@@ -115,6 +115,7 @@
 				<xsl:apply-templates select="logtalk_entity/predicates"/>
 				<xsl:apply-templates select="logtalk_entity/operators"/>
 				<xsl:apply-templates select="logtalk_entity/remarks"/>
+				<xsl:apply-templates select="logtalk_entity/see_also"/>
 				<fo:block id="end"/>
 			</fo:flow>
 
@@ -795,6 +796,41 @@
 						font-family="serif"
 						margin-left="10mm">
 					<xsl:value-of select="text" />
+				</fo:block>
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:otherwise>
+			<fo:block
+					font-size="10pt" 
+					font-family="serif" 
+					font-style="italic"
+					space-before="10pt">
+				(none)
+			</fo:block>
+		</xsl:otherwise>
+	</xsl:choose>
+
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/see_also">
+
+	<fo:block
+			font-size="14pt" 
+			font-family="sans-serif" 
+			font-weight="bold" 
+			keep-with-next="always"
+			space-before="18pt">
+		See also
+	</fo:block>
+	<xsl:choose>
+		<xsl:when test="*">
+			<xsl:for-each select="reference">
+				<fo:block
+						font-size="9pt"
+						font-family="monospace"
+						margin-left="10mm">
+					<xsl:value-of select="name" />
 				</fo:block>
 			</xsl:for-each>
 		</xsl:when>

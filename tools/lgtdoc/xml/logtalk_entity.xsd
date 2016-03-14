@@ -41,6 +41,7 @@
 		<xsd:element name="predicates"	type="predicates"/>
 		<xsd:element name="operators"	type="operators"/>
 		<xsd:element name="remarks"		type="remarks"/>
+		<xsd:element name="see_also"	type="see_also"/>
 	</xsd:sequence>
 </xsd:complexType>
 
@@ -223,14 +224,14 @@
 		<xsd:element name="coinductive"	type="xsd:string"		minOccurs="0"/>
 		<xsd:element name="mode"		type="mode"				minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="comment"		type="xsd:string"		minOccurs="0"/>
-		<xsd:element name="template"	type="xsd:string"		minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="template"	type="xsd:string"		minOccurs="0"/>
 		<xsd:choice	minOccurs="0">
 			<xsd:element name="argnames"	type="xsd:string"/>
 			<xsd:element name="arguments"	type="arguments"/>
 		</xsd:choice>
 		<xsd:element name="exceptions"	type="exceptions"		minOccurs="0"/>
 		<xsd:element name="remarks"		type="remarks"			minOccurs="0"/>
-		<xsd:element name="info"		type="info"				minOccurs="0"/>
+		<xsd:element name="info"		type="info"				minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="examples"	type="examples"			minOccurs="0"/>
 	</xsd:sequence>
 </xsd:complexType>
@@ -298,6 +299,21 @@
 		<xsd:element name="description"	type="xsd:string"/>
 		<xsd:element name="call"		type="xsd:string"/>
 		<xsd:element name="bindings"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="see_also">
+	<xsd:sequence>
+		<xsd:element name="reference"	type="reference"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="reference">
+	<xsd:sequence>
+		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="file"	type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>
 

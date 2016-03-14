@@ -29,7 +29,8 @@
 		author is 'Paulo Moura',
 		date is 2015/11/16,
 		comment is 'Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.',
-		parnames is ['Pipeline']
+		parameters is ['Pipeline'-'List of hook objects'],
+		see_also is [hook_set(_)]
 	]).
 
 	term_expansion(Term, Expansion) :-

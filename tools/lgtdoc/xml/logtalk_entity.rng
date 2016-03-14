@@ -30,6 +30,7 @@
 			<ref name="predicates"/>
 			<ref name="operators"/>
 			<ref name="remarks"/>
+			<ref name="see_also"/>
 		</element>
 	</define>
 
@@ -196,6 +197,21 @@
 	<define name="value">
 		<element name="value">
 			<text/>
+		</element>
+	</define>
+
+	<define name="see_also">
+		<element name="see_also">
+			<zeroOrMore>
+				<ref name="reference"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="reference">
+		<element name="reference">
+			<ref name="name"/>
+			<ref name="file"/>
 		</element>
 	</define>
 

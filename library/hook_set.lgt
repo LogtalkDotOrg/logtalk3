@@ -29,7 +29,8 @@
 		author is 'Paulo Moura',
 		date is 2015/11/16,
 		comment is 'Use a set (represented using a list) of hook objects to expand terms and goals. The hook objects are tried in sequence until one of them succeeds in expanding the current term (goal) into a different term (goal).',
-		parnames is ['Set']
+		parameters is ['Set'-'Set (list) of hook objects'],
+		see_also is [hook_pipeline(_)]
 	]).
 
 	term_expansion(Term, Expansion) :-

@@ -9317,6 +9317,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
+'$lgt_compile_entity_info_directive_pair'(see_also, References, see_also(References)) :-
+	!,
+	'$lgt_must_be'(list(entity_identifier), References).
+
 '$lgt_compile_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
 	'$lgt_must_be'(atomic_or_string, Version).

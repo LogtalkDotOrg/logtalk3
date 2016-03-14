@@ -67,6 +67,7 @@
 	<xsl:apply-templates select="logtalk_entity/predicates" />
 	<xsl:apply-templates select="logtalk_entity/operators" />
 	<xsl:apply-templates select="logtalk_entity/remarks" />
+	<xsl:apply-templates select="logtalk_entity/see_also" />
 	<xsl:value-of select="$hr" />
 </xsl:template>
 
@@ -336,6 +337,26 @@
 <xsl:template match="logtalk_entity/remarks/remark">
 	<xsl:text>* </xsl:text><xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" />
 	<xsl:value-of select="$nl2" />
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/see_also">
+	<xsl:text>## See also</xsl:text>
+	<xsl:value-of select="$nl2" />
+	<xsl:choose>
+		<xsl:when test="reference">
+			<xsl:apply-templates select="reference" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>(none)</xsl:text>
+			<xsl:value-of select="$nl2" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="logtalk_entity/see_also/reference">
+	<xsl:text>* [`</xsl:text><xsl:value-of select="name" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
+	<xsl:value-of select="$nl" />
 </xsl:template>
 
 

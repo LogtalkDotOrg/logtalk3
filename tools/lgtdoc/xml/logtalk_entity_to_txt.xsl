@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
-%  Last updated on March 6, 2016
+%  Last updated on March 14, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -78,6 +78,7 @@
 	<xsl:apply-templates select="logtalk_entity/predicates" />
 	<xsl:apply-templates select="logtalk_entity/operators" />
 	<xsl:apply-templates select="logtalk_entity/remarks" />
+	<xsl:apply-templates select="logtalk_entity/see_also" />
 	<xsl:value-of select="$hr1" />
 </xsl:template>
 
@@ -318,6 +319,24 @@
 
 <xsl:template match="logtalk_entity/remarks/remark">
 	<xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" /><xsl:value-of select="$nl2" />
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/see_also">
+	<xsl:value-of select="$hr2" />
+	<xsl:text>See also</xsl:text><xsl:value-of select="$nl2" />
+	<xsl:choose>
+		<xsl:when test="reference">
+			<xsl:apply-templates select="reference" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>(none)</xsl:text><xsl:value-of select="$nl2" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="logtalk_entity/see_also/reference">
+	<xsl:value-of select="$tab" /><xsl:value-of select="name" /><xsl:value-of select="$nl2" />
 </xsl:template>
 
 

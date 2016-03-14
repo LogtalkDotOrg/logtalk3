@@ -25,7 +25,7 @@
 		version is 3.1,
 		author is 'Paulo Moura',
 		date is 2016/03/11,
-		comment is 'Documenting tool.'
+		comment is 'Documenting tool. Generates XML documenting files for entities and for directory, entity, and predicate indexes.'
 	]).
 
 	:- private(option_/2).
@@ -334,6 +334,7 @@
 		write_entity_xml_predicates(Stream, Entity),
 		write_entity_xml_operators(Stream, Entity),
 		write_entity_xml_remarks(Stream, Entity),
+		write_entity_xml_see_also(Stream, Entity),
 		write_entity_xml_footer(Stream).
 
 	write_entity_xml_header(Stream, Options, StreamOptions) :-
@@ -513,10 +514,11 @@
 			)
 		;	true
 		),
+		% user-defined keys
 		forall(
 			(member(KeyValue, Info),
 			 KeyValue =.. [Key, Value],
-			 \+ member(Key, [comment, author, version, date, parameters, parnames, copyright, license, remarks])),
+			 \+ member(Key, [comment, author, version, date, parameters, parnames, copyright, license, remarks, see_also])),
 			(write_xml_open_tag(Stream, info, []),
 			 write_xml_element(Stream, key, [], Key),
 			 write_xml_cdata_element(Stream, value, [], Value),
@@ -905,6 +907,7 @@
 			write_xml_close_tag(Stream, remarks)
 		;	true
 		),
+		% user-defined keys
 		forall(
 			(member(KeyValue, Info),
 			 KeyValue =.. [Key, Value],
@@ -1081,6 +1084,22 @@
 		),
 		write_xml_close_tag(Stream, remarks).
 
+	write_entity_xml_see_also(Stream, Entity) :-
+		write_xml_open_tag(Stream, see_also, []),
+		(	entity_property(Entity, info(Info)), member(see_also(SeeAlso), Info) ->
+			forall(
+				member(Name, SeeAlso),
+				(entity_to_xml_term(Name),
+				 relation_to_xml_filename(Name, File),
+				 write_xml_open_tag(Stream, reference, []),
+				 write_xml_cdata_element(Stream, name, [], Name),
+				 write_xml_cdata_element(Stream, file, [], File),
+				 write_xml_close_tag(Stream, reference))
+			)
+		;	true
+		),
+		write_xml_close_tag(Stream, see_also).
+
 	% write_xml_open_tag(@stream, @atom, @list)
 	%
 	% writes <Tag Att1="V1" Att2="V2" ...>
@@ -1221,11 +1240,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(logtalk, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(logtalk, web, logtalk_entity-'http://logtalk.org/xml/4.0/logtalk_entity.dtd', 'http://logtalk.org/xml/4.0/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(logtalk, web, logtalk_entity-'http://logtalk.org/xml/4.1/logtalk_entity.dtd', 'http://logtalk.org/xml/4.1/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(logtalk, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'http://logtalk.org/xml/4.0/logtalk_index.dtd', 'http://logtalk.org/xml/4.0/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'http://logtalk.org/xml/4.1/logtalk_index.dtd', 'http://logtalk.org/xml/4.1/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).

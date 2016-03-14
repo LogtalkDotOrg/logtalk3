@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
-%  Last updated on March 6, 2016
+%  Last updated on March 14, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,9 @@
 		</div>
 		<div class="remarks">
 			<xsl:apply-templates select="logtalk_entity/remarks" />
+		</div>
+		<div class="see_also">
+			<xsl:apply-templates select="logtalk_entity/see_also" />
 		</div>
 	</body>
 	</html>
@@ -364,6 +367,27 @@
 		<dt class="comment"><xsl:value-of select="topic" /></dt>
 			<dd class="text"><xsl:value-of select="text" /></dd>
 	</dl>
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/see_also">
+	<h2>See also</h2>
+	<div class="section">
+	<xsl:choose>
+		<xsl:when test="reference">
+			<ul>
+				<xsl:apply-templates select="reference" />
+			</ul>
+		</xsl:when>
+		<xsl:otherwise>
+			<h3 class="comment">(none)</h3>
+		</xsl:otherwise>
+	</xsl:choose>
+	</div>
+</xsl:template>
+
+<xsl:template match="logtalk_entity/see_also/reference">
+	<li class ="code"><a href="{file}.html"><xsl:value-of select="name" /></a></li>
 </xsl:template>
 
 

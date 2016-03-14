@@ -43,6 +43,9 @@ contents of generated TAP and XML files.
 * CHANGED: The `tap_output` object in the `lgtunit` tool no longer prints a
 dash between the test result and the test name.
 
+* ADDED: Support for a `see_also` key to the `info/1` entity documenting
+directive. Updated the `lgtdoc` tool to process this new key.
+
 * IMPROVED: The `logtalk_tester.sh` script now accepts a format option to
 allow writing test result files in either TAP or xUnit XML formats for use
 with continuous integration servers.

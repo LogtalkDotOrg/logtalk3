@@ -21,7 +21,7 @@
 -->
 
 
-<!ELEMENT logtalk (entity, relations, predicates, operators, remarks)>
+<!ELEMENT logtalk (entity, relations, predicates, operators, remarks, see_also)>
 
 
 <!ELEMENT entity (name, type, compilation, comment?, (parnames|parameters)?, author?, version?, date?, copyright?, license?, info*)>
@@ -54,10 +54,13 @@
 
 <!ELEMENT info (key, value)>
 
-
 <!ELEMENT key (#PCDATA)>
 
 <!ELEMENT value (#PCDATA)>
+
+<!ELEMENT see_also (reference*)>
+
+<!ELEMENT reference (name, file)>
 
 
 <!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, complements*, provides*, uses*, calls*, alias*)>
@@ -82,7 +85,6 @@
 
 <!ELEMENT alias (name, original, alternative)>
 
-
 <!ELEMENT scope (#PCDATA)>
 
 <!ELEMENT to (#PCDATA)>
@@ -95,9 +97,7 @@
 
 <!ELEMENT alternative (#PCDATA)>
 
-
 <!ELEMENT predicates (public, protected, private)>
-
 
 <!ELEMENT public (predicate*)>
 
