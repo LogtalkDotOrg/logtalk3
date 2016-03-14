@@ -154,7 +154,7 @@
 
 
 <xsl:template match="logtalk_entity/relations/provides" priority="1">
-	<xsl:text>  * [`</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
+	<xsl:text>  * [`</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md#</xsl:text><xsl:value-of select="resource" /><xsl:text>)</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
