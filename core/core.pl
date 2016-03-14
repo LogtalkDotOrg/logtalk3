@@ -19968,6 +19968,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(list, Term), Context))
 	).
 
+'$lgt_must_be'(list(Type), Term, Context) :-
+	(	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	'$lgt_is_list'(Term) ->
+		forall('$lgt_member'(Item, Term), '$lgt_must_be'(Type, Item, Context))
+	;	throw(error(type_error(list, Term), Context))
+	).
+
 '$lgt_must_be'(object, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
