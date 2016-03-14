@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
-%  Last updated on March 6, 2016
+%  Last updated on March 14, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -153,19 +153,19 @@
 
 
 <xsl:template match="logtalk_entity/relations/provides" priority="1">
-	<xsl:text>  * `</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text>`</xsl:text>
+	<xsl:text>  * [`</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/uses" priority="1">
-	<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>  * [`</xsl:text><xsl:value-of select="name" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/calls" priority="1">
-	<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>  * [`</xsl:text><xsl:value-of select="name" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
@@ -177,7 +177,7 @@
 
 
 <xsl:template match="logtalk_entity/relations/*" priority="0">
-	<xsl:text>  * `</xsl:text><xsl:value-of select="scope" /><xsl:text> </xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>  * `</xsl:text><xsl:value-of select="scope" /><xsl:text>` [`</xsl:text><xsl:value-of select="name" /><xsl:text>`](</xsl:text><xsl:value-of select="file" /><xsl:text>.md)</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
