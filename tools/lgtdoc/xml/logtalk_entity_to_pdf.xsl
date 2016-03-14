@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
-%  Last updated on March 6, 2016
+%  Last updated on March 14, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -145,10 +145,9 @@
 		</fo:block>
 		<xsl:for-each select="parameters/parameter">
 			<fo:block
-					font-size="9pt"
-					font-family="monospace"
 					margin-left="10mm">
-				<xsl:value-of select="name"/> - <xsl:value-of select="description"/>
+				<fo:inline font-size="9pt" font-family="monospace"><xsl:value-of select="name"/></fo:inline>
+				<fo:inline font-size="10pt" font-family="serif"> - <xsl:value-of select="description"/></fo:inline>
 			</fo:block>
 		</xsl:for-each>
 	</xsl:if>
