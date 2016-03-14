@@ -353,6 +353,10 @@ output format, load instead the `tap_report.lgt` file before running the
 tests. A file named `tap_report.txt` will be created in the same directory
 as the object defining the tests.
 
+When using the `test/3` dialect with the TAP format, a `note/1` option
+whose argument is an atom starting with a `TODO` or `todo` word results
+in a test report with a TAP TODO directive.
+
 
 Known issues
 ------------
