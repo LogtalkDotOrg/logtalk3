@@ -58,7 +58,7 @@
 	</xsl:if>
 	<xsl:if test="logtalk_entity/entity/parameters">
 		<xsl:for-each select="logtalk_entity/entity/parameters/parameter">
-			<xsl:text>* </xsl:text><xsl:value-of select="name" /><xsl:text> - </xsl:text><xsl:value-of select="description" />
+			<xsl:text>* `</xsl:text><xsl:value-of select="name" /><xsl:text>` - </xsl:text><xsl:value-of select="description" />
 		</xsl:for-each>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
