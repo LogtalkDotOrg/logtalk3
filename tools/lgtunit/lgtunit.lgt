@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.9,
+		version is 2.10,
 		author is 'Paulo Moura',
-		date is 2016/03/11,
+		date is 2016/03/14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -854,6 +854,7 @@
 		).
 
 	ignorable_discontiguous_predicate((-)/1).
+	ignorable_discontiguous_predicate(test/3).
 	ignorable_discontiguous_predicate(test/2).
 	ignorable_discontiguous_predicate(test/1).
 	ignorable_discontiguous_predicate(succeeds/1).
