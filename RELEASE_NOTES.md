@@ -33,6 +33,12 @@ Logtalk compiler and runtime
 * FIXED: Calls to the `threaded_notify/1` built-in predicate from within the
 `user` pseudo-object must not require a bound argument as per documentation.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The CxProlog adapter file to require version 0.98.1 or later as the
+new version fixes Prolog standard compliance issues.
+
 Tools
 -----
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for CxProlog 0.98.0 or a later version
-%  Last updated on February 12, 2016
+%  Adapter file for CxProlog 0.98.1 or a later version
+%  Last updated on March 15, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -44,16 +44,8 @@
 
 % '$lgt_iso_predicate'(?callable)
 
-'$lgt_iso_predicate'(subsumes_term(_, _)).
-
-subsumes_term(General, Specific) :-
-	\+ \+ '$lgt_cx_subsumes'(General, Specific).
-
-'$lgt_cx_subsumes'(General, Specific) :-
-	term_variables(Specific, Vars1),
-	unify_with_occurs_check(General, Specific),
-	term_variables(Vars1, Vars2),
-	Vars1 == Vars2.
+'$lgt_iso_predicate'(_) :-
+	fail.
 
 
 
@@ -206,7 +198,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(prolog_dialect, cx).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, cxprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,98,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,98,1))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).

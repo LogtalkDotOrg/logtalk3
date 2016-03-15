@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on February 14, 2016
+Last updated on March 15, 2016
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -133,7 +133,7 @@ On Windows, the environment variable `BPDIR` must be defined and pointing
 to the B-Prolog installation directory for the installer to detect it.
 
 
-CxProlog 0.98.0 or later versions
+CxProlog 0.98.1 or later versions
 ---------------------------------
 
 	cx.pl

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on December 28, 2015
+##   Last updated on March 15, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -159,7 +159,7 @@ echo "The following integration scripts are installed for running Logtalk"
 echo "with selected back-end Prolog compilers:"
 echo
 echo "* B-Prolog (version 7.8 or later):         bplgt"
-echo "* CxProlog (version 0.98.0 or later):      cxlgt"
+echo "* CxProlog (version 0.98.1 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
 echo "* JIProlog (version 4.1.2.8 or later):     jiplgt      (first run may require sudo)"

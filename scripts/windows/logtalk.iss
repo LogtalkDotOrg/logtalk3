@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on February 15, 2016
+; Last updated on March 15, 2016
 ; 
 ; This file is part of Logtalk <http://logtalk.org/>  
 ; Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -68,7 +68,7 @@ Name: "user"; Description: "User files (libraries, examples, and other support f
 Name: "user\backup"; Description: "Backup current Logtalk user folder"; Types: full user custom; Flags: disablenouninstallwarning
 Name: "prolog"; Description: "Prolog integration (back-end compiler support)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.98.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.98.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\ji"; Description: "JIProlog integration (version 4.1.2.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
