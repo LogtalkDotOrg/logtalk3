@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 12, 2016
+##   Last updated on March 15, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -87,6 +87,7 @@ run_tests() {
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 		$logtalk_call "$format_goal,$tester_debug_goal" > "$results/$name.results" 2> "$results/$name.errors"
+		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
 	fi
 	if [ $tests_exit -eq 0 ] ; then
