@@ -41,9 +41,11 @@ else
 	extension=''
 fi
 
-if [ "`command -v timeout`" != "" ]; then
+if [[ "`readlink -f $(which timeout)`" == *"System32"* ]] || [[ "`readlink -f $(which timeout)`" == *"system32"* ]] ; then
+	timeout_command=""
+elif [ "`command -v timeout`" != "" ] ; then
 	timeout_command="timeout -k 1"
-elif [ "`command -v gtimeout`" != "" ]; then
+elif [ "`command -v gtimeout`" != "" ] ; then
 	timeout_command="gtimeout -k 1"
 else
 	timeout_command=""
