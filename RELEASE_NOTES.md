@@ -33,6 +33,10 @@ Logtalk compiler and runtime
 * FIXED: Calls to the `threaded_notify/1` built-in predicate from within the
 `user` pseudo-object must not require a bound argument as per documentation.
 
+* FIXED: Calls to the `object_property/2` and `category_property/2` built-in
+predicates with `number_of_clauses/1` or `number_of_user_clauses/1` property
+arguments to be deterministic.
+
 Prolog adapter and integration files
 ------------------------------------
 

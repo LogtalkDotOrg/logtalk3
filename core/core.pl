@@ -766,9 +766,15 @@ object_property(Obj, Prop) :-
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_'(Obj, calls(Predicate, Properties)).
 '$lgt_object_property'(number_of_clauses(Total), Obj, _, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, number_of_clauses(Total, _)).
+	(	'$lgt_entity_property_'(Obj, number_of_clauses(Total, _)) ->
+		true
+	;	fail
+	).
 '$lgt_object_property'(number_of_user_clauses(TotalUser), Obj, _, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, number_of_clauses(_, TotalUser)).
+	(	'$lgt_entity_property_'(Obj, number_of_clauses(_, TotalUser)) ->
+		true
+	;	fail
+	).
 
 '$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, Scope, Resources) :-
 	findall(
@@ -856,9 +862,15 @@ category_property(Ctg, Prop) :-
 '$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, Rnm, Flags) :-
 	'$lgt_entity_property_alias'(Ctg, Rnm, Flags, Alias, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, number_of_clauses(Total, _)).
+	(	'$lgt_entity_property_'(Ctg, number_of_clauses(Total, _)) ->
+		true
+	;	fail
+	).
 '$lgt_category_property'(number_of_user_clauses(TotalUser), Ctg, _, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, number_of_clauses(_, TotalUser)).
+	(	'$lgt_entity_property_'(Ctg, number_of_clauses(_, TotalUser)) ->
+		true
+	;	fail
+	).
 
 
 '$lgt_category_property_resources'(Ctg, Dcl, Flags, Scope, Resources) :-
@@ -2758,7 +2770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 4, 1, rc2)).
 
 
 
