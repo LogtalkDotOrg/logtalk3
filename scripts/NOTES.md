@@ -69,9 +69,9 @@ using the `apropos logtalk` command.
 	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
 	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
 	executable directories to the system path environment variable;
-	if the script detects either a `timeout` or a `gtimeout` command, it will
-	use it to run each test set (this command is provided by the GNU coreutils
-	package)
+	if the script detects either a `timeout` or a `gtimeout` command (provided
+	by the GNU coreutils package), it will use it to run each test set if the
+	`timeout` option is set to a value greater than zero
 
 - `logtalk_version_select.sh`  
 	shell script for switching between installed Logtalk versions for POSIX

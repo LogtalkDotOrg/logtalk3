@@ -61,7 +61,7 @@ directive. Updated the `lgtdoc` tool to process this new key.
 
 * ADDED: The `logtalk_tester.sh` script now uses a timeout command, when
 available, to run each test set. It also accepts a timeout option to
-specify the timeout value (in seconds).
+specify the timeout value (in seconds). By default, no timeout is used.
 
 * ADDED: The `logtalk_tester.sh` script now accepts a format option to
 allow writing test result files in either TAP or xUnit XML formats for use

@@ -78,7 +78,8 @@ logtalk_call="$logtalk -g"
 mode='normal'
 format='default'
 format_goal=$format_default_goal
-timeout=9
+# disable timeouts to maintain backward compatibility
+timeout=0
 
 run_tests() {
 	unit=`dirname "$1"`
@@ -115,7 +116,7 @@ run_tests() {
 run_test() {
 	name="$1"
 	goal="$2"
-	if [ "$timeout_command" != "" ] ; then
+	if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
 		$timeout_command $timeout $logtalk_call "$goal" > "$results/$name.results" 2> "$results/$name.errors"
 	else
 		$logtalk_call "$goal" > "$results/$name.results" 2> "$results/$name.errors"
@@ -142,7 +143,7 @@ usage_help()
 	echo "  -f format for writing the test results (default is $format)"
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
-	echo "  -t timeout in seconds for running each test set (default is $timeout)"
+	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -h help"
 	echo
 	exit 0
