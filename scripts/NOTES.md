@@ -61,14 +61,17 @@ using the `apropos logtalk` command.
 	warnings and errors (please note that, depending on the tests and on the
 	compilation mode, these warnings and errors might be expected);
 	it can also write test results in the TAP and xUnit formats, generating files
-	that can then be processed by continuous integration servers; 
+	that can then be processed by continuous integration servers;
 	know issue: the output of some of the multi-threading examples may interfere
 	with the computation of the test/skipped/passed/failed totals;
 	you can use this script on Windows operating-systems by installing Git for
 	Windows (which provides a Bash shell implementation and is available from
 	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
 	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
-	executable directories to the system path environment variable
+	executable directories to the system path environment variable;
+	if the script detects either a `timeout` or a `gtimeout` command, it will
+	use it to run each test set (this command is provided by the GNU coreutils
+	package)
 
 - `logtalk_version_select.sh`  
 	shell script for switching between installed Logtalk versions for POSIX

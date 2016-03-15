@@ -59,11 +59,15 @@ dash between the test result and the test name.
 * ADDED: Support for a `see_also` key to the `info/1` entity documenting
 directive. Updated the `lgtdoc` tool to process this new key.
 
-* IMPROVED: The `logtalk_tester.sh` script now accepts a format option to
+* ADDED: The `logtalk_tester.sh` script now uses a timeout command, when
+available, to run each test set. It also accepts a timeout option to
+specify the timeout value (in seconds).
+
+* ADDED: The `logtalk_tester.sh` script now accepts a format option to
 allow writing test result files in either TAP or xUnit XML formats for use
 with continuous integration servers.
 
-* IMPROVED: The TAP output support for printing test notes starting with a
+* ADDED: The TAP output support for printing test notes starting with a
 `TODO` or `todo` word as a TODO TAP test directive.
 
 * IMPROVED: The sorting of keys in the directory, entity, and predicate

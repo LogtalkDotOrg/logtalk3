@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.50"
+	echo "`basename $0` 0.6"
 	exit 0
 }
 
@@ -39,6 +39,14 @@ elif [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" ==
 	extension='.sh'
 else
 	extension=''
+fi
+
+if [ "`command -v timeout`" != "" ]; then
+	timeout_command="timeout -k 1"
+elif [ "`command -v gtimeout`" != "" ]; then
+	timeout_command="gtimeout -k 1"
+else
+	timeout_command=""
 fi
 
 # testing goals
@@ -70,6 +78,7 @@ logtalk_call="$logtalk -g"
 mode='normal'
 format='default'
 format_goal=$format_default_goal
+timeout=9
 
 run_tests() {
 	unit=`dirname "$1"`
@@ -78,15 +87,15 @@ run_tests() {
 	echo "***** Testing $unit"
 	name=$(echo "$unit"|sed 's|/|__|g')
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		$logtalk_call "$format_goal,$tester_optimal_goal" > "$results/$name.results" 2> "$results/$name.errors"
+		run_test "$name" "$format_goal,$tester_optimal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		$logtalk_call "$format_goal,$tester_normal_goal" > "$results/$name.results" 2> "$results/$name.errors"
+		run_test "$name" "$format_goal,$tester_normal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		$logtalk_call "$format_goal,$tester_debug_goal" > "$results/$name.results" 2> "$results/$name.errors"
+		run_test "$name" "$format_goal,$tester_debug_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
 	fi
@@ -94,9 +103,22 @@ run_tests() {
 		grep -a 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 		grep -a 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 		grep -a '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
+	elif [ $tests_exit -eq 124 ] ; then
+		echo "*****         timeout"
+		echo "timeout" > "$results/$name.errors"
 	else
 		echo "*****         crash"
 		echo "crash" > "$results/$name.errors"
+	fi
+}
+
+run_test() {
+	name="$1"
+	goal="$2"
+	if [ "$timeout_command" != "" ] ; then
+		$timeout_command $timeout $logtalk_call "$goal" > "$results/$name.results" 2> "$results/$name.errors"
+	else
+		$logtalk_call "$goal" > "$results/$name.results" 2> "$results/$name.errors"
 	fi
 }
 
@@ -107,7 +129,7 @@ usage_help()
 	echo "of the directory containing this script."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-p prolog] [-m mode] [-f format] [-d results]"
+	echo "  `basename $0` [-p prolog] [-m mode] [-f format] [-d results] [-t timeout]"
 	echo "  `basename $0` -v"
 	echo "  `basename $0` -h"
 	echo
@@ -120,12 +142,13 @@ usage_help()
 	echo "  -f format for writing the test results (default is $format)"
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
+	echo "  -t timeout in seconds for running each test set (default is $timeout)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vp:m:f:d:h" option
+while getopts "vp:m:f:d:t:h" option
 do
 	case $option in
 		v) print_version;;
@@ -133,6 +156,7 @@ do
 		m) m_arg="$OPTARG";;
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
+		t) t_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -249,6 +273,14 @@ if [ "$d_arg" != "" ] ; then
 	results="$d_arg"
 fi
 
+if [ "$t_arg" != "" ] ; then
+	timeout="$t_arg"
+fi
+
+if [ "$timeout_command" == "" ] ; then
+	echo "Warning! Timeout command not detected. The timeout option will be ignored."
+fi
+
 mkdir -p "$results"
 rm -f "$results"/*.results
 rm -f "$results"/*.errors
@@ -266,6 +298,7 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
 
 cd "$results"
+timeouts=`grep -a 'timeout' *.errors | wc -l | sed 's/ //g'`
 crashes=`grep -a 'crash' *.errors | wc -l | sed 's/ //g'`
 skipped=`grep -a ': skipped' *.results | wc -l | sed 's/ //g'`
 passed=`grep -a ': success' *.results | wc -l | sed 's/ //g'`
@@ -283,6 +316,10 @@ grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
 grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
 grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
+echo "***** Timeouts"
+echo "*******************************************************************************"
+grep -a 'timeout' *.errors | LC_ALL=C sed 's/timeout//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
+echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
 grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
@@ -295,6 +332,7 @@ echo "***** Failed tests"
 echo "*******************************************************************************"
 grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
 echo "*******************************************************************************"
+echo "***** $timeouts test set timeouts"
 echo "***** $crashes test set crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
@@ -304,7 +342,7 @@ end_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 echo "***** Batch testing ended @ $end_date"
 echo '*******************************************************************************'
 
-if [ $failed -eq 0 ] && [ $crashes -eq 0 ] ; then
+if [ $failed -eq 0 ] && [ $timeouts -eq 0 ] && [ $crashes -eq 0 ] ; then
 	exit 0
 else
 	exit 1
