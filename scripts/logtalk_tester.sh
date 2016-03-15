@@ -41,7 +41,7 @@ else
 	extension=''
 fi
 
-if [[ "`readlink -f $(which timeout)`" == *"System32"* ]] || [[ "`readlink -f $(which timeout)`" == *"system32"* ]] ; then
+if [[ "`which timeout`" == *"System32"* ]] || [[ "`which timeout`" == *"system32"* ]] ; then
 	timeout_command=""
 elif [ "`command -v timeout`" != "" ] ; then
 	timeout_command="timeout -k 1"
