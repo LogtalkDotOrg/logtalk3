@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "January 31, 2015" "Logtalk 3.00.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "March 17, 2016" "Logtalk 3.04.2" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -10,14 +10,18 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I prolog
 .B ] [-m 
 .I mode
+.B ] [-f
+.I format
 .B ] [-d 
 .I results
+.B ] [-t 
+.I timeout
 .B ]
 .br
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\f3logtalk_tester\f1 is a Logtalk script script for automating running unit tests. This script assumes that the directories (and its direct subdirectories, if existing) in the current directory contain a \f2tester.lgt\f1 source file that, when loaded, runs a set of unit tests. In case of failed unit tests, this script returns an exit code of \f21\f1.
+\f3logtalk_tester\f1 is a Logtalk script script for automating running unit tests. This script automates running unit tests found on the current directory and recursively in its sub-directories by scanning for \f2tester.lgt\f1 and \f2tester.logtalk\f1 source files. In case of failed unit tests, this script returns an exit code of \f21\f1.
 
 .SH OPTIONS
 .TP
@@ -30,8 +34,14 @@ Back-end Prolog compiler. Default is YAP. The following identifiers are used: B-
 .BI \-m
 Compilation mode. Default is \f2normal\f1. Possible values are \f2normal\f1, \f2debug\f1, and \f2all\f1.
 .TP
+.BI \-f
+Format for writing the test results. Default is \f2default\f1. Possible values are \f2default\f1, \f2tap\f1, and \f2xunit\f1.
+.TP
 .BI \-d
-Directory to store the test results. Default is the local \f2./tester_results\f1 directory.
+Directory to store the test results. Default is the local \f2./logtalk_tester_logs\f1 directory.
+.TP
+.BI \-t
+Timeout in seconds for running each test set. Default is \f20\f1; i.e. disabled.
 .TP
 .BI \-h
 Provide help on script usage.
@@ -58,4 +68,4 @@ The Logtalk User and Reference Manuals at \f2$LOGTALKHOME/manuals/index.html\f1
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2015 Paulo Moura.
+Copyright (c) 1998-2016 Paulo Moura.

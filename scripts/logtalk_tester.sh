@@ -130,8 +130,9 @@ run_test() {
 usage_help()
 {
 	echo 
-	echo "This script automates running unit tests found on the sub-directories"
-	echo "of the directory containing this script."
+	echo "This script automates running unit tests found on the current directory and recursively"
+	echo "in its sub-directories by scanning for tester.lgt and tester.logtalk source files. In"
+	echo  "case of failed unit tests, this script returns an exit code of 1."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout]"
