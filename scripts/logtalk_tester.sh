@@ -283,7 +283,7 @@ if [ "$t_arg" != "" ] ; then
 fi
 
 if [ "$timeout_command" == "" ] ; then
-	echo "Warning! Timeout command not detected. The timeout option will be ignored."
+	echo "Warning! Timeout support not available. The timeout option will be ignored."
 fi
 
 mkdir -p "$results"
