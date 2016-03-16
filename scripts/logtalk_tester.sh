@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 15, 2016
+##   Last updated on March 16, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -25,11 +25,11 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.6"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
-operating_system=`uname -s`
+operating_system=$(uname -s)
 
 if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
 	# assume that we're running on Windows using the Git for Windows bash shell
@@ -41,11 +41,13 @@ else
 	extension=''
 fi
 
-if [[ "`which timeout`" == *"System32"* ]] || [[ "`which timeout`" == *"system32"* ]] ; then
+# first, make sure that we don't peak Windows own timeout command, which is not usable for this purpose
+if [[ "$(command -v timeout)" == *"System32"* ]] || [[ "$(command -v timeout)" == *"system32"* ]] ; then
 	timeout_command=""
-elif [ "`command -v timeout`" != "" ] ; then
+# second, look for GNU coreutils package timeout command
+elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"GNU coreutils"* ]] ; then
 	timeout_command="timeout -k 1"
-elif [ "`command -v gtimeout`" != "" ] ; then
+elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU coreutils"* ]] ; then
 	timeout_command="gtimeout -k 1"
 else
 	timeout_command=""
@@ -84,7 +86,7 @@ format_goal=$format_default_goal
 timeout=0
 
 run_tests() {
-	unit=`dirname "$1"`
+	unit=$(dirname "$1")
 	cd "$unit"
 	echo '*******************************************************************************'
 	echo "***** Testing $unit"
@@ -132,12 +134,12 @@ usage_help()
 	echo "of the directory containing this script."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-p prolog] [-m mode] [-f format] [-d results] [-t timeout]"
-	echo "  `basename $0` -v"
-	echo "  `basename $0` -h"
+	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout]"
+	echo "  $(basename "$0") -v"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of `basename $0`"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -p back-end Prolog compiler (default is $backend)"
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
@@ -233,11 +235,11 @@ elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
 	usage_help
 	exit 1
-elif [ ! `command -v $backend` ] ; then
+elif [ ! $(command -v $backend) ] ; then
     echo "Error! Default back-end Prolog compiler not found: $prolog"
 	usage_help
     exit 1
-elif [ ! `command -v $logtalk` ] ; then
+elif [ ! $(command -v $logtalk) ] ; then
     echo "Error! $logtalk integration script for $prolog not found."
 	echo "       Check that its directory is in your execution path."
     exit 1
@@ -290,7 +292,7 @@ rm -f "$results"/*.errors
 rm -f "$results"/errors.all
 rm -f "$results"/tester_versions.txt
 
-start_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
+start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 
 echo '*******************************************************************************'
 echo "***** Batch testing started @ $start_date"
@@ -301,11 +303,11 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
 
 cd "$results"
-timeouts=`grep -a 'timeout' *.errors | wc -l | sed 's/ //g'`
-crashes=`grep -a 'crash' *.errors | wc -l | sed 's/ //g'`
-skipped=`grep -a ': skipped' *.results | wc -l | sed 's/ //g'`
-passed=`grep -a ': success' *.results | wc -l | sed 's/ //g'`
-failed=`grep -a ': failure' *.results | wc -l | sed 's/ //g'`
+timeouts=$(grep -a 'timeout' *.errors | wc -l | sed 's/ //g')
+crashes=$(grep -a 'crash' *.errors | wc -l | sed 's/ //g')
+skipped=$(grep -a ': skipped' *.results | wc -l | sed 's/ //g')
+passed=$(grep -a ': success' *.results | wc -l | sed 's/ //g')
+failed=$(grep -a ': failure' *.results | wc -l | sed 's/ //g')
 total=$(($skipped+$passed+$failed))
 
 echo "*******************************************************************************"
@@ -340,7 +342,7 @@ echo "***** $crashes test set crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
 
-end_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
+end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 
 echo "***** Batch testing ended @ $end_date"
 echo '*******************************************************************************'
