@@ -21,9 +21,9 @@
 :- object(tap_report).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/03/14,
+		date is 2016/03/16,
 		comment is 'Intercepts unit test execution messages and generates a tap_report.txt file using the TAP output format in the same directory as the tests object file.'
 	]).
 
@@ -70,16 +70,16 @@
 	% passed test
 	message_hook(passed_test(Test, _, _, Note)) :-
 		write(tap_report, 'ok '), write(tap_report, Test),
-		write_test_note(Note).
+		write_test_note(passed, Note).
 	% failed test
 	message_hook(failed_test(Test, _, _, Reason, Note)) :-
 		write(tap_report, 'not ok '), write(tap_report, Test),
-		write_test_note(Note),
+		write_test_note(failed, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
 	message_hook(skipped_test(Test, _, _, Note)) :-
-		write(tap_report, 'ok # skip '), write(tap_report, Test),
-		write_test_note(Note).
+		write(tap_report, 'ok '), write(tap_report, Test), write(tap_report, ' # skip'),
+		write_test_note(skipped, Note).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write(tap_report, '  ---'), nl(tap_report),
@@ -119,14 +119,18 @@
 	write_failed_reason_message_data(step_failure(Step)) :-
 		write(tap_report, '  message: "'), write(tap_report, Step), write(tap_report, ' goal failed but should have succeeded"'), nl(tap_report).
 
-	write_test_note(Note) :-
+	write_test_note(Result, Note) :-
 		(	Note == '' ->
 			true
-		;	atom(Note), sub_atom(Note, 0, _, _, 'todo') ->
+		;	(	atom(Note), sub_atom(Note, 0, _, _, 'todo')
+			;	atom(Note), sub_atom(Note, 0, _, _, 'TODO')
+			),
+			% check that we are not already using a SKIP directive
+			Result \== skipped ->
+			% write note as a TODO directive
 			write(tap_report, ' # '), write(tap_report, Note)
-		;	atom(Note), sub_atom(Note, 0, _, _, 'TODO') ->
-			write(tap_report, ' # '), write(tap_report, Note)
-		;	write(tap_report, ' ('), write(tap_report, Note), write(tap_report, ')')
+		;	% write note as a comment after the test description
+			write(tap_report, ' ('), write(tap_report, Note), write(tap_report, ')')
 		),
 		nl(tap_report).
 

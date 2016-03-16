@@ -83,6 +83,9 @@ for the `test/3` dialect.
 the `set_output/1` predicate and the a test uses the tool `set_text_output/1`
 and `check_text_output/1` predicates to check its output.
 
+* FIXED: Updated the TAP output support to write the test description before
+SKIP directives.
+
 * FIXED: Bug in the xUnit XML output format support where skipped test tags
 were not well-formed.
 

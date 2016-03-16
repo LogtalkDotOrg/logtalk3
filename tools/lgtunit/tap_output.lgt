@@ -21,9 +21,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/03/14,
+		date is 2016/03/16,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.'
 	]).
 
@@ -62,16 +62,16 @@
 	% passed test
 	message_hook(passed_test(Test, _, _, Note)) :-
 		write('ok '), write(Test),
-		write_test_note(Note).
+		write_test_note(passed, Note).
 	% failed test
 	message_hook(failed_test(Test, _, _, Reason, Note)) :-
 		write('not ok '), write(Test),
-		write_test_note(Note),
+		write_test_note(failed, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
 	message_hook(skipped_test(Test, _, _, Note)) :-
-		write('ok # skip '), write(Test),
-		write_test_note(Note).
+		write('ok '), write(Test), write(' # skip'),
+		write_test_note(skipped, Note).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write('  ---'), nl,
@@ -111,14 +111,18 @@
 	write_failed_reason_message_data(step_failure(Step)) :-
 		write('  message: "'), write(Step), write(' goal failed but should have succeeded"'), nl.
 
-	write_test_note(Note) :-
+	write_test_note(Result, Note) :-
 		(	Note == '' ->
 			true
-		;	atom(Note), sub_atom(Note, 0, _, _, 'todo') ->
+		;	(	atom(Note), sub_atom(Note, 0, _, _, 'todo')
+			;	atom(Note), sub_atom(Note, 0, _, _, 'TODO')
+			),
+			% check that we are not already using a SKIP directive
+			Result \== skipped ->
+			% write note as a TODO directive
 			write(' # '), write(Note)
-		;	atom(Note), sub_atom(Note, 0, _, _, 'TODO') ->
-			write(' # '), write(Note)
-		;	write(' ('), write(Note), write(')')
+		;	% write note as a comment after the test description
+			write(' ('), write(Note), write(')')
 		),
 		nl.
 
