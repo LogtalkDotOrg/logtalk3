@@ -7,7 +7,10 @@
 
 # Logtalk distribution files and directories
 /TODO.txt
+
+# Logtalk automated testing logs
 tester_results/
+logtalk_tester_logs/
 
 # Logtalk temporary file directories
 .lgt_tmp/
