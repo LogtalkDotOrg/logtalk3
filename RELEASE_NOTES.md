@@ -24,7 +24,11 @@ RELEASE NOTES
 3.04.2 - March ??, 2016
 =======================
 
+Tests
+-----
 
+* ADDED: Determinism tests for the `object_property/2`, `protocol_property/2`,
+and `category_property/2` built-in predicates.
 
 
 3.04.1 - March 16, 2016

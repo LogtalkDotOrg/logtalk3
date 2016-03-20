@@ -65,3 +65,55 @@
 	]).
 
 :- end_category.
+
+
+:- category(built_in_category).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Built-in category for testing determinism of category properties.']).
+
+	:- built_in.
+
+:- end_category.
+
+
+:- category(dynamic_category).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Dynamic category for testing determinism of category properties.']).
+
+	:- (dynamic).
+
+:- end_category.
+
+
+:- category(debug_category).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Category compiled in debug mode for testing determinism of category properties.']).
+
+	:- set_logtalk_flag(debug, on).
+
+:- end_category.
+
+
+:- category(events_category).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Category compiled with event support for testing determinism of category properties.']).
+
+	:- set_logtalk_flag(events, allow).
+
+:- end_category.

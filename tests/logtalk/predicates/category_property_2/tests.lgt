@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/02/19,
+		date is 2016/03/20,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -32,26 +32,26 @@
 	:- discontiguous(fails/1).
 	:- discontiguous(throws/2).
 
-	throws(category_property_2_1, error(type_error(category_identifier, 1), logtalk(category_property(1, static), _))) :-
+	throws(category_property_2_01, error(type_error(category_identifier, 1), logtalk(category_property(1, static), _))) :-
 		category_property(1, static).
 
-	throws(category_property_2_2, error(type_error(callable, 1), logtalk(category_property(monitoring, 1), _))) :-
+	throws(category_property_2_02, error(type_error(callable, 1), logtalk(category_property(monitoring, 1), _))) :-
 		category_property(monitoring, 1).
 
-	throws(category_property_2_3, error(domain_error(category_property, foo), logtalk(category_property(monitoring, foo), _))) :-
+	throws(category_property_2_03, error(domain_error(category_property, foo), logtalk(category_property(monitoring, foo), _))) :-
 		category_property(monitoring, foo).
 
-	fails(category_property_2_4) :-
+	fails(category_property_2_04) :-
 		category_property(non_exisiting_category, _).
 
-	fails(category_property_2_5) :-
+	fails(category_property_2_05) :-
 		category_property(monitoring, (dynamic)).
 
-	succeeds(category_property_2_6) :-
+	succeeds(category_property_2_06) :-
 		findall(Prop, category_property(monitoring, Prop), _).
 
 	% entity info
-	succeeds(category_property_2_7) :-
+	succeeds(category_property_2_07) :-
 		category_property(test_category, static),
 		category_property(test_category, source_data),
 		category_property(test_category, file(Basename, Directory)), ground(Basename), ground(Directory),
@@ -65,13 +65,13 @@
 		member(comment(_), Info).
 
 	% entity interface
-	succeeds(category_property_2_8) :-
+	succeeds(category_property_2_08) :-
 		category_property(test_category, public(Public)), Public == [a/1],
 		category_property(test_category, protected(Protected)), Protected == [b/2],
 		category_property(test_category, private(Private)), Private == [c/3, e/5].
 
 	% interface predicate declaration properties
-	succeeds(category_property_2_9) :-
+	succeeds(category_property_2_09) :-
 		category_property(test_category, declares(a/1, Properties1)),
 		member((public), Properties1),
 		member(scope(Scope1), Properties1), Scope1 == (public),
@@ -118,6 +118,7 @@
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
 
+	% check that all queries with explicit properties are valid
 	fails(category_property_2_11) :-
 		(	category_property(empty_category, built_in)
 		;	category_property(empty_category, (dynamic))
@@ -143,6 +144,46 @@
 		),
 		% force backtracking into all property queries
 		fail.
+
+	% determinism tests
+
+	deterministic(category_property_2_12) :-
+		category_property(debug_category, debugging).
+
+	deterministic(category_property_2_13) :-
+		category_property(test_category, source_data).
+
+	deterministic(category_property_2_14) :-
+		category_property(dynamic_category, (dynamic)).
+
+	deterministic(category_property_2_15) :-
+		category_property(test_category, static).
+
+	deterministic(category_property_2_16) :-
+		category_property(built_in_category, built_in).
+
+	deterministic(category_property_2_17) :-
+		category_property(test_category, file(_)).
+
+	deterministic(category_property_2_18) :-
+		category_property(test_category, file(_, _)).
+
+	deterministic(category_property_2_19) :-
+		category_property(test_category, lines(_, _)).
+
+	deterministic(category_property_2_20) :-
+		category_property(test_category, info(_)).
+
+	deterministic(category_property_2_21) :-
+		category_property(events_category, events).
+
+	deterministic(category_property_2_22) :-
+		category_property(test_category, number_of_clauses(_)).
+
+	deterministic(category_property_2_23) :-
+		category_property(test_category, number_of_user_clauses(_)).
+
+	% auxiliary predicates (avoid library dependencies)
 
 	member(H, [H| _]) :-
 		!.

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/02/19,
+		date is 2016/03/20,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -32,26 +32,26 @@
 	:- discontiguous(fails/1).
 	:- discontiguous(throws/2).
 
-	throws(object_property_2_1, error(type_error(object_identifier, 1), logtalk(object_property(1, static), _))) :-
+	throws(object_property_2_01, error(type_error(object_identifier, 1), logtalk(object_property(1, static), _))) :-
 		object_property(1, static).
 
-	throws(object_property_2_2, error(type_error(callable, 1), logtalk(object_property(logtalk, 1), _))) :-
+	throws(object_property_2_02, error(type_error(callable, 1), logtalk(object_property(logtalk, 1), _))) :-
 		object_property(logtalk, 1).
 
-	throws(object_property_2_3, error(domain_error(object_property, foo), logtalk(object_property(logtalk, foo), _))) :-
+	throws(object_property_2_03, error(domain_error(object_property, foo), logtalk(object_property(logtalk, foo), _))) :-
 		object_property(logtalk, foo).
 
-	fails(object_property_2_4) :-
+	fails(object_property_2_04) :-
 		object_property(non_exisiting_object, _).
 
-	fails(object_property_2_5) :-
+	fails(object_property_2_05) :-
 		object_property(logtalk, (dynamic)).
 
-	succeeds(object_property_2_6) :-
+	succeeds(object_property_2_06) :-
 		findall(Prop, object_property(logtalk, Prop), _).
 
 	% entity info
-	succeeds(object_property_2_7) :-
+	succeeds(object_property_2_07) :-
 		object_property(test_object, static),
 		object_property(test_object, dynamic_declarations),
 		object_property(test_object, complements(allow)),
@@ -69,13 +69,13 @@
 		member(comment(_), Info).
 
 	% entity interface
-	succeeds(object_property_2_8) :-
+	succeeds(object_property_2_08) :-
 		object_property(test_object, public(Public)), Public == [a/1],
 		object_property(test_object, protected(Protected)), Protected == [b/2],
 		object_property(test_object, private(Private)), Private == [c/3, e/5].
 
 	% interface predicate declaration properties
-	succeeds(object_property_2_9) :-
+	succeeds(object_property_2_09) :-
 		object_property(test_object, declares(a/1, Properties1)),
 		member((public), Properties1),
 		member(scope(Scope1), Properties1), Scope1 == (public),
@@ -124,6 +124,7 @@
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
 
+	% check that all queries with explicit properties are valid
 	fails(object_property_2_11) :-
 		(	object_property(empty_object, built_in)
 		;	object_property(empty_object, (dynamic))
@@ -154,6 +155,65 @@
 		),
 		% force backtracking into all property queries
 		fail.
+
+	% determinism tests
+
+	deterministic(object_property_2_12) :-
+		object_property(debug_object, debugging).
+
+	deterministic(object_property_2_13) :-
+		object_property(test_object, source_data).
+
+	deterministic(object_property_2_14) :-
+		object_property(dynamic_object, (dynamic)).
+
+	deterministic(object_property_2_15) :-
+		object_property(test_object, static).
+
+	deterministic(object_property_2_16) :-
+		object_property(built_in_object, built_in).
+
+	deterministic(object_property_2_17) :-
+		object_property(test_object, file(_)).
+
+	deterministic(object_property_2_18) :-
+		object_property(test_object, file(_, _)).
+
+	deterministic(object_property_2_19) :-
+		object_property(test_object, lines(_, _)).
+
+	deterministic(object_property_2_20) :-
+		object_property(test_object, info(_)).
+
+	deterministic(object_property_2_21) :-
+		object_property(options_object, events).
+
+	deterministic(object_property_2_22) :-
+		object_property(test_object, number_of_clauses(_)).
+
+	deterministic(object_property_2_23) :-
+		object_property(test_object, number_of_user_clauses(_)).
+
+	deterministic(object_property_2_24) :-
+		object_property(options_object, context_switching_calls).
+
+	deterministic(object_property_2_25) :-
+		object_property(options_object, dynamic_declarations).
+
+	deterministic(object_property_2_26) :-
+		object_property(options_object, complements(_)).
+
+	deterministic(object_property_2_27) :-
+		object_property(options_object, complements).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		deterministic(object_property_2_28) :-
+			object_property(threaded_object, threaded).
+	:- else.
+		- deterministic(object_property_2_28).
+	:- endif.
+
+	% auxiliary predicates (avoid library dependencies)
 
 	member(H, [H| _]) :-
 		!.

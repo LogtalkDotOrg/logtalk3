@@ -54,3 +54,42 @@
 		comment is 'Empty protocol for testing validity of protocol properties.']).
 
 :- end_protocol.
+
+
+:- protocol(built_in_protocol).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Built-in protocol for testing determinism of protocol properties.']).
+
+	:- built_in.
+
+:- end_protocol.
+
+
+:- protocol(dynamic_protocol).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Dynamic protocol for testing determinism of protocol properties.']).
+
+	:- (dynamic).
+
+:- end_protocol.
+
+
+:- protocol(debug_protocol).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Protocol compiled in debug mode for testing determinism of protocol properties.']).
+
+	:- set_logtalk_flag(debug, on).
+
+:- end_protocol.

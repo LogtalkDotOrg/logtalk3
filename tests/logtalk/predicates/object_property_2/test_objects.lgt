@@ -73,3 +73,73 @@
 	]).
 
 :- end_object.
+
+
+:- object(built_in_object).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Built-in object for testing determinism of object properties.']).
+
+	:- built_in.
+
+:- end_object.
+
+
+:- object(dynamic_object).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Dynamic object for testing determinism of object properties.']).
+
+	:- (dynamic).
+
+:- end_object.
+
+
+:- object(debug_object).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Object compiled in debug mode for testing determinism of object properties.']).
+
+	:- set_logtalk_flag(debug, on).
+
+:- end_object.
+
+
+:- object(options_object).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Object compiled with optional features turned on for testing determinism of object properties.']).
+
+	:- set_logtalk_flag(events, allow).
+	:- set_logtalk_flag(context_switching_calls, allow).
+	:- set_logtalk_flag(dynamic_declarations, allow).
+	:- set_logtalk_flag(complements, allow).
+
+:- end_object.
+
+
+:- object(threaded_object).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/03/20,
+		comment is 'Object compiled with threaded calls support for testing determinism of object properties.']).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		:- threaded.
+	:- endif.
+
+:- end_object.
