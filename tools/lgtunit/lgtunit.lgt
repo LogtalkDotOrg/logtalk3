@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.10,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2016/03/14,
+		date is 2016/03/20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -717,6 +717,8 @@
 		directive_expansion(Directive, Terms).
 
 	% skipped tests
+	term_expansion((- Head), Expansion) :-
+		term_expansion((- Head :- true), Expansion).
 	term_expansion((- Head :- _), []) :-
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test),

@@ -24,6 +24,12 @@ RELEASE NOTES
 3.04.2 - March ??, 2016
 =======================
 
+Tools
+-----
+
+* FIXED: The `lgtunit` tool to allow any test dialect to be defined as a fact
+when the test is skipped.
+
 Tests
 -----
 
