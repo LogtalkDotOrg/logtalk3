@@ -932,11 +932,11 @@ protocol_property(Ptc, Prop) :-
 	;	fail
 	).
 '$lgt_protocol_property'(public(Resources), Ptc, Dcl, _, Flags) :-
-	'$lgt_category_property_resources'(Ptc, Dcl, Flags, p(p(p)), Resources).
+	'$lgt_protocol_property_resources'(Ptc, Dcl, Flags, p(p(p)), Resources).
 '$lgt_protocol_property'(protected(Resources), Ptc, Dcl, _, Flags) :-
-	'$lgt_category_property_resources'(Ptc, Dcl, Flags, p(p), Resources).
+	'$lgt_protocol_property_resources'(Ptc, Dcl, Flags, p(p), Resources).
 '$lgt_protocol_property'(private(Resources), Ptc, Dcl, _, Flags) :-
-	'$lgt_category_property_resources'(Ptc, Dcl, Flags, p, Resources).
+	'$lgt_protocol_property_resources'(Ptc, Dcl, Flags, p, Resources).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
 '$lgt_protocol_property'(alias(Alias, Properties), Ptc, _, Rnm, Flags) :-
@@ -955,8 +955,8 @@ protocol_property(Ptc, Prop) :-
 	call(Dcl, Predicate, Scope, _, _, Ptc),
 	functor(Predicate, Functor, Arity).
 
-'$lgt_protocol_property_resource'(Ctg, _, _, Scope, op(Priority, Specifier, Operator)) :-
-	'$lgt_entity_property_'(Ctg, op(Priority, Specifier, Operator, Scope)).
+'$lgt_protocol_property_resource'(Ptc, _, _, Scope, op(Priority, Specifier, Operator)) :-
+	'$lgt_entity_property_'(Ptc, op(Priority, Specifier, Operator, Scope)).
 
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
