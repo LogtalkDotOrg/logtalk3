@@ -24,6 +24,12 @@ RELEASE NOTES
 3.04.2 - March ??, 2016
 =======================
 
+Documentation
+-------------
+
+* FIXED: Description of the search order for predicate definitions for class
+hierarchies in the User Manual.
+
 Tools
 -----
 

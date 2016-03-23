@@ -76,13 +76,13 @@ Implementation inheritance refers to the inheritance of predicate definitions. T
 <h3 id="inheritance_implementation_prototype">Search order for prototype hierarchies</h3>
 
 <p>
-The search order for predicate definitions is similar to the search for predicate declarations except that implemented protocols are ignored (they can only contain predicate directives).
+The search order for predicate definitions is similar to the search for predicate declarations except that implemented protocols are ignored (as they can only contain predicate directives).
 </p>
 
 <h3 id="inheritance_implementation_class">Search order for class hierarchies</h3>
 
 <p>
-The search order for predicate definitions is similar to the search for predicate declarations except that implemented protocols are ignored (they can only contain predicate directives).
+The search order for predicate definitions is similar to the search for predicate declarations except that implemented protocols are ignored (as they can only contain predicate directives) and that the search starts at the instance itself (that received the message) before proceeding, if no predicate definition is found there, to the instance classes.
 </p>
 
 <h3 id="inheritance_implementation_redefinition">Inheritance versus predicate redefinition</h3>
@@ -274,7 +274,7 @@ Nevertheless, Logtalk supports multi-inheritance by enabling an object to extend
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 28, 2014</span>
+		<span>Last updated on: March 23, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="predicates.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="events.html">next</a></span><br/>
