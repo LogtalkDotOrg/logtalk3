@@ -33,6 +33,9 @@ hierarchies in the User Manual.
 Tools
 -----
 
+* ADDED: Support to the `logtalk_tester.sh` automation script to pass user
+arguments to the integration script used to run the tests.
+
 * FIXED: The `lgtunit` tool to allow any test dialect to be defined as a fact
 when the test is skipped.
 

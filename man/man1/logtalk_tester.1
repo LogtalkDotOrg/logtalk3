@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "March 17, 2016" "Logtalk 3.04.2" "Logtalk Documentation"
+.TH logtalk_tester 1 "March 24, 2016" "Logtalk 3.04.2" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -8,20 +8,22 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .br
 .B logtalk_tester [-p 
 .I prolog
-.B ] [-m 
+.B ] [-m
 .I mode
 .B ] [-f
 .I format
-.B ] [-d 
+.B ] [-d
 .I results
-.B ] [-t 
+.B ] [-t
 .I timeout
+.B ] [-a
+.I arguments
 .B ]
 .br
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\f3logtalk_tester\f1 is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \f2tester.lgt\f1 and \f2tester.logtalk\f1 source files. In case of failed unit tests, this script returns an exit code of \f21\f1.
+\f3logtalk_tester\f1 is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \f2tester.lgt\f1 and \f2tester.logtalk\f1 source files. In case of failed unit tests, timed out test sets, or crashed test sets, this script returns an exit code of \f21\f1.
 
 .SH OPTIONS
 .TP
@@ -42,6 +44,9 @@ Directory to store the test results. Default is the local \f2./logtalk_tester_lo
 .TP
 .BI \-t
 Timeout in seconds for running each test set. Default is \f20\f1; i.e. disabled.
+.TP
+.BI \-a
+Arguments to be passed to the integration script used to run the tests (no default).
 .TP
 .BI \-h
 Provide help on script usage.
