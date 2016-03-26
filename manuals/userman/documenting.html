@@ -116,7 +116,7 @@ Arbitrary user-defined predicate information can be represented using the
     ...
 ]).</pre>
 <p>
-Keys should be atoms and values should be ground terms. The following keys are pre-defined and may be processed specially by Logtalk:
+The first argument can also a grammar rule non-terminal indicator, <code>Functor//Arity</code>. Keys should be atoms and values should be bound terms. The following keys are pre-defined and may be processed specially by Logtalk:
 </p>
 <dl>
 	<dt><code>comment</code></dt>
@@ -128,7 +128,7 @@ Keys should be atoms and values should be ground terms. The following keys are p
 	<dt><code>allocation</code></dt>
 		<dd>Objects where we should define the predicate. Some possible values are <code>container</code>, <code>descendants</code>, <code>instances</code>, <code>classes</code>, <code>subclasses</code>, and <code>any</code>.</dd>
 	<dt><code>redefinition</code></dt>
-		<dd>Describes if the predicate can be redefined and, if so, in what way. Some possible values are <code>never</code>, <code>free</code>, <code>specialize</code>, <code>call_super_first</code>, <code>call_super_last</code>.</dd>
+		<dd>Describes if predicate is expected to be redefined and, if so, in what way. Some possible values are <code>never</code>, <code>free</code>, <code>specialize</code>, <code>call_super_first</code>, <code>call_super_last</code>.</dd>
 	<dt><code>exceptions</code></dt>
 		<dd>List of possible exceptions throw by the predicate using the format <em>Description</em> <code>-</code> <em>Exception term</em>. The description must be an atom. The exception term must be a non-variable term.</dd>
 	<dt><code>examples</code></dt>
@@ -151,13 +151,13 @@ As with the <code>info/1</code> directive, use only the keywords that make sense
 <h2 id="documenting_processing">Processing and viewing documenting files</h2>
 
 <p>
-The <code>lgtdoc</code> tool generates a XML documenting file per entity. For example, assuming the default filename extensions, a <code>trace</code> object and a <code>sort(_)</code> parametric object will result in <code>trace_0.xml</code> and <code>sort_1.xml</code> XML files.
+The <code>lgtdoc</code> tool generates a XML documenting file per entity. It can also generate directory, entity, and predicate indexes when documenting libraries and directories. For example, assuming the default filename extensions, a <code>trace</code> object and a <code>sort(_)</code> parametric object will result in <code>trace_0.xml</code> and <code>sort_1.xml</code> XML files.
 </p>
 <p>
-Each XML file contains references to two other files, a XML specification file and a XSL style-sheet file. The XML specification file can be either a DTD file (<code>logtalk.dtd</code>) or a XML Scheme file (<code>logtalk.xsd</code>). The <a href="http://www.w3.org/Style/XSL/">XSL</a> style-sheet file is responsible for converting the XML files to some desired format such as HTML or PDF. The default names for the XML specification file and the XSL style-sheet file are defined by the <code>lgtdoc</code> tool but can be overiden by passing a list of options to the tool predicates. The <code>lgtdoc/xml</code> sub-directory in the Logtalk installation directory contains the XML specification files described above, along with several sample XSL style-sheet files and sample scripts for converting XML documenting files to several formats (e.g. Markdown, HTML, and PDF). Please read the <code>NOTES</code> file included in the directory for details. You may use the supplied sample files as a starting point for generating the documentation of your Logtalk applications.
+Each entity XML file contains references to two other files, a XML specification file and a XSL style-sheet file. The XML specification file can be either a DTD file (<code>logtalk_entity.dtd</code>) or a XML Scheme file (<code>logtalk_entity.xsd</code>). The <a href="http://www.w3.org/Style/XSL/">XSL</a> style-sheet file is responsible for converting the XML files to some desired format such as HTML or PDF. The default names for the XML specification file and the XSL style-sheet file are defined by the <code>lgtdoc</code> tool but can be overiden by passing a list of options to the tool predicates. The <code>lgtdoc/xml</code> sub-directory in the Logtalk installation directory contains the XML specification files described above, along with several sample XSL style-sheet files and sample scripts for converting XML documenting files to several formats (e.g. Markdown, HTML, and PDF). Please read the <code>NOTES</code> file included in the directory for details. You may use the supplied sample files as a starting point for generating the documentation of your Logtalk applications.
 </p>
 <p>
-The Logtalk DTD file, <code>logtalk.dtd</code>, contains a reference to a user-customizable file, <code>custom.ent</code>, which declares XML entities for source code author names, license terms, and copyright string. After editing the <code>custom.ent</code> file to reflect your personal data, you may use the XML entities on <code>info/1</code> documenting directives. For example, assuming that the XML entities are named <em>author</em>, <em>license</em>, and <em>copyright</em> we may write:
+The Logtalk DTD file, <code>logtalk_entity.dtd</code>, contains a reference to a user-customizable file, <code>custom.ent</code>, which declares XML entities for source code author names, license terms, and copyright string. After editing the <code>custom.ent</code> file to reflect your personal data, you may use the XML entities on <code>info/1</code> documenting directives. For example, assuming that the XML entities are named <em>author</em>, <em>license</em>, and <em>copyright</em> we may write:
 </p>
 <pre>:- info([
     version is 1.1,
@@ -181,7 +181,7 @@ Inline formatting in comments text can be accomplished by using Markdown syntax 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 14, 2016</span>
+		<span>Last updated on: March 26, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="errors.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="installing.html">next</a></span><br/>
