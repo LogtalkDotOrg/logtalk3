@@ -122,9 +122,9 @@ run_test() {
 	name="$1"
 	goal="$2"
 	if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
-		$timeout_command $timeout $logtalk_call "$goal" -- "$arguments" > "$results/$name.results" 2> "$results/$name.errors"
+		$timeout_command $timeout $logtalk_call "$goal" -- $arguments > "$results/$name.results" 2> "$results/$name.errors"
 	else
-		$logtalk_call "$goal" -- "$arguments" > "$results/$name.results" 2> "$results/$name.errors"
+		$logtalk_call "$goal" -- $arguments > "$results/$name.results" 2> "$results/$name.errors"
 	fi
 }
 
@@ -136,7 +136,7 @@ usage_help()
 	echo  "case of failed unit tests, this script returns an exit code of 1."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-a arguments]"
+	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -150,7 +150,7 @@ usage_help()
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
-	echo "  -a arguments to be passed to the integration script used to run the tests (no default)"
+	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
 	exit 0
@@ -165,11 +165,13 @@ do
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
-		a) a_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
 done
+
+shift $((OPTIND - 1))
+arguments="$@"
 
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
@@ -284,10 +286,6 @@ fi
 
 if [ "$t_arg" != "" ] ; then
 	timeout="$t_arg"
-fi
-
-if [ "$a_arg" != "" ] ; then
-	arguments="$a_arg"
 fi
 
 if [ "$timeout_command" == "" ] ; then
