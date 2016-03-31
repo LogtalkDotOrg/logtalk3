@@ -68,8 +68,7 @@ Encapsulating Prolog code using Logtalk objects is simple. First, for each sourc
 <p>
 Prolog <em>multifile</em> predicates are used when clauses for the same predicate are spread among several source files. When encapsulating plain Prolog code that uses multifile predicates, is often the case that the clauses of the multifile predicates get spread between different objects and categories but conversion is straight-forward. In the Logtalk object (or category) holding the multifile predicate <em>primary</em> declaration, add a <a title="Consult user manual" href="predicates.html#predicates_scope"><code>public/1</code></a> directive and a <a title="Consult user manual" href="predicates.html#predicates_multifile"><code>multifile/1</code></a> directive. In all other objects (or categories) defining clauses for the multifile predicate, add a <code>multifile/1</code> directive and predicate clauses using the format:
 </p>
-<pre>
-:- multifile(Entity::Functor/Arity).
+<pre>:- multifile(Entity::Functor/Arity).
 
 Entity::Functor(...) :-
     ...
@@ -77,15 +76,13 @@ Entity::Functor(...) :-
 <p>
 See the User Manual section on the <code>multifile/1</code> predicate directive for more information. An alternative solution is to simply keep the clauses for the multifile predicates as plain Prolog code and define, if necessary, a parametric object to encapsulate all predicates working with the multifile predicate clauses. For example, assume the following <code>multifile/1</code> directive:
 </p>
-<pre>
-% city(Name, District, Population, Neighbors)
+<pre>% city(Name, District, Population, Neighbors)
 :- multifile(city/4).
 </pre>
 <p>
 We can define a parametric object with <code>city/4</code> as its identifier:
 </p>
-<pre>
-:- object(city(_Name, _District, _Population, _Neighbors)).
+<pre>:- object(city(_Name, _District, _Population, _Neighbors)).
 
     % predicates for working with city/4 clauses
 
@@ -199,8 +196,7 @@ In this case, although the directive is not copied to the generated Prolog file,
 <p>
 Prolog module predicates can be called from within objects or categories by simply using explicit module qualification, i.e. by writing <code>Module:Goal</code> or <code>Goal@Module</code> (depending on the module system). Logtalk also supports the use of <code>use_module/2</code> directives in object and categories (with the restriction that the first argument of the directive must be the actual module name and not the module file name or the module file path). In this case, these directives are parsed in a similar way to Logtalk <a title="Consult reference manual" href="../refman/directives/uses_2.html"><code>uses/2</code></a> directives, with calls to the specified module predicates being automatically translated to <code>Module:Goal</code> calls. For example, assume a <code>clpfd</code> Prolog module implementing a finite domain constraint solver. You could write:
 </p>
-<pre>
-:- object(puzzle).
+<pre>:- object(puzzle).
 
     :- public(puzzle/1).
 
@@ -244,16 +240,14 @@ Logtalk allows you to send a message to a module in order to call one of its pre
 <p>
 Some Prolog module libraries, e.g. constraint packages, expect clauses for some library predicates to be defined in other modules. This is accomplished by declaring the library predicate <em>multifile</em> and by explicitly prefixing predicate clause heads with the library module identifier. For example:
 </p>
-<pre>
-:- multifile(clpfd:run_propagator/2).
+<pre>:- multifile(clpfd:run_propagator/2).
 clpfd:run_propagator(..., ...) :-
     ...
 </pre>
 <p>
 Logtalk supports the compilation of such clauses within objects and categories. While the clause head is compiled as-is, the clause body is compiled in the same way as a regular object or category predicate, thus allowing calls to local object or category predicates. For example:
 </p>
-<pre>
-:- object(...).
+<pre>:- object(...).
 
     :- multifile(clpfd:run_propagator/2).
     clpfd:run_propagator(..., ...) :-
