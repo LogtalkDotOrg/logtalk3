@@ -158,8 +158,7 @@ prime_numbers(N, M, Acc, Primes) :-
 <p>
 When using asynchronous calls, the link between a <code>threaded_exit/1</code> call and the corresponding <code>threaded_call/1</code> call is established using unification. If there are multiple <code>threaded_call/1</code> calls for a matching <code>threaded_exit/1</code> call, the connection can potentially be established with any of them. Nevertheless, you can easily use a tag the calls by using the extended <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/2</code></a> built-in predicates. For example:
 </p>
-<pre>
-?- threaded_call(member(X, [1,2,3]), Tag).
+<pre>?- threaded_call(member(X, [1,2,3]), Tag).
 
 Tag = 1
 yes

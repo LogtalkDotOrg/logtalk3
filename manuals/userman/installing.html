@@ -277,8 +277,7 @@ Although is always possible to edit the back-end Prolog compiler adapter files, 
 <p>
 Settings files are normal Logtalk source files (although when automatically loaded by Logtalk they are compiled silently with any errors being simply ignored). The usual contents is an <code>initialization/1</code> Prolog directive containing calls to the <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> Logtalk built-in predicate and asserting clauses for the <a title="Consult reference manual" href="../refman/predicates/logtalk_library_path_2.html"><code>logtalk_library_path/2</code></a> multifile dynamic predicate. Note that the <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive cannot be used as its scope is local to the source file being compiled. For example, one of the troubles of writing portable applications is the different feature sets of Prolog compilers. A typical issue is the lack of support for tabling. Using the Logtalk support for conditional compilation you could write:
 </p>
-<pre>
-:- if(current_logtalk_flag(tabling, supported)).
+<pre>:- if(current_logtalk_flag(tabling, supported)).
 
     % add tabling directives to the source code
     :- table(foo/1).
@@ -289,8 +288,7 @@ Settings files are normal Logtalk source files (although when automatically load
 <p>
 The Logtalk flag <code>prolog_dialect</code> may also be used with the conditional compilation directives in order to define a single settings file that can be used with several back-end Prolog compilers. For example:
 </p>
-<pre>
-:- if(current_logtalk_flag(prolog_dialect, yap)).
+<pre>:- if(current_logtalk_flag(prolog_dialect, yap)).
 
     % YAP specific settings
     ...

@@ -340,8 +340,7 @@ This allows clauses for a predicate to be defined in several objects and/or cate
 <p>
 Consider the following simple example:
 </p>
-<pre>
-:- object(main).
+<pre>:- object(main).
 
     :- public(a/1).
     :- multifile(a/1).
@@ -352,8 +351,7 @@ Consider the following simple example:
 <p>
 After compiling and loading the <code>main</code> object, we can define other objects (or categories) that contribute with clauses for the multifile predicate. For example:
 </p>
-<pre>
-:- object(other).
+<pre>:- object(other).
 
     :- multifile(main::a/1).
     main::a(2).
@@ -368,8 +366,7 @@ After compiling and loading the <code>main</code> object, we can define other ob
 <p>
 After compiling and loading the above objects, you can use queries such as:
 </p>
-<pre>
-| ?- main::a(X).
+<pre>| ?- main::a(X).
 
 X = 1 ;
 X = 2 ;
@@ -810,8 +807,7 @@ Note that you can define your own alternative message kind identifiers, for your
 <p>
 Messages are represented by atoms or compound terms, handy for machine-processing, and converted into a list of tokens, for human consumption. This conversion is performed using the non-terminal <a title="Consult reference manual" href="../refman/methods/message_tokens_2.html"><code>logtalk::message_tokens(Term, Component)</code></a>. A simple example is:
 </p>
-<pre>
-:- multifile(logtalk::message_tokens//2).
+<pre>:- multifile(logtalk::message_tokens//2).
 :- dynamic(logtalk::message_tokens//2).
 
 logtalk::message_tokens(loaded_settings_file(Path), core) --&gt;
@@ -994,8 +990,7 @@ Prolog user-defined predicates can be called from within objects or categories b
 <p>
 In alternative, you can also use the <a title="Consult reference manual" href="../refman/directives/uses_2.html"><code>uses/2</code></a> directive and write:
 </p>
-<pre>
-:- uses(user, [bar/0]).
+<pre>:- uses(user, [bar/0]).
 
 foo :-
     ...,
@@ -1017,8 +1012,7 @@ To call Prolog module predicates from within objects or categories you can use s
 <p>
 You can also use in alternative the <a title="Consult reference manual" href="../refman/directives/use_module_2.html"><code>use_module/2</code></a> directive:
 </p>
-<pre>
-:- use_module(module, [bar/0]).
+<pre>:- use_module(module, [bar/0]).
 
 foo :-
     ...,
