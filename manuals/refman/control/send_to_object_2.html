@@ -66,7 +66,7 @@ The lookups for the message declaration and the corresponding method are perform
 <dl>
 	<dt>Either Object or Message is a variable:</dt>
 		<dd><code>instantiation_error</code></dd>
-	<dt>Object is not a valid object identifier:</dt>
+	<dt>Object is neither a variable nor a valid object identifier:</dt>
 		<dd><code>type_error(object_identifier, Object)</code></dd>
 	<dt>Message is neither a variable nor a callable term:</dt>
 		<dd><code>type_error(callable, Message)</code></dd>
@@ -82,10 +82,10 @@ The lookups for the message declaration and the corresponding method are perform
 <dl>
 	<dt>Proxy is a variable:</dt>
 		<dd><code>instantiation_error</code></dd>
-	<dt>Proxy is not a valid object identifier:</dt>
+	<dt>Proxy is neither a variable nor a valid object identifier:</dt>
 		<dd><code>type_error(object_identifier, Proxy)</code></dd>
-	<dt>The predicate Proxy does not exist in the <em>user</em> pseudo-object:</dt>
-		<dd><code>existence_error(procedure, ProxyFunctor/ProxyArity)</code></dd>
+	<dt>Proxy, with predicate indicator Functor/Arity, does not exist in the <em>user</em> pseudo-object:</dt>
+		<dd><code>existence_error(procedure, Functor/Arity)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -106,7 +106,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: April 25, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="send_to_self_1.html">next</a></span><br/>
