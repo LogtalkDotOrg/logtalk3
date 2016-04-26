@@ -22,10 +22,10 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2015/10/22,
-		comment is 'Simple tool for helping porting plain Prolog code.'
+		date is 2016/04/26,
+		comment is 'Adviser tool for porting and wrapping plain Prolog applications.'
 	]).
 
 	:- public(advise_for_files/1).
@@ -195,7 +195,7 @@
 		add_directive_(Object, Directive, NewDirective),
 		logtalk::print_message(information(code), wrapper, add_directive(Directive, NewDirective)),
 		fail.
-	print_replace_advise(_).
+	print_add_advise(_).
 
 	% predicates called from other files wrapped as objects
 	% must be declared public
@@ -220,7 +220,7 @@
 			member((multifile), Properties)
 		).
 
-	% internal dynamic predicates shoudl also be
+	% internal dynamic predicates should also be
 	% declared private for improved performance
 
 	missing_private_directives_advise(Object) :-
@@ -280,8 +280,12 @@
 
 	unknown_predicate_called(Object, Other, Predicate) :-
 		unknown_predicate_called_but_not_defined_(Object, Predicate),
-		object_property(Other, defines(Predicate, _)),
-		wrapper_object_(Other, _).
+		(	object_property(Other, defines(Predicate, _)),
+			wrapper_object_(Other, _) ->
+			true
+		;	% likely some Prolog library predicate
+			Other = user
+		).
 
 	% wrapper for the plain Prolog files source code
 
