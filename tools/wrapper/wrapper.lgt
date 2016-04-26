@@ -31,35 +31,35 @@
 	:- public(advise_for_files/1).
 	:- mode(advise_for_files(+list(atom)), one).
 	:- info(advise_for_files/1, [
-		comment is 'Advise the user on missing directives for converting a list of plain Prolog files in Logtalk objects.',
+		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects.',
 		argnames is ['Files']
 	]).
 
 	:- public(advise_for_directory/2).
 	:- mode(advise_for_directory(+atom, +list(atom)), one).
 	:- info(advise_for_directory/2, [
-		comment is 'Advise the user on missing directives for converting a directory of files, using any of the given extensions, in Logtalk objects.',
+		comment is 'Advises the user on missing directives for converting all plain Prolog files (using any of the given extensions) in a directory to Logtalk objects.',
 		argnames is ['Directory', 'Extensions']
 	]).
 
 	:- public(advise_for_directory/1).
 	:- mode(advise_for_directory(+atom), one).
 	:- info(advise_for_directory/1, [
-		comment is 'Advise the user on missing directives for converting a directory of Prolog files (using either the .pl or .prolog extensions) in Logtalk objects.',
+		comment is 'Advises the user on missing directives for converting all plain Prolog files (using either the .pl or .prolog extensions) in a directory to Logtalk objects.',
 		argnames is ['Directory']
 	]).
 
 	:- public(save_advise/1).
 	:- mode(save_advise(+atom), one).
 	:- info(save_advise/1, [
-		comment is 'Saves wrapper objects for all advised files into the specified directory.',
+		comment is 'Saves wrapper objects (plus a loader file) for all advised files into the specified directory.',
 		argnames is ['Directory']
 	]).
 
 	:- public(save_advise/0).
 	:- mode(save_advise, one).
 	:- info(save_advise/0, [
-		comment is 'Saves wrapper objects for all advised files into the current directory.'
+		comment is 'Saves wrapper objects (plus a loader file) for all advised files into the current directory.'
 	]).
 
 	:- private(unknown_predicate_called_but_not_defined_/2).
@@ -142,7 +142,7 @@
 		argnames is ['File']
 	]).
 
-	% load the plain Prolog files and advise on changes
+	% load the plain Prolog files and advise on required changes for porting
 
 	advise_for_files(Files) :-
 		clean_issues_databases,
@@ -158,10 +158,13 @@
 		os::directory_files(Directory, Files),
 		findall(
 			File,
-			(member(File,Files), member(Extension,Extensions), sub_atom(File,_,_,0,Extension)),
-			FilteredFiles
+			(	member(File, Files),
+				member(Extension, Extensions),
+				sub_atom(File, _, _, 0, Extension)
+			),
+			PrologFiles
 		),
-		advise_for_files(FilteredFiles).
+		advise_for_files(PrologFiles).
 
 	advise_for_directory(Directory) :-
 		advise_for_directory(Directory, ['.pl', '.prolog']).
@@ -244,7 +247,12 @@
 		save_advise_object(Object, Path),
 		close(Stream),
 		fail.
-	save_advise_objects.
+	save_advise_objects :-
+		findall(Object, wrapper_object_(Object, _), Objects),
+		open('loader.lgt', write, Stream),
+		set_output(Stream),
+		logtalk::print_message(raw, wrapper, add_directive(initialization(logtalk_load(Objects)))),
+		close(Stream).		
 
 	save_advise_object(Object, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
