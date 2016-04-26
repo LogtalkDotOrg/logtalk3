@@ -123,6 +123,42 @@
             </dd>
           </dl>
         </div>
+        <div class="section">
+          <h3 id="save_advise/1" class="code">save_advise/1</h3>
+          <blockquote>
+            <p class="comment">Saves wrapper objects for all advised files into the specified directory.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>save_advise(Directory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>save_advise(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="save_advise/0" class="code">save_advise/0</h3>
+          <blockquote>
+            <p class="comment">Saves wrapper objects for all advised files into the current directory.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>save_advise &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
       </div>
       <div class="protected">
         <h2>Protected interface</h2>
@@ -289,6 +325,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>add_directive_(?atom,?predicate_indicator,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="remove_directive_/2" class="code">remove_directive_/2</h3>
+          <blockquote>
+            <p class="comment">Table of directives to be removed.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>remove_directive_(Object,Directive)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>remove_directive_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

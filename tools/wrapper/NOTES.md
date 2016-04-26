@@ -20,16 +20,15 @@ ________________________________________________________________________
 To load this tool and for sample queries, please see the `SCRIPT.txt` file.
 
 This is a prototype tool to help port a plain Prolog application to Logtalk.
-The tool takes a list of Prolog files, loads and wraps the code in each file
-using an object wrapper, and advises on missing directives to be added to
-those objects by using the compiler lint checker and the reflection API. The
-user is then expected to copy and pasted the printed advise into the Prolog
-files and run them again. After a few, usually just one, iterations there
-will be no more missing directives and the user can proceed to test the
-wrapper objects. Assuming that the tests are successful, the user can then
-add the object opening and closing directives to the Prolog files, change
-their extension to a Logtalk source code file extension, and recompile to
-check for additional issues.
+The tool takes a directory of Prolog files or a list of Prolog files, loads
+and wraps the code in each file using an object wrapper, and advises on missing
+directives to be added to those objects by using the compiler lint checker and
+the reflection API. The user can then either save the generated wrapper objects
+or copy and pasted the printed advise into the Prolog files (updating them to
+Logtalk files by adding the object opening and closing directives to the Prolog
+files). The wrapper objects can then be loaded for testing.
+
+For the tool API, consult the `../../docs/wrapper_0.html` file.
 
 Current limitations:
 
