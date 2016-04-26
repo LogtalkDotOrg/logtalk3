@@ -49,6 +49,19 @@
 		argnames is ['Directory']
 	]).
 
+	:- public(save_advise/1).
+	:- mode(save_advise(+atom), one).
+	:- info(save_advise/1, [
+		comment is 'Saves wrapper objects for all advised files into the specified directory.',
+		argnames is ['Directory']
+	]).
+
+	:- public(save_advise/0).
+	:- mode(save_advise, one).
+	:- info(save_advise/0, [
+		comment is 'Saves wrapper objects for all advised files into the current directory.'
+	]).
+
 	:- private(unknown_predicate_called_but_not_defined_/2).
 	:- dynamic(unknown_predicate_called_but_not_defined_/2).
 	:- mode(unknown_predicate_called_but_not_defined_(?atom, ?predicate_indicator), zero_or_more).
@@ -211,6 +224,48 @@
 		logtalk::print_message(information(code), wrapper, remove_directive(Directive)),
 		fail.
 	print_advise(_).
+
+	save_advise(Directory) :-
+		os::working_directory(Current),
+		os::make_directory(Directory),
+		os::change_directory(Directory),
+		save_advise_objects,
+		os::change_directory(Current).
+
+	save_advise :-
+		os::working_directory(Current),
+		save_advise(Current).
+
+	save_advise_objects :-
+		wrapper_object_(Object, File),
+		atom_concat(Object, '.lgt', Source),
+		open(Source, write, Stream),
+		set_output(Stream),
+		save_advise_object(Object, File),
+		close(Stream),
+		fail.
+	save_advise_objects.
+
+	save_advise_object(Object, _) :-
+		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
+		fail.
+	save_advise_object(Object, _) :-
+		\+ \+ add_directive_(Object, _),
+		add_directive_(Object, Directive),
+		logtalk::print_message(raw, wrapper, add_directive(Directive)),
+		fail.
+	save_advise_object(Object, _) :-
+		\+ \+ add_directive_(Object, _, _),
+		add_directive_(Object, Directive, NewDirective),
+		logtalk::print_message(raw, wrapper, add_directive(Directive, NewDirective)),
+		fail.
+	save_advise_object(_, File) :-
+		logtalk::print_message(raw, wrapper, add_directive(include(File))),
+		fail.
+	save_advise_object(_, _) :-
+		logtalk::print_message(raw, wrapper, add_directive(end_object)),
+		fail.
+	save_advise_object(_, _).
 
 	% predicates called from other files wrapped as objects
 	% must be declared public
@@ -387,6 +442,8 @@
 	message_prefix_stream(information,       '% ',     user_output).
 	message_prefix_stream(information(code), '',       user_output).
 	message_prefix_stream(warning,           '*     ', user_error).
+	message_prefix_stream(raw,               '',       Stream) :-
+		current_output(Stream).
 
 	% wraper messages
 

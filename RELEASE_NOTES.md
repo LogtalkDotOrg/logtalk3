@@ -44,6 +44,9 @@ arguments to the integration script used to run the tests.
 * FIXED: The `lgtunit` tool to allow any test dialect to be defined as a fact
 when the test is skipped.
 
+* ADDED: Support for saving the generated wrapper objects for the advised
+files to the `wrapper` tool.
+
 * IMPROVED: The `wrapper` tool to also print advise on `ensure_loaded/1` and
 `include/1` directives that should be removed.
 
