@@ -21,8 +21,13 @@ RELEASE NOTES
 =============
 
 
-3.04.2 - March ??, 2016
+3.04.2 - April ??, 2016
 =======================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug where the compiler could fail to detect discontiguous predicates.
 
 Documentation
 -------------

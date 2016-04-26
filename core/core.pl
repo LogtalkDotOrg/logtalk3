@@ -2770,7 +2770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 4, 2, rc2)).
 
 
 
@@ -12215,6 +12215,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % checks for a discontiguous/1 directive for a predicate
 
 '$lgt_check_discontiguous_directive'(Head, Ctx) :-
+	retractall('$lgt_pp_previous_predicate_'(_, user)),
+	assertz('$lgt_pp_previous_predicate_'(Head, user)),
 	(	'$lgt_pp_discontiguous_'(Head) ->
 		% discontiguous directive present
 		true
