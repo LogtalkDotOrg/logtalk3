@@ -113,6 +113,14 @@
 		argnames is ['Object', 'Directive', 'NewDirective']
 	]).
 
+	:- private(remove_directive_/2).
+	:- dynamic(remove_directive_/2).
+	:- mode(remove_directive_(?atom, ?predicate_indicator), zero_or_more).
+	:- info(remove_directive_/2, [
+		comment is 'Table of directives to be removed.',
+		argnames is ['Object', 'Directive']
+	]).
+
 	:- private(file_being_advised_/1).
 	:- dynamic(file_being_advised_/1).
 	:- mode(file_being_advised_(+atom), zero_or_more).
@@ -154,7 +162,8 @@
 		retractall(file_being_advised_(_)),
 		retractall(wrapper_object_(_, _)),
 		retractall(add_directive_(_, _)),
-		retractall(add_directive_(_, _, _)).
+		retractall(add_directive_(_, _, _)),
+		retractall(remove_directive_(_, _)).
 
 	load_and_wrap_files([]).
 	load_and_wrap_files([File| Files]) :-
@@ -180,22 +189,28 @@
 	print_advise :-
 		wrapper_object_(Object, File),
 		logtalk::print_message(information, wrapper, advise_for_file(File)),
-		print_add_advise(Object),
+		print_advise(Object),
 		fail.
 	print_advise.
 
-	print_add_advise(Object) :-
+	print_advise(Object) :-
 		\+ \+ add_directive_(Object, _),
 		logtalk::print_message(information(code), wrapper, add_directives),
 		add_directive_(Object, Directive),
 		logtalk::print_message(information(code), wrapper, add_directive(Directive)),
 		fail.
-	print_add_advise(Object) :-
+	print_advise(Object) :-
 		\+ \+ add_directive_(Object, _, _),
 		add_directive_(Object, Directive, NewDirective),
 		logtalk::print_message(information(code), wrapper, add_directive(Directive, NewDirective)),
 		fail.
-	print_add_advise(_).
+	print_advise(Object) :-
+		\+ \+ remove_directive_(Object, _),
+		logtalk::print_message(information(code), wrapper, remove_directives),
+		remove_directive_(Object, Directive),
+		logtalk::print_message(information(code), wrapper, remove_directive(Directive)),
+		fail.
+	print_advise(_).
 
 	% predicates called from other files wrapped as objects
 	% must be declared public
@@ -329,19 +344,25 @@
 	term_expansion((:- include(Path)), []) :-
 		file_being_advised_(File),
 		% file extension might be missing
-		atom_concat(Path, _, File).
+		atom_concat(Path, _, File),
+		logtalk_load_context(entity_identifier, Object),
+		assertz(remove_directive_(Object, include(Path))).
 	term_expansion((:- include(Path)), []) :-
 		os::expand_path(Path, ExpandedPath),
 		wrapper_object_(_, File),
 		% file extension might be missing
-		atom_concat(ExpandedPath, _, File).
+		atom_concat(ExpandedPath, _, File),
+		logtalk_load_context(entity_identifier, Object),
+		assertz(remove_directive_(Object, include(Path))).
 
 	% discard ensure_loaded/1 directives for files already being processed
 	term_expansion((:- ensure_loaded(Path)), []) :-
 		os::expand_path(Path, ExpandedPath),
 		wrapper_object_(_, File),
 		% file extension might be missing
-		atom_concat(ExpandedPath, _, File).
+		atom_concat(ExpandedPath, _, File),
+		logtalk_load_context(entity_identifier, Object),
+		assertz(remove_directive_(Object, ensure_loaded(Path))).
 
 	% hooks for intercepting relevant compiler lint messages
 
@@ -390,6 +411,9 @@
 	message_tokens(replace_directives) -->
 		['% Replace the following directives:'-[], nl, nl].
 
+	message_tokens(remove_directives) -->
+		['% Remove the following directives:'-[], nl, nl].
+
 	message_tokens(add_directive(Directive)) -->
 		[':- ~q.'-[Directive], nl, nl].
 
@@ -400,6 +424,9 @@
 			'% add the directive:'-[], nl, nl,
 			':- ~q.'-[NewDirective], nl, nl
 		].
+
+	message_tokens(remove_directive(Directive)) -->
+		[':- ~q.'-[Directive], nl, nl].
 
 	message_tokens(uses_directive(Object, Predicates)) -->
 		[':- uses(~q, ~q).'-[Object, Predicates], nl, nl].

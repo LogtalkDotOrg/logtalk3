@@ -44,9 +44,12 @@ arguments to the integration script used to run the tests.
 * FIXED: The `lgtunit` tool to allow any test dialect to be defined as a fact
 when the test is skipped.
 
-* FIXED: The `wrapper` tool to also print advise for called Prolog predicates
-that are not built-in predicates. The tool assumes those predicates to be
-available in the `user` pseudo-object.
+* IMPROVED: The `wrapper` tool to also print advise on `ensure_loaded/1` and
+`include/1` directives that should be removed.
+
+* IMPROVED: The `wrapper` tool to also print advise for called Prolog
+predicates that are not built-in predicates. The tool assumes those
+predicates to be available in the `user` pseudo-object.
 
 Tests
 -----
