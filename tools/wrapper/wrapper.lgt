@@ -237,11 +237,11 @@
 		save_advise(Current).
 
 	save_advise_objects :-
-		wrapper_object_(Object, File),
+		wrapper_object_(Object, Path),
 		atom_concat(Object, '.lgt', Source),
 		open(Source, write, Stream),
 		set_output(Stream),
-		save_advise_object(Object, File),
+		save_advise_object(Object, Path),
 		close(Stream),
 		fail.
 	save_advise_objects.
@@ -259,8 +259,16 @@
 		add_directive_(Object, Directive, NewDirective),
 		logtalk::print_message(raw, wrapper, add_directive(Directive, NewDirective)),
 		fail.
-	save_advise_object(_, File) :-
-		logtalk::print_message(raw, wrapper, add_directive(include(File))),
+	save_advise_object(_, Path) :-
+		os::decompose_file_name(Path, Directory, Name, Extension),
+		(	os::working_directory(Directory) ->
+			% use a relative path as both the original Prolog file and the Logtalk
+			% file defining the wrapper object reside in the same directory
+			atom_concat(Name, Extension, File),
+			logtalk::print_message(raw, wrapper, add_directive(include(File)))
+		;	% use the full path for the included file
+			logtalk::print_message(raw, wrapper, add_directive(include(Path)))
+		),
 		fail.
 	save_advise_object(_, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(end_object)),
