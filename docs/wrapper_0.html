@@ -124,6 +124,46 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="advise_for_directories/2" class="code">advise_for_directories/2</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting all Prolog files (using any of the given extensions) in a set of directories to Logtalk objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>advise_for_directories(Directories,Extensions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>advise_for_directories(+list(atom),+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="advise_for_directories/1" class="code">advise_for_directories/1</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting all Prolog files (using either the .pl or .prolog extensions) in a set of directories to Logtalk objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>advise_for_directories(Directories)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>advise_for_directories(+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="save_advise/1" class="code">save_advise/1</h3>
           <blockquote>
             <p class="comment">Saves wrapper objects (plus a loader file) for all advised files into the specified directory.</p>

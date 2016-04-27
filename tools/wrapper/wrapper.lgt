@@ -49,6 +49,20 @@
 		argnames is ['Directory']
 	]).
 
+	:- public(advise_for_directories/2).
+	:- mode(advise_for_directories(+list(atom), +list(atom)), one).
+	:- info(advise_for_directories/2, [
+		comment is 'Advises the user on missing directives for converting all Prolog files (using any of the given extensions) in a set of directories to Logtalk objects.',
+		argnames is ['Directories', 'Extensions']
+	]).
+
+	:- public(advise_for_directories/1).
+	:- mode(advise_for_directories(+list(atom)), one).
+	:- info(advise_for_directories/1, [
+		comment is 'Advises the user on missing directives for converting all Prolog files (using either the .pl or .prolog extensions) in a set of directories to Logtalk objects.',
+		argnames is ['Directories']
+	]).
+
 	:- public(save_advise/1).
 	:- mode(save_advise(+atom), one).
 	:- info(save_advise/1, [
@@ -153,6 +167,35 @@
 		load_and_wrap_files(Files),
 		generate_advise,
 		print_advise.
+
+	advise_for_directories(Directories, Extensions) :-
+		advise_for_directories(Directories, Extensions, [], Files),
+		advise_for_files(Files).
+
+	advise_for_directories([], _, Files, Files).
+	advise_for_directories([Directory| Directories], Extensions, Files0, Files) :-
+		directory_prolog_files(Directory, Extensions, DirectoryFiles),
+		append(Files0, DirectoryFiles, Files1),
+		advise_for_directories(Directories, Extensions, Files1, Files).
+
+	advise_for_directories(Directories) :-
+		advise_for_directories(Directories, ['.pl', '.prolog']).		
+
+	directory_prolog_files(Directory, Extensions, DirectoryFiles) :-
+		os::directory_files(Directory, Files),
+		(	sub_atom(Directory, _, 1, 0, '/') ->
+			DirectorySlash = Directory
+		;	atom_concat(Directory, '/', DirectorySlash)
+		),
+		findall(
+			DirectoryFile,
+			(	member(File, Files),
+				member(Extension, Extensions),
+				sub_atom(File, _, _, 0, Extension),
+				atom_concat(DirectorySlash, File, DirectoryFile)
+			),
+			DirectoryFiles
+		).
 
 	advise_for_directory(Directory, Extensions) :-
 		os::directory_files(Directory, Files),
@@ -523,6 +566,10 @@
 	flatten_to_list(A, [A]).
 
 	% we want to minimize any dependencies on other entities, including library objects
+
+	append([], List, List).
+	append([Head| Tail], List, [Head| Tail2]) :-
+		append(Tail, List, Tail2).
 
 	member(Element, [Element| _]).
 	member(Element, [_| List]) :-
