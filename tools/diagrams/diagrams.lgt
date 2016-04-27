@@ -22,9 +22,9 @@
 :- object(diagrams(_Format)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/02/26,
+		date is 2016/04/27,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
@@ -43,7 +43,7 @@
 	libraries(Project, Libraries, Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(libraries, Format, Diagram),
 			Diagram::libraries(Project, Libraries, Options)
 		).
 
@@ -67,7 +67,7 @@
 	all_libraries(Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(all_libraries, Format, Diagram),
 			Diagram::all_libraries(Options)
 		).
 
@@ -90,7 +90,7 @@
 	rlibrary(Library, Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(rlibrary, Format, Diagram),
 			Diagram::rlibrary(Library, Options)
 		).
 
@@ -114,7 +114,7 @@
 	library(Library, Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(library, Format, Diagram),
 			Diagram::library(Library, Options)
 		).
 
@@ -138,7 +138,7 @@
 	directories(Project, Directories, Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(directories, Format, Diagram),
 			Diagram::directories(Project, Directories, Options)
 		).
 
@@ -162,7 +162,7 @@
 	directory(Project, Directory, Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(directory, Format, Diagram),
 			Diagram::directory(Project, Directory, Options)
 		).
 
@@ -186,7 +186,7 @@
 	files(Project, Files, Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(files, Format, Diagram),
 			Diagram::files(Project, Files, Options)
 		).
 
@@ -210,7 +210,7 @@
 	all_files(Options) :-
 		parameter(1, Format),
 		forall(
-			supported_diagram(Format, Diagram),
+			supported_diagram(all_files, Format, Diagram),
 			Diagram::all_files(Options)
 		).
 
@@ -224,14 +224,16 @@
 		::all_files([]).
 
 	% supported_diagram(+atom, -entity_identifier)
-	supported_diagram(Format, entity_diagram(Format)).
-	supported_diagram(Format, inheritance_diagram(Format)).
-	supported_diagram(Format, uses_diagram(Format)).
-	supported_diagram(Format, xref_diagram(Format)).
-	supported_diagram(Format, file_dependency_diagram(Format)).
-	supported_diagram(Format, file_load_diagram(Format)).
-	supported_diagram(Format, library_dependency_diagram(Format)).
-	supported_diagram(Format, library_load_diagram(Format)).
+	supported_diagram(_,         Format, entity_diagram(Format)).
+	supported_diagram(_,         Format, inheritance_diagram(Format)).
+	supported_diagram(_,         Format, uses_diagram(Format)).
+	supported_diagram(_,         Format, xref_diagram(Format)).
+	supported_diagram(_,         Format, file_dependency_diagram(Format)).
+	supported_diagram(_,         Format, file_load_diagram(Format)).
+	supported_diagram(Predicate, Format, library_dependency_diagram(Format)) :-
+		list::memberchk(Predicate, [all_libraries, libraries, rlibrary, library]).
+	supported_diagram(Predicate, Format, library_load_diagram(Format)) :-
+		list::memberchk(Predicate, [all_libraries, libraries, rlibrary, library]).
 
 :- end_object.
 

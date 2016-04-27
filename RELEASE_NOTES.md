@@ -54,6 +54,10 @@ files to the `wrapper` tool.
 predicates that are not built-in predicates. The tool assumes those
 predicates to be available in the `user` pseudo-object.
 
+* FIXED: The `diagrams` tool to avoid failures when using the utility
+`diagrams` object to batch generate diagrams using a method that not all
+types of diagrams support.
+
 Tests
 -----
 
