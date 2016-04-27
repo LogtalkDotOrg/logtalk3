@@ -466,7 +466,8 @@
 	missing_predicate_directives_advise(_).
 
 	% generate uses/2 directives for resolving now implicitly
-	% qualified calls to predicates defined in other files
+	% qualified calls to non-standard built-in predicates or to
+	% predicates defined in other files that we are wrapping
 
 	missing_uses_directives_advise(Object) :-
 		missing_uses_directive(Object, Other, Predicates),
@@ -475,18 +476,23 @@
 		fail.
 	missing_uses_directives_advise(_).
 
+	% for non-standard built-in predicates, just call them
+	% in the context of the "user" pseudo-object
+	missing_uses_directive(Object, user, Predicates) :-
+		setof(
+			Predicate,
+			non_standard_predicate_call_(Object, Predicate),
+			Predicates
+		).
+
+	% other called predicates that are not defined locally but
+	% that there are also not built-in predicates
 	missing_uses_directive(Object, Other, Predicates) :-
 		setof(
 			Predicate,
 			unknown_predicate_called(Object, Other, Predicate),
 			Predicates
 		).
-
-	% for non-standard built-in predicates, just call them
-	% in the context of the "user" pseudo-object
-
-	unknown_predicate_called(Object, user, Predicate) :-
-		non_standard_predicate_call_(Object, Predicate).
 
 	unknown_predicate_called(Object, Other, Predicate) :-
 		unknown_predicate_called_but_not_defined_(Object, Predicate),
