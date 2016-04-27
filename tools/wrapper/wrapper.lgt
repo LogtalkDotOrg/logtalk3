@@ -518,19 +518,7 @@
 			),
 			DefaultOptions
 		),
-		append(UserOptions, DefaultOptions, Options0),
-		fix_options(Options0, Options).
-
-	fix_options([], []).
-	fix_options([Option| Options], [FixedOption| FixedOptions]) :-
-		(	fix_option(Option, FixedOption) ->
-			true
-		;	FixedOption = Option
-		),
-		fix_options(Options, FixedOptions).
-
-	fix_option(exclude_directories(Directories), exclude_directories(NormalizedDirectories)) :-
-		normalize_directory_paths(Directories, NormalizedDirectories).
+		append(UserOptions, DefaultOptions, Options).
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
