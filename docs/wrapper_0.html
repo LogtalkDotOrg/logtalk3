@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.4</code>
+            <code>0.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/4/26</code>
+            <code>2016/4/27</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -64,9 +64,9 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="advise_for_files/1" class="code">advise_for_files/1</h3>
+          <h3 id="rdirectory/2" class="code">rdirectory/2</h3>
           <blockquote>
-            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects.</p>
+            <p class="comment">Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -75,18 +75,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>advise_for_files(Files)</code>
+              <code>rdirectory(Directory,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>advise_for_files(+list(atom)) &ndash; one</code>
+              <code>rdirectory(+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="advise_for_directory/2" class="code">advise_for_directory/2</h3>
+          <h3 id="rdirectory/1" class="code">rdirectory/1</h3>
           <blockquote>
-            <p class="comment">Advises the user on missing directives for converting all plain Prolog files (using any of the given extensions) in a directory to Logtalk objects.</p>
+            <p class="comment">Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using default options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -95,18 +95,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>advise_for_directory(Directory,Extensions)</code>
+              <code>rdirectory(Directory)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>advise_for_directory(+atom,+list(atom)) &ndash; one</code>
+              <code>rdirectory(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="advise_for_directory/1" class="code">advise_for_directory/1</h3>
+          <h3 id="files/2" class="code">files/2</h3>
           <blockquote>
-            <p class="comment">Advises the user on missing directives for converting all plain Prolog files (using either the .pl or .prolog extensions) in a directory to Logtalk objects.</p>
+            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -115,18 +115,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>advise_for_directory(Directory)</code>
+              <code>files(Files,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>advise_for_directory(+atom) &ndash; one</code>
+              <code>files(+list(atom),+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="advise_for_directories/2" class="code">advise_for_directories/2</h3>
+          <h3 id="files/1" class="code">files/1</h3>
           <blockquote>
-            <p class="comment">Advises the user on missing directives for converting all Prolog files (using any of the given extensions) in a set of directories to Logtalk objects.</p>
+            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -135,18 +135,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>advise_for_directories(Directories,Extensions)</code>
+              <code>files(Files)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>advise_for_directories(+list(atom),+list(atom)) &ndash; one</code>
+              <code>files(+list(atom)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="advise_for_directories/1" class="code">advise_for_directories/1</h3>
+          <h3 id="directory/2" class="code">directory/2</h3>
           <blockquote>
-            <p class="comment">Advises the user on missing directives for converting all Prolog files (using either the .pl or .prolog extensions) in a set of directories to Logtalk objects.</p>
+            <p class="comment">Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -155,18 +155,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>advise_for_directories(Directories)</code>
+              <code>directory(Directory,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>advise_for_directories(+list(atom)) &ndash; one</code>
+              <code>directory(+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="save_advise/1" class="code">save_advise/1</h3>
+          <h3 id="directory/1" class="code">directory/1</h3>
           <blockquote>
-            <p class="comment">Saves wrapper objects (plus a loader file) for all advised files into the specified directory.</p>
+            <p class="comment">Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using default options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -175,18 +175,78 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>save_advise(Directory)</code>
+              <code>directory(Directory)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>save_advise(+atom) &ndash; one</code>
+              <code>directory(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="save_advise/0" class="code">save_advise/0</h3>
+          <h3 id="directories/2" class="code">directories/2</h3>
           <blockquote>
-            <p class="comment">Saves wrapper objects (plus a loader file) for all advised files into the current directory.</p>
+            <p class="comment">Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directories(Directories,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directories(+list(atom),+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directories/1" class="code">directories/1</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directories(Directories)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directories(+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="save/1" class="code">save/1</h3>
+          <blockquote>
+            <p class="comment">Saves wrapper objects (plus a loader file) for all advised files using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>save(Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>save(+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="save/0" class="code">save/0</h3>
+          <blockquote>
+            <p class="comment">Saves wrapper objects (plus a loader file) for all advised files using default options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -195,7 +255,47 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>save_advise &ndash; one</code>
+              <code>save &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="default_option/1" class="code">default_option/1</h3>
+          <blockquote>
+            <p class="comment">Enumerates by backtracking the default options used when generating a diagram.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>default_option(DefaultOption)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>default_option(?compound) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="default_options/1" class="code">default_options/1</h3>
+          <blockquote>
+            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>default_options(DefaultOptions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>default_options(-list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -208,6 +308,26 @@
       </div>
       <div class="private">
         <h2>Private predicates</h2>
+        <div class="section">
+          <h3 id="merge_options/2" class="code">merge_options/2</h3>
+          <blockquote>
+            <p class="comment">Merges the user options with the default options, returning the list of options used when wrapping Prolog files. Also expands all directory paths and ensures they end with a slash.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>merge_options(UserOptions,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>merge_options(+list(compound),-list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
         <div class="section">
           <h3 id="unknown_predicate_called_but_not_defined_/2" class="code">unknown_predicate_called_but_not_defined_/2</h3>
           <blockquote>
@@ -265,26 +385,6 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>non_standard_predicate_call_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="wrapper_object_/2" class="code">wrapper_object_/2</h3>
-          <blockquote>
-            <p class="comment">Table of converted files and corresponding objects.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>wrapper_object_(Object,File)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>wrapper_object_(?atom,?atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -389,9 +489,9 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="file_being_advised_/1" class="code">file_being_advised_/1</h3>
+          <h3 id="file_being_advised_/4" class="code">file_being_advised_/4</h3>
           <blockquote>
-            <p class="comment">Table of files being advised.</p>
+            <p class="comment">Table of files being advised are respective directories and names (basename without extension).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -400,11 +500,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>file_being_advised_(File)</code>
+              <code>file_being_advised_(File,Path,Directory,Name)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>file_being_advised_(+atom) &ndash; zero_or_more</code>
+              <code>file_being_advised_(?atom,?atom,?atom,?atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

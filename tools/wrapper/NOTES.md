@@ -36,6 +36,10 @@ Current limitations:
 occur when using a backend Prolog compiler different from the one used to
 run the original plain Prolog code.
 
+- The tool assumes that all files to be wrapped have different names (even if
+found in different directories). If that is not the case, the name conflicts
+must be manually solved before using the tool.
+
 - There isn't yet any support for dealing with meta-predicates and advise on
 missing meta-predicate directives.
 

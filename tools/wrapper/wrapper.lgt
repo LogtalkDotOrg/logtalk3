@@ -22,58 +22,100 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/04/26,
+		date is 2016/04/27,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.'
 	]).
 
-	:- public(advise_for_files/1).
-	:- mode(advise_for_files(+list(atom)), one).
-	:- info(advise_for_files/1, [
-		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects.',
+	:- public(rdirectory/2).
+	:- mode(rdirectory(+atom, +list(compound)), one).
+	:- info(rdirectory/2, [
+		comment is 'Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using the specified options.',
+		argnames is ['Directory', 'Options']
+	]).
+
+	:- public(rdirectory/1).
+	:- mode(rdirectory(+atom), one).
+	:- info(rdirectory/1, [
+		comment is 'Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using default options.',
+		argnames is ['Directory']
+	]).
+
+	:- public(files/2).
+	:- mode(files(+list(atom), +list(compound)), one).
+	:- info(files/2, [
+		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.',
+		argnames is ['Files', 'Options']
+	]).
+
+	:- public(files/1).
+	:- mode(files(+list(atom)), one).
+	:- info(files/1, [
+		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.',
 		argnames is ['Files']
 	]).
 
-	:- public(advise_for_directory/2).
-	:- mode(advise_for_directory(+atom, +list(atom)), one).
-	:- info(advise_for_directory/2, [
-		comment is 'Advises the user on missing directives for converting all plain Prolog files (using any of the given extensions) in a directory to Logtalk objects.',
-		argnames is ['Directory', 'Extensions']
+	:- public(directory/2).
+	:- mode(directory(+atom, +list(compound)), one).
+	:- info(directory/2, [
+		comment is 'Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using the specified options.',
+		argnames is ['Directory', 'Options']
 	]).
 
-	:- public(advise_for_directory/1).
-	:- mode(advise_for_directory(+atom), one).
-	:- info(advise_for_directory/1, [
-		comment is 'Advises the user on missing directives for converting all plain Prolog files (using either the .pl or .prolog extensions) in a directory to Logtalk objects.',
+	:- public(directory/1).
+	:- mode(directory(+atom), one).
+	:- info(directory/1, [
+		comment is 'Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using default options.',
 		argnames is ['Directory']
 	]).
 
-	:- public(advise_for_directories/2).
-	:- mode(advise_for_directories(+list(atom), +list(atom)), one).
-	:- info(advise_for_directories/2, [
-		comment is 'Advises the user on missing directives for converting all Prolog files (using any of the given extensions) in a set of directories to Logtalk objects.',
-		argnames is ['Directories', 'Extensions']
+	:- public(directories/2).
+	:- mode(directories(+list(atom), +list(compound)), one).
+	:- info(directories/2, [
+		comment is 'Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using the specified options.',
+		argnames is ['Directories', 'Options']
 	]).
 
-	:- public(advise_for_directories/1).
-	:- mode(advise_for_directories(+list(atom)), one).
-	:- info(advise_for_directories/1, [
-		comment is 'Advises the user on missing directives for converting all Prolog files (using either the .pl or .prolog extensions) in a set of directories to Logtalk objects.',
+	:- public(directories/1).
+	:- mode(directories(+list(atom)), one).
+	:- info(directories/1, [
+		comment is 'Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using default options.',
 		argnames is ['Directories']
 	]).
 
-	:- public(save_advise/1).
-	:- mode(save_advise(+atom), one).
-	:- info(save_advise/1, [
-		comment is 'Saves wrapper objects (plus a loader file) for all advised files into the specified directory.',
-		argnames is ['Directory']
+	:- public(save/1).
+	:- mode(save(+list(compound)), one).
+	:- info(save/1, [
+		comment is 'Saves wrapper objects (plus a loader file) for all advised files using the specified options.',
+		argnames is ['Options']
 	]).
 
-	:- public(save_advise/0).
-	:- mode(save_advise, one).
-	:- info(save_advise/0, [
-		comment is 'Saves wrapper objects (plus a loader file) for all advised files into the current directory.'
+	:- public(save/0).
+	:- mode(save, one).
+	:- info(save/0, [
+		comment is 'Saves wrapper objects (plus a loader file) for all advised files using default options.'
+	]).
+
+	:- public(default_option/1).
+	:- mode(default_option(?compound), zero_or_more).
+	:- info(default_option/1, [
+		comment is 'Enumerates by backtracking the default options used when generating a diagram.',
+		argnames is ['DefaultOption']
+	]).
+
+	:- public(default_options/1).
+	:- mode(default_options(-list(compound)), one).
+	:- info(default_options/1, [
+		comment is 'Returns a list of the default options used when generating a diagram.',
+		argnames is ['DefaultOptions']
+	]).
+
+	:- private(merge_options/2).
+	:- mode(merge_options(+list(compound), -list(compound)), one).
+	:- info(merge_options/2, [
+		comment is 'Merges the user options with the default options, returning the list of options used when wrapping Prolog files. Also expands all directory paths and ensures they end with a slash.',
+		argnames is ['UserOptions', 'Options']
 	]).
 
 	:- private(unknown_predicate_called_but_not_defined_/2).
@@ -98,14 +140,6 @@
 	:- info(non_standard_predicate_call_/2, [
 		comment is 'Table of called non-standard predicates.',
 		argnames is ['Object', 'Predicate']
-	]).
-
-	:- private(wrapper_object_/2).
-	:- dynamic(wrapper_object_/2).
-	:- mode(wrapper_object_(?atom, ?atom), zero_or_more).
-	:- info(wrapper_object_/2, [
-		comment is 'Table of converted files and corresponding objects.',
-		argnames is ['Object', 'File']
 	]).
 
 	:- private(dynamic_directive_/3).
@@ -148,38 +182,95 @@
 		argnames is ['Object', 'Directive']
 	]).
 
-	:- private(file_being_advised_/1).
-	:- dynamic(file_being_advised_/1).
-	:- mode(file_being_advised_(+atom), zero_or_more).
-	:- info(file_being_advised_/1, [
-		comment is 'Table of files being advised.',
-		argnames is ['File']
+	:- private(file_being_advised_/4).
+	:- dynamic(file_being_advised_/4).
+	:- mode(file_being_advised_(?atom, ?atom, ?atom, ?atom), zero_or_more).
+	:- info(file_being_advised_/4, [
+		comment is 'Table of files being advised are respective directories and names (basename without extension).',
+		argnames is ['File', 'Path', 'Directory', 'Name']
 	]).
 
-	% load the plain Prolog files and advise on required changes for porting
+	rdirectory(Directory, UserOptions) :-
+		reset,
+		merge_options(UserOptions, Options),
+		memberchk(exclude_directories(ExcludedDirectories), Options),
+		memberchk(prolog_extensions(Extensions), Options),
+		rdirectory_directories(Directory, ExcludedDirectories, Directories),
+		directories(Directories, Extensions, [], Files),
+		files(Files, Options).
 
-	advise_for_files(Files) :-
-		clean_issues_databases,
+	rdirectory(Directory) :-
+		rdirectory(Directory, []).
+
+	rdirectory_directories(RootDirectory, ExcludedDirectories, [RootDirectory| AllSubDirectories]) :-
+		sub_directories(RootDirectory, ExcludedDirectories, SubDirectories),
+		findall(
+			Directories,
+			(	member(Directory, SubDirectories),
+				rdirectory_directories(Directory, ExcludedDirectories, Directories)
+			),
+			DirectoriesList
+		),
+		append(DirectoriesList, AllSubDirectories).
+
+	sub_directories(Directory, ExcludedDirectories, SubDirectories) :-
+		os::expand_path(Directory, Path),
+		os::directory_files(Path, Files),
+		(	sub_atom(Path, _, 1, 0, '/') ->
+			PathSlash = Path
+		;	atom_concat(Path, '/', PathSlash)
+		),
+		findall(
+			SubDirectory,
+			(	member(File, Files),
+				File \== '.',
+				File \== '..',
+				\+ member(File, ExcludedDirectories),
+				atom_concat(PathSlash, File, SubDirectory),
+				os::directory_exists(SubDirectory)
+			),
+			SubDirectories
+		).
+
+	files(Files, UserOptions) :-
+		reset,
+		merge_options(UserOptions, Options),
+		memberchk(exclude_files(ExcludedFiles), Options),
 		forall(
-			member(File, Files),
-			assertz(file_being_advised_(File))
+			file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name),
+			assertz(file_being_advised_(File, Path, Directory, Name))
 		),
 		load_and_wrap_files(Files),
 		generate_advise,
 		print_advise.
 
-	advise_for_directories(Directories, Extensions) :-
-		advise_for_directories(Directories, Extensions, [], Files),
-		advise_for_files(Files).
+	files(Files) :-
+		files(Files, []).
 
-	advise_for_directories([], _, Files, Files).
-	advise_for_directories([Directory| Directories], Extensions, Files0, Files) :-
+	file_being_advised([File| _], ExcludedFiles, File, Path, Directory, Name) :-
+		\+ member(File, ExcludedFiles),
+		os::expand_path(File, Path),
+		\+ member(Path, ExcludedFiles),
+		os::decompose_file_name(File, Directory, Name, _),
+		\+ member(Name, ExcludedFiles).
+	file_being_advised([_| Files], ExcludedFiles, File, Path, Directory, Name) :-
+		file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name).
+
+	directories(Directories, UserOptions) :-
+		reset,
+		merge_options(UserOptions, Options),
+		memberchk(prolog_extensions(Extensions), Options),
+		directories(Directories, Extensions, [], Files),
+		files(Files, Options).
+
+	directories([], _, Files, Files).
+	directories([Directory| Directories], Extensions, Files0, Files) :-
 		directory_prolog_files(Directory, Extensions, DirectoryFiles),
 		append(Files0, DirectoryFiles, Files1),
-		advise_for_directories(Directories, Extensions, Files1, Files).
+		directories(Directories, Extensions, Files1, Files).
 
-	advise_for_directories(Directories) :-
-		advise_for_directories(Directories, ['.pl', '.prolog']).		
+	directories(Directories) :-
+		directories(Directories, []).		
 
 	directory_prolog_files(Directory, Extensions, DirectoryFiles) :-
 		os::directory_files(Directory, Files),
@@ -197,29 +288,23 @@
 			DirectoryFiles
 		).
 
-	advise_for_directory(Directory, Extensions) :-
-		os::directory_files(Directory, Files),
-		findall(
-			File,
-			(	member(File, Files),
-				member(Extension, Extensions),
-				sub_atom(File, _, _, 0, Extension)
-			),
-			PrologFiles
-		),
-		advise_for_files(PrologFiles).
+	directory(Directory, UserOptions) :-
+		reset,
+		merge_options(UserOptions, Options),
+		memberchk(prolog_extensions(Extensions), Options),
+		directory_prolog_files(Directory, Extensions, Files),
+		files(Files, Options).
 
-	advise_for_directory(Directory) :-
-		advise_for_directory(Directory, ['.pl', '.prolog']).
+	directory(Directory) :-
+		directory(Directory, []).
 
-	clean_issues_databases :-
+	reset :-
 		retractall(unknown_predicate_called_but_not_defined_(_, _)),
 		retractall(missing_predicate_directive_(_, _, _)),
 		retractall(non_standard_predicate_call_(_, _)),
 		retractall(dynamic_directive_(_,_,_)),
 		retractall(multifile_directive_(_,_,_)),
-		retractall(file_being_advised_(_)),
-		retractall(wrapper_object_(_, _)),
+		retractall(file_being_advised_(_, _, _, _)),
 		retractall(add_directive_(_, _)),
 		retractall(add_directive_(_, _, _)),
 		retractall(remove_directive_(_, _)).
@@ -237,7 +322,7 @@
 		).
 
 	generate_advise :-
-		wrapper_object_(Object, _),
+		file_being_advised_(_, _, _, Object),
 		missing_public_directives_advise(Object),
 		missing_private_directives_advise(Object),
 		missing_predicate_directives_advise(Object),
@@ -246,7 +331,7 @@
 	generate_advise.		
 
 	print_advise :-
-		wrapper_object_(Object, File),
+		file_being_advised_(File, _, _, Object),
 		logtalk::print_message(information, wrapper, advise_for_file(File)),
 		print_advise(Object),
 		fail.
@@ -271,60 +356,56 @@
 		fail.
 	print_advise(_).
 
-	save_advise(Directory) :-
-		os::working_directory(Current),
-		os::make_directory(Directory),
-		os::change_directory(Directory),
-		save_advise_objects,
-		os::change_directory(Current).
+	save(UserOptions) :-
+		merge_options(UserOptions, Options),
+		memberchk(logtalk_extension(Extension), Options),
+		save_wrapper_files(Extension).
 
-	save_advise :-
-		os::working_directory(Current),
-		save_advise(Current).
+	save :-
+		save([]).
 
-	save_advise_objects :-
-		wrapper_object_(Object, Path),
-		atom_concat(Object, '.lgt', Source),
+	save_wrapper_files(Extension) :-
+		file_being_advised_(_, Path, Directory, Name),
+		atom_concat(Directory, Name, Source0),
+		atom_concat(Source0, Extension, Source),
 		open(Source, write, Stream),
 		set_output(Stream),
-		save_advise_object(Object, Path),
+		save_wrapper_file(Name, Path),
 		close(Stream),
 		fail.
-	save_advise_objects :-
-		findall(Object, wrapper_object_(Object, _), Objects),
-		open('loader.lgt', write, Stream),
+	save_wrapper_files(Extension) :-
+		setof(Object, File^Path^file_being_advised_(File, Path, Directory, Object), Objects),
+		atom_concat(Directory, loader, Loader0),
+		atom_concat(Loader0, Extension, Loader),
+		open(Loader, write, Stream),
 		set_output(Stream),
 		logtalk::print_message(raw, wrapper, add_directive(initialization(logtalk_load(Objects)))),
-		close(Stream).		
+		close(Stream),
+		fail.
+	save_wrapper_files(_).
 
-	save_advise_object(Object, _) :-
+	save_wrapper_file(Object, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
 		fail.
-	save_advise_object(Object, _) :-
+	save_wrapper_file(Object, _) :-
 		\+ \+ add_directive_(Object, _),
 		add_directive_(Object, Directive),
 		logtalk::print_message(raw, wrapper, add_directive(Directive)),
 		fail.
-	save_advise_object(Object, _) :-
+	save_wrapper_file(Object, _) :-
 		\+ \+ add_directive_(Object, _, _),
 		add_directive_(Object, Directive, NewDirective),
 		logtalk::print_message(raw, wrapper, add_directive(Directive, NewDirective)),
 		fail.
-	save_advise_object(_, Path) :-
-		os::decompose_file_name(Path, Directory, Name, Extension),
-		(	os::working_directory(Directory) ->
-			% use a relative path as both the original Prolog file and the Logtalk
-			% file defining the wrapper object reside in the same directory
-			atom_concat(Name, Extension, File),
-			logtalk::print_message(raw, wrapper, add_directive(include(File)))
-		;	% use the full path for the included file
-			logtalk::print_message(raw, wrapper, add_directive(include(Path)))
-		),
+	save_wrapper_file(_, Path) :-
+		os::decompose_file_name(Path, _, Name, Extension),
+		atom_concat(Name, Extension, File),
+		logtalk::print_message(raw, wrapper, add_directive(include(File))),
 		fail.
-	save_advise_object(_, _) :-
+	save_wrapper_file(_, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(end_object)),
 		fail.
-	save_advise_object(_, _).
+	save_wrapper_file(_, _).
 
 	% predicates called from other files wrapped as objects
 	% must be declared public
@@ -410,23 +491,66 @@
 	unknown_predicate_called(Object, Other, Predicate) :-
 		unknown_predicate_called_but_not_defined_(Object, Predicate),
 		(	object_property(Other, defines(Predicate, _)),
-			wrapper_object_(Other, _) ->
+			file_being_advised_(_, _, _, Other) ->
 			true
 		;	% likely some Prolog library predicate
 			Other = user
 		).
 
+	% options handling
+
+	default_options(DefaultOptions) :-
+		findall(DefaultOption, default_option(DefaultOption), DefaultOptions).
+
+	merge_options(UserOptions, Options) :-
+		findall(
+			DefaultOption,
+			(	default_option(DefaultOption),
+				functor(DefaultOption, OptionName, Arity),
+				functor(UserOption, OptionName, Arity),
+				\+ member(UserOption, UserOptions)
+			),
+			DefaultOptions
+		),
+		append(UserOptions, DefaultOptions, Options0),
+		fix_options(Options0, Options).
+
+	fix_options([], []).
+	fix_options([Option| Options], [FixedOption| FixedOptions]) :-
+		(	fix_option(Option, FixedOption) ->
+			true
+		;	FixedOption = Option
+		),
+		fix_options(Options, FixedOptions).
+
+	fix_option(exclude_directories(Directories), exclude_directories(NormalizedDirectories)) :-
+		normalize_directory_paths(Directories, NormalizedDirectories).
+
+	normalize_directory_paths([], []).
+	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
+		os::expand_path(Directory, NormalizedDirectory0),
+		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
+			NormalizedDirectory = NormalizedDirectory0
+		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
+		),
+		normalize_directory_paths(Directories, NormalizedDirectories).
+
+	% by default, use only the most common Prolog source file extension:
+	default_option(prolog_extensions(['.pl'])).
+	% by default, use only the most common Logtalk source file extension:
+	default_option(logtalk_extension('.lgt')).
+	% by default, don't exclude any source files:
+	default_option(exclude_files([])).
+	% by default, don't exclude any directories:
+	default_option(exclude_directories([])).
+
 	% wrapper for the plain Prolog files source code
 
-	term_expansion(begin_of_file, [(:- object(Object))]) :-
+	term_expansion(begin_of_file, [(:- object(Name))]) :-
 		logtalk_load_context(basename, Basename),
-		atom_concat(Object, '.pl', Basename).
+		os::decompose_file_name(Basename, _, Name, _).
 
-	term_expansion(end_of_file, [(:- end_object), end_of_file]) :-
-		logtalk_load_context(basename, Basename),
-		atom_concat(Object, '.pl', Basename),
-		logtalk_load_context(file, File),
-		assertz(wrapper_object_(Object, File)).
+	term_expansion(end_of_file, [(:- end_object), end_of_file]).
 
 	% special cases
 
@@ -455,28 +579,24 @@
 		fail.
 
 	% discard include/1 directives for files being processed
-	term_expansion((:- include(Path)), []) :-
-		file_being_advised_(File),
-		% file extension might be missing
-		atom_concat(Path, _, File),
+	term_expansion((:- include(Include)), []) :-
+		file_being_advised_(File, Path, _, Name),
+		(	Include = File
+		;	Include = Path
+		;	Include = Name
+		),
 		logtalk_load_context(entity_identifier, Object),
-		assertz(remove_directive_(Object, include(Path))).
-	term_expansion((:- include(Path)), []) :-
-		os::expand_path(Path, ExpandedPath),
-		wrapper_object_(_, File),
-		% file extension might be missing
-		atom_concat(ExpandedPath, _, File),
-		logtalk_load_context(entity_identifier, Object),
-		assertz(remove_directive_(Object, include(Path))).
+		assertz(remove_directive_(Object, include(Include))).
 
 	% discard ensure_loaded/1 directives for files already being processed
-	term_expansion((:- ensure_loaded(Path)), []) :-
-		os::expand_path(Path, ExpandedPath),
-		wrapper_object_(_, File),
-		% file extension might be missing
-		atom_concat(ExpandedPath, _, File),
+	term_expansion((:- ensure_loaded(Loaded)), []) :-
+		file_being_advised_(File, Path, _, Name),
+		(	Loaded = File
+		;	Loaded = Path
+		;	Loaded = Name
+		),
 		logtalk_load_context(entity_identifier, Object),
-		assertz(remove_directive_(Object, ensure_loaded(Path))).
+		assertz(remove_directive_(Object, ensure_loaded(Loaded))).
 
 	% hooks for intercepting relevant compiler lint messages
 
@@ -566,6 +686,11 @@
 	flatten_to_list(A, [A]).
 
 	% we want to minimize any dependencies on other entities, including library objects
+
+	append([], []).
+	append([List| Lists], Concatenation) :-
+		append(List, Tail, Concatenation),
+		append(Lists, Tail).
 
 	append([], List, List).
 	append([Head| Tail], List, [Head| Tail2]) :-
