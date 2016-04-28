@@ -375,24 +375,25 @@
 
 	save(UserOptions) :-
 		merge_options(UserOptions, Options),
-		memberchk(logtalk_extension(Extension), Options),
-		save_wrapper_objects(Extension).
+		save_wrapper_objects(Options).
 
 	save :-
 		save([]).
 
-	save_wrapper_objects(Extension) :-
+	save_wrapper_objects(Options) :-
 		file_being_advised_(_, Path, Directory, Name),
 		atom_concat(Directory, Name, Source0),
+		memberchk(logtalk_extension(Extension), Options),
 		atom_concat(Source0, Extension, Source),
 		open(Source, write, Stream),
 		set_output(Stream),
-		save_wrapper_object(Name, Path),
+		save_wrapper_object(Name, Path, Options),
 		close(Stream),
 		fail.
-	save_wrapper_objects(Extension) :-
+	save_wrapper_objects(Options) :-
 		setof(Object, File^Path^file_being_advised_(File, Path, Directory, Object), Objects),
 		atom_concat(Directory, loader, Loader0),
+		memberchk(logtalk_extension(Extension), Options),
 		atom_concat(Loader0, Extension, Loader),
 		open(Loader, write, Stream),
 		set_output(Stream),
@@ -401,28 +402,29 @@
 		fail.
 	save_wrapper_objects(_).
 
-	save_wrapper_object(Object, _) :-
+	save_wrapper_object(Object, _, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
 		fail.
-	save_wrapper_object(Object, _) :-
+	save_wrapper_object(Object, _, _) :-
 		\+ \+ add_directive_(Object, _),
 		add_directive_(Object, Directive),
 		logtalk::print_message(raw, wrapper, add_directive(Directive)),
 		fail.
-	save_wrapper_object(Object, _) :-
+	save_wrapper_object(Object, _, _) :-
 		\+ \+ add_directive_(Object, _, _),
 		add_directive_(Object, Directive, NewDirective),
 		logtalk::print_message(raw, wrapper, add_directive(Directive, NewDirective)),
 		fail.
-	save_wrapper_object(_, Path) :-
+	save_wrapper_object(_, Path, Options) :-
+		memberchk(include_wrapped_files(true), Options),
 		os::decompose_file_name(Path, _, Name, Extension),
 		atom_concat(Name, Extension, File),
 		logtalk::print_message(raw, wrapper, add_directive(include(File))),
 		fail.
-	save_wrapper_object(_, _) :-
+	save_wrapper_object(_, _, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(end_object)),
 		fail.
-	save_wrapper_object(_, _).
+	save_wrapper_object(_, _, _).
 
 	% predicates called from other files wrapped as objects
 	% must be declared public
@@ -554,6 +556,8 @@
 	default_option(exclude_files([])).
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).
+	% by default, generate `include/1` directives for the wrapped Prolog source files
+	default_option(include_wrapped_files(true)).
 
 	% wrapper for the plain Prolog files source code
 

@@ -42,13 +42,15 @@ Typical workflow:
 The API predicates also accept a set of options for customization:
 
 - `prolog_extensions(Extensions)`  
-	list of file name extensions used to recognize Prolog source code files (default is `['.pl']`)
+	list of file name extensions used to recognize Prolog source files (default is `['.pl']`)
 - `logtalk_extension(Extension)`  
 	Logtalk default file name extension for the generated wrapper files (default is `'.lgt'`)
 - `exclude_files(Files)`  
 	list of Prolog source files names to exclude (default is `[]`)
 - `exclude_directories(Files)`  
 	list of sub-directory names to exclude (default is `[]`)
+- `include_wrapped_files(Boolean)`  
+	generate `include/1` directives for the wrapped Prolog source files (default is `true`)
 
 Current limitations:
 
