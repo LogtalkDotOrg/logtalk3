@@ -197,7 +197,7 @@
 		memberchk(prolog_extensions(Extensions), Options),
 		rdirectory_directories(Directory, ExcludedDirectories, Directories),
 		directories(Directories, Extensions, [], Files),
-		files(Files, Options).
+		wrap_files(Files, Options).
 
 	rdirectory(Directory) :-
 		rdirectory(Directory, []).
@@ -235,24 +235,29 @@
 	files(Files, UserOptions) :-
 		reset,
 		merge_options(UserOptions, Options),
+		wrap_files(Files, Options).
+
+	files(Files) :-
+		files(Files, []).
+
+	wrap_files(Files, Options) :-
 		memberchk(exclude_files(ExcludedFiles), Options),
 		forall(
 			file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name),
 			assertz(file_being_advised_(File, Path, Directory, Name))
 		),
-		load_and_wrap_files(Files),
+		load_and_wrap_files,
 		generate_advise,
 		print_advise.
-
-	files(Files) :-
-		files(Files, []).
 
 	file_being_advised([File| _], ExcludedFiles, File, Path, Directory, Name) :-
 		\+ member(File, ExcludedFiles),
 		os::expand_path(File, Path),
 		\+ member(Path, ExcludedFiles),
-		os::decompose_file_name(File, Directory, Name, _),
-		\+ member(Name, ExcludedFiles).
+		os::decompose_file_name(File, Directory, Name, Extension),
+		\+ member(Name, ExcludedFiles),
+		atom_concat(Name, Extension, Basename),
+		\+ member(Basename, ExcludedFiles).
 	file_being_advised([_| Files], ExcludedFiles, File, Path, Directory, Name) :-
 		file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name).
 
@@ -261,7 +266,7 @@
 		merge_options(UserOptions, Options),
 		memberchk(prolog_extensions(Extensions), Options),
 		directories(Directories, Extensions, [], Files),
-		files(Files, Options).
+		wrap_files(Files, Options).
 
 	directories([], _, Files, Files).
 	directories([Directory| Directories], Extensions, Files0, Files) :-
@@ -293,7 +298,7 @@
 		merge_options(UserOptions, Options),
 		memberchk(prolog_extensions(Extensions), Options),
 		directory_prolog_files(Directory, Extensions, Files),
-		files(Files, Options).
+		wrap_files(Files, Options).
 
 	directory(Directory) :-
 		directory(Directory, []).
@@ -309,10 +314,11 @@
 		retractall(add_directive_(_, _, _)),
 		retractall(remove_directive_(_, _)).
 
-	load_and_wrap_files([]).
-	load_and_wrap_files([File| Files]) :-
-		load_and_wrap_file(File),
-		load_and_wrap_files(Files).
+	load_and_wrap_files :-
+		file_being_advised_(_, Path, _, _),
+		load_and_wrap_file(Path),
+		fail.
+	load_and_wrap_files.
 
 	load_and_wrap_file(File) :-
 		this(This),
