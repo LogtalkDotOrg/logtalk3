@@ -52,9 +52,9 @@ The API predicates also accept a set of options for customization:
 
 Current limitations:
 
-- The tool cannot deal with syntax errors in the Prolog files. These usually
-occur when using a backend Prolog compiler different from the one used to
-run the original plain Prolog code.
+- The tool cannot deal with syntax errors in the Prolog files. These errors
+usually occur when using a backend Prolog system different from the one used
+to compile the original plain Prolog code.
 
 - The tool assumes that all files to be wrapped have different names (even if
 found in different directories). If that is not the case, the name conflicts

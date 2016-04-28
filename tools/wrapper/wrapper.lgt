@@ -317,9 +317,20 @@
 	load_and_wrap_file(File) :-
 		this(This),
 		(	os::file_exists(File) ->
-			logtalk_load(File, [hook(This), source_data(on), portability(warning)])
+			logtalk_load_lint_options(LintOptions),
+			logtalk_load(File, [hook(This), source_data(on)| LintOptions])
 		;	logtalk::print_message(warning, wrapper, file_not_found(File))
 		).
+
+	logtalk_load_lint_options([
+		portability(warning), 
+		unknown_predicates(warning),
+		undefined_predicates(warning),
+		unknown_entities(warning),
+		missing_directives(warning),
+		redefined_built_ins(warning),
+		singleton_variables(warning)
+	]).
 
 	generate_advise :-
 		file_being_advised_(_, _, _, Object),
