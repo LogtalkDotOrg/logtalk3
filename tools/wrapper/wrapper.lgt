@@ -87,14 +87,14 @@
 	:- public(save/1).
 	:- mode(save(+list(compound)), one).
 	:- info(save/1, [
-		comment is 'Saves the generated wrapper objects (plus a loader file per directory) for all advised files using the specified options.',
+		comment is 'Saves the generated wrapper objects (plus a loader file per directory) for all advised files using the specified options. The wrapper objects are saved to the same directories that contain the wrapped Prolog files.',
 		argnames is ['Options']
 	]).
 
 	:- public(save/0).
 	:- mode(save, one).
 	:- info(save/0, [
-		comment is 'Saves the generated wrapper objects (plus a loader file per directory) for all advised files using default options.'
+		comment is 'Saves the generated wrapper objects (plus a loader file per directory) for all advised files using default options. The wrapper objects are saved to the same directories that contain the wrapped Prolog files.'
 	]).
 
 	:- public(default_option/1).

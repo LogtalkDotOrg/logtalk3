@@ -18,13 +18,17 @@ ________________________________________________________________________
 
 
 This is a prototype tool to help port a plain Prolog application to Logtalk.
+It can also be used to enable applying other Logtalk tools, such as the
+documenting and diagramming tools, to plain Prolog code.
+
 The tool takes a directory of Prolog files or a list of Prolog files, loads
 and wraps the code in each file using an object wrapper, and advises on missing
 directives to be added to those objects by using the compiler lint checker and
 the reflection API. The user can then either save the generated wrapper objects
 or copy and pasted the printed advise into the Prolog files (updating them to
 Logtalk files by adding the object opening and closing directives to the Prolog
-files). The wrapper objects can then be loaded for testing.
+files). The wrapper objects can then be loaded for testing and for use with
+other Logtalk tools.
 
 For the tool API, consult the `../../docs/wrapper_0.html` file.
 
@@ -44,7 +48,7 @@ The API predicates also accept a set of options for customization:
 - `prolog_extensions(Extensions)`  
 	list of file name extensions used to recognize Prolog source files (default is `['.pl']`)
 - `logtalk_extension(Extension)`  
-	Logtalk default file name extension for the generated wrapper files (default is `'.lgt'`)
+	Logtalk file name extension to be used for the generated wrapper files (default is `'.lgt'`)
 - `exclude_files(Files)`  
 	list of Prolog source files names to exclude (default is `[]`)
 - `exclude_directories(Files)`  
@@ -56,7 +60,9 @@ Current limitations:
 
 - The tool cannot deal with syntax errors in the Prolog files. These errors
 usually occur when using a backend Prolog system different from the one used
-to compile the original plain Prolog code.
+to compile the original plain Prolog code. A common cause of syntax errors are
+operator definitions. These can often be solved by defining those operators
+for the Prolog backend used to run Logtalk and this tool.
 
 - The tool assumes that all files to be wrapped have different names (even if
 found in different directories). If that is not the case, the name conflicts
