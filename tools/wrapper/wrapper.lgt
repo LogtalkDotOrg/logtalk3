@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/04/27,
+		date is 2016/04/28,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.'
 	]).
 
@@ -40,20 +40,6 @@
 	:- info(rdirectory/1, [
 		comment is 'Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using default options.',
 		argnames is ['Directory']
-	]).
-
-	:- public(files/2).
-	:- mode(files(+list(atom), +list(compound)), one).
-	:- info(files/2, [
-		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.',
-		argnames is ['Files', 'Options']
-	]).
-
-	:- public(files/1).
-	:- mode(files(+list(atom)), one).
-	:- info(files/1, [
-		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.',
-		argnames is ['Files']
 	]).
 
 	:- public(directory/2).
@@ -84,37 +70,51 @@
 		argnames is ['Directories']
 	]).
 
+	:- public(files/2).
+	:- mode(files(+list(atom), +list(compound)), one).
+	:- info(files/2, [
+		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.',
+		argnames is ['Files', 'Options']
+	]).
+
+	:- public(files/1).
+	:- mode(files(+list(atom)), one).
+	:- info(files/1, [
+		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.',
+		argnames is ['Files']
+	]).
+
 	:- public(save/1).
 	:- mode(save(+list(compound)), one).
 	:- info(save/1, [
-		comment is 'Saves wrapper objects (plus a loader file) for all advised files using the specified options.',
+		comment is 'Saves the generated wrapper objects (plus a loader file per directory) for all advised files using the specified options.',
 		argnames is ['Options']
 	]).
 
 	:- public(save/0).
 	:- mode(save, one).
 	:- info(save/0, [
-		comment is 'Saves wrapper objects (plus a loader file) for all advised files using default options.'
+		comment is 'Saves the generated wrapper objects (plus a loader file per directory) for all advised files using default options.'
 	]).
 
 	:- public(default_option/1).
 	:- mode(default_option(?compound), zero_or_more).
 	:- info(default_option/1, [
-		comment is 'Enumerates by backtracking the default options used when generating a diagram.',
+		comment is 'Enumerates by backtracking the default options used when generating the wrapper objects.',
 		argnames is ['DefaultOption']
 	]).
 
 	:- public(default_options/1).
 	:- mode(default_options(-list(compound)), one).
 	:- info(default_options/1, [
-		comment is 'Returns a list of the default options used when generating a diagram.',
+		comment is 'Returns a list of the default options used when generating the wrapper objects.',
 		argnames is ['DefaultOptions']
 	]).
 
 	:- private(merge_options/2).
 	:- mode(merge_options(+list(compound), -list(compound)), one).
 	:- info(merge_options/2, [
-		comment is 'Merges the user options with the default options, returning the list of options used when wrapping Prolog files. Also expands all directory paths and ensures they end with a slash.',
+		comment is 'Merges the user options with the default options, returning the list of options used when generating the wrapper objects.',
 		argnames is ['UserOptions', 'Options']
 	]).
 
@@ -359,21 +359,21 @@
 	save(UserOptions) :-
 		merge_options(UserOptions, Options),
 		memberchk(logtalk_extension(Extension), Options),
-		save_wrapper_files(Extension).
+		save_wrapper_objects(Extension).
 
 	save :-
 		save([]).
 
-	save_wrapper_files(Extension) :-
+	save_wrapper_objects(Extension) :-
 		file_being_advised_(_, Path, Directory, Name),
 		atom_concat(Directory, Name, Source0),
 		atom_concat(Source0, Extension, Source),
 		open(Source, write, Stream),
 		set_output(Stream),
-		save_wrapper_file(Name, Path),
+		save_wrapper_object(Name, Path),
 		close(Stream),
 		fail.
-	save_wrapper_files(Extension) :-
+	save_wrapper_objects(Extension) :-
 		setof(Object, File^Path^file_being_advised_(File, Path, Directory, Object), Objects),
 		atom_concat(Directory, loader, Loader0),
 		atom_concat(Loader0, Extension, Loader),
@@ -382,30 +382,30 @@
 		logtalk::print_message(raw, wrapper, add_directive(initialization(logtalk_load(Objects)))),
 		close(Stream),
 		fail.
-	save_wrapper_files(_).
+	save_wrapper_objects(_).
 
-	save_wrapper_file(Object, _) :-
+	save_wrapper_object(Object, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
 		fail.
-	save_wrapper_file(Object, _) :-
+	save_wrapper_object(Object, _) :-
 		\+ \+ add_directive_(Object, _),
 		add_directive_(Object, Directive),
 		logtalk::print_message(raw, wrapper, add_directive(Directive)),
 		fail.
-	save_wrapper_file(Object, _) :-
+	save_wrapper_object(Object, _) :-
 		\+ \+ add_directive_(Object, _, _),
 		add_directive_(Object, Directive, NewDirective),
 		logtalk::print_message(raw, wrapper, add_directive(Directive, NewDirective)),
 		fail.
-	save_wrapper_file(_, Path) :-
+	save_wrapper_object(_, Path) :-
 		os::decompose_file_name(Path, _, Name, Extension),
 		atom_concat(Name, Extension, File),
 		logtalk::print_message(raw, wrapper, add_directive(include(File))),
 		fail.
-	save_wrapper_file(_, _) :-
+	save_wrapper_object(_, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(end_object)),
 		fail.
-	save_wrapper_file(_, _).
+	save_wrapper_object(_, _).
 
 	% predicates called from other files wrapped as objects
 	% must be declared public

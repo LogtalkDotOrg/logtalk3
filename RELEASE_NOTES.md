@@ -41,11 +41,11 @@ Tools
 * ADDED: Support to the `logtalk_tester.sh` automation script to pass user
 arguments to the integration script used to run the tests.
 
-* FIXED: The `lgtunit` tool to allow any test dialect to be defined as a fact
-when the test is skipped.
-
 * ADDED: Support for saving the generated wrapper objects for the advised
 files to the `wrapper` tool.
+
+* ADDED: Support to the `wrapper` tool for generating wrapper objects for a
+directory and all its sub-directories and for a list of directories.
 
 * IMPROVED: The `wrapper` tool to also print advise on `ensure_loaded/1` and
 `include/1` directives that should be removed.
@@ -57,6 +57,9 @@ predicates to be available in the `user` pseudo-object.
 * FIXED: The `diagrams` tool to avoid failures when using the utility
 `diagrams` object to batch generate diagrams using a method that not all
 types of diagrams support.
+
+* FIXED: The `lgtunit` tool to allow any test dialect to be defined as a fact
+when the test is skipped.
 
 Tests
 -----

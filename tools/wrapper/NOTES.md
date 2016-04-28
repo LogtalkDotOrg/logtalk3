@@ -17,8 +17,6 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this tool and for sample queries, please see the `SCRIPT.txt` file.
-
 This is a prototype tool to help port a plain Prolog application to Logtalk.
 The tool takes a directory of Prolog files or a list of Prolog files, loads
 and wraps the code in each file using an object wrapper, and advises on missing
@@ -29,6 +27,28 @@ Logtalk files by adding the object opening and closing directives to the Prolog
 files). The wrapper objects can then be loaded for testing.
 
 For the tool API, consult the `../../docs/wrapper_0.html` file.
+
+This tool can be loaded using the query:
+
+	| ?- logtalk_load(wrapper(loader)).
+
+Typical workflow:
+
+	| ?- wrapper::rdirectory(root_directory_of_prolog_code).
+	...
+	| ?- wrapper::save.
+	...
+
+The API predicates also accept a set of options for customization:
+
+- `prolog_extensions(Extensions)`  
+	list of file name extensions used to recognize Prolog source code files (default is `['.pl']`)
+- `logtalk_extension(Extension)`  
+	Logtalk default file name extension for the generated wrapper files (default is `'.lgt'`)
+- `exclude_files(Files)`  
+	list of Prolog source files names to exclude (default is `[]`)
+- `exclude_directories(Files)`  
+	list of sub-directory names to exclude (default is `[]`)
 
 Current limitations:
 

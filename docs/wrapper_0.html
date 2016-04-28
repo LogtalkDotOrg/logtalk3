@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/4/27</code>
+            <code>2016/4/28</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -100,46 +100,6 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>rdirectory(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="files/2" class="code">files/2</h3>
-          <blockquote>
-            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>files(Files,Options)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>files(+list(atom),+list(compound)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="files/1" class="code">files/1</h3>
-          <blockquote>
-            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>files(Files)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>files(+list(atom)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -224,9 +184,49 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="files/2" class="code">files/2</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>files(Files,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>files(+list(atom),+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="files/1" class="code">files/1</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>files(Files)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>files(+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="save/1" class="code">save/1</h3>
           <blockquote>
-            <p class="comment">Saves wrapper objects (plus a loader file) for all advised files using the specified options.</p>
+            <p class="comment">Saves the generated wrapper objects (plus a loader file per directory) for all advised files using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -246,7 +246,7 @@
         <div class="section">
           <h3 id="save/0" class="code">save/0</h3>
           <blockquote>
-            <p class="comment">Saves wrapper objects (plus a loader file) for all advised files using default options.</p>
+            <p class="comment">Saves the generated wrapper objects (plus a loader file per directory) for all advised files using default options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -262,7 +262,7 @@
         <div class="section">
           <h3 id="default_option/1" class="code">default_option/1</h3>
           <blockquote>
-            <p class="comment">Enumerates by backtracking the default options used when generating a diagram.</p>
+            <p class="comment">Enumerates by backtracking the default options used when generating the wrapper objects.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -282,7 +282,7 @@
         <div class="section">
           <h3 id="default_options/1" class="code">default_options/1</h3>
           <blockquote>
-            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+            <p class="comment">Returns a list of the default options used when generating the wrapper objects.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -311,7 +311,7 @@
         <div class="section">
           <h3 id="merge_options/2" class="code">merge_options/2</h3>
           <blockquote>
-            <p class="comment">Merges the user options with the default options, returning the list of options used when wrapping Prolog files. Also expands all directory paths and ensures they end with a slash.</p>
+            <p class="comment">Merges the user options with the default options, returning the list of options used when generating the wrapper objects.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
