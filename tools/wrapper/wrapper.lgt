@@ -318,7 +318,7 @@
 		this(This),
 		(	os::file_exists(File) ->
 			logtalk_load_lint_options(LintOptions),
-			logtalk_load(File, [hook(This), source_data(on)| LintOptions])
+			logtalk_load(File, [hook(This), source_data(on), reload(always)| LintOptions])
 		;	logtalk::print_message(warning, wrapper, file_not_found(File))
 		).
 
