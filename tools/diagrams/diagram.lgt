@@ -794,7 +794,7 @@
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).
 	:- info(omit_path_prefix/3, [
-		comment is 'Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Use mainly for contructing node identitifers.',
+		comment is 'Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Used mainly for contructing file node identitifers and captions.',
 		argnames is ['Path', 'Options', 'Relative']
 	]).
 
