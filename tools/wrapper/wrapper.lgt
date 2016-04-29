@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/04/28,
+		date is 2016/04/29,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.'
 	]).
 
@@ -118,10 +118,34 @@
 		argnames is ['UserOptions', 'Options']
 	]).
 
-	:- private(unknown_predicate_called_but_not_defined_/2).
-	:- dynamic(unknown_predicate_called_but_not_defined_/2).
-	:- mode(unknown_predicate_called_but_not_defined_(?atom, ?predicate_indicator), zero_or_more).
-	:- info(unknown_predicate_called_but_not_defined_/2, [
+	:- private(predicate_called_but_not_defined_/2).
+	:- dynamic(predicate_called_but_not_defined_/2).
+	:- mode(predicate_called_but_not_defined_(?atom, ?predicate_indicator), zero_or_more).
+	:- info(predicate_called_but_not_defined_/2, [
+		comment is 'Table of called object predicates that are not locally defined.',
+		argnames is ['Object', 'Predicate']
+	]).
+
+	:- private(object_predicate_called_/3).
+	:- dynamic(object_predicate_called_/3).
+	:- mode(object_predicate_called_(?atom, ?atom, ?predicate_indicator), zero_or_more).
+	:- info(object_predicate_called_/3, [
+		comment is 'Table of called object predicates.',
+		argnames is ['Object', 'Other', 'Predicate']
+	]).
+
+	:- private(module_predicate_called_/3).
+	:- dynamic(module_predicate_called_/3).
+	:- mode(module_predicate_called_(?atom, ?atom, ?predicate_indicator), zero_or_more).
+	:- info(module_predicate_called_/3, [
+		comment is 'Table of called module predicates.',
+		argnames is ['Object', 'Module', 'Predicate']
+	]).
+
+	:- private(unknown_predicate_called_/2).
+	:- dynamic(unknown_predicate_called_/2).
+	:- mode(unknown_predicate_called_(?atom, ?predicate_indicator), zero_or_more).
+	:- info(unknown_predicate_called_/2, [
 		comment is 'Table of predicates called but not defined.',
 		argnames is ['Object', 'Predicate']
 	]).
@@ -246,6 +270,7 @@
 			file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name),
 			assertz(file_being_advised_(File, Path, Directory, Name))
 		),
+		preload_prolog_files(Options),
 		load_and_wrap_files,
 		generate_advise,
 		print_advise.
@@ -304,7 +329,7 @@
 		directory(Directory, []).
 
 	reset :-
-		retractall(unknown_predicate_called_but_not_defined_(_, _)),
+		retractall(predicate_called_but_not_defined_(_, _)),
 		retractall(missing_predicate_directive_(_, _, _)),
 		retractall(non_standard_predicate_call_(_, _)),
 		retractall(dynamic_directive_(_,_,_)),
@@ -313,6 +338,13 @@
 		retractall(add_directive_(_, _)),
 		retractall(add_directive_(_, _, _)),
 		retractall(remove_directive_(_, _)).
+
+	preload_prolog_files(Options) :-
+		memberchk(preload_prolog_files(true), Options),
+		file_being_advised_(_, Path, _, _),
+		load_prolog_code(Path),
+		fail.
+	preload_prolog_files(_).
 
 	load_and_wrap_files :-
 		file_being_advised_(_, Path, _, _),
@@ -343,7 +375,7 @@
 		missing_public_directives_advise(Object),
 		missing_private_directives_advise(Object),
 		missing_predicate_directives_advise(Object),
-		missing_uses_directives_advise(Object),
+		predicates_called_but_not_defined(Object),
 		fail.
 	generate_advise.		
 
@@ -441,7 +473,7 @@
 	missing_public_directives_advise(_).
 
 	provides_used_predicate(Object, Predicate) :-
-		unknown_predicate_called_but_not_defined_(Other, Predicate),
+		predicate_called_but_not_defined_(Other, Predicate),
 		Other \== Object,
 		object_property(Object, defines(Predicate, _)),
 		\+ (
@@ -465,7 +497,7 @@
 
 	internal_dynamic_predicate(Object, Predicate) :-
 		dynamic_directive_(Object, _, Predicate),
-		\+ unknown_predicate_called_but_not_defined_(_, Predicate).
+		\+ predicate_called_but_not_defined_(_, Predicate).
 
 	% missing public/1 directives are only generated for
 	% predicates declared as multifile
@@ -483,6 +515,28 @@
 		assertz(add_directive_(Object, Directive)),
 		fail.
 	missing_predicate_directives_advise(_).
+
+	predicates_called_but_not_defined(Object) :-
+		retract(predicate_called_but_not_defined_(Object, Predicate)),
+		(	missing_predicate_directive_(Object, (dynamic), Predicate) ->
+			true
+		;	missing_predicate_directive_(Object, (multifile), Predicate) ->
+			true
+		;	object_property(Other, defines(Predicate, _)),
+			file_being_advised_(_, _, _, Other) ->
+			assertz(object_predicate_called_(Object, Other, Predicate))
+		;	module_exported_predicate(Module, Predicate) ->
+			assertz(module_predicate_called_(Object, Module, Predicate))
+		;	assertz(unknown_predicate_called_(Object, Predicate))
+		),
+		fail.
+	predicates_called_but_not_defined(Object) :-
+		missing_uses_directives_advise(Object),
+		fail.
+	predicates_called_but_not_defined(Object) :-
+		missing_use_module_directives_advise(Object),
+		fail.
+	predicates_called_but_not_defined(_).
 
 	% generate uses/2 directives for resolving now implicitly
 	% qualified calls to non-standard built-in predicates or to
@@ -509,18 +563,29 @@
 	missing_uses_directive(Object, Other, Predicates) :-
 		setof(
 			Predicate,
-			unknown_predicate_called(Object, Other, Predicate),
+			object_predicate_called_(Object, Other, Predicate),
 			Predicates
 		).
 
-	unknown_predicate_called(Object, Other, Predicate) :-
-		unknown_predicate_called_but_not_defined_(Object, Predicate),
-		(	object_property(Other, defines(Predicate, _)),
-			file_being_advised_(_, _, _, Other) ->
-			true
-		;	% likely some Prolog library predicate
-			Other = user
+	missing_use_module_directives_advise(Object) :-
+		missing_use_module_directive(Object, Module, Predicates),
+		Directive =.. [use_module, Module, Predicates],
+		assertz(add_directive_(Object, Directive)),
+		fail.
+	missing_use_module_directives_advise(_).
+
+	missing_use_module_directive(Object, Module, Predicates) :-
+		setof(
+			Predicate,
+			module_predicate_called_(Object, Module, Predicate),
+			Predicates
 		).
+
+	unknown_predicate_called(Object, Predicate) :-
+		unknown_predicate_called_(Object, Predicate),
+		logtalk::print_message(warning, wrapper, unknown_predicate_called(Object, Predicate)),
+		fail.
+	unknown_predicate_called(_, _).
 
 	% options handling
 
@@ -558,6 +623,8 @@
 	default_option(exclude_directories([])).
 	% by default, generate `include/1` directives for the wrapped Prolog source files
 	default_option(include_wrapped_files(true)).
+	% by default, don't preload the Prolog source files
+	default_option(preload_prolog_files(false)).
 
 	% wrapper for the plain Prolog files source code
 
@@ -613,13 +680,19 @@
 		logtalk_load_context(entity_identifier, Object),
 		assertz(remove_directive_(Object, ensure_loaded(Loaded))).
 
+	% wrap set_prolog_flag/2 directives so that we don't get a compiler error
+	term_expansion((:- set_prolog_flag(Flag,Value)), [{:- set_prolog_flag(Flag,Value)}]).
+
+	% wrap file consulting directives so that we don't get a compiler error
+	term_expansion((:- [File|Files]), [{:- [File|Files]}]).
+
 	% hooks for intercepting relevant compiler lint messages
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(unknown_predicate_called_but_not_defined(_, _, _, Object, Predicate), _, core, _) :-
-		assertz(unknown_predicate_called_but_not_defined_(Object, Predicate)).
+		assertz(predicate_called_but_not_defined_(Object, Predicate)).
 
 	logtalk::message_hook(missing_predicate_directive(_, _, _, Object, DirectiveFunctor, Predicate), _, core, _) :-
 		assertz(missing_predicate_directive_(Object, DirectiveFunctor, Predicate)).
@@ -682,11 +755,60 @@
 	message_tokens(uses_directive(Object, Predicates)) -->
 		[':- uses(~q, ~q).'-[Object, Predicates], nl, nl].
 
-	directives_tokens([]) -->
-		[].
-	directives_tokens([Directive| Directives]) -->
-		[':- ~q'-[Directive], nl],
-		directives_tokens(Directives).
+	message_tokens(unknown_predicate_called(Object, Predicate)) -->
+		['~q object calls ~q unknown predicate'-[Object, Predicate], nl].
+
+	% modules support
+
+	:- if(current_logtalk_flag(prolog_dialect, swi)).
+
+		load_prolog_code(File) :-
+			{load_files(File)}.
+
+		module_exported_predicate(Module, Predicate) :-
+			{current_module(Module),
+			 module_property(Module, exports(Exports))},
+			member(Predicate, Exports).
+
+	:- elif(current_logtalk_flag(prolog_dialect, yap)).
+
+		load_prolog_code(File) :-
+			{load_files(File, [])}.
+
+		module_exported_predicate(Module, Predicate) :-
+			{current_module(Module),
+			 module_property(Module, exports(Exports))},
+			member(Predicate, Exports).
+
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		load_prolog_code(File) :-
+			{load_files(File, [])}.
+
+		module_exported_predicate(Module, Functor/Arity) :-
+			{current_module(Module),
+			 predicate_property(':'(Module,Goal), exported)},
+			functor(Goal, Functor, Arity).
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		load_prolog_code(File) :-
+			{compile(File, [])}.
+
+		module_exported_predicate(Module, Predicate) :-
+			{current_module(Module),
+			 get_module_info(Module, interface, Exports)},
+			member(export(Predicate), Exports).
+
+	:- else.
+
+		load_prolog_code(File) :-
+			{consult(File)}.
+
+		module_exported_predicate(_, _) :-
+			fail.
+
+	:- endif.
 
 	% auxiliary predicates
 

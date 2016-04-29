@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/4/28</code>
+            <code>2016/4/29</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -329,7 +329,67 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="unknown_predicate_called_but_not_defined_/2" class="code">unknown_predicate_called_but_not_defined_/2</h3>
+          <h3 id="predicate_called_but_not_defined_/2" class="code">predicate_called_but_not_defined_/2</h3>
+          <blockquote>
+            <p class="comment">Table of called object predicates that are not locally defined.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>predicate_called_but_not_defined_(Object,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>predicate_called_but_not_defined_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="object_predicate_called_/3" class="code">object_predicate_called_/3</h3>
+          <blockquote>
+            <p class="comment">Table of called object predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>object_predicate_called_(Object,Other,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>object_predicate_called_(?atom,?atom,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="module_predicate_called_/3" class="code">module_predicate_called_/3</h3>
+          <blockquote>
+            <p class="comment">Table of called module predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>module_predicate_called_(Object,Module,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>module_predicate_called_(?atom,?atom,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="unknown_predicate_called_/2" class="code">unknown_predicate_called_/2</h3>
           <blockquote>
             <p class="comment">Table of predicates called but not defined.</p>
           </blockquote>
@@ -340,11 +400,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>unknown_predicate_called_but_not_defined_(Object,Predicate)</code>
+              <code>unknown_predicate_called_(Object,Predicate)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>unknown_predicate_called_but_not_defined_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
+              <code>unknown_predicate_called_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
