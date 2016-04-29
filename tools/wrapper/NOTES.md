@@ -62,7 +62,8 @@ Current limitations:
 usually occur when using a backend Prolog system different from the one used
 to compile the original plain Prolog code. A common cause of syntax errors are
 operator definitions. These can often be solved by defining those operators
-for the Prolog backend used to run Logtalk and this tool.
+for the Prolog backend used to run Logtalk and this tool. An alternative is to
+preload the Prolog files where those operators are declared.
 
 - The tool assumes that all files to be wrapped have different names (even if
 found in different directories). If that is not the case, the name conflicts

@@ -467,7 +467,8 @@
 	provides_used_predicate(Object, Predicate) :-
 		predicate_called_but_not_defined_(Other, Predicate),
 		Other \== Object,
-		object_property(Object, defines(Predicate, _)),
+		object_property(Object, defines(Predicate, DefinitionProperties)),
+		\+ member(auxiliary, DefinitionProperties),
 		\+ (
 			object_property(Object, declares(Predicate, Properties)),
 			member((multifile), Properties)
@@ -514,7 +515,8 @@
 			true
 		;	missing_predicate_directive_(Object, (multifile), Predicate) ->
 			true
-		;	object_property(Other, defines(Predicate, _)),
+		;	object_property(Other, defines(Predicate, DefinitionProperties)),
+			\+ member(auxiliary, DefinitionProperties),
 			file_being_advised_(_, _, _, Other),
 			\+ object_predicate_called_(Object, Other, Predicate) ->
 			assertz(object_predicate_called_(Object, Other, Predicate))
