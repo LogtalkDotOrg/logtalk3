@@ -517,13 +517,14 @@
 			true
 		;	object_property(Other, defines(Predicate, DefinitionProperties)),
 			\+ member(auxiliary, DefinitionProperties),
-			file_being_advised_(_, _, _, Other),
-			\+ object_predicate_called_(Object, Other, Predicate) ->
+			file_being_advised_(_, _, _, Other) ->
+			retractall(object_predicate_called_(Object, Other, Predicate)),
 			assertz(object_predicate_called_(Object, Other, Predicate))
-		;	module_exported_predicate(Module, Predicate),
-			\+ module_predicate_called_(Object, Module, Predicate) ->
+		;	module_exported_predicate(Module, Predicate) ->
+			retractall(module_predicate_called_(Object, Module, Predicate)),
 			assertz(module_predicate_called_(Object, Module, Predicate))
-		;	assertz(unknown_predicate_called_(Object, Predicate))
+		;	retractall(unknown_predicate_called_(Object, Predicate)),
+			assertz(unknown_predicate_called_(Object, Predicate))
 		),
 		fail.
 	predicates_called_but_not_defined(Object) :-
@@ -531,6 +532,9 @@
 		fail.
 	predicates_called_but_not_defined(Object) :-
 		missing_use_module_directives_advise(Object),
+		fail.
+	predicates_called_but_not_defined(Object) :-
+		unknown_predicates_called_advise(Object),
 		fail.
 	predicates_called_but_not_defined(_).
 
@@ -577,11 +581,11 @@
 			Predicates
 		).
 
-	unknown_predicate_called(Object, Predicate) :-
+	unknown_predicates_called_advise(Object) :-
 		unknown_predicate_called_(Object, Predicate),
 		logtalk::print_message(warning, wrapper, unknown_predicate_called(Object, Predicate)),
 		fail.
-	unknown_predicate_called(_, _).
+	unknown_predicates_called_advise(_).
 
 	% options handling
 
@@ -679,6 +683,10 @@
 
 	% wrap file consulting directives so that we don't get a compiler error
 	term_expansion((:- [File|Files]), [{:- [File|Files]}]).
+
+	goal_expansion(dynamic(Predicate), {dynamic(Predicate)}).
+	goal_expansion(predicate_property(Predicate,Property), {predicate_property(Predicate,Property)}).
+	goal_expansion((Module:Predicate), {(Module:Predicate)}).
 
 	% hooks for intercepting relevant compiler lint messages
 
