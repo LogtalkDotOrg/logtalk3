@@ -345,10 +345,10 @@
 	load_and_wrap_files.
 
 	load_and_wrap_file(File) :-
-		this(This),
+		self(Self),
 		(	os::file_exists(File) ->
 			logtalk_load_lint_options(LintOptions),
-			logtalk_load(File, [hook(This), source_data(on), reload(always)| LintOptions])
+			logtalk_load(File, [hook(Self), source_data(on), reload(always)| LintOptions])
 		;	logtalk::print_message(warning, wrapper, file_not_found(File))
 		).
 
@@ -683,10 +683,6 @@
 
 	% wrap file consulting directives so that we don't get a compiler error
 	term_expansion((:- [File|Files]), [{:- [File|Files]}]).
-
-	goal_expansion(dynamic(Predicate), {dynamic(Predicate)}).
-	goal_expansion(predicate_property(Predicate,Property), {predicate_property(Predicate,Property)}).
-	goal_expansion((Module:Predicate), {(Module:Predicate)}).
 
 	% hooks for intercepting relevant compiler lint messages
 
