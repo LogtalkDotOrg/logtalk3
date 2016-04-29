@@ -523,9 +523,11 @@
 		;	missing_predicate_directive_(Object, (multifile), Predicate) ->
 			true
 		;	object_property(Other, defines(Predicate, _)),
-			file_being_advised_(_, _, _, Other) ->
+			file_being_advised_(_, _, _, Other),
+			\+ object_predicate_called_(Object, Other, Predicate) ->
 			assertz(object_predicate_called_(Object, Other, Predicate))
-		;	module_exported_predicate(Module, Predicate) ->
+		;	module_exported_predicate(Module, Predicate),
+			\+ module_predicate_called_(Object, Module, Predicate) ->
 			assertz(module_predicate_called_(Object, Module, Predicate))
 		;	assertz(unknown_predicate_called_(Object, Predicate))
 		),
