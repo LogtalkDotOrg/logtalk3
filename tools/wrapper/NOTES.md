@@ -55,8 +55,6 @@ The API predicates also accept a set of options for customization:
 	list of sub-directory names to exclude (default is `[]`)
 - `include_wrapped_files(Boolean)`  
 	generate `include/1` directives for the wrapped Prolog source files (default is `true`)
-- `preload_prolog_files(Boolean)`  
-	preload the Prolog source files (default is `false`)
 
 Current limitations:
 

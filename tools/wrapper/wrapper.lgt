@@ -270,7 +270,6 @@
 			file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name),
 			assertz(file_being_advised_(File, Path, Directory, Name))
 		),
-		preload_prolog_files(Options),
 		load_and_wrap_files,
 		generate_advise,
 		print_advise.
@@ -338,13 +337,6 @@
 		retractall(add_directive_(_, _)),
 		retractall(add_directive_(_, _, _)),
 		retractall(remove_directive_(_, _)).
-
-	preload_prolog_files(Options) :-
-		memberchk(preload_prolog_files(true), Options),
-		file_being_advised_(_, Path, _, _),
-		load_prolog_code(Path),
-		fail.
-	preload_prolog_files(_).
 
 	load_and_wrap_files :-
 		file_being_advised_(_, Path, _, _),
@@ -625,8 +617,6 @@
 	default_option(exclude_directories([])).
 	% by default, generate `include/1` directives for the wrapped Prolog source files
 	default_option(include_wrapped_files(true)).
-	% by default, don't preload the Prolog source files
-	default_option(preload_prolog_files(false)).
 
 	% wrapper for the plain Prolog files source code
 
@@ -764,18 +754,12 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
 
-		load_prolog_code(File) :-
-			{load_files(File)}.
-
 		module_exported_predicate(Module, Predicate) :-
 			{current_module(Module),
 			 module_property(Module, exports(Exports))},
 			member(Predicate, Exports).
 
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
-
-		load_prolog_code(File) :-
-			{load_files(File, [])}.
 
 		module_exported_predicate(Module, Predicate) :-
 			{current_module(Module),
@@ -784,9 +768,6 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-		load_prolog_code(File) :-
-			{load_files(File, [])}.
-
 		module_exported_predicate(Module, Functor/Arity) :-
 			{current_module(Module),
 			 predicate_property(':'(Module,Goal), exported)},
@@ -794,18 +775,12 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
-		load_prolog_code(File) :-
-			{compile(File, [])}.
-
 		module_exported_predicate(Module, Predicate) :-
 			{current_module(Module),
 			 get_module_info(Module, interface, Exports)},
 			member(export(Predicate), Exports).
 
 	:- else.
-
-		load_prolog_code(File) :-
-			{consult(File)}.
 
 		module_exported_predicate(_, _) :-
 			fail.
