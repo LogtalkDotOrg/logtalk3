@@ -21,19 +21,20 @@ RELEASE NOTES
 =============
 
 
-3.04.2 - April ??, 2016
-=======================
+3.04.2 - May ??, 2016
+=====================
 
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Bug where the compiler could fail to detect discontiguous predicates.
+* FIXED: Bug where the compiler could fail to detect some discontiguous
+predicates.
 
 Documentation
 -------------
 
-* FIXED: Description of the search order for predicate definitions for class
-hierarchies in the User Manual.
+* FIXED: Description of the search order for predicate definitions for
+class hierarchies in the User Manual.
 
 Tools
 -----
@@ -44,15 +45,16 @@ arguments to the integration script used to run the tests.
 * ADDED: Support for saving the generated wrapper objects for the advised
 files to the `wrapper` tool.
 
-* ADDED: Support to the `wrapper` tool for generating wrapper objects for a
-directory and all its sub-directories and for a list of directories.
+* ADDED: Support to the `wrapper` tool for generating wrapper objects for
+a directory and all its sub-directories and for a list of directories.
 
 * IMPROVED: The `wrapper` tool to also print advise on `ensure_loaded/1` and
 `include/1` directives that should be removed.
 
-* IMPROVED: The `wrapper` tool to also print advise for called Prolog
-predicates that are not built-in predicates. The tool assumes those
-predicates to be available in the `user` pseudo-object.
+* IMPROVED: The `wrapper` tool to also print advise for called Prolog module
+predicates and to print warning for called but not defined predicates.
+
+* FIXED: Allow the `wrapper` tool to be extended for customization.
 
 * FIXED: The `diagrams` tool to avoid failures when using the utility
 `diagrams` object to batch generate diagrams using a method that not all
