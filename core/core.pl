@@ -11928,11 +11928,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_prolog_meta_arguments'([], [], _, [], []).
 
 '$lgt_compile_prolog_meta_arguments'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	(	integer(MArg), MArg > 0 ->
+	(	nonvar(Arg),
+		'$lgt_module_meta_argument'(MArg, Arg),
+		'$lgt_prolog_feature'(modules, supported) ->
+		TArg = Arg, DArg = Arg
+	;	integer(MArg),
+		MArg > 0 ->
 		'$lgt_compile_prolog_meta_argument'(closure(MArg), Arg, Ctx, TArg, DArg)
 	;	'$lgt_compile_prolog_meta_argument'(MArg, Arg, Ctx, TArg, DArg)
 	),
 	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
+
+
+'$lgt_module_meta_argument'(1, ':'(_)) :-
+	!.
+'$lgt_module_meta_argument'(_, ':'(_,_)).
 
 
 '$lgt_compile_prolog_meta_argument'(closure(N), Arg, Ctx, TArg, DArg) :-

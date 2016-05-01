@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * FIXED: Bug where the compiler could fail to detect some discontiguous
 predicates.
 
+* FIXED: Compilation of meta-arguments of calls to Prolog meta-predicates
+that are explicit-qualified module terms.
+
 Documentation
 -------------
 
