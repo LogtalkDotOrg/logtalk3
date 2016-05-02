@@ -17,9 +17,12 @@ limitations under the License.
 ________________________________________________________________________
 
 
+Overview
+--------
+
 This is a prototype tool to help port a plain Prolog application to Logtalk.
-It can also be used to enable applying other Logtalk tools, such as the
-documenting and diagramming tools, to plain Prolog code.
+It can also be used to enable applying other Logtalk developer tools, such as
+the documenting and diagramming tools, to plain Prolog code.
 
 The tool takes a directory of Prolog files or a list of Prolog files, loads
 and wraps the code in each file using an object wrapper, and advises on missing
@@ -28,20 +31,44 @@ the reflection API. The user can then either save the generated wrapper objects
 or copy and pasted the printed advise into the Prolog files (updating them to
 Logtalk files by adding the object opening and closing directives to the Prolog
 files). The wrapper objects can then be loaded for testing and for use with
-other Logtalk tools.
+other tools.
 
-For the tool API, consult the `../../docs/wrapper_0.html` file.
+Loading
+-------
 
 This tool can be loaded using the query:
 
 	| ?- logtalk_load(wrapper(loader)).
 
-Typical workflow:
+Documentation
+-------------
+
+For the tool API, consult the `../../docs/wrapper_0.html` file.
+
+Workflows
+---------
+
+The typical porting workflow is simply:
 
 	| ?- wrapper::rdirectory(root_directory_of_prolog_code).
 	...
 	| ?- wrapper::save.
 	...
+
+See the next section on how to customize the API calls for more flexible
+processing.
+
+Customization
+-------------
+
+The tool can be customized by extending the `wrapper` object. A common
+scenario is when wrapping plain Prolog code just to take advantage, for
+example, of the documenting tool or for generating cross-referencing
+diagrams. In this case, we can workaround any compiler errors by
+specializing the inherited definitions for the `term_expansion/2` and
+`goal_expansion/2` predicates and then load the wrapper objects for
+tool processing by using the `include_wrapped_files(false)` option
+described below.
 
 The API predicates also accept a set of options for customization:
 
@@ -56,7 +83,8 @@ The API predicates also accept a set of options for customization:
 - `include_wrapped_files(Boolean)`  
 	generate `include/1` directives for the wrapped Prolog source files (default is `true`)
 
-Current limitations:
+Current limitations
+-------------------
 
 - The tool cannot deal with syntax errors in the Prolog files. These errors
 usually occur when using a backend Prolog system different from the one used
@@ -72,6 +100,9 @@ must be manually solved before using the tool.
 - There isn't yet any support for dealing with meta-predicates and advise on
 missing meta-predicate directives.
 
+
+Other notes
+-----------
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
