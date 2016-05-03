@@ -67,7 +67,7 @@ example, of the documenting tool or for generating cross-referencing
 diagrams. In this case, we can workaround any compiler errors by
 specializing the inherited definitions for the `term_expansion/2` and
 `goal_expansion/2` predicates and then load the wrapper objects for
-tool processing by using the `include_wrapped_files(false)` option
+further processing by using the `include_wrapped_files(false)` option
 described below.
 
 The API predicates also accept a set of options for customization:
@@ -91,7 +91,9 @@ usually occur when using a backend Prolog system different from the one used
 to compile the original plain Prolog code. A common cause of syntax errors are
 operator definitions. These can often be solved by defining those operators
 for the Prolog backend used to run Logtalk and this tool. An alternative is to
-preload the Prolog files where those operators are declared.
+preload the Prolog files where those operators are declared. Preloading the
+plain Prolog application can also help in wrapping it by ensuring that its
+dependencies are also loaded.
 
 - The tool assumes that all files to be wrapped have different names (even if
 found in different directories). If that is not the case, the name conflicts
