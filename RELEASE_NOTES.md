@@ -33,6 +33,11 @@ predicates.
 * FIXED: Compilation of meta-arguments of calls to Prolog meta-predicates
 that are explicit-qualified module terms.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Definition of the `logtalk_make/1` shortcut `{?}` for Lean Prolog.
+
 Documentation
 -------------
 
