@@ -24,7 +24,10 @@ RELEASE NOTES
 3.04.3 - June ??, 2016
 ======================
 
+Tools
+-----
 
+* ADDED: Support for a `directory/1` predicate to the `diagrams` tool.
 
 
 3.04.2 - May 3, 2016

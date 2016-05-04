@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/02/29,
+		date is 2016/05/04,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -34,7 +34,7 @@
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
 	:- info(libraries/3, [
-		comment is 'Creates a diagram for a set of libraries using the specified options.',
+		comment is 'Creates a diagram for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Libraries', 'Options']
 	]).
 
@@ -68,7 +68,7 @@
 	:- public(libraries/2).
 	:- mode(libraries(+atom, +list(atom)), one).
 	:- info(libraries/2, [
-		comment is 'Creates a diagram for a set of libraries using the default options.',
+		comment is 'Creates a diagram for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Libraries']
 	]).
 
@@ -209,7 +209,7 @@
 	:- public(directories/3).
 	:- mode(directories(+atom, +list(atom), +list(compound)), one).
 	:- info(directories/3, [
-		comment is 'Creates a diagram for a set of directories using the specified options.',
+		comment is 'Creates a diagram for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directories', 'Options']
 	]).
 
@@ -251,7 +251,7 @@
 	:- public(directories/2).
 	:- mode(directories(+atom, +list(atom)), one).
 	:- info(directories/2, [
-		comment is 'Creates a diagram for a set of directories using the default options.',
+		comment is 'Creates a diagram for a set of directories using the default options. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directories']
 	]).
 
@@ -261,7 +261,7 @@
 	:- public(directory/3).
 	:- mode(directory(+atom, +atom, +list(compound)), one).
 	:- info(directory/3, [
-		comment is 'Creates a diagram for a directory using the specified options.',
+		comment is 'Creates a diagram for a directory using the specified options. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
@@ -286,17 +286,29 @@
 	:- public(directory/2).
 	:- mode(directory(+atom, +atom), one).
 	:- info(directory/2, [
-		comment is 'Creates a diagram for a directory using default options.',
+		comment is 'Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Directory']
 	]).
 
 	directory(Project, Directory) :-
 		::directory(Project, Directory, []).
 
+	:- public(directory/1).
+	:- mode(directory(+atom), one).
+	:- info(directory/1, [
+		comment is 'Creates a diagram for a directory using default options.',
+		argnames is ['Directory']
+	]).
+
+	directory(Directory) :-
+		os::expand_path(Directory, Path),
+		os::decompose_file_name(Path, _, Project, _),
+		::directory(Project, Directory, []).
+
 	:- public(files/3).
 	:- mode(files(+atom, +list(atom), +list(compound)), one).
 	:- info(files/3, [
-		comment is 'Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation.',
+		comment is 'Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Files', 'Options']
 	]).
 
@@ -326,7 +338,7 @@
 	:- public(files/2).
 	:- mode(files(+atom, +list(atom)), one).
 	:- info(files/2, [
-		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation.',
+		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.',
 		argnames is ['Project', 'Files']
 	]).
 

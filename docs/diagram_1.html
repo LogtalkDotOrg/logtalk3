@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.1</code>
+            <code>2.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/2/29</code>
+            <code>2016/5/4</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="libraries/3" class="code">libraries/3</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of libraries using the specified options.</p>
+            <p class="comment">Creates a diagram for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -65,7 +65,7 @@
         <div class="section">
           <h3 id="libraries/2" class="code">libraries/2</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of libraries using the default options.</p>
+            <p class="comment">Creates a diagram for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -201,7 +201,7 @@
         <div class="section">
           <h3 id="directories/3" class="code">directories/3</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of directories using the specified options.</p>
+            <p class="comment">Creates a diagram for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -221,7 +221,7 @@
         <div class="section">
           <h3 id="directories/2" class="code">directories/2</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of directories using the default options.</p>
+            <p class="comment">Creates a diagram for a set of directories using the default options. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -241,7 +241,7 @@
         <div class="section">
           <h3 id="directory/3" class="code">directory/3</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a directory using the specified options.</p>
+            <p class="comment">Creates a diagram for a directory using the specified options. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -261,7 +261,7 @@
         <div class="section">
           <h3 id="directory/2" class="code">directory/2</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a directory using default options.</p>
+            <p class="comment">Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -279,9 +279,29 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="directory/1" class="code">directory/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for a directory using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory(Directory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directory(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="files/3" class="code">files/3</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation.</p>
+            <p class="comment">Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -301,7 +321,7 @@
         <div class="section">
           <h3 id="files/2" class="code">files/2</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation.</p>
+            <p class="comment">Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
