@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on March 15, 2016
+; Last updated on May 4, 2016
 ; 
 ; This file is part of Logtalk <http://logtalk.org/>  
 ; Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -517,7 +517,7 @@ begin
   Result := SWIConExePath;
   if Result = 'prolog_compiler_not_installed' then
   begin
-    Warning := 'Failed to detect SWI-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect SWI-Prolog (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
   MsgBox(Warning, mbError, MB_OK)
   end
 end;
@@ -557,7 +557,7 @@ begin
   Result := SWIWinExePath;
   if Result = 'prolog_compiler_not_installed' then
   begin
-    Warning := 'Failed to detect SWI-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect SWI-Prolog (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
   MsgBox(Warning, mbError, MB_OK)
   end
 end;
@@ -640,7 +640,7 @@ begin
   Result := YAPConExePath;
   if Result = 'prolog_compiler_not_installed' then
   begin
-    Warning := 'Failed to detect YAP installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect YAP (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
   MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -669,7 +669,7 @@ begin
   Result := YAPWinExePath;
   if Result = 'prolog_compiler_not_installed' then
   begin
-    Warning := 'Failed to detect YAP installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    Warning := 'Failed to detect YAP (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
   MsgBox(Warning, mbError, MB_OK);
   end
 end;
