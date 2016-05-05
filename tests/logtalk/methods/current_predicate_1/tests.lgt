@@ -100,6 +100,30 @@ b(1, 2).
 		setof(Predicate, primary::p(Predicate), Predicates),
 		Predicates == [a/1, b/2, c/3].
 
+	% test semantics for re-declared predicates
+
+	succeeds(current_predicate_1_16) :-
+		findall(Predicate, proto::current_predicate(Predicate), Predicates),
+		Predicates == [foobar/0].
+
+	fails(current_predicate_1_17) :-
+		proto::current_predicate(foo/_).
+
+	fails(current_predicate_1_18) :-
+		proto::current_predicate(_/1).
+
+	fails(current_predicate_1_19) :-
+		proto::current_predicate(foo/1).
+
+	fails(current_predicate_1_20) :-
+		proto::current_predicate(bar/_).
+
+	fails(current_predicate_1_21) :-
+		proto::current_predicate(_/2).
+
+	fails(current_predicate_1_22) :-
+		proto::current_predicate(bar/2).
+
 	% auxiliary predicates
 
 	user_object(user).

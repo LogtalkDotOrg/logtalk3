@@ -24,11 +24,24 @@ RELEASE NOTES
 3.04.3 - June ??, 2016
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the `current_predicate/1` method when a predicate
+is re-declared with a more restrictive scope where the overridden
+declaration would still be found.
+
 Tools
 -----
 
-* ADDED: Support for `directory/1` and `files/1` predicates to the `diagrams`
-tool.
+* ADDED: Support for `directory/1` and `files/1` predicates to the
+`diagrams` tool.
+
+Tests
+-----
+
+* ADDED: Tests for the `current_predicate/1` method for predicate
+re-declaration semantics.
 
 
 3.04.2 - May 3, 2016

@@ -30,3 +30,34 @@
 		Object::current_predicate(foo/1).
 
 :- end_object.
+
+
+
+:- object(parent).
+
+	:- public(foobar/0).
+	foobar.
+
+	:- public(foo/1).
+	foo(parent).
+
+	:- public(bar/2).
+	bar(parent, parent).
+
+:- end_object.
+
+
+
+:- object(proto,
+	extends(parent)).
+
+	:- public(foobar/0).
+	foobar.
+
+	:- protected(foo/1).
+	foo(proto).
+
+	:- private(bar/2).
+	bar(proto, proto).
+
+:- end_object.

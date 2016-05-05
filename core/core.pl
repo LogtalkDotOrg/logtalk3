@@ -2770,7 +2770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc1)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc2)).
 
 
 
@@ -2844,32 +2844,37 @@ create_logtalk_flag(Flag, Value, Options) :-
 	current_predicate(Pred).
 
 '$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
-	nonvar(Functor),
-	nonvar(Arity),
+	ground(Functor/Arity),
 	!,
-	functor(Pred, Functor, Arity),
-	'$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope),
-	!.
+	% make the current_predicate/1 method deterministic when its argument is ground
+	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
+	(	call(Dcl, Pred, PredScope, _, _, SCtn, _),
+		functor(Pred, Functor, Arity) ->
+		% commit to the first solution found as an inherited
+		%  predicate can always be re-declared
+		(	\+ \+ PredScope = LookupScope ->
+			true
+		;	Sender = SCtn
+		)
+	;	fail
+	).
 
 '$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
-	setof(
-		Functor/Arity,
-		(Pred, LookupScope)^('$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope), functor(Pred, Functor, Arity)),
-		Preds
-	),
-	'$lgt_member'(Functor/Arity, Preds).
-
-
-% '$lgt_visible_predicate'(+object_identifier, ?callable, +object_identifier, +scope)
-%
-% checks/returns object predicates visible/within the scope of the sender
-
-'$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
-	call(Dcl, Pred, PredScope, _, _, SCtn, _),
-	(	\+ \+ PredScope = LookupScope ->
-		true
-	;	Sender = SCtn
+	% use findall/3 + sort/2 to avoid a setof/3 call with five
+	% existentially-qualified variables or an auxiliary predicate
+	findall(Functor/Arity, (call(Dcl, Pred, _, _, _, _, _), functor(Pred, Functor, Arity)), Preds),
+	sort(Preds, SortedPreds),
+	'$lgt_member'(Functor/Arity, SortedPreds),
+	functor(Pred, Functor, Arity),
+	(	call(Dcl, Pred, PredScope, _, _, SCtn, _) ->
+		% commit to the first solution found as an inherited
+		%  predicate can always be re-declared
+		(	\+ \+ PredScope = LookupScope ->
+			true
+		;	Sender = SCtn
+		)
+	;	fail
 	).
 
 
