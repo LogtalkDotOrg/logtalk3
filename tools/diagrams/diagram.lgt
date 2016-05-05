@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/05/04,
+		date is 2016/05/05,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -296,7 +296,7 @@
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Creates a diagram for a directory using default options.',
+		comment is 'Creates a diagram for a directory using default options. The name of the directory is used as a prefix for the diagram file name.',
 		argnames is ['Directory']
 	]).
 
@@ -344,6 +344,16 @@
 
 	files(Project, Files) :-
 		::files(Project, Files, []).
+
+	:- public(files/1).
+	:- mode(files(+list(atom)), one).
+	:- info(files/1, [
+		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file name.',
+		argnames is ['Files']
+	]).
+
+	files(Files) :-
+		::files(files, Files, []).
 
 	:- public(all_files/1).
 	:- mode(all_files(+list(compound)), one).

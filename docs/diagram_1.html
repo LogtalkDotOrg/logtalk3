@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/5/4</code>
+            <code>2016/5/5</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -281,7 +281,7 @@
         <div class="section">
           <h3 id="directory/1" class="code">directory/1</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a directory using default options.</p>
+            <p class="comment">Creates a diagram for a directory using default options. The name of the directory is used as a prefix for the diagram file name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -335,6 +335,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>files(+atom,+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="files/1" class="code">files/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file name.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>files(Files)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>files(+list(atom)) &ndash; one</code>
             </dd>
           </dl>
         </div>

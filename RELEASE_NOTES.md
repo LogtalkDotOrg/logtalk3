@@ -27,7 +27,8 @@ RELEASE NOTES
 Tools
 -----
 
-* ADDED: Support for a `directory/1` predicate to the `diagrams` tool.
+* ADDED: Support for `directory/1` and `files/1` predicates to the `diagrams`
+tool.
 
 
 3.04.2 - May 3, 2016
