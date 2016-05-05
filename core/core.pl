@@ -2770,7 +2770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc3)).
 
 
 
@@ -17906,6 +17906,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 1,
 	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
 
+'$lgt_dcg_rule'((eos --> _), _, _) :-
+	throw(permission_error(modify, built_in_non_terminal, eos//0)).
+
 '$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx) :-
 	!,
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
@@ -18147,6 +18150,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_body'(GRBody, S0, _, Goal, Ctx).
 
 '$lgt_dcg_body'(phrase(GRBody), S0, S, phrase(GRBody, S0, S), _) :-
+	!.
+
+'$lgt_dcg_body'(eos, S0, S, (S0 = [], S = []), _) :-
 	!.
 
 '$lgt_dcg_body'(GRBody, S0, S, Goal, _) :-

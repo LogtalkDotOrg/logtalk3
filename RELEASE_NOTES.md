@@ -27,6 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for `eos//0` as a built-in non-terminal.
+
 * FIXED: Bug in the `current_predicate/1` method when a predicate
 is re-declared with a more restrictive scope where the overridden
 declaration would still be found.

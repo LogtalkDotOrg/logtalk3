@@ -6,7 +6,7 @@
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on August 19, 2014
+##   Last updated on May 5, 2016
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -150,6 +150,7 @@ eval $xslt_proc -o methods/before_3.section refman.xsl methods/before_3.html
 eval $xslt_proc -o methods/after_3.section refman.xsl methods/after_3.html
 eval $xslt_proc -o methods/forward_1.section refman.xsl methods/forward_1.html
 eval $xslt_proc -o methods/call_1.section refman.xsl methods/call_1.html
+eval $xslt_proc -o methods/eos_0.section refman.xsl methods/eos_0.html
 eval $xslt_proc -o methods/phrase_1.section refman.xsl methods/phrase_1.html
 eval $xslt_proc -o methods/phrase_2.section refman.xsl methods/phrase_2.html
 eval $xslt_proc -o methods/phrase_3.section refman.xsl methods/phrase_3.html
@@ -286,6 +287,7 @@ cat -s \
 	methods/before_3.section \
 	methods/after_3.section \
 	methods/forward_1.section \
+	methods/eos_0.section \
 	methods/call_1.section \
 	methods/phrase_1.section \
 	methods/phrase_2.section \
