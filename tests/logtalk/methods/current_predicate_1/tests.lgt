@@ -29,9 +29,9 @@ b(1, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/11/10,
+		date is 2016/05/05,
 		comment is 'Unit tests for the current_predicate/1 built-in method.'
 	]).
 
@@ -123,6 +123,9 @@ b(1, 2).
 
 	fails(current_predicate_1_22) :-
 		proto::current_predicate(bar/2).
+
+	deterministic(current_predicate_1_23) :-
+		proto::current_predicate(foobar/0).
 
 	% auxiliary predicates
 
