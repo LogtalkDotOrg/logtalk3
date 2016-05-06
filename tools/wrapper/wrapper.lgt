@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2016/05/03,
+		date is 2016/05/06,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl''])',
@@ -665,6 +665,9 @@
 		),
 		fail.
 
+	% wrap set_prolog_flag/2 directives so that we don't get a compiler error
+	term_expansion((:- set_prolog_flag(Flag,Value)), [{:- set_prolog_flag(Flag,Value)}]).
+
 	% discard include/1 directives for files being processed
 	term_expansion((:- include(Include)), []) :-
 		file_being_advised_(File, Path, _, Name),
@@ -676,20 +679,32 @@
 		assertz(remove_directive_(Object, include(Include))).
 
 	% discard ensure_loaded/1 directives for files already being processed
-	term_expansion((:- ensure_loaded(Loaded)), []) :-
+	term_expansion((:- ensure_loaded(LoadedFile)), []) :-
 		file_being_advised_(File, Path, _, Name),
-		(	Loaded = File
-		;	Loaded = Path
-		;	Loaded = Name
+		(	LoadedFile = File
+		;	LoadedFile = Path
+		;	LoadedFile = Name
 		),
 		logtalk_load_context(entity_identifier, Object),
-		assertz(remove_directive_(Object, ensure_loaded(Loaded))).
+		assertz(remove_directive_(Object, ensure_loaded(LoadedFile))).
 
-	% wrap set_prolog_flag/2 directives so that we don't get a compiler error
-	term_expansion((:- set_prolog_flag(Flag,Value)), [{:- set_prolog_flag(Flag,Value)}]).
+	% discard consult/1 directives for files already being processed
+	term_expansion((:- [File|Files]), Expansion) :-
+		term_expansion_consult_directive([File|Files], Expansion).
 
-	% wrap file consulting directives so that we don't get a compiler error
-	term_expansion((:- [File|Files]), [{:- [File|Files]}]).
+	term_expansion_consult_directive([], []).
+	term_expansion_consult_directive([LoadedFile| LoadedFiles], Expansion) :-
+		file_being_advised_(File, Path, _, Name),
+		(	LoadedFile = File
+		;	LoadedFile = Path
+		;	LoadedFile = Name
+		),
+		!,
+		logtalk_load_context(entity_identifier, Object),
+		assertz(remove_directive_(Object, (:- [LoadedFile]))),
+		term_expansion_consult_directive(LoadedFiles, Expansion).
+	term_expansion_consult_directive([LoadedFile| LoadedFiles], [{:- [LoadedFile]}| Expansion]) :-
+		term_expansion_consult_directive(LoadedFiles, Expansion).
 
 	% hooks for intercepting relevant compiler lint messages
 
