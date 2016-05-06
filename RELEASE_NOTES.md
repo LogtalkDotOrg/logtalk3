@@ -31,7 +31,7 @@ Logtalk compiler and runtime
 
 * FIXED: Bug in the `current_predicate/1` method when a predicate
 is re-declared with a more restrictive scope where the overridden
-declaration would still be found.
+inherited declaration would still be found.
 
 Tools
 -----
@@ -42,7 +42,9 @@ Tools
 Tests
 -----
 
-* ADDED: Tests for the `current_predicate/1` method for predicate
+* ADDED: Unit tests for the new `eos//0` built-in non-terminal.
+
+* ADDED: Unit tests for the `current_predicate/1` method for predicate
 re-declaration semantics.
 
 
