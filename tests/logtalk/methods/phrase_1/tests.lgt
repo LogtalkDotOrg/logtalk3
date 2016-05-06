@@ -24,8 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2016/05/06,
 		comment is 'Unit tests for the phrase//1 built-in method.'
 	]).
+
+	succeeds(phrase_1_1) :-
+		phrase(list(atom), [a,b,c]).
+
+	succeeds(phrase_1_2) :-
+		phrase(list(sum(Sum)), [1,2,3]),
+		Sum == 6.
+
+	% test DCG
+
+	list(_) --> [].
+	list(NonTerminal) --> phrase(NonTerminal), list(NonTerminal).
+
+	atom --> [Element], {atom(Element)}.
+
+	sum(Sum) --> [Sum], eos.
+	sum(_), [Sum1] --> [Sum0, Element], {Sum1 is Sum0 + Element}.
 
 :- end_object.

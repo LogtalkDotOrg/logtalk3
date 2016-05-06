@@ -44,6 +44,9 @@ Tests
 
 * ADDED: Unit tests for the new `eos//0` built-in non-terminal.
 
+* ADDED: Unit tests for the `call//1-N` and `phrase//1` built-in
+non-terminals.
+
 * ADDED: Unit tests for the `current_predicate/1` method for predicate
 re-declaration semantics.
 

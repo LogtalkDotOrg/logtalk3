@@ -24,8 +24,19 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2016/05/06,
 		comment is 'Unit tests for the call//1-N built-in method.'
 	]).
 
+	succeeds(call_1_1) :-
+		phrase(list(next, Successors), [1,2,3]),
+		Successors == [2,3,4].
+
+	% test DCG
+
+	list(_, []) --> [].
+	list(NonTerminal, [Head| Tail]) --> call(NonTerminal, Head), list(NonTerminal, Tail).
+
+	next(Next) --> [Element], {Next is Element + 1}.
+	
 :- end_object.
