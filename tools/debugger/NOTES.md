@@ -30,6 +30,11 @@ To consult this tool API documentation, open in a web browser the file:
 
 	docs/directory_index.html#tools/debugger/
 
+For more information on using the debugger, open in a web browser the
+following file  and consult the debugging section of the User Manual:
+
+	manuals/index.html
+
 
 Loading
 -------
@@ -59,10 +64,7 @@ Logtalk also provides basic support for the SWI-Prolog graphical tracer.
 The required settings are described in the `settings-sample.lgt` file.
 
 The `debugger_messages.lgt` source file defines the default debugger
-message translations. For more information on the debugger entities,
-open the `docs/tools.html` file in a web browser. For help using the
-debugger, open the `manuals/index.html` file in a web browser and
-consult the debugging section of the User Manual.
+message translations.
 
 The `dump_trace.lgt` contains a simple code example on how to redirect
 a goal trace to a file.
