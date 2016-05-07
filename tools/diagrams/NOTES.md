@@ -17,20 +17,36 @@ limitations under the License.
 ________________________________________________________________________
 
 
+Overview
+--------
+
 This tool generates library, file, and entity diagrams for source files
 and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
 for Prolog module applications.
 
+
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/diagrams/
+
+For sample queries, please see the `SCRIPT.txt` file.
+
+
+Loading
+-------
+
 This tool can be loaded using the query:
 
 	| ?- logtalk_load(diagrams(loader)).
 
-For sample queries, please see the `SCRIPT.txt` file.
 
-Currently only the DOT graph language is supported (tested with version
-2.36.0; visit the <http://www.graphviz.org/> website for more information).
+Supported diagrams
+------------------
 
 The following entity diagrams are supported:
 
@@ -117,6 +133,13 @@ predicates, and files) and arrows (entity, predicate, and file relations):
 The entity, predicate, and file nodes that are not part of the entities, files,
 or libraries for which you are generating a diagram use a dashed border.
 
+
+Supported graph languages
+-------------------------
+
+Currently only the DOT graph language is supported (tested with version
+2.36.0; visit the <http://www.graphviz.org/> website for more information).
+
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG, PDF,
 or Postscript. For example, using the `dot` command-line executable we can
@@ -158,6 +181,10 @@ the diagram in page-sized pieces or, preferably, use software capable of
 tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
 `.dot` files and play with settings such as aspect ratio for fine-tuning
 the diagrams layout.
+
+
+Customization
+-------------
 
 A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
@@ -247,8 +274,9 @@ generated for (loaded) Prolog source files (containing module definitions)
 and for (loaded) Prolog modules. However, the diagraming methods that take
 a library name as argument are not currently usable.
 
-For more information on this tool, open the `docs/tools.html` file in a
-web browser.
+
+Other notes
+-----------
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).

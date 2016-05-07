@@ -33,3 +33,28 @@ ________________________________________________________________________
 % parentheses to avoid a clash with the "help" built-in operator:
 
 | ?- (help)::help.
+...
+
+
+% get on-line help for the `logtalk_load/2` built-in predicate:
+
+| ?- help::logtalk_load/2.
+...
+
+
+% get on-line help for the `eos//0` built-in non-terminal:
+
+| ?- help::eos//0.
+...
+
+
+% get on-line help for a library entity:
+
+?- help::library(random).
+...
+
+
+% consult the User and Reference manuals:
+
+| ?- help::manuals.
+...

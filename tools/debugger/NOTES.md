@@ -17,14 +17,34 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains the default Logtalk command-line debugger. It can
-be loaded by typing:
+Overview
+--------
+
+This tool provides the default Logtalk command-line debugger.
+
+
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/debugger/
+
+
+Loading
+-------
+
+This tool can be loaded using the query:
 
 	| ?- logtalk_load(debugger(loader)).
 
 Note that this tool cannot be loaded at the same time as other tools (e.g.
 the ports profiler) that also provide a debug handler, which must be unique
 in a running session.
+
+
+Usage
+-----
 
 Debugging Logtalk source code (with this debugger) requires compiling
 source files using the `debug(on)` compiler flag. For example:
@@ -47,9 +67,6 @@ consult the debugging section of the User Manual.
 The `dump_trace.lgt` contains a simple code example on how to redirect
 a goal trace to a file.
 
-All source files are formatted using tabs (the recommended setting is
-a tab width equivalent to 4 spaces).
-
 
 Known issues
 ------------
@@ -70,3 +87,10 @@ clause.
 
 Line number spy points are currently not available when using XSB as the
 Prolog backend compiler.
+
+
+Other notes
+-----------
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).

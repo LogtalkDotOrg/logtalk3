@@ -17,11 +17,27 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+Overview
+--------
 
-This example contains simple wrappers for Prolog profiler tools, requiring
-either SICStus Prolog 4 or YAP. The example includes two files:
+This tool contains simple wrappers for selected Prolog profiler tools.
+
+
+Loading
+-------
+
+This tool can be loaded using the query:
+
+	| ?- logtalk_load(assertions(loader)).
+
+For sample queries, please see the `SCRIPT.txt` file.
+
+
+Supported backend Prolog compilers
+----------------------------------
+
+Currently, this tool suports the profilers provided with SICStus Prolog 4,
+SWI-Prolog, and YAP. The tool includes two files:
 
 - `yap_profiler.lgt`  
 	simple wrapper for the YAP count profiler 
@@ -50,6 +66,10 @@ have functors starting with `$lgt_`. Calls to predicates with functors
 such as `_def`, `_dcl`, or `_super`, used to implement inheritance, may
 be listed when your code uses dynamic binding.
 
+
+Compiling source code for profiling
+-----------------------------------
+
 In order to get user-level object and predicate names instead of compiler
 generated names when using the SWI-Prolog and YAP profilers you must set
 `code_prefix` flag to a value other than the default `$`. For example:
@@ -58,6 +78,10 @@ generated names when using the SWI-Prolog and YAP profilers you must set
 
 See also the `settings-sample` file for automating the necessary setup at
 Logtalk startup.
+
+
+Other notes
+-----------
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).

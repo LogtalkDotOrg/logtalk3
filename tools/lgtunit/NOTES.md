@@ -32,20 +32,31 @@ This framework can be used for testing both Logtalk and Prolog code. However,
 some features (notably, code coverage) are only available when testing Logtalk
 code.
 
-All source files are formatted using tabs (the recommended setting is a tab
-width equivalent to 4 spaces).
+The unit tests framework is inspired by the xUnit frameworks architecture and
+by the works of Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker
+(SWI-Prolog `plunit` package).
+
+
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/lgtunit/
+
+
+Loading
+-------
+
+This tool can be loaded using the query:
+
+	| ?- logtalk_load(lgtunit(loader)).
 
 
 Compiling and loading unit tests
 --------------------------------
 
 To compile and load this framework type:
-
-	| ?- logtalk_load(lgtunit(loader)).
-
-The unit tests framework is inspired by the xUnit frameworks architecture and
-by the works of Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker
-(SWI-Prolog `plunit` package).
 
 In order to write your own unit tests, define objects extending the `lgtunit`
 object:
@@ -363,3 +374,10 @@ Known issues
 
 Deterministic unit tests are currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers.
+
+
+Other notes
+-----------
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).

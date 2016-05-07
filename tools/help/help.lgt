@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2015/11/14,
+		date is 2016/05/07,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -326,6 +326,7 @@
 
 	built_in_non_terminal(call, N, '/manuals/refman/methods/', 'call_1.html') :-
 		between(1, 6, N).
+	built_in_non_terminal(eos, 0, '/manuals/refman/methods/', 'eos_0.html').
 	built_in_non_terminal(phrase, 1, '/manuals/refman/methods/', 'phrase_1.html').
 
 	built_in_non_terminal(message_tokens, 2, '/manuals/refman/methods/', 'message_tokens_2.html').

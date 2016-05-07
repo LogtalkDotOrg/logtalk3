@@ -29,11 +29,27 @@ throw an exception. For more information on these entities, open the
 `docs/tools.html` file in a web browser.
 
 
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/assertions/
+
+
+Loading
+-------
+
+This tool can be loaded using the query:
+
+	| ?- logtalk_load(assertions(loader)).
+
+
 Adding assertions to your source code
 -------------------------------------
 
-The `assertion/1` predicate takes a goal as argument. For example,
-assuming that you're writing a unit test:
+The `assertion/1` predicate takes a goal as argument. For example, assuming
+that you're writing a unit test:
 
 	test(assertions_1) :-
 		assertions::assertion(ground(x)),
@@ -118,3 +134,10 @@ and throw an error. For example:
 			throw(error(Message, _)).
 	
 	:- end_category.
+
+
+Other notes
+-----------
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).

@@ -33,6 +33,11 @@ Logtalk compiler and runtime
 is re-declared with a more restrictive scope where the overridden
 inherited declaration would still be found.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation for the developer tools.
+
 Tools
 -----
 

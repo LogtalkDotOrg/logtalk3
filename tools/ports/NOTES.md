@@ -23,14 +23,7 @@ Overview
 
 The `ports.lgt` source file defines a simple predicate execution box model
 port profiler tool (inspired by the ECLiPSe `port_profiler` tool). The box
-model is the same used in the debugger tool. This tool can be loaded using
-the query:
-
-	| ?- logtalk_load(ports(loader)).
-
-Note that this tool cannot be loaded at the same time as other tools (e.g.
-the debugger) that also provide a debug handler, which must be unique in a
-running session.
+model is the same used in the debugger tool.
 
 The Logtalk predicate execution box model is an extended version of the
 original Byrd's four port model. Besides the standard `call`, `exit`, `fail`,
@@ -41,8 +34,23 @@ It also distinguishes between deterministic exits (reported in the `exit`
 column in the profiling result tables) and exits that leave choice-points
 (reported in the `*exit` column).
 
-All source files are formatted using tabs (the recommended setting is a tab
-width equivalent to 4 spaces).
+
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/ports/
+
+
+Loading
+-------
+
+	| ?- logtalk_load(ports(loader)).
+
+Note that this tool cannot be loaded at the same time as other tools (e.g.
+the debugger) that also provide a debug handler, which must be unique in a
+running session.
 
 
 Compiling source files for port profiling
@@ -109,3 +117,10 @@ Known issues
 
 Determinism information is currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers.
+
+
+Other notes
+-----------
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).

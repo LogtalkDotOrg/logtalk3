@@ -17,17 +17,42 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this tool and for sample queries, please see the `SCRIPT.txt`
-file.
+Overview
+--------
 
-This tool provides basic on-line help for Logtalk when running in a
-limited set of operating-systems. Currently, support is limited to
-Linux, MacOS X, and Windows.
+This tool provides basic on-line help for Logtalk when running in a limited
+set of operating-systems. 
+
+
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/help/
+
+For sample queries, please see the `SCRIPT.txt` file.
+
+
+Loading
+-------
+
+	| ?- logtalk_load(help(loader)).
+
+
+Supported operating-systems
+---------------------------
+
+Currently, support is limited to Linux, MacOS X, and Windows.
 
 On Windows, the `start` command must be available. On Linux, the `xdg-open`
 command must be available. On MacOS X, the command `open` is used.
 
 This tool relies on the library portable operating-system access abstraction.
+
+
+Other notes
+-----------
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).

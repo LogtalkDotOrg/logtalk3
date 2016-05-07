@@ -33,6 +33,15 @@ Logtalk files by adding the object opening and closing directives to the Prolog
 files). The wrapper objects can then be loaded for testing and for use with
 other tools.
 
+
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the file:
+
+	docs/directory_index.html#tools/wrapper/
+
+
 Loading
 -------
 
@@ -40,10 +49,6 @@ This tool can be loaded using the query:
 
 	| ?- logtalk_load(wrapper(loader)).
 
-Documentation
--------------
-
-For the tool API, consult the `../../docs/wrapper_0.html` file.
 
 Workflows
 ---------
@@ -57,6 +62,7 @@ The typical porting workflow is simply:
 
 See the next section on how to customize the API calls for more flexible
 processing.
+
 
 Customization
 -------------
@@ -82,6 +88,7 @@ The API predicates also accept a set of options for customization:
 	list of sub-directory names to exclude (default is `[]`)
 - `include_wrapped_files(Boolean)`  
 	generate `include/1` directives for the wrapped Prolog source files (default is `true`)
+
 
 Current limitations
 -------------------
