@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/05/05,
+		date is 2016/05/07,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -74,6 +74,16 @@
 
 	libraries(Project, Libraries) :-
 		::libraries(Project, Libraries, []).
+
+	:- public(libraries/1).
+	:- mode(libraries(+list(atom)), one).
+	:- info(libraries/1, [
+		comment is 'Creates a diagram for a set of libraries using the default options. The prefix "libraries" is used for the diagram file name.',
+		argnames is ['Libraries']
+	]).
+
+	libraries(Libraries) :-
+		::libraries(libraries, Libraries, []).
 
 	:- public(all_libraries/1).
 	:- mode(all_libraries(+list(compound)), one).

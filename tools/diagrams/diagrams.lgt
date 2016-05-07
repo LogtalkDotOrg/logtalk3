@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/05/05,
+		date is 2016/05/07,
 		comment is 'Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
@@ -56,6 +56,16 @@
 
 	libraries(Project, Libraries) :-
 		::libraries(Project, Libraries, []).
+
+	:- public(libraries/1).
+	:- mode(libraries(+list(atom)), one).
+	:- info(libraries/1, [
+		comment is 'Creates  all supported diagrams for a set of libraries using the default options. The prefix "libraries" is used for the diagram file names.',
+		argnames is ['Libraries']
+	]).
+
+	libraries(Libraries) :-
+		::libraries(libraries, Libraries, []).
 
 	:- public(all_libraries/1).
 	:- mode(all_libraries(+list(compound)), one).
@@ -121,7 +131,7 @@
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
-		comment is 'all supported diagrams for a library using default options.',
+		comment is 'Creates all supported diagrams for a library using default options.',
 		argnames is ['Library']
 	]).
 
@@ -179,7 +189,7 @@
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Creates a diagram for a directory using default options. The name of the directory is used as a prefix for the diagram file names.',
+		comment is 'Creates all supported diagrams for a directory using default options. The name of the directory is used as a prefix for the diagram file names.',
 		argnames is ['Directory']
 	]).
 

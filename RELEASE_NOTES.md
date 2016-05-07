@@ -36,8 +36,8 @@ inherited declaration would still be found.
 Tools
 -----
 
-* ADDED: Support for `directory/1` and `files/1` predicates to the
-`diagrams` tool.
+* ADDED: Support for `libraries/1`, `directory/1`, and `files/1` predicates
+to the `diagrams` tool.
 
 * IMPROVED: The `wrapper` tool support for parsing `:- [File| Files]`
 directives by filtering out those files that are already being advised.
