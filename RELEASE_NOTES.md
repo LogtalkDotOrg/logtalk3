@@ -44,8 +44,8 @@ Tools
 * ADDED: Support for `libraries/1`, `directory/1`, and `files/1` predicates
 to the `diagrams` tool.
 
-* ADDED: `file_extensions/1` option for use with the `diagrams` tool file
-loading and file dependency diagrams.
+* ADDED: `file_extensions/1` option for use with the `diagrams` tool entity
+and file diagrams.
 
 * IMPROVED: The `wrapper` tool support for parsing `:- [File| Files]`
 directives by filtering out those files that are already being advised.

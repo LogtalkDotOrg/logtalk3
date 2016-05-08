@@ -12,13 +12,6 @@
 
 	:- uses(list, [member/2, memberchk/2]).
 
-	:- protected(filter_file_extension/3).
-	:- mode(filter_file_extension(+atom, +list(compound), -atom), one).
-	:- info(filter_file_extension/3, [
-		comment is 'Filters the file name extension depending on the file_extensions/1 option.',
-		argnames is ['Basename', 'Options', 'Name']
-	]).
-
 	:- protected(remember_included_file/1).
 	:- protected(remember_referenced_logtalk_file/1).
 	:- protected(remember_referenced_prolog_file/1).
@@ -66,7 +59,7 @@
 		Format::graph_header(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		filter_file_extension(Basename, Options, Name),
+		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
@@ -77,7 +70,7 @@
 	output_externals(Options) :-
 		::retract(referenced_prolog_file_(Path)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		filter_file_extension(Basename, Options, Name),
+		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
@@ -88,12 +81,5 @@
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
-
-	filter_file_extension(Basename, Options, Name) :-
-		memberchk(file_extensions(Boolean), Options),
-		(	Boolean == true ->
-			Name = Basename
-		;	os::decompose_file_name(Basename, _, Name, _)
-		).
 
 :- end_category.

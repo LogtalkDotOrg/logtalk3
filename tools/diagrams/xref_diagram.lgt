@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/02/29,
+		date is 2016/05/08,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -333,6 +333,8 @@
 	default_option(provide_relations(false)).
 	% by default, don't write cross-referencing links:
 	default_option(xref_relations(false)).
+	% by default, print file name extensions:
+	default_option(file_extensions(true)).
 	% by default, print entity relation labels:
 	default_option(relation_labels(true)).
 	% by default, write cross-referencing calls:

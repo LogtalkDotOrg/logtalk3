@@ -805,6 +805,20 @@
 		),
 		variables_to_underscore(Args).
 
+	:- protected(filter_file_extension/3).
+	:- mode(filter_file_extension(+atom, +list(compound), -atom), one).
+	:- info(filter_file_extension/3, [
+		comment is 'Filters the file name extension depending on the file_extensions/1 option.',
+		argnames is ['Basename', 'Options', 'Name']
+	]).
+
+	filter_file_extension(Basename, Options, Name) :-
+		memberchk(file_extensions(Boolean), Options),
+		(	Boolean == true ->
+			Name = Basename
+		;	os::decompose_file_name(Basename, _, Name, _)
+		).
+
 	:- protected(add_link_options/3).
 	:- mode(add_link_options(+atom, +list(compound), -list(compound)), one).
 	:- info(add_link_options/3, [

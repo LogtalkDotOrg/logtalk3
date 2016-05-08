@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/07/26,
+		date is 2016/05/08,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -39,6 +39,8 @@
 	default_option(interface(true)).
 	% by default, print file labels:
 	default_option(file_labels(true)).
+	% by default, print file name extensions:
+	default_option(file_extensions(true)).
 	% by default, write inheritance links:
 	default_option(inheritance_relations(true)).
 	% by default, don't write provide links:

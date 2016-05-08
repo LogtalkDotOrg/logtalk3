@@ -199,6 +199,8 @@ generated diagrams. For entity diagrams the options are:
 	print/omit public predicates (default depends on the specific diagram)
 - `file_labels(Boolean)`  
 	print/omit file labels (`true` or `false`; default is `true`)
+- `file_extensions(Boolean)`  
+	print/omit file name extensions (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `true`)
 - `node_type_captions(Boolean)`  

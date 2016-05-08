@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/07/26,
+		date is 2016/05/08,
 		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
 		parnames is ['Format']
 	]).
@@ -45,6 +45,8 @@
 	default_option(provide_relations(false)).
 	% by default, write cross-referencing links:
 	default_option(xref_relations(true)).
+	% by default, print file name extensions:
+	default_option(file_extensions(true)).
 	% by default, print entity relation labels:
 	default_option(relation_labels(true)).
 	% by default, don't write cross-referencing calls:

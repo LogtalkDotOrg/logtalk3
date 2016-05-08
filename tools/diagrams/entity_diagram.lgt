@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/02/29,
+		date is 2016/05/08,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -90,10 +90,11 @@
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
 			atom_concat(file_, File, Identifier),
+			^^filter_file_extension(Basename, Options, Name),
 			^^add_link_options(File, Options, GraphOptions),
-			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Name, file, GraphOptions),
 			process(Basename, Directory, Options),
-			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions)
+			Format::graph_footer(diagram_output_file, Identifier, Name, file, GraphOptions)
 		;	process(Basename, Directory, Options)
 		).
 
@@ -683,6 +684,8 @@
 	default_option(interface(true)).
 	% by default, print file labels:
 	default_option(file_labels(true)).
+	% by default, print file name extensions:
+	default_option(file_extensions(true)).
 	% by default, write inheritance links:
 	default_option(inheritance_relations(true)).
 	% by default, write provide links:
