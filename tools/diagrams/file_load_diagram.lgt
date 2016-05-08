@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/02/26,
+		date is 2016/05/08,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -33,11 +33,12 @@
 
 	% first, output the file node
 	output_file(Path, Basename, _Directory, Options) :-
+		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Relative, Basename, file, [Relative], file, LinkingOptions)
-		;	^^output_node(Relative, Basename, file, [], file, LinkingOptions)
+			^^output_node(Relative, Name, file, [Relative], file, LinkingOptions)
+		;	^^output_node(Relative, Name, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(Path),
 		fail.
@@ -83,6 +84,8 @@
 	default_option(omit_path_prefixes([])).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
+	% by default, print file name extensions:
+	default_option(file_extensions(true)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
 	% by default, don't print node type captions

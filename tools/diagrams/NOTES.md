@@ -235,7 +235,9 @@ For file diagrams the options are:
 - `date(Boolean)`  
 	print/omit current date and time (`true` or `false`; default is `true`)
 - `directory_paths(Boolean)`  
-	print/omit file directory paths (`true` or `false`; default is `true`)
+	print/omit file directory paths (`true` or `false`; default is `false`)
+- `file_extensions(Boolean)`  
+	print/omit file name extensions (`true` or `false`; default is `true`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `url_prefixes(FilePrefix, DocPrefix)`  
