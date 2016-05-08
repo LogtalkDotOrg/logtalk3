@@ -50,6 +50,9 @@ loading and file dependency diagrams.
 * IMPROVED: The `wrapper` tool support for parsing `:- [File| Files]`
 directives by filtering out those files that are already being advised.
 
+* FIXED: Bug in the `wrapper` tool where some predicate cross-referencing
+information would be ignored.
+
 Tests
 -----
 

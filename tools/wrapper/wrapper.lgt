@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2016/05/06,
+		date is 2016/05/08,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl''])',
@@ -371,10 +371,13 @@
 
 	generate_advise :-
 		file_being_advised_(_, _, _, Object),
+		predicates_called_but_not_defined(Object),
+		fail.
+	generate_advise :-
+		file_being_advised_(_, _, _, Object),
 		missing_public_directives_advise(Object),
 		missing_private_directives_advise(Object),
 		missing_predicate_directives_advise(Object),
-		predicates_called_but_not_defined(Object),
 		fail.
 	generate_advise.		
 
@@ -468,12 +471,11 @@
 		),
 		Directive =.. [(public), Predicates],
 		assertz(add_directive_(Object, Directive)),
-		!.
+		fail.
 	missing_public_directives_advise(_).
 
 	provides_used_predicate(Object, Predicate) :-
-		predicate_called_but_not_defined_(Other, Predicate),
-		Other \== Object,
+		object_predicate_called_(_, Object, Predicate),
 		object_property(Object, defines(Predicate, DefinitionProperties)),
 		\+ member(auxiliary, DefinitionProperties),
 		\+ (
@@ -492,7 +494,7 @@
 		),
 		Directive =.. [(private), Predicates],
 		assertz(add_directive_(Object, Directive)),
-		!.
+		fail.
 	missing_private_directives_advise(_).
 
 	internal_dynamic_predicate(Object, Predicate) :-
@@ -517,7 +519,7 @@
 	missing_predicate_directives_advise(_).
 
 	predicates_called_but_not_defined(Object) :-
-		retract(predicate_called_but_not_defined_(Object, Predicate)),
+		predicate_called_but_not_defined_(Object, Predicate),
 		(	missing_predicate_directive_(Object, (dynamic), Predicate) ->
 			true
 		;	missing_predicate_directive_(Object, (multifile), Predicate) ->
