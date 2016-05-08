@@ -35,7 +35,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the file:
 
-	docs/directory_index.html#tools/lgtdoc/
+[docs/directory_index.html#tools/lgtdoc/](http://logtalk.org/docs/directory_index.html#tools/lgtdoc/)
 
 
 Loading

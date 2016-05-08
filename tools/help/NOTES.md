@@ -29,7 +29,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the file:
 
-	docs/directory_index.html#tools/help/
+[docs/directory_index.html#tools/help/](http://logtalk.org/docs/directory_index.html#tools/help/)
 
 For sample queries, please see the `SCRIPT.txt` file.
 

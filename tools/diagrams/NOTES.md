@@ -32,7 +32,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the file:
 
-	docs/directory_index.html#tools/diagrams/
+[docs/directory_index.html#tools/diagrams/](http://logtalk.org/docs/directory_index.html#tools/diagrams/)
 
 For sample queries, please see the `SCRIPT.txt` file.
 
