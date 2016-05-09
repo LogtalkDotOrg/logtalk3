@@ -17,8 +17,27 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains several useful programming tools. To load the main tools,
-type:
+Available developer tools
+-------------------------
+
+The following developer tools are available, each one with its own
+`loader.lgt` loader file and `NOTES.md` documentation files:
+
+- assertions
+- debugger
+- diagrams
+- help
+- lgtdoc
+- lgtunit
+- ports
+- profiler
+- wrapper
+
+
+Loading the developer tools
+---------------------------
+
+To load the main developer tools, use the following goal:
 
 	| ?- logtalk_load(tools(loader)).
 
@@ -38,24 +57,19 @@ compiling and loading predicates. For example:
 
 	| ?- logtalk_load(lgtunit(loader)).
 
-Currently, the following tools are available, each one with its own
-`loader.lgt` and `NOTES.md` files:
 
-- assertions
-- debugger
-- diagrams
-- help
-- lgtdoc
-- lgtunit
-- ports
-- profiler
-- wrapper
-
-All source files are formatted using tabs (the recommended setting is a tab
-width equivalent to 4 spaces).
+Tools documentation
+-------------------
 
 Specific notes about each tool can be found in the corresponding `NOTES.md`
 files. Basic XHTML documentation about each tool can be found on the `docs`
 directory (open the `docs/index.html` file with your web browser). The
-documentation for these tools can be regenerated using the shell script
-`../scripts/update_html_docs.sh`.
+documentation for these tools can be regenerated using the shell scripts
+`../scripts/update_html_docs.sh` and `../scripts/update_svg_docs.sh`.
+
+
+Other notes
+-----------
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).
