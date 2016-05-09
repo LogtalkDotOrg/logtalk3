@@ -29,9 +29,13 @@ Logtalk compiler and runtime
 
 * ADDED: Support for `eos//0` as a built-in non-terminal.
 
-* FIXED: Bug in the `current_predicate/1` method when a predicate
-is re-declared with a more restrictive scope where the overridden
-inherited declaration would still be found.
+* FIXED: Bug in the `current_predicate/1` built-in method when a predicate is
+re-declared with a more restrictive scope where the overridden inherited
+declaration would still be found.
+
+* FIXED: Bug in the `predicate_property/2` built-in method where it would
+return a `no` meta-predicate template for a Logtalk built-in predicate that is
+not a meta-predicate (the atom `no` is part of the internal representation).
 
 Documentation
 -------------

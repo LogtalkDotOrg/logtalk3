@@ -2770,7 +2770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc3)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc4)).
 
 
 
@@ -3083,7 +3083,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_logtalk_built_in'((private), _).
 '$lgt_predicate_property_logtalk_built_in'(built_in, _).
 '$lgt_predicate_property_logtalk_built_in'(static, _).
-'$lgt_predicate_property_logtalk_built_in'(meta_predicate(Meta), Meta).
+'$lgt_predicate_property_logtalk_built_in'(meta_predicate(Meta), Meta) :-
+	Meta \== no.
 
 
 '$lgt_predicate_property_prolog_built_in'(foreign, Pred) :-
