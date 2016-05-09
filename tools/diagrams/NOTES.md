@@ -68,6 +68,7 @@ loaded indirectly by files external to the libraries being documented.
 
 The following library diagrams are supported:
 
+- library loading dependency diagrams which libraries load other libraries
 - library dependency diagrams showing which libraries contain entities with
 references to entities defined in other libraries
 
