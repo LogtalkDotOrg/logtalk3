@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2016/05/08,
+		date is 2016/05/09,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl''])',
@@ -189,6 +189,14 @@
 		argnames is ['Object', 'Line', 'Predicate']
 	]).
 
+	:- private(add_directive_before_entity_/2).
+	:- dynamic(add_directive_before_entity_/2).
+	:- mode(add_directive_before_entity_(?atom, ?predicate_indicator), zero_or_more).
+	:- info(add_directive_before_entity_/2, [
+		comment is 'Table of directives to be added before the entity opening directive.',
+		argnames is ['Object', 'Directive']
+	]).
+
 	:- private(add_directive_/2).
 	:- dynamic(add_directive_/2).
 	:- mode(add_directive_(?atom, ?predicate_indicator), zero_or_more).
@@ -341,6 +349,7 @@
 		retractall(dynamic_directive_(_,_,_)),
 		retractall(multifile_directive_(_,_,_)),
 		retractall(file_being_advised_(_, _, _, _)),
+		retractall(add_directive_before_entity_(_, _)),
 		retractall(add_directive_(_, _)),
 		retractall(add_directive_(_, _, _)),
 		retractall(remove_directive_(_, _)).
@@ -389,6 +398,12 @@
 	print_advise.
 
 	print_advise(Object) :-
+		\+ \+ add_directive_before_entity_(Object, _),
+		logtalk::print_message(information(code), wrapper, add_directives_before_entity),
+		add_directive_before_entity_(Object, Directive),
+		logtalk::print_message(information(code), wrapper, add_directive_before_entity(Directive)),
+		fail.
+	print_advise(Object) :-
 		\+ \+ add_directive_(Object, _),
 		logtalk::print_message(information(code), wrapper, add_directives),
 		add_directive_(Object, Directive),
@@ -436,6 +451,11 @@
 		fail.
 	save_wrapper_objects(_).
 
+	save_wrapper_object(Object, _, _) :-
+		\+ \+ add_directive_before_entity_(Object, _),
+		add_directive_before_entity_(Object, Directive),
+		logtalk::print_message(raw, wrapper, add_directive_before_entity(Directive)),
+		fail.
 	save_wrapper_object(Object, _, _) :-
 		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
 		fail.
@@ -668,7 +688,24 @@
 		fail.
 
 	% wrap set_prolog_flag/2 directives so that we don't get a compiler error
-	term_expansion((:- set_prolog_flag(Flag,Value)), [{:- set_prolog_flag(Flag,Value)}]).
+	term_expansion((:- set_prolog_flag(Flag,Value)), []) :-
+		logtalk_load_context(entity_identifier, Object),
+		assertz(add_directive_before_entity_(Object, set_prolog_flag(Flag,Value))),
+		assertz(remove_directive_(Object, set_prolog_flag(Flag,Value))).
+
+	% ensure that use_module/1-2 directives will load the module files
+	% instead of being just processed by the Logtalk compiler to find
+	% the module name and the exported/used predicates
+	term_expansion((:- use_module(File)), _) :-
+		logtalk_load_context(entity_identifier, Object),
+		assertz(add_directive_before_entity_(Object, use_module(File))),
+		{use_module(File)},
+		fail.
+	term_expansion((:- use_module(File,Exports)), _) :-
+		logtalk_load_context(entity_identifier, Object),
+		assertz(add_directive_before_entity_(Object, use_module(File,Exports))),
+		{use_module(File,Exports)},
+		fail.
 
 	% discard include/1 directives for files being processed
 	term_expansion((:- include(Include)), []) :-
@@ -703,7 +740,7 @@
 		),
 		!,
 		logtalk_load_context(entity_identifier, Object),
-		assertz(remove_directive_(Object, (:- [LoadedFile]))),
+		assertz(remove_directive_(Object, [LoadedFile])),
 		term_expansion_consult_directive(LoadedFiles, Expansion).
 	term_expansion_consult_directive([LoadedFile| LoadedFiles], [{:- [LoadedFile]}| Expansion]) :-
 		term_expansion_consult_directive(LoadedFiles, Expansion).
@@ -752,13 +789,19 @@
 		[':- public(~q).'-[Predicates], nl, nl].
 
 	message_tokens(add_directives) -->
-		['% Add the following directives:'-[], nl, nl].
+		['% Add the following entity directives:'-[], nl, nl].
+
+	message_tokens(add_directives_before_entity) -->
+		['% Add the following directives before the entity opening directive:'-[], nl, nl].
 
 	message_tokens(replace_directives) -->
 		['% Replace the following directives:'-[], nl, nl].
 
 	message_tokens(remove_directives) -->
 		['% Remove the following directives:'-[], nl, nl].
+
+	message_tokens(add_directive_before_entity(Directive)) -->
+		[':- ~q.'-[Directive], nl, nl].
 
 	message_tokens(add_directive(Directive)) -->
 		[':- ~q.'-[Directive], nl, nl].

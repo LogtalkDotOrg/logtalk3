@@ -51,6 +51,9 @@ to the `diagrams` tool.
 * ADDED: `file_extensions/1` option for use with the `diagrams` tool entity
 and file diagrams.
 
+* IMPROVED: The `wrapper` tool to give advise on `use_module/1-2`directives
+and better advise on `set_prolog_flag/2` directives.
+
 * IMPROVED: The `wrapper` tool support for parsing `:- [File| Files]`
 directives by filtering out those files that are already being advised.
 
