@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on February 12, 2016
+%  Last updated on May 9, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -168,6 +168,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 % '$lgt_prolog_database_predicate'(@callable)
 
 '$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(listing(_)).
 
 
 

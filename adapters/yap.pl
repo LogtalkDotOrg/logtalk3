@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on February 18, 2016
+%  Last updated on May 9, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -229,6 +229,7 @@
 '$lgt_prolog_database_predicate'(assert_static(_)).
 '$lgt_prolog_database_predicate'(asserta_static(_)).
 '$lgt_prolog_database_predicate'(assertz_static(_)).
+'$lgt_prolog_database_predicate'(listing(_)).
 
 
 

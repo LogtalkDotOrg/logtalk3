@@ -37,6 +37,12 @@ declaration would still be found.
 return a `no` meta-predicate template for a Logtalk built-in predicate that is
 not a meta-predicate (the atom `no` is part of the internal representation).
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Tag the de facto standard `listing/1` Prolog predicate as a database
+predicate for all supported backend Prolog compilers.
+
 Documentation
 -------------
 

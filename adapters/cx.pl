@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on March 15, 2016
+%  Last updated on May 9, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -154,6 +154,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_prolog_database_predicate'(@callable)
 
 '$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(listing(_)).
 
 
 

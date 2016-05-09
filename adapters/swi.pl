@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 3, 2016
+%  Last updated on May 9, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -218,6 +218,7 @@
 '$lgt_prolog_database_predicate'(asserta(_, _)).
 '$lgt_prolog_database_predicate'(assertz(_, _)).
 '$lgt_prolog_database_predicate'(clause(_, _, _)).
+'$lgt_prolog_database_predicate'(listing(_)).
 
 
 

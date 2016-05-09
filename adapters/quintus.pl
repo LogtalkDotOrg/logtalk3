@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 12, 2016
+%  Last updated on May 9, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -362,6 +362,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_database_predicate'(asserta(_, _)).
 '$lgt_prolog_database_predicate'(assertz(_, _)).
 '$lgt_prolog_database_predicate'(clause(_, _, _)).
+'$lgt_prolog_database_predicate'(listing(_)).
 
 
 
