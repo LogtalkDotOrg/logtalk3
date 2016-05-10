@@ -46,10 +46,9 @@
 
 <pre>call(Goal)
 call(Closure, Arg1, ...)
-call(Object::Closure, Arg1, ...)
-call(::Closure, Arg1, ...)</pre>
+</pre>
 <p>
-Calls a goal, which might be constructed by appending additional arguments to a closure. The upper limit for <code>N</code> depends on the upper limit for the arity of a compound term of the back-end Prolog compiler. This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object. When using a back-end Prolog compiler supporting a module system, calls in the format <code>call(Module:Closure, Arg1, ...)</code> may also be used.
+Calls a goal, which might be constructed by appending additional arguments to a closure. The upper limit for <code>N</code> depends on the upper limit for the arity of a compound term of the back-end Prolog compiler. This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object. The <code>Closure</code> argument can also be a lambda expression or a Logtalk control construct. When using a back-end Prolog compiler supporting a module system, calls in the format <code>call(Module:Closure, Arg1, ...)</code> may also be used.
 </p>
 
 <h4>Template and modes</h4>
@@ -92,7 +91,7 @@ call(+callable, ?term, ?term)
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 11, 2015</span>
+		<span>Last updated on: May 10, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="ignore_1.html">next</a></span><br/>
