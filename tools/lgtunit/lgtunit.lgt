@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016/05/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -72,6 +72,13 @@
 	:- info(benchmark/3, [
 		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds.',
 		argnames is ['Goal', 'Repetitions', 'Time']
+	]).
+
+	:- public(variant/2).
+	:- mode(variant(@term, @term), zero_or_one).
+	:- info(variant/2, [
+		comment is 'True when the two arguments are a variant of each other. I.e. if is possible to rename the term variables to make them identical. Useful for checking expected test results that contain variables.',
+		argnames is ['Term1', 'Term2']
 	]).
 
 	:- public(op(700, xfx, ('=~='))).
@@ -976,6 +983,16 @@
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
+
+	% definition taken from the SWI-Prolog documentation
+	variant(Term1, Term2) :-
+		% avoid trouble in any shared variables
+		copy_term(Term1, Term1Copy),
+		copy_term(Term2, Term2Copy),
+		% ground and compare the term copies
+		numbervars(Term1Copy, 0, N),
+		numbervars(Term2Copy, 0, N),
+		Term1Copy == Term2Copy.
 
 	benchmark(Goal, Time) :-
 		os::cpu_time(Time0),

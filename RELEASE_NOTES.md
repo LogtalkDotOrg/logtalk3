@@ -51,6 +51,9 @@ Documentation
 Tools
 -----
 
+* ADDED: Predicate `variant/2` to the `lgtunit` tool. Useful for checking
+expected test results that contain variables.
+
 * ADDED: Support for `libraries/1`, `directory/1`, and `files/1` predicates
 to the `diagrams` tool.
 
