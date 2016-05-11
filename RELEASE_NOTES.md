@@ -51,6 +51,9 @@ Documentation
 Tools
 -----
 
+* ADDED: Support to the `logtalk_tester.sh` automation script for specifying a
+path prefix to be suppressed when printing test suite and test results paths.
+
 * ADDED: Predicate `variant/2` to the `lgtunit` tool. Useful for checking
 expected test results that contain variables.
 

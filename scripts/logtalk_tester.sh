@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 24, 2016
+##   Last updated on May 11, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -84,13 +84,15 @@ format='default'
 format_goal=$format_default_goal
 # disable timeouts to maintain backward compatibility
 timeout=0
+prefix=""
 arguments=""
 
 run_tests() {
 	unit=$(dirname "$1")
+	unit_short=${unit#$prefix}
 	cd "$unit"
 	echo '*******************************************************************************'
-	echo "***** Testing $unit"
+	echo "***** Testing $unit_short"
 	name=$(echo "$unit"|sed 's|/|__|g')
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 		run_test "$name" "$format_goal,$tester_optimal_goal"
@@ -150,13 +152,14 @@ usage_help()
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
+	echo "  -s supress path prefix (default is $prefix)"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vp:m:f:d:t:a:h" option
+while getopts "vp:m:f:d:t:s:h" option
 do
 	case $option in
 		v) print_version;;
@@ -165,6 +168,7 @@ do
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
+		s) s_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -288,6 +292,10 @@ if [ "$t_arg" != "" ] ; then
 	timeout="$t_arg"
 fi
 
+if [ "$s_arg" != "" ] ; then
+	prefix="$s_arg"
+fi
+
 if [ "$timeout_command" == "" ] ; then
 	echo "Warning! Timeout support not available. The timeout option will be ignored."
 fi
@@ -329,19 +337,19 @@ grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
-grep -a 'timeout' *.errors | LC_ALL=C sed 's/timeout//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
+grep -a 'timeout' *.errors | LC_ALL=C sed 's/timeout//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g' | LC_ALL=C sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
-grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
+grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g' | LC_ALL=C sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
+grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g' | LC_ALL=C sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
+grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g' | LC_ALL=C sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** $timeouts test set timeouts"
 echo "***** $crashes test set crashes"

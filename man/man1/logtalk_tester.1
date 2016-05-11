@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "March 26, 2016" "Logtalk 3.04.2" "Logtalk Documentation"
+.TH logtalk_tester 1 "May 11, 2016" "Logtalk 3.04.3" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -16,6 +16,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I results
 .B ] [-t
 .I timeout
+.B ] [-s
+.I prefix
 .B ] [--
 .I arguments
 .B ]
@@ -44,6 +46,9 @@ Directory to store the test results. Default is the local \f2./logtalk_tester_lo
 .TP
 .BI \-t
 Timeout in seconds for running each test set. Default is \f20\f1; i.e. disabled.
+.TP
+.BI \-s
+Path prefix to supress when printing test suite and test result paths. Default is the empty string.
 .TP
 .BI \--
 Arguments to be passed to the integration script used to run the tests (no default).
