@@ -41,6 +41,10 @@ not a meta-predicate (the atom `no` is part of the internal representation).
 `logtalk_make/1` built-in predicate (the duplicates occur when there are two
 or more references to the same entity in the same clause).
 
+* FIXED: Compiler bug that would result in duplicated runtime clauses when a
+file or entity initialization goal creates dynamic entities. Thanks to Anne
+Ogborn for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 

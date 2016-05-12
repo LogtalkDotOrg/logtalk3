@@ -5541,6 +5541,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Options = [encoding(Encoding)| DefaultOptions]
 	;	Options = DefaultOptions
 	),
+	% clean all runtime clauses as an initialization goal in the intermediate Prolog file
+	% that is loaded next may create dynamic entities
+	'$lgt_clean_pp_runtime_clauses',
 	% load the generated intermediate Prolog file but cope with unexpected error or failure
 	(	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), Error, true) ->
 			(	var(Error) ->
