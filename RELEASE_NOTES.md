@@ -37,6 +37,10 @@ declaration would still be found.
 return a `no` meta-predicate template for a Logtalk built-in predicate that is
 not a meta-predicate (the atom `no` is part of the internal representation).
 
+* FIXED: Duplicated information when printing circular references using the
+`logtalk_make/1` built-in predicate (the duplicates occur when there are two
+or more references to the same entity in the same clause).
+
 Prolog adapter and integration files
 ------------------------------------
 

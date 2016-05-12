@@ -2337,7 +2337,8 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(comment(make), core, missing_entities_predicates_listed).
 
 '$lgt_logtalk_make'(circular) :-
-	findall(CircularReference, '$lgt_circular_reference'(CircularReference), CircularReferences),
+	findall(CircularReference, '$lgt_circular_reference'(CircularReference), CircularReferences0),
+	sort(CircularReferences0, CircularReferences),
 	'$lgt_print_message'(warning(make), core, circular_references(CircularReferences)),
 	'$lgt_print_message'(comment(make), core, circular_references_listed).
 
@@ -2770,7 +2771,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc4)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc5)).
 
 
 
