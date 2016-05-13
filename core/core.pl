@@ -9924,16 +9924,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, Pred, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, Pred, Lines),
 	TPred = '$lgt_metacall'(Pred, ExCtx).
 
 % compiler bypass control construct (opaque to cuts)
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, Pred, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, Pred, Lines),
 	(	var(Pred) ->
 		TPred = call(Pred)
 	;	Pred == ! ->
@@ -10188,10 +10188,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
 	(	var(QGoal) ->
 		% runtime meta-call
-		'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, QGoal, Lines),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, QGoal, Lines),
 		TPred = '$lgt_bagof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -10219,10 +10219,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
 	(	var(QGoal) ->
 		% runtime meta-call
-		'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, QGoal, Lines),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, QGoal, Lines),
 		TPred = '$lgt_setof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -11413,8 +11413,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, _, _, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, Closure, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, _, Mode, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, Closure, Lines),
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
@@ -11722,7 +11722,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % remember missing meta_predicate/1 directives
 
-'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, MetaArg, Lines) :-
+'$lgt_check_for_meta_predicate_directive'(runtime, _, _, _, _).
+
+'$lgt_check_for_meta_predicate_directive'(compile(_), Head, MetaVars, MetaArg, Lines) :-
 	'$lgt_term_template'(Head, Template),
 	(	'$lgt_pp_meta_predicate_'(Template, _) ->
 		true
