@@ -31,6 +31,8 @@ Logtalk compiler and runtime
 
 * ADDED: Detection and reporting of missing `meta_predicate/1` directives.
 
+* IMPROVED: Optimize the performance of calls to local meta-predicates.
+
 * FIXED: Bug in the `current_predicate/1` built-in method when a predicate is
 re-declared with a more restrictive scope where the overridden inherited
 declaration would still be found.

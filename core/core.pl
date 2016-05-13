@@ -2775,7 +2775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc5)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc6)).
 
 
 
@@ -11599,10 +11599,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, ExCtx, TPred, _, _),
+	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, ExCtx, TPred0, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
-	functor(TPred, TFunctor, TArity),
+	functor(TPred0, TFunctor, TArity),
+	(	'$lgt_pp_meta_predicate_'(Pred, Meta),
+		% local user-defined meta-predicate
+		Pred =.. [Functor| Args],
+		Meta =.. [Functor| MArgs],
+		'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs0) ->
+		'$lgt_append'(TArgs0, [ExCtx], TArgs),
+		TPred =.. [TFunctor| TArgs]
+	;	% non meta-predicate or runtime compilation of meta-arguments
+		TPred = TPred0		
+	),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
 
 % call to a declared but undefined predicate
