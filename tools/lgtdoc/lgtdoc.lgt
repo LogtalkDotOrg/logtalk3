@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 3.1,
+		version is 3.2,
 		author is 'Paulo Moura',
-		date is 2016/03/11,
+		date is 2016/05/13,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for directory, entity, and predicate indexes.'
 	]).
 
@@ -1219,6 +1219,8 @@
 	write_predicate_index(Options) :-
 		write_index(predicate, predicate_entity_, 'predicate_index.xml', Options).
 
+	:- meta_predicate(write_index(*, 4, *, *)).
+
 	write_index(Type, Functor, File, Options) :-
 		open(File, write, Stream),
 		memberchk(xml_spec_reference(XMLSRef), Options),
@@ -1258,6 +1260,8 @@
 	write_index_keys([Key| Keys], Functor, Stream) :-
 		write_index_key(Key, Functor, Stream),
 		write_index_keys(Keys, Functor, Stream).
+
+	:- meta_predicate(write_index_key(*, 4, *)).
 
 	write_index_key(Key, Functor, Stream) :-
 		setof(SecondarySortKey-Entity, PrimarySortKey^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity), SortedEntities),

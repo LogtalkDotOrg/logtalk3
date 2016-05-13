@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2016/05/10,
+		date is 2016/05/13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -473,6 +473,9 @@
 		run_tests([], _).
 
 	% test/3 dialect
+
+	:- meta_predicate(run_test(::, *, *)).
+
 	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
@@ -646,12 +649,16 @@
 		::note(Note),
 		print_message(information, lgtunit, tests_skipped(Object, Note)).
 
+	:- meta_predicate(run_test_condition(*, 0, *, *, *, *)).
+
 	run_test_condition(Test, Goal, File, Position, Note, Output) :-
 		% expected either success or failure; error means user error 
 		(	Goal == true ->
 			true
 		;	catch({Goal}, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,Output), fail))
 		).
+
+	:- meta_predicate(run_test_setup(*, 0, *, *, *, *)).
 
 	run_test_setup(Test, Goal, File, Position, Note, Output) :-
 		% expected success; failure or error means user error 
@@ -665,6 +672,8 @@
 		;	failed_test(Test, File, Position, step_failure(setup), Note, Output),
 			fail
 		).
+
+	:- meta_predicate(run_test_cleanup(*, 0, *, *, *)).
 
 	run_test_cleanup(Test, Goal, File, Position, Output) :-
 		% expected success; failure or error means user error 
@@ -1013,6 +1022,8 @@
 		once(true),
 		fail.
 	empty_loop(_).
+
+	:- meta_predicate(goal_loop(0, *)).
 
 	goal_loop(Goal, Repetitions) :-
 		repeat(Repetitions),

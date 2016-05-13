@@ -84,6 +84,9 @@ information would be ignored.
 commands to ensure that test results sorting is not affected by user locale
 settings.
 
+* FIXED: Added missing `meta_predicate/1` directives for local predicates of
+the `lgtdoc` and `lgtunit` tools.
+
 Tests
 -----
 
