@@ -81,6 +81,8 @@ to the `diagrams` tool.
 * ADDED: `file_extensions/1` option for use with the `diagrams` tool entity
 and file diagrams.
 
+* ADDED: Usage example for the `ports` tool.
+
 * IMPROVED: The `wrapper` tool to give advise on `use_module/1-2`directives
 and better advise on `set_prolog_flag/2` directives.
 
