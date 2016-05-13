@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on November 12, 2015
+%  Last updated on May 13, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -96,7 +96,7 @@
 :- multifile(logtalk_library_path/2).
 :- dynamic(logtalk_library_path/2).
 
-logtalk_library_path(my_project, '$HOME/my_project/').
+logtalk_library_path(my_project, home('my_project/')).
 logtalk_library_path(my_project_libraries, my_project('libraries/')).
 logtalk_library_path(my_project_examples, my_project('examples/')).
 */
