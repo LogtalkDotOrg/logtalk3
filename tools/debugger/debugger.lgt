@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2015/09/12,
+		date is 2016/05/13,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -384,6 +384,8 @@
 
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
+
+	:- meta_predicate(debug_handler(::, *)).
 
 	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
 		invocation_number_(N),
