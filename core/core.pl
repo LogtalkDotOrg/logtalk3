@@ -369,10 +369,14 @@
 :- dynamic('$lgt_pp_non_portable_predicate_'/2).
 % '$lgt_pp_non_portable_function_'(Function, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/2).
+
+% '$lgt_pp_missing_meta_predicate_directive_'(Head, Lines)
+:- dynamic('$lgt_pp_missing_meta_predicate_directive_'/2).
 % '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).
 % '$lgt_pp_missing_discontiguous_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/2).
+
 % '$lgt_pp_previous_predicate_'(Head, Mode)
 :- dynamic('$lgt_pp_previous_predicate_'/2).
 
@@ -6810,6 +6814,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
+	retractall('$lgt_pp_missing_meta_predicate_directive_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
@@ -9919,21 +9924,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, Pred, Lines),
 	TPred = '$lgt_metacall'(Pred, ExCtx).
 
 % compiler bypass control construct (opaque to cuts)
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, Pred, Lines),
 	(	var(Pred) ->
 		TPred = call(Pred)
 	;	Pred == ! ->
 		TPred = true
 	;	'$lgt_must_be'(callable, Pred),
 		TPred = Pred
-	),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	).
 
 % goal expansion (only applied at compile time)
 
@@ -10181,9 +10188,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
 	(	var(QGoal) ->
 		% runtime meta-call
+		'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, QGoal, Lines),
 		TPred = '$lgt_bagof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -10211,9 +10219,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, _, _, Lines),	
 	(	var(QGoal) ->
 		% runtime meta-call
+		'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, QGoal, Lines),
 		TPred = '$lgt_setof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -11404,6 +11413,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, _, _, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, Closure, Lines),
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
@@ -11695,6 +11706,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property'('*->'(_, _), built_in) ->
 		Goal = (Goal0, true)
 	;	Goal = Goal0
+	).
+
+
+
+% remember missing meta_predicate/1 directives
+
+'$lgt_check_for_meta_predicate_directive'(Head, MetaVars, MetaArg, Lines) :-
+	'$lgt_term_template'(Head, Template),
+	(	'$lgt_pp_meta_predicate_'(Template, _) ->
+		true
+	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _) ->
+		true
+	;	var(MetaArg),
+		MetaVars == [],
+		term_variables(Head, HeadVars),
+		'$lgt_member_var'(MetaArg, HeadVars) ->
+		assertz('$lgt_pp_missing_meta_predicate_directive_'(Template, Lines))
+	;	true
 	).
 
 
@@ -15741,6 +15770,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% but missing corresponding public /1 directive
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
+	fail.
+
+
+% reports missing meta_predicate/1 directives for meta-predicates
+
+'$lgt_report_missing_directives'(Type, Entity, Path) :-
+	'$lgt_pp_missing_meta_predicate_directive_'(Head, Lines),
+	functor(Head, Functor, Arity),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (meta_predicate), Functor/Arity)),
 	fail.
 
 % reports missing dynamic/1 directives
