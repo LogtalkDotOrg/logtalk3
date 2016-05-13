@@ -60,6 +60,12 @@ Documentation
 
 * IMPROVED: Documentation for the developer tools.
 
+Library
+-------
+
+* FIXED: Added missing `meta_predicate/1` directives for local predicates of
+the some library entities.
+
 Tools
 -----
 

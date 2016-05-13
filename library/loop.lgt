@@ -23,9 +23,9 @@
 	implements(loopp)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2008/2/16,
+		date is 2016/05/13,
 		comment is 'Loop control structures predicates.'
 	]).
 
@@ -46,6 +46,7 @@
 	foreach(Count, List, Goal) :-
 		foreach_inv(List, Count, Goal).
 
+	:- meta_predicate(foreach_inv(*, *, 0)).
 	foreach_inv([], _, _).
 	foreach_inv([Element| List], Count, Goal) :-
 		\+ \+ (Count = Element, call(Goal)),

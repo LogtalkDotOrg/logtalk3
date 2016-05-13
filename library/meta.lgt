@@ -23,8 +23,8 @@
 	implements(metap)).
 
 	:- info([
-		version is 5.0,
-		date is 2015/12/02,
+		version is 5.1,
+		date is 2016/05/13,
 		author is 'Paulo Moura',
 		comment is 'Some useful meta-predicates.'
 	]).
@@ -120,7 +120,7 @@
 	partition(Closure, List, Included, Excluded) :-
 		partition_(List, Closure, Included, Excluded).
 
-	:- meta_predicate(partition(*, 3, *, *, *, *)).
+	:- meta_predicate(partition_(*, 3, *, *, *, *)).
 	partition_([], _, _, [], [], []).
 	partition_([X| Xs], Closure, Y, Less, Equal, Greater) :-
 		call(Closure, Order, X, Y),

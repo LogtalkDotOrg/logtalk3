@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2010/04/2,
+		date is 2016/05/13,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.'
 	]).
 
@@ -275,6 +275,7 @@
 		compare(Order, Key0, Key),
 		apply_(Order, Key0, Value0, Left, Right, Key, Closure, NewTree).
 
+	:- meta_predicate(apply_(*, *, *, *, *, *, 2, *)).
 	apply_(=,    _, Value0, Left, Right, Key, Closure, t(Left,Key,Value,Right)) :-
 		call(Closure, Key-Value0, Key-Value).
 	apply_(>, Key0, Value0, Left, Right, Key, Closure, t(NewLeft,Key0,Value0,Right)) :-

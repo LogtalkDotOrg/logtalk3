@@ -32,9 +32,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
-		date is 2010/05/08,
+		date is 2016/05/13,
 		comment is 'Red-Black trees. Uses standard order to compare keys.'
 	]).
 
@@ -201,6 +201,7 @@
 		compare(Order, Key0, Key),
 		apply_(Order, Left, Value0, Right, Key, Closure, t(NewLeft,Value,NewRight)).
 
+	:- meta_predicate(apply_(*, *, *, *, *, 2, *)).
 	apply_(=, Left, Value0, Right, Key, Closure, t(Left,Value,Right)) :-
 		call(Closure, Key-Value0, Key-Value).
 	apply_(>, Left, Value0, Right, Key, Closure, t(NewLeft,Value0,Right)) :-
@@ -528,7 +529,7 @@
 		as_list(Left, [Key-Value| Pairs1], Pairs),
 		as_list(Right, Pairs0, Pairs1).
 
-	:- meta_predicate(map(*, 2, *, *)).
+	:- meta_predicate(map_(*, 2, *, *)).
 	map_(black('',_,_,''), _, Nil, Nil) :-
 		!.
 	map_(red(Left,Key,Value,Right), Closure, red(NewLeft,Key,NewValue,NewRight), Nil) :-
