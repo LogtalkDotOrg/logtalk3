@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.13,
+		version is 2.14,
 		author is 'Paulo Moura',
-		date is 2016/05/13,
+		date is 2016/05/14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -1225,16 +1225,16 @@
 		open(Path, read, ReadStream, [type(text)]),
 		set_input(ReadStream).
 
-	check_text_input(Alias, Atom) :-
-		get_text_contents(Alias, Contents),
+	check_text_input(Alias, Expected) :-
+		get_text_contents(Alias, Expected, Contents),
 		clean_text_input,
-		Atom == Contents.
+		Expected == Contents.
 
-	check_text_input(Atom) :-
+	check_text_input(Expected) :-
 		current_input(Stream),
-		get_text_contents(Stream, Contents),
+		get_text_contents(Stream, Expected, Contents),
 		clean_text_input,
-		Atom == Contents.
+		Expected == Contents.
 
 	clean_text_input :-
 		clean_file('test_input.text', _).
@@ -1257,16 +1257,16 @@
 		open(Path, read, ReadStream, [type(binary)]),
 		set_input(ReadStream).
 
-	check_binary_input(Alias, Bytes) :-
-		get_binary_contents(Alias, Contents),
+	check_binary_input(Alias, Expected) :-
+		get_binary_contents(Alias, Expected, Contents),
 		clean_binary_input,
-		Bytes == Contents.
+		Expected == Contents.
 
-	check_binary_input(Bytes) :-
+	check_binary_input(Expected) :-
 		current_input(Stream),
-		get_binary_contents(Stream, Contents),
+		get_binary_contents(Stream, Expected, Contents),
 		clean_binary_input,
-		Bytes == Contents.
+		Expected == Contents.
 
 	clean_binary_input :-
 		clean_file('test_input.binary', _).
@@ -1284,22 +1284,22 @@
 		write_text_contents(Stream, Contents),
 		set_output(Stream).
 
-	check_text_output(Alias, Atom) :-
+	check_text_output(Alias, Expected) :-
 		close(Alias),
 		os::expand_path('test_output.text', Path),
 		open(Path, read, InputStream),
-		get_text_contents(InputStream, Contents),
+		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
-		Atom == Contents.
+		Expected == Contents.
 
-	check_text_output(Atom) :-
+	check_text_output(Expected) :-
 		current_output(OutputStream),
 		close(OutputStream),
 		os::expand_path('test_output.text', Path),
 		open(Path, read, InputStream),
-		get_text_contents(InputStream, Contents),
+		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
-		Atom == Contents.
+		Expected == Contents.
 
 	clean_text_output :-
 		clean_file('test_output.text', _).
@@ -1315,22 +1315,22 @@
 		write_binary_contents(Bytes, Stream),
 		set_output(Stream).
 
-	check_binary_output(Alias, Bytes) :-
+	check_binary_output(Alias, Expected) :-
 		close(Alias),
 		os::expand_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
-		get_binary_contents(InputStream, Contents),
+		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
-		Bytes == Contents.
+		Expected == Contents.
 
-	check_binary_output(Bytes) :-
+	check_binary_output(Expected) :-
 		current_output(OutputStream),
 		close(OutputStream),
 		os::expand_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
-		get_binary_contents(InputStream, Contents),
+		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
-		Bytes == Contents.
+		Expected == Contents.
 
 	clean_binary_output :-
 		clean_file('test_output.binary', _).
@@ -1349,17 +1349,17 @@
 		write_binary_contents(Bytes, Stream),
 		close(Stream).
 
-	check_text_file(File, ExpectedContents) :-
+	check_text_file(File, Expected) :-
 		os::expand_path(File, Path),
 		open(Path, read, Stream),
-		get_text_contents(Stream, ActualContents),
-		ExpectedContents == ActualContents.
+		get_text_contents(Stream, Expected, Contents),
+		Expected == Contents.
 
-	check_binary_file(File, ExpectedContents) :-
+	check_binary_file(File, Expected) :-
 		os::expand_path(File, Path),
 		open(Path, read, Stream, [type(binary)]),
-		get_binary_contents(Stream, ActualContents),
-		ExpectedContents == ActualContents.
+		get_binary_contents(Stream, Expected, Contents),
+		Expected == Contents.
 
 	% auxiliary predicates for testing input/output predicates
 
@@ -1398,9 +1398,11 @@
 		write(Stream, Atom),
 		write_text_contents_list(Atoms, Stream).
 
-	get_text_contents(Stream, Atom) :-
-		get_chars(Stream, Chars, 1000),
-		atom_chars(Atom, Chars).
+	get_text_contents(Stream, Expected, Contents) :-
+		atom_length(Expected, Length),
+		Limit is Length + 1,
+		get_chars(Stream, Chars, Limit),
+		atom_chars(Contents, Chars).
 
 	get_chars(Stream, Chars, Countdown) :-
 		get_char(Stream, Char),
@@ -1419,8 +1421,10 @@
 		put_byte(Stream, Byte),
 		write_binary_contents(Bytes, Stream).
 
-	get_binary_contents(Stream, Bytes) :-
-		get_bytes(Stream, Bytes, 1000).
+	get_binary_contents(Stream, Expected, Bytes) :-
+		length(Expected, Length),
+		Limit is Length + 1,
+		get_bytes(Stream, Bytes, Limit).
 
 	get_bytes(Stream, Bytes, Countdown) :-
 		get_byte(Stream, Byte),
