@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/11,
+		date is 2016/05/14,
 		comment is 'Unit tests for the ISO Prolog standard once/1 built-in predicate.'
 	]).
 
@@ -60,7 +60,8 @@
 
 	throws(eddbali_once_1_06, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		G = 3, {once(G)}.
+		three(G),
+		{once(G)}.
 
 	throws(eddbali_once_1_07, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
@@ -70,5 +71,7 @@
 	% auxiliary predicate used to delay errors to runtime
 
 	variable(_).
+
+	three(3).
 
 :- end_object.
