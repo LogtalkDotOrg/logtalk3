@@ -9924,18 +9924,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, Pred, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines),
 	TPred = '$lgt_metacall'(Pred, ExCtx).
 
 % compiler bypass control construct (opaque to cuts)
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, Pred, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
 	(	var(Pred) ->
-		TPred = call(Pred)
+		TPred = call(Pred),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
 	;	Pred == ! ->
 		TPred = true
 	;	'$lgt_must_be'(callable, Pred),
@@ -10188,10 +10188,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
 	(	var(QGoal) ->
 		% runtime meta-call
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, QGoal, Lines),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal, Lines),
 		TPred = '$lgt_bagof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -10219,10 +10219,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, ExCtx, Mode, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
 	(	var(QGoal) ->
 		% runtime meta-call
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, QGoal, Lines),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal, Lines),
 		TPred = '$lgt_setof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -11413,8 +11413,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, MetaVars, _, _, Mode, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, MetaVars, Closure, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, Mode, _, Lines),	
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Closure, Lines),
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
@@ -11722,16 +11722,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % remember missing meta_predicate/1 directives
 
-'$lgt_check_for_meta_predicate_directive'(runtime, _, _, _, _).
+'$lgt_check_for_meta_predicate_directive'(runtime, _, _, _).
 
-'$lgt_check_for_meta_predicate_directive'(compile(_), Head, MetaVars, MetaArg, Lines) :-
+'$lgt_check_for_meta_predicate_directive'(compile(_), Head, MetaArg, Lines) :-
 	'$lgt_term_template'(Head, Template),
 	(	'$lgt_pp_meta_predicate_'(Template, _) ->
 		true
 	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _) ->
 		true
 	;	var(MetaArg),
-		MetaVars == [],
 		term_variables(Head, HeadVars),
 		'$lgt_member_var'(MetaArg, HeadVars) ->
 		assertz('$lgt_pp_missing_meta_predicate_directive_'(Template, Lines))
@@ -12437,8 +12436,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_object'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, Events, NewCtx), Events, Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
-	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
+	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
+	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines),
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines).
 
 % broadcasting control constructs
 
@@ -12710,8 +12710,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(Pred, '$lgt_send_to_self'(Pred, This, NewCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
-	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
+	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
+	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines),
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines).
 
 % broadcasting control constructs
 
@@ -12905,6 +12906,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_super_call'(Pred, TPred, Ctx) :-
 	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 	!,
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _),
 		\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
 		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _),
@@ -12914,9 +12916,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	var(Pred) ->
 		% translation performed at runtime
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
+		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
 	;	callable(Pred) ->
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_obj_related_entities_are_static',
 			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
@@ -12933,12 +12935,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% super calls from predicates defined in complementing categories
 	% lookup inherited definitions in the complemented object ancestors
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	var(Pred) ->
 		TPred = (
 			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 			'$lgt_obj_super_call'(Super, Pred, ExCtx)
-		)
+		),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
 	;	callable(Pred) ->
 		TPred = (
 			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
@@ -12954,8 +12957,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(existence_error(ancestor, category))
 	;	var(Pred) ->
 		% translation performed at runtime
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		(	'$lgt_compiler_flag'(optimize, on),
