@@ -13451,7 +13451,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Goal == !,
 	!.
 '$lgt_remove_redundant_calls'(call(Goal), SGoal) :-
-	nonvar(Goal),
+	callable(Goal),
 	functor(Goal, Functor, _),
 	sub_atom(Functor, 0, _, _, '$lgt_'),	% e.g. '$lgt_metacall'
 	!,
