@@ -89,8 +89,8 @@ and file diagrams.
 * IMPROVED: The `lgtunit` tool no longer uses an hard-coded limit for the
 predicates that check expected text/binary input/output. Although the limit
 was chosen to ensure portability (as some backend Prolog systems have small
-hard-coded limit for atom and list sizes), it also limited usage when using
-backend Prolog system with no or more generous limits.
+atom length limits), it also limited usage when using backend Prolog system
+with no or more generous limits.
 
 * IMPROVED: The `wrapper` tool to give advise on `use_module/1-2`directives
 and better advise on `set_prolog_flag/2` directives.
