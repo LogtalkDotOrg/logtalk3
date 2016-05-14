@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 12, 2016
+##   Last updated on May 14, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -115,10 +115,10 @@ run_tests() {
 		grep -a '(not applicable)' "$results/$name.results" | sed 's/(/*****         (/'
 	elif [ $tests_exit -eq 124 ] ; then
 		echo "*****         timeout"
-		echo "timeout" > "$results/$name.errors"
+		echo "LOGTALK_TIMEOUT" > "$results/$name.errors"
 	else
 		echo "*****         crash"
-		echo "crash" > "$results/$name.errors"
+		echo "LOGTALK_CRASH" > "$results/$name.errors"
 	fi
 }
 
@@ -319,8 +319,8 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
 
 cd "$results"
-timeouts=$(grep -a 'timeout' *.errors | wc -l | sed 's/ //g')
-crashes=$(grep -a 'crash' *.errors | wc -l | sed 's/ //g')
+timeouts=$(grep -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
+crashes=$(grep -a 'LOGTALK_CRASH' *.errors | wc -l | sed 's/ //g')
 skipped=$(grep -a ': skipped' *.results | wc -l | sed 's/ //g')
 passed=$(grep -a ': success' *.results | wc -l | sed 's/ //g')
 failed=$(grep -a ': failure' *.results | wc -l | sed 's/ //g')
@@ -339,11 +339,11 @@ grep -a -h '*     ' *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
-grep -a 'timeout' *.errors | sed 's/timeout//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -a 'LOGTALK_TIMEOUT' *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
-grep -a 'crash' *.errors | sed 's/crash//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -a 'LOGTALK_CRASH' *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"

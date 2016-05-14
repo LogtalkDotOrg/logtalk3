@@ -105,6 +105,9 @@ information would be ignored.
 commands to ensure that test results sorting is not affected by user locale
 settings.
 
+* FIXED: The `logtalk_tester.sh` automation script to avoid false positives
+when detecting test suite timeouts and crashes.
+
 * FIXED: Added missing `meta_predicate/1` directives for local predicates of
 the `debugger`, `lgtdoc`, and `lgtunit` tools.
 
