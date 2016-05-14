@@ -15798,8 +15798,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, Lines),
-	% detected dynamic predicate but check for out-of-place dynamic/1 directive
-	\+ '$lgt_pp_dynamic_'(Head),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
@@ -15809,8 +15807,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Head, Lines),
-	% detected discontiguous predicate but check for out-of-place discontiguous/1 directive
-	\+ '$lgt_pp_discontiguous_'(Head),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
