@@ -2775,7 +2775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc6)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc7)).
 
 
 
@@ -13522,6 +13522,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
+
+'$lgt_remove_redundant_calls'((Goal1, Goal2), (Goal1, SGoal2)) :-
+	var(Goal1),
+	!,
+	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
+
+'$lgt_remove_redundant_calls'((Goal1, Goal2), (SGoal1, Goal2)) :-
+	var(Goal2),
+	!,
+	'$lgt_remove_redundant_calls'(Goal1, SGoal1).
 
 '$lgt_remove_redundant_calls'((Var1 = Var2a, Var2b = Var3, Goal), SGoal) :-
 	Var2a == Var2b,

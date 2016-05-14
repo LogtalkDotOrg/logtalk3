@@ -49,6 +49,9 @@ or more references to the same entity in the same clause).
 file or entity initialization goal creates dynamic entities. Thanks to Anne
 Ogborn for the bug report.
 
+* FIXED: Compiler optimization bug that could convert a naked meta-variable
+into a call to `true/0`.
+
 Prolog adapter and integration files
 ------------------------------------
 
