@@ -8904,9 +8904,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TAlias =.. [_| Args],
 	% allow for runtime use by adding a local definition that calls the remote definition
 	(	'$lgt_compiler_flag'(optimize, on),
-		'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+		'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
+		'$lgt_comp_ctx'(NewCtx, TAlias, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(aux), Stack, Lines),
 		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, Call, Ctx) ->
+		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, Call, NewCtx) ->
 		'$lgt_add_uses_def_clause'(TAlias, This, Call)
 	;	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)])
 	),
@@ -11724,7 +11725,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_meta_predicate_directive'(runtime, _, _, _).
 
-'$lgt_check_for_meta_predicate_directive'(compile(_), Head, MetaArg, Lines) :-
+'$lgt_check_for_meta_predicate_directive'(compile(aux), _, _, _) :-
+	!.
+
+'$lgt_check_for_meta_predicate_directive'(compile(user), Head, MetaArg, Lines) :-
 	'$lgt_term_template'(Head, Template),
 	(	'$lgt_pp_meta_predicate_'(Template, _) ->
 		true
