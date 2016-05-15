@@ -101,6 +101,10 @@ directives by filtering out those files that are already being advised.
 * FIXED: Bug in the `wrapper` tool where some predicate cross-referencing
 information would be ignored.
 
+* FIXED: The `logtalk_tester.sh` automation script to workaround bugs in
+some backend Prolog compilers handling of standard input that could result
+in failures to recursively process all sub-directories.
+
 * FIXED: The `logtalk_tester.sh` automation script to use `LC_ALL=C` for all
 commands to ensure that test results sorting is not affected by user locale
 settings.

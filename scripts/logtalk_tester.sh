@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.10"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
@@ -120,16 +120,18 @@ run_tests() {
 		echo "*****         crash"
 		echo "LOGTALK_CRASH" > "$results/$name.errors"
 	fi
+	return 0
 }
 
 run_test() {
 	name="$1"
 	goal="$2"
 	if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
-		$timeout_command $timeout $logtalk_call "$goal" -- $arguments > "$results/$name.results" 2> "$results/$name.errors"
+		$timeout_command $timeout $logtalk_call "$goal" -- $arguments < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
 	else
-		$logtalk_call "$goal" -- $arguments > "$results/$name.results" 2> "$results/$name.errors"
+		$logtalk_call "$goal" -- $arguments < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
 	fi
+	return $?
 }
 
 usage_help()
@@ -316,7 +318,9 @@ $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
 
-find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
+find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do
+	run_tests "$file"
+done
 
 cd "$results"
 timeouts=$(grep -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
