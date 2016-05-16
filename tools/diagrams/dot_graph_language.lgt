@@ -204,7 +204,7 @@
 	node_shape_style_color(public_predicate, ellipse, filled, springgreen).
 	node_shape_style_color(protected_predicate, ellipse, filled, yellow).
 	node_shape_style_color(private_predicate, ellipse, filled, indianred1).
-	node_shape_style_color(local_predicate, ellipse, filled, grey).
+	node_shape_style_color(local_predicate, ellipse, filled, beige).
 	node_shape_style_color(multifile_predicate, ellipse, filled, skyblue).
 	node_shape_style_color(exported_predicate, ellipse, filled, springgreen).
 	% external predicates to the entities being documented
