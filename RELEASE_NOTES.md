@@ -112,6 +112,9 @@ settings.
 * FIXED: The `logtalk_tester.sh` automation script to avoid false positives
 when detecting test suite timeouts and crashes.
 
+* FIXED: Bug in the `diagrams` tool where nodes for auxiliary predicate could
+be generated for entity predicate cross-referencing diagrams.
+
 * FIXED: Added missing `meta_predicate/1` directives for local predicates of
 the `debugger`, `lgtdoc`, and `lgtunit` tools.
 
