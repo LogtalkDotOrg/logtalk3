@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/05/07,
+		date is 2016/05/16,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -48,7 +48,7 @@
 		atom_concat(libraries_, Project, Identifier),
 		Format::graph_header(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		output_libraries(Libraries, Format, Options),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		Format::file_footer(diagram_output_file, Project, Options),
@@ -146,7 +146,7 @@
 		add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
 		::output_rlibrary(Library, Path, GraphOptions),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
 		Format::file_footer(diagram_output_file, Library, Options),
@@ -181,7 +181,7 @@
 		add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Path, GraphOptions),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
 		Format::file_footer(diagram_output_file, Library, Options),
@@ -234,7 +234,7 @@
 		Format::graph_header(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
 		normalize_directory_paths(Directories, NormalizedDirectories),
 		output_directories(NormalizedDirectories, Format, Options),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
 		Format::file_footer(diagram_output_file, Project, Options),
@@ -283,11 +283,11 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		Format::file_header(diagram_output_file, Project, Options),
 		atom_concat(directory_, Project, Identifier),
-		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
 		normalize_directory_paths([Directory], [NormalizedDirectory]),
+		add_link_options(NormalizedDirectory, Options, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
 		::output_library(Project, NormalizedDirectory, GraphOptions),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
 		Format::file_footer(diagram_output_file, Project, Options),
@@ -332,7 +332,7 @@
 		atom_concat(files_, Project, Identifier),
 		Format::graph_header(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		::output_files(Files, Options),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		Format::file_footer(diagram_output_file, Project, Options),
@@ -379,7 +379,7 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		Format::file_header(diagram_output_file, files, Options),
 		output_all_files(Options),
-		output_externals(Options),
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::file_footer(diagram_output_file, files, Options),
 		close(Stream).
@@ -471,6 +471,8 @@
 		),
 		fix_options(Options, FixedOptions).
 
+	fix_option(path_url_prefixes(Directory, CodePrefix, DocPrefix), path_url_prefixes(NormalizedDirectory, CodePrefix, DocPrefix)) :-
+		normalize_directory_paths([Directory], [NormalizedDirectory]).
 	fix_option(omit_path_prefixes(Prefixes), omit_path_prefixes(NormalizedPrefixes)) :-
 		normalize_directory_paths(Prefixes, NormalizedPrefixes).
 	fix_option(output_directory(Directory), output_directory(NormalizedDirectory)) :-
@@ -536,14 +538,8 @@
 		argnames is ['Options']
 	]).
 
-	output_externals(Options) :-
-		% as externals can be defined in several places, use the code
-		% prefix, if defined, for code URL links
-		(	memberchk(url_prefixes(CodePrefix, DocPrefix), Options) ->
-			ExternalsOptions = [urls(CodePrefix,DocPrefix)| Options]
-		;	ExternalsOptions = Options
-		),
-		::output_externals(ExternalsOptions).
+	% by default, don't output externals
+	output_externals(_).
 
 	:- protected(reset/0).
 	:- mode(reset, one).
@@ -826,6 +822,12 @@
 		argnames is ['Path', 'Options', 'GraphOptions']
 	]).
 
+	add_link_options(Path, Options, LinkingOptions) :-
+		member(path_url_prefixes(PathPrefix, CodePrefix, DocPrefix), Options),
+		atom_concat(PathPrefix, PathSuffix, Path),
+		!,
+		atom_concat(CodePrefix, PathSuffix, CodeURL),
+		LinkingOptions = [urls(CodeURL,DocPrefix), tooltip(PathSuffix)| Options].
 	add_link_options(Path, Options, LinkingOptions) :-
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		memberchk(url_prefixes(CodePrefix, DocPrefix), Options),

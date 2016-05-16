@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/05/08,
+		date is 2016/05/16,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -56,7 +56,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external files)', external, [urls('',''), tooltip('(external files)')| Options]),
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		^^filter_file_extension(Basename, Options, Name),
@@ -80,6 +80,6 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external files)', external, [urls('',''), tooltip('(external files)')| Options]).
 
 :- end_category.

@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2016/05/16,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -112,9 +112,14 @@
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
-		(	memberchk(urls(URL, _), Options), URL \== '' ->
+		(	memberchk(urls(URL, _), Options) ->
 			write_key_value_nl(Stream, 'URL', URL),
-			write_key_value_nl(Stream, tooltip, URL)
+			(	URL \== '' ->
+				write_key_value_nl(Stream, tooltip, URL)
+			;	member(tooltip(Tooltip), Options) ->
+				write_key_value_nl(Stream, tooltip, Tooltip)
+			;	true
+			)
 		;	member(tooltip(Tooltip), Options) ->
 			write_key_value_nl(Stream, tooltip, Tooltip)
 		;	true

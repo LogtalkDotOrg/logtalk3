@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/05/08,
+		date is 2016/05/16,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -69,13 +69,7 @@
 		^^add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 		process(Basename, Directory, GraphOptions),
-		% as externals can be defined in several places, use the code
-		% prefix, if defined, for code URL links
-		(	member(url_prefixes(CodePrefix, DocPrefix), Options) ->
-			ExternalsOptions = [urls(CodePrefix,DocPrefix)| Options]
-		;	ExternalsOptions = Options
-		),
-		output_externals(ExternalsOptions),
+		output_externals(Options),
 		^^output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 		Format::file_footer(diagram_output_file, Basename, Options),
@@ -123,26 +117,26 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external entities)', external, [urls('',''), tooltip('(external entities)')| Options]),
 		retract(referenced_entity_(Entity)),
-		add_entity_documentation_url(Options, logtalk, Entity, EntityOptions),
+		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
 		retract(referenced_module_(Module)),
-		add_entity_documentation_url(Options, module, Module, EntityOptions),
+		add_external_entity_documentation_url(module, Module, Options, EntityOptions),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external entities)', external, [urls('',''), tooltip('(external entities)')| Options]).
 
 	process(Basename, Directory, Options) :-
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		protocol_property(Protocol, file(Basename, Directory)),
 		\+ member(Protocol, ExcludedEntities),
-		add_entity_documentation_url(Options, protocol, Protocol, ProtocolOptions),
+		add_entity_documentation_url(logtalk, Protocol, Options, ProtocolOptions),
 		output_protocol(Protocol, ProtocolOptions),
 		assertz(included_entity_(Protocol)),
 		fail.
@@ -150,7 +144,7 @@
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, file(Basename, Directory)),
 		\+ member(Object, ExcludedEntities),
-		add_entity_documentation_url(Options, object, Object, ObjectOptions),
+		add_entity_documentation_url(logtalk, Object, Options, ObjectOptions),
 		output_object(Object, ObjectOptions),
 		assertz(included_entity_(Object)),
 		fail.
@@ -158,7 +152,7 @@
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, file(Basename, Directory)),
 		\+ member(Category, ExcludedEntities),
-		add_entity_documentation_url(Options, category, Category, CategoryOptions),
+		add_entity_documentation_url(logtalk, Category, Options, CategoryOptions),
 		output_category(Category, CategoryOptions),
 		assertz(included_entity_(Category)),
 		fail.
@@ -167,34 +161,57 @@
 		atom_concat(Directory, Basename, Path),
 		modules_diagram_support::module_property(Module, file(Path)),
 		\+ member(Module, ExcludedEntities),
-		add_entity_documentation_url(Options, module, Module, ModuleOptions),
+		add_entity_documentation_url(module, Module, Options, ModuleOptions),
 		output_module(Module, ModuleOptions),
 		assertz(included_entity_(Module)),
 		fail.
 	process(_, _, _).
 
-	add_entity_documentation_url(Options, module, Entity, EntityOptions) :-
-		!,
-		(	member(urls(CodePrefix, DocPrefix), Options) ->
-			atom_concat(DocPrefix, Entity, URL0),
+	add_entity_documentation_url(Kind, Entity, Options, EntityOptions) :-
+		(	member(urls(CodeURL, DocPrefix), Options) ->
+			entity_to_html_name(Kind, Entity, Name),
+			atom_concat(DocPrefix, Name, DocURL0),
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
-			atom_concat(URL0, Suffix, URL),
-			EntityOptions = [urls(CodePrefix, URL)| Options]
+			atom_concat(DocURL0, Suffix, DocURL),
+			EntityOptions = [urls(CodeURL, DocURL)| Options]
 		;	EntityOptions = Options
 		).
-	add_entity_documentation_url(Options, _, Entity, EntityOptions) :-
-		(	member(urls(CodePrefix, DocPrefix), Options) ->
-			functor(Entity, Functor, Arity),
-			atom_concat(DocPrefix, Functor, URL0),
-			atom_concat(URL0, '_', URL1),
-			number_codes(Arity, ArityCodes),
-			atom_codes(ArityAtom, ArityCodes),
-			atom_concat(URL1, ArityAtom, URL2),
+
+	add_external_entity_documentation_url(module, Entity, Options, EntityOptions) :-
+		(	modules_diagram_support::module_property(Entity, file(Path)),
+			member(path_url_prefixes(Prefix, CodeURL, DocPrefix), Options),
+			atom_concat(Prefix, _, Path) ->
+			entity_to_html_name(module, Entity, Name),
+			atom_concat(DocPrefix, Name, DocURL0),
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
-			atom_concat(URL2, Suffix, URL),
-			EntityOptions = [urls(CodePrefix, URL)| Options]
+			atom_concat(DocURL0, Suffix, DocURL),
+			EntityOptions = [urls(CodeURL, DocURL)| Options]
 		;	EntityOptions = Options
 		).
+	add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions) :-
+		(	current_object(Entity) ->
+			object_property(Entity, file(Path))
+		;	current_category(Entity) ->
+			category_property(Entity, file(Path))
+		;	protocol_property(Entity, file(Path))
+		),
+		(	member(path_url_prefixes(Prefix, CodeURL, DocPrefix), Options),
+			atom_concat(Prefix, _, Path) ->
+			entity_to_html_name(logtalk, Entity, Name),
+			atom_concat(DocPrefix, Name, DocURL0),
+			memberchk(entity_url_suffix_target(Suffix, _), Options),
+			atom_concat(DocURL0, Suffix, DocURL),
+			EntityOptions = [urls(CodeURL, DocURL)| Options]
+		;	EntityOptions = Options
+		).
+
+	entity_to_html_name(module, Entity, Entity).
+	entity_to_html_name(logtalk, Entity, Name) :-
+		functor(Entity, Functor, Arity),
+		atom_concat(Functor, '_', Name0),
+		number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom, ArityCodes),
+		atom_concat(Name0, ArityAtom, Name).
 
 	output_protocol(Protocol, Options) :-
 		^^ground_entity_identifier(protocol, Protocol, Name),

@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/03/01,
+		date is 2016/05/16,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -63,7 +63,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [urls('',''), tooltip('(external libraries)')| Options]),
 		::retract(referenced_logtalk_library_(Library, Directory)),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
@@ -85,7 +85,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [urls('',''), tooltip('(external libraries)')| Options]).
 
 	add_library_documentation_url(logtalk, Options, Directory, NodeOptions) :-
 		(	member(urls(CodePrefix, DocPrefix), Options) ->

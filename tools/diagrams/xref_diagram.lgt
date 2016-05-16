@@ -70,7 +70,7 @@
 		atom_concat(Directory, Basename, Path),
 		^^add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
-		process(Kind, Entity, Options),
+		process(Kind, Entity, GraphOptions),
 		output_external_predicates(Options),
 		^^output_edges(Options),
 		Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
@@ -195,41 +195,52 @@
 	scope_predicate_kind(protected, protected_predicate).
 	scope_predicate_kind(private, private_predicate).
 
+	% multifile predicate
 	add_predicate_documentation_url(Options, _, Entity::Functor/Arity, PredicateOptions) :-
 		!,
 		add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions).
+	% multifile non-terminal
 	add_predicate_documentation_url(Options, _, Entity::Functor//Arity, PredicateOptions) :-
 		!,
 		add_predicate_documentation_url(Options, Entity, Functor//Arity, PredicateOptions).
+	% local predicate or non-terminal
 	add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions) :-
-		!,
-		(	member(url_prefixes(CodePrefix, DocPrefix), Options) ->
+		(	(	(	current_object(Entity) ->
+					object_property(Entity, file(Path))
+				;	current_category(Entity) ->
+					object_property(Entity, file(Path))
+				;	protocol_property(Entity, file(Path))
+				),
+				member(path_url_prefixes(Prefix, CodePrefix, DocPrefix), Options),
+				atom_concat(Prefix, _, Path) ->
+				true
+			;	member(url_prefixes(CodePrefix, DocPrefix), Options)
+			) ->
 			functor(Entity, EntityFunctor, EntityArity),
-			atom_concat(DocPrefix, EntityFunctor, URL0),
-			atom_concat(URL0, '_', URL1),
+			atom_concat(DocPrefix, EntityFunctor, DocURL0),
+			atom_concat(DocURL0, '_', DocURL1),
 			number_codes(EntityArity, EntityArityCodes),
 			atom_codes(EntityArityAtom, EntityArityCodes),
-			atom_concat(URL1, EntityArityAtom, URL2),
+			atom_concat(DocURL1, EntityArityAtom, DocURL2),
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
 			(	Target == '' ->
-				atom_concat(URL2, Suffix, URL)
-			;	atom_concat(URL2, Suffix, URL3),
-				atom_concat(URL3, Target, URL4),
+				atom_concat(DocURL2, Suffix, DocURL)
+			;	atom_concat(DocURL2, Suffix, DocURL3),
+				atom_concat(DocURL3, Target, DocURL4),
 				(	Predicate = Functor/Arity ->
-					atom_concat(URL4, Functor, URL5),
-					atom_concat(URL5, '/', URL6)
+					atom_concat(DocURL4, Functor, DocURL5),
+					atom_concat(DocURL5, '/', DocURL6)
 				;	Predicate = Functor//Arity,
-					atom_concat(URL4, Functor, URL5),
-					atom_concat(URL5, '//', URL6)
+					atom_concat(DocURL4, Functor, DocURL5),
+					atom_concat(DocURL5, '//', DocURL6)
 				),
 				number_codes(Arity, ArityCodes),
 				atom_codes(ArityAtom, ArityCodes),
-				atom_concat(URL6, ArityAtom, URL)
+				atom_concat(DocURL6, ArityAtom, DocURL)
 			),
-			PredicateOptions = [urls(CodePrefix, URL)| Options]
+			PredicateOptions = [urls(CodePrefix, DocURL)| Options]
 		;	PredicateOptions = Options
 		).
-	add_predicate_documentation_url(Options, _, Options).
 
 	calls_local_predicate(module, Entity, Caller, Callee) :-
 		!,
@@ -304,10 +315,11 @@
 
 	output_external_predicates(Options) :-
 		^^format_object(Format),
-		Format::graph_header(diagram_output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external predicates)', external, [urls('',''), tooltip('(external predicates)')| Options]),
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
-		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, Options),
+		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
+		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
 	output_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
@@ -319,7 +331,7 @@
 		fail.
 	output_external_predicates(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(diagram_output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external predicates)', external, [urls('',''), tooltip('(external predicates)')| Options]).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).

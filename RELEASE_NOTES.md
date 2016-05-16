@@ -78,6 +78,11 @@ path prefix to be suppressed when printing test suite and test results paths.
 * ADDED: Predicate `variant/2` to the `lgtunit` tool. Useful for checking
 expected test results that contain variables.
 
+* ADDED: Option `path_url_prefixes/3` to the `diagrams` tool to allow
+specifying code and documentation URL prefixes per path prefix. This option
+enables generating links (e.g. in SVG diagrams) to third-party libraries and
+other external resources.
+
 * ADDED: Support for `libraries/1`, `directory/1`, and `files/1` predicates
 to the `diagrams` tool.
 
@@ -89,7 +94,7 @@ and file diagrams.
 * IMPROVED: The `lgtunit` tool no longer uses an hard-coded limit for the
 predicates that check expected text/binary input/output. Although the limit
 was chosen to ensure portability (as some backend Prolog systems have small
-atom length limits), it also limited usage when using backend Prolog system
+atom length limits), it also limited usage when using backend Prolog systems
 with no or more generous limits.
 
 * IMPROVED: The `wrapper` tool to give advise on `use_module/1-2`directives
@@ -114,6 +119,9 @@ when detecting test suite timeouts and crashes.
 
 * FIXED: Bug in the `diagrams` tool where nodes for auxiliary predicate could
 be generated for entity predicate cross-referencing diagrams.
+
+* FIXED: The `diagrams` tool to generate correct links for external resources.
+Requires use of the new `path_url_prefixes/3` option.
 
 * FIXED: Added missing `meta_predicate/1` directives for local predicates of
 the `debugger`, `lgtdoc`, and `lgtunit` tools.

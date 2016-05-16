@@ -222,12 +222,14 @@ generated diagrams. For entity diagrams the options are:
 	list of sub-libraries to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
-- `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
-- `url_prefixes(CodePrefix, DocPrefix)`  
-	code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; defaults are `''`)
+- `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
+	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
+- `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
+	default code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; defaults are `''`)
 - `entity_url_suffix_target(Suffix, Target)`  
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
+- `omit_path_prefixes(Prefixes)`  
+	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 
 For file diagrams the options are:
 
@@ -241,10 +243,12 @@ For file diagrams the options are:
 	print/omit file directory paths (`true` or `false`; default is `false`)
 - `file_extensions(Boolean)`  
 	print/omit file name extensions (`true` or `false`; default is `true`)
+- `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
+	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
+- `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
+	default URL code and documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
-- `url_prefixes(FilePrefix, DocPrefix)`  
-	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `node_type_captions(Boolean)`  
