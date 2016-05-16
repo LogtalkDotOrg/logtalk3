@@ -114,7 +114,7 @@
 		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
 		assertz(included_predicate_(Predicate)),
 		fail.
-	process(Kind, Entity, _Options) :-
+	process(Kind, Entity, Options) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, defines(Predicate0, Properties)),
 		\+ entity_property(Kind, Entity, declares(Predicate0, _)),
@@ -123,7 +123,8 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		^^output_node(Predicate, Predicate, '', [], predicate, []),
+		memberchk(node_type_captions(Boolean), Options),
+		^^output_node(Predicate, Predicate, local, [], local_predicate, [node_type_captions(Boolean)]),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -131,7 +132,8 @@
 		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
 		\+ member(auxiliary, Properties),
 		(	Kind == module ->
-			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, []),
+			memberchk(node_type_captions(Boolean), Options),
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, [node_type_captions(Boolean)]),
 			assertz(included_predicate_(':'(To,Predicate)))
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
 			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
@@ -321,13 +323,15 @@
 		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
 		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
-	output_external_predicates(_) :-
+	output_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
-		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, []),
+		memberchk(node_type_captions(Boolean), Options),
+		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
-	output_external_predicates(_) :-
+	output_external_predicates(Options) :-
 		retract(referenced_predicate_(Predicate)),
-		^^output_node(Predicate, Predicate, external, [], external_predicate, []),
+		memberchk(node_type_captions(Boolean), Options),
+		^^output_node(Predicate, Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
 	output_external_predicates(Options) :-
 		^^format_object(Format),

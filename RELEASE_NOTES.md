@@ -123,6 +123,9 @@ be generated for entity predicate cross-referencing diagrams.
 * FIXED: The `diagrams` tool to generate correct links for external resources.
 Requires use of the new `path_url_prefixes/3` option.
 
+* FIXED: Bug in the `diagrams` tool where some predicate node captions would
+be missing when using the option `node_type_captions(true)`.
+
 * FIXED: Added missing `meta_predicate/1` directives for local predicates of
 the `debugger`, `lgtdoc`, and `lgtunit` tools.
 
