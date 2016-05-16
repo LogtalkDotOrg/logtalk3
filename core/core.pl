@@ -2775,7 +2775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 4, 3, rc7)).
+'$lgt_version_data'(logtalk(3, 4, 3, rc8)).
 
 
 
@@ -8903,15 +8903,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
 	% allow for runtime use by adding a local definition that calls the remote definition
-	(	'$lgt_compiler_flag'(optimize, on),
-		'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
-		'$lgt_comp_ctx'(NewCtx, TAlias, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(aux), Stack, Lines),
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, Call, NewCtx) ->
-		'$lgt_add_uses_def_clause'(TAlias, This, Call)
-	;	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)])
-	),
+	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)]),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	% ensure that the this uses/2 directive is found when looking for senders of this message
 	'$lgt_add_referenced_object_message'(Obj, TOriginal, TAlias, TAlias, Lines),
 	assertz('$lgt_pp_uses_predicate_'(Obj, TOriginal, TAlias)).
 
@@ -9021,6 +9015,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% allow for runtime use by adding a local definition that calls the remote definition
 	'$lgt_compile_aux_clauses'([(TAlias :- ':'(Module, TOriginal))]),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	% ensure that the this use_module/2 directive is found when looking for callers of this module predicate
 	'$lgt_add_referenced_module_predicate'(Module, TOriginal, TAlias, TAlias, Lines),
 	assertz('$lgt_pp_use_module_predicate_'(Module, TOriginal, TAlias)).
 
@@ -14133,22 +14128,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_unknown_modules'(_, _, _).
-
-
-
-% '$lgt_add_uses_def_clause'(+callable, +callable)
-%
-% adds a "def clause" for predicates specified in uses/2 directives
-% when static binding is possible
-
-'$lgt_add_uses_def_clause'(Head, This, THead) :-
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
-	),
-	Clause =.. [Def, Head, ExCtx, THead],
-	assertz('$lgt_pp_def_'(Clause)).
 
 
 
