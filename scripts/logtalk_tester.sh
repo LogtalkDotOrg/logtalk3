@@ -229,10 +229,6 @@ elif [ "$p_arg" == "swipack" ] ; then
 	prolog='SWI-Prolog'
 	logtalk=swipl
 	logtalk_call="$logtalk -g"
-	versions_goal="use_module(library(logtalk)),$versions_goal"
-	tester_optimal_goal="use_module(library(logtalk)),$tester_optimal_goal"
-	tester_normal_goal="use_module(library(logtalk)),$tester_normal_goal"
-	tester_debug_goal="use_module(library(logtalk)),$tester_debug_goal"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk=xsblgt$extension
@@ -294,6 +290,11 @@ elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknow format: $f_arg"
 	usage_help
 	exit 1
+fi
+
+if [ "$p_arg" == "swipack" ] ; then
+	format_goal="use_module(library(logtalk)),$format_goal"
+	echo $format_goal
 fi
 
 if [ "$d_arg" != "" ] ; then
