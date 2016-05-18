@@ -24,7 +24,11 @@ RELEASE NOTES
 3.05.1 - June ??, 2016
 ======================
 
+Tools
+-----
 
+* IMPROVED: The `logtalk_tester.sh` automation script now also prints the total
+number of tests sets and the number of completed tests sets.
 
 
 3.05.0 - May 16, 2016

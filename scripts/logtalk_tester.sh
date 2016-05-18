@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 14, 2016
+##   Last updated on May 18, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.11"
+	echo "$(basename "$0") 0.12"
 	exit 0
 }
 
@@ -318,13 +318,16 @@ $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
 
-find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do
+testsets=0
+while read file; do
+	((testsets++))
 	run_tests "$file"
-done
+done < <(find "$base" -name "tester.lgt" -or -name "tester.logtalk")
 
 cd "$results"
 timeouts=$(grep -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
 crashes=$(grep -a 'LOGTALK_CRASH' *.errors | wc -l | sed 's/ //g')
+testsetruns=$(($testsets-$timeouts-$crashes))
 skipped=$(grep -a ': skipped' *.results | wc -l | sed 's/ //g')
 passed=$(grep -a ': success' *.results | wc -l | sed 's/ //g')
 failed=$(grep -a ': failure' *.results | wc -l | sed 's/ //g')
@@ -357,8 +360,7 @@ echo "***** Failed tests"
 echo "*******************************************************************************"
 grep -a ': failure' *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
-echo "***** $timeouts test set timeouts"
-echo "***** $crashes test set crashes"
+echo "***** $testsets test sets: $testsetruns completed, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
 
