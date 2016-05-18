@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.12"
+	echo "$(basename "$0") 0.13"
 	exit 0
 }
 
@@ -149,7 +149,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
@@ -225,6 +225,14 @@ elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
 	logtalk_call="$logtalk -g"
+elif [ "$p_arg" == "swipack" ] ; then
+	prolog='SWI-Prolog'
+	logtalk=swipl
+	logtalk_call="$logtalk -g"
+	versions_goal="use_module(library(logtalk)),$versions_goal"
+	tester_optimal_goal="use_module(library(logtalk)),$tester_optimal_goal"
+	tester_normal_goal="use_module(library(logtalk)),$tester_normal_goal"
+	tester_debug_goal="use_module(library(logtalk)),$tester_debug_goal"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk=xsblgt$extension

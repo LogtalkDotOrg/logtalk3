@@ -27,6 +27,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: Support for using SWI-Prolog with the Logtalk pack installed as the
+backend compiler to the `logtalk_tester.sh` automation script.
+
 * IMPROVED: The `logtalk_tester.sh` automation script now also prints the total
 number of tests sets and the number of completed tests sets.
 
