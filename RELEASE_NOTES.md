@@ -21,8 +21,14 @@ RELEASE NOTES
 =============
 
 
-3.05.0 - May 16, 2016
+3.05.1 - June ??, 2016
 ======================
+
+
+
+
+3.05.0 - May 16, 2016
+=====================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -103,7 +109,7 @@ and better advise on `set_prolog_flag/2` directives.
 * IMPROVED: The `wrapper` tool support for parsing `:- [File| Files]`
 directives by filtering out those files that are already being advised.
 
-* FIXED: Bug in the `wrapper` tool where some predicate cross-referencing
+* FIXED: Bug in the `wrapper` tool where some predicates cross-referencing
 information would be ignored.
 
 * FIXED: The `logtalk_tester.sh` automation script to workaround bugs in
