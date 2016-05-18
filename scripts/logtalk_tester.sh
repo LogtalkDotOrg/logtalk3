@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -115,10 +115,10 @@ run_tests() {
 		grep -a '(not applicable)' "$results/$name.results" | sed 's/(/*****         (/'
 	elif [ $tests_exit -eq 124 ] ; then
 		echo "*****         timeout"
-		echo "LOGTALK_TIMEOUT" > "$results/$name.errors"
+		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
 	else
 		echo "*****         crash"
-		echo "LOGTALK_CRASH" > "$results/$name.errors"
+		echo "LOGTALK_CRASH" >> "$results/$name.errors"
 	fi
 	return 0
 }

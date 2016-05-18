@@ -33,6 +33,9 @@ backend compiler to the `logtalk_tester.sh` automation script.
 * IMPROVED: The `logtalk_tester.sh` automation script now also prints the total
 number of tests sets and the number of completed tests sets.
 
+* FIXED: The `logtalk_tester.sh` automation script to not override any existing
+log messages when tagging a test suite as a timeout or a crash.
+
 
 3.05.0 - May 16, 2016
 =====================
