@@ -43,9 +43,9 @@
 	imports(read_file)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2013/05/04,
+		date is 2016/05/18,
 		comment is 'Simple parser of PDDL 3.0 files.'
 	]).
 
@@ -196,6 +196,7 @@
 
 	function_type(number) --> [number].
 
+	:- meta_non_terminal(emptyOr(0)).
 	emptyOr(_) --> ['(', ')'].
 	emptyOr(W) --> call(W).
 
@@ -446,6 +447,7 @@
 
 	% BNF description include operator <term>+ to mark zero or more replacements.
 	% This DCG extension to overcome this.
+	:- meta_non_terminal(oneOrMore(1, *)).
 	oneOrMore(W, [R| Rs]) --> call(W, R), oneOrMore(W, Rs).
 	oneOrMore(_, [])      --> [].
 

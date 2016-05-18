@@ -23,6 +23,7 @@
 	% predicates for testing of runtime bound messages
 
 	:- public(rt/1).
+	:- meta_predicate(rt(::)).
 	rt(Goal) :-
 		::Goal.
 

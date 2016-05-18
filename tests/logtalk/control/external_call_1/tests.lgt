@@ -21,6 +21,7 @@
 :- object(external_call_test_object).
 
 	:- public(p/1).
+	:- meta_predicate(p(::)).
 	p(Goal) :-
 		{Goal}.
 

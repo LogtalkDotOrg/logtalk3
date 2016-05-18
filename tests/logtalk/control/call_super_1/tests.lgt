@@ -40,6 +40,7 @@
 :- object(call_super_test_object_2,
 	extends(call_super_test_object_1)).
 
+	:- meta_predicate(p(::)).
 	p(Goal) :-
 		^^Goal.
 

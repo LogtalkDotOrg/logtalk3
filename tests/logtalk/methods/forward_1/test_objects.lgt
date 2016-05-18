@@ -33,6 +33,7 @@
 :- object(test_object_2,
 	implements(forwarding)).
 
+	:- meta_predicate(forward(::)).
 	forward(Message) :-
 		[test_object_1::Message].
 

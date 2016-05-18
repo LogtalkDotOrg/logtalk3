@@ -21,8 +21,8 @@
 :- object(faa).
 
 	:- info([
-		version is 1.0,
-		date is 2004/5/10,
+		version is 1.1,
+		date is 2016/05/18,
 		author is 'Paulo Moura',
 		comment is 'Adaptation of the command language DCG example from the Amzi! Prolog manual.'
 	]).
@@ -47,6 +47,7 @@
 			do_command(Command),
 		Command == exit.
 
+	:- meta_predicate(do_command(0)).
 	do_command(Command) :-
 		write('enter command> '),
 		read_tokens(Tokens),
