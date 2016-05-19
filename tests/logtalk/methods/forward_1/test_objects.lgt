@@ -43,6 +43,7 @@
 :- object(test_object_3,
 	implements(forwarding)).
 
+	:- meta_predicate(forward(::)).
 	forward(Message) :-
 		call([test_object_1::Message], bar).
 

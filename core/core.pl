@@ -11409,7 +11409,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, Mode, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Closure, Lines),
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
@@ -11729,9 +11729,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _) ->
 		true
-	;	var(MetaArg),
+	;	term_variables(MetaArg, MetaArgVars),
 		term_variables(Head, HeadVars),
-		'$lgt_member_var'(MetaArg, HeadVars) ->
+		'$lgt_member'(MetaArgVar, MetaArgVars),
+		'$lgt_member_var'(MetaArgVar, HeadVars) ->
 		assertz('$lgt_pp_missing_meta_predicate_directive_'(Template, Lines))
 	;	true
 	).

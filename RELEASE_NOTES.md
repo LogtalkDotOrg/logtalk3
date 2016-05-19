@@ -24,11 +24,16 @@ RELEASE NOTES
 3.05.1 - June ??, 2016
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Detection of missing `meta_predicate/1` directives.
+
 Tools
 -----
 
-* ADDED: Support for using SWI-Prolog with the Logtalk pack installed as the
-backend compiler to the `logtalk_tester.sh` automation script.
+* ADDED: Support for using the Logtalk pack for SWI-Prolog as a backend option
+to the `logtalk_tester.sh` automation script.
 
 * IMPROVED: The `logtalk_tester.sh` automation script now also prints the total
 number of tests sets and the number of completed tests sets.
