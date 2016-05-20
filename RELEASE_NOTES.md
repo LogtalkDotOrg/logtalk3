@@ -29,6 +29,12 @@ Logtalk compiler and runtime
 
 * IMPROVED: Detection of missing `meta_predicate/1` directives.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: SWI-Prolog adapter file to enable tabling support when using version
+7.3.21 or later.
+
 Tools
 -----
 
@@ -45,6 +51,9 @@ Examples
 --------
 
 * UPDATED: The `jpl` example with some benchmarks.
+
+* UPDATED: Tabling example to run using SWI-Prolog as the backend compiler when
+using version 7.3.21 or later.
 
 
 3.05.0 - May 16, 2016

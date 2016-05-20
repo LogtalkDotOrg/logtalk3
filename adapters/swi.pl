@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 9, 2016
+%  Last updated on May 20, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -268,7 +268,12 @@
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, full).
-'$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(tabling, Tabling) :-
+	current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
+	(	(Major,Minor,Patch) @>= (7,3,21) ->
+		Tabling = supported
+	;	Tabling = unsupported
+	).
 '$lgt_prolog_feature'(threads, Threads) :-
 	(	current_prolog_flag(threads, true) ->
 		Threads = supported
@@ -674,6 +679,16 @@
 '$lgt_swi_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
+
+'$lgt_swi_directive_expansion'(table(F/A), {table(TF/TA)}) :-
+	current_module(tabling),
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
+
+'$lgt_swi_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
+	current_module(tabling),
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'([F/A| PIs], _, TPIs).
 
 
 '$lgt_swi_unify_head_thead_args'([], [_]).

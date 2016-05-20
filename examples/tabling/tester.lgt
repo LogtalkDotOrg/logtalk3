@@ -20,6 +20,10 @@
 
 :- if(current_logtalk_flag(tabling, supported)).
 
+	:- if(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(tabling)).
+	:- endif.
+
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(lgtunit(loader)),
