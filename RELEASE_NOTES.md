@@ -41,6 +41,11 @@ number of tests sets and the number of completed tests sets.
 * FIXED: The `logtalk_tester.sh` automation script to not override any existing
 log messages when tagging a test suite as a timeout or a crash.
 
+Examples
+--------
+
+* UPDATED: The `jpl` example with some benchmarks.
+
 
 3.05.0 - May 16, 2016
 =====================

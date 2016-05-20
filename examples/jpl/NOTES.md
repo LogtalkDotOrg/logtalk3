@@ -23,7 +23,17 @@ file.
 This folder contains a minimal abstraction of the JPL library distributed
 with SWI-Prolog and YAP. This abstraction makes use of Logtalk parametric
 objects and allows creating Java object, accessing Java class fields, and
-calling Java class and object methods using a more Logtalk-like syntax.
+calling Java class and object methods using a more Logtalk-like syntax. It
+also gives access to some of the JPL utility predicates.
+
+This abstraction is also expected to be implementable with alternative Java
+interfaces found in backend Prolog compilers other than SWI-Prolog and YAP.
+
+The main idea is to use parametric objects where the first parameter holds
+the Java reference (usually to a class or object) and an optional second
+parameter holds the return value. Together with a forward message handler,
+this allows the use of Java messages with the same functor and number of
+arguments as found in the JavaDocs.
 
 For demonstration, adaptations of the JColorChooser and JOptionPane dialog
 examples and the JTable example from the JPL distribution are included.

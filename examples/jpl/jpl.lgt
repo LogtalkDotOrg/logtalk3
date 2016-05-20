@@ -125,3 +125,55 @@
 	]).
 
 :- end_object.
+
+
+:- object(java).
+
+	:- info([
+		version is 0.1,
+		author is 'Paulo Moura',
+		date is 2016/05/19,
+		comment is 'Abstract interface to JPL API utility predicates.'
+	]).
+
+	:- public(array_list/2).
+	:- mode(array_list(+array, -list), one).
+	:- mode(array_list(-array, +list), one).
+	:- info(array_list/2, [
+		comment is 'Converts between an array and a list.',
+		argnames is ['Array', 'List']
+	]).
+
+	:- public(null/1).
+	:- mode(null(@nonvar), zero_or_one).
+	:- info(null/1, [
+		comment is 'True when the argument is Java null',
+		argnames is ['Reference']
+	]).
+
+	:- public(iterator_element/2).
+	:- mode(iterator_element(+iterator, -element), zero_or_more).
+	:- info(iterator_element/2, [
+		comment is 'Enumerates, by backtracking, all iterator elements.',
+		argnames is ['Array', 'List']
+	]).
+
+	:- use_module(jpl, [
+		jpl_list_to_array/2, jpl_array_to_list/2,
+		jpl_is_null/1,
+		jpl_iterator_element/2
+	]).
+
+	array_list(Array, List) :-
+		(	var(Array) ->
+			jpl_list_to_array(List, Array)
+		;	jpl_array_to_list(Array, List)
+		).
+
+	null(Reference) :-
+		jpl_is_null(Reference).
+
+	iterator_element(Iterator,Element) :-
+		jpl_iterator_element(Iterator, Element).
+
+:- end_object.
