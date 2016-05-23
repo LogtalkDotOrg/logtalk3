@@ -6231,13 +6231,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
 		% not compiling a source file user clause
 		true
-	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
+	;	% add reference if first but be careful to not instantiate the module argument which may only be known at runtime
 		functor(Pred, PredFunctor, PredArity),
-		functor(Alias, AliasFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
 		(	\+ \+ '$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+		;	functor(Alias, AliasFunctor, PredArity),
+			assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
