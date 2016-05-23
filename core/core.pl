@@ -2775,7 +2775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 5, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 5, 1, rc2)).
 
 
 
@@ -6181,37 +6181,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_add_referenced_object_message'(@term, @callable, @term, +pair(integer))
-% '$lgt_add_referenced_object_message'(@term, @callable, @callable, @term, +pair(integer))
+% '$lgt_add_referenced_object_message'(@callable, @term, @callable, @callable, @term, +pair(integer))
 %
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
 
-'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines) :-
-	functor(Pred, PredFunctor, PredArity),
-	(	var(Head) ->
-		% not compiling a clause
-		true
-	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
-		% not compiling a source file user clause
-		true
-	;	nonvar(Obj), '$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
-		% already referenced from an uses/2 directive
-		true
-	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
-		functor(Head, HeadFunctor, HeadArity),
-		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
-			true
-		;	compound(Obj) ->
-			% parametric object
-			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-		;	% runtime instantiated object or non-parametric object
-			assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-		)
-	).
+'$lgt_add_referenced_object_message'(runtime, _, _, _, _, _).
 
-'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Lines) :-
+'$lgt_add_referenced_object_message'(compile(_), Obj, Pred, Alias, Head, Lines) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
@@ -6238,32 +6215,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term, +pair(integer))
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term, +pair(integer))
+% '$lgt_add_referenced_module_predicate'(@callable, @term, @callable, @callable, @term, +pair(integer))
 %
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
-'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Lines) :-
-	functor(Pred, PredFunctor, PredArity),
-	(	var(Head) ->
-		% not compiling a clause
-		true
-	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
-		% not compiling a source file user clause
-		true
-	;	'$lgt_pp_use_module_predicate_'(Module, PredFunctor/PredArity, _) ->
-		% not the first reference
-		true
-	;	% add reference if first but be careful to not instantiate the module argument which may only be known at runtime
-		functor(Head, HeadFunctor, HeadArity),
-		(	\+ \+ '$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
-			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-		)
-	).
+'$lgt_add_referenced_module_predicate'(runtime, _, _, _, _, _).
 
-'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Lines) :-
+'$lgt_add_referenced_module_predicate'(compile(_), Module, Pred, Alias, Head, Lines) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
@@ -8904,9 +8863,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TAlias =.. [_| Args],
 	% allow for runtime use by adding a local definition that calls the remote definition
 	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)]),
-	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	% ensure that the this uses/2 directive is found when looking for senders of this message
-	'$lgt_add_referenced_object_message'(Obj, TOriginal, TAlias, TAlias, Lines),
+	'$lgt_add_referenced_object_message'(Mode, Obj, TOriginal, TAlias, TAlias, Lines),
 	assertz('$lgt_pp_uses_predicate_'(Obj, TOriginal, TAlias)).
 
 '$lgt_compile_uses_directive_predicate_resource'(_, AFunctor, Arity, _, _) :-
@@ -9014,9 +8973,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TAlias =.. [_| Args],
 	% allow for runtime use by adding a local definition that calls the remote definition
 	'$lgt_compile_aux_clauses'([(TAlias :- ':'(Module, TOriginal))]),
-	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	% ensure that the this use_module/2 directive is found when looking for callers of this module predicate
-	'$lgt_add_referenced_module_predicate'(Module, TOriginal, TAlias, TAlias, Lines),
+	'$lgt_add_referenced_module_predicate'(Mode, Module, TOriginal, TAlias, TAlias, Lines),
 	assertz('$lgt_pp_use_module_predicate_'(Module, TOriginal, TAlias)).
 
 '$lgt_compile_use_module_directive_predicate_resource'(_, AFunctor, Arity, _, _) :-
@@ -10548,8 +10507,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
-		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Lines),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, Pred, Head, Lines),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
@@ -10565,8 +10524,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	% we're compiling a call to a module predicate
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
-		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Lines),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, Pred, Head, Lines),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	).
@@ -11462,8 +11421,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
-	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, Alias, Head, Lines),
 	'$lgt_compile_body'(':'(Module,Pred), TPred, _, Ctx).
 
 % predicates specified in uses/2 directives
@@ -11502,8 +11461,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
 		)
 	;	% objects other than the pseudo-object "user"
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
-		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Lines),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Alias, Head, Lines),
 		'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
 		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)
 	).
@@ -12658,10 +12617,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% translation performed at runtime
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode == runtime ->
-		true
-	;	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines)
-	),
+	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head, Lines),
 	(	Events == allow ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, ExCtx)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, ExCtx)
@@ -12669,10 +12625,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode == runtime ->
-		true
-	;	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines)
-	),
+	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head, Lines),
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) ->
