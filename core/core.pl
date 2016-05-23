@@ -6188,14 +6188,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_referenced_object_message'(runtime, _, _, _, _, _).
 
-'$lgt_add_referenced_object_message'(compile(_), Obj, Pred, Alias, Head, Lines) :-
+'$lgt_add_referenced_object_message'(compile(aux), _, _, _, _, _) :-
+	!.
+
+'$lgt_add_referenced_object_message'(compile(user), Obj, Pred, Alias, Head, Lines) :-
 	(	var(Head) ->
 		% not compiling a clause
-		true
-	;	Alias \= Head,
-		% not a linking clause for runtime use
-		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
-		% not compiling a source file user clause
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
 		functor(Pred, PredFunctor, PredArity),
@@ -6204,7 +6202,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			true
 		;	functor(Alias, AliasFunctor, PredArity),
 			(	compound(Obj) ->
-				% parametric object
+				% compile-time parametric object
 				'$lgt_term_template'(Obj, Template),
 				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 			;	% runtime instantiated object or non-parametric object
@@ -6222,14 +6220,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_referenced_module_predicate'(runtime, _, _, _, _, _).
 
-'$lgt_add_referenced_module_predicate'(compile(_), Module, Pred, Alias, Head, Lines) :-
+'$lgt_add_referenced_module_predicate'(compile(aux), _, _, _, _, _) :-
+	!.
+
+'$lgt_add_referenced_module_predicate'(compile(user), Module, Pred, Alias, Head, Lines) :-
 	(	var(Head) ->
 		% not compiling a clause
-		true
-	;	Alias \= Head,
-		% not a linking clause for runtime use
-		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
-		% not compiling a source file user clause
 		true
 	;	% add reference if first but be careful to not instantiate the module argument which may only be known at runtime
 		functor(Pred, PredFunctor, PredArity),
