@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for specifying the `scratch_directory` flag value using
+library notation.
+
 * IMPROVED: Detection of missing `meta_predicate/1` directives.
 
 Prolog adapter and integration files

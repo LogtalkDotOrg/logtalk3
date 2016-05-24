@@ -366,7 +366,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 
 	<dl>
 		<dt><code>scratch_directory(Directory)</code></dt>
-			<dd>Sets the directory (an atom) to be used to store the temporary files generated when compiling Logtalk source files. The directory must always end with a slash. The default value is a sub-directory of the source files directory, either <code>'./lgt_tmp/'</code> or <code>'./.lgt_tmp/'</code> (depending on the back-end Prolog compiler and operating-system). Relative directories must always start with <code>'./'</code> due to the lack of a portable solution to check if a path is relative or absolute.</dd>
+			<dd>Sets the directory to be used to store the temporary files generated when compiling Logtalk source files. This directory can be specified using an atom or using library notation. The directory must always end with a slash. The default value is a sub-directory of the source files directory, either <code>'./lgt_tmp/'</code> or <code>'./.lgt_tmp/'</code> (depending on the back-end Prolog compiler and operating-system). Relative directories must always start with <code>'./'</code> due to the lack of a portable solution to check if a path is relative or absolute.</dd>
 	</dl>
 
 	<dl>
@@ -792,7 +792,7 @@ The Logtalk compiler automatically removes any redundant calls to the built-in p
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 28, 2016</span>
+		<span>Last updated on: May 24, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

@@ -2775,7 +2775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 5, 1, rc3)).
+'$lgt_version_data'(logtalk(3, 5, 1, rc4)).
 
 
 
@@ -5878,10 +5878,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_object_file_name'(SourceDirectory, SourceName, SourceExtension, ObjectFile) :-
 	% temporary files are stored in the defined scratch directory
 	'$lgt_compiler_flag'(scratch_directory, ScratchDirectory0),
+	% allow using library notation to specify the scratch directory
+	'$lgt_check_and_expand_source_file'(ScratchDirectory0, ScratchDirectory1),
 	% make sure that the scratch directory path ends with a slash
-	(	sub_atom(ScratchDirectory0, _, _, 0, '/') ->
-		ScratchDirectory = ScratchDirectory0
-	;	atom_concat(ScratchDirectory0, '/', ScratchDirectory)
+	(	sub_atom(ScratchDirectory1, _, _, 0, '/') ->
+		ScratchDirectory = ScratchDirectory1
+	;	atom_concat(ScratchDirectory1, '/', ScratchDirectory)
 	),
 	(	sub_atom(ScratchDirectory, 0, 2, _, './') ->
 		% relative directory path
@@ -17552,7 +17554,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Obj).
 
 '$lgt_valid_flag_value'(scratch_directory, Directory) :-
-	atom(Directory).
+	callable(Directory).
 
 '$lgt_valid_flag_value'(prolog_compiler, Options) :-
 	'$lgt_is_list'(Options).
