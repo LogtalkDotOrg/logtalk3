@@ -32,6 +32,8 @@ library notation.
 
 * IMPROVED: Detection of missing `meta_predicate/1` directives.
 
+* IMPROVED: Compiler code cleanup and refactoring.
+
 Prolog adapter and integration files
 ------------------------------------
 

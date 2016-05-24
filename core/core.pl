@@ -408,8 +408,8 @@
 
 % '$lgt_pp_warnings_top_goal_directory_'(Goal, Directory)
 :- dynamic('$lgt_pp_warnings_top_goal_directory_'/2).
-% '$lgt_pp_compilation_warnings_counter_'(Counter)
-:- dynamic('$lgt_pp_compilation_warnings_counter_'/1).
+% '$lgt_pp_compiling_warnings_counter_'(Counter)
+:- dynamic('$lgt_pp_compiling_warnings_counter_'/1).
 % '$lgt_pp_loading_warnings_counter_'(Counter)
 :- dynamic('$lgt_pp_loading_warnings_counter_'/1).
 
@@ -1965,7 +1965,8 @@ logtalk_compile(Files, Flags) :-
 	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_compile_files'(ExpandedFiles, Flags),
-	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags), Flags).
+	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
+	'$lgt_clean_pp_file_clauses'.
 
 
 '$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
@@ -1988,7 +1989,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_reset_warnings_counter' :-
 	retractall('$lgt_pp_warnings_top_goal_directory_'(_, _)),
-	retractall('$lgt_pp_compilation_warnings_counter_'(_)),
+	retractall('$lgt_pp_compiling_warnings_counter_'(_)),
 	retractall('$lgt_pp_loading_warnings_counter_'(_)).
 
 
@@ -1996,51 +1997,37 @@ logtalk_compile(Files, Flags) :-
 	(	'$lgt_pp_warnings_top_goal_directory_'(_, _) ->
 		% not top compilation/loading goal; do nothing
 		true
-	;	'$lgt_current_directory'(Current),
+	;	'$lgt_current_directory'(Directory),
 		% remember top compilation/loading goal and directory
-		assertz('$lgt_pp_warnings_top_goal_directory_'(Goal, Current)),
+		assertz('$lgt_pp_warnings_top_goal_directory_'(Goal, Directory)),
 		% initialize compilation warnings counter
-		retractall('$lgt_pp_compilation_warnings_counter_'(_)),
-		assertz('$lgt_pp_compilation_warnings_counter_'(0)),
+		retractall('$lgt_pp_compiling_warnings_counter_'(_)),
+		assertz('$lgt_pp_compiling_warnings_counter_'(0)),
 		% initialize loading warnings counter
 		retractall('$lgt_pp_loading_warnings_counter_'(_)),
 		assertz('$lgt_pp_loading_warnings_counter_'(0))
 	).
 
 
-'$lgt_increment_compile_warnings_counter' :-
-	retract('$lgt_pp_compilation_warnings_counter_'(Old)),
+'$lgt_increment_compiling_warnings_counter' :-
+	retract('$lgt_pp_compiling_warnings_counter_'(Old)),
 	New is Old + 1,
-	assertz('$lgt_pp_compilation_warnings_counter_'(New)).
+	assertz('$lgt_pp_compiling_warnings_counter_'(New)).
 
 
-'$lgt_increment_loadind_warnings_counter' :-
+'$lgt_increment_loading_warnings_counter' :-
 	retract('$lgt_pp_loading_warnings_counter_'(Old)),
 	New is Old + 1,
 	assertz('$lgt_pp_loading_warnings_counter_'(New)).
 
 
-'$lgt_report_warning_numbers'(Goal, Flags) :-
+'$lgt_report_warning_numbers'(Goal) :-
 	(	retract('$lgt_pp_warnings_top_goal_directory_'(Goal, _)),
 		% top compilation/loading goal
-		retract('$lgt_pp_compilation_warnings_counter_'(CCounter)),
+		retract('$lgt_pp_compiling_warnings_counter_'(CCounter)),
 		retract('$lgt_pp_loading_warnings_counter_'(LCounter)) ->
 		% report compilation and loading warnings
-		(	'$lgt_member'(report(Report), Flags) ->
-			% use specified report flag value for reporting
-			catch(
-				(	asserta('$lgt_pp_file_compiler_flag_'(report, Report)),
-					'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter)),
-					retractall('$lgt_pp_file_compiler_flag_'(report, _))
-				),
-				Error,
-				(	retractall('$lgt_pp_file_compiler_flag_'(report, _)),
-					throw(Error)
-				)
-			)
-		;	% use default report flag value for reporting
-			'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter))
-		)
+		'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter))
 	;	% not top compilation/loading goal
 		true
 	).
@@ -2252,7 +2239,8 @@ logtalk_load(Files, Flags) :-
 	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_load_files'(ExpandedFiles, Flags),
-	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags), Flags).
+	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
+	'$lgt_clean_pp_file_clauses'.
 
 
 '$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
@@ -2775,7 +2763,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 5, 1, rc4)).
+'$lgt_version_data'(logtalk(3, 5, 1, rc5)).
 
 
 
@@ -5441,8 +5429,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the compilation auxiliary predicates before compiling a file
 
 '$lgt_load_files'([], _) :-
-	!,
-	'$lgt_clean_pp_file_clauses'.
+	!.
 
 '$lgt_load_files'([File| Files], Flags) :-
 	!,
@@ -5665,7 +5652,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% assume we're reloading the same source file and thus consider entity redefinitions normal
 		'$lgt_print_message'(comment(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
-		'$lgt_increment_loadind_warnings_counter',
+		'$lgt_increment_loading_warnings_counter',
 		'$lgt_print_message'(warning(loading), core, redefining_entity_from_file(NewFile, Lines, Type, Entity, OldFile))
 	).
 
@@ -5713,8 +5700,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the compilation auxiliary predicates before compiling a file
 
 '$lgt_compile_files'([], _) :-
-	!,
-	'$lgt_clean_pp_file_clauses'.
+	!.
 
 '$lgt_compile_files'([File| Files], Flags) :-
 	!,
@@ -6393,7 +6379,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_compiler_flag'(singleton_variables, warning),
 		'$lgt_filter_singleton_variables'([Singleton| Singletons], Names),
 		Names \== [] ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 			'$lgt_print_message'(warning(singleton_variables), core, singleton_variables(SourceFile, Lines, Type, Entity, Names, Term))
@@ -6978,7 +6964,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 			'$lgt_print_message'(warning(portability), core, prolog_dialect_goal_expansion(SourceFile, Lines, Type, Entity, Goal, ExpandedGoal))
@@ -7035,7 +7021,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 			'$lgt_print_message'(warning(portability), core, prolog_dialect_term_expansion(SourceFile, Lines, Type, Entity, Term, ExpandedTerms))
@@ -7404,7 +7390,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(portability), core, compiling_proprietary_prolog_directive(SourceFile, Lines, Type, Entity, Directive))
 	;	true
@@ -7431,7 +7417,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% compile query as an initialization goal
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(portability), core, compiling_query_as_initialization_goal(SourceFile, Lines, Type, Entity, Directive))
 	;	true
@@ -7887,7 +7873,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, deprecated_directive(SourceFile, Lines, Type, Entity, uses/1))
 	;	true
@@ -7929,7 +7915,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_flatten_to_list'(Ptcs, PtcsFlatted),
 	'$lgt_compile_calls_directive'(PtcsFlatted, Ctx),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, deprecated_directive(SourceFile, Lines, Type, Entity, calls/1))
 	;	true
@@ -8058,7 +8044,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	\+ '$lgt_pp_predicate_alias_'(_, _, _, _, _),
 		% not already reported (we assume that there's no mix of alias/2 and alias/3 directives!)
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, This),
 		'$lgt_print_message'(warning(general), core, deprecated_directive(SourceFile, Lines, Type, This, alias/3))
 	;	true
@@ -9739,7 +9725,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	\+ '$lgt_pp_module_'(_),
 	\+ '$lgt_pp_implemented_protocol_'(Protocol, _, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
 	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, Protocol)),
 	fail.
@@ -9758,7 +9744,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(SourceFile, Lines, Type, Entity, (multifile), user::Functor/Arity))
 	;	true
@@ -9803,7 +9789,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(SourceFile, Lines, Type, Entity, (multifile), ':'(Module,Functor/Arity)))
 	;	true
@@ -10422,7 +10408,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(Ctx, SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, deprecated_control_construct(SourceFile, Lines, Type, Entity, (:)/1))
 	;	true
@@ -11158,7 +11144,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_iso_spec_flag'(Flag),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(SourceFile, Lines, Type, Entity, Flag))
@@ -11173,7 +11159,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(SourceFile, Lines, Type, Entity, Flag, Value))
@@ -11187,7 +11173,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_iso_spec_flag'(Flag),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(SourceFile, Lines, Type, Entity, Flag))
@@ -11202,7 +11188,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(SourceFile, Lines, Type, Entity, Flag, Value))
@@ -13762,7 +13748,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Flags /\ 64 =\= 64,
 	Flags /\ 32 =\= 32,
 	% object compiled with complementing categories support disabled
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_warning_context'(SourceFile, _, Lines),
 	'$lgt_print_message'(warning(general), core, complementing_category_ignored(SourceFile, Lines, Ctg, Obj)),
 	fail.
@@ -13978,7 +13964,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
 		% not a currently loaded module
 		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_object(Path, Lines, Type, Entity, Object)),
 	fail.
 
@@ -13998,7 +13984,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_protocol_'(Protocol, _, _, _, _),
 		% not a protocol defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_protocol(Path, Lines, Type, Entity, Protocol)),
 	fail.
 
@@ -14018,7 +14004,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_category_'(Category, _, _, _, _, _),
 		% not a category defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(Path, Lines, Type, Entity, Category)),
 	fail.
 
@@ -14036,7 +14022,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ current_module(Module),
 		% not the module being compiled (self reference)
 		\+ '$lgt_pp_module_'(Module),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_module(Path, Lines, Type, Entity, Module)),
 	fail.
 
@@ -14170,7 +14156,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
 	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
 		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_logtalk_built_in_predicate(SourceFile, Lines, Type, Entity, Functor/Arity))
 	;	true
@@ -14183,7 +14169,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
 	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
 		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_prolog_built_in_predicate(SourceFile, Lines, Type, Entity, Functor/Arity))
 	;	true
@@ -15693,7 +15679,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	% but missing corresponding public /1 directive
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
 	fail.
 
@@ -15703,7 +15689,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_meta_predicate_directive_'(Head, Lines),
 	functor(Head, Functor, Arity),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (meta_predicate), Functor/Arity)),
 	fail.
 
@@ -15712,7 +15698,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, Lines),
 	functor(Head, Functor, Arity),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
 	fail.
 
@@ -15721,7 +15707,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Head, Lines),
 	functor(Head, Functor, Arity),
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
 	fail.
 
@@ -15751,7 +15737,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _),
 	Arity2 is Arity - 2,
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
 		'$lgt_print_message'(warning(unknown_predicates), core, unknown_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, Functor//Arity2))	
 	;	'$lgt_print_message'(warning(unknown_predicates), core, unknown_predicate_called_but_not_defined(Path, Lines, Type, Entity, Functor/Arity))
@@ -15781,7 +15767,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _),
 	Arity2 is Arity - 2,
-	'$lgt_increment_compile_warnings_counter',
+	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
 		'$lgt_print_message'(warning(undefined_predicates), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, Functor//Arity2))	
 	;	'$lgt_print_message'(warning(undefined_predicates), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Functor/Arity))
@@ -15802,14 +15788,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_non_portable_calls'(Type, Entity, Path) :-
 	'$lgt_pp_non_portable_predicate_'(Head, Lines),
 		functor(Head, Functor, Arity),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 '$lgt_report_non_portable_calls'(Type, Entity, Path) :-
 	'$lgt_pp_non_portable_function_'(Function, Lines),
 		functor(Function, Functor, Arity),
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
@@ -16895,7 +16881,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_execution_context'(c(This, Entity, r(Sender, Self, MetaCallContext, Stack)), Entity, Sender, This, Self, MetaCallContext, Stack).
 
-% inheritance only requires updating "this" and "entityd"
+% inheritance only requires updating "this" and "entity"
 '$lgt_execution_context_update_this_entity'(c(OldThis, OldEntity, Rest), OldThis, OldEntity, c(NewThis, NewEntity, Rest), NewThis, NewEntity).
 
 '$lgt_execution_context_this_entity'(c(This, Entity, _), This, Entity).
@@ -17117,7 +17103,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
 	(	UnqualifiedVars \== [] ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(Ctx, SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, unclassified_variables_in_lambda_expression(SourceFile, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal))
 	;	true
@@ -17142,7 +17128,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Parameters, ParameterVars),
 	'$lgt_intersection'(FreeVars, ParameterVars, MixedUpVars),
 	(	MixedUpVars \== [] ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(Ctx, SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, variables_with_dual_role_in_lambda_expression(SourceFile, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal))
 	;	true
@@ -17399,11 +17385,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_category_property'(Property), !.
 % object contains calls to the built-in multi-threading predicates
 '$lgt_valid_object_property'(threaded).
-% object allows the use of the <</2 control construct
+% object allows the use of the <</2 debugging control construct
 '$lgt_valid_object_property'(context_switching_calls).
 % object supports dynamic declaration of new predicates
 '$lgt_valid_object_property'(dynamic_declarations).
-% object can be complemented by categories (old Logtalk 2.x property)
+% object can be complemented by categories (old, deprecated, Logtalk 2.x property)
 '$lgt_valid_object_property'(complements).
 % object can be complemented by categories
 '$lgt_valid_object_property'(complements(_)).
@@ -17620,7 +17606,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_for_renamed_flag'(Flag, Ctx) :-
 	(	'$lgt_renamed_compiler_flag'(Flag, NewFlag),
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_increment_compile_warnings_counter',
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 			'$lgt_print_message'(warning(general), core, renamed_compiler_flag(SourceFile, Lines, Type, Entity, Flag, NewFlag))
