@@ -2775,7 +2775,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 5, 1, rc2)).
+'$lgt_version_data'(logtalk(3, 5, 1, rc3)).
 
 
 
@@ -9730,55 +9730,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, Functor, Arity),
 	throw(permission_error(modify, uses_module_predicate, Functor/Arity)).
 
-% definition of event handlers without reference to the "monitoring" built-in protocol
+% definition of a reserved predicate without reference to the built-in protocol declaring it
 
-'$lgt_compile_head'(before(_, _, _), _, _, Ctx) :-
+'$lgt_compile_head'(Head, _, _, Ctx) :-
+	'$lgt_reserved_predicate_protocol'(Head, Protocol),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	\+ '$lgt_pp_module_'(_),
-	\+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _, _),
+	\+ '$lgt_pp_implemented_protocol_'(Protocol, _, _, _, _),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, monitoring)),
-	fail.
-
-'$lgt_compile_head'(after(_, _, _), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_pp_module_'(_),
-	\+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, monitoring)),
-	fail.
-
-% definition of term- and goal-expansion predicates without reference to the "expanding" built-in protocol
-
-'$lgt_compile_head'(term_expansion(_, _), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_pp_module_'(_),
-	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, expanding)),
-	fail.
-
-'$lgt_compile_head'(goal_expansion(_, _), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_pp_module_'(_),
-	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, expanding)),
-	fail.
-
-% definition of a message forwarding handler without reference to the "forwarding" built-in protocol
-
-'$lgt_compile_head'(forward(_), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_pp_module_'(_),
-	\+ '$lgt_pp_implemented_protocol_'(forwarding, _, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, forwarding)),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(SourceFile, Type, Entity, Protocol)),
 	fail.
 
 % compile the head of a clause of another entity predicate (which we check if declared multifile)
@@ -14099,8 +14060,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_def_'(Clause)),
 	% the following two calls have side effects, thus ...
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode, Lines),
-	'$lgt_remember_defined_predicate'(HeadTemplate, Functor/Arity, ExCtxTemplate, THeadTemplate, Mode),
+	'$lgt_check_for_redefined_built_in'(Mode, HeadTemplate, ExCtxTemplate, THeadTemplate, Lines),
+	'$lgt_remember_defined_predicate'(Mode, HeadTemplate, Functor/Arity, ExCtxTemplate, THeadTemplate),
 	% ... we need to delay output unifications to after they succeed
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
@@ -14124,8 +14085,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_construct_def_clause'(DDef, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_ddef_'(Clause)),
 	% the following two calls have side effects, thus ...
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode, Lines),
-	'$lgt_remember_defined_predicate'(HeadTemplate, Functor/Arity, ExCtxTemplate, THeadTemplate, Mode),
+	'$lgt_check_for_redefined_built_in'(Mode, HeadTemplate, ExCtxTemplate, THeadTemplate, Lines),
+	'$lgt_remember_defined_predicate'(Mode, HeadTemplate, Functor/Arity, ExCtxTemplate, THeadTemplate),
 	% ... we need to delay output unifications to after they succeed
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
@@ -14189,16 +14150,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Clause =.. [Def, Head, _, fail],
 	assertz('$lgt_pp_def_'(Clause)),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	'$lgt_check_for_redefined_built_in'(Head, _, fail, Mode, Lines).
+	'$lgt_check_for_redefined_built_in'(Mode, Head, _, fail, Lines).
 
 
 
-% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @nonvar, )
+% '$lgt_check_for_redefined_built_in'(@callable, @callable, @execution_context, @callable, @pair)
 %
 % this predicate is called when adding a def/ddef clause after finding the first clause
 % for a predicate or when no clauses are defined for a declared predicate
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_), Lines) :-
+'$lgt_check_for_redefined_built_in'(runtime, _, _, _, _).
+
+'$lgt_check_for_redefined_built_in'(compile(_), Head, ExCtx, THead, Lines) :-
 	'$lgt_logtalk_built_in_predicate'(Head, _),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
@@ -14211,7 +14174,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_), Lines) :-
+'$lgt_check_for_redefined_built_in'(compile(_), Head, ExCtx, THead, Lines) :-
 	'$lgt_prolog_built_in_predicate'(Head),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
@@ -14224,22 +14187,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_check_for_redefined_built_in'(_, _, _, _, _).
+'$lgt_check_for_redefined_built_in'(compile(_), _, _, _, _).
 
 
 
-% '$lgt_remember_defined_predicate'(@callable, +predicate_indicator, +execution_context, @callable, @nonvar)
+% '$lgt_remember_defined_predicate'(@callable, @callable, +predicate_indicator, +execution_context, @callable)
 %
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
 % speed up compilation of other clauses for the same predicates
 
-'$lgt_remember_defined_predicate'(Head, PI, ExCtx, THead, Mode) :-
+'$lgt_remember_defined_predicate'(Mode, Head, PI, ExCtx, THead) :-
 	(	Mode == compile(aux) ->
 		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, aux)),
 		retractall('$lgt_pp_previous_predicate_'(_, aux)),
 		assertz('$lgt_pp_previous_predicate_'(Head, aux))
-	;	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user)),
+	;	% compile(user) or runtime
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user)),
 		retractall('$lgt_pp_previous_predicate_'(_, user)),
 		assertz('$lgt_pp_previous_predicate_'(Head, user))
 	).
@@ -16751,6 +16715,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_meta_predicate'(Pred, Meta, predicate) :-
 	'$lgt_built_in_method'(Pred, _, Meta, _),
 	Meta \== no.
+
+
+
+% '$lgt_reserved_predicate_protocol'(?callable, ?atom)
+%
+% table of reserved predicate names and the built-in protocols
+% where they are declared
+
+'$lgt_reserved_predicate_protocol'(before(_, _, _), monitoring).
+'$lgt_reserved_predicate_protocol'(after(_, _, _), monitoring).
+'$lgt_reserved_predicate_protocol'(term_expansion(_, _), expanding).
+'$lgt_reserved_predicate_protocol'(goal_expansion(_, _), expanding).
+'$lgt_reserved_predicate_protocol'(forward(_), forwarding).
 
 
 
