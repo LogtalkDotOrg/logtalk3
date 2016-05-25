@@ -87,6 +87,10 @@ Follows a short description of each included example (in alphabetical order):
 	calls in plain Prolog and explicitly-qualified Prolog module calls
 	(when applicable)
 
+- `blocks`  
+	simpler version of the `bricks` example; illustrates how to use events
+	to avoid breaking object encapsulation when handling object relations
+
 - `birds`  
 	bird identification expert system
 	(example adapted from the "Adventure in Prolog" Amzi! book)

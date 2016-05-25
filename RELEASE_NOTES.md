@@ -61,6 +61,8 @@ log messages when tagging a test suite as a timeout or a crash.
 Examples
 --------
 
+* ADDED: `blocks` example, a simpler version of the `bricks` example.
+
 * UPDATED: The `jpl` example with some benchmarks.
 
 * UPDATED: Tabling example to run using SWI-Prolog as the backend compiler when

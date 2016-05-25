@@ -1,0 +1,228 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(blocks(loader)).
+...
+
+
+% create four blocks, all standing on the "ground" (use your imagination... ;-)
+% (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+
+| ?- block::new(a, [position-(8, 1)]), block::new(b, [position-(6, 1)]), block::new(c, [position-(4, 1)]), block::new(d, [position-(2, 1)]).
+yes
+
+% set up ascii stack monitor so we can watch the blocks moving
+
+| ?- define_events(after, _, move(_,_), _, stack_monitor).
+yes
+
+
+% make the stack (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+
+| ?- block_stack::add_tuple(c-d), block_stack::add_tuple(b-c), block_stack::add_tuple(a-b).
+|.c......
+|.d...b.a
+---------
+|.b......
+|.c......
+|.d.....a
+---------
+|.a
+|.b
+|.c
+|.d
+---
+yes
+
+
+% check results
+
+| ?- block_stack::tuples(Tuples).
+Tuples = [c-d, b-c, a-b]
+yes
+
+| ?- current_event(after, Object, Message, Sender, Monitor).
+Message = move(_, _),
+Monitor = stack_monitor ;
+
+Object = d,
+Message = move(_, _),
+Monitor = block_stack ;
+
+Object = c,
+Message = move(_, _),
+Monitor = block_stack ;
+
+Object = a,
+Message = move(_, _),
+Monitor = block_stack ;
+
+Object = b,
+Message = move(_, _),
+Monitor = block_stack
+yes
+
+
+% move all stack to new position by moving bottom block; check results
+
+| ?- d::move(9, 1).
+|.a.......
+|.b.......
+|.c.......
+|........d
+----------
+|.a.......
+|.b.......
+|........c
+|........d
+----------
+|.a.......
+|........b
+|........c
+|........d
+----------
+|........a
+|........b
+|........c
+|........d
+----------
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 9,
+Xb = 9,
+Xc = 9,
+Xd = 9,
+Ya = 4,
+Yb = 3,
+Yc = 2,
+Yd = 1
+yes
+
+| ?- block_stack::tuples(Tuples).
+Tuples = [c-d, b-c, a-b]
+yes
+
+
+% break stack in half by moving b to the "ground"; check results
+
+| ?- b::move(3, 1).
+|........a
+|.........
+|........c
+|..b.....d
+----------
+|..a.....c
+|..b.....d
+----------
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 3,
+Xb = 3,
+Xc = 9,
+Xd = 9,
+Ya = 2,
+Yb = 1,
+Yc = 2,
+Yd = 1
+yes
+
+| ?- block_stack::tuples(Tuples).
+Tuples = [c-d, a-b]
+yes
+
+% create new block_stack tuple; check results
+
+| ?- block_stack::add_tuple(d-a).
+|..d......
+|..a.....c
+|..b......
+----------
+|..c
+|..d
+|..a
+|..b
+----
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 3,
+Xb = 3,
+Xc = 3,
+Xd = 3,
+Ya = 2,
+Yb = 1,
+Yc = 4,
+Yd = 3
+yes
+
+| ?- block_stack::tuples(Tuples).
+Tuples = [c-d, a-b, d-a]
+yes
+
+% move all stack to new position by moving bottom block; check results
+
+| ?- b::move(5, 1).
+|..c..
+|..d..
+|..a..
+|....b
+------
+|..c..
+|..d..
+|....a
+|....b
+------
+|..c..
+|....d
+|....a
+|....b
+------
+|....c
+|....d
+|....a
+|....b
+------
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 5,
+Xb = 5,
+Xc = 5,
+Xd = 5,
+Ya = 2,
+Yb = 1,
+Yc = 4,
+Yd = 3
+yes
+
+| ?- block_stack::tuples(Tuples).
+Tuples = [c-d, a-b, d-a]
+yes
+
+% clean up instances, tuples and monitors
+
+| ?- block_stack::remove_all_tuples.
+yes
+
+| ?- block::delete_all.
+yes
