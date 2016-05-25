@@ -37,6 +37,9 @@ library notation.
 
 * IMPROVED: Compiler code cleanup and refactoring.
 
+* FIXED: Regression when processing source file names with multiple periods.
+Thanks to Günter Kniesel for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 
