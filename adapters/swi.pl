@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 20, 2016
+%  Last updated on May 25, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -1044,8 +1044,8 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 
 '$lgt_swi_convert_message_kind'(comment, informational) :- !.
 '$lgt_swi_convert_message_kind'(comment(_), informational) :- !.
-'$lgt_swi_convert_message_kind'(information(_), information) :- !.
-'$lgt_swi_convert_message_kind'(Kind, Kind).
+'$lgt_swi_convert_message_kind'(Kind0, Kind) :-
+	functor(Kind0, Kind, _).
 
 
 

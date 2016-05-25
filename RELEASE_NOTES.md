@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: When adding a `begin/2` token to the list of tokens generated for
+printing a message, use the message kind term instead of just its functor.
+
 * ADDED: Support for specifying the `scratch_directory` flag value using
 library notation.
 

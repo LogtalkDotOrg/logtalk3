@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/08/26,
+		date is 2016/05/25,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -300,8 +300,7 @@
 		% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
 		% but pass them using discrete arguments instead of doing an expensive list append operation;
 		% these two tokens can be intercepted by the user for supporting e.g. message coloring
-		functor(Kind, Functor, _),
-		print_message_tokens_([begin(Functor,Ctx), Prefix-[]| Tokens], Stream, Prefix),
+		print_message_tokens_([begin(Kind,Ctx), Prefix-[]| Tokens], Stream, Prefix),
 		print_message_tokens_([end(Ctx)], Stream, Prefix).
 
 	% default_message_prefix_stream(?atom_or_compound, ?atom, ?stream_or_alias)
