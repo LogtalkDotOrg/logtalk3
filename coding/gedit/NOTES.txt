@@ -24,13 +24,14 @@ For more information, visit the Gedit plugin websites:
 	http://live.gnome.org/Gedit/Plugins/Snippets
 	http://live.gnome.org/Gedit/ToolLauncherPlugin
 
-For syntax coloring support see the `../gtksourceview2` folder.
+For syntax coloring support see the `../gtksourceview2` and
+`../gtksourceview3` folders (depending on the Gedit version).
 
 
 To install the snippets support, copy the file `logtalk.xml` to 
 the following system-wide directory:
 
-	${prefix}/share/gedit-2/plugins/snippets
+	${prefix}/share/gedit/plugins/snippets
 
 The ${prefix} can be e.g. `/usr`, `/usr/local`, or `/opt`, depending 
 on your system configuration.
@@ -44,7 +45,7 @@ location on your home directory:
 To install the tools support, copy the files in the `tools` directory
 to the following system-wide directory:
 
-	${prefix}/share/gedit-2/plugins/tools
+	${prefix}/share/gedit/plugins/tools
 
 The ${prefix} can be e.g. `/usr`, `/usr/local`, or `/opt`, depending 
 on your system configuration.

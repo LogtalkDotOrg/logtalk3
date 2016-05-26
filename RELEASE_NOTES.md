@@ -68,6 +68,14 @@ Examples
 * UPDATED: Tabling example to run using SWI-Prolog as the backend compiler when
 using version 7.3.21 or later.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Instructions for using GtkSourceView 3.x syntax highlighting support.
+
+* UPDATED: Instructions for adding syntax highlighting support to recent
+versions of the Gedit text editor.
+
 
 3.05.0 - May 16, 2016
 =====================
