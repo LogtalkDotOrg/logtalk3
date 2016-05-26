@@ -18778,7 +18778,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Tag) ->
 		throw(error(instantiation_error, logtalk(This::threaded_exit(Goal, Tag), Sender)))
 	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-		'$lgt_threaded_exit_tag_cheked'(Queue, Goal, Sender, This, Self, Tag)
+		'$lgt_threaded_exit_tag_checked'(Queue, Goal, Sender, This, Self, Tag)
 	).
 
 
@@ -18788,12 +18788,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_exit_tagged'(Queue, Goal, Sender, This, Self, Tag) :-
 	(	var(Tag) ->
 		throw(error(instantiation_error, logtalk(This::threaded_exit(Goal, Tag), Sender)))
-	;	'$lgt_threaded_exit_tag_cheked'(Queue, Goal, Sender, This, Self, Tag)
+	;	'$lgt_threaded_exit_tag_checked'(Queue, Goal, Sender, This, Self, Tag)
 	).
 
 
-
-'$lgt_threaded_exit_tag_cheked'(Queue, Goal, Sender, This, Self, Tag) :-
+'$lgt_threaded_exit_tag_checked'(Queue, Goal, Sender, This, Self, Tag) :-
 	(	% first check if there is a thread running for proving the goal before proceeding
 		thread_peek_message(Queue, '$lgt_thread_id'(Type, Goal, This, Self, Tag, Id)) ->
 		% answering thread exists; go ahead and retrieve the solution(s)
