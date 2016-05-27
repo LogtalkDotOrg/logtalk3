@@ -189,6 +189,12 @@
 :- dynamic('$lgt_hook_goal_expansion_'/2).
 
 
+% engines
+
+% '$lgt_current_engine_'(Object, Tag)
+:- dynamic('$lgt_current_engine_'/2).
+
+
 % counters
 
 % '$lgt_dynamic_entity_counter_'(Kind, Base, Count)
@@ -1321,6 +1327,7 @@ abolish_object(Obj) :-
 			retractall('$lgt_specializes_class_'(Obj, _, _)),
 			retractall('$lgt_implements_protocol_'(Obj, _, _)),
 			retractall('$lgt_imports_category_'(Obj, _, _)),
+			retractall('$lgt_current_engine_'(Obj, _)),
 			'$lgt_clean_lookup_caches'
 		;	throw(error(permission_error(modify, static_object, Obj), logtalk(abolish_object(Obj), _)))
 		)
@@ -1869,6 +1876,76 @@ threaded_peek(Goal) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_peek(Goal), _)),
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
 	catch('$lgt_threaded_peek'(Prefix, Goal, user, user, user), Error, '$lgt_runtime_error_handler'(Error)).
+
+
+% threaded_engine_create(@term, @callable, ?nonvar)
+
+threaded_engine_create(Answer, Goal, Tag) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine(Answer, Goal, Tag), _))).
+
+threaded_engine_create(Answer, Goal, Tag) :-
+	'$lgt_must_be'(callable, Goal, logtalk(threaded_engine(Answer, Goal, Tag), _)),
+	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
+	catch('$lgt_threaded_engine_create'(Prefix, Answer, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
+
+
+% threaded_engine(?nonvar)
+
+threaded_engine(Tag) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine(Tag), _))).
+
+threaded_engine(Tag) :-
+	'$lgt_current_engine_'(user, Tag).
+
+
+% threaded_engine_get(@nonvar, ?term)
+
+threaded_engine_get(Tag, Answer) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine_get(Answer, Tag), _))).
+
+threaded_engine_get(Tag, Answer) :-
+	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_engine_get(Answer, Tag), _)),
+	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
+	catch('$lgt_threaded_engine_get'(Prefix, Answer, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
+
+
+% threaded_engine_send(@nonvar, @callable)
+
+threaded_engine_send(Tag, Message) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine_send(Message, Tag), _))).
+
+threaded_engine_send(Tag, Message) :-
+	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_engine_send(Message, Tag), _)),
+	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
+	catch('$lgt_threaded_engine_send'(Prefix, Message, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
+
+
+% threaded_engine_receive(@nonvar, @callable)
+
+threaded_engine_receive(Tag, Message) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine_receive(Message, Tag), _))).
+
+threaded_engine_receive(Tag, Message) :-
+	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_engine_receive(Message, Tag), _)),
+	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
+	catch('$lgt_threaded_engine_receive'(Prefix, Message, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
+
+
+% threaded_engine_stop(+nonvar)
+
+threaded_engine_stop(Tag) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine_stop(Tag), _))).
+
+threaded_engine_stop(Tag) :-
+	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_engine_stop(Tag), _)),
+	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
+	catch('$lgt_threaded_engine_stop'(Prefix, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
 % threaded_wait(?nonvar)
@@ -10326,6 +10403,108 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
 
+'$lgt_compile_body'(threaded_engine_create(_, _, _), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_create(Answer, Goal, Tag), MTGoal, '$lgt_debug'(goal(threaded_engine_create(Answer, Goal, Tag), MDGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_must_be'(var, Tag),
+	'$lgt_comp_ctx'(Ctx, _, _, Sender, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
+	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
+		MTGoal = '$lgt_threaded_engine_create'(Prefix, Answer, TGoal, Sender, This, Tag),
+		MDGoal = '$lgt_threaded_engine_create'(Prefix, Answer, DGoal, Sender, This, Tag)
+	;	% compiling a category
+		MTGoal = '$lgt_threaded_engine_create'(Answer, TGoal, Sender, This, Tag),
+		MDGoal = '$lgt_threaded_engine_create'(Answer, DGoal, Sender, This, Tag)
+	),
+	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _).
+
+
+'$lgt_compile_body'(threaded_engine(_), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine(Tag), MTGoal, '$lgt_debug'(goal(threaded_engine(Tag), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	MTGoal = '$lgt_current_engine_'(This, Tag),
+	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
+
+
+'$lgt_compile_body'(threaded_engine_get(_, _), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_get(Tag, Answer), MTGoal, '$lgt_debug'(goal(threaded_engine_get(Tag, Answer), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, Sender, This, _, _, _, _, ExCtx, _, _, _),
+	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
+		MTGoal = '$lgt_threaded_engine_get'(Prefix, Answer, Sender, This, Tag)
+	;	% compiling a category
+		MTGoal = '$lgt_threaded_engine_get'(Answer, Sender, This, Tag)
+	),
+	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _).
+
+
+'$lgt_compile_body'(threaded_engine_send(_, _), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_send(Tag, Msg), MTGoal, '$lgt_debug'(goal(threaded_engine_send(Tag, Msg), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, Sender, This, _, _, _, _, ExCtx, _, _, _),
+	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
+		MTGoal = '$lgt_threaded_engine_send'(Prefix, Msg, Sender, This, Tag)
+	;	% compiling a category
+		MTGoal = '$lgt_threaded_engine_send'(Msg, Sender, This, Tag)
+	),
+	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _).
+
+
+'$lgt_compile_body'(threaded_engine_receive(_, _), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_receive(Tag, Msg), MTGoal, '$lgt_debug'(goal(threaded_engine_receive(Tag, Msg), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, Sender, This, _, _, _, _, ExCtx, _, _, _),
+	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
+		MTGoal = '$lgt_threaded_engine_receive'(Prefix, Msg, Sender, This, Tag)
+	;	% compiling a category
+		MTGoal = '$lgt_threaded_engine_receive'(Msg, Sender, This, Tag)
+	),
+	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _).
+
+
+'$lgt_compile_body'(threaded_engine_stop(_), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_stop(Tag), MTGoal, '$lgt_debug'(goal(threaded_engine_stop(Tag), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_must_be'(var, Tag),
+	'$lgt_comp_ctx'(Ctx, _, _, Sender, This, _, _, _, _, ExCtx, _, _, _),
+	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
+		MTGoal = '$lgt_threaded_engine_stop'(Prefix, Sender, This, Tag)
+	;	% compiling a category
+		MTGoal = '$lgt_threaded_engine_stop'(Sender, This, Tag)
+	),
+	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _).
+
+
 '$lgt_compile_body'(threaded_wait(_), _, _, _) :-
 	\+ '$lgt_pp_threaded_',
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
@@ -18661,6 +18840,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_threaded_engine_create'(@term, @callable, +object_identifier, +object_identifier, ?nonvar)
+
+'$lgt_threaded_engine_create'(Answer, Goal, Sender, This, Tag) :-
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+	'$lgt_threaded_engine_create'(Queue, Answer, Goal, Sender, This, Tag).
+
+
+
+% '$lgt_threaded_engine_create'(+message_queue_identifier, @term, @callable, +object_identifier, +object_identifier, ?nonvar)
+
+'$lgt_threaded_engine_create'(Queue, Answer, Goal, Sender, This, Tag) :-
+	(	var(Tag) ->
+		'$lgt_new_threaded_tag'(Tag)
+	;	'$lgt_current_engine_'(This, Tag) ->
+		throw(error(permission_error(create, engine, Tag), logtalk(This::threaded_engine_create(Answer, Goal, Tag), Sender)))
+	;	true
+	),
+	thread_create('$lgt_mt_engine_goal'(Queue, Answer, Goal, Tag), Id, []),
+	message_queue_create(MQueue),
+	thread_send_message(Queue, '$lgt_engine_queue_id'(Tag, MQueue, Id)),
+	assertz('$lgt_current_engine_'(This, Tag)).
+
+
+
 % '$lgt_mt_det_goal'(+message_queue_identifier, +callable, +object_identifier, +object_identifier, @nonvar)
 %
 % processes a deterministic message received by an object's message queue
@@ -18697,6 +18900,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	% no (more) solutions
 		thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, failure, Id))
+	).
+
+
+
+% '$lgt_mt_engine_goal'(+atom, ?term, +callable, @nonvar)
+%
+% processes a non-deterministic message received by an object's message queue
+
+'$lgt_mt_engine_goal'(Queue, Answer, Goal, Tag) :-
+	thread_self(Id),
+	(	catch(Goal, Error, true),
+		(	var(Error) ->
+			thread_send_message(Queue, '$lgt_reply'(Answer, success, Tag, Id)),
+			thread_get_message(Message),
+			(	Message == '$lgt_next' ->
+				% backtrack to the catch(Goal, ...) to try to find an alternative solution
+				fail
+			;	% otherwise assume Message = '$lgt_exit' and terminate thread
+				true
+			)
+		;	thread_send_message(Queue, '$lgt_reply'(Answer, Error, Tag, Id))
+		)
+	;	% no (more) solutions
+		thread_send_message(Queue, '$lgt_reply'(Answer, failure, Tag, Id))
 	).
 
 
@@ -18819,6 +19046,133 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_threaded_engine_get'(+term, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_get'(Answer, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_get(Alias, Answer), Sender)))
+	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+		'$lgt_threaded_engine_get_checked'(Queue, Answer, Sender, This, Alias)
+	).
+
+
+
+% '$lgt_threaded_engine_get'(+message_queue_identifier, +callable, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_get'(Queue, Answer, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_get(Alias, Answer), Sender)))
+	;	'$lgt_threaded_engine_get_checked'(Queue, Answer, Sender, This, Alias)
+	).
+
+
+'$lgt_threaded_engine_get_checked'(Queue, Answer, Sender, This, Alias) :-
+	(	% first check if there is a thread running for proving the goal before proceeding
+		thread_peek_message(Queue, '$lgt_engine_queue_id'(Alias, _, Id)) ->
+		% answering thread exists; go ahead and retrieve the solution(s)
+		'$lgt_mt_engine_reply'(Queue, Answer, Alias, Id)
+	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
+		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_get(Alias, Answer), Sender)))
+	).
+
+
+
+% '$lgt_threaded_engine_send'(@callable, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_send'(Message, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_send(Alias, Message), Sender)))
+	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+		'$lgt_threaded_engine_send_checked'(Queue, Message, Sender, This, Alias)
+	).
+
+
+
+% '$lgt_threaded_engine_send'(+message_queue_identifier, @callable, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_send'(Queue, Message, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_send(Alias, Message), Sender)))
+	;	'$lgt_threaded_engine_send_checked'(Queue, Message, Sender, This, Alias)
+	).
+
+
+'$lgt_threaded_engine_send_checked'(Queue, Message, Sender, This, Alias) :-
+	(	% first check if there is a thread running for proving the goal before proceeding
+		thread_peek_message(Queue, '$lgt_engine_queue_id'(Alias, MQueue, _)) ->
+		% answering thread exists; go ahead and retrieve the solution(s)
+		thread_send_message(MQueue, '$lgt_message'(Message))
+	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
+		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_send(Alias, Message), Sender)))
+	).
+
+
+
+% '$lgt_threaded_engine_receive'(?term, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_receive'(Message, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_receive(Alias, Message), Sender)))
+	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+		'$lgt_threaded_engine_receive_checked'(Queue, Message, Sender, This, Alias)
+	).
+
+
+
+% '$lgt_threaded_engine_receive'(+message_queue_identifier, ?term, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_receive'(Queue, Message, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_receive(Alias, Message), Sender)))
+	;	'$lgt_threaded_engine_receive_checked'(Queue, Message, Sender, This, Alias)
+	).
+
+
+'$lgt_threaded_engine_receive_checked'(Queue, Message, Sender, This, Alias) :-
+	(	% first check if there is a thread running for proving the goal before proceeding
+		thread_peek_message(Queue, '$lgt_engine_queue_id'(Alias, MQueue, _)) ->
+		% answering thread exists; go ahead and retrieve the solution(s)
+		thread_get_message(MQueue, '$lgt_message'(Message))
+	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
+		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_receive(Alias, Message), Sender)))
+	).
+
+
+
+% '$lgt_threaded_engine_stop'(+object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_stop'(Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_stop(Alias), Sender)))
+	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+		thread_peek_message(Queue, '$lgt_engine_queue_id'(Alias, MQueue, Id)) ->
+		thread_get_message(Queue, '$lgt_engine_queue_id'(Alias, MQueue, Id)),
+		catch(thread_signal(Id, throw(abort)), _, true),
+		catch(thread_join(Id, _), _, true),
+		message_queue_destroy(MQueue),
+		retractall('$lgt_current_engine_'(This, Alias))
+	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
+		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_stop(Alias), Sender)))
+	).
+
+
+
+% '$lgt_threaded_engine_stop'(+message_queue_identifier, +object_identifier, +object_identifier, @nonvar)
+
+'$lgt_threaded_engine_stop'(Queue, Sender, This, Alias) :-
+	(	var(Alias) ->
+		throw(error(instantiation_error, logtalk(This::threaded_engine_stop(Alias), Sender)))
+	;	thread_peek_message(Queue, '$lgt_engine_queue_id'(Alias, MQueue, Id)) ->
+		thread_get_message(Queue, '$lgt_engine_queue_id'(Alias, MQueue, Id)),
+		catch(thread_signal(Id, throw(abort)), _, true),
+		catch(thread_join(Id, _), _, true),
+		message_queue_destroy(MQueue),
+		retractall('$lgt_current_engine_'(This, Alias))
+	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
+		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_stop(Alias), Sender)))
+	).
+
+
 % return the solution found
 
 '$lgt_mt_det_reply'(Queue, Goal, This, Self, Tag, Id) :-
@@ -18829,6 +19183,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		fail
 	;	throw(Result)
 	).
+
 
 
 % return current solution; on backtracking, ask working thread for and get from it the next solution
@@ -18846,6 +19201,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_mt_non_det_reply'(Queue, Goal, This, Self, Tag, Id) :-
 	catch(thread_send_message(Id, '$lgt_next'), _, fail),
 	'$lgt_mt_non_det_reply'(Queue, Goal, This, Self, Tag, Id).
+
+
+
+% return current solution and start computing the next one
+
+'$lgt_mt_engine_reply'(Queue, Answer, Tag, Id) :-
+	thread_property(Id, status(Status)),
+	(	Status == true ->
+		fail
+	;	thread_get_message(Queue, '$lgt_reply'(Reply, Result, Tag, Id)),
+		(	Result == success ->
+			Answer = Reply,
+			catch(thread_send_message(Id, '$lgt_next'), _, true)
+		;	Result == failure ->
+			!,
+			fail
+		;	throw(Result)
+		)
+	).
 
 
 
