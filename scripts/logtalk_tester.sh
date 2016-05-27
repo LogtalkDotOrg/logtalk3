@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 18, 2016
+##   Last updated on May 28, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.14"
+	echo "$(basename "$0") 0.15"
 	exit 0
 }
 
@@ -293,8 +293,8 @@ elif [ "$f_arg" != "" ] ; then
 fi
 
 if [ "$p_arg" == "swipack" ] ; then
+	versions_goal="use_module(library(logtalk)),$versions_goal"
 	format_goal="use_module(library(logtalk)),$format_goal"
-	echo $format_goal
 fi
 
 if [ "$d_arg" != "" ] ; then
