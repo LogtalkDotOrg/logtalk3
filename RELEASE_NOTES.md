@@ -76,6 +76,8 @@ IDEs, text editors, and syntax highlighters support
 * UPDATED: Instructions for adding syntax highlighting support to recent
 versions of the Gedit text editor.
 
+* FIXED: Make the external tools for the Gedit text editor executable.
+
 
 3.05.0 - May 16, 2016
 =====================
