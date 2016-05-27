@@ -28,32 +28,33 @@ For syntax coloring support see the `../gtksourceview2` and
 `../gtksourceview3` folders (depending on the Gedit version).
 
 
-To install the snippets support, copy the file `logtalk.xml` to 
-the following system-wide directory:
+To install the snippets support, copy the file `logtalk.xml` to  the
+following system-wide directory:
 
 	${prefix}/share/gedit/plugins/snippets
 
 The ${prefix} can be e.g. `/usr`, `/usr/local`, or `/opt`, depending 
 on your system configuration.
 
-Alternatively, you can copy the `logtalk.xml` file to the following 
-location on your home directory:
+Alternatively, you can copy the `logtalk.xml` file to one of the following 
+locations on your home directory:
 
-	~/.gnome2/gedit/snippets/
+	Gedit 2.x: ~/.gnome2/gedit/snippets/
+	Gedit 3.x: ~/.config/gedit/snippets
 
-
-To install the tools support, copy the files in the `tools` directory
-to the following system-wide directory:
+To install the tools support, copy the files in the `tools` directory to
+the following system-wide directory:
 
 	${prefix}/share/gedit/plugins/tools
 
-The ${prefix} can be e.g. `/usr`, `/usr/local`, or `/opt`, depending 
-on your system configuration.
+The ${prefix} can be e.g. `/usr`, `/usr/local`, or `/opt`, depending on
+your system configuration.
 
-Alternatively, you can copy the files in the `tools` directory to the
-following location on your home directory:
+Alternatively, you can copy the files in the `tools` directory to one of
+the following locations on your home directory:
 
-	~/.gnome2/gedit/tools/
+	Gedit 2.x: ~/.gnome2/gedit/tools/
+	Gedit 3.x: ~/.config/gedit/tools/
 
 Before using the provided tools, edit and customize them in order to
 use your favorite back-end Prolog compiler and to set your choices
