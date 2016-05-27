@@ -19123,7 +19123,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% engine exists; go ahead and post the message in its mailbox
 		thread_send_message(MQueue, '$lgt_message'(Message))
 	;	% engine does not exist
-		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_send(Alias, Message), Sender)))
+		throw(error(existence_error(engine, Alias), logtalk(This::threaded_engine_send(Alias, Message), Sender)))
 	).
 
 
@@ -19139,7 +19139,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% engine exists; go ahead and retrieve a message from its mailbox
 		thread_get_message(MQueue, '$lgt_message'(Message))
 	;	% engine does not exist
-		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_receive(Alias, Message), Sender)))
+		throw(error(existence_error(engine, Alias), logtalk(This::threaded_engine_receive(Alias, Message), Sender)))
 	).
 
 
@@ -19157,7 +19157,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		message_queue_destroy(MQueue),
 		retractall('$lgt_current_engine_'(This, Alias))
 	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
-		throw(error(existence_error(thread, This), logtalk(This::threaded_engine_stop(Alias), Sender)))
+		throw(error(existence_error(engine, Alias), logtalk(This::threaded_engine_stop(Alias), Sender)))
 	).
 
 
