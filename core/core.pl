@@ -1910,6 +1910,16 @@ threaded_engine_get(Alias, Answer) :-
 	catch('$lgt_threaded_engine_get'(Alias, Answer, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
+% threaded_engine_return(@term)
+
+threaded_engine_return(Answer) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine_return(Answer), _))).
+
+threaded_engine_return(Answer) :-
+	catch('$lgt_threaded_engine_return'(Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
+
+
 % threaded_engine_send(@nonvar, @term)
 
 threaded_engine_send(Alias, Message) :-
@@ -10437,6 +10447,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _).
 
 
+'$lgt_compile_body'(threaded_engine_return(_), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_return(Answer), MTGoal, '$lgt_debug'(goal(threaded_engine_return(Answer), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	MTGoal = '$lgt_threaded_engine_return'(Answer, This),
+	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
+
+
 '$lgt_compile_body'(threaded_engine_send(_, _), _, _, _) :-
 	\+ '$lgt_pp_threaded_',
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
@@ -17953,6 +17975,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(threaded_engine_stop(_), threaded_engine_stop(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine(_), threaded_engine(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_get(_, _), threaded_engine_get(*, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_return(_), threaded_engine_return(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_send(_, _), threaded_engine_send(*, *)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_receive(_, _), threaded_engine_receive(*, *)).
 
@@ -19079,8 +19102,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_threaded_engine_send'(@nonvar, @term, +object_identifier, +object_identifier)
+% '$lgt_threaded_engine_return'(@term, @object_identifier)
 
+'$lgt_threaded_engine_return'(Answer, This) :-
+	thread_self(Id),
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+	thread_peek_message(Queue, '$lgt_engine_queue_id'(Alias, _, Id)),
+	thread_send_message(Queue, '$lgt_answer'(Answer, success, Alias, Id)).
+
+
+
+% '$lgt_threaded_engine_send'(@nonvar, @term, @object_identifier, @object_identifier)
+ 
 '$lgt_threaded_engine_send'(Alias, Message, Sender, This) :-
 	(	var(Alias) ->
 		throw(error(instantiation_error, logtalk(This::threaded_engine_send(Alias, Message), Sender)))
