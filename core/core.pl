@@ -17948,6 +17948,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_), threaded_peek('::')).
 '$lgt_logtalk_built_in_predicate'(threaded_wait(_), no).
 '$lgt_logtalk_built_in_predicate'(threaded_notify(_), no).
+% engines predicates
+'$lgt_logtalk_built_in_predicate'(threaded_engine_create(_, _, _), threaded_engine_create(*, 0, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_stop(_), threaded_engine_stop(*)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine(_), threaded_engine(*)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_get(_, _), threaded_engine_get(*, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_send(_, _), threaded_engine_send(*, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_receive(_, _), threaded_engine_receive(*, *)).
 
 
 
