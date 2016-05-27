@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on February 14, 2016
+%  Last updated on May 27, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -737,5 +737,10 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_quantified_metacall'(*,*,*).
 :- meta_predicate '$lgt_metacall_sender'(*,*,*,*).
 :- meta_predicate '$lgt_metacall_local'(*,*).
+
+:- meta_predicate threaded_engine_create(*,*,*).
+:- meta_predicate '$lgt_mt_engine_goal'(*,*,*,*).
+:- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*,*).
+:- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*).
 
 :- meta_predicate '$user#0.forward#1'(*,*).
