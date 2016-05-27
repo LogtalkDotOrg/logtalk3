@@ -740,7 +740,6 @@ user:portray(c(This, Entity, Rest)) :-
 
 :- meta_predicate threaded_engine_create(*,*,*).
 :- meta_predicate '$lgt_mt_engine_goal'(*,*,*,*).
-:- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*).
 
 :- meta_predicate '$user#0.forward#1'(*,*).
