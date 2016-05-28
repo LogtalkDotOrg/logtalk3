@@ -1327,7 +1327,10 @@ abolish_object(Obj) :-
 			retractall('$lgt_specializes_class_'(Obj, _, _)),
 			retractall('$lgt_implements_protocol_'(Obj, _, _)),
 			retractall('$lgt_imports_category_'(Obj, _, _)),
-			retractall('$lgt_current_engine_'(Obj, _)),
+			forall(
+				'$lgt_current_engine_'(Obj, Engine),
+				'$lgt_threaded_engine_stop'(Engine, Obj, Obj)
+			),
 			'$lgt_clean_lookup_caches'
 		;	throw(error(permission_error(modify, static_object, Obj), logtalk(abolish_object(Obj), _)))
 		)
