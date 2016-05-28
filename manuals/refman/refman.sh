@@ -6,7 +6,7 @@
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on May 5, 2016
+##   Last updated on May 28, 2016
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -111,6 +111,14 @@ eval $xslt_proc -o predicates/threaded_exit_1_2.section refman.xsl predicates/th
 eval $xslt_proc -o predicates/threaded_peek_1_2.section refman.xsl predicates/threaded_peek_1_2.html
 eval $xslt_proc -o predicates/threaded_wait_1.section refman.xsl predicates/threaded_wait_1.html
 eval $xslt_proc -o predicates/threaded_notify_1.section refman.xsl predicates/threaded_notify_1.html
+eval $xslt_proc -o predicates/threaded_engine_create_3.section refman.xsl predicates/threaded_engine_create_3.html
+eval $xslt_proc -o predicates/threaded_engine_stop_1.section refman.xsl predicates/threaded_engine_stop_1.html
+eval $xslt_proc -o predicates/threaded_engine_1.section refman.xsl predicates/threaded_engine_1.html
+eval $xslt_proc -o predicates/threaded_engine_self_1.section refman.xsl predicates/threaded_engine_self_1.html
+eval $xslt_proc -o predicates/threaded_engine_answer_2.section refman.xsl predicates/threaded_engine_answer_2.html
+eval $xslt_proc -o predicates/threaded_engine_return_1.section refman.xsl predicates/threaded_engine_return_1.html
+eval $xslt_proc -o predicates/threaded_engine_post_2.section refman.xsl predicates/threaded_engine_post_2.html
+eval $xslt_proc -o predicates/threaded_engine_fetch_2.section refman.xsl predicates/threaded_engine_fetch_2.html
 eval $xslt_proc -o predicates/logtalk_compile_1.section refman.xsl predicates/logtalk_compile_1.html
 eval $xslt_proc -o predicates/logtalk_compile_2.section refman.xsl predicates/logtalk_compile_2.html
 eval $xslt_proc -o predicates/logtalk_load_1.section refman.xsl predicates/logtalk_load_1.html
@@ -248,6 +256,14 @@ cat -s \
 	predicates/threaded_peek_1_2.section \
 	predicates/threaded_wait_1.section \
 	predicates/threaded_notify_1.section \
+	predicates/threaded_engine_create_3.section \
+	predicates/threaded_engine_stop_1.section \
+	predicates/threaded_engine_1.section \
+	predicates/threaded_engine_self_1.section \
+	predicates/threaded_engine_answer_2.section \
+	predicates/threaded_engine_return_1.section \
+	predicates/threaded_engine_post_2.section \
+	predicates/threaded_engine_fetch_2.section \
 	predicates/logtalk_compile_1.section \
 	predicates/logtalk_compile_2.section \
 	predicates/logtalk_load_1.section \
