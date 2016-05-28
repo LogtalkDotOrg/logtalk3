@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 27, 2016
+%  Last updated on May 28, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -197,6 +197,15 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait'(_, _), 'threaded_wait/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_create'(_, _, _, _, _), 'threaded_engine_create/3') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_stop'(_, _, _), 'threaded_engine_stop/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_self'(_, _), 'threaded_engine_self/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_current_engine_'(_, _), 'threaded_engine/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_answer'(_, _, _, _), 'threaded_engine_answer/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_return'(_, _), 'threaded_engine_return/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_post'(_, _, _, _), 'threaded_engine_post/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_fetch'(_, _, _, _), 'threaded_engine_fetch/2') :- !.
 
 
 :- multifile(prolog:term_compiled/2).
@@ -521,6 +530,16 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(threaded_notify(Msg), _, '$lgt_threaded_notify_ctg'(Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_notify(Msg), _, '$lgt_threaded_notify'(Msg, _), TermPos, TermPos) :- !.
 
+'$lgt_swi_unify_clause_body'(threaded_engine_create(Answer, Goal, Engine), Entity, '$lgt_threaded_engine_create'(Answer, TGoal, _, _, Engine), TermPos0, TermPos) :- !,
+	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
+'$lgt_swi_unify_clause_body'(threaded_engine_stop(Engine), _, '$lgt_threaded_engine_stop'(Engine, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_self(Engine), _, '$lgt_threaded_engine_self'(Engine, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine(Engine), _, '$lgt_current_engine_'(Engine, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_answer(Engine, Answer), _, '$lgt_threaded_engine_answer'(Engine, Answer, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_return(Answer), _, '$lgt_threaded_engine_return'(Answer, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_post(Engine, Term), _, '$lgt_threaded_engine_post'(Engine, Term, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_fetch(Engine, Term), _, '$lgt_threaded_engine_fetch'(Engine, Term, _, _), TermPos, TermPos) :- !.
+
 '$lgt_swi_unify_clause_body'(Goal, Entity, with_mutex(_, TGoal), TermPos0, TermPos) :-
 	\+ functor(Goal, with_mutex, 2),								% synchronized predicates
 	!,
@@ -653,6 +672,14 @@ user:portray(c(This, Entity, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_threaded_wait'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_notify_ctg'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_notify'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_create'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_stop'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_self'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_current_engine_'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_answer'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_return'/2, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_post'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_fetch'/4, trace, 1).
 
 % add dummy meta_predicate/1 directives to avoid cluttering the make/0
 % analysis report (as some of the results are not correct for all usage

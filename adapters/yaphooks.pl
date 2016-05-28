@@ -2,7 +2,7 @@
 %
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
-%  Last updated on August 29, 2014
+%  Last updated on May 28, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -109,6 +109,15 @@ user:prolog_predicate_name(user:'$lgt_threaded_wait_ctg'(_, _), 'threaded_wait/1
 user:prolog_predicate_name(user:'$lgt_threaded_wait'(_, _), 'threaded_wait/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
+
+user:prolog_predicate_name(user:'$lgt_threaded_engine_create'(_, _, _, _, _), 'threaded_engine_create/3') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_stop'(_, _, _), 'threaded_engine_stop/1') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_self'(_, _), 'threaded_engine_self/1') :- !.
+user:prolog_predicate_name(user:'$lgt_current_engine_'(_, _), 'threaded_engine/1') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_answer'(_, _, _, _), 'threaded_engine_answer/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_return'(_, _), 'threaded_engine_return/1') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_post'(_, _, _, _), 'threaded_engine_post/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_fetch'(_, _, _, _), 'threaded_engine_fetch/2') :- !.
 
 user:prolog_predicate_name(Goal, Label) :-
 	Goal \= '::'(_, _),
