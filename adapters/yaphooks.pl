@@ -110,14 +110,14 @@ user:prolog_predicate_name(user:'$lgt_threaded_wait'(_, _), 'threaded_wait/1') :
 user:prolog_predicate_name(user:'$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
 
-user:prolog_predicate_name(user:'$lgt_threaded_engine_create'(_, _, _, _, _), 'threaded_engine_create/3') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_engine_stop'(_, _, _), 'threaded_engine_stop/1') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_create'(_, _, _, _), 'threaded_engine_create/3') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_stop'(_, _), 'threaded_engine_stop/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_engine_self'(_, _), 'threaded_engine_self/1') :- !.
 user:prolog_predicate_name(user:'$lgt_current_engine_'(_, _), 'threaded_engine/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_engine_answer'(_, _, _, _), 'threaded_engine_answer/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_answer'(_, _, _), 'threaded_engine_answer/2') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_engine_return'(_, _), 'threaded_engine_return/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_engine_post'(_, _, _, _), 'threaded_engine_post/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_engine_fetch'(_, _, _, _), 'threaded_engine_fetch/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_post'(_, _, _), 'threaded_engine_post/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_fetch'(_, _, _), 'threaded_engine_fetch/2') :- !.
 
 user:prolog_predicate_name(Goal, Label) :-
 	Goal \= '::'(_, _),
