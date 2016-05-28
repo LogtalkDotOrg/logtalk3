@@ -58,9 +58,6 @@ number of tests sets and the number of completed tests sets.
 * FIXED: The `logtalk_tester.sh` automation script to not override any existing
 log messages when tagging a test suite as a timeout or a crash.
 
-* FIXED: The `logtalk_tester.sh` automation script to print the Logtalk and
-backend Prolog compiler versions when using the `swipack` option.
-
 Examples
 --------
 
