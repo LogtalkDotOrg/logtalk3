@@ -30,4 +30,16 @@
 
 	:- threaded.
 
+	throws(threaded_engine_fetch_2_1, error(instantiation_error, logtalk(threaded_engine_fetch(_,_), _))) :-
+		{threaded_engine_fetch(_, _)}.
+
+	throws(threaded_engine_fetch_2_2, error(existence_error(engine,foo), logtalk(threaded_engine_fetch(foo,_), _))) :-
+		{threaded_engine_fetch(foo, _)}.
+
+	succeeds(threaded_engine_fetch_2_3) :-
+		{threaded_engine_create(none, true, test_engine_1),
+		 threaded_engine_post(test_engine_1, term),
+		 threaded_engine_fetch(test_engine_1, Term)},
+		Term == term.
+
 :- end_object.

@@ -18,22 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- if(current_logtalk_flag(threads, supported)).
 
-	:- info([
-		version is 1.0,
-		author is 'Paulo Moura',
-		date is 2016/05/28,
-		comment is 'Unit tests for the threaded_engine_answer/2 built-in predicate.'
-	]).
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
 
-	:- threaded.
+:- else.
 
-	throws(threaded_engine_answer_2_1, error(instantiation_error, logtalk(threaded_engine_answer(_,_), _))) :-
-		{threaded_engine_answer(_, _)}.
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
 
-	throws(threaded_engine_answer_2_2, error(existence_error(engine,foo), logtalk(threaded_engine_answer(foo,_), _))) :-
-		{threaded_engine_answer(foo, _)}.
-
-:- end_object.
+:- endif.
