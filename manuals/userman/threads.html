@@ -260,7 +260,7 @@ Each notification posted by a call to the <code>threaded_notify/1</code> predica
 <h2 id="threads_engines">Engines</h2>
 
 <p>
-As an alternative to the multi-threading meta-predicates described in the previous sections, support for threaded <em>engines</em> is provided. An engine is a computing thread whose solutions can be lazily computed and retrieved. In addition, an engine also supports a term queue that allows passing arbitrary terms to the engine.
+Threaded <em>engines</em> provide an alternative to the multi-threading meta-predicates described in the previous sections. An engine is a computing thread whose solutions can be lazily computed and retrieved. In addition, an engine also supports a term queue that allows passing arbitrary terms to the engine.
 </p>
 <p>
 An engine is created by calling the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_create_3.html"><code>threaded_engine_create/3</code></a> built-in predicates. For example:
@@ -273,7 +273,10 @@ yes
 The first argument is an <em>answer template</em> to be used for retrieving solution bindings. The user can name the engine, as in this example where the atom <code>worker</code> is used, or have the runtime generate a name, which should be treated as an opaque term.
 </p>
 <p>
-The engine computes the first solution of its goal argument and suspends waiting for it to be retrieved. Solutions can be retrieved one at a time on demand using the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_answer_2.html"><code>threaded_engine_answer/2</code></a> built-in predicate:
+Engines are scoped by the object within which the <code>threaded_engine_create/3</code> call takes place. Thus, different objects can create engines with the same names with no conflicts. Morevover, engines share the visible predicates of the object creating them.
+</p>
+<p>
+The engine computes the first solution of its goal argument and suspends waiting for it to be retrieved. Solutions can be retrieved one at a time using the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_answer_2.html"><code>threaded_engine_answer/2</code></a> built-in predicate:
 </p>
 <pre>
 | ?- threaded_engine_answer(worker, X).
@@ -281,7 +284,7 @@ X = 1
 yes
 </pre>
 <p>
-The call blocks until a solution is available and fails if there are no solutions left. After returning a solution, this predicate signals the engine to start computing the next one. Note that this predicate is deterministic. In constrast with the <code>threaded_exist/1-2</code> built-in predicates, retrieving the next solution requires calling the predicate again instead of backtracking into its call.
+The call blocks until a solution is available and fails if there are no solutions left. After returning a solution, this predicate signals the engine to start computing the next one. Note that this predicate is deterministic. In constrast with the <code>threaded_exist/1-2</code> built-in predicates, retrieving the next solution requires calling the predicate again instead of by backtracking into its call.
 </p>
 <p>
 Engines must be explicitly terminated using the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_stop_1.html"><code>threaded_engine_stop/1</code></a> built-in predicate:
@@ -307,7 +310,7 @@ The <a title="Consult reference manual" href="../refman/predicates/threaded_engi
 yes
 </pre>
 <p>
-The <code>handle/1</code> predicate, after performing a task, can use the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_return_1.html"><code>threaded_engine_return/1</code></a> built-in predicate to make the results available for consumption using the <code>threaded_engine_answer/2</code> built-in predicate.
+The <code>handle/1</code> predicate, after performing a task, can use the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_return_1.html"><code>threaded_engine_return/1</code></a> built-in predicate to make the task results available for consumption using the <code>threaded_engine_answer/2</code> built-in predicate.
 </p>
 
 <h2 id="threads_performance">Multi-threading performance</h2>
