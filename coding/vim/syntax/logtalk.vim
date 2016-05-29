@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	April 24, 2015
+" Last Change:	May 29, 2016
 
 
 " Quit when a syntax file was already loaded:
@@ -143,6 +143,7 @@ syn match	logtalkBuiltIn		"\<logtalk_make\>"
 syn match	logtalkBuiltIn		"\<\(for\|retract\)all\ze("
 
 syn match	logtalkBuiltIn		"\<threaded\(_\(call\|once\|ignore\|exit\|peek\|wait\|notify\)\)\?\ze("
+syn match	logtalkBuiltIn		"\<threaded_engine\(_\(create\|stop\|self\|answer\|return\|post\|fetch\)\)\?\ze("
 
 
 " Logtalk built-in methods

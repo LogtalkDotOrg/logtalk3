@@ -1,7 +1,7 @@
 ; Superedi syntax definitions for Logtalk (http://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	April 24, 2015
+; Last changed in: 	May 29, 2016
 
 
 C=1
@@ -165,6 +165,14 @@ threaded_exit
 threaded_peek
 threaded_wait
 threaded_notify
+threaded_engine
+threaded_engine_create
+threaded_engine_stop
+threaded_engine_self
+threaded_engine_answer
+threaded_engine_return
+threaded_engine_post
+threaded_engine_fetch
 forall
 retractall
 

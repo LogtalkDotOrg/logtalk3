@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on June 10, 2014
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on May 29, 2016
 
 		this.regexList = [
 		  // variables
@@ -52,6 +52,8 @@
 			{ regex: new RegExp("\\b((bag|set)of|f(ind|or)all)(?=[(])", 'g'), css: 'keyword'},
 			// multi-threading built-in predicates
 			{ regex: new RegExp("\\bthreaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])", 'g'), css: 'keyword'},
+			// engine built-in predicates
+			{ regex: new RegExp("\\bthreaded_engine(_(create|stop|self|answer|return|post|fetch))?(?=[(])", 'g'), css: 'keyword'},
 			// term unification built-in predicates
 			{ regex: new RegExp("\\b(subsumes_term|unify_with_occurs_check)(?=[(])", 'g'), css: 'keyword'},
 			// term creation and decomposition built-in predicates

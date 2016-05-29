@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2016/05/29 (1.1.18)
+ *  -  Added syntax coloring for the engine predicates
  * 2015/04/24 (1.1.17)
  *  -  Added syntax coloring of the create_logtalk_flag/3 predicate
  * 2014/10/21 (1.1.16)
@@ -166,10 +168,14 @@ $language_data = array(
             'call', 'catch', 'ignore', 'once', 'throw',
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',
-            // multi-threading meta-predicates
+            // multi-threading predicates
             'threaded',
             'threaded_call', 'threaded_once', 'threaded_ignore', 'threaded_exit', 'threaded_peek',
             'threaded_wait', 'threaded_notify',
+            // engine predicates
+            'threaded_engine',
+            'threaded_engine_create', 'threaded_engine_stop', 'threaded_engine_self', 'threaded_engine_answer', 'threaded_engine_return',
+            'threaded_engine_post', 'threaded_engine_fetch',
             // term unification
             'subsumes_term', 'unify_with_occurs_check',
             // atomic term processing

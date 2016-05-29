@@ -15,7 +15,7 @@ class LogtalkLexer(RegexLexer):
     """
     For `Logtalk <http://logtalk.org/>`_ source code.
 
-    :copyright: 2008-2014 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2016 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
@@ -75,8 +75,10 @@ class LogtalkLexer(RegexLexer):
             (r'(fa(il|lse)|true)\b', Keyword),
             # All solutions
             (r'((bag|set)of|f(ind|or)all)(?=[(])', Keyword),
-            # Multi-threading meta-predicates
+            # Multi-threading predicates
             (r'threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])', Keyword),
+            # Engine predicates
+            (r'threaded_engine(_(create|stop|self|answer|return|post|fetch))?(?=[(])', Keyword),
             # Term unification
             (r'(subsumes_term|unify_with_occurs_check)(?=[(])', Keyword),
             # Term creation and decomposition

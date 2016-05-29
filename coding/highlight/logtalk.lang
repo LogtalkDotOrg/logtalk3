@@ -123,8 +123,12 @@ Keywords={
     Regex=[[ (bagof|setof|findall|forall)(?=[(]) ]],
     Group=1
   },
-  { Id=3, --multi-threading meta-predicates
+  { Id=3, --multi-threading predicates
     Regex=[[ (threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(]) ]],
+    Group=1
+  },
+  { Id=3, --engine predicates
+    Regex=[[ (threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(]) ]],
     Group=1
   },
   { Id=3, --term unification

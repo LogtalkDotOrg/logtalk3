@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2015.04.24
-# Version: 1.21
+#    Date: 2016.05.29
+# Version: 1.22
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -64,8 +64,10 @@ $KEYWORDS(kwc)=regex((throw|ca(ll|tch))(?=[(]), 1)
 $KEYWORDS(kwc)=regex((fa(il|lse)|true), 1)
 # all solutions
 $KEYWORDS(kwc)=regex((bagof|setof|findall|forall)(?=[(]), 1)
-# multi-threading meta-predicates
+# multi-threading predicates
 $KEYWORDS(kwc)=regex((threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(]), 1)
+# engine predicates
+$KEYWORDS(kwc)=regex((threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(]), 1)
 # term unification
 $KEYWORDS(kwc)=regex((subsumes_term|unify_with_occurs_check)(?=[(]), 1)
 # term creation and decomposition

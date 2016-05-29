@@ -345,6 +345,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b(threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(])</string>
+			<key>name</key>
+			<string>support.function.engines.logtalk</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b(current_predicate|predicate_property)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.reflection.logtalk</string>

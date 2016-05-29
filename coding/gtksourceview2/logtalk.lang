@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2014 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2016 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -176,8 +176,10 @@
 			<!-- Compiling, loading, and library paths -->
 			<keyword>(logtalk_(compile|l(ibrary_path|oad|oad_context)|make))(?=[(])</keyword>
 			<keyword>logtalk_make</keyword>
-			<!-- Multi-threading meta-predicates -->
+			<!-- Multi-threading predicates -->
 			<keyword>(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])</keyword>
+			<!-- Engine predicates -->
+			<keyword>(threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(])</keyword>
 			<!-- All solutions -->
 			<keyword>(forall)(?=[(])</keyword>
 		</context>

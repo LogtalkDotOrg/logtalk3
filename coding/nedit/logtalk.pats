@@ -2,7 +2,7 @@
 !
 ! Author: Paulo Moura (pmoura at logtalk.org)
 !
-! Last changed in: April 24, 2015
+! Last changed in: May 29, 2016
 !
 !
 ! To install this patterns file:
@@ -45,7 +45,7 @@ nedit.highlightPatterns: Logtalk:1:0{\n\
 	String:"""":""""::String::\n\
 	Quoted atoms:"'":"'"::String::\n\
 	Escape sequences:"\\\\([\\\\abfnrtv""']|(x[a-fA-F0-9]+|[0-7]+)\\\\)":::String1:Quoted atoms:\n\
-	Built-in methods:"<(parameter|self|sender|this|current_predicate|predicate_property|abolish|asserta|assertz|clause|retractall|retract|bagof|findall|forall|setof|before|after|forward|expand_goal|expand_term|goal_expansion|term_expansion|phrase|threaded|threaded_call|threaded_once|threaded_ignore|threaded_exit|threaded_peek|threaded_wait|threaded_notify)(?=[(])":::Subroutine::\n\
+	Built-in methods:"<(parameter|self|sender|this|current_predicate|predicate_property|abolish|asserta|assertz|clause|retractall|retract|bagof|findall|forall|setof|before|after|forward|expand_goal|expand_term|goal_expansion|term_expansion|phrase|threaded|threaded_call|threaded_once|threaded_ignore|threaded_exit|threaded_peek|threaded_wait|threaded_notify|threaded_engine|threaded_engine_create|threaded_engine_stop|threaded_engine_self|threaded_engine_answer|threaded_engine_return|threaded_engine_post|threaded_engine_fetch)(?=[(])":::Subroutine::\n\
 	Predicate aliases operator:"<as>":::Subroutine::\n\
 	Arithmetic operators:"<is>|\\+|\\*|\\-|/|=:=|=\\\\=|=\\<|\\>=|\\<|\\>":::Subroutine::\n\
 	Built-in predicates:"<(current_object|current_protocol|current_category|create_object|create_protocol|create_category|object_property|protocol_property|category_property|abolish_object|abolish_protocol|abolish_category|complements_object|conforms_to_protocol|extends_object|extends_protocol|extends_category|implements_protocol)(?=[(])":::Subroutine::\n\

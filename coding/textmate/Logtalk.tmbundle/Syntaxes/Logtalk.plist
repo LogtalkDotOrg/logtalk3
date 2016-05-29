@@ -290,7 +290,7 @@
 		<dict>
 			<key>match</key>
 			<string>\b((create|current|set)_logtalk_flag|halt)(?=[(])</string>
-			<key>name</key>
+			<key>name</key>\
 			<string>support.function.implementation-defined-hooks.logtalk</string>
 		</dict>
 		<dict>
@@ -346,6 +346,12 @@
 			<string>\b(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.multi-threading.logtalk</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(])</string>
+			<key>name</key>
+			<string>support.function.engines.logtalk</string>
 		</dict>
 		<dict>
 			<key>match</key>
