@@ -2,7 +2,7 @@
 %
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
-%  Last updated on May 28, 2016
+%  Last updated on May 29, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -117,7 +117,7 @@ user:prolog_predicate_name(user:'$lgt_current_engine_'(_, _), 'threaded_engine/1
 user:prolog_predicate_name(user:'$lgt_threaded_engine_answer'(_, _, _), 'threaded_engine_answer/2') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_engine_return'(_, _), 'threaded_engine_return/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_engine_post'(_, _, _), 'threaded_engine_post/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_engine_fetch'(_, _, _), 'threaded_engine_fetch/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_fetch'(_, _), 'threaded_engine_fetch/1') :- !.
 
 user:prolog_predicate_name(Goal, Label) :-
 	Goal \= '::'(_, _),

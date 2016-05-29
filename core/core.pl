@@ -1942,14 +1942,14 @@ threaded_engine_post(Engine, Term) :-
 	catch('$lgt_threaded_engine_post'(Engine, Term, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
-% threaded_engine_fetch(@nonvar, ?term)
+% threaded_engine_fetch(?term)
 
-threaded_engine_fetch(Engine, Term) :-
+threaded_engine_fetch(Term) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Engine, Term), user))).
+	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Term), user))).
 
-threaded_engine_fetch(Engine, Term) :-
-	catch('$lgt_threaded_engine_fetch'(Engine, Term, user), Error, '$lgt_runtime_error_handler'(Error)).
+threaded_engine_fetch(Term) :-
+	catch('$lgt_threaded_engine_fetch'(Term, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
 % threaded_engine_stop(+nonvar)
@@ -10492,15 +10492,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
 
 
-'$lgt_compile_body'(threaded_engine_fetch(_, _), _, _, _) :-
+'$lgt_compile_body'(threaded_engine_fetch(_), _, _, _) :-
 	\+ '$lgt_pp_threaded_',
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_engine_fetch(Engine, Message), MTGoal, '$lgt_debug'(goal(threaded_engine_fetch(Engine, Message), MTGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_engine_fetch(Message), MTGoal, '$lgt_debug'(goal(threaded_engine_fetch(Message), MTGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	MTGoal = '$lgt_threaded_engine_fetch'(Engine, Message, This),
+	MTGoal = '$lgt_threaded_engine_fetch'(Message, This),
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
 
 
@@ -19161,18 +19161,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_threaded_engine_fetch'(@nonvar, ?term, @object_identifier)
+% '$lgt_threaded_engine_fetch'(?term, @object_identifier)
 
-'$lgt_threaded_engine_fetch'(Engine, Term, This) :-
-	(	var(Engine) ->
-		throw(error(instantiation_error, logtalk(threaded_engine_fetch(Engine, Term), This)))
-	;	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
-		% first check if the engine is running
-		thread_peek_message(ThisQueue, '$lgt_engine_queue_id'(Engine, TermQueue, _)) ->
+'$lgt_threaded_engine_fetch'(Term, This) :-
+	thread_self(Id),
+	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
+	(	% check if calling from within an engine
+		thread_peek_message(ThisQueue, '$lgt_engine_queue_id'(_, TermQueue, Id)) ->
 		% engine exists; go ahead and retrieve a message from its mailbox
 		thread_get_message(TermQueue, Term)
 	;	% engine does not exist
-		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_fetch(Engine, Term), This)))
+		fail
 	).
 
 

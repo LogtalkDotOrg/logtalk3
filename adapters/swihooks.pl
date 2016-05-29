@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 28, 2016
+%  Last updated on May 29, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -205,7 +205,7 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_answer'(_, _, _), 'threaded_engine_answer/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_return'(_, _), 'threaded_engine_return/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_post'(_, _, _), 'threaded_engine_post/2') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_fetch'(_, _, _), 'threaded_engine_fetch/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_fetch'(_, _), 'threaded_engine_fetch/1') :- !.
 
 
 :- multifile(prolog:term_compiled/2).
@@ -535,10 +535,10 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(threaded_engine_stop(Engine), _, '$lgt_threaded_engine_stop'(Engine, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_engine_self(Engine), _, '$lgt_threaded_engine_self'(Engine, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_engine(Engine), _, '$lgt_current_engine_'(Engine, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_engine_answer(Engine, Answer), _, '$lgt_threaded_engine_answer'(Engine, Answer, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_answer(Engine, Answer), _, '$lgt_threaded_engine_answer'(Engine, Answer, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_engine_return(Answer), _, '$lgt_threaded_engine_return'(Answer, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_engine_post(Engine, Term), _, '$lgt_threaded_engine_post'(Engine, Term, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_engine_fetch(Engine, Term), _, '$lgt_threaded_engine_fetch'(Engine, Term, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_post(Engine, Term), _, '$lgt_threaded_engine_post'(Engine, Term, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_engine_fetch(Term), _, '$lgt_threaded_engine_fetch'(Term, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Goal, Entity, with_mutex(_, TGoal), TermPos0, TermPos) :-
 	\+ functor(Goal, with_mutex, 2),								% synchronized predicates
@@ -679,7 +679,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_threaded_engine_answer'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_engine_return'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_engine_post'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_threaded_engine_fetch'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_fetch'/2, trace, 1).
 
 % add dummy meta_predicate/1 directives to avoid cluttering the make/0
 % analysis report (as some of the results are not correct for all usage

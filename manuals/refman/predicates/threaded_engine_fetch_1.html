@@ -27,7 +27,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk built-in predicate: threaded_engine_fetch/2</title>
+	<title>Logtalk built-in predicate: threaded_engine_fetch/1</title>
 	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
 </head>
@@ -35,38 +35,35 @@
 <body>
 
 <div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Built-in predicate: threaded_engine_fetch/2</div>
+<div class="top-right">Built-in predicate: threaded_engine_fetch/1</div>
 <div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_engine_fetch/2</div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_engine_fetch/1</div>
 
-<h2 id="predicates_threaded_engine_fetch_2" class="codenp">threaded_engine_fetch/2</h2>
+<h2 id="predicates_threaded_engine_fetch_1" class="codenp">threaded_engine_fetch/1</h2>
 
 <h4>Description</h4>
 
-<pre>threaded_engine_fetch(Engine, Term)</pre>
+<pre>threaded_engine_fetch(Term)</pre>
 <p>
-Fetches a term from the engine message queue.
+Fetches a term from the engine term queue. Blocks until a term is available. Fails in not called from within an engine.
 </p>
 
 <h4>Template and modes</h4>
 
-<pre>threaded_engine_fetch(@nonvar, ?term)</pre>
+<pre>threaded_engine_fetch(?term)</pre>
 
 <h4>Errors</h4>
 
 <dl>
-	<dt>Engine is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>Engine is neither a variable nor the name of an existing engine:</dt>
-		<dd><code>existence_error(engine, Engine)</code></dd>
+	<dt><code>(none)</code></dt>
 </dl>
 
 <h4>Examples</h4>
 
 <dl>
-	<dt>Fetches a term from the <code>worker_1</code> engine:</dt>
-		<dd><code>threaded_engine_fetch(worker_1, Term)</code></dd>
+	<dt>Fetch a term from the engine term queue:</dt>
+		<dd><code>threaded_engine_fetch(Term)</code></dd>
 </dl>
 
 <h4>See also</h4>
@@ -78,7 +75,7 @@ Fetches a term from the engine message queue.
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 28, 2016</span>
+		<span>Last updated on: May 29, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="threaded_engine_post_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#predicates">next</a></span><br/>
