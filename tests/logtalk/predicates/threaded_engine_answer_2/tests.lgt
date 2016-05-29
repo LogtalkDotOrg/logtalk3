@@ -24,16 +24,37 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/28,
+		date is 2016/05/29,
 		comment is 'Unit tests for the threaded_engine_answer/2 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	throws(threaded_engine_answer_2_1, error(instantiation_error, logtalk(threaded_engine_answer(_,_), _))) :-
-		{threaded_engine_answer(_, _)}.
+	throws(threaded_engine_answer_2_01, error(instantiation_error, logtalk(threaded_engine_answer(_,_), This))) :-
+		this(This),
+		threaded_engine_answer(_, _).
 
-	throws(threaded_engine_answer_2_2, error(existence_error(engine,foo), logtalk(threaded_engine_answer(foo,_), _))) :-
-		{threaded_engine_answer(foo, _)}.
+	throws(threaded_engine_answer_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_answer(foo,_), This))) :-
+		this(This),
+		threaded_engine_answer(foo, _).
+
+	succeeds(threaded_engine_create_3_03) :-
+		threaded_engine_create(X, a(X), test_engine_1).
+
+	succeeds(threaded_engine_create_3_04) :-
+		threaded_engine_answer(test_engine_1, X),
+		threaded_engine_answer(test_engine_1, Y),
+		threaded_engine_answer(test_engine_1, Z),
+		X == 1, Y == 2, Z == 3.
+
+	fails(threaded_engine_create_3_05) :-
+		threaded_engine_answer(test_engine_1, _).
+
+	succeeds(threaded_engine_create_3_06) :-
+		threaded_engine_stop(test_engine_1).
+
+	% auxiliary predicates
+
+	a(1). a(2). a(3).
 
 :- end_object.

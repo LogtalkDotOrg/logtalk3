@@ -24,19 +24,19 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/28,
+		date is 2016/05/29,
 		comment is 'Unit tests for the threaded_engine_stop/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	throws(threaded_engine_stop_1_1, error(instantiation_error, logtalk(threaded_engine_stop(_), _))) :-
+	throws(threaded_engine_stop_1_01, error(instantiation_error, logtalk(threaded_engine_stop(_), _))) :-
 		{threaded_engine_stop(_)}.
 
-	throws(threaded_engine_stop_1_2, error(existence_error(engine,foo), logtalk(threaded_engine_stop(foo), _))) :-
+	throws(threaded_engine_stop_1_02, error(existence_error(engine,foo), logtalk(threaded_engine_stop(foo), _))) :-
 		{threaded_engine_stop(foo)}.
 
-	succeeds(threaded_engine_stop_1_3) :-
+	succeeds(threaded_engine_stop_1_03) :-
 		{threaded_engine_create(none, true, test_engine_1),
 		 threaded_engine_stop(test_engine_1)}.
 

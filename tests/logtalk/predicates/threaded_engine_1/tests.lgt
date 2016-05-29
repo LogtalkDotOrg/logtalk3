@@ -24,10 +24,33 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/28,
+		date is 2016/05/29,
 		comment is 'Unit tests for the threaded_engine/1 built-in predicate.'
 	]).
 
 	:- threaded.
+
+	fails(threaded_engine_1_01) :-
+		threaded_engine(_).
+
+	fails(threaded_engine_1_02) :-
+		threaded_engine(foo).
+
+	succeeds(threaded_engine_1_03) :-
+		threaded_engine_create(none, true, Engine),
+		threaded_engine(Engine),
+		threaded_engine_stop(Engine).
+
+	succeeds(threaded_engine_1_04) :-
+		threaded_engine_create(none, fail, Engine),
+		threaded_engine(Engine),
+		threaded_engine_stop(Engine).
+
+	succeeds(threaded_engine_1_05) :-
+		threaded_engine_create(none, true, test_engine_1),
+		threaded_engine_create(none, true, test_engine_2),
+		threaded_engine_create(none, true, test_engine_3),
+		setof(Engine, threaded_engine(Engine), Engines),
+		Engines == [test_engine_1, test_engine_2, test_engine_3].
 
 :- end_object.

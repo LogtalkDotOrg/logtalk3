@@ -24,17 +24,20 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/28,
+		date is 2016/05/29,
 		comment is 'Unit tests for the threaded_engine_fetch/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	succeeds(threaded_engine_fetch_2_1) :-
+	succeeds(threaded_engine_fetch_1_01) :-
 		threaded_engine_create(none, return, test_engine_1),
 		threaded_engine_post(test_engine_1, term),
 		threaded_engine_answer(test_engine_1, Term),
 		Term == term.
+
+	fails(threaded_engine_fetch_1_02) :-
+		threaded_engine_fetch(_).
 
 	% auxiliary predicates
 

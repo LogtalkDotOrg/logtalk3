@@ -24,20 +24,22 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/28,
+		date is 2016/05/29,
 		comment is 'Unit tests for the threaded_engine_post/2 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	throws(threaded_engine_post_2_1, error(instantiation_error, logtalk(threaded_engine_post(_,_), _))) :-
-		{threaded_engine_post(_, _)}.
+	throws(threaded_engine_post_2_01, error(instantiation_error, logtalk(threaded_engine_post(_,_), This))) :-
+		this(This),
+		threaded_engine_post(_, _).
 
-	throws(threaded_engine_post_2_2, error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_), _))) :-
-		{threaded_engine_post(foo, _)}.
+	throws(threaded_engine_post_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_), This))) :-
+		this(This),
+		threaded_engine_post(foo, _).
 
-	succeeds(threaded_engine_post_2_3) :-
-		{threaded_engine_create(none, true, test_engine_1),
-		 threaded_engine_post(test_engine_1, term)}.
+	succeeds(threaded_engine_post_2_03) :-
+		threaded_engine_create(none, true, test_engine_1),
+		threaded_engine_post(test_engine_1, term).
 
 :- end_object.
