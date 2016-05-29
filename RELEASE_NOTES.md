@@ -37,6 +37,10 @@ library notation.
 
 * IMPROVED: Compiler code cleanup and refactoring.
 
+* IMPROVED: The built-in predicates `threaded_call/1-2`, `threaded_once/1-2`,
+and `threaded_ignore/1` to avoid creating a thread if the goal argument is not
+callable at runtime.
+
 * FIXED: Regression when processing source file names with multiple periods.
 Thanks to Günter Kniesel for the bug report.
 

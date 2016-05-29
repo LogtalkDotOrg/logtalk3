@@ -17,7 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains some useful objects, categories, and protocols. 
+This folder contains useful objects, categories, and protocols. For full
+documentation see:
+
+	../docs/index.html
 
 To load a group of objects, protocols, and categories in this library 
 either change your Prolog working directory to this folder and then 
