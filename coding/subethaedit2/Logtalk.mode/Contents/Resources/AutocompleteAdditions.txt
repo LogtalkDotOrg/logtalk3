@@ -85,7 +85,7 @@ threaded_engine_self()
 threaded_engine_answer(, )
 threaded_engine_return(, )
 threaded_engine_post(, )
-threaded_engine_fetch(, )
+threaded_engine_fetch()
 
 true
 fail
