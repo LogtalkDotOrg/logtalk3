@@ -38,8 +38,6 @@
 
 	succeeds(threaded_engine_post_2_3) :-
 		{threaded_engine_create(none, true, test_engine_1),
-		 threaded_engine_post(test_engine_1, term),
-		 threaded_engine_fetch(test_engine_1, Term)},
-		Term == term.
+		 threaded_engine_post(test_engine_1, term)}.
 
 :- end_object.
