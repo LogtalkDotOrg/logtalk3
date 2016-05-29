@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.05.1 - June ??, 2016
+3.06.0 - June ??, 2016
 ======================
 
 Logtalk compiler and runtime
@@ -29,6 +29,10 @@ Logtalk compiler and runtime
 
 * CHANGED: When adding a `begin/2` token to the list of tokens generated for
 printing a message, use the message kind term instead of just its functor.
+
+* ADDED: Threaded engines API. An engine is a computing threads whose solutions
+can be lazily computed and retrieved. An engine also supports a term queue that
+allows passing arbitrary terms to the engine.
 
 * ADDED: Support for specifying the `scratch_directory` flag value using
 library notation.
@@ -50,6 +54,11 @@ Prolog adapter and integration files
 * UPDATED: SWI-Prolog adapter file to enable tabling support when using version
 7.3.21 or later.
 
+Documentation
+-------------
+
+* UPDATED: User and Reference manuals for the threaded engines API.
+
 Tools
 -----
 
@@ -61,6 +70,11 @@ number of tests sets and the number of completed tests sets.
 
 * FIXED: The `logtalk_tester.sh` automation script to not override any existing
 log messages when tagging a test suite as a timeout or a crash.
+
+Tests
+-----
+
+* ADDED: Unit tests for the new threaded engines built-in predicates.
 
 Examples
 --------
@@ -74,6 +88,9 @@ using version 7.3.21 or later.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
+
+* ADDED: Syntax coloring and code completion support for the new threaded
+engines built-in predicates.
 
 * ADDED: Instructions for using GtkSourceView 3.x syntax highlighting support.
 
