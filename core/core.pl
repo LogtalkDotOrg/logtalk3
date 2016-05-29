@@ -1888,8 +1888,7 @@ threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	throw(error(resource_error(threads), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), user))).
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), user)),
-	catch('$lgt_threaded_engine_create'(AnswerTemplate, Goal, user, Engine), Error, '$lgt_runtime_error_handler'(Error)).
+	catch('$lgt_threaded_engine_create'(AnswerTemplate, Goal, Goal, user, Engine), Error, '$lgt_runtime_error_handler'(Error)).
 
 
 % threaded_engine(?nonvar)
@@ -10427,8 +10426,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_engine_create'(AnswerTemplate, TGoal, This, Engine),
-	MDGoal = '$lgt_threaded_engine_create'(AnswerTemplate, DGoal, This, Engine),
+	MTGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine),
+	MDGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, DGoal, This, Engine),
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
 
 
@@ -19049,17 +19048,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_threaded_engine_create'(@term, @callable, +object_identifier, ?nonvar)
+% '$lgt_threaded_engine_create'(@term, @term, @callable, +object_identifier, ?nonvar)
 
-'$lgt_threaded_engine_create'(AnswerTemplate, Goal, This, Engine) :-
+'$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine) :-
 	(	var(Engine) ->
 		'$lgt_new_threaded_tag'(Engine)
 	;	'$lgt_current_engine_'(This, Engine) ->
 		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)))
 	;	true
 	),
+	'$lgt_must_be'(callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
 	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
-	thread_create('$lgt_mt_engine_goal'(ThisQueue, AnswerTemplate, Goal, Engine), Id, []),
+	thread_create('$lgt_mt_engine_goal'(ThisQueue, AnswerTemplate, TGoal, Engine), Id, []),
 	message_queue_create(TermQueue),
 	thread_send_message(ThisQueue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
 	assertz('$lgt_current_engine_'(This, Engine)).
