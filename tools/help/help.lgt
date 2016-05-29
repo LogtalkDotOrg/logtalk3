@@ -21,9 +21,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2016/05/07,
+		date is 2016/05/30,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -227,6 +227,15 @@
 	built_in_predicate(threaded_peek, 2, '/manuals/refman/predicates/', 'threaded_peek1_2.html').
 	built_in_predicate(threaded_wait, 1, '/manuals/refman/predicates/', 'threaded_wait_1.html').
 	built_in_predicate(threaded_notify, 1, '/manuals/refman/predicates/', 'threaded_notify_1.html').
+
+	built_in_predicate(threaded_engine, 1, '/manuals/refman/predicates/', 'threaded_engine_1.html').
+	built_in_predicate(threaded_engine_create, 3, '/manuals/refman/predicates/', 'threaded_engine_create_3.html').
+	built_in_predicate(threaded_engine_stop, 1, '/manuals/refman/predicates/', 'threaded_engine_stop_1.html').
+	built_in_predicate(threaded_engine_self, 1, '/manuals/refman/predicates/', 'threaded_engine_self_1.html').
+	built_in_predicate(threaded_engine_answer, 2, '/manuals/refman/predicates/', 'threaded_engine_answer_2.html').
+	built_in_predicate(threaded_engine_return, 1, '/manuals/refman/predicates/', 'threaded_engine_return_1.html').
+	built_in_predicate(threaded_engine_post, 2, '/manuals/refman/predicates/', 'threaded_engine_post_2.html').
+	built_in_predicate(threaded_engine_fetch, 1, '/manuals/refman/predicates/', 'threaded_engine_fetch_1.html').
 
 	built_in_predicate(logtalk_compile, 1, '/manuals/refman/predicates/', 'logtalk_compile_1.html').
 	built_in_predicate(logtalk_compile, 2, '/manuals/refman/predicates/', 'logtalk_compile_2.html').

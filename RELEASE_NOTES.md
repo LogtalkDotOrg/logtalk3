@@ -62,6 +62,8 @@ Documentation
 Tools
 -----
 
+* UPDATED: The `help` tool for the threaded engines API built-in predicates.
+
 * ADDED: Support for using the Logtalk pack for SWI-Prolog as a backend option
 to the `logtalk_tester.sh` automation script.
 
