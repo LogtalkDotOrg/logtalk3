@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2016/03/21,
+		date is 2016/05/30,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -240,6 +240,11 @@
 			'  prolog_dialect: ~w, modules: ~w, threads: ~w'-[PrologDialect, Modules, Threads], nl,
 			'  encoding_directive: ~w, tabling: ~w, coinduction: ~w'-[Encodings, Tabling, Coinduction], nl, nl
 		].
+
+	% help
+
+	message_tokens(help) -->
+		['For Logtalk help, use ?- {help(loader)}. or ?- logtalk_load(help(loader)).'-[], nl, nl].
 
 	% settings files messages
 

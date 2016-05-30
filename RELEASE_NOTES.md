@@ -30,12 +30,15 @@ Logtalk compiler and runtime
 * CHANGED: When adding a `begin/2` token to the list of tokens generated for
 printing a message, use the message kind term instead of just its functor.
 
-* ADDED: Threaded engines API. An engine is a computing threads whose solutions
+* ADDED: Threaded engines API. An engine is a computing thread whose solutions
 can be lazily computed and retrieved. An engine also supports a term queue that
 allows passing arbitrary terms to the engine.
 
 * ADDED: Support for specifying the `scratch_directory` flag value using
 library notation.
+
+* ADDED: By default, print information on how to get help using the `help` tool
+at Logtalk startup. Thanks to Anne Ogborn for the suggestion.
 
 * IMPROVED: Detection of missing `meta_predicate/1` directives.
 

@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc1)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc2)).
 
 
 
@@ -20821,6 +20821,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_default_hooks',
 	'$lgt_start_runtime_threading',
 	'$lgt_report_settings_file'(Result),
+	'$lgt_print_message'(comment(help), core, help),
 	'$lgt_check_prolog_version'.
 
 
