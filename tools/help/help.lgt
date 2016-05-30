@@ -18,7 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(help).
+:- object(help,
+	implements(forwarding)).
 
 	:- info([
 		version is 0.8,
@@ -28,6 +29,10 @@
 	]).
 
 	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl, nl)).
+
+	forward(Message) :-
+		writeq(Message), write(' is not a valid help request.'), nl,
+		help.
 
 	:- public(help/0).
 	:- mode(help, one).

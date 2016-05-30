@@ -71,6 +71,9 @@ Tools
 when there is more than a single match for a request for help on a predicate
 indicator or a non-terminal indicator.
 
+* IMPROVED: The `help` tool now prints the general instructions on how to get
+help when if an unknown message is sent to the `help` object.
+
 * ADDED: Support for using the Logtalk pack for SWI-Prolog as a backend option
 to the `logtalk_tester.sh` automation script.
 
