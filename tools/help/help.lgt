@@ -21,7 +21,7 @@
 :- object(help).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
 		date is 2016/05/30,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
@@ -44,8 +44,8 @@
 		write('    help::Functor//Arity. '), nl,
 		write('    help::library.'), nl,
 		write('    help::library(Entity).'), nl, nl,
-		write('The manual page for the selected built-in feature will open in your default'), nl,
-		write('web browser. To consult the Logtalk User and Reference manuals:'), nl, nl,
+		write('The corresponding documentation page will open in your default web browser.'), nl,
+		write('To consult the Logtalk User and Reference manuals:'), nl, nl,
 		write('    help::manuals.'), nl, nl,
 		write('To compile and load source files the following shortcut can be used:'), nl, nl,
 		write('    {File1, File2, ...}'), nl, nl,
@@ -65,14 +65,17 @@
 	]).
 
 	Functor/Arity :-
-		forall(
+		atom(Functor),
+		findall(
+			Path-File,
 			(	built_in_directive(Functor, Arity, Path, File)
 			;	built_in_method(Functor, Arity, Path, File)
 			;	built_in_predicate(Functor, Arity, Path, File)
 			;	control(Functor, Arity, Path, File)
 			),
-			open(Path, File)
-		).
+			Hits
+		),
+		show(Hits, Functor/Arity).
 
 	:- public(('//')/2).
 	:- mode('//'(+atom, +integer), zero_or_one).
@@ -82,10 +85,51 @@
 	]).
 
 	NonTerminalFunctor//Arity :-
-		forall(
+		atom(NonTerminalFunctor),
+		findall(
+			Path-File,
 			built_in_non_terminal(NonTerminalFunctor, Arity, Path, File),
+			Hits
+		),
+		show(Hits, NonTerminalFunctor//Arity).
+
+	show([], Search) :-
+		fuzzy_matching(Search).
+	show([Path-File| Hits], Search) :-
+		(	Hits == [] ->
 			open(Path, File)
+		;	fuzzy_matching(Search)
 		).
+
+	fuzzy_matching(Functor/Arity) :-
+		findall(
+			ExpandedFunctor/Arity,
+			completion(Functor, ExpandedFunctor/Arity-_),
+			ExpandedPIs
+		),
+		alternatives(ExpandedPIs, Functor/Arity).
+	fuzzy_matching(NonTerminalFunctor//Arity) :-
+		findall(
+			ExpandedFunctor//Arity,
+			completion(NonTerminalFunctor, ExpandedFunctor//Arity-_),
+			ExpandedNTIs
+		),
+		alternatives(ExpandedNTIs, NonTerminalFunctor//Arity).
+
+	alternatives([], Search) :-
+		write('No help available for '), writeq(Search), nl,
+		fail.
+	alternatives([Alternative| Alternatives], _) :-
+		(	Alternatives == [] ->
+			write('Do you mean instead:'), nl
+		;	write('Do you mean instead one of:'), nl
+		),
+		write_alternatives([Alternative| Alternatives]).
+
+	write_alternatives([]).
+	write_alternatives([Alternative| Alternatives]) :-
+		write('  '), writeq(Alternative), nl,
+		write_alternatives(Alternatives).
 
 	:- public(completion/2).
 	:- mode(completion(+atom, -pair), zero_or_more).

@@ -64,6 +64,10 @@ Tools
 
 * UPDATED: The `help` tool for the threaded engines API built-in predicates.
 
+* IMPROVED: The `help` tool to use name completions and to print alternatives
+when there is more than a single match for a request for help on a predicate
+indicator or a non-terminal indicator.
+
 * ADDED: Support for using the Logtalk pack for SWI-Prolog as a backend option
 to the `logtalk_tester.sh` automation script.
 
