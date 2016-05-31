@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc3)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc4)).
 
 
 
@@ -18987,7 +18987,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			thread_get_message(_),
 			% assume Message = '$lgt_next' and backtrack to try to find an alternative solution
 			fail
-		;	thread_send_message(Queue, '$lgt_answer'(Answer, Error, Engine, Id))
+		;	thread_send_message(Queue, '$lgt_answer'(Answer, error(Error), Engine, Id)),
+			% keep the thread alive until the answer is collected
+			thread_get_message(_)
 		)
 	;	% no (more) solutions
 		thread_send_message(Queue, '$lgt_answer'(Answer, failure, Engine, Id))
@@ -19007,7 +19009,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% first check if the engine is running
 		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, _, Id)) ->
 		% engine exists; go ahead and retrieve an answer
-		'$lgt_mt_engine_reply'(Queue, Answer, Engine, Id)
+		'$lgt_mt_engine_reply'(This, Queue, Answer, Engine, Id)
 	;	% engine does not exist
 		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_answer(Engine, Answer), This)))
 	).
@@ -19015,17 +19017,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % return current answer and start computing the next one
 
-'$lgt_mt_engine_reply'(Queue, Answer, Engine, Id) :-
+'$lgt_mt_engine_reply'(This, Queue, Answer, Engine, Id) :-
 	thread_property(Id, status(Status)),
 	(	Status == true ->
 		fail
 	;	thread_get_message(Queue, '$lgt_answer'(Reply, Result, Engine, Id)),
 		(	Result == success ->
-			Answer = Reply,
-			catch(thread_send_message(Id, '$lgt_next'), _, true)
+			catch(thread_send_message(Id, '$lgt_next'), _, true),
+			Answer = Reply
 		;	Result == failure ->
 			fail
-		;	throw(Result)
+		;	Result = error(Error),
+			thread_send_message(Id, true),
+			throw(error(Error, logtalk(threaded_engine_answer(Engine,Answer),This)))
 		)
 	).
 
