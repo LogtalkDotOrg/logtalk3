@@ -102,6 +102,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of representation and handling of relations using events;
 	illustrates how to use events to avoid breaking object encapsulation
 
+- `carengines`  
+	example of category composition (extension of categories by 
+	other categories) using car engines
+
 - `cc`  
 	example of using conditional compilation directives to write code
 	portable across several back-end Prolog compilers
@@ -149,10 +153,6 @@ Follows a short description of each included example (in alphabetical order):
 	very simple example of using the new, experimental `encoding/1` 
 	directive (requires Logtalk to be run with YAP, SWI-Prolog,
 	CxProlog, K-Prolog, SICStus Prolog, or Lean Prolog)
-
-- `engines`  
-	example of category composition (extension of categories by 
-	other categories) using car engines
 
 - `errors`  
 	example showing the Logtalk compiler warning and error reporting

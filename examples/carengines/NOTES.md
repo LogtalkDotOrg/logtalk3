@@ -21,4 +21,4 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 For a description of this example, please see the comments in the 
-`engines.lgt` source file.
+`carengines.lgt` source file.

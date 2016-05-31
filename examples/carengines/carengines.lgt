@@ -23,7 +23,7 @@ This is a simple example of category composition, i.e. extending of
 categories by other categories in order to provide modified components 
 for building objects, using car engines.
 
-The example defines a car engine protocol, "enginep", a standard engine 
+The example defines a car engine protocol, "carcarenginep", a standard engine 
 (classic), and an improved version of it, "sport". Both engines are then 
 imported in two car models, "sedan" and "coupe".
 */
@@ -31,7 +31,7 @@ imported in two car models, "sedan" and "coupe".
 
 % first we define a protocol for describing the characteristics of an engine:
 
-:- protocol(enginep).
+:- protocol(carenginep).
 
 	:- public([
 		reference/1,
@@ -49,7 +49,7 @@ imported in two car models, "sedan" and "coupe".
 % when "assembling" cars:
 
 :- category(classic,
-	implements(enginep)).
+	implements(carenginep)).
 
 	reference('M180.940').
 	capacity(2195).

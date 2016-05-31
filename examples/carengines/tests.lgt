@@ -22,13 +22,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/05/13,
-		comment is 'Unit tests for the "engines" example.'
+		date is 2016/05/31,
+		comment is 'Unit tests for the "carengines" example.'
 	]).
 
-	cover(enginep).
+	cover(carenginep).
 	cover(classic).
 	cover(sport).
 	cover(sedan).

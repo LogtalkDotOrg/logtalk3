@@ -91,6 +91,8 @@ Tests
 Examples
 --------
 
+* RENAMED: Example `engines` to `carengines`.
+
 * ADDED: `blocks` example, a simpler version of the `bricks` example.
 
 * UPDATED: The `jpl` example with some benchmarks.
