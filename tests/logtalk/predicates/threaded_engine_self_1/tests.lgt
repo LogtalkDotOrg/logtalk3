@@ -30,7 +30,7 @@
 
 	:- threaded.
 
-	succeeds(threaded_engine_fetch_1_01) :-
+	succeeds(threaded_engine_self_1_01) :-
 		threaded_engine_create(none, return, test_engine_1),
 		threaded_engine_answer(test_engine_1, Engine),
 		Engine == test_engine_1.
