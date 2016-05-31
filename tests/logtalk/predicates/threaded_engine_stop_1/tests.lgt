@@ -24,20 +24,37 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/29,
+		date is 2016/05/31,
 		comment is 'Unit tests for the threaded_engine_stop/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	throws(threaded_engine_stop_1_01, error(instantiation_error, logtalk(threaded_engine_stop(_), _))) :-
-		{threaded_engine_stop(_)}.
+	throws(threaded_engine_stop_1_01, error(instantiation_error, logtalk(threaded_engine_stop(_), This))) :-
+		this(This),
+		threaded_engine_stop(_).
 
-	throws(threaded_engine_stop_1_02, error(existence_error(engine,foo), logtalk(threaded_engine_stop(foo), _))) :-
-		{threaded_engine_stop(foo)}.
+	throws(threaded_engine_stop_1_02, error(existence_error(engine,foo), logtalk(threaded_engine_stop(foo), This))) :-
+		this(This),
+		threaded_engine_stop(foo).
+
+	% engine stop should always be successful independent
+	% of engine thread state and engine goal results 
 
 	succeeds(threaded_engine_stop_1_03) :-
-		{threaded_engine_create(none, true, test_engine_1),
-		 threaded_engine_stop(test_engine_1)}.
+		threaded_engine_create(none, repeat, test_engine_1),
+		threaded_engine_stop(test_engine_1).
+
+	succeeds(threaded_engine_stop_1_04) :-
+		threaded_engine_create(none, true, test_engine_2),
+		threaded_engine_stop(test_engine_2).
+
+	succeeds(threaded_engine_stop_1_05) :-
+		threaded_engine_create(none, fail, test_engine_3),
+		threaded_engine_stop(test_engine_3).
+
+	succeeds(threaded_engine_stop_1_06) :-
+		threaded_engine_create(none, throw(error), test_engine_4),
+		threaded_engine_stop(test_engine_4).
 
 :- end_object.

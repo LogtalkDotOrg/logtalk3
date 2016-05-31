@@ -24,11 +24,15 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/29,
+		date is 2016/05/31,
 		comment is 'Unit tests for the threaded_engine_answer/2 built-in predicate.'
 	]).
 
 	:- threaded.
+
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
 
 	throws(threaded_engine_answer_2_01, error(instantiation_error, logtalk(threaded_engine_answer(_,_), This))) :-
 		this(This),
@@ -38,20 +42,29 @@
 		this(This),
 		threaded_engine_answer(foo, _).
 
-	succeeds(threaded_engine_create_3_03) :-
+	succeeds(threaded_engine_answer_2_03) :-
 		threaded_engine_create(X, a(X), test_engine_1).
 
-	succeeds(threaded_engine_create_3_04) :-
+	succeeds(threaded_engine_answer_2_04) :-
 		threaded_engine_answer(test_engine_1, X),
 		threaded_engine_answer(test_engine_1, Y),
 		threaded_engine_answer(test_engine_1, Z),
 		X == 1, Y == 2, Z == 3.
 
-	fails(threaded_engine_create_3_05) :-
+	% no more answers
+	fails(threaded_engine_answer_2_05) :-
 		threaded_engine_answer(test_engine_1, _).
 
-	succeeds(threaded_engine_create_3_06) :-
-		threaded_engine_stop(test_engine_1).
+	% engine with no goal solutions
+	fails(threaded_engine_answer_2_06) :-
+		threaded_engine_create(_, fail, test_engine_2),
+		threaded_engine_answer(test_engine_2, _).
+
+	% engine with a goal that throws an exception
+	throws(threaded_engine_answer_2_07, error(error, logtalk(threaded_engine_answer(_,_), This))) :-
+		this(This),
+		threaded_engine_create(_, throw(error), test_engine_3),
+		threaded_engine_answer(test_engine_3, _).
 
 	% auxiliary predicates
 
