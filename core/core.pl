@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc5)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc6)).
 
 
 
@@ -19101,11 +19101,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Engine) ->
 		throw(error(instantiation_error, logtalk(threaded_engine_stop(Engine), This)))
 	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, MQueue, Id)) ->
-		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, MQueue, Id)),
+		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)) ->
+		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
 		catch(thread_signal(Id, throw(abort)), _, true),
 		catch(thread_join(Id, _), _, true),
-		message_queue_destroy(MQueue),
+		message_queue_destroy(TermQueue),
+		(	thread_peek_message(Queue, '$lgt_answer'(_, _, Engine, Id)) ->
+			thread_get_message(Queue, '$lgt_answer'(_, _, Engine, Id))
+		;	true
+		),
 		retractall('$lgt_current_engine_'(This, Engine))
 	;	% answering thread don't exist
 		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_stop(Engine), This)))
