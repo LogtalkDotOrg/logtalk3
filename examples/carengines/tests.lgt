@@ -34,21 +34,21 @@
 	cover(sedan).
 	cover(coupe).
 
-	test(engines_1) :-
+	test(carengines_1) :-
 		findall(Predicate, sedan::current_predicate(Predicate), Solutions),
 		list::msort(Solutions, SolutionsSorted),
 		SolutionsSorted == [bore_stroke/2, capacity/1, cylinders/1, fuel/1, horsepower_rpm/2, reference/1].
 
-	test(engines_2) :-
+	test(carengines_2) :-
 		findall(Predicate, coupe::current_predicate(Predicate), Solutions),
 		list::msort(Solutions, SolutionsSorted),
 		SolutionsSorted == [bore_stroke/2, capacity/1, cylinders/1, fuel/1, horsepower_rpm/2, reference/1].
 
-	test(engines_3) :-
+	test(carengines_3) :-
 		findall(Name-Cylinders-HP-RPM, sedan::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)), Solutions),
 		Solutions == ['M180.940'-6-94-4800].
 
-	test(engines_4) :-
+	test(carengines_4) :-
 		findall(Name-Cylinders-HP-RPM, coupe::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)), Solutions),
 		Solutions == ['M180.941'-6-115-3657].
 
