@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/29,
+		date is 2016/05/31,
 		comment is 'Unit tests for the threaded_engine_self/1 built-in predicate.'
 	]).
 
@@ -35,6 +35,7 @@
 		threaded_engine_answer(test_engine_1, Engine),
 		Engine == test_engine_1.
 
+	% calls outside the context of an engine fail
 	fails(threaded_engine_self_1_02) :-
 		threaded_engine_self(_).
 

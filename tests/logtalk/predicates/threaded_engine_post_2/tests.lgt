@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/29,
+		date is 2016/05/31,
 		comment is 'Unit tests for the threaded_engine_post/2 built-in predicate.'
 	]).
 
@@ -38,8 +38,23 @@
 		this(This),
 		threaded_engine_post(foo, _).
 
+	% posting terms to an engine term queue is independent of
+	% the status of the engine goal and its solutions if any
+
 	succeeds(threaded_engine_post_2_03) :-
-		threaded_engine_create(none, true, test_engine_1),
+		threaded_engine_create(none, repeat, test_engine_1),
+		threaded_engine_post(test_engine_1, term).
+
+	succeeds(threaded_engine_post_2_04) :-
+		threaded_engine_create(none, true, test_engine_2),
+		threaded_engine_post(test_engine_1, term).
+
+	succeeds(threaded_engine_post_2_05) :-
+		threaded_engine_create(none, fail, test_engine_3),
+		threaded_engine_post(test_engine_1, term).
+
+	succeeds(threaded_engine_post_2_06) :-
+		threaded_engine_create(none, throw(error), test_engine_4),
 		threaded_engine_post(test_engine_1, term).
 
 :- end_object.

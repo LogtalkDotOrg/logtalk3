@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/29,
+		date is 2016/05/31,
 		comment is 'Unit tests for the threaded_engine/1 built-in predicate.'
 	]).
 
@@ -47,6 +47,12 @@
 		threaded_engine_stop(Engine).
 
 	succeeds(threaded_engine_1_05) :-
+		threaded_engine_create(none, true, Engine),
+		threaded_engine(ReturnedEngine),
+		threaded_engine_stop(Engine),
+		ReturnedEngine == Engine.
+
+	succeeds(threaded_engine_1_06) :-
 		threaded_engine_create(none, true, test_engine_1),
 		threaded_engine_create(none, true, test_engine_2),
 		threaded_engine_create(none, true, test_engine_3),

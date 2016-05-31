@@ -24,10 +24,14 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/28,
+		date is 2016/05/31,
 		comment is 'Unit tests for the threaded_engine_return/1 built-in predicate.'
 	]).
 
 	:- threaded.
+
+	% calls outside the context of an engine fail
+	fails(threaded_engine_return_1_01) :-
+		threaded_engine_return(_).
 
 :- end_object.
