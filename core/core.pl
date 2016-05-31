@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc4)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc5)).
 
 
 
@@ -19050,13 +19050,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_threaded_engine_return'(@term, @object_identifier)
 %
-% fails if not called from within an engine
+% fails if not called from within an engine;
+% blocks until the returned answer is consumed
 
 '$lgt_threaded_engine_return'(Answer, This) :-
 	thread_self(Id),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, _, Id)),
-	thread_send_message(Queue, '$lgt_answer'(Answer, success, Engine, Id)).
+	thread_send_message(Queue, '$lgt_answer'(Answer, success, Engine, Id)),
+	thread_get_message(_).
 
 
 
