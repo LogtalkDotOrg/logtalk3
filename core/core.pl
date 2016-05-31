@@ -18733,6 +18733,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_ignore'(@term, @callable)
+%
+% the thread is only created if the original goal is callable;
+% this prevents programming errors going unnoticed
 
 '$lgt_threaded_ignore'(Goal, TGoal, This) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_ignore(Goal), This)),
@@ -18741,6 +18744,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_call'(@term, @callable, +object_identifier, +object_identifier)
+%
+% the thread is only created if the original goal is callable; this prevents
+% programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_call'(Goal, TGoal, This, Self) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal), This)),
@@ -18751,6 +18757,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_once'(@term, @callable, +object_identifier, +object_identifier)
+%
+% the thread is only created if the original goal is callable; this prevents
+% programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_once'(Goal, TGoal, This, Self) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal), This)),
@@ -18761,6 +18770,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_call_tagged'(@term, @callable, +object_identifier, +object_identifier, -nonvar)
+%
+% the thread is only created if the original goal is callable; this prevents
+% programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_call_tagged'(Goal, TGoal, This, Self, Tag) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal, Tag), This)),
@@ -18772,6 +18784,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_once_tagged'(@term, @callable, +object_identifier, +object_identifier, -nonvar)
+%
+% the thread is only created if the original goal is callable; this prevents
+% programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_once_tagged'(Goal, TGoal, This, Self, Tag) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal, Tag), This)),
@@ -18941,6 +18956,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_engine_create'(@term, @term, @callable, +object_identifier, ?nonvar)
+%
+% the engine thread is only created if the original goal is callable; this prevents
+% programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine) :-
 	(	var(Engine) ->
@@ -18978,6 +18996,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_engine_answer'(@nonvar, ?term, @object_identifier)
+%
+% blocks until an answer (either an engine goal solution or a solution
+% posted by a call to threaded_engine_return/1) becomes available
 
 '$lgt_threaded_engine_answer'(Engine, Answer, This) :-
 	(	var(Engine) ->
@@ -19011,6 +19032,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_engine_self'(@object_identifier, ?nonvar)
+%
+% fails if not called from within an engine
 
 '$lgt_threaded_engine_self'(This, Engine) :-
 	thread_self(Id),
@@ -19022,6 +19045,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_engine_return'(@term, @object_identifier)
+%
+% fails if not called from within an engine
 
 '$lgt_threaded_engine_return'(Answer, This) :-
 	thread_self(Id),
@@ -19048,6 +19073,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_engine_fetch'(?term, @object_identifier)
+%
+% fails if not called from within an engine
 
 '$lgt_threaded_engine_fetch'(Term, This) :-
 	thread_self(Id),
@@ -19074,7 +19101,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		catch(thread_join(Id, _), _, true),
 		message_queue_destroy(MQueue),
 		retractall('$lgt_current_engine_'(This, Engine))
-	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
+	;	% answering thread don't exist
 		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_stop(Engine), This)))
 	).
 
