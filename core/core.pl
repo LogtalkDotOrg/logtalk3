@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc2)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc3)).
 
 
 
@@ -18957,23 +18957,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_current_engine_'(This, Engine)).
 
 
-
-% '$lgt_mt_engine_goal'(+atom, ?term, +callable, @nonvar)
-%
-% processes a non-deterministic message received by an object's message queue
+% compute a solution for the engine goal and return it; note that the thread
+% always terminates with a status of "true" when an exception occurs or there
+% aren't any more solutions for the engine goal
 
 '$lgt_mt_engine_goal'(Queue, Answer, Goal, Engine) :-
 	thread_self(Id),
 	(	catch(Goal, Error, true),
 		(	var(Error) ->
 			thread_send_message(Queue, '$lgt_answer'(Answer, success, Engine, Id)),
-			thread_get_message(Message),
-			(	Message == '$lgt_next' ->
-				% backtrack to the catch(Goal, ...) to try to find an alternative solution
-				fail
-			;	% otherwise assume Message = '$lgt_exit' and terminate thread
-				true
-			)
+			thread_get_message(_),
+			% assume Message = '$lgt_next' and backtrack to try to find an alternative solution
+			fail
 		;	thread_send_message(Queue, '$lgt_answer'(Answer, Error, Engine, Id))
 		)
 	;	% no (more) solutions
@@ -19008,7 +19003,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 			Answer = Reply,
 			catch(thread_send_message(Id, '$lgt_next'), _, true)
 		;	Result == failure ->
-			!,
 			fail
 		;	throw(Result)
 		)
