@@ -18983,16 +18983,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	thread_self(Id),
 	(	catch(Goal, Error, true),
 		(	var(Error) ->
-			thread_send_message(Queue, '$lgt_answer'(Answer, success, Engine, Id)),
+			thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
 			thread_get_message(_),
 			% assume Message = '$lgt_next' and backtrack to try to find an alternative solution
 			fail
-		;	thread_send_message(Queue, '$lgt_answer'(Answer, error(Error), Engine, Id)),
+		;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, error(Error))),
 			% keep the thread alive until the answer is collected
 			thread_get_message(_)
 		)
 	;	% no (more) solutions
-		thread_send_message(Queue, '$lgt_answer'(Answer, failure, Engine, Id))
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure))
 	).
 
 
@@ -19021,9 +19021,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	thread_property(Id, status(Status)),
 	(	Status == true ->
 		fail
-	;	thread_get_message(Queue, '$lgt_answer'(Reply, Result, Engine, Id)),
+	;	thread_get_message(Queue, '$lgt_answer'(Engine, Id, Reply, Result)),
 		(	Result == success ->
-			catch(thread_send_message(Id, '$lgt_next'), _, true),
+			thread_send_message(Id, '$lgt_next'),
 			Answer = Reply
 		;	Result == failure ->
 			fail
@@ -19057,7 +19057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	thread_self(Id),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, _, Id)),
-	thread_send_message(Queue, '$lgt_answer'(Answer, success, Engine, Id)),
+	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
 	thread_get_message(_).
 
 
@@ -19103,11 +19103,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)) ->
 		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
-		catch(thread_signal(Id, throw(abort)), _, true),
-		catch(thread_join(Id, _), _, true),
+		(	thread_property(Id, status(true)) ->
+			thread_join(Id, _)
+		;	thread_signal(Id, throw(abort)),
+			thread_join(Id, _)
+		),
 		message_queue_destroy(TermQueue),
-		(	thread_peek_message(Queue, '$lgt_answer'(_, _, Engine, Id)) ->
-			thread_get_message(Queue, '$lgt_answer'(_, _, Engine, Id))
+		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, _)) ->
+			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, _))
 		;	true
 		),
 		retractall('$lgt_current_engine_'(This, Engine))
