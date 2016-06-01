@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on May 31, 2016
+%  Last updated on June 1, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -141,11 +141,13 @@ logtalk_library_path(delegates, examples('delegates/')).
 logtalk_library_path(diamonds, examples('diamonds/')).
 logtalk_library_path(dynpred, examples('dynpred/')).
 logtalk_library_path(encodings, examples('encodings/')).
+logtalk_library_path(engines, examples('engines/')).
 logtalk_library_path(errors, examples('errors/')).
 logtalk_library_path(expansion, examples('expansion/')).
 logtalk_library_path(family, examples('family/')).
 logtalk_library_path(fft, threads('fft/')).
 logtalk_library_path(fibonacci, threads('fibonacci/')).
+logtalk_library_path(fluents, engines('fluents/')).
 logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(hailstone, examples('hailstone/')).
 logtalk_library_path(hanoi, threads('hanoi/')).
@@ -157,9 +159,11 @@ logtalk_library_path(instmethods, examples('instmethods/')).
 logtalk_library_path(instvars, examples('instvars/')).
 logtalk_library_path(integration, threads('integration/')).
 logtalk_library_path(integration2d, threads('integration2d/')).
+logtalk_library_path(interactors, engines('interactors/')).
 logtalk_library_path(jpl, examples('jpl/')).
 logtalk_library_path(lambdas, examples('lambdas/')).
 logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
+logtalk_library_path(lazy, engines('lazy/')).
 logtalk_library_path(lo_planner, examples('lo/planner/')).
 logtalk_library_path(lo_travellers, examples('lo/travellers/')).
 logtalk_library_path(localizations, examples('localizations/')).
@@ -210,6 +214,7 @@ logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).
 logtalk_library_path(tabling, examples('tabling/')).
 logtalk_library_path(tak, threads('tak/')).
+logtalk_library_path(tbbt, engines('tbbt/')).
 logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).

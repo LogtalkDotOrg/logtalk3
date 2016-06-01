@@ -93,6 +93,10 @@ Examples
 
 * RENAMED: Example `engines` to `carengines`.
 
+* ADDED: Set of examples, `engines`, illustrating using threaded engines
+and coroutining to implement fluents, lazy meta-predicates, interactors,
+and simple agents. Requires SWI-Prolog as the backend Prolog compiler.
+
 * ADDED: `blocks` example, a simpler version of the `bricks` example.
 
 * UPDATED: The `jpl` example with some benchmarks.

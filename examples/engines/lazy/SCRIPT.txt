@@ -1,0 +1,50 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(lazy(loader)).
+...
+
+
+% return a lazy list:
+
+| ?- lazy::find_all(X, (repeat,random::random(X)), List), list::nth1(N, List, E).
+
+List = [0.09230089279334841|_G3527],
+N = 1,
+E = 0.09230089279334841,
+freeze(_G3527, '$lazy#0.source_lazy_list#2'(1, _G3527, <lazy,user,lazy,lazy,c(user,user,r(user,lazy,[],[]))-[(repeat,random::random(X))],[],>)) ;
+List = [0.09230089279334841, 0.4435846174457203|_G3589],
+N = 2,
+E = 0.4435846174457203,
+freeze(_G3589, '$lazy#0.source_lazy_list#2'(1, _G3589, <lazy,user,lazy,lazy,c(user,user,r(user,lazy,[],[]))-[(repeat,random::random(X))],[],>)) ;
+List = [0.09230089279334841, 0.7230402056221108, 0.94581636451987|_G3651],
+N = 3,
+E = 0.94581636451987,
+freeze(_G3651, '$lazy#0.source_lazy_list#2'(1, _G3651, <lazy,user,lazy,lazy,c(user,user,r(user,lazy,[],[]))-[(repeat,random::random(X))],[],>)) ;
+List = [0.09230089279334841, 0.7230402056221108, 0.5014907142064751, 0.311326754804393|_G3712],
+N = 4,
+E = 0.311326754804393,
+freeze(_G3712, '$lazy#0.source_lazy_list#2'(1, _G3712, <lazy,user,lazy,lazy,c(user,user,r(user,lazy,[],[]))-[(repeat,random::random(X))],[],>)) ;
+List = [0.09230089279334841, 0.7230402056221108, 0.5014907142064751, 0.597447524783298, 0.915656206971831|_G3773],
+N = 5,
+E = 0.915656206971831,
+freeze(_G3773, '$lazy#0.source_lazy_list#2'(1, _G3773, <lazy,user,lazy,lazy,c(user,user,r(user,lazy,[],[]))-[(repeat,random::random(X))],[],>)) 
+...

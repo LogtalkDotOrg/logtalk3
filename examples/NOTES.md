@@ -149,6 +149,11 @@ Follows a short description of each included example (in alphabetical order):
 	example of using some of the built-in database handling methods 
 	in order to implement dynamic object state
 
+- `engines`  
+	examples of using threaded engines to implement fluents, lazy
+	meta-predicates, interactors, and simple agents (requires Logtalk
+	to be run with SWI-Prolog)
+
 - `encodings`  
 	very simple example of using the new, experimental `encoding/1` 
 	directive (requires Logtalk to be run with YAP, SWI-Prolog,
