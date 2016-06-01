@@ -17,20 +17,29 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Sublime Text is a text editor for Windows, MacOS X, and Linux.
+Sublime Text is a text editor for Windows, Mac OS X, and Linux.
 It's available from:
 
 	http://www.sublimetext.com/
 
-Sublime Text (version 1.03 or later) supports TextMate syntax files and
-TextMate snippets (version 1.2 or later). See the `../textmate` folder
-and the Sublime Text documentation for more information.
+Sublime Text supports TextMate syntax files and TextMate snippets. See the
+`../textmate` folder and the Sublime Text documentation for more information.
 
 For basic installation, copy the following files to the Sublime Text Packages
-directory at `~/Library/Application Support/Sublime Text 2/Packages/Logtalk/`
-(create the `Logtalk` subdirectory if it doesn't exist):
+directory, which is operating-system specific:
 
-1. File `../textmate2/Logtalk.tmbundle/Syntaxes/logtalk.plist`
+Mac OS X:
+	~/Library/Application Support/Sublime Text 2/Packages/Logtalk/
+Linux:
+	~/.config/sublime-text-3/Packages/Logtalk
+Windows:
+	%APPDATA%\Sublime Text 3\Packages\Logtalk
+
+Create the `Logtalk` subdirectory if it doesn't exist. The files to be
+copied are:
+
+1. File `../textmate2/Logtalk.tmbundle/Syntaxes/logtalk.plist` renamed
+to `Logtalk.tmLanguage`.
 
 2. All files in the `../textmate2/Logtalk.tmbundle/Snippets` directory
 

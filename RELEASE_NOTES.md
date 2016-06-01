@@ -112,6 +112,8 @@ engines built-in predicates.
 
 * ADDED: Instructions for using GtkSourceView 3.x syntax highlighting support.
 
+* UPDATED: Sublime Text instructions for adding Logtalk editing support.
+
 * UPDATED: Instructions for adding syntax highlighting support to recent
 versions of the Gedit text editor.
 
