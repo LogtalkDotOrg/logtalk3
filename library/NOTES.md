@@ -20,7 +20,8 @@ ________________________________________________________________________
 This folder contains useful objects, categories, and protocols. For full
 documentation see:
 
-	../docs/index.html
+[../docs/index.html](http://logtalk.org/docs/index.html)
+
 
 To load a group of objects, protocols, and categories in this library 
 either change your Prolog working directory to this folder and then 
