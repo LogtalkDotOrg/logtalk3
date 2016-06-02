@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc6)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc7)).
 
 
 
@@ -19018,8 +19018,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % return current answer and start computing the next one
 
 '$lgt_mt_engine_reply'(This, Queue, Answer, Engine, Id) :-
-	thread_property(Id, status(Status)),
-	(	Status == true ->
+	(	thread_property(Id, status(true)) ->
 		fail
 	;	thread_get_message(Queue, '$lgt_answer'(Engine, Id, Reply, Result)),
 		(	Result == success ->
@@ -19104,10 +19103,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)) ->
 		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
 		(	thread_property(Id, status(true)) ->
-			thread_join(Id, _)
-		;	thread_signal(Id, throw(abort)),
-			thread_join(Id, _)
+			true
+		;	thread_signal(Id, throw(abort))
 		),
+		thread_join(Id, _),
 		message_queue_destroy(TermQueue),
 		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, _)) ->
 			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, _))
