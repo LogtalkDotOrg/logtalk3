@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/01,
+		date is 2016/06/02,
 		comment is 'Implementation of the rock, paper, scissors, lizard, spock game show e.g. in the "The Big Bang Theory" sitcom.'
 	]).
 
@@ -111,14 +111,14 @@
 	% have called the threaded_engine_self/1 predicate
 	select_move(Me, Move) :-
 		random::random(1, 6, N),
-		select_move(N, Move),
+		move(N, Move),
 		format('~w:~w\n', [Me,Move]).
 
-	select_move(1, scissors).
-	select_move(2, rock).
-	select_move(3, paper).
-	select_move(4, lizard).
-	select_move(5, spock).
+	move(1, scissors).
+	move(2, rock).
+	move(3, paper).
+	move(4, lizard).
+	move(5, spock).
 
 	% compare the moves and decide the outcome for each player
 	decide_move(Move1, Move2, Result1, Result2) :-
