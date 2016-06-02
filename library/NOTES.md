@@ -22,10 +22,16 @@ documentation see:
 
 [../docs/index.html](http://logtalk.org/docs/index.html)
 
+Always use the corresponding loader file to load library entities. The
+available loader files are described below.
 
-To load a group of objects, protocols, and categories in this library 
-either change your Prolog working directory to this folder and then 
-compile and load the corresponding loader utility file or simply use 
+Most library entities are part of small hierarchies or depend on other
+entities and thus cannot be loaded and compiled separately (e.g. the
+`list` object implements the `listp` protocol and is part of a basic
+types hierarchy).
+
+The library loader files can be loaded by either changing the current
+working directory to the library directory or, more by simply using 
 the notation `library(<loader file>)` as argument for the compiling
 and loading predicates. For example:
 
