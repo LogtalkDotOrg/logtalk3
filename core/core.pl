@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc7)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc8)).
 
 
 
@@ -19104,7 +19104,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
 		(	thread_property(Id, status(true)) ->
 			true
-		;	thread_signal(Id, throw(abort))
+		;	catch(thread_signal(Id, throw(abort)), _, true)
 		),
 		thread_join(Id, _),
 		message_queue_destroy(TermQueue),
