@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/31,
+		date is 2016/06/02,
 		comment is 'Unit tests for the threaded_engine_stop/1 built-in predicate.'
 	]).
 
@@ -43,18 +43,22 @@
 
 	succeeds(threaded_engine_stop_1_03) :-
 		threaded_engine_create(none, repeat, test_engine_1),
-		threaded_engine_stop(test_engine_1).
+		threaded_engine_stop(test_engine_1),
+		\+ threaded_engine(test_engine_1).
 
 	succeeds(threaded_engine_stop_1_04) :-
 		threaded_engine_create(none, true, test_engine_2),
-		threaded_engine_stop(test_engine_2).
+		threaded_engine_stop(test_engine_2),
+		\+ threaded_engine(test_engine_2).
 
 	succeeds(threaded_engine_stop_1_05) :-
 		threaded_engine_create(none, fail, test_engine_3),
-		threaded_engine_stop(test_engine_3).
+		threaded_engine_stop(test_engine_3),
+		\+ threaded_engine(test_engine_3).
 
 	succeeds(threaded_engine_stop_1_06) :-
 		threaded_engine_create(none, throw(error), test_engine_4),
-		threaded_engine_stop(test_engine_4).
+		threaded_engine_stop(test_engine_4),
+		\+ threaded_engine(test_engine_4).
 
 :- end_object.
