@@ -17,27 +17,18 @@ limitations under the License.
 ________________________________________________________________________
 
 
-% load the example:
+To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-| ?- logtalk_load(loader).
-...
+This example requires support for both threads and coroutining. Currently it
+only runs on SWI-Prolog. It should run also on XSB and YAP if and when these
+systems bugs with coroutining and/or threads get fixed.
 
+This folder contains examples of using threaded engines for implementing
+meta-predicates. The `best_of/3` meta-predicate example, is described in
+the paper:
 
-% some clauses for a predicate used in the next queries:
-
-| ?- assertz(a(2)), assertz(a(1)), assertz(a(4)), assertz(a(3)).
-yes
-
-
-% find the larger value from the values returned by a generator:
-
-| ?- metas::best_of(X, (>), a(X)).
-X = 4
-yes
-
-
-% test the threaded engine implementation of the standard findall/3 predicate:
-
-| ?- metas::engine_findall(X, a(X), List).
-List = [2, 1, 4, 3]
-yes
+@article{Tarau2000,
+	author="Paul Tarau",
+	title="Architecture and Implementation Aspects of the Lean Prolog System",
+	url="http://www.cse.unt.edu/~tarau/research/LeanProlog/ArchitectureOfLeanProlog.pdf"
+}

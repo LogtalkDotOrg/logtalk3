@@ -18,26 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- if(current_logtalk_flag(prolog_dialect, swi)).
 
-	:- info([
-		version is 1.0,
-		author is 'Paulo Moura',
-		date is 2016/06/01,
-		comment is 'Unit tests for the "engines" example.'
-	]).
+	:- initialization(
+		logtalk_load(emetas)
+	).
 
-	test(engines_1) :-
-		metas::best_of(X, (>), a(X)),
-		X == 4.
+:- else.
 
-	test(engines_2) :-
-		metas::engine_findall(X, a(X), Xs),
-		Xs == [2, 1, 4, 3].
+	:- initialization((write('WARNING: example not supported on this back-end Prolog compiler!'), nl)).
 
-	% auxiliary predicates
-
-	a(2). a(1). a(4). a(3).
-
-:- end_object.
+:- endif.

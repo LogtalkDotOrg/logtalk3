@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(metas).
+:- object(emetas).
 
 	:- info([
 		version is 1.0,
@@ -37,10 +37,10 @@
 		argnames is ['Answer', 'Comparator', 'Generator']
 	]).
 
-	:- public(engine_findall/3).
-	:- meta_predicate(engine_findall(*, 0, *)).
-	:- mode(engine_findall(@term, +callable, -list), one).
-	:- info(engine_findall/3, [
+	:- public(find_all/3).
+	:- meta_predicate(find_all(*, 0, *)).
+	:- mode(find_all(@term, +callable, -list), one).
+	:- info(find_all/3, [
 		comment is 'A findall/3 implementation using threaded engines.',
 		argnames is ['Template', 'Goal', 'List']
 	]).
@@ -66,7 +66,7 @@
 		;	Best = A2
 		).
 
-	engine_findall(Template, Goal, List) :-
+	find_all(Template, Goal, List) :-
 		threaded_engine_create(Template, Goal, Tag),
 		collect(Tag, List0),
 		threaded_engine_stop(Tag),

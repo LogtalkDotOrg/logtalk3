@@ -18,14 +18,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
+:- object(tests,
+	extends(lgtunit)).
 
-	:- initialization(
-		logtalk_load(metas)
-	).
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/06/02,
+		comment is 'Unit tests for the "emetas" example.'
+	]).
 
-:- else.
+	test(engines_1) :-
+		emetas::best_of(X, (>), a(X)),
+		X == 4.
 
-	:- initialization((write('WARNING: example not supported on this back-end Prolog compiler!'), nl)).
+	test(engines_2) :-
+		emetas::find_all(X, a(X), Xs),
+		Xs == [2, 1, 4, 3].
 
-:- endif.
+	% auxiliary predicates
+
+	a(2). a(1). a(4). a(3).
+
+:- end_object.
