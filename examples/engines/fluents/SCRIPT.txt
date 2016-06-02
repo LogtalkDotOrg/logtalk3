@@ -23,9 +23,25 @@ ________________________________________________________________________
 ...
 
 
-% use an engine to create a fluent:
+% get answers from the fluent:
 
-| ?- threaded_engine_create(X, )
-true
+| ?- fluents::next(N1).
+N1 = 1
+yes
 
+| ?- fluents::next(N2).
+N2 = 2
+yes
 
+| ?- fluents::next(N3).
+N3 = 3
+yes
+
+% after exhausting the fluent answers, subsequent queries fail
+% until the threaded engine implementing the fluent is stopped:
+
+| ?- fluents::next(_).
+no
+
+| ?- fluents::next(_).
+no
