@@ -18,6 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% avoid a clash with the "block" operaror defined in SICStus Prolog and YAP
+:- if(current_op(1150, fx, block)).
+	:- op(0, fx, block).
+:- endif.
+
+
 :- initialization((
 	logtalk_load(library(basic_types_loader)),
 	logtalk_load(library(metapredicates_loader)),
