@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.14,
+		version is 2.15,
 		author is 'Paulo Moura',
-		date is 2016/05/14,
+		date is 2016/06/03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -649,7 +649,7 @@
 		::note(Note),
 		print_message(information, lgtunit, tests_skipped(Object, Note)).
 
-	:- meta_predicate(run_test_condition(*, 0, *, *, *, *)).
+	:- meta_predicate(run_test_condition(*, *, *, *, *, *)).
 
 	run_test_condition(Test, Goal, File, Position, Note, Output) :-
 		% expected either success or failure; error means user error 
@@ -658,7 +658,7 @@
 		;	catch({Goal}, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,Output), fail))
 		).
 
-	:- meta_predicate(run_test_setup(*, 0, *, *, *, *)).
+	:- meta_predicate(run_test_setup(*, *, *, *, *, *)).
 
 	run_test_setup(Test, Goal, File, Position, Note, Output) :-
 		% expected success; failure or error means user error 
@@ -673,7 +673,7 @@
 			fail
 		).
 
-	:- meta_predicate(run_test_cleanup(*, 0, *, *, *)).
+	:- meta_predicate(run_test_cleanup(*, *, *, *, *)).
 
 	run_test_cleanup(Test, Goal, File, Position, Output) :-
 		% expected success; failure or error means user error 
