@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc10)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc11)).
 
 
 
@@ -19095,7 +19095,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	% check if calling from within an engine
 		thread_peek_message(ThisQueue, '$lgt_engine_queue_id'(_, TermQueue, Id)) ->
 		% engine exists; go ahead and retrieve a message from its mailbox
-		thread_get_message(TermQueue, Term)
+		thread_get_message(TermQueue, Term),
+		Term \== '$lgt_aborted'
 	;	% engine does not exist
 		fail
 	).
@@ -19103,6 +19104,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_engine_stop'(@nonvar, @object_identifier)
+%
+% when the engine thread is still running, we first put a throw/1 goal in the
+% thread signal queue and then send messages to both the thread queue and the
+% engine term queue to resume the engine goal if suspended waiting for either
+% a request for the next solution or a term to be processed
 
 '$lgt_threaded_engine_stop'(Engine, This) :-
 	(	var(Engine) ->
@@ -19112,7 +19118,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
 		(	thread_property(Id, status(true)) ->
 			true
-		;	catch((thread_signal(Id, throw('$lgt_aborted')),thread_send_message(Id, _)), _, true)			
+		;	% protect the call to thread_signal/1 as the thread may terminate
+			% between checking its status and this call
+			catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
+			% send a term to the engine term queue first as this queue is explicitly
+			% created and destroyed and thus we can be sure it exists
+			thread_send_message(TermQueue, '$lgt_aborted'),
+			% on the other hand, the engone thread own queue may no longer exist
+			catch(thread_send_message(Id, _), _, true)
 		),
 		thread_join(Id, _),
 		message_queue_destroy(TermQueue),
