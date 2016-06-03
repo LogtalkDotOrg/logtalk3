@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc9)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc10)).
 
 
 
@@ -18990,6 +18990,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 				fail
 			;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, final))
 			)
+		;	Error == '$lgt_aborted' ->
+			true
 		;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, error(Error)))
 		)
 	;	% no (more) solutions
@@ -19110,7 +19112,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
 		(	thread_property(Id, status(true)) ->
 			true
-		;	catch(thread_signal(Id, throw(abort)), _, true)
+		;	catch((thread_signal(Id, throw('$lgt_aborted')),thread_send_message(Id, _)), _, true)			
 		),
 		thread_join(Id, _),
 		message_queue_destroy(TermQueue),
