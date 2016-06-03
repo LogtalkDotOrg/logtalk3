@@ -23,8 +23,8 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/02,
-		comment is 'Implementation of the rock, paper, scissors, lizard, spock game show e.g. in the "The Big Bang Theory" sitcom.'
+		date is 2016/06/03,
+		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
 	:- threaded.
@@ -32,7 +32,7 @@
 	:- public(explain/0).
 	:- mode(explain, one).
 	:- info(explain/0, [
-		comment is 'Explains the game of rock, paper, scissors, lizard, spock.'
+		comment is 'Explains the game of rock, paper, scissors, lizard, Spock to wannabe nerds.'
 	]).
 
 	explain :-
@@ -50,7 +50,7 @@
 	:- public(play/0).
 	:- mode(play, one).
 	:- info(play/0, [
-		comment is 'Plays a game of rock, paper, scissors, lizard, spock.'
+		comment is 'Plays a game of rock, paper, scissors, lizard, Spock between Sheldon and Raj.'
 	]).
 
 	% format/2 allows us to avoid synchronization issues
@@ -63,6 +63,7 @@
 		threaded_engine_create(_, loop(sheldon), sheldon),
 		threaded_engine_create(_, loop(raj), raj),
 		play_move,
+		% wait for both engines to terminate before stopping them
 		threaded_engine_answer(sheldon, done),
 		threaded_engine_answer(raj, done),
 		threaded_engine_stop(sheldon),

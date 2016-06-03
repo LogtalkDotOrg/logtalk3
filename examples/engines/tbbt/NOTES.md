@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This example implements the rock, paper, scissors, lizard, spock game depicted
+This example implements the rock, paper, scissors, lizard, Spock game played
 in the "The Big Bang Theory" sitcom using one threaded engine per player. See:
 
 	http://www.samkass.com/theories/RPSSL.html
