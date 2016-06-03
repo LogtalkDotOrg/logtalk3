@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc8)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc9)).
 
 
 
@@ -18981,15 +18981,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_mt_engine_goal'(Queue, Answer, Goal, Engine) :-
 	thread_self(Id),
-	(	catch(Goal, Error, true),
+	(	setup_call_cleanup(true, catch(Goal, Error, true), Deterministic = true),
 		(	var(Error) ->
-			thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
-			thread_get_message(_),
-			% assume Message = '$lgt_next' and backtrack to try to find an alternative solution
-			fail
-		;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, error(Error))),
-			% keep the thread alive until the answer is collected
-			thread_get_message(_)
+			(	var(Deterministic) ->
+				thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
+				thread_get_message(_),
+				% assume Message = '$lgt_next' and backtrack to try to find an alternative solution
+				fail
+			;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, final))
+			)
+		;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, error(Error)))
 		)
 	;	% no (more) solutions
 		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure))
@@ -19016,20 +19017,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % return current answer and start computing the next one
+% if the engine goal succeeded non-deterministically
+%
+% after all solutions are consumed, or in case of error,
+% ensure that the all next calls will fail
 
 '$lgt_mt_engine_reply'(This, Queue, Answer, Engine, Id) :-
-	(	thread_property(Id, status(true)) ->
+	thread_get_message(Queue, '$lgt_answer'(Engine, Id, Reply, Result)),
+	(	Result == success ->
+		thread_send_message(Id, '$lgt_next'),
+		Answer = Reply
+	;	Result == final ->
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure)),
+		Answer = Reply
+	;	Result == failure ->
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure)),
 		fail
-	;	thread_get_message(Queue, '$lgt_answer'(Engine, Id, Reply, Result)),
-		(	Result == success ->
-			thread_send_message(Id, '$lgt_next'),
-			Answer = Reply
-		;	Result == failure ->
-			fail
-		;	Result = error(Error),
-			thread_send_message(Id, true),
-			throw(error(Error, logtalk(threaded_engine_answer(Engine,Answer),This)))
-		)
+	;	Result = error(Error),
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure)),
+		throw(error(Error, logtalk(threaded_engine_answer(Engine,Answer),This)))
 	).
 
 
