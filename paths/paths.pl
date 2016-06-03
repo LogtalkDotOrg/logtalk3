@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on June 2, 2016
+%  Last updated on June 3, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -140,6 +140,7 @@ logtalk_library_path(debug_hooks, examples('debug_hooks/')).
 logtalk_library_path(delegates, examples('delegates/')).
 logtalk_library_path(diamonds, examples('diamonds/')).
 logtalk_library_path(dynpred, examples('dynpred/')).
+logtalk_library_path(ebench, engines('ebench/')).
 logtalk_library_path(emetas, engines('emetas/')).
 logtalk_library_path(encodings, examples('encodings/')).
 logtalk_library_path(engines, examples('engines/')).
