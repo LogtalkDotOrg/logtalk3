@@ -116,6 +116,7 @@ logtalk_library_path(benchmarks, examples('benchmarks/')).
 logtalk_library_path(birds, examples('birds/')).
 logtalk_library_path(birthdays, threads('birthdays/')).
 logtalk_library_path(blackboard, threads('blackboard/')).
+logtalk_library_path(blocks, examples('blocks/')).
 logtalk_library_path(bottles, examples('bottles/')).
 logtalk_library_path(bricks, examples('bricks/')).
 logtalk_library_path(buckets, threads('buckets/')).
