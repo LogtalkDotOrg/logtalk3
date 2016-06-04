@@ -120,7 +120,8 @@ details).
 
 7. Copy to your application directory the `loader-sample.lgt` file, rename
 it to `loader.lgt`, and modify it to load your application source files.
-You may also copy the `tester-sample.lgt` file, renaming it to `tester.lgt`,
-and editing it to run your application unit tests.
+You may also copy the `tester-sample.lgt` and `tests-sample.lgt` files,
+renaming them to `tester.lgt` and `tests.lgt`, and editing them to define
+and run your application unit tests.
 
 8. Have fun!

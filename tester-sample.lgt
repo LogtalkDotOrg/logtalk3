@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample tester file
-%  Last updated on October 3, 2014
+%  Last updated on June 4, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,8 @@
 %  as exemplified below.
 %
 %  The provided testing automation shell script, "logtalk_tester", looks for
-%  files named "tester.lgt" in directories and sub-directories when run.
+%  files named either "tester.lgt" or "tester.logtalk" in directories and
+%  sub-directories when run.
 
 
 :- initialization((

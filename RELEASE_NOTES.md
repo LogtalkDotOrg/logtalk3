@@ -60,6 +60,8 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: Sample test suite file, `tests-sample.lgt`.
+
 * UPDATED: User and Reference manuals for the threaded engines API.
 
 Tools
@@ -105,8 +107,8 @@ and simple agents. Requires SWI-Prolog as the backend Prolog compiler.
 
 * UPDATED: The `jpl` example with some benchmarks.
 
-* UPDATED: Tabling example to run using SWI-Prolog as the backend compiler when
-using version 7.3.21 or later.
+* UPDATED: The `tabling` example to also run using SWI-Prolog as the backend
+compiler when using version 7.3.21 or later.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
