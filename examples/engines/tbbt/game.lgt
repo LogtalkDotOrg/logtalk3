@@ -136,24 +136,24 @@
 		).
 
 	% Scissors cuts Paper
-	final_move(scissors, paper, win, loose) :- !.
+	final_move(scissors, paper, win, loose).
 	% Paper covers Rock
-	final_move(paper, rock, win, loose) :- !.
+	final_move(paper, rock, win, loose).
 	% Rock crushes Lizard
-	final_move(rock, lizard, win, loose) :- !.
+	final_move(rock, lizard, win, loose).
 	% Lizard poisons Spock
-	final_move(lizard, spock, win, loose) :- !.
+	final_move(lizard, spock, win, loose).
 	% Spock smashes Scissors
-	final_move(spock, scissors, win, loose) :- !.
+	final_move(spock, scissors, win, loose).
 	% Scissors decapitates Lizard
-	final_move(scissors, lizard, win, loose) :- !.
+	final_move(scissors, lizard, win, loose).
 	% Lizard eats Paper
-	final_move(lizard, paper, win, loose) :- !.
+	final_move(lizard, paper, win, loose).
 	% Paper disproves Spock
-	final_move(paper, spock, win, loose) :- !.
+	final_move(paper, spock, win, loose).
 	% Spock vaporizes Rock
-	final_move(spock, rock, win, loose) :- !.
+	final_move(spock, rock, win, loose).
 	% (and as it always has) Rock crushes Scissors
-	final_move(rock, scissors, win, loose) :- !.
+	final_move(rock, scissors, win, loose).
 
 :- end_object.
