@@ -23,11 +23,14 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/03,
+		date is 2016/06/06,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
 	:- threaded.
+
+	% create an engine to do all output
+	:- initialization(threaded_engine_create(_, output, writer)).
 
 	:- public(explain/0).
 	:- mode(explain, one).
@@ -60,14 +63,22 @@
 	play :-
 		% in the sitcom, the game is first played between
 		% Sheldon and Raj: create an engine for each one
-		threaded_engine_create(_, loop(sheldon), sheldon),
-		threaded_engine_create(_, loop(raj), raj),
+		threaded_engine_create(done, loop(sheldon), sheldon),
+		threaded_engine_create(done, loop(raj), raj),
 		play_move,
 		% wait for both engines to terminate before stopping them
 		threaded_engine_answer(sheldon, done),
 		threaded_engine_answer(raj, done),
 		threaded_engine_stop(sheldon),
 		threaded_engine_stop(raj).
+
+	output :-
+		threaded_engine_fetch(Format-Arguments),
+		format(Format, Arguments),
+		% workaround tail-recursive predicates leaking memory
+		fail.
+	output :-
+		output.
 
 	% each engine runs this loop predicate until
 	%  there is a winning or loosing move
@@ -81,11 +92,9 @@
 		handle_result(Result, Me).
 
 	handle_result(win, Me) :-
-		format('~w:I win! I''m the best!\n', [Me]),
-		threaded_engine_return(done).
+		threaded_engine_post(writer, '~w:I win! I''m the best!\n'-[Me]).
 	handle_result(loose, Me) :-
-		format('~w:Penny distracted me! It''s Penny''s fault!\n', [Me]),
-		threaded_engine_return(done).
+		threaded_engine_post(writer, '~w:Penny distracted me! It''s Penny''s fault!\n'-[Me]).
 	handle_result(draw, Me) :-
 		loop(Me).
 
@@ -95,12 +104,7 @@
 	play_move :-
 		threaded_engine_answer(sheldon, SheldonMove),
 		threaded_engine_answer(raj, RajMove),
-		(	decide_move(SheldonMove, RajMove, SheldonResult, RajResult) ->
-			true
-		;	SheldonResult = draw,
-			RajResult = draw
-		),
-		nl,
+		decide_move(SheldonMove, RajMove, SheldonResult, RajResult),
 		threaded_engine_post(sheldon, SheldonResult),
 		threaded_engine_post(raj, RajResult),
 		(	SheldonResult == draw ->
@@ -113,7 +117,7 @@
 	select_move(Me, Move) :-
 		random::random(1, 6, N),
 		move(N, Move),
-		format('~w:~w\n', [Me,Move]).
+		threaded_engine_post(writer, '~w:~w\n'-[Me,Move]).
 
 	move(1, scissors).
 	move(2, rock).
@@ -123,30 +127,33 @@
 
 	% compare the moves and decide the outcome for each player
 	decide_move(Move1, Move2, Result1, Result2) :-
-		(	decide_move_(Move1, Move2, Result1, Result2) ->
+		(	final_move(Move1, Move2, Result1, Result2) ->
 			true
-		;	decide_move_(Move2, Move1, Result2, Result1)
+		;	final_move(Move2, Move1, Result2, Result1) ->
+			true
+		;	Result1 = draw,
+			Result2 = draw
 		).
 
 	% Scissors cuts Paper
-	decide_move_(scissors, paper, win, loose) :- !.
+	final_move(scissors, paper, win, loose) :- !.
 	% Paper covers Rock
-	decide_move_(paper, rock, win, loose) :- !.
+	final_move(paper, rock, win, loose) :- !.
 	% Rock crushes Lizard
-	decide_move_(rock, lizard, win, loose) :- !.
+	final_move(rock, lizard, win, loose) :- !.
 	% Lizard poisons Spock
-	decide_move_(lizard, spock, win, loose) :- !.
+	final_move(lizard, spock, win, loose) :- !.
 	% Spock smashes Scissors
-	decide_move_(spock, scissors, win, loose) :- !.
+	final_move(spock, scissors, win, loose) :- !.
 	% Scissors decapitates Lizard
-	decide_move_(scissors, lizard, win, loose) :- !.
+	final_move(scissors, lizard, win, loose) :- !.
 	% Lizard eats Paper
-	decide_move_(lizard, paper, win, loose) :- !.
+	final_move(lizard, paper, win, loose) :- !.
 	% Paper disproves Spock
-	decide_move_(paper, spock, win, loose) :- !.
+	final_move(paper, spock, win, loose) :- !.
 	% Spock vaporizes Rock
-	decide_move_(spock, rock, win, loose) :- !.
+	final_move(spock, rock, win, loose) :- !.
 	% (and as it always has) Rock crushes Scissors
-	decide_move_(rock, scissors, win, loose) :- !.
+	final_move(rock, scissors, win, loose) :- !.
 
 :- end_object.
