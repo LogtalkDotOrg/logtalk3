@@ -24,20 +24,32 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/02,
+		date is 2016/06/07,
 		comment is 'Unit tests for the "emetas" example.'
 	]).
 
-	test(engines_1) :-
+	test(emetas_1) :-
 		emetas::best_of(X, (>), a(X)),
 		X == 4.
 
-	test(engines_2) :-
+	test(emetas_2) :-
 		emetas::find_all(X, a(X), Xs),
 		Xs == [2, 1, 4, 3].
+
+	test(emetas_3) :-
+		emetas::find_at_most(3, X, b(X), Xs),
+		Xs == [1, 2, 3].
+
+	test(emetas_4) :-
+		emetas::find_at_most(3, X, c(X), Xs),
+		Xs = [1, 2].
 
 	% auxiliary predicates
 
 	a(2). a(1). a(4). a(3).
+
+	b(1). b(2). b(3). b(4). b(5).
+
+	c(1). c(2).
 
 :- end_object.

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/01,
+		date is 2016/06/07,
 		comment is 'Examples of implementing meta-predicates using threaded engines.'
 	]).
 
@@ -43,6 +43,14 @@
 	:- info(find_all/3, [
 		comment is 'A findall/3 implementation using threaded engines.',
 		argnames is ['Template', 'Goal', 'List']
+	]).
+
+	:- public(find_at_most/4).
+	:- meta_predicate(find_at_most(*, *, 0, *)).
+	:- mode(find_at_most(+integer, @term, +callable, -list), one).
+	:- info(find_at_most/4, [
+		comment is 'Similar to find_all/3 but finding at most N solutions.',
+		argnames is ['N', 'Template', 'Goal', 'List']
 	]).
 
 	best_of(Answer, Comparator, Generator) :-
@@ -68,14 +76,28 @@
 
 	find_all(Template, Goal, List) :-
 		threaded_engine_create(Template, Goal, Tag),
-		collect(Tag, List0),
+		collect_all(Tag, List0),
 		threaded_engine_stop(Tag),
 		List = List0.
 
-	collect(Tag, [X| Xs]) :-
+	collect_all(Tag, [X| Xs]) :-
 		threaded_engine_answer(Tag, X),
 		!,
-		collect(Tag, Xs).
-	collect(_, []).
+		collect_all(Tag, Xs).
+	collect_all(_, []).
+
+	find_at_most(N, Template, Goal, List) :-
+		threaded_engine_create(Template, Goal, Tag),
+		collect_at_most(N, Tag, List0),
+		threaded_engine_stop(Tag),
+		List = List0.
+
+	collect_at_most(N, Tag, [X| Xs]) :-
+		N > 0,
+		threaded_engine_answer(Tag, X),
+		!,
+		M is N - 1,
+		collect_at_most(M, Tag, Xs).
+	collect_at_most(_, _, []).
 
 :- end_object.
