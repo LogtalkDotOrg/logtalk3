@@ -28,6 +28,7 @@ CONTRIBUTORS
 
 * Abramo Bagnara (efficient expansion of once/1 goals and bug reports in corner cases when compiling disjunctions)
 * Andreas Becker (PDT support for Logtalk, bug reports)
+* Anne Ogborn  (bug reports, usability suggestions)
 * Artur Miguel Dias (testing, lambda expression examples)
 * Clara Dimene (GeSHi syntax highlighter)
 * Daniel L. Dudley (made the ISO 8601 library object available)
