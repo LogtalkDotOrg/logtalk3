@@ -191,8 +191,8 @@
 
 % engines
 
-% '$lgt_current_engine_'(Object, Engine)
-:- dynamic('$lgt_current_engine_'/2).
+% '$lgt_current_engine_'(Object, Engine, TermQueue, Id)
+:- dynamic('$lgt_current_engine_'/4).
 
 
 % counters
@@ -1328,7 +1328,7 @@ abolish_object(Obj) :-
 			retractall('$lgt_implements_protocol_'(Obj, _, _)),
 			retractall('$lgt_imports_category_'(Obj, _, _)),
 			forall(
-				'$lgt_current_engine_'(Obj, Engine),
+				'$lgt_current_engine_'(Obj, Engine, _, _),
 				'$lgt_threaded_engine_stop'(Engine, Obj)
 			),
 			'$lgt_clean_lookup_caches'
@@ -1899,7 +1899,7 @@ threaded_engine(Engine) :-
 	throw(error(resource_error(threads), logtalk(threaded_engine(Engine), user))).
 
 threaded_engine(Engine) :-
-	'$lgt_current_engine_'(user, Engine).
+	'$lgt_current_engine'(user, Engine).
 
 
 % threaded_engine_answer(@nonvar, ?term)
@@ -2844,7 +2844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 0, rc11)).
+'$lgt_version_data'(logtalk(3, 6, 0, rc12)).
 
 
 
@@ -5755,7 +5755,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_instantiates_class_'(Entity, _, _)),
 	retractall('$lgt_specializes_class_'(Entity, _, _)),
 	retractall('$lgt_extends_object_'(Entity, _, _)),
-	retractall('$lgt_current_engine_'(Entity, _)).
+	retractall('$lgt_current_engine_'(Entity, _, _, _)).
 
 '$lgt_retract_old_runtime_clauses'(protocol, Entity) :-
 	retractall('$lgt_current_protocol_'(Entity, _, _, _, _)),
@@ -10397,7 +10397,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(threaded_engine(Engine), MTGoal, '$lgt_debug'(goal(threaded_engine(Engine), MTGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	MTGoal = '$lgt_current_engine_'(This, Engine),
+	MTGoal = '$lgt_current_engine'(This, Engine),
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
 
 
@@ -18961,42 +18961,62 @@ create_logtalk_flag(Flag, Value, Options) :-
 % programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine) :-
+	setup_call_cleanup(
+		mutex_lock('$lgt_engines'),
+		'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, This, Engine),
+		mutex_unlock('$lgt_engines')
+	).
+
+
+'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, This, Engine) :-
 	(	var(Engine) ->
 		'$lgt_new_threaded_tag'(Engine)
-	;	'$lgt_current_engine_'(This, Engine) ->
+	;	'$lgt_current_engine_'(This, Engine, _, _) ->
 		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)))
 	;	true
 	),
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
 	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
-	thread_create('$lgt_mt_engine_goal'(ThisQueue, AnswerTemplate, TGoal, Engine), Id, []),
 	message_queue_create(TermQueue),
-	thread_send_message(ThisQueue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
-	assertz('$lgt_current_engine_'(This, Engine)).
+	thread_create('$lgt_mt_engine_goal'(ThisQueue, TermQueue, AnswerTemplate, TGoal, Engine), Id, []),
+	assertz('$lgt_current_engine_'(This, Engine, TermQueue, Id)).
 
 
 % compute a solution for the engine goal and return it; note that the thread
 % always terminates with a status of "true" when an exception occurs or there
 % aren't any more solutions for the engine goal
 
-'$lgt_mt_engine_goal'(Queue, Answer, Goal, Engine) :-
+%:- thread_local('$lgt_engine_term_queue_'/2).
+
+'$lgt_mt_engine_goal'(ThisQueue, TermQueue, Answer, Goal, Engine) :-
 	thread_self(Id),
+	assertz('$lgt_engine_term_queue_'(Engine, TermQueue)),
 	(	setup_call_cleanup(true, catch(Goal, Error, true), Deterministic = true),
 		(	var(Error) ->
 			(	var(Deterministic) ->
-				thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
-				thread_get_message(_),
-				% assume Message = '$lgt_next' and backtrack to try to find an alternative solution
-				fail
-			;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, final))
+				thread_send_message(ThisQueue, '$lgt_answer'(Engine, Id, Answer, success)),
+				thread_get_message(Message),
+				% if Message = '$lgt_next', backtrack to try to find an alternative solution
+				Message == '$lgt_aborted'
+			;	% no (more) solutions after this one
+				thread_send_message(ThisQueue, '$lgt_answer'(Engine, Id, Answer, final))
 			)
 		;	Error == '$lgt_aborted' ->
+			% we are stopping the engine
 			true
-		;	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, error(Error)))
+		;	% engine goal error
+			thread_send_message(ThisQueue, '$lgt_answer'(Engine, Id, _, error(Error)))
 		)
 	;	% no (more) solutions
-		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure))
+		thread_send_message(ThisQueue, '$lgt_answer'(Engine, Id, _, failure))
 	).
+
+
+
+% '$lgt_threaded_engine'(@object_identifier, ?nonvar)
+
+'$lgt_current_engine'(This, Engine) :-
+	'$lgt_current_engine_'(This, Engine, _, _).
 
 
 
@@ -19010,7 +19030,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(instantiation_error, logtalk(threaded_engine_answer(Engine, Answer), This)))
 	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 		% first check if the engine is running
-		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, _, Id)) ->
+		'$lgt_current_engine_'(This, Engine, _, Id) ->
 		% engine exists; go ahead and retrieve an answer
 		'$lgt_mt_engine_reply'(This, Queue, Answer, Engine, Id)
 	;	% engine does not exist
@@ -19030,13 +19050,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		thread_send_message(Id, '$lgt_next'),
 		Answer = Reply
 	;	Result == final ->
-		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure)),
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, '$lgt_done'(final), failure)),
 		Answer = Reply
 	;	Result == failure ->
-		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure)),
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, '$lgt_done'(failure), failure)),
 		fail
 	;	Result = error(Error),
-		thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, failure)),
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, '$lgt_done'(error), failure)),
 		throw(error(Error, logtalk(threaded_engine_answer(Engine,Answer),This)))
 	).
 
@@ -19046,10 +19066,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % fails if not called from within an engine
 
-'$lgt_threaded_engine_self'(This, Engine) :-
-	thread_self(Id),
-	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine0, _, Id)),
+'$lgt_threaded_engine_self'(_This, Engine) :-
+	'$lgt_engine_term_queue_'(Engine0, _),
 	!,
 	Engine = Engine0.
 
@@ -19063,7 +19081,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_engine_return'(Answer, This) :-
 	thread_self(Id),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, _, Id)),
+	'$lgt_engine_term_queue_'(Engine, _),
 	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
 	thread_get_message(_).
 
@@ -19074,9 +19092,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_engine_post'(Engine, Term, This) :-
 	(	var(Engine) ->
 		throw(error(instantiation_error, logtalk(threaded_engine_post(Engine, Term), This)))
-	;	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
-		% first check if the engine is running
-		thread_peek_message(ThisQueue, '$lgt_engine_queue_id'(Engine, TermQueue, _)) ->
+	;	% first check if the engine is running
+		'$lgt_current_engine_'(This, Engine, TermQueue, _) ->
 		% engine exists; go ahead and post the message in its mailbox
 		thread_send_message(TermQueue, Term)
 	;	% engine does not exist
@@ -19087,20 +19104,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_threaded_engine_fetch'(?term, @object_identifier)
 %
-% fails if not called from within an engine
+% fails if not called from within an engine or if we are
+% stopping a running engine
 
-'$lgt_threaded_engine_fetch'(Term, This) :-
-	thread_self(Id),
-	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
+'$lgt_threaded_engine_fetch'(Term, _This) :-
 	(	% check if calling from within an engine
-		thread_peek_message(ThisQueue, '$lgt_engine_queue_id'(_, TermQueue, Id)) ->
+		'$lgt_engine_term_queue_'(_, TermQueue) ->
 		% engine exists; go ahead and retrieve a message from its mailbox
 		thread_get_message(TermQueue, Term),
 		Term \== '$lgt_aborted'
 	;	% engine does not exist
 		fail
 	).
-
 
 
 % '$lgt_threaded_engine_stop'(@nonvar, @object_identifier)
@@ -19111,30 +19126,43 @@ create_logtalk_flag(Flag, Value, Options) :-
 % a request for the next solution or a term to be processed
 
 '$lgt_threaded_engine_stop'(Engine, This) :-
+	setup_call_cleanup(
+		mutex_lock('$lgt_engines'),
+		'$lgt_threaded_engine_stop_protected'(Engine, This),
+		mutex_unlock('$lgt_engines')
+	).
+
+
+'$lgt_threaded_engine_stop_protected'(Engine, This) :-
 	(	var(Engine) ->
 		throw(error(instantiation_error, logtalk(threaded_engine_stop(Engine), This)))
 	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-		thread_peek_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)) ->
-		thread_get_message(Queue, '$lgt_engine_queue_id'(Engine, TermQueue, Id)),
-		(	thread_property(Id, status(true)) ->
-			true
-		;	% protect the call to thread_signal/1 as the thread may terminate
+		retract('$lgt_current_engine_'(This, Engine, TermQueue, Id)) ->
+		(	thread_property(Id, status(running)) ->
+			% protect the call to thread_signal/1 as the thread may terminate
 			% between checking its status and this call
 			catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
 			% send a term to the engine term queue first as this queue is explicitly
 			% created and destroyed and thus we can be sure it exists
 			thread_send_message(TermQueue, '$lgt_aborted'),
-			% on the other hand, the engone thread own queue may no longer exist
-			catch(thread_send_message(Id, _), _, true)
+			% on the other hand, the engine thread and therefore its queue may no longer exist
+			catch(thread_send_message(Id, '$lgt_aborted'), _, true)
+		;	true
 		),
 		thread_join(Id, _),
 		message_queue_destroy(TermQueue),
+		% remove any non-consumed answer
 		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, _)) ->
 			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, _))
 		;	true
 		),
-		retractall('$lgt_current_engine_'(This, Engine))
-	;	% answering thread don't exist
+		% remove the answer that ensures threaded_engine_answer/2
+		% failure after consuming all solutions if present
+		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, failure)) ->
+			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, failure))
+		;	true
+		)
+	;	% engine doesn't exist
 		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_stop(Engine), This)))
 	).
 
@@ -20833,6 +20861,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_start_runtime_threading' :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
+		mutex_create(_, [alias('$lgt_engines')]),
 		mutex_create(_, [alias('$lgt_threaded_tag')]),
 		(	current_prolog_flag(bounded, true) ->
 			current_prolog_flag(min_integer, Min),
