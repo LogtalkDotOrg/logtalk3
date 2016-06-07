@@ -18985,8 +18985,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compute a solution for the engine goal and return it; note that the thread
 % always terminates with a status of "true" when an exception occurs or there
 % aren't any more solutions for the engine goal
-
-%:- thread_local('$lgt_engine_term_queue_'/2).
+%
+% we use a thread local predicate, '$lgt_engine_term_queue_'/2, to store the
+% engine name and the engine term queue in the thread itself to workaround
+% random timing issues when accessing the '$lgt_current_engine_'/4 dynamic
+% predicate that can result in unexpected errors; this thread local predicate
+% is declared in the adapter files of backend Prolog compilers with compatible
+% multi-threading support to avoid portability issues with this compiler/runtime
+% file
 
 '$lgt_mt_engine_goal'(ThisQueue, TermQueue, Answer, Goal, Engine) :-
 	thread_self(Id),
