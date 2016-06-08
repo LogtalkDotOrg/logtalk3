@@ -32,7 +32,7 @@
 
 	:- uses(lgtunit, [benchmark/2]).
 
-	note('creation and stopping of 1000 threaded engines').
+	note('total times to create and stop 1000 threaded engines').
 
 	test(ebench_1, true, [note(create(true)-seconds(Time))]) :-
 		benchmark(
