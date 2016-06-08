@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/03,
+		date is 2016/06/08,
 		comment is 'Unit tests for the "ebench" example.'
 	]).
 
@@ -36,37 +36,37 @@
 
 	test(ebench_1, true, [note(create(true)-seconds(Time))]) :-
 		benchmark(
-			(between(1,1000,I),atom_number(E,I),threaded_engine_create(_,true,E),fail;true),
+			(between(1,1000,_),threaded_engine_create(_,true,_),fail;true),
 			Time
 		).
 
 	test(ebench_2, true, [note(stop(true)-seconds(Time))]) :-
 		benchmark(
-			(between(1,1000,I),atom_number(E,I),threaded_engine_stop(E),fail;true),
+			(threaded_engine(Engine),threaded_engine_stop(Engine),fail;true),
 			Time
 		).
 
 	test(ebench_3, true, [note(create(repeat)-seconds(Time))]) :-
 		benchmark(
-			(between(1,1000,I),atom_number(E,I),threaded_engine_create(_,repeat,E),fail;true),
+			(between(1,1000,_),threaded_engine_create(_,repeat,_),fail;true),
 			Time
 		).
 
 	test(ebench_4, true, [note(stop(repeat)-seconds(Time))]) :-
 		benchmark(
-			(between(1,1000,I),atom_number(E,I),threaded_engine_stop(E),fail;true),
+			(threaded_engine(Engine),threaded_engine_stop(Engine),fail;true),
 			Time
 		).
 
 	test(ebench_5, true, [note(create(loop)-seconds(Time))]) :-
 		benchmark(
-			(between(1,1000,I),atom_number(E,I),threaded_engine_create(_,loop,E),fail;true),
+			(between(1,1000,_),threaded_engine_create(_,loop,_),fail;true),
 			Time
 		).
 
 	test(ebench_6, true, [note(stop(loop)-seconds(Time))]) :-
 		benchmark(
-			(between(1,1000,I),atom_number(E,I),threaded_engine_stop(E),fail;true),
+			(threaded_engine(Engine),threaded_engine_stop(Engine),fail;true),
 			Time
 		).
 
