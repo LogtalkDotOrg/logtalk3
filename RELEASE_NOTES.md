@@ -76,6 +76,11 @@ indicator or a non-terminal indicator.
 * IMPROVED: The `help` tool now prints the general instructions on how to get
 help when if an unknown message is sent to the `help` object.
 
+* ADDED: Predicates `file/1-2` to the `wrapper` tool.
+
+* IMPROVED: The `wrapper` tool now tries to expand file paths with the defined
+Prolog extensions if the file path as given is not found.
+
 * ADDED: Support for using the Logtalk pack for SWI-Prolog as a backend option
 to the `logtalk_tester.sh` automation script.
 

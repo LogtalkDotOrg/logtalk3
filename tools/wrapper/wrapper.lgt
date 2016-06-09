@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2016/05/09,
+		date is 2016/06/09,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl''])',
@@ -89,6 +89,20 @@
 	:- info(files/1, [
 		comment is 'Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.',
 		argnames is ['Files']
+	]).
+
+	:- public(file/2).
+	:- mode(file(+atom, +list(compound)), one).
+	:- info(file/2, [
+		comment is 'Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using the specified options.',
+		argnames is ['File', 'Options']
+	]).
+
+	:- public(file/1).
+	:- mode(file(+atom), one).
+	:- info(file/1, [
+		comment is 'Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using default options.',
+		argnames is ['File']
 	]).
 
 	:- public(save/1).
@@ -271,35 +285,6 @@
 			SubDirectories
 		).
 
-	files(Files, UserOptions) :-
-		reset,
-		merge_options(UserOptions, Options),
-		wrap_files(Files, Options).
-
-	files(Files) :-
-		files(Files, []).
-
-	wrap_files(Files, Options) :-
-		memberchk(exclude_files(ExcludedFiles), Options),
-		forall(
-			file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name),
-			assertz(file_being_advised_(File, Path, Directory, Name))
-		),
-		load_and_wrap_files,
-		generate_advise,
-		print_advise.
-
-	file_being_advised([File| _], ExcludedFiles, File, Path, Directory, Name) :-
-		\+ member(File, ExcludedFiles),
-		os::expand_path(File, Path),
-		\+ member(Path, ExcludedFiles),
-		os::decompose_file_name(File, Directory, Name, Extension),
-		\+ member(Name, ExcludedFiles),
-		atom_concat(Name, Extension, Basename),
-		\+ member(Basename, ExcludedFiles).
-	file_being_advised([_| Files], ExcludedFiles, File, Path, Directory, Name) :-
-		file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name).
-
 	directories(Directories, UserOptions) :-
 		reset,
 		merge_options(UserOptions, Options),
@@ -342,6 +327,43 @@
 	directory(Directory) :-
 		directory(Directory, []).
 
+	files(Files, UserOptions) :-
+		reset,
+		merge_options(UserOptions, Options),
+		wrap_files(Files, Options).
+
+	files(Files) :-
+		files(Files, []).
+
+	file(File, UserOptions) :-
+		reset,
+		merge_options(UserOptions, Options),
+		wrap_files([File], Options).
+
+	file(File) :-
+		file(File, []).
+
+	wrap_files(Files, Options) :-
+		memberchk(exclude_files(ExcludedFiles), Options),
+		forall(
+			file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name),
+			assertz(file_being_advised_(File, Path, Directory, Name))
+		),
+		load_and_wrap_files(Options),
+		generate_advise,
+		print_advise.
+
+	file_being_advised([File| _], ExcludedFiles, File, Path, Directory, Name) :-
+		\+ member(File, ExcludedFiles),
+		os::expand_path(File, Path),
+		\+ member(Path, ExcludedFiles),
+		os::decompose_file_name(File, Directory, Name, Extension),
+		\+ member(Name, ExcludedFiles),
+		atom_concat(Name, Extension, Basename),
+		\+ member(Basename, ExcludedFiles).
+	file_being_advised([_| Files], ExcludedFiles, File, Path, Directory, Name) :-
+		file_being_advised(Files, ExcludedFiles, File, Path, Directory, Name).
+
 	reset :-
 		retractall(predicate_called_but_not_defined_(_, _)),
 		retractall(missing_predicate_directive_(_, _, _)),
@@ -354,19 +376,25 @@
 		retractall(add_directive_(_, _, _)),
 		retractall(remove_directive_(_, _)).
 
-	load_and_wrap_files :-
+	load_and_wrap_files(Options) :-
 		file_being_advised_(_, Path, _, _),
-		load_and_wrap_file(Path),
+		load_and_wrap_file(Path, Options),
 		fail.
-	load_and_wrap_files.
+	load_and_wrap_files(_).
 
-	load_and_wrap_file(File) :-
+	load_and_wrap_file(File, Options) :-
 		self(Self),
 		(	os::file_exists(File) ->
-			logtalk_load_lint_options(LintOptions),
-			logtalk_load(File, [hook(Self), source_data(on), reload(always)| LintOptions])
+			Path = File
+		;	memberchk(prolog_extensions(Extensions), Options),
+			member(Extension, Extensions),
+			atom_concat(File, Extension, Path),
+			os::file_exists(Path) ->
+			true
 		;	logtalk::print_message(warning, wrapper, file_not_found(File))
-		).
+		),
+		logtalk_load_lint_options(LintOptions),
+		logtalk_load(Path, [hook(Self), source_data(on), reload(always)| LintOptions]).
 
 	logtalk_load_lint_options([
 		portability(warning), 

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.7</code>
+            <code>0.8</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/5/9</code>
+            <code>2016/6/9</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -220,6 +220,46 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>files(+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="file/2" class="code">file/2</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file(File,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>file(+atom,+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="file/1" class="code">file/1</h3>
+          <blockquote>
+            <p class="comment">Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file(File)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>file(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
