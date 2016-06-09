@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/01,
+		date is 2016/06/09,
 		comment is 'Lazy meta-predicates implemented using coroutining and threaded engines.'
 	]).
 
@@ -37,13 +37,18 @@
 		argnames is ['Template', 'Goal', 'LazyList']
 	]).
 
-	find_all(Template, Goal, [Head| LazyTail]):-
+	find_all(Template, Goal, LazyList):-
 		threaded_engine_create(Template, Goal, Engine),
-		threaded_engine_answer(Engine, Head),
-		freeze(LazyTail, source_lazy_list(Engine, LazyTail)).
+		(	threaded_engine_answer(Engine, Head) ->
+			freeze(LazyList, source_lazy_list(LazyList, Head, Engine))
+		;	threaded_engine_stop(Engine)
+		).
 
-	source_lazy_list(Engine, [Head| LazyTail]) :-
-		threaded_engine_answer(Engine, Head),
-		freeze(LazyTail, source_lazy_list(Engine, LazyTail)).
+	source_lazy_list([Head| LazyTail], Head, Engine) :-
+		(	threaded_engine_answer(Engine, Next) ->
+			freeze(LazyTail, source_lazy_list(LazyTail, Next, Engine))
+		;	LazyTail = [],
+			threaded_engine_stop(Engine)
+		).
 
 :- end_object.
