@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/31,
+		date is 2016/06/10,
 		comment is 'Unit tests for the threaded_engine_answer/2 built-in predicate.'
 	]).
 
@@ -34,17 +34,21 @@
 		succeeds/1, fails/1, throws/2
 	]).
 
+	% engine name must be bound at runtime (but no error at compile time)
 	throws(threaded_engine_answer_2_01, error(instantiation_error, logtalk(threaded_engine_answer(_,_), This))) :-
 		this(This),
 		threaded_engine_answer(_, _).
 
+	% engine must exist
 	throws(threaded_engine_answer_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_answer(foo,_), This))) :-
 		this(This),
 		threaded_engine_answer(foo, _).
 
+	% create engine for the following tests
 	succeeds(threaded_engine_answer_2_03) :-
 		threaded_engine_create(X, a(X), test_engine_1).
 
+	% all solutions must be retrievable
 	succeeds(threaded_engine_answer_2_04) :-
 		threaded_engine_answer(test_engine_1, X),
 		threaded_engine_answer(test_engine_1, Y),
@@ -55,15 +59,23 @@
 	fails(threaded_engine_answer_2_05) :-
 		threaded_engine_answer(test_engine_1, _).
 
-	% engine with no goal solutions
+	% no more answers (must keep failing)
 	fails(threaded_engine_answer_2_06) :-
+		threaded_engine_answer(test_engine_1, _).
+
+	% engine with no goal solutions
+	fails(threaded_engine_answer_2_07) :-
 		threaded_engine_create(_, fail, test_engine_2),
 		threaded_engine_answer(test_engine_2, _).
 
 	% engine with a goal that throws an exception
-	throws(threaded_engine_answer_2_07, error(error, logtalk(threaded_engine_answer(_,_), This))) :-
+	throws(threaded_engine_answer_2_08, error(error, logtalk(threaded_engine_answer(_,_), This))) :-
 		this(This),
 		threaded_engine_create(_, throw(error), test_engine_3),
+		threaded_engine_answer(test_engine_3, _).
+
+	% after the exception, there cannot be any solutions
+	fails(threaded_engine_answer_2_09) :-
 		threaded_engine_answer(test_engine_3, _).
 
 	% auxiliary predicates

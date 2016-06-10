@@ -24,19 +24,31 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/31,
+		date is 2016/06/10,
 		comment is 'Unit tests for the threaded_engine_self/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
+	% test calling threaded_engine_self/1 with unbound argument
 	succeeds(threaded_engine_self_1_01) :-
 		threaded_engine_create(none, return, test_engine_1),
 		threaded_engine_answer(test_engine_1, Engine),
 		Engine == test_engine_1.
 
-	% calls outside the context of an engine fail
-	fails(threaded_engine_self_1_02) :-
+	% test calling threaded_engine_self/1 with bound and correct argument
+	succeeds(threaded_engine_self_1_02) :-
+		threaded_engine_create(none, correct, test_engine_2),
+		threaded_engine_answer(test_engine_2, Answer),
+		Answer == none.
+
+	% test calling threaded_engine_self/1 with bound but incorrect argument
+	fails(threaded_engine_self_1_03) :-
+		threaded_engine_create(none, wrong, test_engine_3),
+		threaded_engine_answer(test_engine_3, _).
+
+	% calls outside the context of an engine must fail
+	fails(threaded_engine_self_1_04) :-
 		threaded_engine_self(_).
 
 	% auxiliary predicates
@@ -44,5 +56,11 @@
 	return :-
 		threaded_engine_self(Engine),
 		threaded_engine_return(Engine).
+
+	correct :-
+		threaded_engine_self(test_engine_2).
+
+	wrong :-
+		threaded_engine_self(wrong).
 
 :- end_object.

@@ -24,16 +24,18 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/31,
+		date is 2016/06/10,
 		comment is 'Unit tests for the threaded_engine_post/2 built-in predicate.'
 	]).
 
 	:- threaded.
 
+	% engine argument must be bound at runtime (but no error at compile time)
 	throws(threaded_engine_post_2_01, error(instantiation_error, logtalk(threaded_engine_post(_,_), This))) :-
 		this(This),
 		threaded_engine_post(_, _).
 
+	% engine must exist
 	throws(threaded_engine_post_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_), This))) :-
 		this(This),
 		threaded_engine_post(foo, _).

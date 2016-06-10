@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/31,
+		date is 2016/06/10,
 		comment is 'Unit tests for the threaded_engine_return/1 built-in predicate.'
 	]).
 
@@ -32,6 +32,34 @@
 
 	% calls outside the context of an engine fail
 	fails(threaded_engine_return_1_01) :-
+		threaded_engine_return(_).
+
+	% no restrictions on the kind of terms that can be returned as answers
+
+	succeeds(threaded_engine_return_1_02) :-
+		threaded_engine_create(none, return_atom, test_engine_1),
+		threaded_engine_answer(test_engine_1, Answer),
+		Answer == foo.
+
+	succeeds(threaded_engine_return_1_03) :-
+		threaded_engine_create(none, return_compound, test_engine_2),
+		threaded_engine_answer(test_engine_2, Answer),
+		::variant(Answer, f(X,_,X)).
+
+	succeeds(threaded_engine_return_1_04) :-
+		threaded_engine_create(none, return_var, test_engine_3),
+		threaded_engine_answer(test_engine_3, Answer),
+		var(Answer).
+
+	% auxiliary predicates
+
+	return_atom :-
+		threaded_engine_return(foo).
+
+	return_compound :-
+		threaded_engine_return(f(X,_,X)).
+
+	return_var :-
 		threaded_engine_return(_).
 
 :- end_object.

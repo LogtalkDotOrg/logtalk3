@@ -24,19 +24,20 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/31,
+		date is 2016/06/10,
 		comment is 'Unit tests for the threaded_engine_fetch/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
+	% must be able to fetch a posted term
 	succeeds(threaded_engine_fetch_1_01) :-
 		threaded_engine_create(none, boomerang, test_engine_1),
 		threaded_engine_post(test_engine_1, term),
 		threaded_engine_answer(test_engine_1, Term),
 		Term == term.
 
-	% engine term queue is, well, a queue
+	% engine term queue must be, well, a queue
 	succeeds(threaded_engine_fetch_1_02) :-
 		threaded_engine_create(none, loop, test_engine_2),
 		threaded_engine_post(test_engine_2, term1),
