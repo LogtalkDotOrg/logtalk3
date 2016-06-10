@@ -46,7 +46,10 @@
 
 <pre>threaded_engine_return(Answer)</pre>
 <p>
-Returns an answer independent of the solutions of the engine goal. This predicate is usually used when the engine goal is call to a recursive predicate processing terms from the engine message queue.
+Returns an answer independent of the solutions of the engine goal. Fails if not called from within an engine. This predicate is usually used when the engine goal is call to a recursive predicate processing terms from the engine message queue.
+</p>
+<p>
+Note that this predicate should not be called as the last element of a conjunction resulting in an engine goal solution as, in this case, an answer will always be returned. For example, instead of <code>(threaded_engine_return(ready); member(X,[1,2,3]))</code> use <code>(X=ready; member(X,[1,2,3]))</code>.
 </p>
 
 <h4>Template and modes</h4>
@@ -75,7 +78,7 @@ Returns an answer independent of the solutions of the engine goal. This predicat
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 28, 2016</span>
+		<span>Last updated on: June 10, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="threaded_engine_answer_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_engine_post_2.html">next</a></span><br/>
