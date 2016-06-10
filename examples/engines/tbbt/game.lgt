@@ -23,14 +23,18 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/06,
+		date is 2016/06/10,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
 	:- threaded.
 
-	% create an engine to do all output
+	% create an engine to do all output from the other engines
 	:- initialization(threaded_engine_create(_, output, writer)).
+
+	% format/2 allows us to avoid synchronization issues
+	% when our engines are concurrently writing text
+	:- uses(user, [format/2]).
 
 	:- public(explain/0).
 	:- mode(explain, one).
@@ -55,10 +59,6 @@
 	:- info(play/0, [
 		comment is 'Plays a game of rock, paper, scissors, lizard, Spock between Sheldon and Raj.'
 	]).
-
-	% format/2 allows us to avoid synchronization issues
-	% when our engines are concurrently writing text
-	:- uses(user, [format/2]).
 
 	play :-
 		% in the sitcom, the game is first played between
@@ -114,6 +114,7 @@
 
 	% when selecting and printing the move, we could also
 	% have called the threaded_engine_self/1 predicate
+	% instead of passing the name of the engine
 	select_move(Me, Move) :-
 		random::random(1, 6, N),
 		move(N, Move),
