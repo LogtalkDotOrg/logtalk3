@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.15,
+		version is 2.16,
 		author is 'Paulo Moura',
-		date is 2016/06/03,
+		date is 2016/06/11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -747,9 +747,9 @@
 
 	% unit test idiom test/3
 	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)]) :-
-		callable(Outcome0),
-		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		check_for_valid_test_identifier(Test),
+		check_for_valid_test_outcome(Test, Outcome0),
+		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
 		term_variables(Options, Variables),
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
@@ -765,9 +765,9 @@
 
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, [], Outcome) :- Goal)]) :-
-		callable(Outcome0),
-		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		check_for_valid_test_identifier(Test),
+		check_for_valid_test_outcome(Test, Outcome0),
+		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Position)))
@@ -879,6 +879,14 @@
 	ignorable_discontiguous_predicate(deterministic/1).
 	ignorable_discontiguous_predicate(fails/1).
 	ignorable_discontiguous_predicate(throws/2).
+
+	check_for_valid_test_outcome(Test, Outcome) :-
+		(	var(Outcome) ->
+			print_message(error, lgtunit, non_instantiated_test_outcome(Test))
+		;	member(Outcome, [true, true(_), deterministic, deterministic(_), fail,error(_), errors(_), ball(_), balls(_)]) ->
+			true
+		;	print_message(error, lgtunit, invalid_test_outcome(Test, Outcome))
+		).
 
 	convert_test_outcome(true, Goal, true, Goal).
 	convert_test_outcome(true(Test), Goal, true, (Goal, Test)).

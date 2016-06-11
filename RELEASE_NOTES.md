@@ -32,7 +32,7 @@ printing a message, use the message kind term instead of just its functor.
 
 * ADDED: Threaded engines API. An engine is a computing thread whose solutions
 can be lazily computed and retrieved. An engine also supports a term queue that
-allows passing arbitrary terms to the engine.
+allows passing arbitrary terms to an engine.
 
 * ADDED: Support for specifying the `scratch_directory` flag value using
 library notation.
@@ -89,6 +89,9 @@ number of tests sets and the number of completed tests sets.
 
 * FIXED: The `logtalk_tester.sh` automation script to not override any existing
 log messages when tagging a test suite as a timeout or a crash.
+
+* IMPROVED: The `lgtunit` tool to print an error message when an invalid test
+outcome is found while compiling tests using the `test/3` testing dialect. 
 
 * FIXED: Regression in the `lgtunit` tool introduced in the previous release
 where an error in the added meta-predicate directives for local meta-predicates
