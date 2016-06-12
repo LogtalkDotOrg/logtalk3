@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.06.0 - June ??, 2016
+3.06.0 - June 12, 2016
 ======================
 
 Logtalk compiler and runtime
@@ -30,9 +30,10 @@ Logtalk compiler and runtime
 * CHANGED: When adding a `begin/2` token to the list of tokens generated for
 printing a message, use the message kind term instead of just its functor.
 
-* ADDED: Threaded engines API. An engine is a computing thread whose solutions
-can be lazily computed and retrieved. An engine also supports a term queue that
-allows passing arbitrary terms to an engine.
+* ADDED: Threaded engines API. A threaded engine is a computing thread whose
+solutions can be lazily computed and retrieved. An engine also supports a term
+queue that allows passing arbitrary terms to an engine. Based on Paul Tarau's
+`engines` concepts.
 
 * ADDED: Support for specifying the `scratch_directory` flag value using
 library notation.
