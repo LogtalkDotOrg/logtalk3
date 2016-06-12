@@ -91,6 +91,9 @@ number of tests sets and the number of completed tests sets.
 * FIXED: The `logtalk_tester.sh` automation script to not override any existing
 log messages when tagging a test suite as a timeout or a crash.
 
+* FIXED: Workaround the lack of support for process substitution in the Git for
+Windows provided Git Bash when using the `logtalk_tester.sh` automation script.
+
 * IMPROVED: The `lgtunit` tool to print an error message when an invalid test
 outcome is found while compiling tests using the `test/3` testing dialect. 
 
