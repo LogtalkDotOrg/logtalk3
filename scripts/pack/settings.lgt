@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  sample settings file
-%  Last updated on February 16, 2015
+%  Last updated on June 14, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -332,6 +332,9 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 	% uncomment the next line to suppress the startup printing of settings information (except warnings and errors)
 	logtalk::message_hook(_, comment(settings), core, _).
+
+	% uncomment the next line to suppress the startup printing on the help tool
+	logtalk::message_hook(_, comment(help), core, _).
 
 :- end_category.
 
