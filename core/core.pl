@@ -19019,7 +19019,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_threaded_engine'(@object_identifier, ?nonvar)
+% '$lgt_current_engine'(@object_identifier, ?nonvar)
+%
+% we cannot compile threaded_engine/1 calls into '$lgt_current_engine_'/2 calls
+% as the last two arguments would cause problems with bagof/3 and setof/3 calls
 
 '$lgt_current_engine'(This, Engine) :-
 	'$lgt_current_engine_'(This, Engine, _, _).
