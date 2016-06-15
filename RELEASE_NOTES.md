@@ -24,7 +24,16 @@ RELEASE NOTES
 3.06.1 - June ??, 2016
 ======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* RENAMED: Threaded engine predicates `threaded_engine_stop/1` to
+`threaded_engine_destroy/1`, `threaded_engine_return/1` to
+`threaded_engine_yield/1`, and `threaded_engine_answer/2` to
+`threaded_engine_next/2`. After discussion on engine APIs predicate
+naming with Paul Tarau and Jan Wielemaker. This renaming makes it
+easier to compare and port code between coroutining and threaded
+versions of engine APIs.
 
 
 3.06.0 - June 12, 2016

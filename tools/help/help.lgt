@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2016/05/30,
+		date is 2016/06/15,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -279,10 +279,10 @@
 
 	built_in_predicate(threaded_engine, 1, '/manuals/refman/predicates/', 'threaded_engine_1.html').
 	built_in_predicate(threaded_engine_create, 3, '/manuals/refman/predicates/', 'threaded_engine_create_3.html').
-	built_in_predicate(threaded_engine_stop, 1, '/manuals/refman/predicates/', 'threaded_engine_stop_1.html').
+	built_in_predicate(threaded_engine_destroy, 1, '/manuals/refman/predicates/', 'threaded_engine_destroy_1.html').
 	built_in_predicate(threaded_engine_self, 1, '/manuals/refman/predicates/', 'threaded_engine_self_1.html').
-	built_in_predicate(threaded_engine_answer, 2, '/manuals/refman/predicates/', 'threaded_engine_answer_2.html').
-	built_in_predicate(threaded_engine_return, 1, '/manuals/refman/predicates/', 'threaded_engine_return_1.html').
+	built_in_predicate(threaded_engine_next, 2, '/manuals/refman/predicates/', 'threaded_engine_next_2.html').
+	built_in_predicate(threaded_engine_yield, 1, '/manuals/refman/predicates/', 'threaded_engine_yield_1.html').
 	built_in_predicate(threaded_engine_post, 2, '/manuals/refman/predicates/', 'threaded_engine_post_2.html').
 	built_in_predicate(threaded_engine_fetch, 1, '/manuals/refman/predicates/', 'threaded_engine_fetch_1.html').
 

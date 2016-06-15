@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/01,
+		date is 2016/06/15,
 		comment is 'Examples of implementing interactors using threaded engines.'
 	]).
 
@@ -59,21 +59,21 @@
 	]).
 
 	natural(N) :-
-		threaded_engine_answer(naturals, N).
+		threaded_engine_next(naturals, N).
 
 	natural_loop(N) :-
-		threaded_engine_return(N),
+		threaded_engine_yield(N),
 		N1 is N + 1,
 		natural_loop(N1).
 
 	prime(Prime) :-
-		threaded_engine_answer(primes, Prime).
+		threaded_engine_next(primes, Prime).
 
 	prime_loop(N) :-
 		N1 is N + 1,
 		(	test_prime(N1) ->
 			prime_loop(N1)
-		;	threaded_engine_return(N1)
+		;	threaded_engine_yield(N1)
 		),
 		prime_loop(N1).
 
@@ -86,13 +86,13 @@
 		% inject goal for the engine to execute
 		threaded_engine_post(sums, Sum1->Sum2 :- Sum2 is Sum1 + 2),
 		threaded_engine_post(sums, Sum1->Sum2 :- Sum2 is Sum1 + 5),
-		threaded_engine_answer(sums, Sums).
+		threaded_engine_next(sums, Sums).
 
 	% the argument of the loop predicate acts as a engine local state variable
 	sum_loop(Sum1) :-
 		threaded_engine_fetch(Sum1->Sum2 :- Goal),
 		call(Goal),
-		threaded_engine_return(Sum1->Sum2),
+		threaded_engine_yield(Sum1->Sum2),
 		sum_loop(Sum2).
 
 :- end_object.

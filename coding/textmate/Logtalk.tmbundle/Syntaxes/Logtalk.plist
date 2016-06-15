@@ -349,7 +349,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(])</string>
+			<string>\b(threaded_engine(_(create|destroy|self|next|yield|post|fetch))?)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.engines.logtalk</string>
 		</dict>

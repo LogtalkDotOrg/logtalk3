@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/01,
+		date is 2016/06/15,
 		comment is 'Examples of implementing fluents using threaded engines.'
 	]).
 
@@ -40,7 +40,7 @@
 	]).
 
 	next(Next) :-
-		threaded_engine_answer(fluent, Next).
+		threaded_engine_next(fluent, Next).
 
 	a(1). a(2). a(3).
 

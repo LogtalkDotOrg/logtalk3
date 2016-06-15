@@ -167,10 +167,10 @@ threaded_wait
 threaded_notify
 threaded_engine
 threaded_engine_create
-threaded_engine_stop
+threaded_engine_destroy
 threaded_engine_self
-threaded_engine_answer
-threaded_engine_return
+threaded_engine_next
+threaded_engine_yield
 threaded_engine_post
 threaded_engine_fetch
 forall

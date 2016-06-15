@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/07,
+		date is 2016/06/15,
 		comment is 'Examples of implementing meta-predicates using threaded engines.'
 	]).
 
@@ -54,13 +54,13 @@
 	]).
 
 	best_of(Answer, Comparator, Generator) :-
-		threaded_engine_create(Answer, Generator, E),
-		efoldl(E, compare_answers(Comparator), no, Best),
+		threaded_engine_create(Answer, Generator, Engine),
+		efoldl(Engine, compare_answers(Comparator), no, Best),
 		Answer = Best.
 
 	:- meta_predicate(efoldl(*, 3, *, *)).
 	efoldl(Engine, F, R1, R2):-
-		threaded_engine_answer(Engine, X),
+		threaded_engine_next(Engine, X),
 		!,
 		call(F, R1, X, R),
 		efoldl(Engine, F, R, R2).
@@ -75,29 +75,29 @@
 		).
 
 	find_all(Template, Goal, List) :-
-		threaded_engine_create(Template, Goal, Tag),
-		collect_all(Tag, List0),
-		threaded_engine_stop(Tag),
+		threaded_engine_create(Template, Goal, Engine),
+		collect_all(Engine, List0),
+		threaded_engine_destroy(Engine),
 		List = List0.
 
-	collect_all(Tag, [X| Xs]) :-
-		threaded_engine_answer(Tag, X),
+	collect_all(Engine, [X| Xs]) :-
+		threaded_engine_next(Engine, X),
 		!,
-		collect_all(Tag, Xs).
+		collect_all(Engine, Xs).
 	collect_all(_, []).
 
 	find_at_most(N, Template, Goal, List) :-
-		threaded_engine_create(Template, Goal, Tag),
-		collect_at_most(N, Tag, List0),
-		threaded_engine_stop(Tag),
+		threaded_engine_create(Template, Goal, Engine),
+		collect_at_most(N, Engine, List0),
+		threaded_engine_destroy(Engine),
 		List = List0.
 
-	collect_at_most(N, Tag, [X| Xs]) :-
+	collect_at_most(N, Engine, [X| Xs]) :-
 		N > 0,
-		threaded_engine_answer(Tag, X),
+		threaded_engine_next(Engine, X),
 		!,
 		M is N - 1,
-		collect_at_most(M, Tag, Xs).
+		collect_at_most(M, Engine, Xs).
 	collect_at_most(_, _, []).
 
 :- end_object.

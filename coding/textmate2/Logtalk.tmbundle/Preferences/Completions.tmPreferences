@@ -93,10 +93,10 @@
 			<string>threaded_notify</string>
 			<string>threaded_engine</string>
 			<string>threaded_engine_create</string>
-			<string>threaded_engine_stop</string>
+			<string>threaded_engine_destroy</string>
 			<string>threaded_engine_self</string>
-			<string>threaded_engine_answer</string>
-			<string>threaded_engine_return</string>
+			<string>threaded_engine_next</string>
+			<string>threaded_engine_yield</string>
 			<string>threaded_engine_post</string>
 			<string>threaded_engine_fetch</string>
 			<string>self</string>

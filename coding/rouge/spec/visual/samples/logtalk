@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.33,
+		version is 1.34,
 		author is 'Paulo Moura',
-		date is 2016/05/29,
+		date is 2016/06/15,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -139,10 +139,10 @@ comment
 	engines :-
 		threaded_engine(Engine),
 		threaded_engine_create(AnswerTemplate, Goal, Engine),
-		threaded_engine_stop(Engine),
+		threaded_engine_destroy(Engine),
 		threaded_engine_self(Engine),
-		threaded_engine_answer(Engine, Answer),
-		threaded_engine_return(Answer),
+		threaded_engine_next(Engine, Answer),
+		threaded_engine_yield(Answer),
 		threaded_engine_post(Engine, Term),
 		threaded_engine_fetch(Term).
 

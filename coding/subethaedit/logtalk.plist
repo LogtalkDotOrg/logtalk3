@@ -254,10 +254,10 @@
 				<string>[^A-Za-z0-9_](threaded_notify)\(</string>
 				<string>[^A-Za-z0-9_](threaded_engine)\(</string>
 				<string>[^A-Za-z0-9_](threaded_engine_create)\(</string>
-				<string>[^A-Za-z0-9_](threaded_engine_stop)\(</string>
+				<string>[^A-Za-z0-9_](threaded_engine_destroy)\(</string>
 				<string>[^A-Za-z0-9_](threaded_engine_self)\(</string>
-				<string>[^A-Za-z0-9_](threaded_engine_answer)\(</string>
-				<string>[^A-Za-z0-9_](threaded_engine_return)\(</string>
+				<string>[^A-Za-z0-9_](threaded_engine_next)\(</string>
+				<string>[^A-Za-z0-9_](threaded_engine_yield)\(</string>
 				<string>[^A-Za-z0-9_](threaded_engine_post)\(</string>
 				<string>[^A-Za-z0-9_](threaded_engine_fetch)\(</string>
 			</array>

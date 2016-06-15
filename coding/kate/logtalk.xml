@@ -46,7 +46,7 @@
 				<!-- Multi-threading predicates -->
 				<RegExpr String = "\bthreaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Engine predicates -->
-				<RegExpr String = "\bthreaded_engine(_(create|stop|self|answer|return|post|fetch))?(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\bthreaded_engine(_(create|destroy|self|next|yield|post|fetch))?(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Term unification -->
 				<RegExpr String = "\b(subsumes_term|unify_with_occurs_check)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Term creation and decomposition -->

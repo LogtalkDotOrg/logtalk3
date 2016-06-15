@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/08,
+		date is 2016/06/12,
 		comment is 'Unit tests for the "ebench" example.'
 	]).
 
@@ -32,7 +32,7 @@
 
 	:- uses(lgtunit, [benchmark/2]).
 
-	note('total times to create and stop 1000 threaded engines').
+	note('total times to create and destroy 1000 threaded engines').
 
 	test(ebench_1, true, [note(create(true)-seconds(Time))]) :-
 		benchmark(
@@ -40,9 +40,9 @@
 			Time
 		).
 
-	test(ebench_2, true, [note(stop(true)-seconds(Time))]) :-
+	test(ebench_2, true, [note(destroy(true)-seconds(Time))]) :-
 		benchmark(
-			(threaded_engine(Engine),threaded_engine_stop(Engine),fail;true),
+			(threaded_engine(Engine),threaded_engine_destroy(Engine),fail;true),
 			Time
 		).
 
@@ -52,9 +52,9 @@
 			Time
 		).
 
-	test(ebench_4, true, [note(stop(repeat)-seconds(Time))]) :-
+	test(ebench_4, true, [note(destroy(repeat)-seconds(Time))]) :-
 		benchmark(
-			(threaded_engine(Engine),threaded_engine_stop(Engine),fail;true),
+			(threaded_engine(Engine),threaded_engine_destroy(Engine),fail;true),
 			Time
 		).
 
@@ -64,9 +64,9 @@
 			Time
 		).
 
-	test(ebench_6, true, [note(stop(loop)-seconds(Time))]) :-
+	test(ebench_6, true, [note(destroy(loop)-seconds(Time))]) :-
 		benchmark(
-			(threaded_engine(Engine),threaded_engine_stop(Engine),fail;true),
+			(threaded_engine(Engine),threaded_engine_destroy(Engine),fail;true),
 			Time
 		).
 

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/10,
+		date is 2016/06/15,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
@@ -66,11 +66,11 @@
 		threaded_engine_create(done, loop(sheldon), sheldon),
 		threaded_engine_create(done, loop(raj), raj),
 		play_move,
-		% wait for both engines to terminate before stopping them
-		threaded_engine_answer(sheldon, done),
-		threaded_engine_answer(raj, done),
-		threaded_engine_stop(sheldon),
-		threaded_engine_stop(raj).
+		% wait for both engines to terminate before destroying them
+		threaded_engine_next(sheldon, done),
+		threaded_engine_next(raj, done),
+		threaded_engine_destroy(sheldon),
+		threaded_engine_destroy(raj).
 
 	output :-
 		threaded_engine_fetch(Format-Arguments),
@@ -86,7 +86,7 @@
 		select_move(Me, Move),
 		% return the selected move to the object,
 		% which acts as the game arbiter
-		threaded_engine_return(Move),
+		threaded_engine_yield(Move),
 		% react to the move outcome
 		threaded_engine_fetch(Result),
 		handle_result(Result, Me).
@@ -102,8 +102,8 @@
 	% communicate the move outcome to the engines, and decides if
 	% the game continues 
 	play_move :-
-		threaded_engine_answer(sheldon, SheldonMove),
-		threaded_engine_answer(raj, RajMove),
+		threaded_engine_next(sheldon, SheldonMove),
+		threaded_engine_next(raj, RajMove),
 		decide_move(SheldonMove, RajMove, SheldonResult, RajResult),
 		threaded_engine_post(sheldon, SheldonResult),
 		threaded_engine_post(raj, RajResult),

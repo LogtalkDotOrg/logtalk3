@@ -87,7 +87,7 @@
 				<regex>\b(forall)\(</regex>
 				<!-- <regex>\b(retractall)\(</regex> -->
 				<regex>\b(threaded(?:_(?:call|once|ignore|exit|peek|wait|notify))?)\(</regex>
-				<regex>\b(threaded_engine(?:_(?:create|stop|self|answer|return|post|fetch))?)\(</regex>
+				<regex>\b(threaded_engine(?:_(?:create|destroy|self|next|yield|post|fetch))?)\(</regex>
 			</keywords>
 
 			<keywords id="Other Built-in Predicates" color="#1A1AA6" useforautocomplete="yes">

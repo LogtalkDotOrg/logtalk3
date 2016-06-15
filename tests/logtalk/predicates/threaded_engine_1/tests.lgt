@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/10,
+		date is 2016/06/15,
 		comment is 'Unit tests for the threaded_engine/1 built-in predicate.'
 	]).
 
@@ -42,26 +42,26 @@
 	succeeds(threaded_engine_1_03) :-
 		threaded_engine_create(none, true, Engine),
 		threaded_engine(Engine),
-		threaded_engine_stop(Engine).
+		threaded_engine_destroy(Engine).
 
 	% engine with multiple solutions
 	succeeds(threaded_engine_1_04) :-
 		threaded_engine_create(none, repeat, Engine),
 		threaded_engine(Engine),
-		threaded_engine_stop(Engine).
+		threaded_engine_destroy(Engine).
 
 	% engine with no solutions
 	succeeds(threaded_engine_1_05) :-
 		threaded_engine_create(none, fail, Engine),
 		threaded_engine(Engine),
-		threaded_engine_stop(Engine).
+		threaded_engine_destroy(Engine).
 
 	% the predicate must also work as expected
 	% when called with an unbound argument
 	succeeds(threaded_engine_1_06) :-
 		threaded_engine_create(none, true, Engine),
 		threaded_engine(ReturnedEngine),
-		threaded_engine_stop(Engine),
+		threaded_engine_destroy(Engine),
 		ReturnedEngine == Engine.
 
 	% all existing engines must be returned

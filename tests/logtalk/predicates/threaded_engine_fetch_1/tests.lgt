@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/06/10,
+		date is 2016/06/15,
 		comment is 'Unit tests for the threaded_engine_fetch/1 built-in predicate.'
 	]).
 
@@ -34,7 +34,7 @@
 	succeeds(threaded_engine_fetch_1_01) :-
 		threaded_engine_create(none, boomerang, test_engine_1),
 		threaded_engine_post(test_engine_1, term),
-		threaded_engine_answer(test_engine_1, Term),
+		threaded_engine_next(test_engine_1, Term),
 		Term == term.
 
 	% engine term queue must be, well, a queue
@@ -43,9 +43,9 @@
 		threaded_engine_post(test_engine_2, term1),
 		threaded_engine_post(test_engine_2, term2),
 		threaded_engine_post(test_engine_2, term3),
-		threaded_engine_answer(test_engine_2, Term1),
-		threaded_engine_answer(test_engine_2, Term2),
-		threaded_engine_answer(test_engine_2, Term3),
+		threaded_engine_next(test_engine_2, Term1),
+		threaded_engine_next(test_engine_2, Term2),
+		threaded_engine_next(test_engine_2, Term3),
 		Term1 == term1, Term2 == term2, Term3 == term3.
 
 	% calls outside the context of an engine fail
@@ -56,11 +56,11 @@
 
 	boomerang :-
 		threaded_engine_fetch(Term),
-		threaded_engine_return(Term).
+		threaded_engine_yield(Term).
 
 	loop :-
 		threaded_engine_fetch(Term),
-		threaded_engine_return(Term),
+		threaded_engine_yield(Term),
 		loop.
 
 :- end_object.

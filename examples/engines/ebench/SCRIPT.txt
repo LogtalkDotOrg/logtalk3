@@ -35,7 +35,7 @@ ________________________________________________________________________
 | ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,true,A),fail)).
 ...
 
-| ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_stop(A),fail)).
+| ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ...
 
 
@@ -44,7 +44,7 @@ ________________________________________________________________________
 | ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,repeat,A),fail)).
 ...
 
-| ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_stop(A),fail)).
+| ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ...
 
 
@@ -58,5 +58,5 @@ yes
 | ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,loop,A),fail)).
 ...
 
-| ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_stop(A),fail)).
+| ?- time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ...

@@ -27,7 +27,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk built-in predicate: threaded_engine_answer/2</title>
+	<title>Logtalk built-in predicate: threaded_engine_yield/1</title>
 	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
 </head>
@@ -35,53 +35,53 @@
 <body>
 
 <div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Built-in predicate: threaded_engine_answer/2</div>
+<div class="top-right">Built-in predicate: threaded_engine_yield/1</div>
 <div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_engine_answer/2</div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_engine_yield/1</div>
 
-<h2 id="predicates_threaded_engine_answer_2" class="codenp">threaded_engine_answer/2</h2>
+<h2 id="predicates_threaded_engine_yield_1" class="codenp">threaded_engine_yield/1</h2>
 
 <h4>Description</h4>
 
-<pre>threaded_engine_answer(Engine, Answer)</pre>
+<pre>threaded_engine_yield(Answer)</pre>
 <p>
-Retrieves an answer from an engine. When the engine goal is running, this predicate blocks until an answer becomes available. The predicate fails when there are no more solutions to the engine goal.
+Returns an answer independent of the solutions of the engine goal. Fails if not called from within an engine. This predicate is usually used when the engine goal is call to a recursive predicate processing terms from the engine message queue.
+</p>
+<p>
+Note that this predicate should not be called as the last element of a conjunction resulting in an engine goal solution as, in this case, an answer will always be returned. For example, instead of <code>(threaded_engine_yield(ready); member(X,[1,2,3]))</code> use <code>(X=ready; member(X,[1,2,3]))</code>.
 </p>
 
 <h4>Template and modes</h4>
 
-<pre>threaded_engine_answer(@nonvar, ?term)</pre>
+<pre>threaded_engine_yield(@term)</pre>
 
 <h4>Errors</h4>
 
 <dl>
-	<dt>Engine is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>Engine is neither a variable nor the name of an existing engine:</dt>
-		<dd><code>existence_error(engine, Engine)</code></dd>
+	<dt><code>(none)</code></dt>
 </dl>
 
 <h4>Examples</h4>
 
 <dl>
 	<dt>Returns the atom <code>ready</code> as an engine answer:</dt>
-		<dd><code>threaded_engine_return(ready)</code></dd>
+		<dd><code>threaded_engine_yield(ready)</code></dd>
 </dl>
 
 <h4>See also</h4>
 
 <p>
-<code><a href="threaded_engine_create_3.html">threaded_engine_create/3</a></code>, <code><a href="threaded_engine_return_1.html">threaded_engine_return/1</a></code>
+<code><a href="threaded_engine_create_3.html">threaded_engine_create/3</a></code>, <code><a href="threaded_engine_self_1.html">threaded_engine_next/2</a></code>
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 28, 2016</span>
+		<span>Last updated on: June 15, 2016</span>
 	</div>
 	<div class="navbottom">
-		<span><a href="threaded_engine_self_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_engine_return_1.html">next</a></span><br/>
+		<span><a href="threaded_engine_next_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_engine_post_2.html">next</a></span><br/>
 		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
 	</div>
 </div>

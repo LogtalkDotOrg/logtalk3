@@ -20,6 +20,6 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example provides benchmarking support for evaluating the performance of
-threaded engine creation and stopping. Currently it only runs on SWI-Prolog.
+threaded engine creation and destroying. Currently it only runs on SWI-Prolog.
 It should run also on XSB and YAP if and when these systems bugs with
 coroutining and/or threads get fixed.

@@ -38,7 +38,7 @@ N3 = 3
 yes
 
 % after exhausting the fluent answers, subsequent queries fail
-% until the threaded engine implementing the fluent is stopped:
+% until the threaded engine implementing the fluent is destroyed:
 
 | ?- fluents::next(_).
 no

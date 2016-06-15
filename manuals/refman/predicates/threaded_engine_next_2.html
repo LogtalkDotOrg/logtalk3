@@ -27,7 +27,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk built-in predicate: threaded_engine_stop/1</title>
+	<title>Logtalk built-in predicate: threaded_engine_next/2</title>
 	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
 </head>
@@ -35,23 +35,23 @@
 <body>
 
 <div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Built-in predicate: threaded_engine_stop/1</div>
+<div class="top-right">Built-in predicate: threaded_engine_next/2</div>
 <div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_engine_stop/1</div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_engine_next/2</div>
 
-<h2 id="predicates_threaded_engine_stop_1" class="codenp">threaded_engine_stop/1</h2>
+<h2 id="predicates_threaded_engine_next_2" class="codenp">threaded_engine_next/2</h2>
 
 <h4>Description</h4>
 
-<pre>threaded_engine_stop(Engine)</pre>
+<pre>threaded_engine_next(Engine, Answer)</pre>
 <p>
-Stops an engine.
+Retrieves an answer from an engine. When the engine goal is running, this predicate blocks until an answer becomes available. The predicate fails when there are no more solutions to the engine goal.
 </p>
 
 <h4>Template and modes</h4>
 
-<pre>threaded_engine_stop(@nonvar)</pre>
+<pre>threaded_engine_next(@nonvar, ?term)</pre>
 
 <h4>Errors</h4>
 
@@ -65,25 +65,23 @@ Stops an engine.
 <h4>Examples</h4>
 
 <dl>
-	<dt>Stop an engine named <code>worker_1</code>:</dt>
-		<dd><code>threaded_engine_stop(worker_1)</code></dd>
-	<dt>Stop all engines:</dt>
-		<dd><code>forall(threaded_engine(Engine), threaded_engine_stop(Engine))</code></dd>
+	<dt>Returns the atom <code>ready</code> as an engine answer:</dt>
+		<dd><code>threaded_engine_yield(ready)</code></dd>
 </dl>
 
 <h4>See also</h4>
 
 <p>
-<code><a href="threaded_engine_create_3.html">threaded_engine_create/3</a></code>, <code><a href="threaded_engine_self_1.html">threaded_engine_self/1</a></code>, <code><a href="threaded_engine_1.html">threaded_engine/1</a></code>
+<code><a href="threaded_engine_create_3.html">threaded_engine_create/3</a></code>, <code><a href="threaded_engine_yield_1.html">threaded_engine_yield/1</a></code>
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 28, 2016</span>
+		<span>Last updated on: June 15, 2016</span>
 	</div>
 	<div class="navbottom">
-		<span><a href="threaded_engine_create_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_engine_1.html">next</a></span><br/>
+		<span><a href="threaded_engine_self_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_engine_yield_1.html">next</a></span><br/>
 		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
 	</div>
 </div>

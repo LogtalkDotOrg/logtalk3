@@ -177,7 +177,7 @@ var LogtalkHighlightRules = function() {
            regex: '\\b(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])' },
          { caseInsensitive: false,
            token: 'support.function.engines.logtalk',
-           regex: '\\b(threaded_engine(_(create|stop|self|answer|return|post|fetch))?)(?=[(])' },
+           regex: '\\b(threaded_engine(_(create|destroy|self|next|yield|post|fetch))?)(?=[(])' },
          { caseInsensitive: false,
            token: 'support.function.reflection.logtalk',
            regex: '\\b(?:current_predicate|predicate_property)(?=[(])' },

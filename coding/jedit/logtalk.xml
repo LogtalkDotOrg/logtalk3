@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by		Paulo Moura
-	version			1.500
+	version			1.600
 	created on		May 5, 2002
-	last revised	May 29, 2016
+	last revised	June 15, 2016
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -91,7 +91,7 @@
 		<!-- Multi-threading predicates -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\bthreaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])</SEQ_REGEXP>
 		<!-- Engine predicates -->
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\bthreaded_engine(_(create|stop|self|answer|return|post|fetch))?(?=[(])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\bthreaded_engine(_(create|destroy|self|next|yield|post|fetch))?(?=[(])</SEQ_REGEXP>
 		<!-- Term unification -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(subsumes_term|unify_with_occurs_check)(?=[(])</SEQ_REGEXP>
 		<!-- Term creation and decomposition -->
