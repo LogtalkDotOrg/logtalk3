@@ -46,7 +46,7 @@
 
 <pre>threaded_engine_next(Engine, Answer)</pre>
 <p>
-Retrieves an answer from an engine. When the engine goal is running, this predicate blocks until an answer becomes available. The predicate fails when there are no more solutions to the engine goal.
+Retrieves the next answer from an engine. This predicate blocks until an answer becomes available. The predicate fails when there are no more solutions to the engine goal. If the engine goal throws an exception, calling this predicate will re-throw the exception and subsequent calls will fail.
 </p>
 
 <h4>Template and modes</h4>
@@ -65,8 +65,8 @@ Retrieves an answer from an engine. When the engine goal is running, this predic
 <h4>Examples</h4>
 
 <dl>
-	<dt>Returns the atom <code>ready</code> as an engine answer:</dt>
-		<dd><code>threaded_engine_yield(ready)</code></dd>
+	<dt>Gets the next engine answer:</dt>
+		<dd><code>threaded_engine_next(worker_1, Answer)</code></dd>
 </dl>
 
 <h4>See also</h4>

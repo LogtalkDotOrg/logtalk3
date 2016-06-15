@@ -46,7 +46,10 @@
 
 <pre>threaded_engine_yield(Answer)</pre>
 <p>
-Returns an answer independent of the solutions of the engine goal. Fails if not called from within an engine. This predicate is usually used when the engine goal is call to a recursive predicate processing terms from the engine message queue.
+Returns an answer independent of the solutions of the engine goal. Fails if not called from within an engine. This predicate is usually used when the engine goal is call to a recursive predicate processing terms from the engine term queue.
+</p>
+<p>
+This predicate blocks until the returned answer is consumed.
 </p>
 <p>
 Note that this predicate should not be called as the last element of a conjunction resulting in an engine goal solution as, in this case, an answer will always be returned. For example, instead of <code>(threaded_engine_yield(ready); member(X,[1,2,3]))</code> use <code>(X=ready; member(X,[1,2,3]))</code>.
