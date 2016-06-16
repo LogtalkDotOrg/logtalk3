@@ -1,0 +1,25 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the `SCRIPT.txt` file.
+
+This example illustrates fetching answers from an engine that returns them using
+the `threaded_engine_yield/1` built-in predicate. The original example was written
+by Jan Wielemaker. Currently it only runs on SWI-Prolog. It should run also on XSB
+and YAP if and when these systems bugs with coroutining and/or threads get fixed.

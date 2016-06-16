@@ -35,6 +35,12 @@ naming with Paul Tarau and Jan Wielemaker. This renaming makes it
 easier to compare and port code between coroutining and threaded
 versions of engine APIs.
 
+Examples
+--------
+
+* ADDED: Three new engines examples, `sums`, `whisper`, and `yield`, originally
+written by Jan Wielemaker.
+
 
 3.06.0 - June 12, 2016
 ======================

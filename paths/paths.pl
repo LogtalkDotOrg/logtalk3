@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on June 3, 2016
+%  Last updated on June 16, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -212,6 +212,7 @@ logtalk_library_path(shapes_ch, examples('shapes/ch/')).
 logtalk_library_path(shapes_ph, examples('shapes/ph/')).
 logtalk_library_path(sicstus, examples('sicstus/')).
 logtalk_library_path(sorting, threads('sorting/')).
+logtalk_library_path(sums, engines('sums/')).
 logtalk_library_path(symbiosis, examples('symbiosis/')).
 logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).
@@ -222,5 +223,7 @@ logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
+logtalk_library_path(whisper, engines('whisper/')).
 logtalk_library_path(wrappers, examples('wrappers/')).
 logtalk_library_path(xpce, examples('xpce/')).
+logtalk_library_path(yield, engines('yield/')).
