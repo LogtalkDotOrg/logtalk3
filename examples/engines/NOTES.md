@@ -27,6 +27,12 @@ This directory contains several examples of using threaded engines:
 	examples of defining interactors using engines
 - `lazy`  
 	examples of defining lazy predicates using engines and coroutining
+- `sums`  
+	example of using engines to accumulate state
 - `tbbt`  
 	examples of defining simple agents using engines
 	(inspired by the "The Big Bang Theory" sitcom)
+- `whisper`  
+	example of creating a chain of engines passing a term
+- `yield`  
+	example of fetching answers from an engine returned using the yield predicate
