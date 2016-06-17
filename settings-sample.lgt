@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on May 13, 2016
+%  Last updated on June 17, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -22,20 +22,20 @@
 
 
 %  This is a sample settings file for Logtalk that can be used to override
-%  the default flag values in the back-end Prolog compiler adapter files.
+%  the default flag values in the backend Prolog compiler adapter files.
 %  This is specially useful when Logtalk is installed system-wide in a
 %  read-only directory. Using settings files allows Logtalk to easily support
-%  user-specific settings. Note that the settings defined here can always
-%  be overridden by using the `logtalk_compile/2` and `logtalk_load/2` built-in
-%  predicates or by using the `set_logtalk_flag/2` directive within the source
-%  files.
+%  user-specific and project-specific settings. Note that the settings
+%  defined here can always be overridden by using the `logtalk_compile/2` and
+%  `logtalk_load/2` built-in predicates or by using the `set_logtalk_flag/2`
+%  directive within the source files.
 %
 %  Logtalk looks for a settings file first in the startup directory (thus
 %  supporting per-project settings files). If not found, Logtalk looks for
 %  a settings file in the Logtalk user directory. If no settings file is
 %  found, Logtalk will use the default flag values defined in the backend
 %  Prolog compiler adapter file. It's however possible to restrict searching
-%  of settings files to the Logtalk user directory and to disable settings
+%  of settings files to the Logtalk user directory or to disable settings
 %  files by changing the definition of the read-only flag `settings_file`
 %  in the used Prolog adapter file.
 %
@@ -62,7 +62,7 @@
 %  as the scope of the `set_logtalk_flag/2` directive is local to the entity
 %  or the source file containing it.
 %
-%  If you use more than one back-end Prolog compiler and want to use per
+%  If you use more than one backend Prolog compiler and want to use per
 %  compiler settings, you can use the Logtalk conditional compilation
 %  directives and the `prolog_dialect` compiler flag. See the User and
 %  Reference Manuals for details.
@@ -73,7 +73,7 @@
 %  them (you may use the `logtalk_compile/1-2` built-in predicates to compile
 %  the settings files without loading them).
 %
-%  Limitations of the back-end Prolog compilers may prevent settings files
+%  Limitations of the backend Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially
 %  when running on non-POSIX operating systems such as Windows. Check the 
 %  `adapters/NOTES.md` file for compatibility details.
@@ -350,6 +350,9 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 	% uncomment the next line to suppress the startup printing of settings information (except warnings and errors)
 	%logtalk::message_hook(_, comment(settings), core, _).
+
+	% uncomment the next line to suppress the startup printing on the help tool
+	%logtalk::message_hook(_, comment(help), core, _).
 
 :- end_category.
 */
