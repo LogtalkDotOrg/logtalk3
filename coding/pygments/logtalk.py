@@ -78,7 +78,7 @@ class LogtalkLexer(RegexLexer):
             # Multi-threading predicates
             (r'threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])', Keyword),
             # Engine predicates
-            (r'threaded_engine(_(create|destroy|self|next|yield|post|fetch))?(?=[(])', Keyword),
+            (r'threaded_engine(_(create|destroy|self|next|next_reified|yield|post|fetch))?(?=[(])', Keyword),
             # Term unification
             (r'(subsumes_term|unify_with_occurs_check)(?=[(])', Keyword),
             # Term creation and decomposition

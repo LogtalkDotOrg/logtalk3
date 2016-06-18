@@ -35,6 +35,15 @@ naming with Paul Tarau and Jan Wielemaker. This renaming makes it
 easier to compare and port code between coroutining and threaded
 versions of engine APIs.
 
+* ADDED: Threaded engine predicate `threaded_engine_next_reified/2`. This
+predicate follows Lean Prolog convention of returning `the(Answer)`, `no`,
+and `exception(Error)` terms as answers.
+
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The `logtalk` SWI-Prolog pack to load Logtalk silently.
+
 Examples
 --------
 

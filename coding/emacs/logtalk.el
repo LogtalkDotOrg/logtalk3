@@ -4,7 +4,7 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: June 15, 2016
+;; Last modification date: June 18, 2016
 ;; Version: 1.31
 
 ;; Installation:
@@ -142,7 +142,7 @@
 		;;
 		;; engines:
 		;;
-		("\\<\\(threaded_engine\\(_\\(?:create\\|destroy\\|self\\|next\\|yield\\|post\\|fetch\\)\\)?\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(threaded_engine\\(_\\(?:create\\|destroy\\|self\\|next\\|next_reified\\|yield\\|post\\|fetch\\)\\)?\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; logic and control:
 		;;

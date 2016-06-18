@@ -64,7 +64,7 @@ module Rouge
         # Multi-threading predicates
         rule /threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=[(])/, Keyword
         # Engine predicates
-        rule /threaded_engine(_(create|destroy|self|next|yield|post|fetch))?(?=[(])/, Keyword
+        rule /threaded_engine(_(create|destroy|self|next|next_reified|yield|post|fetch))?(?=[(])/, Keyword
         # Term unification
         rule /(subsumes_term|unify_with_occurs_check)(?=[(])/, Keyword
         # Term creation and decomposition

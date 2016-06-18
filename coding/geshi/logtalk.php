@@ -12,7 +12,7 @@
  *
  * CHANGES
  * -------
- * 2016/06/15 (1.1.19)
+ * 2016/06/18 (1.1.19)
  *  -  Fixed for the rename of some of the engine predicates
  * 2016/05/29 (1.1.18)
  *  -  Added syntax coloring for the engine predicates
@@ -176,7 +176,8 @@ $language_data = array(
             'threaded_wait', 'threaded_notify',
             // engine predicates
             'threaded_engine',
-            'threaded_engine_create', 'threaded_engine_destroy', 'threaded_engine_self', 'threaded_engine_next', 'threaded_engine_yield',
+            'threaded_engine_create', 'threaded_engine_destroy', 'threaded_engine_self',
+			'threaded_engine_next', 'threaded_engine_next_reified', 'threaded_engine_yield',
             'threaded_engine_post', 'threaded_engine_fetch',
             // term unification
             'subsumes_term', 'unify_with_occurs_check',

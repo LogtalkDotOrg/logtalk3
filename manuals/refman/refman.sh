@@ -6,7 +6,7 @@
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on June 15, 2016
+##   Last updated on June 18, 2016
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -116,6 +116,7 @@ eval $xslt_proc -o predicates/threaded_engine_destroy_1.section refman.xsl predi
 eval $xslt_proc -o predicates/threaded_engine_1.section refman.xsl predicates/threaded_engine_1.html
 eval $xslt_proc -o predicates/threaded_engine_self_1.section refman.xsl predicates/threaded_engine_self_1.html
 eval $xslt_proc -o predicates/threaded_engine_next_2.section refman.xsl predicates/threaded_engine_next_2.html
+eval $xslt_proc -o predicates/threaded_engine_next_reified_2.section refman.xsl predicates/threaded_engine_next_reified_2.html
 eval $xslt_proc -o predicates/threaded_engine_yield_1.section refman.xsl predicates/threaded_engine_yield_1.html
 eval $xslt_proc -o predicates/threaded_engine_post_2.section refman.xsl predicates/threaded_engine_post_2.html
 eval $xslt_proc -o predicates/threaded_engine_fetch_1.section refman.xsl predicates/threaded_engine_fetch_1.html
@@ -261,6 +262,7 @@ cat -s \
 	predicates/threaded_engine_1.section \
 	predicates/threaded_engine_self_1.section \
 	predicates/threaded_engine_next_2.section \
+	predicates/threaded_engine_next_reified_2.section \
 	predicates/threaded_engine_yield_1.section \
 	predicates/threaded_engine_post_2.section \
 	predicates/threaded_engine_fetch_1.section \

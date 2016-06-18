@@ -61,7 +61,7 @@ comment
 	:- info([
 		version is 1.34,
 		author is 'Paulo Moura',
-		date is 2016/06/15,
+		date is 2016/06/18,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -171,6 +171,7 @@ comment
 		threaded_engine_destroy(Engine),
 		threaded_engine_self(Engine),
 		threaded_engine_next(Engine, Answer),
+		threaded_engine_next_reified(Engine, Answer),
 		threaded_engine_yield(Answer),
 		threaded_engine_post(Engine, Term),
 		threaded_engine_fetch(Term).

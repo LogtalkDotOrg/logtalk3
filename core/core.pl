@@ -1912,6 +1912,16 @@ threaded_engine_next(Engine, Answer) :-
 	catch('$lgt_threaded_engine_next'(Engine, Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
+% threaded_engine_next_reified(@nonvar, ?term)
+
+threaded_engine_next_reified(Engine, Answer) :-
+	\+ '$lgt_prolog_feature'(threads, supported),
+	throw(error(resource_error(threads), logtalk(threaded_engine_next_reified(Engine, Answer), user))).
+
+threaded_engine_next_reified(Engine, Answer) :-
+	catch('$lgt_threaded_engine_next_reified'(Engine, Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
+
+
 % threaded_engine_yield(@term)
 
 threaded_engine_yield(Answer) :-
@@ -2844,7 +2854,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 6, 1, rc2)).
 
 
 
@@ -10406,10 +10416,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_engine_next(Engine, Answer), MTGoal, '$lgt_debug'(goal(threaded_engine_next(Engine, Answer), MTGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_engine_next(Engine, Answer), MTGoal, '$lgt_debug'(goal(threaded_engine_next_reified(Engine, Answer), MTGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	MTGoal = '$lgt_threaded_engine_next'(Engine, Answer, This),
+	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
+
+
+'$lgt_compile_body'(threaded_engine_next_reified(_, _), _, _, _) :-
+	\+ '$lgt_pp_threaded_',
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(resource_error(threads)).
+
+'$lgt_compile_body'(threaded_engine_next_reified(Engine, Answer), MTGoal, '$lgt_debug'(goal(threaded_engine_next_reified(Engine, Answer), MTGoal), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	MTGoal = '$lgt_threaded_engine_next_reified'(Engine, Answer, This),
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
 
 
@@ -17942,6 +17964,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(threaded_engine_self(_), threaded_engine_self(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine(_), threaded_engine(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_next(_, _), threaded_engine_next(*, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_next_reified(_, _), threaded_engine_next_reified(*, *)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_yield(_), threaded_engine_yield(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_post(_, _), threaded_engine_post(*, *)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_fetch(_, _), threaded_engine_fetch(*, *)).
@@ -19071,6 +19094,48 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_threaded_engine_next_reified'(@nonvar, ?term, @object_identifier)
+%
+% blocks until an answer (either an engine goal solution or a solution
+% posted by a call to threaded_engine_yield/1) becomes available
+
+'$lgt_threaded_engine_next_reified'(Engine, Answer, This) :-
+	(	var(Engine) ->
+		throw(error(instantiation_error, logtalk(threaded_engine_next_reified(Engine, Answer), This)))
+	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+		% first check if the engine is running
+		'$lgt_current_engine_'(This, Engine, _, Id) ->
+		% engine exists; go ahead and retrieve an answer
+		'$lgt_mt_engine_reply_reified'(Queue, Answer, Engine, Id)
+	;	% engine does not exist
+		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_next_reified(Engine, Answer), This)))
+	).
+
+
+% return current answer and start computing the next one
+% if the engine goal succeeded non-deterministically
+%
+% after all solutions are consumed, or in case of error,
+% ensure that the all next calls will fail
+
+'$lgt_mt_engine_reply_reified'(Queue, Answer, Engine, Id) :-
+	thread_get_message(Queue, '$lgt_answer'(Engine, Id, Reply, Result)),
+	(	Result == success ->
+		thread_send_message(Id, '$lgt_next'),
+		Answer = the(Reply)
+	;	Result == final ->
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, '$lgt_done'(final), failure)),
+		Answer = the(Reply)
+	;	Result == failure ->
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, '$lgt_done'(failure), failure)),
+		Answer = no
+	;	Result = error(Error),
+		thread_send_message(Queue, '$lgt_answer'(Engine, Id, '$lgt_done'(error), failure)),
+		Answer = exception(Error)
+	).
+
+
+
 % '$lgt_threaded_engine_self'(@object_identifier, ?nonvar)
 %
 % fails if not called from within an engine
@@ -19165,8 +19230,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, _))
 		;	true
 		),
-		% remove the answer that ensures threaded_engine_next/2
-		% failure after consuming all solutions if present
+		% remove the answer that ensures threaded_engine_next/2 and threaded_engine_next_reified/2
+		% return failures after consuming all solutions if present
 		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, failure)) ->
 			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, failure))
 		;	true
