@@ -21,9 +21,9 @@
 :- object(emetas).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/15,
+		date is 2016/06/18,
 		comment is 'Examples of implementing meta-predicates using threaded engines.'
 	]).
 
@@ -42,6 +42,14 @@
 	:- mode(find_all(@term, +callable, -list), one).
 	:- info(find_all/3, [
 		comment is 'A findall/3 implementation using threaded engines.',
+		argnames is ['Template', 'Goal', 'List']
+	]).
+
+	:- public(find_all_reified/3).
+	:- meta_predicate(find_all_reified(*, 0, *)).
+	:- mode(find_all_reified(@term, +callable, -list), one).
+	:- info(find_all_reified/3, [
+		comment is 'A findall/3 implementation using threaded engines but with reified answers.',
 		argnames is ['Template', 'Goal', 'List']
 	]).
 
@@ -85,6 +93,18 @@
 		!,
 		collect_all(Engine, Xs).
 	collect_all(_, []).
+
+	find_all_reified(Template, Goal, List) :-
+		threaded_engine_create(Template, Goal, Engine),
+		threaded_engine_next_reified(Engine, Answer),
+		collect_all_reifeid(Answer, Engine, List0),
+		threaded_engine_destroy(Engine),
+		List = List0.
+
+	collect_all_reifeid(no, _, []).
+	collect_all_reifeid(the(X), Engine, [X| Xs]) :-
+		threaded_engine_next_reified(Engine, Answer),
+		collect_all_reifeid(Answer, Engine, Xs).
 
 	find_at_most(N, Template, Goal, List) :-
 		threaded_engine_create(Template, Goal, Engine),

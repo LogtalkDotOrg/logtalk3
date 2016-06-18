@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/06/07,
+		date is 2016/06/18,
 		comment is 'Unit tests for the "emetas" example.'
 	]).
 
@@ -37,10 +37,14 @@
 		Xs == [2, 1, 4, 3].
 
 	test(emetas_3) :-
+		emetas::find_all_reified(X, a(X), Xs),
+		Xs == [2, 1, 4, 3].
+
+	test(emetas_4) :-
 		emetas::find_at_most(3, X, b(X), Xs),
 		Xs == [1, 2, 3].
 
-	test(emetas_4) :-
+	test(emetas_5) :-
 		emetas::find_at_most(3, X, c(X), Xs),
 		Xs = [1, 2].
 
