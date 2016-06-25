@@ -21,6 +21,17 @@ RELEASE NOTES
 =============
 
 
+3.06.2 - July ??, 2016
+======================
+
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: A `term` key to the `logtalk_load_context/2` built-in predicate for
+accessing the term under compilation. This key is only meaningful, however,
+when called from the `term_expansion/2` hook predicate.
+
+
 3.06.1 - June 19, 2016
 ======================
 

@@ -448,8 +448,8 @@
 % '$lgt_pp_cc_mode_'(Action)
 :- dynamic('$lgt_pp_cc_mode_'/1).
 
-% '$lgt_pp_term_lines_variable_names_'(Lines, VariableNames)
-:- dynamic('$lgt_pp_term_lines_variable_names_'/2).
+% '$lgt_pp_term_variable_names_lines_'(Term, VariableNames, Lines)
+:- dynamic('$lgt_pp_term_variable_names_lines_'/3).
 
 % '$lgt_pp_aux_predicate_counter_'(Counter)
 :- dynamic('$lgt_pp_aux_predicate_counter_'/1).
@@ -2703,11 +2703,14 @@ logtalk_load_context(entity_type, Type) :-
 	;	'$lgt_pp_entity_'(Type, _, _, _, _)
 	).
 
-logtalk_load_context(term_position, Lines) :-
-	'$lgt_pp_term_lines_variable_names_'(Lines, _).
+logtalk_load_context(term, Term) :-
+	'$lgt_pp_term_variable_names_lines_'(Term, _, _).
 
 logtalk_load_context(variable_names, VariableNames) :-
-	'$lgt_pp_term_lines_variable_names_'(_, VariableNames).
+	'$lgt_pp_term_variable_names_lines_'(_, VariableNames, _).
+
+logtalk_load_context(term_position, Lines) :-
+	'$lgt_pp_term_variable_names_lines_'(_, _, Lines).
 
 logtalk_load_context(stream, Stream) :-
 	% avoid a spurious choice-point with some back-end Prolog compilers
@@ -6349,7 +6352,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% Kind == category,
 		'$lgt_pp_referenced_category_'(Entity, Start-_)	
 	),
-	'$lgt_pp_term_lines_variable_names_'(_-End, _),
+	'$lgt_pp_term_variable_names_lines_'(_, _, _-End),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(Basename, Directory, Start, End)))),
 	fail.
 
@@ -6597,10 +6600,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% read term as we may get a syntax error while reading the next term;
 	% this will allow us to use the stream position if necessary to find
 	% the approximated position of the error
-	retractall('$lgt_pp_term_lines_variable_names_'(_, _)),
+	retractall('$lgt_pp_term_variable_names_lines_'(_, _, _)),
 	% the actual read term predicate is defined in the adapter files
 	'$lgt_read_term'(Stream, Term, Options, Lines, VariableNames),
-	assertz('$lgt_pp_term_lines_variable_names_'(Lines, VariableNames)).
+	assertz('$lgt_pp_term_variable_names_lines_'(Term, VariableNames, Lines)).
 
 
 
@@ -6759,7 +6762,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_file_encoding_'(_, _, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
-	retractall('$lgt_pp_term_lines_variable_names_'(_, _)),
+	retractall('$lgt_pp_term_variable_names_lines_'(_, _, _)),
 	% a Logtalk source file may contain only plain Prolog terms
 	% instead of plain Prolog terms intermixed between entities
 	% definitions; there might also be plain Prolog terms after
@@ -14085,7 +14088,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % returns the current term line numbers, represented as a pair StartLine-EndLine
 
 '$lgt_current_line_numbers'(Lines) :-
-	(	'$lgt_pp_term_lines_variable_names_'(Lines, _) ->
+	(	'$lgt_pp_term_variable_names_lines_'(_, _, Lines) ->
 		true
 	;	stream_property(Input, alias(logtalk_compiler_input)),
 		'$lgt_stream_current_line_number'(Input, Line) ->
