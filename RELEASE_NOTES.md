@@ -28,8 +28,10 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: A `term` key to the `logtalk_load_context/2` built-in predicate for
-accessing the term under compilation. This key is only meaningful, however,
-when called from the `term_expansion/2` hook predicate.
+accessing the term under compilation.
+
+* FIXED: Make the `logtalk_load_context/2` built-in predicate `variable_names`
+and `term_position` keys usable by the `goal_expansion/2` method.
 
 
 3.06.1 - June 19, 2016
