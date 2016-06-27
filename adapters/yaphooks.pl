@@ -3,7 +3,7 @@
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
 %
-%  Last updated on June 15, 2016
+%  Last updated on June 27, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -103,7 +103,7 @@ user:prolog_predicate_name(user:'$lgt_threaded_wait'(_, _), 'threaded_wait/1') :
 user:prolog_predicate_name(user:'$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
 
-user:prolog_predicate_name(user:'$lgt_threaded_engine_create'(_, _, _, _), 'threaded_engine_create/3') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_engine_create'(_, _, _, _, _), 'threaded_engine_create/3') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_engine_destroy'(_, _), 'threaded_engine_destroy/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_engine_self'(_, _), 'threaded_engine_self/1') :- !.
 user:prolog_predicate_name(user:'$lgt_current_engine_'(_, _), 'threaded_engine/1') :- !.

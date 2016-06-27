@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 15, 2016
+%  Last updated on June 27, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -190,7 +190,7 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
 
-'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_create'(_, _, _, _), 'threaded_engine_create/3') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_create'(_, _, _, _, _), 'threaded_engine_create/3') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_destroy'(_, _), 'threaded_engine_destroy/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_engine_self'(_, _), 'threaded_engine_self/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_current_engine_'(_, _), 'threaded_engine/1') :- !.
@@ -497,8 +497,7 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(threaded_notify(Msg), _, '$lgt_threaded_notify_ctg'(Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_notify(Msg), _, '$lgt_threaded_notify'(Msg, _), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(threaded_engine_create(Answer, Goal, Engine), Entity, '$lgt_threaded_engine_create'(Answer, TGoal, _, Engine), TermPos0, TermPos) :- !,
-	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
+'$lgt_swi_unify_clause_body'(threaded_engine_create(Answer, Goal, Engine), _, '$lgt_threaded_engine_create'(Answer, Goal, _, _, Engine), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_engine_destroy(Engine), _, '$lgt_threaded_engine_destroy'(Engine, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_engine_self(Engine), _, '$lgt_threaded_engine_self'(Engine, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(threaded_engine(Engine), _, '$lgt_current_engine_'(Engine, _), TermPos, TermPos) :- !.
@@ -635,7 +634,8 @@ user:portray(c(This, Entity, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_threaded_wait'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_notify_ctg'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_notify'/2, trace, 1).
-:- '$set_predicate_attribute'('$lgt_threaded_engine_create'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_create_protected'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_threaded_engine_create'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_engine_destroy'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_engine_self'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_current_engine_'/2, trace, 1).
@@ -725,7 +725,8 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_metacall_local'(*,*).
 
 :- meta_predicate threaded_engine_create(*,*,*).
-:- meta_predicate '$lgt_mt_engine_goal'(*,*,*,*).
-:- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*).
+:- meta_predicate '$lgt_mt_engine_goal'(*,*,*,*,*).
+:- meta_predicate '$lgt_threaded_engine_create_protected'(*,*,*,*,*).
+:- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*).
 
 :- meta_predicate '$user#0.forward#1'(*,*).
