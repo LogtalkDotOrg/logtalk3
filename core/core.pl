@@ -2665,9 +2665,9 @@ logtalk_make(Target) :-
 % predicate found on some compilers such as Quintus Prolog, SICStus
 % Prolog, SWI-Prolog, and YAP
 %
-% keys that use information from the '$lgt_pp_file_paths_flags_'/5 predicate can be
-% used in calls wrapped by initialization/1 directives as this predicate is
-% only reinitialized after loading the generated intermediate Prolog file
+% keys that use information from the '$lgt_pp_file_paths_flags_'/5 predicate
+% can be used in calls wrapped by initialization/1 directives as this predicate
+% is only reinitialized after loading the generated intermediate Prolog file
 
 logtalk_load_context(source, SourceFile) :-
 	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _).
@@ -7494,6 +7494,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	),
 	% save the source data information for use in the second compiler stage
+	% (where it might be required by calls to the logtalk_load_context/2
+	% predicate during goal expansion)
 	(	'$lgt_pp_term_variable_names_lines_'(Term, VariableNames, Lines) ->
 		SourceData = (Term, VariableNames, Lines)
 	;	SourceData = nil
@@ -7957,6 +7959,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Lines),
 		'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, Entity, [], []),
 		% save the source data information for use in the second compiler stage
+		% (where it might be required by calls to the logtalk_load_context/2
+		% predicate during goal expansion)
 		(	'$lgt_pp_term_variable_names_lines_'(Term, VariableNames, Lines) ->
 			SourceData = (Term, VariableNames, Lines)
 		;	SourceData = nil
@@ -9638,7 +9642,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(Error, clause(Clause)))
 	),
 	% sucessful translation; save the source data information for use in
-	% the second compiler stage
+	% the second compiler stage (where it might be required by calls to
+	% the logtalk_load_context/2 predicate during goal expansion)
 	(	'$lgt_pp_term_variable_names_lines_'(Term, VariableNames, Lines) ->
 		SourceData = (Term, VariableNames, Lines)
 	;	SourceData = nil
@@ -9662,6 +9667,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% clause occurs before an opening entity directive
 	!,
 	% save the source data information for use in the second compiler stage
+	% (where it might be required by calls to the logtalk_load_context/2
+	% predicate during goal expansion)
 	(	'$lgt_pp_term_variable_names_lines_'(Term, VariableNames, Lines) ->
 		SourceData = (Term, VariableNames, Lines)
 	;	SourceData = nil
