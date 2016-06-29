@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.9,
+		version is 0.10,
 		author is 'Paulo Moura',
-		date is 2016/06/15,
+		date is 2016/06/29,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -282,6 +282,7 @@
 	built_in_predicate(threaded_engine_destroy, 1, '/manuals/refman/predicates/', 'threaded_engine_destroy_1.html').
 	built_in_predicate(threaded_engine_self, 1, '/manuals/refman/predicates/', 'threaded_engine_self_1.html').
 	built_in_predicate(threaded_engine_next, 2, '/manuals/refman/predicates/', 'threaded_engine_next_2.html').
+	built_in_predicate(threaded_engine_next_reified, 2, '/manuals/refman/predicates/', 'threaded_engine_next_reified_2.html').
 	built_in_predicate(threaded_engine_yield, 1, '/manuals/refman/predicates/', 'threaded_engine_yield_1.html').
 	built_in_predicate(threaded_engine_post, 2, '/manuals/refman/predicates/', 'threaded_engine_post_2.html').
 	built_in_predicate(threaded_engine_fetch, 1, '/manuals/refman/predicates/', 'threaded_engine_fetch_1.html').
