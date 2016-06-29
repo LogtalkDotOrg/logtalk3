@@ -476,7 +476,6 @@
 			atom_concat('open "file://$LOGTALKHOME', Path, Command0),
 			atom_concat(Command0, File, Command1),
 			atom_concat(Command1, '" > /dev/null 2>&1', Command),
-			writeq(os::shell(Command)), nl,
 			os::shell(Command)
 		;	os::shell('uname -s | grep Linux 1> /dev/null') ->
 			% assume we're running on Linux
