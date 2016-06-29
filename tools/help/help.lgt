@@ -468,7 +468,8 @@
 		;	os::environment_variable('COMSPEC', _) ->
 			% assume we're running on Windows
 			atom_concat('cmd /c start "" "file:///%LOGTALKHOME%', Path, Command0),
-			atom_concat(Command0, '"', Command),
+			atom_concat(Command0, File, Command1),
+			atom_concat(Command1, '"', Command),
 			os::shell(Command)
 		;	os::shell('uname -s | grep Darwin 1> /dev/null') ->
 			% assume we're running on MacOS X
