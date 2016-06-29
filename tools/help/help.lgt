@@ -48,6 +48,8 @@
 		write('    help::Functor/Arity.'), nl,
 		write('    help::Functor//Arity. '), nl,
 		write('    help::library.'), nl,
+		write('    help::library(Functor/Arity).'), nl,
+		write('    help::library(Functor//Arity).'), nl,
 		write('    help::library(Entity).'), nl, nl,
 		write('The corresponding documentation page will open in your default web browser.'), nl,
 		write('To consult the Logtalk User and Reference manuals:'), nl, nl,
@@ -397,17 +399,46 @@
 	]).
 
 	library :-
-		open('/docs/', 'library.html').
+		open('/docs/', 'index.html').
 
 	:- public(library/1).
 	:- mode(library(+entity_identifier), zero_or_one).
 	:- info(library/1, [
-		comment is 'Provides help on the standard Logtalk library.',
-		argnames is ['Entity']
+		comment is 'Provides help on the standard Logtalk library entities, predicates, and non-terminals.',
+		argnames is ['Topic']
 	]).
 
+	library(Topic) :-
+		var(Topic),
+		!,
+		open('/docs/', 'index.html').
+	library(Functor/Arity) :-
+		atom(Functor),
+		integer(Arity),
+		!,
+		atom_concat('predicate_index.html#', Functor, File0),
+		atom_concat(File0, '/', File1),
+		number_chars(Arity, ArityChars),
+		atom_chars(ArityAtom, ArityChars),
+		atom_concat(File1, ArityAtom, File),
+		open('/docs/', File).
+	library(_/_) :-
+		!,
+		open('/docs/', 'predicate_index.html').
+	library(Functor//Arity) :-
+		atom(Functor),
+		integer(Arity),
+		!,
+		atom_concat('predicate_index.html#', Functor, File0),
+		atom_concat(File0, '//', File1),
+		number_chars(Arity, ArityChars),
+		atom_chars(ArityAtom, ArityChars),
+		atom_concat(File1, ArityAtom, File),
+		open('/docs/', File).
+	library(_//_) :-
+		!,
+		open('/docs/', 'predicate_index.html').
 	library(Entity) :-
-		nonvar(Entity),
 		callable(Entity),
 		functor(Entity, Functor, Arity),
 		atom_concat(Functor, '_', File0),
@@ -415,7 +446,10 @@
 		atom_chars(ArityAtom, ArityChars),
 		atom_concat(File0, ArityAtom, File1),
 		atom_concat(File1, '.html', File),
-		open('/docs/', File).
+		open('/docs/', File),
+		!.
+	library(_) :-
+		open('/docs/', 'index.html').
 
 	:- public(manuals/0).
 	:- mode(manuals, one).
@@ -429,46 +463,29 @@
 	open(Path, File) :-
 		(	\+ os::environment_variable('LOGTALKHOME', _) ->
 			write('The environment variable LOGTALKHOME must be defined and pointing to your'), nl,
-			write('Logtalk installation folder in order for on-line help to be available.'), nl, nl
+			write('Logtalk installation folder in order for on-line help to be available.'), nl, nl,
+			fail
 		;	os::environment_variable('COMSPEC', _) ->
 			% assume we're running on Windows
-			convert_file_path(Path, ConvertedPath),
-			atom_concat('%LOGTALKHOME%', ConvertedPath, FullPath),
-			atom_concat('cmd /c start /D"', FullPath, Command0),
-			atom_concat(Command0, '" ', Command1),
-			atom_concat(Command1, File, Command),
+			atom_concat('cmd /c start "" "file:///%LOGTALKHOME%', Path, Command0),
+			atom_concat(Command0, '"', Command),
 			os::shell(Command)
 		;	os::shell('uname -s | grep Darwin 1> /dev/null') ->
 			% assume we're running on MacOS X
-			atom_concat('open "$LOGTALKHOME', Path, Command0),
+			atom_concat('open "file://$LOGTALKHOME', Path, Command0),
 			atom_concat(Command0, File, Command1),
 			atom_concat(Command1, '" > /dev/null 2>&1', Command),
+			writeq(os::shell(Command)), nl,
 			os::shell(Command)
 		;	os::shell('uname -s | grep Linux 1> /dev/null') ->
 			% assume we're running on Linux
-			atom_concat('xdg-open "$LOGTALKHOME', Path, Command0),
+			atom_concat('xdg-open "file://$LOGTALKHOME', Path, Command0),
 			atom_concat(Command0, File, Command1),
 			atom_concat(Command1, '" > /dev/null 2>&1', Command),
 			os::shell(Command)
 		;	% we couldn't find which operating-system are we running on
 			write('Unsupported operating-system.'), nl
 		).
-
-	convert_file_path(Path, ConvertedPath) :-
-		% we cannot use atom_chars/2 as Quintus definition returns codes
-		atom_codes(Path, PathCodes),
-		char_code('/', SlashCode),
-		char_code('\\', BackslashCode),
-		reverse_slashes(PathCodes, SlashCode, BackslashCode, ConvertedPathCodes),
-		atom_codes(ConvertedPath, ConvertedPathCodes).
-
-	reverse_slashes([], _, _, []).
-	reverse_slashes([Code| Codes], SlashCode, BackslashCode, ConvertedCodes) :-
-		(	Code =:= SlashCode ->
-			ConvertedCodes = [BackslashCode| ConvertedCodesTail]
-		;	ConvertedCodes = [Code| ConvertedCodesTail]
-		),
-		reverse_slashes(Codes, SlashCode, BackslashCode, ConvertedCodesTail).
 
 	% we use a simplified version of the integer::between/3
 	% predicate in order to minimize this tool dependencies

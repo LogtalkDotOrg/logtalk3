@@ -33,6 +33,12 @@ accessing the term under compilation.
 * FIXED: Make the `logtalk_load_context/2` built-in predicate `variable_names`
 and `term_position` keys usable by the `goal_expansion/2` method.
 
+Tools
+-----
+
+* IMPROVED: The `help` tool to provide help also for library predicates and
+non-terminals.
+
 
 3.06.1 - June 19, 2016
 ======================
