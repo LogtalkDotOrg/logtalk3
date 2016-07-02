@@ -6608,7 +6608,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_second_stage'(+atom, @entity_identifier, +compilation_context)
 %
-% compiler second stage
+% compiler second stage (initialization/1 goals and clause body goals)
 
 '$lgt_second_stage'(Type, Entity, Ctx) :-
 	catch(

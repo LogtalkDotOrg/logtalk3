@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample tester file
-%  Last updated on June 7, 2016
+%  Last updated on June 30, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -62,7 +62,7 @@
 
 	% the "lgtunit" tool supports other, more expressive, idioms
 	% allowing e.g. testing for expected failures and errors,
-	% deterinism, defining setup and cleanup goals, etc; see its
+	% determinism, defining setup and cleanup goals, etc; see its
 	% documentation for details
 
 :- end_object.

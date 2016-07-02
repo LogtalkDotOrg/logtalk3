@@ -93,10 +93,10 @@ For support options, please consult the web page:
 5. INSTALLATION
 ---------------
 
-Logtalk can be installed either from sources by running a few shell scripts 
-or by using one of the provided installers, depending on your operating 
-system. For manual installation, see the [INSTALL.md](INSTALL.md) file for
-detailed instructions.
+Logtalk can be installed either from sources by running a couple of shell
+scripts  or by using one of the provided installers, depending on your
+operating system. For manual installation, see the [INSTALL.md](INSTALL.md)
+file for detailed instructions.
 
 See the user manual for a description of the source files organization
 and for using instructions (to read the user manual open the

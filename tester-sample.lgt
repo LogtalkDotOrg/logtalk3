@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample tester file
-%  Last updated on June 4, 2016
+%  Last updated on June 30, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -27,8 +27,8 @@
 %  as exemplified below.
 %
 %  The provided testing automation shell script, "logtalk_tester", looks for
-%  files named either "tester.lgt" or "tester.logtalk" in directories and
-%  sub-directories when run.
+%  files named either "tester.lgt" or "tester.logtalk" in the current directory
+%  and its sub-directories when run.
 
 
 :- initialization((
@@ -41,7 +41,7 @@
 	% load your application files (e.g. "source.lgt") enabling supporting for
 	% code coverage, which requires compilation in debug mode and collecting
 	% source data information; if code coverage is not wanted, simply remove
-	% the second argument for faster execution
+	% the "debug(on)" option for faster execution
 	logtalk_load(source, [source_data(on), debug(on)]),
 	% compile the unit tests file expanding it using "lgtunit" as the hook
 	% object to preprocess the tests
