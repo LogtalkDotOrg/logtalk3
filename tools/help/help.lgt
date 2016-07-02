@@ -449,7 +449,7 @@
 		open('/docs/', File),
 		!.
 	library(_) :-
-		open('/docs/', 'index.html').
+		open('/docs/', 'entity_index.html').
 
 	:- public(manuals/0).
 	:- mode(manuals, one).
