@@ -79,7 +79,8 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_txt.xsl"
+entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_md.xsl"
+index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_md.xsl"
 
 processor=xsltproc
 # processor=xalan
@@ -150,9 +151,18 @@ if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 		echo "  converting $file"
 		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$xslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory\"/\"$name.txt\" \"$file\" \"$xslt\";;
-			sabcmd)		eval sabcmd \"$xslt\" \"$file\" \"$directory\"/\"$name.txt\";;
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$entity_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.txt\" \"$file\" \"$entity_xslt\";;
+			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.txt\";;
+		esac
+	done
+	for file in `grep -l "<logtalk_index" *.xml`; do
+		echo "  converting $file"
+		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		case "$processor" in
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$index_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.txt\" \"$file\" \"$index_xslt\";;
+			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory\"/\"$name.txt\";;
 		esac
 	done
 	echo "conversion done"

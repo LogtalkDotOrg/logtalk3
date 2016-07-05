@@ -42,6 +42,8 @@ Tools
 non-terminals and to open, respectively, the predicate index or the entity
 index when looking for help in non-existing predicates or entities.
 
+* FIXED: The `lgt2txt.sh` shell script to also convert the XML index files.
+
 
 3.06.1 - June 19, 2016
 ======================
