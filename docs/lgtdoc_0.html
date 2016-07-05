@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">lgtdoc</h1>
       <blockquote>
-        <p class="comment">Documenting tool. Generates XML documenting files for entities and for directory, entity, and predicate indexes.</p>
+        <p class="comment">Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>3.2</code>
+            <code>4.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/5/13</code>
+            <code>2016/7/5</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -76,6 +76,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>option_(?atom,?nonvar) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="library_entity_/4" class="code">library_entity_/4</h3>
+          <blockquote>
+            <p class="comment">Table of documented entities per library.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>library_entity_(Library,PrimarySortKey,SecondarySortKey,Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>library_entity_(?atom,?nonvar,?nonvar,?atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

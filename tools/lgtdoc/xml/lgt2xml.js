@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to XML conversion script 
-//   Last updated on February 17, 2016
+//   Last updated on July 5, 2016
 //
 //   This file is part of Logtalk <http://logtalk.org/>  
 //   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -183,6 +183,7 @@ function create_index_file() {
 	var files = new Enumerator(FSObject.GetFolder(directory).Files);
 
 	if (FSObject.FileExists(WshShell.CurrentDirectory + "\\directory_index.xml")) {
+		f.WriteLine("    <li><a href=\"library_index.xml\">Library index</a></li>");
 		f.WriteLine("    <li><a href=\"directory_index.xml\">Directory index</a></li>");
 		f.WriteLine("    <li><a href=\"entity_index.xml\">Entity index</a></li>");
 		f.WriteLine("    <li><a href=\"predicate_index.xml\">Predicate index</a></li>");

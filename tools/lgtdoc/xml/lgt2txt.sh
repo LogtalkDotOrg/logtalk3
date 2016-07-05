@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on February 17, 2016
+##   Last updated on July 5, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>

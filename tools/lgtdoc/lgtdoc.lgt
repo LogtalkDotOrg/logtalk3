@@ -22,10 +22,10 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 3.2,
+		version is 4.0,
 		author is 'Paulo Moura',
-		date is 2016/05/13,
-		comment is 'Documenting tool. Generates XML documenting files for entities and for directory, entity, and predicate indexes.'
+		date is 2016/07/05,
+		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
 	:- private(option_/2).
@@ -34,6 +34,14 @@
 	:- info(option_/2, [
 		comment is 'Table of option values.',
 		argnames is ['Option', 'Value']
+	]).
+
+	:- private(library_entity_/4).
+	:- dynamic(library_entity_/4).
+	:- mode(library_entity_(?atom, ?nonvar, ?nonvar, ?atom), zero_or_more).
+	:- info(library_entity_/4, [
+		comment is 'Table of documented entities per library.',
+		argnames is ['Library', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
 	:- private(directory_entity_/4).
@@ -256,6 +264,11 @@
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
 		functor(Entity, Functor, _),
+		(	logtalk_library_path(Library, _),
+			logtalk::expand_library_path(Library, Path) ->
+			assertz(library_entity_(Library, Library, Functor, Entity))
+		;	true
+		),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Relative, Path) ->
 			assertz(directory_entity_(Relative, Relative, Functor, Entity))
@@ -1206,9 +1219,13 @@
 		category_property(Entity, Property).
 
 	write_indexes(Options) :-
+		write_library_index(Options),
 		write_directory_index(Options),
 		write_entity_index(Options),
 		write_predicate_index(Options).
+
+	write_library_index(Options) :-
+		write_index(library, library_entity_, 'library_index.xml', Options).
 
 	write_directory_index(Options) :-
 		write_index(directory, directory_entity_, 'directory_index.xml', Options).
@@ -1370,6 +1387,7 @@
 
 	reset :-
 		retractall(option_(_, _)),
+		retractall(library_entity_(_, _, _, _)),
 		retractall(directory_entity_(_, _, _, _)),
 		retractall(type_entity_(_, _, _, _)),
 		retractall(predicate_entity_(_, _, _, _)).

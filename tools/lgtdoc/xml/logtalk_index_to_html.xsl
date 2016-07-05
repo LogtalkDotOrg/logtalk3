@@ -16,7 +16,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into HTML files
-%  Last updated on March 1, 2016
+%  Last updated on July 5, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -57,6 +57,9 @@
 
 
 <xsl:template match="logtalk_index/type">
+	<xsl:if test=".='library'">
+		Library index
+	</xsl:if>
 	<xsl:if test=".='directory'">
 		Directory index
 	</xsl:if>

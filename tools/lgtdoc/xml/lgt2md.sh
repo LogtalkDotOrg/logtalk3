@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to Mardown text files conversion script 
-##   Last updated on February 19, 2016
+##   Last updated on July 5, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -119,6 +119,7 @@ create_index_file()
 	echo "" >> "$index_file"
 
 	if [ -e "./directory_index.xml" ] ; then
+		echo "* [Library index](library_index.md)" >> "$index_file"
 		echo "* [Directory index](directory_index.md)" >> "$index_file"
 		echo "* [Entity index](entity_index.md)" >> "$index_file"
 		echo "* [Predicate index](predicate_index.md)" >> "$index_file"

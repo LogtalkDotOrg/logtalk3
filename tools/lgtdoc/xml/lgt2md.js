@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to Mardown text files conversion script 
-//   Last updated on February 19, 2016
+//   Last updated on July 5, 2016
 //
 //   This file is part of Logtalk <http://logtalk.org/>  
 //   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -208,6 +208,7 @@ function create_index_file() {
 	var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
 	if (FSObject.FileExists(WshShell.CurrentDirectory + "\\directory_index.xml")) {
+		f.WriteLine("* [Library index](library_index.md)");
 		f.WriteLine("* [Directory index](directory_index.md)");
 		f.WriteLine("* [Entity index](entity_index.md)");
 		f.WriteLine("* [Predicate index](predicate_index.md)");

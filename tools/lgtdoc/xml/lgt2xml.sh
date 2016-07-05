@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on February 17, 2016
+##   Last updated on July 5, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -129,6 +129,7 @@ create_index_file()
 	echo "<ul>" >> "$index_file"
 
 	if [ -e "./directory_index.xml" ] ; then
+		echo "    <li><a href=\"library_index.xml\">Library index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"directory_index.xml\">Directory index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"entity_index.xml\">Entity index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"predicate_index.xml\">Predicate index</a></li>" >> "$index_file"

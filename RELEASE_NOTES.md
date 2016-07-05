@@ -36,8 +36,11 @@ and `term_position` keys usable by the `goal_expansion/2` method.
 Tools
 -----
 
+* ADDED: Support for generating library indexes to the `lgtdoc` tool.
+
 * IMPROVED: The `help` tool to provide help also for library predicates and
-non-terminals.
+non-terminals and to open, respectively, the predicate index or the entity
+index when looking for help in non-existing predicates or entities.
 
 
 3.06.1 - June 19, 2016
