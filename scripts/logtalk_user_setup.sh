@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on February 18, 2016
+##   Last updated on July 7, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -126,6 +126,7 @@ cp -RL "$LOGTALKHOME"/tools "$LOGTALKUSER"/
 cp "$LOGTALKHOME"/loader-sample.lgt "$LOGTALKUSER"/loader-sample.lgt
 cp "$LOGTALKHOME"/settings-sample.lgt "$LOGTALKUSER"/settings-sample.lgt
 cp "$LOGTALKHOME"/tester-sample.lgt "$LOGTALKUSER"/tester-sample.lgt
+cp "$LOGTALKHOME"/tests-sample.lgt "$LOGTALKUSER"/tests-sample.lgt
 cp "$LOGTALKHOME"/VERSION.txt "$LOGTALKUSER"/
 chmod -R u+w "$LOGTALKUSER"
 rm -f "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2*

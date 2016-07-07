@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on May 4, 2016
+; Last updated on July 7, 2016
 ; 
 ; This file is part of Logtalk <http://logtalk.org/>  
 ; Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -110,6 +110,7 @@ Source: "{#MyBaseDir}\tools\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\t
 Source: "{#MyBaseDir}\loader-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "loader-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\settings-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "settings-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\tester-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tester-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
+Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tests-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
 Source: "{#MyBaseDir}\scripts\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn

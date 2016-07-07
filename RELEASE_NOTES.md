@@ -50,6 +50,12 @@ Tests
 * ADDED: Tests for valid source file name variants to the `logtalk_load/1-2`
 and `logtalk_compile/1-2` built-in predicates.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The installer and user setup scripts to copy the `tests-sample.lgt`
+to the `$LOGTALKUSER` folder.
+
 
 3.06.1 - June 19, 2016
 ======================
