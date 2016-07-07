@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2016/07/07,
 		comment is 'Unit tests for the ISO Prolog standard throw/1 control construct.'
 	]).
 
@@ -52,6 +52,6 @@
 
 	succeeds(eclipse_throw_1_7) :-
 		{catch(throw(f(_)), T, true)},
-		nonvar(T), T = f(Y), var(Y).
+		::variant(T, f(_)).
 
 :- end_object.
