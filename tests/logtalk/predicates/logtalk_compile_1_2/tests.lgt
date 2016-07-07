@@ -22,10 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/13,
+		date is 2016/07/07,
 		comment is 'Unit tests for the logtalk_compile/1-2 built-in predicates.'
+	]).
+
+	:- discontiguous([
+		succeeds/1, throws/2
 	]).
 
 	% logtalk_compile/1
@@ -59,6 +63,36 @@
 
 	throws(logtalk_compile_1_10, error(existence_error(file, non_exisiting_file), logtalk(logtalk_compile([non_exisiting_file]), _))) :-
 		logtalk_compile([non_exisiting_file]).
+
+	succeeds(logtalk_compile_1_11) :-
+		logtalk_compile(a1, []).
+
+	succeeds(logtalk_compile_1_12) :-
+		logtalk_compile(a2, []).
+
+	succeeds(logtalk_compile_1_13) :-
+		logtalk_compile(a3, []).
+
+	succeeds(logtalk_compile_1_14) :-
+		logtalk_compile(a4, []).
+
+	succeeds(logtalk_compile_1_15) :-
+		logtalk_compile('a5.b.c', []).
+
+	succeeds(logtalk_compile_1_16) :-
+		logtalk_compile('a6.b.c', []).
+
+	succeeds(logtalk_compile_1_17) :-
+		logtalk_compile('a7.b.c', []).
+
+	succeeds(logtalk_compile_1_18) :-
+		logtalk_compile('a8.b.c', []).
+
+	succeeds(logtalk_compile_1_19) :-
+		logtalk_compile('a9.foo', []).
+
+	succeeds(logtalk_compile_1_20) :-
+		logtalk_compile(a10, []).
 
 	% logtalk_compile/2
 
@@ -112,5 +146,35 @@
 
 	throws(logtalk_compile_2_17, error(permission_error(modify,flag,threads), logtalk(logtalk_compile([],[threads(supported)]), _))) :-
 		logtalk_compile([], [threads(supported)]).
+
+	succeeds(logtalk_compile_2_18) :-
+		logtalk_compile(a1, []).
+
+	succeeds(logtalk_compile_2_19) :-
+		logtalk_compile(a2, []).
+
+	succeeds(logtalk_compile_2_20) :-
+		logtalk_compile(a3, []).
+
+	succeeds(logtalk_compile_2_21) :-
+		logtalk_compile(a4, []).
+
+	succeeds(logtalk_compile_2_22) :-
+		logtalk_compile('a5.b.c', []).
+
+	succeeds(logtalk_compile_2_23) :-
+		logtalk_compile('a6.b.c', []).
+
+	succeeds(logtalk_compile_2_24) :-
+		logtalk_compile('a7.b.c', []).
+
+	succeeds(logtalk_compile_2_25) :-
+		logtalk_compile('a8.b.c', []).
+
+	succeeds(logtalk_compile_2_26) :-
+		logtalk_compile('a9.foo', []).
+
+	succeeds(logtalk_compile_2_27) :-
+		logtalk_compile(a10, []).
 
 :- end_object.

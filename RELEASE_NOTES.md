@@ -44,6 +44,12 @@ index when looking for help in non-existing predicates or entities.
 
 * FIXED: The `lgt2txt.sh` shell script to also convert the XML index files.
 
+Tests
+-----
+
+* ADDED: Tests for valid source file name variants to the `logtalk_load/1-2`
+and `logtalk_compile/1-2` built-in predicates.
+
 
 3.06.1 - June 19, 2016
 ======================

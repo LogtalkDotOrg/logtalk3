@@ -22,10 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/13,
+		date is 2016/07/07,
 		comment is 'Unit tests for the logtalk_load/1-2 built-in predicates.'
+	]).
+
+	:- discontiguous([
+		succeeds/1, throws/2
 	]).
 
 	% logtalk_load/1
@@ -59,6 +63,36 @@
 
 	throws(logtalk_load_1_10, error(existence_error(file, non_exisiting_file), logtalk(logtalk_load([non_exisiting_file]), _))) :-
 		logtalk_load([non_exisiting_file]).
+
+	succeeds(logtalk_load_1_11) :-
+		logtalk_load(a1, []).
+
+	succeeds(logtalk_load_1_12) :-
+		logtalk_load(a2, []).
+
+	succeeds(logtalk_load_1_13) :-
+		logtalk_load(a3, []).
+
+	succeeds(logtalk_load_1_14) :-
+		logtalk_load(a4, []).
+
+	succeeds(logtalk_load_1_15) :-
+		logtalk_load('a5.b.c', []).
+
+	succeeds(logtalk_load_1_16) :-
+		logtalk_load('a6.b.c', []).
+
+	succeeds(logtalk_load_1_17) :-
+		logtalk_load('a7.b.c', []).
+
+	succeeds(logtalk_load_1_18) :-
+		logtalk_load('a8.b.c', []).
+
+	succeeds(logtalk_load_1_19) :-
+		logtalk_load('a9.foo', []).
+
+	succeeds(logtalk_load_1_20) :-
+		logtalk_load(a10, []).
 
 	% logtalk_load/2
 
@@ -112,5 +146,35 @@
 
 	throws(logtalk_load_2_17, error(permission_error(modify,flag,threads), logtalk(logtalk_load([],[threads(supported)]), _))) :-
 		logtalk_load([], [threads(supported)]).
+
+	succeeds(logtalk_load_2_18) :-
+		logtalk_load(a1, []).
+
+	succeeds(logtalk_load_2_19) :-
+		logtalk_load(a2, []).
+
+	succeeds(logtalk_load_2_20) :-
+		logtalk_load(a3, []).
+
+	succeeds(logtalk_load_2_21) :-
+		logtalk_load(a4, []).
+
+	succeeds(logtalk_load_2_22) :-
+		logtalk_load('a5.b.c', []).
+
+	succeeds(logtalk_load_2_23) :-
+		logtalk_load('a6.b.c', []).
+
+	succeeds(logtalk_load_2_24) :-
+		logtalk_load('a7.b.c', []).
+
+	succeeds(logtalk_load_2_25) :-
+		logtalk_load('a8.b.c', []).
+
+	succeeds(logtalk_load_2_26) :-
+		logtalk_load('a9.foo', []).
+
+	succeeds(logtalk_load_2_27) :-
+		logtalk_load(a10, []).
 
 :- end_object.
