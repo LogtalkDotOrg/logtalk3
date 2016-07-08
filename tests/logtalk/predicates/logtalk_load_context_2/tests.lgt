@@ -91,33 +91,73 @@
 		result/2
 	]).
 
-	% only true during source file compilation
-	test(logtalk_load_context_2_1) :-
-		\+ logtalk_load_context(_, _).
-
-	% source file related keys
-	test(logtalk_load_context_2_2) :-
+	setup :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'sample.lgt', Source),
-		logtalk_load(Source, [hook(hook)]),
-		result(source, Source0), Source0 == Source,
-		result(file, Source1), Source1 == Source,
-		result(basename, Basename), Basename == 'sample.lgt',
-		result(directory, Directory0), Directory0 == Directory,
-		result(target, PrologFile0), atom(PrologFile0),
-		result(stream, Stream), ground(Stream).
+		logtalk_load(Source, [hook(hook)]).
+
+	% only true during source file compilation
+	test(logtalk_load_context_2_01) :-
+		\+ logtalk_load_context(_, _).
+
+	% source file related keys
+
+	test(logtalk_load_context_2_02) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'sample.lgt', Source),
+		result(source, Source0), Source0 == Source.
+
+	test(logtalk_load_context_2_03) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'sample.lgt', File),
+		result(file, File0), File0 == File.
+
+	test(logtalk_load_context_2_04) :-
+		result(basename, Basename),
+		Basename == 'sample.lgt'.
+
+	test(logtalk_load_context_2_05) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		result(directory, Directory0),
+		Directory0 == Directory.
+
+	test(logtalk_load_context_2_06) :-
+		result(target, PrologFile0),
+		atom(PrologFile0).
+
+	test(logtalk_load_context_2_07) :-
+		result(stream, Stream),
+		ground(Stream).
 
 	% source file entity related keys
-	test(logtalk_load_context_2_3) :-
-		result(entity_identifier, EntityIdentifier), EntityIdentifier == sample,
-		result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
-		result(entity_type, EntityType), EntityType == object.
+
+	test(logtalk_load_context_2_08) :-
+		result(entity_identifier, EntityIdentifier),
+		EntityIdentifier == sample.
+
+	test(logtalk_load_context_2_09) :-
+		result(entity_prefix, EntityPrefix),
+		logtalk::entity_prefix(sample, EntityPrefix).
+
+	test(logtalk_load_context_2_10) :-
+		result(entity_type, EntityType),
+		EntityType == object.
 
 	% source file term related keys
-	test(logtalk_load_context_2_4) :-
-		result(term, Term), ::variant(Term, a(A,B,B,A)),
-		result(variable_names, VariableNames), ::variant(VariableNames, ['A'=_, 'B'=_]),
+
+	test(logtalk_load_context_2_11) :-
+		result(term, Term),
+		::variant(Term, a(A,B,B,A)).
+
+	test(logtalk_load_context_2_12) :-
+		result(variable_names, VariableNames),
+		::variant(VariableNames, ['A'=_, 'B'=_]).
+
+	test(logtalk_load_context_2_13) :-
 		result(term_position, TermPosition), ground(TermPosition).
 
 :- end_object.
