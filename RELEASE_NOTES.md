@@ -50,6 +50,8 @@ Tests
 * ADDED: Tests for valid source file name variants to the `logtalk_load/1-2`
 and `logtalk_compile/1-2` built-in predicates.
 
+* IMPROVED: Tests for the ` `logtalk_load_context/2` built-in predicate.
+
 Installers and installation scripts
 -----------------------------------
 

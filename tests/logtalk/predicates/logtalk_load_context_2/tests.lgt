@@ -24,6 +24,18 @@
 	:- public(result/2).
 	:- dynamic(result/2).
 
+	term_expansion(a(_,_,_,_), _) :-
+		logtalk_load_context(term, Term),
+		assertz(result(term, Term)),
+		fail.
+	term_expansion(a(_,_,_,_), _) :-
+		logtalk_load_context(variable_names, VariableNames),
+		assertz(result(variable_names, VariableNames)),
+		fail.
+	term_expansion(a(_,_,_,_), _) :-
+		logtalk_load_context(term_position, Position),
+		assertz(result(term_position, Position)),
+		fail.
 	term_expansion((:- end_object), _) :-
 		logtalk_load_context(source, Path),
 		assertz(result(source, Path)),
@@ -57,18 +69,6 @@
 		assertz(result(entity_type, Type)),
 		fail.
 	term_expansion((:- end_object), _) :-
-		logtalk_load_context(term, Term),
-		assertz(result(term, Term)),
-		fail.
-	term_expansion((:- end_object), _) :-
-		logtalk_load_context(variable_names, VariableNames),
-		assertz(result(variable_names, VariableNames)),
-		fail.
-	term_expansion((:- end_object), _) :-
-		logtalk_load_context(term_position, Position),
-		assertz(result(term_position, Position)),
-		fail.
-	term_expansion((:- end_object), _) :-
 		logtalk_load_context(stream, Stream),
 		assertz(result(stream, Stream)),
 		fail.
@@ -81,9 +81,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/06/27,
+		date is 2016/07/08,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -91,9 +91,11 @@
 		result/2
 	]).
 
+	% only true during source file compilation
 	test(logtalk_load_context_2_1) :-
 		\+ logtalk_load_context(_, _).
 
+	% source file related keys
 	test(logtalk_load_context_2_2) :-
 		this(This),
 		object_property(This, file(_, Directory)),
@@ -104,27 +106,18 @@
 		result(basename, Basename), Basename == 'sample.lgt',
 		result(directory, Directory0), Directory0 == Directory,
 		result(target, PrologFile0), atom(PrologFile0),
-		result(entity_identifier, EntityIdentifier), EntityIdentifier == sample,
-		result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
-		result(entity_type, EntityType), EntityType == object,
-		result(term, Term), Term == (:- end_object),
-		result(variable_names, VariableNames), variable_names_list(VariableNames),
-		result(term_position, TermPosition), ground(TermPosition),
 		result(stream, Stream), ground(Stream).
 
-	variable_names_list((-)) :-
-		!,
-		fail.
-	variable_names_list([]).
-	variable_names_list([Pair| Pairs]) :-
-		variable_names_pair(Pair),
-		variable_names_list(Pairs).
+	% source file entity related keys
+	test(logtalk_load_context_2_3) :-
+		result(entity_identifier, EntityIdentifier), EntityIdentifier == sample,
+		result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
+		result(entity_type, EntityType), EntityType == object.
 
-	variable_names_pair((-)) :-
-		!,
-		fail.
-	variable_names_pair(Name = Variable) :-
-		atom(Name),
-		var(Variable).
+	% source file term related keys
+	test(logtalk_load_context_2_4) :-
+		result(term, Term), ::variant(Term, a(A,B,B,A)),
+		result(variable_names, VariableNames), ::variant(VariableNames, ['A'=_, 'B'=_]),
+		result(term_position, TermPosition), ground(TermPosition).
 
 :- end_object.

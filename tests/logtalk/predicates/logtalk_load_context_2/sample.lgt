@@ -20,4 +20,6 @@
 
 :- object(sample).
 
+	a(A,B,B,A).
+
 :- end_object.
