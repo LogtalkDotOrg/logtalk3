@@ -33,6 +33,11 @@ accessing the term under compilation.
 * FIXED: Make the `logtalk_load_context/2` built-in predicate `variable_names`
 and `term_position` keys usable by the `goal_expansion/2` method.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Startup of Logtalk using the multi-threading version of XSB.
+
 Tools
 -----
 

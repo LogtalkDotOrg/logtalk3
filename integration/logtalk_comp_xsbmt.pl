@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for XSB
-%  Last updated on September 2, 2014
+%  Last updated on July 9, 2014
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -38,6 +38,8 @@
 :- compiler_options([xpp_on]).
 
 #include ../core/core.pl
+
+:- thread_private '$lgt_engine_term_queue_'/2.
 
 % workaround the lack of support for static multifile predicates
 :- multifile('$logtalk#0.debug_handler_provider#1'/2).
