@@ -36,6 +36,9 @@ accessing the term under compilation.
 * FIXED: Make the `logtalk_load_context/2` built-in predicate `variable_names`
 and `term_position` keys usable by the `goal_expansion/2` method.
 
+* FIXED: Reject meta-predicate meta-argument specifiers that are not currently
+supported.
+
 Prolog adapter and integration files
 ------------------------------------
 

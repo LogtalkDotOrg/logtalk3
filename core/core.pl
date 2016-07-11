@@ -2857,7 +2857,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 2, rc2)).
+'$lgt_version_data'(logtalk(3, 6, 2, rc3)).
 
 
 
@@ -17409,13 +17409,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_meta_predicate_template_arg'((::)) :- !.
 % non meta-argument
 '$lgt_valid_meta_predicate_template_arg'(*) :- !.
-% predicate indicator
-'$lgt_valid_meta_predicate_template_arg'(/) :- !.
-% list of predicate indicators
-'$lgt_valid_meta_predicate_template_arg'([/]) :- !.
-% list of goals/closures
-'$lgt_valid_meta_predicate_template_arg'([N]) :-
-	!, integer(N), N >= 0.
 % goal with possible existential variables qualification
 '$lgt_valid_meta_predicate_template_arg'(^) :- !.
 % goal or closure
