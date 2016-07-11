@@ -39,7 +39,14 @@ and `term_position` keys usable by the `goal_expansion/2` method.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Startup of Logtalk using the multi-threading version of XSB.
+* FIXED: Startup of Logtalk using the multi-threading version of XSB as the
+backend compiler.
+
+Documentation
+-------------
+
+* IMPROVED: Documentation of the term-expansion, message printing, and question
+asking mechanisms in the User Manual.
 
 Tools
 -----
