@@ -2857,7 +2857,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 6, 2, rc2)).
 
 
 
@@ -12194,10 +12194,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TArg = TArg0
 	).
 
+'$lgt_compile_prolog_meta_argument'((//), Args, Ctx, TArgs, DArgs) :-
+	'$lgt_compile_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
+
 '$lgt_compile_prolog_meta_argument'([/], [], _, [], []) :- !.
 '$lgt_compile_prolog_meta_argument'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
 	nonvar(Arg),
 	'$lgt_compile_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
+	'$lgt_compile_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
+
+'$lgt_compile_prolog_meta_argument'([//], Args, Ctx, TArgs, DArgs) :-
 	'$lgt_compile_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
 
 

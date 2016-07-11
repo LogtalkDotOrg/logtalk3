@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for `//` and `[//]` meta-predicate meta-argument specifiers
+when dealing with Prolog meta-predicates.
+
 * ADDED: A `term` key to the `logtalk_load_context/2` built-in predicate for
 accessing the term under compilation.
 
