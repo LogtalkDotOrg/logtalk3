@@ -48,8 +48,12 @@ backend compiler.
 Documentation
 -------------
 
+* ADDED: Library index.
+
 * IMPROVED: Documentation of the term-expansion, message printing, and question
 asking mechanisms in the User Manual.
+
+* IMPROVED: Documentation of the `expanding` built-in protocol.
 
 Tools
 -----

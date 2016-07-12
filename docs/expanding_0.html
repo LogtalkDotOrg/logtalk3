@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>1.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2013/8/19</code>
+            <code>2016/7/12</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="goal_expansion/2" class="code">goal_expansion/2</h3>
           <blockquote>
-            <p class="comment">Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (including clause goals, goal meta-arguments of standard meta-predicates, initialization goals, and conditional compilation goals).</p>
+            <p class="comment">Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (except for goals wrapped using the {}/1 compiler bypass control construct).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -65,7 +65,7 @@
         <div class="section">
           <h3 id="term_expansion/2" class="code">term_expansion/2</h3>
           <blockquote>
-            <p class="comment">Defines a term expansion. Called until it succeeds on all terms read while compiling a source file except those skipped by using the conditional compilation directives.</p>
+            <p class="comment">Defines a term expansion. Called until it succeeds on all terms read while compiling a source file (except for terms skipped by using the conditional compilation directives or wrapped using the {}/1 compiler bypass control construct).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
