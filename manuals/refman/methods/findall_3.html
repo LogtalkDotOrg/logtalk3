@@ -44,9 +44,12 @@
 
 <h4>Description</h4>
 
-<pre>findall(Term, Goal, List)</pre>
+<pre>findall(Template, Goal, List)</pre>
 <p>
-See the Prolog ISO standard definition. This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object.
+Collects a list of solutions for the goal. The order of the elements in the list follows the order of the goal solutions.
+</p>
+<p>
+This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object.
 </p>
 
 <h4>Template and modes</h4>
@@ -55,21 +58,24 @@ See the Prolog ISO standard definition. This built-in meta-predicate is declared
 
 <h4>Errors</h4>
 
-<blockquote>
-<p>
-	(see the Prolog ISO standard)
-</p>
-</blockquote>
+<dl>
+	<dt>Goal is a variable:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Goal is neither a variable nor a callable term:</dt>
+		<dd><code>type_error(callable, Goal)</code></dd>
+	<dt>Goal is a call to a non-existing predicate:</dt>
+		<dd><code>existence_error(procedure, Predicate)</code></dd>
+</dl>
 
 <h4>Examples</h4>
 
 <dl>
 	<dt>To find all solutions in the context of the object or category containing the call:</dt>
-		<dd><code>findall(Term, Goal, List)</code></dd>
+		<dd><code>findall(Template, Goal, List)</code></dd>
 	<dt>To find all solutions by sending the goal as a message to <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
-		<dd><code>findall(Term, ::Goal, List)</code></dd>
+		<dd><code>findall(Template, ::Goal, List)</code></dd>
 	<dt>To find all solutions by sending the goal as a message to an explicit object:</dt>
-		<dd><code>findall(Term, Object::Goal, List)</code></dd>
+		<dd><code>findall(Template, Object::Goal, List)</code></dd>
 </dl>
 
 <h4>See also</h4>
@@ -81,7 +87,7 @@ See the Prolog ISO standard definition. This built-in meta-predicate is declared
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: July 13, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="bagof_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="findall_4.html">next</a></span><br/>

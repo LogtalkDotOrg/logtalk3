@@ -55,6 +55,9 @@ asking mechanisms in the User Manual.
 
 * IMPROVED: Documentation of the `expanding` built-in protocol.
 
+* IMPROVED: The documentation of the `bagof/3`, `setof/3`, and `findall/3-4`
+built-in methods no longer require consulting the Prolog ISO standard.
+
 Tools
 -----
 
