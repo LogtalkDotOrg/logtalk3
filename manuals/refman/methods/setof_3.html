@@ -49,7 +49,7 @@
 Collects a set of solutions for the goal for each set of instantiations of the free variables in the goal. The solutions are sorted using standard term order. The free variables in the goal are the variables that occur in the goal but not in the template. Free variables can be ignored, however, by using the <code>^/2</code> existential qualifier. For example, if <code>T</code> is term containing all the free variables that we want to ignore, we can write <code>T^Goal</code>. Note that the term <code>T</code> can be written as <code>V1^V2^...</code>.
 </p>
 <p>
-When there are free variables, this method is re-executable on backtracking.
+When there are free variables, this method is re-executable on backtracking. This method fails when there are no solutions, never returning an empty list.
 </p>
 <p>
 This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object.
@@ -73,12 +73,12 @@ This built-in meta-predicate is declared as a private method and thus cannot be 
 <h4>Examples</h4>
 
 <dl>
-	<dt>To find all solutions in the context of the object or category containing the call:</dt>
+	<dt>To find a set of solutions in the context of the object or category containing the call:</dt>
 		<dd><code>setof(Template, Goal, List)</code></dd>
-	<dt>To find all solutions by sending the goal as a message to <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
-		<dd><code>setof(Template, ::Goal, List)</code></dd>
-	<dt>To find all solutions by sending the goal as a message to an explicit object:</dt>
-		<dd><code>setof(Template, Object::Goal, List)</code></dd>
+	<dt>To find a set of solutions of sending a message to <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
+		<dd><code>setof(Template, ::Message, List)</code></dd>
+	<dt>To find a set of solutions of sending a message to an explicit object:</dt>
+		<dd><code>setof(Template, Object::Message, List)</code></dd>
 </dl>
 
 <h4>See also</h4>

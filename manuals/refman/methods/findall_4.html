@@ -46,7 +46,7 @@
 
 <pre>findall(Template, Goal, List, Tail)</pre>
 <p>
-Variant of the <code>findall/3</code> method that allows passing the tail of the results list.
+Variant of the <code>findall/3</code> method that allows passing the tail of the results list. It succeeds returning the  tail argument when the goal have no solutions.
 </p>
 <p>
 This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object.
@@ -72,10 +72,10 @@ This built-in meta-predicate is declared as a private method and thus cannot be 
 <dl>
 	<dt>To find all solutions in the context of the object or category containing the call:</dt>
 		<dd><code>findall(Template, Goal, List, Tail)</code></dd>
-	<dt>To find all solutions by sending the goal as a message to <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
-		<dd><code>findall(Template, ::Goal, List, Tail)</code></dd>
-	<dt>To find all solutions by sending the goal as a message to an explicit object:</dt>
-		<dd><code>findall(Template, Object::Goal, List, Tail)</code></dd>
+	<dt>To find all solutions of sending a message to <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
+		<dd><code>findall(Template, ::Message, List, Tail)</code></dd>
+	<dt>To find all solutions of sending a message to an explicit object:</dt>
+		<dd><code>findall(Template, Object::Message, List, Tail)</code></dd>
 </dl>
 
 <h4>See also</h4>
