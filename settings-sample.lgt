@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on June 17, 2016
+%  Last updated on July 13, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -71,7 +71,7 @@
 %  be printed by default if syntax errors are found. Be sure to debug and
 %  test your settings files as regular Logtalk source files before using
 %  them (you may use the `logtalk_compile/1-2` built-in predicates to compile
-%  the settings files without loading them).
+%  the settings files without loading them to check for syntax errors).
 %
 %  Limitations of the backend Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially

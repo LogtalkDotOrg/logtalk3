@@ -89,13 +89,14 @@ following table summarizes the availability of these features:
 |  Qu-Prolog       |       no      |       no      |       no      |       no      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |  
-|  SWI-Prolog      |       no      |      yes      |      yes      |      yes      |  
+|  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |  
 |  XSB             |      yes      |       no      |       no      |      yes      |  
 |  YAP             |      yes      |      yes      |      yes      |      yes      |  
 
-A value of "yes" means at least partial support (but some limitations may
-be present). A value of "no" just means that the backend Prolog compiler
-doesn't provide a *compatible* implementation of the required features.
+A value of "yes" means at least partial support (but some limitations may be
+present and a recent version of the Prolog system may be required). A value
+of "no" may simply mean that the backend Prolog compiler doesn't provide a
+*compatible* implementation of the required features.
 
 
 template adapter file
@@ -423,10 +424,17 @@ can use the goal:
 
 	?- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
 
-In alternative, you can copy the `scripts/pack/logtalk/prolog/logtalk.pl`
-file to the SWI-Prolog library directory and then use the query:
+In alternative, you can install the Logtalk pack for SWI-Prolog by typing:
+
+	?- pack_install(logtalk).
+
+After, you can load Logtalk on-demand by typing:
 
 	?- use_module(library(logtalk)).
+
+The pack alternative is handy for deployment but not ideal for development as
+it implicitly assumes a single user and the files are buried in the directory
+`~/lib/swipl/pack/logtalk`.
 
 If you want to load automatically Logtalk at startup and be able to use it
 with both the shell integration script and the Mac OS X GUI application, you

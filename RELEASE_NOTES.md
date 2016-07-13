@@ -28,7 +28,7 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Support for `//` and `[//]` meta-predicate meta-argument specifiers
-when dealing with Prolog meta-predicates.
+when dealing with proprietary Prolog meta-predicates.
 
 * ADDED: A `term` key to the `logtalk_load_context/2` built-in predicate for
 accessing the term under compilation.
@@ -56,7 +56,7 @@ asking mechanisms in the User Manual.
 * IMPROVED: Documentation of the `expanding` built-in protocol.
 
 * IMPROVED: The documentation of the `bagof/3`, `setof/3`, and `findall/3-4`
-built-in methods no longer require consulting the Prolog ISO standard.
+built-in methods no longer refer to the Prolog ISO standard.
 
 Tools
 -----
