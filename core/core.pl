@@ -154,7 +154,7 @@
 :- dynamic('$lgt_send_to_obj_static_binding_'/4).
 
 
-% lookup caches for messages to an object, messages to self, and super calls
+% dynamic binding lookup caches for messages and super calls
 
 % '$lgt_send_to_obj_'(Obj, Pred, ExCtx)
 :- dynamic('$lgt_send_to_obj_'/3).
@@ -168,7 +168,7 @@
 :- dynamic('$lgt_ctg_super_call_'/3).
 
 
-% lookup cache for asserting and retracting dynamic facts
+% dynamic binding lookup cache for asserting and retracting dynamic facts
 
 % '$lgt_db_lookup_cache_'(Obj, Fact, Sender, TFact, UClause)
 :- dynamic('$lgt_db_lookup_cache_'/5).
@@ -2309,13 +2309,13 @@ logtalk_load(Files) :-
 % logtalk_load(@source_file_name, @list(compiler_flag))
 % logtalk_load(@list(source_file_name), @list(compiler_flag))
 %
-% compiles to disk and then loads to memory a source file or a list of source
-% files using a list of compiler flags
+% compiles to disk and then loads to memory a source file or a list of
+% source files using a list of compiler flags
 %
 % note that we can only clean the compiler flags after reporting warning
-% numbers as the report/1 flag might be being in the list of flags but we
-% cannot test for it as its value should only be used in the default code
-% for printing messages
+% numbers as the report/1 flag might be in the list of flags but we cannot
+% test for it as its value should only be used in the default code for
+% printing messages
 
 logtalk_load(Files, Flags) :-
 	catch(
@@ -2354,8 +2354,9 @@ logtalk_make :-
 
 % logtalk_make(+atom)
 %
-% reloads changed Logtalk source files, cleans all intermediate Prolog files,
-% and lists all missing entities
+% performs a make target: reload of changed Logtalk source files, cleaning
+% all intermediate Prolog files, listing all missing entities, or listing
+% circular entity references
 
 logtalk_make(Target) :-
 	(	var(Target) ->
@@ -2600,7 +2601,8 @@ logtalk_make(Target) :-
 	).
 
 
-% find circular dependencies for logtalk_make/1
+% find circular dependencies for logtalk_make/1; we only check for
+% mutual and triangular dependencies due to the computational cost
 
 '$lgt_circular_reference'((Object1-Object2)-references([Path1-Line1,Path2-Line2])) :-
 	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
@@ -2874,7 +2876,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % checks if an object exists at runtime; this is necessary in order to
 % prevent trivial messages such as true/0 or repeat/0 from succeeding
-% when the target object doesn't exist; used in the translation of ::/2
+% when the target object doesn't exist; used in the compilation of ::/2
 % calls
 
 '$lgt_object_exists'(Obj, Pred, Sender) :-
@@ -4381,7 +4383,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_self'(?term, +object_identifier, +compilation_context)
 %
-% runtime processing of a message sending call when the arguments are not
+% runtime processing of a message sending call when the message is not
 % known at compile time
 
 '$lgt_send_to_self'(Pred, Sender, Ctx) :-
@@ -4498,7 +4500,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
 	% call all before event handlers
 	\+ ('$lgt_before_event_'(Obj, Pred, Sender, _, Before), \+ Before),
-	% process the message; we cannot simply call '$lgt_send_to_obj_ne'/3 as the generated cache entries differ
+	% process the message; we cannot simply call '$lgt_send_to_obj_ne'/3
+	% as the generated cache entries are different
 	'$lgt_send_to_obj_nv_inner'(Obj, Pred, Sender, SenderExCtx),
 	% call all after event handlers
 	\+ ('$lgt_after_event_'(Obj, Pred, Sender, _, After), \+ After).
@@ -4712,8 +4715,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_obj_super_call'(+atom, +term, +execution_context)
 %
-% runtime processing of an object "super" call when the arguments are not
-% known at compile time
+% runtime processing of an object "super" call when the predicate called is
+% not known at compile time
 
 '$lgt_obj_super_call'(Super, Pred, ExCtx) :-
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
@@ -4786,8 +4789,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_ctg_super_call'(+category_identifier, +term, +execution_context)
 %
-% runtime processing of a category "super" call when the arguments are not
-% known at compile time
+% runtime processing of a category "super" call when the predicate called
+% is not known at compile time
 
 '$lgt_ctg_super_call'(Ctg, Pred, ExCtx) :-
 	'$lgt_must_be'(callable, Pred, logtalk(^^Pred, Ctg)),
