@@ -33,6 +33,8 @@ when dealing with proprietary Prolog meta-predicates.
 * ADDED: A `term` key to the `logtalk_load_context/2` built-in predicate for
 accessing the term under compilation.
 
+* IMPROVED: Compile settings files in optimized mode and preventing reloading.
+
 * FIXED: Make the `logtalk_load_context/2` built-in predicate `variable_names`
 and `term_position` keys usable by the `goal_expansion/2` method.
 

@@ -20878,7 +20878,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_settings_file'(ScratchDirectory, Result) :-
 	'$lgt_default_flag'(settings_file, Value),
-	'$lgt_load_settings_file'(Value, [report(off), clean(on), scratch_directory(ScratchDirectory)], Result).
+	Options = [
+		% delete the generated intermediate file as it may be non-portable
+		% between backend Prolog compilers
+		clean(on),
+		% use a scratch directory where we expect to have writing permission
+		scratch_directory(ScratchDirectory),
+		% optimize any entity code present, allowing static binding to
+		% entity resources, and preventing their redefinition
+		optimize(on), reload(skip),
+		% don't print any compilation and loading messages
+		report(off)
+	],
+	'$lgt_load_settings_file'(Value, Options, Result).
 
 
 '$lgt_load_settings_file'(deny, _, disabled).
