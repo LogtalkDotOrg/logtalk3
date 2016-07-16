@@ -71,6 +71,9 @@ index when looking for help in non-existing predicates or entities.
 
 * FIXED: The `lgt2txt.sh` shell script to also convert the XML index files.
 
+* FIXED: Avoid polluting SWI-Prolog meta-predicate analysis with `lgtunit`
+private meta-predicates.
+
 Tests
 -----
 

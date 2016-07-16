@@ -1492,3 +1492,12 @@
 		memberchk(Element, List).
 
 :- end_object.
+
+
+% avoid polluting SWI-Prolog meta-predicate analysis with "lgtunit"
+% private meta-predicates
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- meta_predicate('$lgtunit#0.run_test_condition#6'(*,0,*,*,*,*,*)).
+	:- meta_predicate('$lgtunit#0.run_test_setup#6'(*,0,*,*,*,*,*)).
+	:- meta_predicate('$lgtunit#0.run_test_cleanup#5'(*,0,*,*,*,*)).
+:- endif.
