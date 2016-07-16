@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/04/25,
+		date is 2016/07/16,
 		comment is 'Unit tests for the create_logtalk_flag/3 built-in predicate.'
 	]).
 
@@ -86,12 +86,30 @@
 		{	create_logtalk_flag(raining, true, []),
 			current_logtalk_flag(raining, Value1),
 			Value1 == true,
+			create_logtalk_flag(raining, false, []),
+			current_logtalk_flag(raining, Value2),
+			Value2 == false
+		}.
+
+	succeeds(create_logtalk_flag_3_16) :-
+		{	create_logtalk_flag(raining, true, []),
+			current_logtalk_flag(raining, Value1),
+			Value1 == true,
+			create_logtalk_flag(raining, false, [keep(false)]),
+			current_logtalk_flag(raining, Value2),
+			Value2 == false
+		}.
+
+	succeeds(create_logtalk_flag_3_17) :-
+		{	create_logtalk_flag(raining, true, []),
+			current_logtalk_flag(raining, Value1),
+			Value1 == true,
 			create_logtalk_flag(raining, false, [keep(true)]),
 			current_logtalk_flag(raining, Value2),
 			Value2 == true
 		}.
 
-	succeeds(create_logtalk_flag_3_16) :-
+	succeeds(create_logtalk_flag_3_18) :-
 		{	create_logtalk_flag(foo, bar, [type(term)]),
 			current_logtalk_flag(foo, Value1),
 			Value1 == bar,
@@ -100,7 +118,7 @@
 			Value2 == baz
 		}.
 
-	succeeds(create_logtalk_flag_3_17) :-
+	succeeds(create_logtalk_flag_3_19) :-
 		{	create_logtalk_flag(bar, baz, [access(read_only)]),
 			current_logtalk_flag(bar, Value1),
 			Value1 == baz

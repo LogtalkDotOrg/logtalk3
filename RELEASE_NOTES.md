@@ -79,6 +79,8 @@ and `logtalk_compile/1-2` built-in predicates.
 
 * IMPROVED: Tests for the `logtalk_load_context/2` built-in predicate.
 
+* IMPROVED: Tests for the `create_logtalk_flag/3` built-in predicate.
+
 Installers and installation scripts
 -----------------------------------
 
