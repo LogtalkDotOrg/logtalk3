@@ -36,7 +36,7 @@
 :- op(600, xfy, ::).
 % message sending to "self"
 :- op(600,  fy, ::).
-% "super" call (calls an inherited method definition)
+% "super" call (calls an inherited or imported method definition)
 :- op(600,  fy, ^^).
 % imported category predicate call operator (deprecated)
 :- op(600,  fy,  :).
@@ -64,6 +64,7 @@
 
 
 % predicate alias operator (alternative to the ::/2 or :/2 operators depending on the context)
+% first introduced in SWI-Prolog and YAP also for defining aliases to module predicates
 :- op(700, xfx, as).
 
 
@@ -721,6 +722,7 @@ object_property(Obj, Prop) :-
 		Complements = restrict
 	).
 '$lgt_object_property'(complements, _, _, _, _, _, _, Flags) :-
+	% deprecated Logtalk 2.x object property
 	(	Flags /\ 64 =:= 64 ->
 		true
 	;	Flags /\ 32 =:= 32
@@ -2063,14 +2065,14 @@ logtalk_compile(Files, Flags) :-
 '$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
-	'$lgt_reset_warnings_counter'(logtalk_compile(Files, Flags)),
+	'$lgt_reset_directory_and_warnings_counter'(logtalk_compile(Files, Flags)),
 	throw(error(Error, logtalk(logtalk_compile(Files, Flags), _))).
 
 
 
 % predicates for compilation warning counting and reporting
 
-'$lgt_reset_warnings_counter'(Goal) :-
+'$lgt_reset_directory_and_warnings_counter'(Goal) :-
 	(	'$lgt_pp_warnings_top_goal_directory_'(Goal, Directory) ->
 		'$lgt_change_directory'(Directory)
 	;	true
@@ -2129,7 +2131,7 @@ logtalk_compile(Files, Flags) :-
 % '$lgt_check_and_expand_source_files'(@list, -list)
 %
 % check if the source file names are valid (but not if the file exists)
-% and return their paths
+% and return their absolute paths
 
 '$lgt_check_and_expand_source_files'([File| Files], [Path| Paths]) :-
 	!,
@@ -2337,7 +2339,7 @@ logtalk_load(Files, Flags) :-
 '$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
-	'$lgt_reset_warnings_counter'(logtalk_load(Files, Flags)),
+	'$lgt_reset_directory_and_warnings_counter'(logtalk_load(Files, Flags)),
 	throw(error(Error, logtalk(logtalk_load(Files, Flags), _))).
 
 
@@ -2824,7 +2826,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	(	'$lgt_member'(type(Type0), Options) ->
 		'$lgt_map_user_defined_flag_type'(Type0, Type)
-	;	Value == true ->
+	;	% infer type from the initial value
+		Value == true ->
 		Type = '$lgt_is_boolean'
 	;	Value == false ->
 		Type = '$lgt_is_boolean'
@@ -17072,7 +17075,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % head of the clause being compiled
 '$lgt_comp_ctx_head'(ctx(Head, _, _, _, _, _, _, _, _, _, _, _), Head).
 
-% entity containing the clause being compiled
+% entity containing the clause being compiled (either a category or an object)
 '$lgt_comp_ctx_entity'(ctx(_, Entity, _, _, _, _, _, _, _, _, _, _), Entity).
 
 '$lgt_comp_ctx_sender'(ctx(_, _, Sender, _, _, _, _, _, _, _, _, _), Sender).
@@ -20977,6 +20980,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_cache_compiler_flags' :-
 	'$lgt_version_data'(logtalk(Major, Minor, Patch, Status)),
 	assertz('$lgt_current_flag_'(version_data, logtalk(Major, Minor, Patch, Status))),
+	% also support the deprecated Logtalk 2.x "version" flag
 	assertz('$lgt_current_flag_'(version, version(Major, Minor, Patch))).
 
 
