@@ -30,6 +30,9 @@ Tools
 * FIXED: The `lgtdoc` tool to use the `startup` library name only when no other
 library for the same path is defined.
 
+* FIXED: The `lgtunit` tool to allow defining `test/3` tests with a `note/1`
+option whose argument is a variable to be instantiated by the test goal.
+
 
 3.06.2 - July 18, 2016
 ======================

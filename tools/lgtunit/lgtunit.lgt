@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2016/06/11,
+		date is 2016/07/28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -919,11 +919,10 @@
 		;	true
 		).
 
-	parse_test_options([], _, Condition, Setup, Cleanup, Note) :-
+	parse_test_options([], _, Condition, Setup, Cleanup, _) :-
 		(var(Condition) -> Condition = true; true),
 		(var(Setup) -> Setup = true; true),
-		(var(Cleanup) -> Cleanup = true; true),
-		(var(Note) -> Note = ''; true).
+		(var(Cleanup) -> Cleanup = true; true).
 	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Note) :-
 		(	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '_condition', Goal, Condition)
