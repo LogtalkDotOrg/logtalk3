@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.0,
+		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2016/07/05,
+		date is 2016/07/28,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -264,7 +264,10 @@
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
 		functor(Entity, Functor, _),
-		(	logtalk_library_path(Library, _),
+		(	(	logtalk_library_path(Library, _),
+				Library \== startup
+			;	logtalk_library_path(Library, _)
+			),
 			logtalk::expand_library_path(Library, Path) ->
 			assertz(library_entity_(Library, Library, Functor, Entity))
 		;	true

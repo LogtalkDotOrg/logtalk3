@@ -24,7 +24,11 @@ RELEASE NOTES
 3.06.3 - August ??, 2016
 ========================
 
+Tools
+-----
 
+* FIXED: The `lgtdoc` tool to use the `startup` library name only when no other
+library for the same path is defined.
 
 
 3.06.2 - July 18, 2016
