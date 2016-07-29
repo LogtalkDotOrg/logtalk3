@@ -20,5 +20,5 @@
 
 :- initialization((
 	logtalk_load(library(os_loader)),
-	logtalk_load([lgtdocp, lgtdoc], [optimize(on)])
+	logtalk_load([lgtdocp, lgtdoc, doclet], [optimize(on)])
 )).

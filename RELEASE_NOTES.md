@@ -27,6 +27,10 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: An utility `doclet` object to the `lgtdoc` tool providing a simple
+solution to specify a set of goals and a set of shell commands to (re)generate
+the API documentation for a project.
+
 * FIXED: The `lgtdoc` tool to use the `startup` library name only when no other
 library for the same path is defined.
 
