@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Detect attempts to call existentially quantified goals outside the
+scope of `bagof/3` and `setof/3` calls.
+
 * FIXED: When compiling `uses/2` directives, don't create a linking clause for
 runtime use for built-in predicates in `user` with no alias being defined.
 

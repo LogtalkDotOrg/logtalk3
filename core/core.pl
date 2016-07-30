@@ -2862,7 +2862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc3)).
 
 
 
@@ -10019,11 +10019,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ensure that this control construct cannot be used to break object encapsulation 
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))).
 
-% bagof/3 and setof/3 existential quantifiers
+% existential quantifier outside bagof/3 and setof/3 calls
 
-'$lgt_compile_body'(Var^Pred, Var^TPred, Var^DPred, Ctx) :-
-	!,
-	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
+'$lgt_compile_body'(_^_, _, _, _) :-
+	% in some weird cases, the use may be defining a (^)/2 predicate ...
+	\+ '$lgt_pp_defines_predicate_'(_^_, _, _, _, _, _),
+	% ... but otherwise (^)/2 cannot be used outside bagof/3 and setof/3 calls
+	throw(existence_error(procedure, (^)/2)).
 
 % control constructs
 
@@ -10243,7 +10245,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		'$lgt_compile_body'(QGoal, TGoal, DGoal, Ctx),
+		'$lgt_compile_quantified_body'(QGoal, TGoal, DGoal, Ctx),
 		TPred = bagof(Term, TGoal, List),
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), bagof(Term, DGoal, List)), ExCtx)
 	).
@@ -10274,7 +10276,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		'$lgt_compile_body'(QGoal, TGoal, DGoal, Ctx),
+		'$lgt_compile_quantified_body'(QGoal, TGoal, DGoal, Ctx),
 		TPred = setof(Term, TGoal, List),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), setof(Term, DGoal, List)), ExCtx)
 	).
@@ -11812,6 +11814,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines).
+
+
+
+% bagof/3 and setof/3 existential quantifiers
+
+'$lgt_compile_quantified_body'(Term^Pred, Term^TPred, Term^DPred, Ctx) :-
+	!,
+	'$lgt_compile_quantified_body'(Pred, TPred, DPred, Ctx).
+
+'$lgt_compile_quantified_body'(Pred, TPred, DPred, Ctx) :-
+	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
 
 
 
