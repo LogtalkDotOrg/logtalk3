@@ -14,8 +14,8 @@
 	% to this object (after loading the "lgtdoc" tool of course)
 
 	% to automatically (re)generate API documentation when this file is
-	% loaded, uncomment the following directive
-	:- initialization(::update).
+	% loaded, uncomment the following directive:
+	%:- initialization(::update).
 
 	% define one clause per goal required to generate the documentation
 	% this goal will be called in the context of "user"

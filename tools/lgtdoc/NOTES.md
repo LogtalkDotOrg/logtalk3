@@ -59,15 +59,20 @@ In alternative, you may also turn on the `source_data` flag globally by typing:
 	| ?- set_logtalk_flag(source_data, on).
 
 The tool API allows generating documentation for libraries, directories, and
-files, complemented with directory, entity, and predicate indexes.
+files, complemented with library, directory, entity, and predicate indexes.
 
 The `lgtdoc/xml` directory includes several ready to use scripts for converting
 the XML documenting files to (X)HTML, PDF, Markdown, or plain text files. See
 the `lgtdoc/xml/NOTES.md` for details.
 
-An utility `doclet` object is available providing a simple solution to specify a
-set of goals and a set of shell commands to (re)generate the API documentation
-for a project. For an usage example see the `sample_doclet.lgt` source file.
+
+Automating (re)generating API documentation for a project
+---------------------------------------------------------
+
+An utility `doclet` object is available providing a simple solution to specify
+a sequence of goals and a sequence of shell commands to (re)generate the API
+documentation for a project. For an usage example see the `sample_doclet.lgt`
+source file.
 
 
 Other notes

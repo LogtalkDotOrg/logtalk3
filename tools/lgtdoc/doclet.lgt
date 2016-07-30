@@ -38,7 +38,7 @@
 	:- public(update/0).
 	:- mode(update, zero_or_one).
 	:- info(update/0, [
-		comment is 'Updates the project documentation, first by calling a set of goals and second by executing a set of shell commands. Fails if one of the update steps fails.'
+		comment is 'Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if one of the update steps fails.'
 	]).
 
 	:- public(doc_goal/1).
