@@ -24,6 +24,12 @@ RELEASE NOTES
 3.06.3 - August ??, 2016
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: When compiling `uses/2` directives, don't create a linking clause for
+runtime use for built-in predicates in `user` with no alias being defined.
+
 Tools
 -----
 

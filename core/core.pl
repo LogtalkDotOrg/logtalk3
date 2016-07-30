@@ -2862,7 +2862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc1)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc2)).
 
 
 
@@ -8972,8 +8972,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% unify args of TOriginal and TAlias
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote definition
-	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)]),
+	% allow for runtime use by adding a local definition that calls the remote
+	% definition except when the remote is a built-in predicate in "user" with
+	% no alias being defined
+	(	Obj == user,
+		OFunctor == AFunctor,
+		'$lgt_predicate_property'(TOriginal, built_in) ->
+		true
+	;	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)])	
+	),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	% ensure that the this uses/2 directive is found when looking for senders of this message
 	'$lgt_add_referenced_object_message'(Mode, Obj, TOriginal, TAlias, TAlias, Lines),
