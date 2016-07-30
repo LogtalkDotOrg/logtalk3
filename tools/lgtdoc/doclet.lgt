@@ -76,7 +76,8 @@
 			;	print_message(warning, lgtdoc(doclet), goal_error(Goal, Error)),
 				fail
 			)
-		;	print_message(warning, lgtdoc(doclet), goal_failure(Goal))
+		;	print_message(warning, lgtdoc(doclet), goal_failure(Goal)),
+			fail
 		).
 
 	execute_command(Command) :-

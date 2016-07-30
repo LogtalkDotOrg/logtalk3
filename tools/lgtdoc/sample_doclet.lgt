@@ -13,11 +13,16 @@
 	% for the "lgtdoc" tool; usage is simple: just send the message update/0
 	% to this object (after loading the "lgtdoc" tool of course)
 
+	% to automatically (re)generate API documentation when this file is
+	% loaded, uncomment the following directive
+	:- initialization(::update).
+
 	% define one clause per goal required to generate the documentation
 	% this goal will be called in the context of "user"
 	doc_goal(lgtdoc::library(lgtdoc, [xml_docs_directory(docs)])).
 
 	% define one clause per shell command to be executed
+	shell_command('mkdir -p docs').
 	shell_command('cd docs && lgt2html -t "API documentation for the lgtdoc tool"').
 
 :- end_object.
