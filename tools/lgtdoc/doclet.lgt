@@ -112,3 +112,10 @@
 		['  command execution failed with status ~w'-[Status], nl].
 
 :- end_object.
+
+
+% avoid polluting SWI-Prolog meta-predicate analysis with
+% "doclet" private meta-predicates
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- meta_predicate('$doclet#0.call_doc_goal#1'(*,*)).
+:- endif.
