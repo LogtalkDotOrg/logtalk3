@@ -21,14 +21,18 @@
 :- object(doclet).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2016/07/29,
+		date is 2016/07/30,
 		comment is 'Utility object to help automate (re)generate API documentation for a project.'
 	]).
 
 	:- uses(logtalk, [
 		print_message/3
+	]).
+
+	:- uses(os, [
+		shell/2
 	]).
 
 	:- public(update/0).
@@ -77,10 +81,11 @@
 
 	execute_command(Command) :-
 		print_message(comment, lgtdoc(doclet), executing_command(Command)),
-		os::shell(Command, Status),
+		shell(Command, Status),
 		(	Status =:= 0 ->
 			true
-		;	print_message(warning, lgtdoc(doclet), command_failure(Command, Status))
+		;	print_message(warning, lgtdoc(doclet), command_failure(Command, Status)),
+			fail
 		).
 
 	% default message translations
