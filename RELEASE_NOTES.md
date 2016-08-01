@@ -31,7 +31,11 @@ Logtalk compiler and runtime
 scope of `bagof/3` and `setof/3` calls.
 
 * FIXED: When compiling `uses/2` directives, don't create a linking clause for
-runtime use for built-in predicates in `user` with no alias being defined.
+runtime use for built-in predicates in `user` when no alias is being defined.
+
+* FIXED: When propagating a compilation failure for a file to its parent files,
+ensure that the file ancestors will be reloaded starting with the top ancestor
+by the make mechanism.
 
 Tools
 -----

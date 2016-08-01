@@ -2862,7 +2862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc3)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc4)).
 
 
 
@@ -5874,7 +5874,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_propagate_failure_to_parent_files'(File) :-
 	(	'$lgt_parent_file_'(File, Parent) ->
-		assertz('$lgt_failed_file_'(Parent)),
+		asserta('$lgt_failed_file_'(Parent)),
 		'$lgt_propagate_failure_to_parent_files'(Parent)
 	;	true
 	).
