@@ -66,15 +66,6 @@ the XML documenting files to (X)HTML, PDF, Markdown, or plain text files. See
 the `lgtdoc/xml/NOTES.md` for details.
 
 
-Automating (re)generating API documentation for a project
----------------------------------------------------------
-
-An utility `doclet` object is available providing a simple solution to specify
-a sequence of goals and a sequence of shell commands to (re)generate the API
-documentation for a project. For an usage example see the `sample_doclet.lgt`
-source file.
-
-
 Other notes
 -----------
 

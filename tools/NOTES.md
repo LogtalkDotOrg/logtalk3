@@ -26,6 +26,7 @@ The following developer tools are available, each one with its own
 - assertions
 - debugger
 - diagrams
+- doclet
 - help
 - lgtdoc
 - lgtunit

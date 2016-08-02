@@ -26,6 +26,7 @@
 		assertions(loader),
 		debugger(loader),
 		diagrams(loader),
+		doclet(loader),
 		help(loader),
 		lgtdoc(loader),
 		lgtunit(loader)

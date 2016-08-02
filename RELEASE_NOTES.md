@@ -49,9 +49,8 @@ Manual.
 Tools
 -----
 
-* ADDED: An utility `doclet` object to the `lgtdoc` tool providing a simple
-solution to specify a set of goals and a set of shell commands to (re)generate
-the API documentation for a project.
+* ADDED: A `doclet` tool providing a simple solution to specify a set of goals
+and a set of shell commands to (re)generate documentation for a project.
 
 * CHANGED: The `lgtdoc` tool to always interpret the argument of the option
 `xml_docs_directory/1` as relative to the current directory for consistency
