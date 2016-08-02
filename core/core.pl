@@ -2393,8 +2393,21 @@ logtalk_make(Target) :-
 	fail.
 % recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
 '$lgt_logtalk_make'(all) :-
-	'$lgt_files_with_changed_compilation_mode'(Files),
+	% find all files impacted by a change to compilation mode
+	findall(
+		file(Path, Flags),
+		(	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, _),
+			atom_concat(Directory, Basename, Path),
+			'$lgt_changed_compilation_mode'(Mode, Flags)
+		),
+		Files
+	),
+	% filter files that will be reloaded by a parent file that will also be reloaded
 	'$lgt_member'(file(Path,Flags), Files),
+	\+ (
+		'$lgt_parent_file_'(Path, Parent),
+		'$lgt_member'(file(Parent,_), Files)
+	),
 	logtalk_load(Path, Flags),
 	fail.
 '$lgt_logtalk_make'(all) :-
@@ -2428,30 +2441,6 @@ logtalk_make(Target) :-
 	sort(CircularReferences0, CircularReferences),
 	'$lgt_print_message'(warning(make), core, circular_references(CircularReferences)),
 	'$lgt_print_message'(comment(make), core, circular_references_listed).
-
-
-'$lgt_files_with_changed_compilation_mode'(Files) :-
-	% find all files impacted by a change to compilation mode
-	findall(
-		file(Path, Flags),
-		(	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, _),
-			atom_concat(Directory, Basename, Path),
-			'$lgt_changed_compilation_mode'(Mode, Flags)
-		),
-		Files0
-	),
-	% filter out files that will be reloaded by a parent file
-	% that will also be reloaded
-	findall(
-		file(Path, Flags),
-		(	'$lgt_member'(file(Path,Flags), Files0),
-			\+ (
-				'$lgt_parent_file_'(Path, Parent),
-				'$lgt_member'(file(Parent,_), Files0)
-			)
-		),
-		Files
-	).
 
 
 % deal with changes to the default compilation mode
