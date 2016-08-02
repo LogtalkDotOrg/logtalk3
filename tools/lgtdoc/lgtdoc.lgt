@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.1,
+		version is 4.2,
 		author is 'Paulo Moura',
-		date is 2016/07/28,
+		date is 2016/08/02,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -74,7 +74,6 @@
 		logtalk::expand_library_path(Library, TopPath),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
-		os::change_directory(TopPath),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options),
@@ -103,7 +102,6 @@
 		logtalk::expand_library_path(Library, Path),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
-		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
@@ -119,7 +117,6 @@
 		os::expand_path(Directory, Path),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
-		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_rdirectory(Path, Options),
@@ -153,7 +150,6 @@
 		os::expand_path(Directory, Path),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
-		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
@@ -189,7 +185,6 @@
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
-		os::change_directory(Directory),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		process(Basename, Directory, Options, StreamOptions),

@@ -53,6 +53,10 @@ Tools
 solution to specify a set of goals and a set of shell commands to (re)generate
 the API documentation for a project.
 
+* CHANGED: The `lgtdoc` tool to always interpret the argument of the option
+`xml_docs_directory/1` as relative to the current directory for consistency
+with the `diagrams` tool.
+
 * FIXED: The `lgtdoc` tool to use the `startup` library name only when no other
 library for the same path is defined.
 
