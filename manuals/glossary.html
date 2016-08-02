@@ -175,6 +175,9 @@
 
 <dd><dl>
 
+<dt id="doclet" class="glossary"><strong>doclet object</strong></dt>
+<dd>An object specifying the steps necessary to (re)generate the API documentation for a project. See the <code>lgtdoc</code> tool for details.</dd>
+
 <dt id="hook" class="glossary"><strong>hook object</strong></dt>
 <dd>An object, implementing the <code>expanding</code> built-in protocol, defining term- and goal-expansion clauses, used in the compilation of Logtalk source files. An hook object can be specified using the compiler flag <code>hook/1</code>.</dd>
 
@@ -248,6 +251,25 @@
 <dt id="specialization" class="glossary"><strong>specialization</strong></dt>
 <dd>A class is specialized by constructing a new class that inherit its predicates and possibly add new ones.</dd>
 
+<dt id="source_file" class="glossary"><strong>source file</strong></dt>
+<dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk entities may be defined in a single source file. Prolog code may be intermixed with entity definitions.</dd>
+
+<dd><dl>
+
+<dt id="adapter_file" class="glossary"><strong>adapter file</strong></dt>
+<dd>A Prolog source file defining a minimal abstraction layer between the Logtalk compiler/runtime and a specific backend Prolog compiler.</dd>
+
+<dt id="loader_file" class="glossary"><strong>loader file</strong></dt>
+<dd>A source file whose main purpose is to load a set of source files.</dd>
+
+<dt id="settings_file" class="glossary"><strong>settings file</strong></dt>
+<dd>A source file, compiled and loaded at Logtalk startup, mainly defining default values for compiler flags that override the defaults found on the backend Prolog compiler adapter files.</dd>
+
+<dt id="tester_file" class="glossary"><strong>tester file</strong></dt>
+<dd>A source file whose main purpose is to load and a run a set of unit tests.</dd>
+
+</dl></dd>
+
 <dt id="this" class="glossary"><strong>this</strong></dt>
 <dd>The object that contains the predicate clause under execution. When the predicate clause is contained in a category, <em>this</em> is a reference to the object importing the category.</dd>
 
@@ -256,7 +278,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 22, 2015</span>
+		<span>Last updated on: August 2, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
