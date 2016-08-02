@@ -2377,23 +2377,24 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(circular).
 
 
-% single file compilation failure
+% single file failure or chain of loaded files leading to a compilation failure
 '$lgt_logtalk_make'(all) :-
 	'$lgt_failed_file_'(Path),
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, Flags),
 	logtalk_load(Path, Flags),
 	fail.
-% chain of loaded files lead to a compilation failure
+% recompilation of changed source files since last loaded
 '$lgt_logtalk_make'(all) :-
-	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, LoadingTimeStamp),
+	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, LoadingTimeStamp),
 	atom_concat(Directory, Basename, Path),
-	(	'$lgt_failed_file_'(Path) ->
-		true
-	;	'$lgt_changed_compilation_mode'(Mode, Flags) ->
-		true
-	;	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
-		LoadingTimeStamp @< CurrentTimeStamp
-	),
+	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
+	LoadingTimeStamp @< CurrentTimeStamp,
+	logtalk_load(Path, Flags),
+	fail.
+% recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
+'$lgt_logtalk_make'(all) :-
+	'$lgt_files_with_changed_compilation_mode'(Files),
+	'$lgt_member'(file(Path,Flags), Files),
 	logtalk_load(Path, Flags),
 	fail.
 '$lgt_logtalk_make'(all) :-
@@ -2427,6 +2428,30 @@ logtalk_make(Target) :-
 	sort(CircularReferences0, CircularReferences),
 	'$lgt_print_message'(warning(make), core, circular_references(CircularReferences)),
 	'$lgt_print_message'(comment(make), core, circular_references_listed).
+
+
+'$lgt_files_with_changed_compilation_mode'(Files) :-
+	% find all files impacted by a change to compilation mode
+	findall(
+		file(Path, Flags),
+		(	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, _),
+			atom_concat(Directory, Basename, Path),
+			'$lgt_changed_compilation_mode'(Mode, Flags)
+		),
+		Files0
+	),
+	% filter out files that will be reloaded by a parent file
+	% that will also be reloaded
+	findall(
+		file(Path, Flags),
+		(	'$lgt_member'(file(Path,Flags), Files0),
+			\+ (
+				'$lgt_parent_file_'(Path, Parent),
+				'$lgt_member'(file(Parent,_), Files0)
+			)
+		),
+		Files
+	).
 
 
 % deal with changes to the default compilation mode
@@ -2862,7 +2887,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc4)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc5)).
 
 
 

@@ -37,6 +37,9 @@ runtime use for built-in predicates in `user` when no alias is being defined.
 ensure that the file ancestors will be reloaded starting with the top ancestor
 by the make mechanism.
 
+* FIXED: Avoid redundant file reloads when calling `logtalk_make/0` or
+`logtalk_make/1` with the target `all`.
+
 Tools
 -----
 
