@@ -40,6 +40,12 @@ by the make mechanism.
 * FIXED: Avoid redundant file reloads when calling `logtalk_make/0` or
 `logtalk_make/1` with the target `all`.
 
+Documentation
+-------------
+
+* IMPROVED: The glossary is now included in the PDF version of the Reference
+Manual.
+
 Tools
 -----
 

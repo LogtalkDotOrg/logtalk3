@@ -6,7 +6,7 @@
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on June 18, 2016
+##   Last updated on August 2, 2016
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ catalog=file:///opt/local/share/xml/xhtml/catalog
 rm -f *.section directives/*.section predicates/*.section methods/*.section control/*.section
 
 eval $xslt_proc -o index.section refman.xsl index.html
+eval $xslt_proc -o glossary.section refman.xsl ../glossary.html
 eval $xslt_proc -o grammar.section refman.xsl grammar.html
 eval $xslt_proc -o directives/encoding_1.section refman.xsl directives/encoding_1.html
 eval $xslt_proc -o directives/set_logtalk_flag_2.section refman.xsl directives/set_logtalk_flag_2.html
@@ -188,6 +189,7 @@ cat -s \
 	refman.header \
 	index.section \
 	refman.body \
+	glossary.section \
 	grammar.section \
 	directives.header \
 	directives/encoding_1.section \
