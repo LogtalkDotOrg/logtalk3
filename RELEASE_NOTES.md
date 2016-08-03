@@ -43,6 +43,8 @@ by the make mechanism.
 Documentation
 -------------
 
+* ADDED: Glossary entries for the different roles of source files.
+
 * IMPROVED: The glossary is now included in the PDF version of the Reference
 Manual.
 

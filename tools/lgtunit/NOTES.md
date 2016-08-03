@@ -183,10 +183,11 @@ of skipped tests.
 Testing non-deterministic predicates
 ------------------------------------
 
-For testing non-deterministic predicates, you use wrap the test goal using the
-standard `findall/3` predicate to collect all solutions and check against the
-list of expected solutions. When the expected solutions are a set, use in
-alternative the standard `setof/3` predicate.
+For testing non-deterministic predicates (with a finite and manageable number
+of solutions), you can wrap the test goal using the standard `findall/3`
+predicate to collect all solutions and check against the list of expected
+solutions. When the expected solutions are a set, use in alternative the
+standard `setof/3` predicate.
 
 
 Testing input/output predicates
