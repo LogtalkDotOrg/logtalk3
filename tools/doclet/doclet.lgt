@@ -21,9 +21,9 @@
 :- object(doclet).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/08/02,
+		date is 2016/08/03,
 		comment is 'Utility object to help automate (re)generate documentation for a project.'
 	]).
 
@@ -69,23 +69,23 @@
 	:- meta_predicate(call_doc_goal(*)).
 
 	call_doc_goal(Goal) :-
-		print_message(comment, lgtdoc(doclet), calling_goal(Goal)),
+		print_message(comment, doclet, calling_goal(Goal)),
 		(	catch({Goal}, Error, true) ->
 			(	var(Error) ->
 				true
-			;	print_message(warning, lgtdoc(doclet), goal_error(Goal, Error)),
+			;	print_message(warning, doclet, goal_error(Goal, Error)),
 				fail
 			)
-		;	print_message(warning, lgtdoc(doclet), goal_failure(Goal)),
+		;	print_message(warning, doclet, goal_failure(Goal)),
 			fail
 		).
 
 	execute_command(Command) :-
-		print_message(comment, lgtdoc(doclet), executing_command(Command)),
+		print_message(comment, doclet, executing_command(Command)),
 		shell(Command, Status),
 		(	Status =:= 0 ->
 			true
-		;	print_message(warning, lgtdoc(doclet), command_failure(Command, Status)),
+		;	print_message(warning, doclet, command_failure(Command, Status)),
 			fail
 		).
 
@@ -94,7 +94,7 @@
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(Message, lgtdoc(doclet)) -->
+	logtalk::message_tokens(Message, doclet) -->
 		message_tokens(Message).
 
 	message_tokens(calling_goal(Goal)) -->
