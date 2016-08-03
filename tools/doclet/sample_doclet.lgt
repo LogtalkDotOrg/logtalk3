@@ -5,18 +5,17 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/02,
+		date is 2016/08/03,
 		comment is 'Example of a doclet object.'
 	]).
 
-	% in this example doclet, we automate (re)generating API documentation
-	% and an entity diagram for the "lgtunit" tool
+	% in this example doclet, we automate (re)generating both API
+	% documentation and an entity diagram for the "lgtunit" tool
 	
 	% usage is simple: just send the message update/0 to this object
-	% (after loading the "lgtdoc" and "diagrams" tools of course)
 
-	% to automatically (re)generate the documentation when this file is
-	% loaded, uncomment the following directive:
+	% to automatically (re)generate the documentation when this file
+	% is loaded, uncomment the following directive:
 	%:- initialization(::update).
 
 	% define one clause per goal required to generate the documentation

@@ -20,11 +20,11 @@ ________________________________________________________________________
 Overview
 --------
 
-This folder provides the a simple tool for (re)generating documentation for a
+This folder provides a simple tool for (re)generating documentation for a
 project. The tool provides a `doclet` object that is expected to be extended
-by the user to specify a sequence of goals and a sequence of shell commands to
-(re)generate documentation. For an usage example see the `sample_doclet.lgt`
-source file.
+by the user to specify a sequence of goals and a sequence of shell commands
+to (re)generate documentation. For usage examples see the `sample_doclet.lgt`
+and `doclet1.lgt` source files.
 
 
 Loading
