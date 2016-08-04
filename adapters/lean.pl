@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Lean Prolog 4.5.7 and later versions
-%  Last updated on May 9, 2016
+%  Last updated on August 3, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -628,95 +628,66 @@ to_engine(Interactor, Pattern, Goal) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  multi-threading predicates
+%  multi-threading predicates (dummy definitions to avoid startup warnings)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% thread_property(+atom, ?nonvar)
-
 thread_property(_, _) :-
 	fail.
-
-
-% thread_self(?atom)
 
 thread_self(_) :-
 	fail.
 
-
-% thread_create(@callable, -thread_id, +list)
-
 thread_create(_, _, _) :-
 	fail.
-
-
-% thread_join(+atom, -nonvar)
 
 thread_join(_, _) :-
 	fail.
 
-
-% thread_detach(+atom)
-
 thread_detach(_) :-
 	fail.
-
-
-% thread_exit(@term)
 
 thread_exit(_) :-
 	fail.
 
-
-% thread_send_message(+atom, @callable)
-
 thread_send_message(_, _) :-
 	fail.
-
-
-% thread_peek_message(+atom, ?callable)
 
 thread_peek_message(_, _) :-
 	fail.
 
-
-% thread_get_message(+atom, ?callable)
-
 thread_get_message(_, _) :-
 	fail.
-
-
-% thread_get_message(?callable)
 
 thread_get_message(_) :-
 	fail.
 
-
-% thread_sleep(+number)
-
 thread_sleep(_) :-
 	fail.
-
 
 mutex_create(_, _) :-
 	fail.
 
-
 with_mutex(_, _) :-
 	fail.
-
 
 mutex_lock(_) :-
 	fail.
 
-
 mutex_unlock(_) :-
 	fail.
 
-
 mutex_property(_, _) :-
 	fail.
+
+message_queue_create(_) :-
+	fail.
+
+message_queue_destroy(_) :-
+	fail.
+
+:- dynamic('$lgt_engine_term_queue_'/2).
 
 
 

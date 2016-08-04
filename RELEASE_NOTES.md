@@ -40,6 +40,12 @@ by the make mechanism.
 * FIXED: Avoid redundant file reloads when calling `logtalk_make/0` or
 `logtalk_make/1` with the target `all`.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Startup warnings about undefined multi-threading predicates when using
+Lean Prolog as the backend compiler.
+
 Documentation
 -------------
 
