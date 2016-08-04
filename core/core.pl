@@ -2880,7 +2880,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc6)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc7)).
 
 
 
@@ -11839,7 +11839,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_quantified_body'(Term^Pred, Term^TPred, Term^DPred, Ctx) :-
 	!,
-	'$lgt_compile_quantified_body'(Pred, TPred, DPred, Ctx).
+	(	var(Pred) ->
+		% meta-call resolved at runtime
+		'$lgt_compile_body'(Pred, TPred, DPred, Ctx)
+	;	% we can have Term1^Term2^...^Pred
+		'$lgt_compile_quantified_body'(Pred, TPred, DPred, Ctx)
+	).
 
 '$lgt_compile_quantified_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
