@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on May 9, 2016
+%  Last updated on August 3, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -601,7 +601,11 @@ thread_peek_message(_, _) :- fail.
 thread_property(_, _) :- fail.
 thread_self(_) :- fail.
 thread_send_message(_, _) :- fail.
+thread_join(_, _) :- fail.
 with_mutex(_, _) :- fail.
+message_queue_create(_) :- fail.
+message_queue_destroy(_) :- fail.
+:- dynamic('$lgt_engine_term_queue_'/2).
 
 
 

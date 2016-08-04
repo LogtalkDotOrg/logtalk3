@@ -43,6 +43,8 @@ by the make mechanism.
 Prolog adapter and integration files
 ------------------------------------
 
+* FIXED: Embedding Logtalk in a GNU Prolog generated executable.
+
 * FIXED: Startup warnings about undefined multi-threading predicates when using
 Lean Prolog as the backend compiler.
 
