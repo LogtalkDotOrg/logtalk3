@@ -82,17 +82,21 @@ Often predicates can only called using specific argument patterns. The valid arg
 </p>
 <pre>:- mode(member(?term, ?list), zero_or_more).</pre>
 <p>
-The first directive argument describes a valid calling mode. The minimum information will be the instantiation mode of each argument. There are four possible values (described in <a title="ISO Prolog Standard" href="../bibliography.html#ISO95">[ISO 95]</a>):
+The first directive argument describes a valid calling mode. The minimum information will be the instantiation mode of each argument. The first four possible values are described in <a title="ISO Prolog Standard" href="../bibliography.html#ISO95">[ISO 95]</a>). The remaining two can be found in use in some Prolog systems.
 </p>
 <dl>
 	<dt><code>+</code></dt>
-		<dd>Argument must be instantiated.</dd>
+		<dd>Argument must be instantiated (but not necessarily ground).</dd>
 	<dt><code>-</code></dt>
-		<dd>Argument must be a free (non-instantiated) variable.</dd>
+		<dd>Argument should be a free (non-instantiated) variable (when bound, the call will unify the returned term with the given term).</dd>
 	<dt><code>?</code></dt>
 		<dd>Argument can either be instantiated or free.</dd>
 	<dt><code>@</code></dt>
 		<dd>Argument will not be further instantiated (modified).</dd>
+	<dt><code>++</code></dt>
+		<dd>Argument must be ground.</dd>
+	<dt><code>--</code></dt>
+		<dd>Argument must be unbound.</dd>
 </dl>
 <p>
 These four mode atoms are also declared as prefix operators by the Logtalk compiler. This makes it possible to include type information for each argument like in the example above. Some of the possible type values are: <code>event</code>, <code>object</code>, <code>category</code>, <code>protocol</code>, <code>callable</code>, <code>term</code>, <code>nonvar</code>, <code>var</code>, <code>atomic</code>, <code>atom</code>, <code>number</code>, <code>integer</code>, <code>float</code>, <code>compound</code>, and <code>list</code>. The first four are Logtalk specific. The remaining are common Prolog types. We can also use our own types that can be either atoms or ground compound terms.
@@ -1041,7 +1045,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 11, 2016</span>
+		<span>Last updated on: August 3, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

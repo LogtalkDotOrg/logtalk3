@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for `++` (ground) and `--` (unbound) argument instantiation
+modes for use with the `mode/2` predicate directive.
+
 * IMPROVED: Detect attempts to call existentially quantified goals outside the
 scope of `bagof/3` and `setof/3` calls.
 

@@ -52,6 +52,10 @@
 :- op(200, fy, (@)).
 % output argument (not instantiated); ISO Prolog standard operator
 :- op(200, fy, (-)).
+% ground argument
+:- op(200, fy, ++).
+% unbound argument (typically when returning an opaque term)
+:- op(200, fy, --).
 
 
 % bitwise left-shift operator (used for context-switching calls)
@@ -2876,7 +2880,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc5)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc6)).
 
 
 
@@ -17489,6 +17493,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % not modified argument (i.e. not further instantiated) by the predicate call
 '$lgt_valid_mode_template_arg'((@)).
 '$lgt_valid_mode_template_arg'('@'(_)).
+% ground argument
+'$lgt_valid_mode_template_arg'((++)).
+'$lgt_valid_mode_template_arg'('++'(_)).
+% unbound argument
+'$lgt_valid_mode_template_arg'((--)).
+'$lgt_valid_mode_template_arg'('--'(_)).
 
 
 
