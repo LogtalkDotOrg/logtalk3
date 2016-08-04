@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/08/03,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -40,7 +40,7 @@
 
 	succeeds(iso_op_3_02) :-
 		{op(30, xfy, ++), op(0, xfy, ++)},
-		{\+ current_op(_, _, ++)}.
+		{\+ current_op(_, xfy, ++)}.
 
 	throws(iso_op_3_03, error(type_error(integer,max),_)) :-
 		{op(max, xfy, ++)}.
