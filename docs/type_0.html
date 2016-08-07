@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="type/1" class="code">type/1</h3>
           <blockquote>
-            <p class="comment">Table of defined types. New types can be registered by defining clauses for this predicate.</p>
+            <p class="comment">Table of defined types. A new type can be registered by defining a clause for this predicate.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -105,7 +105,7 @@
         <div class="section">
           <h3 id="check/2" class="code">check/2</h3>
           <blockquote>
-            <p class="comment">True if the given term is of the specified term. Throws an error otherwise. Checking of new types can be added by defining clauses for this predicate.</p>
+            <p class="comment">True if the given term is of the specified term. Throws an error otherwise. Checking of a new type can be added by defining a clause for this predicate.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -174,12 +174,16 @@
           <dd class="text">The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.</dd>
         </dl>
         <dl class="remarks">
+          <dt class="comment">boolean</dt>
+          <dd class="text">The two value of this type are the atoms true and false.</dd>
+        </dl>
+        <dl class="remarks">
           <dt class="comment">character_code</dt>
           <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">member(List)</dt>
-          <dd class="text">Uses equality to test if the given term is a member of the list.</dd>
+          <dt class="comment">one_of(Type, Set)</dt>
+          <dd class="text">For checking if a given term is a member of a set of elements of the a given type. The set is represented using a list.</dd>
         </dl>
       </div>
     </div>

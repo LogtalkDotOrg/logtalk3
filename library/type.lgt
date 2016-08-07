@@ -33,8 +33,9 @@
 			'Compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}',
 			'Other types' - '{member(Type), var_or(Type)}',
 			'between(Type, Lower, Upper)' - 'The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.',
+			'boolean' - 'The two value of this type are the atoms true and false.',
 			'character_code' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'member(List)' - 'Uses equality to test if the given term is a member of the list.'
+			'one_of(Type, Set)' - 'For checking if a given term is a member of a set of elements of the a given type. The set is represented using a list.'
 		]
 	]).
 
@@ -46,7 +47,7 @@
 	:- endif.
 	:- mode(type(?nonvar), zero_or_more).
 	:- info(type/1, [
-		comment is 'Table of defined types. New types can be registered by defining clauses for this predicate.',
+		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate.',
 		argnames is ['Type']
 	]).
 
@@ -72,7 +73,7 @@
 	:- endif.
 	:- mode(check(+atom, @term), one).
 	:- info(check/2, [
-		comment is 'True if the given term is of the specified term. Throws an error otherwise. Checking of new types can be added by defining clauses for this predicate.',
+		comment is 'True if the given term is of the specified term. Throws an error otherwise. Checking of a new type can be added by defining a clause for this predicate.',
 		argnames is ['Type', 'Term']
 	]).
 
@@ -131,7 +132,7 @@
 	type(acyclic).
 	type(between(_Type, _Lower, _Upper)).
 	% other types
-	type(member(_List)).
+	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
 
 	valid(Type, Term) :-
@@ -531,10 +532,11 @@
 		;	throw(type_error(between(Type, Lower, Upper), Term))
 		).
 
-	check(member(List), Term) :-
-		(	member_equal(Term, List) ->
-			true
-		;	throw(type_error(member(List), Term))
+	check(one_of(Type, Set), Term) :-
+		check(Type, Term),
+		(	\+ member(Term, Set) ->
+			throw(domain_error(one_of(Type, Set), Term))
+		;	true
 		).
 
 	check(var_or(Type), Term) :-
@@ -573,9 +575,8 @@
 		check(Type, Term),
 		is_list_of_type(Terms, Type).
 
-	member_equal(V, [H| _]) :-
-		V == H.
-	member_equal(V, [_| T]) :-
-		member_equal(V, T).
+	member(Head, [Head| _]).
+	member(Head, [_| Tail]) :-
+		member(Head, Tail).
 
 :- end_object.
