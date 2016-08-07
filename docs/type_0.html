@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>type</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">type</h1>
+      <blockquote>
+        <p class="comment">Type checking predicates. New types can be supported by defining clauses for the type/1 and check/2 multifile predicates.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2016/8/7</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 id="type/1" class="code">type/1</h3>
+          <blockquote>
+            <p class="comment">Table of defined types. New types can be registered by defining clauses for this predicate.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static, multifile</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>type(Type)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>type(?nonvar) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="valid/2" class="code">valid/2</h3>
+          <blockquote>
+            <p class="comment">True if the given term is of the specified term. Fails otherwise.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>valid(Type,Term)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>valid(+atom,@term) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check/3" class="code">check/3</h3>
+          <blockquote>
+            <p class="comment">True if the given term is of the specified term. Throws an error otherwise using the format error(Error, Context).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check(Type,Term,Context)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check(+atom,@term,@term) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check/2" class="code">check/2</h3>
+          <blockquote>
+            <p class="comment">True if the given term is of the specified term. Throws an error otherwise. Checking of new types can be added by defining clauses for this predicate.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static, multifile</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check(Type,Term)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check(+atom,@term) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <dl class="remarks">
+          <dt class="comment">Logtalk specific types</dt>
+          <dd class="text">{entity, object, protocol, category, module, entity_identifier, object_identifier, protocol_identifier, category_identifier, module_identifier, event}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Base types from Prolog</dt>
+          <dd class="text">{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Atom derived types</dt>
+          <dd class="text">{boolean, character}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Number derived types</dt>
+          <dd class="text">{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Compound derived types</dt>
+          <dd class="text">{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Other types</dt>
+          <dd class="text">{member(Type), var_or(Type)}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">between(Type, Lower, Upper)</dt>
+          <dd class="text">The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">character_code</dt>
+          <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">member(List)</dt>
+          <dd class="text">Uses equality to test if the given term is a member of the list.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="see_also">
+      <h2>See also</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

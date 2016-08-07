@@ -25,6 +25,7 @@
 		atomic,
 		atom,
 		number, float, integer,
-		compound, listp, list
+		compound, listp, list,
+		type
 	], [optimize(on)])
 ).

@@ -26,6 +26,9 @@ These objects implement predicates over standard Prolog term types and
 also term representing common data structures such as lists, difference
 lists, binary trees, queues, heaps, dictionaries, and sets.
 
+It also includes a user-extensible `type` object defining type checking
+predicates over common Logtalk and Prolog term types.
+
 In case your code only requires the basic types, you can load in
 alternative the `basic_types_loader.lgt` utility file:
 

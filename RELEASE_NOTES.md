@@ -62,6 +62,12 @@ Documentation
 * IMPROVED: The glossary is now included in the PDF version of the Reference
 Manual.
 
+Library
+-------
+
+* ADDED: A user-extensible `type` object defining type checking predicates
+over common Logtalk and Prolog types.
+
 Tools
 -----
 

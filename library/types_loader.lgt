@@ -36,6 +36,7 @@
 		dictionaryp, bintree, rbtree,
 		setp, set, set1,
 		heapp, heaps,
-		comparingp
+		comparingp,
+		type
 	], [optimize(on)])
 ).
