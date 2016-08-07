@@ -36,7 +36,7 @@
 			'between(Type, Lower, Upper) type notes' - 'The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression and it is evaluated by calling call(LambdaExpression, Term). Term is the term being checked. Expression is typically an arithmetic or term comparison expression that defines an interval.',
+			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is typically an arithmetic or term comparison expression that defines an interval.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is a member of a set of elements of a given type. The set is represented using a list.'
 		]
 	]).
@@ -544,11 +544,11 @@
 		;	throw(domain_error(between(Type, Lower, Upper), Term))
 		).
 
-	check(interval(Type, LambdaExpression), Term) :-
+	check(interval(Type, [Term]>>Closure), Term) :-
 		check(Type, Term),
-		(	{call(LambdaExpression, Term)} ->
+		(	{call(Closure)} ->
 			true
-		;	throw(domain_error(interval(Type, LambdaExpression), Term))
+		;	throw(domain_error(interval(Type, [Term]>>Closure), Term))
 		).
 
 	check(one_of(Type, Set), Term) :-
