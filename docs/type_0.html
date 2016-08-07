@@ -162,28 +162,32 @@
           <dd class="text">{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Compound derived types</dt>
-          <dd class="text">{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}</dd>
+          <dt class="comment">List types (compound derived types)</dt>
+          <dd class="text">{list, partial_list, list_or_partial_list, list(Type)}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Other compound derived types</dt>
+          <dd class="text">{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, partial_list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Other types</dt>
-          <dd class="text">{member(Type), var_or(Type)}</dd>
+          <dd class="text">{one_of(Type, Set), var_or(Type)}</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">between(Type, Lower, Upper)</dt>
+          <dt class="comment">between(Type, Lower, Upper) type notes</dt>
           <dd class="text">The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">boolean</dt>
+          <dt class="comment">boolean type notes</dt>
           <dd class="text">The two value of this type are the atoms true and false.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">character_code</dt>
+          <dt class="comment">character_code type notes</dt>
           <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">one_of(Type, Set)</dt>
-          <dd class="text">For checking if a given term is a member of a set of elements of the a given type. The set is represented using a list.</dd>
+          <dt class="comment">one_of(Type, Set) type notes</dt>
+          <dd class="text">For checking if a given term is a member of a set of elements of a given type. The set is represented using a list.</dd>
         </dl>
       </div>
     </div>

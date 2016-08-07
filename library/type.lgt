@@ -30,12 +30,13 @@
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
 			'Atom derived types' - '{boolean, character}',
 			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
-			'Compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}',
-			'Other types' - '{member(Type), var_or(Type)}',
-			'between(Type, Lower, Upper)' - 'The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.',
-			'boolean' - 'The two value of this type are the atoms true and false.',
-			'character_code' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'one_of(Type, Set)' - 'For checking if a given term is a member of a set of elements of the a given type. The set is represented using a list.'
+			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
+			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, partial_list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}',
+			'Other types' - '{one_of(Type, Set), var_or(Type)}',
+			'between(Type, Lower, Upper) type notes' - 'The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.',
+			'boolean type notes' - 'The two value of this type are the atoms true and false.',
+			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
+			'one_of(Type, Set) type notes' - 'For checking if a given term is a member of a set of elements of a given type. The set is represented using a list.'
 		]
 	]).
 
@@ -124,6 +125,7 @@
 	type(clause).
 	type(clause_or_partial_clause).
 	type(list).
+	type(partial_list).
 	type(list_or_partial_list).
 	type(list(_Type)).
 	type(pair).
@@ -473,6 +475,14 @@
 		;	throw(type_error(list, Term))
 		).
 
+	check(partial_list, Term) :-
+		(	var(Term) ->
+			true
+		;	is_partial_list(Term) ->
+			true
+		;	throw(type_error(partial_list, Term))
+		).
+
 	check(list_or_partial_list, Term) :-
 		(	var(Term) ->
 			true
@@ -545,7 +555,8 @@
 		;	check(Type, Term)
 		).
 
-	% auxiliary predicates
+	% auxiliary predicates; we could use the Logtalk standard library
+	% for some of them but we prefer to avoid any object dependencies
 
 	code_upper_limit(Upper) :-
 		current_logtalk_flag(unicode, Unicode),
@@ -562,6 +573,12 @@
 	is_list([]).
 	is_list([_| Tail]) :-
 		is_list(Tail).	
+
+	is_partial_list(Var) :-
+		var(Var),
+		!.
+	is_partial_list([_| Tail]) :-
+		is_partial_list(Tail).
 
 	is_list_or_partial_list(Var) :-
 		var(Var),
