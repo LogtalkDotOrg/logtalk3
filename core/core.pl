@@ -680,7 +680,7 @@ Obj<<Goal :-
 % current_object(?object_identifier)
 
 current_object(Obj) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(current_object(Obj), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_object(Obj), _)),
 	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _).
 
 
@@ -688,7 +688,7 @@ current_object(Obj) :-
 % current_protocol(?protocol_identifier)
 
 current_protocol(Ptc) :-
-	'$lgt_must_be'(var_or_protocol_identifier, Ptc, logtalk(current_protocol(Ptc), _)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(current_protocol(Ptc), _)),
 	'$lgt_current_protocol_'(Ptc, _, _, _, _).
 
 
@@ -696,7 +696,7 @@ current_protocol(Ptc) :-
 % current_category(?category_identifier)
 
 current_category(Ctg) :-
-	'$lgt_must_be'(var_or_category_identifier, Ctg, logtalk(current_category(Ctg), _)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(current_category(Ctg), _)),
 	'$lgt_current_category_'(Ctg, _, _, _, _, _).
 
 
@@ -707,8 +707,8 @@ current_category(Ctg) :-
 % created when the predicate is called with a bound property argument
 
 object_property(Obj, Prop) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(object_property(Obj, Prop), _)),
-	'$lgt_must_be'(var_or_object_property, Prop, logtalk(object_property(Obj, Prop), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(object_property(Obj, Prop), _)),
+	'$lgt_check'(var_or_object_property, Prop, logtalk(object_property(Obj, Prop), _)),
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, DDcl, DDef, Rnm, Flags),
 	'$lgt_object_property'(Prop, Obj, Dcl, Def, DDcl, DDef, Rnm, Flags).
 
@@ -821,8 +821,8 @@ object_property(Obj, Prop) :-
 % created when the predicate is called with a bound property argument
 
 category_property(Ctg, Prop) :-
-	'$lgt_must_be'(var_or_category_identifier, Ctg, logtalk(category_property(Ctg, Prop), _)),
-	'$lgt_must_be'(var_or_category_property, Prop, logtalk(category_property(Ctg, Prop), _)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(category_property(Ctg, Prop), _)),
+	'$lgt_check'(var_or_category_property, Prop, logtalk(category_property(Ctg, Prop), _)),
 	'$lgt_current_category_'(Ctg, _, Dcl, Def, Rnm, Flags),
 	'$lgt_category_property'(Prop, Ctg, Dcl, Def, Rnm, Flags).
 
@@ -911,8 +911,8 @@ category_property(Ctg, Prop) :-
 % created when the predicate is called with a bound property argument
 
 protocol_property(Ptc, Prop) :-
-	'$lgt_must_be'(var_or_protocol_identifier, Ptc, logtalk(protocol_property(Ptc, Prop), _)),
-	'$lgt_must_be'(var_or_protocol_property, Prop, logtalk(protocol_property(Ptc, Prop), _)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(protocol_property(Ptc, Prop), _)),
+	'$lgt_check'(var_or_protocol_property, Prop, logtalk(protocol_property(Ptc, Prop), _)),
 	'$lgt_current_protocol_'(Ptc, _, Dcl, Rnm, Flags),
 	'$lgt_protocol_property'(Prop, Ptc, Dcl, Rnm, Flags).
 
@@ -1122,9 +1122,9 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	).
 
 create_object(Obj, Relations, Directives, Clauses) :-
-	'$lgt_must_be'(list, Relations, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
-	'$lgt_must_be'(list, Directives, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
-	'$lgt_must_be'(list, Clauses, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Relations, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Directives, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Clauses, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
 	catch(
 		'$lgt_create_object'(Obj, Relations, Directives, Clauses),
 		Error,
@@ -1174,9 +1174,9 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	).
 
 create_category(Ctg, Relations, Directives, Clauses) :-
-	'$lgt_must_be'(list, Relations, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
-	'$lgt_must_be'(list, Directives, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
-	'$lgt_must_be'(list, Clauses, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Relations, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Directives, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Clauses, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
 	catch(
 		'$lgt_create_category'(Ctg, Relations, Directives, Clauses),
 		Error,
@@ -1229,8 +1229,8 @@ create_protocol(Ptc, Relations, Directives) :-
 	).
 
 create_protocol(Ptc, Relations, Directives) :-
-	'$lgt_must_be'(list, Relations, logtalk(create_protocol(Ptc, Relations, Directives), _)),
-	'$lgt_must_be'(list, Directives, logtalk(create_protocol(Ptc, Relations, Directives), _)),
+	'$lgt_check'(list, Relations, logtalk(create_protocol(Ptc, Relations, Directives), _)),
+	'$lgt_check'(list, Directives, logtalk(create_protocol(Ptc, Relations, Directives), _)),
 	catch(
 		'$lgt_create_protocol'(Ptc, Relations, Directives),
 		Error,
@@ -1309,7 +1309,7 @@ create_protocol(Ptc, Relations, Directives) :-
 % abolish_object(+object_identifier)
 
 abolish_object(Obj) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(abolish_object(Obj), _)),
+	'$lgt_check'(object_identifier, Obj, logtalk(abolish_object(Obj), _)),
 	(	'$lgt_current_object_'(Obj, _, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags) ->
 		(	Flags /\ 2 =:= 2 ->
 			% dynamic object
@@ -1348,7 +1348,7 @@ abolish_object(Obj) :-
 % abolish_category(+category_identifier)
 
 abolish_category(Ctg) :-
-	'$lgt_must_be'(category_identifier, Ctg, logtalk(abolish_category(Ctg), _)),
+	'$lgt_check'(category_identifier, Ctg, logtalk(abolish_category(Ctg), _)),
 	(	'$lgt_current_category_'(Ctg, _, Dcl, Def, Rnm, Flags) ->
 		(	Flags /\ 2 =:= 2 ->
 			% dynamic category
@@ -1375,7 +1375,7 @@ abolish_category(Ctg) :-
 % abolish_protocol(@protocol_identifier)
 
 abolish_protocol(Ptc) :-
-	'$lgt_must_be'(protocol_identifier, Ptc, logtalk(abolish_protocol(Ptc), _)),
+	'$lgt_check'(protocol_identifier, Ptc, logtalk(abolish_protocol(Ptc), _)),
 	(	'$lgt_current_protocol_'(Ptc, _, Dcl, Rnm, Flags) ->
 		(	Flags /\ 2 =:= 2 ->
 			% dynamic protocol
@@ -1413,8 +1413,8 @@ abolish_protocol(Ptc) :-
 % implements_protocol(?category_identifier, ?protocol_identifier)
 
 implements_protocol(ObjOrCtg, Ptc) :-
-	'$lgt_must_be'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc), _)),
-	'$lgt_must_be'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc), _)),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc), _)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc), _)),
 	'$lgt_implements_protocol_'(ObjOrCtg, Ptc, _).
 
 
@@ -1423,9 +1423,9 @@ implements_protocol(ObjOrCtg, Ptc) :-
 % implements_protocol(?category_identifier, ?protocol_identifier, ?atom)
 
 implements_protocol(ObjOrCtg, Ptc, Scope) :-
-	'$lgt_must_be'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
-	'$lgt_must_be'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
 	'$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope).
 
 
@@ -1433,8 +1433,8 @@ implements_protocol(ObjOrCtg, Ptc, Scope) :-
 % imports_category(?object_identifier, ?category_identifier)
 
 imports_category(Obj, Ctg) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg), _)),
-	'$lgt_must_be'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg), _)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg), _)),
 	'$lgt_imports_category_'(Obj, Ctg, _).
 
 
@@ -1442,9 +1442,9 @@ imports_category(Obj, Ctg) :-
 % imports_category(?object_identifier, ?category_identifier, ?atom)
 
 imports_category(Obj, Ctg, Scope) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg, Scope), _)),
-	'$lgt_must_be'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(imports_category(Obj, Ctg, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg, Scope), _)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(imports_category(Obj, Ctg, Scope), _)),
 	'$lgt_imports_category_'(Obj, Ctg, Scope).
 
 
@@ -1452,8 +1452,8 @@ imports_category(Obj, Ctg, Scope) :-
 % instantiates_class(?object_identifier, ?object_identifier)
 
 instantiates_class(Obj, Class) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class), _)),
-	'$lgt_must_be'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class), _)),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class), _)),
 	'$lgt_instantiates_class_'(Obj, Class, _).
 
 
@@ -1461,9 +1461,9 @@ instantiates_class(Obj, Class) :-
 % instantiates_class(?object_identifier, ?object_identifier, ?atom)
 
 instantiates_class(Obj, Class, Scope) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class, Scope), _)),
-	'$lgt_must_be'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(instantiates_class(Obj, Class, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(instantiates_class(Obj, Class, Scope), _)),
 	'$lgt_instantiates_class_'(Obj, Class, Scope).
 
 
@@ -1471,8 +1471,8 @@ instantiates_class(Obj, Class, Scope) :-
 % specializes_class(?object_identifier, ?object_identifier)
 
 specializes_class(Class, Superclass) :-
-	'$lgt_must_be'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass), _)),
-	'$lgt_must_be'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass), _)),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass), _)),
+	'$lgt_check'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass), _)),
 	'$lgt_specializes_class_'(Class, Superclass, _).
 
 
@@ -1480,9 +1480,9 @@ specializes_class(Class, Superclass) :-
 % specializes_class(?object_identifier, ?object_identifier, ?atom)
 
 specializes_class(Class, Superclass, Scope) :-
-	'$lgt_must_be'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass, Scope), _)),
-	'$lgt_must_be'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(specializes_class(Class, Superclass, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(specializes_class(Class, Superclass, Scope), _)),
 	'$lgt_specializes_class_'(Class, Superclass, Scope).
 
 
@@ -1490,8 +1490,8 @@ specializes_class(Class, Superclass, Scope) :-
 % extends_category(?category_identifier, ?category_identifier)
 
 extends_category(Ctg, ExtCtg) :-
-	'$lgt_must_be'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg), _)),
-	'$lgt_must_be'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg), _)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg), _)),
+	'$lgt_check'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg), _)),
 	'$lgt_extends_category_'(Ctg, ExtCtg, _).
 
 
@@ -1499,9 +1499,9 @@ extends_category(Ctg, ExtCtg) :-
 % extends_category(?category_identifier, ?category_identifier, ?atom)
 
 extends_category(Ctg, ExtCtg, Scope) :-
-	'$lgt_must_be'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
-	'$lgt_must_be'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
+	'$lgt_check'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
 	'$lgt_extends_category_'(Ctg, ExtCtg, Scope).
 
 
@@ -1509,8 +1509,8 @@ extends_category(Ctg, ExtCtg, Scope) :-
 % extends_protocol(?protocol_identifier, ?protocol_identifier)
 
 extends_protocol(Ptc, ExtPtc) :-
-	'$lgt_must_be'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc), _)),
-	'$lgt_must_be'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc), _)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc), _)),
+	'$lgt_check'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc), _)),
 	'$lgt_extends_protocol_'(Ptc, ExtPtc, _).
 
 
@@ -1518,9 +1518,9 @@ extends_protocol(Ptc, ExtPtc) :-
 % extends_protocol(?protocol_identifier, ?protocol_identifier, ?atom)
 
 extends_protocol(Ptc, ExtPtc, Scope) :-
-	'$lgt_must_be'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
-	'$lgt_must_be'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
+	'$lgt_check'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
 	'$lgt_extends_protocol_'(Ptc, ExtPtc, Scope).
 
 
@@ -1528,8 +1528,8 @@ extends_protocol(Ptc, ExtPtc, Scope) :-
 % extends_object(?object_identifier, ?object_identifier)
 
 extends_object(Prototype, Parent) :-
-	'$lgt_must_be'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent), _)),
-	'$lgt_must_be'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent), _)),
+	'$lgt_check'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent), _)),
+	'$lgt_check'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent), _)),
 	'$lgt_extends_object_'(Prototype, Parent, _).
 
 
@@ -1537,9 +1537,9 @@ extends_object(Prototype, Parent) :-
 % extends_object(?object_identifier, ?object_identifier, ?atom)
 
 extends_object(Prototype, Parent, Scope) :-
-	'$lgt_must_be'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent, Scope), _)),
-	'$lgt_must_be'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(extends_object(Prototype, Parent, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(extends_object(Prototype, Parent, Scope), _)),
 	'$lgt_extends_object_'(Prototype, Parent, Scope).
 
 
@@ -1547,8 +1547,8 @@ extends_object(Prototype, Parent, Scope) :-
 % complements_object(?category_identifier, ?object_identifier)
 
 complements_object(Category, Object) :-
-	'$lgt_must_be'(var_or_category_identifier, Category, logtalk(complements_object(Category, Object), _)),
-	'$lgt_must_be'(var_or_object_identifier, Object, logtalk(complements_object(Category, Object), _)),
+	'$lgt_check'(var_or_category_identifier, Category, logtalk(complements_object(Category, Object), _)),
+	'$lgt_check'(var_or_object_identifier, Object, logtalk(complements_object(Category, Object), _)),
 	'$lgt_complemented_object_'(Object, Category, _, _, _).
 
 
@@ -1557,8 +1557,8 @@ complements_object(Category, Object) :-
 % conforms_to_protocol(?category_identifier, ?protocol_identifier)
 
 conforms_to_protocol(ObjOrCtg, Protocol) :-
-	'$lgt_must_be'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
-	'$lgt_must_be'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
+	'$lgt_check'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
 	(	var(ObjOrCtg) ->
 		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _)
 	;	var(Protocol) ->
@@ -1574,9 +1574,9 @@ conforms_to_protocol(ObjOrCtg, Protocol) :-
 % conforms_to_protocol(?category_identifier, ?protocol_identifier, ?atom)
 
 conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
-	'$lgt_must_be'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
-	'$lgt_must_be'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
-	'$lgt_must_be'(var_or_scope, Scope, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
+	'$lgt_check'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
 	(	var(ObjOrCtg) ->
 		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, Scope)
 	;	var(Protocol) ->
@@ -1687,11 +1687,11 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 % current_event(?term, ?term, ?term, ?term, ?object_identifier)
 
 current_event(Event, Obj, Msg, Sender, Monitor) :-
-	'$lgt_must_be'(var_or_event, Event, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_callable, Msg, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Sender, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Monitor, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_event, Event, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_callable, Msg, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Sender, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
 	(	var(Event) ->
 		(	'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)
 		;	'$lgt_after_event_'(Obj, Msg, Sender, Monitor, _)
@@ -1707,11 +1707,11 @@ current_event(Event, Obj, Msg, Sender, Monitor) :-
 % define_events(@term, @term, @term, @term, +object_identifier)
 
 define_events(Event, Obj, Msg, Sender, Monitor) :-
-	'$lgt_must_be'(var_or_event, Event, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_callable, Msg, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Sender, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(object_identifier, Monitor, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_event, Event, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_callable, Msg, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Sender, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(object_identifier, Monitor, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
 	(	'$lgt_current_object_'(Monitor, _, _, Def, _, _, _, _, _, _, _) ->
 		'$lgt_execution_context'(ExCtx, _, Monitor, Monitor, Monitor, [], []),
 		(	var(Event) ->
@@ -1745,11 +1745,11 @@ define_events(Event, Obj, Msg, Sender, Monitor) :-
 % abolish_events(@term, @term, @term, @term, @term)
 
 abolish_events(Event, Obj, Msg, Sender, Monitor) :-
-	'$lgt_must_be'(var_or_event, Event, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Obj, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_callable, Msg, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Sender, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_must_be'(var_or_object_identifier, Monitor, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_event, Event, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_callable, Msg, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Sender, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
 	(	var(Event) ->
 		retractall('$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)),
 		retractall('$lgt_after_event_'(Obj, Msg, Sender, Monitor, _))
@@ -1771,7 +1771,7 @@ threaded(Goals) :-
 	throw(error(resource_error(threads), logtalk(threaded(Goals), user))).
 
 threaded(Goals) :-
-	'$lgt_must_be'(callable, Goals, logtalk(threaded(Goals), _)),
+	'$lgt_check'(callable, Goals, logtalk(threaded(Goals), _)),
 	'$lgt_compile_threaded_call'(Goals, MTGoals),
 	catch(MTGoals, Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1783,8 +1783,8 @@ threaded_call(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_call(Goal, Tag), user))).
 
 threaded_call(Goal, Tag) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal, Tag), _)),
-	'$lgt_must_be'(var, Tag, logtalk(threaded_call(Goal, Tag), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_call(Goal, Tag), _)),
+	'$lgt_check'(var, Tag, logtalk(threaded_call(Goal, Tag), _)),
 	catch('$lgt_threaded_call_tagged'(Goal, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1795,7 +1795,7 @@ threaded_call(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_call(Goal), user))).
 
 threaded_call(Goal) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_call(Goal), _)),
 	catch('$lgt_threaded_call'(Goal, Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1806,8 +1806,8 @@ threaded_once(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_once(Goal, Tag), user))).
 
 threaded_once(Goal, Tag) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal, Tag), _)),
-	'$lgt_must_be'(var, Tag, logtalk(threaded_once(Goal, Tag), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_once(Goal, Tag), _)),
+	'$lgt_check'(var, Tag, logtalk(threaded_once(Goal, Tag), _)),
 	catch('$lgt_threaded_once_tagged'(Goal, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1818,7 +1818,7 @@ threaded_once(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_once(Goal), user))).
 
 threaded_once(Goal) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_once(Goal), _)),
 	catch('$lgt_threaded_once'(Goal, Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1839,8 +1839,8 @@ threaded_exit(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_exit(Goal, Tag), user))).
 
 threaded_exit(Goal, Tag) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_exit(Goal, Tag), _)),
-	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_exit(Goal, Tag), _)),
+	'$lgt_check'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), _)),
 	catch('$lgt_threaded_exit_tagged'(Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1851,7 +1851,7 @@ threaded_exit(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_exit(Goal), user))).
 
 threaded_exit(Goal) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_exit(Goal), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_exit(Goal), _)),
 	catch('$lgt_threaded_exit'(Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1862,8 +1862,8 @@ threaded_peek(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_peek(Goal, Tag), user))).
 
 threaded_peek(Goal, Tag) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_peek(Goal, Tag), _)),
-	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_peek(Goal, Tag), _)),
+	'$lgt_check'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), _)),
 	catch('$lgt_threaded_peek_tagged'(Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1874,7 +1874,7 @@ threaded_peek(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_peek(Goal), user))).
 
 threaded_peek(Goal) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_peek(Goal), _)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_peek(Goal), _)),
 	catch('$lgt_threaded_peek'(Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2216,8 +2216,8 @@ logtalk_compile(Files, Flags) :-
 	(	var(Flag) ->
 		throw(error(instantiation_error, _))
 	;	Flag =.. [Name, Value] ->
-		'$lgt_must_be'(read_write_flag, Name, _),
-		'$lgt_must_be'(flag_value, Name+Value, _)
+		'$lgt_check'(read_write_flag, Name, _),
+		'$lgt_check'(flag_value, Name+Value, _)
 	;	compound(Flag) ->
 		throw(error(domain_error(compiler_flag, Flag), _))
 	;	throw(error(type_error(compound, Flag), _))
@@ -2750,8 +2750,8 @@ logtalk_load_context(stream, Stream) :-
 % the logtalk_compile/2 and logtalk_load/2 predicates
 
 set_logtalk_flag(Flag, Value) :-
-	'$lgt_must_be'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), _)),
-	'$lgt_must_be'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_check'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_check'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), _)),
 	'$lgt_set_compiler_flag'(Flag, Value).
 
 
@@ -2780,7 +2780,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compiler_flag'(Flag, Value)
 	;	'$lgt_user_defined_flag_'(Flag, _, _) ->
 		'$lgt_compiler_flag'(Flag, Value)
-	;	'$lgt_must_be'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _))
+	;	'$lgt_check'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _))
 	).
 
 
@@ -2793,10 +2793,10 @@ current_logtalk_flag(Flag, Value) :-
 % built-in predicate of SWI-Prolog
 
 create_logtalk_flag(Flag, Value, Options) :-
-	'$lgt_must_be'(atom, Flag, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
-	'$lgt_must_be'(ground, Value, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
-	'$lgt_must_be'(ground, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
-	'$lgt_must_be'(list, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_check'(atom, Flag, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_check'(ground, Value, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_check'(ground, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_check'(list, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
 	fail.
 
 create_logtalk_flag(Flag, Value, Options) :-
@@ -2917,10 +2917,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % local operator declarations without a scope declaration are invisible
 
 '$lgt_current_op'(Obj, Priority, Specifier, Operator, Sender, Scope) :-
-	'$lgt_must_be'(object, Obj, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	'$lgt_must_be'(var_or_operator_priority, Priority, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	'$lgt_must_be'(var_or_operator_specifier, Specifier, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	'$lgt_must_be'(var_or_atom, Operator, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_check'(object, Obj, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_check'(var_or_operator_priority, Priority, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_check'(var_or_operator_specifier, Specifier, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_check'(var_or_atom, Operator, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
 	(	Obj == user ->
 		current_op(Priority, Specifier, Operator)
 	;	'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, OpScope)),
@@ -2945,8 +2945,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % local predicates without a scope declaration are invisible
 
 '$lgt_current_predicate'(Obj, Pred, Sender, _) :-
-	'$lgt_must_be'(var_or_predicate_indicator, Pred, logtalk(Obj::current_predicate(Pred), Sender)),
-	'$lgt_must_be'(object, Obj, logtalk(Obj::current_predicate(Pred), Sender)),
+	'$lgt_check'(var_or_predicate_indicator, Pred, logtalk(Obj::current_predicate(Pred), Sender)),
+	'$lgt_check'(object, Obj, logtalk(Obj::current_predicate(Pred), Sender)),
 	fail.
 
 '$lgt_current_predicate'(user, Pred, _, _) :-
@@ -3000,9 +3000,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the method is called with a bound and deterministic property argument
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, _) :-
-	'$lgt_must_be'(callable, Pred, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
-	'$lgt_must_be'(var_or_predicate_property, Prop, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
-	'$lgt_must_be'(object, Obj, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
+	'$lgt_check'(callable, Pred, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
+	'$lgt_check'(var_or_predicate_property, Prop, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
+	'$lgt_check'(object, Obj, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
 	fail.
 
 '$lgt_predicate_property'(user, Pred, Prop, _, _) :-
@@ -3342,8 +3342,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % abolish/1 built-in method
 
 '$lgt_abolish'(Obj, Pred, Sender, TestScope) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::abolish(Pred), Sender)),
-	'$lgt_must_be'(predicate_indicator, Pred, logtalk(Obj::abolish(Pred), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::abolish(Pred), Sender)),
+	'$lgt_check'(predicate_indicator, Pred, logtalk(Obj::abolish(Pred), Sender)),
 	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope).
 
 '$lgt_abolish_checked'(user, Functor/Arity, _, _) :-
@@ -3418,8 +3418,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	asserta(TClause).
 
 '$lgt_asserta'(Obj, Clause, Sender, TestScope, DclScope) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::asserta(Clause), Sender)),
-	'$lgt_must_be'(clause, Clause, logtalk(Obj::asserta(Clause), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::asserta(Clause), Sender)),
+	'$lgt_check'(clause, Clause, logtalk(Obj::asserta(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
 			'$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope)
@@ -3512,8 +3512,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz(TClause).
 
 '$lgt_assertz'(Obj, Clause, Sender, TestScope, DclScope) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::assertz(Clause), Sender)),
-	'$lgt_must_be'(clause, Clause, logtalk(Obj::assertz(Clause), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::assertz(Clause), Sender)),
+	'$lgt_check'(clause, Clause, logtalk(Obj::assertz(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
 			'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope)
@@ -3656,8 +3656,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % clause/2 built-in method
 
 '$lgt_clause'(Obj, Head, Body, Sender, TestScope) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::clause(Head, Body), Sender)),
-	'$lgt_must_be'(clause_or_partial_clause, (Head:-Body), logtalk(Obj::clause(Head, Body), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::clause(Head, Body), Sender)),
+	'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(Obj::clause(Head, Body), Sender)),
 	'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope).
 
 
@@ -3741,8 +3741,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_update_ddef_table_opt'(UClause).
 
 '$lgt_retract'(Obj, Clause, Sender, TestScope) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::retract(Clause), Sender)),
-	'$lgt_must_be'(clause_or_partial_clause, Clause, logtalk(Obj::retract(Clause), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retract(Clause), Sender)),
+	'$lgt_check'(clause_or_partial_clause, Clause, logtalk(Obj::retract(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	var(Body) ->
 			'$lgt_retract_var_body_checked'(Obj, Clause, Sender, TestScope)
@@ -3931,8 +3931,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_update_ddef_table_opt'(UClause).
 
 '$lgt_retractall'(Obj, Head, Sender, TestScope) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::retractall(Head), Sender)),
-	'$lgt_must_be'(callable, Head, logtalk(Obj::retractall(Head), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retractall(Head), Sender)),
+	'$lgt_check'(callable, Head, logtalk(Obj::retractall(Head), Sender)),
 	'$lgt_retractall_checked'(Obj, Head, Sender, TestScope).
 
 
@@ -4066,7 +4066,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_phrase'(GRBody, Input, ExCtx) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
-	'$lgt_must_be'(callable, GRBody, logtalk(phrase(GRBody, Input), Entity)),
+	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input), Entity)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
 	catch('$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx), Error, throw(error(Error, logtalk(phrase(GRBody, Input), Entity)))),
@@ -4086,7 +4086,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_phrase'(GRBody, Input, Rest, ExCtx) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
-	'$lgt_must_be'(callable, GRBody, logtalk(phrase(GRBody, Input, Rest), Entity)),
+	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input, Rest), Entity)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
 	catch('$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx), Error, throw(error(Error, logtalk(phrase(GRBody, Input, Rest), Entity)))),
@@ -4410,7 +4410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_send_to_self'(Pred, Sender, Ctx) :-
 	% we must ensure that the argument is valid before compiling the message
 	% sending goal otherwise there would be a potential for an endless loop
-	'$lgt_must_be'(callable, Pred, logtalk(::Pred, Sender)),
+	'$lgt_check'(callable, Pred, logtalk(::Pred, Sender)),
 	catch('$lgt_compile_message_to_self'(Pred, TPred, Ctx), Error, throw(error(Error, logtalk(::Pred, Sender)))),
 	call(TPred).
 
@@ -4484,7 +4484,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% message sending goal otherwise an endless loop would result
 	'$lgt_comp_ctx_this'(Ctx, Sender),
 	% avoid an endless loop if the message is not a callable term
-	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
+	'$lgt_check'(callable, Pred, logtalk(Obj::Pred, Sender)),
 	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
 	call(TPred).
 
@@ -4497,7 +4497,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_send_to_obj'(Obj, Pred, SenderExCtx) :-
 	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
 	'$lgt_send_to_obj_'(Obj, Pred, SenderExCtx).
 
 
@@ -4632,7 +4632,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_send_to_obj_ne'(Obj, Pred, SenderExCtx) :-
 	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
 	'$lgt_send_to_obj_ne_'(Obj, Pred, SenderExCtx).
 
 
@@ -4741,7 +4741,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_obj_super_call'(Super, Pred, ExCtx) :-
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	'$lgt_must_be'(callable, Pred, logtalk(^^Pred, This)),
+	'$lgt_check'(callable, Pred, logtalk(^^Pred, This)),
 	'$lgt_obj_super_call_'(Super, Pred, ExCtx).
 
 
@@ -4814,7 +4814,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % is not known at compile time
 
 '$lgt_ctg_super_call'(Ctg, Pred, ExCtx) :-
-	'$lgt_must_be'(callable, Pred, logtalk(^^Pred, Ctg)),
+	'$lgt_check'(callable, Pred, logtalk(^^Pred, Ctg)),
 	'$lgt_ctg_super_call_'(Ctg, Pred, ExCtx).
 
 
@@ -5102,7 +5102,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_metacall'(Free/Lambda, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Lambda, This)),
+	'$lgt_check'(curly_bracketed_term, Free, logtalk(Free/Lambda, This)),
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
 	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Lambda, MetaCallCtx),
 	'$lgt_copy_term_without_constraints'(Free/Lambda+MetaCallCtx, Free/LambdaCopy+MetaCallCtxCopy),
@@ -5111,7 +5111,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_metacall'(Free/Parameters>>Lambda, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Lambda, This)),
+	'$lgt_check'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Lambda, This)),
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
 	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Parameters>>Lambda, MetaCallCtx),
 	'$lgt_copy_term_without_constraints'(Free/Parameters>>Lambda+MetaCallCtx, Free/ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
@@ -5356,8 +5356,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % flag "context_switching_calls"
 
 '$lgt_call_within_context'(Obj, Goal, This) :-
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj<<Goal, This)),
-	'$lgt_must_be'(callable, Goal, logtalk(Obj<<Goal, This)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj<<Goal, This)),
+	'$lgt_check'(callable, Goal, logtalk(Obj<<Goal, This)),
 	'$lgt_compile_context_switch_call'(Obj, Goal, TGoal, This),
 	call(TGoal).
 
@@ -7081,7 +7081,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	% the following check means that an expanded goal is checked twice but that
 	% allows us to distinguish between user errors and goal-expansion errors
-	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)).
+	'$lgt_check'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)).
 
 
 '$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
@@ -7102,7 +7102,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles a list of file terms (clauses, directives, or grammar rules)
 
 '$lgt_compile_file_terms'([Term| Terms], Ctx) :-
-	'$lgt_must_be'(nonvar, Term, term(Term)),
+	'$lgt_check'(nonvar, Term, term(Term)),
 	% only the compilation context mode and position should be shared between different terms
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
@@ -7330,9 +7330,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_directive'(if(Goal), Ctx) :-
 	(	Goal = {UserGoal} ->
 		% final goal
-		'$lgt_must_be'(callable, UserGoal, directive(if(Goal))),
+		'$lgt_check'(callable, UserGoal, directive(if(Goal))),
 		fail
-	;	'$lgt_must_be'(callable, Goal, directive(if(Goal))),
+	;	'$lgt_check'(callable, Goal, directive(if(Goal))),
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
@@ -7389,9 +7389,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_directive'(elif(Goal), Ctx) :-
 	(	Goal = {UserGoal} ->
 		% final goal
-		'$lgt_must_be'(callable, UserGoal, directive(elif(Goal))),
+		'$lgt_check'(callable, UserGoal, directive(elif(Goal))),
 		fail
-	;	'$lgt_must_be'(callable, Goal, directive(elif(Goal))),
+	;	'$lgt_check'(callable, Goal, directive(elif(Goal))),
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
@@ -7578,7 +7578,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(ensure_loaded(File), Ctx) :-
 	!,
 	% perform basic error checking
-	'$lgt_must_be'(ground, File),
+	'$lgt_check'(ground, File),
 	% assume that ensure_loaded/1 is also a built-in predicate
 	ensure_loaded(File),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
@@ -7587,7 +7587,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(use_module(File), Ctx) :-
 	!,
 	% perform basic error checking
-	'$lgt_must_be'(ground, File),
+	'$lgt_check'(ground, File),
 	% assume that use_module/1 is also a built-in predicate
 	use_module(File),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
@@ -7596,8 +7596,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(use_module(File, Imports), Ctx) :-
 	!,
 	% perform basic error checking
-	'$lgt_must_be'(ground, File),
-	'$lgt_must_be'(ground, Imports),
+	'$lgt_check'(ground, File),
+	'$lgt_check'(ground, Imports),
 	% assume that use_module/2 is also a built-in predicate
 	use_module(File, Imports),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
@@ -7614,12 +7614,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	!,
 	% perform basic error checking
-	'$lgt_must_be'(callable, Goal),
+	'$lgt_check'(callable, Goal),
 	% initialization directives are collected and moved to the end of file
 	% to minimize compatibility issues with backend Prolog compilers
 	(	Goal = {UserGoal} ->
 		% final goal
-		'$lgt_must_be'(callable, UserGoal),
+		'$lgt_check'(callable, UserGoal),
 		assertz('$lgt_pp_file_initialization_'(Goal))
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		% goals are only expanded when compiling a source file
@@ -7631,15 +7631,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_directive'(op(Priority, Specifier, Operators), Ctx) :-
 	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_file_operators'(Priority, Specifier, Operators),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), nil, Lines)).
 
 '$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), Ctx) :-
 	!,
-	'$lgt_must_be'(read_write_flag, Name),
-	'$lgt_must_be'(flag_value, Name+Value),
+	'$lgt_check'(read_write_flag, Name),
+	'$lgt_check'(flag_value, Name+Value),
 	% local scope (restricted to the source file being compiled)
 	Flag =.. [Name, Value],
 	'$lgt_set_compiler_flags'([Flag]),
@@ -7650,7 +7650,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% perform basic error and portability checking
 	'$lgt_compile_body'(set_prolog_flag(Flag, Value), _, _, _),
 	% require a nonvar value
-	'$lgt_must_be'(nonvar, Value),
+	'$lgt_check'(nonvar, Value),
 	% setting the flag during compilation may or may not work as expected
 	% depending on the flag and on the back-end Prolog compiler
 	set_prolog_flag(Flag, Value),
@@ -7702,17 +7702,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% Logtalk entity predicates must be defined within an entity but be
 	% sure there aren't instantiation or type errors in the directive
 	!,
-	'$lgt_must_be'(object_identifier, Obj),
-	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred),
+	'$lgt_check'(object_identifier, Obj),
+	'$lgt_check'(predicate_or_non_terminal_indicator, Pred),
 	throw(permission_error(declare, Property, Obj::Pred)).
 
 '$lgt_check_file_predicate_directive_argument'(':'(Module,Pred), _) :-
 	!,
-	'$lgt_must_be'(module_identifier, Module),
-	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred).
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_check'(predicate_or_non_terminal_indicator, Pred).
 
 '$lgt_check_file_predicate_directive_argument'(Pred, _) :-
-	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred).
+	'$lgt_check'(predicate_or_non_terminal_indicator, Pred).
 
 
 
@@ -7926,8 +7926,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_logtalk_directive'(module(Module, []), Ctx).
 
 '$lgt_compile_logtalk_directive'(module(Module, Exports), Ctx) :-
-	'$lgt_must_be'(module_identifier, Module),
-	'$lgt_must_be'(list, Exports),
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_check'(list, Exports),
 	% remember we are compiling a module
 	assertz('$lgt_pp_module_'(Module)),
 	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
@@ -7938,8 +7938,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % set_logtalk_flag/2 entity directive
 
 '$lgt_compile_logtalk_directive'(set_logtalk_flag(Flag, Value), Ctx) :-
-	'$lgt_must_be'(read_write_flag, Flag),
-	'$lgt_must_be'(flag_value, Flag+Value),
+	'$lgt_check'(read_write_flag, Flag),
+	'$lgt_check'(flag_value, Flag+Value),
 	retractall('$lgt_pp_entity_compiler_flag_'(Flag, _)),
 	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
@@ -8002,20 +8002,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 % op/3 entity directive (operators are local to entities)
 
 '$lgt_compile_logtalk_directive'(op(Priority, Specifier, Operators), _) :-
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
 % uses/2 entity directive
 
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
-	'$lgt_must_be'(object_identifier, Obj),
+	'$lgt_check'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, Ctx).
 
 % uses/1 entity directive (deprecated)
 
 '$lgt_compile_logtalk_directive'(uses(Obj), Ctx) :-
-	'$lgt_must_be'(object_identifier, Obj),
+	'$lgt_check'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compiling_warnings_counter',
@@ -8031,7 +8031,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % level into a module identifier
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
-	'$lgt_must_be'(module_identifier, Module),
+	'$lgt_check'(module_identifier, Module),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_logtalk_directive'(uses(Module, Imports), Ctx)
@@ -8050,8 +8050,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% we must be compiling a module as an object
 	'$lgt_pp_module_'(_),
 	% we're compiling a module as an object; assume referenced modules are also compiled as objects
-	'$lgt_must_be'(module_identifier, Module),
-	'$lgt_must_be'(list, Exports),
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_check'(list, Exports),
 	'$lgt_compile_reexport_directive'(Exports, Module, Ctx).
 
 % calls/1 entity directive (deprecated)
@@ -8180,7 +8180,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % alias/2 entity directive
 
 '$lgt_compile_logtalk_directive'(alias(Entity, Resources), Ctx) :-
-	'$lgt_must_be'(entity_identifier, Entity),
+	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_compile_alias_directive'(Resources, Resources, Entity, Ctx).
 
 % alias/3 predicate directive (deprecated)
@@ -8215,7 +8215,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_alias_directive'([Resource| Resources], Argument, Entity, Ctx) :-
 	!,
-	'$lgt_must_be'(ground, Resource),
+	'$lgt_check'(ground, Resource),
 	'$lgt_compile_alias_directive_resource'(Resource, Entity, Ctx),
 	'$lgt_compile_alias_directive'(Resources, Argument, Entity, Ctx).
 
@@ -8232,8 +8232,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_alias_directive_resource'(Original::Alias, Entity, Ctx) :-
 	!,
-	'$lgt_must_be'(predicate_or_non_terminal_indicator, Original),
-	'$lgt_must_be'(predicate_or_non_terminal_indicator, Alias),
+	'$lgt_check'(predicate_or_non_terminal_indicator, Original),
+	'$lgt_check'(predicate_or_non_terminal_indicator, Alias),
 	'$lgt_compile_alias_directive_resource'(Original, Alias, Entity, Ctx).
 
 '$lgt_compile_alias_directive_resource'(Resource, _, _) :-
@@ -8276,7 +8276,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % auxiliary predicate for compiling calls/1 directives
 
 '$lgt_compile_calls_directive'([Ptc| Ptcs], Ctx) :-
-	'$lgt_must_be'(protocol_identifier, Ptc),
+	'$lgt_check'(protocol_identifier, Ptc),
 	'$lgt_add_referenced_protocol'(Ptc, Ctx),
 	'$lgt_compile_calls_directive'(Ptcs, Ctx).
 
@@ -8371,7 +8371,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % auxiliary predicate for compiling scope directive resources
 
 '$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope, _) :-
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
 	'$lgt_scope'(Scope, InternalScope),
@@ -8465,7 +8465,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
-	;	'$lgt_must_be'(entity_identifier, Entity),
+	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
@@ -8476,7 +8476,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
-	;	'$lgt_must_be'(entity_identifier, Entity),
+	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
@@ -8487,7 +8487,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/Arity))))
 	).
 
@@ -8496,7 +8496,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/ExtArity))))
 	).
 
@@ -8548,7 +8548,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
-	;	'$lgt_must_be'(entity_identifier, Entity),
+	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
@@ -8559,7 +8559,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
-	;	'$lgt_must_be'(entity_identifier, Entity),
+	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
@@ -8570,7 +8570,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/Arity))))
 	).
 
@@ -8579,7 +8579,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/ExtArity))))
 	).
 
@@ -8621,14 +8621,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_meta_predicate_directive_resource'(Entity::Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
+	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_term_template'(Meta, Template),
 	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Meta)).
 
 '$lgt_compile_meta_predicate_directive_resource'(':'(Module, Meta)) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
+	'$lgt_check'(module_identifier, Module),
 	'$lgt_term_template'(Meta, Template),
 	assertz('$lgt_pp_meta_predicate_'(':'(Module,Template), ':'(Module,Meta))).
 
@@ -8664,7 +8664,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_meta_non_terminal_directive_resource'(Entity::Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
+	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta)).
@@ -8672,7 +8672,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_meta_non_terminal_directive_resource'(':'(Module, Meta)) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
+	'$lgt_check'(module_identifier, Module),
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	assertz('$lgt_pp_meta_predicate_'(':'(Module, Template), ':'(Module, ExtendedMeta))).
@@ -8732,7 +8732,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
-	;	'$lgt_must_be'(entity_identifier, Entity),
+	;	'$lgt_check'(entity_identifier, Entity),
 		functor(Template, Functor, Arity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
@@ -8746,7 +8746,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
-	;	'$lgt_must_be'(entity_identifier, Entity),
+	;	'$lgt_check'(entity_identifier, Entity),
 		functor(Template, Functor, ExtArity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
@@ -8760,7 +8760,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))))
 	).
 
@@ -8769,7 +8769,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/ExtArity))))
 	).
 
@@ -8882,8 +8882,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_construct_extended_coinductive_template'(Functor, Arity, Template).
 
 '$lgt_valid_coinductive_template'(Template, Functor, Arity, Head, TestHead, Template) :-
-	'$lgt_must_be'(callable, Template),
-	'$lgt_must_be'(ground, Template),
+	'$lgt_check'(callable, Template),
+	'$lgt_check'(ground, Template),
 	functor(Template, Functor, Arity),
 	functor(Head, Functor, Arity),
 	Template =.. [Functor| TemplateArgs],
@@ -8920,7 +8920,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_uses_directive'([Resource| Resources], Argument, Obj, Ctx) :-
 	!,
-	'$lgt_must_be'(ground, Resource),
+	'$lgt_check'(ground, Resource),
 	'$lgt_compile_uses_directive_resource'(Resource, Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Argument, Obj, Ctx).
 
@@ -8932,7 +8932,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_uses_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
@@ -9037,7 +9037,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_use_module_directive'([Resource| Resources], Argument, Module, Ctx) :-
 	!,
-	'$lgt_must_be'(ground, Resource),
+	'$lgt_check'(ground, Resource),
 	'$lgt_compile_use_module_directive_resource'(Resource, Module, Ctx),
 	'$lgt_compile_use_module_directive'(Resources, Argument, Module, Ctx).
 
@@ -9049,7 +9049,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_use_module_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
@@ -9155,7 +9155,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_reexport_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
@@ -9204,7 +9204,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % into Logtalk ones by translating the meta-argument specifiers
 
 '$lgt_compile_module_meta_predicate_directive'([Template| Templates], [ConvertedTemplate| ConvertedTemplates]) :-
-	'$lgt_must_be'(callable, Template),
+	'$lgt_check'(callable, Template),
 	Template =.. [Functor| Args],
 	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, ConvertedArgs),
 	ConvertedTemplate =.. [Functor| ConvertedArgs],
@@ -9384,7 +9384,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_entity_info_directive_pair'(Key, Value, TPair),
 		'$lgt_compile_entity_info_directive'(Pairs, TPairs)
 	;	% non-valid pair; generate an error
-		'$lgt_must_be'(key_value_info_pair, Pair)
+		'$lgt_check'(key_value_info_pair, Pair)
 	).
 
 '$lgt_compile_entity_info_directive'([], []).
@@ -9399,19 +9399,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	Author = {EntityName}, atom(EntityName) ->
 		true
-	;	'$lgt_must_be'(atom_or_string, Author)
+	;	'$lgt_check'(atom_or_string, Author)
 	).
 
 '$lgt_compile_entity_info_directive_pair'(comment, Comment, comment(Comment)) :-
 	!,
-	'$lgt_must_be'(atom_or_string, Comment).
+	'$lgt_check'(atom_or_string, Comment).
 
 '$lgt_compile_entity_info_directive_pair'(date, Date, date(Date)) :-
 	!,
 	(	Date = Year/Month/Day ->
-		'$lgt_must_be'(integer, Year),
-		'$lgt_must_be'(integer, Month),
-		'$lgt_must_be'(integer, Day)
+		'$lgt_check'(integer, Year),
+		'$lgt_check'(integer, Month),
+		'$lgt_check'(integer, Day)
 	;	throw(type_error(date, Date))
 	).
 
@@ -9429,7 +9429,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_entity_info_directive_pair'(remarks, Remarks, remarks(Remarks)) :-
 	!,
-	'$lgt_must_be'(list, Remarks),
+	'$lgt_check'(list, Remarks),
 	(	'$lgt_member'(Remark, Remarks), \+ '$lgt_valid_remark'(Remark) ->
 		throw(type_error(remark, Remark))
 	;	true
@@ -9437,24 +9437,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_entity_info_directive_pair'(see_also, References, see_also(References)) :-
 	!,
-	'$lgt_must_be'(list(entity_identifier), References).
+	'$lgt_check'(list(entity_identifier), References).
 
 '$lgt_compile_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
-	'$lgt_must_be'(atomic_or_string, Version).
+	'$lgt_check'(atomic_or_string, Version).
 
 '$lgt_compile_entity_info_directive_pair'(copyright, Copyright, copyright(Copyright)) :-
 	!,
 	(	Copyright = {EntityName}, atom(EntityName) ->
 		true
-	;	'$lgt_must_be'(atom_or_string, Copyright)
+	;	'$lgt_check'(atom_or_string, Copyright)
 	).
 
 '$lgt_compile_entity_info_directive_pair'(license, License, license(License)) :-
 	!,
 	(	License = {EntityName}, atom(EntityName) ->
 		true
-	;	'$lgt_must_be'(atom_or_string, License)
+	;	'$lgt_check'(atom_or_string, License)
 	).
 
 % user-defined entity info pair; no checking
@@ -9465,8 +9465,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_entity_info_parameters'([Pair| Pairs], Parameters, Counter0, Arity) :-
 	!,
 	(	Pair = Name - Description ->
-		'$lgt_must_be'(atom_or_string, Name),
-		'$lgt_must_be'(atom_or_string, Description),
+		'$lgt_check'(atom_or_string, Name),
+		'$lgt_check'(atom_or_string, Description),
 		Counter1 is Counter0 + 1,
 		'$lgt_check_entity_info_parameters'(Pairs, Parameters, Counter1, Arity)
 	;	throw(type_error(pair, Pair))
@@ -9485,7 +9485,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_entity_info_parnames'([Name| Names], Parnames, Counter0, Arity) :-
 	!,
-	'$lgt_must_be'(atom_or_string, Name),
+	'$lgt_check'(atom_or_string, Name),
 	Counter1 is Counter0 + 1,
 	'$lgt_check_entity_info_parnames'(Names, Parnames, Counter1, Arity).
 
@@ -9510,7 +9510,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_predicate_info_directive_pair'(Key, Value, Functor, Arity, TPair),
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs)
 	;	% non-valid pair; generate an error
-		'$lgt_must_be'(key_value_info_pair, Pair)
+		'$lgt_check'(key_value_info_pair, Pair)
 	).
 
 '$lgt_compile_predicate_info_directive'([], _, _, []).
@@ -9523,7 +9523,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_info_directive_pair'(allocation, Allocation, _, _, allocation(Allocation)) :-
 	!,
-	'$lgt_must_be'(atom, Allocation),
+	'$lgt_check'(atom, Allocation),
 	(	'$lgt_valid_predicate_allocation'(Allocation) ->
 		true
 	;	throw(domain_error(allocation, Allocation))
@@ -9539,11 +9539,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_info_directive_pair'(comment, Comment, _, _, comment(Comment)) :-
 	!,
-	'$lgt_must_be'(atom_or_string, Comment).
+	'$lgt_check'(atom_or_string, Comment).
 
 '$lgt_compile_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions(Exceptions)) :-
 	!,
-	'$lgt_must_be'(list, Exceptions),
+	'$lgt_check'(list, Exceptions),
 	(	'$lgt_member'(Exception, Exceptions), \+ '$lgt_valid_predicate_exception'(Exception) ->
 		throw(type_error(exception, Exception))
 	;	true
@@ -9551,7 +9551,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_info_directive_pair'(remarks, Remarks, _, _, remarks(Remarks)) :-
 	!,
-	'$lgt_must_be'(list, Remarks),
+	'$lgt_check'(list, Remarks),
 	(	'$lgt_member'(Remark, Remarks), \+ '$lgt_valid_remark'(Remark) ->
 		throw(type_error(remark, Remark))
 	;	true
@@ -9559,7 +9559,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_info_directive_pair'(examples, Examples, Functor, Arity, examples(Examples)) :-
 	!,
-	'$lgt_must_be'(list, Examples),
+	'$lgt_check'(list, Examples),
 	(	'$lgt_member'(Example, Examples), \+ '$lgt_valid_predicate_call_example'(Example, Functor, Arity) ->
 		throw(type_error(example, Example))
 	;	true
@@ -9567,7 +9567,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_predicate_info_directive_pair'(redefinition, Redefinition, _, _, redefinition(Redefinition)) :-
 	!,
-	'$lgt_must_be'(atom, Redefinition),
+	'$lgt_check'(atom, Redefinition),
 	(	'$lgt_valid_predicate_redefinition'(Redefinition) ->
 		true
 	;	throw(domain_error(redefinition, Redefinition))
@@ -9581,8 +9581,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Arity) :-
 	!,
 	(	Pair = Name - Description ->
-		'$lgt_must_be'(atom_or_string, Name),
-		'$lgt_must_be'(atom_or_string, Description),
+		'$lgt_check'(atom_or_string, Name),
+		'$lgt_check'(atom_or_string, Description),
 		Counter1 is Counter0 + 1,
 		'$lgt_check_predicate_info_arguments'(Pairs, Arguments, Counter1, Arity)
 	;	throw(type_error(pair, Pair))
@@ -9601,7 +9601,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_predicate_info_argnames'([Name| Names], Arguments, Counter0, Arity) :-
 	!,
-	'$lgt_must_be'(atom_or_string, Name),
+	'$lgt_check'(atom_or_string, Name),
 	Counter1 is Counter0 + 1,
 	'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity).
 
@@ -9654,7 +9654,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles a source file clause
 
 '$lgt_compile_clause'(Clause, Ctx) :-
-	'$lgt_must_be'(clause, Clause, clause(Clause)),
+	'$lgt_check'(clause, Clause, clause(Clause)),
 	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
 	% compiling an entity clause
 	(	Type == protocol ->
@@ -9834,7 +9834,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_head'({Head}, {Functor/Arity}, Head, _) :-
 	!,
-	'$lgt_must_be'(callable, Head),
+	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity).
 
 % not the first clause for this predicate; reuse the compiled head template
@@ -9898,8 +9898,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compile the head of a clause of another entity predicate (which we check if declared multifile)
 
 '$lgt_compile_head'(Other::Head, _, _, _) :-
-	'$lgt_must_be'(entity_identifier, Other),
-	'$lgt_must_be'(callable, Head),
+	'$lgt_check'(entity_identifier, Other),
+	'$lgt_check'(callable, Head),
 	fail.
 
 '$lgt_compile_head'(user::Head, user::Functor/Arity, Head, Ctx) :-
@@ -9941,11 +9941,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_head'(':'(Module, Head), ':'(Module, Functor/Arity), THead, Ctx) :-
 	!,
-	'$lgt_must_be'(callable, Head),
+	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity),
 	(	Module == user ->
 		THead = Head
-	;	'$lgt_must_be'(module_identifier, Module),
+	;	'$lgt_check'(module_identifier, Module),
 		THead = ':'(Module, Head)
 	),
 	(	Module == user, '$lgt_pp_directive_'(multifile(Functor/Arity)) ->
@@ -10003,7 +10003,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
 	;	Pred == ! ->
 		TPred = true
-	;	'$lgt_must_be'(callable, Pred),
+	;	'$lgt_check'(callable, Pred),
 		TPred = Pred
 	).
 
@@ -10019,7 +10019,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % message delegation (send a message while preserving the original sender)
 
 '$lgt_compile_body'([Goal], _, _, _) :-
-	'$lgt_must_be'(callable, Goal),
+	'$lgt_check'(callable, Goal),
 	\+ functor(Goal, (::), 2),
 	throw(domain_error(message_sending_goal, Goal)).
 
@@ -10321,7 +10321,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(threaded_call(Goal, Tag), MTGoal, '$lgt_debug'(goal(threaded_call(Goal, Tag), MDGoal), ExCtx), Ctx) :-
 	!,
-	'$lgt_must_be'(var, Tag),
+	'$lgt_check'(var, Tag),
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_call_tagged'(Goal, TGoal, This, Self, Tag),
@@ -10350,7 +10350,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(threaded_once(Goal, Tag), MTGoal, '$lgt_debug'(goal(threaded_once(Goal, Tag), MDGoal), ExCtx), Ctx) :-
 	!,
-	'$lgt_must_be'(var, Tag),
+	'$lgt_check'(var, Tag),
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_once_tagged'(Goal, TGoal, This, Self, Tag),
@@ -10658,8 +10658,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(':'(Module, Pred), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_module_identifier, Module),
-	'$lgt_must_be'(var_or_callable, Pred),
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Pred),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::Pred, TPred, DPred, Ctx)
@@ -10711,9 +10711,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(current_op(Priority, Specifier, Operator), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_operator_priority, Priority),
-	'$lgt_must_be'(var_or_operator_specifier, Specifier),
-	'$lgt_must_be'(var_or_atom, Operator),
+	'$lgt_check'(var_or_operator_priority, Priority),
+	'$lgt_check'(var_or_operator_specifier, Specifier),
+	'$lgt_check'(var_or_atom, Operator),
 	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	TPred = '$lgt_current_op'(Database, Priority, Specifier, Operator, Database, p(_)),
@@ -10750,7 +10750,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(current_predicate(Pred), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	TPred = '$lgt_current_predicate'(Database, Pred, Database, p(_)),
@@ -10784,8 +10784,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(predicate_property(Pred, Prop), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Pred),
-	'$lgt_must_be'(var_or_predicate_property, Prop),
+	'$lgt_check'(var_or_callable, Pred),
+	'$lgt_check'(var_or_predicate_property, Prop),
 	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	TPred = '$lgt_predicate_property'(Database, Pred, Prop, Database, p(_)),
@@ -10827,7 +10827,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_check_dynamic_directive'(Mode, Pred, Lines),
 	(	ground(Pred) ->
 		TCond = '$lgt_abolish_checked'(Database, Pred, Database, p(_))
@@ -10896,7 +10896,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_asserta'(Database, Clause, Database, p(_), p)
-		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
 					TCond = '$lgt_asserta_fact_checked'(Database, Head, Database, p(_), p)
@@ -10963,7 +10963,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_assertz'(Database, Clause, Database, p(_), p)
-		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
 					TCond = '$lgt_assertz_fact_checked'(Database, Head, Database, p(_), p)
@@ -11006,12 +11006,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
-		'$lgt_must_be'(var_or_callable, Body),
+		'$lgt_check'(var_or_callable, Body),
 		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body))
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 			TCond = '$lgt_clause'(Database, Head, Body, Database, p(_))
-		;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
+		;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
 			TCond = '$lgt_clause_checked'(Database, Head, Body, Database, p(_))
 		),
 		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
@@ -11072,7 +11072,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_retract'(Database, Clause, Database, p(_))
-		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	var(Body) ->
 					'$lgt_retract_var_body_checked'(Database, Clause, Database, p(_))
@@ -11122,7 +11122,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	var(Head) ->
 			TCond = '$lgt_retractall'(Database, Head, Database, p(_))
-		;	'$lgt_must_be'(callable, Head),
+		;	'$lgt_check'(callable, Head),
 			TCond = '$lgt_retractall_checked'(Database, Head, Database, p(_))
 		),
 		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
@@ -11149,7 +11149,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(phrase(GRBody, Input), TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
 	var(GRBody),
 	!,
-	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Input),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_phrase'(GRBody, Input, ExCtx).
 
@@ -11157,7 +11157,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	% the '$lgt_dcg_body'/5 predicate already checks that the grammar rule body is callable
 	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
-	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Input),
 	TPred = (Input = S0, [] = S, TPred0),
 	DPred = (Input = S0, [] = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11166,8 +11166,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(phrase(GRBody, Input, Rest), TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), TPred), ExCtx), Ctx) :-
 	var(GRBody),
 	!,
-	'$lgt_must_be'(list_or_partial_list, Input),
-	'$lgt_must_be'(list_or_partial_list, Rest),
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Rest),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_phrase'(GRBody, Input, Rest, ExCtx).
 
@@ -11175,8 +11175,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	% the '$lgt_dcg_body'/5 predicate already checks that the grammar rule body is callable
 	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
-	'$lgt_must_be'(list_or_partial_list, Input),
-	'$lgt_must_be'(list_or_partial_list, Rest),
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Rest),
 	TPred = (Input = S0, Rest = S, TPred0),
 	DPred = (Input = S0, Rest = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11243,7 +11243,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_body'(parameter(Arg, _), _, _, Ctx) :-
-	'$lgt_must_be'(integer, Arg),
+	'$lgt_check'(integer, Arg),
 	(	'$lgt_pp_entity_'(_, Entity, _, _, _) ->
 		% compile time
 		true
@@ -11342,36 +11342,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Flag),
 	nonvar(Value),
 	!,
-	'$lgt_must_be'(read_write_flag, Flag),
-	'$lgt_must_be'(flag_value, Flag + Value),
+	'$lgt_check'(read_write_flag, Flag),
+	'$lgt_check'(flag_value, Flag + Value),
 	TPred = '$lgt_set_compiler_flag'(Flag, Value),
 	DPred = set_logtalk_flag(Flag, Value),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
 '$lgt_compile_body'(set_logtalk_flag(Flag, _), _, _, _) :-
-	'$lgt_must_be'(var_or_read_write_flag, Flag),
+	'$lgt_check'(var_or_read_write_flag, Flag),
 	fail.
 
 '$lgt_compile_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
 	nonvar(Value),
 	!,
-	'$lgt_must_be'(flag, Flag),
-	'$lgt_must_be'(flag_value, Flag + Value),
+	'$lgt_check'(flag, Flag),
+	'$lgt_check'(flag_value, Flag + Value),
 	TPred = '$lgt_compiler_flag'(Flag, Value),
 	DPred = current_logtalk_flag(Flag, Value),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
 '$lgt_compile_body'(current_logtalk_flag(Flag, _), _, _, _) :-
-	'$lgt_must_be'(var_or_flag, Flag),
+	'$lgt_check'(var_or_flag, Flag),
 	fail.
 
 % Prolog flag predicates (just basic error and portability checking)
 
 '$lgt_compile_body'(set_prolog_flag(Flag, _), _, _, Ctx) :-
-	'$lgt_must_be'(var_or_atom, Flag),
+	'$lgt_check'(var_or_atom, Flag),
 	nonvar(Flag),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
@@ -11400,7 +11400,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_compile_body'(current_prolog_flag(Flag, _), _, _, Ctx) :-
-	'$lgt_must_be'(var_or_atom, Flag),
+	'$lgt_check'(var_or_atom, Flag),
 	nonvar(Flag),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
@@ -12149,7 +12149,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_prolog_meta_argument'(closure(N), Arg, Ctx, TArg, DArg) :-
 	% closure
-	'$lgt_must_be'(var_or_callable, Arg),
+	'$lgt_check'(var_or_callable, Arg),
 	'$lgt_length'(ExtArgs, 0, N),
 	(	var(Arg) ->
 		ExtArg =.. [call, Arg| ExtArgs]
@@ -12515,11 +12515,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_runtime_checked_db_clause'((Head :- Body)) :-
 	var(Head),
 	!,
-	'$lgt_must_be'(var_or_callable, Body).
+	'$lgt_check'(var_or_callable, Body).
 
 '$lgt_runtime_checked_db_clause'((Head :- Body)) :-
 	var(Body),
-	'$lgt_must_be'(var_or_callable, Head).
+	'$lgt_check'(var_or_callable, Head).
 
 
 
@@ -12565,7 +12565,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _) :-
 	Obj == user,
 	!,
-	'$lgt_must_be'(var_or_callable, Pred).
+	'$lgt_check'(var_or_callable, Pred).
 
 % convenient access to parametric object proxies
 
@@ -12652,22 +12652,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(current_op(Priority, Specifier, Operator), Obj, '$lgt_current_op'(Obj, Priority, Specifier, Operator, This, p(p(p))), _, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_operator_priority, Priority),
-	'$lgt_must_be'(var_or_operator_specifier, Specifier),
-	'$lgt_must_be'(var_or_atom, Operator),
+	'$lgt_check'(var_or_operator_priority, Priority),
+	'$lgt_check'(var_or_operator_specifier, Specifier),
+	'$lgt_check'(var_or_atom, Operator),
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), _, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), _, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Pred),
-	'$lgt_must_be'(var_or_predicate_property, Prop),
+	'$lgt_check'(var_or_callable, Pred),
+	'$lgt_check'(var_or_predicate_property, Prop),
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
@@ -12675,7 +12675,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, _, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	var(Obj) ->
@@ -12695,9 +12695,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	var(Obj) ->
-		'$lgt_must_be'(clause_or_partial_clause, Clause),
+		'$lgt_check'(clause_or_partial_clause, Clause),
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
 			(	'$lgt_compiler_flag'(optimize, on),
 				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
@@ -12715,9 +12715,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	var(Obj) ->
-		'$lgt_must_be'(clause_or_partial_clause, Clause),
+		'$lgt_check'(clause_or_partial_clause, Clause),
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
 			(	'$lgt_compiler_flag'(optimize, on),
 				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
@@ -12734,7 +12734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
+	;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
 		(	var(Obj) ->
 			TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
 		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
@@ -12748,9 +12748,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
 	;	var(Obj) ->
-		'$lgt_must_be'(clause_or_partial_clause, Clause),
+		'$lgt_check'(clause_or_partial_clause, Clause),
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
 				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
@@ -12773,9 +12773,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
 	;	var(Obj) ->
-		'$lgt_must_be'(callable, Head),
+		'$lgt_check'(callable, Head),
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
-	;	'$lgt_must_be'(callable, Head),
+	;	'$lgt_check'(callable, Head),
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
 			TPred = retractall(THead)
@@ -12801,7 +12801,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'({Goal}, _, call(Goal), _, _) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Goal).
+	'$lgt_check'(var_or_callable, Goal).
 
 % invalid message
 
@@ -12910,22 +12910,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(current_op(Priority, Specifier, Operator), '$lgt_current_op'(Self, Priority, Specifier, Operator, This, p(_)), Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_operator_priority, Priority),
-	'$lgt_must_be'(var_or_operator_specifier, Specifier),
-	'$lgt_must_be'(var_or_atom, Operator),
+	'$lgt_check'(var_or_operator_priority, Priority),
+	'$lgt_check'(var_or_operator_specifier, Specifier),
+	'$lgt_check'(var_or_atom, Operator),
 	'$lgt_comp_ctx_self'(Ctx, Self),
 	'$lgt_comp_ctx_this'(Ctx, This).
 
 '$lgt_compile_message_to_self'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx_self'(Ctx, Self),
 	'$lgt_comp_ctx_this'(Ctx, This).
 
 '$lgt_compile_message_to_self'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_)), Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Pred),
-	'$lgt_must_be'(var_or_predicate_property, Prop),
+	'$lgt_check'(var_or_callable, Pred),
+	'$lgt_check'(var_or_predicate_property, Prop),
 	'$lgt_comp_ctx_self'(Ctx, Self),
 	'$lgt_comp_ctx_this'(Ctx, This).
 
@@ -12933,7 +12933,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(abolish(Pred), TPred, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check'(var_or_predicate_indicator, Pred),
 	(	ground(Pred) ->
 		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_))
 	;	% partially instantiated predicate indicator; runtime check required
@@ -12950,7 +12950,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
 				TPred = '$lgt_asserta_fact_checked'(Self, Head, This, p(_), p(p))
@@ -12966,7 +12966,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
 				TPred = '$lgt_assertz_fact_checked'(Self, Head, This, p(_), p(p))
@@ -12982,7 +12982,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Self, Head, Body, This, p(_))
-	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
+	;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
 		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_))
 	),
 	'$lgt_comp_ctx_self'(Ctx, Self),
@@ -12992,7 +12992,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Self, Clause, This, p(_))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
 				'$lgt_retract_var_body_checked'(Self, Clause, This, p(_))
@@ -13010,7 +13010,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Self, Head, This, p(_))
-	;	'$lgt_must_be'(callable, Head),
+	;	'$lgt_check'(callable, Head),
 		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_))
 	),
 	'$lgt_comp_ctx_self'(Ctx, Self),
@@ -13032,7 +13032,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'({Goal}, call(Goal), _) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Goal).
+	'$lgt_check'(var_or_callable, Goal).
 
 % invalid message
 
@@ -13167,16 +13167,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_context_switch_call'(Obj, Goal, TGoal, This) :-
 	(	var(Obj) ->
-		'$lgt_must_be'(var_or_callable, Goal),
+		'$lgt_check'(var_or_callable, Goal),
 		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
 	;	Obj = {Proxy} ->
 		TGoal = ('$lgt_call_proxy'(Proxy, Goal, This), TGoal0),
 		'$lgt_compile_context_switch_call'(Proxy, Goal, TGoal0, This)
 	;	var(Goal) ->
-		'$lgt_must_be'(var_or_object_identifier, Obj),
+		'$lgt_check'(var_or_object_identifier, Obj),
 		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
-	;	'$lgt_must_be'(object_identifier, Obj),
-		'$lgt_must_be'(callable, Goal),
+	;	'$lgt_check'(object_identifier, Obj),
+		'$lgt_check'(callable, Goal),
 		TGoal = '$lgt_call_within_context_nv'(Obj, Goal, This)
 	).
 
@@ -13980,7 +13980,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_complements_object_relation'([], _, _, _, _, _).
 
 '$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _, _) :-
-	'$lgt_must_be'(object_identifier, Obj),
+	'$lgt_check'(object_identifier, Obj),
 	(	'$lgt_is_protocol'(Obj) ->
 		throw(type_error(object, Obj))
 	;	'$lgt_is_category'(Obj) ->
@@ -16593,7 +16593,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % of the entity being compiled when the entity argument is not instantiated
 
 '$lgt_compile_predicate_heads'(Heads, Entity, THeads, Ctx) :-
-	'$lgt_must_be'(var_or_entity_identifier, Entity),
+	'$lgt_check'(var_or_entity_identifier, Entity),
 	'$lgt_entity_prefix'(Entity, Prefix),
 	'$lgt_compile_predicate_heads_aux'(Heads, Prefix, THeads, Ctx).
 
@@ -16616,7 +16616,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_predicate_heads_aux'(Heads, Prefix, THeads, Ctx).
 
 '$lgt_compile_predicate_heads_aux'(Head, Prefix, THead, Ctx) :-
-	'$lgt_must_be'(callable, Head),
+	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
@@ -16633,7 +16633,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % (which must be loaded) in order for this predicate to succeed
 
 '$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads) :-
-	'$lgt_must_be'(var_or_entity_identifier, Entity),
+	'$lgt_check'(var_or_entity_identifier, Entity),
 	'$lgt_decompile_predicate_heads'(THeads, Entity, Type, _, Heads).
 
 
@@ -16679,7 +16679,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % of the entity being compiled when the entity argument is not instantiated
 
 '$lgt_compile_predicate_indicators'(PIs, Entity, TPIs) :-
-	'$lgt_must_be'(var_or_entity_identifier, Entity),
+	'$lgt_check'(var_or_entity_identifier, Entity),
 	'$lgt_entity_prefix'(Entity, Prefix),
 	'$lgt_compile_predicate_indicators_aux'(PIs, Prefix, TPIs).
 
@@ -16770,7 +16770,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % (which must be loaded) in order for this predicate to succeed
 
 '$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, PIs) :-
-	'$lgt_must_be'(var_or_entity_identifier, Entity),
+	'$lgt_check'(var_or_entity_identifier, Entity),
 	'$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, _, PIs).
 
 
@@ -17250,29 +17250,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_entity_reference'(object, Ref, Scope, Object) :-
 	(	Ref = Scope::Object ->
-		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(object_identifier, Object)
+		'$lgt_check'(scope, Scope),
+		'$lgt_check'(object_identifier, Object)
 	;	Ref = Object,
 		Scope = (public),
-		'$lgt_must_be'(object_identifier, Object)
+		'$lgt_check'(object_identifier, Object)
 	).
 
 '$lgt_check_entity_reference'(protocol, Ref, Scope, Protocol) :-
 	(	Ref = Scope::Protocol ->
-		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(protocol_identifier, Protocol)
+		'$lgt_check'(scope, Scope),
+		'$lgt_check'(protocol_identifier, Protocol)
 	;	Ref = Protocol,
 		Scope = (public),
-		'$lgt_must_be'(protocol_identifier, Protocol)
+		'$lgt_check'(protocol_identifier, Protocol)
 	).
 
 '$lgt_check_entity_reference'(category, Ref, Scope, Category) :-
 	(	Ref = Scope::Category ->
-		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(category_identifier, Category)
+		'$lgt_check'(scope, Scope),
+		'$lgt_check'(category_identifier, Category)
 	;	Ref = Category,
 		Scope = (public),
-		'$lgt_must_be'(category_identifier, Category)
+		'$lgt_check'(category_identifier, Category)
 	).
 
 
@@ -17295,30 +17295,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_closure'({Closure}, _) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Closure).
+	'$lgt_check'(var_or_callable, Closure).
 
 '$lgt_check_closure'(Object::Closure, _) :-
 	!,
-	'$lgt_must_be'(var_or_object_identifier, Object),
-	'$lgt_must_be'(var_or_callable, Closure).
+	'$lgt_check'(var_or_object_identifier, Object),
+	'$lgt_check'(var_or_callable, Closure).
 
 '$lgt_check_closure'(::Closure, _) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Closure).
+	'$lgt_check'(var_or_callable, Closure).
 
 '$lgt_check_closure'(^^Closure, _) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Closure).
+	'$lgt_check'(var_or_callable, Closure).
 
 '$lgt_check_closure'(Object<<Closure, _) :-
 	!,
-	'$lgt_must_be'(var_or_object_identifier, Object),
-	'$lgt_must_be'(var_or_callable, Closure).
+	'$lgt_check'(var_or_object_identifier, Object),
+	'$lgt_check'(var_or_callable, Closure).
 
 '$lgt_check_closure'(':'(Module, Closure), _) :-
 	!,
-	'$lgt_must_be'(var_or_module_identifier, Module),
-	'$lgt_must_be'(var_or_callable, Closure).
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Closure).
 
 '$lgt_check_closure'(Closure, _) :-
 	\+ callable(Closure),
@@ -17335,9 +17335,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_lambda_expression'(Free/Parameters>>Goal, Ctx) :-
 	!,
 	% first, check for errors
-	'$lgt_must_be'(var_or_curly_bracketed_term, Free),
-	'$lgt_must_be'(list_or_partial_list, Parameters),
-	'$lgt_must_be'(var_or_callable, Goal),
+	'$lgt_check'(var_or_curly_bracketed_term, Free),
+	'$lgt_check'(list_or_partial_list, Parameters),
+	'$lgt_check'(var_or_callable, Goal),
 	% second, check for likely errors if compiling a source file
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		nonvar(Free),
@@ -17349,13 +17349,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_lambda_expression'(Free/Goal, _) :-
-	'$lgt_must_be'(var_or_curly_bracketed_term, Free),
-	'$lgt_must_be'(var_or_callable, Goal).
+	'$lgt_check'(var_or_curly_bracketed_term, Free),
+	'$lgt_check'(var_or_callable, Goal).
 
 '$lgt_check_lambda_expression'(Parameters>>Goal, Ctx) :-
 	% first, check for errors
-	'$lgt_must_be'(list_or_partial_list, Parameters),
-	'$lgt_must_be'(var_or_callable, Goal),
+	'$lgt_check'(list_or_partial_list, Parameters),
+	'$lgt_check'(var_or_callable, Goal),
 	% second, check for likely errors if compiling a source file
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		nonvar(Parameters),
@@ -18108,12 +18108,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_rule'((Entity::NonTerminal, Terminals --> GRBody), (Entity::Head :- Body), Ctx) :-
 	!,
-	'$lgt_must_be'(object_identifier, Entity),
+	'$lgt_check'(object_identifier, Entity),
 	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx).
 
 '$lgt_dcg_rule'((':'(Module, NonTerminal), Terminals --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
 	!,
-	'$lgt_must_be'(module_identifier, Module),
+	'$lgt_check'(module_identifier, Module),
 	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx).
 
 '$lgt_dcg_rule'((phrase(_), _ --> _), _, _) :-
@@ -18139,12 +18139,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_rule'((Entity::NonTerminal --> GRBody), (Entity::Head :- Body), Ctx) :-
 	!,
-	'$lgt_must_be'(object_identifier, Entity),
+	'$lgt_check'(object_identifier, Entity),
 	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx).
 
 '$lgt_dcg_rule'((':'(Module, NonTerminal) --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
 	!,
-	'$lgt_must_be'(module_identifier, Module),
+	'$lgt_check'(module_identifier, Module),
 	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx).
 
 '$lgt_dcg_rule'((phrase(_) --> _), _, _) :-
@@ -18179,7 +18179,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % translates a grammar goal non-terminal
 
 '$lgt_dcg_non_terminal'(NonTerminal, _, _, _) :-
-	'$lgt_must_be'(callable, NonTerminal),
+	'$lgt_check'(callable, NonTerminal),
 	'$lgt_pp_protocol_'(_, _, _, _, _),
 	% protocols cannot contain non-terminal definitions
 	functor(NonTerminal, Functor, Arity),
@@ -18197,11 +18197,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % translates a list of terminals
 
 '$lgt_dcg_terminals'(Terminals, S0, S, Goal) :-
-	'$lgt_must_be'(nonvar, Terminals),
+	'$lgt_check'(nonvar, Terminals),
 	(	'$lgt_is_list'(Terminals) ->
 		'$lgt_append'(Terminals, S, List),
 		Goal = (S0 = List)
-	;	'$lgt_must_be'(list_or_partial_list, Terminals),
+	;	'$lgt_check'(list_or_partial_list, Terminals),
 		Goal = {'$lgt_append'(Terminals, S, S0)}
 	).
 
@@ -18392,7 +18392,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_body'({Goal}, S0, S, (Goal, (S0 = S)), _) :-
 	!,
-	'$lgt_must_be'(callable, Goal).
+	'$lgt_check'(callable, Goal).
 
 '$lgt_dcg_body'(\+ GRBody, S0, S, (\+ Goal, (S0 = S)), Ctx) :-
 	!,
@@ -18409,7 +18409,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 1,
 	!,
 	GRBody =.. [call, Closure| Args],
-	'$lgt_must_be'(var_or_callable, Closure),
+	'$lgt_check'(var_or_callable, Closure),
 	'$lgt_append'(Args, [S0, S], FullArgs),
 	Goal =.. [call, Closure| FullArgs].
 
@@ -18875,7 +18875,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % this prevents programming errors going unnoticed
 
 '$lgt_threaded_ignore'(Goal, TGoal, This) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_ignore(Goal), This)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_ignore(Goal), This)),
 	thread_create(catch(TGoal, _, true), _, [detached(true)]).
 
 
@@ -18886,7 +18886,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_call'(Goal, TGoal, This, Self) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal), This)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_call(Goal), This)),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_create('$lgt_mt_non_det_goal'(Queue, TGoal, This, Self, []), Id, []),
 	thread_send_message(Queue, '$lgt_thread_id'(call, TGoal, This, Self, [], Id)).
@@ -18899,7 +18899,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_once'(Goal, TGoal, This, Self) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal), This)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_once(Goal), This)),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_create('$lgt_mt_det_goal'(Queue, TGoal, This, Self, []), Id, []),
 	thread_send_message(Queue, '$lgt_thread_id'(once, TGoal, This, Self, [], Id)).
@@ -18912,7 +18912,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_call_tagged'(Goal, TGoal, This, Self, Tag) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal, Tag), This)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_call(Goal, Tag), This)),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	'$lgt_new_threaded_tag'(Tag),
 	thread_create('$lgt_mt_non_det_goal'(Queue, TGoal, This, Self, Tag), Id, []),
@@ -18926,7 +18926,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_once_tagged'(Goal, TGoal, This, Self, Tag) :-
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal, Tag), This)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_once(Goal, Tag), This)),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	'$lgt_new_threaded_tag'(Tag),
 	thread_create('$lgt_mt_det_goal'(Queue, TGoal, This, Self, Tag), Id, []),
@@ -19112,7 +19112,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)))
 	;	true
 	),
-	'$lgt_must_be'(callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
+	'$lgt_check'(callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
 	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
 	message_queue_create(TermQueue),
 	thread_create('$lgt_mt_engine_goal'(ThisQueue, TermQueue, AnswerTemplate, TGoal, Engine), Id, []),
@@ -19731,13 +19731,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		UserClosure = Closure
 	),
 	!,
-	'$lgt_must_be'(var_or_callable, UserClosure).
+	'$lgt_check'(var_or_callable, UserClosure).
 
 '$lgt_compile_static_binding_meta_argument'(N, Closure, Ctx, TClosure) :-
 	integer(N), N > 0,
 	% closure
 	!,
-	'$lgt_must_be'(var_or_callable, Closure),
+	'$lgt_check'(var_or_callable, Closure),
 	'$lgt_length'(ExtArgs, 0, N),
 	'$lgt_extend_closure'(Closure, ExtArgs, Goal),
 	% compiling the meta-argument allows predicate cross-referencing information
@@ -20281,29 +20281,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_must_be'(+atom, @term, @callable)
+% '$lgt_check'(+atom, @term, @callable)
 %
 % type-checking for built-in predicate arguments
 
-'$lgt_must_be'(var, Term, Context) :-
+'$lgt_check'(var, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	throw(error(type_error(variable, Term), Context))
 	).
 
-'$lgt_must_be'(nonvar, Term, Context) :-
+'$lgt_check'(nonvar, Term, Context) :-
 	(	nonvar(Term) ->
 		true
 	;	throw(error(instantiation_error, Context))
 	).
 
-'$lgt_must_be'(ground, Term, Context) :-
+'$lgt_check'(ground, Term, Context) :-
 	(	ground(Term) ->
 		true
 	;	throw(error(instantiation_error, Context))
 	).
 
-'$lgt_must_be'(atom, Term, Context) :-
+'$lgt_check'(atom, Term, Context) :-
 	(	atom(Term) ->
 		true
 	;	var(Term) ->
@@ -20311,7 +20311,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_atom, Term, Context) :-
+'$lgt_check'(var_or_atom, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	atom(Term) ->
@@ -20319,7 +20319,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(boolean, Term, Context) :-
+'$lgt_check'(boolean, Term, Context) :-
 	(	Term == true ->
 		true
 	;	Term == false ->
@@ -20331,7 +20331,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_boolean, Term, Context) :-
+'$lgt_check'(var_or_boolean, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	\+ atom(Term) ->
@@ -20341,7 +20341,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(domain_error(boolean, Term), Context))
 	).
 
-'$lgt_must_be'(atom_or_string, Term, Context) :-
+'$lgt_check'(atom_or_string, Term, Context) :-
 	(	atom(Term) ->
 		true
 	;	'$lgt_string'(Term) ->
@@ -20351,7 +20351,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom_or_string, Term), Context))
 	).
 
-'$lgt_must_be'(integer, Term, Context) :-
+'$lgt_check'(integer, Term, Context) :-
 	(	integer(Term) ->
 		true
 	;	var(Term) ->
@@ -20359,7 +20359,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(integer, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_integer, Term, Context) :-
+'$lgt_check'(var_or_integer, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	integer(Term) ->
@@ -20367,7 +20367,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(integer, Term), Context))
 	).
 
-'$lgt_must_be'(non_negative_integer, Term, Context) :-
+'$lgt_check'(non_negative_integer, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	\+ integer(Term) ->
@@ -20377,7 +20377,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_must_be'(var_or_non_negative_integer, Term, Context) :-
+'$lgt_check'(var_or_non_negative_integer, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	\+ integer(Term) ->
@@ -20387,7 +20387,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_must_be'(float, Term, Context) :-
+'$lgt_check'(float, Term, Context) :-
 	(	float(Term) ->
 		true
 	;	var(Term) ->
@@ -20395,7 +20395,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(float, Term), Context))
 	).
 
-'$lgt_must_be'(atomic, Term, Context) :-
+'$lgt_check'(atomic, Term, Context) :-
 	(	atomic(Term) ->
 		true
 	;	var(Term) ->
@@ -20403,7 +20403,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atomic, Term), Context))
 	).
 
-'$lgt_must_be'(atomic_or_string, Term, Context) :-
+'$lgt_check'(atomic_or_string, Term, Context) :-
 	(	atomic(Term) ->
 		true
 	;	'$lgt_string'(Term) ->
@@ -20413,7 +20413,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atomic_or_string, Term), Context))
 	).
 
-'$lgt_must_be'(curly_bracketed_term, Term, Context) :-
+'$lgt_check'(curly_bracketed_term, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	Term = {_} ->
@@ -20423,7 +20423,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(curly_bracketed_term, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_curly_bracketed_term, Term, Context) :-
+'$lgt_check'(var_or_curly_bracketed_term, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	Term = {_} ->
@@ -20433,7 +20433,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(curly_bracketed_term, Term), Context))
 	).
 
-'$lgt_must_be'(callable, Term, Context) :-
+'$lgt_check'(callable, Term, Context) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
@@ -20441,7 +20441,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_callable, Term, Context) :-
+'$lgt_check'(var_or_callable, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	callable(Term) ->
@@ -20449,25 +20449,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(clause, Term, Context) :-
+'$lgt_check'(clause, Term, Context) :-
 	(	Term = (Head :- Body) ->
-		'$lgt_must_be'(callable, Head, Context),
-		'$lgt_must_be'(callable, Body, Context)
+		'$lgt_check'(callable, Head, Context),
+		'$lgt_check'(callable, Body, Context)
 	;	callable(Term) ->
 		true
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(clause_or_partial_clause, Term, Context) :-
+'$lgt_check'(clause_or_partial_clause, Term, Context) :-
 	(	Term = (Head :- Body) ->
-		'$lgt_must_be'(callable, Head, Context),
-		'$lgt_must_be'(var_or_callable, Body, Context)
+		'$lgt_check'(callable, Head, Context),
+		'$lgt_check'(var_or_callable, Body, Context)
 	;	callable(Term) ->
 		true
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(list, Term, Context) :-
+'$lgt_check'(list, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_is_list'(Term) ->
@@ -20475,7 +20475,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(list, Term), Context))
 	).
 
-'$lgt_must_be'(list_or_partial_list, Term, Context) :-
+'$lgt_check'(list_or_partial_list, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_is_list_or_partial_list'(Term) ->
@@ -20483,15 +20483,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(list, Term), Context))
 	).
 
-'$lgt_must_be'(list(Type), Term, Context) :-
+'$lgt_check'(list(Type), Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_is_list'(Term) ->
-		forall('$lgt_member'(Item, Term), '$lgt_must_be'(Type, Item, Context))
+		forall('$lgt_member'(Item, Term), '$lgt_check'(Type, Item, Context))
 	;	throw(error(type_error(list, Term), Context))
 	).
 
-'$lgt_must_be'(object, Term, Context) :-
+'$lgt_check'(object, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_current_object_'(Term, _, _, _, _, _, _, _, _, _, _) ->
@@ -20501,7 +20501,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(object_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(object_identifier, Term, Context) :-
+'$lgt_check'(object_identifier, Term, Context) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
@@ -20509,7 +20509,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(object_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_object_identifier, Term, Context) :-
+'$lgt_check'(var_or_object_identifier, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	callable(Term) ->
@@ -20517,7 +20517,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(object_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(protocol, Term, Context) :-
+'$lgt_check'(protocol, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_current_protocol_'(Term, _, _, _, _) ->
@@ -20527,7 +20527,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(protocol_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(protocol_identifier, Term, Context) :-
+'$lgt_check'(protocol_identifier, Term, Context) :-
 	(	atom(Term) ->
 		true
 	;	var(Term) ->
@@ -20535,7 +20535,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(protocol_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_protocol_identifier, Term, Context) :-
+'$lgt_check'(var_or_protocol_identifier, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	atom(Term) ->
@@ -20543,7 +20543,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(protocol_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(category, Term, Context) :-
+'$lgt_check'(category, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_current_category_'(Term, _, _, _, _, _) ->
@@ -20553,7 +20553,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(category_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(category_identifier, Term, Context) :-
+'$lgt_check'(category_identifier, Term, Context) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
@@ -20561,7 +20561,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(category_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_category_identifier, Term, Context) :-
+'$lgt_check'(var_or_category_identifier, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	callable(Term) ->
@@ -20569,7 +20569,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(category_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(entity_identifier, Term, Context) :-
+'$lgt_check'(entity_identifier, Term, Context) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
@@ -20577,7 +20577,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(entity_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_entity_identifier, Term, Context) :-
+'$lgt_check'(var_or_entity_identifier, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	callable(Term) ->
@@ -20585,7 +20585,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(entity_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(module_identifier, Term, Context) :-
+'$lgt_check'(module_identifier, Term, Context) :-
 	(	atom(Term) ->
 		true
 	;	var(Term) ->
@@ -20593,7 +20593,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(module_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_module_identifier, Term, Context) :-
+'$lgt_check'(var_or_module_identifier, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	atom(Term) ->
@@ -20601,33 +20601,33 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(module_identifier, Term), Context))
 	).
 
-'$lgt_must_be'(predicate_indicator, Term, Context) :-
+'$lgt_check'(predicate_indicator, Term, Context) :-
 	(	Term = Functor/Arity ->
-		'$lgt_must_be'(atom, Functor, Context),
-		'$lgt_must_be'(non_negative_integer, Arity, Context)
+		'$lgt_check'(atom, Functor, Context),
+		'$lgt_check'(non_negative_integer, Arity, Context)
 	;	throw(error(type_error(predicate_indicator, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_predicate_indicator, Term, Context) :-
+'$lgt_check'(var_or_predicate_indicator, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	Term = Functor/Arity ->
-		'$lgt_must_be'(var_or_atom, Functor, Context),
-		'$lgt_must_be'(var_or_non_negative_integer, Arity, Context)
+		'$lgt_check'(var_or_atom, Functor, Context),
+		'$lgt_check'(var_or_non_negative_integer, Arity, Context)
 	;	throw(error(type_error(predicate_indicator, Term), Context))
 	).
 
-'$lgt_must_be'(predicate_or_non_terminal_indicator, Term, Context) :-
+'$lgt_check'(predicate_or_non_terminal_indicator, Term, Context) :-
 	(	Term = Functor/Arity ->
-		'$lgt_must_be'(atom, Functor, Context),
-		'$lgt_must_be'(non_negative_integer, Arity, Context)
+		'$lgt_check'(atom, Functor, Context),
+		'$lgt_check'(non_negative_integer, Arity, Context)
 	;	Term = Functor//Arity ->
-		'$lgt_must_be'(atom, Functor, Context),
-		'$lgt_must_be'(non_negative_integer, Arity, Context)
+		'$lgt_check'(atom, Functor, Context),
+		'$lgt_check'(non_negative_integer, Arity, Context)
 	;	throw(error(type_error(predicate_indicator, Term), Context))
 	).
 
-'$lgt_must_be'(scope, Term, Context) :-
+'$lgt_check'(scope, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_scope'(Term) ->
@@ -20637,7 +20637,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_scope, Term, Context) :-
+'$lgt_check'(var_or_scope, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_scope'(Term) ->
@@ -20647,7 +20647,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_event, Term, Context) :-
+'$lgt_check'(var_or_event, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	Term \== before,
@@ -20656,15 +20656,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_must_be'(operator_specification, Term, Context) :-
+'$lgt_check'(operator_specification, Term, Context) :-
 	(	Term = op(Priority, Specifier, Operators) ->
-		'$lgt_must_be'(operator_priority, Priority, Context),
-		'$lgt_must_be'(operator_specifier, Specifier, Context),
-		'$lgt_must_be'(operator_names, Operators, Context)
+		'$lgt_check'(operator_priority, Priority, Context),
+		'$lgt_check'(operator_specifier, Specifier, Context),
+		'$lgt_check'(operator_names, Operators, Context)
 	;	throw(error(type_error(operator_specification, Term), Context))
 	).
 
-'$lgt_must_be'(operator_priority, Priority, Context) :-
+'$lgt_check'(operator_priority, Priority, Context) :-
 	(	var(Priority) ->
 		throw(error(instantiation_error, Context))
 	;	\+ integer(Priority),
@@ -20674,13 +20674,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_must_be'(var_or_operator_priority, Priority, Context) :-
+'$lgt_check'(var_or_operator_priority, Priority, Context) :-
 	(	var(Priority) ->
 		true
-	;	'$lgt_must_be'(operator_priority, Priority, Context)
+	;	'$lgt_check'(operator_priority, Priority, Context)
 	).
 
-'$lgt_must_be'(operator_specifier, Term, Context) :-
+'$lgt_check'(operator_specifier, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	\+ atom(Term) ->
@@ -20690,13 +20690,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(domain_error(operator_specifier, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_operator_specifier, Term, Context) :-
+'$lgt_check'(var_or_operator_specifier, Term, Context) :-
 	(	var(Term) ->
 		true
-	;	'$lgt_must_be'(operator_specifier, Term, Context)
+	;	'$lgt_check'(operator_specifier, Term, Context)
 	).
 
-'$lgt_must_be'(operator_names, Term, Context) :-
+'$lgt_check'(operator_names, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	Term == (',') ->
@@ -20705,10 +20705,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	\+ '$lgt_is_list'(Term) ->
 		throw(type_error(list, Term))
-	;	\+ ('$lgt_member'(Operator, Term), \+ '$lgt_must_be'(operator_name, Operator, Context))
+	;	\+ ('$lgt_member'(Operator, Term), \+ '$lgt_check'(operator_name, Operator, Context))
 	).
 
-'$lgt_must_be'(operator_name, Term, Context) :-
+'$lgt_check'(operator_name, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	Term == (',') ->
@@ -20718,7 +20718,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_object_property, Term, Context) :-
+'$lgt_check'(var_or_object_property, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_object_property'(Term) ->
@@ -20728,7 +20728,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_category_property, Term, Context) :-
+'$lgt_check'(var_or_category_property, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_category_property'(Term) ->
@@ -20738,7 +20738,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_protocol_property, Term, Context) :-
+'$lgt_check'(var_or_protocol_property, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_protocol_property'(Term) ->
@@ -20748,7 +20748,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
-'$lgt_must_be'(flag, Term, Context) :-
+'$lgt_check'(flag, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_flag'(Term) ->
@@ -20760,7 +20760,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_flag, Term, Context) :-
+'$lgt_check'(var_or_flag, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_flag'(Term) ->
@@ -20772,7 +20772,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
-'$lgt_must_be'(read_write_flag, Term, Context) :-
+'$lgt_check'(read_write_flag, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	\+ atom(Term) ->
@@ -20787,7 +20787,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_must_be'(var_or_read_write_flag, Term, Context) :-
+'$lgt_check'(var_or_read_write_flag, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	\+ atom(Term) ->
@@ -20802,7 +20802,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_must_be'(flag_value, Term1+Term2, Context) :-
+'$lgt_check'(flag_value, Term1+Term2, Context) :-
 	(	var(Term2) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_flag_value'(Term1, Term2) ->
@@ -20813,7 +20813,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(domain_error(flag_value, Term1 + Term2), Context))
 	).
 
-'$lgt_must_be'(var_or_flag_value, Term1+Term2, Context) :-
+'$lgt_check'(var_or_flag_value, Term1+Term2, Context) :-
 	(	var(Term2) ->
 		true
 	;	'$lgt_valid_flag_value'(Term1, Term2) ->
@@ -20824,7 +20824,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(domain_error(flag_value, Term1 + Term2), Context))
 	).
 
-'$lgt_must_be'(predicate_property, Term, Context) :-
+'$lgt_check'(predicate_property, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_predicate_property'(Term) ->
@@ -20832,7 +20832,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(domain_error(predicate_property, Term), Context))
 	).
 
-'$lgt_must_be'(var_or_predicate_property, Term, Context) :-
+'$lgt_check'(var_or_predicate_property, Term, Context) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_predicate_property'(Term) ->
@@ -20840,21 +20840,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(error(domain_error(predicate_property, Term), Context))
 	).
 
-'$lgt_must_be'(key_value_info_pair, Term, Context) :-
+'$lgt_check'(key_value_info_pair, Term, Context) :-
 	(	Term = (Key is Value) ->
-		'$lgt_must_be'(atom, Key, Context),
-		'$lgt_must_be'(nonvar, Value, Context)
+		'$lgt_check'(atom, Key, Context),
+		'$lgt_check'(nonvar, Value, Context)
 	;	throw(error(type_error(key_value_info_pair, Term), Context))
 	).
 
 
 
-% '$lgt_must_be'(+atom, @term)
+% '$lgt_check'(+atom, @term)
 %
 % this simpler version of the predicate is mainly used when compiling source files
 
-'$lgt_must_be'(Type, Term) :-
-	catch('$lgt_must_be'(Type, Term, _), error(Error, _), throw(Error)).
+'$lgt_check'(Type, Term) :-
+	catch('$lgt_check'(Type, Term, _), error(Error, _), throw(Error)).
 
 
 
