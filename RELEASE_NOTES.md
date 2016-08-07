@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: A `unicode` read-only flag to describe the backend Prolog compiler
+support for the Unicode standard.
+
 * ADDED: Support for `++` (ground) and `--` (unbound) argument instantiation
 modes for use with the `mode/2` predicate directive.
 

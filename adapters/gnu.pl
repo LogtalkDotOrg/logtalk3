@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on August 3, 2016
+%  Last updated on August 7, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -210,6 +210,7 @@ setup_call_cleanup(_, _, _) :-
 	'$lgt_prolog_feature'(modules, unsupported).
 :- endif.
 '$lgt_prolog_feature'(coinduction, unsupported).
+'$lgt_prolog_feature'(unicode, unsupported).
 
 
 

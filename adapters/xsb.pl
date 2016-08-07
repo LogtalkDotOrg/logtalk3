@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on July 9, 2016
+%  Last updated on August 7, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -227,6 +227,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 	).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
+'$lgt_prolog_feature'(unicode, unsupported).
 
 
 

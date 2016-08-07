@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Lean Prolog 4.5.7 and later versions
-%  Last updated on August 3, 2016
+%  Last updated on August 7, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -306,6 +306,7 @@ to_engine(Interactor, Pattern, Goal) :-
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).
+'$lgt_prolog_feature'(unicode, bmp).
 
 
 

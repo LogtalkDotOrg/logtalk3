@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2016/08/02,
+		date is 2016/08/07,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -217,9 +217,10 @@
 		 current_logtalk_flag(prolog_dialect, PrologDialect),
 		 current_logtalk_flag(modules, Modules),
 		 current_logtalk_flag(threads, Threads),
-		 current_logtalk_flag(encoding_directive, Encodings),
 		 current_logtalk_flag(tabling, Tabling),
 		 current_logtalk_flag(coinduction, Coinduction),
+		 current_logtalk_flag(unicode, Unicode),
+		 current_logtalk_flag(encoding_directive, Encodings),
 		 ground_term_copy(Hook, GroundHook)},
 		[
 			'Default lint compilation flags: '-[], nl,
@@ -239,7 +240,8 @@
 			'  prolog_loader:   ~w'-[PrologLoader], nl,
 			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
 			'  prolog_dialect: ~w, modules: ~w, threads: ~w'-[PrologDialect, Modules, Threads], nl,
-			'  encoding_directive: ~w, tabling: ~w, coinduction: ~w'-[Encodings, Tabling, Coinduction], nl, nl
+			'  tabling: ~w, coinduction: ~w'-[Tabling, Coinduction], nl,
+			'  unicode: ~w, encoding_directive: ~w'-[Unicode, Encodings], nl, nl
 		].
 
 	% help

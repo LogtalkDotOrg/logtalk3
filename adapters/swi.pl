@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on June 7, 2016
+%  Last updated on August 7, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -282,6 +282,7 @@
 	).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, supported).
+'$lgt_prolog_feature'(unicode, full).
 
 
 

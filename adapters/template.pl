@@ -200,6 +200,7 @@ numbervars(Term, From, Next) :-
 '$lgt_prolog_feature'(threads, ?????).
 '$lgt_prolog_feature'(modules, ?????).
 '$lgt_prolog_feature'(coinduction, ?????).
+'$lgt_prolog_feature'(unicode, ?????).
 
 
 
