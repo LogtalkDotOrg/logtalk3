@@ -186,6 +186,10 @@
           <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
         </dl>
         <dl class="remarks">
+          <dt class="comment">interval(Type, LambdaExpression) type notes</dt>
+          <dd class="text">LambdaExpression must use the form [Term]&gt;&gt;Expression and it is evaluated by calling call(LambdaExpression, Term). Term is the term being checked. Expression is typically an arithmetic or term comparison expression that defines an interval.</dd>
+        </dl>
+        <dl class="remarks">
           <dt class="comment">one_of(Type, Set) type notes</dt>
           <dd class="text">For checking if a given term is a member of a set of elements of a given type. The set is represented using a list.</dd>
         </dl>
