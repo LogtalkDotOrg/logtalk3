@@ -23,21 +23,23 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/07,
-		comment is 'Type checking predicates. New types can be supported by defining clauses for the type/1 and check/2 multifile predicates.',
+		date is 2016/08/08,
+		comment is 'Type checking predicates. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
-			'Logtalk specific types' - '{entity, object, protocol, category, module, entity_identifier, object_identifier, protocol_identifier, category_identifier, module_identifier, event}',
+			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
+			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
 			'Atom derived types' - '{boolean, character}',
 			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
-			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, list, partial_list, list_or_partial_list, list(Type), pair, pair(KeyType,ValueType), cyclic, acyclic, between(Type,Lower,Upper)}',
-			'Other types' - '{one_of(Type, Set), var_or(Type)}',
-			'between(Type, Lower, Upper) type notes' - 'The type argument allows us to distinguish between numbers and other terms. It also allows unambiguous mixed integer/float (number) comparisons and strict float and integer comparisons.',
+			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
+			'Other types' - '{between(Type,Lower,Upper), interval(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}',
+			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows chosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is typically an arithmetic or term comparison expression that defines an interval.',
-			'one_of(Type, Set) type notes' - 'For checking if a given term is a member of a set of elements of a given type. The set is represented using a list.'
+			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is typically an arithmetic or term comparison expression that tests if Term belongs to an interval. The term is type-checked before evaluating the expression.',
+			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
+			'General notes' - 'The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
 		]
 	]).
 
@@ -47,23 +49,23 @@
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
 		:- dynamic(type/1).
 	:- endif.
-	:- mode(type(?nonvar), zero_or_more).
+	:- mode(type(?callable), zero_or_more).
 	:- info(type/1, [
-		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate.',
+		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.',
 		argnames is ['Type']
 	]).
 
 	:- public(valid/2).
-	:- mode(valid(+atom, @term), zero_or_one).
+	:- mode(valid(@callable, @term), zero_or_one).
 	:- info(valid/2, [
-		comment is 'True if the given term is of the specified term. Fails otherwise.',
+		comment is 'True if the given term is of the specified type. Fails otherwise.',
 		argnames is ['Type', 'Term']
 	]).
 
 	:- public(check/3).
-	:- mode(check(+atom, @term, @term), one).
+	:- mode(check(@callable, @term, @term), one).
 	:- info(check/3, [
-		comment is 'True if the given term is of the specified term. Throws an error otherwise using the format error(Error, Context).',
+		comment is 'True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context).',
 		argnames is ['Type', 'Term', 'Context']
 	]).
 
@@ -73,9 +75,9 @@
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
 		:- dynamic(check/2).
 	:- endif.
-	:- mode(check(+atom, @term), one).
+	:- mode(check(@callable, @term), one).
 	:- info(check/2, [
-		comment is 'True if the given term is of the specified term. Throws an error otherwise. Checking of a new type can be added by defining a clause for this predicate.',
+		comment is 'True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.',
 		argnames is ['Type', 'Term']
 	]).
 
