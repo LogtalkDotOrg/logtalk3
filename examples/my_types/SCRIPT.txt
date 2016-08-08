@@ -1,0 +1,46 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(my_types(loader)).
+...
+
+
+% type-check temperature values in different units:
+
+| ?- type::check(temperature(celsius), 38.7).
+yes
+
+| ?- type::check(temperature(fahrenheit), 101.2).
+yes
+
+| ?- type::check(temperature(kelvin), 307.4).
+yes
+
+| ?- type::valid(temperature(kelvin), -12.1).
+no
+
+| ?- catch(type::check(temperature(celsius), 38), Error, true).
+Error = type_error(float, 38).
+yes
+
+| ?- catch(type::check(temperature(kelvin), -12.1, my_error_context), Error, true).
+Error = error(domain_error(interval(float,[-12.1]>>(-12.1>=0.0)),-12.1), my_error_context)
+yes

@@ -255,6 +255,10 @@ Follows a short description of each included example (in alphabetical order):
 	example illustrates how to use multifile predicates within
 	Logtalk objects and categories
 
+- `my_types`  
+	example of defining new types using the user-extensible `type`
+	library object
+
 - `named_databases`
     example of an implementation of the Lean Prolog API for named
     databases for Prolog compilers with a module system

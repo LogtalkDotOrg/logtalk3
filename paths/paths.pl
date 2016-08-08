@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on August 2, 2016
+%  Last updated on August 8, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -186,6 +186,7 @@ logtalk_library_path(modules, examples('modules/')).
 logtalk_library_path(msglog, examples('msglog/')).
 logtalk_library_path(mtbatch, threads('mtbatch/')).
 logtalk_library_path(multifile, examples('multifile/')).
+logtalk_library_path(my_types, examples('my_types/')).
 logtalk_library_path(named_databases, examples('named_databases/')).
 logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(operators, examples('operators/')).
