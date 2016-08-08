@@ -424,7 +424,7 @@
 			throw(instantiation_error)
 		;	\+ integer(Term) ->
 			throw(type_error(integer, Term))
-		;	between(0, 255, Term) ->
+		;	{between(0, 255, Term)} ->
 			true
 		;	throw(domain_error(byte, Term))
 		).
@@ -435,7 +435,7 @@
 		;	\+ integer(Term) ->
 			throw(type_error(integer, Term))
 		;	code_upper_limit(Upper),
-			between(0, Upper, Term) ->
+			{between(0, Upper, Term)} ->
 			true
 		;	throw(domain_error(character_code, Term))
 		).
@@ -555,7 +555,10 @@
 	check(between(Type, Lower, Upper), Term) :-
 		check(Type, Term),
 		(	number(Term) ->
-			Lower =< Term, Term =< Upper
+			(	Lower =< Term, Term =< Upper ->
+				true
+			;	throw(domain_error(between(Type, Lower, Upper), Term))
+			)
 		;	% not a number; use standard term order
 			Lower @=< Term, Term @=< Upper ->
 			true
@@ -624,3 +627,9 @@
 		member(Head, Tail).
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, xsb)).
+	% workaround XSB atom-based module system
+	:- import(from(/(between,3), basics)).
+:- endif.
