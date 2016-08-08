@@ -39,6 +39,7 @@
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
 			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is typically an arithmetic or term comparison expression that tests if Term belongs to an interval. The term is type-checked before evaluating the expression.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
+			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'General notes' - 'The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
 		]
 	]).
@@ -121,6 +122,7 @@
 	% atom derived types
 	type(boolean).
 	type(character).
+	type(order).
 	% compound derived types
 	type(predicate_indicator).
 	type(non_terminal_indicator).
@@ -359,6 +361,20 @@
 		;	atom_length(Term, 1) ->
 			true
 		;	throw(domain_error(character, Term))
+		).
+
+	check(order, Term) :-
+		(	Term == (<) ->
+			true
+		;	Term == (=) ->
+			true
+		;	Term == (>) ->
+			true
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	atom(Term) ->
+			throw(domain_error(order, Term))
+		;	throw(type_error(atom, Term))
 		).
 
 	% number derived types

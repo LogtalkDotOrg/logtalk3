@@ -198,6 +198,10 @@
           <dd class="text">For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.</dd>
         </dl>
         <dl class="remarks">
+          <dt class="comment">order type notes</dt>
+          <dd class="text">The three possible values of this type are the single character atoms &lt;, =, and &gt;.</dd>
+        </dl>
+        <dl class="remarks">
           <dt class="comment">General notes</dt>
           <dd class="text">The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.</dd>
         </dl>
