@@ -37,7 +37,7 @@
 			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows chosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is typically an arithmetic or term comparison expression that tests if Term belongs to an interval. The term is type-checked before evaluating the expression.',
+			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is usually an arithmetic or term comparison expression that tests if Term belongs to an interval. The term is type-checked before evaluating the expression.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'General notes' - 'The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
@@ -151,6 +151,8 @@
 
 	% entities
 
+	:- if(current_logtalk_flag(modules, supported)).
+
 	check(entity, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
@@ -166,6 +168,26 @@
 			throw(existence_error(entity, Term))
 		;	throw(type_error(entity_identifier, Term))
 		).
+
+	:- else.
+
+	check(entity, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	current_object(Term) ->
+			true
+		;	current_protocol(Term) ->
+			true
+		;	current_category(Term) ->
+			true
+		;	callable(Term) ->
+			throw(existence_error(entity, Term))
+		;	throw(type_error(entity_identifier, Term))
+		).
+
+	:- else.
+
+	:- endif.
 
 	check(object, Term) :-
 		(	var(Term) ->
@@ -574,6 +596,7 @@
 
 	check(one_of(Type, Set), Term) :-
 		check(Type, Term),
+		% use negation to avoid further instantiating the term
 		(	\+ member(Term, Set) ->
 			throw(domain_error(one_of(Type, Set), Term))
 		;	true
@@ -592,8 +615,11 @@
 		current_logtalk_flag(unicode, Unicode),
 		code_upper_limit(Unicode, Upper).
 
+	% 0x10FFFF
 	code_upper_limit(full, 1114111).
+	% 0xFFFF
 	code_upper_limit(bmp, 65535).
+	% 0xFF
 	code_upper_limit(unsupported, 255).
 
 	is_list(Var) :-
