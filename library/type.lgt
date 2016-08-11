@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/08,
+		date is 2016/08/10,
 		comment is 'Type checking predicates. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
@@ -446,7 +446,7 @@
 			throw(instantiation_error)
 		;	\+ integer(Term) ->
 			throw(type_error(integer, Term))
-		;	{between(0, 255, Term)} ->
+		;	0 =< Term, Term =< 255 ->
 			true
 		;	throw(domain_error(byte, Term))
 		).
@@ -457,7 +457,7 @@
 		;	\+ integer(Term) ->
 			throw(type_error(integer, Term))
 		;	code_upper_limit(Upper),
-			{between(0, Upper, Term)} ->
+			0 =< Term, Term =< Upper ->
 			true
 		;	throw(domain_error(character_code, Term))
 		).
@@ -653,9 +653,3 @@
 		member(Head, Tail).
 
 :- end_object.
-
-
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
-	% workaround XSB atom-based module system
-	:- import(from(/(between,3), basics)).
-:- endif.
