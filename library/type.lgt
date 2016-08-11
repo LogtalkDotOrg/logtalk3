@@ -33,11 +33,11 @@
 			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
-			'Other types' - '{between(Type,Lower,Upper), interval(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}',
+			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}',
 			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows chosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'interval(Type, LambdaExpression) type notes' - 'LambdaExpression must use the form [Term]>>Expression. Term is the term being checked. Expression is usually an arithmetic or term comparison expression that tests if Term belongs to an interval. The term is type-checked before evaluating the expression.',
+			'property(Type, LambdaExpression) type notes' - 'LambdaExpression must be of the form [Term]>>Goal. Term is the term being checked. Goal verifies that Term satisfies some property and is called in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'General notes' - 'The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
@@ -138,7 +138,7 @@
 	type(cyclic).
 	type(acyclic).
 	type(between(_Type, _Lower, _Upper)).
-	type(interval(_Type, _LambdaExpression)).
+	type(property(_Type, _LambdaExpression)).
 	% other types
 	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
@@ -587,11 +587,11 @@
 		;	throw(domain_error(between(Type, Lower, Upper), Term))
 		).
 
-	check(interval(Type, [Term]>>Closure), Term) :-
+	check(property(Type, [Term]>>Goal), Term) :-
 		check(Type, Term),
-		(	{call(Closure)} ->
-			true
-		;	throw(domain_error(interval(Type, [Term]>>Closure), Term))
+		(	{call(Goal)} ->
+		true
+		;	throw(domain_error(property(Type, [Term]>>Goal), Term))
 		).
 
 	check(one_of(Type, Set), Term) :-
