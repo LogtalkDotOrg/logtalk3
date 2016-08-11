@@ -26,7 +26,7 @@
 	:- info([
 		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2016/07/28,
+		date is 2016/08/11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -735,12 +735,12 @@
 	% skipped tests
 	term_expansion((- Head), Expansion) :-
 		term_expansion((- Head :- true), Expansion).
-	term_expansion((- Head :- _), []) :-
+	term_expansion((- Head :- Goal), []) :-
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		(	Head = test(Test, _, Options) ->
-			parse_test_options(Options, Test, _, _, _, Note),
+			parse_test_options(Options, Goal, Test, _, _, _, Note),
 			assertz(test_(Test, skipped(Test, Position, Note)))
 		;	assertz(test_(Test, skipped(Test, Position)))
 		).
@@ -752,7 +752,7 @@
 		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
 		term_variables(Options, Variables),
-		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
+		parse_test_options(Options, Goal0, Test, Condition, Setup, Cleanup, Note),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
 		;	Outcome == deterministic ->
@@ -919,11 +919,32 @@
 		;	true
 		).
 
-	parse_test_options([], _, Condition, Setup, Cleanup, _) :-
-		(var(Condition) -> Condition = true; true),
-		(var(Setup) -> Setup = true; true),
-		(var(Cleanup) -> Cleanup = true; true).
-	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Note) :-
+	parse_test_options([], Goal, _, Condition, Setup, Cleanup, Note) :-
+		(	var(Condition) ->
+			% no condition/1 option found
+			Condition = true
+		;	true
+		),
+		(	var(Setup) ->
+			% no setup/1 option found
+			Setup = true
+		;	true
+		),
+		(	var(Cleanup) ->
+			% no cleanup/1 option found
+			Cleanup = true
+		;	true
+		),
+		(	nonvar(Note) ->
+			true
+		;	term_variables(Goal, Variables),
+			member_var(Note, Variables) ->
+			% assume note/1 argument instantiated by the test goal
+			true
+		;	% no note/1 option found
+			Note = ''
+		).
+	parse_test_options([Option| Options], Goal, Test, Condition, Setup, Cleanup, Note) :-
 		(	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '_condition', Goal, Condition)
 		;	Option = setup(Goal) ->
@@ -935,7 +956,7 @@
 		;	% ignore non-recognized options
 			true
 		),
-		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note).
+		parse_test_options(Options, Goal, Test, Condition, Setup, Cleanup, Note).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
 		atom_concat(Test, Step, Head),
@@ -1489,6 +1510,11 @@
 		!.
 	memberchk(Element, [_| List]) :-
 		memberchk(Element, List).
+
+	member_var(Var, [Head| _]) :-
+		Var == Head.
+	member_var(Var, [_| Tail]) :-
+		member_var(Var, Tail).
 
 :- end_object.
 
