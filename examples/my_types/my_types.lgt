@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/08,
+		date is 2016/08/10,
 		comment is 'A simple example of extending the "type" library object with a new type definition.'
 	]).
 
@@ -43,10 +43,10 @@
 		check_temperature(Unit, Term).
 
 	check_temperature(celsius, Term) :-
-		type::check(interval(float, [Temperature]>>(Temperature >= -273.15)), Term).
+		type::check(property(float, [Temperature]>>(Temperature >= -273.15)), Term).
 	check_temperature(fahrenheit, Term) :-
-		type::check(interval(float, [Temperature]>>(Temperature >= -459.67)), Term).
+		type::check(property(float, [Temperature]>>(Temperature >= -459.67)), Term).
 	check_temperature(kelvin, Term) :-
-		type::check(interval(float, [Temperature]>>(Temperature >= 0.0)), Term).
+		type::check(property(float, [Temperature]>>(Temperature >= 0.0)), Term).
 
 :- end_category.

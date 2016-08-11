@@ -591,7 +591,7 @@
 	check(property(Type, [Term]>>Goal), Term) :-
 		check(Type, Term),
 		(	{call(Goal)} ->
-		true
+			true
 		;	throw(domain_error(property(Type, [Term]>>Goal), Term))
 		).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/08,
+		date is 2016/08/10,
 		comment is 'Unit tests for the "my_types" example.'
 	]).
 
@@ -43,7 +43,7 @@
 	throws(types_5, type_error(float,38)) :-
 		type::check(temperature(celsius), 38).
 
-	throws(types_6, error(domain_error(interval(float,[-12.1]>>(-12.1>=0.0)),-12.1), my_error_context)) :-
+	throws(types_6, error(domain_error(property(float,[-12.1]>>(-12.1>=0.0)),-12.1), my_error_context)) :-
 		type::check(temperature(kelvin), -12.1, my_error_context).
 
 :- end_object.
