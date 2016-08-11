@@ -40,7 +40,8 @@
 			'property(Type, LambdaExpression) type notes' - 'LambdaExpression must be of the form [Term]>>Goal. Term is the term being checked. Goal verifies that Term satisfies some property and is called in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
-			'General notes' - 'The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
+			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
+			'Design decisions' - 'The predicates valid/2 abd check/3 are defined uisng the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
 		]
 	]).
 

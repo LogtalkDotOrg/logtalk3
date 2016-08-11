@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/8</code>
+            <code>2016/8/10</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -175,7 +175,7 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Other types</dt>
-          <dd class="text">{between(Type,Lower,Upper), interval(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}</dd>
+          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">between(Type, Lower, Upper) type notes</dt>
@@ -190,8 +190,8 @@
           <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">interval(Type, LambdaExpression) type notes</dt>
-          <dd class="text">LambdaExpression must use the form [Term]&gt;&gt;Expression. Term is the term being checked. Expression is usually an arithmetic or term comparison expression that tests if Term belongs to an interval. The term is type-checked before evaluating the expression.</dd>
+          <dt class="comment">property(Type, LambdaExpression) type notes</dt>
+          <dd class="text">LambdaExpression must be of the form [Term]&gt;&gt;Goal. Term is the term being checked. Goal verifies that Term satisfies some property and is called in the context of "user". The term is type-checked before calling the goal.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">one_of(Type, Set) type notes</dt>
@@ -202,8 +202,12 @@
           <dd class="text">The three possible values of this type are the single character atoms &lt;, =, and &gt;.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">General notes</dt>
-          <dd class="text">The type argument to the predicates is never itself type-checked for performance reasons. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.</dd>
+          <dt class="comment">Caveats</dt>
+          <dd class="text">The type argument to the predicates is never itself type-checked for performance reasons.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Design decisions</dt>
+          <dd class="text">The predicates valid/2 abd check/3 are defined uisng the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.</dd>
         </dl>
       </div>
     </div>
