@@ -23,8 +23,8 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/10,
-		comment is 'Type checking predicates. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
+		date is 2016/08/12,
+		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier}',
@@ -34,14 +34,14 @@
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}',
-			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows chosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
+			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
 			'property(Type, LambdaExpression) type notes' - 'LambdaExpression must be of the form [Term]>>Goal. Term is the term being checked. Goal verifies that Term satisfies some property and is called in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
-			'Design decisions' - 'The predicates valid/2 abd check/3 are defined uisng the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.'
+			'Design choices' - 'The predicates valid/2 and check/3 are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.'
 		]
 	]).
 

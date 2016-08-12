@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">type</h1>
       <blockquote>
-        <p class="comment">Type checking predicates. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
+        <p class="comment">Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/10</code>
+            <code>2016/8/12</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -179,7 +179,7 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">between(Type, Lower, Upper) type notes</dt>
-          <dd class="text">The type argument allows distinguishing between numbers and other types. It also allows chosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</dd>
+          <dd class="text">The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">boolean type notes</dt>
@@ -206,8 +206,8 @@
           <dd class="text">The type argument to the predicates is never itself type-checked for performance reasons.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Design decisions</dt>
-          <dd class="text">The predicates valid/2 abd check/3 are defined uisng the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an aditional predicate.</dd>
+          <dt class="comment">Design choices</dt>
+          <dd class="text">The predicates valid/2 and check/3 are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</dd>
         </dl>
       </div>
     </div>
