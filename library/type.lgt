@@ -41,7 +41,7 @@
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
-			'Design choices' - 'The predicates valid/2 and check/3 are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.'
+			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.'
 		]
 	]).
 
@@ -67,7 +67,7 @@
 	:- public(check/3).
 	:- mode(check(@callable, @term, @term), one).
 	:- info(check/3, [
-		comment is 'True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context).',
+		comment is 'True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.',
 		argnames is ['Type', 'Term', 'Context']
 	]).
 
@@ -80,7 +80,13 @@
 	:- mode(check(@callable, @term), one).
 	:- info(check/2, [
 		comment is 'True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.',
-		argnames is ['Type', 'Term']
+		argnames is ['Type', 'Term'],
+		exceptions is [
+			'Term is not bound as required' - 'instantiation_error',
+			'Term is not of the specified type' - 'type_error(Type, Term)',
+			'Term is the of the correct type but not in the specified domain' - 'domain_error(Domain, Term)',
+			'Term is the of the correct type and domain but the resource it represents does not exist' - 'existence_error(Type, Term)'
+		]
 	]).
 
 	% Logtalk entity types

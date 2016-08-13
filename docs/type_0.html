@@ -85,7 +85,7 @@
         <div class="section">
           <h3 id="check/3" class="code">check/3</h3>
           <blockquote>
-            <p class="comment">True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context).</p>
+            <p class="comment">True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -120,6 +120,11 @@
             <dd class="value">
               <code>check(@callable,@term) &ndash; one</code>
             </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Term is not bound as required: <code>instantiation_error</code></dd>
+            <dd class="value">Term is not of the specified type: <code>type_error(Type, Term)</code></dd>
+            <dd class="value">Term is the of the correct type but not in the specified domain: <code>domain_error(Domain, Term)</code></dd>
+            <dd class="value">Term is the of the correct type and domain but the resource it represents does not exist: <code>existence_error(Type, Term)</code></dd>
           </dl>
         </div>
       </div>
@@ -207,7 +212,7 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Design choices</dt>
-          <dd class="text">The predicates valid/2 and check/3 are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</dd>
+          <dd class="text">The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</dd>
         </dl>
       </div>
     </div>
