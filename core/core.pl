@@ -2511,6 +2511,7 @@ logtalk_make(Target) :-
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(Object::_, Properties)),
+	% note that the next call always fails when Object is not bound
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	(	'$lgt_member'(line_count(Line), Properties) ->
 		true
@@ -2521,6 +2522,8 @@ logtalk_make(Target) :-
 
 '$lgt_missing_module'(Module-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(':'(Module,_), Properties)),
+	% note that the next call always fails when Module is not bound
+	% given the call, assume that the backend compiler supports modules
 	\+ current_module(Module),
 	(	'$lgt_member'(line_count(Line), Properties) ->
 		true
@@ -2535,8 +2538,6 @@ logtalk_make(Target) :-
 	'$lgt_entity_property_'(Entity, calls(Object::Predicate, Properties)),
 	% the object may only be known at runtime; reject those cases
 	nonvar(Object),
-	% in rare cases, the predicate may only be fully specified at runtime
-	ground(Predicate),
 	% require loaded objects as the missing objects are already listed
 	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_current_predicate'(Object, Predicate, Entity, p(p(p))),
@@ -2568,8 +2569,6 @@ logtalk_make(Target) :-
 
 '$lgt_missing_predicate'((::Functor/Arity)-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(::Functor/Arity, Properties)),
-	% in rare cases, the predicate may only be fully specified at runtime
-	ground(Functor/Arity),
 	functor(Template, Functor, Arity),
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, IDcl, _, _, _, _, _) ->
 		(	\+ '$lgt_instantiates_class_'(Entity, _, _),
