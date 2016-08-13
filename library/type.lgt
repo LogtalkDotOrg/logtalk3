@@ -65,7 +65,7 @@
 	]).
 
 	:- public(check/3).
-	:- mode(check(@callable, @term, @term), one).
+	:- mode(check(@callable, @term, @term), one_or_error).
 	:- info(check/3, [
 		comment is 'True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.',
 		argnames is ['Type', 'Term', 'Context']
@@ -77,7 +77,7 @@
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
 		:- dynamic(check/2).
 	:- endif.
-	:- mode(check(@callable, @term), one).
+	:- mode(check(@callable, @term), one_or_error).
 	:- info(check/2, [
 		comment is 'True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.',
 		argnames is ['Type', 'Term'],

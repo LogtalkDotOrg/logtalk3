@@ -33,6 +33,9 @@ support for the Unicode standard.
 * ADDED: Support for `++` (ground) and `--` (unbound) argument instantiation
 modes for use with the `mode/2` predicate directive.
 
+* ADDED: Support for `one_or_error` determinism specification in `mode/2`
+predicate directives. Useful for documenting type-checking predicates.
+
 * IMPROVED: Detect attempts to call existentially quantified goals outside the
 scope of `bagof/3` and `setof/3` calls.
 

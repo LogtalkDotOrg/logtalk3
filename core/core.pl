@@ -2880,7 +2880,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 6, 3, rc8)).
+'$lgt_version_data'(logtalk(3, 6, 3, rc9)).
 
 
 
@@ -17519,6 +17519,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_number_of_proofs'(zero_or_more).
 % calling the predicate using the specified mode always succeed at least once
 '$lgt_valid_number_of_proofs'(one_or_more).
+% calling the predicate using the specified mode either succeeds once or throws an error
+'$lgt_valid_number_of_proofs'(one_or_error).
 % calling the predicate using the specified mode throws an error
 '$lgt_valid_number_of_proofs'(error).
 
