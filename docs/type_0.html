@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/12</code>
+            <code>2016/8/13</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -195,8 +195,8 @@
           <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">property(Type, LambdaExpression) type notes</dt>
-          <dd class="text">LambdaExpression must be of the form [Term]&gt;&gt;Goal. Term is the term being checked. Goal verifies that Term satisfies some property and is called in the context of "user". The term is type-checked before calling the goal.</dd>
+          <dt class="comment">property(Type, Lambda) type notes</dt>
+          <dd class="text">Verifies that Term satisfies a property described using a lambda expression of the form [Arg]&gt;&gt;Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">one_of(Type, Set) type notes</dt>
