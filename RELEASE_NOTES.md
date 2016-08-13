@@ -49,6 +49,9 @@ by the make mechanism.
 * FIXED: Avoid redundant file reloads when calling `logtalk_make/0` or
 `logtalk_make/1` with the target `all`.
 
+* FIXED: Detection of missing predicates in `^^/1` calls when calling
+`logtalk_make/1` with the target `missing`.
+
 Prolog adapter and integration files
 ------------------------------------
 

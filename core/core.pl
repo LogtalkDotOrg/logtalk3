@@ -2546,6 +2546,26 @@ logtalk_make(Target) :-
 	),
 	'$lgt_missing_reference'(Entity, Line, Reference).
 
+'$lgt_missing_predicate'((^^Functor/Arity)-Reference) :-
+	'$lgt_entity_property_'(Entity, calls(^^Functor/Arity, Properties)),
+	functor(Template, Functor, Arity),
+	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, IDcl, _, _, _, _, _) ->
+		(	\+ '$lgt_instantiates_class_'(Entity, _, _),
+			\+ '$lgt_specializes_class_'(Entity, _, _) ->
+			% prototype
+			\+ call(Dcl, Template, _, _, _, _, _)
+		;	% instance and/or class
+			\+ call(IDcl, Template, _, _, _, _, _)
+		)
+	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),
+		\+ call(Dcl, Template, _, _, _, _)
+	),
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	Line = -1
+	),
+	'$lgt_missing_reference'(Entity, Line, Reference).
+
 '$lgt_missing_predicate'((::Functor/Arity)-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(::Functor/Arity, Properties)),
 	% in rare cases, the predicate may only be fully specified at runtime
