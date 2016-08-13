@@ -792,7 +792,9 @@ object_property(Obj, Prop) :-
 	;	fail
 	).
 
+
 '$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, Scope, Resources) :-
+	% the caller uses this predicate to group object resources by scope
 	findall(
 		Resource,
 		'$lgt_object_property_resource'(Obj, Dcl, DDcl, Flags, Scope, Resource),
@@ -890,6 +892,7 @@ category_property(Ctg, Prop) :-
 
 
 '$lgt_category_property_resources'(Ctg, Dcl, Flags, Scope, Resources) :-
+	% the caller uses this predicate to group object resources by scope
 	findall(
 		Resource,
 		'$lgt_category_property_resource'(Ctg, Dcl, Flags, Scope, Resource),
@@ -960,6 +963,7 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_protocol_property_resources'(Ptc, Dcl, Flags, Scope, Resources) :-
+	% the caller uses this predicate to group object resources by scope
 	findall(
 		Resource,
 		'$lgt_protocol_property_resource'(Ptc, Dcl, Flags, Scope, Resource),
@@ -1283,9 +1287,9 @@ create_protocol(Ptc, Relations, Directives) :-
 
 
 '$lgt_next_integer'(I, I).
-'$lgt_next_integer'(I, J) :-
-	I2 is I + 1,
-	'$lgt_next_integer'(I2, J).
+'$lgt_next_integer'(I, K) :-
+	J is I + 1,
+	'$lgt_next_integer'(J, K).
 
 
 
