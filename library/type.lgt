@@ -37,7 +37,7 @@
 			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
-			'property(Type, Lambda) type notes' - 'Verifies that Term satisfies a property described using a lambda expression of the form [Arg]>>Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.',
+			'property(Type, Lambda) type notes' - 'Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]>>Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
@@ -594,11 +594,11 @@
 		;	throw(domain_error(between(Type, Lower, Upper), Term))
 		).
 
-	check(property(Type, [Handle]>>Goal), Term) :-
+	check(property(Type, [Parameter]>>Goal), Term) :-
 		check(Type, Term),
-		(	\+ \+ {Handle = Term, call(Goal)} ->
+		(	\+ \+ {Parameter = Term, call(Goal)} ->
 			true
-		;	throw(domain_error(property(Type, [Handle]>>Goal), Term))
+		;	throw(domain_error(property(Type, [Parameter]>>Goal), Term))
 		).
 
 	check(one_of(Type, Set), Term) :-
