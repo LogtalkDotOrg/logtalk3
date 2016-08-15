@@ -24,7 +24,8 @@ This tool generates library, file, and entity diagrams for source files
 and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
-for Prolog module applications.
+for Prolog module applications. It's also possible to generate predicate
+cross-referencing diagrams for plain Prolog files.
 
 
 API documentation
@@ -282,6 +283,23 @@ When using SWI-Prolog or YAP as the backend compilers, diagrams can also be
 generated for (loaded) Prolog source files (containing module definitions)
 and for (loaded) Prolog modules. However, the diagraming methods that take
 a library name as argument are not currently usable.
+
+
+Creating diagrams for plain Prolog files
+----------------------------------------
+
+This tool can also be used to create predicate cross-referencing diagrams
+for plain Prolog files. For example, if the Prolog file is named `code.pl`,
+simply define an object including its code:
+
+	:- object(code).
+		:- include('code.pl').
+	:- end_object.
+
+Save the object to a e.g. `code.lgt` file in the same directory as the
+Prolog file and then load it and create the diagram:
+
+	?- logtalk_load(code), xref_diagram::entity(code).
 
 
 Other notes
