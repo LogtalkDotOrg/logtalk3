@@ -53,6 +53,9 @@ by the make mechanism.
 * FIXED: Detection of missing predicates in `^^/1` calls when calling
 `logtalk_make/1` with the target `missing`.
 
+* FIXED: Bug in the reflection API where some predicate cross-referencing
+information were not recorded. Thanks to Edward Schwartz for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 

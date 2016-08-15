@@ -11941,23 +11941,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_remember_called_predicate'(compile(user), Functor/Arity, TFunctor/TArity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
-	(	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, Lines) ->
-		% already recorded for the current clause being compiled
-		true
-	;	Head = Object::Predicate ->
+	(	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
-		functor(Predicate, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, Object::HeadFunctor/HeadArity, Lines))
+		Caller = Object::HeadFunctor/HeadArity
 	;	Head = ':'(Module,Predicate) ->
 		% call from the body of a Prolog module multifile predicate clause
-		functor(Predicate, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, ':'(Module,HeadFunctor/HeadArity), Lines))
+		Caller = ':'(Module,HeadFunctor/HeadArity)
 	;	% call from the body of a local entity clause
-		functor(Head, HeadFunctor, HeadArity),
-		Functor/Arity \== HeadFunctor/HeadArity ->
-		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, Lines))
-	;	% recursive call
+		Head = Predicate,
+		Caller = HeadFunctor/HeadArity
+	),
+	functor(Predicate, HeadFunctor, HeadArity),
+	(	Caller == Functor/Arity ->
+		% recursive call
 		true
+	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, Caller, Lines) ->
+		% already recorded for the current clause being compiled
+		true
+	;	assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, Caller, Lines))
 	).
 
 
@@ -11973,20 +11974,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_remember_called_self_predicate'(compile(user), Functor/Arity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
-	(	'$lgt_pp_calls_self_predicate_'(Functor/Arity, _, Lines) ->
-		% already recorded for the current clause being compiled (however unlikely!)
-		true
-	;	Head = Object::Predicate ->
+	(	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
-		functor(Predicate, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, Object::HeadFunctor/HeadArity, Lines))
+		Caller = Object::HeadFunctor/HeadArity
 	;	Head = ':'(Module,Predicate) ->
 		% call from the body of a Prolog module multifile predicate clause
-		functor(Predicate, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, ':'(Module,HeadFunctor/HeadArity), Lines))
+		Caller = ':'(Module,HeadFunctor/HeadArity)
 	;	% call from the body of a local entity clause
-		functor(Head, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines))
+		Head = Predicate,
+		Caller = HeadFunctor/HeadArity
+	),
+	functor(Predicate, HeadFunctor, HeadArity),
+	(	'$lgt_pp_calls_self_predicate_'(Functor/Arity, Caller, Lines) ->
+		% already recorded for the current clause being compiled (however unlikely!)
+		true
+	;	assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, Caller, Lines))
 	).
 
 
@@ -12002,20 +12004,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_remember_called_super_predicate'(compile(user), Functor/Arity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
-	(	'$lgt_pp_calls_super_predicate_'(Functor/Arity, _, Lines) ->
-		% already recorded for the current clause being compiled (however unlikely!)
-		true
-	;	Head = Object::Predicate ->
+	(	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
-		functor(Predicate, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, Object::HeadFunctor/HeadArity, Lines))
+		Caller = Object::HeadFunctor/HeadArity
 	;	Head = ':'(Module,Predicate) ->
 		% call from the body of a Prolog module multifile predicate clause
-		functor(Predicate, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, ':'(Module,HeadFunctor/HeadArity), Lines))
+		Caller = ':'(Module,HeadFunctor/HeadArity)
 	;	% call from the body of a local entity clause
-		functor(Head, HeadFunctor, HeadArity),
-		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines))
+		Head = Predicate,
+		Caller = HeadFunctor/HeadArity
+	),
+	functor(Predicate, HeadFunctor, HeadArity),
+	(	'$lgt_pp_calls_super_predicate_'(Functor/Arity, Caller, Lines) ->
+		% already recorded for the current clause being compiled (however unlikely!)
+		true
+	;	assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, Caller, Lines))
 	).
 
 
