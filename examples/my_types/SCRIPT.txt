@@ -42,5 +42,5 @@ Error = type_error(float, 38).
 yes
 
 | ?- catch(type::check(temperature(kelvin), -12.1, my_error_context), Error, true).
-Error = error(domain_error(interval(float,[-12.1]>>(-12.1>=0.0)),-12.1), my_error_context)
+Error = error(domain_error(property(float, [A]>>(A>=0.0)), -12.1), my_error_context).
 yes

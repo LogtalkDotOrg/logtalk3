@@ -31,7 +31,8 @@ Logtalk compiler and runtime
 support for the Unicode standard.
 
 * ADDED: Support for `++` (ground) and `--` (unbound) argument instantiation
-modes for use with the `mode/2` predicate directive.
+modes (declared as prefix operators) for use with the `mode/2` predicate
+directive.
 
 * ADDED: Support for `one_or_error` determinism specification in `mode/2`
 predicate directives. Useful for documenting type-checking predicates.
@@ -71,8 +72,8 @@ Manual.
 Library
 -------
 
-* ADDED: A user-extensible `type` object defining type checking predicates
-over common Logtalk and Prolog types.
+* ADDED: A user-extensible `type` object defining type testing and type
+checking predicates over common Logtalk and Prolog types.
 
 Tools
 -----
@@ -93,8 +94,8 @@ option whose argument is a variable to be instantiated by the test goal.
 Examples
 --------
 
-* ADDED: Example of defining new types using the user-extensible `type`
-library object.
+* ADDED: New example, `my_types`, of defining new types using the
+user-extensible `type` library object.
 
 
 3.06.2 - July 18, 2016

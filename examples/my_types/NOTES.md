@@ -20,5 +20,6 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains an example of defining new types for type-checking
-purposes (what else?) using the user-extensible `type` library object.
+This folder contains an example of defining new types for type-testing
+and type-checking purposes (what else?) using the user-extensible `type`
+library object.

@@ -23,12 +23,13 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/10,
+		date is 2016/08/14,
 		comment is 'A simple example of extending the "type" library object with a new type definition.'
 	]).
 
-	% register the new type
+	% register a new parametric temperature type
 	:- multifile(type::type/1).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(type::type/1).
 	:- endif.
@@ -36,12 +37,15 @@
 
 	% add the actual checking code for the new type
 	:- multifile(type::check/2).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(type::check/2).
 	:- endif.
 	type::check(temperature(Unit), Term) :-
 		check_temperature(Unit, Term).
 
+	% given that temperature has only a lower bound, we make use of the library
+	% property/2 type to define the necessary test expression for each unit
 	check_temperature(celsius, Term) :-
 		type::check(property(float, [Temperature]>>(Temperature >= -273.15)), Term).
 	check_temperature(fahrenheit, Term) :-
