@@ -192,8 +192,6 @@
 		;	throw(type_error(entity_identifier, Term))
 		).
 
-	:- else.
-
 	:- endif.
 
 	check(object, Term) :-
