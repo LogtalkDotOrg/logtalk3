@@ -35,6 +35,7 @@
 		assignvars_loader,
 		hook_flows_loader,
 		counters,
-		streamvars
+		streamvars,
+		arbitrary
 	], [optimize(on)])
 ).
