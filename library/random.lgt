@@ -68,7 +68,7 @@
 		random(Float),
 		Random is truncate((Float*(Upper-Lower+1)+Lower)).
 
-	member(List, Random) :-
+	member(Random, List) :-
 		length(List, Length),
 		random(Float),
 		Index is truncate(Float*Length+1),
