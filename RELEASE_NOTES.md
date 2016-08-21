@@ -78,6 +78,10 @@ Library
 * ADDED: A user-extensible `type` object defining type testing and type
 checking predicates over common Logtalk and Prolog types.
 
+* UPDATED: Revised random number generator library. Added `between/3`,
+`member/2`, `select/3`, `sequence/4`, `set/4`, `get_seed/1`, and `set_seed/1`
+predicates.
+
 Tools
 -----
 

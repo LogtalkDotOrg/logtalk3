@@ -18,18 +18,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(random,
 	implements(randomp)).
 
 	:- info([
-		version is 1.4,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2007/10/13,
-		comment is 'Random number generator predicates.'
+		date is 2016/08/20,
+		comment is 'Portable random number generator predicates.'
 	]).
 
-	:- synchronized([random/1, randseq/4, randset/4, reset_seed/0, set_seed/1]).
+	:- uses(list, [
+		length/2, nth1/3
+	]).
+
+	:- synchronized([
+		random/1, random/3,
+		sequence/4, set/4, permutation/2,
+		randseq/4, randset/4,
+		reset_seed/0, get_seed/1, set_seed/1
+	]).
 
 	:- initialization(::reset_seed).
 
@@ -53,20 +61,101 @@
 		Float is A0/30269 + A1/30307 + A2/30323,
 		Random is Float - truncate(Float).
 
+	between(Lower, Upper, Random) :-
+		integer(Lower),
+		integer(Upper),
+		Upper >= Lower,
+		random(Float),
+		Random is truncate((Float*(Upper-Lower+1)+Lower)).
+
+	member(List, Random) :-
+		length(List, Length),
+		random(Float),
+		Index is truncate(Float*Length+1),
+		nth1(Index, List, Random).
+
+	select(Random, List, Rest) :-
+		length(List, Length),
+		random(Float),
+		Index is truncate(Float*Length+1),
+		select(1, Index, Random, List, Rest).
+
+	select(Index, Index, Random, [Random| Rest], Rest) :-
+		!.
+	select(Current, Index, Random, [Head| Tail], [Head| Rest]) :-
+		Next is Current + 1,
+		select(Next, Index, Random, Tail, Rest).
+
+	sequence(Length, Lower, Upper, Sequence) :-
+		integer(Length),
+		Length >= 0,
+		integer(Lower),
+		integer(Upper),
+		Upper >= Lower,
+		::retract(seed_(A0, A1, A2)),
+		sequence(Length, Lower, Upper, A0, A1, A2, B0, B1, B2, Sequence),
+		::asserta(seed_(B0, B1, B2)).
+
+	sequence(0, _, _, S0, S1, S2, S0, S1, S2, []) :-
+		!.
+	sequence(N, Lower, Upper, A0, A1, A2, S0, S1, S2, [Random| Sequence]) :-
+		N2 is N - 1,
+		random(A0, A1, A2, B0, B1, B2, Float),
+		Random is truncate(Float*(Upper-Lower+1)+Lower),
+		sequence(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, Sequence).
+
+	set(Length, Lower, Upper, Set) :-
+		integer(Length),
+		Length >= 0,
+		integer(Lower),
+		integer(Upper),
+		Upper >= Lower,
+		Length =< Upper - Lower + 1,
+		::retract(seed_(A0, A1, A2)),
+		set(Length, Lower, Upper, A0, A1, A2, B0, B1, B2, [], Set),
+		::asserta(seed_(B0, B1, B2)).
+
+	set(0, _, _, S0, S1, S2, S0, S1, S2, List, Set) :-
+		!,
+		sort(List, Set).
+	set(N, Lower, Upper, A0, A1, A2, S0, S1, S2, Acc, Set) :-
+		random(A0, A1, A2, B0, B1, B2, Float),
+		Random is truncate(Float*(Upper-Lower+1)+Lower),
+		(	not_member(Acc, Random) ->
+			N2 is N - 1,
+			set(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, [Random| Acc], Set)
+		;	set(N, Lower, Upper, B0, B1, B2, S0, S1, S2, Acc, Set)
+		).
+
+	permutation(List, Permutation) :-
+		::retract(seed_(A0, A1, A2)),
+		add_random_key(List, A0, A1, A2, B0, B1, B2, KeyList),
+		::asserta(seed_(B0, B1, B2)),
+		keysort(KeyList, SortedKeyList),
+		remove_random_key(SortedKeyList, Permutation).
+
+	add_random_key([], S0, S1, S2, S0, S1, S2, []).
+	add_random_key([Head| Tail], A0, A1, A2, S0, S1, S2, [Random-Head| KeyTail]) :-
+		random(A0, A1, A2, B0, B1, B2, Random),
+		add_random_key(Tail, B0, B1, B2, S0, S1, S2, KeyTail).
+
+	remove_random_key([], []).
+	remove_random_key([_-Head| KeyTail], [Head| Tail]) :-
+		remove_random_key(KeyTail, Tail).
+
 	random(Lower, Upper, Random) :-
 		integer(Lower),
 		integer(Upper),
 		Upper >= Lower,
 		!,
 		random(Float),
-		Random is truncate((Float * (Upper-Lower)+Lower)).
-
+		Random is truncate((Float*(Upper-Lower)+Lower)).
 	random(Lower, Upper, Random) :-
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
 		random(Float),
-		Random is Float * (Upper-Lower)+Lower.
+		Random is Float * (Upper-Lower) + Lower.
 
 	randseq(Length, Lower, Upper, Sequence) :-
 		integer(Length),
@@ -79,7 +168,6 @@
 		randseq(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), List),
 		::asserta(seed_(B0, B1, B2)),
 		map_truncate(List, Sequence).
-
 	randseq(Length, Lower, Upper, Sequence) :-
 		integer(Length),
 		Length >= 0,
@@ -124,20 +212,20 @@
 		randset(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), [], Set),
 		::asserta(seed_(B0, B1, B2)).
 
-	randset(0, _, _, Seed, Seed, List, List) :-
-		!.
-	randset(N, Lower, Upper, (A0, A1, A2), (C0, C1, C2), Acc, List) :-
-		N2 is N - 1,
+	randset(0, _, _, Seed, Seed, List, Set) :-
+		!,
+		sort(List, Set).
+	randset(N, Lower, Upper, (A0, A1, A2), (C0, C1, C2), Acc, Set) :-
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Float2 is Float * (Upper-Lower)+Lower,
+		Float2 is Float * (Upper-Lower) + Lower,
 		(	integer(Lower) ->
 			Random is truncate(Float2)
 		;	Random is Float2
 		),
 		(	not_member(Acc, Random) ->
-			add_ordered(Acc, Random, Acc2),
-			randset(N2, Lower, Upper, (B0, B1, B2), (C0, C1, C2), Acc2, List)
-		;	randset(N, Lower, Upper, (B0, B1, B2), (C0, C1, C2), Acc, List)
+			N2 is N - 1,
+			randset(N2, Lower, Upper, (B0, B1, B2), (C0, C1, C2), [Random| Acc], Set)
+		;	randset(N, Lower, Upper, (B0, B1, B2), (C0, C1, C2), Acc, Set)
 		).
 
 	not_member([], _).
@@ -145,25 +233,25 @@
 		H =\= R,
 		not_member(T, R).
 
-	add_ordered([], R, [R]).
-	add_ordered([H| T], R, L) :-
-		(	H > R ->
-			L = [R, H| T]
-		;	L = [H| T2],
-			add_ordered(T, R, T2)
-		).
-
 	reset_seed :-
 		::retractall(seed_(_, _, _)),
 		::asserta(seed_(3172, 9814, 20125)).
 
+	get_seed(seed(S0, S1, S2)) :-
+		::seed_(S0, S1, S2).
+
 	set_seed(Seed) :-
 		integer(Seed),
+		!,
 		Seed > 0,
 		::retractall(seed_(_, _, _)),
 		S0 is Seed mod 30269,
 		S1 is Seed mod 30307,
 		S2 is Seed mod 30323,
+		::asserta(seed_(S0, S1, S2)).
+
+	set_seed(seed(S0, S1, S2)) :-
+		::retractall(seed_(_, _, _)),
 		::asserta(seed_(S0, S1, S2)).
 
 :- end_object.

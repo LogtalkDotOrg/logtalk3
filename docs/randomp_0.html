@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>2.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2008/10/31</code>
+            <code>2016/8/19</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -50,7 +50,7 @@
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static, synchronized</code>
+              <code>static</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -63,14 +63,134 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="random/3" class="code">random/3</h3>
+          <h3 id="between/3" class="code">between/3</h3>
           <blockquote>
-            <p class="comment">Returns a new random value in the interval [Lower, Upper[.</p>
+            <p class="comment">Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower &gt; Upper.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static, synchronized</code>
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>between(Lower,Upper,Random)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>between(+integer,+integer,-integer) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="member/2" class="code">member/2</h3>
+          <blockquote>
+            <p class="comment">Returns a random member of a list. Fails if the list is empty.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>member(Random,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>member(-term,+list(term)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="select/3" class="code">select/3</h3>
+          <blockquote>
+            <p class="comment">Returns a random member of a list and the rest of the list. Fails if the list is empty.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>select(Random,List,Rest)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>select(-term,+list(term),-list(term)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="permutation/2" class="code">permutation/2</h3>
+          <blockquote>
+            <p class="comment">Returns a random permutation of a list.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>permutation(List,Permutation)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>permutation(+list,-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="sequence/4" class="code">sequence/4</h3>
+          <blockquote>
+            <p class="comment">Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower &gt; Upper.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>sequence(Length,Lower,Upper,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>sequence(+integer,+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="set/4" class="code">set/4</h3>
+          <blockquote>
+            <p class="comment">Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower &gt; Upper, or if Length &gt; Upper - Lower + 1.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>set(Length,Lower,Upper,Set)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>set(+integer,+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="random/3" class="code">random/3</h3>
+          <blockquote>
+            <p class="comment">Returns a new random value in the interval [Lower, Upper[. Fails if Lower &gt; Upper. Deprecated. Use between/3 for integers.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -88,12 +208,12 @@
         <div class="section">
           <h3 id="randseq/4" class="code">randseq/4</h3>
           <blockquote>
-            <p class="comment">Returns a list of Length random values in the interval [Lower, Upper[.</p>
+            <p class="comment">Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower &gt; Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static, synchronized</code>
+              <code>static</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -111,12 +231,12 @@
         <div class="section">
           <h3 id="randset/4" class="code">randset/4</h3>
           <blockquote>
-            <p class="comment">Returns an ordered set of Length random values in the interval [Lower, Upper[.</p>
+            <p class="comment">Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower &gt; Upper, or Length &gt; Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static, synchronized</code>
+              <code>static</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -134,12 +254,12 @@
         <div class="section">
           <h3 id="reset_seed/0" class="code">reset_seed/0</h3>
           <blockquote>
-            <p class="comment">Resets the random seed to its default value.</p>
+            <p class="comment">Resets the random generator seed to its default value. Deprecated. Use get_seed/1 and set_seed/1 instead if you need reproducibility.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static, synchronized</code>
+              <code>static</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
@@ -148,14 +268,34 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="set_seed/1" class="code">set_seed/1</h3>
+          <h3 id="get_seed/1" class="code">get_seed/1</h3>
           <blockquote>
-            <p class="comment">Sets the random seed to the given value.</p>
+            <p class="comment">Gets the current random generator seed. Seed should be regarded as an opaque ground term</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static, synchronized</code>
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>get_seed(Seed)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>get_seed(-ground) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="set_seed/1" class="code">set_seed/1</h3>
+          <blockquote>
+            <p class="comment">Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -163,7 +303,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>set_seed(+integer) &ndash; zero_or_one</code>
+              <code>set_seed(+ground) &ndash; one</code>
             </dd>
           </dl>
         </div>
