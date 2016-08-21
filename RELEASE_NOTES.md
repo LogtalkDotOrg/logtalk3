@@ -78,7 +78,7 @@ Library
 * ADDED: A user-extensible `type` object defining type testing and type
 checking predicates over common Logtalk and Prolog types.
 
-* ADDED: A user-extensible `arbitrary` category, complementing the library
+* ADDED: A user-extensible `arbitrary` category, which complements the library
 `type` object, defining predicates for generating arbitrary values for selected
 types.
 

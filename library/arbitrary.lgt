@@ -31,6 +31,9 @@
 		]
 	]).
 
+	:- uses(list, [length/2]).
+	:- uses(random, [between/3, member/2, random/1]).
+
 	:- public(arbitrary/1).
 	:- multifile(arbitrary/1).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
@@ -134,34 +137,34 @@
 	:- if(current_logtalk_flag(modules, supported)).
 
 	arbitrary(entity, Arbitrary) :-
-		random::member(ArbitraryType, [object, protocol, category, module]),
+		member(ArbitraryType, [object, protocol, category, module]),
 		arbitrary(ArbitraryType, Arbitrary).
 
 	:- else.
 
 	arbitrary(entity, Arbitrary) :-
-		random::member(ArbitraryType, [object, protocol, category]),
+		member(ArbitraryType, [object, protocol, category]),
 		arbitrary(ArbitraryType, Arbitrary).
 
 	:- endif.
 
 	arbitrary(object, Arbitrary) :-
 		findall(Object, current_object(Object), Objects),
-		random::member(Arbitrary, Objects).
+		member(Arbitrary, Objects).
 
 	arbitrary(protocol, Arbitrary) :-
 		findall(Protocol, current_object(Protocol), Protocols),
-		random::member(Arbitrary, Protocols).
+		member(Arbitrary, Protocols).
 
 	arbitrary(category, Arbitrary) :-
 		findall(Category, current_category(Category), Categories),
-		random::member(Arbitrary, Categories).
+		member(Arbitrary, Categories).
 
 	:- if(current_logtalk_flag(modules, supported)).
 
 	arbitrary(module, Arbitrary) :-
 		findall(Module, current_module(Module), Modules),
-		random::member(Arbitrary, Modules).
+		member(Arbitrary, Modules).
 
 	:- endif.
 
@@ -171,14 +174,14 @@
 		arbitrary(atom(ascii_printable), Arbitrary).
 
 	arbitrary(object_identifier, Arbitrary) :-
-		random::member(Type, [atom(ascii_printable), compound]),
+		member(Type, [atom(ascii_printable), compound]),
 		arbitrary(Type, Arbitrary).
 
 	arbitrary(protocol_identifier, Arbitrary) :-
 		arbitrary(atom(ascii_printable), Arbitrary).
 
 	arbitrary(category_identifier, Arbitrary) :-
-		random::member(Type, [atom(ascii_printable), compound]),
+		member(Type, [atom(ascii_printable), compound]),
 		arbitrary(Type, Arbitrary).
 
 	:- if(current_logtalk_flag(modules, supported)).
@@ -191,7 +194,7 @@
 	% events
 
 	arbitrary(event, Arbitrary) :-
-		random::member(Arbitrary, [before, after]).
+		member(Arbitrary, [before, after]).
 
 	% Prolog base types
 
@@ -206,17 +209,17 @@
 			),
 			Types
 		),
-		random::member(ArbitraryType, Types),
+		member(ArbitraryType, Types),
 		arbitrary(ArbitraryType, Arbitrary).
 
 	arbitrary(var, _).
 
 	arbitrary(nonvar, Arbitrary) :-
-		random::member(Type, [atom(ascii_printable), integer, float, compound]),
+		member(Type, [atom(ascii_printable), integer, float, compound]),
 		arbitrary(Type, Arbitrary).
 
 	arbitrary(atomic, Arbitrary) :-
-		random::member(Type, [atom(ascii_printable), integer, float]),
+		member(Type, [atom(ascii_printable), integer, float]),
 		arbitrary(Type, Arbitrary).
 
 	arbitrary(atom, Arbitrary) :-
@@ -224,15 +227,15 @@
 		atom_codes(Arbitrary, Codes).
 
 	arbitrary(number, Arbitrary) :-
-		random::member(Type, [integer, float]),
+		member(Type, [integer, float]),
 		arbitrary(Type, Arbitrary).
 
 	arbitrary(integer, Arbitrary) :-
-		random::between(-1000, 1000, Arbitrary).
+		between(-1000, 1000, Arbitrary).
 
 	arbitrary(float, Arbitrary) :-
 		arbitrary(integer, Integer),
-		random::random(Factor),
+		random(Factor),
 		Arbitrary is Integer * Factor.
 
 	arbitrary(compound, Arbitrary) :-
@@ -241,20 +244,20 @@
 		Arbitrary =.. [Functor| Arguments].
 
 	arbitrary(callable, Arbitrary) :-
-		random::member(Type, [atom(ascii_printable), compound]),
+		member(Type, [atom(ascii_printable), compound]),
 		arbitrary(Type, Arbitrary).
 
 	% atom derived types
 
 	arbitrary(boolean, Arbitrary) :-
-		random::member(Arbitrary, [true, false]).
+		member(Arbitrary, [true, false]).
 
 	arbitrary(character, Arbitrary) :-
 		arbitrary(character_code, Code),
 		char_code(Arbitrary, Code).
 
 	arbitrary(order, Arbitrary) :-
-		random::member(Arbitrary, [(<), (=), (>)]).
+		member(Arbitrary, [(<), (=), (>)]).
 
 	arbitrary(non_empty_atom, Arbitrary) :-
 		arbitrary(character_code(ascii_printable), Code),
@@ -273,36 +276,36 @@
 	% number derived types
 
 	arbitrary(positive_integer, Arbitrary) :-
-		random::between(1, 1000, Arbitrary).
+		between(1, 1000, Arbitrary).
 
 	arbitrary(negative_integer, Arbitrary) :-
-		random::between(-1000, -1, Arbitrary).
+		between(-1000, -1, Arbitrary).
 
 	arbitrary(non_negative_integer, Arbitrary) :-
-		random::between(0, 1000, Arbitrary).
+		between(0, 1000, Arbitrary).
 
 	arbitrary(non_positive_integer, Arbitrary) :-
-		random::between(-1000, 0, Arbitrary).
+		between(-1000, 0, Arbitrary).
 
 	arbitrary(byte, Arbitrary) :-
-		random::between(0, 255, Arbitrary).
+		between(0, 255, Arbitrary).
 
 	arbitrary(character_code, Arbitrary) :-
 		code_upper_limit(Upper),
-		random::between(0, Upper, Arbitrary).
+		between(0, Upper, Arbitrary).
 
 	arbitrary(character_code(CharSet), Arbitrary) :-
 		(	CharSet == ascii_full ->
-			random::between(0, 127, Arbitrary)
+			between(0, 127, Arbitrary)
 		;	CharSet == ascii_printable ->
-			random::between(32, 126, Arbitrary)
+			between(32, 126, Arbitrary)
 		;	CharSet == byte ->
-			random::between(0, 255, Arbitrary)
+			between(0, 255, Arbitrary)
 		;	CharSet == unicode_bmp ->
-			random::between(0, 65535, Arbitrary)
+			between(0, 65535, Arbitrary)
 		;	CharSet == unicode_full ->
-			random::between(0, 1114111, Arbitrary)
-		;	random::between(32, 126, Arbitrary)
+			between(0, 1114111, Arbitrary)
+		;	between(32, 126, Arbitrary)
 		).
 
 	% compound derived types
@@ -316,11 +319,11 @@
 		arbitrary(between(integer,0,42), Arity).
 
 	arbitrary(predicate_or_non_terminal_indicator, Arbitrary) :-
-		random::member(ArbitraryType, [predicate_indicator, non_terminal_indicator]),
+		member(ArbitraryType, [predicate_indicator, non_terminal_indicator]),
 		arbitrary(ArbitraryType, Arbitrary).
 
 	arbitrary(clause, Arbitrary) :-
-		random::member(Kind, [fact, rule]),
+		member(Kind, [fact, rule]),
 		(	Kind == fact ->
 			arbitrary(callable, Arbitrary)
 		;	% Kind == rule,
@@ -336,22 +339,14 @@
 		arbitrary(non_empty_list(types([var,atom(ascii_printable),integer,float])), Arbitrary).
 
 	arbitrary(list(Type), Arbitrary) :-
-		random::between(0, 42, Length),
+		between(0, 42, Length),
 		length(Arbitrary, Length),
-		findall(
-			ArbitraryValue,
-			(member(ArbitraryValue, Arbitrary), arbitrary(Type, ArbitraryValue)),
-			Arbitrary
-		).
+		map_arbitrary(Arbitrary, Type).
 
 	arbitrary(non_empty_list(Type), Arbitrary) :-
-		random::between(1, 42, Length),
+		between(1, 42, Length),
 		length(Arbitrary, Length),
-		findall(
-			ArbitraryValue,
-			(member(ArbitraryValue, Arbitrary), arbitrary(Type, ArbitraryValue)),
-			Arbitrary
-		).
+		map_arbitrary(Arbitrary, Type).
 
 	arbitrary(pair, ArbitraryKey-ArbitraryValue) :-
 		arbitrary(nonvar, ArbitraryKey),
@@ -363,12 +358,12 @@
 
 	arbitrary(between(Type, Lower, Upper), Arbitrary) :-
 		(	Type == integer ->
-			random::between(Lower, Upper, Arbitrary)
+			between(Lower, Upper, Arbitrary)
 		;	Type == float ->
-			random::random(Random),
+			random(Random),
 			Arbitrary is Random * (Upper-Lower) + Lower
 		;	Type == number ->
-			random::random(Random),
+			random(Random),
 			Arbitrary is Random * (Upper-Lower) + Lower
 		;	% not a number
 			repeat,
@@ -383,14 +378,14 @@
 		!.
 
 	arbitrary(one_of(_Type, Set), Arbitrary) :-
-		random::member(Arbitrary, Set).
+		member(Arbitrary, Set).
 
 	arbitrary(var_or(Type), Arbitrary) :-
-		random::member(VarOrType, [var, Type]),
+		member(VarOrType, [var, Type]),
 		arbitrary(VarOrType, Arbitrary).
 
 	arbitrary(types(Types), Arbitrary) :-
-		random::member(Type, Types),
+		member(Type, Types),
 		arbitrary(Type, Arbitrary).
 
 	% auxiliary predicates; we could use the Logtalk standard library
@@ -407,8 +402,9 @@
 	% 0xFF
 	code_upper_limit(unsupported, 255).
 
-	member(Head, [Head| _]).
-	member(Head, [_| Tail]) :-
-		member(Head, Tail).
+	map_arbitrary([], _).
+	map_arbitrary([Head| Tail], Type) :-
+		arbitrary(Type, Head),
+		map_arbitrary(Tail, Type).
 
 :- end_category.
