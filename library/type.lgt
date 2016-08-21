@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/13,
+		date is 2016/08/21,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
@@ -40,6 +40,7 @@
 			'property(Type, Lambda) type notes' - 'Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]>>Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
+			'types(Types)' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
 			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.'
 		]
@@ -149,6 +150,7 @@
 	% other types
 	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
+	type(types(_Types)).
 
 	valid(Type, Term) :-
 		catch(check(Type, Term), _, fail).
@@ -611,6 +613,13 @@
 		(	var(Term) ->
 			true
 		;	check(Type, Term)
+		).
+
+	check(types(Types), Term) :-
+		(	member(Type, Types),
+			valid(Type, Term) ->
+			true
+		;	throw(domain_error(types(Types), Term))
 		).
 
 	% auxiliary predicates; we could use the Logtalk standard library
