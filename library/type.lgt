@@ -46,6 +46,8 @@
 		]
 	]).
 
+	:- set_logtalk_flag(complements, restrict).
+
 	:- public(type/1).
 	:- multifile(type/1).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
