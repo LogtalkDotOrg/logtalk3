@@ -22,11 +22,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/03/01,
+		date is 2016/08/22,
 		comment is 'Unit tests for the "patching" example.'
 	]).
+
+	:- uses(list, [memberchk/2]).
 
 	cover(broken).
 	cover(metaclass).
@@ -36,7 +38,7 @@
 
 	succeeds(patching_1) :-
 		setof((Category, Object), complements_object(Category, Object), Pairs),
-		Pairs == [(patch,broken), (patch,broken_class)].
+		ground(Pairs), memberchk((patch,broken), Pairs), memberchk((patch,broken_class), Pairs).
 
 	succeeds(patching_2) :-
 		broken::is_proper_list([1,2,3]).
