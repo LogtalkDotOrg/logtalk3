@@ -21,6 +21,7 @@
 :- initialization(
 	logtalk_load([
 		types_loader,
+		arbitrary_loader,
 		os_loader,
 		dates_loader,
 		events_loader,
@@ -35,7 +36,6 @@
 		assignvars_loader,
 		hook_flows_loader,
 		counters,
-		streamvars,
-		arbitrary
+		streamvars
 	], [optimize(on)])
 ).
