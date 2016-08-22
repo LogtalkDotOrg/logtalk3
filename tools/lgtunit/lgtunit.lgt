@@ -26,7 +26,7 @@
 	:- info([
 		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/08/21,
+		date is 2016/08/22,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -58,17 +58,24 @@
 		argnames is ['Goal']
 	]).
 
+	:- public(quick_check/3).
+	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
+	:- info(quick_check/3, [
+		comment is 'Generates and runs random tests for a given predicate given its mode template reporting the result in reified form: "passed" or "failed(Goal)" where Goal is the test that failed. Accepts an option n(NumberOfTests). Default is to run 100 random tests.',
+		argnames is ['Template', 'Result', 'Options']
+	]).
+
 	:- public(quick_check/2).
 	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
 	:- info(quick_check/2, [
-		comment is 'Generates and runs random tests for a given predicate given its mode template. Fails when a random generated call fails. Accepts an option n(NumberOfTests). Default is to run 100 random tests.',
+		comment is 'Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.',
 		argnames is ['Template', 'Options']
 	]).
 
 	:- public(quick_check/1).
 	:- mode(quick_check(@callable), zero_or_one).
 	:- info(quick_check/1, [
-		comment is 'Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails.',
+		comment is 'Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.',
 		argnames is ['Template']
 	]).
 
@@ -1076,6 +1083,15 @@
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
+
+	quick_check(Template, Result, Options) :-
+		parse_quick_check_options(Options, NumberOfTests),
+		catch(run_quick_check_tests(Template, NumberOfTests), Error, true),
+		(	var(Error) ->
+			Result = passed
+		;	Error = quick_check_failed(Goal),
+			Result = failed(Goal)
+		).
 
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, NumberOfTests),

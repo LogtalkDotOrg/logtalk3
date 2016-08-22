@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/21</code>
+            <code>2016/8/22</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -134,9 +134,29 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="quick_check/3" class="code">quick_check/3</h3>
+          <blockquote>
+            <p class="comment">Generates and runs random tests for a given predicate given its mode template reporting the result in reified form: "passed" or "failed(Goal)" where Goal is the test that failed. Accepts an option n(NumberOfTests). Default is to run 100 random tests.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>quick_check(Template,Result,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>quick_check(@callable,-callable,++list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="quick_check/2" class="code">quick_check/2</h3>
           <blockquote>
-            <p class="comment">Generates and runs random tests for a given predicate given its mode template. Fails when a random generated call fails. Accepts an option n(NumberOfTests). Default is to run 100 random tests.</p>
+            <p class="comment">Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -156,7 +176,7 @@
         <div class="section">
           <h3 id="quick_check/1" class="code">quick_check/1</h3>
           <blockquote>
-            <p class="comment">Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails.</p>
+            <p class="comment">Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>

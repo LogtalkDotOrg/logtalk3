@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2016/08/21,
+		date is 2016/08/22,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -190,7 +190,7 @@
 		['  test goal throws the wrong error: expected ~q but got ~q'-[ExpectedError, Error], nl].
 
 	failed_test_reason(quick_check_failed(Goal)) -->
-		['  quick check failure for the call:'-[], nl, '    ~q'-[Goal], nl].
+		['  quick check test failure:'-[], nl, '    ~q'-[Goal], nl].
 
 	failed_test_reason(step_error(Step, Error)) -->
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
