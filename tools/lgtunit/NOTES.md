@@ -148,6 +148,13 @@ The currently supported options are (non-recognized options are ignored):
 - `note(Term)`  
 	annotation to print (between parenthesis by default) after the test result (default is `''`); the annotation term can share variables with the test goal, which can be used to pass additional information about the test result
 
+Also supported is QuickCheck testing where random tests are automatically
+generated and run given a predicate mode template with type information for
+each argument (see the section below for more details):
+
+	quick_check(Test, Template, Options).
+	quick_check(Test, Template).
+
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
 be corrected otherwise the test results can be misleading.
@@ -162,6 +169,24 @@ Parameterized unit tests can be easily defined by using parametric objects.
 Note: when using the `(<<)/2` debugging control construct to access and test
 an object internal predicates, make sure that the `context_switching_calls`
 compiler flag is set to `allow` for those objects.
+
+
+QuickCheck
+----------
+
+QuickCheck was originally developed for Haskell. Implementations for several
+other programming languages soon followed. The idea is to express properties
+that predicates must comply with and automatically generate tests for those
+properties. The `lgtunit` tool supports both `quick_check/2-3` test idioms
+and `quick_check/1-2` predicates for interactive use. Properties are expressed
+using predicates. The QuickCheck test idioms and predicates take as argument
+the mode template for a property (defined as a local predicate) and generate
+random values for each argument based on the type information. The mode
+template syntax is the same used in the `info/2` predicate directives. An
+optional argument, `n/1`, allows the specification of the number of random
+tests that will be generated and run. The user can define new types to use
+in the property mode templates to use with its QuickCheck tests by defining
+clauses for the `arbitrary` library category multifile predicates.
 
 
 Skipping unit tests

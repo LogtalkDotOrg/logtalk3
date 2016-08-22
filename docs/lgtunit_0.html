@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.17</code>
+            <code>3.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/11</code>
+            <code>2016/8/21</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -130,6 +130,46 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>deterministic(+callable) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="quick_check/2" class="code">quick_check/2</h3>
+          <blockquote>
+            <p class="comment">Generates and runs random tests for a given predicate given its mode template. Fails when a random generated call fails. Accepts an option n(NumberOfTests). Default is to run 100 random tests.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>quick_check(Template,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>quick_check(@callable,++list(compound)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="quick_check/1" class="code">quick_check/1</h3>
+          <blockquote>
+            <p class="comment">Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>quick_check(Template)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>quick_check(@callable) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -257,6 +297,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>run_tests(+list(callable),+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="run_quick_check_tests/2" class="code">run_quick_check_tests/2</h3>
+          <blockquote>
+            <p class="comment">Runs a list of defined tests.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>run_quick_check_tests(Template,NumberOfTests)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>run_quick_check_tests(@callable,+integer) &ndash; one_or_error</code>
             </dd>
           </dl>
         </div>

@@ -89,6 +89,8 @@ predicates.
 Tools
 -----
 
+* ADDED: QuickCheck support to the `lgtunit` tool.
+
 * ADDED: A `doclet` tool providing a simple solution to specify a set of goals
 and a set of shell commands to (re)generate documentation for a project.
 

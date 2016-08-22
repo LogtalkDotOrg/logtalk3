@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2016/06/11,
+		date is 2016/08/21,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -107,6 +107,12 @@
 		;	['~w: skipped (~w)'-[Test, Note], nl]
 		).
 
+	message_tokens(quick_check_passed(NumberOfTests)) -->
+		['~w random tests passed'-[NumberOfTests], nl].
+
+	message_tokens(quick_check_failed(Goal)) -->
+		failed_test_reason(quick_check_failed(Goal)).
+
 	message_tokens(failed_cleanup(Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, Test),
 		['  in file ~w between lines ~w'-[File, Position], nl].
@@ -182,6 +188,10 @@
 		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
 	failed_test_reason(wrong_error(ExpectedError, Error)) -->
 		['  test goal throws the wrong error: expected ~q but got ~q'-[ExpectedError, Error], nl].
+
+	failed_test_reason(quick_check_failed(Goal)) -->
+		['  quick check failure for the call:'-[], nl, '    ~q'-[Goal], nl].
+
 	failed_test_reason(step_error(Step, Error)) -->
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
 	failed_test_reason(step_failure(Step)) -->

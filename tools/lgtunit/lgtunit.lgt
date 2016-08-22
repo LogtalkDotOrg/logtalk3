@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.17,
+		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/08/11,
+		date is 2016/08/21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -56,6 +56,20 @@
 	:- info(deterministic/1, [
 		comment is 'True if a goal succeeds once without leaving choice-points.',
 		argnames is ['Goal']
+	]).
+
+	:- public(quick_check/2).
+	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
+	:- info(quick_check/2, [
+		comment is 'Generates and runs random tests for a given predicate given its mode template. Fails when a random generated call fails. Accepts an option n(NumberOfTests). Default is to run 100 random tests.',
+		argnames is ['Template', 'Options']
+	]).
+
+	:- public(quick_check/1).
+	:- mode(quick_check(@callable), zero_or_one).
+	:- info(quick_check/1, [
+		comment is 'Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails.',
+		argnames is ['Template']
 	]).
 
 	:- public(benchmark/2).
@@ -100,6 +114,13 @@
 	:- info(run_tests/2, [
 		comment is 'Runs a list of defined tests.',
 		argnames is ['Tests', 'File']
+	]).
+
+	:- protected(run_quick_check_tests/2).
+	:- mode(run_quick_check_tests(@callable, +integer), one_or_error).
+	:- info(run_quick_check_tests/2, [
+		comment is 'Runs a list of defined tests.',
+		argnames is ['Template', 'NumberOfTests']
 	]).
 
 	:- protected(condition/0).
@@ -389,9 +410,11 @@
 
 	% we use the structured printing mechanism in order to allow unit tests
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
-	:- uses(logtalk, [
-		print_message/3
-	]).
+	:- uses(logtalk, [print_message/3]).
+	% library support for quick check
+	:- uses(type, [arbitrary/2]).
+	% library list predicates
+	:- uses(list, [append/3, length/2, member/2, memberchk/2]).
 
 	% by default, run the unit tests
 	condition.
@@ -568,6 +591,14 @@
 			;	true
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_error, Output)
+		).
+	run_test(quick_check(Test, Position), File, Output) :-
+		(	catch(::test(Test, _, quick_check), quick_check_failed(Goal), failed_test(Test, File, Position, quick_check_failed(Goal), Output)) ->
+			(	var(Goal) ->
+				passed_test(Test, File, Position, Output)
+			;	true
+			)
+		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
 		).
 
 	run_test(skipped(Test, Position, Note), File, Output) :-
@@ -815,6 +846,20 @@
 		logtalk_load_context(term_position, Position),
 		assertz(test_(Test, throws(Test, Errors, Position))).
 
+	% unit test idiom quick_check/3
+	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests))]) :-
+		check_for_valid_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
+		parse_quick_check_options(Options, NumberOfTests),
+		assertz(test_(Test, quick_check(Test, Position))).
+
+	% unit test idiom quick_check/2
+	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests))]) :-
+		check_for_valid_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
+		parse_quick_check_options([], NumberOfTests),
+		assertz(test_(Test, quick_check(Test, Position))).
+
 	% support the deprecated unit/1 predicate which may still be in use in old code
 	term_expansion(unit(Entity), [cover(Entity)]).
 
@@ -964,6 +1009,17 @@
 		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, _),
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
+	parse_quick_check_options([], NumberOfTests) :-
+		(	var(NumberOfTests) ->
+			NumberOfTests = 100
+		;	true
+		).
+	parse_quick_check_options([Option| Options], NumberOfTests) :-
+		(	Option = n(NumberOfTests) ->
+			true
+		;	parse_quick_check_options(Options, NumberOfTests)
+		).
+
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
@@ -1020,6 +1076,44 @@
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
+
+	quick_check(Template, Options) :-
+		parse_quick_check_options(Options, NumberOfTests),
+		catch(run_quick_check_tests(Template, NumberOfTests), Error, true),
+		(	var(Error) ->
+			print_message(information, lgtunit, quick_check_passed(NumberOfTests))
+		;	print_message(warning, lgtunit, Error),
+			fail
+		).
+
+	quick_check(Template) :-
+		quick_check(Template, []).
+
+	run_quick_check_tests(Template, NumberOfTests) :-
+		Template =.. [Name| Arguments],
+		forall(between(1, NumberOfTests, _), run_quick_check_test(Name, Arguments)).
+
+	run_quick_check_test(Name, Arguments) :-
+		sender(Sender),
+		generate_arbitrary_arguments(Arguments, ArbitraryArguments),
+		Goal =.. [Name| ArbitraryArguments],
+		(	catch(Sender<<Goal, _, throw(quick_check_failed(Goal))) ->
+			true
+		;	throw(quick_check_failed(Goal))
+		).
+
+	generate_arbitrary_arguments([], []).
+	generate_arbitrary_arguments([Arg| Args], [AArg| AArgs]) :-
+		generate_arbitrary_argument(Arg, AArg),
+		generate_arbitrary_arguments(Args, AArgs).
+
+	generate_arbitrary_argument('-'(_), _).
+	generate_arbitrary_argument('+'(Type), Arbitrary) :-
+		arbitrary(Type, Arbitrary).
+	generate_arbitrary_argument('?'(Type), Arbitrary) :-
+		arbitrary(types([var,Type]), Arbitrary).
+	generate_arbitrary_argument('@'(Type), Arbitrary) :-
+		arbitrary(Type, Arbitrary).
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-
@@ -1487,29 +1581,7 @@
 		close(Stream),
 		os::delete_file(Path).
 
-	% auxiliary predicates; we could use the Logtalk standard library but we
-	% prefer to minimize this object dependencies given its testing purpose
-
-	append([], List, List).
-	append([Head| Tail], List, [Head| Tail2]) :-
-		append(Tail, List, Tail2).
-
-	length(List, Length) :-
-		length(List, 0, Length).
-
-	length([], Length, Length).
-	length([_| Tail], Acc, Length) :-
-		Acc2 is Acc + 1,
-		length(Tail, Acc2, Length).
-
-	member(Element, [Element| _]).
-	member(Element, [_| List]) :-
-		member(Element, List).
-
-	memberchk(Element, [Element| _]) :-
-		!.
-	memberchk(Element, [_| List]) :-
-		memberchk(Element, List).
+	% auxiliary predicates
 
 	member_var(Var, [Head| _]) :-
 		Var == Head.
