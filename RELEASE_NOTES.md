@@ -110,6 +110,10 @@ Examples
 * ADDED: New example, `my_types`, of defining new types using the
 user-extensible `type` library object.
 
+* ADDED: New `quick_check` example on how to use the QuickCheck support in
+the `lgtunit` tool for both interactive testing at the top-level and for
+defining unit tests.
+
 
 3.06.2 - July 18, 2016
 ======================

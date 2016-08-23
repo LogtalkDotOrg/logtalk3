@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on August 8, 2016
+%  Last updated on August 22, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -204,6 +204,7 @@ logtalk_library_path(profiling, examples('profiling/')).
 logtalk_library_path(prototypes, examples('prototypes/')).
 logtalk_library_path(proxies, examples('proxies/')).
 logtalk_library_path(puzzles, examples('puzzles/')).
+logtalk_library_path(quick_check, examples('quick_check/')).
 logtalk_library_path(recipes, examples('recipes/')).
 logtalk_library_path(reflection, examples('reflection/')).
 logtalk_library_path(relations, examples('relations/')).

@@ -308,6 +308,11 @@ Follows a short description of each included example (in alphabetical order):
 - `puzzles`  
 	several examples of solving logical puzzles
 
+- `quick_check`  
+	example of using the QuickCheck support provided by the `lgtunit`
+	tool both for interactive testing at the top-level interpreter and
+	for defining unit tests
+
 - `recipes`  
 	example of a possible solution for representing structured data
 	and also of hot patching of running code
