@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/21,
+		date is 2016/08/23,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -388,6 +388,12 @@
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
 
+	shrink(list, Large, Small) :-
+		shrink(list(_), Large, Small).
+
+	shrink(list(_), Large, Small) :-
+		shrink_list(Large, Small).
+
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies
 
@@ -406,5 +412,13 @@
 	map_arbitrary([Head| Tail], Type) :-
 		arbitrary(Type, Head),
 		map_arbitrary(Tail, Type).
+
+	shrink_list([], []).
+	shrink_list([Head| Tail], [Head| Small]) :-
+		shrink_list_discard_one(Tail, Small).
+
+	shrink_list_discard_one([], []).
+	shrink_list_discard_one([_| Tail], Small) :-
+		shrink_list(Tail, Small).
 
 :- end_category.
