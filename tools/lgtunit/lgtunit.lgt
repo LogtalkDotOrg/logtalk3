@@ -419,7 +419,7 @@
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
-	:- uses(type, [arbitrary/2]).
+	:- uses(type, [arbitrary/2, shrink/3]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2]).
 
@@ -1106,22 +1106,22 @@
 		quick_check(Template, []).
 
 	run_quick_check_tests(Template, NumberOfTests) :-
-		Template =.. [Name| Arguments],
-		forall(between(1, NumberOfTests, _), run_quick_check_test(Name, Arguments)).
+		Template =.. [Name| Types],
+		forall(between(1, NumberOfTests, _), run_quick_check_test(Name, Types)).
 
-	run_quick_check_test(Name, Arguments) :-
+	run_quick_check_test(Name, Types) :-
 		sender(Sender),
-		generate_arbitrary_arguments(Arguments, ArbitraryArguments),
-		Goal =.. [Name| ArbitraryArguments],
-		(	catch(Sender<<Goal, _, throw(quick_check_failed(Goal))) ->
+		generate_arbitrary_arguments(Types, Arguments),
+		Goal =.. [Name| Arguments],
+		(	catch(Sender<<Goal, _, shrink_failed_test(Types, Goal)) ->
 			true
-		;	throw(quick_check_failed(Goal))
+		;	shrink_failed_test(Types, Goal)
 		).
 
 	generate_arbitrary_arguments([], []).
-	generate_arbitrary_arguments([Arg| Args], [AArg| AArgs]) :-
-		generate_arbitrary_argument(Arg, AArg),
-		generate_arbitrary_arguments(Args, AArgs).
+	generate_arbitrary_arguments([Type| Types], [Argument| Arguments]) :-
+		generate_arbitrary_argument(Type, Argument),
+		generate_arbitrary_arguments(Types, Arguments).
 
 	generate_arbitrary_argument('-'(_), _).
 	generate_arbitrary_argument('++'(Type), Arbitrary) :-
@@ -1132,6 +1132,42 @@
 		arbitrary(types([var,Type]), Arbitrary).
 	generate_arbitrary_argument('@'(Type), Arbitrary) :-
 		arbitrary(Type, Arbitrary).
+
+	shrink_failed_test(Types, Goal) :-
+		shrink_failed_test(16, Types, Goal).
+
+	shrink_failed_test(Depth, Types, Goal) :-
+		Depth > 0,
+		sender(Sender),
+		shrink_goal(Types, Goal, Small),
+		!,
+		NextDepth is Depth - 1,
+		(	catch(Sender<<Small, _, shrink_failed_test(NextDepth, Types, Small)) ->
+			throw(quick_check_failed(Goal))
+		;	shrink_failed_test(NextDepth, Types, Small)
+		).
+	shrink_failed_test(_, _, Goal) :-
+		throw(quick_check_failed(Goal)).
+
+	shrink_goal(Types, Goal, Small) :-
+		Goal =.. [Functor| LargeArguments],
+		shrink_goal_arguments(Types, LargeArguments, SmallArguments),
+		Small =.. [Functor| SmallArguments],
+		Goal \== Small.
+
+	shrink_goal_arguments([], [], []).
+	shrink_goal_arguments([Type| Types], [LargeArgument| LargeArguments], [SmallArgument| SmallArguments]) :-
+		(	extract_input_type(Type, InputType),
+			shrink(InputType, LargeArgument, SmallArgument) ->
+			true
+		;	SmallArgument = LargeArgument
+		),
+		shrink_goal_arguments(Types, LargeArguments, SmallArguments).
+
+	extract_input_type('++'(Type), Type).
+	extract_input_type('+'(Type), Type).
+	extract_input_type('?'(Type), Type).
+	extract_input_type('@'(Type), Type).
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-
