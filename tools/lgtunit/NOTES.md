@@ -25,8 +25,9 @@ The `lgtunit.lgt` source file implements a framework for defining and running
 unit tests in Logtalk. The `lgtunit_messages.lgt` source file defines the
 default translations for the messages printed when running unit tests. These
 messages can be intercepted to customize output, e.g. to make it less verbose,
-or to integrate this tool with e.g. GUI IDEs. For more information on these
-entities, open the `docs/tools.html` file in a web browser.
+or for integration with e.g. GUI IDEs and continuous integration servers. For
+more information on these entities, open the `docs/tools.html` file in a web
+browser.
 
 This framework can be used for testing both Logtalk and Prolog code. However,
 some features (notably, code coverage) are only available when testing Logtalk
@@ -177,26 +178,26 @@ QuickCheck
 QuickCheck was originally developed for Haskell. Implementations for several
 other programming languages soon followed. The idea is to express properties
 that predicates must comply with and automatically generate tests for those
-properties. The `lgtunit` tool supports both `quick_check/2-3` test idioms as
-described above and `quick_check/1-3` public predicates for interactive use:
+properties. The `lgtunit` tool supports both `quick_check/2-3` test idioms, as
+described above, and `quick_check/1-3` public predicates for interactive use:
 
 	quick_check(Template, Options, Result).
 	quick_check(Template, Options).
 	quick_check(Template).
 
-The `quick_check/3` predicate returns results in reified form (either "passed"
-or "failed(Goal)" with Goal being the random test that failed). The other two
+The `quick_check/3` predicate returns results in reified form (either `passed`
+or `failed(Goal)` with Goal being the random test that failed). The other two
 predicates print the test results.
 
 Properties are expressed using predicates. The QuickCheck test idioms and
 predicates take as argument the mode template for a property (defined as a
-local predicate) and generate random values for each argument based on the
-type information. The mode template syntax is the same used in the `info/2`
-predicate directives. An optional argument, `n/1`, allows the specification
-of the number of random tests that will be generated and run. The user can
-define new types to use in the property mode templates to use with its
-QuickCheck tests by defining clauses for the `arbitrary` library category
-multifile predicates.
+local predicate) and generate random values for each input argument based
+on the type information. The mode template syntax is the same used in the
+`info/2` predicate directives. An optional argument, `n/1`, allows the
+specification of the number of random tests that will be generated and run.
+The user can define new types to use in the property mode templates to use
+with its QuickCheck tests by defining clauses for the `arbitrary` library
+category multifile predicates.
 
 
 Skipping unit tests

@@ -263,7 +263,7 @@
 
 	arbitrary(atom(CharSet), Arbitrary) :-
 		arbitrary(list(character_code(CharSet)), Codes),
-		atom_codes(Arbitrary, Codes).		
+		atom_codes(Arbitrary, Codes).
 
 	arbitrary(non_empty_atom(CharSet), Arbitrary) :-
 		arbitrary(character_code(CharSet), Code),

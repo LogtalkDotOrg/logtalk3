@@ -110,8 +110,8 @@ the `debugger` tool with some backend Prolog compilers such as Lean Prolog.
 Examples
 --------
 
-* ADDED: New example, `my_types`, of defining new types using the
-user-extensible `type` library object.
+* ADDED: New `my_types` example of defining new types using the user-extensible
+`type` library object.
 
 * ADDED: New `quick_check` example on how to use the QuickCheck support in
 the `lgtunit` tool for both interactive testing at the top-level and for
