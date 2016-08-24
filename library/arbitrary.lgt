@@ -18,6 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% fragile workaround for the lack of support for
+% static multifile predicates in Qu-Prolog
+:- if(current_logtalk_flag(prolog_dialect, qp)).
+	:- dynamic('$arbitrary#0.arbitrary#1'/2).
+	:- dynamic('$arbitrary#0.arbitrary#2'/3).
+	:- dynamic('$arbitrary#0.shrink#3'/4).
+:- endif.
+
+
 :- category(arbitrary,
 	complements(type)).
 
