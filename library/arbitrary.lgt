@@ -134,14 +134,12 @@
 	:- if(current_logtalk_flag(modules, supported)).
 
 	arbitrary(entity, Arbitrary) :-
-		member(ArbitraryType, [object, protocol, category, module]),
-		arbitrary(ArbitraryType, Arbitrary).
+		arbitrary(types([object, protocol, category, module]), Arbitrary).
 
 	:- else.
 
 	arbitrary(entity, Arbitrary) :-
-		member(ArbitraryType, [object, protocol, category]),
-		arbitrary(ArbitraryType, Arbitrary).
+		arbitrary(types([object, protocol, category]), Arbitrary).
 
 	:- endif.
 
@@ -171,15 +169,13 @@
 		arbitrary(atom(ascii_printable), Arbitrary).
 
 	arbitrary(object_identifier, Arbitrary) :-
-		member(Type, [atom(ascii_printable), compound]),
-		arbitrary(Type, Arbitrary).
+		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
 
 	arbitrary(protocol_identifier, Arbitrary) :-
 		arbitrary(atom(ascii_printable), Arbitrary).
 
 	arbitrary(category_identifier, Arbitrary) :-
-		member(Type, [atom(ascii_printable), compound]),
-		arbitrary(Type, Arbitrary).
+		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
 
 	:- if(current_logtalk_flag(modules, supported)).
 
@@ -206,26 +202,22 @@
 			),
 			Types
 		),
-		member(ArbitraryType, Types),
-		arbitrary(ArbitraryType, Arbitrary).
+		arbitrary(types(Types), Arbitrary).
 
 	arbitrary(var, _).
 
 	arbitrary(nonvar, Arbitrary) :-
-		member(Type, [atom(ascii_printable), integer, float, compound]),
-		arbitrary(Type, Arbitrary).
+		arbitrary(types([atom(ascii_printable), integer, float, compound]), Arbitrary).
 
 	arbitrary(atomic, Arbitrary) :-
-		member(Type, [atom(ascii_printable), integer, float]),
-		arbitrary(Type, Arbitrary).
+		arbitrary(types([atom(ascii_printable), integer, float]), Arbitrary).
 
 	arbitrary(atom, Arbitrary) :-
 		arbitrary(list(character_code(ascii_printable)), Codes),
 		atom_codes(Arbitrary, Codes).
 
 	arbitrary(number, Arbitrary) :-
-		member(Type, [integer, float]),
-		arbitrary(Type, Arbitrary).
+		arbitrary(types([integer, float]), Arbitrary).
 
 	arbitrary(integer, Arbitrary) :-
 		between(-1000, 1000, Arbitrary).
@@ -241,8 +233,7 @@
 		Arbitrary =.. [Functor| Arguments].
 
 	arbitrary(callable, Arbitrary) :-
-		member(Type, [atom(ascii_printable), compound]),
-		arbitrary(Type, Arbitrary).
+		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
 
 	% atom derived types
 
@@ -316,8 +307,7 @@
 		arbitrary(between(integer,0,42), Arity).
 
 	arbitrary(predicate_or_non_terminal_indicator, Arbitrary) :-
-		member(ArbitraryType, [predicate_indicator, non_terminal_indicator]),
-		arbitrary(ArbitraryType, Arbitrary).
+		arbitrary(types([predicate_indicator, non_terminal_indicator]), Arbitrary).
 
 	arbitrary(clause, Arbitrary) :-
 		member(Kind, [fact, rule]),
@@ -378,8 +368,7 @@
 		member(Arbitrary, Set).
 
 	arbitrary(var_or(Type), Arbitrary) :-
-		member(VarOrType, [var, Type]),
-		arbitrary(VarOrType, Arbitrary).
+		arbitrary(types([var, Type]), Arbitrary).
 
 	arbitrary(types(Types), Arbitrary) :-
 		member(Type, Types),
@@ -395,6 +384,9 @@
 
 	shrink(non_negative_integer, Large, Small) :-
 		Small is Large // 2.
+
+	shrink(float, Large, Small) :-
+		Small is Large / 2.
 
 	shrink(list, Large, Small) :-
 		shrink(list(_), Large, Small).
