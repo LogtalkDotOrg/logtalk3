@@ -36,10 +36,6 @@
 
 	:- public(arbitrary/1).
 	:- multifile(arbitrary/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
-		:- dynamic(arbitrary/1).
-	:- endif.
 	:- mode(arbitrary(?callable), zero_or_more).
 	:- info(arbitrary/1, [
 		comment is 'Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.',
@@ -48,10 +44,6 @@
 
 	:- public(arbitrary/2).
 	:- multifile(arbitrary/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
-		:- dynamic(arbitrary/2).
-	:- endif.
 	:- mode(arbitrary(@callable, -term), zero_or_one).
 	:- info(arbitrary/2, [
 		comment is 'Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.',
@@ -60,10 +52,6 @@
 
 	:- public(shrink/3).
 	:- multifile(shrink/3).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
-		:- dynamic(shrink/3).
-	:- endif.
 	:- mode(shrink(@callable, @term, -term), zero_or_one).
 	:- info(shrink/3, [
 		comment is 'Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.',
