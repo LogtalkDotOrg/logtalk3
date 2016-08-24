@@ -24,23 +24,30 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/08/22,
+		date is 2016/08/23,
 		comment is 'Unit tests for the "quick_check" example.'
 	]).
 
 	:- uses(list, [
-		same_length/2, same_length/3, select/3
+		reverse/2, same_length/2, same_length/3, select/3
 	]).
 
 	% tests
 
 	% run the default number of random tests
-	quick_check(qc1, same_length_2_prop(+list)).
+	quick_check(qc1, reverse_2_twice_prop(+list)).
+	quick_check(qc2, same_length_2_prop(+list)).
 	% run 25 random tests
-	quick_check(qc2, same_length_3_prop(+list), [n(25)]).
+	quick_check(qc3, same_length_3_prop(+list), [n(25)]).
 
 	% properties (must be defined as local predicates but can, of course,
 	% call any predicate defined elsewhere)
+
+	% reversing a list twice must give the original list
+	reverse_2_twice_prop(List) :-
+		reverse(List, Reverse),
+		reverse(Reverse, ReverseReverse),
+		List == ReverseReverse.
 
 	% same_length/2 must be true when using the same list for both arguments
 	same_length_2_prop(List) :-
