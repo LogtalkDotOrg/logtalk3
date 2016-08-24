@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/08/20,
+		date is 2016/08/23,
 		comment is 'Portable random number generator predicates.'
 	]).
 
@@ -66,7 +66,7 @@
 		integer(Upper),
 		Upper >= Lower,
 		random(Float),
-		Random is truncate((Float*(Upper-Lower+1)+Lower)).
+		Random is truncate((Float * (Upper - Lower + 1) + Lower)).
 
 	member(Random, List) :-
 		length(List, Length),
@@ -101,7 +101,7 @@
 	sequence(N, Lower, Upper, A0, A1, A2, S0, S1, S2, [Random| Sequence]) :-
 		N2 is N - 1,
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Random is truncate(Float*(Upper-Lower+1)+Lower),
+		Random is truncate(Float * (Upper - Lower + 1) + Lower),
 		sequence(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
@@ -120,7 +120,7 @@
 		sort(List, Set).
 	set(N, Lower, Upper, A0, A1, A2, S0, S1, S2, Acc, Set) :-
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Random is truncate(Float*(Upper-Lower+1)+Lower),
+		Random is truncate(Float * (Upper - Lower + 1) + Lower),
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
 			set(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, [Random| Acc], Set)
@@ -149,7 +149,7 @@
 		Upper >= Lower,
 		!,
 		random(Float),
-		Random is truncate((Float*(Upper-Lower)+Lower)).
+		Random is truncate((Float * (Upper - Lower) + Lower)).
 	random(Lower, Upper, Random) :-
 		float(Lower),
 		float(Upper),
