@@ -104,6 +104,9 @@ library for the same path is defined.
 * FIXED: The `lgtunit` tool to allow defining `test/3` tests with a `note/1`
 option whose argument is a variable to be instantiated by the test goal.
 
+* FIXED: Warning about a missing `meta_predicate/1` directive when compiling
+the `debugger` tool with some backend Prolog compilers such as Lean Prolog.
+
 Examples
 --------
 

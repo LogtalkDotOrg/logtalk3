@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.9,
+		version is 2.10,
 		author is 'Paulo Moura',
-		date is 2016/05/13,
+		date is 2016/08/23,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -484,7 +484,7 @@
 	:- else.
 
 		call_goal(TGoal, _) :-
-			{TGoal}.
+			{call(TGoal)}.
 
 	:- endif.
 
