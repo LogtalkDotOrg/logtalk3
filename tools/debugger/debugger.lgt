@@ -385,7 +385,7 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	:- meta_predicate(debug_handler(::, *)).
+	:- meta_predicate(debug_handler((::), (*))).
 
 	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
 		invocation_number_(N),
