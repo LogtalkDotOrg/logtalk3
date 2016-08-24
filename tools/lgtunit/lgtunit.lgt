@@ -26,7 +26,7 @@
 	:- info([
 		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/08/22,
+		date is 2016/08/23,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -1124,6 +1124,8 @@
 		generate_arbitrary_arguments(Args, AArgs).
 
 	generate_arbitrary_argument('-'(_), _).
+	generate_arbitrary_argument('++'(Type), Arbitrary) :-
+		arbitrary(Type, Arbitrary).
 	generate_arbitrary_argument('+'(Type), Arbitrary) :-
 		arbitrary(Type, Arbitrary).
 	generate_arbitrary_argument('?'(Type), Arbitrary) :-
