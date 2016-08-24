@@ -388,6 +388,17 @@
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
 
+	shrink(atom, Large, Small) :-
+		atom_codes(Large, LargeCodes),
+		shrink_list(LargeCodes, SmallCodes),
+		atom_codes(Small, SmallCodes).
+
+	shrink(integer, Large, Small) :-
+		Small is Large // 2.
+
+	shrink(non_negative_integer, Large, Small) :-
+		Small is Large // 2.
+
 	shrink(list, Large, Small) :-
 		shrink(list(_), Large, Small).
 
