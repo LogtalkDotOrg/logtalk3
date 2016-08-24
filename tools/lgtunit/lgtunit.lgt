@@ -1107,7 +1107,10 @@
 
 	run_quick_check_tests(Template, NumberOfTests) :-
 		Template =.. [Name| Types],
-		forall(between(1, NumberOfTests, _), run_quick_check_test(Name, Types)).
+		forall(
+			{between(1, NumberOfTests, _)},
+			run_quick_check_test(Name, Types)
+		).
 
 	run_quick_check_test(Name, Types) :-
 		sender(Sender),
@@ -1643,6 +1646,11 @@
 		member_var(Var, Tail).
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, xsb)).
+	:- import(from(/(between,3), basics)).
+:- endif.
 
 
 % avoid polluting SWI-Prolog meta-predicate analysis with "lgtunit"
