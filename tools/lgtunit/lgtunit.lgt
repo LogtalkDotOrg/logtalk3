@@ -504,7 +504,7 @@
 
 	% test/3 dialect
 
-	:- meta_predicate(run_test(::, *, *)).
+	:- meta_predicate(run_test((::), (*), (*))).
 
 	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
