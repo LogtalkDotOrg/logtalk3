@@ -18,6 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% reversing a list twice must give the original list
+reverse_2_twice_prop(List) :-
+	list::reverse(List, Reverse),
+	list::reverse(Reverse, ReverseReverse),
+	List == ReverseReverse.
 
 % same_length/2 must be true when using the same list for both arguments
 same_length_2_prop(List) :-

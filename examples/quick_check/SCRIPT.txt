@@ -24,6 +24,13 @@ ________________________________________________________________________
 ...
 
 
+% check that reversing a list twice gives back the same list:
+
+| ?- lgtunit::quick_check(reverse_2_twice_prop(+list)).
+% 100 random tests passed
+yes
+
+
 % check the same_length_2_prop/1 property by running the default number of
 % random tests:
 
