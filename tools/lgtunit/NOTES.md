@@ -156,6 +156,10 @@ each argument (see the section below for more details):
 	quick_check(Test, Template, Options).
 	quick_check(Test, Template).
 
+The valid options are the same as for the `test/3` dialect plus a `n/1` option
+to specify the number of random tests that will be generated and run (defaults
+to 100 tests).
+
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
 be corrected otherwise the test results can be misleading.

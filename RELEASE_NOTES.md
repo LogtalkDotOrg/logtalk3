@@ -89,7 +89,9 @@ predicates.
 Tools
 -----
 
-* ADDED: QuickCheck support to the `lgtunit` tool.
+* ADDED: QuickCheck support to the `lgtunit` tool. Includes both a new
+`quick_check/2-3` test dialect and `quick_check/1-3` public predicates
+for e.g. interactive use at the top-level interpreter.
 
 * ADDED: A `doclet` tool providing a simple solution to specify a set of goals
 and a set of shell commands to (re)generate documentation for a project.

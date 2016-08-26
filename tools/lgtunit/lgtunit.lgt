@@ -566,6 +566,31 @@
 			)
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
+	% quick_check/3 dialect
+	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
+			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
+				(	catch(::test(Test, Variables, quick_check), quick_check_failed(Goal), failed_test(Test, File, Position, quick_check_failed(Goal), Output)) ->
+					(	var(Goal) ->
+						passed_test(Test, File, Position, Note, Output)
+					;	true
+					)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Output)
+				),
+				run_test_cleanup(Test, Cleanup, File, Position, Output)
+			;	true
+			)
+		;	skipped_test(Test, File, Position, Note, Output)
+		).
+	% quick_check/2 dialect
+	run_test(quick_check(Test, Position), File, Output) :-
+		(	catch(::test(Test, _, quick_check), quick_check_failed(Goal), failed_test(Test, File, Position, quick_check_failed(Goal), Output)) ->
+			(	var(Goal) ->
+				passed_test(Test, File, Position, Output)
+			;	true
+			)
+		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
+		).
 	% other dialects
 	run_test(succeeds(Test, Position), File, Output) :-
 		(	catch(::test(Test, _, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
@@ -598,14 +623,6 @@
 			;	true
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_error, Output)
-		).
-	run_test(quick_check(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, quick_check), quick_check_failed(Goal), failed_test(Test, File, Position, quick_check_failed(Goal), Output)) ->
-			(	var(Goal) ->
-				passed_test(Test, File, Position, Output)
-			;	true
-			)
-		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
 		).
 
 	run_test(skipped(Test, Position, Note), File, Output) :-
@@ -857,14 +874,15 @@
 	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		parse_quick_check_options(Options, NumberOfTests),
-		assertz(test_(Test, quick_check(Test, Position))).
+		term_variables(Options, Variables),
+		parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests),
+		assertz(test_(Test, quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note))).
 
 	% unit test idiom quick_check/2
 	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		parse_quick_check_options([], NumberOfTests),
+		default_quick_check_number_of_tests(NumberOfTests),
 		assertz(test_(Test, quick_check(Test, Position))).
 
 	% support the deprecated unit/1 predicate which may still be in use in old code
@@ -1018,16 +1036,19 @@
 		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, _),
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
-	parse_quick_check_options([], NumberOfTests) :-
-		(	var(NumberOfTests) ->
-			NumberOfTests = 100
-		;	true
-		).
-	parse_quick_check_options([Option| Options], NumberOfTests) :-
-		(	Option = n(NumberOfTests) ->
+	parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests) :-
+		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
+		parse_quick_check_number_of_tests_option(Options, NumberOfTests).
+
+	parse_quick_check_number_of_tests_option(Options, NumberOfTests) :-
+		(	member(n(NumberOfTests), Options),
+			integer(NumberOfTests),
+			NumberOfTests >= 0 ->
 			true
-		;	parse_quick_check_options(Options, NumberOfTests)
+		;	default_quick_check_number_of_tests(NumberOfTests)
 		).
+
+	default_quick_check_number_of_tests(100).
 
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
@@ -1087,7 +1108,7 @@
 	:- endif.
 
 	quick_check(Template, Result, Options) :-
-		parse_quick_check_options(Options, NumberOfTests),
+		parse_quick_check_number_of_tests_option(Options, NumberOfTests),
 		catch(run_quick_check_tests(Template, NumberOfTests), Error, true),
 		(	var(Error) ->
 			Result = passed
@@ -1096,7 +1117,7 @@
 		).
 
 	quick_check(Template, Options) :-
-		parse_quick_check_options(Options, NumberOfTests),
+		parse_quick_check_number_of_tests_option(Options, NumberOfTests),
 		catch(run_quick_check_tests(Template, NumberOfTests), Error, true),
 		(	var(Error) ->
 			print_message(information, lgtunit, quick_check_passed(NumberOfTests))
