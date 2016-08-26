@@ -502,10 +502,10 @@
 	run_tests :-
 		run_tests([], _).
 
-	% test/3 dialect
 
 	:- meta_predicate(run_test((::), (*), (*))).
 
+	% test/3 dialect
 	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
@@ -973,7 +973,7 @@
 		;	true
 		).
 
-	parse_test_options([], Goal, _, Condition, Setup, Cleanup, Note) :-
+	parse_test_options([], TestGoal, _, Condition, Setup, Cleanup, Note) :-
 		(	var(Condition) ->
 			% no condition/1 option found
 			Condition = true
@@ -991,14 +991,14 @@
 		),
 		(	nonvar(Note) ->
 			true
-		;	term_variables(Goal, Variables),
+		;	term_variables(TestGoal, Variables),
 			member_var(Note, Variables) ->
 			% assume note/1 argument instantiated by the test goal
 			true
 		;	% no note/1 option found
 			Note = ''
 		).
-	parse_test_options([Option| Options], Goal, Test, Condition, Setup, Cleanup, Note) :-
+	parse_test_options([Option| Options], TestGoal, Test, Condition, Setup, Cleanup, Note) :-
 		(	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '_condition', Goal, Condition)
 		;	Option = setup(Goal) ->
@@ -1010,7 +1010,7 @@
 		;	% ignore non-recognized options
 			true
 		),
-		parse_test_options(Options, Goal, Test, Condition, Setup, Cleanup, Note).
+		parse_test_options(Options, TestGoal, Test, Condition, Setup, Cleanup, Note).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
 		atom_concat(Test, Step, Head),
