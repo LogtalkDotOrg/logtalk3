@@ -26,7 +26,7 @@
 	:- info([
 		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/08/23,
+		date is 2016/08/25,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -931,6 +931,8 @@
 	ignorable_discontiguous_predicate(deterministic/1).
 	ignorable_discontiguous_predicate(fails/1).
 	ignorable_discontiguous_predicate(throws/2).
+	ignorable_discontiguous_predicate(quick_check/2).
+	ignorable_discontiguous_predicate(quick_check/3).
 
 	check_for_valid_test_outcome(Test, Outcome) :-
 		(	var(Outcome) ->
