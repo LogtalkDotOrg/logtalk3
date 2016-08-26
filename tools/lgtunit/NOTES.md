@@ -363,10 +363,12 @@ running unit tests. See the `scripts/NOTES.md` file for details.
 Utility predicates
 ------------------
 
-The `lgtunit` tool provides the following utility predicates to simplify
-writing unit tests that require float comparison or goal benchmarking:
+The `lgtunit` tool provides some utility predicates to simplify writing unit
+tests:
 
-- `Float1 =~= Float2`
+- `variant/2` - to check when two terms are a variant of each other (e.g. to
+check expected test results against the actual results when they contain variables)
+- `Float1 =~= Float2` - for approximate float comparison
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
 
