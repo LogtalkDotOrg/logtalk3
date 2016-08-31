@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>arbitrary</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">category</p>
+      <h1 class="code">arbitrary</h1>
+      <blockquote>
+        <p class="comment">Adds predicates for generating random values for selected types to the library "type" object.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2016/8/23</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static</code>
+          </dd>
+        </dl>
+        <dl class="relations"/>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 id="arbitrary/1" class="code">arbitrary/1</h3>
+          <blockquote>
+            <p class="comment">Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static, multifile</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>arbitrary(Type)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>arbitrary(?callable) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="arbitrary/2" class="code">arbitrary/2</h3>
+          <blockquote>
+            <p class="comment">Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static, multifile</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>arbitrary(Type,Term)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>arbitrary(@callable,-term) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="shrink/3" class="code">shrink/3</h3>
+          <blockquote>
+            <p class="comment">Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static, multifile</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>shrink(Type,Large,Small)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>shrink(@callable,@term,-term) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <dl class="remarks">
+          <dt class="comment">Atom character sets</dt>
+          <dd class="text">When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="see_also">
+      <h2>See also</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>
