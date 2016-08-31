@@ -72,6 +72,9 @@ Documentation
 * IMPROVED: The glossary is now included in the PDF version of the Reference
 Manual.
 
+* IMPROVED: Description of the semantics of predicate scope directives in the
+User Manual.
+
 Library
 -------
 

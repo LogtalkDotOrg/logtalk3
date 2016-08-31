@@ -61,7 +61,7 @@ All object (or category) predicates that we want to access from other objects mu
 <h3 id="predicates_scope">Scope directives</h3>
 
 <p>
-A predicate can be <em>public</em>, <em>protected</em>, <em>private</em>, or <em>local</em>. Public predicates can be called from any object. Protected predicates can only be called from the container object or from a container descendant. Private predicates can only be called from the container object. Local predicates, like private predicates, can only be called from the container object (or category) but they are <em>invisible</em> to the reflection built-in methods (<code>current_op/3</code>, <code>current_predicate/1</code>, and <code>predicate_property/2</code>) and to the message error handling mechanisms (i.e. sending a message corresponding to a local predicate results in a <code>predicate_declaration</code> existence error, not in a scope error).
+A predicate scope directive specifies <em>from where</em> the predicate can be called, i.e. its <em>visibility</em>.  Predicates can be <em>public</em>, <em>protected</em>, <em>private</em>, or <em>local</em>. Public predicates can be called from any object. Protected predicates can only be called from the container object or from a container descendant. Private predicates can only be called from the container object. Local predicates, like private predicates, can only be called from the container object (or category) but they are <em>invisible</em> to the reflection built-in methods (<code>current_op/3</code>, <code>current_predicate/1</code>, and <code>predicate_property/2</code>) and to the message error handling mechanisms (i.e. sending a message corresponding to a local predicate results in a <code>predicate_declaration</code> existence error, not in a scope error).
 </p>
 <p>
 The scope declarations are made using the directives <a title="Consult reference manual" href="../refman/directives/public_1.html"><code>public/1</code></a>, <a title="Consult reference manual" href="../refman/directives/protected_1.html"><code>protected/1</code></a>, and <a title="Consult reference manual" href="../refman/directives/private_1.html"><code>private/1</code></a>. For example:
@@ -73,6 +73,9 @@ The scope declarations are made using the directives <a title="Consult reference
 :- private(process_init_options/1).</pre>
 <p>
 If a predicate does not have a scope declaration, it is assumed that the predicate is local. Note that we do not need to write scope declarations for all defined predicates. One exception is local dynamic predicates: declaring them as private predicates may allow the Logtalk compiler to generate optimized code for asserting and retracting clauses.
+</p>
+<p>
+Note that a predicate scope directive doesn't specify <em>where</em> a predicate is, or can be, defined. For example, a private predicate can only be called from an object holding its scope directive. But it can be defined in descendant objects. A typical example is an object playing the role of a class defining a private (possibly dynamic) predicate for its descendant instances. Only the class can call (and possibly assert/retract clauses for) the predicate but its clauses can be found/defined in the instances themselves.
 </p>
 
 <h3 id="predicates_mode">Mode directive</h3>
@@ -1047,7 +1050,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 12, 2016</span>
+		<span>Last updated on: August 31, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
