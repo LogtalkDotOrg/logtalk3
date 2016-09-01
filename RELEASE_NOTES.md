@@ -24,6 +24,11 @@ RELEASE NOTES
 3.07.1 - September ??, 2016
 ===========================
 
+Library
+-------
+
+* FIXED: Typo in the `arbitrary` category in the generation of random values
+for the `protocol` type. Thanks to Jan Burse for the bug report.
 
 
 3.07.0 - August 31, 2016

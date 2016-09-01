@@ -39,6 +39,7 @@ CONTRIBUTORS
 * Günter Kniesel (PDT support for Logtalk; feedback on Logtalk OOP features)
 * Gopal Gupta (coinduction examples)
 * Ivan Bratko (search methods in the state-space searching example)
+* Jan Burse (bug reports)
 * Jan Wielemaker (feedback on Prolog compliance testing and engine examples)
 * Joachim Schimpf (feedback on Prolog compliance testing)
 * Joerg Schuster (bug reports)
