@@ -24,6 +24,11 @@ RELEASE NOTES
 3.07.1 - September ??, 2016
 ===========================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `logtalk_load_context/2` built-in predicate.
+
 Library
 -------
 

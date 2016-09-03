@@ -49,7 +49,7 @@
 Provides access to the Logtalk compilation/loading context. The following keys are currently supported: <code>entity_identifier</code>, <code>entity_prefix</code>, <code>entity_type</code> (returns the value <code>module</code> when compiling a module as an object), <code>source</code>, <code>file</code> (same as <code>source</code>), <code>basename</code>, <code>directory</code>, <code>stream</code>, <code>target</code> (the full path of the intermediate Prolog file), <code>flags</code> (the list of the explicit flags used for the compilation of the source file), <code>term</code> (the term being expanded), <code>term_position</code> (<code>StartLine-EndLine</code>), and <code>variable_names</code> (<code>[Name1=Variable1, ...]</code>). The <code>term_position</code> key is only supported in back-end Prolog compilers that provide access to the start and end lines of a read term.
 </p>
 <p>
-The <code>source</code>, <code>file</code>, <code>basename</code>, <code>directory</code>, <code>target</code>, and <code>flags</code> keys can also be used in calls to the <code>logtalk_load_context/2</code> predicate wrapped in <a title="Consult reference manual" href="../directives/initialization_1.html"><code>initialization/1</code></a> directives.
+The <code>source</code>, <code>file</code>, <code>basename</code>, <code>directory</code>, <code>target</code>, and <code>flags</code> keys can also be used in calls to the <code>logtalk_load_context/2</code> predicate wrapped by the first <a title="Consult reference manual" href="../directives/initialization_1.html"><code>initialization/1</code></a> directive in a source file.
 </p>
 <p>
 Currently, any variables in the values of the <code>term</code> and <code>variable_names</code> keys are not shared with, respectively, the term and goal arguments of the <code><a href="../methods/term_expansion_2.html">term_expansion/2</a></code> and <code><a href="../methods/goal_expansion_2.html">goal_expansion/2</a></code> methods.
@@ -90,7 +90,7 @@ Using the <code>variable_names</code> key requires calling the standard built-in
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 28, 2016</span>
+		<span>Last updated on: September 3, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_library_path_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#predicates">next</a></span><br/>
