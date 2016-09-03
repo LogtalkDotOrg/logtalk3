@@ -30,6 +30,11 @@ Library
 * FIXED: Typo in the `arbitrary` category in the generation of random values
 for the `protocol` type. Thanks to Jan Burse for the bug report.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `build_release.sh` script to also build an RPM installer.
+
 
 3.07.0 - August 31, 2016
 ========================

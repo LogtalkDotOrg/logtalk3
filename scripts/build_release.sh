@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on March 1, 2015
+##   Last updated on September 3, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -95,5 +95,9 @@ sudo port destroot logtalk
 sudo port pkg logtalk
 cp -R work/logtalk-$version.pkg $directory
 sudo port clean logtalk
+
+cd $directory/logtalk-$version/scripts/linux
+./build_rpm.sh
+mv $HOME/rpmbuild/RPMS/noarch/logtalk-$version*.rpm $directory
 
 cd $directory
