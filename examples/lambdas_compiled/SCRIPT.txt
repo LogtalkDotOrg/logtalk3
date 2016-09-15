@@ -27,9 +27,9 @@ ________________________________________________________________________
 % SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
 
 ?- lambda_benchmarks::bench1.
-Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
+Using map/2 with a closure for testing less(0, X) with X in [1..100000]:
 % 200,002 inferences, 0.030 CPU in 0.024 seconds (123% CPU, 6666733 Lips)
-Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
+Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:
 % 300,002 inferences, 0.010 CPU in 0.017 seconds (60% CPU, 30000200 Lips)
 true.
 

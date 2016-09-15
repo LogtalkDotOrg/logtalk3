@@ -235,7 +235,7 @@
 %
 %  compiler directives
 %
-% (used for source file compilation and runtime creation of new entities)
+%  (used for source file compilation and runtime creation of new entities)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1064,6 +1064,7 @@ protocol_property(Ptc, Prop) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(Flags, N, Line)),
 	!,
 	(	Line =:= 0 ->
+		% auxiliary predicate
 		Properties0 = [number_of_clauses(N)]
 	;	Properties0 = [line_count(Line), number_of_clauses(N)]
 	),
@@ -2984,7 +2985,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	call(Dcl, Pred, PredScope, _, _, SCtn, _),
 		functor(Pred, Functor, Arity) ->
 		% commit to the first solution found as an inherited
-		%  predicate can always be re-declared
+		% predicate can always be re-declared
 		(	\+ \+ PredScope = LookupScope ->
 			true
 		;	Sender = SCtn
@@ -3002,7 +3003,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Pred, Functor, Arity),
 	(	call(Dcl, Pred, PredScope, _, _, SCtn, _) ->
 		% commit to the first solution found as an inherited
-		%  predicate can always be re-declared
+		% predicate can always be re-declared
 		(	\+ \+ PredScope = LookupScope ->
 			true
 		;	Sender = SCtn

@@ -57,7 +57,7 @@ yes
 Zs = [a-1,b-2,c-3]
 yes
 
-| ?- Points = [(1,4),(2,5),(8,3)], meta::map([(X,Y),Z]>>(Z is sqrt(X*X + Y*Y)), Points, Distances).     
+| ?- Points = [(1,4),(2,5),(8,3)], meta::map([(X,Y),Z]>>(Z is sqrt(X*X + Y*Y)), Points, Distances).
 
 Distances = [4.1231056256176606,5.3851648071345037,8.5440037453175304]
 Points = [(1,4),(2,5),(8,3)]
@@ -77,17 +77,17 @@ yes
 Result = [5,25,61]
 yes
 
-| ?- Xsss = [[[1,2,3],[4]],[[5]]], meta::map(meta::map(meta::map([X,Y]>>(Y is X+3))), Xsss,  Ysss).
+| ?- Xsss = [[[1,2,3],[4]],[[5]]], meta::map(meta::map(meta::map([X,Y]>>(Y is X+3))), Xsss, Ysss).
 Xsss = [[[1,2,3],[4]],[[5]]]
 Ysss = [[[4,5,6],[7]],[[8]]]
 yes
 
-| ?- meta::map([X,[X]]>>true,[1,2],Ys).     
+| ?- meta::map([X,[X]]>>true,[1,2],Ys).
 Ys = [[1],[2]]
 yes
 
 | ?- meta::map([X,[X]]>>true,Xs,[[1],[2]]).
-Xs = [1,2] ? 
+Xs = [1,2] ?
 yes
 
 | ?- meta::map([N,M]>>(list::length(L, N), list::length([_|L], M)), [999,123],R).
@@ -104,13 +104,13 @@ yes
 | ?- logtalk<<([]>>true).
 yes
 
-| ?- logtalk<<({}/true). 
+| ?- logtalk<<({}/true).
 yes
 
 | ?- logtalk<<({}/[]>>true).
 yes
 
-| ?- logtalk<<({X}/true).     
+| ?- logtalk<<({X}/true).
 yes
 
 
@@ -143,7 +143,7 @@ Zss = [[_#22(1..268435453),_#66(2..268435454)],[_#110(3..268435455)]]
 
 (1 ms) yes
 
-| ?- meta::map({Y}/[X,Z]>>(Z#=X+Y), Xs, Ys).        
+| ?- meta::map({Y}/[X,Z]>>(Z#=X+Y), Xs, Ys).
 
 Xs = []
 Ys = [] ? ;
@@ -162,7 +162,7 @@ Ys = [_#41(0..268435455),_#115(0..268435455),_#189(0..268435455)] ? ;
 
 Xs = [_#3(0..268435455),_#96(0..268435455),_#170(0..268435455),_#244(0..268435455)]
 Y = _#22(0..268435455)
-Ys = [_#41(0..268435455),_#115(0..268435455),_#189(0..268435455),_#263(0..268435455)] ? 
+Ys = [_#41(0..268435455),_#115(0..268435455),_#189(0..268435455),_#263(0..268435455)] ?
 ...
 
 
@@ -234,7 +234,7 @@ _A in inf..sup,
 _E in inf..sup,
 _B in inf..sup,
 _F in inf..sup,
-_C in inf..sup ? 
+_C in inf..sup ?
 yes
 
 | ?- Xs = [A,B], meta::map({Y}/[X,Z]>>(clpfd:(X+Y #= Z)), Xs, Zs).
@@ -244,7 +244,7 @@ A in inf..sup,
 Y in inf..sup,
 _A in inf..sup,
 B in inf..sup,
-_B in inf..sup ? 
+_B in inf..sup ?
 yes
 
 
@@ -306,7 +306,7 @@ N = 3 ? ;
 F = 3
 N = 4 ? ;
 F = 5
-N = 5 ? 
+N = 5 ?
 ...
 
 
@@ -324,7 +324,7 @@ Xs = [A,B]
 Ys = [[1|A],[1|B]] ? ;
 
 Xs = [A,B,C]
-Ys = [[1|A],[1|B],[1|C]] ? 
+Ys = [[1|A],[1|B],[1|C]] ?
 ...
 
 
@@ -347,9 +347,9 @@ yes
 % SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
 
 ?- lambda_benchmarks::bench1.
-Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
+Using map/2 with a closure for testing less(0, X) with X in [1..100000]:
 % 1,500,027 inferences, 0.430 CPU in 0.435 seconds (99% CPU, 3488435 Lips)
-Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
+Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:
 % 2,500,002 inferences, 0.870 CPU in 0.874 seconds (99% CPU, 2873566 Lips)
 true.
 
