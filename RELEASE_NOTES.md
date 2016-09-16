@@ -43,8 +43,8 @@ Installers and installation scripts
 VCS support
 -----------
 
-* ADDED: Template `Logtalk.gitignore` file for versioning Logtalk projects
-using git.
+* ADDED: `Logtalk.gitignore` and `Logtalk.p4ignore` template files for
+versioning Logtalk projects using git and Perforce.
 
 
 3.07.0 - August 31, 2016
