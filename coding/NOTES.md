@@ -24,6 +24,9 @@ highlighting may also be applied to the Prolog adapter files (`*.pl`).
 Support for some syntax highlighters (used in e.g in wikis, source code
 browsers, and bug trackers) is also provided.
 
+Files for setting Logtalk projects using common version control systems
+(e.g. git) are also provided.
+
 The files in this directory can be regarded as contributions to
 third-party text editors and syntax highlighters. Thus, as a general
 rule, these files are dual-licensed under the Logtalk license and the

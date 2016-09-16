@@ -40,6 +40,12 @@ Installers and installation scripts
 
 * UPDATED: The `build_release.sh` script to also build an RPM installer.
 
+VCS support
+-----------
+
+* ADDED: Template `Logtalk.gitignore` file for versioning Logtalk projects
+using git.
+
 
 3.07.0 - August 31, 2016
 ========================
