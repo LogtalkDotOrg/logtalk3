@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>1.01</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/21</code>
+            <code>2016/9/17</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -180,19 +180,23 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Other types</dt>
-          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">between(Type, Lower, Upper) type notes</dt>
-          <dd class="text">The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</dd>
+          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">boolean type notes</dt>
           <dd class="text">The two value of this type are the atoms true and false.</dd>
         </dl>
         <dl class="remarks">
+          <dt class="comment">order type notes</dt>
+          <dd class="text">The three possible values of this type are the single character atoms &lt;, =, and &gt;.</dd>
+        </dl>
+        <dl class="remarks">
           <dt class="comment">character_code type notes</dt>
           <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">between(Type, Lower, Upper) type notes</dt>
+          <dd class="text">The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">property(Type, Lambda) type notes</dt>
@@ -203,11 +207,11 @@
           <dd class="text">For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">order type notes</dt>
-          <dd class="text">The three possible values of this type are the single character atoms &lt;, =, and &gt;.</dd>
+          <dt class="comment">var_or(Type) notes</dt>
+          <dd class="text">Allows checking if a term is either a variable or a valid value of the given type.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">types(Types)</dt>
+          <dt class="comment">types(Types) notes</dt>
           <dd class="text">Allows checking if a term is a valid value for one of the types in a list of types.</dd>
         </dl>
         <dl class="remarks">

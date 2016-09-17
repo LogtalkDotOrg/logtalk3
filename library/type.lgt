@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2016/08/21,
+		date is 2016/09/17,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
@@ -33,14 +33,15 @@
 			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
-			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type)}',
-			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
+			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
+			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
+			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'property(Type, Lambda) type notes' - 'Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]>>Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
-			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
-			'types(Types)' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
+			'var_or(Type) notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
+			'types(Types) notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
 			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.'
 		]
