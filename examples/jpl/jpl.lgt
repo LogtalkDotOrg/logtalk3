@@ -69,11 +69,14 @@
 	implements((forwarding, javap))).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/27,
+		date is 2016/09/19,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.',
-		parnames is ['Reference', 'ReturnValue']
+		parameters is [
+			'Reference' - 'Either a class name or a Java reference to an object',
+			'ReturnValue' - 'Value returned by a method call (possibly the Java value void)'
+		]
 	]).
 
 	:- use_module(jpl, [
@@ -121,7 +124,9 @@
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2014/03/25,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.',
-		parnames is ['Reference']
+		parameters is [
+			'Reference' - 'Either a class name or a Java reference to an object'
+		]
 	]).
 
 :- end_object.
@@ -165,30 +170,30 @@
 	]).
 
 	:- public(is_true/1).
-	:- mode(is_true(@nonvar), zero_or_one).
+	:- mode(is_true(++ground), zero_or_one).
 	:- info(is_true/1, [
-		comment is 'True when the argument is the Java value true.',
+		comment is 'True when the argument is the Java value true. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_false/1).
-	:- mode(is_false(@nonvar), zero_or_one).
+	:- mode(is_false(++ground), zero_or_one).
 	:- info(is_false/1, [
-		comment is 'True when the argument is the Java value false.',
+		comment is 'True when the argument is the Java value false. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_void/1).
-	:- mode(is_void(@nonvar), zero_or_one).
+	:- mode(is_void(++ground), zero_or_one).
 	:- info(is_void/1, [
-		comment is 'True when the argument is the Java value void.',
+		comment is 'True when the argument is the Java value void. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_null/1).
-	:- mode(is_null(@nonvar), zero_or_one).
+	:- mode(is_null(++ground), zero_or_one).
 	:- info(is_null/1, [
-		comment is 'True when the argument is the Java value null.',
+		comment is 'True when the argument is the Java value null. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
