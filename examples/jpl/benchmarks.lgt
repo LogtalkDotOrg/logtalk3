@@ -28,9 +28,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2015/10/06,
+		date is 2016/09/19,
 		comment is 'Some benchmarks for the "jpl" example.'
 	]).
 
@@ -47,7 +47,11 @@
 		time((jpl:jpl_new('java.util.Date', [], I1), jpl:jpl_call(I1, getYear, [], _))),
 		writeq((java('java.util.Date')::new(I2), java(I2, Year2)::invoke(getYear))), nl,
 		time((java('java.util.Date')::new(I2), java(I2, Year2)::invoke(getYear))),
-		writeq((java('java.util.Date')::new(I3), java(I3, Year3)::getYear)), nl,
-		time((java('java.util.Date')::new(I3), java(I3, Year3)::getYear)).
+		writeq((java('java.util.Date')::new(I3), java(I3)::invoke(getYear))), nl,
+		time((java('java.util.Date')::new(I3), java(I3)::invoke(getYear))),
+		writeq((java('java.util.Date')::new(I4), java(I4, Year3)::getYear)), nl,
+		time((java('java.util.Date')::new(I4), java(I4, Year3)::getYear)),
+		writeq((java('java.util.Date')::new(I5), java(I5)::getYear)), nl,
+		time((java('java.util.Date')::new(I5), java(I5)::getYear)).
 
 :- end_object.
