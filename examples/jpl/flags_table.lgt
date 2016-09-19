@@ -26,9 +26,9 @@
 :- object(flags_table).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2015/01/21,
+		date is 2016/09/19,
 		comment is 'JTable example from the JPL distribution.'
 	]).
 
@@ -55,6 +55,7 @@
 		java('javax.swing.JScrollPane')::new([Table], ScrollPane),
 		java(ContentPane)::add(ScrollPane, 'Center'),
 		java(Frame)::setSize(600, 400),
-		java(Frame)::setVisible(@true).
+		java::true(True),
+		java(Frame)::setVisible(True).
 
 :- end_object.

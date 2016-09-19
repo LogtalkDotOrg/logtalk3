@@ -130,10 +130,66 @@
 :- object(java).
 
 	:- info([
-		version is 0.1,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/05/19,
+		date is 2016/09/19,
 		comment is 'Abstract interface to JPL API utility predicates.'
+	]).
+
+	:- public(true/1).
+	:- mode(true(--var), one).
+	:- info(true/1, [
+		comment is 'Returns an opaque term that represents the Java value true.',
+		argnames is ['Reference']
+	]).
+
+	:- public(false/1).
+	:- mode(false(--var), one).
+	:- info(false/1, [
+		comment is 'Returns an opaque term that represents the Java value false.',
+		argnames is ['Reference']
+	]).
+
+	:- public(void/1).
+	:- mode(void(--var), one).
+	:- info(void/1, [
+		comment is 'Returns an opaque term that represents the Java value void.',
+		argnames is ['Reference']
+	]).
+
+	:- public(null/1).
+	:- mode(null(--var), one).
+	:- info(null/1, [
+		comment is 'Returns an opaque term that represents the Java value null.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_true/1).
+	:- mode(is_true(@nonvar), zero_or_one).
+	:- info(is_true/1, [
+		comment is 'True when the argument is the Java value true.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_false/1).
+	:- mode(is_false(@nonvar), zero_or_one).
+	:- info(is_false/1, [
+		comment is 'True when the argument is the Java value false.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_void/1).
+	:- mode(is_void(@nonvar), zero_or_one).
+	:- info(is_void/1, [
+		comment is 'True when the argument is the Java value void.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_null/1).
+	:- mode(is_null(@nonvar), zero_or_one).
+	:- info(is_null/1, [
+		comment is 'True when the argument is the Java value null.',
+		argnames is ['Reference']
 	]).
 
 	:- public(array_list/2).
@@ -144,13 +200,6 @@
 		argnames is ['Array', 'List']
 	]).
 
-	:- public(null/1).
-	:- mode(null(@nonvar), zero_or_one).
-	:- info(null/1, [
-		comment is 'True when the argument is Java null',
-		argnames is ['Reference']
-	]).
-
 	:- public(iterator_element/2).
 	:- mode(iterator_element(+iterator, -element), zero_or_more).
 	:- info(iterator_element/2, [
@@ -159,19 +208,41 @@
 	]).
 
 	:- use_module(jpl, [
+		jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,
+		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1,
 		jpl_list_to_array/2, jpl_array_to_list/2,
-		jpl_is_null/1,
 		jpl_iterator_element/2
 	]).
+
+	true(Reference) :-
+		jpl_true(Reference).
+
+	false(Reference) :-
+		jpl_false(Reference).
+
+	void(Reference) :-
+		jpl_void(Reference).
+
+	null(Reference) :-
+		jpl_null(Reference).
+
+	is_true(Reference) :-
+		jpl_is_true(Reference).
+
+	is_false(Reference) :-
+		jpl_is_false(Reference).
+
+	is_void(Reference) :-
+		jpl_is_void(Reference).
+
+	is_null(Reference) :-
+		jpl_is_null(Reference).
 
 	array_list(Array, List) :-
 		(	var(Array) ->
 			jpl_list_to_array(List, Array)
 		;	jpl_array_to_list(Array, List)
 		).
-
-	null(Reference) :-
-		jpl_is_null(Reference).
 
 	iterator_element(Iterator,Element) :-
 		jpl_iterator_element(Iterator, Element).

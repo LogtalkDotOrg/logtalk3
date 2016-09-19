@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2015/10/06,
+		date is 2016/09/19,
 		comment is 'Unit tests for the "jpl" example.'
 	]).
 
@@ -60,7 +60,7 @@
 			Name, 
 			(	repeat,
 				java(Iterator, HasNext)::hasNext,
-				(	HasNext == @true ->
+				(	java::is_true(HasNext) ->
 					java(Iterator, Name)::next
 				;	!,
 					fail

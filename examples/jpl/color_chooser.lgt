@@ -26,9 +26,9 @@
 :- object(color_chooser).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2015/01/21,
+		date is 2016/09/19,
 		comment is 'JColorChooser dialog example from the JPL distribution.'
 	]).
 
@@ -48,6 +48,6 @@
 		java('java.awt.Color')::get_field(pink, Pink),
 		java('javax.swing.JColorChooser', Color)::showDialog(ContentPane, 'pick a colo(u)r', Pink),
 		java(Frame)::dispose,
-		Color \== @null.
+		\+ java::is_null(Color).
 
 :- end_object.

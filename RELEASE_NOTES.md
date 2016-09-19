@@ -49,6 +49,13 @@ VCS support
 * ADDED: `Logtalk.gitignore` and `Logtalk.p4ignore` template files for
 versioning Logtalk projects using git and Perforce.
 
+Examples
+--------
+
+* UPDATED: The `jpl` example with new predicates to get representations of the
+`true`, `false`, `void`, and `null` Java values and with predicates to test for
+these values.
+
 
 3.07.0 - August 31, 2016
 ========================
