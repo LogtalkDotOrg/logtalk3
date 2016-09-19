@@ -40,6 +40,9 @@ Installers and installation scripts
 
 * UPDATED: The `build_release.sh` script to also build an RPM installer.
 
+* UPDATED: The Windows installer to also detect ECLiPSe 7.0 (the current
+development version).
+
 VCS support
 -----------
 
