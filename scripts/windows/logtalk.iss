@@ -319,7 +319,7 @@ begin
         Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-    else RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+    else if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
         Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
@@ -331,7 +331,7 @@ begin
       Result := 'prolog_compiler_not_installed'
   else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-       else RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
        else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
