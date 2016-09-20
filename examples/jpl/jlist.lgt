@@ -26,9 +26,9 @@
 :- object(jlist).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2015/01/23,
+		date is 2016/09/19,
 		comment is 'JList dialog example from the JPL distribution.'
 	]).
 
@@ -52,6 +52,7 @@
 		java(Frame)::pack,
 		java(Frame, Height)::getHeight,
 		java(Frame)::setSize(150, Height),
-		java(Frame)::setVisible(@true).
+		java::true(True),
+		java(Frame)::setVisible(True).
 
 :- end_object.

@@ -23,7 +23,7 @@ ________________________________________________________________________
 ...
 
 
-% get the Java version:
+% get the Java version by using the getProperty/1 static method:
 
 | ?- java('java.lang.System', Version)::getProperty('java.version').
 
@@ -31,7 +31,7 @@ Version = '1.7.0_51'
 yes
 
 
-% get the value of the "pi" constant:
+% get the value of the "pi" constant by accessing the 'PI' class field:
 
 | ?- java('java.lang.Math')::get_field('PI', Pi).
 
@@ -63,7 +63,8 @@ Text = ...
 yes
 
 
-% run some benchmarks
+% run some benchmarks comparing plain JPL calls with calls to Logtalk's thin
+% abstraction layer:
 
 | ?- logtalk_load(jpl(benchmarks)).
 ...
