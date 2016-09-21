@@ -41,14 +41,16 @@ your Rouge installation directory (replacing any existing older file).
 your Rouge installation directory (replacing any existing older file).
 
 3. Copy the file `spec/lexers/logtalk_spec.rb` to the same directory in 
-your Rouge installation directory (replacing any existing older file).
+your Rouge installation directory (if it exists, replacing any existing
+older file).
 
 4. Copy the file `spec/visual/samples/logtalk` to the same directory in 
-your Rouge installation directory (replacing any existing older file).
+your Rouge installation directory (if it exists, replacing any existing
+older file).
 
 An example of generating HTML code (wrapped with a `pre` tag) would be:
 
-	$ rougify highlight -f html source.lgt > source.html
+	$ rougify highlight -f html -i source.lgt > source.html
 
 To get the CSS file used for the generated HTML code use the command:
 
@@ -56,9 +58,9 @@ To get the CSS file used for the generated HTML code use the command:
 
 An useful formatter option is line numbers:
 
-	$ rougify highlight -f html -F line_numbers=true source.lgt > source.html
+	$ rougify highlight -f html -F line_numbers=true -i source.lgt > source.html
 
 You may also use the Logtalk lexer with plain Prolog files by using the `-l` 
 option. For example:
 
-	$ rougify highlight -l logtalk source.pl > source.html
+	$ rougify highlight -l logtalk -i source.pl > source.html

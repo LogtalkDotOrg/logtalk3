@@ -56,6 +56,11 @@ Examples
 `true`, `false`, `void`, and `null` Java values and with predicates to test for
 these values. Also updated the example benchmarks.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Rogue support.
+
 
 3.07.0 - August 31, 2016
 ========================
