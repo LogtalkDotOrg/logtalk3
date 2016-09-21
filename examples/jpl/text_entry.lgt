@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2016/09/19,
+		date is 2016/09/21,
 		comment is 'JOptionPane dialog example from the JPL distribution.'
 	]).
 
@@ -42,7 +42,8 @@
 		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
 		java(Frame)::setLocation(400, 300),
 		java(Frame)::setSize(400, 300),
-		java(Frame)::setVisible(@true),
+		java::true(True),
+		java(Frame)::setVisible(True),
 		java(Frame)::toFront,
 		java('javax.swing.JOptionPane', Text)::showInputDialog(Frame, 'type your name'),
 		java(Frame)::dispose,
