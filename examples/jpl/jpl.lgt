@@ -137,7 +137,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/09/19,
+		date is 2016/09/21,
 		comment is 'Abstract interface to JPL API utility predicates.'
 	]).
 
@@ -209,7 +209,7 @@
 	:- mode(iterator_element(+iterator, -element), zero_or_more).
 	:- info(iterator_element/2, [
 		comment is 'Enumerates, by backtracking, all iterator elements.',
-		argnames is ['Array', 'List']
+		argnames is ['Iterator', 'Element']
 	]).
 
 	:- use_module(jpl, [
@@ -249,7 +249,7 @@
 		;	jpl_array_to_list(Array, List)
 		).
 
-	iterator_element(Iterator,Element) :-
+	iterator_element(Iterator, Element) :-
 		jpl_iterator_element(Iterator, Element).
 
 :- end_object.
