@@ -46,8 +46,9 @@ development version).
 VCS support
 -----------
 
-* ADDED: `Logtalk.gitignore` and `Logtalk.p4ignore` template files for
-versioning Logtalk projects using git and Perforce.
+* ADDED: `Logtalk.gitignore`, `Logtalk.hgignore`, and `Logtalk.p4ignore`
+template files for versioning Logtalk projects using Git, Mercurial, and
+Perforce.
 
 Examples
 --------
