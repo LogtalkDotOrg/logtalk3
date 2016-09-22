@@ -25,7 +25,7 @@
 		version is 1.3,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2016/09/22,
-		comment is 'Unit tests for the "jpl" example.'
+		comment is 'Unit tests for the "java" example.'
 	]).
 
 	test(jpl_1) :-

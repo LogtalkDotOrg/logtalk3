@@ -194,10 +194,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of defining instance variables, default variable values,
 	and setter and getter methods
 
-- `jpl`  
-	example of defining a minimal abstraction of the JPL API for
-	calling Java from Logtalk using familiar message sending syntax
-	(requires Logtalk to be run with SWI-Prolog or YAP)
+- `java`  
+	example of using the library minimal abstraction for calling Java
+	from Logtalk using familiar message sending syntax (requires Logtalk
+	to be run with SWI-Prolog, YAP, or JIProlog as the backend compiler)
 
 - `lambdas`  
 	example of using lambda expressions

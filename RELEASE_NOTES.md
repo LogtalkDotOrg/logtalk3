@@ -58,9 +58,9 @@ Perforce.
 Examples
 --------
 
-* UPDATED: The `jpl` example benchmarks. Also allow some of the individual
-examples to run when using JIProlog as the backend compiler. This example
-now relies on the new library Java support.
+* RENAMED: The `jpl` example to `java`. Also updated the example benchmarks
+and some of the individual examples to run when using JIProlog as the backend
+compiler. This example now relies on the new library Java support.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

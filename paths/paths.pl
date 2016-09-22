@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on August 22, 2016
+%  Last updated on September 22, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -164,7 +164,7 @@ logtalk_library_path(instvars, examples('instvars/')).
 logtalk_library_path(integration, threads('integration/')).
 logtalk_library_path(integration2d, threads('integration2d/')).
 logtalk_library_path(interactors, engines('interactors/')).
-logtalk_library_path(jpl, examples('jpl/')).
+logtalk_library_path(java, examples('java/')).
 logtalk_library_path(lambdas, examples('lambdas/')).
 logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
 logtalk_library_path(lazy, engines('lazy/')).
