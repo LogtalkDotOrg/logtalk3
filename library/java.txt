@@ -32,4 +32,6 @@ The main idea in this abstraction layer is to use parametric objects where
 the first parameter holds the Java reference (usually to a class or object)
 and an optional second parameter holds the return value. Together with a
 forward message handler, this allows the use of Java messages with the same
-functor and number of arguments as found in the JavaDocs.
+functor and number of arguments as found in the relevant JavaDocs.
+
+For usage examples and unti tests, see the `java` example.

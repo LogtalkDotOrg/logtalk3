@@ -30,9 +30,8 @@ the command:
 
 	$ rougify list
 
-Recent versions of Rouge may already contain support for Logtalk. However, 
-this directory may contain updated support files. If that is the case,
-install the Logtalk support files by performing the following steps:
+This directory may contain, however, updated support files. If that is the
+case, install the Logtalk support files by performing the following steps:
 
 1. Copy the file `lib/rouge/lexers/logtalk.rb` to the same directory in 
 your Rouge installation directory (replacing any existing older file).
