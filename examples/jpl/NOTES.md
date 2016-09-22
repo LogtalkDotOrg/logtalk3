@@ -18,29 +18,17 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+file. Running all the examples and the benchmarks requires SWI-Prolog with
+the JPL library installed. YAP most likely would be usable when the old JPL
+library bundled with it is updated. Some of the examples (but not the
+benchmarks) can also be used with JIProlog.
 
-This folder contains a minimal abstraction of the JPL library distributed
-with SWI-Prolog and YAP. This abstraction makes use of Logtalk parametric
-objects and allows creating Java object, accessing Java class fields, and
-calling Java class and object methods using a more Logtalk-like syntax. It
-also gives access to some of the JPL utility predicates.
+This folder contains examples adapted from the JPL library distributed
+with SWI-Prolog and YAP. It uses a lightweight abstraction, included in
+the Logtalk library, for calling Java from Prolog.
 
-This abstraction is also expected to be implementable with alternative Java
-interfaces found in backend Prolog compilers other than SWI-Prolog and YAP.
-
-The main idea is to use parametric objects where the first parameter holds
-the Java reference (usually to a class or object) and an optional second
-parameter holds the return value. Together with a forward message handler,
-this allows the use of Java messages with the same functor and number of
-arguments as found in the JavaDocs.
-
-For demonstration, adaptations of the JColorChooser and JOptionPane dialog
-examples and the JTable example from the JPL distribution are included.
-
-There are two loader files in this example, The `loader.lgt` file loads
-only the JPL library and the Logtalk abstraction of the JPL API. The
-`examples.lgt` file loads base files and the examples.
+Adaptations of the JColorChooser and JOptionPane dialog examples and the
+JTable example from the JPL distribution are included.
 
 When running the GUI examples on the Mac OS X Terminal application, you may
 get a Java error saying that the AWT cannot be started. In alternative, try

@@ -1,0 +1,188 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>
+%  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(java(_Reference, _ReturnValue),
+	implements((forwarding, java_access_protocol))).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/09/22,
+		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
+		parnames is ['Reference', 'ReturnValue']
+	]).
+
+	:- uses(user, [
+		get/3, set/3, create_object/3, get_constructors/2, get_methods/2, invoke/4, length/2, memberchk/2
+	]).
+
+	get_field(Field, Value) :-
+		parameter(1, Reference),
+		get(Reference, Field, Value).
+
+	set_field(Field, Value) :-
+		parameter(1, Reference),
+		set(Reference, Field, Value).
+
+	new(Parameters, Instance) :- 
+		parameter(1, Class),
+		length(Parameters, Arity),
+		functor(Proto, Class, Arity),
+		get_constructors(Class, Constructors),
+		memberchk(Proto, Constructors),
+%		writeq(create_object(Proto, Parameters, Instance)), nl,
+		create_object(Proto, Parameters, Instance),
+		parameter(2, Instance).
+
+	new(Instance) :- 
+		new([], Instance).
+
+	invoke(Message) :-
+		parameter(1, Reference),
+		Message =.. [Functor| Parameters],
+		functor(Message, Functor, Arity),
+		functor(Proto, Functor, Arity),
+		get_methods(Reference, Methods),
+		memberchk(Proto, Methods),
+		invoke(Reference, Proto, Parameters, Output),
+		parameter(2, Output).
+
+	forward(Message) :-
+		invoke(Message).
+
+:- end_object.
+
+
+:- object(java(Reference),
+	extends(java(Reference, _))).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/09/22,
+		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
+		parnames is ['Reference']
+	]).
+
+:- end_object.
+
+
+:- object(java,
+	implements(java_utils_protocol)).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/09/22,
+		comment is 'Abstract interface to JIProlog API utility predicates.'
+	]).
+
+	:- public(true/1).
+	:- mode(true(--var), one).
+	:- info(true/1, [
+		comment is 'Returns an opaque term that represents the Java value true.',
+		argnames is ['Reference']
+	]).
+
+	:- public(false/1).
+	:- mode(false(--var), one).
+	:- info(false/1, [
+		comment is 'Returns an opaque term that represents the Java value false.',
+		argnames is ['Reference']
+	]).
+
+	:- public(void/1).
+	:- mode(void(--var), one).
+	:- info(void/1, [
+		comment is 'Returns an opaque term that represents the Java value void.',
+		argnames is ['Reference']
+	]).
+
+	:- public(null/1).
+	:- mode(null(--var), one).
+	:- info(null/1, [
+		comment is 'Returns an opaque term that represents the Java value null.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_true/1).
+	:- mode(is_true(++ground), zero_or_one).
+	:- info(is_true/1, [
+		comment is 'True when the argument is the Java value true. Fails if the argument is not instantiated.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_false/1).
+	:- mode(is_false(++ground), zero_or_one).
+	:- info(is_false/1, [
+		comment is 'True when the argument is the Java value false. Fails if the argument is not instantiated.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_void/1).
+	:- mode(is_void(++ground), zero_or_one).
+	:- info(is_void/1, [
+		comment is 'True when the argument is the Java value void. Fails if the argument is not instantiated.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_null/1).
+	:- mode(is_null(++ground), zero_or_one).
+	:- info(is_null/1, [
+		comment is 'True when the argument is the Java value null. Fails if the argument is not instantiated.',
+		argnames is ['Reference']
+	]).
+
+	:- public(array_list/2).
+	:- mode(array_list(+array, -list), one).
+	:- mode(array_list(-array, +list), one).
+	:- info(array_list/2, [
+		comment is 'Converts between an array and a list.',
+		argnames is ['Array', 'List']
+	]).
+
+	:- public(iterator_element/2).
+	:- mode(iterator_element(+iterator, -element), zero_or_more).
+	:- info(iterator_element/2, [
+		comment is 'Enumerates, by backtracking, all iterator elements.',
+		argnames is ['Array', 'List']
+	]).
+
+	true(true).
+
+	false(false).
+
+	void(void).
+
+	null([]).
+
+	is_true(Reference) :-
+		Reference == true.
+
+	is_false(Reference) :-
+		Reference == false.
+
+	is_void(Reference) :-
+		Reference == void.
+
+	is_null(Reference) :-
+		Reference == [].
+
+:- end_object.

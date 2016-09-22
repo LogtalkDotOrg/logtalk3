@@ -22,9 +22,8 @@
 
 	:- if(exists_source(library(jpl))).
 
-		:- use_module(library(jpl), []).
 		:- initialization((
-			logtalk_load(jpl, [optimize(on)]),
+			logtalk_load(library(java_loader)),
 			logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on)])
 		)).
 

@@ -35,6 +35,7 @@
 		meta_compiler_loader,
 		assignvars_loader,
 		hook_flows_loader,
+		java_loader,
 		counters,
 		streamvars
 	], [optimize(on)])

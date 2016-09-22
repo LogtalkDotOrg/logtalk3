@@ -22,11 +22,8 @@
 
 	:- if(exists_source(library(jpl))).
 
-		:- initialization((
-			logtalk_load(library(java_loader)),
-			logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on)]),
-			logtalk_load(benchmarks, [optimize(on)])
-		)).
+		:- use_module(library(jpl), []).
+		:- initialization(logtalk_load([java_protocols,java_jpl], [optimize(on)])).
 
 	:- else.
 
@@ -36,10 +33,7 @@
 
 :- elif(current_logtalk_flag(prolog_dialect, ji)).
 
-	:- initialization((
-		logtalk_load(library(java_loader)),
-		logtalk_load([color_chooser, jlist, text_entry], [optimize(on)])
-	)).
+	:- initialization(logtalk_load([java_protocols,java_jip], [optimize(on)])).
 
 :- else.
 

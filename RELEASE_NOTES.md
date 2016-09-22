@@ -32,6 +32,11 @@ Documentation
 Library
 -------
 
+* ADDED: A set of protocols specifying predicates for calling Java from Prolog
+and implementations of these protocols for SWI-Prolog (requires the bundled JPL
+library), YAP (requires updating the old bundled version of the JPL library),
+and JIProlog (experimental; not fully functional).
+
 * FIXED: Typo in the `arbitrary` category in the generation of random values
 for the `protocol` type. Thanks to Jan Burse for the bug report.
 
@@ -53,9 +58,9 @@ Perforce.
 Examples
 --------
 
-* UPDATED: The `jpl` example with new predicates to get representations of the
-`true`, `false`, `void`, and `null` Java values and with predicates to test for
-these values. Also updated the example benchmarks.
+* UPDATED: The `jpl` example benchmarks. Also allow some of the individual
+examples to run when using JIProlog as the backend compiler. This example
+now relies on the new library Java support.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

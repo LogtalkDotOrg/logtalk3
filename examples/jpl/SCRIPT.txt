@@ -17,9 +17,9 @@ limitations under the License.
 ________________________________________________________________________
 
 
-% start by loading the examples:
+% start by loading the example:
 
-| ?- logtalk_load(jpl(examples)).
+| ?- logtalk_load(jpl(loader)).
 ...
 
 
@@ -65,9 +65,6 @@ yes
 
 % run some benchmarks comparing plain JPL calls with calls to Logtalk's thin
 % abstraction layer:
-
-| ?- logtalk_load(jpl(benchmarks)).
-...
 
 | ?- benchmarks::run.
 ...
