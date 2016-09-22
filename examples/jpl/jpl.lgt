@@ -21,23 +21,23 @@
 :- protocol(javap).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/27,
+		date is 2016/09/22,
 		comment is 'Protocol for a minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.'
 	]).
 
 	:- public(get_field/2).
 	:- mode(get_field(+atom, ?nonvar), zero_or_one).
 	:- info(get_field/2, [
-		comment is 'Gets the value of a class field.',
+		comment is 'Gets the value of a class or object field.',
 		argnames is ['Field', 'Value']
 	]).
 
 	:- public(set_field/2).
 	:- mode(set_field(+atom, +nonvar), one).
 	:- info(set_field/2, [
-		comment is 'Sets the value of a class field.',
+		comment is 'Sets the value of a class or object field.',
 		argnames is ['Field', 'Value']
 	]).
 
@@ -58,8 +58,8 @@
 	:- public(invoke/1).
 	:- mode(invoke(@nonvar), one).
 	:- info(invoke/1, [
-		comment is 'Invokes a method. This is more efficient than relying on the forward/1 handler.',
-		argnames is ['Message']
+		comment is 'Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.',
+		argnames is ['Method']
 	]).
 
 :- end_protocol.
@@ -71,8 +71,8 @@
 	:- info([
 		version is 1.01,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2016/09/19,
-		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.',
+		date is 2016/09/22,
+		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object',
 			'ReturnValue' - 'Value returned by a method call (possibly the Java value void)'
@@ -86,12 +86,12 @@
 	]).
 
 	get_field(Field, Value) :-
-		parameter(1, Class),
-		jpl_get(Class, Field, Value).
+		parameter(1, ClassOrObject),
+		jpl_get(ClassOrObject, Field, Value).
 
 	set_field(Field, Value) :-
-		parameter(1, Class),
-		jpl_set(Class, Field, Value).
+		parameter(1, ClassOrObject),
+		jpl_set(ClassOrObject, Field, Value).
 
 	new(Parameters, Instance) :- 
 		parameter(1, Class),
@@ -123,7 +123,7 @@
 		version is 1.0,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2014/03/25,
-		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.',
+		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object'
 		]
