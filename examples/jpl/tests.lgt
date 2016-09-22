@@ -22,14 +22,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2016/09/19,
+		date is 2016/09/22,
 		comment is 'Unit tests for the "jpl" example.'
 	]).
-
-	cover(java(_,_)).
-	cover(java(_)).
 
 	test(jpl_1) :-
 		java('java.lang.System')::getProperty('java.version').
@@ -46,13 +43,18 @@
 		java('java.lang.Math')::get_field('PI', Pi),
 		float(Pi).
 
-	- test(jpl_5) :-
+	test(jpl_5) :-
+		java('java.util.Date')::new(Date),
+		java(Date, Time)::getTime,
+		number(Time).
+
+	- test(jpl_6) :-
 		java('java.awt.Rectangle')::new([100, 20], Rectangle),
 		java(Rectangle)::set_field(width, 300),
 		java(Rectangle)::get_field(width, Value),
 		Value == 300.
 
-	test(jpl_6) :-
+	test(jpl_7) :-
 		java('java.util.ArrayList')::new(ArrayList),
 		java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')),
 		java(ArrayList, Iterator)::iterator,
