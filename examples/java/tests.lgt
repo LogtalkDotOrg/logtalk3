@@ -28,33 +28,37 @@
 		comment is 'Unit tests for the "java" example.'
 	]).
 
-	test(jpl_1) :-
+	test(java_1) :-
 		java('java.lang.System')::getProperty('java.version').
 
-	test(jpl_2) :-
+	test(java_2) :-
 		java('java.lang.System', Version)::getProperty('java.version'),
 		atom(Version).
 
-	test(jpl_3) :-
+	test(java_3) :-
 		java('java.lang.System', Version)::invoke(getProperty('java.version')),
 		atom(Version).
 
-	test(jpl_4) :-
+	test(java_4) :-
+		java('java.lang.Integer', Integer)::parseInt('123'),
+		Integer == 123.
+
+	test(java_5) :-
 		java('java.lang.Math')::get_field('PI', Pi),
 		float(Pi).
 
-	test(jpl_5) :-
-		java('java.util.Date')::new(Date),
-		java(Date, Time)::getTime,
-		number(Time).
-
-	- test(jpl_6) :-
+	- test(java_6) :-
 		java('java.awt.Rectangle')::new([100, 20], Rectangle),
 		java(Rectangle)::set_field(width, 300),
 		java(Rectangle)::get_field(width, Value),
 		Value == 300.
 
-	test(jpl_7) :-
+	test(java_7) :-
+		java('java.util.Date')::new(Date),
+		java(Date, Time)::getTime,
+		number(Time).
+
+	test(java_8) :-
 		java('java.util.ArrayList')::new(ArrayList),
 		java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')),
 		java(ArrayList, Iterator)::iterator,
