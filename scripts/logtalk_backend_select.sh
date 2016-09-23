@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk back-end Prolog compiler select script
-##   Last updated on July 4, 2014
+##   Last updated on September 23, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 print_version() {
 	echo "Current `basename $0` version:"
-	echo "  0.5"
+	echo "  0.6"
 	exit 0
 }
 
@@ -35,7 +35,7 @@ list_backends() {
 	if [ -e `command -v bplgt` ]  && [ "`command -v bp`" != "" ] ; then
 		echo -n "  bplgt"
 	fi
-	if [ -e `command -v cxlgt1` ]  && [ "`command -v cxprolog1`" != "" ] ; then
+	if [ -e `command -v cxlgt` ]  && [ "`command -v cxprolog`" != "" ] ; then
 		echo -n "  cxlgt"
 	fi
 	if [ -e `command -v eclipselgt` ]  && [ "`command -v eclipse`" != "" ] ; then
@@ -43,6 +43,9 @@ list_backends() {
 	fi
 	if [ -e `command -v gplgt` ]  && [ "`command -v gprolog`" != "" ] ; then
 		echo -n "  gplgt"
+	fi
+	if [ -e `command -v jiplgt` ]  && [ "`command -v jipconsole.sh`" != "" ] ; then
+		echo -n "  jiplgt"
 	fi
 	if [ -e `command -v lplgt` ]  && [ "`command -v lprolog`" != "" ] ; then
 		echo -n "  lplgt"
@@ -112,6 +115,8 @@ valid_backend() {
 	elif [ "$1" == "eclipselgt" ] && [ -e `command -v eclipselgt` ]  && [ "`command -v eclipse`" != "" ] ; then
 		return 0
 	elif [ "$1" == "gplgt" ] && [ -e `command -v gplgt` ]  && [ "`command -v gprolog`" != "" ] ; then
+		return 0
+	elif [ "$1" == "jiplgt" ] && [ -e `command -v jiplgt` ]  && [ "`command -v jipconsole.sh`" != "" ] ; then
 		return 0
 	elif [ "$1" == "lplgt" ] && [ -e `command -v lplgt` ]  && [ "`command -v lprolog`" != "" ] ; then
 		return 0

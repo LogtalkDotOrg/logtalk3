@@ -111,6 +111,9 @@ Prolog adapter and integration files
 * FIXED: Startup warnings about undefined multi-threading predicates when using
 Lean Prolog as the backend compiler.
 
+* FIXED: The `logtalk_backend_select.sh` script to also support selecting
+CxProlog or JIProlog as the default backend compiler.
+
 Documentation
 -------------
 
