@@ -65,7 +65,7 @@ compiler. This example now relies on the new library Java support.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: Preliminary REPL support for the Sublime Text 3 editor.
+* ADDED: Experimental build and REPL support for the Sublime Text 3 editor.
 
 * UPDATED: Rogue support.
 

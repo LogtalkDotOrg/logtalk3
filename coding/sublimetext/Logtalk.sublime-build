@@ -1,0 +1,5 @@
+{
+	"cmd": ["logtalk", "-g", "logtalk_compile('$file'),halt"],
+	"path": "$PATH:/opt/local/bin:$HOME/bin",
+	"selector": "source.logtalk"
+}

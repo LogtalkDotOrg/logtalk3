@@ -45,16 +45,19 @@ to `Logtalk.tmLanguage`.
 
 3. File `logtalk.sublime-completions`
 
+4. File `Logtalk.sublime-build`
+
 Create a `Sublime Text 3/Packages/SublimeREPL/config/Logtalk` subdirectory
 if it doesn't exist and copy the following two files there:
 
 	Default.sublime-commands
 	Main.sublime-menu
 
-The REPL support is experimental and currently not available on Windows.
-It requires that you first run the `logtalk_backend_select` shell script
-to set your default backend compiler. In alternative, edit the
-`Main.sublime-menu` file and change the name of the integration script.
+The build and REPL support are experimental and currently not available on
+Windows. It requires that you first run the `logtalk_backend_select` shell
+script to set your default backend compiler. In alternative, edit the
+`Logtalk.sublime-build` and `Main.sublime-menu` files and change the names
+of the integration scripts.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
