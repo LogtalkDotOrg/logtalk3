@@ -1,0 +1,31 @@
+[
+  {
+    "id":"tools",
+    "children":[
+      {
+        "caption":"SublimeREPL",
+        "mnemonic":"r",
+        "id":"SublimeREPL",
+        "children":[
+          {
+            "caption":"Logtalk",
+            "command":"repl_open",
+            "id":"repl_logtalk",
+            "mnemonic":"P",
+            "args":{
+              "type":"subprocess",
+              "external_id":"logtalk",
+              "encoding":"utf8",
+              "cmd": ["logtalk"],
+              "soft_quit":"\nexit\n",
+              "cwd":"$file_path",
+              "cmd_postfix":"\n",
+              "autocomplete_server": true,
+              "syntax":"Packages/Logtalk/Logtalk.tmLanguage"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
