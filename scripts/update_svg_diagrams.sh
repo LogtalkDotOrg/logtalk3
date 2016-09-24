@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on March 12, 2016
+##   Last updated on September 24, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -51,7 +51,7 @@ tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),log
 
 
 print_version() {
-	echo "`basename $0` 0.3"
+	echo "`basename $0` 0.4"
 	exit 0
 }
 
@@ -68,7 +68,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -v print version of `basename $0`"
 	echo "  -h help"
 	echo
@@ -99,6 +99,9 @@ elif [ "$p_arg" == "eclipse" ] ; then
 elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk="gplgt$extension --query-goal"
+elif [ "$p_arg" == "ji" ] ; then
+	prolog='JIProlog'
+	logtalk="jiplgt$extension -n -g"
 elif [ "$p_arg" == "lean" ] ; then
 	prolog='Lean Prolog'
 	logtalk="lplgt$extension"
