@@ -23,7 +23,7 @@ ________________________________________________________________________
 ...
 
 
-% test the include/1 directive as a file directive:
+% test the use of the Logtalk include/1 directive as a file directive:
 
 | ?- findall(Vowel, vowel(Vowel), Vowels).
 
@@ -31,7 +31,8 @@ Vowels = [a,e,i,o,u]
 yes
 
 
-% get a list of all capitals:
+% test the use of the Logtalk include/1 directive as an entity directive
+% by getting a list of all capitals:
 
 | ?- countries::capitals(Capitals).
 
@@ -39,7 +40,8 @@ Capitals = [berlim, lisbon, madrid, paris, varsovia]
 yes
 
 
-% get sets of countries with the same population:
+% test the use of the Logtalk include/1 directive as an entity directive
+% by getting sets of countries with the same population:
 
 | ?- setof(Countries, countries::same_population(Countries), Solutions).
 
