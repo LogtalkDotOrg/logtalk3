@@ -30,6 +30,9 @@ The following shell command can be used:
 
 	$ apm init --package ~/.atom/packages/language-logtalk --convert $LOGTALKHOME/coding/textmate2/Logtalk.tmbundle
 
+If the `apm` command is not available, you can install it by selecting Atom's
+menu option `Install Shell Commands`.
+
 In alternative, a third-party maintained converted bundle is readily available
 from:
 
