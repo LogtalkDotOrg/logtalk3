@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(osp).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2015/10/16,
+		date is 2016/09/26,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -165,7 +164,7 @@
 	:- mode(date_time(-integer, -integer, -integer, -integer, -integer, -integer, -integer), one).
 	:- info(date_time/7, [
 		comment is 'Returns the current date and time.',
-		argnames is ['Year', 'Month', 'Day', 'Hours', 'Mins', 'Seconds', 'Miliseconds']
+		argnames is ['Year', 'Month', 'Day', 'Hours', 'Minutes', 'Seconds', 'Miliseconds']
 	]).
 
 	:- public(cpu_time/1).
