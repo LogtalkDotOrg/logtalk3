@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.0,
+		version is 3.1,
 		author is 'Paulo Moura',
-		date is 2016/08/25,
+		date is 2016/09/26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -641,8 +641,7 @@
 	write_tests_header :-
 		self(Self),
 		print_message(comment, lgtunit, tests_started),
-		date::today(Year, Month, Day),
-		time::now(Hours, Minutes, Seconds),
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(information, lgtunit, tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		(	object_property(Self, file(File, Directory)) ->
 			atom_concat(Directory, File, Path),
@@ -661,8 +660,7 @@
 		print_message(information, lgtunit, completed_tests_from_object(Self)).
 
 	write_tests_footer :-
-		date::today(Year, Month, Day),
-		time::now(Hours, Minutes, Seconds),
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(comment, lgtunit, tests_ended).
 

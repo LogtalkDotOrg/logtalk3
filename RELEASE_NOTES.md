@@ -40,6 +40,12 @@ and JIProlog (experimental; not fully functional).
 * FIXED: Typo in the `arbitrary` category in the generation of random values
 for the `protocol` type. Thanks to Jan Burse for the bug report.
 
+Tools
+-----
+
+* CHANGED: The `lgtunit` tool no longer depends on the `date` and `time`
+library objects.
+
 Installers and installation scripts
 -----------------------------------
 
