@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on July 13, 2016
+%  Last updated on September 27, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -99,6 +99,17 @@
 logtalk_library_path(my_project, home('my_project/')).
 logtalk_library_path(my_project_libraries, my_project('libraries/')).
 logtalk_library_path(my_project_examples, my_project('examples/')).
+*/
+
+
+%  To define a "library" alias for your project while making it
+%  relocatable, edit and uncomment the following lines:
+
+/*
+:- initialization((
+    logtalk_load_context(directory, Directory),
+    assertz(logtalk_library_path(my_project, Directory))
+)).
 */
 
 
