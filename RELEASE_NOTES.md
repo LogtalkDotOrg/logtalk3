@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.07.1 - September ??, 2016
-===========================
+3.07.1 - October ??, 2016
+=========================
 
 Documentation
 -------------
@@ -66,7 +66,7 @@ no test sets are found.
 Installers and installation scripts
 -----------------------------------
 
-* UPDATED: The `build_release.sh` script to also build an RPM installer.
+* UPDATED: The `build_release.sh` script to also build a RPM installer.
 
 * UPDATED: The Windows installer to also detect ECLiPSe 7.0 (the current
 development version).
