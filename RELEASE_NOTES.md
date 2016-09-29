@@ -54,6 +54,9 @@ errors when no test sets are found.
 
 * IMPROVED: Documentation and usage examples of the `doclet` tool.
 
+* FIXED: An off-by-one error in the `logtalk_tester.sh` automation script when
+no test sets are found.
+
 Installers and installation scripts
 -----------------------------------
 

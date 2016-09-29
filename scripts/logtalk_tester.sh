@@ -329,7 +329,7 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 
 testsets=0
 output="$(find "$base" -name "tester.lgt" -or -name "tester.logtalk")"
-while read file; do
+while read file && [ "$file" != "" ]; do
 	((testsets++))
 	run_tests "$file"
 done <<< "$output"
