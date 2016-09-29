@@ -71,7 +71,7 @@ logtalk=swilgt$extension
 logtalk_call="$logtalk -g"
 # disable timeouts to maintain backward compatibility
 timeout=0
-prefix=""
+prefix="$HOME/"
 arguments=""
 
 run_doclets() {
@@ -124,7 +124,7 @@ usage_help()
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
-	echo "  -s supress path prefix (default is $prefix)"
+	echo "  -s supress path prefix (default is "$prefix")"
 	echo "  -- arguments to be passed to the integration script used to run the doclets (no default)"
 	echo "  -h help"
 	echo

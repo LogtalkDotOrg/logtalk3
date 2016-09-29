@@ -54,9 +54,9 @@ using the `apropos logtalk` command.
 	privileges)
 
 - `logtalk_tester.sh`  
-	shell script for automating running unit tests e.g. in the `examples` and
-	`tests` directories; it recurses through all sub-directories of a directory
-	looking for either `tester.lgt` or `tester.logtalk` files;
+	shell script for automating running unit tests in the current directory
+	and recursively in all its sub-directories by scanning for either `tester.lgt`
+	or `tester.logtalk` files;
 	in its default output format, it reports, besides test results, compilation
 	warnings and errors (please note that, depending on the tests and on the
 	compilation mode, these warnings and errors might be expected);
@@ -74,9 +74,9 @@ using the `apropos logtalk` command.
 	`timeout` option is set to a value greater than zero
 
 - `logtalk_doclet.sh`  
-	shell script for automating running doclets; it recurses through all
-	sub-directories of a directory looking for either `doclet.lgt` or
-	`doclet.logtalk` files;
+	shell script for automating running doclets in the current directory and
+	recursively in all its sub-directories by scanning for either `doclet.lgt`
+	or `doclet.logtalk` files;
 	you can use this script on Windows operating-systems by installing Git for
 	Windows (which provides a Bash shell implementation and is available from
 	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and

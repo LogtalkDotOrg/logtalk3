@@ -79,14 +79,14 @@ base="$PWD"
 results="$base/logtalk_tester_logs"
 backend=swipl
 prolog='SWI-Prolog'
-logtalk=yaplgt$extension
+logtalk=swilgt$extension
 logtalk_call="$logtalk -g"
 mode='normal'
 format='default'
 format_goal=$format_default_goal
 # disable timeouts to maintain backward compatibility
 timeout=0
-prefix=""
+prefix="$HOME/"
 arguments=""
 
 run_tests() {
@@ -156,7 +156,7 @@ usage_help()
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
-	echo "  -s supress path prefix (default is $prefix)"
+	echo "  -s supress path prefix (default is "$prefix")"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo

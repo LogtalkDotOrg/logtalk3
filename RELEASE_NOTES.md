@@ -52,6 +52,9 @@ library objects.
 * CHANGED: The default backend compiler for the `logtalk_tester.sh` automation
 script is now SWI-Prolog.
 
+* CHANGED: The default path prefix to be suppressed when running the
+`logtalk_tester.sh` automation script is now `$HOME/`.
+
 * IMPROVED: The `logtalk_tester.sh` automation script to avoiding printing grep
 errors when no test sets are found.
 
