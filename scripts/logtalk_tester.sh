@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on June 12, 2016
+##   Last updated on September 29, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.16"
+	echo "$(basename "$0") 0.17"
 	exit 0
 }
 
@@ -77,8 +77,8 @@ format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
 
 base="$PWD"
 results="$base/logtalk_tester_logs"
-backend=yap
-prolog='YAP'
+backend=swipl
+prolog='SWI-Prolog'
 logtalk=yaplgt$extension
 logtalk_call="$logtalk -g"
 mode='normal'

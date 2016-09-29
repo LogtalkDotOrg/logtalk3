@@ -46,6 +46,9 @@ Tools
 * CHANGED: The `lgtunit` tool no longer depends on the `date` and `time`
 library objects.
 
+* CHANGED: The default backend compiler for the `logtalk_tester.sh` automation
+script is now SWI-Prolog.
+
 * IMPROVED: Documentation and usage examples of the `doclet` tool.
 
 Installers and installation scripts
