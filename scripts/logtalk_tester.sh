@@ -335,40 +335,40 @@ while read file; do
 done <<< "$output"
 
 cd "$results"
-timeouts=$(grep -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
-crashes=$(grep -a 'LOGTALK_CRASH' *.errors | wc -l | sed 's/ //g')
+timeouts=$(grep -s -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
+crashes=$(grep -s -a 'LOGTALK_CRASH' *.errors | wc -l | sed 's/ //g')
 testsetruns=$(($testsets-$timeouts-$crashes))
-skipped=$(grep -a ': skipped' *.results | wc -l | sed 's/ //g')
-passed=$(grep -a ': success' *.results | wc -l | sed 's/ //g')
-failed=$(grep -a ': failure' *.results | wc -l | sed 's/ //g')
+skipped=$(grep -s -a ': skipped' *.results | wc -l | sed 's/ //g')
+passed=$(grep -s -a ': success' *.results | wc -l | sed 's/ //g')
+failed=$(grep -s -a ': failure' *.results | wc -l | sed 's/ //g')
 total=$(($skipped+$passed+$failed))
 
 echo "*******************************************************************************"
 echo "***** Compilation errors/warnings and failed unit tests"
 echo "***** (compilation errors/warnings might be expected depending on the test)"
 echo "*******************************************************************************"
-grep -a -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
-grep -a -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -a -h '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -a -h '!     ' *.results | sed 's/.results//' | tee -a errors.all
-grep -a -h '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -a -h '*     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
+grep -s -a -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -h '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '*     ' *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
-grep -a 'LOGTALK_TIMEOUT' *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_TIMEOUT' *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
-grep -a 'LOGTALK_CRASH' *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_CRASH' *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep -a ': skipped' *.results | sed 's/: skipped//' | sed 's/.results:% / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a ': skipped' *.results | sed 's/: skipped//' | sed 's/.results:% / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep -a ': failure' *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a ': failure' *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** $testsets test sets: $testsetruns completed, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
