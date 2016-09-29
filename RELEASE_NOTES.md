@@ -43,6 +43,9 @@ for the `protocol` type. Thanks to Jan Burse for the bug report.
 Tools
 -----
 
+* ADDED: A `logtalk_doclet.sh` automation script for running all doclets found
+in a directory and its sub-directories.
+
 * CHANGED: The `lgtunit` tool no longer depends on the `date` and `time`
 library objects.
 

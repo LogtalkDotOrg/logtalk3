@@ -1,0 +1,71 @@
+.TH logtalk_doclet 1 "September 29, 2016" "Logtalk 3.07.1" "Logtalk Documentation"
+
+.SH NAME
+logtalk_doclet \- Logtalk script for automating running doclets
+
+.SH SYNOPSIS
+.B logtalk_doclet -v
+.br
+.B logtalk_doclet [-p 
+.I prolog
+.B ] [-d
+.I results
+.B ] [-t
+.I timeout
+.B ] [-s
+.I prefix
+.B ] [--
+.I arguments
+.B ]
+.br
+.B logtalk_doclet -h
+
+.SH DESCRIPTION
+\f3logtalk_doclet\f1 is a script for automating running Logtalk doclets. This script runs doclets found on a directory and recursively in its sub-directories by scanning for \f2doclet.lgt\f1 and \f2doclet.logtalk\f1 source files. In case of failed doclets, timed out doclets, or crashed tdoclets, this script returns an exit code of \f21\f1. The script assumes that the doclets use an \f2initialization/1\f1 directive to automatically run the documentation generation goal at loading time.
+
+.SH OPTIONS
+.TP
+.BI \-v
+Print script version.
+.TP
+.BI \-p
+Back-end Prolog compiler. Default is YAP. The following identifiers are used: B-Prolog - \f2b\f1, CxProlog - \f2cx\f1, ECLiPSe - \f2eclipse\f1, GNU Prolog - \f2gnu\f1, JIProlog - \f2ji\f1, Lean Prolog - \f2lean\f1, Qu-Prolog - \f2qp\f1, SICStus Prolog - \f2sicstus\f1, SWI-Prolog - \f2swi\f1, SWI-Prolog with Logtalk pack - \f2swipack\f1, XSB - \f2xsb\f1, XSB-MT - \f2xsbmt\f1, YAP - \f2yap\f1.
+.TP
+.BI \-d
+Directory to store the doclet running logs. Default is the local \f2./logtalk_doclet_logs\f1 directory.
+.TP
+.BI \-t
+Timeout in seconds for running each doclet. Default is \f20\f1; i.e. disabled.
+.TP
+.BI \-s
+Path prefix to supress when printing doclet paths. Default is the empty string.
+.TP
+.BI \--
+Arguments to be passed to the integration script used to run the doclets (no default).
+.TP
+.BI \-h
+Provide help on script usage.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKUSER/library/tester_versions.lgt
+Logtalk source file used for printing the Logtalk and back-end Prolog compiler versions.
+
+.SH "SEE ALSO"
+The Logtalk website at <http://logtalk.org/>
+.PP
+The Logtalk User and Reference Manuals at \f2$LOGTALKHOME/manuals/index.html\f1
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2016 Paulo Moura.

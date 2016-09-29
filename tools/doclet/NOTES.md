@@ -45,6 +45,13 @@ This tool can be loaded using the query:
 	| ?- logtalk_load(doclet(loader)).
 
 
+Automating running doclets
+--------------------------
+
+You can use the `scripts/logtalk_doclet.sh` Bash shell script for automating
+running doclets. See the `scripts/NOTES.md` file for details.
+
+
 Other notes
 -----------
 

@@ -55,8 +55,8 @@ using the `apropos logtalk` command.
 
 - `logtalk_tester.sh`  
 	shell script for automating running unit tests e.g. in the `examples` and
-	`tests` directories; it recurses through all sub-directories of the current
-	directory looking for either `tester.lgt` or `tester.logtalk` files;
+	`tests` directories; it recurses through all sub-directories of a directory
+	looking for either `tester.lgt` or `tester.logtalk` files;
 	in its default output format, it reports, besides test results, compilation
 	warnings and errors (please note that, depending on the tests and on the
 	compilation mode, these warnings and errors might be expected);
@@ -71,6 +71,19 @@ using the `apropos logtalk` command.
 	executable directories to the system path environment variable;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
 	by the GNU coreutils package), it will use it to run each test set if the
+	`timeout` option is set to a value greater than zero
+
+- `logtalk_doclet.sh`  
+	shell script for automating running doclets; it recurses through all
+	sub-directories of a directory looking for either `doclet.lgt` or
+	`doclet.logtalk` files;
+	you can use this script on Windows operating-systems by installing Git for
+	Windows (which provides a Bash shell implementation and is available from
+	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
+	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
+	executable directories to the system path environment variable;
+	if the script detects either a `timeout` or a `gtimeout` command (provided
+	by the GNU coreutils package), it will use it to run each doclet if the
 	`timeout` option is set to a value greater than zero
 
 - `logtalk_version_select.sh`  
