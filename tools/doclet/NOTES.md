@@ -20,11 +20,21 @@ ________________________________________________________________________
 Overview
 --------
 
-This folder provides a simple tool for (re)generating documentation for a
-project. The tool provides a `doclet` object that is expected to be extended
-by the user to specify a sequence of goals and a sequence of shell commands
-to (re)generate documentation. For usage examples see the `sample_doclet.lgt`
-and `doclet1.lgt` source files.
+This folder provides a simple tool for (re)generating documentation for an
+application. The tool provides a `doclet` object that is expected to be
+extended by the user to specify a sequence of goals and a sequence of shell
+commands that load the application and (re)generate its documentation.
+
+Doclet source files are usually named `doclet.lgt` (or `doclet.logtalk`) and
+the doclet object are usually named after the application or library to be
+documented with a `_doclet` suffix. By using an `initialization/1` directive
+to automatically send the `update/0` message that generates the documentation
+upon doclet loading, we can abstract the name of the doclet object. The usual
+query to load and run a doclet is therefore:
+
+	| ?- logtalk_load([doclet(loader), doclet]).
+
+For usage examples see the `sample_doclet.lgt` and `doclet1.lgt` source files.
 
 
 Loading

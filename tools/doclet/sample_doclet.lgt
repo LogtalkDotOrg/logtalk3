@@ -1,22 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>
+%  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- object(sample_doclet,
 	extends(doclet)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/08/03,
+		date is 2016/09/29,
 		comment is 'Example of a doclet object.'
 	]).
 
 	% in this example doclet, we automate (re)generating both API
 	% documentation and an entity diagram for the "lgtunit" tool
-	
-	% usage is simple: just send the message update/0 to this object
 
-	% to automatically (re)generate the documentation when this file
-	% is loaded, uncomment the following directive:
-	%:- initialization(::update).
+	% (re)generate the documentation when this file is loaded
+	:- initialization(::update).
 
 	% define one clause per goal required to generate the documentation
 	% (these goals will be called in the context of "user")

@@ -46,6 +46,8 @@ Tools
 * CHANGED: The `lgtunit` tool no longer depends on the `date` and `time`
 library objects.
 
+* IMPROVED: Documentation and usage examples of the `doclet` tool.
+
 Installers and installation scripts
 -----------------------------------
 

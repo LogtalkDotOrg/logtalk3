@@ -1,12 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>
+%  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- object(doclet(_Library),
 	extends(doclet)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/08/03,
-		comment is 'Example of a parameterized doclet.',
+		date is 2016/09/29,
+		comment is 'Parametric doclet.',
 		parnames is ['Library']
 	]).
 
@@ -47,5 +66,21 @@
 	cd_docs(CD) :-
 		docs_path(DocsPath),
 		atom_concat('cd ', DocsPath, CD).		
+
+:- end_object.
+
+
+:- object(library_doclet,
+	extends(doclet(library))).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/09/29,
+		comment is 'Usage example of the parametric doclet to generate documentation for the standard library.'
+	]).
+
+	% (re)generate the documentation when this file is loaded
+	:- initialization(::update).
 
 :- end_object.
