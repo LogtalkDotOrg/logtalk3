@@ -62,6 +62,39 @@ no
 Result = passed.
 yes
 
-?- lgtunit::quick_check(broken_nth1_3_prop(+list), Result, [n(250)]).
+| ?- lgtunit::quick_check(broken_nth1_3_prop(+list), Result, [n(250)]).
 Result = failed(broken_nth1_3_prop([-580.5691640744163, 19, 'nUU!{4WKMv]fCtX*cOyApd', 457])).
+yes
+
+
+% defining a predicate specifying a property of the predicate that we want
+% to test is not always necessary; for example assuming that the predicate
+% length/2 is defined in "user":
+
+| ?- lgtunit::quick_check(length(+list, -integer)).
+% 100 random tests passed
+yes
+
+
+% the template of the quick_check/1-3 predicates can also use the the
+% ::/2 and <</2 control constructs:
+
+| ?- lgtunit::quick_check(list::length(+list, -integer)).
+% 100 random tests passed
+yes
+
+| ?- lgtunit::quick_check(list<<length(+list, -integer)).
+% 100 random tests passed
+yes
+
+
+% when using a backend Prolog system providing a "lists" module defining
+% the length/2 predicate, the template argument of the quick_check/1-3
+% predicates can be an explicitly module-qualified template:
+
+| ?- use_module(library(lists)).
+yes
+
+| ?- lgtunit::quick_check(lists:length(+list, -integer)).
+% 100 random tests passed
 yes
