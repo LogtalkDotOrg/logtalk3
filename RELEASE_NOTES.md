@@ -29,7 +29,9 @@ Logtalk compiler and runtime
 
 * FIXED: Source file compilation error reporting when the errors occur before
 the intermediate Prolog file is created. The report would containing only the
-error but without file and line information.
+error but without file and line information. This bug only manifested itself
+when compiling the first source file term and when checking for an `encoding/1`
+directive.
 
 Documentation
 -------------
