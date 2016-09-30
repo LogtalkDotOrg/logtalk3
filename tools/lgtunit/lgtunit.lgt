@@ -26,7 +26,7 @@
 	:- info([
 		version is 3.1,
 		author is 'Paulo Moura',
-		date is 2016/09/26,
+		date is 2016/09/30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -1127,17 +1127,29 @@
 		quick_check(Template, []).
 
 	run_quick_check_tests(Template, NumberOfTests) :-
-		Template =.. [Name| Types],
+		callable(Template),
+		integer(NumberOfTests),
+		decompose_quick_check_template(Template, Entity, Operator, Predicate),
+		Predicate =.. [Name| Types],
 		forall(
 			{between(1, NumberOfTests, _)},
-			run_quick_check_test(Name, Types)
+			run_quick_check_test(Entity, Operator, Name, Types)
 		).
 
-	run_quick_check_test(Name, Types) :-
-		sender(Sender),
+	decompose_quick_check_template(Object::Template, Object, (::), Template) :-
+		!.
+	decompose_quick_check_template(Object<<Template, Object, (<<), Template) :-
+		!.
+	decompose_quick_check_template(':'(Module,Template), Module, (:), Template) :-
+		!.
+	decompose_quick_check_template(Template, Sender, (<<), Template) :-
+		sender(Sender).
+
+	run_quick_check_test(Entity, Operator, Name, Types) :-
 		generate_arbitrary_arguments(Types, Arguments),
-		Goal =.. [Name| Arguments],
-		(	catch(Sender<<Goal, _, shrink_failed_test(Types, Goal)) ->
+		Predicate =.. [Name| Arguments],
+		Goal =.. [Operator, Entity, Predicate],
+		(	catch(Goal, _, shrink_failed_test(Types, Goal)) ->
 			true
 		;	shrink_failed_test(Types, Goal)
 		).

@@ -191,7 +191,10 @@ described above, and `quick_check/1-3` public predicates for interactive use:
 
 The `quick_check/3` predicate returns results in reified form (either `passed`
 or `failed(Goal)` with Goal being the random test that failed). The other two
-predicates print the test results.
+predicates print the test results. The template can be a `::/2`, `<</2`, or
+`:/2` qualified callable term. When the template is an unqualified callable
+term, it will be used to construct a goal to be called in the context of the
+*sender* using the `<</2` debugging control construct.
 
 Properties are expressed using predicates. The QuickCheck test idioms and
 predicates take as argument the mode template for a property (defined as a
