@@ -2904,7 +2904,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 7, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 7, 1, rc2)).
 
 
 
@@ -6073,12 +6073,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_read_term'(Input, Term, [singletons(Singletons)], Lines),
 		InputError,
-		'$lgt_compiler_stream_io_error_handler'(Input, InputError)
+		'$lgt_compiler_error_handler'(SourceFile, Lines, InputError)
 	),
 	catch(
 		'$lgt_check_for_encoding_directive'(Term, SourceFile, Input, NewInput, OutputOptions),
 		FirstTermError,
-		'$lgt_compiler_stream_io_error_handler'(Input, FirstTermError)
+		'$lgt_compiler_error_handler'(SourceFile, Lines, FirstTermError)
 	),
 	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
 	catch(
@@ -6597,6 +6597,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_delete_intermediate_files'(ObjectFile)
 	;	true
 	),
+	!,
+	fail.
+
+
+
+% '$lgt_compiler_error_handler'(+atom, +pair(integer), @compound)
+%
+% closes the stream being used for reading, restores the operator table,
+% reports the compilation error found, and, finally, fails in order to
+% abort the compilation process
+
+'$lgt_compiler_error_handler'(SourceFile, Lines, Error) :-
+	stream_property(Input, alias(logtalk_compiler_input)), !,
+	'$lgt_print_message'(error, core, compiler_error(SourceFile, Lines, Error)),
+	'$lgt_restore_global_operator_table',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_reset_warnings_counter',
+	catch('$lgt_close'(Input), _, true),
 	!,
 	fail.
 

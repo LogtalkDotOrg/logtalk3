@@ -24,6 +24,13 @@ RELEASE NOTES
 3.07.1 - October ??, 2016
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Source file compilation error reporting when the errors occur before
+the intermediate Prolog file is created. The report would containing only the
+error but without file and line information.
+
 Documentation
 -------------
 
