@@ -26,8 +26,8 @@
 	:- info([
 		version is 3.1,
 		author is 'Paulo Moura',
-		date is 2016/09/30,
-		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
+		date is 2016/10/02,
+		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
 	:- public(cover/1).

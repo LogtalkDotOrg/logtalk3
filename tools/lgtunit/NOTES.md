@@ -419,7 +419,8 @@ Known issues
 ------------
 
 Deterministic unit tests are currently not available when using Lean Prolog
-or Quintus Prolog as backend compilers.
+or Quintus Prolog as backend compilers do the lack of required built-in
+support that cannot be defined in Prolog.
 
 
 Other notes
