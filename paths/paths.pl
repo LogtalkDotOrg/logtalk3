@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on September 22, 2016
+%  Last updated on October 4, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -81,6 +81,7 @@ logtalk_library_path(home, HOME) :-
 logtalk_library_path(core, logtalk_home('core/')).
 
 % main directories in the Logtalk distribution
+logtalk_library_path(coding, logtalk_user('coding/')).
 logtalk_library_path(contributions, logtalk_user('contributions/')).
 logtalk_library_path(examples, logtalk_user('examples/')).
 logtalk_library_path(library, logtalk_user('library/')).

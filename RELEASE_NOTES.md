@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Also define a library path for the `coding` directory as it may also
+contain source code for supporting editing services.
+
 * FIXED: Source file compilation error reporting when the errors occur before
 the intermediate Prolog file is created. The report would containing only the
 error but without file and line information. This bug only manifested itself
