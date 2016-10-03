@@ -1,0 +1,73 @@
+{
+  "patterns": {
+    "LogtalkError1": {
+      "expression": "[\\*!]\\s+in\\sfile\\s(path)\\sat\\sor\\sabove\\sline\\s(line)"
+    },
+    "LogtalkError2": {
+      "expression": "[\\*!]\\s+in\\sfile\\s(path)\\sbetween\\slines\\s(line)"
+    },
+    "LogtalkError3": {
+      "expression": "[\\*!]\\s+in\\sfile\\s(path)"
+    }
+  },
+  "commands": [
+    {
+      "namespace": "Process Palette",
+      "action": "Compile Logtalk file",
+      "command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('{fileAbsPath}')),halt\"",
+      "arguments": [],
+      "cwd": "{fileDirPath}",
+      "inputDialogs": [],
+      "env": {},
+      "keystroke": "cmd-1",
+      "stream": false,
+      "outputTarget": "panel",
+      "outputBufferSize": 80000,
+      "maxCompleted": 3,
+      "autoShowOutput": true,
+      "autoHideOutput": false,
+      "scrollLockEnabled": false,
+      "singular": true,
+      "promptToSave": true,
+      "saveOption": "referenced",
+      "patterns": [
+        "LogtalkError1",
+        "LogtalkError2",
+        "LogtalkError3"
+      ],
+      "successOutput": "{stdout}{stderr}",
+      "errorOutput": "{stdout}{stderr}",
+      "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "successMessage": "Executed : {fullCommand}",
+      "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}"
+    },
+    {
+      "namespace": "Process Palette",
+      "action": "Generate Markdown documentation",
+      "command": "swilgt -g \"logtalk_load(lgtdoc(loader)),logtalk_load('{fileAbsPath}'),lgtdoc::file('{fileAbsPath}'),halt\" && cd {fileDirAbsPath}/xml_docs && lgt2html && atom index.html",
+      "arguments": [],
+      "cwd": null,
+      "inputDialogs": [],
+      "env": {},
+      "keystroke": "cmd-2",
+      "stream": false,
+      "outputTarget": "panel",
+      "outputBufferSize": 80000,
+      "maxCompleted": 3,
+      "autoShowOutput": true,
+      "autoHideOutput": false,
+      "scrollLockEnabled": false,
+      "singular": false,
+      "promptToSave": true,
+      "saveOption": "referenced",
+      "patterns": [],
+      "successOutput": "{stdout}",
+      "errorOutput": "{stdout}\n{stderr}",
+      "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "successMessage": "Executed : {fullCommand}",
+      "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}"
+    }
+  ]
+}

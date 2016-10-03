@@ -100,6 +100,9 @@ compiler. This example now relies on the new library Java support.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Sample commands for compiling files and generating HTML documentation
+from within the Atom text editor.
+
 * ADDED: Experimental build and REPL support for the Sublime Text 3 editor.
 
 * UPDATED: Rogue support.
