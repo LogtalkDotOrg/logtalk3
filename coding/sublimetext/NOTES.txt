@@ -45,7 +45,8 @@ to `Logtalk.tmLanguage`.
 
 3. File `logtalk.sublime-completions`
 
-4. File `Logtalk.sublime-build`
+4. File `Logtalk.sublime-build` (edit it to change the used integration
+script)
 
 Create a `Sublime Text 3/Packages/SublimeREPL/config/Logtalk` subdirectory
 if it doesn't exist and copy the following two files there:

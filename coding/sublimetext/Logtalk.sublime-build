@@ -1,5 +1,6 @@
 {
-	"cmd": ["logtalk", "-g", "logtalk_compile('$file'),halt"],
+	"cmd": ["swilgt", "-g", "set_logtalk_flag(report,warnings),ignore(logtalk_load('${file}')),halt"],
 	"path": "$PATH:/opt/local/bin:$HOME/bin",
-	"selector": "source.logtalk"
+	"selector": "source.logtalk",
+	"file_regex": "^[\\*!]\\s+in\\sfile\\s([\\/0-9a-zA-Z\\._\\\\:]+)[^\\d]+(\\d+)"
 }
