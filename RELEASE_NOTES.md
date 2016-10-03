@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Ensure that in compiler error and warning messages the file and line
+information is always the last line for the reported issue.
+
 * ADDED: Also define a library path for the `coding` directory as it may also
 contain source code for supporting editing services.
 

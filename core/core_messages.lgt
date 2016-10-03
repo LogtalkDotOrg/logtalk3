@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2016/08/07,
+		date is 2016/10/03,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -609,13 +609,13 @@
 
 	message_context(File, Type, Entity) -->
 		{ground_term_copy(Entity, GroundEntity)},
-		['  in file ~w'-[File], nl, '  while compiling ~w ~q'-[Type, GroundEntity], nl].
+		['  while compiling ~w ~q'-[Type, GroundEntity], nl, '  in file ~w'-[File], nl].
 
 	message_context(File, Lines, Type, Entity) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		(	{Lines = Line-Line} ->
-			['  in file ~w at or above line ~d'-[File, Line], nl, '  while compiling ~w ~q'-[Type, GroundEntity], nl]
-		;	['  in file ~w between lines ~w'-[File, Lines], nl, '  while compiling ~w ~q'-[Type, GroundEntity], nl]
+			['  while compiling ~w ~q'-[Type, GroundEntity], nl, '  in file ~w at or above line ~d'-[File, Line], nl]
+		;	['  while compiling ~w ~q'-[Type, GroundEntity], nl, '  in file ~w between lines ~w'-[File, Lines], nl]
 		).
 
 	message_context(File, Lines) -->
