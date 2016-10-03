@@ -45,7 +45,7 @@
     {
       "namespace": "Process Palette",
       "action": "Generate HTML documentation",
-      "command": "swilgt -g \"logtalk_load(lgtdoc(loader)),logtalk_load('{fileAbsPath}'),lgtdoc::file('{fileAbsPath}'),halt\" && cd {fileDirAbsPath}/xml_docs && lgt2html && atom index.html",
+      "command": "swilgt -g \"logtalk_load(lgtdoc(loader)),logtalk_load('{fileAbsPath}'),lgtdoc::directory('{fileDirAbsPath}'),halt\" && cd {fileDirAbsPath}/xml_docs && lgt2html && atom index.html",
       "arguments": [],
       "cwd": null,
       "inputDialogs": [],
