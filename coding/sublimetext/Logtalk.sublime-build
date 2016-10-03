@@ -1,6 +1,6 @@
 {
-	"cmd": ["swilgt", "-g", "set_logtalk_flag(report,warnings),ignore(logtalk_load('${file}')),halt"],
+	"cmd": ["swilgt", "-g", "set_logtalk_flag(report,warnings),ignore(logtalk_load(coding('sublimetext/sublime_text_rewrite_messages'),[scratch_directory(logtalk_user(scratch))])),ignore(logtalk_load('${file}')),halt"],
 	"path": "$PATH:/opt/local/bin:$HOME/bin",
 	"selector": "source.logtalk",
-	"file_regex": "^[\\*!]\\s+in\\sfile\\s([\\/0-9a-zA-Z\\._\\\\:]+)[^\\d]+(\\d+)"
+	"file_regex": "^[\\*!]\\s+in\\sfile\\s([\\/0-9a-zA-Z\\._\\\\:]+)[^\\d]+(\\d+)[^:]*[:](\\d+)[:](.*$)"
 }
