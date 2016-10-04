@@ -81,6 +81,11 @@ template `::/2`, `<</2`, and `:/2` arguments.
 * FIXED: An off-by-one error in the `logtalk_tester.sh` automation script when
 no test sets are found.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `lgtunit` tool utility predicates.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.1,
+		version is 3.2,
 		author is 'Paulo Moura',
-		date is 2016/10/02,
+		date is 2016/10/04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -108,6 +108,13 @@
 	:- info(('=~=')/2, [
 		comment is 'Compares two floats for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Handy when writing certain unit tests but the default precision values may not be adequate for all cases.',
 		argnames is ['Float1', 'Float2']
+	]).
+
+	:- public(epsilon/1).
+	:- mode(epsilon(-float), one).
+	:- info(epsilon/1, [
+		comment is 'Returns the value of epsilon used in the definition of the (=~=)/2 predicate.',
+		argnames is ['Epsilon']
 	]).
 
 	:- protected(run_tests/0).
