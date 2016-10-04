@@ -4,7 +4,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/03,
+		date is 2016/10/04,
 		comment is 'Rewrite compiler error and warnings messages for Sublime Text builds.'
 	]).
 
@@ -27,11 +27,18 @@
 
 	reverse_line_order(Tokens, TokensReversed) :-
 		append(FirstLine, [nl| OtherLines], Tokens),
-		append(_SecondLine, [nl| ThirdLine0], OtherLines),
-		append(ThirdLine1, [nl], ThirdLine0),
-		append(ThirdLine1, [':1:'-[]], ThirdLine),
-		append(ThirdLine, FirstLine, TokensReversed0),
+		find_last_line(OtherLines, LastLine),
+		append(LastLine, [':1:'-[]], SecondLine),
+		append(SecondLine, FirstLine, TokensReversed0),
 		append(TokensReversed0, [nl], TokensReversed).
+
+	find_last_line(OtherLines, LastLine) :-
+		append(Line, [nl| RestLines], OtherLines),
+		find_last_line(RestLines, Line, LastLine).
+
+	find_last_line([], LastLine, LastLine).
+	find_last_line(RestLines, _, LastLine) :-
+		find_last_line(RestLines, LastLine).
 
 	append([], List, List).
 	append([Head| Tail], List, [Head| Tail2]) :-
