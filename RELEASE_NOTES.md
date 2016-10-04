@@ -61,6 +61,8 @@ Tools
 * ADDED: A `logtalk_doclet.sh` automation script for running all doclets found
 in a directory and its sub-directories.
 
+* ADDED: A `epsilon/1` utility predicate to the `lgtunit` tool.
+
 * CHANGED: The `lgtunit` tool no longer depends on the `date` and `time`
 library objects.
 
