@@ -26,7 +26,7 @@
 	:- info([
 		version is 3.2,
 		author is 'Paulo Moura',
-		date is 2016/10/04,
+		date is 2016/10/05,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1140,7 +1140,7 @@
 		Predicate =.. [Name| Types],
 		forall(
 			{between(1, NumberOfTests, _)},
-			run_quick_check_test(Entity, Operator, Name, Types)
+			run_quick_check_test(Template, Entity, Operator, Name, Types)
 		).
 
 	decompose_quick_check_template(Object::Template, Object, (::), Template) :-
@@ -1152,13 +1152,13 @@
 	decompose_quick_check_template(Template, Sender, (<<), Template) :-
 		sender(Sender).
 
-	run_quick_check_test(Entity, Operator, Name, Types) :-
+	run_quick_check_test(Template, Entity, Operator, Name, Types) :-
 		generate_arbitrary_arguments(Types, Arguments),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
-		(	catch(Goal, _, shrink_failed_test(Types, Goal)) ->
+		(	catch(Goal, _, shrink_failed_test(Types, Goal, Template)) ->
 			true
-		;	shrink_failed_test(Types, Goal)
+		;	shrink_failed_test(Types, Goal, Template)
 		).
 
 	generate_arbitrary_arguments([], []).
@@ -1176,27 +1176,28 @@
 	generate_arbitrary_argument('@'(Type), Arbitrary) :-
 		arbitrary(Type, Arbitrary).
 
-	shrink_failed_test(Types, Goal) :-
-		shrink_failed_test(16, Types, Goal).
+	shrink_failed_test(Types, Goal, Template) :-
+		shrink_failed_test(16, Types, Goal, Template).
 
-	shrink_failed_test(Depth, Types, Goal) :-
+	shrink_failed_test(Depth, Types, Goal, Template) :-
 		Depth > 0,
-		sender(Sender),
 		shrink_goal(Types, Goal, Small),
 		!,
 		NextDepth is Depth - 1,
-		(	catch(Sender<<Small, _, shrink_failed_test(NextDepth, Types, Small)) ->
-			throw(quick_check_failed(Goal))
-		;	shrink_failed_test(NextDepth, Types, Small)
+		(	catch(Small, _, shrink_failed_test(NextDepth, Types, Small, Template)) ->
+			quick_check_failed(Goal, Template)
+		;	shrink_failed_test(NextDepth, Types, Small, Template)
 		).
-	shrink_failed_test(_, _, Goal) :-
-		throw(quick_check_failed(Goal)).
+	shrink_failed_test(_, _, Goal, Template) :-
+		quick_check_failed(Goal, Template).
 
-	shrink_goal(Types, Goal, Small) :-
+	shrink_goal(Types, Large, Small) :-
+		decompose_quick_check_template(Large, Entity, Operator, Goal),
 		Goal =.. [Functor| LargeArguments],
 		shrink_goal_arguments(Types, LargeArguments, SmallArguments),
-		Small =.. [Functor| SmallArguments],
-		Goal \== Small.
+		SmallGoal =.. [Functor| SmallArguments],
+		Goal \== SmallGoal,
+		Small =.. [Operator, Entity, SmallGoal].
 
 	shrink_goal_arguments([], [], []).
 	shrink_goal_arguments([Type| Types], [LargeArgument| LargeArguments], [SmallArgument| SmallArguments]) :-
@@ -1211,6 +1212,15 @@
 	extract_input_type('+'(Type), Type).
 	extract_input_type('?'(Type), Type).
 	extract_input_type('@'(Type), Type).
+
+	quick_check_failed(Object<<Goal, _<<_) :-
+		!,
+		throw(quick_check_failed(Object<<Goal)).
+	quick_check_failed(_<<Goal, _) :-
+		!,
+		throw(quick_check_failed(Goal)).
+	quick_check_failed(Goal, _) :-
+		throw(quick_check_failed(Goal)).
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-
