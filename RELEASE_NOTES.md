@@ -122,6 +122,9 @@ from within the Atom text editor.
 
 * ADDED: Experimental build and REPL support for the Sublime Text 3 editor.
 
+* ADDED: Note on GNU Global, a source code tagging system that can be used via
+its Pygments parser in Logtalk projects.
+
 * UPDATED: Rogue support.
 
 
