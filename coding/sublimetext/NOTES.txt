@@ -60,6 +60,11 @@ script to set your default backend compiler. In alternative, edit the
 `Logtalk.sublime-build` and `Main.sublime-menu` files and change the names
 of the integration scripts.
 
+For code navigation, install ctags Logtalk support (see the `../ctags` folder)
+and the Sublime Text `ctags` package. On Mac OS Xm you may also need to install
+the `Fix Mac Path` package in order to use a recent `ctags` version (that you
+can install using e.g. Homebrew or MacPorts).
+
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces); you may set the tab width on the editor preference
