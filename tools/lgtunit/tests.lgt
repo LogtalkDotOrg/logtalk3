@@ -24,15 +24,15 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/04,
+		date is 2016/10/05,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
 	:- uses(lgtunit, [
-		('=~=')/2,
+		epsilon/1, ('=~=')/2,
 		deterministic/1,
-		epsilon/1,
-		variant/2
+		variant/2,
+		quick_check/3, quick_check/2, quick_check/1
 	]).
 
 	% epsilon/1 tests
@@ -106,5 +106,39 @@
 
 	test(variant_2_06) :-
 		\+ variant(a(1,_Y), a(_A,2)).
+
+	% quick_check/3 tests
+
+	test(quick_check_3_01) :-
+		quick_check(atom(+atom), Result, []),
+		Result == passed.
+
+	test(quick_check_3_02) :-
+		quick_check(atom(+integer), Result, []),
+		Result = failed(atom(Integer)), integer(Integer).
+
+	% quick_check/2 tests
+
+	test(quick_check_2_01) :-
+		quick_check(atom(+atom), []).
+
+	test(quick_check_2_02) :-
+		\+ quick_check(atom(+integer), []).
+
+	% quick_check/1 tests
+
+	test(quick_check_1_01) :-
+		quick_check(atom(+atom)).
+
+	test(quick_check_1_02) :-
+		\+ quick_check(atom(+integer)).
+
+	% supress quick_check/1-3 messages
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(quick_check_passed(_NumberOfTests), _, lgtunit, _).
+	logtalk::message_hook(quick_check_failed(_Goal), _, lgtunit, _).
 
 :- end_object.
