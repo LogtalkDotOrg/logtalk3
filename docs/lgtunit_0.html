@@ -196,7 +196,7 @@
         <div class="section">
           <h3 id="benchmark/2" class="code">benchmark/2</h3>
           <blockquote>
-            <p class="comment">Benchmarks a goal and returns the total execution time in seconds.</p>
+            <p class="comment">Benchmarks a goal and returns the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -213,14 +213,14 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>benchmark(+callable,-float) &ndash; zero_or_one</code>
+              <code>benchmark(+callable,-float) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
           <h3 id="benchmark/3" class="code">benchmark/3</h3>
           <blockquote>
-            <p class="comment">Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds.</p>
+            <p class="comment">Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -237,7 +237,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>benchmark(+callable,+integer,-float) &ndash; zero_or_one</code>
+              <code>benchmark(+callable,+integer,-float) &ndash; one</code>
             </dd>
           </dl>
         </div>

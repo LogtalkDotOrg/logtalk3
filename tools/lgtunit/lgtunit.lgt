@@ -81,17 +81,17 @@
 
 	:- public(benchmark/2).
 	:- meta_predicate(benchmark(0, *)).
-	:- mode(benchmark(+callable, -float), zero_or_one).
+	:- mode(benchmark(+callable, -float), one).
 	:- info(benchmark/2, [
-		comment is 'Benchmarks a goal and returns the total execution time in seconds.',
+		comment is 'Benchmarks a goal and returns the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Time']
 	]).
 
 	:- public(benchmark/3).
 	:- meta_predicate(benchmark(0, *, *)).
-	:- mode(benchmark(+callable, +integer, -float), zero_or_one).
+	:- mode(benchmark(+callable, +integer, -float), one).
 	:- info(benchmark/3, [
-		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds.',
+		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Repetitions', 'Time']
 	]).
 
@@ -1234,7 +1234,7 @@
 
 	benchmark(Goal, Time) :-
 		os::cpu_time(Time0),
-		once(Goal),
+		ignore(Goal),
 		os::cpu_time(Time1),
 		Time is Time1 - Time0.
 

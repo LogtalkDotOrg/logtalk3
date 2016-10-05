@@ -83,6 +83,10 @@ template `::/2`, `<</2`, and `:/2` arguments.
 * FIXED: An off-by-one error in the `logtalk_tester.sh` automation script when
 no test sets are found.
 
+* FIXED: Bug in the `lgtunit::benchmark/2` predicate where it would fail when
+benchmarking goals that fail. Also fixed the `lgtunit::benchmark/2-3` predicate
+mode directives to specify that the predicates are expected to always succeed.
+
 Tests
 -----
 

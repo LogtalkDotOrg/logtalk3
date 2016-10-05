@@ -29,11 +29,32 @@
 	]).
 
 	:- uses(lgtunit, [
+		benchmark/3, benchmark/2,
 		epsilon/1, ('=~=')/2,
 		deterministic/1,
 		variant/2,
 		quick_check/3, quick_check/2, quick_check/1
 	]).
+
+	% benchmark/3 tests
+
+	test(benchmark_3_01) :-
+		benchmark(atom_codes('sample test atom',_), 100, Time),
+		float(Time).
+
+	test(benchmark_3_02) :-
+		benchmark(fail, 100, Time),
+		float(Time).
+
+	% benchmark/2 tests
+
+	test(benchmark_2_01) :-
+		benchmark(atom_codes('sample test atom',_), Time),
+		float(Time).
+
+	test(benchmark_2_02) :-
+		benchmark(fail, Time),
+		float(Time).
 
 	% epsilon/1 tests
 
