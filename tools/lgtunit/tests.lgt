@@ -114,7 +114,15 @@
 		Result == passed.
 
 	test(quick_check_3_02) :-
+		quick_check(atom(+atom), Result, [n(25)]),
+		Result == passed.
+
+	test(quick_check_3_03) :-
 		quick_check(atom(+integer), Result, []),
+		Result = failed(atom(Integer)), integer(Integer).
+
+	test(quick_check_3_04) :-
+		quick_check(atom(+integer), Result, [n(25)]),
 		Result = failed(atom(Integer)), integer(Integer).
 
 	% quick_check/2 tests
@@ -123,7 +131,14 @@
 		quick_check(atom(+atom), []).
 
 	test(quick_check_2_02) :-
+		quick_check(atom(+atom), [n(25)]),
+		quick_check_passed(N), N == 25.
+
+	test(quick_check_2_03) :-
 		\+ quick_check(atom(+integer), []).
+
+	test(quick_check_2_04) :-
+		\+ quick_check(atom(+integer), [n(25)]).
 
 	% quick_check/1 tests
 
@@ -133,12 +148,17 @@
 	test(quick_check_1_02) :-
 		\+ quick_check(atom(+integer)).
 
-	% supress quick_check/1-3 messages
+	% supress quick_check/1-3 messages and save option values for tests
+
+	:- private(quick_check_passed/1).
+	:- dynamic(quick_check_passed/1).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(quick_check_passed(_NumberOfTests), _, lgtunit, _).
-	logtalk::message_hook(quick_check_failed(_Goal), _, lgtunit, _).
+	logtalk::message_hook(quick_check_passed(NumberOfTests), _, lgtunit, _) :-
+		retractall(quick_check_passed(_)),
+		assertz(quick_check_passed(NumberOfTests)).
+	logtalk::message_hook(quick_check_failed(_), _, lgtunit, _).
 
 :- end_object.
