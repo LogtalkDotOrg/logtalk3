@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2016/10/03,
+		date is 2016/10/06,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -623,9 +623,6 @@
 			['  in file ~w at or above line ~d'-[File, Line], nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl]
 		).
-
-	message_context(File) -->
-		['  in file ~w'-[File], nl].
 
 	missing_entities([]) -->
 		[].
