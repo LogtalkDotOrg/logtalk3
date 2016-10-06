@@ -4,7 +4,8 @@
 --regex-Logtalk=/^[ \t]*:- protocol\(([a-z][a-zA-Z0-9_]*)/\1/p,Protocols/
 --regex-Logtalk=/^[ \t]*:- category\(([a-z][a-zA-Z0-9_]*)/\1/c,Categories/
 --regex-Logtalk=/^[ \t]*:- module\(([a-z][a-zA-Z0-9_]*)/\1/m,Modules/
---regex-Logtalk=/^[ \t]*:- uses\(([a-z][a-zA-Z0-9_]*)/\1/o,Uses directives/
+--regex-Logtalk=/^[ \t]*:- uses\(([a-z][a-zA-Z0-9_]*)/\1/y,Uses directives/
+--regex-Logtalk=/^[ \t]*:- use_module\(([a-z][a-zA-Z0-9_]*)/\1/z,Uses directives/
 --regex-Logtalk=/^[ \t]*:- public\(([a-z][a-zA-Z0-9_]*[\/]+[0-9]*)/\1/u,Public predicates/
 --regex-Logtalk=/^[ \t]*:- protected\(([a-z][a-zA-Z0-9_]*[\/]+[0-9]*)/\1/r,Protected predicates/
 --regex-Logtalk=/^[ \t]*:- private\(([a-z][a-zA-Z0-9_]*[\/]+[0-9]*)/\1/i,Private predicates/
