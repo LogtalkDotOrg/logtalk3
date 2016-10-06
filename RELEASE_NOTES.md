@@ -127,6 +127,9 @@ its Pygments parser in Logtalk projects.
 
 * UPDATED: Rogue support.
 
+* UPDATED: The ctags support to parse additional entity and predicate
+directives.
+
 
 3.07.0 - August 31, 2016
 ========================
