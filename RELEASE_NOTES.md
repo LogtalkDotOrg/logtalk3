@@ -44,6 +44,10 @@ Documentation
 
 * IMPROVED: Documentation of the `logtalk_load_context/2` built-in predicate.
 
+* FIXED: Examples in the User Manual of entity opening directives that still
+used old and no longer supported Logtalk 2.x syntax for enumerating multiple
+entities.
+
 Library
 -------
 
