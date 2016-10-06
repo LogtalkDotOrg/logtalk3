@@ -53,6 +53,13 @@ LOGTALK_TXT_COMMAND
 	set to the name of the shell script you use to generate the TXT 
 	documentation (e.g. lgt2txt)
 
+If you're using the TmCodeBrowser plug-in available at:
+
+	http://www.cocoabits.com/TmCodeBrowser/
+
+Copy the `ctags` file to `$HOME/.ctags.tmcodebrowser` or append its
+contents to the `$HOME/.ctags.tmcodebrowser` file if it already exists.
+
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces); you may set the tab width on the editor preference

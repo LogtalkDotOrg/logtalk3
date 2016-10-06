@@ -24,18 +24,6 @@ This folder contains minimal support for using Exuberant Ctags  with Logtalk:
 To install, copy the `ctags` file to `$HOME/.ctags` or append its contents to
 the `$HOME/.ctags` file if it already exists.
 
-If you're using the MacOS X TextMate and its TmCodeBrowser plug-in available at:
-
-	http://www.cocoabits.com/TmCodeBrowser/
-
-Copy the `ctags` file to `$HOME/.ctags.tmcodebrowser` or append its contents to
-the `$HOME/.ctags.tmcodebrowser` file if it already exists.
-
-If you're using the Vim text editor, you can install the "Tag List" plugin in
-order to enable a source code browser for Logtalk (and other) source files:
-
-	http://vim-taglist.sourceforge.net/
-
-After installing the plugin, add the following line to your `.vimrc` file:
-
-	let tlist_logtalk_settings = 'logtalk;o:Objects;p:Protocols;c:Categories;m:Modules;u:Public predicates;r:Protected predicates;v:Private predicates'
+Several text editors (e.g. Atom, Sublime Text, TextMate, and Vim) support code
+navigation using ctags. Check the text editor documentation and the Logtalk
+support provided by this distribution for details.

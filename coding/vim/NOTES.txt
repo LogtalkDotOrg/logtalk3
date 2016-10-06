@@ -60,4 +60,11 @@ CTRL-P or CTRL-N to cycle between all the completion choices.
 
 6. Check the `coding/ctags` in the Logtalk installation directory for
 instructions on how to enable a source code browser for Logtalk source
-files using the Vim plugin Taglist.
+files using the plugin Taglist:
+
+	http://vim-taglist.sourceforge.net/
+
+After installing the plugin, add the following line to your `.vimrc` file:
+
+	let tlist_logtalk_settings = 'logtalk;o:Objects;p:Protocols;c:Categories;m:Modules;u:Public predicates;r:Protected predicates;v:Private predicates'
+
