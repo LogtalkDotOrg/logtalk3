@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(meta,
 	implements(metap)).
 
 	:- info([
-		version is 5.1,
-		date is 2016/05/13,
+		version is 5.2,
+		date is 2016/10/06,
 		author is 'Paulo Moura',
 		comment is 'Some useful meta-predicates.'
 	]).
@@ -44,9 +43,9 @@
 		fold_right/4 as foldr/4,
 		fold_right_1/3 as foldr1/3,
 		scan_left/4 as scanl/4,
-		scan_left_1/4 as scanl1/4,
+		scan_left_1/3 as scanl1/3,
 		scan_right/4 as scanr/4,
-		scan_right_1/4 as scanr1/4
+		scan_right_1/3 as scanr1/3
 	]).
 
 	:- meta_predicate(include_(*, 1, *)).

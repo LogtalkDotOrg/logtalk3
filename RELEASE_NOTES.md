@@ -62,6 +62,9 @@ for the `protocol` type. Thanks to Jan Burse for the bug report.
 * FIXED: Missing public declarations for the `check/1` and `valid/1` predicates
 in the `varlistp` protocol.
 
+* FIXED: Arity typos in the declaration of the meta-predicates aliases
+`scanl1/3` and `scanr1/3` in the `meta` object.
+
 Tools
 -----
 
