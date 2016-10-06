@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>1.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2009/4/29</code>
+            <code>2016/10/6</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -451,6 +451,46 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>suffix(?list,@list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="valid/1" class="code">valid/1</h3>
+          <blockquote>
+            <p class="comment">Term is a valid list of variables.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>valid(Term)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>valid(@nonvar) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check/1" class="code">check/1</h3>
+          <blockquote>
+            <p class="comment">Checks if a term is a valid list of variables. Throws an exception if the term is not valid.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check(Term)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check(@nonvar) &ndash; one</code>
             </dd>
           </dl>
         </div>

@@ -59,6 +59,9 @@ and JIProlog (experimental; not fully functional).
 * FIXED: Typo in the `arbitrary` category in the generation of random values
 for the `protocol` type. Thanks to Jan Burse for the bug report.
 
+* FIXED: Missing public declarations for the `check/1` and `valid/1` predicates
+in the `varlistp` protocol.
+
 Tools
 -----
 

@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(varlistp).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2009/4/29,
+		date is 2016/10/06,
 		comment is 'List of variables protocol.'
 	]).
 
@@ -170,6 +169,20 @@
 	:- info(suffix/2, [
 		comment is 'Suffix is a suffix of List.',
 		argnames is ['Suffix', 'List']
+	]).
+
+	:- public(valid/1).
+	:- mode(valid(@nonvar), zero_or_one).
+	:- info(valid/1, [
+		comment is 'Term is a valid list of variables.',
+		argnames is ['Term']
+	]).
+
+	:- public(check/1).
+	:- mode(check(@nonvar), one).
+	:- info(check/1, [
+		comment is 'Checks if a term is a valid list of variables. Throws an exception if the term is not valid.',
+		argnames is ['Term']
 	]).
 
 :- end_protocol.
