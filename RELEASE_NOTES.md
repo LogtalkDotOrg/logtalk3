@@ -68,6 +68,9 @@ in the `varlistp` protocol.
 * FIXED: Arity typos in the declaration of the meta-predicates aliases
 `scanl1/3` and `scanr1/3` in the `meta` object.
 
+* FIXED: The `os::directory_files/2` predicate when called with a path that
+requires expansion when using SWI-Prolog or XSB as the backend compiler.
+
 Tools
 -----
 

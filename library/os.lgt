@@ -37,9 +37,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.22,
+		version is 1.23,
 		author is 'Paulo Moura',
-		date is 2015/10/10,
+		date is 2016/10/07,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -80,7 +80,8 @@
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			expand_path(Directory, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -278,7 +279,8 @@
 			{path_sysop(cwd, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{findall(File, list_directory(Directory, File), Files)}.
+			expand_path(Directory, ExpandedPath),
+			{findall(File, list_directory(ExpandedPath, File), Files)}.
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
