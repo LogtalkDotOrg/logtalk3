@@ -470,6 +470,9 @@ The following object properties are supported:
 		<dd>Total number of user-defined predicate clauses defined in the object at compilation time</dd>
 </dl>
 <p>
+When a predicate is called from an <code>initialization/1</code> directive, the argument of the <code>caller/1</code> property is <code>:-/1</code>.
+</p>
+<p>
 Some of the properties such as line numbers are only available when the object is defined in a source file compiled with the <code>source_data</code> flag turned on.
 </p>
 
@@ -556,7 +559,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 6, 2016</span>
+		<span>Last updated on: October 7, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
