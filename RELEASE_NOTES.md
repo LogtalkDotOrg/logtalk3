@@ -39,6 +39,9 @@ error but without file and line information. This bug only manifested itself
 when compiling the first source file term and when checking for an `encoding/1`
 directive.
 
+* FIXED: Processing of the `at_same_line` token when printing a message where
+the line prefix would not be omitted.
+
 Documentation
 -------------
 
