@@ -381,17 +381,16 @@
 	process_file(_).
 
 	all :-
-		write_scan_header('All files'),
+		write_scan_header('All entities'),
 		current_object(Object),
 		process_entity(object, Object),
 		fail.
 	all :-
-		write_scan_header('All files'),
 		current_category(Category),
 		process_entity(category, Category),
 		fail.
 	all :-
-		write_scan_footer('All files').
+		write_scan_footer('All entities').
 
 	write_scan_header(Type) :-
 		print_message(silent, dead_code_scanner, scan_started),
