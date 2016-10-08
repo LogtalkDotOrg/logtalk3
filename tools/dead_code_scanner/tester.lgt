@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright 2016 Barry Evans <barryevans@kyndi.com>
+%  Copyright 2016 Barry Evans <barryevans@kyndi.com>  
 %                 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
