@@ -74,6 +74,9 @@ requires expansion when using SWI-Prolog or XSB as the backend compiler.
 Tools
 -----
 
+* NEW: Dead code scanner tool, `dead_code_scanner`, co-developed with Barry
+Evans.
+
 * ADDED: A `logtalk_doclet.sh` automation script for running all doclets found
 in a directory and its sub-directories.
 

@@ -1,0 +1,71 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>
+Copyright 1998-2016 Barry Evans <barryevans@kyndi.com>
+                    Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% make sure to compile any files that you want to scan for dead code with
+% the required source_data flag turned on:
+
+| ?- set_logtalk_flag(source_data, on).
+...
+
+
+% load the tool:
+
+| ?- logtalk_load(dead_code_scanner(loader)).
+...
+
+
+% run the dead_code_scanner tool unit tests:
+
+| ?- logtalk_load(dead_code_scanner(tester)).
+...
+
+
+% apply the tool to itself:
+
+| ?- dead_code_scanner::library(dead_code_scanner).
+...
+
+
+% load the standard library and scan it for dead code:
+
+| ?- logtalk_load(library(all_loader)).
+...
+
+| ?- dead_code_scanner::library(library).
+...
+
+
+% scan a specific entity for dead code:
+
+| ?- dead_code_scanner::entity(logtalk).
+...
+
+
+% get a list of all dead predicates in the built-in core_messages category:
+
+| ?- dead_code_scanner::predicates(core_messages, DeadPredicates).
+...
+
+
+% enumerate, by backtracking, all dead predicates in the built-in logtalk
+% object:
+
+| ?- dead_code_scanner::predicate(logtalk, DeadPredicate).
+...

@@ -24,6 +24,7 @@ The following developer tools are available, each one with its own
 `loader.lgt` loader file and `NOTES.md` documentation files:
 
 - assertions
+- dead_code_scanner
 - debugger
 - diagrams
 - doclet

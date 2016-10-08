@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on October 4, 2016
+%  Last updated on October 8, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -96,6 +96,7 @@ logtalk_library_path(xml_parser, contributions('xml_parser/')).
 
 % developer tools
 logtalk_library_path(assertions, tools('assertions/')).
+logtalk_library_path(dead_code_scanner, tools('dead_code_scanner/')).
 logtalk_library_path(debugger, tools('debugger/')).
 logtalk_library_path(diagrams, tools('diagrams/')).
 logtalk_library_path(doclet, tools('doclet/')).

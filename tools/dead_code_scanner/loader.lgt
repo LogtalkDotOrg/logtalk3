@@ -1,8 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <http://logtalk.org/>
-%  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
-%  
+%
+%  This file is part of Logtalk <http://logtalk.org/>  
+%  Copyright 2016 Barry Evans <barryevans@kyndi.com>
+%                 Paulo Moura <pmoura@logtalk.org>
+%
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
@@ -19,17 +20,7 @@
 
 
 :- initialization((
-	% most of these tools require that application code
-	% be compiled with the source_data flag turned on
-	set_logtalk_flag(source_data, on),
-	logtalk_load([
-		assertions(loader),
-		dead_code_scanner(loader),
-		debugger(loader),
-		diagrams(loader),
-		doclet(loader),
-		help(loader),
-		lgtdoc(loader),
-		lgtunit(loader)
-	])
+	logtalk_load(library(basic_types_loader)),
+	logtalk_load(library(os_loader)),
+	logtalk_load([dead_code_scanner, dead_code_scanner_messages], [optimize(on)])
 )).
