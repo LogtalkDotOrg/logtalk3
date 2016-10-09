@@ -16132,7 +16132,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	(	Alias = AliasFunctor/Arity,
 		Arity2 is Arity - 2,
-		Arity2 >= 0 ->
+		Arity2 >= 0,
 		functor(NonTerminalAlias, AliasFunctor, Arity2),
 		'$lgt_pp_uses_non_terminal_'(Obj, _, NonTerminalAlias) ->
 		Predicate = PredFunctor/Arity,
