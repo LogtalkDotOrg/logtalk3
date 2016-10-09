@@ -21,10 +21,11 @@
 :- initialization(
 	logtalk_load(
 		warnings,
-		[unknown_entities(warning),
-		 unknown_predicates(warning),
-		 undefined_predicates(warning),
-		 singleton_variables(warning),
-		 portability(warning), report(on)]
+		[	unknown_entities(warning),
+		 	unknown_predicates(warning),
+		 	undefined_predicates(warning),
+		 	singleton_variables(warning),
+		 	portability(warning), report(on)
+		]
 	)
 ).

@@ -88,3 +88,23 @@
 		consult(file).
 
 :- end_object.
+
+
+
+:- object(unused_predicate).
+
+	:- uses(logtalk, [
+		expand_library_path/2
+	]).
+
+:- end_object.
+
+
+
+:- object(unused_non_terminal).
+
+	:- uses(logtalk, [
+		message_tokens//2
+	]).
+
+:- end_object.

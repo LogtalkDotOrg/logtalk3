@@ -136,6 +136,10 @@ Examples
 and some of the individual examples to run when using JIProlog as the backend
 compiler. This example now relies on the new library Java support.
 
+* UPDATED: The `errors` example to also illustrate the warnings printed for
+unused predicates and non-terminals referenced in `uses/2` and `use_module/2`
+directives.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
