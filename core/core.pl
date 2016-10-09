@@ -9051,10 +9051,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(permission_error(modify, uses_object_predicate, AFunctor/Arity)).
 
 
-'$lgt_compile_uses_directive_non_terminal_resource'(OFunctor, AFunctor, Arity, ExtArity, Obj, _) :-
+'$lgt_compile_uses_directive_non_terminal_resource'(OFunctor, AFunctor, Arity, ExtArity, Obj, Ctx) :-
 	functor(TOriginal, OFunctor, Arity),
 	functor(TAlias, AFunctor, Arity),
-	functor(TPred, AFunctor, ExtArity),
+	functor(TPred, OFunctor, ExtArity),
+	functor(TPredAlias, AFunctor, ExtArity),
 	\+ '$lgt_pp_uses_non_terminal_'(_, _, TOriginal),
 	\+ '$lgt_pp_use_module_non_terminal_'(_, _, TOriginal),
 	\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
@@ -9067,6 +9068,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% allow for runtime use by adding a local definition that calls the remote definition
 	'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
 	'$lgt_compile_grammar_rule'((TAlias --> Obj::TOriginal), NewCtx),
+	% ensure that the this uses/2 directive is found when looking for senders of this message
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
+	'$lgt_add_referenced_object_message'(Mode, Obj, TPred, TPredAlias, TPredAlias, Lines),
 	assertz('$lgt_pp_uses_non_terminal_'(Obj, TOriginal, TAlias)).
 
 '$lgt_compile_uses_directive_non_terminal_resource'(_, AFunctor, Arity, _, _, _) :-
@@ -16126,7 +16130,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_pp_referenced_object_message_'(Obj, Predicate, Alias, Caller, _),
 		Alias \== Caller
 	),
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, uses/2, Obj::Predicate)),
+	(	Alias = AliasFunctor/Arity,
+		Arity2 is Arity - 2,
+		Arity2 >= 0 ->
+		functor(NonTerminalAlias, AliasFunctor, Arity2),
+		'$lgt_pp_uses_non_terminal_'(Obj, _, NonTerminalAlias) ->
+		Predicate = PredFunctor/Arity,
+		NonTerminal = PredFunctor//Arity2,
+		'$lgt_print_message'(warning(dead_code), core, likely_unused_non_terminal(Path, Lines, Type, Entity, uses/2, Obj::NonTerminal))
+	;	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, uses/2, Obj::Predicate))
+	),
 	fail.
 
 '$lgt_report_unused_uses_predicates'(_, _, _).
@@ -16141,7 +16154,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_pp_referenced_module_predicate_'(Module, Predicate, Alias, Caller, _),
 		Alias \== Caller
 	),
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, use_module/2, ':'(Module,Predicate))),
+	(	Alias = AliasFunctor/Arity,
+		Arity2 is Arity - 2,
+		Arity2 >= 0 ->
+		functor(NonTerminalAlias, AliasFunctor, Arity2),
+		'$lgt_pp_use_module_non_terminal_'(Module, _, NonTerminalAlias) ->
+		Predicate = PredFunctor/Arity,
+		NonTerminal = PredFunctor//Arity2,
+		'$lgt_print_message'(warning(dead_code), core, likely_unused_non_terminal(Path, Lines, Type, Entity, use_module/2, ':'(Module,NonTerminal)))
+	;	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, use_module/2, ':'(Module,Predicate)))
+	),
 	fail.
 
 '$lgt_report_unused_use_module_predicates'(_, _, _).

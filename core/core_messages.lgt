@@ -366,6 +366,10 @@
 		['Likely unused predicate referenced in ~q directive: ~q'-[Directive, Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(likely_unused_non_terminal(File, Lines, Type, Entity, Directive, NonTerminal)) -->
+		['Likely unused non-terminal referenced in ~q directive: ~q'-[Directive, NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
 	message_tokens(non_standard_prolog_flag(File, Lines, Type, Entity, Flag)) -->
 		['Use of non-standard Prolog flag: ~q'-[Flag], nl],
 		message_context(File, Lines, Type, Entity).

@@ -30,8 +30,8 @@ Logtalk compiler and runtime
 * CHANGED: Ensure that in compiler error and warning messages the file and line
 information is always the last line for the reported issue.
 
-* ADDED: Report unused predicates referenced in `uses/2` and `use_module/2`
-directives.
+* ADDED: Report unused predicates and non-terminals referenced in `uses/2` and
+`use_module/2` directives.
 
 * ADDED: Also define a library path for the `coding` directory as it may also
 contain source code for supporting editing services.
