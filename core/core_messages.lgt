@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2016/10/06,
+		date is 2016/10/09,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -360,6 +360,10 @@
 
 	message_tokens(non_standard_arithmetic_function_call(File, Lines, Type, Entity, Function)) -->
 		['Call to non-standard Prolog built-in arithmetic function: ~q'-[Function], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(likely_unused_predicate(File, Lines, Type, Entity, Directive, Predicate)) -->
+		['Likely unused predicate referenced in ~q directive: ~q'-[Directive, Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(non_standard_prolog_flag(File, Lines, Type, Entity, Flag)) -->

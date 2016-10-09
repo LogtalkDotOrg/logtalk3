@@ -2904,7 +2904,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 7, 1, rc3)).
+'$lgt_version_data'(logtalk(3, 7, 1, rc4)).
 
 
 
@@ -14171,9 +14171,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % reports any potential problem found while compiling an entity
 
 '$lgt_report_problems'(Type, Entity) :-
-	'$lgt_report_missing_directives'(Type, Entity),
-	'$lgt_report_non_portable_calls'(Type, Entity),
-	'$lgt_report_unknown_entities'(Type, Entity).
+	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
+	'$lgt_report_missing_directives'(Type, Entity, Path),
+	'$lgt_report_non_portable_calls'(Type, Entity, Path),
+	'$lgt_report_unused_uses_predicates'(Type, Entity, Path),
+	'$lgt_report_unused_use_module_predicates'(Type, Entity, Path),
+	'$lgt_report_unknown_entities'(Type, Entity, Path).
 
 
 
@@ -14234,13 +14237,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_unknown_entities'(+atom, @entity_identifier)
+% '$lgt_report_unknown_entities'(+atom, @entity_identifier, +atom)
 %
 % reports any unknown referenced entities found while compiling an entity
 
-'$lgt_report_unknown_entities'(Type, Entity) :-
+'$lgt_report_unknown_entities'(Type, Entity, Path) :-
 	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
-		'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 		'$lgt_report_unknown_objects'(Type, Entity, Path),
 		'$lgt_report_unknown_protocols'(Type, Entity, Path),
 		'$lgt_report_unknown_categories'(Type, Entity, Path),
@@ -15979,17 +15981,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing predicate directives
 
-'$lgt_report_missing_directives'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity, Path) :-
 	(	'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
-		'$lgt_report_missing_directives'(Type, Entity, Path)
+		'$lgt_report_missing_directives_'(Type, Entity, Path)
 	;	true
 	).
 
 
 % reports missing public/1 directives for multifile predicates
 
-'$lgt_report_missing_directives'(Type, Entity, Path) :-
+'$lgt_report_missing_directives_'(Type, Entity, Path) :-
 	'$lgt_pp_multifile_'(Head, Lines),
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
@@ -15999,10 +16000,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
 	fail.
 
-
 % reports missing meta_predicate/1 directives for meta-predicates
 
-'$lgt_report_missing_directives'(Type, Entity, Path) :-
+'$lgt_report_missing_directives_'(Type, Entity, Path) :-
 	'$lgt_pp_missing_meta_predicate_directive_'(Head, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
@@ -16011,7 +16011,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing dynamic/1 directives
 
-'$lgt_report_missing_directives'(Type, Entity, Path) :-
+'$lgt_report_missing_directives_'(Type, Entity, Path) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
@@ -16020,14 +16020,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing discontiguous/1 directives
 
-'$lgt_report_missing_directives'(Type, Entity, Path) :-
+'$lgt_report_missing_directives_'(Type, Entity, Path) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Head, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
 	fail.
 
-'$lgt_report_missing_directives'(_, _, _).
+'$lgt_report_missing_directives_'(_, _, _).
 
 
 
@@ -16093,29 +16093,58 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports non-portable predicate and function calls in the body of object and category predicates
 
-'$lgt_report_non_portable_calls'(Type, Entity) :-
+'$lgt_report_non_portable_calls'(Type, Entity, Path) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
-		'$lgt_report_non_portable_calls'(Type, Entity, Path)
+		'$lgt_report_non_portable_calls_'(Type, Entity, Path)
 	;	true
 	).
 
 
-'$lgt_report_non_portable_calls'(Type, Entity, Path) :-
+'$lgt_report_non_portable_calls_'(Type, Entity, Path) :-
 	'$lgt_pp_non_portable_predicate_'(Head, Lines),
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_calls'(Type, Entity, Path) :-
+'$lgt_report_non_portable_calls_'(Type, Entity, Path) :-
 	'$lgt_pp_non_portable_function_'(Function, Lines),
 		functor(Function, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_calls'(_, _, _).
+'$lgt_report_non_portable_calls_'(_, _, _).
+
+
+
+% reports unused predicates referenced in uses/2 directives
+
+'$lgt_report_unused_uses_predicates'(Type, Entity, Path) :-
+	'$lgt_pp_referenced_object_message_'(Obj, Predicate, Alias, Alias, Lines),
+	\+ (
+		'$lgt_pp_referenced_object_message_'(Obj, Predicate, Alias, Caller, _),
+		Alias \== Caller
+	),
+	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, uses/2, Obj::Predicate)),
+	fail.
+
+'$lgt_report_unused_uses_predicates'(_, _, _).
+
+
+
+% reports unused predicates referenced in use_module/2 directives
+
+'$lgt_report_unused_use_module_predicates'(Type, Entity, Path) :-
+	'$lgt_pp_referenced_module_predicate_'(Module, Predicate, Alias, Alias, Lines),
+	\+ (
+		'$lgt_pp_referenced_module_predicate_'(Module, Predicate, Alias, Caller, _),
+		Alias \== Caller
+	),
+	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, use_module/2, ':'(Module,Predicate))),
+	fail.
+
+'$lgt_report_unused_use_module_predicates'(_, _, _).
 
 
 
