@@ -109,6 +109,9 @@ no test sets are found.
 benchmarking goals that fail. Also fixed the `lgtunit::benchmark/2-3` predicate
 mode directives to specify that the predicates are expected to always succeed.
 
+* FIXED: Filtering of local calls when generating predicate cross-referencing
+diagrams using the `diagrams` tool.
+
 Tests
 -----
 

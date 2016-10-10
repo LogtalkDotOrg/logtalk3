@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/05/16,
+		date is 2016/10/10,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -254,6 +254,9 @@
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
 		Callee0 \= _::_,
+		Callee0 \= ::_,
+		Callee0 \= ^^_,
+		Callee0 \= _<<_,
 		Callee0 \= ':'(_, _),
 		memberchk(caller(Caller0), CallsProperties),
 		(	entity_property(Kind, Entity, defines(Callee0, CalleeDefinesProperties)),
