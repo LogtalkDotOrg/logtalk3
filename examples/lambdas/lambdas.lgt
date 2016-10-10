@@ -88,14 +88,16 @@
 :- object(misc).
 
 	:- info([
-		version is 1.1,
-		date is 2009/12/5,
+		version is 1.2,
+		date is 2016/10/10,
 		author is 'Paulo Moura',
 		comment is 'Some miscellaneous tests for lambda expressions collected from public forums.'
 	]).
 
 	% adapted from a Richard O'Keefe example
 	:- public(common_prefix/3).
+	% avoid spurious warning about missing meta_predicate/1 directive
+	:- meta_predicate(common_prefix(*, *, *)).
 	common_prefix(Front, Xs, Ys) :-
 		meta::map({Front}/(list::append(Front)), Xs, Ys).
 
