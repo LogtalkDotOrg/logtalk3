@@ -148,7 +148,7 @@
 			:- use_module(prolog_statistics, [time/1]).
 		:- endif.
 
-		:- uses(integer, [between/3, sequence/3]).
+		:- uses(integer, [sequence/3]).
 		:- uses(meta, [map/2, map/3]).
 
 		bench1 :-

@@ -22,14 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/08/23,
+		date is 2016/10/10,
 		comment is 'Unit tests for the "quick_check" example.'
 	]).
 
 	:- uses(list, [
-		reverse/2, same_length/2, same_length/3, select/3
+		reverse/2, same_length/2, same_length/3
 	]).
 
 	% tests

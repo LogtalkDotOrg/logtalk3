@@ -22,14 +22,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2014/04/27,
+		date is 2016/10/10,
 		comment is 'Unit tests for the PDDL 3.0 parsers.'
-	]).
-
-	:- uses(os, [
-		change_directory/1
 	]).
 
 	test(elevators) :-

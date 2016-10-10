@@ -21,15 +21,13 @@
 :- object(mtbatch).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2011/04/03,
+		date is 2016/10/10,
 		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
 	]).
 
 	:- threaded.
-
-	:- uses(integer, [between/3]).
 
 	:- public(run/0).
 	:- mode(run, one).

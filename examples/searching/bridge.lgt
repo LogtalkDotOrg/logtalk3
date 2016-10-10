@@ -22,9 +22,9 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2004/8/15,
+		date is 2016/10/10,
 		comment is 'Bridge puzzle.'
 	]).
 
@@ -63,9 +63,9 @@
 
 	heuristic((Left, Lamp, Right), Heuristic) :-
 		(	Lamp = left ->
-			list::min(Left, Heuristic)
-		;	list::max(Right, Max),
-			list::min(Right, Min),
+			min(Left, Heuristic)
+		;	max(Right, Max),
+			min(Right, Min),
 			Heuristic is Max + Min
 		).
 
