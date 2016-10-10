@@ -22,15 +22,15 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/05/08,
+		date is 2016/10/10,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	% first, output the file node
@@ -38,7 +38,7 @@
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
-		(	memberchk(directory_paths(true), Options) ->
+		(	member(directory_paths(true), Options) ->
 			^^output_node(Relative, Name, file, [Relative], file, LinkingOptions)
 		;	^^output_node(Relative, Name, file, [], file, LinkingOptions)
 		),

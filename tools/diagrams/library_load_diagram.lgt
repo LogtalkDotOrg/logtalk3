@@ -22,15 +22,15 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/03/01,
+		date is 2016/10/10,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	% first, output the library node
@@ -38,7 +38,7 @@
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions),
-		(	memberchk(directory_paths(true), Options) ->
+		(	member(directory_paths(true), Options) ->
 			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)
 		;	^^output_node(Relative, Library, library, [], library, NodeOptions)
 		),
