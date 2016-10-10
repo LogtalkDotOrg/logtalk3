@@ -2887,7 +2887,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 7, 1, rc5)).
+'$lgt_version_data'(logtalk(3, 7, 1, rc6)).
 
 
 
@@ -11647,6 +11647,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias, _),
 	!,
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	Obj == user ->
 		(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
 				% built-in Prolog meta-predicate declared in the adapter file in use
@@ -11660,7 +11661,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 				'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 				TPred =.. [Functor| TArgs],
 				DGoal =.. [Functor| DArgs],
-				'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 				(	Type == control_construct ->
 					DPred = DGoal
 				;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
@@ -11672,9 +11672,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			TPred = Pred,
 			DPred = '$lgt_debug'(goal(Alias, Pred), ExCtx),
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
-		)
+		),
+		'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Alias, Head, Lines)
 	;	% objects other than the pseudo-object "user"
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Alias, Head, Lines),
 		'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
 		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)

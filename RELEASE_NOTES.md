@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * CHANGED: Ensure that in compiler error and warning messages the file and line
 information is always the last line for the reported issue.
 
+* CHANGED: Also save reflection data for `uses/2` directives for resources in
+the pseudo-object `user`.
+
 * ADDED: Report unused predicates and non-terminals referenced in `uses/2` and
 `use_module/2` directives.
 
