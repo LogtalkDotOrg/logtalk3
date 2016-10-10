@@ -36,6 +36,13 @@ information is always the last line for the reported issue.
 * ADDED: Also define a library path for the `coding` directory as it may also
 contain source code for supporting editing services.
 
+* ADDED: Also generate entity `calls/2` properties for non-terminals listed
+in `uses/2` and `use_module/2` directives and add `non_terminal/1` and
+`alias/2` (when applicable) properties to the callee properties.
+
+* IMPROVED: More compact and easier to extend internal representation for the
+`calls/2` entity properties.
+
 * FIXED: Source file compilation error reporting when the errors occur before
 the intermediate Prolog file is created. The report would containing only the
 error but without file and line information. This bug only manifested itself
@@ -116,6 +123,9 @@ Tests
 -----
 
 * ADDED: Unit tests for the `lgtunit` tool utility predicates.
+
+* ADDED: Unit tests for the `calls/2` property of the `object_property/2` and
+`category_property` built-in predicates.
 
 Installers and installation scripts
 -----------------------------------

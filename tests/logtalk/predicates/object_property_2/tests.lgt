@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016/10/10,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -60,8 +60,8 @@
 		object_property(test_object, source_data),
 		object_property(test_object, file(Basename, Directory)), ground(Basename), ground(Directory),
 		object_property(test_object, lines(Start, End)), integer(Start), integer(End),
-		object_property(test_object, number_of_clauses(N)), N == 10,
-		object_property(test_object, number_of_user_clauses(NUC)), NUC == 10,
+		object_property(test_object, number_of_clauses(N)), N == 18,
+		object_property(test_object, number_of_user_clauses(NUC)), NUC == 16,
 		object_property(test_object, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),
@@ -74,7 +74,7 @@
 		object_property(test_object, protected(Protected)), Protected == [b/2],
 		object_property(test_object, private(Private)), Private == [c/3, e/5].
 
-	% interface predicate declaration properties
+	% predicate declaration properties
 	succeeds(object_property_2_09) :-
 		object_property(test_object, declares(a/1, Properties1)),
 		member((public), Properties1),
@@ -106,7 +106,7 @@
 		member(static, Properties5),
 		member(line_count(LC5), Properties5), integer(LC5).
 
-	% interface predicate definition properties
+	% predicate definition properties
 	succeeds(object_property_2_10) :-
 		object_property(test_object, defines(a/1, Properties1)),
 		member(line_count(LC1), Properties1), integer(LC1),
@@ -124,8 +124,30 @@
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
 
+	% predicate call properties
+	succeeds(object_property_2_11) :-
+		object_property(test_object, calls(local/0, Properties1)),
+		member(caller(Caller1), Properties1), Caller1 == caller1/0,
+		member(line_count(Line1), Properties1), integer(Line1),
+		object_property(test_object, calls(logtalk::expand_library_path/2, Properties2)),
+		member(caller(Caller2), Properties2), Caller2 == caller2/0,
+		member(line_count(Line2), Properties2), integer(Line2),
+		object_property(test_object, calls(logtalk::message_tokens/4, Properties3)),
+		member(caller(Caller3), Properties3), Caller3 == caller3/0,
+		member(line_count(Line3), Properties3), integer(Line3),
+		member(non_terminal(NonTerminal3), Properties3), NonTerminal3 == message_tokens//2,
+		object_property(test_object, calls(logtalk::loaded_file/1, Properties4)),
+		member(caller(Caller4), Properties4), Caller4 == caller4/0,
+		member(line_count(Line4), Properties4), integer(Line4),
+		member(alias(Alias4), Properties4), Alias4 == loaded/1,
+		object_property(test_object, calls(logtalk::message_tokens/4, Properties5)),
+		member(caller(Caller5), Properties5), Caller5 == caller5/0,
+		member(line_count(Line5), Properties5), integer(Line5),
+		member(non_terminal(NonTerminal5), Properties5), NonTerminal5 == message_tokens//2,
+		member(alias(Alias5), Properties5), Alias5 == tokens/4.
+
 	% check that all queries with explicit properties are valid
-	fails(object_property_2_11) :-
+	fails(object_property_2_12) :-
 		(	object_property(empty_object, built_in)
 		;	object_property(empty_object, (dynamic))
 		;	object_property(empty_object, static)
@@ -158,59 +180,59 @@
 
 	% determinism tests
 
-	deterministic(object_property_2_12) :-
+	deterministic(object_property_2_13) :-
 		object_property(debug_object, debugging).
 
-	deterministic(object_property_2_13) :-
+	deterministic(object_property_2_14) :-
 		object_property(test_object, source_data).
 
-	deterministic(object_property_2_14) :-
+	deterministic(object_property_2_15) :-
 		object_property(dynamic_object, (dynamic)).
 
-	deterministic(object_property_2_15) :-
+	deterministic(object_property_2_16) :-
 		object_property(test_object, static).
 
-	deterministic(object_property_2_16) :-
+	deterministic(object_property_2_17) :-
 		object_property(built_in_object, built_in).
 
-	deterministic(object_property_2_17) :-
+	deterministic(object_property_2_18) :-
 		object_property(test_object, file(_)).
 
-	deterministic(object_property_2_18) :-
+	deterministic(object_property_2_19) :-
 		object_property(test_object, file(_, _)).
 
-	deterministic(object_property_2_19) :-
+	deterministic(object_property_2_20) :-
 		object_property(test_object, lines(_, _)).
 
-	deterministic(object_property_2_20) :-
+	deterministic(object_property_2_21) :-
 		object_property(test_object, info(_)).
 
-	deterministic(object_property_2_21) :-
+	deterministic(object_property_2_22) :-
 		object_property(options_object, events).
 
-	deterministic(object_property_2_22) :-
+	deterministic(object_property_2_23) :-
 		object_property(test_object, number_of_clauses(_)).
 
-	deterministic(object_property_2_23) :-
+	deterministic(object_property_2_24) :-
 		object_property(test_object, number_of_user_clauses(_)).
 
-	deterministic(object_property_2_24) :-
+	deterministic(object_property_2_25) :-
 		object_property(options_object, context_switching_calls).
 
-	deterministic(object_property_2_25) :-
+	deterministic(object_property_2_26) :-
 		object_property(options_object, dynamic_declarations).
 
-	deterministic(object_property_2_26) :-
+	deterministic(object_property_2_27) :-
 		object_property(options_object, complements(_)).
 
-	deterministic(object_property_2_27) :-
+	deterministic(object_property_2_28) :-
 		object_property(options_object, complements).
 
 	:- if(current_logtalk_flag(threads, supported)).
-		deterministic(object_property_2_28) :-
+		deterministic(object_property_2_29) :-
 			object_property(threaded_object, threaded).
 	:- else.
-		- deterministic(object_property_2_28).
+		- deterministic(object_property_2_29).
 	:- endif.
 
 	% auxiliary predicates (avoid library dependencies)

@@ -24,9 +24,9 @@
 :- category(test_category).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/12/17,
+		date is 2016/10/10,
 		comment is 'Sample category for testing with the `source_data` flag turned on.']).
 
 	:- public(a/1).
@@ -51,6 +51,27 @@
 	d(4, 1, 2, 3).
 
 	:- private(e/5).
+
+	caller1 :-
+		local.
+
+	local.
+
+	caller2 :-
+		logtalk::expand_library_path(home, _).
+
+	caller3 :-
+		phrase(logtalk::message_tokens(_,_), _, _).
+
+	:- uses(logtalk, [
+		loaded_file/1 as loaded/1, message_tokens//2 as tokens//2
+	]).
+
+	caller4 :-
+		loaded(_).
+
+	caller5 :-
+		phrase(tokens(_,_), _, _).
 
 :- end_category.
 

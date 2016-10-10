@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2016/10/10,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -56,8 +56,8 @@
 		category_property(test_category, source_data),
 		category_property(test_category, file(Basename, Directory)), ground(Basename), ground(Directory),
 		category_property(test_category, lines(Start, End)), integer(Start), integer(End),
-		category_property(test_category, number_of_clauses(NC)), NC == 7,
-		category_property(test_category, number_of_user_clauses(NUC)), NUC == 7,
+		category_property(test_category, number_of_clauses(NC)), NC == 15,
+		category_property(test_category, number_of_user_clauses(NUC)), NUC == 13,
 		category_property(test_category, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),
@@ -70,7 +70,7 @@
 		category_property(test_category, protected(Protected)), Protected == [b/2],
 		category_property(test_category, private(Private)), Private == [c/3, e/5].
 
-	% interface predicate declaration properties
+	% predicate declaration properties
 	succeeds(category_property_2_09) :-
 		category_property(test_category, declares(a/1, Properties1)),
 		member((public), Properties1),
@@ -102,7 +102,7 @@
 		member(static, Properties5),
 		member(line_count(LC5), Properties5), integer(LC5).
 
-	% interface predicate definition properties
+	% predicate definition properties
 	succeeds(category_property_2_10) :-
 		category_property(test_category, defines(a/1, Properties1)),
 		member(line_count(LC1), Properties1), integer(LC1),
@@ -118,8 +118,30 @@
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
 
+	% predicate call properties
+	succeeds(category_property_2_11) :-
+		category_property(test_category, calls(local/0, Properties1)),
+		member(caller(Caller1), Properties1), Caller1 == caller1/0,
+		member(line_count(Line1), Properties1), integer(Line1),
+		category_property(test_category, calls(logtalk::expand_library_path/2, Properties2)),
+		member(caller(Caller2), Properties2), Caller2 == caller2/0,
+		member(line_count(Line2), Properties2), integer(Line2),
+		category_property(test_category, calls(logtalk::message_tokens/4, Properties3)),
+		member(caller(Caller3), Properties3), Caller3 == caller3/0,
+		member(line_count(Line3), Properties3), integer(Line3),
+		member(non_terminal(NonTerminal3), Properties3), NonTerminal3 == message_tokens//2,
+		category_property(test_category, calls(logtalk::loaded_file/1, Properties4)),
+		member(caller(Caller4), Properties4), Caller4 == caller4/0,
+		member(line_count(Line4), Properties4), integer(Line4),
+		member(alias(Alias4), Properties4), Alias4 == loaded/1,
+		category_property(test_category, calls(logtalk::message_tokens/4, Properties5)),
+		member(caller(Caller5), Properties5), Caller5 == caller5/0,
+		member(line_count(Line5), Properties5), integer(Line5),
+		member(non_terminal(NonTerminal5), Properties5), NonTerminal5 == message_tokens//2,
+		member(alias(Alias5), Properties5), Alias5 == tokens/4.
+
 	% check that all queries with explicit properties are valid
-	fails(category_property_2_11) :-
+	fails(category_property_2_12) :-
 		(	category_property(empty_category, built_in)
 		;	category_property(empty_category, (dynamic))
 		;	category_property(empty_category, static)
@@ -147,40 +169,40 @@
 
 	% determinism tests
 
-	deterministic(category_property_2_12) :-
+	deterministic(category_property_2_13) :-
 		category_property(debug_category, debugging).
 
-	deterministic(category_property_2_13) :-
+	deterministic(category_property_2_14) :-
 		category_property(test_category, source_data).
 
-	deterministic(category_property_2_14) :-
+	deterministic(category_property_2_15) :-
 		category_property(dynamic_category, (dynamic)).
 
-	deterministic(category_property_2_15) :-
+	deterministic(category_property_2_16) :-
 		category_property(test_category, static).
 
-	deterministic(category_property_2_16) :-
+	deterministic(category_property_2_17) :-
 		category_property(built_in_category, built_in).
 
-	deterministic(category_property_2_17) :-
+	deterministic(category_property_2_18) :-
 		category_property(test_category, file(_)).
 
-	deterministic(category_property_2_18) :-
+	deterministic(category_property_2_19) :-
 		category_property(test_category, file(_, _)).
 
-	deterministic(category_property_2_19) :-
+	deterministic(category_property_2_20) :-
 		category_property(test_category, lines(_, _)).
 
-	deterministic(category_property_2_20) :-
+	deterministic(category_property_2_21) :-
 		category_property(test_category, info(_)).
 
-	deterministic(category_property_2_21) :-
+	deterministic(category_property_2_22) :-
 		category_property(events_category, events).
 
-	deterministic(category_property_2_22) :-
+	deterministic(category_property_2_23) :-
 		category_property(test_category, number_of_clauses(_)).
 
-	deterministic(category_property_2_23) :-
+	deterministic(category_property_2_24) :-
 		category_property(test_category, number_of_user_clauses(_)).
 
 	% auxiliary predicates (avoid library dependencies)
