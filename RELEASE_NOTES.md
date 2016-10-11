@@ -33,12 +33,8 @@ information is always the last line for the reported issue.
 * CHANGED: Also save reflection data for `uses/2` directives for resources in
 the pseudo-object `user`.
 
-* ADDED: Compiler support for detecting unused predicates and non-terminals
-referenced in `uses/2` and `use_module/2` directives.
-
-* ADDED: New lint flag, `unused_predicates`, to control reporting of unused
-predicates and non-terminals referenced in `uses/2` and `use_module/2`
-directives.
+* ADDED: Report unused predicates and non-terminals referenced in `uses/2` and
+`use_module/2` directives.
 
 * ADDED: Also define a library path for the `coding` directory as it may also
 contain source code for supporting editing services.
