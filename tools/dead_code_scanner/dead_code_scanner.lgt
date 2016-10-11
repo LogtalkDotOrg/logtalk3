@@ -22,9 +22,9 @@
 :- object(dead_code_scanner).
 
   :- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2016/10/08,
+		date is 2016/10/11,
 		comment is 'A tool for detecting *likely* dead code in Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -111,6 +111,7 @@
 		;	Predicates = []
 		).
 
+	% local predicates not called, directly or indirectly, by scoped predicates
 	predicate(Entity, Predicate) :-
 		non_scoped_predicate(Entity, Predicate0),
 		\+ used_by_scoped_predicate(Entity, Predicate0),
@@ -120,6 +121,32 @@
 			member(non_terminal(NonTerminal), Properties) ->
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
+		).
+	% predicates and non-terminals listed in the uses/2 directives that are not used
+	predicate(Entity, Object::Resource) :-
+		entity_property(Entity, calls(Object::Predicate, CallsProperties)),
+		memberchk(caller(Predicate), CallsProperties),
+		memberchk(line_count(_), CallsProperties),
+		entity_property(Entity, defines(Predicate, DefinesProperties)),
+		memberchk(auxiliary, DefinesProperties),
+		memberchk(number_of_clauses(1), DefinesProperties),
+		(	memberchk(non_terminal(NonTerminal), CallsProperties),
+			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
+			Resource = NonTerminal
+		;	Resource = Predicate
+		).
+	% predicates and non-terminals listed in the use_module/2 directives that are not used
+	predicate(Entity, ':'(Module,Resource)) :-
+		entity_property(Entity, calls(':'(Module,Predicate), CallsProperties)),
+		memberchk(caller(Predicate), CallsProperties),
+		memberchk(line_count(_), CallsProperties),
+		entity_property(Entity, defines(Predicate, DefinesProperties)),
+		memberchk(auxiliary, DefinesProperties),
+		memberchk(number_of_clauses(1), DefinesProperties),
+		(	memberchk(non_terminal(NonTerminal), CallsProperties),
+			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
+			Resource = NonTerminal
+		;	Resource = Predicate
 		).
 
 	non_scoped_predicate(Entity, Alias) :-
