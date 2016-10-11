@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/05/16,
+		date is 2016/10/12,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -430,11 +430,9 @@
 	output_object_xref_calls(Object, Options) :-
 		setof(
 			Predicate,
-			Predicate0^CallsProperties^DefinesProperties^NonTerminal^(
-				object_property(Object, calls(Other::Predicate0, CallsProperties)),
-				nonvar(Other),
-				object_property(Other, defines(Predicate0, DefinesProperties)),
-				(	member(non_terminal(NonTerminal), DefinesProperties) ->
+			Other^Predicate0^Properties^NonTerminal^(
+				object_property(Object, calls(Other::Predicate0, Properties)),
+				(	member(non_terminal(NonTerminal), Properties) ->
 					Predicate = NonTerminal
 				;	Predicate = Predicate0
 				)
@@ -542,11 +540,9 @@
 	output_category_xref_calls(Category, Options) :-
 		setof(
 			Predicate,
-			Predicate0^CallsProperties^DefinesProperties^NonTerminal^(
-				category_property(Category, calls(Other::Predicate0, CallsProperties)),
-				nonvar(Other),
-				object_property(Other, defines(Predicate0, DefinesProperties)),
-				(	member(non_terminal(NonTerminal), DefinesProperties) ->
+			Other^Predicate0^Properties^NonTerminal^(
+				category_property(Category, calls(Other::Predicate0, Properties)),
+				(	member(non_terminal(NonTerminal), Properties) ->
 					Predicate = NonTerminal
 				;	Predicate = Predicate0
 				)

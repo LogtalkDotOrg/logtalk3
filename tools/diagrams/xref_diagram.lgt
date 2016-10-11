@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2016/10/12,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -279,11 +279,15 @@
 		memberchk(caller(Caller), Properties).
 	calls_external_predicate(Kind, Entity, Caller, Object::Callee) :-
 		Kind \== protocol,
-		entity_property(Kind, Entity, calls(Object::Callee, Properties)),
+		entity_property(Kind, Entity, calls(Object::Callee0, CallsProperties)),
 		nonvar(Object),
-		memberchk(caller(Caller), Properties),
+		memberchk(caller(Caller), CallsProperties),
 		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
-		\+ member(auxiliary, CallerProperties).
+		\+ member(auxiliary, CallerProperties),
+		(	member(non_terminal(CalleeNonTerminal), CallsProperties) ->
+			Callee = CalleeNonTerminal
+		;	Callee = Callee0
+		).
 	calls_external_predicate(Kind, Entity, Caller, ':'(Module,Callee)) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(':'(Module,Callee), Properties)),

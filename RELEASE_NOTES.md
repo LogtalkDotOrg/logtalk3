@@ -119,6 +119,10 @@ mode directives to specify that the predicates are expected to always succeed.
 * FIXED: Filtering of local calls when generating predicate cross-referencing
 diagrams using the `diagrams` tool.
 
+* FIXED: When generating cross-referencing diagrams, label predicate call edges
+for non-terminals using the non-terminal indicator instead of the corresponding
+predicate indicator.
+
 Tests
 -----
 
