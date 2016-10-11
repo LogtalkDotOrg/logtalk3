@@ -194,6 +194,7 @@
 		{current_logtalk_flag(unknown_entities, UnknownEntities),
 		 current_logtalk_flag(unknown_predicates, UnknownPredicates),
 		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
+		 current_logtalk_flag(unused_predicates, UnusedPredicates),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
 		 current_logtalk_flag(missing_directives, Missing),
@@ -225,6 +226,7 @@
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
+			'  unused_predicates: ~w'-[UnusedPredicates], nl,
 			'  portability: ~w, unknown_entities: ~w'-[Portability, UnknownEntities], nl,
 			'  missing_directives: ~w, redefined_built_ins: ~w'-[Missing, Redefined], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,

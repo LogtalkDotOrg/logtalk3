@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.2.8 or later versions
-%  Last updated on August 7, 2016
+%  Last updated on October 11, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -254,6 +254,7 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(unknown_predicates, warning).
 '$lgt_default_flag'(undefined_predicates, warning).
+'$lgt_default_flag'(unused_predicates, silent).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).

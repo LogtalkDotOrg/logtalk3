@@ -221,6 +221,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(unknown_predicates, warning).
 '$lgt_default_flag'(undefined_predicates, warning).
+'$lgt_default_flag'(unused_predicates, silent).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(underscore_variables, singletons).

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on September 27, 2016
+%  Last updated on October 11, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -336,6 +336,17 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(context_switching_calls, deny),
 	set_logtalk_flag(dynamic_declarations, deny),
 	set_logtalk_flag(source_data, off)
+)).
+*/
+
+
+%  To clean your application of dead code, uncomment the following lines and
+%  after run the dead_code_scanner tool:
+
+/*
+:- initialization((
+	set_logtalk_flag(unused_predicates, warning),
+	logtalk_load(dead_code_scanner(loader))
 )).
 */
 

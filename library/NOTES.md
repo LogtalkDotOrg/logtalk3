@@ -22,8 +22,8 @@ documentation see:
 
 [../docs/index.html](http://logtalk.org/docs/index.html)
 
-Always use the corresponding loader file to load library entities. The
-available loader files are described below.
+As a general rule, always use the corresponding loader file to load
+library entities. The available loader files are described below.
 
 Most library entities are part of small hierarchies or depend on other
 entities and thus cannot be loaded and compiled separately (e.g. the

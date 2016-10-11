@@ -2887,7 +2887,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 7, 1, rc6)).
+'$lgt_version_data'(logtalk(3, 7, 1, rc7)).
 
 
 
@@ -14167,8 +14167,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	'$lgt_report_missing_directives'(Type, Entity, Path),
 	'$lgt_report_non_portable_calls'(Type, Entity, Path),
-	'$lgt_report_unused_uses_predicates'(Type, Entity, Path),
-	'$lgt_report_unused_use_module_predicates'(Type, Entity, Path),
+	'$lgt_report_unused_predicates'(Type, Entity, Path),
 	'$lgt_report_unknown_entities'(Type, Entity, Path).
 
 
@@ -16111,7 +16110,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% reports unused predicates and non-terminals referenced in uses/2 directives
+% reports unused predicates and non-terminals referenced in uses/2 and use_module/2 directives
+
+'$lgt_report_unused_predicates'(Type, Entity, Path) :-
+	(	'$lgt_compiler_flag'(unused_predicates, warning) ->
+		'$lgt_report_unused_uses_predicates'(Type, Entity, Path),
+		'$lgt_report_unused_use_module_predicates'(Type, Entity, Path)
+	;	true
+	).
+
 
 '$lgt_report_unused_uses_predicates'(Type, Entity, Path) :-
 	'$lgt_pp_uses_predicate_'(Obj, Predicate, _, Lines),
@@ -16120,7 +16127,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_pp_referenced_object_message_'(Obj, Functor/Arity, Alias, Caller, _),
 		Alias \== Caller
 	),
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, uses/2, Obj::Functor/Arity)),
+	'$lgt_print_message'(warning(unused_predicates), core, likely_unused_predicate(Path, Lines, Type, Entity, uses/2, Obj::Functor/Arity)),
 	fail.
 
 '$lgt_report_unused_uses_predicates'(Type, Entity, Path) :-
@@ -16131,14 +16138,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Alias \== Caller
 	),
 	Arity2 is Arity - 2,
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_non_terminal(Path, Lines, Type, Entity, uses/2, Obj::Functor//Arity2)),
+	'$lgt_print_message'(warning(unused_predicates), core, likely_unused_non_terminal(Path, Lines, Type, Entity, uses/2, Obj::Functor//Arity2)),
 	fail.
 
 '$lgt_report_unused_uses_predicates'(_, _, _).
 
-
-
-% reports unused predicates and non-terminals referenced in use_module/2 directives
 
 '$lgt_report_unused_use_module_predicates'(Type, Entity, Path) :-
 	'$lgt_pp_use_module_predicate_'(Module, Predicate, _, Lines),
@@ -16147,7 +16151,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, Alias, Caller, _),
 		Alias \== Caller
 	),
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, use_module/2, ':'(Module,Functor/Arity))),
+	'$lgt_print_message'(warning(unused_predicates), core, likely_unused_predicate(Path, Lines, Type, Entity, use_module/2, ':'(Module,Functor/Arity))),
 	fail.
 
 '$lgt_report_unused_use_module_predicates'(Type, Entity, Path) :-
@@ -16158,7 +16162,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Alias \== Caller
 	),
 	Arity2 is Arity - 2,
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_non_terminal(Path, Lines, Type, Entity, use_module/2, ':'(Module,Functor//Arity2))),
+	'$lgt_print_message'(warning(unused_predicates), core, likely_unused_non_terminal(Path, Lines, Type, Entity, use_module/2, ':'(Module,Functor//Arity2))),
 	fail.
 
 '$lgt_report_unused_use_module_predicates'(_, _, _).
@@ -17768,6 +17772,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(singleton_variables).
 '$lgt_valid_flag'(unknown_predicates).
 '$lgt_valid_flag'(undefined_predicates).
+'$lgt_valid_flag'(unused_predicates).
 '$lgt_valid_flag'(underscore_variables).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
@@ -17851,6 +17856,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(undefined_predicates, silent) :- !.
 '$lgt_valid_flag_value'(undefined_predicates, warning) :- !.
 '$lgt_valid_flag_value'(undefined_predicates, error) :- !.
+
+'$lgt_valid_flag_value'(unused_predicates, silent) :- !.
+'$lgt_valid_flag_value'(unused_predicates, warning) :- !.
 
 '$lgt_valid_flag_value'(portability, silent) :- !.
 '$lgt_valid_flag_value'(portability, warning) :- !.
