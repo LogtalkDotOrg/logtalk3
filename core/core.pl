@@ -2887,7 +2887,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 7, 1, rc6)).
+'$lgt_version_data'(logtalk(3, 7, 1, rc8)).
 
 
 
@@ -14167,8 +14167,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	'$lgt_report_missing_directives'(Type, Entity, Path),
 	'$lgt_report_non_portable_calls'(Type, Entity, Path),
-	'$lgt_report_unused_uses_predicates'(Type, Entity, Path),
-	'$lgt_report_unused_use_module_predicates'(Type, Entity, Path),
 	'$lgt_report_unknown_entities'(Type, Entity, Path).
 
 
@@ -16108,60 +16106,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_non_portable_calls_'(_, _, _).
-
-
-
-% reports unused predicates and non-terminals referenced in uses/2 directives
-
-'$lgt_report_unused_uses_predicates'(Type, Entity, Path) :-
-	'$lgt_pp_uses_predicate_'(Obj, Predicate, _, Lines),
-	functor(Predicate, Functor, Arity),
-	\+ (
-		'$lgt_pp_referenced_object_message_'(Obj, Functor/Arity, Alias, Caller, _),
-		Alias \== Caller
-	),
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, uses/2, Obj::Functor/Arity)),
-	fail.
-
-'$lgt_report_unused_uses_predicates'(Type, Entity, Path) :-
-	'$lgt_pp_uses_non_terminal_'(Obj, _, _, Predicate, _, Lines) ->
-	functor(Predicate, Functor, Arity),
-	\+ (
-		'$lgt_pp_referenced_object_message_'(Obj, Functor/Arity, Alias, Caller, _),
-		Alias \== Caller
-	),
-	Arity2 is Arity - 2,
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_non_terminal(Path, Lines, Type, Entity, uses/2, Obj::Functor//Arity2)),
-	fail.
-
-'$lgt_report_unused_uses_predicates'(_, _, _).
-
-
-
-% reports unused predicates and non-terminals referenced in use_module/2 directives
-
-'$lgt_report_unused_use_module_predicates'(Type, Entity, Path) :-
-	'$lgt_pp_use_module_predicate_'(Module, Predicate, _, Lines),
-	functor(Predicate, Functor, Arity),
-	\+ (
-		'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, Alias, Caller, _),
-		Alias \== Caller
-	),
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_predicate(Path, Lines, Type, Entity, use_module/2, ':'(Module,Functor/Arity))),
-	fail.
-
-'$lgt_report_unused_use_module_predicates'(Type, Entity, Path) :-
-	'$lgt_pp_use_module_non_terminal_'(Module, _, _, Predicate, _, Lines),
-	functor(Predicate, Functor, Arity),
-	\+ (
-		'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, Alias, Caller, _),
-		Alias \== Caller
-	),
-	Arity2 is Arity - 2,
-	'$lgt_print_message'(warning(dead_code), core, likely_unused_non_terminal(Path, Lines, Type, Entity, use_module/2, ':'(Module,Functor//Arity2))),
-	fail.
-
-'$lgt_report_unused_use_module_predicates'(_, _, _).
 
 
 

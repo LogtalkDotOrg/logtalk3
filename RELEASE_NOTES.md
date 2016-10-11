@@ -33,9 +33,6 @@ information is always the last line for the reported issue.
 * CHANGED: Also save reflection data for `uses/2` directives for resources in
 the pseudo-object `user`.
 
-* ADDED: Report unused predicates and non-terminals referenced in `uses/2` and
-`use_module/2` directives.
-
 * ADDED: Also define a library path for the `coding` directory as it may also
 contain source code for supporting editing services.
 
@@ -154,7 +151,7 @@ compiler. This example now relies on the new library Java support.
 
 * UPDATED: The `errors` example to also illustrate the warnings printed for
 unused predicates and non-terminals referenced in `uses/2` and `use_module/2`
-directives.
+directives when using the new `dead_code_scanner` tool.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
