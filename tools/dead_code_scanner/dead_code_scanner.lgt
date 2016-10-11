@@ -115,14 +115,14 @@
 	predicate(Entity, Predicate) :-
 		non_scoped_predicate(Entity, Predicate0),
 		\+ used_by_scoped_predicate(Entity, Predicate0),
-		% likely dead predicate found; check if resulted
+		% likely dead predicate found; check if it resulted
 		% from the compilation of a non-terminal
 		(	entity_property(Entity, defines(Predicate0, Properties)),
 			member(non_terminal(NonTerminal), Properties) ->
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		).
-	% predicates and non-terminals listed in the uses/2 directives that are not used
+	% unused predicates and non-terminals listed in the uses/2 directives
 	predicate(Entity, Object::Resource) :-
 		entity_property(Entity, calls(Object::Predicate, CallsProperties)),
 		memberchk(caller(Predicate), CallsProperties),
@@ -130,17 +130,20 @@
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
+		% Predicate :- Object::Predicate linking clause that is generated when
+		% processing uses/2 directives for allowing runtime use of listed resources
 		\+ (
 			entity_property(Entity, calls(Object::Predicate, OtherCallsProperties)),
 			memberchk(caller(Caller), OtherCallsProperties),
 			Caller \== Predicate
 		),
+		% no other callers for Object::Predicate
 		(	memberchk(non_terminal(NonTerminal), CallsProperties),
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
 		;	Resource = Predicate
 		).
-	% predicates and non-terminals listed in the use_module/2 directives that are not used
+	% unused predicates and non-terminals listed in the use_module/2 directives
 	predicate(Entity, ':'(Module,Resource)) :-
 		entity_property(Entity, calls(':'(Module,Predicate), CallsProperties)),
 		memberchk(caller(Predicate), CallsProperties),
@@ -148,11 +151,14 @@
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
+		% Predicate :- Module:Predicate linking clause that is generated when
+		% processing uses/2 directives for allowing runtime use of listed resources
 		\+ (
 			entity_property(Entity, calls(':'(Module,Predicate), OtherCallsProperties)),
 			memberchk(caller(Caller), OtherCallsProperties),
 			Caller \== Predicate
 		),
+		% no other callers for Module:Predicate
 		(	memberchk(non_terminal(NonTerminal), CallsProperties),
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
