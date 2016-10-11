@@ -22,13 +22,13 @@ documentation see:
 
 [../docs/index.html](http://logtalk.org/docs/index.html)
 
-Always use the corresponding loader file to load library entities. The
-available loader files are described below.
+As a general rule, always use the corresponding loader file to load
+library entities. The available loader files are described below.
 
 Most library entities are part of small hierarchies or depend on other
 entities and thus cannot be loaded and compiled separately (e.g. the
 `list` object implements the `listp` protocol and is part of a basic
-types hierarchy).
+types hierarchy). Using the loader files takes care of all dependencies.
 
 The library loader files can be loaded by either changing the current
 working directory to the library directory or, more by simply using 
@@ -55,6 +55,10 @@ its own loader and notes files:
 * hierarchies  
 	`hierarchies_loader.lgt`
 	`hierarchies.txt`
+
+* java  
+	`java_loader.lgt`
+	`java.txt`
 
 * metapredicates  
 	`metapredicates_loader.lgt`

@@ -127,7 +127,7 @@ The reference and user manuals and the tutorial are provided in XHTML and
 PDF formats and can be found in the [manuals](manuals/) directory.
 
 The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
-Logtalk updates since the first public version. Read it carefully if you
+Logtalk updates since the first public version. Check it carefully if you
 have been using a previous Logtalk version.
 
 The documentation for the core, library, tools, and contributions entities
