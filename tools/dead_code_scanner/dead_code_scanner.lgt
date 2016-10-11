@@ -130,6 +130,11 @@
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
+		\+ (
+			entity_property(Entity, calls(Object::Predicate, OtherCallsProperties)),
+			memberchk(caller(Caller), OtherCallsProperties),
+			Caller \== Predicate
+		),
 		(	memberchk(non_terminal(NonTerminal), CallsProperties),
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
@@ -143,6 +148,11 @@
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
+		\+ (
+			entity_property(Entity, calls(':'(Module,Predicate), OtherCallsProperties)),
+			memberchk(caller(Caller), OtherCallsProperties),
+			Caller \== Predicate
+		),
 		(	memberchk(non_terminal(NonTerminal), CallsProperties),
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
