@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2016/10/08,
+		date is 2016/10/11,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -40,6 +40,10 @@
 		entity/1
 	]).
 
+	:- uses(lgtunit, [
+		deterministic/1
+	]).
+
 	% category tests
 
 	test(dcs_stand_alone_category_01) :-
@@ -50,8 +54,24 @@
 			dead_non_terminal//0
 		].
 
+	test(dcs_stand_alone_category_02) :-
+		setof(Predicate, predicate(stand_alone_category, Predicate), Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
 	test(dcs_category_01) :-
 		predicates(category, Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
+	test(dcs_category_02) :-
+		setof(Predicate, predicate(category, Predicate), Predicates),
 		Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
@@ -68,8 +88,24 @@
 			dead_non_terminal//0
 		].
 
+	test(dcs_stand_alone_prototype_02) :-
+		setof(Predicate, predicate(stand_alone_prototype, Predicate), Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
 	test(dcs_prototype_01) :-
 		predicates(prototype, Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
+	test(dcs_prototype_02) :-
+		setof(Predicate, predicate(prototype, Predicate), Predicates),
 		Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
@@ -86,8 +122,24 @@
 			dead_non_terminal//0
 		].
 
+	test(dcs_stand_alone_class_02) :-
+		setof(Predicate, predicate(stand_alone_class, Predicate), Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
 	test(dcs_class_01) :-
 		predicates(class, Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
+	test(dcs_class_02) :-
+		setof(Predicate, predicate(class, Predicate), Predicates),
 		Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
@@ -102,8 +154,24 @@
 			dead_non_terminal//0
 		].
 
+	test(dcs_subclass_with_metaclass_02) :-
+		setof(Predicate, predicate(subclass_with_metaclass, Predicate), Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
 	test(dcs_subclass_01) :-
 		predicates(subclass, Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
+	test(dcs_subclass_02) :-
+		setof(Predicate, predicate(subclass, Predicate), Predicates),
 		Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
@@ -118,38 +186,49 @@
 			dead_non_terminal//0
 		].
 
-	% the following tests ony check (for now) that
-	% the called predicates succeed as expected
+	test(dcs_instance_02) :-
+		setof(Predicate, predicate(instance, Predicate), Predicates),
+		Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		].
+
+	% the following tests ony check (for now) that the called
+	% predicates succeed as expected and are deterministic
+
+	test(dcs_predicates_2_01) :-
+		deterministic(predicates(lgtunit, _)).
 
 	test(dcs_entity_1_01) :-
-		entity(lgtunit).
+		deterministic(entity(lgtunit)).
 
 	test(dcs_entity_1_02) :-
-		entity(lgtunit_messages).
+		deterministic(entity(lgtunit_messages)).
 
 	test(dcs_all_0_01) :-
-		all.
+		deterministic(all).
 
 	test(dcs_library_1_01) :-
-		library(lgtunit).
+		deterministic(library(lgtunit)).
 
 	test(dcs_rlibrary_1_01) :-
-		rlibrary(lgtunit).
+		deterministic(rlibrary(lgtunit)).
 
 	test(dcs_file_1_01) :-
 		object_property(lgtunit, file(File)),
-		file(File).
+		deterministic(file(File)).
 
 	test(dcs_directory_1_01) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		directory(Directory).
+		deterministic(directory(Directory)).
 
 	test(dcs_rdirectory_1_01) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		rdirectory(Directory).
+		deterministic(rdirectory(Directory)).
 
 	% supress all messages from the "dead_code_scanner"
-	% component to not polute the unit tests output
+	% component to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

@@ -24,6 +24,6 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([dead_code_scanner, dead_code_scanner_messages], [source_data(on), debug(on)]),
 	logtalk_load(test_entities, [source_data(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
+	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
 	tests::run
 )).
