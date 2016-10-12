@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.10,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2016/08/23,
+		date is 2016/10/12,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -107,23 +107,6 @@
 			print_message(comment, debugger, debugger_switched_off)
 		;	print_message(comment, debugger, debugger_off)
 		).
-
-	suspend(Tracing) :-
-		(	tracing_ ->
-			Tracing = true
-		;	Tracing = false
-		),
-		retractall(debugging_),
-		retractall(tracing_).
-
-	resume(Tracing) :-
-		(	Tracing == true ->
-			retractall(tracing_),
-			assertz(tracing_)
-		;	true
-		),
-		retractall(debugging_),
-		assertz(debugging_).
 
 	trace :-
 		(	tracing_ ->
@@ -712,22 +695,6 @@
 		{once(Goal)},
 		fail.
 
-	:- if(predicate_property(break, built_in)).
-
-	do_port_option(b, _, _, _, _, _, _, _) :-
-		suspend(Tracing),
-		break,
-		resume(Tracing),
-		fail.
-
-	:- else.
-
-	do_port_option(b, _, _, _, _, _, _, _) :-
-		print_message(warning, debugger, break_not_supported),
-		fail.
-
-	:- endif.
-
 	do_port_option(a, _, _, _, _, _, _, _) :-
 		retractall(skipping_),
 		retractall(quasi_skipping_),
@@ -836,6 +803,39 @@
 	do_port_option((?), _, _, _, _, _, _, _) :-
 		print_message(information, debugger, extended_help),
 		fail.
+
+	:- if(predicate_property(break, built_in)).
+
+	do_port_option(b, _, _, _, _, _, _, _) :-
+		suspend(Tracing),
+		break,
+		resume(Tracing),
+		fail.
+
+	suspend(Tracing) :-
+		(	tracing_ ->
+			Tracing = true
+		;	Tracing = false
+		),
+		retractall(debugging_),
+		retractall(tracing_).
+
+	resume(Tracing) :-
+		(	Tracing == true ->
+			retractall(tracing_),
+			assertz(tracing_)
+		;	true
+		),
+		retractall(debugging_),
+		assertz(debugging_).
+
+	:- else.
+
+	do_port_option(b, _, _, _, _, _, _, _) :-
+		print_message(warning, debugger, break_not_supported),
+		fail.
+
+	:- endif.
 
 	valid_zap_port(ZapPort) :-
 		callable(ZapPort),
