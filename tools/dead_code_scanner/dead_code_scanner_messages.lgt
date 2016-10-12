@@ -22,9 +22,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0.1,
+		version is 0.3,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2016/10/08,
+		date is 2016/10/12,
 		comment is 'Logtalk "dead_code_scanner" tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -63,13 +63,10 @@
 
 	message_tokens(scanning_entity(Kind, Entity)) -->
 		{ground_term_copy(Entity, GroundEntity)},
-		['Scanning ~q ~w ...'-[GroundEntity, Kind], flush].
+		['Scanning ~q ~w ...'-[GroundEntity, Kind], nl].
 
-	message_tokens(no_dead_predicates) -->
-		[at_same_line, ' no dead predicates found'-[], nl].
-
-	message_tokens(dead_predicates(Predicates)) -->
-		[at_same_line, nl, 'Likely dead predicates: ~q'-[Predicates], nl].
+	message_tokens(dead_predicate(_Entity, Predicate, File, Line)) -->
+		['Likely dead predicate: ~q'-[Predicate], nl, '  in file ~w at or above line ~d'-[File, Line], nl].
 
 	% auxiliary predicates
 

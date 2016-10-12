@@ -22,10 +22,10 @@
 :- object(dead_code_scanner).
 
   :- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2016/10/11,
-		comment is 'A tool for detecting *likely* dead code in Logtalk entities and Prolog modules compiled as objects.',
+		date is 2016/10/12,
+		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
 			'Know issues' - 'Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.',
@@ -111,9 +111,12 @@
 		;	Predicates = []
 		).
 
-	% local predicates not called, directly or indirectly, by scoped predicates
 	predicate(Entity, Predicate) :-
-		non_scoped_predicate(Entity, Predicate0),
+		predicate(Entity, Predicate, _, _).
+
+	% local predicates not called, directly or indirectly, by scoped predicates
+	predicate(Entity, Predicate, File, Line) :-
+		non_scoped_predicate(Entity, Predicate0, File, Line),
 		\+ used_by_scoped_predicate(Entity, Predicate0),
 		% likely dead predicate found; check if it resulted
 		% from the compilation of a non-terminal
@@ -123,10 +126,11 @@
 		;	Predicate = Predicate0
 		).
 	% unused predicates and non-terminals listed in the uses/2 directives
-	predicate(Entity, Object::Resource) :-
+	predicate(Entity, Object::Resource, File, Line) :-
+		entity_property(Entity, file(File)),
 		entity_property(Entity, calls(Object::Predicate, CallsProperties)),
 		memberchk(caller(Predicate), CallsProperties),
-		memberchk(line_count(_), CallsProperties),
+		memberchk(line_count(Line), CallsProperties),
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
@@ -144,10 +148,11 @@
 		;	Resource = Predicate
 		).
 	% unused predicates and non-terminals listed in the use_module/2 directives
-	predicate(Entity, ':'(Module,Resource)) :-
+	predicate(Entity, ':'(Module,Resource), File, Line) :-
+		entity_property(Entity, file(File)),
 		entity_property(Entity, calls(':'(Module,Predicate), CallsProperties)),
 		memberchk(caller(Predicate), CallsProperties),
-		memberchk(line_count(_), CallsProperties),
+		memberchk(line_count(Line), CallsProperties),
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
@@ -165,7 +170,7 @@
 		;	Resource = Predicate
 		).
 
-	non_scoped_predicate(Entity, Alias) :-
+	non_scoped_predicate(Entity, Alias, File, Line) :-
 		\+ (atom(Entity), current_protocol(Entity)),
 		entity_property(Entity, defines(Alias, Properties)),
 		Alias \= _::_,
@@ -180,8 +185,10 @@
 		),
 		\+ local_scope_directive(Entity, Predicate),
 		% no local scope directive
-		\+ inherited_scope_directive(Entity, Predicate).
+		\+ inherited_scope_directive(Entity, Predicate),
 		% no inherited scope directive
+		entity_property(Entity, file(File)),
+		memberchk(line_count(Line), Properties).
 
 	inherited_scope_directive(Entity, Predicate) :-
 		(	current_category(Entity) ->
@@ -360,11 +367,10 @@
 
 	process_entity(Kind, Entity) :-
 		print_message(information, dead_code_scanner, scanning_entity(Kind, Entity)),
-		predicates(Entity, Predicates),
-		(	Predicates == [] ->
-			print_message(information, dead_code_scanner, no_dead_predicates)
-		;	print_message(warning, dead_code_scanner, dead_predicates(Predicates))
-		).
+		predicate(Entity, Predicate, File, Line),
+		print_message(warning, dead_code_scanner, dead_predicate(Entity, Predicate, File, Line)),
+		fail.
+	process_entity(_, _).
 
 	file(Source) :-
 		locate_file(Source, Path),
