@@ -66,7 +66,21 @@
 		['Scanning ~q ~w ...'-[GroundEntity, Kind], nl].
 
 	message_tokens(dead_predicate(_Entity, Predicate, File, Line)) -->
-		['Likely dead predicate: ~q'-[Predicate], nl, '  in file ~w at or above line ~d'-[File, Line], nl].
+		likely_dead_predicate(Predicate),
+		['  in file ~w at or above line ~d'-[File, Line], nl].
+
+	likely_dead_predicate(Object::Functor/Arity) -->
+		['Likely unused predicate: ~q'-[Object::Functor/Arity], nl].
+	likely_dead_predicate(Object::Functor//Arity) -->
+		['Likely unused non-terminal: ~q'-[Object::Functor//Arity], nl].
+	likely_dead_predicate(':'(Module,Functor/Arity)) -->
+		['Likely unused predicate: ~q'-[':'(Module,Functor/Arity)], nl].
+	likely_dead_predicate(':'(Module,Functor//Arity)) -->
+		['Likely unused non-terminal: ~q'-[':'(Module,Functor//Arity)], nl].
+	likely_dead_predicate(Functor/Arity) -->
+		['Likely dead predicate: ~q'-[Functor/Arity], nl].
+	likely_dead_predicate(Functor//Arity) -->
+		['Likely dead non-terminal: ~q'-[Functor//Arity], nl].
 
 	% auxiliary predicates
 
