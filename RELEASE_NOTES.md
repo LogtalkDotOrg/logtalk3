@@ -160,8 +160,8 @@ directives when using the new `dead_code_scanner` tool.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: Sample commands for compiling files and generating HTML documentation
-from within the Atom text editor.
+* ADDED: Sample commands for compiling files, scanning for dead code, and
+generating HTML documentation from within the Atom text editor.
 
 * ADDED: Experimental build and REPL support for the Sublime Text 3 editor.
 
