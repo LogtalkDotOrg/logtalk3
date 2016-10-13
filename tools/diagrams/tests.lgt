@@ -28,22 +28,22 @@
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
-	cover(diagram).
-	cover(diagrams).
-	cover(entity_diagram).
-	cover(file_dependency_diagram).
-	cover(file_diagram).
-	cover(file_load_diagram).
+	cover(diagram(_)).
+	cover(diagrams(_)).
+	cover(entity_diagram(_)).
+	cover(file_dependency_diagram(_)).
+	cover(file_diagram(_)).
+	cover(file_load_diagram(_)).
 	cover(graph_language_registry).
-	cover(inheritance_diagram).
-	cover(library_dependency_diagram).
-	cover(library_diagram).
-	cover(library_load_diagram).
+	cover(inheritance_diagram(_)).
+	cover(library_dependency_diagram(_)).
+	cover(library_diagram(_)).
+	cover(library_load_diagram(_)).
 	:- if(current_logtalk_flag(modules, supported)).
 		cover(modules_diagram_support).
 	:- endif.
-	cover(uses_diagram).
-	cover(xref_diagram).
+	cover(uses_diagram(_)).
+	cover(xref_diagram(_)).
 
 	:- uses(lgtunit, [
 		deterministic/1
