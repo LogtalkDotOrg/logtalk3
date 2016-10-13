@@ -128,6 +128,8 @@ Tests
 
 * ADDED: Unit tests for the `lgtunit` tool utility predicates.
 
+* ADDED: Unit tests for the `lgtdoc` tool predicates.
+
 * ADDED: Unit tests for the `calls/2` property of the `object_property/2` and
 `category_property` built-in predicates.
 
