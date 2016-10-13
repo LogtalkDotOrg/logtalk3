@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/05/16,
+		date is 2016/10/13,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -31,6 +31,19 @@
 
 	:- private(referenced_prolog_library_/2).
 	:- dynamic(referenced_prolog_library_/2).
+
+	files(Project, Files, UserOptions) :-
+		files_directories(Files, Directories),
+		::directories(Project, Directories, UserOptions).
+
+	files_directories(Files, Directories) :-
+		files_directories_bag(Files, Directories0),
+		sort(Directories0, Directories).
+
+	files_directories_bag([], []).
+	files_directories_bag([File| Files], [Directory| Directories]) :-
+		^^locate_file(File, _, _, Directory, _),
+		files_directories_bag(Files, Directories).
 
 	remember_included_library(Library, Path) :-
 		(	::included_library_(Library, Path) ->

@@ -123,6 +123,11 @@ diagrams using the `diagrams` tool.
 for non-terminals using the non-terminal indicator instead of the corresponding
 predicate indicator.
 
+* FIXED: Added implementation of the `files/1-3` predicates for the library
+diagrams. This is a partial fix that just converts calls to the `files/1-3`
+predicates into calls to the `directories/3` predicate as the `files/1-3`
+predicates are usually not useful when generating library diagrams.
+
 Tests
 -----
 

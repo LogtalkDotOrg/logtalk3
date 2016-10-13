@@ -427,19 +427,19 @@
 		logtalk::expand_library_path(diagrams, DiagramsDirectory),
 		deterministic(library_dependency_diagram::directory(DiagramsDirectory)).
 
-	- test(library_dependency_diagram_files_3_01) :-
+	test(library_dependency_diagram_files_3_01) :-
 		logtalk::expand_library_path(diagrams, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		deterministic(library_dependency_diagram::files(test, Files, [])).
 
-	- test(library_dependency_diagram_files_2_01) :-
+	test(library_dependency_diagram_files_2_01) :-
 		logtalk::expand_library_path(diagrams, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		deterministic(library_dependency_diagram::files(test, Files)).
 
-	- test(library_dependency_diagram_files_1_01) :-
+	test(library_dependency_diagram_files_1_01) :-
 		logtalk::expand_library_path(diagrams, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
@@ -502,19 +502,19 @@
 		logtalk::expand_library_path(diagrams, DiagramsDirectory),
 		deterministic(library_load_diagram::directory(DiagramsDirectory)).
 
-	- test(library_load_diagram_files_3_01) :-
+	test(library_load_diagram_files_3_01) :-
 		logtalk::expand_library_path(diagrams, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		deterministic(library_load_diagram::files(test, Files, [])).
 
-	- test(library_load_diagram_files_2_01) :-
+	test(library_load_diagram_files_2_01) :-
 		logtalk::expand_library_path(diagrams, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		deterministic(library_load_diagram::files(test, Files)).
 
-	- test(library_load_diagram_files_1_01) :-
+	test(library_load_diagram_files_1_01) :-
 		logtalk::expand_library_path(diagrams, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
