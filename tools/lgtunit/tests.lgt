@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/05,
+		date is 2016/10/13,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -149,7 +149,8 @@
 	% quick_check/2 tests
 
 	test(quick_check_2_01) :-
-		quick_check(atom(+atom), []).
+		quick_check(atom(+atom), []),
+		quick_check_passed(N), N == 100.
 
 	test(quick_check_2_02) :-
 		quick_check(atom(+atom), [n(25)]),
@@ -164,7 +165,8 @@
 	% quick_check/1 tests
 
 	test(quick_check_1_01) :-
-		quick_check(atom(+atom)).
+		quick_check(atom(+atom)),
+		quick_check_passed(N), N == 100.
 
 	test(quick_check_1_02) :-
 		\+ quick_check(atom(+integer)).
