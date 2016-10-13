@@ -21,7 +21,27 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
+	logtalk_load([library(basic_types_loader), library(os_loader), library(pairs)]),
+	logtalk_load(modules_diagram_support, [source_data(on), debug(on)]),
+	logtalk_load([
+		graph_language_registry,
+		graph_language_protocol,
+		dot_graph_language
+		], [source_data(on), debug(on)]),
+	logtalk_load([
+		diagram,
+		entity_diagram,
+		xref_diagram,
+		inheritance_diagram,
+		uses_diagram,
+		file_diagram,
+		file_load_diagram,
+		file_dependency_diagram,
+		library_diagram,
+		library_load_diagram,
+		library_dependency_diagram,
+		diagrams
+		], [source_data(on), debug(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
