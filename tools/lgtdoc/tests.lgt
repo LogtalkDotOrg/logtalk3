@@ -44,6 +44,14 @@
 		deterministic/1
 	]).
 
+	:- uses(os, [
+		directory_files/2, delete_file/1, delete_directory/1
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic
 
@@ -88,6 +96,21 @@
 	test(lgtdoc_rdirectory_1_01) :-
 		logtalk::expand_library_path(lgtunit, Directory),
 		deterministic(rdirectory(Directory)).
+
+	cleanup :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, 'xml_docs/', XMLDocsDirectory),
+		os::directory_files(XMLDocsDirectory, XMLFiles),
+		forall(
+			(	list::member(XMLFile, XMLFiles),
+				sub_atom(XMLFile, _, 4, 0, '.xml')
+			),
+			(	atom_concat(XMLDocsDirectory, XMLFile, XMLFilePath),
+				os::delete_file(XMLFilePath)
+			)
+		),
+		os::delete_directory(XMLDocsDirectory).
 
 	% supress all messages from the "lgtdoc" tool
 	% component to not pollute the unit tests output
