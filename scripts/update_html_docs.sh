@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on September 24, 2016
+##   Last updated on October 13, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -135,5 +135,7 @@ $logtalk "$goal"
 cd "$cwd/../docs"
 lgt2html
 rm *.xml
+rm *.dtd
+rm *.xsd
 
 exit 0
