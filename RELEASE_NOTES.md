@@ -33,7 +33,7 @@ information is always the last line for the reported issue.
 * CHANGED: Also save reflection data for `uses/2` directives for resources in
 the pseudo-object `user`.
 
-* ADDED: Also define a library path for the `coding` directory as it may also
+* ADDED: Define a library path for the `coding` directory as it may also
 contain source code for supporting editing services.
 
 * ADDED: Also generate entity `calls/2` properties for non-terminals listed
@@ -87,7 +87,7 @@ Tools
 * NEW: Dead code scanner tool, `dead_code_scanner`, co-developed with Barry
 Evans.
 
-* ADDED: A `logtalk_doclet.sh` automation script for running all doclets found
+* NEW: A `logtalk_doclet.sh` automation script for running all doclets found
 in a directory and its sub-directories.
 
 * ADDED: A `epsilon/1` utility predicate to the `lgtunit` tool.

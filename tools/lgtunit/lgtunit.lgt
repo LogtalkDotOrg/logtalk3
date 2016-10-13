@@ -21,6 +21,8 @@
 :- object(lgtunit,
 	implements(expanding)).		% built-in protocol for term and goal expansion methods
 
+	% avoid a catch-22 due to the local definition
+	% of the logtalk::trace_event/2 predicate
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
