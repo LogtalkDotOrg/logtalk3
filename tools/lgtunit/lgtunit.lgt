@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.2,
+		version is 3.3,
 		author is 'Paulo Moura',
-		date is 2016/10/05,
+		date is 2016/10/13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -561,7 +561,7 @@
 	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Output)) ->
+				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Note, Output)) ->
 					(	var(Error) ->
 						failed_test(Test, File, Position, success_instead_of_error, Note, Output)
 					;	true
@@ -638,11 +638,14 @@
 	run_test(skipped(Test, Position), File, Output) :-
 		skipped_test(Test, File, Position, Output).
 
-	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Output) :-
+	check_error(Test, PossibleErrors, Error, File, Position, Output) :-
+		check_error(Test, PossibleErrors, Error, File, Position, '', Output).
+
+	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Note, Output) :-
 		(	member(ExpectedError, [PossibleError| PossibleErrors]),
 			subsumes_term(ExpectedError, Error) ->
-			passed_test(Test, File, Position, Output)
-		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Output)
+			passed_test(Test, File, Position, Note, Output)
+		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Note, Output)
 		).
 
 	write_tests_header :-

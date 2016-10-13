@@ -116,6 +116,9 @@ no test sets are found.
 benchmarking goals that fail. Also fixed the `lgtunit::benchmark/2-3` predicate
 mode directives to specify that the predicates are expected to always succeed.
 
+* FIXED: Printing of notes when using the `test/3` dialect with `error/1`,
+`errors/1`, `ball/1`, and `balls/1` outcomes.
+
 * FIXED: Filtering of local calls when generating predicate cross-referencing
 diagrams using the `diagrams` tool.
 
@@ -131,7 +134,8 @@ predicates are usually not useful when generating library diagrams.
 Tests
 -----
 
-* ADDED: Unit tests for the `lgtunit` tool utility predicates.
+* ADDED: Unit tests for the `lgtunit` tool test dialects and utility
+predicates.
 
 * ADDED: Unit tests for the `diagrams` and `lgtdoc` tools.
 
