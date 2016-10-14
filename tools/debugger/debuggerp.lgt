@@ -132,4 +132,11 @@
 		argnames is ['Ports']
 	]).
 
+	:- public(leashing/1).
+	:- mode(leashing(?atom), zero_or_more).
+	:- info(leashing/1, [
+		comment is 'Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).',
+		argnames is ['Port']
+	]).
+
 :- end_protocol.

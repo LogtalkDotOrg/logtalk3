@@ -282,6 +282,7 @@
 		assertz(leashing_(Port)),
 		set_leash_ports(Ports).
 
+	% initial default values
 	leashing_(fact).
 	leashing_(rule).
 	leashing_(call).
@@ -328,6 +329,9 @@
 	leash_shortand_ports(half, [fact, rule, call, redo]).
 	leash_shortand_ports(tight, [fact, rule, call, redo, fail, exception]).
 	leash_shortand_ports(full, [fact, rule, call, exit, redo, fail, exception]).
+
+	leashing(Port) :-
+		leashing_(Port).
 
 	leashing(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),

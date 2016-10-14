@@ -36,7 +36,7 @@
 		(spy)/1, spying/1, (nospy)/1,
 		(spy)/4, spying/4, (nospy)/4,
 		nospyall/0,
-		leash/1
+		leash/1, leashing/1
 	]).
 
 	:- uses(lgtunit, [
@@ -146,25 +146,40 @@
 		\+ spying(_, _, _, _).
 
 	test(debugger_leash_1_01) :-
-		deterministic(leash(none)).
+		deterministic(leash(none)),
+		\+ leashing(_).
 
 	test(debugger_leash_1_02) :-
-		deterministic(leash(loose)).
+		deterministic(leash(loose)),
+		setof(Port, leashing(Port), Ports),
+		Ports == [call, fact, rule].
 
 	test(debugger_leash_1_03) :-
-		deterministic(leash(half)).
+		deterministic(leash(half)),
+		setof(Port, leashing(Port), Ports),
+		Ports == [call, fact, redo, rule].
 
 	test(debugger_leash_1_04) :-
-		deterministic(leash(tight)).
+		deterministic(leash(tight)),
+		setof(Port, leashing(Port), Ports),
+		Ports == [call, exception, fact, fail, redo, rule].
 
 	test(debugger_leash_1_05) :-
-		deterministic(leash(full)).
+		deterministic(leash(full)),
+		setof(Port, leashing(Port), Ports),
+		Ports == [call, exception, exit, fact, fail, redo, rule].
 
 	test(debugger_leash_1_06) :-
 		set::powerset([fact,rule,call,exit,redo,fail,exception], PowerSet),
 		forall(
-			list::member(Set, PowerSet),
-			deterministic(leash(Set))
+			(	list::member(Set, PowerSet),
+				sort(Set, SetSorted)
+			),
+			(	deterministic(leash(Set)),
+				findall(Port, leashing(Port), Ports),
+				sort(Ports, PortsSorted),
+				PortsSorted == SetSorted
+			)
 		).
 
 	test(debugger_spy_1_01) :-
