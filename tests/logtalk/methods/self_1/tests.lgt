@@ -22,14 +22,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/12/26,
+		date is 2016/10/15,
 		comment is 'Unit tests for the self/1 built-in method.'
 	]).
 
 	test(self_1) :-
 		self(Self),
 		Self == tests.
+
+	test(self_2) :-
+		self(tests).
+
+	test(self_3) :-
+		\+ self(other).
 
 :- end_object.

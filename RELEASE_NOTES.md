@@ -148,6 +148,9 @@ predicates.
 * ADDED: Unit tests for the `calls/2` property of the `object_property/2` and
 `category_property` built-in predicates.
 
+* ADDED: Some more unit tests for the `self/1`, `sender/1`, and `this/1`
+built-in execution context methods.
+
 Installers and installation scripts
 -----------------------------------
 

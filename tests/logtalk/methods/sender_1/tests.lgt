@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2016/10/15,
 		comment is 'Unit tests for the sender/1 built-in method.'
 	]).
 
@@ -36,5 +36,13 @@
 		this(This),
 		{This::test_sender(Sender)},
 		Sender == user.
+
+	test(sender_2) :-
+		this(This),
+		{This::test_sender(user)}.
+
+	test(sender_3) :-
+		this(This),
+		\+ {This::test_sender(other)}.
 
 :- end_object.
