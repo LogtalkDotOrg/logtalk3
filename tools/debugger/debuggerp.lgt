@@ -24,7 +24,13 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2016/10/14,
-		comment is 'Debugger protocol.'
+		comment is 'Debugger protocol.',
+		remarks is [
+			'Debugger help' - 'Type the character "h" or the character "?" at a leashed port.',
+			'Predicate spy point' - 'Specified as a ground term Functor/Arity.',
+			'Line number spy point' - 'Specified as an Entity-Line term with both Entity and Line bound.',
+			'Leash shorthands' - 'none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].'
+		]
 	]).
 
 	% avoid a catch-22...
@@ -33,7 +39,7 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings, including spy points and leashed ports.'
+		comment is 'Resets all debugging settings, including spy points and leashed ports, and turns off debugging.'
 	]).
 
 	:- public(debug/0).

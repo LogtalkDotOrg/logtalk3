@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="reset/0" class="code">reset/0</h3>
           <blockquote>
-            <p class="comment">Resets all debugging settings, including spy points and leashed ports.</p>
+            <p class="comment">Resets all debugging settings, including spy points and leashed ports, and turns off debugging.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -369,7 +369,22 @@
     <div class="remarks">
       <h2>Remarks</h2>
       <div class="section">
-        <h3 class="comment">(none)</h3>
+        <dl class="remarks">
+          <dt class="comment">Debugger help</dt>
+          <dd class="text">Type the character "h" or the character "?" at a leashed port.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Predicate spy point</dt>
+          <dd class="text">Specified as a ground term Functor/Arity.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Line number spy point</dt>
+          <dd class="text">Specified as an Entity-Line term with both Entity and Line bound.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Leash shorthands</dt>
+          <dd class="text">none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].</dd>
+        </dl>
       </div>
     </div>
     <div class="see_also">
