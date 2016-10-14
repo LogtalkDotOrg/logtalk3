@@ -226,7 +226,9 @@
 
 	nospy_aux(SpyPoints) :-
 		var(SpyPoints),
-		!.
+		!,
+		nospy_line_number(_),
+		nospy_predicate(_).
 	nospy_aux([]).
 	nospy_aux([SpyPoint| SpyPoints]) :-
 		nospy_list([SpyPoint| SpyPoints]).

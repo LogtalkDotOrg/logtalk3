@@ -43,33 +43,107 @@
 		deterministic/1
 	]).
 
-	% the following tests ony check (for now) that the called
-	% predicates succeed as expected and are deterministic
-
 	test(debugger_reset_0_01) :-
 		deterministic(reset).
+
+	% no spy points should be defined after calling reset/0
+	test(debugger_reset_0_02) :-
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(_, _, _, _),
+		deterministic(reset),
+		\+ spying(_),
+		\+ spying(_, _, _, _).
 
 	test(debugger_debug_0_01) :-
 		deterministic(debug).
 
+	% calling debug/0 must not change the existing spy points
+	test(debugger_debug_0_02) :-
+		reset,
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(user, logtalk, _, _),
+		deterministic(debug),
+		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Sender, This, _, _), Sender == user, This = logtalk.
+
 	test(debugger_nodebug_0_01) :-
 		deterministic(nodebug).
 
+	% calling nodebug/0 must not change the existing spy points
+	test(debugger_nodebug_0_02) :-
+		reset,
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(user, logtalk, _, _),
+		deterministic(nodebug),
+		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Sender, This, _, _), Sender == user, This = logtalk.
+
+	% debugging/0 must be deterministic when there are no spy points to report
 	test(debugger_debugging_0_01) :-
+		reset,
+		deterministic(debugging).
+
+	% debugging/0 must be deterministic when there are spy points to report
+	test(debugger_debugging_0_02) :-
+		reset,
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(user, logtalk, _, _),
 		deterministic(debugging).
 
 	test(debugger_debugging_1_01) :-
+		\+ debugging(_).
+
+	test(debugger_debugging_1_02) :-
 		create_object(Object, [], [set_logtalk_flag(debug,on)], []),
-		deterministic(debugging(Object)).
+		debugging(Entity),
+		Object == Entity.
 
 	test(debugger_trace_0_01) :-
 		deterministic(trace).
 
+	% calling trace/0 must not change the existing spy points
+	test(debugger_trace_0_02) :-
+		reset,
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(user, logtalk, _, _),
+		deterministic(trace),
+		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Sender, This, _, _), Sender == user, This = logtalk.
+
 	test(debugger_notrace_0_01) :-
 		deterministic(notrace).
 
+	% calling trace/0 must not change the existing spy points
+	test(debugger_notrace_0_02) :-
+		reset,
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(user, logtalk, _, _),
+		deterministic(notrace),
+		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Sender, This, _, _), Sender == user, This = logtalk.
+
 	test(debugger_nospyall_0_01) :-
 		deterministic(nospyall).
+
+	% calling nospyall/0 must delete all existing spy points
+	test(debugger_nospyall_0_02) :-
+		reset,
+		spy(foo/1),
+		spy(logtalk-13),
+		spy(user, logtalk, _, _),
+		deterministic(nospyall),
+		\+ spying(_),
+		\+ spying(_, _, _, _).
 
 	test(debugger_leash_1_01) :-
 		deterministic(leash(none)).
@@ -96,32 +170,69 @@
 	test(debugger_spy_1_01) :-
 		deterministic(spy(logtalk-13)).
 
+	% setting a line number spy point already set must still succeed deterministically
 	test(debugger_spy_1_02) :-
-		deterministic(spy(foo/3)).
+		reset,
+		deterministic(spy(logtalk-13)),
+		deterministic(spy(logtalk-13)).
 
 	test(debugger_spy_1_03) :-
+		deterministic(spy(foo/3)).
+
+	% setting a predicate spy point already set must still succeed deterministically
+	test(debugger_spy_1_04) :-
+		reset,
+		deterministic(spy(foo/3)),
+		deterministic(spy(foo/3)).
+
+	test(debugger_spy_1_05) :-
 		deterministic(spy([])).
 
-	test(debugger_spy_1_04) :-
-		deterministic(spy([logtalk-27, bar/5])).
+	% all spy point in a list must be set
+	test(debugger_spy_1_06) :-
+		reset,
+		deterministic(spy([logtalk-27, bar/5])),
+		setof(SpyPoint, spying(SpyPoint), SpyPoints),
+		SpyPoints == [logtalk-27, bar/5].
 
 	test(debugger_nospy_1_01) :-
-		deterministic(nospy(logtalk-13)).
-
-	test(debugger_nospy_1_02) :-
-		deterministic(nospy(foo/3)).
-
-	test(debugger_nospy_1_03) :-
+		reset,
 		deterministic(nospy(_)).
 
-	test(debugger_spy_4_01) :-
-		deterministic(nospy(user, logtalk, _, _)).
+	test(debugger_nospy_1_02) :-
+		reset,
+		spy(logtalk-13),
+		deterministic(nospy(logtalk-13)),
+		\+ spying(_).
+
+	test(debugger_nospy_1_03) :-
+		reset,
+		spy(foo/3),
+		deterministic(nospy(foo/3)),
+		\+ spying(_).
+
+	test(debugger_nospy_1_04) :-
+		reset,
+		spy(logtalk-13),
+		spy(foo/3),
+		deterministic(nospy(_)),
+		\+ spying(_).
 
 	test(debugger_nospy_4_01) :-
-		deterministic(nospy(user, logtalk, _, _)).
+		reset,
+		deterministic(nospy(_, _, _, _)).
 
 	test(debugger_nospy_4_02) :-
-		deterministic(nospy(_, _, _, _)).
+		reset,
+		spy(user, logtalk, _, _),
+		deterministic(nospy(user, logtalk, _, _)),
+		\+ spying(_, _, _, _).
+
+	test(debugger_nospy_4_03) :-
+		reset,
+		spy(user, logtalk, _, _),
+		deterministic(nospy(_, _, _, _)),
+		\+ spying(_, _, _, _).
 
 	% supress all messages from the "dead_code_scanner"
 	% component to not pollute the unit tests output

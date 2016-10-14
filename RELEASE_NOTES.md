@@ -133,7 +133,8 @@ diagrams. This is a partial fix that just converts calls to the `files/1-3`
 predicates into calls to the `directories/3` predicate as the `files/1-3`
 predicates are usually not useful when generating library diagrams.
 
-* FIXED: Non-determinism of the `debugger::nospy/1` predicate.
+* FIXED: Non-determinism of the `debugger::nospy/1` predicate and cases where
+it would fail to delete all matching spy points.
 
 Tests
 -----

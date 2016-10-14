@@ -74,8 +74,8 @@
 	]).
 
 	:- public((spy)/1).
-	:- mode(spy(+spy_point), one).
-	:- mode(spy(+list(spy_point)), one).
+	:- mode(spy(@spy_point), one).
+	:- mode(spy(@list(spy_point)), one).
 	:- info((spy)/1, [
 		comment is 'Sets a line number spy point or a predicate spy point or a list of spy points.',
 		argnames is ['SpyPoint']
