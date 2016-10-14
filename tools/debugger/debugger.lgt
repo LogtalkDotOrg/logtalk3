@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.11,
+		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/10/12,
+		date is 2016/10/14,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -215,6 +215,11 @@
 		;	assertz(spying_predicate_(Functor, Arity))
 		).
 
+	spying(Entity-Line) :-
+		spying_line_number_(Entity, Line).
+	spying(Functor/Arity) :-
+		spying_predicate_(Functor, Arity).
+
 	nospy(SpyPoints) :-
 		nospy_aux(SpyPoints),
 		print_message(information, debugger, matching_spy_points_removed).
@@ -245,6 +250,9 @@
 			true
 		;	debug
 		).
+
+	spying(Sender, This, Self, Goal) :-
+		spying_context_(Sender, This, Self, Goal).
 
 	nospy(Sender, This, Self, Goal) :-
 		retractall(spying_context_(Sender, This, Self, Goal)),
@@ -318,7 +326,7 @@
 
 	leashing(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
-		(	spying(Port, Goal, ExCtx, Code) ->
+		(	spying_port_code(Port, Goal, ExCtx, Code) ->
 			retractall(tracing_),
 			assertz(tracing_)
 		;	tracing_ ->
@@ -333,17 +341,17 @@
 		;	fail
 		).
 
-	spying(fact(Entity,_,Line), _, _, '#') :-
+	spying_port_code(fact(Entity,_,Line), _, _, '#') :-
 		spying_line_number_(Entity, Line),
 		!.
-	spying(rule(Entity,_,Line), _, _, '#') :-
+	spying_port_code(rule(Entity,_,Line), _, _, '#') :-
 		spying_line_number_(Entity, Line),
 		!.
-	spying(_, Goal, _, '+') :-
+	spying_port_code(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
 		\+ \+ spying_predicate_(Functor, Arity),
 		!.
-	spying(_, Goal, ExCtx, '*') :-
+	spying_port_code(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 		\+ \+ spying_context_(Sender, This, Self, Goal).
 

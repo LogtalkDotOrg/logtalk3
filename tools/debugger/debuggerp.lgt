@@ -21,9 +21,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 1.1,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2015/07/07,
+		date is 2016/10/14,
 		comment is 'Debugger protocol.'
 	]).
 
@@ -81,10 +81,24 @@
 		argnames is ['SpyPoint']
 	]).
 
+	:- public(spying/1).
+	:- mode(spying(?spy_point), zero_or_more).
+	:- info(spying/1, [
+		comment is 'Enumerates, by backtracking, all defined line number and predicate spy points.',
+		argnames is ['SpyPoint']
+	]).
+
 	:- public((spy)/4).
 	:- mode(spy(@term, @term, @term, @term), one).
 	:- info((spy)/4, [
 		comment is 'Sets a context spy point.',
+		argnames is ['Sender', 'This', 'Self', 'Goal']
+	]).
+
+	:- public(spying/4).
+	:- mode(spying(?term, ?term, ?term, ?term), zero_or_more).
+	:- info(spying/4, [
+		comment is 'Enumerates, by backtracking, all defined context spy points.',
 		argnames is ['Sender', 'This', 'Self', 'Goal']
 	]).
 
