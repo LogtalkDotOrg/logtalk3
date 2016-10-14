@@ -45,8 +45,8 @@ in `uses/2` and `use_module/2` directives and add `non_terminal/1` and
 
 * FIXED: Source file compilation error reporting when the errors occur before
 the intermediate Prolog file is created. The report would containing only the
-error but without file and line information. This bug only manifested itself
-when compiling the first source file term and when checking for an `encoding/1`
+error but without file and line information. This bug only occurred when
+compiling the first source file term while checking for an `encoding/1`
 directive.
 
 * FIXED: Processing of the `at_same_line` token when printing a message where
@@ -112,6 +112,10 @@ template `::/2`, `<</2`, and `:/2` arguments.
 
 * IMPROVED: Documentation and usage examples of the `doclet` tool.
 
+* IMPROVED: When generating cross-referencing diagrams, label predicate
+call edges for non-terminals using the non-terminal indicator instead of
+the corresponding predicate indicator.
+
 * FIXED: An off-by-one error in the `logtalk_tester.sh` automation script when
 no test sets are found.
 
@@ -124,10 +128,6 @@ mode directives to specify that the predicates are expected to always succeed.
 
 * FIXED: Filtering of local calls when generating predicate cross-referencing
 diagrams using the `diagrams` tool.
-
-* FIXED: When generating cross-referencing diagrams, label predicate call edges
-for non-terminals using the non-terminal indicator instead of the corresponding
-predicate indicator.
 
 * FIXED: Added implementation of the `files/1-3` predicates for the library
 diagrams. This is a partial fix that just converts calls to the `files/1-3`

@@ -20,22 +20,9 @@ ________________________________________________________________________
 README
 ======
 
-1. About
-2. Logtalk web site
-3. Registration
-4. Support
-5. Installation
-6. Customization
-7. Running
-8. Documentation
-9. Upgrading
-10. Citations
-11. Contributions
-12. Legal
 
-
-1. ABOUT
---------
+ABOUT
+-----
 
 Logtalk is an *object-oriented logic programming language* that extends and
 leverages the Prolog language with a feature set suitable for programming
@@ -51,8 +38,8 @@ multi-threading programming. Logtalk uses standard Prolog syntax with the
 addition of some operators and directives for a smooth learning path.
 
 
-2. LOGTALK WEB SITE
--------------------
+LOGTALK WEB SITE
+----------------
 
 The latest release of the Logtalk is always available at the URL:
 
@@ -62,10 +49,10 @@ At this address you can also find additional documentation and information
 about Logtalk.
 
 
-3. REGISTRATION
----------------
+REGISTRATION
+------------
 
-To register as a Logtalk user either use the registration form found at 
+To register as a Logtalk user either use the registration form found at
 the Logtalk web site:
 
 <http://logtalk.org/regform.html>
@@ -76,22 +63,22 @@ or send an email message to:
 
 with the following information:
 
-email address, first and last name, organization, organization type 
-(education, commercial, government, ...), Prolog compilers you use 
-(optional), platforms (mac, pc, unix, ...) (optional), projects where 
+email address, first and last name, organization, organization type
+(education, commercial, government, ...), Prolog compilers you use
+(optional), platforms (mac, pc, unix, ...) (optional), projects where
 you intend to use Logtalk (optional)
 
 
-4. SUPPORT
-----------
+SUPPORT
+-------
 
 For support options, please consult the web page:
 
 <http://logtalk.org/support.html>
 
 
-5. INSTALLATION
----------------
+INSTALLATION
+------------
 
 Logtalk can be installed either from sources by running a couple of shell
 scripts  or by using one of the provided installers, depending on your
@@ -105,23 +92,26 @@ formatted using tabs (the recommended setting is a tab width equivalent
 to 4 spaces).
 
 
-6. CUSTOMIZATION
-----------------
+CUSTOMIZATION
+-------------
 
 The [CUSTOMIZE.md](CUSTOMIZE.md) file provides detailed instructions for
 customizing the Logtalk installation and working environment.
 
 
-7. RUNNING
-----------
+RUNNING
+-------
 
 The [QUICK_START.md](QUICK_START.md) file provides quick instructions for
 those of you in a hurry to run Logtalk, provided that your favorite Prolog
 compiler is supported and installed.
 
 
-8. DOCUMENTATION
-----------------
+DOCUMENTATION
+-------------
+
+A quick introduction for experienced programmers is available at the
+[Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
 The reference and user manuals and the tutorial are provided in XHTML and
 PDF formats and can be found in the [manuals](manuals/) directory.
@@ -141,16 +131,16 @@ On POSIX systems, there's also a man page for each shell script. A list of
 all the scripts can be generated using the `apropos logtalk` command.
 
 
-9. UPGRADING
-------------
+UPGRADING
+---------
 
-If you are upgrading from a previous Logtalk version, please check the 
+If you are upgrading from a previous Logtalk version, please check the
 [UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
 programs or your custom adapter files to run under this new version.
 
 
-10. CITATIONS
--------------
+CITATIONS
+---------
 
 If you find Logtalk useful, please include a citation on your publications.
 Consult the [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib) file for bibliographic
@@ -158,8 +148,8 @@ references in BibTeX format (the Logtalk technical report published on 2000
 and the 2003 PhD thesis on Logtalk are good choices).
 
 
-11. CONTRIBUTIONS
------------------
+CONTRIBUTIONS
+-------------
 
 Contributions, constructive criticism, patches, bug reports, and suggestions
 are always welcome. Major code and documentation contributions require the
@@ -171,8 +161,8 @@ on the authors chosen licensing terms and may require a separate, independent,
 agreement between users and authors.
 
 
-12. LEGAL
----------
+LEGAL
+-----
 
 Logtalk is copyrighted by Paulo Moura and made available under the Apache
 License 2.0. See the [LICENSE.txt](LICENSE.txt) file for the license terms.
