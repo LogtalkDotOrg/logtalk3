@@ -103,9 +103,9 @@
 	]).
 
 	:- public((nospy)/1).
-	:- mode(nospy(@variable), one).
-	:- mode(nospy(+spy_point), one).
-	:- mode(nospy(+list(spy_point)), one).
+	:- mode(nospy(@var), one).
+	:- mode(nospy(@spy_point), one).
+	:- mode(nospy(@list(spy_point)), one).
 	:- info((nospy)/1, [
 		comment is 'Removes all matching line number spy points and predicate spy points.',
 		argnames is ['SpyPoint']

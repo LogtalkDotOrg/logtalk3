@@ -224,6 +224,9 @@
 		nospy_aux(SpyPoints),
 		print_message(information, debugger, matching_spy_points_removed).
 
+	nospy_aux(SpyPoints) :-
+		var(SpyPoints),
+		!.
 	nospy_aux([]).
 	nospy_aux([SpyPoint| SpyPoints]) :-
 		nospy_list([SpyPoint| SpyPoints]).
