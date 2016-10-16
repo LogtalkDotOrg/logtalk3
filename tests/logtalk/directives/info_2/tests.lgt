@@ -31,21 +31,60 @@
 	:- public(a/1).
 	:- info(a/1, [
 		comment is 'A public predicate.',
-		argnames is ['Arg'],
+		remarks is [
+			'key' - 'value'
+		],
+		redefinition is specialize,
+		allocation is any,
+		arguments is ['Arg' - 'Arg description'],
+		examples is [
+			'Sample call' - a(X) - {X = 1}
+		],
+		exceptions is [
+			'Description' - error
+		],
 		custom is value
 	]).
 
 	:- protected(b/2).
 	:- info(b/2, [
 		comment is 'A protected predicate.',
+		remarks is [
+			'key1' - 'value1',
+			'key2' - 'value2'
+		],
+		redefinition is call_super_first,
+		allocation is descendants,
 		argnames is ['Arg1', 'Arg2'],
+		examples is [
+			'Sample call' - b(X, Y) - {X = 1, Y = 2}
+		],
+		exceptions is [
+			'Description1' - error1,
+			'Description2' - error2
+		],
 		custom is value
 	]).
 
 	:- private(c/3).
 	:- info(c/3, [
 		comment is 'A private predicate.',
+		remarks is [
+			'key1' - 'value1',
+			'key2' - 'value2',
+			'key3' - 'value3'
+		],
+		redefinition is never,
+		allocation is container,
 		argnames is ['Arg1', 'Arg2', 'Arg3'],
+		examples is [
+			'Sample call' - c(X, Y, Z) - {X = 1, Y = 2, Z = 3}
+		],
+		exceptions is [
+			'Description1' - error1,
+			'Description2' - error2,
+			'Description3' - error3
+		],
 		custom is value
 	]).
 
@@ -56,49 +95,61 @@
 	test(info_2_01) :-
 		this(This),
 		object_property(This, declares(a/1, Properties)),
-		ground(Properties),
-		memberchk(scope(public), Properties),
+		memberchk(scope(Scope), Properties), Scope == (public),
 		memberchk((public), Properties),
 		memberchk(static, Properties).
 
 	test(info_2_02) :-
 		this(This),
 		object_property(This, declares(a/1, Properties)),
-		ground(Properties),
 		memberchk(info(Info), Properties),
-		memberchk(comment('A public predicate.'), Info),
-		memberchk(custom(value), Info).
+		memberchk(comment(Comment), Info), Comment == 'A public predicate.',
+		memberchk(remarks(Remarks), Info), Remarks == ['key'-'value'],
+		memberchk(redefinition(Redefinition), Info), Redefinition == specialize,
+		memberchk(allocation(Allocation), Info), Allocation == any,
+		memberchk(arguments(Arguments), Info), Arguments == ['Arg' - 'Arg description'],
+		memberchk(examples(Examples), Info), ^^variant(Examples, ['Sample call'-a(X)-{X=1}]),
+		memberchk(exceptions(Exceptions), Info), Exceptions == ['Description'-error],
+		memberchk(custom(Value), Info), Value == value.
 
 	test(info_2_03) :-
 		this(This),
 		object_property(This, declares(b/2, Properties)),
-		ground(Properties),
-		memberchk(scope(protected), Properties),
+		memberchk(scope(Scope), Properties), Scope == protected,
 		memberchk(protected, Properties),
 		memberchk(static, Properties).
 
 	test(info_2_04) :-
 		this(This),
 		object_property(This, declares(b/2, Properties)),
-		ground(Properties),
 		memberchk(info(Info), Properties),
-		memberchk(comment('A protected predicate.'), Info),
-		memberchk(custom(value), Info).
+		memberchk(comment(Comment), Info), Comment == 'A protected predicate.',
+		memberchk(remarks(Remarks), Info), Remarks == ['key1'-'value1', 'key2'-'value2'],
+		memberchk(redefinition(Redefinition), Info), Redefinition == call_super_first,
+		memberchk(allocation(Allocation), Info), Allocation == descendants,
+		memberchk(argnames(Argnames), Info), Argnames == ['Arg1', 'Arg2'],
+		memberchk(examples(Examples), Info), ^^variant(Examples, ['Sample call'-b(X,Y)-{X=1,Y=2}]),
+		memberchk(exceptions(Exceptions), Info), Exceptions == ['Description1'-error1,'Description2'-error2],
+		memberchk(custom(Value), Info), Value == value.
 
 	test(info_2_05) :-
 		this(This),
 		object_property(This, declares(c/3, Properties)),
-		ground(Properties),
-		memberchk(scope(private), Properties),
+		memberchk(scope(Scope), Properties), Scope == (private),
 		memberchk((private), Properties),
 		memberchk(static, Properties).
 
 	test(info_2_06) :-
 		this(This),
 		object_property(This, declares(c/3, Properties)),
-		ground(Properties),
 		memberchk(info(Info), Properties),
-		memberchk(comment('A private predicate.'), Info),
-		memberchk(custom(value), Info).
+		memberchk(comment(Comment), Info), Comment == 'A private predicate.',
+		memberchk(remarks(Remarks), Info), Remarks == ['key1'-'value1', 'key2'-'value2', 'key3'-'value3'],
+		memberchk(redefinition(Redefinition), Info), Redefinition == never,
+		memberchk(allocation(Allocation), Info), Allocation == container,
+		memberchk(argnames(Argnames), Info), Argnames == ['Arg1', 'Arg2', 'Arg3'],
+		memberchk(examples(Examples), Info), ^^variant(Examples, ['Sample call'-c(X,Y,Z)-{X=1,Y=2,Z=3}]),
+		memberchk(exceptions(Exceptions), Info), Exceptions == ['Description1'-error1,'Description2'-error2,'Description3'-error3],
+		memberchk(custom(Value), Info), Value == value.
 
 :- end_object.
