@@ -21,6 +21,6 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
+	logtalk_load(tests, [hook(lgtunit), source_data(on)]),
 	tests::run
 )).
