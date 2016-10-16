@@ -55,6 +55,8 @@ the line prefix would not be omitted.
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `include/1` directive.
+
 * IMPROVED: Documentation of the `logtalk_load_context/2` built-in predicate.
 
 * FIXED: Examples in the User Manual of entity opening directives that still
