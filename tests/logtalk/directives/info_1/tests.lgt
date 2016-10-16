@@ -24,8 +24,23 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
-		comment is 'Unit tests for the info/1 built-in directive.'
+		date is 2016/10/16,
+		comment is 'Unit tests for the info/1 built-in directive.',
+		custom is value
 	]).
+
+	:- uses(list, [
+		memberchk/2
+	]).
+
+	test(info_1_01) :-
+		this(This),
+		object_property(This, info(Properties)),
+		ground(Properties),
+		memberchk(version(1.0), Properties),
+		memberchk(author('Paulo Moura'), Properties),
+		memberchk(date(2016/10/16), Properties),
+		memberchk(comment('Unit tests for the info/1 built-in directive.'), Properties),
+		memberchk(custom(value), Properties).
 
 :- end_object.
