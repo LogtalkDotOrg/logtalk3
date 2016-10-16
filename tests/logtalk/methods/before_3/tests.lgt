@@ -19,13 +19,30 @@
 
 
 :- object(tests,
+	implements(monitoring),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2016/10/16,
 		comment is 'Unit tests for the before/3 built-in method.'
 	]).
+
+	:- initialization(init).
+
+	init :-
+		this(This),
+		define_events(before, logtalk, _, user, This).
+
+	:- private(message/1).
+	:- dynamic(message/1).
+
+	before(_, Message, _) :-
+		assertz(message(Message)).
+
+	test(before_3_1) :-
+		{logtalk::entity_prefix(logtalk, Prefix)},
+		message(entity_prefix(logtalk, Prefix)).
 
 :- end_object.

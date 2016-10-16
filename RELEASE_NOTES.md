@@ -152,6 +152,8 @@ predicates.
 
 * ADDED: Unit tests for the `info/1`, `info/2`, and `include/1` directives.
 
+* ADDED: Unit tests for the `before/3` and `after/3` built-in methods.
+
 * ADDED: Some more unit tests for the `self/1`, `sender/1`, and `this/1`
 built-in execution context methods.
 
