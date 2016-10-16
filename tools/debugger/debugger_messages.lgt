@@ -21,9 +21,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2015/10/22,
+		date is 2016/10/16,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -54,7 +54,7 @@
 	:- multifile(logtalk::question_prompt_stream/4).
 	:- dynamic(logtalk::question_prompt_stream/4).
 
-	logtalk::question_prompt_stream(question, debugger, '    > ', user_input).
+	logtalk::question_prompt_stream(question, debugger, '     > ', user_input).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
@@ -65,43 +65,43 @@
 	% questions
 
 	message_tokens(enter_query) -->
-		['    Enter a query to be executed deterministically'-[], nl].
+		['     Enter a query to be executed deterministically'-[], nl].
 
 	message_tokens(enter_goal) -->
-		['    Enter a goal to unify with the current goal'-[], nl].
+		['     Enter a goal to unify with the current goal'-[], nl].
 
 	message_tokens(enter_context_spy_point(GoalTemplate)) -->
 		{ground_term_copy(GoalTemplate, GroundGoalTemplate)},
-		['    Enter a context spy point term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
+		['     Enter a context spy point term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
 
 	message_tokens(enter_invocation_number) -->
-		['    Enter an invocation number to jump to'-[], nl].
+		['     Enter an invocation number to jump to'-[], nl].
 
 	message_tokens(enter_port_name) -->
-		['    Enter a port name or a negated port name to zap to'-[], nl].
+		['     Enter a port name or a negated port name to zap to'-[], nl].
 
 	message_tokens(enter_write_max_depth) -->
-		['    Enter the maximum write depth for terms (0 to reset)'-[], nl].
+		['     Enter the maximum write depth for terms (0 to reset)'-[], nl].
 
 	% debugger status and switching
 
 	message_tokens(debugger_on_spying) -->
-		['Debugger is on: showing spy points for all objects compiled in debug mode.'-[], nl].
+		['   Debugger is on: showing spy points for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_switched_on_spying) -->
-		['Debugger switched on: showing spy points for all objects compiled in debug mode.'-[], nl].
+		['   Debugger switched on: showing spy points for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_on_tracing) -->
-		['Debugger is on: tracing everything for all objects compiled in debug mode.'-[], nl].
+		['   Debugger is on: tracing everything for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_switched_on_tracing) -->
-		['Debugger switched on: tracing everything for all objects compiled in debug mode.'-[], nl].
+		['   Debugger switched on: tracing everything for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_off) -->
-		['Debugger is off.'-[], nl].
+		['   Debugger is off.'-[], nl].
 
 	message_tokens(debugger_switched_off) -->
-		['Debugger switched off.'-[], nl].
+		['   Debugger switched off.'-[], nl].
 
 	% at port
 
@@ -120,70 +120,70 @@
 	% spy points
 
 	message_tokens(all_spy_points_added) -->
-		['    All specified spy points added.'-[], nl].
+		['     All specified spy points added.'-[], nl].
 
 	message_tokens(matching_spy_points_removed) -->
-		['    All matching line number and predicate spy points removed.'-[], nl].
+		['     All matching line number and predicate spy points removed.'-[], nl].
 
 	% predicate spy points
 
 	message_tokens(predicate_spy_points(SpyPoints)) -->
-		['    Defined predicate spy points (Functor/Arity):'-[], nl],
+		['     Defined predicate spy points (Functor/Arity):'-[], nl],
 		spy_points(SpyPoints).
 
 	message_tokens(all_predicate_spy_points_removed) -->
-		['    All predicate spy points removed.'-[], nl].
+		['     All predicate spy points removed.'-[], nl].
 
 	message_tokens(no_predicate_spy_points_defined) -->
-		['    No predicate spy points are defined.'-[], nl].
+		['     No predicate spy points are defined.'-[], nl].
 
 	message_tokens(predicate_spy_point_added) -->
-		['    Predicate spy point added.'-[], nl].
+		['     Predicate spy point added.'-[], nl].
 
 	message_tokens(predicate_spy_point_removed) -->
-		['    Predicate spy point removed.'-[], nl].
+		['     Predicate spy point removed.'-[], nl].
 
 	% line number spy points
 
 	message_tokens(line_number_spy_points(SpyPoints)) -->
-		['    Defined line number spy points (Entity-Line):'-[], nl],
+		['     Defined line number spy points (Entity-Line):'-[], nl],
 		spy_points(SpyPoints).
 
 	message_tokens(all_line_number_spy_points_removed) -->
-		['    All line number spy points removed.'-[], nl].
+		['     All line number spy points removed.'-[], nl].
 
 	message_tokens(no_line_number_spy_points_defined) -->
-		['    No line number spy points are defined.'-[], nl].
+		['     No line number spy points are defined.'-[], nl].
 
 	message_tokens(line_number_spy_point_added) -->
-		['    Line number spy point added.'-[], nl].
+		['     Line number spy point added.'-[], nl].
 
 	message_tokens(line_number_spy_point_removed) -->
-		['    Line number spy point removed.'-[], nl].
+		['     Line number spy point removed.'-[], nl].
 
 	% context spy points
 
 	message_tokens(context_spy_points(SpyPoints)) -->
-		['    Defined context spy points (Sender, This, Self, Goal):'-[], nl],
+		['     Defined context spy points (Sender, This, Self, Goal):'-[], nl],
 		context_spy_points(SpyPoints).
 
 	message_tokens(matching_context_spy_points_removed) -->
-		['    All matching context spy points removed.'-[], nl].
+		['     All matching context spy points removed.'-[], nl].
 
 	message_tokens(all_context_spy_points_removed) -->
-		['    All context spy points removed.'-[], nl].
+		['     All context spy points removed.'-[], nl].
 
 	message_tokens(context_spy_point_set) -->
-		['    Context spy point set.'-[], nl].
+		['     Context spy point set.'-[], nl].
 
 	message_tokens(no_context_spy_points_defined) -->
-		['    No context spy points are defined.'-[], nl].
+		['     No context spy points are defined.'-[], nl].
 
 	% execution context
 
 	message_tokens(execution_context(Entity0, Sender0, This0, Self0, MetaCallCtx0, Stack0)) -->
 		% in some cases, e.g when dealing with multifile clauses for Prolog modules,
-		% most of the execution context elements are not available
+		% some of the execution context elements may not available
 		{var(Entity0) -> Entity = n/a; Entity = Entity0},
 		{var(Sender0) -> Sender = n/a; Sender = Sender0},
 		{var(This0) -> This = n/a; This = This0},
@@ -191,71 +191,72 @@
 		{var(MetaCallCtx0) -> MetaCallCtx = n/a; MetaCallCtx = MetaCallCtx0},
 		{var(Stack0) -> Stack = n/a; Stack = Stack0},
 		[
-			'    Entity:            ~q'-[Entity], nl,
-			'    Sender:            ~q'-[Sender], nl,
-			'    This:              ~q'-[This], nl,
-			'    Self:              ~q'-[Self], nl,
-			'    Meta-call context: ~q'-[MetaCallCtx], nl,
-			'    Coinduction stack: ~q'-[Stack], nl
+			'     Entity:            ~q'-[Entity], nl,
+			'     Sender:            ~q'-[Sender], nl,
+			'     This:              ~q'-[This], nl,
+			'     Self:              ~q'-[Self], nl,
+			'     Meta-call context: ~q'-[MetaCallCtx], nl,
+			'     Coinduction stack: ~q'-[Stack], nl
 		].
 
 	% file context
 
 	message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause0, Line0)) -->
 		{atom_concat(Directory, Basename, File),
+		 ground_term_copy(Entity, GroundEntity),
 		 clause_and_line_numbers(Clause0, Line0, Clause, Line)},
 		[
-			'    File:              ~w'-[File], nl,
-			'    Line number:       ~w'-[Line], nl,
-			'    Entity:            ~q'-[Entity], nl,
-			'    Predicate:         ~q'-[Predicate], nl,
-			'    Clause number:     ~w'-[Clause], nl
+			'     File:          ~w'-[File], nl,
+			'     Line number:   ~w'-[Line], nl,
+			'     Entity:        ~q'-[GroundEntity], nl,
+			'     Predicate:     ~q'-[Predicate], nl,
+			'     Clause number: ~w'-[Clause], nl
 		].
 
 	% goals
 
 	message_tokens(print_current_goal(Goal)) -->
-		['    Current goal: ~p'-[Goal], nl].
+		['     Current goal: ~p'-[Goal], nl].
 
 	message_tokens(display_current_goal(Goal,MaxDepth)) -->
-		['    Current goal: '-[], term(Goal,[quoted(true),ignore_ops(true),max_depth(MaxDepth)]), nl].
+		['     Current goal: '-[], term(Goal,[quoted(true),ignore_ops(true),max_depth(MaxDepth)]), nl].
 
 	message_tokens(display_current_goal(Goal)) -->
-		['    Current goal: ~k'-[Goal], nl].
+		['     Current goal: ~k'-[Goal], nl].
 
 	message_tokens(write_current_goal(Goal,MaxDepth)) -->
 		{ground_term_copy(Goal, GroundGoal)},
-		['    Current goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
+		['     Current goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
 	message_tokens(write_current_goal(Goal)) -->
 		{ground_term_copy(Goal, GroundGoal)},
-		['    Current goal: ~q'-[GroundGoal], nl].
+		['     Current goal: ~q'-[GroundGoal], nl].
 
 	message_tokens(write_compiled_goal(Goal,MaxDepth)) -->
 		{ground_term_copy(Goal, GroundGoal)},
-		['    Compiled goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
+		['     Compiled goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
 	message_tokens(write_compiled_goal(Goal)) -->
 		{ground_term_copy(Goal, GroundGoal)},
-		['    Compiled goal: ~q'-[GroundGoal], nl].
+		['     Compiled goal: ~q'-[GroundGoal], nl].
 
 	% exceptions
 
 	message_tokens(write_exception_term(Error,MaxDepth)) -->
 		{ground_term_copy(Error, GroundError)},
-		['    Exception term: '-[], term(GroundError,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
+		['     Exception term: '-[], term(GroundError,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
 	message_tokens(write_exception_term(Error)) -->
 		{ground_term_copy(Error, GroundError)},
-		['    Exception term: ~q'-[GroundError], nl].
+		['     Exception term: ~q'-[GroundError], nl].
 
 	% features
 
 	message_tokens(break_not_supported) -->
-		['    break/0 not supported by the back-end Prolog compiler.'-[], nl].
+		['     break/0 not supported by the back-end Prolog compiler.'-[], nl].
 
 	message_tokens(max_depth_not_supported) -->
-		['    Limiting write term depth not supported by the back-end Prolog compiler.'-[], nl].
+		['     Limiting write term depth not supported by the back-end Prolog compiler.'-[], nl].
 
 	% help
 
@@ -320,7 +321,7 @@
 	% ports
 
 	message_tokens(leashed_ports(Ports)) -->
-		['    Leashed ports:'-[]],
+		['     Leashed ports:'-[]],
 		(	{Ports == []} ->
 			[' (none)'-[]]
 		;	leashed_ports(Ports)
