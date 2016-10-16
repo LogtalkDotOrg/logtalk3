@@ -18,14 +18,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- include(logtalk_user('tests/logtalk/directives/include_1/file.pl')).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/05/21,
+		date is 2016/10/16,
 		comment is 'Unit tests for the include/1 built-in directive.'
 	]).
+
+	:- include(logtalk_user('tests/logtalk/directives/include_1/file.pl')).
+
+	test(include_1_01) :-
+		findall(X, {a(X)}, Xs),
+		Xs == [1, 2, 3].
+
+	test(include_1_02) :-
+		findall(X, {b(_, X)}, Xs),
+		Xs == [1, 2, 3].
+
+	test(include_1_03) :-
+		\+ {current_predicate(c/3)}.
+
+	test(include_1_04) :-
+		findall(X, a(X), Xs),
+		Xs == [1, 2, 3].
+
+	test(include_1_05) :-
+		findall(X, b(_, X), Xs),
+		Xs == [1, 2, 3].
+
+	test(include_1_06) :-
+		\+ current_predicate(c/3).
 
 :- end_object.
