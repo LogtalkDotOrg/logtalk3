@@ -175,6 +175,9 @@ Perforce.
 Examples
 --------
 
+* ADDED: An example of object-based composition, `laptops`, to contrast with
+category-based composition.
+
 * RENAMED: The `jpl` example to `java`. Also updated the example benchmarks
 and some of the individual examples to run when using JIProlog as the backend
 compiler. This example now relies on the new library Java support.

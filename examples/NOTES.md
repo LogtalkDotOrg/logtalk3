@@ -103,8 +103,7 @@ Follows a short description of each included example (in alphabetical order):
 	illustrates how to use events to avoid breaking object encapsulation
 
 - `carengines`  
-	example of category composition (extension of categories by 
-	other categories) using car engines
+	example of extending categories using car engines
 
 - `cc`  
 	example of using conditional compilation directives to write code
@@ -205,6 +204,10 @@ Follows a short description of each included example (in alphabetical order):
 - `lambdas_compiled`  
 	pseudo-example for testing compilation of calls to library
 	meta-predicates with lambda expressions as meta-arguments
+
+- `laptops`  
+	example of defining an object as a composition of other objects
+	in order to contrast with category-based composition
 
 - `lo`  
 	examples adapted from the Francis G. McCabe L&O system
