@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.07.1 - October ??, 2016
+3.08.0 - October 17, 2016
 =========================
 
 Logtalk compiler and runtime
