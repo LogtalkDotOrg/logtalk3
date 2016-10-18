@@ -26,6 +26,7 @@
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
+	:- import(from(/(datime,1), standard)).
 	:- import(from(/(expand_atom,2), standard)).
 	:- import(from(/(xsb_configuration,2), xsb_configuration)).
 	:- import(from(/(sys_pid,1), shell)).
@@ -37,9 +38,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.23,
+		version is 1.24,
 		author is 'Paulo Moura',
-		date is 2016/10/07,
+		date is 2016/10/18,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -326,10 +327,10 @@
 			{expand_atom(Variable, Value)}.
 
 		time_stamp(Time) :-
-			{standard:datime(Time)}.
+			{datime(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{standard:datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
+			{datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Time) :-
 			{cputime(Time)}.
