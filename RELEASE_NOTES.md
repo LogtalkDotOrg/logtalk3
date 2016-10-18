@@ -35,6 +35,10 @@ Documentation
 
 * IMPROVED: User Manual documentation on the predicate lookup procedures.
 
+* FIXED: Reference Manual descriptions of the `public/1` and `protected/1`
+directives regarding using declared non-terminals as arguments to the
+`phrase/2-3` built-in methods.
+
 
 3.08.0 - October 17, 2016
 =========================
