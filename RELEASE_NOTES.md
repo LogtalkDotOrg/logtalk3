@@ -30,6 +30,11 @@ Prolog adapter and integration files
 * CHANGED: Moved the dependency on the `standard:datime/1` predicate from the
 XSB adapter file, where it is no longer used, to the library `os` object.
 
+Documentation
+-------------
+
+* IMPROVED: User Manual documentation on the predicate lookup procedures.
+
 
 3.08.0 - October 17, 2016
 =========================

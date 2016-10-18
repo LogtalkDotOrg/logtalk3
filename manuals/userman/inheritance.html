@@ -46,7 +46,10 @@
 The inheritance mechanisms found on object-oriented programming languages allow us the specialization of previously defined objects, avoiding the unnecessary repetition of code. In the context of logic programming, we can interpret inheritance as a form of theory extension: an object will virtually contain, besides its own predicates, all the predicates inherited from other objects that are not redefined by itself.
 </p>
 <p>
-Logtalk uses a depth-first lookup procedure for finding predicate declarations and predicate definitions, as explained below. The <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> predicate directive may be used to solve inheritance conflicts and for defining alternative names for inherited predicates.
+Logtalk uses a depth-first lookup procedure for finding predicate declarations and predicate definitions, as explained below. The lookup procedures locate the entities holding the predicate declaration and the predicate definition using, respectively, the predicate indicator and the predicate template (constructed from the predicate indicator).
+</p>
+<p>
+The <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> predicate directive may be used to defining alternative names for inherited predicates for solving inheritance conflicts and for giving access to all inherited definitions.
 </p>
 
 <h2 id="inheritance_protocol">Protocol inheritance</h2>
@@ -274,7 +277,7 @@ Nevertheless, Logtalk supports multi-inheritance by enabling an object to extend
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 24, 2016</span>
+		<span>Last updated on: October 18, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="predicates.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="events.html">next</a></span><br/>
