@@ -24,6 +24,12 @@ RELEASE NOTES
 3.08.1 - November ??, 2016
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* NEW: Inline calls in linking clauses to Prolog module, built-in, and
+foreign predicates when compiling source files in optimal mode.
+
 Prolog adapter and integration files
 ------------------------------------
 

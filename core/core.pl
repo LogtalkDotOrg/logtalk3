@@ -6680,6 +6680,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_entity'(Type, Entity, Ctx) :-
 	'$lgt_generate_entity_code'(Type, Ctx),
+	'$lgt_inline_calls'(Type),
 	'$lgt_report_problems'(Type, Entity),
 	'$lgt_write_entity_code',
 	'$lgt_add_entity_source_data'(Type, Entity),
@@ -14156,6 +14157,67 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	fail
 	).
+
+
+
+% '$lgt_inline_calls'(+atom)
+%
+% inline calls in linking clauses to Prolog module, built-in, and
+% foreign predicates when compiling source files in optimal mode
+
+'$lgt_inline_calls'(protocol).
+
+'$lgt_inline_calls'(category) :-
+	'$lgt_pp_category_'(_, _, _, Def, _, _),
+	'$lgt_inline_calls_def'(Def).
+
+'$lgt_inline_calls'(object) :-
+	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _),
+	'$lgt_inline_calls_def'(Def).
+
+
+'$lgt_inline_calls_def'(Def) :-
+	'$lgt_compiler_flag'(optimize, on),
+	'$lgt_pp_number_of_clauses_'(Functor, Arity, 1),
+	% single clause
+	once((
+		'$lgt_pp_public_'(Functor, Arity)
+	;	'$lgt_pp_protected_'(Functor, Arity)
+	;	'$lgt_pp_private_'(Functor, Arity)
+	)),
+	% local scope declaration
+	functor(Head, Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
+	\+ '$lgt_pp_multifile_'(Head, _),
+	\+ '$lgt_pp_synchronized_'(Head, _),
+	% static, non-multifile, and no synchronization wrapper
+	'$lgt_pp_defines_predicate_'(Head, _, _, THead, compile(_), user),
+	% source file user-defined predicate
+	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
+	(	TBody = ':'(Module, Body) ->
+		atom(Module),
+		callable(Body)
+	;	'$lgt_predicate_property'(TBody, built_in) ->
+		Body = TBody
+	;	% not all backend Prolog systems support a "foreign" predicate property
+		catch('$lgt_predicate_property'(TBody, foreign), _, fail),
+		Body = TBody
+	),
+	functor(Body, _, Arity),
+	% same arity
+	Head =.. [_| HeadArguments],
+	Body =.. [_| BodyArguments],
+	HeadArguments == BodyArguments,
+	% same arguments
+	retractall('$lgt_pp_final_entity_term_'((THead :- TBody), _)),
+	DefClauseOld =.. [Def, Head, _, _],
+	retractall('$lgt_pp_def_'(DefClauseOld)),
+	DefClauseNew =.. [Def, Head, _, TBody],
+	asserta('$lgt_pp_def_'(DefClauseNew)),
+	% next candidate predicate
+	fail.
+
+'$lgt_inline_calls_def'(_).
 
 
 
