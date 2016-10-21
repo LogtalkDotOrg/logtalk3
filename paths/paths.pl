@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on October 17, 2016
+%  Last updated on October 21, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -161,6 +161,7 @@ logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(includes, examples('includes/')).
 logtalk_library_path(inheritance, examples('inheritance/')).
+logtalk_library_path(inlining, examples('inlining/')).
 logtalk_library_path(instmethods, examples('instmethods/')).
 logtalk_library_path(instvars, examples('instvars/')).
 logtalk_library_path(integration, threads('integration/')).

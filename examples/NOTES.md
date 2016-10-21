@@ -185,6 +185,10 @@ Follows a short description of each included example (in alphabetical order):
 	examples of public, protected, and private inheritance using both 
 	prototypes and classes/instances
 
+- `inlining`  
+	simple example for illustrating and testing inlining of predicate
+	definitions
+
 - `instmethods`  
 	example of instance defined methods; also illustrates the use of 
 	"super calls" to call overridden method definitions

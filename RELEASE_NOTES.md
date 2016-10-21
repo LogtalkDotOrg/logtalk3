@@ -47,6 +47,12 @@ Documentation
 directives regarding using declared non-terminals as arguments to the
 `phrase/2-3` built-in methods.
 
+Examples
+--------
+
+* ADDED: Simple example, `inlining`, illustrating inlining of predicate
+definitions.
+
 
 3.08.0 - October 17, 2016
 =========================
