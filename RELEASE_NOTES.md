@@ -30,6 +30,8 @@ Logtalk compiler and runtime
 * NEW: Inline calls in linking clauses to Prolog module, built-in, and
 foreign predicates when compiling source files in optimal mode.
 
+* ADDED: Predicate property and predicate definition property `inline`.
+
 Prolog adapter and integration files
 ------------------------------------
 

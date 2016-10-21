@@ -365,6 +365,8 @@
 :- dynamic('$lgt_pp_predicate_definition_line_'/3).
 % '$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode, Origin)
 :- dynamic('$lgt_pp_defines_predicate_'/6).
+% '$lgt_pp_inline_predicate_'(Functor/Arity)
+:- dynamic('$lgt_pp_inline_predicate_'/1).
 
 % '$lgt_pp_predicate_definition_line_'(Other, Functor, Arity, Line)
 :- dynamic('$lgt_pp_predicate_definition_line_'/4).
@@ -1068,14 +1070,18 @@ protocol_property(Ptc, Prop) :-
 		Properties0 = [number_of_clauses(N)]
 	;	Properties0 = [line_count(Line), number_of_clauses(N)]
 	),
-	(	Flags /\ 2 =:= 2 ->
-		Arity2 is Arity - 2,
-		Properties1 = [non_terminal(Functor//Arity2)| Properties0]
+	(	Flags /\ 4 =:= 4 ->
+		Properties1 = [inline| Properties0]
 	;	Properties1 = Properties0
 	),
+	(	Flags /\ 2 =:= 2 ->
+		Arity2 is Arity - 2,
+		Properties2 = [non_terminal(Functor//Arity2)| Properties1]
+	;	Properties2 = Properties1
+	),
 	(	Flags /\ 1 =:= 1 ->
-		Properties = [auxiliary| Properties1]
-	;	Properties = Properties1
+		Properties = [auxiliary| Properties2]
+	;	Properties = Properties2
 	).
 
 '$lgt_entity_property_defines'(_, _, []).
@@ -3121,6 +3127,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	functor(Original, Functor, Arity),
 			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, _, Line)) ->
 			true
+		;	fail
+		)
+	;	fail
+	).
+'$lgt_predicate_property_user'(inline, Alias, Original, _, _, _, _, _, _, Def, _) :-
+	(	call(Def, Alias, _, _, _, DCtn) ->
+		(	functor(Original, Functor, Arity),
+			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(Flags, _, _)) ->
+			Flags /\ 4 =:= 4
 		;	fail
 		)
 	;	fail
@@ -6477,16 +6492,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, Mode, _),
+	(	'$lgt_pp_inline_predicate_'(Functor/Arity) ->
+		Flags0 is 4
+	;	Flags0 is 0
+	),
 	(	Arity2 is Arity - 2,
 		Arity2 >= 0,
 		'$lgt_pp_defines_non_terminal_'(Functor, Arity2) ->
-		Flags0 is 2
-	;	Flags0 is 0
+		Flags1 is Flags0 + 2
+	;	Flags1 is Flags0
 	),
 	(	Mode == compile(aux) ->
-		Flags is Flags0 + 1,
+		Flags is Flags1 + 1,
 		Line is 0
-	;	Flags is Flags0,
+	;	Flags is Flags1,
 		'$lgt_pp_predicate_definition_line_'(Functor, Arity, Line)
 	),
 	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
@@ -6911,6 +6930,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_inline_predicate_'(_)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _)),
@@ -14214,6 +14234,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, _, TBody],
 	asserta('$lgt_pp_def_'(DefClauseNew)),
+	assertz('$lgt_pp_inline_predicate_'(Functor/Arity)),
 	% next candidate predicate
 	fail.
 
@@ -17686,6 +17707,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_predicate_property'(alias_declared_in(_, _)).
 % predicate is an auxiliary predicate
 '$lgt_valid_predicate_property'(auxiliary).
+% predicate definition is inlined
+'$lgt_valid_predicate_property'(inline).
 
 
 
