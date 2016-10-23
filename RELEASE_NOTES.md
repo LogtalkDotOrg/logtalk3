@@ -24,6 +24,12 @@ RELEASE NOTES
 3.08.1 - November ??, 2016
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Faster implementation of the internal '$lgt_predicate_property'/2
+predicate for SWI-Prolog.
+
 Logtalk compiler and runtime
 ----------------------------
 

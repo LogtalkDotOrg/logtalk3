@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on August 7, 2016
+%  Last updated on October 22, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -115,14 +115,17 @@
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	% avoid calls to the predicate_property/2 predicate triggering library
-	% auto-loading as this could introduce unwanted dependencies
-	current_prolog_flag(autoload, Value),
-	setup_call_cleanup(
-		set_prolog_flag(autoload, false),
-		predicate_property(Pred, Prop),
-		set_prolog_flag(autoload, Value)
-	).
+	% avoid calls to predicate_property/2 triggering library auto-loading
+	% (as this could introduce unwanted dependencies) by calling
+	% current_predicate/1 first (which never triggers auto-loading)
+	(	Pred = Module:Callable ->
+		functor(Callable, Functor, Arity),
+		current_predicate(Module:Functor/Arity)
+	;	functor(Pred, Functor, Arity),
+		current_predicate(Functor/Arity)
+	),
+	predicate_property(Pred, Prop).
+
 
 % SWI-Prolog provides a sleep/1 predicate instead of the thread_sleep/1
 % predicate specified in the ISO Prolog Threads standardization proposal;
