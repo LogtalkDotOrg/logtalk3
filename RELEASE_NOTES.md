@@ -24,6 +24,12 @@ RELEASE NOTES
 3.08.1 - November ??, 2016
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Static binding of a closure meta-argument that is an alias to another
+predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 

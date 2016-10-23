@@ -2893,7 +2893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc2)).
 
 
 
@@ -19886,7 +19886,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		fail
 	;	'$lgt_built_in_predicate'(TGoal) ->
 		% built-in predicates may result from goal-expansion during compilation
-		TClosure = {Closure}
+		'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, _),
+		TClosure0 =.. [TFunctor| TArgs],
+		TClosure = {TClosure0}
 	;	'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) ->
 		TClosure = '$lgt_closure'(TFunctor, TArgs, ExCtx)
 	;	% runtime resolved meta-call
