@@ -14211,7 +14211,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_multifile_'(Head, _),
 	\+ '$lgt_pp_synchronized_'(Head, _),
 	% static, non-multifile, and no synchronization wrapper
-	'$lgt_pp_defines_predicate_'(Head, _, _, THead, compile(_), user),
+	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_), user),
 	% source file user-defined predicate
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
 	(	TBody = ':'(Module, Body) ->
@@ -14232,7 +14232,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_final_entity_term_'((THead :- TBody), _)),
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
-	DefClauseNew =.. [Def, Head, _, TBody],
+	DefClauseNew =.. [Def, Head, ExCtx, TBody],
 	asserta('$lgt_pp_def_'(DefClauseNew)),
 	assertz('$lgt_pp_inline_predicate_'(Functor/Arity)),
 	% next candidate predicate
