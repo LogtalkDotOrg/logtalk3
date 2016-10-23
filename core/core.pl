@@ -14198,8 +14198,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_inline_calls_def'(Def) :-
 	'$lgt_compiler_flag'(optimize, on),
+	\+ '$lgt_pp_dynamic_',
+	% static entity
 	'$lgt_pp_number_of_clauses_'(Functor, Arity, 1),
-	% single clause
+	% predicate with a single clause
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_multifile_'(Head, _),
@@ -14226,6 +14228,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% same arity
 	Head =.. [_| HeadArguments],
 	Body =.. [_| BodyArguments],
+	% handle argument permutations
 	sort(HeadArguments, SortedHeadArguments),
 	sort(BodyArguments, SortedBodyArguments),
 	SortedHeadArguments == SortedBodyArguments,
