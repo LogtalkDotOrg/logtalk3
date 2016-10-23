@@ -14227,7 +14227,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% same arity
 	Head =.. [_| HeadArguments],
 	Body =.. [_| BodyArguments],
-	HeadArguments == BodyArguments,
+	sort(HeadArguments, SortedHeadArguments),
+	sort(BodyArguments, SortedBodyArguments),
+	SortedHeadArguments == SortedBodyArguments,
 	% same arguments
 	retractall('$lgt_pp_final_entity_term_'((THead :- TBody), _)),
 	DefClauseOld =.. [Def, Head, _, _],
