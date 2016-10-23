@@ -21,14 +21,14 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/10/14,
+		date is 2016/10/23,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character "h" or the character "?" at a leashed port.',
 			'Predicate spy point' - 'Specified as a ground term Functor/Arity.',
-			'Line number spy point' - 'Specified as an Entity-Line term with both Entity and Line bound.',
+			'Line number spy point' - 'Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.',
 			'Leash shorthands' - 'none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].'
 		]
 	]).
