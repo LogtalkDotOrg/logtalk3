@@ -2893,7 +2893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc2)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc3)).
 
 
 
@@ -14233,7 +14233,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	sort(BodyArguments, SortedBodyArguments),
 	SortedHeadArguments == SortedBodyArguments,
 	% same arguments
-	retractall('$lgt_pp_final_entity_term_'((THead :- TBody), _)),
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, ExCtx, TBody],
