@@ -23,27 +23,27 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/21,
+		date is 2016/10/23,
 		comment is 'Simple object for illustrating and testing inlining of predicate definitions.'
 	]).
 
 	:- public([
-		between/3, map/2
+		integer/1, map/2
 	]).
 
-	% the following clause defining the local predicate between/3
-	% simply calls the same predicate in "user" as Logtalk ensures
-	% that is available there as it is a de facto standard predicate;
-	% these linking clauses are common when writing portable code and
-	% when abstracting foreign library resources
+	% the following clause defining the local predicate integer/1
+	% simply calls the same predicate in "user"; although we use this
+	% standard Prolog predicate here for example portability, in
+	% practical cases these linking clauses are common when writing
+	% portable code and when abstracting foreign library resources
 
 	% the compiler generates a predicate definition table entry that
 	% directly calls user::between/2, thus inlining the predicate
 	% definition, and discars the clause (assuming compilation with
 	% the "optimize" flag turned on)
 
-	between(Lower, Upper, Value) :-
-		user::between(Lower, Upper, Value).
+	integer(Term) :-
+		user::integer(Term).
 
 	% another common case occurs with meta-predicate definitions like
 	% map/N that take a list on its second argument but uses a linking
@@ -53,6 +53,6 @@
 	map(Closure, List) :-
 		map_(List, Closure).
 
-	map_(_, _).	
+	map_(_, _).
 
 :- end_object.
