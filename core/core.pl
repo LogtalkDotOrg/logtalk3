@@ -14200,12 +14200,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(optimize, on),
 	'$lgt_pp_number_of_clauses_'(Functor, Arity, 1),
 	% single clause
-	once((
-		'$lgt_pp_public_'(Functor, Arity)
-	;	'$lgt_pp_protected_'(Functor, Arity)
-	;	'$lgt_pp_private_'(Functor, Arity)
-	)),
-	% local scope declaration
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_multifile_'(Head, _),
