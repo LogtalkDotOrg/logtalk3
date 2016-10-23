@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/21,
+		date is 2016/10/22,
 		comment is 'Unit tests for the "inlining" example.'
 	]).
 
@@ -46,10 +46,27 @@
 		ground(Properties),
 		memberchk(inline, Properties).
 
+	test(inlining_03) :-
+		inlining::predicate_property(map(_,_), inline).
+
+	test(inlining_04) :-
+		findall(
+			Property,
+			inlining::predicate_property(map(_,_), Property),
+			Properties
+		),
+		ground(Properties),
+		memberchk(inline, Properties).
+
 	% test "inline" predicate definition property
 
-	test(inlining_03) :-
+	test(inlining_05) :-
 		object_property(inlining, defines(between/3, Properties)),
+		ground(Properties),
+		memberchk(inline, Properties).
+
+	test(inlining_06) :-
+		object_property(inlining, defines(map/2, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
 

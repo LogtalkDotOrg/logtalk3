@@ -28,13 +28,13 @@
 	]).
 
 	:- public([
-		between/3
+		between/3, map/2
 	]).
 
 	% the following clause defining the local predicate between/3
 	% simply calls the same predicate in "user" as Logtalk ensures
 	% that is available there as it is a de facto standard predicate;
-	% these liking clauses are common when writing portable code and
+	% these linking clauses are common when writing portable code and
 	% when abstracting foreign library resources
 
 	% the compiler generates a predicate definition table entry that
@@ -44,5 +44,15 @@
 
 	between(Lower, Upper, Value) :-
 		user::between(Lower, Upper, Value).
+
+	% another common case occurs with meta-predicate definitions like
+	% map/N that take a list on its second argument but uses a linking
+	% clause to move the list to the first argument to better exploit
+	% indexing
+
+	map(Closure, List) :-
+		map_(List, Closure).
+
+	map_(_, _).	
 
 :- end_object.
