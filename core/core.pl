@@ -14214,8 +14214,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_predicate_property'(TBody, built_in) ->
 		Body = TBody
 	;	% not all backend Prolog systems support a "foreign" predicate property
-		catch('$lgt_predicate_property'(TBody, foreign), _, fail),
+		catch('$lgt_predicate_property'(TBody, foreign), _, fail) ->
 		Body = TBody
+	;	'$lgt_pp_defines_predicate_'(Body, _, _, TBody, compile(_), user) ->
+		\+ '$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _),
+		Arity2 is Arity - 2, Arity2 >= 0,
+		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _)
+	;	fail
 	),
 	functor(Body, _, Arity),
 	% same arity
