@@ -53,9 +53,9 @@
 	]).
 
 	:- public(run_test/1).
-	:- mode(run_test, one).
+	:- mode(run_test, zero_or_one).
 	:- info(run_test/1, [
-		comment is 'Runs a given unit test, writing the results to the current output stream.',
+		comment is 'Runs a given unit test, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.',
 		argnames is ['Test']
 	]).
 
@@ -483,6 +483,7 @@
 		set_output(Output).
 
 	run_test(Test) :-
+		run_setup,
 		self(Self),
 		::test_(Test, Spec),
 		object_property(Self, file(File)),
@@ -490,7 +491,8 @@
 		current_input(Input), current_output(Output),
 		run_test(Spec, File, Output),
 		% restore the current input and output streams
-		set_input(Input), set_output(Output).
+		set_input(Input), set_output(Output),
+		run_cleanup.
 
 	run_condition :-
 		% expected either success or failure; error means user error 
