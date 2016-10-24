@@ -36,6 +36,9 @@ predicate.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: Also optimize message sending goals when loading plain Prolog source
+files when using SWI-Prolog or YAP.
+
 * ADDED: Normalization of arithmetic evaluation errors when using XSB.
 
 * IMPROVED: Faster implementation of the internal '$lgt_predicate_property'/2
