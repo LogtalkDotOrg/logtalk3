@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on October 24, 2016
+%  Last updated on October 22, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -865,7 +865,9 @@ user:goal_expansion(phrase(Rule, Input), ExpandedGoal) :-
 	'$lgt_user_module_qualification'('$lgt_phrase'(Rule, Input, ExCtx), ExpandedGoal).
 % optimize messages sent from within modules
 user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
-	prolog_load_context(module, _),
+	prolog_load_context(module, Module),
+	% not top-level query
+	Module \== user,
 	'$lgt_compiler_flag'(events, Events),
 	prolog_load_context(term_position, Position),
 	stream_position_data(line_count, Position, Line),
