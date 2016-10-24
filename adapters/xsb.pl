@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on October 18, 2016
+%  Last updated on October 24, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -684,6 +684,13 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 	existence_error(procedure, ':'(usermod, Functor/Arity)),
 	existence_error(procedure, Functor/Arity)
 ).
+'$lgt_normalize_error_term_aux'(
+	type_error(evaluable, Expression),
+	type_error(evaluable, Functor/Arity)
+) :-
+	callable(Expression),
+	Expression \= _/_,
+	functor(Expression, Functor, Arity).
 '$lgt_normalize_error_term_aux'(
 	Error,
 	Error
