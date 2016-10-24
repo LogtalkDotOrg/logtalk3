@@ -37,7 +37,9 @@ a(3, c, 'C').
 		integer/1, map/2, a/2
 	]).
 
-	:- uses(user, [a/3]).
+	:- uses(user, [
+		a/3
+	]).
 
 	% the following clause defining the local predicate integer/1
 	% simply calls the same predicate in "user"; although we use this
