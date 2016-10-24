@@ -18,6 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% simple plain Prolog table for the inlining examples
+a(1, a, 'A').
+a(2, b, 'B').
+a(3, c, 'C').
+
+
 :- object(inlining).
 
 	:- info([
@@ -28,8 +34,10 @@
 	]).
 
 	:- public([
-		integer/1, map/2
+		integer/1, map/2, a/2
 	]).
+
+	:- uses(user, [a/3]).
 
 	% the following clause defining the local predicate integer/1
 	% simply calls the same predicate in "user"; although we use this
@@ -45,7 +53,7 @@
 	integer(Term) :-
 		user::integer(Term).
 
-	% another common case occurs with meta-predicate definitions like
+	% a common case occurs with meta-predicate definitions like
 	% map/N that take a list on its second argument but uses a linking
 	% clause to move the list to the first argument to better exploit
 	% indexing
@@ -54,5 +62,10 @@
 		map_(List, Closure).
 
 	map_(_, _).
+
+	% another common case is to define accessors to a plain Prolog table
+	
+	a(N, C) :-
+		a(N, C, _).
 
 :- end_object.

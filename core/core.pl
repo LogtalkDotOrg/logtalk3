@@ -14210,6 +14210,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_), user),
 	% source file user-defined predicate
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
+	TBody \= ','(_, _),
+	TBody \= ';'(_, _),
+	% body is not a control construct
 	(	TBody = ':'(Module, Body) ->
 		atom(Module),
 		callable(Body)
@@ -14218,21 +14221,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% not all backend Prolog systems support a "foreign" predicate property
 		catch('$lgt_predicate_property'(TBody, foreign), _, fail) ->
 		Body = TBody
+	;	functor(TBody, TFunctor, TArity),
+		'$lgt_pp_referenced_object_message_'(Object, TFunctor/TArity, _, Functor/Arity, _),
+		Object == user ->
+		Body = TBody
 	;	'$lgt_pp_defines_predicate_'(Body, _, _, TBody, compile(_), user) ->
 		\+ '$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _),
 		Arity2 is Arity - 2, Arity2 >= 0,
 		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _)
 	;	fail
 	),
-	functor(Body, _, Arity),
-	% same arity
-	Head =.. [_| HeadArguments],
-	Body =.. [_| BodyArguments],
+	term_variables(Head, HeadVariables),
+	term_variables(Body, BodyVariables),
 	% handle argument permutations
-	sort(HeadArguments, SortedHeadArguments),
-	sort(BodyArguments, SortedBodyArguments),
-	SortedHeadArguments == SortedBodyArguments,
-	% same arguments
+	forall(
+		'$lgt_member'(Var, HeadVariables),
+		'$lgt_member_var'(Var, BodyVariables)
+	),
+	% all head variables present in the body
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, ExCtx, TBody],

@@ -39,9 +39,10 @@ predicate for SWI-Prolog.
 Logtalk compiler and runtime
 ----------------------------
 
-* NEW: Inline calls in linking clauses to entity local predicates and to
-Prolog module, built-in, and foreign predicates when compiling source files
-in optimal mode.
+* NEW: Inline calls in linking clauses to entity local predicates, to Prolog
+module, built-in, and foreign predicates, and to predicates defined in the
+`user` pseudo-object when compiling source files with the `optimize` flag
+turned on.
 
 * ADDED: Predicate property and predicate definition property `inline`.
 

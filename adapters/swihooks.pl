@@ -729,4 +729,4 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_threaded_engine_create_protected'(*,*,*,*,*).
 :- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*).
 
-%:- meta_predicate '$user#0.forward#1'(*,*).	% inlined
+:- meta_predicate '$user#0.forward#1'(*,*).

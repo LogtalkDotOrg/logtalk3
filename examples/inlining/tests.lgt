@@ -58,15 +58,32 @@
 		ground(Properties),
 		memberchk(inline, Properties).
 
+	test(inlining_05) :-
+		inlining::predicate_property(a(_,_), inline).
+
+	test(inlining_06) :-
+		findall(
+			Property,
+			inlining::predicate_property(a(_,_), Property),
+			Properties
+		),
+		ground(Properties),
+		memberchk(inline, Properties).
+
 	% test "inline" predicate definition property
 
-	test(inlining_05) :-
+	test(inlining_07) :-
 		object_property(inlining, defines(integer/1, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
 
-	test(inlining_06) :-
+	test(inlining_08) :-
 		object_property(inlining, defines(map/2, Properties)),
+		ground(Properties),
+		memberchk(inline, Properties).
+
+	test(inlining_09) :-
+		object_property(inlining, defines(a/2, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
 
