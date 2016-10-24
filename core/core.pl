@@ -14216,35 +14216,39 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_), user),
 	% source file user-defined predicate
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
-	TBody \= ','(_, _),
-	TBody \= ';'(_, _),
-	% body is not a control construct
+	\+ '$lgt_control_construct'(TBody),
+	\+ '$lgt_logtalk_meta_predicate'(TBody, _, _),
+	% body is not a control construct or a built-in meta-predicate
 	(	TBody = ':'(Module, Body) ->
 		atom(Module),
 		callable(Body)
-	;	'$lgt_predicate_property'(TBody, built_in) ->
+	;	'$lgt_predicate_property'(TBody, built_in),
+		\+ '$lgt_predicate_property'(TBody, meta_predicate(_)) ->
+		% Prolog built-in predicate
 		Body = TBody
 	;	% not all backend Prolog systems support a "foreign" predicate property
-		catch('$lgt_predicate_property'(TBody, foreign), _, fail) ->
+		catch('$lgt_predicate_property'(TBody, foreign), _, fail),
+		\+ '$lgt_predicate_property'(TBody, meta_predicate(_)) ->
+		% Prolog foreign predicate
 		Body = TBody
 	;	functor(TBody, TFunctor, TArity),
 		'$lgt_pp_referenced_object_message_'(Object, TFunctor/TArity, _, Functor/Arity, _),
 		Object == user ->
+		% message to the "user" pseudo-object
 		Body = TBody
-	;	'$lgt_pp_defines_predicate_'(Body, _, _, TBody, compile(_), user) ->
-		\+ '$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _),
-		Arity2 is Arity - 2, Arity2 >= 0,
-		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _)
+	;	'$lgt_pp_defines_predicate_'(Body, _, _, TBody, compile(_), user),
+		\+ '$lgt_pp_meta_predicate_'(Body, _) ->
+		% call to a local predicate
+		true
 	;	fail
 	),
-	term_variables(Head, HeadVariables),
-	term_variables(Body, BodyVariables),
-	% handle argument permutations
+	Head =.. [_| HeadArguments],
+	Body =.. [_| BodyArguments],
 	forall(
-		'$lgt_member'(Var, HeadVariables),
-		'$lgt_member_var'(Var, BodyVariables)
+		'$lgt_member'(Argument, HeadArguments),
+		(var(Argument), '$lgt_member_var'(Argument, BodyArguments))
 	),
-	% all head variables present in the body
+	% all head arguments are variables and exist in the body
 	DefClauseOld =.. [Def, Head, _, _],
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, ExCtx, TBody],
@@ -14254,6 +14258,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_inline_calls_def'(_).
+
+
+% '$lgt_control_construct'(?callable)
+
+'$lgt_control_construct'((_ , _)).
+'$lgt_control_construct'((_ ; _)).
+'$lgt_control_construct'((_ -> _)).
+'$lgt_control_construct'(\+ _).
+'$lgt_control_construct'(^^ _).
+'$lgt_control_construct'(_ :: _).
+'$lgt_control_construct'(:: _).
+'$lgt_control_construct'(_ / _).
+'$lgt_control_construct'(_ >> _).
+'$lgt_control_construct'(_ << _).
+'$lgt_control_construct'({_}).
+'$lgt_control_construct'(':'(_, _)).
+'$lgt_control_construct'(throw(_)).
 
 
 
