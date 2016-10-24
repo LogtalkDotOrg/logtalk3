@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.3,
+		version is 3.4,
 		author is 'Paulo Moura',
-		date is 2016/10/13,
+		date is 2016/10/24,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -50,6 +50,13 @@
 	:- mode(run, one).
 	:- info(run/0, [
 		comment is 'Runs the unit tests, writing the results to the current output stream.'
+	]).
+
+	:- public(run_test/1).
+	:- mode(run_test, one).
+	:- info(run_test/1, [
+		comment is 'Runs a given unit test, writing the results to the current output stream.',
+		argnames is ['Test']
 	]).
 
 	:- public(deterministic/1).
@@ -474,6 +481,16 @@
 		write_tests_footer,
 		% restore the current output stream
 		set_output(Output).
+
+	run_test(Test) :-
+		self(Self),
+		::test_(Test, Spec),
+		object_property(Self, file(File)),
+		% save the current input and output streams
+		current_input(Input), current_output(Output),
+		run_test(Spec, File, Output),
+		% restore the current input and output streams
+		set_input(Input), set_output(Output).
 
 	run_condition :-
 		% expected either success or failure; error means user error 
@@ -932,7 +949,8 @@
 		).
 
 	% collect all unit test identifiers when reching the end_object/0 directive 
-	directive_expansion(end_object, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
+	directive_expansion(end_object, Terms) :-
+		findall(test_(Identifier, Test), test_(Identifier, Test), Terms, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]),
 		findall(Test, retract(test_(_, Test)), Tests),
 		logtalk_load_context(source, File).
 

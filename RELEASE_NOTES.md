@@ -66,6 +66,11 @@ Documentation
 directives regarding using declared non-terminals as arguments to the
 `phrase/2-3` built-in methods.
 
+Tools
+-----
+
+* ADDED: Predicate `lgtunit::run_test/1` for running an individual test.
+
 Examples
 --------
 
