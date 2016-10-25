@@ -18,14 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup the object "employee" as a monitor for any message sent to itself:
-
-:- initialization((
-	define_events(before, employee, _, _, employee),
-	set_logtalk_flag(events, allow)
-)).
-
-
 % define a category that adds new functionality to the "employee" object:
 
 :- category(add_on,
@@ -47,3 +39,11 @@
 	:- alias(employee, [salary/1 as income/1]).
 
 :- end_category.
+
+
+% setup the object "employee" as a monitor for any message sent to itself:
+
+:- initialization((
+	define_events(before, employee, _, _, employee),
+	set_logtalk_flag(events, allow)
+)).

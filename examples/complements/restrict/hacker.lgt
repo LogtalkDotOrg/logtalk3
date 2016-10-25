@@ -18,14 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup the object "my_vault" as a monitor for any message sent to itself:
-
-:- initialization((
-	define_events(before, my_vault, _, _, my_vault),
-	set_logtalk_flag(events, allow)
-)).
-
-
 :- category(hacker,
 	implements(monitoring),		% built-in protocol for the event handler methods
 	complements(my_vault)).		% patch (or attempt to patch) the "my_vault" object
@@ -40,3 +32,11 @@
 		write('You have been hacked by SmartPants!'), nl.
 
 :- end_category.
+
+
+% setup the object "my_vault" as a monitor for any message sent to itself:
+
+:- initialization((
+	define_events(before, my_vault, _, _, my_vault),
+	set_logtalk_flag(events, allow)
+)).

@@ -325,15 +325,15 @@
 % '$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
 :- dynamic('$lgt_pp_complemented_object_'/5).
 
-% '$lgt_pp_file_initialization_'(Goal)
-:- dynamic('$lgt_pp_file_initialization_'/1).
-% '$lgt_pp_file_object_initialization_'(Object, Goal)
-:- dynamic('$lgt_pp_file_object_initialization_'/2).
+% '$lgt_pp_file_initialization_'(Goal, Lines)
+:- dynamic('$lgt_pp_file_initialization_'/2).
+% '$lgt_pp_file_object_initialization_'(Object, Goal, Lines)
+:- dynamic('$lgt_pp_file_object_initialization_'/3).
 
 % '$lgt_pp_object_initialization_'(Goal, SourceData, Lines)
 :- dynamic('$lgt_pp_object_initialization_'/3).
-% '$lgt_pp_final_object_initialization_'(Goal)
-:- dynamic('$lgt_pp_final_object_initialization_'/1).
+% '$lgt_pp_final_object_initialization_'(Goal, Lines)
+:- dynamic('$lgt_pp_final_object_initialization_'/2).
 
 % '$lgt_pp_entity_meta_directive_'(Directive, SourceData, Lines)
 :- dynamic('$lgt_pp_entity_meta_directive_'/3).
@@ -2893,7 +2893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc4)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc5)).
 
 
 
@@ -6836,8 +6836,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % cleans up all dynamic predicates used during source file compilation
 
 '$lgt_clean_pp_file_clauses' :-
-	retractall('$lgt_pp_file_initialization_'(_)),
-	retractall('$lgt_pp_file_object_initialization_'(_, _)),
+	retractall('$lgt_pp_file_initialization_'(_, _)),
+	retractall('$lgt_pp_file_object_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
@@ -6911,7 +6911,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_object_initialization_'(_, _, _)),
-	retractall('$lgt_pp_final_object_initialization_'(_)),
+	retractall('$lgt_pp_final_object_initialization_'(_, _)),
 	retractall('$lgt_pp_entity_meta_directive_'(_, _, _)),
 	retractall('$lgt_pp_dcl_'(_)),
 	retractall('$lgt_pp_def_'(_)),
@@ -7674,16 +7674,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(callable, Goal),
 	% initialization directives are collected and moved to the end of file
 	% to minimize compatibility issues with backend Prolog compilers
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	(	Goal = {UserGoal} ->
 		% final goal
 		'$lgt_check'(callable, UserGoal),
-		assertz('$lgt_pp_file_initialization_'(Goal))
+		assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		% goals are only expanded when compiling a source file
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
 		Goal \== ExpandedGoal ->
 		'$lgt_compile_file_directive'(initialization(ExpandedGoal), Ctx)
-	;	assertz('$lgt_pp_file_initialization_'(Goal))
+	;	assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	).
 
 '$lgt_compile_file_directive'(op(Priority, Specifier, Operators), Ctx) :-
@@ -14077,7 +14078,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	% ensure that a new complementing category will take preference over
 	% a previously loaded complementing category for the same object
-	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)))),
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)), Lines)),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
 
@@ -15895,7 +15897,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% initialization/1 goals
 	retract('$lgt_pp_object_initialization_'(Goal, SourceData, Lines)),
 	'$lgt_compile_predicate_calls'(Goal, SourceData, Lines, Optimize, TGoal),
-	assertz('$lgt_pp_final_object_initialization_'(TGoal)),
+	assertz('$lgt_pp_final_object_initialization_'(TGoal, Lines)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
@@ -16374,8 +16376,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_initialization_goal'(InitializationGoal) :-
 	findall(
+		Line-Goal,
+		('$lgt_pp_file_object_initialization_'(_, Goal, Line-_); '$lgt_pp_file_initialization_'(Goal, Line-_)),
+		LineGoals
+	),
+	keysort(LineGoals, SortedLineGoals),
+	findall(
 		Goal,
-		('$lgt_pp_file_object_initialization_'(_, Goal); '$lgt_pp_file_initialization_'(Goal)),
+		'$lgt_member'(_-Goal, SortedLineGoals),
 		Goals
 	),
 	'$lgt_list_to_conjunction'(Goals, InitializationGoal).
@@ -16425,14 +16433,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Goal2 = true
 	),
 	% an object may contain multiple initialization/1 directives
-	(	bagof(ObjectInitGoal, '$lgt_pp_final_object_initialization_'(ObjectInitGoal), ObjectInitGoals) ->
+	(	bagof(ObjectInitGoal, '$lgt_pp_final_object_initialization_'(ObjectInitGoal, _), ObjectInitGoals) ->
 		'$lgt_list_to_conjunction'(ObjectInitGoals, Goal3),
 		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)
 	;	'$lgt_remove_redundant_calls'((Goal1, Goal2), Goal)
 	),
 	(	Goal == true ->
 		true
-	;	assertz('$lgt_pp_file_object_initialization_'(Object, Goal))
+	;	'$lgt_pp_referenced_object_'(Object, Lines),
+		assertz('$lgt_pp_file_object_initialization_'(Object, Goal, Lines))
 	).
 
 
@@ -16524,13 +16533,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	),
 	% an object may contain multiple initialization/1 directives
-	(	bagof(Goal, '$lgt_pp_final_object_initialization_'(Goal), GoalList) ->
+	(	bagof(Goal, '$lgt_pp_final_object_initialization_'(Goal, _), GoalList) ->
 		'$lgt_list_to_conjunction'(GoalList, Goals),
 		once(Goals)
 	;	true
 	),
 	% complementing categories add a file initialization goal
-	(	'$lgt_pp_file_initialization_'(InitializationGoal) ->
+	(	'$lgt_pp_file_initialization_'(InitializationGoal, _) ->
 		once(InitializationGoal)
 	;	true
 	).

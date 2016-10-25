@@ -33,6 +33,9 @@ pseudo-object.
 * FIXED: Static binding of a closure meta-argument that is an alias to another
 predicate.
 
+* FIXED: Keep the relative order of file and object level `initialization/1`
+directives in a source file in the generated code.
+
 Prolog adapter and integration files
 ------------------------------------
 
