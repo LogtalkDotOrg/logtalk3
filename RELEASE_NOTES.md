@@ -38,6 +38,9 @@ Prolog adapter and integration files
 
 * ADDED: Normalization of arithmetic evaluation errors when using XSB.
 
+* ADDED: Definition for the SWI-Prolog `prolog:make_hook/2` hook predicate to
+automatically call `logtalk_make/0` when calling `make/0`.
+
 * IMPROVED: Faster implementation of the internal '$lgt_predicate_property'/2
 predicate for SWI-Prolog.
 

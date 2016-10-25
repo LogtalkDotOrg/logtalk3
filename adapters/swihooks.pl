@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on October 23, 2016
+%  Last updated on October 25, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -86,6 +86,15 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	),
 	source_file_property(_, derived_from(Source,_)),
 	!.
+
+
+:- if(current_predicate(prolog:make_hook/2)).
+
+	:- multifile(prolog:make_hook/2).
+	prolog:make_hook(before, _) :-
+		logtalk_make.
+
+:- endif.
 
 
 % for e.g. the call stack in the SWI-Prolog graphical tracer
