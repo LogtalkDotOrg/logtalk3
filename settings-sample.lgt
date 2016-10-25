@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on September 27, 2016
+%  Last updated on October 25, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -223,7 +223,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	:- use_module(library(statistics)).
 
 	:- initialization((
-		set_logtalk_flag(code_prefix, '.'),
+		set_logtalk_flag(code_prefix, '.')
 	)).
 
 :- endif.
