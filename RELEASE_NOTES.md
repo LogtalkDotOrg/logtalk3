@@ -80,6 +80,11 @@ Examples
 * ADDED: Simple example, `inlining`, illustrating inlining of predicate
 definitions.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.
+
 
 3.08.0 - October 17, 2016
 =========================
