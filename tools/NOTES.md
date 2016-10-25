@@ -21,7 +21,8 @@ Available developer tools
 -------------------------
 
 The following developer tools are available, each one with its own
-`loader.lgt` loader file and `NOTES.md` documentation files:
+`loader.lgt` loader file (except make which is a built-in tool) and
+`NOTES.md` documentation files:
 
 - assertions
 - dead_code_scanner
@@ -31,6 +32,7 @@ The following developer tools are available, each one with its own
 - help
 - lgtdoc
 - lgtunit
+- make
 - ports
 - profiler
 - wrapper

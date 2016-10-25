@@ -47,7 +47,7 @@ GUI IDEs and continuous integration servers.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the file:
+To consult this tool API documentation, open in a web browser the link:
 
 [docs/directory_index.html#tools/dead_code_scanner/](http://logtalk.org/docs/directory_index.html#tools/dead_code_scanner/)
 

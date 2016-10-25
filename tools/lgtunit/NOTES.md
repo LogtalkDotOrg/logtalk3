@@ -41,7 +41,7 @@ by the works of Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the file:
+To consult this tool API documentation, open in a web browser the link:
 
 [docs/directory_index.html#tools/lgtunit/](http://logtalk.org/docs/directory_index.html#tools/lgtunit/)
 

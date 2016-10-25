@@ -31,7 +31,7 @@ cross-referencing diagrams for plain Prolog files.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the file:
+To consult this tool API documentation, open in a web browser the link:
 
 [docs/directory_index.html#tools/diagrams/](http://logtalk.org/docs/directory_index.html#tools/diagrams/)
 

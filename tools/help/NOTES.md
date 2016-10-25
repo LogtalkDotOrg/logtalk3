@@ -27,7 +27,7 @@ set of operating-systems.
 API documentation
 -----------------
 
-To consult this tool API documentation, open in a web browser the file:
+To consult this tool API documentation, open in a web browser the link:
 
 [docs/directory_index.html#tools/help/](http://logtalk.org/docs/directory_index.html#tools/help/)
 
