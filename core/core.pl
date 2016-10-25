@@ -14271,6 +14271,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_control_construct'({_}).
 '$lgt_control_construct'(':'(_, _)).
 '$lgt_control_construct'(throw(_)).
+'$lgt_control_construct'('*->'(_, _)) :-
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
 
 
 
