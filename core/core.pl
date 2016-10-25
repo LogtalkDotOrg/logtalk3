@@ -2893,7 +2893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc5)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc6)).
 
 
 
@@ -12623,16 +12623,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % messages to the pseudo-object "user"
 
-'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, Ctx) :-
+'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _) :-
 	Obj == user,
 	!,
-	'$lgt_check'(var_or_callable, Pred),
-	'$lgt_add_referenced_object'(Obj, Ctx),
-	(	callable(Pred) ->
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, Mode, _, Lines),
-		'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head, Lines)
-	;	true
-	).
+	'$lgt_check'(var_or_callable, Pred).
 
 % convenient access to parametric object proxies
 

@@ -27,9 +27,6 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Also save reflection data for messages sent explicitly to the `user`
-pseudo-object.
-
 * FIXED: Static binding of a closure meta-argument that is an alias to another
 predicate.
 
