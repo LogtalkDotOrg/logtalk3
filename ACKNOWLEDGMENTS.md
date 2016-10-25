@@ -30,6 +30,7 @@ CONTRIBUTORS
 * Andreas Becker (PDT support for Logtalk, bug reports)
 * Anne Ogborn (bug reports, usability suggestions)
 * Artur Miguel Dias (testing, lambda expression examples)
+* Barry Evans (dead code scanner tool, usability suggestions)
 * Clara Dimene (GeSHi syntax highlighter)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
