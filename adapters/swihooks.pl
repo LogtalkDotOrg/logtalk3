@@ -97,6 +97,32 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 :- endif.
 
 
+/*	
+% experimental hack to get a stsck trace for errors
+% generated from top-level message sending calls
+
+:- use_module(library(prolog_stack)).
+
+user:prolog_exception_hook(Exception, Exception, Frame, CatchFrame) :-
+	\+ atom(CatchFrame),
+	prolog_frame_attribute(CatchFrame, predicate_indicator, PI),
+	memberchk(PI, [(::)/2, (<<)/2]),
+    get_prolog_backtrace(Frame, 20, Trace),
+	'$lgt_swi_filter_filter_trace'(Trace, Tracefiltered),
+    format(user_error, 'Error: ~p', [Exception]), nl(user_error),
+    print_prolog_backtrace(user_error, Tracefiltered), nl(user_error),
+	fail.
+
+'$lgt_swi_filter_filter_trace'([], []).
+'$lgt_swi_filter_filter_trace'([frame(N,C,G0)| Trace], [frame(N,C,Entity::Head)| Tracefiltered]) :-
+	'$lgt_decompile_predicate_heads'(G0, Entity, _, Head),
+	!,
+	'$lgt_swi_filter_filter_trace'(Trace, Tracefiltered).
+'$lgt_swi_filter_filter_trace'([_| Trace], Tracefiltered) :-
+	'$lgt_swi_filter_filter_trace'(Trace, Tracefiltered).
+*/
+
+
 % for e.g. the call stack in the SWI-Prolog graphical tracer
 :- multifile(user:prolog_predicate_name/2).
 
