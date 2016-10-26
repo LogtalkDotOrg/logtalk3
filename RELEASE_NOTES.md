@@ -100,6 +100,12 @@ Installers and installation scripts
 * FIXED: The `install.sh` manual installation script to allow using it from
 any directory. Thanks to Jan Wielemaker for the bug report.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Contributed an updated Logtalk mode for the SWI-Prolog native text
+editor.
+
 
 3.08.0 - October 17, 2016
 =========================
