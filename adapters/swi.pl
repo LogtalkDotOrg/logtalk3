@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on October 22, 2016
+%  Last updated on October 25, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -933,14 +933,14 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	!,
 	write_canonical(Stream, Term), write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, Term, user, File, Line) :-
-	!,
-	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
-
 '$lgt_write_compiled_term'(Stream, (:- Directive), _, _, _) :-
 	% to cope with {(:- Directive)} entity terms
 	!,
 	write_canonical(Stream, (:- Directive)), write(Stream, '.\n').
+
+'$lgt_write_compiled_term'(Stream, Term, user, File, Line) :-
+	!,
+	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, aux, _, _) :-
 	!,

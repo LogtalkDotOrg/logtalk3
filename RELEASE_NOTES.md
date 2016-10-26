@@ -44,6 +44,9 @@ automatically call `logtalk_make/0` when calling `make/0`.
 * IMPROVED: Faster implementation of the internal '$lgt_predicate_property'/2
 predicate for SWI-Prolog.
 
+* FIXED: Compilation of SWI-Prolog proprietary directives when decorating the
+generated code with source location data.
+
 Logtalk compiler and runtime
 ----------------------------
 
