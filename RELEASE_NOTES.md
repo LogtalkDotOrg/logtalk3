@@ -33,6 +33,9 @@ predicate.
 * FIXED: Keep the relative order of file and object level `initialization/1`
 directives in a source file in the generated code.
 
+* FIXED: Compiler internal declaration of the `threaded_engine_fetch/1` as a
+built-in predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 

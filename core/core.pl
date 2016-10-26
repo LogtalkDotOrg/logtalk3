@@ -2893,7 +2893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc6)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc7)).
 
 
 
@@ -18245,7 +18245,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(threaded_engine_next_reified(_, _), threaded_engine_next_reified(*, *)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_yield(_), threaded_engine_yield(*)).
 '$lgt_logtalk_built_in_predicate'(threaded_engine_post(_, _), threaded_engine_post(*, *)).
-'$lgt_logtalk_built_in_predicate'(threaded_engine_fetch(_, _), threaded_engine_fetch(*, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_engine_fetch(_), threaded_engine_fetch(*)).
 
 
 
