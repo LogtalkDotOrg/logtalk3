@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on September 29, 2016
+##   Last updated on October 26, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -32,12 +32,14 @@ else
 	esac
 fi
 
+cd `dirname $0`
+
 version=`cat ../VERSION.txt`
 default_directory=logtalk-$version
 
 print_version() {
 	echo "Current `basename $0` version:"
-	echo "  0.2"
+	echo "  0.3"
 	exit 0
 }
 

@@ -94,6 +94,12 @@ Tests
 
 * ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The `install.sh` manual installation script to allow using it from
+any directory. Thanks to Jan Wielemaker for the bug report.
+
 
 3.08.0 - October 17, 2016
 =========================
