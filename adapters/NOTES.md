@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on March 15, 2016
+Last updated on October 25, 2016
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -438,7 +438,12 @@ it implicitly assumes a single user and the files are buried in the directory
 
 If you want to load automatically Logtalk at startup and be able to use it
 with both the shell integration script and the Mac OS X GUI application, you
-can add to the `~/.plrc` or `~/.swiplrc` init file the lines:
+can add to the `~/.plrc` or `~/.swiplrc` init file the following lines after
+editing the `LOGTALKHOME` and `LOGTALKUSER` environment variable values in
+the `setenv/2` calls:
+
+	:- setenv('LOGTALKHOME', '/replace/with/your/logtalk/system/folder/path').
+	:- setenv('LOGTALKUSER', '/replace/with/your/logtalk/user/folder/path').
 
 	:- if((current_prolog_flag(home,HOME), sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl'))).
 		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
