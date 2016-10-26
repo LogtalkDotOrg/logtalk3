@@ -36,6 +36,9 @@ directives in a source file in the generated code.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: Also optimize message sending goals in plain Prolog source files
+when using SWI-Prolog or YAP.
+
 * ADDED: Normalization of arithmetic evaluation errors when using XSB.
 
 * ADDED: Definition for the SWI-Prolog `prolog:make_hook/2` hook predicate to
