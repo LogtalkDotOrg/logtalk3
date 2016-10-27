@@ -28,10 +28,11 @@ The tool takes a directory of Prolog files or a list of Prolog files, loads
 and wraps the code in each file using an object wrapper, and advises on missing
 directives to be added to those objects by using the compiler lint checker and
 the reflection API. The user can then either save the generated wrapper objects
-or copy and pasted the printed advise into the Prolog files (updating them to
+or copy and paste the printed advise into the Prolog files (updating them to
 Logtalk files by adding the object opening and closing directives to the Prolog
-files). The wrapper objects can then be loaded for testing and for use with
-other tools.
+files). The wrapper objects use `include/1` directives to include the Prolog
+files and can be loaded for testing and for use with other tools. The wrapped
+Prolog files are not modified and thus require only read permission.
 
 
 API documentation
@@ -79,13 +80,13 @@ described below.
 The API predicates also accept a set of options for customization:
 
 - `prolog_extensions(Extensions)`  
-	list of file name extensions used to recognize Prolog source files (default is `['.pl']`)
+	list of file name extensions used to recognize Prolog source files (default is `['.pl', '.pro', '.prolog']`)
 - `logtalk_extension(Extension)`  
 	Logtalk file name extension to be used for the generated wrapper files (default is `'.lgt'`)
 - `exclude_files(Files)`  
-	list of Prolog source files names to exclude (default is `[]`)
+	list of Prolog source files to exclude (default is `[]`)
 - `exclude_directories(Files)`  
-	list of sub-directory names to exclude (default is `[]`)
+	list of sub-directories to exclude (default is `[]`)
 - `include_wrapped_files(Boolean)`  
 	generate `include/1` directives for the wrapped Prolog source files (default is `true`)
 

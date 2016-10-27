@@ -83,6 +83,10 @@ Tools
 
 * ADDED: Predicate `lgtunit::run_test/1` for running an individual test.
 
+* IMPROVED: Documentation of the `wrapper` tool and added `.prolog` and
+`.pro` file extensions to the default list of recognized Prolog file name
+extensions.
+
 Examples
 --------
 

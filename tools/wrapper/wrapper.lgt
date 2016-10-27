@@ -22,17 +22,21 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2016/06/09,
+		date is 2016/10/26,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
-			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl''])',
+			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl'',''.pro'',''.prolog''])',
 			'logtalk_extension(Extension) option' - 'Logtalk file name extension to be used for the generated wrapper files (default is ''.lgt'')',
 			'exclude_files(Files) option' - 'list of Prolog source files names to exclude (default is [])',
 			'exclude_directories(Files) option' - 'list of sub-directory names to exclude (default is [])',
 			'include_wrapped_files(Boolean)' - 'generate include/1 directives for the wrapped Prolog source files (default is true)'
 		]		
+	]).
+
+	:- uses(logtalk, [
+		print_message/3
 	]).
 
 	:- public(rdirectory/2).
@@ -391,7 +395,7 @@
 			atom_concat(File, Extension, Path),
 			os::file_exists(Path) ->
 			true
-		;	logtalk::print_message(warning, wrapper, file_not_found(File))
+		;	print_message(warning, wrapper, file_not_found(File))
 		),
 		logtalk_load_lint_options(LintOptions),
 		logtalk_load(Path, [hook(Self), source_data(on), reload(always)| LintOptions]).
@@ -420,33 +424,33 @@
 
 	print_advise :-
 		file_being_advised_(File, _, _, Object),
-		logtalk::print_message(information, wrapper, advise_for_file(File)),
+		print_message(information, wrapper, advise_for_file(File)),
 		print_advise(Object),
 		fail.
 	print_advise.
 
 	print_advise(Object) :-
 		\+ \+ add_directive_before_entity_(Object, _),
-		logtalk::print_message(information(code), wrapper, add_directives_before_entity),
+		print_message(information(code), wrapper, add_directives_before_entity),
 		add_directive_before_entity_(Object, Directive),
-		logtalk::print_message(information(code), wrapper, add_directive_before_entity(Directive)),
+		print_message(information(code), wrapper, add_directive_before_entity(Directive)),
 		fail.
 	print_advise(Object) :-
 		\+ \+ add_directive_(Object, _),
-		logtalk::print_message(information(code), wrapper, add_directives),
+		print_message(information(code), wrapper, add_directives),
 		add_directive_(Object, Directive),
-		logtalk::print_message(information(code), wrapper, add_directive(Directive)),
+		print_message(information(code), wrapper, add_directive(Directive)),
 		fail.
 	print_advise(Object) :-
 		\+ \+ add_directive_(Object, _, _),
 		add_directive_(Object, Directive, NewDirective),
-		logtalk::print_message(information(code), wrapper, add_directive(Directive, NewDirective)),
+		print_message(information(code), wrapper, add_directive(Directive, NewDirective)),
 		fail.
 	print_advise(Object) :-
 		\+ \+ remove_directive_(Object, _),
-		logtalk::print_message(information(code), wrapper, remove_directives),
+		print_message(information(code), wrapper, remove_directives),
 		remove_directive_(Object, Directive),
-		logtalk::print_message(information(code), wrapper, remove_directive(Directive)),
+		print_message(information(code), wrapper, remove_directive(Directive)),
 		fail.
 	print_advise(_).
 
@@ -474,7 +478,7 @@
 		atom_concat(Loader0, Extension, Loader),
 		open(Loader, write, Stream),
 		set_output(Stream),
-		logtalk::print_message(raw, wrapper, add_directive(initialization(logtalk_load(Objects)))),
+		print_message(raw, wrapper, add_directive(initialization(logtalk_load(Objects)))),
 		close(Stream),
 		fail.
 	save_wrapper_objects(_).
@@ -482,29 +486,29 @@
 	save_wrapper_object(Object, _, _) :-
 		\+ \+ add_directive_before_entity_(Object, _),
 		add_directive_before_entity_(Object, Directive),
-		logtalk::print_message(raw, wrapper, add_directive_before_entity(Directive)),
+		print_message(raw, wrapper, add_directive_before_entity(Directive)),
 		fail.
 	save_wrapper_object(Object, _, _) :-
-		logtalk::print_message(raw, wrapper, add_directive(object(Object))),
+		print_message(raw, wrapper, add_directive(object(Object))),
 		fail.
 	save_wrapper_object(Object, _, _) :-
 		\+ \+ add_directive_(Object, _),
 		add_directive_(Object, Directive),
-		logtalk::print_message(raw, wrapper, add_directive(Directive)),
+		print_message(raw, wrapper, add_directive(Directive)),
 		fail.
 	save_wrapper_object(Object, _, _) :-
 		\+ \+ add_directive_(Object, _, _),
 		add_directive_(Object, Directive, NewDirective),
-		logtalk::print_message(raw, wrapper, add_directive(Directive, NewDirective)),
+		print_message(raw, wrapper, add_directive(Directive, NewDirective)),
 		fail.
 	save_wrapper_object(_, Path, Options) :-
 		memberchk(include_wrapped_files(true), Options),
 		os::decompose_file_name(Path, _, Name, Extension),
 		atom_concat(Name, Extension, File),
-		logtalk::print_message(raw, wrapper, add_directive(include(File))),
+		print_message(raw, wrapper, add_directive(include(File))),
 		fail.
 	save_wrapper_object(_, _, _) :-
-		logtalk::print_message(raw, wrapper, add_directive(end_object)),
+		print_message(raw, wrapper, add_directive(end_object)),
 		fail.
 	save_wrapper_object(_, _, _).
 
@@ -640,7 +644,7 @@
 
 	unknown_predicates_called_advise(Object) :-
 		unknown_predicate_called_(Object, Predicate),
-		logtalk::print_message(warning, wrapper, unknown_predicate_called(Object, Predicate)),
+		print_message(warning, wrapper, unknown_predicate_called(Object, Predicate)),
 		fail.
 	unknown_predicates_called_advise(_).
 
@@ -670,9 +674,9 @@
 		),
 		normalize_directory_paths(Directories, NormalizedDirectories).
 
-	% by default, use only the most common Prolog source file extension:
-	default_option(prolog_extensions(['.pl'])).
-	% by default, use only the most common Logtalk source file extension:
+	% by default, use the most common Prolog source file extensions:
+	default_option(prolog_extensions(['.pl', '.pro', '.prolog'])).
+	% by default, use the common Logtalk source file extension:
 	default_option(logtalk_extension('.lgt')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
