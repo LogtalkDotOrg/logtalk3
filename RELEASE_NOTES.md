@@ -44,7 +44,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * CHANGED: Also optimize message sending goals in plain Prolog source files
-when using SWI-Prolog or YAP.
+and message sending goals from `user` in Logtalk source files when using YAP
+or SWI-Prolog.
 
 * ADDED: Normalization of arithmetic evaluation errors when using XSB.
 
@@ -102,7 +103,7 @@ Tests
 
 * ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.
 
-* UPDATED: Unit tests for the `securemp` example to taske into account that
+* UPDATED: Unit tests for the `securemp` example to take into account that
 message sending goals from `user` may be optimized.
 
 Installers and installation scripts

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on October 26, 2016
+%  Last updated on October 27, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -809,7 +809,6 @@ user:goal_expansion(phrase(Rule, Input), ExpandedGoal) :-
 	'$lgt_user_module_qualification'('$lgt_phrase'(Rule, Input, ExCtx), ExpandedGoal).
 % optimize messages sent from within modules
 user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
-	\+ logtalk_load_context(_, _),
 	prolog_load_context(module, Module),
 	(	Module == user ->
 		Events = allow
