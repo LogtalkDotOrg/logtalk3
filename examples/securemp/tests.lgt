@@ -22,33 +22,52 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2012/12/09,
+		date is 2016/10/27,
 		comment is 'Unit tests for the "securemp" example.'
 	]).
 
 	:- discontiguous(fails/1).
-	:- discontiguous(succeeds/1).
-	:- discontiguous(throws/2).
 
 	fails(rule_a) :-
 		logtalk_load(rule_a).				% compile-time error
 
-	throws(rule_a_variant, error(existence_error(procedure, scale/3), _)) :-
+	succeeds(rule_a_variant) :-
 		logtalk_load(rule_a_variant),		% runtime error
-		{client_a_variant::double([1,2,3], _)}.
+		catch({client_a_variant::double([1,2,3], _)}, error(existence_error(procedure,PI), _), true),
+		ground(PI),
+		(	PI == scale/3 ->
+			true
+		;	% the client_a_variant::double/2 message may be optimized
+			logtalk::decompile_predicate_indicators(PI, Entity, Type, DPI),
+			Entity == library_a_variant, Type == object, DPI == scale/3
+		).
 
 	succeeds(rule_b_1) :-
 		logtalk_load(rule_b_1).
 
-	throws(rule_b_2, error(existence_error(procedure, term/0), _)) :-
+	succeeds(rule_b_2) :-
 		logtalk_load(rule_b_2),				% runtime error
-		{client_b_2::test}.
+		catch({client_b_2::test}, error(existence_error(procedure,PI), _), true),
+		ground(PI),
+		(	PI == term/0 ->
+			true
+		;	% the client_a_variant::double/2 message may be optimized
+			logtalk::decompile_predicate_indicators(PI, Entity, Type, DPI),
+			Entity == library_b_2, Type == object, DPI == term/0
+		).
 
-	throws(rule_b_3, error(existence_error(procedure, a/2), _)) :-
+	succeeds(rule_b_3) :-
 		logtalk_load(rule_b_3),				% runtime error
-		{client_b_3::test(_)}.
+		catch({client_b_3::test(_)}, error(existence_error(procedure,PI), _), true),
+		ground(PI),
+		(	PI == a/2 ->
+			true
+		;	% the client_a_variant::double/2 message may be optimized
+			logtalk::decompile_predicate_indicators(PI, Entity, Type, DPI),
+			Entity == library_b_3, Type == object, DPI == a/2
+		).
 
 	succeeds(rule_b_3_variant) :-
 		logtalk_load(rule_b_3_variant),		% suspicious meta-predicate

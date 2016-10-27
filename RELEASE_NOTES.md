@@ -102,6 +102,9 @@ Tests
 
 * ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.
 
+* UPDATED: Unit tests for the `securemp` example to taske into account that
+message sending goals from `user` may be optimized.
+
 Installers and installation scripts
 -----------------------------------
 
