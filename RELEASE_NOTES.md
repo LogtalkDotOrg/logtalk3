@@ -36,6 +36,10 @@ directives in a source file in the generated code.
 * FIXED: Compiler internal declaration of the `threaded_engine_fetch/1` as a
 built-in predicate.
 
+* FIXED: Checking that an object exists at runtime when sending trivial
+messages (such as `true/0` or `repeat/0`) would fail to check for
+instantiation errors.
+
 Prolog adapter and integration files
 ------------------------------------
 

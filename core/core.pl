@@ -2893,7 +2893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc7)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc8)).
 
 
 
@@ -2906,6 +2906,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_object_exists'(@var, +callable, +object_identifier)
 % '$lgt_object_exists'(+object_identifier, +callable, +object_identifier)
 %
 % checks if an object exists at runtime; this is necessary in order to
@@ -2914,7 +2915,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % calls
 
 '$lgt_object_exists'(Obj, Pred, Sender) :-
-	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
+	(	var(Obj) ->
+		throw(error(instantiation_error, logtalk(Obj::Pred, Sender)))
+	;	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	% we have already verified that Obj is a valid object identifier when
 		% we generated the call to this predicate
