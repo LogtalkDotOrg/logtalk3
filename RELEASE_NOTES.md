@@ -88,6 +88,10 @@ Tools
 
 * ADDED: Predicate `lgtunit::run_test/1` for running an individual test.
 
+* ADDED: Predicate `lgtunit::benchmark/4` supporting the specification of
+the clock to be used (either `cpu` or `wall`). The `wall` clock is useful
+for benchmarking goals that spawn threads.
+
 * IMPROVED: Documentation of the `wrapper` tool and added `.prolog` and
 `.pro` file extensions to the default list of recognized Prolog file name
 extensions.

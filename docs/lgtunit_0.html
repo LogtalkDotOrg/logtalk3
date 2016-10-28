@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>3.4</code>
+            <code>3.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/10/24</code>
+            <code>2016/10/27</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -254,6 +254,30 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>benchmark(+callable,+integer,-float) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="benchmark/4" class="code">benchmark/4</h3>
+          <blockquote>
+            <p class="comment">Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>benchmark(Goal,Repetitions,Clock,Time)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>benchmark(0,*,*,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>benchmark(+callable,+integer,+atom,-float) &ndash; one</code>
             </dd>
           </dl>
         </div>

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.4,
+		version is 3.5,
 		author is 'Paulo Moura',
-		date is 2016/10/24,
+		date is 2016/10/27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -102,6 +102,14 @@
 	:- info(benchmark/3, [
 		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Repetitions', 'Time']
+	]).
+
+	:- public(benchmark/4).
+	:- meta_predicate(benchmark(0, *, *, *)).
+	:- mode(benchmark(+callable, +integer, +atom, -float), one).
+	:- info(benchmark/4, [
+		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.',
+		argnames is ['Goal', 'Repetitions', 'Clock', 'Time']
 	]).
 
 	:- public(variant/2).
@@ -1264,11 +1272,25 @@
 		Time is Time1 - Time0.
 
 	benchmark(Goal, Repetitions, Time) :-
+		benchmark_(cpu, Goal, Repetitions, Time).
+
+	benchmark(Goal, Repetitions, Clock, Time) :-
+		benchmark_(Clock, Goal, Repetitions, Time).
+
+	:- meta_predicate(benchmark_(*, 0, *, *)).
+	benchmark_(cpu, Goal, Repetitions, Time) :-
 		os::cpu_time(Time0),
 		empty_loop(Repetitions),
 		os::cpu_time(Time1),
 		goal_loop(Goal, Repetitions),
 		os::cpu_time(Time2),
+		Time is Time2 - 2*Time1 + Time0.
+	benchmark_(wall, Goal, Repetitions, Time) :-
+		os::wall_time(Time0),
+		empty_loop(Repetitions),
+		os::wall_time(Time1),
+		goal_loop(Goal, Repetitions),
+		os::wall_time(Time2),
 		Time is Time2 - 2*Time1 + Time0.
 
 	empty_loop(Repetitions) :-
