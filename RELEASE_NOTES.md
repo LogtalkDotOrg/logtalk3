@@ -27,6 +27,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Inline calls in linking clauses to entity local predicates, to Prolog
+module, built-in, and foreign predicates, and to predicates defined in the
+`user` pseudo-object when compiling source files with the `optimize` flag
+turned on.
+
+* ADDED: Predicate property and predicate definition property `inline`.
+
 * FIXED: Static binding of a closure meta-argument that is an alias to another
 predicate.
 
@@ -47,6 +54,9 @@ Prolog adapter and integration files
 and message sending goals from `user` in Logtalk source files when using YAP
 or SWI-Prolog.
 
+* CHANGED: Moved the dependency on the `standard:datime/1` predicate from the
+XSB adapter file, where it is no longer used, to the library `os` object.
+
 * ADDED: Normalization of arithmetic evaluation errors when using XSB.
 
 * ADDED: Definition for the SWI-Prolog `prolog:make_hook/2` hook predicate to
@@ -57,22 +67,6 @@ predicate for SWI-Prolog.
 
 * FIXED: Compilation of SWI-Prolog proprietary directives when decorating the
 generated code with source location data.
-
-Logtalk compiler and runtime
-----------------------------
-
-* NEW: Inline calls in linking clauses to entity local predicates, to Prolog
-module, built-in, and foreign predicates, and to predicates defined in the
-`user` pseudo-object when compiling source files with the `optimize` flag
-turned on.
-
-* ADDED: Predicate property and predicate definition property `inline`.
-
-Prolog adapter and integration files
-------------------------------------
-
-* CHANGED: Moved the dependency on the `standard:datime/1` predicate from the
-XSB adapter file, where it is no longer used, to the library `os` object.
 
 Documentation
 -------------
