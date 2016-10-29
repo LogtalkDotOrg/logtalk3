@@ -348,5 +348,9 @@ Prolog file and then load it and create the diagram:
 Other notes
 -----------
 
+The zoom icons, `zoom.png` and `zoom.svg` have been designed by Victor Erixon:
+
+	https://www.iconfinder.com/iconsets/eightyshades
+
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
