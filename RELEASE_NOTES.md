@@ -90,6 +90,9 @@ for benchmarking goals that spawn threads.
 `.pro` file extensions to the default list of recognized Prolog file name
 extensions.
 
+* FIXED: Bug in the generation of library cross-referencing diagrams where
+all external predicates would be assigned to the `user` pseudo-object.
+
 Examples
 --------
 
