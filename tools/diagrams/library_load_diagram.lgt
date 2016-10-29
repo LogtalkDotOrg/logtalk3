@@ -38,8 +38,15 @@
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions0),
-		entity_diagram::diagram_name_suffix(Suffix),
-		^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions),
+		(	logtalk::loaded_file_property(File, library(Library)),
+			(	logtalk::loaded_file_property(File, object(_))
+			;	logtalk::loaded_file_property(File, protocol(_))
+			;	logtalk::loaded_file_property(File, category(_))
+			) ->
+			entity_diagram::diagram_name_suffix(Suffix),
+			^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions)
+		;	NodeOptions = NodeOptions0
+		),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)
 		;	^^output_node(Relative, Library, library, [], library, NodeOptions)
