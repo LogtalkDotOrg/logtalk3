@@ -86,6 +86,9 @@ Tools
 the clock to be used (either `cpu` or `wall`). The `wall` clock is useful
 for benchmarking goals that spawn threads.
 
+* ADDED: Zoom option to the `diagrams` tool that allows linking library
+diagrams to entity diagrams to predicate cross-referencing diagrams.
+
 * IMPROVED: Documentation of the `wrapper` tool and added `.prolog` and
 `.pro` file extensions to the default list of recognized Prolog file name
 extensions.

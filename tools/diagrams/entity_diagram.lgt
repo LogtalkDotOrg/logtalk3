@@ -22,7 +22,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
 		date is 2016/10/29,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -249,7 +249,11 @@
 		;	Resources = []
 		),
 		object_name_kind_caption(Object, Name, Kind, Caption),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
+		{xref_diagram::diagram_name_suffix(Suffix0)},
+		atom_concat('_object', Suffix0, Suffix),
+		NodeOptions0 = Options,
+		^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
@@ -277,7 +281,11 @@
 		;	Resources = []
 		),
 		category_name_kind_caption(Category, Name, Kind, Caption),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
+		{xref_diagram::diagram_name_suffix(Suffix0)},
+		atom_concat('_category', Suffix0, Suffix),
+		NodeOptions0 = Options,
+		^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -725,6 +733,10 @@
 	default_option(omit_path_prefixes([])).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
+	% by default, don't zooming into libraries and entities:
+	default_option(zoom(false)).
+	% by default, use a '.svg' extension for zoom linked diagrams
+	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_entity_diagram').
 

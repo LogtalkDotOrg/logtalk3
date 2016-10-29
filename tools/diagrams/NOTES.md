@@ -27,6 +27,10 @@ the diagrams. Limited support is also available for generating diagrams
 for Prolog module applications. It's also possible to generate predicate
 cross-referencing diagrams for plain Prolog files.
 
+Linking library diagrams to entity diagrams to predicate cross-referencing
+diagrams is also supported when using SVG output. This feature allows using
+diagrams for navigating complex code by zooming into details.
+
 
 API documentation
 -----------------
@@ -231,6 +235,10 @@ generated diagrams. For entity diagrams the options are:
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
+- `zoom(Boolean)`  
+	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
+- `zoom_url_suffix(Suffix)`  
+	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
 For file diagrams the options are:
 
@@ -260,6 +268,41 @@ For file diagrams the options are:
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
 	list of sub-libraries to exclude (default is `[]`)
+- `zoom(Boolean)`  
+	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
+- `zoom_url_suffix(Suffix)`  
+	extension for zoom linked diagrams (an atom; default is `'.svg'`)
+
+For library diagrams the options are:
+
+- `layout(Layout)`  
+	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default depends on the kind of diagram)
+- `title(Title)`  
+	diagram title (an atom; default is `''`)
+- `date(Boolean)`  
+	print/omit current date and time (`true` or `false`; default is `true`)
+- `directory_paths(Boolean)`  
+	print/omit file directory paths (`true` or `false`; default is `false`)
+- `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
+	code and documenting URL prefixes for a path prefix used when generating cluster, library, file, and entity links (atoms; no default)
+- `url_prefixes(CodeURLPrefix, DocURLPrefix)`  
+	default URL code and documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
+- `omit_path_prefixes(Prefixes)`  
+	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
+- `relation_labels(Boolean)`  
+	print/omit entity relation labels (`true` or `false`; default is `false`)
+- `node_type_captions(Boolean)`  
+	print/omit node type captions (`true` or `false`; default is `false`)
+- `output_directory(Directory)`  
+	directory for the .dot files (an atom; default is `'./'`)
+- `exclude_files(Files)`  
+	list of source files to exclude (default is `[]`)
+- `exclude_libraries(Libraries)`  
+	list of sub-libraries to exclude (default is `[]`)
+- `zoom(Boolean)`  
+	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
+- `zoom_url_suffix(Suffix)`  
+	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
 The option `omit_path_prefixes(Prefixes)` with a non-empty list of prefixes
 should be used together with the option `directory_paths(true)`, in particular

@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/05/16,
+		date is 2016/10/29,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -426,6 +426,16 @@
 		nonvar(Format),
 		graph_language_registry::language_object(Format, Object).
 
+	:- public(diagram_name_suffix/1).
+	:- mode(diagram_name_suffix(-atom), one).
+	:- info(diagram_name_suffix/1, [
+		comment is 'Returns the diagram name suffix.',
+		argnames is ['Suffix']
+	]).
+
+	% default value
+	diagram_name_suffix('_diagram').
+
 	:- public(default_option/1).
 	:- mode(default_option(?compound), zero_or_more).
 	:- info(default_option/1, [
@@ -636,16 +646,6 @@
 				member(Source, [ExcludedFile| ExcludedFiles])
 		).
 
-	:- protected(diagram_name_suffix/1).
-	:- mode(diagram_name_suffix(-atom), one).
-	:- info(diagram_name_suffix/1, [
-		comment is 'Returns the diagram name suffix.',
-		argnames is ['Suffix']
-	]).
-
-	% default value
-	diagram_name_suffix('_diagram').
-
 	:- protected(output_file_path/4).
 	:- mode(output_file_path(+atom, +list(atom), +object_identifier, -atom), one).
 	:- info(output_file_path/4, [
@@ -852,6 +852,33 @@
 			atom_concat(Prefix, Relative, Path) ->
 			true
 		;	Relative = Path
+		).
+
+	:- protected(add_node_zoom_option/5).
+	:- mode(add_node_zoom_option(+atom, +atom, +list(compound), +list(compound), -list(compound)), one).
+	:- info(add_node_zoom_option/5, [
+		comment is 'Adds node zoom options when using the zoom option.',
+		argnames is ['Identifier', 'Suffix', 'Options', 'NodeOptions0', 'NodeOptions']
+	]).
+
+	add_node_zoom_option(Identifier, Suffix, Options, NodeOptions0, NodeOptions) :-
+		(	member(zoom(false), Options) ->
+			NodeOptions = NodeOptions0
+		;	member(zoom_url_suffix(Extension), Options) ->
+			(	compound(Identifier) ->
+				functor(Identifier, Functor, Arity),
+				number_codes(Arity, ArityCodes),
+				atom_codes(ArityAtom, ArityCodes),
+				atom_concat(Functor, '_', Diagram0),
+				atom_concat(Diagram0, ArityAtom, Diagram1),
+				atom_concat(Diagram1, Suffix, Diagram2),
+				atom_concat(Diagram2, Extension, Diagram)
+			;	atom_concat(Identifier, Suffix, Diagram0),
+				atom_concat(Diagram0, Extension, Diagram)
+			),
+			NodeOptions = [zoom_url(Diagram)| NodeOptions0]
+		;	% this case should never occur as the zoom_url_suffix/1 should be always defined
+			NodeOptions = NodeOptions0
 		).
 
 :- end_category.

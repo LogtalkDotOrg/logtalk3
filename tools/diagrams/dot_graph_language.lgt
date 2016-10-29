@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/05/16,
+		date is 2016/10/29,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -162,22 +162,29 @@
 		),
 		write_key_value_comma(Stream, style, Style),
 		write_key_value_comma(Stream, fillcolor, Color),
-		write(Stream, 'label=<<FONT POINT-SIZE="11"><![CDATA['),
+		write(Stream, 'label=<<TABLE border="0" cellborder="0" cellspacing="0">'),
+		(	member(zoom_url(Diagram), Options) ->
+			write(Stream, '<TR><TD width="10" height="10" fixedsize="true" align="left" tooltip="Zoom" href="'),
+			write(Stream, Diagram),
+			write(Stream, '"><IMG SRC="zoom.png"/></TD></TR>')
+		;	true
+		),
+		write(Stream, '<TR><TD><FONT POINT-SIZE="11"><![CDATA['),
 		write(Stream, Label),
-		write(Stream, ']]></FONT>'),
+		write(Stream, ']]></FONT></TD></TR>'),
 		(	member(node_type_captions(true), Options),
 			Caption \== '' ->
-			write(Stream, '<BR /><FONT POINT-SIZE="7"><![CDATA['),
+			write(Stream, '<TR><TD><FONT POINT-SIZE="7"><![CDATA['),
 			write(Stream, Caption),
-			write(Stream, ']]></FONT>')
+			write(Stream, ']]></FONT></TD></TR>')
 		;	true
 		),
 		(	Contents == [] ->
 			true
-		;	write(Stream, '<BR/> <BR/>'),
-			write_lines(Contents, Stream)
+		;	write(Stream, '<TR><TD> </TD></TR>'),
+			write_node_lines(Contents, Stream)
 		),
-		write(Stream, '>]'), nl(Stream).
+		write(Stream, '</TABLE>>]'), nl(Stream).
 
 	% entities belonging to the file or library being documented
 	node_shape_style_color(prototype, box, filled, beige).
@@ -223,7 +230,7 @@
 		;	true
 		),
 		write(Stream, 'label=<'),
-		write_lines(Labels, Stream),
+		write_edge_lines(Labels, Stream),
 		write(Stream, '>]'), nl(Stream).
 
 	% entity relations
@@ -260,11 +267,18 @@
 		write(Stream, Value),
 		write(Stream, '"').
 
-	write_lines([], _).
-	write_lines([Line| Lines], Stream) :-
+	write_node_lines([], _).
+	write_node_lines([Line| Lines], Stream) :-
+		write(Stream, '<TR><TD><![CDATA['),
+		write(Stream, Line),
+		write(Stream, ']]></TD></TR>'),
+		write_node_lines(Lines, Stream).
+
+	write_edge_lines([], _).
+	write_edge_lines([Line| Lines], Stream) :-
 		write(Stream, '<![CDATA['),
 		write(Stream, Line),
 		write(Stream, ']]><BR/>'),
-		write_lines(Lines, Stream).
+		write_edge_lines(Lines, Stream).
 
 :- end_object.

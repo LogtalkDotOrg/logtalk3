@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2016/10/29,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -37,7 +37,9 @@
 	output_library(Library, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		^^add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions),
+		^^add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions0),
+		entity_diagram::diagram_name_suffix(Suffix),
+		^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)
 		;	^^output_node(Relative, Library, library, [], library, NodeOptions)
@@ -106,6 +108,10 @@
 	default_option(exclude_libraries([])).
 	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('directory_index.html', '#')).
+	% by default, don't zooming into libraries and entities:
+	default_option(zoom(false)).
+	% by default, use a '.svg' extension for zoom linked diagrams
+	default_option(zoom_url_suffix('.svg')).
 
 	diagram_name_suffix('_library_load_diagram').
 
