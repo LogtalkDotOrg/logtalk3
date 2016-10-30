@@ -58,7 +58,7 @@
 		node_type_captions(true),
 		output_directory(docs),
 		url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'),
-		omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])
+		omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/'])
 	]).
 
 	tool(Tool) :-
