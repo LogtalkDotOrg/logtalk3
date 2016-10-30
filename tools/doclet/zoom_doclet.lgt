@@ -22,9 +22,9 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/10/30,
 		comment is 'Example of a doclet object generating linking diagrams using the zoom/1 option.'
 	]).
 
@@ -47,18 +47,18 @@
 		common_options(Options).
 
 	% define one clause per shell command to be executed
-	shell_command('cd docs && lgt2html -t "API documentation for the lgtunit tool"').
-	shell_command('cd docs && cp $LOGTALKUSER/tools/diagrams/zoom.png .').
-	shell_command('cd docs && dot -Tsvg dead_code_scanner_entity_diagram.dot > dead_code_scanner_entity_diagram.svg').
-	shell_command('cd docs && dot -Tsvg dead_code_scanner_object_xref_diagram.dot > dead_code_scanner_object_xref_diagram.svg').
-	shell_command('cd docs && dot -Tsvg dead_code_scanner_messages_category_xref_diagram.dot > dead_code_scanner_messages_category_xref_diagram.svg').
-	shell_command('cd docs && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && lgt2html -t "API documentation for the lgtunit tool"').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && cp $LOGTALKUSER/tools/diagrams/zoom.png .').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && dot -Tsvg dead_code_scanner_entity_diagram.dot > dead_code_scanner_entity_diagram.svg').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && dot -Tsvg dead_code_scanner_object_xref_diagram.dot > dead_code_scanner_object_xref_diagram.svg').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && dot -Tsvg dead_code_scanner_messages_category_xref_diagram.dot > dead_code_scanner_messages_category_xref_diagram.svg').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
 
 	% auxiliary predicates
 
 	common_options([
 		node_type_captions(true),
-		output_directory(docs),
+		output_directory('$LOGTALKUSER/tools/doclet/docs'),
 		url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'),
 		omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/'])
 	]).

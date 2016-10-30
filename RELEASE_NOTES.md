@@ -109,6 +109,9 @@ all external predicates would be assigned to the `user` pseudo-object.
 * FIXED: Represent non-terminal callers in entity predicate cross-referencing
 diagrams as non-terminals instead of using the corresponding predicate form.
 
+* FIXED: Example doclets to prevent issues with different concepts of working
+directory across supported backend Prolog compilers.
+
 Examples
 --------
 

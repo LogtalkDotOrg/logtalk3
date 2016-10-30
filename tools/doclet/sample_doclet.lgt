@@ -22,9 +22,9 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/09/29,
+		date is 2016/10/30,
 		comment is 'Example of a doclet object.'
 	]).
 
@@ -38,11 +38,11 @@
 	% (these goals will be called in the context of "user")
 	doc_goal(logtalk_load([lgtunit(loader), lgtdoc(loader), diagrams(loader)])).
 	doc_goal(lgtdoc::library(lgtunit, [xml_docs_directory(docs)])).
-	doc_goal(entity_diagram::library(lgtunit, [title('Logtalk lgtunit tool'), node_type_captions(true), output_directory(docs)])).
+	doc_goal(entity_diagram::library(lgtunit, [title('Logtalk lgtunit tool'), node_type_captions(true), output_directory('$LOGTALKUSER/tools/doclet/docs')])).
 
 	% define one clause per shell command to be executed
-	shell_command('cd docs && lgt2html -t "API documentation for the lgtunit tool"').
-	shell_command('cd docs && dot -Tpdf lgtunit_entity_diagram.dot > lgtunit_entity_diagram.pdf').
-	shell_command('cd docs && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && lgt2html -t "API documentation for the lgtunit tool"').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && dot -Tpdf lgtunit_entity_diagram.dot > lgtunit_entity_diagram.pdf').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
 
 :- end_object.
