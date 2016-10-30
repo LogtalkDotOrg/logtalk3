@@ -39,9 +39,12 @@
 	doc_goal(set_logtalk_flag(source_data, on)).
 	doc_goal(logtalk_load([dead_code_scanner(loader), lgtdoc(loader), diagrams(loader)])).
 	doc_goal(lgtdoc::library(dead_code_scanner, [xml_docs_directory(docs)])).
-	doc_goal(entity_diagram::library(dead_code_scanner, [title('Dead code scanner tool'), node_type_captions(true), output_directory(docs), zoom(true)])).
-	doc_goal(xref_diagram::entity(dead_code_scanner, [title('Dead code scanner main code'), node_type_captions(true), output_directory(docs)])).
-	doc_goal(xref_diagram::entity(dead_code_scanner_messages, [title('Dead code scanner messages'), node_type_captions(true), output_directory(docs)])).
+	doc_goal(entity_diagram::library(dead_code_scanner, [title('Dead code scanner tool'), zoom(true)| Options])) :-
+		common_options(Options).
+	doc_goal(xref_diagram::entity(dead_code_scanner, [title('Dead code scanner main code')| Options])) :-
+		common_options(Options).
+	doc_goal(xref_diagram::entity(dead_code_scanner_messages, [title('Dead code scanner messages')| Options])) :-
+		common_options(Options).
 
 	% define one clause per shell command to be executed
 	shell_command('cd docs && lgt2html -t "API documentation for the lgtunit tool"').
@@ -50,5 +53,14 @@
 	shell_command('cd docs && dot -Tsvg dead_code_scanner_object_xref_diagram.dot > dead_code_scanner_object_xref_diagram.svg').
 	shell_command('cd docs && dot -Tsvg dead_code_scanner_messages_category_xref_diagram.dot > dead_code_scanner_messages_category_xref_diagram.svg').
 	shell_command('cd docs && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
+
+	% auxiliary predicates
+
+	common_options([
+		node_type_captions(true),
+		output_directory(docs),
+		url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'),
+		omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])
+	]).
 
 :- end_object.
