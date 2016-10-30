@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.3</code>
+            <code>2.4</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/5/16</code>
+            <code>2016/10/29</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -435,6 +435,26 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="diagram_name_suffix/1" class="code">diagram_name_suffix/1</h3>
+          <blockquote>
+            <p class="comment">Returns the diagram name suffix.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>diagram_name_suffix(Suffix)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>diagram_name_suffix(-atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="default_option/1" class="code">default_option/1</h3>
           <blockquote>
             <p class="comment">Enumerates by backtracking the default options used when generating a diagram.</p>
@@ -714,26 +734,6 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="diagram_name_suffix/1" class="code">diagram_name_suffix/1</h3>
-          <blockquote>
-            <p class="comment">Returns the diagram name suffix.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>diagram_name_suffix(Suffix)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>diagram_name_suffix(-atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
           <h3 id="output_file_path/4" class="code">output_file_path/4</h3>
           <blockquote>
             <p class="comment">Returns the output file path.</p>
@@ -850,6 +850,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>omit_path_prefix(+atom,+list(compound),-atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="add_node_zoom_option/5" class="code">add_node_zoom_option/5</h3>
+          <blockquote>
+            <p class="comment">Adds node zoom options when using the zoom option.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>add_node_zoom_option(Identifier,Suffix,Options,NodeOptions0,NodeOptions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>add_node_zoom_option(+atom,+atom,+list(compound),+list(compound),-list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
