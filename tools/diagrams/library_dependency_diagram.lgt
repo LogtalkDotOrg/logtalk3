@@ -45,7 +45,8 @@
 			) ->
 			entity_diagram::diagram_name_suffix(Suffix),
 			^^add_node_zoom_option(Library, Suffix, Options, NodeOptions0, NodeOptions)
-		;	NodeOptions = NodeOptions0
+		;	% no entities for this library; entity diagram empty
+			NodeOptions = NodeOptions0
 		),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)

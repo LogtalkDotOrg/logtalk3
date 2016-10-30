@@ -249,10 +249,16 @@
 		;	Resources = []
 		),
 		object_name_kind_caption(Object, Name, Kind, Caption),
+		% use the {}/1 control construct to avoid a warning do to the circular
+		% reference between this object and the xref_diagram object
 		{xref_diagram::diagram_name_suffix(Suffix0)},
 		atom_concat('_object', Suffix0, Suffix),
 		NodeOptions0 = Options,
-		^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions),
+		(	object_property(Object, defines(_, _)) ->
+			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)
+		;	% no defined predicates; xref diagram empty
+			NodeOptions = NodeOptions0
+		),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_object_relations(Object, Options).
 
@@ -281,10 +287,16 @@
 		;	Resources = []
 		),
 		category_name_kind_caption(Category, Name, Kind, Caption),
+		% use the {}/1 control construct to avoid a warning do to the circular
+		% reference between this object and the xref_diagram object
 		{xref_diagram::diagram_name_suffix(Suffix0)},
 		atom_concat('_category', Suffix0, Suffix),
 		NodeOptions0 = Options,
-		^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions),
+		(	category_property(Category, defines(_, _)) ->
+			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)
+		;	% no defined predicates; xref diagram empty
+			NodeOptions = NodeOptions0
+		),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
 		output_category_relations(Category, Options).
 
