@@ -38,9 +38,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.24,
+		version is 1.25,
 		author is 'Paulo Moura',
-		date is 2016/10/18,
+		date is 2016/10/29,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -56,11 +56,25 @@
 			{shell(Command)}.
 
 		expand_path(Path, ExpandedPath) :-
+			catch(
+				expand_path_(Path, ExpandedPath),
+				error(existence_error(variable,_), _),
+				expand_only_directory_part(Path, ExpandedPath)
+			).
+
+		expand_path_(Path, ExpandedPath) :-
 			{working_directory(Current, Current)},
 			(	{absolute_file_name(Path, [expand(true), relative_to(Current), file_errors(fail)], ExpandedPath)} ->
 				true
 			;	{absolute_file_name(Path, [expand(true), relative_to(Current), file_type(directory), file_errors(fail)], ExpandedPath)}
 			).
+
+		% workaround to expand file names such as Sample$Config.class where
+		% SWI-Prolog will try to expand $Config as an environment variable
+		expand_only_directory_part(Path, ExpandedPath) :-
+			decompose_file_name(Path, Directory, Name, Extension),
+			expand_path_(Directory, ExpandedDirectory),
+			atomic_list_concat([ExpandedDirectory, Name, Extension], ExpandedPath).
 
 		make_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
