@@ -106,6 +106,9 @@ extensions.
 * FIXED: Bug in the generation of library cross-referencing diagrams where
 all external predicates would be assigned to the `user` pseudo-object.
 
+* FIXED: Represent non-terminal callers in entity predicate cross-referencing
+diagrams as non-terminals instead of using the corresponding predicate form.
+
 Examples
 --------
 

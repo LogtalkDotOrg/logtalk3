@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/10/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -129,12 +129,21 @@
 		fail.
 	process(Kind, Entity, Options) :-
 		Kind \== protocol,
-		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
-		\+ member(auxiliary, Properties),
+		entity_property(Kind, Entity, provides(Predicate, To, ProvidesProperties)),
+		\+ member(auxiliary, ProvidesProperties),
 		(	Kind == module ->
 			memberchk(node_type_captions(Boolean), Options),
 			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, [node_type_captions(Boolean)]),
 			assertz(included_predicate_(':'(To,Predicate)))
+		;	(	current_object(To) ->
+				ToKind = object
+			;	ToKind = category
+			),
+			entity_property(ToKind, To, declares(Predicate, DeclaresProperties)),
+			member(non_terminal(NonTerminal), DeclaresProperties) ->
+			add_predicate_documentation_url(Options, Entity, To::NonTerminal, PredicateOptions),
+			^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
+			assertz(included_predicate_(To::NonTerminal))
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
 			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
 			assertz(included_predicate_(To::Predicate))
@@ -264,7 +273,17 @@
 			Callee = CalleeNonTerminal
 		;	Callee = Callee0
 		),
-		(	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+		(	Caller0 = From::Predicate ->
+			(	current_object(From) ->
+				FromKind = object
+			;	FromKind = category
+			),
+			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
+			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
+				Caller = From::NonTerminal
+			;	Caller = From::Predicate
+			)
+		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
 			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
 			Caller = CallerNonTerminal
 		;	Caller = Caller0
