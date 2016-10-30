@@ -162,21 +162,21 @@
 		),
 		write_key_value_comma(Stream, style, Style),
 		write_key_value_comma(Stream, fillcolor, Color),
-		write(Stream, 'label=<<TABLE border="0" cellborder="0" cellspacing="0">'),
+		write(Stream, 'label=<<TABLE border="0" cellborder="0" cellspacing="0" cellpadding="0">'),
 		(	member(zoom_url(Diagram), Options) ->
-			write(Stream, '<TR><TD width="10" height="10" fixedsize="true" align="left" tooltip="Zoom" href="'),
+			write(Stream, '<TR><TD width="11" height="11" fixedsize="true" align="left" tooltip="Zoom" href="'),
 			write(Stream, Diagram),
 			write(Stream, '"><IMG SRC="zoom.png"/></TD></TR>')
 		;	true
 		),
-		write(Stream, '<TR><TD><FONT POINT-SIZE="11"><![CDATA['),
+		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11"><![CDATA['),
 		write(Stream, Label),
-		write(Stream, ']]></FONT></TD></TR>'),
+		write(Stream, ']]></FONT></TD><TD> </TD></TR>'),
 		(	member(node_type_captions(true), Options),
 			Caption \== '' ->
-			write(Stream, '<TR><TD><FONT POINT-SIZE="7"><![CDATA['),
+			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7"><![CDATA['),
 			write(Stream, Caption),
-			write(Stream, ']]></FONT></TD></TR>')
+			write(Stream, ']]></FONT></TD><TD> </TD></TR>')
 		;	true
 		),
 		(	Contents == [] ->
@@ -269,9 +269,9 @@
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
-		write(Stream, '<TR><TD><![CDATA['),
+		write(Stream, '<TR><TD> </TD><TD><![CDATA['),
 		write(Stream, Line),
-		write(Stream, ']]></TD></TR>'),
+		write(Stream, ']]></TD><TD> </TD></TR>'),
 		write_node_lines(Lines, Stream).
 
 	write_edge_lines([], _).
