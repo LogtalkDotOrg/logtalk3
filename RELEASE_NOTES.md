@@ -80,6 +80,8 @@ directives regarding using declared non-terminals as arguments to the
 Library
 -------
 
+* ADDED: Predicate `make_library_path/1` to the `os` library.
+
 * FIXED: Added workaround to the `os` library when using SWI-Prolog as the
 backend compiler to allow correct expansion of Java file names with a `$`
 in the middle of the name.

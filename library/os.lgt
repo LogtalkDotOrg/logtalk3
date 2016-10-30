@@ -25,6 +25,8 @@
 	:- use_module(library(calendar)).
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
+:- elif(current_logtalk_flag(prolog_dialect, swi)).
+	:- use_module(library(filesex)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	:- import(from(/(datime,1), standard)).
 	:- import(from(/(expand_atom,2), standard)).
@@ -38,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.25,
+		version is 1.26,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/10/30,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -82,6 +84,10 @@
 				true
 			;	{make_directory(ExpandedPath)}
 			).
+
+		make_directory_path(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{make_directory_path(ExpandedPath)}.
 
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -188,6 +194,9 @@
 			;	{make_directory(ExpandedPath)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
+
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{delete_directory(ExpandedPath)}.
@@ -281,6 +290,9 @@
 				true
 			;	{path_sysop(mkdir, ExpandedPath)}
 			).
+
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -381,6 +393,9 @@
 				true
 			;	{make_directory(ExpandedPath)}
 			).
+
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -487,6 +502,9 @@
 			;	{make_directory(ExpandedPath)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
+
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{delete_directory(ExpandedPath)}.
@@ -585,6 +603,9 @@
 			;	{make_directory(Path)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
+
 		delete_directory(Directory) :-
 			expand_path(Directory, Path),
 			{delete_directory(Path)}.
@@ -678,6 +699,9 @@
 				true
 			;	{mkdir(ExpandedPath)}
 			).
+
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
 			{canonical_path_name(Directory, ExpandedPath),
@@ -785,6 +809,9 @@
 			;	{make_directory(ExpandedPath)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
+
 		delete_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
 			 delete_directory(ExpandedPath)}.
@@ -888,6 +915,9 @@
 			;	{fs_mkdir(ExpandedPath)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
+
 		delete_directory(_) :-
 			throw(not_available(delete_directory/1)).
 
@@ -989,6 +1019,15 @@
 			(	{access(ExpandedPath, 4, 0)} ->
 				true
 			;	atom_concat('mkdir "', ExpandedPath, Command0),
+				atom_concat(Command0, '"', Command),
+				{os(system(Command))}
+			).
+
+		make_directory_path(Directory) :-
+			{absolute_file_name(Directory, ExpandedPath)},
+			(	{access(ExpandedPath, 4, 0)} ->
+				true
+			;	atom_concat('mkdir -p "', ExpandedPath, Command0),
 				atom_concat(Command0, '"', Command),
 				{os(system(Command))}
 			).
@@ -1131,6 +1170,9 @@
 			;	{make_directory(ExpandedPath)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory(Directory).
+
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{delete_directory(ExpandedPath)}.
@@ -1262,6 +1304,14 @@
 			(	{absolute_file_name(Path, [access(exist), file_type(directory), file_errors(fail)], _)} ->
 				true
 			;	atom_concat('mkdir ', Path, Command),
+				{unix(system(Command))}
+			).
+
+		make_directory_path(Directory) :-
+			expand_path(Directory, Path),
+			(	{absolute_file_name(Path, [access(exist), file_type(directory), file_errors(fail)], _)} ->
+				true
+			;	atom_concat('mkdir -p ', Path, Command),
 				{unix(system(Command))}
 			).
 
@@ -1414,6 +1464,9 @@
 			;	{make_directory(ExpandedPath)}
 			).
 
+		make_directory_path(Directory) :-
+			make_directory(Directory).
+
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{delete_directory(ExpandedPath)}.
@@ -1509,6 +1562,9 @@
 				true
 			;	{make_directory(ExpandedPath)}
 			).
+
+		make_directory_path(Directory) :-
+			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -1612,5 +1668,50 @@
 			strrch1(Xs1, G, [X| Xs1], Ys)
 		;	strrch1(Xs1, G, Prev, Ys)
 		).
+
+	make_directory_path_portable(Path) :-
+		expand_path(Path, ExpandedPath),
+		(	directory_exists(ExpandedPath) ->
+			true
+		;	sub_atom(ExpandedPath, _, 1, 0, '/') ->
+			sub_atom(ExpandedPath, 0, _, 1, ExpandedPath1),
+			path_parts(ExpandedPath1, [], Parts)
+		;	path_parts(ExpandedPath, [], Parts)
+		),
+		make_parts(Parts).
+
+	path_parts(Path, Parts0, Parts) :-
+		decompose_file_name(Path, Directory, Name, Extension),
+		(	Path == Directory ->
+			atom_concat(Name, Extension, Part0),
+			atom_concat('/', Part0, Part),
+			Parts = [Part| Parts0]
+		;	Directory == ('/') ->
+			Parts = [Path| Parts0]
+		;	Directory = './' ->
+			atom_concat(Name, Extension, Part),
+			Parts = [Part| Parts0]
+		;	atom_concat(Name, Extension, Part0),
+			atom_concat('/', Part0, Part),
+			sub_atom(Directory, 0, _, 1, Directory1),
+			path_parts(Directory1, [Part| Parts0], Parts)
+		).
+
+	make_parts([]).
+	make_parts([Part| Parts]) :-
+		make_parts_(Parts, Part).
+
+	make_parts_([], Part) :-
+		(	directory_exists(Part) ->
+			true
+		;	make_directory(Part)
+		).
+	make_parts_([Part| Parts], Root) :-
+		(	directory_exists(Root) ->
+			true
+		;	make_directory(Root)
+		),
+		atom_concat(Root, Part, NewRoot),
+		make_parts_(Parts, NewRoot).
 
 :- end_object.

@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2016/09/26,
+		date is 2016/10/30,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -66,6 +66,13 @@
 	:- mode(make_directory(+atom), one).
 	:- info(make_directory/1, [
 		comment is 'Makes a new directory. Succeeds if the directory already exists.',
+		argnames is ['Directory']
+	]).
+
+	:- public(make_directory_path/1).
+	:- mode(make_directory_path(+atom), one).
+	:- info(make_directory_path/1, [
+		comment is 'Makes a new directory creatign all the intermediate directories if necessary. Succeeds if the directory already exists.',
 		argnames is ['Directory']
 	]).
 
