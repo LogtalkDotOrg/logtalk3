@@ -34,7 +34,8 @@ query to load and run a doclet is therefore:
 
 	| ?- logtalk_load([doclet(loader), doclet]).
 
-For usage examples see the `sample_doclet.lgt` and `doclet1.lgt` source files.
+For usage examples see the `sample_doclet.lgt`, `doclet1.lgt`,
+`zoom_doclet.lgt`, and `tools_doclet.lgt` source files.
 
 
 Loading
