@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on October 27, 2016
+%  Last updated on October 31, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -863,16 +863,18 @@ user:goal_expansion(phrase(Rule, Input), ExpandedGoal) :-
 	!,
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_user_module_qualification'('$lgt_phrase'(Rule, Input, ExCtx), ExpandedGoal).
-% optimize messages sent from within modules
+% optimize messages sent from modules (including "user")
 user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
-	prolog_load_context(module, Module),
-	(	Module == user ->
+	(	prolog_load_context(module, user) ->
 		Events = allow
 	;	'$lgt_compiler_flag'(events, Events)
 	),
-	% top-level goals make the next call fail
-	prolog_load_context(term_position, Position),
-	stream_position_data(line_count, Position, Line),
+	(	prolog_load_context(term_position, Position),
+		stream_position_data(line_count, Position, Line) ->
+		true
+	;	% top-level goal
+		Line = -1
+	),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, compile(aux), [], Line-Line),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail),
