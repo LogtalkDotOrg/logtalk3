@@ -101,6 +101,9 @@ diagrams to entity diagrams to predicate cross-referencing diagrams.
 * ADDED: Doclet example, `zoom_doclet`, illustrating generating linking
 diagrams using the `zoom/1` option.
 
+* IMPROVED: Predicate cross-referencing diagrams now include edges for
+predicates called in *self*.
+
 * IMPROVED: Documentation of the `wrapper` tool and added `.prolog` and
 `.pro` file extensions to the default list of recognized Prolog file name
 extensions.

@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/10/30,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -246,6 +246,7 @@
 	edge_arrow(provides_clauses, inv).
 	% cross-referencing predicate calls
 	edge_arrow(calls_predicate, rdiamond).
+	edge_arrow(calls_self_predicate, ordiamond).
 	% file relations
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).

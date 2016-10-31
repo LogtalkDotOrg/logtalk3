@@ -22,7 +22,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
 		date is 2016/10/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -157,6 +157,13 @@
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
 		fail.
 	process(Kind, Entity, Options) :-
+		calls_self_predicate(Kind, Entity, Caller, Callee),
+		\+ ^^edge(Caller, Callee, ['calls in self'], calls_self_predicate, _),
+		remember_referenced_predicate(Caller),
+		remember_referenced_predicate(Callee),
+		^^save_edge(Caller, Callee, ['calls in self'], calls_self_predicate, [tooltip('calls in self')| Options]),
+		fail.
+	process(Kind, Entity, Options) :-
 		calls_external_predicate(Kind, Entity, Caller, Callee),
 		remember_external_predicate(Callee),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
@@ -273,6 +280,27 @@
 			Callee = CalleeNonTerminal
 		;	Callee = Callee0
 		),
+		(	Caller0 = From::Predicate ->
+			(	current_object(From) ->
+				FromKind = object
+			;	FromKind = category
+			),
+			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
+			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
+				Caller = From::NonTerminal
+			;	Caller = From::Predicate
+			)
+		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+			Caller = CallerNonTerminal
+		;	Caller = Caller0
+		).
+
+	calls_self_predicate(Kind, Entity, Caller, Predicate) :-
+		Kind \== protocol,
+		entity_property(Kind, Entity, calls(::Predicate, CallsProperties)),
+		nonvar(Predicate),
+		memberchk(caller(Caller0), CallsProperties),
 		(	Caller0 = From::Predicate ->
 			(	current_object(From) ->
 				FromKind = object
