@@ -313,7 +313,7 @@
 	calls_self_predicate(Kind, Entity, Caller, Predicate) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(::Predicate, CallsProperties)),
-		nonvar(Predicate),
+		ground(Predicate),
 		memberchk(caller(Caller0), CallsProperties),
 		(	Caller0 = From::Predicate ->
 			(	current_object(From) ->
@@ -390,7 +390,7 @@
 	updates_self_predicate(Kind, Entity, Caller, Dynamic) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, updates(::Dynamic, CallsProperties)),
-		nonvar(Dynamic),
+		ground(Dynamic),
 		memberchk(caller(Caller0), CallsProperties),
 		(	Caller0 = From::Predicate ->
 			(	current_object(From) ->

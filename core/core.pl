@@ -13118,13 +13118,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(abolish(Pred), TPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, This, Self, _, _, _, _, Mode, _, Lines),
 	(	ground(Pred) ->
-		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_))
+		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_)),
+		'$lgt_remember_updated_self_predicate'(Mode, Pred, Head, Lines)
 	;	% partially instantiated predicate indicator; runtime check required
 		TPred = '$lgt_abolish'(Self, Pred, This, p(_))
-	),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	).
 
 '$lgt_compile_message_to_self'(assert(Clause), TPred, Ctx) :-
 	!,
@@ -13132,6 +13132,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(asserta(Clause), TPred, Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, This, Self, _, _, _, _, Mode, _, Lines),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p))
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
@@ -13139,15 +13140,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 			(	Body == true ->
 				TPred = '$lgt_asserta_fact_checked'(Self, Head, This, p(_), p(p))
 			;	TPred = '$lgt_asserta_rule_checked'(Self, Clause, This, p(_), p(p))
-			)
-		;	TPred = '$lgt_asserta_fact_checked'(Self, Clause, This, p(_), p(p))
+			),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
+		;	TPred = '$lgt_asserta_fact_checked'(Self, Clause, This, p(_), p(p)),
+			functor(Clause, Functor, Arity),
+			'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		)
-	),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	).
 
 '$lgt_compile_message_to_self'(assertz(Clause), TPred, Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, This, Self, _, _, _, _, Mode, _, Lines),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p))
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
@@ -13155,8 +13159,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 			(	Body == true ->
 				TPred = '$lgt_assertz_fact_checked'(Self, Head, This, p(_), p(p))
 			;	TPred = '$lgt_assertz_rule_checked'(Self, Clause, This, p(_), p(p))
-			)
-		;	TPred = '$lgt_assertz_fact_checked'(Self, Clause, This, p(_), p(p))
+			),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
+		;	TPred = '$lgt_assertz_fact_checked'(Self, Clause, This, p(_), p(p)),
+			functor(Clause, Functor, Arity),
+			'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		)
 	),
 	'$lgt_comp_ctx_self'(Ctx, Self),
@@ -13174,6 +13182,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(retract(Clause), TPred, Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, This, Self, _, _, _, _, Mode, _, Lines),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Self, Clause, This, p(_))
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
@@ -13183,8 +13192,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	Body == true ->
 				TPred = '$lgt_retract_fact_checked'(Self, Head, This, p(_))
 			;	TPred = '$lgt_retract_rule_checked'(Self, Clause, This, p(_))
-			)
-		;	TPred = '$lgt_retract_fact_checked'(Self, Clause, This, p(_))
+			),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
+		;	TPred = '$lgt_retract_fact_checked'(Self, Clause, This, p(_)),
+			functor(Clause, Functor, Arity),
+			'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		)
 	),
 	'$lgt_comp_ctx_self'(Ctx, Self),
@@ -13192,10 +13205,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(retractall(Head), TPred, Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, This, Self, _, _, _, _, Mode, _, Lines),
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Self, Head, This, p(_))
 	;	'$lgt_check'(callable, Head),
-		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_))
+		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_)),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_self_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 	),
 	'$lgt_comp_ctx_self'(Ctx, Self),
 	'$lgt_comp_ctx_this'(Ctx, This).
