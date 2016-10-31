@@ -23,11 +23,42 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2009/3/6,
+		date is 2016/10/30,
 		comment is 'Atom data type predicates.'
 	]).
+
+	:- public(replace_sub_atom/4).
+	:- mode(replace_sub_atom(+atom, +atom, +atom, ?atom), zero_or_one).
+	:- info(replace_sub_atom/4, [
+		comment is 'Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.',
+		argnames is ['Old', 'New', 'Input', 'Output']
+	]).
+
+	replace_sub_atom(Old, New, Input, Output) :-
+		atom_length(Old, Length),
+		(	Length =:= 0 ->
+			Output = Input
+		;	replace_sub_atom(Old, Length, New, Input, [Fragment| Fragments]),
+			append_fragments(Fragments, Fragment, Output)
+		).
+
+	replace_sub_atom(Old, Length, New, Input, Fragments) :-
+		(	sub_atom(Input, Before, Length, _, Old) ->
+			sub_atom(Input, 0, Before, _, Prefix),
+			Skip is Before + Length,
+			sub_atom(Input, Skip, _, 0, Suffix),
+			atom_concat(Prefix, New, Fragment),
+			Fragments = [Fragment| TailFragments],
+			replace_sub_atom(Old, Length, New, Suffix, TailFragments)
+		;	Fragments = [Input]
+		).
+
+	append_fragments([], Output, Output).
+	append_fragments([Fragment| Fragments], Previous, Output) :-
+		atom_concat(Previous, Fragment, Output0),
+		append_fragments(Fragments, Output0, Output).
 
 	valid(Atom) :-
 		atom(Atom).

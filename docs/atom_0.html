@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>1.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2009/3/6</code>
+            <code>2016/10/30</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -48,7 +48,24 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <p class="comment">(see related entities)</p>
+          <h3 id="replace_sub_atom/4" class="code">replace_sub_atom/4</h3>
+          <blockquote>
+            <p class="comment">Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>replace_sub_atom(Old,New,Input,Output)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>replace_sub_atom(+atom,+atom,+atom,?atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
         </div>
       </div>
       <div class="protected">

@@ -80,6 +80,9 @@ directives regarding using declared non-terminals as arguments to the
 Library
 -------
 
+* ADDED: Predicate `atom::replace_sub_atom/4` for replacing all occurrences
+of an atom by another atom in an atom.
+
 * ADDED: Predicate `make_library_path/1` to the `os` library.
 
 * FIXED: Added workaround to the `os` library when using SWI-Prolog as the
