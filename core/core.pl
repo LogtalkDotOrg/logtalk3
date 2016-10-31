@@ -378,6 +378,11 @@
 % '$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines)
 :- dynamic('$lgt_pp_calls_super_predicate_'/3).
 
+% '$lgt_pp_updates_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines)
+:- dynamic('$lgt_pp_updates_predicate_'/3).
+% '$lgt_pp_updates_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines)
+:- dynamic('$lgt_pp_updates_self_predicate_'/3).
+
 % '$lgt_pp_non_portable_predicate_'(Head, Lines)
 :- dynamic('$lgt_pp_non_portable_predicate_'/2).
 % '$lgt_pp_non_portable_function_'(Function, Lines)
@@ -783,6 +788,8 @@ object_property(Obj, Prop) :-
 	'$lgt_entity_property_alias'(Obj, Rnm, Flags, Alias, Properties).
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Obj, Predicate, Properties).
+'$lgt_object_property'(updates(Predicate, Properties), Obj, _, _, _, _, _, _) :-
+	'$lgt_entity_property_updates'(Obj, Predicate, Properties).
 '$lgt_object_property'(number_of_clauses(Total), Obj, _, _, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Obj, number_of_clauses(Total, _)) ->
 		true
@@ -879,6 +886,8 @@ category_property(Ctg, Prop) :-
 	'$lgt_entity_property_provides'(Ctg, Predicate, To, Properties).
 '$lgt_category_property'(calls(Predicate, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
+'$lgt_category_property'(updates(Predicate, Properties), Ctg, _, _, _, _) :-
+	'$lgt_entity_property_updates'(Ctg, Predicate, Properties).
 '$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, Rnm, Flags) :-
 	'$lgt_entity_property_alias'(Ctg, Rnm, Flags, Alias, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _, _) :-
@@ -1117,6 +1126,19 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_calls'(Entity, Call, Properties) :-
 	'$lgt_entity_property_'(Entity, calls(Call, Caller, Alias, NonTerminal, Line)),
+	(	NonTerminal == no ->
+		NonTerminalProperty = []
+	;	NonTerminalProperty = [non_terminal(NonTerminal)]
+	),
+	(	Alias == no ->
+		OtherProperties = NonTerminalProperty
+	;	OtherProperties = [alias(Alias)| NonTerminalProperty]
+	),
+	Properties = [caller(Caller), line_count(Line)| OtherProperties].
+
+
+'$lgt_entity_property_updates'(Entity, Predicate, Properties) :-
+	'$lgt_entity_property_'(Entity, updates(Predicate, Caller, Alias, NonTerminal, Line)),
 	(	NonTerminal == no ->
 		NonTerminalProperty = []
 	;	NonTerminalProperty = [non_terminal(NonTerminal)]
@@ -2893,7 +2915,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 8, 1, rc8)).
+'$lgt_version_data'(logtalk(3, 8, 1, rc9)).
 
 
 
@@ -6448,6 +6470,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
+	'$lgt_pp_updates_self_predicate_'(Predicate, Caller, Line-_),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(::Predicate, Caller, no, no, Line)))),
+	fail.
+
+'$lgt_add_entity_properties'(_, Entity) :-
+	'$lgt_pp_updates_predicate_'(Predicate, Caller, Line-_),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Predicate, Caller, no, no, Line)))),
+	fail.
+
+'$lgt_add_entity_properties'(_, Entity) :-
 	'$lgt_pp_entity_info_'(Info),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
 	fail.
@@ -6937,6 +6969,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _)),
+	retractall('$lgt_pp_updates_predicate_'(_, _, _)),
+	retractall('$lgt_pp_updates_self_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_meta_predicate_directive_'(_, _)),
@@ -10886,12 +10920,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(abolish(Pred), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_check_dynamic_directive'(Mode, Pred, Lines),
 	(	ground(Pred) ->
-		TCond = '$lgt_abolish_checked'(Database, Pred, Database, p(_))
+		TCond = '$lgt_abolish_checked'(Database, Pred, Database, p(_)),
+		'$lgt_remember_updated_predicate'(Mode, Pred, Head, Lines)
 	;	% partially instantiated predicate indicator; runtime check required
 		TCond = '$lgt_abolish'(Database, Pred, Database, p(_))
 	),
@@ -10951,9 +10986,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(asserta(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, CallerHead, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
-		TCond = asserta(TClause)
+		TCond = asserta(TClause),
+		functor(Clause, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_asserta'(Database, Clause, Database, p(_), p)
@@ -10962,8 +10999,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 				(	Body == true ->
 					TCond = '$lgt_asserta_fact_checked'(Database, Head, Database, p(_), p)
 				;	TCond = '$lgt_asserta_rule_checked'(Database, Clause, Database, p(_), p)
-				)
-			;	TCond = '$lgt_asserta_fact_checked'(Database, Clause, Database, p(_), p)
+				),
+				functor(Head, Functor, Arity),
+				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
+			;	TCond = '$lgt_asserta_fact_checked'(Database, Clause, Database, p(_), p),
+				functor(Clause, Functor, Arity),
+				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 			)
 		),
 		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
@@ -11018,9 +11059,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, CallerHead, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
-		TCond = assertz(TClause)
+		TCond = assertz(TClause),
+		functor(Clause, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_assertz'(Database, Clause, Database, p(_), p)
@@ -11029,8 +11072,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 				(	Body == true ->
 					TCond = '$lgt_assertz_fact_checked'(Database, Head, Database, p(_), p)
 				;	TCond = '$lgt_assertz_rule_checked'(Database, Clause, Database, p(_), p)
-				)
-			;	TCond = '$lgt_assertz_fact_checked'(Database, Clause, Database, p(_), p)
+				),
+				functor(Head, Functor, Arity),
+				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
+			;	TCond = '$lgt_assertz_fact_checked'(Database, Clause, Database, p(_), p),
+				functor(Clause, Functor, Arity),
+				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 			)
 		),
 		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
@@ -11127,9 +11174,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(retract(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, CallerHead, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
-		TCond = retract(TClause)
+		TCond = retract(TClause),
+		functor(Clause, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_retract'(Database, Clause, Database, p(_))
@@ -11140,8 +11189,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 				;	Body == true ->
 					TCond = '$lgt_retract_fact_checked'(Database, Head, Database, p(_))
 				;	TCond = '$lgt_retract_rule_checked'(Database, Clause, Database, p(_))
-				)
-			;	TCond = '$lgt_retract_fact_checked'(Database, Clause, Database, p(_))
+				),
+				functor(Head, Functor, Arity),
+				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
+			;	TCond = '$lgt_retract_fact_checked'(Database, Clause, Database, p(_)),
+				functor(Clause, Functor, Arity),
+				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 			)
 		),
 		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
@@ -11177,14 +11230,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(retractall(Head), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, CallerHead, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
-		TCond = retractall(THead)
+		TCond = retractall(THead),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	var(Head) ->
 			TCond = '$lgt_retractall'(Database, Head, Database, p(_))
 		;	'$lgt_check'(callable, Head),
-			TCond = '$lgt_retractall_checked'(Database, Head, Database, p(_))
+			TCond = '$lgt_retractall_checked'(Database, Head, Database, p(_)),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		),
 		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
 	),
@@ -12057,6 +12114,69 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% already recorded for the current clause being compiled (however unlikely!)
 		true
 	;	assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, Caller, Lines))
+	).
+
+
+
+% '$lgt_remember_updated_predicate'(@callable, +predicate_indicator, @callable, @term)
+%
+% used for collecting cross-referencing information
+
+'$lgt_remember_updated_predicate'(runtime, _, _, _).
+
+'$lgt_remember_updated_predicate'(compile(aux), _, _, _) :-
+	!.
+
+'$lgt_remember_updated_predicate'(compile(user), Functor/Arity, Head, Lines) :-
+	% currently, the returned line numbers are for the start and end lines of the clause containing the call
+	(	Head = Object::Predicate ->
+		% update from the body of a Logtalk multifile predicate clause
+		Caller = Object::HeadFunctor/HeadArity
+	;	Head = ':'(Module,Predicate) ->
+		% update from the body of a Prolog module multifile predicate clause
+		Caller = ':'(Module,HeadFunctor/HeadArity)
+	;	% update from the body of a local entity clause
+		Head = Predicate,
+		Caller = HeadFunctor/HeadArity
+	),
+	functor(Predicate, HeadFunctor, HeadArity),
+	(	Caller == Functor/Arity ->
+		% recursive call (however unlikely!)
+		true
+	;	'$lgt_pp_updates_predicate_'(Functor/Arity, Caller, Lines) ->
+		% already recorded for the current clause being compiled
+		true
+	;	assertz('$lgt_pp_updates_predicate_'(Functor/Arity, Caller, Lines))
+	).
+
+
+
+% '$lgt_remember_update_self_predicate'(@callable, +predicate_indicator, @callable, @term)
+%
+% used for collecting cross-referencing information
+
+'$lgt_remember_updated_self_predicate'(runtime, _, _, _).
+
+'$lgt_remember_updated_self_predicate'(compile(aux), _, _, _) :-
+	!.
+
+'$lgt_remember_updated_self_predicate'(compile(user), Functor/Arity, Head, Lines) :-
+	% currently, the returned line numbers are for the start and end lines of the clause containing the call
+	(	Head = Object::Predicate ->
+		% update from the body of a Logtalk multifile predicate clause
+		Caller = Object::HeadFunctor/HeadArity
+	;	Head = ':'(Module,Predicate) ->
+		% update from the body of a Prolog module multifile predicate clause
+		Caller = ':'(Module,HeadFunctor/HeadArity)
+	;	% update from the body of a local entity clause
+		Head = Predicate,
+		Caller = HeadFunctor/HeadArity
+	),
+	functor(Predicate, HeadFunctor, HeadArity),
+	(	'$lgt_pp_updates_self_predicate_'(Functor/Arity, Caller, Lines) ->
+		% already recorded for the current clause being compiled (however unlikely!)
+		true
+	;	assertz('$lgt_pp_updates_self_predicate_'(Functor/Arity, Caller, Lines))
 	).
 
 
@@ -17807,6 +17927,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_category_property'(provides(_, _, _)).
 % list of calling properties for a predicate called in the entity
 '$lgt_valid_category_property'(calls(_, _)).
+% list of updating properties for a dynamic predicate updated in the entity
+'$lgt_valid_category_property'(updates(_, _)).
 % number of predicate clauses (including both user-defined and auxiliary clauses)
 '$lgt_valid_category_property'(number_of_clauses(_)).
 % number of user-defined predicate clauses

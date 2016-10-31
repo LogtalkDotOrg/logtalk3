@@ -34,6 +34,9 @@ turned on.
 
 * ADDED: Predicate property and predicate definition property `inline`.
 
+* ADDED: Object and category `updates/2` property for cross-referencing data
+on predicates that update dynamic predicates.
+
 * FIXED: Static binding of a closure meta-argument that is an alias to another
 predicate.
 

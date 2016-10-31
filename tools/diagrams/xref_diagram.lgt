@@ -169,6 +169,20 @@
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
 		fail.
+	process(Kind, Entity, Options) :-
+		updates_local_predicate(Kind, Entity, Caller, Dynamic),
+		\+ ^^edge(Caller, Dynamic, [updates], updates_predicate, _),
+		remember_referenced_predicate(Caller),
+		remember_referenced_predicate(Dynamic),
+		^^save_edge(Caller, Dynamic, [updates], updates_predicate, [tooltip(updates)| Options]),
+		fail.
+	process(Kind, Entity, Options) :-
+		updates_self_predicate(Kind, Entity, Caller, Dynamic),
+		\+ ^^edge(Caller, Dynamic, ['updates in self'], updates_self_predicate, _),
+		remember_referenced_predicate(Caller),
+		remember_referenced_predicate(Dynamic),
+		^^save_edge(Caller, Dynamic, ['updates in self'], updates_self_predicate, [tooltip('updates in self')| Options]),
+		fail.
 	process(_, _, _) :-
 		retract(included_predicate_(Predicate)),
 		retractall(referenced_predicate_(Predicate)),
@@ -342,6 +356,57 @@
 		memberchk(caller(Caller), Properties),
 		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
 		\+ member(auxiliary, CallerProperties).
+
+	updates_local_predicate(Kind, Entity, Caller, Dynamic) :-
+		Kind \== protocol,
+		entity_property(Kind, Entity, updates(Dynamic0, CallsProperties)),
+		Dynamic0 \= _::_,
+		Dynamic0 \= ::_,
+		Dynamic0 \= ^^_,
+		Dynamic0 \= _<<_,
+		Dynamic0 \= ':'(_, _),
+		memberchk(caller(Caller0), CallsProperties),
+		(	entity_property(Kind, Entity, defines(Dynamic0, DynamicDefinesProperties)),
+			member(non_terminal(DynamicNonTerminal), DynamicDefinesProperties) ->
+			Dynamic = DynamicNonTerminal
+		;	Dynamic = Dynamic0
+		),
+		(	Caller0 = From::Predicate ->
+			(	current_object(From) ->
+				FromKind = object
+			;	FromKind = category
+			),
+			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
+			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
+				Caller = From::NonTerminal
+			;	Caller = From::Predicate
+			)
+		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+			Caller = CallerNonTerminal
+		;	Caller = Caller0
+		).
+
+	updates_self_predicate(Kind, Entity, Caller, Dynamic) :-
+		Kind \== protocol,
+		entity_property(Kind, Entity, updates(::Dynamic, CallsProperties)),
+		nonvar(Dynamic),
+		memberchk(caller(Caller0), CallsProperties),
+		(	Caller0 = From::Predicate ->
+			(	current_object(From) ->
+				FromKind = object
+			;	FromKind = category
+			),
+			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
+			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
+				Caller = From::NonTerminal
+			;	Caller = From::Predicate
+			)
+		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+			Caller = CallerNonTerminal
+		;	Caller = Caller0
+		).
 
 	entity_property(object, Entity, Property) :-
 		object_property(Entity, Property).

@@ -247,6 +247,9 @@
 	% cross-referencing predicate calls
 	edge_arrow(calls_predicate, rdiamond).
 	edge_arrow(calls_self_predicate, ordiamond).
+	% dynamic predicate updates
+	edge_arrow(updates_predicate, tee).
+	edge_arrow(updates_self_predicate, otee).
 	% file relations
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).
