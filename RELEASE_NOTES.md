@@ -95,6 +95,9 @@ in the middle of the name.
 Tools
 -----
 
+* CHANGED: The default value of the diagrams option `node_type_captions/1`
+to `true`.
+
 * ADDED: Predicate `lgtunit::run_test/1` for running an individual test.
 
 * ADDED: Predicate `lgtunit::benchmark/4` supporting the specification of

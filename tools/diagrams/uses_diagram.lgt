@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/11/01,
 		comment is 'Predicates for generating entity diagrams with only uses and use_module relation edges.',
 		parnames is ['Format']
 	]).
@@ -51,8 +51,8 @@
 	default_option(relation_labels(true)).
 	% by default, don't write cross-referencing calls:
 	default_option(xref_calls(false)).
-	% by default, don't print node type captions
-	default_option(node_type_captions(false)).
+	% by default, print node type captions
+	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:

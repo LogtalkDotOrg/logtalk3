@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/11/01,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -136,8 +136,8 @@
 	default_option(file_extensions(true)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
-	% by default, don't print node type captions
-	default_option(node_type_captions(false)).
+	% by default, print node type captions
+	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
