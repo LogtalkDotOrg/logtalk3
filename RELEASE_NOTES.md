@@ -104,8 +104,8 @@ for benchmarking goals that spawn threads.
 * ADDED: Zoom option to the `diagrams` tool that allows linking library
 diagrams to entity diagrams to predicate cross-referencing diagrams.
 
-* ADDED: Doclet example, `zoom_doclet`, illustrating generating linking
-diagrams using the `zoom/1` option.
+* ADDED: Doclet examples, `zoom_doclet` and `tools_doclet`, illustrating
+linking diagrams using the `zoom/1` option.
 
 * IMPROVED: Predicate cross-referencing diagrams now include edges for
 predicates called in *self*.

@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2016/10/30,
+		date is 2016/10/31,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -170,18 +170,17 @@
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
 		fail.
 	process(Kind, Entity, Options) :-
-		updates_local_predicate(Kind, Entity, Caller, Dynamic),
-		\+ ^^edge(Caller, Dynamic, [updates], updates_predicate, _),
+		updates_predicate(Kind, Entity, Caller, Dynamic),
+		(	Dynamic = ::_ ->
+			Tooltip = 'updates in self',
+			EdgeKind = updates_self_predicate
+		;	Tooltip = 'updates',
+			EdgeKind = updates_predicate
+		),
+		\+ ^^edge(Caller, Dynamic, [Tooltip], EdgeKind, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Dynamic),
-		^^save_edge(Caller, Dynamic, [updates], updates_predicate, [tooltip(updates)| Options]),
-		fail.
-	process(Kind, Entity, Options) :-
-		updates_self_predicate(Kind, Entity, Caller, Dynamic),
-		\+ ^^edge(Caller, Dynamic, ['updates in self'], updates_self_predicate, _),
-		remember_referenced_predicate(Caller),
-		remember_referenced_predicate(Dynamic),
-		^^save_edge(Caller, Dynamic, ['updates in self'], updates_self_predicate, [tooltip('updates in self')| Options]),
+		^^save_edge(Caller, Dynamic, [Tooltip], EdgeKind, [tooltip(Tooltip)| Options]),
 		fail.
 	process(_, _, _) :-
 		retract(included_predicate_(Predicate)),
@@ -357,40 +356,14 @@
 		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
 		\+ member(auxiliary, CallerProperties).
 
-	updates_local_predicate(Kind, Entity, Caller, Dynamic) :-
+	updates_predicate(Kind, Entity, Caller, Dynamic) :-
 		Kind \== protocol,
-		entity_property(Kind, Entity, updates(Dynamic0, CallsProperties)),
-		Dynamic0 \= _::_,
-		Dynamic0 \= ::_,
-		Dynamic0 \= ^^_,
-		Dynamic0 \= _<<_,
-		Dynamic0 \= ':'(_, _),
-		memberchk(caller(Caller0), CallsProperties),
-		(	entity_property(Kind, Entity, defines(Dynamic0, DynamicDefinesProperties)),
-			member(non_terminal(DynamicNonTerminal), DynamicDefinesProperties) ->
-			Dynamic = DynamicNonTerminal
-		;	Dynamic = Dynamic0
+		entity_property(Kind, Entity, updates(Dynamic, CallsProperties)),
+		(	Dynamic = Object::PredicateIndicator ->
+			% we can have a parametric object ...
+			callable(Object), ground(PredicateIndicator)
+		;	ground(Dynamic)
 		),
-		(	Caller0 = From::Predicate ->
-			(	current_object(From) ->
-				FromKind = object
-			;	FromKind = category
-			),
-			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
-			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
-				Caller = From::NonTerminal
-			;	Caller = From::Predicate
-			)
-		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
-			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
-		).
-
-	updates_self_predicate(Kind, Entity, Caller, Dynamic) :-
-		Kind \== protocol,
-		entity_property(Kind, Entity, updates(::Dynamic, CallsProperties)),
-		ground(Dynamic),
 		memberchk(caller(Caller0), CallsProperties),
 		(	Caller0 = From::Predicate ->
 			(	current_object(From) ->
