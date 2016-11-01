@@ -5703,7 +5703,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			(	var(Error) ->
 				true
 			;	% an error while loading the generated intermediate Prolog files
-				% are usually due to write_canonical/2 and/or read_term/3 bugs
+				% is usually caused by write_canonical/2 and/or read_term/3 bugs
 				'$lgt_print_message'(error, core, loading_error(SourceFile, Error)),
 				fail
 			)

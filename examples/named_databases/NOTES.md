@@ -40,7 +40,7 @@ such as SWI-Prolog, do allow listing of static code by default but can be set
 to prevent it. One important consequence is that, although it is possible to
 *load* files with static predicates into named databases, saving them will
 only save the dynamic predicates. I.e. named databases loading static resources
-should re regarded as a read-only databases.
+should be regarded as read-only databases.
 
 A hook object is provided for optimizing calls to the named database API
 predicates within object and categories.
