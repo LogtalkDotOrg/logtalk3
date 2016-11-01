@@ -10889,9 +10889,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Module::abolish(Pred), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {abolish(':'(Module, Pred))},
-		DCond = '$lgt_debug'(goal(abolish(':'(Module, Pred)), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(abolish(':'(Module, Pred)), TCond), ExCtx),
+		(	ground(Term) ->
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Pred), CallerHead, Lines)
+		;	true
+		)
 	).
 
 '$lgt_compile_body'(abolish(Pred), TCond, DCond, Ctx) :-
@@ -10902,9 +10906,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Obj::abolish(HeadFunctor/Arity), TCond, DCond, Ctx)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
 		functor(Head, HeadFunctor, Arity),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {abolish(':'(Module, HeadFunctor/Arity))},
-		DCond = '$lgt_debug'(goal(abolish(':'(Module, HeadFunctor/Arity)), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(abolish(':'(Module, HeadFunctor/Arity)), TCond), ExCtx),
+		'$lgt_remember_updated_predicate'(Mode, ':'(Module, HeadFunctor/Arity), CallerHead, Lines)
 	;	% proceed to next clause
 		fail
 	),
@@ -10945,9 +10950,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Module::asserta(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {asserta(QClause)},
-		DCond = '$lgt_debug'(goal(asserta(QClause), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(asserta(QClause), TCond), ExCtx),
+		(	ground(QClause) ->
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
+		;	true
+		)
 	).
 
 '$lgt_compile_body'(asserta(Clause), TCond, DCond, Ctx) :-
@@ -10957,9 +10967,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 			'$lgt_compile_body'(Obj::asserta((Head :- Body)), TCond, DCond, Ctx)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 			TCond = {asserta((':'(Module,Head) :- Body))},
-			DCond = '$lgt_debug'(goal(asserta((':'(Module,Head) :- Body)), TCond), ExCtx)
+			DCond = '$lgt_debug'(goal(asserta((':'(Module,Head) :- Body)), TCond), ExCtx),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 		;	% proceed to next clause
 			fail
 		)
@@ -10967,9 +10979,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 			'$lgt_compile_body'(Obj::asserta(Head), TCond, DCond, Ctx)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 			TCond = {asserta(':'(Module,Head))},
-			DCond = '$lgt_debug'(goal(asserta(':'(Module,Head)), TCond), ExCtx)
+			DCond = '$lgt_debug'(goal(asserta(':'(Module,Head)), TCond), ExCtx),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 		;	% proceed to next clause
 			fail
 		)
@@ -11018,9 +11032,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Module::assertz(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {assertz(QClause)},
-		DCond = '$lgt_debug'(goal(assertz(QClause), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(assertz(QClause), TCond), ExCtx),
+		(	ground(QClause) ->
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
+		;	true
+		)
 	).
 
 '$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx) :-
@@ -11030,9 +11049,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 			'$lgt_compile_body'(Obj::assertz((Head :- Body)), TCond, DCond, Ctx)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 			TCond = {assertz((':'(Module,Head) :- Body))},
-			DCond = '$lgt_debug'(goal(assertz((':'(Module,Head) :- Body)), TCond), ExCtx)
+			DCond = '$lgt_debug'(goal(assertz((':'(Module,Head) :- Body)), TCond), ExCtx),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 		;	% proceed to next clause
 			fail
 		)
@@ -11040,9 +11061,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 			'$lgt_compile_body'(Obj::assertz(Head), TCond, DCond, Ctx)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 			TCond = {assertz(':'(Module,Head))},
-			DCond = '$lgt_debug'(goal(assertz(':'(Module,Head)), TCond), ExCtx)
+			DCond = '$lgt_debug'(goal(assertz(':'(Module,Head)), TCond), ExCtx),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 		;	% proceed to next clause
 			fail
 		)
@@ -11133,9 +11156,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Module::retract(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {retract(QClause)},
-		DCond = '$lgt_debug'(goal(retract(QClause), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(retract(QClause), TCond), ExCtx),
+		(	ground(QClause) ->
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
+		;	true
+		)
 	).
 
 '$lgt_compile_body'(retract(Clause), TCond, DCond, Ctx) :-
@@ -11145,9 +11173,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 			'$lgt_compile_body'(Obj::retract((Head :- Body)), TCond, DCond, Ctx)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 			TCond = {retract((':'(Module,Head) :- Body))},
-			DCond = '$lgt_debug'(goal(retract((':'(Module,Head) :- Body)), TCond), ExCtx)
+			DCond = '$lgt_debug'(goal(retract((':'(Module,Head) :- Body)), TCond), ExCtx),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 		;	% proceed to next clause
 			fail
 		)
@@ -11155,9 +11185,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 			'$lgt_compile_body'(Obj::retract(Head), TCond, DCond, Ctx)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 			TCond = {retract(':'(Module,Head))},
-			DCond = '$lgt_debug'(goal(retract(':'(Module,Head)), TCond), ExCtx)
+			DCond = '$lgt_debug'(goal(retract(':'(Module,Head)), TCond), ExCtx),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 		;	% proceed to next clause
 			fail
 		)
@@ -11202,9 +11234,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Module::retractall(Head), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {retractall(QHead)},
-		DCond = '$lgt_debug'(goal(retractall(QHead), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(retractall(QHead), TCond), ExCtx),
+		(	ground(QHead) ->
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
+		;	true
+		)
 	).
 
 '$lgt_compile_body'(retractall(Alias), TCond, DCond, Ctx) :-
@@ -11212,9 +11249,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 		'$lgt_compile_body'(Obj::retractall(Head), TCond, DCond, Ctx)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {retractall(':'(Module,Head))},
-		DCond = '$lgt_debug'(goal(retractall(':'(Module,Head)), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(retractall(':'(Module,Head)), TCond), ExCtx),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 	;	% proceed to next clause
 		fail
 	),
