@@ -11108,9 +11108,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_body'(Module::clause(Head, Body), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {clause(QHead, Body)},
-		DCond = '$lgt_debug'(goal(clause(QHead, Body), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(clause(QHead, Body), TCond), ExCtx),
+		(	ground(QHead) ->
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
+		;	true
+		)
 	).
 
 '$lgt_compile_body'(clause(Alias, Body), TCond, DCond, Ctx) :-
@@ -11118,24 +11123,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, _) ->
 		'$lgt_compile_body'(Obj::clause(Head, Body), TCond, DCond, Ctx)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, _) ->
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		TCond = {clause(':'(Module,Head), Body)},
-		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, ':'(Module, Functor/Arity), CallerHead, Lines)
 	;	fail
 	),
 	!.
 
 '$lgt_compile_body'(clause(Head, Body), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, CallerHead, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
 		'$lgt_check'(var_or_callable, Body),
-		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body))
+		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body)),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 			TCond = '$lgt_clause'(Database, Head, Body, Database, p(_))
 		;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
-			TCond = '$lgt_clause_checked'(Database, Head, Body, Database, p(_))
+			TCond = '$lgt_clause_checked'(Database, Head, Body, Database, p(_)),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		),
 		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
 	),
@@ -12925,16 +12936,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(clause(Head, Body), Obj, TPred, _, Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
 	;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
 		(	var(Obj) ->
 			TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
+		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p))),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead, Lines)
 		)
-	),
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _).
+	).
 
 '$lgt_compile_message_to_object'(retract(Clause), Obj, TPred, _, Ctx) :-
 	!,
@@ -13181,19 +13194,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Clause, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead, Lines)
 		)
-	),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	).
 
 '$lgt_compile_message_to_self'(clause(Head, Body), TPred, Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, This, Self, _, _, _, _, Mode, _, Lines),
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Self, Head, Body, This, p(_))
 	;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
-		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_))
-	),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_)),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead, Lines)
+	).
 
 '$lgt_compile_message_to_self'(retract(Clause), TPred, Ctx) :-
 	!,
@@ -13214,9 +13226,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Clause, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead, Lines)
 		)
-	),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	).
 
 '$lgt_compile_message_to_self'(retractall(Head), TPred, Ctx) :-
 	!,
@@ -13227,9 +13237,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_)),
 		functor(Head, Functor, Arity),
 		'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead, Lines)
-	),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	).
 
 % term and goal expansion predicates
 
