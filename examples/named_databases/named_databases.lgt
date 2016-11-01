@@ -208,7 +208,10 @@
 		open(File, write, Stream),
 		current_output(Current),
 		set_output(Stream),
-		listing(Database:_),
+		current_predicate(Database:Functor/Arity),
+		functor(Template, Functor, Arity), 
+		predicate_property(Database:Template, (dynamic)),
+		listing(Database:Functor/Arity),
 		close(Stream),
 		set_output(Current).
 

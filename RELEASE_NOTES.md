@@ -126,6 +126,11 @@ directory across supported backend Prolog compilers.
 Examples
 --------
 
+* CHANGED: The `named_databases` example definition of the `db_save/2`
+predicate for SWI-Prolog and YAP to only save dynamic predicate definitions.
+This ensures portability and prevents errors when using SWI-Prolog with the
+(recently added) `protect_static_code` flag set to `true`.
+
 * ADDED: Simple example, `inlining`, illustrating inlining of predicate
 definitions.
 
