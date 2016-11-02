@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.2,
+		version is 4.3,
 		author is 'Paulo Moura',
-		date is 2016/08/02,
+		date is 2016/11/02,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1360,28 +1360,46 @@
 		assertz(option_(Option, Value)).
 
 	merge_options(UserOptions, Options) :-
-		(member(xml_docs_directory(Directory), UserOptions) -> true; option(xml_docs_directory, Directory)),
+		(member(xml_docs_directory(Directory0), UserOptions) -> true; option(xml_docs_directory, Directory0)),
 		(member(xml_spec_reference(XMLSRef), UserOptions) -> true; option(xml_spec_reference, XMLSRef)),
 		(member(xml_spec(XMLSpec), UserOptions) -> true; option(xml_spec, XMLSpec)),
-		(member(entity_xsl_file(XSL), UserOptions) -> true; option(entity_xsl_file, XSL)),
-		(member(index_xsl_file(XSL), UserOptions) -> true; option(index_xsl_file, IXSL)),
+		(member(entity_xsl_file(EntityXSL0), UserOptions) -> true; option(entity_xsl_file, EntityXSL0)),
+		(member(index_xsl_file(IndexXSL0), UserOptions) -> true; option(index_xsl_file, IndexXSL0)),
 		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
 		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
 		% by default, don't omit any path prefixes:
-		(member(omit_path_prefixes(Prefixes), UserOptions) -> true; option(omit_path_prefixes, Prefixes)),
+		(member(omit_path_prefixes(Prefixes0), UserOptions) -> true; option(omit_path_prefixes, Prefixes0)),
 		% by default, don't exclude any source files:
-		(member(exclude_files(ExcludedFiles), UserOptions) -> true; option(exclude_files, ExcludedFiles)),
+		(member(exclude_files(ExcludedFiles0), UserOptions) -> true; option(exclude_files, ExcludedFiles0)),
 		% by default, don't exclude any library sub-directories:
-		(member(exclude_paths(ExcludedPaths), UserOptions) -> true; option(exclude_paths, ExcludedPaths)),
+		(member(exclude_paths(ExcludedPaths0), UserOptions) -> true; option(exclude_paths, ExcludedPaths0)),
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
+		normalize_directory_paths([Directory0| Prefixes0], [Directory| Prefixes]),
+		normalize_file_paths([EntityXSL0, IndexXSL0], [EntityXSL, IndexXSL]),
+		normalize_file_paths(ExcludedFiles0, ExcludedFiles),
+		normalize_directory_paths(ExcludedPaths0, ExcludedPaths),
 		Options = [
 			xml_docs_directory(Directory), xml_spec_reference(XMLSRef), xml_spec(XMLSpec),
-			entity_xsl_file(XSL), index_xsl_file(IXSL),
+			entity_xsl_file(EntityXSL), index_xsl_file(IndexXSL),
 			encoding(Encoding), bom(BOM),
 			omit_path_prefixes(Prefixes),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)
 		].
+
+	normalize_directory_paths([], []).
+	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
+		os::expand_path(Directory, NormalizedDirectory0),
+		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
+			NormalizedDirectory = NormalizedDirectory0
+		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
+		),
+		normalize_directory_paths(Directories, NormalizedDirectories).
+
+	normalize_file_paths([], []).
+	normalize_file_paths([File| Files], [NormalizedFile| NormalizedFiles]) :-
+		os::expand_path(File, NormalizedFile),
+		normalize_file_paths(Files, NormalizedFiles).
 
 	reset :-
 		retractall(option_(_, _)),

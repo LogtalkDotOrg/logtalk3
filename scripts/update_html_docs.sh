@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on October 13, 2016
+##   Last updated on November 2, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -45,11 +45,11 @@ logtalk="swilgt$extension -g"
 cwd=`pwd`
 
 # documentation goal
-goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]),lgtdoc::all([xml_docs_directory('$cwd/../docs'),omit_path_prefixes(['/Users/pmoura/logtalk/','/opt/local/share/logtalk/'])]),halt."
+goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]),lgtdoc::all([xml_docs_directory('$cwd/../docs'),omit_path_prefixes(['$LOGTALKUSER','$LOGTALKHOME'])]),halt."
 
 
 print_version() {
-	echo "`basename $0` 0.7"
+	echo "`basename $0` 0.8"
 	exit 0
 }
 
