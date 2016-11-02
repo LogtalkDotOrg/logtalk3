@@ -174,6 +174,9 @@
 		(	Dynamic = ::_ ->
 			Tooltip = 'updates in self',
 			EdgeKind = updates_self_predicate
+		;	Kind == category ->
+			Tooltip = 'updates in this',
+			EdgeKind = updates_this_predicate
 		;	Tooltip = 'updates',
 			EdgeKind = updates_predicate
 		),
