@@ -140,6 +140,8 @@ definitions.
 Tests
 -----
 
+* ADDED: Unit tests for the new `updates/2` object and category property.
+
 * ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.
 
 * UPDATED: Unit tests for the `securemp` example to take into account that

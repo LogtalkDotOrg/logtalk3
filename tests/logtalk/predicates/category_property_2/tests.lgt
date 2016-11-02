@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/10/11,
+		date is 2016/11/01,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -57,8 +57,8 @@
 		category_property(test_category, source_data),
 		category_property(test_category, file(Basename, Directory)), ground(Basename), ground(Directory),
 		category_property(test_category, lines(Start, End)), integer(Start), integer(End),
-		category_property(test_category, number_of_clauses(NC)), NC == 15,
-		category_property(test_category, number_of_user_clauses(NUC)), NUC == 13,
+		category_property(test_category, number_of_clauses(NC)), NC == 21,
+		category_property(test_category, number_of_user_clauses(NUC)), NUC == 19,
 		category_property(test_category, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),
@@ -165,128 +165,147 @@
 		member(non_terminal(NonTerminal5), Properties5), NonTerminal5 == message_tokens//2,
 		member(alias(Alias5), Properties5), Alias5 == tokens/4.
 
+	% predicate updates properties
+
+	succeeds(category_property_2_22) :-
+		setof(
+			Caller,
+			Properties^(
+				category_property(test_category, updates(c/3, Properties)),
+				member(caller(Caller), Properties)
+			),
+			Callers
+		),
+		Callers == [caller10/0, caller11/0, caller6/0, caller7/0, caller8/0, caller9/0].
+		
+	succeeds(category_property_2_23) :-
+		forall(
+			category_property(test_category, updates(c/3, Properties)),
+			(member(line_count(Line), Properties), integer(Line))
+		).
+
 	% check that all queries with explicit properties are valid
 
-	fails(category_property_2_22) :-
+	fails(category_property_2_24) :-
 		category_property(empty_category, built_in),
 		fail.
 
-	fails(category_property_2_23) :-
+	fails(category_property_2_25) :-
 		category_property(empty_category, (dynamic)),
 		fail.
 
-	fails(category_property_2_24) :-
+	fails(category_property_2_26) :-
 		category_property(empty_category, static),
 		fail.
 
-	fails(category_property_2_25) :-
+	fails(category_property_2_27) :-
 		category_property(empty_category, debugging),
 		fail.
 
-	fails(category_property_2_26) :-
+	fails(category_property_2_28) :-
 		category_property(empty_category, public(_)),
 		fail.
 
-	fails(category_property_2_27) :-
+	fails(category_property_2_29) :-
 		category_property(empty_category, protected(_)),
 		fail.
 
-	fails(category_property_2_28) :-
+	fails(category_property_2_30) :-
 		category_property(empty_category, private(_)),
 		fail.
 
-	fails(category_property_2_29) :-
+	fails(category_property_2_31) :-
 		category_property(empty_category, declares(_, _)),
 		fail.
 
-	fails(category_property_2_30) :-
+	fails(category_property_2_32) :-
 		category_property(empty_category, alias(_, _)),
 		fail.
 
-	fails(category_property_2_31) :-
+	fails(category_property_2_33) :-
 		category_property(empty_category, source_data),
 		fail.
 
-	fails(category_property_2_32) :-
+	fails(category_property_2_34) :-
 		category_property(empty_category, info(_)),
 		fail.
 
-	fails(category_property_2_33) :-
+	fails(category_property_2_35) :-
 		category_property(empty_category, file(_)),
 		fail.
 
-	fails(category_property_2_34) :-
+	fails(category_property_2_36) :-
 		category_property(empty_category, file(_, _)),
 		fail.
 
-	fails(category_property_2_35) :-
+	fails(category_property_2_37) :-
 		category_property(empty_category, lines(_, _)),
 		fail.
 
-	fails(category_property_2_36) :-
+	fails(category_property_2_38) :-
 		category_property(empty_category, events),
 		fail.
 
-	fails(category_property_2_37) :-
+	fails(category_property_2_39) :-
 		category_property(empty_category, defines(_, _)),
 		fail.
 
-	fails(category_property_2_38) :-
+	fails(category_property_2_40) :-
 		category_property(empty_category, includes(_, _, _)),
 		fail.
 
-	fails(category_property_2_39) :-
+	fails(category_property_2_41) :-
 		category_property(empty_category, provides(_, _, _)),
 		fail.
 
-	fails(category_property_2_40) :-
+	fails(category_property_2_42) :-
 		category_property(empty_category, calls(_, _)),
 		fail.
 
-	fails(category_property_2_41) :-
+	fails(category_property_2_43) :-
 		category_property(empty_category, number_of_clauses(_)),
 		fail.
 
-	fails(category_property_2_42) :-
+	fails(category_property_2_44) :-
 		category_property(empty_category, number_of_user_clauses(_)),
 		fail.
 
 	% determinism tests
 
-	deterministic(category_property_2_43) :-
+	deterministic(category_property_2_45) :-
 		category_property(debug_category, debugging).
 
-	deterministic(category_property_2_44) :-
+	deterministic(category_property_2_46) :-
 		category_property(test_category, source_data).
 
-	deterministic(category_property_2_45) :-
+	deterministic(category_property_2_47) :-
 		category_property(dynamic_category, (dynamic)).
 
-	deterministic(category_property_2_46) :-
+	deterministic(category_property_2_48) :-
 		category_property(test_category, static).
 
-	deterministic(category_property_2_47) :-
+	deterministic(category_property_2_49) :-
 		category_property(built_in_category, built_in).
 
-	deterministic(category_property_2_48) :-
+	deterministic(category_property_2_50) :-
 		category_property(test_category, file(_)).
 
-	deterministic(category_property_2_49) :-
+	deterministic(category_property_2_51) :-
 		category_property(test_category, file(_, _)).
 
-	deterministic(category_property_2_50) :-
+	deterministic(category_property_2_52) :-
 		category_property(test_category, lines(_, _)).
 
-	deterministic(category_property_2_51) :-
+	deterministic(category_property_2_53) :-
 		category_property(test_category, info(_)).
 
-	deterministic(category_property_2_52) :-
+	deterministic(category_property_2_54) :-
 		category_property(events_category, events).
 
-	deterministic(category_property_2_53) :-
+	deterministic(category_property_2_55) :-
 		category_property(test_category, number_of_clauses(_)).
 
-	deterministic(category_property_2_54) :-
+	deterministic(category_property_2_56) :-
 		category_property(test_category, number_of_user_clauses(_)).
 
 	% auxiliary predicates (avoid library dependencies)

@@ -24,9 +24,9 @@
 :- object(test_object).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2016/11/01,
 		comment is 'Sample object for testing with the `source_data` flag turned on.']).
 
 	:- set_logtalk_flag(complements, allow).
@@ -80,6 +80,24 @@
 
 	caller5 :-
 		phrase(tokens(_,_), _, _).
+
+	caller6 :-
+		asserta(c(1,1,1)).
+
+	caller7 :-
+		assertz(c(1,1,1)).
+
+	caller8 :-
+		retract(c(1,2,3)).
+
+	caller9 :-
+		retractall(c(_,_,_)).
+
+	caller10 :-
+		clause(c(_,_,_), true).
+
+	caller11 :-
+		abolish(c/3).
 
 :- end_object.
 
