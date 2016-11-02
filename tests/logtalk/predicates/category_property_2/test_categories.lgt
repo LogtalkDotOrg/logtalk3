@@ -91,6 +91,42 @@
 	updater6 :-
 		abolish(c/3).
 
+	updater1s :-
+		::asserta(c(1,1,1)).
+
+	updater2s :-
+		::assertz(c(1,1,1)).
+
+	updater3s :-
+		::retract(c(1,2,3)).
+
+	updater4s :-
+		::retractall(c(_,_,_)).
+
+	updater5s :-
+		::clause(c(_,_,_), true).
+
+	updater6s :-
+		::abolish(c/3).
+
+	updater1o :-
+		logtalk::asserta(c(1,1,1)).
+
+	updater2o :-
+		logtalk::assertz(c(1,1,1)).
+
+	updater3o :-
+		logtalk::retract(c(1,2,3)).
+
+	updater4o :-
+		logtalk::retractall(c(_,_,_)).
+
+	updater5o :-
+		logtalk::clause(c(_,_,_), true).
+
+	updater6o :-
+		logtalk::abolish(c/3).
+
 :- end_category.
 
 
