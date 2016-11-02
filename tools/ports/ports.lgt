@@ -120,7 +120,7 @@
 			numbervars(GroundEntity, 0, _)
 		).
 
-	% inore calls to control constructs and ...
+	% ignore calls to control constructs and ...
 	port(_::_, _, _) :- !.
 	port(::_, _, _) :- !.
 	port(^^_, _, _) :- !.
