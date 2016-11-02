@@ -1136,7 +1136,7 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_entity_property_updates'(Entity, Predicate, Properties) :-
-	'$lgt_entity_property_'(Entity, updates(Predicate, Caller, Alias, NonTerminal, Line)),
+	'$lgt_entity_property_'(Entity, updates(Predicate, Updater, Alias, NonTerminal, Line)),
 	(	NonTerminal == no ->
 		NonTerminalProperty = []
 	;	NonTerminalProperty = [non_terminal(NonTerminal)]
@@ -1145,7 +1145,7 @@ protocol_property(Ptc, Prop) :-
 		OtherProperties = NonTerminalProperty
 	;	OtherProperties = [alias(Alias)| NonTerminalProperty]
 	),
-	Properties = [caller(Caller), line_count(Line)| OtherProperties].
+	Properties = [updater(Updater), line_count(Line)| OtherProperties].
 
 
 
@@ -6468,8 +6468,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	'$lgt_pp_updates_predicate_'(Dynamic, Caller, Line-_),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Dynamic, Caller, no, no, Line)))),
+	'$lgt_pp_updates_predicate_'(Dynamic, Updater, Line-_),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Dynamic, Updater, no, no, Line)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
@@ -12173,19 +12173,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	Head = Object::Predicate ->
 		% update from the body of a Logtalk multifile predicate clause
-		Caller = Object::HeadFunctor/HeadArity
+		Updater = Object::HeadFunctor/HeadArity
 	;	Head = ':'(Module,Predicate) ->
 		% update from the body of a Prolog module multifile predicate clause
-		Caller = ':'(Module,HeadFunctor/HeadArity)
+		Updater = ':'(Module,HeadFunctor/HeadArity)
 	;	% update from the body of a local entity clause
 		Head = Predicate,
-		Caller = HeadFunctor/HeadArity
+		Updater = HeadFunctor/HeadArity
 	),
 	functor(Predicate, HeadFunctor, HeadArity),
-	(	'$lgt_pp_updates_predicate_'(Dynamic, Caller, Lines) ->
+	(	'$lgt_pp_updates_predicate_'(Dynamic, Updater, Lines) ->
 		% already recorded for the current clause being compiled (however unlikely!)
 		true
-	;	assertz('$lgt_pp_updates_predicate_'(Dynamic, Caller, Lines))
+	;	assertz('$lgt_pp_updates_predicate_'(Dynamic, Updater, Lines))
 	).
 
 

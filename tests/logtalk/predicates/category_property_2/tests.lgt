@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2016/11/02,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -169,14 +169,14 @@
 
 	succeeds(category_property_2_22) :-
 		setof(
-			Caller,
+			Updater,
 			Properties^(
 				category_property(test_category, updates(c/3, Properties)),
-				member(caller(Caller), Properties)
+				member(updater(Updater), Properties)
 			),
-			Callers
+			Updaters
 		),
-		Callers == [caller10/0, caller11/0, caller6/0, caller7/0, caller8/0, caller9/0].
+		Updaters == [updater1/0, updater2/0, updater3/0, updater4/0, updater5/0, updater6/0].
 		
 	succeeds(category_property_2_23) :-
 		forall(

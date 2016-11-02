@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2016/11/02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -359,29 +359,29 @@
 		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
 		\+ member(auxiliary, CallerProperties).
 
-	updates_predicate(Kind, Entity, Caller, Dynamic) :-
+	updates_predicate(Kind, Entity, Updater, Dynamic) :-
 		Kind \== protocol,
-		entity_property(Kind, Entity, updates(Dynamic, CallsProperties)),
+		entity_property(Kind, Entity, updates(Dynamic, UpdatesProperties)),
 		(	Dynamic = Object::PredicateIndicator ->
 			% we can have a parametric object ...
 			callable(Object), ground(PredicateIndicator)
 		;	ground(Dynamic)
 		),
-		memberchk(caller(Caller0), CallsProperties),
-		(	Caller0 = From::Predicate ->
+		memberchk(updater(Updater0), UpdatesProperties),
+		(	Updater0 = From::Predicate ->
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
 			),
 			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
 			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
-				Caller = From::NonTerminal
-			;	Caller = From::Predicate
+				Updater = From::NonTerminal
+			;	Updater = From::Predicate
 			)
-		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
-			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+		;	entity_property(Kind, Entity, defines(Updater0, DefinesProperties)),
+			member(non_terminal(UpdaterNonTerminal), DefinesProperties) ->
+			Updater = UpdaterNonTerminal
+		;	Updater = Updater0
 		).
 
 	entity_property(object, Entity, Property) :-

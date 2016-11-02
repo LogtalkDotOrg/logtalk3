@@ -26,7 +26,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2016/11/02,
 		comment is 'Sample category for testing with the `source_data` flag turned on.']).
 
 	:- public(a/1).
@@ -73,22 +73,22 @@
 	caller5 :-
 		phrase(tokens(_,_), _, _).
 
-	caller6 :-
+	updater1 :-
 		asserta(c(1,1,1)).
 
-	caller7 :-
+	updater2 :-
 		assertz(c(1,1,1)).
 
-	caller8 :-
+	updater3 :-
 		retract(c(1,2,3)).
 
-	caller9 :-
+	updater4 :-
 		retractall(c(_,_,_)).
 
-	caller10 :-
+	updater5 :-
 		clause(c(_,_,_), true).
 
-	caller11 :-
+	updater6 :-
 		abolish(c/3).
 
 :- end_category.

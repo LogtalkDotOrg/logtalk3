@@ -81,22 +81,22 @@
 	caller5 :-
 		phrase(tokens(_,_), _, _).
 
-	caller6 :-
+	updater1 :-
 		asserta(c(1,1,1)).
 
-	caller7 :-
+	updater2 :-
 		assertz(c(1,1,1)).
 
-	caller8 :-
+	updater3 :-
 		retract(c(1,2,3)).
 
-	caller9 :-
+	updater4 :-
 		retractall(c(_,_,_)).
 
-	caller10 :-
+	updater5 :-
 		clause(c(_,_,_), true).
 
-	caller11 :-
+	updater6 :-
 		abolish(c/3).
 
 :- end_object.
