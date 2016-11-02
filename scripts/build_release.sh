@@ -98,6 +98,6 @@ sudo port clean logtalk
 
 cd $directory/logtalk-$version/scripts/linux
 ./build_rpm.sh
-mv $HOME/rpmbuild/RPMS/noarch/logtalk-$version*.rpm $directory
+mv $HOME/rpmbuild/RPMS/noarch/logtalk-*.rpm $directory/
 
 cd $directory
