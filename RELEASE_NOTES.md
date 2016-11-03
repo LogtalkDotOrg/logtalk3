@@ -65,11 +65,11 @@ XSB adapter file, where it is no longer used, to the library `os` object.
 * ADDED: Definition for the SWI-Prolog `prolog:make_hook/2` hook predicate to
 automatically call `logtalk_make/0` when calling `make/0`.
 
-* IMPROVED: Faster implementation of the internal '$lgt_predicate_property'/2
+* IMPROVED: Faster implementation of the internal `'$lgt_predicate_property'/2`
 predicate for SWI-Prolog.
 
 * FIXED: Compilation of SWI-Prolog proprietary directives when decorating the
-generated code with source location data.
+generated code with source location data for using the SWI-Prolog own tools.
 
 Documentation
 -------------
