@@ -147,6 +147,9 @@ This ensures portability and prevents errors when using SWI-Prolog with the
 * ADDED: Simple example, `inlining`, illustrating inlining of predicate
 definitions.
 
+* FIXED: Two dead links to the original Prolog code in the `adventure` example.
+Thanks to Eric Charikane for the updated links.
+
 Tests
 -----
 

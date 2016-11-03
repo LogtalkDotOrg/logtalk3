@@ -20,7 +20,8 @@
 
 %"Spider" -- A Sample Adventure Game in Prolog
 % David Matuszek, Villanova University
-% http://www.csc.vill.edu/~dmatusze/resources/prolog/spider.html
+% http://www.csc.villanova.edu/~dmatusze/resources/prolog/spider.html
+
 
 :- object(spider).
 

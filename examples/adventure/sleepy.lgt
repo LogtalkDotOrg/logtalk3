@@ -18,9 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/* "Sleepy" -- a sample adventure game, by David Matuszek. */
+% "Sleepy" -- A Sample Adventure Game in Prolog
+% David Matuszek, Villanova University
+% http://www.csc.villanova.edu/~dmatusze/resources/prolog/sleepy.html
 
-% http://www.csc.vill.edu/~dmatusze/resources/prolog/sleepy.html
 
 :- object(sleepy).
 
