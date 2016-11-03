@@ -50,6 +50,9 @@ built-in predicate.
 messages (such as `true/0` or `repeat/0`) would fail to check for
 instantiation errors.
 
+* FIXED: Spurious choice-point when using the `logtalk_compile/1-2` built-in
+predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
