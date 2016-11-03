@@ -102,10 +102,12 @@ Tools
 to `true`.
 
 * ADDED: Predicate `lgtunit::run_test/1` for running an individual test.
+Thanks to Barry Evans for the suggestion.
 
 * ADDED: Predicate `lgtunit::benchmark/4` supporting the specification of
 the clock to be used (either `cpu` or `wall`). The `wall` clock is useful
-for benchmarking goals that spawn threads.
+for benchmarking goals that spawn threads. Thanks to Barry Evans for the
+suggestion.
 
 * ADDED: Zoom option to the `diagrams` tool that allows linking library
 diagrams to entity diagrams to predicate cross-referencing diagrams.
