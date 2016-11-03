@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2016/10/29,
+		date is 2016/11/02,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -481,8 +481,10 @@
 		),
 		fix_options(Options, FixedOptions).
 
-	fix_option(path_url_prefixes(Directory, CodePrefix, DocPrefix), path_url_prefixes(NormalizedDirectory, CodePrefix, DocPrefix)) :-
-		normalize_directory_paths([Directory], [NormalizedDirectory]).
+	fix_option(url_prefixes(CodePrefix, DocPrefix), url_prefixes(NormalizedCodePrefix, NormalizedDocPrefix)) :-
+		normalize_directory_paths([CodePrefix, DocPrefix], [NormalizedCodePrefix, NormalizedDocPrefix]).
+	fix_option(path_url_prefixes(Directory, CodePrefix, DocPrefix), path_url_prefixes(NormalizedDirectory, NormalizedCodePrefix, NormalizedDocPrefix)) :-
+		normalize_directory_paths([Directory, CodePrefix, DocPrefix], [NormalizedDirectory, NormalizedCodePrefix, NormalizedDocPrefix]).
 	fix_option(omit_path_prefixes(Prefixes), omit_path_prefixes(NormalizedPrefixes)) :-
 		normalize_directory_paths(Prefixes, NormalizedPrefixes).
 	fix_option(output_directory(Directory), output_directory(NormalizedDirectory)) :-
