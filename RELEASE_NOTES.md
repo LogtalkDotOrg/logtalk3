@@ -53,6 +53,9 @@ instantiation errors.
 * FIXED: Spurious choice-point when using the `logtalk_compile/1-2` built-in
 predicates.
 
+* FIXED: Using the `{}/1` compiler bypass control construct as argument to the
+`if/1` and `elif/1` conditional compilation directives.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -7449,7 +7449,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Value == skip_all ->
 		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	% Value == skip_else,
-		(	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error)) ->
+		(	(	Goal = {UserGoal} ->
+				catch(UserGoal, Error, '$lgt_first_stage_error_handler'(Error))
+			;	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error))	
+			) ->
 			asserta('$lgt_pp_cc_mode_'(skip_else))
 		;	asserta('$lgt_pp_cc_mode_'(seek_else)),
 			retractall('$lgt_pp_cc_skipping_'),
@@ -7461,7 +7464,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% top-level if
 	!,
 	asserta('$lgt_pp_cc_if_found_'(Goal)),
-	(	call(Goal) ->
+	(	(	Goal = {UserGoal} ->
+			catch(UserGoal, Error, '$lgt_first_stage_error_handler'(Error))
+		;	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error))
+		) ->
 		asserta('$lgt_pp_cc_mode_'(skip_else))
 	;	asserta('$lgt_pp_cc_mode_'(seek_else)),
 		retractall('$lgt_pp_cc_skipping_'),
@@ -7509,7 +7515,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% Mode == seek_else,
 		% the corresponding if is false
 		retract('$lgt_pp_cc_mode_'(_)),
-		(	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error)) ->
+		(	(	Goal = {UserGoal} ->
+				catch(UserGoal, Error, '$lgt_first_stage_error_handler'(Error))
+			;	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error))
+			) ->
 			retractall('$lgt_pp_cc_skipping_'),
 			asserta('$lgt_pp_cc_mode_'(skip_else))
 		;	asserta('$lgt_pp_cc_mode_'(seek_else))
