@@ -129,11 +129,14 @@ predicates called in *self*.
 `.pro` file extensions to the default list of recognized Prolog file name
 extensions.
 
+* IMPROVED: Represent non-terminal callers in predicate cross-referencing
+diagrams as non-terminals instead of using the corresponding predicate form.
+
 * FIXED: Bug in the generation of library cross-referencing diagrams where
 all external predicates would be assigned to the `user` pseudo-object.
 
-* FIXED: Represent non-terminal callers in entity predicate cross-referencing
-diagrams as non-terminals instead of using the corresponding predicate form.
+* FIXED: Bug in some diagram methods that would fail to reset the internal
+database before generating a diagram.
 
 * FIXED: Example doclets to prevent issues with different concepts of working
 directory across supported backend Prolog compilers.

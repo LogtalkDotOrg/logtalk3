@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2016/11/02,
+		date is 2016/11/03,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -62,7 +62,7 @@
 		atom_concat(Identifier0, Kind, Identifier),
 		^^format_object(Format),
 		^^merge_options(UserOptions, Options),
-		reset,
+		::reset,
 		^^output_file_path(Identifier, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		Format::file_header(diagram_output_file, Identifier, Options),
@@ -394,6 +394,7 @@
 		modules_diagram_support::module_property(Entity, Property).
 
 	reset :-
+		^^reset,
 		retractall(included_predicate_(_)),
 		retractall(referenced_predicate_(_)),
 		retractall(external_predicate_(_)).

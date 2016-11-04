@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2016/11/03,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -61,7 +61,7 @@
 		^^locate_file(Source, Basename, Extension, Directory, Path),
 		atom_concat(Name, Extension, Basename),
 		^^merge_options(UserOptions, Options),
-		reset,
+		::reset,
 		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		Format::file_header(diagram_output_file, Basename, Options),

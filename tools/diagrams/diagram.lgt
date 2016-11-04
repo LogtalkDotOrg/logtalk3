@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2016/11/02,
+		date is 2016/11/03,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -95,6 +95,7 @@
 	all_libraries(UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
+		::reset,
 		::output_file_path(all_libraries, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		Format::file_header(diagram_output_file, libraries, Options),
@@ -375,6 +376,7 @@
 	all_files(UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
+		::reset,
 		::output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		Format::file_header(diagram_output_file, files, Options),
