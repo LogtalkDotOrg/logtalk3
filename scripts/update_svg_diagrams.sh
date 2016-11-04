@@ -43,11 +43,11 @@ logtalk="swilgt$extension -g"
 
 
 # documentation goals
-core_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), inheritance_diagram::library(core,[title('Logtalk core entities'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER','$LOGTALKHOME'])]), halt."
+core_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), inheritance_diagram::library(core,[title('Logtalk core entities'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
 
-library_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::library(library, [title('Logtalk library'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER','$LOGTALKHOME'])]), halt."
+library_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::library(library, [title('Logtalk library'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
 
-tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER','$LOGTALKHOME'])]), halt."
+tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
 
 
 print_version() {
