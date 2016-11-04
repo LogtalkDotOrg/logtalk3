@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.9,
+		version is 2.10,
 		author is 'Paulo Moura',
-		date is 2016/11/03,
+		date is 2016/11/04,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -117,6 +117,8 @@
 	process(Kind, Entity, Options) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, defines(Predicate0, Properties)),
+		% exclude dynamic predicates that have no clauses defined at compilation time
+		Properties \== [],
 		\+ entity_property(Kind, Entity, declares(Predicate0, _)),
 		\+ member(auxiliary, Properties),
 		(	member(non_terminal(NonTerminal), Properties) ->

@@ -135,6 +135,9 @@ all external predicates would be assigned to the `user` pseudo-object.
 * FIXED: Bug in some diagram methods that would fail to reset the internal
 database before generating a diagram.
 
+* FIXED: When generating entity diagrams, don't generate nodes for dynamic
+predicates that have no clauses defined at compilation time.
+
 * FIXED: Example doclets to prevent issues with different concepts of working
 directory across supported backend Prolog compilers.
 
