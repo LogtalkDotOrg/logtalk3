@@ -119,9 +119,6 @@ linking diagrams using the `zoom/1` option.
 of the `xml_docs_directory/1`, `omit_path_prefixes/1`, `exclude_files/1`,
 `exclude_paths/1`, `entity_xsl_file/1`, and `index_xsl_file/1` options.
 
-* IMPROVED: The `diagrams` tool now expands the arguments of the option
-`url_prefixes/2`.
-
 * IMPROVED: Predicate cross-referencing diagrams now include edges for
 predicates called in *self*.
 
