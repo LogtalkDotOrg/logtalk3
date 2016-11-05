@@ -16600,7 +16600,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Goal2 = true
 	),
 	% an object may contain multiple initialization/1 directives
-	(	bagof(ObjectInitGoal, '$lgt_pp_final_object_initialization_'(ObjectInitGoal, _), ObjectInitGoals) ->
+	(	bagof(ObjectInitGoal, Lines^'$lgt_pp_final_object_initialization_'(ObjectInitGoal, Lines), ObjectInitGoals) ->
 		'$lgt_list_to_conjunction'(ObjectInitGoals, Goal3),
 		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)
 	;	'$lgt_remove_redundant_calls'((Goal1, Goal2), Goal)

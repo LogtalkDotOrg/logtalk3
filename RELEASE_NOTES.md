@@ -56,6 +56,9 @@ predicates.
 * FIXED: Using the `{}/1` compiler bypass control construct as argument to the
 `if/1` and `elif/1` conditional compilation directives.
 
+* FIXED: Bug where `initialization/1`directives in included files would be
+ignored when the main file also have one or more `initialization/1`directives.
+
 Prolog adapter and integration files
 ------------------------------------
 
