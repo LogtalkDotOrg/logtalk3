@@ -21299,9 +21299,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_load_settings_file'(deny, _, disabled).
 
 '$lgt_load_settings_file'(restrict, Options, Result) :-
-	% lookup for a settings file restricted to the Logtalk user folder
-	(	'$lgt_user_directory'(User),
+	% lookup for a settings file restricted to the Logtalk user directory or home directory
+	(	% first lookup for a settings file in the Logtalk user directory
+		'$lgt_user_directory'(User),
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
+		true
+	;	% if not found, lookup for a settings file in the user home directory
+		'$lgt_expand_library_path'(home, Home),
+		'$lgt_load_settings_file_from_directory'(Home, Options, Result) ->
 		true
 	;	% no settings file found
 		Result = none(restrict)
@@ -21312,9 +21317,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_startup_directory'(Startup),
 		'$lgt_load_settings_file_from_directory'(Startup, Options, Result) ->
 		true
-	;	% if not found, lookup for a settings file in the Logtalk user folder
+	;	% if not found, lookup for a settings file in the Logtalk user directory
 		'$lgt_user_directory'(User),
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
+		true
+	;	% if still not found, lookup for a settings file in the user home directory
+		'$lgt_expand_library_path'(home, Home),
+		'$lgt_load_settings_file_from_directory'(Home, Options, Result) ->
 		true
 	;	% no settings file found
 		Result = none(allow)

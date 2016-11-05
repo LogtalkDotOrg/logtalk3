@@ -230,7 +230,7 @@ The adapter files specifies <em>default</em> values for most of the Logtalk comp
 </p>
 <dl>
 	<dt><code>settings_file</code></dt>
-		<dd>Allows or disables loading of <em>settings files</em> at startup. Possible values are <code>allow</code>, <code>restrict</code>, and <code>deny</code>. The usual default value is <code>allow</code> but it can be changed by editing the adapter file when e.g. embedding Logtalk in a compiled application. With a value of <code>allow</code>, settings files are searched in the startup directory and in the Logtalk user directory. With a value of <code>restrict</code>, settings files are only searched in the Logtalk user directory.</dd>
+		<dd>Allows or disables loading of <em>settings files</em> at startup. Possible values are <code>allow</code>, <code>restrict</code>, and <code>deny</code>. The usual default value is <code>allow</code> but it can be changed by editing the adapter file when e.g. embedding Logtalk in a compiled application. With a value of <code>allow</code>, settings files are searched in the startup directory, in the Logtalk user directory, and in the user home directory. With a value of <code>restrict</code>, settings files are only searched in the Logtalk user directory and in the user home directory.</dd>
 </dl>
 <dl>
 	<dt><code>prolog_dialect</code></dt>
@@ -276,7 +276,7 @@ The adapter files specifies <em>default</em> values for most of the Logtalk comp
 <h3 id="installing_settings">Settings files</h3>
 
 <p>
-Although is always possible to edit the back-end Prolog compiler adapter files, the recommended solution to customize compiler flags is to edit the <code>settings.lgt</code> file in the Logtalk user folder. Depending on the back-end Prolog compiler and on the operating-system, is also possible to define per-project settings files by creating a <code>settings.lgt</code> file in the project directory and by starting Logtalk from this directory. At startup, Logtalk tries to load a <code>settings.lgt</code> file from the startup directory (assuming that the read-only <code>settings</code> flag is set to <code>allow</code>). If not found, Logtalk tries to load a <code>settings.lgt</code> file from the Logtalk user folder. If no settings files are found, Logtalk will use the default compiler flag values set on the back-end Prolog compiler adapter files. When limitations of the back-end Prolog compiler or on the operating-system prevent Logtalk from finding the settings files, these can always be loaded manually after Logtalk startup.
+Although is always possible to edit the back-end Prolog compiler adapter files, the recommended solution to customize compiler flags is to edit the <code>settings.lgt</code> file in the Logtalk user folder or in the user home folder. Depending on the back-end Prolog compiler and on the operating-system, is also possible to define per-project settings files by creating a <code>settings.lgt</code> file in the project directory and by starting Logtalk from this directory. At startup, Logtalk tries to load a <code>settings.lgt</code> file from the startup directory (assuming that the read-only <code>settings</code> flag is set to <code>allow</code>). If not found, Logtalk tries to load a <code>settings.lgt</code> file from the Logtalk user folder. If still not found, Logtalk tries to load a <code>settings.lgt</code> file from the user home folder. If no settings files are found, Logtalk will use the default compiler flag values set on the back-end Prolog compiler adapter files. When limitations of the back-end Prolog compiler or on the operating-system prevent Logtalk from finding the settings files, these can always be loaded manually after Logtalk startup.
 </p>
 <p>
 Settings files are normal Logtalk source files (although when automatically loaded by Logtalk they are compiled silently with any errors being simply ignored). The usual contents is an <code>initialization/1</code> Prolog directive containing calls to the <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> Logtalk built-in predicate and asserting clauses for the <a title="Consult reference manual" href="../refman/predicates/logtalk_library_path_2.html"><code>logtalk_library_path/2</code></a> multifile dynamic predicate. Note that the <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive cannot be used as its scope is local to the source file being compiled. For example, one of the troubles of writing portable applications is the different feature sets of Prolog compilers. A typical issue is the lack of support for tabling. Using the Logtalk support for conditional compilation you could write:
@@ -336,7 +336,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 7, 2016</span>
+		<span>Last updated on: November 5, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

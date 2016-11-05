@@ -27,6 +27,14 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Settings files are now also looked up in the user home directory
+when not found in the startup directory or in the Logtalk user directory.
+Setting the `settings_file` flag to `restrict` now restricts searching for
+a settings file to the Logtalk user directory and the user home directory.
+This changes are useful when a team shares a Logtalk installation with both
+the `LOGTALKHOME` and `LOGTALKUSER` environment variables pointing to the
+same directory. Thanks to Barry Evans for the suggestion.
+
 * NEW: Inline calls in linking clauses to entity local predicates, to Prolog
 module, built-in, and foreign predicates, and to predicates defined in the
 `user` pseudo-object when compiling source files with the `optimize` flag
