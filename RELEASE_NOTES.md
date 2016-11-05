@@ -172,6 +172,10 @@ Thanks to Eric Charikane for the updated links.
 Tests
 -----
 
+* ADDED: Additional tests for the `include/1` directive to check compilation
+of multiple `initialization/1` directives in the main file and in the included
+files.
+
 * ADDED: Unit tests for the new `updates/2` object and category property.
 
 * ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.

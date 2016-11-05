@@ -55,4 +55,19 @@
 	test(include_1_06) :-
 		\+ current_predicate(c/3).
 
+	% test multiple initialization/1 directives
+	% in main file and in the included files
+
+	test(include_1_07) :-
+		main<<a,
+		main<<main.
+
+	test(include_1_08) :-
+		main<<b,
+		main<<include_1.
+
+	test(include_1_09) :-
+		main<<c,
+		main<<include_2.
+
 :- end_object.
