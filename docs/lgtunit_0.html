@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>3.5</code>
+            <code>3.6</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/10/27</code>
+            <code>2016/11/5</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -74,26 +74,6 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="run/2" class="code">run/2</h3>
-          <blockquote>
-            <p class="comment">Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>run(File,Mode)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>run(+atom,+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
           <h3 id="run/0" class="code">run/0</h3>
           <blockquote>
             <p class="comment">Runs the unit tests, writing the results to the current output stream.</p>
@@ -110,9 +90,9 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="run_test/1" class="code">run_test/1</h3>
+          <h3 id="run/1" class="code">run/1</h3>
           <blockquote>
-            <p class="comment">Runs a given unit test, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.</p>
+            <p class="comment">Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -121,7 +101,34 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>run_test(Test)</code>
+              <code>run(Tests)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>run(+atom) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>run(+list(atom)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="run/2" class="code">run/2</h3>
+          <blockquote>
+            <p class="comment">Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>run(File,Mode)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>run(+atom,+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>

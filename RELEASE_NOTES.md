@@ -115,8 +115,8 @@ Tools
 * CHANGED: The default value of the diagrams option `node_type_captions/1`
 to `true`.
 
-* ADDED: Predicate `lgtunit::run_test/1` for running an individual test.
-Thanks to Barry Evans for the suggestion.
+* ADDED: Predicate `lgtunit::run/1` for running a unit test or a list of
+unit tests. Thanks to Barry Evans for the suggestion.
 
 * ADDED: Predicate `lgtunit::benchmark/4` supporting the specification of
 the clock to be used (either `cpu` or `wall`). The `wall` clock is useful

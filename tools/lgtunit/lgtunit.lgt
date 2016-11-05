@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.5,
+		version is 3.6,
 		author is 'Paulo Moura',
-		date is 2016/10/27,
+		date is 2016/11/05,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -39,24 +39,25 @@
 		argnames is ['Entity']
 	]).
 
-	:- public(run/2).
-	:- mode(run(+atom, +atom), one).
-	:- info(run/2, [
-		comment is 'Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).',
-		argnames is ['File', 'Mode']
-	]).
-
 	:- public(run/0).
 	:- mode(run, one).
 	:- info(run/0, [
 		comment is 'Runs the unit tests, writing the results to the current output stream.'
 	]).
 
-	:- public(run_test/1).
-	:- mode(run_test, zero_or_one).
-	:- info(run_test/1, [
-		comment is 'Runs a given unit test, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.',
-		argnames is ['Test']
+	:- public(run/1).
+	:- mode(run(+atom), zero_or_one).
+	:- mode(run(+list(atom)), zero_or_one).
+	:- info(run/1, [
+		comment is 'Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.',
+		argnames is ['Tests']
+	]).
+
+	:- public(run/2).
+	:- mode(run(+atom, +atom), one).
+	:- info(run/2, [
+		comment is 'Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).',
+		argnames is ['File', 'Mode']
 	]).
 
 	:- public(deterministic/1).
@@ -490,8 +491,16 @@
 		% restore the current output stream
 		set_output(Output).
 
-	run_test(Test) :-
+	run(Test) :-
+		atom(Test),
+		!,
+		run([Test]).
+	run(Tests) :-
 		run_setup,
+		forall(member(Test, Tests), run_test(Test)),
+		run_cleanup.
+
+	run_test(Test) :-
 		self(Self),
 		::test_(Test, Spec),
 		object_property(Self, file(File)),
@@ -499,8 +508,7 @@
 		current_input(Input), current_output(Output),
 		run_test(Spec, File, Output),
 		% restore the current input and output streams
-		set_input(Input), set_output(Output),
-		run_cleanup.
+		set_input(Input), set_output(Output).
 
 	run_condition :-
 		% expected either success or failure; error means user error 
