@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.26,
+		version is 1.27,
 		author is 'Paulo Moura',
-		date is 2016/10/30,
+		date is 2016/11/06,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -76,7 +76,7 @@
 		expand_only_directory_part(Path, ExpandedPath) :-
 			decompose_file_name(Path, Directory, Name, Extension),
 			expand_path_(Directory, ExpandedDirectory),
-			atomic_list_concat([ExpandedDirectory, Name, Extension], ExpandedPath).
+			{atomic_list_concat([ExpandedDirectory, Name, Extension], ExpandedPath)}.
 
 		make_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),

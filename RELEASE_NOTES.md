@@ -109,6 +109,10 @@ of an atom by another atom in an atom.
 backend compiler to allow correct expansion of Java file names with a `$`
 in the middle of the name.
 
+* FIXED: Avoid portability warnings when compiling the standard library
+due to calls to non-standard built-in predicates from within conditional
+compilation blocks.
+
 Tools
 -----
 

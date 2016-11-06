@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/09/01,
+		date is 2016/11/06,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -158,7 +158,7 @@
 	:- if(current_logtalk_flag(modules, supported)).
 
 	arbitrary(module, Arbitrary) :-
-		findall(Module, current_module(Module), Modules),
+		findall(Module, {current_module(Module)}, Modules),
 		member(Arbitrary, Modules).
 
 	:- endif.

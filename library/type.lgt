@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/09/17,
+		date is 2016/11/06,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
@@ -174,7 +174,7 @@
 			true
 		;	current_category(Term) ->
 			true
-		;	current_module(Term) ->
+		;	{current_module(Term)} ->
 			true
 		;	callable(Term) ->
 			throw(existence_error(entity, Term))
@@ -234,7 +234,7 @@
 	check(module, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
-		;	current_module(Term) ->
+		;	{current_module(Term)} ->
 			true
 		;	atom(Term) ->
 			throw(existence_error(module, Term))

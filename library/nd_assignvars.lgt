@@ -33,9 +33,9 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2015/07/31,
+		date is 2016/11/06,
 		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms).'
 	]).
 
@@ -126,7 +126,7 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 		assignable('$'(Init,_), Init).
 
 		Assignable <= Value :-
-			setarg(1, Assignable, Value).
+			{setarg(1, Assignable, Value)}.
 
 		'$'(Value,_) => Value :-
 			nonvar(Value).
