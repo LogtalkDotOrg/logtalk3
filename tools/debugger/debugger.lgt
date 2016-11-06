@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 3.0,
+		version is 3.1,
 		author is 'Paulo Moura',
-		date is 2016/10/14,
+		date is 2016/11/06,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -825,7 +825,7 @@
 
 	do_port_option(b, _, _, _, _, _, _, _) :-
 		suspend(Tracing),
-		break,
+		{break},
 		resume(Tracing),
 		fail.
 
@@ -864,7 +864,7 @@
 	:- if(current_logtalk_flag(threads, supported)).
 
 		inc_invocation_number(New) :-
-			with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New)).
+			{with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New))}.
 
 		inc_invocation_number_aux(New) :-
 			(	retract(invocation_number_(Old)) ->
@@ -894,7 +894,7 @@
 	:- if(current_logtalk_flag(prolog_dialect, cx)).
 
 		read_single_char(Char) :-
-			get_single_char(Code), put_code(Code), char_code(Char, Code),
+			{get_single_char(Code)}, put_code(Code), char_code(Char, Code),
 			(	Code =:= 10 ->
 				true
 			;	nl
@@ -939,7 +939,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
 		read_single_char(Char) :-
-			get_single_char(Code), put_code(Code), nl, char_code(Char, Code).
+			{get_single_char(Code)}, put_code(Code), nl, char_code(Char, Code).
 
 	:- else.
 
@@ -960,5 +960,5 @@
 
 :- if(current_logtalk_flag(prolog_dialect, swi)).
 	% add dummy meta_predicate/1 directive to avoid cluttering the make/0 analysis report
-	:- meta_predicate(':'(user,'$debugger#0.call_goal#2'(*,*,*))).
+	{:- meta_predicate(':'(user,'$debugger#0.call_goal#2'(*,*,*)))}.
 :- endif.

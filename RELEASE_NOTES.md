@@ -159,6 +159,10 @@ predicates that have no clauses defined at compilation time.
 * FIXED: Example doclets to prevent issues with different concepts of working
 directory across supported backend Prolog compilers.
 
+* FIXED: Avoid portability warnings when compiling the developer tools due to
+directives and calls to non-standard built-in predicates found in conditional
+compilation blocks.
+
 Examples
 --------
 

@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/12/04,
+		date is 2016/11/06,
 		comment is 'Pseudo-object "user" representing the plain Prolog database.']).
 
 	:- built_in.
@@ -42,6 +42,6 @@
 	% it's not necessary or used as the Logtalk compiler already performs
 	% this translation
 	forward(Message) :-
-		{Message}.
+		{call(Message)}.
 
 :- end_object.
