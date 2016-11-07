@@ -22,7 +22,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 3.2,
+		version is 3.3,
 		author is 'Paulo Moura',
 		date is 2016/11/07,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -861,30 +861,17 @@
 			valid_leash_port(Port)
 		).
 
-	:- if(current_logtalk_flag(threads, supported)).
+	:- synchronized([
+		inc_invocation_number/1, reset_invocation_number/1
+	]).
 
-		inc_invocation_number(New) :-
-			with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New)).
-
-		inc_invocation_number_aux(New) :-
-			(	retract(invocation_number_(Old)) ->
-				New is Old + 1,
-				asserta(invocation_number_(New))
-			;	% something weird happen as the previous call should never fail
-				reset_invocation_number(New)
-			).
-
-	:- else.
-
-		inc_invocation_number(New) :-
-			(	retract(invocation_number_(Old)) ->
-				New is Old + 1,
-				asserta(invocation_number_(New))
-			;	% something weird happen as the previous call should never fail
-				reset_invocation_number(New)
-			).
-
-	:- endif.
+	inc_invocation_number(New) :-
+		(	retract(invocation_number_(Old)) ->
+			New is Old + 1,
+			asserta(invocation_number_(New))
+		;	% something weird happen as the previous call should never fail
+			reset_invocation_number(New)
+		).
 
 	reset_invocation_number(0) :-
 		retractall(invocation_number_(_)),
