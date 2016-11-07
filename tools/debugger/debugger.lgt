@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 3.1,
+		version is 3.2,
 		author is 'Paulo Moura',
-		date is 2016/11/06,
+		date is 2016/11/07,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -864,7 +864,7 @@
 	:- if(current_logtalk_flag(threads, supported)).
 
 		inc_invocation_number(New) :-
-			{with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New))}.
+			with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New)).
 
 		inc_invocation_number_aux(New) :-
 			(	retract(invocation_number_(Old)) ->
