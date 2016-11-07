@@ -88,11 +88,16 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/09/22,
+		date is 2016/11/07,
 		comment is 'Abstract interface to JIProlog API utility predicates.'
 	]).
+
+	value_reference(true, true).
+	value_reference(false, false).
+	value_reference(void, void).
+	value_reference(null, []).
 
 	true(true).
 

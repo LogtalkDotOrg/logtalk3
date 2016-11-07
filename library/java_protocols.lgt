@@ -68,10 +68,17 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/09/21,
+		date is 2016/11/07,
 		comment is 'Abstract interface to Java utility predicates.'
+	]).
+
+	:- public(value_reference/2).
+	:- mode(value_reference(?atom, --var), one_or_more).
+	:- info(value_reference/2, [
+		comment is 'Returns an opaque term that represents the Java value.',
+		argnames is ['Value', 'Reference']
 	]).
 
 	:- public(true/1).

@@ -89,9 +89,9 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/09/21,
+		date is 2016/11/07,
 		comment is 'Abstract interface to JPL API utility predicates.'
 	]).
 
@@ -101,6 +101,15 @@
 		jpl_list_to_array/2, jpl_array_to_list/2,
 		jpl_iterator_element/2
 	]).
+
+	value_reference(true, Reference) :-
+		jpl_true(Reference).
+	value_reference(false, Reference) :-
+		jpl_false(Reference).
+	value_reference(void, Reference) :-
+		jpl_void(Reference).
+	value_reference(null, Reference) :-
+		jpl_null(Reference).
 
 	true(Reference) :-
 		jpl_true(Reference).

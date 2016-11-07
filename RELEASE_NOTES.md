@@ -116,6 +116,8 @@ of an atom by another atom in an atom.
 
 * ADDED: Predicate `make_library_path/1` to the `os` library.
 
+* ADDED: Predicate `value_reference/2` to the Java library.
+
 * FIXED: Added workaround to the `os` library when using SWI-Prolog as the
 backend compiler to allow correct expansion of Java file names with a `$`
 in the middle of the name.
