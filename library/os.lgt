@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.27,
+		version is 1.28,
 		author is 'Paulo Moura',
-		date is 2016/11/06,
+		date is 2016/11/07,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -1669,49 +1669,56 @@
 		;	strrch1(Xs1, G, Prev, Ys)
 		).
 
-	make_directory_path_portable(Path) :-
-		expand_path(Path, ExpandedPath),
-		(	directory_exists(ExpandedPath) ->
-			true
-		;	sub_atom(ExpandedPath, _, 1, 0, '/') ->
-			sub_atom(ExpandedPath, 0, _, 1, ExpandedPath1),
-			path_parts(ExpandedPath1, [], Parts)
-		;	path_parts(ExpandedPath, [], Parts)
-		),
-		make_parts(Parts).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		Dialect \== swi, Dialect \== qp, Dialect \== quints
+	)).
 
-	path_parts(Path, Parts0, Parts) :-
-		decompose_file_name(Path, Directory, Name, Extension),
-		(	Path == Directory ->
-			atom_concat(Name, Extension, Part0),
-			atom_concat('/', Part0, Part),
-			Parts = [Part| Parts0]
-		;	Directory == ('/') ->
-			Parts = [Path| Parts0]
-		;	Directory = './' ->
-			atom_concat(Name, Extension, Part),
-			Parts = [Part| Parts0]
-		;	atom_concat(Name, Extension, Part0),
-			atom_concat('/', Part0, Part),
-			sub_atom(Directory, 0, _, 1, Directory1),
-			path_parts(Directory1, [Part| Parts0], Parts)
-		).
+		make_directory_path_portable(Path) :-
+			expand_path(Path, ExpandedPath),
+			(	directory_exists(ExpandedPath) ->
+				true
+			;	sub_atom(ExpandedPath, _, 1, 0, '/') ->
+				sub_atom(ExpandedPath, 0, _, 1, ExpandedPath1),
+				path_parts(ExpandedPath1, [], Parts)
+			;	path_parts(ExpandedPath, [], Parts)
+			),
+			make_parts(Parts).
 
-	make_parts([]).
-	make_parts([Part| Parts]) :-
-		make_parts_(Parts, Part).
+		path_parts(Path, Parts0, Parts) :-
+			decompose_file_name(Path, Directory, Name, Extension),
+			(	Path == Directory ->
+				atom_concat(Name, Extension, Part0),
+				atom_concat('/', Part0, Part),
+				Parts = [Part| Parts0]
+			;	Directory == ('/') ->
+				Parts = [Path| Parts0]
+			;	Directory = './' ->
+				atom_concat(Name, Extension, Part),
+				Parts = [Part| Parts0]
+			;	atom_concat(Name, Extension, Part0),
+				atom_concat('/', Part0, Part),
+				sub_atom(Directory, 0, _, 1, Directory1),
+				path_parts(Directory1, [Part| Parts0], Parts)
+			).
 
-	make_parts_([], Part) :-
-		(	directory_exists(Part) ->
-			true
-		;	make_directory(Part)
-		).
-	make_parts_([Part| Parts], Root) :-
-		(	directory_exists(Root) ->
-			true
-		;	make_directory(Root)
-		),
-		atom_concat(Root, Part, NewRoot),
-		make_parts_(Parts, NewRoot).
+		make_parts([]).
+		make_parts([Part| Parts]) :-
+			make_parts_(Parts, Part).
+
+		make_parts_([], Part) :-
+			(	directory_exists(Part) ->
+				true
+			;	make_directory(Part)
+			).
+		make_parts_([Part| Parts], Root) :-
+			(	directory_exists(Root) ->
+				true
+			;	make_directory(Root)
+			),
+			atom_concat(Root, Part, NewRoot),
+			make_parts_(Parts, NewRoot).
+
+	:- endif.
 
 :- end_object.
