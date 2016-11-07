@@ -79,8 +79,13 @@ XSB adapter file, where it is no longer used, to the library `os` object.
 
 * ADDED: Normalization of arithmetic evaluation errors when using XSB.
 
-* ADDED: Definition for the SWI-Prolog `prolog:make_hook/2` hook predicate to
-automatically call `logtalk_make/0` when calling `make/0`.
+* ADDED: Commented out experimental definition (to the `swihooks.pl` file)
+for the SWI-Prolog `prolog:make_hook/2` hook predicate to automatically call
+`logtalk_make/0` when calling `make/0`.
+
+* ADDED: Commented out experimental definition (to the `swihooks.pl` file)
+for SWI-Prolog to print a stack trace for errors generated from top-level
+message sending calls.
 
 * IMPROVED: Faster implementation of the internal `'$lgt_predicate_property'/2`
 predicate for SWI-Prolog.
