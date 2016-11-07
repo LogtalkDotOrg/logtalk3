@@ -46,9 +46,9 @@ send_to_object_test_object(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/03/31,
+		date is 2016/11/07,
 		comment is 'Unit tests for the (::)/2 built-in control construct.'
 	]).
 
@@ -119,13 +119,13 @@ send_to_object_test_object(2).
 	throws(send_to_object_2_19, error(permission_error(access, private_predicate,s/4), logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
 		{send_to_object_test_object(_)::s(_,_,_,_)}.
 
-	throws(send_to_object_2_20, error(instantiation_error, logtalk({_}::true,user))) :-
+	throws(send_to_object_2_20, error(instantiation_error, _)) :-
 		{{_}::true}.
 
-	throws(send_to_object_2_21, error(type_error(object_identifier,1), logtalk({1}::true,user))) :-
+	throws(send_to_object_2_21, error(type_error(callable,1), _)) :-
 		{{1}::true}.
 
-	throws(send_to_object_2_22, error(existence_error(procedure,foo/0), logtalk({foo}::true,user))) :-
+	throws(send_to_object_2_22, error(existence_error(procedure,foo/0), _)) :-
 		{{foo}::true}.
 
 	succeeds(send_to_object_2_23) :-

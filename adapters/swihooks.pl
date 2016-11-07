@@ -748,7 +748,6 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_obj_super_call'(*,*,*).
 :- meta_predicate '$lgt_send_to_obj'(*,*,*).
 :- meta_predicate '$lgt_send_to_self'(*,*,*).
-:- meta_predicate '$lgt_call_proxy'(*,*,*).
 :- meta_predicate '$lgt_call_within_context_nv'(*,*,*).
 :- meta_predicate '$lgt_call_within_context'(*,*,*).
 

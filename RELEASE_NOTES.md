@@ -67,6 +67,12 @@ predicates.
 * FIXED: Bug where `initialization/1`directives in included files would be
 ignored when the main file also have one or more `initialization/1`directives.
 
+* FIXED: The convenient notation `{Proxy}::Message` to use parametric object
+proxies is now translated to `({Proxy}, Proxy::Message)` before compilation as
+per documentation. This is also consistent with the compilation of other calls
+in `user` and provides a small performance improvement over the previous use
+of a `catch/3` wrapper for `Proxy`.
+
 Prolog adapter and integration files
 ------------------------------------
 
