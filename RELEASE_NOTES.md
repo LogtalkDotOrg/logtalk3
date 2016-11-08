@@ -151,7 +151,7 @@ of the `xml_docs_directory/1`, `omit_path_prefixes/1`, `exclude_files/1`,
 `exclude_paths/1`, `entity_xsl_file/1`, and `index_xsl_file/1` options.
 
 * IMPROVED: Predicate cross-referencing diagrams now include edges for
-predicates called in *self*.
+predicates called in *self* and for *super* calls.
 
 * IMPROVED: Documentation of the `wrapper` tool and added `.prolog` and
 `.pro` file extensions to the default list of recognized Prolog file name

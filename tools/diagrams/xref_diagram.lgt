@@ -166,6 +166,13 @@
 		^^save_edge(Caller, Callee, ['calls in self'], calls_self_predicate, [tooltip('calls in self')| Options]),
 		fail.
 	process(Kind, Entity, Options) :-
+		calls_super_predicate(Kind, Entity, Caller, Callee),
+		\+ ^^edge(Caller, Callee, ['super call'], calls_super_predicate, _),
+		remember_referenced_predicate(Caller),
+		remember_referenced_predicate(Callee),
+		^^save_edge(Caller, Callee, ['super call'], calls_super_predicate, [tooltip('super call')| Options]),
+		fail.
+	process(Kind, Entity, Options) :-
 		calls_external_predicate(Kind, Entity, Caller, Callee),
 		remember_external_predicate(Callee),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
@@ -314,22 +321,61 @@
 		;	Caller = Caller0
 		).
 
-	calls_self_predicate(Kind, Entity, Caller, Predicate) :-
+	calls_super_predicate(Kind, Entity, Caller, Callee) :-
 		Kind \== protocol,
-		entity_property(Kind, Entity, calls(::Predicate, CallsProperties)),
-		ground(Predicate),
+		entity_property(Kind, Entity, calls(^^Callee0, CallsProperties)),
+		ground(Callee0),
 		memberchk(caller(Caller0), CallsProperties),
 		(	Caller0 = From::Predicate ->
+			% multifile predicate caller (unlikely but possible)
+			Predicate = Functor/Arity,
+			functor(Template, Functor, Arity),
 			(	current_object(From) ->
-				FromKind = object
-			;	FromKind = category
+				From::predicate_property(Template, CallerProperties)
+			;	% current_category(From),
+				create_object(Object, [imports(From)], [], []),
+				Object::predicate_property(Template, CallerProperties),
+				abolish_object(Object)
 			),
-			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
-			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
+			(	member(non_terminal(NonTerminal), CallerProperties) ->
 				Caller = From::NonTerminal
 			;	Caller = From::Predicate
 			)
-		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+		;	% local predicate caller
+			entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
+			member(non_terminal(CallerNonTerminal), CallerProperties) ->
+			Caller = CallerNonTerminal
+		;	Caller = Caller0
+		),
+		% usually caller and callee are the same predicate but that's not required
+		(	entity_property(Kind, Entity, defines(Callee0, CalleeProperties)),
+			member(non_terminal(CalleeNonTerminal), CalleeProperties) ->
+			Callee = CalleeNonTerminal
+		;	Callee = Callee0
+		).
+
+	calls_self_predicate(Kind, Entity, Caller, Callee) :-
+		Kind \== protocol,
+		entity_property(Kind, Entity, calls(::Callee, CallsProperties)),
+		ground(Callee),
+		memberchk(caller(Caller0), CallsProperties),
+		(	Caller0 = From::Predicate ->
+			% multifile predicate caller
+			Predicate = Functor/Arity,
+			functor(Template, Functor, Arity),
+			(	current_object(From) ->
+				From::predicate_property(Template, CallerProperties)
+			;	% current_category(From),
+				create_object(Object, [imports(From)], [], []),
+				Object::predicate_property(Template, CallerProperties),
+				abolish_object(Object)
+			),
+			(	member(non_terminal(NonTerminal), CallerProperties) ->
+				Caller = From::NonTerminal
+			;	Caller = From::Predicate
+			)
+		;	% local predicate caller
+			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
 			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
 			Caller = CallerNonTerminal
 		;	Caller = Caller0
