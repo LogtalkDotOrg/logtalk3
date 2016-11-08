@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on October 25, 2016
+Last updated on November 8, 2016
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -382,6 +382,11 @@ the `make/0` predicate will not detect the fixed file as no intermediate
 Prolog file was generated in the first loading attempt (use instead the
 `logtalk_make/0-1` predicates in this case).
 
+The `swihooks.pl` file includes experimental and commented out code for
+writing stack trace for errors generated from top-level message sending
+calls. To try it, copy the code to your Logtalk settings file that is
+loaded at startup.
+
 The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
 may improve compatibility of Logtalk code across different back-end 
 Prolog compilers buy may also cause compatibility problems with some 
@@ -407,7 +412,7 @@ predicates. Calls of these predicates within objects and categories must
 be explicitly qualified or implicit qualified by listing the predicates
 in `use_module/2` directives). You may also set the Logtalk `portability`,
 and `unknown_predicates` compiler flags to `warning` in order to detect
-unqualified calls to library predicates. All the module libraries should
+unqualified calls to library predicates. All the module libraries must
 be loaded prior to compilation of object and categories containing calls
 to the library predicates.
 
