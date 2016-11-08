@@ -169,6 +169,9 @@ database before generating a diagram.
 * FIXED: When generating entity diagrams, don't generate nodes for dynamic
 predicates that have no clauses defined at compilation time.
 
+* FIXED: Bug in predicate cross-referencing diagrams display where some
+external calls from non-terminals would not be represented correctly.
+
 * FIXED: Example doclets to prevent issues with different concepts of working
 directory across supported backend Prolog compilers.
 

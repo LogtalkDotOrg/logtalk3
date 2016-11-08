@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.10,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2016/11/04,
+		date is 2016/11/07,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -346,12 +346,19 @@
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Object::Callee0, CallsProperties)),
 		nonvar(Object),
-		memberchk(caller(Caller), CallsProperties),
-		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
+		memberchk(caller(Caller0), CallsProperties),
+		entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
 		\+ member(auxiliary, CallerProperties),
-		(	member(non_terminal(CalleeNonTerminal), CallsProperties) ->
+		Callee0 = Functor/Arity,
+		functor(Template, Functor, Arity),
+		Object::predicate_property(Template, CalleeProperties),
+		(	member(non_terminal(CalleeNonTerminal), CalleeProperties) ->
 			Callee = CalleeNonTerminal
 		;	Callee = Callee0
+		),
+		(	member(non_terminal(CallerNonTerminal), CallerProperties) ->
+			Caller = CallerNonTerminal
+		;	Caller = Caller0
 		).
 	calls_external_predicate(Kind, Entity, Caller, ':'(Module,Callee)) :-
 		Kind \== protocol,
