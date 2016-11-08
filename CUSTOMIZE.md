@@ -80,9 +80,10 @@ settings on the `settings-sample.lgt` for configuration suggestions.
 
 You may customize the Logtalk compiler flags and add your own library paths
 by coping or renaming the `settings-sample.lgt` file in your Logtalk user
-folder to `settings.lgt` and editing it. Settings in this file override the
-default values in the adapter files. Some of the default flag values that
-you may want to change include:
+folder to `settings.lgt` and editing it. The `settings.lgt` file may also be
+stored in your home directory. Settings in this file override the default
+values in the adapter files. Some of the default flag values that you may
+want to change include:
 
 * `report`  
     for less verbose startup and compilation reports

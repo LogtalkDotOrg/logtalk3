@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on October 25, 2016
+%  Last updated on November 7, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -32,12 +32,14 @@
 %
 %  Logtalk looks for a settings file first in the startup directory (thus
 %  supporting per-project settings files). If not found, Logtalk looks for
-%  a settings file in the Logtalk user directory. If no settings file is
-%  found, Logtalk will use the default flag values defined in the backend
-%  Prolog compiler adapter file. It's however possible to restrict searching
-%  of settings files to the Logtalk user directory or to disable settings
-%  files by changing the definition of the read-only flag `settings_file`
-%  in the used Prolog adapter file.
+%  a settings file in the Logtalk user directory. If still not found, Logtalk
+%  for a settings file in the home directory. If no settings file is found,
+%  Logtalk will use the default flag values defined in the backend Prolog
+%  compiler adapter file. It's however possible to restrict searching
+%  of settings files to the Logtalk user directory and to the home directory
+%  or to disable settings files by changing the definition of the read-only
+%  flag `settings_file` in the used Prolog adapter file from `allow` to,
+%  respectively, `restrict` or `deny`.
 %
 %  Logtalk uses the value of the `LOGTALK_STARTUP_DIRECTORY` environment
 %  variable for the startup directory and the value of the `LOGTALKUSER`
