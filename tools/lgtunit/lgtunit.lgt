@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.6,
+		version is 3.7,
 		author is 'Paulo Moura',
-		date is 2016/11/05,
+		date is 2016/11/09,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1099,6 +1099,10 @@
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
+		% avoid portability warnings
+		:- uses(user, [setup_call_cleanup/3]).
+		:- meta_predicate(user::setup_call_cleanup(0,0,0)).
+
 		deterministic(Goal) :-
 			setup_call_cleanup(true, Goal, Deterministic = true),
 			(	nonvar(Deterministic) ->
@@ -1109,6 +1113,10 @@
 	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
 				(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
 	)).
+		% avoid portability warnings
+		:- uses(user, [call_cleanup/2]).
+		:- meta_predicate(user::call_cleanup(0,0)).
+
 		deterministic(Goal) :-
 			call_cleanup(Goal, Deterministic = true),
 			(	var(Deterministic) ->
@@ -1117,6 +1125,10 @@
 			;	!
 			).
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+		% avoid portability warnings
+		:- uses(user, [call_det/2]).
+		:- meta_predicate(user::call_det(0,*)).
+
 		deterministic(Goal) :-
 			call_det(Goal, Deterministic),
 			!,
@@ -1148,7 +1160,7 @@
 			(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
 	)).
 		epsilon(Epsilon) :-
-			Epsilon is epsilon.
+			{Epsilon is epsilon}.
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
