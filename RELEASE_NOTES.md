@@ -73,6 +73,9 @@ per documentation. This is also consistent with the compilation of other calls
 in `user` and provides a small performance improvement over the previous use
 of a `catch/3` wrapper for `Proxy`.
 
+* FIXED: Portability report of non-standard arithmetic functions with no
+arguments.
+
 Prolog adapter and integration files
 ------------------------------------
 

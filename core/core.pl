@@ -12730,7 +12730,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
 '$lgt_check_non_portable_functions'(Expression, Lines) :-
-	compound(Expression),
+	callable(Expression),
 	% assume function
 	!,
 	(	'$lgt_iso_spec_function'(Expression) ->
