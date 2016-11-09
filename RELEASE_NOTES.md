@@ -172,6 +172,9 @@ predicates that have no clauses defined at compilation time.
 * FIXED: Bug in predicate cross-referencing diagrams display where some
 external calls from non-terminals would not be represented correctly.
 
+* FIXED: Cases where the `exclude_libraries/1` option would be ignored when
+generating library diagrams.
+
 * FIXED: Example doclets to prevent issues with different concepts of working
 directory across supported backend Prolog compilers.
 

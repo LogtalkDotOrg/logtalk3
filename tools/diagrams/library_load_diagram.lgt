@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2016/11/08,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -80,6 +80,8 @@
 			logtalk_library_path(OtherLibrary, _),
 			logtalk::expand_library_path(OtherLibrary, OtherDirectory) ->
 			% file found in a directory corresponding to a Logtalk library
+			memberchk(exclude_libraries(ExcludedLibraries), Options),
+			\+ member(OtherLibrary, ExcludedLibraries),
 			^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
 		;	modules_diagram_support::module_property(OtherLibrary, file(Other)) ->
 			% Prolog library module 
