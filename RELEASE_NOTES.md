@@ -188,6 +188,8 @@ compilation blocks.
 * FIXED: Bug in library dependency diagrams where edges could be generated for
 libraries without entity dependencies.
 
+* FIXED: Escape terms in dot HTML-like labels for most backend Prolog systems.
+
 Examples
 --------
 

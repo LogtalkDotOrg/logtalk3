@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2016/11/09,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -169,14 +169,14 @@
 			write(Stream, '"><IMG SRC="zoom.png"/></TD></TR>')
 		;	true
 		),
-		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11"><![CDATA['),
-		write(Stream, Label),
-		write(Stream, ']]></FONT></TD><TD> </TD></TR>'),
+		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),
+		write_escaped_term(Stream, Label),
+		write(Stream, '</FONT></TD><TD> </TD></TR>'),
 		(	member(node_type_captions(true), Options),
 			Caption \== '' ->
-			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7"><![CDATA['),
-			write(Stream, Caption),
-			write(Stream, ']]></FONT></TD><TD> </TD></TR>')
+			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7">'),
+			write_escaped_term(Stream, Caption),
+			write(Stream, '</FONT></TD><TD> </TD></TR>')
 		;	true
 		),
 		(	Contents == [] ->
@@ -270,21 +270,103 @@
 	write_key_value(Stream, Key, Value) :-
 		write(Stream, Key),
 		write(Stream, '="'),
-		write(Stream, Value),
+		write_escaped_term(Stream, Value),
 		write(Stream, '"').
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
-		write(Stream, '<TR><TD> </TD><TD><![CDATA['),
-		write(Stream, Line),
-		write(Stream, ']]></TD><TD> </TD></TR>'),
+		write(Stream, '<TR><TD> </TD><TD>'),
+		write_escaped_term(Stream, Line),
+		write(Stream, '</TD><TD> </TD></TR>'),
 		write_node_lines(Lines, Stream).
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-
-		write(Stream, '<![CDATA['),
-		write(Stream, Line),
-		write(Stream, ']]><BR/>'),
+		write_escaped_term(Stream, Line),
+		write(Stream, '<BR/>'),
 		write_edge_lines(Lines, Stream).
+
+	% CDATA tags are not officially supported in dot as of version 2.38
+	% and are broken as they don't escape problematic characters; we try
+	% to workaround the problem by manually escaping characters but the
+	% chosen solution requires writing a term to a list of characters,
+	% which is a non-standard functionality that only some backend systems
+	% provide in a usable form
+	write_escaped_term(Stream, Term) :-
+		(	term_to_html_atom(Term, Atom) ->
+			write(Stream, Atom)
+		;	write(Stream, Term)
+		).
+
+	term_to_html_atom(Term, Atom) :-
+		write_term_to_chars(Term, Chars),
+		escape_chars(Chars, EscapedChars),
+		atom_chars(Atom, EscapedChars).
+
+	escape_chars([], []).
+	escape_chars([Char| Chars], EscapedChars) :-
+		(	Char == ('>') ->
+			EscapedChars = ['&','g','t',';'| RestEscapedChars]
+		;	Char == ('<') ->
+			EscapedChars = ['&','l','t',';'| RestEscapedChars]
+		;	Char == ('&') ->
+			EscapedChars = ['&','a','m','p',';'| RestEscapedChars]
+		;	EscapedChars = [Char| RestEscapedChars]
+		),
+		escape_chars(Chars, RestEscapedChars).
+
+	:- if(current_logtalk_flag(prolog_dialect, cx)).
+
+		write_term_to_chars(Term, Chars) :-
+			{atom_term(Atom, Term), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		write_term_to_chars(Term, Chars) :-
+			{term_string(Term, String), atom_string(Atom, String), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+		write_term_to_chars(Term, Chars) :-
+			{write_to_chars(Chars, Term)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, lean)).
+
+		write_term_to_chars(Term, Chars) :-
+			{term_to_atom(Term, Atom), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, qp)).
+
+		write_term_to_chars(Term, Chars) :-
+			{open_string(write, Stream), write(Stream, Term), stream_to_atom(Stream, Atom), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+
+		write_term_to_chars(Term, Chars) :-
+			{format(chars(Chars), '~w', Term)}.
+	
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		:- use_module(library(codesio), []).
+		write_term_to_chars(Term, Chars) :-
+			{codesio:format_to_codes('~w', Term, Codes), atom_codes(Atom, Codes), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+		:- import(from(/(term_to_atom,2), string)).
+		write_term_to_chars(Term, Chars) :-
+			{term_to_atom(Term, Atom), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, yap)).
+
+		write_term_to_chars(Term, Chars) :-
+			{format(chars(Chars), '~w', Term)}.
+
+	:- else.
+	
+		write_term_to_chars(_, _) :-
+			fail.
+
+	:- endif.
 
 :- end_object.
