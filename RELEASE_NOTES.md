@@ -185,6 +185,9 @@ directory across supported backend Prolog compilers.
 directives and calls to non-standard built-in predicates found in conditional
 compilation blocks.
 
+* FIXED: Bug in library dependency diagrams where edges could be generated for
+libraries without entity dependencies.
+
 Examples
 --------
 

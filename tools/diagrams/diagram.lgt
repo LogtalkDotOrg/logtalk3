@@ -111,6 +111,7 @@
 		\+ memberchk(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
+		% loaded library
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),

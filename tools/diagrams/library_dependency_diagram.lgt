@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2016/11/08,
+		date is 2016/11/09,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format']
 	]).
@@ -89,18 +89,11 @@
 		),
 		atom_concat(OtherDirectory, OtherBasename, OtherPath),
 		(	Kind == module ->
-			modules_diagram_support::module_property(OtherLibrary, file(OtherPath))
+			modules_diagram_support::module_property(Other, file(OtherPath)),
+			OtherLibrary = Other
 		;	logtalk::loaded_file_property(OtherPath, library(OtherLibrary))
 		),
 		OtherLibrary \== Library.
-	% sometimes a library is a wrapper for its sub-libraries without source files
-	% on its own; use the relative paths to check for sub-libraries
-	depends_library(Library, Directory, OtherLibrary, OtherDirectory, object) :-
-		logtalk_library_path(OtherLibrary, _),
-		OtherLibrary \== Library,
-		logtalk::expand_library_path(OtherLibrary, OtherDirectory),
-		atom_concat(Directory, Relative, OtherDirectory),
-		Relative \== ''.
 
 	depends_object(Object, object, Other) :-
 		object_property(Object, calls(Other::_,_)), nonvar(Other).
