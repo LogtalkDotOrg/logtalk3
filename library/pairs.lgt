@@ -22,8 +22,8 @@
 :- object(pairs).
 
 	:- info([
-		version is 1.1,
-		date is 2011/01/07,
+		version is 1.2,
+		date is 2016/11/10,
 		author is 'Paulo Moura',
 		comment is 'Useful predicates over lists of pairs (key-value terms).'
 	]).
@@ -57,6 +57,14 @@
 		argnames is ['Pairs', 'TransposedPairs']
 	]).
 
+	:- public(map/3).
+	:- meta_predicate(map(2, *, *)).
+	:- mode(map(@callable, +list, -list(pair)), one).
+	:- info(map/3, [
+		comment is 'Maps a list into pairs using a closure that applies to each list element to compute its key.',
+		argnames is ['Closure', 'List', 'Pairs']
+	]).
+
 	keys_values(Pairs, Keys, Values) :-
 		(	nonvar(Pairs) ->
 			pairs_to_keys_values(Pairs, Keys, Values)
@@ -83,5 +91,14 @@
 	transpose([], []).
 	transpose([Key-Value| Pairs], [Value-Key| TransposedPairs]) :-
 		transpose(Pairs, TransposedPairs).
+
+	map(Closure, List, Pairs) :-
+		map_(List, Closure, Pairs).
+
+	:- meta_predicate(map_(*, 2, *)).
+	map_([], _, []).
+	map_([Item| Items], Closure, [Key-Item| Pairs]) :-
+		call(Closure, Item, Key),
+		map_(Items, Closure, Pairs).
 
 :- end_object.

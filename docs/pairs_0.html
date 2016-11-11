@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>1.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011/1/7</code>
+            <code>2016/11/10</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -122,6 +122,30 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>transpose(+list(pair),-list(pair)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="map/3" class="code">map/3</h3>
+          <blockquote>
+            <p class="comment">Maps a list into pairs using a closure that applies to each list element to compute its key.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>map(Closure,List,Pairs)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>map(2,*,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>map(@callable,+list,-list(pair)) &ndash; one</code>
             </dd>
           </dl>
         </div>

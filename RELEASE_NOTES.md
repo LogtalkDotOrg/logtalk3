@@ -121,6 +121,8 @@ of an atom by another atom in an atom.
 
 * ADDED: Predicate `value_reference/2` to the Java library.
 
+* ADDED: Predicate `map/3` to the `pairs` library.
+
 * FIXED: Added workaround to the `os` library when using SWI-Prolog as the
 backend compiler to allow correct expansion of Java file names with a `$`
 in the middle of the name.

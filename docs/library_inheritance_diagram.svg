@@ -10,7 +10,7 @@
 <title>library</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2394 4658,-2394 4658,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2016/11/07, 11:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2016/11/10, 16:47</text>
 <g id="clust1" class="cluster">
 <title>cluster_library_library</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
@@ -126,8 +126,8 @@
 <g id="clust18" class="cluster">
 <title>cluster_file_/Users/pmoura/logtalk/library/pairs.lgt</title>
 <g id="a_clust18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/pairs.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/pairs.lgt">
-<path fill="#fffafa" stroke="#8b8989" d="M4136,-77C4136,-77 4232,-77 4232,-77 4238,-77 4244,-83 4244,-89 4244,-89 4244,-184 4244,-184 4244,-190 4238,-196 4232,-196 4232,-196 4136,-196 4136,-196 4130,-196 4124,-190 4124,-184 4124,-184 4124,-89 4124,-89 4124,-83 4130,-77 4136,-77"/>
-<text text-anchor="middle" x="4159.5" y="-84" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">pairs.lgt</text>
+<path fill="#fffafa" stroke="#8b8989" d="M4136,-72C4136,-72 4232,-72 4232,-72 4238,-72 4244,-78 4244,-84 4244,-84 4244,-189 4244,-189 4244,-195 4238,-201 4232,-201 4232,-201 4136,-201 4136,-201 4130,-201 4124,-195 4124,-189 4124,-189 4124,-84 4124,-84 4124,-78 4130,-72 4136,-72"/>
+<text text-anchor="middle" x="4159.5" y="-79" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">pairs.lgt</text>
 </a>
 </g>
 </g>
@@ -1257,26 +1257,29 @@
 <g id="node14" class="node">
 <title>pairs</title>
 <g id="a_node14"><a xlink:href="http://logtalk.org/library/pairs_0.html" xlink:title="http://logtalk.org/library/pairs_0.html">
-<polygon fill="#f5f5dc" stroke="#000000" points="4233.5,-186 4134.5,-186 4134.5,-106 4233.5,-106 4233.5,-186"/>
-<text text-anchor="start" x="4143" y="-173.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4167.5" y="-173.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">pairs</text>
-<text text-anchor="start" x="4220" y="-173.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4143" y="-162.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4165.5" y="-163.4" font-family="Courier,monospace" font-size="7.00" fill="#000000">prototype</text>
-<text text-anchor="start" x="4220" y="-162.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4143" y="-152.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4143" y="-142.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4149" y="-142.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">keys_values/3</text>
-<text text-anchor="start" x="4220" y="-142.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4143" y="-132.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4168" y="-132.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">keys/2</text>
-<text text-anchor="start" x="4220" y="-132.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4143" y="-122.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4162.5" y="-122.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">values/2</text>
-<text text-anchor="start" x="4220" y="-122.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4143" y="-112.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="4154.5" y="-112.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">transpose/2</text>
-<text text-anchor="start" x="4220" y="-112.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<polygon fill="#f5f5dc" stroke="#000000" points="4233.5,-191 4134.5,-191 4134.5,-101 4233.5,-101 4233.5,-191"/>
+<text text-anchor="start" x="4143" y="-178.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4167.5" y="-178.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">pairs</text>
+<text text-anchor="start" x="4220" y="-178.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-167.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4165.5" y="-168.4" font-family="Courier,monospace" font-size="7.00" fill="#000000">prototype</text>
+<text text-anchor="start" x="4220" y="-167.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-157.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-147.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4149" y="-147.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">keys_values/3</text>
+<text text-anchor="start" x="4220" y="-147.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-137.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4168" y="-137.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">keys/2</text>
+<text text-anchor="start" x="4220" y="-137.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-127.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4162.5" y="-127.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">values/2</text>
+<text text-anchor="start" x="4220" y="-127.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-117.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4154.5" y="-117.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">transpose/2</text>
+<text text-anchor="start" x="4220" y="-117.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4143" y="-107.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="4170.5" y="-107.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">map/3</text>
+<text text-anchor="start" x="4220" y="-107.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
