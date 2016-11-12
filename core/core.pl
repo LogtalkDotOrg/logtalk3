@@ -9381,21 +9381,45 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles a relation between an object (the last argument) with other entities
 
+'$lgt_compile_object_relation'(implements(_), _, _) :-
+	'$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, implements/1)).
+
 '$lgt_compile_object_relation'(implements(Ptcs), Obj, Ctx) :-
 	'$lgt_flatten_to_list'(Ptcs, FlattenedPtcs),
 	'$lgt_compile_implements_protocol_relation'(FlattenedPtcs, Obj, Ctx).
+
+
+'$lgt_compile_object_relation'(imports(_), _, _) :-
+	'$lgt_pp_imported_category_'(_, _, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, imports/1)).
 
 '$lgt_compile_object_relation'(imports(Ctgs), Obj, Ctx) :-
 	'$lgt_flatten_to_list'(Ctgs, FlattenedCtgs),
 	'$lgt_compile_imports_category_relation'(FlattenedCtgs, Obj, Ctx).
 
+
+'$lgt_compile_object_relation'(instantiates(_), _, _) :-
+	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, instantiates/1)).
+
 '$lgt_compile_object_relation'(instantiates(Classes), Instance, Ctx) :-
 	'$lgt_flatten_to_list'(Classes, FlattenedClasses),
 	'$lgt_compile_instantiates_class_relation'(FlattenedClasses, Instance, Ctx).
 
+
+'$lgt_compile_object_relation'(specializes(_), _, _) :-
+	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, specializes/1)).
+
 '$lgt_compile_object_relation'(specializes(Superclasses), Class, Ctx) :-
 	'$lgt_flatten_to_list'(Superclasses, FlattenedSuperclasses),
 	'$lgt_compile_specializes_class_relation'(FlattenedSuperclasses, Class, Ctx).
+
+
+'$lgt_compile_object_relation'(extends(_), _, _) :-
+	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, extends/1)).
 
 '$lgt_compile_object_relation'(extends(Parents), Prototype, Ctx) :-
 	'$lgt_flatten_to_list'(Parents, FlattenedParents),
@@ -9427,6 +9451,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles a relation between a protocol (the last argument) with other entities
 
+'$lgt_compile_protocol_relation'(extends(_), _, _) :-
+	'$lgt_pp_extended_protocol_'(_, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, extends/1)).
+
 '$lgt_compile_protocol_relation'(extends(Ptcs), Ptc, Ctx) :-
 	'$lgt_flatten_to_list'(Ptcs, FlattenedPtcs),
 	'$lgt_compile_extends_protocol_relation'(FlattenedPtcs, Ptc, Ctx).
@@ -9457,13 +9485,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles a relation between a category (the last argument) with other entities
 
+'$lgt_compile_category_relation'(implements(_), _, _) :-
+	'$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, implements/1)).
+
 '$lgt_compile_category_relation'(implements(Ptcs), Ctg, Ctx) :-
 	'$lgt_flatten_to_list'(Ptcs, FlattenedPtcs),
 	'$lgt_compile_implements_protocol_relation'(FlattenedPtcs, Ctg, Ctx).
 
+
+'$lgt_compile_category_relation'(extends(_), _, _) :-
+	'$lgt_pp_extended_category_'(_, _, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, extends/1)).
+
 '$lgt_compile_category_relation'(extends(Ctgs), Ctg, Ctx) :-
 	'$lgt_flatten_to_list'(Ctgs, FlattenedCtgs),
 	'$lgt_compile_extends_category_relation'(FlattenedCtgs, Ctg, Ctx).
+
+
+'$lgt_compile_category_relation'(complements(_), _, _) :-
+	'$lgt_pp_complemented_object_'(_, _, _, _, _),
+	throw(permission_error(repeat, entity_relation, complements/1)).
 
 '$lgt_compile_category_relation'(complements(Objs), Ctg, Ctx) :-
 	'$lgt_flatten_to_list'(Objs, FlattenedObjs),

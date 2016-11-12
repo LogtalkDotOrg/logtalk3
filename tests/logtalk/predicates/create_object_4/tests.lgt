@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2014/11/14,
+		date is 2016/11/11,
 		comment is 'Unit tests for the create_object/4 built-in predicate.'
 	]).
 
@@ -49,37 +49,52 @@
 	throws(create_object_1_07, error(type_error(list, atom), logtalk(create_object(_, [], [], atom), _))) :-
 		create_object(_, [], [], atom).
 
-	throws(create_object_1_08, error(_, logtalk(create_object(_, [], [dynamic(foo/1), synchronized(foo/1)], [foo(1)]), _))) :-
+	throws(create_object_1_08, error(permission_error(modify, dynamic_predicate, foo/1), logtalk(create_object(_, [], [dynamic(foo/1), synchronized(foo/1)], [foo(1)]), _))) :-
 		create_object(_, [], [dynamic(foo/1), synchronized(foo/1)], [foo(1)]).
 
-	throws(create_object_1_09, error(_, logtalk(create_object(_, [], [synchronized(foo/1), dynamic(foo/1)], [foo(1)]), _))) :-
+	throws(create_object_1_09, error(permission_error(modify, synchronized_predicate, foo/1), logtalk(create_object(_, [], [synchronized(foo/1), dynamic(foo/1)], [foo(1)]), _))) :-
 		create_object(_, [], [synchronized(foo/1), dynamic(foo/1)], [foo(1)]).
 
-	throws(create_object_1_10, error(_, logtalk(create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]), _))) :-
+	throws(create_object_1_10, error(domain_error({1}, 2), logtalk(create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]), _))) :-
 		create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]).
 
-	succeeds(create_object_1_11) :-
+	throws(create_object_1_11, error(permission_error(repeat, entity_relation, implements/1), logtalk(create_object(_, [implements(protocol1), implements(protocol2)], [], []), _))) :-
+		create_object(_, [implements(protocol1), implements(protocol2)], [], []).
+
+	throws(create_object_1_12, error(permission_error(repeat, entity_relation, imports/1), logtalk(create_object(_, [imports(category1), imports(category2)], [], []), _))) :-
+		create_object(_, [imports(category1), imports(category2)], [], []).
+
+	throws(create_object_1_13, error(permission_error(repeat, entity_relation, extends/1), logtalk(create_object(_, [extends(object1), extends(object2)], [], []), _))) :-
+		create_object(_, [extends(object1), extends(object2)], [], []).
+
+	throws(create_object_1_14, error(permission_error(repeat, entity_relation, instantiates/1), logtalk(create_object(_, [instantiates(class1), instantiates(class2)], [], []), _))) :-
+		create_object(_, [instantiates(class1), instantiates(class2)], [], []).
+
+	throws(create_object_1_15, error(permission_error(repeat, entity_relation, specializes/1), logtalk(create_object(_, [specializes(class1), specializes(class2)], [], []), _))) :-
+		create_object(_, [specializes(class1), specializes(class2)], [], []).
+
+	succeeds(create_object_1_16) :-
 		create_object(Object, [], [], []),
 		(	atom(Object) ->
 			true
 		;	compound(Object)
 		).
 
-	succeeds(create_object_1_12) :-
+	succeeds(create_object_1_17) :-
 		create_object(create_object4_test_object, [], [], []),
 		abolish_object(create_object4_test_object).
 
-	succeeds(create_object_1_13) :-
+	succeeds(create_object_1_18) :-
 		create_object(Object, [], [], [foo(1), (bar(X) :- foo(X))]),
 		abolish_object(Object).
 
-	succeeds(create_object_1_14) :-
+	succeeds(create_object_1_19) :-
 		create_object(Parent, [], [public([p/1, q/1])], [p(0), q(0)]),
 		create_object(Descendant, [extends(Parent)], [], [p(1), (p(X) :- ^^p(X)), q(1), (q(X) :- ::p(X))]),
 		abolish_object(Descendant),
 		abolish_object(Parent).
 
-	succeeds(create_object_1_15) :-
+	succeeds(create_object_1_20) :-
 		create_object(Object, [], [op(567, xfx, foo)], []),
 		{\+ current_op(567, xfx, foo)},
 		abolish_object(Object).

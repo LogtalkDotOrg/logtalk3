@@ -45,6 +45,10 @@ turned on.
 * ADDED: Object and category `updates/2` property for cross-referencing data
 on predicates that update dynamic predicates.
 
+* IMPROVED: Detect and report repeated entity relation clauses in entity
+opening directives. The repetitions are reported using a `repeat` permission
+error.
+
 * FIXED: Static binding of a closure meta-argument that is an alias to another
 predicate.
 
