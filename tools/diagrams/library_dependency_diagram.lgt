@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		member/2, memberchk/2
 	]).
 
 	% first, output the library node
