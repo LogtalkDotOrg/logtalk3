@@ -78,7 +78,8 @@ The following library diagrams are supported:
 references to entities defined in other libraries
 
 Library dependency diagrams are specially useful for large applications
-where file diagrams would be too large and complex to be useful.
+where file diagrams would be too large and complex to be useful, specially
+when combined with the *zoom* option to link to individual library diagrams.
 
 An utility object, `diagrams`, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
@@ -87,8 +88,15 @@ make sense for some types of diagrams.
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
-entity relations. Currently we use the following DOT shapes (entities,
-predicates, and files) and arrows (entity, predicate, and file relations):
+entity relations. Currently we use the following DOT shapes (libraries,
+entities, predicates, and files) and arrows (entity, predicate, and file
+relations):
+
+- libraries  
+	`box3d` (3D box, lightyellow)
+
+- library and file loading and dependency relations  
+	`normal` (arrow ending with a black triangle)
 
 - objects (classes, instances, and prototypes)  
 	`box` (rectangle, yellow for instances/classes and beige for prototypes)
@@ -131,13 +139,9 @@ predicates, and files) and arrows (entity, predicate, and file relations):
 - uses and use module relations  
 	`rdiamond` (arrow ending with a black half diamond)
 
-- file loading relations  
-	`normal` (arrow ending with a black triangle)
-- file dependency relations  
-	`rdiamond` (arrow ending with a black half diamond)
-
-The entity, predicate, and file nodes that are not part of the entities, files,
-or libraries for which you are generating a diagram use a dashed border.
+The library, file, entity, and predicate nodes that are not part of the
+predicates, entities, files, or libraries for which we are generating a
+diagram use a dashed border.
 
 
 Supported graph languages
