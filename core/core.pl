@@ -7744,7 +7744,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(set_prolog_flag(Flag, Value), Ctx) :-
 	!,
 	% perform basic error and portability checking
-	'$lgt_compile_body'(set_prolog_flag(Flag, Value), _, _, _),
+	'$lgt_compile_body'(set_prolog_flag(Flag, Value), _, _, Ctx),
 	% require a nonvar value
 	'$lgt_check'(nonvar, Value),
 	% setting the flag during compilation may or may not work as expected

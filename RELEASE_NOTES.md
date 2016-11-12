@@ -80,6 +80,9 @@ of a `catch/3` wrapper for `Proxy`.
 * FIXED: Portability report of non-standard arithmetic functions with no
 arguments.
 
+* FIXED: Instantiation error when compiling `set_prolog_flag/2` directives
+setting a non-standard flag with the `portability` flag set to `warning`.
+
 Prolog adapter and integration files
 ------------------------------------
 
