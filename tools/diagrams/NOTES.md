@@ -352,5 +352,8 @@ The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 
 	https://www.iconfinder.com/xinhstudio
 
+Currently, only the `zoom.png` file is used. A copy of this file must exist
+in any directory used for publishing diagrams using it. 
+
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).

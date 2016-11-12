@@ -141,6 +141,9 @@ Tools
 * CHANGED: The default value of the diagrams option `node_type_captions/1`
 to `true`.
 
+* CHANGED: When generating diagrams for all loaded libraries, represent any
+loaded Prolog module library as an external library.
+
 * ADDED: Predicate `lgtunit::run/1` for running a unit test or a list of
 unit tests. Thanks to Barry Evans for the suggestion.
 

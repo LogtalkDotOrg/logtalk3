@@ -63,12 +63,11 @@
 		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% ensure that this dependency is not already recorded
 		\+ ^^edge(Relative, OtherRelative, _, _, _),
-			(	Kind == module ->
-				^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory),
-				^^save_edge(Relative, OtherRelative, [depends], depends_on_library, [tooltip(depends)| Options])
-			;	^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory),
-				^^save_edge(Relative, OtherRelative, [depends], depends_on_library, [tooltip(depends)| Options])
-			),
+		^^save_edge(Relative, OtherRelative, [depends], depends_on_library, [tooltip(depends)| Options]),
+		(	Kind == module ->
+			^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory)
+		;	^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
+		),
 		fail.
 	output_library(_, _, _).
 
