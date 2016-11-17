@@ -243,6 +243,8 @@ any directory. Thanks to Jan Wielemaker for the bug report.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Preliminary extension for the Visual Studio Code text editor.
+
 * UPDATED: Contributed an updated Logtalk mode for the SWI-Prolog native text
 editor.
 

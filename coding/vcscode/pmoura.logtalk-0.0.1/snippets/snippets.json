@@ -1,0 +1,158 @@
+{
+	"category": {
+		"prefix": "category",
+		"body": "\n:- category(${1:Category},\n\timplements(${2:Protocol})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_category.\n",
+		"description": "    Category with protocol",
+		"scope": "source.logtalk"
+	},
+	"category1": {
+		"prefix": "category",
+		"body": "\n:- category(${1:Category}).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${2:Description}'\n\t]).\n\n$0\n\n:- end_category.\n",
+		"description": "Category",
+		"scope": "source.logtalk"
+	},
+	"class": {
+		"prefix": "class",
+		"body": "\n:- object(${1:Class},\n\timplements(${2:Protocol}),\n\timports(${3:Category}),\n\tinstantiates(${4:Metaclass}),\n\tspecializes(${5:Superclass})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${6:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Class with all",
+		"scope": "source.logtalk"
+	},
+	"class1": {
+		"prefix": "class",
+		"body": "\n:- object(${1:Class},\n\timports(${2:Category}),\n\tspecializes(${3:Superclass})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${4:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Class with category",
+		"scope": "source.logtalk"
+	},
+	"class2": {
+		"prefix": "class",
+		"body": "\n:- object(${1:Class},\n\tinstantiates(${2:Metaclass}),\n\tspecializes(${3:Superclass})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${4:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Class with metaclass",
+		"scope": "source.logtalk"
+	},
+	"class3": {
+		"prefix": "class",
+		"body": "\n:- object(${1:Class},\n\timplements(${2:Protocol}),\n\tspecializes(${3:Superclass})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${4:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Class with protocol",
+		"scope": "source.logtalk"
+	},
+	"class4": {
+		"prefix": "class",
+		"body": "\n:- object(${1:Class},\n\tspecializes(${2:Superclass})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "Class",
+		"scope": "source.logtalk"
+	},
+	"category2": {
+		"prefix": "category",
+		"body": "\n:- category(${1:Category},\n\tcomplements(${2:Object})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_category.\n",
+		"description": "    Complementing category",
+		"scope": "source.logtalk"
+	},
+	"category3": {
+		"prefix": "category",
+		"body": "\n:- category(${1:ExtendedCategory},\n\textends(${2:MinimalCategory})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_category.\n",
+		"description": "    Extended category",
+		"scope": "source.logtalk"
+	},
+	"protocol": {
+		"prefix": "protocol",
+		"body": "\n:- protocol(${1:Extended},\n\textends(${2:Minimal})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_protocol.\n",
+		"description": "    Extended protocol",
+		"scope": "source.logtalk"
+	},
+	"instance": {
+		"prefix": "instance",
+		"body": "\n:- object(${1:Instance},\n\timplements(${2:Protocol}),\n\timports(${3:Category}),\n\tinstantiates(${4:Class})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${5:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Instance with all",
+		"scope": "source.logtalk"
+	},
+	"instance1": {
+		"prefix": "instance",
+		"body": "\n:- object(${1:Instance},\n\timports(${2:Category}),\n\tinstantiates(${3:Class})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${4:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Instance with category",
+		"scope": "source.logtalk"
+	},
+	"instance2": {
+		"prefix": "instance",
+		"body": "\n:- object(${1:Instance},\n\timplements(${2:Protocol}),\n\tinstantiates(${3:Class})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${4:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Instance with protocol",
+		"scope": "source.logtalk"
+	},
+	"instance3": {
+		"prefix": "instance",
+		"body": "\n:- object(${1:Instance},\n\tinstantiates(${2:Class})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "Instance",
+		"scope": "source.logtalk"
+	},
+	"private": {
+		"prefix": "private",
+		"body": "\t:- private(${1:Functor}/0).\n\t:- mode(${1:Functor}, ${2:Solutions}).\n\t:- info(${1:Functor}/0, [\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0",
+		"description": "    (with no arguments)",
+		"scope": "source.logtalk"
+	},
+	"private1": {
+		"prefix": "private",
+		"body": "\t:- private(${1:Functor}/${2:Arity}).\n\t:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).\n\t:- info(${1:Functor}/${2:Arity}, [\n\t\tcomment is '${5:Description}',\n\t\targuments is ['$6'-'$7']\n\t]).\n\n$0",
+		"description": "Private predicate",
+		"scope": "source.logtalk"
+	},
+	"protected": {
+		"prefix": "protected",
+		"body": "\t:- protected(${1:Functor}/0).\n\t:- mode(${1:Functor}, ${2:Solutions}).\n\t:- info(${1:Functor}/0, [\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0",
+		"description": "    (with no arguments)",
+		"scope": "source.logtalk"
+	},
+	"protected1": {
+		"prefix": "protected",
+		"body": "\t:- protected(${1:Functor}/${2:Arity}).\n\t:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).\n\t:- info(${1:Functor}/${2:Arity}, [\n\t\tcomment is '${5:Description}',\n\t\targuments is ['$6'-'$7']\n\t]).\n\n$0",
+		"description": "Protected predicate",
+		"scope": "source.logtalk"
+	},
+	"protocol1": {
+		"prefix": "protocol",
+		"body": "\n:- protocol(${1:Protocol}).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${2:Description}'\n\t]).\n\n$0\n\n:- end_protocol.\n",
+		"description": "Protocol",
+		"scope": "source.logtalk"
+	},
+	"object": {
+		"prefix": "object",
+		"body": "\n:- object(${1:Prototype},\n\timplements(${2:Protocol}),\n\timports(${3:Category}),\n\textends(${4:Parent})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${5:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Prototype with all",
+		"scope": "source.logtalk"
+	},
+	"object1": {
+		"prefix": "object",
+		"body": "\n:- object(${1:Prototype},\n\timports(${2:Category})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Prototype with category",
+		"scope": "source.logtalk"
+	},
+	"object2": {
+		"prefix": "object",
+		"body": "\n:- object(${1:Prototype},\n\textends(${2:Parent})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Prototype with parent",
+		"scope": "source.logtalk"
+	},
+	"object3": {
+		"prefix": "object",
+		"body": "\n:- object(${1:Prototype},\n\timplements(${2:Protocol})).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "    Prototype with protocol",
+		"scope": "source.logtalk"
+	},
+	"object4": {
+		"prefix": "object",
+		"body": "\n:- object(${1:Object}).\n\n\t:- info([\n\t\tversion is 1.0,\n\t\tauthor is '$TM_FULLNAME',\n\t\tdate is `date +%Y/%m/%d`,\n\t\tcomment is '${2:Description}'\n\t]).\n\n$0\n\n:- end_object.\n",
+		"description": "Prototype",
+		"scope": "source.logtalk"
+	},
+	"public": {
+		"prefix": "public",
+		"body": "\t:- public(${1:Functor}/0).\n\t:- mode(${1:Functor}, ${2:Solutions}).\n\t:- info(${1:Functor}/0, [\n\t\tcomment is '${3:Description}'\n\t]).\n\n$0",
+		"description": "    (with no arguments)",
+		"scope": "source.logtalk"
+	},
+	"public1": {
+		"prefix": "public",
+		"body": "\t:- public(${1:Functor}/${2:Arity}).\n\t:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).\n\t:- info(${1:Functor}/${2:Arity}, [\n\t\tcomment is '${5:Description}',\n\t\targuments is ['$6'-'$7']\n\t]).\n\n$0",
+		"description": "Public predicate",
+		"scope": "source.logtalk"
+	}
+}
