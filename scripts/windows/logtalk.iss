@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 19, 2016
+; Last updated on November 20, 2016
 ; 
 ; This file is part of Logtalk <http://logtalk.org/>  
 ; Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -505,6 +505,8 @@ begin
         Result := Home + '\bin\swipl.exe'
       else
         Result := 'prolog_compiler_not_installed'
+    else
+      Result := 'prolog_compiler_not_installed'
   else
     if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) or
        RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home)
@@ -545,6 +547,8 @@ begin
         Result := Home + '\bin\swipl-win.exe'
       else
         Result := 'prolog_compiler_not_installed'
+    else
+      Result := 'prolog_compiler_not_installed'
   else
     if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) or
        RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home)

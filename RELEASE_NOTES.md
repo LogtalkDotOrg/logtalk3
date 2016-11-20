@@ -240,6 +240,9 @@ instead of hard-coded paths.
 * FIXED: The `install.sh` manual installation script to allow using it from
 any directory. Thanks to Jan Wielemaker for the bug report.
 
+* FIXED: Windows installer script bug that resulted in integration shortcuts
+for SWI-Prolog not being created in 32 bits versions of Windows.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
