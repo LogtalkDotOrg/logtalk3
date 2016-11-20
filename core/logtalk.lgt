@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2016/10/07,
+		date is 2016/11/20,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -168,9 +168,10 @@
 
 	:- public(expand_library_path/2).
 	:- mode(expand_library_path(+atom, ?atom), zero_or_one).
+	:- mode(expand_library_path(+callable, ?atom), zero_or_one).
 	:- info(expand_library_path/2, [
-		comment is 'Expands a library name into its full path. Uses a depth bound to prevent loops.',
-		argnames is ['Library', 'Path']
+		comment is 'Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.',
+		argnames is ['LibraryPath', 'AbsolutePath']
 	]).
 
 	:- public(loaded_file/1).
@@ -408,8 +409,15 @@
 
 	default_question_prompt_stream(question, _, '> ', user_input).
 
-	expand_library_path(Library, Path) :-
-		{'$lgt_expand_library_path'(Library, Path)}.
+	expand_library_path(LibraryPath, AbsolutePath) :-
+		(	atom(LibraryPath) ->
+			{'$lgt_expand_library_alias'(LibraryPath, AbsolutePath)}
+		;	callable(LibraryPath),
+			LibraryPath =.. [Library, File],
+			atom(File),
+			{'$lgt_expand_library_alias'(Library, Prefix)},
+			atom_concat(Prefix, File, AbsolutePath)
+		).
 
 	loaded_file(Path) :-
 		{'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)},
@@ -446,7 +454,7 @@
 		 '$lgt_entity_property_'(Category, file_lines(Basename, Directory, _, _))}.
 	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
 		logtalk_library_path(Library, _),
-		{'$lgt_expand_library_path'(Library, Directory)}, !.
+		{'$lgt_expand_library_alias'(Library, Directory)}, !.
 
 	compile_aux_clauses(Clauses) :-
 		{'$lgt_compile_aux_clauses'(Clauses)}.

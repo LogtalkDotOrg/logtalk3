@@ -22,19 +22,29 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/12/05,
+		date is 2016/11/20,
 		comment is 'Unit tests for the logtalk_library_path/2 built-in predicate.'
 	]).
 
-	test(logtalk_library_path_2_1) :-
+	% library aliases must be atoms
+	test(logtalk_library_path_2_01) :-
 		forall(
 			logtalk_library_path(Library, Path),
 			(	atom(Library),
 				ground(Path),
 				logtalk::expand_library_path(Library, ExpandedPath),
 				atom(ExpandedPath)
+			)
+		).
+
+	% library alias paths must end with a slash
+	test(logtalk_library_path_2_02) :-
+		forall(
+			logtalk_library_path(Library, Path),
+			(	logtalk::expand_library_path(Library, ExpandedPath),
+				sub_atom(ExpandedPath, _, 1, 0, '/')
 			)
 		).
 

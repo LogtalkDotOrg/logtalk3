@@ -22,41 +22,41 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/07/07,
+		date is 2016/11/20,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
-	test(logtalk_1) :-
+	succeeds(logtalk_01) :-
 		current_object(logtalk),
 		object_property(logtalk, built_in).
 
-	test(logtalk_2) :-
+	succeeds(logtalk_02) :-
 		logtalk::entity_prefix(foo, Prefix),
 		logtalk::entity_prefix(Entity, Prefix),
 		Entity == foo.
 
-	test(logtalk_3) :-
+	succeeds(logtalk_03) :-
 		logtalk::entity_prefix(foo(_), Prefix),
 		logtalk::entity_prefix(Entity, Prefix),
 		::variant(Entity, foo(_)).
 
-	test(logtalk_4) :-
+	succeeds(logtalk_04) :-
 		logtalk::compile_predicate_heads(bar(_), logtalk, Compiled, _),
 		logtalk::decompile_predicate_heads(Compiled, Entity, Type, Decompiled),
 		Entity == logtalk,
 		Type == object,
 		::variant(Decompiled, bar(_)).
 
-	test(logtalk_5) :-
+	succeeds(logtalk_05) :-
 		logtalk::compile_predicate_indicators(bar/1, logtalk, Compiled),
 		logtalk::decompile_predicate_indicators(Compiled, Entity, Type, Decompiled),
 		Entity == logtalk,
 		Type == object,
 		Decompiled == bar/1.
 
-	test(logtalk_6) :-
+	succeeds(logtalk_06) :-
 		logtalk::loaded_file_property(SourceFile, basename('tests.lgt')), !,
 		logtalk::loaded_file_property(SourceFile, directory(Directory)), atom(Directory),
 		logtalk::loaded_file_property(SourceFile, mode(Mode)), atom(Mode), mode(Mode),
@@ -70,6 +70,22 @@
 		;	true
 		),
 		logtalk::loaded_file_property(SourceFile, object(Object)), Object == tests.
+
+	deterministic(logtalk_07) :-
+		logtalk::expand_library_path(core, Path),
+		atom(Path).
+
+	deterministic(logtalk_08) :-
+		logtalk::expand_library_path(core(logtalk), Path),
+		atom(Path).
+
+	fails(logtalk_09) :-
+		logtalk::expand_library_path(non_existing_library_alias, _).
+
+	fails(logtalk_10) :-
+		logtalk::expand_library_path(non_existing_library_alias(some_file), _).
+
+	% auxiliary predicates
 
 	mode(debug).
 	mode(normal).

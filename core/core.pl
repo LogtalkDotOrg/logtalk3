@@ -2199,7 +2199,7 @@ logtalk_compile(Files, Flags) :-
 	;	compound(File),
 		File =.. [Library, Basename],
 		atom(Basename) ->
-		(	'$lgt_expand_library_path'(Library, Directory) ->
+		(	'$lgt_expand_library_alias'(Library, Directory) ->
 			atom_concat(Directory, Basename, Path)
 		;	throw(error(existence_error(library, Library), _))
 		)
@@ -2210,13 +2210,13 @@ logtalk_compile(Files, Flags) :-
 
 
 
-% '$lgt_expand_library_path'(+atom, -atom)
+% '$lgt_expand_library_alias'(+atom, -atom)
 %
 % converts a library alias into its corresponding path; uses a depth
 % bound to prevent loops (inspired by similar code in SWI-Prolog)
 
-'$lgt_expand_library_path'(Library, Path) :-
-	'$lgt_expand_library_path'(Library, Path0, 16),
+'$lgt_expand_library_alias'(Library, Path) :-
+	'$lgt_expand_library_alias'(Library, Path0, 16),
 	% expand the library path into an absolute path
 	'$lgt_expand_path'(Path0, Path1),
 	% make sure that the library path ends with a slash
@@ -2226,7 +2226,7 @@ logtalk_compile(Files, Flags) :-
 	).
 
 
-'$lgt_expand_library_path'(Library, Path, Depth) :-
+'$lgt_expand_library_alias'(Library, Path, Depth) :-
 	logtalk_library_path(Library, Location), !,
 	(	compound(Location),
 		Location =.. [Prefix, Directory],
@@ -2234,7 +2234,7 @@ logtalk_compile(Files, Flags) :-
 		% assume library notation (a compound term)
 		Depth > 0,
 		NewDepth is Depth - 1,
-		'$lgt_expand_library_path'(Prefix, PrefixPath0, NewDepth),
+		'$lgt_expand_library_alias'(Prefix, PrefixPath0, NewDepth),
 		% make sure that the prefix path ends with a slash
 		(	sub_atom(PrefixPath0, _, 1, 0, '/') ->
 			atom_concat(PrefixPath0, Directory, Path)
@@ -21270,7 +21270,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % Logtalk, the pre-compiled entities are loaded prior to this file)
 
 '$lgt_load_built_in_entities'(ScratchDirectory) :-
-	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
+	'$lgt_expand_library_alias'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
 	'$lgt_load_built_in_entity'(expanding, protocol, 'expanding', ScratchDirectory),
 	'$lgt_load_built_in_entity'(monitoring, protocol, 'monitoring', ScratchDirectory),
@@ -21346,7 +21346,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% if not found, lookup for a settings file in the user home directory
-		'$lgt_expand_library_path'(home, Home),
+		'$lgt_expand_library_alias'(home, Home),
 		'$lgt_load_settings_file_from_directory'(Home, Options, Result) ->
 		true
 	;	% no settings file found
@@ -21363,7 +21363,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% if still not found, lookup for a settings file in the user home directory
-		'$lgt_expand_library_path'(home, Home),
+		'$lgt_expand_library_alias'(home, Home),
 		'$lgt_load_settings_file_from_directory'(Home, Options, Result) ->
 		true
 	;	% no settings file found

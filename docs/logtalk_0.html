@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.4</code>
+            <code>1.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/10/7</code>
+            <code>2016/11/20</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -289,7 +289,7 @@
         <div class="section">
           <h3 id="expand_library_path/2" class="code">expand_library_path/2</h3>
           <blockquote>
-            <p class="comment">Expands a library name into its full path. Uses a depth bound to prevent loops.</p>
+            <p class="comment">Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -298,11 +298,14 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>expand_library_path(Library,Path)</code>
+              <code>expand_library_path(LibraryPath,AbsolutePath)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>expand_library_path(+atom,?atom) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>expand_library_path(+callable,?atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

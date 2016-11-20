@@ -35,6 +35,9 @@ This changes are useful when a team shares a Logtalk installation with both
 the `LOGTALKHOME` and `LOGTALKUSER` environment variables pointing to the
 same directory. Thanks to Barry Evans for the suggestion.
 
+* CHANGED: The `logtalk::expand_library_path/2` predicate to also expand paths
+in library notation in addition to library aliases.
+
 * NEW: Inline calls in linking clauses to entity local predicates, to Prolog
 module, built-in, and foreign predicates, and to predicates defined in the
 `user` pseudo-object when compiling source files with the `optimize` flag
@@ -241,7 +244,8 @@ instead of hard-coded paths.
 any directory. Thanks to Jan Wielemaker for the bug report.
 
 * FIXED: Windows installer script bug that resulted in integration shortcuts
-for SWI-Prolog not being created in 32 bits versions of Windows.
+for SWI-Prolog not being created in 32 bits versions of Windows. Thanks to
+Michael Richter for the bug report.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
