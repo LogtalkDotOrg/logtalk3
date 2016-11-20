@@ -306,7 +306,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect CxProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -379,7 +379,7 @@ var
 begin
   if ( RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'JIP_HOME', JIP_HOME) or
        RegQueryStringValue(HKCU, 'Environment', 'JIP_HOME', JIP_HOME)
-	 ) and
+     ) and
      FileExists(JIP_HOME + '\jipconsole.jar')
   then
     Result := JIP_HOME + '\jipconsole.jar'
@@ -444,7 +444,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect Quintus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -459,7 +459,7 @@ var
 begin
   if IsWin64 then
     if RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.3_win32\', 'SP_PATH', SP_PATH) or
-	   RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.3_win32\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.3_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.1_x86-win32-nt-4\', 'SP_PATH', SP_PATH)
@@ -485,7 +485,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect SICStus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -525,7 +525,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect SWI-Prolog (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK)
+    MsgBox(Warning, mbError, MB_OK)
   end
 end;
 
@@ -565,7 +565,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect SWI-Prolog (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK)
+    MsgBox(Warning, mbError, MB_OK)
   end
 end;
 
@@ -592,7 +592,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect XSB installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -619,7 +619,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect XSB-MT installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -648,7 +648,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect YAP (console version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -677,7 +677,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect YAP (window version) installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
