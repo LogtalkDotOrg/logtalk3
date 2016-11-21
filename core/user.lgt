@@ -25,7 +25,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2016/11/06,
-		comment is 'Pseudo-object "user" representing the plain Prolog database.']).
+		comment is 'Pseudo-object "user" representing the plain Prolog database.'
+	]).
 
 	:- built_in.
 

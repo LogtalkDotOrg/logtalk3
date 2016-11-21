@@ -36,7 +36,8 @@
 		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2016/11/20,
-		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
+		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
+	]).
 
 	:- built_in.
 

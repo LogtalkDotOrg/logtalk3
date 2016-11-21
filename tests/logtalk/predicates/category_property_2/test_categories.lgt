@@ -27,7 +27,8 @@
 		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2016/11/02,
-		comment is 'Sample category for testing with the `source_data` flag turned on.']).
+		comment is 'Sample category for testing with the `source_data` flag turned on.'
+	]).
 
 	:- public(a/1).
 	:- if(current_logtalk_flag(coinduction, supported)).
@@ -148,7 +149,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Built-in category for testing determinism of category properties.']).
+		comment is 'Built-in category for testing determinism of category properties.'
+	]).
 
 	:- built_in.
 
@@ -161,7 +163,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Dynamic category for testing determinism of category properties.']).
+		comment is 'Dynamic category for testing determinism of category properties.'
+	]).
 
 	:- (dynamic).
 
@@ -174,7 +177,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Category compiled in debug mode for testing determinism of category properties.']).
+		comment is 'Category compiled in debug mode for testing determinism of category properties.'
+	]).
 
 	:- set_logtalk_flag(debug, on).
 
@@ -187,7 +191,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Category compiled with event support for testing determinism of category properties.']).
+		comment is 'Category compiled with event support for testing determinism of category properties.'
+	]).
 
 	:- set_logtalk_flag(events, allow).
 

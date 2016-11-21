@@ -27,7 +27,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2014/05/23,
-		comment is 'Simple object for testing goal-expansion of access to a dictionary parameter.']).
+		comment is 'Simple object for testing goal-expansion of access to a dictionary parameter.'
+	]).
 
 	:- public(init/1).
 	init(Pairs) :-

@@ -25,7 +25,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2014/05/22,
-		comment is 'Access to an object (or category) first parameter as a SWI-Prolog dictionary.']).
+		comment is 'Access to an object (or category) first parameter as a SWI-Prolog dictionary.'
+	]).
 
 	goal_expansion(
 		parameter_create(Pairs),

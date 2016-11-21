@@ -24,7 +24,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2014/08/18,
-		comment is 'Registry of implemented graph languages.']).
+		comment is 'Registry of implemented graph languages.'
+	]).
 
 	:- public(language_object/2).
 	:- multifile(language_object/2).

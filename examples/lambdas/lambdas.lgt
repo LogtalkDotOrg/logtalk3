@@ -198,7 +198,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2013/04/15,
-		comment is 'Example for illustrating lambda compilation warnings.']).
+		comment is 'Example for illustrating lambda compilation warnings.'
+	]).
 
 	% lambda expression with unclassified variables
 	foo(C1, C2, C3) :-

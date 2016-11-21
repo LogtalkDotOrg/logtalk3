@@ -27,7 +27,8 @@
 		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2016/11/01,
-		comment is 'Sample object for testing with the `source_data` flag turned on.']).
+		comment is 'Sample object for testing with the `source_data` flag turned on.'
+	]).
 
 	:- set_logtalk_flag(complements, allow).
 	:- set_logtalk_flag(dynamic_declarations, allow).
@@ -156,7 +157,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Built-in object for testing determinism of object properties.']).
+		comment is 'Built-in object for testing determinism of object properties.'
+	]).
 
 	:- built_in.
 
@@ -169,7 +171,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Dynamic object for testing determinism of object properties.']).
+		comment is 'Dynamic object for testing determinism of object properties.'
+	]).
 
 	:- (dynamic).
 
@@ -182,7 +185,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Object compiled in debug mode for testing determinism of object properties.']).
+		comment is 'Object compiled in debug mode for testing determinism of object properties.'
+	]).
 
 	:- set_logtalk_flag(debug, on).
 
@@ -195,7 +199,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Object compiled with optional features turned on for testing determinism of object properties.']).
+		comment is 'Object compiled with optional features turned on for testing determinism of object properties.'
+	]).
 
 	:- set_logtalk_flag(events, allow).
 	:- set_logtalk_flag(context_switching_calls, allow).
@@ -211,7 +216,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2016/03/20,
-		comment is 'Object compiled with threaded calls support for testing determinism of object properties.']).
+		comment is 'Object compiled with threaded calls support for testing determinism of object properties.'
+	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.

@@ -24,7 +24,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2013/10/15,
-		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.']).
+		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.'
+	]).
 
 	:- threaded.
 
