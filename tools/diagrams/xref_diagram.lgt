@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2016/11/21,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -119,7 +119,7 @@
 		entity_property(Kind, Entity, defines(Predicate0, Properties)),
 		% exclude dynamic predicates that have no clauses defined at compilation time
 		Properties \== [],
-		\+ entity_property(Kind, Entity, declares(Predicate0, _)),
+		\+ included_predicate_(Predicate0),
 		\+ member(auxiliary, Properties),
 		(	member(non_terminal(NonTerminal), Properties) ->
 			Predicate = NonTerminal
@@ -127,6 +127,19 @@
 		),
 		memberchk(node_type_captions(Boolean), Options),
 		^^output_node(Predicate, Predicate, local, [], local_predicate, [node_type_captions(Boolean)]),
+		assertz(included_predicate_(Predicate)),
+		fail.
+	process(Kind, Entity, Options) :-
+		Kind \== protocol,
+		entity_property(Kind, Entity, updates(Predicate0, Properties)),
+		\+ included_predicate_(Predicate0),
+		\+ member(auxiliary, Properties),
+		(	member(non_terminal(NonTerminal), Properties) ->
+			Predicate = NonTerminal
+		;	Predicate = Predicate0
+		),
+		memberchk(node_type_captions(Boolean), Options),
+		^^output_node(Predicate, Predicate, (dynamic), [], local_predicate, [node_type_captions(Boolean)]),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
