@@ -35,7 +35,7 @@
 	:- info([
 		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2016/11/20,
+		date is 2016/11/21,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
 	]).
 
@@ -194,7 +194,7 @@
 	:- public(compile_aux_clauses/1).
 	:- mode(compile_aux_clauses(@list(clause)), one).
 	:- info(compile_aux_clauses/1, [
-		comment is 'Compiles a list of auxiliary clauses.',
+		comment is 'Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.',
 		argnames is ['Clauses']
 	]).
 

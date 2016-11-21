@@ -32,6 +32,8 @@
 		current_object(logtalk),
 		object_property(logtalk, built_in).
 
+	% entity_prefix/2 tests
+
 	succeeds(logtalk_02) :-
 		logtalk::entity_prefix(foo, Prefix),
 		logtalk::entity_prefix(Entity, Prefix),
@@ -56,6 +58,8 @@
 		Type == object,
 		Decompiled == bar/1.
 
+	% loaded_file_property/2 tests
+
 	succeeds(logtalk_06) :-
 		logtalk::loaded_file_property(SourceFile, basename('tests.lgt')), !,
 		logtalk::loaded_file_property(SourceFile, directory(Directory)), atom(Directory),
@@ -70,6 +74,8 @@
 		;	true
 		),
 		logtalk::loaded_file_property(SourceFile, object(Object)), Object == tests.
+
+	% expand_library_path/2 tests
 
 	deterministic(logtalk_07) :-
 		logtalk::expand_library_path(core, Path),
