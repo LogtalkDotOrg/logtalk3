@@ -230,6 +230,9 @@ files.
 
 * ADDED: Unit tests for the `logtalk_make/0-1` built-in predicates.
 
+* ADDED: Some more unit tests for the public predicates of the `logtalk`
+built-in object.
+
 * UPDATED: Unit tests for the `securemp` example to take into account that
 message sending goals from `user` may be optimized.
 

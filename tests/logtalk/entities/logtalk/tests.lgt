@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/11/20,
+		date is 2016/11/22,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -58,9 +58,31 @@
 		Type == object,
 		Decompiled == bar/1.
 
-	% loaded_file_property/2 tests
+	% loaded_file/1 tests
 
 	succeeds(logtalk_06) :-
+		forall(
+			logtalk::loaded_file(File),
+			atom(File)
+		).
+
+	fails(logtalk_07) :-
+		logtalk::loaded_file(non_loaded_file).
+
+	succeeds(logtalk_08) :-
+		forall(
+			(	logtalk::loaded_file(File),
+				os::decompose_file_name(File, Directory, Name, Extension),
+				atom_concat(Name, Extension, Basename)
+			),
+			(	logtalk::loaded_file_property(File, directory(Directory0)), Directory0 == Directory,
+				logtalk::loaded_file_property(File, basename(Basename0)), Basename0 == Basename
+			)
+		).
+
+	% loaded_file_property/2 tests
+
+	succeeds(logtalk_09) :-
 		logtalk::loaded_file_property(SourceFile, basename('tests.lgt')), !,
 		logtalk::loaded_file_property(SourceFile, directory(Directory)), atom(Directory),
 		logtalk::loaded_file_property(SourceFile, mode(Mode)), atom(Mode), mode(Mode),
@@ -77,18 +99,18 @@
 
 	% expand_library_path/2 tests
 
-	deterministic(logtalk_07) :-
+	deterministic(logtalk_10) :-
 		logtalk::expand_library_path(core, Path),
 		atom(Path).
 
-	deterministic(logtalk_08) :-
+	deterministic(logtalk_11) :-
 		logtalk::expand_library_path(core(logtalk), Path),
 		atom(Path).
 
-	fails(logtalk_09) :-
+	fails(logtalk_12) :-
 		logtalk::expand_library_path(non_existing_library_alias, _).
 
-	fails(logtalk_10) :-
+	fails(logtalk_13) :-
 		logtalk::expand_library_path(non_existing_library_alias(some_file), _).
 
 	% auxiliary predicates
