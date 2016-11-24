@@ -66,13 +66,14 @@ If all the terms in a source file are valid, then there is a set of errors or po
 <h3 id="errors_unknown">Unknown entities</h3>
 
 <p>
-The Logtalk compiler will warn us of any referenced entity that is not currently loaded. The warning may reveal a misspell entity name or just an entity that it will be loaded next.
+The Logtalk compiler warns about any referenced entity that is not currently loaded. The warning may reveal a misspell entity name or just an entity that it will be loaded later. Out-of-oder loading should be avoided when possible as it prevents some code optimizations such as static binding od messages to methods.
 </p>
 
 <h3 id="errors_singletons">Singleton variables</h3>
 
 <p>
-Singleton variables in a clause are often misspell variables and, as such, one of the most common errors when programming in Prolog. If your Prolog compiler complies with the Prolog ISO standard or at least supports the ISO predicate <code>read_term/3</code> called with the option <code>singletons(S)</code>, then the Logtalk compiler will warn us of any singleton it finds while compiling a Logtalk entity.
+Singleton variables in a clause are often misspell variables and, as such, one of the most common errors when programming in Prolog. 
+when the backend Prolog compiler complies with the Prolog ISO standard or at least supports the ISO predicate <code>read_term/3</code> called with the option <code>singletons(S)</code>, the Logtalk compiler warns about any singleton variable found while compiling a source file.
 </p>
 
 <h3 id="errors_prolog">Redefinition of Prolog built-in predicates</h3>
@@ -102,7 +103,19 @@ A warning will be reported if Logtalk finds (in the body of a predicate definiti
 <h3 id="errors_portability">Portability warnings</h3>
 
 <p>
-A warning will be reported if a predicate clause contains a call to a non-ISO specified built-in predicate or to a non-ISO specified arithmetic function.
+A warning will be reported if a predicate clause contains a call to a non-ISO specified built-in predicate or arithmetic function, Portability warnings are also reported for non-standard flags or flag values. These warnings often cannot be avoided due to the limited scope of the ISO Prolog standard.
+</p>
+
+<h3 id="errors_missing_directives">Missing directives</h3>
+
+<p>
+A warning will be reported for any missing dynamic, discontiguous, meta-predicate, and public predicate directive.
+</p>
+
+<h3 id="errors_predicate_redefinition">Redefinition of predicates declared in <code>uses/2</code> and <code>use_module/2</code> directives</h3>
+
+<p>
+A error will be reported for any attempt to define locally a predicate that is already listed in a <code>uses/2</code> or in a <code>use_module/2</code> directive.
 </p>
 
 <h3 id="errors_others">Other warnings and errors</h3>
@@ -148,7 +161,7 @@ More sophisticated definitions are, of course, possible.
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 9, 2015</span>
+		<span>Last updated on: November 24, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="threads.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="documenting.html">next</a></span><br/>
