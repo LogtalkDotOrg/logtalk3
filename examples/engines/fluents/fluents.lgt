@@ -29,7 +29,7 @@
 
 	:- threaded.
 
-	% initialize a fluent and git it a name (which is object-scoped)
+	% initialize a fluent and give it a name (which is object-scoped)
 	:- initialization(threaded_engine_create(X, a(X), fluent)).
 
 	:- public(next/1).
