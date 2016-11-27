@@ -729,7 +729,7 @@ After compiling and loading these two objects, we can try the following goal:
 Color parameter value is blue
 yes</pre>
 <p>
-The method <code>parameter/2</code> is only translated to a compile time unification for parametric objects. When the method is used in a parametric category, its call is translated to a call to the built-in Prolog predicate <code>arg/3</code>.
+Calls to the <code>parameter/2</code> method are translated to a compile time unification when the second argument is a variable. When the second argument is bound, the calls are translated to a call to the built-in predicate <code>arg/3</code>.
 </p>
 
 <h3 id="predicates_database">Database methods</h3>
@@ -1052,7 +1052,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 21, 2016</span>
+		<span>Last updated on: November 28, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
