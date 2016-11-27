@@ -498,6 +498,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dt>source_file_directive ::=</dt>
 				<dd>"<code>:- encoding(</code>" <em>atom</em> "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
+				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>"</dd>
 				<dd><em>Prolog directives</em></dd>
 		</dl>
 
@@ -532,6 +533,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>"<code>:- calls(</code>" protocol_identifiers "<code>).</code>" |</dd>
 				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
+				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>" |</dd>
 				<dd>predicate_directives</dd>
 		</dl>
 
@@ -550,6 +552,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>"<code>:- calls(</code>" protocol_identifiers "<code>).</code>" |</dd>
 				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
+				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>" |</dd>
 				<dd>predicate_directives</dd>
 		</dl>
 
@@ -565,6 +568,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
+				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>" |</dd>
 				<dd>predicate_directives</dd>
 		</dl>
 
@@ -1139,7 +1143,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 30, 2016</span>
+		<span>Last updated on: November 28, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.08.1 - November ??, 2016
+3.09.0 - November 28, 2016
 ==========================
 
 Logtalk compiler and runtime
@@ -35,8 +35,8 @@ This changes are useful when a team shares a Logtalk installation with both
 the `LOGTALKHOME` and `LOGTALKUSER` environment variables pointing to the
 same directory. Thanks to Barry Evans for the suggestion.
 
-* CHANGED: The `logtalk::expand_library_path/2` predicate to also expand paths
-in library notation in addition to library aliases.
+* CHANGED: The `logtalk::expand_library_path/2` predicate to also expand
+paths in library notation in addition to library aliases.
 
 * NEW: Inline calls in linking clauses to entity local predicates, to Prolog
 module, built-in, and foreign predicates, and to predicates defined in the
@@ -68,8 +68,8 @@ instantiation errors.
 * FIXED: Spurious choice-point when using the `logtalk_compile/1-2` built-in
 predicates.
 
-* FIXED: Using the `{}/1` compiler bypass control construct as argument to the
-`if/1` and `elif/1` conditional compilation directives.
+* FIXED: Using the `{}/1` compiler bypass control construct as argument to
+the `if/1` and `elif/1` conditional compilation directives.
 
 * FIXED: Bug where `initialization/1`directives in included files would be
 ignored when the main file also have one or more `initialization/1`directives.
