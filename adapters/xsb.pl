@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on October 24, 2016
+%  Last updated on December 5, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -258,11 +258,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
-	(	xsb_configuration(os_type, windows) ->
-		ScratchDirectory = './lgt_tmp/'
-	;	ScratchDirectory = './.lgt_tmp/'
-	).
+'$lgt_default_flag'(scratch_directory, './').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').

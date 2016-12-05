@@ -24,6 +24,13 @@ RELEASE NOTES
 3.09.1 - December ??, 2016
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Workaround an incompatible change in the concept of working directory
+in recent XSB development versions that prevents setting the `scratch_directory`
+flag to a value other than `./`.
+
 Documentation
 -------------
 

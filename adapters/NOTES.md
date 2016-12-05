@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on November 8, 2016
+Last updated on December 5, 2016
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -500,6 +500,10 @@ To generate `.xwam` files from Logtalk source files, set the `prolog_compiler`
 flag to the list of options that will be passed to the XSB `compile/2` built-in
 predicate and use either the built-in predicates `logtalk_compile/1-2` or the
 built-in predicates `logtalk_load/1-2` with the `clean` flag turned off.
+
+Changes in the XSB development version after the 3.7.0 release introduce an
+incompatibility with a setting for the `scratch_directory` flag other than
+`./`. This issue may or may not be fixed in the next XSB stable release.
 
 
 YAP 6.3.4 and later versions
