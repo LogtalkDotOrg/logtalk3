@@ -18,7 +18,7 @@ ________________________________________________________________________
 
 
 This is a SWI-Prolog pack specific README file. The actual Logtalk
-README file can be found at `../logtalk-3.09.0/README.md`. Follows
+README file can be found at `../logtalk-3.09.1/README.md`. Follows
 some notes on this pack version of Logtalk.
 
 Installing this pack simplifies loading Logtalk on-demand by simply
@@ -33,28 +33,28 @@ using one of its prebuilt installers.
 
 When using the directive above, the `LOGTALKHOME` and `LOGTALKUSER`
 shell environment variables are set, just for the duration of the
-SWI-Prolog process, to the full path of the `../logtalk-3.09.0`
+SWI-Prolog process, to the full path of the `../logtalk-3.09.1`
 directory.
 
 For easy access to the contents of the Logtalk installation folder
 (e.g. documentation or examples) you can create a symbolic link to the
-`../logtalk-3.09.0` directory (in e.g. your home directory). Its full
+`../logtalk-3.09.1` directory (in e.g. your home directory). Its full
 path can be easily found by using the query:
 
 	?- pack_info(logtalk).
 
-The `../logtalk-3.09.0` directory contains a `settings.lgt` file that
+The `../logtalk-3.09.1` directory contains a `settings.lgt` file that
 makes loading of Logtalk silent. If you make other changes to this file,
-or to other contents of the `../logtalk-3.09.0` directory, be sure to
+or to other contents of the `../logtalk-3.09.1` directory, be sure to
 make a backup before upgrading or removing this pack.
 
-The `../logtalk-3.09.0` directory contains several handy scripts but due
+The `../logtalk-3.09.1` directory contains several handy scripts but due
 to a current limitation of the `archive` library used for extracting the
 pack files, the executable permission of the script files is not being
 preserved. This can be manually fixed after installing the pack using
-the following steps (adjust the `logtalk-3.09.0` directory full path if
+the following steps (adjust the `logtalk-3.09.1` directory full path if
 necessary for your installation):
 
-	$ cd $HOME/lib/swipl/pack/logtalk/logtalk-3.09.0
+	$ cd $HOME/lib/swipl/pack/logtalk/logtalk-3.09.1
 	$ chmod a+x scripts/cleandist.sh
 	$ ./scripts/cleandist.sh
