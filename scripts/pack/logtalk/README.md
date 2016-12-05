@@ -49,11 +49,12 @@ or to other contents of the `../logtalk-3.09.1` directory, be sure to
 make a backup before upgrading or removing this pack.
 
 The `../logtalk-3.09.1` directory contains several handy scripts but due
-to a current limitation of the `archive` library used for extracting the
-pack files, the executable permission of the script files is not being
-preserved. This can be manually fixed after installing the pack using
-the following steps (adjust the `logtalk-3.09.1` directory full path if
-necessary for your installation):
+to a limitation of the `archive` library in SWI-Prolog 7.3.28 and older
+versions used for extracting the pack files, the executable permission
+of the script files was not preserved. If you're not running SWI-Prolog
+7.3.29 or a later version, this issue can be manually fixed after installing
+the pack using the following steps (adjust the `logtalk-3.09.1` directory
+full path if necessary for your installation):
 
 	$ cd $HOME/lib/swipl/pack/logtalk/logtalk-3.09.1
 	$ chmod a+x scripts/cleandist.sh

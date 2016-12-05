@@ -24,7 +24,10 @@ RELEASE NOTES
 3.09.1 - December ??, 2016
 ==========================
 
+Documentation
+-------------
 
+* UPDATED: Documentation of the SWI-Prolog Logtalk pack.
 
 
 3.09.0 - November 28, 2016
