@@ -10280,8 +10280,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_length'(ExtraArgs, 0, NExtraArgs),
 	Meta =.. [_| MetaArgs],
 	% check that the call/N call complies with the meta-predicate declaration
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs, MetaArg),
-	throw(domain_error({MetaArg}, NExtraArgs)).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs, Domain),
+	throw(domain_error(Domain, NExtraArgs)).
 
 '$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx) :-
 	!,
@@ -12572,33 +12572,45 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_not_same_meta_arg_extra_args'(@list(nonvar), @list(var), @var, +integer, -integer)
+% '$lgt_not_same_meta_arg_extra_args'(@list(nonvar), @list(var), @var, +integer, -compound)
 %
 % checks that the number of additional arguments being appended to a closure
 % in a call/N call matches the corresponding meta-predicate declaration
 % (the relative ordering of the meta-vars is the same of the corresponding
 % meta-arguments; assumes Logtalk meta-predicate notation)
 
-'$lgt_not_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs, MetaArg) :-
+'$lgt_not_same_meta_arg_extra_args'(MetaArgs, _, _, ExtraArgs, Domain) :-
+	findall(Integer, ('$lgt_member'(Integer, MetaArgs), integer(Integer)), Integers),
+	'$lgt_sum_list'(Integers, Sum),
+	Sum < ExtraArgs,
 	!,
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
+	(	Integers == [] ->
+		Domain = {}
+	;	Integers = [MetaArg| _],
+		Domain = {MetaArg}
+	).
 
-'$lgt_not_same_meta_arg_extra_args'([(::)| MetaArgs], MetaVars, Closure, ExtraArgs, MetaArg) :-
+'$lgt_not_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
 	!,
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
 
-'$lgt_not_same_meta_arg_extra_args'([0| MetaArgs], MetaVars, Closure, ExtraArgs, MetaArg) :-
+'$lgt_not_same_meta_arg_extra_args'([(::)| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
 	!,
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
 
-'$lgt_not_same_meta_arg_extra_args'([MetaArg| _], [MetaVar| _], Closure, ExtraArgs, MetaArg) :-
+'$lgt_not_same_meta_arg_extra_args'([0| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
+	!,
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
+
+'$lgt_not_same_meta_arg_extra_args'([MetaArg| _], [MetaVar| _], Closure, ExtraArgs, Domain) :-
 	MetaVar == Closure,
 	!,
 	integer(MetaArg),
-	MetaArg =\= ExtraArgs.
+	MetaArg =\= ExtraArgs,
+	Domain = {MetaArg}.
 
-'$lgt_not_same_meta_arg_extra_args'([_| MetaArgs], [_| MetaVars], Closure, ExtraArgs, MetaArg) :-
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
+'$lgt_not_same_meta_arg_extra_args'([_| MetaArgs], [_| MetaVars], Closure, ExtraArgs, Domain) :-
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
 
 
 

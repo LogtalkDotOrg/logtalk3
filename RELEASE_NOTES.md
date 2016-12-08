@@ -24,6 +24,13 @@ RELEASE NOTES
 3.09.1 - December ??, 2016
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Detection of `meta_predicate/1` directives that wrongly specify a goal
+meta-argument that is actually called using the `call/2-N` meta-predicates.
+Thanks to Arun Majumdar for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 
