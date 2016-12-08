@@ -27,6 +27,10 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* FIXED: SWI-Prolog integration hooks that allowed editing or loading a Logtalk
+source file specified library notation using the `edit/1`, `load_files/1-2`,
+and `consult/1` SWI-Prolog predicates.
+
 * FIXED: Workaround an incompatible change in the concept of working directory
 in recent XSB development versions that prevents setting the `scratch_directory`
 flag to a value other than `./`.

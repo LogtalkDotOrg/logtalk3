@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on November 7, 2016
+%  Last updated on December 8, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -48,7 +48,7 @@ user:prolog_load_file(_:Spec, Flags) :-
 	;	Spec =.. [Library, File],
 		% no paths instead of a file name for Logtalk
 		atom(File),
-		'$lgt_expand_library_path'(Library, LibPath),
+		'$lgt_expand_library_alias'(Library, LibPath),
 		atom_concat(LibPath, File, Spec2),
 		expand_file_name(Spec2, [SpecExp]),
 		absolute_file_name(SpecExp, [extensions(LogtalkExtensions), access(read), file_errors(fail)], Path)
@@ -75,7 +75,7 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	compound(Spec),
 	Spec =.. [Library, Name],
 	atom(Name),
-	'$lgt_expand_library_path'(Library, LibraryPath),
+	'$lgt_expand_library_alias'(Library, LibraryPath),
 	atom_concat(LibraryPath, Name, LogtalkPath),
 	(	file_name_extension(_, Extension, LogtalkPath),
 		atom_concat('.', Extension, DotExtension),
