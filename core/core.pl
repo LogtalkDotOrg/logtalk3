@@ -2179,7 +2179,7 @@ logtalk_compile(Files, Flags) :-
 % '$lgt_check_and_expand_source_files'(@list, -list)
 %
 % check if the source file names are valid (but not if the file exists)
-% and return their absolute paths
+% and return their absolute paths when using library notation
 
 '$lgt_check_and_expand_source_files'([File| Files], [Path| Paths]) :-
 	!,
