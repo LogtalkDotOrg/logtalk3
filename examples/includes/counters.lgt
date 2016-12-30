@@ -27,6 +27,15 @@
 		save_counters/0
 	]).
 
+	:- private(counter_value_/2).
+	:- dynamic(counter_value_/2).
+
+	% load the counters persistent database file when the object is compiled and
+	% loaded (use library notation for specifying the included file path for
+	% portability as backend Prolog compilers diverge on the concept of current
+	% directory)
+	:- include(includes('counters.pl')).
+
 	counter(Counter, Value) :-
 		counter_value_(Counter, Value).
 
@@ -51,11 +60,5 @@
 		;	true
 		),
 		close(Stream).
-
-	:- private(counter_value_/2).
-	:- dynamic(counter_value_/2).
-
-	% load the counters persistent database file when the object is compiled and loaded
-	:- include(includes('counters.pl')).
 
 :- end_object.

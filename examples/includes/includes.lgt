@@ -30,6 +30,10 @@
 		same_population/1
 	]).
 
+	% load the countries database file when the object is compiled and
+	% loaded (use library notation for specifying the included file path
+	% for portability as backend Prolog compilers diverge on the concept
+	% of current directory)
 	:- include(includes('countries.pl')).
 
 	capitals(Capitals) :-
