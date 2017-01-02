@@ -86,12 +86,16 @@ loading. See the `../../tests` directory for examples of unit tests.
 Unit test dialects
 ------------------
 
+Multiple test _dialects_ are supported by default. Other test dialects can
+be easily defined by extending the `lgtunit` object by term-expanding the
+new dialect into one of the default dialects.
+
 Unit tests can be written using any of the following dialects:
 
 	test(Test) :- Goal.
 
-This is the most simple dialect, allowing the specification of tests
-that are expected to succeed. A more versatile dialect is:
+This is the most simple dialect, allowing the specification of tests that
+are expected to succeed. A more versatile dialect is:
 
 	succeeds(Test) :- Goal.
 	deterministic(Test) :- Goal.
