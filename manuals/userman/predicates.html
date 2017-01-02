@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>    
-%  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -440,7 +440,7 @@ Note that, abstracting from the opening and closing object directives and the sc
 <h3 id="predicates_categories">Category predicates</h3>
 
 <p>
-Because a category can be imported by several different objects, dynamic private predicates must be called either in the context of <em>self</em>, using the <em>message to self</em> control structure, <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a>, or in the context of <em>this</em> (i.e. in the context of the object importing the category). For example, if we want to define a category implementing variables using destructive assignment where the variable values are stored in <em>self</em> we could write:
+Because a category can be imported by multiple objects, dynamic private predicates must be called either in the context of <em>self</em>, using the <em>message to self</em> control structure, <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a>, or in the context of <em>this</em> (i.e. in the context of the object importing the category). For example, if we want to define a category implementing variables using destructive assignment where the variable values are stored in <em>self</em> we could write:
 </p>
 <pre>:- category(variable).
 
@@ -462,7 +462,7 @@ Because a category can be imported by several different objects, dynamic private
 In this case, the <code>get/2</code> and <code>set/2</code> predicates will always access/update the correct definition, contained in the object receiving the messages. The alternative, storing the variable values in <em>this</em>, such that  each object importing the category will have its own definition for the <code>value_/2</code> private predicate is simple: just omit the use of the <code>::/1</code> control construct in the code above.
 </p>
 <p>
-A category may only contain clauses for static predicates. Nevertheless, as the example above illustrates, there are no restrictions in declaring and calling dynamic predicates from inside a category.
+A category can only contain clauses for static predicates. Nevertheless, as the example above illustrates, there are no restrictions in declaring and calling dynamic predicates from inside a category.
 </p>
 
 <h3 id="predicates_metadef">Meta-predicates</h3>
@@ -820,7 +820,7 @@ The Logtalk message printing mechanism provides you with a set of predicates, de
 Note that you can define your own alternative message kind identifiers, for your own components, together with suitable definitions for their associated prefixes and output streams.
 </p>
 <p>
-Messages are represented by atoms or compound terms, handy for machine-processing, and converted into a list of tokens, for human consumption. This conversion is performed using the non-terminal <a title="Consult reference manual" href="../refman/methods/message_tokens_2.html"><code>message_tokens(Term, Component)</code></a>. A simple example is:
+Messages are represented by atoms or compound terms, handy for machine-processing, and converted into a list of tokens, for human consumption. This conversion is performed using the multifile non-terminal <a title="Consult reference manual" href="../refman/methods/message_tokens_2.html"><code>message_tokens(Term, Component)</code></a>. A simple example is:
 </p>
 <pre>:- multifile(logtalk::message_tokens//2).
 :- dynamic(logtalk::message_tokens//2).
@@ -829,7 +829,7 @@ logtalk::message_tokens(loaded_settings_file(Path), core) --&gt;
     ['Loaded settings file found on directory ~w'-[Path], nl, nl].
 </pre>
 <p>
-The <code>Component</code> argument is new in the Logtalk implementation and is useful to filter messages belonging to a specific component (e.g. the Logtalk compiler and runtime is identified by the atom <code>core</code>) and also to avoid conflicts when two different components define the same message term (e.g. <code>banner</code> seems to be popular).
+The <code>Component</code> argument is new in the Logtalk implementation and is useful to filter messages belonging to a specific component (e.g. the Logtalk compiler and runtime is identified by the atom <code>core</code>) and also to avoid conflicts when two components define the same message term (e.g. <code>banner</code>).
 </p>
 <p>
 The following tokens can be used when translating a message:
@@ -998,7 +998,7 @@ The third argument can be either the atom <code>predicate</code> or the atom <co
 <h2 id="predicates_prolog_user">Calling Prolog user-defined predicates</h2>
 
 <p>
-Prolog user-defined predicates can be called from within objects or categories by either using the <a title="Consult reference manual" href="../refman/control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct. For example:
+Prolog user-defined predicates can be called from within objects or categories by using the <a title="Consult reference manual" href="../refman/control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct. For example:
 </p>
 <pre>foo :-
     ...,
@@ -1036,7 +1036,7 @@ foo :-
     bar,
     ...</pre>
 <p>
-Note that the first argument of the <code>use_module/2</code>, when used within an object or a category, should be a module name, not a file name. The actual module code should be loaded prior to compilation of Logtalk that uses it. In particular, programmers should not expect that the module be auto-loaded (when using back-end Prolog compilers supporting an autoloading mechanism).
+Note that the first argument of the <code>use_module/2</code>, when used within an object or a category, is a module name, not a file name. The actual module code should be loaded prior to compilation of Logtalk that uses it. In particular, programmers should not expect that the module be auto-loaded (when using back-end Prolog compilers supporting an autoloading mechanism).
 </p>
 <p>
 When the module predicate is a meta-predicate but for some reason you don't want its calls to be compiled as such, you can use the <a title="Consult reference manual" href="../refman/control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct as before:

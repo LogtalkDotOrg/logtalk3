@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,15 +21,15 @@ RELEASE NOTES
 =============
 
 
-3.09.1 - December ??, 2016
-==========================
+3.09.1 - January ??, 2016
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
 
 * FIXED: Detection of `meta_predicate/1` directives that wrongly specify a goal
-meta-argument that is actually called using the `call/2-N` meta-predicates.
-Thanks to Arun Majumdar for the bug report.
+meta-argument that is actually a closure passed to `call/2-N` meta-predicate
+calls. Thanks to Arun Majumdar for the bug report.
 
 Prolog adapter and integration files
 ------------------------------------
