@@ -25,5 +25,5 @@ These entities define a portable operating-system interface for the
 supported backend Prolog compilers. Some predicates may only be supported
 by a subset of backend Prolog compilers on a subset of operating-systems.
 They should be used with care and fully tested in your application domain
-as some backend Prolog compilers have buggy and inconsistent interfaces to
-the operating-system.
+as some backend Prolog compilers have buggy and inconsistent interfaces
+across operating-systems.

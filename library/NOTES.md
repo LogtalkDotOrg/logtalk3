@@ -28,12 +28,11 @@ library entities. The available loader files are described below.
 Most library entities are part of small hierarchies or depend on other
 entities and thus cannot be loaded and compiled separately (e.g. the
 `list` object implements the `listp` protocol and is part of a basic
-types hierarchy). Using the loader files takes care of all dependencies.
+types hierarchy). Using the loader files takes care of all dependencies
+and also ensure compilation in optimized mode.
 
-The library loader files can be loaded by either changing the current
-working directory to the library directory or, more by simply using 
-the notation `library(<loader file>)` as argument for the compiling
-and loading predicates. For example:
+The library loader files can be loaded using the `library(<loader file>)`
+notation as argument for the compiling and loading predicates. For example:
 
 	| ?- logtalk_load(library(random_loader)).
 
