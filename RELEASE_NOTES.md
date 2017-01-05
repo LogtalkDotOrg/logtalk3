@@ -52,6 +52,9 @@ Documentation
 
 * UPDATED: Documentation of the SWI-Prolog Logtalk pack.
 
+* IMPROVED: User Manual description of object properties, category properties,
+and calling of category predicates.
+
 Tests
 -----
 
