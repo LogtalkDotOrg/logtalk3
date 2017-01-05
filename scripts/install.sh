@@ -27,8 +27,8 @@ if [ -f "/etc/debian_version" ]; then
 	default_prefix=/usr
 else
 	case $( uname -s ) in
-		Darwin	) default_prefix=/opt/local;;
-		*		) default_prefix=/usr/local;;
+		Darwin ) default_prefix=/opt/local;;
+		*      ) default_prefix=/usr/local;;
 	esac
 fi
 
