@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on November 1, 2016
+##   Last updated on January 5, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -59,45 +59,45 @@ mkdir -p debian/usr/share/doc-base
 mkdir -p debian/usr/share/menu
 mkdir -p debian/DEBIAN
 cd logtalk-$version/scripts
-./install.sh -p $directory/debian/usr
-rm -rf $directory/debian/usr/share/mime
-cp debian/logtalk.doc-base $directory/debian/usr/share/doc-base/logtalk-docs
-cp debian/menu $directory/debian/usr/share/menu/logtalk
-cp ../*.bib $directory/debian/usr/share/doc/logtalk
-cp ../*.txt $directory/debian/usr/share/doc/logtalk
-cp debian/copyright $directory/debian/usr/share/doc/logtalk
-cp debian/changelog $directory/debian/usr/share/doc/logtalk
-cp debian/changelog.Debian $directory/debian/usr/share/doc/logtalk
-gzip --best $directory/debian/usr/share/doc/logtalk/*.bib 
-gzip --best $directory/debian/usr/share/doc/logtalk/*.txt 
-gzip --best $directory/debian/usr/share/doc/logtalk/changelog 
-gzip --best $directory/debian/usr/share/doc/logtalk/changelog.Debian
-cp debian/control $directory/debian/DEBIAN
-sudo sed -e "s/^Version:.*/Version: $version/" -i '' $directory/debian/DEBIAN/control
-cp debian/postinst $directory/debian/DEBIAN
-cp debian/prerm $directory/debian/DEBIAN
-cp debian/postrm $directory/debian/DEBIAN
-cd $directory
+./install.sh -p "$directory/debian/usr"
+rm -rf "$directory/debian/usr/share/mime"
+cp debian/logtalk.doc-base "$directory/debian/usr/share/doc-base/logtalk-docs"
+cp debian/menu "$directory/debian/usr/share/menu/logtalk"
+cp ../*.bib "$directory/debian/usr/share/doc/logtalk"
+cp ../*.txt "$directory/debian/usr/share/doc/logtalk"
+cp debian/copyright "$directory/debian/usr/share/doc/logtalk"
+cp debian/changelog "$directory/debian/usr/share/doc/logtalk"
+cp debian/changelog.Debian "$directory/debian/usr/share/doc/logtalk"
+gzip --best "$directory/debian/usr/share/doc/logtalk"/*.bib
+gzip --best "$directory/debian/usr/share/doc/logtalk"/*.txt
+gzip --best "$directory/debian/usr/share/doc/logtalk/changelog"
+gzip --best "$directory/debian/usr/share/doc/logtalk/changelog.Debian"
+cp debian/control "$directory/debian/DEBIAN"
+sudo sed -e "s/^Version:.*/Version: $version/" -i '' "$directory/debian/DEBIAN/control"
+cp debian/postinst "$directory/debian/DEBIAN"
+cp debian/prerm "$directory/debian/DEBIAN"
+cp debian/postrm "$directory/debian/DEBIAN"
+cd "$directory"
 dpkg-deb --build debian logtalk_$version-1_all.deb
 
-sha256="`openssl sha256 -r logtalk-$version.tar.bz2 | xargs -L 1 | sed 's/*.tar.bz2//g'`"
-rmd160="`openssl rmd160 -r logtalk-$version.tar.bz2 | xargs -L 1 | sed 's/*.tar.bz2//g'`"
+sha256="`openssl dgst -sha256 "logtalk-$version.tar.bz2" | sed 's/^.* //'`"
+rmd160="`openssl dgst -rmd160 "logtalk-$version.tar.bz2" | sed 's/^.* //'`"
 sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
 sudo cp -f logtalk-$version.tar.bz2 /opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2
 cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/
 sudo mv -f Portfile Portfile.old
-sudo cp $directory/logtalk-$version/scripts/macosx/Portfile .
+sudo cp "$directory/logtalk-$version/scripts/macosx/Portfile" .
 sudo sed -e "s/^version.*/version $version/" -i '' Portfile
 sudo sed -e "s/sha256.*/sha256 $sha256 \\\/" -i '' Portfile
 sudo sed -e "s/rmd160.*/rmd160 $rmd160/" -i '' Portfile
 sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk
-cp -R work/logtalk-$version.pkg $directory
+cp -R work/logtalk-$version.pkg "$directory"
 sudo port clean logtalk
 
-cd $directory/logtalk-$version/scripts/linux
+cd "$directory/logtalk-$version/scripts/linux"
 ./build_rpm.sh
-mv $HOME/rpmbuild/RPMS/noarch/logtalk-*.rpm $directory/
+mv "$HOME"/rpmbuild/RPMS/noarch/logtalk-*.rpm "$directory"
 
-cd $directory
+cd "$directory"

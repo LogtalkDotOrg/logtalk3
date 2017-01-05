@@ -52,6 +52,12 @@ Documentation
 
 * UPDATED: Documentation of the SWI-Prolog Logtalk pack.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Issue with the build release script when writing the MacPorts portfile
+used for generating the macOS installer.
+
 
 3.09.0 - November 28, 2016
 ==========================
