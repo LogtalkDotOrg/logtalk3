@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/11/12,
+		date is 2017/01/05,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -103,37 +103,61 @@ a(1).
 	fails(predicate_property_2_18) :-
 		test_object::predicate_property(ie(_), synchronized).
 
+	succeeds(predicate_property_2_19) :-
+		test_object::predicate_property(ie(_), number_of_clauses(N)),
+		N == 1.
+
+	succeeds(predicate_property_2_20) :-
+		test_object::predicate_property(ie(_), number_of_rules(N)),
+		N == 1.
+
 	% test properties of a user-defined meta-predicate
 
-	succeeds(predicate_property_2_19) :-
+	succeeds(predicate_property_2_21) :-
 		test_object::predicate_property(meta(_,_), meta_predicate(Template)),
 		Template == meta(0, *).
 
+	succeeds(predicate_property_2_22) :-
+		test_object::predicate_property(meta(_,_), number_of_clauses(N)),
+		N == 0.
+
+	succeeds(predicate_property_2_23) :-
+		test_object::predicate_property(meta(_,_), number_of_rules(N)),
+		N == 0.
+
 	% test properties of a user-defined non-terminal
 
-	succeeds(predicate_property_2_20) :-
+	succeeds(predicate_property_2_24) :-
 		test_object::predicate_property(nt(_,_), non_terminal(NonTerminal)),
 		NonTerminal == nt//0.
 
+	succeeds(predicate_property_2_25) :-
+		test_object::predicate_property(nt(_,_), number_of_clauses(N)),
+		N == 0.
+
+	succeeds(predicate_property_2_26) :-
+		test_object::predicate_property(nt(_,_), number_of_rules(N)),
+		N == 0.
+
 	% tests for the "user" pseudo-object
 
-	succeeds(predicate_property_2_21) :-
+	succeeds(predicate_property_2_27) :-
 		user::predicate_property(a(_), _).
 
-	succeeds(predicate_property_2_22) :-
+	succeeds(predicate_property_2_28) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::predicate_property(a(_), _).
 
 	% test semantics for local calls from multifile predicate clauses
 
-	succeeds(predicate_property_2_23) :-
+	succeeds(predicate_property_2_29) :-
 		primary::p(a(_), scope(Scope)),
 		primary::p(a(_), declared_in(Object)),
 		primary::p(a(_), defined_in(Object)),
 		Scope == (private), Object == secondary.
 
-	succeeds(predicate_property_2_24) :-
+	succeeds(predicate_property_2_30) :-
 		primary::p(b(_,_), scope(Scope)),
 		primary::p(b(_,_), declared_in(Object)),
 		primary::p(b(_,_), defined_in(Object)),

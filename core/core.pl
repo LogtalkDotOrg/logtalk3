@@ -354,10 +354,10 @@
 % '$lgt_pp_final_entity_aux_clause_'(Clause)
 :- dynamic('$lgt_pp_final_entity_aux_clause_'/1).
 
-% '$lgt_pp_number_of_clauses_'(Functor, Arity, Number)
-:- dynamic('$lgt_pp_number_of_clauses_'/3).
-% '$lgt_pp_number_of_clauses_'(Other, Functor, Arity, Number)
-:- dynamic('$lgt_pp_number_of_clauses_'/4).
+% '$lgt_pp_number_of_clauses_rules_'(Functor, Arity, NumberOfClauses, NumberOfRules)
+:- dynamic('$lgt_pp_number_of_clauses_rules_'/4).
+% '$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, NumberOfClauses, NumberOfRules)
+:- dynamic('$lgt_pp_number_of_clauses_rules_'/5).
 
 % '$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line)
 :- dynamic('$lgt_pp_predicate_declaration_line_'/3).
@@ -793,8 +793,18 @@ object_property(Obj, Prop) :-
 		true
 	;	fail
 	).
+'$lgt_object_property'(number_of_rules(Total), Obj, _, _, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Obj, number_of_rules(Total, _)) ->
+		true
+	;	fail
+	).
 '$lgt_object_property'(number_of_user_clauses(TotalUser), Obj, _, _, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Obj, number_of_clauses(_, TotalUser)) ->
+		true
+	;	fail
+	).
+'$lgt_object_property'(number_of_user_rules(TotalUser), Obj, _, _, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Obj, number_of_rules(_, TotalUser)) ->
 		true
 	;	fail
 	).
@@ -893,8 +903,18 @@ category_property(Ctg, Prop) :-
 		true
 	;	fail
 	).
+'$lgt_category_property'(number_of_rules(Total), Ctg, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Ctg, number_of_rules(Total, _)) ->
+		true
+	;	fail
+	).
 '$lgt_category_property'(number_of_user_clauses(TotalUser), Ctg, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Ctg, number_of_clauses(_, TotalUser)) ->
+		true
+	;	fail
+	).
+'$lgt_category_property'(number_of_user_rules(TotalUser), Ctg, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Ctg, number_of_rules(_, TotalUser)) ->
 		true
 	;	fail
 	).
@@ -1070,12 +1090,12 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_entity_property_defines'(Entity, Functor/Arity, Properties) :-
-	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(Flags, N, Line)),
+	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_line(Flags, Clauses, Rules, Line)),
 	!,
 	(	Line =:= 0 ->
 		% auxiliary predicate
-		Properties0 = [number_of_clauses(N)]
-	;	Properties0 = [line_count(Line), number_of_clauses(N)]
+		Properties0 = [number_of_clauses(Clauses), number_of_rules(Rules)]
+	;	Properties0 = [line_count(Line), number_of_clauses(Clauses), number_of_rules(Rules)]
 	),
 	(	Flags /\ 4 =:= 4 ->
 		Properties1 = [inline| Properties0]
@@ -1095,13 +1115,13 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
-	'$lgt_predicate_property_'(Entity, Functor/Arity, clauses_line_from(N, Line, From)),
-	Properties = [line_count(Line), number_of_clauses(N)].
+	'$lgt_predicate_property_'(Entity, Functor/Arity, clauses_rules_line_from(Clauses, Rules, Line, From)),
+	Properties = [line_count(Line), number_of_clauses(Clauses), number_of_rules(Rules)].
 
 
 '$lgt_entity_property_provides'(Entity, Functor/Arity, To, Properties) :-
-	'$lgt_predicate_property_'(To, Functor/Arity, clauses_line_from(N, Line, Entity)),
-	Properties = [line_count(Line), number_of_clauses(N)].
+	'$lgt_predicate_property_'(To, Functor/Arity, clauses_rules_line_from(Clauses, Rules, Line, Entity)),
+	Properties = [line_count(Line), number_of_clauses(Clauses), number_of_rules(Rules)].
 
 
 '$lgt_entity_property_alias'(Entity, Rnm, Flags, AliasFunctor/Arity, Properties) :-
@@ -2913,7 +2933,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 9, 1, rc2)).
 
 
 
@@ -3148,7 +3168,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_user'(defined_in(DCtn, Line), Alias, Original, _, _, _, _, _, _, Def, _) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	functor(Original, Functor, Arity),
-			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, _, Line)) ->
+			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_line(_, _, _, Line)) ->
 			true
 		;	fail
 		)
@@ -3157,7 +3177,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_user'(inline, Alias, Original, _, _, _, _, _, _, Def, _) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	functor(Original, Functor, Arity),
-			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(Flags, _, _)) ->
+			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_line(Flags, _, _, _)) ->
 			Flags /\ 4 =:= 4
 		;	fail
 		)
@@ -3172,7 +3192,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	'$lgt_find_overridden_predicate'(DCtn, Obj, Alias, Super),
 			functor(Original, Functor, Arity),
-			'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_line(_, _, Line)) ->
+			'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_rules_line(_, _, _, Line)) ->
 			true
 		;	fail
 		)
@@ -3197,13 +3217,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% static object
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		functor(Original, Functor, Arity),
-		(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)) ->
+		(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_line(_, N0, _, _)) ->
 			true
 		;	N0 is 0
 		),
 		(	PredFlags /\ 16 =:= 16 ->
 			% multifile predicate
-			findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_line_from(N1, _, _)), N1s),
+			findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_rules_line_from(N1, _, _, _)), N1s),
+			'$lgt_sum_list'([N0| N1s], N)
+		;	N is N0
+		)
+	;	fail
+	).
+'$lgt_predicate_property_user'(number_of_rules(N), Alias, Original, _, _, _, PredFlags, _, Obj, Def, _) :-
+	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
+	Flags /\ 2 =:= 0,
+	% static object
+	(	call(Def, Alias, _, _, _, DCtn) ->
+		functor(Original, Functor, Arity),
+		(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_line(_, _, N0, _)) ->
+			true
+		;	N0 is 0
+		),
+		(	PredFlags /\ 16 =:= 16 ->
+			% multifile predicate
+			findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_rules_line_from(_, N1, _, _)), N1s),
 			'$lgt_sum_list'([N0| N1s], N)
 		;	N is N0
 		)
@@ -6478,15 +6516,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	findall(Define, '$lgt_pp_number_of_clauses_'(_, _, Define), Defines),
+	findall(Define, '$lgt_pp_number_of_clauses_rules_'(_, _, Define, _), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux), _), '$lgt_pp_number_of_clauses_'(Functor, Arity, AuxDefine)), AuxDefines),
+	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux), _), '$lgt_pp_number_of_clauses_rules_'(Functor, Arity, AuxDefine, _)), AuxDefines),
 	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
-	findall(Provide, '$lgt_pp_number_of_clauses_'(_, _, _, Provide), Provides),
+	findall(Provide, '$lgt_pp_number_of_clauses_rules_'(_, _, _, Provide, _), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
 	Total is TotalDefines + TotalProvides,
 	TotalUser is Total - TotalAuxDefines,
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, number_of_clauses(Total, TotalUser)))),
+	fail.
+
+'$lgt_add_entity_properties'(_, Entity) :-
+	findall(Define, '$lgt_pp_number_of_clauses_rules_'(_, _, _, Define), Defines),
+	'$lgt_sum_list'(Defines, TotalDefines),
+	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux), _), '$lgt_pp_number_of_clauses_rules_'(Functor, Arity, _, AuxDefine)), AuxDefines),
+	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
+	findall(Provide, '$lgt_pp_number_of_clauses_rules_'(_, _, _, _, Provide), Provides),
+	'$lgt_sum_list'(Provides, TotalProvides),
+	Total is TotalDefines + TotalProvides,
+	TotalUser is Total - TotalAuxDefines,
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, number_of_rules(Total, TotalUser)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
@@ -6507,15 +6557,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_predicate_definition_line_'(Other, Functor, Arity, Line),
-	'$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, clauses_line_from(N,Line,Entity)))),
+	'$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, clauses_rules_line_from(Clauses,Rules,Line,Entity)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, declaration_line(Line)))),
 	\+ '$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(0, 0, 0)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_line(0, 0, 0, 0)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
@@ -6536,8 +6586,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Flags is Flags1,
 		'$lgt_pp_predicate_definition_line_'(Functor, Arity, Line)
 	),
-	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(Flags, N, Line)))),
+	'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_line(Flags, Clauses, Rules, Line)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
@@ -6951,8 +7001,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_final_entity_term_'(_, _)),
 	retractall('$lgt_pp_entity_aux_clause_'(_)),
 	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
-	retractall('$lgt_pp_number_of_clauses_'(_, _, _)),
-	retractall('$lgt_pp_number_of_clauses_'(_, _, _, _)),
+	retractall('$lgt_pp_number_of_clauses_rules_'(_, _, _, _)),
+	retractall('$lgt_pp_number_of_clauses_rules_'(_, _, _, _, _)),
 	retractall('$lgt_pp_predicate_declaration_line_'(_, _, _)),
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _)),
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _, _)),
@@ -9901,7 +9951,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TClause = srule(THead, Body, BodyCtx),
 		DClause = dsrule(THead, DHead, Body, BodyCtx)
 	),
-	'$lgt_clause_number'(PI, BeginLine, N).
+	'$lgt_clause_number'(PI, rule, BeginLine, N).
 
 '$lgt_compile_clause'(Fact, Entity, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
@@ -9922,43 +9972,71 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% other facts
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, BeginLine), ExCtx)
 	),
-	'$lgt_clause_number'(PI, BeginLine, N).
+	'$lgt_clause_number'(PI, fact, BeginLine, N).
 
 
 
-% '$lgt_clause_number'(@callable, +integer, -integer)
+% '$lgt_clause_number'(@callable, +atom, +integer, -integer)
 %
 % returns the clause number for a compiled predicate; when the clause is the
 % first one for the predicate, we also save the definition line in the source
 % file (assuming that we're not compiling a clause for a dynamically created
 % entity) for use with the reflection built-in predicates and methods
 
-'$lgt_clause_number'(Other::Functor/Arity, Line, N) :-
+'$lgt_clause_number'(Other::Functor/Arity, fact, Line, Clauses) :-
+	!,
 	% object or category multifile predicate
-	(	retract('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N0)) ->
-		N is N0 + 1
+	(	retract('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses0, Rules)) ->
+		Clauses is Clauses0 + 1
 	;	% first clause found for this predicate
-		N = 1,
+		Clauses = 1,
+		Rules = 0,
 		assertz('$lgt_pp_predicate_definition_line_'(Other, Functor, Arity, Line))
 	),
-	assertz('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N)).
+	assertz('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules)).
+
+'$lgt_clause_number'(Other::Functor/Arity, rule, Line, Clauses) :-
+	% object or category multifile predicate
+	(	retract('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses0, Rules0)) ->
+		Clauses is Clauses0 + 1,
+		Rules is Rules0 + 1
+	;	% first clause found for this predicate
+		Clauses = 1,
+		Rules = 1,
+		assertz('$lgt_pp_predicate_definition_line_'(Other, Functor, Arity, Line))
+	),
+	assertz('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules)).
 
 % module multifile predicate
-'$lgt_clause_number'(':'(_, _), _, 0).
+'$lgt_clause_number'(':'(_, _), _, _, 0).
 
-'$lgt_clause_number'({Head}, Line, N) :-
+'$lgt_clause_number'({Head}, Kind, Line, Clauses) :-
 	% pre-compiled predicate clause head
-	'$lgt_clause_number'(user::Head, Line, N).
+	'$lgt_clause_number'(user::Head, Kind, Line, Clauses).
 
-'$lgt_clause_number'(Functor/Arity, Line, N) :-
+'$lgt_clause_number'(Functor/Arity, fact, Line, Clauses) :-
+	!,
 	% predicate clause for the entity being compiled
-	(	retract('$lgt_pp_number_of_clauses_'(Functor, Arity, N0)) ->
-		N is N0 + 1
+	(	retract('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses0, Rules)) ->
+		Clauses is Clauses0 + 1
 	;	% first clause found for this predicate
-		N = 1,
+		Clauses = 1,
+		Rules = 0,
 		assertz('$lgt_pp_predicate_definition_line_'(Functor, Arity, Line))
 	),
-	assertz('$lgt_pp_number_of_clauses_'(Functor, Arity, N)).
+	assertz('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules)).
+
+'$lgt_clause_number'(Functor/Arity, rule, Line, Clauses) :-
+	% predicate clause for the entity being compiled
+	(	retract('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses0, Rules0)) ->
+		Clauses is Clauses0 + 1,
+		Rules is Rules0 + 1
+	;	% first clause found for this predicate
+		Clauses = 1,
+		Rules = 1,
+		assertz('$lgt_pp_predicate_definition_line_'(Functor, Arity, Line))
+	),
+	assertz('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules)).
 
 
 
@@ -12427,7 +12505,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_def_'(Clause)),
 	% add, if applicable, source data information for the auxiliary clause
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, flags_clauses_line(1,1,0))))
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, flags_clauses_rules_line(1,1,1,0))))
 	;	true
 	),
 	(	'$lgt_prolog_feature'(modules, supported) ->
@@ -14426,7 +14504,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(optimize, on),
 	\+ '$lgt_pp_dynamic_',
 	% static entity
-	'$lgt_pp_number_of_clauses_'(Functor, Arity, 1),
+	'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, 1, _),
 	% predicate with a single clause
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Head),
@@ -17962,6 +18040,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_predicate_property'(info(_)).
 % number of predicate clauses
 '$lgt_valid_predicate_property'(number_of_clauses(_)).
+% number of predicate rules
+'$lgt_valid_predicate_property'(number_of_rules(_)).
 % entity containing the predicate scope directive plus declaration line
 '$lgt_valid_predicate_property'(declared_in(_, _)).
 % object or category containing the predicate definition plus definition line
@@ -18032,8 +18112,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_category_property'(updates(_, _)).
 % number of predicate clauses (including both user-defined and auxiliary clauses)
 '$lgt_valid_category_property'(number_of_clauses(_)).
+% number of predicate rules (including both user-defined and auxiliary clauses)
+'$lgt_valid_category_property'(number_of_rules(_)).
 % number of user-defined predicate clauses
 '$lgt_valid_category_property'(number_of_user_clauses(_)).
+% number of user-defined predicate rules
+'$lgt_valid_category_property'(number_of_user_rules(_)).
 
 
 

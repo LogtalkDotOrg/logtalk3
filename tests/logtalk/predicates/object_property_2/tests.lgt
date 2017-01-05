@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2016/11/02,
+		date is 2017/01/05,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -61,8 +61,10 @@
 		object_property(test_object, source_data),
 		object_property(test_object, file(Basename, Directory)), ground(Basename), ground(Directory),
 		object_property(test_object, lines(Start, End)), integer(Start), integer(End),
-		object_property(test_object, number_of_clauses(N)), N == 36,
+		object_property(test_object, number_of_clauses(NC)), NC == 36,
+		object_property(test_object, number_of_rules(NR)), NR == 25,
 		object_property(test_object, number_of_user_clauses(NUC)), NUC == 34,
+		object_property(test_object, number_of_user_rules(NUR)), NUR == 23,
 		object_property(test_object, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),
@@ -120,27 +122,32 @@
 	succeeds(object_property_2_13) :-
 		object_property(test_object, defines(a/1, Properties1)),
 		member(line_count(LC1), Properties1), integer(LC1),
-		member(number_of_clauses(NC1), Properties1), integer(NC1).
+		member(number_of_clauses(NC1), Properties1), NC1 == 1,
+		member(number_of_rules(NR1), Properties1), NR1 == 0.
 
 	succeeds(object_property_2_14) :-
 		object_property(test_object, defines(b/2, Properties2)),
 		member(line_count(LC2), Properties2), integer(LC2),
-		member(number_of_clauses(NC2), Properties2), NC2 == 2.
+		member(number_of_clauses(NC2), Properties2), NC2 == 2,
+		member(number_of_rules(NR2), Properties2), NR2 == 0.
 
 	succeeds(object_property_2_15) :-
 		object_property(test_object, defines(c/3, Properties3)),
 		member(line_count(LC3), Properties3), integer(LC3),
-		member(number_of_clauses(NC3), Properties3), NC3 == 3.
+		member(number_of_clauses(NC3), Properties3), NC3 == 3,
+		member(number_of_rules(NR3), Properties3), NR3 == 0.
 
 	succeeds(object_property_2_16) :-
 		object_property(test_object, defines(d/4, Properties4)),
 		member(line_count(LC4), Properties4), integer(LC4),
-		member(number_of_clauses(NC4), Properties4), NC4 == 4.
+		member(number_of_clauses(NC4), Properties4), NC4 == 4,
+		member(number_of_rules(NR4), Properties4), NR4 == 0.
 
 	succeeds(object_property_2_17) :-
 		object_property(test_object, defines(e/5, Properties5)),
 		\+ member(line_count(_LC5), Properties5),
-		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
+		member(number_of_clauses(NC5), Properties5), NC5 == 0,	
+		member(number_of_rules(NR5), Properties5), NR5 == 0.		
 
 	% predicate call properties
 
@@ -309,83 +316,98 @@
 		fail.
 
 	fails(object_property_2_49) :-
-		object_property(empty_object, number_of_user_clauses(_)),
+		object_property(empty_object, number_of_rules(_)),
 		fail.
+
 	fails(object_property_2_50) :-
-		object_property(empty_object, threaded),
+		object_property(empty_object, number_of_user_clauses(_)),
 		fail.
 
 	fails(object_property_2_51) :-
-		object_property(empty_object, context_switching_calls),
+		object_property(empty_object, number_of_user_rules(_)),
 		fail.
 
 	fails(object_property_2_52) :-
-		object_property(empty_object, dynamic_declarations),
+		object_property(empty_object, threaded),
 		fail.
 
 	fails(object_property_2_53) :-
-		object_property(empty_object, complements),
+		object_property(empty_object, context_switching_calls),
 		fail.
 
 	fails(object_property_2_54) :-
+		object_property(empty_object, dynamic_declarations),
+		fail.
+
+	fails(object_property_2_55) :-
+		object_property(empty_object, complements),
+		fail.
+
+	fails(object_property_2_56) :-
 		object_property(empty_object, complements(_)),
 		fail.
 
 	% determinism tests
 
-	deterministic(object_property_2_55) :-
+	deterministic(object_property_2_57) :-
 		object_property(debug_object, debugging).
 
-	deterministic(object_property_2_56) :-
+	deterministic(object_property_2_58) :-
 		object_property(test_object, source_data).
 
-	deterministic(object_property_2_57) :-
+	deterministic(object_property_2_59) :-
 		object_property(dynamic_object, (dynamic)).
 
-	deterministic(object_property_2_58) :-
+	deterministic(object_property_2_60) :-
 		object_property(test_object, static).
 
-	deterministic(object_property_2_59) :-
+	deterministic(object_property_2_61) :-
 		object_property(built_in_object, built_in).
 
-	deterministic(object_property_2_60) :-
+	deterministic(object_property_2_62) :-
 		object_property(test_object, file(_)).
 
-	deterministic(object_property_2_61) :-
+	deterministic(object_property_2_63) :-
 		object_property(test_object, file(_, _)).
 
-	deterministic(object_property_2_62) :-
+	deterministic(object_property_2_64) :-
 		object_property(test_object, lines(_, _)).
 
-	deterministic(object_property_2_63) :-
+	deterministic(object_property_2_65) :-
 		object_property(test_object, info(_)).
 
-	deterministic(object_property_2_64) :-
+	deterministic(object_property_2_66) :-
 		object_property(options_object, events).
 
-	deterministic(object_property_2_65) :-
+	deterministic(object_property_2_67) :-
 		object_property(test_object, number_of_clauses(_)).
 
-	deterministic(object_property_2_66) :-
-		object_property(test_object, number_of_user_clauses(_)).
-
-	deterministic(object_property_2_67) :-
-		object_property(options_object, context_switching_calls).
-
 	deterministic(object_property_2_68) :-
-		object_property(options_object, dynamic_declarations).
+		object_property(test_object, number_of_rules(_)).
 
 	deterministic(object_property_2_69) :-
-		object_property(options_object, complements(_)).
+		object_property(test_object, number_of_user_clauses(_)).
 
 	deterministic(object_property_2_70) :-
+		object_property(test_object, number_of_user_rules(_)).
+
+	deterministic(object_property_2_71) :-
+		object_property(options_object, context_switching_calls).
+
+	deterministic(object_property_2_72) :-
+		object_property(options_object, dynamic_declarations).
+
+	deterministic(object_property_2_73) :-
+		object_property(options_object, complements(_)).
+
+	deterministic(object_property_2_74) :-
 		object_property(options_object, complements).
 
 	:- if(current_logtalk_flag(threads, supported)).
-		deterministic(object_property_2_71) :-
+		deterministic(object_property_2_75) :-
 			object_property(threaded_object, threaded).
 	:- else.
-		- deterministic(object_property_2_71).
+		- deterministic(object_property_2_75).
 	:- endif.
 
 	% auxiliary predicates (avoid library dependencies)

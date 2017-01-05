@@ -27,6 +27,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for `number_of_rules/1` and `number_of_user_rules/1` object
+and category properties.
+
+* ADDED: Support for `number_of_rules/1` predicate property.
+
 * FIXED: Detection of `meta_predicate/1` directives that wrongly specify a goal
 meta-argument that is actually a closure passed to `call/2-N` meta-predicate
 calls. Thanks to Arun Majumdar for the bug report.
