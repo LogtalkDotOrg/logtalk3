@@ -23,8 +23,8 @@
 	:- info([
 		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/08/03,
-		comment is 'Utility object to help automate (re)generate documentation for a project.'
+		date is 2017/01/05,
+		comment is 'Utility object to help automate (re)generating documentation for a project.'
 	]).
 
 	:- uses(logtalk, [
@@ -38,7 +38,7 @@
 	:- public(update/0).
 	:- mode(update, zero_or_one).
 	:- info(update/0, [
-		comment is 'Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if one of the update steps fails.'
+		comment is 'Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if any goal or shell command fails.'
 	]).
 
 	:- public(doc_goal/1).

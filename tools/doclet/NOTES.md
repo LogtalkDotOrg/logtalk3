@@ -20,13 +20,13 @@ ________________________________________________________________________
 Overview
 --------
 
-This folder provides a simple tool for (re)generating documentation for an
-application. The tool provides a `doclet` object that is expected to be
-extended by the user to specify a sequence of goals and a sequence of shell
-commands that load the application and (re)generate its documentation.
+This folder provides a simple tool for (re)generating documentation for a
+project. The tool defines a `doclet` object that is expected to be extended
+by the user to specify a sequence of goals and a sequence of shell commands
+that load the application and (re)generate its documentation.
 
-Doclet source files are usually named `doclet.lgt` (or `doclet.logtalk`) and
-the doclet object are usually named after the application or library to be
+Doclet source files are preferably named `doclet.lgt` (or `doclet.logtalk`)
+and the doclet object are usually named after the application or library to be
 documented with a `_doclet` suffix. By using an `initialization/1` directive
 to automatically send the `update/0` message that generates the documentation
 upon doclet loading, we can abstract the name of the doclet object. The usual
@@ -50,7 +50,9 @@ Automating running doclets
 --------------------------
 
 You can use the `scripts/logtalk_doclet.sh` Bash shell script for automating
-running doclets. See the `scripts/NOTES.md` file for details.
+running doclets. The script expects the doclet source files to be named either
+`doclet.lgt` or `doclet.logtalk`. See the `scripts/NOTES.md` file or the
+script man page for details.
 
 
 Other notes
