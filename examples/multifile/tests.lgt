@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2014/02/04,
+		date is 2017/01/05,
 		comment is 'Unit tests for the "multifile" example.'
 	]).
 
@@ -32,24 +32,40 @@
 	cover(other).
 	cover(more).
 
-	test(multifile_1) :-
+	test(multifile_01) :-
 		findall(X, main::a(X), Solutions),
 		Solutions == [1, 2, 3, 4, 5].
 
-	test(multifile_2) :-
+	test(multifile_02) :-
 		main::current_predicate(a/1),
 		main::predicate_property(a(_), public),
 		main::predicate_property(a(_), multifile),
 		main::predicate_property(a(_), number_of_clauses(5)).
 
-	test(multifile_3) :-
+	test(multifile_03) :-
 		findall(X, main::b(X), Solutions),
 		Solutions == [one, two, three].
 
-	test(multifile_4) :-
+	test(multifile_04) :-
 		main::current_predicate(b/1),
 		main::predicate_property(b(_), public),
 		main::predicate_property(b(_), multifile),
 		main::predicate_property(b(_), number_of_clauses(2)).
+
+	test(multifile_05) :-
+		object_property(main, number_of_clauses(N)),
+		N == 2.
+
+	test(multifile_06) :-
+		object_property(main, number_of_user_clauses(N)),
+		N == 2.
+
+	test(multifile_07) :-
+		object_property(main, number_of_rules(N)),
+		N == 0.
+
+	test(multifile_08) :-
+		object_property(main, number_of_user_rules(N)),
+		N == 0.
 
 :- end_object.

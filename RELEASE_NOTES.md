@@ -52,6 +52,11 @@ Documentation
 
 * UPDATED: Documentation of the SWI-Prolog Logtalk pack.
 
+Tests
+-----
+
+* ADDED: Additional tests for the `multifile` example.
+
 Installers and installation scripts
 -----------------------------------
 
