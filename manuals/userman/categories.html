@@ -374,21 +374,21 @@ Omitting the scope keyword is equivalent to writing:
     ...
 :- end_object.</pre>
 
-<h2 id="categories_predicates">Using category predicates</h2>
+<h2 id="categories_predicates">Calling category predicates</h2>
 
 <p>
-Category predicates can be called from within an object using either the message sending mechanisms or a direct call. Consider the following category:
+Category predicates can be called from within an object by sending a message to <em>self</em> or using a <em>super</em> call. Consider the following category:
 </p>
 <pre>:- category(output).
 
     :- public(out/1).
 
     out(X) :-
-        writeq(X), nl.
+        write(X), nl.
 
 :- end_category.</pre>
 <p>
-Using the message sending mechanisms, the predicate <code>out/1</code> can be called from within an object importing the category by simply sending a message to <em>self</em>. For example:
+The predicate <code>out/1</code> can be called from within an object importing the category by simply sending a message to <em>self</em>. For example:
 </p>
 <pre>:- object(worker,
     imports(output)).
@@ -401,10 +401,10 @@ Using the message sending mechanisms, the predicate <code>out/1</code> can be ca
 
 :- end_object.</pre>
 <p>
-This is the recommended way of calling category predicates as it supports the specialization/redefinition of the category predicate in a descendant object (as the predicate declaration and definition lookups will start from <em>self</em>). Messages to <em>self</em> usually imply the use of dynamic binding as the actual object that will receive the message is only known at runtime. This translates to a small performance penalty when compared with calls to local object predicates.
+This is the recommended way of calling a category predicate that can be specialized/overriden in a descendant object as the predicate definition lookup will start from <em>self</em>.
 </p>
 <p>
-It is also possible to perform direct calls to predicates from imported categories without using the message sending mechanisms with the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> control construct. For example:
+A direct call the predicate definition found in an imported category can be made using the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> control construct. For example:
 </p>
 <pre>:- object(worker,
     imports(output)).
@@ -436,7 +436,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 2, 2016</span>
+		<span>Last updated on: January 5, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>
