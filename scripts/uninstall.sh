@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on September 29, 2016
+##   Last updated on January 5, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -58,8 +58,8 @@ echo
 echo "Uninstalling Logtalk $version system-level files..."
 echo
 
-cd $LOGTALKHOME/..
-rm -rf $directory
+cd "$LOGTALKHOME"/..
+rm -rf "$directory"
 rm -f logtalk
 cd ../bin
 rm -f bplgt

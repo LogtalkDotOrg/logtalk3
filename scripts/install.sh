@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on October 26, 2016
+##   Last updated on January 5, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -79,15 +79,15 @@ if [ "$prefix_argument" != "" ] && [ ! -d "$prefix_argument" ] ; then
 	usage_help
 	exit 1
 elif [ "$prefix_argument" != "" ] ; then
-	prefix=$prefix_argument
+	prefix="$prefix_argument"
 else
-	prefix=$default_prefix
+	prefix="$default_prefix"
 fi
 
 if [ "$directory_argument" != "" ] ; then
-	directory=$directory_argument
+	directory="$directory_argument"
 else
-	directory=$default_directory
+	directory="$default_directory"
 fi
 
 if [ ! -w "$prefix" ] ; then
@@ -100,25 +100,25 @@ echo
 echo "Installing Logtalk $version on $prefix/share ..."
 echo
 
-mkdir -p $prefix/share
+mkdir -p "$prefix/share"
 
-rm -rf $prefix/share/$directory
-rm -f $prefix/share/logtalk
+rm -rf "$prefix/share/$directory"
+rm -f "$prefix/share/logtalk"
 
-mkdir $prefix/share/$directory
+mkdir "$prefix/share/$directory"
 
 cd ..
-cp -R * $prefix/share/$directory
+cp -R * "$prefix/share/$directory"
 
-cd $prefix/share/$directory
+cd "$prefix/share/$directory"
 chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 
 cd ..
-ln -sf $directory logtalk
+ln -sf "$directory" logtalk
 
-mkdir -p $prefix/bin
-cd $prefix/bin
+mkdir -p "$prefix/bin"
+cd "$prefix/bin"
 
 ln -sf ../share/logtalk/scripts/logtalk_tester.sh logtalk_tester
 ln -sf ../share/logtalk/scripts/logtalk_doclet.sh logtalk_doclet
@@ -156,7 +156,7 @@ mkdir -p ../share/man/man1
 cd ../share/man/man1
 gzip --best ../../logtalk/man/man1/*.1
 for file in ../../logtalk/man/man1/*.1.gz ; do
-	ln -sf $file `basename $file`
+	ln -sf "$file" `basename "$file"`
 done
 
 echo "The following integration scripts are installed for running Logtalk"
@@ -190,10 +190,10 @@ echo "for compatibility notes or consult the integration script man page."
 echo
 
 if [ "`command -v update-mime-database`" != "" ]; then
-	mkdir -p $prefix/share/mime/packages
-	rm -f $prefix/share/mime/packages/logtalk.xml
-	cp $prefix/share/$directory/scripts/freedesktop/logtalk.xml $prefix/share/mime/packages/logtalk.xml
-	update-mime-database $prefix/share/mime
+	mkdir -p "$prefix/share/mime/packages"
+	rm -f "$prefix/share/mime/packages/logtalk.xml"
+	cp "$prefix/share/$directory/scripts/freedesktop/logtalk.xml" "$prefix/share/mime/packages/logtalk.xml"
+	update-mime-database "$prefix/share/mime"
 	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
 	echo
 fi

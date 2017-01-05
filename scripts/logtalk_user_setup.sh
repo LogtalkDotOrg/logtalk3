@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on July 7, 2016
+##   Last updated on January 5, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -67,7 +67,7 @@ fi
 
 if ! [ "$LOGTALKUSER" ]
 then
-	LOGTALKUSER=$HOME/logtalk
+	LOGTALKUSER="$HOME/logtalk"
 	echo "After the script completion, you must set the environment variable"
 	echo "LOGTALKUSER pointing to \"$LOGTALKUSER\"."
 	echo
@@ -76,7 +76,7 @@ fi
 if [ -d "$LOGTALKUSER" ]
 then
 	date=`eval date \"+%Y-%m-%d-%H%M%S\"`
-	mv $LOGTALKUSER "$LOGTALKUSER-backup-$date"
+	mv "$LOGTALKUSER" "$LOGTALKUSER-backup-$date"
 	echo "Created a backup of the existing \"\$LOGTALKUSER\" directory:"
 	echo
 	echo "  $LOGTALKUSER-backup-$date"
@@ -85,7 +85,7 @@ then
 	echo
 	echo "  $LOGTALKUSER"
 	echo
-	mkdir $LOGTALKUSER
+	mkdir "$LOGTALKUSER"
 	if [ -f "$LOGTALKUSER-backup-$date"/settings.lgt ]
 	then
 		cp "$LOGTALKUSER-backup-$date"/settings.lgt "$LOGTALKUSER"/
@@ -105,7 +105,7 @@ else
 	echo
 	echo "  $LOGTALKUSER"
 	echo
-	mkdir $LOGTALKUSER
+	mkdir "$LOGTALKUSER"
 fi
 
 echo "Copying Logtalk files and directories..."
