@@ -62,8 +62,9 @@ Tools
 external Prolog module predicates, when running using SWI-Prolog or YAP as
 the backend compiler, where the module prefix would be omitted.
 
-* FIXED: Error in the `diagrams` tool when trying to get properties for
-referenced entities (usually external) that for some reason failed to load.
+* FIXED: Error in the `dead_code_scanner` and `diagrams` tools when trying to
+get properties for referenced entities (usually external) that for some reason
+failed to load.
 
 Tests
 -----
