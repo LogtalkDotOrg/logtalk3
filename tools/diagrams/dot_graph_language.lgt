@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2016/11/12,
+		date is 2017/01/06,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -343,7 +343,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
 		write_term_to_chars(Term, Chars) :-
-			{format(chars(Chars), '~w', Term)}.
+			{format(chars(Chars), '~w', [Term])}.
 	
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
@@ -360,7 +360,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
 		write_term_to_chars(Term, Chars) :-
-			{format(chars(Chars), '~w', Term)}.
+			{format(chars(Chars), '~w', [Term])}.
 
 	:- else.
 	

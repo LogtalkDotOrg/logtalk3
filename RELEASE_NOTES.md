@@ -55,6 +55,13 @@ Documentation
 * IMPROVED: User Manual description of object properties, category properties,
 and calling of category predicates.
 
+Tools
+-----
+
+* FIXED: Bug in the `diagrams` tool when writing node captions for calls to
+external Prolog module predicates, when running using SWI-Prolog or YAP as
+the backend compiler, where the module prefix would be omitted.
+
 Tests
 -----
 
