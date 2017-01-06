@@ -63,12 +63,16 @@ external Prolog module predicates, when running using SWI-Prolog or YAP as
 the backend compiler, where the module prefix would be omitted.
 
 * FIXED: Error in the `diagrams` tool when trying to get properties for
-referenced entities (usually external) that for some reason are not loaded.
+referenced entities (usually external) that for some reason failed to load.
 
 Tests
 -----
 
 * ADDED: Additional tests for the `multifile` example.
+
+* FIXED: Workaround an operator related syntax error when using XSB as the
+backend compiler for running the `category_property/2` and `object_property/2`
+unit tests.
 
 Installers and installation scripts
 -----------------------------------

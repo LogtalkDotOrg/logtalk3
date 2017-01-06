@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2017/01/05,
+		date is 2017/01/06,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -145,7 +145,7 @@
 	% predicate call properties
 
 	succeeds(category_property_2_18) :-
-		category_property(test_category, calls(local/0, Properties1)),
+		category_property(test_category, calls((local)/0, Properties1)),
 		member(caller(Caller1), Properties1), Caller1 == caller1/0,
 		member(line_count(Line1), Properties1), integer(Line1).
 
