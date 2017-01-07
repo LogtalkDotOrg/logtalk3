@@ -78,6 +78,8 @@ unit tests.
 Installers and installation scripts
 -----------------------------------
 
+* IMPROVED: Use a shallow clone in the `build_release.sh` script.
+
 * FIXED: Issue with the build release script when writing the MacPorts portfile
 used for generating the macOS installer.
 

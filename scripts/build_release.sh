@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on January 5, 2017
+##   Last updated on January 7, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -24,13 +24,13 @@
 
 
 if [ -z "$1" ]; then
-	git clone git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
+	git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
 	version=`cat lgtclone/VERSION.txt | sed -e 's/-stable$//'`
 
 	mv lgtclone logtalk-$version
 else
 	version="$1"
-	git clone git://github.com/LogtalkDotOrg/logtalk3.git logtalk-$version
+	git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git logtalk-$version
 fi
 
 directory=`PWD`
