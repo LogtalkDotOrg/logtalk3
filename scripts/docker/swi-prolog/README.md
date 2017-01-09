@@ -25,11 +25,11 @@ Building a Logtalk image
 
 #### Nightly build
 
-    docker build -t="logtalk/logtalk:nightly" .
+    docker build -t="logtalk/logtalk3-swi:nightly" .
 
 #### Last stable release
 
-    docker build --build-arg LOGTALK_VERSION=lgt3090stable -t="logtalk/logtalk:lgt3090stable" -t="logtalk/logtalk:latest" .
+    docker build --build-arg LOGTALK_VERSION=lgt3090stable -t="logtalk/logtalk3-swi:3090" -t="logtalk/logtalk3-swi:latest" .
 
 
 
@@ -39,10 +39,10 @@ Running a Logtalk container
 
 #### From the nightly build
 
-    docker run -it --name logtalk_nightly "logtalk/logtalk:nightly"
+    docker run -it --name logtalk_nightly "logtalk/logtalk3-swi:nightly"
 
 
 #### From the last stable release
 
-    docker run -it --name logtalk_latest "logtalk/logtalk:latest"
+    docker run -it --name logtalk_latest "logtalk/logtalk3-swi:latest"
 
