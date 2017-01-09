@@ -45,6 +45,14 @@ yes
 yes
 
 
+% round-trip conversion:
+
+| ?- java::terms_to_array([x,[1,a,7,[y,z]],k,[]], Array), java::array_to_terms(Array, List).
+Array = @'J#00000140612800198040',
+List = [x, [1, a, 7, [y, z]], k, []].
+yes
+
+
 % some GUI examples, adapted from the JPL distribution examples
 
 | ?- color_chooser::color(Color).

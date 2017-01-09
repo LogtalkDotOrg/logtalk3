@@ -68,9 +68,9 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2017/01/09,
 		comment is 'Abstract interface to Java utility predicates.'
 	]).
 
@@ -137,11 +137,32 @@
 		argnames is ['Reference']
 	]).
 
+	:- public(terms_to_array/2).
+	:- mode(terms_to_array(++list(ground), -array), one).
+	:- info(terms_to_array/2, [
+		comment is 'Converts a list of ground Prolog terms to an array (a Java reference).',
+		argnames is ['Terms', 'Array']
+	]).
+
+	:- public(array_to_terms/3).
+	:- mode(array_to_terms(+array, -list(ground), -integer), one).
+	:- info(array_to_terms/3, [
+		comment is 'Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.',
+		argnames is ['Array', 'Terms', 'Length']
+	]).
+
+	:- public(array_to_terms/2).
+	:- mode(array_to_terms(+array, -list(term)), one).
+	:- info(array_to_terms/2, [
+		comment is 'Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.',
+		argnames is ['Array', 'Terms']
+	]).
+
 	:- public(array_list/2).
 	:- mode(array_list(+array, -list), one).
 	:- mode(array_list(-array, +list), one).
 	:- info(array_list/2, [
-		comment is 'Converts between an array and a list.',
+		comment is 'Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.',
 		argnames is ['Array', 'List']
 	]).
 

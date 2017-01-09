@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>1.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/11/7</code>
+            <code>2017/1/9</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -223,9 +223,69 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="terms_to_array/2" class="code">terms_to_array/2</h3>
+          <blockquote>
+            <p class="comment">Converts a list of ground Prolog terms to an array (a Java reference).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>terms_to_array(Terms,Array)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>terms_to_array(++list(ground),-array) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="array_to_terms/3" class="code">array_to_terms/3</h3>
+          <blockquote>
+            <p class="comment">Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>array_to_terms(Array,Terms,Length)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>array_to_terms(+array,-list(ground),-integer) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="array_to_terms/2" class="code">array_to_terms/2</h3>
+          <blockquote>
+            <p class="comment">Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>array_to_terms(Array,Terms)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>array_to_terms(+array,-list(term)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="array_list/2" class="code">array_list/2</h3>
           <blockquote>
-            <p class="comment">Converts between an array and a list.</p>
+            <p class="comment">Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>

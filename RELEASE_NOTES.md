@@ -55,6 +55,12 @@ Documentation
 * IMPROVED: User Manual description of object properties, category properties,
 and calling of category predicates.
 
+Library
+-------
+
+* ADDED: Predicates `terms_to_array/2` and `array_to_terms/2-3` to the `java`
+library object. Currently only implemented for the SWI-Prolog/YAP JPL library.
+
 Tools
 -----
 
