@@ -84,6 +84,9 @@ unit tests.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Docker support (using SWI-Prolog as the backend compiler). Contributed
+by Sergio Castro.
+
 * IMPROVED: Use a shallow clone in the `build_release.sh` script.
 
 * FIXED: Issue with the build release script when writing the MacPorts portfile

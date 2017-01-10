@@ -17,14 +17,16 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains files and resources needed to run Logtalk in a Docker container.
-It also contains the Readme files displayed in Dockerhub.
+This directory contains files and resources required to run Logtalk in a
+Docker container. It also contains the read-me files that are displayed
+at Docker Hub. The files are organized in directories per supported
+backend Prolog compiler. Note that we are currently limited to Prolog
+systems with available Docker containers. Each one of these directories
+includes the following files:
 
 - `Dockerfile`  
-        the docker file configuring Logtalk with a specific Prolog engine.
+	the docker file configuring Logtalk with a specific Prolog engine
 
-- `Readme.md`
-        The README.md files located in the same directory than dockerfiles 
-        will be automatically used as the project description when creating
-        an automated build in Dockerhub.
-
+- `README.md`
+	the `README.md` file automatically used as the project description
+	when creating an automated build at Docker Hub

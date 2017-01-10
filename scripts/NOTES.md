@@ -17,12 +17,13 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains shell scripts used for Logtalk testing, packaging,
-installation, and integration with Prolog compilers. Those with extension
-`.sh` are bash shells scripts for MacOS X, Linux, and similar systems.
-Those with extension `.js` are JScript command-line scripts for Windows;
-they require WSH 5.6 or later version to be installed and should be run
-using `cscript.exe` from a DOS command line shell (you may download WSH 5.6
+This directory contains support files for creating Docker containers and
+shell scripts used for Logtalk testing, packaging, installation, and
+integration with Prolog compilers. Those with extension `.sh` are bash
+shells scripts for MacOS X, Linux, and similar systems. Those with
+extension `.js` are JScript command-line scripts for Windows; they require
+WSH 5.6 or later version to be installed and should be run using
+`cscript.exe` from a DOS command line shell (you may download WSH 5.6
 from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
 Man pages are provided for all POSIX shell scripts, which can be listed
@@ -101,6 +102,9 @@ using the `apropos logtalk` command.
 - `debian`  
 	directory containing support files for building a Debian package
 	(work in progress; experimental)
+
+- `docker`  
+	directory containing support files for building Docker containers
 
 - `freedesktop`  
 	directory containing support files for adding the Logtalk mime-type
