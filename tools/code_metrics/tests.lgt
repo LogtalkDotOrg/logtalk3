@@ -62,8 +62,8 @@
 	test(dit_obj_e) :-
 		depth_is(obj_e, 1).
 
-	test(wrong_output(dit_obj_c), fail) :-
-		depth_is(obj_c, 7).
+	test(wrong_output(dit_obj_c)) :-
+		\+ depth_is(obj_c, 7).
 
 	test(dit_cat_a) :-
 		depth_is(cat_a, 2).
@@ -83,8 +83,8 @@
 	test(dit_prot_b) :-
 		depth_is(prot_b, 2).
 
-	test(wrong_output(dit_prot_c), fail) :-
-		depth_is(prot_a, 0).
+	test(wrong_output(dit_prot_c)) :-
+		\+ depth_is(prot_a, 0).
 
 	test(dit_herring) :-
 		depth_is(herring, 2).
@@ -115,8 +115,8 @@
 	test(coupling_obj_e) :-
 		coupling_is(obj_e, 0).
 
-	test(wrong_output(coupling_obj_c), fail) :-
-		coupling_is(obj_c, 10).
+	test(wrong_output(coupling_obj_c)) :-
+		\+ coupling_is(obj_c, 10).
 
 	test(coupling_cat_a) :-
 		coupling_is(cat_a, 1).
@@ -130,8 +130,8 @@
 	test(coupling_cat_d) :-
 		coupling_is(cat_d, 0).
 
-	test(wrong_output(coupling_cat_c), fail) :-
-		coupling_is(obj_c, 4).
+	test(wrong_output(coupling_cat_c)) :-
+		\+ coupling_is(obj_c, 4).
 
 	test(coupling_prot_a) :-
 		coupling_is(prot_a, 0).
@@ -153,8 +153,8 @@
 
 	% noc tests
 
-	test(noc_cat_a, fail) :-
-		noc::item_score(cat_a, _).
+	test(noc_cat_a) :-
+		\+ noc::item_score(cat_a, _).
 
 	test(noc_cat_b) :-
 		nocs_are(cat_b, Nocs),
@@ -164,12 +164,12 @@
 		nocs_are(cat_c, Nocs),
 		Nocs == [foo/0-1].
 
-	test(noc_cat_d, fail) :-
-		noc::item_score(cat_d, _).
+	test(noc_cat_d) :-
+		\+ noc::item_score(cat_d, _).
 
-	test(wrong_clause(noc_obj_e), fail) :-
+	test(wrong_clause(noc_obj_e)) :-
 		nocs_are(obj_e, Nocs),
-		Nocs == [foo/0-2].
+		\+ Nocs == [foo/0-2].
 
 	test(noc_obj_e) :-
 		nocs_are(obj_e, Nocs),
@@ -191,26 +191,26 @@
 		nocs_are(obj_c, Nocs),
 		Nocs == [foo/0-1].
 
-	test(noc_prot_a, fail) :-
-		noc::item_score(prot_a, _).
+	test(noc_prot_a) :-
+		\+ noc::item_score(prot_a, _).
 
-	test(noc_prot_b, fail) :-
-		noc::item_score(prot_b, _).
+	test(noc_prot_b) :-
+		\+ noc::item_score(prot_b, _).
 
-	test(noc_car, fail) :-
-		noc::item_score(car, _).
+	test(noc_car) :-
+		\+ noc::item_score(car, _).
 
-	test(noc_vehicle, fail) :-
-		noc::item_score(vehicle, _).
+	test(noc_vehicle) :-
+		\+ noc::item_score(vehicle, _).
 
-	test(noc_meta_vehicle, fail) :-
-		noc::item_score(meta_vehicle, _).
+	test(noc_meta_vehicle) :-
+		\+ noc::item_score(meta_vehicle, _).
 
-	test(noc_herring, fail) :-
-		noc::item_score(herring, _).
+	test(noc_herring) :-
+		\+ noc::item_score(herring, _).
 
-	test(noc_bird, fail) :-
-		noc::item_score(bird, _).
+	test(noc_bird) :-
+		\+ noc::item_score(bird, _).
 
 	% main interface tests
 
