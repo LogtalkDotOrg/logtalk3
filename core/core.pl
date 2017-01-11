@@ -265,8 +265,8 @@
 :- dynamic('$lgt_pp_dynamic_'/1).
 % '$lgt_pp_discontiguous_'(Head)
 :- dynamic('$lgt_pp_discontiguous_'/1).
-% '$lgt_pp_mode_'(Mode, Determinism)
-:- dynamic('$lgt_pp_mode_'/2).
+% '$lgt_pp_mode_'(Mode, Determinism, Lines)
+:- dynamic('$lgt_pp_mode_'/3).
 % '$lgt_pp_public_'(Functor, Arity)
 :- dynamic('$lgt_pp_public_'/2).
 % '$lgt_pp_protected_'(Functor, Arity)
@@ -2933,7 +2933,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 1, rc2)).
+'$lgt_version_data'(logtalk(3, 9, 1, rc3)).
 
 
 
@@ -6591,7 +6591,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_mode_'(Mode, Solutions),
+	'$lgt_pp_mode_'(Mode, Solutions, _),
 		functor(Mode, Functor, Arity),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)))),
 	fail.
@@ -6984,7 +6984,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_discontiguous_'(_)),
 	retractall('$lgt_pp_multifile_'(_, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
-	retractall('$lgt_pp_mode_'(_, _)),
+	retractall('$lgt_pp_mode_'(_, _, _)),
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
@@ -8305,8 +8305,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_valid_number_of_proofs'(Solutions),
 	throw(type_error(number_of_proofs, Solutions)).
 
-'$lgt_compile_logtalk_directive'(mode(Mode, Solutions), _) :-
-	assertz('$lgt_pp_mode_'(Mode, Solutions)).
+'$lgt_compile_logtalk_directive'(mode(Mode, Solutions), Ctx) :-
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_mode_'(Mode, Solutions, Lines)).
 
 % multifile/2 predicate directive
 
@@ -16405,7 +16406,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
-	% but missing corresponding public /1 directive
+	% but missing corresponding public directive
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
 	fail.
@@ -16435,6 +16436,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
+	fail.
+
+% reports missing scope directives for mode directives
+
+'$lgt_report_missing_directives_'(Type, Entity, Path) :-
+	'$lgt_pp_mode_'(Mode, _, Lines),
+	% declared predicate
+	functor(Mode, Functor, Arity),
+	\+ '$lgt_pp_public_'(Functor, Arity),
+	\+ '$lgt_pp_protected_'(Functor, Arity),
+	\+ '$lgt_pp_private_'(Functor, Arity),
+	% but missing scope directive
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(missing_directives), core, missing_scope_directive(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 '$lgt_report_missing_directives_'(_, _, _).

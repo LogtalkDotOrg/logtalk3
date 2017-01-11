@@ -32,9 +32,12 @@ and category properties.
 
 * ADDED: Support for `number_of_rules/1` predicate property.
 
-* FIXED: Detection of `meta_predicate/1` directives that wrongly specify a goal
+* ADDED: Detection of `meta_predicate/1` directives that wrongly specify a goal
 meta-argument that is actually a closure passed to `call/2-N` meta-predicate
-calls. Thanks to Arun Majumdar for the bug report.
+calls. Thanks to Arun Majumdar for the report.
+
+* ADDED: Detection of missing predicate scope directives in the presence of
+`mode/2` directives.
 
 Prolog adapter and integration files
 ------------------------------------

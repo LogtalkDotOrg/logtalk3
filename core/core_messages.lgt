@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2016/10/11,
+		date is 2017/01/11,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -352,6 +352,10 @@
 
 	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate)) -->
 		['Missing ~w directive for the predicate: ~q'-[Directive, Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(missing_scope_directive(File, Lines, Type, Entity, Predicate)) -->
+		['Missing scope directive for the predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(non_standard_predicate_call(File, Lines, Type, Entity, Predicate)) -->
