@@ -1,0 +1,64 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>
+Copyright 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
+               Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% load the tool:
+
+| ?- logtalk_load(code_metrics(loader)).
+...
+
+
+% run the code_metrics tool unit tests:
+
+| ?- logtalk_load(code_metrics(tester)).
+...
+
+
+% apply the tool to itself:
+
+| ?- code_metrics::library(code_metrics).
+...
+
+
+% load the standard library and obtain metrics stats on all items:
+
+| ?- logtalk_load(library(all_loader)).
+...
+
+| ?- code_metrics::library(library).
+...
+
+
+% Analyze metrics for a specific item:
+
+| ?- code_metrics::item(logtalk).
+...
+
+
+% enumerate, by backtracking, the scores for `number of clauses`, `depth of inheritance tree`,
+and `coupling`, for the built-in logtalk object:
+
+| ?- noc::item_score(logtalk, Score).
+...
+
+| ?- dit::item_score(logtalk, Score).
+...
+
+| ?- coupling::item_score(logtalk, Score).
+...

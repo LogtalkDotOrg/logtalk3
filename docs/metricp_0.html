@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>metricp</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">protocol</p>
+      <h1 class="code">metricp</h1>
+      <blockquote>
+        <p class="comment">Protocol for code_metrics tool.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Ebrahim Azarisooreh</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>0.1</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2017/1/2</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 id="item_score/2" class="code">item_score/2</h3>
+          <blockquote>
+            <p class="comment">True if Score is a term that represents the metric score associated with Item.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>item_score(Item,Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>item_score(?term,?term) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+          <dl class="properties">
+            <dt class="key">version:</dt>
+            <dd class="value">
+              <code>0.1</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <dl class="remarks">
+          <dt class="comment">Usage</dt>
+          <dd class="text">This protocol should be implemented by any metric added to the system.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Item</dt>
+          <dd class="text">A term identifying an item of interest to be measured. This is normally an entity.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Score</dt>
+          <dd class="text">Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question. One shouldn't constrain onself to numbers in the implementation.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="see_also">
+      <h2>See also</h2>
+      <div class="section">
+        <ul>
+          <li class="code">
+            <a href="analysis_0.html">analysis</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
