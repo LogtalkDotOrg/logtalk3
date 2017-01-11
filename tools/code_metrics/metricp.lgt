@@ -21,28 +21,25 @@
 
 :- protocol(metricp).
 
-    :- info([
-        version is 0.1,
-        author is 'Ebrahim Azarisooreh',
-        date is 2017/1/2,
-        comment is 'Protocol for code_metrics tool.',
-        remarks is [
-            'Usage'-'This protocol should be implemented by any metric added to the system.',
-            'Item'-'A term identifying an item of interest to be measured. This is normally an \c
-            entity.',
-            'Score'-'Score can be any type of term necessary to explain the nature of the item and \c
-            its relationship to the metric in question. One shouldn''t constrain onself to numbers \c
-            in the implementation.'
-        ],
-        see_also is [analysis]
-    ]).
+	:- info([
+		version is 0.1,
+		author is 'Ebrahim Azarisooreh',
+		date is 2017/1/2,
+		comment is 'Protocol for code_metrics tool.',
+		remarks is [
+			'Usage'-'This protocol should be implemented by any metric added to the system.',
+			'Item'-'A term identifying an item of interest to be measured. This is normally an entity.',
+			'Score'-'Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question.'
+		],
+		see_also is [analysis]
+	]).
 
-    :- public(item_score/2).
-    :- mode(item_score(?term, ?term), zero_or_more).
-    :- info(item_score/2, [
-        version is 0.1,
-        comment is 'True if Score is a term that represents the metric score associated with Item.',
-        argnames is ['Item', 'Score']
-    ]).
+	:- public(item_score/2).
+	:- mode(item_score(?term, ?term), zero_or_more).
+	:- info(item_score/2, [
+		version is 0.1,
+		comment is 'True if Score is a term that represents the metric score associated with Item.',
+		argnames is ['Item', 'Score']
+	]).
 
 :- end_protocol.

@@ -24,84 +24,84 @@
 :- end_protocol.
 
 :- protocol(prot_b,
-    extends(prot_a)).
+	extends(prot_a)).
 
 :- end_protocol.
 
 :- category(cat_a,
-    implements(prot_a)).
+	implements(prot_a)).
 
 :- end_category.
 
 :- object(obj_e).
 
-    :- dynamic(fact/1).
-    :- public([foo/0, fact/1]).
+	:- dynamic(fact/1).
+	:- public([foo/0, fact/1]).
 
-    foo :-
-        true.
+	foo :-
+		true.
 
 :- end_object.
 
 :- object(obj_d).
 
-    :- public([foo/0, bar/0]).
+	:- public([foo/0, bar/0]).
 
-    bar :-
-        true.
+	bar :-
+		true.
 
-    foo :-
-        obj_e::foo.
+	foo :-
+		obj_e::foo.
 
 :- end_object.
 
 :- object(obj_a,
-    imports(cat_a)).
+	imports(cat_a)).
 
-    :- public([foo/0, bar/0]).
+	:- public([foo/0, bar/0]).
 
-    foo :-
-        obj_d::bar.
+	foo :-
+		obj_d::bar.
 
-    bar :-
-        obj_d::foo,
-        obj_e::foo.
+	bar :-
+		obj_d::foo,
+		obj_e::foo.
 
-    baz(_) :-
-        foo.
+	baz(_) :-
+		foo.
 
-    baz(_).
+	baz(_).
 
 :- end_object.
 
 :- object(obj_b,
-    extends(obj_a)).
+	extends(obj_a)).
 
-    :- public(foo/0).
+	:- public(foo/0).
 
-    foo :-
-        obj_e::assertz(fact(1)).
+	foo :-
+		obj_e::assertz(fact(1)).
 
 :- end_object.
 
 
 :- object(obj_c,
-    extends(obj_b)).
+	extends(obj_b)).
 
-    :- public(fact/1).
-    :- dynamic(fact/1).
+	:- public(fact/1).
+	:- dynamic(fact/1).
 
-    foo :-
-        true.
+	foo :-
+		true.
 
 :- end_object.
 
 :- category(cat_b,
-    extends(cat_a),
-    implements(prot_b)).
+	extends(cat_a),
+	implements(prot_b)).
 
-    foo :-
-        ::true.
+	foo :-
+		::true.
 
 :- end_category.
 
@@ -110,10 +110,10 @@
 :- end_category.
 
 :- category(cat_c,
-    extends(cat_d)).
+	extends(cat_d)).
 
-    foo :-
-        obj_b::foo.
+	foo :-
+		obj_b::foo.
 
 :- end_category.
 
@@ -122,21 +122,21 @@
 :- end_object.
 
 :- object(herring,
-    specializes(bird)).
+	specializes(bird)).
 
 :- end_object.
 
 :- object(meta_vehicle,
-    instantiates(meta_vehicle)).
+	instantiates(meta_vehicle)).
 
 :- end_object.
 
 :- object(vehicle,
-    instantiates(meta_vehicle)).
+	instantiates(meta_vehicle)).
 
 :- end_object.
 
 :- object(car,
-    instantiates(vehicle)).
+	instantiates(vehicle)).
 
 :- end_object.

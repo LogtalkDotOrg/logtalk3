@@ -20,28 +20,28 @@
 
 
 :- object(noc,
-    implements(metricp),
-    imports(analysis)).
+	implements(metricp),
+	imports(analysis)).
 
-    :- info([
-        version is 0.1,
-        author is 'Ebrahim Azarisooreh',
-        date is 2017/1/9,
-        comment is 'Number of clauses defined for a predicate in an object or category.'
-    ]).
+	:- info([
+		version is 0.1,
+		author is 'Ebrahim Azarisooreh',
+		date is 2017/1/9,
+		comment is 'Number of clauses defined for a predicate in an object or category.'
+	]).
 
-    :- uses(list, [memberchk/2]).
+	:- uses(list, [memberchk/2]).
 
-    item_score(Item, predicate_noc(Predicate, Noc)) :-
-        ^^current_entity(Item),
-        ^^entity_kind(Item, Kind),
-        (  Kind == object
-        ;  Kind == category
-        ),
-        defined_predicate_noc(Item, Predicate, Noc).
+	item_score(Item, predicate_noc(Predicate, Noc)) :-
+		^^current_entity(Item),
+		^^entity_kind(Item, Kind),
+		(  Kind == object
+		;  Kind == category
+		),
+		defined_predicate_noc(Item, Predicate, Noc).
 
-    defined_predicate_noc(Item, Predicate, Noc) :-
-        ^^defines_predicate(Item, Predicate, Properties),
-        memberchk(number_of_clauses(Noc), Properties).
+	defined_predicate_noc(Item, Predicate, Noc) :-
+		^^defines_predicate(Item, Predicate, Properties),
+		memberchk(number_of_clauses(Noc), Properties).
 
 :- end_object.

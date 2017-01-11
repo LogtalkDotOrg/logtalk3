@@ -21,124 +21,122 @@
 
 :- object(code_metrics).
 
-    :- info([
-        version is 0.1,
-        author is 'Ebrahim Azarisooreh',
-        date is 2017/1/2,
-        comment is 'Logtalk frontend for analyzing source code via metrics.'
-    ]).
+	:- info([
+		version is 0.1,
+		author is 'Ebrahim Azarisooreh',
+		date is 2017/1/2,
+		comment is 'Logtalk frontend for analyzing source code via metrics.'
+	]).
 
-    %% Much of this interface was adapted from `dead_code_scanner` interface code authored by
-    %% Paulo Moura and Barry Evans. The derivative code can be found in the Logtalk source
-    %% @ tools/dead_code_scanner/dead_code_scanner.lgt
+	%% Much of this interface was adapted from `dead_code_scanner` interface code authored by
+	%% Paulo Moura and Barry Evans. The derivative code can be found in the Logtalk source
+	%% @ tools/dead_code_scanner/dead_code_scanner.lgt
 
-    :- public(item/1).
-    :- mode(item(+term), zero_or_one).
-    :- info(item/1, [
-        comment is 'Scans Item and unifies with a term that represents its metric score.',
-        argnames is ['Item']
-    ]).
+	:- public(item/1).
+	:- mode(item(+term), zero_or_one).
+	:- info(item/1, [
+		comment is 'Scans Item and unifies with a term that represents its metric score.',
+		argnames is ['Item']
+	]).
 
-    :- public(file/1).
-    :- mode(file(+atom), zero_or_one).
-    :- info(file/1, [
-        comment is 'Scans all entities in a file and unifies with a score that corresponds to an \c
-        arbitrary metric.',
-        argnames is ['File']
-    ]).
+	:- public(file/1).
+	:- mode(file(+atom), zero_or_one).
+	:- info(file/1, [
+		comment is 'Scans all entities in a file and unifies with a score that corresponds to an arbitrary metric.',
+		argnames is ['File']
+	]).
 
-    :- public(directory/1).
-    :- mode(directory(+atom), one).
-    :- info(directory/1, [
-        comment is 'Scans Directory and unifies with terms that represent metric results.',
-        argnames is ['Directory']
-    ]).
+	:- public(directory/1).
+	:- mode(directory(+atom), one).
+	:- info(directory/1, [
+		comment is 'Scans Directory and unifies with terms that represent metric results.',
+		argnames is ['Directory']
+	]).
 
-    :- public(rdirectory/1).
-    :- mode(rdirectory(+atom), one).
-    :- info(rdirectory/1, [
-        comment is 'Recursive version of directory_entity_score/3.',
-        argnames is ['Directory']
-    ]).
+	:- public(rdirectory/1).
+	:- mode(rdirectory(+atom), one).
+	:- info(rdirectory/1, [
+		comment is 'Recursive version of directory_entity_score/3.',
+		argnames is ['Directory']
+	]).
 
-    :- public(library/1).
-    :- mode(library(+atom), one).
-    :- info(library/1, [
-        comment is 'Scan all entities in all loaded files from a given library for their metric \c
-        scores.',
-        argnames is ['Library']
-    ]).
+	:- public(library/1).
+	:- mode(library(+atom), one).
+	:- info(library/1, [
+		comment is 'Scan all entities in all loaded files from a given library for their metric scores.',
+		argnames is ['Library']
+	]).
 
-    :- public(rlibrary/1).
-    :- mode(rlibrary(+atom), one).
-    :- info(rlibrary/1, [
-        comment is 'Recursive version of library_entity_score/3',
-        argnames is ['Library']
-    ]).
+	:- public(rlibrary/1).
+	:- mode(rlibrary(+atom), one).
+	:- info(rlibrary/1, [
+		comment is 'Recursive version of library_entity_score/3',
+		argnames is ['Library']
+	]).
 
-    :- public(all/0).
-    :- mode(all, one).
-    :- info(all/0, [
-        comment is 'Scans all loaded entities and assesses them based on the loaded metrics.'
-    ]).
+	:- public(all/0).
+	:- mode(all, one).
+	:- info(all/0, [
+		comment is 'Scans all loaded entities and assesses them based on the loaded metrics.'
+	]).
 
-    :- uses(logtalk, [print_message/3]).
+	:- uses(logtalk, [print_message/3]).
 
-    :- uses(list, [
-        member/2,
-        memberchk/2
-    ]).
+	:- uses(list, [
+		member/2,
+		memberchk/2
+	]).
 
-    %%%%%%%%%%%%%%%%
-    %% Item scans %%
-    %%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%
+	%% Item scans %%
+	%%%%%%%%%%%%%%%%
 
-    item(Item) :-
-        (  current_object(Item)
-        -> Kind = object
-        ;  current_category(Item)
-        -> Kind = category
-        ;  current_protocol(Item),
-           Kind = protocol
-        ),
-        write_scan_header('Item'),
-        process_item(Kind, Item),
-        write_scan_footer('Item').
-
-    process_item(Kind, Item) :-
-        print_message(information, code_metrics, scanning_item(Kind, Item)),
-        forall(
-            process_item_(Item, Metric, Score),
-            print_message(information, code_metrics, item_score(Item, Metric, Score))
-        ).
-
-    process_item_(Item, Metric, Score) :-
-        imports_category(Metric, analysis),
-        Metric::item_score(Item, Score).
-
-    %%%%%%%%%%%%%%%%
-    %% File scans %%
-    %%%%%%%%%%%%%%%%
-
-    file(Source) :-
-        locate_file(Source, Path),
-        write_scan_header('File'),
-        process_file(Path),
-        write_scan_footer('File').
-
-    process_file(Path) :-
-        print_message(information, code_metrics, scanning_file(Path)),
-        forall(
-            process_file_(Path, Kind, Item),
-            process_item(Kind, Item)
-        ).
-
-    process_file_(Path, Kind, Item) :-
-        (	logtalk::loaded_file_property(Path, object(Item)),
+	item(Item) :-
+		(   current_object(Item) ->
 			Kind = object
-		;	logtalk::loaded_file_property(Path, protocol(Item)),
+		;   current_category(Item) ->
+			Kind = category
+		;   current_protocol(Item),
 			Kind = protocol
-		;	logtalk::loaded_file_property(Path, category(Item)),
+		),
+		write_scan_header('Item'),
+		process_item(Kind, Item),
+		write_scan_footer('Item').
+
+	process_item(Kind, Item) :-
+		print_message(information, code_metrics, scanning_item(Kind, Item)),
+		forall(
+			process_item_(Item, Metric, Score),
+			print_message(information, code_metrics, item_score(Item, Metric, Score))
+		).
+
+	process_item_(Item, Metric, Score) :-
+		imports_category(Metric, analysis),
+		Metric::item_score(Item, Score).
+
+	%%%%%%%%%%%%%%%%
+	%% File scans %%
+	%%%%%%%%%%%%%%%%
+
+	file(Source) :-
+		locate_file(Source, Path),
+		write_scan_header('File'),
+		process_file(Path),
+		write_scan_footer('File').
+
+	process_file(Path) :-
+		print_message(information, code_metrics, scanning_file(Path)),
+		forall(
+			process_file_(Path, Kind, Item),
+			process_item(Kind, Item)
+		).
+
+	process_file_(Path, Kind, Item) :-
+		(   logtalk::loaded_file_property(Path, object(Item)),
+			Kind = object
+		;   logtalk::loaded_file_property(Path, protocol(Item)),
+			Kind = protocol
+		;   logtalk::loaded_file_property(Path, category(Item)),
 			Kind = category
 		).
 
@@ -180,57 +178,57 @@
 			)
 		).
 
-    %%%%%%%%%%%%%%%%%%%%%
-    %% Directory scans %%
-    %%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%
+	%% Directory scans %%
+	%%%%%%%%%%%%%%%%%%%%%
 
-    directory(Directory) :-
+	directory(Directory) :-
 		write_scan_header('Directory'),
 		os::expand_path(Directory, Path),
 		output_directory_files(Path),
 		write_scan_footer('Directory').
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %% Recursive directory scans %%
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% Recursive directory scans %%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    rdirectory(Directory) :-
+	rdirectory(Directory) :-
 		write_scan_header('Recursive directory'),
 		os::expand_path(Directory, Path),
 		output_rdirectory(Path),
 		write_scan_footer('Recursive directory').
 
-    output_rdirectory(Directory) :-
-        setof(
-            SubDirectory,
-            sub_directory(Directory, SubDirectory),
-            SubDirectories
-        ),
-        forall(
-            member(SubDirectory, SubDirectories),
-            output_directory_files(SubDirectory)
-        ).
+	output_rdirectory(Directory) :-
+		setof(
+			SubDirectory,
+			sub_directory(Directory, SubDirectory),
+			SubDirectories
+		),
+		forall(
+			member(SubDirectory, SubDirectories),
+			output_directory_files(SubDirectory)
+		).
 
 	sub_directory(Directory, SubDirectory) :-
 		logtalk::loaded_file(Path),
 		os::decompose_file_name(Path, SubDirectory, _, _),
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
-    %%%%%%%%%%%%%%%%%%%
-    %% Library scans %%
-    %%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%
+	%% Library scans %%
+	%%%%%%%%%%%%%%%%%%%
 
-    library(Library) :-
+	library(Library) :-
 		write_scan_header('Library'),
 		logtalk::expand_library_path(Library, Path),
 		output_directory_files(Path),
 		write_scan_footer('Library').
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %% Recursive library scans %%
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% Recursive library scans %%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    rlibrary(Library) :-
+	rlibrary(Library) :-
 		write_scan_header('Recursive library'),
 		logtalk::expand_library_path(Library, TopPath),
 		output_rlibrary(TopPath),
@@ -247,58 +245,58 @@
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(TopPath, _RelativePath, LibraryPath).
 
-    %%%%%%%%%%%%%%%%%%%%
-    %% Scan all items %%
-    %%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%
+	%% Scan all items %%
+	%%%%%%%%%%%%%%%%%%%%
 
-    all :-
-        write_scan_header('All items'),
-        forall(
-            all(Kind, Item),
-            process_item(Kind, Item)
-        ),
-        write_scan_footer('All items').
+	all :-
+		write_scan_header('All items'),
+		forall(
+			all(Kind, Item),
+			process_item(Kind, Item)
+		),
+		write_scan_footer('All items').
 
-    all(Kind, Item) :-
-        (  current_object(Item),
-           Kind = object
-        ;  current_category(Item),
-           Kind = category
-        ;  current_protocol(Item),
-           Kind = protocol
-        ).
+	all(Kind, Item) :-
+		(   current_object(Item),
+			Kind = object
+		;   current_category(Item),
+			Kind = category
+		;   current_protocol(Item),
+			Kind = protocol
+		).
 
-    % internal/common predicates
-    output_directory_files(Directory) :-
+	% internal/common predicates
+	output_directory_files(Directory) :-
 		print_message(information, code_metrics, scanning_directory(Directory)),
-        forall(
-            output_directory_files_(Directory, Path),
-            process_file(Path)
-        ).
+		forall(
+			output_directory_files_(Directory, Path),
+			process_file(Path)
+		).
 
-    output_directory_files_(Directory, Path) :-
-        (	sub_atom(Directory, _, 1, 0, '/') ->
-            DirectorySlash = Directory
-        ;	atom_concat(Directory, '/', DirectorySlash)
-        ),
-        logtalk::loaded_file_property(Path, directory(DirectorySlash)).
+	output_directory_files_(Directory, Path) :-
+		(	sub_atom(Directory, _, 1, 0, '/') ->
+			DirectorySlash = Directory
+		;	atom_concat(Directory, '/', DirectorySlash)
+		),
+		logtalk::loaded_file_property(Path, directory(DirectorySlash)).
 
-    write_scan_header(Type) :-
-    	print_message(silent, code_metrics, scan_started),
-    	os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
-    	print_message(
-            information,
-            code_metrics,
-            scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)
-        ).
+	write_scan_header(Type) :-
+		print_message(silent, code_metrics, scan_started),
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
+		print_message(
+			information,
+			code_metrics,
+			scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)
+		).
 
 	write_scan_footer(Type) :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(
-            information,
-            code_metrics,
-            scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)
-        ),
+			information,
+			code_metrics,
+			scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)
+		),
 		print_message(silent, code_metrics, scan_ended).
 
 :- end_object.

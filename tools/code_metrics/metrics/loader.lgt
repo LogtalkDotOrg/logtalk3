@@ -21,8 +21,8 @@
 
 :- initialization(
 	logtalk_load([
-        dit,
-        coupling,
-        noc
-    ])
+		dit,
+		coupling,
+		noc
+	])
 ).

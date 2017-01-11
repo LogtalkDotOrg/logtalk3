@@ -20,39 +20,37 @@
 
 
 :- object(dit,
-    implements(metricp),
-    imports(analysis)).
+	implements(metricp),
+	imports(analysis)).
 
-    :- info([
-        version is 0.1,
-        author is 'Ebrahim Azarisooreh',
-        date is 2017/1/2,
-        comment is 'Analyzes the depth of inheritance for objects, protocols, and categories.',
-        remarks is [
-            'Depth'-'The depth is the maximum length of a node to the root entity. Lower scores \c
-            are generally better.',
-            'Inheritance'-'A level of inheritance defined by either one of specialization, \c
-            instantiation, extension, importation, or implementation.',
-            'Scoring'-'The maximum path length is determined for each entity in question.'
-        ]
-    ]).
+	:- info([
+		version is 0.1,
+		author is 'Ebrahim Azarisooreh',
+		date is 2017/1/2,
+		comment is 'Analyzes the depth of inheritance for objects, protocols, and categories.',
+		remarks is [
+			'Depth'-'The depth is the maximum length of a node to the root entity. Lower scores are generally better.',
+			'Inheritance'-'A level of inheritance defined by either one of specialization, instantiation, extension, importation, or implementation.',
+			'Scoring'-'The maximum path length is determined for each entity in question.'
+		]
+	]).
 
-    :- uses(list, [max/2]).
+	:- uses(list, [max/2]).
 
-    item_score(Entity, Score) :-
-        ^^current_entity(Entity),
-        depth(Entity, Score).
+	item_score(Entity, Score) :-
+		^^current_entity(Entity),
+		depth(Entity, Score).
 
-    depth(Entity, Depth) :-
-        ^^entity_kind(Entity, EntityKind),
-        setof(D, depth(EntityKind, Entity, 1, D), Depths),
-        max(Depths, Depth).
+	depth(Entity, Depth) :-
+		^^entity_kind(Entity, EntityKind),
+		setof(D, depth(EntityKind, Entity, 1, D), Depths),
+		max(Depths, Depth).
 
-    depth(EntityKind, Entity, Depth0, Depth) :-
-        (   ^^ancestor(EntityKind, Entity, AncestorKind, Ancestor)
-        *-> Depth1 is Depth0 + 1,
-            depth(AncestorKind, Ancestor, Depth1, Depth)
-        ;   Depth0 = Depth
-        ).
+	depth(EntityKind, Entity, Depth0, Depth) :-
+		(   ^^ancestor(EntityKind, Entity, AncestorKind, Ancestor)
+		*-> Depth1 is Depth0 + 1,
+			depth(AncestorKind, Ancestor, Depth1, Depth)
+		;   Depth0 = Depth
+		).
 
 :- end_object.
