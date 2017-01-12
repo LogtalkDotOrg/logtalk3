@@ -140,11 +140,13 @@
 		ground(Call).
 
 	entity_calls(object, Entity, Caller, Call) :-
-		object_property(Entity, calls(Call, [caller(Caller)|_])),
+		object_property(Entity, calls(Call, Properties)),
+		memberchk(caller(Caller), Properties),
 		valid_call(Call).
 
 	entity_calls(category, Entity, Caller, Call) :-
-		category_property(Entity, calls(Call, [caller(Caller)|_])),
+		category_property(Entity, calls(Call, Properties)),
+		memberchk(caller(Caller), Properties),
 		valid_call(Call).
 
 	entity_updates(Entity, Updater, Update) :-
@@ -153,11 +155,13 @@
 		ground(Update).
 
 	entity_updates(object, Entity, Updater, Update) :-
-		object_property(Entity, updates(Update, [updater(Updater)|_])),
+		object_property(Entity, updates(Update, Properties)),
+		memberchk(updater(Updater), Properties),
 		valid_call(Update).
 
 	entity_updates(category, Entity, Updater, Update) :-
-		category_property(Entity, updates(Update, [updater(Updater)|_])),
+		category_property(Entity, updates(Update, Properties)),
+		memberchk(updater(Updater), Properties),
 		valid_call(Update).
 
 	defines_predicate(Entity, Predicate) :-
