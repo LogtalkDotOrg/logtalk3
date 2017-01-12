@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="item/1" class="code">item/1</h3>
           <blockquote>
-            <p class="comment">Scans Item and unifies with a term that represents its metric score.</p>
+            <p class="comment">Scans Item and prints a summary based on all applicable metrics.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -65,7 +65,7 @@
         <div class="section">
           <h3 id="file/1" class="code">file/1</h3>
           <blockquote>
-            <p class="comment">Scans all entities in a file and unifies with a score that corresponds to an arbitrary metric.</p>
+            <p class="comment">Prints a metric summary of all items present in a file.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -85,7 +85,7 @@
         <div class="section">
           <h3 id="directory/1" class="code">directory/1</h3>
           <blockquote>
-            <p class="comment">Scans Directory and unifies with terms that represent metric results.</p>
+            <p class="comment">Scans Directory and prints metrics summary.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -105,7 +105,7 @@
         <div class="section">
           <h3 id="rdirectory/1" class="code">rdirectory/1</h3>
           <blockquote>
-            <p class="comment">Recursive version of directory_entity_score/3.</p>
+            <p class="comment">Recursive version of directory/1.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -125,7 +125,7 @@
         <div class="section">
           <h3 id="library/1" class="code">library/1</h3>
           <blockquote>
-            <p class="comment">Scan all entities in all loaded files from a given library for their metric scores.</p>
+            <p class="comment">Prints a metrics summary of all loaded items from a given library.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -145,7 +145,7 @@
         <div class="section">
           <h3 id="rlibrary/1" class="code">rlibrary/1</h3>
           <blockquote>
-            <p class="comment">Recursive version of library_entity_score/3</p>
+            <p class="comment">Recursive version of library/1.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -165,7 +165,7 @@
         <div class="section">
           <h3 id="all/0" class="code">all/0</h3>
           <blockquote>
-            <p class="comment">Scans all loaded entities and assesses them based on the loaded metrics.</p>
+            <p class="comment">Scans all loaded items and prints a report of all applicable metrics.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>

@@ -35,49 +35,49 @@
 	:- public(item/1).
 	:- mode(item(+term), zero_or_one).
 	:- info(item/1, [
-		comment is 'Scans Item and unifies with a term that represents its metric score.',
+		comment is 'Scans Item and prints a summary based on all applicable metrics.',
 		argnames is ['Item']
 	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), zero_or_one).
 	:- info(file/1, [
-		comment is 'Scans all entities in a file and unifies with a score that corresponds to an arbitrary metric.',
+		comment is 'Prints a metric summary of all items present in a file.',
 		argnames is ['File']
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Scans Directory and unifies with terms that represent metric results.',
+		comment is 'Scans Directory and prints metrics summary.',
 		argnames is ['Directory']
 	]).
 
 	:- public(rdirectory/1).
 	:- mode(rdirectory(+atom), one).
 	:- info(rdirectory/1, [
-		comment is 'Recursive version of directory_entity_score/3.',
+		comment is 'Recursive version of directory/1.',
 		argnames is ['Directory']
 	]).
 
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
-		comment is 'Scan all entities in all loaded files from a given library for their metric scores.',
+		comment is 'Prints a metrics summary of all loaded items from a given library.',
 		argnames is ['Library']
 	]).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
-		comment is 'Recursive version of library_entity_score/3',
+		comment is 'Recursive version of library/1.',
 		argnames is ['Library']
 	]).
 
 	:- public(all/0).
 	:- mode(all, one).
 	:- info(all/0, [
-		comment is 'Scans all loaded entities and assesses them based on the loaded metrics.'
+		comment is 'Scans all loaded items and prints a report of all applicable metrics.'
 	]).
 
 	:- uses(logtalk, [print_message/3]).
