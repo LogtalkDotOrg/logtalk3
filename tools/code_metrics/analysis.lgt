@@ -110,8 +110,11 @@
 	current_entity(Entity) :-
 		current_category(Entity).
 	current_entity(Entity) :-
-		atom(Entity),
-		current_protocol(Entity).
+		(   nonvar(Entity) ->
+		    atom(Entity),
+		    current_protocol(Entity)
+		;   current_protocol(Entity)
+		).
 
 	entity_kind(Entity, Kind) :-
 		(   current_object(Entity) ->
