@@ -21,14 +21,14 @@
 
 :- multifile(logtalk_library_path/2).
 
-logtalk_library_path(metrics, './metrics/').
+logtalk_library_path(metrics, code_metrics('metrics/')).
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([
-		metricp,
-		analysis,
+		code_metrics_protocol,
+		code_metrics_utilities,
 		code_metrics,
 		code_metrics_messages,
 		metrics(loader)

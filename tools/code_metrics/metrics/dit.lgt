@@ -20,8 +20,8 @@
 
 
 :- object(dit,
-	implements(metricp),
-	imports(analysis)).
+	implements(code_metrics_protocol),
+	imports(code_metrics_utilities)).
 
 	:- info([
 		version is 0.1,

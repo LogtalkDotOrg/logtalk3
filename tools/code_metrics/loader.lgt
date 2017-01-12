@@ -27,8 +27,8 @@ logtalk_library_path(metrics, code_metrics('metrics/')).
 	logtalk_load(library(basic_types_loader)),
 	logtalk_load(library(os_loader)),
 	logtalk_load([
-		metricp,
-		analysis,
+		code_metrics_protocol,
+		code_metrics_utilities,
 		code_metrics_messages,
 		code_metrics,
 		metrics(loader)
