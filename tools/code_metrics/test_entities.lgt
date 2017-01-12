@@ -86,7 +86,7 @@
 
 
 :- object(obj_c,
-	extends(obj_b)).
+	extends([obj_a, obj_b])).
 
 	:- public(fact/1).
 	:- dynamic(fact/1).

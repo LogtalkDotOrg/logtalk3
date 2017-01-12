@@ -107,7 +107,7 @@
 		coupling_is(obj_b, 2).
 
 	test(coupling_obj_c) :-
-		coupling_is(obj_c, 1).
+		coupling_is(obj_c, 2).
 
 	test(coupling_obj_d) :-
 		coupling_is(obj_d, 1).
