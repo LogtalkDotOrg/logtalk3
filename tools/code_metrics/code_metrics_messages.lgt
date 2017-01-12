@@ -70,11 +70,11 @@
 		item_score(Item, Metric, Score).
 
 	item_score(_Item, Metric, Score) -->
-		{  (   Metric == dit
-		   ;   Metric == coupling
-		   ),
-		   !,
-		   metric_label(Metric, Label)
+		{	(	Metric == dit
+			;	Metric == coupling
+			),
+			!,
+			metric_label(Metric, Label)
 		},
 		['~w score: ~w'-[Label, Score], nl].
 
@@ -90,9 +90,9 @@
 	object_label(noc, 'Number of Clauses').
 
 	metric_label(MetricObject, Label) :-
-		(   object_label(MetricObject, MetricLabel) ->
+		(	object_label(MetricObject, MetricLabel) ->
 			MetricLabel = Label
-		;   MetricObject = Label
+		;	MetricObject = Label
 		).
 
 	ground_term_copy(Term, GroundTerm) :-

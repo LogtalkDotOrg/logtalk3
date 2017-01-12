@@ -23,15 +23,18 @@
 
 :- end_protocol.
 
+
 :- protocol(prot_b,
 	extends(prot_a)).
 
 :- end_protocol.
 
+
 :- category(cat_a,
 	implements(prot_a)).
 
 :- end_category.
+
 
 :- object(obj_e).
 
@@ -42,6 +45,7 @@
 		true.
 
 :- end_object.
+
 
 :- object(obj_d).
 
@@ -54,6 +58,7 @@
 		obj_e::foo.
 
 :- end_object.
+
 
 :- object(obj_a,
 	imports(cat_a)).
@@ -73,6 +78,7 @@
 	baz(_).
 
 :- end_object.
+
 
 :- object(obj_b,
 	extends(obj_a)).
@@ -96,6 +102,7 @@
 
 :- end_object.
 
+
 :- category(cat_b,
 	extends(cat_a),
 	implements(prot_b)).
@@ -105,9 +112,11 @@
 
 :- end_category.
 
+
 :- category(cat_d).
 
 :- end_category.
+
 
 :- category(cat_c,
 	extends(cat_d)).
@@ -117,24 +126,29 @@
 
 :- end_category.
 
+
 :- object(bird).
 
 :- end_object.
+
 
 :- object(herring,
 	specializes(bird)).
 
 :- end_object.
 
+
 :- object(meta_vehicle,
 	instantiates(meta_vehicle)).
 
 :- end_object.
 
+
 :- object(vehicle,
 	instantiates(meta_vehicle)).
 
 :- end_object.
+
 
 :- object(car,
 	instantiates(vehicle)).

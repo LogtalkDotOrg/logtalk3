@@ -92,11 +92,11 @@
 	%%%%%%%%%%%%%%%%
 
 	item(Item) :-
-		(   current_object(Item) ->
+		(	current_object(Item) ->
 			Kind = object
-		;   current_category(Item) ->
+		;	current_category(Item) ->
 			Kind = category
-		;   current_protocol(Item),
+		;	current_protocol(Item),
 			Kind = protocol
 		),
 		write_scan_header('Item'),
@@ -132,11 +132,11 @@
 		).
 
 	process_file_(Path, Kind, Item) :-
-		(   logtalk::loaded_file_property(Path, object(Item)),
+		(	logtalk::loaded_file_property(Path, object(Item)),
 			Kind = object
-		;   logtalk::loaded_file_property(Path, protocol(Item)),
+		;	logtalk::loaded_file_property(Path, protocol(Item)),
 			Kind = protocol
-		;   logtalk::loaded_file_property(Path, category(Item)),
+		;	logtalk::loaded_file_property(Path, category(Item)),
 			Kind = category
 		).
 
@@ -258,11 +258,11 @@
 		write_scan_footer('All items').
 
 	all(Kind, Item) :-
-		(   current_object(Item),
+		(	current_object(Item),
 			Kind = object
-		;   current_category(Item),
+		;	current_category(Item),
 			Kind = category
-		;   current_protocol(Item),
+		;	current_protocol(Item),
 			Kind = protocol
 		).
 

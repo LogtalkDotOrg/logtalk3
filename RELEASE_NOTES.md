@@ -67,6 +67,8 @@ library object. Currently only implemented for the SWI-Prolog/YAP JPL library.
 Tools
 -----
 
+* ADDED: Prototype code metrics tool contributed by Ebrahim Azarisooreh.
+
 * FIXED: Bug in the `diagrams` tool when writing node captions for calls to
 external Prolog module predicates, when running using SWI-Prolog or YAP as
 the backend compiler, where the module prefix would be omitted.

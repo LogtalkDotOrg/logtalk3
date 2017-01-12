@@ -26,15 +26,19 @@ logtalk_library_path(metrics, code_metrics('metrics/')).
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load([
-		code_metrics_protocol,
-		code_metrics_utilities,
-		code_metrics,
-		code_metrics_messages,
-		metrics(loader)
-	],
-	[source_data(on), debug(on)]),
-
+	logtalk_load(
+		[
+			code_metrics_protocol,
+			code_metrics_utilities,
+			code_metrics,
+			code_metrics_messages,
+			metrics(loader)
+		],
+		[	
+			source_data(on),
+			debug(on)
+		]
+	),
 	logtalk_load(test_entities, [source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
 	tests::run

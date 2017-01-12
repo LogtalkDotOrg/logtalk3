@@ -25,6 +25,7 @@ The following developer tools are available, each one with its own
 `NOTES.md` documentation files:
 
 - assertions
+- code_metrics
 - dead_code_scanner
 - debugger
 - diagrams

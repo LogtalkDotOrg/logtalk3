@@ -3,15 +3,15 @@
 <?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>code_metrics_protocol</title>
+    <title>dit</title>
     <link rel="stylesheet" href="logtalk.css" type="text/css"/>
   </head>
   <body>
     <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">code_metrics_protocol</h1>
+      <p class="type">object</p>
+      <h1 class="code">dit</h1>
       <blockquote>
-        <p class="comment">Protocol for code_metrics tool.</p>
+        <p class="comment">Analyzes the depth of inheritance for objects, protocols, and categories.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -33,52 +33,38 @@
         <dl class="properties">
           <dt class="key">compilation flags:</dt>
           <dd class="value">
-            <code>static</code>
+            <code>static, context_switching_calls</code>
           </dd>
         </dl>
-        <p class="comment">(no dependencies on other files)</p>
+        <dl class="relations">
+          <dt class="key">implements:</dt>
+          <dd class="value">
+            <code>public <a href="code_metrics_protocol_0.html">code_metrics_protocol</a></code>
+          </dd>
+          <dt class="key">imports:</dt>
+          <dd class="value">
+            <code>public <a href="code_metrics_utilities_0.html">code_metrics_utilities</a></code>
+          </dd>
+        </dl>
       </div>
     </div>
     <div class="predicates">
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="item_score/2" class="code">item_score/2</h3>
-          <blockquote>
-            <p class="comment">True if Score is a term that represents the metric score associated with Item.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>item_score(Item,Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>item_score(?term,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-          <dl class="properties">
-            <dt class="key">version:</dt>
-            <dd class="value">
-              <code>0.1</code>
-            </dd>
-          </dl>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
     </div>
@@ -92,27 +78,23 @@
       <h2>Remarks</h2>
       <div class="section">
         <dl class="remarks">
-          <dt class="comment">Usage</dt>
-          <dd class="text">This protocol should be implemented by any metric added to the system.</dd>
+          <dt class="comment">Depth</dt>
+          <dd class="text">The depth is the maximum length of a node to the root entity. Lower scores are generally better.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Item</dt>
-          <dd class="text">A term identifying an item of interest to be measured. This is normally an entity.</dd>
+          <dt class="comment">Inheritance</dt>
+          <dd class="text">A level of inheritance defined by either one of specialization, instantiation, extension, importation, or implementation.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Score</dt>
-          <dd class="text">Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question.</dd>
+          <dt class="comment">Scoring</dt>
+          <dd class="text">The maximum path length is determined for each entity in question.</dd>
         </dl>
       </div>
     </div>
     <div class="see_also">
       <h2>See also</h2>
       <div class="section">
-        <ul>
-          <li class="code">
-            <a href="analysis_0.html">analysis</a>
-          </li>
-        </ul>
+        <h3 class="comment">(none)</h3>
       </div>
     </div>
   </body>

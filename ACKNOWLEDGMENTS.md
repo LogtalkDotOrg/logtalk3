@@ -34,6 +34,7 @@ CONTRIBUTORS
 * Clara Dimene (GeSHi syntax highlighter)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
+* Ebrahim Azarisooreh (code metrics tool)
 * Eva Stöwe (PDT support for Logtalk)
 * Feliks Kluzniak (coinduction examples and bug reports)
 * François Fages (meta-predicate safety bug reports)

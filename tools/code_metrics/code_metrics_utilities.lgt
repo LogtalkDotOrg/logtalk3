@@ -110,27 +110,27 @@
 	current_entity(Entity) :-
 		current_category(Entity).
 	current_entity(Entity) :-
-		(   nonvar(Entity) ->
-		    atom(Entity),
-		    current_protocol(Entity)
-		;   current_protocol(Entity)
+		(	nonvar(Entity) ->
+			atom(Entity),
+			current_protocol(Entity)
+		;	current_protocol(Entity)
 		).
 
 	entity_kind(Entity, Kind) :-
-		(   current_object(Entity) ->
+		(	current_object(Entity) ->
 			Kind = object
-		;   current_category(Entity) ->
+		;	current_category(Entity) ->
 			Kind = category
-		;   current_protocol(Entity),
+		;	current_protocol(Entity),
 			Kind = protocol
 		).
 
 	entity_property(Entity, Property) :-
-		(   current_object(Entity) ->
+		(	current_object(Entity) ->
 			object_property(Entity, Property)
-		;   current_category(Entity) ->
+		;	current_category(Entity) ->
 			category_property(Entity, Property)
-		;   current_protocol(Entity),
+		;	current_protocol(Entity),
 			protocol_property(Entity, Property)
 		).
 
@@ -224,10 +224,10 @@
 	% Auxiliary predicates
 
 	valid_call(Predicate) :-
-		(   Predicate = Functor/N
-		;   Predicate = ^^Functor/N
-		;   Predicate = ::Functor/N
-		;   Predicate = _::Functor/N
+		(	Predicate = Functor/N
+		;	Predicate = ^^Functor/N
+		;	Predicate = ::Functor/N
+		;	Predicate = _::Functor/N
 		).
 
 :- end_category.
