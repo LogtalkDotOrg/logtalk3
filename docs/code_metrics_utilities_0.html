@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>code_metrics_utilities</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">category</p>
+      <h1 class="code">code_metrics_utilities</h1>
+      <blockquote>
+        <p class="comment">Internal predicates for analyzing source code.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Ebrahim Azarisooreh</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>0.1</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2016/1/10</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <h3 id="ancestor/4" class="code">ancestor/4</h3>
+          <blockquote>
+            <p class="comment">True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>ancestor(EntityKind,Entity,AncestorKind,Ancestor)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>ancestor(?entity,?entity_identifier,?entity,?entity_identifier) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="current_entity/1" class="code">current_entity/1</h3>
+          <blockquote>
+            <p class="comment">True if Entity is a currently loaded entity.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>current_entity(Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>current_entity(?entity_identifier) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="declares_predicate/2" class="code">declares_predicate/2</h3>
+          <blockquote>
+            <p class="comment">True if Entity declares Predicate internally.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>declares_predicate(Entity,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>declares_predicate(?entity_identifier,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="defines_predicate/2" class="code">defines_predicate/2</h3>
+          <blockquote>
+            <p class="comment">True if Entity defines an implementation of Predicate internally. Only internally defined predicates are valid here, therefore predicates with the 'auxiliary' property are excluded. Only categories and objects are valid entities.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>defines_predicate(Entity,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>defines_predicate(?entity_identifier,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="defines_predicate/3" class="code">defines_predicate/3</h3>
+          <blockquote>
+            <p class="comment">Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>defines_predicate(Entity,Predicate,Property)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>defines_predicate(?entity_identifier,?predicate_indicator,?term) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="entity_calls/3" class="code">entity_calls/3</h3>
+          <blockquote>
+            <p class="comment">True if a predicate Caller within Entity makes a Call.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity_calls(Entity,Caller,Call)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="entity_kind/2" class="code">entity_kind/2</h3>
+          <blockquote>
+            <p class="comment">True if Kind defines Entity and is one of category, protocol, or object.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity_kind(Entity,Kind)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>entity_kind(+entity_identifier,-entity) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="entity_property/2" class="code">entity_property/2</h3>
+          <blockquote>
+            <p class="comment">True if Property is a valid property of Entity. Entity can be either category, protocol, or object.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity_property(Entity,Property)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>entity_property(+entity_identifier,-term) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="entity_updates/3" class="code">entity_updates/3</h3>
+          <blockquote>
+            <p class="comment">True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity_updates(Entity,Updater,Update)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <dl class="remarks">
+          <dt class="comment">Usage</dt>
+          <dd class="text">This is meant to be imported by any metric added to the system.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Predicate Scope</dt>
+          <dd class="text">This is meant for internal use by metrics only. As such, all provided predicates are private.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="see_also">
+      <h2>See also</h2>
+      <div class="section">
+        <ul>
+          <li class="code">
+            <a href="code_metrics_protocol_0.html">code_metrics_protocol</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

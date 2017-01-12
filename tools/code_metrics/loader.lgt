@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>
-%  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
+%                 Paulo Moura         <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -18,19 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- multifile(logtalk_library_path/2).
+
+logtalk_library_path(metrics, code_metrics('metrics/')).
+
 :- initialization((
-	% most of these tools require that application code
-	% be compiled with the source_data flag turned on
-	set_logtalk_flag(source_data, on),
+	logtalk_load(library(basic_types_loader)),
+	logtalk_load(library(os_loader)),
 	logtalk_load([
-		assertions(loader),
-		code_metrics(loader),
-		dead_code_scanner(loader),
-		debugger(loader),
-		diagrams(loader),
-		doclet(loader),
-		help(loader),
-		lgtdoc(loader),
-		lgtunit(loader)
+		code_metrics_protocol,
+		code_metrics_utilities,
+		code_metrics_messages,
+		code_metrics,
+		metrics(loader)
 	])
 )).

@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>
-%  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
+%                 Paulo Moura         <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -18,19 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	% most of these tools require that application code
-	% be compiled with the source_data flag turned on
-	set_logtalk_flag(source_data, on),
+:- initialization(
 	logtalk_load([
-		assertions(loader),
-		code_metrics(loader),
-		dead_code_scanner(loader),
-		debugger(loader),
-		diagrams(loader),
-		doclet(loader),
-		help(loader),
-		lgtdoc(loader),
-		lgtunit(loader)
+		dit,
+		coupling,
+		noc
 	])
-)).
+).
