@@ -47,10 +47,11 @@
 		max(Depths, Depth).
 
 	depth(EntityKind, Entity, Depth0, Depth) :-
-		(   ^^ancestor(EntityKind, Entity, AncestorKind, Ancestor)
-		*-> Depth1 is Depth0 + 1,
-			depth(AncestorKind, Ancestor, Depth1, Depth)
-		;   Depth0 = Depth
-		).
+		^^ancestor(EntityKind, Entity, AncestorKind, Ancestor),
+		Depth1 is Depth0 + 1,
+		depth(AncestorKind, Ancestor, Depth1, Depth).
+
+	depth(EntityKind, Entity, Depth, Depth) :-
+		\+ ^^ancestor(EntityKind, Entity, _, _).
 
 :- end_object.
