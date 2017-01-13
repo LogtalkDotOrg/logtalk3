@@ -79,7 +79,7 @@
 		['~w score: ~w'-[Label, Score], nl].
 
 	item_score(_Item, noc_metric, predicate_noc(Predicate, Score)) -->
-		{ metric_label(noc, Label) },
+		{ metric_label(noc_metric, Label) },
 		['~w [~w]: ~w'-[Label, Predicate, Score], nl].
 
 	% auxiliary predicates
