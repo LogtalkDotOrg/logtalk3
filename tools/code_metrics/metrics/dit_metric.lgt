@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(dit,
+:- object(dit_metric,
 	implements(code_metrics_protocol),
 	imports(code_metrics_utilities)).
 

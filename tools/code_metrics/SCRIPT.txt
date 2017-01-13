@@ -54,11 +54,11 @@ ________________________________________________________________________
 % enumerate, by backtracking, the scores for number of clauses, depth of
 % inheritance tree, and coupling, for the built-in logtalk object:
 
-| ?- noc::item_score(logtalk, Score).
+| ?- noc_metric::item_score(logtalk, Score).
 ...
 
-| ?- dit::item_score(logtalk, Score).
+| ?- dit_metric::item_score(logtalk, Score).
 ...
 
-| ?- coupling::item_score(logtalk, Score).
+| ?- coupling_metric::item_score(logtalk, Score).
 ...

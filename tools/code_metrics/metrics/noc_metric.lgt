@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(noc,
+:- object(noc_metric,
 	implements(code_metrics_protocol),
 	imports(code_metrics_utilities)).
 
