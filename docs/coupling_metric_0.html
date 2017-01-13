@@ -3,15 +3,15 @@
 <?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>noc</title>
+    <title>coupling_metric</title>
     <link rel="stylesheet" href="logtalk.css" type="text/css"/>
   </head>
   <body>
     <div class="header">
       <p class="type">object</p>
-      <h1 class="code">noc</h1>
+      <h1 class="code">coupling_metric</h1>
       <blockquote>
-        <p class="comment">Number of clauses defined for a predicate in an object or category.</p>
+        <p class="comment">Analyzes the coupling score for objects, categories, and protocols.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/1/9</code>
+            <code>2017/1/2</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -77,7 +77,18 @@
     <div class="remarks">
       <h2>Remarks</h2>
       <div class="section">
-        <h3 class="comment">(none)</h3>
+        <dl class="remarks">
+          <dt class="comment">Calls and Updates</dt>
+          <dd class="text">Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Ancestors</dt>
+          <dd class="text">Any direct inheritance relations to the entity in question will also increment the score. Duplicate entity couplings will not be scored multiple times.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Interpretation</dt>
+          <dd class="text">Generally speaking, lower scores are better.</dd>
+        </dl>
       </div>
     </div>
     <div class="see_also">
