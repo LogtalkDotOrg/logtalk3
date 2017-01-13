@@ -1,8 +1,8 @@
 {
-    "name": "logtalk",
+	"name": "logtalk",
 	"displayName": "Logtalk",
 	"description": "Logtalk language support for Visual Studio Code",
-    "version": "0.0.1",
+	"version": "0.0.1",
  	"publisher": "pmoura",
 	"author": {
 		"name": "Paulo Moura",
@@ -14,28 +14,32 @@
 			"url": "https://github.com/pmoura"
 		}
 	],
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Languages"
-    ],
-    "icon": "images/logtalk.png",
-    "contributes": {
-        "languages": [{
-            "id": "logtalk",
-            "aliases": ["Logtalk", "logtalk"],
-            "extensions": [".lgt",".logtalk"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "logtalk",
-            "scopeName": "source.logtalk",
-            "path": "./syntaxes/logtalk.tmLanguage"
-        }],
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"categories": [
+		"Languages"
+	],
+	"icon": "images/logtalk.png",
+	"contributes": {
+		"languages": [{
+			"id": "logtalk",
+			"aliases": ["Logtalk", "logtalk"],
+			"extensions": [".lgt",".logtalk"],
+			"configuration": "./language-configuration.json"
+		}],
+		"grammars": [{
+			"language": "logtalk",
+			"scopeName": "source.logtalk",
+			"path": "./syntaxes/logtalk.tmLanguage"
+		}],
 		"snippets": [{
 				"language": "logtalk",
 				"path": "./snippets/snippets.json"
 		}]
-    }
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/LogtalkDotOrg/logtalk3/tree/master/coding/vcscode"
+	}
 }
