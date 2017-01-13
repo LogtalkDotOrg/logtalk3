@@ -21,8 +21,8 @@
 
 :- initialization(
 	logtalk_load([
-		dit,
-		coupling,
-		noc
+		dit_metric,
+		coupling_metric,
+		noc_metric
 	])
 ).

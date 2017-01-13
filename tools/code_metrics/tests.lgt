@@ -154,7 +154,7 @@
 	% noc tests
 
 	test(noc_cat_a) :-
-		\+ noc::item_score(cat_a, _).
+		\+ noc_metric::item_score(cat_a, _).
 
 	test(noc_cat_b) :-
 		nocs_are(cat_b, Nocs),
@@ -165,7 +165,7 @@
 		Nocs == [foo/0-1].
 
 	test(noc_cat_d) :-
-		\+ noc::item_score(cat_d, _).
+		\+ noc_metric::item_score(cat_d, _).
 
 	test(wrong_clause(noc_obj_e)) :-
 		nocs_are(obj_e, Nocs),
@@ -192,25 +192,25 @@
 		Nocs == [foo/0-1].
 
 	test(noc_prot_a) :-
-		\+ noc::item_score(prot_a, _).
+		\+ noc_metric::item_score(prot_a, _).
 
 	test(noc_prot_b) :-
-		\+ noc::item_score(prot_b, _).
+		\+ noc_metric::item_score(prot_b, _).
 
 	test(noc_car) :-
-		\+ noc::item_score(car, _).
+		\+ noc_metric::item_score(car, _).
 
 	test(noc_vehicle) :-
-		\+ noc::item_score(vehicle, _).
+		\+ noc_metric::item_score(vehicle, _).
 
 	test(noc_meta_vehicle) :-
-		\+ noc::item_score(meta_vehicle, _).
+		\+ noc_metric::item_score(meta_vehicle, _).
 
 	test(noc_herring) :-
-		\+ noc::item_score(herring, _).
+		\+ noc_metric::item_score(herring, _).
 
 	test(noc_bird) :-
-		\+ noc::item_score(bird, _).
+		\+ noc_metric::item_score(bird, _).
 
 	% main interface tests
 
@@ -241,17 +241,17 @@
 	% convenience
 
 	coupling_is(Item, N) :-
-		findall(C, coupling::item_score(Item, C), Couplings),
+		findall(C, coupling_metric::item_score(Item, C), Couplings),
 		Couplings == [N].
 
 	depth_is(Item, N) :-
-		findall(D, dit::item_score(Item, D), Depths),
+		findall(D, dit_metric::item_score(Item, D), Depths),
 		Depths == [N].
 
 	nocs_are(Item, Nocs) :-
 		findall(
 			Predicate-Noc,
-			noc::item_score(Item, predicate_noc(Predicate, Noc)),
+			noc_metric::item_score(Item, predicate_noc(Predicate, Noc)),
 			Nocs
 		).
 

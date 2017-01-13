@@ -70,24 +70,24 @@
 		item_score(Item, Metric, Score).
 
 	item_score(_Item, Metric, Score) -->
-		{	(	Metric == dit
-			;	Metric == coupling
+		{	(	Metric == dit_metric
+			;	Metric == coupling_metric
 			),
 			!,
 			metric_label(Metric, Label)
 		},
 		['~w score: ~w'-[Label, Score], nl].
 
-	item_score(_Item, noc, predicate_noc(Predicate, Score)) -->
+	item_score(_Item, noc_metric, predicate_noc(Predicate, Score)) -->
 		{ metric_label(noc, Label) },
 		['~w [~w]: ~w'-[Label, Predicate, Score], nl].
 
 	% auxiliary predicates
 
 	% for expanding the metric objects into more meaninful names for the user
-	object_label(dit, 'Depth of Inheritance').
-	object_label(coupling, 'Coupling').
-	object_label(noc, 'Number of Clauses').
+	object_label(dit_metric, 'Depth of Inheritance').
+	object_label(coupling_metric, 'Coupling').
+	object_label(noc_metric, 'Number of Clauses').
 
 	metric_label(MetricObject, Label) :-
 		(	object_label(MetricObject, MetricLabel) ->
