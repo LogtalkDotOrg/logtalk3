@@ -97,6 +97,12 @@ by Sergio Castro.
 * FIXED: Issue with the build release script when writing the MacPorts portfile
 used for generating the macOS installer.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Emacs syntax coloring support for using tab-based indentation as per
+coding guidelines but to default to user-defined tab width.
+
 
 3.09.0 - November 28, 2016
 ==========================

@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: June 18, 2016
-;; Version: 1.31
+;; Last modification date: January 13, 2017
+;; Version: 1.32
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.31"
+(defvar logtalk-mode-version "1.32"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -285,7 +285,9 @@
 	"Major mode for editing Logtalk files"
 	(interactive)
 	(kill-all-local-variables)
-	(setq tab-width 4)
+	(setq indent-tabs-mode t)
+	(setq tab-width (default-value 'tab-width))
+	(setq c-basic-offset (default-value 'tab-width))
 	(set-syntax-table logtalk-mode-syntax-table)
 	(set (make-local-variable 'font-lock-defaults) '(logtalk-font-lock-keywords))
 	(turn-on-font-lock)
