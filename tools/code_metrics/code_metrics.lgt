@@ -111,7 +111,7 @@
 		).
 
 	process_item_(Item, Metric, Score) :-
-		imports_category(Metric, analysis),
+		imports_category(Metric, code_metrics_utilities),
 		Metric::item_score(Item, Score).
 
 	%%%%%%%%%%%%%%%%
