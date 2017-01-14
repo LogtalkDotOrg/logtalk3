@@ -103,8 +103,8 @@ IDEs, text editors, and syntax highlighters support
 * FIXED: Emacs syntax coloring support for using tab-based indentation as per
 coding guidelines but to default to user-defined tab width.
 
-* FIXED: Emacs syntax coloring support for the `create_logtalk_flag/2` built-in
-predicate.
+* FIXED: Emacs syntax coloring support for numbers in hexadecimal notation and
+for the `create_logtalk_flag/2` built-in predicate.
 
 
 3.09.0 - November 28, 2016

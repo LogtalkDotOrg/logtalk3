@@ -249,7 +249,7 @@
 
 (setq logtalk-font-lock-numbers
 	'(
-		("\\<\\(0x[a-fA-F0-9]+\\)\\>" 1 'logtalk-number-face)
+		("\\<\\(0x[[:xdigit:]]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0o[0-7]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0b[0-1]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0['].\\)\\>" 1 'logtalk-number-face)
