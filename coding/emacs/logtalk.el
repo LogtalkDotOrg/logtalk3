@@ -4,7 +4,7 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: January 13, 2017
+;; Last modification date: January 14, 2017
 ;; Version: 1.32
 
 ;; Installation:
@@ -124,7 +124,7 @@
 		("\\<\\(\\(?:category\\|object\\|protocol\\)_property\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(co\\(?:mplements_object\\|nforms_to_protocol\\)\\|extends_\\(?:object\\|protocol\\|category\\)\\|i\\(?:mp\\(?:lements_protocol\\|orts_category\\)\\|nstantiates_class\\)\\|specializes_class\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(\\(?:abolish\\|define\\)_events\\|current_event\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
-		("\\<\\(\\(?:curren\\|se\\)t_logtalk_flag\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(\\(?:c\\(?:reate\\|urrent\\)\\|set\\)_logtalk_flag\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(logtalk_\\(?:compile\\|load\\|library_path\\|load_context\\|make\\)\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<logtalk_make\\>" 0 'logtalk-built-in-predicate-face)
 		("\\<\\(forall\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
@@ -138,11 +138,7 @@
 		;;
 		;; multi-threading:
 		;;
-		("\\<\\(threaded\\(_\\(?:call\\|once\\|ignore\\|exit\\|peek\\|wait\\|notify\\)\\)?\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
-		;;
-		;; engines:
-		;;
-		("\\<\\(threaded_engine\\(_\\(?:create\\|destroy\\|self\\|next\\|next_reified\\|yield\\|post\\|fetch\\)\\)?\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(threaded\\(?:_\\(?:call\\|e\\(?:ngine\\(?:_\\(?:create\\|destroy\\|fetch\\|next\\(?:_reified\\)?\\|post\\|self\\|yield\\)\\)?\\|xit\\)\\|ignore\\|notify\\|once\\|peek\\|wait\\)\\)?\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; logic and control:
 		;;
@@ -212,7 +208,7 @@
 		;;
 		;; implementation defined hooks functions:
 		;;
-		("\\<\\(\\(?:create\\|current\\|set\\)_prolog_flag\\|halt\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(\\(?:current\\|set\\)_prolog_flag\\|halt\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<halt\\>" 0 'logtalk-built-in-predicate-face)
 		;;
 		;; atomic term processing:
