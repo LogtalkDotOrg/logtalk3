@@ -80,7 +80,9 @@ failed to load.
 Tests
 -----
 
-* ADDED: Additional tests for the `multifile` example.
+* ADDED: Additional unit tests for the 0'Char number notation.
+
+* ADDED: Additional unit tests for the `multifile` example.
 
 * FIXED: Workaround an operator related syntax error when using XSB as the
 backend compiler for running the `category_property/2` and `object_property/2`
