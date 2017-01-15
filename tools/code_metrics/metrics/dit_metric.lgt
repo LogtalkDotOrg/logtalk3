@@ -26,12 +26,12 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/2,
+		date is 2017/01/02,
 		comment is 'Analyzes the depth of inheritance for objects, protocols, and categories.',
 		remarks is [
-			'Depth'-'The depth is the maximum length of a node to the root entity. Lower scores are generally better.',
-			'Inheritance'-'A level of inheritance defined by either one of specialization, instantiation, extension, importation, or implementation.',
-			'Scoring'-'The maximum path length is determined for each entity in question.'
+			'Depth' - 'The depth is the maximum length of a node to the root entity. Lower scores are generally better.',
+			'Inheritance' - 'A level of inheritance defined by either one of specialization, instantiation, extension, importation, or implementation.',
+			'Scoring' - 'The maximum path length is determined for each entity in question.'
 		]
 	]).
 

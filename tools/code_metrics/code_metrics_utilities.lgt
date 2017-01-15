@@ -27,8 +27,8 @@
 		date is 2016/1/10,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
-			'Usage'-'This is meant to be imported by any metric added to the system.',
-			'Predicate Scope'-'This is meant for internal use by metrics only. As such, all provided predicates are private.'
+			'Usage' - 'This is meant to be imported by any metric added to the system.',
+			'Predicate Scope' - 'This is meant for internal use by metrics only. As such, all provided predicates are private.'
 		],
 		see_also is [metricp]
 	]).

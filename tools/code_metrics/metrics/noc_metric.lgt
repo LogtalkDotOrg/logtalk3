@@ -26,7 +26,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/9,
+		date is 2017/01/09,
 		comment is 'Number of clauses defined for a predicate in an object or category.'
 	]).
 

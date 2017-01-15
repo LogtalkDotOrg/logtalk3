@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/7,
+		date is 2017/01/07,
 		comment is 'Message translations for the code_metrics tool.'
 	]).
 

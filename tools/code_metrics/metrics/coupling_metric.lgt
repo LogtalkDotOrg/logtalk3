@@ -26,12 +26,12 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/2,
+		date is 2017/01/02,
 		comment is 'Analyzes the coupling score for objects, categories, and protocols.',
 		remarks is [
-			'Calls and Updates'-'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
-			'Ancestors'-'Any direct inheritance relations to the entity in question will also increment the score. Duplicate entity couplings will not be scored multiple times.',
-			'Interpretation'-'Generally speaking, lower scores are better.'
+			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
+			'Ancestors' - 'Any direct inheritance relations to the entity in question will also increment the score. Duplicate entity couplings will not be scored multiple times.',
+			'Interpretation' - 'Generally speaking, lower scores are better.'
 		]
 	]).
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/10,
+		date is 2017/01/10,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 

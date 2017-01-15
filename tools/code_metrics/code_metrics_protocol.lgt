@@ -24,12 +24,12 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/2,
+		date is 2017/01/02,
 		comment is 'Protocol for code_metrics tool.',
 		remarks is [
-			'Usage'-'This protocol should be implemented by any metric added to the system.',
-			'Item'-'A term identifying an item of interest to be measured. This is normally an entity.',
-			'Score'-'Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question.'
+			'Usage' - 'This protocol should be implemented by any metric added to the system.',
+			'Item' - 'A term identifying an item of interest to be measured. This is normally an entity.',
+			'Score' - 'Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question.'
 		],
 		see_also is [analysis]
 	]).

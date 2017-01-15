@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/1/2,
+		date is 2017/01/02,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -267,6 +267,7 @@
 		).
 
 	% internal/common predicates
+
 	output_directory_files(Directory) :-
 		print_message(information, code_metrics, scanning_directory(Directory)),
 		forall(
