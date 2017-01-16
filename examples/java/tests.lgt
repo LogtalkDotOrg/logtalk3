@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2016/09/23,
+		date is 2017/01/16,
 		comment is 'Unit tests for the "java" example.'
 	]).
 
@@ -85,5 +85,10 @@
 			Names
 		),
 		Names == ['Paulo', 'Carlos', 'Helena'].
+
+	test(java_11) :-
+		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], 3.14, foo(bar)], Array),
+		java::array_to_terms(Array, List),
+		List == [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)].
 
 :- end_object.

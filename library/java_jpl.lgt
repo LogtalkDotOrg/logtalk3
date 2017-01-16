@@ -103,6 +103,10 @@
 		jpl_call/4, jpl_ref_to_type/2
 	]).
 
+	:- uses(user, [
+		length/2
+	]).
+
 	value_reference(true, Reference) :-
 		jpl_true(Reference).
 	value_reference(false, Reference) :-
@@ -140,36 +144,11 @@
 		jpl_terms_to_array(Terms, Array).
 
 	array_to_terms(Array, Terms, Length) :-
-		jpl_array_to_list(Array, List),
-		ref_list_to_terms(List, Terms, 0, Length).
+		jpl_call('org.jpl7.Util', termArrayToList, [Array], {Terms}),
+		length(Terms, Length).
 
 	array_to_terms(Array, Terms) :-
-		array_to_terms(Array, Terms, _).
-
-	ref_list_to_terms([], [], Length, Length).
-	ref_list_to_terms([Ref| Refs], [Term| Terms], Length0, Length) :-
-		jpl_ref_to_type(Ref, class([org, jpl7], [Type])),
-		ref_to_term(Type, Ref, Term),
-		Length1 is Length0 + 1,
-		ref_list_to_terms(Refs, Terms, Length1, Length).
-
-	ref_to_term('Atom', Ref, Atom) :-
-		jpl_call(Ref, name, [], Atom0),
-		(	Atom0 == '[]',
-			jpl_call(Ref, atomType, [], reserved_symbol) ->
-			Atom = []
-		;	Atom = Atom0
-		).
-	ref_to_term('Integer', Ref, Integer) :-
-		jpl_call(Ref, intValue, [], Integer).
-	ref_to_term('Float', Ref, Float) :-
-		jpl_call(Ref, doubleValue, [], Float).
-	ref_to_term('Compound', Ref, Compound) :-
-		jpl_call(Ref, name, [], Functor),
-		jpl_call(Ref, args, [], Array),
-		jpl_array_to_list(Array, Refs),
-		ref_list_to_terms(Refs, Args, 0, _),
-		Compound =.. [Functor| Args].
+		jpl_call('org.jpl7.Util', termArrayToList, [Array], {Terms}).
 
 	array_list(Array, List) :-
 		(	var(Array) ->

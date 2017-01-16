@@ -30,6 +30,12 @@ Logtalk compiler and runtime
 * FIXED: Bug where the compiler would fail to report the error when a class
 attempts to specialize a prototype.
 
+Library
+-------
+
+* IMPROVED: Implementation of the `java::array_to_terms/2-3` predicates when
+using the SWI-Prolog/YAP JPL library.
+
 
 3.09.1 - January 16, 2016
 =========================
