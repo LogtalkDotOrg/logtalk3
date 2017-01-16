@@ -14244,10 +14244,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(type_error(object, Superclass))
 	;	'$lgt_is_category'(Superclass) ->
 		throw(type_error(object, Superclass))
-	;	'$lgt_is_prototype'(Class) ->
-		throw(domain_error(class, Class))
+	;	'$lgt_is_prototype'(Superclass) ->
+		throw(domain_error(class, Superclass))
 	;	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		throw(permission_error(specialize, class, Class))
+		throw(permission_error(specialize, class, Superclass))
 	;	'$lgt_add_referenced_object'(Superclass, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Class, Superclass, Scope))),
 		'$lgt_construct_ic_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),

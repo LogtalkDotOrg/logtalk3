@@ -24,6 +24,11 @@ RELEASE NOTES
 3.09.2 - February ??, 2016
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug where the compiler would fail to report the error when a class
+attempts to specialize a prototype.
 
 
 3.09.1 - January 16, 2016
