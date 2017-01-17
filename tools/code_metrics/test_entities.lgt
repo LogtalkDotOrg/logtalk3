@@ -127,7 +127,8 @@
 :- end_category.
 
 
-:- object(bird).
+:- object(bird,
+	instantiates(bird)).
 
 :- end_object.
 
