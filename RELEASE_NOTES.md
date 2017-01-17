@@ -47,6 +47,13 @@ Tools
 
 * IMPROVED: Documentation of the `lgtunit` tool.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `create_object/4`, `create_protocol/3`, and
+`create_category/4` built-in predicates to check the expected errors when
+the declared entity relations are not valid.
+
 Installers and installation scripts
 -----------------------------------
 
