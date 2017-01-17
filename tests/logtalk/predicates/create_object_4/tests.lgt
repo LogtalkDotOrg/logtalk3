@@ -131,4 +131,19 @@
 		create_object(Object1, [], [], []),
 		create_object(Object2, [specializes(Object1)], [], []).
 
+	throws(create_object_4_29, error(permission_error(extend, prototype, Prototype), logtalk(create_object(Object, [instantiates(Class), extends(Prototype)], [], []), _))) :-
+		create_object(Prototype, [], [], []),
+		create_object(Class, [instantiates(Class)], [], []),
+		create_object(Object, [instantiates(Class), extends(Prototype)], [], []).
+
+	throws(create_object_4_30, error(permission_error(instantiate, class, Class), logtalk(create_object(Object, [extends(Prototype), instantiates(Class)], [], []), _))) :-
+		create_object(Prototype, [], [], []),
+		create_object(Class, [instantiates(Class)], [], []),
+		create_object(Object, [extends(Prototype), instantiates(Class)], [], []).
+
+	throws(create_object_4_31, error(permission_error(specialize, class, Class), logtalk(create_object(Object, [extends(Prototype), specializes(Class)], [], []), _))) :-
+		create_object(Prototype, [], [], []),
+		create_object(Class, [instantiates(Class)], [], []),
+		create_object(Object, [extends(Prototype), specializes(Class)], [], []).
+
 :- end_object.
