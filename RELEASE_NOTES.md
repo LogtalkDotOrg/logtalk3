@@ -36,6 +36,11 @@ Library
 * IMPROVED: Implementation of the `java::array_to_terms/2-3` predicates when
 using the SWI-Prolog/YAP JPL library.
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: Documentation of the Logtalk support for the Atom text editor.
+
 
 3.09.1 - January 16, 2016
 =========================

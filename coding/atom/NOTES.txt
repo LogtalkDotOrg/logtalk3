@@ -38,15 +38,28 @@ from:
 
 	https://atom.io/packages/language-logtalk
 
-Several Atom packages can be useful for Logtalk development. As an example,
-the file `process-palette.json` defines commands for compiling a file from
-within Atom allowing clicking on warnings and errors and jump to their
+Several Atom packages can be useful for Logtalk development. Those include:
+
+1. `process-palette`
+
+The provided `process-palette.json` file defines commands for compiling a file
+from within Atom allowing clicking on warnings and errors and jump to their
 location, for scanning for dead code, and for generating HTML documentation.
 For using these commands, install the `process-palette` package and replace
-or merge the contents of the file with default file found at `~/.atom`.
-Customize the file if necessary e.g. to select your preferred Prolog backend
-and keyboard shortcuts. Also install a HTML preview package such as
-`atom-html-preview`.
+or merge the contents of the file with default file found at `~/.atom`. If
+no `~/.atom/process-palette.json` file exists just copy the provided file
+to `~/.atom`. Customize the file if necessary e.g. to select your preferred
+Prolog backend and keyboard shortcuts.
+
+2. `atom_ctags`
+
+By installing this package and the Logtalk ctags support (see `../ctags`), it
+is possible to use Atom's `Command Palette` to index and browse Logtalk code.
+
+3. `atom-html-preview`
+
+One of the packages that allows convenient rendering of HTML files, including
+those generated for API documentation of Logtalk code.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
