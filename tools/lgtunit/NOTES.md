@@ -57,8 +57,6 @@ This tool can be loaded using the query:
 Compiling and loading unit tests
 --------------------------------
 
-To compile and load this framework type:
-
 In order to write your own unit tests, define objects extending the `lgtunit`
 object:
 
@@ -69,18 +67,20 @@ object:
 
 	:- end_object.
 
-The source files defining the test objects must be compiled using the option
-`hook(lgtunit)`. For example:
+The tests must be term-expanded by the `lgtunit` object by compiling the source
+files defining the test objects using the option `hook(lgtunit)`. For example:
 
 	| ?- logtalk_load(my_tests, [hook(lgtunit)]).
 
 As the term-expansion mechanism applies to all the contents of a source file,
 the source files defining the test objects shouldn't contain entities other
 than the test objects. Additional code necessary for the tests should go to
-separate files. See the `../../tester-sample.lgt` file for an example of a
-loader file for compiling and loading the `lgtunit` tool, the source code
-under testing, the unit tests, and for automatically run all the tests after
-loading. See the `../../tests` directory for examples of unit tests.
+separate files.
+
+See the `../../tester-sample.lgt` file for an example of a loader file for
+compiling and loading the `lgtunit` tool, the source code under testing, the
+unit tests, and for automatically run all the tests after loading. See e.g.
+the `../../tests` directory for examples of unit tests.
 
 
 Unit test dialects
@@ -95,7 +95,8 @@ Unit tests can be written using any of the following dialects:
 	test(Test) :- Goal.
 
 This is the most simple dialect, allowing the specification of tests that
-are expected to succeed. A more versatile dialect is:
+are expected to succeed. The argument of the `test/1` predicate, `Test`, is
+an atom that identifies it and must be unique. A more versatile dialect is:
 
 	succeeds(Test) :- Goal.
 	deterministic(Test) :- Goal.

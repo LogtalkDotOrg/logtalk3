@@ -36,6 +36,11 @@ Library
 * IMPROVED: Implementation of the `java::array_to_terms/2-3` predicates when
 using the SWI-Prolog/YAP JPL library.
 
+Tools
+-----
+
+* IMPROVED: Documentation of the `lgtunit` tool.
+
 Installers and installation scripts
 -----------------------------------
 
