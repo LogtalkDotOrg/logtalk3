@@ -14158,8 +14158,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_implements_protocol_relation('+list, @object_identifier)
-% '$lgt_compile_implements_protocol_relation'(+list, @category_identifier)
+% '$lgt_compile_implements_protocol_relation('+list, @object_identifier, @compilation_context)
+% '$lgt_compile_implements_protocol_relation'(+list, @category_identifier, @compilation_context)
 %
 % compiles an "implements" relation between a category or an object and a list of protocols
 
@@ -14443,6 +14443,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% existing object; check that is not being compiled as a different kind of entity
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _))
+	;	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
+		% object being compiled
+		true
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		% object defined in the same file we're compiling
 		true
@@ -14460,6 +14463,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% existing protocol; check that is not being compiled as a different kind of entity
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _))
+	;	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
+		% protocol being compiled
+		true
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
 		% protocol defined in the same file we're compiling
 		true
@@ -14477,6 +14483,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% existing category; check that is not being compiled as a different kind of entity
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _))
+	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
+		% category being compiled
+		true
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
 		% category defined in the same file we're compiling
 		true

@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: More strict compiler checks for entity references when compiling
+entities.
+
 * FIXED: Bug where the compiler would fail to report the error when a class
 attempts to specialize a prototype.
 
