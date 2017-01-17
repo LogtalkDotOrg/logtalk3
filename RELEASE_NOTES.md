@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Exception thrown when a category attempts to complement itself for
+consistency with similar cases.
+
 * IMPROVED: More strict compiler checks for entity references when compiling
 entities.
 

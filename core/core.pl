@@ -2933,7 +2933,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 9, 2, rc2)).
 
 
 
@@ -14345,7 +14345,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _, _) :-
 	'$lgt_check'(object_identifier, Obj),
-	(	'$lgt_is_protocol'(Obj) ->
+	(	'$lgt_term_template'(Obj, Ctg) ->
+		throw(permission_error(complement, self, Ctg))
+	;	'$lgt_is_protocol'(Obj) ->
 		throw(type_error(object, Obj))
 	;	'$lgt_is_category'(Obj) ->
 		throw(type_error(object, Obj))
