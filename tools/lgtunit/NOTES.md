@@ -21,21 +21,25 @@ ________________________________________________________________________
 Overview
 --------
 
+The `lgtunit` tool provides unit testing support for Logtalk. It can be used
+for testing both Logtalk and Prolog code.
+
+This tool is inspired by the xUnit frameworks architecture and by the works of
+Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog
+`plunit` package).
+
+
+Main files
+----------
+
 The `lgtunit.lgt` source file implements a framework for defining and running
 unit tests in Logtalk. The `lgtunit_messages.lgt` source file defines the
 default translations for the messages printed when running unit tests. These
 messages can be intercepted to customize output, e.g. to make it less verbose,
-or for integration with e.g. GUI IDEs and continuous integration servers. For
-more information on these entities, open the `docs/tools.html` file in a web
-browser.
+or for integration with e.g. GUI IDEs and continuous integration servers.
 
-This framework can be used for testing both Logtalk and Prolog code. However,
-some features (notably, code coverage) are only available when testing Logtalk
-code.
-
-The unit tests framework is inspired by the xUnit frameworks architecture and
-by the works of Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker
-(SWI-Prolog `plunit` package).
+Other files part of this tool provide support for alternative output formats
+of test results and are discussed below.
 
 
 API documentation
@@ -87,8 +91,8 @@ Unit test dialects
 ------------------
 
 Multiple test _dialects_ are supported by default. Other test dialects can
-be easily defined by extending the `lgtunit` object by term-expanding the
-new dialect into one of the default dialects.
+be easily defined by extending the `lgtunit` object and by term-expanding
+the new dialect into one of the default dialects.
 
 Unit tests can be written using any of the following dialects:
 
@@ -393,7 +397,7 @@ Exporting unit test results in xUnit XML format
 
 To output test results in the xUnit XML format, simply load the
 `xunit_output.lgt` file before running the tests. This file defines
-an object, `xunit_output`, that intercepts and replaces unit test
+an object, `xunit_output`, that intercepts and rewrites unit test
 execution messages, converting them to the xUnit XML format.
 
 To write the test results to a file using the xUnit XML format, simply
@@ -407,7 +411,7 @@ Writing unit test results in the TAP output format
 
 To output test results in the TAP (Test Anything Protocol) format, simply
 load the `tap_output.lgt` file before running the tests. This file defines
-an object, `tap_output`, that intercepts and replaces unit test execution
+an object, `tap_output`, that intercepts and rewrites unit test execution
 messages, converting them to the TAP output format.
 
 To write the test results to a file using the TAP (Test Anything Protocol)
@@ -424,8 +428,10 @@ Known issues
 ------------
 
 Deterministic unit tests are currently not available when using Lean Prolog
-or Quintus Prolog as backend compilers do the lack of required built-in
-support that cannot be defined in Prolog.
+or Quintus Prolog as backend compilers do the lack of a required built-in
+support that cannot be sensibly defined in Prolog.
+
+Code coverage is only available when testing Logtalk code.
 
 
 Other notes
