@@ -33,7 +33,7 @@ consistency with similar cases.
 * IMPROVED: More strict compiler checks for entity references when compiling
 entities.
 
-* FIXED: Bug where the compiler would fail to report the error when a class
+* FIXED: Bug where the compiler would fail to report an error when a class
 attempts to specialize a prototype.
 
 Library
@@ -54,8 +54,8 @@ Tests
 `create_category/4` built-in predicates to check the expected errors when
 the declared entity relations are not valid.
 
-Installers and installation scripts
------------------------------------
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
 * IMPROVED: Documentation of the Logtalk support for the Atom text editor.
 
