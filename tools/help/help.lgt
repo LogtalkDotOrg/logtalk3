@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.10,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2016/06/29,
+		date is 2017/01/29,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -78,7 +78,7 @@
 			(	built_in_directive(Functor, Arity, Path, File)
 			;	built_in_method(Functor, Arity, Path, File)
 			;	built_in_predicate(Functor, Arity, Path, File)
-			;	control(Functor, Arity, Path, File)
+			;	control_construct(Functor, Arity, Path, File)
 			),
 			Hits
 		),
@@ -154,7 +154,7 @@
 			Completion = Functor/Arity
 		;	built_in_non_terminal(Functor, Arity, Path, File),
 			Completion = Functor//Arity
-		;	control(Functor, Arity, Path, File),
+		;	control_construct(Functor, Arity, Path, File),
 			Completion = Functor/Arity
 		),
 		sub_atom(Functor, 0, _, _, Prefix),
@@ -364,19 +364,19 @@
 	built_in_method(question_hook, 6, '/manuals/refman/methods/', 'question_hook_6.html').
 	built_in_method(question_prompt_stream, 4, '/manuals/refman/methods/', 'question_prompt_stream_4.html').
 
-	:- public(control/4).
-	:- mode(control(?atom, ?integer, -atom, -atom), zero_or_more).
-	:- info(control/4, [
+	:- public(control_construct/4).
+	:- mode(control_construct(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(control_construct/4, [
 		comment is 'Provides access to the HTML documenting files describing built-in control constructs.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
-	control((::), 2, '/manuals/refman/control/', 'send_to_object_2.html').
-	control('[]', 1, '/manuals/refman/control/', 'delegate_message_1.html').
-	control((::), 1, '/manuals/refman/control/', 'send_to_self_1.html').
-	control((^^), 1, '/manuals/refman/control/', 'call_super_1.html').
-	control(({}), 1, '/manuals/refman/control/', 'external_call_1.html').
-	control((<<), 2, '/manuals/refman/control/', 'context_switch_2.html').
+	control_construct((::), 2, '/manuals/refman/control/', 'send_to_object_2.html').
+	control_construct('[]', 1, '/manuals/refman/control/', 'delegate_message_1.html').
+	control_construct((::), 1, '/manuals/refman/control/', 'send_to_self_1.html').
+	control_construct((^^), 1, '/manuals/refman/control/', 'call_super_1.html').
+	control_construct(({}), 1, '/manuals/refman/control/', 'external_call_1.html').
+	control_construct((<<), 2, '/manuals/refman/control/', 'context_switch_2.html').
 
 	:- public(built_in_non_terminal/4).
 	:- mode(built_in_non_terminal(?atom, ?integer, -atom, -atom), zero_or_more).

@@ -45,6 +45,8 @@ using the SWI-Prolog/YAP JPL library.
 Tools
 -----
 
+* CHANGED: Renamed `help` tool `control/4` predicate to `control_construct/4`.
+
 * IMPROVED: Documentation of the `lgtunit` tool.
 
 Tests
