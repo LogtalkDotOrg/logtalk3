@@ -39,6 +39,9 @@ attempts to specialize a prototype.
 Library
 -------
 
+* ADDED: Predicate `atom::split/3` for splitting an atom into a list of
+sub-atoms given another atom as delimiter.
+
 * IMPROVED: Implementation of the `java::array_to_terms/2-3` predicates when
 using the SWI-Prolog/YAP JPL library.
 

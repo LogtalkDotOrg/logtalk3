@@ -23,17 +23,24 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2016/10/30,
+		date is 2017/01/31,
 		comment is 'Atom data type predicates.'
 	]).
 
 	:- public(replace_sub_atom/4).
-	:- mode(replace_sub_atom(+atom, +atom, +atom, ?atom), zero_or_one).
+	:- mode(replace_sub_atom(+atom, +atom, +atom, -atom), one).
 	:- info(replace_sub_atom/4, [
 		comment is 'Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.',
 		argnames is ['Old', 'New', 'Input', 'Output']
+	]).
+
+	:- public(split/3).
+	:- mode(split(+atom, +atom, -list(atom)), one).
+	:- info(split/3, [
+		comment is 'Splits an atom at a given delimiter into a list of sub-atoms.',
+		argnames is ['Atom', 'Delimiter', 'SubAtoms']
 	]).
 
 	replace_sub_atom(Old, New, Input, Output) :-
@@ -59,6 +66,19 @@
 	append_fragments([Fragment| Fragments], Previous, Output) :-
 		atom_concat(Previous, Fragment, Output0),
 		append_fragments(Fragments, Output0, Output).
+
+	split(Atom, Delimiter, SubAtoms) :-
+		atom_length(Delimiter, Length),
+		split(Atom, Delimiter, Length, SubAtoms).
+
+	split(Atom, Delimiter, Length, [SubAtom| SubAtoms]) :-
+		sub_atom(Atom, Before, Length, _, Delimiter),
+		sub_atom(Atom, 0, Before, _, SubAtom),
+		!,
+		Skip is Before + Length,
+		sub_atom(Atom, Skip, _, 0, Suffix),
+		split(Suffix, Delimiter, Length, SubAtoms).
+	split(Atom, _, _, [Atom]).
 
 	valid(Atom) :-
 		atom(Atom).
