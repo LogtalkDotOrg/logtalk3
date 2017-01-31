@@ -52,6 +52,9 @@ Tools
 
 * IMPROVED: Documentation of the `lgtunit` tool.
 
+* FIXED: Runtime error in the `dead_code_scanner` tool when scanning source
+files that define protocols.
+
 Tests
 -----
 

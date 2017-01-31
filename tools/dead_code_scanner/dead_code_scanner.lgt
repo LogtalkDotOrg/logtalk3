@@ -22,9 +22,9 @@
 :- object(dead_code_scanner).
 
   :- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/01/06,
+		date is 2017/01/31,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -112,6 +112,7 @@
 		).
 
 	predicate(Entity, Predicate) :-
+		\+ (atom(Entity), current_protocol(Entity)),
 		predicate(Entity, Predicate, _, _).
 
 	% local predicates not called, directly or indirectly, by scoped predicates
@@ -171,7 +172,6 @@
 		).
 
 	non_scoped_predicate(Entity, Alias, File, Line) :-
-		\+ (atom(Entity), current_protocol(Entity)),
 		entity_property(Entity, defines(Alias, Properties)),
 		Alias \= _::_,
 		% not a Logtalk multifile predicate definition
@@ -369,6 +369,7 @@
 
 	process_entity(Kind, Entity) :-
 		print_message(information, dead_code_scanner, scanning_entity(Kind, Entity)),
+		Kind \== protocol,
 		predicate(Entity, Predicate, File, Line),
 		print_message(warning, dead_code_scanner, dead_predicate(Entity, Predicate, File, Line)),
 		fail.
@@ -422,8 +423,6 @@
 		print_message(information, dead_code_scanner, scanning_file(Path)),
 		(	logtalk::loaded_file_property(Path, object(Entity)),
 			Kind = object
-		;	logtalk::loaded_file_property(Path, protocol(Entity)),
-			Kind = protocol
 		;	logtalk::loaded_file_property(Path, category(Entity)),
 			Kind = category
 		),
