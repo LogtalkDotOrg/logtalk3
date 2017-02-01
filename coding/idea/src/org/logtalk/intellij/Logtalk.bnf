@@ -1,0 +1,131 @@
+{
+  parserClass="org.logtalk.intellij.parser.LogtalkParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Logtalk"
+  psiImplClassSuffix="Impl"
+  psiPackage="org.logtalk.intellij.psi"
+  psiImplPackage="org.logtalk.intellij.psi.impl"
+
+  elementTypeHolderClass="org.logtalk.intellij.psi.LogtalkTypes"
+  elementTypeClass="org.logtalk.intellij.psi.LogtalkElementType"
+  tokenTypeClass="org.logtalk.intellij.psi.LogtalkTokenType"
+}
+
+logtalkFile ::= item_*
+
+private item_ ::= (sentence|COMMENT|CRLF)
+
+sentence ::= (operation|compound|atom) DOT
+
+term ::= (operation|basic_term) //basic_term instead of term to avoid left recursion
+
+basic_term ::= (parenthesized_block|braced_block|list|map_reference|compound|atom|STRING|number|variable)
+
+operation ::= (native_binary_operation|native_left_operation|
+                custom_binary_operation|custom_left_operation)
+
+native_binary_operation ::= basic_term known_binary_operator term
+
+native_left_operation ::= known_left_operator term
+
+custom_binary_operation ::= basic_term atom term
+
+custom_left_operation ::= atom term
+
+atom ::= (  QUOTED_ATOM|
+            UNQUOTED_ATOM|
+            KEYWORD_ATOM|
+            DIRECTIVE_UNQUOTED_ATOM|
+            DIRECTIVE_KEYWORD_ATOM|
+            HEAD_UNQUOTED_ATOM|
+            HEAD_KEYWORD_ATOM|
+            CUT|
+            CONS|
+            known_operator
+         )
+
+compound ::= compound_name LPAREN term RPAREN
+
+compound_name ::= ( QUOTED_COMPOUND_NAME|
+                    UNQUOTED_COMPOUND_NAME|
+                    KEYWORD_COMPOUND_NAME|
+                    DIRECTIVE_UNQUOTED_COMPOUND_NAME|
+                    DIRECTIVE_KEYWORD_COMPOUND_NAME|
+                    HEAD_KEYWORD_COMPOUND_NAME|
+                    HEAD_UNQUOTED_COMPOUND_NAME
+                  )
+
+list ::= LBRACKET term? RBRACKET
+
+braced_block ::= LBRACE term RBRACE
+
+parenthesized_block ::= LPAREN term RPAREN
+
+number ::= (INTEGER|FLOAT|BIN_NUMBER|OCT_NUMBER|HEX_NUMBER|CHAR_CODE)
+
+variable ::= (ANONYMOUS_VARIABLE|NAMED_VARIABLE)
+
+map_reference ::= (braced_block|variable) MAP_OP (atom|INTEGER|variable)
+
+known_operator ::= (known_binary_operator|known_left_operator)
+
+known_binary_operator ::= ( LONG_ARROW_OP|
+                            DIRECTIVE_OP|
+                            SEMICOLON_OP|PIPE_OP|
+                            IMPLICATION_OP|STAR_IMPLICATION_OP|
+                            COMMA|
+                            COLON_EQUALS_OP|
+                            LESS_THAN_OP|EQUALS_OP|EQUALS_DOT_DOT_OP|EQUALS_AT_EQUALS_OP|BACKSLASH_EQUALS_AT_EQUALS_OP|
+                            EQUALS_COLON_EQUALS_OP|LESS_OR_EQUALS_OP|DOUBLE_EQUALS_OP|EQUALS_BACKSLASH_EQUALS_OP|
+                            GREATER_THAN_OP|GREATER_OR_EQUALS_OP|AT_LESS_THAN_OP|AT_EQUALS_LESS_THAN_OP|
+                            AT_GREATER_THAN_OP|AT_GREATER_OR_EQUALS_OP|BACKSLASH_EQUALS_OP|BACKSLASH_DOUBLE_EQUALS_OP|
+                            AS_OP|IS_OP|BUTTERFLY_OP|COLON_LESS_THAN_OP|
+                            COLON_OP|
+                            PLUS_OP|MINUS_OP|SLASH_BACKSLASH_OP|BACKSLASH_SLASH_OP|XOR_OP|
+                            STAR_OP|SLASH_OP|DOUBLE_SLASH_OP|DIV_OP|RDIV_OP|DOUBLE_GREATER_THAN_OP|MOD_OP|REM_OP|
+                            DOUBLE_STAR_OP|
+                            CARET_OP|
+                            MAP_OP|
+                            DOLLAR_OP|
+                            LGT_METHOD_CALL_OP|
+                            LGT_SUPER_CALL_OP|
+                            LGT_CONTEXT_SWITCHING_OP
+                            )
+
+known_left_operator ::=   ( DIRECTIVE_OP|
+                            QUERY_OP|
+                            DYNAMIC_OP|DISCONTIGUOUS_OP|INITIALIZATION_OP|META_PREDICATE_OP|MODULE_TRANSPARENT_OP|MULTIFILE_OP|
+                            PUBLIC_OP|THREAD_LOCAL_OP|THREAD_INITIALIZATION_OP|VOLATILE_OP|
+                            NOT_OP|
+                            QUESTION_MARK_OP|
+                            PLUS_OP|MINUS_OP|BACKSLASH_OP|
+                            AT|
+                            LGT_METHOD_CALL_OP|
+                            LGT_SUPER_CALL_OP
+                            )
+
+
+/*
+http://www.swi-prolog.org/pldoc/man?section=operators
+
+1200	xfx	-->, :-
+1200	fx	:-, ?-
+1150	fx	dynamic, discontiguous, initialization, meta_predicate, module_transparent, multifile, public, thread_local, thread_initialization, volatile
+1100	xfy	;, |
+1050	xfy	->, *->
+1000	xfy	,
+990	xfx	:=
+900	fy	\+
+700	xfx	<, =, =.., =@=, \=@=, =:=, =<, ==, =\=, >, >=, @<, @=<, @>, @>=, \=, \==, as, is, >:<, :<
+600	xfy	:
+500	yfx	+, -, /\, \/, xor
+500	fx	?
+400	yfx	*, /, //, div, rdiv, <<, >>, mod, rem
+200	xfx	**
+200	xfy	^
+200	fy	+, -, \
+100	yfx	.
+1	fx	$
+ */

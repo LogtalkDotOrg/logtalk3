@@ -1,0 +1,53 @@
+// This is a generated file. Not intended for manual editing.
+package org.logtalk.intellij.psi.impl;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
+import static org.logtalk.intellij.psi.LogtalkTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.logtalk.intellij.psi.*;
+
+public class LogtalkOperationImpl extends ASTWrapperPsiElement implements LogtalkOperation {
+
+  public LogtalkOperationImpl(ASTNode node) {
+    super(node);
+  }
+
+  public void accept(@NotNull LogtalkVisitor visitor) {
+    visitor.visitOperation(this);
+  }
+
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof LogtalkVisitor) accept((LogtalkVisitor)visitor);
+    else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public LogtalkCustomBinaryOperation getCustomBinaryOperation() {
+    return findChildByClass(LogtalkCustomBinaryOperation.class);
+  }
+
+  @Override
+  @Nullable
+  public LogtalkCustomLeftOperation getCustomLeftOperation() {
+    return findChildByClass(LogtalkCustomLeftOperation.class);
+  }
+
+  @Override
+  @Nullable
+  public LogtalkNativeBinaryOperation getNativeBinaryOperation() {
+    return findChildByClass(LogtalkNativeBinaryOperation.class);
+  }
+
+  @Override
+  @Nullable
+  public LogtalkNativeLeftOperation getNativeLeftOperation() {
+    return findChildByClass(LogtalkNativeLeftOperation.class);
+  }
+
+}

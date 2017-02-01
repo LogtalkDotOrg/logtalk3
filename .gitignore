@@ -28,3 +28,16 @@ lgt_tmp/
 # Text editors
 .tm_properties
 *~
+
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ
+*.iml
+.idea/
+# codeStylesettings is influenced by local plugins
+.idea/codeStyleSettings.xml
