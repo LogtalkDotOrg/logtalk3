@@ -20,7 +20,6 @@ import com.intellij.psi.TokenType;
       String quote;
 %}
 
-
 LPAREN = "("
 RPAREN = ")"
 LBRACKET = "["
@@ -187,11 +186,11 @@ LGT_CONTEXT_SWITCHING_OP = "<<"
 
 
 
+
 //LGT_KEYWORDS = ({LGT_COMPOUND_NAME_KEYWORDS}|{LGT_ATOM_KEYWORDS})
 LGT_COMPOUND_NAME_KEYWORDS = (
-//built_in_directives:
 "encoding" | "initialization" | "op" | "set_logtalk_flag" | "if" | "elif" | "calls" | "category" |
-"include" | "info" | "initialization" | "object" | "object" | "object" | "object" | "object" | "protocol" |
+"include" | "info" | "initialization" | "object" | "protocol" |
 "uses" | "alias" | "coinductive" | "discontiguous" | "dynamic" | "info" | "meta_predicate" | "meta_non_terminal" | "mode" |
 "multifile" | "private" | "protected" | "public" | "synchronized" | "uses" | "use_module" |
 "parameter" | "self" | "sender" | "this" | "current_op" | "current_predicate" | "predicate_property" | "abolish" | "asserta" |
@@ -210,17 +209,29 @@ LGT_COMPOUND_NAME_KEYWORDS = (
  "threaded_engine_self" | "threaded_engine_next" | "threaded_engine_next_reified" | "threaded_engine_yield" | "threaded_engine_post" |
  "threaded_engine_fetch" | "logtalk_compile" | "logtalk_compile" | "logtalk_load" | "logtalk_load" | "logtalk_make" | "logtalk_library_path" |
  "logtalk_load_context" | "current_logtalk_flag" | "set_logtalk_flag" | "create_logtalk_flag" |
- "implements" | "imports" | "complements" | "extends" | "instantiates" | "specializes"
+ "implements" | "imports" | "complements" | "extends" | "instantiates" | "specializes" |
+ "ensure_loaded" | "export" | "reexport" | "module" | "set_prolog_flag" |
+ "unify_with_occurs_check" | "subsumes_term" | "atom" | "atomic" | "integer" | "float" | "callable" | "compound" | "nonvar" |
+ "var" | "number" | "ground" | "acyclic_term" | "compare" | "functor" | "arg" | "copy_term" | "numbervars" | "term_variables" |
+ "current_input" | "current_output" | "set_input" | "set_output" | "open" | "close" | "flush_output" | "stream_property" |
+ "at_end_of_stream" | "set_stream_position" | "get_char" | "get_code" | "peek_char" | "peek_code" | "put_char" | "put_code" |
+ "nl" | "get_byte" | "peek_byte" | "put_byte" | "read" | "read_term" | "writeq" | "write" | "write_canonical" | "write_term" |
+ "current_op" | "op" | "current_char_conversion" | "char_conversion" | "call" | "once" | "ignore" | "atom_length" | "atom_chars" |
+ "atom_codes" | "atom_concat" | "sub_atom" | "char_code" | "number_chars" | "number_codes" | "current_prolog_flag" | "set_prolog_flag" |
+ "halt" | "keysort" | "sort" |
+ "atan" | "atan2" | "acos" | "asin" | "sin" | "cos" | "tan" | "sign" | "abs" | "truncate" | "round" | "ceiling" | "exp" |
+ "log" | "sqrt" | "rem" | "mod" | "div" | "float_fractional_part" | "float_integer_part" | "float" | "floor" | "min" | "max" | "xor"
 )
 
 
 LGT_ATOM_KEYWORDS = (
 "else" | "endif" | "dynamic" | "end_category" | "end_object" | "end_protocol" | "threaded" |
 "eos" |
-"logtalk_make"
+"logtalk_make" |
+"built_in" |
+"halt" | "flush_output" | "at_end_of_stream" | "true" | "fail" | "false" | "repeat" | "nl" |
+"pi" | "e"
 )
-
-
 
 
 CRLF = \R

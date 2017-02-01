@@ -23,13 +23,13 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("LONG_ARROW_OP", DefaultLanguageHighlighterColors.CONSTANT);
 
     public static final TextAttributesKey OPERATOR =
-            createTextAttributesKey("OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
+            createTextAttributesKey("OPERATOR", DefaultLanguageHighlighterColors.CONSTANT);
 
     public static final TextAttributesKey CUT =
             createTextAttributesKey("CUT", DefaultLanguageHighlighterColors.CONSTANT);
 
     public static final TextAttributesKey STRING =
-            createTextAttributesKey("STRING_TERM", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
+            createTextAttributesKey("STRING_TERM", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
 
     public static final TextAttributesKey INTEGER =
             createTextAttributesKey("INTEGER_TERM", DefaultLanguageHighlighterColors.NUMBER);
@@ -59,7 +59,7 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("KEYWORD_ATOM", DefaultLanguageHighlighterColors.STATIC_FIELD);
 
     public static final TextAttributesKey HEAD_UNQUOTED_ATOM =
-            createTextAttributesKey("HEAD_UNQUOTED_ATOM", DefaultLanguageHighlighterColors.CONSTANT);
+            createTextAttributesKey("HEAD_UNQUOTED_ATOM", DefaultLanguageHighlighterColors.IDENTIFIER);
 
     public static final TextAttributesKey HEAD_KEYWORD_ATOM =
             createTextAttributesKey("HEAD_KEYWORD_ATOM", DefaultLanguageHighlighterColors.STATIC_FIELD);
@@ -68,7 +68,7 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("DIRECTIVE_UNQUOTED_ATOM", DefaultLanguageHighlighterColors.IDENTIFIER); //unrecognized keyword
 
     public static final TextAttributesKey DIRECTIVE_KEYWORD_ATOM =
-            createTextAttributesKey("DIRECTIVE_KEYWORD_ATOM", DefaultLanguageHighlighterColors.MARKUP_ATTRIBUTE);
+            createTextAttributesKey("DIRECTIVE_KEYWORD_ATOM", DefaultLanguageHighlighterColors.STATIC_FIELD);
 
     public static final TextAttributesKey QUOTED_COMPOUND_NAME =
             createTextAttributesKey("QUOTED_COMPOUND_NAME", DefaultLanguageHighlighterColors.STRING);
@@ -80,7 +80,7 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("KEYWORD_COMPOUND_NAME", DefaultLanguageHighlighterColors.STATIC_FIELD);
 
     public static final TextAttributesKey HEAD_UNQUOTED_COMPOUND_NAME =
-            createTextAttributesKey("HEAD_UNQUOTED_COMPOUND_NAME", DefaultLanguageHighlighterColors.CONSTANT);
+            createTextAttributesKey("HEAD_UNQUOTED_COMPOUND_NAME", DefaultLanguageHighlighterColors.IDENTIFIER);
 
     public static final TextAttributesKey HEAD_KEYWORD_COMPOUND_NAME =
             createTextAttributesKey("HEAD_KEYWORD_COMPOUND_NAME", DefaultLanguageHighlighterColors.STATIC_FIELD);
@@ -89,7 +89,7 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("DIRECTIVE_UNQUOTED_COMPOUND_NAME", DefaultLanguageHighlighterColors.IDENTIFIER); //unrecognized keyword
 
     public static final TextAttributesKey DIRECTIVE_KEYWORD_COMPOUND_NAME =
-            createTextAttributesKey("DIRECTIVE_KEYWORD_COMPOUND_NAME", DefaultLanguageHighlighterColors.MARKUP_ATTRIBUTE);
+            createTextAttributesKey("DIRECTIVE_KEYWORD_COMPOUND_NAME", DefaultLanguageHighlighterColors.STATIC_FIELD);
 
 
     public static final TextAttributesKey ANONYMOUS_VARIABLE =
