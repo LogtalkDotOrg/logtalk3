@@ -28,7 +28,7 @@ Building a Logtalk image
 
 #### Last stable release
 
-    docker build --build-arg LOGTALK_VERSION=lgt3090stable -t="logtalk/logtalk3-swi:3090" -t="logtalk/logtalk3-swi:latest" .
+    docker build --build-arg LOGTALK_VERSION=lgt3091stable -t="logtalk/logtalk3-swi:3091" -t="logtalk/logtalk3-swi:latest" .
 
 
 Running a Logtalk container
