@@ -65,6 +65,11 @@ the declared entity relations are not valid.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: IntelliJ IDEA plug-in. Contributed by Sergio Castro.
+
+* ADDED: Helper shell script for publishing Docker images at Docker Hub.
+Contributed by Sergio Castro.
+
 * IMPROVED: Documentation of the Logtalk support for the Atom text editor.
 
 
