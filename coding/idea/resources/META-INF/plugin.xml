@@ -1,0 +1,44 @@
+<idea-plugin version="2">
+  <id>org.logtalk</id>
+  <name>Logtalk</name>
+  <version>1.0.4</version>
+  <vendor email="sergioc78@gmail.com" url="http://logtalk.org/">Logtalk</vendor>
+
+  <description><![CDATA[
+      <em>Logtalk</em> support for IntelliJ.
+    ]]></description>
+
+  <change-notes><![CDATA[
+      This plugin provides syntax highlighting for Logtalk and some basic editing features:<br>
+      <ul>
+        <li> Parentheses matching.</li>
+        <li> Multiline terms and comments folding and unfolding.</li>
+        <li> Automatic line and block commenting/uncommenting of selection using IntelliJ standard shortcuts.</li>
+      </ul>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileTypeFactory implementation="org.logtalk.intellij.LogtalkFileTypeFactory"/>
+    <lang.parserDefinition language="Logtalk" implementationClass="org.logtalk.intellij.LogtalkParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="Logtalk" implementationClass="org.logtalk.intellij.LogtalkSyntaxHighlighterFactory"/>
+    <lang.braceMatcher language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkPairedBraceMatcher"/>
+    <lang.commenter language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkCommenter"/>
+    <lang.foldingBuilder language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkFoldingBuilder"/>
+
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+</idea-plugin>
