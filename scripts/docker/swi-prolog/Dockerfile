@@ -39,6 +39,7 @@ RUN mkdir $LOGTALK_DOWNLOAD -p
 WORKDIR $LOGTALK_DOWNLOAD
 
 # Install curl
+RUN apt-get update
 RUN apt-get install -y curl
 
 ARG LOGTALK_VERSION=master
