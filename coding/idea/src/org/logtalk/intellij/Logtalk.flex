@@ -236,11 +236,16 @@ LGT_ATOM_KEYWORDS = (
 
 CRLF = \R
 WHITE_SPACE = [\ \n\t\f]
-INTEGER = [:digit:]+
-FLOAT = {INTEGER} {DOT} {INTEGER}
-BIN_NUMBER = [0-1]+
-OCT_NUMBER = [0-7]+
-HEX_NUMBER = [a-fA-F0-9_]+
+
+SIGN = "+" | "-"
+EXPONENTIATION = "e"|"E"
+
+SIMPLE_INTEGER = [:digit:]+
+INTEGER = {SIGN}? {SIMPLE_INTEGER} ({EXPONENTIATION} {SIGN}? {SIMPLE_INTEGER})?
+FLOAT = {SIGN}? {INTEGER} {DOT} {INTEGER} ({EXPONENTIATION} {SIGN}? {SIMPLE_INTEGER})?
+BIN_NUMBER = {SIGN}? [0-1]+
+OCT_NUMBER = {SIGN}? [0-7]+
+HEX_NUMBER = {SIGN}? [a-fA-F0-9_]+
 
 ATOM_CHAR = [:jletterdigit:]
 UNQUOTED_ATOM = [:lowercase:] {ATOM_CHAR}*
@@ -326,9 +331,9 @@ FIRST_CHAR_MAP_PROPERTY = ([:letter:]|[:digit:]|"_")
 
     {RBRACKET}                                      { return LogtalkTypes.RBRACKET; }
 
-    {LBRACE}                                        { return LogtalkTypes.LBRACKET; }
+    {LBRACE}                                        { return LogtalkTypes.LBRACE; }
 
-    {RBRACE}                                        { return LogtalkTypes.RBRACKET; }
+    {RBRACE}                                        { return LogtalkTypes.RBRACE; }
 
     {BIN_PREFIX} {BIN_NUMBER}                       { return LogtalkTypes.BIN_NUMBER;}
 
