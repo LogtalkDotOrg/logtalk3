@@ -93,10 +93,10 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
 
 
     public static final TextAttributesKey ANONYMOUS_VARIABLE =
-            createTextAttributesKey("ANONYMOUS_VARIABLE", DefaultLanguageHighlighterColors.LABEL);
+            createTextAttributesKey("ANONYMOUS_VARIABLE", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
 
     public static final TextAttributesKey NAMED_VARIABLE =
-            createTextAttributesKey("NAMED_VARIABLE", DefaultLanguageHighlighterColors.LABEL);
+            createTextAttributesKey("NAMED_VARIABLE", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
 
     public static final TextAttributesKey PARENTHESIS =
             createTextAttributesKey("PARENTHESIS", DefaultLanguageHighlighterColors.PARENTHESES);
@@ -219,6 +219,7 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
         return tokenType.equals(LogtalkTypes.LPAREN) || tokenType.equals(LogtalkTypes.RPAREN);
     }
 
+
     private static boolean isOperator(IElementType tokenType) {
         return //tokenType.equals(LogtalkTypes.LONG_ARROW_OP) || //these operators have a different treatment.
                 //tokenType.equals(LogtalkTypes.DIRECTIVE_OP) ||
@@ -284,6 +285,8 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
                 tokenType.equals(LogtalkTypes.MAP_OP) ||
                 tokenType.equals(LogtalkTypes.DOLLAR_OP) ||
                 tokenType.equals(LogtalkTypes.AT) ||
+                tokenType.equals(LogtalkTypes.LBRACE)  ||
+                tokenType.equals(LogtalkTypes.RBRACE) ||
                 tokenType.equals(LogtalkTypes.LGT_METHOD_CALL_OP) ||
                 tokenType.equals(LogtalkTypes.LGT_SUPER_CALL_OP)||
                 tokenType.equals(LogtalkTypes.LGT_CONTEXT_SWITCHING_OP);
