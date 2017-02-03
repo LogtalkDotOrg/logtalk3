@@ -70,7 +70,7 @@ CONTRIBUTORS
 * Robert Sasak (PDDL 3.0 parser contribution)
 * Robert Shiplett (bug reports)
 * Rui Marques (bug reports)
-* Sergio Castro (Docker support, testing, suggestions, and bug reports)
+* Sergio Castro (Docker support, IntelliJ IDEA support, testing, suggestions, and bug reports)
 * Timon Van Overveldt (multi-threading optimization and bug reports)
 * Theofrastos Mantadelis ("flags" contribution, ProbLog integration support, benchmark tests)
 * Ulrich Neumerkel (lambda expression examples, bug reports, and feedback on Prolog compliance testing)

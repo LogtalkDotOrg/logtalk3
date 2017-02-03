@@ -2,11 +2,12 @@
 
 #############################################################################
 ##
-##   Logtalk Docker publishing script.
-##   Last updated on February 1, 2017
+##   Logtalk Docker publishing script
+##   Last updated on February 3, 2017
 ##
 ##   This file is part of Logtalk <http://logtalk.org/>
-##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
+##   Paulo Moura <pmoura@logtalk.org>
 ##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.

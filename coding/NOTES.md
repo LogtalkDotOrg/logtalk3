@@ -42,7 +42,7 @@ equivalent to 4 spaces); you may set the tab width on the editor preference
 panel.
 
 You may notice that support for some text editors, notably for Windows-only 
-editors, is rather poor. Depending on the text editor, proper syntax
+editors, is relatively poor. Depending on the text editor, proper syntax
 highlighting support for Prolog and Logtalk may require support for
 regular expressions with zero-width look-ahead and look-behind assertions,
 which some editors lack.

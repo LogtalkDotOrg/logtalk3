@@ -1,14 +1,14 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright 2017 Sergio Castro <sergioc78@gmail.com>  
-               Paulo Moura <pmoura@logtalk.org>
+Copyright 2017 Sergio Castro <sergioc78@gmail.com> and  
+Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-		http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,8 @@ ________________________________________________________________________
 Overview
 --------
 
-This plugin provides syntax highlighting for Logtalk and some basic editing features: 
+This plugin provides syntax highlighting for Logtalk and some basic editing
+features for IntelliJ IDEA:
 
 - Parentheses matching.
 - Multiline terms and comments folding and unfolding.
@@ -33,19 +34,15 @@ More information at the [plugin site](https://plugins.jetbrains.com/idea/plugin/
 Install or update
 -----------------
 
-To load the latest version of this plugin in IntelliJ follow these steps:
- 
- - Go to your project configuration (*&lt;CTRL> + &lt;ALT> + S*) 
- 
- - Select  *Plugins* -> *Browse Repositories ...* .
+To install the latest version of this plugin in IntelliJ IDEA follow these steps:
 
+- Go to the IntelliJ IDEA preferences.
+- Select *Plugins* and then click on the *Browse Repositories ...* button.
 - Type *logtalk* in the search box to find it. Select it and click on *Install* or *Update*.
-
 
 
 Known issues
 ------------
 
-The grammar still needs some work. 
-Particularly, it does not show as errors few sentences that should not be considered valid.
-
+The grammar still needs some work. Particularly, it does not show as errors
+few sentences that should not be considered valid.

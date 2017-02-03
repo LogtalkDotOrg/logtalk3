@@ -1,7 +1,8 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+Copyright 2017 Sergio Castro <sergioc78@gmail.com> and  
+Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,6 +28,6 @@ includes the following files:
 - `Dockerfile`  
 	the docker file configuring Logtalk with a specific Prolog engine
 
-- `README.md`
+- `README.md`  
 	the `README.md` file automatically used as the project description
 	when creating an automated build at Docker Hub
