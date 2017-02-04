@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>
-%  Copyright 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
-%                 Paulo Moura         <pmoura@logtalk.org>
+%  Copyright 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com> and
+%  Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@
 :- object(code_metrics).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/02,
+		date is 2017/02/014,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -81,11 +81,7 @@
 	]).
 
 	:- uses(logtalk, [print_message/3]).
-
-	:- uses(list, [
-		member/2,
-		memberchk/2
-	]).
+	:- uses(list, [member/2]).
 
 	%%%%%%%%%%%%%%%%
 	%% Item scans %%

@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.3,
+		version is 4.4,
 		author is 'Paulo Moura',
-		date is 2016/11/02,
+		date is 2017/02/04,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1139,15 +1139,15 @@
 	%
 	% writes <Tag Att1="V1" Att2="V2" ...><![CDATA[Text]]></Tag> (quoted)
 
-	writeq_xml_cdata_element(Stream, Tag, Atts, Text) :-
-		write(Stream, '<'),
-		write(Stream, Tag),
-		write_xml_tag_attributes(Stream, Atts),
-		write(Stream, '><![CDATA['),
-		pretty_print_vars_quoted(Stream, Text),
-		write(Stream, ']]></'),
-		write(Stream, Tag),
-		write(Stream, '>'), nl(Stream).
+	%writeq_xml_cdata_element(Stream, Tag, Atts, Text) :-
+	%	write(Stream, '<'),
+	%	write(Stream, Tag),
+	%	write_xml_tag_attributes(Stream, Atts),
+	%	write(Stream, '><![CDATA['),
+	%	pretty_print_vars_quoted(Stream, Text),
+	%	write(Stream, ']]></'),
+	%	write(Stream, Tag),
+	%	write(Stream, '>'), nl(Stream).
 
 	% write_xml_cdata_element(@stream, @atom, @list, @term)
 	%
@@ -1437,9 +1437,9 @@
 			numbervars(Term, 0, _),
 			write_term(Stream, Term, [numbervars(true)])).
 
-	pretty_print_vars_quoted(Stream, Term) :-
-		\+ \+ (
-			numbervars(Term, 0, _),
-			write_term(Stream, Term, [numbervars(true), quoted(true)])).
+	%pretty_print_vars_quoted(Stream, Term) :-
+	%	\+ \+ (
+	%		numbervars(Term, 0, _),
+	%		write_term(Stream, Term, [numbervars(true), quoted(true)])).
 
 :- end_object.

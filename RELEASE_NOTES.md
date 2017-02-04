@@ -30,8 +30,8 @@ Logtalk compiler and runtime
 * CHANGED: Exception thrown when a category attempts to complement itself for
 consistency with similar cases.
 
-* IMPROVED: More strict compiler checks for entity references when compiling
-entities.
+* IMPROVED: More strict compiler checking for valid entity relations when
+compiling entity opening directives.
 
 * FIXED: Bug where the compiler would fail to report an error when a class
 attempts to specialize a prototype.

@@ -89,9 +89,9 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/01/09,
+		date is 2017/02/04,
 		comment is 'Abstract interface to JPL API utility predicates.'
 	]).
 
@@ -100,7 +100,7 @@
 		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1,
 		jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
 		jpl_iterator_element/2,
-		jpl_call/4, jpl_ref_to_type/2
+		jpl_call/4
 	]).
 
 	:- uses(user, [

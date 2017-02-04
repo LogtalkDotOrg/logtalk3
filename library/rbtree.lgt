@@ -29,9 +29,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
-		date is 2016/05/13,
+		date is 2017/02/04,
 		comment is 'Red-Black trees. Uses standard order to compare keys.'
 	]).
 
@@ -595,9 +595,6 @@
 
 	partial_map(t(Nil,Tree), Map, Closure, t(Nil,NewTree)) :-
 		partial_map(Tree, Map, [], Nil, Closure, NewTree).
-
-	partial_map(t(Nil,Tree), Map, Map0, Closure, t(Nil,NewTree)) :-
-		partial_map(Tree, Map, Map0, Nil, Closure, NewTree).
 
 	partial_map(T, [], [], _, _, T) :-
 		!.
