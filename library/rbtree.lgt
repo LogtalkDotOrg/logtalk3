@@ -8,9 +8,6 @@
 %	 Cormen, Leiserson, Rivest, and Stein,
 %	 MIT Press
 %
-%  This file is dual-licensed under the Artistic License 2.0 (as
-%  published by The Perl Foundation) and the GNU General Public
-%  License 3 (as published by the Free Software Foundation) as follows.
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
