@@ -24,7 +24,7 @@ public class LogtalkFileType extends LanguageFileType {
     @NotNull
     @Override
     public String getDescription() {
-        return "A Logtalk resource.";
+        return "Logtalk";
     }
 
     @NotNull
