@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2017/01/11,
+		date is 2017/02/05,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -51,7 +51,8 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(Message, core) -->
-		message_tokens(Message).
+		{ground_term_copy(Message, GroundMessage)},
+		message_tokens(GroundMessage).
 
 	% file compilation and loading messages
 
@@ -94,21 +95,18 @@
 	% entity compilation messages
 
 	message_tokens(compiling_entity(Type, Entity)) -->
-		{ground_term_copy(Entity, GroundEntity)},
 		(	{current_logtalk_flag(debug, on)} ->
-			['- compiling ~w ~q in debug mode ... '-[Type, GroundEntity], nl]
-		;	['- compiling ~w ~q ... '-[Type, GroundEntity], nl]
+			['- compiling ~w ~q in debug mode ... '-[Type, Entity], nl]
+		;	['- compiling ~w ~q ... '-[Type, Entity], nl]
 		).
 	message_tokens(compiled_entity(_Type, _Entity)) -->
 		['compiled'-[], nl].
 
 	message_tokens(redefining_entity(Type, Entity)) -->
-		{ground_term_copy(Entity, GroundEntity)},
-		['Redefining ~w ~q'-[Type, GroundEntity], nl].
+		['Redefining ~w ~q'-[Type, Entity], nl].
 
 	message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile)) -->
-		{ground_term_copy(Entity, GroundEntity)},
-		['Redefining ~w ~q (loaded from file ~w)'-[Type, GroundEntity, OldFile], nl],
+		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
 		message_context(File, Lines).
 
 	% make messages
@@ -272,8 +270,7 @@
 		['Debugging session aborted by user. Debugger still on.'-[], nl].
 
 	message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)) -->
-		{ground_term_copy(Provider, GroundProvider)},
-		['A definition for the debug handler predicate already exists in: ~q'-[GroundProvider], nl],
+		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% compiler error and warning messages
@@ -301,26 +298,22 @@
 		error_term_tokens(Error).
 
 	message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error)) -->
-		{ground_term_copy(HookEntity, GroundHookEntity)},
-		['Error found when term-expanding ~w using hook entity ~w: '-[Term, GroundHookEntity]],
+		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error)) -->
-		{ground_term_copy(HookEntity, GroundHookEntity)},
-		['Error found when term-expanding ~w using hook entity ~w: '-[Term, GroundHookEntity]],
+		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
 	message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error)) -->
-		{ground_term_copy(HookEntity, GroundHookEntity)},
-		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, GroundHookEntity]],
+		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error)) -->
-		{ground_term_copy(HookEntity, GroundHookEntity)},
-		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, GroundHookEntity]],
+		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
@@ -333,8 +326,7 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_object(File, Lines, Type, Entity, Object)) -->
-		{ground_term_copy(Object, GroundObject)},
-		['Reference to unknown object: ~q'-[GroundObject], nl],
+		['Reference to unknown object: ~q'-[Object], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol)) -->
@@ -342,8 +334,7 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_category(File, Lines, Type, Entity, Category)) -->
-		{ground_term_copy(Category, GroundCategory)},
-		['Reference to unknown category: ~q'-[GroundCategory], nl],
+		['Reference to unknown category: ~q'-[Category], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_module(File, Lines, Type, Entity, Module)) -->
@@ -387,26 +378,22 @@
 		message_context(File, Lines).
 
 	message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression)) -->
-		{ground_term_copy(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy)},
-		(	{UnqualifiedVarsCopy = [UnqualifiedVarCopy]} ->
-			['Unclassified variable ~q in lambda expression: ~q'-[UnqualifiedVarCopy, LambdaExpressionCopy], nl]
-		;	['Unclassified variables ~q in lambda expression: ~q'-[UnqualifiedVarsCopy, LambdaExpressionCopy], nl]
+		(	{UnqualifiedVars = [UnqualifiedVar]} ->
+			['Unclassified variable ~q in lambda expression: ~q'-[UnqualifiedVar, LambdaExpression], nl]
+		;	['Unclassified variables ~q in lambda expression: ~q'-[UnqualifiedVars, LambdaExpression], nl]
 		),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, LambdaExpression)) -->
-		{ground_term_copy(MixedUpVars-LambdaExpression, MixedUpVarsCopy-LambdaExpressionCopy)},
-		(	{MixedUpVarsCopy = [MixedUpVarCopy]} ->
-			['Variable ~q have dual role in lambda expression: ~q'-[MixedUpVarCopy, LambdaExpressionCopy], nl]
-		;	['Variables ~q have dual role in lambda expression: ~q'-[MixedUpVarsCopy, LambdaExpressionCopy], nl]
+		(	{MixedUpVars = [MixedUpVar]} ->
+			['Variable ~q have dual role in lambda expression: ~q'-[MixedUpVar, LambdaExpression], nl]
+		;	['Variables ~q have dual role in lambda expression: ~q'-[MixedUpVars, LambdaExpression], nl]
 		),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
-		{ground_term_copy(Category, GroundCategory),
-		 ground_term_copy(Object, GroundObject)},
-		['Complementing category will be ignored: ~q'-[GroundCategory], nl,
-		 'Complemented object, ~q, compiled with complementing categories support turned off'-[GroundObject], nl],
+		['Complementing category will be ignored: ~q'-[Category], nl,
+		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
 		message_context(File, Lines).
 
 	message_tokens(prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal)) -->
@@ -612,14 +599,12 @@
 		['~q'-[Functor//Arity]].
 
 	message_context(File, Type, Entity) -->
-		{ground_term_copy(Entity, GroundEntity)},
-		['  while compiling ~w ~q'-[Type, GroundEntity], nl, '  in file ~w'-[File], nl].
+		['  while compiling ~w ~q'-[Type, Entity], nl, '  in file ~w'-[File], nl].
 
 	message_context(File, Lines, Type, Entity) -->
-		{ground_term_copy(Entity, GroundEntity)},
 		(	{Lines = Line-Line} ->
-			['  while compiling ~w ~q'-[Type, GroundEntity], nl, '  in file ~w at or above line ~d'-[File, Line], nl]
-		;	['  while compiling ~w ~q'-[Type, GroundEntity], nl, '  in file ~w between lines ~w'-[File, Lines], nl]
+			['  while compiling ~w ~q'-[Type, Entity], nl, '  in file ~w at or above line ~d'-[File, Line], nl]
+		;	['  while compiling ~w ~q'-[Type, Entity], nl, '  in file ~w between lines ~w'-[File, Lines], nl]
 		).
 
 	message_context(File, Lines) -->
@@ -631,28 +616,23 @@
 	missing_entities([]) -->
 		[].
 	missing_entities([Entity-reference(Kind,From,File,Line)| Entities]) -->
-		{ground_term_copy(Entity, GroundEntity),
-		 ground_term_copy(From, GroundFrom)},
-		['  ~q'-[GroundEntity], nl],
-		['    referenced from ~w ~q'-[Kind,GroundFrom], nl],
+		['  ~q'-[Entity], nl],
+		['    referenced from ~w ~q'-[Kind,From], nl],
 		make_warning_context(File, Line),
 		missing_entities(Entities).
 
 	missing_predicates([]) -->
 		[].
 	missing_predicates([Predicate-reference(Kind,From,File,Line)| Predicates]) -->
-		{ground_term_copy(Predicate, GroundPredicate),
-		 ground_term_copy(From, GroundFrom)},
-		['  ~q'-[GroundPredicate], nl],
-		['    referenced from ~w ~q'-[Kind,GroundFrom], nl],
+		['  ~q'-[Predicate], nl],
+		['    referenced from ~w ~q'-[Kind,From], nl],
 		make_warning_context(File, Line),
 		missing_predicates(Predicates).
 
 	circular_references([]) -->
 		[].
 	circular_references([CircularReference-references(FileLines)| CircularReferences]) -->
-		{ground_term_copy(CircularReference, GroundCircularReference)},
-		['  ~q'-[GroundCircularReference], nl],
+		['  ~q'-[CircularReference], nl],
 		circular_reference_file_lines(FileLines),
 		circular_references(CircularReferences).
 
