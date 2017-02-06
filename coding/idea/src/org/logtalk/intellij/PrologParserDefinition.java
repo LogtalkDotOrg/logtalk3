@@ -1,17 +1,17 @@
 package org.logtalk.intellij;
 
 
-import org.logtalk.intellij.psi.LogtalkFile;
+import org.logtalk.intellij.psi.PrologFile;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 
-public class LogtalkParserDefinition extends LogicParserDefinition {
+public class PrologParserDefinition extends LogicParserDefinition {
 
     public static final IFileElementType FILE =
-            new IFileElementType(Language.findInstance(LogtalkLanguage.class));
+            new IFileElementType(Language.findInstance(PrologLanguage.class));
 
     @Override
     public IFileElementType getFileNodeType() {
@@ -20,6 +20,6 @@ public class LogtalkParserDefinition extends LogicParserDefinition {
 
     @Override
     public PsiFile createFile(FileViewProvider viewProvider) {
-        return new LogtalkFile(viewProvider);
+        return new PrologFile(viewProvider);
     }
 }

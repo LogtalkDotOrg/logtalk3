@@ -29,12 +29,18 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="org.logtalk.intellij.LogtalkFileTypeFactory"/>
+
     <lang.parserDefinition language="Logtalk" implementationClass="org.logtalk.intellij.LogtalkParserDefinition"/>
     <lang.syntaxHighlighterFactory language="Logtalk" implementationClass="org.logtalk.intellij.LogtalkSyntaxHighlighterFactory"/>
     <lang.braceMatcher language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkPairedBraceMatcher"/>
     <lang.commenter language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkCommenter"/>
     <lang.foldingBuilder language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkFoldingBuilder"/>
 
+    <lang.parserDefinition language="Prolog" implementationClass="org.logtalk.intellij.PrologParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="Prolog" implementationClass="org.logtalk.intellij.LogtalkSyntaxHighlighterFactory"/>
+    <lang.braceMatcher language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkPairedBraceMatcher"/>
+    <lang.commenter language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkCommenter"/>
+    <lang.foldingBuilder language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkFoldingBuilder"/>
   </extensions>
 
   <actions>
