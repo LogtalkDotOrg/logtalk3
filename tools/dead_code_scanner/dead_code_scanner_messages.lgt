@@ -22,9 +22,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2016/10/12,
+		date is 2017/02/06,
 		comment is 'Logtalk "dead_code_scanner" tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -41,7 +41,8 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(Message, dead_code_scanner) -->
-		message_tokens(Message).
+		{ground_term_copy(Message, GroundMessage)},
+		message_tokens(GroundMessage).
 
 	message_tokens(scan_started) -->
 		[].
@@ -62,8 +63,7 @@
 		['Scanning file ~w ...'-[File], nl].
 
 	message_tokens(scanning_entity(Kind, Entity)) -->
-		{ground_term_copy(Entity, GroundEntity)},
-		['Scanning ~q ~w ...'-[GroundEntity, Kind], nl].
+		['Scanning ~q ~w ...'-[Entity, Kind], nl].
 
 	message_tokens(dead_predicate(_Entity, Predicate, File, Line)) -->
 		likely_dead_predicate(Predicate),
