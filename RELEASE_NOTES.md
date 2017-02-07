@@ -36,6 +36,12 @@ compiling entity opening directives.
 * FIXED: Bug where the compiler would fail to report an error when a class
 attempts to specialize a prototype.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Typo in call to internal compiler predicate in the ECLiPSe adapter
+file.
+
 Library
 -------
 

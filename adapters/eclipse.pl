@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on August 7, 2016
+%  Last updated on February 7, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -31,7 +31,7 @@
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
 '$lgt_eclipse_discontiguous_predicate_handler'(Err, Goal) :-
-	'$lgt_increment_loadind_warnings_counter',
+	'$lgt_increment_loading_warnings_counter',
 	error(default(Err), Goal).
 
 
