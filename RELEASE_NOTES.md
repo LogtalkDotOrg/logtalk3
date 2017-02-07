@@ -39,8 +39,8 @@ attempts to specialize a prototype.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Typo in call to internal compiler predicate in the ECLiPSe adapter
-file.
+* FIXED: Passing to the Logtalk compiler discontiguous predicate warning events
+posted by the ECLiPSe compiler.
 
 Library
 -------

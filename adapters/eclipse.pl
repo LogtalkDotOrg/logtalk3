@@ -31,7 +31,11 @@
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
 '$lgt_eclipse_discontiguous_predicate_handler'(Err, Goal) :-
-	'$lgt_increment_loading_warnings_counter',
+	(	'$lgt_increment_loading_warnings_counter' ->
+		true
+	;	% likely not compiling a Logtalk source file
+		true
+	),
 	error(default(Err), Goal).
 
 
