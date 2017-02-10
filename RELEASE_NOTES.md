@@ -42,8 +42,11 @@ attempts to specialize a prototype.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Passing to the Logtalk compiler discontiguous predicate warning events
-posted by the ECLiPSe compiler.
+* FIXED: Expanding source file paths when we have a sub-directory and a file
+with the same name in a directory when using ECLiPSe as the backend compiler.
+
+* FIXED: Passing to the Logtalk compiler discontiguous predicate warning
+events posted by the ECLiPSe compiler.
 
 Library
 -------

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 7, 2017
+%  Last updated on February 10, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -333,7 +333,13 @@ forall(Generate, Test) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	canonical_path_name(Path, ExpandedPath).
+	canonical_path_name(Path, ExpandedPath0),
+	% delete any ending slash as we can have a file with
+	% the same name (minus extension) as a sub-directory
+	(	sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+		sub_atom(ExpandedPath0, 0, _, 1, ExpandedPath)
+	;	ExpandedPath = ExpandedPath0
+	).
 
 
 % '$lgt_file_exists'(+atom)
