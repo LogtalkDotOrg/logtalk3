@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Expand the file argument of `include/1` directives as a source file
+argument (thus allowing the file name extension to be omitted).
+
 * CHANGED: Exception thrown when a category attempts to complement itself for
 consistency with similar cases.
 

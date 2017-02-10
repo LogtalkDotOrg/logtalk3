@@ -2933,7 +2933,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 2, rc2)).
+'$lgt_version_data'(logtalk(3, 9, 2, rc3)).
 
 
 
@@ -20737,17 +20737,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_read_file_to_terms'(Mode, File, Terms) :-
+	% check file specification and expand library notation if used
 	catch(
 		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
 		error(FileError, _),
 		throw(FileError)
 	),
-	(	'$lgt_file_exists'(ExpandedFile) ->
+	% find the full file name as the extension may be missing
+	(	'$lgt_source_file_name'(ExpandedFile, _, _, _, SourceFile),
+		% avoid a loading loop by checking that the file name is different
+		% from the name of the file containing the include/1 directive
+		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
+		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(existence_error(file, File))
 	),
 	catch(
-		'$lgt_open'(ExpandedFile, read, Stream, []),
+		'$lgt_open'(SourceFile, read, Stream, []),
 		error(OpenError, _),
 		throw(OpenError)
 	),
