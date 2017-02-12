@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on November 2, 2016
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,7 @@
 #############################################################################
 
 
-operating_system=`uname -s`
+operating_system=$(uname -s)
 
 if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
 	# assume that we're running on Windows using the Git for Windows bash shell
@@ -51,7 +51,7 @@ tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),log
 
 
 print_version() {
-	echo "`basename $0` 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
@@ -62,14 +62,14 @@ usage_help()
 	echo "This script updates the SVG diagrams of the core entities, the library, and the development tools."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-p prolog]"
-	echo "  `basename $0` -v"
-	echo "  `basename $0` -h"
+	echo "  $(basename "$0") [-p prolog]"
+	echo "  $(basename "$0") -v"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -p back-end Prolog compiler (default is $backend)"
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
-	echo "  -v print version of `basename $0`"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 	exit 0
@@ -127,14 +127,14 @@ elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
 	usage_help
 	exit 1
-elif [ ! `command -v $backend` ] ; then
+elif [ ! "$(command -v $backend)" ] ; then
     echo "Error! Default back-end Prolog compiler not found: $prolog"
 	usage_help
     exit 1
 fi
 
 
-cd ../docs
+cd ../docs || exit 1
 
 $logtalk "$core_goal"
 $logtalk "$library_goal"
@@ -144,6 +144,6 @@ for f in *.dot; do
 	dot -Tsvg "$f" > "${f%.*}.svg"
 done
 
-rm *.dot
+rm ./*.dot
 
 exit 0

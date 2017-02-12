@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on September 29, 2016
+##   Last updated on Februaru 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.17"
+	echo "$(basename "$0") 0.18"
 	exit 0
 }
 
@@ -92,10 +92,10 @@ arguments=""
 run_tests() {
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
-	cd "$unit"
+	cd "$unit" || exit 1
 	echo '*******************************************************************************'
 	echo "***** Testing $unit_short"
-	name=$(echo "$unit"|sed 's|/|__|g')
+	name=${unit////__}
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 		run_test "$name" "$format_goal,$tester_optimal_goal"
 		tests_exit=$?
@@ -156,7 +156,7 @@ usage_help()
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
-	echo "  -s supress path prefix (default is "$prefix")"
+	echo "  -s supress path prefix (default is $prefix)"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
@@ -179,7 +179,7 @@ do
 done
 
 shift $((OPTIND - 1))
-arguments="$@"
+arguments="$*"
 
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
@@ -253,11 +253,11 @@ elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
 	usage_help
 	exit 1
-elif [ ! $(command -v $backend) ] ; then
+elif [ ! "$(command -v $backend)" ] ; then
     echo "Error! Default back-end Prolog compiler not found: $prolog"
 	usage_help
     exit 1
-elif [ ! $(command -v $logtalk) ] ; then
+elif [ ! "$(command -v $logtalk)" ] ; then
     echo "Error! $logtalk integration script for $prolog not found."
 	echo "       Check that its directory is in your execution path."
     exit 1
@@ -329,46 +329,46 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 
 testsets=0
 output="$(find "$base" -name "tester.lgt" -or -name "tester.logtalk")"
-while read file && [ "$file" != "" ]; do
+while read -r file && [ "$file" != "" ]; do
 	((testsets++))
 	run_tests "$file"
 done <<< "$output"
 
-cd "$results"
-timeouts=$(grep -s -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
-crashes=$(grep -s -a 'LOGTALK_CRASH' *.errors | wc -l | sed 's/ //g')
-testsetruns=$(($testsets-$timeouts-$crashes))
-skipped=$(grep -s -a ': skipped' *.results | wc -l | sed 's/ //g')
-passed=$(grep -s -a ': success' *.results | wc -l | sed 's/ //g')
-failed=$(grep -s -a ': failure' *.results | wc -l | sed 's/ //g')
-total=$(($skipped+$passed+$failed))
+cd "$results" || exit 1
+timeouts=$(cat -- *.errors | grep -c 'LOGTALK_TIMEOUT')
+crashes=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
+testsetruns=$((testsets-timeouts-crashes))
+skipped=$(cat -- *.results | grep -c ': skipped')
+passed=$(cat -- *.results | grep -c ': success')
+failed=$(cat -- *.results | grep -c ': failure')
+total=$((skipped+passed+failed))
 
 echo "*******************************************************************************"
 echo "***** Compilation errors/warnings and failed unit tests"
 echo "***** (compilation errors/warnings might be expected depending on the test)"
 echo "*******************************************************************************"
-grep -s -a -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
-grep -s -a -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' *.results | sed 's/.results//' | tee -a errors.all
-grep -s -a -h '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '*     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -A2 'syntax_error' -- *.results | sed 's/.results//' | tee errors.all
+grep -s -a -A2 'syntax_error' -- *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' -- *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -h -F '*     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h -F '*     ' -- *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_TIMEOUT' *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_CRASH' *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_CRASH' -- *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep -s -a ': skipped' *.results | sed 's/: skipped//' | sed 's/.results:% / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a ': skipped' -- *.results | sed 's/: skipped//' | sed 's/.results:% / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep -s -a ': failure' *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a ': failure' -- *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** $testsets test sets: $testsetruns completed, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
@@ -379,7 +379,7 @@ end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 echo "***** Batch testing ended @ $end_date"
 echo '*******************************************************************************'
 
-if [ $failed -eq 0 ] && [ $timeouts -eq 0 ] && [ $crashes -eq 0 ] ; then
+if [ "$failed" -eq 0 ] && [ "$timeouts" -eq 0 ] && [ "$crashes" -eq 0 ] ; then
 	exit 0
 else
 	exit 1

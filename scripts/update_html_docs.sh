@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on November 2, 2016
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,7 @@
 #############################################################################
 
 
-operating_system=`uname -s`
+operating_system=$(uname -s)
 
 if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
 	# assume that we're running on Windows using the Git for Windows bash shell
@@ -42,14 +42,14 @@ backend=swipl
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
 
-cwd=`pwd`
+cwd=$(pwd)
 
 # documentation goal
 goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]),lgtdoc::all([xml_docs_directory('$cwd/../docs'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]),halt."
 
 
 print_version() {
-	echo "`basename $0` 0.8"
+	echo "$(basename "$0") 0.9"
 	exit 0
 }
 
@@ -60,14 +60,14 @@ usage_help()
 	echo "This script updates the HTML documentation of the library and the development tools."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-p prolog]"
-	echo "  `basename $0` -v"
-	echo "  `basename $0` -h"
+	echo "  $(basename "$0") [-p prolog]"
+	echo "  $(basename "$0") -v"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -p back-end Prolog compiler (default is $backend)"
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
-	echo "  -v print version of `basename $0`"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 	exit 0
@@ -125,17 +125,17 @@ elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
 	usage_help
 	exit 1
-elif [ ! `command -v $backend` ] ; then
+elif [ ! "$(command -v $backend)" ] ; then
     echo "Error! Default back-end Prolog compiler not found: $prolog"
 	usage_help
     exit 1
 fi
 
 $logtalk "$goal"
-cd "$cwd/../docs"
+cd "$cwd/../docs" || exit 1
 lgt2html
-rm *.xml
-rm *.dtd
-rm *.xsd
+rm ./*.xml
+rm ./*.dtd
+rm ./*.xsd
 
 exit 0

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk version select script
-##   Last updated on November 17, 2013
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -24,16 +24,16 @@
 
 
 print_version() {
-	echo "`basename $0` 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
 
 list_versions() {
     echo "Available versions:"
-	if [ `(ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null` -gt 0 ]; then
+	if [ $( (ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null ) -gt 0 ]; then
 		for path in $(ls -d "$prefix"/logtalk-*); do
-			file=`basename $path`
+			file=$(basename "$path")
 			echo "  $file"
 		done
 		echo
@@ -61,14 +61,14 @@ usage_help() {
 	echo "This script allows switching between installed Logtalk versions"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` version"
-	echo "  `basename $0` -v"
-	echo "  `basename $0` -l"
-	echo "  `basename $0` -s"
-	echo "  `basename $0` -h"
+	echo "  $(basename "$0") version"
+	echo "  $(basename "$0") -v"
+	echo "  $(basename "$0") -l"
+	echo "  $(basename "$0") -s"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of `basename $0`"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -l list available versions"
 	echo "  -s show the currently selected version"
 	echo "  -h help"
@@ -78,10 +78,10 @@ usage_help() {
 
 
 valid_version() {
-	if [ `(ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null` -gt 0 ]; then
+	if [ $( (ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null ) -gt 0 ]; then
 	    for path in $(ls -d "$prefix"/logtalk-*); do
-			version=`basename $path`
-	        if [ $1 == $version ]; then
+			version=$(basename "$path")
+	        if [ "$1" == "$version" ]; then
 	            return 0
 	        fi
 	    done
@@ -91,14 +91,14 @@ valid_version() {
 
 
 switch_version() {
-	valid_version $1
+	valid_version "$1"
 	if [ 0 != ${?} ]; then
     	echo "Invalid version: $1"
     	exit 1
 	else
-		cd "$prefix"
+		cd "$prefix" || exit 1
 		rm -f logtalk
-		ln -sf $1 logtalk
+		ln -sf "$1" logtalk
     	echo "Switched to version: $1"
 		exit 0
 	fi
@@ -137,7 +137,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 
-prefix=`dirname "$LOGTALKHOME"`
+prefix=$(dirname "$LOGTALKHOME")
 
 
 while getopts "vlsh" Option
@@ -155,7 +155,7 @@ done
 if [ "$1" == "" ]; then
 	usage_help
 else
-	switch_version $1
+	switch_version "$1"
 	error=$?
 	if [ 0 != $error ]; then
 		echo "An error occurred when activating version \"$version\"!"

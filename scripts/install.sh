@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on January 5, 2017
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -32,14 +32,15 @@ else
 	esac
 fi
 
-cd `dirname $0`
+# allow using this script from any directory
+cd "$(dirname "$0")" || exit 1
 
-version=`cat ../VERSION.txt`
+version=$(cat ../VERSION.txt)
 default_directory=logtalk-$version
 
 print_version() {
-	echo "Current `basename $0` version:"
-	echo "  0.3"
+	echo "Current $(basename "$0") version:"
+	echo "  0.4"
 	exit 0
 }
 
@@ -50,9 +51,9 @@ usage_help()
 	echo "It may require a user with administrative privileges or the use of sudo."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-p prefix] [-d directory]"
-	echo "  `basename $0` -v"
-	echo "  `basename $0` -h"
+	echo "  $(basename "$0") [-p prefix] [-d directory]"
+	echo "  $(basename "$0") -v"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -p prefix directory for the installation (default is $default_prefix)"
@@ -107,10 +108,9 @@ rm -f "$prefix/share/logtalk"
 
 mkdir "$prefix/share/$directory"
 
-cd ..
-cp -R * "$prefix/share/$directory"
+cp -R ../* "$prefix/share/$directory"
 
-cd "$prefix/share/$directory"
+cd "$prefix/share/$directory" || exit 1
 chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 
@@ -118,7 +118,7 @@ cd ..
 ln -sf "$directory" logtalk
 
 mkdir -p "$prefix/bin"
-cd "$prefix/bin"
+cd "$prefix/bin" || exit 1
 
 ln -sf ../share/logtalk/scripts/logtalk_tester.sh logtalk_tester
 ln -sf ../share/logtalk/scripts/logtalk_doclet.sh logtalk_doclet
@@ -153,10 +153,10 @@ ln -sf ../share/logtalk/integration/xsbmtlgt.sh xsbmtlgt
 ln -sf ../share/logtalk/integration/yaplgt.sh yaplgt
 
 mkdir -p ../share/man/man1
-cd ../share/man/man1
+cd ../share/man/man1 || exit 1
 gzip --best ../../logtalk/man/man1/*.1
 for file in ../../logtalk/man/man1/*.1.gz ; do
-	ln -sf "$file" `basename "$file"`
+	ln -sf "$file" "$(basename "$file")"
 done
 
 echo "The following integration scripts are installed for running Logtalk"
@@ -189,7 +189,7 @@ echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"
 echo "for compatibility notes or consult the integration script man page."
 echo
 
-if [ "`command -v update-mime-database`" != "" ]; then
+if [ "$(command -v update-mime-database)" != "" ]; then
 	mkdir -p "$prefix/share/mime/packages"
 	rm -f "$prefix/share/mime/packages/logtalk.xml"
 	cp "$prefix/share/$directory/scripts/freedesktop/logtalk.xml" "$prefix/share/mime/packages/logtalk.xml"

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on January 5, 2017
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -51,17 +51,17 @@ if ! [ "$LOGTALKHOME" ]; then
 		exit 1
 fi
 
-version=`cat "$LOGTALKHOME/VERSION.txt"`
+version=$(cat "$LOGTALKHOME/VERSION.txt")
 directory=logtalk-$version
 
 echo
 echo "Uninstalling Logtalk $version system-level files..."
 echo
 
-cd "$LOGTALKHOME"/..
+cd "$LOGTALKHOME"/.. || exit 1
 rm -rf "$directory"
 rm -f logtalk
-cd ../bin
+cd ../bin || exit 1
 rm -f bplgt
 rm -f cxlgt
 rm -f eclipselgt
@@ -85,7 +85,7 @@ rm -f swilgt
 rm -f xsblgt
 rm -f xsbmtlgt
 rm -f yaplgt
-cd ../share/man/man1
+cd ../share/man/man1 || exit 1
 rm -f bplgt.1.gz
 rm -f cxlgt.1.gz
 rm -f eclipselgt.1.gz

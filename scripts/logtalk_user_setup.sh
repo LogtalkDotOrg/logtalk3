@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on January 5, 2017
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,7 @@ fi
 
 if [ -d "$LOGTALKUSER" ]
 then
-	date=`eval date \"+%Y-%m-%d-%H%M%S\"`
+	date=$(eval date \"+%Y-%m-%d-%H%M%S\")
 	mv "$LOGTALKUSER" "$LOGTALKUSER-backup-$date"
 	echo "Created a backup of the existing \"\$LOGTALKUSER\" directory:"
 	echo

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk RPM package build script
-##   Last updated on October 3, 2013
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -22,21 +22,21 @@
 ## 
 #############################################################################
 
-version=`cat ../../VERSION.txt`
+version=$(cat ../../VERSION.txt)
 
-version_clean=`echo $version | sed -e 's/-stable$//' | sed -e 's/-/_/g'`
+version_clean=$(echo "$version" | sed -e 's/-stable$//' | sed -e 's/-/_/g')
 archive=logtalk-$version
 
 directory="$PWD"
 
-cd ../..
-tar -cjf ~/rpmbuild/SOURCES/$archive.tar.bz2 .
+cd ../.. || exit 1
+tar -cjf "$HOME/rpmbuild/SOURCES/$archive.tar.bz2" .
 mkdir -p ~/rpmbuild/RPMS/noarch
 
-cd "$directory"
+cd "$directory" || exit 1
 sed -e 's/LOGTALK_VERSION/'$version_clean'/g' -e 's/LOGTALK_INSTALL_DIRECTORY/'$archive'/g' logtalk.spec.in > logtalk.spec
 rpmbuild -ba --target=noarch-*-linux logtalk.spec
 
-cd ~/rpmbuild/RPMS/noarch
-echo $PWD
+cd "$HOME/rpmbuild/RPMS/noarch" || exit 1
+echo "$PWD"
 ls -l

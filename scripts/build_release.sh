@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on January 7, 2017
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -25,32 +25,32 @@
 
 if [ -z "$1" ]; then
 	git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
-	version=`cat lgtclone/VERSION.txt | sed -e 's/-stable$//'`
+	version=$(sed -e 's/-stable$//' < lgtclone/VERSION.txt)
 
-	mv lgtclone logtalk-$version
+	mv lgtclone "logtalk-$version"
 else
 	version="$1"
-	git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git logtalk-$version
+	git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git "logtalk-$version"
 fi
 
-directory=`PWD`
+directory=$(PWD)
 
-cd logtalk-$version
+cd "logtalk-$version" || exit 1
 chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 cd ..
 
-cp -R logtalk-$version/scripts/pack pack-$version
-cp -R logtalk-$version pack-$version/logtalk
-mv pack-$version/settings.lgt pack-$version/logtalk/logtalk-$version
-cd pack-$version
-tar zcvf logtalk-$version.tgz logtalk
-mv logtalk-$version.tgz ..
+cp -R "logtalk-$version/scripts/pack" "pack-$version"
+cp -R "logtalk-$version" "pack-$version/logtalk"
+mv "pack-$version/settings.lgt" "pack-$version/logtalk/logtalk-$version"
+cd "pack-$version" || exit 1
+tar zcvf "logtalk-$version.tgz" logtalk
+mv "logtalk-$version.tgz" ..
 cd ..
 
-cp -R logtalk-$version/manuals logtalk-manuals-$version
-tar -czf logtalk-manuals-$version.tgz logtalk-manuals-$version
-tar -cjf logtalk-$version.tar.bz2 logtalk-$version
+cp -R "logtalk-$version/manuals" "logtalk-manuals-$version"
+tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
+tar -cjf "logtalk-$version.tar.bz2" "logtalk-$version"
 
 rm -rf debian
 mkdir -p debian/usr/bin
@@ -58,7 +58,7 @@ mkdir -p debian/usr/share/doc/logtalk
 mkdir -p debian/usr/share/doc-base
 mkdir -p debian/usr/share/menu
 mkdir -p debian/DEBIAN
-cd logtalk-$version/scripts
+cd "logtalk-$version/scripts" || exit 1
 ./install.sh -p "$directory/debian/usr"
 rm -rf "$directory/debian/usr/share/mime"
 cp debian/logtalk.doc-base "$directory/debian/usr/share/doc-base/logtalk-docs"
@@ -77,14 +77,14 @@ sudo sed -e "s/^Version:.*/Version: $version/" -i '' "$directory/debian/DEBIAN/c
 cp debian/postinst "$directory/debian/DEBIAN"
 cp debian/prerm "$directory/debian/DEBIAN"
 cp debian/postrm "$directory/debian/DEBIAN"
-cd "$directory"
-dpkg-deb --build debian logtalk_$version-1_all.deb
+cd "$directory" || exit 1
+dpkg-deb --build debian "logtalk_$version-1_all.deb"
 
-sha256="`openssl dgst -sha256 "logtalk-$version.tar.bz2" | sed 's/^.* //'`"
-rmd160="`openssl dgst -rmd160 "logtalk-$version.tar.bz2" | sed 's/^.* //'`"
+sha256="$(openssl dgst -sha256 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
+rmd160="$(openssl dgst -rmd160 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
 sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
-sudo cp -f logtalk-$version.tar.bz2 /opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2
-cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/
+sudo cp -f "logtalk-$version.tar.bz2" "/opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2"
+cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/ || exit 1
 sudo mv -f Portfile Portfile.old
 sudo cp "$directory/logtalk-$version/scripts/macosx/Portfile" .
 sudo sed -e "s/^version.*/version $version/" -i '' Portfile
@@ -93,11 +93,11 @@ sudo sed -e "s/rmd160.*/rmd160 $rmd160/" -i '' Portfile
 sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk
-cp -R work/logtalk-$version.pkg "$directory"
+cp -R "work/logtalk-$version.pkg" "$directory"
 sudo port clean logtalk
 
-cd "$directory/logtalk-$version/scripts/linux"
+cd "$directory/logtalk-$version/scripts/linux" || exit 1
 ./build_rpm.sh
 mv "$HOME"/rpmbuild/RPMS/noarch/logtalk-*.rpm "$directory"
 
-cd "$directory"
+cd "$directory" || exit 1

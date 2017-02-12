@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on September 29, 2016
+##   Last updated on February 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.2"
 	exit 0
 }
 
@@ -77,10 +77,10 @@ arguments=""
 run_doclets() {
 	directory=$(dirname "$1")
 	directory_short=${directory#$prefix}
-	cd "$directory"
+	cd "$directory" || exit 1
 	echo '*******************************************************************************'
 	echo "***** Documenting $directory_short"
-	name=$(echo "$directory"|sed 's|/|__|g')
+	name=${directory////__}
 	run_doclet "$name" "$documenting_goal"
 	doclet_exit=$?
 	if [ $doclet_exit -eq 0 ] ; then
@@ -124,7 +124,7 @@ usage_help()
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
-	echo "  -s supress path prefix (default is "$prefix")"
+	echo "  -s supress path prefix (default is $prefix)"
 	echo "  -- arguments to be passed to the integration script used to run the doclets (no default)"
 	echo "  -h help"
 	echo
@@ -145,7 +145,7 @@ do
 done
 
 shift $((OPTIND - 1))
-arguments="$@"
+arguments="$*"
 
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
@@ -211,11 +211,11 @@ elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
 	usage_help
 	exit 1
-elif [ ! $(command -v $backend) ] ; then
+elif [ ! "$(command -v $backend)" ] ; then
     echo "Error! Default back-end Prolog compiler not found: $prolog"
 	usage_help
     exit 1
-elif [ ! $(command -v $logtalk) ] ; then
+elif [ ! "$(command -v $logtalk)" ] ; then
     echo "Error! $logtalk integration script for $prolog not found."
 	echo "       Check that its directory is in your execution path."
     exit 1
@@ -257,37 +257,37 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 
 doclets=0
 output="$(find "$base" -name "doclet.lgt" -or -name "doclet.logtalk")"
-while read file && [ "$file" != "" ]; do
+while read -r file && [ "$file" != "" ]; do
 	((doclets++))
 	run_doclets "$file"
 done <<< "$output"
 
-cd "$results"
-timeouts=$(grep -s -a 'LOGTALK_TIMEOUT' *.errors | wc -l | sed 's/ //g')
-crashes=$(grep -s -a 'LOGTALK_CRASH' *.errors | wc -l | sed 's/ //g')
-failures=$(grep -s -a 'failed' *.results | wc -l | sed 's/ //g')
+cd "$results" || exit 1
+timeouts=$(cat -- *.errors | grep -c 'LOGTALK_TIMEOUT')
+crashes=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
+failures=$(cat -- *.results | grep -c 'failed')
 
 echo "*******************************************************************************"
 echo "***** Compilation errors/warnings and failed doclets"
 echo "*******************************************************************************"
-grep -s -a -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
-grep -s -a -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' *.results | sed 's/.results//' | tee -a errors.all
-grep -s -a -h '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '*     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -A2 'syntax_error' -- *.results | sed 's/.results//' | tee errors.all
+grep -s -a -A2 'syntax_error' -- *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' -- *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -h -F '*     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
+grep -s -a -h -F '*     ' -- *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_TIMEOUT' *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_CRASH' *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_CRASH' -- *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Doclet failures"
 echo "*******************************************************************************"
-grep -s -a 'failed' *.results
+grep -s -a 'failed' -- *.results
 echo "*******************************************************************************"
 echo "***** $doclets doclets: $timeouts timeouts, $crashes crashes, $failures failures"
 echo "*******************************************************************************"
@@ -297,7 +297,7 @@ end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 echo "***** Batch documentation processing ended @ $end_date"
 echo '*******************************************************************************'
 
-if [ $failures -eq 0 ] && [ $timeouts -eq 0 ] && [ $crashes -eq 0 ] ; then
+if [ "$failures" -eq 0 ] && [ "$timeouts" -eq 0 ] && [ "$crashes" -eq 0 ] ; then
 	exit 0
 else
 	exit 1

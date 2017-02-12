@@ -79,6 +79,11 @@ Tests
 `create_category/4` built-in predicates to check the expected errors when
 the declared entity relations are not valid.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Outdated and fragile constructs in most Bash shell scripts.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
