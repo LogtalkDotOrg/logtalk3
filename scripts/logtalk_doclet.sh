@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on February 12, 2017
+##   Last updated on February 13, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.2"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
@@ -72,7 +72,6 @@ logtalk_call="$logtalk -g"
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
-arguments=""
 
 run_doclets() {
 	directory=$(dirname "$1")
@@ -99,9 +98,9 @@ run_doclet() {
 	name="$1"
 	goal="$2"
 	if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
-		$timeout_command $timeout $logtalk_call "$goal" -- $arguments < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		$timeout_command $timeout $logtalk_call "$goal" -- "$@" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
 	else
-		$logtalk_call "$goal" -- $arguments < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		$logtalk_call "$goal" -- "$@" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
 	fi
 	return $?
 }
@@ -145,7 +144,6 @@ do
 done
 
 shift $((OPTIND - 1))
-arguments="$*"
 
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
