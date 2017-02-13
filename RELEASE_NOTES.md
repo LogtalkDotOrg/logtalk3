@@ -79,6 +79,12 @@ Tests
 `create_category/4` built-in predicates to check the expected errors when
 the declared entity relations are not valid.
 
+Examples
+--------
+
+* FIXED: The options used for generating the API HTML documentation in the
+`zoom_doclet` example.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -22,9 +22,9 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/10/30,
+		date is 2017/02/12,
 		comment is 'Example of a doclet object generating linking diagrams using the zoom/1 option.'
 	]).
 
@@ -38,7 +38,7 @@
 	% (these goals will be called in the context of "user")
 	doc_goal(set_logtalk_flag(source_data, on)).
 	doc_goal(logtalk_load([dead_code_scanner(loader), lgtdoc(loader), diagrams(loader)])).
-	doc_goal(lgtdoc::library(dead_code_scanner, [xml_docs_directory(docs)])).
+	doc_goal(lgtdoc::library(dead_code_scanner, [xml_docs_directory('$LOGTALKUSER/tools/doclet/docs'), omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/'])])).
 	doc_goal(entity_diagram::library(dead_code_scanner, [title('Dead code scanner tool'), zoom(true)| Options])) :-
 		common_options(Options).
 	doc_goal(xref_diagram::entity(dead_code_scanner, [title('Dead code scanner main code')| Options])) :-
