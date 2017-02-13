@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2017/02/05,
+		date is 2017/02/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -535,6 +535,9 @@
 		['Syntax error: ~w'-[Error], nl].
 	error_tokens(system_error) -->
 		['System error'-[], nl].
+	% special case of errors in included files
+	error_tokens(include_error) -->
+		[].
 	% catchall clause
 	error_tokens(Error) -->
 		['~q'-[Error], nl].

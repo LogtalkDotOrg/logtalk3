@@ -2933,7 +2933,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 2, rc3)).
+'$lgt_version_data'(logtalk(3, 9, 2, rc4)).
 
 
 
@@ -6745,6 +6745,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_compiler_open_stream_error_handler'(+atom, @compound)
+%
+% handles open stream errors in included files
+
+'$lgt_compiler_include_open_stream_error_handler'(Path, Error) :-
+	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
+	'$lgt_first_stage_error_handler'(error(include_error, directive(include(Path)))).
+
+
+
+% '$lgt_compiler_include_syntax_error_handler'(+atom, +atom, @stream_or_alias, @compound)
+%
+% handles syntax errors in included files
+
+'$lgt_compiler_include_syntax_error_handler'(Path, ExpandedPath, Stream, Error) :-
+	'$lgt_current_line_numbers'(Stream, Lines),
+	'$lgt_print_message'(error, core, compiler_error(ExpandedPath, Lines, Error)),
+	catch('$lgt_close'(Stream), _, true),
+	'$lgt_first_stage_error_handler'(error(include_error, directive(include(Path)))).
+
+
+
+% '$lgt_compiler_include_error_handler'(+atom, +atom, @pair(integer), @compound)
+%
+% handles compiler errors in included files
+
+'$lgt_compiler_include_error_handler'(Path, ExpandedPath, Lines, Error) :-
+	'$lgt_print_message'(error, core, compiler_error(ExpandedPath, Lines, Error)),
+	'$lgt_first_stage_error_handler'(error(include_error, directive(include(Path)))).
+
+
+
 % '$lgt_read_term'(@stream, -term, @list, -pair(integer))
 %
 % remember term position and variable names in order to support the
@@ -7230,6 +7262,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	true
 	).
+
+
+
+% '$lgt_compile_included_file_terms'(+atom, +atom, +list(term), +compilation_context)
+%
+% compiles a list of file terms (clauses, directives, or grammar rules) read from an
+% included file
+
+'$lgt_compile_included_file_terms'([Term-TermLines| Terms], Path, ExpandedPath, Ctx) :-
+	'$lgt_check'(nonvar, Term, term(Term)),
+	% only the compilation context mode and position should be shared between different terms
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
+	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
+	catch(
+		'$lgt_compile_file_term'(Term, NewCtx),
+		Error,
+		'$lgt_compiler_include_error_handler'(Path, ExpandedPath, TermLines, Error)
+	),
+	'$lgt_compile_included_file_terms'(Terms, Path, ExpandedPath, Ctx).
+
+'$lgt_compile_included_file_terms'([], _, _, _).
 
 
 
@@ -7753,8 +7806,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% handling of this Prolog directive is necessary to
 	% support the Logtalk term-expansion mechanism
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_read_file_to_terms'(Mode, File, Terms),
-	'$lgt_compile_file_terms'(Terms, Ctx).
+	'$lgt_read_file_to_terms'(Mode, File, ExpandedFile, Terms),
+	'$lgt_compile_included_file_terms'(Terms, File, ExpandedFile, Ctx).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	!,
@@ -7894,10 +7947,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_read_file_to_terms'(Mode, File, Terms),
+	'$lgt_read_file_to_terms'(Mode, File, ExpandedFile, Terms),
 	(	Mode == runtime ->
 		'$lgt_compile_runtime_terms'(Terms)
-	;	'$lgt_compile_file_terms'(Terms, Ctx)
+	;	'$lgt_compile_included_file_terms'(Terms, File, ExpandedFile, Ctx)
 	).
 
 % object opening and closing directives
@@ -14646,13 +14699,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_current_line_numbers'(-pair(integer))
 %
-% returns the current term line numbers, represented as a pair StartLine-EndLine
+% returns the current term line numbers, represented as a pair
+% StartLine-EndLine, for the compiler input stream
 
 '$lgt_current_line_numbers'(Lines) :-
 	(	'$lgt_pp_term_variable_names_lines_'(_, _, Lines) ->
 		true
 	;	stream_property(Input, alias(logtalk_compiler_input)),
 		'$lgt_stream_current_line_number'(Input, Line) ->
+		Lines = Line-Line
+	;	Lines = '-'(-1, -1)
+	).
+
+
+
+% '$lgt_current_line_numbers'(+stream_or_alias, -pair(integer))
+%
+% returns the current term line numbers, represented as a pair
+% StartLine-EndLine, for the given input stream
+
+'$lgt_current_line_numbers'(Stream, Lines) :-
+	(	'$lgt_stream_current_line_number'(Stream, Line) ->
 		Lines = Line-Line
 	;	Lines = '-'(-1, -1)
 	).
@@ -20736,7 +20803,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_sum_list'(Values, Sum1, Sum).
 
 
-'$lgt_read_file_to_terms'(Mode, File, Terms) :-
+'$lgt_read_file_to_terms'(Mode, File, SourceFile, Terms) :-
 	% check file specification and expand library notation if used
 	catch(
 		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
@@ -20754,13 +20821,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	catch(
 		'$lgt_open'(SourceFile, read, Stream, []),
-		error(OpenError, _),
-		throw(OpenError)
+		OpenError,
+		'$lgt_compiler_include_open_stream_error_handler'(File, OpenError)
 	),
 	catch(
 		'$lgt_read_stream_to_terms'(Mode, Stream, Terms),
-		error(TermError, _),
-		('$lgt_close'(Stream), throw(TermError))
+		TermError,
+		'$lgt_compiler_include_syntax_error_handler'(File, SourceFile, Stream, TermError)
 	),
 	'$lgt_close'(Stream).
 
@@ -20777,7 +20844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_read_stream_to_terms_runtime'(end_of_file, _, []) :-
 	!.
-'$lgt_read_stream_to_terms_runtime'(Term, Stream, [Term| Terms]) :-
+'$lgt_read_stream_to_terms_runtime'(Term, Stream, [Term-'-'(-1,-1)| Terms]) :-
 	'$lgt_read_term'(Stream, NextTerm, [], _),
 	'$lgt_read_stream_to_terms_runtime'(NextTerm, Stream, Terms).
 
@@ -20788,7 +20855,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_read_stream_to_terms_compile'(end_of_file, _, _, []) :-
 	!.
-'$lgt_read_stream_to_terms_compile'(Term, Singletons, Stream, [Term| Terms]) :-
+'$lgt_read_stream_to_terms_compile'(Term, Singletons, Stream, [Term-Lines| Terms]) :-
+	'$lgt_current_line_numbers'(Stream, Lines),
 	'$lgt_report_singleton_variables'(Singletons, Term),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], _),
 	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, Stream, Terms).
