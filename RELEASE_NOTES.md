@@ -60,6 +60,9 @@ sub-atoms given another atom as delimiter.
 * IMPROVED: Implementation of the `java::array_to_terms/2-3` predicates when
 using the SWI-Prolog/YAP JPL library.
 
+* FIXED: Missing `compound` type implementation in the `type` library object.
+Thanks to Ebrahim Azarisooreh for the bug report.
+
 * FIXED: Inconsistent licensing terms of `rbtree` code. As the Logtalk version
 was originally released under the Artistic License 2.0, we use this license
 relicensing clause to re-release it under Logtalk's Apache License 2.0. Thanks
