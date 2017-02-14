@@ -33,9 +33,6 @@ argument (thus allowing the file name extension to be omitted).
 * CHANGED: Exception thrown when a category attempts to complement itself for
 consistency with similar cases.
 
-* IMPROVED: Compiler error reporting when using `include/1` directives. The
-errors are now reported using the included files names and term positions.
-
 * IMPROVED: More strict compiler checking for valid entity relations when
 compiling entity opening directives.
 
