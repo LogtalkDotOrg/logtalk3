@@ -42,6 +42,10 @@ attempts to specialize a prototype.
 * FIXED: Spurious choice-point when compiling non-standard file-level
 directives.
 
+* FIXED: Handling of the `debug` and `optimize` flags. Turning on one of them
+failed to explicitly turn off the other. This bug would prevent in some cases
+overriding the default compilation mode.
+
 Prolog adapter and integration files
 ------------------------------------
 

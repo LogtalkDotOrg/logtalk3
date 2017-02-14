@@ -2302,6 +2302,14 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_set_compiler_flags'(Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
+	(	'$lgt_member'(optimize(on), Flags) ->
+		retractall('$lgt_pp_file_compiler_flag_'(debug, _)),
+		assertz('$lgt_pp_file_compiler_flag_'(debug, off))
+	;	'$lgt_member'(debug(on), Flags) ->
+		retractall('$lgt_pp_file_compiler_flag_'(optimize, _)),
+		assertz('$lgt_pp_file_compiler_flag_'(optimize, off))
+	;	true
+	),
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
 		% pre-compile hooks in order to speed up entity compilation
 		(	current_object(HookEntity) ->
@@ -2811,6 +2819,14 @@ set_logtalk_flag(Flag, Value) :-
 '$lgt_set_compiler_flag'(Flag, Value) :-
 	retractall('$lgt_current_flag_'(Flag, _)),
 	assertz('$lgt_current_flag_'(Flag, Value)),
+	(	Flag == optimize, Value == on ->
+		retractall('$lgt_current_flag_'(debug, _)),
+		assertz('$lgt_current_flag_'(debug, off))
+	;	Flag == debug, Value == on ->
+		retractall('$lgt_current_flag_'(optimize, _)),
+		assertz('$lgt_current_flag_'(optimize, off))
+	;	true
+	),
 	(	Flag == hook ->
 		% pre-compile hook calls for better performance when compiling files
 		'$lgt_compile_hooks'(Value)
@@ -2933,7 +2949,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 2, rc3)).
+'$lgt_version_data'(logtalk(3, 9, 2, rc4)).
 
 
 
