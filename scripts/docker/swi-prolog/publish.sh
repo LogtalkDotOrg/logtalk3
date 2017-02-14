@@ -2,8 +2,8 @@
 
 #############################################################################
 ##
-##   Logtalk Docker publishing script
-##   Last updated on February 3, 2017
+##   Logtalk Docker publishing script for stable versions
+##   Last updated on February 14, 2017
 ##
 ##   This file is part of Logtalk <http://logtalk.org/>
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
@@ -23,7 +23,7 @@
 ##
 #############################################################################
 
-TAG="3091"
+TAG=$(cat ../../../VERSION.txt | sed -e 's/-stable$//' | sed -e 's/\.//g')
 
 docker build -t logtalk/logtalk3-swi -t logtalk/logtalk3-swi:${TAG} .
 docker push logtalk/logtalk3-swi
