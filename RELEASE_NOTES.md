@@ -42,6 +42,9 @@ compiling entity opening directives.
 * FIXED: Bug where the compiler would fail to report an error when a class
 attempts to specialize a prototype.
 
+* FIXED: Spurious choice-point when compiling non-standard file-level
+directives.
+
 Prolog adapter and integration files
 ------------------------------------
 
