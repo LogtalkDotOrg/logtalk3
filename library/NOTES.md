@@ -22,6 +22,9 @@ documentation see:
 
 [../docs/index.html](http://logtalk.org/docs/index.html)
 
+A plain Prolog version of the Unicode 6.2 standard is also included in the
+`unicode_data` folder. See its `README.md` file for details.
+
 As a general rule, always use the corresponding loader file to load
 library entities. The available loader files are described below.
 

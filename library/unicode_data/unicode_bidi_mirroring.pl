@@ -1,0 +1,629 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of VivoMind Prolog Unicode Resources  
+%  
+%  VivoMind Prolog Unicode Resources is free software distributed using the
+%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
+%  license
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  Last modified: March 13, 2012
+%
+%  Original Unicode file header comments follow
+
+/*
+# BidiMirroring-6.1.0.txt
+# Date: 2011-12-20, 19:31:00 GMT [KW, LI]
+#
+# Bidi_Mirroring_Glyph Property
+# 
+# This file is an informative contributory data file in the
+# Unicode Character Database.
+#
+# Copyright (c) 1991-2011 Unicode, Inc.
+# For terms of use, see http://www.unicode.org/terms_of_use.html
+#
+# This data file lists characters that have the Bidi_Mirrored=Yes property
+# value, for which there is another Unicode character that typically has a glyph
+# that is the mirror image of the original character's glyph.
+#
+# The repertoire covered by the file is Unicode 6.1.0.
+# 
+# The file contains a list of lines with mappings from one code point
+# to another one for character-based mirroring.
+# Note that for "real" mirroring, a rendering engine needs to select
+# appropriate alternative glyphs, and that many Unicode characters do not
+# have a mirror-image Unicode character.
+# 
+# Each mapping line contains two fields, separated by a semicolon (';').
+# Each of the two fields contains a code point represented as a
+# variable-length hexadecimal value with 4 to 6 digits.
+# A comment indicates where the characters are "BEST FIT" mirroring.
+# 
+# Code points for which Bidi_Mirrored=Yes, but for which no appropriate 
+# characters exist with mirrored glyphs, are
+# listed as comments at the end of the file.
+#
+#   Note: (2011-12-19) There is an inconsistency between the 
+#   following statement about the default value
+#   of the Bidi_Mirroring_Glyph property and the
+#   value of the @missing line for Bidi_Mirroring_Glyph in
+#   PropertyValueAliases.txt. This inconsistency was discovered too
+#   late in the release process to be resolved by
+#   the UTC. The inconsistency will be resolved in a future revision.
+#
+# Formally, the default value of the Bidi_Mirroring_Glyph property
+# for each code point is the code point itself, unless a mapping to
+# some other character is specified in this data file. When a code
+# point has the default value for the Bidi_Mirroring_Glyph property,
+# that means that no other character exists whose glyph is suitable
+# for character-based mirroring.
+# 
+# For information on bidi mirroring, see UAX #9: Bidirectional Algorithm,
+# at http://www.unicode.org/unicode/reports/tr9/
+# 
+# This file was originally created by Markus Scherer.
+# Extended for Unicode 3.2, 4.0, 4.1, 5.0, 5.1, 5.2, and 6.0 by Ken Whistler,
+# and for Unicode 6.1 by Ken Whistler and Laurentiu Iancu.
+# 
+# ############################################################
+#
+# Property:	Bidi_Mirroring_Glyph
+#
+*/
+
+unicode_bidi_mirroring(0x0028, 0x0029).	% LEFT PARENTHESIS
+unicode_bidi_mirroring(0x0029, 0x0028).	% RIGHT PARENTHESIS
+unicode_bidi_mirroring(0x003C, 0x003E).	% LESS-THAN SIGN
+unicode_bidi_mirroring(0x003E, 0x003C).	% GREATER-THAN SIGN
+unicode_bidi_mirroring(0x005B, 0x005D).	% LEFT SQUARE BRACKET
+unicode_bidi_mirroring(0x005D, 0x005B).	% RIGHT SQUARE BRACKET
+unicode_bidi_mirroring(0x007B, 0x007D).	% LEFT CURLY BRACKET
+unicode_bidi_mirroring(0x007D, 0x007B).	% RIGHT CURLY BRACKET
+unicode_bidi_mirroring(0x00AB, 0x00BB).	% LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+unicode_bidi_mirroring(0x00BB, 0x00AB).	% RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+unicode_bidi_mirroring(0x0F3A, 0x0F3B).	% TIBETAN MARK GUG RTAGS GYON
+unicode_bidi_mirroring(0x0F3B, 0x0F3A).	% TIBETAN MARK GUG RTAGS GYAS
+unicode_bidi_mirroring(0x0F3C, 0x0F3D).	% TIBETAN MARK ANG KHANG GYON
+unicode_bidi_mirroring(0x0F3D, 0x0F3C).	% TIBETAN MARK ANG KHANG GYAS
+unicode_bidi_mirroring(0x169B, 0x169C).	% OGHAM FEATHER MARK
+unicode_bidi_mirroring(0x169C, 0x169B).	% OGHAM REVERSED FEATHER MARK
+unicode_bidi_mirroring(0x2039, 0x203A).	% SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+unicode_bidi_mirroring(0x203A, 0x2039).	% SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+unicode_bidi_mirroring(0x2045, 0x2046).	% LEFT SQUARE BRACKET WITH QUILL
+unicode_bidi_mirroring(0x2046, 0x2045).	% RIGHT SQUARE BRACKET WITH QUILL
+unicode_bidi_mirroring(0x207D, 0x207E).	% SUPERSCRIPT LEFT PARENTHESIS
+unicode_bidi_mirroring(0x207E, 0x207D).	% SUPERSCRIPT RIGHT PARENTHESIS
+unicode_bidi_mirroring(0x208D, 0x208E).	% SUBSCRIPT LEFT PARENTHESIS
+unicode_bidi_mirroring(0x208E, 0x208D).	% SUBSCRIPT RIGHT PARENTHESIS
+unicode_bidi_mirroring(0x2208, 0x220B).	% ELEMENT OF
+unicode_bidi_mirroring(0x2209, 0x220C).	% NOT AN ELEMENT OF
+unicode_bidi_mirroring(0x220A, 0x220D).	% SMALL ELEMENT OF
+unicode_bidi_mirroring(0x220B, 0x2208).	% CONTAINS AS MEMBER
+unicode_bidi_mirroring(0x220C, 0x2209).	% DOES NOT CONTAIN AS MEMBER
+unicode_bidi_mirroring(0x220D, 0x220A).	% SMALL CONTAINS AS MEMBER
+unicode_bidi_mirroring(0x2215, 0x29F5).	% DIVISION SLASH
+unicode_bidi_mirroring(0x223C, 0x223D).	% TILDE OPERATOR
+unicode_bidi_mirroring(0x223D, 0x223C).	% REVERSED TILDE
+unicode_bidi_mirroring(0x2243, 0x22CD).	% ASYMPTOTICALLY EQUAL TO
+unicode_bidi_mirroring(0x2252, 0x2253).	% APPROXIMATELY EQUAL TO OR THE IMAGE OF
+unicode_bidi_mirroring(0x2253, 0x2252).	% IMAGE OF OR APPROXIMATELY EQUAL TO
+unicode_bidi_mirroring(0x2254, 0x2255).	% COLON EQUALS
+unicode_bidi_mirroring(0x2255, 0x2254).	% EQUALS COLON
+unicode_bidi_mirroring(0x2264, 0x2265).	% LESS-THAN OR EQUAL TO
+unicode_bidi_mirroring(0x2265, 0x2264).	% GREATER-THAN OR EQUAL TO
+unicode_bidi_mirroring(0x2266, 0x2267).	% LESS-THAN OVER EQUAL TO
+unicode_bidi_mirroring(0x2267, 0x2266).	% GREATER-THAN OVER EQUAL TO
+unicode_bidi_mirroring(0x2268, 0x2269).	% [BEST FIT] LESS-THAN BUT NOT EQUAL TO
+unicode_bidi_mirroring(0x2269, 0x2268).	% [BEST FIT] GREATER-THAN BUT NOT EQUAL TO
+unicode_bidi_mirroring(0x226A, 0x226B).	% MUCH LESS-THAN
+unicode_bidi_mirroring(0x226B, 0x226A).	% MUCH GREATER-THAN
+unicode_bidi_mirroring(0x226E, 0x226F).	% [BEST FIT] NOT LESS-THAN
+unicode_bidi_mirroring(0x226F, 0x226E).	% [BEST FIT] NOT GREATER-THAN
+unicode_bidi_mirroring(0x2270, 0x2271).	% [BEST FIT] NEITHER LESS-THAN NOR EQUAL TO
+unicode_bidi_mirroring(0x2271, 0x2270).	% [BEST FIT] NEITHER GREATER-THAN NOR EQUAL TO
+unicode_bidi_mirroring(0x2272, 0x2273).	% [BEST FIT] LESS-THAN OR EQUIVALENT TO
+unicode_bidi_mirroring(0x2273, 0x2272).	% [BEST FIT] GREATER-THAN OR EQUIVALENT TO
+unicode_bidi_mirroring(0x2274, 0x2275).	% [BEST FIT] NEITHER LESS-THAN NOR EQUIVALENT TO
+unicode_bidi_mirroring(0x2275, 0x2274).	% [BEST FIT] NEITHER GREATER-THAN NOR EQUIVALENT TO
+unicode_bidi_mirroring(0x2276, 0x2277).	% LESS-THAN OR GREATER-THAN
+unicode_bidi_mirroring(0x2277, 0x2276).	% GREATER-THAN OR LESS-THAN
+unicode_bidi_mirroring(0x2278, 0x2279).	% [BEST FIT] NEITHER LESS-THAN NOR GREATER-THAN
+unicode_bidi_mirroring(0x2279, 0x2278).	% [BEST FIT] NEITHER GREATER-THAN NOR LESS-THAN
+unicode_bidi_mirroring(0x227A, 0x227B).	% PRECEDES
+unicode_bidi_mirroring(0x227B, 0x227A).	% SUCCEEDS
+unicode_bidi_mirroring(0x227C, 0x227D).	% PRECEDES OR EQUAL TO
+unicode_bidi_mirroring(0x227D, 0x227C).	% SUCCEEDS OR EQUAL TO
+unicode_bidi_mirroring(0x227E, 0x227F).	% [BEST FIT] PRECEDES OR EQUIVALENT TO
+unicode_bidi_mirroring(0x227F, 0x227E).	% [BEST FIT] SUCCEEDS OR EQUIVALENT TO
+unicode_bidi_mirroring(0x2280, 0x2281).	% [BEST FIT] DOES NOT PRECEDE
+unicode_bidi_mirroring(0x2281, 0x2280).	% [BEST FIT] DOES NOT SUCCEED
+unicode_bidi_mirroring(0x2282, 0x2283).	% SUBSET OF
+unicode_bidi_mirroring(0x2283, 0x2282).	% SUPERSET OF
+unicode_bidi_mirroring(0x2284, 0x2285).	% [BEST FIT] NOT A SUBSET OF
+unicode_bidi_mirroring(0x2285, 0x2284).	% [BEST FIT] NOT A SUPERSET OF
+unicode_bidi_mirroring(0x2286, 0x2287).	% SUBSET OF OR EQUAL TO
+unicode_bidi_mirroring(0x2287, 0x2286).	% SUPERSET OF OR EQUAL TO
+unicode_bidi_mirroring(0x2288, 0x2289).	% [BEST FIT] NEITHER A SUBSET OF NOR EQUAL TO
+unicode_bidi_mirroring(0x2289, 0x2288).	% [BEST FIT] NEITHER A SUPERSET OF NOR EQUAL TO
+unicode_bidi_mirroring(0x228A, 0x228B).	% [BEST FIT] SUBSET OF WITH NOT EQUAL TO
+unicode_bidi_mirroring(0x228B, 0x228A).	% [BEST FIT] SUPERSET OF WITH NOT EQUAL TO
+unicode_bidi_mirroring(0x228F, 0x2290).	% SQUARE IMAGE OF
+unicode_bidi_mirroring(0x2290, 0x228F).	% SQUARE ORIGINAL OF
+unicode_bidi_mirroring(0x2291, 0x2292).	% SQUARE IMAGE OF OR EQUAL TO
+unicode_bidi_mirroring(0x2292, 0x2291).	% SQUARE ORIGINAL OF OR EQUAL TO
+unicode_bidi_mirroring(0x2298, 0x29B8).	% CIRCLED DIVISION SLASH
+unicode_bidi_mirroring(0x22A2, 0x22A3).	% RIGHT TACK
+unicode_bidi_mirroring(0x22A3, 0x22A2).	% LEFT TACK
+unicode_bidi_mirroring(0x22A6, 0x2ADE).	% ASSERTION
+unicode_bidi_mirroring(0x22A8, 0x2AE4).	% TRUE
+unicode_bidi_mirroring(0x22A9, 0x2AE3).	% FORCES
+unicode_bidi_mirroring(0x22AB, 0x2AE5).	% DOUBLE VERTICAL BAR DOUBLE RIGHT TURNSTILE
+unicode_bidi_mirroring(0x22B0, 0x22B1).	% PRECEDES UNDER RELATION
+unicode_bidi_mirroring(0x22B1, 0x22B0).	% SUCCEEDS UNDER RELATION
+unicode_bidi_mirroring(0x22B2, 0x22B3).	% NORMAL SUBGROUP OF
+unicode_bidi_mirroring(0x22B3, 0x22B2).	% CONTAINS AS NORMAL SUBGROUP
+unicode_bidi_mirroring(0x22B4, 0x22B5).	% NORMAL SUBGROUP OF OR EQUAL TO
+unicode_bidi_mirroring(0x22B5, 0x22B4).	% CONTAINS AS NORMAL SUBGROUP OR EQUAL TO
+unicode_bidi_mirroring(0x22B6, 0x22B7).	% ORIGINAL OF
+unicode_bidi_mirroring(0x22B7, 0x22B6).	% IMAGE OF
+unicode_bidi_mirroring(0x22C9, 0x22CA).	% LEFT NORMAL FACTOR SEMIDIRECT PRODUCT
+unicode_bidi_mirroring(0x22CA, 0x22C9).	% RIGHT NORMAL FACTOR SEMIDIRECT PRODUCT
+unicode_bidi_mirroring(0x22CB, 0x22CC).	% LEFT SEMIDIRECT PRODUCT
+unicode_bidi_mirroring(0x22CC, 0x22CB).	% RIGHT SEMIDIRECT PRODUCT
+unicode_bidi_mirroring(0x22CD, 0x2243).	% REVERSED TILDE EQUALS
+unicode_bidi_mirroring(0x22D0, 0x22D1).	% DOUBLE SUBSET
+unicode_bidi_mirroring(0x22D1, 0x22D0).	% DOUBLE SUPERSET
+unicode_bidi_mirroring(0x22D6, 0x22D7).	% LESS-THAN WITH DOT
+unicode_bidi_mirroring(0x22D7, 0x22D6).	% GREATER-THAN WITH DOT
+unicode_bidi_mirroring(0x22D8, 0x22D9).	% VERY MUCH LESS-THAN
+unicode_bidi_mirroring(0x22D9, 0x22D8).	% VERY MUCH GREATER-THAN
+unicode_bidi_mirroring(0x22DA, 0x22DB).	% LESS-THAN EQUAL TO OR GREATER-THAN
+unicode_bidi_mirroring(0x22DB, 0x22DA).	% GREATER-THAN EQUAL TO OR LESS-THAN
+unicode_bidi_mirroring(0x22DC, 0x22DD).	% EQUAL TO OR LESS-THAN
+unicode_bidi_mirroring(0x22DD, 0x22DC).	% EQUAL TO OR GREATER-THAN
+unicode_bidi_mirroring(0x22DE, 0x22DF).	% EQUAL TO OR PRECEDES
+unicode_bidi_mirroring(0x22DF, 0x22DE).	% EQUAL TO OR SUCCEEDS
+unicode_bidi_mirroring(0x22E0, 0x22E1).	% [BEST FIT] DOES NOT PRECEDE OR EQUAL
+unicode_bidi_mirroring(0x22E1, 0x22E0).	% [BEST FIT] DOES NOT SUCCEED OR EQUAL
+unicode_bidi_mirroring(0x22E2, 0x22E3).	% [BEST FIT] NOT SQUARE IMAGE OF OR EQUAL TO
+unicode_bidi_mirroring(0x22E3, 0x22E2).	% [BEST FIT] NOT SQUARE ORIGINAL OF OR EQUAL TO
+unicode_bidi_mirroring(0x22E4, 0x22E5).	% [BEST FIT] SQUARE IMAGE OF OR NOT EQUAL TO
+unicode_bidi_mirroring(0x22E5, 0x22E4).	% [BEST FIT] SQUARE ORIGINAL OF OR NOT EQUAL TO
+unicode_bidi_mirroring(0x22E6, 0x22E7).	% [BEST FIT] LESS-THAN BUT NOT EQUIVALENT TO
+unicode_bidi_mirroring(0x22E7, 0x22E6).	% [BEST FIT] GREATER-THAN BUT NOT EQUIVALENT TO
+unicode_bidi_mirroring(0x22E8, 0x22E9).	% [BEST FIT] PRECEDES BUT NOT EQUIVALENT TO
+unicode_bidi_mirroring(0x22E9, 0x22E8).	% [BEST FIT] SUCCEEDS BUT NOT EQUIVALENT TO
+unicode_bidi_mirroring(0x22EA, 0x22EB).	% [BEST FIT] NOT NORMAL SUBGROUP OF
+unicode_bidi_mirroring(0x22EB, 0x22EA).	% [BEST FIT] DOES NOT CONTAIN AS NORMAL SUBGROUP
+unicode_bidi_mirroring(0x22EC, 0x22ED).	% [BEST FIT] NOT NORMAL SUBGROUP OF OR EQUAL TO
+unicode_bidi_mirroring(0x22ED, 0x22EC).	% [BEST FIT] DOES NOT CONTAIN AS NORMAL SUBGROUP OR EQUAL
+unicode_bidi_mirroring(0x22F0, 0x22F1).	% UP RIGHT DIAGONAL ELLIPSIS
+unicode_bidi_mirroring(0x22F1, 0x22F0).	% DOWN RIGHT DIAGONAL ELLIPSIS
+unicode_bidi_mirroring(0x22F2, 0x22FA).	% ELEMENT OF WITH LONG HORIZONTAL STROKE
+unicode_bidi_mirroring(0x22F3, 0x22FB).	% ELEMENT OF WITH VERTICAL BAR AT END OF HORIZONTAL STROKE
+unicode_bidi_mirroring(0x22F4, 0x22FC).	% SMALL ELEMENT OF WITH VERTICAL BAR AT END OF HORIZONTAL STROKE
+unicode_bidi_mirroring(0x22F6, 0x22FD).	% ELEMENT OF WITH OVERBAR
+unicode_bidi_mirroring(0x22F7, 0x22FE).	% SMALL ELEMENT OF WITH OVERBAR
+unicode_bidi_mirroring(0x22FA, 0x22F2).	% CONTAINS WITH LONG HORIZONTAL STROKE
+unicode_bidi_mirroring(0x22FB, 0x22F3).	% CONTAINS WITH VERTICAL BAR AT END OF HORIZONTAL STROKE
+unicode_bidi_mirroring(0x22FC, 0x22F4).	% SMALL CONTAINS WITH VERTICAL BAR AT END OF HORIZONTAL STROKE
+unicode_bidi_mirroring(0x22FD, 0x22F6).	% CONTAINS WITH OVERBAR
+unicode_bidi_mirroring(0x22FE, 0x22F7).	% SMALL CONTAINS WITH OVERBAR
+unicode_bidi_mirroring(0x2308, 0x2309).	% LEFT CEILING
+unicode_bidi_mirroring(0x2309, 0x2308).	% RIGHT CEILING
+unicode_bidi_mirroring(0x230A, 0x230B).	% LEFT FLOOR
+unicode_bidi_mirroring(0x230B, 0x230A).	% RIGHT FLOOR
+unicode_bidi_mirroring(0x2329, 0x232A).	% LEFT-POINTING ANGLE BRACKET
+unicode_bidi_mirroring(0x232A, 0x2329).	% RIGHT-POINTING ANGLE BRACKET
+unicode_bidi_mirroring(0x2768, 0x2769).	% MEDIUM LEFT PARENTHESIS ORNAMENT
+unicode_bidi_mirroring(0x2769, 0x2768).	% MEDIUM RIGHT PARENTHESIS ORNAMENT
+unicode_bidi_mirroring(0x276A, 0x276B).	% MEDIUM FLATTENED LEFT PARENTHESIS ORNAMENT
+unicode_bidi_mirroring(0x276B, 0x276A).	% MEDIUM FLATTENED RIGHT PARENTHESIS ORNAMENT
+unicode_bidi_mirroring(0x276C, 0x276D).	% MEDIUM LEFT-POINTING ANGLE BRACKET ORNAMENT
+unicode_bidi_mirroring(0x276D, 0x276C).	% MEDIUM RIGHT-POINTING ANGLE BRACKET ORNAMENT
+unicode_bidi_mirroring(0x276E, 0x276F).	% HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT
+unicode_bidi_mirroring(0x276F, 0x276E).	% HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT
+unicode_bidi_mirroring(0x2770, 0x2771).	% HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT
+unicode_bidi_mirroring(0x2771, 0x2770).	% HEAVY RIGHT-POINTING ANGLE BRACKET ORNAMENT
+unicode_bidi_mirroring(0x2772, 0x2773).	% LIGHT LEFT TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x2773, 0x2772).	% LIGHT RIGHT TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x2774, 0x2775).	% MEDIUM LEFT CURLY BRACKET ORNAMENT
+unicode_bidi_mirroring(0x2775, 0x2774).	% MEDIUM RIGHT CURLY BRACKET ORNAMENT
+unicode_bidi_mirroring(0x27C3, 0x27C4).	% OPEN SUBSET
+unicode_bidi_mirroring(0x27C4, 0x27C3).	% OPEN SUPERSET
+unicode_bidi_mirroring(0x27C5, 0x27C6).	% LEFT S-SHAPED BAG DELIMITER
+unicode_bidi_mirroring(0x27C6, 0x27C5).	% RIGHT S-SHAPED BAG DELIMITER
+unicode_bidi_mirroring(0x27C8, 0x27C9).	% REVERSE SOLIDUS PRECEDING SUBSET
+unicode_bidi_mirroring(0x27C9, 0x27C8).	% SUPERSET PRECEDING SOLIDUS
+unicode_bidi_mirroring(0x27CB, 0x27CD).	% MATHEMATICAL RISING DIAGONAL
+unicode_bidi_mirroring(0x27CD, 0x27CB).	% MATHEMATICAL FALLING DIAGONAL
+unicode_bidi_mirroring(0x27D5, 0x27D6).	% LEFT OUTER JOIN
+unicode_bidi_mirroring(0x27D6, 0x27D5).	% RIGHT OUTER JOIN
+unicode_bidi_mirroring(0x27DD, 0x27DE).	% LONG RIGHT TACK
+unicode_bidi_mirroring(0x27DE, 0x27DD).	% LONG LEFT TACK
+unicode_bidi_mirroring(0x27E2, 0x27E3).	% WHITE CONCAVE-SIDED DIAMOND WITH LEFTWARDS TICK
+unicode_bidi_mirroring(0x27E3, 0x27E2).	% WHITE CONCAVE-SIDED DIAMOND WITH RIGHTWARDS TICK
+unicode_bidi_mirroring(0x27E4, 0x27E5).	% WHITE SQUARE WITH LEFTWARDS TICK
+unicode_bidi_mirroring(0x27E5, 0x27E4).	% WHITE SQUARE WITH RIGHTWARDS TICK
+unicode_bidi_mirroring(0x27E6, 0x27E7).	% MATHEMATICAL LEFT WHITE SQUARE BRACKET
+unicode_bidi_mirroring(0x27E7, 0x27E6).	% MATHEMATICAL RIGHT WHITE SQUARE BRACKET
+unicode_bidi_mirroring(0x27E8, 0x27E9).	% MATHEMATICAL LEFT ANGLE BRACKET
+unicode_bidi_mirroring(0x27E9, 0x27E8).	% MATHEMATICAL RIGHT ANGLE BRACKET
+unicode_bidi_mirroring(0x27EA, 0x27EB).	% MATHEMATICAL LEFT DOUBLE ANGLE BRACKET
+unicode_bidi_mirroring(0x27EB, 0x27EA).	% MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET
+unicode_bidi_mirroring(0x27EC, 0x27ED).	% MATHEMATICAL LEFT WHITE TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x27ED, 0x27EC).	% MATHEMATICAL RIGHT WHITE TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x27EE, 0x27EF).	% MATHEMATICAL LEFT FLATTENED PARENTHESIS
+unicode_bidi_mirroring(0x27EF, 0x27EE).	% MATHEMATICAL RIGHT FLATTENED PARENTHESIS
+unicode_bidi_mirroring(0x2983, 0x2984).	% LEFT WHITE CURLY BRACKET
+unicode_bidi_mirroring(0x2984, 0x2983).	% RIGHT WHITE CURLY BRACKET
+unicode_bidi_mirroring(0x2985, 0x2986).	% LEFT WHITE PARENTHESIS
+unicode_bidi_mirroring(0x2986, 0x2985).	% RIGHT WHITE PARENTHESIS
+unicode_bidi_mirroring(0x2987, 0x2988).	% Z NOTATION LEFT IMAGE BRACKET
+unicode_bidi_mirroring(0x2988, 0x2987).	% Z NOTATION RIGHT IMAGE BRACKET
+unicode_bidi_mirroring(0x2989, 0x298A).	% Z NOTATION LEFT BINDING BRACKET
+unicode_bidi_mirroring(0x298A, 0x2989).	% Z NOTATION RIGHT BINDING BRACKET
+unicode_bidi_mirroring(0x298B, 0x298C).	% LEFT SQUARE BRACKET WITH UNDERBAR
+unicode_bidi_mirroring(0x298C, 0x298B).	% RIGHT SQUARE BRACKET WITH UNDERBAR
+unicode_bidi_mirroring(0x298D, 0x2990).	% LEFT SQUARE BRACKET WITH TICK IN TOP CORNER
+unicode_bidi_mirroring(0x298E, 0x298F).	% RIGHT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
+unicode_bidi_mirroring(0x298F, 0x298E).	% LEFT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
+unicode_bidi_mirroring(0x2990, 0x298D).	% RIGHT SQUARE BRACKET WITH TICK IN TOP CORNER
+unicode_bidi_mirroring(0x2991, 0x2992).	% LEFT ANGLE BRACKET WITH DOT
+unicode_bidi_mirroring(0x2992, 0x2991).	% RIGHT ANGLE BRACKET WITH DOT
+unicode_bidi_mirroring(0x2993, 0x2994).	% LEFT ARC LESS-THAN BRACKET
+unicode_bidi_mirroring(0x2994, 0x2993).	% RIGHT ARC GREATER-THAN BRACKET
+unicode_bidi_mirroring(0x2995, 0x2996).	% DOUBLE LEFT ARC GREATER-THAN BRACKET
+unicode_bidi_mirroring(0x2996, 0x2995).	% DOUBLE RIGHT ARC LESS-THAN BRACKET
+unicode_bidi_mirroring(0x2997, 0x2998).	% LEFT BLACK TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x2998, 0x2997).	% RIGHT BLACK TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x29B8, 0x2298).	% CIRCLED REVERSE SOLIDUS
+unicode_bidi_mirroring(0x29C0, 0x29C1).	% CIRCLED LESS-THAN
+unicode_bidi_mirroring(0x29C1, 0x29C0).	% CIRCLED GREATER-THAN
+unicode_bidi_mirroring(0x29C4, 0x29C5).	% SQUARED RISING DIAGONAL SLASH
+unicode_bidi_mirroring(0x29C5, 0x29C4).	% SQUARED FALLING DIAGONAL SLASH
+unicode_bidi_mirroring(0x29CF, 0x29D0).	% LEFT TRIANGLE BESIDE VERTICAL BAR
+unicode_bidi_mirroring(0x29D0, 0x29CF).	% VERTICAL BAR BESIDE RIGHT TRIANGLE
+unicode_bidi_mirroring(0x29D1, 0x29D2).	% BOWTIE WITH LEFT HALF BLACK
+unicode_bidi_mirroring(0x29D2, 0x29D1).	% BOWTIE WITH RIGHT HALF BLACK
+unicode_bidi_mirroring(0x29D4, 0x29D5).	% TIMES WITH LEFT HALF BLACK
+unicode_bidi_mirroring(0x29D5, 0x29D4).	% TIMES WITH RIGHT HALF BLACK
+unicode_bidi_mirroring(0x29D8, 0x29D9).	% LEFT WIGGLY FENCE
+unicode_bidi_mirroring(0x29D9, 0x29D8).	% RIGHT WIGGLY FENCE
+unicode_bidi_mirroring(0x29DA, 0x29DB).	% LEFT DOUBLE WIGGLY FENCE
+unicode_bidi_mirroring(0x29DB, 0x29DA).	% RIGHT DOUBLE WIGGLY FENCE
+unicode_bidi_mirroring(0x29F5, 0x2215).	% REVERSE SOLIDUS OPERATOR
+unicode_bidi_mirroring(0x29F8, 0x29F9).	% BIG SOLIDUS
+unicode_bidi_mirroring(0x29F9, 0x29F8).	% BIG REVERSE SOLIDUS
+unicode_bidi_mirroring(0x29FC, 0x29FD).	% LEFT-POINTING CURVED ANGLE BRACKET
+unicode_bidi_mirroring(0x29FD, 0x29FC).	% RIGHT-POINTING CURVED ANGLE BRACKET
+unicode_bidi_mirroring(0x2A2B, 0x2A2C).	% MINUS SIGN WITH FALLING DOTS
+unicode_bidi_mirroring(0x2A2C, 0x2A2B).	% MINUS SIGN WITH RISING DOTS
+unicode_bidi_mirroring(0x2A2D, 0x2A2E).	% PLUS SIGN IN LEFT HALF CIRCLE
+unicode_bidi_mirroring(0x2A2E, 0x2A2D).	% PLUS SIGN IN RIGHT HALF CIRCLE
+unicode_bidi_mirroring(0x2A34, 0x2A35).	% MULTIPLICATION SIGN IN LEFT HALF CIRCLE
+unicode_bidi_mirroring(0x2A35, 0x2A34).	% MULTIPLICATION SIGN IN RIGHT HALF CIRCLE
+unicode_bidi_mirroring(0x2A3C, 0x2A3D).	% INTERIOR PRODUCT
+unicode_bidi_mirroring(0x2A3D, 0x2A3C).	% RIGHTHAND INTERIOR PRODUCT
+unicode_bidi_mirroring(0x2A64, 0x2A65).	% Z NOTATION DOMAIN ANTIRESTRICTION
+unicode_bidi_mirroring(0x2A65, 0x2A64).	% Z NOTATION RANGE ANTIRESTRICTION
+unicode_bidi_mirroring(0x2A79, 0x2A7A).	% LESS-THAN WITH CIRCLE INSIDE
+unicode_bidi_mirroring(0x2A7A, 0x2A79).	% GREATER-THAN WITH CIRCLE INSIDE
+unicode_bidi_mirroring(0x2A7D, 0x2A7E).	% LESS-THAN OR SLANTED EQUAL TO
+unicode_bidi_mirroring(0x2A7E, 0x2A7D).	% GREATER-THAN OR SLANTED EQUAL TO
+unicode_bidi_mirroring(0x2A7F, 0x2A80).	% LESS-THAN OR SLANTED EQUAL TO WITH DOT INSIDE
+unicode_bidi_mirroring(0x2A80, 0x2A7F).	% GREATER-THAN OR SLANTED EQUAL TO WITH DOT INSIDE
+unicode_bidi_mirroring(0x2A81, 0x2A82).	% LESS-THAN OR SLANTED EQUAL TO WITH DOT ABOVE
+unicode_bidi_mirroring(0x2A82, 0x2A81).	% GREATER-THAN OR SLANTED EQUAL TO WITH DOT ABOVE
+unicode_bidi_mirroring(0x2A83, 0x2A84).	% LESS-THAN OR SLANTED EQUAL TO WITH DOT ABOVE RIGHT
+unicode_bidi_mirroring(0x2A84, 0x2A83).	% GREATER-THAN OR SLANTED EQUAL TO WITH DOT ABOVE LEFT
+unicode_bidi_mirroring(0x2A8B, 0x2A8C).	% LESS-THAN ABOVE DOUBLE-LINE EQUAL ABOVE GREATER-THAN
+unicode_bidi_mirroring(0x2A8C, 0x2A8B).	% GREATER-THAN ABOVE DOUBLE-LINE EQUAL ABOVE LESS-THAN
+unicode_bidi_mirroring(0x2A91, 0x2A92).	% LESS-THAN ABOVE GREATER-THAN ABOVE DOUBLE-LINE EQUAL
+unicode_bidi_mirroring(0x2A92, 0x2A91).	% GREATER-THAN ABOVE LESS-THAN ABOVE DOUBLE-LINE EQUAL
+unicode_bidi_mirroring(0x2A93, 0x2A94).	% LESS-THAN ABOVE SLANTED EQUAL ABOVE GREATER-THAN ABOVE SLANTED EQUAL
+unicode_bidi_mirroring(0x2A94, 0x2A93).	% GREATER-THAN ABOVE SLANTED EQUAL ABOVE LESS-THAN ABOVE SLANTED EQUAL
+unicode_bidi_mirroring(0x2A95, 0x2A96).	% SLANTED EQUAL TO OR LESS-THAN
+unicode_bidi_mirroring(0x2A96, 0x2A95).	% SLANTED EQUAL TO OR GREATER-THAN
+unicode_bidi_mirroring(0x2A97, 0x2A98).	% SLANTED EQUAL TO OR LESS-THAN WITH DOT INSIDE
+unicode_bidi_mirroring(0x2A98, 0x2A97).	% SLANTED EQUAL TO OR GREATER-THAN WITH DOT INSIDE
+unicode_bidi_mirroring(0x2A99, 0x2A9A).	% DOUBLE-LINE EQUAL TO OR LESS-THAN
+unicode_bidi_mirroring(0x2A9A, 0x2A99).	% DOUBLE-LINE EQUAL TO OR GREATER-THAN
+unicode_bidi_mirroring(0x2A9B, 0x2A9C).	% DOUBLE-LINE SLANTED EQUAL TO OR LESS-THAN
+unicode_bidi_mirroring(0x2A9C, 0x2A9B).	% DOUBLE-LINE SLANTED EQUAL TO OR GREATER-THAN
+unicode_bidi_mirroring(0x2AA1, 0x2AA2).	% DOUBLE NESTED LESS-THAN
+unicode_bidi_mirroring(0x2AA2, 0x2AA1).	% DOUBLE NESTED GREATER-THAN
+unicode_bidi_mirroring(0x2AA6, 0x2AA7).	% LESS-THAN CLOSED BY CURVE
+unicode_bidi_mirroring(0x2AA7, 0x2AA6).	% GREATER-THAN CLOSED BY CURVE
+unicode_bidi_mirroring(0x2AA8, 0x2AA9).	% LESS-THAN CLOSED BY CURVE ABOVE SLANTED EQUAL
+unicode_bidi_mirroring(0x2AA9, 0x2AA8).	% GREATER-THAN CLOSED BY CURVE ABOVE SLANTED EQUAL
+unicode_bidi_mirroring(0x2AAA, 0x2AAB).	% SMALLER THAN
+unicode_bidi_mirroring(0x2AAB, 0x2AAA).	% LARGER THAN
+unicode_bidi_mirroring(0x2AAC, 0x2AAD).	% SMALLER THAN OR EQUAL TO
+unicode_bidi_mirroring(0x2AAD, 0x2AAC).	% LARGER THAN OR EQUAL TO
+unicode_bidi_mirroring(0x2AAF, 0x2AB0).	% PRECEDES ABOVE SINGLE-LINE EQUALS SIGN
+unicode_bidi_mirroring(0x2AB0, 0x2AAF).	% SUCCEEDS ABOVE SINGLE-LINE EQUALS SIGN
+unicode_bidi_mirroring(0x2AB3, 0x2AB4).	% PRECEDES ABOVE EQUALS SIGN
+unicode_bidi_mirroring(0x2AB4, 0x2AB3).	% SUCCEEDS ABOVE EQUALS SIGN
+unicode_bidi_mirroring(0x2ABB, 0x2ABC).	% DOUBLE PRECEDES
+unicode_bidi_mirroring(0x2ABC, 0x2ABB).	% DOUBLE SUCCEEDS
+unicode_bidi_mirroring(0x2ABD, 0x2ABE).	% SUBSET WITH DOT
+unicode_bidi_mirroring(0x2ABE, 0x2ABD).	% SUPERSET WITH DOT
+unicode_bidi_mirroring(0x2ABF, 0x2AC0).	% SUBSET WITH PLUS SIGN BELOW
+unicode_bidi_mirroring(0x2AC0, 0x2ABF).	% SUPERSET WITH PLUS SIGN BELOW
+unicode_bidi_mirroring(0x2AC1, 0x2AC2).	% SUBSET WITH MULTIPLICATION SIGN BELOW
+unicode_bidi_mirroring(0x2AC2, 0x2AC1).	% SUPERSET WITH MULTIPLICATION SIGN BELOW
+unicode_bidi_mirroring(0x2AC3, 0x2AC4).	% SUBSET OF OR EQUAL TO WITH DOT ABOVE
+unicode_bidi_mirroring(0x2AC4, 0x2AC3).	% SUPERSET OF OR EQUAL TO WITH DOT ABOVE
+unicode_bidi_mirroring(0x2AC5, 0x2AC6).	% SUBSET OF ABOVE EQUALS SIGN
+unicode_bidi_mirroring(0x2AC6, 0x2AC5).	% SUPERSET OF ABOVE EQUALS SIGN
+unicode_bidi_mirroring(0x2ACD, 0x2ACE).	% SQUARE LEFT OPEN BOX OPERATOR
+unicode_bidi_mirroring(0x2ACE, 0x2ACD).	% SQUARE RIGHT OPEN BOX OPERATOR
+unicode_bidi_mirroring(0x2ACF, 0x2AD0).	% CLOSED SUBSET
+unicode_bidi_mirroring(0x2AD0, 0x2ACF).	% CLOSED SUPERSET
+unicode_bidi_mirroring(0x2AD1, 0x2AD2).	% CLOSED SUBSET OR EQUAL TO
+unicode_bidi_mirroring(0x2AD2, 0x2AD1).	% CLOSED SUPERSET OR EQUAL TO
+unicode_bidi_mirroring(0x2AD3, 0x2AD4).	% SUBSET ABOVE SUPERSET
+unicode_bidi_mirroring(0x2AD4, 0x2AD3).	% SUPERSET ABOVE SUBSET
+unicode_bidi_mirroring(0x2AD5, 0x2AD6).	% SUBSET ABOVE SUBSET
+unicode_bidi_mirroring(0x2AD6, 0x2AD5).	% SUPERSET ABOVE SUPERSET
+unicode_bidi_mirroring(0x2ADE, 0x22A6).	% SHORT LEFT TACK
+unicode_bidi_mirroring(0x2AE3, 0x22A9).	% DOUBLE VERTICAL BAR LEFT TURNSTILE
+unicode_bidi_mirroring(0x2AE4, 0x22A8).	% VERTICAL BAR DOUBLE LEFT TURNSTILE
+unicode_bidi_mirroring(0x2AE5, 0x22AB).	% DOUBLE VERTICAL BAR DOUBLE LEFT TURNSTILE
+unicode_bidi_mirroring(0x2AEC, 0x2AED).	% DOUBLE STROKE NOT SIGN
+unicode_bidi_mirroring(0x2AED, 0x2AEC).	% REVERSED DOUBLE STROKE NOT SIGN
+unicode_bidi_mirroring(0x2AF7, 0x2AF8).	% TRIPLE NESTED LESS-THAN
+unicode_bidi_mirroring(0x2AF8, 0x2AF7).	% TRIPLE NESTED GREATER-THAN
+unicode_bidi_mirroring(0x2AF9, 0x2AFA).	% DOUBLE-LINE SLANTED LESS-THAN OR EQUAL TO
+unicode_bidi_mirroring(0x2AFA, 0x2AF9).	% DOUBLE-LINE SLANTED GREATER-THAN OR EQUAL TO
+unicode_bidi_mirroring(0x2E02, 0x2E03).	% LEFT SUBSTITUTION BRACKET
+unicode_bidi_mirroring(0x2E03, 0x2E02).	% RIGHT SUBSTITUTION BRACKET
+unicode_bidi_mirroring(0x2E04, 0x2E05).	% LEFT DOTTED SUBSTITUTION BRACKET
+unicode_bidi_mirroring(0x2E05, 0x2E04).	% RIGHT DOTTED SUBSTITUTION BRACKET
+unicode_bidi_mirroring(0x2E09, 0x2E0A).	% LEFT TRANSPOSITION BRACKET
+unicode_bidi_mirroring(0x2E0A, 0x2E09).	% RIGHT TRANSPOSITION BRACKET
+unicode_bidi_mirroring(0x2E0C, 0x2E0D).	% LEFT RAISED OMISSION BRACKET
+unicode_bidi_mirroring(0x2E0D, 0x2E0C).	% RIGHT RAISED OMISSION BRACKET
+unicode_bidi_mirroring(0x2E1C, 0x2E1D).	% LEFT LOW PARAPHRASE BRACKET
+unicode_bidi_mirroring(0x2E1D, 0x2E1C).	% RIGHT LOW PARAPHRASE BRACKET
+unicode_bidi_mirroring(0x2E20, 0x2E21).	% LEFT VERTICAL BAR WITH QUILL
+unicode_bidi_mirroring(0x2E21, 0x2E20).	% RIGHT VERTICAL BAR WITH QUILL
+unicode_bidi_mirroring(0x2E22, 0x2E23).	% TOP LEFT HALF BRACKET
+unicode_bidi_mirroring(0x2E23, 0x2E22).	% TOP RIGHT HALF BRACKET
+unicode_bidi_mirroring(0x2E24, 0x2E25).	% BOTTOM LEFT HALF BRACKET
+unicode_bidi_mirroring(0x2E25, 0x2E24).	% BOTTOM RIGHT HALF BRACKET
+unicode_bidi_mirroring(0x2E26, 0x2E27).	% LEFT SIDEWAYS U BRACKET
+unicode_bidi_mirroring(0x2E27, 0x2E26).	% RIGHT SIDEWAYS U BRACKET
+unicode_bidi_mirroring(0x2E28, 0x2E29).	% LEFT DOUBLE PARENTHESIS
+unicode_bidi_mirroring(0x2E29, 0x2E28).	% RIGHT DOUBLE PARENTHESIS
+unicode_bidi_mirroring(0x3008, 0x3009).	% LEFT ANGLE BRACKET
+unicode_bidi_mirroring(0x3009, 0x3008).	% RIGHT ANGLE BRACKET
+unicode_bidi_mirroring(0x300A, 0x300B).	% LEFT DOUBLE ANGLE BRACKET
+unicode_bidi_mirroring(0x300B, 0x300A).	% RIGHT DOUBLE ANGLE BRACKET
+unicode_bidi_mirroring(0x300C, 0x300D).	% [BEST FIT] LEFT CORNER BRACKET
+unicode_bidi_mirroring(0x300D, 0x300C).	% [BEST FIT] RIGHT CORNER BRACKET
+unicode_bidi_mirroring(0x300E, 0x300F).	% [BEST FIT] LEFT WHITE CORNER BRACKET
+unicode_bidi_mirroring(0x300F, 0x300E).	% [BEST FIT] RIGHT WHITE CORNER BRACKET
+unicode_bidi_mirroring(0x3010, 0x3011).	% LEFT BLACK LENTICULAR BRACKET
+unicode_bidi_mirroring(0x3011, 0x3010).	% RIGHT BLACK LENTICULAR BRACKET
+unicode_bidi_mirroring(0x3014, 0x3015).	% LEFT TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x3015, 0x3014).	% RIGHT TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x3016, 0x3017).	% LEFT WHITE LENTICULAR BRACKET
+unicode_bidi_mirroring(0x3017, 0x3016).	% RIGHT WHITE LENTICULAR BRACKET
+unicode_bidi_mirroring(0x3018, 0x3019).	% LEFT WHITE TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x3019, 0x3018).	% RIGHT WHITE TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0x301A, 0x301B).	% LEFT WHITE SQUARE BRACKET
+unicode_bidi_mirroring(0x301B, 0x301A).	% RIGHT WHITE SQUARE BRACKET
+unicode_bidi_mirroring(0xFE59, 0xFE5A).	% SMALL LEFT PARENTHESIS
+unicode_bidi_mirroring(0xFE5A, 0xFE59).	% SMALL RIGHT PARENTHESIS
+unicode_bidi_mirroring(0xFE5B, 0xFE5C).	% SMALL LEFT CURLY BRACKET
+unicode_bidi_mirroring(0xFE5C, 0xFE5B).	% SMALL RIGHT CURLY BRACKET
+unicode_bidi_mirroring(0xFE5D, 0xFE5E).	% SMALL LEFT TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0xFE5E, 0xFE5D).	% SMALL RIGHT TORTOISE SHELL BRACKET
+unicode_bidi_mirroring(0xFE64, 0xFE65).	% SMALL LESS-THAN SIGN
+unicode_bidi_mirroring(0xFE65, 0xFE64).	% SMALL GREATER-THAN SIGN
+unicode_bidi_mirroring(0xFF08, 0xFF09).	% FULLWIDTH LEFT PARENTHESIS
+unicode_bidi_mirroring(0xFF09, 0xFF08).	% FULLWIDTH RIGHT PARENTHESIS
+unicode_bidi_mirroring(0xFF1C, 0xFF1E).	% FULLWIDTH LESS-THAN SIGN
+unicode_bidi_mirroring(0xFF1E, 0xFF1C).	% FULLWIDTH GREATER-THAN SIGN
+unicode_bidi_mirroring(0xFF3B, 0xFF3D).	% FULLWIDTH LEFT SQUARE BRACKET
+unicode_bidi_mirroring(0xFF3D, 0xFF3B).	% FULLWIDTH RIGHT SQUARE BRACKET
+unicode_bidi_mirroring(0xFF5B, 0xFF5D).	% FULLWIDTH LEFT CURLY BRACKET
+unicode_bidi_mirroring(0xFF5D, 0xFF5B).	% FULLWIDTH RIGHT CURLY BRACKET
+unicode_bidi_mirroring(0xFF5F, 0xFF60).	% FULLWIDTH LEFT WHITE PARENTHESIS
+unicode_bidi_mirroring(0xFF60, 0xFF5F).	% FULLWIDTH RIGHT WHITE PARENTHESIS
+unicode_bidi_mirroring(0xFF62, 0xFF63).	% [BEST FIT] HALFWIDTH LEFT CORNER BRACKET
+unicode_bidi_mirroring(0xFF63, 0xFF62).	% [BEST FIT] HALFWIDTH RIGHT CORNER BRACKET
+
+/*
+# The following characters have no appropriate mirroring character.
+# For these characters it is up to the rendering system
+#   to provide mirrored glyphs.
+
+# 2140; DOUBLE-STRUCK N-ARY SUMMATION
+# 2201; COMPLEMENT
+# 2202; PARTIAL DIFFERENTIAL
+# 2203; THERE EXISTS
+# 2204; THERE DOES NOT EXIST
+# 2211; N-ARY SUMMATION
+# 2216; SET MINUS
+# 221A; SQUARE ROOT
+# 221B; CUBE ROOT
+# 221C; FOURTH ROOT
+# 221D; PROPORTIONAL TO
+# 221F; RIGHT ANGLE
+# 2220; ANGLE
+# 2221; MEASURED ANGLE
+# 2222; SPHERICAL ANGLE
+# 2224; DOES NOT DIVIDE
+# 2226; NOT PARALLEL TO
+# 222B; INTEGRAL
+# 222C; DOUBLE INTEGRAL
+# 222D; TRIPLE INTEGRAL
+# 222E; CONTOUR INTEGRAL
+# 222F; SURFACE INTEGRAL
+# 2230; VOLUME INTEGRAL
+# 2231; CLOCKWISE INTEGRAL
+# 2232; CLOCKWISE CONTOUR INTEGRAL
+# 2233; ANTICLOCKWISE CONTOUR INTEGRAL
+# 2239; EXCESS
+# 223B; HOMOTHETIC
+# 223E; INVERTED LAZY S
+# 223F; SINE WAVE
+# 2240; WREATH PRODUCT
+# 2241; NOT TILDE
+# 2242; MINUS TILDE
+# 2244; NOT ASYMPTOTICALLY EQUAL TO
+# 2245; APPROXIMATELY EQUAL TO
+# 2246; APPROXIMATELY BUT NOT ACTUALLY EQUAL TO
+# 2247; NEITHER APPROXIMATELY NOR ACTUALLY EQUAL TO
+# 2248; ALMOST EQUAL TO
+# 2249; NOT ALMOST EQUAL TO
+# 224A; ALMOST EQUAL OR EQUAL TO
+# 224B; TRIPLE TILDE
+# 224C; ALL EQUAL TO
+# 225F; QUESTIONED EQUAL TO
+# 2260; NOT EQUAL TO
+# 2262; NOT IDENTICAL TO
+# 228C; MULTISET
+# 22A7; MODELS
+# 22AA; TRIPLE VERTICAL BAR RIGHT TURNSTILE
+# 22AC; DOES NOT PROVE
+# 22AD; NOT TRUE
+# 22AE; DOES NOT FORCE
+# 22AF; NEGATED DOUBLE VERTICAL BAR DOUBLE RIGHT TURNSTILE
+# 22B8; MULTIMAP
+# 22BE; RIGHT ANGLE WITH ARC
+# 22BF; RIGHT TRIANGLE
+# 22F5; ELEMENT OF WITH DOT ABOVE
+# 22F8; ELEMENT OF WITH UNDERBAR
+# 22F9; ELEMENT OF WITH TWO HORIZONTAL STROKES
+# 22FF; Z NOTATION BAG MEMBERSHIP
+# 2320; TOP HALF INTEGRAL
+# 2321; BOTTOM HALF INTEGRAL
+# 27C0; THREE DIMENSIONAL ANGLE
+# 27CC; LONG DIVISION
+# 27D3; LOWER RIGHT CORNER WITH DOT
+# 27D4; UPPER LEFT CORNER WITH DOT
+# 27DC; LEFT MULTIMAP
+# 299B; MEASURED ANGLE OPENING LEFT
+# 299C; RIGHT ANGLE VARIANT WITH SQUARE
+# 299D; MEASURED RIGHT ANGLE WITH DOT
+# 299E; ANGLE WITH S INSIDE
+# 299F; ACUTE ANGLE
+# 29A0; SPHERICAL ANGLE OPENING LEFT
+# 29A1; SPHERICAL ANGLE OPENING UP
+# 29A2; TURNED ANGLE
+# 29A3; REVERSED ANGLE
+# 29A4; ANGLE WITH UNDERBAR
+# 29A5; REVERSED ANGLE WITH UNDERBAR
+# 29A6; OBLIQUE ANGLE OPENING UP
+# 29A7; OBLIQUE ANGLE OPENING DOWN
+# 29A8; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING UP AND RIGHT
+# 29A9; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING UP AND LEFT
+# 29AA; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING DOWN AND RIGHT
+# 29AB; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING DOWN AND LEFT
+# 29AC; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING RIGHT AND UP
+# 29AD; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING LEFT AND UP
+# 29AE; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING RIGHT AND DOWN
+# 29AF; MEASURED ANGLE WITH OPEN ARM ENDING IN ARROW POINTING LEFT AND DOWN
+# 29C2; CIRCLE WITH SMALL CIRCLE TO THE RIGHT
+# 29C3; CIRCLE WITH TWO HORIZONTAL STROKES TO THE RIGHT
+# 29C9; TWO JOINED SQUARES
+# 29CE; RIGHT TRIANGLE ABOVE LEFT TRIANGLE
+# 29DC; INCOMPLETE INFINITY
+# 29E1; INCREASES AS
+# 29E3; EQUALS SIGN AND SLANTED PARALLEL
+# 29E4; EQUALS SIGN AND SLANTED PARALLEL WITH TILDE ABOVE
+# 29E5; IDENTICAL TO AND SLANTED PARALLEL
+# 29E8; DOWN-POINTING TRIANGLE WITH LEFT HALF BLACK
+# 29E9; DOWN-POINTING TRIANGLE WITH RIGHT HALF BLACK
+# 29F4; RULE-DELAYED
+# 29F6; SOLIDUS WITH OVERBAR
+# 29F7; REVERSE SOLIDUS WITH HORIZONTAL STROKE
+# 2A0A; MODULO TWO SUM
+# 2A0B; SUMMATION WITH INTEGRAL
+# 2A0C; QUADRUPLE INTEGRAL OPERATOR
+# 2A0D; FINITE PART INTEGRAL
+# 2A0E; INTEGRAL WITH DOUBLE STROKE
+# 2A0F; INTEGRAL AVERAGE WITH SLASH
+# 2A10; CIRCULATION FUNCTION
+# 2A11; ANTICLOCKWISE INTEGRATION
+# 2A12; LINE INTEGRATION WITH RECTANGULAR PATH AROUND POLE
+# 2A13; LINE INTEGRATION WITH SEMICIRCULAR PATH AROUND POLE
+# 2A14; LINE INTEGRATION NOT INCLUDING THE POLE
+# 2A15; INTEGRAL AROUND A POINT OPERATOR
+# 2A16; QUATERNION INTEGRAL OPERATOR
+# 2A17; INTEGRAL WITH LEFTWARDS ARROW WITH HOOK
+# 2A18; INTEGRAL WITH TIMES SIGN
+# 2A19; INTEGRAL WITH INTERSECTION
+# 2A1A; INTEGRAL WITH UNION
+# 2A1B; INTEGRAL WITH OVERBAR
+# 2A1C; INTEGRAL WITH UNDERBAR
+# 2A1E; LARGE LEFT TRIANGLE OPERATOR
+# 2A1F; Z NOTATION SCHEMA COMPOSITION
+# 2A20; Z NOTATION SCHEMA PIPING
+# 2A21; Z NOTATION SCHEMA PROJECTION
+# 2A24; PLUS SIGN WITH TILDE ABOVE
+# 2A26; PLUS SIGN WITH TILDE BELOW
+# 2A29; MINUS SIGN WITH COMMA ABOVE
+# 2A3E; Z NOTATION RELATIONAL COMPOSITION
+# 2A57; SLOPING LARGE OR
+# 2A58; SLOPING LARGE AND
+# 2A6A; TILDE OPERATOR WITH DOT ABOVE
+# 2A6B; TILDE OPERATOR WITH RISING DOTS
+# 2A6C; SIMILAR MINUS SIMILAR
+# 2A6D; CONGRUENT WITH DOT ABOVE
+# 2A6F; ALMOST EQUAL TO WITH CIRCUMFLEX ACCENT
+# 2A70; APPROXIMATELY EQUAL OR EQUAL TO
+# 2A73; EQUALS SIGN ABOVE TILDE OPERATOR
+# 2A74; DOUBLE COLON EQUAL
+# 2A7B; LESS-THAN WITH QUESTION MARK ABOVE
+# 2A7C; GREATER-THAN WITH QUESTION MARK ABOVE
+# 2A85; LESS-THAN OR APPROXIMATE
+# 2A86; GREATER-THAN OR APPROXIMATE
+# 2A87; LESS-THAN AND SINGLE-LINE NOT EQUAL TO
+# 2A88; GREATER-THAN AND SINGLE-LINE NOT EQUAL TO
+# 2A89; LESS-THAN AND NOT APPROXIMATE
+# 2A8A; GREATER-THAN AND NOT APPROXIMATE
+# 2A8D; LESS-THAN ABOVE SIMILAR OR EQUAL
+# 2A8E; GREATER-THAN ABOVE SIMILAR OR EQUAL
+# 2A8F; LESS-THAN ABOVE SIMILAR ABOVE GREATER-THAN
+# 2A90; GREATER-THAN ABOVE SIMILAR ABOVE LESS-THAN
+# 2A9D; SIMILAR OR LESS-THAN
+# 2A9E; SIMILAR OR GREATER-THAN
+# 2A9F; SIMILAR ABOVE LESS-THAN ABOVE EQUALS SIGN
+# 2AA0; SIMILAR ABOVE GREATER-THAN ABOVE EQUALS SIGN
+# 2AA3; DOUBLE NESTED LESS-THAN WITH UNDERBAR
+# 2AB1; PRECEDES ABOVE SINGLE-LINE NOT EQUAL TO
+# 2AB2; SUCCEEDS ABOVE SINGLE-LINE NOT EQUAL TO
+# 2AB5; PRECEDES ABOVE NOT EQUAL TO
+# 2AB6; SUCCEEDS ABOVE NOT EQUAL TO
+# 2AB7; PRECEDES ABOVE ALMOST EQUAL TO
+# 2AB8; SUCCEEDS ABOVE ALMOST EQUAL TO
+# 2AB9; PRECEDES ABOVE NOT ALMOST EQUAL TO
+# 2ABA; SUCCEEDS ABOVE NOT ALMOST EQUAL TO
+# 2AC7; SUBSET OF ABOVE TILDE OPERATOR
+# 2AC8; SUPERSET OF ABOVE TILDE OPERATOR
+# 2AC9; SUBSET OF ABOVE ALMOST EQUAL TO
+# 2ACA; SUPERSET OF ABOVE ALMOST EQUAL TO
+# 2ACB; SUBSET OF ABOVE NOT EQUAL TO
+# 2ACC; SUPERSET OF ABOVE NOT EQUAL TO
+# 2ADC; FORKING
+# 2AE2; VERTICAL BAR TRIPLE RIGHT TURNSTILE
+# 2AE6; LONG DASH FROM LEFT MEMBER OF DOUBLE VERTICAL
+# 2AEE; DOES NOT DIVIDE WITH REVERSED NEGATION SLASH
+# 2AF3; PARALLEL WITH TILDE OPERATOR
+# 2AFB; TRIPLE SOLIDUS BINARY RELATION
+# 2AFD; DOUBLE SOLIDUS OPERATOR
+# 1D6DB; MATHEMATICAL BOLD PARTIAL DIFFERENTIAL
+# 1D715; MATHEMATICAL ITALIC PARTIAL DIFFERENTIAL
+# 1D74F; MATHEMATICAL BOLD ITALIC PARTIAL DIFFERENTIAL
+# 1D789; MATHEMATICAL SANS-SERIF BOLD PARTIAL DIFFERENTIAL
+# 1D7C3; MATHEMATICAL SANS-SERIF BOLD ITALIC PARTIAL DIFFERENTIAL
+
+# EOF
+*/

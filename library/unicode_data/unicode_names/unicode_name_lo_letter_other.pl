@@ -1,0 +1,11800 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of VivoMind Prolog Unicode Resources  
+%  
+%  VivoMind Prolog Unicode Resources is free software distributed using the
+%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
+%  license
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  Last modified: March 13, 2012
+
+unicode_name(0x00AA, 'FEMININE ORDINAL INDICATOR').
+unicode_name(0x00BA, 'MASCULINE ORDINAL INDICATOR').
+unicode_name(0x01BB, 'LATIN LETTER TWO WITH STROKE').
+unicode_name(0x01C0, 'LATIN LETTER DENTAL CLICK').
+unicode_name(0x01C1, 'LATIN LETTER LATERAL CLICK').
+unicode_name(0x01C2, 'LATIN LETTER ALVEOLAR CLICK').
+unicode_name(0x01C3, 'LATIN LETTER RETROFLEX CLICK').
+unicode_name(0x0294, 'LATIN LETTER GLOTTAL STOP').
+unicode_name(0x05D0, 'HEBREW LETTER ALEF').
+unicode_name(0x05D1, 'HEBREW LETTER BET').
+unicode_name(0x05D2, 'HEBREW LETTER GIMEL').
+unicode_name(0x05D3, 'HEBREW LETTER DALET').
+unicode_name(0x05D4, 'HEBREW LETTER HE').
+unicode_name(0x05D5, 'HEBREW LETTER VAV').
+unicode_name(0x05D6, 'HEBREW LETTER ZAYIN').
+unicode_name(0x05D7, 'HEBREW LETTER HET').
+unicode_name(0x05D8, 'HEBREW LETTER TET').
+unicode_name(0x05D9, 'HEBREW LETTER YOD').
+unicode_name(0x05DA, 'HEBREW LETTER FINAL KAF').
+unicode_name(0x05DB, 'HEBREW LETTER KAF').
+unicode_name(0x05DC, 'HEBREW LETTER LAMED').
+unicode_name(0x05DD, 'HEBREW LETTER FINAL MEM').
+unicode_name(0x05DE, 'HEBREW LETTER MEM').
+unicode_name(0x05DF, 'HEBREW LETTER FINAL NUN').
+unicode_name(0x05E0, 'HEBREW LETTER NUN').
+unicode_name(0x05E1, 'HEBREW LETTER SAMEKH').
+unicode_name(0x05E2, 'HEBREW LETTER AYIN').
+unicode_name(0x05E3, 'HEBREW LETTER FINAL PE').
+unicode_name(0x05E4, 'HEBREW LETTER PE').
+unicode_name(0x05E5, 'HEBREW LETTER FINAL TSADI').
+unicode_name(0x05E6, 'HEBREW LETTER TSADI').
+unicode_name(0x05E7, 'HEBREW LETTER QOF').
+unicode_name(0x05E8, 'HEBREW LETTER RESH').
+unicode_name(0x05E9, 'HEBREW LETTER SHIN').
+unicode_name(0x05EA, 'HEBREW LETTER TAV').
+unicode_name(0x05F0, 'HEBREW LIGATURE YIDDISH DOUBLE VAV').
+unicode_name(0x05F1, 'HEBREW LIGATURE YIDDISH VAV YOD').
+unicode_name(0x05F2, 'HEBREW LIGATURE YIDDISH DOUBLE YOD').
+unicode_name(0x0620, 'ARABIC LETTER KASHMIRI YEH').
+unicode_name(0x0621, 'ARABIC LETTER HAMZA').
+unicode_name(0x0622, 'ARABIC LETTER ALEF WITH MADDA ABOVE').
+unicode_name(0x0623, 'ARABIC LETTER ALEF WITH HAMZA ABOVE').
+unicode_name(0x0624, 'ARABIC LETTER WAW WITH HAMZA ABOVE').
+unicode_name(0x0625, 'ARABIC LETTER ALEF WITH HAMZA BELOW').
+unicode_name(0x0626, 'ARABIC LETTER YEH WITH HAMZA ABOVE').
+unicode_name(0x0627, 'ARABIC LETTER ALEF').
+unicode_name(0x0628, 'ARABIC LETTER BEH').
+unicode_name(0x0629, 'ARABIC LETTER TEH MARBUTA').
+unicode_name(0x062A, 'ARABIC LETTER TEH').
+unicode_name(0x062B, 'ARABIC LETTER THEH').
+unicode_name(0x062C, 'ARABIC LETTER JEEM').
+unicode_name(0x062D, 'ARABIC LETTER HAH').
+unicode_name(0x062E, 'ARABIC LETTER KHAH').
+unicode_name(0x062F, 'ARABIC LETTER DAL').
+unicode_name(0x0630, 'ARABIC LETTER THAL').
+unicode_name(0x0631, 'ARABIC LETTER REH').
+unicode_name(0x0632, 'ARABIC LETTER ZAIN').
+unicode_name(0x0633, 'ARABIC LETTER SEEN').
+unicode_name(0x0634, 'ARABIC LETTER SHEEN').
+unicode_name(0x0635, 'ARABIC LETTER SAD').
+unicode_name(0x0636, 'ARABIC LETTER DAD').
+unicode_name(0x0637, 'ARABIC LETTER TAH').
+unicode_name(0x0638, 'ARABIC LETTER ZAH').
+unicode_name(0x0639, 'ARABIC LETTER AIN').
+unicode_name(0x063A, 'ARABIC LETTER GHAIN').
+unicode_name(0x063B, 'ARABIC LETTER KEHEH WITH TWO DOTS ABOVE').
+unicode_name(0x063C, 'ARABIC LETTER KEHEH WITH THREE DOTS BELOW').
+unicode_name(0x063D, 'ARABIC LETTER FARSI YEH WITH INVERTED V').
+unicode_name(0x063E, 'ARABIC LETTER FARSI YEH WITH TWO DOTS ABOVE').
+unicode_name(0x063F, 'ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE').
+unicode_name(0x0641, 'ARABIC LETTER FEH').
+unicode_name(0x0642, 'ARABIC LETTER QAF').
+unicode_name(0x0643, 'ARABIC LETTER KAF').
+unicode_name(0x0644, 'ARABIC LETTER LAM').
+unicode_name(0x0645, 'ARABIC LETTER MEEM').
+unicode_name(0x0646, 'ARABIC LETTER NOON').
+unicode_name(0x0647, 'ARABIC LETTER HEH').
+unicode_name(0x0648, 'ARABIC LETTER WAW').
+unicode_name(0x0649, 'ARABIC LETTER ALEF MAKSURA').
+unicode_name(0x064A, 'ARABIC LETTER YEH').
+unicode_name(0x066E, 'ARABIC LETTER DOTLESS BEH').
+unicode_name(0x066F, 'ARABIC LETTER DOTLESS QAF').
+unicode_name(0x0671, 'ARABIC LETTER ALEF WASLA').
+unicode_name(0x0672, 'ARABIC LETTER ALEF WITH WAVY HAMZA ABOVE').
+unicode_name(0x0673, 'ARABIC LETTER ALEF WITH WAVY HAMZA BELOW').
+unicode_name(0x0674, 'ARABIC LETTER HIGH HAMZA').
+unicode_name(0x0675, 'ARABIC LETTER HIGH HAMZA ALEF').
+unicode_name(0x0676, 'ARABIC LETTER HIGH HAMZA WAW').
+unicode_name(0x0677, 'ARABIC LETTER U WITH HAMZA ABOVE').
+unicode_name(0x0678, 'ARABIC LETTER HIGH HAMZA YEH').
+unicode_name(0x0679, 'ARABIC LETTER TTEH').
+unicode_name(0x067A, 'ARABIC LETTER TTEHEH').
+unicode_name(0x067B, 'ARABIC LETTER BEEH').
+unicode_name(0x067C, 'ARABIC LETTER TEH WITH RING').
+unicode_name(0x067D, 'ARABIC LETTER TEH WITH THREE DOTS ABOVE DOWNWARDS').
+unicode_name(0x067E, 'ARABIC LETTER PEH').
+unicode_name(0x067F, 'ARABIC LETTER TEHEH').
+unicode_name(0x0680, 'ARABIC LETTER BEHEH').
+unicode_name(0x0681, 'ARABIC LETTER HAH WITH HAMZA ABOVE').
+unicode_name(0x0682, 'ARABIC LETTER HAH WITH TWO DOTS VERTICAL ABOVE').
+unicode_name(0x0683, 'ARABIC LETTER NYEH').
+unicode_name(0x0684, 'ARABIC LETTER DYEH').
+unicode_name(0x0685, 'ARABIC LETTER HAH WITH THREE DOTS ABOVE').
+unicode_name(0x0686, 'ARABIC LETTER TCHEH').
+unicode_name(0x0687, 'ARABIC LETTER TCHEHEH').
+unicode_name(0x0688, 'ARABIC LETTER DDAL').
+unicode_name(0x0689, 'ARABIC LETTER DAL WITH RING').
+unicode_name(0x068A, 'ARABIC LETTER DAL WITH DOT BELOW').
+unicode_name(0x068B, 'ARABIC LETTER DAL WITH DOT BELOW AND SMALL TAH').
+unicode_name(0x068C, 'ARABIC LETTER DAHAL').
+unicode_name(0x068D, 'ARABIC LETTER DDAHAL').
+unicode_name(0x068E, 'ARABIC LETTER DUL').
+unicode_name(0x068F, 'ARABIC LETTER DAL WITH THREE DOTS ABOVE DOWNWARDS').
+unicode_name(0x0690, 'ARABIC LETTER DAL WITH FOUR DOTS ABOVE').
+unicode_name(0x0691, 'ARABIC LETTER RREH').
+unicode_name(0x0692, 'ARABIC LETTER REH WITH SMALL V').
+unicode_name(0x0693, 'ARABIC LETTER REH WITH RING').
+unicode_name(0x0694, 'ARABIC LETTER REH WITH DOT BELOW').
+unicode_name(0x0695, 'ARABIC LETTER REH WITH SMALL V BELOW').
+unicode_name(0x0696, 'ARABIC LETTER REH WITH DOT BELOW AND DOT ABOVE').
+unicode_name(0x0697, 'ARABIC LETTER REH WITH TWO DOTS ABOVE').
+unicode_name(0x0698, 'ARABIC LETTER JEH').
+unicode_name(0x0699, 'ARABIC LETTER REH WITH FOUR DOTS ABOVE').
+unicode_name(0x069A, 'ARABIC LETTER SEEN WITH DOT BELOW AND DOT ABOVE').
+unicode_name(0x069B, 'ARABIC LETTER SEEN WITH THREE DOTS BELOW').
+unicode_name(0x069C, 'ARABIC LETTER SEEN WITH THREE DOTS BELOW AND THREE DOTS ABOVE').
+unicode_name(0x069D, 'ARABIC LETTER SAD WITH TWO DOTS BELOW').
+unicode_name(0x069E, 'ARABIC LETTER SAD WITH THREE DOTS ABOVE').
+unicode_name(0x069F, 'ARABIC LETTER TAH WITH THREE DOTS ABOVE').
+unicode_name(0x06A0, 'ARABIC LETTER AIN WITH THREE DOTS ABOVE').
+unicode_name(0x06A1, 'ARABIC LETTER DOTLESS FEH').
+unicode_name(0x06A2, 'ARABIC LETTER FEH WITH DOT MOVED BELOW').
+unicode_name(0x06A3, 'ARABIC LETTER FEH WITH DOT BELOW').
+unicode_name(0x06A4, 'ARABIC LETTER VEH').
+unicode_name(0x06A5, 'ARABIC LETTER FEH WITH THREE DOTS BELOW').
+unicode_name(0x06A6, 'ARABIC LETTER PEHEH').
+unicode_name(0x06A7, 'ARABIC LETTER QAF WITH DOT ABOVE').
+unicode_name(0x06A8, 'ARABIC LETTER QAF WITH THREE DOTS ABOVE').
+unicode_name(0x06A9, 'ARABIC LETTER KEHEH').
+unicode_name(0x06AA, 'ARABIC LETTER SWASH KAF').
+unicode_name(0x06AB, 'ARABIC LETTER KAF WITH RING').
+unicode_name(0x06AC, 'ARABIC LETTER KAF WITH DOT ABOVE').
+unicode_name(0x06AD, 'ARABIC LETTER NG').
+unicode_name(0x06AE, 'ARABIC LETTER KAF WITH THREE DOTS BELOW').
+unicode_name(0x06AF, 'ARABIC LETTER GAF').
+unicode_name(0x06B0, 'ARABIC LETTER GAF WITH RING').
+unicode_name(0x06B1, 'ARABIC LETTER NGOEH').
+unicode_name(0x06B2, 'ARABIC LETTER GAF WITH TWO DOTS BELOW').
+unicode_name(0x06B3, 'ARABIC LETTER GUEH').
+unicode_name(0x06B4, 'ARABIC LETTER GAF WITH THREE DOTS ABOVE').
+unicode_name(0x06B5, 'ARABIC LETTER LAM WITH SMALL V').
+unicode_name(0x06B6, 'ARABIC LETTER LAM WITH DOT ABOVE').
+unicode_name(0x06B7, 'ARABIC LETTER LAM WITH THREE DOTS ABOVE').
+unicode_name(0x06B8, 'ARABIC LETTER LAM WITH THREE DOTS BELOW').
+unicode_name(0x06B9, 'ARABIC LETTER NOON WITH DOT BELOW').
+unicode_name(0x06BA, 'ARABIC LETTER NOON GHUNNA').
+unicode_name(0x06BB, 'ARABIC LETTER RNOON').
+unicode_name(0x06BC, 'ARABIC LETTER NOON WITH RING').
+unicode_name(0x06BD, 'ARABIC LETTER NOON WITH THREE DOTS ABOVE').
+unicode_name(0x06BE, 'ARABIC LETTER HEH DOACHASHMEE').
+unicode_name(0x06BF, 'ARABIC LETTER TCHEH WITH DOT ABOVE').
+unicode_name(0x06C0, 'ARABIC LETTER HEH WITH YEH ABOVE').
+unicode_name(0x06C1, 'ARABIC LETTER HEH GOAL').
+unicode_name(0x06C2, 'ARABIC LETTER HEH GOAL WITH HAMZA ABOVE').
+unicode_name(0x06C3, 'ARABIC LETTER TEH MARBUTA GOAL').
+unicode_name(0x06C4, 'ARABIC LETTER WAW WITH RING').
+unicode_name(0x06C5, 'ARABIC LETTER KIRGHIZ OE').
+unicode_name(0x06C6, 'ARABIC LETTER OE').
+unicode_name(0x06C7, 'ARABIC LETTER U').
+unicode_name(0x06C8, 'ARABIC LETTER YU').
+unicode_name(0x06C9, 'ARABIC LETTER KIRGHIZ YU').
+unicode_name(0x06CA, 'ARABIC LETTER WAW WITH TWO DOTS ABOVE').
+unicode_name(0x06CB, 'ARABIC LETTER VE').
+unicode_name(0x06CC, 'ARABIC LETTER FARSI YEH').
+unicode_name(0x06CD, 'ARABIC LETTER YEH WITH TAIL').
+unicode_name(0x06CE, 'ARABIC LETTER YEH WITH SMALL V').
+unicode_name(0x06CF, 'ARABIC LETTER WAW WITH DOT ABOVE').
+unicode_name(0x06D0, 'ARABIC LETTER E').
+unicode_name(0x06D1, 'ARABIC LETTER YEH WITH THREE DOTS BELOW').
+unicode_name(0x06D2, 'ARABIC LETTER YEH BARREE').
+unicode_name(0x06D3, 'ARABIC LETTER YEH BARREE WITH HAMZA ABOVE').
+unicode_name(0x06D5, 'ARABIC LETTER AE').
+unicode_name(0x06EE, 'ARABIC LETTER DAL WITH INVERTED V').
+unicode_name(0x06EF, 'ARABIC LETTER REH WITH INVERTED V').
+unicode_name(0x06FA, 'ARABIC LETTER SHEEN WITH DOT BELOW').
+unicode_name(0x06FB, 'ARABIC LETTER DAD WITH DOT BELOW').
+unicode_name(0x06FC, 'ARABIC LETTER GHAIN WITH DOT BELOW').
+unicode_name(0x06FF, 'ARABIC LETTER HEH WITH INVERTED V').
+unicode_name(0x0710, 'SYRIAC LETTER ALAPH').
+unicode_name(0x0712, 'SYRIAC LETTER BETH').
+unicode_name(0x0713, 'SYRIAC LETTER GAMAL').
+unicode_name(0x0714, 'SYRIAC LETTER GAMAL GARSHUNI').
+unicode_name(0x0715, 'SYRIAC LETTER DALATH').
+unicode_name(0x0716, 'SYRIAC LETTER DOTLESS DALATH RISH').
+unicode_name(0x0717, 'SYRIAC LETTER HE').
+unicode_name(0x0718, 'SYRIAC LETTER WAW').
+unicode_name(0x0719, 'SYRIAC LETTER ZAIN').
+unicode_name(0x071A, 'SYRIAC LETTER HETH').
+unicode_name(0x071B, 'SYRIAC LETTER TETH').
+unicode_name(0x071C, 'SYRIAC LETTER TETH GARSHUNI').
+unicode_name(0x071D, 'SYRIAC LETTER YUDH').
+unicode_name(0x071E, 'SYRIAC LETTER YUDH HE').
+unicode_name(0x071F, 'SYRIAC LETTER KAPH').
+unicode_name(0x0720, 'SYRIAC LETTER LAMADH').
+unicode_name(0x0721, 'SYRIAC LETTER MIM').
+unicode_name(0x0722, 'SYRIAC LETTER NUN').
+unicode_name(0x0723, 'SYRIAC LETTER SEMKATH').
+unicode_name(0x0724, 'SYRIAC LETTER FINAL SEMKATH').
+unicode_name(0x0725, 'SYRIAC LETTER E').
+unicode_name(0x0726, 'SYRIAC LETTER PE').
+unicode_name(0x0727, 'SYRIAC LETTER REVERSED PE').
+unicode_name(0x0728, 'SYRIAC LETTER SADHE').
+unicode_name(0x0729, 'SYRIAC LETTER QAPH').
+unicode_name(0x072A, 'SYRIAC LETTER RISH').
+unicode_name(0x072B, 'SYRIAC LETTER SHIN').
+unicode_name(0x072C, 'SYRIAC LETTER TAW').
+unicode_name(0x072D, 'SYRIAC LETTER PERSIAN BHETH').
+unicode_name(0x072E, 'SYRIAC LETTER PERSIAN GHAMAL').
+unicode_name(0x072F, 'SYRIAC LETTER PERSIAN DHALATH').
+unicode_name(0x074D, 'SYRIAC LETTER SOGDIAN ZHAIN').
+unicode_name(0x074E, 'SYRIAC LETTER SOGDIAN KHAPH').
+unicode_name(0x074F, 'SYRIAC LETTER SOGDIAN FE').
+unicode_name(0x0750, 'ARABIC LETTER BEH WITH THREE DOTS HORIZONTALLY BELOW').
+unicode_name(0x0751, 'ARABIC LETTER BEH WITH DOT BELOW AND THREE DOTS ABOVE').
+unicode_name(0x0752, 'ARABIC LETTER BEH WITH THREE DOTS POINTING UPWARDS BELOW').
+unicode_name(0x0753, 'ARABIC LETTER BEH WITH THREE DOTS POINTING UPWARDS BELOW AND TWO DOTS ABOVE').
+unicode_name(0x0754, 'ARABIC LETTER BEH WITH TWO DOTS BELOW AND DOT ABOVE').
+unicode_name(0x0755, 'ARABIC LETTER BEH WITH INVERTED SMALL V BELOW').
+unicode_name(0x0756, 'ARABIC LETTER BEH WITH SMALL V').
+unicode_name(0x0757, 'ARABIC LETTER HAH WITH TWO DOTS ABOVE').
+unicode_name(0x0758, 'ARABIC LETTER HAH WITH THREE DOTS POINTING UPWARDS BELOW').
+unicode_name(0x0759, 'ARABIC LETTER DAL WITH TWO DOTS VERTICALLY BELOW AND SMALL TAH').
+unicode_name(0x075A, 'ARABIC LETTER DAL WITH INVERTED SMALL V BELOW').
+unicode_name(0x075B, 'ARABIC LETTER REH WITH STROKE').
+unicode_name(0x075C, 'ARABIC LETTER SEEN WITH FOUR DOTS ABOVE').
+unicode_name(0x075D, 'ARABIC LETTER AIN WITH TWO DOTS ABOVE').
+unicode_name(0x075E, 'ARABIC LETTER AIN WITH THREE DOTS POINTING DOWNWARDS ABOVE').
+unicode_name(0x075F, 'ARABIC LETTER AIN WITH TWO DOTS VERTICALLY ABOVE').
+unicode_name(0x0760, 'ARABIC LETTER FEH WITH TWO DOTS BELOW').
+unicode_name(0x0761, 'ARABIC LETTER FEH WITH THREE DOTS POINTING UPWARDS BELOW').
+unicode_name(0x0762, 'ARABIC LETTER KEHEH WITH DOT ABOVE').
+unicode_name(0x0763, 'ARABIC LETTER KEHEH WITH THREE DOTS ABOVE').
+unicode_name(0x0764, 'ARABIC LETTER KEHEH WITH THREE DOTS POINTING UPWARDS BELOW').
+unicode_name(0x0765, 'ARABIC LETTER MEEM WITH DOT ABOVE').
+unicode_name(0x0766, 'ARABIC LETTER MEEM WITH DOT BELOW').
+unicode_name(0x0767, 'ARABIC LETTER NOON WITH TWO DOTS BELOW').
+unicode_name(0x0768, 'ARABIC LETTER NOON WITH SMALL TAH').
+unicode_name(0x0769, 'ARABIC LETTER NOON WITH SMALL V').
+unicode_name(0x076A, 'ARABIC LETTER LAM WITH BAR').
+unicode_name(0x076B, 'ARABIC LETTER REH WITH TWO DOTS VERTICALLY ABOVE').
+unicode_name(0x076C, 'ARABIC LETTER REH WITH HAMZA ABOVE').
+unicode_name(0x076D, 'ARABIC LETTER SEEN WITH TWO DOTS VERTICALLY ABOVE').
+unicode_name(0x076E, 'ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH BELOW').
+unicode_name(0x076F, 'ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH AND TWO DOTS').
+unicode_name(0x0770, 'ARABIC LETTER SEEN WITH SMALL ARABIC LETTER TAH AND TWO DOTS').
+unicode_name(0x0771, 'ARABIC LETTER REH WITH SMALL ARABIC LETTER TAH AND TWO DOTS').
+unicode_name(0x0772, 'ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH ABOVE').
+unicode_name(0x0773, 'ARABIC LETTER ALEF WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE').
+unicode_name(0x0774, 'ARABIC LETTER ALEF WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE').
+unicode_name(0x0775, 'ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE').
+unicode_name(0x0776, 'ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE').
+unicode_name(0x0777, 'ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT FOUR BELOW').
+unicode_name(0x0778, 'ARABIC LETTER WAW WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE').
+unicode_name(0x0779, 'ARABIC LETTER WAW WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE').
+unicode_name(0x077A, 'ARABIC LETTER YEH BARREE WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE').
+unicode_name(0x077B, 'ARABIC LETTER YEH BARREE WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE').
+unicode_name(0x077C, 'ARABIC LETTER HAH WITH EXTENDED ARABIC-INDIC DIGIT FOUR BELOW').
+unicode_name(0x077D, 'ARABIC LETTER SEEN WITH EXTENDED ARABIC-INDIC DIGIT FOUR ABOVE').
+unicode_name(0x077E, 'ARABIC LETTER SEEN WITH INVERTED V').
+unicode_name(0x077F, 'ARABIC LETTER KAF WITH TWO DOTS ABOVE').
+unicode_name(0x0780, 'THAANA LETTER HAA').
+unicode_name(0x0781, 'THAANA LETTER SHAVIYANI').
+unicode_name(0x0782, 'THAANA LETTER NOONU').
+unicode_name(0x0783, 'THAANA LETTER RAA').
+unicode_name(0x0784, 'THAANA LETTER BAA').
+unicode_name(0x0785, 'THAANA LETTER LHAVIYANI').
+unicode_name(0x0786, 'THAANA LETTER KAAFU').
+unicode_name(0x0787, 'THAANA LETTER ALIFU').
+unicode_name(0x0788, 'THAANA LETTER VAAVU').
+unicode_name(0x0789, 'THAANA LETTER MEEMU').
+unicode_name(0x078A, 'THAANA LETTER FAAFU').
+unicode_name(0x078B, 'THAANA LETTER DHAALU').
+unicode_name(0x078C, 'THAANA LETTER THAA').
+unicode_name(0x078D, 'THAANA LETTER LAAMU').
+unicode_name(0x078E, 'THAANA LETTER GAAFU').
+unicode_name(0x078F, 'THAANA LETTER GNAVIYANI').
+unicode_name(0x0790, 'THAANA LETTER SEENU').
+unicode_name(0x0791, 'THAANA LETTER DAVIYANI').
+unicode_name(0x0792, 'THAANA LETTER ZAVIYANI').
+unicode_name(0x0793, 'THAANA LETTER TAVIYANI').
+unicode_name(0x0794, 'THAANA LETTER YAA').
+unicode_name(0x0795, 'THAANA LETTER PAVIYANI').
+unicode_name(0x0796, 'THAANA LETTER JAVIYANI').
+unicode_name(0x0797, 'THAANA LETTER CHAVIYANI').
+unicode_name(0x0798, 'THAANA LETTER TTAA').
+unicode_name(0x0799, 'THAANA LETTER HHAA').
+unicode_name(0x079A, 'THAANA LETTER KHAA').
+unicode_name(0x079B, 'THAANA LETTER THAALU').
+unicode_name(0x079C, 'THAANA LETTER ZAA').
+unicode_name(0x079D, 'THAANA LETTER SHEENU').
+unicode_name(0x079E, 'THAANA LETTER SAADHU').
+unicode_name(0x079F, 'THAANA LETTER DAADHU').
+unicode_name(0x07A0, 'THAANA LETTER TO').
+unicode_name(0x07A1, 'THAANA LETTER ZO').
+unicode_name(0x07A2, 'THAANA LETTER AINU').
+unicode_name(0x07A3, 'THAANA LETTER GHAINU').
+unicode_name(0x07A4, 'THAANA LETTER QAAFU').
+unicode_name(0x07A5, 'THAANA LETTER WAAVU').
+unicode_name(0x07B1, 'THAANA LETTER NAA').
+unicode_name(0x07CA, 'NKO LETTER A').
+unicode_name(0x07CB, 'NKO LETTER EE').
+unicode_name(0x07CC, 'NKO LETTER I').
+unicode_name(0x07CD, 'NKO LETTER E').
+unicode_name(0x07CE, 'NKO LETTER U').
+unicode_name(0x07CF, 'NKO LETTER OO').
+unicode_name(0x07D0, 'NKO LETTER O').
+unicode_name(0x07D1, 'NKO LETTER DAGBASINNA').
+unicode_name(0x07D2, 'NKO LETTER N').
+unicode_name(0x07D3, 'NKO LETTER BA').
+unicode_name(0x07D4, 'NKO LETTER PA').
+unicode_name(0x07D5, 'NKO LETTER TA').
+unicode_name(0x07D6, 'NKO LETTER JA').
+unicode_name(0x07D7, 'NKO LETTER CHA').
+unicode_name(0x07D8, 'NKO LETTER DA').
+unicode_name(0x07D9, 'NKO LETTER RA').
+unicode_name(0x07DA, 'NKO LETTER RRA').
+unicode_name(0x07DB, 'NKO LETTER SA').
+unicode_name(0x07DC, 'NKO LETTER GBA').
+unicode_name(0x07DD, 'NKO LETTER FA').
+unicode_name(0x07DE, 'NKO LETTER KA').
+unicode_name(0x07DF, 'NKO LETTER LA').
+unicode_name(0x07E0, 'NKO LETTER NA WOLOSO').
+unicode_name(0x07E1, 'NKO LETTER MA').
+unicode_name(0x07E2, 'NKO LETTER NYA').
+unicode_name(0x07E3, 'NKO LETTER NA').
+unicode_name(0x07E4, 'NKO LETTER HA').
+unicode_name(0x07E5, 'NKO LETTER WA').
+unicode_name(0x07E6, 'NKO LETTER YA').
+unicode_name(0x07E7, 'NKO LETTER NYA WOLOSO').
+unicode_name(0x07E8, 'NKO LETTER JONA JA').
+unicode_name(0x07E9, 'NKO LETTER JONA CHA').
+unicode_name(0x07EA, 'NKO LETTER JONA RA').
+unicode_name(0x0800, 'SAMARITAN LETTER ALAF').
+unicode_name(0x0801, 'SAMARITAN LETTER BIT').
+unicode_name(0x0802, 'SAMARITAN LETTER GAMAN').
+unicode_name(0x0803, 'SAMARITAN LETTER DALAT').
+unicode_name(0x0804, 'SAMARITAN LETTER IY').
+unicode_name(0x0805, 'SAMARITAN LETTER BAA').
+unicode_name(0x0806, 'SAMARITAN LETTER ZEN').
+unicode_name(0x0807, 'SAMARITAN LETTER IT').
+unicode_name(0x0808, 'SAMARITAN LETTER TIT').
+unicode_name(0x0809, 'SAMARITAN LETTER YUT').
+unicode_name(0x080A, 'SAMARITAN LETTER KAAF').
+unicode_name(0x080B, 'SAMARITAN LETTER LABAT').
+unicode_name(0x080C, 'SAMARITAN LETTER MIM').
+unicode_name(0x080D, 'SAMARITAN LETTER NUN').
+unicode_name(0x080E, 'SAMARITAN LETTER SINGAAT').
+unicode_name(0x080F, 'SAMARITAN LETTER IN').
+unicode_name(0x0810, 'SAMARITAN LETTER FI').
+unicode_name(0x0811, 'SAMARITAN LETTER TSAADIY').
+unicode_name(0x0812, 'SAMARITAN LETTER QUF').
+unicode_name(0x0813, 'SAMARITAN LETTER RISH').
+unicode_name(0x0814, 'SAMARITAN LETTER SHAN').
+unicode_name(0x0815, 'SAMARITAN LETTER TAAF').
+unicode_name(0x0840, 'MANDAIC LETTER HALQA').
+unicode_name(0x0841, 'MANDAIC LETTER AB').
+unicode_name(0x0842, 'MANDAIC LETTER AG').
+unicode_name(0x0843, 'MANDAIC LETTER AD').
+unicode_name(0x0844, 'MANDAIC LETTER AH').
+unicode_name(0x0845, 'MANDAIC LETTER USHENNA').
+unicode_name(0x0846, 'MANDAIC LETTER AZ').
+unicode_name(0x0847, 'MANDAIC LETTER IT').
+unicode_name(0x0848, 'MANDAIC LETTER ATT').
+unicode_name(0x0849, 'MANDAIC LETTER AKSA').
+unicode_name(0x084A, 'MANDAIC LETTER AK').
+unicode_name(0x084B, 'MANDAIC LETTER AL').
+unicode_name(0x084C, 'MANDAIC LETTER AM').
+unicode_name(0x084D, 'MANDAIC LETTER AN').
+unicode_name(0x084E, 'MANDAIC LETTER AS').
+unicode_name(0x084F, 'MANDAIC LETTER IN').
+unicode_name(0x0850, 'MANDAIC LETTER AP').
+unicode_name(0x0851, 'MANDAIC LETTER ASZ').
+unicode_name(0x0852, 'MANDAIC LETTER AQ').
+unicode_name(0x0853, 'MANDAIC LETTER AR').
+unicode_name(0x0854, 'MANDAIC LETTER ASH').
+unicode_name(0x0855, 'MANDAIC LETTER AT').
+unicode_name(0x0856, 'MANDAIC LETTER DUSHENNA').
+unicode_name(0x0857, 'MANDAIC LETTER KAD').
+unicode_name(0x0858, 'MANDAIC LETTER AIN').
+unicode_name(0x08A0, 'ARABIC LETTER BEH WITH SMALL V BELOW').
+unicode_name(0x08A2, 'ARABIC LETTER JEEM WITH TWO DOTS ABOVE').
+unicode_name(0x08A3, 'ARABIC LETTER TAH WITH TWO DOTS ABOVE').
+unicode_name(0x08A4, 'ARABIC LETTER FEH WITH DOT BELOW AND THREE DOTS ABOVE').
+unicode_name(0x08A5, 'ARABIC LETTER QAF WITH DOT BELOW').
+unicode_name(0x08A6, 'ARABIC LETTER LAM WITH DOUBLE BAR').
+unicode_name(0x08A7, 'ARABIC LETTER MEEM WITH THREE DOTS ABOVE').
+unicode_name(0x08A8, 'ARABIC LETTER YEH WITH TWO DOTS BELOW AND HAMZA ABOVE').
+unicode_name(0x08A9, 'ARABIC LETTER YEH WITH TWO DOTS BELOW AND DOT ABOVE').
+unicode_name(0x08AA, 'ARABIC LETTER REH WITH LOOP').
+unicode_name(0x08AB, 'ARABIC LETTER WAW WITH DOT WITHIN').
+unicode_name(0x08AC, 'ARABIC LETTER ROHINGYA YEH').
+unicode_name(0x0904, 'DEVANAGARI LETTER SHORT A').
+unicode_name(0x0905, 'DEVANAGARI LETTER A').
+unicode_name(0x0906, 'DEVANAGARI LETTER AA').
+unicode_name(0x0907, 'DEVANAGARI LETTER I').
+unicode_name(0x0908, 'DEVANAGARI LETTER II').
+unicode_name(0x0909, 'DEVANAGARI LETTER U').
+unicode_name(0x090A, 'DEVANAGARI LETTER UU').
+unicode_name(0x090B, 'DEVANAGARI LETTER VOCALIC R').
+unicode_name(0x090C, 'DEVANAGARI LETTER VOCALIC L').
+unicode_name(0x090D, 'DEVANAGARI LETTER CANDRA E').
+unicode_name(0x090E, 'DEVANAGARI LETTER SHORT E').
+unicode_name(0x090F, 'DEVANAGARI LETTER E').
+unicode_name(0x0910, 'DEVANAGARI LETTER AI').
+unicode_name(0x0911, 'DEVANAGARI LETTER CANDRA O').
+unicode_name(0x0912, 'DEVANAGARI LETTER SHORT O').
+unicode_name(0x0913, 'DEVANAGARI LETTER O').
+unicode_name(0x0914, 'DEVANAGARI LETTER AU').
+unicode_name(0x0915, 'DEVANAGARI LETTER KA').
+unicode_name(0x0916, 'DEVANAGARI LETTER KHA').
+unicode_name(0x0917, 'DEVANAGARI LETTER GA').
+unicode_name(0x0918, 'DEVANAGARI LETTER GHA').
+unicode_name(0x0919, 'DEVANAGARI LETTER NGA').
+unicode_name(0x091A, 'DEVANAGARI LETTER CA').
+unicode_name(0x091B, 'DEVANAGARI LETTER CHA').
+unicode_name(0x091C, 'DEVANAGARI LETTER JA').
+unicode_name(0x091D, 'DEVANAGARI LETTER JHA').
+unicode_name(0x091E, 'DEVANAGARI LETTER NYA').
+unicode_name(0x091F, 'DEVANAGARI LETTER TTA').
+unicode_name(0x0920, 'DEVANAGARI LETTER TTHA').
+unicode_name(0x0921, 'DEVANAGARI LETTER DDA').
+unicode_name(0x0922, 'DEVANAGARI LETTER DDHA').
+unicode_name(0x0923, 'DEVANAGARI LETTER NNA').
+unicode_name(0x0924, 'DEVANAGARI LETTER TA').
+unicode_name(0x0925, 'DEVANAGARI LETTER THA').
+unicode_name(0x0926, 'DEVANAGARI LETTER DA').
+unicode_name(0x0927, 'DEVANAGARI LETTER DHA').
+unicode_name(0x0928, 'DEVANAGARI LETTER NA').
+unicode_name(0x0929, 'DEVANAGARI LETTER NNNA').
+unicode_name(0x092A, 'DEVANAGARI LETTER PA').
+unicode_name(0x092B, 'DEVANAGARI LETTER PHA').
+unicode_name(0x092C, 'DEVANAGARI LETTER BA').
+unicode_name(0x092D, 'DEVANAGARI LETTER BHA').
+unicode_name(0x092E, 'DEVANAGARI LETTER MA').
+unicode_name(0x092F, 'DEVANAGARI LETTER YA').
+unicode_name(0x0930, 'DEVANAGARI LETTER RA').
+unicode_name(0x0931, 'DEVANAGARI LETTER RRA').
+unicode_name(0x0932, 'DEVANAGARI LETTER LA').
+unicode_name(0x0933, 'DEVANAGARI LETTER LLA').
+unicode_name(0x0934, 'DEVANAGARI LETTER LLLA').
+unicode_name(0x0935, 'DEVANAGARI LETTER VA').
+unicode_name(0x0936, 'DEVANAGARI LETTER SHA').
+unicode_name(0x0937, 'DEVANAGARI LETTER SSA').
+unicode_name(0x0938, 'DEVANAGARI LETTER SA').
+unicode_name(0x0939, 'DEVANAGARI LETTER HA').
+unicode_name(0x093D, 'DEVANAGARI SIGN AVAGRAHA').
+unicode_name(0x0950, 'DEVANAGARI OM').
+unicode_name(0x0958, 'DEVANAGARI LETTER QA').
+unicode_name(0x0959, 'DEVANAGARI LETTER KHHA').
+unicode_name(0x095A, 'DEVANAGARI LETTER GHHA').
+unicode_name(0x095B, 'DEVANAGARI LETTER ZA').
+unicode_name(0x095C, 'DEVANAGARI LETTER DDDHA').
+unicode_name(0x095D, 'DEVANAGARI LETTER RHA').
+unicode_name(0x095E, 'DEVANAGARI LETTER FA').
+unicode_name(0x095F, 'DEVANAGARI LETTER YYA').
+unicode_name(0x0960, 'DEVANAGARI LETTER VOCALIC RR').
+unicode_name(0x0961, 'DEVANAGARI LETTER VOCALIC LL').
+unicode_name(0x0972, 'DEVANAGARI LETTER CANDRA A').
+unicode_name(0x0973, 'DEVANAGARI LETTER OE').
+unicode_name(0x0974, 'DEVANAGARI LETTER OOE').
+unicode_name(0x0975, 'DEVANAGARI LETTER AW').
+unicode_name(0x0976, 'DEVANAGARI LETTER UE').
+unicode_name(0x0977, 'DEVANAGARI LETTER UUE').
+unicode_name(0x0979, 'DEVANAGARI LETTER ZHA').
+unicode_name(0x097A, 'DEVANAGARI LETTER HEAVY YA').
+unicode_name(0x097B, 'DEVANAGARI LETTER GGA').
+unicode_name(0x097C, 'DEVANAGARI LETTER JJA').
+unicode_name(0x097D, 'DEVANAGARI LETTER GLOTTAL STOP').
+unicode_name(0x097E, 'DEVANAGARI LETTER DDDA').
+unicode_name(0x097F, 'DEVANAGARI LETTER BBA').
+unicode_name(0x0985, 'BENGALI LETTER A').
+unicode_name(0x0986, 'BENGALI LETTER AA').
+unicode_name(0x0987, 'BENGALI LETTER I').
+unicode_name(0x0988, 'BENGALI LETTER II').
+unicode_name(0x0989, 'BENGALI LETTER U').
+unicode_name(0x098A, 'BENGALI LETTER UU').
+unicode_name(0x098B, 'BENGALI LETTER VOCALIC R').
+unicode_name(0x098C, 'BENGALI LETTER VOCALIC L').
+unicode_name(0x098F, 'BENGALI LETTER E').
+unicode_name(0x0990, 'BENGALI LETTER AI').
+unicode_name(0x0993, 'BENGALI LETTER O').
+unicode_name(0x0994, 'BENGALI LETTER AU').
+unicode_name(0x0995, 'BENGALI LETTER KA').
+unicode_name(0x0996, 'BENGALI LETTER KHA').
+unicode_name(0x0997, 'BENGALI LETTER GA').
+unicode_name(0x0998, 'BENGALI LETTER GHA').
+unicode_name(0x0999, 'BENGALI LETTER NGA').
+unicode_name(0x099A, 'BENGALI LETTER CA').
+unicode_name(0x099B, 'BENGALI LETTER CHA').
+unicode_name(0x099C, 'BENGALI LETTER JA').
+unicode_name(0x099D, 'BENGALI LETTER JHA').
+unicode_name(0x099E, 'BENGALI LETTER NYA').
+unicode_name(0x099F, 'BENGALI LETTER TTA').
+unicode_name(0x09A0, 'BENGALI LETTER TTHA').
+unicode_name(0x09A1, 'BENGALI LETTER DDA').
+unicode_name(0x09A2, 'BENGALI LETTER DDHA').
+unicode_name(0x09A3, 'BENGALI LETTER NNA').
+unicode_name(0x09A4, 'BENGALI LETTER TA').
+unicode_name(0x09A5, 'BENGALI LETTER THA').
+unicode_name(0x09A6, 'BENGALI LETTER DA').
+unicode_name(0x09A7, 'BENGALI LETTER DHA').
+unicode_name(0x09A8, 'BENGALI LETTER NA').
+unicode_name(0x09AA, 'BENGALI LETTER PA').
+unicode_name(0x09AB, 'BENGALI LETTER PHA').
+unicode_name(0x09AC, 'BENGALI LETTER BA').
+unicode_name(0x09AD, 'BENGALI LETTER BHA').
+unicode_name(0x09AE, 'BENGALI LETTER MA').
+unicode_name(0x09AF, 'BENGALI LETTER YA').
+unicode_name(0x09B0, 'BENGALI LETTER RA').
+unicode_name(0x09B2, 'BENGALI LETTER LA').
+unicode_name(0x09B6, 'BENGALI LETTER SHA').
+unicode_name(0x09B7, 'BENGALI LETTER SSA').
+unicode_name(0x09B8, 'BENGALI LETTER SA').
+unicode_name(0x09B9, 'BENGALI LETTER HA').
+unicode_name(0x09BD, 'BENGALI SIGN AVAGRAHA').
+unicode_name(0x09CE, 'BENGALI LETTER KHANDA TA').
+unicode_name(0x09DC, 'BENGALI LETTER RRA').
+unicode_name(0x09DD, 'BENGALI LETTER RHA').
+unicode_name(0x09DF, 'BENGALI LETTER YYA').
+unicode_name(0x09E0, 'BENGALI LETTER VOCALIC RR').
+unicode_name(0x09E1, 'BENGALI LETTER VOCALIC LL').
+unicode_name(0x09F0, 'BENGALI LETTER RA WITH MIDDLE DIAGONAL').
+unicode_name(0x09F1, 'BENGALI LETTER RA WITH LOWER DIAGONAL').
+unicode_name(0x0A05, 'GURMUKHI LETTER A').
+unicode_name(0x0A06, 'GURMUKHI LETTER AA').
+unicode_name(0x0A07, 'GURMUKHI LETTER I').
+unicode_name(0x0A08, 'GURMUKHI LETTER II').
+unicode_name(0x0A09, 'GURMUKHI LETTER U').
+unicode_name(0x0A0A, 'GURMUKHI LETTER UU').
+unicode_name(0x0A0F, 'GURMUKHI LETTER EE').
+unicode_name(0x0A10, 'GURMUKHI LETTER AI').
+unicode_name(0x0A13, 'GURMUKHI LETTER OO').
+unicode_name(0x0A14, 'GURMUKHI LETTER AU').
+unicode_name(0x0A15, 'GURMUKHI LETTER KA').
+unicode_name(0x0A16, 'GURMUKHI LETTER KHA').
+unicode_name(0x0A17, 'GURMUKHI LETTER GA').
+unicode_name(0x0A18, 'GURMUKHI LETTER GHA').
+unicode_name(0x0A19, 'GURMUKHI LETTER NGA').
+unicode_name(0x0A1A, 'GURMUKHI LETTER CA').
+unicode_name(0x0A1B, 'GURMUKHI LETTER CHA').
+unicode_name(0x0A1C, 'GURMUKHI LETTER JA').
+unicode_name(0x0A1D, 'GURMUKHI LETTER JHA').
+unicode_name(0x0A1E, 'GURMUKHI LETTER NYA').
+unicode_name(0x0A1F, 'GURMUKHI LETTER TTA').
+unicode_name(0x0A20, 'GURMUKHI LETTER TTHA').
+unicode_name(0x0A21, 'GURMUKHI LETTER DDA').
+unicode_name(0x0A22, 'GURMUKHI LETTER DDHA').
+unicode_name(0x0A23, 'GURMUKHI LETTER NNA').
+unicode_name(0x0A24, 'GURMUKHI LETTER TA').
+unicode_name(0x0A25, 'GURMUKHI LETTER THA').
+unicode_name(0x0A26, 'GURMUKHI LETTER DA').
+unicode_name(0x0A27, 'GURMUKHI LETTER DHA').
+unicode_name(0x0A28, 'GURMUKHI LETTER NA').
+unicode_name(0x0A2A, 'GURMUKHI LETTER PA').
+unicode_name(0x0A2B, 'GURMUKHI LETTER PHA').
+unicode_name(0x0A2C, 'GURMUKHI LETTER BA').
+unicode_name(0x0A2D, 'GURMUKHI LETTER BHA').
+unicode_name(0x0A2E, 'GURMUKHI LETTER MA').
+unicode_name(0x0A2F, 'GURMUKHI LETTER YA').
+unicode_name(0x0A30, 'GURMUKHI LETTER RA').
+unicode_name(0x0A32, 'GURMUKHI LETTER LA').
+unicode_name(0x0A33, 'GURMUKHI LETTER LLA').
+unicode_name(0x0A35, 'GURMUKHI LETTER VA').
+unicode_name(0x0A36, 'GURMUKHI LETTER SHA').
+unicode_name(0x0A38, 'GURMUKHI LETTER SA').
+unicode_name(0x0A39, 'GURMUKHI LETTER HA').
+unicode_name(0x0A59, 'GURMUKHI LETTER KHHA').
+unicode_name(0x0A5A, 'GURMUKHI LETTER GHHA').
+unicode_name(0x0A5B, 'GURMUKHI LETTER ZA').
+unicode_name(0x0A5C, 'GURMUKHI LETTER RRA').
+unicode_name(0x0A5E, 'GURMUKHI LETTER FA').
+unicode_name(0x0A72, 'GURMUKHI IRI').
+unicode_name(0x0A73, 'GURMUKHI URA').
+unicode_name(0x0A74, 'GURMUKHI EK ONKAR').
+unicode_name(0x0A85, 'GUJARATI LETTER A').
+unicode_name(0x0A86, 'GUJARATI LETTER AA').
+unicode_name(0x0A87, 'GUJARATI LETTER I').
+unicode_name(0x0A88, 'GUJARATI LETTER II').
+unicode_name(0x0A89, 'GUJARATI LETTER U').
+unicode_name(0x0A8A, 'GUJARATI LETTER UU').
+unicode_name(0x0A8B, 'GUJARATI LETTER VOCALIC R').
+unicode_name(0x0A8C, 'GUJARATI LETTER VOCALIC L').
+unicode_name(0x0A8D, 'GUJARATI VOWEL CANDRA E').
+unicode_name(0x0A8F, 'GUJARATI LETTER E').
+unicode_name(0x0A90, 'GUJARATI LETTER AI').
+unicode_name(0x0A91, 'GUJARATI VOWEL CANDRA O').
+unicode_name(0x0A93, 'GUJARATI LETTER O').
+unicode_name(0x0A94, 'GUJARATI LETTER AU').
+unicode_name(0x0A95, 'GUJARATI LETTER KA').
+unicode_name(0x0A96, 'GUJARATI LETTER KHA').
+unicode_name(0x0A97, 'GUJARATI LETTER GA').
+unicode_name(0x0A98, 'GUJARATI LETTER GHA').
+unicode_name(0x0A99, 'GUJARATI LETTER NGA').
+unicode_name(0x0A9A, 'GUJARATI LETTER CA').
+unicode_name(0x0A9B, 'GUJARATI LETTER CHA').
+unicode_name(0x0A9C, 'GUJARATI LETTER JA').
+unicode_name(0x0A9D, 'GUJARATI LETTER JHA').
+unicode_name(0x0A9E, 'GUJARATI LETTER NYA').
+unicode_name(0x0A9F, 'GUJARATI LETTER TTA').
+unicode_name(0x0AA0, 'GUJARATI LETTER TTHA').
+unicode_name(0x0AA1, 'GUJARATI LETTER DDA').
+unicode_name(0x0AA2, 'GUJARATI LETTER DDHA').
+unicode_name(0x0AA3, 'GUJARATI LETTER NNA').
+unicode_name(0x0AA4, 'GUJARATI LETTER TA').
+unicode_name(0x0AA5, 'GUJARATI LETTER THA').
+unicode_name(0x0AA6, 'GUJARATI LETTER DA').
+unicode_name(0x0AA7, 'GUJARATI LETTER DHA').
+unicode_name(0x0AA8, 'GUJARATI LETTER NA').
+unicode_name(0x0AAA, 'GUJARATI LETTER PA').
+unicode_name(0x0AAB, 'GUJARATI LETTER PHA').
+unicode_name(0x0AAC, 'GUJARATI LETTER BA').
+unicode_name(0x0AAD, 'GUJARATI LETTER BHA').
+unicode_name(0x0AAE, 'GUJARATI LETTER MA').
+unicode_name(0x0AAF, 'GUJARATI LETTER YA').
+unicode_name(0x0AB0, 'GUJARATI LETTER RA').
+unicode_name(0x0AB2, 'GUJARATI LETTER LA').
+unicode_name(0x0AB3, 'GUJARATI LETTER LLA').
+unicode_name(0x0AB5, 'GUJARATI LETTER VA').
+unicode_name(0x0AB6, 'GUJARATI LETTER SHA').
+unicode_name(0x0AB7, 'GUJARATI LETTER SSA').
+unicode_name(0x0AB8, 'GUJARATI LETTER SA').
+unicode_name(0x0AB9, 'GUJARATI LETTER HA').
+unicode_name(0x0ABD, 'GUJARATI SIGN AVAGRAHA').
+unicode_name(0x0AD0, 'GUJARATI OM').
+unicode_name(0x0AE0, 'GUJARATI LETTER VOCALIC RR').
+unicode_name(0x0AE1, 'GUJARATI LETTER VOCALIC LL').
+unicode_name(0x0B05, 'ORIYA LETTER A').
+unicode_name(0x0B06, 'ORIYA LETTER AA').
+unicode_name(0x0B07, 'ORIYA LETTER I').
+unicode_name(0x0B08, 'ORIYA LETTER II').
+unicode_name(0x0B09, 'ORIYA LETTER U').
+unicode_name(0x0B0A, 'ORIYA LETTER UU').
+unicode_name(0x0B0B, 'ORIYA LETTER VOCALIC R').
+unicode_name(0x0B0C, 'ORIYA LETTER VOCALIC L').
+unicode_name(0x0B0F, 'ORIYA LETTER E').
+unicode_name(0x0B10, 'ORIYA LETTER AI').
+unicode_name(0x0B13, 'ORIYA LETTER O').
+unicode_name(0x0B14, 'ORIYA LETTER AU').
+unicode_name(0x0B15, 'ORIYA LETTER KA').
+unicode_name(0x0B16, 'ORIYA LETTER KHA').
+unicode_name(0x0B17, 'ORIYA LETTER GA').
+unicode_name(0x0B18, 'ORIYA LETTER GHA').
+unicode_name(0x0B19, 'ORIYA LETTER NGA').
+unicode_name(0x0B1A, 'ORIYA LETTER CA').
+unicode_name(0x0B1B, 'ORIYA LETTER CHA').
+unicode_name(0x0B1C, 'ORIYA LETTER JA').
+unicode_name(0x0B1D, 'ORIYA LETTER JHA').
+unicode_name(0x0B1E, 'ORIYA LETTER NYA').
+unicode_name(0x0B1F, 'ORIYA LETTER TTA').
+unicode_name(0x0B20, 'ORIYA LETTER TTHA').
+unicode_name(0x0B21, 'ORIYA LETTER DDA').
+unicode_name(0x0B22, 'ORIYA LETTER DDHA').
+unicode_name(0x0B23, 'ORIYA LETTER NNA').
+unicode_name(0x0B24, 'ORIYA LETTER TA').
+unicode_name(0x0B25, 'ORIYA LETTER THA').
+unicode_name(0x0B26, 'ORIYA LETTER DA').
+unicode_name(0x0B27, 'ORIYA LETTER DHA').
+unicode_name(0x0B28, 'ORIYA LETTER NA').
+unicode_name(0x0B2A, 'ORIYA LETTER PA').
+unicode_name(0x0B2B, 'ORIYA LETTER PHA').
+unicode_name(0x0B2C, 'ORIYA LETTER BA').
+unicode_name(0x0B2D, 'ORIYA LETTER BHA').
+unicode_name(0x0B2E, 'ORIYA LETTER MA').
+unicode_name(0x0B2F, 'ORIYA LETTER YA').
+unicode_name(0x0B30, 'ORIYA LETTER RA').
+unicode_name(0x0B32, 'ORIYA LETTER LA').
+unicode_name(0x0B33, 'ORIYA LETTER LLA').
+unicode_name(0x0B35, 'ORIYA LETTER VA').
+unicode_name(0x0B36, 'ORIYA LETTER SHA').
+unicode_name(0x0B37, 'ORIYA LETTER SSA').
+unicode_name(0x0B38, 'ORIYA LETTER SA').
+unicode_name(0x0B39, 'ORIYA LETTER HA').
+unicode_name(0x0B3D, 'ORIYA SIGN AVAGRAHA').
+unicode_name(0x0B5C, 'ORIYA LETTER RRA').
+unicode_name(0x0B5D, 'ORIYA LETTER RHA').
+unicode_name(0x0B5F, 'ORIYA LETTER YYA').
+unicode_name(0x0B60, 'ORIYA LETTER VOCALIC RR').
+unicode_name(0x0B61, 'ORIYA LETTER VOCALIC LL').
+unicode_name(0x0B71, 'ORIYA LETTER WA').
+unicode_name(0x0B83, 'TAMIL SIGN VISARGA').
+unicode_name(0x0B85, 'TAMIL LETTER A').
+unicode_name(0x0B86, 'TAMIL LETTER AA').
+unicode_name(0x0B87, 'TAMIL LETTER I').
+unicode_name(0x0B88, 'TAMIL LETTER II').
+unicode_name(0x0B89, 'TAMIL LETTER U').
+unicode_name(0x0B8A, 'TAMIL LETTER UU').
+unicode_name(0x0B8E, 'TAMIL LETTER E').
+unicode_name(0x0B8F, 'TAMIL LETTER EE').
+unicode_name(0x0B90, 'TAMIL LETTER AI').
+unicode_name(0x0B92, 'TAMIL LETTER O').
+unicode_name(0x0B93, 'TAMIL LETTER OO').
+unicode_name(0x0B94, 'TAMIL LETTER AU').
+unicode_name(0x0B95, 'TAMIL LETTER KA').
+unicode_name(0x0B99, 'TAMIL LETTER NGA').
+unicode_name(0x0B9A, 'TAMIL LETTER CA').
+unicode_name(0x0B9C, 'TAMIL LETTER JA').
+unicode_name(0x0B9E, 'TAMIL LETTER NYA').
+unicode_name(0x0B9F, 'TAMIL LETTER TTA').
+unicode_name(0x0BA3, 'TAMIL LETTER NNA').
+unicode_name(0x0BA4, 'TAMIL LETTER TA').
+unicode_name(0x0BA8, 'TAMIL LETTER NA').
+unicode_name(0x0BA9, 'TAMIL LETTER NNNA').
+unicode_name(0x0BAA, 'TAMIL LETTER PA').
+unicode_name(0x0BAE, 'TAMIL LETTER MA').
+unicode_name(0x0BAF, 'TAMIL LETTER YA').
+unicode_name(0x0BB0, 'TAMIL LETTER RA').
+unicode_name(0x0BB1, 'TAMIL LETTER RRA').
+unicode_name(0x0BB2, 'TAMIL LETTER LA').
+unicode_name(0x0BB3, 'TAMIL LETTER LLA').
+unicode_name(0x0BB4, 'TAMIL LETTER LLLA').
+unicode_name(0x0BB5, 'TAMIL LETTER VA').
+unicode_name(0x0BB6, 'TAMIL LETTER SHA').
+unicode_name(0x0BB7, 'TAMIL LETTER SSA').
+unicode_name(0x0BB8, 'TAMIL LETTER SA').
+unicode_name(0x0BB9, 'TAMIL LETTER HA').
+unicode_name(0x0BD0, 'TAMIL OM').
+unicode_name(0x0C05, 'TELUGU LETTER A').
+unicode_name(0x0C06, 'TELUGU LETTER AA').
+unicode_name(0x0C07, 'TELUGU LETTER I').
+unicode_name(0x0C08, 'TELUGU LETTER II').
+unicode_name(0x0C09, 'TELUGU LETTER U').
+unicode_name(0x0C0A, 'TELUGU LETTER UU').
+unicode_name(0x0C0B, 'TELUGU LETTER VOCALIC R').
+unicode_name(0x0C0C, 'TELUGU LETTER VOCALIC L').
+unicode_name(0x0C0E, 'TELUGU LETTER E').
+unicode_name(0x0C0F, 'TELUGU LETTER EE').
+unicode_name(0x0C10, 'TELUGU LETTER AI').
+unicode_name(0x0C12, 'TELUGU LETTER O').
+unicode_name(0x0C13, 'TELUGU LETTER OO').
+unicode_name(0x0C14, 'TELUGU LETTER AU').
+unicode_name(0x0C15, 'TELUGU LETTER KA').
+unicode_name(0x0C16, 'TELUGU LETTER KHA').
+unicode_name(0x0C17, 'TELUGU LETTER GA').
+unicode_name(0x0C18, 'TELUGU LETTER GHA').
+unicode_name(0x0C19, 'TELUGU LETTER NGA').
+unicode_name(0x0C1A, 'TELUGU LETTER CA').
+unicode_name(0x0C1B, 'TELUGU LETTER CHA').
+unicode_name(0x0C1C, 'TELUGU LETTER JA').
+unicode_name(0x0C1D, 'TELUGU LETTER JHA').
+unicode_name(0x0C1E, 'TELUGU LETTER NYA').
+unicode_name(0x0C1F, 'TELUGU LETTER TTA').
+unicode_name(0x0C20, 'TELUGU LETTER TTHA').
+unicode_name(0x0C21, 'TELUGU LETTER DDA').
+unicode_name(0x0C22, 'TELUGU LETTER DDHA').
+unicode_name(0x0C23, 'TELUGU LETTER NNA').
+unicode_name(0x0C24, 'TELUGU LETTER TA').
+unicode_name(0x0C25, 'TELUGU LETTER THA').
+unicode_name(0x0C26, 'TELUGU LETTER DA').
+unicode_name(0x0C27, 'TELUGU LETTER DHA').
+unicode_name(0x0C28, 'TELUGU LETTER NA').
+unicode_name(0x0C2A, 'TELUGU LETTER PA').
+unicode_name(0x0C2B, 'TELUGU LETTER PHA').
+unicode_name(0x0C2C, 'TELUGU LETTER BA').
+unicode_name(0x0C2D, 'TELUGU LETTER BHA').
+unicode_name(0x0C2E, 'TELUGU LETTER MA').
+unicode_name(0x0C2F, 'TELUGU LETTER YA').
+unicode_name(0x0C30, 'TELUGU LETTER RA').
+unicode_name(0x0C31, 'TELUGU LETTER RRA').
+unicode_name(0x0C32, 'TELUGU LETTER LA').
+unicode_name(0x0C33, 'TELUGU LETTER LLA').
+unicode_name(0x0C35, 'TELUGU LETTER VA').
+unicode_name(0x0C36, 'TELUGU LETTER SHA').
+unicode_name(0x0C37, 'TELUGU LETTER SSA').
+unicode_name(0x0C38, 'TELUGU LETTER SA').
+unicode_name(0x0C39, 'TELUGU LETTER HA').
+unicode_name(0x0C3D, 'TELUGU SIGN AVAGRAHA').
+unicode_name(0x0C58, 'TELUGU LETTER TSA').
+unicode_name(0x0C59, 'TELUGU LETTER DZA').
+unicode_name(0x0C60, 'TELUGU LETTER VOCALIC RR').
+unicode_name(0x0C61, 'TELUGU LETTER VOCALIC LL').
+unicode_name(0x0C85, 'KANNADA LETTER A').
+unicode_name(0x0C86, 'KANNADA LETTER AA').
+unicode_name(0x0C87, 'KANNADA LETTER I').
+unicode_name(0x0C88, 'KANNADA LETTER II').
+unicode_name(0x0C89, 'KANNADA LETTER U').
+unicode_name(0x0C8A, 'KANNADA LETTER UU').
+unicode_name(0x0C8B, 'KANNADA LETTER VOCALIC R').
+unicode_name(0x0C8C, 'KANNADA LETTER VOCALIC L').
+unicode_name(0x0C8E, 'KANNADA LETTER E').
+unicode_name(0x0C8F, 'KANNADA LETTER EE').
+unicode_name(0x0C90, 'KANNADA LETTER AI').
+unicode_name(0x0C92, 'KANNADA LETTER O').
+unicode_name(0x0C93, 'KANNADA LETTER OO').
+unicode_name(0x0C94, 'KANNADA LETTER AU').
+unicode_name(0x0C95, 'KANNADA LETTER KA').
+unicode_name(0x0C96, 'KANNADA LETTER KHA').
+unicode_name(0x0C97, 'KANNADA LETTER GA').
+unicode_name(0x0C98, 'KANNADA LETTER GHA').
+unicode_name(0x0C99, 'KANNADA LETTER NGA').
+unicode_name(0x0C9A, 'KANNADA LETTER CA').
+unicode_name(0x0C9B, 'KANNADA LETTER CHA').
+unicode_name(0x0C9C, 'KANNADA LETTER JA').
+unicode_name(0x0C9D, 'KANNADA LETTER JHA').
+unicode_name(0x0C9E, 'KANNADA LETTER NYA').
+unicode_name(0x0C9F, 'KANNADA LETTER TTA').
+unicode_name(0x0CA0, 'KANNADA LETTER TTHA').
+unicode_name(0x0CA1, 'KANNADA LETTER DDA').
+unicode_name(0x0CA2, 'KANNADA LETTER DDHA').
+unicode_name(0x0CA3, 'KANNADA LETTER NNA').
+unicode_name(0x0CA4, 'KANNADA LETTER TA').
+unicode_name(0x0CA5, 'KANNADA LETTER THA').
+unicode_name(0x0CA6, 'KANNADA LETTER DA').
+unicode_name(0x0CA7, 'KANNADA LETTER DHA').
+unicode_name(0x0CA8, 'KANNADA LETTER NA').
+unicode_name(0x0CAA, 'KANNADA LETTER PA').
+unicode_name(0x0CAB, 'KANNADA LETTER PHA').
+unicode_name(0x0CAC, 'KANNADA LETTER BA').
+unicode_name(0x0CAD, 'KANNADA LETTER BHA').
+unicode_name(0x0CAE, 'KANNADA LETTER MA').
+unicode_name(0x0CAF, 'KANNADA LETTER YA').
+unicode_name(0x0CB0, 'KANNADA LETTER RA').
+unicode_name(0x0CB1, 'KANNADA LETTER RRA').
+unicode_name(0x0CB2, 'KANNADA LETTER LA').
+unicode_name(0x0CB3, 'KANNADA LETTER LLA').
+unicode_name(0x0CB5, 'KANNADA LETTER VA').
+unicode_name(0x0CB6, 'KANNADA LETTER SHA').
+unicode_name(0x0CB7, 'KANNADA LETTER SSA').
+unicode_name(0x0CB8, 'KANNADA LETTER SA').
+unicode_name(0x0CB9, 'KANNADA LETTER HA').
+unicode_name(0x0CBD, 'KANNADA SIGN AVAGRAHA').
+unicode_name(0x0CDE, 'KANNADA LETTER FA').
+unicode_name(0x0CE0, 'KANNADA LETTER VOCALIC RR').
+unicode_name(0x0CE1, 'KANNADA LETTER VOCALIC LL').
+unicode_name(0x0CF1, 'KANNADA SIGN JIHVAMULIYA').
+unicode_name(0x0CF2, 'KANNADA SIGN UPADHMANIYA').
+unicode_name(0x0D05, 'MALAYALAM LETTER A').
+unicode_name(0x0D06, 'MALAYALAM LETTER AA').
+unicode_name(0x0D07, 'MALAYALAM LETTER I').
+unicode_name(0x0D08, 'MALAYALAM LETTER II').
+unicode_name(0x0D09, 'MALAYALAM LETTER U').
+unicode_name(0x0D0A, 'MALAYALAM LETTER UU').
+unicode_name(0x0D0B, 'MALAYALAM LETTER VOCALIC R').
+unicode_name(0x0D0C, 'MALAYALAM LETTER VOCALIC L').
+unicode_name(0x0D0E, 'MALAYALAM LETTER E').
+unicode_name(0x0D0F, 'MALAYALAM LETTER EE').
+unicode_name(0x0D10, 'MALAYALAM LETTER AI').
+unicode_name(0x0D12, 'MALAYALAM LETTER O').
+unicode_name(0x0D13, 'MALAYALAM LETTER OO').
+unicode_name(0x0D14, 'MALAYALAM LETTER AU').
+unicode_name(0x0D15, 'MALAYALAM LETTER KA').
+unicode_name(0x0D16, 'MALAYALAM LETTER KHA').
+unicode_name(0x0D17, 'MALAYALAM LETTER GA').
+unicode_name(0x0D18, 'MALAYALAM LETTER GHA').
+unicode_name(0x0D19, 'MALAYALAM LETTER NGA').
+unicode_name(0x0D1A, 'MALAYALAM LETTER CA').
+unicode_name(0x0D1B, 'MALAYALAM LETTER CHA').
+unicode_name(0x0D1C, 'MALAYALAM LETTER JA').
+unicode_name(0x0D1D, 'MALAYALAM LETTER JHA').
+unicode_name(0x0D1E, 'MALAYALAM LETTER NYA').
+unicode_name(0x0D1F, 'MALAYALAM LETTER TTA').
+unicode_name(0x0D20, 'MALAYALAM LETTER TTHA').
+unicode_name(0x0D21, 'MALAYALAM LETTER DDA').
+unicode_name(0x0D22, 'MALAYALAM LETTER DDHA').
+unicode_name(0x0D23, 'MALAYALAM LETTER NNA').
+unicode_name(0x0D24, 'MALAYALAM LETTER TA').
+unicode_name(0x0D25, 'MALAYALAM LETTER THA').
+unicode_name(0x0D26, 'MALAYALAM LETTER DA').
+unicode_name(0x0D27, 'MALAYALAM LETTER DHA').
+unicode_name(0x0D28, 'MALAYALAM LETTER NA').
+unicode_name(0x0D29, 'MALAYALAM LETTER NNNA').
+unicode_name(0x0D2A, 'MALAYALAM LETTER PA').
+unicode_name(0x0D2B, 'MALAYALAM LETTER PHA').
+unicode_name(0x0D2C, 'MALAYALAM LETTER BA').
+unicode_name(0x0D2D, 'MALAYALAM LETTER BHA').
+unicode_name(0x0D2E, 'MALAYALAM LETTER MA').
+unicode_name(0x0D2F, 'MALAYALAM LETTER YA').
+unicode_name(0x0D30, 'MALAYALAM LETTER RA').
+unicode_name(0x0D31, 'MALAYALAM LETTER RRA').
+unicode_name(0x0D32, 'MALAYALAM LETTER LA').
+unicode_name(0x0D33, 'MALAYALAM LETTER LLA').
+unicode_name(0x0D34, 'MALAYALAM LETTER LLLA').
+unicode_name(0x0D35, 'MALAYALAM LETTER VA').
+unicode_name(0x0D36, 'MALAYALAM LETTER SHA').
+unicode_name(0x0D37, 'MALAYALAM LETTER SSA').
+unicode_name(0x0D38, 'MALAYALAM LETTER SA').
+unicode_name(0x0D39, 'MALAYALAM LETTER HA').
+unicode_name(0x0D3A, 'MALAYALAM LETTER TTTA').
+unicode_name(0x0D3D, 'MALAYALAM SIGN AVAGRAHA').
+unicode_name(0x0D4E, 'MALAYALAM LETTER DOT REPH').
+unicode_name(0x0D60, 'MALAYALAM LETTER VOCALIC RR').
+unicode_name(0x0D61, 'MALAYALAM LETTER VOCALIC LL').
+unicode_name(0x0D7A, 'MALAYALAM LETTER CHILLU NN').
+unicode_name(0x0D7B, 'MALAYALAM LETTER CHILLU N').
+unicode_name(0x0D7C, 'MALAYALAM LETTER CHILLU RR').
+unicode_name(0x0D7D, 'MALAYALAM LETTER CHILLU L').
+unicode_name(0x0D7E, 'MALAYALAM LETTER CHILLU LL').
+unicode_name(0x0D7F, 'MALAYALAM LETTER CHILLU K').
+unicode_name(0x0D85, 'SINHALA LETTER AYANNA').
+unicode_name(0x0D86, 'SINHALA LETTER AAYANNA').
+unicode_name(0x0D87, 'SINHALA LETTER AEYANNA').
+unicode_name(0x0D88, 'SINHALA LETTER AEEYANNA').
+unicode_name(0x0D89, 'SINHALA LETTER IYANNA').
+unicode_name(0x0D8A, 'SINHALA LETTER IIYANNA').
+unicode_name(0x0D8B, 'SINHALA LETTER UYANNA').
+unicode_name(0x0D8C, 'SINHALA LETTER UUYANNA').
+unicode_name(0x0D8D, 'SINHALA LETTER IRUYANNA').
+unicode_name(0x0D8E, 'SINHALA LETTER IRUUYANNA').
+unicode_name(0x0D8F, 'SINHALA LETTER ILUYANNA').
+unicode_name(0x0D90, 'SINHALA LETTER ILUUYANNA').
+unicode_name(0x0D91, 'SINHALA LETTER EYANNA').
+unicode_name(0x0D92, 'SINHALA LETTER EEYANNA').
+unicode_name(0x0D93, 'SINHALA LETTER AIYANNA').
+unicode_name(0x0D94, 'SINHALA LETTER OYANNA').
+unicode_name(0x0D95, 'SINHALA LETTER OOYANNA').
+unicode_name(0x0D96, 'SINHALA LETTER AUYANNA').
+unicode_name(0x0D9A, 'SINHALA LETTER ALPAPRAANA KAYANNA').
+unicode_name(0x0D9B, 'SINHALA LETTER MAHAAPRAANA KAYANNA').
+unicode_name(0x0D9C, 'SINHALA LETTER ALPAPRAANA GAYANNA').
+unicode_name(0x0D9D, 'SINHALA LETTER MAHAAPRAANA GAYANNA').
+unicode_name(0x0D9E, 'SINHALA LETTER KANTAJA NAASIKYAYA').
+unicode_name(0x0D9F, 'SINHALA LETTER SANYAKA GAYANNA').
+unicode_name(0x0DA0, 'SINHALA LETTER ALPAPRAANA CAYANNA').
+unicode_name(0x0DA1, 'SINHALA LETTER MAHAAPRAANA CAYANNA').
+unicode_name(0x0DA2, 'SINHALA LETTER ALPAPRAANA JAYANNA').
+unicode_name(0x0DA3, 'SINHALA LETTER MAHAAPRAANA JAYANNA').
+unicode_name(0x0DA4, 'SINHALA LETTER TAALUJA NAASIKYAYA').
+unicode_name(0x0DA5, 'SINHALA LETTER TAALUJA SANYOOGA NAAKSIKYAYA').
+unicode_name(0x0DA6, 'SINHALA LETTER SANYAKA JAYANNA').
+unicode_name(0x0DA7, 'SINHALA LETTER ALPAPRAANA TTAYANNA').
+unicode_name(0x0DA8, 'SINHALA LETTER MAHAAPRAANA TTAYANNA').
+unicode_name(0x0DA9, 'SINHALA LETTER ALPAPRAANA DDAYANNA').
+unicode_name(0x0DAA, 'SINHALA LETTER MAHAAPRAANA DDAYANNA').
+unicode_name(0x0DAB, 'SINHALA LETTER MUURDHAJA NAYANNA').
+unicode_name(0x0DAC, 'SINHALA LETTER SANYAKA DDAYANNA').
+unicode_name(0x0DAD, 'SINHALA LETTER ALPAPRAANA TAYANNA').
+unicode_name(0x0DAE, 'SINHALA LETTER MAHAAPRAANA TAYANNA').
+unicode_name(0x0DAF, 'SINHALA LETTER ALPAPRAANA DAYANNA').
+unicode_name(0x0DB0, 'SINHALA LETTER MAHAAPRAANA DAYANNA').
+unicode_name(0x0DB1, 'SINHALA LETTER DANTAJA NAYANNA').
+unicode_name(0x0DB3, 'SINHALA LETTER SANYAKA DAYANNA').
+unicode_name(0x0DB4, 'SINHALA LETTER ALPAPRAANA PAYANNA').
+unicode_name(0x0DB5, 'SINHALA LETTER MAHAAPRAANA PAYANNA').
+unicode_name(0x0DB6, 'SINHALA LETTER ALPAPRAANA BAYANNA').
+unicode_name(0x0DB7, 'SINHALA LETTER MAHAAPRAANA BAYANNA').
+unicode_name(0x0DB8, 'SINHALA LETTER MAYANNA').
+unicode_name(0x0DB9, 'SINHALA LETTER AMBA BAYANNA').
+unicode_name(0x0DBA, 'SINHALA LETTER YAYANNA').
+unicode_name(0x0DBB, 'SINHALA LETTER RAYANNA').
+unicode_name(0x0DBD, 'SINHALA LETTER DANTAJA LAYANNA').
+unicode_name(0x0DC0, 'SINHALA LETTER VAYANNA').
+unicode_name(0x0DC1, 'SINHALA LETTER TAALUJA SAYANNA').
+unicode_name(0x0DC2, 'SINHALA LETTER MUURDHAJA SAYANNA').
+unicode_name(0x0DC3, 'SINHALA LETTER DANTAJA SAYANNA').
+unicode_name(0x0DC4, 'SINHALA LETTER HAYANNA').
+unicode_name(0x0DC5, 'SINHALA LETTER MUURDHAJA LAYANNA').
+unicode_name(0x0DC6, 'SINHALA LETTER FAYANNA').
+unicode_name(0x0E01, 'THAI CHARACTER KO KAI').
+unicode_name(0x0E02, 'THAI CHARACTER KHO KHAI').
+unicode_name(0x0E03, 'THAI CHARACTER KHO KHUAT').
+unicode_name(0x0E04, 'THAI CHARACTER KHO KHWAI').
+unicode_name(0x0E05, 'THAI CHARACTER KHO KHON').
+unicode_name(0x0E06, 'THAI CHARACTER KHO RAKHANG').
+unicode_name(0x0E07, 'THAI CHARACTER NGO NGU').
+unicode_name(0x0E08, 'THAI CHARACTER CHO CHAN').
+unicode_name(0x0E09, 'THAI CHARACTER CHO CHING').
+unicode_name(0x0E0A, 'THAI CHARACTER CHO CHANG').
+unicode_name(0x0E0B, 'THAI CHARACTER SO SO').
+unicode_name(0x0E0C, 'THAI CHARACTER CHO CHOE').
+unicode_name(0x0E0D, 'THAI CHARACTER YO YING').
+unicode_name(0x0E0E, 'THAI CHARACTER DO CHADA').
+unicode_name(0x0E0F, 'THAI CHARACTER TO PATAK').
+unicode_name(0x0E10, 'THAI CHARACTER THO THAN').
+unicode_name(0x0E11, 'THAI CHARACTER THO NANGMONTHO').
+unicode_name(0x0E12, 'THAI CHARACTER THO PHUTHAO').
+unicode_name(0x0E13, 'THAI CHARACTER NO NEN').
+unicode_name(0x0E14, 'THAI CHARACTER DO DEK').
+unicode_name(0x0E15, 'THAI CHARACTER TO TAO').
+unicode_name(0x0E16, 'THAI CHARACTER THO THUNG').
+unicode_name(0x0E17, 'THAI CHARACTER THO THAHAN').
+unicode_name(0x0E18, 'THAI CHARACTER THO THONG').
+unicode_name(0x0E19, 'THAI CHARACTER NO NU').
+unicode_name(0x0E1A, 'THAI CHARACTER BO BAIMAI').
+unicode_name(0x0E1B, 'THAI CHARACTER PO PLA').
+unicode_name(0x0E1C, 'THAI CHARACTER PHO PHUNG').
+unicode_name(0x0E1D, 'THAI CHARACTER FO FA').
+unicode_name(0x0E1E, 'THAI CHARACTER PHO PHAN').
+unicode_name(0x0E1F, 'THAI CHARACTER FO FAN').
+unicode_name(0x0E20, 'THAI CHARACTER PHO SAMPHAO').
+unicode_name(0x0E21, 'THAI CHARACTER MO MA').
+unicode_name(0x0E22, 'THAI CHARACTER YO YAK').
+unicode_name(0x0E23, 'THAI CHARACTER RO RUA').
+unicode_name(0x0E24, 'THAI CHARACTER RU').
+unicode_name(0x0E25, 'THAI CHARACTER LO LING').
+unicode_name(0x0E26, 'THAI CHARACTER LU').
+unicode_name(0x0E27, 'THAI CHARACTER WO WAEN').
+unicode_name(0x0E28, 'THAI CHARACTER SO SALA').
+unicode_name(0x0E29, 'THAI CHARACTER SO RUSI').
+unicode_name(0x0E2A, 'THAI CHARACTER SO SUA').
+unicode_name(0x0E2B, 'THAI CHARACTER HO HIP').
+unicode_name(0x0E2C, 'THAI CHARACTER LO CHULA').
+unicode_name(0x0E2D, 'THAI CHARACTER O ANG').
+unicode_name(0x0E2E, 'THAI CHARACTER HO NOKHUK').
+unicode_name(0x0E2F, 'THAI CHARACTER PAIYANNOI').
+unicode_name(0x0E30, 'THAI CHARACTER SARA A').
+unicode_name(0x0E32, 'THAI CHARACTER SARA AA').
+unicode_name(0x0E33, 'THAI CHARACTER SARA AM').
+unicode_name(0x0E40, 'THAI CHARACTER SARA E').
+unicode_name(0x0E41, 'THAI CHARACTER SARA AE').
+unicode_name(0x0E42, 'THAI CHARACTER SARA O').
+unicode_name(0x0E43, 'THAI CHARACTER SARA AI MAIMUAN').
+unicode_name(0x0E44, 'THAI CHARACTER SARA AI MAIMALAI').
+unicode_name(0x0E45, 'THAI CHARACTER LAKKHANGYAO').
+unicode_name(0x0E81, 'LAO LETTER KO').
+unicode_name(0x0E82, 'LAO LETTER KHO SUNG').
+unicode_name(0x0E84, 'LAO LETTER KHO TAM').
+unicode_name(0x0E87, 'LAO LETTER NGO').
+unicode_name(0x0E88, 'LAO LETTER CO').
+unicode_name(0x0E8A, 'LAO LETTER SO TAM').
+unicode_name(0x0E8D, 'LAO LETTER NYO').
+unicode_name(0x0E94, 'LAO LETTER DO').
+unicode_name(0x0E95, 'LAO LETTER TO').
+unicode_name(0x0E96, 'LAO LETTER THO SUNG').
+unicode_name(0x0E97, 'LAO LETTER THO TAM').
+unicode_name(0x0E99, 'LAO LETTER NO').
+unicode_name(0x0E9A, 'LAO LETTER BO').
+unicode_name(0x0E9B, 'LAO LETTER PO').
+unicode_name(0x0E9C, 'LAO LETTER PHO SUNG').
+unicode_name(0x0E9D, 'LAO LETTER FO TAM').
+unicode_name(0x0E9E, 'LAO LETTER PHO TAM').
+unicode_name(0x0E9F, 'LAO LETTER FO SUNG').
+unicode_name(0x0EA1, 'LAO LETTER MO').
+unicode_name(0x0EA2, 'LAO LETTER YO').
+unicode_name(0x0EA3, 'LAO LETTER LO LING').
+unicode_name(0x0EA5, 'LAO LETTER LO LOOT').
+unicode_name(0x0EA7, 'LAO LETTER WO').
+unicode_name(0x0EAA, 'LAO LETTER SO SUNG').
+unicode_name(0x0EAB, 'LAO LETTER HO SUNG').
+unicode_name(0x0EAD, 'LAO LETTER O').
+unicode_name(0x0EAE, 'LAO LETTER HO TAM').
+unicode_name(0x0EAF, 'LAO ELLIPSIS').
+unicode_name(0x0EB0, 'LAO VOWEL SIGN A').
+unicode_name(0x0EB2, 'LAO VOWEL SIGN AA').
+unicode_name(0x0EB3, 'LAO VOWEL SIGN AM').
+unicode_name(0x0EBD, 'LAO SEMIVOWEL SIGN NYO').
+unicode_name(0x0EC0, 'LAO VOWEL SIGN E').
+unicode_name(0x0EC1, 'LAO VOWEL SIGN EI').
+unicode_name(0x0EC2, 'LAO VOWEL SIGN O').
+unicode_name(0x0EC3, 'LAO VOWEL SIGN AY').
+unicode_name(0x0EC4, 'LAO VOWEL SIGN AI').
+unicode_name(0x0EDC, 'LAO HO NO').
+unicode_name(0x0EDD, 'LAO HO MO').
+unicode_name(0x0EDE, 'LAO LETTER KHMU GO').
+unicode_name(0x0EDF, 'LAO LETTER KHMU NYO').
+unicode_name(0x0F00, 'TIBETAN SYLLABLE OM').
+unicode_name(0x0F40, 'TIBETAN LETTER KA').
+unicode_name(0x0F41, 'TIBETAN LETTER KHA').
+unicode_name(0x0F42, 'TIBETAN LETTER GA').
+unicode_name(0x0F43, 'TIBETAN LETTER GHA').
+unicode_name(0x0F44, 'TIBETAN LETTER NGA').
+unicode_name(0x0F45, 'TIBETAN LETTER CA').
+unicode_name(0x0F46, 'TIBETAN LETTER CHA').
+unicode_name(0x0F47, 'TIBETAN LETTER JA').
+unicode_name(0x0F49, 'TIBETAN LETTER NYA').
+unicode_name(0x0F4A, 'TIBETAN LETTER TTA').
+unicode_name(0x0F4B, 'TIBETAN LETTER TTHA').
+unicode_name(0x0F4C, 'TIBETAN LETTER DDA').
+unicode_name(0x0F4D, 'TIBETAN LETTER DDHA').
+unicode_name(0x0F4E, 'TIBETAN LETTER NNA').
+unicode_name(0x0F4F, 'TIBETAN LETTER TA').
+unicode_name(0x0F50, 'TIBETAN LETTER THA').
+unicode_name(0x0F51, 'TIBETAN LETTER DA').
+unicode_name(0x0F52, 'TIBETAN LETTER DHA').
+unicode_name(0x0F53, 'TIBETAN LETTER NA').
+unicode_name(0x0F54, 'TIBETAN LETTER PA').
+unicode_name(0x0F55, 'TIBETAN LETTER PHA').
+unicode_name(0x0F56, 'TIBETAN LETTER BA').
+unicode_name(0x0F57, 'TIBETAN LETTER BHA').
+unicode_name(0x0F58, 'TIBETAN LETTER MA').
+unicode_name(0x0F59, 'TIBETAN LETTER TSA').
+unicode_name(0x0F5A, 'TIBETAN LETTER TSHA').
+unicode_name(0x0F5B, 'TIBETAN LETTER DZA').
+unicode_name(0x0F5C, 'TIBETAN LETTER DZHA').
+unicode_name(0x0F5D, 'TIBETAN LETTER WA').
+unicode_name(0x0F5E, 'TIBETAN LETTER ZHA').
+unicode_name(0x0F5F, 'TIBETAN LETTER ZA').
+unicode_name(0x0F60, 'TIBETAN LETTER -A').
+unicode_name(0x0F61, 'TIBETAN LETTER YA').
+unicode_name(0x0F62, 'TIBETAN LETTER RA').
+unicode_name(0x0F63, 'TIBETAN LETTER LA').
+unicode_name(0x0F64, 'TIBETAN LETTER SHA').
+unicode_name(0x0F65, 'TIBETAN LETTER SSA').
+unicode_name(0x0F66, 'TIBETAN LETTER SA').
+unicode_name(0x0F67, 'TIBETAN LETTER HA').
+unicode_name(0x0F68, 'TIBETAN LETTER A').
+unicode_name(0x0F69, 'TIBETAN LETTER KSSA').
+unicode_name(0x0F6A, 'TIBETAN LETTER FIXED-FORM RA').
+unicode_name(0x0F6B, 'TIBETAN LETTER KKA').
+unicode_name(0x0F6C, 'TIBETAN LETTER RRA').
+unicode_name(0x0F88, 'TIBETAN SIGN LCE TSA CAN').
+unicode_name(0x0F89, 'TIBETAN SIGN MCHU CAN').
+unicode_name(0x0F8A, 'TIBETAN SIGN GRU CAN RGYINGS').
+unicode_name(0x0F8B, 'TIBETAN SIGN GRU MED RGYINGS').
+unicode_name(0x0F8C, 'TIBETAN SIGN INVERTED MCHU CAN').
+unicode_name(0x1000, 'MYANMAR LETTER KA').
+unicode_name(0x1001, 'MYANMAR LETTER KHA').
+unicode_name(0x1002, 'MYANMAR LETTER GA').
+unicode_name(0x1003, 'MYANMAR LETTER GHA').
+unicode_name(0x1004, 'MYANMAR LETTER NGA').
+unicode_name(0x1005, 'MYANMAR LETTER CA').
+unicode_name(0x1006, 'MYANMAR LETTER CHA').
+unicode_name(0x1007, 'MYANMAR LETTER JA').
+unicode_name(0x1008, 'MYANMAR LETTER JHA').
+unicode_name(0x1009, 'MYANMAR LETTER NYA').
+unicode_name(0x100A, 'MYANMAR LETTER NNYA').
+unicode_name(0x100B, 'MYANMAR LETTER TTA').
+unicode_name(0x100C, 'MYANMAR LETTER TTHA').
+unicode_name(0x100D, 'MYANMAR LETTER DDA').
+unicode_name(0x100E, 'MYANMAR LETTER DDHA').
+unicode_name(0x100F, 'MYANMAR LETTER NNA').
+unicode_name(0x1010, 'MYANMAR LETTER TA').
+unicode_name(0x1011, 'MYANMAR LETTER THA').
+unicode_name(0x1012, 'MYANMAR LETTER DA').
+unicode_name(0x1013, 'MYANMAR LETTER DHA').
+unicode_name(0x1014, 'MYANMAR LETTER NA').
+unicode_name(0x1015, 'MYANMAR LETTER PA').
+unicode_name(0x1016, 'MYANMAR LETTER PHA').
+unicode_name(0x1017, 'MYANMAR LETTER BA').
+unicode_name(0x1018, 'MYANMAR LETTER BHA').
+unicode_name(0x1019, 'MYANMAR LETTER MA').
+unicode_name(0x101A, 'MYANMAR LETTER YA').
+unicode_name(0x101B, 'MYANMAR LETTER RA').
+unicode_name(0x101C, 'MYANMAR LETTER LA').
+unicode_name(0x101D, 'MYANMAR LETTER WA').
+unicode_name(0x101E, 'MYANMAR LETTER SA').
+unicode_name(0x101F, 'MYANMAR LETTER HA').
+unicode_name(0x1020, 'MYANMAR LETTER LLA').
+unicode_name(0x1021, 'MYANMAR LETTER A').
+unicode_name(0x1022, 'MYANMAR LETTER SHAN A').
+unicode_name(0x1023, 'MYANMAR LETTER I').
+unicode_name(0x1024, 'MYANMAR LETTER II').
+unicode_name(0x1025, 'MYANMAR LETTER U').
+unicode_name(0x1026, 'MYANMAR LETTER UU').
+unicode_name(0x1027, 'MYANMAR LETTER E').
+unicode_name(0x1028, 'MYANMAR LETTER MON E').
+unicode_name(0x1029, 'MYANMAR LETTER O').
+unicode_name(0x102A, 'MYANMAR LETTER AU').
+unicode_name(0x103F, 'MYANMAR LETTER GREAT SA').
+unicode_name(0x1050, 'MYANMAR LETTER SHA').
+unicode_name(0x1051, 'MYANMAR LETTER SSA').
+unicode_name(0x1052, 'MYANMAR LETTER VOCALIC R').
+unicode_name(0x1053, 'MYANMAR LETTER VOCALIC RR').
+unicode_name(0x1054, 'MYANMAR LETTER VOCALIC L').
+unicode_name(0x1055, 'MYANMAR LETTER VOCALIC LL').
+unicode_name(0x105A, 'MYANMAR LETTER MON NGA').
+unicode_name(0x105B, 'MYANMAR LETTER MON JHA').
+unicode_name(0x105C, 'MYANMAR LETTER MON BBA').
+unicode_name(0x105D, 'MYANMAR LETTER MON BBE').
+unicode_name(0x1061, 'MYANMAR LETTER SGAW KAREN SHA').
+unicode_name(0x1065, 'MYANMAR LETTER WESTERN PWO KAREN THA').
+unicode_name(0x1066, 'MYANMAR LETTER WESTERN PWO KAREN PWA').
+unicode_name(0x106E, 'MYANMAR LETTER EASTERN PWO KAREN NNA').
+unicode_name(0x106F, 'MYANMAR LETTER EASTERN PWO KAREN YWA').
+unicode_name(0x1070, 'MYANMAR LETTER EASTERN PWO KAREN GHWA').
+unicode_name(0x1075, 'MYANMAR LETTER SHAN KA').
+unicode_name(0x1076, 'MYANMAR LETTER SHAN KHA').
+unicode_name(0x1077, 'MYANMAR LETTER SHAN GA').
+unicode_name(0x1078, 'MYANMAR LETTER SHAN CA').
+unicode_name(0x1079, 'MYANMAR LETTER SHAN ZA').
+unicode_name(0x107A, 'MYANMAR LETTER SHAN NYA').
+unicode_name(0x107B, 'MYANMAR LETTER SHAN DA').
+unicode_name(0x107C, 'MYANMAR LETTER SHAN NA').
+unicode_name(0x107D, 'MYANMAR LETTER SHAN PHA').
+unicode_name(0x107E, 'MYANMAR LETTER SHAN FA').
+unicode_name(0x107F, 'MYANMAR LETTER SHAN BA').
+unicode_name(0x1080, 'MYANMAR LETTER SHAN THA').
+unicode_name(0x1081, 'MYANMAR LETTER SHAN HA').
+unicode_name(0x108E, 'MYANMAR LETTER RUMAI PALAUNG FA').
+unicode_name(0x10D0, 'GEORGIAN LETTER AN').
+unicode_name(0x10D1, 'GEORGIAN LETTER BAN').
+unicode_name(0x10D2, 'GEORGIAN LETTER GAN').
+unicode_name(0x10D3, 'GEORGIAN LETTER DON').
+unicode_name(0x10D4, 'GEORGIAN LETTER EN').
+unicode_name(0x10D5, 'GEORGIAN LETTER VIN').
+unicode_name(0x10D6, 'GEORGIAN LETTER ZEN').
+unicode_name(0x10D7, 'GEORGIAN LETTER TAN').
+unicode_name(0x10D8, 'GEORGIAN LETTER IN').
+unicode_name(0x10D9, 'GEORGIAN LETTER KAN').
+unicode_name(0x10DA, 'GEORGIAN LETTER LAS').
+unicode_name(0x10DB, 'GEORGIAN LETTER MAN').
+unicode_name(0x10DC, 'GEORGIAN LETTER NAR').
+unicode_name(0x10DD, 'GEORGIAN LETTER ON').
+unicode_name(0x10DE, 'GEORGIAN LETTER PAR').
+unicode_name(0x10DF, 'GEORGIAN LETTER ZHAR').
+unicode_name(0x10E0, 'GEORGIAN LETTER RAE').
+unicode_name(0x10E1, 'GEORGIAN LETTER SAN').
+unicode_name(0x10E2, 'GEORGIAN LETTER TAR').
+unicode_name(0x10E3, 'GEORGIAN LETTER UN').
+unicode_name(0x10E4, 'GEORGIAN LETTER PHAR').
+unicode_name(0x10E5, 'GEORGIAN LETTER KHAR').
+unicode_name(0x10E6, 'GEORGIAN LETTER GHAN').
+unicode_name(0x10E7, 'GEORGIAN LETTER QAR').
+unicode_name(0x10E8, 'GEORGIAN LETTER SHIN').
+unicode_name(0x10E9, 'GEORGIAN LETTER CHIN').
+unicode_name(0x10EA, 'GEORGIAN LETTER CAN').
+unicode_name(0x10EB, 'GEORGIAN LETTER JIL').
+unicode_name(0x10EC, 'GEORGIAN LETTER CIL').
+unicode_name(0x10ED, 'GEORGIAN LETTER CHAR').
+unicode_name(0x10EE, 'GEORGIAN LETTER XAN').
+unicode_name(0x10EF, 'GEORGIAN LETTER JHAN').
+unicode_name(0x10F0, 'GEORGIAN LETTER HAE').
+unicode_name(0x10F1, 'GEORGIAN LETTER HE').
+unicode_name(0x10F2, 'GEORGIAN LETTER HIE').
+unicode_name(0x10F3, 'GEORGIAN LETTER WE').
+unicode_name(0x10F4, 'GEORGIAN LETTER HAR').
+unicode_name(0x10F5, 'GEORGIAN LETTER HOE').
+unicode_name(0x10F6, 'GEORGIAN LETTER FI').
+unicode_name(0x10F7, 'GEORGIAN LETTER YN').
+unicode_name(0x10F8, 'GEORGIAN LETTER ELIFI').
+unicode_name(0x10F9, 'GEORGIAN LETTER TURNED GAN').
+unicode_name(0x10FA, 'GEORGIAN LETTER AIN').
+unicode_name(0x10FD, 'GEORGIAN LETTER AEN').
+unicode_name(0x10FE, 'GEORGIAN LETTER HARD SIGN').
+unicode_name(0x10FF, 'GEORGIAN LETTER LABIAL SIGN').
+unicode_name(0x1100, 'HANGUL CHOSEONG KIYEOK').
+unicode_name(0x1101, 'HANGUL CHOSEONG SSANGKIYEOK').
+unicode_name(0x1102, 'HANGUL CHOSEONG NIEUN').
+unicode_name(0x1103, 'HANGUL CHOSEONG TIKEUT').
+unicode_name(0x1104, 'HANGUL CHOSEONG SSANGTIKEUT').
+unicode_name(0x1105, 'HANGUL CHOSEONG RIEUL').
+unicode_name(0x1106, 'HANGUL CHOSEONG MIEUM').
+unicode_name(0x1107, 'HANGUL CHOSEONG PIEUP').
+unicode_name(0x1108, 'HANGUL CHOSEONG SSANGPIEUP').
+unicode_name(0x1109, 'HANGUL CHOSEONG SIOS').
+unicode_name(0x110A, 'HANGUL CHOSEONG SSANGSIOS').
+unicode_name(0x110B, 'HANGUL CHOSEONG IEUNG').
+unicode_name(0x110C, 'HANGUL CHOSEONG CIEUC').
+unicode_name(0x110D, 'HANGUL CHOSEONG SSANGCIEUC').
+unicode_name(0x110E, 'HANGUL CHOSEONG CHIEUCH').
+unicode_name(0x110F, 'HANGUL CHOSEONG KHIEUKH').
+unicode_name(0x1110, 'HANGUL CHOSEONG THIEUTH').
+unicode_name(0x1111, 'HANGUL CHOSEONG PHIEUPH').
+unicode_name(0x1112, 'HANGUL CHOSEONG HIEUH').
+unicode_name(0x1113, 'HANGUL CHOSEONG NIEUN-KIYEOK').
+unicode_name(0x1114, 'HANGUL CHOSEONG SSANGNIEUN').
+unicode_name(0x1115, 'HANGUL CHOSEONG NIEUN-TIKEUT').
+unicode_name(0x1116, 'HANGUL CHOSEONG NIEUN-PIEUP').
+unicode_name(0x1117, 'HANGUL CHOSEONG TIKEUT-KIYEOK').
+unicode_name(0x1118, 'HANGUL CHOSEONG RIEUL-NIEUN').
+unicode_name(0x1119, 'HANGUL CHOSEONG SSANGRIEUL').
+unicode_name(0x111A, 'HANGUL CHOSEONG RIEUL-HIEUH').
+unicode_name(0x111B, 'HANGUL CHOSEONG KAPYEOUNRIEUL').
+unicode_name(0x111C, 'HANGUL CHOSEONG MIEUM-PIEUP').
+unicode_name(0x111D, 'HANGUL CHOSEONG KAPYEOUNMIEUM').
+unicode_name(0x111E, 'HANGUL CHOSEONG PIEUP-KIYEOK').
+unicode_name(0x111F, 'HANGUL CHOSEONG PIEUP-NIEUN').
+unicode_name(0x1120, 'HANGUL CHOSEONG PIEUP-TIKEUT').
+unicode_name(0x1121, 'HANGUL CHOSEONG PIEUP-SIOS').
+unicode_name(0x1122, 'HANGUL CHOSEONG PIEUP-SIOS-KIYEOK').
+unicode_name(0x1123, 'HANGUL CHOSEONG PIEUP-SIOS-TIKEUT').
+unicode_name(0x1124, 'HANGUL CHOSEONG PIEUP-SIOS-PIEUP').
+unicode_name(0x1125, 'HANGUL CHOSEONG PIEUP-SSANGSIOS').
+unicode_name(0x1126, 'HANGUL CHOSEONG PIEUP-SIOS-CIEUC').
+unicode_name(0x1127, 'HANGUL CHOSEONG PIEUP-CIEUC').
+unicode_name(0x1128, 'HANGUL CHOSEONG PIEUP-CHIEUCH').
+unicode_name(0x1129, 'HANGUL CHOSEONG PIEUP-THIEUTH').
+unicode_name(0x112A, 'HANGUL CHOSEONG PIEUP-PHIEUPH').
+unicode_name(0x112B, 'HANGUL CHOSEONG KAPYEOUNPIEUP').
+unicode_name(0x112C, 'HANGUL CHOSEONG KAPYEOUNSSANGPIEUP').
+unicode_name(0x112D, 'HANGUL CHOSEONG SIOS-KIYEOK').
+unicode_name(0x112E, 'HANGUL CHOSEONG SIOS-NIEUN').
+unicode_name(0x112F, 'HANGUL CHOSEONG SIOS-TIKEUT').
+unicode_name(0x1130, 'HANGUL CHOSEONG SIOS-RIEUL').
+unicode_name(0x1131, 'HANGUL CHOSEONG SIOS-MIEUM').
+unicode_name(0x1132, 'HANGUL CHOSEONG SIOS-PIEUP').
+unicode_name(0x1133, 'HANGUL CHOSEONG SIOS-PIEUP-KIYEOK').
+unicode_name(0x1134, 'HANGUL CHOSEONG SIOS-SSANGSIOS').
+unicode_name(0x1135, 'HANGUL CHOSEONG SIOS-IEUNG').
+unicode_name(0x1136, 'HANGUL CHOSEONG SIOS-CIEUC').
+unicode_name(0x1137, 'HANGUL CHOSEONG SIOS-CHIEUCH').
+unicode_name(0x1138, 'HANGUL CHOSEONG SIOS-KHIEUKH').
+unicode_name(0x1139, 'HANGUL CHOSEONG SIOS-THIEUTH').
+unicode_name(0x113A, 'HANGUL CHOSEONG SIOS-PHIEUPH').
+unicode_name(0x113B, 'HANGUL CHOSEONG SIOS-HIEUH').
+unicode_name(0x113C, 'HANGUL CHOSEONG CHITUEUMSIOS').
+unicode_name(0x113D, 'HANGUL CHOSEONG CHITUEUMSSANGSIOS').
+unicode_name(0x113E, 'HANGUL CHOSEONG CEONGCHIEUMSIOS').
+unicode_name(0x113F, 'HANGUL CHOSEONG CEONGCHIEUMSSANGSIOS').
+unicode_name(0x1140, 'HANGUL CHOSEONG PANSIOS').
+unicode_name(0x1141, 'HANGUL CHOSEONG IEUNG-KIYEOK').
+unicode_name(0x1142, 'HANGUL CHOSEONG IEUNG-TIKEUT').
+unicode_name(0x1143, 'HANGUL CHOSEONG IEUNG-MIEUM').
+unicode_name(0x1144, 'HANGUL CHOSEONG IEUNG-PIEUP').
+unicode_name(0x1145, 'HANGUL CHOSEONG IEUNG-SIOS').
+unicode_name(0x1146, 'HANGUL CHOSEONG IEUNG-PANSIOS').
+unicode_name(0x1147, 'HANGUL CHOSEONG SSANGIEUNG').
+unicode_name(0x1148, 'HANGUL CHOSEONG IEUNG-CIEUC').
+unicode_name(0x1149, 'HANGUL CHOSEONG IEUNG-CHIEUCH').
+unicode_name(0x114A, 'HANGUL CHOSEONG IEUNG-THIEUTH').
+unicode_name(0x114B, 'HANGUL CHOSEONG IEUNG-PHIEUPH').
+unicode_name(0x114C, 'HANGUL CHOSEONG YESIEUNG').
+unicode_name(0x114D, 'HANGUL CHOSEONG CIEUC-IEUNG').
+unicode_name(0x114E, 'HANGUL CHOSEONG CHITUEUMCIEUC').
+unicode_name(0x114F, 'HANGUL CHOSEONG CHITUEUMSSANGCIEUC').
+unicode_name(0x1150, 'HANGUL CHOSEONG CEONGCHIEUMCIEUC').
+unicode_name(0x1151, 'HANGUL CHOSEONG CEONGCHIEUMSSANGCIEUC').
+unicode_name(0x1152, 'HANGUL CHOSEONG CHIEUCH-KHIEUKH').
+unicode_name(0x1153, 'HANGUL CHOSEONG CHIEUCH-HIEUH').
+unicode_name(0x1154, 'HANGUL CHOSEONG CHITUEUMCHIEUCH').
+unicode_name(0x1155, 'HANGUL CHOSEONG CEONGCHIEUMCHIEUCH').
+unicode_name(0x1156, 'HANGUL CHOSEONG PHIEUPH-PIEUP').
+unicode_name(0x1157, 'HANGUL CHOSEONG KAPYEOUNPHIEUPH').
+unicode_name(0x1158, 'HANGUL CHOSEONG SSANGHIEUH').
+unicode_name(0x1159, 'HANGUL CHOSEONG YEORINHIEUH').
+unicode_name(0x115A, 'HANGUL CHOSEONG KIYEOK-TIKEUT').
+unicode_name(0x115B, 'HANGUL CHOSEONG NIEUN-SIOS').
+unicode_name(0x115C, 'HANGUL CHOSEONG NIEUN-CIEUC').
+unicode_name(0x115D, 'HANGUL CHOSEONG NIEUN-HIEUH').
+unicode_name(0x115E, 'HANGUL CHOSEONG TIKEUT-RIEUL').
+unicode_name(0x115F, 'HANGUL CHOSEONG FILLER').
+unicode_name(0x1160, 'HANGUL JUNGSEONG FILLER').
+unicode_name(0x1161, 'HANGUL JUNGSEONG A').
+unicode_name(0x1162, 'HANGUL JUNGSEONG AE').
+unicode_name(0x1163, 'HANGUL JUNGSEONG YA').
+unicode_name(0x1164, 'HANGUL JUNGSEONG YAE').
+unicode_name(0x1165, 'HANGUL JUNGSEONG EO').
+unicode_name(0x1166, 'HANGUL JUNGSEONG E').
+unicode_name(0x1167, 'HANGUL JUNGSEONG YEO').
+unicode_name(0x1168, 'HANGUL JUNGSEONG YE').
+unicode_name(0x1169, 'HANGUL JUNGSEONG O').
+unicode_name(0x116A, 'HANGUL JUNGSEONG WA').
+unicode_name(0x116B, 'HANGUL JUNGSEONG WAE').
+unicode_name(0x116C, 'HANGUL JUNGSEONG OE').
+unicode_name(0x116D, 'HANGUL JUNGSEONG YO').
+unicode_name(0x116E, 'HANGUL JUNGSEONG U').
+unicode_name(0x116F, 'HANGUL JUNGSEONG WEO').
+unicode_name(0x1170, 'HANGUL JUNGSEONG WE').
+unicode_name(0x1171, 'HANGUL JUNGSEONG WI').
+unicode_name(0x1172, 'HANGUL JUNGSEONG YU').
+unicode_name(0x1173, 'HANGUL JUNGSEONG EU').
+unicode_name(0x1174, 'HANGUL JUNGSEONG YI').
+unicode_name(0x1175, 'HANGUL JUNGSEONG I').
+unicode_name(0x1176, 'HANGUL JUNGSEONG A-O').
+unicode_name(0x1177, 'HANGUL JUNGSEONG A-U').
+unicode_name(0x1178, 'HANGUL JUNGSEONG YA-O').
+unicode_name(0x1179, 'HANGUL JUNGSEONG YA-YO').
+unicode_name(0x117A, 'HANGUL JUNGSEONG EO-O').
+unicode_name(0x117B, 'HANGUL JUNGSEONG EO-U').
+unicode_name(0x117C, 'HANGUL JUNGSEONG EO-EU').
+unicode_name(0x117D, 'HANGUL JUNGSEONG YEO-O').
+unicode_name(0x117E, 'HANGUL JUNGSEONG YEO-U').
+unicode_name(0x117F, 'HANGUL JUNGSEONG O-EO').
+unicode_name(0x1180, 'HANGUL JUNGSEONG O-E').
+unicode_name(0x1181, 'HANGUL JUNGSEONG O-YE').
+unicode_name(0x1182, 'HANGUL JUNGSEONG O-O').
+unicode_name(0x1183, 'HANGUL JUNGSEONG O-U').
+unicode_name(0x1184, 'HANGUL JUNGSEONG YO-YA').
+unicode_name(0x1185, 'HANGUL JUNGSEONG YO-YAE').
+unicode_name(0x1186, 'HANGUL JUNGSEONG YO-YEO').
+unicode_name(0x1187, 'HANGUL JUNGSEONG YO-O').
+unicode_name(0x1188, 'HANGUL JUNGSEONG YO-I').
+unicode_name(0x1189, 'HANGUL JUNGSEONG U-A').
+unicode_name(0x118A, 'HANGUL JUNGSEONG U-AE').
+unicode_name(0x118B, 'HANGUL JUNGSEONG U-EO-EU').
+unicode_name(0x118C, 'HANGUL JUNGSEONG U-YE').
+unicode_name(0x118D, 'HANGUL JUNGSEONG U-U').
+unicode_name(0x118E, 'HANGUL JUNGSEONG YU-A').
+unicode_name(0x118F, 'HANGUL JUNGSEONG YU-EO').
+unicode_name(0x1190, 'HANGUL JUNGSEONG YU-E').
+unicode_name(0x1191, 'HANGUL JUNGSEONG YU-YEO').
+unicode_name(0x1192, 'HANGUL JUNGSEONG YU-YE').
+unicode_name(0x1193, 'HANGUL JUNGSEONG YU-U').
+unicode_name(0x1194, 'HANGUL JUNGSEONG YU-I').
+unicode_name(0x1195, 'HANGUL JUNGSEONG EU-U').
+unicode_name(0x1196, 'HANGUL JUNGSEONG EU-EU').
+unicode_name(0x1197, 'HANGUL JUNGSEONG YI-U').
+unicode_name(0x1198, 'HANGUL JUNGSEONG I-A').
+unicode_name(0x1199, 'HANGUL JUNGSEONG I-YA').
+unicode_name(0x119A, 'HANGUL JUNGSEONG I-O').
+unicode_name(0x119B, 'HANGUL JUNGSEONG I-U').
+unicode_name(0x119C, 'HANGUL JUNGSEONG I-EU').
+unicode_name(0x119D, 'HANGUL JUNGSEONG I-ARAEA').
+unicode_name(0x119E, 'HANGUL JUNGSEONG ARAEA').
+unicode_name(0x119F, 'HANGUL JUNGSEONG ARAEA-EO').
+unicode_name(0x11A0, 'HANGUL JUNGSEONG ARAEA-U').
+unicode_name(0x11A1, 'HANGUL JUNGSEONG ARAEA-I').
+unicode_name(0x11A2, 'HANGUL JUNGSEONG SSANGARAEA').
+unicode_name(0x11A3, 'HANGUL JUNGSEONG A-EU').
+unicode_name(0x11A4, 'HANGUL JUNGSEONG YA-U').
+unicode_name(0x11A5, 'HANGUL JUNGSEONG YEO-YA').
+unicode_name(0x11A6, 'HANGUL JUNGSEONG O-YA').
+unicode_name(0x11A7, 'HANGUL JUNGSEONG O-YAE').
+unicode_name(0x11A8, 'HANGUL JONGSEONG KIYEOK').
+unicode_name(0x11A9, 'HANGUL JONGSEONG SSANGKIYEOK').
+unicode_name(0x11AA, 'HANGUL JONGSEONG KIYEOK-SIOS').
+unicode_name(0x11AB, 'HANGUL JONGSEONG NIEUN').
+unicode_name(0x11AC, 'HANGUL JONGSEONG NIEUN-CIEUC').
+unicode_name(0x11AD, 'HANGUL JONGSEONG NIEUN-HIEUH').
+unicode_name(0x11AE, 'HANGUL JONGSEONG TIKEUT').
+unicode_name(0x11AF, 'HANGUL JONGSEONG RIEUL').
+unicode_name(0x11B0, 'HANGUL JONGSEONG RIEUL-KIYEOK').
+unicode_name(0x11B1, 'HANGUL JONGSEONG RIEUL-MIEUM').
+unicode_name(0x11B2, 'HANGUL JONGSEONG RIEUL-PIEUP').
+unicode_name(0x11B3, 'HANGUL JONGSEONG RIEUL-SIOS').
+unicode_name(0x11B4, 'HANGUL JONGSEONG RIEUL-THIEUTH').
+unicode_name(0x11B5, 'HANGUL JONGSEONG RIEUL-PHIEUPH').
+unicode_name(0x11B6, 'HANGUL JONGSEONG RIEUL-HIEUH').
+unicode_name(0x11B7, 'HANGUL JONGSEONG MIEUM').
+unicode_name(0x11B8, 'HANGUL JONGSEONG PIEUP').
+unicode_name(0x11B9, 'HANGUL JONGSEONG PIEUP-SIOS').
+unicode_name(0x11BA, 'HANGUL JONGSEONG SIOS').
+unicode_name(0x11BB, 'HANGUL JONGSEONG SSANGSIOS').
+unicode_name(0x11BC, 'HANGUL JONGSEONG IEUNG').
+unicode_name(0x11BD, 'HANGUL JONGSEONG CIEUC').
+unicode_name(0x11BE, 'HANGUL JONGSEONG CHIEUCH').
+unicode_name(0x11BF, 'HANGUL JONGSEONG KHIEUKH').
+unicode_name(0x11C0, 'HANGUL JONGSEONG THIEUTH').
+unicode_name(0x11C1, 'HANGUL JONGSEONG PHIEUPH').
+unicode_name(0x11C2, 'HANGUL JONGSEONG HIEUH').
+unicode_name(0x11C3, 'HANGUL JONGSEONG KIYEOK-RIEUL').
+unicode_name(0x11C4, 'HANGUL JONGSEONG KIYEOK-SIOS-KIYEOK').
+unicode_name(0x11C5, 'HANGUL JONGSEONG NIEUN-KIYEOK').
+unicode_name(0x11C6, 'HANGUL JONGSEONG NIEUN-TIKEUT').
+unicode_name(0x11C7, 'HANGUL JONGSEONG NIEUN-SIOS').
+unicode_name(0x11C8, 'HANGUL JONGSEONG NIEUN-PANSIOS').
+unicode_name(0x11C9, 'HANGUL JONGSEONG NIEUN-THIEUTH').
+unicode_name(0x11CA, 'HANGUL JONGSEONG TIKEUT-KIYEOK').
+unicode_name(0x11CB, 'HANGUL JONGSEONG TIKEUT-RIEUL').
+unicode_name(0x11CC, 'HANGUL JONGSEONG RIEUL-KIYEOK-SIOS').
+unicode_name(0x11CD, 'HANGUL JONGSEONG RIEUL-NIEUN').
+unicode_name(0x11CE, 'HANGUL JONGSEONG RIEUL-TIKEUT').
+unicode_name(0x11CF, 'HANGUL JONGSEONG RIEUL-TIKEUT-HIEUH').
+unicode_name(0x11D0, 'HANGUL JONGSEONG SSANGRIEUL').
+unicode_name(0x11D1, 'HANGUL JONGSEONG RIEUL-MIEUM-KIYEOK').
+unicode_name(0x11D2, 'HANGUL JONGSEONG RIEUL-MIEUM-SIOS').
+unicode_name(0x11D3, 'HANGUL JONGSEONG RIEUL-PIEUP-SIOS').
+unicode_name(0x11D4, 'HANGUL JONGSEONG RIEUL-PIEUP-HIEUH').
+unicode_name(0x11D5, 'HANGUL JONGSEONG RIEUL-KAPYEOUNPIEUP').
+unicode_name(0x11D6, 'HANGUL JONGSEONG RIEUL-SSANGSIOS').
+unicode_name(0x11D7, 'HANGUL JONGSEONG RIEUL-PANSIOS').
+unicode_name(0x11D8, 'HANGUL JONGSEONG RIEUL-KHIEUKH').
+unicode_name(0x11D9, 'HANGUL JONGSEONG RIEUL-YEORINHIEUH').
+unicode_name(0x11DA, 'HANGUL JONGSEONG MIEUM-KIYEOK').
+unicode_name(0x11DB, 'HANGUL JONGSEONG MIEUM-RIEUL').
+unicode_name(0x11DC, 'HANGUL JONGSEONG MIEUM-PIEUP').
+unicode_name(0x11DD, 'HANGUL JONGSEONG MIEUM-SIOS').
+unicode_name(0x11DE, 'HANGUL JONGSEONG MIEUM-SSANGSIOS').
+unicode_name(0x11DF, 'HANGUL JONGSEONG MIEUM-PANSIOS').
+unicode_name(0x11E0, 'HANGUL JONGSEONG MIEUM-CHIEUCH').
+unicode_name(0x11E1, 'HANGUL JONGSEONG MIEUM-HIEUH').
+unicode_name(0x11E2, 'HANGUL JONGSEONG KAPYEOUNMIEUM').
+unicode_name(0x11E3, 'HANGUL JONGSEONG PIEUP-RIEUL').
+unicode_name(0x11E4, 'HANGUL JONGSEONG PIEUP-PHIEUPH').
+unicode_name(0x11E5, 'HANGUL JONGSEONG PIEUP-HIEUH').
+unicode_name(0x11E6, 'HANGUL JONGSEONG KAPYEOUNPIEUP').
+unicode_name(0x11E7, 'HANGUL JONGSEONG SIOS-KIYEOK').
+unicode_name(0x11E8, 'HANGUL JONGSEONG SIOS-TIKEUT').
+unicode_name(0x11E9, 'HANGUL JONGSEONG SIOS-RIEUL').
+unicode_name(0x11EA, 'HANGUL JONGSEONG SIOS-PIEUP').
+unicode_name(0x11EB, 'HANGUL JONGSEONG PANSIOS').
+unicode_name(0x11EC, 'HANGUL JONGSEONG IEUNG-KIYEOK').
+unicode_name(0x11ED, 'HANGUL JONGSEONG IEUNG-SSANGKIYEOK').
+unicode_name(0x11EE, 'HANGUL JONGSEONG SSANGIEUNG').
+unicode_name(0x11EF, 'HANGUL JONGSEONG IEUNG-KHIEUKH').
+unicode_name(0x11F0, 'HANGUL JONGSEONG YESIEUNG').
+unicode_name(0x11F1, 'HANGUL JONGSEONG YESIEUNG-SIOS').
+unicode_name(0x11F2, 'HANGUL JONGSEONG YESIEUNG-PANSIOS').
+unicode_name(0x11F3, 'HANGUL JONGSEONG PHIEUPH-PIEUP').
+unicode_name(0x11F4, 'HANGUL JONGSEONG KAPYEOUNPHIEUPH').
+unicode_name(0x11F5, 'HANGUL JONGSEONG HIEUH-NIEUN').
+unicode_name(0x11F6, 'HANGUL JONGSEONG HIEUH-RIEUL').
+unicode_name(0x11F7, 'HANGUL JONGSEONG HIEUH-MIEUM').
+unicode_name(0x11F8, 'HANGUL JONGSEONG HIEUH-PIEUP').
+unicode_name(0x11F9, 'HANGUL JONGSEONG YEORINHIEUH').
+unicode_name(0x11FA, 'HANGUL JONGSEONG KIYEOK-NIEUN').
+unicode_name(0x11FB, 'HANGUL JONGSEONG KIYEOK-PIEUP').
+unicode_name(0x11FC, 'HANGUL JONGSEONG KIYEOK-CHIEUCH').
+unicode_name(0x11FD, 'HANGUL JONGSEONG KIYEOK-KHIEUKH').
+unicode_name(0x11FE, 'HANGUL JONGSEONG KIYEOK-HIEUH').
+unicode_name(0x11FF, 'HANGUL JONGSEONG SSANGNIEUN').
+unicode_name(0x1200, 'ETHIOPIC SYLLABLE HA').
+unicode_name(0x1201, 'ETHIOPIC SYLLABLE HU').
+unicode_name(0x1202, 'ETHIOPIC SYLLABLE HI').
+unicode_name(0x1203, 'ETHIOPIC SYLLABLE HAA').
+unicode_name(0x1204, 'ETHIOPIC SYLLABLE HEE').
+unicode_name(0x1205, 'ETHIOPIC SYLLABLE HE').
+unicode_name(0x1206, 'ETHIOPIC SYLLABLE HO').
+unicode_name(0x1207, 'ETHIOPIC SYLLABLE HOA').
+unicode_name(0x1208, 'ETHIOPIC SYLLABLE LA').
+unicode_name(0x1209, 'ETHIOPIC SYLLABLE LU').
+unicode_name(0x120A, 'ETHIOPIC SYLLABLE LI').
+unicode_name(0x120B, 'ETHIOPIC SYLLABLE LAA').
+unicode_name(0x120C, 'ETHIOPIC SYLLABLE LEE').
+unicode_name(0x120D, 'ETHIOPIC SYLLABLE LE').
+unicode_name(0x120E, 'ETHIOPIC SYLLABLE LO').
+unicode_name(0x120F, 'ETHIOPIC SYLLABLE LWA').
+unicode_name(0x1210, 'ETHIOPIC SYLLABLE HHA').
+unicode_name(0x1211, 'ETHIOPIC SYLLABLE HHU').
+unicode_name(0x1212, 'ETHIOPIC SYLLABLE HHI').
+unicode_name(0x1213, 'ETHIOPIC SYLLABLE HHAA').
+unicode_name(0x1214, 'ETHIOPIC SYLLABLE HHEE').
+unicode_name(0x1215, 'ETHIOPIC SYLLABLE HHE').
+unicode_name(0x1216, 'ETHIOPIC SYLLABLE HHO').
+unicode_name(0x1217, 'ETHIOPIC SYLLABLE HHWA').
+unicode_name(0x1218, 'ETHIOPIC SYLLABLE MA').
+unicode_name(0x1219, 'ETHIOPIC SYLLABLE MU').
+unicode_name(0x121A, 'ETHIOPIC SYLLABLE MI').
+unicode_name(0x121B, 'ETHIOPIC SYLLABLE MAA').
+unicode_name(0x121C, 'ETHIOPIC SYLLABLE MEE').
+unicode_name(0x121D, 'ETHIOPIC SYLLABLE ME').
+unicode_name(0x121E, 'ETHIOPIC SYLLABLE MO').
+unicode_name(0x121F, 'ETHIOPIC SYLLABLE MWA').
+unicode_name(0x1220, 'ETHIOPIC SYLLABLE SZA').
+unicode_name(0x1221, 'ETHIOPIC SYLLABLE SZU').
+unicode_name(0x1222, 'ETHIOPIC SYLLABLE SZI').
+unicode_name(0x1223, 'ETHIOPIC SYLLABLE SZAA').
+unicode_name(0x1224, 'ETHIOPIC SYLLABLE SZEE').
+unicode_name(0x1225, 'ETHIOPIC SYLLABLE SZE').
+unicode_name(0x1226, 'ETHIOPIC SYLLABLE SZO').
+unicode_name(0x1227, 'ETHIOPIC SYLLABLE SZWA').
+unicode_name(0x1228, 'ETHIOPIC SYLLABLE RA').
+unicode_name(0x1229, 'ETHIOPIC SYLLABLE RU').
+unicode_name(0x122A, 'ETHIOPIC SYLLABLE RI').
+unicode_name(0x122B, 'ETHIOPIC SYLLABLE RAA').
+unicode_name(0x122C, 'ETHIOPIC SYLLABLE REE').
+unicode_name(0x122D, 'ETHIOPIC SYLLABLE RE').
+unicode_name(0x122E, 'ETHIOPIC SYLLABLE RO').
+unicode_name(0x122F, 'ETHIOPIC SYLLABLE RWA').
+unicode_name(0x1230, 'ETHIOPIC SYLLABLE SA').
+unicode_name(0x1231, 'ETHIOPIC SYLLABLE SU').
+unicode_name(0x1232, 'ETHIOPIC SYLLABLE SI').
+unicode_name(0x1233, 'ETHIOPIC SYLLABLE SAA').
+unicode_name(0x1234, 'ETHIOPIC SYLLABLE SEE').
+unicode_name(0x1235, 'ETHIOPIC SYLLABLE SE').
+unicode_name(0x1236, 'ETHIOPIC SYLLABLE SO').
+unicode_name(0x1237, 'ETHIOPIC SYLLABLE SWA').
+unicode_name(0x1238, 'ETHIOPIC SYLLABLE SHA').
+unicode_name(0x1239, 'ETHIOPIC SYLLABLE SHU').
+unicode_name(0x123A, 'ETHIOPIC SYLLABLE SHI').
+unicode_name(0x123B, 'ETHIOPIC SYLLABLE SHAA').
+unicode_name(0x123C, 'ETHIOPIC SYLLABLE SHEE').
+unicode_name(0x123D, 'ETHIOPIC SYLLABLE SHE').
+unicode_name(0x123E, 'ETHIOPIC SYLLABLE SHO').
+unicode_name(0x123F, 'ETHIOPIC SYLLABLE SHWA').
+unicode_name(0x1240, 'ETHIOPIC SYLLABLE QA').
+unicode_name(0x1241, 'ETHIOPIC SYLLABLE QU').
+unicode_name(0x1242, 'ETHIOPIC SYLLABLE QI').
+unicode_name(0x1243, 'ETHIOPIC SYLLABLE QAA').
+unicode_name(0x1244, 'ETHIOPIC SYLLABLE QEE').
+unicode_name(0x1245, 'ETHIOPIC SYLLABLE QE').
+unicode_name(0x1246, 'ETHIOPIC SYLLABLE QO').
+unicode_name(0x1247, 'ETHIOPIC SYLLABLE QOA').
+unicode_name(0x1248, 'ETHIOPIC SYLLABLE QWA').
+unicode_name(0x124A, 'ETHIOPIC SYLLABLE QWI').
+unicode_name(0x124B, 'ETHIOPIC SYLLABLE QWAA').
+unicode_name(0x124C, 'ETHIOPIC SYLLABLE QWEE').
+unicode_name(0x124D, 'ETHIOPIC SYLLABLE QWE').
+unicode_name(0x1250, 'ETHIOPIC SYLLABLE QHA').
+unicode_name(0x1251, 'ETHIOPIC SYLLABLE QHU').
+unicode_name(0x1252, 'ETHIOPIC SYLLABLE QHI').
+unicode_name(0x1253, 'ETHIOPIC SYLLABLE QHAA').
+unicode_name(0x1254, 'ETHIOPIC SYLLABLE QHEE').
+unicode_name(0x1255, 'ETHIOPIC SYLLABLE QHE').
+unicode_name(0x1256, 'ETHIOPIC SYLLABLE QHO').
+unicode_name(0x1258, 'ETHIOPIC SYLLABLE QHWA').
+unicode_name(0x125A, 'ETHIOPIC SYLLABLE QHWI').
+unicode_name(0x125B, 'ETHIOPIC SYLLABLE QHWAA').
+unicode_name(0x125C, 'ETHIOPIC SYLLABLE QHWEE').
+unicode_name(0x125D, 'ETHIOPIC SYLLABLE QHWE').
+unicode_name(0x1260, 'ETHIOPIC SYLLABLE BA').
+unicode_name(0x1261, 'ETHIOPIC SYLLABLE BU').
+unicode_name(0x1262, 'ETHIOPIC SYLLABLE BI').
+unicode_name(0x1263, 'ETHIOPIC SYLLABLE BAA').
+unicode_name(0x1264, 'ETHIOPIC SYLLABLE BEE').
+unicode_name(0x1265, 'ETHIOPIC SYLLABLE BE').
+unicode_name(0x1266, 'ETHIOPIC SYLLABLE BO').
+unicode_name(0x1267, 'ETHIOPIC SYLLABLE BWA').
+unicode_name(0x1268, 'ETHIOPIC SYLLABLE VA').
+unicode_name(0x1269, 'ETHIOPIC SYLLABLE VU').
+unicode_name(0x126A, 'ETHIOPIC SYLLABLE VI').
+unicode_name(0x126B, 'ETHIOPIC SYLLABLE VAA').
+unicode_name(0x126C, 'ETHIOPIC SYLLABLE VEE').
+unicode_name(0x126D, 'ETHIOPIC SYLLABLE VE').
+unicode_name(0x126E, 'ETHIOPIC SYLLABLE VO').
+unicode_name(0x126F, 'ETHIOPIC SYLLABLE VWA').
+unicode_name(0x1270, 'ETHIOPIC SYLLABLE TA').
+unicode_name(0x1271, 'ETHIOPIC SYLLABLE TU').
+unicode_name(0x1272, 'ETHIOPIC SYLLABLE TI').
+unicode_name(0x1273, 'ETHIOPIC SYLLABLE TAA').
+unicode_name(0x1274, 'ETHIOPIC SYLLABLE TEE').
+unicode_name(0x1275, 'ETHIOPIC SYLLABLE TE').
+unicode_name(0x1276, 'ETHIOPIC SYLLABLE TO').
+unicode_name(0x1277, 'ETHIOPIC SYLLABLE TWA').
+unicode_name(0x1278, 'ETHIOPIC SYLLABLE CA').
+unicode_name(0x1279, 'ETHIOPIC SYLLABLE CU').
+unicode_name(0x127A, 'ETHIOPIC SYLLABLE CI').
+unicode_name(0x127B, 'ETHIOPIC SYLLABLE CAA').
+unicode_name(0x127C, 'ETHIOPIC SYLLABLE CEE').
+unicode_name(0x127D, 'ETHIOPIC SYLLABLE CE').
+unicode_name(0x127E, 'ETHIOPIC SYLLABLE CO').
+unicode_name(0x127F, 'ETHIOPIC SYLLABLE CWA').
+unicode_name(0x1280, 'ETHIOPIC SYLLABLE XA').
+unicode_name(0x1281, 'ETHIOPIC SYLLABLE XU').
+unicode_name(0x1282, 'ETHIOPIC SYLLABLE XI').
+unicode_name(0x1283, 'ETHIOPIC SYLLABLE XAA').
+unicode_name(0x1284, 'ETHIOPIC SYLLABLE XEE').
+unicode_name(0x1285, 'ETHIOPIC SYLLABLE XE').
+unicode_name(0x1286, 'ETHIOPIC SYLLABLE XO').
+unicode_name(0x1287, 'ETHIOPIC SYLLABLE XOA').
+unicode_name(0x1288, 'ETHIOPIC SYLLABLE XWA').
+unicode_name(0x128A, 'ETHIOPIC SYLLABLE XWI').
+unicode_name(0x128B, 'ETHIOPIC SYLLABLE XWAA').
+unicode_name(0x128C, 'ETHIOPIC SYLLABLE XWEE').
+unicode_name(0x128D, 'ETHIOPIC SYLLABLE XWE').
+unicode_name(0x1290, 'ETHIOPIC SYLLABLE NA').
+unicode_name(0x1291, 'ETHIOPIC SYLLABLE NU').
+unicode_name(0x1292, 'ETHIOPIC SYLLABLE NI').
+unicode_name(0x1293, 'ETHIOPIC SYLLABLE NAA').
+unicode_name(0x1294, 'ETHIOPIC SYLLABLE NEE').
+unicode_name(0x1295, 'ETHIOPIC SYLLABLE NE').
+unicode_name(0x1296, 'ETHIOPIC SYLLABLE NO').
+unicode_name(0x1297, 'ETHIOPIC SYLLABLE NWA').
+unicode_name(0x1298, 'ETHIOPIC SYLLABLE NYA').
+unicode_name(0x1299, 'ETHIOPIC SYLLABLE NYU').
+unicode_name(0x129A, 'ETHIOPIC SYLLABLE NYI').
+unicode_name(0x129B, 'ETHIOPIC SYLLABLE NYAA').
+unicode_name(0x129C, 'ETHIOPIC SYLLABLE NYEE').
+unicode_name(0x129D, 'ETHIOPIC SYLLABLE NYE').
+unicode_name(0x129E, 'ETHIOPIC SYLLABLE NYO').
+unicode_name(0x129F, 'ETHIOPIC SYLLABLE NYWA').
+unicode_name(0x12A0, 'ETHIOPIC SYLLABLE GLOTTAL A').
+unicode_name(0x12A1, 'ETHIOPIC SYLLABLE GLOTTAL U').
+unicode_name(0x12A2, 'ETHIOPIC SYLLABLE GLOTTAL I').
+unicode_name(0x12A3, 'ETHIOPIC SYLLABLE GLOTTAL AA').
+unicode_name(0x12A4, 'ETHIOPIC SYLLABLE GLOTTAL EE').
+unicode_name(0x12A5, 'ETHIOPIC SYLLABLE GLOTTAL E').
+unicode_name(0x12A6, 'ETHIOPIC SYLLABLE GLOTTAL O').
+unicode_name(0x12A7, 'ETHIOPIC SYLLABLE GLOTTAL WA').
+unicode_name(0x12A8, 'ETHIOPIC SYLLABLE KA').
+unicode_name(0x12A9, 'ETHIOPIC SYLLABLE KU').
+unicode_name(0x12AA, 'ETHIOPIC SYLLABLE KI').
+unicode_name(0x12AB, 'ETHIOPIC SYLLABLE KAA').
+unicode_name(0x12AC, 'ETHIOPIC SYLLABLE KEE').
+unicode_name(0x12AD, 'ETHIOPIC SYLLABLE KE').
+unicode_name(0x12AE, 'ETHIOPIC SYLLABLE KO').
+unicode_name(0x12AF, 'ETHIOPIC SYLLABLE KOA').
+unicode_name(0x12B0, 'ETHIOPIC SYLLABLE KWA').
+unicode_name(0x12B2, 'ETHIOPIC SYLLABLE KWI').
+unicode_name(0x12B3, 'ETHIOPIC SYLLABLE KWAA').
+unicode_name(0x12B4, 'ETHIOPIC SYLLABLE KWEE').
+unicode_name(0x12B5, 'ETHIOPIC SYLLABLE KWE').
+unicode_name(0x12B8, 'ETHIOPIC SYLLABLE KXA').
+unicode_name(0x12B9, 'ETHIOPIC SYLLABLE KXU').
+unicode_name(0x12BA, 'ETHIOPIC SYLLABLE KXI').
+unicode_name(0x12BB, 'ETHIOPIC SYLLABLE KXAA').
+unicode_name(0x12BC, 'ETHIOPIC SYLLABLE KXEE').
+unicode_name(0x12BD, 'ETHIOPIC SYLLABLE KXE').
+unicode_name(0x12BE, 'ETHIOPIC SYLLABLE KXO').
+unicode_name(0x12C0, 'ETHIOPIC SYLLABLE KXWA').
+unicode_name(0x12C2, 'ETHIOPIC SYLLABLE KXWI').
+unicode_name(0x12C3, 'ETHIOPIC SYLLABLE KXWAA').
+unicode_name(0x12C4, 'ETHIOPIC SYLLABLE KXWEE').
+unicode_name(0x12C5, 'ETHIOPIC SYLLABLE KXWE').
+unicode_name(0x12C8, 'ETHIOPIC SYLLABLE WA').
+unicode_name(0x12C9, 'ETHIOPIC SYLLABLE WU').
+unicode_name(0x12CA, 'ETHIOPIC SYLLABLE WI').
+unicode_name(0x12CB, 'ETHIOPIC SYLLABLE WAA').
+unicode_name(0x12CC, 'ETHIOPIC SYLLABLE WEE').
+unicode_name(0x12CD, 'ETHIOPIC SYLLABLE WE').
+unicode_name(0x12CE, 'ETHIOPIC SYLLABLE WO').
+unicode_name(0x12CF, 'ETHIOPIC SYLLABLE WOA').
+unicode_name(0x12D0, 'ETHIOPIC SYLLABLE PHARYNGEAL A').
+unicode_name(0x12D1, 'ETHIOPIC SYLLABLE PHARYNGEAL U').
+unicode_name(0x12D2, 'ETHIOPIC SYLLABLE PHARYNGEAL I').
+unicode_name(0x12D3, 'ETHIOPIC SYLLABLE PHARYNGEAL AA').
+unicode_name(0x12D4, 'ETHIOPIC SYLLABLE PHARYNGEAL EE').
+unicode_name(0x12D5, 'ETHIOPIC SYLLABLE PHARYNGEAL E').
+unicode_name(0x12D6, 'ETHIOPIC SYLLABLE PHARYNGEAL O').
+unicode_name(0x12D8, 'ETHIOPIC SYLLABLE ZA').
+unicode_name(0x12D9, 'ETHIOPIC SYLLABLE ZU').
+unicode_name(0x12DA, 'ETHIOPIC SYLLABLE ZI').
+unicode_name(0x12DB, 'ETHIOPIC SYLLABLE ZAA').
+unicode_name(0x12DC, 'ETHIOPIC SYLLABLE ZEE').
+unicode_name(0x12DD, 'ETHIOPIC SYLLABLE ZE').
+unicode_name(0x12DE, 'ETHIOPIC SYLLABLE ZO').
+unicode_name(0x12DF, 'ETHIOPIC SYLLABLE ZWA').
+unicode_name(0x12E0, 'ETHIOPIC SYLLABLE ZHA').
+unicode_name(0x12E1, 'ETHIOPIC SYLLABLE ZHU').
+unicode_name(0x12E2, 'ETHIOPIC SYLLABLE ZHI').
+unicode_name(0x12E3, 'ETHIOPIC SYLLABLE ZHAA').
+unicode_name(0x12E4, 'ETHIOPIC SYLLABLE ZHEE').
+unicode_name(0x12E5, 'ETHIOPIC SYLLABLE ZHE').
+unicode_name(0x12E6, 'ETHIOPIC SYLLABLE ZHO').
+unicode_name(0x12E7, 'ETHIOPIC SYLLABLE ZHWA').
+unicode_name(0x12E8, 'ETHIOPIC SYLLABLE YA').
+unicode_name(0x12E9, 'ETHIOPIC SYLLABLE YU').
+unicode_name(0x12EA, 'ETHIOPIC SYLLABLE YI').
+unicode_name(0x12EB, 'ETHIOPIC SYLLABLE YAA').
+unicode_name(0x12EC, 'ETHIOPIC SYLLABLE YEE').
+unicode_name(0x12ED, 'ETHIOPIC SYLLABLE YE').
+unicode_name(0x12EE, 'ETHIOPIC SYLLABLE YO').
+unicode_name(0x12EF, 'ETHIOPIC SYLLABLE YOA').
+unicode_name(0x12F0, 'ETHIOPIC SYLLABLE DA').
+unicode_name(0x12F1, 'ETHIOPIC SYLLABLE DU').
+unicode_name(0x12F2, 'ETHIOPIC SYLLABLE DI').
+unicode_name(0x12F3, 'ETHIOPIC SYLLABLE DAA').
+unicode_name(0x12F4, 'ETHIOPIC SYLLABLE DEE').
+unicode_name(0x12F5, 'ETHIOPIC SYLLABLE DE').
+unicode_name(0x12F6, 'ETHIOPIC SYLLABLE DO').
+unicode_name(0x12F7, 'ETHIOPIC SYLLABLE DWA').
+unicode_name(0x12F8, 'ETHIOPIC SYLLABLE DDA').
+unicode_name(0x12F9, 'ETHIOPIC SYLLABLE DDU').
+unicode_name(0x12FA, 'ETHIOPIC SYLLABLE DDI').
+unicode_name(0x12FB, 'ETHIOPIC SYLLABLE DDAA').
+unicode_name(0x12FC, 'ETHIOPIC SYLLABLE DDEE').
+unicode_name(0x12FD, 'ETHIOPIC SYLLABLE DDE').
+unicode_name(0x12FE, 'ETHIOPIC SYLLABLE DDO').
+unicode_name(0x12FF, 'ETHIOPIC SYLLABLE DDWA').
+unicode_name(0x1300, 'ETHIOPIC SYLLABLE JA').
+unicode_name(0x1301, 'ETHIOPIC SYLLABLE JU').
+unicode_name(0x1302, 'ETHIOPIC SYLLABLE JI').
+unicode_name(0x1303, 'ETHIOPIC SYLLABLE JAA').
+unicode_name(0x1304, 'ETHIOPIC SYLLABLE JEE').
+unicode_name(0x1305, 'ETHIOPIC SYLLABLE JE').
+unicode_name(0x1306, 'ETHIOPIC SYLLABLE JO').
+unicode_name(0x1307, 'ETHIOPIC SYLLABLE JWA').
+unicode_name(0x1308, 'ETHIOPIC SYLLABLE GA').
+unicode_name(0x1309, 'ETHIOPIC SYLLABLE GU').
+unicode_name(0x130A, 'ETHIOPIC SYLLABLE GI').
+unicode_name(0x130B, 'ETHIOPIC SYLLABLE GAA').
+unicode_name(0x130C, 'ETHIOPIC SYLLABLE GEE').
+unicode_name(0x130D, 'ETHIOPIC SYLLABLE GE').
+unicode_name(0x130E, 'ETHIOPIC SYLLABLE GO').
+unicode_name(0x130F, 'ETHIOPIC SYLLABLE GOA').
+unicode_name(0x1310, 'ETHIOPIC SYLLABLE GWA').
+unicode_name(0x1312, 'ETHIOPIC SYLLABLE GWI').
+unicode_name(0x1313, 'ETHIOPIC SYLLABLE GWAA').
+unicode_name(0x1314, 'ETHIOPIC SYLLABLE GWEE').
+unicode_name(0x1315, 'ETHIOPIC SYLLABLE GWE').
+unicode_name(0x1318, 'ETHIOPIC SYLLABLE GGA').
+unicode_name(0x1319, 'ETHIOPIC SYLLABLE GGU').
+unicode_name(0x131A, 'ETHIOPIC SYLLABLE GGI').
+unicode_name(0x131B, 'ETHIOPIC SYLLABLE GGAA').
+unicode_name(0x131C, 'ETHIOPIC SYLLABLE GGEE').
+unicode_name(0x131D, 'ETHIOPIC SYLLABLE GGE').
+unicode_name(0x131E, 'ETHIOPIC SYLLABLE GGO').
+unicode_name(0x131F, 'ETHIOPIC SYLLABLE GGWAA').
+unicode_name(0x1320, 'ETHIOPIC SYLLABLE THA').
+unicode_name(0x1321, 'ETHIOPIC SYLLABLE THU').
+unicode_name(0x1322, 'ETHIOPIC SYLLABLE THI').
+unicode_name(0x1323, 'ETHIOPIC SYLLABLE THAA').
+unicode_name(0x1324, 'ETHIOPIC SYLLABLE THEE').
+unicode_name(0x1325, 'ETHIOPIC SYLLABLE THE').
+unicode_name(0x1326, 'ETHIOPIC SYLLABLE THO').
+unicode_name(0x1327, 'ETHIOPIC SYLLABLE THWA').
+unicode_name(0x1328, 'ETHIOPIC SYLLABLE CHA').
+unicode_name(0x1329, 'ETHIOPIC SYLLABLE CHU').
+unicode_name(0x132A, 'ETHIOPIC SYLLABLE CHI').
+unicode_name(0x132B, 'ETHIOPIC SYLLABLE CHAA').
+unicode_name(0x132C, 'ETHIOPIC SYLLABLE CHEE').
+unicode_name(0x132D, 'ETHIOPIC SYLLABLE CHE').
+unicode_name(0x132E, 'ETHIOPIC SYLLABLE CHO').
+unicode_name(0x132F, 'ETHIOPIC SYLLABLE CHWA').
+unicode_name(0x1330, 'ETHIOPIC SYLLABLE PHA').
+unicode_name(0x1331, 'ETHIOPIC SYLLABLE PHU').
+unicode_name(0x1332, 'ETHIOPIC SYLLABLE PHI').
+unicode_name(0x1333, 'ETHIOPIC SYLLABLE PHAA').
+unicode_name(0x1334, 'ETHIOPIC SYLLABLE PHEE').
+unicode_name(0x1335, 'ETHIOPIC SYLLABLE PHE').
+unicode_name(0x1336, 'ETHIOPIC SYLLABLE PHO').
+unicode_name(0x1337, 'ETHIOPIC SYLLABLE PHWA').
+unicode_name(0x1338, 'ETHIOPIC SYLLABLE TSA').
+unicode_name(0x1339, 'ETHIOPIC SYLLABLE TSU').
+unicode_name(0x133A, 'ETHIOPIC SYLLABLE TSI').
+unicode_name(0x133B, 'ETHIOPIC SYLLABLE TSAA').
+unicode_name(0x133C, 'ETHIOPIC SYLLABLE TSEE').
+unicode_name(0x133D, 'ETHIOPIC SYLLABLE TSE').
+unicode_name(0x133E, 'ETHIOPIC SYLLABLE TSO').
+unicode_name(0x133F, 'ETHIOPIC SYLLABLE TSWA').
+unicode_name(0x1340, 'ETHIOPIC SYLLABLE TZA').
+unicode_name(0x1341, 'ETHIOPIC SYLLABLE TZU').
+unicode_name(0x1342, 'ETHIOPIC SYLLABLE TZI').
+unicode_name(0x1343, 'ETHIOPIC SYLLABLE TZAA').
+unicode_name(0x1344, 'ETHIOPIC SYLLABLE TZEE').
+unicode_name(0x1345, 'ETHIOPIC SYLLABLE TZE').
+unicode_name(0x1346, 'ETHIOPIC SYLLABLE TZO').
+unicode_name(0x1347, 'ETHIOPIC SYLLABLE TZOA').
+unicode_name(0x1348, 'ETHIOPIC SYLLABLE FA').
+unicode_name(0x1349, 'ETHIOPIC SYLLABLE FU').
+unicode_name(0x134A, 'ETHIOPIC SYLLABLE FI').
+unicode_name(0x134B, 'ETHIOPIC SYLLABLE FAA').
+unicode_name(0x134C, 'ETHIOPIC SYLLABLE FEE').
+unicode_name(0x134D, 'ETHIOPIC SYLLABLE FE').
+unicode_name(0x134E, 'ETHIOPIC SYLLABLE FO').
+unicode_name(0x134F, 'ETHIOPIC SYLLABLE FWA').
+unicode_name(0x1350, 'ETHIOPIC SYLLABLE PA').
+unicode_name(0x1351, 'ETHIOPIC SYLLABLE PU').
+unicode_name(0x1352, 'ETHIOPIC SYLLABLE PI').
+unicode_name(0x1353, 'ETHIOPIC SYLLABLE PAA').
+unicode_name(0x1354, 'ETHIOPIC SYLLABLE PEE').
+unicode_name(0x1355, 'ETHIOPIC SYLLABLE PE').
+unicode_name(0x1356, 'ETHIOPIC SYLLABLE PO').
+unicode_name(0x1357, 'ETHIOPIC SYLLABLE PWA').
+unicode_name(0x1358, 'ETHIOPIC SYLLABLE RYA').
+unicode_name(0x1359, 'ETHIOPIC SYLLABLE MYA').
+unicode_name(0x135A, 'ETHIOPIC SYLLABLE FYA').
+unicode_name(0x1380, 'ETHIOPIC SYLLABLE SEBATBEIT MWA').
+unicode_name(0x1381, 'ETHIOPIC SYLLABLE MWI').
+unicode_name(0x1382, 'ETHIOPIC SYLLABLE MWEE').
+unicode_name(0x1383, 'ETHIOPIC SYLLABLE MWE').
+unicode_name(0x1384, 'ETHIOPIC SYLLABLE SEBATBEIT BWA').
+unicode_name(0x1385, 'ETHIOPIC SYLLABLE BWI').
+unicode_name(0x1386, 'ETHIOPIC SYLLABLE BWEE').
+unicode_name(0x1387, 'ETHIOPIC SYLLABLE BWE').
+unicode_name(0x1388, 'ETHIOPIC SYLLABLE SEBATBEIT FWA').
+unicode_name(0x1389, 'ETHIOPIC SYLLABLE FWI').
+unicode_name(0x138A, 'ETHIOPIC SYLLABLE FWEE').
+unicode_name(0x138B, 'ETHIOPIC SYLLABLE FWE').
+unicode_name(0x138C, 'ETHIOPIC SYLLABLE SEBATBEIT PWA').
+unicode_name(0x138D, 'ETHIOPIC SYLLABLE PWI').
+unicode_name(0x138E, 'ETHIOPIC SYLLABLE PWEE').
+unicode_name(0x138F, 'ETHIOPIC SYLLABLE PWE').
+unicode_name(0x13A0, 'CHEROKEE LETTER A').
+unicode_name(0x13A1, 'CHEROKEE LETTER E').
+unicode_name(0x13A2, 'CHEROKEE LETTER I').
+unicode_name(0x13A3, 'CHEROKEE LETTER O').
+unicode_name(0x13A4, 'CHEROKEE LETTER U').
+unicode_name(0x13A5, 'CHEROKEE LETTER V').
+unicode_name(0x13A6, 'CHEROKEE LETTER GA').
+unicode_name(0x13A7, 'CHEROKEE LETTER KA').
+unicode_name(0x13A8, 'CHEROKEE LETTER GE').
+unicode_name(0x13A9, 'CHEROKEE LETTER GI').
+unicode_name(0x13AA, 'CHEROKEE LETTER GO').
+unicode_name(0x13AB, 'CHEROKEE LETTER GU').
+unicode_name(0x13AC, 'CHEROKEE LETTER GV').
+unicode_name(0x13AD, 'CHEROKEE LETTER HA').
+unicode_name(0x13AE, 'CHEROKEE LETTER HE').
+unicode_name(0x13AF, 'CHEROKEE LETTER HI').
+unicode_name(0x13B0, 'CHEROKEE LETTER HO').
+unicode_name(0x13B1, 'CHEROKEE LETTER HU').
+unicode_name(0x13B2, 'CHEROKEE LETTER HV').
+unicode_name(0x13B3, 'CHEROKEE LETTER LA').
+unicode_name(0x13B4, 'CHEROKEE LETTER LE').
+unicode_name(0x13B5, 'CHEROKEE LETTER LI').
+unicode_name(0x13B6, 'CHEROKEE LETTER LO').
+unicode_name(0x13B7, 'CHEROKEE LETTER LU').
+unicode_name(0x13B8, 'CHEROKEE LETTER LV').
+unicode_name(0x13B9, 'CHEROKEE LETTER MA').
+unicode_name(0x13BA, 'CHEROKEE LETTER ME').
+unicode_name(0x13BB, 'CHEROKEE LETTER MI').
+unicode_name(0x13BC, 'CHEROKEE LETTER MO').
+unicode_name(0x13BD, 'CHEROKEE LETTER MU').
+unicode_name(0x13BE, 'CHEROKEE LETTER NA').
+unicode_name(0x13BF, 'CHEROKEE LETTER HNA').
+unicode_name(0x13C0, 'CHEROKEE LETTER NAH').
+unicode_name(0x13C1, 'CHEROKEE LETTER NE').
+unicode_name(0x13C2, 'CHEROKEE LETTER NI').
+unicode_name(0x13C3, 'CHEROKEE LETTER NO').
+unicode_name(0x13C4, 'CHEROKEE LETTER NU').
+unicode_name(0x13C5, 'CHEROKEE LETTER NV').
+unicode_name(0x13C6, 'CHEROKEE LETTER QUA').
+unicode_name(0x13C7, 'CHEROKEE LETTER QUE').
+unicode_name(0x13C8, 'CHEROKEE LETTER QUI').
+unicode_name(0x13C9, 'CHEROKEE LETTER QUO').
+unicode_name(0x13CA, 'CHEROKEE LETTER QUU').
+unicode_name(0x13CB, 'CHEROKEE LETTER QUV').
+unicode_name(0x13CC, 'CHEROKEE LETTER SA').
+unicode_name(0x13CD, 'CHEROKEE LETTER S').
+unicode_name(0x13CE, 'CHEROKEE LETTER SE').
+unicode_name(0x13CF, 'CHEROKEE LETTER SI').
+unicode_name(0x13D0, 'CHEROKEE LETTER SO').
+unicode_name(0x13D1, 'CHEROKEE LETTER SU').
+unicode_name(0x13D2, 'CHEROKEE LETTER SV').
+unicode_name(0x13D3, 'CHEROKEE LETTER DA').
+unicode_name(0x13D4, 'CHEROKEE LETTER TA').
+unicode_name(0x13D5, 'CHEROKEE LETTER DE').
+unicode_name(0x13D6, 'CHEROKEE LETTER TE').
+unicode_name(0x13D7, 'CHEROKEE LETTER DI').
+unicode_name(0x13D8, 'CHEROKEE LETTER TI').
+unicode_name(0x13D9, 'CHEROKEE LETTER DO').
+unicode_name(0x13DA, 'CHEROKEE LETTER DU').
+unicode_name(0x13DB, 'CHEROKEE LETTER DV').
+unicode_name(0x13DC, 'CHEROKEE LETTER DLA').
+unicode_name(0x13DD, 'CHEROKEE LETTER TLA').
+unicode_name(0x13DE, 'CHEROKEE LETTER TLE').
+unicode_name(0x13DF, 'CHEROKEE LETTER TLI').
+unicode_name(0x13E0, 'CHEROKEE LETTER TLO').
+unicode_name(0x13E1, 'CHEROKEE LETTER TLU').
+unicode_name(0x13E2, 'CHEROKEE LETTER TLV').
+unicode_name(0x13E3, 'CHEROKEE LETTER TSA').
+unicode_name(0x13E4, 'CHEROKEE LETTER TSE').
+unicode_name(0x13E5, 'CHEROKEE LETTER TSI').
+unicode_name(0x13E6, 'CHEROKEE LETTER TSO').
+unicode_name(0x13E7, 'CHEROKEE LETTER TSU').
+unicode_name(0x13E8, 'CHEROKEE LETTER TSV').
+unicode_name(0x13E9, 'CHEROKEE LETTER WA').
+unicode_name(0x13EA, 'CHEROKEE LETTER WE').
+unicode_name(0x13EB, 'CHEROKEE LETTER WI').
+unicode_name(0x13EC, 'CHEROKEE LETTER WO').
+unicode_name(0x13ED, 'CHEROKEE LETTER WU').
+unicode_name(0x13EE, 'CHEROKEE LETTER WV').
+unicode_name(0x13EF, 'CHEROKEE LETTER YA').
+unicode_name(0x13F0, 'CHEROKEE LETTER YE').
+unicode_name(0x13F1, 'CHEROKEE LETTER YI').
+unicode_name(0x13F2, 'CHEROKEE LETTER YO').
+unicode_name(0x13F3, 'CHEROKEE LETTER YU').
+unicode_name(0x13F4, 'CHEROKEE LETTER YV').
+unicode_name(0x1401, 'CANADIAN SYLLABICS E').
+unicode_name(0x1402, 'CANADIAN SYLLABICS AAI').
+unicode_name(0x1403, 'CANADIAN SYLLABICS I').
+unicode_name(0x1404, 'CANADIAN SYLLABICS II').
+unicode_name(0x1405, 'CANADIAN SYLLABICS O').
+unicode_name(0x1406, 'CANADIAN SYLLABICS OO').
+unicode_name(0x1407, 'CANADIAN SYLLABICS Y-CREE OO').
+unicode_name(0x1408, 'CANADIAN SYLLABICS CARRIER EE').
+unicode_name(0x1409, 'CANADIAN SYLLABICS CARRIER I').
+unicode_name(0x140A, 'CANADIAN SYLLABICS A').
+unicode_name(0x140B, 'CANADIAN SYLLABICS AA').
+unicode_name(0x140C, 'CANADIAN SYLLABICS WE').
+unicode_name(0x140D, 'CANADIAN SYLLABICS WEST-CREE WE').
+unicode_name(0x140E, 'CANADIAN SYLLABICS WI').
+unicode_name(0x140F, 'CANADIAN SYLLABICS WEST-CREE WI').
+unicode_name(0x1410, 'CANADIAN SYLLABICS WII').
+unicode_name(0x1411, 'CANADIAN SYLLABICS WEST-CREE WII').
+unicode_name(0x1412, 'CANADIAN SYLLABICS WO').
+unicode_name(0x1413, 'CANADIAN SYLLABICS WEST-CREE WO').
+unicode_name(0x1414, 'CANADIAN SYLLABICS WOO').
+unicode_name(0x1415, 'CANADIAN SYLLABICS WEST-CREE WOO').
+unicode_name(0x1416, 'CANADIAN SYLLABICS NASKAPI WOO').
+unicode_name(0x1417, 'CANADIAN SYLLABICS WA').
+unicode_name(0x1418, 'CANADIAN SYLLABICS WEST-CREE WA').
+unicode_name(0x1419, 'CANADIAN SYLLABICS WAA').
+unicode_name(0x141A, 'CANADIAN SYLLABICS WEST-CREE WAA').
+unicode_name(0x141B, 'CANADIAN SYLLABICS NASKAPI WAA').
+unicode_name(0x141C, 'CANADIAN SYLLABICS AI').
+unicode_name(0x141D, 'CANADIAN SYLLABICS Y-CREE W').
+unicode_name(0x141E, 'CANADIAN SYLLABICS GLOTTAL STOP').
+unicode_name(0x141F, 'CANADIAN SYLLABICS FINAL ACUTE').
+unicode_name(0x1420, 'CANADIAN SYLLABICS FINAL GRAVE').
+unicode_name(0x1421, 'CANADIAN SYLLABICS FINAL BOTTOM HALF RING').
+unicode_name(0x1422, 'CANADIAN SYLLABICS FINAL TOP HALF RING').
+unicode_name(0x1423, 'CANADIAN SYLLABICS FINAL RIGHT HALF RING').
+unicode_name(0x1424, 'CANADIAN SYLLABICS FINAL RING').
+unicode_name(0x1425, 'CANADIAN SYLLABICS FINAL DOUBLE ACUTE').
+unicode_name(0x1426, 'CANADIAN SYLLABICS FINAL DOUBLE SHORT VERTICAL STROKES').
+unicode_name(0x1427, 'CANADIAN SYLLABICS FINAL MIDDLE DOT').
+unicode_name(0x1428, 'CANADIAN SYLLABICS FINAL SHORT HORIZONTAL STROKE').
+unicode_name(0x1429, 'CANADIAN SYLLABICS FINAL PLUS').
+unicode_name(0x142A, 'CANADIAN SYLLABICS FINAL DOWN TACK').
+unicode_name(0x142B, 'CANADIAN SYLLABICS EN').
+unicode_name(0x142C, 'CANADIAN SYLLABICS IN').
+unicode_name(0x142D, 'CANADIAN SYLLABICS ON').
+unicode_name(0x142E, 'CANADIAN SYLLABICS AN').
+unicode_name(0x142F, 'CANADIAN SYLLABICS PE').
+unicode_name(0x1430, 'CANADIAN SYLLABICS PAAI').
+unicode_name(0x1431, 'CANADIAN SYLLABICS PI').
+unicode_name(0x1432, 'CANADIAN SYLLABICS PII').
+unicode_name(0x1433, 'CANADIAN SYLLABICS PO').
+unicode_name(0x1434, 'CANADIAN SYLLABICS POO').
+unicode_name(0x1435, 'CANADIAN SYLLABICS Y-CREE POO').
+unicode_name(0x1436, 'CANADIAN SYLLABICS CARRIER HEE').
+unicode_name(0x1437, 'CANADIAN SYLLABICS CARRIER HI').
+unicode_name(0x1438, 'CANADIAN SYLLABICS PA').
+unicode_name(0x1439, 'CANADIAN SYLLABICS PAA').
+unicode_name(0x143A, 'CANADIAN SYLLABICS PWE').
+unicode_name(0x143B, 'CANADIAN SYLLABICS WEST-CREE PWE').
+unicode_name(0x143C, 'CANADIAN SYLLABICS PWI').
+unicode_name(0x143D, 'CANADIAN SYLLABICS WEST-CREE PWI').
+unicode_name(0x143E, 'CANADIAN SYLLABICS PWII').
+unicode_name(0x143F, 'CANADIAN SYLLABICS WEST-CREE PWII').
+unicode_name(0x1440, 'CANADIAN SYLLABICS PWO').
+unicode_name(0x1441, 'CANADIAN SYLLABICS WEST-CREE PWO').
+unicode_name(0x1442, 'CANADIAN SYLLABICS PWOO').
+unicode_name(0x1443, 'CANADIAN SYLLABICS WEST-CREE PWOO').
+unicode_name(0x1444, 'CANADIAN SYLLABICS PWA').
+unicode_name(0x1445, 'CANADIAN SYLLABICS WEST-CREE PWA').
+unicode_name(0x1446, 'CANADIAN SYLLABICS PWAA').
+unicode_name(0x1447, 'CANADIAN SYLLABICS WEST-CREE PWAA').
+unicode_name(0x1448, 'CANADIAN SYLLABICS Y-CREE PWAA').
+unicode_name(0x1449, 'CANADIAN SYLLABICS P').
+unicode_name(0x144A, 'CANADIAN SYLLABICS WEST-CREE P').
+unicode_name(0x144B, 'CANADIAN SYLLABICS CARRIER H').
+unicode_name(0x144C, 'CANADIAN SYLLABICS TE').
+unicode_name(0x144D, 'CANADIAN SYLLABICS TAAI').
+unicode_name(0x144E, 'CANADIAN SYLLABICS TI').
+unicode_name(0x144F, 'CANADIAN SYLLABICS TII').
+unicode_name(0x1450, 'CANADIAN SYLLABICS TO').
+unicode_name(0x1451, 'CANADIAN SYLLABICS TOO').
+unicode_name(0x1452, 'CANADIAN SYLLABICS Y-CREE TOO').
+unicode_name(0x1453, 'CANADIAN SYLLABICS CARRIER DEE').
+unicode_name(0x1454, 'CANADIAN SYLLABICS CARRIER DI').
+unicode_name(0x1455, 'CANADIAN SYLLABICS TA').
+unicode_name(0x1456, 'CANADIAN SYLLABICS TAA').
+unicode_name(0x1457, 'CANADIAN SYLLABICS TWE').
+unicode_name(0x1458, 'CANADIAN SYLLABICS WEST-CREE TWE').
+unicode_name(0x1459, 'CANADIAN SYLLABICS TWI').
+unicode_name(0x145A, 'CANADIAN SYLLABICS WEST-CREE TWI').
+unicode_name(0x145B, 'CANADIAN SYLLABICS TWII').
+unicode_name(0x145C, 'CANADIAN SYLLABICS WEST-CREE TWII').
+unicode_name(0x145D, 'CANADIAN SYLLABICS TWO').
+unicode_name(0x145E, 'CANADIAN SYLLABICS WEST-CREE TWO').
+unicode_name(0x145F, 'CANADIAN SYLLABICS TWOO').
+unicode_name(0x1460, 'CANADIAN SYLLABICS WEST-CREE TWOO').
+unicode_name(0x1461, 'CANADIAN SYLLABICS TWA').
+unicode_name(0x1462, 'CANADIAN SYLLABICS WEST-CREE TWA').
+unicode_name(0x1463, 'CANADIAN SYLLABICS TWAA').
+unicode_name(0x1464, 'CANADIAN SYLLABICS WEST-CREE TWAA').
+unicode_name(0x1465, 'CANADIAN SYLLABICS NASKAPI TWAA').
+unicode_name(0x1466, 'CANADIAN SYLLABICS T').
+unicode_name(0x1467, 'CANADIAN SYLLABICS TTE').
+unicode_name(0x1468, 'CANADIAN SYLLABICS TTI').
+unicode_name(0x1469, 'CANADIAN SYLLABICS TTO').
+unicode_name(0x146A, 'CANADIAN SYLLABICS TTA').
+unicode_name(0x146B, 'CANADIAN SYLLABICS KE').
+unicode_name(0x146C, 'CANADIAN SYLLABICS KAAI').
+unicode_name(0x146D, 'CANADIAN SYLLABICS KI').
+unicode_name(0x146E, 'CANADIAN SYLLABICS KII').
+unicode_name(0x146F, 'CANADIAN SYLLABICS KO').
+unicode_name(0x1470, 'CANADIAN SYLLABICS KOO').
+unicode_name(0x1471, 'CANADIAN SYLLABICS Y-CREE KOO').
+unicode_name(0x1472, 'CANADIAN SYLLABICS KA').
+unicode_name(0x1473, 'CANADIAN SYLLABICS KAA').
+unicode_name(0x1474, 'CANADIAN SYLLABICS KWE').
+unicode_name(0x1475, 'CANADIAN SYLLABICS WEST-CREE KWE').
+unicode_name(0x1476, 'CANADIAN SYLLABICS KWI').
+unicode_name(0x1477, 'CANADIAN SYLLABICS WEST-CREE KWI').
+unicode_name(0x1478, 'CANADIAN SYLLABICS KWII').
+unicode_name(0x1479, 'CANADIAN SYLLABICS WEST-CREE KWII').
+unicode_name(0x147A, 'CANADIAN SYLLABICS KWO').
+unicode_name(0x147B, 'CANADIAN SYLLABICS WEST-CREE KWO').
+unicode_name(0x147C, 'CANADIAN SYLLABICS KWOO').
+unicode_name(0x147D, 'CANADIAN SYLLABICS WEST-CREE KWOO').
+unicode_name(0x147E, 'CANADIAN SYLLABICS KWA').
+unicode_name(0x147F, 'CANADIAN SYLLABICS WEST-CREE KWA').
+unicode_name(0x1480, 'CANADIAN SYLLABICS KWAA').
+unicode_name(0x1481, 'CANADIAN SYLLABICS WEST-CREE KWAA').
+unicode_name(0x1482, 'CANADIAN SYLLABICS NASKAPI KWAA').
+unicode_name(0x1483, 'CANADIAN SYLLABICS K').
+unicode_name(0x1484, 'CANADIAN SYLLABICS KW').
+unicode_name(0x1485, 'CANADIAN SYLLABICS SOUTH-SLAVEY KEH').
+unicode_name(0x1486, 'CANADIAN SYLLABICS SOUTH-SLAVEY KIH').
+unicode_name(0x1487, 'CANADIAN SYLLABICS SOUTH-SLAVEY KOH').
+unicode_name(0x1488, 'CANADIAN SYLLABICS SOUTH-SLAVEY KAH').
+unicode_name(0x1489, 'CANADIAN SYLLABICS CE').
+unicode_name(0x148A, 'CANADIAN SYLLABICS CAAI').
+unicode_name(0x148B, 'CANADIAN SYLLABICS CI').
+unicode_name(0x148C, 'CANADIAN SYLLABICS CII').
+unicode_name(0x148D, 'CANADIAN SYLLABICS CO').
+unicode_name(0x148E, 'CANADIAN SYLLABICS COO').
+unicode_name(0x148F, 'CANADIAN SYLLABICS Y-CREE COO').
+unicode_name(0x1490, 'CANADIAN SYLLABICS CA').
+unicode_name(0x1491, 'CANADIAN SYLLABICS CAA').
+unicode_name(0x1492, 'CANADIAN SYLLABICS CWE').
+unicode_name(0x1493, 'CANADIAN SYLLABICS WEST-CREE CWE').
+unicode_name(0x1494, 'CANADIAN SYLLABICS CWI').
+unicode_name(0x1495, 'CANADIAN SYLLABICS WEST-CREE CWI').
+unicode_name(0x1496, 'CANADIAN SYLLABICS CWII').
+unicode_name(0x1497, 'CANADIAN SYLLABICS WEST-CREE CWII').
+unicode_name(0x1498, 'CANADIAN SYLLABICS CWO').
+unicode_name(0x1499, 'CANADIAN SYLLABICS WEST-CREE CWO').
+unicode_name(0x149A, 'CANADIAN SYLLABICS CWOO').
+unicode_name(0x149B, 'CANADIAN SYLLABICS WEST-CREE CWOO').
+unicode_name(0x149C, 'CANADIAN SYLLABICS CWA').
+unicode_name(0x149D, 'CANADIAN SYLLABICS WEST-CREE CWA').
+unicode_name(0x149E, 'CANADIAN SYLLABICS CWAA').
+unicode_name(0x149F, 'CANADIAN SYLLABICS WEST-CREE CWAA').
+unicode_name(0x14A0, 'CANADIAN SYLLABICS NASKAPI CWAA').
+unicode_name(0x14A1, 'CANADIAN SYLLABICS C').
+unicode_name(0x14A2, 'CANADIAN SYLLABICS SAYISI TH').
+unicode_name(0x14A3, 'CANADIAN SYLLABICS ME').
+unicode_name(0x14A4, 'CANADIAN SYLLABICS MAAI').
+unicode_name(0x14A5, 'CANADIAN SYLLABICS MI').
+unicode_name(0x14A6, 'CANADIAN SYLLABICS MII').
+unicode_name(0x14A7, 'CANADIAN SYLLABICS MO').
+unicode_name(0x14A8, 'CANADIAN SYLLABICS MOO').
+unicode_name(0x14A9, 'CANADIAN SYLLABICS Y-CREE MOO').
+unicode_name(0x14AA, 'CANADIAN SYLLABICS MA').
+unicode_name(0x14AB, 'CANADIAN SYLLABICS MAA').
+unicode_name(0x14AC, 'CANADIAN SYLLABICS MWE').
+unicode_name(0x14AD, 'CANADIAN SYLLABICS WEST-CREE MWE').
+unicode_name(0x14AE, 'CANADIAN SYLLABICS MWI').
+unicode_name(0x14AF, 'CANADIAN SYLLABICS WEST-CREE MWI').
+unicode_name(0x14B0, 'CANADIAN SYLLABICS MWII').
+unicode_name(0x14B1, 'CANADIAN SYLLABICS WEST-CREE MWII').
+unicode_name(0x14B2, 'CANADIAN SYLLABICS MWO').
+unicode_name(0x14B3, 'CANADIAN SYLLABICS WEST-CREE MWO').
+unicode_name(0x14B4, 'CANADIAN SYLLABICS MWOO').
+unicode_name(0x14B5, 'CANADIAN SYLLABICS WEST-CREE MWOO').
+unicode_name(0x14B6, 'CANADIAN SYLLABICS MWA').
+unicode_name(0x14B7, 'CANADIAN SYLLABICS WEST-CREE MWA').
+unicode_name(0x14B8, 'CANADIAN SYLLABICS MWAA').
+unicode_name(0x14B9, 'CANADIAN SYLLABICS WEST-CREE MWAA').
+unicode_name(0x14BA, 'CANADIAN SYLLABICS NASKAPI MWAA').
+unicode_name(0x14BB, 'CANADIAN SYLLABICS M').
+unicode_name(0x14BC, 'CANADIAN SYLLABICS WEST-CREE M').
+unicode_name(0x14BD, 'CANADIAN SYLLABICS MH').
+unicode_name(0x14BE, 'CANADIAN SYLLABICS ATHAPASCAN M').
+unicode_name(0x14BF, 'CANADIAN SYLLABICS SAYISI M').
+unicode_name(0x14C0, 'CANADIAN SYLLABICS NE').
+unicode_name(0x14C1, 'CANADIAN SYLLABICS NAAI').
+unicode_name(0x14C2, 'CANADIAN SYLLABICS NI').
+unicode_name(0x14C3, 'CANADIAN SYLLABICS NII').
+unicode_name(0x14C4, 'CANADIAN SYLLABICS NO').
+unicode_name(0x14C5, 'CANADIAN SYLLABICS NOO').
+unicode_name(0x14C6, 'CANADIAN SYLLABICS Y-CREE NOO').
+unicode_name(0x14C7, 'CANADIAN SYLLABICS NA').
+unicode_name(0x14C8, 'CANADIAN SYLLABICS NAA').
+unicode_name(0x14C9, 'CANADIAN SYLLABICS NWE').
+unicode_name(0x14CA, 'CANADIAN SYLLABICS WEST-CREE NWE').
+unicode_name(0x14CB, 'CANADIAN SYLLABICS NWA').
+unicode_name(0x14CC, 'CANADIAN SYLLABICS WEST-CREE NWA').
+unicode_name(0x14CD, 'CANADIAN SYLLABICS NWAA').
+unicode_name(0x14CE, 'CANADIAN SYLLABICS WEST-CREE NWAA').
+unicode_name(0x14CF, 'CANADIAN SYLLABICS NASKAPI NWAA').
+unicode_name(0x14D0, 'CANADIAN SYLLABICS N').
+unicode_name(0x14D1, 'CANADIAN SYLLABICS CARRIER NG').
+unicode_name(0x14D2, 'CANADIAN SYLLABICS NH').
+unicode_name(0x14D3, 'CANADIAN SYLLABICS LE').
+unicode_name(0x14D4, 'CANADIAN SYLLABICS LAAI').
+unicode_name(0x14D5, 'CANADIAN SYLLABICS LI').
+unicode_name(0x14D6, 'CANADIAN SYLLABICS LII').
+unicode_name(0x14D7, 'CANADIAN SYLLABICS LO').
+unicode_name(0x14D8, 'CANADIAN SYLLABICS LOO').
+unicode_name(0x14D9, 'CANADIAN SYLLABICS Y-CREE LOO').
+unicode_name(0x14DA, 'CANADIAN SYLLABICS LA').
+unicode_name(0x14DB, 'CANADIAN SYLLABICS LAA').
+unicode_name(0x14DC, 'CANADIAN SYLLABICS LWE').
+unicode_name(0x14DD, 'CANADIAN SYLLABICS WEST-CREE LWE').
+unicode_name(0x14DE, 'CANADIAN SYLLABICS LWI').
+unicode_name(0x14DF, 'CANADIAN SYLLABICS WEST-CREE LWI').
+unicode_name(0x14E0, 'CANADIAN SYLLABICS LWII').
+unicode_name(0x14E1, 'CANADIAN SYLLABICS WEST-CREE LWII').
+unicode_name(0x14E2, 'CANADIAN SYLLABICS LWO').
+unicode_name(0x14E3, 'CANADIAN SYLLABICS WEST-CREE LWO').
+unicode_name(0x14E4, 'CANADIAN SYLLABICS LWOO').
+unicode_name(0x14E5, 'CANADIAN SYLLABICS WEST-CREE LWOO').
+unicode_name(0x14E6, 'CANADIAN SYLLABICS LWA').
+unicode_name(0x14E7, 'CANADIAN SYLLABICS WEST-CREE LWA').
+unicode_name(0x14E8, 'CANADIAN SYLLABICS LWAA').
+unicode_name(0x14E9, 'CANADIAN SYLLABICS WEST-CREE LWAA').
+unicode_name(0x14EA, 'CANADIAN SYLLABICS L').
+unicode_name(0x14EB, 'CANADIAN SYLLABICS WEST-CREE L').
+unicode_name(0x14EC, 'CANADIAN SYLLABICS MEDIAL L').
+unicode_name(0x14ED, 'CANADIAN SYLLABICS SE').
+unicode_name(0x14EE, 'CANADIAN SYLLABICS SAAI').
+unicode_name(0x14EF, 'CANADIAN SYLLABICS SI').
+unicode_name(0x14F0, 'CANADIAN SYLLABICS SII').
+unicode_name(0x14F1, 'CANADIAN SYLLABICS SO').
+unicode_name(0x14F2, 'CANADIAN SYLLABICS SOO').
+unicode_name(0x14F3, 'CANADIAN SYLLABICS Y-CREE SOO').
+unicode_name(0x14F4, 'CANADIAN SYLLABICS SA').
+unicode_name(0x14F5, 'CANADIAN SYLLABICS SAA').
+unicode_name(0x14F6, 'CANADIAN SYLLABICS SWE').
+unicode_name(0x14F7, 'CANADIAN SYLLABICS WEST-CREE SWE').
+unicode_name(0x14F8, 'CANADIAN SYLLABICS SWI').
+unicode_name(0x14F9, 'CANADIAN SYLLABICS WEST-CREE SWI').
+unicode_name(0x14FA, 'CANADIAN SYLLABICS SWII').
+unicode_name(0x14FB, 'CANADIAN SYLLABICS WEST-CREE SWII').
+unicode_name(0x14FC, 'CANADIAN SYLLABICS SWO').
+unicode_name(0x14FD, 'CANADIAN SYLLABICS WEST-CREE SWO').
+unicode_name(0x14FE, 'CANADIAN SYLLABICS SWOO').
+unicode_name(0x14FF, 'CANADIAN SYLLABICS WEST-CREE SWOO').
+unicode_name(0x1500, 'CANADIAN SYLLABICS SWA').
+unicode_name(0x1501, 'CANADIAN SYLLABICS WEST-CREE SWA').
+unicode_name(0x1502, 'CANADIAN SYLLABICS SWAA').
+unicode_name(0x1503, 'CANADIAN SYLLABICS WEST-CREE SWAA').
+unicode_name(0x1504, 'CANADIAN SYLLABICS NASKAPI SWAA').
+unicode_name(0x1505, 'CANADIAN SYLLABICS S').
+unicode_name(0x1506, 'CANADIAN SYLLABICS ATHAPASCAN S').
+unicode_name(0x1507, 'CANADIAN SYLLABICS SW').
+unicode_name(0x1508, 'CANADIAN SYLLABICS BLACKFOOT S').
+unicode_name(0x1509, 'CANADIAN SYLLABICS MOOSE-CREE SK').
+unicode_name(0x150A, 'CANADIAN SYLLABICS NASKAPI SKW').
+unicode_name(0x150B, 'CANADIAN SYLLABICS NASKAPI S-W').
+unicode_name(0x150C, 'CANADIAN SYLLABICS NASKAPI SPWA').
+unicode_name(0x150D, 'CANADIAN SYLLABICS NASKAPI STWA').
+unicode_name(0x150E, 'CANADIAN SYLLABICS NASKAPI SKWA').
+unicode_name(0x150F, 'CANADIAN SYLLABICS NASKAPI SCWA').
+unicode_name(0x1510, 'CANADIAN SYLLABICS SHE').
+unicode_name(0x1511, 'CANADIAN SYLLABICS SHI').
+unicode_name(0x1512, 'CANADIAN SYLLABICS SHII').
+unicode_name(0x1513, 'CANADIAN SYLLABICS SHO').
+unicode_name(0x1514, 'CANADIAN SYLLABICS SHOO').
+unicode_name(0x1515, 'CANADIAN SYLLABICS SHA').
+unicode_name(0x1516, 'CANADIAN SYLLABICS SHAA').
+unicode_name(0x1517, 'CANADIAN SYLLABICS SHWE').
+unicode_name(0x1518, 'CANADIAN SYLLABICS WEST-CREE SHWE').
+unicode_name(0x1519, 'CANADIAN SYLLABICS SHWI').
+unicode_name(0x151A, 'CANADIAN SYLLABICS WEST-CREE SHWI').
+unicode_name(0x151B, 'CANADIAN SYLLABICS SHWII').
+unicode_name(0x151C, 'CANADIAN SYLLABICS WEST-CREE SHWII').
+unicode_name(0x151D, 'CANADIAN SYLLABICS SHWO').
+unicode_name(0x151E, 'CANADIAN SYLLABICS WEST-CREE SHWO').
+unicode_name(0x151F, 'CANADIAN SYLLABICS SHWOO').
+unicode_name(0x1520, 'CANADIAN SYLLABICS WEST-CREE SHWOO').
+unicode_name(0x1521, 'CANADIAN SYLLABICS SHWA').
+unicode_name(0x1522, 'CANADIAN SYLLABICS WEST-CREE SHWA').
+unicode_name(0x1523, 'CANADIAN SYLLABICS SHWAA').
+unicode_name(0x1524, 'CANADIAN SYLLABICS WEST-CREE SHWAA').
+unicode_name(0x1525, 'CANADIAN SYLLABICS SH').
+unicode_name(0x1526, 'CANADIAN SYLLABICS YE').
+unicode_name(0x1527, 'CANADIAN SYLLABICS YAAI').
+unicode_name(0x1528, 'CANADIAN SYLLABICS YI').
+unicode_name(0x1529, 'CANADIAN SYLLABICS YII').
+unicode_name(0x152A, 'CANADIAN SYLLABICS YO').
+unicode_name(0x152B, 'CANADIAN SYLLABICS YOO').
+unicode_name(0x152C, 'CANADIAN SYLLABICS Y-CREE YOO').
+unicode_name(0x152D, 'CANADIAN SYLLABICS YA').
+unicode_name(0x152E, 'CANADIAN SYLLABICS YAA').
+unicode_name(0x152F, 'CANADIAN SYLLABICS YWE').
+unicode_name(0x1530, 'CANADIAN SYLLABICS WEST-CREE YWE').
+unicode_name(0x1531, 'CANADIAN SYLLABICS YWI').
+unicode_name(0x1532, 'CANADIAN SYLLABICS WEST-CREE YWI').
+unicode_name(0x1533, 'CANADIAN SYLLABICS YWII').
+unicode_name(0x1534, 'CANADIAN SYLLABICS WEST-CREE YWII').
+unicode_name(0x1535, 'CANADIAN SYLLABICS YWO').
+unicode_name(0x1536, 'CANADIAN SYLLABICS WEST-CREE YWO').
+unicode_name(0x1537, 'CANADIAN SYLLABICS YWOO').
+unicode_name(0x1538, 'CANADIAN SYLLABICS WEST-CREE YWOO').
+unicode_name(0x1539, 'CANADIAN SYLLABICS YWA').
+unicode_name(0x153A, 'CANADIAN SYLLABICS WEST-CREE YWA').
+unicode_name(0x153B, 'CANADIAN SYLLABICS YWAA').
+unicode_name(0x153C, 'CANADIAN SYLLABICS WEST-CREE YWAA').
+unicode_name(0x153D, 'CANADIAN SYLLABICS NASKAPI YWAA').
+unicode_name(0x153E, 'CANADIAN SYLLABICS Y').
+unicode_name(0x153F, 'CANADIAN SYLLABICS BIBLE-CREE Y').
+unicode_name(0x1540, 'CANADIAN SYLLABICS WEST-CREE Y').
+unicode_name(0x1541, 'CANADIAN SYLLABICS SAYISI YI').
+unicode_name(0x1542, 'CANADIAN SYLLABICS RE').
+unicode_name(0x1543, 'CANADIAN SYLLABICS R-CREE RE').
+unicode_name(0x1544, 'CANADIAN SYLLABICS WEST-CREE LE').
+unicode_name(0x1545, 'CANADIAN SYLLABICS RAAI').
+unicode_name(0x1546, 'CANADIAN SYLLABICS RI').
+unicode_name(0x1547, 'CANADIAN SYLLABICS RII').
+unicode_name(0x1548, 'CANADIAN SYLLABICS RO').
+unicode_name(0x1549, 'CANADIAN SYLLABICS ROO').
+unicode_name(0x154A, 'CANADIAN SYLLABICS WEST-CREE LO').
+unicode_name(0x154B, 'CANADIAN SYLLABICS RA').
+unicode_name(0x154C, 'CANADIAN SYLLABICS RAA').
+unicode_name(0x154D, 'CANADIAN SYLLABICS WEST-CREE LA').
+unicode_name(0x154E, 'CANADIAN SYLLABICS RWAA').
+unicode_name(0x154F, 'CANADIAN SYLLABICS WEST-CREE RWAA').
+unicode_name(0x1550, 'CANADIAN SYLLABICS R').
+unicode_name(0x1551, 'CANADIAN SYLLABICS WEST-CREE R').
+unicode_name(0x1552, 'CANADIAN SYLLABICS MEDIAL R').
+unicode_name(0x1553, 'CANADIAN SYLLABICS FE').
+unicode_name(0x1554, 'CANADIAN SYLLABICS FAAI').
+unicode_name(0x1555, 'CANADIAN SYLLABICS FI').
+unicode_name(0x1556, 'CANADIAN SYLLABICS FII').
+unicode_name(0x1557, 'CANADIAN SYLLABICS FO').
+unicode_name(0x1558, 'CANADIAN SYLLABICS FOO').
+unicode_name(0x1559, 'CANADIAN SYLLABICS FA').
+unicode_name(0x155A, 'CANADIAN SYLLABICS FAA').
+unicode_name(0x155B, 'CANADIAN SYLLABICS FWAA').
+unicode_name(0x155C, 'CANADIAN SYLLABICS WEST-CREE FWAA').
+unicode_name(0x155D, 'CANADIAN SYLLABICS F').
+unicode_name(0x155E, 'CANADIAN SYLLABICS THE').
+unicode_name(0x155F, 'CANADIAN SYLLABICS N-CREE THE').
+unicode_name(0x1560, 'CANADIAN SYLLABICS THI').
+unicode_name(0x1561, 'CANADIAN SYLLABICS N-CREE THI').
+unicode_name(0x1562, 'CANADIAN SYLLABICS THII').
+unicode_name(0x1563, 'CANADIAN SYLLABICS N-CREE THII').
+unicode_name(0x1564, 'CANADIAN SYLLABICS THO').
+unicode_name(0x1565, 'CANADIAN SYLLABICS THOO').
+unicode_name(0x1566, 'CANADIAN SYLLABICS THA').
+unicode_name(0x1567, 'CANADIAN SYLLABICS THAA').
+unicode_name(0x1568, 'CANADIAN SYLLABICS THWAA').
+unicode_name(0x1569, 'CANADIAN SYLLABICS WEST-CREE THWAA').
+unicode_name(0x156A, 'CANADIAN SYLLABICS TH').
+unicode_name(0x156B, 'CANADIAN SYLLABICS TTHE').
+unicode_name(0x156C, 'CANADIAN SYLLABICS TTHI').
+unicode_name(0x156D, 'CANADIAN SYLLABICS TTHO').
+unicode_name(0x156E, 'CANADIAN SYLLABICS TTHA').
+unicode_name(0x156F, 'CANADIAN SYLLABICS TTH').
+unicode_name(0x1570, 'CANADIAN SYLLABICS TYE').
+unicode_name(0x1571, 'CANADIAN SYLLABICS TYI').
+unicode_name(0x1572, 'CANADIAN SYLLABICS TYO').
+unicode_name(0x1573, 'CANADIAN SYLLABICS TYA').
+unicode_name(0x1574, 'CANADIAN SYLLABICS NUNAVIK HE').
+unicode_name(0x1575, 'CANADIAN SYLLABICS NUNAVIK HI').
+unicode_name(0x1576, 'CANADIAN SYLLABICS NUNAVIK HII').
+unicode_name(0x1577, 'CANADIAN SYLLABICS NUNAVIK HO').
+unicode_name(0x1578, 'CANADIAN SYLLABICS NUNAVIK HOO').
+unicode_name(0x1579, 'CANADIAN SYLLABICS NUNAVIK HA').
+unicode_name(0x157A, 'CANADIAN SYLLABICS NUNAVIK HAA').
+unicode_name(0x157B, 'CANADIAN SYLLABICS NUNAVIK H').
+unicode_name(0x157C, 'CANADIAN SYLLABICS NUNAVUT H').
+unicode_name(0x157D, 'CANADIAN SYLLABICS HK').
+unicode_name(0x157E, 'CANADIAN SYLLABICS QAAI').
+unicode_name(0x157F, 'CANADIAN SYLLABICS QI').
+unicode_name(0x1580, 'CANADIAN SYLLABICS QII').
+unicode_name(0x1581, 'CANADIAN SYLLABICS QO').
+unicode_name(0x1582, 'CANADIAN SYLLABICS QOO').
+unicode_name(0x1583, 'CANADIAN SYLLABICS QA').
+unicode_name(0x1584, 'CANADIAN SYLLABICS QAA').
+unicode_name(0x1585, 'CANADIAN SYLLABICS Q').
+unicode_name(0x1586, 'CANADIAN SYLLABICS TLHE').
+unicode_name(0x1587, 'CANADIAN SYLLABICS TLHI').
+unicode_name(0x1588, 'CANADIAN SYLLABICS TLHO').
+unicode_name(0x1589, 'CANADIAN SYLLABICS TLHA').
+unicode_name(0x158A, 'CANADIAN SYLLABICS WEST-CREE RE').
+unicode_name(0x158B, 'CANADIAN SYLLABICS WEST-CREE RI').
+unicode_name(0x158C, 'CANADIAN SYLLABICS WEST-CREE RO').
+unicode_name(0x158D, 'CANADIAN SYLLABICS WEST-CREE RA').
+unicode_name(0x158E, 'CANADIAN SYLLABICS NGAAI').
+unicode_name(0x158F, 'CANADIAN SYLLABICS NGI').
+unicode_name(0x1590, 'CANADIAN SYLLABICS NGII').
+unicode_name(0x1591, 'CANADIAN SYLLABICS NGO').
+unicode_name(0x1592, 'CANADIAN SYLLABICS NGOO').
+unicode_name(0x1593, 'CANADIAN SYLLABICS NGA').
+unicode_name(0x1594, 'CANADIAN SYLLABICS NGAA').
+unicode_name(0x1595, 'CANADIAN SYLLABICS NG').
+unicode_name(0x1596, 'CANADIAN SYLLABICS NNG').
+unicode_name(0x1597, 'CANADIAN SYLLABICS SAYISI SHE').
+unicode_name(0x1598, 'CANADIAN SYLLABICS SAYISI SHI').
+unicode_name(0x1599, 'CANADIAN SYLLABICS SAYISI SHO').
+unicode_name(0x159A, 'CANADIAN SYLLABICS SAYISI SHA').
+unicode_name(0x159B, 'CANADIAN SYLLABICS WOODS-CREE THE').
+unicode_name(0x159C, 'CANADIAN SYLLABICS WOODS-CREE THI').
+unicode_name(0x159D, 'CANADIAN SYLLABICS WOODS-CREE THO').
+unicode_name(0x159E, 'CANADIAN SYLLABICS WOODS-CREE THA').
+unicode_name(0x159F, 'CANADIAN SYLLABICS WOODS-CREE TH').
+unicode_name(0x15A0, 'CANADIAN SYLLABICS LHI').
+unicode_name(0x15A1, 'CANADIAN SYLLABICS LHII').
+unicode_name(0x15A2, 'CANADIAN SYLLABICS LHO').
+unicode_name(0x15A3, 'CANADIAN SYLLABICS LHOO').
+unicode_name(0x15A4, 'CANADIAN SYLLABICS LHA').
+unicode_name(0x15A5, 'CANADIAN SYLLABICS LHAA').
+unicode_name(0x15A6, 'CANADIAN SYLLABICS LH').
+unicode_name(0x15A7, 'CANADIAN SYLLABICS TH-CREE THE').
+unicode_name(0x15A8, 'CANADIAN SYLLABICS TH-CREE THI').
+unicode_name(0x15A9, 'CANADIAN SYLLABICS TH-CREE THII').
+unicode_name(0x15AA, 'CANADIAN SYLLABICS TH-CREE THO').
+unicode_name(0x15AB, 'CANADIAN SYLLABICS TH-CREE THOO').
+unicode_name(0x15AC, 'CANADIAN SYLLABICS TH-CREE THA').
+unicode_name(0x15AD, 'CANADIAN SYLLABICS TH-CREE THAA').
+unicode_name(0x15AE, 'CANADIAN SYLLABICS TH-CREE TH').
+unicode_name(0x15AF, 'CANADIAN SYLLABICS AIVILIK B').
+unicode_name(0x15B0, 'CANADIAN SYLLABICS BLACKFOOT E').
+unicode_name(0x15B1, 'CANADIAN SYLLABICS BLACKFOOT I').
+unicode_name(0x15B2, 'CANADIAN SYLLABICS BLACKFOOT O').
+unicode_name(0x15B3, 'CANADIAN SYLLABICS BLACKFOOT A').
+unicode_name(0x15B4, 'CANADIAN SYLLABICS BLACKFOOT WE').
+unicode_name(0x15B5, 'CANADIAN SYLLABICS BLACKFOOT WI').
+unicode_name(0x15B6, 'CANADIAN SYLLABICS BLACKFOOT WO').
+unicode_name(0x15B7, 'CANADIAN SYLLABICS BLACKFOOT WA').
+unicode_name(0x15B8, 'CANADIAN SYLLABICS BLACKFOOT NE').
+unicode_name(0x15B9, 'CANADIAN SYLLABICS BLACKFOOT NI').
+unicode_name(0x15BA, 'CANADIAN SYLLABICS BLACKFOOT NO').
+unicode_name(0x15BB, 'CANADIAN SYLLABICS BLACKFOOT NA').
+unicode_name(0x15BC, 'CANADIAN SYLLABICS BLACKFOOT KE').
+unicode_name(0x15BD, 'CANADIAN SYLLABICS BLACKFOOT KI').
+unicode_name(0x15BE, 'CANADIAN SYLLABICS BLACKFOOT KO').
+unicode_name(0x15BF, 'CANADIAN SYLLABICS BLACKFOOT KA').
+unicode_name(0x15C0, 'CANADIAN SYLLABICS SAYISI HE').
+unicode_name(0x15C1, 'CANADIAN SYLLABICS SAYISI HI').
+unicode_name(0x15C2, 'CANADIAN SYLLABICS SAYISI HO').
+unicode_name(0x15C3, 'CANADIAN SYLLABICS SAYISI HA').
+unicode_name(0x15C4, 'CANADIAN SYLLABICS CARRIER GHU').
+unicode_name(0x15C5, 'CANADIAN SYLLABICS CARRIER GHO').
+unicode_name(0x15C6, 'CANADIAN SYLLABICS CARRIER GHE').
+unicode_name(0x15C7, 'CANADIAN SYLLABICS CARRIER GHEE').
+unicode_name(0x15C8, 'CANADIAN SYLLABICS CARRIER GHI').
+unicode_name(0x15C9, 'CANADIAN SYLLABICS CARRIER GHA').
+unicode_name(0x15CA, 'CANADIAN SYLLABICS CARRIER RU').
+unicode_name(0x15CB, 'CANADIAN SYLLABICS CARRIER RO').
+unicode_name(0x15CC, 'CANADIAN SYLLABICS CARRIER RE').
+unicode_name(0x15CD, 'CANADIAN SYLLABICS CARRIER REE').
+unicode_name(0x15CE, 'CANADIAN SYLLABICS CARRIER RI').
+unicode_name(0x15CF, 'CANADIAN SYLLABICS CARRIER RA').
+unicode_name(0x15D0, 'CANADIAN SYLLABICS CARRIER WU').
+unicode_name(0x15D1, 'CANADIAN SYLLABICS CARRIER WO').
+unicode_name(0x15D2, 'CANADIAN SYLLABICS CARRIER WE').
+unicode_name(0x15D3, 'CANADIAN SYLLABICS CARRIER WEE').
+unicode_name(0x15D4, 'CANADIAN SYLLABICS CARRIER WI').
+unicode_name(0x15D5, 'CANADIAN SYLLABICS CARRIER WA').
+unicode_name(0x15D6, 'CANADIAN SYLLABICS CARRIER HWU').
+unicode_name(0x15D7, 'CANADIAN SYLLABICS CARRIER HWO').
+unicode_name(0x15D8, 'CANADIAN SYLLABICS CARRIER HWE').
+unicode_name(0x15D9, 'CANADIAN SYLLABICS CARRIER HWEE').
+unicode_name(0x15DA, 'CANADIAN SYLLABICS CARRIER HWI').
+unicode_name(0x15DB, 'CANADIAN SYLLABICS CARRIER HWA').
+unicode_name(0x15DC, 'CANADIAN SYLLABICS CARRIER THU').
+unicode_name(0x15DD, 'CANADIAN SYLLABICS CARRIER THO').
+unicode_name(0x15DE, 'CANADIAN SYLLABICS CARRIER THE').
+unicode_name(0x15DF, 'CANADIAN SYLLABICS CARRIER THEE').
+unicode_name(0x15E0, 'CANADIAN SYLLABICS CARRIER THI').
+unicode_name(0x15E1, 'CANADIAN SYLLABICS CARRIER THA').
+unicode_name(0x15E2, 'CANADIAN SYLLABICS CARRIER TTU').
+unicode_name(0x15E3, 'CANADIAN SYLLABICS CARRIER TTO').
+unicode_name(0x15E4, 'CANADIAN SYLLABICS CARRIER TTE').
+unicode_name(0x15E5, 'CANADIAN SYLLABICS CARRIER TTEE').
+unicode_name(0x15E6, 'CANADIAN SYLLABICS CARRIER TTI').
+unicode_name(0x15E7, 'CANADIAN SYLLABICS CARRIER TTA').
+unicode_name(0x15E8, 'CANADIAN SYLLABICS CARRIER PU').
+unicode_name(0x15E9, 'CANADIAN SYLLABICS CARRIER PO').
+unicode_name(0x15EA, 'CANADIAN SYLLABICS CARRIER PE').
+unicode_name(0x15EB, 'CANADIAN SYLLABICS CARRIER PEE').
+unicode_name(0x15EC, 'CANADIAN SYLLABICS CARRIER PI').
+unicode_name(0x15ED, 'CANADIAN SYLLABICS CARRIER PA').
+unicode_name(0x15EE, 'CANADIAN SYLLABICS CARRIER P').
+unicode_name(0x15EF, 'CANADIAN SYLLABICS CARRIER GU').
+unicode_name(0x15F0, 'CANADIAN SYLLABICS CARRIER GO').
+unicode_name(0x15F1, 'CANADIAN SYLLABICS CARRIER GE').
+unicode_name(0x15F2, 'CANADIAN SYLLABICS CARRIER GEE').
+unicode_name(0x15F3, 'CANADIAN SYLLABICS CARRIER GI').
+unicode_name(0x15F4, 'CANADIAN SYLLABICS CARRIER GA').
+unicode_name(0x15F5, 'CANADIAN SYLLABICS CARRIER KHU').
+unicode_name(0x15F6, 'CANADIAN SYLLABICS CARRIER KHO').
+unicode_name(0x15F7, 'CANADIAN SYLLABICS CARRIER KHE').
+unicode_name(0x15F8, 'CANADIAN SYLLABICS CARRIER KHEE').
+unicode_name(0x15F9, 'CANADIAN SYLLABICS CARRIER KHI').
+unicode_name(0x15FA, 'CANADIAN SYLLABICS CARRIER KHA').
+unicode_name(0x15FB, 'CANADIAN SYLLABICS CARRIER KKU').
+unicode_name(0x15FC, 'CANADIAN SYLLABICS CARRIER KKO').
+unicode_name(0x15FD, 'CANADIAN SYLLABICS CARRIER KKE').
+unicode_name(0x15FE, 'CANADIAN SYLLABICS CARRIER KKEE').
+unicode_name(0x15FF, 'CANADIAN SYLLABICS CARRIER KKI').
+unicode_name(0x1600, 'CANADIAN SYLLABICS CARRIER KKA').
+unicode_name(0x1601, 'CANADIAN SYLLABICS CARRIER KK').
+unicode_name(0x1602, 'CANADIAN SYLLABICS CARRIER NU').
+unicode_name(0x1603, 'CANADIAN SYLLABICS CARRIER NO').
+unicode_name(0x1604, 'CANADIAN SYLLABICS CARRIER NE').
+unicode_name(0x1605, 'CANADIAN SYLLABICS CARRIER NEE').
+unicode_name(0x1606, 'CANADIAN SYLLABICS CARRIER NI').
+unicode_name(0x1607, 'CANADIAN SYLLABICS CARRIER NA').
+unicode_name(0x1608, 'CANADIAN SYLLABICS CARRIER MU').
+unicode_name(0x1609, 'CANADIAN SYLLABICS CARRIER MO').
+unicode_name(0x160A, 'CANADIAN SYLLABICS CARRIER ME').
+unicode_name(0x160B, 'CANADIAN SYLLABICS CARRIER MEE').
+unicode_name(0x160C, 'CANADIAN SYLLABICS CARRIER MI').
+unicode_name(0x160D, 'CANADIAN SYLLABICS CARRIER MA').
+unicode_name(0x160E, 'CANADIAN SYLLABICS CARRIER YU').
+unicode_name(0x160F, 'CANADIAN SYLLABICS CARRIER YO').
+unicode_name(0x1610, 'CANADIAN SYLLABICS CARRIER YE').
+unicode_name(0x1611, 'CANADIAN SYLLABICS CARRIER YEE').
+unicode_name(0x1612, 'CANADIAN SYLLABICS CARRIER YI').
+unicode_name(0x1613, 'CANADIAN SYLLABICS CARRIER YA').
+unicode_name(0x1614, 'CANADIAN SYLLABICS CARRIER JU').
+unicode_name(0x1615, 'CANADIAN SYLLABICS SAYISI JU').
+unicode_name(0x1616, 'CANADIAN SYLLABICS CARRIER JO').
+unicode_name(0x1617, 'CANADIAN SYLLABICS CARRIER JE').
+unicode_name(0x1618, 'CANADIAN SYLLABICS CARRIER JEE').
+unicode_name(0x1619, 'CANADIAN SYLLABICS CARRIER JI').
+unicode_name(0x161A, 'CANADIAN SYLLABICS SAYISI JI').
+unicode_name(0x161B, 'CANADIAN SYLLABICS CARRIER JA').
+unicode_name(0x161C, 'CANADIAN SYLLABICS CARRIER JJU').
+unicode_name(0x161D, 'CANADIAN SYLLABICS CARRIER JJO').
+unicode_name(0x161E, 'CANADIAN SYLLABICS CARRIER JJE').
+unicode_name(0x161F, 'CANADIAN SYLLABICS CARRIER JJEE').
+unicode_name(0x1620, 'CANADIAN SYLLABICS CARRIER JJI').
+unicode_name(0x1621, 'CANADIAN SYLLABICS CARRIER JJA').
+unicode_name(0x1622, 'CANADIAN SYLLABICS CARRIER LU').
+unicode_name(0x1623, 'CANADIAN SYLLABICS CARRIER LO').
+unicode_name(0x1624, 'CANADIAN SYLLABICS CARRIER LE').
+unicode_name(0x1625, 'CANADIAN SYLLABICS CARRIER LEE').
+unicode_name(0x1626, 'CANADIAN SYLLABICS CARRIER LI').
+unicode_name(0x1627, 'CANADIAN SYLLABICS CARRIER LA').
+unicode_name(0x1628, 'CANADIAN SYLLABICS CARRIER DLU').
+unicode_name(0x1629, 'CANADIAN SYLLABICS CARRIER DLO').
+unicode_name(0x162A, 'CANADIAN SYLLABICS CARRIER DLE').
+unicode_name(0x162B, 'CANADIAN SYLLABICS CARRIER DLEE').
+unicode_name(0x162C, 'CANADIAN SYLLABICS CARRIER DLI').
+unicode_name(0x162D, 'CANADIAN SYLLABICS CARRIER DLA').
+unicode_name(0x162E, 'CANADIAN SYLLABICS CARRIER LHU').
+unicode_name(0x162F, 'CANADIAN SYLLABICS CARRIER LHO').
+unicode_name(0x1630, 'CANADIAN SYLLABICS CARRIER LHE').
+unicode_name(0x1631, 'CANADIAN SYLLABICS CARRIER LHEE').
+unicode_name(0x1632, 'CANADIAN SYLLABICS CARRIER LHI').
+unicode_name(0x1633, 'CANADIAN SYLLABICS CARRIER LHA').
+unicode_name(0x1634, 'CANADIAN SYLLABICS CARRIER TLHU').
+unicode_name(0x1635, 'CANADIAN SYLLABICS CARRIER TLHO').
+unicode_name(0x1636, 'CANADIAN SYLLABICS CARRIER TLHE').
+unicode_name(0x1637, 'CANADIAN SYLLABICS CARRIER TLHEE').
+unicode_name(0x1638, 'CANADIAN SYLLABICS CARRIER TLHI').
+unicode_name(0x1639, 'CANADIAN SYLLABICS CARRIER TLHA').
+unicode_name(0x163A, 'CANADIAN SYLLABICS CARRIER TLU').
+unicode_name(0x163B, 'CANADIAN SYLLABICS CARRIER TLO').
+unicode_name(0x163C, 'CANADIAN SYLLABICS CARRIER TLE').
+unicode_name(0x163D, 'CANADIAN SYLLABICS CARRIER TLEE').
+unicode_name(0x163E, 'CANADIAN SYLLABICS CARRIER TLI').
+unicode_name(0x163F, 'CANADIAN SYLLABICS CARRIER TLA').
+unicode_name(0x1640, 'CANADIAN SYLLABICS CARRIER ZU').
+unicode_name(0x1641, 'CANADIAN SYLLABICS CARRIER ZO').
+unicode_name(0x1642, 'CANADIAN SYLLABICS CARRIER ZE').
+unicode_name(0x1643, 'CANADIAN SYLLABICS CARRIER ZEE').
+unicode_name(0x1644, 'CANADIAN SYLLABICS CARRIER ZI').
+unicode_name(0x1645, 'CANADIAN SYLLABICS CARRIER ZA').
+unicode_name(0x1646, 'CANADIAN SYLLABICS CARRIER Z').
+unicode_name(0x1647, 'CANADIAN SYLLABICS CARRIER INITIAL Z').
+unicode_name(0x1648, 'CANADIAN SYLLABICS CARRIER DZU').
+unicode_name(0x1649, 'CANADIAN SYLLABICS CARRIER DZO').
+unicode_name(0x164A, 'CANADIAN SYLLABICS CARRIER DZE').
+unicode_name(0x164B, 'CANADIAN SYLLABICS CARRIER DZEE').
+unicode_name(0x164C, 'CANADIAN SYLLABICS CARRIER DZI').
+unicode_name(0x164D, 'CANADIAN SYLLABICS CARRIER DZA').
+unicode_name(0x164E, 'CANADIAN SYLLABICS CARRIER SU').
+unicode_name(0x164F, 'CANADIAN SYLLABICS CARRIER SO').
+unicode_name(0x1650, 'CANADIAN SYLLABICS CARRIER SE').
+unicode_name(0x1651, 'CANADIAN SYLLABICS CARRIER SEE').
+unicode_name(0x1652, 'CANADIAN SYLLABICS CARRIER SI').
+unicode_name(0x1653, 'CANADIAN SYLLABICS CARRIER SA').
+unicode_name(0x1654, 'CANADIAN SYLLABICS CARRIER SHU').
+unicode_name(0x1655, 'CANADIAN SYLLABICS CARRIER SHO').
+unicode_name(0x1656, 'CANADIAN SYLLABICS CARRIER SHE').
+unicode_name(0x1657, 'CANADIAN SYLLABICS CARRIER SHEE').
+unicode_name(0x1658, 'CANADIAN SYLLABICS CARRIER SHI').
+unicode_name(0x1659, 'CANADIAN SYLLABICS CARRIER SHA').
+unicode_name(0x165A, 'CANADIAN SYLLABICS CARRIER SH').
+unicode_name(0x165B, 'CANADIAN SYLLABICS CARRIER TSU').
+unicode_name(0x165C, 'CANADIAN SYLLABICS CARRIER TSO').
+unicode_name(0x165D, 'CANADIAN SYLLABICS CARRIER TSE').
+unicode_name(0x165E, 'CANADIAN SYLLABICS CARRIER TSEE').
+unicode_name(0x165F, 'CANADIAN SYLLABICS CARRIER TSI').
+unicode_name(0x1660, 'CANADIAN SYLLABICS CARRIER TSA').
+unicode_name(0x1661, 'CANADIAN SYLLABICS CARRIER CHU').
+unicode_name(0x1662, 'CANADIAN SYLLABICS CARRIER CHO').
+unicode_name(0x1663, 'CANADIAN SYLLABICS CARRIER CHE').
+unicode_name(0x1664, 'CANADIAN SYLLABICS CARRIER CHEE').
+unicode_name(0x1665, 'CANADIAN SYLLABICS CARRIER CHI').
+unicode_name(0x1666, 'CANADIAN SYLLABICS CARRIER CHA').
+unicode_name(0x1667, 'CANADIAN SYLLABICS CARRIER TTSU').
+unicode_name(0x1668, 'CANADIAN SYLLABICS CARRIER TTSO').
+unicode_name(0x1669, 'CANADIAN SYLLABICS CARRIER TTSE').
+unicode_name(0x166A, 'CANADIAN SYLLABICS CARRIER TTSEE').
+unicode_name(0x166B, 'CANADIAN SYLLABICS CARRIER TTSI').
+unicode_name(0x166C, 'CANADIAN SYLLABICS CARRIER TTSA').
+unicode_name(0x166F, 'CANADIAN SYLLABICS QAI').
+unicode_name(0x1670, 'CANADIAN SYLLABICS NGAI').
+unicode_name(0x1671, 'CANADIAN SYLLABICS NNGI').
+unicode_name(0x1672, 'CANADIAN SYLLABICS NNGII').
+unicode_name(0x1673, 'CANADIAN SYLLABICS NNGO').
+unicode_name(0x1674, 'CANADIAN SYLLABICS NNGOO').
+unicode_name(0x1675, 'CANADIAN SYLLABICS NNGA').
+unicode_name(0x1676, 'CANADIAN SYLLABICS NNGAA').
+unicode_name(0x1677, 'CANADIAN SYLLABICS WOODS-CREE THWEE').
+unicode_name(0x1678, 'CANADIAN SYLLABICS WOODS-CREE THWI').
+unicode_name(0x1679, 'CANADIAN SYLLABICS WOODS-CREE THWII').
+unicode_name(0x167A, 'CANADIAN SYLLABICS WOODS-CREE THWO').
+unicode_name(0x167B, 'CANADIAN SYLLABICS WOODS-CREE THWOO').
+unicode_name(0x167C, 'CANADIAN SYLLABICS WOODS-CREE THWA').
+unicode_name(0x167D, 'CANADIAN SYLLABICS WOODS-CREE THWAA').
+unicode_name(0x167E, 'CANADIAN SYLLABICS WOODS-CREE FINAL TH').
+unicode_name(0x167F, 'CANADIAN SYLLABICS BLACKFOOT W').
+unicode_name(0x1681, 'OGHAM LETTER BEITH').
+unicode_name(0x1682, 'OGHAM LETTER LUIS').
+unicode_name(0x1683, 'OGHAM LETTER FEARN').
+unicode_name(0x1684, 'OGHAM LETTER SAIL').
+unicode_name(0x1685, 'OGHAM LETTER NION').
+unicode_name(0x1686, 'OGHAM LETTER UATH').
+unicode_name(0x1687, 'OGHAM LETTER DAIR').
+unicode_name(0x1688, 'OGHAM LETTER TINNE').
+unicode_name(0x1689, 'OGHAM LETTER COLL').
+unicode_name(0x168A, 'OGHAM LETTER CEIRT').
+unicode_name(0x168B, 'OGHAM LETTER MUIN').
+unicode_name(0x168C, 'OGHAM LETTER GORT').
+unicode_name(0x168D, 'OGHAM LETTER NGEADAL').
+unicode_name(0x168E, 'OGHAM LETTER STRAIF').
+unicode_name(0x168F, 'OGHAM LETTER RUIS').
+unicode_name(0x1690, 'OGHAM LETTER AILM').
+unicode_name(0x1691, 'OGHAM LETTER ONN').
+unicode_name(0x1692, 'OGHAM LETTER UR').
+unicode_name(0x1693, 'OGHAM LETTER EADHADH').
+unicode_name(0x1694, 'OGHAM LETTER IODHADH').
+unicode_name(0x1695, 'OGHAM LETTER EABHADH').
+unicode_name(0x1696, 'OGHAM LETTER OR').
+unicode_name(0x1697, 'OGHAM LETTER UILLEANN').
+unicode_name(0x1698, 'OGHAM LETTER IFIN').
+unicode_name(0x1699, 'OGHAM LETTER EAMHANCHOLL').
+unicode_name(0x169A, 'OGHAM LETTER PEITH').
+unicode_name(0x16A0, 'RUNIC LETTER FEHU FEOH FE F').
+unicode_name(0x16A1, 'RUNIC LETTER V').
+unicode_name(0x16A2, 'RUNIC LETTER URUZ UR U').
+unicode_name(0x16A3, 'RUNIC LETTER YR').
+unicode_name(0x16A4, 'RUNIC LETTER Y').
+unicode_name(0x16A5, 'RUNIC LETTER W').
+unicode_name(0x16A6, 'RUNIC LETTER THURISAZ THURS THORN').
+unicode_name(0x16A7, 'RUNIC LETTER ETH').
+unicode_name(0x16A8, 'RUNIC LETTER ANSUZ A').
+unicode_name(0x16A9, 'RUNIC LETTER OS O').
+unicode_name(0x16AA, 'RUNIC LETTER AC A').
+unicode_name(0x16AB, 'RUNIC LETTER AESC').
+unicode_name(0x16AC, 'RUNIC LETTER LONG-BRANCH-OSS O').
+unicode_name(0x16AD, 'RUNIC LETTER SHORT-TWIG-OSS O').
+unicode_name(0x16AE, 'RUNIC LETTER O').
+unicode_name(0x16AF, 'RUNIC LETTER OE').
+unicode_name(0x16B0, 'RUNIC LETTER ON').
+unicode_name(0x16B1, 'RUNIC LETTER RAIDO RAD REID R').
+unicode_name(0x16B2, 'RUNIC LETTER KAUNA').
+unicode_name(0x16B3, 'RUNIC LETTER CEN').
+unicode_name(0x16B4, 'RUNIC LETTER KAUN K').
+unicode_name(0x16B5, 'RUNIC LETTER G').
+unicode_name(0x16B6, 'RUNIC LETTER ENG').
+unicode_name(0x16B7, 'RUNIC LETTER GEBO GYFU G').
+unicode_name(0x16B8, 'RUNIC LETTER GAR').
+unicode_name(0x16B9, 'RUNIC LETTER WUNJO WYNN W').
+unicode_name(0x16BA, 'RUNIC LETTER HAGLAZ H').
+unicode_name(0x16BB, 'RUNIC LETTER HAEGL H').
+unicode_name(0x16BC, 'RUNIC LETTER LONG-BRANCH-HAGALL H').
+unicode_name(0x16BD, 'RUNIC LETTER SHORT-TWIG-HAGALL H').
+unicode_name(0x16BE, 'RUNIC LETTER NAUDIZ NYD NAUD N').
+unicode_name(0x16BF, 'RUNIC LETTER SHORT-TWIG-NAUD N').
+unicode_name(0x16C0, 'RUNIC LETTER DOTTED-N').
+unicode_name(0x16C1, 'RUNIC LETTER ISAZ IS ISS I').
+unicode_name(0x16C2, 'RUNIC LETTER E').
+unicode_name(0x16C3, 'RUNIC LETTER JERAN J').
+unicode_name(0x16C4, 'RUNIC LETTER GER').
+unicode_name(0x16C5, 'RUNIC LETTER LONG-BRANCH-AR AE').
+unicode_name(0x16C6, 'RUNIC LETTER SHORT-TWIG-AR A').
+unicode_name(0x16C7, 'RUNIC LETTER IWAZ EOH').
+unicode_name(0x16C8, 'RUNIC LETTER PERTHO PEORTH P').
+unicode_name(0x16C9, 'RUNIC LETTER ALGIZ EOLHX').
+unicode_name(0x16CA, 'RUNIC LETTER SOWILO S').
+unicode_name(0x16CB, 'RUNIC LETTER SIGEL LONG-BRANCH-SOL S').
+unicode_name(0x16CC, 'RUNIC LETTER SHORT-TWIG-SOL S').
+unicode_name(0x16CD, 'RUNIC LETTER C').
+unicode_name(0x16CE, 'RUNIC LETTER Z').
+unicode_name(0x16CF, 'RUNIC LETTER TIWAZ TIR TYR T').
+unicode_name(0x16D0, 'RUNIC LETTER SHORT-TWIG-TYR T').
+unicode_name(0x16D1, 'RUNIC LETTER D').
+unicode_name(0x16D2, 'RUNIC LETTER BERKANAN BEORC BJARKAN B').
+unicode_name(0x16D3, 'RUNIC LETTER SHORT-TWIG-BJARKAN B').
+unicode_name(0x16D4, 'RUNIC LETTER DOTTED-P').
+unicode_name(0x16D5, 'RUNIC LETTER OPEN-P').
+unicode_name(0x16D6, 'RUNIC LETTER EHWAZ EH E').
+unicode_name(0x16D7, 'RUNIC LETTER MANNAZ MAN M').
+unicode_name(0x16D8, 'RUNIC LETTER LONG-BRANCH-MADR M').
+unicode_name(0x16D9, 'RUNIC LETTER SHORT-TWIG-MADR M').
+unicode_name(0x16DA, 'RUNIC LETTER LAUKAZ LAGU LOGR L').
+unicode_name(0x16DB, 'RUNIC LETTER DOTTED-L').
+unicode_name(0x16DC, 'RUNIC LETTER INGWAZ').
+unicode_name(0x16DD, 'RUNIC LETTER ING').
+unicode_name(0x16DE, 'RUNIC LETTER DAGAZ DAEG D').
+unicode_name(0x16DF, 'RUNIC LETTER OTHALAN ETHEL O').
+unicode_name(0x16E0, 'RUNIC LETTER EAR').
+unicode_name(0x16E1, 'RUNIC LETTER IOR').
+unicode_name(0x16E2, 'RUNIC LETTER CWEORTH').
+unicode_name(0x16E3, 'RUNIC LETTER CALC').
+unicode_name(0x16E4, 'RUNIC LETTER CEALC').
+unicode_name(0x16E5, 'RUNIC LETTER STAN').
+unicode_name(0x16E6, 'RUNIC LETTER LONG-BRANCH-YR').
+unicode_name(0x16E7, 'RUNIC LETTER SHORT-TWIG-YR').
+unicode_name(0x16E8, 'RUNIC LETTER ICELANDIC-YR').
+unicode_name(0x16E9, 'RUNIC LETTER Q').
+unicode_name(0x16EA, 'RUNIC LETTER X').
+unicode_name(0x1700, 'TAGALOG LETTER A').
+unicode_name(0x1701, 'TAGALOG LETTER I').
+unicode_name(0x1702, 'TAGALOG LETTER U').
+unicode_name(0x1703, 'TAGALOG LETTER KA').
+unicode_name(0x1704, 'TAGALOG LETTER GA').
+unicode_name(0x1705, 'TAGALOG LETTER NGA').
+unicode_name(0x1706, 'TAGALOG LETTER TA').
+unicode_name(0x1707, 'TAGALOG LETTER DA').
+unicode_name(0x1708, 'TAGALOG LETTER NA').
+unicode_name(0x1709, 'TAGALOG LETTER PA').
+unicode_name(0x170A, 'TAGALOG LETTER BA').
+unicode_name(0x170B, 'TAGALOG LETTER MA').
+unicode_name(0x170C, 'TAGALOG LETTER YA').
+unicode_name(0x170E, 'TAGALOG LETTER LA').
+unicode_name(0x170F, 'TAGALOG LETTER WA').
+unicode_name(0x1710, 'TAGALOG LETTER SA').
+unicode_name(0x1711, 'TAGALOG LETTER HA').
+unicode_name(0x1720, 'HANUNOO LETTER A').
+unicode_name(0x1721, 'HANUNOO LETTER I').
+unicode_name(0x1722, 'HANUNOO LETTER U').
+unicode_name(0x1723, 'HANUNOO LETTER KA').
+unicode_name(0x1724, 'HANUNOO LETTER GA').
+unicode_name(0x1725, 'HANUNOO LETTER NGA').
+unicode_name(0x1726, 'HANUNOO LETTER TA').
+unicode_name(0x1727, 'HANUNOO LETTER DA').
+unicode_name(0x1728, 'HANUNOO LETTER NA').
+unicode_name(0x1729, 'HANUNOO LETTER PA').
+unicode_name(0x172A, 'HANUNOO LETTER BA').
+unicode_name(0x172B, 'HANUNOO LETTER MA').
+unicode_name(0x172C, 'HANUNOO LETTER YA').
+unicode_name(0x172D, 'HANUNOO LETTER RA').
+unicode_name(0x172E, 'HANUNOO LETTER LA').
+unicode_name(0x172F, 'HANUNOO LETTER WA').
+unicode_name(0x1730, 'HANUNOO LETTER SA').
+unicode_name(0x1731, 'HANUNOO LETTER HA').
+unicode_name(0x1740, 'BUHID LETTER A').
+unicode_name(0x1741, 'BUHID LETTER I').
+unicode_name(0x1742, 'BUHID LETTER U').
+unicode_name(0x1743, 'BUHID LETTER KA').
+unicode_name(0x1744, 'BUHID LETTER GA').
+unicode_name(0x1745, 'BUHID LETTER NGA').
+unicode_name(0x1746, 'BUHID LETTER TA').
+unicode_name(0x1747, 'BUHID LETTER DA').
+unicode_name(0x1748, 'BUHID LETTER NA').
+unicode_name(0x1749, 'BUHID LETTER PA').
+unicode_name(0x174A, 'BUHID LETTER BA').
+unicode_name(0x174B, 'BUHID LETTER MA').
+unicode_name(0x174C, 'BUHID LETTER YA').
+unicode_name(0x174D, 'BUHID LETTER RA').
+unicode_name(0x174E, 'BUHID LETTER LA').
+unicode_name(0x174F, 'BUHID LETTER WA').
+unicode_name(0x1750, 'BUHID LETTER SA').
+unicode_name(0x1751, 'BUHID LETTER HA').
+unicode_name(0x1760, 'TAGBANWA LETTER A').
+unicode_name(0x1761, 'TAGBANWA LETTER I').
+unicode_name(0x1762, 'TAGBANWA LETTER U').
+unicode_name(0x1763, 'TAGBANWA LETTER KA').
+unicode_name(0x1764, 'TAGBANWA LETTER GA').
+unicode_name(0x1765, 'TAGBANWA LETTER NGA').
+unicode_name(0x1766, 'TAGBANWA LETTER TA').
+unicode_name(0x1767, 'TAGBANWA LETTER DA').
+unicode_name(0x1768, 'TAGBANWA LETTER NA').
+unicode_name(0x1769, 'TAGBANWA LETTER PA').
+unicode_name(0x176A, 'TAGBANWA LETTER BA').
+unicode_name(0x176B, 'TAGBANWA LETTER MA').
+unicode_name(0x176C, 'TAGBANWA LETTER YA').
+unicode_name(0x176E, 'TAGBANWA LETTER LA').
+unicode_name(0x176F, 'TAGBANWA LETTER WA').
+unicode_name(0x1770, 'TAGBANWA LETTER SA').
+unicode_name(0x1780, 'KHMER LETTER KA').
+unicode_name(0x1781, 'KHMER LETTER KHA').
+unicode_name(0x1782, 'KHMER LETTER KO').
+unicode_name(0x1783, 'KHMER LETTER KHO').
+unicode_name(0x1784, 'KHMER LETTER NGO').
+unicode_name(0x1785, 'KHMER LETTER CA').
+unicode_name(0x1786, 'KHMER LETTER CHA').
+unicode_name(0x1787, 'KHMER LETTER CO').
+unicode_name(0x1788, 'KHMER LETTER CHO').
+unicode_name(0x1789, 'KHMER LETTER NYO').
+unicode_name(0x178A, 'KHMER LETTER DA').
+unicode_name(0x178B, 'KHMER LETTER TTHA').
+unicode_name(0x178C, 'KHMER LETTER DO').
+unicode_name(0x178D, 'KHMER LETTER TTHO').
+unicode_name(0x178E, 'KHMER LETTER NNO').
+unicode_name(0x178F, 'KHMER LETTER TA').
+unicode_name(0x1790, 'KHMER LETTER THA').
+unicode_name(0x1791, 'KHMER LETTER TO').
+unicode_name(0x1792, 'KHMER LETTER THO').
+unicode_name(0x1793, 'KHMER LETTER NO').
+unicode_name(0x1794, 'KHMER LETTER BA').
+unicode_name(0x1795, 'KHMER LETTER PHA').
+unicode_name(0x1796, 'KHMER LETTER PO').
+unicode_name(0x1797, 'KHMER LETTER PHO').
+unicode_name(0x1798, 'KHMER LETTER MO').
+unicode_name(0x1799, 'KHMER LETTER YO').
+unicode_name(0x179A, 'KHMER LETTER RO').
+unicode_name(0x179B, 'KHMER LETTER LO').
+unicode_name(0x179C, 'KHMER LETTER VO').
+unicode_name(0x179D, 'KHMER LETTER SHA').
+unicode_name(0x179E, 'KHMER LETTER SSO').
+unicode_name(0x179F, 'KHMER LETTER SA').
+unicode_name(0x17A0, 'KHMER LETTER HA').
+unicode_name(0x17A1, 'KHMER LETTER LA').
+unicode_name(0x17A2, 'KHMER LETTER QA').
+unicode_name(0x17A3, 'KHMER INDEPENDENT VOWEL QAQ').
+unicode_name(0x17A4, 'KHMER INDEPENDENT VOWEL QAA').
+unicode_name(0x17A5, 'KHMER INDEPENDENT VOWEL QI').
+unicode_name(0x17A6, 'KHMER INDEPENDENT VOWEL QII').
+unicode_name(0x17A7, 'KHMER INDEPENDENT VOWEL QU').
+unicode_name(0x17A8, 'KHMER INDEPENDENT VOWEL QUK').
+unicode_name(0x17A9, 'KHMER INDEPENDENT VOWEL QUU').
+unicode_name(0x17AA, 'KHMER INDEPENDENT VOWEL QUUV').
+unicode_name(0x17AB, 'KHMER INDEPENDENT VOWEL RY').
+unicode_name(0x17AC, 'KHMER INDEPENDENT VOWEL RYY').
+unicode_name(0x17AD, 'KHMER INDEPENDENT VOWEL LY').
+unicode_name(0x17AE, 'KHMER INDEPENDENT VOWEL LYY').
+unicode_name(0x17AF, 'KHMER INDEPENDENT VOWEL QE').
+unicode_name(0x17B0, 'KHMER INDEPENDENT VOWEL QAI').
+unicode_name(0x17B1, 'KHMER INDEPENDENT VOWEL QOO TYPE ONE').
+unicode_name(0x17B2, 'KHMER INDEPENDENT VOWEL QOO TYPE TWO').
+unicode_name(0x17B3, 'KHMER INDEPENDENT VOWEL QAU').
+unicode_name(0x17DC, 'KHMER SIGN AVAKRAHASANYA').
+unicode_name(0x1820, 'MONGOLIAN LETTER A').
+unicode_name(0x1821, 'MONGOLIAN LETTER E').
+unicode_name(0x1822, 'MONGOLIAN LETTER I').
+unicode_name(0x1823, 'MONGOLIAN LETTER O').
+unicode_name(0x1824, 'MONGOLIAN LETTER U').
+unicode_name(0x1825, 'MONGOLIAN LETTER OE').
+unicode_name(0x1826, 'MONGOLIAN LETTER UE').
+unicode_name(0x1827, 'MONGOLIAN LETTER EE').
+unicode_name(0x1828, 'MONGOLIAN LETTER NA').
+unicode_name(0x1829, 'MONGOLIAN LETTER ANG').
+unicode_name(0x182A, 'MONGOLIAN LETTER BA').
+unicode_name(0x182B, 'MONGOLIAN LETTER PA').
+unicode_name(0x182C, 'MONGOLIAN LETTER QA').
+unicode_name(0x182D, 'MONGOLIAN LETTER GA').
+unicode_name(0x182E, 'MONGOLIAN LETTER MA').
+unicode_name(0x182F, 'MONGOLIAN LETTER LA').
+unicode_name(0x1830, 'MONGOLIAN LETTER SA').
+unicode_name(0x1831, 'MONGOLIAN LETTER SHA').
+unicode_name(0x1832, 'MONGOLIAN LETTER TA').
+unicode_name(0x1833, 'MONGOLIAN LETTER DA').
+unicode_name(0x1834, 'MONGOLIAN LETTER CHA').
+unicode_name(0x1835, 'MONGOLIAN LETTER JA').
+unicode_name(0x1836, 'MONGOLIAN LETTER YA').
+unicode_name(0x1837, 'MONGOLIAN LETTER RA').
+unicode_name(0x1838, 'MONGOLIAN LETTER WA').
+unicode_name(0x1839, 'MONGOLIAN LETTER FA').
+unicode_name(0x183A, 'MONGOLIAN LETTER KA').
+unicode_name(0x183B, 'MONGOLIAN LETTER KHA').
+unicode_name(0x183C, 'MONGOLIAN LETTER TSA').
+unicode_name(0x183D, 'MONGOLIAN LETTER ZA').
+unicode_name(0x183E, 'MONGOLIAN LETTER HAA').
+unicode_name(0x183F, 'MONGOLIAN LETTER ZRA').
+unicode_name(0x1840, 'MONGOLIAN LETTER LHA').
+unicode_name(0x1841, 'MONGOLIAN LETTER ZHI').
+unicode_name(0x1842, 'MONGOLIAN LETTER CHI').
+unicode_name(0x1844, 'MONGOLIAN LETTER TODO E').
+unicode_name(0x1845, 'MONGOLIAN LETTER TODO I').
+unicode_name(0x1846, 'MONGOLIAN LETTER TODO O').
+unicode_name(0x1847, 'MONGOLIAN LETTER TODO U').
+unicode_name(0x1848, 'MONGOLIAN LETTER TODO OE').
+unicode_name(0x1849, 'MONGOLIAN LETTER TODO UE').
+unicode_name(0x184A, 'MONGOLIAN LETTER TODO ANG').
+unicode_name(0x184B, 'MONGOLIAN LETTER TODO BA').
+unicode_name(0x184C, 'MONGOLIAN LETTER TODO PA').
+unicode_name(0x184D, 'MONGOLIAN LETTER TODO QA').
+unicode_name(0x184E, 'MONGOLIAN LETTER TODO GA').
+unicode_name(0x184F, 'MONGOLIAN LETTER TODO MA').
+unicode_name(0x1850, 'MONGOLIAN LETTER TODO TA').
+unicode_name(0x1851, 'MONGOLIAN LETTER TODO DA').
+unicode_name(0x1852, 'MONGOLIAN LETTER TODO CHA').
+unicode_name(0x1853, 'MONGOLIAN LETTER TODO JA').
+unicode_name(0x1854, 'MONGOLIAN LETTER TODO TSA').
+unicode_name(0x1855, 'MONGOLIAN LETTER TODO YA').
+unicode_name(0x1856, 'MONGOLIAN LETTER TODO WA').
+unicode_name(0x1857, 'MONGOLIAN LETTER TODO KA').
+unicode_name(0x1858, 'MONGOLIAN LETTER TODO GAA').
+unicode_name(0x1859, 'MONGOLIAN LETTER TODO HAA').
+unicode_name(0x185A, 'MONGOLIAN LETTER TODO JIA').
+unicode_name(0x185B, 'MONGOLIAN LETTER TODO NIA').
+unicode_name(0x185C, 'MONGOLIAN LETTER TODO DZA').
+unicode_name(0x185D, 'MONGOLIAN LETTER SIBE E').
+unicode_name(0x185E, 'MONGOLIAN LETTER SIBE I').
+unicode_name(0x185F, 'MONGOLIAN LETTER SIBE IY').
+unicode_name(0x1860, 'MONGOLIAN LETTER SIBE UE').
+unicode_name(0x1861, 'MONGOLIAN LETTER SIBE U').
+unicode_name(0x1862, 'MONGOLIAN LETTER SIBE ANG').
+unicode_name(0x1863, 'MONGOLIAN LETTER SIBE KA').
+unicode_name(0x1864, 'MONGOLIAN LETTER SIBE GA').
+unicode_name(0x1865, 'MONGOLIAN LETTER SIBE HA').
+unicode_name(0x1866, 'MONGOLIAN LETTER SIBE PA').
+unicode_name(0x1867, 'MONGOLIAN LETTER SIBE SHA').
+unicode_name(0x1868, 'MONGOLIAN LETTER SIBE TA').
+unicode_name(0x1869, 'MONGOLIAN LETTER SIBE DA').
+unicode_name(0x186A, 'MONGOLIAN LETTER SIBE JA').
+unicode_name(0x186B, 'MONGOLIAN LETTER SIBE FA').
+unicode_name(0x186C, 'MONGOLIAN LETTER SIBE GAA').
+unicode_name(0x186D, 'MONGOLIAN LETTER SIBE HAA').
+unicode_name(0x186E, 'MONGOLIAN LETTER SIBE TSA').
+unicode_name(0x186F, 'MONGOLIAN LETTER SIBE ZA').
+unicode_name(0x1870, 'MONGOLIAN LETTER SIBE RAA').
+unicode_name(0x1871, 'MONGOLIAN LETTER SIBE CHA').
+unicode_name(0x1872, 'MONGOLIAN LETTER SIBE ZHA').
+unicode_name(0x1873, 'MONGOLIAN LETTER MANCHU I').
+unicode_name(0x1874, 'MONGOLIAN LETTER MANCHU KA').
+unicode_name(0x1875, 'MONGOLIAN LETTER MANCHU RA').
+unicode_name(0x1876, 'MONGOLIAN LETTER MANCHU FA').
+unicode_name(0x1877, 'MONGOLIAN LETTER MANCHU ZHA').
+unicode_name(0x1880, 'MONGOLIAN LETTER ALI GALI ANUSVARA ONE').
+unicode_name(0x1881, 'MONGOLIAN LETTER ALI GALI VISARGA ONE').
+unicode_name(0x1882, 'MONGOLIAN LETTER ALI GALI DAMARU').
+unicode_name(0x1883, 'MONGOLIAN LETTER ALI GALI UBADAMA').
+unicode_name(0x1884, 'MONGOLIAN LETTER ALI GALI INVERTED UBADAMA').
+unicode_name(0x1885, 'MONGOLIAN LETTER ALI GALI BALUDA').
+unicode_name(0x1886, 'MONGOLIAN LETTER ALI GALI THREE BALUDA').
+unicode_name(0x1887, 'MONGOLIAN LETTER ALI GALI A').
+unicode_name(0x1888, 'MONGOLIAN LETTER ALI GALI I').
+unicode_name(0x1889, 'MONGOLIAN LETTER ALI GALI KA').
+unicode_name(0x188A, 'MONGOLIAN LETTER ALI GALI NGA').
+unicode_name(0x188B, 'MONGOLIAN LETTER ALI GALI CA').
+unicode_name(0x188C, 'MONGOLIAN LETTER ALI GALI TTA').
+unicode_name(0x188D, 'MONGOLIAN LETTER ALI GALI TTHA').
+unicode_name(0x188E, 'MONGOLIAN LETTER ALI GALI DDA').
+unicode_name(0x188F, 'MONGOLIAN LETTER ALI GALI NNA').
+unicode_name(0x1890, 'MONGOLIAN LETTER ALI GALI TA').
+unicode_name(0x1891, 'MONGOLIAN LETTER ALI GALI DA').
+unicode_name(0x1892, 'MONGOLIAN LETTER ALI GALI PA').
+unicode_name(0x1893, 'MONGOLIAN LETTER ALI GALI PHA').
+unicode_name(0x1894, 'MONGOLIAN LETTER ALI GALI SSA').
+unicode_name(0x1895, 'MONGOLIAN LETTER ALI GALI ZHA').
+unicode_name(0x1896, 'MONGOLIAN LETTER ALI GALI ZA').
+unicode_name(0x1897, 'MONGOLIAN LETTER ALI GALI AH').
+unicode_name(0x1898, 'MONGOLIAN LETTER TODO ALI GALI TA').
+unicode_name(0x1899, 'MONGOLIAN LETTER TODO ALI GALI ZHA').
+unicode_name(0x189A, 'MONGOLIAN LETTER MANCHU ALI GALI GHA').
+unicode_name(0x189B, 'MONGOLIAN LETTER MANCHU ALI GALI NGA').
+unicode_name(0x189C, 'MONGOLIAN LETTER MANCHU ALI GALI CA').
+unicode_name(0x189D, 'MONGOLIAN LETTER MANCHU ALI GALI JHA').
+unicode_name(0x189E, 'MONGOLIAN LETTER MANCHU ALI GALI TTA').
+unicode_name(0x189F, 'MONGOLIAN LETTER MANCHU ALI GALI DDHA').
+unicode_name(0x18A0, 'MONGOLIAN LETTER MANCHU ALI GALI TA').
+unicode_name(0x18A1, 'MONGOLIAN LETTER MANCHU ALI GALI DHA').
+unicode_name(0x18A2, 'MONGOLIAN LETTER MANCHU ALI GALI SSA').
+unicode_name(0x18A3, 'MONGOLIAN LETTER MANCHU ALI GALI CYA').
+unicode_name(0x18A4, 'MONGOLIAN LETTER MANCHU ALI GALI ZHA').
+unicode_name(0x18A5, 'MONGOLIAN LETTER MANCHU ALI GALI ZA').
+unicode_name(0x18A6, 'MONGOLIAN LETTER ALI GALI HALF U').
+unicode_name(0x18A7, 'MONGOLIAN LETTER ALI GALI HALF YA').
+unicode_name(0x18A8, 'MONGOLIAN LETTER MANCHU ALI GALI BHA').
+unicode_name(0x18AA, 'MONGOLIAN LETTER MANCHU ALI GALI LHA').
+unicode_name(0x18B0, 'CANADIAN SYLLABICS OY').
+unicode_name(0x18B1, 'CANADIAN SYLLABICS AY').
+unicode_name(0x18B2, 'CANADIAN SYLLABICS AAY').
+unicode_name(0x18B3, 'CANADIAN SYLLABICS WAY').
+unicode_name(0x18B4, 'CANADIAN SYLLABICS POY').
+unicode_name(0x18B5, 'CANADIAN SYLLABICS PAY').
+unicode_name(0x18B6, 'CANADIAN SYLLABICS PWOY').
+unicode_name(0x18B7, 'CANADIAN SYLLABICS TAY').
+unicode_name(0x18B8, 'CANADIAN SYLLABICS KAY').
+unicode_name(0x18B9, 'CANADIAN SYLLABICS KWAY').
+unicode_name(0x18BA, 'CANADIAN SYLLABICS MAY').
+unicode_name(0x18BB, 'CANADIAN SYLLABICS NOY').
+unicode_name(0x18BC, 'CANADIAN SYLLABICS NAY').
+unicode_name(0x18BD, 'CANADIAN SYLLABICS LAY').
+unicode_name(0x18BE, 'CANADIAN SYLLABICS SOY').
+unicode_name(0x18BF, 'CANADIAN SYLLABICS SAY').
+unicode_name(0x18C0, 'CANADIAN SYLLABICS SHOY').
+unicode_name(0x18C1, 'CANADIAN SYLLABICS SHAY').
+unicode_name(0x18C2, 'CANADIAN SYLLABICS SHWOY').
+unicode_name(0x18C3, 'CANADIAN SYLLABICS YOY').
+unicode_name(0x18C4, 'CANADIAN SYLLABICS YAY').
+unicode_name(0x18C5, 'CANADIAN SYLLABICS RAY').
+unicode_name(0x18C6, 'CANADIAN SYLLABICS NWI').
+unicode_name(0x18C7, 'CANADIAN SYLLABICS OJIBWAY NWI').
+unicode_name(0x18C8, 'CANADIAN SYLLABICS NWII').
+unicode_name(0x18C9, 'CANADIAN SYLLABICS OJIBWAY NWII').
+unicode_name(0x18CA, 'CANADIAN SYLLABICS NWO').
+unicode_name(0x18CB, 'CANADIAN SYLLABICS OJIBWAY NWO').
+unicode_name(0x18CC, 'CANADIAN SYLLABICS NWOO').
+unicode_name(0x18CD, 'CANADIAN SYLLABICS OJIBWAY NWOO').
+unicode_name(0x18CE, 'CANADIAN SYLLABICS RWEE').
+unicode_name(0x18CF, 'CANADIAN SYLLABICS RWI').
+unicode_name(0x18D0, 'CANADIAN SYLLABICS RWII').
+unicode_name(0x18D1, 'CANADIAN SYLLABICS RWO').
+unicode_name(0x18D2, 'CANADIAN SYLLABICS RWOO').
+unicode_name(0x18D3, 'CANADIAN SYLLABICS RWA').
+unicode_name(0x18D4, 'CANADIAN SYLLABICS OJIBWAY P').
+unicode_name(0x18D5, 'CANADIAN SYLLABICS OJIBWAY T').
+unicode_name(0x18D6, 'CANADIAN SYLLABICS OJIBWAY K').
+unicode_name(0x18D7, 'CANADIAN SYLLABICS OJIBWAY C').
+unicode_name(0x18D8, 'CANADIAN SYLLABICS OJIBWAY M').
+unicode_name(0x18D9, 'CANADIAN SYLLABICS OJIBWAY N').
+unicode_name(0x18DA, 'CANADIAN SYLLABICS OJIBWAY S').
+unicode_name(0x18DB, 'CANADIAN SYLLABICS OJIBWAY SH').
+unicode_name(0x18DC, 'CANADIAN SYLLABICS EASTERN W').
+unicode_name(0x18DD, 'CANADIAN SYLLABICS WESTERN W').
+unicode_name(0x18DE, 'CANADIAN SYLLABICS FINAL SMALL RING').
+unicode_name(0x18DF, 'CANADIAN SYLLABICS FINAL RAISED DOT').
+unicode_name(0x18E0, 'CANADIAN SYLLABICS R-CREE RWE').
+unicode_name(0x18E1, 'CANADIAN SYLLABICS WEST-CREE LOO').
+unicode_name(0x18E2, 'CANADIAN SYLLABICS WEST-CREE LAA').
+unicode_name(0x18E3, 'CANADIAN SYLLABICS THWE').
+unicode_name(0x18E4, 'CANADIAN SYLLABICS THWA').
+unicode_name(0x18E5, 'CANADIAN SYLLABICS TTHWE').
+unicode_name(0x18E6, 'CANADIAN SYLLABICS TTHOO').
+unicode_name(0x18E7, 'CANADIAN SYLLABICS TTHAA').
+unicode_name(0x18E8, 'CANADIAN SYLLABICS TLHWE').
+unicode_name(0x18E9, 'CANADIAN SYLLABICS TLHOO').
+unicode_name(0x18EA, 'CANADIAN SYLLABICS SAYISI SHWE').
+unicode_name(0x18EB, 'CANADIAN SYLLABICS SAYISI SHOO').
+unicode_name(0x18EC, 'CANADIAN SYLLABICS SAYISI HOO').
+unicode_name(0x18ED, 'CANADIAN SYLLABICS CARRIER GWU').
+unicode_name(0x18EE, 'CANADIAN SYLLABICS CARRIER DENE GEE').
+unicode_name(0x18EF, 'CANADIAN SYLLABICS CARRIER GAA').
+unicode_name(0x18F0, 'CANADIAN SYLLABICS CARRIER GWA').
+unicode_name(0x18F1, 'CANADIAN SYLLABICS SAYISI JUU').
+unicode_name(0x18F2, 'CANADIAN SYLLABICS CARRIER JWA').
+unicode_name(0x18F3, 'CANADIAN SYLLABICS BEAVER DENE L').
+unicode_name(0x18F4, 'CANADIAN SYLLABICS BEAVER DENE R').
+unicode_name(0x18F5, 'CANADIAN SYLLABICS CARRIER DENTAL S').
+unicode_name(0x1900, 'LIMBU VOWEL-CARRIER LETTER').
+unicode_name(0x1901, 'LIMBU LETTER KA').
+unicode_name(0x1902, 'LIMBU LETTER KHA').
+unicode_name(0x1903, 'LIMBU LETTER GA').
+unicode_name(0x1904, 'LIMBU LETTER GHA').
+unicode_name(0x1905, 'LIMBU LETTER NGA').
+unicode_name(0x1906, 'LIMBU LETTER CA').
+unicode_name(0x1907, 'LIMBU LETTER CHA').
+unicode_name(0x1908, 'LIMBU LETTER JA').
+unicode_name(0x1909, 'LIMBU LETTER JHA').
+unicode_name(0x190A, 'LIMBU LETTER YAN').
+unicode_name(0x190B, 'LIMBU LETTER TA').
+unicode_name(0x190C, 'LIMBU LETTER THA').
+unicode_name(0x190D, 'LIMBU LETTER DA').
+unicode_name(0x190E, 'LIMBU LETTER DHA').
+unicode_name(0x190F, 'LIMBU LETTER NA').
+unicode_name(0x1910, 'LIMBU LETTER PA').
+unicode_name(0x1911, 'LIMBU LETTER PHA').
+unicode_name(0x1912, 'LIMBU LETTER BA').
+unicode_name(0x1913, 'LIMBU LETTER BHA').
+unicode_name(0x1914, 'LIMBU LETTER MA').
+unicode_name(0x1915, 'LIMBU LETTER YA').
+unicode_name(0x1916, 'LIMBU LETTER RA').
+unicode_name(0x1917, 'LIMBU LETTER LA').
+unicode_name(0x1918, 'LIMBU LETTER WA').
+unicode_name(0x1919, 'LIMBU LETTER SHA').
+unicode_name(0x191A, 'LIMBU LETTER SSA').
+unicode_name(0x191B, 'LIMBU LETTER SA').
+unicode_name(0x191C, 'LIMBU LETTER HA').
+unicode_name(0x1950, 'TAI LE LETTER KA').
+unicode_name(0x1951, 'TAI LE LETTER XA').
+unicode_name(0x1952, 'TAI LE LETTER NGA').
+unicode_name(0x1953, 'TAI LE LETTER TSA').
+unicode_name(0x1954, 'TAI LE LETTER SA').
+unicode_name(0x1955, 'TAI LE LETTER YA').
+unicode_name(0x1956, 'TAI LE LETTER TA').
+unicode_name(0x1957, 'TAI LE LETTER THA').
+unicode_name(0x1958, 'TAI LE LETTER LA').
+unicode_name(0x1959, 'TAI LE LETTER PA').
+unicode_name(0x195A, 'TAI LE LETTER PHA').
+unicode_name(0x195B, 'TAI LE LETTER MA').
+unicode_name(0x195C, 'TAI LE LETTER FA').
+unicode_name(0x195D, 'TAI LE LETTER VA').
+unicode_name(0x195E, 'TAI LE LETTER HA').
+unicode_name(0x195F, 'TAI LE LETTER QA').
+unicode_name(0x1960, 'TAI LE LETTER KHA').
+unicode_name(0x1961, 'TAI LE LETTER TSHA').
+unicode_name(0x1962, 'TAI LE LETTER NA').
+unicode_name(0x1963, 'TAI LE LETTER A').
+unicode_name(0x1964, 'TAI LE LETTER I').
+unicode_name(0x1965, 'TAI LE LETTER EE').
+unicode_name(0x1966, 'TAI LE LETTER EH').
+unicode_name(0x1967, 'TAI LE LETTER U').
+unicode_name(0x1968, 'TAI LE LETTER OO').
+unicode_name(0x1969, 'TAI LE LETTER O').
+unicode_name(0x196A, 'TAI LE LETTER UE').
+unicode_name(0x196B, 'TAI LE LETTER E').
+unicode_name(0x196C, 'TAI LE LETTER AUE').
+unicode_name(0x196D, 'TAI LE LETTER AI').
+unicode_name(0x1970, 'TAI LE LETTER TONE-2').
+unicode_name(0x1971, 'TAI LE LETTER TONE-3').
+unicode_name(0x1972, 'TAI LE LETTER TONE-4').
+unicode_name(0x1973, 'TAI LE LETTER TONE-5').
+unicode_name(0x1974, 'TAI LE LETTER TONE-6').
+unicode_name(0x1980, 'NEW TAI LUE LETTER HIGH QA').
+unicode_name(0x1981, 'NEW TAI LUE LETTER LOW QA').
+unicode_name(0x1982, 'NEW TAI LUE LETTER HIGH KA').
+unicode_name(0x1983, 'NEW TAI LUE LETTER HIGH XA').
+unicode_name(0x1984, 'NEW TAI LUE LETTER HIGH NGA').
+unicode_name(0x1985, 'NEW TAI LUE LETTER LOW KA').
+unicode_name(0x1986, 'NEW TAI LUE LETTER LOW XA').
+unicode_name(0x1987, 'NEW TAI LUE LETTER LOW NGA').
+unicode_name(0x1988, 'NEW TAI LUE LETTER HIGH TSA').
+unicode_name(0x1989, 'NEW TAI LUE LETTER HIGH SA').
+unicode_name(0x198A, 'NEW TAI LUE LETTER HIGH YA').
+unicode_name(0x198B, 'NEW TAI LUE LETTER LOW TSA').
+unicode_name(0x198C, 'NEW TAI LUE LETTER LOW SA').
+unicode_name(0x198D, 'NEW TAI LUE LETTER LOW YA').
+unicode_name(0x198E, 'NEW TAI LUE LETTER HIGH TA').
+unicode_name(0x198F, 'NEW TAI LUE LETTER HIGH THA').
+unicode_name(0x1990, 'NEW TAI LUE LETTER HIGH NA').
+unicode_name(0x1991, 'NEW TAI LUE LETTER LOW TA').
+unicode_name(0x1992, 'NEW TAI LUE LETTER LOW THA').
+unicode_name(0x1993, 'NEW TAI LUE LETTER LOW NA').
+unicode_name(0x1994, 'NEW TAI LUE LETTER HIGH PA').
+unicode_name(0x1995, 'NEW TAI LUE LETTER HIGH PHA').
+unicode_name(0x1996, 'NEW TAI LUE LETTER HIGH MA').
+unicode_name(0x1997, 'NEW TAI LUE LETTER LOW PA').
+unicode_name(0x1998, 'NEW TAI LUE LETTER LOW PHA').
+unicode_name(0x1999, 'NEW TAI LUE LETTER LOW MA').
+unicode_name(0x199A, 'NEW TAI LUE LETTER HIGH FA').
+unicode_name(0x199B, 'NEW TAI LUE LETTER HIGH VA').
+unicode_name(0x199C, 'NEW TAI LUE LETTER HIGH LA').
+unicode_name(0x199D, 'NEW TAI LUE LETTER LOW FA').
+unicode_name(0x199E, 'NEW TAI LUE LETTER LOW VA').
+unicode_name(0x199F, 'NEW TAI LUE LETTER LOW LA').
+unicode_name(0x19A0, 'NEW TAI LUE LETTER HIGH HA').
+unicode_name(0x19A1, 'NEW TAI LUE LETTER HIGH DA').
+unicode_name(0x19A2, 'NEW TAI LUE LETTER HIGH BA').
+unicode_name(0x19A3, 'NEW TAI LUE LETTER LOW HA').
+unicode_name(0x19A4, 'NEW TAI LUE LETTER LOW DA').
+unicode_name(0x19A5, 'NEW TAI LUE LETTER LOW BA').
+unicode_name(0x19A6, 'NEW TAI LUE LETTER HIGH KVA').
+unicode_name(0x19A7, 'NEW TAI LUE LETTER HIGH XVA').
+unicode_name(0x19A8, 'NEW TAI LUE LETTER LOW KVA').
+unicode_name(0x19A9, 'NEW TAI LUE LETTER LOW XVA').
+unicode_name(0x19AA, 'NEW TAI LUE LETTER HIGH SUA').
+unicode_name(0x19AB, 'NEW TAI LUE LETTER LOW SUA').
+unicode_name(0x19C1, 'NEW TAI LUE LETTER FINAL V').
+unicode_name(0x19C2, 'NEW TAI LUE LETTER FINAL NG').
+unicode_name(0x19C3, 'NEW TAI LUE LETTER FINAL N').
+unicode_name(0x19C4, 'NEW TAI LUE LETTER FINAL M').
+unicode_name(0x19C5, 'NEW TAI LUE LETTER FINAL K').
+unicode_name(0x19C6, 'NEW TAI LUE LETTER FINAL D').
+unicode_name(0x19C7, 'NEW TAI LUE LETTER FINAL B').
+unicode_name(0x1A00, 'BUGINESE LETTER KA').
+unicode_name(0x1A01, 'BUGINESE LETTER GA').
+unicode_name(0x1A02, 'BUGINESE LETTER NGA').
+unicode_name(0x1A03, 'BUGINESE LETTER NGKA').
+unicode_name(0x1A04, 'BUGINESE LETTER PA').
+unicode_name(0x1A05, 'BUGINESE LETTER BA').
+unicode_name(0x1A06, 'BUGINESE LETTER MA').
+unicode_name(0x1A07, 'BUGINESE LETTER MPA').
+unicode_name(0x1A08, 'BUGINESE LETTER TA').
+unicode_name(0x1A09, 'BUGINESE LETTER DA').
+unicode_name(0x1A0A, 'BUGINESE LETTER NA').
+unicode_name(0x1A0B, 'BUGINESE LETTER NRA').
+unicode_name(0x1A0C, 'BUGINESE LETTER CA').
+unicode_name(0x1A0D, 'BUGINESE LETTER JA').
+unicode_name(0x1A0E, 'BUGINESE LETTER NYA').
+unicode_name(0x1A0F, 'BUGINESE LETTER NYCA').
+unicode_name(0x1A10, 'BUGINESE LETTER YA').
+unicode_name(0x1A11, 'BUGINESE LETTER RA').
+unicode_name(0x1A12, 'BUGINESE LETTER LA').
+unicode_name(0x1A13, 'BUGINESE LETTER VA').
+unicode_name(0x1A14, 'BUGINESE LETTER SA').
+unicode_name(0x1A15, 'BUGINESE LETTER A').
+unicode_name(0x1A16, 'BUGINESE LETTER HA').
+unicode_name(0x1A20, 'TAI THAM LETTER HIGH KA').
+unicode_name(0x1A21, 'TAI THAM LETTER HIGH KHA').
+unicode_name(0x1A22, 'TAI THAM LETTER HIGH KXA').
+unicode_name(0x1A23, 'TAI THAM LETTER LOW KA').
+unicode_name(0x1A24, 'TAI THAM LETTER LOW KXA').
+unicode_name(0x1A25, 'TAI THAM LETTER LOW KHA').
+unicode_name(0x1A26, 'TAI THAM LETTER NGA').
+unicode_name(0x1A27, 'TAI THAM LETTER HIGH CA').
+unicode_name(0x1A28, 'TAI THAM LETTER HIGH CHA').
+unicode_name(0x1A29, 'TAI THAM LETTER LOW CA').
+unicode_name(0x1A2A, 'TAI THAM LETTER LOW SA').
+unicode_name(0x1A2B, 'TAI THAM LETTER LOW CHA').
+unicode_name(0x1A2C, 'TAI THAM LETTER NYA').
+unicode_name(0x1A2D, 'TAI THAM LETTER RATA').
+unicode_name(0x1A2E, 'TAI THAM LETTER HIGH RATHA').
+unicode_name(0x1A2F, 'TAI THAM LETTER DA').
+unicode_name(0x1A30, 'TAI THAM LETTER LOW RATHA').
+unicode_name(0x1A31, 'TAI THAM LETTER RANA').
+unicode_name(0x1A32, 'TAI THAM LETTER HIGH TA').
+unicode_name(0x1A33, 'TAI THAM LETTER HIGH THA').
+unicode_name(0x1A34, 'TAI THAM LETTER LOW TA').
+unicode_name(0x1A35, 'TAI THAM LETTER LOW THA').
+unicode_name(0x1A36, 'TAI THAM LETTER NA').
+unicode_name(0x1A37, 'TAI THAM LETTER BA').
+unicode_name(0x1A38, 'TAI THAM LETTER HIGH PA').
+unicode_name(0x1A39, 'TAI THAM LETTER HIGH PHA').
+unicode_name(0x1A3A, 'TAI THAM LETTER HIGH FA').
+unicode_name(0x1A3B, 'TAI THAM LETTER LOW PA').
+unicode_name(0x1A3C, 'TAI THAM LETTER LOW FA').
+unicode_name(0x1A3D, 'TAI THAM LETTER LOW PHA').
+unicode_name(0x1A3E, 'TAI THAM LETTER MA').
+unicode_name(0x1A3F, 'TAI THAM LETTER LOW YA').
+unicode_name(0x1A40, 'TAI THAM LETTER HIGH YA').
+unicode_name(0x1A41, 'TAI THAM LETTER RA').
+unicode_name(0x1A42, 'TAI THAM LETTER RUE').
+unicode_name(0x1A43, 'TAI THAM LETTER LA').
+unicode_name(0x1A44, 'TAI THAM LETTER LUE').
+unicode_name(0x1A45, 'TAI THAM LETTER WA').
+unicode_name(0x1A46, 'TAI THAM LETTER HIGH SHA').
+unicode_name(0x1A47, 'TAI THAM LETTER HIGH SSA').
+unicode_name(0x1A48, 'TAI THAM LETTER HIGH SA').
+unicode_name(0x1A49, 'TAI THAM LETTER HIGH HA').
+unicode_name(0x1A4A, 'TAI THAM LETTER LLA').
+unicode_name(0x1A4B, 'TAI THAM LETTER A').
+unicode_name(0x1A4C, 'TAI THAM LETTER LOW HA').
+unicode_name(0x1A4D, 'TAI THAM LETTER I').
+unicode_name(0x1A4E, 'TAI THAM LETTER II').
+unicode_name(0x1A4F, 'TAI THAM LETTER U').
+unicode_name(0x1A50, 'TAI THAM LETTER UU').
+unicode_name(0x1A51, 'TAI THAM LETTER EE').
+unicode_name(0x1A52, 'TAI THAM LETTER OO').
+unicode_name(0x1A53, 'TAI THAM LETTER LAE').
+unicode_name(0x1A54, 'TAI THAM LETTER GREAT SA').
+unicode_name(0x1B05, 'BALINESE LETTER AKARA').
+unicode_name(0x1B06, 'BALINESE LETTER AKARA TEDUNG').
+unicode_name(0x1B07, 'BALINESE LETTER IKARA').
+unicode_name(0x1B08, 'BALINESE LETTER IKARA TEDUNG').
+unicode_name(0x1B09, 'BALINESE LETTER UKARA').
+unicode_name(0x1B0A, 'BALINESE LETTER UKARA TEDUNG').
+unicode_name(0x1B0B, 'BALINESE LETTER RA REPA').
+unicode_name(0x1B0C, 'BALINESE LETTER RA REPA TEDUNG').
+unicode_name(0x1B0D, 'BALINESE LETTER LA LENGA').
+unicode_name(0x1B0E, 'BALINESE LETTER LA LENGA TEDUNG').
+unicode_name(0x1B0F, 'BALINESE LETTER EKARA').
+unicode_name(0x1B10, 'BALINESE LETTER AIKARA').
+unicode_name(0x1B11, 'BALINESE LETTER OKARA').
+unicode_name(0x1B12, 'BALINESE LETTER OKARA TEDUNG').
+unicode_name(0x1B13, 'BALINESE LETTER KA').
+unicode_name(0x1B14, 'BALINESE LETTER KA MAHAPRANA').
+unicode_name(0x1B15, 'BALINESE LETTER GA').
+unicode_name(0x1B16, 'BALINESE LETTER GA GORA').
+unicode_name(0x1B17, 'BALINESE LETTER NGA').
+unicode_name(0x1B18, 'BALINESE LETTER CA').
+unicode_name(0x1B19, 'BALINESE LETTER CA LACA').
+unicode_name(0x1B1A, 'BALINESE LETTER JA').
+unicode_name(0x1B1B, 'BALINESE LETTER JA JERA').
+unicode_name(0x1B1C, 'BALINESE LETTER NYA').
+unicode_name(0x1B1D, 'BALINESE LETTER TA LATIK').
+unicode_name(0x1B1E, 'BALINESE LETTER TA MURDA MAHAPRANA').
+unicode_name(0x1B1F, 'BALINESE LETTER DA MURDA ALPAPRANA').
+unicode_name(0x1B20, 'BALINESE LETTER DA MURDA MAHAPRANA').
+unicode_name(0x1B21, 'BALINESE LETTER NA RAMBAT').
+unicode_name(0x1B22, 'BALINESE LETTER TA').
+unicode_name(0x1B23, 'BALINESE LETTER TA TAWA').
+unicode_name(0x1B24, 'BALINESE LETTER DA').
+unicode_name(0x1B25, 'BALINESE LETTER DA MADU').
+unicode_name(0x1B26, 'BALINESE LETTER NA').
+unicode_name(0x1B27, 'BALINESE LETTER PA').
+unicode_name(0x1B28, 'BALINESE LETTER PA KAPAL').
+unicode_name(0x1B29, 'BALINESE LETTER BA').
+unicode_name(0x1B2A, 'BALINESE LETTER BA KEMBANG').
+unicode_name(0x1B2B, 'BALINESE LETTER MA').
+unicode_name(0x1B2C, 'BALINESE LETTER YA').
+unicode_name(0x1B2D, 'BALINESE LETTER RA').
+unicode_name(0x1B2E, 'BALINESE LETTER LA').
+unicode_name(0x1B2F, 'BALINESE LETTER WA').
+unicode_name(0x1B30, 'BALINESE LETTER SA SAGA').
+unicode_name(0x1B31, 'BALINESE LETTER SA SAPA').
+unicode_name(0x1B32, 'BALINESE LETTER SA').
+unicode_name(0x1B33, 'BALINESE LETTER HA').
+unicode_name(0x1B45, 'BALINESE LETTER KAF SASAK').
+unicode_name(0x1B46, 'BALINESE LETTER KHOT SASAK').
+unicode_name(0x1B47, 'BALINESE LETTER TZIR SASAK').
+unicode_name(0x1B48, 'BALINESE LETTER EF SASAK').
+unicode_name(0x1B49, 'BALINESE LETTER VE SASAK').
+unicode_name(0x1B4A, 'BALINESE LETTER ZAL SASAK').
+unicode_name(0x1B4B, 'BALINESE LETTER ASYURA SASAK').
+unicode_name(0x1B83, 'SUNDANESE LETTER A').
+unicode_name(0x1B84, 'SUNDANESE LETTER I').
+unicode_name(0x1B85, 'SUNDANESE LETTER U').
+unicode_name(0x1B86, 'SUNDANESE LETTER AE').
+unicode_name(0x1B87, 'SUNDANESE LETTER O').
+unicode_name(0x1B88, 'SUNDANESE LETTER E').
+unicode_name(0x1B89, 'SUNDANESE LETTER EU').
+unicode_name(0x1B8A, 'SUNDANESE LETTER KA').
+unicode_name(0x1B8B, 'SUNDANESE LETTER QA').
+unicode_name(0x1B8C, 'SUNDANESE LETTER GA').
+unicode_name(0x1B8D, 'SUNDANESE LETTER NGA').
+unicode_name(0x1B8E, 'SUNDANESE LETTER CA').
+unicode_name(0x1B8F, 'SUNDANESE LETTER JA').
+unicode_name(0x1B90, 'SUNDANESE LETTER ZA').
+unicode_name(0x1B91, 'SUNDANESE LETTER NYA').
+unicode_name(0x1B92, 'SUNDANESE LETTER TA').
+unicode_name(0x1B93, 'SUNDANESE LETTER DA').
+unicode_name(0x1B94, 'SUNDANESE LETTER NA').
+unicode_name(0x1B95, 'SUNDANESE LETTER PA').
+unicode_name(0x1B96, 'SUNDANESE LETTER FA').
+unicode_name(0x1B97, 'SUNDANESE LETTER VA').
+unicode_name(0x1B98, 'SUNDANESE LETTER BA').
+unicode_name(0x1B99, 'SUNDANESE LETTER MA').
+unicode_name(0x1B9A, 'SUNDANESE LETTER YA').
+unicode_name(0x1B9B, 'SUNDANESE LETTER RA').
+unicode_name(0x1B9C, 'SUNDANESE LETTER LA').
+unicode_name(0x1B9D, 'SUNDANESE LETTER WA').
+unicode_name(0x1B9E, 'SUNDANESE LETTER SA').
+unicode_name(0x1B9F, 'SUNDANESE LETTER XA').
+unicode_name(0x1BA0, 'SUNDANESE LETTER HA').
+unicode_name(0x1BAE, 'SUNDANESE LETTER KHA').
+unicode_name(0x1BAF, 'SUNDANESE LETTER SYA').
+unicode_name(0x1BBA, 'SUNDANESE AVAGRAHA').
+unicode_name(0x1BBB, 'SUNDANESE LETTER REU').
+unicode_name(0x1BBC, 'SUNDANESE LETTER LEU').
+unicode_name(0x1BBD, 'SUNDANESE LETTER BHA').
+unicode_name(0x1BBE, 'SUNDANESE LETTER FINAL K').
+unicode_name(0x1BBF, 'SUNDANESE LETTER FINAL M').
+unicode_name(0x1BC0, 'BATAK LETTER A').
+unicode_name(0x1BC1, 'BATAK LETTER SIMALUNGUN A').
+unicode_name(0x1BC2, 'BATAK LETTER HA').
+unicode_name(0x1BC3, 'BATAK LETTER SIMALUNGUN HA').
+unicode_name(0x1BC4, 'BATAK LETTER MANDAILING HA').
+unicode_name(0x1BC5, 'BATAK LETTER BA').
+unicode_name(0x1BC6, 'BATAK LETTER KARO BA').
+unicode_name(0x1BC7, 'BATAK LETTER PA').
+unicode_name(0x1BC8, 'BATAK LETTER SIMALUNGUN PA').
+unicode_name(0x1BC9, 'BATAK LETTER NA').
+unicode_name(0x1BCA, 'BATAK LETTER MANDAILING NA').
+unicode_name(0x1BCB, 'BATAK LETTER WA').
+unicode_name(0x1BCC, 'BATAK LETTER SIMALUNGUN WA').
+unicode_name(0x1BCD, 'BATAK LETTER PAKPAK WA').
+unicode_name(0x1BCE, 'BATAK LETTER GA').
+unicode_name(0x1BCF, 'BATAK LETTER SIMALUNGUN GA').
+unicode_name(0x1BD0, 'BATAK LETTER JA').
+unicode_name(0x1BD1, 'BATAK LETTER DA').
+unicode_name(0x1BD2, 'BATAK LETTER RA').
+unicode_name(0x1BD3, 'BATAK LETTER SIMALUNGUN RA').
+unicode_name(0x1BD4, 'BATAK LETTER MA').
+unicode_name(0x1BD5, 'BATAK LETTER SIMALUNGUN MA').
+unicode_name(0x1BD6, 'BATAK LETTER SOUTHERN TA').
+unicode_name(0x1BD7, 'BATAK LETTER NORTHERN TA').
+unicode_name(0x1BD8, 'BATAK LETTER SA').
+unicode_name(0x1BD9, 'BATAK LETTER SIMALUNGUN SA').
+unicode_name(0x1BDA, 'BATAK LETTER MANDAILING SA').
+unicode_name(0x1BDB, 'BATAK LETTER YA').
+unicode_name(0x1BDC, 'BATAK LETTER SIMALUNGUN YA').
+unicode_name(0x1BDD, 'BATAK LETTER NGA').
+unicode_name(0x1BDE, 'BATAK LETTER LA').
+unicode_name(0x1BDF, 'BATAK LETTER SIMALUNGUN LA').
+unicode_name(0x1BE0, 'BATAK LETTER NYA').
+unicode_name(0x1BE1, 'BATAK LETTER CA').
+unicode_name(0x1BE2, 'BATAK LETTER NDA').
+unicode_name(0x1BE3, 'BATAK LETTER MBA').
+unicode_name(0x1BE4, 'BATAK LETTER I').
+unicode_name(0x1BE5, 'BATAK LETTER U').
+unicode_name(0x1C00, 'LEPCHA LETTER KA').
+unicode_name(0x1C01, 'LEPCHA LETTER KLA').
+unicode_name(0x1C02, 'LEPCHA LETTER KHA').
+unicode_name(0x1C03, 'LEPCHA LETTER GA').
+unicode_name(0x1C04, 'LEPCHA LETTER GLA').
+unicode_name(0x1C05, 'LEPCHA LETTER NGA').
+unicode_name(0x1C06, 'LEPCHA LETTER CA').
+unicode_name(0x1C07, 'LEPCHA LETTER CHA').
+unicode_name(0x1C08, 'LEPCHA LETTER JA').
+unicode_name(0x1C09, 'LEPCHA LETTER NYA').
+unicode_name(0x1C0A, 'LEPCHA LETTER TA').
+unicode_name(0x1C0B, 'LEPCHA LETTER THA').
+unicode_name(0x1C0C, 'LEPCHA LETTER DA').
+unicode_name(0x1C0D, 'LEPCHA LETTER NA').
+unicode_name(0x1C0E, 'LEPCHA LETTER PA').
+unicode_name(0x1C0F, 'LEPCHA LETTER PLA').
+unicode_name(0x1C10, 'LEPCHA LETTER PHA').
+unicode_name(0x1C11, 'LEPCHA LETTER FA').
+unicode_name(0x1C12, 'LEPCHA LETTER FLA').
+unicode_name(0x1C13, 'LEPCHA LETTER BA').
+unicode_name(0x1C14, 'LEPCHA LETTER BLA').
+unicode_name(0x1C15, 'LEPCHA LETTER MA').
+unicode_name(0x1C16, 'LEPCHA LETTER MLA').
+unicode_name(0x1C17, 'LEPCHA LETTER TSA').
+unicode_name(0x1C18, 'LEPCHA LETTER TSHA').
+unicode_name(0x1C19, 'LEPCHA LETTER DZA').
+unicode_name(0x1C1A, 'LEPCHA LETTER YA').
+unicode_name(0x1C1B, 'LEPCHA LETTER RA').
+unicode_name(0x1C1C, 'LEPCHA LETTER LA').
+unicode_name(0x1C1D, 'LEPCHA LETTER HA').
+unicode_name(0x1C1E, 'LEPCHA LETTER HLA').
+unicode_name(0x1C1F, 'LEPCHA LETTER VA').
+unicode_name(0x1C20, 'LEPCHA LETTER SA').
+unicode_name(0x1C21, 'LEPCHA LETTER SHA').
+unicode_name(0x1C22, 'LEPCHA LETTER WA').
+unicode_name(0x1C23, 'LEPCHA LETTER A').
+unicode_name(0x1C4D, 'LEPCHA LETTER TTA').
+unicode_name(0x1C4E, 'LEPCHA LETTER TTHA').
+unicode_name(0x1C4F, 'LEPCHA LETTER DDA').
+unicode_name(0x1C5A, 'OL CHIKI LETTER LA').
+unicode_name(0x1C5B, 'OL CHIKI LETTER AT').
+unicode_name(0x1C5C, 'OL CHIKI LETTER AG').
+unicode_name(0x1C5D, 'OL CHIKI LETTER ANG').
+unicode_name(0x1C5E, 'OL CHIKI LETTER AL').
+unicode_name(0x1C5F, 'OL CHIKI LETTER LAA').
+unicode_name(0x1C60, 'OL CHIKI LETTER AAK').
+unicode_name(0x1C61, 'OL CHIKI LETTER AAJ').
+unicode_name(0x1C62, 'OL CHIKI LETTER AAM').
+unicode_name(0x1C63, 'OL CHIKI LETTER AAW').
+unicode_name(0x1C64, 'OL CHIKI LETTER LI').
+unicode_name(0x1C65, 'OL CHIKI LETTER IS').
+unicode_name(0x1C66, 'OL CHIKI LETTER IH').
+unicode_name(0x1C67, 'OL CHIKI LETTER INY').
+unicode_name(0x1C68, 'OL CHIKI LETTER IR').
+unicode_name(0x1C69, 'OL CHIKI LETTER LU').
+unicode_name(0x1C6A, 'OL CHIKI LETTER UC').
+unicode_name(0x1C6B, 'OL CHIKI LETTER UD').
+unicode_name(0x1C6C, 'OL CHIKI LETTER UNN').
+unicode_name(0x1C6D, 'OL CHIKI LETTER UY').
+unicode_name(0x1C6E, 'OL CHIKI LETTER LE').
+unicode_name(0x1C6F, 'OL CHIKI LETTER EP').
+unicode_name(0x1C70, 'OL CHIKI LETTER EDD').
+unicode_name(0x1C71, 'OL CHIKI LETTER EN').
+unicode_name(0x1C72, 'OL CHIKI LETTER ERR').
+unicode_name(0x1C73, 'OL CHIKI LETTER LO').
+unicode_name(0x1C74, 'OL CHIKI LETTER OTT').
+unicode_name(0x1C75, 'OL CHIKI LETTER OB').
+unicode_name(0x1C76, 'OL CHIKI LETTER OV').
+unicode_name(0x1C77, 'OL CHIKI LETTER OH').
+unicode_name(0x1CE9, 'VEDIC SIGN ANUSVARA ANTARGOMUKHA').
+unicode_name(0x1CEA, 'VEDIC SIGN ANUSVARA BAHIRGOMUKHA').
+unicode_name(0x1CEB, 'VEDIC SIGN ANUSVARA VAMAGOMUKHA').
+unicode_name(0x1CEC, 'VEDIC SIGN ANUSVARA VAMAGOMUKHA WITH TAIL').
+unicode_name(0x1CEE, 'VEDIC SIGN HEXIFORM LONG ANUSVARA').
+unicode_name(0x1CEF, 'VEDIC SIGN LONG ANUSVARA').
+unicode_name(0x1CF0, 'VEDIC SIGN RTHANG LONG ANUSVARA').
+unicode_name(0x1CF1, 'VEDIC SIGN ANUSVARA UBHAYATO MUKHA').
+unicode_name(0x1CF5, 'VEDIC SIGN JIHVAMULIYA').
+unicode_name(0x1CF6, 'VEDIC SIGN UPADHMANIYA').
+unicode_name(0x2135, 'ALEF SYMBOL').
+unicode_name(0x2136, 'BET SYMBOL').
+unicode_name(0x2137, 'GIMEL SYMBOL').
+unicode_name(0x2138, 'DALET SYMBOL').
+unicode_name(0x2D30, 'TIFINAGH LETTER YA').
+unicode_name(0x2D31, 'TIFINAGH LETTER YAB').
+unicode_name(0x2D32, 'TIFINAGH LETTER YABH').
+unicode_name(0x2D33, 'TIFINAGH LETTER YAG').
+unicode_name(0x2D34, 'TIFINAGH LETTER YAGHH').
+unicode_name(0x2D35, 'TIFINAGH LETTER BERBER ACADEMY YAJ').
+unicode_name(0x2D36, 'TIFINAGH LETTER YAJ').
+unicode_name(0x2D37, 'TIFINAGH LETTER YAD').
+unicode_name(0x2D38, 'TIFINAGH LETTER YADH').
+unicode_name(0x2D39, 'TIFINAGH LETTER YADD').
+unicode_name(0x2D3A, 'TIFINAGH LETTER YADDH').
+unicode_name(0x2D3B, 'TIFINAGH LETTER YEY').
+unicode_name(0x2D3C, 'TIFINAGH LETTER YAF').
+unicode_name(0x2D3D, 'TIFINAGH LETTER YAK').
+unicode_name(0x2D3E, 'TIFINAGH LETTER TUAREG YAK').
+unicode_name(0x2D3F, 'TIFINAGH LETTER YAKHH').
+unicode_name(0x2D40, 'TIFINAGH LETTER YAH').
+unicode_name(0x2D41, 'TIFINAGH LETTER BERBER ACADEMY YAH').
+unicode_name(0x2D42, 'TIFINAGH LETTER TUAREG YAH').
+unicode_name(0x2D43, 'TIFINAGH LETTER YAHH').
+unicode_name(0x2D44, 'TIFINAGH LETTER YAA').
+unicode_name(0x2D45, 'TIFINAGH LETTER YAKH').
+unicode_name(0x2D46, 'TIFINAGH LETTER TUAREG YAKH').
+unicode_name(0x2D47, 'TIFINAGH LETTER YAQ').
+unicode_name(0x2D48, 'TIFINAGH LETTER TUAREG YAQ').
+unicode_name(0x2D49, 'TIFINAGH LETTER YI').
+unicode_name(0x2D4A, 'TIFINAGH LETTER YAZH').
+unicode_name(0x2D4B, 'TIFINAGH LETTER AHAGGAR YAZH').
+unicode_name(0x2D4C, 'TIFINAGH LETTER TUAREG YAZH').
+unicode_name(0x2D4D, 'TIFINAGH LETTER YAL').
+unicode_name(0x2D4E, 'TIFINAGH LETTER YAM').
+unicode_name(0x2D4F, 'TIFINAGH LETTER YAN').
+unicode_name(0x2D50, 'TIFINAGH LETTER TUAREG YAGN').
+unicode_name(0x2D51, 'TIFINAGH LETTER TUAREG YANG').
+unicode_name(0x2D52, 'TIFINAGH LETTER YAP').
+unicode_name(0x2D53, 'TIFINAGH LETTER YU').
+unicode_name(0x2D54, 'TIFINAGH LETTER YAR').
+unicode_name(0x2D55, 'TIFINAGH LETTER YARR').
+unicode_name(0x2D56, 'TIFINAGH LETTER YAGH').
+unicode_name(0x2D57, 'TIFINAGH LETTER TUAREG YAGH').
+unicode_name(0x2D58, 'TIFINAGH LETTER AYER YAGH').
+unicode_name(0x2D59, 'TIFINAGH LETTER YAS').
+unicode_name(0x2D5A, 'TIFINAGH LETTER YASS').
+unicode_name(0x2D5B, 'TIFINAGH LETTER YASH').
+unicode_name(0x2D5C, 'TIFINAGH LETTER YAT').
+unicode_name(0x2D5D, 'TIFINAGH LETTER YATH').
+unicode_name(0x2D5E, 'TIFINAGH LETTER YACH').
+unicode_name(0x2D5F, 'TIFINAGH LETTER YATT').
+unicode_name(0x2D60, 'TIFINAGH LETTER YAV').
+unicode_name(0x2D61, 'TIFINAGH LETTER YAW').
+unicode_name(0x2D62, 'TIFINAGH LETTER YAY').
+unicode_name(0x2D63, 'TIFINAGH LETTER YAZ').
+unicode_name(0x2D64, 'TIFINAGH LETTER TAWELLEMET YAZ').
+unicode_name(0x2D65, 'TIFINAGH LETTER YAZZ').
+unicode_name(0x2D66, 'TIFINAGH LETTER YE').
+unicode_name(0x2D67, 'TIFINAGH LETTER YO').
+unicode_name(0x2D80, 'ETHIOPIC SYLLABLE LOA').
+unicode_name(0x2D81, 'ETHIOPIC SYLLABLE MOA').
+unicode_name(0x2D82, 'ETHIOPIC SYLLABLE ROA').
+unicode_name(0x2D83, 'ETHIOPIC SYLLABLE SOA').
+unicode_name(0x2D84, 'ETHIOPIC SYLLABLE SHOA').
+unicode_name(0x2D85, 'ETHIOPIC SYLLABLE BOA').
+unicode_name(0x2D86, 'ETHIOPIC SYLLABLE TOA').
+unicode_name(0x2D87, 'ETHIOPIC SYLLABLE COA').
+unicode_name(0x2D88, 'ETHIOPIC SYLLABLE NOA').
+unicode_name(0x2D89, 'ETHIOPIC SYLLABLE NYOA').
+unicode_name(0x2D8A, 'ETHIOPIC SYLLABLE GLOTTAL OA').
+unicode_name(0x2D8B, 'ETHIOPIC SYLLABLE ZOA').
+unicode_name(0x2D8C, 'ETHIOPIC SYLLABLE DOA').
+unicode_name(0x2D8D, 'ETHIOPIC SYLLABLE DDOA').
+unicode_name(0x2D8E, 'ETHIOPIC SYLLABLE JOA').
+unicode_name(0x2D8F, 'ETHIOPIC SYLLABLE THOA').
+unicode_name(0x2D90, 'ETHIOPIC SYLLABLE CHOA').
+unicode_name(0x2D91, 'ETHIOPIC SYLLABLE PHOA').
+unicode_name(0x2D92, 'ETHIOPIC SYLLABLE POA').
+unicode_name(0x2D93, 'ETHIOPIC SYLLABLE GGWA').
+unicode_name(0x2D94, 'ETHIOPIC SYLLABLE GGWI').
+unicode_name(0x2D95, 'ETHIOPIC SYLLABLE GGWEE').
+unicode_name(0x2D96, 'ETHIOPIC SYLLABLE GGWE').
+unicode_name(0x2DA0, 'ETHIOPIC SYLLABLE SSA').
+unicode_name(0x2DA1, 'ETHIOPIC SYLLABLE SSU').
+unicode_name(0x2DA2, 'ETHIOPIC SYLLABLE SSI').
+unicode_name(0x2DA3, 'ETHIOPIC SYLLABLE SSAA').
+unicode_name(0x2DA4, 'ETHIOPIC SYLLABLE SSEE').
+unicode_name(0x2DA5, 'ETHIOPIC SYLLABLE SSE').
+unicode_name(0x2DA6, 'ETHIOPIC SYLLABLE SSO').
+unicode_name(0x2DA8, 'ETHIOPIC SYLLABLE CCA').
+unicode_name(0x2DA9, 'ETHIOPIC SYLLABLE CCU').
+unicode_name(0x2DAA, 'ETHIOPIC SYLLABLE CCI').
+unicode_name(0x2DAB, 'ETHIOPIC SYLLABLE CCAA').
+unicode_name(0x2DAC, 'ETHIOPIC SYLLABLE CCEE').
+unicode_name(0x2DAD, 'ETHIOPIC SYLLABLE CCE').
+unicode_name(0x2DAE, 'ETHIOPIC SYLLABLE CCO').
+unicode_name(0x2DB0, 'ETHIOPIC SYLLABLE ZZA').
+unicode_name(0x2DB1, 'ETHIOPIC SYLLABLE ZZU').
+unicode_name(0x2DB2, 'ETHIOPIC SYLLABLE ZZI').
+unicode_name(0x2DB3, 'ETHIOPIC SYLLABLE ZZAA').
+unicode_name(0x2DB4, 'ETHIOPIC SYLLABLE ZZEE').
+unicode_name(0x2DB5, 'ETHIOPIC SYLLABLE ZZE').
+unicode_name(0x2DB6, 'ETHIOPIC SYLLABLE ZZO').
+unicode_name(0x2DB8, 'ETHIOPIC SYLLABLE CCHA').
+unicode_name(0x2DB9, 'ETHIOPIC SYLLABLE CCHU').
+unicode_name(0x2DBA, 'ETHIOPIC SYLLABLE CCHI').
+unicode_name(0x2DBB, 'ETHIOPIC SYLLABLE CCHAA').
+unicode_name(0x2DBC, 'ETHIOPIC SYLLABLE CCHEE').
+unicode_name(0x2DBD, 'ETHIOPIC SYLLABLE CCHE').
+unicode_name(0x2DBE, 'ETHIOPIC SYLLABLE CCHO').
+unicode_name(0x2DC0, 'ETHIOPIC SYLLABLE QYA').
+unicode_name(0x2DC1, 'ETHIOPIC SYLLABLE QYU').
+unicode_name(0x2DC2, 'ETHIOPIC SYLLABLE QYI').
+unicode_name(0x2DC3, 'ETHIOPIC SYLLABLE QYAA').
+unicode_name(0x2DC4, 'ETHIOPIC SYLLABLE QYEE').
+unicode_name(0x2DC5, 'ETHIOPIC SYLLABLE QYE').
+unicode_name(0x2DC6, 'ETHIOPIC SYLLABLE QYO').
+unicode_name(0x2DC8, 'ETHIOPIC SYLLABLE KYA').
+unicode_name(0x2DC9, 'ETHIOPIC SYLLABLE KYU').
+unicode_name(0x2DCA, 'ETHIOPIC SYLLABLE KYI').
+unicode_name(0x2DCB, 'ETHIOPIC SYLLABLE KYAA').
+unicode_name(0x2DCC, 'ETHIOPIC SYLLABLE KYEE').
+unicode_name(0x2DCD, 'ETHIOPIC SYLLABLE KYE').
+unicode_name(0x2DCE, 'ETHIOPIC SYLLABLE KYO').
+unicode_name(0x2DD0, 'ETHIOPIC SYLLABLE XYA').
+unicode_name(0x2DD1, 'ETHIOPIC SYLLABLE XYU').
+unicode_name(0x2DD2, 'ETHIOPIC SYLLABLE XYI').
+unicode_name(0x2DD3, 'ETHIOPIC SYLLABLE XYAA').
+unicode_name(0x2DD4, 'ETHIOPIC SYLLABLE XYEE').
+unicode_name(0x2DD5, 'ETHIOPIC SYLLABLE XYE').
+unicode_name(0x2DD6, 'ETHIOPIC SYLLABLE XYO').
+unicode_name(0x2DD8, 'ETHIOPIC SYLLABLE GYA').
+unicode_name(0x2DD9, 'ETHIOPIC SYLLABLE GYU').
+unicode_name(0x2DDA, 'ETHIOPIC SYLLABLE GYI').
+unicode_name(0x2DDB, 'ETHIOPIC SYLLABLE GYAA').
+unicode_name(0x2DDC, 'ETHIOPIC SYLLABLE GYEE').
+unicode_name(0x2DDD, 'ETHIOPIC SYLLABLE GYE').
+unicode_name(0x2DDE, 'ETHIOPIC SYLLABLE GYO').
+unicode_name(0x3006, 'IDEOGRAPHIC CLOSING MARK').
+unicode_name(0x303C, 'MASU MARK').
+unicode_name(0x3041, 'HIRAGANA LETTER SMALL A').
+unicode_name(0x3042, 'HIRAGANA LETTER A').
+unicode_name(0x3043, 'HIRAGANA LETTER SMALL I').
+unicode_name(0x3044, 'HIRAGANA LETTER I').
+unicode_name(0x3045, 'HIRAGANA LETTER SMALL U').
+unicode_name(0x3046, 'HIRAGANA LETTER U').
+unicode_name(0x3047, 'HIRAGANA LETTER SMALL E').
+unicode_name(0x3048, 'HIRAGANA LETTER E').
+unicode_name(0x3049, 'HIRAGANA LETTER SMALL O').
+unicode_name(0x304A, 'HIRAGANA LETTER O').
+unicode_name(0x304B, 'HIRAGANA LETTER KA').
+unicode_name(0x304C, 'HIRAGANA LETTER GA').
+unicode_name(0x304D, 'HIRAGANA LETTER KI').
+unicode_name(0x304E, 'HIRAGANA LETTER GI').
+unicode_name(0x304F, 'HIRAGANA LETTER KU').
+unicode_name(0x3050, 'HIRAGANA LETTER GU').
+unicode_name(0x3051, 'HIRAGANA LETTER KE').
+unicode_name(0x3052, 'HIRAGANA LETTER GE').
+unicode_name(0x3053, 'HIRAGANA LETTER KO').
+unicode_name(0x3054, 'HIRAGANA LETTER GO').
+unicode_name(0x3055, 'HIRAGANA LETTER SA').
+unicode_name(0x3056, 'HIRAGANA LETTER ZA').
+unicode_name(0x3057, 'HIRAGANA LETTER SI').
+unicode_name(0x3058, 'HIRAGANA LETTER ZI').
+unicode_name(0x3059, 'HIRAGANA LETTER SU').
+unicode_name(0x305A, 'HIRAGANA LETTER ZU').
+unicode_name(0x305B, 'HIRAGANA LETTER SE').
+unicode_name(0x305C, 'HIRAGANA LETTER ZE').
+unicode_name(0x305D, 'HIRAGANA LETTER SO').
+unicode_name(0x305E, 'HIRAGANA LETTER ZO').
+unicode_name(0x305F, 'HIRAGANA LETTER TA').
+unicode_name(0x3060, 'HIRAGANA LETTER DA').
+unicode_name(0x3061, 'HIRAGANA LETTER TI').
+unicode_name(0x3062, 'HIRAGANA LETTER DI').
+unicode_name(0x3063, 'HIRAGANA LETTER SMALL TU').
+unicode_name(0x3064, 'HIRAGANA LETTER TU').
+unicode_name(0x3065, 'HIRAGANA LETTER DU').
+unicode_name(0x3066, 'HIRAGANA LETTER TE').
+unicode_name(0x3067, 'HIRAGANA LETTER DE').
+unicode_name(0x3068, 'HIRAGANA LETTER TO').
+unicode_name(0x3069, 'HIRAGANA LETTER DO').
+unicode_name(0x306A, 'HIRAGANA LETTER NA').
+unicode_name(0x306B, 'HIRAGANA LETTER NI').
+unicode_name(0x306C, 'HIRAGANA LETTER NU').
+unicode_name(0x306D, 'HIRAGANA LETTER NE').
+unicode_name(0x306E, 'HIRAGANA LETTER NO').
+unicode_name(0x306F, 'HIRAGANA LETTER HA').
+unicode_name(0x3070, 'HIRAGANA LETTER BA').
+unicode_name(0x3071, 'HIRAGANA LETTER PA').
+unicode_name(0x3072, 'HIRAGANA LETTER HI').
+unicode_name(0x3073, 'HIRAGANA LETTER BI').
+unicode_name(0x3074, 'HIRAGANA LETTER PI').
+unicode_name(0x3075, 'HIRAGANA LETTER HU').
+unicode_name(0x3076, 'HIRAGANA LETTER BU').
+unicode_name(0x3077, 'HIRAGANA LETTER PU').
+unicode_name(0x3078, 'HIRAGANA LETTER HE').
+unicode_name(0x3079, 'HIRAGANA LETTER BE').
+unicode_name(0x307A, 'HIRAGANA LETTER PE').
+unicode_name(0x307B, 'HIRAGANA LETTER HO').
+unicode_name(0x307C, 'HIRAGANA LETTER BO').
+unicode_name(0x307D, 'HIRAGANA LETTER PO').
+unicode_name(0x307E, 'HIRAGANA LETTER MA').
+unicode_name(0x307F, 'HIRAGANA LETTER MI').
+unicode_name(0x3080, 'HIRAGANA LETTER MU').
+unicode_name(0x3081, 'HIRAGANA LETTER ME').
+unicode_name(0x3082, 'HIRAGANA LETTER MO').
+unicode_name(0x3083, 'HIRAGANA LETTER SMALL YA').
+unicode_name(0x3084, 'HIRAGANA LETTER YA').
+unicode_name(0x3085, 'HIRAGANA LETTER SMALL YU').
+unicode_name(0x3086, 'HIRAGANA LETTER YU').
+unicode_name(0x3087, 'HIRAGANA LETTER SMALL YO').
+unicode_name(0x3088, 'HIRAGANA LETTER YO').
+unicode_name(0x3089, 'HIRAGANA LETTER RA').
+unicode_name(0x308A, 'HIRAGANA LETTER RI').
+unicode_name(0x308B, 'HIRAGANA LETTER RU').
+unicode_name(0x308C, 'HIRAGANA LETTER RE').
+unicode_name(0x308D, 'HIRAGANA LETTER RO').
+unicode_name(0x308E, 'HIRAGANA LETTER SMALL WA').
+unicode_name(0x308F, 'HIRAGANA LETTER WA').
+unicode_name(0x3090, 'HIRAGANA LETTER WI').
+unicode_name(0x3091, 'HIRAGANA LETTER WE').
+unicode_name(0x3092, 'HIRAGANA LETTER WO').
+unicode_name(0x3093, 'HIRAGANA LETTER N').
+unicode_name(0x3094, 'HIRAGANA LETTER VU').
+unicode_name(0x3095, 'HIRAGANA LETTER SMALL KA').
+unicode_name(0x3096, 'HIRAGANA LETTER SMALL KE').
+unicode_name(0x309F, 'HIRAGANA DIGRAPH YORI').
+unicode_name(0x30A1, 'KATAKANA LETTER SMALL A').
+unicode_name(0x30A2, 'KATAKANA LETTER A').
+unicode_name(0x30A3, 'KATAKANA LETTER SMALL I').
+unicode_name(0x30A4, 'KATAKANA LETTER I').
+unicode_name(0x30A5, 'KATAKANA LETTER SMALL U').
+unicode_name(0x30A6, 'KATAKANA LETTER U').
+unicode_name(0x30A7, 'KATAKANA LETTER SMALL E').
+unicode_name(0x30A8, 'KATAKANA LETTER E').
+unicode_name(0x30A9, 'KATAKANA LETTER SMALL O').
+unicode_name(0x30AA, 'KATAKANA LETTER O').
+unicode_name(0x30AB, 'KATAKANA LETTER KA').
+unicode_name(0x30AC, 'KATAKANA LETTER GA').
+unicode_name(0x30AD, 'KATAKANA LETTER KI').
+unicode_name(0x30AE, 'KATAKANA LETTER GI').
+unicode_name(0x30AF, 'KATAKANA LETTER KU').
+unicode_name(0x30B0, 'KATAKANA LETTER GU').
+unicode_name(0x30B1, 'KATAKANA LETTER KE').
+unicode_name(0x30B2, 'KATAKANA LETTER GE').
+unicode_name(0x30B3, 'KATAKANA LETTER KO').
+unicode_name(0x30B4, 'KATAKANA LETTER GO').
+unicode_name(0x30B5, 'KATAKANA LETTER SA').
+unicode_name(0x30B6, 'KATAKANA LETTER ZA').
+unicode_name(0x30B7, 'KATAKANA LETTER SI').
+unicode_name(0x30B8, 'KATAKANA LETTER ZI').
+unicode_name(0x30B9, 'KATAKANA LETTER SU').
+unicode_name(0x30BA, 'KATAKANA LETTER ZU').
+unicode_name(0x30BB, 'KATAKANA LETTER SE').
+unicode_name(0x30BC, 'KATAKANA LETTER ZE').
+unicode_name(0x30BD, 'KATAKANA LETTER SO').
+unicode_name(0x30BE, 'KATAKANA LETTER ZO').
+unicode_name(0x30BF, 'KATAKANA LETTER TA').
+unicode_name(0x30C0, 'KATAKANA LETTER DA').
+unicode_name(0x30C1, 'KATAKANA LETTER TI').
+unicode_name(0x30C2, 'KATAKANA LETTER DI').
+unicode_name(0x30C3, 'KATAKANA LETTER SMALL TU').
+unicode_name(0x30C4, 'KATAKANA LETTER TU').
+unicode_name(0x30C5, 'KATAKANA LETTER DU').
+unicode_name(0x30C6, 'KATAKANA LETTER TE').
+unicode_name(0x30C7, 'KATAKANA LETTER DE').
+unicode_name(0x30C8, 'KATAKANA LETTER TO').
+unicode_name(0x30C9, 'KATAKANA LETTER DO').
+unicode_name(0x30CA, 'KATAKANA LETTER NA').
+unicode_name(0x30CB, 'KATAKANA LETTER NI').
+unicode_name(0x30CC, 'KATAKANA LETTER NU').
+unicode_name(0x30CD, 'KATAKANA LETTER NE').
+unicode_name(0x30CE, 'KATAKANA LETTER NO').
+unicode_name(0x30CF, 'KATAKANA LETTER HA').
+unicode_name(0x30D0, 'KATAKANA LETTER BA').
+unicode_name(0x30D1, 'KATAKANA LETTER PA').
+unicode_name(0x30D2, 'KATAKANA LETTER HI').
+unicode_name(0x30D3, 'KATAKANA LETTER BI').
+unicode_name(0x30D4, 'KATAKANA LETTER PI').
+unicode_name(0x30D5, 'KATAKANA LETTER HU').
+unicode_name(0x30D6, 'KATAKANA LETTER BU').
+unicode_name(0x30D7, 'KATAKANA LETTER PU').
+unicode_name(0x30D8, 'KATAKANA LETTER HE').
+unicode_name(0x30D9, 'KATAKANA LETTER BE').
+unicode_name(0x30DA, 'KATAKANA LETTER PE').
+unicode_name(0x30DB, 'KATAKANA LETTER HO').
+unicode_name(0x30DC, 'KATAKANA LETTER BO').
+unicode_name(0x30DD, 'KATAKANA LETTER PO').
+unicode_name(0x30DE, 'KATAKANA LETTER MA').
+unicode_name(0x30DF, 'KATAKANA LETTER MI').
+unicode_name(0x30E0, 'KATAKANA LETTER MU').
+unicode_name(0x30E1, 'KATAKANA LETTER ME').
+unicode_name(0x30E2, 'KATAKANA LETTER MO').
+unicode_name(0x30E3, 'KATAKANA LETTER SMALL YA').
+unicode_name(0x30E4, 'KATAKANA LETTER YA').
+unicode_name(0x30E5, 'KATAKANA LETTER SMALL YU').
+unicode_name(0x30E6, 'KATAKANA LETTER YU').
+unicode_name(0x30E7, 'KATAKANA LETTER SMALL YO').
+unicode_name(0x30E8, 'KATAKANA LETTER YO').
+unicode_name(0x30E9, 'KATAKANA LETTER RA').
+unicode_name(0x30EA, 'KATAKANA LETTER RI').
+unicode_name(0x30EB, 'KATAKANA LETTER RU').
+unicode_name(0x30EC, 'KATAKANA LETTER RE').
+unicode_name(0x30ED, 'KATAKANA LETTER RO').
+unicode_name(0x30EE, 'KATAKANA LETTER SMALL WA').
+unicode_name(0x30EF, 'KATAKANA LETTER WA').
+unicode_name(0x30F0, 'KATAKANA LETTER WI').
+unicode_name(0x30F1, 'KATAKANA LETTER WE').
+unicode_name(0x30F2, 'KATAKANA LETTER WO').
+unicode_name(0x30F3, 'KATAKANA LETTER N').
+unicode_name(0x30F4, 'KATAKANA LETTER VU').
+unicode_name(0x30F5, 'KATAKANA LETTER SMALL KA').
+unicode_name(0x30F6, 'KATAKANA LETTER SMALL KE').
+unicode_name(0x30F7, 'KATAKANA LETTER VA').
+unicode_name(0x30F8, 'KATAKANA LETTER VI').
+unicode_name(0x30F9, 'KATAKANA LETTER VE').
+unicode_name(0x30FA, 'KATAKANA LETTER VO').
+unicode_name(0x30FF, 'KATAKANA DIGRAPH KOTO').
+unicode_name(0x3105, 'BOPOMOFO LETTER B').
+unicode_name(0x3106, 'BOPOMOFO LETTER P').
+unicode_name(0x3107, 'BOPOMOFO LETTER M').
+unicode_name(0x3108, 'BOPOMOFO LETTER F').
+unicode_name(0x3109, 'BOPOMOFO LETTER D').
+unicode_name(0x310A, 'BOPOMOFO LETTER T').
+unicode_name(0x310B, 'BOPOMOFO LETTER N').
+unicode_name(0x310C, 'BOPOMOFO LETTER L').
+unicode_name(0x310D, 'BOPOMOFO LETTER G').
+unicode_name(0x310E, 'BOPOMOFO LETTER K').
+unicode_name(0x310F, 'BOPOMOFO LETTER H').
+unicode_name(0x3110, 'BOPOMOFO LETTER J').
+unicode_name(0x3111, 'BOPOMOFO LETTER Q').
+unicode_name(0x3112, 'BOPOMOFO LETTER X').
+unicode_name(0x3113, 'BOPOMOFO LETTER ZH').
+unicode_name(0x3114, 'BOPOMOFO LETTER CH').
+unicode_name(0x3115, 'BOPOMOFO LETTER SH').
+unicode_name(0x3116, 'BOPOMOFO LETTER R').
+unicode_name(0x3117, 'BOPOMOFO LETTER Z').
+unicode_name(0x3118, 'BOPOMOFO LETTER C').
+unicode_name(0x3119, 'BOPOMOFO LETTER S').
+unicode_name(0x311A, 'BOPOMOFO LETTER A').
+unicode_name(0x311B, 'BOPOMOFO LETTER O').
+unicode_name(0x311C, 'BOPOMOFO LETTER E').
+unicode_name(0x311D, 'BOPOMOFO LETTER EH').
+unicode_name(0x311E, 'BOPOMOFO LETTER AI').
+unicode_name(0x311F, 'BOPOMOFO LETTER EI').
+unicode_name(0x3120, 'BOPOMOFO LETTER AU').
+unicode_name(0x3121, 'BOPOMOFO LETTER OU').
+unicode_name(0x3122, 'BOPOMOFO LETTER AN').
+unicode_name(0x3123, 'BOPOMOFO LETTER EN').
+unicode_name(0x3124, 'BOPOMOFO LETTER ANG').
+unicode_name(0x3125, 'BOPOMOFO LETTER ENG').
+unicode_name(0x3126, 'BOPOMOFO LETTER ER').
+unicode_name(0x3127, 'BOPOMOFO LETTER I').
+unicode_name(0x3128, 'BOPOMOFO LETTER U').
+unicode_name(0x3129, 'BOPOMOFO LETTER IU').
+unicode_name(0x312A, 'BOPOMOFO LETTER V').
+unicode_name(0x312B, 'BOPOMOFO LETTER NG').
+unicode_name(0x312C, 'BOPOMOFO LETTER GN').
+unicode_name(0x312D, 'BOPOMOFO LETTER IH').
+unicode_name(0x3131, 'HANGUL LETTER KIYEOK').
+unicode_name(0x3132, 'HANGUL LETTER SSANGKIYEOK').
+unicode_name(0x3133, 'HANGUL LETTER KIYEOK-SIOS').
+unicode_name(0x3134, 'HANGUL LETTER NIEUN').
+unicode_name(0x3135, 'HANGUL LETTER NIEUN-CIEUC').
+unicode_name(0x3136, 'HANGUL LETTER NIEUN-HIEUH').
+unicode_name(0x3137, 'HANGUL LETTER TIKEUT').
+unicode_name(0x3138, 'HANGUL LETTER SSANGTIKEUT').
+unicode_name(0x3139, 'HANGUL LETTER RIEUL').
+unicode_name(0x313A, 'HANGUL LETTER RIEUL-KIYEOK').
+unicode_name(0x313B, 'HANGUL LETTER RIEUL-MIEUM').
+unicode_name(0x313C, 'HANGUL LETTER RIEUL-PIEUP').
+unicode_name(0x313D, 'HANGUL LETTER RIEUL-SIOS').
+unicode_name(0x313E, 'HANGUL LETTER RIEUL-THIEUTH').
+unicode_name(0x313F, 'HANGUL LETTER RIEUL-PHIEUPH').
+unicode_name(0x3140, 'HANGUL LETTER RIEUL-HIEUH').
+unicode_name(0x3141, 'HANGUL LETTER MIEUM').
+unicode_name(0x3142, 'HANGUL LETTER PIEUP').
+unicode_name(0x3143, 'HANGUL LETTER SSANGPIEUP').
+unicode_name(0x3144, 'HANGUL LETTER PIEUP-SIOS').
+unicode_name(0x3145, 'HANGUL LETTER SIOS').
+unicode_name(0x3146, 'HANGUL LETTER SSANGSIOS').
+unicode_name(0x3147, 'HANGUL LETTER IEUNG').
+unicode_name(0x3148, 'HANGUL LETTER CIEUC').
+unicode_name(0x3149, 'HANGUL LETTER SSANGCIEUC').
+unicode_name(0x314A, 'HANGUL LETTER CHIEUCH').
+unicode_name(0x314B, 'HANGUL LETTER KHIEUKH').
+unicode_name(0x314C, 'HANGUL LETTER THIEUTH').
+unicode_name(0x314D, 'HANGUL LETTER PHIEUPH').
+unicode_name(0x314E, 'HANGUL LETTER HIEUH').
+unicode_name(0x314F, 'HANGUL LETTER A').
+unicode_name(0x3150, 'HANGUL LETTER AE').
+unicode_name(0x3151, 'HANGUL LETTER YA').
+unicode_name(0x3152, 'HANGUL LETTER YAE').
+unicode_name(0x3153, 'HANGUL LETTER EO').
+unicode_name(0x3154, 'HANGUL LETTER E').
+unicode_name(0x3155, 'HANGUL LETTER YEO').
+unicode_name(0x3156, 'HANGUL LETTER YE').
+unicode_name(0x3157, 'HANGUL LETTER O').
+unicode_name(0x3158, 'HANGUL LETTER WA').
+unicode_name(0x3159, 'HANGUL LETTER WAE').
+unicode_name(0x315A, 'HANGUL LETTER OE').
+unicode_name(0x315B, 'HANGUL LETTER YO').
+unicode_name(0x315C, 'HANGUL LETTER U').
+unicode_name(0x315D, 'HANGUL LETTER WEO').
+unicode_name(0x315E, 'HANGUL LETTER WE').
+unicode_name(0x315F, 'HANGUL LETTER WI').
+unicode_name(0x3160, 'HANGUL LETTER YU').
+unicode_name(0x3161, 'HANGUL LETTER EU').
+unicode_name(0x3162, 'HANGUL LETTER YI').
+unicode_name(0x3163, 'HANGUL LETTER I').
+unicode_name(0x3164, 'HANGUL FILLER').
+unicode_name(0x3165, 'HANGUL LETTER SSANGNIEUN').
+unicode_name(0x3166, 'HANGUL LETTER NIEUN-TIKEUT').
+unicode_name(0x3167, 'HANGUL LETTER NIEUN-SIOS').
+unicode_name(0x3168, 'HANGUL LETTER NIEUN-PANSIOS').
+unicode_name(0x3169, 'HANGUL LETTER RIEUL-KIYEOK-SIOS').
+unicode_name(0x316A, 'HANGUL LETTER RIEUL-TIKEUT').
+unicode_name(0x316B, 'HANGUL LETTER RIEUL-PIEUP-SIOS').
+unicode_name(0x316C, 'HANGUL LETTER RIEUL-PANSIOS').
+unicode_name(0x316D, 'HANGUL LETTER RIEUL-YEORINHIEUH').
+unicode_name(0x316E, 'HANGUL LETTER MIEUM-PIEUP').
+unicode_name(0x316F, 'HANGUL LETTER MIEUM-SIOS').
+unicode_name(0x3170, 'HANGUL LETTER MIEUM-PANSIOS').
+unicode_name(0x3171, 'HANGUL LETTER KAPYEOUNMIEUM').
+unicode_name(0x3172, 'HANGUL LETTER PIEUP-KIYEOK').
+unicode_name(0x3173, 'HANGUL LETTER PIEUP-TIKEUT').
+unicode_name(0x3174, 'HANGUL LETTER PIEUP-SIOS-KIYEOK').
+unicode_name(0x3175, 'HANGUL LETTER PIEUP-SIOS-TIKEUT').
+unicode_name(0x3176, 'HANGUL LETTER PIEUP-CIEUC').
+unicode_name(0x3177, 'HANGUL LETTER PIEUP-THIEUTH').
+unicode_name(0x3178, 'HANGUL LETTER KAPYEOUNPIEUP').
+unicode_name(0x3179, 'HANGUL LETTER KAPYEOUNSSANGPIEUP').
+unicode_name(0x317A, 'HANGUL LETTER SIOS-KIYEOK').
+unicode_name(0x317B, 'HANGUL LETTER SIOS-NIEUN').
+unicode_name(0x317C, 'HANGUL LETTER SIOS-TIKEUT').
+unicode_name(0x317D, 'HANGUL LETTER SIOS-PIEUP').
+unicode_name(0x317E, 'HANGUL LETTER SIOS-CIEUC').
+unicode_name(0x317F, 'HANGUL LETTER PANSIOS').
+unicode_name(0x3180, 'HANGUL LETTER SSANGIEUNG').
+unicode_name(0x3181, 'HANGUL LETTER YESIEUNG').
+unicode_name(0x3182, 'HANGUL LETTER YESIEUNG-SIOS').
+unicode_name(0x3183, 'HANGUL LETTER YESIEUNG-PANSIOS').
+unicode_name(0x3184, 'HANGUL LETTER KAPYEOUNPHIEUPH').
+unicode_name(0x3185, 'HANGUL LETTER SSANGHIEUH').
+unicode_name(0x3186, 'HANGUL LETTER YEORINHIEUH').
+unicode_name(0x3187, 'HANGUL LETTER YO-YA').
+unicode_name(0x3188, 'HANGUL LETTER YO-YAE').
+unicode_name(0x3189, 'HANGUL LETTER YO-I').
+unicode_name(0x318A, 'HANGUL LETTER YU-YEO').
+unicode_name(0x318B, 'HANGUL LETTER YU-YE').
+unicode_name(0x318C, 'HANGUL LETTER YU-I').
+unicode_name(0x318D, 'HANGUL LETTER ARAEA').
+unicode_name(0x318E, 'HANGUL LETTER ARAEAE').
+unicode_name(0x31A0, 'BOPOMOFO LETTER BU').
+unicode_name(0x31A1, 'BOPOMOFO LETTER ZI').
+unicode_name(0x31A2, 'BOPOMOFO LETTER JI').
+unicode_name(0x31A3, 'BOPOMOFO LETTER GU').
+unicode_name(0x31A4, 'BOPOMOFO LETTER EE').
+unicode_name(0x31A5, 'BOPOMOFO LETTER ENN').
+unicode_name(0x31A6, 'BOPOMOFO LETTER OO').
+unicode_name(0x31A7, 'BOPOMOFO LETTER ONN').
+unicode_name(0x31A8, 'BOPOMOFO LETTER IR').
+unicode_name(0x31A9, 'BOPOMOFO LETTER ANN').
+unicode_name(0x31AA, 'BOPOMOFO LETTER INN').
+unicode_name(0x31AB, 'BOPOMOFO LETTER UNN').
+unicode_name(0x31AC, 'BOPOMOFO LETTER IM').
+unicode_name(0x31AD, 'BOPOMOFO LETTER NGG').
+unicode_name(0x31AE, 'BOPOMOFO LETTER AINN').
+unicode_name(0x31AF, 'BOPOMOFO LETTER AUNN').
+unicode_name(0x31B0, 'BOPOMOFO LETTER AM').
+unicode_name(0x31B1, 'BOPOMOFO LETTER OM').
+unicode_name(0x31B2, 'BOPOMOFO LETTER ONG').
+unicode_name(0x31B3, 'BOPOMOFO LETTER INNN').
+unicode_name(0x31B4, 'BOPOMOFO FINAL LETTER P').
+unicode_name(0x31B5, 'BOPOMOFO FINAL LETTER T').
+unicode_name(0x31B6, 'BOPOMOFO FINAL LETTER K').
+unicode_name(0x31B7, 'BOPOMOFO FINAL LETTER H').
+unicode_name(0x31B8, 'BOPOMOFO LETTER GH').
+unicode_name(0x31B9, 'BOPOMOFO LETTER LH').
+unicode_name(0x31BA, 'BOPOMOFO LETTER ZY').
+unicode_name(0x31F0, 'KATAKANA LETTER SMALL KU').
+unicode_name(0x31F1, 'KATAKANA LETTER SMALL SI').
+unicode_name(0x31F2, 'KATAKANA LETTER SMALL SU').
+unicode_name(0x31F3, 'KATAKANA LETTER SMALL TO').
+unicode_name(0x31F4, 'KATAKANA LETTER SMALL NU').
+unicode_name(0x31F5, 'KATAKANA LETTER SMALL HA').
+unicode_name(0x31F6, 'KATAKANA LETTER SMALL HI').
+unicode_name(0x31F7, 'KATAKANA LETTER SMALL HU').
+unicode_name(0x31F8, 'KATAKANA LETTER SMALL HE').
+unicode_name(0x31F9, 'KATAKANA LETTER SMALL HO').
+unicode_name(0x31FA, 'KATAKANA LETTER SMALL MU').
+unicode_name(0x31FB, 'KATAKANA LETTER SMALL RA').
+unicode_name(0x31FC, 'KATAKANA LETTER SMALL RI').
+unicode_name(0x31FD, 'KATAKANA LETTER SMALL RU').
+unicode_name(0x31FE, 'KATAKANA LETTER SMALL RE').
+unicode_name(0x31FF, 'KATAKANA LETTER SMALL RO').
+unicode_name(0x3400, '<CJK Ideograph Extension A, First>').
+unicode_name(0x4DB5, '<CJK Ideograph Extension A, Last>').
+unicode_name(0x4E00, '<CJK Ideograph, First>').
+unicode_name(0x9FCC, '<CJK Ideograph, Last>').
+unicode_name(0xA000, 'YI SYLLABLE IT').
+unicode_name(0xA001, 'YI SYLLABLE IX').
+unicode_name(0xA002, 'YI SYLLABLE I').
+unicode_name(0xA003, 'YI SYLLABLE IP').
+unicode_name(0xA004, 'YI SYLLABLE IET').
+unicode_name(0xA005, 'YI SYLLABLE IEX').
+unicode_name(0xA006, 'YI SYLLABLE IE').
+unicode_name(0xA007, 'YI SYLLABLE IEP').
+unicode_name(0xA008, 'YI SYLLABLE AT').
+unicode_name(0xA009, 'YI SYLLABLE AX').
+unicode_name(0xA00A, 'YI SYLLABLE A').
+unicode_name(0xA00B, 'YI SYLLABLE AP').
+unicode_name(0xA00C, 'YI SYLLABLE UOX').
+unicode_name(0xA00D, 'YI SYLLABLE UO').
+unicode_name(0xA00E, 'YI SYLLABLE UOP').
+unicode_name(0xA00F, 'YI SYLLABLE OT').
+unicode_name(0xA010, 'YI SYLLABLE OX').
+unicode_name(0xA011, 'YI SYLLABLE O').
+unicode_name(0xA012, 'YI SYLLABLE OP').
+unicode_name(0xA013, 'YI SYLLABLE EX').
+unicode_name(0xA014, 'YI SYLLABLE E').
+unicode_name(0xA016, 'YI SYLLABLE BIT').
+unicode_name(0xA017, 'YI SYLLABLE BIX').
+unicode_name(0xA018, 'YI SYLLABLE BI').
+unicode_name(0xA019, 'YI SYLLABLE BIP').
+unicode_name(0xA01A, 'YI SYLLABLE BIET').
+unicode_name(0xA01B, 'YI SYLLABLE BIEX').
+unicode_name(0xA01C, 'YI SYLLABLE BIE').
+unicode_name(0xA01D, 'YI SYLLABLE BIEP').
+unicode_name(0xA01E, 'YI SYLLABLE BAT').
+unicode_name(0xA01F, 'YI SYLLABLE BAX').
+unicode_name(0xA020, 'YI SYLLABLE BA').
+unicode_name(0xA021, 'YI SYLLABLE BAP').
+unicode_name(0xA022, 'YI SYLLABLE BUOX').
+unicode_name(0xA023, 'YI SYLLABLE BUO').
+unicode_name(0xA024, 'YI SYLLABLE BUOP').
+unicode_name(0xA025, 'YI SYLLABLE BOT').
+unicode_name(0xA026, 'YI SYLLABLE BOX').
+unicode_name(0xA027, 'YI SYLLABLE BO').
+unicode_name(0xA028, 'YI SYLLABLE BOP').
+unicode_name(0xA029, 'YI SYLLABLE BEX').
+unicode_name(0xA02A, 'YI SYLLABLE BE').
+unicode_name(0xA02B, 'YI SYLLABLE BEP').
+unicode_name(0xA02C, 'YI SYLLABLE BUT').
+unicode_name(0xA02D, 'YI SYLLABLE BUX').
+unicode_name(0xA02E, 'YI SYLLABLE BU').
+unicode_name(0xA02F, 'YI SYLLABLE BUP').
+unicode_name(0xA030, 'YI SYLLABLE BURX').
+unicode_name(0xA031, 'YI SYLLABLE BUR').
+unicode_name(0xA032, 'YI SYLLABLE BYT').
+unicode_name(0xA033, 'YI SYLLABLE BYX').
+unicode_name(0xA034, 'YI SYLLABLE BY').
+unicode_name(0xA035, 'YI SYLLABLE BYP').
+unicode_name(0xA036, 'YI SYLLABLE BYRX').
+unicode_name(0xA037, 'YI SYLLABLE BYR').
+unicode_name(0xA038, 'YI SYLLABLE PIT').
+unicode_name(0xA039, 'YI SYLLABLE PIX').
+unicode_name(0xA03A, 'YI SYLLABLE PI').
+unicode_name(0xA03B, 'YI SYLLABLE PIP').
+unicode_name(0xA03C, 'YI SYLLABLE PIEX').
+unicode_name(0xA03D, 'YI SYLLABLE PIE').
+unicode_name(0xA03E, 'YI SYLLABLE PIEP').
+unicode_name(0xA03F, 'YI SYLLABLE PAT').
+unicode_name(0xA040, 'YI SYLLABLE PAX').
+unicode_name(0xA041, 'YI SYLLABLE PA').
+unicode_name(0xA042, 'YI SYLLABLE PAP').
+unicode_name(0xA043, 'YI SYLLABLE PUOX').
+unicode_name(0xA044, 'YI SYLLABLE PUO').
+unicode_name(0xA045, 'YI SYLLABLE PUOP').
+unicode_name(0xA046, 'YI SYLLABLE POT').
+unicode_name(0xA047, 'YI SYLLABLE POX').
+unicode_name(0xA048, 'YI SYLLABLE PO').
+unicode_name(0xA049, 'YI SYLLABLE POP').
+unicode_name(0xA04A, 'YI SYLLABLE PUT').
+unicode_name(0xA04B, 'YI SYLLABLE PUX').
+unicode_name(0xA04C, 'YI SYLLABLE PU').
+unicode_name(0xA04D, 'YI SYLLABLE PUP').
+unicode_name(0xA04E, 'YI SYLLABLE PURX').
+unicode_name(0xA04F, 'YI SYLLABLE PUR').
+unicode_name(0xA050, 'YI SYLLABLE PYT').
+unicode_name(0xA051, 'YI SYLLABLE PYX').
+unicode_name(0xA052, 'YI SYLLABLE PY').
+unicode_name(0xA053, 'YI SYLLABLE PYP').
+unicode_name(0xA054, 'YI SYLLABLE PYRX').
+unicode_name(0xA055, 'YI SYLLABLE PYR').
+unicode_name(0xA056, 'YI SYLLABLE BBIT').
+unicode_name(0xA057, 'YI SYLLABLE BBIX').
+unicode_name(0xA058, 'YI SYLLABLE BBI').
+unicode_name(0xA059, 'YI SYLLABLE BBIP').
+unicode_name(0xA05A, 'YI SYLLABLE BBIET').
+unicode_name(0xA05B, 'YI SYLLABLE BBIEX').
+unicode_name(0xA05C, 'YI SYLLABLE BBIE').
+unicode_name(0xA05D, 'YI SYLLABLE BBIEP').
+unicode_name(0xA05E, 'YI SYLLABLE BBAT').
+unicode_name(0xA05F, 'YI SYLLABLE BBAX').
+unicode_name(0xA060, 'YI SYLLABLE BBA').
+unicode_name(0xA061, 'YI SYLLABLE BBAP').
+unicode_name(0xA062, 'YI SYLLABLE BBUOX').
+unicode_name(0xA063, 'YI SYLLABLE BBUO').
+unicode_name(0xA064, 'YI SYLLABLE BBUOP').
+unicode_name(0xA065, 'YI SYLLABLE BBOT').
+unicode_name(0xA066, 'YI SYLLABLE BBOX').
+unicode_name(0xA067, 'YI SYLLABLE BBO').
+unicode_name(0xA068, 'YI SYLLABLE BBOP').
+unicode_name(0xA069, 'YI SYLLABLE BBEX').
+unicode_name(0xA06A, 'YI SYLLABLE BBE').
+unicode_name(0xA06B, 'YI SYLLABLE BBEP').
+unicode_name(0xA06C, 'YI SYLLABLE BBUT').
+unicode_name(0xA06D, 'YI SYLLABLE BBUX').
+unicode_name(0xA06E, 'YI SYLLABLE BBU').
+unicode_name(0xA06F, 'YI SYLLABLE BBUP').
+unicode_name(0xA070, 'YI SYLLABLE BBURX').
+unicode_name(0xA071, 'YI SYLLABLE BBUR').
+unicode_name(0xA072, 'YI SYLLABLE BBYT').
+unicode_name(0xA073, 'YI SYLLABLE BBYX').
+unicode_name(0xA074, 'YI SYLLABLE BBY').
+unicode_name(0xA075, 'YI SYLLABLE BBYP').
+unicode_name(0xA076, 'YI SYLLABLE NBIT').
+unicode_name(0xA077, 'YI SYLLABLE NBIX').
+unicode_name(0xA078, 'YI SYLLABLE NBI').
+unicode_name(0xA079, 'YI SYLLABLE NBIP').
+unicode_name(0xA07A, 'YI SYLLABLE NBIEX').
+unicode_name(0xA07B, 'YI SYLLABLE NBIE').
+unicode_name(0xA07C, 'YI SYLLABLE NBIEP').
+unicode_name(0xA07D, 'YI SYLLABLE NBAT').
+unicode_name(0xA07E, 'YI SYLLABLE NBAX').
+unicode_name(0xA07F, 'YI SYLLABLE NBA').
+unicode_name(0xA080, 'YI SYLLABLE NBAP').
+unicode_name(0xA081, 'YI SYLLABLE NBOT').
+unicode_name(0xA082, 'YI SYLLABLE NBOX').
+unicode_name(0xA083, 'YI SYLLABLE NBO').
+unicode_name(0xA084, 'YI SYLLABLE NBOP').
+unicode_name(0xA085, 'YI SYLLABLE NBUT').
+unicode_name(0xA086, 'YI SYLLABLE NBUX').
+unicode_name(0xA087, 'YI SYLLABLE NBU').
+unicode_name(0xA088, 'YI SYLLABLE NBUP').
+unicode_name(0xA089, 'YI SYLLABLE NBURX').
+unicode_name(0xA08A, 'YI SYLLABLE NBUR').
+unicode_name(0xA08B, 'YI SYLLABLE NBYT').
+unicode_name(0xA08C, 'YI SYLLABLE NBYX').
+unicode_name(0xA08D, 'YI SYLLABLE NBY').
+unicode_name(0xA08E, 'YI SYLLABLE NBYP').
+unicode_name(0xA08F, 'YI SYLLABLE NBYRX').
+unicode_name(0xA090, 'YI SYLLABLE NBYR').
+unicode_name(0xA091, 'YI SYLLABLE HMIT').
+unicode_name(0xA092, 'YI SYLLABLE HMIX').
+unicode_name(0xA093, 'YI SYLLABLE HMI').
+unicode_name(0xA094, 'YI SYLLABLE HMIP').
+unicode_name(0xA095, 'YI SYLLABLE HMIEX').
+unicode_name(0xA096, 'YI SYLLABLE HMIE').
+unicode_name(0xA097, 'YI SYLLABLE HMIEP').
+unicode_name(0xA098, 'YI SYLLABLE HMAT').
+unicode_name(0xA099, 'YI SYLLABLE HMAX').
+unicode_name(0xA09A, 'YI SYLLABLE HMA').
+unicode_name(0xA09B, 'YI SYLLABLE HMAP').
+unicode_name(0xA09C, 'YI SYLLABLE HMUOX').
+unicode_name(0xA09D, 'YI SYLLABLE HMUO').
+unicode_name(0xA09E, 'YI SYLLABLE HMUOP').
+unicode_name(0xA09F, 'YI SYLLABLE HMOT').
+unicode_name(0xA0A0, 'YI SYLLABLE HMOX').
+unicode_name(0xA0A1, 'YI SYLLABLE HMO').
+unicode_name(0xA0A2, 'YI SYLLABLE HMOP').
+unicode_name(0xA0A3, 'YI SYLLABLE HMUT').
+unicode_name(0xA0A4, 'YI SYLLABLE HMUX').
+unicode_name(0xA0A5, 'YI SYLLABLE HMU').
+unicode_name(0xA0A6, 'YI SYLLABLE HMUP').
+unicode_name(0xA0A7, 'YI SYLLABLE HMURX').
+unicode_name(0xA0A8, 'YI SYLLABLE HMUR').
+unicode_name(0xA0A9, 'YI SYLLABLE HMYX').
+unicode_name(0xA0AA, 'YI SYLLABLE HMY').
+unicode_name(0xA0AB, 'YI SYLLABLE HMYP').
+unicode_name(0xA0AC, 'YI SYLLABLE HMYRX').
+unicode_name(0xA0AD, 'YI SYLLABLE HMYR').
+unicode_name(0xA0AE, 'YI SYLLABLE MIT').
+unicode_name(0xA0AF, 'YI SYLLABLE MIX').
+unicode_name(0xA0B0, 'YI SYLLABLE MI').
+unicode_name(0xA0B1, 'YI SYLLABLE MIP').
+unicode_name(0xA0B2, 'YI SYLLABLE MIEX').
+unicode_name(0xA0B3, 'YI SYLLABLE MIE').
+unicode_name(0xA0B4, 'YI SYLLABLE MIEP').
+unicode_name(0xA0B5, 'YI SYLLABLE MAT').
+unicode_name(0xA0B6, 'YI SYLLABLE MAX').
+unicode_name(0xA0B7, 'YI SYLLABLE MA').
+unicode_name(0xA0B8, 'YI SYLLABLE MAP').
+unicode_name(0xA0B9, 'YI SYLLABLE MUOT').
+unicode_name(0xA0BA, 'YI SYLLABLE MUOX').
+unicode_name(0xA0BB, 'YI SYLLABLE MUO').
+unicode_name(0xA0BC, 'YI SYLLABLE MUOP').
+unicode_name(0xA0BD, 'YI SYLLABLE MOT').
+unicode_name(0xA0BE, 'YI SYLLABLE MOX').
+unicode_name(0xA0BF, 'YI SYLLABLE MO').
+unicode_name(0xA0C0, 'YI SYLLABLE MOP').
+unicode_name(0xA0C1, 'YI SYLLABLE MEX').
+unicode_name(0xA0C2, 'YI SYLLABLE ME').
+unicode_name(0xA0C3, 'YI SYLLABLE MUT').
+unicode_name(0xA0C4, 'YI SYLLABLE MUX').
+unicode_name(0xA0C5, 'YI SYLLABLE MU').
+unicode_name(0xA0C6, 'YI SYLLABLE MUP').
+unicode_name(0xA0C7, 'YI SYLLABLE MURX').
+unicode_name(0xA0C8, 'YI SYLLABLE MUR').
+unicode_name(0xA0C9, 'YI SYLLABLE MYT').
+unicode_name(0xA0CA, 'YI SYLLABLE MYX').
+unicode_name(0xA0CB, 'YI SYLLABLE MY').
+unicode_name(0xA0CC, 'YI SYLLABLE MYP').
+unicode_name(0xA0CD, 'YI SYLLABLE FIT').
+unicode_name(0xA0CE, 'YI SYLLABLE FIX').
+unicode_name(0xA0CF, 'YI SYLLABLE FI').
+unicode_name(0xA0D0, 'YI SYLLABLE FIP').
+unicode_name(0xA0D1, 'YI SYLLABLE FAT').
+unicode_name(0xA0D2, 'YI SYLLABLE FAX').
+unicode_name(0xA0D3, 'YI SYLLABLE FA').
+unicode_name(0xA0D4, 'YI SYLLABLE FAP').
+unicode_name(0xA0D5, 'YI SYLLABLE FOX').
+unicode_name(0xA0D6, 'YI SYLLABLE FO').
+unicode_name(0xA0D7, 'YI SYLLABLE FOP').
+unicode_name(0xA0D8, 'YI SYLLABLE FUT').
+unicode_name(0xA0D9, 'YI SYLLABLE FUX').
+unicode_name(0xA0DA, 'YI SYLLABLE FU').
+unicode_name(0xA0DB, 'YI SYLLABLE FUP').
+unicode_name(0xA0DC, 'YI SYLLABLE FURX').
+unicode_name(0xA0DD, 'YI SYLLABLE FUR').
+unicode_name(0xA0DE, 'YI SYLLABLE FYT').
+unicode_name(0xA0DF, 'YI SYLLABLE FYX').
+unicode_name(0xA0E0, 'YI SYLLABLE FY').
+unicode_name(0xA0E1, 'YI SYLLABLE FYP').
+unicode_name(0xA0E2, 'YI SYLLABLE VIT').
+unicode_name(0xA0E3, 'YI SYLLABLE VIX').
+unicode_name(0xA0E4, 'YI SYLLABLE VI').
+unicode_name(0xA0E5, 'YI SYLLABLE VIP').
+unicode_name(0xA0E6, 'YI SYLLABLE VIET').
+unicode_name(0xA0E7, 'YI SYLLABLE VIEX').
+unicode_name(0xA0E8, 'YI SYLLABLE VIE').
+unicode_name(0xA0E9, 'YI SYLLABLE VIEP').
+unicode_name(0xA0EA, 'YI SYLLABLE VAT').
+unicode_name(0xA0EB, 'YI SYLLABLE VAX').
+unicode_name(0xA0EC, 'YI SYLLABLE VA').
+unicode_name(0xA0ED, 'YI SYLLABLE VAP').
+unicode_name(0xA0EE, 'YI SYLLABLE VOT').
+unicode_name(0xA0EF, 'YI SYLLABLE VOX').
+unicode_name(0xA0F0, 'YI SYLLABLE VO').
+unicode_name(0xA0F1, 'YI SYLLABLE VOP').
+unicode_name(0xA0F2, 'YI SYLLABLE VEX').
+unicode_name(0xA0F3, 'YI SYLLABLE VEP').
+unicode_name(0xA0F4, 'YI SYLLABLE VUT').
+unicode_name(0xA0F5, 'YI SYLLABLE VUX').
+unicode_name(0xA0F6, 'YI SYLLABLE VU').
+unicode_name(0xA0F7, 'YI SYLLABLE VUP').
+unicode_name(0xA0F8, 'YI SYLLABLE VURX').
+unicode_name(0xA0F9, 'YI SYLLABLE VUR').
+unicode_name(0xA0FA, 'YI SYLLABLE VYT').
+unicode_name(0xA0FB, 'YI SYLLABLE VYX').
+unicode_name(0xA0FC, 'YI SYLLABLE VY').
+unicode_name(0xA0FD, 'YI SYLLABLE VYP').
+unicode_name(0xA0FE, 'YI SYLLABLE VYRX').
+unicode_name(0xA0FF, 'YI SYLLABLE VYR').
+unicode_name(0xA100, 'YI SYLLABLE DIT').
+unicode_name(0xA101, 'YI SYLLABLE DIX').
+unicode_name(0xA102, 'YI SYLLABLE DI').
+unicode_name(0xA103, 'YI SYLLABLE DIP').
+unicode_name(0xA104, 'YI SYLLABLE DIEX').
+unicode_name(0xA105, 'YI SYLLABLE DIE').
+unicode_name(0xA106, 'YI SYLLABLE DIEP').
+unicode_name(0xA107, 'YI SYLLABLE DAT').
+unicode_name(0xA108, 'YI SYLLABLE DAX').
+unicode_name(0xA109, 'YI SYLLABLE DA').
+unicode_name(0xA10A, 'YI SYLLABLE DAP').
+unicode_name(0xA10B, 'YI SYLLABLE DUOX').
+unicode_name(0xA10C, 'YI SYLLABLE DUO').
+unicode_name(0xA10D, 'YI SYLLABLE DOT').
+unicode_name(0xA10E, 'YI SYLLABLE DOX').
+unicode_name(0xA10F, 'YI SYLLABLE DO').
+unicode_name(0xA110, 'YI SYLLABLE DOP').
+unicode_name(0xA111, 'YI SYLLABLE DEX').
+unicode_name(0xA112, 'YI SYLLABLE DE').
+unicode_name(0xA113, 'YI SYLLABLE DEP').
+unicode_name(0xA114, 'YI SYLLABLE DUT').
+unicode_name(0xA115, 'YI SYLLABLE DUX').
+unicode_name(0xA116, 'YI SYLLABLE DU').
+unicode_name(0xA117, 'YI SYLLABLE DUP').
+unicode_name(0xA118, 'YI SYLLABLE DURX').
+unicode_name(0xA119, 'YI SYLLABLE DUR').
+unicode_name(0xA11A, 'YI SYLLABLE TIT').
+unicode_name(0xA11B, 'YI SYLLABLE TIX').
+unicode_name(0xA11C, 'YI SYLLABLE TI').
+unicode_name(0xA11D, 'YI SYLLABLE TIP').
+unicode_name(0xA11E, 'YI SYLLABLE TIEX').
+unicode_name(0xA11F, 'YI SYLLABLE TIE').
+unicode_name(0xA120, 'YI SYLLABLE TIEP').
+unicode_name(0xA121, 'YI SYLLABLE TAT').
+unicode_name(0xA122, 'YI SYLLABLE TAX').
+unicode_name(0xA123, 'YI SYLLABLE TA').
+unicode_name(0xA124, 'YI SYLLABLE TAP').
+unicode_name(0xA125, 'YI SYLLABLE TUOT').
+unicode_name(0xA126, 'YI SYLLABLE TUOX').
+unicode_name(0xA127, 'YI SYLLABLE TUO').
+unicode_name(0xA128, 'YI SYLLABLE TUOP').
+unicode_name(0xA129, 'YI SYLLABLE TOT').
+unicode_name(0xA12A, 'YI SYLLABLE TOX').
+unicode_name(0xA12B, 'YI SYLLABLE TO').
+unicode_name(0xA12C, 'YI SYLLABLE TOP').
+unicode_name(0xA12D, 'YI SYLLABLE TEX').
+unicode_name(0xA12E, 'YI SYLLABLE TE').
+unicode_name(0xA12F, 'YI SYLLABLE TEP').
+unicode_name(0xA130, 'YI SYLLABLE TUT').
+unicode_name(0xA131, 'YI SYLLABLE TUX').
+unicode_name(0xA132, 'YI SYLLABLE TU').
+unicode_name(0xA133, 'YI SYLLABLE TUP').
+unicode_name(0xA134, 'YI SYLLABLE TURX').
+unicode_name(0xA135, 'YI SYLLABLE TUR').
+unicode_name(0xA136, 'YI SYLLABLE DDIT').
+unicode_name(0xA137, 'YI SYLLABLE DDIX').
+unicode_name(0xA138, 'YI SYLLABLE DDI').
+unicode_name(0xA139, 'YI SYLLABLE DDIP').
+unicode_name(0xA13A, 'YI SYLLABLE DDIEX').
+unicode_name(0xA13B, 'YI SYLLABLE DDIE').
+unicode_name(0xA13C, 'YI SYLLABLE DDIEP').
+unicode_name(0xA13D, 'YI SYLLABLE DDAT').
+unicode_name(0xA13E, 'YI SYLLABLE DDAX').
+unicode_name(0xA13F, 'YI SYLLABLE DDA').
+unicode_name(0xA140, 'YI SYLLABLE DDAP').
+unicode_name(0xA141, 'YI SYLLABLE DDUOX').
+unicode_name(0xA142, 'YI SYLLABLE DDUO').
+unicode_name(0xA143, 'YI SYLLABLE DDUOP').
+unicode_name(0xA144, 'YI SYLLABLE DDOT').
+unicode_name(0xA145, 'YI SYLLABLE DDOX').
+unicode_name(0xA146, 'YI SYLLABLE DDO').
+unicode_name(0xA147, 'YI SYLLABLE DDOP').
+unicode_name(0xA148, 'YI SYLLABLE DDEX').
+unicode_name(0xA149, 'YI SYLLABLE DDE').
+unicode_name(0xA14A, 'YI SYLLABLE DDEP').
+unicode_name(0xA14B, 'YI SYLLABLE DDUT').
+unicode_name(0xA14C, 'YI SYLLABLE DDUX').
+unicode_name(0xA14D, 'YI SYLLABLE DDU').
+unicode_name(0xA14E, 'YI SYLLABLE DDUP').
+unicode_name(0xA14F, 'YI SYLLABLE DDURX').
+unicode_name(0xA150, 'YI SYLLABLE DDUR').
+unicode_name(0xA151, 'YI SYLLABLE NDIT').
+unicode_name(0xA152, 'YI SYLLABLE NDIX').
+unicode_name(0xA153, 'YI SYLLABLE NDI').
+unicode_name(0xA154, 'YI SYLLABLE NDIP').
+unicode_name(0xA155, 'YI SYLLABLE NDIEX').
+unicode_name(0xA156, 'YI SYLLABLE NDIE').
+unicode_name(0xA157, 'YI SYLLABLE NDAT').
+unicode_name(0xA158, 'YI SYLLABLE NDAX').
+unicode_name(0xA159, 'YI SYLLABLE NDA').
+unicode_name(0xA15A, 'YI SYLLABLE NDAP').
+unicode_name(0xA15B, 'YI SYLLABLE NDOT').
+unicode_name(0xA15C, 'YI SYLLABLE NDOX').
+unicode_name(0xA15D, 'YI SYLLABLE NDO').
+unicode_name(0xA15E, 'YI SYLLABLE NDOP').
+unicode_name(0xA15F, 'YI SYLLABLE NDEX').
+unicode_name(0xA160, 'YI SYLLABLE NDE').
+unicode_name(0xA161, 'YI SYLLABLE NDEP').
+unicode_name(0xA162, 'YI SYLLABLE NDUT').
+unicode_name(0xA163, 'YI SYLLABLE NDUX').
+unicode_name(0xA164, 'YI SYLLABLE NDU').
+unicode_name(0xA165, 'YI SYLLABLE NDUP').
+unicode_name(0xA166, 'YI SYLLABLE NDURX').
+unicode_name(0xA167, 'YI SYLLABLE NDUR').
+unicode_name(0xA168, 'YI SYLLABLE HNIT').
+unicode_name(0xA169, 'YI SYLLABLE HNIX').
+unicode_name(0xA16A, 'YI SYLLABLE HNI').
+unicode_name(0xA16B, 'YI SYLLABLE HNIP').
+unicode_name(0xA16C, 'YI SYLLABLE HNIET').
+unicode_name(0xA16D, 'YI SYLLABLE HNIEX').
+unicode_name(0xA16E, 'YI SYLLABLE HNIE').
+unicode_name(0xA16F, 'YI SYLLABLE HNIEP').
+unicode_name(0xA170, 'YI SYLLABLE HNAT').
+unicode_name(0xA171, 'YI SYLLABLE HNAX').
+unicode_name(0xA172, 'YI SYLLABLE HNA').
+unicode_name(0xA173, 'YI SYLLABLE HNAP').
+unicode_name(0xA174, 'YI SYLLABLE HNUOX').
+unicode_name(0xA175, 'YI SYLLABLE HNUO').
+unicode_name(0xA176, 'YI SYLLABLE HNOT').
+unicode_name(0xA177, 'YI SYLLABLE HNOX').
+unicode_name(0xA178, 'YI SYLLABLE HNOP').
+unicode_name(0xA179, 'YI SYLLABLE HNEX').
+unicode_name(0xA17A, 'YI SYLLABLE HNE').
+unicode_name(0xA17B, 'YI SYLLABLE HNEP').
+unicode_name(0xA17C, 'YI SYLLABLE HNUT').
+unicode_name(0xA17D, 'YI SYLLABLE NIT').
+unicode_name(0xA17E, 'YI SYLLABLE NIX').
+unicode_name(0xA17F, 'YI SYLLABLE NI').
+unicode_name(0xA180, 'YI SYLLABLE NIP').
+unicode_name(0xA181, 'YI SYLLABLE NIEX').
+unicode_name(0xA182, 'YI SYLLABLE NIE').
+unicode_name(0xA183, 'YI SYLLABLE NIEP').
+unicode_name(0xA184, 'YI SYLLABLE NAX').
+unicode_name(0xA185, 'YI SYLLABLE NA').
+unicode_name(0xA186, 'YI SYLLABLE NAP').
+unicode_name(0xA187, 'YI SYLLABLE NUOX').
+unicode_name(0xA188, 'YI SYLLABLE NUO').
+unicode_name(0xA189, 'YI SYLLABLE NUOP').
+unicode_name(0xA18A, 'YI SYLLABLE NOT').
+unicode_name(0xA18B, 'YI SYLLABLE NOX').
+unicode_name(0xA18C, 'YI SYLLABLE NO').
+unicode_name(0xA18D, 'YI SYLLABLE NOP').
+unicode_name(0xA18E, 'YI SYLLABLE NEX').
+unicode_name(0xA18F, 'YI SYLLABLE NE').
+unicode_name(0xA190, 'YI SYLLABLE NEP').
+unicode_name(0xA191, 'YI SYLLABLE NUT').
+unicode_name(0xA192, 'YI SYLLABLE NUX').
+unicode_name(0xA193, 'YI SYLLABLE NU').
+unicode_name(0xA194, 'YI SYLLABLE NUP').
+unicode_name(0xA195, 'YI SYLLABLE NURX').
+unicode_name(0xA196, 'YI SYLLABLE NUR').
+unicode_name(0xA197, 'YI SYLLABLE HLIT').
+unicode_name(0xA198, 'YI SYLLABLE HLIX').
+unicode_name(0xA199, 'YI SYLLABLE HLI').
+unicode_name(0xA19A, 'YI SYLLABLE HLIP').
+unicode_name(0xA19B, 'YI SYLLABLE HLIEX').
+unicode_name(0xA19C, 'YI SYLLABLE HLIE').
+unicode_name(0xA19D, 'YI SYLLABLE HLIEP').
+unicode_name(0xA19E, 'YI SYLLABLE HLAT').
+unicode_name(0xA19F, 'YI SYLLABLE HLAX').
+unicode_name(0xA1A0, 'YI SYLLABLE HLA').
+unicode_name(0xA1A1, 'YI SYLLABLE HLAP').
+unicode_name(0xA1A2, 'YI SYLLABLE HLUOX').
+unicode_name(0xA1A3, 'YI SYLLABLE HLUO').
+unicode_name(0xA1A4, 'YI SYLLABLE HLUOP').
+unicode_name(0xA1A5, 'YI SYLLABLE HLOX').
+unicode_name(0xA1A6, 'YI SYLLABLE HLO').
+unicode_name(0xA1A7, 'YI SYLLABLE HLOP').
+unicode_name(0xA1A8, 'YI SYLLABLE HLEX').
+unicode_name(0xA1A9, 'YI SYLLABLE HLE').
+unicode_name(0xA1AA, 'YI SYLLABLE HLEP').
+unicode_name(0xA1AB, 'YI SYLLABLE HLUT').
+unicode_name(0xA1AC, 'YI SYLLABLE HLUX').
+unicode_name(0xA1AD, 'YI SYLLABLE HLU').
+unicode_name(0xA1AE, 'YI SYLLABLE HLUP').
+unicode_name(0xA1AF, 'YI SYLLABLE HLURX').
+unicode_name(0xA1B0, 'YI SYLLABLE HLUR').
+unicode_name(0xA1B1, 'YI SYLLABLE HLYT').
+unicode_name(0xA1B2, 'YI SYLLABLE HLYX').
+unicode_name(0xA1B3, 'YI SYLLABLE HLY').
+unicode_name(0xA1B4, 'YI SYLLABLE HLYP').
+unicode_name(0xA1B5, 'YI SYLLABLE HLYRX').
+unicode_name(0xA1B6, 'YI SYLLABLE HLYR').
+unicode_name(0xA1B7, 'YI SYLLABLE LIT').
+unicode_name(0xA1B8, 'YI SYLLABLE LIX').
+unicode_name(0xA1B9, 'YI SYLLABLE LI').
+unicode_name(0xA1BA, 'YI SYLLABLE LIP').
+unicode_name(0xA1BB, 'YI SYLLABLE LIET').
+unicode_name(0xA1BC, 'YI SYLLABLE LIEX').
+unicode_name(0xA1BD, 'YI SYLLABLE LIE').
+unicode_name(0xA1BE, 'YI SYLLABLE LIEP').
+unicode_name(0xA1BF, 'YI SYLLABLE LAT').
+unicode_name(0xA1C0, 'YI SYLLABLE LAX').
+unicode_name(0xA1C1, 'YI SYLLABLE LA').
+unicode_name(0xA1C2, 'YI SYLLABLE LAP').
+unicode_name(0xA1C3, 'YI SYLLABLE LUOT').
+unicode_name(0xA1C4, 'YI SYLLABLE LUOX').
+unicode_name(0xA1C5, 'YI SYLLABLE LUO').
+unicode_name(0xA1C6, 'YI SYLLABLE LUOP').
+unicode_name(0xA1C7, 'YI SYLLABLE LOT').
+unicode_name(0xA1C8, 'YI SYLLABLE LOX').
+unicode_name(0xA1C9, 'YI SYLLABLE LO').
+unicode_name(0xA1CA, 'YI SYLLABLE LOP').
+unicode_name(0xA1CB, 'YI SYLLABLE LEX').
+unicode_name(0xA1CC, 'YI SYLLABLE LE').
+unicode_name(0xA1CD, 'YI SYLLABLE LEP').
+unicode_name(0xA1CE, 'YI SYLLABLE LUT').
+unicode_name(0xA1CF, 'YI SYLLABLE LUX').
+unicode_name(0xA1D0, 'YI SYLLABLE LU').
+unicode_name(0xA1D1, 'YI SYLLABLE LUP').
+unicode_name(0xA1D2, 'YI SYLLABLE LURX').
+unicode_name(0xA1D3, 'YI SYLLABLE LUR').
+unicode_name(0xA1D4, 'YI SYLLABLE LYT').
+unicode_name(0xA1D5, 'YI SYLLABLE LYX').
+unicode_name(0xA1D6, 'YI SYLLABLE LY').
+unicode_name(0xA1D7, 'YI SYLLABLE LYP').
+unicode_name(0xA1D8, 'YI SYLLABLE LYRX').
+unicode_name(0xA1D9, 'YI SYLLABLE LYR').
+unicode_name(0xA1DA, 'YI SYLLABLE GIT').
+unicode_name(0xA1DB, 'YI SYLLABLE GIX').
+unicode_name(0xA1DC, 'YI SYLLABLE GI').
+unicode_name(0xA1DD, 'YI SYLLABLE GIP').
+unicode_name(0xA1DE, 'YI SYLLABLE GIET').
+unicode_name(0xA1DF, 'YI SYLLABLE GIEX').
+unicode_name(0xA1E0, 'YI SYLLABLE GIE').
+unicode_name(0xA1E1, 'YI SYLLABLE GIEP').
+unicode_name(0xA1E2, 'YI SYLLABLE GAT').
+unicode_name(0xA1E3, 'YI SYLLABLE GAX').
+unicode_name(0xA1E4, 'YI SYLLABLE GA').
+unicode_name(0xA1E5, 'YI SYLLABLE GAP').
+unicode_name(0xA1E6, 'YI SYLLABLE GUOT').
+unicode_name(0xA1E7, 'YI SYLLABLE GUOX').
+unicode_name(0xA1E8, 'YI SYLLABLE GUO').
+unicode_name(0xA1E9, 'YI SYLLABLE GUOP').
+unicode_name(0xA1EA, 'YI SYLLABLE GOT').
+unicode_name(0xA1EB, 'YI SYLLABLE GOX').
+unicode_name(0xA1EC, 'YI SYLLABLE GO').
+unicode_name(0xA1ED, 'YI SYLLABLE GOP').
+unicode_name(0xA1EE, 'YI SYLLABLE GET').
+unicode_name(0xA1EF, 'YI SYLLABLE GEX').
+unicode_name(0xA1F0, 'YI SYLLABLE GE').
+unicode_name(0xA1F1, 'YI SYLLABLE GEP').
+unicode_name(0xA1F2, 'YI SYLLABLE GUT').
+unicode_name(0xA1F3, 'YI SYLLABLE GUX').
+unicode_name(0xA1F4, 'YI SYLLABLE GU').
+unicode_name(0xA1F5, 'YI SYLLABLE GUP').
+unicode_name(0xA1F6, 'YI SYLLABLE GURX').
+unicode_name(0xA1F7, 'YI SYLLABLE GUR').
+unicode_name(0xA1F8, 'YI SYLLABLE KIT').
+unicode_name(0xA1F9, 'YI SYLLABLE KIX').
+unicode_name(0xA1FA, 'YI SYLLABLE KI').
+unicode_name(0xA1FB, 'YI SYLLABLE KIP').
+unicode_name(0xA1FC, 'YI SYLLABLE KIEX').
+unicode_name(0xA1FD, 'YI SYLLABLE KIE').
+unicode_name(0xA1FE, 'YI SYLLABLE KIEP').
+unicode_name(0xA1FF, 'YI SYLLABLE KAT').
+unicode_name(0xA200, 'YI SYLLABLE KAX').
+unicode_name(0xA201, 'YI SYLLABLE KA').
+unicode_name(0xA202, 'YI SYLLABLE KAP').
+unicode_name(0xA203, 'YI SYLLABLE KUOX').
+unicode_name(0xA204, 'YI SYLLABLE KUO').
+unicode_name(0xA205, 'YI SYLLABLE KUOP').
+unicode_name(0xA206, 'YI SYLLABLE KOT').
+unicode_name(0xA207, 'YI SYLLABLE KOX').
+unicode_name(0xA208, 'YI SYLLABLE KO').
+unicode_name(0xA209, 'YI SYLLABLE KOP').
+unicode_name(0xA20A, 'YI SYLLABLE KET').
+unicode_name(0xA20B, 'YI SYLLABLE KEX').
+unicode_name(0xA20C, 'YI SYLLABLE KE').
+unicode_name(0xA20D, 'YI SYLLABLE KEP').
+unicode_name(0xA20E, 'YI SYLLABLE KUT').
+unicode_name(0xA20F, 'YI SYLLABLE KUX').
+unicode_name(0xA210, 'YI SYLLABLE KU').
+unicode_name(0xA211, 'YI SYLLABLE KUP').
+unicode_name(0xA212, 'YI SYLLABLE KURX').
+unicode_name(0xA213, 'YI SYLLABLE KUR').
+unicode_name(0xA214, 'YI SYLLABLE GGIT').
+unicode_name(0xA215, 'YI SYLLABLE GGIX').
+unicode_name(0xA216, 'YI SYLLABLE GGI').
+unicode_name(0xA217, 'YI SYLLABLE GGIEX').
+unicode_name(0xA218, 'YI SYLLABLE GGIE').
+unicode_name(0xA219, 'YI SYLLABLE GGIEP').
+unicode_name(0xA21A, 'YI SYLLABLE GGAT').
+unicode_name(0xA21B, 'YI SYLLABLE GGAX').
+unicode_name(0xA21C, 'YI SYLLABLE GGA').
+unicode_name(0xA21D, 'YI SYLLABLE GGAP').
+unicode_name(0xA21E, 'YI SYLLABLE GGUOT').
+unicode_name(0xA21F, 'YI SYLLABLE GGUOX').
+unicode_name(0xA220, 'YI SYLLABLE GGUO').
+unicode_name(0xA221, 'YI SYLLABLE GGUOP').
+unicode_name(0xA222, 'YI SYLLABLE GGOT').
+unicode_name(0xA223, 'YI SYLLABLE GGOX').
+unicode_name(0xA224, 'YI SYLLABLE GGO').
+unicode_name(0xA225, 'YI SYLLABLE GGOP').
+unicode_name(0xA226, 'YI SYLLABLE GGET').
+unicode_name(0xA227, 'YI SYLLABLE GGEX').
+unicode_name(0xA228, 'YI SYLLABLE GGE').
+unicode_name(0xA229, 'YI SYLLABLE GGEP').
+unicode_name(0xA22A, 'YI SYLLABLE GGUT').
+unicode_name(0xA22B, 'YI SYLLABLE GGUX').
+unicode_name(0xA22C, 'YI SYLLABLE GGU').
+unicode_name(0xA22D, 'YI SYLLABLE GGUP').
+unicode_name(0xA22E, 'YI SYLLABLE GGURX').
+unicode_name(0xA22F, 'YI SYLLABLE GGUR').
+unicode_name(0xA230, 'YI SYLLABLE MGIEX').
+unicode_name(0xA231, 'YI SYLLABLE MGIE').
+unicode_name(0xA232, 'YI SYLLABLE MGAT').
+unicode_name(0xA233, 'YI SYLLABLE MGAX').
+unicode_name(0xA234, 'YI SYLLABLE MGA').
+unicode_name(0xA235, 'YI SYLLABLE MGAP').
+unicode_name(0xA236, 'YI SYLLABLE MGUOX').
+unicode_name(0xA237, 'YI SYLLABLE MGUO').
+unicode_name(0xA238, 'YI SYLLABLE MGUOP').
+unicode_name(0xA239, 'YI SYLLABLE MGOT').
+unicode_name(0xA23A, 'YI SYLLABLE MGOX').
+unicode_name(0xA23B, 'YI SYLLABLE MGO').
+unicode_name(0xA23C, 'YI SYLLABLE MGOP').
+unicode_name(0xA23D, 'YI SYLLABLE MGEX').
+unicode_name(0xA23E, 'YI SYLLABLE MGE').
+unicode_name(0xA23F, 'YI SYLLABLE MGEP').
+unicode_name(0xA240, 'YI SYLLABLE MGUT').
+unicode_name(0xA241, 'YI SYLLABLE MGUX').
+unicode_name(0xA242, 'YI SYLLABLE MGU').
+unicode_name(0xA243, 'YI SYLLABLE MGUP').
+unicode_name(0xA244, 'YI SYLLABLE MGURX').
+unicode_name(0xA245, 'YI SYLLABLE MGUR').
+unicode_name(0xA246, 'YI SYLLABLE HXIT').
+unicode_name(0xA247, 'YI SYLLABLE HXIX').
+unicode_name(0xA248, 'YI SYLLABLE HXI').
+unicode_name(0xA249, 'YI SYLLABLE HXIP').
+unicode_name(0xA24A, 'YI SYLLABLE HXIET').
+unicode_name(0xA24B, 'YI SYLLABLE HXIEX').
+unicode_name(0xA24C, 'YI SYLLABLE HXIE').
+unicode_name(0xA24D, 'YI SYLLABLE HXIEP').
+unicode_name(0xA24E, 'YI SYLLABLE HXAT').
+unicode_name(0xA24F, 'YI SYLLABLE HXAX').
+unicode_name(0xA250, 'YI SYLLABLE HXA').
+unicode_name(0xA251, 'YI SYLLABLE HXAP').
+unicode_name(0xA252, 'YI SYLLABLE HXUOT').
+unicode_name(0xA253, 'YI SYLLABLE HXUOX').
+unicode_name(0xA254, 'YI SYLLABLE HXUO').
+unicode_name(0xA255, 'YI SYLLABLE HXUOP').
+unicode_name(0xA256, 'YI SYLLABLE HXOT').
+unicode_name(0xA257, 'YI SYLLABLE HXOX').
+unicode_name(0xA258, 'YI SYLLABLE HXO').
+unicode_name(0xA259, 'YI SYLLABLE HXOP').
+unicode_name(0xA25A, 'YI SYLLABLE HXEX').
+unicode_name(0xA25B, 'YI SYLLABLE HXE').
+unicode_name(0xA25C, 'YI SYLLABLE HXEP').
+unicode_name(0xA25D, 'YI SYLLABLE NGIEX').
+unicode_name(0xA25E, 'YI SYLLABLE NGIE').
+unicode_name(0xA25F, 'YI SYLLABLE NGIEP').
+unicode_name(0xA260, 'YI SYLLABLE NGAT').
+unicode_name(0xA261, 'YI SYLLABLE NGAX').
+unicode_name(0xA262, 'YI SYLLABLE NGA').
+unicode_name(0xA263, 'YI SYLLABLE NGAP').
+unicode_name(0xA264, 'YI SYLLABLE NGUOT').
+unicode_name(0xA265, 'YI SYLLABLE NGUOX').
+unicode_name(0xA266, 'YI SYLLABLE NGUO').
+unicode_name(0xA267, 'YI SYLLABLE NGOT').
+unicode_name(0xA268, 'YI SYLLABLE NGOX').
+unicode_name(0xA269, 'YI SYLLABLE NGO').
+unicode_name(0xA26A, 'YI SYLLABLE NGOP').
+unicode_name(0xA26B, 'YI SYLLABLE NGEX').
+unicode_name(0xA26C, 'YI SYLLABLE NGE').
+unicode_name(0xA26D, 'YI SYLLABLE NGEP').
+unicode_name(0xA26E, 'YI SYLLABLE HIT').
+unicode_name(0xA26F, 'YI SYLLABLE HIEX').
+unicode_name(0xA270, 'YI SYLLABLE HIE').
+unicode_name(0xA271, 'YI SYLLABLE HAT').
+unicode_name(0xA272, 'YI SYLLABLE HAX').
+unicode_name(0xA273, 'YI SYLLABLE HA').
+unicode_name(0xA274, 'YI SYLLABLE HAP').
+unicode_name(0xA275, 'YI SYLLABLE HUOT').
+unicode_name(0xA276, 'YI SYLLABLE HUOX').
+unicode_name(0xA277, 'YI SYLLABLE HUO').
+unicode_name(0xA278, 'YI SYLLABLE HUOP').
+unicode_name(0xA279, 'YI SYLLABLE HOT').
+unicode_name(0xA27A, 'YI SYLLABLE HOX').
+unicode_name(0xA27B, 'YI SYLLABLE HO').
+unicode_name(0xA27C, 'YI SYLLABLE HOP').
+unicode_name(0xA27D, 'YI SYLLABLE HEX').
+unicode_name(0xA27E, 'YI SYLLABLE HE').
+unicode_name(0xA27F, 'YI SYLLABLE HEP').
+unicode_name(0xA280, 'YI SYLLABLE WAT').
+unicode_name(0xA281, 'YI SYLLABLE WAX').
+unicode_name(0xA282, 'YI SYLLABLE WA').
+unicode_name(0xA283, 'YI SYLLABLE WAP').
+unicode_name(0xA284, 'YI SYLLABLE WUOX').
+unicode_name(0xA285, 'YI SYLLABLE WUO').
+unicode_name(0xA286, 'YI SYLLABLE WUOP').
+unicode_name(0xA287, 'YI SYLLABLE WOX').
+unicode_name(0xA288, 'YI SYLLABLE WO').
+unicode_name(0xA289, 'YI SYLLABLE WOP').
+unicode_name(0xA28A, 'YI SYLLABLE WEX').
+unicode_name(0xA28B, 'YI SYLLABLE WE').
+unicode_name(0xA28C, 'YI SYLLABLE WEP').
+unicode_name(0xA28D, 'YI SYLLABLE ZIT').
+unicode_name(0xA28E, 'YI SYLLABLE ZIX').
+unicode_name(0xA28F, 'YI SYLLABLE ZI').
+unicode_name(0xA290, 'YI SYLLABLE ZIP').
+unicode_name(0xA291, 'YI SYLLABLE ZIEX').
+unicode_name(0xA292, 'YI SYLLABLE ZIE').
+unicode_name(0xA293, 'YI SYLLABLE ZIEP').
+unicode_name(0xA294, 'YI SYLLABLE ZAT').
+unicode_name(0xA295, 'YI SYLLABLE ZAX').
+unicode_name(0xA296, 'YI SYLLABLE ZA').
+unicode_name(0xA297, 'YI SYLLABLE ZAP').
+unicode_name(0xA298, 'YI SYLLABLE ZUOX').
+unicode_name(0xA299, 'YI SYLLABLE ZUO').
+unicode_name(0xA29A, 'YI SYLLABLE ZUOP').
+unicode_name(0xA29B, 'YI SYLLABLE ZOT').
+unicode_name(0xA29C, 'YI SYLLABLE ZOX').
+unicode_name(0xA29D, 'YI SYLLABLE ZO').
+unicode_name(0xA29E, 'YI SYLLABLE ZOP').
+unicode_name(0xA29F, 'YI SYLLABLE ZEX').
+unicode_name(0xA2A0, 'YI SYLLABLE ZE').
+unicode_name(0xA2A1, 'YI SYLLABLE ZEP').
+unicode_name(0xA2A2, 'YI SYLLABLE ZUT').
+unicode_name(0xA2A3, 'YI SYLLABLE ZUX').
+unicode_name(0xA2A4, 'YI SYLLABLE ZU').
+unicode_name(0xA2A5, 'YI SYLLABLE ZUP').
+unicode_name(0xA2A6, 'YI SYLLABLE ZURX').
+unicode_name(0xA2A7, 'YI SYLLABLE ZUR').
+unicode_name(0xA2A8, 'YI SYLLABLE ZYT').
+unicode_name(0xA2A9, 'YI SYLLABLE ZYX').
+unicode_name(0xA2AA, 'YI SYLLABLE ZY').
+unicode_name(0xA2AB, 'YI SYLLABLE ZYP').
+unicode_name(0xA2AC, 'YI SYLLABLE ZYRX').
+unicode_name(0xA2AD, 'YI SYLLABLE ZYR').
+unicode_name(0xA2AE, 'YI SYLLABLE CIT').
+unicode_name(0xA2AF, 'YI SYLLABLE CIX').
+unicode_name(0xA2B0, 'YI SYLLABLE CI').
+unicode_name(0xA2B1, 'YI SYLLABLE CIP').
+unicode_name(0xA2B2, 'YI SYLLABLE CIET').
+unicode_name(0xA2B3, 'YI SYLLABLE CIEX').
+unicode_name(0xA2B4, 'YI SYLLABLE CIE').
+unicode_name(0xA2B5, 'YI SYLLABLE CIEP').
+unicode_name(0xA2B6, 'YI SYLLABLE CAT').
+unicode_name(0xA2B7, 'YI SYLLABLE CAX').
+unicode_name(0xA2B8, 'YI SYLLABLE CA').
+unicode_name(0xA2B9, 'YI SYLLABLE CAP').
+unicode_name(0xA2BA, 'YI SYLLABLE CUOX').
+unicode_name(0xA2BB, 'YI SYLLABLE CUO').
+unicode_name(0xA2BC, 'YI SYLLABLE CUOP').
+unicode_name(0xA2BD, 'YI SYLLABLE COT').
+unicode_name(0xA2BE, 'YI SYLLABLE COX').
+unicode_name(0xA2BF, 'YI SYLLABLE CO').
+unicode_name(0xA2C0, 'YI SYLLABLE COP').
+unicode_name(0xA2C1, 'YI SYLLABLE CEX').
+unicode_name(0xA2C2, 'YI SYLLABLE CE').
+unicode_name(0xA2C3, 'YI SYLLABLE CEP').
+unicode_name(0xA2C4, 'YI SYLLABLE CUT').
+unicode_name(0xA2C5, 'YI SYLLABLE CUX').
+unicode_name(0xA2C6, 'YI SYLLABLE CU').
+unicode_name(0xA2C7, 'YI SYLLABLE CUP').
+unicode_name(0xA2C8, 'YI SYLLABLE CURX').
+unicode_name(0xA2C9, 'YI SYLLABLE CUR').
+unicode_name(0xA2CA, 'YI SYLLABLE CYT').
+unicode_name(0xA2CB, 'YI SYLLABLE CYX').
+unicode_name(0xA2CC, 'YI SYLLABLE CY').
+unicode_name(0xA2CD, 'YI SYLLABLE CYP').
+unicode_name(0xA2CE, 'YI SYLLABLE CYRX').
+unicode_name(0xA2CF, 'YI SYLLABLE CYR').
+unicode_name(0xA2D0, 'YI SYLLABLE ZZIT').
+unicode_name(0xA2D1, 'YI SYLLABLE ZZIX').
+unicode_name(0xA2D2, 'YI SYLLABLE ZZI').
+unicode_name(0xA2D3, 'YI SYLLABLE ZZIP').
+unicode_name(0xA2D4, 'YI SYLLABLE ZZIET').
+unicode_name(0xA2D5, 'YI SYLLABLE ZZIEX').
+unicode_name(0xA2D6, 'YI SYLLABLE ZZIE').
+unicode_name(0xA2D7, 'YI SYLLABLE ZZIEP').
+unicode_name(0xA2D8, 'YI SYLLABLE ZZAT').
+unicode_name(0xA2D9, 'YI SYLLABLE ZZAX').
+unicode_name(0xA2DA, 'YI SYLLABLE ZZA').
+unicode_name(0xA2DB, 'YI SYLLABLE ZZAP').
+unicode_name(0xA2DC, 'YI SYLLABLE ZZOX').
+unicode_name(0xA2DD, 'YI SYLLABLE ZZO').
+unicode_name(0xA2DE, 'YI SYLLABLE ZZOP').
+unicode_name(0xA2DF, 'YI SYLLABLE ZZEX').
+unicode_name(0xA2E0, 'YI SYLLABLE ZZE').
+unicode_name(0xA2E1, 'YI SYLLABLE ZZEP').
+unicode_name(0xA2E2, 'YI SYLLABLE ZZUX').
+unicode_name(0xA2E3, 'YI SYLLABLE ZZU').
+unicode_name(0xA2E4, 'YI SYLLABLE ZZUP').
+unicode_name(0xA2E5, 'YI SYLLABLE ZZURX').
+unicode_name(0xA2E6, 'YI SYLLABLE ZZUR').
+unicode_name(0xA2E7, 'YI SYLLABLE ZZYT').
+unicode_name(0xA2E8, 'YI SYLLABLE ZZYX').
+unicode_name(0xA2E9, 'YI SYLLABLE ZZY').
+unicode_name(0xA2EA, 'YI SYLLABLE ZZYP').
+unicode_name(0xA2EB, 'YI SYLLABLE ZZYRX').
+unicode_name(0xA2EC, 'YI SYLLABLE ZZYR').
+unicode_name(0xA2ED, 'YI SYLLABLE NZIT').
+unicode_name(0xA2EE, 'YI SYLLABLE NZIX').
+unicode_name(0xA2EF, 'YI SYLLABLE NZI').
+unicode_name(0xA2F0, 'YI SYLLABLE NZIP').
+unicode_name(0xA2F1, 'YI SYLLABLE NZIEX').
+unicode_name(0xA2F2, 'YI SYLLABLE NZIE').
+unicode_name(0xA2F3, 'YI SYLLABLE NZIEP').
+unicode_name(0xA2F4, 'YI SYLLABLE NZAT').
+unicode_name(0xA2F5, 'YI SYLLABLE NZAX').
+unicode_name(0xA2F6, 'YI SYLLABLE NZA').
+unicode_name(0xA2F7, 'YI SYLLABLE NZAP').
+unicode_name(0xA2F8, 'YI SYLLABLE NZUOX').
+unicode_name(0xA2F9, 'YI SYLLABLE NZUO').
+unicode_name(0xA2FA, 'YI SYLLABLE NZOX').
+unicode_name(0xA2FB, 'YI SYLLABLE NZOP').
+unicode_name(0xA2FC, 'YI SYLLABLE NZEX').
+unicode_name(0xA2FD, 'YI SYLLABLE NZE').
+unicode_name(0xA2FE, 'YI SYLLABLE NZUX').
+unicode_name(0xA2FF, 'YI SYLLABLE NZU').
+unicode_name(0xA300, 'YI SYLLABLE NZUP').
+unicode_name(0xA301, 'YI SYLLABLE NZURX').
+unicode_name(0xA302, 'YI SYLLABLE NZUR').
+unicode_name(0xA303, 'YI SYLLABLE NZYT').
+unicode_name(0xA304, 'YI SYLLABLE NZYX').
+unicode_name(0xA305, 'YI SYLLABLE NZY').
+unicode_name(0xA306, 'YI SYLLABLE NZYP').
+unicode_name(0xA307, 'YI SYLLABLE NZYRX').
+unicode_name(0xA308, 'YI SYLLABLE NZYR').
+unicode_name(0xA309, 'YI SYLLABLE SIT').
+unicode_name(0xA30A, 'YI SYLLABLE SIX').
+unicode_name(0xA30B, 'YI SYLLABLE SI').
+unicode_name(0xA30C, 'YI SYLLABLE SIP').
+unicode_name(0xA30D, 'YI SYLLABLE SIEX').
+unicode_name(0xA30E, 'YI SYLLABLE SIE').
+unicode_name(0xA30F, 'YI SYLLABLE SIEP').
+unicode_name(0xA310, 'YI SYLLABLE SAT').
+unicode_name(0xA311, 'YI SYLLABLE SAX').
+unicode_name(0xA312, 'YI SYLLABLE SA').
+unicode_name(0xA313, 'YI SYLLABLE SAP').
+unicode_name(0xA314, 'YI SYLLABLE SUOX').
+unicode_name(0xA315, 'YI SYLLABLE SUO').
+unicode_name(0xA316, 'YI SYLLABLE SUOP').
+unicode_name(0xA317, 'YI SYLLABLE SOT').
+unicode_name(0xA318, 'YI SYLLABLE SOX').
+unicode_name(0xA319, 'YI SYLLABLE SO').
+unicode_name(0xA31A, 'YI SYLLABLE SOP').
+unicode_name(0xA31B, 'YI SYLLABLE SEX').
+unicode_name(0xA31C, 'YI SYLLABLE SE').
+unicode_name(0xA31D, 'YI SYLLABLE SEP').
+unicode_name(0xA31E, 'YI SYLLABLE SUT').
+unicode_name(0xA31F, 'YI SYLLABLE SUX').
+unicode_name(0xA320, 'YI SYLLABLE SU').
+unicode_name(0xA321, 'YI SYLLABLE SUP').
+unicode_name(0xA322, 'YI SYLLABLE SURX').
+unicode_name(0xA323, 'YI SYLLABLE SUR').
+unicode_name(0xA324, 'YI SYLLABLE SYT').
+unicode_name(0xA325, 'YI SYLLABLE SYX').
+unicode_name(0xA326, 'YI SYLLABLE SY').
+unicode_name(0xA327, 'YI SYLLABLE SYP').
+unicode_name(0xA328, 'YI SYLLABLE SYRX').
+unicode_name(0xA329, 'YI SYLLABLE SYR').
+unicode_name(0xA32A, 'YI SYLLABLE SSIT').
+unicode_name(0xA32B, 'YI SYLLABLE SSIX').
+unicode_name(0xA32C, 'YI SYLLABLE SSI').
+unicode_name(0xA32D, 'YI SYLLABLE SSIP').
+unicode_name(0xA32E, 'YI SYLLABLE SSIEX').
+unicode_name(0xA32F, 'YI SYLLABLE SSIE').
+unicode_name(0xA330, 'YI SYLLABLE SSIEP').
+unicode_name(0xA331, 'YI SYLLABLE SSAT').
+unicode_name(0xA332, 'YI SYLLABLE SSAX').
+unicode_name(0xA333, 'YI SYLLABLE SSA').
+unicode_name(0xA334, 'YI SYLLABLE SSAP').
+unicode_name(0xA335, 'YI SYLLABLE SSOT').
+unicode_name(0xA336, 'YI SYLLABLE SSOX').
+unicode_name(0xA337, 'YI SYLLABLE SSO').
+unicode_name(0xA338, 'YI SYLLABLE SSOP').
+unicode_name(0xA339, 'YI SYLLABLE SSEX').
+unicode_name(0xA33A, 'YI SYLLABLE SSE').
+unicode_name(0xA33B, 'YI SYLLABLE SSEP').
+unicode_name(0xA33C, 'YI SYLLABLE SSUT').
+unicode_name(0xA33D, 'YI SYLLABLE SSUX').
+unicode_name(0xA33E, 'YI SYLLABLE SSU').
+unicode_name(0xA33F, 'YI SYLLABLE SSUP').
+unicode_name(0xA340, 'YI SYLLABLE SSYT').
+unicode_name(0xA341, 'YI SYLLABLE SSYX').
+unicode_name(0xA342, 'YI SYLLABLE SSY').
+unicode_name(0xA343, 'YI SYLLABLE SSYP').
+unicode_name(0xA344, 'YI SYLLABLE SSYRX').
+unicode_name(0xA345, 'YI SYLLABLE SSYR').
+unicode_name(0xA346, 'YI SYLLABLE ZHAT').
+unicode_name(0xA347, 'YI SYLLABLE ZHAX').
+unicode_name(0xA348, 'YI SYLLABLE ZHA').
+unicode_name(0xA349, 'YI SYLLABLE ZHAP').
+unicode_name(0xA34A, 'YI SYLLABLE ZHUOX').
+unicode_name(0xA34B, 'YI SYLLABLE ZHUO').
+unicode_name(0xA34C, 'YI SYLLABLE ZHUOP').
+unicode_name(0xA34D, 'YI SYLLABLE ZHOT').
+unicode_name(0xA34E, 'YI SYLLABLE ZHOX').
+unicode_name(0xA34F, 'YI SYLLABLE ZHO').
+unicode_name(0xA350, 'YI SYLLABLE ZHOP').
+unicode_name(0xA351, 'YI SYLLABLE ZHET').
+unicode_name(0xA352, 'YI SYLLABLE ZHEX').
+unicode_name(0xA353, 'YI SYLLABLE ZHE').
+unicode_name(0xA354, 'YI SYLLABLE ZHEP').
+unicode_name(0xA355, 'YI SYLLABLE ZHUT').
+unicode_name(0xA356, 'YI SYLLABLE ZHUX').
+unicode_name(0xA357, 'YI SYLLABLE ZHU').
+unicode_name(0xA358, 'YI SYLLABLE ZHUP').
+unicode_name(0xA359, 'YI SYLLABLE ZHURX').
+unicode_name(0xA35A, 'YI SYLLABLE ZHUR').
+unicode_name(0xA35B, 'YI SYLLABLE ZHYT').
+unicode_name(0xA35C, 'YI SYLLABLE ZHYX').
+unicode_name(0xA35D, 'YI SYLLABLE ZHY').
+unicode_name(0xA35E, 'YI SYLLABLE ZHYP').
+unicode_name(0xA35F, 'YI SYLLABLE ZHYRX').
+unicode_name(0xA360, 'YI SYLLABLE ZHYR').
+unicode_name(0xA361, 'YI SYLLABLE CHAT').
+unicode_name(0xA362, 'YI SYLLABLE CHAX').
+unicode_name(0xA363, 'YI SYLLABLE CHA').
+unicode_name(0xA364, 'YI SYLLABLE CHAP').
+unicode_name(0xA365, 'YI SYLLABLE CHUOT').
+unicode_name(0xA366, 'YI SYLLABLE CHUOX').
+unicode_name(0xA367, 'YI SYLLABLE CHUO').
+unicode_name(0xA368, 'YI SYLLABLE CHUOP').
+unicode_name(0xA369, 'YI SYLLABLE CHOT').
+unicode_name(0xA36A, 'YI SYLLABLE CHOX').
+unicode_name(0xA36B, 'YI SYLLABLE CHO').
+unicode_name(0xA36C, 'YI SYLLABLE CHOP').
+unicode_name(0xA36D, 'YI SYLLABLE CHET').
+unicode_name(0xA36E, 'YI SYLLABLE CHEX').
+unicode_name(0xA36F, 'YI SYLLABLE CHE').
+unicode_name(0xA370, 'YI SYLLABLE CHEP').
+unicode_name(0xA371, 'YI SYLLABLE CHUX').
+unicode_name(0xA372, 'YI SYLLABLE CHU').
+unicode_name(0xA373, 'YI SYLLABLE CHUP').
+unicode_name(0xA374, 'YI SYLLABLE CHURX').
+unicode_name(0xA375, 'YI SYLLABLE CHUR').
+unicode_name(0xA376, 'YI SYLLABLE CHYT').
+unicode_name(0xA377, 'YI SYLLABLE CHYX').
+unicode_name(0xA378, 'YI SYLLABLE CHY').
+unicode_name(0xA379, 'YI SYLLABLE CHYP').
+unicode_name(0xA37A, 'YI SYLLABLE CHYRX').
+unicode_name(0xA37B, 'YI SYLLABLE CHYR').
+unicode_name(0xA37C, 'YI SYLLABLE RRAX').
+unicode_name(0xA37D, 'YI SYLLABLE RRA').
+unicode_name(0xA37E, 'YI SYLLABLE RRUOX').
+unicode_name(0xA37F, 'YI SYLLABLE RRUO').
+unicode_name(0xA380, 'YI SYLLABLE RROT').
+unicode_name(0xA381, 'YI SYLLABLE RROX').
+unicode_name(0xA382, 'YI SYLLABLE RRO').
+unicode_name(0xA383, 'YI SYLLABLE RROP').
+unicode_name(0xA384, 'YI SYLLABLE RRET').
+unicode_name(0xA385, 'YI SYLLABLE RREX').
+unicode_name(0xA386, 'YI SYLLABLE RRE').
+unicode_name(0xA387, 'YI SYLLABLE RREP').
+unicode_name(0xA388, 'YI SYLLABLE RRUT').
+unicode_name(0xA389, 'YI SYLLABLE RRUX').
+unicode_name(0xA38A, 'YI SYLLABLE RRU').
+unicode_name(0xA38B, 'YI SYLLABLE RRUP').
+unicode_name(0xA38C, 'YI SYLLABLE RRURX').
+unicode_name(0xA38D, 'YI SYLLABLE RRUR').
+unicode_name(0xA38E, 'YI SYLLABLE RRYT').
+unicode_name(0xA38F, 'YI SYLLABLE RRYX').
+unicode_name(0xA390, 'YI SYLLABLE RRY').
+unicode_name(0xA391, 'YI SYLLABLE RRYP').
+unicode_name(0xA392, 'YI SYLLABLE RRYRX').
+unicode_name(0xA393, 'YI SYLLABLE RRYR').
+unicode_name(0xA394, 'YI SYLLABLE NRAT').
+unicode_name(0xA395, 'YI SYLLABLE NRAX').
+unicode_name(0xA396, 'YI SYLLABLE NRA').
+unicode_name(0xA397, 'YI SYLLABLE NRAP').
+unicode_name(0xA398, 'YI SYLLABLE NROX').
+unicode_name(0xA399, 'YI SYLLABLE NRO').
+unicode_name(0xA39A, 'YI SYLLABLE NROP').
+unicode_name(0xA39B, 'YI SYLLABLE NRET').
+unicode_name(0xA39C, 'YI SYLLABLE NREX').
+unicode_name(0xA39D, 'YI SYLLABLE NRE').
+unicode_name(0xA39E, 'YI SYLLABLE NREP').
+unicode_name(0xA39F, 'YI SYLLABLE NRUT').
+unicode_name(0xA3A0, 'YI SYLLABLE NRUX').
+unicode_name(0xA3A1, 'YI SYLLABLE NRU').
+unicode_name(0xA3A2, 'YI SYLLABLE NRUP').
+unicode_name(0xA3A3, 'YI SYLLABLE NRURX').
+unicode_name(0xA3A4, 'YI SYLLABLE NRUR').
+unicode_name(0xA3A5, 'YI SYLLABLE NRYT').
+unicode_name(0xA3A6, 'YI SYLLABLE NRYX').
+unicode_name(0xA3A7, 'YI SYLLABLE NRY').
+unicode_name(0xA3A8, 'YI SYLLABLE NRYP').
+unicode_name(0xA3A9, 'YI SYLLABLE NRYRX').
+unicode_name(0xA3AA, 'YI SYLLABLE NRYR').
+unicode_name(0xA3AB, 'YI SYLLABLE SHAT').
+unicode_name(0xA3AC, 'YI SYLLABLE SHAX').
+unicode_name(0xA3AD, 'YI SYLLABLE SHA').
+unicode_name(0xA3AE, 'YI SYLLABLE SHAP').
+unicode_name(0xA3AF, 'YI SYLLABLE SHUOX').
+unicode_name(0xA3B0, 'YI SYLLABLE SHUO').
+unicode_name(0xA3B1, 'YI SYLLABLE SHUOP').
+unicode_name(0xA3B2, 'YI SYLLABLE SHOT').
+unicode_name(0xA3B3, 'YI SYLLABLE SHOX').
+unicode_name(0xA3B4, 'YI SYLLABLE SHO').
+unicode_name(0xA3B5, 'YI SYLLABLE SHOP').
+unicode_name(0xA3B6, 'YI SYLLABLE SHET').
+unicode_name(0xA3B7, 'YI SYLLABLE SHEX').
+unicode_name(0xA3B8, 'YI SYLLABLE SHE').
+unicode_name(0xA3B9, 'YI SYLLABLE SHEP').
+unicode_name(0xA3BA, 'YI SYLLABLE SHUT').
+unicode_name(0xA3BB, 'YI SYLLABLE SHUX').
+unicode_name(0xA3BC, 'YI SYLLABLE SHU').
+unicode_name(0xA3BD, 'YI SYLLABLE SHUP').
+unicode_name(0xA3BE, 'YI SYLLABLE SHURX').
+unicode_name(0xA3BF, 'YI SYLLABLE SHUR').
+unicode_name(0xA3C0, 'YI SYLLABLE SHYT').
+unicode_name(0xA3C1, 'YI SYLLABLE SHYX').
+unicode_name(0xA3C2, 'YI SYLLABLE SHY').
+unicode_name(0xA3C3, 'YI SYLLABLE SHYP').
+unicode_name(0xA3C4, 'YI SYLLABLE SHYRX').
+unicode_name(0xA3C5, 'YI SYLLABLE SHYR').
+unicode_name(0xA3C6, 'YI SYLLABLE RAT').
+unicode_name(0xA3C7, 'YI SYLLABLE RAX').
+unicode_name(0xA3C8, 'YI SYLLABLE RA').
+unicode_name(0xA3C9, 'YI SYLLABLE RAP').
+unicode_name(0xA3CA, 'YI SYLLABLE RUOX').
+unicode_name(0xA3CB, 'YI SYLLABLE RUO').
+unicode_name(0xA3CC, 'YI SYLLABLE RUOP').
+unicode_name(0xA3CD, 'YI SYLLABLE ROT').
+unicode_name(0xA3CE, 'YI SYLLABLE ROX').
+unicode_name(0xA3CF, 'YI SYLLABLE RO').
+unicode_name(0xA3D0, 'YI SYLLABLE ROP').
+unicode_name(0xA3D1, 'YI SYLLABLE REX').
+unicode_name(0xA3D2, 'YI SYLLABLE RE').
+unicode_name(0xA3D3, 'YI SYLLABLE REP').
+unicode_name(0xA3D4, 'YI SYLLABLE RUT').
+unicode_name(0xA3D5, 'YI SYLLABLE RUX').
+unicode_name(0xA3D6, 'YI SYLLABLE RU').
+unicode_name(0xA3D7, 'YI SYLLABLE RUP').
+unicode_name(0xA3D8, 'YI SYLLABLE RURX').
+unicode_name(0xA3D9, 'YI SYLLABLE RUR').
+unicode_name(0xA3DA, 'YI SYLLABLE RYT').
+unicode_name(0xA3DB, 'YI SYLLABLE RYX').
+unicode_name(0xA3DC, 'YI SYLLABLE RY').
+unicode_name(0xA3DD, 'YI SYLLABLE RYP').
+unicode_name(0xA3DE, 'YI SYLLABLE RYRX').
+unicode_name(0xA3DF, 'YI SYLLABLE RYR').
+unicode_name(0xA3E0, 'YI SYLLABLE JIT').
+unicode_name(0xA3E1, 'YI SYLLABLE JIX').
+unicode_name(0xA3E2, 'YI SYLLABLE JI').
+unicode_name(0xA3E3, 'YI SYLLABLE JIP').
+unicode_name(0xA3E4, 'YI SYLLABLE JIET').
+unicode_name(0xA3E5, 'YI SYLLABLE JIEX').
+unicode_name(0xA3E6, 'YI SYLLABLE JIE').
+unicode_name(0xA3E7, 'YI SYLLABLE JIEP').
+unicode_name(0xA3E8, 'YI SYLLABLE JUOT').
+unicode_name(0xA3E9, 'YI SYLLABLE JUOX').
+unicode_name(0xA3EA, 'YI SYLLABLE JUO').
+unicode_name(0xA3EB, 'YI SYLLABLE JUOP').
+unicode_name(0xA3EC, 'YI SYLLABLE JOT').
+unicode_name(0xA3ED, 'YI SYLLABLE JOX').
+unicode_name(0xA3EE, 'YI SYLLABLE JO').
+unicode_name(0xA3EF, 'YI SYLLABLE JOP').
+unicode_name(0xA3F0, 'YI SYLLABLE JUT').
+unicode_name(0xA3F1, 'YI SYLLABLE JUX').
+unicode_name(0xA3F2, 'YI SYLLABLE JU').
+unicode_name(0xA3F3, 'YI SYLLABLE JUP').
+unicode_name(0xA3F4, 'YI SYLLABLE JURX').
+unicode_name(0xA3F5, 'YI SYLLABLE JUR').
+unicode_name(0xA3F6, 'YI SYLLABLE JYT').
+unicode_name(0xA3F7, 'YI SYLLABLE JYX').
+unicode_name(0xA3F8, 'YI SYLLABLE JY').
+unicode_name(0xA3F9, 'YI SYLLABLE JYP').
+unicode_name(0xA3FA, 'YI SYLLABLE JYRX').
+unicode_name(0xA3FB, 'YI SYLLABLE JYR').
+unicode_name(0xA3FC, 'YI SYLLABLE QIT').
+unicode_name(0xA3FD, 'YI SYLLABLE QIX').
+unicode_name(0xA3FE, 'YI SYLLABLE QI').
+unicode_name(0xA3FF, 'YI SYLLABLE QIP').
+unicode_name(0xA400, 'YI SYLLABLE QIET').
+unicode_name(0xA401, 'YI SYLLABLE QIEX').
+unicode_name(0xA402, 'YI SYLLABLE QIE').
+unicode_name(0xA403, 'YI SYLLABLE QIEP').
+unicode_name(0xA404, 'YI SYLLABLE QUOT').
+unicode_name(0xA405, 'YI SYLLABLE QUOX').
+unicode_name(0xA406, 'YI SYLLABLE QUO').
+unicode_name(0xA407, 'YI SYLLABLE QUOP').
+unicode_name(0xA408, 'YI SYLLABLE QOT').
+unicode_name(0xA409, 'YI SYLLABLE QOX').
+unicode_name(0xA40A, 'YI SYLLABLE QO').
+unicode_name(0xA40B, 'YI SYLLABLE QOP').
+unicode_name(0xA40C, 'YI SYLLABLE QUT').
+unicode_name(0xA40D, 'YI SYLLABLE QUX').
+unicode_name(0xA40E, 'YI SYLLABLE QU').
+unicode_name(0xA40F, 'YI SYLLABLE QUP').
+unicode_name(0xA410, 'YI SYLLABLE QURX').
+unicode_name(0xA411, 'YI SYLLABLE QUR').
+unicode_name(0xA412, 'YI SYLLABLE QYT').
+unicode_name(0xA413, 'YI SYLLABLE QYX').
+unicode_name(0xA414, 'YI SYLLABLE QY').
+unicode_name(0xA415, 'YI SYLLABLE QYP').
+unicode_name(0xA416, 'YI SYLLABLE QYRX').
+unicode_name(0xA417, 'YI SYLLABLE QYR').
+unicode_name(0xA418, 'YI SYLLABLE JJIT').
+unicode_name(0xA419, 'YI SYLLABLE JJIX').
+unicode_name(0xA41A, 'YI SYLLABLE JJI').
+unicode_name(0xA41B, 'YI SYLLABLE JJIP').
+unicode_name(0xA41C, 'YI SYLLABLE JJIET').
+unicode_name(0xA41D, 'YI SYLLABLE JJIEX').
+unicode_name(0xA41E, 'YI SYLLABLE JJIE').
+unicode_name(0xA41F, 'YI SYLLABLE JJIEP').
+unicode_name(0xA420, 'YI SYLLABLE JJUOX').
+unicode_name(0xA421, 'YI SYLLABLE JJUO').
+unicode_name(0xA422, 'YI SYLLABLE JJUOP').
+unicode_name(0xA423, 'YI SYLLABLE JJOT').
+unicode_name(0xA424, 'YI SYLLABLE JJOX').
+unicode_name(0xA425, 'YI SYLLABLE JJO').
+unicode_name(0xA426, 'YI SYLLABLE JJOP').
+unicode_name(0xA427, 'YI SYLLABLE JJUT').
+unicode_name(0xA428, 'YI SYLLABLE JJUX').
+unicode_name(0xA429, 'YI SYLLABLE JJU').
+unicode_name(0xA42A, 'YI SYLLABLE JJUP').
+unicode_name(0xA42B, 'YI SYLLABLE JJURX').
+unicode_name(0xA42C, 'YI SYLLABLE JJUR').
+unicode_name(0xA42D, 'YI SYLLABLE JJYT').
+unicode_name(0xA42E, 'YI SYLLABLE JJYX').
+unicode_name(0xA42F, 'YI SYLLABLE JJY').
+unicode_name(0xA430, 'YI SYLLABLE JJYP').
+unicode_name(0xA431, 'YI SYLLABLE NJIT').
+unicode_name(0xA432, 'YI SYLLABLE NJIX').
+unicode_name(0xA433, 'YI SYLLABLE NJI').
+unicode_name(0xA434, 'YI SYLLABLE NJIP').
+unicode_name(0xA435, 'YI SYLLABLE NJIET').
+unicode_name(0xA436, 'YI SYLLABLE NJIEX').
+unicode_name(0xA437, 'YI SYLLABLE NJIE').
+unicode_name(0xA438, 'YI SYLLABLE NJIEP').
+unicode_name(0xA439, 'YI SYLLABLE NJUOX').
+unicode_name(0xA43A, 'YI SYLLABLE NJUO').
+unicode_name(0xA43B, 'YI SYLLABLE NJOT').
+unicode_name(0xA43C, 'YI SYLLABLE NJOX').
+unicode_name(0xA43D, 'YI SYLLABLE NJO').
+unicode_name(0xA43E, 'YI SYLLABLE NJOP').
+unicode_name(0xA43F, 'YI SYLLABLE NJUX').
+unicode_name(0xA440, 'YI SYLLABLE NJU').
+unicode_name(0xA441, 'YI SYLLABLE NJUP').
+unicode_name(0xA442, 'YI SYLLABLE NJURX').
+unicode_name(0xA443, 'YI SYLLABLE NJUR').
+unicode_name(0xA444, 'YI SYLLABLE NJYT').
+unicode_name(0xA445, 'YI SYLLABLE NJYX').
+unicode_name(0xA446, 'YI SYLLABLE NJY').
+unicode_name(0xA447, 'YI SYLLABLE NJYP').
+unicode_name(0xA448, 'YI SYLLABLE NJYRX').
+unicode_name(0xA449, 'YI SYLLABLE NJYR').
+unicode_name(0xA44A, 'YI SYLLABLE NYIT').
+unicode_name(0xA44B, 'YI SYLLABLE NYIX').
+unicode_name(0xA44C, 'YI SYLLABLE NYI').
+unicode_name(0xA44D, 'YI SYLLABLE NYIP').
+unicode_name(0xA44E, 'YI SYLLABLE NYIET').
+unicode_name(0xA44F, 'YI SYLLABLE NYIEX').
+unicode_name(0xA450, 'YI SYLLABLE NYIE').
+unicode_name(0xA451, 'YI SYLLABLE NYIEP').
+unicode_name(0xA452, 'YI SYLLABLE NYUOX').
+unicode_name(0xA453, 'YI SYLLABLE NYUO').
+unicode_name(0xA454, 'YI SYLLABLE NYUOP').
+unicode_name(0xA455, 'YI SYLLABLE NYOT').
+unicode_name(0xA456, 'YI SYLLABLE NYOX').
+unicode_name(0xA457, 'YI SYLLABLE NYO').
+unicode_name(0xA458, 'YI SYLLABLE NYOP').
+unicode_name(0xA459, 'YI SYLLABLE NYUT').
+unicode_name(0xA45A, 'YI SYLLABLE NYUX').
+unicode_name(0xA45B, 'YI SYLLABLE NYU').
+unicode_name(0xA45C, 'YI SYLLABLE NYUP').
+unicode_name(0xA45D, 'YI SYLLABLE XIT').
+unicode_name(0xA45E, 'YI SYLLABLE XIX').
+unicode_name(0xA45F, 'YI SYLLABLE XI').
+unicode_name(0xA460, 'YI SYLLABLE XIP').
+unicode_name(0xA461, 'YI SYLLABLE XIET').
+unicode_name(0xA462, 'YI SYLLABLE XIEX').
+unicode_name(0xA463, 'YI SYLLABLE XIE').
+unicode_name(0xA464, 'YI SYLLABLE XIEP').
+unicode_name(0xA465, 'YI SYLLABLE XUOX').
+unicode_name(0xA466, 'YI SYLLABLE XUO').
+unicode_name(0xA467, 'YI SYLLABLE XOT').
+unicode_name(0xA468, 'YI SYLLABLE XOX').
+unicode_name(0xA469, 'YI SYLLABLE XO').
+unicode_name(0xA46A, 'YI SYLLABLE XOP').
+unicode_name(0xA46B, 'YI SYLLABLE XYT').
+unicode_name(0xA46C, 'YI SYLLABLE XYX').
+unicode_name(0xA46D, 'YI SYLLABLE XY').
+unicode_name(0xA46E, 'YI SYLLABLE XYP').
+unicode_name(0xA46F, 'YI SYLLABLE XYRX').
+unicode_name(0xA470, 'YI SYLLABLE XYR').
+unicode_name(0xA471, 'YI SYLLABLE YIT').
+unicode_name(0xA472, 'YI SYLLABLE YIX').
+unicode_name(0xA473, 'YI SYLLABLE YI').
+unicode_name(0xA474, 'YI SYLLABLE YIP').
+unicode_name(0xA475, 'YI SYLLABLE YIET').
+unicode_name(0xA476, 'YI SYLLABLE YIEX').
+unicode_name(0xA477, 'YI SYLLABLE YIE').
+unicode_name(0xA478, 'YI SYLLABLE YIEP').
+unicode_name(0xA479, 'YI SYLLABLE YUOT').
+unicode_name(0xA47A, 'YI SYLLABLE YUOX').
+unicode_name(0xA47B, 'YI SYLLABLE YUO').
+unicode_name(0xA47C, 'YI SYLLABLE YUOP').
+unicode_name(0xA47D, 'YI SYLLABLE YOT').
+unicode_name(0xA47E, 'YI SYLLABLE YOX').
+unicode_name(0xA47F, 'YI SYLLABLE YO').
+unicode_name(0xA480, 'YI SYLLABLE YOP').
+unicode_name(0xA481, 'YI SYLLABLE YUT').
+unicode_name(0xA482, 'YI SYLLABLE YUX').
+unicode_name(0xA483, 'YI SYLLABLE YU').
+unicode_name(0xA484, 'YI SYLLABLE YUP').
+unicode_name(0xA485, 'YI SYLLABLE YURX').
+unicode_name(0xA486, 'YI SYLLABLE YUR').
+unicode_name(0xA487, 'YI SYLLABLE YYT').
+unicode_name(0xA488, 'YI SYLLABLE YYX').
+unicode_name(0xA489, 'YI SYLLABLE YY').
+unicode_name(0xA48A, 'YI SYLLABLE YYP').
+unicode_name(0xA48B, 'YI SYLLABLE YYRX').
+unicode_name(0xA48C, 'YI SYLLABLE YYR').
+unicode_name(0xA4D0, 'LISU LETTER BA').
+unicode_name(0xA4D1, 'LISU LETTER PA').
+unicode_name(0xA4D2, 'LISU LETTER PHA').
+unicode_name(0xA4D3, 'LISU LETTER DA').
+unicode_name(0xA4D4, 'LISU LETTER TA').
+unicode_name(0xA4D5, 'LISU LETTER THA').
+unicode_name(0xA4D6, 'LISU LETTER GA').
+unicode_name(0xA4D7, 'LISU LETTER KA').
+unicode_name(0xA4D8, 'LISU LETTER KHA').
+unicode_name(0xA4D9, 'LISU LETTER JA').
+unicode_name(0xA4DA, 'LISU LETTER CA').
+unicode_name(0xA4DB, 'LISU LETTER CHA').
+unicode_name(0xA4DC, 'LISU LETTER DZA').
+unicode_name(0xA4DD, 'LISU LETTER TSA').
+unicode_name(0xA4DE, 'LISU LETTER TSHA').
+unicode_name(0xA4DF, 'LISU LETTER MA').
+unicode_name(0xA4E0, 'LISU LETTER NA').
+unicode_name(0xA4E1, 'LISU LETTER LA').
+unicode_name(0xA4E2, 'LISU LETTER SA').
+unicode_name(0xA4E3, 'LISU LETTER ZHA').
+unicode_name(0xA4E4, 'LISU LETTER ZA').
+unicode_name(0xA4E5, 'LISU LETTER NGA').
+unicode_name(0xA4E6, 'LISU LETTER HA').
+unicode_name(0xA4E7, 'LISU LETTER XA').
+unicode_name(0xA4E8, 'LISU LETTER HHA').
+unicode_name(0xA4E9, 'LISU LETTER FA').
+unicode_name(0xA4EA, 'LISU LETTER WA').
+unicode_name(0xA4EB, 'LISU LETTER SHA').
+unicode_name(0xA4EC, 'LISU LETTER YA').
+unicode_name(0xA4ED, 'LISU LETTER GHA').
+unicode_name(0xA4EE, 'LISU LETTER A').
+unicode_name(0xA4EF, 'LISU LETTER AE').
+unicode_name(0xA4F0, 'LISU LETTER E').
+unicode_name(0xA4F1, 'LISU LETTER EU').
+unicode_name(0xA4F2, 'LISU LETTER I').
+unicode_name(0xA4F3, 'LISU LETTER O').
+unicode_name(0xA4F4, 'LISU LETTER U').
+unicode_name(0xA4F5, 'LISU LETTER UE').
+unicode_name(0xA4F6, 'LISU LETTER UH').
+unicode_name(0xA4F7, 'LISU LETTER OE').
+unicode_name(0xA500, 'VAI SYLLABLE EE').
+unicode_name(0xA501, 'VAI SYLLABLE EEN').
+unicode_name(0xA502, 'VAI SYLLABLE HEE').
+unicode_name(0xA503, 'VAI SYLLABLE WEE').
+unicode_name(0xA504, 'VAI SYLLABLE WEEN').
+unicode_name(0xA505, 'VAI SYLLABLE PEE').
+unicode_name(0xA506, 'VAI SYLLABLE BHEE').
+unicode_name(0xA507, 'VAI SYLLABLE BEE').
+unicode_name(0xA508, 'VAI SYLLABLE MBEE').
+unicode_name(0xA509, 'VAI SYLLABLE KPEE').
+unicode_name(0xA50A, 'VAI SYLLABLE MGBEE').
+unicode_name(0xA50B, 'VAI SYLLABLE GBEE').
+unicode_name(0xA50C, 'VAI SYLLABLE FEE').
+unicode_name(0xA50D, 'VAI SYLLABLE VEE').
+unicode_name(0xA50E, 'VAI SYLLABLE TEE').
+unicode_name(0xA50F, 'VAI SYLLABLE THEE').
+unicode_name(0xA510, 'VAI SYLLABLE DHEE').
+unicode_name(0xA511, 'VAI SYLLABLE DHHEE').
+unicode_name(0xA512, 'VAI SYLLABLE LEE').
+unicode_name(0xA513, 'VAI SYLLABLE REE').
+unicode_name(0xA514, 'VAI SYLLABLE DEE').
+unicode_name(0xA515, 'VAI SYLLABLE NDEE').
+unicode_name(0xA516, 'VAI SYLLABLE SEE').
+unicode_name(0xA517, 'VAI SYLLABLE SHEE').
+unicode_name(0xA518, 'VAI SYLLABLE ZEE').
+unicode_name(0xA519, 'VAI SYLLABLE ZHEE').
+unicode_name(0xA51A, 'VAI SYLLABLE CEE').
+unicode_name(0xA51B, 'VAI SYLLABLE JEE').
+unicode_name(0xA51C, 'VAI SYLLABLE NJEE').
+unicode_name(0xA51D, 'VAI SYLLABLE YEE').
+unicode_name(0xA51E, 'VAI SYLLABLE KEE').
+unicode_name(0xA51F, 'VAI SYLLABLE NGGEE').
+unicode_name(0xA520, 'VAI SYLLABLE GEE').
+unicode_name(0xA521, 'VAI SYLLABLE MEE').
+unicode_name(0xA522, 'VAI SYLLABLE NEE').
+unicode_name(0xA523, 'VAI SYLLABLE NYEE').
+unicode_name(0xA524, 'VAI SYLLABLE I').
+unicode_name(0xA525, 'VAI SYLLABLE IN').
+unicode_name(0xA526, 'VAI SYLLABLE HI').
+unicode_name(0xA527, 'VAI SYLLABLE HIN').
+unicode_name(0xA528, 'VAI SYLLABLE WI').
+unicode_name(0xA529, 'VAI SYLLABLE WIN').
+unicode_name(0xA52A, 'VAI SYLLABLE PI').
+unicode_name(0xA52B, 'VAI SYLLABLE BHI').
+unicode_name(0xA52C, 'VAI SYLLABLE BI').
+unicode_name(0xA52D, 'VAI SYLLABLE MBI').
+unicode_name(0xA52E, 'VAI SYLLABLE KPI').
+unicode_name(0xA52F, 'VAI SYLLABLE MGBI').
+unicode_name(0xA530, 'VAI SYLLABLE GBI').
+unicode_name(0xA531, 'VAI SYLLABLE FI').
+unicode_name(0xA532, 'VAI SYLLABLE VI').
+unicode_name(0xA533, 'VAI SYLLABLE TI').
+unicode_name(0xA534, 'VAI SYLLABLE THI').
+unicode_name(0xA535, 'VAI SYLLABLE DHI').
+unicode_name(0xA536, 'VAI SYLLABLE DHHI').
+unicode_name(0xA537, 'VAI SYLLABLE LI').
+unicode_name(0xA538, 'VAI SYLLABLE RI').
+unicode_name(0xA539, 'VAI SYLLABLE DI').
+unicode_name(0xA53A, 'VAI SYLLABLE NDI').
+unicode_name(0xA53B, 'VAI SYLLABLE SI').
+unicode_name(0xA53C, 'VAI SYLLABLE SHI').
+unicode_name(0xA53D, 'VAI SYLLABLE ZI').
+unicode_name(0xA53E, 'VAI SYLLABLE ZHI').
+unicode_name(0xA53F, 'VAI SYLLABLE CI').
+unicode_name(0xA540, 'VAI SYLLABLE JI').
+unicode_name(0xA541, 'VAI SYLLABLE NJI').
+unicode_name(0xA542, 'VAI SYLLABLE YI').
+unicode_name(0xA543, 'VAI SYLLABLE KI').
+unicode_name(0xA544, 'VAI SYLLABLE NGGI').
+unicode_name(0xA545, 'VAI SYLLABLE GI').
+unicode_name(0xA546, 'VAI SYLLABLE MI').
+unicode_name(0xA547, 'VAI SYLLABLE NI').
+unicode_name(0xA548, 'VAI SYLLABLE NYI').
+unicode_name(0xA549, 'VAI SYLLABLE A').
+unicode_name(0xA54A, 'VAI SYLLABLE AN').
+unicode_name(0xA54B, 'VAI SYLLABLE NGAN').
+unicode_name(0xA54C, 'VAI SYLLABLE HA').
+unicode_name(0xA54D, 'VAI SYLLABLE HAN').
+unicode_name(0xA54E, 'VAI SYLLABLE WA').
+unicode_name(0xA54F, 'VAI SYLLABLE WAN').
+unicode_name(0xA550, 'VAI SYLLABLE PA').
+unicode_name(0xA551, 'VAI SYLLABLE BHA').
+unicode_name(0xA552, 'VAI SYLLABLE BA').
+unicode_name(0xA553, 'VAI SYLLABLE MBA').
+unicode_name(0xA554, 'VAI SYLLABLE KPA').
+unicode_name(0xA555, 'VAI SYLLABLE KPAN').
+unicode_name(0xA556, 'VAI SYLLABLE MGBA').
+unicode_name(0xA557, 'VAI SYLLABLE GBA').
+unicode_name(0xA558, 'VAI SYLLABLE FA').
+unicode_name(0xA559, 'VAI SYLLABLE VA').
+unicode_name(0xA55A, 'VAI SYLLABLE TA').
+unicode_name(0xA55B, 'VAI SYLLABLE THA').
+unicode_name(0xA55C, 'VAI SYLLABLE DHA').
+unicode_name(0xA55D, 'VAI SYLLABLE DHHA').
+unicode_name(0xA55E, 'VAI SYLLABLE LA').
+unicode_name(0xA55F, 'VAI SYLLABLE RA').
+unicode_name(0xA560, 'VAI SYLLABLE DA').
+unicode_name(0xA561, 'VAI SYLLABLE NDA').
+unicode_name(0xA562, 'VAI SYLLABLE SA').
+unicode_name(0xA563, 'VAI SYLLABLE SHA').
+unicode_name(0xA564, 'VAI SYLLABLE ZA').
+unicode_name(0xA565, 'VAI SYLLABLE ZHA').
+unicode_name(0xA566, 'VAI SYLLABLE CA').
+unicode_name(0xA567, 'VAI SYLLABLE JA').
+unicode_name(0xA568, 'VAI SYLLABLE NJA').
+unicode_name(0xA569, 'VAI SYLLABLE YA').
+unicode_name(0xA56A, 'VAI SYLLABLE KA').
+unicode_name(0xA56B, 'VAI SYLLABLE KAN').
+unicode_name(0xA56C, 'VAI SYLLABLE NGGA').
+unicode_name(0xA56D, 'VAI SYLLABLE GA').
+unicode_name(0xA56E, 'VAI SYLLABLE MA').
+unicode_name(0xA56F, 'VAI SYLLABLE NA').
+unicode_name(0xA570, 'VAI SYLLABLE NYA').
+unicode_name(0xA571, 'VAI SYLLABLE OO').
+unicode_name(0xA572, 'VAI SYLLABLE OON').
+unicode_name(0xA573, 'VAI SYLLABLE HOO').
+unicode_name(0xA574, 'VAI SYLLABLE WOO').
+unicode_name(0xA575, 'VAI SYLLABLE WOON').
+unicode_name(0xA576, 'VAI SYLLABLE POO').
+unicode_name(0xA577, 'VAI SYLLABLE BHOO').
+unicode_name(0xA578, 'VAI SYLLABLE BOO').
+unicode_name(0xA579, 'VAI SYLLABLE MBOO').
+unicode_name(0xA57A, 'VAI SYLLABLE KPOO').
+unicode_name(0xA57B, 'VAI SYLLABLE MGBOO').
+unicode_name(0xA57C, 'VAI SYLLABLE GBOO').
+unicode_name(0xA57D, 'VAI SYLLABLE FOO').
+unicode_name(0xA57E, 'VAI SYLLABLE VOO').
+unicode_name(0xA57F, 'VAI SYLLABLE TOO').
+unicode_name(0xA580, 'VAI SYLLABLE THOO').
+unicode_name(0xA581, 'VAI SYLLABLE DHOO').
+unicode_name(0xA582, 'VAI SYLLABLE DHHOO').
+unicode_name(0xA583, 'VAI SYLLABLE LOO').
+unicode_name(0xA584, 'VAI SYLLABLE ROO').
+unicode_name(0xA585, 'VAI SYLLABLE DOO').
+unicode_name(0xA586, 'VAI SYLLABLE NDOO').
+unicode_name(0xA587, 'VAI SYLLABLE SOO').
+unicode_name(0xA588, 'VAI SYLLABLE SHOO').
+unicode_name(0xA589, 'VAI SYLLABLE ZOO').
+unicode_name(0xA58A, 'VAI SYLLABLE ZHOO').
+unicode_name(0xA58B, 'VAI SYLLABLE COO').
+unicode_name(0xA58C, 'VAI SYLLABLE JOO').
+unicode_name(0xA58D, 'VAI SYLLABLE NJOO').
+unicode_name(0xA58E, 'VAI SYLLABLE YOO').
+unicode_name(0xA58F, 'VAI SYLLABLE KOO').
+unicode_name(0xA590, 'VAI SYLLABLE NGGOO').
+unicode_name(0xA591, 'VAI SYLLABLE GOO').
+unicode_name(0xA592, 'VAI SYLLABLE MOO').
+unicode_name(0xA593, 'VAI SYLLABLE NOO').
+unicode_name(0xA594, 'VAI SYLLABLE NYOO').
+unicode_name(0xA595, 'VAI SYLLABLE U').
+unicode_name(0xA596, 'VAI SYLLABLE UN').
+unicode_name(0xA597, 'VAI SYLLABLE HU').
+unicode_name(0xA598, 'VAI SYLLABLE HUN').
+unicode_name(0xA599, 'VAI SYLLABLE WU').
+unicode_name(0xA59A, 'VAI SYLLABLE WUN').
+unicode_name(0xA59B, 'VAI SYLLABLE PU').
+unicode_name(0xA59C, 'VAI SYLLABLE BHU').
+unicode_name(0xA59D, 'VAI SYLLABLE BU').
+unicode_name(0xA59E, 'VAI SYLLABLE MBU').
+unicode_name(0xA59F, 'VAI SYLLABLE KPU').
+unicode_name(0xA5A0, 'VAI SYLLABLE MGBU').
+unicode_name(0xA5A1, 'VAI SYLLABLE GBU').
+unicode_name(0xA5A2, 'VAI SYLLABLE FU').
+unicode_name(0xA5A3, 'VAI SYLLABLE VU').
+unicode_name(0xA5A4, 'VAI SYLLABLE TU').
+unicode_name(0xA5A5, 'VAI SYLLABLE THU').
+unicode_name(0xA5A6, 'VAI SYLLABLE DHU').
+unicode_name(0xA5A7, 'VAI SYLLABLE DHHU').
+unicode_name(0xA5A8, 'VAI SYLLABLE LU').
+unicode_name(0xA5A9, 'VAI SYLLABLE RU').
+unicode_name(0xA5AA, 'VAI SYLLABLE DU').
+unicode_name(0xA5AB, 'VAI SYLLABLE NDU').
+unicode_name(0xA5AC, 'VAI SYLLABLE SU').
+unicode_name(0xA5AD, 'VAI SYLLABLE SHU').
+unicode_name(0xA5AE, 'VAI SYLLABLE ZU').
+unicode_name(0xA5AF, 'VAI SYLLABLE ZHU').
+unicode_name(0xA5B0, 'VAI SYLLABLE CU').
+unicode_name(0xA5B1, 'VAI SYLLABLE JU').
+unicode_name(0xA5B2, 'VAI SYLLABLE NJU').
+unicode_name(0xA5B3, 'VAI SYLLABLE YU').
+unicode_name(0xA5B4, 'VAI SYLLABLE KU').
+unicode_name(0xA5B5, 'VAI SYLLABLE NGGU').
+unicode_name(0xA5B6, 'VAI SYLLABLE GU').
+unicode_name(0xA5B7, 'VAI SYLLABLE MU').
+unicode_name(0xA5B8, 'VAI SYLLABLE NU').
+unicode_name(0xA5B9, 'VAI SYLLABLE NYU').
+unicode_name(0xA5BA, 'VAI SYLLABLE O').
+unicode_name(0xA5BB, 'VAI SYLLABLE ON').
+unicode_name(0xA5BC, 'VAI SYLLABLE NGON').
+unicode_name(0xA5BD, 'VAI SYLLABLE HO').
+unicode_name(0xA5BE, 'VAI SYLLABLE HON').
+unicode_name(0xA5BF, 'VAI SYLLABLE WO').
+unicode_name(0xA5C0, 'VAI SYLLABLE WON').
+unicode_name(0xA5C1, 'VAI SYLLABLE PO').
+unicode_name(0xA5C2, 'VAI SYLLABLE BHO').
+unicode_name(0xA5C3, 'VAI SYLLABLE BO').
+unicode_name(0xA5C4, 'VAI SYLLABLE MBO').
+unicode_name(0xA5C5, 'VAI SYLLABLE KPO').
+unicode_name(0xA5C6, 'VAI SYLLABLE MGBO').
+unicode_name(0xA5C7, 'VAI SYLLABLE GBO').
+unicode_name(0xA5C8, 'VAI SYLLABLE GBON').
+unicode_name(0xA5C9, 'VAI SYLLABLE FO').
+unicode_name(0xA5CA, 'VAI SYLLABLE VO').
+unicode_name(0xA5CB, 'VAI SYLLABLE TO').
+unicode_name(0xA5CC, 'VAI SYLLABLE THO').
+unicode_name(0xA5CD, 'VAI SYLLABLE DHO').
+unicode_name(0xA5CE, 'VAI SYLLABLE DHHO').
+unicode_name(0xA5CF, 'VAI SYLLABLE LO').
+unicode_name(0xA5D0, 'VAI SYLLABLE RO').
+unicode_name(0xA5D1, 'VAI SYLLABLE DO').
+unicode_name(0xA5D2, 'VAI SYLLABLE NDO').
+unicode_name(0xA5D3, 'VAI SYLLABLE SO').
+unicode_name(0xA5D4, 'VAI SYLLABLE SHO').
+unicode_name(0xA5D5, 'VAI SYLLABLE ZO').
+unicode_name(0xA5D6, 'VAI SYLLABLE ZHO').
+unicode_name(0xA5D7, 'VAI SYLLABLE CO').
+unicode_name(0xA5D8, 'VAI SYLLABLE JO').
+unicode_name(0xA5D9, 'VAI SYLLABLE NJO').
+unicode_name(0xA5DA, 'VAI SYLLABLE YO').
+unicode_name(0xA5DB, 'VAI SYLLABLE KO').
+unicode_name(0xA5DC, 'VAI SYLLABLE NGGO').
+unicode_name(0xA5DD, 'VAI SYLLABLE GO').
+unicode_name(0xA5DE, 'VAI SYLLABLE MO').
+unicode_name(0xA5DF, 'VAI SYLLABLE NO').
+unicode_name(0xA5E0, 'VAI SYLLABLE NYO').
+unicode_name(0xA5E1, 'VAI SYLLABLE E').
+unicode_name(0xA5E2, 'VAI SYLLABLE EN').
+unicode_name(0xA5E3, 'VAI SYLLABLE NGEN').
+unicode_name(0xA5E4, 'VAI SYLLABLE HE').
+unicode_name(0xA5E5, 'VAI SYLLABLE HEN').
+unicode_name(0xA5E6, 'VAI SYLLABLE WE').
+unicode_name(0xA5E7, 'VAI SYLLABLE WEN').
+unicode_name(0xA5E8, 'VAI SYLLABLE PE').
+unicode_name(0xA5E9, 'VAI SYLLABLE BHE').
+unicode_name(0xA5EA, 'VAI SYLLABLE BE').
+unicode_name(0xA5EB, 'VAI SYLLABLE MBE').
+unicode_name(0xA5EC, 'VAI SYLLABLE KPE').
+unicode_name(0xA5ED, 'VAI SYLLABLE KPEN').
+unicode_name(0xA5EE, 'VAI SYLLABLE MGBE').
+unicode_name(0xA5EF, 'VAI SYLLABLE GBE').
+unicode_name(0xA5F0, 'VAI SYLLABLE GBEN').
+unicode_name(0xA5F1, 'VAI SYLLABLE FE').
+unicode_name(0xA5F2, 'VAI SYLLABLE VE').
+unicode_name(0xA5F3, 'VAI SYLLABLE TE').
+unicode_name(0xA5F4, 'VAI SYLLABLE THE').
+unicode_name(0xA5F5, 'VAI SYLLABLE DHE').
+unicode_name(0xA5F6, 'VAI SYLLABLE DHHE').
+unicode_name(0xA5F7, 'VAI SYLLABLE LE').
+unicode_name(0xA5F8, 'VAI SYLLABLE RE').
+unicode_name(0xA5F9, 'VAI SYLLABLE DE').
+unicode_name(0xA5FA, 'VAI SYLLABLE NDE').
+unicode_name(0xA5FB, 'VAI SYLLABLE SE').
+unicode_name(0xA5FC, 'VAI SYLLABLE SHE').
+unicode_name(0xA5FD, 'VAI SYLLABLE ZE').
+unicode_name(0xA5FE, 'VAI SYLLABLE ZHE').
+unicode_name(0xA5FF, 'VAI SYLLABLE CE').
+unicode_name(0xA600, 'VAI SYLLABLE JE').
+unicode_name(0xA601, 'VAI SYLLABLE NJE').
+unicode_name(0xA602, 'VAI SYLLABLE YE').
+unicode_name(0xA603, 'VAI SYLLABLE KE').
+unicode_name(0xA604, 'VAI SYLLABLE NGGE').
+unicode_name(0xA605, 'VAI SYLLABLE NGGEN').
+unicode_name(0xA606, 'VAI SYLLABLE GE').
+unicode_name(0xA607, 'VAI SYLLABLE GEN').
+unicode_name(0xA608, 'VAI SYLLABLE ME').
+unicode_name(0xA609, 'VAI SYLLABLE NE').
+unicode_name(0xA60A, 'VAI SYLLABLE NYE').
+unicode_name(0xA60B, 'VAI SYLLABLE NG').
+unicode_name(0xA610, 'VAI SYLLABLE NDOLE FA').
+unicode_name(0xA611, 'VAI SYLLABLE NDOLE KA').
+unicode_name(0xA612, 'VAI SYLLABLE NDOLE SOO').
+unicode_name(0xA613, 'VAI SYMBOL FEENG').
+unicode_name(0xA614, 'VAI SYMBOL KEENG').
+unicode_name(0xA615, 'VAI SYMBOL TING').
+unicode_name(0xA616, 'VAI SYMBOL NII').
+unicode_name(0xA617, 'VAI SYMBOL BANG').
+unicode_name(0xA618, 'VAI SYMBOL FAA').
+unicode_name(0xA619, 'VAI SYMBOL TAA').
+unicode_name(0xA61A, 'VAI SYMBOL DANG').
+unicode_name(0xA61B, 'VAI SYMBOL DOONG').
+unicode_name(0xA61C, 'VAI SYMBOL KUNG').
+unicode_name(0xA61D, 'VAI SYMBOL TONG').
+unicode_name(0xA61E, 'VAI SYMBOL DO-O').
+unicode_name(0xA61F, 'VAI SYMBOL JONG').
+unicode_name(0xA62A, 'VAI SYLLABLE NDOLE MA').
+unicode_name(0xA62B, 'VAI SYLLABLE NDOLE DO').
+unicode_name(0xA66E, 'CYRILLIC LETTER MULTIOCULAR O').
+unicode_name(0xA6A0, 'BAMUM LETTER A').
+unicode_name(0xA6A1, 'BAMUM LETTER KA').
+unicode_name(0xA6A2, 'BAMUM LETTER U').
+unicode_name(0xA6A3, 'BAMUM LETTER KU').
+unicode_name(0xA6A4, 'BAMUM LETTER EE').
+unicode_name(0xA6A5, 'BAMUM LETTER REE').
+unicode_name(0xA6A6, 'BAMUM LETTER TAE').
+unicode_name(0xA6A7, 'BAMUM LETTER O').
+unicode_name(0xA6A8, 'BAMUM LETTER NYI').
+unicode_name(0xA6A9, 'BAMUM LETTER I').
+unicode_name(0xA6AA, 'BAMUM LETTER LA').
+unicode_name(0xA6AB, 'BAMUM LETTER PA').
+unicode_name(0xA6AC, 'BAMUM LETTER RII').
+unicode_name(0xA6AD, 'BAMUM LETTER RIEE').
+unicode_name(0xA6AE, 'BAMUM LETTER LEEEE').
+unicode_name(0xA6AF, 'BAMUM LETTER MEEEE').
+unicode_name(0xA6B0, 'BAMUM LETTER TAA').
+unicode_name(0xA6B1, 'BAMUM LETTER NDAA').
+unicode_name(0xA6B2, 'BAMUM LETTER NJAEM').
+unicode_name(0xA6B3, 'BAMUM LETTER M').
+unicode_name(0xA6B4, 'BAMUM LETTER SUU').
+unicode_name(0xA6B5, 'BAMUM LETTER MU').
+unicode_name(0xA6B6, 'BAMUM LETTER SHII').
+unicode_name(0xA6B7, 'BAMUM LETTER SI').
+unicode_name(0xA6B8, 'BAMUM LETTER SHEUX').
+unicode_name(0xA6B9, 'BAMUM LETTER SEUX').
+unicode_name(0xA6BA, 'BAMUM LETTER KYEE').
+unicode_name(0xA6BB, 'BAMUM LETTER KET').
+unicode_name(0xA6BC, 'BAMUM LETTER NUAE').
+unicode_name(0xA6BD, 'BAMUM LETTER NU').
+unicode_name(0xA6BE, 'BAMUM LETTER NJUAE').
+unicode_name(0xA6BF, 'BAMUM LETTER YOQ').
+unicode_name(0xA6C0, 'BAMUM LETTER SHU').
+unicode_name(0xA6C1, 'BAMUM LETTER YUQ').
+unicode_name(0xA6C2, 'BAMUM LETTER YA').
+unicode_name(0xA6C3, 'BAMUM LETTER NSHA').
+unicode_name(0xA6C4, 'BAMUM LETTER KEUX').
+unicode_name(0xA6C5, 'BAMUM LETTER PEUX').
+unicode_name(0xA6C6, 'BAMUM LETTER NJEE').
+unicode_name(0xA6C7, 'BAMUM LETTER NTEE').
+unicode_name(0xA6C8, 'BAMUM LETTER PUE').
+unicode_name(0xA6C9, 'BAMUM LETTER WUE').
+unicode_name(0xA6CA, 'BAMUM LETTER PEE').
+unicode_name(0xA6CB, 'BAMUM LETTER FEE').
+unicode_name(0xA6CC, 'BAMUM LETTER RU').
+unicode_name(0xA6CD, 'BAMUM LETTER LU').
+unicode_name(0xA6CE, 'BAMUM LETTER MI').
+unicode_name(0xA6CF, 'BAMUM LETTER NI').
+unicode_name(0xA6D0, 'BAMUM LETTER REUX').
+unicode_name(0xA6D1, 'BAMUM LETTER RAE').
+unicode_name(0xA6D2, 'BAMUM LETTER KEN').
+unicode_name(0xA6D3, 'BAMUM LETTER NGKWAEN').
+unicode_name(0xA6D4, 'BAMUM LETTER NGGA').
+unicode_name(0xA6D5, 'BAMUM LETTER NGA').
+unicode_name(0xA6D6, 'BAMUM LETTER SHO').
+unicode_name(0xA6D7, 'BAMUM LETTER PUAE').
+unicode_name(0xA6D8, 'BAMUM LETTER FU').
+unicode_name(0xA6D9, 'BAMUM LETTER FOM').
+unicode_name(0xA6DA, 'BAMUM LETTER WA').
+unicode_name(0xA6DB, 'BAMUM LETTER NA').
+unicode_name(0xA6DC, 'BAMUM LETTER LI').
+unicode_name(0xA6DD, 'BAMUM LETTER PI').
+unicode_name(0xA6DE, 'BAMUM LETTER LOQ').
+unicode_name(0xA6DF, 'BAMUM LETTER KO').
+unicode_name(0xA6E0, 'BAMUM LETTER MBEN').
+unicode_name(0xA6E1, 'BAMUM LETTER REN').
+unicode_name(0xA6E2, 'BAMUM LETTER MEN').
+unicode_name(0xA6E3, 'BAMUM LETTER MA').
+unicode_name(0xA6E4, 'BAMUM LETTER TI').
+unicode_name(0xA6E5, 'BAMUM LETTER KI').
+unicode_name(0xA7FB, 'LATIN EPIGRAPHIC LETTER REVERSED F').
+unicode_name(0xA7FC, 'LATIN EPIGRAPHIC LETTER REVERSED P').
+unicode_name(0xA7FD, 'LATIN EPIGRAPHIC LETTER INVERTED M').
+unicode_name(0xA7FE, 'LATIN EPIGRAPHIC LETTER I LONGA').
+unicode_name(0xA7FF, 'LATIN EPIGRAPHIC LETTER ARCHAIC M').
+unicode_name(0xA800, 'SYLOTI NAGRI LETTER A').
+unicode_name(0xA801, 'SYLOTI NAGRI LETTER I').
+unicode_name(0xA803, 'SYLOTI NAGRI LETTER U').
+unicode_name(0xA804, 'SYLOTI NAGRI LETTER E').
+unicode_name(0xA805, 'SYLOTI NAGRI LETTER O').
+unicode_name(0xA807, 'SYLOTI NAGRI LETTER KO').
+unicode_name(0xA808, 'SYLOTI NAGRI LETTER KHO').
+unicode_name(0xA809, 'SYLOTI NAGRI LETTER GO').
+unicode_name(0xA80A, 'SYLOTI NAGRI LETTER GHO').
+unicode_name(0xA80C, 'SYLOTI NAGRI LETTER CO').
+unicode_name(0xA80D, 'SYLOTI NAGRI LETTER CHO').
+unicode_name(0xA80E, 'SYLOTI NAGRI LETTER JO').
+unicode_name(0xA80F, 'SYLOTI NAGRI LETTER JHO').
+unicode_name(0xA810, 'SYLOTI NAGRI LETTER TTO').
+unicode_name(0xA811, 'SYLOTI NAGRI LETTER TTHO').
+unicode_name(0xA812, 'SYLOTI NAGRI LETTER DDO').
+unicode_name(0xA813, 'SYLOTI NAGRI LETTER DDHO').
+unicode_name(0xA814, 'SYLOTI NAGRI LETTER TO').
+unicode_name(0xA815, 'SYLOTI NAGRI LETTER THO').
+unicode_name(0xA816, 'SYLOTI NAGRI LETTER DO').
+unicode_name(0xA817, 'SYLOTI NAGRI LETTER DHO').
+unicode_name(0xA818, 'SYLOTI NAGRI LETTER NO').
+unicode_name(0xA819, 'SYLOTI NAGRI LETTER PO').
+unicode_name(0xA81A, 'SYLOTI NAGRI LETTER PHO').
+unicode_name(0xA81B, 'SYLOTI NAGRI LETTER BO').
+unicode_name(0xA81C, 'SYLOTI NAGRI LETTER BHO').
+unicode_name(0xA81D, 'SYLOTI NAGRI LETTER MO').
+unicode_name(0xA81E, 'SYLOTI NAGRI LETTER RO').
+unicode_name(0xA81F, 'SYLOTI NAGRI LETTER LO').
+unicode_name(0xA820, 'SYLOTI NAGRI LETTER RRO').
+unicode_name(0xA821, 'SYLOTI NAGRI LETTER SO').
+unicode_name(0xA822, 'SYLOTI NAGRI LETTER HO').
+unicode_name(0xA840, 'PHAGS-PA LETTER KA').
+unicode_name(0xA841, 'PHAGS-PA LETTER KHA').
+unicode_name(0xA842, 'PHAGS-PA LETTER GA').
+unicode_name(0xA843, 'PHAGS-PA LETTER NGA').
+unicode_name(0xA844, 'PHAGS-PA LETTER CA').
+unicode_name(0xA845, 'PHAGS-PA LETTER CHA').
+unicode_name(0xA846, 'PHAGS-PA LETTER JA').
+unicode_name(0xA847, 'PHAGS-PA LETTER NYA').
+unicode_name(0xA848, 'PHAGS-PA LETTER TA').
+unicode_name(0xA849, 'PHAGS-PA LETTER THA').
+unicode_name(0xA84A, 'PHAGS-PA LETTER DA').
+unicode_name(0xA84B, 'PHAGS-PA LETTER NA').
+unicode_name(0xA84C, 'PHAGS-PA LETTER PA').
+unicode_name(0xA84D, 'PHAGS-PA LETTER PHA').
+unicode_name(0xA84E, 'PHAGS-PA LETTER BA').
+unicode_name(0xA84F, 'PHAGS-PA LETTER MA').
+unicode_name(0xA850, 'PHAGS-PA LETTER TSA').
+unicode_name(0xA851, 'PHAGS-PA LETTER TSHA').
+unicode_name(0xA852, 'PHAGS-PA LETTER DZA').
+unicode_name(0xA853, 'PHAGS-PA LETTER WA').
+unicode_name(0xA854, 'PHAGS-PA LETTER ZHA').
+unicode_name(0xA855, 'PHAGS-PA LETTER ZA').
+unicode_name(0xA856, 'PHAGS-PA LETTER SMALL A').
+unicode_name(0xA857, 'PHAGS-PA LETTER YA').
+unicode_name(0xA858, 'PHAGS-PA LETTER RA').
+unicode_name(0xA859, 'PHAGS-PA LETTER LA').
+unicode_name(0xA85A, 'PHAGS-PA LETTER SHA').
+unicode_name(0xA85B, 'PHAGS-PA LETTER SA').
+unicode_name(0xA85C, 'PHAGS-PA LETTER HA').
+unicode_name(0xA85D, 'PHAGS-PA LETTER A').
+unicode_name(0xA85E, 'PHAGS-PA LETTER I').
+unicode_name(0xA85F, 'PHAGS-PA LETTER U').
+unicode_name(0xA860, 'PHAGS-PA LETTER E').
+unicode_name(0xA861, 'PHAGS-PA LETTER O').
+unicode_name(0xA862, 'PHAGS-PA LETTER QA').
+unicode_name(0xA863, 'PHAGS-PA LETTER XA').
+unicode_name(0xA864, 'PHAGS-PA LETTER FA').
+unicode_name(0xA865, 'PHAGS-PA LETTER GGA').
+unicode_name(0xA866, 'PHAGS-PA LETTER EE').
+unicode_name(0xA867, 'PHAGS-PA SUBJOINED LETTER WA').
+unicode_name(0xA868, 'PHAGS-PA SUBJOINED LETTER YA').
+unicode_name(0xA869, 'PHAGS-PA LETTER TTA').
+unicode_name(0xA86A, 'PHAGS-PA LETTER TTHA').
+unicode_name(0xA86B, 'PHAGS-PA LETTER DDA').
+unicode_name(0xA86C, 'PHAGS-PA LETTER NNA').
+unicode_name(0xA86D, 'PHAGS-PA LETTER ALTERNATE YA').
+unicode_name(0xA86E, 'PHAGS-PA LETTER VOICELESS SHA').
+unicode_name(0xA86F, 'PHAGS-PA LETTER VOICED HA').
+unicode_name(0xA870, 'PHAGS-PA LETTER ASPIRATED FA').
+unicode_name(0xA871, 'PHAGS-PA SUBJOINED LETTER RA').
+unicode_name(0xA872, 'PHAGS-PA SUPERFIXED LETTER RA').
+unicode_name(0xA873, 'PHAGS-PA LETTER CANDRABINDU').
+unicode_name(0xA882, 'SAURASHTRA LETTER A').
+unicode_name(0xA883, 'SAURASHTRA LETTER AA').
+unicode_name(0xA884, 'SAURASHTRA LETTER I').
+unicode_name(0xA885, 'SAURASHTRA LETTER II').
+unicode_name(0xA886, 'SAURASHTRA LETTER U').
+unicode_name(0xA887, 'SAURASHTRA LETTER UU').
+unicode_name(0xA888, 'SAURASHTRA LETTER VOCALIC R').
+unicode_name(0xA889, 'SAURASHTRA LETTER VOCALIC RR').
+unicode_name(0xA88A, 'SAURASHTRA LETTER VOCALIC L').
+unicode_name(0xA88B, 'SAURASHTRA LETTER VOCALIC LL').
+unicode_name(0xA88C, 'SAURASHTRA LETTER E').
+unicode_name(0xA88D, 'SAURASHTRA LETTER EE').
+unicode_name(0xA88E, 'SAURASHTRA LETTER AI').
+unicode_name(0xA88F, 'SAURASHTRA LETTER O').
+unicode_name(0xA890, 'SAURASHTRA LETTER OO').
+unicode_name(0xA891, 'SAURASHTRA LETTER AU').
+unicode_name(0xA892, 'SAURASHTRA LETTER KA').
+unicode_name(0xA893, 'SAURASHTRA LETTER KHA').
+unicode_name(0xA894, 'SAURASHTRA LETTER GA').
+unicode_name(0xA895, 'SAURASHTRA LETTER GHA').
+unicode_name(0xA896, 'SAURASHTRA LETTER NGA').
+unicode_name(0xA897, 'SAURASHTRA LETTER CA').
+unicode_name(0xA898, 'SAURASHTRA LETTER CHA').
+unicode_name(0xA899, 'SAURASHTRA LETTER JA').
+unicode_name(0xA89A, 'SAURASHTRA LETTER JHA').
+unicode_name(0xA89B, 'SAURASHTRA LETTER NYA').
+unicode_name(0xA89C, 'SAURASHTRA LETTER TTA').
+unicode_name(0xA89D, 'SAURASHTRA LETTER TTHA').
+unicode_name(0xA89E, 'SAURASHTRA LETTER DDA').
+unicode_name(0xA89F, 'SAURASHTRA LETTER DDHA').
+unicode_name(0xA8A0, 'SAURASHTRA LETTER NNA').
+unicode_name(0xA8A1, 'SAURASHTRA LETTER TA').
+unicode_name(0xA8A2, 'SAURASHTRA LETTER THA').
+unicode_name(0xA8A3, 'SAURASHTRA LETTER DA').
+unicode_name(0xA8A4, 'SAURASHTRA LETTER DHA').
+unicode_name(0xA8A5, 'SAURASHTRA LETTER NA').
+unicode_name(0xA8A6, 'SAURASHTRA LETTER PA').
+unicode_name(0xA8A7, 'SAURASHTRA LETTER PHA').
+unicode_name(0xA8A8, 'SAURASHTRA LETTER BA').
+unicode_name(0xA8A9, 'SAURASHTRA LETTER BHA').
+unicode_name(0xA8AA, 'SAURASHTRA LETTER MA').
+unicode_name(0xA8AB, 'SAURASHTRA LETTER YA').
+unicode_name(0xA8AC, 'SAURASHTRA LETTER RA').
+unicode_name(0xA8AD, 'SAURASHTRA LETTER LA').
+unicode_name(0xA8AE, 'SAURASHTRA LETTER VA').
+unicode_name(0xA8AF, 'SAURASHTRA LETTER SHA').
+unicode_name(0xA8B0, 'SAURASHTRA LETTER SSA').
+unicode_name(0xA8B1, 'SAURASHTRA LETTER SA').
+unicode_name(0xA8B2, 'SAURASHTRA LETTER HA').
+unicode_name(0xA8B3, 'SAURASHTRA LETTER LLA').
+unicode_name(0xA8F2, 'DEVANAGARI SIGN SPACING CANDRABINDU').
+unicode_name(0xA8F3, 'DEVANAGARI SIGN CANDRABINDU VIRAMA').
+unicode_name(0xA8F4, 'DEVANAGARI SIGN DOUBLE CANDRABINDU VIRAMA').
+unicode_name(0xA8F5, 'DEVANAGARI SIGN CANDRABINDU TWO').
+unicode_name(0xA8F6, 'DEVANAGARI SIGN CANDRABINDU THREE').
+unicode_name(0xA8F7, 'DEVANAGARI SIGN CANDRABINDU AVAGRAHA').
+unicode_name(0xA8FB, 'DEVANAGARI HEADSTROKE').
+unicode_name(0xA90A, 'KAYAH LI LETTER KA').
+unicode_name(0xA90B, 'KAYAH LI LETTER KHA').
+unicode_name(0xA90C, 'KAYAH LI LETTER GA').
+unicode_name(0xA90D, 'KAYAH LI LETTER NGA').
+unicode_name(0xA90E, 'KAYAH LI LETTER SA').
+unicode_name(0xA90F, 'KAYAH LI LETTER SHA').
+unicode_name(0xA910, 'KAYAH LI LETTER ZA').
+unicode_name(0xA911, 'KAYAH LI LETTER NYA').
+unicode_name(0xA912, 'KAYAH LI LETTER TA').
+unicode_name(0xA913, 'KAYAH LI LETTER HTA').
+unicode_name(0xA914, 'KAYAH LI LETTER NA').
+unicode_name(0xA915, 'KAYAH LI LETTER PA').
+unicode_name(0xA916, 'KAYAH LI LETTER PHA').
+unicode_name(0xA917, 'KAYAH LI LETTER MA').
+unicode_name(0xA918, 'KAYAH LI LETTER DA').
+unicode_name(0xA919, 'KAYAH LI LETTER BA').
+unicode_name(0xA91A, 'KAYAH LI LETTER RA').
+unicode_name(0xA91B, 'KAYAH LI LETTER YA').
+unicode_name(0xA91C, 'KAYAH LI LETTER LA').
+unicode_name(0xA91D, 'KAYAH LI LETTER WA').
+unicode_name(0xA91E, 'KAYAH LI LETTER THA').
+unicode_name(0xA91F, 'KAYAH LI LETTER HA').
+unicode_name(0xA920, 'KAYAH LI LETTER VA').
+unicode_name(0xA921, 'KAYAH LI LETTER CA').
+unicode_name(0xA922, 'KAYAH LI LETTER A').
+unicode_name(0xA923, 'KAYAH LI LETTER OE').
+unicode_name(0xA924, 'KAYAH LI LETTER I').
+unicode_name(0xA925, 'KAYAH LI LETTER OO').
+unicode_name(0xA930, 'REJANG LETTER KA').
+unicode_name(0xA931, 'REJANG LETTER GA').
+unicode_name(0xA932, 'REJANG LETTER NGA').
+unicode_name(0xA933, 'REJANG LETTER TA').
+unicode_name(0xA934, 'REJANG LETTER DA').
+unicode_name(0xA935, 'REJANG LETTER NA').
+unicode_name(0xA936, 'REJANG LETTER PA').
+unicode_name(0xA937, 'REJANG LETTER BA').
+unicode_name(0xA938, 'REJANG LETTER MA').
+unicode_name(0xA939, 'REJANG LETTER CA').
+unicode_name(0xA93A, 'REJANG LETTER JA').
+unicode_name(0xA93B, 'REJANG LETTER NYA').
+unicode_name(0xA93C, 'REJANG LETTER SA').
+unicode_name(0xA93D, 'REJANG LETTER RA').
+unicode_name(0xA93E, 'REJANG LETTER LA').
+unicode_name(0xA93F, 'REJANG LETTER YA').
+unicode_name(0xA940, 'REJANG LETTER WA').
+unicode_name(0xA941, 'REJANG LETTER HA').
+unicode_name(0xA942, 'REJANG LETTER MBA').
+unicode_name(0xA943, 'REJANG LETTER NGGA').
+unicode_name(0xA944, 'REJANG LETTER NDA').
+unicode_name(0xA945, 'REJANG LETTER NYJA').
+unicode_name(0xA946, 'REJANG LETTER A').
+unicode_name(0xA960, 'HANGUL CHOSEONG TIKEUT-MIEUM').
+unicode_name(0xA961, 'HANGUL CHOSEONG TIKEUT-PIEUP').
+unicode_name(0xA962, 'HANGUL CHOSEONG TIKEUT-SIOS').
+unicode_name(0xA963, 'HANGUL CHOSEONG TIKEUT-CIEUC').
+unicode_name(0xA964, 'HANGUL CHOSEONG RIEUL-KIYEOK').
+unicode_name(0xA965, 'HANGUL CHOSEONG RIEUL-SSANGKIYEOK').
+unicode_name(0xA966, 'HANGUL CHOSEONG RIEUL-TIKEUT').
+unicode_name(0xA967, 'HANGUL CHOSEONG RIEUL-SSANGTIKEUT').
+unicode_name(0xA968, 'HANGUL CHOSEONG RIEUL-MIEUM').
+unicode_name(0xA969, 'HANGUL CHOSEONG RIEUL-PIEUP').
+unicode_name(0xA96A, 'HANGUL CHOSEONG RIEUL-SSANGPIEUP').
+unicode_name(0xA96B, 'HANGUL CHOSEONG RIEUL-KAPYEOUNPIEUP').
+unicode_name(0xA96C, 'HANGUL CHOSEONG RIEUL-SIOS').
+unicode_name(0xA96D, 'HANGUL CHOSEONG RIEUL-CIEUC').
+unicode_name(0xA96E, 'HANGUL CHOSEONG RIEUL-KHIEUKH').
+unicode_name(0xA96F, 'HANGUL CHOSEONG MIEUM-KIYEOK').
+unicode_name(0xA970, 'HANGUL CHOSEONG MIEUM-TIKEUT').
+unicode_name(0xA971, 'HANGUL CHOSEONG MIEUM-SIOS').
+unicode_name(0xA972, 'HANGUL CHOSEONG PIEUP-SIOS-THIEUTH').
+unicode_name(0xA973, 'HANGUL CHOSEONG PIEUP-KHIEUKH').
+unicode_name(0xA974, 'HANGUL CHOSEONG PIEUP-HIEUH').
+unicode_name(0xA975, 'HANGUL CHOSEONG SSANGSIOS-PIEUP').
+unicode_name(0xA976, 'HANGUL CHOSEONG IEUNG-RIEUL').
+unicode_name(0xA977, 'HANGUL CHOSEONG IEUNG-HIEUH').
+unicode_name(0xA978, 'HANGUL CHOSEONG SSANGCIEUC-HIEUH').
+unicode_name(0xA979, 'HANGUL CHOSEONG SSANGTHIEUTH').
+unicode_name(0xA97A, 'HANGUL CHOSEONG PHIEUPH-HIEUH').
+unicode_name(0xA97B, 'HANGUL CHOSEONG HIEUH-SIOS').
+unicode_name(0xA97C, 'HANGUL CHOSEONG SSANGYEORINHIEUH').
+unicode_name(0xA984, 'JAVANESE LETTER A').
+unicode_name(0xA985, 'JAVANESE LETTER I KAWI').
+unicode_name(0xA986, 'JAVANESE LETTER I').
+unicode_name(0xA987, 'JAVANESE LETTER II').
+unicode_name(0xA988, 'JAVANESE LETTER U').
+unicode_name(0xA989, 'JAVANESE LETTER PA CEREK').
+unicode_name(0xA98A, 'JAVANESE LETTER NGA LELET').
+unicode_name(0xA98B, 'JAVANESE LETTER NGA LELET RASWADI').
+unicode_name(0xA98C, 'JAVANESE LETTER E').
+unicode_name(0xA98D, 'JAVANESE LETTER AI').
+unicode_name(0xA98E, 'JAVANESE LETTER O').
+unicode_name(0xA98F, 'JAVANESE LETTER KA').
+unicode_name(0xA990, 'JAVANESE LETTER KA SASAK').
+unicode_name(0xA991, 'JAVANESE LETTER KA MURDA').
+unicode_name(0xA992, 'JAVANESE LETTER GA').
+unicode_name(0xA993, 'JAVANESE LETTER GA MURDA').
+unicode_name(0xA994, 'JAVANESE LETTER NGA').
+unicode_name(0xA995, 'JAVANESE LETTER CA').
+unicode_name(0xA996, 'JAVANESE LETTER CA MURDA').
+unicode_name(0xA997, 'JAVANESE LETTER JA').
+unicode_name(0xA998, 'JAVANESE LETTER NYA MURDA').
+unicode_name(0xA999, 'JAVANESE LETTER JA MAHAPRANA').
+unicode_name(0xA99A, 'JAVANESE LETTER NYA').
+unicode_name(0xA99B, 'JAVANESE LETTER TTA').
+unicode_name(0xA99C, 'JAVANESE LETTER TTA MAHAPRANA').
+unicode_name(0xA99D, 'JAVANESE LETTER DDA').
+unicode_name(0xA99E, 'JAVANESE LETTER DDA MAHAPRANA').
+unicode_name(0xA99F, 'JAVANESE LETTER NA MURDA').
+unicode_name(0xA9A0, 'JAVANESE LETTER TA').
+unicode_name(0xA9A1, 'JAVANESE LETTER TA MURDA').
+unicode_name(0xA9A2, 'JAVANESE LETTER DA').
+unicode_name(0xA9A3, 'JAVANESE LETTER DA MAHAPRANA').
+unicode_name(0xA9A4, 'JAVANESE LETTER NA').
+unicode_name(0xA9A5, 'JAVANESE LETTER PA').
+unicode_name(0xA9A6, 'JAVANESE LETTER PA MURDA').
+unicode_name(0xA9A7, 'JAVANESE LETTER BA').
+unicode_name(0xA9A8, 'JAVANESE LETTER BA MURDA').
+unicode_name(0xA9A9, 'JAVANESE LETTER MA').
+unicode_name(0xA9AA, 'JAVANESE LETTER YA').
+unicode_name(0xA9AB, 'JAVANESE LETTER RA').
+unicode_name(0xA9AC, 'JAVANESE LETTER RA AGUNG').
+unicode_name(0xA9AD, 'JAVANESE LETTER LA').
+unicode_name(0xA9AE, 'JAVANESE LETTER WA').
+unicode_name(0xA9AF, 'JAVANESE LETTER SA MURDA').
+unicode_name(0xA9B0, 'JAVANESE LETTER SA MAHAPRANA').
+unicode_name(0xA9B1, 'JAVANESE LETTER SA').
+unicode_name(0xA9B2, 'JAVANESE LETTER HA').
+unicode_name(0xAA00, 'CHAM LETTER A').
+unicode_name(0xAA01, 'CHAM LETTER I').
+unicode_name(0xAA02, 'CHAM LETTER U').
+unicode_name(0xAA03, 'CHAM LETTER E').
+unicode_name(0xAA04, 'CHAM LETTER AI').
+unicode_name(0xAA05, 'CHAM LETTER O').
+unicode_name(0xAA06, 'CHAM LETTER KA').
+unicode_name(0xAA07, 'CHAM LETTER KHA').
+unicode_name(0xAA08, 'CHAM LETTER GA').
+unicode_name(0xAA09, 'CHAM LETTER GHA').
+unicode_name(0xAA0A, 'CHAM LETTER NGUE').
+unicode_name(0xAA0B, 'CHAM LETTER NGA').
+unicode_name(0xAA0C, 'CHAM LETTER CHA').
+unicode_name(0xAA0D, 'CHAM LETTER CHHA').
+unicode_name(0xAA0E, 'CHAM LETTER JA').
+unicode_name(0xAA0F, 'CHAM LETTER JHA').
+unicode_name(0xAA10, 'CHAM LETTER NHUE').
+unicode_name(0xAA11, 'CHAM LETTER NHA').
+unicode_name(0xAA12, 'CHAM LETTER NHJA').
+unicode_name(0xAA13, 'CHAM LETTER TA').
+unicode_name(0xAA14, 'CHAM LETTER THA').
+unicode_name(0xAA15, 'CHAM LETTER DA').
+unicode_name(0xAA16, 'CHAM LETTER DHA').
+unicode_name(0xAA17, 'CHAM LETTER NUE').
+unicode_name(0xAA18, 'CHAM LETTER NA').
+unicode_name(0xAA19, 'CHAM LETTER DDA').
+unicode_name(0xAA1A, 'CHAM LETTER PA').
+unicode_name(0xAA1B, 'CHAM LETTER PPA').
+unicode_name(0xAA1C, 'CHAM LETTER PHA').
+unicode_name(0xAA1D, 'CHAM LETTER BA').
+unicode_name(0xAA1E, 'CHAM LETTER BHA').
+unicode_name(0xAA1F, 'CHAM LETTER MUE').
+unicode_name(0xAA20, 'CHAM LETTER MA').
+unicode_name(0xAA21, 'CHAM LETTER BBA').
+unicode_name(0xAA22, 'CHAM LETTER YA').
+unicode_name(0xAA23, 'CHAM LETTER RA').
+unicode_name(0xAA24, 'CHAM LETTER LA').
+unicode_name(0xAA25, 'CHAM LETTER VA').
+unicode_name(0xAA26, 'CHAM LETTER SSA').
+unicode_name(0xAA27, 'CHAM LETTER SA').
+unicode_name(0xAA28, 'CHAM LETTER HA').
+unicode_name(0xAA40, 'CHAM LETTER FINAL K').
+unicode_name(0xAA41, 'CHAM LETTER FINAL G').
+unicode_name(0xAA42, 'CHAM LETTER FINAL NG').
+unicode_name(0xAA44, 'CHAM LETTER FINAL CH').
+unicode_name(0xAA45, 'CHAM LETTER FINAL T').
+unicode_name(0xAA46, 'CHAM LETTER FINAL N').
+unicode_name(0xAA47, 'CHAM LETTER FINAL P').
+unicode_name(0xAA48, 'CHAM LETTER FINAL Y').
+unicode_name(0xAA49, 'CHAM LETTER FINAL R').
+unicode_name(0xAA4A, 'CHAM LETTER FINAL L').
+unicode_name(0xAA4B, 'CHAM LETTER FINAL SS').
+unicode_name(0xAA60, 'MYANMAR LETTER KHAMTI GA').
+unicode_name(0xAA61, 'MYANMAR LETTER KHAMTI CA').
+unicode_name(0xAA62, 'MYANMAR LETTER KHAMTI CHA').
+unicode_name(0xAA63, 'MYANMAR LETTER KHAMTI JA').
+unicode_name(0xAA64, 'MYANMAR LETTER KHAMTI JHA').
+unicode_name(0xAA65, 'MYANMAR LETTER KHAMTI NYA').
+unicode_name(0xAA66, 'MYANMAR LETTER KHAMTI TTA').
+unicode_name(0xAA67, 'MYANMAR LETTER KHAMTI TTHA').
+unicode_name(0xAA68, 'MYANMAR LETTER KHAMTI DDA').
+unicode_name(0xAA69, 'MYANMAR LETTER KHAMTI DDHA').
+unicode_name(0xAA6A, 'MYANMAR LETTER KHAMTI DHA').
+unicode_name(0xAA6B, 'MYANMAR LETTER KHAMTI NA').
+unicode_name(0xAA6C, 'MYANMAR LETTER KHAMTI SA').
+unicode_name(0xAA6D, 'MYANMAR LETTER KHAMTI HA').
+unicode_name(0xAA6E, 'MYANMAR LETTER KHAMTI HHA').
+unicode_name(0xAA6F, 'MYANMAR LETTER KHAMTI FA').
+unicode_name(0xAA71, 'MYANMAR LETTER KHAMTI XA').
+unicode_name(0xAA72, 'MYANMAR LETTER KHAMTI ZA').
+unicode_name(0xAA73, 'MYANMAR LETTER KHAMTI RA').
+unicode_name(0xAA74, 'MYANMAR LOGOGRAM KHAMTI OAY').
+unicode_name(0xAA75, 'MYANMAR LOGOGRAM KHAMTI QN').
+unicode_name(0xAA76, 'MYANMAR LOGOGRAM KHAMTI HM').
+unicode_name(0xAA7A, 'MYANMAR LETTER AITON RA').
+unicode_name(0xAA80, 'TAI VIET LETTER LOW KO').
+unicode_name(0xAA81, 'TAI VIET LETTER HIGH KO').
+unicode_name(0xAA82, 'TAI VIET LETTER LOW KHO').
+unicode_name(0xAA83, 'TAI VIET LETTER HIGH KHO').
+unicode_name(0xAA84, 'TAI VIET LETTER LOW KHHO').
+unicode_name(0xAA85, 'TAI VIET LETTER HIGH KHHO').
+unicode_name(0xAA86, 'TAI VIET LETTER LOW GO').
+unicode_name(0xAA87, 'TAI VIET LETTER HIGH GO').
+unicode_name(0xAA88, 'TAI VIET LETTER LOW NGO').
+unicode_name(0xAA89, 'TAI VIET LETTER HIGH NGO').
+unicode_name(0xAA8A, 'TAI VIET LETTER LOW CO').
+unicode_name(0xAA8B, 'TAI VIET LETTER HIGH CO').
+unicode_name(0xAA8C, 'TAI VIET LETTER LOW CHO').
+unicode_name(0xAA8D, 'TAI VIET LETTER HIGH CHO').
+unicode_name(0xAA8E, 'TAI VIET LETTER LOW SO').
+unicode_name(0xAA8F, 'TAI VIET LETTER HIGH SO').
+unicode_name(0xAA90, 'TAI VIET LETTER LOW NYO').
+unicode_name(0xAA91, 'TAI VIET LETTER HIGH NYO').
+unicode_name(0xAA92, 'TAI VIET LETTER LOW DO').
+unicode_name(0xAA93, 'TAI VIET LETTER HIGH DO').
+unicode_name(0xAA94, 'TAI VIET LETTER LOW TO').
+unicode_name(0xAA95, 'TAI VIET LETTER HIGH TO').
+unicode_name(0xAA96, 'TAI VIET LETTER LOW THO').
+unicode_name(0xAA97, 'TAI VIET LETTER HIGH THO').
+unicode_name(0xAA98, 'TAI VIET LETTER LOW NO').
+unicode_name(0xAA99, 'TAI VIET LETTER HIGH NO').
+unicode_name(0xAA9A, 'TAI VIET LETTER LOW BO').
+unicode_name(0xAA9B, 'TAI VIET LETTER HIGH BO').
+unicode_name(0xAA9C, 'TAI VIET LETTER LOW PO').
+unicode_name(0xAA9D, 'TAI VIET LETTER HIGH PO').
+unicode_name(0xAA9E, 'TAI VIET LETTER LOW PHO').
+unicode_name(0xAA9F, 'TAI VIET LETTER HIGH PHO').
+unicode_name(0xAAA0, 'TAI VIET LETTER LOW FO').
+unicode_name(0xAAA1, 'TAI VIET LETTER HIGH FO').
+unicode_name(0xAAA2, 'TAI VIET LETTER LOW MO').
+unicode_name(0xAAA3, 'TAI VIET LETTER HIGH MO').
+unicode_name(0xAAA4, 'TAI VIET LETTER LOW YO').
+unicode_name(0xAAA5, 'TAI VIET LETTER HIGH YO').
+unicode_name(0xAAA6, 'TAI VIET LETTER LOW RO').
+unicode_name(0xAAA7, 'TAI VIET LETTER HIGH RO').
+unicode_name(0xAAA8, 'TAI VIET LETTER LOW LO').
+unicode_name(0xAAA9, 'TAI VIET LETTER HIGH LO').
+unicode_name(0xAAAA, 'TAI VIET LETTER LOW VO').
+unicode_name(0xAAAB, 'TAI VIET LETTER HIGH VO').
+unicode_name(0xAAAC, 'TAI VIET LETTER LOW HO').
+unicode_name(0xAAAD, 'TAI VIET LETTER HIGH HO').
+unicode_name(0xAAAE, 'TAI VIET LETTER LOW O').
+unicode_name(0xAAAF, 'TAI VIET LETTER HIGH O').
+unicode_name(0xAAB1, 'TAI VIET VOWEL AA').
+unicode_name(0xAAB5, 'TAI VIET VOWEL E').
+unicode_name(0xAAB6, 'TAI VIET VOWEL O').
+unicode_name(0xAAB9, 'TAI VIET VOWEL UEA').
+unicode_name(0xAABA, 'TAI VIET VOWEL UA').
+unicode_name(0xAABB, 'TAI VIET VOWEL AUE').
+unicode_name(0xAABC, 'TAI VIET VOWEL AY').
+unicode_name(0xAABD, 'TAI VIET VOWEL AN').
+unicode_name(0xAAC0, 'TAI VIET TONE MAI NUENG').
+unicode_name(0xAAC2, 'TAI VIET TONE MAI SONG').
+unicode_name(0xAADB, 'TAI VIET SYMBOL KON').
+unicode_name(0xAADC, 'TAI VIET SYMBOL NUENG').
+unicode_name(0xAAE0, 'MEETEI MAYEK LETTER E').
+unicode_name(0xAAE1, 'MEETEI MAYEK LETTER O').
+unicode_name(0xAAE2, 'MEETEI MAYEK LETTER CHA').
+unicode_name(0xAAE3, 'MEETEI MAYEK LETTER NYA').
+unicode_name(0xAAE4, 'MEETEI MAYEK LETTER TTA').
+unicode_name(0xAAE5, 'MEETEI MAYEK LETTER TTHA').
+unicode_name(0xAAE6, 'MEETEI MAYEK LETTER DDA').
+unicode_name(0xAAE7, 'MEETEI MAYEK LETTER DDHA').
+unicode_name(0xAAE8, 'MEETEI MAYEK LETTER NNA').
+unicode_name(0xAAE9, 'MEETEI MAYEK LETTER SHA').
+unicode_name(0xAAEA, 'MEETEI MAYEK LETTER SSA').
+unicode_name(0xAAF2, 'MEETEI MAYEK ANJI').
+unicode_name(0xAB01, 'ETHIOPIC SYLLABLE TTHU').
+unicode_name(0xAB02, 'ETHIOPIC SYLLABLE TTHI').
+unicode_name(0xAB03, 'ETHIOPIC SYLLABLE TTHAA').
+unicode_name(0xAB04, 'ETHIOPIC SYLLABLE TTHEE').
+unicode_name(0xAB05, 'ETHIOPIC SYLLABLE TTHE').
+unicode_name(0xAB06, 'ETHIOPIC SYLLABLE TTHO').
+unicode_name(0xAB09, 'ETHIOPIC SYLLABLE DDHU').
+unicode_name(0xAB0A, 'ETHIOPIC SYLLABLE DDHI').
+unicode_name(0xAB0B, 'ETHIOPIC SYLLABLE DDHAA').
+unicode_name(0xAB0C, 'ETHIOPIC SYLLABLE DDHEE').
+unicode_name(0xAB0D, 'ETHIOPIC SYLLABLE DDHE').
+unicode_name(0xAB0E, 'ETHIOPIC SYLLABLE DDHO').
+unicode_name(0xAB11, 'ETHIOPIC SYLLABLE DZU').
+unicode_name(0xAB12, 'ETHIOPIC SYLLABLE DZI').
+unicode_name(0xAB13, 'ETHIOPIC SYLLABLE DZAA').
+unicode_name(0xAB14, 'ETHIOPIC SYLLABLE DZEE').
+unicode_name(0xAB15, 'ETHIOPIC SYLLABLE DZE').
+unicode_name(0xAB16, 'ETHIOPIC SYLLABLE DZO').
+unicode_name(0xAB20, 'ETHIOPIC SYLLABLE CCHHA').
+unicode_name(0xAB21, 'ETHIOPIC SYLLABLE CCHHU').
+unicode_name(0xAB22, 'ETHIOPIC SYLLABLE CCHHI').
+unicode_name(0xAB23, 'ETHIOPIC SYLLABLE CCHHAA').
+unicode_name(0xAB24, 'ETHIOPIC SYLLABLE CCHHEE').
+unicode_name(0xAB25, 'ETHIOPIC SYLLABLE CCHHE').
+unicode_name(0xAB26, 'ETHIOPIC SYLLABLE CCHHO').
+unicode_name(0xAB28, 'ETHIOPIC SYLLABLE BBA').
+unicode_name(0xAB29, 'ETHIOPIC SYLLABLE BBU').
+unicode_name(0xAB2A, 'ETHIOPIC SYLLABLE BBI').
+unicode_name(0xAB2B, 'ETHIOPIC SYLLABLE BBAA').
+unicode_name(0xAB2C, 'ETHIOPIC SYLLABLE BBEE').
+unicode_name(0xAB2D, 'ETHIOPIC SYLLABLE BBE').
+unicode_name(0xAB2E, 'ETHIOPIC SYLLABLE BBO').
+unicode_name(0xABC0, 'MEETEI MAYEK LETTER KOK').
+unicode_name(0xABC1, 'MEETEI MAYEK LETTER SAM').
+unicode_name(0xABC2, 'MEETEI MAYEK LETTER LAI').
+unicode_name(0xABC3, 'MEETEI MAYEK LETTER MIT').
+unicode_name(0xABC4, 'MEETEI MAYEK LETTER PA').
+unicode_name(0xABC5, 'MEETEI MAYEK LETTER NA').
+unicode_name(0xABC6, 'MEETEI MAYEK LETTER CHIL').
+unicode_name(0xABC7, 'MEETEI MAYEK LETTER TIL').
+unicode_name(0xABC8, 'MEETEI MAYEK LETTER KHOU').
+unicode_name(0xABC9, 'MEETEI MAYEK LETTER NGOU').
+unicode_name(0xABCA, 'MEETEI MAYEK LETTER THOU').
+unicode_name(0xABCB, 'MEETEI MAYEK LETTER WAI').
+unicode_name(0xABCC, 'MEETEI MAYEK LETTER YANG').
+unicode_name(0xABCD, 'MEETEI MAYEK LETTER HUK').
+unicode_name(0xABCE, 'MEETEI MAYEK LETTER UN').
+unicode_name(0xABCF, 'MEETEI MAYEK LETTER I').
+unicode_name(0xABD0, 'MEETEI MAYEK LETTER PHAM').
+unicode_name(0xABD1, 'MEETEI MAYEK LETTER ATIYA').
+unicode_name(0xABD2, 'MEETEI MAYEK LETTER GOK').
+unicode_name(0xABD3, 'MEETEI MAYEK LETTER JHAM').
+unicode_name(0xABD4, 'MEETEI MAYEK LETTER RAI').
+unicode_name(0xABD5, 'MEETEI MAYEK LETTER BA').
+unicode_name(0xABD6, 'MEETEI MAYEK LETTER JIL').
+unicode_name(0xABD7, 'MEETEI MAYEK LETTER DIL').
+unicode_name(0xABD8, 'MEETEI MAYEK LETTER GHOU').
+unicode_name(0xABD9, 'MEETEI MAYEK LETTER DHOU').
+unicode_name(0xABDA, 'MEETEI MAYEK LETTER BHAM').
+unicode_name(0xABDB, 'MEETEI MAYEK LETTER KOK LONSUM').
+unicode_name(0xABDC, 'MEETEI MAYEK LETTER LAI LONSUM').
+unicode_name(0xABDD, 'MEETEI MAYEK LETTER MIT LONSUM').
+unicode_name(0xABDE, 'MEETEI MAYEK LETTER PA LONSUM').
+unicode_name(0xABDF, 'MEETEI MAYEK LETTER NA LONSUM').
+unicode_name(0xABE0, 'MEETEI MAYEK LETTER TIL LONSUM').
+unicode_name(0xABE1, 'MEETEI MAYEK LETTER NGOU LONSUM').
+unicode_name(0xABE2, 'MEETEI MAYEK LETTER I LONSUM').
+unicode_name(0xAC00, '<Hangul Syllable, First>').
+unicode_name(0xD7A3, '<Hangul Syllable, Last>').
+unicode_name(0xD7B0, 'HANGUL JUNGSEONG O-YEO').
+unicode_name(0xD7B1, 'HANGUL JUNGSEONG O-O-I').
+unicode_name(0xD7B2, 'HANGUL JUNGSEONG YO-A').
+unicode_name(0xD7B3, 'HANGUL JUNGSEONG YO-AE').
+unicode_name(0xD7B4, 'HANGUL JUNGSEONG YO-EO').
+unicode_name(0xD7B5, 'HANGUL JUNGSEONG U-YEO').
+unicode_name(0xD7B6, 'HANGUL JUNGSEONG U-I-I').
+unicode_name(0xD7B7, 'HANGUL JUNGSEONG YU-AE').
+unicode_name(0xD7B8, 'HANGUL JUNGSEONG YU-O').
+unicode_name(0xD7B9, 'HANGUL JUNGSEONG EU-A').
+unicode_name(0xD7BA, 'HANGUL JUNGSEONG EU-EO').
+unicode_name(0xD7BB, 'HANGUL JUNGSEONG EU-E').
+unicode_name(0xD7BC, 'HANGUL JUNGSEONG EU-O').
+unicode_name(0xD7BD, 'HANGUL JUNGSEONG I-YA-O').
+unicode_name(0xD7BE, 'HANGUL JUNGSEONG I-YAE').
+unicode_name(0xD7BF, 'HANGUL JUNGSEONG I-YEO').
+unicode_name(0xD7C0, 'HANGUL JUNGSEONG I-YE').
+unicode_name(0xD7C1, 'HANGUL JUNGSEONG I-O-I').
+unicode_name(0xD7C2, 'HANGUL JUNGSEONG I-YO').
+unicode_name(0xD7C3, 'HANGUL JUNGSEONG I-YU').
+unicode_name(0xD7C4, 'HANGUL JUNGSEONG I-I').
+unicode_name(0xD7C5, 'HANGUL JUNGSEONG ARAEA-A').
+unicode_name(0xD7C6, 'HANGUL JUNGSEONG ARAEA-E').
+unicode_name(0xD7CB, 'HANGUL JONGSEONG NIEUN-RIEUL').
+unicode_name(0xD7CC, 'HANGUL JONGSEONG NIEUN-CHIEUCH').
+unicode_name(0xD7CD, 'HANGUL JONGSEONG SSANGTIKEUT').
+unicode_name(0xD7CE, 'HANGUL JONGSEONG SSANGTIKEUT-PIEUP').
+unicode_name(0xD7CF, 'HANGUL JONGSEONG TIKEUT-PIEUP').
+unicode_name(0xD7D0, 'HANGUL JONGSEONG TIKEUT-SIOS').
+unicode_name(0xD7D1, 'HANGUL JONGSEONG TIKEUT-SIOS-KIYEOK').
+unicode_name(0xD7D2, 'HANGUL JONGSEONG TIKEUT-CIEUC').
+unicode_name(0xD7D3, 'HANGUL JONGSEONG TIKEUT-CHIEUCH').
+unicode_name(0xD7D4, 'HANGUL JONGSEONG TIKEUT-THIEUTH').
+unicode_name(0xD7D5, 'HANGUL JONGSEONG RIEUL-SSANGKIYEOK').
+unicode_name(0xD7D6, 'HANGUL JONGSEONG RIEUL-KIYEOK-HIEUH').
+unicode_name(0xD7D7, 'HANGUL JONGSEONG SSANGRIEUL-KHIEUKH').
+unicode_name(0xD7D8, 'HANGUL JONGSEONG RIEUL-MIEUM-HIEUH').
+unicode_name(0xD7D9, 'HANGUL JONGSEONG RIEUL-PIEUP-TIKEUT').
+unicode_name(0xD7DA, 'HANGUL JONGSEONG RIEUL-PIEUP-PHIEUPH').
+unicode_name(0xD7DB, 'HANGUL JONGSEONG RIEUL-YESIEUNG').
+unicode_name(0xD7DC, 'HANGUL JONGSEONG RIEUL-YEORINHIEUH-HIEUH').
+unicode_name(0xD7DD, 'HANGUL JONGSEONG KAPYEOUNRIEUL').
+unicode_name(0xD7DE, 'HANGUL JONGSEONG MIEUM-NIEUN').
+unicode_name(0xD7DF, 'HANGUL JONGSEONG MIEUM-SSANGNIEUN').
+unicode_name(0xD7E0, 'HANGUL JONGSEONG SSANGMIEUM').
+unicode_name(0xD7E1, 'HANGUL JONGSEONG MIEUM-PIEUP-SIOS').
+unicode_name(0xD7E2, 'HANGUL JONGSEONG MIEUM-CIEUC').
+unicode_name(0xD7E3, 'HANGUL JONGSEONG PIEUP-TIKEUT').
+unicode_name(0xD7E4, 'HANGUL JONGSEONG PIEUP-RIEUL-PHIEUPH').
+unicode_name(0xD7E5, 'HANGUL JONGSEONG PIEUP-MIEUM').
+unicode_name(0xD7E6, 'HANGUL JONGSEONG SSANGPIEUP').
+unicode_name(0xD7E7, 'HANGUL JONGSEONG PIEUP-SIOS-TIKEUT').
+unicode_name(0xD7E8, 'HANGUL JONGSEONG PIEUP-CIEUC').
+unicode_name(0xD7E9, 'HANGUL JONGSEONG PIEUP-CHIEUCH').
+unicode_name(0xD7EA, 'HANGUL JONGSEONG SIOS-MIEUM').
+unicode_name(0xD7EB, 'HANGUL JONGSEONG SIOS-KAPYEOUNPIEUP').
+unicode_name(0xD7EC, 'HANGUL JONGSEONG SSANGSIOS-KIYEOK').
+unicode_name(0xD7ED, 'HANGUL JONGSEONG SSANGSIOS-TIKEUT').
+unicode_name(0xD7EE, 'HANGUL JONGSEONG SIOS-PANSIOS').
+unicode_name(0xD7EF, 'HANGUL JONGSEONG SIOS-CIEUC').
+unicode_name(0xD7F0, 'HANGUL JONGSEONG SIOS-CHIEUCH').
+unicode_name(0xD7F1, 'HANGUL JONGSEONG SIOS-THIEUTH').
+unicode_name(0xD7F2, 'HANGUL JONGSEONG SIOS-HIEUH').
+unicode_name(0xD7F3, 'HANGUL JONGSEONG PANSIOS-PIEUP').
+unicode_name(0xD7F4, 'HANGUL JONGSEONG PANSIOS-KAPYEOUNPIEUP').
+unicode_name(0xD7F5, 'HANGUL JONGSEONG YESIEUNG-MIEUM').
+unicode_name(0xD7F6, 'HANGUL JONGSEONG YESIEUNG-HIEUH').
+unicode_name(0xD7F7, 'HANGUL JONGSEONG CIEUC-PIEUP').
+unicode_name(0xD7F8, 'HANGUL JONGSEONG CIEUC-SSANGPIEUP').
+unicode_name(0xD7F9, 'HANGUL JONGSEONG SSANGCIEUC').
+unicode_name(0xD7FA, 'HANGUL JONGSEONG PHIEUPH-SIOS').
+unicode_name(0xD7FB, 'HANGUL JONGSEONG PHIEUPH-THIEUTH').
+unicode_name(0xF900, 'CJK COMPATIBILITY IDEOGRAPH-F900').
+unicode_name(0xF901, 'CJK COMPATIBILITY IDEOGRAPH-F901').
+unicode_name(0xF902, 'CJK COMPATIBILITY IDEOGRAPH-F902').
+unicode_name(0xF903, 'CJK COMPATIBILITY IDEOGRAPH-F903').
+unicode_name(0xF904, 'CJK COMPATIBILITY IDEOGRAPH-F904').
+unicode_name(0xF905, 'CJK COMPATIBILITY IDEOGRAPH-F905').
+unicode_name(0xF906, 'CJK COMPATIBILITY IDEOGRAPH-F906').
+unicode_name(0xF907, 'CJK COMPATIBILITY IDEOGRAPH-F907').
+unicode_name(0xF908, 'CJK COMPATIBILITY IDEOGRAPH-F908').
+unicode_name(0xF909, 'CJK COMPATIBILITY IDEOGRAPH-F909').
+unicode_name(0xF90A, 'CJK COMPATIBILITY IDEOGRAPH-F90A').
+unicode_name(0xF90B, 'CJK COMPATIBILITY IDEOGRAPH-F90B').
+unicode_name(0xF90C, 'CJK COMPATIBILITY IDEOGRAPH-F90C').
+unicode_name(0xF90D, 'CJK COMPATIBILITY IDEOGRAPH-F90D').
+unicode_name(0xF90E, 'CJK COMPATIBILITY IDEOGRAPH-F90E').
+unicode_name(0xF90F, 'CJK COMPATIBILITY IDEOGRAPH-F90F').
+unicode_name(0xF910, 'CJK COMPATIBILITY IDEOGRAPH-F910').
+unicode_name(0xF911, 'CJK COMPATIBILITY IDEOGRAPH-F911').
+unicode_name(0xF912, 'CJK COMPATIBILITY IDEOGRAPH-F912').
+unicode_name(0xF913, 'CJK COMPATIBILITY IDEOGRAPH-F913').
+unicode_name(0xF914, 'CJK COMPATIBILITY IDEOGRAPH-F914').
+unicode_name(0xF915, 'CJK COMPATIBILITY IDEOGRAPH-F915').
+unicode_name(0xF916, 'CJK COMPATIBILITY IDEOGRAPH-F916').
+unicode_name(0xF917, 'CJK COMPATIBILITY IDEOGRAPH-F917').
+unicode_name(0xF918, 'CJK COMPATIBILITY IDEOGRAPH-F918').
+unicode_name(0xF919, 'CJK COMPATIBILITY IDEOGRAPH-F919').
+unicode_name(0xF91A, 'CJK COMPATIBILITY IDEOGRAPH-F91A').
+unicode_name(0xF91B, 'CJK COMPATIBILITY IDEOGRAPH-F91B').
+unicode_name(0xF91C, 'CJK COMPATIBILITY IDEOGRAPH-F91C').
+unicode_name(0xF91D, 'CJK COMPATIBILITY IDEOGRAPH-F91D').
+unicode_name(0xF91E, 'CJK COMPATIBILITY IDEOGRAPH-F91E').
+unicode_name(0xF91F, 'CJK COMPATIBILITY IDEOGRAPH-F91F').
+unicode_name(0xF920, 'CJK COMPATIBILITY IDEOGRAPH-F920').
+unicode_name(0xF921, 'CJK COMPATIBILITY IDEOGRAPH-F921').
+unicode_name(0xF922, 'CJK COMPATIBILITY IDEOGRAPH-F922').
+unicode_name(0xF923, 'CJK COMPATIBILITY IDEOGRAPH-F923').
+unicode_name(0xF924, 'CJK COMPATIBILITY IDEOGRAPH-F924').
+unicode_name(0xF925, 'CJK COMPATIBILITY IDEOGRAPH-F925').
+unicode_name(0xF926, 'CJK COMPATIBILITY IDEOGRAPH-F926').
+unicode_name(0xF927, 'CJK COMPATIBILITY IDEOGRAPH-F927').
+unicode_name(0xF928, 'CJK COMPATIBILITY IDEOGRAPH-F928').
+unicode_name(0xF929, 'CJK COMPATIBILITY IDEOGRAPH-F929').
+unicode_name(0xF92A, 'CJK COMPATIBILITY IDEOGRAPH-F92A').
+unicode_name(0xF92B, 'CJK COMPATIBILITY IDEOGRAPH-F92B').
+unicode_name(0xF92C, 'CJK COMPATIBILITY IDEOGRAPH-F92C').
+unicode_name(0xF92D, 'CJK COMPATIBILITY IDEOGRAPH-F92D').
+unicode_name(0xF92E, 'CJK COMPATIBILITY IDEOGRAPH-F92E').
+unicode_name(0xF92F, 'CJK COMPATIBILITY IDEOGRAPH-F92F').
+unicode_name(0xF930, 'CJK COMPATIBILITY IDEOGRAPH-F930').
+unicode_name(0xF931, 'CJK COMPATIBILITY IDEOGRAPH-F931').
+unicode_name(0xF932, 'CJK COMPATIBILITY IDEOGRAPH-F932').
+unicode_name(0xF933, 'CJK COMPATIBILITY IDEOGRAPH-F933').
+unicode_name(0xF934, 'CJK COMPATIBILITY IDEOGRAPH-F934').
+unicode_name(0xF935, 'CJK COMPATIBILITY IDEOGRAPH-F935').
+unicode_name(0xF936, 'CJK COMPATIBILITY IDEOGRAPH-F936').
+unicode_name(0xF937, 'CJK COMPATIBILITY IDEOGRAPH-F937').
+unicode_name(0xF938, 'CJK COMPATIBILITY IDEOGRAPH-F938').
+unicode_name(0xF939, 'CJK COMPATIBILITY IDEOGRAPH-F939').
+unicode_name(0xF93A, 'CJK COMPATIBILITY IDEOGRAPH-F93A').
+unicode_name(0xF93B, 'CJK COMPATIBILITY IDEOGRAPH-F93B').
+unicode_name(0xF93C, 'CJK COMPATIBILITY IDEOGRAPH-F93C').
+unicode_name(0xF93D, 'CJK COMPATIBILITY IDEOGRAPH-F93D').
+unicode_name(0xF93E, 'CJK COMPATIBILITY IDEOGRAPH-F93E').
+unicode_name(0xF93F, 'CJK COMPATIBILITY IDEOGRAPH-F93F').
+unicode_name(0xF940, 'CJK COMPATIBILITY IDEOGRAPH-F940').
+unicode_name(0xF941, 'CJK COMPATIBILITY IDEOGRAPH-F941').
+unicode_name(0xF942, 'CJK COMPATIBILITY IDEOGRAPH-F942').
+unicode_name(0xF943, 'CJK COMPATIBILITY IDEOGRAPH-F943').
+unicode_name(0xF944, 'CJK COMPATIBILITY IDEOGRAPH-F944').
+unicode_name(0xF945, 'CJK COMPATIBILITY IDEOGRAPH-F945').
+unicode_name(0xF946, 'CJK COMPATIBILITY IDEOGRAPH-F946').
+unicode_name(0xF947, 'CJK COMPATIBILITY IDEOGRAPH-F947').
+unicode_name(0xF948, 'CJK COMPATIBILITY IDEOGRAPH-F948').
+unicode_name(0xF949, 'CJK COMPATIBILITY IDEOGRAPH-F949').
+unicode_name(0xF94A, 'CJK COMPATIBILITY IDEOGRAPH-F94A').
+unicode_name(0xF94B, 'CJK COMPATIBILITY IDEOGRAPH-F94B').
+unicode_name(0xF94C, 'CJK COMPATIBILITY IDEOGRAPH-F94C').
+unicode_name(0xF94D, 'CJK COMPATIBILITY IDEOGRAPH-F94D').
+unicode_name(0xF94E, 'CJK COMPATIBILITY IDEOGRAPH-F94E').
+unicode_name(0xF94F, 'CJK COMPATIBILITY IDEOGRAPH-F94F').
+unicode_name(0xF950, 'CJK COMPATIBILITY IDEOGRAPH-F950').
+unicode_name(0xF951, 'CJK COMPATIBILITY IDEOGRAPH-F951').
+unicode_name(0xF952, 'CJK COMPATIBILITY IDEOGRAPH-F952').
+unicode_name(0xF953, 'CJK COMPATIBILITY IDEOGRAPH-F953').
+unicode_name(0xF954, 'CJK COMPATIBILITY IDEOGRAPH-F954').
+unicode_name(0xF955, 'CJK COMPATIBILITY IDEOGRAPH-F955').
+unicode_name(0xF956, 'CJK COMPATIBILITY IDEOGRAPH-F956').
+unicode_name(0xF957, 'CJK COMPATIBILITY IDEOGRAPH-F957').
+unicode_name(0xF958, 'CJK COMPATIBILITY IDEOGRAPH-F958').
+unicode_name(0xF959, 'CJK COMPATIBILITY IDEOGRAPH-F959').
+unicode_name(0xF95A, 'CJK COMPATIBILITY IDEOGRAPH-F95A').
+unicode_name(0xF95B, 'CJK COMPATIBILITY IDEOGRAPH-F95B').
+unicode_name(0xF95C, 'CJK COMPATIBILITY IDEOGRAPH-F95C').
+unicode_name(0xF95D, 'CJK COMPATIBILITY IDEOGRAPH-F95D').
+unicode_name(0xF95E, 'CJK COMPATIBILITY IDEOGRAPH-F95E').
+unicode_name(0xF95F, 'CJK COMPATIBILITY IDEOGRAPH-F95F').
+unicode_name(0xF960, 'CJK COMPATIBILITY IDEOGRAPH-F960').
+unicode_name(0xF961, 'CJK COMPATIBILITY IDEOGRAPH-F961').
+unicode_name(0xF962, 'CJK COMPATIBILITY IDEOGRAPH-F962').
+unicode_name(0xF963, 'CJK COMPATIBILITY IDEOGRAPH-F963').
+unicode_name(0xF964, 'CJK COMPATIBILITY IDEOGRAPH-F964').
+unicode_name(0xF965, 'CJK COMPATIBILITY IDEOGRAPH-F965').
+unicode_name(0xF966, 'CJK COMPATIBILITY IDEOGRAPH-F966').
+unicode_name(0xF967, 'CJK COMPATIBILITY IDEOGRAPH-F967').
+unicode_name(0xF968, 'CJK COMPATIBILITY IDEOGRAPH-F968').
+unicode_name(0xF969, 'CJK COMPATIBILITY IDEOGRAPH-F969').
+unicode_name(0xF96A, 'CJK COMPATIBILITY IDEOGRAPH-F96A').
+unicode_name(0xF96B, 'CJK COMPATIBILITY IDEOGRAPH-F96B').
+unicode_name(0xF96C, 'CJK COMPATIBILITY IDEOGRAPH-F96C').
+unicode_name(0xF96D, 'CJK COMPATIBILITY IDEOGRAPH-F96D').
+unicode_name(0xF96E, 'CJK COMPATIBILITY IDEOGRAPH-F96E').
+unicode_name(0xF96F, 'CJK COMPATIBILITY IDEOGRAPH-F96F').
+unicode_name(0xF970, 'CJK COMPATIBILITY IDEOGRAPH-F970').
+unicode_name(0xF971, 'CJK COMPATIBILITY IDEOGRAPH-F971').
+unicode_name(0xF972, 'CJK COMPATIBILITY IDEOGRAPH-F972').
+unicode_name(0xF973, 'CJK COMPATIBILITY IDEOGRAPH-F973').
+unicode_name(0xF974, 'CJK COMPATIBILITY IDEOGRAPH-F974').
+unicode_name(0xF975, 'CJK COMPATIBILITY IDEOGRAPH-F975').
+unicode_name(0xF976, 'CJK COMPATIBILITY IDEOGRAPH-F976').
+unicode_name(0xF977, 'CJK COMPATIBILITY IDEOGRAPH-F977').
+unicode_name(0xF978, 'CJK COMPATIBILITY IDEOGRAPH-F978').
+unicode_name(0xF979, 'CJK COMPATIBILITY IDEOGRAPH-F979').
+unicode_name(0xF97A, 'CJK COMPATIBILITY IDEOGRAPH-F97A').
+unicode_name(0xF97B, 'CJK COMPATIBILITY IDEOGRAPH-F97B').
+unicode_name(0xF97C, 'CJK COMPATIBILITY IDEOGRAPH-F97C').
+unicode_name(0xF97D, 'CJK COMPATIBILITY IDEOGRAPH-F97D').
+unicode_name(0xF97E, 'CJK COMPATIBILITY IDEOGRAPH-F97E').
+unicode_name(0xF97F, 'CJK COMPATIBILITY IDEOGRAPH-F97F').
+unicode_name(0xF980, 'CJK COMPATIBILITY IDEOGRAPH-F980').
+unicode_name(0xF981, 'CJK COMPATIBILITY IDEOGRAPH-F981').
+unicode_name(0xF982, 'CJK COMPATIBILITY IDEOGRAPH-F982').
+unicode_name(0xF983, 'CJK COMPATIBILITY IDEOGRAPH-F983').
+unicode_name(0xF984, 'CJK COMPATIBILITY IDEOGRAPH-F984').
+unicode_name(0xF985, 'CJK COMPATIBILITY IDEOGRAPH-F985').
+unicode_name(0xF986, 'CJK COMPATIBILITY IDEOGRAPH-F986').
+unicode_name(0xF987, 'CJK COMPATIBILITY IDEOGRAPH-F987').
+unicode_name(0xF988, 'CJK COMPATIBILITY IDEOGRAPH-F988').
+unicode_name(0xF989, 'CJK COMPATIBILITY IDEOGRAPH-F989').
+unicode_name(0xF98A, 'CJK COMPATIBILITY IDEOGRAPH-F98A').
+unicode_name(0xF98B, 'CJK COMPATIBILITY IDEOGRAPH-F98B').
+unicode_name(0xF98C, 'CJK COMPATIBILITY IDEOGRAPH-F98C').
+unicode_name(0xF98D, 'CJK COMPATIBILITY IDEOGRAPH-F98D').
+unicode_name(0xF98E, 'CJK COMPATIBILITY IDEOGRAPH-F98E').
+unicode_name(0xF98F, 'CJK COMPATIBILITY IDEOGRAPH-F98F').
+unicode_name(0xF990, 'CJK COMPATIBILITY IDEOGRAPH-F990').
+unicode_name(0xF991, 'CJK COMPATIBILITY IDEOGRAPH-F991').
+unicode_name(0xF992, 'CJK COMPATIBILITY IDEOGRAPH-F992').
+unicode_name(0xF993, 'CJK COMPATIBILITY IDEOGRAPH-F993').
+unicode_name(0xF994, 'CJK COMPATIBILITY IDEOGRAPH-F994').
+unicode_name(0xF995, 'CJK COMPATIBILITY IDEOGRAPH-F995').
+unicode_name(0xF996, 'CJK COMPATIBILITY IDEOGRAPH-F996').
+unicode_name(0xF997, 'CJK COMPATIBILITY IDEOGRAPH-F997').
+unicode_name(0xF998, 'CJK COMPATIBILITY IDEOGRAPH-F998').
+unicode_name(0xF999, 'CJK COMPATIBILITY IDEOGRAPH-F999').
+unicode_name(0xF99A, 'CJK COMPATIBILITY IDEOGRAPH-F99A').
+unicode_name(0xF99B, 'CJK COMPATIBILITY IDEOGRAPH-F99B').
+unicode_name(0xF99C, 'CJK COMPATIBILITY IDEOGRAPH-F99C').
+unicode_name(0xF99D, 'CJK COMPATIBILITY IDEOGRAPH-F99D').
+unicode_name(0xF99E, 'CJK COMPATIBILITY IDEOGRAPH-F99E').
+unicode_name(0xF99F, 'CJK COMPATIBILITY IDEOGRAPH-F99F').
+unicode_name(0xF9A0, 'CJK COMPATIBILITY IDEOGRAPH-F9A0').
+unicode_name(0xF9A1, 'CJK COMPATIBILITY IDEOGRAPH-F9A1').
+unicode_name(0xF9A2, 'CJK COMPATIBILITY IDEOGRAPH-F9A2').
+unicode_name(0xF9A3, 'CJK COMPATIBILITY IDEOGRAPH-F9A3').
+unicode_name(0xF9A4, 'CJK COMPATIBILITY IDEOGRAPH-F9A4').
+unicode_name(0xF9A5, 'CJK COMPATIBILITY IDEOGRAPH-F9A5').
+unicode_name(0xF9A6, 'CJK COMPATIBILITY IDEOGRAPH-F9A6').
+unicode_name(0xF9A7, 'CJK COMPATIBILITY IDEOGRAPH-F9A7').
+unicode_name(0xF9A8, 'CJK COMPATIBILITY IDEOGRAPH-F9A8').
+unicode_name(0xF9A9, 'CJK COMPATIBILITY IDEOGRAPH-F9A9').
+unicode_name(0xF9AA, 'CJK COMPATIBILITY IDEOGRAPH-F9AA').
+unicode_name(0xF9AB, 'CJK COMPATIBILITY IDEOGRAPH-F9AB').
+unicode_name(0xF9AC, 'CJK COMPATIBILITY IDEOGRAPH-F9AC').
+unicode_name(0xF9AD, 'CJK COMPATIBILITY IDEOGRAPH-F9AD').
+unicode_name(0xF9AE, 'CJK COMPATIBILITY IDEOGRAPH-F9AE').
+unicode_name(0xF9AF, 'CJK COMPATIBILITY IDEOGRAPH-F9AF').
+unicode_name(0xF9B0, 'CJK COMPATIBILITY IDEOGRAPH-F9B0').
+unicode_name(0xF9B1, 'CJK COMPATIBILITY IDEOGRAPH-F9B1').
+unicode_name(0xF9B2, 'CJK COMPATIBILITY IDEOGRAPH-F9B2').
+unicode_name(0xF9B3, 'CJK COMPATIBILITY IDEOGRAPH-F9B3').
+unicode_name(0xF9B4, 'CJK COMPATIBILITY IDEOGRAPH-F9B4').
+unicode_name(0xF9B5, 'CJK COMPATIBILITY IDEOGRAPH-F9B5').
+unicode_name(0xF9B6, 'CJK COMPATIBILITY IDEOGRAPH-F9B6').
+unicode_name(0xF9B7, 'CJK COMPATIBILITY IDEOGRAPH-F9B7').
+unicode_name(0xF9B8, 'CJK COMPATIBILITY IDEOGRAPH-F9B8').
+unicode_name(0xF9B9, 'CJK COMPATIBILITY IDEOGRAPH-F9B9').
+unicode_name(0xF9BA, 'CJK COMPATIBILITY IDEOGRAPH-F9BA').
+unicode_name(0xF9BB, 'CJK COMPATIBILITY IDEOGRAPH-F9BB').
+unicode_name(0xF9BC, 'CJK COMPATIBILITY IDEOGRAPH-F9BC').
+unicode_name(0xF9BD, 'CJK COMPATIBILITY IDEOGRAPH-F9BD').
+unicode_name(0xF9BE, 'CJK COMPATIBILITY IDEOGRAPH-F9BE').
+unicode_name(0xF9BF, 'CJK COMPATIBILITY IDEOGRAPH-F9BF').
+unicode_name(0xF9C0, 'CJK COMPATIBILITY IDEOGRAPH-F9C0').
+unicode_name(0xF9C1, 'CJK COMPATIBILITY IDEOGRAPH-F9C1').
+unicode_name(0xF9C2, 'CJK COMPATIBILITY IDEOGRAPH-F9C2').
+unicode_name(0xF9C3, 'CJK COMPATIBILITY IDEOGRAPH-F9C3').
+unicode_name(0xF9C4, 'CJK COMPATIBILITY IDEOGRAPH-F9C4').
+unicode_name(0xF9C5, 'CJK COMPATIBILITY IDEOGRAPH-F9C5').
+unicode_name(0xF9C6, 'CJK COMPATIBILITY IDEOGRAPH-F9C6').
+unicode_name(0xF9C7, 'CJK COMPATIBILITY IDEOGRAPH-F9C7').
+unicode_name(0xF9C8, 'CJK COMPATIBILITY IDEOGRAPH-F9C8').
+unicode_name(0xF9C9, 'CJK COMPATIBILITY IDEOGRAPH-F9C9').
+unicode_name(0xF9CA, 'CJK COMPATIBILITY IDEOGRAPH-F9CA').
+unicode_name(0xF9CB, 'CJK COMPATIBILITY IDEOGRAPH-F9CB').
+unicode_name(0xF9CC, 'CJK COMPATIBILITY IDEOGRAPH-F9CC').
+unicode_name(0xF9CD, 'CJK COMPATIBILITY IDEOGRAPH-F9CD').
+unicode_name(0xF9CE, 'CJK COMPATIBILITY IDEOGRAPH-F9CE').
+unicode_name(0xF9CF, 'CJK COMPATIBILITY IDEOGRAPH-F9CF').
+unicode_name(0xF9D0, 'CJK COMPATIBILITY IDEOGRAPH-F9D0').
+unicode_name(0xF9D1, 'CJK COMPATIBILITY IDEOGRAPH-F9D1').
+unicode_name(0xF9D2, 'CJK COMPATIBILITY IDEOGRAPH-F9D2').
+unicode_name(0xF9D3, 'CJK COMPATIBILITY IDEOGRAPH-F9D3').
+unicode_name(0xF9D4, 'CJK COMPATIBILITY IDEOGRAPH-F9D4').
+unicode_name(0xF9D5, 'CJK COMPATIBILITY IDEOGRAPH-F9D5').
+unicode_name(0xF9D6, 'CJK COMPATIBILITY IDEOGRAPH-F9D6').
+unicode_name(0xF9D7, 'CJK COMPATIBILITY IDEOGRAPH-F9D7').
+unicode_name(0xF9D8, 'CJK COMPATIBILITY IDEOGRAPH-F9D8').
+unicode_name(0xF9D9, 'CJK COMPATIBILITY IDEOGRAPH-F9D9').
+unicode_name(0xF9DA, 'CJK COMPATIBILITY IDEOGRAPH-F9DA').
+unicode_name(0xF9DB, 'CJK COMPATIBILITY IDEOGRAPH-F9DB').
+unicode_name(0xF9DC, 'CJK COMPATIBILITY IDEOGRAPH-F9DC').
+unicode_name(0xF9DD, 'CJK COMPATIBILITY IDEOGRAPH-F9DD').
+unicode_name(0xF9DE, 'CJK COMPATIBILITY IDEOGRAPH-F9DE').
+unicode_name(0xF9DF, 'CJK COMPATIBILITY IDEOGRAPH-F9DF').
+unicode_name(0xF9E0, 'CJK COMPATIBILITY IDEOGRAPH-F9E0').
+unicode_name(0xF9E1, 'CJK COMPATIBILITY IDEOGRAPH-F9E1').
+unicode_name(0xF9E2, 'CJK COMPATIBILITY IDEOGRAPH-F9E2').
+unicode_name(0xF9E3, 'CJK COMPATIBILITY IDEOGRAPH-F9E3').
+unicode_name(0xF9E4, 'CJK COMPATIBILITY IDEOGRAPH-F9E4').
+unicode_name(0xF9E5, 'CJK COMPATIBILITY IDEOGRAPH-F9E5').
+unicode_name(0xF9E6, 'CJK COMPATIBILITY IDEOGRAPH-F9E6').
+unicode_name(0xF9E7, 'CJK COMPATIBILITY IDEOGRAPH-F9E7').
+unicode_name(0xF9E8, 'CJK COMPATIBILITY IDEOGRAPH-F9E8').
+unicode_name(0xF9E9, 'CJK COMPATIBILITY IDEOGRAPH-F9E9').
+unicode_name(0xF9EA, 'CJK COMPATIBILITY IDEOGRAPH-F9EA').
+unicode_name(0xF9EB, 'CJK COMPATIBILITY IDEOGRAPH-F9EB').
+unicode_name(0xF9EC, 'CJK COMPATIBILITY IDEOGRAPH-F9EC').
+unicode_name(0xF9ED, 'CJK COMPATIBILITY IDEOGRAPH-F9ED').
+unicode_name(0xF9EE, 'CJK COMPATIBILITY IDEOGRAPH-F9EE').
+unicode_name(0xF9EF, 'CJK COMPATIBILITY IDEOGRAPH-F9EF').
+unicode_name(0xF9F0, 'CJK COMPATIBILITY IDEOGRAPH-F9F0').
+unicode_name(0xF9F1, 'CJK COMPATIBILITY IDEOGRAPH-F9F1').
+unicode_name(0xF9F2, 'CJK COMPATIBILITY IDEOGRAPH-F9F2').
+unicode_name(0xF9F3, 'CJK COMPATIBILITY IDEOGRAPH-F9F3').
+unicode_name(0xF9F4, 'CJK COMPATIBILITY IDEOGRAPH-F9F4').
+unicode_name(0xF9F5, 'CJK COMPATIBILITY IDEOGRAPH-F9F5').
+unicode_name(0xF9F6, 'CJK COMPATIBILITY IDEOGRAPH-F9F6').
+unicode_name(0xF9F7, 'CJK COMPATIBILITY IDEOGRAPH-F9F7').
+unicode_name(0xF9F8, 'CJK COMPATIBILITY IDEOGRAPH-F9F8').
+unicode_name(0xF9F9, 'CJK COMPATIBILITY IDEOGRAPH-F9F9').
+unicode_name(0xF9FA, 'CJK COMPATIBILITY IDEOGRAPH-F9FA').
+unicode_name(0xF9FB, 'CJK COMPATIBILITY IDEOGRAPH-F9FB').
+unicode_name(0xF9FC, 'CJK COMPATIBILITY IDEOGRAPH-F9FC').
+unicode_name(0xF9FD, 'CJK COMPATIBILITY IDEOGRAPH-F9FD').
+unicode_name(0xF9FE, 'CJK COMPATIBILITY IDEOGRAPH-F9FE').
+unicode_name(0xF9FF, 'CJK COMPATIBILITY IDEOGRAPH-F9FF').
+unicode_name(0xFA00, 'CJK COMPATIBILITY IDEOGRAPH-FA00').
+unicode_name(0xFA01, 'CJK COMPATIBILITY IDEOGRAPH-FA01').
+unicode_name(0xFA02, 'CJK COMPATIBILITY IDEOGRAPH-FA02').
+unicode_name(0xFA03, 'CJK COMPATIBILITY IDEOGRAPH-FA03').
+unicode_name(0xFA04, 'CJK COMPATIBILITY IDEOGRAPH-FA04').
+unicode_name(0xFA05, 'CJK COMPATIBILITY IDEOGRAPH-FA05').
+unicode_name(0xFA06, 'CJK COMPATIBILITY IDEOGRAPH-FA06').
+unicode_name(0xFA07, 'CJK COMPATIBILITY IDEOGRAPH-FA07').
+unicode_name(0xFA08, 'CJK COMPATIBILITY IDEOGRAPH-FA08').
+unicode_name(0xFA09, 'CJK COMPATIBILITY IDEOGRAPH-FA09').
+unicode_name(0xFA0A, 'CJK COMPATIBILITY IDEOGRAPH-FA0A').
+unicode_name(0xFA0B, 'CJK COMPATIBILITY IDEOGRAPH-FA0B').
+unicode_name(0xFA0C, 'CJK COMPATIBILITY IDEOGRAPH-FA0C').
+unicode_name(0xFA0D, 'CJK COMPATIBILITY IDEOGRAPH-FA0D').
+unicode_name(0xFA0E, 'CJK COMPATIBILITY IDEOGRAPH-FA0E').
+unicode_name(0xFA0F, 'CJK COMPATIBILITY IDEOGRAPH-FA0F').
+unicode_name(0xFA10, 'CJK COMPATIBILITY IDEOGRAPH-FA10').
+unicode_name(0xFA11, 'CJK COMPATIBILITY IDEOGRAPH-FA11').
+unicode_name(0xFA12, 'CJK COMPATIBILITY IDEOGRAPH-FA12').
+unicode_name(0xFA13, 'CJK COMPATIBILITY IDEOGRAPH-FA13').
+unicode_name(0xFA14, 'CJK COMPATIBILITY IDEOGRAPH-FA14').
+unicode_name(0xFA15, 'CJK COMPATIBILITY IDEOGRAPH-FA15').
+unicode_name(0xFA16, 'CJK COMPATIBILITY IDEOGRAPH-FA16').
+unicode_name(0xFA17, 'CJK COMPATIBILITY IDEOGRAPH-FA17').
+unicode_name(0xFA18, 'CJK COMPATIBILITY IDEOGRAPH-FA18').
+unicode_name(0xFA19, 'CJK COMPATIBILITY IDEOGRAPH-FA19').
+unicode_name(0xFA1A, 'CJK COMPATIBILITY IDEOGRAPH-FA1A').
+unicode_name(0xFA1B, 'CJK COMPATIBILITY IDEOGRAPH-FA1B').
+unicode_name(0xFA1C, 'CJK COMPATIBILITY IDEOGRAPH-FA1C').
+unicode_name(0xFA1D, 'CJK COMPATIBILITY IDEOGRAPH-FA1D').
+unicode_name(0xFA1E, 'CJK COMPATIBILITY IDEOGRAPH-FA1E').
+unicode_name(0xFA1F, 'CJK COMPATIBILITY IDEOGRAPH-FA1F').
+unicode_name(0xFA20, 'CJK COMPATIBILITY IDEOGRAPH-FA20').
+unicode_name(0xFA21, 'CJK COMPATIBILITY IDEOGRAPH-FA21').
+unicode_name(0xFA22, 'CJK COMPATIBILITY IDEOGRAPH-FA22').
+unicode_name(0xFA23, 'CJK COMPATIBILITY IDEOGRAPH-FA23').
+unicode_name(0xFA24, 'CJK COMPATIBILITY IDEOGRAPH-FA24').
+unicode_name(0xFA25, 'CJK COMPATIBILITY IDEOGRAPH-FA25').
+unicode_name(0xFA26, 'CJK COMPATIBILITY IDEOGRAPH-FA26').
+unicode_name(0xFA27, 'CJK COMPATIBILITY IDEOGRAPH-FA27').
+unicode_name(0xFA28, 'CJK COMPATIBILITY IDEOGRAPH-FA28').
+unicode_name(0xFA29, 'CJK COMPATIBILITY IDEOGRAPH-FA29').
+unicode_name(0xFA2A, 'CJK COMPATIBILITY IDEOGRAPH-FA2A').
+unicode_name(0xFA2B, 'CJK COMPATIBILITY IDEOGRAPH-FA2B').
+unicode_name(0xFA2C, 'CJK COMPATIBILITY IDEOGRAPH-FA2C').
+unicode_name(0xFA2D, 'CJK COMPATIBILITY IDEOGRAPH-FA2D').
+unicode_name(0xFA2E, 'CJK COMPATIBILITY IDEOGRAPH-FA2E').
+unicode_name(0xFA2F, 'CJK COMPATIBILITY IDEOGRAPH-FA2F').
+unicode_name(0xFA30, 'CJK COMPATIBILITY IDEOGRAPH-FA30').
+unicode_name(0xFA31, 'CJK COMPATIBILITY IDEOGRAPH-FA31').
+unicode_name(0xFA32, 'CJK COMPATIBILITY IDEOGRAPH-FA32').
+unicode_name(0xFA33, 'CJK COMPATIBILITY IDEOGRAPH-FA33').
+unicode_name(0xFA34, 'CJK COMPATIBILITY IDEOGRAPH-FA34').
+unicode_name(0xFA35, 'CJK COMPATIBILITY IDEOGRAPH-FA35').
+unicode_name(0xFA36, 'CJK COMPATIBILITY IDEOGRAPH-FA36').
+unicode_name(0xFA37, 'CJK COMPATIBILITY IDEOGRAPH-FA37').
+unicode_name(0xFA38, 'CJK COMPATIBILITY IDEOGRAPH-FA38').
+unicode_name(0xFA39, 'CJK COMPATIBILITY IDEOGRAPH-FA39').
+unicode_name(0xFA3A, 'CJK COMPATIBILITY IDEOGRAPH-FA3A').
+unicode_name(0xFA3B, 'CJK COMPATIBILITY IDEOGRAPH-FA3B').
+unicode_name(0xFA3C, 'CJK COMPATIBILITY IDEOGRAPH-FA3C').
+unicode_name(0xFA3D, 'CJK COMPATIBILITY IDEOGRAPH-FA3D').
+unicode_name(0xFA3E, 'CJK COMPATIBILITY IDEOGRAPH-FA3E').
+unicode_name(0xFA3F, 'CJK COMPATIBILITY IDEOGRAPH-FA3F').
+unicode_name(0xFA40, 'CJK COMPATIBILITY IDEOGRAPH-FA40').
+unicode_name(0xFA41, 'CJK COMPATIBILITY IDEOGRAPH-FA41').
+unicode_name(0xFA42, 'CJK COMPATIBILITY IDEOGRAPH-FA42').
+unicode_name(0xFA43, 'CJK COMPATIBILITY IDEOGRAPH-FA43').
+unicode_name(0xFA44, 'CJK COMPATIBILITY IDEOGRAPH-FA44').
+unicode_name(0xFA45, 'CJK COMPATIBILITY IDEOGRAPH-FA45').
+unicode_name(0xFA46, 'CJK COMPATIBILITY IDEOGRAPH-FA46').
+unicode_name(0xFA47, 'CJK COMPATIBILITY IDEOGRAPH-FA47').
+unicode_name(0xFA48, 'CJK COMPATIBILITY IDEOGRAPH-FA48').
+unicode_name(0xFA49, 'CJK COMPATIBILITY IDEOGRAPH-FA49').
+unicode_name(0xFA4A, 'CJK COMPATIBILITY IDEOGRAPH-FA4A').
+unicode_name(0xFA4B, 'CJK COMPATIBILITY IDEOGRAPH-FA4B').
+unicode_name(0xFA4C, 'CJK COMPATIBILITY IDEOGRAPH-FA4C').
+unicode_name(0xFA4D, 'CJK COMPATIBILITY IDEOGRAPH-FA4D').
+unicode_name(0xFA4E, 'CJK COMPATIBILITY IDEOGRAPH-FA4E').
+unicode_name(0xFA4F, 'CJK COMPATIBILITY IDEOGRAPH-FA4F').
+unicode_name(0xFA50, 'CJK COMPATIBILITY IDEOGRAPH-FA50').
+unicode_name(0xFA51, 'CJK COMPATIBILITY IDEOGRAPH-FA51').
+unicode_name(0xFA52, 'CJK COMPATIBILITY IDEOGRAPH-FA52').
+unicode_name(0xFA53, 'CJK COMPATIBILITY IDEOGRAPH-FA53').
+unicode_name(0xFA54, 'CJK COMPATIBILITY IDEOGRAPH-FA54').
+unicode_name(0xFA55, 'CJK COMPATIBILITY IDEOGRAPH-FA55').
+unicode_name(0xFA56, 'CJK COMPATIBILITY IDEOGRAPH-FA56').
+unicode_name(0xFA57, 'CJK COMPATIBILITY IDEOGRAPH-FA57').
+unicode_name(0xFA58, 'CJK COMPATIBILITY IDEOGRAPH-FA58').
+unicode_name(0xFA59, 'CJK COMPATIBILITY IDEOGRAPH-FA59').
+unicode_name(0xFA5A, 'CJK COMPATIBILITY IDEOGRAPH-FA5A').
+unicode_name(0xFA5B, 'CJK COMPATIBILITY IDEOGRAPH-FA5B').
+unicode_name(0xFA5C, 'CJK COMPATIBILITY IDEOGRAPH-FA5C').
+unicode_name(0xFA5D, 'CJK COMPATIBILITY IDEOGRAPH-FA5D').
+unicode_name(0xFA5E, 'CJK COMPATIBILITY IDEOGRAPH-FA5E').
+unicode_name(0xFA5F, 'CJK COMPATIBILITY IDEOGRAPH-FA5F').
+unicode_name(0xFA60, 'CJK COMPATIBILITY IDEOGRAPH-FA60').
+unicode_name(0xFA61, 'CJK COMPATIBILITY IDEOGRAPH-FA61').
+unicode_name(0xFA62, 'CJK COMPATIBILITY IDEOGRAPH-FA62').
+unicode_name(0xFA63, 'CJK COMPATIBILITY IDEOGRAPH-FA63').
+unicode_name(0xFA64, 'CJK COMPATIBILITY IDEOGRAPH-FA64').
+unicode_name(0xFA65, 'CJK COMPATIBILITY IDEOGRAPH-FA65').
+unicode_name(0xFA66, 'CJK COMPATIBILITY IDEOGRAPH-FA66').
+unicode_name(0xFA67, 'CJK COMPATIBILITY IDEOGRAPH-FA67').
+unicode_name(0xFA68, 'CJK COMPATIBILITY IDEOGRAPH-FA68').
+unicode_name(0xFA69, 'CJK COMPATIBILITY IDEOGRAPH-FA69').
+unicode_name(0xFA6A, 'CJK COMPATIBILITY IDEOGRAPH-FA6A').
+unicode_name(0xFA6B, 'CJK COMPATIBILITY IDEOGRAPH-FA6B').
+unicode_name(0xFA6C, 'CJK COMPATIBILITY IDEOGRAPH-FA6C').
+unicode_name(0xFA6D, 'CJK COMPATIBILITY IDEOGRAPH-FA6D').
+unicode_name(0xFA70, 'CJK COMPATIBILITY IDEOGRAPH-FA70').
+unicode_name(0xFA71, 'CJK COMPATIBILITY IDEOGRAPH-FA71').
+unicode_name(0xFA72, 'CJK COMPATIBILITY IDEOGRAPH-FA72').
+unicode_name(0xFA73, 'CJK COMPATIBILITY IDEOGRAPH-FA73').
+unicode_name(0xFA74, 'CJK COMPATIBILITY IDEOGRAPH-FA74').
+unicode_name(0xFA75, 'CJK COMPATIBILITY IDEOGRAPH-FA75').
+unicode_name(0xFA76, 'CJK COMPATIBILITY IDEOGRAPH-FA76').
+unicode_name(0xFA77, 'CJK COMPATIBILITY IDEOGRAPH-FA77').
+unicode_name(0xFA78, 'CJK COMPATIBILITY IDEOGRAPH-FA78').
+unicode_name(0xFA79, 'CJK COMPATIBILITY IDEOGRAPH-FA79').
+unicode_name(0xFA7A, 'CJK COMPATIBILITY IDEOGRAPH-FA7A').
+unicode_name(0xFA7B, 'CJK COMPATIBILITY IDEOGRAPH-FA7B').
+unicode_name(0xFA7C, 'CJK COMPATIBILITY IDEOGRAPH-FA7C').
+unicode_name(0xFA7D, 'CJK COMPATIBILITY IDEOGRAPH-FA7D').
+unicode_name(0xFA7E, 'CJK COMPATIBILITY IDEOGRAPH-FA7E').
+unicode_name(0xFA7F, 'CJK COMPATIBILITY IDEOGRAPH-FA7F').
+unicode_name(0xFA80, 'CJK COMPATIBILITY IDEOGRAPH-FA80').
+unicode_name(0xFA81, 'CJK COMPATIBILITY IDEOGRAPH-FA81').
+unicode_name(0xFA82, 'CJK COMPATIBILITY IDEOGRAPH-FA82').
+unicode_name(0xFA83, 'CJK COMPATIBILITY IDEOGRAPH-FA83').
+unicode_name(0xFA84, 'CJK COMPATIBILITY IDEOGRAPH-FA84').
+unicode_name(0xFA85, 'CJK COMPATIBILITY IDEOGRAPH-FA85').
+unicode_name(0xFA86, 'CJK COMPATIBILITY IDEOGRAPH-FA86').
+unicode_name(0xFA87, 'CJK COMPATIBILITY IDEOGRAPH-FA87').
+unicode_name(0xFA88, 'CJK COMPATIBILITY IDEOGRAPH-FA88').
+unicode_name(0xFA89, 'CJK COMPATIBILITY IDEOGRAPH-FA89').
+unicode_name(0xFA8A, 'CJK COMPATIBILITY IDEOGRAPH-FA8A').
+unicode_name(0xFA8B, 'CJK COMPATIBILITY IDEOGRAPH-FA8B').
+unicode_name(0xFA8C, 'CJK COMPATIBILITY IDEOGRAPH-FA8C').
+unicode_name(0xFA8D, 'CJK COMPATIBILITY IDEOGRAPH-FA8D').
+unicode_name(0xFA8E, 'CJK COMPATIBILITY IDEOGRAPH-FA8E').
+unicode_name(0xFA8F, 'CJK COMPATIBILITY IDEOGRAPH-FA8F').
+unicode_name(0xFA90, 'CJK COMPATIBILITY IDEOGRAPH-FA90').
+unicode_name(0xFA91, 'CJK COMPATIBILITY IDEOGRAPH-FA91').
+unicode_name(0xFA92, 'CJK COMPATIBILITY IDEOGRAPH-FA92').
+unicode_name(0xFA93, 'CJK COMPATIBILITY IDEOGRAPH-FA93').
+unicode_name(0xFA94, 'CJK COMPATIBILITY IDEOGRAPH-FA94').
+unicode_name(0xFA95, 'CJK COMPATIBILITY IDEOGRAPH-FA95').
+unicode_name(0xFA96, 'CJK COMPATIBILITY IDEOGRAPH-FA96').
+unicode_name(0xFA97, 'CJK COMPATIBILITY IDEOGRAPH-FA97').
+unicode_name(0xFA98, 'CJK COMPATIBILITY IDEOGRAPH-FA98').
+unicode_name(0xFA99, 'CJK COMPATIBILITY IDEOGRAPH-FA99').
+unicode_name(0xFA9A, 'CJK COMPATIBILITY IDEOGRAPH-FA9A').
+unicode_name(0xFA9B, 'CJK COMPATIBILITY IDEOGRAPH-FA9B').
+unicode_name(0xFA9C, 'CJK COMPATIBILITY IDEOGRAPH-FA9C').
+unicode_name(0xFA9D, 'CJK COMPATIBILITY IDEOGRAPH-FA9D').
+unicode_name(0xFA9E, 'CJK COMPATIBILITY IDEOGRAPH-FA9E').
+unicode_name(0xFA9F, 'CJK COMPATIBILITY IDEOGRAPH-FA9F').
+unicode_name(0xFAA0, 'CJK COMPATIBILITY IDEOGRAPH-FAA0').
+unicode_name(0xFAA1, 'CJK COMPATIBILITY IDEOGRAPH-FAA1').
+unicode_name(0xFAA2, 'CJK COMPATIBILITY IDEOGRAPH-FAA2').
+unicode_name(0xFAA3, 'CJK COMPATIBILITY IDEOGRAPH-FAA3').
+unicode_name(0xFAA4, 'CJK COMPATIBILITY IDEOGRAPH-FAA4').
+unicode_name(0xFAA5, 'CJK COMPATIBILITY IDEOGRAPH-FAA5').
+unicode_name(0xFAA6, 'CJK COMPATIBILITY IDEOGRAPH-FAA6').
+unicode_name(0xFAA7, 'CJK COMPATIBILITY IDEOGRAPH-FAA7').
+unicode_name(0xFAA8, 'CJK COMPATIBILITY IDEOGRAPH-FAA8').
+unicode_name(0xFAA9, 'CJK COMPATIBILITY IDEOGRAPH-FAA9').
+unicode_name(0xFAAA, 'CJK COMPATIBILITY IDEOGRAPH-FAAA').
+unicode_name(0xFAAB, 'CJK COMPATIBILITY IDEOGRAPH-FAAB').
+unicode_name(0xFAAC, 'CJK COMPATIBILITY IDEOGRAPH-FAAC').
+unicode_name(0xFAAD, 'CJK COMPATIBILITY IDEOGRAPH-FAAD').
+unicode_name(0xFAAE, 'CJK COMPATIBILITY IDEOGRAPH-FAAE').
+unicode_name(0xFAAF, 'CJK COMPATIBILITY IDEOGRAPH-FAAF').
+unicode_name(0xFAB0, 'CJK COMPATIBILITY IDEOGRAPH-FAB0').
+unicode_name(0xFAB1, 'CJK COMPATIBILITY IDEOGRAPH-FAB1').
+unicode_name(0xFAB2, 'CJK COMPATIBILITY IDEOGRAPH-FAB2').
+unicode_name(0xFAB3, 'CJK COMPATIBILITY IDEOGRAPH-FAB3').
+unicode_name(0xFAB4, 'CJK COMPATIBILITY IDEOGRAPH-FAB4').
+unicode_name(0xFAB5, 'CJK COMPATIBILITY IDEOGRAPH-FAB5').
+unicode_name(0xFAB6, 'CJK COMPATIBILITY IDEOGRAPH-FAB6').
+unicode_name(0xFAB7, 'CJK COMPATIBILITY IDEOGRAPH-FAB7').
+unicode_name(0xFAB8, 'CJK COMPATIBILITY IDEOGRAPH-FAB8').
+unicode_name(0xFAB9, 'CJK COMPATIBILITY IDEOGRAPH-FAB9').
+unicode_name(0xFABA, 'CJK COMPATIBILITY IDEOGRAPH-FABA').
+unicode_name(0xFABB, 'CJK COMPATIBILITY IDEOGRAPH-FABB').
+unicode_name(0xFABC, 'CJK COMPATIBILITY IDEOGRAPH-FABC').
+unicode_name(0xFABD, 'CJK COMPATIBILITY IDEOGRAPH-FABD').
+unicode_name(0xFABE, 'CJK COMPATIBILITY IDEOGRAPH-FABE').
+unicode_name(0xFABF, 'CJK COMPATIBILITY IDEOGRAPH-FABF').
+unicode_name(0xFAC0, 'CJK COMPATIBILITY IDEOGRAPH-FAC0').
+unicode_name(0xFAC1, 'CJK COMPATIBILITY IDEOGRAPH-FAC1').
+unicode_name(0xFAC2, 'CJK COMPATIBILITY IDEOGRAPH-FAC2').
+unicode_name(0xFAC3, 'CJK COMPATIBILITY IDEOGRAPH-FAC3').
+unicode_name(0xFAC4, 'CJK COMPATIBILITY IDEOGRAPH-FAC4').
+unicode_name(0xFAC5, 'CJK COMPATIBILITY IDEOGRAPH-FAC5').
+unicode_name(0xFAC6, 'CJK COMPATIBILITY IDEOGRAPH-FAC6').
+unicode_name(0xFAC7, 'CJK COMPATIBILITY IDEOGRAPH-FAC7').
+unicode_name(0xFAC8, 'CJK COMPATIBILITY IDEOGRAPH-FAC8').
+unicode_name(0xFAC9, 'CJK COMPATIBILITY IDEOGRAPH-FAC9').
+unicode_name(0xFACA, 'CJK COMPATIBILITY IDEOGRAPH-FACA').
+unicode_name(0xFACB, 'CJK COMPATIBILITY IDEOGRAPH-FACB').
+unicode_name(0xFACC, 'CJK COMPATIBILITY IDEOGRAPH-FACC').
+unicode_name(0xFACD, 'CJK COMPATIBILITY IDEOGRAPH-FACD').
+unicode_name(0xFACE, 'CJK COMPATIBILITY IDEOGRAPH-FACE').
+unicode_name(0xFACF, 'CJK COMPATIBILITY IDEOGRAPH-FACF').
+unicode_name(0xFAD0, 'CJK COMPATIBILITY IDEOGRAPH-FAD0').
+unicode_name(0xFAD1, 'CJK COMPATIBILITY IDEOGRAPH-FAD1').
+unicode_name(0xFAD2, 'CJK COMPATIBILITY IDEOGRAPH-FAD2').
+unicode_name(0xFAD3, 'CJK COMPATIBILITY IDEOGRAPH-FAD3').
+unicode_name(0xFAD4, 'CJK COMPATIBILITY IDEOGRAPH-FAD4').
+unicode_name(0xFAD5, 'CJK COMPATIBILITY IDEOGRAPH-FAD5').
+unicode_name(0xFAD6, 'CJK COMPATIBILITY IDEOGRAPH-FAD6').
+unicode_name(0xFAD7, 'CJK COMPATIBILITY IDEOGRAPH-FAD7').
+unicode_name(0xFAD8, 'CJK COMPATIBILITY IDEOGRAPH-FAD8').
+unicode_name(0xFAD9, 'CJK COMPATIBILITY IDEOGRAPH-FAD9').
+unicode_name(0xFB1D, 'HEBREW LETTER YOD WITH HIRIQ').
+unicode_name(0xFB1F, 'HEBREW LIGATURE YIDDISH YOD YOD PATAH').
+unicode_name(0xFB20, 'HEBREW LETTER ALTERNATIVE AYIN').
+unicode_name(0xFB21, 'HEBREW LETTER WIDE ALEF').
+unicode_name(0xFB22, 'HEBREW LETTER WIDE DALET').
+unicode_name(0xFB23, 'HEBREW LETTER WIDE HE').
+unicode_name(0xFB24, 'HEBREW LETTER WIDE KAF').
+unicode_name(0xFB25, 'HEBREW LETTER WIDE LAMED').
+unicode_name(0xFB26, 'HEBREW LETTER WIDE FINAL MEM').
+unicode_name(0xFB27, 'HEBREW LETTER WIDE RESH').
+unicode_name(0xFB28, 'HEBREW LETTER WIDE TAV').
+unicode_name(0xFB2A, 'HEBREW LETTER SHIN WITH SHIN DOT').
+unicode_name(0xFB2B, 'HEBREW LETTER SHIN WITH SIN DOT').
+unicode_name(0xFB2C, 'HEBREW LETTER SHIN WITH DAGESH AND SHIN DOT').
+unicode_name(0xFB2D, 'HEBREW LETTER SHIN WITH DAGESH AND SIN DOT').
+unicode_name(0xFB2E, 'HEBREW LETTER ALEF WITH PATAH').
+unicode_name(0xFB2F, 'HEBREW LETTER ALEF WITH QAMATS').
+unicode_name(0xFB30, 'HEBREW LETTER ALEF WITH MAPIQ').
+unicode_name(0xFB31, 'HEBREW LETTER BET WITH DAGESH').
+unicode_name(0xFB32, 'HEBREW LETTER GIMEL WITH DAGESH').
+unicode_name(0xFB33, 'HEBREW LETTER DALET WITH DAGESH').
+unicode_name(0xFB34, 'HEBREW LETTER HE WITH MAPIQ').
+unicode_name(0xFB35, 'HEBREW LETTER VAV WITH DAGESH').
+unicode_name(0xFB36, 'HEBREW LETTER ZAYIN WITH DAGESH').
+unicode_name(0xFB38, 'HEBREW LETTER TET WITH DAGESH').
+unicode_name(0xFB39, 'HEBREW LETTER YOD WITH DAGESH').
+unicode_name(0xFB3A, 'HEBREW LETTER FINAL KAF WITH DAGESH').
+unicode_name(0xFB3B, 'HEBREW LETTER KAF WITH DAGESH').
+unicode_name(0xFB3C, 'HEBREW LETTER LAMED WITH DAGESH').
+unicode_name(0xFB3E, 'HEBREW LETTER MEM WITH DAGESH').
+unicode_name(0xFB40, 'HEBREW LETTER NUN WITH DAGESH').
+unicode_name(0xFB41, 'HEBREW LETTER SAMEKH WITH DAGESH').
+unicode_name(0xFB43, 'HEBREW LETTER FINAL PE WITH DAGESH').
+unicode_name(0xFB44, 'HEBREW LETTER PE WITH DAGESH').
+unicode_name(0xFB46, 'HEBREW LETTER TSADI WITH DAGESH').
+unicode_name(0xFB47, 'HEBREW LETTER QOF WITH DAGESH').
+unicode_name(0xFB48, 'HEBREW LETTER RESH WITH DAGESH').
+unicode_name(0xFB49, 'HEBREW LETTER SHIN WITH DAGESH').
+unicode_name(0xFB4A, 'HEBREW LETTER TAV WITH DAGESH').
+unicode_name(0xFB4B, 'HEBREW LETTER VAV WITH HOLAM').
+unicode_name(0xFB4C, 'HEBREW LETTER BET WITH RAFE').
+unicode_name(0xFB4D, 'HEBREW LETTER KAF WITH RAFE').
+unicode_name(0xFB4E, 'HEBREW LETTER PE WITH RAFE').
+unicode_name(0xFB4F, 'HEBREW LIGATURE ALEF LAMED').
+unicode_name(0xFB50, 'ARABIC LETTER ALEF WASLA ISOLATED FORM').
+unicode_name(0xFB51, 'ARABIC LETTER ALEF WASLA FINAL FORM').
+unicode_name(0xFB52, 'ARABIC LETTER BEEH ISOLATED FORM').
+unicode_name(0xFB53, 'ARABIC LETTER BEEH FINAL FORM').
+unicode_name(0xFB54, 'ARABIC LETTER BEEH INITIAL FORM').
+unicode_name(0xFB55, 'ARABIC LETTER BEEH MEDIAL FORM').
+unicode_name(0xFB56, 'ARABIC LETTER PEH ISOLATED FORM').
+unicode_name(0xFB57, 'ARABIC LETTER PEH FINAL FORM').
+unicode_name(0xFB58, 'ARABIC LETTER PEH INITIAL FORM').
+unicode_name(0xFB59, 'ARABIC LETTER PEH MEDIAL FORM').
+unicode_name(0xFB5A, 'ARABIC LETTER BEHEH ISOLATED FORM').
+unicode_name(0xFB5B, 'ARABIC LETTER BEHEH FINAL FORM').
+unicode_name(0xFB5C, 'ARABIC LETTER BEHEH INITIAL FORM').
+unicode_name(0xFB5D, 'ARABIC LETTER BEHEH MEDIAL FORM').
+unicode_name(0xFB5E, 'ARABIC LETTER TTEHEH ISOLATED FORM').
+unicode_name(0xFB5F, 'ARABIC LETTER TTEHEH FINAL FORM').
+unicode_name(0xFB60, 'ARABIC LETTER TTEHEH INITIAL FORM').
+unicode_name(0xFB61, 'ARABIC LETTER TTEHEH MEDIAL FORM').
+unicode_name(0xFB62, 'ARABIC LETTER TEHEH ISOLATED FORM').
+unicode_name(0xFB63, 'ARABIC LETTER TEHEH FINAL FORM').
+unicode_name(0xFB64, 'ARABIC LETTER TEHEH INITIAL FORM').
+unicode_name(0xFB65, 'ARABIC LETTER TEHEH MEDIAL FORM').
+unicode_name(0xFB66, 'ARABIC LETTER TTEH ISOLATED FORM').
+unicode_name(0xFB67, 'ARABIC LETTER TTEH FINAL FORM').
+unicode_name(0xFB68, 'ARABIC LETTER TTEH INITIAL FORM').
+unicode_name(0xFB69, 'ARABIC LETTER TTEH MEDIAL FORM').
+unicode_name(0xFB6A, 'ARABIC LETTER VEH ISOLATED FORM').
+unicode_name(0xFB6B, 'ARABIC LETTER VEH FINAL FORM').
+unicode_name(0xFB6C, 'ARABIC LETTER VEH INITIAL FORM').
+unicode_name(0xFB6D, 'ARABIC LETTER VEH MEDIAL FORM').
+unicode_name(0xFB6E, 'ARABIC LETTER PEHEH ISOLATED FORM').
+unicode_name(0xFB6F, 'ARABIC LETTER PEHEH FINAL FORM').
+unicode_name(0xFB70, 'ARABIC LETTER PEHEH INITIAL FORM').
+unicode_name(0xFB71, 'ARABIC LETTER PEHEH MEDIAL FORM').
+unicode_name(0xFB72, 'ARABIC LETTER DYEH ISOLATED FORM').
+unicode_name(0xFB73, 'ARABIC LETTER DYEH FINAL FORM').
+unicode_name(0xFB74, 'ARABIC LETTER DYEH INITIAL FORM').
+unicode_name(0xFB75, 'ARABIC LETTER DYEH MEDIAL FORM').
+unicode_name(0xFB76, 'ARABIC LETTER NYEH ISOLATED FORM').
+unicode_name(0xFB77, 'ARABIC LETTER NYEH FINAL FORM').
+unicode_name(0xFB78, 'ARABIC LETTER NYEH INITIAL FORM').
+unicode_name(0xFB79, 'ARABIC LETTER NYEH MEDIAL FORM').
+unicode_name(0xFB7A, 'ARABIC LETTER TCHEH ISOLATED FORM').
+unicode_name(0xFB7B, 'ARABIC LETTER TCHEH FINAL FORM').
+unicode_name(0xFB7C, 'ARABIC LETTER TCHEH INITIAL FORM').
+unicode_name(0xFB7D, 'ARABIC LETTER TCHEH MEDIAL FORM').
+unicode_name(0xFB7E, 'ARABIC LETTER TCHEHEH ISOLATED FORM').
+unicode_name(0xFB7F, 'ARABIC LETTER TCHEHEH FINAL FORM').
+unicode_name(0xFB80, 'ARABIC LETTER TCHEHEH INITIAL FORM').
+unicode_name(0xFB81, 'ARABIC LETTER TCHEHEH MEDIAL FORM').
+unicode_name(0xFB82, 'ARABIC LETTER DDAHAL ISOLATED FORM').
+unicode_name(0xFB83, 'ARABIC LETTER DDAHAL FINAL FORM').
+unicode_name(0xFB84, 'ARABIC LETTER DAHAL ISOLATED FORM').
+unicode_name(0xFB85, 'ARABIC LETTER DAHAL FINAL FORM').
+unicode_name(0xFB86, 'ARABIC LETTER DUL ISOLATED FORM').
+unicode_name(0xFB87, 'ARABIC LETTER DUL FINAL FORM').
+unicode_name(0xFB88, 'ARABIC LETTER DDAL ISOLATED FORM').
+unicode_name(0xFB89, 'ARABIC LETTER DDAL FINAL FORM').
+unicode_name(0xFB8A, 'ARABIC LETTER JEH ISOLATED FORM').
+unicode_name(0xFB8B, 'ARABIC LETTER JEH FINAL FORM').
+unicode_name(0xFB8C, 'ARABIC LETTER RREH ISOLATED FORM').
+unicode_name(0xFB8D, 'ARABIC LETTER RREH FINAL FORM').
+unicode_name(0xFB8E, 'ARABIC LETTER KEHEH ISOLATED FORM').
+unicode_name(0xFB8F, 'ARABIC LETTER KEHEH FINAL FORM').
+unicode_name(0xFB90, 'ARABIC LETTER KEHEH INITIAL FORM').
+unicode_name(0xFB91, 'ARABIC LETTER KEHEH MEDIAL FORM').
+unicode_name(0xFB92, 'ARABIC LETTER GAF ISOLATED FORM').
+unicode_name(0xFB93, 'ARABIC LETTER GAF FINAL FORM').
+unicode_name(0xFB94, 'ARABIC LETTER GAF INITIAL FORM').
+unicode_name(0xFB95, 'ARABIC LETTER GAF MEDIAL FORM').
+unicode_name(0xFB96, 'ARABIC LETTER GUEH ISOLATED FORM').
+unicode_name(0xFB97, 'ARABIC LETTER GUEH FINAL FORM').
+unicode_name(0xFB98, 'ARABIC LETTER GUEH INITIAL FORM').
+unicode_name(0xFB99, 'ARABIC LETTER GUEH MEDIAL FORM').
+unicode_name(0xFB9A, 'ARABIC LETTER NGOEH ISOLATED FORM').
+unicode_name(0xFB9B, 'ARABIC LETTER NGOEH FINAL FORM').
+unicode_name(0xFB9C, 'ARABIC LETTER NGOEH INITIAL FORM').
+unicode_name(0xFB9D, 'ARABIC LETTER NGOEH MEDIAL FORM').
+unicode_name(0xFB9E, 'ARABIC LETTER NOON GHUNNA ISOLATED FORM').
+unicode_name(0xFB9F, 'ARABIC LETTER NOON GHUNNA FINAL FORM').
+unicode_name(0xFBA0, 'ARABIC LETTER RNOON ISOLATED FORM').
+unicode_name(0xFBA1, 'ARABIC LETTER RNOON FINAL FORM').
+unicode_name(0xFBA2, 'ARABIC LETTER RNOON INITIAL FORM').
+unicode_name(0xFBA3, 'ARABIC LETTER RNOON MEDIAL FORM').
+unicode_name(0xFBA4, 'ARABIC LETTER HEH WITH YEH ABOVE ISOLATED FORM').
+unicode_name(0xFBA5, 'ARABIC LETTER HEH WITH YEH ABOVE FINAL FORM').
+unicode_name(0xFBA6, 'ARABIC LETTER HEH GOAL ISOLATED FORM').
+unicode_name(0xFBA7, 'ARABIC LETTER HEH GOAL FINAL FORM').
+unicode_name(0xFBA8, 'ARABIC LETTER HEH GOAL INITIAL FORM').
+unicode_name(0xFBA9, 'ARABIC LETTER HEH GOAL MEDIAL FORM').
+unicode_name(0xFBAA, 'ARABIC LETTER HEH DOACHASHMEE ISOLATED FORM').
+unicode_name(0xFBAB, 'ARABIC LETTER HEH DOACHASHMEE FINAL FORM').
+unicode_name(0xFBAC, 'ARABIC LETTER HEH DOACHASHMEE INITIAL FORM').
+unicode_name(0xFBAD, 'ARABIC LETTER HEH DOACHASHMEE MEDIAL FORM').
+unicode_name(0xFBAE, 'ARABIC LETTER YEH BARREE ISOLATED FORM').
+unicode_name(0xFBAF, 'ARABIC LETTER YEH BARREE FINAL FORM').
+unicode_name(0xFBB0, 'ARABIC LETTER YEH BARREE WITH HAMZA ABOVE ISOLATED FORM').
+unicode_name(0xFBB1, 'ARABIC LETTER YEH BARREE WITH HAMZA ABOVE FINAL FORM').
+unicode_name(0xFBD3, 'ARABIC LETTER NG ISOLATED FORM').
+unicode_name(0xFBD4, 'ARABIC LETTER NG FINAL FORM').
+unicode_name(0xFBD5, 'ARABIC LETTER NG INITIAL FORM').
+unicode_name(0xFBD6, 'ARABIC LETTER NG MEDIAL FORM').
+unicode_name(0xFBD7, 'ARABIC LETTER U ISOLATED FORM').
+unicode_name(0xFBD8, 'ARABIC LETTER U FINAL FORM').
+unicode_name(0xFBD9, 'ARABIC LETTER OE ISOLATED FORM').
+unicode_name(0xFBDA, 'ARABIC LETTER OE FINAL FORM').
+unicode_name(0xFBDB, 'ARABIC LETTER YU ISOLATED FORM').
+unicode_name(0xFBDC, 'ARABIC LETTER YU FINAL FORM').
+unicode_name(0xFBDD, 'ARABIC LETTER U WITH HAMZA ABOVE ISOLATED FORM').
+unicode_name(0xFBDE, 'ARABIC LETTER VE ISOLATED FORM').
+unicode_name(0xFBDF, 'ARABIC LETTER VE FINAL FORM').
+unicode_name(0xFBE0, 'ARABIC LETTER KIRGHIZ OE ISOLATED FORM').
+unicode_name(0xFBE1, 'ARABIC LETTER KIRGHIZ OE FINAL FORM').
+unicode_name(0xFBE2, 'ARABIC LETTER KIRGHIZ YU ISOLATED FORM').
+unicode_name(0xFBE3, 'ARABIC LETTER KIRGHIZ YU FINAL FORM').
+unicode_name(0xFBE4, 'ARABIC LETTER E ISOLATED FORM').
+unicode_name(0xFBE5, 'ARABIC LETTER E FINAL FORM').
+unicode_name(0xFBE6, 'ARABIC LETTER E INITIAL FORM').
+unicode_name(0xFBE7, 'ARABIC LETTER E MEDIAL FORM').
+unicode_name(0xFBE8, 'ARABIC LETTER UIGHUR KAZAKH KIRGHIZ ALEF MAKSURA INITIAL FORM').
+unicode_name(0xFBE9, 'ARABIC LETTER UIGHUR KAZAKH KIRGHIZ ALEF MAKSURA MEDIAL FORM').
+unicode_name(0xFBEA, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH ALEF ISOLATED FORM').
+unicode_name(0xFBEB, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH ALEF FINAL FORM').
+unicode_name(0xFBEC, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH AE ISOLATED FORM').
+unicode_name(0xFBED, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH AE FINAL FORM').
+unicode_name(0xFBEE, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH WAW ISOLATED FORM').
+unicode_name(0xFBEF, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH WAW FINAL FORM').
+unicode_name(0xFBF0, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH U ISOLATED FORM').
+unicode_name(0xFBF1, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH U FINAL FORM').
+unicode_name(0xFBF2, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH OE ISOLATED FORM').
+unicode_name(0xFBF3, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH OE FINAL FORM').
+unicode_name(0xFBF4, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH YU ISOLATED FORM').
+unicode_name(0xFBF5, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH YU FINAL FORM').
+unicode_name(0xFBF6, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH E ISOLATED FORM').
+unicode_name(0xFBF7, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH E FINAL FORM').
+unicode_name(0xFBF8, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH E INITIAL FORM').
+unicode_name(0xFBF9, 'ARABIC LIGATURE UIGHUR KIRGHIZ YEH WITH HAMZA ABOVE WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFBFA, 'ARABIC LIGATURE UIGHUR KIRGHIZ YEH WITH HAMZA ABOVE WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFBFB, 'ARABIC LIGATURE UIGHUR KIRGHIZ YEH WITH HAMZA ABOVE WITH ALEF MAKSURA INITIAL FORM').
+unicode_name(0xFBFC, 'ARABIC LETTER FARSI YEH ISOLATED FORM').
+unicode_name(0xFBFD, 'ARABIC LETTER FARSI YEH FINAL FORM').
+unicode_name(0xFBFE, 'ARABIC LETTER FARSI YEH INITIAL FORM').
+unicode_name(0xFBFF, 'ARABIC LETTER FARSI YEH MEDIAL FORM').
+unicode_name(0xFC00, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH JEEM ISOLATED FORM').
+unicode_name(0xFC01, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH HAH ISOLATED FORM').
+unicode_name(0xFC02, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH MEEM ISOLATED FORM').
+unicode_name(0xFC03, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC04, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH YEH ISOLATED FORM').
+unicode_name(0xFC05, 'ARABIC LIGATURE BEH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC06, 'ARABIC LIGATURE BEH WITH HAH ISOLATED FORM').
+unicode_name(0xFC07, 'ARABIC LIGATURE BEH WITH KHAH ISOLATED FORM').
+unicode_name(0xFC08, 'ARABIC LIGATURE BEH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC09, 'ARABIC LIGATURE BEH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC0A, 'ARABIC LIGATURE BEH WITH YEH ISOLATED FORM').
+unicode_name(0xFC0B, 'ARABIC LIGATURE TEH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC0C, 'ARABIC LIGATURE TEH WITH HAH ISOLATED FORM').
+unicode_name(0xFC0D, 'ARABIC LIGATURE TEH WITH KHAH ISOLATED FORM').
+unicode_name(0xFC0E, 'ARABIC LIGATURE TEH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC0F, 'ARABIC LIGATURE TEH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC10, 'ARABIC LIGATURE TEH WITH YEH ISOLATED FORM').
+unicode_name(0xFC11, 'ARABIC LIGATURE THEH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC12, 'ARABIC LIGATURE THEH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC13, 'ARABIC LIGATURE THEH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC14, 'ARABIC LIGATURE THEH WITH YEH ISOLATED FORM').
+unicode_name(0xFC15, 'ARABIC LIGATURE JEEM WITH HAH ISOLATED FORM').
+unicode_name(0xFC16, 'ARABIC LIGATURE JEEM WITH MEEM ISOLATED FORM').
+unicode_name(0xFC17, 'ARABIC LIGATURE HAH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC18, 'ARABIC LIGATURE HAH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC19, 'ARABIC LIGATURE KHAH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC1A, 'ARABIC LIGATURE KHAH WITH HAH ISOLATED FORM').
+unicode_name(0xFC1B, 'ARABIC LIGATURE KHAH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC1C, 'ARABIC LIGATURE SEEN WITH JEEM ISOLATED FORM').
+unicode_name(0xFC1D, 'ARABIC LIGATURE SEEN WITH HAH ISOLATED FORM').
+unicode_name(0xFC1E, 'ARABIC LIGATURE SEEN WITH KHAH ISOLATED FORM').
+unicode_name(0xFC1F, 'ARABIC LIGATURE SEEN WITH MEEM ISOLATED FORM').
+unicode_name(0xFC20, 'ARABIC LIGATURE SAD WITH HAH ISOLATED FORM').
+unicode_name(0xFC21, 'ARABIC LIGATURE SAD WITH MEEM ISOLATED FORM').
+unicode_name(0xFC22, 'ARABIC LIGATURE DAD WITH JEEM ISOLATED FORM').
+unicode_name(0xFC23, 'ARABIC LIGATURE DAD WITH HAH ISOLATED FORM').
+unicode_name(0xFC24, 'ARABIC LIGATURE DAD WITH KHAH ISOLATED FORM').
+unicode_name(0xFC25, 'ARABIC LIGATURE DAD WITH MEEM ISOLATED FORM').
+unicode_name(0xFC26, 'ARABIC LIGATURE TAH WITH HAH ISOLATED FORM').
+unicode_name(0xFC27, 'ARABIC LIGATURE TAH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC28, 'ARABIC LIGATURE ZAH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC29, 'ARABIC LIGATURE AIN WITH JEEM ISOLATED FORM').
+unicode_name(0xFC2A, 'ARABIC LIGATURE AIN WITH MEEM ISOLATED FORM').
+unicode_name(0xFC2B, 'ARABIC LIGATURE GHAIN WITH JEEM ISOLATED FORM').
+unicode_name(0xFC2C, 'ARABIC LIGATURE GHAIN WITH MEEM ISOLATED FORM').
+unicode_name(0xFC2D, 'ARABIC LIGATURE FEH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC2E, 'ARABIC LIGATURE FEH WITH HAH ISOLATED FORM').
+unicode_name(0xFC2F, 'ARABIC LIGATURE FEH WITH KHAH ISOLATED FORM').
+unicode_name(0xFC30, 'ARABIC LIGATURE FEH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC31, 'ARABIC LIGATURE FEH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC32, 'ARABIC LIGATURE FEH WITH YEH ISOLATED FORM').
+unicode_name(0xFC33, 'ARABIC LIGATURE QAF WITH HAH ISOLATED FORM').
+unicode_name(0xFC34, 'ARABIC LIGATURE QAF WITH MEEM ISOLATED FORM').
+unicode_name(0xFC35, 'ARABIC LIGATURE QAF WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC36, 'ARABIC LIGATURE QAF WITH YEH ISOLATED FORM').
+unicode_name(0xFC37, 'ARABIC LIGATURE KAF WITH ALEF ISOLATED FORM').
+unicode_name(0xFC38, 'ARABIC LIGATURE KAF WITH JEEM ISOLATED FORM').
+unicode_name(0xFC39, 'ARABIC LIGATURE KAF WITH HAH ISOLATED FORM').
+unicode_name(0xFC3A, 'ARABIC LIGATURE KAF WITH KHAH ISOLATED FORM').
+unicode_name(0xFC3B, 'ARABIC LIGATURE KAF WITH LAM ISOLATED FORM').
+unicode_name(0xFC3C, 'ARABIC LIGATURE KAF WITH MEEM ISOLATED FORM').
+unicode_name(0xFC3D, 'ARABIC LIGATURE KAF WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC3E, 'ARABIC LIGATURE KAF WITH YEH ISOLATED FORM').
+unicode_name(0xFC3F, 'ARABIC LIGATURE LAM WITH JEEM ISOLATED FORM').
+unicode_name(0xFC40, 'ARABIC LIGATURE LAM WITH HAH ISOLATED FORM').
+unicode_name(0xFC41, 'ARABIC LIGATURE LAM WITH KHAH ISOLATED FORM').
+unicode_name(0xFC42, 'ARABIC LIGATURE LAM WITH MEEM ISOLATED FORM').
+unicode_name(0xFC43, 'ARABIC LIGATURE LAM WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC44, 'ARABIC LIGATURE LAM WITH YEH ISOLATED FORM').
+unicode_name(0xFC45, 'ARABIC LIGATURE MEEM WITH JEEM ISOLATED FORM').
+unicode_name(0xFC46, 'ARABIC LIGATURE MEEM WITH HAH ISOLATED FORM').
+unicode_name(0xFC47, 'ARABIC LIGATURE MEEM WITH KHAH ISOLATED FORM').
+unicode_name(0xFC48, 'ARABIC LIGATURE MEEM WITH MEEM ISOLATED FORM').
+unicode_name(0xFC49, 'ARABIC LIGATURE MEEM WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC4A, 'ARABIC LIGATURE MEEM WITH YEH ISOLATED FORM').
+unicode_name(0xFC4B, 'ARABIC LIGATURE NOON WITH JEEM ISOLATED FORM').
+unicode_name(0xFC4C, 'ARABIC LIGATURE NOON WITH HAH ISOLATED FORM').
+unicode_name(0xFC4D, 'ARABIC LIGATURE NOON WITH KHAH ISOLATED FORM').
+unicode_name(0xFC4E, 'ARABIC LIGATURE NOON WITH MEEM ISOLATED FORM').
+unicode_name(0xFC4F, 'ARABIC LIGATURE NOON WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC50, 'ARABIC LIGATURE NOON WITH YEH ISOLATED FORM').
+unicode_name(0xFC51, 'ARABIC LIGATURE HEH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC52, 'ARABIC LIGATURE HEH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC53, 'ARABIC LIGATURE HEH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC54, 'ARABIC LIGATURE HEH WITH YEH ISOLATED FORM').
+unicode_name(0xFC55, 'ARABIC LIGATURE YEH WITH JEEM ISOLATED FORM').
+unicode_name(0xFC56, 'ARABIC LIGATURE YEH WITH HAH ISOLATED FORM').
+unicode_name(0xFC57, 'ARABIC LIGATURE YEH WITH KHAH ISOLATED FORM').
+unicode_name(0xFC58, 'ARABIC LIGATURE YEH WITH MEEM ISOLATED FORM').
+unicode_name(0xFC59, 'ARABIC LIGATURE YEH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFC5A, 'ARABIC LIGATURE YEH WITH YEH ISOLATED FORM').
+unicode_name(0xFC5B, 'ARABIC LIGATURE THAL WITH SUPERSCRIPT ALEF ISOLATED FORM').
+unicode_name(0xFC5C, 'ARABIC LIGATURE REH WITH SUPERSCRIPT ALEF ISOLATED FORM').
+unicode_name(0xFC5D, 'ARABIC LIGATURE ALEF MAKSURA WITH SUPERSCRIPT ALEF ISOLATED FORM').
+unicode_name(0xFC5E, 'ARABIC LIGATURE SHADDA WITH DAMMATAN ISOLATED FORM').
+unicode_name(0xFC5F, 'ARABIC LIGATURE SHADDA WITH KASRATAN ISOLATED FORM').
+unicode_name(0xFC60, 'ARABIC LIGATURE SHADDA WITH FATHA ISOLATED FORM').
+unicode_name(0xFC61, 'ARABIC LIGATURE SHADDA WITH DAMMA ISOLATED FORM').
+unicode_name(0xFC62, 'ARABIC LIGATURE SHADDA WITH KASRA ISOLATED FORM').
+unicode_name(0xFC63, 'ARABIC LIGATURE SHADDA WITH SUPERSCRIPT ALEF ISOLATED FORM').
+unicode_name(0xFC64, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH REH FINAL FORM').
+unicode_name(0xFC65, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH ZAIN FINAL FORM').
+unicode_name(0xFC66, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH MEEM FINAL FORM').
+unicode_name(0xFC67, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH NOON FINAL FORM').
+unicode_name(0xFC68, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC69, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH YEH FINAL FORM').
+unicode_name(0xFC6A, 'ARABIC LIGATURE BEH WITH REH FINAL FORM').
+unicode_name(0xFC6B, 'ARABIC LIGATURE BEH WITH ZAIN FINAL FORM').
+unicode_name(0xFC6C, 'ARABIC LIGATURE BEH WITH MEEM FINAL FORM').
+unicode_name(0xFC6D, 'ARABIC LIGATURE BEH WITH NOON FINAL FORM').
+unicode_name(0xFC6E, 'ARABIC LIGATURE BEH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC6F, 'ARABIC LIGATURE BEH WITH YEH FINAL FORM').
+unicode_name(0xFC70, 'ARABIC LIGATURE TEH WITH REH FINAL FORM').
+unicode_name(0xFC71, 'ARABIC LIGATURE TEH WITH ZAIN FINAL FORM').
+unicode_name(0xFC72, 'ARABIC LIGATURE TEH WITH MEEM FINAL FORM').
+unicode_name(0xFC73, 'ARABIC LIGATURE TEH WITH NOON FINAL FORM').
+unicode_name(0xFC74, 'ARABIC LIGATURE TEH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC75, 'ARABIC LIGATURE TEH WITH YEH FINAL FORM').
+unicode_name(0xFC76, 'ARABIC LIGATURE THEH WITH REH FINAL FORM').
+unicode_name(0xFC77, 'ARABIC LIGATURE THEH WITH ZAIN FINAL FORM').
+unicode_name(0xFC78, 'ARABIC LIGATURE THEH WITH MEEM FINAL FORM').
+unicode_name(0xFC79, 'ARABIC LIGATURE THEH WITH NOON FINAL FORM').
+unicode_name(0xFC7A, 'ARABIC LIGATURE THEH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC7B, 'ARABIC LIGATURE THEH WITH YEH FINAL FORM').
+unicode_name(0xFC7C, 'ARABIC LIGATURE FEH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC7D, 'ARABIC LIGATURE FEH WITH YEH FINAL FORM').
+unicode_name(0xFC7E, 'ARABIC LIGATURE QAF WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC7F, 'ARABIC LIGATURE QAF WITH YEH FINAL FORM').
+unicode_name(0xFC80, 'ARABIC LIGATURE KAF WITH ALEF FINAL FORM').
+unicode_name(0xFC81, 'ARABIC LIGATURE KAF WITH LAM FINAL FORM').
+unicode_name(0xFC82, 'ARABIC LIGATURE KAF WITH MEEM FINAL FORM').
+unicode_name(0xFC83, 'ARABIC LIGATURE KAF WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC84, 'ARABIC LIGATURE KAF WITH YEH FINAL FORM').
+unicode_name(0xFC85, 'ARABIC LIGATURE LAM WITH MEEM FINAL FORM').
+unicode_name(0xFC86, 'ARABIC LIGATURE LAM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC87, 'ARABIC LIGATURE LAM WITH YEH FINAL FORM').
+unicode_name(0xFC88, 'ARABIC LIGATURE MEEM WITH ALEF FINAL FORM').
+unicode_name(0xFC89, 'ARABIC LIGATURE MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFC8A, 'ARABIC LIGATURE NOON WITH REH FINAL FORM').
+unicode_name(0xFC8B, 'ARABIC LIGATURE NOON WITH ZAIN FINAL FORM').
+unicode_name(0xFC8C, 'ARABIC LIGATURE NOON WITH MEEM FINAL FORM').
+unicode_name(0xFC8D, 'ARABIC LIGATURE NOON WITH NOON FINAL FORM').
+unicode_name(0xFC8E, 'ARABIC LIGATURE NOON WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC8F, 'ARABIC LIGATURE NOON WITH YEH FINAL FORM').
+unicode_name(0xFC90, 'ARABIC LIGATURE ALEF MAKSURA WITH SUPERSCRIPT ALEF FINAL FORM').
+unicode_name(0xFC91, 'ARABIC LIGATURE YEH WITH REH FINAL FORM').
+unicode_name(0xFC92, 'ARABIC LIGATURE YEH WITH ZAIN FINAL FORM').
+unicode_name(0xFC93, 'ARABIC LIGATURE YEH WITH MEEM FINAL FORM').
+unicode_name(0xFC94, 'ARABIC LIGATURE YEH WITH NOON FINAL FORM').
+unicode_name(0xFC95, 'ARABIC LIGATURE YEH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFC96, 'ARABIC LIGATURE YEH WITH YEH FINAL FORM').
+unicode_name(0xFC97, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH JEEM INITIAL FORM').
+unicode_name(0xFC98, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH HAH INITIAL FORM').
+unicode_name(0xFC99, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH KHAH INITIAL FORM').
+unicode_name(0xFC9A, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH MEEM INITIAL FORM').
+unicode_name(0xFC9B, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH HEH INITIAL FORM').
+unicode_name(0xFC9C, 'ARABIC LIGATURE BEH WITH JEEM INITIAL FORM').
+unicode_name(0xFC9D, 'ARABIC LIGATURE BEH WITH HAH INITIAL FORM').
+unicode_name(0xFC9E, 'ARABIC LIGATURE BEH WITH KHAH INITIAL FORM').
+unicode_name(0xFC9F, 'ARABIC LIGATURE BEH WITH MEEM INITIAL FORM').
+unicode_name(0xFCA0, 'ARABIC LIGATURE BEH WITH HEH INITIAL FORM').
+unicode_name(0xFCA1, 'ARABIC LIGATURE TEH WITH JEEM INITIAL FORM').
+unicode_name(0xFCA2, 'ARABIC LIGATURE TEH WITH HAH INITIAL FORM').
+unicode_name(0xFCA3, 'ARABIC LIGATURE TEH WITH KHAH INITIAL FORM').
+unicode_name(0xFCA4, 'ARABIC LIGATURE TEH WITH MEEM INITIAL FORM').
+unicode_name(0xFCA5, 'ARABIC LIGATURE TEH WITH HEH INITIAL FORM').
+unicode_name(0xFCA6, 'ARABIC LIGATURE THEH WITH MEEM INITIAL FORM').
+unicode_name(0xFCA7, 'ARABIC LIGATURE JEEM WITH HAH INITIAL FORM').
+unicode_name(0xFCA8, 'ARABIC LIGATURE JEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFCA9, 'ARABIC LIGATURE HAH WITH JEEM INITIAL FORM').
+unicode_name(0xFCAA, 'ARABIC LIGATURE HAH WITH MEEM INITIAL FORM').
+unicode_name(0xFCAB, 'ARABIC LIGATURE KHAH WITH JEEM INITIAL FORM').
+unicode_name(0xFCAC, 'ARABIC LIGATURE KHAH WITH MEEM INITIAL FORM').
+unicode_name(0xFCAD, 'ARABIC LIGATURE SEEN WITH JEEM INITIAL FORM').
+unicode_name(0xFCAE, 'ARABIC LIGATURE SEEN WITH HAH INITIAL FORM').
+unicode_name(0xFCAF, 'ARABIC LIGATURE SEEN WITH KHAH INITIAL FORM').
+unicode_name(0xFCB0, 'ARABIC LIGATURE SEEN WITH MEEM INITIAL FORM').
+unicode_name(0xFCB1, 'ARABIC LIGATURE SAD WITH HAH INITIAL FORM').
+unicode_name(0xFCB2, 'ARABIC LIGATURE SAD WITH KHAH INITIAL FORM').
+unicode_name(0xFCB3, 'ARABIC LIGATURE SAD WITH MEEM INITIAL FORM').
+unicode_name(0xFCB4, 'ARABIC LIGATURE DAD WITH JEEM INITIAL FORM').
+unicode_name(0xFCB5, 'ARABIC LIGATURE DAD WITH HAH INITIAL FORM').
+unicode_name(0xFCB6, 'ARABIC LIGATURE DAD WITH KHAH INITIAL FORM').
+unicode_name(0xFCB7, 'ARABIC LIGATURE DAD WITH MEEM INITIAL FORM').
+unicode_name(0xFCB8, 'ARABIC LIGATURE TAH WITH HAH INITIAL FORM').
+unicode_name(0xFCB9, 'ARABIC LIGATURE ZAH WITH MEEM INITIAL FORM').
+unicode_name(0xFCBA, 'ARABIC LIGATURE AIN WITH JEEM INITIAL FORM').
+unicode_name(0xFCBB, 'ARABIC LIGATURE AIN WITH MEEM INITIAL FORM').
+unicode_name(0xFCBC, 'ARABIC LIGATURE GHAIN WITH JEEM INITIAL FORM').
+unicode_name(0xFCBD, 'ARABIC LIGATURE GHAIN WITH MEEM INITIAL FORM').
+unicode_name(0xFCBE, 'ARABIC LIGATURE FEH WITH JEEM INITIAL FORM').
+unicode_name(0xFCBF, 'ARABIC LIGATURE FEH WITH HAH INITIAL FORM').
+unicode_name(0xFCC0, 'ARABIC LIGATURE FEH WITH KHAH INITIAL FORM').
+unicode_name(0xFCC1, 'ARABIC LIGATURE FEH WITH MEEM INITIAL FORM').
+unicode_name(0xFCC2, 'ARABIC LIGATURE QAF WITH HAH INITIAL FORM').
+unicode_name(0xFCC3, 'ARABIC LIGATURE QAF WITH MEEM INITIAL FORM').
+unicode_name(0xFCC4, 'ARABIC LIGATURE KAF WITH JEEM INITIAL FORM').
+unicode_name(0xFCC5, 'ARABIC LIGATURE KAF WITH HAH INITIAL FORM').
+unicode_name(0xFCC6, 'ARABIC LIGATURE KAF WITH KHAH INITIAL FORM').
+unicode_name(0xFCC7, 'ARABIC LIGATURE KAF WITH LAM INITIAL FORM').
+unicode_name(0xFCC8, 'ARABIC LIGATURE KAF WITH MEEM INITIAL FORM').
+unicode_name(0xFCC9, 'ARABIC LIGATURE LAM WITH JEEM INITIAL FORM').
+unicode_name(0xFCCA, 'ARABIC LIGATURE LAM WITH HAH INITIAL FORM').
+unicode_name(0xFCCB, 'ARABIC LIGATURE LAM WITH KHAH INITIAL FORM').
+unicode_name(0xFCCC, 'ARABIC LIGATURE LAM WITH MEEM INITIAL FORM').
+unicode_name(0xFCCD, 'ARABIC LIGATURE LAM WITH HEH INITIAL FORM').
+unicode_name(0xFCCE, 'ARABIC LIGATURE MEEM WITH JEEM INITIAL FORM').
+unicode_name(0xFCCF, 'ARABIC LIGATURE MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFCD0, 'ARABIC LIGATURE MEEM WITH KHAH INITIAL FORM').
+unicode_name(0xFCD1, 'ARABIC LIGATURE MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFCD2, 'ARABIC LIGATURE NOON WITH JEEM INITIAL FORM').
+unicode_name(0xFCD3, 'ARABIC LIGATURE NOON WITH HAH INITIAL FORM').
+unicode_name(0xFCD4, 'ARABIC LIGATURE NOON WITH KHAH INITIAL FORM').
+unicode_name(0xFCD5, 'ARABIC LIGATURE NOON WITH MEEM INITIAL FORM').
+unicode_name(0xFCD6, 'ARABIC LIGATURE NOON WITH HEH INITIAL FORM').
+unicode_name(0xFCD7, 'ARABIC LIGATURE HEH WITH JEEM INITIAL FORM').
+unicode_name(0xFCD8, 'ARABIC LIGATURE HEH WITH MEEM INITIAL FORM').
+unicode_name(0xFCD9, 'ARABIC LIGATURE HEH WITH SUPERSCRIPT ALEF INITIAL FORM').
+unicode_name(0xFCDA, 'ARABIC LIGATURE YEH WITH JEEM INITIAL FORM').
+unicode_name(0xFCDB, 'ARABIC LIGATURE YEH WITH HAH INITIAL FORM').
+unicode_name(0xFCDC, 'ARABIC LIGATURE YEH WITH KHAH INITIAL FORM').
+unicode_name(0xFCDD, 'ARABIC LIGATURE YEH WITH MEEM INITIAL FORM').
+unicode_name(0xFCDE, 'ARABIC LIGATURE YEH WITH HEH INITIAL FORM').
+unicode_name(0xFCDF, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH MEEM MEDIAL FORM').
+unicode_name(0xFCE0, 'ARABIC LIGATURE YEH WITH HAMZA ABOVE WITH HEH MEDIAL FORM').
+unicode_name(0xFCE1, 'ARABIC LIGATURE BEH WITH MEEM MEDIAL FORM').
+unicode_name(0xFCE2, 'ARABIC LIGATURE BEH WITH HEH MEDIAL FORM').
+unicode_name(0xFCE3, 'ARABIC LIGATURE TEH WITH MEEM MEDIAL FORM').
+unicode_name(0xFCE4, 'ARABIC LIGATURE TEH WITH HEH MEDIAL FORM').
+unicode_name(0xFCE5, 'ARABIC LIGATURE THEH WITH MEEM MEDIAL FORM').
+unicode_name(0xFCE6, 'ARABIC LIGATURE THEH WITH HEH MEDIAL FORM').
+unicode_name(0xFCE7, 'ARABIC LIGATURE SEEN WITH MEEM MEDIAL FORM').
+unicode_name(0xFCE8, 'ARABIC LIGATURE SEEN WITH HEH MEDIAL FORM').
+unicode_name(0xFCE9, 'ARABIC LIGATURE SHEEN WITH MEEM MEDIAL FORM').
+unicode_name(0xFCEA, 'ARABIC LIGATURE SHEEN WITH HEH MEDIAL FORM').
+unicode_name(0xFCEB, 'ARABIC LIGATURE KAF WITH LAM MEDIAL FORM').
+unicode_name(0xFCEC, 'ARABIC LIGATURE KAF WITH MEEM MEDIAL FORM').
+unicode_name(0xFCED, 'ARABIC LIGATURE LAM WITH MEEM MEDIAL FORM').
+unicode_name(0xFCEE, 'ARABIC LIGATURE NOON WITH MEEM MEDIAL FORM').
+unicode_name(0xFCEF, 'ARABIC LIGATURE NOON WITH HEH MEDIAL FORM').
+unicode_name(0xFCF0, 'ARABIC LIGATURE YEH WITH MEEM MEDIAL FORM').
+unicode_name(0xFCF1, 'ARABIC LIGATURE YEH WITH HEH MEDIAL FORM').
+unicode_name(0xFCF2, 'ARABIC LIGATURE SHADDA WITH FATHA MEDIAL FORM').
+unicode_name(0xFCF3, 'ARABIC LIGATURE SHADDA WITH DAMMA MEDIAL FORM').
+unicode_name(0xFCF4, 'ARABIC LIGATURE SHADDA WITH KASRA MEDIAL FORM').
+unicode_name(0xFCF5, 'ARABIC LIGATURE TAH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFCF6, 'ARABIC LIGATURE TAH WITH YEH ISOLATED FORM').
+unicode_name(0xFCF7, 'ARABIC LIGATURE AIN WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFCF8, 'ARABIC LIGATURE AIN WITH YEH ISOLATED FORM').
+unicode_name(0xFCF9, 'ARABIC LIGATURE GHAIN WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFCFA, 'ARABIC LIGATURE GHAIN WITH YEH ISOLATED FORM').
+unicode_name(0xFCFB, 'ARABIC LIGATURE SEEN WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFCFC, 'ARABIC LIGATURE SEEN WITH YEH ISOLATED FORM').
+unicode_name(0xFCFD, 'ARABIC LIGATURE SHEEN WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFCFE, 'ARABIC LIGATURE SHEEN WITH YEH ISOLATED FORM').
+unicode_name(0xFCFF, 'ARABIC LIGATURE HAH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFD00, 'ARABIC LIGATURE HAH WITH YEH ISOLATED FORM').
+unicode_name(0xFD01, 'ARABIC LIGATURE JEEM WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFD02, 'ARABIC LIGATURE JEEM WITH YEH ISOLATED FORM').
+unicode_name(0xFD03, 'ARABIC LIGATURE KHAH WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFD04, 'ARABIC LIGATURE KHAH WITH YEH ISOLATED FORM').
+unicode_name(0xFD05, 'ARABIC LIGATURE SAD WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFD06, 'ARABIC LIGATURE SAD WITH YEH ISOLATED FORM').
+unicode_name(0xFD07, 'ARABIC LIGATURE DAD WITH ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFD08, 'ARABIC LIGATURE DAD WITH YEH ISOLATED FORM').
+unicode_name(0xFD09, 'ARABIC LIGATURE SHEEN WITH JEEM ISOLATED FORM').
+unicode_name(0xFD0A, 'ARABIC LIGATURE SHEEN WITH HAH ISOLATED FORM').
+unicode_name(0xFD0B, 'ARABIC LIGATURE SHEEN WITH KHAH ISOLATED FORM').
+unicode_name(0xFD0C, 'ARABIC LIGATURE SHEEN WITH MEEM ISOLATED FORM').
+unicode_name(0xFD0D, 'ARABIC LIGATURE SHEEN WITH REH ISOLATED FORM').
+unicode_name(0xFD0E, 'ARABIC LIGATURE SEEN WITH REH ISOLATED FORM').
+unicode_name(0xFD0F, 'ARABIC LIGATURE SAD WITH REH ISOLATED FORM').
+unicode_name(0xFD10, 'ARABIC LIGATURE DAD WITH REH ISOLATED FORM').
+unicode_name(0xFD11, 'ARABIC LIGATURE TAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD12, 'ARABIC LIGATURE TAH WITH YEH FINAL FORM').
+unicode_name(0xFD13, 'ARABIC LIGATURE AIN WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD14, 'ARABIC LIGATURE AIN WITH YEH FINAL FORM').
+unicode_name(0xFD15, 'ARABIC LIGATURE GHAIN WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD16, 'ARABIC LIGATURE GHAIN WITH YEH FINAL FORM').
+unicode_name(0xFD17, 'ARABIC LIGATURE SEEN WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD18, 'ARABIC LIGATURE SEEN WITH YEH FINAL FORM').
+unicode_name(0xFD19, 'ARABIC LIGATURE SHEEN WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD1A, 'ARABIC LIGATURE SHEEN WITH YEH FINAL FORM').
+unicode_name(0xFD1B, 'ARABIC LIGATURE HAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD1C, 'ARABIC LIGATURE HAH WITH YEH FINAL FORM').
+unicode_name(0xFD1D, 'ARABIC LIGATURE JEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD1E, 'ARABIC LIGATURE JEEM WITH YEH FINAL FORM').
+unicode_name(0xFD1F, 'ARABIC LIGATURE KHAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD20, 'ARABIC LIGATURE KHAH WITH YEH FINAL FORM').
+unicode_name(0xFD21, 'ARABIC LIGATURE SAD WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD22, 'ARABIC LIGATURE SAD WITH YEH FINAL FORM').
+unicode_name(0xFD23, 'ARABIC LIGATURE DAD WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD24, 'ARABIC LIGATURE DAD WITH YEH FINAL FORM').
+unicode_name(0xFD25, 'ARABIC LIGATURE SHEEN WITH JEEM FINAL FORM').
+unicode_name(0xFD26, 'ARABIC LIGATURE SHEEN WITH HAH FINAL FORM').
+unicode_name(0xFD27, 'ARABIC LIGATURE SHEEN WITH KHAH FINAL FORM').
+unicode_name(0xFD28, 'ARABIC LIGATURE SHEEN WITH MEEM FINAL FORM').
+unicode_name(0xFD29, 'ARABIC LIGATURE SHEEN WITH REH FINAL FORM').
+unicode_name(0xFD2A, 'ARABIC LIGATURE SEEN WITH REH FINAL FORM').
+unicode_name(0xFD2B, 'ARABIC LIGATURE SAD WITH REH FINAL FORM').
+unicode_name(0xFD2C, 'ARABIC LIGATURE DAD WITH REH FINAL FORM').
+unicode_name(0xFD2D, 'ARABIC LIGATURE SHEEN WITH JEEM INITIAL FORM').
+unicode_name(0xFD2E, 'ARABIC LIGATURE SHEEN WITH HAH INITIAL FORM').
+unicode_name(0xFD2F, 'ARABIC LIGATURE SHEEN WITH KHAH INITIAL FORM').
+unicode_name(0xFD30, 'ARABIC LIGATURE SHEEN WITH MEEM INITIAL FORM').
+unicode_name(0xFD31, 'ARABIC LIGATURE SEEN WITH HEH INITIAL FORM').
+unicode_name(0xFD32, 'ARABIC LIGATURE SHEEN WITH HEH INITIAL FORM').
+unicode_name(0xFD33, 'ARABIC LIGATURE TAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD34, 'ARABIC LIGATURE SEEN WITH JEEM MEDIAL FORM').
+unicode_name(0xFD35, 'ARABIC LIGATURE SEEN WITH HAH MEDIAL FORM').
+unicode_name(0xFD36, 'ARABIC LIGATURE SEEN WITH KHAH MEDIAL FORM').
+unicode_name(0xFD37, 'ARABIC LIGATURE SHEEN WITH JEEM MEDIAL FORM').
+unicode_name(0xFD38, 'ARABIC LIGATURE SHEEN WITH HAH MEDIAL FORM').
+unicode_name(0xFD39, 'ARABIC LIGATURE SHEEN WITH KHAH MEDIAL FORM').
+unicode_name(0xFD3A, 'ARABIC LIGATURE TAH WITH MEEM MEDIAL FORM').
+unicode_name(0xFD3B, 'ARABIC LIGATURE ZAH WITH MEEM MEDIAL FORM').
+unicode_name(0xFD3C, 'ARABIC LIGATURE ALEF WITH FATHATAN FINAL FORM').
+unicode_name(0xFD3D, 'ARABIC LIGATURE ALEF WITH FATHATAN ISOLATED FORM').
+unicode_name(0xFD50, 'ARABIC LIGATURE TEH WITH JEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD51, 'ARABIC LIGATURE TEH WITH HAH WITH JEEM FINAL FORM').
+unicode_name(0xFD52, 'ARABIC LIGATURE TEH WITH HAH WITH JEEM INITIAL FORM').
+unicode_name(0xFD53, 'ARABIC LIGATURE TEH WITH HAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD54, 'ARABIC LIGATURE TEH WITH KHAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD55, 'ARABIC LIGATURE TEH WITH MEEM WITH JEEM INITIAL FORM').
+unicode_name(0xFD56, 'ARABIC LIGATURE TEH WITH MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD57, 'ARABIC LIGATURE TEH WITH MEEM WITH KHAH INITIAL FORM').
+unicode_name(0xFD58, 'ARABIC LIGATURE JEEM WITH MEEM WITH HAH FINAL FORM').
+unicode_name(0xFD59, 'ARABIC LIGATURE JEEM WITH MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD5A, 'ARABIC LIGATURE HAH WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFD5B, 'ARABIC LIGATURE HAH WITH MEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD5C, 'ARABIC LIGATURE SEEN WITH HAH WITH JEEM INITIAL FORM').
+unicode_name(0xFD5D, 'ARABIC LIGATURE SEEN WITH JEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD5E, 'ARABIC LIGATURE SEEN WITH JEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD5F, 'ARABIC LIGATURE SEEN WITH MEEM WITH HAH FINAL FORM').
+unicode_name(0xFD60, 'ARABIC LIGATURE SEEN WITH MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD61, 'ARABIC LIGATURE SEEN WITH MEEM WITH JEEM INITIAL FORM').
+unicode_name(0xFD62, 'ARABIC LIGATURE SEEN WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD63, 'ARABIC LIGATURE SEEN WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD64, 'ARABIC LIGATURE SAD WITH HAH WITH HAH FINAL FORM').
+unicode_name(0xFD65, 'ARABIC LIGATURE SAD WITH HAH WITH HAH INITIAL FORM').
+unicode_name(0xFD66, 'ARABIC LIGATURE SAD WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD67, 'ARABIC LIGATURE SHEEN WITH HAH WITH MEEM FINAL FORM').
+unicode_name(0xFD68, 'ARABIC LIGATURE SHEEN WITH HAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD69, 'ARABIC LIGATURE SHEEN WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFD6A, 'ARABIC LIGATURE SHEEN WITH MEEM WITH KHAH FINAL FORM').
+unicode_name(0xFD6B, 'ARABIC LIGATURE SHEEN WITH MEEM WITH KHAH INITIAL FORM').
+unicode_name(0xFD6C, 'ARABIC LIGATURE SHEEN WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD6D, 'ARABIC LIGATURE SHEEN WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD6E, 'ARABIC LIGATURE DAD WITH HAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD6F, 'ARABIC LIGATURE DAD WITH KHAH WITH MEEM FINAL FORM').
+unicode_name(0xFD70, 'ARABIC LIGATURE DAD WITH KHAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD71, 'ARABIC LIGATURE TAH WITH MEEM WITH HAH FINAL FORM').
+unicode_name(0xFD72, 'ARABIC LIGATURE TAH WITH MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD73, 'ARABIC LIGATURE TAH WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD74, 'ARABIC LIGATURE TAH WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFD75, 'ARABIC LIGATURE AIN WITH JEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD76, 'ARABIC LIGATURE AIN WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD77, 'ARABIC LIGATURE AIN WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD78, 'ARABIC LIGATURE AIN WITH MEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD79, 'ARABIC LIGATURE GHAIN WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD7A, 'ARABIC LIGATURE GHAIN WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFD7B, 'ARABIC LIGATURE GHAIN WITH MEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD7C, 'ARABIC LIGATURE FEH WITH KHAH WITH MEEM FINAL FORM').
+unicode_name(0xFD7D, 'ARABIC LIGATURE FEH WITH KHAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD7E, 'ARABIC LIGATURE QAF WITH MEEM WITH HAH FINAL FORM').
+unicode_name(0xFD7F, 'ARABIC LIGATURE QAF WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD80, 'ARABIC LIGATURE LAM WITH HAH WITH MEEM FINAL FORM').
+unicode_name(0xFD81, 'ARABIC LIGATURE LAM WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFD82, 'ARABIC LIGATURE LAM WITH HAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD83, 'ARABIC LIGATURE LAM WITH JEEM WITH JEEM INITIAL FORM').
+unicode_name(0xFD84, 'ARABIC LIGATURE LAM WITH JEEM WITH JEEM FINAL FORM').
+unicode_name(0xFD85, 'ARABIC LIGATURE LAM WITH KHAH WITH MEEM FINAL FORM').
+unicode_name(0xFD86, 'ARABIC LIGATURE LAM WITH KHAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD87, 'ARABIC LIGATURE LAM WITH MEEM WITH HAH FINAL FORM').
+unicode_name(0xFD88, 'ARABIC LIGATURE LAM WITH MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD89, 'ARABIC LIGATURE MEEM WITH HAH WITH JEEM INITIAL FORM').
+unicode_name(0xFD8A, 'ARABIC LIGATURE MEEM WITH HAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD8B, 'ARABIC LIGATURE MEEM WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFD8C, 'ARABIC LIGATURE MEEM WITH JEEM WITH HAH INITIAL FORM').
+unicode_name(0xFD8D, 'ARABIC LIGATURE MEEM WITH JEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD8E, 'ARABIC LIGATURE MEEM WITH KHAH WITH JEEM INITIAL FORM').
+unicode_name(0xFD8F, 'ARABIC LIGATURE MEEM WITH KHAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD92, 'ARABIC LIGATURE MEEM WITH JEEM WITH KHAH INITIAL FORM').
+unicode_name(0xFD93, 'ARABIC LIGATURE HEH WITH MEEM WITH JEEM INITIAL FORM').
+unicode_name(0xFD94, 'ARABIC LIGATURE HEH WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD95, 'ARABIC LIGATURE NOON WITH HAH WITH MEEM INITIAL FORM').
+unicode_name(0xFD96, 'ARABIC LIGATURE NOON WITH HAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD97, 'ARABIC LIGATURE NOON WITH JEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD98, 'ARABIC LIGATURE NOON WITH JEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD99, 'ARABIC LIGATURE NOON WITH JEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD9A, 'ARABIC LIGATURE NOON WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFD9B, 'ARABIC LIGATURE NOON WITH MEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFD9C, 'ARABIC LIGATURE YEH WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFD9D, 'ARABIC LIGATURE YEH WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFD9E, 'ARABIC LIGATURE BEH WITH KHAH WITH YEH FINAL FORM').
+unicode_name(0xFD9F, 'ARABIC LIGATURE TEH WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFDA0, 'ARABIC LIGATURE TEH WITH JEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFDA1, 'ARABIC LIGATURE TEH WITH KHAH WITH YEH FINAL FORM').
+unicode_name(0xFDA2, 'ARABIC LIGATURE TEH WITH KHAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFDA3, 'ARABIC LIGATURE TEH WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDA4, 'ARABIC LIGATURE TEH WITH MEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFDA5, 'ARABIC LIGATURE JEEM WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDA6, 'ARABIC LIGATURE JEEM WITH HAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFDA7, 'ARABIC LIGATURE JEEM WITH MEEM WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFDA8, 'ARABIC LIGATURE SEEN WITH KHAH WITH ALEF MAKSURA FINAL FORM').
+unicode_name(0xFDA9, 'ARABIC LIGATURE SAD WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDAA, 'ARABIC LIGATURE SHEEN WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDAB, 'ARABIC LIGATURE DAD WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDAC, 'ARABIC LIGATURE LAM WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFDAD, 'ARABIC LIGATURE LAM WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDAE, 'ARABIC LIGATURE YEH WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDAF, 'ARABIC LIGATURE YEH WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFDB0, 'ARABIC LIGATURE YEH WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDB1, 'ARABIC LIGATURE MEEM WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDB2, 'ARABIC LIGATURE QAF WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDB3, 'ARABIC LIGATURE NOON WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDB4, 'ARABIC LIGATURE QAF WITH MEEM WITH HAH INITIAL FORM').
+unicode_name(0xFDB5, 'ARABIC LIGATURE LAM WITH HAH WITH MEEM INITIAL FORM').
+unicode_name(0xFDB6, 'ARABIC LIGATURE AIN WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDB7, 'ARABIC LIGATURE KAF WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDB8, 'ARABIC LIGATURE NOON WITH JEEM WITH HAH INITIAL FORM').
+unicode_name(0xFDB9, 'ARABIC LIGATURE MEEM WITH KHAH WITH YEH FINAL FORM').
+unicode_name(0xFDBA, 'ARABIC LIGATURE LAM WITH JEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFDBB, 'ARABIC LIGATURE KAF WITH MEEM WITH MEEM FINAL FORM').
+unicode_name(0xFDBC, 'ARABIC LIGATURE LAM WITH JEEM WITH MEEM FINAL FORM').
+unicode_name(0xFDBD, 'ARABIC LIGATURE NOON WITH JEEM WITH HAH FINAL FORM').
+unicode_name(0xFDBE, 'ARABIC LIGATURE JEEM WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDBF, 'ARABIC LIGATURE HAH WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFDC0, 'ARABIC LIGATURE MEEM WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFDC1, 'ARABIC LIGATURE FEH WITH MEEM WITH YEH FINAL FORM').
+unicode_name(0xFDC2, 'ARABIC LIGATURE BEH WITH HAH WITH YEH FINAL FORM').
+unicode_name(0xFDC3, 'ARABIC LIGATURE KAF WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFDC4, 'ARABIC LIGATURE AIN WITH JEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFDC5, 'ARABIC LIGATURE SAD WITH MEEM WITH MEEM INITIAL FORM').
+unicode_name(0xFDC6, 'ARABIC LIGATURE SEEN WITH KHAH WITH YEH FINAL FORM').
+unicode_name(0xFDC7, 'ARABIC LIGATURE NOON WITH JEEM WITH YEH FINAL FORM').
+unicode_name(0xFDF0, 'ARABIC LIGATURE SALLA USED AS KORANIC STOP SIGN ISOLATED FORM').
+unicode_name(0xFDF1, 'ARABIC LIGATURE QALA USED AS KORANIC STOP SIGN ISOLATED FORM').
+unicode_name(0xFDF2, 'ARABIC LIGATURE ALLAH ISOLATED FORM').
+unicode_name(0xFDF3, 'ARABIC LIGATURE AKBAR ISOLATED FORM').
+unicode_name(0xFDF4, 'ARABIC LIGATURE MOHAMMAD ISOLATED FORM').
+unicode_name(0xFDF5, 'ARABIC LIGATURE SALAM ISOLATED FORM').
+unicode_name(0xFDF6, 'ARABIC LIGATURE RASOUL ISOLATED FORM').
+unicode_name(0xFDF7, 'ARABIC LIGATURE ALAYHE ISOLATED FORM').
+unicode_name(0xFDF8, 'ARABIC LIGATURE WASALLAM ISOLATED FORM').
+unicode_name(0xFDF9, 'ARABIC LIGATURE SALLA ISOLATED FORM').
+unicode_name(0xFDFA, 'ARABIC LIGATURE SALLALLAHOU ALAYHE WASALLAM').
+unicode_name(0xFDFB, 'ARABIC LIGATURE JALLAJALALOUHOU').
+unicode_name(0xFE70, 'ARABIC FATHATAN ISOLATED FORM').
+unicode_name(0xFE71, 'ARABIC TATWEEL WITH FATHATAN ABOVE').
+unicode_name(0xFE72, 'ARABIC DAMMATAN ISOLATED FORM').
+unicode_name(0xFE73, 'ARABIC TAIL FRAGMENT').
+unicode_name(0xFE74, 'ARABIC KASRATAN ISOLATED FORM').
+unicode_name(0xFE76, 'ARABIC FATHA ISOLATED FORM').
+unicode_name(0xFE77, 'ARABIC FATHA MEDIAL FORM').
+unicode_name(0xFE78, 'ARABIC DAMMA ISOLATED FORM').
+unicode_name(0xFE79, 'ARABIC DAMMA MEDIAL FORM').
+unicode_name(0xFE7A, 'ARABIC KASRA ISOLATED FORM').
+unicode_name(0xFE7B, 'ARABIC KASRA MEDIAL FORM').
+unicode_name(0xFE7C, 'ARABIC SHADDA ISOLATED FORM').
+unicode_name(0xFE7D, 'ARABIC SHADDA MEDIAL FORM').
+unicode_name(0xFE7E, 'ARABIC SUKUN ISOLATED FORM').
+unicode_name(0xFE7F, 'ARABIC SUKUN MEDIAL FORM').
+unicode_name(0xFE80, 'ARABIC LETTER HAMZA ISOLATED FORM').
+unicode_name(0xFE81, 'ARABIC LETTER ALEF WITH MADDA ABOVE ISOLATED FORM').
+unicode_name(0xFE82, 'ARABIC LETTER ALEF WITH MADDA ABOVE FINAL FORM').
+unicode_name(0xFE83, 'ARABIC LETTER ALEF WITH HAMZA ABOVE ISOLATED FORM').
+unicode_name(0xFE84, 'ARABIC LETTER ALEF WITH HAMZA ABOVE FINAL FORM').
+unicode_name(0xFE85, 'ARABIC LETTER WAW WITH HAMZA ABOVE ISOLATED FORM').
+unicode_name(0xFE86, 'ARABIC LETTER WAW WITH HAMZA ABOVE FINAL FORM').
+unicode_name(0xFE87, 'ARABIC LETTER ALEF WITH HAMZA BELOW ISOLATED FORM').
+unicode_name(0xFE88, 'ARABIC LETTER ALEF WITH HAMZA BELOW FINAL FORM').
+unicode_name(0xFE89, 'ARABIC LETTER YEH WITH HAMZA ABOVE ISOLATED FORM').
+unicode_name(0xFE8A, 'ARABIC LETTER YEH WITH HAMZA ABOVE FINAL FORM').
+unicode_name(0xFE8B, 'ARABIC LETTER YEH WITH HAMZA ABOVE INITIAL FORM').
+unicode_name(0xFE8C, 'ARABIC LETTER YEH WITH HAMZA ABOVE MEDIAL FORM').
+unicode_name(0xFE8D, 'ARABIC LETTER ALEF ISOLATED FORM').
+unicode_name(0xFE8E, 'ARABIC LETTER ALEF FINAL FORM').
+unicode_name(0xFE8F, 'ARABIC LETTER BEH ISOLATED FORM').
+unicode_name(0xFE90, 'ARABIC LETTER BEH FINAL FORM').
+unicode_name(0xFE91, 'ARABIC LETTER BEH INITIAL FORM').
+unicode_name(0xFE92, 'ARABIC LETTER BEH MEDIAL FORM').
+unicode_name(0xFE93, 'ARABIC LETTER TEH MARBUTA ISOLATED FORM').
+unicode_name(0xFE94, 'ARABIC LETTER TEH MARBUTA FINAL FORM').
+unicode_name(0xFE95, 'ARABIC LETTER TEH ISOLATED FORM').
+unicode_name(0xFE96, 'ARABIC LETTER TEH FINAL FORM').
+unicode_name(0xFE97, 'ARABIC LETTER TEH INITIAL FORM').
+unicode_name(0xFE98, 'ARABIC LETTER TEH MEDIAL FORM').
+unicode_name(0xFE99, 'ARABIC LETTER THEH ISOLATED FORM').
+unicode_name(0xFE9A, 'ARABIC LETTER THEH FINAL FORM').
+unicode_name(0xFE9B, 'ARABIC LETTER THEH INITIAL FORM').
+unicode_name(0xFE9C, 'ARABIC LETTER THEH MEDIAL FORM').
+unicode_name(0xFE9D, 'ARABIC LETTER JEEM ISOLATED FORM').
+unicode_name(0xFE9E, 'ARABIC LETTER JEEM FINAL FORM').
+unicode_name(0xFE9F, 'ARABIC LETTER JEEM INITIAL FORM').
+unicode_name(0xFEA0, 'ARABIC LETTER JEEM MEDIAL FORM').
+unicode_name(0xFEA1, 'ARABIC LETTER HAH ISOLATED FORM').
+unicode_name(0xFEA2, 'ARABIC LETTER HAH FINAL FORM').
+unicode_name(0xFEA3, 'ARABIC LETTER HAH INITIAL FORM').
+unicode_name(0xFEA4, 'ARABIC LETTER HAH MEDIAL FORM').
+unicode_name(0xFEA5, 'ARABIC LETTER KHAH ISOLATED FORM').
+unicode_name(0xFEA6, 'ARABIC LETTER KHAH FINAL FORM').
+unicode_name(0xFEA7, 'ARABIC LETTER KHAH INITIAL FORM').
+unicode_name(0xFEA8, 'ARABIC LETTER KHAH MEDIAL FORM').
+unicode_name(0xFEA9, 'ARABIC LETTER DAL ISOLATED FORM').
+unicode_name(0xFEAA, 'ARABIC LETTER DAL FINAL FORM').
+unicode_name(0xFEAB, 'ARABIC LETTER THAL ISOLATED FORM').
+unicode_name(0xFEAC, 'ARABIC LETTER THAL FINAL FORM').
+unicode_name(0xFEAD, 'ARABIC LETTER REH ISOLATED FORM').
+unicode_name(0xFEAE, 'ARABIC LETTER REH FINAL FORM').
+unicode_name(0xFEAF, 'ARABIC LETTER ZAIN ISOLATED FORM').
+unicode_name(0xFEB0, 'ARABIC LETTER ZAIN FINAL FORM').
+unicode_name(0xFEB1, 'ARABIC LETTER SEEN ISOLATED FORM').
+unicode_name(0xFEB2, 'ARABIC LETTER SEEN FINAL FORM').
+unicode_name(0xFEB3, 'ARABIC LETTER SEEN INITIAL FORM').
+unicode_name(0xFEB4, 'ARABIC LETTER SEEN MEDIAL FORM').
+unicode_name(0xFEB5, 'ARABIC LETTER SHEEN ISOLATED FORM').
+unicode_name(0xFEB6, 'ARABIC LETTER SHEEN FINAL FORM').
+unicode_name(0xFEB7, 'ARABIC LETTER SHEEN INITIAL FORM').
+unicode_name(0xFEB8, 'ARABIC LETTER SHEEN MEDIAL FORM').
+unicode_name(0xFEB9, 'ARABIC LETTER SAD ISOLATED FORM').
+unicode_name(0xFEBA, 'ARABIC LETTER SAD FINAL FORM').
+unicode_name(0xFEBB, 'ARABIC LETTER SAD INITIAL FORM').
+unicode_name(0xFEBC, 'ARABIC LETTER SAD MEDIAL FORM').
+unicode_name(0xFEBD, 'ARABIC LETTER DAD ISOLATED FORM').
+unicode_name(0xFEBE, 'ARABIC LETTER DAD FINAL FORM').
+unicode_name(0xFEBF, 'ARABIC LETTER DAD INITIAL FORM').
+unicode_name(0xFEC0, 'ARABIC LETTER DAD MEDIAL FORM').
+unicode_name(0xFEC1, 'ARABIC LETTER TAH ISOLATED FORM').
+unicode_name(0xFEC2, 'ARABIC LETTER TAH FINAL FORM').
+unicode_name(0xFEC3, 'ARABIC LETTER TAH INITIAL FORM').
+unicode_name(0xFEC4, 'ARABIC LETTER TAH MEDIAL FORM').
+unicode_name(0xFEC5, 'ARABIC LETTER ZAH ISOLATED FORM').
+unicode_name(0xFEC6, 'ARABIC LETTER ZAH FINAL FORM').
+unicode_name(0xFEC7, 'ARABIC LETTER ZAH INITIAL FORM').
+unicode_name(0xFEC8, 'ARABIC LETTER ZAH MEDIAL FORM').
+unicode_name(0xFEC9, 'ARABIC LETTER AIN ISOLATED FORM').
+unicode_name(0xFECA, 'ARABIC LETTER AIN FINAL FORM').
+unicode_name(0xFECB, 'ARABIC LETTER AIN INITIAL FORM').
+unicode_name(0xFECC, 'ARABIC LETTER AIN MEDIAL FORM').
+unicode_name(0xFECD, 'ARABIC LETTER GHAIN ISOLATED FORM').
+unicode_name(0xFECE, 'ARABIC LETTER GHAIN FINAL FORM').
+unicode_name(0xFECF, 'ARABIC LETTER GHAIN INITIAL FORM').
+unicode_name(0xFED0, 'ARABIC LETTER GHAIN MEDIAL FORM').
+unicode_name(0xFED1, 'ARABIC LETTER FEH ISOLATED FORM').
+unicode_name(0xFED2, 'ARABIC LETTER FEH FINAL FORM').
+unicode_name(0xFED3, 'ARABIC LETTER FEH INITIAL FORM').
+unicode_name(0xFED4, 'ARABIC LETTER FEH MEDIAL FORM').
+unicode_name(0xFED5, 'ARABIC LETTER QAF ISOLATED FORM').
+unicode_name(0xFED6, 'ARABIC LETTER QAF FINAL FORM').
+unicode_name(0xFED7, 'ARABIC LETTER QAF INITIAL FORM').
+unicode_name(0xFED8, 'ARABIC LETTER QAF MEDIAL FORM').
+unicode_name(0xFED9, 'ARABIC LETTER KAF ISOLATED FORM').
+unicode_name(0xFEDA, 'ARABIC LETTER KAF FINAL FORM').
+unicode_name(0xFEDB, 'ARABIC LETTER KAF INITIAL FORM').
+unicode_name(0xFEDC, 'ARABIC LETTER KAF MEDIAL FORM').
+unicode_name(0xFEDD, 'ARABIC LETTER LAM ISOLATED FORM').
+unicode_name(0xFEDE, 'ARABIC LETTER LAM FINAL FORM').
+unicode_name(0xFEDF, 'ARABIC LETTER LAM INITIAL FORM').
+unicode_name(0xFEE0, 'ARABIC LETTER LAM MEDIAL FORM').
+unicode_name(0xFEE1, 'ARABIC LETTER MEEM ISOLATED FORM').
+unicode_name(0xFEE2, 'ARABIC LETTER MEEM FINAL FORM').
+unicode_name(0xFEE3, 'ARABIC LETTER MEEM INITIAL FORM').
+unicode_name(0xFEE4, 'ARABIC LETTER MEEM MEDIAL FORM').
+unicode_name(0xFEE5, 'ARABIC LETTER NOON ISOLATED FORM').
+unicode_name(0xFEE6, 'ARABIC LETTER NOON FINAL FORM').
+unicode_name(0xFEE7, 'ARABIC LETTER NOON INITIAL FORM').
+unicode_name(0xFEE8, 'ARABIC LETTER NOON MEDIAL FORM').
+unicode_name(0xFEE9, 'ARABIC LETTER HEH ISOLATED FORM').
+unicode_name(0xFEEA, 'ARABIC LETTER HEH FINAL FORM').
+unicode_name(0xFEEB, 'ARABIC LETTER HEH INITIAL FORM').
+unicode_name(0xFEEC, 'ARABIC LETTER HEH MEDIAL FORM').
+unicode_name(0xFEED, 'ARABIC LETTER WAW ISOLATED FORM').
+unicode_name(0xFEEE, 'ARABIC LETTER WAW FINAL FORM').
+unicode_name(0xFEEF, 'ARABIC LETTER ALEF MAKSURA ISOLATED FORM').
+unicode_name(0xFEF0, 'ARABIC LETTER ALEF MAKSURA FINAL FORM').
+unicode_name(0xFEF1, 'ARABIC LETTER YEH ISOLATED FORM').
+unicode_name(0xFEF2, 'ARABIC LETTER YEH FINAL FORM').
+unicode_name(0xFEF3, 'ARABIC LETTER YEH INITIAL FORM').
+unicode_name(0xFEF4, 'ARABIC LETTER YEH MEDIAL FORM').
+unicode_name(0xFEF5, 'ARABIC LIGATURE LAM WITH ALEF WITH MADDA ABOVE ISOLATED FORM').
+unicode_name(0xFEF6, 'ARABIC LIGATURE LAM WITH ALEF WITH MADDA ABOVE FINAL FORM').
+unicode_name(0xFEF7, 'ARABIC LIGATURE LAM WITH ALEF WITH HAMZA ABOVE ISOLATED FORM').
+unicode_name(0xFEF8, 'ARABIC LIGATURE LAM WITH ALEF WITH HAMZA ABOVE FINAL FORM').
+unicode_name(0xFEF9, 'ARABIC LIGATURE LAM WITH ALEF WITH HAMZA BELOW ISOLATED FORM').
+unicode_name(0xFEFA, 'ARABIC LIGATURE LAM WITH ALEF WITH HAMZA BELOW FINAL FORM').
+unicode_name(0xFEFB, 'ARABIC LIGATURE LAM WITH ALEF ISOLATED FORM').
+unicode_name(0xFEFC, 'ARABIC LIGATURE LAM WITH ALEF FINAL FORM').
+unicode_name(0xFF66, 'HALFWIDTH KATAKANA LETTER WO').
+unicode_name(0xFF67, 'HALFWIDTH KATAKANA LETTER SMALL A').
+unicode_name(0xFF68, 'HALFWIDTH KATAKANA LETTER SMALL I').
+unicode_name(0xFF69, 'HALFWIDTH KATAKANA LETTER SMALL U').
+unicode_name(0xFF6A, 'HALFWIDTH KATAKANA LETTER SMALL E').
+unicode_name(0xFF6B, 'HALFWIDTH KATAKANA LETTER SMALL O').
+unicode_name(0xFF6C, 'HALFWIDTH KATAKANA LETTER SMALL YA').
+unicode_name(0xFF6D, 'HALFWIDTH KATAKANA LETTER SMALL YU').
+unicode_name(0xFF6E, 'HALFWIDTH KATAKANA LETTER SMALL YO').
+unicode_name(0xFF6F, 'HALFWIDTH KATAKANA LETTER SMALL TU').
+unicode_name(0xFF71, 'HALFWIDTH KATAKANA LETTER A').
+unicode_name(0xFF72, 'HALFWIDTH KATAKANA LETTER I').
+unicode_name(0xFF73, 'HALFWIDTH KATAKANA LETTER U').
+unicode_name(0xFF74, 'HALFWIDTH KATAKANA LETTER E').
+unicode_name(0xFF75, 'HALFWIDTH KATAKANA LETTER O').
+unicode_name(0xFF76, 'HALFWIDTH KATAKANA LETTER KA').
+unicode_name(0xFF77, 'HALFWIDTH KATAKANA LETTER KI').
+unicode_name(0xFF78, 'HALFWIDTH KATAKANA LETTER KU').
+unicode_name(0xFF79, 'HALFWIDTH KATAKANA LETTER KE').
+unicode_name(0xFF7A, 'HALFWIDTH KATAKANA LETTER KO').
+unicode_name(0xFF7B, 'HALFWIDTH KATAKANA LETTER SA').
+unicode_name(0xFF7C, 'HALFWIDTH KATAKANA LETTER SI').
+unicode_name(0xFF7D, 'HALFWIDTH KATAKANA LETTER SU').
+unicode_name(0xFF7E, 'HALFWIDTH KATAKANA LETTER SE').
+unicode_name(0xFF7F, 'HALFWIDTH KATAKANA LETTER SO').
+unicode_name(0xFF80, 'HALFWIDTH KATAKANA LETTER TA').
+unicode_name(0xFF81, 'HALFWIDTH KATAKANA LETTER TI').
+unicode_name(0xFF82, 'HALFWIDTH KATAKANA LETTER TU').
+unicode_name(0xFF83, 'HALFWIDTH KATAKANA LETTER TE').
+unicode_name(0xFF84, 'HALFWIDTH KATAKANA LETTER TO').
+unicode_name(0xFF85, 'HALFWIDTH KATAKANA LETTER NA').
+unicode_name(0xFF86, 'HALFWIDTH KATAKANA LETTER NI').
+unicode_name(0xFF87, 'HALFWIDTH KATAKANA LETTER NU').
+unicode_name(0xFF88, 'HALFWIDTH KATAKANA LETTER NE').
+unicode_name(0xFF89, 'HALFWIDTH KATAKANA LETTER NO').
+unicode_name(0xFF8A, 'HALFWIDTH KATAKANA LETTER HA').
+unicode_name(0xFF8B, 'HALFWIDTH KATAKANA LETTER HI').
+unicode_name(0xFF8C, 'HALFWIDTH KATAKANA LETTER HU').
+unicode_name(0xFF8D, 'HALFWIDTH KATAKANA LETTER HE').
+unicode_name(0xFF8E, 'HALFWIDTH KATAKANA LETTER HO').
+unicode_name(0xFF8F, 'HALFWIDTH KATAKANA LETTER MA').
+unicode_name(0xFF90, 'HALFWIDTH KATAKANA LETTER MI').
+unicode_name(0xFF91, 'HALFWIDTH KATAKANA LETTER MU').
+unicode_name(0xFF92, 'HALFWIDTH KATAKANA LETTER ME').
+unicode_name(0xFF93, 'HALFWIDTH KATAKANA LETTER MO').
+unicode_name(0xFF94, 'HALFWIDTH KATAKANA LETTER YA').
+unicode_name(0xFF95, 'HALFWIDTH KATAKANA LETTER YU').
+unicode_name(0xFF96, 'HALFWIDTH KATAKANA LETTER YO').
+unicode_name(0xFF97, 'HALFWIDTH KATAKANA LETTER RA').
+unicode_name(0xFF98, 'HALFWIDTH KATAKANA LETTER RI').
+unicode_name(0xFF99, 'HALFWIDTH KATAKANA LETTER RU').
+unicode_name(0xFF9A, 'HALFWIDTH KATAKANA LETTER RE').
+unicode_name(0xFF9B, 'HALFWIDTH KATAKANA LETTER RO').
+unicode_name(0xFF9C, 'HALFWIDTH KATAKANA LETTER WA').
+unicode_name(0xFF9D, 'HALFWIDTH KATAKANA LETTER N').
+unicode_name(0xFFA0, 'HALFWIDTH HANGUL FILLER').
+unicode_name(0xFFA1, 'HALFWIDTH HANGUL LETTER KIYEOK').
+unicode_name(0xFFA2, 'HALFWIDTH HANGUL LETTER SSANGKIYEOK').
+unicode_name(0xFFA3, 'HALFWIDTH HANGUL LETTER KIYEOK-SIOS').
+unicode_name(0xFFA4, 'HALFWIDTH HANGUL LETTER NIEUN').
+unicode_name(0xFFA5, 'HALFWIDTH HANGUL LETTER NIEUN-CIEUC').
+unicode_name(0xFFA6, 'HALFWIDTH HANGUL LETTER NIEUN-HIEUH').
+unicode_name(0xFFA7, 'HALFWIDTH HANGUL LETTER TIKEUT').
+unicode_name(0xFFA8, 'HALFWIDTH HANGUL LETTER SSANGTIKEUT').
+unicode_name(0xFFA9, 'HALFWIDTH HANGUL LETTER RIEUL').
+unicode_name(0xFFAA, 'HALFWIDTH HANGUL LETTER RIEUL-KIYEOK').
+unicode_name(0xFFAB, 'HALFWIDTH HANGUL LETTER RIEUL-MIEUM').
+unicode_name(0xFFAC, 'HALFWIDTH HANGUL LETTER RIEUL-PIEUP').
+unicode_name(0xFFAD, 'HALFWIDTH HANGUL LETTER RIEUL-SIOS').
+unicode_name(0xFFAE, 'HALFWIDTH HANGUL LETTER RIEUL-THIEUTH').
+unicode_name(0xFFAF, 'HALFWIDTH HANGUL LETTER RIEUL-PHIEUPH').
+unicode_name(0xFFB0, 'HALFWIDTH HANGUL LETTER RIEUL-HIEUH').
+unicode_name(0xFFB1, 'HALFWIDTH HANGUL LETTER MIEUM').
+unicode_name(0xFFB2, 'HALFWIDTH HANGUL LETTER PIEUP').
+unicode_name(0xFFB3, 'HALFWIDTH HANGUL LETTER SSANGPIEUP').
+unicode_name(0xFFB4, 'HALFWIDTH HANGUL LETTER PIEUP-SIOS').
+unicode_name(0xFFB5, 'HALFWIDTH HANGUL LETTER SIOS').
+unicode_name(0xFFB6, 'HALFWIDTH HANGUL LETTER SSANGSIOS').
+unicode_name(0xFFB7, 'HALFWIDTH HANGUL LETTER IEUNG').
+unicode_name(0xFFB8, 'HALFWIDTH HANGUL LETTER CIEUC').
+unicode_name(0xFFB9, 'HALFWIDTH HANGUL LETTER SSANGCIEUC').
+unicode_name(0xFFBA, 'HALFWIDTH HANGUL LETTER CHIEUCH').
+unicode_name(0xFFBB, 'HALFWIDTH HANGUL LETTER KHIEUKH').
+unicode_name(0xFFBC, 'HALFWIDTH HANGUL LETTER THIEUTH').
+unicode_name(0xFFBD, 'HALFWIDTH HANGUL LETTER PHIEUPH').
+unicode_name(0xFFBE, 'HALFWIDTH HANGUL LETTER HIEUH').
+unicode_name(0xFFC2, 'HALFWIDTH HANGUL LETTER A').
+unicode_name(0xFFC3, 'HALFWIDTH HANGUL LETTER AE').
+unicode_name(0xFFC4, 'HALFWIDTH HANGUL LETTER YA').
+unicode_name(0xFFC5, 'HALFWIDTH HANGUL LETTER YAE').
+unicode_name(0xFFC6, 'HALFWIDTH HANGUL LETTER EO').
+unicode_name(0xFFC7, 'HALFWIDTH HANGUL LETTER E').
+unicode_name(0xFFCA, 'HALFWIDTH HANGUL LETTER YEO').
+unicode_name(0xFFCB, 'HALFWIDTH HANGUL LETTER YE').
+unicode_name(0xFFCC, 'HALFWIDTH HANGUL LETTER O').
+unicode_name(0xFFCD, 'HALFWIDTH HANGUL LETTER WA').
+unicode_name(0xFFCE, 'HALFWIDTH HANGUL LETTER WAE').
+unicode_name(0xFFCF, 'HALFWIDTH HANGUL LETTER OE').
+unicode_name(0xFFD2, 'HALFWIDTH HANGUL LETTER YO').
+unicode_name(0xFFD3, 'HALFWIDTH HANGUL LETTER U').
+unicode_name(0xFFD4, 'HALFWIDTH HANGUL LETTER WEO').
+unicode_name(0xFFD5, 'HALFWIDTH HANGUL LETTER WE').
+unicode_name(0xFFD6, 'HALFWIDTH HANGUL LETTER WI').
+unicode_name(0xFFD7, 'HALFWIDTH HANGUL LETTER YU').
+unicode_name(0xFFDA, 'HALFWIDTH HANGUL LETTER EU').
+unicode_name(0xFFDB, 'HALFWIDTH HANGUL LETTER YI').
+unicode_name(0xFFDC, 'HALFWIDTH HANGUL LETTER I').
+unicode_name(0x10000, 'LINEAR B SYLLABLE B008 A').
+unicode_name(0x10001, 'LINEAR B SYLLABLE B038 E').
+unicode_name(0x10002, 'LINEAR B SYLLABLE B028 I').
+unicode_name(0x10003, 'LINEAR B SYLLABLE B061 O').
+unicode_name(0x10004, 'LINEAR B SYLLABLE B010 U').
+unicode_name(0x10005, 'LINEAR B SYLLABLE B001 DA').
+unicode_name(0x10006, 'LINEAR B SYLLABLE B045 DE').
+unicode_name(0x10007, 'LINEAR B SYLLABLE B007 DI').
+unicode_name(0x10008, 'LINEAR B SYLLABLE B014 DO').
+unicode_name(0x10009, 'LINEAR B SYLLABLE B051 DU').
+unicode_name(0x1000A, 'LINEAR B SYLLABLE B057 JA').
+unicode_name(0x1000B, 'LINEAR B SYLLABLE B046 JE').
+unicode_name(0x1000D, 'LINEAR B SYLLABLE B036 JO').
+unicode_name(0x1000E, 'LINEAR B SYLLABLE B065 JU').
+unicode_name(0x1000F, 'LINEAR B SYLLABLE B077 KA').
+unicode_name(0x10010, 'LINEAR B SYLLABLE B044 KE').
+unicode_name(0x10011, 'LINEAR B SYLLABLE B067 KI').
+unicode_name(0x10012, 'LINEAR B SYLLABLE B070 KO').
+unicode_name(0x10013, 'LINEAR B SYLLABLE B081 KU').
+unicode_name(0x10014, 'LINEAR B SYLLABLE B080 MA').
+unicode_name(0x10015, 'LINEAR B SYLLABLE B013 ME').
+unicode_name(0x10016, 'LINEAR B SYLLABLE B073 MI').
+unicode_name(0x10017, 'LINEAR B SYLLABLE B015 MO').
+unicode_name(0x10018, 'LINEAR B SYLLABLE B023 MU').
+unicode_name(0x10019, 'LINEAR B SYLLABLE B006 NA').
+unicode_name(0x1001A, 'LINEAR B SYLLABLE B024 NE').
+unicode_name(0x1001B, 'LINEAR B SYLLABLE B030 NI').
+unicode_name(0x1001C, 'LINEAR B SYLLABLE B052 NO').
+unicode_name(0x1001D, 'LINEAR B SYLLABLE B055 NU').
+unicode_name(0x1001E, 'LINEAR B SYLLABLE B003 PA').
+unicode_name(0x1001F, 'LINEAR B SYLLABLE B072 PE').
+unicode_name(0x10020, 'LINEAR B SYLLABLE B039 PI').
+unicode_name(0x10021, 'LINEAR B SYLLABLE B011 PO').
+unicode_name(0x10022, 'LINEAR B SYLLABLE B050 PU').
+unicode_name(0x10023, 'LINEAR B SYLLABLE B016 QA').
+unicode_name(0x10024, 'LINEAR B SYLLABLE B078 QE').
+unicode_name(0x10025, 'LINEAR B SYLLABLE B021 QI').
+unicode_name(0x10026, 'LINEAR B SYLLABLE B032 QO').
+unicode_name(0x10028, 'LINEAR B SYLLABLE B060 RA').
+unicode_name(0x10029, 'LINEAR B SYLLABLE B027 RE').
+unicode_name(0x1002A, 'LINEAR B SYLLABLE B053 RI').
+unicode_name(0x1002B, 'LINEAR B SYLLABLE B002 RO').
+unicode_name(0x1002C, 'LINEAR B SYLLABLE B026 RU').
+unicode_name(0x1002D, 'LINEAR B SYLLABLE B031 SA').
+unicode_name(0x1002E, 'LINEAR B SYLLABLE B009 SE').
+unicode_name(0x1002F, 'LINEAR B SYLLABLE B041 SI').
+unicode_name(0x10030, 'LINEAR B SYLLABLE B012 SO').
+unicode_name(0x10031, 'LINEAR B SYLLABLE B058 SU').
+unicode_name(0x10032, 'LINEAR B SYLLABLE B059 TA').
+unicode_name(0x10033, 'LINEAR B SYLLABLE B004 TE').
+unicode_name(0x10034, 'LINEAR B SYLLABLE B037 TI').
+unicode_name(0x10035, 'LINEAR B SYLLABLE B005 TO').
+unicode_name(0x10036, 'LINEAR B SYLLABLE B069 TU').
+unicode_name(0x10037, 'LINEAR B SYLLABLE B054 WA').
+unicode_name(0x10038, 'LINEAR B SYLLABLE B075 WE').
+unicode_name(0x10039, 'LINEAR B SYLLABLE B040 WI').
+unicode_name(0x1003A, 'LINEAR B SYLLABLE B042 WO').
+unicode_name(0x1003C, 'LINEAR B SYLLABLE B017 ZA').
+unicode_name(0x1003D, 'LINEAR B SYLLABLE B074 ZE').
+unicode_name(0x1003F, 'LINEAR B SYLLABLE B020 ZO').
+unicode_name(0x10040, 'LINEAR B SYLLABLE B025 A2').
+unicode_name(0x10041, 'LINEAR B SYLLABLE B043 A3').
+unicode_name(0x10042, 'LINEAR B SYLLABLE B085 AU').
+unicode_name(0x10043, 'LINEAR B SYLLABLE B071 DWE').
+unicode_name(0x10044, 'LINEAR B SYLLABLE B090 DWO').
+unicode_name(0x10045, 'LINEAR B SYLLABLE B048 NWA').
+unicode_name(0x10046, 'LINEAR B SYLLABLE B029 PU2').
+unicode_name(0x10047, 'LINEAR B SYLLABLE B062 PTE').
+unicode_name(0x10048, 'LINEAR B SYLLABLE B076 RA2').
+unicode_name(0x10049, 'LINEAR B SYLLABLE B033 RA3').
+unicode_name(0x1004A, 'LINEAR B SYLLABLE B068 RO2').
+unicode_name(0x1004B, 'LINEAR B SYLLABLE B066 TA2').
+unicode_name(0x1004C, 'LINEAR B SYLLABLE B087 TWE').
+unicode_name(0x1004D, 'LINEAR B SYLLABLE B091 TWO').
+unicode_name(0x10050, 'LINEAR B SYMBOL B018').
+unicode_name(0x10051, 'LINEAR B SYMBOL B019').
+unicode_name(0x10052, 'LINEAR B SYMBOL B022').
+unicode_name(0x10053, 'LINEAR B SYMBOL B034').
+unicode_name(0x10054, 'LINEAR B SYMBOL B047').
+unicode_name(0x10055, 'LINEAR B SYMBOL B049').
+unicode_name(0x10056, 'LINEAR B SYMBOL B056').
+unicode_name(0x10057, 'LINEAR B SYMBOL B063').
+unicode_name(0x10058, 'LINEAR B SYMBOL B064').
+unicode_name(0x10059, 'LINEAR B SYMBOL B079').
+unicode_name(0x1005A, 'LINEAR B SYMBOL B082').
+unicode_name(0x1005B, 'LINEAR B SYMBOL B083').
+unicode_name(0x1005C, 'LINEAR B SYMBOL B086').
+unicode_name(0x1005D, 'LINEAR B SYMBOL B089').
+unicode_name(0x10080, 'LINEAR B IDEOGRAM B100 MAN').
+unicode_name(0x10081, 'LINEAR B IDEOGRAM B102 WOMAN').
+unicode_name(0x10082, 'LINEAR B IDEOGRAM B104 DEER').
+unicode_name(0x10083, 'LINEAR B IDEOGRAM B105 EQUID').
+unicode_name(0x10084, 'LINEAR B IDEOGRAM B105F MARE').
+unicode_name(0x10085, 'LINEAR B IDEOGRAM B105M STALLION').
+unicode_name(0x10086, 'LINEAR B IDEOGRAM B106F EWE').
+unicode_name(0x10087, 'LINEAR B IDEOGRAM B106M RAM').
+unicode_name(0x10088, 'LINEAR B IDEOGRAM B107F SHE-GOAT').
+unicode_name(0x10089, 'LINEAR B IDEOGRAM B107M HE-GOAT').
+unicode_name(0x1008A, 'LINEAR B IDEOGRAM B108F SOW').
+unicode_name(0x1008B, 'LINEAR B IDEOGRAM B108M BOAR').
+unicode_name(0x1008C, 'LINEAR B IDEOGRAM B109F COW').
+unicode_name(0x1008D, 'LINEAR B IDEOGRAM B109M BULL').
+unicode_name(0x1008E, 'LINEAR B IDEOGRAM B120 WHEAT').
+unicode_name(0x1008F, 'LINEAR B IDEOGRAM B121 BARLEY').
+unicode_name(0x10090, 'LINEAR B IDEOGRAM B122 OLIVE').
+unicode_name(0x10091, 'LINEAR B IDEOGRAM B123 SPICE').
+unicode_name(0x10092, 'LINEAR B IDEOGRAM B125 CYPERUS').
+unicode_name(0x10093, 'LINEAR B MONOGRAM B127 KAPO').
+unicode_name(0x10094, 'LINEAR B MONOGRAM B128 KANAKO').
+unicode_name(0x10095, 'LINEAR B IDEOGRAM B130 OIL').
+unicode_name(0x10096, 'LINEAR B IDEOGRAM B131 WINE').
+unicode_name(0x10097, 'LINEAR B IDEOGRAM B132').
+unicode_name(0x10098, 'LINEAR B MONOGRAM B133 AREPA').
+unicode_name(0x10099, 'LINEAR B MONOGRAM B135 MERI').
+unicode_name(0x1009A, 'LINEAR B IDEOGRAM B140 BRONZE').
+unicode_name(0x1009B, 'LINEAR B IDEOGRAM B141 GOLD').
+unicode_name(0x1009C, 'LINEAR B IDEOGRAM B142').
+unicode_name(0x1009D, 'LINEAR B IDEOGRAM B145 WOOL').
+unicode_name(0x1009E, 'LINEAR B IDEOGRAM B146').
+unicode_name(0x1009F, 'LINEAR B IDEOGRAM B150').
+unicode_name(0x100A0, 'LINEAR B IDEOGRAM B151 HORN').
+unicode_name(0x100A1, 'LINEAR B IDEOGRAM B152').
+unicode_name(0x100A2, 'LINEAR B IDEOGRAM B153').
+unicode_name(0x100A3, 'LINEAR B IDEOGRAM B154').
+unicode_name(0x100A4, 'LINEAR B MONOGRAM B156 TURO2').
+unicode_name(0x100A5, 'LINEAR B IDEOGRAM B157').
+unicode_name(0x100A6, 'LINEAR B IDEOGRAM B158').
+unicode_name(0x100A7, 'LINEAR B IDEOGRAM B159 CLOTH').
+unicode_name(0x100A8, 'LINEAR B IDEOGRAM B160').
+unicode_name(0x100A9, 'LINEAR B IDEOGRAM B161').
+unicode_name(0x100AA, 'LINEAR B IDEOGRAM B162 GARMENT').
+unicode_name(0x100AB, 'LINEAR B IDEOGRAM B163 ARMOUR').
+unicode_name(0x100AC, 'LINEAR B IDEOGRAM B164').
+unicode_name(0x100AD, 'LINEAR B IDEOGRAM B165').
+unicode_name(0x100AE, 'LINEAR B IDEOGRAM B166').
+unicode_name(0x100AF, 'LINEAR B IDEOGRAM B167').
+unicode_name(0x100B0, 'LINEAR B IDEOGRAM B168').
+unicode_name(0x100B1, 'LINEAR B IDEOGRAM B169').
+unicode_name(0x100B2, 'LINEAR B IDEOGRAM B170').
+unicode_name(0x100B3, 'LINEAR B IDEOGRAM B171').
+unicode_name(0x100B4, 'LINEAR B IDEOGRAM B172').
+unicode_name(0x100B5, 'LINEAR B IDEOGRAM B173 MONTH').
+unicode_name(0x100B6, 'LINEAR B IDEOGRAM B174').
+unicode_name(0x100B7, 'LINEAR B IDEOGRAM B176 TREE').
+unicode_name(0x100B8, 'LINEAR B IDEOGRAM B177').
+unicode_name(0x100B9, 'LINEAR B IDEOGRAM B178').
+unicode_name(0x100BA, 'LINEAR B IDEOGRAM B179').
+unicode_name(0x100BB, 'LINEAR B IDEOGRAM B180').
+unicode_name(0x100BC, 'LINEAR B IDEOGRAM B181').
+unicode_name(0x100BD, 'LINEAR B IDEOGRAM B182').
+unicode_name(0x100BE, 'LINEAR B IDEOGRAM B183').
+unicode_name(0x100BF, 'LINEAR B IDEOGRAM B184').
+unicode_name(0x100C0, 'LINEAR B IDEOGRAM B185').
+unicode_name(0x100C1, 'LINEAR B IDEOGRAM B189').
+unicode_name(0x100C2, 'LINEAR B IDEOGRAM B190').
+unicode_name(0x100C3, 'LINEAR B IDEOGRAM B191 HELMET').
+unicode_name(0x100C4, 'LINEAR B IDEOGRAM B220 FOOTSTOOL').
+unicode_name(0x100C5, 'LINEAR B IDEOGRAM B225 BATHTUB').
+unicode_name(0x100C6, 'LINEAR B IDEOGRAM B230 SPEAR').
+unicode_name(0x100C7, 'LINEAR B IDEOGRAM B231 ARROW').
+unicode_name(0x100C8, 'LINEAR B IDEOGRAM B232').
+unicode_name(0x100C9, 'LINEAR B IDEOGRAM B233 SWORD').
+unicode_name(0x100CA, 'LINEAR B IDEOGRAM B234').
+unicode_name(0x100CB, 'LINEAR B IDEOGRAM B236').
+unicode_name(0x100CC, 'LINEAR B IDEOGRAM B240 WHEELED CHARIOT').
+unicode_name(0x100CD, 'LINEAR B IDEOGRAM B241 CHARIOT').
+unicode_name(0x100CE, 'LINEAR B IDEOGRAM B242 CHARIOT FRAME').
+unicode_name(0x100CF, 'LINEAR B IDEOGRAM B243 WHEEL').
+unicode_name(0x100D0, 'LINEAR B IDEOGRAM B245').
+unicode_name(0x100D1, 'LINEAR B IDEOGRAM B246').
+unicode_name(0x100D2, 'LINEAR B MONOGRAM B247 DIPTE').
+unicode_name(0x100D3, 'LINEAR B IDEOGRAM B248').
+unicode_name(0x100D4, 'LINEAR B IDEOGRAM B249').
+unicode_name(0x100D5, 'LINEAR B IDEOGRAM B251').
+unicode_name(0x100D6, 'LINEAR B IDEOGRAM B252').
+unicode_name(0x100D7, 'LINEAR B IDEOGRAM B253').
+unicode_name(0x100D8, 'LINEAR B IDEOGRAM B254 DART').
+unicode_name(0x100D9, 'LINEAR B IDEOGRAM B255').
+unicode_name(0x100DA, 'LINEAR B IDEOGRAM B256').
+unicode_name(0x100DB, 'LINEAR B IDEOGRAM B257').
+unicode_name(0x100DC, 'LINEAR B IDEOGRAM B258').
+unicode_name(0x100DD, 'LINEAR B IDEOGRAM B259').
+unicode_name(0x100DE, 'LINEAR B IDEOGRAM VESSEL B155').
+unicode_name(0x100DF, 'LINEAR B IDEOGRAM VESSEL B200').
+unicode_name(0x100E0, 'LINEAR B IDEOGRAM VESSEL B201').
+unicode_name(0x100E1, 'LINEAR B IDEOGRAM VESSEL B202').
+unicode_name(0x100E2, 'LINEAR B IDEOGRAM VESSEL B203').
+unicode_name(0x100E3, 'LINEAR B IDEOGRAM VESSEL B204').
+unicode_name(0x100E4, 'LINEAR B IDEOGRAM VESSEL B205').
+unicode_name(0x100E5, 'LINEAR B IDEOGRAM VESSEL B206').
+unicode_name(0x100E6, 'LINEAR B IDEOGRAM VESSEL B207').
+unicode_name(0x100E7, 'LINEAR B IDEOGRAM VESSEL B208').
+unicode_name(0x100E8, 'LINEAR B IDEOGRAM VESSEL B209').
+unicode_name(0x100E9, 'LINEAR B IDEOGRAM VESSEL B210').
+unicode_name(0x100EA, 'LINEAR B IDEOGRAM VESSEL B211').
+unicode_name(0x100EB, 'LINEAR B IDEOGRAM VESSEL B212').
+unicode_name(0x100EC, 'LINEAR B IDEOGRAM VESSEL B213').
+unicode_name(0x100ED, 'LINEAR B IDEOGRAM VESSEL B214').
+unicode_name(0x100EE, 'LINEAR B IDEOGRAM VESSEL B215').
+unicode_name(0x100EF, 'LINEAR B IDEOGRAM VESSEL B216').
+unicode_name(0x100F0, 'LINEAR B IDEOGRAM VESSEL B217').
+unicode_name(0x100F1, 'LINEAR B IDEOGRAM VESSEL B218').
+unicode_name(0x100F2, 'LINEAR B IDEOGRAM VESSEL B219').
+unicode_name(0x100F3, 'LINEAR B IDEOGRAM VESSEL B221').
+unicode_name(0x100F4, 'LINEAR B IDEOGRAM VESSEL B222').
+unicode_name(0x100F5, 'LINEAR B IDEOGRAM VESSEL B226').
+unicode_name(0x100F6, 'LINEAR B IDEOGRAM VESSEL B227').
+unicode_name(0x100F7, 'LINEAR B IDEOGRAM VESSEL B228').
+unicode_name(0x100F8, 'LINEAR B IDEOGRAM VESSEL B229').
+unicode_name(0x100F9, 'LINEAR B IDEOGRAM VESSEL B250').
+unicode_name(0x100FA, 'LINEAR B IDEOGRAM VESSEL B305').
+unicode_name(0x10280, 'LYCIAN LETTER A').
+unicode_name(0x10281, 'LYCIAN LETTER E').
+unicode_name(0x10282, 'LYCIAN LETTER B').
+unicode_name(0x10283, 'LYCIAN LETTER BH').
+unicode_name(0x10284, 'LYCIAN LETTER G').
+unicode_name(0x10285, 'LYCIAN LETTER D').
+unicode_name(0x10286, 'LYCIAN LETTER I').
+unicode_name(0x10287, 'LYCIAN LETTER W').
+unicode_name(0x10288, 'LYCIAN LETTER Z').
+unicode_name(0x10289, 'LYCIAN LETTER TH').
+unicode_name(0x1028A, 'LYCIAN LETTER J').
+unicode_name(0x1028B, 'LYCIAN LETTER K').
+unicode_name(0x1028C, 'LYCIAN LETTER Q').
+unicode_name(0x1028D, 'LYCIAN LETTER L').
+unicode_name(0x1028E, 'LYCIAN LETTER M').
+unicode_name(0x1028F, 'LYCIAN LETTER N').
+unicode_name(0x10290, 'LYCIAN LETTER MM').
+unicode_name(0x10291, 'LYCIAN LETTER NN').
+unicode_name(0x10292, 'LYCIAN LETTER U').
+unicode_name(0x10293, 'LYCIAN LETTER P').
+unicode_name(0x10294, 'LYCIAN LETTER KK').
+unicode_name(0x10295, 'LYCIAN LETTER R').
+unicode_name(0x10296, 'LYCIAN LETTER S').
+unicode_name(0x10297, 'LYCIAN LETTER T').
+unicode_name(0x10298, 'LYCIAN LETTER TT').
+unicode_name(0x10299, 'LYCIAN LETTER AN').
+unicode_name(0x1029A, 'LYCIAN LETTER EN').
+unicode_name(0x1029B, 'LYCIAN LETTER H').
+unicode_name(0x1029C, 'LYCIAN LETTER X').
+unicode_name(0x102A0, 'CARIAN LETTER A').
+unicode_name(0x102A1, 'CARIAN LETTER P2').
+unicode_name(0x102A2, 'CARIAN LETTER D').
+unicode_name(0x102A3, 'CARIAN LETTER L').
+unicode_name(0x102A4, 'CARIAN LETTER UUU').
+unicode_name(0x102A5, 'CARIAN LETTER R').
+unicode_name(0x102A6, 'CARIAN LETTER LD').
+unicode_name(0x102A7, 'CARIAN LETTER A2').
+unicode_name(0x102A8, 'CARIAN LETTER Q').
+unicode_name(0x102A9, 'CARIAN LETTER B').
+unicode_name(0x102AA, 'CARIAN LETTER M').
+unicode_name(0x102AB, 'CARIAN LETTER O').
+unicode_name(0x102AC, 'CARIAN LETTER D2').
+unicode_name(0x102AD, 'CARIAN LETTER T').
+unicode_name(0x102AE, 'CARIAN LETTER SH').
+unicode_name(0x102AF, 'CARIAN LETTER SH2').
+unicode_name(0x102B0, 'CARIAN LETTER S').
+unicode_name(0x102B1, 'CARIAN LETTER C-18').
+unicode_name(0x102B2, 'CARIAN LETTER U').
+unicode_name(0x102B3, 'CARIAN LETTER NN').
+unicode_name(0x102B4, 'CARIAN LETTER X').
+unicode_name(0x102B5, 'CARIAN LETTER N').
+unicode_name(0x102B6, 'CARIAN LETTER TT2').
+unicode_name(0x102B7, 'CARIAN LETTER P').
+unicode_name(0x102B8, 'CARIAN LETTER SS').
+unicode_name(0x102B9, 'CARIAN LETTER I').
+unicode_name(0x102BA, 'CARIAN LETTER E').
+unicode_name(0x102BB, 'CARIAN LETTER UUUU').
+unicode_name(0x102BC, 'CARIAN LETTER K').
+unicode_name(0x102BD, 'CARIAN LETTER K2').
+unicode_name(0x102BE, 'CARIAN LETTER ND').
+unicode_name(0x102BF, 'CARIAN LETTER UU').
+unicode_name(0x102C0, 'CARIAN LETTER G').
+unicode_name(0x102C1, 'CARIAN LETTER G2').
+unicode_name(0x102C2, 'CARIAN LETTER ST').
+unicode_name(0x102C3, 'CARIAN LETTER ST2').
+unicode_name(0x102C4, 'CARIAN LETTER NG').
+unicode_name(0x102C5, 'CARIAN LETTER II').
+unicode_name(0x102C6, 'CARIAN LETTER C-39').
+unicode_name(0x102C7, 'CARIAN LETTER TT').
+unicode_name(0x102C8, 'CARIAN LETTER UUU2').
+unicode_name(0x102C9, 'CARIAN LETTER RR').
+unicode_name(0x102CA, 'CARIAN LETTER MB').
+unicode_name(0x102CB, 'CARIAN LETTER MB2').
+unicode_name(0x102CC, 'CARIAN LETTER MB3').
+unicode_name(0x102CD, 'CARIAN LETTER MB4').
+unicode_name(0x102CE, 'CARIAN LETTER LD2').
+unicode_name(0x102CF, 'CARIAN LETTER E2').
+unicode_name(0x102D0, 'CARIAN LETTER UUU3').
+unicode_name(0x10300, 'OLD ITALIC LETTER A').
+unicode_name(0x10301, 'OLD ITALIC LETTER BE').
+unicode_name(0x10302, 'OLD ITALIC LETTER KE').
+unicode_name(0x10303, 'OLD ITALIC LETTER DE').
+unicode_name(0x10304, 'OLD ITALIC LETTER E').
+unicode_name(0x10305, 'OLD ITALIC LETTER VE').
+unicode_name(0x10306, 'OLD ITALIC LETTER ZE').
+unicode_name(0x10307, 'OLD ITALIC LETTER HE').
+unicode_name(0x10308, 'OLD ITALIC LETTER THE').
+unicode_name(0x10309, 'OLD ITALIC LETTER I').
+unicode_name(0x1030A, 'OLD ITALIC LETTER KA').
+unicode_name(0x1030B, 'OLD ITALIC LETTER EL').
+unicode_name(0x1030C, 'OLD ITALIC LETTER EM').
+unicode_name(0x1030D, 'OLD ITALIC LETTER EN').
+unicode_name(0x1030E, 'OLD ITALIC LETTER ESH').
+unicode_name(0x1030F, 'OLD ITALIC LETTER O').
+unicode_name(0x10310, 'OLD ITALIC LETTER PE').
+unicode_name(0x10311, 'OLD ITALIC LETTER SHE').
+unicode_name(0x10312, 'OLD ITALIC LETTER KU').
+unicode_name(0x10313, 'OLD ITALIC LETTER ER').
+unicode_name(0x10314, 'OLD ITALIC LETTER ES').
+unicode_name(0x10315, 'OLD ITALIC LETTER TE').
+unicode_name(0x10316, 'OLD ITALIC LETTER U').
+unicode_name(0x10317, 'OLD ITALIC LETTER EKS').
+unicode_name(0x10318, 'OLD ITALIC LETTER PHE').
+unicode_name(0x10319, 'OLD ITALIC LETTER KHE').
+unicode_name(0x1031A, 'OLD ITALIC LETTER EF').
+unicode_name(0x1031B, 'OLD ITALIC LETTER ERS').
+unicode_name(0x1031C, 'OLD ITALIC LETTER CHE').
+unicode_name(0x1031D, 'OLD ITALIC LETTER II').
+unicode_name(0x1031E, 'OLD ITALIC LETTER UU').
+unicode_name(0x10330, 'GOTHIC LETTER AHSA').
+unicode_name(0x10331, 'GOTHIC LETTER BAIRKAN').
+unicode_name(0x10332, 'GOTHIC LETTER GIBA').
+unicode_name(0x10333, 'GOTHIC LETTER DAGS').
+unicode_name(0x10334, 'GOTHIC LETTER AIHVUS').
+unicode_name(0x10335, 'GOTHIC LETTER QAIRTHRA').
+unicode_name(0x10336, 'GOTHIC LETTER IUJA').
+unicode_name(0x10337, 'GOTHIC LETTER HAGL').
+unicode_name(0x10338, 'GOTHIC LETTER THIUTH').
+unicode_name(0x10339, 'GOTHIC LETTER EIS').
+unicode_name(0x1033A, 'GOTHIC LETTER KUSMA').
+unicode_name(0x1033B, 'GOTHIC LETTER LAGUS').
+unicode_name(0x1033C, 'GOTHIC LETTER MANNA').
+unicode_name(0x1033D, 'GOTHIC LETTER NAUTHS').
+unicode_name(0x1033E, 'GOTHIC LETTER JER').
+unicode_name(0x1033F, 'GOTHIC LETTER URUS').
+unicode_name(0x10340, 'GOTHIC LETTER PAIRTHRA').
+unicode_name(0x10342, 'GOTHIC LETTER RAIDA').
+unicode_name(0x10343, 'GOTHIC LETTER SAUIL').
+unicode_name(0x10344, 'GOTHIC LETTER TEIWS').
+unicode_name(0x10345, 'GOTHIC LETTER WINJA').
+unicode_name(0x10346, 'GOTHIC LETTER FAIHU').
+unicode_name(0x10347, 'GOTHIC LETTER IGGWS').
+unicode_name(0x10348, 'GOTHIC LETTER HWAIR').
+unicode_name(0x10349, 'GOTHIC LETTER OTHAL').
+unicode_name(0x10380, 'UGARITIC LETTER ALPA').
+unicode_name(0x10381, 'UGARITIC LETTER BETA').
+unicode_name(0x10382, 'UGARITIC LETTER GAMLA').
+unicode_name(0x10383, 'UGARITIC LETTER KHA').
+unicode_name(0x10384, 'UGARITIC LETTER DELTA').
+unicode_name(0x10385, 'UGARITIC LETTER HO').
+unicode_name(0x10386, 'UGARITIC LETTER WO').
+unicode_name(0x10387, 'UGARITIC LETTER ZETA').
+unicode_name(0x10388, 'UGARITIC LETTER HOTA').
+unicode_name(0x10389, 'UGARITIC LETTER TET').
+unicode_name(0x1038A, 'UGARITIC LETTER YOD').
+unicode_name(0x1038B, 'UGARITIC LETTER KAF').
+unicode_name(0x1038C, 'UGARITIC LETTER SHIN').
+unicode_name(0x1038D, 'UGARITIC LETTER LAMDA').
+unicode_name(0x1038E, 'UGARITIC LETTER MEM').
+unicode_name(0x1038F, 'UGARITIC LETTER DHAL').
+unicode_name(0x10390, 'UGARITIC LETTER NUN').
+unicode_name(0x10391, 'UGARITIC LETTER ZU').
+unicode_name(0x10392, 'UGARITIC LETTER SAMKA').
+unicode_name(0x10393, 'UGARITIC LETTER AIN').
+unicode_name(0x10394, 'UGARITIC LETTER PU').
+unicode_name(0x10395, 'UGARITIC LETTER SADE').
+unicode_name(0x10396, 'UGARITIC LETTER QOPA').
+unicode_name(0x10397, 'UGARITIC LETTER RASHA').
+unicode_name(0x10398, 'UGARITIC LETTER THANNA').
+unicode_name(0x10399, 'UGARITIC LETTER GHAIN').
+unicode_name(0x1039A, 'UGARITIC LETTER TO').
+unicode_name(0x1039B, 'UGARITIC LETTER I').
+unicode_name(0x1039C, 'UGARITIC LETTER U').
+unicode_name(0x1039D, 'UGARITIC LETTER SSU').
+unicode_name(0x103A0, 'OLD PERSIAN SIGN A').
+unicode_name(0x103A1, 'OLD PERSIAN SIGN I').
+unicode_name(0x103A2, 'OLD PERSIAN SIGN U').
+unicode_name(0x103A3, 'OLD PERSIAN SIGN KA').
+unicode_name(0x103A4, 'OLD PERSIAN SIGN KU').
+unicode_name(0x103A5, 'OLD PERSIAN SIGN GA').
+unicode_name(0x103A6, 'OLD PERSIAN SIGN GU').
+unicode_name(0x103A7, 'OLD PERSIAN SIGN XA').
+unicode_name(0x103A8, 'OLD PERSIAN SIGN CA').
+unicode_name(0x103A9, 'OLD PERSIAN SIGN JA').
+unicode_name(0x103AA, 'OLD PERSIAN SIGN JI').
+unicode_name(0x103AB, 'OLD PERSIAN SIGN TA').
+unicode_name(0x103AC, 'OLD PERSIAN SIGN TU').
+unicode_name(0x103AD, 'OLD PERSIAN SIGN DA').
+unicode_name(0x103AE, 'OLD PERSIAN SIGN DI').
+unicode_name(0x103AF, 'OLD PERSIAN SIGN DU').
+unicode_name(0x103B0, 'OLD PERSIAN SIGN THA').
+unicode_name(0x103B1, 'OLD PERSIAN SIGN PA').
+unicode_name(0x103B2, 'OLD PERSIAN SIGN BA').
+unicode_name(0x103B3, 'OLD PERSIAN SIGN FA').
+unicode_name(0x103B4, 'OLD PERSIAN SIGN NA').
+unicode_name(0x103B5, 'OLD PERSIAN SIGN NU').
+unicode_name(0x103B6, 'OLD PERSIAN SIGN MA').
+unicode_name(0x103B7, 'OLD PERSIAN SIGN MI').
+unicode_name(0x103B8, 'OLD PERSIAN SIGN MU').
+unicode_name(0x103B9, 'OLD PERSIAN SIGN YA').
+unicode_name(0x103BA, 'OLD PERSIAN SIGN VA').
+unicode_name(0x103BB, 'OLD PERSIAN SIGN VI').
+unicode_name(0x103BC, 'OLD PERSIAN SIGN RA').
+unicode_name(0x103BD, 'OLD PERSIAN SIGN RU').
+unicode_name(0x103BE, 'OLD PERSIAN SIGN LA').
+unicode_name(0x103BF, 'OLD PERSIAN SIGN SA').
+unicode_name(0x103C0, 'OLD PERSIAN SIGN ZA').
+unicode_name(0x103C1, 'OLD PERSIAN SIGN SHA').
+unicode_name(0x103C2, 'OLD PERSIAN SIGN SSA').
+unicode_name(0x103C3, 'OLD PERSIAN SIGN HA').
+unicode_name(0x103C8, 'OLD PERSIAN SIGN AURAMAZDAA').
+unicode_name(0x103C9, 'OLD PERSIAN SIGN AURAMAZDAA-2').
+unicode_name(0x103CA, 'OLD PERSIAN SIGN AURAMAZDAAHA').
+unicode_name(0x103CB, 'OLD PERSIAN SIGN XSHAAYATHIYA').
+unicode_name(0x103CC, 'OLD PERSIAN SIGN DAHYAAUSH').
+unicode_name(0x103CD, 'OLD PERSIAN SIGN DAHYAAUSH-2').
+unicode_name(0x103CE, 'OLD PERSIAN SIGN BAGA').
+unicode_name(0x103CF, 'OLD PERSIAN SIGN BUUMISH').
+unicode_name(0x10450, 'SHAVIAN LETTER PEEP').
+unicode_name(0x10451, 'SHAVIAN LETTER TOT').
+unicode_name(0x10452, 'SHAVIAN LETTER KICK').
+unicode_name(0x10453, 'SHAVIAN LETTER FEE').
+unicode_name(0x10454, 'SHAVIAN LETTER THIGH').
+unicode_name(0x10455, 'SHAVIAN LETTER SO').
+unicode_name(0x10456, 'SHAVIAN LETTER SURE').
+unicode_name(0x10457, 'SHAVIAN LETTER CHURCH').
+unicode_name(0x10458, 'SHAVIAN LETTER YEA').
+unicode_name(0x10459, 'SHAVIAN LETTER HUNG').
+unicode_name(0x1045A, 'SHAVIAN LETTER BIB').
+unicode_name(0x1045B, 'SHAVIAN LETTER DEAD').
+unicode_name(0x1045C, 'SHAVIAN LETTER GAG').
+unicode_name(0x1045D, 'SHAVIAN LETTER VOW').
+unicode_name(0x1045E, 'SHAVIAN LETTER THEY').
+unicode_name(0x1045F, 'SHAVIAN LETTER ZOO').
+unicode_name(0x10460, 'SHAVIAN LETTER MEASURE').
+unicode_name(0x10461, 'SHAVIAN LETTER JUDGE').
+unicode_name(0x10462, 'SHAVIAN LETTER WOE').
+unicode_name(0x10463, 'SHAVIAN LETTER HA-HA').
+unicode_name(0x10464, 'SHAVIAN LETTER LOLL').
+unicode_name(0x10465, 'SHAVIAN LETTER MIME').
+unicode_name(0x10466, 'SHAVIAN LETTER IF').
+unicode_name(0x10467, 'SHAVIAN LETTER EGG').
+unicode_name(0x10468, 'SHAVIAN LETTER ASH').
+unicode_name(0x10469, 'SHAVIAN LETTER ADO').
+unicode_name(0x1046A, 'SHAVIAN LETTER ON').
+unicode_name(0x1046B, 'SHAVIAN LETTER WOOL').
+unicode_name(0x1046C, 'SHAVIAN LETTER OUT').
+unicode_name(0x1046D, 'SHAVIAN LETTER AH').
+unicode_name(0x1046E, 'SHAVIAN LETTER ROAR').
+unicode_name(0x1046F, 'SHAVIAN LETTER NUN').
+unicode_name(0x10470, 'SHAVIAN LETTER EAT').
+unicode_name(0x10471, 'SHAVIAN LETTER AGE').
+unicode_name(0x10472, 'SHAVIAN LETTER ICE').
+unicode_name(0x10473, 'SHAVIAN LETTER UP').
+unicode_name(0x10474, 'SHAVIAN LETTER OAK').
+unicode_name(0x10475, 'SHAVIAN LETTER OOZE').
+unicode_name(0x10476, 'SHAVIAN LETTER OIL').
+unicode_name(0x10477, 'SHAVIAN LETTER AWE').
+unicode_name(0x10478, 'SHAVIAN LETTER ARE').
+unicode_name(0x10479, 'SHAVIAN LETTER OR').
+unicode_name(0x1047A, 'SHAVIAN LETTER AIR').
+unicode_name(0x1047B, 'SHAVIAN LETTER ERR').
+unicode_name(0x1047C, 'SHAVIAN LETTER ARRAY').
+unicode_name(0x1047D, 'SHAVIAN LETTER EAR').
+unicode_name(0x1047E, 'SHAVIAN LETTER IAN').
+unicode_name(0x1047F, 'SHAVIAN LETTER YEW').
+unicode_name(0x10480, 'OSMANYA LETTER ALEF').
+unicode_name(0x10481, 'OSMANYA LETTER BA').
+unicode_name(0x10482, 'OSMANYA LETTER TA').
+unicode_name(0x10483, 'OSMANYA LETTER JA').
+unicode_name(0x10484, 'OSMANYA LETTER XA').
+unicode_name(0x10485, 'OSMANYA LETTER KHA').
+unicode_name(0x10486, 'OSMANYA LETTER DEEL').
+unicode_name(0x10487, 'OSMANYA LETTER RA').
+unicode_name(0x10488, 'OSMANYA LETTER SA').
+unicode_name(0x10489, 'OSMANYA LETTER SHIIN').
+unicode_name(0x1048A, 'OSMANYA LETTER DHA').
+unicode_name(0x1048B, 'OSMANYA LETTER CAYN').
+unicode_name(0x1048C, 'OSMANYA LETTER GA').
+unicode_name(0x1048D, 'OSMANYA LETTER FA').
+unicode_name(0x1048E, 'OSMANYA LETTER QAAF').
+unicode_name(0x1048F, 'OSMANYA LETTER KAAF').
+unicode_name(0x10490, 'OSMANYA LETTER LAAN').
+unicode_name(0x10491, 'OSMANYA LETTER MIIN').
+unicode_name(0x10492, 'OSMANYA LETTER NUUN').
+unicode_name(0x10493, 'OSMANYA LETTER WAW').
+unicode_name(0x10494, 'OSMANYA LETTER HA').
+unicode_name(0x10495, 'OSMANYA LETTER YA').
+unicode_name(0x10496, 'OSMANYA LETTER A').
+unicode_name(0x10497, 'OSMANYA LETTER E').
+unicode_name(0x10498, 'OSMANYA LETTER I').
+unicode_name(0x10499, 'OSMANYA LETTER O').
+unicode_name(0x1049A, 'OSMANYA LETTER U').
+unicode_name(0x1049B, 'OSMANYA LETTER AA').
+unicode_name(0x1049C, 'OSMANYA LETTER EE').
+unicode_name(0x1049D, 'OSMANYA LETTER OO').
+unicode_name(0x10800, 'CYPRIOT SYLLABLE A').
+unicode_name(0x10801, 'CYPRIOT SYLLABLE E').
+unicode_name(0x10802, 'CYPRIOT SYLLABLE I').
+unicode_name(0x10803, 'CYPRIOT SYLLABLE O').
+unicode_name(0x10804, 'CYPRIOT SYLLABLE U').
+unicode_name(0x10805, 'CYPRIOT SYLLABLE JA').
+unicode_name(0x10808, 'CYPRIOT SYLLABLE JO').
+unicode_name(0x1080A, 'CYPRIOT SYLLABLE KA').
+unicode_name(0x1080B, 'CYPRIOT SYLLABLE KE').
+unicode_name(0x1080C, 'CYPRIOT SYLLABLE KI').
+unicode_name(0x1080D, 'CYPRIOT SYLLABLE KO').
+unicode_name(0x1080E, 'CYPRIOT SYLLABLE KU').
+unicode_name(0x1080F, 'CYPRIOT SYLLABLE LA').
+unicode_name(0x10810, 'CYPRIOT SYLLABLE LE').
+unicode_name(0x10811, 'CYPRIOT SYLLABLE LI').
+unicode_name(0x10812, 'CYPRIOT SYLLABLE LO').
+unicode_name(0x10813, 'CYPRIOT SYLLABLE LU').
+unicode_name(0x10814, 'CYPRIOT SYLLABLE MA').
+unicode_name(0x10815, 'CYPRIOT SYLLABLE ME').
+unicode_name(0x10816, 'CYPRIOT SYLLABLE MI').
+unicode_name(0x10817, 'CYPRIOT SYLLABLE MO').
+unicode_name(0x10818, 'CYPRIOT SYLLABLE MU').
+unicode_name(0x10819, 'CYPRIOT SYLLABLE NA').
+unicode_name(0x1081A, 'CYPRIOT SYLLABLE NE').
+unicode_name(0x1081B, 'CYPRIOT SYLLABLE NI').
+unicode_name(0x1081C, 'CYPRIOT SYLLABLE NO').
+unicode_name(0x1081D, 'CYPRIOT SYLLABLE NU').
+unicode_name(0x1081E, 'CYPRIOT SYLLABLE PA').
+unicode_name(0x1081F, 'CYPRIOT SYLLABLE PE').
+unicode_name(0x10820, 'CYPRIOT SYLLABLE PI').
+unicode_name(0x10821, 'CYPRIOT SYLLABLE PO').
+unicode_name(0x10822, 'CYPRIOT SYLLABLE PU').
+unicode_name(0x10823, 'CYPRIOT SYLLABLE RA').
+unicode_name(0x10824, 'CYPRIOT SYLLABLE RE').
+unicode_name(0x10825, 'CYPRIOT SYLLABLE RI').
+unicode_name(0x10826, 'CYPRIOT SYLLABLE RO').
+unicode_name(0x10827, 'CYPRIOT SYLLABLE RU').
+unicode_name(0x10828, 'CYPRIOT SYLLABLE SA').
+unicode_name(0x10829, 'CYPRIOT SYLLABLE SE').
+unicode_name(0x1082A, 'CYPRIOT SYLLABLE SI').
+unicode_name(0x1082B, 'CYPRIOT SYLLABLE SO').
+unicode_name(0x1082C, 'CYPRIOT SYLLABLE SU').
+unicode_name(0x1082D, 'CYPRIOT SYLLABLE TA').
+unicode_name(0x1082E, 'CYPRIOT SYLLABLE TE').
+unicode_name(0x1082F, 'CYPRIOT SYLLABLE TI').
+unicode_name(0x10830, 'CYPRIOT SYLLABLE TO').
+unicode_name(0x10831, 'CYPRIOT SYLLABLE TU').
+unicode_name(0x10832, 'CYPRIOT SYLLABLE WA').
+unicode_name(0x10833, 'CYPRIOT SYLLABLE WE').
+unicode_name(0x10834, 'CYPRIOT SYLLABLE WI').
+unicode_name(0x10835, 'CYPRIOT SYLLABLE WO').
+unicode_name(0x10837, 'CYPRIOT SYLLABLE XA').
+unicode_name(0x10838, 'CYPRIOT SYLLABLE XE').
+unicode_name(0x1083C, 'CYPRIOT SYLLABLE ZA').
+unicode_name(0x1083F, 'CYPRIOT SYLLABLE ZO').
+unicode_name(0x10840, 'IMPERIAL ARAMAIC LETTER ALEPH').
+unicode_name(0x10841, 'IMPERIAL ARAMAIC LETTER BETH').
+unicode_name(0x10842, 'IMPERIAL ARAMAIC LETTER GIMEL').
+unicode_name(0x10843, 'IMPERIAL ARAMAIC LETTER DALETH').
+unicode_name(0x10844, 'IMPERIAL ARAMAIC LETTER HE').
+unicode_name(0x10845, 'IMPERIAL ARAMAIC LETTER WAW').
+unicode_name(0x10846, 'IMPERIAL ARAMAIC LETTER ZAYIN').
+unicode_name(0x10847, 'IMPERIAL ARAMAIC LETTER HETH').
+unicode_name(0x10848, 'IMPERIAL ARAMAIC LETTER TETH').
+unicode_name(0x10849, 'IMPERIAL ARAMAIC LETTER YODH').
+unicode_name(0x1084A, 'IMPERIAL ARAMAIC LETTER KAPH').
+unicode_name(0x1084B, 'IMPERIAL ARAMAIC LETTER LAMEDH').
+unicode_name(0x1084C, 'IMPERIAL ARAMAIC LETTER MEM').
+unicode_name(0x1084D, 'IMPERIAL ARAMAIC LETTER NUN').
+unicode_name(0x1084E, 'IMPERIAL ARAMAIC LETTER SAMEKH').
+unicode_name(0x1084F, 'IMPERIAL ARAMAIC LETTER AYIN').
+unicode_name(0x10850, 'IMPERIAL ARAMAIC LETTER PE').
+unicode_name(0x10851, 'IMPERIAL ARAMAIC LETTER SADHE').
+unicode_name(0x10852, 'IMPERIAL ARAMAIC LETTER QOPH').
+unicode_name(0x10853, 'IMPERIAL ARAMAIC LETTER RESH').
+unicode_name(0x10854, 'IMPERIAL ARAMAIC LETTER SHIN').
+unicode_name(0x10855, 'IMPERIAL ARAMAIC LETTER TAW').
+unicode_name(0x10900, 'PHOENICIAN LETTER ALF').
+unicode_name(0x10901, 'PHOENICIAN LETTER BET').
+unicode_name(0x10902, 'PHOENICIAN LETTER GAML').
+unicode_name(0x10903, 'PHOENICIAN LETTER DELT').
+unicode_name(0x10904, 'PHOENICIAN LETTER HE').
+unicode_name(0x10905, 'PHOENICIAN LETTER WAU').
+unicode_name(0x10906, 'PHOENICIAN LETTER ZAI').
+unicode_name(0x10907, 'PHOENICIAN LETTER HET').
+unicode_name(0x10908, 'PHOENICIAN LETTER TET').
+unicode_name(0x10909, 'PHOENICIAN LETTER YOD').
+unicode_name(0x1090A, 'PHOENICIAN LETTER KAF').
+unicode_name(0x1090B, 'PHOENICIAN LETTER LAMD').
+unicode_name(0x1090C, 'PHOENICIAN LETTER MEM').
+unicode_name(0x1090D, 'PHOENICIAN LETTER NUN').
+unicode_name(0x1090E, 'PHOENICIAN LETTER SEMK').
+unicode_name(0x1090F, 'PHOENICIAN LETTER AIN').
+unicode_name(0x10910, 'PHOENICIAN LETTER PE').
+unicode_name(0x10911, 'PHOENICIAN LETTER SADE').
+unicode_name(0x10912, 'PHOENICIAN LETTER QOF').
+unicode_name(0x10913, 'PHOENICIAN LETTER ROSH').
+unicode_name(0x10914, 'PHOENICIAN LETTER SHIN').
+unicode_name(0x10915, 'PHOENICIAN LETTER TAU').
+unicode_name(0x10920, 'LYDIAN LETTER A').
+unicode_name(0x10921, 'LYDIAN LETTER B').
+unicode_name(0x10922, 'LYDIAN LETTER G').
+unicode_name(0x10923, 'LYDIAN LETTER D').
+unicode_name(0x10924, 'LYDIAN LETTER E').
+unicode_name(0x10925, 'LYDIAN LETTER V').
+unicode_name(0x10926, 'LYDIAN LETTER I').
+unicode_name(0x10927, 'LYDIAN LETTER Y').
+unicode_name(0x10928, 'LYDIAN LETTER K').
+unicode_name(0x10929, 'LYDIAN LETTER L').
+unicode_name(0x1092A, 'LYDIAN LETTER M').
+unicode_name(0x1092B, 'LYDIAN LETTER N').
+unicode_name(0x1092C, 'LYDIAN LETTER O').
+unicode_name(0x1092D, 'LYDIAN LETTER R').
+unicode_name(0x1092E, 'LYDIAN LETTER SS').
+unicode_name(0x1092F, 'LYDIAN LETTER T').
+unicode_name(0x10930, 'LYDIAN LETTER U').
+unicode_name(0x10931, 'LYDIAN LETTER F').
+unicode_name(0x10932, 'LYDIAN LETTER Q').
+unicode_name(0x10933, 'LYDIAN LETTER S').
+unicode_name(0x10934, 'LYDIAN LETTER TT').
+unicode_name(0x10935, 'LYDIAN LETTER AN').
+unicode_name(0x10936, 'LYDIAN LETTER EN').
+unicode_name(0x10937, 'LYDIAN LETTER LY').
+unicode_name(0x10938, 'LYDIAN LETTER NN').
+unicode_name(0x10939, 'LYDIAN LETTER C').
+unicode_name(0x10980, 'MEROITIC HIEROGLYPHIC LETTER A').
+unicode_name(0x10981, 'MEROITIC HIEROGLYPHIC LETTER E').
+unicode_name(0x10982, 'MEROITIC HIEROGLYPHIC LETTER I').
+unicode_name(0x10983, 'MEROITIC HIEROGLYPHIC LETTER O').
+unicode_name(0x10984, 'MEROITIC HIEROGLYPHIC LETTER YA').
+unicode_name(0x10985, 'MEROITIC HIEROGLYPHIC LETTER WA').
+unicode_name(0x10986, 'MEROITIC HIEROGLYPHIC LETTER BA').
+unicode_name(0x10987, 'MEROITIC HIEROGLYPHIC LETTER BA-2').
+unicode_name(0x10988, 'MEROITIC HIEROGLYPHIC LETTER PA').
+unicode_name(0x10989, 'MEROITIC HIEROGLYPHIC LETTER MA').
+unicode_name(0x1098A, 'MEROITIC HIEROGLYPHIC LETTER NA').
+unicode_name(0x1098B, 'MEROITIC HIEROGLYPHIC LETTER NA-2').
+unicode_name(0x1098C, 'MEROITIC HIEROGLYPHIC LETTER NE').
+unicode_name(0x1098D, 'MEROITIC HIEROGLYPHIC LETTER NE-2').
+unicode_name(0x1098E, 'MEROITIC HIEROGLYPHIC LETTER RA').
+unicode_name(0x1098F, 'MEROITIC HIEROGLYPHIC LETTER RA-2').
+unicode_name(0x10990, 'MEROITIC HIEROGLYPHIC LETTER LA').
+unicode_name(0x10991, 'MEROITIC HIEROGLYPHIC LETTER KHA').
+unicode_name(0x10992, 'MEROITIC HIEROGLYPHIC LETTER HHA').
+unicode_name(0x10993, 'MEROITIC HIEROGLYPHIC LETTER SA').
+unicode_name(0x10994, 'MEROITIC HIEROGLYPHIC LETTER SA-2').
+unicode_name(0x10995, 'MEROITIC HIEROGLYPHIC LETTER SE').
+unicode_name(0x10996, 'MEROITIC HIEROGLYPHIC LETTER KA').
+unicode_name(0x10997, 'MEROITIC HIEROGLYPHIC LETTER QA').
+unicode_name(0x10998, 'MEROITIC HIEROGLYPHIC LETTER TA').
+unicode_name(0x10999, 'MEROITIC HIEROGLYPHIC LETTER TA-2').
+unicode_name(0x1099A, 'MEROITIC HIEROGLYPHIC LETTER TE').
+unicode_name(0x1099B, 'MEROITIC HIEROGLYPHIC LETTER TE-2').
+unicode_name(0x1099C, 'MEROITIC HIEROGLYPHIC LETTER TO').
+unicode_name(0x1099D, 'MEROITIC HIEROGLYPHIC LETTER DA').
+unicode_name(0x1099E, 'MEROITIC HIEROGLYPHIC SYMBOL VIDJ').
+unicode_name(0x1099F, 'MEROITIC HIEROGLYPHIC SYMBOL VIDJ-2').
+unicode_name(0x109A0, 'MEROITIC CURSIVE LETTER A').
+unicode_name(0x109A1, 'MEROITIC CURSIVE LETTER E').
+unicode_name(0x109A2, 'MEROITIC CURSIVE LETTER I').
+unicode_name(0x109A3, 'MEROITIC CURSIVE LETTER O').
+unicode_name(0x109A4, 'MEROITIC CURSIVE LETTER YA').
+unicode_name(0x109A5, 'MEROITIC CURSIVE LETTER WA').
+unicode_name(0x109A6, 'MEROITIC CURSIVE LETTER BA').
+unicode_name(0x109A7, 'MEROITIC CURSIVE LETTER PA').
+unicode_name(0x109A8, 'MEROITIC CURSIVE LETTER MA').
+unicode_name(0x109A9, 'MEROITIC CURSIVE LETTER NA').
+unicode_name(0x109AA, 'MEROITIC CURSIVE LETTER NE').
+unicode_name(0x109AB, 'MEROITIC CURSIVE LETTER RA').
+unicode_name(0x109AC, 'MEROITIC CURSIVE LETTER LA').
+unicode_name(0x109AD, 'MEROITIC CURSIVE LETTER KHA').
+unicode_name(0x109AE, 'MEROITIC CURSIVE LETTER HHA').
+unicode_name(0x109AF, 'MEROITIC CURSIVE LETTER SA').
+unicode_name(0x109B0, 'MEROITIC CURSIVE LETTER ARCHAIC SA').
+unicode_name(0x109B1, 'MEROITIC CURSIVE LETTER SE').
+unicode_name(0x109B2, 'MEROITIC CURSIVE LETTER KA').
+unicode_name(0x109B3, 'MEROITIC CURSIVE LETTER QA').
+unicode_name(0x109B4, 'MEROITIC CURSIVE LETTER TA').
+unicode_name(0x109B5, 'MEROITIC CURSIVE LETTER TE').
+unicode_name(0x109B6, 'MEROITIC CURSIVE LETTER TO').
+unicode_name(0x109B7, 'MEROITIC CURSIVE LETTER DA').
+unicode_name(0x109BE, 'MEROITIC CURSIVE LOGOGRAM RMT').
+unicode_name(0x109BF, 'MEROITIC CURSIVE LOGOGRAM IMN').
+unicode_name(0x10A00, 'KHAROSHTHI LETTER A').
+unicode_name(0x10A10, 'KHAROSHTHI LETTER KA').
+unicode_name(0x10A11, 'KHAROSHTHI LETTER KHA').
+unicode_name(0x10A12, 'KHAROSHTHI LETTER GA').
+unicode_name(0x10A13, 'KHAROSHTHI LETTER GHA').
+unicode_name(0x10A15, 'KHAROSHTHI LETTER CA').
+unicode_name(0x10A16, 'KHAROSHTHI LETTER CHA').
+unicode_name(0x10A17, 'KHAROSHTHI LETTER JA').
+unicode_name(0x10A19, 'KHAROSHTHI LETTER NYA').
+unicode_name(0x10A1A, 'KHAROSHTHI LETTER TTA').
+unicode_name(0x10A1B, 'KHAROSHTHI LETTER TTHA').
+unicode_name(0x10A1C, 'KHAROSHTHI LETTER DDA').
+unicode_name(0x10A1D, 'KHAROSHTHI LETTER DDHA').
+unicode_name(0x10A1E, 'KHAROSHTHI LETTER NNA').
+unicode_name(0x10A1F, 'KHAROSHTHI LETTER TA').
+unicode_name(0x10A20, 'KHAROSHTHI LETTER THA').
+unicode_name(0x10A21, 'KHAROSHTHI LETTER DA').
+unicode_name(0x10A22, 'KHAROSHTHI LETTER DHA').
+unicode_name(0x10A23, 'KHAROSHTHI LETTER NA').
+unicode_name(0x10A24, 'KHAROSHTHI LETTER PA').
+unicode_name(0x10A25, 'KHAROSHTHI LETTER PHA').
+unicode_name(0x10A26, 'KHAROSHTHI LETTER BA').
+unicode_name(0x10A27, 'KHAROSHTHI LETTER BHA').
+unicode_name(0x10A28, 'KHAROSHTHI LETTER MA').
+unicode_name(0x10A29, 'KHAROSHTHI LETTER YA').
+unicode_name(0x10A2A, 'KHAROSHTHI LETTER RA').
+unicode_name(0x10A2B, 'KHAROSHTHI LETTER LA').
+unicode_name(0x10A2C, 'KHAROSHTHI LETTER VA').
+unicode_name(0x10A2D, 'KHAROSHTHI LETTER SHA').
+unicode_name(0x10A2E, 'KHAROSHTHI LETTER SSA').
+unicode_name(0x10A2F, 'KHAROSHTHI LETTER SA').
+unicode_name(0x10A30, 'KHAROSHTHI LETTER ZA').
+unicode_name(0x10A31, 'KHAROSHTHI LETTER HA').
+unicode_name(0x10A32, 'KHAROSHTHI LETTER KKA').
+unicode_name(0x10A33, 'KHAROSHTHI LETTER TTTHA').
+unicode_name(0x10A60, 'OLD SOUTH ARABIAN LETTER HE').
+unicode_name(0x10A61, 'OLD SOUTH ARABIAN LETTER LAMEDH').
+unicode_name(0x10A62, 'OLD SOUTH ARABIAN LETTER HETH').
+unicode_name(0x10A63, 'OLD SOUTH ARABIAN LETTER MEM').
+unicode_name(0x10A64, 'OLD SOUTH ARABIAN LETTER QOPH').
+unicode_name(0x10A65, 'OLD SOUTH ARABIAN LETTER WAW').
+unicode_name(0x10A66, 'OLD SOUTH ARABIAN LETTER SHIN').
+unicode_name(0x10A67, 'OLD SOUTH ARABIAN LETTER RESH').
+unicode_name(0x10A68, 'OLD SOUTH ARABIAN LETTER BETH').
+unicode_name(0x10A69, 'OLD SOUTH ARABIAN LETTER TAW').
+unicode_name(0x10A6A, 'OLD SOUTH ARABIAN LETTER SAT').
+unicode_name(0x10A6B, 'OLD SOUTH ARABIAN LETTER KAPH').
+unicode_name(0x10A6C, 'OLD SOUTH ARABIAN LETTER NUN').
+unicode_name(0x10A6D, 'OLD SOUTH ARABIAN LETTER KHETH').
+unicode_name(0x10A6E, 'OLD SOUTH ARABIAN LETTER SADHE').
+unicode_name(0x10A6F, 'OLD SOUTH ARABIAN LETTER SAMEKH').
+unicode_name(0x10A70, 'OLD SOUTH ARABIAN LETTER FE').
+unicode_name(0x10A71, 'OLD SOUTH ARABIAN LETTER ALEF').
+unicode_name(0x10A72, 'OLD SOUTH ARABIAN LETTER AYN').
+unicode_name(0x10A73, 'OLD SOUTH ARABIAN LETTER DHADHE').
+unicode_name(0x10A74, 'OLD SOUTH ARABIAN LETTER GIMEL').
+unicode_name(0x10A75, 'OLD SOUTH ARABIAN LETTER DALETH').
+unicode_name(0x10A76, 'OLD SOUTH ARABIAN LETTER GHAYN').
+unicode_name(0x10A77, 'OLD SOUTH ARABIAN LETTER TETH').
+unicode_name(0x10A78, 'OLD SOUTH ARABIAN LETTER ZAYN').
+unicode_name(0x10A79, 'OLD SOUTH ARABIAN LETTER DHALETH').
+unicode_name(0x10A7A, 'OLD SOUTH ARABIAN LETTER YODH').
+unicode_name(0x10A7B, 'OLD SOUTH ARABIAN LETTER THAW').
+unicode_name(0x10A7C, 'OLD SOUTH ARABIAN LETTER THETH').
+unicode_name(0x10B00, 'AVESTAN LETTER A').
+unicode_name(0x10B01, 'AVESTAN LETTER AA').
+unicode_name(0x10B02, 'AVESTAN LETTER AO').
+unicode_name(0x10B03, 'AVESTAN LETTER AAO').
+unicode_name(0x10B04, 'AVESTAN LETTER AN').
+unicode_name(0x10B05, 'AVESTAN LETTER AAN').
+unicode_name(0x10B06, 'AVESTAN LETTER AE').
+unicode_name(0x10B07, 'AVESTAN LETTER AEE').
+unicode_name(0x10B08, 'AVESTAN LETTER E').
+unicode_name(0x10B09, 'AVESTAN LETTER EE').
+unicode_name(0x10B0A, 'AVESTAN LETTER O').
+unicode_name(0x10B0B, 'AVESTAN LETTER OO').
+unicode_name(0x10B0C, 'AVESTAN LETTER I').
+unicode_name(0x10B0D, 'AVESTAN LETTER II').
+unicode_name(0x10B0E, 'AVESTAN LETTER U').
+unicode_name(0x10B0F, 'AVESTAN LETTER UU').
+unicode_name(0x10B10, 'AVESTAN LETTER KE').
+unicode_name(0x10B11, 'AVESTAN LETTER XE').
+unicode_name(0x10B12, 'AVESTAN LETTER XYE').
+unicode_name(0x10B13, 'AVESTAN LETTER XVE').
+unicode_name(0x10B14, 'AVESTAN LETTER GE').
+unicode_name(0x10B15, 'AVESTAN LETTER GGE').
+unicode_name(0x10B16, 'AVESTAN LETTER GHE').
+unicode_name(0x10B17, 'AVESTAN LETTER CE').
+unicode_name(0x10B18, 'AVESTAN LETTER JE').
+unicode_name(0x10B19, 'AVESTAN LETTER TE').
+unicode_name(0x10B1A, 'AVESTAN LETTER THE').
+unicode_name(0x10B1B, 'AVESTAN LETTER DE').
+unicode_name(0x10B1C, 'AVESTAN LETTER DHE').
+unicode_name(0x10B1D, 'AVESTAN LETTER TTE').
+unicode_name(0x10B1E, 'AVESTAN LETTER PE').
+unicode_name(0x10B1F, 'AVESTAN LETTER FE').
+unicode_name(0x10B20, 'AVESTAN LETTER BE').
+unicode_name(0x10B21, 'AVESTAN LETTER BHE').
+unicode_name(0x10B22, 'AVESTAN LETTER NGE').
+unicode_name(0x10B23, 'AVESTAN LETTER NGYE').
+unicode_name(0x10B24, 'AVESTAN LETTER NGVE').
+unicode_name(0x10B25, 'AVESTAN LETTER NE').
+unicode_name(0x10B26, 'AVESTAN LETTER NYE').
+unicode_name(0x10B27, 'AVESTAN LETTER NNE').
+unicode_name(0x10B28, 'AVESTAN LETTER ME').
+unicode_name(0x10B29, 'AVESTAN LETTER HME').
+unicode_name(0x10B2A, 'AVESTAN LETTER YYE').
+unicode_name(0x10B2B, 'AVESTAN LETTER YE').
+unicode_name(0x10B2C, 'AVESTAN LETTER VE').
+unicode_name(0x10B2D, 'AVESTAN LETTER RE').
+unicode_name(0x10B2E, 'AVESTAN LETTER LE').
+unicode_name(0x10B2F, 'AVESTAN LETTER SE').
+unicode_name(0x10B30, 'AVESTAN LETTER ZE').
+unicode_name(0x10B31, 'AVESTAN LETTER SHE').
+unicode_name(0x10B32, 'AVESTAN LETTER ZHE').
+unicode_name(0x10B33, 'AVESTAN LETTER SHYE').
+unicode_name(0x10B34, 'AVESTAN LETTER SSHE').
+unicode_name(0x10B35, 'AVESTAN LETTER HE').
+unicode_name(0x10B40, 'INSCRIPTIONAL PARTHIAN LETTER ALEPH').
+unicode_name(0x10B41, 'INSCRIPTIONAL PARTHIAN LETTER BETH').
+unicode_name(0x10B42, 'INSCRIPTIONAL PARTHIAN LETTER GIMEL').
+unicode_name(0x10B43, 'INSCRIPTIONAL PARTHIAN LETTER DALETH').
+unicode_name(0x10B44, 'INSCRIPTIONAL PARTHIAN LETTER HE').
+unicode_name(0x10B45, 'INSCRIPTIONAL PARTHIAN LETTER WAW').
+unicode_name(0x10B46, 'INSCRIPTIONAL PARTHIAN LETTER ZAYIN').
+unicode_name(0x10B47, 'INSCRIPTIONAL PARTHIAN LETTER HETH').
+unicode_name(0x10B48, 'INSCRIPTIONAL PARTHIAN LETTER TETH').
+unicode_name(0x10B49, 'INSCRIPTIONAL PARTHIAN LETTER YODH').
+unicode_name(0x10B4A, 'INSCRIPTIONAL PARTHIAN LETTER KAPH').
+unicode_name(0x10B4B, 'INSCRIPTIONAL PARTHIAN LETTER LAMEDH').
+unicode_name(0x10B4C, 'INSCRIPTIONAL PARTHIAN LETTER MEM').
+unicode_name(0x10B4D, 'INSCRIPTIONAL PARTHIAN LETTER NUN').
+unicode_name(0x10B4E, 'INSCRIPTIONAL PARTHIAN LETTER SAMEKH').
+unicode_name(0x10B4F, 'INSCRIPTIONAL PARTHIAN LETTER AYIN').
+unicode_name(0x10B50, 'INSCRIPTIONAL PARTHIAN LETTER PE').
+unicode_name(0x10B51, 'INSCRIPTIONAL PARTHIAN LETTER SADHE').
+unicode_name(0x10B52, 'INSCRIPTIONAL PARTHIAN LETTER QOPH').
+unicode_name(0x10B53, 'INSCRIPTIONAL PARTHIAN LETTER RESH').
+unicode_name(0x10B54, 'INSCRIPTIONAL PARTHIAN LETTER SHIN').
+unicode_name(0x10B55, 'INSCRIPTIONAL PARTHIAN LETTER TAW').
+unicode_name(0x10B60, 'INSCRIPTIONAL PAHLAVI LETTER ALEPH').
+unicode_name(0x10B61, 'INSCRIPTIONAL PAHLAVI LETTER BETH').
+unicode_name(0x10B62, 'INSCRIPTIONAL PAHLAVI LETTER GIMEL').
+unicode_name(0x10B63, 'INSCRIPTIONAL PAHLAVI LETTER DALETH').
+unicode_name(0x10B64, 'INSCRIPTIONAL PAHLAVI LETTER HE').
+unicode_name(0x10B65, 'INSCRIPTIONAL PAHLAVI LETTER WAW-AYIN-RESH').
+unicode_name(0x10B66, 'INSCRIPTIONAL PAHLAVI LETTER ZAYIN').
+unicode_name(0x10B67, 'INSCRIPTIONAL PAHLAVI LETTER HETH').
+unicode_name(0x10B68, 'INSCRIPTIONAL PAHLAVI LETTER TETH').
+unicode_name(0x10B69, 'INSCRIPTIONAL PAHLAVI LETTER YODH').
+unicode_name(0x10B6A, 'INSCRIPTIONAL PAHLAVI LETTER KAPH').
+unicode_name(0x10B6B, 'INSCRIPTIONAL PAHLAVI LETTER LAMEDH').
+unicode_name(0x10B6C, 'INSCRIPTIONAL PAHLAVI LETTER MEM-QOPH').
+unicode_name(0x10B6D, 'INSCRIPTIONAL PAHLAVI LETTER NUN').
+unicode_name(0x10B6E, 'INSCRIPTIONAL PAHLAVI LETTER SAMEKH').
+unicode_name(0x10B6F, 'INSCRIPTIONAL PAHLAVI LETTER PE').
+unicode_name(0x10B70, 'INSCRIPTIONAL PAHLAVI LETTER SADHE').
+unicode_name(0x10B71, 'INSCRIPTIONAL PAHLAVI LETTER SHIN').
+unicode_name(0x10B72, 'INSCRIPTIONAL PAHLAVI LETTER TAW').
+unicode_name(0x10C00, 'OLD TURKIC LETTER ORKHON A').
+unicode_name(0x10C01, 'OLD TURKIC LETTER YENISEI A').
+unicode_name(0x10C02, 'OLD TURKIC LETTER YENISEI AE').
+unicode_name(0x10C03, 'OLD TURKIC LETTER ORKHON I').
+unicode_name(0x10C04, 'OLD TURKIC LETTER YENISEI I').
+unicode_name(0x10C05, 'OLD TURKIC LETTER YENISEI E').
+unicode_name(0x10C06, 'OLD TURKIC LETTER ORKHON O').
+unicode_name(0x10C07, 'OLD TURKIC LETTER ORKHON OE').
+unicode_name(0x10C08, 'OLD TURKIC LETTER YENISEI OE').
+unicode_name(0x10C09, 'OLD TURKIC LETTER ORKHON AB').
+unicode_name(0x10C0A, 'OLD TURKIC LETTER YENISEI AB').
+unicode_name(0x10C0B, 'OLD TURKIC LETTER ORKHON AEB').
+unicode_name(0x10C0C, 'OLD TURKIC LETTER YENISEI AEB').
+unicode_name(0x10C0D, 'OLD TURKIC LETTER ORKHON AG').
+unicode_name(0x10C0E, 'OLD TURKIC LETTER YENISEI AG').
+unicode_name(0x10C0F, 'OLD TURKIC LETTER ORKHON AEG').
+unicode_name(0x10C10, 'OLD TURKIC LETTER YENISEI AEG').
+unicode_name(0x10C11, 'OLD TURKIC LETTER ORKHON AD').
+unicode_name(0x10C12, 'OLD TURKIC LETTER YENISEI AD').
+unicode_name(0x10C13, 'OLD TURKIC LETTER ORKHON AED').
+unicode_name(0x10C14, 'OLD TURKIC LETTER ORKHON EZ').
+unicode_name(0x10C15, 'OLD TURKIC LETTER YENISEI EZ').
+unicode_name(0x10C16, 'OLD TURKIC LETTER ORKHON AY').
+unicode_name(0x10C17, 'OLD TURKIC LETTER YENISEI AY').
+unicode_name(0x10C18, 'OLD TURKIC LETTER ORKHON AEY').
+unicode_name(0x10C19, 'OLD TURKIC LETTER YENISEI AEY').
+unicode_name(0x10C1A, 'OLD TURKIC LETTER ORKHON AEK').
+unicode_name(0x10C1B, 'OLD TURKIC LETTER YENISEI AEK').
+unicode_name(0x10C1C, 'OLD TURKIC LETTER ORKHON OEK').
+unicode_name(0x10C1D, 'OLD TURKIC LETTER YENISEI OEK').
+unicode_name(0x10C1E, 'OLD TURKIC LETTER ORKHON AL').
+unicode_name(0x10C1F, 'OLD TURKIC LETTER YENISEI AL').
+unicode_name(0x10C20, 'OLD TURKIC LETTER ORKHON AEL').
+unicode_name(0x10C21, 'OLD TURKIC LETTER ORKHON ELT').
+unicode_name(0x10C22, 'OLD TURKIC LETTER ORKHON EM').
+unicode_name(0x10C23, 'OLD TURKIC LETTER ORKHON AN').
+unicode_name(0x10C24, 'OLD TURKIC LETTER ORKHON AEN').
+unicode_name(0x10C25, 'OLD TURKIC LETTER YENISEI AEN').
+unicode_name(0x10C26, 'OLD TURKIC LETTER ORKHON ENT').
+unicode_name(0x10C27, 'OLD TURKIC LETTER YENISEI ENT').
+unicode_name(0x10C28, 'OLD TURKIC LETTER ORKHON ENC').
+unicode_name(0x10C29, 'OLD TURKIC LETTER YENISEI ENC').
+unicode_name(0x10C2A, 'OLD TURKIC LETTER ORKHON ENY').
+unicode_name(0x10C2B, 'OLD TURKIC LETTER YENISEI ENY').
+unicode_name(0x10C2C, 'OLD TURKIC LETTER YENISEI ANG').
+unicode_name(0x10C2D, 'OLD TURKIC LETTER ORKHON ENG').
+unicode_name(0x10C2E, 'OLD TURKIC LETTER YENISEI AENG').
+unicode_name(0x10C2F, 'OLD TURKIC LETTER ORKHON EP').
+unicode_name(0x10C30, 'OLD TURKIC LETTER ORKHON OP').
+unicode_name(0x10C31, 'OLD TURKIC LETTER ORKHON IC').
+unicode_name(0x10C32, 'OLD TURKIC LETTER ORKHON EC').
+unicode_name(0x10C33, 'OLD TURKIC LETTER YENISEI EC').
+unicode_name(0x10C34, 'OLD TURKIC LETTER ORKHON AQ').
+unicode_name(0x10C35, 'OLD TURKIC LETTER YENISEI AQ').
+unicode_name(0x10C36, 'OLD TURKIC LETTER ORKHON IQ').
+unicode_name(0x10C37, 'OLD TURKIC LETTER YENISEI IQ').
+unicode_name(0x10C38, 'OLD TURKIC LETTER ORKHON OQ').
+unicode_name(0x10C39, 'OLD TURKIC LETTER YENISEI OQ').
+unicode_name(0x10C3A, 'OLD TURKIC LETTER ORKHON AR').
+unicode_name(0x10C3B, 'OLD TURKIC LETTER YENISEI AR').
+unicode_name(0x10C3C, 'OLD TURKIC LETTER ORKHON AER').
+unicode_name(0x10C3D, 'OLD TURKIC LETTER ORKHON AS').
+unicode_name(0x10C3E, 'OLD TURKIC LETTER ORKHON AES').
+unicode_name(0x10C3F, 'OLD TURKIC LETTER ORKHON ASH').
+unicode_name(0x10C40, 'OLD TURKIC LETTER YENISEI ASH').
+unicode_name(0x10C41, 'OLD TURKIC LETTER ORKHON ESH').
+unicode_name(0x10C42, 'OLD TURKIC LETTER YENISEI ESH').
+unicode_name(0x10C43, 'OLD TURKIC LETTER ORKHON AT').
+unicode_name(0x10C44, 'OLD TURKIC LETTER YENISEI AT').
+unicode_name(0x10C45, 'OLD TURKIC LETTER ORKHON AET').
+unicode_name(0x10C46, 'OLD TURKIC LETTER YENISEI AET').
+unicode_name(0x10C47, 'OLD TURKIC LETTER ORKHON OT').
+unicode_name(0x10C48, 'OLD TURKIC LETTER ORKHON BASH').
+unicode_name(0x11003, 'BRAHMI SIGN JIHVAMULIYA').
+unicode_name(0x11004, 'BRAHMI SIGN UPADHMANIYA').
+unicode_name(0x11005, 'BRAHMI LETTER A').
+unicode_name(0x11006, 'BRAHMI LETTER AA').
+unicode_name(0x11007, 'BRAHMI LETTER I').
+unicode_name(0x11008, 'BRAHMI LETTER II').
+unicode_name(0x11009, 'BRAHMI LETTER U').
+unicode_name(0x1100A, 'BRAHMI LETTER UU').
+unicode_name(0x1100B, 'BRAHMI LETTER VOCALIC R').
+unicode_name(0x1100C, 'BRAHMI LETTER VOCALIC RR').
+unicode_name(0x1100D, 'BRAHMI LETTER VOCALIC L').
+unicode_name(0x1100E, 'BRAHMI LETTER VOCALIC LL').
+unicode_name(0x1100F, 'BRAHMI LETTER E').
+unicode_name(0x11010, 'BRAHMI LETTER AI').
+unicode_name(0x11011, 'BRAHMI LETTER O').
+unicode_name(0x11012, 'BRAHMI LETTER AU').
+unicode_name(0x11013, 'BRAHMI LETTER KA').
+unicode_name(0x11014, 'BRAHMI LETTER KHA').
+unicode_name(0x11015, 'BRAHMI LETTER GA').
+unicode_name(0x11016, 'BRAHMI LETTER GHA').
+unicode_name(0x11017, 'BRAHMI LETTER NGA').
+unicode_name(0x11018, 'BRAHMI LETTER CA').
+unicode_name(0x11019, 'BRAHMI LETTER CHA').
+unicode_name(0x1101A, 'BRAHMI LETTER JA').
+unicode_name(0x1101B, 'BRAHMI LETTER JHA').
+unicode_name(0x1101C, 'BRAHMI LETTER NYA').
+unicode_name(0x1101D, 'BRAHMI LETTER TTA').
+unicode_name(0x1101E, 'BRAHMI LETTER TTHA').
+unicode_name(0x1101F, 'BRAHMI LETTER DDA').
+unicode_name(0x11020, 'BRAHMI LETTER DDHA').
+unicode_name(0x11021, 'BRAHMI LETTER NNA').
+unicode_name(0x11022, 'BRAHMI LETTER TA').
+unicode_name(0x11023, 'BRAHMI LETTER THA').
+unicode_name(0x11024, 'BRAHMI LETTER DA').
+unicode_name(0x11025, 'BRAHMI LETTER DHA').
+unicode_name(0x11026, 'BRAHMI LETTER NA').
+unicode_name(0x11027, 'BRAHMI LETTER PA').
+unicode_name(0x11028, 'BRAHMI LETTER PHA').
+unicode_name(0x11029, 'BRAHMI LETTER BA').
+unicode_name(0x1102A, 'BRAHMI LETTER BHA').
+unicode_name(0x1102B, 'BRAHMI LETTER MA').
+unicode_name(0x1102C, 'BRAHMI LETTER YA').
+unicode_name(0x1102D, 'BRAHMI LETTER RA').
+unicode_name(0x1102E, 'BRAHMI LETTER LA').
+unicode_name(0x1102F, 'BRAHMI LETTER VA').
+unicode_name(0x11030, 'BRAHMI LETTER SHA').
+unicode_name(0x11031, 'BRAHMI LETTER SSA').
+unicode_name(0x11032, 'BRAHMI LETTER SA').
+unicode_name(0x11033, 'BRAHMI LETTER HA').
+unicode_name(0x11034, 'BRAHMI LETTER LLA').
+unicode_name(0x11035, 'BRAHMI LETTER OLD TAMIL LLLA').
+unicode_name(0x11036, 'BRAHMI LETTER OLD TAMIL RRA').
+unicode_name(0x11037, 'BRAHMI LETTER OLD TAMIL NNNA').
+unicode_name(0x11083, 'KAITHI LETTER A').
+unicode_name(0x11084, 'KAITHI LETTER AA').
+unicode_name(0x11085, 'KAITHI LETTER I').
+unicode_name(0x11086, 'KAITHI LETTER II').
+unicode_name(0x11087, 'KAITHI LETTER U').
+unicode_name(0x11088, 'KAITHI LETTER UU').
+unicode_name(0x11089, 'KAITHI LETTER E').
+unicode_name(0x1108A, 'KAITHI LETTER AI').
+unicode_name(0x1108B, 'KAITHI LETTER O').
+unicode_name(0x1108C, 'KAITHI LETTER AU').
+unicode_name(0x1108D, 'KAITHI LETTER KA').
+unicode_name(0x1108E, 'KAITHI LETTER KHA').
+unicode_name(0x1108F, 'KAITHI LETTER GA').
+unicode_name(0x11090, 'KAITHI LETTER GHA').
+unicode_name(0x11091, 'KAITHI LETTER NGA').
+unicode_name(0x11092, 'KAITHI LETTER CA').
+unicode_name(0x11093, 'KAITHI LETTER CHA').
+unicode_name(0x11094, 'KAITHI LETTER JA').
+unicode_name(0x11095, 'KAITHI LETTER JHA').
+unicode_name(0x11096, 'KAITHI LETTER NYA').
+unicode_name(0x11097, 'KAITHI LETTER TTA').
+unicode_name(0x11098, 'KAITHI LETTER TTHA').
+unicode_name(0x11099, 'KAITHI LETTER DDA').
+unicode_name(0x1109A, 'KAITHI LETTER DDDHA').
+unicode_name(0x1109B, 'KAITHI LETTER DDHA').
+unicode_name(0x1109C, 'KAITHI LETTER RHA').
+unicode_name(0x1109D, 'KAITHI LETTER NNA').
+unicode_name(0x1109E, 'KAITHI LETTER TA').
+unicode_name(0x1109F, 'KAITHI LETTER THA').
+unicode_name(0x110A0, 'KAITHI LETTER DA').
+unicode_name(0x110A1, 'KAITHI LETTER DHA').
+unicode_name(0x110A2, 'KAITHI LETTER NA').
+unicode_name(0x110A3, 'KAITHI LETTER PA').
+unicode_name(0x110A4, 'KAITHI LETTER PHA').
+unicode_name(0x110A5, 'KAITHI LETTER BA').
+unicode_name(0x110A6, 'KAITHI LETTER BHA').
+unicode_name(0x110A7, 'KAITHI LETTER MA').
+unicode_name(0x110A8, 'KAITHI LETTER YA').
+unicode_name(0x110A9, 'KAITHI LETTER RA').
+unicode_name(0x110AA, 'KAITHI LETTER LA').
+unicode_name(0x110AB, 'KAITHI LETTER VA').
+unicode_name(0x110AC, 'KAITHI LETTER SHA').
+unicode_name(0x110AD, 'KAITHI LETTER SSA').
+unicode_name(0x110AE, 'KAITHI LETTER SA').
+unicode_name(0x110AF, 'KAITHI LETTER HA').
+unicode_name(0x110D0, 'SORA SOMPENG LETTER SAH').
+unicode_name(0x110D1, 'SORA SOMPENG LETTER TAH').
+unicode_name(0x110D2, 'SORA SOMPENG LETTER BAH').
+unicode_name(0x110D3, 'SORA SOMPENG LETTER CAH').
+unicode_name(0x110D4, 'SORA SOMPENG LETTER DAH').
+unicode_name(0x110D5, 'SORA SOMPENG LETTER GAH').
+unicode_name(0x110D6, 'SORA SOMPENG LETTER MAH').
+unicode_name(0x110D7, 'SORA SOMPENG LETTER NGAH').
+unicode_name(0x110D8, 'SORA SOMPENG LETTER LAH').
+unicode_name(0x110D9, 'SORA SOMPENG LETTER NAH').
+unicode_name(0x110DA, 'SORA SOMPENG LETTER VAH').
+unicode_name(0x110DB, 'SORA SOMPENG LETTER PAH').
+unicode_name(0x110DC, 'SORA SOMPENG LETTER YAH').
+unicode_name(0x110DD, 'SORA SOMPENG LETTER RAH').
+unicode_name(0x110DE, 'SORA SOMPENG LETTER HAH').
+unicode_name(0x110DF, 'SORA SOMPENG LETTER KAH').
+unicode_name(0x110E0, 'SORA SOMPENG LETTER JAH').
+unicode_name(0x110E1, 'SORA SOMPENG LETTER NYAH').
+unicode_name(0x110E2, 'SORA SOMPENG LETTER AH').
+unicode_name(0x110E3, 'SORA SOMPENG LETTER EEH').
+unicode_name(0x110E4, 'SORA SOMPENG LETTER IH').
+unicode_name(0x110E5, 'SORA SOMPENG LETTER UH').
+unicode_name(0x110E6, 'SORA SOMPENG LETTER OH').
+unicode_name(0x110E7, 'SORA SOMPENG LETTER EH').
+unicode_name(0x110E8, 'SORA SOMPENG LETTER MAE').
+unicode_name(0x11103, 'CHAKMA LETTER AA').
+unicode_name(0x11104, 'CHAKMA LETTER I').
+unicode_name(0x11105, 'CHAKMA LETTER U').
+unicode_name(0x11106, 'CHAKMA LETTER E').
+unicode_name(0x11107, 'CHAKMA LETTER KAA').
+unicode_name(0x11108, 'CHAKMA LETTER KHAA').
+unicode_name(0x11109, 'CHAKMA LETTER GAA').
+unicode_name(0x1110A, 'CHAKMA LETTER GHAA').
+unicode_name(0x1110B, 'CHAKMA LETTER NGAA').
+unicode_name(0x1110C, 'CHAKMA LETTER CAA').
+unicode_name(0x1110D, 'CHAKMA LETTER CHAA').
+unicode_name(0x1110E, 'CHAKMA LETTER JAA').
+unicode_name(0x1110F, 'CHAKMA LETTER JHAA').
+unicode_name(0x11110, 'CHAKMA LETTER NYAA').
+unicode_name(0x11111, 'CHAKMA LETTER TTAA').
+unicode_name(0x11112, 'CHAKMA LETTER TTHAA').
+unicode_name(0x11113, 'CHAKMA LETTER DDAA').
+unicode_name(0x11114, 'CHAKMA LETTER DDHAA').
+unicode_name(0x11115, 'CHAKMA LETTER NNAA').
+unicode_name(0x11116, 'CHAKMA LETTER TAA').
+unicode_name(0x11117, 'CHAKMA LETTER THAA').
+unicode_name(0x11118, 'CHAKMA LETTER DAA').
+unicode_name(0x11119, 'CHAKMA LETTER DHAA').
+unicode_name(0x1111A, 'CHAKMA LETTER NAA').
+unicode_name(0x1111B, 'CHAKMA LETTER PAA').
+unicode_name(0x1111C, 'CHAKMA LETTER PHAA').
+unicode_name(0x1111D, 'CHAKMA LETTER BAA').
+unicode_name(0x1111E, 'CHAKMA LETTER BHAA').
+unicode_name(0x1111F, 'CHAKMA LETTER MAA').
+unicode_name(0x11120, 'CHAKMA LETTER YYAA').
+unicode_name(0x11121, 'CHAKMA LETTER YAA').
+unicode_name(0x11122, 'CHAKMA LETTER RAA').
+unicode_name(0x11123, 'CHAKMA LETTER LAA').
+unicode_name(0x11124, 'CHAKMA LETTER WAA').
+unicode_name(0x11125, 'CHAKMA LETTER SAA').
+unicode_name(0x11126, 'CHAKMA LETTER HAA').
+unicode_name(0x11183, 'SHARADA LETTER A').
+unicode_name(0x11184, 'SHARADA LETTER AA').
+unicode_name(0x11185, 'SHARADA LETTER I').
+unicode_name(0x11186, 'SHARADA LETTER II').
+unicode_name(0x11187, 'SHARADA LETTER U').
+unicode_name(0x11188, 'SHARADA LETTER UU').
+unicode_name(0x11189, 'SHARADA LETTER VOCALIC R').
+unicode_name(0x1118A, 'SHARADA LETTER VOCALIC RR').
+unicode_name(0x1118B, 'SHARADA LETTER VOCALIC L').
+unicode_name(0x1118C, 'SHARADA LETTER VOCALIC LL').
+unicode_name(0x1118D, 'SHARADA LETTER E').
+unicode_name(0x1118E, 'SHARADA LETTER AI').
+unicode_name(0x1118F, 'SHARADA LETTER O').
+unicode_name(0x11190, 'SHARADA LETTER AU').
+unicode_name(0x11191, 'SHARADA LETTER KA').
+unicode_name(0x11192, 'SHARADA LETTER KHA').
+unicode_name(0x11193, 'SHARADA LETTER GA').
+unicode_name(0x11194, 'SHARADA LETTER GHA').
+unicode_name(0x11195, 'SHARADA LETTER NGA').
+unicode_name(0x11196, 'SHARADA LETTER CA').
+unicode_name(0x11197, 'SHARADA LETTER CHA').
+unicode_name(0x11198, 'SHARADA LETTER JA').
+unicode_name(0x11199, 'SHARADA LETTER JHA').
+unicode_name(0x1119A, 'SHARADA LETTER NYA').
+unicode_name(0x1119B, 'SHARADA LETTER TTA').
+unicode_name(0x1119C, 'SHARADA LETTER TTHA').
+unicode_name(0x1119D, 'SHARADA LETTER DDA').
+unicode_name(0x1119E, 'SHARADA LETTER DDHA').
+unicode_name(0x1119F, 'SHARADA LETTER NNA').
+unicode_name(0x111A0, 'SHARADA LETTER TA').
+unicode_name(0x111A1, 'SHARADA LETTER THA').
+unicode_name(0x111A2, 'SHARADA LETTER DA').
+unicode_name(0x111A3, 'SHARADA LETTER DHA').
+unicode_name(0x111A4, 'SHARADA LETTER NA').
+unicode_name(0x111A5, 'SHARADA LETTER PA').
+unicode_name(0x111A6, 'SHARADA LETTER PHA').
+unicode_name(0x111A7, 'SHARADA LETTER BA').
+unicode_name(0x111A8, 'SHARADA LETTER BHA').
+unicode_name(0x111A9, 'SHARADA LETTER MA').
+unicode_name(0x111AA, 'SHARADA LETTER YA').
+unicode_name(0x111AB, 'SHARADA LETTER RA').
+unicode_name(0x111AC, 'SHARADA LETTER LA').
+unicode_name(0x111AD, 'SHARADA LETTER LLA').
+unicode_name(0x111AE, 'SHARADA LETTER VA').
+unicode_name(0x111AF, 'SHARADA LETTER SHA').
+unicode_name(0x111B0, 'SHARADA LETTER SSA').
+unicode_name(0x111B1, 'SHARADA LETTER SA').
+unicode_name(0x111B2, 'SHARADA LETTER HA').
+unicode_name(0x111C1, 'SHARADA SIGN AVAGRAHA').
+unicode_name(0x111C2, 'SHARADA SIGN JIHVAMULIYA').
+unicode_name(0x111C3, 'SHARADA SIGN UPADHMANIYA').
+unicode_name(0x111C4, 'SHARADA OM').
+unicode_name(0x11680, 'TAKRI LETTER A').
+unicode_name(0x11681, 'TAKRI LETTER AA').
+unicode_name(0x11682, 'TAKRI LETTER I').
+unicode_name(0x11683, 'TAKRI LETTER II').
+unicode_name(0x11684, 'TAKRI LETTER U').
+unicode_name(0x11685, 'TAKRI LETTER UU').
+unicode_name(0x11686, 'TAKRI LETTER E').
+unicode_name(0x11687, 'TAKRI LETTER AI').
+unicode_name(0x11688, 'TAKRI LETTER O').
+unicode_name(0x11689, 'TAKRI LETTER AU').
+unicode_name(0x1168A, 'TAKRI LETTER KA').
+unicode_name(0x1168B, 'TAKRI LETTER KHA').
+unicode_name(0x1168C, 'TAKRI LETTER GA').
+unicode_name(0x1168D, 'TAKRI LETTER GHA').
+unicode_name(0x1168E, 'TAKRI LETTER NGA').
+unicode_name(0x1168F, 'TAKRI LETTER CA').
+unicode_name(0x11690, 'TAKRI LETTER CHA').
+unicode_name(0x11691, 'TAKRI LETTER JA').
+unicode_name(0x11692, 'TAKRI LETTER JHA').
+unicode_name(0x11693, 'TAKRI LETTER NYA').
+unicode_name(0x11694, 'TAKRI LETTER TTA').
+unicode_name(0x11695, 'TAKRI LETTER TTHA').
+unicode_name(0x11696, 'TAKRI LETTER DDA').
+unicode_name(0x11697, 'TAKRI LETTER DDHA').
+unicode_name(0x11698, 'TAKRI LETTER NNA').
+unicode_name(0x11699, 'TAKRI LETTER TA').
+unicode_name(0x1169A, 'TAKRI LETTER THA').
+unicode_name(0x1169B, 'TAKRI LETTER DA').
+unicode_name(0x1169C, 'TAKRI LETTER DHA').
+unicode_name(0x1169D, 'TAKRI LETTER NA').
+unicode_name(0x1169E, 'TAKRI LETTER PA').
+unicode_name(0x1169F, 'TAKRI LETTER PHA').
+unicode_name(0x116A0, 'TAKRI LETTER BA').
+unicode_name(0x116A1, 'TAKRI LETTER BHA').
+unicode_name(0x116A2, 'TAKRI LETTER MA').
+unicode_name(0x116A3, 'TAKRI LETTER YA').
+unicode_name(0x116A4, 'TAKRI LETTER RA').
+unicode_name(0x116A5, 'TAKRI LETTER LA').
+unicode_name(0x116A6, 'TAKRI LETTER VA').
+unicode_name(0x116A7, 'TAKRI LETTER SHA').
+unicode_name(0x116A8, 'TAKRI LETTER SA').
+unicode_name(0x116A9, 'TAKRI LETTER HA').
+unicode_name(0x116AA, 'TAKRI LETTER RRA').
+unicode_name(0x12000, 'CUNEIFORM SIGN A').
+unicode_name(0x12001, 'CUNEIFORM SIGN A TIMES A').
+unicode_name(0x12002, 'CUNEIFORM SIGN A TIMES BAD').
+unicode_name(0x12003, 'CUNEIFORM SIGN A TIMES GAN2 TENU').
+unicode_name(0x12004, 'CUNEIFORM SIGN A TIMES HA').
+unicode_name(0x12005, 'CUNEIFORM SIGN A TIMES IGI').
+unicode_name(0x12006, 'CUNEIFORM SIGN A TIMES LAGAR GUNU').
+unicode_name(0x12007, 'CUNEIFORM SIGN A TIMES MUSH').
+unicode_name(0x12008, 'CUNEIFORM SIGN A TIMES SAG').
+unicode_name(0x12009, 'CUNEIFORM SIGN A2').
+unicode_name(0x1200A, 'CUNEIFORM SIGN AB').
+unicode_name(0x1200B, 'CUNEIFORM SIGN AB TIMES ASH2').
+unicode_name(0x1200C, 'CUNEIFORM SIGN AB TIMES DUN3 GUNU').
+unicode_name(0x1200D, 'CUNEIFORM SIGN AB TIMES GAL').
+unicode_name(0x1200E, 'CUNEIFORM SIGN AB TIMES GAN2 TENU').
+unicode_name(0x1200F, 'CUNEIFORM SIGN AB TIMES HA').
+unicode_name(0x12010, 'CUNEIFORM SIGN AB TIMES IGI GUNU').
+unicode_name(0x12011, 'CUNEIFORM SIGN AB TIMES IMIN').
+unicode_name(0x12012, 'CUNEIFORM SIGN AB TIMES LAGAB').
+unicode_name(0x12013, 'CUNEIFORM SIGN AB TIMES SHESH').
+unicode_name(0x12014, 'CUNEIFORM SIGN AB TIMES U PLUS U PLUS U').
+unicode_name(0x12015, 'CUNEIFORM SIGN AB GUNU').
+unicode_name(0x12016, 'CUNEIFORM SIGN AB2').
+unicode_name(0x12017, 'CUNEIFORM SIGN AB2 TIMES BALAG').
+unicode_name(0x12018, 'CUNEIFORM SIGN AB2 TIMES GAN2 TENU').
+unicode_name(0x12019, 'CUNEIFORM SIGN AB2 TIMES ME PLUS EN').
+unicode_name(0x1201A, 'CUNEIFORM SIGN AB2 TIMES SHA3').
+unicode_name(0x1201B, 'CUNEIFORM SIGN AB2 TIMES TAK4').
+unicode_name(0x1201C, 'CUNEIFORM SIGN AD').
+unicode_name(0x1201D, 'CUNEIFORM SIGN AK').
+unicode_name(0x1201E, 'CUNEIFORM SIGN AK TIMES ERIN2').
+unicode_name(0x1201F, 'CUNEIFORM SIGN AK TIMES SHITA PLUS GISH').
+unicode_name(0x12020, 'CUNEIFORM SIGN AL').
+unicode_name(0x12021, 'CUNEIFORM SIGN AL TIMES AL').
+unicode_name(0x12022, 'CUNEIFORM SIGN AL TIMES DIM2').
+unicode_name(0x12023, 'CUNEIFORM SIGN AL TIMES GISH').
+unicode_name(0x12024, 'CUNEIFORM SIGN AL TIMES HA').
+unicode_name(0x12025, 'CUNEIFORM SIGN AL TIMES KAD3').
+unicode_name(0x12026, 'CUNEIFORM SIGN AL TIMES KI').
+unicode_name(0x12027, 'CUNEIFORM SIGN AL TIMES SHE').
+unicode_name(0x12028, 'CUNEIFORM SIGN AL TIMES USH').
+unicode_name(0x12029, 'CUNEIFORM SIGN ALAN').
+unicode_name(0x1202A, 'CUNEIFORM SIGN ALEPH').
+unicode_name(0x1202B, 'CUNEIFORM SIGN AMAR').
+unicode_name(0x1202C, 'CUNEIFORM SIGN AMAR TIMES SHE').
+unicode_name(0x1202D, 'CUNEIFORM SIGN AN').
+unicode_name(0x1202E, 'CUNEIFORM SIGN AN OVER AN').
+unicode_name(0x1202F, 'CUNEIFORM SIGN AN THREE TIMES').
+unicode_name(0x12030, 'CUNEIFORM SIGN AN PLUS NAGA OPPOSING AN PLUS NAGA').
+unicode_name(0x12031, 'CUNEIFORM SIGN AN PLUS NAGA SQUARED').
+unicode_name(0x12032, 'CUNEIFORM SIGN ANSHE').
+unicode_name(0x12033, 'CUNEIFORM SIGN APIN').
+unicode_name(0x12034, 'CUNEIFORM SIGN ARAD').
+unicode_name(0x12035, 'CUNEIFORM SIGN ARAD TIMES KUR').
+unicode_name(0x12036, 'CUNEIFORM SIGN ARKAB').
+unicode_name(0x12037, 'CUNEIFORM SIGN ASAL2').
+unicode_name(0x12038, 'CUNEIFORM SIGN ASH').
+unicode_name(0x12039, 'CUNEIFORM SIGN ASH ZIDA TENU').
+unicode_name(0x1203A, 'CUNEIFORM SIGN ASH KABA TENU').
+unicode_name(0x1203B, 'CUNEIFORM SIGN ASH OVER ASH TUG2 OVER TUG2 TUG2 OVER TUG2 PAP').
+unicode_name(0x1203C, 'CUNEIFORM SIGN ASH OVER ASH OVER ASH').
+unicode_name(0x1203D, 'CUNEIFORM SIGN ASH OVER ASH OVER ASH CROSSING ASH OVER ASH OVER ASH').
+unicode_name(0x1203E, 'CUNEIFORM SIGN ASH2').
+unicode_name(0x1203F, 'CUNEIFORM SIGN ASHGAB').
+unicode_name(0x12040, 'CUNEIFORM SIGN BA').
+unicode_name(0x12041, 'CUNEIFORM SIGN BAD').
+unicode_name(0x12042, 'CUNEIFORM SIGN BAG3').
+unicode_name(0x12043, 'CUNEIFORM SIGN BAHAR2').
+unicode_name(0x12044, 'CUNEIFORM SIGN BAL').
+unicode_name(0x12045, 'CUNEIFORM SIGN BAL OVER BAL').
+unicode_name(0x12046, 'CUNEIFORM SIGN BALAG').
+unicode_name(0x12047, 'CUNEIFORM SIGN BAR').
+unicode_name(0x12048, 'CUNEIFORM SIGN BARA2').
+unicode_name(0x12049, 'CUNEIFORM SIGN BI').
+unicode_name(0x1204A, 'CUNEIFORM SIGN BI TIMES A').
+unicode_name(0x1204B, 'CUNEIFORM SIGN BI TIMES GAR').
+unicode_name(0x1204C, 'CUNEIFORM SIGN BI TIMES IGI GUNU').
+unicode_name(0x1204D, 'CUNEIFORM SIGN BU').
+unicode_name(0x1204E, 'CUNEIFORM SIGN BU OVER BU AB').
+unicode_name(0x1204F, 'CUNEIFORM SIGN BU OVER BU UN').
+unicode_name(0x12050, 'CUNEIFORM SIGN BU CROSSING BU').
+unicode_name(0x12051, 'CUNEIFORM SIGN BULUG').
+unicode_name(0x12052, 'CUNEIFORM SIGN BULUG OVER BULUG').
+unicode_name(0x12053, 'CUNEIFORM SIGN BUR').
+unicode_name(0x12054, 'CUNEIFORM SIGN BUR2').
+unicode_name(0x12055, 'CUNEIFORM SIGN DA').
+unicode_name(0x12056, 'CUNEIFORM SIGN DAG').
+unicode_name(0x12057, 'CUNEIFORM SIGN DAG KISIM5 TIMES A PLUS MASH').
+unicode_name(0x12058, 'CUNEIFORM SIGN DAG KISIM5 TIMES AMAR').
+unicode_name(0x12059, 'CUNEIFORM SIGN DAG KISIM5 TIMES BALAG').
+unicode_name(0x1205A, 'CUNEIFORM SIGN DAG KISIM5 TIMES BI').
+unicode_name(0x1205B, 'CUNEIFORM SIGN DAG KISIM5 TIMES GA').
+unicode_name(0x1205C, 'CUNEIFORM SIGN DAG KISIM5 TIMES GA PLUS MASH').
+unicode_name(0x1205D, 'CUNEIFORM SIGN DAG KISIM5 TIMES GI').
+unicode_name(0x1205E, 'CUNEIFORM SIGN DAG KISIM5 TIMES GIR2').
+unicode_name(0x1205F, 'CUNEIFORM SIGN DAG KISIM5 TIMES GUD').
+unicode_name(0x12060, 'CUNEIFORM SIGN DAG KISIM5 TIMES HA').
+unicode_name(0x12061, 'CUNEIFORM SIGN DAG KISIM5 TIMES IR').
+unicode_name(0x12062, 'CUNEIFORM SIGN DAG KISIM5 TIMES IR PLUS LU').
+unicode_name(0x12063, 'CUNEIFORM SIGN DAG KISIM5 TIMES KAK').
+unicode_name(0x12064, 'CUNEIFORM SIGN DAG KISIM5 TIMES LA').
+unicode_name(0x12065, 'CUNEIFORM SIGN DAG KISIM5 TIMES LU').
+unicode_name(0x12066, 'CUNEIFORM SIGN DAG KISIM5 TIMES LU PLUS MASH2').
+unicode_name(0x12067, 'CUNEIFORM SIGN DAG KISIM5 TIMES LUM').
+unicode_name(0x12068, 'CUNEIFORM SIGN DAG KISIM5 TIMES NE').
+unicode_name(0x12069, 'CUNEIFORM SIGN DAG KISIM5 TIMES PAP PLUS PAP').
+unicode_name(0x1206A, 'CUNEIFORM SIGN DAG KISIM5 TIMES SI').
+unicode_name(0x1206B, 'CUNEIFORM SIGN DAG KISIM5 TIMES TAK4').
+unicode_name(0x1206C, 'CUNEIFORM SIGN DAG KISIM5 TIMES U2 PLUS GIR2').
+unicode_name(0x1206D, 'CUNEIFORM SIGN DAG KISIM5 TIMES USH').
+unicode_name(0x1206E, 'CUNEIFORM SIGN DAM').
+unicode_name(0x1206F, 'CUNEIFORM SIGN DAR').
+unicode_name(0x12070, 'CUNEIFORM SIGN DARA3').
+unicode_name(0x12071, 'CUNEIFORM SIGN DARA4').
+unicode_name(0x12072, 'CUNEIFORM SIGN DI').
+unicode_name(0x12073, 'CUNEIFORM SIGN DIB').
+unicode_name(0x12074, 'CUNEIFORM SIGN DIM').
+unicode_name(0x12075, 'CUNEIFORM SIGN DIM TIMES SHE').
+unicode_name(0x12076, 'CUNEIFORM SIGN DIM2').
+unicode_name(0x12077, 'CUNEIFORM SIGN DIN').
+unicode_name(0x12078, 'CUNEIFORM SIGN DIN KASKAL U GUNU DISH').
+unicode_name(0x12079, 'CUNEIFORM SIGN DISH').
+unicode_name(0x1207A, 'CUNEIFORM SIGN DU').
+unicode_name(0x1207B, 'CUNEIFORM SIGN DU OVER DU').
+unicode_name(0x1207C, 'CUNEIFORM SIGN DU GUNU').
+unicode_name(0x1207D, 'CUNEIFORM SIGN DU SHESHIG').
+unicode_name(0x1207E, 'CUNEIFORM SIGN DUB').
+unicode_name(0x1207F, 'CUNEIFORM SIGN DUB TIMES ESH2').
+unicode_name(0x12080, 'CUNEIFORM SIGN DUB2').
+unicode_name(0x12081, 'CUNEIFORM SIGN DUG').
+unicode_name(0x12082, 'CUNEIFORM SIGN DUGUD').
+unicode_name(0x12083, 'CUNEIFORM SIGN DUH').
+unicode_name(0x12084, 'CUNEIFORM SIGN DUN').
+unicode_name(0x12085, 'CUNEIFORM SIGN DUN3').
+unicode_name(0x12086, 'CUNEIFORM SIGN DUN3 GUNU').
+unicode_name(0x12087, 'CUNEIFORM SIGN DUN3 GUNU GUNU').
+unicode_name(0x12088, 'CUNEIFORM SIGN DUN4').
+unicode_name(0x12089, 'CUNEIFORM SIGN DUR2').
+unicode_name(0x1208A, 'CUNEIFORM SIGN E').
+unicode_name(0x1208B, 'CUNEIFORM SIGN E TIMES PAP').
+unicode_name(0x1208C, 'CUNEIFORM SIGN E OVER E NUN OVER NUN').
+unicode_name(0x1208D, 'CUNEIFORM SIGN E2').
+unicode_name(0x1208E, 'CUNEIFORM SIGN E2 TIMES A PLUS HA PLUS DA').
+unicode_name(0x1208F, 'CUNEIFORM SIGN E2 TIMES GAR').
+unicode_name(0x12090, 'CUNEIFORM SIGN E2 TIMES MI').
+unicode_name(0x12091, 'CUNEIFORM SIGN E2 TIMES SAL').
+unicode_name(0x12092, 'CUNEIFORM SIGN E2 TIMES SHE').
+unicode_name(0x12093, 'CUNEIFORM SIGN E2 TIMES U').
+unicode_name(0x12094, 'CUNEIFORM SIGN EDIN').
+unicode_name(0x12095, 'CUNEIFORM SIGN EGIR').
+unicode_name(0x12096, 'CUNEIFORM SIGN EL').
+unicode_name(0x12097, 'CUNEIFORM SIGN EN').
+unicode_name(0x12098, 'CUNEIFORM SIGN EN TIMES GAN2').
+unicode_name(0x12099, 'CUNEIFORM SIGN EN TIMES GAN2 TENU').
+unicode_name(0x1209A, 'CUNEIFORM SIGN EN TIMES ME').
+unicode_name(0x1209B, 'CUNEIFORM SIGN EN CROSSING EN').
+unicode_name(0x1209C, 'CUNEIFORM SIGN EN OPPOSING EN').
+unicode_name(0x1209D, 'CUNEIFORM SIGN EN SQUARED').
+unicode_name(0x1209E, 'CUNEIFORM SIGN EREN').
+unicode_name(0x1209F, 'CUNEIFORM SIGN ERIN2').
+unicode_name(0x120A0, 'CUNEIFORM SIGN ESH2').
+unicode_name(0x120A1, 'CUNEIFORM SIGN EZEN').
+unicode_name(0x120A2, 'CUNEIFORM SIGN EZEN TIMES A').
+unicode_name(0x120A3, 'CUNEIFORM SIGN EZEN TIMES A PLUS LAL').
+unicode_name(0x120A4, 'CUNEIFORM SIGN EZEN TIMES A PLUS LAL TIMES LAL').
+unicode_name(0x120A5, 'CUNEIFORM SIGN EZEN TIMES AN').
+unicode_name(0x120A6, 'CUNEIFORM SIGN EZEN TIMES BAD').
+unicode_name(0x120A7, 'CUNEIFORM SIGN EZEN TIMES DUN3 GUNU').
+unicode_name(0x120A8, 'CUNEIFORM SIGN EZEN TIMES DUN3 GUNU GUNU').
+unicode_name(0x120A9, 'CUNEIFORM SIGN EZEN TIMES HA').
+unicode_name(0x120AA, 'CUNEIFORM SIGN EZEN TIMES HA GUNU').
+unicode_name(0x120AB, 'CUNEIFORM SIGN EZEN TIMES IGI GUNU').
+unicode_name(0x120AC, 'CUNEIFORM SIGN EZEN TIMES KASKAL').
+unicode_name(0x120AD, 'CUNEIFORM SIGN EZEN TIMES KASKAL SQUARED').
+unicode_name(0x120AE, 'CUNEIFORM SIGN EZEN TIMES KU3').
+unicode_name(0x120AF, 'CUNEIFORM SIGN EZEN TIMES LA').
+unicode_name(0x120B0, 'CUNEIFORM SIGN EZEN TIMES LAL TIMES LAL').
+unicode_name(0x120B1, 'CUNEIFORM SIGN EZEN TIMES LI').
+unicode_name(0x120B2, 'CUNEIFORM SIGN EZEN TIMES LU').
+unicode_name(0x120B3, 'CUNEIFORM SIGN EZEN TIMES U2').
+unicode_name(0x120B4, 'CUNEIFORM SIGN EZEN TIMES UD').
+unicode_name(0x120B5, 'CUNEIFORM SIGN GA').
+unicode_name(0x120B6, 'CUNEIFORM SIGN GA GUNU').
+unicode_name(0x120B7, 'CUNEIFORM SIGN GA2').
+unicode_name(0x120B8, 'CUNEIFORM SIGN GA2 TIMES A PLUS DA PLUS HA').
+unicode_name(0x120B9, 'CUNEIFORM SIGN GA2 TIMES A PLUS HA').
+unicode_name(0x120BA, 'CUNEIFORM SIGN GA2 TIMES A PLUS IGI').
+unicode_name(0x120BB, 'CUNEIFORM SIGN GA2 TIMES AB2 TENU PLUS TAB').
+unicode_name(0x120BC, 'CUNEIFORM SIGN GA2 TIMES AN').
+unicode_name(0x120BD, 'CUNEIFORM SIGN GA2 TIMES ASH').
+unicode_name(0x120BE, 'CUNEIFORM SIGN GA2 TIMES ASH2 PLUS GAL').
+unicode_name(0x120BF, 'CUNEIFORM SIGN GA2 TIMES BAD').
+unicode_name(0x120C0, 'CUNEIFORM SIGN GA2 TIMES BAR PLUS RA').
+unicode_name(0x120C1, 'CUNEIFORM SIGN GA2 TIMES BUR').
+unicode_name(0x120C2, 'CUNEIFORM SIGN GA2 TIMES BUR PLUS RA').
+unicode_name(0x120C3, 'CUNEIFORM SIGN GA2 TIMES DA').
+unicode_name(0x120C4, 'CUNEIFORM SIGN GA2 TIMES DI').
+unicode_name(0x120C5, 'CUNEIFORM SIGN GA2 TIMES DIM TIMES SHE').
+unicode_name(0x120C6, 'CUNEIFORM SIGN GA2 TIMES DUB').
+unicode_name(0x120C7, 'CUNEIFORM SIGN GA2 TIMES EL').
+unicode_name(0x120C8, 'CUNEIFORM SIGN GA2 TIMES EL PLUS LA').
+unicode_name(0x120C9, 'CUNEIFORM SIGN GA2 TIMES EN').
+unicode_name(0x120CA, 'CUNEIFORM SIGN GA2 TIMES EN TIMES GAN2 TENU').
+unicode_name(0x120CB, 'CUNEIFORM SIGN GA2 TIMES GAN2 TENU').
+unicode_name(0x120CC, 'CUNEIFORM SIGN GA2 TIMES GAR').
+unicode_name(0x120CD, 'CUNEIFORM SIGN GA2 TIMES GI').
+unicode_name(0x120CE, 'CUNEIFORM SIGN GA2 TIMES GI4').
+unicode_name(0x120CF, 'CUNEIFORM SIGN GA2 TIMES GI4 PLUS A').
+unicode_name(0x120D0, 'CUNEIFORM SIGN GA2 TIMES GIR2 PLUS SU').
+unicode_name(0x120D1, 'CUNEIFORM SIGN GA2 TIMES HA PLUS LU PLUS ESH2').
+unicode_name(0x120D2, 'CUNEIFORM SIGN GA2 TIMES HAL').
+unicode_name(0x120D3, 'CUNEIFORM SIGN GA2 TIMES HAL PLUS LA').
+unicode_name(0x120D4, 'CUNEIFORM SIGN GA2 TIMES HI PLUS LI').
+unicode_name(0x120D5, 'CUNEIFORM SIGN GA2 TIMES HUB2').
+unicode_name(0x120D6, 'CUNEIFORM SIGN GA2 TIMES IGI GUNU').
+unicode_name(0x120D7, 'CUNEIFORM SIGN GA2 TIMES ISH PLUS HU PLUS ASH').
+unicode_name(0x120D8, 'CUNEIFORM SIGN GA2 TIMES KAK').
+unicode_name(0x120D9, 'CUNEIFORM SIGN GA2 TIMES KASKAL').
+unicode_name(0x120DA, 'CUNEIFORM SIGN GA2 TIMES KID').
+unicode_name(0x120DB, 'CUNEIFORM SIGN GA2 TIMES KID PLUS LAL').
+unicode_name(0x120DC, 'CUNEIFORM SIGN GA2 TIMES KU3 PLUS AN').
+unicode_name(0x120DD, 'CUNEIFORM SIGN GA2 TIMES LA').
+unicode_name(0x120DE, 'CUNEIFORM SIGN GA2 TIMES ME PLUS EN').
+unicode_name(0x120DF, 'CUNEIFORM SIGN GA2 TIMES MI').
+unicode_name(0x120E0, 'CUNEIFORM SIGN GA2 TIMES NUN').
+unicode_name(0x120E1, 'CUNEIFORM SIGN GA2 TIMES NUN OVER NUN').
+unicode_name(0x120E2, 'CUNEIFORM SIGN GA2 TIMES PA').
+unicode_name(0x120E3, 'CUNEIFORM SIGN GA2 TIMES SAL').
+unicode_name(0x120E4, 'CUNEIFORM SIGN GA2 TIMES SAR').
+unicode_name(0x120E5, 'CUNEIFORM SIGN GA2 TIMES SHE').
+unicode_name(0x120E6, 'CUNEIFORM SIGN GA2 TIMES SHE PLUS TUR').
+unicode_name(0x120E7, 'CUNEIFORM SIGN GA2 TIMES SHID').
+unicode_name(0x120E8, 'CUNEIFORM SIGN GA2 TIMES SUM').
+unicode_name(0x120E9, 'CUNEIFORM SIGN GA2 TIMES TAK4').
+unicode_name(0x120EA, 'CUNEIFORM SIGN GA2 TIMES U').
+unicode_name(0x120EB, 'CUNEIFORM SIGN GA2 TIMES UD').
+unicode_name(0x120EC, 'CUNEIFORM SIGN GA2 TIMES UD PLUS DU').
+unicode_name(0x120ED, 'CUNEIFORM SIGN GA2 OVER GA2').
+unicode_name(0x120EE, 'CUNEIFORM SIGN GABA').
+unicode_name(0x120EF, 'CUNEIFORM SIGN GABA CROSSING GABA').
+unicode_name(0x120F0, 'CUNEIFORM SIGN GAD').
+unicode_name(0x120F1, 'CUNEIFORM SIGN GAD OVER GAD GAR OVER GAR').
+unicode_name(0x120F2, 'CUNEIFORM SIGN GAL').
+unicode_name(0x120F3, 'CUNEIFORM SIGN GAL GAD OVER GAD GAR OVER GAR').
+unicode_name(0x120F4, 'CUNEIFORM SIGN GALAM').
+unicode_name(0x120F5, 'CUNEIFORM SIGN GAM').
+unicode_name(0x120F6, 'CUNEIFORM SIGN GAN').
+unicode_name(0x120F7, 'CUNEIFORM SIGN GAN2').
+unicode_name(0x120F8, 'CUNEIFORM SIGN GAN2 TENU').
+unicode_name(0x120F9, 'CUNEIFORM SIGN GAN2 OVER GAN2').
+unicode_name(0x120FA, 'CUNEIFORM SIGN GAN2 CROSSING GAN2').
+unicode_name(0x120FB, 'CUNEIFORM SIGN GAR').
+unicode_name(0x120FC, 'CUNEIFORM SIGN GAR3').
+unicode_name(0x120FD, 'CUNEIFORM SIGN GASHAN').
+unicode_name(0x120FE, 'CUNEIFORM SIGN GESHTIN').
+unicode_name(0x120FF, 'CUNEIFORM SIGN GESHTIN TIMES KUR').
+unicode_name(0x12100, 'CUNEIFORM SIGN GI').
+unicode_name(0x12101, 'CUNEIFORM SIGN GI TIMES E').
+unicode_name(0x12102, 'CUNEIFORM SIGN GI TIMES U').
+unicode_name(0x12103, 'CUNEIFORM SIGN GI CROSSING GI').
+unicode_name(0x12104, 'CUNEIFORM SIGN GI4').
+unicode_name(0x12105, 'CUNEIFORM SIGN GI4 OVER GI4').
+unicode_name(0x12106, 'CUNEIFORM SIGN GI4 CROSSING GI4').
+unicode_name(0x12107, 'CUNEIFORM SIGN GIDIM').
+unicode_name(0x12108, 'CUNEIFORM SIGN GIR2').
+unicode_name(0x12109, 'CUNEIFORM SIGN GIR2 GUNU').
+unicode_name(0x1210A, 'CUNEIFORM SIGN GIR3').
+unicode_name(0x1210B, 'CUNEIFORM SIGN GIR3 TIMES A PLUS IGI').
+unicode_name(0x1210C, 'CUNEIFORM SIGN GIR3 TIMES GAN2 TENU').
+unicode_name(0x1210D, 'CUNEIFORM SIGN GIR3 TIMES IGI').
+unicode_name(0x1210E, 'CUNEIFORM SIGN GIR3 TIMES LU PLUS IGI').
+unicode_name(0x1210F, 'CUNEIFORM SIGN GIR3 TIMES PA').
+unicode_name(0x12110, 'CUNEIFORM SIGN GISAL').
+unicode_name(0x12111, 'CUNEIFORM SIGN GISH').
+unicode_name(0x12112, 'CUNEIFORM SIGN GISH CROSSING GISH').
+unicode_name(0x12113, 'CUNEIFORM SIGN GISH TIMES BAD').
+unicode_name(0x12114, 'CUNEIFORM SIGN GISH TIMES TAK4').
+unicode_name(0x12115, 'CUNEIFORM SIGN GISH TENU').
+unicode_name(0x12116, 'CUNEIFORM SIGN GU').
+unicode_name(0x12117, 'CUNEIFORM SIGN GU CROSSING GU').
+unicode_name(0x12118, 'CUNEIFORM SIGN GU2').
+unicode_name(0x12119, 'CUNEIFORM SIGN GU2 TIMES KAK').
+unicode_name(0x1211A, 'CUNEIFORM SIGN GU2 TIMES KAK TIMES IGI GUNU').
+unicode_name(0x1211B, 'CUNEIFORM SIGN GU2 TIMES NUN').
+unicode_name(0x1211C, 'CUNEIFORM SIGN GU2 TIMES SAL PLUS TUG2').
+unicode_name(0x1211D, 'CUNEIFORM SIGN GU2 GUNU').
+unicode_name(0x1211E, 'CUNEIFORM SIGN GUD').
+unicode_name(0x1211F, 'CUNEIFORM SIGN GUD TIMES A PLUS KUR').
+unicode_name(0x12120, 'CUNEIFORM SIGN GUD TIMES KUR').
+unicode_name(0x12121, 'CUNEIFORM SIGN GUD OVER GUD LUGAL').
+unicode_name(0x12122, 'CUNEIFORM SIGN GUL').
+unicode_name(0x12123, 'CUNEIFORM SIGN GUM').
+unicode_name(0x12124, 'CUNEIFORM SIGN GUM TIMES SHE').
+unicode_name(0x12125, 'CUNEIFORM SIGN GUR').
+unicode_name(0x12126, 'CUNEIFORM SIGN GUR7').
+unicode_name(0x12127, 'CUNEIFORM SIGN GURUN').
+unicode_name(0x12128, 'CUNEIFORM SIGN GURUSH').
+unicode_name(0x12129, 'CUNEIFORM SIGN HA').
+unicode_name(0x1212A, 'CUNEIFORM SIGN HA TENU').
+unicode_name(0x1212B, 'CUNEIFORM SIGN HA GUNU').
+unicode_name(0x1212C, 'CUNEIFORM SIGN HAL').
+unicode_name(0x1212D, 'CUNEIFORM SIGN HI').
+unicode_name(0x1212E, 'CUNEIFORM SIGN HI TIMES ASH').
+unicode_name(0x1212F, 'CUNEIFORM SIGN HI TIMES ASH2').
+unicode_name(0x12130, 'CUNEIFORM SIGN HI TIMES BAD').
+unicode_name(0x12131, 'CUNEIFORM SIGN HI TIMES DISH').
+unicode_name(0x12132, 'CUNEIFORM SIGN HI TIMES GAD').
+unicode_name(0x12133, 'CUNEIFORM SIGN HI TIMES KIN').
+unicode_name(0x12134, 'CUNEIFORM SIGN HI TIMES NUN').
+unicode_name(0x12135, 'CUNEIFORM SIGN HI TIMES SHE').
+unicode_name(0x12136, 'CUNEIFORM SIGN HI TIMES U').
+unicode_name(0x12137, 'CUNEIFORM SIGN HU').
+unicode_name(0x12138, 'CUNEIFORM SIGN HUB2').
+unicode_name(0x12139, 'CUNEIFORM SIGN HUB2 TIMES AN').
+unicode_name(0x1213A, 'CUNEIFORM SIGN HUB2 TIMES HAL').
+unicode_name(0x1213B, 'CUNEIFORM SIGN HUB2 TIMES KASKAL').
+unicode_name(0x1213C, 'CUNEIFORM SIGN HUB2 TIMES LISH').
+unicode_name(0x1213D, 'CUNEIFORM SIGN HUB2 TIMES UD').
+unicode_name(0x1213E, 'CUNEIFORM SIGN HUL2').
+unicode_name(0x1213F, 'CUNEIFORM SIGN I').
+unicode_name(0x12140, 'CUNEIFORM SIGN I A').
+unicode_name(0x12141, 'CUNEIFORM SIGN IB').
+unicode_name(0x12142, 'CUNEIFORM SIGN IDIM').
+unicode_name(0x12143, 'CUNEIFORM SIGN IDIM OVER IDIM BUR').
+unicode_name(0x12144, 'CUNEIFORM SIGN IDIM OVER IDIM SQUARED').
+unicode_name(0x12145, 'CUNEIFORM SIGN IG').
+unicode_name(0x12146, 'CUNEIFORM SIGN IGI').
+unicode_name(0x12147, 'CUNEIFORM SIGN IGI DIB').
+unicode_name(0x12148, 'CUNEIFORM SIGN IGI RI').
+unicode_name(0x12149, 'CUNEIFORM SIGN IGI OVER IGI SHIR OVER SHIR UD OVER UD').
+unicode_name(0x1214A, 'CUNEIFORM SIGN IGI GUNU').
+unicode_name(0x1214B, 'CUNEIFORM SIGN IL').
+unicode_name(0x1214C, 'CUNEIFORM SIGN IL TIMES GAN2 TENU').
+unicode_name(0x1214D, 'CUNEIFORM SIGN IL2').
+unicode_name(0x1214E, 'CUNEIFORM SIGN IM').
+unicode_name(0x1214F, 'CUNEIFORM SIGN IM TIMES TAK4').
+unicode_name(0x12150, 'CUNEIFORM SIGN IM CROSSING IM').
+unicode_name(0x12151, 'CUNEIFORM SIGN IM OPPOSING IM').
+unicode_name(0x12152, 'CUNEIFORM SIGN IM SQUARED').
+unicode_name(0x12153, 'CUNEIFORM SIGN IMIN').
+unicode_name(0x12154, 'CUNEIFORM SIGN IN').
+unicode_name(0x12155, 'CUNEIFORM SIGN IR').
+unicode_name(0x12156, 'CUNEIFORM SIGN ISH').
+unicode_name(0x12157, 'CUNEIFORM SIGN KA').
+unicode_name(0x12158, 'CUNEIFORM SIGN KA TIMES A').
+unicode_name(0x12159, 'CUNEIFORM SIGN KA TIMES AD').
+unicode_name(0x1215A, 'CUNEIFORM SIGN KA TIMES AD PLUS KU3').
+unicode_name(0x1215B, 'CUNEIFORM SIGN KA TIMES ASH2').
+unicode_name(0x1215C, 'CUNEIFORM SIGN KA TIMES BAD').
+unicode_name(0x1215D, 'CUNEIFORM SIGN KA TIMES BALAG').
+unicode_name(0x1215E, 'CUNEIFORM SIGN KA TIMES BAR').
+unicode_name(0x1215F, 'CUNEIFORM SIGN KA TIMES BI').
+unicode_name(0x12160, 'CUNEIFORM SIGN KA TIMES ERIN2').
+unicode_name(0x12161, 'CUNEIFORM SIGN KA TIMES ESH2').
+unicode_name(0x12162, 'CUNEIFORM SIGN KA TIMES GA').
+unicode_name(0x12163, 'CUNEIFORM SIGN KA TIMES GAL').
+unicode_name(0x12164, 'CUNEIFORM SIGN KA TIMES GAN2 TENU').
+unicode_name(0x12165, 'CUNEIFORM SIGN KA TIMES GAR').
+unicode_name(0x12166, 'CUNEIFORM SIGN KA TIMES GAR PLUS SHA3 PLUS A').
+unicode_name(0x12167, 'CUNEIFORM SIGN KA TIMES GI').
+unicode_name(0x12168, 'CUNEIFORM SIGN KA TIMES GIR2').
+unicode_name(0x12169, 'CUNEIFORM SIGN KA TIMES GISH PLUS SAR').
+unicode_name(0x1216A, 'CUNEIFORM SIGN KA TIMES GISH CROSSING GISH').
+unicode_name(0x1216B, 'CUNEIFORM SIGN KA TIMES GU').
+unicode_name(0x1216C, 'CUNEIFORM SIGN KA TIMES GUR7').
+unicode_name(0x1216D, 'CUNEIFORM SIGN KA TIMES IGI').
+unicode_name(0x1216E, 'CUNEIFORM SIGN KA TIMES IM').
+unicode_name(0x1216F, 'CUNEIFORM SIGN KA TIMES KAK').
+unicode_name(0x12170, 'CUNEIFORM SIGN KA TIMES KI').
+unicode_name(0x12171, 'CUNEIFORM SIGN KA TIMES KID').
+unicode_name(0x12172, 'CUNEIFORM SIGN KA TIMES LI').
+unicode_name(0x12173, 'CUNEIFORM SIGN KA TIMES LU').
+unicode_name(0x12174, 'CUNEIFORM SIGN KA TIMES ME').
+unicode_name(0x12175, 'CUNEIFORM SIGN KA TIMES ME PLUS DU').
+unicode_name(0x12176, 'CUNEIFORM SIGN KA TIMES ME PLUS GI').
+unicode_name(0x12177, 'CUNEIFORM SIGN KA TIMES ME PLUS TE').
+unicode_name(0x12178, 'CUNEIFORM SIGN KA TIMES MI').
+unicode_name(0x12179, 'CUNEIFORM SIGN KA TIMES MI PLUS NUNUZ').
+unicode_name(0x1217A, 'CUNEIFORM SIGN KA TIMES NE').
+unicode_name(0x1217B, 'CUNEIFORM SIGN KA TIMES NUN').
+unicode_name(0x1217C, 'CUNEIFORM SIGN KA TIMES PI').
+unicode_name(0x1217D, 'CUNEIFORM SIGN KA TIMES RU').
+unicode_name(0x1217E, 'CUNEIFORM SIGN KA TIMES SA').
+unicode_name(0x1217F, 'CUNEIFORM SIGN KA TIMES SAR').
+unicode_name(0x12180, 'CUNEIFORM SIGN KA TIMES SHA').
+unicode_name(0x12181, 'CUNEIFORM SIGN KA TIMES SHE').
+unicode_name(0x12182, 'CUNEIFORM SIGN KA TIMES SHID').
+unicode_name(0x12183, 'CUNEIFORM SIGN KA TIMES SHU').
+unicode_name(0x12184, 'CUNEIFORM SIGN KA TIMES SIG').
+unicode_name(0x12185, 'CUNEIFORM SIGN KA TIMES SUHUR').
+unicode_name(0x12186, 'CUNEIFORM SIGN KA TIMES TAR').
+unicode_name(0x12187, 'CUNEIFORM SIGN KA TIMES U').
+unicode_name(0x12188, 'CUNEIFORM SIGN KA TIMES U2').
+unicode_name(0x12189, 'CUNEIFORM SIGN KA TIMES UD').
+unicode_name(0x1218A, 'CUNEIFORM SIGN KA TIMES UMUM TIMES PA').
+unicode_name(0x1218B, 'CUNEIFORM SIGN KA TIMES USH').
+unicode_name(0x1218C, 'CUNEIFORM SIGN KA TIMES ZI').
+unicode_name(0x1218D, 'CUNEIFORM SIGN KA2').
+unicode_name(0x1218E, 'CUNEIFORM SIGN KA2 CROSSING KA2').
+unicode_name(0x1218F, 'CUNEIFORM SIGN KAB').
+unicode_name(0x12190, 'CUNEIFORM SIGN KAD2').
+unicode_name(0x12191, 'CUNEIFORM SIGN KAD3').
+unicode_name(0x12192, 'CUNEIFORM SIGN KAD4').
+unicode_name(0x12193, 'CUNEIFORM SIGN KAD5').
+unicode_name(0x12194, 'CUNEIFORM SIGN KAD5 OVER KAD5').
+unicode_name(0x12195, 'CUNEIFORM SIGN KAK').
+unicode_name(0x12196, 'CUNEIFORM SIGN KAK TIMES IGI GUNU').
+unicode_name(0x12197, 'CUNEIFORM SIGN KAL').
+unicode_name(0x12198, 'CUNEIFORM SIGN KAL TIMES BAD').
+unicode_name(0x12199, 'CUNEIFORM SIGN KAL CROSSING KAL').
+unicode_name(0x1219A, 'CUNEIFORM SIGN KAM2').
+unicode_name(0x1219B, 'CUNEIFORM SIGN KAM4').
+unicode_name(0x1219C, 'CUNEIFORM SIGN KASKAL').
+unicode_name(0x1219D, 'CUNEIFORM SIGN KASKAL LAGAB TIMES U OVER LAGAB TIMES U').
+unicode_name(0x1219E, 'CUNEIFORM SIGN KASKAL OVER KASKAL LAGAB TIMES U OVER LAGAB TIMES U').
+unicode_name(0x1219F, 'CUNEIFORM SIGN KESH2').
+unicode_name(0x121A0, 'CUNEIFORM SIGN KI').
+unicode_name(0x121A1, 'CUNEIFORM SIGN KI TIMES BAD').
+unicode_name(0x121A2, 'CUNEIFORM SIGN KI TIMES U').
+unicode_name(0x121A3, 'CUNEIFORM SIGN KI TIMES UD').
+unicode_name(0x121A4, 'CUNEIFORM SIGN KID').
+unicode_name(0x121A5, 'CUNEIFORM SIGN KIN').
+unicode_name(0x121A6, 'CUNEIFORM SIGN KISAL').
+unicode_name(0x121A7, 'CUNEIFORM SIGN KISH').
+unicode_name(0x121A8, 'CUNEIFORM SIGN KISIM5').
+unicode_name(0x121A9, 'CUNEIFORM SIGN KISIM5 OVER KISIM5').
+unicode_name(0x121AA, 'CUNEIFORM SIGN KU').
+unicode_name(0x121AB, 'CUNEIFORM SIGN KU OVER HI TIMES ASH2 KU OVER HI TIMES ASH2').
+unicode_name(0x121AC, 'CUNEIFORM SIGN KU3').
+unicode_name(0x121AD, 'CUNEIFORM SIGN KU4').
+unicode_name(0x121AE, 'CUNEIFORM SIGN KU4 VARIANT FORM').
+unicode_name(0x121AF, 'CUNEIFORM SIGN KU7').
+unicode_name(0x121B0, 'CUNEIFORM SIGN KUL').
+unicode_name(0x121B1, 'CUNEIFORM SIGN KUL GUNU').
+unicode_name(0x121B2, 'CUNEIFORM SIGN KUN').
+unicode_name(0x121B3, 'CUNEIFORM SIGN KUR').
+unicode_name(0x121B4, 'CUNEIFORM SIGN KUR OPPOSING KUR').
+unicode_name(0x121B5, 'CUNEIFORM SIGN KUSHU2').
+unicode_name(0x121B6, 'CUNEIFORM SIGN KWU318').
+unicode_name(0x121B7, 'CUNEIFORM SIGN LA').
+unicode_name(0x121B8, 'CUNEIFORM SIGN LAGAB').
+unicode_name(0x121B9, 'CUNEIFORM SIGN LAGAB TIMES A').
+unicode_name(0x121BA, 'CUNEIFORM SIGN LAGAB TIMES A PLUS DA PLUS HA').
+unicode_name(0x121BB, 'CUNEIFORM SIGN LAGAB TIMES A PLUS GAR').
+unicode_name(0x121BC, 'CUNEIFORM SIGN LAGAB TIMES A PLUS LAL').
+unicode_name(0x121BD, 'CUNEIFORM SIGN LAGAB TIMES AL').
+unicode_name(0x121BE, 'CUNEIFORM SIGN LAGAB TIMES AN').
+unicode_name(0x121BF, 'CUNEIFORM SIGN LAGAB TIMES ASH ZIDA TENU').
+unicode_name(0x121C0, 'CUNEIFORM SIGN LAGAB TIMES BAD').
+unicode_name(0x121C1, 'CUNEIFORM SIGN LAGAB TIMES BI').
+unicode_name(0x121C2, 'CUNEIFORM SIGN LAGAB TIMES DAR').
+unicode_name(0x121C3, 'CUNEIFORM SIGN LAGAB TIMES EN').
+unicode_name(0x121C4, 'CUNEIFORM SIGN LAGAB TIMES GA').
+unicode_name(0x121C5, 'CUNEIFORM SIGN LAGAB TIMES GAR').
+unicode_name(0x121C6, 'CUNEIFORM SIGN LAGAB TIMES GUD').
+unicode_name(0x121C7, 'CUNEIFORM SIGN LAGAB TIMES GUD PLUS GUD').
+unicode_name(0x121C8, 'CUNEIFORM SIGN LAGAB TIMES HA').
+unicode_name(0x121C9, 'CUNEIFORM SIGN LAGAB TIMES HAL').
+unicode_name(0x121CA, 'CUNEIFORM SIGN LAGAB TIMES HI TIMES NUN').
+unicode_name(0x121CB, 'CUNEIFORM SIGN LAGAB TIMES IGI GUNU').
+unicode_name(0x121CC, 'CUNEIFORM SIGN LAGAB TIMES IM').
+unicode_name(0x121CD, 'CUNEIFORM SIGN LAGAB TIMES IM PLUS HA').
+unicode_name(0x121CE, 'CUNEIFORM SIGN LAGAB TIMES IM PLUS LU').
+unicode_name(0x121CF, 'CUNEIFORM SIGN LAGAB TIMES KI').
+unicode_name(0x121D0, 'CUNEIFORM SIGN LAGAB TIMES KIN').
+unicode_name(0x121D1, 'CUNEIFORM SIGN LAGAB TIMES KU3').
+unicode_name(0x121D2, 'CUNEIFORM SIGN LAGAB TIMES KUL').
+unicode_name(0x121D3, 'CUNEIFORM SIGN LAGAB TIMES KUL PLUS HI PLUS A').
+unicode_name(0x121D4, 'CUNEIFORM SIGN LAGAB TIMES LAGAB').
+unicode_name(0x121D5, 'CUNEIFORM SIGN LAGAB TIMES LISH').
+unicode_name(0x121D6, 'CUNEIFORM SIGN LAGAB TIMES LU').
+unicode_name(0x121D7, 'CUNEIFORM SIGN LAGAB TIMES LUL').
+unicode_name(0x121D8, 'CUNEIFORM SIGN LAGAB TIMES ME').
+unicode_name(0x121D9, 'CUNEIFORM SIGN LAGAB TIMES ME PLUS EN').
+unicode_name(0x121DA, 'CUNEIFORM SIGN LAGAB TIMES MUSH').
+unicode_name(0x121DB, 'CUNEIFORM SIGN LAGAB TIMES NE').
+unicode_name(0x121DC, 'CUNEIFORM SIGN LAGAB TIMES SHE PLUS SUM').
+unicode_name(0x121DD, 'CUNEIFORM SIGN LAGAB TIMES SHITA PLUS GISH PLUS ERIN2').
+unicode_name(0x121DE, 'CUNEIFORM SIGN LAGAB TIMES SHITA PLUS GISH TENU').
+unicode_name(0x121DF, 'CUNEIFORM SIGN LAGAB TIMES SHU2').
+unicode_name(0x121E0, 'CUNEIFORM SIGN LAGAB TIMES SHU2 PLUS SHU2').
+unicode_name(0x121E1, 'CUNEIFORM SIGN LAGAB TIMES SUM').
+unicode_name(0x121E2, 'CUNEIFORM SIGN LAGAB TIMES TAG').
+unicode_name(0x121E3, 'CUNEIFORM SIGN LAGAB TIMES TAK4').
+unicode_name(0x121E4, 'CUNEIFORM SIGN LAGAB TIMES TE PLUS A PLUS SU PLUS NA').
+unicode_name(0x121E5, 'CUNEIFORM SIGN LAGAB TIMES U').
+unicode_name(0x121E6, 'CUNEIFORM SIGN LAGAB TIMES U PLUS A').
+unicode_name(0x121E7, 'CUNEIFORM SIGN LAGAB TIMES U PLUS U PLUS U').
+unicode_name(0x121E8, 'CUNEIFORM SIGN LAGAB TIMES U2 PLUS ASH').
+unicode_name(0x121E9, 'CUNEIFORM SIGN LAGAB TIMES UD').
+unicode_name(0x121EA, 'CUNEIFORM SIGN LAGAB TIMES USH').
+unicode_name(0x121EB, 'CUNEIFORM SIGN LAGAB SQUARED').
+unicode_name(0x121EC, 'CUNEIFORM SIGN LAGAR').
+unicode_name(0x121ED, 'CUNEIFORM SIGN LAGAR TIMES SHE').
+unicode_name(0x121EE, 'CUNEIFORM SIGN LAGAR TIMES SHE PLUS SUM').
+unicode_name(0x121EF, 'CUNEIFORM SIGN LAGAR GUNU').
+unicode_name(0x121F0, 'CUNEIFORM SIGN LAGAR GUNU OVER LAGAR GUNU SHE').
+unicode_name(0x121F1, 'CUNEIFORM SIGN LAHSHU').
+unicode_name(0x121F2, 'CUNEIFORM SIGN LAL').
+unicode_name(0x121F3, 'CUNEIFORM SIGN LAL TIMES LAL').
+unicode_name(0x121F4, 'CUNEIFORM SIGN LAM').
+unicode_name(0x121F5, 'CUNEIFORM SIGN LAM TIMES KUR').
+unicode_name(0x121F6, 'CUNEIFORM SIGN LAM TIMES KUR PLUS RU').
+unicode_name(0x121F7, 'CUNEIFORM SIGN LI').
+unicode_name(0x121F8, 'CUNEIFORM SIGN LIL').
+unicode_name(0x121F9, 'CUNEIFORM SIGN LIMMU2').
+unicode_name(0x121FA, 'CUNEIFORM SIGN LISH').
+unicode_name(0x121FB, 'CUNEIFORM SIGN LU').
+unicode_name(0x121FC, 'CUNEIFORM SIGN LU TIMES BAD').
+unicode_name(0x121FD, 'CUNEIFORM SIGN LU2').
+unicode_name(0x121FE, 'CUNEIFORM SIGN LU2 TIMES AL').
+unicode_name(0x121FF, 'CUNEIFORM SIGN LU2 TIMES BAD').
+unicode_name(0x12200, 'CUNEIFORM SIGN LU2 TIMES ESH2').
+unicode_name(0x12201, 'CUNEIFORM SIGN LU2 TIMES ESH2 TENU').
+unicode_name(0x12202, 'CUNEIFORM SIGN LU2 TIMES GAN2 TENU').
+unicode_name(0x12203, 'CUNEIFORM SIGN LU2 TIMES HI TIMES BAD').
+unicode_name(0x12204, 'CUNEIFORM SIGN LU2 TIMES IM').
+unicode_name(0x12205, 'CUNEIFORM SIGN LU2 TIMES KAD2').
+unicode_name(0x12206, 'CUNEIFORM SIGN LU2 TIMES KAD3').
+unicode_name(0x12207, 'CUNEIFORM SIGN LU2 TIMES KAD3 PLUS ASH').
+unicode_name(0x12208, 'CUNEIFORM SIGN LU2 TIMES KI').
+unicode_name(0x12209, 'CUNEIFORM SIGN LU2 TIMES LA PLUS ASH').
+unicode_name(0x1220A, 'CUNEIFORM SIGN LU2 TIMES LAGAB').
+unicode_name(0x1220B, 'CUNEIFORM SIGN LU2 TIMES ME PLUS EN').
+unicode_name(0x1220C, 'CUNEIFORM SIGN LU2 TIMES NE').
+unicode_name(0x1220D, 'CUNEIFORM SIGN LU2 TIMES NU').
+unicode_name(0x1220E, 'CUNEIFORM SIGN LU2 TIMES SI PLUS ASH').
+unicode_name(0x1220F, 'CUNEIFORM SIGN LU2 TIMES SIK2 PLUS BU').
+unicode_name(0x12210, 'CUNEIFORM SIGN LU2 TIMES TUG2').
+unicode_name(0x12211, 'CUNEIFORM SIGN LU2 TENU').
+unicode_name(0x12212, 'CUNEIFORM SIGN LU2 CROSSING LU2').
+unicode_name(0x12213, 'CUNEIFORM SIGN LU2 OPPOSING LU2').
+unicode_name(0x12214, 'CUNEIFORM SIGN LU2 SQUARED').
+unicode_name(0x12215, 'CUNEIFORM SIGN LU2 SHESHIG').
+unicode_name(0x12216, 'CUNEIFORM SIGN LU3').
+unicode_name(0x12217, 'CUNEIFORM SIGN LUGAL').
+unicode_name(0x12218, 'CUNEIFORM SIGN LUGAL OVER LUGAL').
+unicode_name(0x12219, 'CUNEIFORM SIGN LUGAL OPPOSING LUGAL').
+unicode_name(0x1221A, 'CUNEIFORM SIGN LUGAL SHESHIG').
+unicode_name(0x1221B, 'CUNEIFORM SIGN LUH').
+unicode_name(0x1221C, 'CUNEIFORM SIGN LUL').
+unicode_name(0x1221D, 'CUNEIFORM SIGN LUM').
+unicode_name(0x1221E, 'CUNEIFORM SIGN LUM OVER LUM').
+unicode_name(0x1221F, 'CUNEIFORM SIGN LUM OVER LUM GAR OVER GAR').
+unicode_name(0x12220, 'CUNEIFORM SIGN MA').
+unicode_name(0x12221, 'CUNEIFORM SIGN MA TIMES TAK4').
+unicode_name(0x12222, 'CUNEIFORM SIGN MA GUNU').
+unicode_name(0x12223, 'CUNEIFORM SIGN MA2').
+unicode_name(0x12224, 'CUNEIFORM SIGN MAH').
+unicode_name(0x12225, 'CUNEIFORM SIGN MAR').
+unicode_name(0x12226, 'CUNEIFORM SIGN MASH').
+unicode_name(0x12227, 'CUNEIFORM SIGN MASH2').
+unicode_name(0x12228, 'CUNEIFORM SIGN ME').
+unicode_name(0x12229, 'CUNEIFORM SIGN MES').
+unicode_name(0x1222A, 'CUNEIFORM SIGN MI').
+unicode_name(0x1222B, 'CUNEIFORM SIGN MIN').
+unicode_name(0x1222C, 'CUNEIFORM SIGN MU').
+unicode_name(0x1222D, 'CUNEIFORM SIGN MU OVER MU').
+unicode_name(0x1222E, 'CUNEIFORM SIGN MUG').
+unicode_name(0x1222F, 'CUNEIFORM SIGN MUG GUNU').
+unicode_name(0x12230, 'CUNEIFORM SIGN MUNSUB').
+unicode_name(0x12231, 'CUNEIFORM SIGN MURGU2').
+unicode_name(0x12232, 'CUNEIFORM SIGN MUSH').
+unicode_name(0x12233, 'CUNEIFORM SIGN MUSH TIMES A').
+unicode_name(0x12234, 'CUNEIFORM SIGN MUSH TIMES KUR').
+unicode_name(0x12235, 'CUNEIFORM SIGN MUSH TIMES ZA').
+unicode_name(0x12236, 'CUNEIFORM SIGN MUSH OVER MUSH').
+unicode_name(0x12237, 'CUNEIFORM SIGN MUSH OVER MUSH TIMES A PLUS NA').
+unicode_name(0x12238, 'CUNEIFORM SIGN MUSH CROSSING MUSH').
+unicode_name(0x12239, 'CUNEIFORM SIGN MUSH3').
+unicode_name(0x1223A, 'CUNEIFORM SIGN MUSH3 TIMES A').
+unicode_name(0x1223B, 'CUNEIFORM SIGN MUSH3 TIMES A PLUS DI').
+unicode_name(0x1223C, 'CUNEIFORM SIGN MUSH3 TIMES DI').
+unicode_name(0x1223D, 'CUNEIFORM SIGN MUSH3 GUNU').
+unicode_name(0x1223E, 'CUNEIFORM SIGN NA').
+unicode_name(0x1223F, 'CUNEIFORM SIGN NA2').
+unicode_name(0x12240, 'CUNEIFORM SIGN NAGA').
+unicode_name(0x12241, 'CUNEIFORM SIGN NAGA INVERTED').
+unicode_name(0x12242, 'CUNEIFORM SIGN NAGA TIMES SHU TENU').
+unicode_name(0x12243, 'CUNEIFORM SIGN NAGA OPPOSING NAGA').
+unicode_name(0x12244, 'CUNEIFORM SIGN NAGAR').
+unicode_name(0x12245, 'CUNEIFORM SIGN NAM NUTILLU').
+unicode_name(0x12246, 'CUNEIFORM SIGN NAM').
+unicode_name(0x12247, 'CUNEIFORM SIGN NAM2').
+unicode_name(0x12248, 'CUNEIFORM SIGN NE').
+unicode_name(0x12249, 'CUNEIFORM SIGN NE TIMES A').
+unicode_name(0x1224A, 'CUNEIFORM SIGN NE TIMES UD').
+unicode_name(0x1224B, 'CUNEIFORM SIGN NE SHESHIG').
+unicode_name(0x1224C, 'CUNEIFORM SIGN NI').
+unicode_name(0x1224D, 'CUNEIFORM SIGN NI TIMES E').
+unicode_name(0x1224E, 'CUNEIFORM SIGN NI2').
+unicode_name(0x1224F, 'CUNEIFORM SIGN NIM').
+unicode_name(0x12250, 'CUNEIFORM SIGN NIM TIMES GAN2 TENU').
+unicode_name(0x12251, 'CUNEIFORM SIGN NIM TIMES GAR PLUS GAN2 TENU').
+unicode_name(0x12252, 'CUNEIFORM SIGN NINDA2').
+unicode_name(0x12253, 'CUNEIFORM SIGN NINDA2 TIMES AN').
+unicode_name(0x12254, 'CUNEIFORM SIGN NINDA2 TIMES ASH').
+unicode_name(0x12255, 'CUNEIFORM SIGN NINDA2 TIMES ASH PLUS ASH').
+unicode_name(0x12256, 'CUNEIFORM SIGN NINDA2 TIMES GUD').
+unicode_name(0x12257, 'CUNEIFORM SIGN NINDA2 TIMES ME PLUS GAN2 TENU').
+unicode_name(0x12258, 'CUNEIFORM SIGN NINDA2 TIMES NE').
+unicode_name(0x12259, 'CUNEIFORM SIGN NINDA2 TIMES NUN').
+unicode_name(0x1225A, 'CUNEIFORM SIGN NINDA2 TIMES SHE').
+unicode_name(0x1225B, 'CUNEIFORM SIGN NINDA2 TIMES SHE PLUS A AN').
+unicode_name(0x1225C, 'CUNEIFORM SIGN NINDA2 TIMES SHE PLUS ASH').
+unicode_name(0x1225D, 'CUNEIFORM SIGN NINDA2 TIMES SHE PLUS ASH PLUS ASH').
+unicode_name(0x1225E, 'CUNEIFORM SIGN NINDA2 TIMES U2 PLUS ASH').
+unicode_name(0x1225F, 'CUNEIFORM SIGN NINDA2 TIMES USH').
+unicode_name(0x12260, 'CUNEIFORM SIGN NISAG').
+unicode_name(0x12261, 'CUNEIFORM SIGN NU').
+unicode_name(0x12262, 'CUNEIFORM SIGN NU11').
+unicode_name(0x12263, 'CUNEIFORM SIGN NUN').
+unicode_name(0x12264, 'CUNEIFORM SIGN NUN LAGAR TIMES GAR').
+unicode_name(0x12265, 'CUNEIFORM SIGN NUN LAGAR TIMES MASH').
+unicode_name(0x12266, 'CUNEIFORM SIGN NUN LAGAR TIMES SAL').
+unicode_name(0x12267, 'CUNEIFORM SIGN NUN LAGAR TIMES SAL OVER NUN LAGAR TIMES SAL').
+unicode_name(0x12268, 'CUNEIFORM SIGN NUN LAGAR TIMES USH').
+unicode_name(0x12269, 'CUNEIFORM SIGN NUN TENU').
+unicode_name(0x1226A, 'CUNEIFORM SIGN NUN OVER NUN').
+unicode_name(0x1226B, 'CUNEIFORM SIGN NUN CROSSING NUN').
+unicode_name(0x1226C, 'CUNEIFORM SIGN NUN CROSSING NUN LAGAR OVER LAGAR').
+unicode_name(0x1226D, 'CUNEIFORM SIGN NUNUZ').
+unicode_name(0x1226E, 'CUNEIFORM SIGN NUNUZ AB2 TIMES ASHGAB').
+unicode_name(0x1226F, 'CUNEIFORM SIGN NUNUZ AB2 TIMES BI').
+unicode_name(0x12270, 'CUNEIFORM SIGN NUNUZ AB2 TIMES DUG').
+unicode_name(0x12271, 'CUNEIFORM SIGN NUNUZ AB2 TIMES GUD').
+unicode_name(0x12272, 'CUNEIFORM SIGN NUNUZ AB2 TIMES IGI GUNU').
+unicode_name(0x12273, 'CUNEIFORM SIGN NUNUZ AB2 TIMES KAD3').
+unicode_name(0x12274, 'CUNEIFORM SIGN NUNUZ AB2 TIMES LA').
+unicode_name(0x12275, 'CUNEIFORM SIGN NUNUZ AB2 TIMES NE').
+unicode_name(0x12276, 'CUNEIFORM SIGN NUNUZ AB2 TIMES SILA3').
+unicode_name(0x12277, 'CUNEIFORM SIGN NUNUZ AB2 TIMES U2').
+unicode_name(0x12278, 'CUNEIFORM SIGN NUNUZ KISIM5 TIMES BI').
+unicode_name(0x12279, 'CUNEIFORM SIGN NUNUZ KISIM5 TIMES BI U').
+unicode_name(0x1227A, 'CUNEIFORM SIGN PA').
+unicode_name(0x1227B, 'CUNEIFORM SIGN PAD').
+unicode_name(0x1227C, 'CUNEIFORM SIGN PAN').
+unicode_name(0x1227D, 'CUNEIFORM SIGN PAP').
+unicode_name(0x1227E, 'CUNEIFORM SIGN PESH2').
+unicode_name(0x1227F, 'CUNEIFORM SIGN PI').
+unicode_name(0x12280, 'CUNEIFORM SIGN PI TIMES A').
+unicode_name(0x12281, 'CUNEIFORM SIGN PI TIMES AB').
+unicode_name(0x12282, 'CUNEIFORM SIGN PI TIMES BI').
+unicode_name(0x12283, 'CUNEIFORM SIGN PI TIMES BU').
+unicode_name(0x12284, 'CUNEIFORM SIGN PI TIMES E').
+unicode_name(0x12285, 'CUNEIFORM SIGN PI TIMES I').
+unicode_name(0x12286, 'CUNEIFORM SIGN PI TIMES IB').
+unicode_name(0x12287, 'CUNEIFORM SIGN PI TIMES U').
+unicode_name(0x12288, 'CUNEIFORM SIGN PI TIMES U2').
+unicode_name(0x12289, 'CUNEIFORM SIGN PI CROSSING PI').
+unicode_name(0x1228A, 'CUNEIFORM SIGN PIRIG').
+unicode_name(0x1228B, 'CUNEIFORM SIGN PIRIG TIMES KAL').
+unicode_name(0x1228C, 'CUNEIFORM SIGN PIRIG TIMES UD').
+unicode_name(0x1228D, 'CUNEIFORM SIGN PIRIG TIMES ZA').
+unicode_name(0x1228E, 'CUNEIFORM SIGN PIRIG OPPOSING PIRIG').
+unicode_name(0x1228F, 'CUNEIFORM SIGN RA').
+unicode_name(0x12290, 'CUNEIFORM SIGN RAB').
+unicode_name(0x12291, 'CUNEIFORM SIGN RI').
+unicode_name(0x12292, 'CUNEIFORM SIGN RU').
+unicode_name(0x12293, 'CUNEIFORM SIGN SA').
+unicode_name(0x12294, 'CUNEIFORM SIGN SAG NUTILLU').
+unicode_name(0x12295, 'CUNEIFORM SIGN SAG').
+unicode_name(0x12296, 'CUNEIFORM SIGN SAG TIMES A').
+unicode_name(0x12297, 'CUNEIFORM SIGN SAG TIMES DU').
+unicode_name(0x12298, 'CUNEIFORM SIGN SAG TIMES DUB').
+unicode_name(0x12299, 'CUNEIFORM SIGN SAG TIMES HA').
+unicode_name(0x1229A, 'CUNEIFORM SIGN SAG TIMES KAK').
+unicode_name(0x1229B, 'CUNEIFORM SIGN SAG TIMES KUR').
+unicode_name(0x1229C, 'CUNEIFORM SIGN SAG TIMES LUM').
+unicode_name(0x1229D, 'CUNEIFORM SIGN SAG TIMES MI').
+unicode_name(0x1229E, 'CUNEIFORM SIGN SAG TIMES NUN').
+unicode_name(0x1229F, 'CUNEIFORM SIGN SAG TIMES SAL').
+unicode_name(0x122A0, 'CUNEIFORM SIGN SAG TIMES SHID').
+unicode_name(0x122A1, 'CUNEIFORM SIGN SAG TIMES TAB').
+unicode_name(0x122A2, 'CUNEIFORM SIGN SAG TIMES U2').
+unicode_name(0x122A3, 'CUNEIFORM SIGN SAG TIMES UB').
+unicode_name(0x122A4, 'CUNEIFORM SIGN SAG TIMES UM').
+unicode_name(0x122A5, 'CUNEIFORM SIGN SAG TIMES UR').
+unicode_name(0x122A6, 'CUNEIFORM SIGN SAG TIMES USH').
+unicode_name(0x122A7, 'CUNEIFORM SIGN SAG OVER SAG').
+unicode_name(0x122A8, 'CUNEIFORM SIGN SAG GUNU').
+unicode_name(0x122A9, 'CUNEIFORM SIGN SAL').
+unicode_name(0x122AA, 'CUNEIFORM SIGN SAL LAGAB TIMES ASH2').
+unicode_name(0x122AB, 'CUNEIFORM SIGN SANGA2').
+unicode_name(0x122AC, 'CUNEIFORM SIGN SAR').
+unicode_name(0x122AD, 'CUNEIFORM SIGN SHA').
+unicode_name(0x122AE, 'CUNEIFORM SIGN SHA3').
+unicode_name(0x122AF, 'CUNEIFORM SIGN SHA3 TIMES A').
+unicode_name(0x122B0, 'CUNEIFORM SIGN SHA3 TIMES BAD').
+unicode_name(0x122B1, 'CUNEIFORM SIGN SHA3 TIMES GISH').
+unicode_name(0x122B2, 'CUNEIFORM SIGN SHA3 TIMES NE').
+unicode_name(0x122B3, 'CUNEIFORM SIGN SHA3 TIMES SHU2').
+unicode_name(0x122B4, 'CUNEIFORM SIGN SHA3 TIMES TUR').
+unicode_name(0x122B5, 'CUNEIFORM SIGN SHA3 TIMES U').
+unicode_name(0x122B6, 'CUNEIFORM SIGN SHA3 TIMES U PLUS A').
+unicode_name(0x122B7, 'CUNEIFORM SIGN SHA6').
+unicode_name(0x122B8, 'CUNEIFORM SIGN SHAB6').
+unicode_name(0x122B9, 'CUNEIFORM SIGN SHAR2').
+unicode_name(0x122BA, 'CUNEIFORM SIGN SHE').
+unicode_name(0x122BB, 'CUNEIFORM SIGN SHE HU').
+unicode_name(0x122BC, 'CUNEIFORM SIGN SHE OVER SHE GAD OVER GAD GAR OVER GAR').
+unicode_name(0x122BD, 'CUNEIFORM SIGN SHE OVER SHE TAB OVER TAB GAR OVER GAR').
+unicode_name(0x122BE, 'CUNEIFORM SIGN SHEG9').
+unicode_name(0x122BF, 'CUNEIFORM SIGN SHEN').
+unicode_name(0x122C0, 'CUNEIFORM SIGN SHESH').
+unicode_name(0x122C1, 'CUNEIFORM SIGN SHESH2').
+unicode_name(0x122C2, 'CUNEIFORM SIGN SHESHLAM').
+unicode_name(0x122C3, 'CUNEIFORM SIGN SHID').
+unicode_name(0x122C4, 'CUNEIFORM SIGN SHID TIMES A').
+unicode_name(0x122C5, 'CUNEIFORM SIGN SHID TIMES IM').
+unicode_name(0x122C6, 'CUNEIFORM SIGN SHIM').
+unicode_name(0x122C7, 'CUNEIFORM SIGN SHIM TIMES A').
+unicode_name(0x122C8, 'CUNEIFORM SIGN SHIM TIMES BAL').
+unicode_name(0x122C9, 'CUNEIFORM SIGN SHIM TIMES BULUG').
+unicode_name(0x122CA, 'CUNEIFORM SIGN SHIM TIMES DIN').
+unicode_name(0x122CB, 'CUNEIFORM SIGN SHIM TIMES GAR').
+unicode_name(0x122CC, 'CUNEIFORM SIGN SHIM TIMES IGI').
+unicode_name(0x122CD, 'CUNEIFORM SIGN SHIM TIMES IGI GUNU').
+unicode_name(0x122CE, 'CUNEIFORM SIGN SHIM TIMES KUSHU2').
+unicode_name(0x122CF, 'CUNEIFORM SIGN SHIM TIMES LUL').
+unicode_name(0x122D0, 'CUNEIFORM SIGN SHIM TIMES MUG').
+unicode_name(0x122D1, 'CUNEIFORM SIGN SHIM TIMES SAL').
+unicode_name(0x122D2, 'CUNEIFORM SIGN SHINIG').
+unicode_name(0x122D3, 'CUNEIFORM SIGN SHIR').
+unicode_name(0x122D4, 'CUNEIFORM SIGN SHIR TENU').
+unicode_name(0x122D5, 'CUNEIFORM SIGN SHIR OVER SHIR BUR OVER BUR').
+unicode_name(0x122D6, 'CUNEIFORM SIGN SHITA').
+unicode_name(0x122D7, 'CUNEIFORM SIGN SHU').
+unicode_name(0x122D8, 'CUNEIFORM SIGN SHU OVER INVERTED SHU').
+unicode_name(0x122D9, 'CUNEIFORM SIGN SHU2').
+unicode_name(0x122DA, 'CUNEIFORM SIGN SHUBUR').
+unicode_name(0x122DB, 'CUNEIFORM SIGN SI').
+unicode_name(0x122DC, 'CUNEIFORM SIGN SI GUNU').
+unicode_name(0x122DD, 'CUNEIFORM SIGN SIG').
+unicode_name(0x122DE, 'CUNEIFORM SIGN SIG4').
+unicode_name(0x122DF, 'CUNEIFORM SIGN SIG4 OVER SIG4 SHU2').
+unicode_name(0x122E0, 'CUNEIFORM SIGN SIK2').
+unicode_name(0x122E1, 'CUNEIFORM SIGN SILA3').
+unicode_name(0x122E2, 'CUNEIFORM SIGN SU').
+unicode_name(0x122E3, 'CUNEIFORM SIGN SU OVER SU').
+unicode_name(0x122E4, 'CUNEIFORM SIGN SUD').
+unicode_name(0x122E5, 'CUNEIFORM SIGN SUD2').
+unicode_name(0x122E6, 'CUNEIFORM SIGN SUHUR').
+unicode_name(0x122E7, 'CUNEIFORM SIGN SUM').
+unicode_name(0x122E8, 'CUNEIFORM SIGN SUMASH').
+unicode_name(0x122E9, 'CUNEIFORM SIGN SUR').
+unicode_name(0x122EA, 'CUNEIFORM SIGN SUR9').
+unicode_name(0x122EB, 'CUNEIFORM SIGN TA').
+unicode_name(0x122EC, 'CUNEIFORM SIGN TA ASTERISK').
+unicode_name(0x122ED, 'CUNEIFORM SIGN TA TIMES HI').
+unicode_name(0x122EE, 'CUNEIFORM SIGN TA TIMES MI').
+unicode_name(0x122EF, 'CUNEIFORM SIGN TA GUNU').
+unicode_name(0x122F0, 'CUNEIFORM SIGN TAB').
+unicode_name(0x122F1, 'CUNEIFORM SIGN TAB OVER TAB NI OVER NI DISH OVER DISH').
+unicode_name(0x122F2, 'CUNEIFORM SIGN TAB SQUARED').
+unicode_name(0x122F3, 'CUNEIFORM SIGN TAG').
+unicode_name(0x122F4, 'CUNEIFORM SIGN TAG TIMES BI').
+unicode_name(0x122F5, 'CUNEIFORM SIGN TAG TIMES GUD').
+unicode_name(0x122F6, 'CUNEIFORM SIGN TAG TIMES SHE').
+unicode_name(0x122F7, 'CUNEIFORM SIGN TAG TIMES SHU').
+unicode_name(0x122F8, 'CUNEIFORM SIGN TAG TIMES TUG2').
+unicode_name(0x122F9, 'CUNEIFORM SIGN TAG TIMES UD').
+unicode_name(0x122FA, 'CUNEIFORM SIGN TAK4').
+unicode_name(0x122FB, 'CUNEIFORM SIGN TAR').
+unicode_name(0x122FC, 'CUNEIFORM SIGN TE').
+unicode_name(0x122FD, 'CUNEIFORM SIGN TE GUNU').
+unicode_name(0x122FE, 'CUNEIFORM SIGN TI').
+unicode_name(0x122FF, 'CUNEIFORM SIGN TI TENU').
+unicode_name(0x12300, 'CUNEIFORM SIGN TIL').
+unicode_name(0x12301, 'CUNEIFORM SIGN TIR').
+unicode_name(0x12302, 'CUNEIFORM SIGN TIR TIMES TAK4').
+unicode_name(0x12303, 'CUNEIFORM SIGN TIR OVER TIR').
+unicode_name(0x12304, 'CUNEIFORM SIGN TIR OVER TIR GAD OVER GAD GAR OVER GAR').
+unicode_name(0x12305, 'CUNEIFORM SIGN TU').
+unicode_name(0x12306, 'CUNEIFORM SIGN TUG2').
+unicode_name(0x12307, 'CUNEIFORM SIGN TUK').
+unicode_name(0x12308, 'CUNEIFORM SIGN TUM').
+unicode_name(0x12309, 'CUNEIFORM SIGN TUR').
+unicode_name(0x1230A, 'CUNEIFORM SIGN TUR OVER TUR ZA OVER ZA').
+unicode_name(0x1230B, 'CUNEIFORM SIGN U').
+unicode_name(0x1230C, 'CUNEIFORM SIGN U GUD').
+unicode_name(0x1230D, 'CUNEIFORM SIGN U U U').
+unicode_name(0x1230E, 'CUNEIFORM SIGN U OVER U PA OVER PA GAR OVER GAR').
+unicode_name(0x1230F, 'CUNEIFORM SIGN U OVER U SUR OVER SUR').
+unicode_name(0x12310, 'CUNEIFORM SIGN U OVER U U REVERSED OVER U REVERSED').
+unicode_name(0x12311, 'CUNEIFORM SIGN U2').
+unicode_name(0x12312, 'CUNEIFORM SIGN UB').
+unicode_name(0x12313, 'CUNEIFORM SIGN UD').
+unicode_name(0x12314, 'CUNEIFORM SIGN UD KUSHU2').
+unicode_name(0x12315, 'CUNEIFORM SIGN UD TIMES BAD').
+unicode_name(0x12316, 'CUNEIFORM SIGN UD TIMES MI').
+unicode_name(0x12317, 'CUNEIFORM SIGN UD TIMES U PLUS U PLUS U').
+unicode_name(0x12318, 'CUNEIFORM SIGN UD TIMES U PLUS U PLUS U GUNU').
+unicode_name(0x12319, 'CUNEIFORM SIGN UD GUNU').
+unicode_name(0x1231A, 'CUNEIFORM SIGN UD SHESHIG').
+unicode_name(0x1231B, 'CUNEIFORM SIGN UD SHESHIG TIMES BAD').
+unicode_name(0x1231C, 'CUNEIFORM SIGN UDUG').
+unicode_name(0x1231D, 'CUNEIFORM SIGN UM').
+unicode_name(0x1231E, 'CUNEIFORM SIGN UM TIMES LAGAB').
+unicode_name(0x1231F, 'CUNEIFORM SIGN UM TIMES ME PLUS DA').
+unicode_name(0x12320, 'CUNEIFORM SIGN UM TIMES SHA3').
+unicode_name(0x12321, 'CUNEIFORM SIGN UM TIMES U').
+unicode_name(0x12322, 'CUNEIFORM SIGN UMBIN').
+unicode_name(0x12323, 'CUNEIFORM SIGN UMUM').
+unicode_name(0x12324, 'CUNEIFORM SIGN UMUM TIMES KASKAL').
+unicode_name(0x12325, 'CUNEIFORM SIGN UMUM TIMES PA').
+unicode_name(0x12326, 'CUNEIFORM SIGN UN').
+unicode_name(0x12327, 'CUNEIFORM SIGN UN GUNU').
+unicode_name(0x12328, 'CUNEIFORM SIGN UR').
+unicode_name(0x12329, 'CUNEIFORM SIGN UR CROSSING UR').
+unicode_name(0x1232A, 'CUNEIFORM SIGN UR SHESHIG').
+unicode_name(0x1232B, 'CUNEIFORM SIGN UR2').
+unicode_name(0x1232C, 'CUNEIFORM SIGN UR2 TIMES A PLUS HA').
+unicode_name(0x1232D, 'CUNEIFORM SIGN UR2 TIMES A PLUS NA').
+unicode_name(0x1232E, 'CUNEIFORM SIGN UR2 TIMES AL').
+unicode_name(0x1232F, 'CUNEIFORM SIGN UR2 TIMES HA').
+unicode_name(0x12330, 'CUNEIFORM SIGN UR2 TIMES NUN').
+unicode_name(0x12331, 'CUNEIFORM SIGN UR2 TIMES U2').
+unicode_name(0x12332, 'CUNEIFORM SIGN UR2 TIMES U2 PLUS ASH').
+unicode_name(0x12333, 'CUNEIFORM SIGN UR2 TIMES U2 PLUS BI').
+unicode_name(0x12334, 'CUNEIFORM SIGN UR4').
+unicode_name(0x12335, 'CUNEIFORM SIGN URI').
+unicode_name(0x12336, 'CUNEIFORM SIGN URI3').
+unicode_name(0x12337, 'CUNEIFORM SIGN URU').
+unicode_name(0x12338, 'CUNEIFORM SIGN URU TIMES A').
+unicode_name(0x12339, 'CUNEIFORM SIGN URU TIMES ASHGAB').
+unicode_name(0x1233A, 'CUNEIFORM SIGN URU TIMES BAR').
+unicode_name(0x1233B, 'CUNEIFORM SIGN URU TIMES DUN').
+unicode_name(0x1233C, 'CUNEIFORM SIGN URU TIMES GA').
+unicode_name(0x1233D, 'CUNEIFORM SIGN URU TIMES GAL').
+unicode_name(0x1233E, 'CUNEIFORM SIGN URU TIMES GAN2 TENU').
+unicode_name(0x1233F, 'CUNEIFORM SIGN URU TIMES GAR').
+unicode_name(0x12340, 'CUNEIFORM SIGN URU TIMES GU').
+unicode_name(0x12341, 'CUNEIFORM SIGN URU TIMES HA').
+unicode_name(0x12342, 'CUNEIFORM SIGN URU TIMES IGI').
+unicode_name(0x12343, 'CUNEIFORM SIGN URU TIMES IM').
+unicode_name(0x12344, 'CUNEIFORM SIGN URU TIMES ISH').
+unicode_name(0x12345, 'CUNEIFORM SIGN URU TIMES KI').
+unicode_name(0x12346, 'CUNEIFORM SIGN URU TIMES LUM').
+unicode_name(0x12347, 'CUNEIFORM SIGN URU TIMES MIN').
+unicode_name(0x12348, 'CUNEIFORM SIGN URU TIMES PA').
+unicode_name(0x12349, 'CUNEIFORM SIGN URU TIMES SHE').
+unicode_name(0x1234A, 'CUNEIFORM SIGN URU TIMES SIG4').
+unicode_name(0x1234B, 'CUNEIFORM SIGN URU TIMES TU').
+unicode_name(0x1234C, 'CUNEIFORM SIGN URU TIMES U PLUS GUD').
+unicode_name(0x1234D, 'CUNEIFORM SIGN URU TIMES UD').
+unicode_name(0x1234E, 'CUNEIFORM SIGN URU TIMES URUDA').
+unicode_name(0x1234F, 'CUNEIFORM SIGN URUDA').
+unicode_name(0x12350, 'CUNEIFORM SIGN URUDA TIMES U').
+unicode_name(0x12351, 'CUNEIFORM SIGN USH').
+unicode_name(0x12352, 'CUNEIFORM SIGN USH TIMES A').
+unicode_name(0x12353, 'CUNEIFORM SIGN USH TIMES KU').
+unicode_name(0x12354, 'CUNEIFORM SIGN USH TIMES KUR').
+unicode_name(0x12355, 'CUNEIFORM SIGN USH TIMES TAK4').
+unicode_name(0x12356, 'CUNEIFORM SIGN USHX').
+unicode_name(0x12357, 'CUNEIFORM SIGN USH2').
+unicode_name(0x12358, 'CUNEIFORM SIGN USHUMX').
+unicode_name(0x12359, 'CUNEIFORM SIGN UTUKI').
+unicode_name(0x1235A, 'CUNEIFORM SIGN UZ3').
+unicode_name(0x1235B, 'CUNEIFORM SIGN UZ3 TIMES KASKAL').
+unicode_name(0x1235C, 'CUNEIFORM SIGN UZU').
+unicode_name(0x1235D, 'CUNEIFORM SIGN ZA').
+unicode_name(0x1235E, 'CUNEIFORM SIGN ZA TENU').
+unicode_name(0x1235F, 'CUNEIFORM SIGN ZA SQUARED TIMES KUR').
+unicode_name(0x12360, 'CUNEIFORM SIGN ZAG').
+unicode_name(0x12361, 'CUNEIFORM SIGN ZAMX').
+unicode_name(0x12362, 'CUNEIFORM SIGN ZE2').
+unicode_name(0x12363, 'CUNEIFORM SIGN ZI').
+unicode_name(0x12364, 'CUNEIFORM SIGN ZI OVER ZI').
+unicode_name(0x12365, 'CUNEIFORM SIGN ZI3').
+unicode_name(0x12366, 'CUNEIFORM SIGN ZIB').
+unicode_name(0x12367, 'CUNEIFORM SIGN ZIB KABA TENU').
+unicode_name(0x12368, 'CUNEIFORM SIGN ZIG').
+unicode_name(0x12369, 'CUNEIFORM SIGN ZIZ2').
+unicode_name(0x1236A, 'CUNEIFORM SIGN ZU').
+unicode_name(0x1236B, 'CUNEIFORM SIGN ZU5').
+unicode_name(0x1236C, 'CUNEIFORM SIGN ZU5 TIMES A').
+unicode_name(0x1236D, 'CUNEIFORM SIGN ZUBUR').
+unicode_name(0x1236E, 'CUNEIFORM SIGN ZUM').
+unicode_name(0x13000, 'EGYPTIAN HIEROGLYPH A001').
+unicode_name(0x13001, 'EGYPTIAN HIEROGLYPH A002').
+unicode_name(0x13002, 'EGYPTIAN HIEROGLYPH A003').
+unicode_name(0x13003, 'EGYPTIAN HIEROGLYPH A004').
+unicode_name(0x13004, 'EGYPTIAN HIEROGLYPH A005').
+unicode_name(0x13005, 'EGYPTIAN HIEROGLYPH A005A').
+unicode_name(0x13006, 'EGYPTIAN HIEROGLYPH A006').
+unicode_name(0x13007, 'EGYPTIAN HIEROGLYPH A006A').
+unicode_name(0x13008, 'EGYPTIAN HIEROGLYPH A006B').
+unicode_name(0x13009, 'EGYPTIAN HIEROGLYPH A007').
+unicode_name(0x1300A, 'EGYPTIAN HIEROGLYPH A008').
+unicode_name(0x1300B, 'EGYPTIAN HIEROGLYPH A009').
+unicode_name(0x1300C, 'EGYPTIAN HIEROGLYPH A010').
+unicode_name(0x1300D, 'EGYPTIAN HIEROGLYPH A011').
+unicode_name(0x1300E, 'EGYPTIAN HIEROGLYPH A012').
+unicode_name(0x1300F, 'EGYPTIAN HIEROGLYPH A013').
+unicode_name(0x13010, 'EGYPTIAN HIEROGLYPH A014').
+unicode_name(0x13011, 'EGYPTIAN HIEROGLYPH A014A').
+unicode_name(0x13012, 'EGYPTIAN HIEROGLYPH A015').
+unicode_name(0x13013, 'EGYPTIAN HIEROGLYPH A016').
+unicode_name(0x13014, 'EGYPTIAN HIEROGLYPH A017').
+unicode_name(0x13015, 'EGYPTIAN HIEROGLYPH A017A').
+unicode_name(0x13016, 'EGYPTIAN HIEROGLYPH A018').
+unicode_name(0x13017, 'EGYPTIAN HIEROGLYPH A019').
+unicode_name(0x13018, 'EGYPTIAN HIEROGLYPH A020').
+unicode_name(0x13019, 'EGYPTIAN HIEROGLYPH A021').
+unicode_name(0x1301A, 'EGYPTIAN HIEROGLYPH A022').
+unicode_name(0x1301B, 'EGYPTIAN HIEROGLYPH A023').
+unicode_name(0x1301C, 'EGYPTIAN HIEROGLYPH A024').
+unicode_name(0x1301D, 'EGYPTIAN HIEROGLYPH A025').
+unicode_name(0x1301E, 'EGYPTIAN HIEROGLYPH A026').
+unicode_name(0x1301F, 'EGYPTIAN HIEROGLYPH A027').
+unicode_name(0x13020, 'EGYPTIAN HIEROGLYPH A028').
+unicode_name(0x13021, 'EGYPTIAN HIEROGLYPH A029').
+unicode_name(0x13022, 'EGYPTIAN HIEROGLYPH A030').
+unicode_name(0x13023, 'EGYPTIAN HIEROGLYPH A031').
+unicode_name(0x13024, 'EGYPTIAN HIEROGLYPH A032').
+unicode_name(0x13025, 'EGYPTIAN HIEROGLYPH A032A').
+unicode_name(0x13026, 'EGYPTIAN HIEROGLYPH A033').
+unicode_name(0x13027, 'EGYPTIAN HIEROGLYPH A034').
+unicode_name(0x13028, 'EGYPTIAN HIEROGLYPH A035').
+unicode_name(0x13029, 'EGYPTIAN HIEROGLYPH A036').
+unicode_name(0x1302A, 'EGYPTIAN HIEROGLYPH A037').
+unicode_name(0x1302B, 'EGYPTIAN HIEROGLYPH A038').
+unicode_name(0x1302C, 'EGYPTIAN HIEROGLYPH A039').
+unicode_name(0x1302D, 'EGYPTIAN HIEROGLYPH A040').
+unicode_name(0x1302E, 'EGYPTIAN HIEROGLYPH A040A').
+unicode_name(0x1302F, 'EGYPTIAN HIEROGLYPH A041').
+unicode_name(0x13030, 'EGYPTIAN HIEROGLYPH A042').
+unicode_name(0x13031, 'EGYPTIAN HIEROGLYPH A042A').
+unicode_name(0x13032, 'EGYPTIAN HIEROGLYPH A043').
+unicode_name(0x13033, 'EGYPTIAN HIEROGLYPH A043A').
+unicode_name(0x13034, 'EGYPTIAN HIEROGLYPH A044').
+unicode_name(0x13035, 'EGYPTIAN HIEROGLYPH A045').
+unicode_name(0x13036, 'EGYPTIAN HIEROGLYPH A045A').
+unicode_name(0x13037, 'EGYPTIAN HIEROGLYPH A046').
+unicode_name(0x13038, 'EGYPTIAN HIEROGLYPH A047').
+unicode_name(0x13039, 'EGYPTIAN HIEROGLYPH A048').
+unicode_name(0x1303A, 'EGYPTIAN HIEROGLYPH A049').
+unicode_name(0x1303B, 'EGYPTIAN HIEROGLYPH A050').
+unicode_name(0x1303C, 'EGYPTIAN HIEROGLYPH A051').
+unicode_name(0x1303D, 'EGYPTIAN HIEROGLYPH A052').
+unicode_name(0x1303E, 'EGYPTIAN HIEROGLYPH A053').
+unicode_name(0x1303F, 'EGYPTIAN HIEROGLYPH A054').
+unicode_name(0x13040, 'EGYPTIAN HIEROGLYPH A055').
+unicode_name(0x13041, 'EGYPTIAN HIEROGLYPH A056').
+unicode_name(0x13042, 'EGYPTIAN HIEROGLYPH A057').
+unicode_name(0x13043, 'EGYPTIAN HIEROGLYPH A058').
+unicode_name(0x13044, 'EGYPTIAN HIEROGLYPH A059').
+unicode_name(0x13045, 'EGYPTIAN HIEROGLYPH A060').
+unicode_name(0x13046, 'EGYPTIAN HIEROGLYPH A061').
+unicode_name(0x13047, 'EGYPTIAN HIEROGLYPH A062').
+unicode_name(0x13048, 'EGYPTIAN HIEROGLYPH A063').
+unicode_name(0x13049, 'EGYPTIAN HIEROGLYPH A064').
+unicode_name(0x1304A, 'EGYPTIAN HIEROGLYPH A065').
+unicode_name(0x1304B, 'EGYPTIAN HIEROGLYPH A066').
+unicode_name(0x1304C, 'EGYPTIAN HIEROGLYPH A067').
+unicode_name(0x1304D, 'EGYPTIAN HIEROGLYPH A068').
+unicode_name(0x1304E, 'EGYPTIAN HIEROGLYPH A069').
+unicode_name(0x1304F, 'EGYPTIAN HIEROGLYPH A070').
+unicode_name(0x13050, 'EGYPTIAN HIEROGLYPH B001').
+unicode_name(0x13051, 'EGYPTIAN HIEROGLYPH B002').
+unicode_name(0x13052, 'EGYPTIAN HIEROGLYPH B003').
+unicode_name(0x13053, 'EGYPTIAN HIEROGLYPH B004').
+unicode_name(0x13054, 'EGYPTIAN HIEROGLYPH B005').
+unicode_name(0x13055, 'EGYPTIAN HIEROGLYPH B005A').
+unicode_name(0x13056, 'EGYPTIAN HIEROGLYPH B006').
+unicode_name(0x13057, 'EGYPTIAN HIEROGLYPH B007').
+unicode_name(0x13058, 'EGYPTIAN HIEROGLYPH B008').
+unicode_name(0x13059, 'EGYPTIAN HIEROGLYPH B009').
+unicode_name(0x1305A, 'EGYPTIAN HIEROGLYPH C001').
+unicode_name(0x1305B, 'EGYPTIAN HIEROGLYPH C002').
+unicode_name(0x1305C, 'EGYPTIAN HIEROGLYPH C002A').
+unicode_name(0x1305D, 'EGYPTIAN HIEROGLYPH C002B').
+unicode_name(0x1305E, 'EGYPTIAN HIEROGLYPH C002C').
+unicode_name(0x1305F, 'EGYPTIAN HIEROGLYPH C003').
+unicode_name(0x13060, 'EGYPTIAN HIEROGLYPH C004').
+unicode_name(0x13061, 'EGYPTIAN HIEROGLYPH C005').
+unicode_name(0x13062, 'EGYPTIAN HIEROGLYPH C006').
+unicode_name(0x13063, 'EGYPTIAN HIEROGLYPH C007').
+unicode_name(0x13064, 'EGYPTIAN HIEROGLYPH C008').
+unicode_name(0x13065, 'EGYPTIAN HIEROGLYPH C009').
+unicode_name(0x13066, 'EGYPTIAN HIEROGLYPH C010').
+unicode_name(0x13067, 'EGYPTIAN HIEROGLYPH C010A').
+unicode_name(0x13068, 'EGYPTIAN HIEROGLYPH C011').
+unicode_name(0x13069, 'EGYPTIAN HIEROGLYPH C012').
+unicode_name(0x1306A, 'EGYPTIAN HIEROGLYPH C013').
+unicode_name(0x1306B, 'EGYPTIAN HIEROGLYPH C014').
+unicode_name(0x1306C, 'EGYPTIAN HIEROGLYPH C015').
+unicode_name(0x1306D, 'EGYPTIAN HIEROGLYPH C016').
+unicode_name(0x1306E, 'EGYPTIAN HIEROGLYPH C017').
+unicode_name(0x1306F, 'EGYPTIAN HIEROGLYPH C018').
+unicode_name(0x13070, 'EGYPTIAN HIEROGLYPH C019').
+unicode_name(0x13071, 'EGYPTIAN HIEROGLYPH C020').
+unicode_name(0x13072, 'EGYPTIAN HIEROGLYPH C021').
+unicode_name(0x13073, 'EGYPTIAN HIEROGLYPH C022').
+unicode_name(0x13074, 'EGYPTIAN HIEROGLYPH C023').
+unicode_name(0x13075, 'EGYPTIAN HIEROGLYPH C024').
+unicode_name(0x13076, 'EGYPTIAN HIEROGLYPH D001').
+unicode_name(0x13077, 'EGYPTIAN HIEROGLYPH D002').
+unicode_name(0x13078, 'EGYPTIAN HIEROGLYPH D003').
+unicode_name(0x13079, 'EGYPTIAN HIEROGLYPH D004').
+unicode_name(0x1307A, 'EGYPTIAN HIEROGLYPH D005').
+unicode_name(0x1307B, 'EGYPTIAN HIEROGLYPH D006').
+unicode_name(0x1307C, 'EGYPTIAN HIEROGLYPH D007').
+unicode_name(0x1307D, 'EGYPTIAN HIEROGLYPH D008').
+unicode_name(0x1307E, 'EGYPTIAN HIEROGLYPH D008A').
+unicode_name(0x1307F, 'EGYPTIAN HIEROGLYPH D009').
+unicode_name(0x13080, 'EGYPTIAN HIEROGLYPH D010').
+unicode_name(0x13081, 'EGYPTIAN HIEROGLYPH D011').
+unicode_name(0x13082, 'EGYPTIAN HIEROGLYPH D012').
+unicode_name(0x13083, 'EGYPTIAN HIEROGLYPH D013').
+unicode_name(0x13084, 'EGYPTIAN HIEROGLYPH D014').
+unicode_name(0x13085, 'EGYPTIAN HIEROGLYPH D015').
+unicode_name(0x13086, 'EGYPTIAN HIEROGLYPH D016').
+unicode_name(0x13087, 'EGYPTIAN HIEROGLYPH D017').
+unicode_name(0x13088, 'EGYPTIAN HIEROGLYPH D018').
+unicode_name(0x13089, 'EGYPTIAN HIEROGLYPH D019').
+unicode_name(0x1308A, 'EGYPTIAN HIEROGLYPH D020').
+unicode_name(0x1308B, 'EGYPTIAN HIEROGLYPH D021').
+unicode_name(0x1308C, 'EGYPTIAN HIEROGLYPH D022').
+unicode_name(0x1308D, 'EGYPTIAN HIEROGLYPH D023').
+unicode_name(0x1308E, 'EGYPTIAN HIEROGLYPH D024').
+unicode_name(0x1308F, 'EGYPTIAN HIEROGLYPH D025').
+unicode_name(0x13090, 'EGYPTIAN HIEROGLYPH D026').
+unicode_name(0x13091, 'EGYPTIAN HIEROGLYPH D027').
+unicode_name(0x13092, 'EGYPTIAN HIEROGLYPH D027A').
+unicode_name(0x13093, 'EGYPTIAN HIEROGLYPH D028').
+unicode_name(0x13094, 'EGYPTIAN HIEROGLYPH D029').
+unicode_name(0x13095, 'EGYPTIAN HIEROGLYPH D030').
+unicode_name(0x13096, 'EGYPTIAN HIEROGLYPH D031').
+unicode_name(0x13097, 'EGYPTIAN HIEROGLYPH D031A').
+unicode_name(0x13098, 'EGYPTIAN HIEROGLYPH D032').
+unicode_name(0x13099, 'EGYPTIAN HIEROGLYPH D033').
+unicode_name(0x1309A, 'EGYPTIAN HIEROGLYPH D034').
+unicode_name(0x1309B, 'EGYPTIAN HIEROGLYPH D034A').
+unicode_name(0x1309C, 'EGYPTIAN HIEROGLYPH D035').
+unicode_name(0x1309D, 'EGYPTIAN HIEROGLYPH D036').
+unicode_name(0x1309E, 'EGYPTIAN HIEROGLYPH D037').
+unicode_name(0x1309F, 'EGYPTIAN HIEROGLYPH D038').
+unicode_name(0x130A0, 'EGYPTIAN HIEROGLYPH D039').
+unicode_name(0x130A1, 'EGYPTIAN HIEROGLYPH D040').
+unicode_name(0x130A2, 'EGYPTIAN HIEROGLYPH D041').
+unicode_name(0x130A3, 'EGYPTIAN HIEROGLYPH D042').
+unicode_name(0x130A4, 'EGYPTIAN HIEROGLYPH D043').
+unicode_name(0x130A5, 'EGYPTIAN HIEROGLYPH D044').
+unicode_name(0x130A6, 'EGYPTIAN HIEROGLYPH D045').
+unicode_name(0x130A7, 'EGYPTIAN HIEROGLYPH D046').
+unicode_name(0x130A8, 'EGYPTIAN HIEROGLYPH D046A').
+unicode_name(0x130A9, 'EGYPTIAN HIEROGLYPH D047').
+unicode_name(0x130AA, 'EGYPTIAN HIEROGLYPH D048').
+unicode_name(0x130AB, 'EGYPTIAN HIEROGLYPH D048A').
+unicode_name(0x130AC, 'EGYPTIAN HIEROGLYPH D049').
+unicode_name(0x130AD, 'EGYPTIAN HIEROGLYPH D050').
+unicode_name(0x130AE, 'EGYPTIAN HIEROGLYPH D050A').
+unicode_name(0x130AF, 'EGYPTIAN HIEROGLYPH D050B').
+unicode_name(0x130B0, 'EGYPTIAN HIEROGLYPH D050C').
+unicode_name(0x130B1, 'EGYPTIAN HIEROGLYPH D050D').
+unicode_name(0x130B2, 'EGYPTIAN HIEROGLYPH D050E').
+unicode_name(0x130B3, 'EGYPTIAN HIEROGLYPH D050F').
+unicode_name(0x130B4, 'EGYPTIAN HIEROGLYPH D050G').
+unicode_name(0x130B5, 'EGYPTIAN HIEROGLYPH D050H').
+unicode_name(0x130B6, 'EGYPTIAN HIEROGLYPH D050I').
+unicode_name(0x130B7, 'EGYPTIAN HIEROGLYPH D051').
+unicode_name(0x130B8, 'EGYPTIAN HIEROGLYPH D052').
+unicode_name(0x130B9, 'EGYPTIAN HIEROGLYPH D052A').
+unicode_name(0x130BA, 'EGYPTIAN HIEROGLYPH D053').
+unicode_name(0x130BB, 'EGYPTIAN HIEROGLYPH D054').
+unicode_name(0x130BC, 'EGYPTIAN HIEROGLYPH D054A').
+unicode_name(0x130BD, 'EGYPTIAN HIEROGLYPH D055').
+unicode_name(0x130BE, 'EGYPTIAN HIEROGLYPH D056').
+unicode_name(0x130BF, 'EGYPTIAN HIEROGLYPH D057').
+unicode_name(0x130C0, 'EGYPTIAN HIEROGLYPH D058').
+unicode_name(0x130C1, 'EGYPTIAN HIEROGLYPH D059').
+unicode_name(0x130C2, 'EGYPTIAN HIEROGLYPH D060').
+unicode_name(0x130C3, 'EGYPTIAN HIEROGLYPH D061').
+unicode_name(0x130C4, 'EGYPTIAN HIEROGLYPH D062').
+unicode_name(0x130C5, 'EGYPTIAN HIEROGLYPH D063').
+unicode_name(0x130C6, 'EGYPTIAN HIEROGLYPH D064').
+unicode_name(0x130C7, 'EGYPTIAN HIEROGLYPH D065').
+unicode_name(0x130C8, 'EGYPTIAN HIEROGLYPH D066').
+unicode_name(0x130C9, 'EGYPTIAN HIEROGLYPH D067').
+unicode_name(0x130CA, 'EGYPTIAN HIEROGLYPH D067A').
+unicode_name(0x130CB, 'EGYPTIAN HIEROGLYPH D067B').
+unicode_name(0x130CC, 'EGYPTIAN HIEROGLYPH D067C').
+unicode_name(0x130CD, 'EGYPTIAN HIEROGLYPH D067D').
+unicode_name(0x130CE, 'EGYPTIAN HIEROGLYPH D067E').
+unicode_name(0x130CF, 'EGYPTIAN HIEROGLYPH D067F').
+unicode_name(0x130D0, 'EGYPTIAN HIEROGLYPH D067G').
+unicode_name(0x130D1, 'EGYPTIAN HIEROGLYPH D067H').
+unicode_name(0x130D2, 'EGYPTIAN HIEROGLYPH E001').
+unicode_name(0x130D3, 'EGYPTIAN HIEROGLYPH E002').
+unicode_name(0x130D4, 'EGYPTIAN HIEROGLYPH E003').
+unicode_name(0x130D5, 'EGYPTIAN HIEROGLYPH E004').
+unicode_name(0x130D6, 'EGYPTIAN HIEROGLYPH E005').
+unicode_name(0x130D7, 'EGYPTIAN HIEROGLYPH E006').
+unicode_name(0x130D8, 'EGYPTIAN HIEROGLYPH E007').
+unicode_name(0x130D9, 'EGYPTIAN HIEROGLYPH E008').
+unicode_name(0x130DA, 'EGYPTIAN HIEROGLYPH E008A').
+unicode_name(0x130DB, 'EGYPTIAN HIEROGLYPH E009').
+unicode_name(0x130DC, 'EGYPTIAN HIEROGLYPH E009A').
+unicode_name(0x130DD, 'EGYPTIAN HIEROGLYPH E010').
+unicode_name(0x130DE, 'EGYPTIAN HIEROGLYPH E011').
+unicode_name(0x130DF, 'EGYPTIAN HIEROGLYPH E012').
+unicode_name(0x130E0, 'EGYPTIAN HIEROGLYPH E013').
+unicode_name(0x130E1, 'EGYPTIAN HIEROGLYPH E014').
+unicode_name(0x130E2, 'EGYPTIAN HIEROGLYPH E015').
+unicode_name(0x130E3, 'EGYPTIAN HIEROGLYPH E016').
+unicode_name(0x130E4, 'EGYPTIAN HIEROGLYPH E016A').
+unicode_name(0x130E5, 'EGYPTIAN HIEROGLYPH E017').
+unicode_name(0x130E6, 'EGYPTIAN HIEROGLYPH E017A').
+unicode_name(0x130E7, 'EGYPTIAN HIEROGLYPH E018').
+unicode_name(0x130E8, 'EGYPTIAN HIEROGLYPH E019').
+unicode_name(0x130E9, 'EGYPTIAN HIEROGLYPH E020').
+unicode_name(0x130EA, 'EGYPTIAN HIEROGLYPH E020A').
+unicode_name(0x130EB, 'EGYPTIAN HIEROGLYPH E021').
+unicode_name(0x130EC, 'EGYPTIAN HIEROGLYPH E022').
+unicode_name(0x130ED, 'EGYPTIAN HIEROGLYPH E023').
+unicode_name(0x130EE, 'EGYPTIAN HIEROGLYPH E024').
+unicode_name(0x130EF, 'EGYPTIAN HIEROGLYPH E025').
+unicode_name(0x130F0, 'EGYPTIAN HIEROGLYPH E026').
+unicode_name(0x130F1, 'EGYPTIAN HIEROGLYPH E027').
+unicode_name(0x130F2, 'EGYPTIAN HIEROGLYPH E028').
+unicode_name(0x130F3, 'EGYPTIAN HIEROGLYPH E028A').
+unicode_name(0x130F4, 'EGYPTIAN HIEROGLYPH E029').
+unicode_name(0x130F5, 'EGYPTIAN HIEROGLYPH E030').
+unicode_name(0x130F6, 'EGYPTIAN HIEROGLYPH E031').
+unicode_name(0x130F7, 'EGYPTIAN HIEROGLYPH E032').
+unicode_name(0x130F8, 'EGYPTIAN HIEROGLYPH E033').
+unicode_name(0x130F9, 'EGYPTIAN HIEROGLYPH E034').
+unicode_name(0x130FA, 'EGYPTIAN HIEROGLYPH E034A').
+unicode_name(0x130FB, 'EGYPTIAN HIEROGLYPH E036').
+unicode_name(0x130FC, 'EGYPTIAN HIEROGLYPH E037').
+unicode_name(0x130FD, 'EGYPTIAN HIEROGLYPH E038').
+unicode_name(0x130FE, 'EGYPTIAN HIEROGLYPH F001').
+unicode_name(0x130FF, 'EGYPTIAN HIEROGLYPH F001A').
+unicode_name(0x13100, 'EGYPTIAN HIEROGLYPH F002').
+unicode_name(0x13101, 'EGYPTIAN HIEROGLYPH F003').
+unicode_name(0x13102, 'EGYPTIAN HIEROGLYPH F004').
+unicode_name(0x13103, 'EGYPTIAN HIEROGLYPH F005').
+unicode_name(0x13104, 'EGYPTIAN HIEROGLYPH F006').
+unicode_name(0x13105, 'EGYPTIAN HIEROGLYPH F007').
+unicode_name(0x13106, 'EGYPTIAN HIEROGLYPH F008').
+unicode_name(0x13107, 'EGYPTIAN HIEROGLYPH F009').
+unicode_name(0x13108, 'EGYPTIAN HIEROGLYPH F010').
+unicode_name(0x13109, 'EGYPTIAN HIEROGLYPH F011').
+unicode_name(0x1310A, 'EGYPTIAN HIEROGLYPH F012').
+unicode_name(0x1310B, 'EGYPTIAN HIEROGLYPH F013').
+unicode_name(0x1310C, 'EGYPTIAN HIEROGLYPH F013A').
+unicode_name(0x1310D, 'EGYPTIAN HIEROGLYPH F014').
+unicode_name(0x1310E, 'EGYPTIAN HIEROGLYPH F015').
+unicode_name(0x1310F, 'EGYPTIAN HIEROGLYPH F016').
+unicode_name(0x13110, 'EGYPTIAN HIEROGLYPH F017').
+unicode_name(0x13111, 'EGYPTIAN HIEROGLYPH F018').
+unicode_name(0x13112, 'EGYPTIAN HIEROGLYPH F019').
+unicode_name(0x13113, 'EGYPTIAN HIEROGLYPH F020').
+unicode_name(0x13114, 'EGYPTIAN HIEROGLYPH F021').
+unicode_name(0x13115, 'EGYPTIAN HIEROGLYPH F021A').
+unicode_name(0x13116, 'EGYPTIAN HIEROGLYPH F022').
+unicode_name(0x13117, 'EGYPTIAN HIEROGLYPH F023').
+unicode_name(0x13118, 'EGYPTIAN HIEROGLYPH F024').
+unicode_name(0x13119, 'EGYPTIAN HIEROGLYPH F025').
+unicode_name(0x1311A, 'EGYPTIAN HIEROGLYPH F026').
+unicode_name(0x1311B, 'EGYPTIAN HIEROGLYPH F027').
+unicode_name(0x1311C, 'EGYPTIAN HIEROGLYPH F028').
+unicode_name(0x1311D, 'EGYPTIAN HIEROGLYPH F029').
+unicode_name(0x1311E, 'EGYPTIAN HIEROGLYPH F030').
+unicode_name(0x1311F, 'EGYPTIAN HIEROGLYPH F031').
+unicode_name(0x13120, 'EGYPTIAN HIEROGLYPH F031A').
+unicode_name(0x13121, 'EGYPTIAN HIEROGLYPH F032').
+unicode_name(0x13122, 'EGYPTIAN HIEROGLYPH F033').
+unicode_name(0x13123, 'EGYPTIAN HIEROGLYPH F034').
+unicode_name(0x13124, 'EGYPTIAN HIEROGLYPH F035').
+unicode_name(0x13125, 'EGYPTIAN HIEROGLYPH F036').
+unicode_name(0x13126, 'EGYPTIAN HIEROGLYPH F037').
+unicode_name(0x13127, 'EGYPTIAN HIEROGLYPH F037A').
+unicode_name(0x13128, 'EGYPTIAN HIEROGLYPH F038').
+unicode_name(0x13129, 'EGYPTIAN HIEROGLYPH F038A').
+unicode_name(0x1312A, 'EGYPTIAN HIEROGLYPH F039').
+unicode_name(0x1312B, 'EGYPTIAN HIEROGLYPH F040').
+unicode_name(0x1312C, 'EGYPTIAN HIEROGLYPH F041').
+unicode_name(0x1312D, 'EGYPTIAN HIEROGLYPH F042').
+unicode_name(0x1312E, 'EGYPTIAN HIEROGLYPH F043').
+unicode_name(0x1312F, 'EGYPTIAN HIEROGLYPH F044').
+unicode_name(0x13130, 'EGYPTIAN HIEROGLYPH F045').
+unicode_name(0x13131, 'EGYPTIAN HIEROGLYPH F045A').
+unicode_name(0x13132, 'EGYPTIAN HIEROGLYPH F046').
+unicode_name(0x13133, 'EGYPTIAN HIEROGLYPH F046A').
+unicode_name(0x13134, 'EGYPTIAN HIEROGLYPH F047').
+unicode_name(0x13135, 'EGYPTIAN HIEROGLYPH F047A').
+unicode_name(0x13136, 'EGYPTIAN HIEROGLYPH F048').
+unicode_name(0x13137, 'EGYPTIAN HIEROGLYPH F049').
+unicode_name(0x13138, 'EGYPTIAN HIEROGLYPH F050').
+unicode_name(0x13139, 'EGYPTIAN HIEROGLYPH F051').
+unicode_name(0x1313A, 'EGYPTIAN HIEROGLYPH F051A').
+unicode_name(0x1313B, 'EGYPTIAN HIEROGLYPH F051B').
+unicode_name(0x1313C, 'EGYPTIAN HIEROGLYPH F051C').
+unicode_name(0x1313D, 'EGYPTIAN HIEROGLYPH F052').
+unicode_name(0x1313E, 'EGYPTIAN HIEROGLYPH F053').
+unicode_name(0x1313F, 'EGYPTIAN HIEROGLYPH G001').
+unicode_name(0x13140, 'EGYPTIAN HIEROGLYPH G002').
+unicode_name(0x13141, 'EGYPTIAN HIEROGLYPH G003').
+unicode_name(0x13142, 'EGYPTIAN HIEROGLYPH G004').
+unicode_name(0x13143, 'EGYPTIAN HIEROGLYPH G005').
+unicode_name(0x13144, 'EGYPTIAN HIEROGLYPH G006').
+unicode_name(0x13145, 'EGYPTIAN HIEROGLYPH G006A').
+unicode_name(0x13146, 'EGYPTIAN HIEROGLYPH G007').
+unicode_name(0x13147, 'EGYPTIAN HIEROGLYPH G007A').
+unicode_name(0x13148, 'EGYPTIAN HIEROGLYPH G007B').
+unicode_name(0x13149, 'EGYPTIAN HIEROGLYPH G008').
+unicode_name(0x1314A, 'EGYPTIAN HIEROGLYPH G009').
+unicode_name(0x1314B, 'EGYPTIAN HIEROGLYPH G010').
+unicode_name(0x1314C, 'EGYPTIAN HIEROGLYPH G011').
+unicode_name(0x1314D, 'EGYPTIAN HIEROGLYPH G011A').
+unicode_name(0x1314E, 'EGYPTIAN HIEROGLYPH G012').
+unicode_name(0x1314F, 'EGYPTIAN HIEROGLYPH G013').
+unicode_name(0x13150, 'EGYPTIAN HIEROGLYPH G014').
+unicode_name(0x13151, 'EGYPTIAN HIEROGLYPH G015').
+unicode_name(0x13152, 'EGYPTIAN HIEROGLYPH G016').
+unicode_name(0x13153, 'EGYPTIAN HIEROGLYPH G017').
+unicode_name(0x13154, 'EGYPTIAN HIEROGLYPH G018').
+unicode_name(0x13155, 'EGYPTIAN HIEROGLYPH G019').
+unicode_name(0x13156, 'EGYPTIAN HIEROGLYPH G020').
+unicode_name(0x13157, 'EGYPTIAN HIEROGLYPH G020A').
+unicode_name(0x13158, 'EGYPTIAN HIEROGLYPH G021').
+unicode_name(0x13159, 'EGYPTIAN HIEROGLYPH G022').
+unicode_name(0x1315A, 'EGYPTIAN HIEROGLYPH G023').
+unicode_name(0x1315B, 'EGYPTIAN HIEROGLYPH G024').
+unicode_name(0x1315C, 'EGYPTIAN HIEROGLYPH G025').
+unicode_name(0x1315D, 'EGYPTIAN HIEROGLYPH G026').
+unicode_name(0x1315E, 'EGYPTIAN HIEROGLYPH G026A').
+unicode_name(0x1315F, 'EGYPTIAN HIEROGLYPH G027').
+unicode_name(0x13160, 'EGYPTIAN HIEROGLYPH G028').
+unicode_name(0x13161, 'EGYPTIAN HIEROGLYPH G029').
+unicode_name(0x13162, 'EGYPTIAN HIEROGLYPH G030').
+unicode_name(0x13163, 'EGYPTIAN HIEROGLYPH G031').
+unicode_name(0x13164, 'EGYPTIAN HIEROGLYPH G032').
+unicode_name(0x13165, 'EGYPTIAN HIEROGLYPH G033').
+unicode_name(0x13166, 'EGYPTIAN HIEROGLYPH G034').
+unicode_name(0x13167, 'EGYPTIAN HIEROGLYPH G035').
+unicode_name(0x13168, 'EGYPTIAN HIEROGLYPH G036').
+unicode_name(0x13169, 'EGYPTIAN HIEROGLYPH G036A').
+unicode_name(0x1316A, 'EGYPTIAN HIEROGLYPH G037').
+unicode_name(0x1316B, 'EGYPTIAN HIEROGLYPH G037A').
+unicode_name(0x1316C, 'EGYPTIAN HIEROGLYPH G038').
+unicode_name(0x1316D, 'EGYPTIAN HIEROGLYPH G039').
+unicode_name(0x1316E, 'EGYPTIAN HIEROGLYPH G040').
+unicode_name(0x1316F, 'EGYPTIAN HIEROGLYPH G041').
+unicode_name(0x13170, 'EGYPTIAN HIEROGLYPH G042').
+unicode_name(0x13171, 'EGYPTIAN HIEROGLYPH G043').
+unicode_name(0x13172, 'EGYPTIAN HIEROGLYPH G043A').
+unicode_name(0x13173, 'EGYPTIAN HIEROGLYPH G044').
+unicode_name(0x13174, 'EGYPTIAN HIEROGLYPH G045').
+unicode_name(0x13175, 'EGYPTIAN HIEROGLYPH G045A').
+unicode_name(0x13176, 'EGYPTIAN HIEROGLYPH G046').
+unicode_name(0x13177, 'EGYPTIAN HIEROGLYPH G047').
+unicode_name(0x13178, 'EGYPTIAN HIEROGLYPH G048').
+unicode_name(0x13179, 'EGYPTIAN HIEROGLYPH G049').
+unicode_name(0x1317A, 'EGYPTIAN HIEROGLYPH G050').
+unicode_name(0x1317B, 'EGYPTIAN HIEROGLYPH G051').
+unicode_name(0x1317C, 'EGYPTIAN HIEROGLYPH G052').
+unicode_name(0x1317D, 'EGYPTIAN HIEROGLYPH G053').
+unicode_name(0x1317E, 'EGYPTIAN HIEROGLYPH G054').
+unicode_name(0x1317F, 'EGYPTIAN HIEROGLYPH H001').
+unicode_name(0x13180, 'EGYPTIAN HIEROGLYPH H002').
+unicode_name(0x13181, 'EGYPTIAN HIEROGLYPH H003').
+unicode_name(0x13182, 'EGYPTIAN HIEROGLYPH H004').
+unicode_name(0x13183, 'EGYPTIAN HIEROGLYPH H005').
+unicode_name(0x13184, 'EGYPTIAN HIEROGLYPH H006').
+unicode_name(0x13185, 'EGYPTIAN HIEROGLYPH H006A').
+unicode_name(0x13186, 'EGYPTIAN HIEROGLYPH H007').
+unicode_name(0x13187, 'EGYPTIAN HIEROGLYPH H008').
+unicode_name(0x13188, 'EGYPTIAN HIEROGLYPH I001').
+unicode_name(0x13189, 'EGYPTIAN HIEROGLYPH I002').
+unicode_name(0x1318A, 'EGYPTIAN HIEROGLYPH I003').
+unicode_name(0x1318B, 'EGYPTIAN HIEROGLYPH I004').
+unicode_name(0x1318C, 'EGYPTIAN HIEROGLYPH I005').
+unicode_name(0x1318D, 'EGYPTIAN HIEROGLYPH I005A').
+unicode_name(0x1318E, 'EGYPTIAN HIEROGLYPH I006').
+unicode_name(0x1318F, 'EGYPTIAN HIEROGLYPH I007').
+unicode_name(0x13190, 'EGYPTIAN HIEROGLYPH I008').
+unicode_name(0x13191, 'EGYPTIAN HIEROGLYPH I009').
+unicode_name(0x13192, 'EGYPTIAN HIEROGLYPH I009A').
+unicode_name(0x13193, 'EGYPTIAN HIEROGLYPH I010').
+unicode_name(0x13194, 'EGYPTIAN HIEROGLYPH I010A').
+unicode_name(0x13195, 'EGYPTIAN HIEROGLYPH I011').
+unicode_name(0x13196, 'EGYPTIAN HIEROGLYPH I011A').
+unicode_name(0x13197, 'EGYPTIAN HIEROGLYPH I012').
+unicode_name(0x13198, 'EGYPTIAN HIEROGLYPH I013').
+unicode_name(0x13199, 'EGYPTIAN HIEROGLYPH I014').
+unicode_name(0x1319A, 'EGYPTIAN HIEROGLYPH I015').
+unicode_name(0x1319B, 'EGYPTIAN HIEROGLYPH K001').
+unicode_name(0x1319C, 'EGYPTIAN HIEROGLYPH K002').
+unicode_name(0x1319D, 'EGYPTIAN HIEROGLYPH K003').
+unicode_name(0x1319E, 'EGYPTIAN HIEROGLYPH K004').
+unicode_name(0x1319F, 'EGYPTIAN HIEROGLYPH K005').
+unicode_name(0x131A0, 'EGYPTIAN HIEROGLYPH K006').
+unicode_name(0x131A1, 'EGYPTIAN HIEROGLYPH K007').
+unicode_name(0x131A2, 'EGYPTIAN HIEROGLYPH K008').
+unicode_name(0x131A3, 'EGYPTIAN HIEROGLYPH L001').
+unicode_name(0x131A4, 'EGYPTIAN HIEROGLYPH L002').
+unicode_name(0x131A5, 'EGYPTIAN HIEROGLYPH L002A').
+unicode_name(0x131A6, 'EGYPTIAN HIEROGLYPH L003').
+unicode_name(0x131A7, 'EGYPTIAN HIEROGLYPH L004').
+unicode_name(0x131A8, 'EGYPTIAN HIEROGLYPH L005').
+unicode_name(0x131A9, 'EGYPTIAN HIEROGLYPH L006').
+unicode_name(0x131AA, 'EGYPTIAN HIEROGLYPH L006A').
+unicode_name(0x131AB, 'EGYPTIAN HIEROGLYPH L007').
+unicode_name(0x131AC, 'EGYPTIAN HIEROGLYPH L008').
+unicode_name(0x131AD, 'EGYPTIAN HIEROGLYPH M001').
+unicode_name(0x131AE, 'EGYPTIAN HIEROGLYPH M001A').
+unicode_name(0x131AF, 'EGYPTIAN HIEROGLYPH M001B').
+unicode_name(0x131B0, 'EGYPTIAN HIEROGLYPH M002').
+unicode_name(0x131B1, 'EGYPTIAN HIEROGLYPH M003').
+unicode_name(0x131B2, 'EGYPTIAN HIEROGLYPH M003A').
+unicode_name(0x131B3, 'EGYPTIAN HIEROGLYPH M004').
+unicode_name(0x131B4, 'EGYPTIAN HIEROGLYPH M005').
+unicode_name(0x131B5, 'EGYPTIAN HIEROGLYPH M006').
+unicode_name(0x131B6, 'EGYPTIAN HIEROGLYPH M007').
+unicode_name(0x131B7, 'EGYPTIAN HIEROGLYPH M008').
+unicode_name(0x131B8, 'EGYPTIAN HIEROGLYPH M009').
+unicode_name(0x131B9, 'EGYPTIAN HIEROGLYPH M010').
+unicode_name(0x131BA, 'EGYPTIAN HIEROGLYPH M010A').
+unicode_name(0x131BB, 'EGYPTIAN HIEROGLYPH M011').
+unicode_name(0x131BC, 'EGYPTIAN HIEROGLYPH M012').
+unicode_name(0x131BD, 'EGYPTIAN HIEROGLYPH M012A').
+unicode_name(0x131BE, 'EGYPTIAN HIEROGLYPH M012B').
+unicode_name(0x131BF, 'EGYPTIAN HIEROGLYPH M012C').
+unicode_name(0x131C0, 'EGYPTIAN HIEROGLYPH M012D').
+unicode_name(0x131C1, 'EGYPTIAN HIEROGLYPH M012E').
+unicode_name(0x131C2, 'EGYPTIAN HIEROGLYPH M012F').
+unicode_name(0x131C3, 'EGYPTIAN HIEROGLYPH M012G').
+unicode_name(0x131C4, 'EGYPTIAN HIEROGLYPH M012H').
+unicode_name(0x131C5, 'EGYPTIAN HIEROGLYPH M013').
+unicode_name(0x131C6, 'EGYPTIAN HIEROGLYPH M014').
+unicode_name(0x131C7, 'EGYPTIAN HIEROGLYPH M015').
+unicode_name(0x131C8, 'EGYPTIAN HIEROGLYPH M015A').
+unicode_name(0x131C9, 'EGYPTIAN HIEROGLYPH M016').
+unicode_name(0x131CA, 'EGYPTIAN HIEROGLYPH M016A').
+unicode_name(0x131CB, 'EGYPTIAN HIEROGLYPH M017').
+unicode_name(0x131CC, 'EGYPTIAN HIEROGLYPH M017A').
+unicode_name(0x131CD, 'EGYPTIAN HIEROGLYPH M018').
+unicode_name(0x131CE, 'EGYPTIAN HIEROGLYPH M019').
+unicode_name(0x131CF, 'EGYPTIAN HIEROGLYPH M020').
+unicode_name(0x131D0, 'EGYPTIAN HIEROGLYPH M021').
+unicode_name(0x131D1, 'EGYPTIAN HIEROGLYPH M022').
+unicode_name(0x131D2, 'EGYPTIAN HIEROGLYPH M022A').
+unicode_name(0x131D3, 'EGYPTIAN HIEROGLYPH M023').
+unicode_name(0x131D4, 'EGYPTIAN HIEROGLYPH M024').
+unicode_name(0x131D5, 'EGYPTIAN HIEROGLYPH M024A').
+unicode_name(0x131D6, 'EGYPTIAN HIEROGLYPH M025').
+unicode_name(0x131D7, 'EGYPTIAN HIEROGLYPH M026').
+unicode_name(0x131D8, 'EGYPTIAN HIEROGLYPH M027').
+unicode_name(0x131D9, 'EGYPTIAN HIEROGLYPH M028').
+unicode_name(0x131DA, 'EGYPTIAN HIEROGLYPH M028A').
+unicode_name(0x131DB, 'EGYPTIAN HIEROGLYPH M029').
+unicode_name(0x131DC, 'EGYPTIAN HIEROGLYPH M030').
+unicode_name(0x131DD, 'EGYPTIAN HIEROGLYPH M031').
+unicode_name(0x131DE, 'EGYPTIAN HIEROGLYPH M031A').
+unicode_name(0x131DF, 'EGYPTIAN HIEROGLYPH M032').
+unicode_name(0x131E0, 'EGYPTIAN HIEROGLYPH M033').
+unicode_name(0x131E1, 'EGYPTIAN HIEROGLYPH M033A').
+unicode_name(0x131E2, 'EGYPTIAN HIEROGLYPH M033B').
+unicode_name(0x131E3, 'EGYPTIAN HIEROGLYPH M034').
+unicode_name(0x131E4, 'EGYPTIAN HIEROGLYPH M035').
+unicode_name(0x131E5, 'EGYPTIAN HIEROGLYPH M036').
+unicode_name(0x131E6, 'EGYPTIAN HIEROGLYPH M037').
+unicode_name(0x131E7, 'EGYPTIAN HIEROGLYPH M038').
+unicode_name(0x131E8, 'EGYPTIAN HIEROGLYPH M039').
+unicode_name(0x131E9, 'EGYPTIAN HIEROGLYPH M040').
+unicode_name(0x131EA, 'EGYPTIAN HIEROGLYPH M040A').
+unicode_name(0x131EB, 'EGYPTIAN HIEROGLYPH M041').
+unicode_name(0x131EC, 'EGYPTIAN HIEROGLYPH M042').
+unicode_name(0x131ED, 'EGYPTIAN HIEROGLYPH M043').
+unicode_name(0x131EE, 'EGYPTIAN HIEROGLYPH M044').
+unicode_name(0x131EF, 'EGYPTIAN HIEROGLYPH N001').
+unicode_name(0x131F0, 'EGYPTIAN HIEROGLYPH N002').
+unicode_name(0x131F1, 'EGYPTIAN HIEROGLYPH N003').
+unicode_name(0x131F2, 'EGYPTIAN HIEROGLYPH N004').
+unicode_name(0x131F3, 'EGYPTIAN HIEROGLYPH N005').
+unicode_name(0x131F4, 'EGYPTIAN HIEROGLYPH N006').
+unicode_name(0x131F5, 'EGYPTIAN HIEROGLYPH N007').
+unicode_name(0x131F6, 'EGYPTIAN HIEROGLYPH N008').
+unicode_name(0x131F7, 'EGYPTIAN HIEROGLYPH N009').
+unicode_name(0x131F8, 'EGYPTIAN HIEROGLYPH N010').
+unicode_name(0x131F9, 'EGYPTIAN HIEROGLYPH N011').
+unicode_name(0x131FA, 'EGYPTIAN HIEROGLYPH N012').
+unicode_name(0x131FB, 'EGYPTIAN HIEROGLYPH N013').
+unicode_name(0x131FC, 'EGYPTIAN HIEROGLYPH N014').
+unicode_name(0x131FD, 'EGYPTIAN HIEROGLYPH N015').
+unicode_name(0x131FE, 'EGYPTIAN HIEROGLYPH N016').
+unicode_name(0x131FF, 'EGYPTIAN HIEROGLYPH N017').
+unicode_name(0x13200, 'EGYPTIAN HIEROGLYPH N018').
+unicode_name(0x13201, 'EGYPTIAN HIEROGLYPH N018A').
+unicode_name(0x13202, 'EGYPTIAN HIEROGLYPH N018B').
+unicode_name(0x13203, 'EGYPTIAN HIEROGLYPH N019').
+unicode_name(0x13204, 'EGYPTIAN HIEROGLYPH N020').
+unicode_name(0x13205, 'EGYPTIAN HIEROGLYPH N021').
+unicode_name(0x13206, 'EGYPTIAN HIEROGLYPH N022').
+unicode_name(0x13207, 'EGYPTIAN HIEROGLYPH N023').
+unicode_name(0x13208, 'EGYPTIAN HIEROGLYPH N024').
+unicode_name(0x13209, 'EGYPTIAN HIEROGLYPH N025').
+unicode_name(0x1320A, 'EGYPTIAN HIEROGLYPH N025A').
+unicode_name(0x1320B, 'EGYPTIAN HIEROGLYPH N026').
+unicode_name(0x1320C, 'EGYPTIAN HIEROGLYPH N027').
+unicode_name(0x1320D, 'EGYPTIAN HIEROGLYPH N028').
+unicode_name(0x1320E, 'EGYPTIAN HIEROGLYPH N029').
+unicode_name(0x1320F, 'EGYPTIAN HIEROGLYPH N030').
+unicode_name(0x13210, 'EGYPTIAN HIEROGLYPH N031').
+unicode_name(0x13211, 'EGYPTIAN HIEROGLYPH N032').
+unicode_name(0x13212, 'EGYPTIAN HIEROGLYPH N033').
+unicode_name(0x13213, 'EGYPTIAN HIEROGLYPH N033A').
+unicode_name(0x13214, 'EGYPTIAN HIEROGLYPH N034').
+unicode_name(0x13215, 'EGYPTIAN HIEROGLYPH N034A').
+unicode_name(0x13216, 'EGYPTIAN HIEROGLYPH N035').
+unicode_name(0x13217, 'EGYPTIAN HIEROGLYPH N035A').
+unicode_name(0x13218, 'EGYPTIAN HIEROGLYPH N036').
+unicode_name(0x13219, 'EGYPTIAN HIEROGLYPH N037').
+unicode_name(0x1321A, 'EGYPTIAN HIEROGLYPH N037A').
+unicode_name(0x1321B, 'EGYPTIAN HIEROGLYPH N038').
+unicode_name(0x1321C, 'EGYPTIAN HIEROGLYPH N039').
+unicode_name(0x1321D, 'EGYPTIAN HIEROGLYPH N040').
+unicode_name(0x1321E, 'EGYPTIAN HIEROGLYPH N041').
+unicode_name(0x1321F, 'EGYPTIAN HIEROGLYPH N042').
+unicode_name(0x13220, 'EGYPTIAN HIEROGLYPH NL001').
+unicode_name(0x13221, 'EGYPTIAN HIEROGLYPH NL002').
+unicode_name(0x13222, 'EGYPTIAN HIEROGLYPH NL003').
+unicode_name(0x13223, 'EGYPTIAN HIEROGLYPH NL004').
+unicode_name(0x13224, 'EGYPTIAN HIEROGLYPH NL005').
+unicode_name(0x13225, 'EGYPTIAN HIEROGLYPH NL005A').
+unicode_name(0x13226, 'EGYPTIAN HIEROGLYPH NL006').
+unicode_name(0x13227, 'EGYPTIAN HIEROGLYPH NL007').
+unicode_name(0x13228, 'EGYPTIAN HIEROGLYPH NL008').
+unicode_name(0x13229, 'EGYPTIAN HIEROGLYPH NL009').
+unicode_name(0x1322A, 'EGYPTIAN HIEROGLYPH NL010').
+unicode_name(0x1322B, 'EGYPTIAN HIEROGLYPH NL011').
+unicode_name(0x1322C, 'EGYPTIAN HIEROGLYPH NL012').
+unicode_name(0x1322D, 'EGYPTIAN HIEROGLYPH NL013').
+unicode_name(0x1322E, 'EGYPTIAN HIEROGLYPH NL014').
+unicode_name(0x1322F, 'EGYPTIAN HIEROGLYPH NL015').
+unicode_name(0x13230, 'EGYPTIAN HIEROGLYPH NL016').
+unicode_name(0x13231, 'EGYPTIAN HIEROGLYPH NL017').
+unicode_name(0x13232, 'EGYPTIAN HIEROGLYPH NL017A').
+unicode_name(0x13233, 'EGYPTIAN HIEROGLYPH NL018').
+unicode_name(0x13234, 'EGYPTIAN HIEROGLYPH NL019').
+unicode_name(0x13235, 'EGYPTIAN HIEROGLYPH NL020').
+unicode_name(0x13236, 'EGYPTIAN HIEROGLYPH NU001').
+unicode_name(0x13237, 'EGYPTIAN HIEROGLYPH NU002').
+unicode_name(0x13238, 'EGYPTIAN HIEROGLYPH NU003').
+unicode_name(0x13239, 'EGYPTIAN HIEROGLYPH NU004').
+unicode_name(0x1323A, 'EGYPTIAN HIEROGLYPH NU005').
+unicode_name(0x1323B, 'EGYPTIAN HIEROGLYPH NU006').
+unicode_name(0x1323C, 'EGYPTIAN HIEROGLYPH NU007').
+unicode_name(0x1323D, 'EGYPTIAN HIEROGLYPH NU008').
+unicode_name(0x1323E, 'EGYPTIAN HIEROGLYPH NU009').
+unicode_name(0x1323F, 'EGYPTIAN HIEROGLYPH NU010').
+unicode_name(0x13240, 'EGYPTIAN HIEROGLYPH NU010A').
+unicode_name(0x13241, 'EGYPTIAN HIEROGLYPH NU011').
+unicode_name(0x13242, 'EGYPTIAN HIEROGLYPH NU011A').
+unicode_name(0x13243, 'EGYPTIAN HIEROGLYPH NU012').
+unicode_name(0x13244, 'EGYPTIAN HIEROGLYPH NU013').
+unicode_name(0x13245, 'EGYPTIAN HIEROGLYPH NU014').
+unicode_name(0x13246, 'EGYPTIAN HIEROGLYPH NU015').
+unicode_name(0x13247, 'EGYPTIAN HIEROGLYPH NU016').
+unicode_name(0x13248, 'EGYPTIAN HIEROGLYPH NU017').
+unicode_name(0x13249, 'EGYPTIAN HIEROGLYPH NU018').
+unicode_name(0x1324A, 'EGYPTIAN HIEROGLYPH NU018A').
+unicode_name(0x1324B, 'EGYPTIAN HIEROGLYPH NU019').
+unicode_name(0x1324C, 'EGYPTIAN HIEROGLYPH NU020').
+unicode_name(0x1324D, 'EGYPTIAN HIEROGLYPH NU021').
+unicode_name(0x1324E, 'EGYPTIAN HIEROGLYPH NU022').
+unicode_name(0x1324F, 'EGYPTIAN HIEROGLYPH NU022A').
+unicode_name(0x13250, 'EGYPTIAN HIEROGLYPH O001').
+unicode_name(0x13251, 'EGYPTIAN HIEROGLYPH O001A').
+unicode_name(0x13252, 'EGYPTIAN HIEROGLYPH O002').
+unicode_name(0x13253, 'EGYPTIAN HIEROGLYPH O003').
+unicode_name(0x13254, 'EGYPTIAN HIEROGLYPH O004').
+unicode_name(0x13255, 'EGYPTIAN HIEROGLYPH O005').
+unicode_name(0x13256, 'EGYPTIAN HIEROGLYPH O005A').
+unicode_name(0x13257, 'EGYPTIAN HIEROGLYPH O006').
+unicode_name(0x13258, 'EGYPTIAN HIEROGLYPH O006A').
+unicode_name(0x13259, 'EGYPTIAN HIEROGLYPH O006B').
+unicode_name(0x1325A, 'EGYPTIAN HIEROGLYPH O006C').
+unicode_name(0x1325B, 'EGYPTIAN HIEROGLYPH O006D').
+unicode_name(0x1325C, 'EGYPTIAN HIEROGLYPH O006E').
+unicode_name(0x1325D, 'EGYPTIAN HIEROGLYPH O006F').
+unicode_name(0x1325E, 'EGYPTIAN HIEROGLYPH O007').
+unicode_name(0x1325F, 'EGYPTIAN HIEROGLYPH O008').
+unicode_name(0x13260, 'EGYPTIAN HIEROGLYPH O009').
+unicode_name(0x13261, 'EGYPTIAN HIEROGLYPH O010').
+unicode_name(0x13262, 'EGYPTIAN HIEROGLYPH O010A').
+unicode_name(0x13263, 'EGYPTIAN HIEROGLYPH O010B').
+unicode_name(0x13264, 'EGYPTIAN HIEROGLYPH O010C').
+unicode_name(0x13265, 'EGYPTIAN HIEROGLYPH O011').
+unicode_name(0x13266, 'EGYPTIAN HIEROGLYPH O012').
+unicode_name(0x13267, 'EGYPTIAN HIEROGLYPH O013').
+unicode_name(0x13268, 'EGYPTIAN HIEROGLYPH O014').
+unicode_name(0x13269, 'EGYPTIAN HIEROGLYPH O015').
+unicode_name(0x1326A, 'EGYPTIAN HIEROGLYPH O016').
+unicode_name(0x1326B, 'EGYPTIAN HIEROGLYPH O017').
+unicode_name(0x1326C, 'EGYPTIAN HIEROGLYPH O018').
+unicode_name(0x1326D, 'EGYPTIAN HIEROGLYPH O019').
+unicode_name(0x1326E, 'EGYPTIAN HIEROGLYPH O019A').
+unicode_name(0x1326F, 'EGYPTIAN HIEROGLYPH O020').
+unicode_name(0x13270, 'EGYPTIAN HIEROGLYPH O020A').
+unicode_name(0x13271, 'EGYPTIAN HIEROGLYPH O021').
+unicode_name(0x13272, 'EGYPTIAN HIEROGLYPH O022').
+unicode_name(0x13273, 'EGYPTIAN HIEROGLYPH O023').
+unicode_name(0x13274, 'EGYPTIAN HIEROGLYPH O024').
+unicode_name(0x13275, 'EGYPTIAN HIEROGLYPH O024A').
+unicode_name(0x13276, 'EGYPTIAN HIEROGLYPH O025').
+unicode_name(0x13277, 'EGYPTIAN HIEROGLYPH O025A').
+unicode_name(0x13278, 'EGYPTIAN HIEROGLYPH O026').
+unicode_name(0x13279, 'EGYPTIAN HIEROGLYPH O027').
+unicode_name(0x1327A, 'EGYPTIAN HIEROGLYPH O028').
+unicode_name(0x1327B, 'EGYPTIAN HIEROGLYPH O029').
+unicode_name(0x1327C, 'EGYPTIAN HIEROGLYPH O029A').
+unicode_name(0x1327D, 'EGYPTIAN HIEROGLYPH O030').
+unicode_name(0x1327E, 'EGYPTIAN HIEROGLYPH O030A').
+unicode_name(0x1327F, 'EGYPTIAN HIEROGLYPH O031').
+unicode_name(0x13280, 'EGYPTIAN HIEROGLYPH O032').
+unicode_name(0x13281, 'EGYPTIAN HIEROGLYPH O033').
+unicode_name(0x13282, 'EGYPTIAN HIEROGLYPH O033A').
+unicode_name(0x13283, 'EGYPTIAN HIEROGLYPH O034').
+unicode_name(0x13284, 'EGYPTIAN HIEROGLYPH O035').
+unicode_name(0x13285, 'EGYPTIAN HIEROGLYPH O036').
+unicode_name(0x13286, 'EGYPTIAN HIEROGLYPH O036A').
+unicode_name(0x13287, 'EGYPTIAN HIEROGLYPH O036B').
+unicode_name(0x13288, 'EGYPTIAN HIEROGLYPH O036C').
+unicode_name(0x13289, 'EGYPTIAN HIEROGLYPH O036D').
+unicode_name(0x1328A, 'EGYPTIAN HIEROGLYPH O037').
+unicode_name(0x1328B, 'EGYPTIAN HIEROGLYPH O038').
+unicode_name(0x1328C, 'EGYPTIAN HIEROGLYPH O039').
+unicode_name(0x1328D, 'EGYPTIAN HIEROGLYPH O040').
+unicode_name(0x1328E, 'EGYPTIAN HIEROGLYPH O041').
+unicode_name(0x1328F, 'EGYPTIAN HIEROGLYPH O042').
+unicode_name(0x13290, 'EGYPTIAN HIEROGLYPH O043').
+unicode_name(0x13291, 'EGYPTIAN HIEROGLYPH O044').
+unicode_name(0x13292, 'EGYPTIAN HIEROGLYPH O045').
+unicode_name(0x13293, 'EGYPTIAN HIEROGLYPH O046').
+unicode_name(0x13294, 'EGYPTIAN HIEROGLYPH O047').
+unicode_name(0x13295, 'EGYPTIAN HIEROGLYPH O048').
+unicode_name(0x13296, 'EGYPTIAN HIEROGLYPH O049').
+unicode_name(0x13297, 'EGYPTIAN HIEROGLYPH O050').
+unicode_name(0x13298, 'EGYPTIAN HIEROGLYPH O050A').
+unicode_name(0x13299, 'EGYPTIAN HIEROGLYPH O050B').
+unicode_name(0x1329A, 'EGYPTIAN HIEROGLYPH O051').
+unicode_name(0x1329B, 'EGYPTIAN HIEROGLYPH P001').
+unicode_name(0x1329C, 'EGYPTIAN HIEROGLYPH P001A').
+unicode_name(0x1329D, 'EGYPTIAN HIEROGLYPH P002').
+unicode_name(0x1329E, 'EGYPTIAN HIEROGLYPH P003').
+unicode_name(0x1329F, 'EGYPTIAN HIEROGLYPH P003A').
+unicode_name(0x132A0, 'EGYPTIAN HIEROGLYPH P004').
+unicode_name(0x132A1, 'EGYPTIAN HIEROGLYPH P005').
+unicode_name(0x132A2, 'EGYPTIAN HIEROGLYPH P006').
+unicode_name(0x132A3, 'EGYPTIAN HIEROGLYPH P007').
+unicode_name(0x132A4, 'EGYPTIAN HIEROGLYPH P008').
+unicode_name(0x132A5, 'EGYPTIAN HIEROGLYPH P009').
+unicode_name(0x132A6, 'EGYPTIAN HIEROGLYPH P010').
+unicode_name(0x132A7, 'EGYPTIAN HIEROGLYPH P011').
+unicode_name(0x132A8, 'EGYPTIAN HIEROGLYPH Q001').
+unicode_name(0x132A9, 'EGYPTIAN HIEROGLYPH Q002').
+unicode_name(0x132AA, 'EGYPTIAN HIEROGLYPH Q003').
+unicode_name(0x132AB, 'EGYPTIAN HIEROGLYPH Q004').
+unicode_name(0x132AC, 'EGYPTIAN HIEROGLYPH Q005').
+unicode_name(0x132AD, 'EGYPTIAN HIEROGLYPH Q006').
+unicode_name(0x132AE, 'EGYPTIAN HIEROGLYPH Q007').
+unicode_name(0x132AF, 'EGYPTIAN HIEROGLYPH R001').
+unicode_name(0x132B0, 'EGYPTIAN HIEROGLYPH R002').
+unicode_name(0x132B1, 'EGYPTIAN HIEROGLYPH R002A').
+unicode_name(0x132B2, 'EGYPTIAN HIEROGLYPH R003').
+unicode_name(0x132B3, 'EGYPTIAN HIEROGLYPH R003A').
+unicode_name(0x132B4, 'EGYPTIAN HIEROGLYPH R003B').
+unicode_name(0x132B5, 'EGYPTIAN HIEROGLYPH R004').
+unicode_name(0x132B6, 'EGYPTIAN HIEROGLYPH R005').
+unicode_name(0x132B7, 'EGYPTIAN HIEROGLYPH R006').
+unicode_name(0x132B8, 'EGYPTIAN HIEROGLYPH R007').
+unicode_name(0x132B9, 'EGYPTIAN HIEROGLYPH R008').
+unicode_name(0x132BA, 'EGYPTIAN HIEROGLYPH R009').
+unicode_name(0x132BB, 'EGYPTIAN HIEROGLYPH R010').
+unicode_name(0x132BC, 'EGYPTIAN HIEROGLYPH R010A').
+unicode_name(0x132BD, 'EGYPTIAN HIEROGLYPH R011').
+unicode_name(0x132BE, 'EGYPTIAN HIEROGLYPH R012').
+unicode_name(0x132BF, 'EGYPTIAN HIEROGLYPH R013').
+unicode_name(0x132C0, 'EGYPTIAN HIEROGLYPH R014').
+unicode_name(0x132C1, 'EGYPTIAN HIEROGLYPH R015').
+unicode_name(0x132C2, 'EGYPTIAN HIEROGLYPH R016').
+unicode_name(0x132C3, 'EGYPTIAN HIEROGLYPH R016A').
+unicode_name(0x132C4, 'EGYPTIAN HIEROGLYPH R017').
+unicode_name(0x132C5, 'EGYPTIAN HIEROGLYPH R018').
+unicode_name(0x132C6, 'EGYPTIAN HIEROGLYPH R019').
+unicode_name(0x132C7, 'EGYPTIAN HIEROGLYPH R020').
+unicode_name(0x132C8, 'EGYPTIAN HIEROGLYPH R021').
+unicode_name(0x132C9, 'EGYPTIAN HIEROGLYPH R022').
+unicode_name(0x132CA, 'EGYPTIAN HIEROGLYPH R023').
+unicode_name(0x132CB, 'EGYPTIAN HIEROGLYPH R024').
+unicode_name(0x132CC, 'EGYPTIAN HIEROGLYPH R025').
+unicode_name(0x132CD, 'EGYPTIAN HIEROGLYPH R026').
+unicode_name(0x132CE, 'EGYPTIAN HIEROGLYPH R027').
+unicode_name(0x132CF, 'EGYPTIAN HIEROGLYPH R028').
+unicode_name(0x132D0, 'EGYPTIAN HIEROGLYPH R029').
+unicode_name(0x132D1, 'EGYPTIAN HIEROGLYPH S001').
+unicode_name(0x132D2, 'EGYPTIAN HIEROGLYPH S002').
+unicode_name(0x132D3, 'EGYPTIAN HIEROGLYPH S002A').
+unicode_name(0x132D4, 'EGYPTIAN HIEROGLYPH S003').
+unicode_name(0x132D5, 'EGYPTIAN HIEROGLYPH S004').
+unicode_name(0x132D6, 'EGYPTIAN HIEROGLYPH S005').
+unicode_name(0x132D7, 'EGYPTIAN HIEROGLYPH S006').
+unicode_name(0x132D8, 'EGYPTIAN HIEROGLYPH S006A').
+unicode_name(0x132D9, 'EGYPTIAN HIEROGLYPH S007').
+unicode_name(0x132DA, 'EGYPTIAN HIEROGLYPH S008').
+unicode_name(0x132DB, 'EGYPTIAN HIEROGLYPH S009').
+unicode_name(0x132DC, 'EGYPTIAN HIEROGLYPH S010').
+unicode_name(0x132DD, 'EGYPTIAN HIEROGLYPH S011').
+unicode_name(0x132DE, 'EGYPTIAN HIEROGLYPH S012').
+unicode_name(0x132DF, 'EGYPTIAN HIEROGLYPH S013').
+unicode_name(0x132E0, 'EGYPTIAN HIEROGLYPH S014').
+unicode_name(0x132E1, 'EGYPTIAN HIEROGLYPH S014A').
+unicode_name(0x132E2, 'EGYPTIAN HIEROGLYPH S014B').
+unicode_name(0x132E3, 'EGYPTIAN HIEROGLYPH S015').
+unicode_name(0x132E4, 'EGYPTIAN HIEROGLYPH S016').
+unicode_name(0x132E5, 'EGYPTIAN HIEROGLYPH S017').
+unicode_name(0x132E6, 'EGYPTIAN HIEROGLYPH S017A').
+unicode_name(0x132E7, 'EGYPTIAN HIEROGLYPH S018').
+unicode_name(0x132E8, 'EGYPTIAN HIEROGLYPH S019').
+unicode_name(0x132E9, 'EGYPTIAN HIEROGLYPH S020').
+unicode_name(0x132EA, 'EGYPTIAN HIEROGLYPH S021').
+unicode_name(0x132EB, 'EGYPTIAN HIEROGLYPH S022').
+unicode_name(0x132EC, 'EGYPTIAN HIEROGLYPH S023').
+unicode_name(0x132ED, 'EGYPTIAN HIEROGLYPH S024').
+unicode_name(0x132EE, 'EGYPTIAN HIEROGLYPH S025').
+unicode_name(0x132EF, 'EGYPTIAN HIEROGLYPH S026').
+unicode_name(0x132F0, 'EGYPTIAN HIEROGLYPH S026A').
+unicode_name(0x132F1, 'EGYPTIAN HIEROGLYPH S026B').
+unicode_name(0x132F2, 'EGYPTIAN HIEROGLYPH S027').
+unicode_name(0x132F3, 'EGYPTIAN HIEROGLYPH S028').
+unicode_name(0x132F4, 'EGYPTIAN HIEROGLYPH S029').
+unicode_name(0x132F5, 'EGYPTIAN HIEROGLYPH S030').
+unicode_name(0x132F6, 'EGYPTIAN HIEROGLYPH S031').
+unicode_name(0x132F7, 'EGYPTIAN HIEROGLYPH S032').
+unicode_name(0x132F8, 'EGYPTIAN HIEROGLYPH S033').
+unicode_name(0x132F9, 'EGYPTIAN HIEROGLYPH S034').
+unicode_name(0x132FA, 'EGYPTIAN HIEROGLYPH S035').
+unicode_name(0x132FB, 'EGYPTIAN HIEROGLYPH S035A').
+unicode_name(0x132FC, 'EGYPTIAN HIEROGLYPH S036').
+unicode_name(0x132FD, 'EGYPTIAN HIEROGLYPH S037').
+unicode_name(0x132FE, 'EGYPTIAN HIEROGLYPH S038').
+unicode_name(0x132FF, 'EGYPTIAN HIEROGLYPH S039').
+unicode_name(0x13300, 'EGYPTIAN HIEROGLYPH S040').
+unicode_name(0x13301, 'EGYPTIAN HIEROGLYPH S041').
+unicode_name(0x13302, 'EGYPTIAN HIEROGLYPH S042').
+unicode_name(0x13303, 'EGYPTIAN HIEROGLYPH S043').
+unicode_name(0x13304, 'EGYPTIAN HIEROGLYPH S044').
+unicode_name(0x13305, 'EGYPTIAN HIEROGLYPH S045').
+unicode_name(0x13306, 'EGYPTIAN HIEROGLYPH S046').
+unicode_name(0x13307, 'EGYPTIAN HIEROGLYPH T001').
+unicode_name(0x13308, 'EGYPTIAN HIEROGLYPH T002').
+unicode_name(0x13309, 'EGYPTIAN HIEROGLYPH T003').
+unicode_name(0x1330A, 'EGYPTIAN HIEROGLYPH T003A').
+unicode_name(0x1330B, 'EGYPTIAN HIEROGLYPH T004').
+unicode_name(0x1330C, 'EGYPTIAN HIEROGLYPH T005').
+unicode_name(0x1330D, 'EGYPTIAN HIEROGLYPH T006').
+unicode_name(0x1330E, 'EGYPTIAN HIEROGLYPH T007').
+unicode_name(0x1330F, 'EGYPTIAN HIEROGLYPH T007A').
+unicode_name(0x13310, 'EGYPTIAN HIEROGLYPH T008').
+unicode_name(0x13311, 'EGYPTIAN HIEROGLYPH T008A').
+unicode_name(0x13312, 'EGYPTIAN HIEROGLYPH T009').
+unicode_name(0x13313, 'EGYPTIAN HIEROGLYPH T009A').
+unicode_name(0x13314, 'EGYPTIAN HIEROGLYPH T010').
+unicode_name(0x13315, 'EGYPTIAN HIEROGLYPH T011').
+unicode_name(0x13316, 'EGYPTIAN HIEROGLYPH T011A').
+unicode_name(0x13317, 'EGYPTIAN HIEROGLYPH T012').
+unicode_name(0x13318, 'EGYPTIAN HIEROGLYPH T013').
+unicode_name(0x13319, 'EGYPTIAN HIEROGLYPH T014').
+unicode_name(0x1331A, 'EGYPTIAN HIEROGLYPH T015').
+unicode_name(0x1331B, 'EGYPTIAN HIEROGLYPH T016').
+unicode_name(0x1331C, 'EGYPTIAN HIEROGLYPH T016A').
+unicode_name(0x1331D, 'EGYPTIAN HIEROGLYPH T017').
+unicode_name(0x1331E, 'EGYPTIAN HIEROGLYPH T018').
+unicode_name(0x1331F, 'EGYPTIAN HIEROGLYPH T019').
+unicode_name(0x13320, 'EGYPTIAN HIEROGLYPH T020').
+unicode_name(0x13321, 'EGYPTIAN HIEROGLYPH T021').
+unicode_name(0x13322, 'EGYPTIAN HIEROGLYPH T022').
+unicode_name(0x13323, 'EGYPTIAN HIEROGLYPH T023').
+unicode_name(0x13324, 'EGYPTIAN HIEROGLYPH T024').
+unicode_name(0x13325, 'EGYPTIAN HIEROGLYPH T025').
+unicode_name(0x13326, 'EGYPTIAN HIEROGLYPH T026').
+unicode_name(0x13327, 'EGYPTIAN HIEROGLYPH T027').
+unicode_name(0x13328, 'EGYPTIAN HIEROGLYPH T028').
+unicode_name(0x13329, 'EGYPTIAN HIEROGLYPH T029').
+unicode_name(0x1332A, 'EGYPTIAN HIEROGLYPH T030').
+unicode_name(0x1332B, 'EGYPTIAN HIEROGLYPH T031').
+unicode_name(0x1332C, 'EGYPTIAN HIEROGLYPH T032').
+unicode_name(0x1332D, 'EGYPTIAN HIEROGLYPH T032A').
+unicode_name(0x1332E, 'EGYPTIAN HIEROGLYPH T033').
+unicode_name(0x1332F, 'EGYPTIAN HIEROGLYPH T033A').
+unicode_name(0x13330, 'EGYPTIAN HIEROGLYPH T034').
+unicode_name(0x13331, 'EGYPTIAN HIEROGLYPH T035').
+unicode_name(0x13332, 'EGYPTIAN HIEROGLYPH T036').
+unicode_name(0x13333, 'EGYPTIAN HIEROGLYPH U001').
+unicode_name(0x13334, 'EGYPTIAN HIEROGLYPH U002').
+unicode_name(0x13335, 'EGYPTIAN HIEROGLYPH U003').
+unicode_name(0x13336, 'EGYPTIAN HIEROGLYPH U004').
+unicode_name(0x13337, 'EGYPTIAN HIEROGLYPH U005').
+unicode_name(0x13338, 'EGYPTIAN HIEROGLYPH U006').
+unicode_name(0x13339, 'EGYPTIAN HIEROGLYPH U006A').
+unicode_name(0x1333A, 'EGYPTIAN HIEROGLYPH U006B').
+unicode_name(0x1333B, 'EGYPTIAN HIEROGLYPH U007').
+unicode_name(0x1333C, 'EGYPTIAN HIEROGLYPH U008').
+unicode_name(0x1333D, 'EGYPTIAN HIEROGLYPH U009').
+unicode_name(0x1333E, 'EGYPTIAN HIEROGLYPH U010').
+unicode_name(0x1333F, 'EGYPTIAN HIEROGLYPH U011').
+unicode_name(0x13340, 'EGYPTIAN HIEROGLYPH U012').
+unicode_name(0x13341, 'EGYPTIAN HIEROGLYPH U013').
+unicode_name(0x13342, 'EGYPTIAN HIEROGLYPH U014').
+unicode_name(0x13343, 'EGYPTIAN HIEROGLYPH U015').
+unicode_name(0x13344, 'EGYPTIAN HIEROGLYPH U016').
+unicode_name(0x13345, 'EGYPTIAN HIEROGLYPH U017').
+unicode_name(0x13346, 'EGYPTIAN HIEROGLYPH U018').
+unicode_name(0x13347, 'EGYPTIAN HIEROGLYPH U019').
+unicode_name(0x13348, 'EGYPTIAN HIEROGLYPH U020').
+unicode_name(0x13349, 'EGYPTIAN HIEROGLYPH U021').
+unicode_name(0x1334A, 'EGYPTIAN HIEROGLYPH U022').
+unicode_name(0x1334B, 'EGYPTIAN HIEROGLYPH U023').
+unicode_name(0x1334C, 'EGYPTIAN HIEROGLYPH U023A').
+unicode_name(0x1334D, 'EGYPTIAN HIEROGLYPH U024').
+unicode_name(0x1334E, 'EGYPTIAN HIEROGLYPH U025').
+unicode_name(0x1334F, 'EGYPTIAN HIEROGLYPH U026').
+unicode_name(0x13350, 'EGYPTIAN HIEROGLYPH U027').
+unicode_name(0x13351, 'EGYPTIAN HIEROGLYPH U028').
+unicode_name(0x13352, 'EGYPTIAN HIEROGLYPH U029').
+unicode_name(0x13353, 'EGYPTIAN HIEROGLYPH U029A').
+unicode_name(0x13354, 'EGYPTIAN HIEROGLYPH U030').
+unicode_name(0x13355, 'EGYPTIAN HIEROGLYPH U031').
+unicode_name(0x13356, 'EGYPTIAN HIEROGLYPH U032').
+unicode_name(0x13357, 'EGYPTIAN HIEROGLYPH U032A').
+unicode_name(0x13358, 'EGYPTIAN HIEROGLYPH U033').
+unicode_name(0x13359, 'EGYPTIAN HIEROGLYPH U034').
+unicode_name(0x1335A, 'EGYPTIAN HIEROGLYPH U035').
+unicode_name(0x1335B, 'EGYPTIAN HIEROGLYPH U036').
+unicode_name(0x1335C, 'EGYPTIAN HIEROGLYPH U037').
+unicode_name(0x1335D, 'EGYPTIAN HIEROGLYPH U038').
+unicode_name(0x1335E, 'EGYPTIAN HIEROGLYPH U039').
+unicode_name(0x1335F, 'EGYPTIAN HIEROGLYPH U040').
+unicode_name(0x13360, 'EGYPTIAN HIEROGLYPH U041').
+unicode_name(0x13361, 'EGYPTIAN HIEROGLYPH U042').
+unicode_name(0x13362, 'EGYPTIAN HIEROGLYPH V001').
+unicode_name(0x13363, 'EGYPTIAN HIEROGLYPH V001A').
+unicode_name(0x13364, 'EGYPTIAN HIEROGLYPH V001B').
+unicode_name(0x13365, 'EGYPTIAN HIEROGLYPH V001C').
+unicode_name(0x13366, 'EGYPTIAN HIEROGLYPH V001D').
+unicode_name(0x13367, 'EGYPTIAN HIEROGLYPH V001E').
+unicode_name(0x13368, 'EGYPTIAN HIEROGLYPH V001F').
+unicode_name(0x13369, 'EGYPTIAN HIEROGLYPH V001G').
+unicode_name(0x1336A, 'EGYPTIAN HIEROGLYPH V001H').
+unicode_name(0x1336B, 'EGYPTIAN HIEROGLYPH V001I').
+unicode_name(0x1336C, 'EGYPTIAN HIEROGLYPH V002').
+unicode_name(0x1336D, 'EGYPTIAN HIEROGLYPH V002A').
+unicode_name(0x1336E, 'EGYPTIAN HIEROGLYPH V003').
+unicode_name(0x1336F, 'EGYPTIAN HIEROGLYPH V004').
+unicode_name(0x13370, 'EGYPTIAN HIEROGLYPH V005').
+unicode_name(0x13371, 'EGYPTIAN HIEROGLYPH V006').
+unicode_name(0x13372, 'EGYPTIAN HIEROGLYPH V007').
+unicode_name(0x13373, 'EGYPTIAN HIEROGLYPH V007A').
+unicode_name(0x13374, 'EGYPTIAN HIEROGLYPH V007B').
+unicode_name(0x13375, 'EGYPTIAN HIEROGLYPH V008').
+unicode_name(0x13376, 'EGYPTIAN HIEROGLYPH V009').
+unicode_name(0x13377, 'EGYPTIAN HIEROGLYPH V010').
+unicode_name(0x13378, 'EGYPTIAN HIEROGLYPH V011').
+unicode_name(0x13379, 'EGYPTIAN HIEROGLYPH V011A').
+unicode_name(0x1337A, 'EGYPTIAN HIEROGLYPH V011B').
+unicode_name(0x1337B, 'EGYPTIAN HIEROGLYPH V011C').
+unicode_name(0x1337C, 'EGYPTIAN HIEROGLYPH V012').
+unicode_name(0x1337D, 'EGYPTIAN HIEROGLYPH V012A').
+unicode_name(0x1337E, 'EGYPTIAN HIEROGLYPH V012B').
+unicode_name(0x1337F, 'EGYPTIAN HIEROGLYPH V013').
+unicode_name(0x13380, 'EGYPTIAN HIEROGLYPH V014').
+unicode_name(0x13381, 'EGYPTIAN HIEROGLYPH V015').
+unicode_name(0x13382, 'EGYPTIAN HIEROGLYPH V016').
+unicode_name(0x13383, 'EGYPTIAN HIEROGLYPH V017').
+unicode_name(0x13384, 'EGYPTIAN HIEROGLYPH V018').
+unicode_name(0x13385, 'EGYPTIAN HIEROGLYPH V019').
+unicode_name(0x13386, 'EGYPTIAN HIEROGLYPH V020').
+unicode_name(0x13387, 'EGYPTIAN HIEROGLYPH V020A').
+unicode_name(0x13388, 'EGYPTIAN HIEROGLYPH V020B').
+unicode_name(0x13389, 'EGYPTIAN HIEROGLYPH V020C').
+unicode_name(0x1338A, 'EGYPTIAN HIEROGLYPH V020D').
+unicode_name(0x1338B, 'EGYPTIAN HIEROGLYPH V020E').
+unicode_name(0x1338C, 'EGYPTIAN HIEROGLYPH V020F').
+unicode_name(0x1338D, 'EGYPTIAN HIEROGLYPH V020G').
+unicode_name(0x1338E, 'EGYPTIAN HIEROGLYPH V020H').
+unicode_name(0x1338F, 'EGYPTIAN HIEROGLYPH V020I').
+unicode_name(0x13390, 'EGYPTIAN HIEROGLYPH V020J').
+unicode_name(0x13391, 'EGYPTIAN HIEROGLYPH V020K').
+unicode_name(0x13392, 'EGYPTIAN HIEROGLYPH V020L').
+unicode_name(0x13393, 'EGYPTIAN HIEROGLYPH V021').
+unicode_name(0x13394, 'EGYPTIAN HIEROGLYPH V022').
+unicode_name(0x13395, 'EGYPTIAN HIEROGLYPH V023').
+unicode_name(0x13396, 'EGYPTIAN HIEROGLYPH V023A').
+unicode_name(0x13397, 'EGYPTIAN HIEROGLYPH V024').
+unicode_name(0x13398, 'EGYPTIAN HIEROGLYPH V025').
+unicode_name(0x13399, 'EGYPTIAN HIEROGLYPH V026').
+unicode_name(0x1339A, 'EGYPTIAN HIEROGLYPH V027').
+unicode_name(0x1339B, 'EGYPTIAN HIEROGLYPH V028').
+unicode_name(0x1339C, 'EGYPTIAN HIEROGLYPH V028A').
+unicode_name(0x1339D, 'EGYPTIAN HIEROGLYPH V029').
+unicode_name(0x1339E, 'EGYPTIAN HIEROGLYPH V029A').
+unicode_name(0x1339F, 'EGYPTIAN HIEROGLYPH V030').
+unicode_name(0x133A0, 'EGYPTIAN HIEROGLYPH V030A').
+unicode_name(0x133A1, 'EGYPTIAN HIEROGLYPH V031').
+unicode_name(0x133A2, 'EGYPTIAN HIEROGLYPH V031A').
+unicode_name(0x133A3, 'EGYPTIAN HIEROGLYPH V032').
+unicode_name(0x133A4, 'EGYPTIAN HIEROGLYPH V033').
+unicode_name(0x133A5, 'EGYPTIAN HIEROGLYPH V033A').
+unicode_name(0x133A6, 'EGYPTIAN HIEROGLYPH V034').
+unicode_name(0x133A7, 'EGYPTIAN HIEROGLYPH V035').
+unicode_name(0x133A8, 'EGYPTIAN HIEROGLYPH V036').
+unicode_name(0x133A9, 'EGYPTIAN HIEROGLYPH V037').
+unicode_name(0x133AA, 'EGYPTIAN HIEROGLYPH V037A').
+unicode_name(0x133AB, 'EGYPTIAN HIEROGLYPH V038').
+unicode_name(0x133AC, 'EGYPTIAN HIEROGLYPH V039').
+unicode_name(0x133AD, 'EGYPTIAN HIEROGLYPH V040').
+unicode_name(0x133AE, 'EGYPTIAN HIEROGLYPH V040A').
+unicode_name(0x133AF, 'EGYPTIAN HIEROGLYPH W001').
+unicode_name(0x133B0, 'EGYPTIAN HIEROGLYPH W002').
+unicode_name(0x133B1, 'EGYPTIAN HIEROGLYPH W003').
+unicode_name(0x133B2, 'EGYPTIAN HIEROGLYPH W003A').
+unicode_name(0x133B3, 'EGYPTIAN HIEROGLYPH W004').
+unicode_name(0x133B4, 'EGYPTIAN HIEROGLYPH W005').
+unicode_name(0x133B5, 'EGYPTIAN HIEROGLYPH W006').
+unicode_name(0x133B6, 'EGYPTIAN HIEROGLYPH W007').
+unicode_name(0x133B7, 'EGYPTIAN HIEROGLYPH W008').
+unicode_name(0x133B8, 'EGYPTIAN HIEROGLYPH W009').
+unicode_name(0x133B9, 'EGYPTIAN HIEROGLYPH W009A').
+unicode_name(0x133BA, 'EGYPTIAN HIEROGLYPH W010').
+unicode_name(0x133BB, 'EGYPTIAN HIEROGLYPH W010A').
+unicode_name(0x133BC, 'EGYPTIAN HIEROGLYPH W011').
+unicode_name(0x133BD, 'EGYPTIAN HIEROGLYPH W012').
+unicode_name(0x133BE, 'EGYPTIAN HIEROGLYPH W013').
+unicode_name(0x133BF, 'EGYPTIAN HIEROGLYPH W014').
+unicode_name(0x133C0, 'EGYPTIAN HIEROGLYPH W014A').
+unicode_name(0x133C1, 'EGYPTIAN HIEROGLYPH W015').
+unicode_name(0x133C2, 'EGYPTIAN HIEROGLYPH W016').
+unicode_name(0x133C3, 'EGYPTIAN HIEROGLYPH W017').
+unicode_name(0x133C4, 'EGYPTIAN HIEROGLYPH W017A').
+unicode_name(0x133C5, 'EGYPTIAN HIEROGLYPH W018').
+unicode_name(0x133C6, 'EGYPTIAN HIEROGLYPH W018A').
+unicode_name(0x133C7, 'EGYPTIAN HIEROGLYPH W019').
+unicode_name(0x133C8, 'EGYPTIAN HIEROGLYPH W020').
+unicode_name(0x133C9, 'EGYPTIAN HIEROGLYPH W021').
+unicode_name(0x133CA, 'EGYPTIAN HIEROGLYPH W022').
+unicode_name(0x133CB, 'EGYPTIAN HIEROGLYPH W023').
+unicode_name(0x133CC, 'EGYPTIAN HIEROGLYPH W024').
+unicode_name(0x133CD, 'EGYPTIAN HIEROGLYPH W024A').
+unicode_name(0x133CE, 'EGYPTIAN HIEROGLYPH W025').
+unicode_name(0x133CF, 'EGYPTIAN HIEROGLYPH X001').
+unicode_name(0x133D0, 'EGYPTIAN HIEROGLYPH X002').
+unicode_name(0x133D1, 'EGYPTIAN HIEROGLYPH X003').
+unicode_name(0x133D2, 'EGYPTIAN HIEROGLYPH X004').
+unicode_name(0x133D3, 'EGYPTIAN HIEROGLYPH X004A').
+unicode_name(0x133D4, 'EGYPTIAN HIEROGLYPH X004B').
+unicode_name(0x133D5, 'EGYPTIAN HIEROGLYPH X005').
+unicode_name(0x133D6, 'EGYPTIAN HIEROGLYPH X006').
+unicode_name(0x133D7, 'EGYPTIAN HIEROGLYPH X006A').
+unicode_name(0x133D8, 'EGYPTIAN HIEROGLYPH X007').
+unicode_name(0x133D9, 'EGYPTIAN HIEROGLYPH X008').
+unicode_name(0x133DA, 'EGYPTIAN HIEROGLYPH X008A').
+unicode_name(0x133DB, 'EGYPTIAN HIEROGLYPH Y001').
+unicode_name(0x133DC, 'EGYPTIAN HIEROGLYPH Y001A').
+unicode_name(0x133DD, 'EGYPTIAN HIEROGLYPH Y002').
+unicode_name(0x133DE, 'EGYPTIAN HIEROGLYPH Y003').
+unicode_name(0x133DF, 'EGYPTIAN HIEROGLYPH Y004').
+unicode_name(0x133E0, 'EGYPTIAN HIEROGLYPH Y005').
+unicode_name(0x133E1, 'EGYPTIAN HIEROGLYPH Y006').
+unicode_name(0x133E2, 'EGYPTIAN HIEROGLYPH Y007').
+unicode_name(0x133E3, 'EGYPTIAN HIEROGLYPH Y008').
+unicode_name(0x133E4, 'EGYPTIAN HIEROGLYPH Z001').
+unicode_name(0x133E5, 'EGYPTIAN HIEROGLYPH Z002').
+unicode_name(0x133E6, 'EGYPTIAN HIEROGLYPH Z002A').
+unicode_name(0x133E7, 'EGYPTIAN HIEROGLYPH Z002B').
+unicode_name(0x133E8, 'EGYPTIAN HIEROGLYPH Z002C').
+unicode_name(0x133E9, 'EGYPTIAN HIEROGLYPH Z002D').
+unicode_name(0x133EA, 'EGYPTIAN HIEROGLYPH Z003').
+unicode_name(0x133EB, 'EGYPTIAN HIEROGLYPH Z003A').
+unicode_name(0x133EC, 'EGYPTIAN HIEROGLYPH Z003B').
+unicode_name(0x133ED, 'EGYPTIAN HIEROGLYPH Z004').
+unicode_name(0x133EE, 'EGYPTIAN HIEROGLYPH Z004A').
+unicode_name(0x133EF, 'EGYPTIAN HIEROGLYPH Z005').
+unicode_name(0x133F0, 'EGYPTIAN HIEROGLYPH Z005A').
+unicode_name(0x133F1, 'EGYPTIAN HIEROGLYPH Z006').
+unicode_name(0x133F2, 'EGYPTIAN HIEROGLYPH Z007').
+unicode_name(0x133F3, 'EGYPTIAN HIEROGLYPH Z008').
+unicode_name(0x133F4, 'EGYPTIAN HIEROGLYPH Z009').
+unicode_name(0x133F5, 'EGYPTIAN HIEROGLYPH Z010').
+unicode_name(0x133F6, 'EGYPTIAN HIEROGLYPH Z011').
+unicode_name(0x133F7, 'EGYPTIAN HIEROGLYPH Z012').
+unicode_name(0x133F8, 'EGYPTIAN HIEROGLYPH Z013').
+unicode_name(0x133F9, 'EGYPTIAN HIEROGLYPH Z014').
+unicode_name(0x133FA, 'EGYPTIAN HIEROGLYPH Z015').
+unicode_name(0x133FB, 'EGYPTIAN HIEROGLYPH Z015A').
+unicode_name(0x133FC, 'EGYPTIAN HIEROGLYPH Z015B').
+unicode_name(0x133FD, 'EGYPTIAN HIEROGLYPH Z015C').
+unicode_name(0x133FE, 'EGYPTIAN HIEROGLYPH Z015D').
+unicode_name(0x133FF, 'EGYPTIAN HIEROGLYPH Z015E').
+unicode_name(0x13400, 'EGYPTIAN HIEROGLYPH Z015F').
+unicode_name(0x13401, 'EGYPTIAN HIEROGLYPH Z015G').
+unicode_name(0x13402, 'EGYPTIAN HIEROGLYPH Z015H').
+unicode_name(0x13403, 'EGYPTIAN HIEROGLYPH Z015I').
+unicode_name(0x13404, 'EGYPTIAN HIEROGLYPH Z016').
+unicode_name(0x13405, 'EGYPTIAN HIEROGLYPH Z016A').
+unicode_name(0x13406, 'EGYPTIAN HIEROGLYPH Z016B').
+unicode_name(0x13407, 'EGYPTIAN HIEROGLYPH Z016C').
+unicode_name(0x13408, 'EGYPTIAN HIEROGLYPH Z016D').
+unicode_name(0x13409, 'EGYPTIAN HIEROGLYPH Z016E').
+unicode_name(0x1340A, 'EGYPTIAN HIEROGLYPH Z016F').
+unicode_name(0x1340B, 'EGYPTIAN HIEROGLYPH Z016G').
+unicode_name(0x1340C, 'EGYPTIAN HIEROGLYPH Z016H').
+unicode_name(0x1340D, 'EGYPTIAN HIEROGLYPH AA001').
+unicode_name(0x1340E, 'EGYPTIAN HIEROGLYPH AA002').
+unicode_name(0x1340F, 'EGYPTIAN HIEROGLYPH AA003').
+unicode_name(0x13410, 'EGYPTIAN HIEROGLYPH AA004').
+unicode_name(0x13411, 'EGYPTIAN HIEROGLYPH AA005').
+unicode_name(0x13412, 'EGYPTIAN HIEROGLYPH AA006').
+unicode_name(0x13413, 'EGYPTIAN HIEROGLYPH AA007').
+unicode_name(0x13414, 'EGYPTIAN HIEROGLYPH AA007A').
+unicode_name(0x13415, 'EGYPTIAN HIEROGLYPH AA007B').
+unicode_name(0x13416, 'EGYPTIAN HIEROGLYPH AA008').
+unicode_name(0x13417, 'EGYPTIAN HIEROGLYPH AA009').
+unicode_name(0x13418, 'EGYPTIAN HIEROGLYPH AA010').
+unicode_name(0x13419, 'EGYPTIAN HIEROGLYPH AA011').
+unicode_name(0x1341A, 'EGYPTIAN HIEROGLYPH AA012').
+unicode_name(0x1341B, 'EGYPTIAN HIEROGLYPH AA013').
+unicode_name(0x1341C, 'EGYPTIAN HIEROGLYPH AA014').
+unicode_name(0x1341D, 'EGYPTIAN HIEROGLYPH AA015').
+unicode_name(0x1341E, 'EGYPTIAN HIEROGLYPH AA016').
+unicode_name(0x1341F, 'EGYPTIAN HIEROGLYPH AA017').
+unicode_name(0x13420, 'EGYPTIAN HIEROGLYPH AA018').
+unicode_name(0x13421, 'EGYPTIAN HIEROGLYPH AA019').
+unicode_name(0x13422, 'EGYPTIAN HIEROGLYPH AA020').
+unicode_name(0x13423, 'EGYPTIAN HIEROGLYPH AA021').
+unicode_name(0x13424, 'EGYPTIAN HIEROGLYPH AA022').
+unicode_name(0x13425, 'EGYPTIAN HIEROGLYPH AA023').
+unicode_name(0x13426, 'EGYPTIAN HIEROGLYPH AA024').
+unicode_name(0x13427, 'EGYPTIAN HIEROGLYPH AA025').
+unicode_name(0x13428, 'EGYPTIAN HIEROGLYPH AA026').
+unicode_name(0x13429, 'EGYPTIAN HIEROGLYPH AA027').
+unicode_name(0x1342A, 'EGYPTIAN HIEROGLYPH AA028').
+unicode_name(0x1342B, 'EGYPTIAN HIEROGLYPH AA029').
+unicode_name(0x1342C, 'EGYPTIAN HIEROGLYPH AA030').
+unicode_name(0x1342D, 'EGYPTIAN HIEROGLYPH AA031').
+unicode_name(0x1342E, 'EGYPTIAN HIEROGLYPH AA032').
+unicode_name(0x16800, 'BAMUM LETTER PHASE-A NGKUE MFON').
+unicode_name(0x16801, 'BAMUM LETTER PHASE-A GBIEE FON').
+unicode_name(0x16802, 'BAMUM LETTER PHASE-A PON MFON PIPAEMGBIEE').
+unicode_name(0x16803, 'BAMUM LETTER PHASE-A PON MFON PIPAEMBA').
+unicode_name(0x16804, 'BAMUM LETTER PHASE-A NAA MFON').
+unicode_name(0x16805, 'BAMUM LETTER PHASE-A SHUENSHUET').
+unicode_name(0x16806, 'BAMUM LETTER PHASE-A TITA MFON').
+unicode_name(0x16807, 'BAMUM LETTER PHASE-A NZA MFON').
+unicode_name(0x16808, 'BAMUM LETTER PHASE-A SHINDA PA NJI').
+unicode_name(0x16809, 'BAMUM LETTER PHASE-A PON PA NJI PIPAEMGBIEE').
+unicode_name(0x1680A, 'BAMUM LETTER PHASE-A PON PA NJI PIPAEMBA').
+unicode_name(0x1680B, 'BAMUM LETTER PHASE-A MAEMBGBIEE').
+unicode_name(0x1680C, 'BAMUM LETTER PHASE-A TU MAEMBA').
+unicode_name(0x1680D, 'BAMUM LETTER PHASE-A NGANGU').
+unicode_name(0x1680E, 'BAMUM LETTER PHASE-A MAEMVEUX').
+unicode_name(0x1680F, 'BAMUM LETTER PHASE-A MANSUAE').
+unicode_name(0x16810, 'BAMUM LETTER PHASE-A MVEUAENGAM').
+unicode_name(0x16811, 'BAMUM LETTER PHASE-A SEUNYAM').
+unicode_name(0x16812, 'BAMUM LETTER PHASE-A NTOQPEN').
+unicode_name(0x16813, 'BAMUM LETTER PHASE-A KEUKEUTNDA').
+unicode_name(0x16814, 'BAMUM LETTER PHASE-A NKINDI').
+unicode_name(0x16815, 'BAMUM LETTER PHASE-A SUU').
+unicode_name(0x16816, 'BAMUM LETTER PHASE-A NGKUENZEUM').
+unicode_name(0x16817, 'BAMUM LETTER PHASE-A LAPAQ').
+unicode_name(0x16818, 'BAMUM LETTER PHASE-A LET KUT').
+unicode_name(0x16819, 'BAMUM LETTER PHASE-A NTAP MFAA').
+unicode_name(0x1681A, 'BAMUM LETTER PHASE-A MAEKEUP').
+unicode_name(0x1681B, 'BAMUM LETTER PHASE-A PASHAE').
+unicode_name(0x1681C, 'BAMUM LETTER PHASE-A GHEUAERAE').
+unicode_name(0x1681D, 'BAMUM LETTER PHASE-A PAMSHAE').
+unicode_name(0x1681E, 'BAMUM LETTER PHASE-A MON NGGEUAET').
+unicode_name(0x1681F, 'BAMUM LETTER PHASE-A NZUN MEUT').
+unicode_name(0x16820, 'BAMUM LETTER PHASE-A U YUQ NAE').
+unicode_name(0x16821, 'BAMUM LETTER PHASE-A GHEUAEGHEUAE').
+unicode_name(0x16822, 'BAMUM LETTER PHASE-A NTAP NTAA').
+unicode_name(0x16823, 'BAMUM LETTER PHASE-A SISA').
+unicode_name(0x16824, 'BAMUM LETTER PHASE-A MGBASA').
+unicode_name(0x16825, 'BAMUM LETTER PHASE-A MEUNJOMNDEUQ').
+unicode_name(0x16826, 'BAMUM LETTER PHASE-A MOOMPUQ').
+unicode_name(0x16827, 'BAMUM LETTER PHASE-A KAFA').
+unicode_name(0x16828, 'BAMUM LETTER PHASE-A PA LEERAEWA').
+unicode_name(0x16829, 'BAMUM LETTER PHASE-A NDA LEERAEWA').
+unicode_name(0x1682A, 'BAMUM LETTER PHASE-A PET').
+unicode_name(0x1682B, 'BAMUM LETTER PHASE-A MAEMKPEN').
+unicode_name(0x1682C, 'BAMUM LETTER PHASE-A NIKA').
+unicode_name(0x1682D, 'BAMUM LETTER PHASE-A PUP').
+unicode_name(0x1682E, 'BAMUM LETTER PHASE-A TUAEP').
+unicode_name(0x1682F, 'BAMUM LETTER PHASE-A LUAEP').
+unicode_name(0x16830, 'BAMUM LETTER PHASE-A SONJAM').
+unicode_name(0x16831, 'BAMUM LETTER PHASE-A TEUTEUWEN').
+unicode_name(0x16832, 'BAMUM LETTER PHASE-A MAENYI').
+unicode_name(0x16833, 'BAMUM LETTER PHASE-A KET').
+unicode_name(0x16834, 'BAMUM LETTER PHASE-A NDAANGGEUAET').
+unicode_name(0x16835, 'BAMUM LETTER PHASE-A KUOQ').
+unicode_name(0x16836, 'BAMUM LETTER PHASE-A MOOMEUT').
+unicode_name(0x16837, 'BAMUM LETTER PHASE-A SHUM').
+unicode_name(0x16838, 'BAMUM LETTER PHASE-A LOMMAE').
+unicode_name(0x16839, 'BAMUM LETTER PHASE-A FIRI').
+unicode_name(0x1683A, 'BAMUM LETTER PHASE-A ROM').
+unicode_name(0x1683B, 'BAMUM LETTER PHASE-A KPOQ').
+unicode_name(0x1683C, 'BAMUM LETTER PHASE-A SOQ').
+unicode_name(0x1683D, 'BAMUM LETTER PHASE-A MAP PIEET').
+unicode_name(0x1683E, 'BAMUM LETTER PHASE-A SHIRAE').
+unicode_name(0x1683F, 'BAMUM LETTER PHASE-A NTAP').
+unicode_name(0x16840, 'BAMUM LETTER PHASE-A SHOQ NSHUT YUM').
+unicode_name(0x16841, 'BAMUM LETTER PHASE-A NYIT MONGKEUAEQ').
+unicode_name(0x16842, 'BAMUM LETTER PHASE-A PAARAE').
+unicode_name(0x16843, 'BAMUM LETTER PHASE-A NKAARAE').
+unicode_name(0x16844, 'BAMUM LETTER PHASE-A UNKNOWN').
+unicode_name(0x16845, 'BAMUM LETTER PHASE-A NGGEN').
+unicode_name(0x16846, 'BAMUM LETTER PHASE-A MAESI').
+unicode_name(0x16847, 'BAMUM LETTER PHASE-A NJAM').
+unicode_name(0x16848, 'BAMUM LETTER PHASE-A MBANYI').
+unicode_name(0x16849, 'BAMUM LETTER PHASE-A NYET').
+unicode_name(0x1684A, 'BAMUM LETTER PHASE-A TEUAEN').
+unicode_name(0x1684B, 'BAMUM LETTER PHASE-A SOT').
+unicode_name(0x1684C, 'BAMUM LETTER PHASE-A PAAM').
+unicode_name(0x1684D, 'BAMUM LETTER PHASE-A NSHIEE').
+unicode_name(0x1684E, 'BAMUM LETTER PHASE-A MAEM').
+unicode_name(0x1684F, 'BAMUM LETTER PHASE-A NYI').
+unicode_name(0x16850, 'BAMUM LETTER PHASE-A KAQ').
+unicode_name(0x16851, 'BAMUM LETTER PHASE-A NSHA').
+unicode_name(0x16852, 'BAMUM LETTER PHASE-A VEE').
+unicode_name(0x16853, 'BAMUM LETTER PHASE-A LU').
+unicode_name(0x16854, 'BAMUM LETTER PHASE-A NEN').
+unicode_name(0x16855, 'BAMUM LETTER PHASE-A NAQ').
+unicode_name(0x16856, 'BAMUM LETTER PHASE-A MBAQ').
+unicode_name(0x16857, 'BAMUM LETTER PHASE-B NSHUET').
+unicode_name(0x16858, 'BAMUM LETTER PHASE-B TU MAEMGBIEE').
+unicode_name(0x16859, 'BAMUM LETTER PHASE-B SIEE').
+unicode_name(0x1685A, 'BAMUM LETTER PHASE-B SET TU').
+unicode_name(0x1685B, 'BAMUM LETTER PHASE-B LOM NTEUM').
+unicode_name(0x1685C, 'BAMUM LETTER PHASE-B MBA MAELEE').
+unicode_name(0x1685D, 'BAMUM LETTER PHASE-B KIEEM').
+unicode_name(0x1685E, 'BAMUM LETTER PHASE-B YEURAE').
+unicode_name(0x1685F, 'BAMUM LETTER PHASE-B MBAARAE').
+unicode_name(0x16860, 'BAMUM LETTER PHASE-B KAM').
+unicode_name(0x16861, 'BAMUM LETTER PHASE-B PEESHI').
+unicode_name(0x16862, 'BAMUM LETTER PHASE-B YAFU LEERAEWA').
+unicode_name(0x16863, 'BAMUM LETTER PHASE-B LAM NSHUT NYAM').
+unicode_name(0x16864, 'BAMUM LETTER PHASE-B NTIEE SHEUOQ').
+unicode_name(0x16865, 'BAMUM LETTER PHASE-B NDU NJAA').
+unicode_name(0x16866, 'BAMUM LETTER PHASE-B GHEUGHEUAEM').
+unicode_name(0x16867, 'BAMUM LETTER PHASE-B PIT').
+unicode_name(0x16868, 'BAMUM LETTER PHASE-B TU NSIEE').
+unicode_name(0x16869, 'BAMUM LETTER PHASE-B SHET NJAQ').
+unicode_name(0x1686A, 'BAMUM LETTER PHASE-B SHEUAEQTU').
+unicode_name(0x1686B, 'BAMUM LETTER PHASE-B MFON TEUAEQ').
+unicode_name(0x1686C, 'BAMUM LETTER PHASE-B MBIT MBAAKET').
+unicode_name(0x1686D, 'BAMUM LETTER PHASE-B NYI NTEUM').
+unicode_name(0x1686E, 'BAMUM LETTER PHASE-B KEUPUQ').
+unicode_name(0x1686F, 'BAMUM LETTER PHASE-B GHEUGHEN').
+unicode_name(0x16870, 'BAMUM LETTER PHASE-B KEUYEUX').
+unicode_name(0x16871, 'BAMUM LETTER PHASE-B LAANAE').
+unicode_name(0x16872, 'BAMUM LETTER PHASE-B PARUM').
+unicode_name(0x16873, 'BAMUM LETTER PHASE-B VEUM').
+unicode_name(0x16874, 'BAMUM LETTER PHASE-B NGKINDI MVOP').
+unicode_name(0x16875, 'BAMUM LETTER PHASE-B NGGEU MBU').
+unicode_name(0x16876, 'BAMUM LETTER PHASE-B WUAET').
+unicode_name(0x16877, 'BAMUM LETTER PHASE-B SAKEUAE').
+unicode_name(0x16878, 'BAMUM LETTER PHASE-B TAAM').
+unicode_name(0x16879, 'BAMUM LETTER PHASE-B MEUQ').
+unicode_name(0x1687A, 'BAMUM LETTER PHASE-B NGGUOQ').
+unicode_name(0x1687B, 'BAMUM LETTER PHASE-B NGGUOQ LARGE').
+unicode_name(0x1687C, 'BAMUM LETTER PHASE-B MFIYAQ').
+unicode_name(0x1687D, 'BAMUM LETTER PHASE-B SUE').
+unicode_name(0x1687E, 'BAMUM LETTER PHASE-B MBEURI').
+unicode_name(0x1687F, 'BAMUM LETTER PHASE-B MONTIEEN').
+unicode_name(0x16880, 'BAMUM LETTER PHASE-B NYAEMAE').
+unicode_name(0x16881, 'BAMUM LETTER PHASE-B PUNGAAM').
+unicode_name(0x16882, 'BAMUM LETTER PHASE-B MEUT NGGEET').
+unicode_name(0x16883, 'BAMUM LETTER PHASE-B FEUX').
+unicode_name(0x16884, 'BAMUM LETTER PHASE-B MBUOQ').
+unicode_name(0x16885, 'BAMUM LETTER PHASE-B FEE').
+unicode_name(0x16886, 'BAMUM LETTER PHASE-B KEUAEM').
+unicode_name(0x16887, 'BAMUM LETTER PHASE-B MA NJEUAENA').
+unicode_name(0x16888, 'BAMUM LETTER PHASE-B MA NJUQA').
+unicode_name(0x16889, 'BAMUM LETTER PHASE-B LET').
+unicode_name(0x1688A, 'BAMUM LETTER PHASE-B NGGAAM').
+unicode_name(0x1688B, 'BAMUM LETTER PHASE-B NSEN').
+unicode_name(0x1688C, 'BAMUM LETTER PHASE-B MA').
+unicode_name(0x1688D, 'BAMUM LETTER PHASE-B KIQ').
+unicode_name(0x1688E, 'BAMUM LETTER PHASE-B NGOM').
+unicode_name(0x1688F, 'BAMUM LETTER PHASE-C NGKUE MAEMBA').
+unicode_name(0x16890, 'BAMUM LETTER PHASE-C NZA').
+unicode_name(0x16891, 'BAMUM LETTER PHASE-C YUM').
+unicode_name(0x16892, 'BAMUM LETTER PHASE-C WANGKUOQ').
+unicode_name(0x16893, 'BAMUM LETTER PHASE-C NGGEN').
+unicode_name(0x16894, 'BAMUM LETTER PHASE-C NDEUAEREE').
+unicode_name(0x16895, 'BAMUM LETTER PHASE-C NGKAQ').
+unicode_name(0x16896, 'BAMUM LETTER PHASE-C GHARAE').
+unicode_name(0x16897, 'BAMUM LETTER PHASE-C MBEEKEET').
+unicode_name(0x16898, 'BAMUM LETTER PHASE-C GBAYI').
+unicode_name(0x16899, 'BAMUM LETTER PHASE-C NYIR MKPARAQ MEUN').
+unicode_name(0x1689A, 'BAMUM LETTER PHASE-C NTU MBIT').
+unicode_name(0x1689B, 'BAMUM LETTER PHASE-C MBEUM').
+unicode_name(0x1689C, 'BAMUM LETTER PHASE-C PIRIEEN').
+unicode_name(0x1689D, 'BAMUM LETTER PHASE-C NDOMBU').
+unicode_name(0x1689E, 'BAMUM LETTER PHASE-C MBAA CABBAGE-TREE').
+unicode_name(0x1689F, 'BAMUM LETTER PHASE-C KEUSHEUAEP').
+unicode_name(0x168A0, 'BAMUM LETTER PHASE-C GHAP').
+unicode_name(0x168A1, 'BAMUM LETTER PHASE-C KEUKAQ').
+unicode_name(0x168A2, 'BAMUM LETTER PHASE-C YU MUOMAE').
+unicode_name(0x168A3, 'BAMUM LETTER PHASE-C NZEUM').
+unicode_name(0x168A4, 'BAMUM LETTER PHASE-C MBUE').
+unicode_name(0x168A5, 'BAMUM LETTER PHASE-C NSEUAEN').
+unicode_name(0x168A6, 'BAMUM LETTER PHASE-C MBIT').
+unicode_name(0x168A7, 'BAMUM LETTER PHASE-C YEUQ').
+unicode_name(0x168A8, 'BAMUM LETTER PHASE-C KPARAQ').
+unicode_name(0x168A9, 'BAMUM LETTER PHASE-C KAA').
+unicode_name(0x168AA, 'BAMUM LETTER PHASE-C SEUX').
+unicode_name(0x168AB, 'BAMUM LETTER PHASE-C NDIDA').
+unicode_name(0x168AC, 'BAMUM LETTER PHASE-C TAASHAE').
+unicode_name(0x168AD, 'BAMUM LETTER PHASE-C NJUEQ').
+unicode_name(0x168AE, 'BAMUM LETTER PHASE-C TITA YUE').
+unicode_name(0x168AF, 'BAMUM LETTER PHASE-C SUAET').
+unicode_name(0x168B0, 'BAMUM LETTER PHASE-C NGGUAEN NYAM').
+unicode_name(0x168B1, 'BAMUM LETTER PHASE-C VEUX').
+unicode_name(0x168B2, 'BAMUM LETTER PHASE-C NANSANAQ').
+unicode_name(0x168B3, 'BAMUM LETTER PHASE-C MA KEUAERI').
+unicode_name(0x168B4, 'BAMUM LETTER PHASE-C NTAA').
+unicode_name(0x168B5, 'BAMUM LETTER PHASE-C NGGUON').
+unicode_name(0x168B6, 'BAMUM LETTER PHASE-C LAP').
+unicode_name(0x168B7, 'BAMUM LETTER PHASE-C MBIRIEEN').
+unicode_name(0x168B8, 'BAMUM LETTER PHASE-C MGBASAQ').
+unicode_name(0x168B9, 'BAMUM LETTER PHASE-C NTEUNGBA').
+unicode_name(0x168BA, 'BAMUM LETTER PHASE-C TEUTEUX').
+unicode_name(0x168BB, 'BAMUM LETTER PHASE-C NGGUM').
+unicode_name(0x168BC, 'BAMUM LETTER PHASE-C FUE').
+unicode_name(0x168BD, 'BAMUM LETTER PHASE-C NDEUT').
+unicode_name(0x168BE, 'BAMUM LETTER PHASE-C NSA').
+unicode_name(0x168BF, 'BAMUM LETTER PHASE-C NSHAQ').
+unicode_name(0x168C0, 'BAMUM LETTER PHASE-C BUNG').
+unicode_name(0x168C1, 'BAMUM LETTER PHASE-C VEUAEPEN').
+unicode_name(0x168C2, 'BAMUM LETTER PHASE-C MBERAE').
+unicode_name(0x168C3, 'BAMUM LETTER PHASE-C RU').
+unicode_name(0x168C4, 'BAMUM LETTER PHASE-C NJAEM').
+unicode_name(0x168C5, 'BAMUM LETTER PHASE-C LAM').
+unicode_name(0x168C6, 'BAMUM LETTER PHASE-C TITUAEP').
+unicode_name(0x168C7, 'BAMUM LETTER PHASE-C NSUOT NGOM').
+unicode_name(0x168C8, 'BAMUM LETTER PHASE-C NJEEEE').
+unicode_name(0x168C9, 'BAMUM LETTER PHASE-C KET').
+unicode_name(0x168CA, 'BAMUM LETTER PHASE-C NGGU').
+unicode_name(0x168CB, 'BAMUM LETTER PHASE-C MAESI').
+unicode_name(0x168CC, 'BAMUM LETTER PHASE-C MBUAEM').
+unicode_name(0x168CD, 'BAMUM LETTER PHASE-C LU').
+unicode_name(0x168CE, 'BAMUM LETTER PHASE-C KUT').
+unicode_name(0x168CF, 'BAMUM LETTER PHASE-C NJAM').
+unicode_name(0x168D0, 'BAMUM LETTER PHASE-C NGOM').
+unicode_name(0x168D1, 'BAMUM LETTER PHASE-C WUP').
+unicode_name(0x168D2, 'BAMUM LETTER PHASE-C NGGUEET').
+unicode_name(0x168D3, 'BAMUM LETTER PHASE-C NSOM').
+unicode_name(0x168D4, 'BAMUM LETTER PHASE-C NTEN').
+unicode_name(0x168D5, 'BAMUM LETTER PHASE-C KUOP NKAARAE').
+unicode_name(0x168D6, 'BAMUM LETTER PHASE-C NSUN').
+unicode_name(0x168D7, 'BAMUM LETTER PHASE-C NDAM').
+unicode_name(0x168D8, 'BAMUM LETTER PHASE-C MA NSIEE').
+unicode_name(0x168D9, 'BAMUM LETTER PHASE-C YAA').
+unicode_name(0x168DA, 'BAMUM LETTER PHASE-C NDAP').
+unicode_name(0x168DB, 'BAMUM LETTER PHASE-C SHUEQ').
+unicode_name(0x168DC, 'BAMUM LETTER PHASE-C SETFON').
+unicode_name(0x168DD, 'BAMUM LETTER PHASE-C MBI').
+unicode_name(0x168DE, 'BAMUM LETTER PHASE-C MAEMBA').
+unicode_name(0x168DF, 'BAMUM LETTER PHASE-C MBANYI').
+unicode_name(0x168E0, 'BAMUM LETTER PHASE-C KEUSEUX').
+unicode_name(0x168E1, 'BAMUM LETTER PHASE-C MBEUX').
+unicode_name(0x168E2, 'BAMUM LETTER PHASE-C KEUM').
+unicode_name(0x168E3, 'BAMUM LETTER PHASE-C MBAA PICKET').
+unicode_name(0x168E4, 'BAMUM LETTER PHASE-C YUWOQ').
+unicode_name(0x168E5, 'BAMUM LETTER PHASE-C NJEUX').
+unicode_name(0x168E6, 'BAMUM LETTER PHASE-C MIEE').
+unicode_name(0x168E7, 'BAMUM LETTER PHASE-C MUAE').
+unicode_name(0x168E8, 'BAMUM LETTER PHASE-C SHIQ').
+unicode_name(0x168E9, 'BAMUM LETTER PHASE-C KEN LAW').
+unicode_name(0x168EA, 'BAMUM LETTER PHASE-C KEN FATIGUE').
+unicode_name(0x168EB, 'BAMUM LETTER PHASE-C NGAQ').
+unicode_name(0x168EC, 'BAMUM LETTER PHASE-C NAQ').
+unicode_name(0x168ED, 'BAMUM LETTER PHASE-C LIQ').
+unicode_name(0x168EE, 'BAMUM LETTER PHASE-C PIN').
+unicode_name(0x168EF, 'BAMUM LETTER PHASE-C PEN').
+unicode_name(0x168F0, 'BAMUM LETTER PHASE-C TET').
+unicode_name(0x168F1, 'BAMUM LETTER PHASE-D MBUO').
+unicode_name(0x168F2, 'BAMUM LETTER PHASE-D WAP').
+unicode_name(0x168F3, 'BAMUM LETTER PHASE-D NJI').
+unicode_name(0x168F4, 'BAMUM LETTER PHASE-D MFON').
+unicode_name(0x168F5, 'BAMUM LETTER PHASE-D NJIEE').
+unicode_name(0x168F6, 'BAMUM LETTER PHASE-D LIEE').
+unicode_name(0x168F7, 'BAMUM LETTER PHASE-D NJEUT').
+unicode_name(0x168F8, 'BAMUM LETTER PHASE-D NSHEE').
+unicode_name(0x168F9, 'BAMUM LETTER PHASE-D NGGAAMAE').
+unicode_name(0x168FA, 'BAMUM LETTER PHASE-D NYAM').
+unicode_name(0x168FB, 'BAMUM LETTER PHASE-D WUAEN').
+unicode_name(0x168FC, 'BAMUM LETTER PHASE-D NGKUN').
+unicode_name(0x168FD, 'BAMUM LETTER PHASE-D SHEE').
+unicode_name(0x168FE, 'BAMUM LETTER PHASE-D NGKAP').
+unicode_name(0x168FF, 'BAMUM LETTER PHASE-D KEUAETMEUN').
+unicode_name(0x16900, 'BAMUM LETTER PHASE-D TEUT').
+unicode_name(0x16901, 'BAMUM LETTER PHASE-D SHEUAE').
+unicode_name(0x16902, 'BAMUM LETTER PHASE-D NJAP').
+unicode_name(0x16903, 'BAMUM LETTER PHASE-D SUE').
+unicode_name(0x16904, 'BAMUM LETTER PHASE-D KET').
+unicode_name(0x16905, 'BAMUM LETTER PHASE-D YAEMMAE').
+unicode_name(0x16906, 'BAMUM LETTER PHASE-D KUOM').
+unicode_name(0x16907, 'BAMUM LETTER PHASE-D SAP').
+unicode_name(0x16908, 'BAMUM LETTER PHASE-D MFEUT').
+unicode_name(0x16909, 'BAMUM LETTER PHASE-D NDEUX').
+unicode_name(0x1690A, 'BAMUM LETTER PHASE-D MALEERI').
+unicode_name(0x1690B, 'BAMUM LETTER PHASE-D MEUT').
+unicode_name(0x1690C, 'BAMUM LETTER PHASE-D SEUAEQ').
+unicode_name(0x1690D, 'BAMUM LETTER PHASE-D YEN').
+unicode_name(0x1690E, 'BAMUM LETTER PHASE-D NJEUAEM').
+unicode_name(0x1690F, 'BAMUM LETTER PHASE-D KEUOT MBUAE').
+unicode_name(0x16910, 'BAMUM LETTER PHASE-D NGKEURI').
+unicode_name(0x16911, 'BAMUM LETTER PHASE-D TU').
+unicode_name(0x16912, 'BAMUM LETTER PHASE-D GHAA').
+unicode_name(0x16913, 'BAMUM LETTER PHASE-D NGKYEE').
+unicode_name(0x16914, 'BAMUM LETTER PHASE-D FEUFEUAET').
+unicode_name(0x16915, 'BAMUM LETTER PHASE-D NDEE').
+unicode_name(0x16916, 'BAMUM LETTER PHASE-D MGBOFUM').
+unicode_name(0x16917, 'BAMUM LETTER PHASE-D LEUAEP').
+unicode_name(0x16918, 'BAMUM LETTER PHASE-D NDON').
+unicode_name(0x16919, 'BAMUM LETTER PHASE-D MONI').
+unicode_name(0x1691A, 'BAMUM LETTER PHASE-D MGBEUN').
+unicode_name(0x1691B, 'BAMUM LETTER PHASE-D PUUT').
+unicode_name(0x1691C, 'BAMUM LETTER PHASE-D MGBIEE').
+unicode_name(0x1691D, 'BAMUM LETTER PHASE-D MFO').
+unicode_name(0x1691E, 'BAMUM LETTER PHASE-D LUM').
+unicode_name(0x1691F, 'BAMUM LETTER PHASE-D NSIEEP').
+unicode_name(0x16920, 'BAMUM LETTER PHASE-D MBAA').
+unicode_name(0x16921, 'BAMUM LETTER PHASE-D KWAET').
+unicode_name(0x16922, 'BAMUM LETTER PHASE-D NYET').
+unicode_name(0x16923, 'BAMUM LETTER PHASE-D TEUAEN').
+unicode_name(0x16924, 'BAMUM LETTER PHASE-D SOT').
+unicode_name(0x16925, 'BAMUM LETTER PHASE-D YUWOQ').
+unicode_name(0x16926, 'BAMUM LETTER PHASE-D KEUM').
+unicode_name(0x16927, 'BAMUM LETTER PHASE-D RAEM').
+unicode_name(0x16928, 'BAMUM LETTER PHASE-D TEEEE').
+unicode_name(0x16929, 'BAMUM LETTER PHASE-D NGKEUAEQ').
+unicode_name(0x1692A, 'BAMUM LETTER PHASE-D MFEUAE').
+unicode_name(0x1692B, 'BAMUM LETTER PHASE-D NSIEET').
+unicode_name(0x1692C, 'BAMUM LETTER PHASE-D KEUP').
+unicode_name(0x1692D, 'BAMUM LETTER PHASE-D PIP').
+unicode_name(0x1692E, 'BAMUM LETTER PHASE-D PEUTAE').
+unicode_name(0x1692F, 'BAMUM LETTER PHASE-D NYUE').
+unicode_name(0x16930, 'BAMUM LETTER PHASE-D LET').
+unicode_name(0x16931, 'BAMUM LETTER PHASE-D NGGAAM').
+unicode_name(0x16932, 'BAMUM LETTER PHASE-D MFIEE').
+unicode_name(0x16933, 'BAMUM LETTER PHASE-D NGGWAEN').
+unicode_name(0x16934, 'BAMUM LETTER PHASE-D YUOM').
+unicode_name(0x16935, 'BAMUM LETTER PHASE-D PAP').
+unicode_name(0x16936, 'BAMUM LETTER PHASE-D YUOP').
+unicode_name(0x16937, 'BAMUM LETTER PHASE-D NDAM').
+unicode_name(0x16938, 'BAMUM LETTER PHASE-D NTEUM').
+unicode_name(0x16939, 'BAMUM LETTER PHASE-D SUAE').
+unicode_name(0x1693A, 'BAMUM LETTER PHASE-D KUN').
+unicode_name(0x1693B, 'BAMUM LETTER PHASE-D NGGEUX').
+unicode_name(0x1693C, 'BAMUM LETTER PHASE-D NGKIEE').
+unicode_name(0x1693D, 'BAMUM LETTER PHASE-D TUOT').
+unicode_name(0x1693E, 'BAMUM LETTER PHASE-D MEUN').
+unicode_name(0x1693F, 'BAMUM LETTER PHASE-D KUQ').
+unicode_name(0x16940, 'BAMUM LETTER PHASE-D NSUM').
+unicode_name(0x16941, 'BAMUM LETTER PHASE-D TEUN').
+unicode_name(0x16942, 'BAMUM LETTER PHASE-D MAENJET').
+unicode_name(0x16943, 'BAMUM LETTER PHASE-D NGGAP').
+unicode_name(0x16944, 'BAMUM LETTER PHASE-D LEUM').
+unicode_name(0x16945, 'BAMUM LETTER PHASE-D NGGUOM').
+unicode_name(0x16946, 'BAMUM LETTER PHASE-D NSHUT').
+unicode_name(0x16947, 'BAMUM LETTER PHASE-D NJUEQ').
+unicode_name(0x16948, 'BAMUM LETTER PHASE-D GHEUAE').
+unicode_name(0x16949, 'BAMUM LETTER PHASE-D KU').
+unicode_name(0x1694A, 'BAMUM LETTER PHASE-D REN OLD').
+unicode_name(0x1694B, 'BAMUM LETTER PHASE-D TAE').
+unicode_name(0x1694C, 'BAMUM LETTER PHASE-D TOQ').
+unicode_name(0x1694D, 'BAMUM LETTER PHASE-D NYI').
+unicode_name(0x1694E, 'BAMUM LETTER PHASE-D RII').
+unicode_name(0x1694F, 'BAMUM LETTER PHASE-D LEEEE').
+unicode_name(0x16950, 'BAMUM LETTER PHASE-D MEEEE').
+unicode_name(0x16951, 'BAMUM LETTER PHASE-D M').
+unicode_name(0x16952, 'BAMUM LETTER PHASE-D SUU').
+unicode_name(0x16953, 'BAMUM LETTER PHASE-D MU').
+unicode_name(0x16954, 'BAMUM LETTER PHASE-D SHII').
+unicode_name(0x16955, 'BAMUM LETTER PHASE-D SHEUX').
+unicode_name(0x16956, 'BAMUM LETTER PHASE-D KYEE').
+unicode_name(0x16957, 'BAMUM LETTER PHASE-D NU').
+unicode_name(0x16958, 'BAMUM LETTER PHASE-D SHU').
+unicode_name(0x16959, 'BAMUM LETTER PHASE-D NTEE').
+unicode_name(0x1695A, 'BAMUM LETTER PHASE-D PEE').
+unicode_name(0x1695B, 'BAMUM LETTER PHASE-D NI').
+unicode_name(0x1695C, 'BAMUM LETTER PHASE-D SHOQ').
+unicode_name(0x1695D, 'BAMUM LETTER PHASE-D PUQ').
+unicode_name(0x1695E, 'BAMUM LETTER PHASE-D MVOP').
+unicode_name(0x1695F, 'BAMUM LETTER PHASE-D LOQ').
+unicode_name(0x16960, 'BAMUM LETTER PHASE-D REN MUCH').
+unicode_name(0x16961, 'BAMUM LETTER PHASE-D TI').
+unicode_name(0x16962, 'BAMUM LETTER PHASE-D NTUU').
+unicode_name(0x16963, 'BAMUM LETTER PHASE-D MBAA SEVEN').
+unicode_name(0x16964, 'BAMUM LETTER PHASE-D SAQ').
+unicode_name(0x16965, 'BAMUM LETTER PHASE-D FAA').
+unicode_name(0x16966, 'BAMUM LETTER PHASE-E NDAP').
+unicode_name(0x16967, 'BAMUM LETTER PHASE-E TOON').
+unicode_name(0x16968, 'BAMUM LETTER PHASE-E MBEUM').
+unicode_name(0x16969, 'BAMUM LETTER PHASE-E LAP').
+unicode_name(0x1696A, 'BAMUM LETTER PHASE-E VOM').
+unicode_name(0x1696B, 'BAMUM LETTER PHASE-E LOON').
+unicode_name(0x1696C, 'BAMUM LETTER PHASE-E PAA').
+unicode_name(0x1696D, 'BAMUM LETTER PHASE-E SOM').
+unicode_name(0x1696E, 'BAMUM LETTER PHASE-E RAQ').
+unicode_name(0x1696F, 'BAMUM LETTER PHASE-E NSHUOP').
+unicode_name(0x16970, 'BAMUM LETTER PHASE-E NDUN').
+unicode_name(0x16971, 'BAMUM LETTER PHASE-E PUAE').
+unicode_name(0x16972, 'BAMUM LETTER PHASE-E TAM').
+unicode_name(0x16973, 'BAMUM LETTER PHASE-E NGKA').
+unicode_name(0x16974, 'BAMUM LETTER PHASE-E KPEUX').
+unicode_name(0x16975, 'BAMUM LETTER PHASE-E WUO').
+unicode_name(0x16976, 'BAMUM LETTER PHASE-E SEE').
+unicode_name(0x16977, 'BAMUM LETTER PHASE-E NGGEUAET').
+unicode_name(0x16978, 'BAMUM LETTER PHASE-E PAAM').
+unicode_name(0x16979, 'BAMUM LETTER PHASE-E TOO').
+unicode_name(0x1697A, 'BAMUM LETTER PHASE-E KUOP').
+unicode_name(0x1697B, 'BAMUM LETTER PHASE-E LOM').
+unicode_name(0x1697C, 'BAMUM LETTER PHASE-E NSHIEE').
+unicode_name(0x1697D, 'BAMUM LETTER PHASE-E NGOP').
+unicode_name(0x1697E, 'BAMUM LETTER PHASE-E MAEM').
+unicode_name(0x1697F, 'BAMUM LETTER PHASE-E NGKEUX').
+unicode_name(0x16980, 'BAMUM LETTER PHASE-E NGOQ').
+unicode_name(0x16981, 'BAMUM LETTER PHASE-E NSHUE').
+unicode_name(0x16982, 'BAMUM LETTER PHASE-E RIMGBA').
+unicode_name(0x16983, 'BAMUM LETTER PHASE-E NJEUX').
+unicode_name(0x16984, 'BAMUM LETTER PHASE-E PEEM').
+unicode_name(0x16985, 'BAMUM LETTER PHASE-E SAA').
+unicode_name(0x16986, 'BAMUM LETTER PHASE-E NGGURAE').
+unicode_name(0x16987, 'BAMUM LETTER PHASE-E MGBA').
+unicode_name(0x16988, 'BAMUM LETTER PHASE-E GHEUX').
+unicode_name(0x16989, 'BAMUM LETTER PHASE-E NGKEUAEM').
+unicode_name(0x1698A, 'BAMUM LETTER PHASE-E NJAEMLI').
+unicode_name(0x1698B, 'BAMUM LETTER PHASE-E MAP').
+unicode_name(0x1698C, 'BAMUM LETTER PHASE-E LOOT').
+unicode_name(0x1698D, 'BAMUM LETTER PHASE-E NGGEEEE').
+unicode_name(0x1698E, 'BAMUM LETTER PHASE-E NDIQ').
+unicode_name(0x1698F, 'BAMUM LETTER PHASE-E TAEN NTEUM').
+unicode_name(0x16990, 'BAMUM LETTER PHASE-E SET').
+unicode_name(0x16991, 'BAMUM LETTER PHASE-E PUM').
+unicode_name(0x16992, 'BAMUM LETTER PHASE-E NDAA SOFTNESS').
+unicode_name(0x16993, 'BAMUM LETTER PHASE-E NGGUAESHAE NYAM').
+unicode_name(0x16994, 'BAMUM LETTER PHASE-E YIEE').
+unicode_name(0x16995, 'BAMUM LETTER PHASE-E GHEUN').
+unicode_name(0x16996, 'BAMUM LETTER PHASE-E TUAE').
+unicode_name(0x16997, 'BAMUM LETTER PHASE-E YEUAE').
+unicode_name(0x16998, 'BAMUM LETTER PHASE-E PO').
+unicode_name(0x16999, 'BAMUM LETTER PHASE-E TUMAE').
+unicode_name(0x1699A, 'BAMUM LETTER PHASE-E KEUAE').
+unicode_name(0x1699B, 'BAMUM LETTER PHASE-E SUAEN').
+unicode_name(0x1699C, 'BAMUM LETTER PHASE-E TEUAEQ').
+unicode_name(0x1699D, 'BAMUM LETTER PHASE-E VEUAE').
+unicode_name(0x1699E, 'BAMUM LETTER PHASE-E WEUX').
+unicode_name(0x1699F, 'BAMUM LETTER PHASE-E LAAM').
+unicode_name(0x169A0, 'BAMUM LETTER PHASE-E PU').
+unicode_name(0x169A1, 'BAMUM LETTER PHASE-E TAAQ').
+unicode_name(0x169A2, 'BAMUM LETTER PHASE-E GHAAMAE').
+unicode_name(0x169A3, 'BAMUM LETTER PHASE-E NGEUREUT').
+unicode_name(0x169A4, 'BAMUM LETTER PHASE-E SHEUAEQ').
+unicode_name(0x169A5, 'BAMUM LETTER PHASE-E MGBEN').
+unicode_name(0x169A6, 'BAMUM LETTER PHASE-E MBEE').
+unicode_name(0x169A7, 'BAMUM LETTER PHASE-E NZAQ').
+unicode_name(0x169A8, 'BAMUM LETTER PHASE-E NKOM').
+unicode_name(0x169A9, 'BAMUM LETTER PHASE-E GBET').
+unicode_name(0x169AA, 'BAMUM LETTER PHASE-E TUM').
+unicode_name(0x169AB, 'BAMUM LETTER PHASE-E KUET').
+unicode_name(0x169AC, 'BAMUM LETTER PHASE-E YAP').
+unicode_name(0x169AD, 'BAMUM LETTER PHASE-E NYI CLEAVER').
+unicode_name(0x169AE, 'BAMUM LETTER PHASE-E YIT').
+unicode_name(0x169AF, 'BAMUM LETTER PHASE-E MFEUQ').
+unicode_name(0x169B0, 'BAMUM LETTER PHASE-E NDIAQ').
+unicode_name(0x169B1, 'BAMUM LETTER PHASE-E PIEEQ').
+unicode_name(0x169B2, 'BAMUM LETTER PHASE-E YUEQ').
+unicode_name(0x169B3, 'BAMUM LETTER PHASE-E LEUAEM').
+unicode_name(0x169B4, 'BAMUM LETTER PHASE-E FUE').
+unicode_name(0x169B5, 'BAMUM LETTER PHASE-E GBEUX').
+unicode_name(0x169B6, 'BAMUM LETTER PHASE-E NGKUP').
+unicode_name(0x169B7, 'BAMUM LETTER PHASE-E KET').
+unicode_name(0x169B8, 'BAMUM LETTER PHASE-E MAE').
+unicode_name(0x169B9, 'BAMUM LETTER PHASE-E NGKAAMI').
+unicode_name(0x169BA, 'BAMUM LETTER PHASE-E GHET').
+unicode_name(0x169BB, 'BAMUM LETTER PHASE-E FA').
+unicode_name(0x169BC, 'BAMUM LETTER PHASE-E NTUM').
+unicode_name(0x169BD, 'BAMUM LETTER PHASE-E PEUT').
+unicode_name(0x169BE, 'BAMUM LETTER PHASE-E YEUM').
+unicode_name(0x169BF, 'BAMUM LETTER PHASE-E NGGEUAE').
+unicode_name(0x169C0, 'BAMUM LETTER PHASE-E NYI BETWEEN').
+unicode_name(0x169C1, 'BAMUM LETTER PHASE-E NZUQ').
+unicode_name(0x169C2, 'BAMUM LETTER PHASE-E POON').
+unicode_name(0x169C3, 'BAMUM LETTER PHASE-E MIEE').
+unicode_name(0x169C4, 'BAMUM LETTER PHASE-E FUET').
+unicode_name(0x169C5, 'BAMUM LETTER PHASE-E NAE').
+unicode_name(0x169C6, 'BAMUM LETTER PHASE-E MUAE').
+unicode_name(0x169C7, 'BAMUM LETTER PHASE-E GHEUAE').
+unicode_name(0x169C8, 'BAMUM LETTER PHASE-E FU I').
+unicode_name(0x169C9, 'BAMUM LETTER PHASE-E MVI').
+unicode_name(0x169CA, 'BAMUM LETTER PHASE-E PUAQ').
+unicode_name(0x169CB, 'BAMUM LETTER PHASE-E NGKUM').
+unicode_name(0x169CC, 'BAMUM LETTER PHASE-E KUT').
+unicode_name(0x169CD, 'BAMUM LETTER PHASE-E PIET').
+unicode_name(0x169CE, 'BAMUM LETTER PHASE-E NTAP').
+unicode_name(0x169CF, 'BAMUM LETTER PHASE-E YEUAET').
+unicode_name(0x169D0, 'BAMUM LETTER PHASE-E NGGUP').
+unicode_name(0x169D1, 'BAMUM LETTER PHASE-E PA PEOPLE').
+unicode_name(0x169D2, 'BAMUM LETTER PHASE-E FU CALL').
+unicode_name(0x169D3, 'BAMUM LETTER PHASE-E FOM').
+unicode_name(0x169D4, 'BAMUM LETTER PHASE-E NJEE').
+unicode_name(0x169D5, 'BAMUM LETTER PHASE-E A').
+unicode_name(0x169D6, 'BAMUM LETTER PHASE-E TOQ').
+unicode_name(0x169D7, 'BAMUM LETTER PHASE-E O').
+unicode_name(0x169D8, 'BAMUM LETTER PHASE-E I').
+unicode_name(0x169D9, 'BAMUM LETTER PHASE-E LAQ').
+unicode_name(0x169DA, 'BAMUM LETTER PHASE-E PA PLURAL').
+unicode_name(0x169DB, 'BAMUM LETTER PHASE-E TAA').
+unicode_name(0x169DC, 'BAMUM LETTER PHASE-E TAQ').
+unicode_name(0x169DD, 'BAMUM LETTER PHASE-E NDAA MY HOUSE').
+unicode_name(0x169DE, 'BAMUM LETTER PHASE-E SHIQ').
+unicode_name(0x169DF, 'BAMUM LETTER PHASE-E YEUX').
+unicode_name(0x169E0, 'BAMUM LETTER PHASE-E NGUAE').
+unicode_name(0x169E1, 'BAMUM LETTER PHASE-E YUAEN').
+unicode_name(0x169E2, 'BAMUM LETTER PHASE-E YOQ SWIMMING').
+unicode_name(0x169E3, 'BAMUM LETTER PHASE-E YOQ COVER').
+unicode_name(0x169E4, 'BAMUM LETTER PHASE-E YUQ').
+unicode_name(0x169E5, 'BAMUM LETTER PHASE-E YUN').
+unicode_name(0x169E6, 'BAMUM LETTER PHASE-E KEUX').
+unicode_name(0x169E7, 'BAMUM LETTER PHASE-E PEUX').
+unicode_name(0x169E8, 'BAMUM LETTER PHASE-E NJEE EPOCH').
+unicode_name(0x169E9, 'BAMUM LETTER PHASE-E PUE').
+unicode_name(0x169EA, 'BAMUM LETTER PHASE-E WUE').
+unicode_name(0x169EB, 'BAMUM LETTER PHASE-E FEE').
+unicode_name(0x169EC, 'BAMUM LETTER PHASE-E VEE').
+unicode_name(0x169ED, 'BAMUM LETTER PHASE-E LU').
+unicode_name(0x169EE, 'BAMUM LETTER PHASE-E MI').
+unicode_name(0x169EF, 'BAMUM LETTER PHASE-E REUX').
+unicode_name(0x169F0, 'BAMUM LETTER PHASE-E RAE').
+unicode_name(0x169F1, 'BAMUM LETTER PHASE-E NGUAET').
+unicode_name(0x169F2, 'BAMUM LETTER PHASE-E NGA').
+unicode_name(0x169F3, 'BAMUM LETTER PHASE-E SHO').
+unicode_name(0x169F4, 'BAMUM LETTER PHASE-E SHOQ').
+unicode_name(0x169F5, 'BAMUM LETTER PHASE-E FU REMEDY').
+unicode_name(0x169F6, 'BAMUM LETTER PHASE-E NA').
+unicode_name(0x169F7, 'BAMUM LETTER PHASE-E PI').
+unicode_name(0x169F8, 'BAMUM LETTER PHASE-E LOQ').
+unicode_name(0x169F9, 'BAMUM LETTER PHASE-E KO').
+unicode_name(0x169FA, 'BAMUM LETTER PHASE-E MEN').
+unicode_name(0x169FB, 'BAMUM LETTER PHASE-E MA').
+unicode_name(0x169FC, 'BAMUM LETTER PHASE-E MAQ').
+unicode_name(0x169FD, 'BAMUM LETTER PHASE-E TEU').
+unicode_name(0x169FE, 'BAMUM LETTER PHASE-E KI').
+unicode_name(0x169FF, 'BAMUM LETTER PHASE-E MON').
+unicode_name(0x16A00, 'BAMUM LETTER PHASE-E TEN').
+unicode_name(0x16A01, 'BAMUM LETTER PHASE-E FAQ').
+unicode_name(0x16A02, 'BAMUM LETTER PHASE-E GHOM').
+unicode_name(0x16A03, 'BAMUM LETTER PHASE-F KA').
+unicode_name(0x16A04, 'BAMUM LETTER PHASE-F U').
+unicode_name(0x16A05, 'BAMUM LETTER PHASE-F KU').
+unicode_name(0x16A06, 'BAMUM LETTER PHASE-F EE').
+unicode_name(0x16A07, 'BAMUM LETTER PHASE-F REE').
+unicode_name(0x16A08, 'BAMUM LETTER PHASE-F TAE').
+unicode_name(0x16A09, 'BAMUM LETTER PHASE-F NYI').
+unicode_name(0x16A0A, 'BAMUM LETTER PHASE-F LA').
+unicode_name(0x16A0B, 'BAMUM LETTER PHASE-F RII').
+unicode_name(0x16A0C, 'BAMUM LETTER PHASE-F RIEE').
+unicode_name(0x16A0D, 'BAMUM LETTER PHASE-F MEEEE').
+unicode_name(0x16A0E, 'BAMUM LETTER PHASE-F TAA').
+unicode_name(0x16A0F, 'BAMUM LETTER PHASE-F NDAA').
+unicode_name(0x16A10, 'BAMUM LETTER PHASE-F NJAEM').
+unicode_name(0x16A11, 'BAMUM LETTER PHASE-F M').
+unicode_name(0x16A12, 'BAMUM LETTER PHASE-F SUU').
+unicode_name(0x16A13, 'BAMUM LETTER PHASE-F SHII').
+unicode_name(0x16A14, 'BAMUM LETTER PHASE-F SI').
+unicode_name(0x16A15, 'BAMUM LETTER PHASE-F SEUX').
+unicode_name(0x16A16, 'BAMUM LETTER PHASE-F KYEE').
+unicode_name(0x16A17, 'BAMUM LETTER PHASE-F KET').
+unicode_name(0x16A18, 'BAMUM LETTER PHASE-F NUAE').
+unicode_name(0x16A19, 'BAMUM LETTER PHASE-F NU').
+unicode_name(0x16A1A, 'BAMUM LETTER PHASE-F NJUAE').
+unicode_name(0x16A1B, 'BAMUM LETTER PHASE-F YOQ').
+unicode_name(0x16A1C, 'BAMUM LETTER PHASE-F SHU').
+unicode_name(0x16A1D, 'BAMUM LETTER PHASE-F YA').
+unicode_name(0x16A1E, 'BAMUM LETTER PHASE-F NSHA').
+unicode_name(0x16A1F, 'BAMUM LETTER PHASE-F PEUX').
+unicode_name(0x16A20, 'BAMUM LETTER PHASE-F NTEE').
+unicode_name(0x16A21, 'BAMUM LETTER PHASE-F WUE').
+unicode_name(0x16A22, 'BAMUM LETTER PHASE-F PEE').
+unicode_name(0x16A23, 'BAMUM LETTER PHASE-F RU').
+unicode_name(0x16A24, 'BAMUM LETTER PHASE-F NI').
+unicode_name(0x16A25, 'BAMUM LETTER PHASE-F REUX').
+unicode_name(0x16A26, 'BAMUM LETTER PHASE-F KEN').
+unicode_name(0x16A27, 'BAMUM LETTER PHASE-F NGKWAEN').
+unicode_name(0x16A28, 'BAMUM LETTER PHASE-F NGGA').
+unicode_name(0x16A29, 'BAMUM LETTER PHASE-F SHO').
+unicode_name(0x16A2A, 'BAMUM LETTER PHASE-F PUAE').
+unicode_name(0x16A2B, 'BAMUM LETTER PHASE-F FOM').
+unicode_name(0x16A2C, 'BAMUM LETTER PHASE-F WA').
+unicode_name(0x16A2D, 'BAMUM LETTER PHASE-F LI').
+unicode_name(0x16A2E, 'BAMUM LETTER PHASE-F LOQ').
+unicode_name(0x16A2F, 'BAMUM LETTER PHASE-F KO').
+unicode_name(0x16A30, 'BAMUM LETTER PHASE-F MBEN').
+unicode_name(0x16A31, 'BAMUM LETTER PHASE-F REN').
+unicode_name(0x16A32, 'BAMUM LETTER PHASE-F MA').
+unicode_name(0x16A33, 'BAMUM LETTER PHASE-F MO').
+unicode_name(0x16A34, 'BAMUM LETTER PHASE-F MBAA').
+unicode_name(0x16A35, 'BAMUM LETTER PHASE-F TET').
+unicode_name(0x16A36, 'BAMUM LETTER PHASE-F KPA').
+unicode_name(0x16A37, 'BAMUM LETTER PHASE-F SAMBA').
+unicode_name(0x16A38, 'BAMUM LETTER PHASE-F VUEQ').
+unicode_name(0x16F00, 'MIAO LETTER PA').
+unicode_name(0x16F01, 'MIAO LETTER BA').
+unicode_name(0x16F02, 'MIAO LETTER YI PA').
+unicode_name(0x16F03, 'MIAO LETTER PLA').
+unicode_name(0x16F04, 'MIAO LETTER MA').
+unicode_name(0x16F05, 'MIAO LETTER MHA').
+unicode_name(0x16F06, 'MIAO LETTER ARCHAIC MA').
+unicode_name(0x16F07, 'MIAO LETTER FA').
+unicode_name(0x16F08, 'MIAO LETTER VA').
+unicode_name(0x16F09, 'MIAO LETTER VFA').
+unicode_name(0x16F0A, 'MIAO LETTER TA').
+unicode_name(0x16F0B, 'MIAO LETTER DA').
+unicode_name(0x16F0C, 'MIAO LETTER YI TTA').
+unicode_name(0x16F0D, 'MIAO LETTER YI TA').
+unicode_name(0x16F0E, 'MIAO LETTER TTA').
+unicode_name(0x16F0F, 'MIAO LETTER DDA').
+unicode_name(0x16F10, 'MIAO LETTER NA').
+unicode_name(0x16F11, 'MIAO LETTER NHA').
+unicode_name(0x16F12, 'MIAO LETTER YI NNA').
+unicode_name(0x16F13, 'MIAO LETTER ARCHAIC NA').
+unicode_name(0x16F14, 'MIAO LETTER NNA').
+unicode_name(0x16F15, 'MIAO LETTER NNHA').
+unicode_name(0x16F16, 'MIAO LETTER LA').
+unicode_name(0x16F17, 'MIAO LETTER LYA').
+unicode_name(0x16F18, 'MIAO LETTER LHA').
+unicode_name(0x16F19, 'MIAO LETTER LHYA').
+unicode_name(0x16F1A, 'MIAO LETTER TLHA').
+unicode_name(0x16F1B, 'MIAO LETTER DLHA').
+unicode_name(0x16F1C, 'MIAO LETTER TLHYA').
+unicode_name(0x16F1D, 'MIAO LETTER DLHYA').
+unicode_name(0x16F1E, 'MIAO LETTER KA').
+unicode_name(0x16F1F, 'MIAO LETTER GA').
+unicode_name(0x16F20, 'MIAO LETTER YI KA').
+unicode_name(0x16F21, 'MIAO LETTER QA').
+unicode_name(0x16F22, 'MIAO LETTER QGA').
+unicode_name(0x16F23, 'MIAO LETTER NGA').
+unicode_name(0x16F24, 'MIAO LETTER NGHA').
+unicode_name(0x16F25, 'MIAO LETTER ARCHAIC NGA').
+unicode_name(0x16F26, 'MIAO LETTER HA').
+unicode_name(0x16F27, 'MIAO LETTER XA').
+unicode_name(0x16F28, 'MIAO LETTER GHA').
+unicode_name(0x16F29, 'MIAO LETTER GHHA').
+unicode_name(0x16F2A, 'MIAO LETTER TSSA').
+unicode_name(0x16F2B, 'MIAO LETTER DZZA').
+unicode_name(0x16F2C, 'MIAO LETTER NYA').
+unicode_name(0x16F2D, 'MIAO LETTER NYHA').
+unicode_name(0x16F2E, 'MIAO LETTER TSHA').
+unicode_name(0x16F2F, 'MIAO LETTER DZHA').
+unicode_name(0x16F30, 'MIAO LETTER YI TSHA').
+unicode_name(0x16F31, 'MIAO LETTER YI DZHA').
+unicode_name(0x16F32, 'MIAO LETTER REFORMED TSHA').
+unicode_name(0x16F33, 'MIAO LETTER SHA').
+unicode_name(0x16F34, 'MIAO LETTER SSA').
+unicode_name(0x16F35, 'MIAO LETTER ZHA').
+unicode_name(0x16F36, 'MIAO LETTER ZSHA').
+unicode_name(0x16F37, 'MIAO LETTER TSA').
+unicode_name(0x16F38, 'MIAO LETTER DZA').
+unicode_name(0x16F39, 'MIAO LETTER YI TSA').
+unicode_name(0x16F3A, 'MIAO LETTER SA').
+unicode_name(0x16F3B, 'MIAO LETTER ZA').
+unicode_name(0x16F3C, 'MIAO LETTER ZSA').
+unicode_name(0x16F3D, 'MIAO LETTER ZZA').
+unicode_name(0x16F3E, 'MIAO LETTER ZZSA').
+unicode_name(0x16F3F, 'MIAO LETTER ARCHAIC ZZA').
+unicode_name(0x16F40, 'MIAO LETTER ZZYA').
+unicode_name(0x16F41, 'MIAO LETTER ZZSYA').
+unicode_name(0x16F42, 'MIAO LETTER WA').
+unicode_name(0x16F43, 'MIAO LETTER AH').
+unicode_name(0x16F44, 'MIAO LETTER HHA').
+unicode_name(0x16F50, 'MIAO LETTER NASALIZATION').
+unicode_name(0x1B000, 'KATAKANA LETTER ARCHAIC E').
+unicode_name(0x1B001, 'HIRAGANA LETTER ARCHAIC YE').
+unicode_name(0x1EE00, 'ARABIC MATHEMATICAL ALEF').
+unicode_name(0x1EE01, 'ARABIC MATHEMATICAL BEH').
+unicode_name(0x1EE02, 'ARABIC MATHEMATICAL JEEM').
+unicode_name(0x1EE03, 'ARABIC MATHEMATICAL DAL').
+unicode_name(0x1EE05, 'ARABIC MATHEMATICAL WAW').
+unicode_name(0x1EE06, 'ARABIC MATHEMATICAL ZAIN').
+unicode_name(0x1EE07, 'ARABIC MATHEMATICAL HAH').
+unicode_name(0x1EE08, 'ARABIC MATHEMATICAL TAH').
+unicode_name(0x1EE09, 'ARABIC MATHEMATICAL YEH').
+unicode_name(0x1EE0A, 'ARABIC MATHEMATICAL KAF').
+unicode_name(0x1EE0B, 'ARABIC MATHEMATICAL LAM').
+unicode_name(0x1EE0C, 'ARABIC MATHEMATICAL MEEM').
+unicode_name(0x1EE0D, 'ARABIC MATHEMATICAL NOON').
+unicode_name(0x1EE0E, 'ARABIC MATHEMATICAL SEEN').
+unicode_name(0x1EE0F, 'ARABIC MATHEMATICAL AIN').
+unicode_name(0x1EE10, 'ARABIC MATHEMATICAL FEH').
+unicode_name(0x1EE11, 'ARABIC MATHEMATICAL SAD').
+unicode_name(0x1EE12, 'ARABIC MATHEMATICAL QAF').
+unicode_name(0x1EE13, 'ARABIC MATHEMATICAL REH').
+unicode_name(0x1EE14, 'ARABIC MATHEMATICAL SHEEN').
+unicode_name(0x1EE15, 'ARABIC MATHEMATICAL TEH').
+unicode_name(0x1EE16, 'ARABIC MATHEMATICAL THEH').
+unicode_name(0x1EE17, 'ARABIC MATHEMATICAL KHAH').
+unicode_name(0x1EE18, 'ARABIC MATHEMATICAL THAL').
+unicode_name(0x1EE19, 'ARABIC MATHEMATICAL DAD').
+unicode_name(0x1EE1A, 'ARABIC MATHEMATICAL ZAH').
+unicode_name(0x1EE1B, 'ARABIC MATHEMATICAL GHAIN').
+unicode_name(0x1EE1C, 'ARABIC MATHEMATICAL DOTLESS BEH').
+unicode_name(0x1EE1D, 'ARABIC MATHEMATICAL DOTLESS NOON').
+unicode_name(0x1EE1E, 'ARABIC MATHEMATICAL DOTLESS FEH').
+unicode_name(0x1EE1F, 'ARABIC MATHEMATICAL DOTLESS QAF').
+unicode_name(0x1EE21, 'ARABIC MATHEMATICAL INITIAL BEH').
+unicode_name(0x1EE22, 'ARABIC MATHEMATICAL INITIAL JEEM').
+unicode_name(0x1EE24, 'ARABIC MATHEMATICAL INITIAL HEH').
+unicode_name(0x1EE27, 'ARABIC MATHEMATICAL INITIAL HAH').
+unicode_name(0x1EE29, 'ARABIC MATHEMATICAL INITIAL YEH').
+unicode_name(0x1EE2A, 'ARABIC MATHEMATICAL INITIAL KAF').
+unicode_name(0x1EE2B, 'ARABIC MATHEMATICAL INITIAL LAM').
+unicode_name(0x1EE2C, 'ARABIC MATHEMATICAL INITIAL MEEM').
+unicode_name(0x1EE2D, 'ARABIC MATHEMATICAL INITIAL NOON').
+unicode_name(0x1EE2E, 'ARABIC MATHEMATICAL INITIAL SEEN').
+unicode_name(0x1EE2F, 'ARABIC MATHEMATICAL INITIAL AIN').
+unicode_name(0x1EE30, 'ARABIC MATHEMATICAL INITIAL FEH').
+unicode_name(0x1EE31, 'ARABIC MATHEMATICAL INITIAL SAD').
+unicode_name(0x1EE32, 'ARABIC MATHEMATICAL INITIAL QAF').
+unicode_name(0x1EE34, 'ARABIC MATHEMATICAL INITIAL SHEEN').
+unicode_name(0x1EE35, 'ARABIC MATHEMATICAL INITIAL TEH').
+unicode_name(0x1EE36, 'ARABIC MATHEMATICAL INITIAL THEH').
+unicode_name(0x1EE37, 'ARABIC MATHEMATICAL INITIAL KHAH').
+unicode_name(0x1EE39, 'ARABIC MATHEMATICAL INITIAL DAD').
+unicode_name(0x1EE3B, 'ARABIC MATHEMATICAL INITIAL GHAIN').
+unicode_name(0x1EE42, 'ARABIC MATHEMATICAL TAILED JEEM').
+unicode_name(0x1EE47, 'ARABIC MATHEMATICAL TAILED HAH').
+unicode_name(0x1EE49, 'ARABIC MATHEMATICAL TAILED YEH').
+unicode_name(0x1EE4B, 'ARABIC MATHEMATICAL TAILED LAM').
+unicode_name(0x1EE4D, 'ARABIC MATHEMATICAL TAILED NOON').
+unicode_name(0x1EE4E, 'ARABIC MATHEMATICAL TAILED SEEN').
+unicode_name(0x1EE4F, 'ARABIC MATHEMATICAL TAILED AIN').
+unicode_name(0x1EE51, 'ARABIC MATHEMATICAL TAILED SAD').
+unicode_name(0x1EE52, 'ARABIC MATHEMATICAL TAILED QAF').
+unicode_name(0x1EE54, 'ARABIC MATHEMATICAL TAILED SHEEN').
+unicode_name(0x1EE57, 'ARABIC MATHEMATICAL TAILED KHAH').
+unicode_name(0x1EE59, 'ARABIC MATHEMATICAL TAILED DAD').
+unicode_name(0x1EE5B, 'ARABIC MATHEMATICAL TAILED GHAIN').
+unicode_name(0x1EE5D, 'ARABIC MATHEMATICAL TAILED DOTLESS NOON').
+unicode_name(0x1EE5F, 'ARABIC MATHEMATICAL TAILED DOTLESS QAF').
+unicode_name(0x1EE61, 'ARABIC MATHEMATICAL STRETCHED BEH').
+unicode_name(0x1EE62, 'ARABIC MATHEMATICAL STRETCHED JEEM').
+unicode_name(0x1EE64, 'ARABIC MATHEMATICAL STRETCHED HEH').
+unicode_name(0x1EE67, 'ARABIC MATHEMATICAL STRETCHED HAH').
+unicode_name(0x1EE68, 'ARABIC MATHEMATICAL STRETCHED TAH').
+unicode_name(0x1EE69, 'ARABIC MATHEMATICAL STRETCHED YEH').
+unicode_name(0x1EE6A, 'ARABIC MATHEMATICAL STRETCHED KAF').
+unicode_name(0x1EE6C, 'ARABIC MATHEMATICAL STRETCHED MEEM').
+unicode_name(0x1EE6D, 'ARABIC MATHEMATICAL STRETCHED NOON').
+unicode_name(0x1EE6E, 'ARABIC MATHEMATICAL STRETCHED SEEN').
+unicode_name(0x1EE6F, 'ARABIC MATHEMATICAL STRETCHED AIN').
+unicode_name(0x1EE70, 'ARABIC MATHEMATICAL STRETCHED FEH').
+unicode_name(0x1EE71, 'ARABIC MATHEMATICAL STRETCHED SAD').
+unicode_name(0x1EE72, 'ARABIC MATHEMATICAL STRETCHED QAF').
+unicode_name(0x1EE74, 'ARABIC MATHEMATICAL STRETCHED SHEEN').
+unicode_name(0x1EE75, 'ARABIC MATHEMATICAL STRETCHED TEH').
+unicode_name(0x1EE76, 'ARABIC MATHEMATICAL STRETCHED THEH').
+unicode_name(0x1EE77, 'ARABIC MATHEMATICAL STRETCHED KHAH').
+unicode_name(0x1EE79, 'ARABIC MATHEMATICAL STRETCHED DAD').
+unicode_name(0x1EE7A, 'ARABIC MATHEMATICAL STRETCHED ZAH').
+unicode_name(0x1EE7B, 'ARABIC MATHEMATICAL STRETCHED GHAIN').
+unicode_name(0x1EE7C, 'ARABIC MATHEMATICAL STRETCHED DOTLESS BEH').
+unicode_name(0x1EE7E, 'ARABIC MATHEMATICAL STRETCHED DOTLESS FEH').
+unicode_name(0x1EE80, 'ARABIC MATHEMATICAL LOOPED ALEF').
+unicode_name(0x1EE81, 'ARABIC MATHEMATICAL LOOPED BEH').
+unicode_name(0x1EE82, 'ARABIC MATHEMATICAL LOOPED JEEM').
+unicode_name(0x1EE83, 'ARABIC MATHEMATICAL LOOPED DAL').
+unicode_name(0x1EE84, 'ARABIC MATHEMATICAL LOOPED HEH').
+unicode_name(0x1EE85, 'ARABIC MATHEMATICAL LOOPED WAW').
+unicode_name(0x1EE86, 'ARABIC MATHEMATICAL LOOPED ZAIN').
+unicode_name(0x1EE87, 'ARABIC MATHEMATICAL LOOPED HAH').
+unicode_name(0x1EE88, 'ARABIC MATHEMATICAL LOOPED TAH').
+unicode_name(0x1EE89, 'ARABIC MATHEMATICAL LOOPED YEH').
+unicode_name(0x1EE8B, 'ARABIC MATHEMATICAL LOOPED LAM').
+unicode_name(0x1EE8C, 'ARABIC MATHEMATICAL LOOPED MEEM').
+unicode_name(0x1EE8D, 'ARABIC MATHEMATICAL LOOPED NOON').
+unicode_name(0x1EE8E, 'ARABIC MATHEMATICAL LOOPED SEEN').
+unicode_name(0x1EE8F, 'ARABIC MATHEMATICAL LOOPED AIN').
+unicode_name(0x1EE90, 'ARABIC MATHEMATICAL LOOPED FEH').
+unicode_name(0x1EE91, 'ARABIC MATHEMATICAL LOOPED SAD').
+unicode_name(0x1EE92, 'ARABIC MATHEMATICAL LOOPED QAF').
+unicode_name(0x1EE93, 'ARABIC MATHEMATICAL LOOPED REH').
+unicode_name(0x1EE94, 'ARABIC MATHEMATICAL LOOPED SHEEN').
+unicode_name(0x1EE95, 'ARABIC MATHEMATICAL LOOPED TEH').
+unicode_name(0x1EE96, 'ARABIC MATHEMATICAL LOOPED THEH').
+unicode_name(0x1EE97, 'ARABIC MATHEMATICAL LOOPED KHAH').
+unicode_name(0x1EE98, 'ARABIC MATHEMATICAL LOOPED THAL').
+unicode_name(0x1EE99, 'ARABIC MATHEMATICAL LOOPED DAD').
+unicode_name(0x1EE9A, 'ARABIC MATHEMATICAL LOOPED ZAH').
+unicode_name(0x1EE9B, 'ARABIC MATHEMATICAL LOOPED GHAIN').
+unicode_name(0x1EEA1, 'ARABIC MATHEMATICAL DOUBLE-STRUCK BEH').
+unicode_name(0x1EEA2, 'ARABIC MATHEMATICAL DOUBLE-STRUCK JEEM').
+unicode_name(0x1EEA3, 'ARABIC MATHEMATICAL DOUBLE-STRUCK DAL').
+unicode_name(0x1EEA5, 'ARABIC MATHEMATICAL DOUBLE-STRUCK WAW').
+unicode_name(0x1EEA6, 'ARABIC MATHEMATICAL DOUBLE-STRUCK ZAIN').
+unicode_name(0x1EEA7, 'ARABIC MATHEMATICAL DOUBLE-STRUCK HAH').
+unicode_name(0x1EEA8, 'ARABIC MATHEMATICAL DOUBLE-STRUCK TAH').
+unicode_name(0x1EEA9, 'ARABIC MATHEMATICAL DOUBLE-STRUCK YEH').
+unicode_name(0x1EEAB, 'ARABIC MATHEMATICAL DOUBLE-STRUCK LAM').
+unicode_name(0x1EEAC, 'ARABIC MATHEMATICAL DOUBLE-STRUCK MEEM').
+unicode_name(0x1EEAD, 'ARABIC MATHEMATICAL DOUBLE-STRUCK NOON').
+unicode_name(0x1EEAE, 'ARABIC MATHEMATICAL DOUBLE-STRUCK SEEN').
+unicode_name(0x1EEAF, 'ARABIC MATHEMATICAL DOUBLE-STRUCK AIN').
+unicode_name(0x1EEB0, 'ARABIC MATHEMATICAL DOUBLE-STRUCK FEH').
+unicode_name(0x1EEB1, 'ARABIC MATHEMATICAL DOUBLE-STRUCK SAD').
+unicode_name(0x1EEB2, 'ARABIC MATHEMATICAL DOUBLE-STRUCK QAF').
+unicode_name(0x1EEB3, 'ARABIC MATHEMATICAL DOUBLE-STRUCK REH').
+unicode_name(0x1EEB4, 'ARABIC MATHEMATICAL DOUBLE-STRUCK SHEEN').
+unicode_name(0x1EEB5, 'ARABIC MATHEMATICAL DOUBLE-STRUCK TEH').
+unicode_name(0x1EEB6, 'ARABIC MATHEMATICAL DOUBLE-STRUCK THEH').
+unicode_name(0x1EEB7, 'ARABIC MATHEMATICAL DOUBLE-STRUCK KHAH').
+unicode_name(0x1EEB8, 'ARABIC MATHEMATICAL DOUBLE-STRUCK THAL').
+unicode_name(0x1EEB9, 'ARABIC MATHEMATICAL DOUBLE-STRUCK DAD').
+unicode_name(0x1EEBA, 'ARABIC MATHEMATICAL DOUBLE-STRUCK ZAH').
+unicode_name(0x1EEBB, 'ARABIC MATHEMATICAL DOUBLE-STRUCK GHAIN').
+unicode_name(0x20000, '<CJK Ideograph Extension B, First>').
+unicode_name(0x2A6D6, '<CJK Ideograph Extension B, Last>').
+unicode_name(0x2A700, '<CJK Ideograph Extension C, First>').
+unicode_name(0x2B734, '<CJK Ideograph Extension C, Last>').
+unicode_name(0x2B740, '<CJK Ideograph Extension D, First>').
+unicode_name(0x2B81D, '<CJK Ideograph Extension D, Last>').
+unicode_name(0x2F800, 'CJK COMPATIBILITY IDEOGRAPH-2F800').
+unicode_name(0x2F801, 'CJK COMPATIBILITY IDEOGRAPH-2F801').
+unicode_name(0x2F802, 'CJK COMPATIBILITY IDEOGRAPH-2F802').
+unicode_name(0x2F803, 'CJK COMPATIBILITY IDEOGRAPH-2F803').
+unicode_name(0x2F804, 'CJK COMPATIBILITY IDEOGRAPH-2F804').
+unicode_name(0x2F805, 'CJK COMPATIBILITY IDEOGRAPH-2F805').
+unicode_name(0x2F806, 'CJK COMPATIBILITY IDEOGRAPH-2F806').
+unicode_name(0x2F807, 'CJK COMPATIBILITY IDEOGRAPH-2F807').
+unicode_name(0x2F808, 'CJK COMPATIBILITY IDEOGRAPH-2F808').
+unicode_name(0x2F809, 'CJK COMPATIBILITY IDEOGRAPH-2F809').
+unicode_name(0x2F80A, 'CJK COMPATIBILITY IDEOGRAPH-2F80A').
+unicode_name(0x2F80B, 'CJK COMPATIBILITY IDEOGRAPH-2F80B').
+unicode_name(0x2F80C, 'CJK COMPATIBILITY IDEOGRAPH-2F80C').
+unicode_name(0x2F80D, 'CJK COMPATIBILITY IDEOGRAPH-2F80D').
+unicode_name(0x2F80E, 'CJK COMPATIBILITY IDEOGRAPH-2F80E').
+unicode_name(0x2F80F, 'CJK COMPATIBILITY IDEOGRAPH-2F80F').
+unicode_name(0x2F810, 'CJK COMPATIBILITY IDEOGRAPH-2F810').
+unicode_name(0x2F811, 'CJK COMPATIBILITY IDEOGRAPH-2F811').
+unicode_name(0x2F812, 'CJK COMPATIBILITY IDEOGRAPH-2F812').
+unicode_name(0x2F813, 'CJK COMPATIBILITY IDEOGRAPH-2F813').
+unicode_name(0x2F814, 'CJK COMPATIBILITY IDEOGRAPH-2F814').
+unicode_name(0x2F815, 'CJK COMPATIBILITY IDEOGRAPH-2F815').
+unicode_name(0x2F816, 'CJK COMPATIBILITY IDEOGRAPH-2F816').
+unicode_name(0x2F817, 'CJK COMPATIBILITY IDEOGRAPH-2F817').
+unicode_name(0x2F818, 'CJK COMPATIBILITY IDEOGRAPH-2F818').
+unicode_name(0x2F819, 'CJK COMPATIBILITY IDEOGRAPH-2F819').
+unicode_name(0x2F81A, 'CJK COMPATIBILITY IDEOGRAPH-2F81A').
+unicode_name(0x2F81B, 'CJK COMPATIBILITY IDEOGRAPH-2F81B').
+unicode_name(0x2F81C, 'CJK COMPATIBILITY IDEOGRAPH-2F81C').
+unicode_name(0x2F81D, 'CJK COMPATIBILITY IDEOGRAPH-2F81D').
+unicode_name(0x2F81E, 'CJK COMPATIBILITY IDEOGRAPH-2F81E').
+unicode_name(0x2F81F, 'CJK COMPATIBILITY IDEOGRAPH-2F81F').
+unicode_name(0x2F820, 'CJK COMPATIBILITY IDEOGRAPH-2F820').
+unicode_name(0x2F821, 'CJK COMPATIBILITY IDEOGRAPH-2F821').
+unicode_name(0x2F822, 'CJK COMPATIBILITY IDEOGRAPH-2F822').
+unicode_name(0x2F823, 'CJK COMPATIBILITY IDEOGRAPH-2F823').
+unicode_name(0x2F824, 'CJK COMPATIBILITY IDEOGRAPH-2F824').
+unicode_name(0x2F825, 'CJK COMPATIBILITY IDEOGRAPH-2F825').
+unicode_name(0x2F826, 'CJK COMPATIBILITY IDEOGRAPH-2F826').
+unicode_name(0x2F827, 'CJK COMPATIBILITY IDEOGRAPH-2F827').
+unicode_name(0x2F828, 'CJK COMPATIBILITY IDEOGRAPH-2F828').
+unicode_name(0x2F829, 'CJK COMPATIBILITY IDEOGRAPH-2F829').
+unicode_name(0x2F82A, 'CJK COMPATIBILITY IDEOGRAPH-2F82A').
+unicode_name(0x2F82B, 'CJK COMPATIBILITY IDEOGRAPH-2F82B').
+unicode_name(0x2F82C, 'CJK COMPATIBILITY IDEOGRAPH-2F82C').
+unicode_name(0x2F82D, 'CJK COMPATIBILITY IDEOGRAPH-2F82D').
+unicode_name(0x2F82E, 'CJK COMPATIBILITY IDEOGRAPH-2F82E').
+unicode_name(0x2F82F, 'CJK COMPATIBILITY IDEOGRAPH-2F82F').
+unicode_name(0x2F830, 'CJK COMPATIBILITY IDEOGRAPH-2F830').
+unicode_name(0x2F831, 'CJK COMPATIBILITY IDEOGRAPH-2F831').
+unicode_name(0x2F832, 'CJK COMPATIBILITY IDEOGRAPH-2F832').
+unicode_name(0x2F833, 'CJK COMPATIBILITY IDEOGRAPH-2F833').
+unicode_name(0x2F834, 'CJK COMPATIBILITY IDEOGRAPH-2F834').
+unicode_name(0x2F835, 'CJK COMPATIBILITY IDEOGRAPH-2F835').
+unicode_name(0x2F836, 'CJK COMPATIBILITY IDEOGRAPH-2F836').
+unicode_name(0x2F837, 'CJK COMPATIBILITY IDEOGRAPH-2F837').
+unicode_name(0x2F838, 'CJK COMPATIBILITY IDEOGRAPH-2F838').
+unicode_name(0x2F839, 'CJK COMPATIBILITY IDEOGRAPH-2F839').
+unicode_name(0x2F83A, 'CJK COMPATIBILITY IDEOGRAPH-2F83A').
+unicode_name(0x2F83B, 'CJK COMPATIBILITY IDEOGRAPH-2F83B').
+unicode_name(0x2F83C, 'CJK COMPATIBILITY IDEOGRAPH-2F83C').
+unicode_name(0x2F83D, 'CJK COMPATIBILITY IDEOGRAPH-2F83D').
+unicode_name(0x2F83E, 'CJK COMPATIBILITY IDEOGRAPH-2F83E').
+unicode_name(0x2F83F, 'CJK COMPATIBILITY IDEOGRAPH-2F83F').
+unicode_name(0x2F840, 'CJK COMPATIBILITY IDEOGRAPH-2F840').
+unicode_name(0x2F841, 'CJK COMPATIBILITY IDEOGRAPH-2F841').
+unicode_name(0x2F842, 'CJK COMPATIBILITY IDEOGRAPH-2F842').
+unicode_name(0x2F843, 'CJK COMPATIBILITY IDEOGRAPH-2F843').
+unicode_name(0x2F844, 'CJK COMPATIBILITY IDEOGRAPH-2F844').
+unicode_name(0x2F845, 'CJK COMPATIBILITY IDEOGRAPH-2F845').
+unicode_name(0x2F846, 'CJK COMPATIBILITY IDEOGRAPH-2F846').
+unicode_name(0x2F847, 'CJK COMPATIBILITY IDEOGRAPH-2F847').
+unicode_name(0x2F848, 'CJK COMPATIBILITY IDEOGRAPH-2F848').
+unicode_name(0x2F849, 'CJK COMPATIBILITY IDEOGRAPH-2F849').
+unicode_name(0x2F84A, 'CJK COMPATIBILITY IDEOGRAPH-2F84A').
+unicode_name(0x2F84B, 'CJK COMPATIBILITY IDEOGRAPH-2F84B').
+unicode_name(0x2F84C, 'CJK COMPATIBILITY IDEOGRAPH-2F84C').
+unicode_name(0x2F84D, 'CJK COMPATIBILITY IDEOGRAPH-2F84D').
+unicode_name(0x2F84E, 'CJK COMPATIBILITY IDEOGRAPH-2F84E').
+unicode_name(0x2F84F, 'CJK COMPATIBILITY IDEOGRAPH-2F84F').
+unicode_name(0x2F850, 'CJK COMPATIBILITY IDEOGRAPH-2F850').
+unicode_name(0x2F851, 'CJK COMPATIBILITY IDEOGRAPH-2F851').
+unicode_name(0x2F852, 'CJK COMPATIBILITY IDEOGRAPH-2F852').
+unicode_name(0x2F853, 'CJK COMPATIBILITY IDEOGRAPH-2F853').
+unicode_name(0x2F854, 'CJK COMPATIBILITY IDEOGRAPH-2F854').
+unicode_name(0x2F855, 'CJK COMPATIBILITY IDEOGRAPH-2F855').
+unicode_name(0x2F856, 'CJK COMPATIBILITY IDEOGRAPH-2F856').
+unicode_name(0x2F857, 'CJK COMPATIBILITY IDEOGRAPH-2F857').
+unicode_name(0x2F858, 'CJK COMPATIBILITY IDEOGRAPH-2F858').
+unicode_name(0x2F859, 'CJK COMPATIBILITY IDEOGRAPH-2F859').
+unicode_name(0x2F85A, 'CJK COMPATIBILITY IDEOGRAPH-2F85A').
+unicode_name(0x2F85B, 'CJK COMPATIBILITY IDEOGRAPH-2F85B').
+unicode_name(0x2F85C, 'CJK COMPATIBILITY IDEOGRAPH-2F85C').
+unicode_name(0x2F85D, 'CJK COMPATIBILITY IDEOGRAPH-2F85D').
+unicode_name(0x2F85E, 'CJK COMPATIBILITY IDEOGRAPH-2F85E').
+unicode_name(0x2F85F, 'CJK COMPATIBILITY IDEOGRAPH-2F85F').
+unicode_name(0x2F860, 'CJK COMPATIBILITY IDEOGRAPH-2F860').
+unicode_name(0x2F861, 'CJK COMPATIBILITY IDEOGRAPH-2F861').
+unicode_name(0x2F862, 'CJK COMPATIBILITY IDEOGRAPH-2F862').
+unicode_name(0x2F863, 'CJK COMPATIBILITY IDEOGRAPH-2F863').
+unicode_name(0x2F864, 'CJK COMPATIBILITY IDEOGRAPH-2F864').
+unicode_name(0x2F865, 'CJK COMPATIBILITY IDEOGRAPH-2F865').
+unicode_name(0x2F866, 'CJK COMPATIBILITY IDEOGRAPH-2F866').
+unicode_name(0x2F867, 'CJK COMPATIBILITY IDEOGRAPH-2F867').
+unicode_name(0x2F868, 'CJK COMPATIBILITY IDEOGRAPH-2F868').
+unicode_name(0x2F869, 'CJK COMPATIBILITY IDEOGRAPH-2F869').
+unicode_name(0x2F86A, 'CJK COMPATIBILITY IDEOGRAPH-2F86A').
+unicode_name(0x2F86B, 'CJK COMPATIBILITY IDEOGRAPH-2F86B').
+unicode_name(0x2F86C, 'CJK COMPATIBILITY IDEOGRAPH-2F86C').
+unicode_name(0x2F86D, 'CJK COMPATIBILITY IDEOGRAPH-2F86D').
+unicode_name(0x2F86E, 'CJK COMPATIBILITY IDEOGRAPH-2F86E').
+unicode_name(0x2F86F, 'CJK COMPATIBILITY IDEOGRAPH-2F86F').
+unicode_name(0x2F870, 'CJK COMPATIBILITY IDEOGRAPH-2F870').
+unicode_name(0x2F871, 'CJK COMPATIBILITY IDEOGRAPH-2F871').
+unicode_name(0x2F872, 'CJK COMPATIBILITY IDEOGRAPH-2F872').
+unicode_name(0x2F873, 'CJK COMPATIBILITY IDEOGRAPH-2F873').
+unicode_name(0x2F874, 'CJK COMPATIBILITY IDEOGRAPH-2F874').
+unicode_name(0x2F875, 'CJK COMPATIBILITY IDEOGRAPH-2F875').
+unicode_name(0x2F876, 'CJK COMPATIBILITY IDEOGRAPH-2F876').
+unicode_name(0x2F877, 'CJK COMPATIBILITY IDEOGRAPH-2F877').
+unicode_name(0x2F878, 'CJK COMPATIBILITY IDEOGRAPH-2F878').
+unicode_name(0x2F879, 'CJK COMPATIBILITY IDEOGRAPH-2F879').
+unicode_name(0x2F87A, 'CJK COMPATIBILITY IDEOGRAPH-2F87A').
+unicode_name(0x2F87B, 'CJK COMPATIBILITY IDEOGRAPH-2F87B').
+unicode_name(0x2F87C, 'CJK COMPATIBILITY IDEOGRAPH-2F87C').
+unicode_name(0x2F87D, 'CJK COMPATIBILITY IDEOGRAPH-2F87D').
+unicode_name(0x2F87E, 'CJK COMPATIBILITY IDEOGRAPH-2F87E').
+unicode_name(0x2F87F, 'CJK COMPATIBILITY IDEOGRAPH-2F87F').
+unicode_name(0x2F880, 'CJK COMPATIBILITY IDEOGRAPH-2F880').
+unicode_name(0x2F881, 'CJK COMPATIBILITY IDEOGRAPH-2F881').
+unicode_name(0x2F882, 'CJK COMPATIBILITY IDEOGRAPH-2F882').
+unicode_name(0x2F883, 'CJK COMPATIBILITY IDEOGRAPH-2F883').
+unicode_name(0x2F884, 'CJK COMPATIBILITY IDEOGRAPH-2F884').
+unicode_name(0x2F885, 'CJK COMPATIBILITY IDEOGRAPH-2F885').
+unicode_name(0x2F886, 'CJK COMPATIBILITY IDEOGRAPH-2F886').
+unicode_name(0x2F887, 'CJK COMPATIBILITY IDEOGRAPH-2F887').
+unicode_name(0x2F888, 'CJK COMPATIBILITY IDEOGRAPH-2F888').
+unicode_name(0x2F889, 'CJK COMPATIBILITY IDEOGRAPH-2F889').
+unicode_name(0x2F88A, 'CJK COMPATIBILITY IDEOGRAPH-2F88A').
+unicode_name(0x2F88B, 'CJK COMPATIBILITY IDEOGRAPH-2F88B').
+unicode_name(0x2F88C, 'CJK COMPATIBILITY IDEOGRAPH-2F88C').
+unicode_name(0x2F88D, 'CJK COMPATIBILITY IDEOGRAPH-2F88D').
+unicode_name(0x2F88E, 'CJK COMPATIBILITY IDEOGRAPH-2F88E').
+unicode_name(0x2F88F, 'CJK COMPATIBILITY IDEOGRAPH-2F88F').
+unicode_name(0x2F890, 'CJK COMPATIBILITY IDEOGRAPH-2F890').
+unicode_name(0x2F891, 'CJK COMPATIBILITY IDEOGRAPH-2F891').
+unicode_name(0x2F892, 'CJK COMPATIBILITY IDEOGRAPH-2F892').
+unicode_name(0x2F893, 'CJK COMPATIBILITY IDEOGRAPH-2F893').
+unicode_name(0x2F894, 'CJK COMPATIBILITY IDEOGRAPH-2F894').
+unicode_name(0x2F895, 'CJK COMPATIBILITY IDEOGRAPH-2F895').
+unicode_name(0x2F896, 'CJK COMPATIBILITY IDEOGRAPH-2F896').
+unicode_name(0x2F897, 'CJK COMPATIBILITY IDEOGRAPH-2F897').
+unicode_name(0x2F898, 'CJK COMPATIBILITY IDEOGRAPH-2F898').
+unicode_name(0x2F899, 'CJK COMPATIBILITY IDEOGRAPH-2F899').
+unicode_name(0x2F89A, 'CJK COMPATIBILITY IDEOGRAPH-2F89A').
+unicode_name(0x2F89B, 'CJK COMPATIBILITY IDEOGRAPH-2F89B').
+unicode_name(0x2F89C, 'CJK COMPATIBILITY IDEOGRAPH-2F89C').
+unicode_name(0x2F89D, 'CJK COMPATIBILITY IDEOGRAPH-2F89D').
+unicode_name(0x2F89E, 'CJK COMPATIBILITY IDEOGRAPH-2F89E').
+unicode_name(0x2F89F, 'CJK COMPATIBILITY IDEOGRAPH-2F89F').
+unicode_name(0x2F8A0, 'CJK COMPATIBILITY IDEOGRAPH-2F8A0').
+unicode_name(0x2F8A1, 'CJK COMPATIBILITY IDEOGRAPH-2F8A1').
+unicode_name(0x2F8A2, 'CJK COMPATIBILITY IDEOGRAPH-2F8A2').
+unicode_name(0x2F8A3, 'CJK COMPATIBILITY IDEOGRAPH-2F8A3').
+unicode_name(0x2F8A4, 'CJK COMPATIBILITY IDEOGRAPH-2F8A4').
+unicode_name(0x2F8A5, 'CJK COMPATIBILITY IDEOGRAPH-2F8A5').
+unicode_name(0x2F8A6, 'CJK COMPATIBILITY IDEOGRAPH-2F8A6').
+unicode_name(0x2F8A7, 'CJK COMPATIBILITY IDEOGRAPH-2F8A7').
+unicode_name(0x2F8A8, 'CJK COMPATIBILITY IDEOGRAPH-2F8A8').
+unicode_name(0x2F8A9, 'CJK COMPATIBILITY IDEOGRAPH-2F8A9').
+unicode_name(0x2F8AA, 'CJK COMPATIBILITY IDEOGRAPH-2F8AA').
+unicode_name(0x2F8AB, 'CJK COMPATIBILITY IDEOGRAPH-2F8AB').
+unicode_name(0x2F8AC, 'CJK COMPATIBILITY IDEOGRAPH-2F8AC').
+unicode_name(0x2F8AD, 'CJK COMPATIBILITY IDEOGRAPH-2F8AD').
+unicode_name(0x2F8AE, 'CJK COMPATIBILITY IDEOGRAPH-2F8AE').
+unicode_name(0x2F8AF, 'CJK COMPATIBILITY IDEOGRAPH-2F8AF').
+unicode_name(0x2F8B0, 'CJK COMPATIBILITY IDEOGRAPH-2F8B0').
+unicode_name(0x2F8B1, 'CJK COMPATIBILITY IDEOGRAPH-2F8B1').
+unicode_name(0x2F8B2, 'CJK COMPATIBILITY IDEOGRAPH-2F8B2').
+unicode_name(0x2F8B3, 'CJK COMPATIBILITY IDEOGRAPH-2F8B3').
+unicode_name(0x2F8B4, 'CJK COMPATIBILITY IDEOGRAPH-2F8B4').
+unicode_name(0x2F8B5, 'CJK COMPATIBILITY IDEOGRAPH-2F8B5').
+unicode_name(0x2F8B6, 'CJK COMPATIBILITY IDEOGRAPH-2F8B6').
+unicode_name(0x2F8B7, 'CJK COMPATIBILITY IDEOGRAPH-2F8B7').
+unicode_name(0x2F8B8, 'CJK COMPATIBILITY IDEOGRAPH-2F8B8').
+unicode_name(0x2F8B9, 'CJK COMPATIBILITY IDEOGRAPH-2F8B9').
+unicode_name(0x2F8BA, 'CJK COMPATIBILITY IDEOGRAPH-2F8BA').
+unicode_name(0x2F8BB, 'CJK COMPATIBILITY IDEOGRAPH-2F8BB').
+unicode_name(0x2F8BC, 'CJK COMPATIBILITY IDEOGRAPH-2F8BC').
+unicode_name(0x2F8BD, 'CJK COMPATIBILITY IDEOGRAPH-2F8BD').
+unicode_name(0x2F8BE, 'CJK COMPATIBILITY IDEOGRAPH-2F8BE').
+unicode_name(0x2F8BF, 'CJK COMPATIBILITY IDEOGRAPH-2F8BF').
+unicode_name(0x2F8C0, 'CJK COMPATIBILITY IDEOGRAPH-2F8C0').
+unicode_name(0x2F8C1, 'CJK COMPATIBILITY IDEOGRAPH-2F8C1').
+unicode_name(0x2F8C2, 'CJK COMPATIBILITY IDEOGRAPH-2F8C2').
+unicode_name(0x2F8C3, 'CJK COMPATIBILITY IDEOGRAPH-2F8C3').
+unicode_name(0x2F8C4, 'CJK COMPATIBILITY IDEOGRAPH-2F8C4').
+unicode_name(0x2F8C5, 'CJK COMPATIBILITY IDEOGRAPH-2F8C5').
+unicode_name(0x2F8C6, 'CJK COMPATIBILITY IDEOGRAPH-2F8C6').
+unicode_name(0x2F8C7, 'CJK COMPATIBILITY IDEOGRAPH-2F8C7').
+unicode_name(0x2F8C8, 'CJK COMPATIBILITY IDEOGRAPH-2F8C8').
+unicode_name(0x2F8C9, 'CJK COMPATIBILITY IDEOGRAPH-2F8C9').
+unicode_name(0x2F8CA, 'CJK COMPATIBILITY IDEOGRAPH-2F8CA').
+unicode_name(0x2F8CB, 'CJK COMPATIBILITY IDEOGRAPH-2F8CB').
+unicode_name(0x2F8CC, 'CJK COMPATIBILITY IDEOGRAPH-2F8CC').
+unicode_name(0x2F8CD, 'CJK COMPATIBILITY IDEOGRAPH-2F8CD').
+unicode_name(0x2F8CE, 'CJK COMPATIBILITY IDEOGRAPH-2F8CE').
+unicode_name(0x2F8CF, 'CJK COMPATIBILITY IDEOGRAPH-2F8CF').
+unicode_name(0x2F8D0, 'CJK COMPATIBILITY IDEOGRAPH-2F8D0').
+unicode_name(0x2F8D1, 'CJK COMPATIBILITY IDEOGRAPH-2F8D1').
+unicode_name(0x2F8D2, 'CJK COMPATIBILITY IDEOGRAPH-2F8D2').
+unicode_name(0x2F8D3, 'CJK COMPATIBILITY IDEOGRAPH-2F8D3').
+unicode_name(0x2F8D4, 'CJK COMPATIBILITY IDEOGRAPH-2F8D4').
+unicode_name(0x2F8D5, 'CJK COMPATIBILITY IDEOGRAPH-2F8D5').
+unicode_name(0x2F8D6, 'CJK COMPATIBILITY IDEOGRAPH-2F8D6').
+unicode_name(0x2F8D7, 'CJK COMPATIBILITY IDEOGRAPH-2F8D7').
+unicode_name(0x2F8D8, 'CJK COMPATIBILITY IDEOGRAPH-2F8D8').
+unicode_name(0x2F8D9, 'CJK COMPATIBILITY IDEOGRAPH-2F8D9').
+unicode_name(0x2F8DA, 'CJK COMPATIBILITY IDEOGRAPH-2F8DA').
+unicode_name(0x2F8DB, 'CJK COMPATIBILITY IDEOGRAPH-2F8DB').
+unicode_name(0x2F8DC, 'CJK COMPATIBILITY IDEOGRAPH-2F8DC').
+unicode_name(0x2F8DD, 'CJK COMPATIBILITY IDEOGRAPH-2F8DD').
+unicode_name(0x2F8DE, 'CJK COMPATIBILITY IDEOGRAPH-2F8DE').
+unicode_name(0x2F8DF, 'CJK COMPATIBILITY IDEOGRAPH-2F8DF').
+unicode_name(0x2F8E0, 'CJK COMPATIBILITY IDEOGRAPH-2F8E0').
+unicode_name(0x2F8E1, 'CJK COMPATIBILITY IDEOGRAPH-2F8E1').
+unicode_name(0x2F8E2, 'CJK COMPATIBILITY IDEOGRAPH-2F8E2').
+unicode_name(0x2F8E3, 'CJK COMPATIBILITY IDEOGRAPH-2F8E3').
+unicode_name(0x2F8E4, 'CJK COMPATIBILITY IDEOGRAPH-2F8E4').
+unicode_name(0x2F8E5, 'CJK COMPATIBILITY IDEOGRAPH-2F8E5').
+unicode_name(0x2F8E6, 'CJK COMPATIBILITY IDEOGRAPH-2F8E6').
+unicode_name(0x2F8E7, 'CJK COMPATIBILITY IDEOGRAPH-2F8E7').
+unicode_name(0x2F8E8, 'CJK COMPATIBILITY IDEOGRAPH-2F8E8').
+unicode_name(0x2F8E9, 'CJK COMPATIBILITY IDEOGRAPH-2F8E9').
+unicode_name(0x2F8EA, 'CJK COMPATIBILITY IDEOGRAPH-2F8EA').
+unicode_name(0x2F8EB, 'CJK COMPATIBILITY IDEOGRAPH-2F8EB').
+unicode_name(0x2F8EC, 'CJK COMPATIBILITY IDEOGRAPH-2F8EC').
+unicode_name(0x2F8ED, 'CJK COMPATIBILITY IDEOGRAPH-2F8ED').
+unicode_name(0x2F8EE, 'CJK COMPATIBILITY IDEOGRAPH-2F8EE').
+unicode_name(0x2F8EF, 'CJK COMPATIBILITY IDEOGRAPH-2F8EF').
+unicode_name(0x2F8F0, 'CJK COMPATIBILITY IDEOGRAPH-2F8F0').
+unicode_name(0x2F8F1, 'CJK COMPATIBILITY IDEOGRAPH-2F8F1').
+unicode_name(0x2F8F2, 'CJK COMPATIBILITY IDEOGRAPH-2F8F2').
+unicode_name(0x2F8F3, 'CJK COMPATIBILITY IDEOGRAPH-2F8F3').
+unicode_name(0x2F8F4, 'CJK COMPATIBILITY IDEOGRAPH-2F8F4').
+unicode_name(0x2F8F5, 'CJK COMPATIBILITY IDEOGRAPH-2F8F5').
+unicode_name(0x2F8F6, 'CJK COMPATIBILITY IDEOGRAPH-2F8F6').
+unicode_name(0x2F8F7, 'CJK COMPATIBILITY IDEOGRAPH-2F8F7').
+unicode_name(0x2F8F8, 'CJK COMPATIBILITY IDEOGRAPH-2F8F8').
+unicode_name(0x2F8F9, 'CJK COMPATIBILITY IDEOGRAPH-2F8F9').
+unicode_name(0x2F8FA, 'CJK COMPATIBILITY IDEOGRAPH-2F8FA').
+unicode_name(0x2F8FB, 'CJK COMPATIBILITY IDEOGRAPH-2F8FB').
+unicode_name(0x2F8FC, 'CJK COMPATIBILITY IDEOGRAPH-2F8FC').
+unicode_name(0x2F8FD, 'CJK COMPATIBILITY IDEOGRAPH-2F8FD').
+unicode_name(0x2F8FE, 'CJK COMPATIBILITY IDEOGRAPH-2F8FE').
+unicode_name(0x2F8FF, 'CJK COMPATIBILITY IDEOGRAPH-2F8FF').
+unicode_name(0x2F900, 'CJK COMPATIBILITY IDEOGRAPH-2F900').
+unicode_name(0x2F901, 'CJK COMPATIBILITY IDEOGRAPH-2F901').
+unicode_name(0x2F902, 'CJK COMPATIBILITY IDEOGRAPH-2F902').
+unicode_name(0x2F903, 'CJK COMPATIBILITY IDEOGRAPH-2F903').
+unicode_name(0x2F904, 'CJK COMPATIBILITY IDEOGRAPH-2F904').
+unicode_name(0x2F905, 'CJK COMPATIBILITY IDEOGRAPH-2F905').
+unicode_name(0x2F906, 'CJK COMPATIBILITY IDEOGRAPH-2F906').
+unicode_name(0x2F907, 'CJK COMPATIBILITY IDEOGRAPH-2F907').
+unicode_name(0x2F908, 'CJK COMPATIBILITY IDEOGRAPH-2F908').
+unicode_name(0x2F909, 'CJK COMPATIBILITY IDEOGRAPH-2F909').
+unicode_name(0x2F90A, 'CJK COMPATIBILITY IDEOGRAPH-2F90A').
+unicode_name(0x2F90B, 'CJK COMPATIBILITY IDEOGRAPH-2F90B').
+unicode_name(0x2F90C, 'CJK COMPATIBILITY IDEOGRAPH-2F90C').
+unicode_name(0x2F90D, 'CJK COMPATIBILITY IDEOGRAPH-2F90D').
+unicode_name(0x2F90E, 'CJK COMPATIBILITY IDEOGRAPH-2F90E').
+unicode_name(0x2F90F, 'CJK COMPATIBILITY IDEOGRAPH-2F90F').
+unicode_name(0x2F910, 'CJK COMPATIBILITY IDEOGRAPH-2F910').
+unicode_name(0x2F911, 'CJK COMPATIBILITY IDEOGRAPH-2F911').
+unicode_name(0x2F912, 'CJK COMPATIBILITY IDEOGRAPH-2F912').
+unicode_name(0x2F913, 'CJK COMPATIBILITY IDEOGRAPH-2F913').
+unicode_name(0x2F914, 'CJK COMPATIBILITY IDEOGRAPH-2F914').
+unicode_name(0x2F915, 'CJK COMPATIBILITY IDEOGRAPH-2F915').
+unicode_name(0x2F916, 'CJK COMPATIBILITY IDEOGRAPH-2F916').
+unicode_name(0x2F917, 'CJK COMPATIBILITY IDEOGRAPH-2F917').
+unicode_name(0x2F918, 'CJK COMPATIBILITY IDEOGRAPH-2F918').
+unicode_name(0x2F919, 'CJK COMPATIBILITY IDEOGRAPH-2F919').
+unicode_name(0x2F91A, 'CJK COMPATIBILITY IDEOGRAPH-2F91A').
+unicode_name(0x2F91B, 'CJK COMPATIBILITY IDEOGRAPH-2F91B').
+unicode_name(0x2F91C, 'CJK COMPATIBILITY IDEOGRAPH-2F91C').
+unicode_name(0x2F91D, 'CJK COMPATIBILITY IDEOGRAPH-2F91D').
+unicode_name(0x2F91E, 'CJK COMPATIBILITY IDEOGRAPH-2F91E').
+unicode_name(0x2F91F, 'CJK COMPATIBILITY IDEOGRAPH-2F91F').
+unicode_name(0x2F920, 'CJK COMPATIBILITY IDEOGRAPH-2F920').
+unicode_name(0x2F921, 'CJK COMPATIBILITY IDEOGRAPH-2F921').
+unicode_name(0x2F922, 'CJK COMPATIBILITY IDEOGRAPH-2F922').
+unicode_name(0x2F923, 'CJK COMPATIBILITY IDEOGRAPH-2F923').
+unicode_name(0x2F924, 'CJK COMPATIBILITY IDEOGRAPH-2F924').
+unicode_name(0x2F925, 'CJK COMPATIBILITY IDEOGRAPH-2F925').
+unicode_name(0x2F926, 'CJK COMPATIBILITY IDEOGRAPH-2F926').
+unicode_name(0x2F927, 'CJK COMPATIBILITY IDEOGRAPH-2F927').
+unicode_name(0x2F928, 'CJK COMPATIBILITY IDEOGRAPH-2F928').
+unicode_name(0x2F929, 'CJK COMPATIBILITY IDEOGRAPH-2F929').
+unicode_name(0x2F92A, 'CJK COMPATIBILITY IDEOGRAPH-2F92A').
+unicode_name(0x2F92B, 'CJK COMPATIBILITY IDEOGRAPH-2F92B').
+unicode_name(0x2F92C, 'CJK COMPATIBILITY IDEOGRAPH-2F92C').
+unicode_name(0x2F92D, 'CJK COMPATIBILITY IDEOGRAPH-2F92D').
+unicode_name(0x2F92E, 'CJK COMPATIBILITY IDEOGRAPH-2F92E').
+unicode_name(0x2F92F, 'CJK COMPATIBILITY IDEOGRAPH-2F92F').
+unicode_name(0x2F930, 'CJK COMPATIBILITY IDEOGRAPH-2F930').
+unicode_name(0x2F931, 'CJK COMPATIBILITY IDEOGRAPH-2F931').
+unicode_name(0x2F932, 'CJK COMPATIBILITY IDEOGRAPH-2F932').
+unicode_name(0x2F933, 'CJK COMPATIBILITY IDEOGRAPH-2F933').
+unicode_name(0x2F934, 'CJK COMPATIBILITY IDEOGRAPH-2F934').
+unicode_name(0x2F935, 'CJK COMPATIBILITY IDEOGRAPH-2F935').
+unicode_name(0x2F936, 'CJK COMPATIBILITY IDEOGRAPH-2F936').
+unicode_name(0x2F937, 'CJK COMPATIBILITY IDEOGRAPH-2F937').
+unicode_name(0x2F938, 'CJK COMPATIBILITY IDEOGRAPH-2F938').
+unicode_name(0x2F939, 'CJK COMPATIBILITY IDEOGRAPH-2F939').
+unicode_name(0x2F93A, 'CJK COMPATIBILITY IDEOGRAPH-2F93A').
+unicode_name(0x2F93B, 'CJK COMPATIBILITY IDEOGRAPH-2F93B').
+unicode_name(0x2F93C, 'CJK COMPATIBILITY IDEOGRAPH-2F93C').
+unicode_name(0x2F93D, 'CJK COMPATIBILITY IDEOGRAPH-2F93D').
+unicode_name(0x2F93E, 'CJK COMPATIBILITY IDEOGRAPH-2F93E').
+unicode_name(0x2F93F, 'CJK COMPATIBILITY IDEOGRAPH-2F93F').
+unicode_name(0x2F940, 'CJK COMPATIBILITY IDEOGRAPH-2F940').
+unicode_name(0x2F941, 'CJK COMPATIBILITY IDEOGRAPH-2F941').
+unicode_name(0x2F942, 'CJK COMPATIBILITY IDEOGRAPH-2F942').
+unicode_name(0x2F943, 'CJK COMPATIBILITY IDEOGRAPH-2F943').
+unicode_name(0x2F944, 'CJK COMPATIBILITY IDEOGRAPH-2F944').
+unicode_name(0x2F945, 'CJK COMPATIBILITY IDEOGRAPH-2F945').
+unicode_name(0x2F946, 'CJK COMPATIBILITY IDEOGRAPH-2F946').
+unicode_name(0x2F947, 'CJK COMPATIBILITY IDEOGRAPH-2F947').
+unicode_name(0x2F948, 'CJK COMPATIBILITY IDEOGRAPH-2F948').
+unicode_name(0x2F949, 'CJK COMPATIBILITY IDEOGRAPH-2F949').
+unicode_name(0x2F94A, 'CJK COMPATIBILITY IDEOGRAPH-2F94A').
+unicode_name(0x2F94B, 'CJK COMPATIBILITY IDEOGRAPH-2F94B').
+unicode_name(0x2F94C, 'CJK COMPATIBILITY IDEOGRAPH-2F94C').
+unicode_name(0x2F94D, 'CJK COMPATIBILITY IDEOGRAPH-2F94D').
+unicode_name(0x2F94E, 'CJK COMPATIBILITY IDEOGRAPH-2F94E').
+unicode_name(0x2F94F, 'CJK COMPATIBILITY IDEOGRAPH-2F94F').
+unicode_name(0x2F950, 'CJK COMPATIBILITY IDEOGRAPH-2F950').
+unicode_name(0x2F951, 'CJK COMPATIBILITY IDEOGRAPH-2F951').
+unicode_name(0x2F952, 'CJK COMPATIBILITY IDEOGRAPH-2F952').
+unicode_name(0x2F953, 'CJK COMPATIBILITY IDEOGRAPH-2F953').
+unicode_name(0x2F954, 'CJK COMPATIBILITY IDEOGRAPH-2F954').
+unicode_name(0x2F955, 'CJK COMPATIBILITY IDEOGRAPH-2F955').
+unicode_name(0x2F956, 'CJK COMPATIBILITY IDEOGRAPH-2F956').
+unicode_name(0x2F957, 'CJK COMPATIBILITY IDEOGRAPH-2F957').
+unicode_name(0x2F958, 'CJK COMPATIBILITY IDEOGRAPH-2F958').
+unicode_name(0x2F959, 'CJK COMPATIBILITY IDEOGRAPH-2F959').
+unicode_name(0x2F95A, 'CJK COMPATIBILITY IDEOGRAPH-2F95A').
+unicode_name(0x2F95B, 'CJK COMPATIBILITY IDEOGRAPH-2F95B').
+unicode_name(0x2F95C, 'CJK COMPATIBILITY IDEOGRAPH-2F95C').
+unicode_name(0x2F95D, 'CJK COMPATIBILITY IDEOGRAPH-2F95D').
+unicode_name(0x2F95E, 'CJK COMPATIBILITY IDEOGRAPH-2F95E').
+unicode_name(0x2F95F, 'CJK COMPATIBILITY IDEOGRAPH-2F95F').
+unicode_name(0x2F960, 'CJK COMPATIBILITY IDEOGRAPH-2F960').
+unicode_name(0x2F961, 'CJK COMPATIBILITY IDEOGRAPH-2F961').
+unicode_name(0x2F962, 'CJK COMPATIBILITY IDEOGRAPH-2F962').
+unicode_name(0x2F963, 'CJK COMPATIBILITY IDEOGRAPH-2F963').
+unicode_name(0x2F964, 'CJK COMPATIBILITY IDEOGRAPH-2F964').
+unicode_name(0x2F965, 'CJK COMPATIBILITY IDEOGRAPH-2F965').
+unicode_name(0x2F966, 'CJK COMPATIBILITY IDEOGRAPH-2F966').
+unicode_name(0x2F967, 'CJK COMPATIBILITY IDEOGRAPH-2F967').
+unicode_name(0x2F968, 'CJK COMPATIBILITY IDEOGRAPH-2F968').
+unicode_name(0x2F969, 'CJK COMPATIBILITY IDEOGRAPH-2F969').
+unicode_name(0x2F96A, 'CJK COMPATIBILITY IDEOGRAPH-2F96A').
+unicode_name(0x2F96B, 'CJK COMPATIBILITY IDEOGRAPH-2F96B').
+unicode_name(0x2F96C, 'CJK COMPATIBILITY IDEOGRAPH-2F96C').
+unicode_name(0x2F96D, 'CJK COMPATIBILITY IDEOGRAPH-2F96D').
+unicode_name(0x2F96E, 'CJK COMPATIBILITY IDEOGRAPH-2F96E').
+unicode_name(0x2F96F, 'CJK COMPATIBILITY IDEOGRAPH-2F96F').
+unicode_name(0x2F970, 'CJK COMPATIBILITY IDEOGRAPH-2F970').
+unicode_name(0x2F971, 'CJK COMPATIBILITY IDEOGRAPH-2F971').
+unicode_name(0x2F972, 'CJK COMPATIBILITY IDEOGRAPH-2F972').
+unicode_name(0x2F973, 'CJK COMPATIBILITY IDEOGRAPH-2F973').
+unicode_name(0x2F974, 'CJK COMPATIBILITY IDEOGRAPH-2F974').
+unicode_name(0x2F975, 'CJK COMPATIBILITY IDEOGRAPH-2F975').
+unicode_name(0x2F976, 'CJK COMPATIBILITY IDEOGRAPH-2F976').
+unicode_name(0x2F977, 'CJK COMPATIBILITY IDEOGRAPH-2F977').
+unicode_name(0x2F978, 'CJK COMPATIBILITY IDEOGRAPH-2F978').
+unicode_name(0x2F979, 'CJK COMPATIBILITY IDEOGRAPH-2F979').
+unicode_name(0x2F97A, 'CJK COMPATIBILITY IDEOGRAPH-2F97A').
+unicode_name(0x2F97B, 'CJK COMPATIBILITY IDEOGRAPH-2F97B').
+unicode_name(0x2F97C, 'CJK COMPATIBILITY IDEOGRAPH-2F97C').
+unicode_name(0x2F97D, 'CJK COMPATIBILITY IDEOGRAPH-2F97D').
+unicode_name(0x2F97E, 'CJK COMPATIBILITY IDEOGRAPH-2F97E').
+unicode_name(0x2F97F, 'CJK COMPATIBILITY IDEOGRAPH-2F97F').
+unicode_name(0x2F980, 'CJK COMPATIBILITY IDEOGRAPH-2F980').
+unicode_name(0x2F981, 'CJK COMPATIBILITY IDEOGRAPH-2F981').
+unicode_name(0x2F982, 'CJK COMPATIBILITY IDEOGRAPH-2F982').
+unicode_name(0x2F983, 'CJK COMPATIBILITY IDEOGRAPH-2F983').
+unicode_name(0x2F984, 'CJK COMPATIBILITY IDEOGRAPH-2F984').
+unicode_name(0x2F985, 'CJK COMPATIBILITY IDEOGRAPH-2F985').
+unicode_name(0x2F986, 'CJK COMPATIBILITY IDEOGRAPH-2F986').
+unicode_name(0x2F987, 'CJK COMPATIBILITY IDEOGRAPH-2F987').
+unicode_name(0x2F988, 'CJK COMPATIBILITY IDEOGRAPH-2F988').
+unicode_name(0x2F989, 'CJK COMPATIBILITY IDEOGRAPH-2F989').
+unicode_name(0x2F98A, 'CJK COMPATIBILITY IDEOGRAPH-2F98A').
+unicode_name(0x2F98B, 'CJK COMPATIBILITY IDEOGRAPH-2F98B').
+unicode_name(0x2F98C, 'CJK COMPATIBILITY IDEOGRAPH-2F98C').
+unicode_name(0x2F98D, 'CJK COMPATIBILITY IDEOGRAPH-2F98D').
+unicode_name(0x2F98E, 'CJK COMPATIBILITY IDEOGRAPH-2F98E').
+unicode_name(0x2F98F, 'CJK COMPATIBILITY IDEOGRAPH-2F98F').
+unicode_name(0x2F990, 'CJK COMPATIBILITY IDEOGRAPH-2F990').
+unicode_name(0x2F991, 'CJK COMPATIBILITY IDEOGRAPH-2F991').
+unicode_name(0x2F992, 'CJK COMPATIBILITY IDEOGRAPH-2F992').
+unicode_name(0x2F993, 'CJK COMPATIBILITY IDEOGRAPH-2F993').
+unicode_name(0x2F994, 'CJK COMPATIBILITY IDEOGRAPH-2F994').
+unicode_name(0x2F995, 'CJK COMPATIBILITY IDEOGRAPH-2F995').
+unicode_name(0x2F996, 'CJK COMPATIBILITY IDEOGRAPH-2F996').
+unicode_name(0x2F997, 'CJK COMPATIBILITY IDEOGRAPH-2F997').
+unicode_name(0x2F998, 'CJK COMPATIBILITY IDEOGRAPH-2F998').
+unicode_name(0x2F999, 'CJK COMPATIBILITY IDEOGRAPH-2F999').
+unicode_name(0x2F99A, 'CJK COMPATIBILITY IDEOGRAPH-2F99A').
+unicode_name(0x2F99B, 'CJK COMPATIBILITY IDEOGRAPH-2F99B').
+unicode_name(0x2F99C, 'CJK COMPATIBILITY IDEOGRAPH-2F99C').
+unicode_name(0x2F99D, 'CJK COMPATIBILITY IDEOGRAPH-2F99D').
+unicode_name(0x2F99E, 'CJK COMPATIBILITY IDEOGRAPH-2F99E').
+unicode_name(0x2F99F, 'CJK COMPATIBILITY IDEOGRAPH-2F99F').
+unicode_name(0x2F9A0, 'CJK COMPATIBILITY IDEOGRAPH-2F9A0').
+unicode_name(0x2F9A1, 'CJK COMPATIBILITY IDEOGRAPH-2F9A1').
+unicode_name(0x2F9A2, 'CJK COMPATIBILITY IDEOGRAPH-2F9A2').
+unicode_name(0x2F9A3, 'CJK COMPATIBILITY IDEOGRAPH-2F9A3').
+unicode_name(0x2F9A4, 'CJK COMPATIBILITY IDEOGRAPH-2F9A4').
+unicode_name(0x2F9A5, 'CJK COMPATIBILITY IDEOGRAPH-2F9A5').
+unicode_name(0x2F9A6, 'CJK COMPATIBILITY IDEOGRAPH-2F9A6').
+unicode_name(0x2F9A7, 'CJK COMPATIBILITY IDEOGRAPH-2F9A7').
+unicode_name(0x2F9A8, 'CJK COMPATIBILITY IDEOGRAPH-2F9A8').
+unicode_name(0x2F9A9, 'CJK COMPATIBILITY IDEOGRAPH-2F9A9').
+unicode_name(0x2F9AA, 'CJK COMPATIBILITY IDEOGRAPH-2F9AA').
+unicode_name(0x2F9AB, 'CJK COMPATIBILITY IDEOGRAPH-2F9AB').
+unicode_name(0x2F9AC, 'CJK COMPATIBILITY IDEOGRAPH-2F9AC').
+unicode_name(0x2F9AD, 'CJK COMPATIBILITY IDEOGRAPH-2F9AD').
+unicode_name(0x2F9AE, 'CJK COMPATIBILITY IDEOGRAPH-2F9AE').
+unicode_name(0x2F9AF, 'CJK COMPATIBILITY IDEOGRAPH-2F9AF').
+unicode_name(0x2F9B0, 'CJK COMPATIBILITY IDEOGRAPH-2F9B0').
+unicode_name(0x2F9B1, 'CJK COMPATIBILITY IDEOGRAPH-2F9B1').
+unicode_name(0x2F9B2, 'CJK COMPATIBILITY IDEOGRAPH-2F9B2').
+unicode_name(0x2F9B3, 'CJK COMPATIBILITY IDEOGRAPH-2F9B3').
+unicode_name(0x2F9B4, 'CJK COMPATIBILITY IDEOGRAPH-2F9B4').
+unicode_name(0x2F9B5, 'CJK COMPATIBILITY IDEOGRAPH-2F9B5').
+unicode_name(0x2F9B6, 'CJK COMPATIBILITY IDEOGRAPH-2F9B6').
+unicode_name(0x2F9B7, 'CJK COMPATIBILITY IDEOGRAPH-2F9B7').
+unicode_name(0x2F9B8, 'CJK COMPATIBILITY IDEOGRAPH-2F9B8').
+unicode_name(0x2F9B9, 'CJK COMPATIBILITY IDEOGRAPH-2F9B9').
+unicode_name(0x2F9BA, 'CJK COMPATIBILITY IDEOGRAPH-2F9BA').
+unicode_name(0x2F9BB, 'CJK COMPATIBILITY IDEOGRAPH-2F9BB').
+unicode_name(0x2F9BC, 'CJK COMPATIBILITY IDEOGRAPH-2F9BC').
+unicode_name(0x2F9BD, 'CJK COMPATIBILITY IDEOGRAPH-2F9BD').
+unicode_name(0x2F9BE, 'CJK COMPATIBILITY IDEOGRAPH-2F9BE').
+unicode_name(0x2F9BF, 'CJK COMPATIBILITY IDEOGRAPH-2F9BF').
+unicode_name(0x2F9C0, 'CJK COMPATIBILITY IDEOGRAPH-2F9C0').
+unicode_name(0x2F9C1, 'CJK COMPATIBILITY IDEOGRAPH-2F9C1').
+unicode_name(0x2F9C2, 'CJK COMPATIBILITY IDEOGRAPH-2F9C2').
+unicode_name(0x2F9C3, 'CJK COMPATIBILITY IDEOGRAPH-2F9C3').
+unicode_name(0x2F9C4, 'CJK COMPATIBILITY IDEOGRAPH-2F9C4').
+unicode_name(0x2F9C5, 'CJK COMPATIBILITY IDEOGRAPH-2F9C5').
+unicode_name(0x2F9C6, 'CJK COMPATIBILITY IDEOGRAPH-2F9C6').
+unicode_name(0x2F9C7, 'CJK COMPATIBILITY IDEOGRAPH-2F9C7').
+unicode_name(0x2F9C8, 'CJK COMPATIBILITY IDEOGRAPH-2F9C8').
+unicode_name(0x2F9C9, 'CJK COMPATIBILITY IDEOGRAPH-2F9C9').
+unicode_name(0x2F9CA, 'CJK COMPATIBILITY IDEOGRAPH-2F9CA').
+unicode_name(0x2F9CB, 'CJK COMPATIBILITY IDEOGRAPH-2F9CB').
+unicode_name(0x2F9CC, 'CJK COMPATIBILITY IDEOGRAPH-2F9CC').
+unicode_name(0x2F9CD, 'CJK COMPATIBILITY IDEOGRAPH-2F9CD').
+unicode_name(0x2F9CE, 'CJK COMPATIBILITY IDEOGRAPH-2F9CE').
+unicode_name(0x2F9CF, 'CJK COMPATIBILITY IDEOGRAPH-2F9CF').
+unicode_name(0x2F9D0, 'CJK COMPATIBILITY IDEOGRAPH-2F9D0').
+unicode_name(0x2F9D1, 'CJK COMPATIBILITY IDEOGRAPH-2F9D1').
+unicode_name(0x2F9D2, 'CJK COMPATIBILITY IDEOGRAPH-2F9D2').
+unicode_name(0x2F9D3, 'CJK COMPATIBILITY IDEOGRAPH-2F9D3').
+unicode_name(0x2F9D4, 'CJK COMPATIBILITY IDEOGRAPH-2F9D4').
+unicode_name(0x2F9D5, 'CJK COMPATIBILITY IDEOGRAPH-2F9D5').
+unicode_name(0x2F9D6, 'CJK COMPATIBILITY IDEOGRAPH-2F9D6').
+unicode_name(0x2F9D7, 'CJK COMPATIBILITY IDEOGRAPH-2F9D7').
+unicode_name(0x2F9D8, 'CJK COMPATIBILITY IDEOGRAPH-2F9D8').
+unicode_name(0x2F9D9, 'CJK COMPATIBILITY IDEOGRAPH-2F9D9').
+unicode_name(0x2F9DA, 'CJK COMPATIBILITY IDEOGRAPH-2F9DA').
+unicode_name(0x2F9DB, 'CJK COMPATIBILITY IDEOGRAPH-2F9DB').
+unicode_name(0x2F9DC, 'CJK COMPATIBILITY IDEOGRAPH-2F9DC').
+unicode_name(0x2F9DD, 'CJK COMPATIBILITY IDEOGRAPH-2F9DD').
+unicode_name(0x2F9DE, 'CJK COMPATIBILITY IDEOGRAPH-2F9DE').
+unicode_name(0x2F9DF, 'CJK COMPATIBILITY IDEOGRAPH-2F9DF').
+unicode_name(0x2F9E0, 'CJK COMPATIBILITY IDEOGRAPH-2F9E0').
+unicode_name(0x2F9E1, 'CJK COMPATIBILITY IDEOGRAPH-2F9E1').
+unicode_name(0x2F9E2, 'CJK COMPATIBILITY IDEOGRAPH-2F9E2').
+unicode_name(0x2F9E3, 'CJK COMPATIBILITY IDEOGRAPH-2F9E3').
+unicode_name(0x2F9E4, 'CJK COMPATIBILITY IDEOGRAPH-2F9E4').
+unicode_name(0x2F9E5, 'CJK COMPATIBILITY IDEOGRAPH-2F9E5').
+unicode_name(0x2F9E6, 'CJK COMPATIBILITY IDEOGRAPH-2F9E6').
+unicode_name(0x2F9E7, 'CJK COMPATIBILITY IDEOGRAPH-2F9E7').
+unicode_name(0x2F9E8, 'CJK COMPATIBILITY IDEOGRAPH-2F9E8').
+unicode_name(0x2F9E9, 'CJK COMPATIBILITY IDEOGRAPH-2F9E9').
+unicode_name(0x2F9EA, 'CJK COMPATIBILITY IDEOGRAPH-2F9EA').
+unicode_name(0x2F9EB, 'CJK COMPATIBILITY IDEOGRAPH-2F9EB').
+unicode_name(0x2F9EC, 'CJK COMPATIBILITY IDEOGRAPH-2F9EC').
+unicode_name(0x2F9ED, 'CJK COMPATIBILITY IDEOGRAPH-2F9ED').
+unicode_name(0x2F9EE, 'CJK COMPATIBILITY IDEOGRAPH-2F9EE').
+unicode_name(0x2F9EF, 'CJK COMPATIBILITY IDEOGRAPH-2F9EF').
+unicode_name(0x2F9F0, 'CJK COMPATIBILITY IDEOGRAPH-2F9F0').
+unicode_name(0x2F9F1, 'CJK COMPATIBILITY IDEOGRAPH-2F9F1').
+unicode_name(0x2F9F2, 'CJK COMPATIBILITY IDEOGRAPH-2F9F2').
+unicode_name(0x2F9F3, 'CJK COMPATIBILITY IDEOGRAPH-2F9F3').
+unicode_name(0x2F9F4, 'CJK COMPATIBILITY IDEOGRAPH-2F9F4').
+unicode_name(0x2F9F5, 'CJK COMPATIBILITY IDEOGRAPH-2F9F5').
+unicode_name(0x2F9F6, 'CJK COMPATIBILITY IDEOGRAPH-2F9F6').
+unicode_name(0x2F9F7, 'CJK COMPATIBILITY IDEOGRAPH-2F9F7').
+unicode_name(0x2F9F8, 'CJK COMPATIBILITY IDEOGRAPH-2F9F8').
+unicode_name(0x2F9F9, 'CJK COMPATIBILITY IDEOGRAPH-2F9F9').
+unicode_name(0x2F9FA, 'CJK COMPATIBILITY IDEOGRAPH-2F9FA').
+unicode_name(0x2F9FB, 'CJK COMPATIBILITY IDEOGRAPH-2F9FB').
+unicode_name(0x2F9FC, 'CJK COMPATIBILITY IDEOGRAPH-2F9FC').
+unicode_name(0x2F9FD, 'CJK COMPATIBILITY IDEOGRAPH-2F9FD').
+unicode_name(0x2F9FE, 'CJK COMPATIBILITY IDEOGRAPH-2F9FE').
+unicode_name(0x2F9FF, 'CJK COMPATIBILITY IDEOGRAPH-2F9FF').
+unicode_name(0x2FA00, 'CJK COMPATIBILITY IDEOGRAPH-2FA00').
+unicode_name(0x2FA01, 'CJK COMPATIBILITY IDEOGRAPH-2FA01').
+unicode_name(0x2FA02, 'CJK COMPATIBILITY IDEOGRAPH-2FA02').
+unicode_name(0x2FA03, 'CJK COMPATIBILITY IDEOGRAPH-2FA03').
+unicode_name(0x2FA04, 'CJK COMPATIBILITY IDEOGRAPH-2FA04').
+unicode_name(0x2FA05, 'CJK COMPATIBILITY IDEOGRAPH-2FA05').
+unicode_name(0x2FA06, 'CJK COMPATIBILITY IDEOGRAPH-2FA06').
+unicode_name(0x2FA07, 'CJK COMPATIBILITY IDEOGRAPH-2FA07').
+unicode_name(0x2FA08, 'CJK COMPATIBILITY IDEOGRAPH-2FA08').
+unicode_name(0x2FA09, 'CJK COMPATIBILITY IDEOGRAPH-2FA09').
+unicode_name(0x2FA0A, 'CJK COMPATIBILITY IDEOGRAPH-2FA0A').
+unicode_name(0x2FA0B, 'CJK COMPATIBILITY IDEOGRAPH-2FA0B').
+unicode_name(0x2FA0C, 'CJK COMPATIBILITY IDEOGRAPH-2FA0C').
+unicode_name(0x2FA0D, 'CJK COMPATIBILITY IDEOGRAPH-2FA0D').
+unicode_name(0x2FA0E, 'CJK COMPATIBILITY IDEOGRAPH-2FA0E').
+unicode_name(0x2FA0F, 'CJK COMPATIBILITY IDEOGRAPH-2FA0F').
+unicode_name(0x2FA10, 'CJK COMPATIBILITY IDEOGRAPH-2FA10').
+unicode_name(0x2FA11, 'CJK COMPATIBILITY IDEOGRAPH-2FA11').
+unicode_name(0x2FA12, 'CJK COMPATIBILITY IDEOGRAPH-2FA12').
+unicode_name(0x2FA13, 'CJK COMPATIBILITY IDEOGRAPH-2FA13').
+unicode_name(0x2FA14, 'CJK COMPATIBILITY IDEOGRAPH-2FA14').
+unicode_name(0x2FA15, 'CJK COMPATIBILITY IDEOGRAPH-2FA15').
+unicode_name(0x2FA16, 'CJK COMPATIBILITY IDEOGRAPH-2FA16').
+unicode_name(0x2FA17, 'CJK COMPATIBILITY IDEOGRAPH-2FA17').
+unicode_name(0x2FA18, 'CJK COMPATIBILITY IDEOGRAPH-2FA18').
+unicode_name(0x2FA19, 'CJK COMPATIBILITY IDEOGRAPH-2FA19').
+unicode_name(0x2FA1A, 'CJK COMPATIBILITY IDEOGRAPH-2FA1A').
+unicode_name(0x2FA1B, 'CJK COMPATIBILITY IDEOGRAPH-2FA1B').
+unicode_name(0x2FA1C, 'CJK COMPATIBILITY IDEOGRAPH-2FA1C').
+unicode_name(0x2FA1D, 'CJK COMPATIBILITY IDEOGRAPH-2FA1D').

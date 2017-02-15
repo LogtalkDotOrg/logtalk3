@@ -61,6 +61,8 @@ events posted by the ECLiPSe compiler.
 Library
 -------
 
+* ADDED: Plain Prolog version of the Unicode 6.2 standard.
+
 * ADDED: Predicate `atom::split/3` for splitting an atom into a list of
 sub-atoms given another atom as delimiter.
 
