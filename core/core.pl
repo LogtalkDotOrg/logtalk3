@@ -2949,7 +2949,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 2, rc4)).
+'$lgt_version_data'(logtalk(3, 9, 2, rc5)).
 
 
 
@@ -16469,8 +16469,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_missing_directives_'(Type, Entity, Path) :-
 	'$lgt_pp_mode_'(Mode, _, Lines),
-	% declared predicate
+	% documented predicate or non-terminal
 	functor(Mode, Functor, Arity),
+	\+ '$lgt_pp_non_terminal_'(Functor, Arity, _),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	\+ '$lgt_pp_protected_'(Functor, Arity),
 	\+ '$lgt_pp_private_'(Functor, Arity),

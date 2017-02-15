@@ -46,6 +46,9 @@ directives.
 failed to explicitly turn off the other. This bug would prevent in some cases
 overriding the default compilation mode.
 
+* FIXED: Spurious reports on missing scope directives when using `mode/2`
+directives to document non-terminals.
+
 Prolog adapter and integration files
 ------------------------------------
 
