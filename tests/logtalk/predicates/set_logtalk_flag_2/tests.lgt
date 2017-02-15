@@ -22,23 +22,33 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/12/11,
+		date is 2017/02/15,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in predicate.'
 	]).
 
-	:- discontiguous(succeeds/1).
-	:- discontiguous(fails/1).
-	:- discontiguous(throws/2).
-
-	throws(set_logtalk_flag_2_1, error(instantiation_error, logtalk(set_logtalk_flag(_,_),_))) :-
+	throws(set_logtalk_flag_2_01, error(instantiation_error, logtalk(set_logtalk_flag(_,_),_))) :-
 		{set_logtalk_flag(_, _)}.
 
-	throws(set_logtalk_flag_2_2, error(type_error(atom,1), logtalk(set_logtalk_flag(1,a),_))) :-
+	throws(set_logtalk_flag_2_02, error(type_error(atom,1), logtalk(set_logtalk_flag(1,a),_))) :-
 		{set_logtalk_flag(1, a)}.
 
-	throws(set_logtalk_flag_2_3, error(domain_error(flag,non_existing_flag), logtalk(set_logtalk_flag(non_existing_flag,a),_))) :-
+	throws(set_logtalk_flag_2_03, error(domain_error(flag,non_existing_flag), logtalk(set_logtalk_flag(non_existing_flag,a),_))) :-
 		{set_logtalk_flag(non_existing_flag, a)}.
+
+	% turning the debug flag on must automatically turn off the optimize flag
+	succeeds(set_logtalk_flag_2_04) :-
+		set_logtalk_flag(optimize, on),
+		set_logtalk_flag(debug, on),
+		current_logtalk_flag(debug, Debug), Debug == on,
+		current_logtalk_flag(optimize, Optimize), Optimize == off.
+
+	% turning the optimize flag on must automatically turn off the debug flag
+	succeeds(set_logtalk_flag_2_05) :-
+		set_logtalk_flag(debug, on),
+		set_logtalk_flag(optimize, on),
+		current_logtalk_flag(optimize, Optimize), Optimize == on,
+		current_logtalk_flag(debug, Debug), Debug == off.
 
 :- end_object.

@@ -246,15 +246,15 @@ The library notation provides functionality inspired by the <code>file_search_pa
 <h3 id="programming_flags">Compiler flags</h3>
 
 <p>
-The <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> and <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a> always use the current set of default compiler flags as specified in your settings file and the Logtalk adapter files or changed for the current session using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a>. Although the default flag values cover the usual cases, you may want to use a different set of flag values while compiling or loading some of your Logtalk source files. This can be accomplished by using the <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_2.html"><code>logtalk_compile/2</code></a> built-in predicates. These two predicates accept a list of flag values affecting how a Logtalk source file is compiled and loaded:
+The <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> and <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a> always use the current set of default compiler flags as specified in your settings file and the Logtalk adapter files or changed for the current session using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a>. Although the default flag values cover the usual cases, you may want to use a different set of flag values while compiling or loading some of your Logtalk source files. This can be accomplished by using the <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_2.html"><code>logtalk_compile/2</code></a> built-in predicates. These two predicates accept a list of options affecting how a Logtalk source file is compiled and loaded:
 </p>
-<pre>| ?- logtalk_compile(Files, Flags).</pre>
+<pre>| ?- logtalk_compile(Files, Options).</pre>
 <p>
 or:
 </p>
-<pre>| ?- logtalk_load(Files, Flags).</pre>
+<pre>| ?- logtalk_load(Files, Options).</pre>
 <p>
-In fact, the <code>logtalk_load/1</code> and <code>logtalk_compile/1</code> predicates are just shortcuts to the extended versions called with the default compiler flag values.
+In fact, the <code>logtalk_load/1</code> and <code>logtalk_compile/1</code> predicates are just shortcuts to the extended versions called with the default compiler flag values. The options are represented by a compound term where the functor is the flag name and the sole argument is the flag value.
 </p>
 <p>
 We may also change the default flag values from the ones loaded from the adapter file by using the <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> built-in predicate. For example:
@@ -368,7 +368,6 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 		<dt><code>scratch_directory(Directory)</code></dt>
 			<dd>Sets the directory to be used to store the temporary files generated when compiling Logtalk source files. This directory can be specified using an atom or using library notation. The directory must always end with a slash. The default value is a sub-directory of the source files directory, either <code>'./lgt_tmp/'</code> or <code>'./.lgt_tmp/'</code> (depending on the back-end Prolog compiler and operating-system). Relative directories must always start with <code>'./'</code> due to the lack of a portable solution to check if a path is relative or absolute.</dd>
 	</dl>
-
 	<dl>
 		<dt><code>report(Option)</code></dt>
 			<dd>Controls the default printing of messages. Possible option values are <code>on</code> (by usual default, print all messages that are not intercepted by the user), <code>warnings</code> (only print warning and error messages that are not intercepted by the user), and <code>off</code> (do not print any messages that are not intercepted by the user).</dd>
@@ -379,7 +378,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>optimize(Option)</code></dt>
-			<dd>Controls the compiler optimizations. Possible option values are <code>on</code> (used by default for deployment) and <code>off</code> (used by default for development). Compiler optimizations include the use of static binding whenever possible, the removal of redundant calls to <code>true/0</code> from predicate clauses, the removal of redundant unifications when compiling grammar rules, and inlining of predicate definitions with a single clause that links to a local predicate, to a plain Prolog built-in (or foreign) predicate, or to a Prolog module predicate with the same arguments. Care should be taken when developing applications with this flag turned on as changing and reloading a file may render static binding optimizations invalid for code defining in other loaded files.</dd>
+			<dd>Controls the compiler optimizations. Possible option values are <code>on</code> (used by default for deployment) and <code>off</code> (used by default for development). Compiler optimizations include the use of static binding whenever possible, the removal of redundant calls to <code>true/0</code> from predicate clauses, the removal of redundant unifications when compiling grammar rules, and inlining of predicate definitions with a single clause that links to a local predicate, to a plain Prolog built-in (or foreign) predicate, or to a Prolog module predicate with the same arguments. Care should be taken when developing applications with this flag turned on as changing and reloading a file may render static binding optimizations invalid for code defining in other loaded files. Turning on this flag automatically turns off the <code>debug</code> flag.</dd>
 	</dl>
 	<dl>
 		<dt><code>source_data(Option)</code></dt>
@@ -387,7 +386,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>debug(Option)</code></dt>
-			<dd>Controls the compilation of source files in debug mode (the Logtalk default debugger can only be used with files compiled in this mode). Possible option values are <code>on</code> and <code>off</code> (the usual default).</dd>
+			<dd>Controls the compilation of source files in debug mode (the Logtalk default debugger can only be used with files compiled in this mode). Possible option values are <code>on</code> and <code>off</code> (the usual default). Turning on this flag automatically turns off the <code>optimize</code> flag.</dd>
 	</dl>
 	<dl>
 		<dt><code>reload(Option)</code></dt>
@@ -792,7 +791,7 @@ The Logtalk compiler automatically removes any redundant calls to the built-in p
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 22, 2016</span>
+		<span>Last updated on: February 15, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
