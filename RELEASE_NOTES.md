@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.09.2 - February ??, 2016
+3.09.2 - February ??, 2017
 ==========================
 
 Logtalk compiler and runtime
@@ -118,7 +118,7 @@ Contributed by Sergio Castro.
 * IMPROVED: Documentation of the Logtalk support for the Atom text editor.
 
 
-3.09.1 - January 16, 2016
+3.09.1 - January 16, 2017
 =========================
 
 Logtalk compiler and runtime
