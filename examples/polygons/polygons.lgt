@@ -23,8 +23,8 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.2,
-		date is 2005/8/15,
+		version is 1.3,
+		date is 2017/02/15,
 		author is 'Paulo Moura',
 		comment is 'Polygon predicates.'
 	]).
@@ -32,10 +32,10 @@
 	:- public(move/2).
 	:- mode(move(+integer, +integer), one).
 
-	:- public(trans_x/2).
+	:- public(trans_x/1).
 	:- mode(trans_x(+integer), one).
 
-	:- public(trans_y/2).
+	:- public(trans_y/1).
 	:- mode(trans_y(+integer), one).
 
 	:- public(number_of_sides/1).

@@ -83,8 +83,8 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1.0,
-		date is 2016/05/25,
+		version is 1.1,
+		date is 2017/02/15,
 		author is 'Paulo Moura',
 		comment is 'Block stacks. A stack is represented by top-bottom tuples.'
 	]).
@@ -125,7 +125,7 @@
 
 	:- private(tuple_/2).
 	:- dynamic(tuple_/2).
-	:- mode(tuple_(?tuple), zero_or_more).
+	:- mode(tuple_(?object_identifier, ?object_identifier), zero_or_more).
 	:- info(tuple_/2, [
 		comment is 'Stores the relation tuples.',
 		argnames is ['Top', 'Bottom']

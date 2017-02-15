@@ -21,9 +21,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 5.5,
+		version is 5.6,
 		author is 'Paulo Moura',
-		date is 2014/09/27,
+		date is 2017/02/15,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'
 	]).
 
@@ -48,8 +48,8 @@
 	]).
 
 	:- public(benchmark/2).
-	:- mode(move(?atom, -callable), zero_or_more).
-	:- info(move/2, [
+	:- mode(benchmark(?atom, -callable), zero_or_more).
+	:- info(benchmark/2, [
 		comment is 'Table of benchmark identifiers and benchmark goals.',
 		argnames is ['Id', 'Goal']
 	]).
