@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk Docker publishing script for stable versions
-##   Last updated on February 14, 2017
+##   Last updated on February 15, 2017
 ##
 ##   This file is part of Logtalk <http://logtalk.org/>
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
@@ -22,6 +22,10 @@
 ##   limitations under the License.
 ##
 #############################################################################
+
+
+# allow using this script from any directory
+cd "$(dirname "$0")" || exit 1
 
 TAG=$(cat ../../../VERSION.txt | sed -e 's/-stable$//' | sed -e 's/\.//g')
 
