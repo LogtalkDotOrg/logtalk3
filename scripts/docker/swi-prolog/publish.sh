@@ -28,7 +28,7 @@
 cd "$(dirname "$0")" || exit 1
 
 TAG=$(cat ../../../VERSION.txt | sed -e 's/-stable$//' | sed -e 's/\.//g')
-
-docker build -t logtalk/logtalk3-swi -t logtalk/logtalk3-swi:${TAG} .
+VERSION=lgt${TAG}stable
+docker build --build-arg LOGTALK_VERSION=${VERSION} -t logtalk/logtalk3-swi -t logtalk/logtalk3-swi:${TAG} .
 docker push logtalk/logtalk3-swi
 docker push logtalk/logtalk3-swi:${TAG}
