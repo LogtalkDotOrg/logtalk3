@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.7,
+		version is 3.8,
 		author is 'Paulo Moura',
-		date is 2016/11/09,
+		date is 2017/02/15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1079,7 +1079,8 @@
 	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
 		atom_concat(Test, Step, Head),
 		logtalk_load_context(entity_name, Entity),
-		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, _),
+		logtalk::execution_context(ExecutionContext, Entity, Entity, Entity, Entity, [], []),
+		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, ExecutionContext),
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests) :-

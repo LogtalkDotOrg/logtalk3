@@ -82,6 +82,10 @@ Tools
 * FIXED: Runtime error in the `dead_code_scanner` tool when scanning source
 files that define protocols.
 
+* FIXED: Bug in the `lgtunit` tool when compiling in debug mode tests using the
+`test/3` dialect where condition, setup, and cleanup goals would be missing the
+execution context.
+
 Tests
 -----
 
