@@ -1,8 +1,8 @@
 name(logtalk).
 title('Logtalk - Object-Oriented Logic Programming Language').
-version('3.09.2').
+version('3.09.3').
 author('Paulo Moura', 'pmoura@logtalk.org').
 packager('Paulo Moura', 'pmoura@logtalk.org').
 maintainer('Paulo Moura', 'pmoura@logtalk.org').
 home('http://logtalk.org/').
-download('http://logtalk.org/files/swi-prolog/packs/logtalk-3.09.2.tgz').
+download('http://logtalk.org/files/swi-prolog/packs/logtalk-3.09.3.tgz').
