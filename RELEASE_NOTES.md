@@ -24,7 +24,11 @@ RELEASE NOTES
 3.09.3 - March ??, 2017
 =======================
 
+Installers and installation scripts
+-----------------------------------
 
+* FIXED: Bug in Docker publishing script where the `master` branch was used to
+deploy stable versions but not using the tagged stable commits.
 
 
 3.09.2 - February 15, 2017
