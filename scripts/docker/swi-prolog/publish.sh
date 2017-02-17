@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #############################################################################
 ##
 ##   Logtalk Docker publishing script for stable versions
-##   Last updated on February 15, 2017
+##   Last updated on February 17, 2017
 ##
 ##   This file is part of Logtalk <http://logtalk.org/>
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and

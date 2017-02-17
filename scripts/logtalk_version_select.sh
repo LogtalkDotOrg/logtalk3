@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #############################################################################
 ## 
 ##   Logtalk version select script
-##   Last updated on February 12, 2017
+##   Last updated on February 17, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>

@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #############################################################################
 ## 
 ##   Integration script for B-Prolog
-##   Last updated on October 11, 2013
+##   Last updated on February 17, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
