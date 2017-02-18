@@ -34,6 +34,12 @@ bug report.
 * FIXED: Bug in Docker publishing script where the `master` branch was used to
 deploy stable versions but not using the tagged stable commits.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Configuration file for the Atom text editor `process-palette` plug-in
+when used on Windows systems.
+
 
 3.09.2 - February 15, 2017
 ==========================
