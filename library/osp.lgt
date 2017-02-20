@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
-		date is 2016/10/30,
+		date is 2017/02/20,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -161,9 +161,9 @@
 	]).
 
 	:- public(time_stamp/1).
-	:- mode(time_stamp(-number), one).
+	:- mode(time_stamp(-ground), one).
 	:- info(time_stamp/1, [
-		comment is 'Returns a system-dependent time stamp (which can be used for sorting).',
+		comment is 'Returns a system-dependent time stamp, which can be used for sorting, but should be regarded otherwise as an opaque term.',
 		argnames is ['Time']
 	]).
 

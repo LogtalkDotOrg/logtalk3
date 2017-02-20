@@ -24,6 +24,11 @@ RELEASE NOTES
 3.09.3 - March ??, 2017
 =======================
 
+Library
+-------
+
+* FIXED: Declaration of the return type for the `os::time_stamp/1` predicate.
+
 Installers and installation scripts
 -----------------------------------
 
