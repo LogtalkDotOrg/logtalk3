@@ -29,6 +29,11 @@ Library
 
 * FIXED: Declaration of the return type for the `os::time_stamp/1` predicate.
 
+Tests
+-----
+
+* ADDED: Some unit tests for the `os` library.
+
 Installers and installation scripts
 -----------------------------------
 
