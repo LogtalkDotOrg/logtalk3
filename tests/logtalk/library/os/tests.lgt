@@ -191,6 +191,9 @@
 		os::expand_path(File, ExpandedFile),
 		ExpandedFile == Path.
 
+	setup :-
+		cleanup.
+
 	cleanup :-
 		this(This),
 		object_property(This, file(_,Directory)),
