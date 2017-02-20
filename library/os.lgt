@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.28,
+		version is 1.29,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2017/02/20,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -350,7 +350,8 @@
 			{path_sysop(rename, OldPath, NewPath)}.
 
 		environment_variable(Variable, Value) :-
-			{expand_atom(Variable, Value)}.
+			atom_concat('$', Variable, DollarVariable),
+			{expand_atom(DollarVariable, Value)}.
 
 		time_stamp(Time) :-
 			{datime(Time)}.

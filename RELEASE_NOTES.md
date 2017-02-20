@@ -29,6 +29,8 @@ Library
 
 * FIXED: Declaration of the return type for the `os::time_stamp/1` predicate.
 
+* FIXED: Implementation of the `os::environment_variable/2` predicate for XSB.
+
 Tools
 -----
 
