@@ -36,6 +36,10 @@ Library
 Tools
 -----
 
+* FIXED: Extra characters in the beginning of the lines in the listings of
+skipped and failed tests when using the `logtalk_tester.sh` script from the
+directory that contains the tests.
+
 * FIXED: Regression in previous release when passing additional arguments to
 the `logtalk_tester.sh` script.
 
