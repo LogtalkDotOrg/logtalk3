@@ -29,6 +29,12 @@ Library
 
 * FIXED: Declaration of the return type for the `os::time_stamp/1` predicate.
 
+Tools
+-----
+
+* FIXED: Regression in previous release when passing additional arguments to
+the `logtalk_tester.sh` script.
+
 Tests
 -----
 

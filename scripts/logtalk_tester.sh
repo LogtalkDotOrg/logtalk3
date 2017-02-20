@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on February 17, 2017
+##   Last updated on February 20, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.19"
+	echo "$(basename "$0") 0.20"
 	exit 0
 }
 
@@ -125,10 +125,18 @@ run_tests() {
 run_test() {
 	name="$1"
 	goal="$2"
-	if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
-		$timeout_command $timeout $logtalk_call "$goal" -- "$@" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+	if [ ${#args[@]} -eq 0 ]; then
+		if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
+			$timeout_command $timeout $logtalk_call "$goal" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		else
+			$logtalk_call "$goal" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		fi
 	else
-		$logtalk_call "$goal" -- "$@" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
+			$timeout_command $timeout $logtalk_call "$goal" -- "${args[@]}" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		else
+			$logtalk_call "$goal" -- "${args[@]}" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
+		fi
 	fi
 	return $?
 }
@@ -178,6 +186,7 @@ do
 done
 
 shift $((OPTIND - 1))
+args=("$@")
 
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
