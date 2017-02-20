@@ -84,4 +84,111 @@
 	test(os_environment_variable_2_02) :-
 		\+ os::environment_variable('FOO__BAR__BAZ', _).
 
+	% skip the following test as it requires passing
+	% extra arguments when executing this test set
+	- test(os_command_line_arguments_1_01) :-
+		os::command_line_arguments(Arguments),
+		Arguments == [foo, bar, baz].
+
+	test(os_pid_1_01) :-
+		os::pid(PID),
+		integer(PID).
+
+	test(os_file_exists_1_01) :-
+		this(This),
+		object_property(This, file(File)),
+		os::file_exists(File).
+
+	test(os_file_exists_1_02) :-
+		\+ os::file_exists(non_existing_file).
+
+	test(os_delete_file_1_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, test_file, TestFile),
+		open(TestFile, write, Stream),
+		close(Stream),
+		os::file_exists(TestFile),
+		os::delete_file(TestFile).
+
+	test(os_rename_file_2_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, test_file_1, TestFile1),
+		open(TestFile1, write, Stream),
+		close(Stream),
+		atom_concat(Directory, test_file_2, TestFile2),
+		os::rename_file(TestFile1, TestFile2),
+		\+ os::file_exists(TestFile1),
+		os::file_exists(TestFile2),
+		os::delete_file(TestFile2).
+
+	test(os_directory_exists_1_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_exists(Directory).
+
+	test(os_directory_exists_1_02) :-
+		\+ os::directory_exists(non_existing_directory).
+
+	test(os_make_directory_1_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::make_directory(SubDirectory),
+		os::directory_exists(SubDirectory).
+
+	% make_directory/1 should succeed when the directory already exists
+	test(os_make_directory_1_02) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::make_directory(SubDirectory),
+		os::directory_exists(SubDirectory).
+
+	test(os_make_directory_path_1_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory),
+		os::make_directory_path(SubDirectory),
+		os::directory_exists(SubDirectory).
+
+	test(os_make_directory_path_1_02) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory),
+		os::make_directory_path(SubDirectory),
+		os::directory_exists(SubDirectory).
+
+	test(os_delete_directory_1_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::make_directory(SubDirectory),
+		os::delete_directory(SubDirectory),
+		\+ os::directory_exists(SubDirectory).
+
+	test(os_working_directory_01) :-
+		os::working_directory(WorkingDirectory),
+		atom(WorkingDirectory).
+
+	test(os_change_directory_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::change_directory(Directory),
+		os::working_directory(WorkingDirectory),
+		(	WorkingDirectory == Directory ->
+			true
+		;	sub_atom(Directory, 0, _, 1, DirectoryNoSlash),
+			WorkingDirectory == DirectoryNoSlash
+		).
+
+	test(os_expand_path_2_01) :-
+		this(This),
+		object_property(This, file(File,Directory)),
+		atom_concat(Directory, File, Path),
+		os::change_directory(Directory),
+		os::expand_path(File, ExpandedFile),
+		ExpandedFile == Path.
+
 :- end_object.
