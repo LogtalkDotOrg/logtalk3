@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.29,
+		version is 1.31,
 		author is 'Paulo Moura',
 		date is 2017/02/20,
 		comment is 'Portable operating-system access predicates.'
@@ -971,8 +971,8 @@
 		environment_variable(Variable, Value) :-
 			{os_env(Variable, Value)}.
 
-		time_stamp(_) :-
-			throw(not_available(time_stamp/1)).
+		time_stamp(TimeStamp) :-
+			TimeStamp is currtime.
 
 		date_time(0, 0, 0, 0, 0, 0, 0).
 
