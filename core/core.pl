@@ -5819,7 +5819,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_redefined_entity'(@entity_identifier, -atom, -atom, -atom, -nonvar)
+% '$lgt_redefined_entity'(@entity_identifier, -atom, -atom, -atom, -pair(integer))
 %
 % true if an entity of the same name is already loaded; returns entity type
 
@@ -5860,7 +5860,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom, +atom, +nonvar)
+% '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom, +atom, +pair(integer))
 %
 % prints an informative message or a warning for a redefined entity
 
@@ -6777,7 +6777,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_read_file_term'(@stream, -term, @list, -pair(integer))
+% '$lgt_read_file_term'(+atom, @stream, -term, @list, -pair(integer))
 %
 % remember term position and variable names in order to support the
 % logtalk_load_context/2 predicate and more informative compiler warning
@@ -7402,13 +7402,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_expanded_term'({ExpandedTerm}, Term, _) :-
 	% bypass control construct; expanded term is final
 	!,
-	'$lgt_source_file_context'(File, Lines),
 	(	callable(ExpandedTerm) ->
+		(	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines) ->
+			SourceData = sd(Term, VariableNames, File, Lines)
+		;	SourceData = nil, Lines = '-'(-1, -1)
+		),
 		(	'$lgt_pp_entity_'(_, _, _, _, _) ->
 			% ensure that the relative order of the entity terms is kept
-			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, File, Lines))
+			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, SourceData, Lines))
 		;	% non-entity terms
-			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, File, Lines))
+			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, SourceData, Lines))
 		)
 	;	var(ExpandedTerm) ->
 		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
@@ -7728,7 +7731,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% predicate during goal expansion)
 	(	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines) ->
 		SourceData = sd(Term, VariableNames, File, Lines)
-	;	SourceData = nil
+	;	SourceData = nil, Lines = '-'(-1, -1)
 	),
 	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta), SourceData, Lines)).
 
@@ -7786,8 +7789,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(ground, FileSpec),
 	% assume that ensure_loaded/1 is also a built-in predicate
 	ensure_loaded(FileSpec),
-	'$lgt_source_file_context'(File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(FileSpec)), File, Lines)).
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(FileSpec)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(use_module(FileSpec), _) :-
 	!,
@@ -7795,8 +7798,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(ground, FileSpec),
 	% assume that use_module/1 is also a built-in predicate
 	use_module(FileSpec),
-	'$lgt_source_file_context'(File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(FileSpec)), File, Lines)).
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(FileSpec)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(use_module(FileSpec, Imports), _) :-
 	!,
@@ -7805,8 +7808,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(ground, Imports),
 	% assume that use_module/2 is also a built-in predicate
 	use_module(FileSpec, Imports),
-	'$lgt_source_file_context'(File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(FileSpec, Imports)), File, Lines)).
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(FileSpec, Imports)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
@@ -7839,8 +7842,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_file_operators'(Priority, Specifier, Operators),
-	'$lgt_source_file_context'(File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), File, Lines)).
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), Ctx) :-
 	!,
@@ -7861,8 +7864,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% depending on the flag and on the back-end Prolog compiler
 	set_prolog_flag(Flag, Value),
 	% we also copy the directive to the generated intermediate Prolog file
-	'$lgt_source_file_context'(File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), File, Lines)).
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
@@ -7884,8 +7887,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file
-	'$lgt_source_file_context'(File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- Directive), File, Lines)),
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,File,Lines), Lines)),
 	% report a possible portability issue if warranted
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning),
@@ -9950,7 +9953,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% predicate during goal expansion)
 	(	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines) ->
 		SourceData = sd(Term, VariableNames, File, Lines)
-	;	SourceData = nil
+	;	SourceData = nil, Lines = '-'(-1, -1)
 	),
 	% copy the clause unchanged to the generated Prolog file
 	assertz('$lgt_pp_prolog_term_'(Clause, SourceData, Lines)).
@@ -16210,7 +16213,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% user-defined terms
 	retract('$lgt_pp_entity_term_'(Term, SourceData, Lines)),
-	'$lgt_compile_predicate_calls'(Term, SourceData, Lines, Optimize, TTerm),
+	'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm),
 	assertz('$lgt_pp_final_entity_term_'(TTerm, Lines)),
 	fail.
 
@@ -16224,21 +16227,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% other auxiliary clauses
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-	'$lgt_compile_predicate_calls'(Clause, nil, '-'(0,0), Optimize, TClause),
+	'$lgt_compile_predicate_calls'(Clause, nil, Optimize, TClause),
 	assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% initialization/1 goals
 	retract('$lgt_pp_object_initialization_'(Goal, SourceData, Lines)),
-	'$lgt_compile_predicate_calls'(Goal, SourceData, Lines, Optimize, TGoal),
+	'$lgt_compile_predicate_calls'(Goal, SourceData, Optimize, TGoal),
 	assertz('$lgt_pp_final_object_initialization_'(TGoal, Lines)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% other initialization goals found on proprietary Prolog directives
-	retract('$lgt_pp_entity_meta_directive_'(Directive, SourceData, Lines)),
-	'$lgt_compile_predicate_calls'(Directive, SourceData, Lines, Optimize, TDirective),
+	retract('$lgt_pp_entity_meta_directive_'(Directive, SourceData, _)),
+	'$lgt_compile_predicate_calls'(Directive, SourceData, Optimize, TDirective),
 	assertz('$lgt_pp_directive_'(TDirective)),
 	fail.
 
@@ -16248,9 +16251,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_predicate_calls'(+callable, +compound, +atom, -callable)
 
-'$lgt_compile_predicate_calls'(Term, SourceData, _, Optimize, TTerm) :-
+'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm) :-
 	(	catch(
-			'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm),
+			'$lgt_compile_predicate_calls_inner'(Term, SourceData, Optimize, TTerm),
 			Error,
 			'$lgt_compile_predicate_calls_error_handler'(Term, Error)
 		) ->
@@ -16261,10 +16264,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-
-% '$lgt_compile_predicate_calls'(+callable, +nonvar, +atom, -callable)
-
-'$lgt_compile_predicate_calls'(Body, SourceData, Optimize, TRule) :-
+'$lgt_compile_predicate_calls_inner'(Body, SourceData, Optimize, TRule) :-
 	(	SourceData = sd(Term, VariableNames, File, Lines) ->
 		assertz('$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines))
 	;	true
