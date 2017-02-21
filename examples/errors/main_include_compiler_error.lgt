@@ -18,9 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(ccredef).
+:- object(main_include_compiler_error).
 
-	% Logtalk built-in control constructs cannot be redefined
-	::(_).
+	:- public(a/0).
+
+	a.
+
+	:- include(include_compiler_error).
+
+	f.
+	g.
 
 :- end_object.

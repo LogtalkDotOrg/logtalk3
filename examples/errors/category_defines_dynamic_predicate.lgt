@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(catdynpred).
+:- category(category_defines_dynamic_predicate).
 
 	% dynamic predicates may be declared inside categories but ...
 	:- public(dynpred/1).

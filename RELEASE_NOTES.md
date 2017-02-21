@@ -58,6 +58,12 @@ Tests
 
 * ADDED: Some unit tests for the `os` library.
 
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate errors and warnings when using
+the `include/1` directive.
+
 Installers and installation scripts
 -----------------------------------
 

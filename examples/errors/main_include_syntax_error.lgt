@@ -18,19 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load(
-		[	warnings,
-			main_include_compiler_warning
-		],
-		[	redefined_built_ins(warning),
-			missing_directives(warning),
-			unknown_entities(warning),
-		 	unknown_predicates(warning),
-		 	undefined_predicates(warning),
-		 	singleton_variables(warning),
-		 	portability(warning),
-			report(on)
-		]
-	)
-).
+:- object(main_include_syntax_error).
+
+	a.
+	b.
+
+	:- include(include_syntax_error).
+
+	f.
+	g.
+
+:- end_object.

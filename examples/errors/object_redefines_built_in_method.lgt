@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(lgtmthdredef).
+:- object(object_redefines_built_in_method).
 
 	% Logtalk built-in methods cannot be redefined
 	asserta(_).

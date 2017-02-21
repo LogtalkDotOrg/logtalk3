@@ -18,10 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invclause).
+:- object(unknown_directive).
 
-	% invalid clause head
-	1234 :-
-		write(hello).
+	% unknown directive
+	:- index(predicate/3, [1, 2]).
 
 :- end_object.

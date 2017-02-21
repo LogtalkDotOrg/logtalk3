@@ -18,9 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(noninstdir).
+:- object(invalid_clause_head).
 
-	% misspelt directive functor
-	:- Public(predicate/0).
+	1234 :-
+		write(hello).
 
 :- end_object.

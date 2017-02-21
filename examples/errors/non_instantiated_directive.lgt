@@ -18,9 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(unknowndir).
+:- object(non_instantiated_directive).
 
-	% unknown directive
-	:- index(predicate/3, [1, 2]).
+	% misspelt directive functor
+	:- Public(predicate/0).
 
 :- end_object.

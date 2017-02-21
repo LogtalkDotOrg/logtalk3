@@ -19,14 +19,17 @@
 
 
 :- initialization((
-	(logtalk_load(lgtmthdredef, [report(on)]) -> true; true),
-	(logtalk_load(invclause, [report(on)]) -> true; true),
-	(logtalk_load(unknowndir, [report(on)]) -> true; true),
-	(logtalk_load(noninstdir, [report(on)]) -> true; true),
-	(logtalk_load(invargdir, [report(on)]) -> true; true),
-	(logtalk_load(unmatchdir, [report(on)]) -> true; true),
-	(logtalk_load(catdynpred, [report(on)]) -> true; true),
-	(logtalk_load(ccredef, [report(on)]) -> true; true),
-	(logtalk_load(usesrepeated, [report(on)]) -> true; true),
-	(logtalk_load(usesconflict, [report(on)]) -> true; true)
+	set_logtalk_flag(report, on),
+	ignore(logtalk_load(object_redefines_built_in_method)),
+	ignore(logtalk_load(invalid_clause_head)),
+	ignore(logtalk_load(unknown_directive)),
+	ignore(logtalk_load(non_instantiated_directive)),
+	ignore(logtalk_load(invalid_directive_argument)),
+	ignore(logtalk_load(unmatched_directive)),
+	ignore(logtalk_load(category_defines_dynamic_predicate)),
+	ignore(logtalk_load(control_construct_redefinition)),
+	ignore(logtalk_load(uses_predicate_repeated)),
+	ignore(logtalk_load(uses_predicate_conflict)),
+	ignore(logtalk_load(main_include_syntax_error)),
+	ignore(logtalk_load(main_include_compiler_error))
 )).
