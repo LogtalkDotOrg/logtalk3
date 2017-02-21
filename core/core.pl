@@ -12067,7 +12067,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 		% closed-world assumption: calls to static, declared but undefined
 		% predicates must fail instead of throwing an exception,
-		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
+		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity),
 		TPred = fail,
 		DPred = Pred
 	).
@@ -12090,7 +12090,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		% closed-world assumption: calls to static, declared but undefined
 		% predicates must fail instead of throwing an exception,
-		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
+		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity),
 		TPred = fail
 	),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
@@ -12141,7 +12141,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
-	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines).
+	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity).
 
 % call to a Prolog built-in predicate
 
@@ -16539,30 +16539,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports calls to declared, static, but undefined predicates and non-terminals
 
-'$lgt_report_undefined_predicate_call'(runtime, _, _).
+'$lgt_report_undefined_predicate_call'(runtime, _).
 
-'$lgt_report_undefined_predicate_call'(compile(_), Pred, Lines) :-
+'$lgt_report_undefined_predicate_call'(compile(_), Pred) :-
 	'$lgt_compiler_flag'(undefined_predicates, Value),
-	'$lgt_report_undefined_predicate_call_aux'(Value, Pred, Lines).
+	'$lgt_report_undefined_predicate_call_aux'(Value, Pred).
 
 
-'$lgt_report_undefined_predicate_call_aux'(silent, _, _).
+'$lgt_report_undefined_predicate_call_aux'(silent, _).
 
-'$lgt_report_undefined_predicate_call_aux'(error, Functor/Arity, _) :-
+'$lgt_report_undefined_predicate_call_aux'(error, Functor/Arity) :-
 	Arity2 is Arity - 2,
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
 		throw(existence_error(procedure, Functor//Arity2))
 	;	throw(existence_error(procedure, Functor/Arity))
 	).
 
-'$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity, Lines) :-
-	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
-	'$lgt_pp_entity_'(Type, Entity, _, _, _),
+'$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity) :-
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	Arity2 is Arity - 2,
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
-		'$lgt_print_message'(warning(undefined_predicates), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, Functor//Arity2))	
-	;	'$lgt_print_message'(warning(undefined_predicates), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(warning(undefined_predicates), core, declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2))	
+	;	'$lgt_print_message'(warning(undefined_predicates), core, declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity))
 	).
 
 
