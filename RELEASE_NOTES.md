@@ -24,6 +24,12 @@ RELEASE NOTES
 3.09.3 - March ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `file` key of the `logtalk_load_context/2` predicate to return
+the file being included when processing an `include/1` directive.
+
 Library
 -------
 
