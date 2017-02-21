@@ -2949,7 +2949,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc3)).
 
 
 
@@ -6682,8 +6682,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 % error handler for the compiler first stage
 
 '$lgt_first_stage_error_handler'(Error) :-
-	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _),
-	'$lgt_source_file_context'(SourceFile, Lines),
+	'$lgt_pp_file_paths_flags_'(_, _, MainSourceFile, ObjectFile, _),
+	(	'$lgt_source_file_context'(SourceFile, Lines) ->
+		true
+	;	% likely a syntax error when trying to read a main file term as syntax
+		% errors in included files are handled when reading a file to terms
+		SourceFile = MainSourceFile,
+		(	stream_property(Input, alias(logtalk_compiler_input)),
+			'$lgt_stream_current_line_number'(Input, Line) ->
+			Lines = Line-Line
+		;	Lines = '-'(-1, -1)
+		)
+	),
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
 
 
@@ -7517,7 +7527,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_directive'(+term, +compilation_context)
+% '$lgt_compile_directive'(@term, +compilation_context)
 %
 % compiles a directive
 
