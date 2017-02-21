@@ -265,8 +265,8 @@
 :- dynamic('$lgt_pp_dynamic_'/1).
 % '$lgt_pp_discontiguous_'(Head)
 :- dynamic('$lgt_pp_discontiguous_'/1).
-% '$lgt_pp_mode_'(Mode, Determinism, Lines)
-:- dynamic('$lgt_pp_mode_'/3).
+% '$lgt_pp_mode_'(Mode, Determinism, File, Lines)
+:- dynamic('$lgt_pp_mode_'/4).
 % '$lgt_pp_public_'(Functor, Arity)
 :- dynamic('$lgt_pp_public_'/2).
 % '$lgt_pp_protected_'(Functor, Arity)
@@ -279,8 +279,8 @@
 :- dynamic('$lgt_pp_predicate_alias_'/5).
 % '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
 :- dynamic('$lgt_pp_non_terminal_'/3).
-% '$lgt_pp_multifile_'(Head, Lines)
-:- dynamic('$lgt_pp_multifile_'/2).
+% '$lgt_pp_multifile_'(Head, File, Lines)
+:- dynamic('$lgt_pp_multifile_'/3).
 % '$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)
 :- dynamic('$lgt_pp_coinductive_'/7).
 
@@ -381,17 +381,17 @@
 % '$lgt_pp_updates_predicate_'(Dynamic, HeadFunctor/HeadArity, Lines)
 :- dynamic('$lgt_pp_updates_predicate_'/3).
 
-% '$lgt_pp_non_portable_predicate_'(Head, Lines)
-:- dynamic('$lgt_pp_non_portable_predicate_'/2).
-% '$lgt_pp_non_portable_function_'(Function, Lines)
-:- dynamic('$lgt_pp_non_portable_function_'/2).
+% '$lgt_pp_non_portable_predicate_'(Head, File, Lines)
+:- dynamic('$lgt_pp_non_portable_predicate_'/3).
+% '$lgt_pp_non_portable_function_'(Function, File, Lines)
+:- dynamic('$lgt_pp_non_portable_function_'/3).
 
-% '$lgt_pp_missing_meta_predicate_directive_'(Head, Lines)
-:- dynamic('$lgt_pp_missing_meta_predicate_directive_'/2).
-% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
-:- dynamic('$lgt_pp_missing_dynamic_directive_'/2).
-% '$lgt_pp_missing_discontiguous_directive_'(Head, Lines)
-:- dynamic('$lgt_pp_missing_discontiguous_directive_'/2).
+% '$lgt_pp_missing_meta_predicate_directive_'(Head, File, Lines)
+:- dynamic('$lgt_pp_missing_meta_predicate_directive_'/3).
+% '$lgt_pp_missing_dynamic_directive_'(Head, File, Lines)
+:- dynamic('$lgt_pp_missing_dynamic_directive_'/3).
+% '$lgt_pp_missing_discontiguous_directive_'(Head, File, Lines)
+:- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).
 
 % '$lgt_pp_previous_predicate_'(Head, Mode)
 :- dynamic('$lgt_pp_previous_predicate_'/2).
@@ -401,14 +401,14 @@
 % '$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_calls_non_terminal_'/3).
 
-% '$lgt_pp_referenced_object_'(Object, Lines)
-:- dynamic('$lgt_pp_referenced_object_'/2).
-% '$lgt_pp_referenced_protocol_'(Protocol, Lines)
-:- dynamic('$lgt_pp_referenced_protocol_'/2).
-% '$lgt_pp_referenced_category_'(Category, Lines)
-:- dynamic('$lgt_pp_referenced_category_'/2).
-% '$lgt_pp_referenced_module_'(Module, Lines)
-:- dynamic('$lgt_pp_referenced_module_'/2).
+% '$lgt_pp_referenced_object_'(Object, File, Lines)
+:- dynamic('$lgt_pp_referenced_object_'/3).
+% '$lgt_pp_referenced_protocol_'(Protocol, File, Lines)
+:- dynamic('$lgt_pp_referenced_protocol_'/3).
+% '$lgt_pp_referenced_category_'(Category, File, Lines)
+:- dynamic('$lgt_pp_referenced_category_'/3).
+% '$lgt_pp_referenced_module_'(Module, File, Lines)
+:- dynamic('$lgt_pp_referenced_module_'/3).
 
 % '$lgt_pp_referenced_object_message_'(Object, Functor/Arity, AliasFunctor/Arity, HeadFunctor/HeadArity, Lines)
 :- dynamic('$lgt_pp_referenced_object_message_'/5).
@@ -2949,7 +2949,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc1)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc2)).
 
 
 
@@ -6315,17 +6315,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 % runtime resolved ::/2 calls
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	% compiling a reference in a source file
 	!,
-	(	'$lgt_pp_referenced_object_'(Obj, _) ->
+	(	'$lgt_pp_referenced_object_'(Obj, _, _) ->
 		% not the first reference to this object
 		true
 	;	atom(Obj) ->
-		assertz('$lgt_pp_referenced_object_'(Obj, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_referenced_object_'(Obj, File, Lines))
 	;	% parametric object
 		'$lgt_term_template'(Obj, Template),
-		assertz('$lgt_pp_referenced_object_'(Template, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_referenced_object_'(Template, File, Lines))
 	).
 
 '$lgt_add_referenced_object'(_, _).
@@ -6338,12 +6340,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc, Ctx) :-
-	(	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
+	(	'$lgt_pp_referenced_protocol_'(Ptc, _, _) ->
 		% not the first reference to this protocol
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
+	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
 		% compiling a reference in a source file
-		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_referenced_protocol_'(Ptc, File, Lines))
 	;	% not a source file reference
 		true
 	).
@@ -6356,16 +6359,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg, Ctx) :-
-	(	'$lgt_pp_referenced_category_'(Ctg, _) ->
+	(	'$lgt_pp_referenced_category_'(Ctg, _, _) ->
 		% not the first reference to this category
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
+	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
 		% compiling a reference in a source file
 		(	atom(Ctg) ->
-			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
+			'$lgt_source_file_context'(File, Lines),
+			assertz('$lgt_pp_referenced_category_'(Ctg, File, Lines))
 		;	% parametric category
 			'$lgt_term_template'(Ctg, Template),
-			assertz('$lgt_pp_referenced_category_'(Template, Lines))
+			'$lgt_source_file_context'(File, Lines),
+			assertz('$lgt_pp_referenced_category_'(Template, File, Lines))
 		)
 	;	% not a source file reference
 		true
@@ -6379,12 +6384,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
-	(	'$lgt_pp_referenced_module_'(Module, _) ->
+	(	'$lgt_pp_referenced_module_'(Module, _, _) ->
 		% not the first reference to this module
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
+	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
 		% compiling a reference in a source file
-		assertz('$lgt_pp_referenced_module_'(Module, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_referenced_module_'(Module, File, Lines))
 	;	% not a source file reference
 		true
 	).
@@ -6469,11 +6475,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_properties'(Kind, Entity) :-
 	'$lgt_pp_file_paths_flags_'(Basename, Directory, _, _, _),
 	(	Kind == object ->
-		'$lgt_pp_referenced_object_'(Entity, Start-End)
+		'$lgt_pp_referenced_object_'(Entity, _, Start-End)
 	;	Kind == protocol ->
-		'$lgt_pp_referenced_protocol_'(Entity, Start-End)
+		'$lgt_pp_referenced_protocol_'(Entity, _, Start-End)
 	;	% Kind == category,
-		'$lgt_pp_referenced_category_'(Entity, Start-End)	
+		'$lgt_pp_referenced_category_'(Entity, _, Start-End)	
 	),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(Basename, Directory, Start, End)))),
 	fail.
@@ -6607,7 +6613,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_mode_'(Mode, Solutions, _),
+	'$lgt_pp_mode_'(Mode, Solutions, _, _),
 		functor(Mode, Functor, Arity),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)))),
 	fail.
@@ -7009,9 +7015,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_private_'(_, _)),
 	retractall('$lgt_pp_dynamic_'(_)),
 	retractall('$lgt_pp_discontiguous_'(_)),
-	retractall('$lgt_pp_multifile_'(_, _)),
+	retractall('$lgt_pp_multifile_'(_, _, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
-	retractall('$lgt_pp_mode_'(_, _, _)),
+	retractall('$lgt_pp_mode_'(_, _, _, _)),
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
@@ -7040,18 +7046,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _)),
 	retractall('$lgt_pp_updates_predicate_'(_, _, _)),
-	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
-	retractall('$lgt_pp_non_portable_function_'(_, _)),
-	retractall('$lgt_pp_missing_meta_predicate_directive_'(_, _)),
-	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
-	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _)),
+	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
+	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
+	retractall('$lgt_pp_missing_meta_predicate_directive_'(_, _, _)),
+	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
+	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _)),
-	retractall('$lgt_pp_referenced_object_'(_, _)),
-	retractall('$lgt_pp_referenced_protocol_'(_, _)),
-	retractall('$lgt_pp_referenced_category_'(_, _)),
-	retractall('$lgt_pp_referenced_module_'(_, _)),
+	retractall('$lgt_pp_referenced_object_'(_, _, _)),
+	retractall('$lgt_pp_referenced_protocol_'(_, _, _)),
+	retractall('$lgt_pp_referenced_category_'(_, _, _)),
+	retractall('$lgt_pp_referenced_module_'(_, _, _)),
 	retractall('$lgt_pp_referenced_object_message_'(_, _, _, _, _)),
 	retractall('$lgt_pp_referenced_module_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_built_in_'),
@@ -8011,9 +8017,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% we're indeed compiling an object
-		retract('$lgt_pp_referenced_object_'(Obj, Start-_)),
+		retract('$lgt_pp_referenced_object_'(Obj, _, Start-_)),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_object_'(Obj, Start-End)),
+		assertz('$lgt_pp_referenced_object_'(Obj, _, Start-End)),
 		'$lgt_second_stage'(object, Obj, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 	;	% entity ending directive mismatch 
@@ -8060,9 +8066,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
 		% we're indeed compiling a protocol
-		retract('$lgt_pp_referenced_protocol_'(Ptc, Start-_)),
+		retract('$lgt_pp_referenced_protocol_'(Ptc, _, Start-_)),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_protocol_'(Ptc, Start-End)),
+		assertz('$lgt_pp_referenced_protocol_'(Ptc, _, Start-End)),
 		'$lgt_second_stage'(protocol, Ptc, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch 
@@ -8115,9 +8121,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
 		% we're indeed compiling a category
-		retract('$lgt_pp_referenced_category_'(Ctg, Start-_)),
+		retract('$lgt_pp_referenced_category_'(Ctg, _, Start-_)),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_category_'(Ctg, Start-End)),
+		assertz('$lgt_pp_referenced_category_'(Ctg, _, Start-End)),
 		'$lgt_second_stage'(category, Ctg, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch 
@@ -8364,9 +8370,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_valid_number_of_proofs'(Solutions),
 	throw(type_error(number_of_proofs, Solutions)).
 
-'$lgt_compile_logtalk_directive'(mode(Mode, Solutions), Ctx) :-
-	'$lgt_comp_ctx_lines'(Ctx, Lines),
-	assertz('$lgt_pp_mode_'(Mode, Solutions, Lines)).
+'$lgt_compile_logtalk_directive'(mode(Mode, Solutions), _) :-
+	'$lgt_source_file_context'(File, Lines),
+	assertz('$lgt_pp_mode_'(Mode, Solutions, File, Lines)).
 
 % multifile/2 predicate directive
 
@@ -8979,7 +8985,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/ExtArity))))
 	).
 
-'$lgt_compile_multifile_directive_resource'(Pred, Ctx) :-
+'$lgt_compile_multifile_directive_resource'(Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
@@ -8987,13 +8993,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocols cannot contain predicate definitions
 		throw(permission_error(declare, multifile, Functor/Arity))
 	;	functor(Head, Functor, Arity),
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
-		assertz('$lgt_pp_multifile_'(Head, Lines)),
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
 
-'$lgt_compile_multifile_directive_resource'(NonTerminal, Ctx) :-
+'$lgt_compile_multifile_directive_resource'(NonTerminal, _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
@@ -9001,8 +9007,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocols cannot contain non-terminal definitions
 		throw(permission_error(declare, multifile, Functor//Arity))
 	;	functor(Head, Functor, ExtArity),
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
-		assertz('$lgt_pp_multifile_'(Head, Lines)),
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
@@ -10265,18 +10271,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, _),	
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred),
 	TPred = '$lgt_metacall'(Pred, ExCtx).
 
 % compiler bypass control construct (opaque to cuts)
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, _),	
 	(	var(Pred) ->
 		TPred = call(Pred),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
 	;	Pred == ! ->
 		TPred = true
 	;	'$lgt_check'(callable, Pred),
@@ -10531,10 +10537,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, _),	
 	(	var(QGoal) ->
 		% runtime meta-call
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal, Lines),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal),
 		TPred = '$lgt_bagof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -10562,10 +10568,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),	
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, _),	
 	(	var(QGoal) ->
 		% runtime meta-call
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal, Lines),
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, QGoal),
 		TPred = '$lgt_setof'(Term, QGoal, List, ExCtx),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
@@ -11109,7 +11115,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, Entity, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	'$lgt_check'(var_or_predicate_indicator, Pred),
-	'$lgt_check_dynamic_directive'(Mode, Pred, Lines),
+	'$lgt_check_dynamic_directive'(Mode, Pred),
 	(	ground(Pred) ->
 		TCond = '$lgt_abolish_checked'(Database, Pred, Database, p(_)),
 		'$lgt_remember_updated_predicate'(Mode, Pred, Head, Lines)
@@ -11120,8 +11126,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(assert(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	'$lgt_check_non_portable_prolog_built_in_call'(Mode, assert(Clause), Lines),
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_check_non_portable_prolog_built_in_call'(Mode, assert(Clause)),
 	'$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx).
 
 '$lgt_compile_body'(asserta(QClause), TCond, DCond, Ctx) :-
@@ -11202,7 +11208,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 			)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Clause)
 	),
 	DCond = '$lgt_debug'(goal(asserta(Clause), TCond), ExCtx).
 
@@ -11284,7 +11290,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 			)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Clause)
 	),
 	DCond = '$lgt_debug'(goal(assertz(Clause), TCond), ExCtx).
 
@@ -11337,7 +11343,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Head)
 	),
 	DCond = '$lgt_debug'(goal(clause(Head, Body), TCond), ExCtx).
 
@@ -11421,7 +11427,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 			)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Clause)
 	),
 	DCond = '$lgt_debug'(goal(retract(Clause), TCond), ExCtx).
 
@@ -11474,7 +11480,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead, Lines)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Head)
 	),
 	DCond = '$lgt_debug'(goal(retractall(Head), TCond), ExCtx).
 
@@ -11780,45 +11786,45 @@ create_logtalk_flag(Flag, Value, Options) :-
 % arithmetic predicates (portability checks)
 
 '$lgt_compile_body'(_ is Exp, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp, Lines),
+	'$lgt_check_non_portable_functions'(Exp),
 	fail.
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1, Lines),
-	'$lgt_check_non_portable_functions'(Exp2, Lines),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1, Lines),
-	'$lgt_check_non_portable_functions'(Exp2, Lines),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 < Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1, Lines),
-	'$lgt_check_non_portable_functions'(Exp2, Lines),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 =< Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1, Lines),
-	'$lgt_check_non_portable_functions'(Exp2, Lines),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 > Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1, Lines),
-	'$lgt_check_non_portable_functions'(Exp2, Lines),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 >= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1, Lines),
-	'$lgt_check_non_portable_functions'(Exp2, Lines),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 
 % blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
@@ -11894,8 +11900,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Closure, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, Mode, _, _),
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Closure),
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
@@ -12100,7 +12106,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	(	'$lgt_pp_dynamic_'(Pred)
-	;	'$lgt_pp_multifile_'(Pred, _)
+	;	'$lgt_pp_multifile_'(Pred, _, _)
 	),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
@@ -12147,21 +12153,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 			TGoal =.. [Functor| TArgs],
 			DGoal =.. [Functor| DArgs],
-			'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+			'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 			TPred = TGoal,
 			(	Type == control_construct ->
 				DPred = DGoal
 			;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
 			),
-			'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
+			'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred)
 		;	% meta-predicate template is not usable
 			throw(domain_error(meta_predicate_template, Meta))
 		)
 	;	% non meta-predicate
 		TPred = Pred,
 		DPred = '$lgt_debug'(goal(Pred, Pred), ExCtx),
-		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
-		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
+		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred)
 	).
 
 % call to a Logtalk built-in predicate (that is not already handled)
@@ -12219,22 +12225,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % remember missing meta_predicate/1 directives
 
-'$lgt_check_for_meta_predicate_directive'(runtime, _, _, _).
+'$lgt_check_for_meta_predicate_directive'(runtime, _, _).
 
-'$lgt_check_for_meta_predicate_directive'(compile(aux), _, _, _) :-
+'$lgt_check_for_meta_predicate_directive'(compile(aux), _, _) :-
 	!.
 
-'$lgt_check_for_meta_predicate_directive'(compile(user), Head, MetaArg, Lines) :-
+'$lgt_check_for_meta_predicate_directive'(compile(user), Head, MetaArg) :-
 	'$lgt_term_template'(Head, Template),
 	(	'$lgt_pp_meta_predicate_'(Template, _) ->
 		true
-	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _) ->
+	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _, _) ->
 		true
 	;	term_variables(MetaArg, MetaArgVars),
 		term_variables(Head, HeadVars),
 		'$lgt_member'(MetaArgVar, MetaArgVars),
 		'$lgt_member_var'(MetaArgVar, HeadVars) ->
-		assertz('$lgt_pp_missing_meta_predicate_directive_'(Template, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_meta_predicate_directive_'(Template, File, Lines))
 	;	true
 	).
 
@@ -12242,15 +12249,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % remember non-portable Prolog built-in predicate calls
 
-'$lgt_check_non_portable_prolog_built_in_call'(runtime, _, _).
+'$lgt_check_non_portable_prolog_built_in_call'(runtime, _).
 
-'$lgt_check_non_portable_prolog_built_in_call'(compile(_), Pred, Lines) :-
-	(	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
+'$lgt_check_non_portable_prolog_built_in_call'(compile(_), Pred) :-
+	(	\+ '$lgt_pp_non_portable_predicate_'(Pred, _, _),
 		% not previously recorded as a non portable call
 		\+ '$lgt_iso_spec_predicate'(Pred) ->
 		% bona fide non-portable Prolog built-in predicate
 		'$lgt_term_template'(Pred, Template),
-		assertz('$lgt_pp_non_portable_predicate_'(Template, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_non_portable_predicate_'(Template, File, Lines))
 	;	true
 	).
 
@@ -12782,42 +12790,43 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_dynamic_directive'(@term, @term, @compilation_context)
+% '$lgt_check_dynamic_directive'(@term, @term)
 %
 % checks for a dynamic/1 directive for a predicate that is an argument to the
 % database built-in methods; the predicate may be non-instantiated or only
 % partially instantiated but must be valid
 
-'$lgt_check_dynamic_directive'(runtime, _, _).
+'$lgt_check_dynamic_directive'(runtime, _).
 
-'$lgt_check_dynamic_directive'(compile(_), Term, Lines) :-
-	'$lgt_check_dynamic_directive'(Term, Lines).
+'$lgt_check_dynamic_directive'(compile(_), Term) :-
+	'$lgt_check_dynamic_directive'(Term).
 
 
-'$lgt_check_dynamic_directive'(Term, _) :-
+'$lgt_check_dynamic_directive'(Term) :-
 	var(Term),
 	% runtime binding argument
 	!.
 
-'$lgt_check_dynamic_directive'((Head :- _), Lines) :-
+'$lgt_check_dynamic_directive'((Head :- _)) :-
 	!,
-	'$lgt_check_dynamic_directive'(Head, Lines).
+	'$lgt_check_dynamic_directive'(Head).
 
-'$lgt_check_dynamic_directive'(Functor/Arity, Lines) :-
+'$lgt_check_dynamic_directive'(Functor/Arity) :-
 	!,
 	(	ground(Functor/Arity) ->
 		functor(Head, Functor, Arity),
-		'$lgt_check_dynamic_directive'(Head, Lines)
+		'$lgt_check_dynamic_directive'(Head)
 	;	true
 	).
 
-'$lgt_check_dynamic_directive'(Head, Lines) :-
+'$lgt_check_dynamic_directive'(Head) :-
 	(	'$lgt_pp_dynamic_'(Head) ->
 		true
-	;	'$lgt_pp_missing_dynamic_directive_'(Head, _) ->
+	;	'$lgt_pp_missing_dynamic_directive_'(Head, _, _) ->
 		true
 	;	'$lgt_term_template'(Head, Template),
-		assertz('$lgt_pp_missing_dynamic_directive_'(Template, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_dynamic_directive_'(Template, File, Lines))
 	).
 
 
@@ -12832,13 +12841,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_discontiguous_'(Head) ->
 		% discontiguous directive present
 		true
-	;	'$lgt_pp_missing_discontiguous_directive_'(Head, _) ->
+	;	'$lgt_pp_missing_discontiguous_directive_'(Head, _, _) ->
 		% discontiguous directive missing already recorded
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
+	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
 		% compiling a source file clause; record missing discontiguous directive
 		'$lgt_term_template'(Head, Template),
-		assertz('$lgt_pp_missing_discontiguous_directive_'(Template, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_discontiguous_directive_'(Template, File, Lines))
 	;	% runtime compilation or compiling an auxiliary predicate clause
 		true
 	).
@@ -12917,35 +12927,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_non_portable_functions'(@term, @term)
+% '$lgt_check_non_portable_functions'(@term)
 %
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
-'$lgt_check_non_portable_functions'(Expression, Lines) :-
+'$lgt_check_non_portable_functions'(Expression) :-
 	callable(Expression),
 	% assume function
 	!,
 	(	'$lgt_iso_spec_function'(Expression) ->
 		% portable call (we assume...!)
 		true
-	;	'$lgt_pp_non_portable_function_'(Expression, _) ->
+	;	'$lgt_pp_non_portable_function_'(Expression, _, _) ->
 		% non-portable function already recorded
 		true
 	;	% first occurrence of this non-portable function; record it
 		'$lgt_term_template'(Expression, Template),
-		assertz('$lgt_pp_non_portable_function_'(Template, Lines))
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_non_portable_function_'(Template, File, Lines))
 	),
 	Expression =.. [_| Expressions],
-	'$lgt_check_non_portable_function_args'(Expressions, Lines).
+	'$lgt_check_non_portable_function_args'(Expressions).
 
-'$lgt_check_non_portable_functions'(_, _).	% variables and numbers
+'$lgt_check_non_portable_functions'(_).	% variables and numbers
 
 
-'$lgt_check_non_portable_function_args'([], _).
+'$lgt_check_non_portable_function_args'([]).
 
-'$lgt_check_non_portable_function_args'([Expression| Expressions], Lines) :-
-	'$lgt_check_non_portable_functions'(Expression, Lines),
-	'$lgt_check_non_portable_function_args'(Expressions, Lines).
+'$lgt_check_non_portable_function_args'([Expression| Expressions]) :-
+	'$lgt_check_non_portable_functions'(Expression),
+	'$lgt_check_non_portable_function_args'(Expressions).
 
 
 
@@ -12995,7 +13006,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
 	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines).
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred).
 
 % broadcasting control constructs
 
@@ -13271,7 +13282,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
 	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines).
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred).
 
 % broadcasting control constructs
 
@@ -13487,7 +13498,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% translation performed at runtime
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
 	;	callable(Pred) ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_obj_related_entities_are_static',
@@ -13505,13 +13516,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% super calls from predicates defined in complementing categories
 	% lookup inherited definitions in the complemented object ancestors
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	(	var(Pred) ->
 		TPred = (
 			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 			'$lgt_obj_super_call'(Super, Pred, ExCtx)
 		),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
 	;	callable(Pred) ->
 		TPred = (
 			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
@@ -13527,9 +13538,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(existence_error(ancestor, category))
 	;	var(Pred) ->
 		% translation performed at runtime
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred, Lines)
+		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		(	'$lgt_compiler_flag'(optimize, on),
@@ -14579,7 +14590,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% predicate with a single clause
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Head),
-	\+ '$lgt_pp_multifile_'(Head, _),
+	\+ '$lgt_pp_multifile_'(Head, _, _),
 	\+ '$lgt_pp_synchronized_'(Head, _),
 	% static, non-multifile, and no synchronization wrapper
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_), user),
@@ -14654,10 +14665,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % reports any potential problem found while compiling an entity
 
 '$lgt_report_problems'(Type, Entity) :-
-	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
-	'$lgt_report_missing_directives'(Type, Entity, Path),
-	'$lgt_report_non_portable_calls'(Type, Entity, Path),
-	'$lgt_report_unknown_entities'(Type, Entity, Path).
+	'$lgt_report_missing_directives'(Type, Entity),
+	'$lgt_report_non_portable_calls'(Type, Entity),
+	'$lgt_report_unknown_entities'(Type, Entity).
 
 
 
@@ -14684,23 +14694,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % reports any unknown referenced entities found while compiling an entity
 
-'$lgt_report_unknown_entities'(Type, Entity, Path) :-
+'$lgt_report_unknown_entities'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
-		'$lgt_report_unknown_objects'(Type, Entity, Path),
-		'$lgt_report_unknown_protocols'(Type, Entity, Path),
-		'$lgt_report_unknown_categories'(Type, Entity, Path),
-		'$lgt_report_unknown_modules'(Type, Entity, Path)
+		'$lgt_report_unknown_objects'(Type, Entity),
+		'$lgt_report_unknown_protocols'(Type, Entity),
+		'$lgt_report_unknown_categories'(Type, Entity),
+		'$lgt_report_unknown_modules'(Type, Entity)
 	;	true
 	).
 
 
 
-% '$lgt_report_unknown_objects'(+atom, @entity_identifier, +atom)
+% '$lgt_report_unknown_objects'(+atom, @entity_identifier)
 %
 % reports any references to unknown objects found while compiling an entity
 
-'$lgt_report_unknown_objects'(Type, Entity, Path) :-
-	'$lgt_pp_referenced_object_'(Object, Lines),
+'$lgt_report_unknown_objects'(Type, Entity) :-
+	'$lgt_pp_referenced_object_'(Object, File, Lines),
 		% not a currently loaded object
 		\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not the object being compiled (self reference)
@@ -14710,19 +14720,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a currently loaded module
 		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_object(Path, Lines, Type, Entity, Object)),
+		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_object(File, Lines, Type, Entity, Object)),
 	fail.
 
-'$lgt_report_unknown_objects'(_, _, _).
+'$lgt_report_unknown_objects'(_, _).
 
 
 
-% '$lgt_report_unknown_protocols'(+atom, @entity_identifier, +atom)
+% '$lgt_report_unknown_protocols'(+atom, @entity_identifier)
 %
 % reports any references to unknown protocols found while compiling an entity
 
-'$lgt_report_unknown_protocols'(Type, Entity, Path) :-
-	'$lgt_pp_referenced_protocol_'(Protocol, Lines),
+'$lgt_report_unknown_protocols'(Type, Entity) :-
+	'$lgt_pp_referenced_protocol_'(Protocol, File, Lines),
 		% not a currently loaded protocol
 		\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
 		% not the protocol being compiled (self reference)
@@ -14730,19 +14740,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a protocol defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_protocol(Path, Lines, Type, Entity, Protocol)),
+		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol)),
 	fail.
 
-'$lgt_report_unknown_protocols'(_, _, _).
+'$lgt_report_unknown_protocols'(_, _).
 
 
 
-% '$lgt_report_unknown_categories'(+atom, @entity_identifier, +atom)
+% '$lgt_report_unknown_categories'(+atom, @entity_identifier)
 %
 % reports any references to unknown categories found while compiling an entity
 
-'$lgt_report_unknown_categories'(Type, Entity, Path) :-
-	'$lgt_pp_referenced_category_'(Category, Lines),
+'$lgt_report_unknown_categories'(Type, Entity) :-
+	'$lgt_pp_referenced_category_'(Category, File, Lines),
 		% not a currently loaded category
 		\+ '$lgt_current_category_'(Category, _, _, _, _, _),
 		% not the category being compiled (self reference)
@@ -14750,28 +14760,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a category defined in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(Path, Lines, Type, Entity, Category)),
+		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(File, Lines, Type, Entity, Category)),
 	fail.
 
-'$lgt_report_unknown_categories'(_, _, _).
+'$lgt_report_unknown_categories'(_, _).
 
 
 
-% '$lgt_report_unknown_modules'(+atom, @entity_identifier, +atom)
+% '$lgt_report_unknown_modules'(+atom, @entity_identifier)
 %
 % reports any references to unknown modules found while compiling an entity
 
-'$lgt_report_unknown_modules'(Type, Entity, Path) :-
-	'$lgt_pp_referenced_module_'(Module, Lines),
+'$lgt_report_unknown_modules'(Type, Entity) :-
+	'$lgt_pp_referenced_module_'(Module, File, Lines),
 		% not a currently loaded module
 		\+ current_module(Module),
 		% not the module being compiled (self reference)
 		\+ '$lgt_pp_module_'(Module),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_module(Path, Lines, Type, Entity, Module)),
+		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_module(File, Lines, Type, Entity, Module)),
 	fail.
 
-'$lgt_report_unknown_modules'(_, _, _).
+'$lgt_report_unknown_modules'(_, _).
 
 
 
@@ -15154,7 +15164,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Coinductive = 32				% 0b00100000
 	;	Coinductive = 0
 	),
-	(	'$lgt_pp_multifile_'(Pred, _) ->
+	(	'$lgt_pp_multifile_'(Pred, _, _) ->
 		Multifile = 16					% 0b00010000
 	;	Multifile = 0
 	),
@@ -15200,7 +15210,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_discontiguous_'(Head)
 	),
 	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_multifile_'(Head, _),
+	\+ '$lgt_pp_multifile_'(Head, _, _),
 	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% declared, static, but undefined predicate;
@@ -15213,7 +15223,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Type == object,
 		% categories cannot contain clauses for dynamic predicates
 		'$lgt_pp_dynamic_'(Head)
-	;	'$lgt_pp_multifile_'(Head, _),
+	;	'$lgt_pp_multifile_'(Head, _, _),
 		\+ '$lgt_pp_dynamic_'(Head)
 	),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
@@ -15225,7 +15235,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_private_'(Functor, Arity),
 		\+ '$lgt_pp_synchronized_'(Head, _),
 		\+ '$lgt_pp_coinductive_'(Head, _, _, _, _, _, _),
-		\+ '$lgt_pp_multifile_'(Head, _) ->
+		\+ '$lgt_pp_multifile_'(Head, _, _) ->
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, _, Ctx)
 	;	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx)
 	),
@@ -16424,56 +16434,56 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing predicate directives
 
-'$lgt_report_missing_directives'(Type, Entity, Path) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_report_missing_directives_'(Type, Entity, Path)
+		'$lgt_report_missing_directives_'(Type, Entity)
 	;	true
 	).
 
 
 % reports missing public/1 directives for multifile predicates
 
-'$lgt_report_missing_directives_'(Type, Entity, Path) :-
-	'$lgt_pp_multifile_'(Head, Lines),
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	'$lgt_pp_multifile_'(Head, File, Lines),
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	% but missing corresponding public directive
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(File, Lines, Type, Entity, (public), Functor/Arity)),
 	fail.
 
 % reports missing meta_predicate/1 directives for meta-predicates
 
-'$lgt_report_missing_directives_'(Type, Entity, Path) :-
-	'$lgt_pp_missing_meta_predicate_directive_'(Head, Lines),
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	'$lgt_pp_missing_meta_predicate_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (meta_predicate), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity)),
 	fail.
 
 % reports missing dynamic/1 directives
 
-'$lgt_report_missing_directives_'(Type, Entity, Path) :-
-	'$lgt_pp_missing_dynamic_directive_'(Head, Lines),
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	'$lgt_pp_missing_dynamic_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(File, Lines, Type, Entity, (dynamic), Functor/Arity)),
 	fail.
 
 % reports missing discontiguous/1 directives
 
-'$lgt_report_missing_directives_'(Type, Entity, Path) :-
-	'$lgt_pp_missing_discontiguous_directive_'(Head, Lines),
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	'$lgt_pp_missing_discontiguous_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(File, Lines, Type, Entity, (discontiguous), Functor/Arity)),
 	fail.
 
 % reports missing scope directives for mode directives
 
-'$lgt_report_missing_directives_'(Type, Entity, Path) :-
-	'$lgt_pp_mode_'(Mode, _, Lines),
+'$lgt_report_missing_directives_'(Type, Entity) :-
+	'$lgt_pp_mode_'(Mode, _, File, Lines),
 	% documented predicate or non-terminal
 	functor(Mode, Functor, Arity),
 	\+ '$lgt_pp_non_terminal_'(Functor, Arity, _),
@@ -16482,10 +16492,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_private_'(Functor, Arity),
 	% but missing scope directive
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), core, missing_scope_directive(Path, Lines, Type, Entity, Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_scope_directive(File, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_missing_directives_'(_, _, _).
+'$lgt_report_missing_directives_'(_, _).
 
 
 
@@ -16551,28 +16561,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports non-portable predicate and function calls in the body of object and category predicates
 
-'$lgt_report_non_portable_calls'(Type, Entity, Path) :-
+'$lgt_report_non_portable_calls'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_report_non_portable_calls_'(Type, Entity, Path)
+		'$lgt_report_non_portable_calls_'(Type, Entity)
 	;	true
 	).
 
 
-'$lgt_report_non_portable_calls_'(Type, Entity, Path) :-
-	'$lgt_pp_non_portable_predicate_'(Head, Lines),
+'$lgt_report_non_portable_calls_'(Type, Entity) :-
+	'$lgt_pp_non_portable_predicate_'(Head, File, Lines),
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
+		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(File, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_calls_'(Type, Entity, Path) :-
-	'$lgt_pp_non_portable_function_'(Function, Lines),
+'$lgt_report_non_portable_calls_'(Type, Entity) :-
+	'$lgt_pp_non_portable_function_'(Function, File, Lines),
 		functor(Function, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
+		'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(File, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_calls_'(_, _, _).
+'$lgt_report_non_portable_calls_'(_, _).
 
 
 
@@ -16786,7 +16796,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	(	Goal == true ->
 		true
-	;	'$lgt_pp_referenced_object_'(Object, Lines),
+	;	'$lgt_pp_referenced_object_'(Object, _File, Lines),
 		assertz('$lgt_pp_file_object_initialization_'(Object, Goal, Lines))
 	).
 
