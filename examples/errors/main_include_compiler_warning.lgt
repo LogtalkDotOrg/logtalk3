@@ -20,7 +20,7 @@
 
 :- object(main_include_compiler_warning).
 
-	:- set_logtalk_flag(portability, warning).
+	:- public(not_defined/0).
 
 	:- include(include_compiler_warning).
 

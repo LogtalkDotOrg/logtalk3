@@ -20,3 +20,9 @@
 
 abc :-
 	consult(def).
+
+ghi :-
+	jkl.
+
+mno :-
+	not_defined.
