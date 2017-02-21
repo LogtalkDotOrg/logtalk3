@@ -459,7 +459,7 @@
 :- dynamic('$lgt_pp_cc_mode_'/1).
 
 % '$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines)
-:- dynamic('$lgt_pp_term_variable_names_lines_'/4).
+:- dynamic('$lgt_pp_term_variable_names_file_lines_'/4).
 
 % '$lgt_pp_aux_predicate_counter_'(Counter)
 :- dynamic('$lgt_pp_aux_predicate_counter_'/1).
