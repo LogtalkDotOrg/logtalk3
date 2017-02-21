@@ -2949,7 +2949,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc3)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc4)).
 
 
 
@@ -12196,7 +12196,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
-	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines).
+	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity).
 
 
 
@@ -16510,30 +16510,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports unknown predicates and non-terminals
 
-'$lgt_report_unknown_predicate_call'(runtime, _, _).
+'$lgt_report_unknown_predicate_call'(runtime, _).
 
-'$lgt_report_unknown_predicate_call'(compile(_), Pred, Lines) :-
+'$lgt_report_unknown_predicate_call'(compile(_), Pred) :-
 	'$lgt_compiler_flag'(unknown_predicates, Value),
-	'$lgt_report_unknown_predicate_call_aux'(Value, Pred, Lines).
+	'$lgt_report_unknown_predicate_call_aux'(Value, Pred).
 
 
-'$lgt_report_unknown_predicate_call_aux'(silent, _, _).
+'$lgt_report_unknown_predicate_call_aux'(silent, _).
 
-'$lgt_report_unknown_predicate_call_aux'(error, Functor/Arity, _) :-
+'$lgt_report_unknown_predicate_call_aux'(error, Functor/Arity) :-
 	Arity2 is Arity - 2,
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
 		throw(existence_error(non_terminal, Functor//Arity2))
 	;	throw(existence_error(predicate, Functor/Arity))
 	).
 
-'$lgt_report_unknown_predicate_call_aux'(warning, Functor/Arity, Lines) :-
-	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
-	'$lgt_pp_entity_'(Type, Entity, _, _, _),
+'$lgt_report_unknown_predicate_call_aux'(warning, Functor/Arity) :-
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	Arity2 is Arity - 2,
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
-		'$lgt_print_message'(warning(unknown_predicates), core, unknown_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, Functor//Arity2))	
-	;	'$lgt_print_message'(warning(unknown_predicates), core, unknown_predicate_called_but_not_defined(Path, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(warning(unknown_predicates), core, unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, Functor//Arity2))	
+	;	'$lgt_print_message'(warning(unknown_predicates), core, unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Functor/Arity))
 	).
 
 
