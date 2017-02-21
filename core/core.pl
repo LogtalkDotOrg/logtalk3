@@ -6685,13 +6685,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_file_paths_flags_'(_, _, MainSourceFile, ObjectFile, _),
 	(	'$lgt_source_file_context'(SourceFile, Lines) ->
 		true
-	;	% likely a syntax error when trying to read a main file term as syntax
+	;	% no file context information available for last term read; likely
+		% due to a syntax error when trying to read a main file term as syntax
 		% errors in included files are handled when reading a file to terms
 		SourceFile = MainSourceFile,
 		(	stream_property(Input, alias(logtalk_compiler_input)),
 			'$lgt_stream_current_line_number'(Input, Line) ->
 			Lines = Line-Line
-		;	Lines = '-'(-1, -1)
+		;	% some backend Prolog compilers do not support, or do not always support
+			% (e.g. when a syntax error occurs) querying a stream line number
+			Lines = '-'(-1, -1)
 		)
 	),
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
@@ -14680,7 +14683,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_source_file_context'(-atom, -pair(integer), -atom, -entity_identifier)
 %
-% returns file, lines, and entity source context
+% returns file, lines, and entity source context for the last term read;
+% it fails if the last attempt to read a term resulted in a syntax error
 
 '$lgt_source_file_context'(File, Lines, Type, Entity) :-
 	'$lgt_pp_term_variable_names_file_lines_'(_, _, File, Lines),
@@ -14690,7 +14694,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_source_file_context'(-atom, -pair(integer))
 %
-% returns file and lines source context
+% returns file and lines source context for the last term read;
+% it fails if the last attempt to read a term resulted in a syntax error
 
 '$lgt_source_file_context'(File, Lines) :-
 	'$lgt_pp_term_variable_names_file_lines_'(_, _, File, Lines).
