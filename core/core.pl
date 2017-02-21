@@ -6818,16 +6818,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_clean_pp_entity_clauses'.
 
 
-'$lgt_second_stage_error_handler'(error(Error,Lines,Context)) :-
-	!,
+'$lgt_second_stage_error_handler'(Error) :-
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _),
 	'$lgt_source_file_context'(SourceFile, Lines),
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, error(Error,Context)).
-
-'$lgt_second_stage_error_handler'(Error) :-
-	% we should never get here but some backend Prolog compilers have broken or
-	% non-standard error handling; pass the error to the first stage handler
-	throw(Error).
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
 
 
 
