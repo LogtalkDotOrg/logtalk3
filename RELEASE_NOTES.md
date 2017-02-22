@@ -38,6 +38,12 @@ of reporting the main file name and the line number of the directive.
 * CHANGED: The `file` key of the `logtalk_load_context/2` predicate to return
 the file being included when processing an `include/1` directive.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Removed superfluous newline at startup when using the integration
+scripts. Thanks to Xin Wang for the bug report.
+
 Library
 -------
 
