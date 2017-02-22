@@ -18,9 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(lgtmthdredef).
+:- object(main_include_compiler_warning).
 
-	% Logtalk built-in methods cannot be redefined
-	asserta(_).
+	:- public(not_defined/0).
+
+	:- include(include_compiler_warning).
 
 :- end_object.

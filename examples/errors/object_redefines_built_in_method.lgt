@@ -18,9 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(unknowndir).
+:- object(object_redefines_built_in_method).
 
-	% unknown directive
-	:- index(predicate/3, [1, 2]).
+	% Logtalk built-in methods cannot be redefined
+	asserta(_).
 
 :- end_object.

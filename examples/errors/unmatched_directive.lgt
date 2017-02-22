@@ -20,7 +20,7 @@
 
 % misspelt opening object directive
 
-:- objecto(unmatchdir).
+:- objecto(unmatched_directive).
 
 
 :- end_object.

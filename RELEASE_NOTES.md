@@ -24,6 +24,20 @@ RELEASE NOTES
 3.09.3 - March ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: The entity properties that return information on predicates now
+include an `include(File)` property when the predicate property location
+is an included file.
+
+* IMPROVED: Report compiler errors and warnings found when processing an
+`include/1` directive using the included file name and line numbers instead
+of reporting the main file name and the line number of the directive. 
+
+* CHANGED: The `file` key of the `logtalk_load_context/2` predicate to return
+the file being included when processing an `include/1` directive.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -53,6 +67,12 @@ Tests
 -----
 
 * ADDED: Some unit tests for the `os` library.
+
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate errors and warnings when using
+the `include/1` directive.
 
 Installers and installation scripts
 -----------------------------------

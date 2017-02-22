@@ -18,19 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load(
-		[	warnings,
-			main_include_compiler_warning
-		],
-		[	redefined_built_ins(warning),
-			missing_directives(warning),
-			unknown_entities(warning),
-		 	unknown_predicates(warning),
-		 	undefined_predicates(warning),
-		 	singleton_variables(warning),
-		 	portability(warning),
-			report(on)
-		]
-	)
-).
+c.
+d
+e.

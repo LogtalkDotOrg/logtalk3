@@ -18,9 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invargdir).
-
-	% invalid directive argument
-	:- public(1234).
-
-:- end_object.
+foo.
+bar.
+baz.
+:- private(a/0).
+zee.

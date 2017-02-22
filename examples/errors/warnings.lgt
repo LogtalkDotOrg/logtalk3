@@ -108,3 +108,20 @@
 	]).
 
 :- end_object.
+
+
+
+:- object(mode_directive_typo).
+
+	:- public(a/1).
+	:- mode(a(+atom, -integer), one).
+
+:- end_object.
+
+
+
+:- object(missing_public_directive).
+
+	:- multifile(m/2).
+
+:- end_object.
