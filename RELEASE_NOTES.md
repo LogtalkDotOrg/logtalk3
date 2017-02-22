@@ -66,6 +66,9 @@ the `logtalk_tester.sh` script.
 Tests
 -----
 
+* ADDED: Unit tests for the `include/1` entity directive to verify ordering
+of `initialization/1` directive goals.
+
 * ADDED: Unit tests for the `include/1` entity directive for checking that
 `declares/2` and `defines/2` properties include the `line_count/1` and
 `include/1` properties for predicates declared or defined in included files.

@@ -5,11 +5,13 @@
 	:- set_logtalk_flag(dynamic_declarations, allow).
 	:- set_logtalk_flag(missing_directives, silent).
 
-	:- initialization(assertz(main)).
+	:- initialization(assertz(i(main_1))).
 
 	:- public(a/0).
 	a.
 
 	:- include('include_1.pl').
+
+	:- initialization(assertz(i(main_2))).
 
 :- end_object.
