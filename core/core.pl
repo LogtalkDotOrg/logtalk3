@@ -2974,7 +2974,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc3)).
 
 
 
@@ -7874,8 +7874,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% handling of this Prolog directive is necessary to
 	% support the Logtalk term-expansion mechanism
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_read_file_to_terms'(Mode, File, Path, Terms),
-	'$lgt_compile_file_terms'(Terms, Path, Ctx).
+	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
+	'$lgt_current_directory'(Current),
+	'$lgt_change_directory'(Directory),
+	'$lgt_compile_file_terms'(Terms, Path, Ctx),
+	'$lgt_change_directory'(Current).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	!,
@@ -8014,11 +8017,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_read_file_to_terms'(Mode, File, Path, Terms),
+	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
+	'$lgt_current_directory'(Current),
+	'$lgt_change_directory'(Directory),
 	(	Mode == runtime ->
 		'$lgt_compile_runtime_terms'(Terms, Path)
 	;	'$lgt_compile_file_terms'(Terms, Path, Ctx)
-	).
+	),
+	'$lgt_change_directory'(Current).
 
 % object opening and closing directives
 
@@ -20841,7 +20847,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_sum_list'(Values, Sum1, Sum).
 
 
-'$lgt_read_file_to_terms'(Mode, File, SourceFile, Terms) :-
+'$lgt_read_file_to_terms'(Mode, File, Directory, SourceFile, Terms) :-
 	% check file specification and expand library notation if used
 	catch(
 		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
@@ -20849,7 +20855,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(FileError)
 	),
 	% find the full file name as the extension may be missing
-	(	'$lgt_source_file_name'(ExpandedFile, _, _, _, SourceFile),
+	(	'$lgt_source_file_name'(ExpandedFile, Directory, _, _, SourceFile),
 		% avoid a loading loop by checking that the file name is different
 		% from the name of the file containing the include/1 directive
 		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),

@@ -38,6 +38,9 @@ of reporting the main file name and the line number of the directive.
 * CHANGED: The `file` key of the `logtalk_load_context/2` predicate to return
 the file being included when processing an `include/1` directive.
 
+* FIXED: Using `include/1` directives to include files that in turn also use
+`include/1` directives with relative paths to include other files.
+
 Prolog adapter and integration files
 ------------------------------------
 
