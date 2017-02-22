@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: The entity properties that return information on predicates now
+include an `include(File)` property when the predicate property location
+is an included file.
+
 * IMPROVED: Report compiler errors and warnings found when processing an
 `include/1` directive using the included file name and line numbers instead
 of reporting the main file name and the line number of the directive. 
