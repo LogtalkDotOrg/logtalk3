@@ -972,7 +972,7 @@
 			{os_env(Variable, Value)}.
 
 		time_stamp(TimeStamp) :-
-			TimeStamp is currtime.
+			{TimeStamp is currtime}.
 
 		date_time(0, 0, 0, 0, 0, 0, 0).
 
