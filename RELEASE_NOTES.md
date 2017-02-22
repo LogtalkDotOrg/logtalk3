@@ -24,6 +24,12 @@ RELEASE NOTES
 3.09.3 - March ??, 2017
 =======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Removed superfluous newline at startup when using the integration
+scripts. Thanks to Xin Wang for the bug report.
+
 Library
 -------
 
