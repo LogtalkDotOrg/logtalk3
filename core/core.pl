@@ -1388,6 +1388,7 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_create_entity_error_handler'(Error, Goal).
 
 '$lgt_create_entity_error_handler'(Error, Goal) :-
+	retractall('$lgt_file_loading_stack_'(_, _)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
@@ -6759,6 +6760,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	stream_property(Input, alias(logtalk_compiler_input)),
 	stream_property(Output, alias(logtalk_compiler_output)), !,
 	'$lgt_print_message'(error, core, compiler_error(SourceFile, Lines, Error)),
+	retractall('$lgt_file_loading_stack_'(_, _)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
@@ -6785,6 +6787,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compiler_error_handler'(SourceFile, Lines, Error) :-
 	stream_property(Input, alias(logtalk_compiler_input)), !,
 	'$lgt_print_message'(error, core, compiler_error(SourceFile, Lines, Error)),
+	retractall('$lgt_file_loading_stack_'(_, _)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
@@ -6803,6 +6806,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compiler_stream_io_error_handler'(Stream, Error) :-
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
+	retractall('$lgt_file_loading_stack_'(_, _)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
@@ -6829,6 +6833,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	),
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
+	retractall('$lgt_file_loading_stack_'(_, _)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
