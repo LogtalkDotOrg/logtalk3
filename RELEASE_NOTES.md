@@ -44,6 +44,10 @@ the file being included when processing an `include/1` directive.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: The default value of the `report` flag is now set to `warnings`
+when using the quiet startup command-line option provided by the SWI-Prolog,
+SICStus Prolog, and YAP backends.
+
 * FIXED: Removed superfluous newline at startup when using the integration
 scripts. Thanks to Xin Wang for the bug report.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on August 7, 2016
+%  Last updated on February 23, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -299,7 +299,11 @@ forall(Generate, Test) :-
 	;	% ... but not POSIX systems
 		ScratchDirectory = './.lgt_tmp/'
 	).
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	(	current_prolog_flag(informational, off) ->
+		Report = warnings
+	;	Report = on
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).

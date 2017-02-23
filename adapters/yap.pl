@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on October 31, 2016
+%  Last updated on February 23, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -329,7 +329,11 @@
 		ScratchDirectory = './.lgt_tmp/'
 	;	ScratchDirectory = './lgt_tmp/'
 	).
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	(	current_prolog_flag(verbose, normal) ->
+		Report = on
+	;	Report = warnings
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
