@@ -6120,9 +6120,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	(	sub_atom(ScratchDirectory, 0, 2, _, './') ->
 		% relative directory path
-		atom_concat(SourceDirectory, ScratchDirectory, ObjectDirectory0)
+		sub_atom(ScratchDirectory, 2, _, 0, ScratchDirectorySuffix),
+		atom_concat(SourceDirectory, ScratchDirectorySuffix, ObjectDirectory)
 	;	% assume absolute directory path
-		ObjectDirectory0 = ScratchDirectory
+		ObjectDirectory = ScratchDirectory
 	),
 	% append (if supported by the backend compiler) a directory hash value to the
 	% intermediate Prolog file name to try to avoid file name collisions when
@@ -6142,8 +6143,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% there must be a single object file extension defined in the Prolog adapter files
 	'$lgt_file_extension'(object, ObjectExtension),
 	atom_concat(ObjectName, ObjectExtension, ObjectBasename),
-	atom_concat(ObjectDirectory0, ObjectBasename, ObjectFile0),
-	'$lgt_expand_path'(ObjectFile0, ObjectFile),
 	atom_concat(ObjectDirectory, ObjectBasename, ObjectFile),
 	% make sure the scratch directory exists
 	'$lgt_make_directory'(ObjectDirectory).
