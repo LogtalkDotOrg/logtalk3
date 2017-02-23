@@ -2262,7 +2262,8 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_expand_library_alias'(Library, Path) :-
 	'$lgt_expand_library_alias'(Library, Path0, 16),
-	% expand the library path into an absolute path
+	% expand the library path into an absolute path as it may
+	% contain environment variables that need to be expanded
 	'$lgt_expand_path'(Path0, Path1),
 	% make sure that the library path ends with a slash
 	(	sub_atom(Path1, _, 1, 0, '/') ->
