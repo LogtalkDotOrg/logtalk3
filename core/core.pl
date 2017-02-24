@@ -5693,7 +5693,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_file'(File, Flags) :-
 	(	'$lgt_source_file_name'(File, Directory, Name, Extension, SourceFile),
-		'$lgt_file_exists'(SourceFile) ->
+		catch('$lgt_file_exists'(SourceFile), _, fail) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
@@ -5952,7 +5952,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
 	(	'$lgt_source_file_name'(File, Directory, Name, Extension, SourceFile),
-		'$lgt_file_exists'(SourceFile) ->
+		catch('$lgt_file_exists'(SourceFile), _, fail) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
@@ -20871,7 +20871,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% avoid a loading loop by checking that the file name is different
 		% from the name of the file containing the include/1 directive
 		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
-		'$lgt_file_exists'(SourceFile) ->
+		catch('$lgt_file_exists'(SourceFile), _, fail) ->
 		true
 	;	throw(existence_error(file, File))
 	),
