@@ -6069,11 +6069,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 % commit to that solution when not simply generating all possible solutions
 
 '$lgt_source_file_name'(FilePath, Directory, Name, Extension, SourceFile) :-
-	(	once('$lgt_file_loading_stack_'(_, ParentDirectory)),
-		% parent file exists; try first a path relative to its directory
-		atom_concat(ParentDirectory, FilePath, SourceFile0)
-	;	% we may have an absolute file path or a relative path without any parent file
-		'$lgt_expand_path'(FilePath, SourceFile0)
+	(	'$lgt_expand_path'(FilePath, FilePath) ->
+		% assume full path
+		SourceFile0 = FilePath
+	;	% assume relative path
+		(	once('$lgt_file_loading_stack_'(_, ParentDirectory)),
+			% parent file exists; try first a path relative to its directory
+			atom_concat(ParentDirectory, FilePath, SourceFile0)
+		;	% we may have an absolute file path or a relative path without any parent file
+			'$lgt_expand_path'(FilePath, SourceFile0)
+		)
 	),
 	'$lgt_decompose_file_name'(SourceFile0, Directory, Name0, Extension0),
 	(	% file extensions are defined in the Prolog adapter files (there

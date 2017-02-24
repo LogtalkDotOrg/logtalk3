@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on December 5, 2016
+%  Last updated on February 24, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -293,7 +293,8 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
 	expand_atom(Path, EnvVarExpandedPath),
-	path_sysop(expand, EnvVarExpandedPath, ExpandedPath).
+	path_sysop(expand, EnvVarExpandedPath, ExpandedPath0),
+	ExpandedPath = ExpandedPath0.
 
 
 % '$lgt_file_exists'(+atom)
