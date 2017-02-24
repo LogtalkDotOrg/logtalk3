@@ -27,6 +27,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The compiler no longer changes the Prolog backend working directory
+when compiling files. This avoids potential clashes when using multi-threaded
+Prolog systems, such as SWI-Prolog, where the working directory is shared among
+all threads.
+
 * ADDED: The entity properties that return information on predicates now
 include an `include(File)` property when the predicate property location
 is an included file.

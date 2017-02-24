@@ -422,8 +422,8 @@
 % '$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)
 :- dynamic('$lgt_pp_entity_operator_'/4).
 
-% '$lgt_pp_warnings_top_goal_directory_'(Goal, Directory)
-:- dynamic('$lgt_pp_warnings_top_goal_directory_'/2).
+% '$lgt_pp_warnings_top_goal_'(Goal)
+:- dynamic('$lgt_pp_warnings_top_goal_'/1).
 % '$lgt_pp_compiling_warnings_counter_'(Counter)
 :- dynamic('$lgt_pp_compiling_warnings_counter_'/1).
 % '$lgt_pp_loading_warnings_counter_'(Counter)
@@ -2159,34 +2159,25 @@ logtalk_compile(Files, Flags) :-
 '$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
-	'$lgt_reset_directory_and_warnings_counter'(logtalk_compile(Files, Flags)),
+	'$lgt_reset_warnings_counter',
 	throw(error(Error, logtalk(logtalk_compile(Files, Flags), _))).
 
 
 
 % predicates for compilation warning counting and reporting
 
-'$lgt_reset_directory_and_warnings_counter'(Goal) :-
-	(	'$lgt_pp_warnings_top_goal_directory_'(Goal, Directory) ->
-		'$lgt_change_directory'(Directory)
-	;	true
-	),
-	'$lgt_reset_warnings_counter'.
-
-
 '$lgt_reset_warnings_counter' :-
-	retractall('$lgt_pp_warnings_top_goal_directory_'(_, _)),
+	retractall('$lgt_pp_warnings_top_goal_'(_)),
 	retractall('$lgt_pp_compiling_warnings_counter_'(_)),
 	retractall('$lgt_pp_loading_warnings_counter_'(_)).
 
 
 '$lgt_init_warnings_counter'(Goal) :-
-	(	'$lgt_pp_warnings_top_goal_directory_'(_, _) ->
+	(	'$lgt_pp_warnings_top_goal_'(_) ->
 		% not top compilation/loading goal; do nothing
 		true
-	;	'$lgt_current_directory'(Directory),
-		% remember top compilation/loading goal and directory
-		assertz('$lgt_pp_warnings_top_goal_directory_'(Goal, Directory)),
+	;	% remember top compilation/loading goal
+		assertz('$lgt_pp_warnings_top_goal_'(Goal)),
 		% initialize compilation warnings counter
 		retractall('$lgt_pp_compiling_warnings_counter_'(_)),
 		assertz('$lgt_pp_compiling_warnings_counter_'(0)),
@@ -2209,7 +2200,7 @@ logtalk_compile(Files, Flags) :-
 
 
 '$lgt_report_warning_numbers'(Goal) :-
-	(	retract('$lgt_pp_warnings_top_goal_directory_'(Goal, _)),
+	(	retract('$lgt_pp_warnings_top_goal_'(Goal)),
 		% top compilation/loading goal
 		retract('$lgt_pp_compiling_warnings_counter_'(CCounter)),
 		retract('$lgt_pp_loading_warnings_counter_'(LCounter)) ->
@@ -2442,7 +2433,7 @@ logtalk_load(Files, Flags) :-
 '$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
-	'$lgt_reset_directory_and_warnings_counter'(logtalk_load(Files, Flags)),
+	'$lgt_reset_warnings_counter',
 	throw(error(Error, logtalk(logtalk_load(Files, Flags), _))).
 
 
@@ -2976,7 +2967,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc3)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc4)).
 
 
 
@@ -5703,8 +5694,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	% change the current directory to the directory of the file being loaded as it can
 	% be a loader file loading other files in its directory using a relative path
-%	'$lgt_current_directory'(Current),
-%	'$lgt_change_directory'(Directory),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp),
 		\+ '$lgt_failed_file_'(SourceFile) ->
 		% we're attempting to reload a file
@@ -5736,7 +5725,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	).
-%	'$lgt_change_directory'(Current).
 
 
 '$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory) :-
@@ -6002,8 +5990,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action, _Directory) :-
 	(	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action) ->
 		retractall('$lgt_failed_file_'(SourceFile))
-	;	%'$lgt_change_directory'(Directory),
-		assertz('$lgt_failed_file_'(SourceFile)),
+	;	assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile),
 		fail
 	).
@@ -7883,12 +7870,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% support the Logtalk term-expansion mechanism
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
-%	'$lgt_current_directory'(Current),
-%	'$lgt_change_directory'(Directory),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
 	'$lgt_compile_file_terms'(Terms, Path, Ctx),
 	retract('$lgt_file_loading_stack_'(Path, Directory)).
-%	'$lgt_change_directory'(Current).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	!,
@@ -8028,15 +8012,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
-%	'$lgt_current_directory'(Current),
-%	'$lgt_change_directory'(Directory),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
 	(	Mode == runtime ->
 		'$lgt_compile_runtime_terms'(Terms, Path)
 	;	'$lgt_compile_file_terms'(Terms, Path, Ctx)
 	),
 	retract('$lgt_file_loading_stack_'(Path, Directory)).
-%	'$lgt_change_directory'(Current).
 
 % object opening and closing directives
 
