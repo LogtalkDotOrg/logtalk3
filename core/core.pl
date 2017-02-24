@@ -2216,7 +2216,8 @@ logtalk_compile(Files, Flags) :-
 % '$lgt_check_and_expand_source_files'(@list, -list)
 %
 % check if the source file names are valid (but not if the file exists)
-% and return their absolute paths when using library notation
+% and return their absolute paths when using library notation or when
+% they start with an environment variable
 
 '$lgt_check_and_expand_source_files'([File| Files], [Path| Paths]) :-
 	!,
@@ -2232,12 +2233,17 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_check_and_expand_source_file'(File, Path) :-
 	(	atom(File) ->
-		Path = File
+		'$lgt_prolog_os_file_name'(NormalizedFile, File),
+		(	sub_atom(NormalizedFile, 0, 1, _, '$') ->
+			'$lgt_expand_path'(NormalizedFile, Path)
+		;	Path = NormalizedFile
+		)
 	;	compound(File),
 		File =.. [Library, Basename],
 		atom(Basename) ->
+		'$lgt_prolog_os_file_name'(NormalizedBasename, Basename),
 		(	'$lgt_expand_library_alias'(Library, Directory) ->
-			atom_concat(Directory, Basename, Path)
+			atom_concat(Directory, NormalizedBasename, Path)
 		;	throw(error(existence_error(library, Library), _))
 		)
 	;	ground(File) ->
@@ -2967,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc4)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc5)).
 
 
 
@@ -6063,10 +6069,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % commit to that solution when not simply generating all possible solutions
 
 '$lgt_source_file_name'(FilePath, Directory, Name, Extension, SourceFile) :-
-	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
 	(	once('$lgt_file_loading_stack_'(_, ParentDirectory)),
-		atom_concat(ParentDirectory, NormalizedPath, SourceFile0)
-	;	'$lgt_expand_path'(NormalizedPath, SourceFile0)
+		% parent file exists; try first a path relative to its directory
+		atom_concat(ParentDirectory, FilePath, SourceFile0)
+	;	% we may have an absolute file path or a relative path without any parent file
+		'$lgt_expand_path'(FilePath, SourceFile0)
 	),
 	'$lgt_decompose_file_name'(SourceFile0, Directory, Name0, Extension0),
 	(	% file extensions are defined in the Prolog adapter files (there
@@ -20841,7 +20848,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_read_file_to_terms'(Mode, File, Directory, SourceFile, Terms) :-
-	% check file specification and expand library notation if used
+	% check file specification and expand library notation or environment
+	% variable if used
 	catch(
 		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
 		error(FileError, _),
