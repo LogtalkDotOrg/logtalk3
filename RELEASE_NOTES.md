@@ -56,6 +56,9 @@ SICStus Prolog, and YAP backends.
 * FIXED: Removed superfluous newline at startup when using the integration
 scripts. Thanks to Xin Wang for the bug report.
 
+* FIXED: Workaround a XSB bug when expanding file paths while passing the
+expected full path.
+
 Library
 -------
 
