@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on August 7, 2016
+%  Last updated on February 25, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -315,7 +315,7 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(reload, changed).
 '$lgt_default_flag'(debug, off).
 % Prolog compiler and loader flags:
-'$lgt_default_flag'(prolog_compiler, [assemble_only(true), string_table(2048), compiler_heap(4096), compiler_scratchpad(512)]).
+'$lgt_default_flag'(prolog_compiler, [assemble_only(true), string_table(4096), compiler_heap(8192), compiler_scratchpad(1024)]).
 '$lgt_default_flag'(prolog_loader, []).
 
 

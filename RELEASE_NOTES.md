@@ -59,6 +59,9 @@ scripts. Thanks to Xin Wang for the bug report.
 * FIXED: Workaround a XSB bug when expanding file paths while passing the
 expected full path.
 
+* FIXED: Increase the size of the memory areas in the Qu-Prolog adapter file
+and integration scripts to allow running the current Logtalk version.
+
 Library
 -------
 

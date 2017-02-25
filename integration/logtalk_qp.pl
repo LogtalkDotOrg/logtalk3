@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for Qu-Prolog
-%  Last updated on April 29, 2014
+%  Last updated on February 25, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -29,7 +29,7 @@
 	fcompile('$LOGTALKUSER/.paths.pl', [assemble_only(true), object_file('$LOGTALKUSER/.paths.qo')]),
 	load('$LOGTALKUSER/.paths.qo'),
 	os(system('ln -sf $LOGTALKHOME/core/core.pl $LOGTALKUSER/.core.pl')),
-	fcompile('$LOGTALKUSER/.core.pl', [assemble_only(true), object_file('$LOGTALKUSER/.core.qo'), compiler_heap(2048), string_table(256)]),
+	fcompile('$LOGTALKUSER/.core.pl', [assemble_only(true), object_file('$LOGTALKUSER/.core.qo'), compiler_heap(8192), string_table(512)]),
 	load('$LOGTALKUSER/.core.qo').
 
 % workaround the lack of support for static multifile predicates

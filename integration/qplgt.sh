@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Qu-Prolog
-##   Last updated on February 22, 2017
+##   Last updated on February 25, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -95,4 +95,4 @@ fi
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec qp -s 3072 -d 3072 -h 4096 -e 256 -C 256 -H 1536 -l "$LOGTALKHOME/integration/logtalk_qp.pl" "$@"
+exec qp -s 3072 -d 3072 -h 8192 -e 256 -C 256 -H 1536 -l "$LOGTALKHOME/integration/logtalk_qp.pl" "$@"
