@@ -78,6 +78,9 @@ directory that contains the tests.
 * FIXED: Regression in previous release when passing additional arguments to
 the `logtalk_tester.sh` script.
 
+* FIXED: Missing `dynamic/1` directive for a `logtalk_library_path/2` multifile
+predicate definition in the `code_metrics` tool.
+
 Tests
 -----
 

@@ -20,6 +20,7 @@
 
 
 :- multifile(logtalk_library_path/2).
+:- dynamic(logtalk_library_path/2).
 
 logtalk_library_path(metrics, code_metrics('metrics/')).
 
