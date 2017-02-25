@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.0</code>
+            <code>2.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/19</code>
+            <code>2017/2/25</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -254,7 +254,7 @@
         <div class="section">
           <h3 id="reset_seed/0" class="code">reset_seed/0</h3>
           <blockquote>
-            <p class="comment">Resets the random generator seed to its default value. Deprecated. Use get_seed/1 and set_seed/1 instead if you need reproducibility.</p>
+            <p class="comment">Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -270,7 +270,7 @@
         <div class="section">
           <h3 id="get_seed/1" class="code">get_seed/1</h3>
           <blockquote>
-            <p class="comment">Gets the current random generator seed. Seed should be regarded as an opaque ground term</p>
+            <p class="comment">Gets the current random generator seed. Seed should be regarded as an opaque ground term.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -304,6 +304,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>set_seed(+ground) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="randomize/1" class="code">randomize/1</h3>
+          <blockquote>
+            <p class="comment">Randomizes the random generator using a positive integer to compute a new seed.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>randomize(Seed)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>randomize(+positive_integer) &ndash; one</code>
             </dd>
           </dl>
         </div>

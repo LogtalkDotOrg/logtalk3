@@ -17,14 +17,22 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this library load the `random_loader.lgt`
-utility file:
+To load all entities in this library load the `random_loader.lgt` utility
+file:
 
 	| ?- logtalk_load(library(random_loader)).
 
-The `random` object implements portable random number generators.
+The `random` object implements portable random number generators and
+supports multiple random number generators, using different seeds, by
+defining derived objects. For example:
 
-If you need more than one random number generator, using different
-seeds, define new objects as extensions of the `random` object. Be
-sure to initialize the seeds of the new random generator objects
-by using the `reset_seed/0` message.
+	:- object(my_random_generator_1,
+		extends(ramdom)).
+	
+		:- intialization(::reset_seed).
+
+	:- end_object.
+
+The `frandom` object is a faster version of the `random` object but
+cannot be extended. Useful when a single random number generator is
+required.

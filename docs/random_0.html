@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">random</h1>
       <blockquote>
-        <p class="comment">Portable random number generator predicates.</p>
+        <p class="comment">Portable random number generator predicates. Core predicates originally written by Richard O'Keefe.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.0</code>
+            <code>2.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/8/23</code>
+            <code>2017/2/25</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -90,7 +90,10 @@
     <div class="remarks">
       <h2>Remarks</h2>
       <div class="section">
-        <h3 class="comment">(none)</h3>
+        <dl class="remarks">
+          <dt class="comment">Multiple random number generators</dt>
+          <dd class="text">To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.</dd>
+        </dl>
       </div>
     </div>
     <div class="see_also">
