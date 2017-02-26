@@ -22,9 +22,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/01/31,
+		date is 2017/02/26,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -128,10 +128,8 @@
 		).
 	% unused predicates and non-terminals listed in the uses/2 directives
 	predicate(Entity, Object::Resource, File, Line) :-
-		entity_property(Entity, file(File)),
 		entity_property(Entity, calls(Object::Predicate, CallsProperties)),
 		memberchk(caller(Predicate), CallsProperties),
-		memberchk(line_count(Line), CallsProperties),
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
@@ -147,13 +145,16 @@
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
 		;	Resource = Predicate
-		).
+		),
+		(	member(include(File), CallsProperties) ->
+			true
+		;	entity_property(Entity, file(File))
+		),
+		memberchk(line_count(Line), CallsProperties).
 	% unused predicates and non-terminals listed in the use_module/2 directives
 	predicate(Entity, ':'(Module,Resource), File, Line) :-
-		entity_property(Entity, file(File)),
 		entity_property(Entity, calls(':'(Module,Predicate), CallsProperties)),
 		memberchk(caller(Predicate), CallsProperties),
-		memberchk(line_count(Line), CallsProperties),
 		entity_property(Entity, defines(Predicate, DefinesProperties)),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
@@ -169,7 +170,12 @@
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
 		;	Resource = Predicate
-		).
+		),
+		(	member(include(File), CallsProperties) ->
+			true
+		;	entity_property(Entity, file(File))
+		),
+		memberchk(line_count(Line), CallsProperties).
 
 	non_scoped_predicate(Entity, Alias, File, Line) :-
 		entity_property(Entity, defines(Alias, Properties)),
@@ -187,7 +193,10 @@
 		% no local scope directive
 		\+ inherited_scope_directive(Entity, Predicate),
 		% no inherited scope directive
-		entity_property(Entity, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Entity, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 
 	inherited_scope_directive(Entity, Predicate) :-

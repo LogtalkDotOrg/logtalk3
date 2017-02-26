@@ -76,6 +76,9 @@ Library
 Tools
 -----
 
+* UPDATED: The `dead_code_scanner` tool to report dead code found in included
+files by using their paths.
+
 * FIXED: Extra characters in the beginning of the lines in the listings of
 skipped and failed tests when using the `logtalk_tester.sh` script from the
 directory that contains the tests.
