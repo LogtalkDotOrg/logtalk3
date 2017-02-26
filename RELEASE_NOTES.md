@@ -67,8 +67,6 @@ Library
 
 * ADDED: Predicate `randomize/1` to the `random` library.
 
-* ADDED: Faster version of the `random` library object, `frandom`.
-
 * ADDED: Implementation of the `os::time_stamp/1` predicate for CxProlog.
 
 * FIXED: Declaration of the return type for the `os::time_stamp/1` predicate.
