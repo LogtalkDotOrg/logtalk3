@@ -39,7 +39,7 @@
 		random/1, random/3,
 		sequence/4, set/4, permutation/2,
 		randseq/4, randset/4,
-		reset_seed/0, get_seed/1, set_seed/1
+		reset_seed/0, get_seed/1, set_seed/1, randomize/1
 	]).
 
 	:- initialization(::reset_seed).
