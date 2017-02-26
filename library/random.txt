@@ -32,7 +32,3 @@ defining derived objects. For example:
 		:- intialization(::reset_seed).
 
 	:- end_object.
-
-The `frandom` object is a faster version of the `random` object but
-cannot be extended. Useful when a single random number generator is
-required.
