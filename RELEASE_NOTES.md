@@ -112,7 +112,8 @@ Installers and installation scripts
 
 * FIXED: The shebang on all shell scripts to use `#!/usr/bin/env bash` instead
 of `#!/bin/bash` for compatibility with BSD systems. Thanks to Xin Wang for the
-bug report.
+bug report. When using the scripts on Windows using the Bash shell provided by
+Git for Windows, a recent version is required.
 
 * FIXED: Bug in Docker publishing script where the `master` branch was used to
 deploy stable versions but not using the tagged stable commits.

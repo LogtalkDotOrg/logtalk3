@@ -48,8 +48,10 @@ location, for scanning for dead code, and for generating HTML documentation.
 For using these commands, install the `process-palette` package and replace
 or merge the contents of the file with default file found at `~/.atom`. If
 no `~/.atom/process-palette.json` file exists just copy the provided file
-to `~/.atom`. Customize the file if necessary e.g. to select your preferred
-Prolog backend and keyboard shortcuts.
+to `~/.atom`. Customization of this file is usually required to select your
+preferred Prolog backend and keyboard shortcuts. The package settings may also
+need to be edited to select the shell to be use (notably, on Windows, a Bash
+shell must be specified; e.g. the Bash shell provided by Git for Windows).
 
 2. `atom_ctags`
 
