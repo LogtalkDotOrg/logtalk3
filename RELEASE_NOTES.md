@@ -117,6 +117,10 @@ deploy stable versions but not using the tagged stable commits.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: Configuration file for the Atom text editor `process-palette` plug-in
+to create a `Logtalk` menu with the defined commands. Requires version 0.12.0 or
+later of the plug-in.
+
 * FIXED: Configuration file for the Atom text editor `process-palette` plug-in
 when used on Windows systems.
 

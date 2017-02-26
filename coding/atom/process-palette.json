@@ -40,7 +40,10 @@
       "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
       "successMessage": "Executed : {fullCommand}",
       "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
-      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}"
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "menus": [
+        "Logtalk"
+      ]
     },
     {
       "namespace": "Process Palette",
@@ -71,7 +74,10 @@
       "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
       "successMessage": "Executed : {fullCommand}",
       "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
-      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}"
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "menus": [
+        "Logtalk"
+      ]
     },
     {
       "namespace": "Process Palette",
@@ -98,7 +104,10 @@
       "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
       "successMessage": "Executed : {fullCommand}",
       "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
-      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}"
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "menus": [
+        "Logtalk"
+      ]
     }
   ]
 }
