@@ -14,9 +14,9 @@
     {
       "namespace": "Process Palette",
       "action": "Compile Logtalk file",
-      "command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('{fileAbsPath | posix}')),halt\" 2>&1",
+      "command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('{fileAbsPath|posix}')),halt\" 2>&1",
       "arguments": [],
-      "cwd": "{fileDirPath}",
+      "cwd": null,
       "inputDialogs": [],
       "env": {},
       "keystroke": "cmd-1",
@@ -48,9 +48,9 @@
     {
       "namespace": "Process Palette",
       "action": "Scan Logtalk file for dead code",
-      "command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('{fileAbsPath | posix}')),flush_output,logtalk_load(dead_code_scanner(loader)),dead_code_scanner::all,halt\" 2>&1",
+      "command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('{fileAbsPath|posix}')),flush_output,logtalk_load(dead_code_scanner(loader)),dead_code_scanner::all,halt\" 2>&1",
       "arguments": [],
-      "cwd": "{fileDirPath}",
+      "cwd": null,
       "inputDialogs": [],
       "env": {},
       "keystroke": "cmd-2",
@@ -82,7 +82,7 @@
     {
       "namespace": "Process Palette",
       "action": "Generate HTML documentation",
-      "command": "swilgt -g \"logtalk_load(lgtdoc(loader)),logtalk_load('{fileAbsPath | posix}'),lgtdoc::directory('{fileDirAbsPath | posix}'),halt\" 2>&1 && cd {fileDirAbsPath | posix}/xml_docs && lgt2html && atom index.html",
+      "command": "swilgt -g \"logtalk_load(lgtdoc(loader)),logtalk_load('{fileAbsPath | posix}'),lgtdoc::directory('{fileDirAbsPath|posix}'),halt\" 2>&1 && cd {fileDirAbsPath | posix}/xml_docs && lgt2html && atom index.html",
       "arguments": [],
       "cwd": null,
       "inputDialogs": [],
