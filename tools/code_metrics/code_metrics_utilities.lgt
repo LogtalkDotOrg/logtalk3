@@ -22,9 +22,9 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2016/1/10,
+		date is 2017/02/27,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
@@ -214,10 +214,13 @@
 		extends_object(Entity, Ancestor).
 	ancestor(object, Entity, object, Ancestor) :-
 		instantiates_class(Entity, Ancestor),
-		% to account for meta-classes that can instantiate themselves
-		Entity \== Ancestor.
+		Entity \== Ancestor,
+		\+ instantiates_class(Ancestor, Entity),
+		\+ specializes_class(Ancestor, Entity).
 	ancestor(object, Entity, object, Ancestor) :-
-		specializes_class(Entity, Ancestor).
+		specializes_class(Entity, Ancestor),
+		\+ instantiates_class(Ancestor, Entity),
+		\+ specializes_class(Ancestor, Entity).
 
 
 
