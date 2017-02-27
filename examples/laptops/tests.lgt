@@ -24,8 +24,19 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/10/16,
+		date is 2017/02/27,
 		comment is 'Unit tests for the "laptops" example.'
 	]).
+
+	test(laptops_1) :-
+		custom::new(fast, fifteen, querty, Laptop),
+		imports_category(Laptop, Category),
+		Category == laptop.
+
+	test(laptops_2) :-
+		custom::new(faster, thirteen, dvorak, Laptop),
+		Laptop::mainboard(Mainboard), Mainboard == faster,
+		Laptop::display(Display), Display == thirteen,
+		Laptop::keyboard(Keyboard), Keyboard == dvorak.
 
 :- end_object.

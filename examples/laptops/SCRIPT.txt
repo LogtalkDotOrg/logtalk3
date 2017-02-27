@@ -45,7 +45,7 @@ Keyboard: qwerty
 yes
 
 
-% create and custom laptop and describe it:
+% create a custom laptop and describe it:
 
 | ?- custom::new(faster, thirteen, dvorak, Laptop).
 Laptop = o1.

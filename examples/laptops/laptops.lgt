@@ -136,7 +136,8 @@
 
 
 % now we can assemble some laptops; again we start with a category in
-% order to provide an implementation for the describe/0 predicate
+% order to provide an implementation for the describe/0 predicate and
+% declarations for the public predicates
 
 :- category(laptop,
 	implements(describe)).
@@ -145,8 +146,8 @@
 		mainboard/1, display/1, keyboard/1
 	]).
 
-	% as we are using object for composition, we have a level
-	% of indirection when going from assembly to parts
+	% as we are using objects for composition, thus we have a
+	% level of indirection when going from assembly to parts
 	describe :-
 		::mainboard(Mainboard), Mainboard::describe,
 		::display(Display), Display::describe,
