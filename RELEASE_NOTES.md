@@ -62,6 +62,11 @@ expected full path.
 * FIXED: Increase the size of the memory areas in the Qu-Prolog adapter file
 and integration scripts to allow running the current Logtalk version.
 
+Documentation
+-------------
+
+UPDATED: Documentation of the portable `os` library.
+
 Library
 -------
 

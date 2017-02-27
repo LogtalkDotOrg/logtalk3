@@ -42,8 +42,12 @@
 	:- info([
 		version is 1.31,
 		author is 'Paulo Moura',
-		date is 2017/02/20,
-		comment is 'Portable operating-system access predicates.'
+		date is 2017/02/27,
+		comment is 'Portable operating-system access predicates.',
+		remarks is [
+			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
+			'Missing implementations' - 'A few predicates (e.g. wall_time/1) cannot be implemented in some backend Prolog systems.'
+		]
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
