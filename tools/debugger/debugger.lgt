@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 3.3,
+		version is 4.0,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2017/02/27,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -291,8 +291,8 @@
 	leashing_(fail).
 	leashing_(exception).
 
-	port_user_name(fact(_,_,_), fact).
-	port_user_name(rule(_,_,_), rule).
+	port_user_name(fact(_,_,_,_), fact).
+	port_user_name(rule(_,_,_,_), rule).
 	port_user_name(call, call).
 	port_user_name(exit, exit).
 	port_user_name(nd_exit, exit).
@@ -350,10 +350,10 @@
 		;	fail
 		).
 
-	spying_port_code(fact(Entity,_,Line), _, _, '#') :-
+	spying_port_code(fact(Entity,_,_,Line), _, _, '#') :-
 		spying_line_number_(Entity, Line),
 		!.
-	spying_port_code(rule(Entity,_,Line), _, _, '#') :-
+	spying_port_code(rule(Entity,_,_,Line), _, _, '#') :-
 		spying_line_number_(Entity, Line),
 		!.
 	spying_port_code(_, Goal, _, '+') :-
@@ -387,7 +387,7 @@
 
 	:- meta_predicate(debug_handler((::), (*))).
 
-	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
+	debug_handler(fact(Entity,Fact,Clause,File,Line), ExCtx) :-
 		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
@@ -395,11 +395,11 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
-			port(fact(Entity,Clause,Line), N, Fact, _, _, ExCtx, Action),
+			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	debug_handler(rule(Entity,Head,Clause,Line), ExCtx) :-
+	debug_handler(rule(Entity,Head,Clause,File,Line), ExCtx) :-
 		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
@@ -407,7 +407,7 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
-			port(rule(Entity,Clause,Line), N, Head, _, _, ExCtx, Action),
+			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
@@ -581,7 +581,7 @@
 	do_port_option(l, _, _, _, _, _, _, true) :-
 		retractall(tracing_).
 
-	do_port_option(s, rule(_,_,_), _, _, _, _, _, true) :-
+	do_port_option(s, rule(_,_,_,_), _, _, _, _, _, true) :-
 		!,
 		retractall(skipping_),
 		assertz(skipping_).
@@ -673,18 +673,18 @@
 		fail.
 
 	do_port_option((#), Port, _, _, _, _, _, _) :-
-		(	Port = fact(Entity, _, Line) ->
+		(	Port = fact(Entity, _, _, Line) ->
 			true
-		;	Port = rule(Entity, _, Line)
+		;	Port = rule(Entity, _, _, Line)
 		),
 		spy_line_number(Entity-Line),
 		print_message(information, debugger, line_number_spy_point_added),
 		fail.
 
 	do_port_option(('|'), Port, _, _, _, _, _, _) :-
-		(	Port = fact(Entity, _, Line) ->
+		(	Port = fact(Entity, _, _, Line) ->
 			true
-		;	Port = rule(Entity, _, Line)
+		;	Port = rule(Entity, _, _, Line)
 		),
 		nospy_line_number(Entity-Line),
 		print_message(information, debugger, line_number_spy_point_removed),
@@ -777,16 +777,16 @@
 		fail.
 
 	do_port_option('.', Port, _, Goal, _, _, _, _) :-
-		(	Port = fact(Entity, Clause, Line) ->
+		(	Port = fact(Entity, Clause, File, Line) ->
 			true
-		;	Port = rule(Entity, Clause, Line)
+		;	Port = rule(Entity, Clause, File, Line)
 		),
 		(	current_object(Entity) ->
-			object_property(Entity, file(Basename,Directory))
+			true
 		;	current_category(Entity) ->
-			category_property(Entity, file(Basename,Directory))
+			true
 		;	current_protocol(Entity) ->
-			protocol_property(Entity, file(Basename,Directory))
+			true
 		;	% assume a Prolog module, for which there isn't a portable
 			% solution for retrieving source file information
 			fail
@@ -794,14 +794,14 @@
 		(	Goal = (Other::Predicate) ->
 			% clause for an entity multifile predicate
 			functor(Predicate, Functor, Arity),
-			print_message(information, debugger, file_context(Basename,Directory,Entity,Other::Functor/Arity,Clause,Line))
+			print_message(information, debugger, file_context(File,Line,Entity,Other::Functor/Arity,Clause))
 		;	Goal = ':'(Other,Predicate) ->
 			% clause for a module multifile predicate
 			functor(Predicate, Functor, Arity),
-			print_message(information, debugger, file_context(Basename,Directory,Entity,':'(Other,Functor/Arity),Clause,Line))
+			print_message(information, debugger, file_context(File,Line,Entity,':'(Other,Functor/Arity),Clause))
 		;	% clause for a local predicate
 			functor(Goal, Functor, Arity),
-			print_message(information, debugger, file_context(Basename,Directory,Entity,Functor/Arity,Clause,Line))
+			print_message(information, debugger, file_context(File,Line,Entity,Functor/Arity,Clause))
 		),
 		fail.
 

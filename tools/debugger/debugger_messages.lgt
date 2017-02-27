@@ -21,9 +21,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 1.4,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/10/16,
+		date is 2017/02/27,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -201,10 +201,9 @@
 
 	% file context
 
-	message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause0, Line0)) -->
-		{atom_concat(Directory, Basename, File),
-		 ground_term_copy(Entity, GroundEntity),
-		 clause_and_line_numbers(Clause0, Line0, Clause, Line)},
+	message_tokens(file_context(File0, Line0, Entity, Predicate, Clause0)) -->
+		{ground_term_copy(Entity, GroundEntity),
+		 location_and_clause_number(File0, Line0, Clause0, File, Line, Clause)},
 		[
 			'     File:          ~w'-[File], nl,
 			'     Line number:   ~w'-[Line], nl,
@@ -333,9 +332,9 @@
 		leashed_ports(Ports).
 	leashed_ports([]) --> [].
 
-	port_name(fact(_,_,_)) -->
+	port_name(fact(_,_,_,_)) -->
 		['  Fact: '-[]].
-	port_name(rule(_,_,_)) -->
+	port_name(rule(_,_,_,_)) -->
 		['  Rule: '-[]].
 	port_name(call) -->
 		['  Call: '-[]].
@@ -406,7 +405,11 @@
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
 
-	clause_and_line_numbers(Clause0, Line0, Clause, Line) :-
+	location_and_clause_number(File0, Line0, Clause0, File, Line, Clause) :-
+		 (	File0 == nil ->
+		 	File = 'n/a'
+		 ;	File = File0
+		 ),
 		 (	Line0 > 0 ->
 		 	Line = Line0
 		 ;	Line = 'n/a'

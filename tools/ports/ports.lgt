@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 0.9,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2017/02/27,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -85,11 +85,11 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	debug_handler(fact(_, Goal, _, _), ExCtx) :-
+	debug_handler(fact(_, Goal, _, _, _), ExCtx) :-
 		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
 		ground_entity_identifier(Entity, GroundEntity),
 		port(Goal, fact, GroundEntity).
-	debug_handler(rule(_, Goal, _, _), ExCtx) :-
+	debug_handler(rule(_, Goal, _, _, _), ExCtx) :-
 		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
 		ground_entity_identifier(Entity, GroundEntity),
 		port(Goal, rule, GroundEntity).

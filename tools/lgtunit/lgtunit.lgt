@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3.8,
+		version is 4.0,
 		author is 'Paulo Moura',
-		date is 2017/02/15,
+		date is 2017/02/27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1343,9 +1343,9 @@
 	% the Logtalk runtime calls all defined logtalk::trace_event/2 hooks using
 	% a failure-driven loop; thus we don't have to worry about handling all
 	% events or failing after handling an event to give other hooks a chance
-	logtalk::trace_event(fact(Entity, Fact, N, _), _) :-
+	logtalk::trace_event(fact(Entity, Fact, N, _, _), _) :-
 		fired(Entity, Fact, N).
-	logtalk::trace_event(rule(Entity, Head, N, _), _) :-
+	logtalk::trace_event(rule(Entity, Head, N, _, _), _) :-
 		fired(Entity, Head, N).
 
 	fired(Entity, Other::Head, N) :-

@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 9, 3, rc5)).
+'$lgt_version_data'(logtalk(3, 9, 3, rc6)).
 
 
 
@@ -3565,7 +3565,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, 0), ExCtx), DBody)))
+				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), ExCtx), DBody)))
 			;	asserta((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender
@@ -3599,7 +3599,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0, 0), ExCtx)))
+				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), ExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
 				asserta(THead)
 			)
@@ -3659,7 +3659,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, 0), ExCtx), DBody)))
+				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), ExCtx), DBody)))
 			;	assertz((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender
@@ -3693,7 +3693,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0, 0), ExCtx)))
+				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), ExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
 				assertz(THead)
 			)
@@ -3791,7 +3791,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	TBody = ('$lgt_nop'(Body), _) ->
 		% rules (compiled both in normal and debug mode)
 		true
-	;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
+	;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
 		% facts compiled in debug mode
 		Body = true
 	;	% facts compiled in normal mode
@@ -3810,7 +3810,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 					clause(THead, TBody),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
-					;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
+					;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
 						Body = true
 					;	TBody = Body
 					)
@@ -3833,7 +3833,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			clause(THead, TBody),
 			(	TBody = ('$lgt_nop'(Body), _) ->
 				true
-			;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
+			;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
 				Body = true
 			;	TBody = Body
 			)
@@ -3889,7 +3889,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 					retract((THead :- TBody)),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
-					;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
+					;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
 						Body = true
 					;	TBody = Body
 					),
@@ -3899,7 +3899,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 					retract((THead :- TBody)),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
-					;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
+					;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
 						Body = true
 					;	TBody = Body
 					)
@@ -3922,7 +3922,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			retract((THead :- TBody)),
 			(	TBody = ('$lgt_nop'(Body), _) ->
 				true
-			;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
+			;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
 				Body = true
 			;	TBody = Body
 			)
@@ -3993,7 +3993,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 					'$lgt_unwrap_compiled_head'(THead0, THead),
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
-						retract((THead :- '$lgt_debug'(fact(_, _, _, _), _)))
+						retract((THead :- '$lgt_debug'(fact(_, _, _, _, _), _)))
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, Scope, Type, Sender, THead, DDef, true),
 						retract(THead)
 					),
@@ -4002,7 +4002,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 					'$lgt_unwrap_compiled_head'(THead0, THead),
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
-						retract((THead :- '$lgt_debug'(fact(_, _, _, _), _)))
+						retract((THead :- '$lgt_debug'(fact(_, _, _, _, _), _)))
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead),
 						retract(THead)
 					)
@@ -4023,7 +4023,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_unwrap_compiled_head'(THead0, THead),
 			(	ObjFlags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				retract((THead :- '$lgt_debug'(fact(_, _, _, _), _)))
+				retract((THead :- '$lgt_debug'(fact(_, _, _, _, _), _)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead),
 				retract(THead)
 			)
@@ -5611,11 +5611,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_debug'(goal(_, TGoal), _) :-
 	call(TGoal).
 
-% fact(Entity, Fact, ClauseNumber, BeginLine)
-'$lgt_debug'(fact(_, _, _, _), _).
+% fact(Entity, Fact, ClauseNumber, File, BeginLine)
+'$lgt_debug'(fact(_, _, _, _, _), _).
 
-% rule(Entity, Head, ClauseNumber, BeginLine)
-'$lgt_debug'(rule(_, _, _, _), _).
+% rule(Entity, Head, ClauseNumber, File, BeginLine)
+'$lgt_debug'(rule(_, _, _, _, _), _).
 
 
 
@@ -10053,28 +10053,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, Head, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, BeginLine-EndLine),
+	'$lgt_comp_ctx'(Ctx, Head, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, _),
+	'$lgt_source_file_context'(Ctx, File, BeginLine-EndLine),
 	'$lgt_compile_head'(Head, PI, THead, Ctx),
 	(	Head = {UserHead} ->
 		% clause for a multifile predicate in "user"
-		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, BeginLine), ExCtx),
+		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
 		'$lgt_execution_context'(ExCtx, user, Sender, This, Self, MetaCallCtx, Stack),
 		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 	;	Head = Other::_ ->
 		% clause for an entity multifile predicate
-		DHead = '$lgt_debug'(rule(Entity, Head, N, BeginLine), ExCtx),
+		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
 		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
 		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 	;	Head = ':'(Other, _) ->
 		% clause for a module multifile predicate
-		DHead = '$lgt_debug'(rule(Entity, Head, N, BeginLine), ExCtx),
+		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
 		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
 		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 	;	% clause for a local predicate
-		DHead = '$lgt_debug'(rule(Entity, Head, N, BeginLine), ExCtx),
+		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		BodyCtx = Ctx
 	),
 	(	'$lgt_pp_dynamic_'(Head) ->
@@ -10083,29 +10084,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TClause = srule(THead, Body, BodyCtx),
 		DClause = dsrule(THead, DHead, Body, BodyCtx)
 	),
-	'$lgt_source_file_context'(Ctx, File, _),
 	'$lgt_clause_number'(PI, rule, File, BeginLine, N).
 
 '$lgt_compile_clause'(Fact, Entity, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, ExCtx, _, _, BeginLine-_),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
 	(	Fact = {UserFact} ->
 		% fact for a multifile predicate in "user"
-		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, BeginLine), ExCtx)
+		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, File, BeginLine), ExCtx)
 	;	Fact = Other::_ ->
 		% fact for an entity multifile predicate
-		DHead = '$lgt_debug'(fact(Entity, Fact, N, BeginLine), ExCtx),
+		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(Ctx, _, Other, _, _, _, _, _, _, ExCtx, _, _, _),
 		'$lgt_execution_context_this_entity'(ExCtx, _, Other)
 	;	Fact = ':'(Other, _) ->
 		% fact for a module multifile predicate
-		DHead = '$lgt_debug'(fact(Entity, Fact, N, BeginLine), ExCtx),
+		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(Ctx, _, Other, _, _, _, _, _, _, ExCtx, _, _, _),
 		'$lgt_execution_context_this_entity'(ExCtx, _, Other)
 	;	% other facts
-		DHead = '$lgt_debug'(fact(Entity, Fact, N, BeginLine), ExCtx)
+		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	),
-	'$lgt_source_file_context'(Ctx, File, _),
 	'$lgt_clause_number'(PI, fact, File, BeginLine, N).
 
 
@@ -16469,7 +16469,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, BodyStack),
 	'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack, Hook),
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Header = '$lgt_debug'(rule(Entity, DHead, 0, 0), BodyExCtx),
+		Header = '$lgt_debug'(rule(Entity, DHead, 0, nil, 0), BodyExCtx),
 		If = '$lgt_debug'(goal(check_coinductive_success(TestHead, HeadStack), '$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)), BodyExCtx),
 		Then = '$lgt_debug'(goal(coinductive_success_hook(Head, Hypothesis), Hook), BodyExCtx),
 		Else = (

@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2016/11/21,
+		date is 2017/02/27,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
 	]).
 
@@ -157,7 +157,7 @@
 	:- multifile(debug_handler/2).
 	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
 	:- info(debug_handler/2, [
-		comment is 'Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,Line) and rule(Entity,Head,Clause,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
+		comment is 'Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
 		argnames is ['Event', 'ExecutionContext']
 	]).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB

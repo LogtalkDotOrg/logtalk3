@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The debug events `fact/4` and `rule/4` to `fact/5` and `rule/5` with
+the added argument being the container file to account for the improved support
+for `include/1` directives.
+
 * CHANGED: The compiler no longer changes the Prolog backend working directory
 when compiling files. This avoids potential clashes when using multi-threaded
 Prolog systems, such as SWI-Prolog, where the working directory is shared among
@@ -80,6 +84,9 @@ Library
 
 Tools
 -----
+
+* CHANGED: The `debugger`, `lgtunit`, and `ports` tools to account for the
+change to the debug events from `fact/4` and `rule/4` to `fact/5` and `rule/5`.
 
 * UPDATED: The `dead_code_scanner` tool to report dead code found in included
 files by using their paths.
