@@ -5738,9 +5738,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% save the file loading dependency on a parent file if it exists
 	'$lgt_save_file_loading_dependency'(SourceFile),
 	% compile the source file to an intermediate Prolog file on disk
+	asserta('$lgt_file_loading_stack_'(SourceFile, Directory)),
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, loading, _Current),
 	% compile and load the intermediate Prolog file
-	asserta('$lgt_file_loading_stack_'(SourceFile, Directory)),
 	'$lgt_load_compiled_file'(SourceFile, Flags, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile, _)),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)).
@@ -6076,7 +6076,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	once('$lgt_file_loading_stack_'(_, ParentDirectory)),
 			% parent file exists; try first a path relative to its directory
 			atom_concat(ParentDirectory, FilePath, SourceFile0)
-		;	% we may have an absolute file path or a relative path without any parent file
+		;	% we may have a relative file path without any parent file
 			'$lgt_expand_path'(FilePath, SourceFile0)
 		)
 	),

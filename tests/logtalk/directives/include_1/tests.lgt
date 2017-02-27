@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/02/22,
+		date is 2017/02/27,
 		comment is 'Unit tests for the include/1 built-in directive.'
 	]).
 
@@ -132,5 +132,21 @@
 		object_property(main, defines(c/0, Properties)),
 		memberchk(line_count(Line), Properties),
 		integer(Line).
+
+	test(include_1_21) :-
+		{plain_1(X)},
+		X == 1.
+
+	test(include_1_22) :-
+		{up::plain_1(X)},
+		X == 1.
+
+	test(include_1_23) :-
+		{plain_2(X)},
+		X == 1.
+
+	test(include_1_24) :-
+		{sub::plain_2(X)},
+		X == 1.
 
 :- end_object.

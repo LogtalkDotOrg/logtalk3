@@ -24,7 +24,21 @@ RELEASE NOTES
 3.10.1 - March ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: Bug where an included file specified using a relative path would not
+be found when the main file is being loaded from a directory other than the
+one that contains it.
+
+Tests
+-----
+
+* ADDED: Unit tests for the `include/1` directive to check additional cases of
+using relative paths.
+
+
+3.10.0 - February 27, 2017
 ==========================
 
 Logtalk compiler and runtime

@@ -18,18 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(library(os_loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(main),
-	% test with loading from a relative path a file that uses include/1
-	% directives with relative paths that go up to the file parent directory
-	logtalk_load('down/up'),
-	% test with loading from an absolute path a file that uses include/1
-	% directives with relative paths that go into sub-directories
-	logtalk_load('$LOGTALKUSER/tests/logtalk/directives/include_1/sub'),
-	logtalk_load(tests, [hook(lgtunit), source_data(on)]),
-	tests::run
-)).
+:- include('../one/two/plain_1.pl').
+
+
+:- object(up).
+
+	:- public(plain_1/1).
+
+	:- include('../one/two/plain_1.pl').
+
+:- end_object.
