@@ -76,7 +76,7 @@ the Logtalk directory, and then type:
 	% sudo ./install.sh
 
 This installation script makes all files read-only for non-admin users in 
-order to avoid user tempering. This is a convenient setup for computer labs, 
+order to avoid user tampering. This is a convenient setup for computer labs, 
 given that making directories world-writable is a security risk. The install
 script accepts an installation prefix as argument. For example:
 
