@@ -66,6 +66,8 @@ globally before compiling your source files:
 
 	| ?- set_logtalk_flag(debug, on), set_logtalk_flag(source_data, on).
 
+Be aware, however, that loader files (e.g. library loader files) may override
+default flag values and thus loaded files may not be compiled in debug mode.
 
 Generating profiling data
 -------------------------
