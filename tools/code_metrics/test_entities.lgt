@@ -155,3 +155,26 @@
 	instantiates(vehicle)).
 
 :- end_object.
+
+
+
+:- object(class,
+	instantiates(class),
+	specializes(abstract_class)).
+
+:- end_object.
+
+
+
+:- object(object,
+	instantiates(class)).
+
+:- end_object.
+
+
+
+:- object(abstract_class,
+	instantiates(class),
+	specializes(object)).
+
+:- end_object.

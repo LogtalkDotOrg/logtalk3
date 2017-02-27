@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/10,
+		date is 2017/02/27,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 
@@ -46,6 +46,15 @@
 	]).
 
 	% DIT tests
+
+	test(dit_reflexive_obj) :-
+		depth_is(object, 2).
+
+	test(dit_reflexive_class) :-
+		depth_is(class, 1).
+
+	test(dit_reflexive_abstract_class) :-
+		depth_is(abstract_class, 3).
 
 	test(dit_obj_a) :-
 		depth_is(obj_a, 3).
