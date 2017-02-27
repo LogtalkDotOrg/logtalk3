@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on February 20, 2017
+##   Last updated on February 27, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,13 +27,13 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.21"
+	echo "$(basename "$0") 0.22"
 	exit 0
 }
 
 operating_system=$(uname -s)
 
-if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
+if [ "${operating_system:0:10}" == "MINGW32_NT" ] || [ "${operating_system:0:10}" == "MINGW64_NT" ] ; then
 	# assume that we're running on Windows using the Git for Windows bash shell
 	extension='.sh'
 elif [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" == "$LOGTALKUSER" ] ; then

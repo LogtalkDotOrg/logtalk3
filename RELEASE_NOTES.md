@@ -83,6 +83,9 @@ files by using their paths.
 skipped and failed tests when using the `logtalk_tester.sh` script from the
 directory that contains the tests.
 
+* FIXED: Detection by the `logtalk_tester.sh` script of 64-bit versions of the
+Bash shell provided by Git for Windows.
+
 * FIXED: Regression in previous release when passing additional arguments to
 the `logtalk_tester.sh` script.
 
