@@ -5739,7 +5739,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_save_file_loading_dependency'(SourceFile),
 	% compile the source file to an intermediate Prolog file on disk
 	asserta('$lgt_file_loading_stack_'(SourceFile, Directory)),
-	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, loading, _Current),
+	% a syntax error while reading the terms in a source file results
+	% in a printed message and failure instead of an exception but we
+	% need to pass the failure up to the caller
+	(	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, loading) ->
+		retractall('$lgt_failed_file_'(SourceFile))
+	;	assertz('$lgt_failed_file_'(SourceFile)),
+		'$lgt_propagate_failure_to_parent_files'(SourceFile),
+		fail
+	),
 	% compile and load the intermediate Prolog file
 	'$lgt_load_compiled_file'(SourceFile, Flags, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile, _)),
@@ -5954,7 +5962,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	atom_concat(Name, Extension, Basename),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
 	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
-	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, compiling),
+	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
 '$lgt_compile_files'(File, Flags) :-
@@ -5962,11 +5970,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_file'(@source_file_name, @source_file_name, @list, +atom)
+% '$lgt_compile_file'(@source_file_name, @list, @source_file_name, +atom)
 %
 % compiles to disk a source file
 
-'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action) :-
+'$lgt_compile_file'(SourceFile, Flags, ObjectFile, Action) :-
 	(	% interpret a clean(on) setting as (also) meaning that any
 		% existing intermediate Prolog files should be disregarded 
 		'$lgt_compiler_flag'(clean, off),
@@ -5984,21 +5992,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	% Action == compiling
 			'$lgt_print_message'(comment(compiling), core, compiled_file(SourceFile, Flags))
 		)
-	).
-
-
-% auxiliary predicate when compiling a file as a consequence of a logtalk_load/1-2 call
-%
-% a syntax error while reading the terms in a source file results in a printed message
-% and failure instead of an exception but we need to restore the original directory
-% before passing the failure up to the caller
-
-'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action, _Directory) :-
-	(	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action) ->
-		retractall('$lgt_failed_file_'(SourceFile))
-	;	assertz('$lgt_failed_file_'(SourceFile)),
-		'$lgt_propagate_failure_to_parent_files'(SourceFile),
-		fail
 	).
 
 
@@ -6077,6 +6070,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			% parent file exists; try first a path relative to its directory
 			atom_concat(ParentDirectory, FilePath, SourceFile0)
 		;	% we may have a relative file path without any parent file
+			% (e.g. when the user changes the working directory to the
+			% directory containing the file to be loaded)
 			'$lgt_expand_path'(FilePath, SourceFile0)
 		)
 	),
