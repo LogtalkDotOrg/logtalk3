@@ -35,6 +35,11 @@ one that contains it.
 uses `ensure_loaded/1` or `use_module/1-2` directives where the Prolog module
 is specified using a relative path.
 
+Library
+-------
+
+* ADDED: Predicate `pairs::group_by_key/2`.
+
 Tests
 -----
 

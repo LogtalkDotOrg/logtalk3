@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.2</code>
+            <code>1.3</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/11/10</code>
+            <code>2017/2/28</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -122,6 +122,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>transpose(+list(pair),-list(pair)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="group_by_key/2" class="code">group_by_key/2</h3>
+          <blockquote>
+            <p class="comment">Groups pairs by key by constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. The relative order of the values for the same key is kept. The resulting list of pairs is sorted by key.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>group_by_key(Pairs,Groups)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>group_by_key(+list(pair),-list(pair)) &ndash; one</code>
             </dd>
           </dl>
         </div>
