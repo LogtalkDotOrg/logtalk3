@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 be found when the main file is being loaded from a directory other than the
 one that contains it.
 
+* FIXED: Bug where an included file uses `ensure_loaded/1` or `use_module/1-2`
+directives where the Prolog module is specified using a relative path.
+
 Tests
 -----
 

@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 1, rc2)).
 
 
 
@@ -7847,29 +7847,35 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	% perform basic error checking
 	'$lgt_check'(ground, FileSpec),
+	% try to expand the file spec as the directive may be found in an included file
+	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
 	% assume that ensure_loaded/1 is also a built-in predicate
-	ensure_loaded(FileSpec),
+	ensure_loaded(ExpandedFile),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(FileSpec)), sd(Term,VariableNames,File,Lines), Lines)).
+	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(ExpandedFile)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(use_module(FileSpec), _) :-
 	!,
 	% perform basic error checking
 	'$lgt_check'(ground, FileSpec),
+	% try to expand the file spec as the directive may be found in an included file
+	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
 	% assume that use_module/1 is also a built-in predicate
-	use_module(FileSpec),
+	use_module(ExpandedFile),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(FileSpec)), sd(Term,VariableNames,File,Lines), Lines)).
+	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(use_module(FileSpec, Imports), _) :-
 	!,
 	% perform basic error checking
 	'$lgt_check'(ground, FileSpec),
 	'$lgt_check'(ground, Imports),
+	% try to expand the file spec as the directive may be found in an included file
+	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
 	% assume that use_module/2 is also a built-in predicate
-	use_module(FileSpec, Imports),
+	use_module(ExpandedFile, Imports),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(FileSpec, Imports)), sd(Term,VariableNames,File,Lines), Lines)).
+	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile, Imports)), sd(Term,VariableNames,File,Lines), Lines)).
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
@@ -7983,6 +7989,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_file_predicate_directive_argument'(Pred, _) :-
 	'$lgt_check'(predicate_or_non_terminal_indicator, Pred).
+
+
+'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile) :-
+	(	atom(FileSpec),
+		% try to expand to an existing Prolog file
+		'$lgt_source_file_name'(FileSpec, _, _, Extension, ExpandedFile),
+		'$lgt_file_extension'(prolog, Extension),
+		catch('$lgt_file_exists'(ExpandedFile), _, fail) ->
+		true
+	;	% otherwise try the file spec as-is
+		ExpandedFile = FileSpec
+	).
 
 
 
