@@ -46,6 +46,12 @@ Tests
 * ADDED: Unit tests for the `include/1` directive to check additional cases of
 using relative paths.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Atom text editor command for running a doclet found on the directory
+of an open file.
+
 
 3.10.0 - February 27, 2017
 ==========================
