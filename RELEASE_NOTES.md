@@ -46,6 +46,11 @@ Tests
 * ADDED: Unit tests for the `include/1` directive to check additional cases of
 using relative paths.
 
+Examples
+--------
+
+* FIXED: Portability issue with one of the `errors` example loader files.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

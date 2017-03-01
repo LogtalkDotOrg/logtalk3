@@ -20,16 +20,16 @@
 
 :- initialization((
 	set_logtalk_flag(report, on),
-	ignore(logtalk_load(object_redefines_built_in_method)),
-	ignore(logtalk_load(invalid_clause_head)),
-	ignore(logtalk_load(unknown_directive)),
-	ignore(logtalk_load(non_instantiated_directive)),
-	ignore(logtalk_load(invalid_directive_argument)),
-	ignore(logtalk_load(unmatched_directive)),
-	ignore(logtalk_load(category_defines_dynamic_predicate)),
-	ignore(logtalk_load(control_construct_redefinition)),
-	ignore(logtalk_load(uses_predicate_repeated)),
-	ignore(logtalk_load(uses_predicate_conflict)),
-	ignore(logtalk_load(main_include_syntax_error)),
-	ignore(logtalk_load(main_include_compiler_error))
+	(logtalk_load(object_redefines_built_in_method) -> true; true),
+	(logtalk_load(invalid_clause_head) -> true; true),
+	(logtalk_load(unknown_directive) -> true; true),
+	(logtalk_load(non_instantiated_directive) -> true; true),
+	(logtalk_load(invalid_directive_argument) -> true; true),
+	(logtalk_load(unmatched_directive) -> true; true),
+	(logtalk_load(category_defines_dynamic_predicate) -> true; true),
+	(logtalk_load(control_construct_redefinition) -> true; true),
+	(logtalk_load(uses_predicate_repeated) -> true; true),
+	(logtalk_load(uses_predicate_conflict) -> true; true),
+	(logtalk_load(main_include_syntax_error) -> true; true),
+	(logtalk_load(main_include_compiler_error) -> true; true)
 )).
