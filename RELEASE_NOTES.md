@@ -40,6 +40,15 @@ Library
 
 * ADDED: Predicate `pairs::group_by_key/2`.
 
+Tools
+-----
+
+* IMPROVED: The `diagrams` tool nows prints a warning message when generating
+a diagram fails and ensures that the output stream is closed in this case.
+
+* IMPROVED: When generating cross-referencing diagrams, print a warning instead
+of generating entity existence errors when referenced entities are not loaded.
+
 Tests
 -----
 

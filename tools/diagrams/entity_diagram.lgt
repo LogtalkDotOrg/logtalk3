@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.10,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2017/01/06,
+		date is 2017/03/02,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -64,15 +64,20 @@
 		::reset,
 		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Basename, Options),
-		atom_concat(file_, Path, Identifier),
-		^^add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
-		process(Basename, Directory, GraphOptions),
-		output_externals(Options),
-		^^output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
-		Format::file_footer(diagram_output_file, Basename, Options),
+		(	Format::file_header(diagram_output_file, Basename, Options),
+			atom_concat(file_, Path, Identifier),
+			^^add_link_options(Path, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
+			process(Basename, Directory, GraphOptions),
+			output_externals(Options),
+			^^output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
+			Format::file_footer(diagram_output_file, Basename, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::file(Source, UserOptions)))
+		),
 		close(Stream).
 
 	file(Source) :-

@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2016/11/11,
+		date is 2017/03/02,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -44,14 +44,19 @@
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Project, Options),
-		atom_concat(libraries_, Project, Identifier),
-		Format::graph_header(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
-		output_libraries(Libraries, Format, Options),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
-		Format::file_footer(diagram_output_file, Project, Options),
+		(	Format::file_header(diagram_output_file, Project, Options),
+			atom_concat(libraries_, Project, Identifier),
+			Format::graph_header(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
+			output_libraries(Libraries, Format, Options),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
+			Format::file_footer(diagram_output_file, Project, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::libraries(Project, Libraries, UserOptions)))
+		),
 		close(Stream).
 
 	output_libraries([], _Format, _Options).
@@ -98,11 +103,16 @@
 		::reset,
 		::output_file_path(all_libraries, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, libraries, Options),
-		output_all_libraries(Options),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::file_footer(diagram_output_file, libraries, Options),
+		(	Format::file_header(diagram_output_file, libraries, Options),
+			output_all_libraries(Options),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::file_footer(diagram_output_file, libraries, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::all_libraries(UserOptions)))
+		),
 		close(Stream).
 
 	output_all_libraries(Options) :-
@@ -144,15 +154,20 @@
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Library, Options),
-		atom_concat(rlibrary_, Library, Identifier),
-		add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
-		::output_rlibrary(Library, Path, GraphOptions),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
-		Format::file_footer(diagram_output_file, Library, Options),
+		(	Format::file_header(diagram_output_file, Library, Options),
+			atom_concat(rlibrary_, Library, Identifier),
+			add_link_options(Path, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
+			::output_rlibrary(Library, Path, GraphOptions),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
+			Format::file_footer(diagram_output_file, Library, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rlibrary(Library, UserOptions)))
+		),
 		close(Stream).
 
 	:- public(rlibrary/1).
@@ -179,15 +194,20 @@
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Library, Options),
-		atom_concat(library_, Library, Identifier),
-		add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
-		::output_library(Library, Path, GraphOptions),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
-		Format::file_footer(diagram_output_file, Library, Options),
+		(	Format::file_header(diagram_output_file, Library, Options),
+			atom_concat(library_, Library, Identifier),
+			add_link_options(Path, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
+			::output_library(Library, Path, GraphOptions),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+			Format::file_footer(diagram_output_file, Library, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::library(Library, UserOptions)))
+		),
 		close(Stream).
 
 	output_library(_Library, Directory, Options) :-
@@ -232,15 +252,20 @@
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Project, Options),
-		atom_concat(directories_, Project, Identifier),
-		Format::graph_header(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
-		normalize_directory_paths(Directories, NormalizedDirectories),
-		output_directories(NormalizedDirectories, Format, Options),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
-		Format::file_footer(diagram_output_file, Project, Options),
+		(	Format::file_header(diagram_output_file, Project, Options),
+			atom_concat(directories_, Project, Identifier),
+			Format::graph_header(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
+			normalize_directory_paths(Directories, NormalizedDirectories),
+			output_directories(NormalizedDirectories, Format, Options),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
+			Format::file_footer(diagram_output_file, Project, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directories(Project, Directories, UserOptions)))
+		),
 		close(Stream).
 
 	normalize_directory_paths([], []).
@@ -284,16 +309,21 @@
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Project, Options),
-		atom_concat(directory_, Project, Identifier),
-		normalize_directory_paths([Directory], [NormalizedDirectory]),
-		add_link_options(NormalizedDirectory, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
-		::output_library(Project, NormalizedDirectory, GraphOptions),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
-		Format::file_footer(diagram_output_file, Project, Options),
+		(	Format::file_header(diagram_output_file, Project, Options),
+			atom_concat(directory_, Project, Identifier),
+			normalize_directory_paths([Directory], [NormalizedDirectory]),
+			add_link_options(NormalizedDirectory, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
+			::output_library(Project, NormalizedDirectory, GraphOptions),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
+			Format::file_footer(diagram_output_file, Project, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, Directory, UserOptions)))
+		),
 		close(Stream).
 
 	:- public(directory/2).
@@ -331,14 +361,19 @@
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Project, Options),
-		atom_concat(files_, Project, Identifier),
-		Format::graph_header(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
-		::output_files(Files, Options),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
-		Format::file_footer(diagram_output_file, Project, Options),
+		(	Format::file_header(diagram_output_file, Project, Options),
+			atom_concat(files_, Project, Identifier),
+			Format::graph_header(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
+			::output_files(Files, Options),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
+			Format::file_footer(diagram_output_file, Project, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::files(Project, Files, UserOptions)))
+		),
 		close(Stream).
 
 	output_files([], _Options).
@@ -381,11 +416,16 @@
 		::reset,
 		::output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, files, Options),
-		output_all_files(Options),
-		::output_externals(Options),
-		::output_edges(Options),
-		Format::file_footer(diagram_output_file, files, Options),
+		(	Format::file_header(diagram_output_file, files, Options),
+			output_all_files(Options),
+			::output_externals(Options),
+			::output_edges(Options),
+			Format::file_footer(diagram_output_file, files, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::all_files(UserOptions)))
+		),
 		close(Stream).
 
 	output_all_files(Options) :-
@@ -884,5 +924,32 @@
 		;	% this case should never occur as the zoom_url_suffix/1 should be always defined
 			NodeOptions = NodeOptions0
 		).
+
+	% structured message printing predicates;
+	% the main reason to not write directly to an output stream is to
+	% allow other tools such as IDEs to intercept and handle results
+
+	:- multifile(logtalk::message_prefix_stream/4).
+	:- dynamic(logtalk::message_prefix_stream/4).
+
+	logtalk::message_prefix_stream(Kind, diagrams, Prefix, Stream) :-
+		message_prefix_stream(Kind, Prefix, Stream).
+
+	% Quintus Prolog based prefixes (also used in SICStus Prolog):
+	message_prefix_stream(information, '% ',     user_output).
+	message_prefix_stream(warning,     '*     ', user_output).
+	message_prefix_stream(error,       '!     ', user_output).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(Message, diagrams) -->
+		message_tokens(Message).
+
+	message_tokens(generating_diagram_failed(Message)) -->
+		[nl, 'Generating diagram failed: ~q'-[Message], nl].
+
+	message_tokens(entity_not_loaded(Entity)) -->
+		[nl, 'Referenced entity not loaded: ~q'-[Entity], nl].
 
 :- end_category.

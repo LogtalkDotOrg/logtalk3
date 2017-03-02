@@ -352,6 +352,14 @@ Prolog file and then load it and create the diagram:
 Other notes
 -----------
 
+Generating complete diagrams requires that all referenced entities are loaded.
+When that is not the case, notably when generating cross-referencing diagrams,
+missing entities can result in incomplete diagrams.
+
+The Graphviz command-line utilities, e.g. `dot`, are notorious for random
+crashes, often requiring re-doing conversions from `.dot` files to other
+formats.
+
 The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 
 	https://www.iconfinder.com/xinhstudio

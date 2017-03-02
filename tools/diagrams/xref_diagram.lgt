@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.13,
+		version is 2.14,
 		author is 'Paulo Moura',
-		date is 2017/01/06,
+		date is 2017/03/02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -65,20 +65,26 @@
 		::reset,
 		^^output_file_path(Identifier, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
-		Format::file_header(diagram_output_file, Identifier, Options),
-		entity_property(Kind, Entity, file(Basename, Directory)),
-		atom_concat(Directory, Basename, Path),
-		^^add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
-		process(Kind, Entity, GraphOptions),
-		output_external_predicates(Options),
-		^^output_edges(Options),
-		Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
-		Format::file_footer(diagram_output_file, Identifier, Options),
+		(	Format::file_header(diagram_output_file, Identifier, Options),
+			entity_property(Kind, Entity, file(Basename, Directory)),
+			atom_concat(Directory, Basename, Path),
+			^^add_link_options(Path, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
+			process(Kind, Entity, GraphOptions),
+			output_external_predicates(Options),
+			^^output_edges(Options),
+			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
+			Format::file_footer(diagram_output_file, Identifier, Options) ->
+			true
+		;	% failure is usually caused by errors in the source itself
+			self(Self),
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::entity(Entity, UserOptions)))
+		),
 		close(Stream).
 
 	entity(Entity) :-
 		entity(Entity, []).
+
 
 	entity_kind(Entity, Kind, GroundEntity, Name) :-
 		(	current_object(Entity) ->
@@ -348,10 +354,13 @@
 			functor(Template, Functor, Arity),
 			(	current_object(From) ->
 				From::predicate_property(Template, CallerProperties)
-			;	% current_category(From),
+			;	current_category(From) ->
 				create_object(Object, [imports(From)], [], []),
 				Object::predicate_property(Template, CallerProperties),
 				abolish_object(Object)
+			;	% entity not loaded
+				logtalk::print_message(warning, diagrams, entity_not_loaded(From)),
+				fail
 			),
 			(	member(non_terminal(NonTerminal), CallerProperties) ->
 				Caller = From::NonTerminal
@@ -381,10 +390,13 @@
 			functor(Template, Functor, Arity),
 			(	current_object(From) ->
 				From::predicate_property(Template, CallerProperties)
-			;	% current_category(From),
+			;	current_category(From) ->
 				create_object(Object, [imports(From)], [], []),
 				Object::predicate_property(Template, CallerProperties),
 				abolish_object(Object)
+			;	% entity not loaded
+				logtalk::print_message(warning, diagrams, entity_not_loaded(From)),
+				fail
 			),
 			(	member(non_terminal(NonTerminal), CallerProperties) ->
 				Caller = From::NonTerminal
@@ -413,7 +425,12 @@
 		\+ member(auxiliary, CallerProperties),
 		Callee0 = Functor/Arity,
 		functor(Template, Functor, Arity),
-		Object::predicate_property(Template, CalleeProperties),
+		(	current_object(Object) ->
+			Object::predicate_property(Template, CalleeProperties)
+		;	% entity not loaded
+			logtalk::print_message(warning, diagrams, entity_not_loaded(Object)),
+			fail
+		),
 		(	member(non_terminal(CalleeNonTerminal), CalleeProperties) ->
 			Callee = CalleeNonTerminal
 		;	Callee = Callee0
