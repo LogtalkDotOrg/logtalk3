@@ -24,12 +24,17 @@ RELEASE NOTES
 3.10.2 - March ??, 2017
 =======================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `logtalk_make/1` built-in predicate.
+
 Examples
 --------
 
 * IMPROVED: Simplify the `includes` example as the compiler no longer changes
-the working directory when compiling files making the portability workaround
-unnecessary.
+the working directory when compiling files thus making the example portability
+workaround unnecessary.
 
 
 3.10.1 - March 2, 2017
