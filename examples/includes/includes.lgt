@@ -20,7 +20,7 @@
 
 % note that the following directive is the *Logtalk* include/1
 % directive, *not* the Prolog include/1 directive
-:- include(includes('vowels.pl')).
+:- include('vowels.pl').
 
 
 :- object(countries).
@@ -30,11 +30,8 @@
 		same_population/1
 	]).
 
-	% load the countries database file when the object is compiled and
-	% loaded (use library notation for specifying the included file path
-	% for portability as backend Prolog compilers diverge on the concept
-	% of current directory)
-	:- include(includes('countries.pl')).
+	% load the countries database file when the object is compiled and loaded
+	:- include('countries.pl').
 
 	capitals(Capitals) :-
 		setof(Capital, Country^Population^country(Country, Capital, Population), Capitals).
