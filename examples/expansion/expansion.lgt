@@ -19,7 +19,8 @@
 
 
 :- category(number_conversion,
-	implements(expanding)).		% built-in protocol for term and goal expansion methods
+	% built-in protocol for term and goal expansion methods
+	implements(expanding)).
 
 	term_expansion(0, zero).
 	term_expansion(1, one).

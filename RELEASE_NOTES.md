@@ -27,8 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Calls to `logtalk_make(missing)` no longer reports predicates for
-messages sent to objects that implement the `forwarding` protocol. This avoids
+* CHANGED: Calls to `logtalk_make(missing)` no longer report predicates for
+messages sent to objects implementing the `forwarding` protocol. This avoids
 false positives when using e.g. the `java` library.
 
 Documentation

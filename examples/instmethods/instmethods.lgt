@@ -25,8 +25,10 @@
 % being modified); this makes it trivial to define instance methods
 
 
-:- object(root,				% avoid infinite metaclass regression by 
-	instantiates(root)).	% making the class its own metaclass 
+:- object(root,
+	% avoid infinite metaclass regression by
+	% making the class its own metaclass
+	instantiates(root)).
 
 	:- public(method/0).
 
@@ -38,14 +40,18 @@
 :- end_object.
 
 
-:- object(instance1,		% this instance simply inherits the method/0 predicate
+% this instance simply inherits the method/0 predicate
+		
+:- object(instance1,
 	instantiates(root)).
 
 :- end_object.
 
 
-:- object(instance2,		% this instance provides its own definition for the
-	instantiates(root)).	% method/0 predicate
+% this instance provides its own definition for the	method/0 predicate
+
+:- object(instance2,
+	instantiates(root)).
 
 	method :-
 		this(This),
@@ -56,8 +62,10 @@
 :- end_object.
 
 
-:- object(instance3,		% this instance specializes the inherited definition
-	instantiates(root)).	% of the method/0 predicate
+% this instance specializes the inherited definition of the method/0 predicate
+
+:- object(instance3,
+	instantiates(root)).
 
 	method :-
 		this(This),

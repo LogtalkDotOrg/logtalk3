@@ -18,8 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(metacircle,					% avoid infinite metaclass regression by
-	instantiates(metacircle)).			% making "metacircle" its own metaclass
+:- object(metacircle,
+	% avoid infinite metaclass regression by
+	% making "metacircle" its own metaclass
+	instantiates(metacircle)).
 
 	:- public(new/4).
 	:- mode(new(+float, +float, +float, -object_identifier), one).
@@ -28,26 +30,33 @@
 		argnames is ['X', 'Y', 'Radius', 'Circle']
 	]).
 
-	new(Radius, X, Y, Circle) :-		% this would be a "constructor" in other languages
-		self(Self),						% we may be instantiating a subclass of "circle"
+	% this would be a "constructor" in other languages
+	new(Radius, X, Y, Circle) :-
+		self(Self),
+		% we may be instantiating a subclass of "circle"
 		create_object(Circle, [instantiates(Self)], [], [position(X, Y), radius(Radius)]).
 
-	:- public(area/2).					% this would be an utility class method, usable without
-	:- mode(area(+float, -float), one).	% being necessary to first instantiate the "circle" class
+	:- public(area/2).
+	:- mode(area(+float, -float), one).
 	:- info(area/2, [
 		comment is 'Calculates the area of a circle given its radius.',
 		argnames is ['Radius', 'Area']
 	]).
 
+	% this would be an utility class method, usable without
+	% being necessary to first instantiate the "circle" class
 	area(Radius, Area) :-
 		Area is 4*atan(1.0)*Radius*Radius.
 
 :- end_object.
 
 
-:- object(circle,						% "circle" is an instantiable class as it accepts
-	instantiates(metacircle)).			% messages for creating new objects (declared and
-										% defined in its metaclass, "metacircle")
+% "circle" is an instantiable class as it accepts messages for creating
+% new objects (declared and defined in its metaclass, "metacircle")
+
+:- object(circle,
+	instantiates(metacircle)).
+
 	:- public(position/2).
 	:- mode(position(?float, ?float), zero_or_one).
 	:- info(position/2, [
@@ -76,16 +85,20 @@
 	]).
 
 	area(Area) :-
-		% ask the circle's instance that received the area/1 message its radius
+		% ask self, ie. the circle's instance that
+		% received the area/1 message its radius
 		::radius(Radius),
 		Area is 4*atan(1.0)*Radius*Radius.
 
 :- end_object.
 
 
-:- object(c42,							% a static instance of "circle"; of course, you
-	instantiates(circle)).				% can also create dynamic instances at runtime
-										% by sending the new/4 message to "circle"
+% a static instance of "circle"; of course, you can also create dynamic
+% instances at runtime by sending the new/4 message to "circle"
+
+:- object(c42,
+	instantiates(circle)).
+
 	position(3.7, 4.5).
 	radius(2.8).
 

@@ -19,8 +19,10 @@
 
 
 :- category(hacker,
-	implements(monitoring),		% built-in protocol for the event handler methods
-	complements(my_vault)).		% patch (or attempt to patch) the "my_vault" object
+	% built-in protocol for the event handler methods
+	implements(monitoring),
+	% patch (or attempt to patch) the "my_vault" object
+	complements(my_vault)).
 
 	% attempt to override the "my_vault" password:
 	password('1234567890').

@@ -19,7 +19,8 @@
 
 
 :- object(msglog,
-	implements(monitoring)).	% built-in protocol for event handler methods
+	% built-in protocol for event handler methods
+	implements(monitoring)).
 
 	:- info([
 		version is 1.2,

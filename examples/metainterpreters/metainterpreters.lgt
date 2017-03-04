@@ -41,7 +41,9 @@
 		solve(A),
 		solve(B).
 	solve(A) :-
-		clause(A, B),   % retrieves clauses in "this", i.e. in the database of the object importing the category
+   	 	% retrieve clauses in "this", i.e. in the database
+		% of the object importing this category
+		clause(A, B),
 		solve(B).
 
 :- end_category.
@@ -70,7 +72,9 @@
 		proof_tree(A, PA),
 		proof_tree(B, PB).
 	proof_tree(A, (A :- PB)) :-
-		clause(A, B),   % retrieves clauses in "this", i.e. in the database of the object importing the category
+   	 	% retrieve clauses in "this", i.e. in the database
+		% of the object importing this category
+		clause(A, B),
 		proof_tree(B, PB).
 
 :- end_category.
@@ -103,7 +107,9 @@
 		trace(B, Depth). 
 	trace(A, Depth) :-
 		write_trace(call, A, Depth),
-		clause(A, B),   % retrieves clauses in "this", i.e. in the database of the object importing the category
+   	 	% retrieve clauses in "this", i.e. in the database
+		% of the object importing this category
+		clause(A, B),
 		Depth2 is Depth + 1,
 		trace(B, Depth2),
 		(	write_trace(exit, A, Depth)

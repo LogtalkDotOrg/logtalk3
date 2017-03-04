@@ -19,7 +19,8 @@
 
 
 :- object(hook,
-	implements(expanding)).		% built-in protocol for term and goal expansion methods
+	% built-in protocol for term and goal expansion methods
+	implements(expanding)).
 
 	:- info([
 		version is 1.32,
