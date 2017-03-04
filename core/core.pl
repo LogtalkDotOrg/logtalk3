@@ -2622,6 +2622,7 @@ logtalk_make(Target) :-
 % find missing predicates for logtalk_make/1
 
 '$lgt_missing_predicate'((Object::Predicate)-Reference) :-
+	\+ '$lgt_implements_protocol_'(Object, forwarding, _),
 	'$lgt_entity_property_'(Entity, calls(Object::Predicate, _, _, _, Line)),
 	% the object may only be known at runtime; reject those cases
 	nonvar(Object),

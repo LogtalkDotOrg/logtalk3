@@ -24,6 +24,13 @@ RELEASE NOTES
 3.10.2 - March ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Calls to `logtalk_make(missing)` no longer reports predicates for
+messages sent to objects that implement the `forwarding` protocol. This avoids
+false positives when using e.g. the `java` library.
+
 Documentation
 -------------
 

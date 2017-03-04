@@ -55,6 +55,9 @@ When using the <code>all</code> target, only source files loaded using the <code
 When using the <code>missing</code> or <code>circular</code> targets, be sure to compile your source files with the <code>source_date</code> flag turned on for complete and detailed reports.
 </p>
 <p>
+When using the <code>missing</code> target, predicates for messages sent to objects that implement the <code>forwarding</code> built-in protocol are not reported. While this usually avoids only false positives, it may also result in failure to report true missing predicates in some cases.
+</p>
+<p>
 When using the <code>circular</code> target, be prepared for a lengthy computation time for applications with a large combined number of objects and message calls. Only mutual and triangular dependencies are checked due to the computational cost.
 </p>
 <p>
