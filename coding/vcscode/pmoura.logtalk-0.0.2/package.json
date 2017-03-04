@@ -2,7 +2,7 @@
 	"name": "logtalk",
 	"displayName": "Logtalk",
 	"description": "Logtalk language support for Visual Studio Code",
-	"version": "0.0.1",
+	"version": "0.0.2",
  	"publisher": "pmoura",
 	"author": {
 		"name": "Paulo Moura",
@@ -15,7 +15,7 @@
 		}
 	],
 	"engines": {
-		"vscode": "^1.5.0"
+		"vscode": "^1.10.0"
 	},
 	"categories": [
 		"Languages"
@@ -36,7 +36,14 @@
 		"snippets": [{
 				"language": "logtalk",
 				"path": "./snippets/snippets.json"
-		}]
+		}],
+		"configurationDefaults": {
+		        "[logtalk]": {
+					"editor.tabSize": 4,
+					"editor.insertSpaces": false,
+		            "editor.wordWrap": "on"
+		        }
+		    }
 	},
 	"repository": {
 		"type": "git",

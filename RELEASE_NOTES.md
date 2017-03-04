@@ -43,6 +43,12 @@ Examples
 the working directory when compiling files thus making the example portability
 workaround unnecessary.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Support for the Visual Studio Code text editor to take advantage of
+the support for language specific default settings introduced in version 1.10.
+
 
 3.10.1 - March 2, 2017
 ======================
