@@ -54,7 +54,7 @@
 		;	memberchk(Y, Domain)
 		).
 
-	%	Translate attributes from this module to residual goals
+	% Translate attributes from this module to residual goals
 	attribute_goals(X) -->
 		{ get_attr(X, domain, Domain) },
 		[domain(X, Domain)].

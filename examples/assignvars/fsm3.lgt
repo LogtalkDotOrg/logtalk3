@@ -22,7 +22,8 @@
 %
 % fsm(-list, -nonvar, -list)
 
-fsm([red-0-red, red-1-green, red-2-red,		% a simple finite state machine example
+% a simple finite state machine example
+fsm([red-0-red, red-1-green, red-2-red,
 	yellow-0-red, yellow-1-green, yellow-2-red,
 	green-0-yellow, green-1-yellow, green-2-red],
 	red,

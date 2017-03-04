@@ -39,7 +39,7 @@
 
 	work.
 
-	enter.	recur.
-	exit.	error.
+	enter.  recur.
+	exit.   error.
 
 :- end_object.

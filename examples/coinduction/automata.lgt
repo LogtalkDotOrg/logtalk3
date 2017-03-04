@@ -33,8 +33,9 @@
 	automaton(State, [Input| Inputs]) :-
 		trans(State, Input, NewState),
 		automaton(NewState, Inputs).
-%	automata(State, []) :-		% we drop the base case in order
-%		final(State).			% to get an omega-automaton
+	% we drop the base case in order to get an omega-automaton
+%	automata(State, []) :-
+%		final(State).
 
 	trans(s0, a, s1).
 	trans(s1, b, s2).

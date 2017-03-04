@@ -41,7 +41,9 @@
 
 	check_domain([]).
 	check_domain([Head| Tail]) :-
-		parameter(1, Type),		% compiled in-line to head unification
+		% parameter/1 calls are usually compiled in-line
+		% into an head unification
+		parameter(1, Type),
 		Type::valid(Head),
 		check_domain(Tail).
 
@@ -64,7 +66,7 @@
 		;	memberchk(Y, Domain)
 		).
 
-	%	Translate attributes from this module to residual goals
+	% Translate attributes from this module to residual goals
 	attribute_goals(X) -->
 		{ get_attr(X, domain(_), List) },
 		[domain(X, List)].
