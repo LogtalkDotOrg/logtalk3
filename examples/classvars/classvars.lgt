@@ -18,18 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(root,					% avoid infinite metaclass regression by
-	instantiates(root)).		% making the class its own metaclass
-
-	:- private(cv_/1).
-	:- dynamic(cv_/1).
-	:- mode(cv_(?integer), zero_or_one).
+:- object(root,
+	% avoid infinite metaclass regression by
+	% making the class its own metaclass
+	instantiates(root)).
 
 	:- public(cv/1).
 	:- mode(cv(?integer), zero_or_one).
 
 	:- public(set_cv/1).
 	:- mode(set_cv(+integer), one).
+
+	:- private(cv_/1).
+	:- dynamic(cv_/1).
+	:- mode(cv_(?integer), zero_or_one).
 
 	% cv_/1 value is stored locally, in this class
 	cv_(0).

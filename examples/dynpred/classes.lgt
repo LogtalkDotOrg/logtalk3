@@ -18,8 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(metaclass,			% avoid infinite metaclass regression by
-	instantiates(metaclass)).	% making the class its own metaclass
+:- object(metaclass,
+	% avoid infinite metaclass regression by
+	% making the class its own metaclass
+	instantiates(metaclass)).
 
 :- end_object.
 

@@ -21,7 +21,9 @@
 % Alf believes he is the only survivor of his species; no point in
 % defining a class if there is only going to be a single instance:
 
-:- object(alf).	% a prototype, which is also a stand-alone object
+% a prototype, which is also a stand-alone object
+
+:- object(alf).
 
 	% prototypes declare predicates for themselves (and derived prototypes)
 	:- public([
@@ -43,27 +45,33 @@
 % are all melmacians, they share most attributes (and add some
 % of their own):
 
-:- object(skip,		% derived prototype
-	extends(alf)).	% parent prototype
+% "skip", a derived prototype from "alf", its parent prototype
+
+:- object(skip,
+	extends(alf)).
 
 	:- public(best_friend/1).
 
 	best_friend(alf).
 	name('Skip').
-	chases(_) :-	% still longing for a nice cat
-		fail.		% to eat since Melmac exploded
+	% still longing for a nice cat to eat since Melmac exploded
+	chases(_) :-
+		fail.
 
 :- end_object.
 
 
-:- object(rhonda,	% derived prototype
-	extends(alf)).	% parent prototype
+% "rhonda" is also a prototype derived from "alf"
+
+:- object(rhonda,
+	extends(alf)).
 
 	:- public(boyfriend/1).
 
 	boyfriend(alf).
 	name('Rhonda').
-	chases(_) :-	% still longing for a nice cat
-		fail.		% to eat since Melmac exploded
+	% still longing for a nice cat to eat since Melmac exploded
+	chases(_) :-
+		fail.
 
 :- end_object.

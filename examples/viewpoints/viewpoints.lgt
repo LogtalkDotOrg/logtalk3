@@ -31,11 +31,14 @@
 		age/1, score/1
 	]).
 
-	grow_older :-					% this predicate uses property sharing, i.e.
-		retract(age(Old)),			% the property and its value are shared by all 
-		New is Old + 1,				% descendant prototypes/viewpoints; changes
-		asserta(age(New)).			% are shared no matter which viewpoint receives
-									% the grow_older/1 message
+	% this predicate uses property sharing, i.e. the property and its
+	% value are shared by all descendant prototypes/viewpoints; changes
+	% are shared no matter which viewpoint receives the grow_older/1 message
+	grow_older :-
+		retract(age(Old)),
+		New is Old + 1,
+		asserta(age(New)).
+
 	address('8 Octave Street').
 
 	age(30).
@@ -44,11 +47,15 @@
 
 	phone(11-11-11-11).
 
-	score(0).						% default value for the score/1 property,
-									% shared by all descendant prototypes/viewpoints;
-	set_score(Score) :-				% changing the default value results in
-		::retractall(score(_)),		% in a local value stored in the descendant
-		::asserta(score(Score)).	% prototype that received the set_score/1 message
+	% default value for the score/1 property, shared
+	% by all descendant prototypes/viewpoints
+	score(0).
+
+	% changing the default value results in in a local value stored in
+	% the descendant prototype that received the set_score/1 message
+	set_score(Score) :-
+		::retractall(score(_)),
+		::asserta(score(Score)).
 
 :- end_object.
 
@@ -68,7 +75,8 @@
 
 	salary(1500).
 
-	give_raise(Raise) :-			% another example of property sharing
+	% another example of property sharing
+	give_raise(Raise) :-
 		retract(salary(Old)),
 		New is Old + Raise,
 		asserta(salary(New)).

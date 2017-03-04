@@ -25,8 +25,10 @@
 	main::a(3).
 
 	:- multifile(main::b/1).
-	main::b(X) :-	% the head of this clause exists in the object "main" but
-		c(X).		% the body is compiled as local to the object "other"
+	% the head of this clause exists in the object "main" but
+	% the body is compiled as local to the object "other"
+	main::b(X) :-
+		c(X).
 
 	c(two).
 	c(three).

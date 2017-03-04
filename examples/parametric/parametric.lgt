@@ -31,9 +31,10 @@
 */
 
 
-% dealing with non-empty lists is easy:
+% dealing with non-empty lists is easy;
+% note that the lists are compound terms
 
-:- object([_| _]).			% note that the lists are compound terms
+:- object([_| _]).
 
 	:- public(last/1).
 	:- mode(last(?term), zero_or_one).
@@ -73,11 +74,15 @@
 
 % dealing with empty lists must also be done but it's a bit tricky:
 
-:- object('[]',				% the empty list is usually an atom, not a compound term,
-	extends([[_| _]])).		% so the "extends" relation would be always wrong
+% the empty list is usually an atom, not a compound term,
+% so the "extends" relation would be always wrong
+:- object('[]',
+	extends([[_| _]])).
 
-	last(_) :-				% the trick is to redefine all inherited predicates
-		fail.				% to do the right thing for empty lists
+	% the trick is to redefine all inherited predicates
+	% to do the right thing for empty lists
+	last(_) :-
+		fail.
 
 	member(_) :-
 		fail.
@@ -337,8 +342,9 @@
 		argnames is ['OldAge', 'NewAge', 'NewId']
 	]).
 
-	age(OldAge, NewAge, person(Name, NewAge)) :-	% this rule is compiled into a fact due to
-		this(person(Name, OldAge)).					% compilation of the this/1 call inline
+	% this rule is compiled into a fact due to compilation of the this/1 call inline
+	age(OldAge, NewAge, person(Name, NewAge)) :-
+		this(person(Name, OldAge)).
 
 :- end_object.
 

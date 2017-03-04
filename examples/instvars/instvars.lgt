@@ -18,12 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(root,					% avoid infinite metaclass regression by
-	instantiates(root)).		% making the class its own metaclass
-
-	:- private(ivar_/1).
-	:- dynamic(ivar_/1).
-	:- mode(ivar_(?integer), zero_or_one).
+:- object(root,
+	% avoid infinite metaclass regression by
+	% making the class its own metaclass
+	instantiates(root)).
 
 	:- public(ivar/1).
 	:- mode(ivar(?integer), zero_or_one).
@@ -31,14 +29,23 @@
 	:- public(set_ivar/1).
 	:- mode(set_ivar(+integer), one).
 
-	ivar_(0).					% default value for ivar_/1, stored locally in the class
+	:- private(ivar_/1).
+	:- dynamic(ivar_/1).
+	:- mode(ivar_(?integer), zero_or_one).
 
-	ivar(Value) :-				% retrieve ivar_/1 value from "self", i.e. from
-		::ivar_(Value).			% the instance that received the ivar/1 message
+	% default value for ivar_/1, stored locally in the class
+	ivar_(0).
+
+	% retrieve ivar_/1 value from "self", i.e. from
+	% the instance that received the ivar/1 message
+	ivar(Value) :-
+		::ivar_(Value).
 
 	set_ivar(Value) :-
-		::retractall(ivar_(_)),		% retract old ivar_/1 from "self"
-		::asserta(ivar_(Value)).	% assert the new value into "self"
+		% retract old ivar_/1 from "self"
+		::retractall(ivar_(_)),
+		% assert the new value into "self"
+		::asserta(ivar_(Value)).
 
 :- end_object.
 

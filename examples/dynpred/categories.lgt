@@ -18,36 +18,50 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(ctg).					% categories are fine-grained units of code reuse
-									% that can be imported by any number of objects
+% categories are fine-grained units of code reuse
+% that can be imported by any number of objects
+
+:- category(ctg).
+
 	:- public([
 		get_default/1, set_default/1,
 		get_value/1, set_value/1
 	]).
 
-	:- private(state/1).			% categories can declare and handle dynamic
-	:- dynamic(state/1).			% predicates but cannot contain clauses for them
+	% categories can declare and handle dynamic
+	% predicates but cannot contain clauses for them
+	:- private(state/1).
+	:- dynamic(state/1).
 
 	get_default(State) :-
-		state(State).				% called in the context of "this"
+		% call state/1 in the context of "this"
+		state(State).
 
 	set_default(State) :-
-		retractall(state(_)),		% retracts clauses in "this"
-		assertz(state(State)).		% asserts clause in "this"
+		% retract clause in "this"
+		retractall(state(_)),
+		% assert clause in "this"
+		assertz(state(State)).
 
 	get_value(State) :-
-		::state(State).				% called in the context of "self"
+		% call state/1 in the context of "self"
+		::state(State).
 
 	set_value(State) :-
-		::retractall(state(_)),		% retracts clauses in "self"
-		::assertz(state(State)).	% asserts clause in "self"
+		% retract all clauses in "self"
+		::retractall(state(_)),
+		% assert clause in "self"
+		::assertz(state(State)).
 
 :- end_category.
 
 
-:- object(top,						% category predicates are inherited
-	imports(ctg)).					% by the descendants of the object
-									% importing the category
+% category predicates are inherited by the descendants
+% of the objects importing the category
+
+:- object(top,
+	imports(ctg)).
+
 :- end_object.
 
 
