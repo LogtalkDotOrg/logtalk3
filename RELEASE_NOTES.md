@@ -36,6 +36,8 @@ Documentation
 
 * IMPROVED: Documentation of the `logtalk_make/1` built-in predicate.
 
+* IMPROVED: Documentation of the sample loader file.
+
 Examples
 --------
 
