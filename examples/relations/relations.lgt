@@ -748,7 +748,7 @@
 	del_monitors(Tuple) :-
 		^^del_monitors(Tuple),
 		::descriptor(Descriptor),
-		del_monitors(Tuple, Descriptor). 
+		del_monitors(Tuple, Descriptor).
 
 	del_monitors([], []).
 	del_monitors([Object| Objects], [Role| Roles]) :-

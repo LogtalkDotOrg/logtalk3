@@ -22,4 +22,4 @@
 	set_logtalk_flag(optimize, on),
 	logtalk_load(library(assignvars_loader)),
 	logtalk_load([fsm3, rectangle3])
-)). 
+)).

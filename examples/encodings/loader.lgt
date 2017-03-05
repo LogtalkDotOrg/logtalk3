@@ -21,16 +21,16 @@
 :- if(current_logtalk_flag(prolog_dialect, swi)).
 
 	% SWI-Prolog doesn't support UTF-32
-	:- initialization(logtalk_load([asian, babel, latin])). 
+	:- initialization(logtalk_load([asian, babel, latin])).
 
 :- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == cx; Dialect == sicstus; Dialect == yap))).
 
-	:- initialization(logtalk_load([asian, babel, latin, mythology])). 
+	:- initialization(logtalk_load([asian, babel, latin, mythology])).
 
 :- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ji; Dialect == lean; Dialect == k))).
 
 	% JIProlog, Lean Prolog, and K-Prolog only supported Unicode encoding is UTF-8
-	:- initialization(logtalk_load([babel])). 
+	:- initialization(logtalk_load([babel])).
 
 :- else.
 

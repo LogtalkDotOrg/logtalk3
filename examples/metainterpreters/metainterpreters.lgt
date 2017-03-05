@@ -104,7 +104,7 @@
 	trace((A, B), Depth) :-
 		!, 
 		trace(A, Depth),
-		trace(B, Depth). 
+		trace(B, Depth).
 	trace(A, Depth) :-
 		write_trace(call, A, Depth),
    	 	% retrieve clauses in "this", i.e. in the database

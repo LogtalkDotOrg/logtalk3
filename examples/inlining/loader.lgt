@@ -22,4 +22,4 @@
 	% predicate definitions are only inlined when
 	% compiling source files in optimized mode
 	logtalk_load(inlining, [optimize(on)])
-). 
+).

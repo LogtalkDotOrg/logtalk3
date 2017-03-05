@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(xyz). 
+:- object(xyz).
 
 	:- public(xyz/3).
 	:- mode(xyz(?integer, ?integer, ?integer), zero_or_one).
@@ -43,7 +43,7 @@
 :- end_object.
 
 
-:- object(t). 
+:- object(t).
 
 	:- public(t/1).
 	:- mode(t(?integer), zero_or_one).
@@ -67,7 +67,7 @@
 
 
 :- object(xyzt,
-	extends((xyz, t))). 
+	extends((xyz, t))).
 
 	:- public(xyzt/4).
 	:- mode(xyzt(?integer, ?integer, ?integer, ?integer), zero_or_one).
@@ -81,7 +81,7 @@
 
 
 
-:- object(xyz(_X,_Y,_Z)). 
+:- object(xyz(_X,_Y,_Z)).
 
 	:- public(distance/1).
 	:- mode(distance(?nunber), one).
@@ -95,7 +95,7 @@
 :- end_object.
 
 
-:- object(t(_T)). 
+:- object(t(_T)).
 
 	:- public(time/1).
 	:- mode(time(?integer), zero_or_one).
@@ -107,6 +107,6 @@
 
 
 :- object(xyzt(X, Y, Z, T),
-	extends((xyz(X, Y, Z), t(T)))). 
+	extends((xyz(X, Y, Z), t(T)))).
 
 :- end_object.

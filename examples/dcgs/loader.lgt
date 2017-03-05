@@ -39,7 +39,7 @@
 		dcgtest,
 		metas
 	])
-). 
+).
 
 :- if(\+ current_logtalk_flag(prolog_dialect, lean)).
 
@@ -52,6 +52,6 @@
 			url,
 			xml
 		])
-	). 
+	).
 
 :- endif.

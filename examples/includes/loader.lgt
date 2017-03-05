@@ -20,4 +20,4 @@
 
 :- initialization(
 	logtalk_load([includes, counters])
-). 
+).

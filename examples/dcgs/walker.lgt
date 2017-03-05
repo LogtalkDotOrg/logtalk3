@@ -41,7 +41,7 @@
 		moves((0, 0), Ending).
 
 	moves(Start, Ending) -->
-		move(Start, Temp), moves(Temp, Ending). 
+		move(Start, Temp), moves(Temp, Ending).
 	moves(Ending, Ending) -->
 		[]. 
 

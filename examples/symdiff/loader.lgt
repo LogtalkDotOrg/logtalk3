@@ -25,4 +25,4 @@ documenting files. No problems on MacOS X and no problems expect in other POSIX 
 
 :- initialization(
 	logtalk_load(symdiff)
-). 
+).

@@ -20,4 +20,4 @@
 
 :- initialization(
 	logtalk_load([nasty, slow_print])
-). 
+).

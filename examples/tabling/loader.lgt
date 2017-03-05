@@ -24,7 +24,7 @@
 		:- use_module(library(tabling)).
 	:- endif.
 
-	:- initialization(logtalk_load(tabling)). 
+	:- initialization(logtalk_load(tabling)).
 
 :- else.
 

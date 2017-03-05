@@ -71,7 +71,7 @@
 		\+ hh(1), \+ hh(2), \+ hh(3), \+ hh(4), \+ hh(5), \+ hh(6), hh(7).
 
 	test(if_elif_else_0) :-
-		\+ ii(1), ii(2), \+ ii(3), \+ ii(4), \+ ii(5), \+ ii(6), \+ ii(7). 
+		\+ ii(1), ii(2), \+ ii(3), \+ ii(4), \+ ii(5), \+ ii(6), \+ ii(7).
 
 	test(if_if_endif_0) :-
 		jj(0).
