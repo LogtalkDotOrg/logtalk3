@@ -21,7 +21,8 @@
 :- object(wrong_arity).
 
 	:- public(map/2).
-	:- meta_predicate(map(2, *)).		% wrong meta-predicate arity
+	% wrong meta-predicate arity
+	:- meta_predicate(map(2, *)).
 
 	map(Closure, Element) :-
 		call(Closure, Element, _).

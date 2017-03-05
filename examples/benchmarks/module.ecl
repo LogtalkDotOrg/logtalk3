@@ -79,7 +79,7 @@ mod_arc(5, 8).
 mod_member(Element, [Element| _]).
 mod_member(Element, [_| List]) :-
 	mod_member(Element, List).
-    
+
 mod_reverse(List, Reversed) :-
 	mod_reverse(List, [], Reversed, Reversed).
 

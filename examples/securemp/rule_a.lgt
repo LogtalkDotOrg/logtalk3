@@ -31,8 +31,9 @@
 
 	:- public(map/3).
 	:- meta_predicate(map(*, 2, *)).
-	map(In, scale(_), Out) :-			% the instantiated second argument
-		!, map_(In, scale(3), Out).		% results in a compile-time error
+	% the instantiated second argument results in a compile-time error
+	map(In, scale(_), Out) :-
+		!, map_(In, scale(3), Out).
 	map(In, Closure, Out) :-
 		map_(In, Closure, Out).
 

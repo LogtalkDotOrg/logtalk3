@@ -24,8 +24,9 @@
 % that rewrites a goal
 
 :- object(ha,
-	implements(expanding)).		% hook objects should always reference
-								% the "expanding" built-in protocol
+	% hook objects should always reference the "expanding" built-in protocol
+	implements(expanding)).
+
 	term_expansion(a, [aa]).
 	term_expansion((:- end_object), [ha, (:- end_object)]).
 

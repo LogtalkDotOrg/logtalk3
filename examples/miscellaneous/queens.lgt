@@ -28,13 +28,8 @@
 
 :- object(queens).
 
-
-	:- uses(list, [keysort/2, member/2]).
-
-
 	:- public(queens/1).
 	:- mode(queens(+integer), one).
-
 
 	:- private(forbidden/4).
 	:- mode(forbidden(+integer, +integer, +integer, +integer), zero_or_one).
@@ -66,6 +61,7 @@
 	:- private(shorter/2).
 	:- mode(shorter(+list, +list), zero_or_one).
 
+	:- uses(list, [keysort/2, member/2]).
 
 /*  The N-queens problem is to place N queens on an NxN chessboard so
 	that no two queens attack each other.  Suppose we have a queen in
@@ -113,7 +109,8 @@
 */
 
 	make_initial_table(N, Table) :-
-		number_list(N, PossibleColumns), 	% set of all possible columns
+		% set of all possible columns
+		number_list(N, PossibleColumns),
 		make_initial_table(N, PossibleColumns, Table).
 
 
@@ -127,9 +124,9 @@
 
 	number_list(0, []) :- !.
 	number_list(N, [N| List]) :-
-		M is N-1,	%  see previous comment
+		%  see previous comment
+		M is N-1,
 		number_list(M, List).
-
 
 /*  This actually generates the reverse of what I said, so we'd get
 	[4/[4,3,2,1], 3/[4,3,2,1], 2/[4,3,2,1], 1/[4,3,2,1]],
@@ -150,10 +147,10 @@
 	place([], []).
 	place(UnplacedQueens, [Queen-Col|Placement]) :-
 		least_room_to_move(UnplacedQueens, Queen, Columns, OtherQueens),
-		member(Col, Columns),	% backtrack over possible places
+		% backtrack over possible places
+		member(Col, Columns),
 		prune(OtherQueens, Queen, Col, RemainingQueens),
 		place(RemainingQueens, Placement).
-
 
 /*  If you haven't done this sort of thing before, least_room_to_move
 	can be quite tricky.  The idea is the we wander down the list of
@@ -179,14 +176,12 @@
 	lr2m([Pair|Table], OldQ, OldC, MinQ, MinC, [Pair|Rest]) :-
 		lr2m(Table, OldQ, OldC, MinQ, MinC, Rest).
 
-
 /*  shorter(L1, L2) is true when the list L1 is strictly shorter than
     the list L2
 */
 	shorter([], [_|_]).
 	shorter([_|L1], [_|L2]) :-
 		shorter(L1, L2).
-
 
 /*  Now we have to code prune.  To prune all the queens, we prune each
     queen in turn.
@@ -208,7 +203,6 @@
 	prune([Col2|Cols], Row2, Row1, Col1, [Col2|Permitted]) :-
 		prune(Cols, Row2, Row1, Col1, Permitted).
 
-
 /*  Finally, since we have ensured that two queens are automatically in
     different rows, we have only to check rules 2, 3, and 4.
 */
@@ -217,7 +211,6 @@
 		Row2 - Col2 =:= Row1 - Col1.
 	forbidden(Row1, Col1, Row2, Col2) :-
 		Row2 + Col2 =:= Row1 + Col1.
-
 
 /*  The last thing left for us to do is to write the top level predicate
     that ties all the pieces together.  Because the 'place' predicate
@@ -231,6 +224,5 @@
 		place(Table, Placement),
 		keysort(Placement, DisplayForm),
 		write(DisplayForm), nl.
-
 
 :- end_object.

@@ -31,10 +31,12 @@
 	:- discontiguous(fails/1).
 
 	fails(rule_a) :-
-		logtalk_load(rule_a).				% compile-time error
+		% compile-time error
+		logtalk_load(rule_a).
 
 	succeeds(rule_a_variant) :-
-		logtalk_load(rule_a_variant),		% runtime error
+		% runtime error
+		logtalk_load(rule_a_variant),
 		catch({client_a_variant::double([1,2,3], _)}, error(existence_error(procedure,PI), _), true),
 		ground(PI),
 		(	PI == scale/3 ->
@@ -48,7 +50,8 @@
 		logtalk_load(rule_b_1).
 
 	succeeds(rule_b_2) :-
-		logtalk_load(rule_b_2),				% runtime error
+		% runtime error
+		logtalk_load(rule_b_2),
 		catch({client_b_2::test}, error(existence_error(procedure,PI), _), true),
 		ground(PI),
 		(	PI == term/0 ->
@@ -59,7 +62,8 @@
 		).
 
 	succeeds(rule_b_3) :-
-		logtalk_load(rule_b_3),				% runtime error
+		% runtime error
+		logtalk_load(rule_b_3),
 		catch({client_b_3::test(_)}, error(existence_error(procedure,PI), _), true),
 		ground(PI),
 		(	PI == a/2 ->
@@ -70,11 +74,13 @@
 		).
 
 	succeeds(rule_b_3_variant) :-
-		logtalk_load(rule_b_3_variant),		% suspicious meta-predicate
-		{client_b_3_variant::test(X)},		% definition but no error
+		% suspicious meta-predicate definition but no error
+		logtalk_load(rule_b_3_variant),
+		{client_b_3_variant::test(X)},
 		X == 3.
 
 	fails(rule_c) :-
-		logtalk_load(rule_c).				% compile-time error
+		% compile-time error
+		logtalk_load(rule_c).
 
 :- end_object.
