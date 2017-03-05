@@ -34,16 +34,16 @@
 			"path": "./syntaxes/logtalk.tmLanguage"
 		}],
 		"snippets": [{
-				"language": "logtalk",
-				"path": "./snippets/snippets.json"
+			"language": "logtalk",
+			"path": "./snippets/snippets.json"
 		}],
 		"configurationDefaults": {
-		        "[logtalk]": {
-					"editor.tabSize": 4,
-					"editor.insertSpaces": false,
-		            "editor.wordWrap": "on"
-		        }
-		    }
+			"[logtalk]": {
+				"editor.tabSize": 4,
+				"editor.insertSpaces": false,
+				"editor.wordWrap": "on"
+			}
+		}
 	},
 	"repository": {
 		"type": "git",
