@@ -48,17 +48,17 @@ a(3, c, 'C').
 	% portable code and when abstracting foreign library resources
 
 	% the compiler generates a predicate definition table entry that
-	% directly calls user::between/2, thus inlining the predicate
+	% directly calls user::integer/1, thus inlining the predicate
 	% definition, and discars the clause (assuming compilation with
 	% the "optimize" flag turned on)
 
 	integer(Term) :-
 		user::integer(Term).
 
-	% a common case occurs with meta-predicate definitions like
-	% map/N that take a list on its second argument but uses a linking
-	% clause to move the list to the first argument to better exploit
-	% indexing
+	% a common case occurs with meta-predicate definitions like map/N
+	% that take a list on its second argument but uses a linking clause
+	% to move the list to the first argument to take advantage of
+	% first-argument indexing
 
 	map(Closure, List) :-
 		map_(List, Closure).
