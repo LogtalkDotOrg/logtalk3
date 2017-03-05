@@ -18,6 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% hook object can be specified either using a hook/1 compiler option
+% in calls to the logtalk_compile/2 and logtalk_load/2 predicates or
+% as follows using the set_logtalk_flag/2 directive at the beginning
+% of a source file
 :- set_logtalk_flag(hook, pardicts_hook).
 
 

@@ -45,6 +45,8 @@ Examples
 the working directory when compiling files thus making the example portability
 workaround unnecessary.
 
+* IMPROVED: Documentation of the `pardicts` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

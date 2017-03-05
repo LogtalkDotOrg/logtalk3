@@ -24,8 +24,8 @@
 )).
 
 	:- initialization((
-		logtalk_load(pardicts_hook),
-		logtalk_load(source)
+		logtalk_load(pardicts_hook, [optimize(on)]),
+		logtalk_load(source, [optimize(on)])
 	)).
 
 :- else.

@@ -28,6 +28,10 @@
 		comment is 'Access to an object (or category) first parameter as a SWI-Prolog dictionary.'
 	]).
 
+	% the goal expansion results are inlined when compiling
+	% the source files expanded using this hook object in
+	% optimize mode
+
 	goal_expansion(
 		parameter_create(Pairs),
 		(parameter(1, Dict), dict_create(Dict, p, Pairs))
