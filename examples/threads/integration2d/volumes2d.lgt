@@ -36,7 +36,7 @@
 		c(NP, N, C),
 		w(NP, N, W),
 		YK is Down + (Up-Down)*C,
-		interval_area(Function, A, B, YK, NP, NP, 0.0, Area), !,	% cut needed due to a SWI-Prolog weird bug
+		interval_area(Function, A, B, YK, NP, NP, 0.0, Area), !, % cut needed due to a SWI-Prolog weird bug
 		N2 is N - 1,
 		Acc2 is Acc + W*Area,
 		interval_volume(Function, A, B, Down, Up, N2, NP, Acc2, Volume).

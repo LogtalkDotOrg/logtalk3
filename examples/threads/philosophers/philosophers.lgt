@@ -232,8 +232,10 @@
 :- object(p5,
 	imports(philosopher)).
 
-	left_chopstick(cs1).	% change order so that the chopsticks are picked
-	right_chopstick(cs5).	% in different order from the other philosophers
+	% change order so that the chopsticks are picked
+	% in different order from the other philosophers
+	left_chopstick(cs1).
+	right_chopstick(cs5).
 
 :- end_object.
 
