@@ -94,8 +94,8 @@ the three objects below with their instantiation and specialization relations.
 		findall(Instance, instantiates_class(Instance, Self), Instances).
 
 	% instances of this class are instantiable
-	%  classes,not abstract classes
-	abstract_class :-,
+	% classes, not abstract classes
+	abstract_class :-
 		fail.
 
 :- end_object.
