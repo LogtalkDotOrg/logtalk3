@@ -7,7 +7,7 @@
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
 %  
-%      http://www.apache.org/licenses/LICENSE-2.0
+%	  http://www.apache.org/licenses/LICENSE-2.0
 %  
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,9 @@
 
 :- protocol(recipep).
 
-    :- public([
-        name/1, ingredient/3, step/3
-    ]).
+	:- public([
+		name/1, ingredient/3, step/3
+	]).
 
 :- end_protocol.
 
@@ -37,19 +37,19 @@
 	% allow this object to be (hot) patched
 	:- set_logtalk_flag(complements, allow).
 
-    :- public([
-        ingredient/1, ingredients/1, steps/1,
+	:- public([
+		ingredient/1, ingredients/1, steps/1,
 		cooking_time/1
-    ]).
+	]).
 
-    ingredient(Ingredient) :-
-        ::ingredient(Ingredient,_,_).
+	ingredient(Ingredient) :-
+		::ingredient(Ingredient,_,_).
 
-    ingredients(Ingredients) :-
-        findall(Ingredient, ::ingredient(Ingredient,_,_), Ingredients).
+	ingredients(Ingredients) :-
+		findall(Ingredient, ::ingredient(Ingredient,_,_), Ingredients).
 
-    steps(Steps) :-
-        findall(Order-Step, ::step(Order,Step,_), Steps).
+	steps(Steps) :-
+		findall(Order-Step, ::step(Order,Step,_), Steps).
 
 	cooking_time(CookingTime) :-
 		findall(StepTime, ::step(_,_,StepTime), StepTimes),

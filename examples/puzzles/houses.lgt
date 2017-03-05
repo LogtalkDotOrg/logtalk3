@@ -91,8 +91,8 @@ Who owns the zebra and who drinks water?
 		member(h(_, _, lucky, juice, _), Solution),                         % 13
 		member(h(japonese, _, kent, _, _), Solution),                       % 14
 		near(h(norwegian, _, _, _, _), h(_, _, _, _, blue), Solution),      % 15
-		member(h(_, _, _, water, _), Solution),  	% one of them drinks water
-		member(h(_, zebra, _, _, _), Solution).  	% one of them owns a zebra
+		member(h(_, _, _, water, _), Solution),       % one of them drinks water
+		member(h(_, zebra, _, _, _), Solution).       % one of them owns a zebra
 
 	zebra_owner(Owner) :-
 		houses(Solution),

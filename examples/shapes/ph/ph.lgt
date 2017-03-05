@@ -18,8 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(shape).	% an object with no hierarchy relations with other 
-					% objects is always compiled as a prototype
+% an object with no hierarchy relations with other
+% objects is always compiled as a prototype
+
+
+:- object(shape).
+
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
@@ -41,9 +45,11 @@
 		argnames is ['X', 'Y']
 	]).
 
-	color(red).      % default shape color
+	% default shape color
+	color(red).
 
-	position(0, 0).  % default shape position
+	% default shape position
+	position(0, 0).
 
 :- end_object.
 
@@ -99,7 +105,8 @@
 		argnames is ['Length']
 	]).
 
-	side(1).         % default side length
+	% default side length
+	side(1).
 
 	perimeter(Perimeter) :-
 		::nsides(Number),

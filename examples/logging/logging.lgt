@@ -24,13 +24,16 @@
 		init_log/0,
 		add_log_entry/1,
 		print_log/0,
-		log_entry/2			% public access to log entries
+		% public access to log entries
+		log_entry/2
 	]).
 
-	:- private(log_/2).		% table of log entries
+	% table of log entries
+	:- private(log_/2).
 	:- dynamic(log_/2).
 
-	:- op(600, xfy, (:)).	% used to represent event time in the log
+	% used to represent event time in the log
+	:- op(600, xfy, (:)).
 
 	% retractall/1 retracts clauses in "this", i.e. in the object importing the category
 	init_log :-
@@ -43,9 +46,9 @@
 		time::now(Hours, Mins, Secs),
 		assertz(log_(Year/Month/Day-Hours:Mins:Secs, Entry)).
 
-	% log_/2 is a private predicate but we can still use the ::/2 message sending control
-	% construct because the sender of the message is the object, "this", importing the
-	% category where the predicate is declared
+	% log_/2 is a private predicate but we can still use the ::/2 message
+	% sending control construct because the sender of the message is the
+	% object, "this", importing the category where the predicate is declared
 	print_log :-
 		this(This),
 			This::log_(Date, Entry),
@@ -63,10 +66,13 @@
 :- object(object,
 	imports(logging)).
 
-	% the following two initialization goals are equivalent because, in this case,
-	% "self" and "this" are the same object:
+	% the following two initialization goals are equivalent because,
+	% in this case, "self" and "this" are the same object:
 
-	%:- initialization(::init_log).		% starts lookup for init_log/0 in "self"
-	:- initialization(^^init_log).		% starts lookup for init_log/0 in "this"
+	% starts lookup for init_log/0 in "self"
+	%:- initialization(::init_log).
+
+	% starts lookup for init_log/0 in "this"
+	:- initialization(^^init_log).
 
 :- end_object.

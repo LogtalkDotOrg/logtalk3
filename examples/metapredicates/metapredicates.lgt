@@ -32,7 +32,9 @@
 	]).
 
 	:- public(trace/1).
-	:- meta_predicate(trace(0)).	% changes interpretation of meta-calls on trace/1 clauses
+	% the meta_predicate/1 directive changes the interpretation
+	% of meta-calls on trace/1 clauses
+	:- meta_predicate(trace(0)).
 	:- mode(trace(+callable), zero_or_more).
 	:- info(trace/1, [
 		comment is 'Traces goal execution.',
@@ -41,7 +43,8 @@
 
 	trace(Goal) :-
 		write('call: '), writeq(Goal), nl,
-		call(Goal),		% Goal is called in the context of the object sending the message trace/1
+		% call Goal in the context of the object sending the message trace/1
+		call(Goal),
 		write('exit: '), writeq(Goal), nl.
 
 	trace(Goal) :-
@@ -63,8 +66,10 @@
 		comment is 'List sorting parameterized by the type of the list elements.'
 	]).
 
-	:- uses(list, [append/3]).		% calls to append(...) will be translated to list::append(...)
-	:- uses(tracer, [trace/1]).		% calls to trace(...) will be translated to tracer::trace(...)
+	% compile calls to append(...) as list::append(...)
+	:- uses(list, [append/3]).
+	% compile calls to trace(...) as tracer::trace(...)
+	:- uses(tracer, [trace/1]).
 
 	:- public(sort/2).
 	:- mode(sort(+list, -list), one).

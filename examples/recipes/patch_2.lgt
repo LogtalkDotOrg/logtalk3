@@ -23,6 +23,6 @@
 :- category(recipe_level_default_value,
 	complements(proto_recipe)).
 
-    level(easy).
+	level(easy).
 
 :- end_category.

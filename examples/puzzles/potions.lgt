@@ -49,16 +49,20 @@ http://www.csci.csusb.edu/dick/cs320/prolog/Potions.htm
 		contents(H1),
 		select(P1, H1, H2),
 		select(P7, H2, H3),
-		P1 \== P7, P1 \== forward, P7 \== forward,				% second clue
+		% second clue
+		P1 \== P7, P1 \== forward, P7 \== forward,
 		select(P2, H3, H4),
 		P2 \== poison,
 		select(P3, H4, H5),
-		P3 \== poison,											% third clue
-		select(P6, H5, H6),										% fourth clue
+		% third clue
+		P3 \== poison,
+		% fourth clue
+		select(P6, H5, H6),
 		P2 == P6,
 		select(P4, H6, H7),
 		select(P5, H7, []),
-		two_pairs_poison_wine([P1, P2, P3, P4, P5, P6, P7]).	% first clue
+		% first clue
+		two_pairs_poison_wine([P1, P2, P3, P4, P5, P6, P7]).
 
 	two_pairs_poison_wine(S) :-
 		poison_wine_pair(S, R),

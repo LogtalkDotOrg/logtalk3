@@ -86,7 +86,8 @@
 	print :-
 		forall(
 			::log_(Object, Message),
-			(writeq(Object), write('::'), writeq(Message), write('.'), nl)).
+			(writeq(Object), write('::'), writeq(Message), write('.'), nl)
+		).
 
 	erase :-
 		::retractall(log_(_, _)).

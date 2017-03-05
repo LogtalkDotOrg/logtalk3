@@ -45,7 +45,9 @@
 		steps(B, Steps1, Steps).
 	steps(A, Steps0, Steps) :-
 		Steps1 is Steps0 + 1,
-		clause(A, B),   % retrieves clauses in "this", i.e. in the database of the object importing the category
+   	 	% retrieve clauses in "this", i.e. in the database
+		% of the object importing this category
+		clause(A, B),
 		steps(B, Steps1, Steps).
 
 :- end_category.

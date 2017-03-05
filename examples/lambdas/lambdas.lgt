@@ -123,7 +123,8 @@
 
 	f(x, y).
 
-	:- public((local)/0).	% use ()'s in order to avoid a XSB parser bug
+	% use ()'s in order to avoid a XSB parser error
+	:- public((local)/0).
 	local :-
 		integer::sequence(1, 100, List),
 		meta::map([X]>>less(0,X),List).

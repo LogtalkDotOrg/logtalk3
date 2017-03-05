@@ -24,7 +24,7 @@
 :- category(add_recipe_level_descriptor,
 	complements(proto_recipe)).
 
-    :- public(level/1).
-    :- dynamic(level/1).
+	:- public(level/1).
+	:- dynamic(level/1).
 
 :- end_category.

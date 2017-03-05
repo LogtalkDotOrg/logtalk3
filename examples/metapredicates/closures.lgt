@@ -18,9 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/*	Logtalk meta-predicates accept both goals and closures
-	as meta-arguments as illustrated in this example
-*/
+% Logtalk meta-predicates accept both goals and closures
+% as meta-arguments as illustrated in this example
 
 
 :- object(metapreds).
@@ -33,11 +32,14 @@
 	:- meta_predicate(apply(1, *)).
 	:- mode(apply(+callable, ?term), zero_or_more).
 
-	apply(Closure, Arg) :-		% the Logtalk compiler verifies that any closure which is a
-		call(Closure, Arg).		% meta-argument is used within a call/N method that complies with
-								% the meta-predicate directive (in this case, apply(1, *) => call/2)
+	% the Logtalk compiler verifies that any closure which is a
+	% meta-argument is used within a call/N method that complies with
+	% the meta-predicate directive (in this case, apply(1, *) => call/2)
+	apply(Closure, Arg) :-
+		call(Closure, Arg).
 
-	:- public(test_this/0).		% simple predicate for testing calls to a local meta-predicate
+	% simple predicate for testing calls to a local meta-predicate
+	:- public(test_this/0).
 
 	test_this :-
 		apply(foo(X), Y),
@@ -51,8 +53,10 @@
 :- object(descendant,
 	extends(metapreds)).
 
-	:- public(test_self/0).		% simple predicate for testing calls to a meta-predicate
-								% defined in an ancestor object
+	% simple predicate for testing calls to a
+	% meta-predicate defined in an ancestor object
+	:- public(test_self/0).
+
 	test_self :-
 		::apply(foo(X), Y),
 		writeq((X, Y)), nl.
@@ -64,8 +68,10 @@
 
 :- object(test).
 
-	:- public(test_obj/0).		% simple predicate for testing calls to a meta-predicate
-								% defined in another object
+	% simple predicate for testing calls to a
+	% meta-predicate defined in another object
+	:- public(test_obj/0).
+
 	test_obj :-
 		metapreds::apply(foo(X), Y),
 		writeq((X, Y)), nl.
