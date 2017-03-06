@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/10/15,
+		date is 2017/03/06,
 		comment is 'Unit tests for the this/1 built-in method.'
 	]).
 

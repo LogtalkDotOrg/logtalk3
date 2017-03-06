@@ -18,28 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- object(self_1_test_object_1).
 
-	:- info([
-		version is 1.2,
-		author is 'Paulo Moura',
-		date is 2017/03/06,
-		comment is 'Unit tests for the self/1 built-in method.'
-	]).
-
-	test(self_1) :-
-		self(Self),
-		Self == tests.
-
-	test(self_2) :-
-		self(tests).
-
-	test(self_3) :-
-		\+ self(other).
-
-	test(self_4) :-
-		self_1_test_object_1::p(Self),
-		Self == self_1_test_object_1.
+	% primary declaration for the p/1 multifile predicate:
+	% the public scope directive is mandatory
+	:- public(p/1).
+	:- multifile(p/1).
+	:- dynamic(p/1).
 
 :- end_object.

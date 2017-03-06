@@ -44,6 +44,12 @@ Documentation
 
 * IMPROVED: Documentation of the sample loader file.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `sender/1` and `self/1` built-in methods to check
+results when called from within multifile predicate clauses.
+
 Examples
 --------
 
