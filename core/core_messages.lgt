@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2017/03/01,
+		date is 2017/03/06,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -428,9 +428,9 @@
 		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(missing_reference_to_built_in_protocol(File, Type, Entity, Protocol)) -->
+	message_tokens(missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)) -->
 		['Missing reference to the built-in protocol: ~q'-[Protocol], nl],
-		message_context(File, Type, Entity).
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(compiling_proprietary_prolog_directive(File, Lines, Type, Entity, Directive)) -->
 		['Compiling proprietary Prolog directive: ~q'-[Directive], nl],
@@ -599,9 +599,6 @@
 	non_terminal_indicator_tokens(Term) -->
 		{functor(Term, Functor, Arity)},
 		['~q'-[Functor//Arity]].
-
-	message_context(File, Type, Entity) -->
-		['  while compiling ~w ~q'-[Type, Entity], nl, '  in file ~w'-[File], nl].
 
 	message_context(File, Lines, Type, Entity) -->
 		['  while compiling ~w ~q'-[Type, Entity], nl],

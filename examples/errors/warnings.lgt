@@ -125,3 +125,11 @@
 	:- multifile(m/2).
 
 :- end_object.
+
+
+
+:- object(missing_protocol_reference).
+
+	before(_, _, _).
+
+:- end_object.

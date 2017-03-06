@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 2, rc2)).
 
 
 
@@ -10258,8 +10258,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_module_'(_),
 	\+ '$lgt_pp_implemented_protocol_'(Protocol, _, _, _, _),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_source_file_context'(File, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(File, Type, Entity, Protocol)),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)),
 	fail.
 
 % compile the head of a clause of another entity predicate (which we check if declared multifile)
