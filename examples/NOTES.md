@@ -168,6 +168,10 @@ Follows a short description of each included example (in alphabetical order):
 - `family`  
 	classical family relations example
 
+- `family_alt`  
+	alternative version of the `family` example using a family registry
+	implemented using multifile predicates to avoid dynamic binding
+
 - `hailstone`  
 	example of computing Hailstone sequences
 

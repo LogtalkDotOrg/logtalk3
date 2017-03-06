@@ -56,11 +56,17 @@ results when called from within multifile predicate clauses.
 Examples
 --------
 
+* ADDED: Example `family_alt` providing an alternative version of the `family`
+example using a family registry implemented using multifile predicates to avoid
+dynamic binding.
+
 * IMPROVED: Simplify the `includes` example as the compiler no longer changes
 the working directory when compiling files thus making the example portability
 workaround unnecessary.
 
 * IMPROVED: Documentation of the `pardicts` example.
+
+* FIXED: Layout of comments in some examples to follow the coding guidelines.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
