@@ -66,6 +66,9 @@ workaround unnecessary.
 
 * IMPROVED: Documentation of the `pardicts` example.
 
+* FIXED: The `benchmarks` example loader file used for benchmarking with event
+support turned on was not loading all required source files.
+
 * FIXED: Layout of comments in some examples to follow the coding guidelines.
 
 IDEs, text editors, and syntax highlighters support

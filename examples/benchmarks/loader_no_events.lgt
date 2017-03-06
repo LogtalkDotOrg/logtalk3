@@ -27,6 +27,6 @@
 :- initialization((
 	logtalk_load(library(os_loader)),
 	logtalk_load([category], [events(deny), optimize(on)]),
-	logtalk_load([objects, database, maze, graph], [events(deny), optimize(on)]),
+	logtalk_load([objects, database_other, database, maze, graph], [events(deny), optimize(on)]),
 	logtalk_load([plain, benchmarks], [events(deny), optimize(on)])
 )).
