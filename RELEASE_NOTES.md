@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 messages sent to objects implementing the `forwarding` protocol. This avoids
 false positives when using e.g. the `java` library.
 
+* FIXED: Calls to the `^^/1` and `::/1` control constructs when called from
+predicates that are being called from multifile predicate clauses.
+
 * FIXED: Also print line numbers in warnings for clauses that define reserved
 predicates declared in built-in protocols that are not declared as implemented.
 
