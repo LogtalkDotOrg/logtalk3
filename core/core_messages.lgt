@@ -231,7 +231,7 @@
 			'  context_switching_calls: ~w, events: ~w'-[ContextCalls, Events], nl,
 			'Other default compilation flags:'-[], nl,
 			'  report: ~w, scratch_directory: ~w'-[Report, ScratchDirectory], nl,
-			'  source_data: ~w, code_prefix: ~q, hook: ~w'-[SourceData, Code, GroundHook], nl,
+			'  source_data: ~w, code_prefix: ~q, hook: ~q'-[SourceData, Code, GroundHook], nl,
 			'  optimize: ~w, debug: ~w, clean: ~w, reload: ~w'-[Optimize, Debug, Clean, Reload], nl,
 			'Backend Prolog compiler flags:'-[], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
@@ -254,7 +254,7 @@
 	message_tokens(settings_file_disabled) -->
 		['Loading of settings file disabled in the backend Prolog compiler adapter file.'-[], nl, nl].
 	message_tokens(error_loading_settings_file(Path, Error)) -->
-		['Errors found while loading settings file from directory ~w: ~w'-[Path, Error], nl, nl].
+		['Errors found while loading settings file from directory ~w: ~q'-[Path, Error], nl, nl].
 	message_tokens(no_settings_file_found(allow)) -->
 		['No settings file found in the startup or Logtalk user directories.'-[], nl,
 		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
@@ -298,22 +298,22 @@
 		error_term_tokens(Error).
 
 	message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error)) -->
-		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		['Error found when term-expanding ~q using hook entity ~q: '-[Term, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error)) -->
-		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		['Error found when term-expanding ~q using hook entity ~q: '-[Term, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
 	message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error)) -->
-		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
+		['Error found when goal-expanding ~q using hook entity ~q: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error)) -->
-		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
+		['Error found when goal-expanding ~q using hook entity ~q: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
@@ -534,7 +534,7 @@
 	error_tokens(resource_error(Resource)) -->
 		['Resource error: ~q'-[Resource], nl].
 	error_tokens(syntax_error(Error)) -->
-		['Syntax error: ~w'-[Error], nl].
+		['Syntax error: ~q'-[Error], nl].
 	error_tokens(system_error) -->
 		['System error'-[], nl].
 	% catchall clause

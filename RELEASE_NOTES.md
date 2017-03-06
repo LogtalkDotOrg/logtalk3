@@ -34,6 +34,9 @@ false positives when using e.g. the `java` library.
 * FIXED: Also print line numbers in warnings for clauses that define reserved
 predicates declared in built-in protocols that are not declared as implemented.
 
+* FIXED: Cases where terms in compiler error and warning messages would not be
+printed as quoted terms.
+
 Documentation
 -------------
 
