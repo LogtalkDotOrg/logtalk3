@@ -31,7 +31,7 @@
 			'Item' - 'A term identifying an item of interest to be measured. This is normally an entity.',
 			'Score' - 'Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question.'
 		],
-		see_also is [analysis]
+		see_also is [code_metrics_utilities]
 	]).
 
 	:- public(item_score/2).
