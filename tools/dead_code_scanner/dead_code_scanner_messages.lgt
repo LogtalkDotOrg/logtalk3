@@ -22,9 +22,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/02/06,
+		date is 2017/03/07,
 		comment is 'Logtalk "dead_code_scanner" tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -68,6 +68,9 @@
 	message_tokens(dead_predicate(_Entity, Predicate, File, Line)) -->
 		likely_dead_predicate(Predicate),
 		['  in file ~w at or above line ~d'-[File, Line], nl].
+
+	message_tokens(unknown_entity(Entity)) -->
+		['Entity not loaded: ~q'-[Entity], nl].
 
 	likely_dead_predicate(Object::Functor/Arity) -->
 		['Likely unused predicate: ~q'-[Object::Functor/Arity], nl].

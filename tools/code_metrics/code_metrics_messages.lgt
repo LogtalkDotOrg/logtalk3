@@ -22,9 +22,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/07,
+		date is 2017/03/07,
 		comment is 'Message translations for the code_metrics tool.'
 	]).
 
@@ -35,14 +35,15 @@
 		message_prefix_stream(Kind, Prefix, Stream).
 
 	message_prefix_stream(information, '% ',     user_output).
-	message_prefix_stream(warning,     '*',      user_output).
-	message_prefix_stream(error,       '!',      user_output).
+	message_prefix_stream(warning,     '* ',     user_output).
+	message_prefix_stream(error,       '! ',     user_output).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(Message, code_metrics) -->
-		message_tokens(Message).
+		{ground_term_copy(Message, GroundMessage)},
+		message_tokens(GroundMessage).
 
 	message_tokens(starting_code_analysis) --> [].
 
@@ -63,8 +64,10 @@
 		['Scanning file ~w ...'-[File], nl].
 
 	message_tokens(scanning_item(Kind, Item)) -->
-		{ ground_term_copy(Item, GroundEntity) },
-		[nl, 'Scanning ~q ~w ...'-[GroundEntity, Kind], nl].
+		[nl, 'Scanning ~q ~w ...'-[Item, Kind], nl].
+
+	message_tokens(unknown_item(Entity)) -->
+		['Item not loaded: ~q'-[Entity], nl].
 
 	message_tokens(item_score(Item, Metric, Score)) -->
 		item_score(Item, Metric, Score).

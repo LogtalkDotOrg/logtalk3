@@ -22,9 +22,9 @@
 :- object(code_metrics).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/02/014,
+		date is 2017/03/07,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -92,8 +92,10 @@
 			Kind = object
 		;	current_category(Item) ->
 			Kind = category
-		;	current_protocol(Item),
+		;	current_protocol(Item) ->
 			Kind = protocol
+		;	print_message(warning, code_metrics, unknown_item(Item)),
+			fail
 		),
 		write_scan_header('Item'),
 		process_item(Kind, Item),

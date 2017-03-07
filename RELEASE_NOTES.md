@@ -47,6 +47,12 @@ Documentation
 
 * IMPROVED: Documentation of the sample loader file.
 
+Tools
+-----
+
+* UPDATED: The `code_metrics` and `dead_code_scanner` tools to print a warning
+message when an entity to be analyzed is not loaded.
+
 Tests
 -----
 

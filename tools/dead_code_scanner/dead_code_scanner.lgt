@@ -22,9 +22,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/02/26,
+		date is 2017/03/07,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -369,8 +369,10 @@
 			Kind = object
 		;	current_category(Entity) ->
 			Kind = category
-		;	current_protocol(Entity),
+		;	current_protocol(Entity) ->
 			Kind = protocol
+		;	print_message(warning, dead_code_scanner, unknown_entity(Entity)),
+			fail
 		),
 		write_scan_header('Entity'),
 		process_entity(Kind, Entity),
