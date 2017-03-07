@@ -35,8 +35,8 @@
 		message_prefix_stream(Kind, Prefix, Stream).
 
 	message_prefix_stream(information, '% ',     user_output).
-	message_prefix_stream(warning,     '* ',     user_output).
-	message_prefix_stream(error,       '! ',     user_output).
+	message_prefix_stream(warning,     '*     ', user_output).
+	message_prefix_stream(error,       '!     ', user_output).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
@@ -66,7 +66,13 @@
 	message_tokens(scanning_item(Kind, Item)) -->
 		[nl, 'Scanning ~q ~w ...'-[Item, Kind], nl].
 
-	message_tokens(unknown_item(Entity)) -->
+	message_tokens(unknown(library, Library)) -->
+		['Library not defined: ~q'-[Library], nl].
+	message_tokens(unknown(directory, Directory)) -->
+		['Directory does not exist: ~q'-[Directory], nl].
+	message_tokens(unknown(file, File)) -->
+		['File does not exist: ~q'-[File], nl].
+	message_tokens(unknown(item, Entity)) -->
 		['Item not loaded: ~q'-[Entity], nl].
 
 	message_tokens(item_score(Item, Metric, Score)) -->

@@ -69,7 +69,11 @@
 		likely_dead_predicate(Predicate),
 		['  in file ~w at or above line ~d'-[File, Line], nl].
 
-	message_tokens(unknown_entity(Entity)) -->
+	message_tokens(unknown(library, Library)) -->
+		['Library not defined: ~q'-[Library], nl].
+	message_tokens(unknown(directory, Directory)) -->
+		['Directory does not exist: ~q'-[Directory], nl].
+	message_tokens(unknown(entity, Entity)) -->
 		['Entity not loaded: ~q'-[Entity], nl].
 
 	likely_dead_predicate(Object::Functor/Arity) -->

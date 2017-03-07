@@ -303,10 +303,13 @@
 		).
 
 	rlibrary(Library) :-
-		write_scan_header('Recursive library'),
-		logtalk::expand_library_path(Library, TopPath),
-		output_rlibrary(TopPath),
-		write_scan_footer('Recursive library').
+		(	logtalk::expand_library_path(Library, TopPath) ->
+			write_scan_header('Recursive library'),
+			output_rlibrary(TopPath),
+			write_scan_footer('Recursive library')
+		;	print_message(warning, dead_code_scanner, unknown(library,Library)),
+			fail
+		).
 
 	output_rlibrary(TopPath) :-
 		forall(
@@ -320,16 +323,23 @@
 		atom_concat(TopPath, _RelativePath, LibraryPath).
 
 	library(Library) :-
-		write_scan_header('Library'),
-		logtalk::expand_library_path(Library, Path),
-		output_directory_files(Path),
-		write_scan_footer('Library').
+		(	logtalk::expand_library_path(Library, Path) ->
+			write_scan_header('Library'),
+			output_directory_files(Path),
+			write_scan_footer('Library')
+		;	print_message(warning, dead_code_scanner, unknown(library,Library)),
+			fail
+		).
 
 	rdirectory(Directory) :-
-		write_scan_header('Recursive directory'),
-		os::expand_path(Directory, Path),
-		output_rdirectory(Path),
-		write_scan_footer('Recursive directory').
+		(	os::expand_path(Directory, Path),
+			os::directory_exists(Path) ->
+			write_scan_header('Recursive directory'),
+			output_rdirectory(Path),
+			write_scan_footer('Recursive directory')
+		;	print_message(warning, dead_code_scanner, unknown(directory,Directory)),
+			fail
+		).
 
 	output_rdirectory(Directory) :-
 		setof(
@@ -348,10 +358,14 @@
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
 	directory(Directory) :-
-		write_scan_header('Directory'),
-		os::expand_path(Directory, Path),
-		output_directory_files(Path),
-		write_scan_footer('Directory').
+		(	os::expand_path(Directory, Path),
+			os::directory_exists(Path) ->
+			write_scan_header('Directory'),
+			output_directory_files(Path),
+			write_scan_footer('Directory')
+		;	print_message(warning, dead_code_scanner, unknown(directory,Directory)),
+			fail
+		).
 
 	output_directory_files(Directory) :-
 		print_message(information, dead_code_scanner, scanning_directory(Directory)),
@@ -371,7 +385,7 @@
 			Kind = category
 		;	current_protocol(Entity) ->
 			Kind = protocol
-		;	print_message(warning, dead_code_scanner, unknown_entity(Entity)),
+		;	print_message(warning, dead_code_scanner, unknown(entity,Entity)),
 			fail
 		),
 		write_scan_header('Entity'),

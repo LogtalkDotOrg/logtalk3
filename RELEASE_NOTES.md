@@ -51,7 +51,7 @@ Tools
 -----
 
 * UPDATED: The `code_metrics` and `dead_code_scanner` tools to print a warning
-message when an entity to be analyzed is not loaded.
+message when an item to be analyzed is not loaded or does not exist.
 
 Tests
 -----

@@ -94,7 +94,7 @@
 			Kind = category
 		;	current_protocol(Item) ->
 			Kind = protocol
-		;	print_message(warning, code_metrics, unknown_item(Item)),
+		;	print_message(warning, code_metrics, unknown(item,Item)),
 			fail
 		),
 		write_scan_header('Item'),
@@ -117,10 +117,13 @@
 	%%%%%%%%%%%%%%%%
 
 	file(Source) :-
-		locate_file(Source, Path),
-		write_scan_header('File'),
-		process_file(Path),
-		write_scan_footer('File').
+		(	locate_file(Source, Path) ->
+			write_scan_header('File'),
+			process_file(Path),
+			write_scan_footer('File')
+		;	print_message(warning, code_metrics, unknown(file,Source)),
+			fail
+		).
 
 	process_file(Path) :-
 		print_message(information, code_metrics, scanning_file(Path)),
@@ -181,20 +184,28 @@
 	%%%%%%%%%%%%%%%%%%%%%
 
 	directory(Directory) :-
-		write_scan_header('Directory'),
-		os::expand_path(Directory, Path),
-		output_directory_files(Path),
-		write_scan_footer('Directory').
+		(	os::expand_path(Directory, Path),
+			os::directory_exists(Path) ->
+			write_scan_header('Directory'),
+			output_directory_files(Path),
+			write_scan_footer('Directory')
+		;	print_message(warning, code_metrics, unknown(directory,Directory)),
+			fail
+		).
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Recursive directory scans %%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	rdirectory(Directory) :-
-		write_scan_header('Recursive directory'),
-		os::expand_path(Directory, Path),
-		output_rdirectory(Path),
-		write_scan_footer('Recursive directory').
+		(	os::expand_path(Directory, Path),
+			os::directory_exists(Path) ->
+			write_scan_header('Recursive directory'),
+			output_rdirectory(Path),
+			write_scan_footer('Recursive directory')
+		;	print_message(warning, code_metrics, unknown(directory,Directory)),
+			fail
+		).
 
 	output_rdirectory(Directory) :-
 		setof(
@@ -217,20 +228,26 @@
 	%%%%%%%%%%%%%%%%%%%
 
 	library(Library) :-
-		write_scan_header('Library'),
-		logtalk::expand_library_path(Library, Path),
-		output_directory_files(Path),
-		write_scan_footer('Library').
+		(	logtalk::expand_library_path(Library, Path) ->
+			write_scan_header('Library'),
+			output_directory_files(Path),
+			write_scan_footer('Library')
+		;	print_message(warning, code_metrics, unknown(library,Library)),
+			fail
+		).
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Recursive library scans %%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	rlibrary(Library) :-
-		write_scan_header('Recursive library'),
-		logtalk::expand_library_path(Library, TopPath),
-		output_rlibrary(TopPath),
-		write_scan_footer('Recursive library').
+		(	logtalk::expand_library_path(Library, TopPath) ->
+			write_scan_header('Recursive library'),
+			output_rlibrary(TopPath),
+			write_scan_footer('Recursive library')
+		;	print_message(warning, code_metrics, unknown(library,Library)),
+			fail
+		).
 
 	output_rlibrary(TopPath) :-
 		forall(
