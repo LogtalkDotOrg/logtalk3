@@ -38,13 +38,13 @@
 
 	% entry points to register concrete families
 
-	:- public(parent/3).
+	:- private(parent/3).
 	:- multifile(parent/3).
 
-	:- public(male/2).
+	:- private(male/2).
 	:- multifile(male/2).
 
-	:- public(female/2).
+	:- private(female/2).
 	:- multifile(female/2).
 
 	% delegate queries about basic family relations

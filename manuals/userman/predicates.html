@@ -350,7 +350,7 @@ A predicate can be declared <em>multifile</em> by using the <a title="Consult re
 </p>
 <pre>:- multifile(Functor/Arity).</pre>
 <p>
-This allows clauses for a predicate to be defined in several objects and/or categories. This is a directive that should be used with care. Support for this directive have been added to Logtalk primarily to support migration of Prolog module code. Spreading clauses for a predicate among several Logtalk entities can be handy in some cases but can also make your code difficult to understand. Logtalk precludes using a multifile predicate for breaking object encapsulation by checking that the object (or category) declaring the predicate (using a <code>public/1</code> scope directive) defines it also as multifile. This entity is said to contain the <em>primary declaration</em> for the multifile predicate. In addition, note that the <code>multifile/1</code> directive is mandatory when defining multifile predicates.
+This allows clauses for a predicate to be defined in several objects and/or categories. This is a directive that should be used with care. Support for this directive have been added to Logtalk primarily to support migration of Prolog module code. Spreading clauses for a predicate among several Logtalk entities can be handy in some cases but can also make your code difficult to understand. Logtalk precludes using a multifile predicate for breaking object encapsulation by checking that the object (or category) declaring the predicate (using a scope directive) defines it also as multifile. This entity is said to contain the <em>primary declaration</em> for the multifile predicate. In addition, note that the <code>multifile/1</code> directive is mandatory when defining multifile predicates.
 </p>
 <p>
 Consider the following simple example:
@@ -390,7 +390,7 @@ X = 4
 yes
 </pre>
 <p>
-Entities containing primary multifile predicate declarations must always be compiled before entities defining clauses for those multifile predicates. The Logtalk compiler will print a warning if the <code>public/1</code> directive is missing.
+Entities containing primary multifile predicate declarations must always be compiled before entities defining clauses for those multifile predicates. The Logtalk compiler will print a warning if the scope directive is missing.
 </p>
 <p>
 Multifile predicates may also be declared dynamic using the same <code>Entity::Functor/Arity</code> notation (multifile predicates are static by default).
@@ -1054,7 +1054,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 5, 2017</span>
+		<span>Last updated on: March 7, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

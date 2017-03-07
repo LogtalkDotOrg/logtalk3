@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 2, rc3)).
+'$lgt_version_data'(logtalk(3, 10, 2, rc4)).
 
 
 
@@ -9109,8 +9109,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
 	), !,
-	% the predicate must be declared both public and multifile
-	(	call(Dcl, Pred, p(p(p)), _, Flags) ->
+	% the predicate must be declared (i.e. have a scope directive) and multifile
+	(	call(Dcl, Pred, Scope, _, Flags) ->
+		functor(Scope, p, _),
 		Flags /\ 16 =:= 16
 	;	fail
 	).
@@ -16544,16 +16545,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-% reports missing public/1 directives for multifile predicates
+% reports missing scope directives for multifile predicates
 
 '$lgt_report_missing_directives_'(Type, Entity) :-
 	'$lgt_pp_multifile_'(Head, File, Lines),
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
-	% but missing corresponding public directive
+	\+ '$lgt_pp_protected_'(Functor, Arity),
+	\+ '$lgt_pp_private_'(Functor, Arity),
+	% but missing corresponding scope directive
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(File, Lines, Type, Entity, (public), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_scope_directive(File, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 % reports missing meta_predicate/1 directives for meta-predicates

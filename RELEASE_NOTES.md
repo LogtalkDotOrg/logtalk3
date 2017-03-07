@@ -27,6 +27,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Allow the primary declaration for a multifile predicate to declare
+the predicate protected or private instead of being restricted to public scope.
+This allows using multifile predicates for distributed predicate definitions
+without making them part of the public interface of the objects holding their
+primary declarations.
+
 * CHANGED: Calls to `logtalk_make(missing)` no longer report predicates for
 messages sent to objects implementing the `forwarding` protocol. This avoids
 false positives when using e.g. the `java` library.
