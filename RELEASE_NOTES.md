@@ -53,6 +53,12 @@ Documentation
 
 * IMPROVED: Documentation of the sample loader file.
 
+Library
+-------
+
+* ADDED: Definitions for operating-system types for type-checking when using
+the `type` library object.
+
 Tools
 -----
 
