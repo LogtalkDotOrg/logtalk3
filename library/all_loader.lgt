@@ -23,7 +23,6 @@
 		types_loader,
 		arbitrary_loader,
 		os_loader,
-		os_types_loader,
 		dates_loader,
 		events_loader,
 		dependents_loader,

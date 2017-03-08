@@ -17,20 +17,16 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load the basic entities in this group load the `os_loader.lgt` utility
-file:
+To load all entities in this group load the `os_loader.lgt` utility file:
 
 	| ?- logtalk_load(library(os_loader)).
 
-These entities define a portable operating-system interface for the
+These entities define a *portable* operating-system interface for the
 supported backend Prolog compilers. Some predicates may only be supported
 by a subset of backend Prolog compilers on a subset of operating-systems.
 They should be used with care and fully tested in your application domain
-as some backend Prolog compilers have buggy and inconsistent interfaces
-across operating-systems.
+as some backend Prolog compilers have buggy and inconsistent interfaces,
+specially across operating-systems.
 
-There is also a `os_types_loader.lgt` loader file that loads the same files
-as the `os_loader.lgt` loader file plus a `os_types.lgt` file that defines
-operating-system types including `file`, `file(Extensions)`, `directory`,
-and `environment_variable` for type-checking when using with the `type`
-library object.
+The `os_types.lgt` file defines some useful operating-system types for
+type-checking when using with the `type` library object.

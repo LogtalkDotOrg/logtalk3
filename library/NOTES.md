@@ -68,7 +68,6 @@ its own loader and notes files:
 
 * os  
 	`os_loader.lgt`
-	`os_types_loader.lgt`
 	`os.txt`
 
 * random  

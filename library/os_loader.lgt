@@ -18,6 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([osp, os], [optimize(on)])
-).
+:- initialization((
+	logtalk_load(basic_types_loader),
+	logtalk_load([osp, os, os_types], [optimize(on)])
+)).
