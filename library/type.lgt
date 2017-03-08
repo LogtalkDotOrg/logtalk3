@@ -625,7 +625,10 @@
 		!.
 
 	check(stream(Property), Term) :-
-		catch(stream_property(Term, Property), error(Error,_), throw(Error)),
+		(	catch(stream_property(Term, Property), error(Error,_), throw(Error)) ->
+			true
+		;	throw(type_error(stream(Property), Term))
+		),
 		!.
 
 	check(stream_or_alias, Term) :-
@@ -636,10 +639,12 @@
 		).
 
 	check(stream_or_alias(Property), Term) :-
-		(	atom(Term), stream_property(Stream, alias(Term)) ->
-			stream_property(Stream, Property)
-		;	catch(stream_property(Term, Property), error(Error,_), throw(Error)),
-			!
+		(	atom(Term), stream_property(Stream, alias(Term)),
+			stream_property(Stream, Property) ->
+			true
+		;	catch(stream_property(Term, Property), error(Error,_), throw(Error)) ->
+			true
+		;	throw(type_error(stream_or_alias(Property), Term))
 		).
 
 	% other types
