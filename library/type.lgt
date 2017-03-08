@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/02/14,
+		date is 2017/03/08,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
@@ -33,8 +33,10 @@
 			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
+			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
+			'Stream types notes' - 'In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
 			'character_code type notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
 			'between(Type, Lower, Upper) type notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
@@ -150,6 +152,9 @@
 	type(acyclic).
 	type(between(_Type, _Lower, _Upper)).
 	type(property(_Type, _LambdaExpression)).
+	% stream types
+	type(stream).
+	type(stream(_Type)).
 	% other types
 	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
@@ -611,6 +616,33 @@
 			true
 		;	throw(domain_error(property(Type, [Parameter]>>Goal), Term))
 		).
+
+	% stream types
+	% (assume a compliant implementation of stream_property/2)
+
+	check(stream, Term) :-
+		catch(stream_property(Term, _), error(Error,_), throw(Error)),
+		!.
+
+	check(stream(Property), Term) :-
+		catch(stream_property(Term, Property), error(Error,_), throw(Error)),
+		!.
+
+	check(stream_or_alias, Term) :-
+		(	atom(Term), stream_property(_, alias(Term)) ->
+			true
+		;	catch(stream_property(Term, _), error(Error,_), throw(Error)),
+			!
+		).
+
+	check(stream_or_alias(Property), Term) :-
+		(	atom(Term), stream_property(Stream, alias(Term)) ->
+			stream_property(Stream, Property)
+		;	catch(stream_property(Term, Property), error(Error,_), throw(Error)),
+			!
+		).
+
+	% other types
 
 	check(one_of(Type, Set), Term) :-
 		check(Type, Term),
