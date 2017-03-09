@@ -306,31 +306,39 @@ same line as the test results.
 Debugging failed unit tests
 ---------------------------
 
-In order to debug failed unit tests, you can compile the unit test objects
-without using the `hook/1` option and use the `(<<)/2` debugging control
-construct to call the individual tests. For example, assuming you have a
-`test(test_n)` unit test that is failing, you can type:
-
-	| ?- logtalk_load(my_tests).
-	...
-
-	| ?- my_tests << test(test_n).
-	...
-
-You may also compile the unit test objects in debug mode and use the Logtalk
-debugger. For example:
+In order to debug failed unit tests, start by compiling the unit test objects
+and the code being tested in debug mode. Load the debugger and trace the test
+that you want to debug. For example, assuming your tests are defined in a
+`tests` object and that the identifier of test to be debugged is `test_foo`:
 
 	| ?- logtalk_load(debugger(loader)).
-	...
-
-	| ?- logtalk_load(my_tests, [debug(on)]).
 	...
 
 	| ?- debugger::trace.
 	...
 
-	| ?- my_tests << test(test_n).
+	| ?- tests::run(test_foo).
 	...
+
+You can also compiling the code and the tests to be tested in debug mode but
+compile the tests without using the `hook/1` compiler option. Assuming that
+the `context_switching_calls` flag is set to `allow`, you can then use the
+`<</2` debugging control construct to debug the tests. For example, assuming
+that the identifier of test to be debugged is `test_foo` and that you used
+the `test/1` dialect:
+
+	| ?- logtalk_load(debugger(loader)).
+	...
+
+	| ?- debugger::trace.
+	...
+
+	| ?- tests<<test(test_foo).
+	...
+
+In the more complicated cases, it may be worth to define `loader_debug.lgt`
+and `tester_debug.lgt` files that load code and tests in debug mode and also
+load the debugger.
 
 
 Code coverage

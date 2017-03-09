@@ -70,6 +70,8 @@ Tools
 * UPDATED: The `code_metrics` and `dead_code_scanner` tools to print a warning
 message when an item to be analyzed is not loaded or does not exist.
 
+* IMPROVED: Documentation on how to debug failing unit tests.
+
 Tests
 -----
 
