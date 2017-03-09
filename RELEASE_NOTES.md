@@ -56,8 +56,9 @@ Documentation
 Library
 -------
 
-* ADDED: Definitions for operating-system types for type-checking when using
-the `type` library object.
+* ADDED: Support for the operating-system types `file`, `file(Extensions)`,
+`directory`, and `environment_variable` for type-checking when using the
+`type` library object.
 
 * ADDED: Support for types `stream`, `stream_or_alias`, `stream(Property)`,
 and `stream_or_alias(Property)` to the `type` library object. Suggested by
