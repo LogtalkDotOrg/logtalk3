@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2017/03/06,
+		date is 2017/03/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -204,7 +204,7 @@
 		 current_logtalk_flag(report, Report),
 		 current_logtalk_flag(scratch_directory, ScratchDirectory),
 		 current_logtalk_flag(code_prefix, Code),
-		 (current_logtalk_flag(hook, Hook) -> true; Hook = '(none)'),
+		 (current_logtalk_flag(hook, Hook) -> true; Hook = n/d),
 		 current_logtalk_flag(optimize, Optimize),
 		 current_logtalk_flag(source_data, SourceData),
 		 current_logtalk_flag(clean, Clean),
