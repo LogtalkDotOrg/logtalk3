@@ -21,8 +21,8 @@
 :- object(sender_1_test_object_2).
 
 	% secondary declaration for the p/1 multifile predicate:
-	% a primary declaration with a public scope directive is
-	% required for this secondary declaration to be valid
+	% a primary declaration with a predicate scope directive
+	% is required for this secondary declaration to be valid
 	:- multifile(sender_1_test_object_1::p/1).
 	:- dynamic(sender_1_test_object_1::p/1).
 
