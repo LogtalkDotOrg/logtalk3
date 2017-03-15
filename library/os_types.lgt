@@ -41,6 +41,9 @@
 		:- dynamic(type::type/1).
 	:- endif.
 
+	% clauses for the type::type/1 predicate must always be defined with
+	% an instantiated first argument to keep calls deterministic by taking
+	% advantage of first argument indexing
 	type::type(file).
 	type::type(file(_Extensions)).
 	type::type(directory).
@@ -52,6 +55,9 @@
 		:- dynamic(type::check/2).
 	:- endif.
 
+	% clauses for the type::check/1 predicate must always be defined with
+	% an instantiated first argument to keep calls deterministic by taking
+	% advantage of first argument indexing
 	type::check(file, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
