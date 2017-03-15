@@ -21,9 +21,9 @@
 :- category(os_types).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/03/08,
+		date is 2017/03/15,
 		comment is 'A set of operating-system related types.',
 		remarks is [
 			'Provided types' - 'This category adds "file", "file(Extensions)", "directory", and "environment_variable" types for type-checking when using the "type" library object.',
@@ -40,23 +40,19 @@
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(type::type/1).
 	:- endif.
-	type::type(Type) :-
-		type(Type).
 
-	type(file).
-	type(file(_Extensions)).
-	type(directory).
-	type(environment_variable).
+	type::type(file).
+	type::type(file(_Extensions)).
+	type::type(directory).
+	type::type(environment_variable).
 
 	:- multifile(type::check/2).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(type::check/2).
 	:- endif.
-	type::check(Type, Term) :-
-		check(Type, Term).
 
-	check(file, Term) :-
+	type::check(file, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	\+ atom(Term) ->
@@ -65,7 +61,7 @@
 			true
 		;	throw(existence_error(file, Term))
 		).
-	check(file(Extensions), Term) :-
+	type::check(file(Extensions), Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	\+ atom(Term) ->
@@ -77,7 +73,7 @@
 			true
 		;	throw(domain_error(file(Extensions), Term))
 		).
-	check(directory, Term) :-
+	type::check(directory, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	\+ atom(Term) ->
@@ -86,7 +82,7 @@
 			true
 		;	throw(existence_error(file, Term))
 		).
-	check(environment_variable, Term) :-
+	type::check(environment_variable, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	\+ atom(Term) ->

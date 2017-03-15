@@ -24,7 +24,12 @@ RELEASE NOTES
 3.10.3 - April ??, 2017
 =======================
 
+Library
+-------
 
+* FIXED: The new operating-system types added in the previous release by the
+`os_types` category introduced a spurious choice-point for the `type::type/1`
+and `type::check/2` predicates.
 
 
 3.10.2 - March 13, 2017

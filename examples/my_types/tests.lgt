@@ -22,19 +22,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/08/13,
+		date is 2017/03/15,
 		comment is 'Unit tests for the "my_types" example.'
 	]).
 
-	succeeds(types_1) :-
+	deterministic(types_1) :-
 		type::check(temperature(celsius), 38.7).
 
-	succeeds(types_2) :-
+	deterministic(types_2) :-
 		type::check(temperature(fahrenheit), 101.2).
 
-	succeeds(types_3) :-
+	deterministic(types_3) :-
 		type::check(temperature(kelvin), 307.4).
 
 	fails(types_4) :-
