@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/03/08,
+		date is 2017/03/15,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
@@ -45,7 +45,8 @@
 			'var_or(Type) notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
 			'types(Types) notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
-			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.'
+			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.',
+			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.'
 		]
 	]).
 

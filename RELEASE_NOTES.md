@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 predicate clauses defined in categories that make calls to the `::/1-2`
 control constructs.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `type` library object.
+
 Library
 -------
 

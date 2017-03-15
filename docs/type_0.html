@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.3</code>
+            <code>1.4</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/3/8</code>
+            <code>2017/3/15</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -229,6 +229,10 @@
         <dl class="remarks">
           <dt class="comment">Design choices</dt>
           <dd class="text">The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Registering new types</dt>
+          <dd class="text">New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</dd>
         </dl>
       </div>
     </div>
