@@ -24,6 +24,13 @@ RELEASE NOTES
 3.10.3 - April ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Regression in previous release in the compilation of multifile
+predicate clauses defined in categories that make calls to the `::/1-2`
+control constructs.
+
 Library
 -------
 
