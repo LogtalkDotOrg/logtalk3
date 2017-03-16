@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.2</code>
+            <code>1.3</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/1/9</code>
+            <code>2017/3/16</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="value_reference/2" class="code">value_reference/2</h3>
           <blockquote>
-            <p class="comment">Returns an opaque term that represents the Java value.</p>
+            <p class="comment">Returns an opaque term that represents the Java value with the given name.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -58,7 +58,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>value_reference(?atom,--var) &ndash; one_or_more</code>
+              <code>value_reference(?atom,--ground) &ndash; one_or_more</code>
             </dd>
           </dl>
         </div>
@@ -78,7 +78,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>true(--var) &ndash; one</code>
+              <code>true(--ground) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -98,7 +98,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>false(--var) &ndash; one</code>
+              <code>false(--ground) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -118,7 +118,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>void(--var) &ndash; one</code>
+              <code>void(--ground) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -138,7 +138,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>null(--var) &ndash; one</code>
+              <code>null(--ground) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -158,7 +158,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>is_true(++ground) &ndash; zero_or_one</code>
+              <code>is_true(@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -178,7 +178,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>is_false(++ground) &ndash; zero_or_one</code>
+              <code>is_false(@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -198,7 +198,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>is_void(++ground) &ndash; zero_or_one</code>
+              <code>is_void(@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -218,7 +218,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>is_null(++ground) &ndash; zero_or_one</code>
+              <code>is_null(@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

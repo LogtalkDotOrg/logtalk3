@@ -43,6 +43,8 @@ Library
 `os_types` category introduced a spurious choice-point for the `type::type/1`
 and `type::check/2` predicates.
 
+* FIXED: Mode templates of some of the `java_utils_protocol` predicates.
+
 
 3.10.2 - March 13, 2017
 =======================

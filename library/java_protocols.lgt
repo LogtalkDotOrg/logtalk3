@@ -68,70 +68,70 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/01/09,
+		date is 2017/03/16,
 		comment is 'Abstract interface to Java utility predicates.'
 	]).
 
 	:- public(value_reference/2).
-	:- mode(value_reference(?atom, --var), one_or_more).
+	:- mode(value_reference(?atom, --ground), one_or_more).
 	:- info(value_reference/2, [
-		comment is 'Returns an opaque term that represents the Java value.',
+		comment is 'Returns an opaque term that represents the Java value with the given name.',
 		argnames is ['Value', 'Reference']
 	]).
 
 	:- public(true/1).
-	:- mode(true(--var), one).
+	:- mode(true(--ground), one).
 	:- info(true/1, [
 		comment is 'Returns an opaque term that represents the Java value true.',
 		argnames is ['Reference']
 	]).
 
 	:- public(false/1).
-	:- mode(false(--var), one).
+	:- mode(false(--ground), one).
 	:- info(false/1, [
 		comment is 'Returns an opaque term that represents the Java value false.',
 		argnames is ['Reference']
 	]).
 
 	:- public(void/1).
-	:- mode(void(--var), one).
+	:- mode(void(--ground), one).
 	:- info(void/1, [
 		comment is 'Returns an opaque term that represents the Java value void.',
 		argnames is ['Reference']
 	]).
 
 	:- public(null/1).
-	:- mode(null(--var), one).
+	:- mode(null(--ground), one).
 	:- info(null/1, [
 		comment is 'Returns an opaque term that represents the Java value null.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_true/1).
-	:- mode(is_true(++ground), zero_or_one).
+	:- mode(is_true(@term), zero_or_one).
 	:- info(is_true/1, [
 		comment is 'True when the argument is the Java value true. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_false/1).
-	:- mode(is_false(++ground), zero_or_one).
+	:- mode(is_false(@term), zero_or_one).
 	:- info(is_false/1, [
 		comment is 'True when the argument is the Java value false. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_void/1).
-	:- mode(is_void(++ground), zero_or_one).
+	:- mode(is_void(@term), zero_or_one).
 	:- info(is_void/1, [
 		comment is 'True when the argument is the Java value void. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 
 	:- public(is_null/1).
-	:- mode(is_null(++ground), zero_or_one).
+	:- mode(is_null(@term), zero_or_one).
 	:- info(is_null/1, [
 		comment is 'True when the argument is the Java value null. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
