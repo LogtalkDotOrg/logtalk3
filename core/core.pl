@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 3, rc3)).
+'$lgt_version_data'(logtalk(3, 10, 3, rc4)).
 
 
 
@@ -10076,8 +10076,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Head = {UserHead} ->
 		% clause for a multifile predicate in "user"
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(ExCtx, user, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, _, BeginLine-EndLine),
+		'$lgt_execution_context_this_entity'(ExCtx, _, user),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
@@ -10086,8 +10086,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Head = Other::_ ->
 		% clause for an entity multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, _, BeginLine-EndLine),
+		'$lgt_execution_context_this_entity'(ExCtx, _, Other),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
@@ -10096,8 +10096,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Head = ':'(Other, _) ->
 		% clause for a module multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, _, BeginLine-EndLine),
+		'$lgt_execution_context_this_entity'(ExCtx, _, Other),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])

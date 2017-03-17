@@ -27,6 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Simplified code generated for multifile predicates.
+
 * FIXED: Regression in previous release in the compilation of multifile
 predicate clauses defined in categories that make calls to the `::/1-2`
 control constructs.
