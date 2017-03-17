@@ -41,7 +41,7 @@ addition of some operators and directives for a smooth learning path.
 LOGTALK WEB SITE
 ----------------
 
-The latest release of the Logtalk is always available at the URL:
+The latest stable release of the Logtalk is always available at the URL:
 
 <http://logtalk.org/>
 
@@ -72,7 +72,13 @@ you intend to use Logtalk (optional)
 SUPPORT
 -------
 
-For support options, please consult the web page:
+Support channels include:
+
+* Community discussion forums: <http://forums.logtalk.org/>
+* Community live chat room: <https://gitter.im/LogtalkDotOrg/logtalk3>
+* Commercial support: <http://logtalk.pt/>
+
+For more information on support options, please consult the web page:
 
 <http://logtalk.org/support.html>
 
