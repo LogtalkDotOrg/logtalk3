@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 10, 3, rc3)).
 
 
 
@@ -10076,31 +10076,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Head = {UserHead} ->
 		% clause for a multifile predicate in "user"
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, Stack, BeginLine-EndLine),
 		'$lgt_execution_context'(ExCtx, user, Sender, This, Self, MetaCallCtx, Stack),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
-			'$lgt_execution_context'(BodyExCtx, Entity, Sender, Entity, Entity, MetaCallCtx, Stack)
+			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
 		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
 	;	Head = Other::_ ->
 		% clause for an entity multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, Stack, BeginLine-EndLine),
 		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
-			'$lgt_execution_context'(BodyExCtx, Entity, Sender, Entity, Entity, MetaCallCtx, Stack)
+			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
 		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
 	;	Head = ':'(Other, _) ->
 		% clause for a module multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, Stack, BeginLine-EndLine),
 		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
-			'$lgt_execution_context'(BodyExCtx, Entity, Sender, Entity, Entity, MetaCallCtx, Stack)
+			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
 		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
 	;	% clause for a local predicate
@@ -10117,7 +10117,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_clause'(Fact, Entity, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
 	(	Fact = {UserFact} ->
 		% fact for a multifile predicate in "user"
