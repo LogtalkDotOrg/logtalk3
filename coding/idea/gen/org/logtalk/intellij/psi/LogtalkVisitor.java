@@ -11,6 +11,10 @@ public class LogtalkVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAtomKeyword(@NotNull LogtalkAtomKeyword o) {
+    visitPsiElement(o);
+  }
+
   public void visitBasicTerm(@NotNull LogtalkBasicTerm o) {
     visitPsiElement(o);
   }
@@ -27,6 +31,10 @@ public class LogtalkVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCompoundNameKeyword(@NotNull LogtalkCompoundNameKeyword o) {
+    visitPsiElement(o);
+  }
+
   public void visitCustomBinaryOperation(@NotNull LogtalkCustomBinaryOperation o) {
     visitPsiElement(o);
   }
@@ -40,10 +48,6 @@ public class LogtalkVisitor extends PsiElementVisitor {
   }
 
   public void visitKnownLeftOperator(@NotNull LogtalkKnownLeftOperator o) {
-    visitPsiElement(o);
-  }
-
-  public void visitKnownOperator(@NotNull LogtalkKnownOperator o) {
     visitPsiElement(o);
   }
 
@@ -80,6 +84,10 @@ public class LogtalkVisitor extends PsiElementVisitor {
   }
 
   public void visitTerm(@NotNull LogtalkTerm o) {
+    visitPsiElement(o);
+  }
+
+  public void visitValidOperator(@NotNull LogtalkValidOperator o) {
     visitPsiElement(o);
   }
 

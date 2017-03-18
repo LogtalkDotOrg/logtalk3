@@ -8,12 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface LogtalkOperation extends PsiElement {
 
   @Nullable
-  LogtalkCustomBinaryOperation getCustomBinaryOperation();
-
-  @Nullable
-  LogtalkCustomLeftOperation getCustomLeftOperation();
-
-  @Nullable
   LogtalkNativeBinaryOperation getNativeBinaryOperation();
 
   @Nullable

@@ -25,7 +25,7 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
 
     @NotNull
     @Override
-    public FoldingDescriptor[] buildFoldRegions(@NotNull final ASTNode node, @NotNull final Document document) {
+    public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
         final List<FoldingDescriptor> descriptors = new ArrayList<>();
         collectDescriptorsRecursively(node, document, descriptors);
         return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
@@ -81,7 +81,7 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
     }
 
     @Override
-    public boolean isCollapsedByDefault(@NotNull final ASTNode node) {
+    public boolean isCollapsedByDefault(@NotNull ASTNode node) {
         return false;
     }
 

@@ -27,12 +27,12 @@ public class LogtalkPairedBraceMatcher implements PairedBraceMatcher {
     }
 
     @Override
-    public boolean isPairedBracesAllowedBeforeType(@NotNull final IElementType lbraceType, @Nullable final IElementType contextType) {
+    public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
         return true;
     }
 
     @Override
-    public int getCodeConstructStart(final PsiFile file, final int openingBraceOffset) {
+    public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
         return openingBraceOffset;
     }
 }

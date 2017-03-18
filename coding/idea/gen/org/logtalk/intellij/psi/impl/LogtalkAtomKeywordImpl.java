@@ -11,25 +11,19 @@ import static org.logtalk.intellij.psi.LogtalkTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.logtalk.intellij.psi.*;
 
-public class LogtalkAtomImpl extends ASTWrapperPsiElement implements LogtalkAtom {
+public class LogtalkAtomKeywordImpl extends ASTWrapperPsiElement implements LogtalkAtomKeyword {
 
-  public LogtalkAtomImpl(ASTNode node) {
+  public LogtalkAtomKeywordImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LogtalkVisitor visitor) {
-    visitor.visitAtom(this);
+    visitor.visitAtomKeyword(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof LogtalkVisitor) accept((LogtalkVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public LogtalkAtomKeyword getAtomKeyword() {
-    return findChildByClass(LogtalkAtomKeyword.class);
   }
 
 }

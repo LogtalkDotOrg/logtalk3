@@ -1,13 +1,14 @@
 <idea-plugin version="2">
   <id>org.logtalk</id>
   <name>Logtalk</name>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
   <vendor email="sergioc78@gmail.com" url="http://logtalk.org/">Logtalk</vendor>
 
   <description><![CDATA[
       <em>Logtalk</em> support for IntelliJ.
     ]]></description>
 
+    <!--
   <change-notes><![CDATA[
       This plugin provides syntax highlighting for Logtalk and some basic editing features:<br>
       <ul>
@@ -17,6 +18,7 @@
       </ul>
     ]]>
   </change-notes>
+-->
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="145.0"/>
@@ -31,13 +33,16 @@
     <fileTypeFactory implementation="org.logtalk.intellij.LogtalkFileTypeFactory"/>
 
     <lang.parserDefinition language="Logtalk" implementationClass="org.logtalk.intellij.LogtalkParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="Logtalk" implementationClass="org.logtalk.intellij.LogtalkSyntaxHighlighterFactory"/>
+    <lang.syntaxHighlighterFactory language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkSyntaxHighlighterFactory"/>
+    <annotator language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkAnnotator"/>
     <lang.braceMatcher language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkPairedBraceMatcher"/>
     <lang.commenter language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkCommenter"/>
     <lang.foldingBuilder language="Logtalk" implementationClass="org.logtalk.intellij.editor.LogtalkFoldingBuilder"/>
 
-    <lang.parserDefinition language="Prolog" implementationClass="org.logtalk.intellij.PrologParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="Prolog" implementationClass="org.logtalk.intellij.LogtalkSyntaxHighlighterFactory"/>
+    <!-- At the moment Logtalk and Prolog are defined with the same properties. This will change. -->
+   <lang.parserDefinition language="Prolog" implementationClass="org.logtalk.intellij.PrologParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkSyntaxHighlighterFactory"/>
+    <annotator language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkAnnotator"/>
     <lang.braceMatcher language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkPairedBraceMatcher"/>
     <lang.commenter language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkCommenter"/>
     <lang.foldingBuilder language="Prolog" implementationClass="org.logtalk.intellij.editor.LogtalkFoldingBuilder"/>

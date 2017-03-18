@@ -1,4 +1,4 @@
-package org.logtalk.intellij;
+package org.logtalk.intellij.editor;
 
 
 import org.jetbrains.annotations.NotNull;
