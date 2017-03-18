@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   Logtalk user folder setup script
-//   Last updated on July 7, 2016
+//   Last updated on March 18, 2017
 //
 //   This file is part of Logtalk <http://logtalk.org/>  
 //   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -210,8 +210,8 @@ link.Save();
 WScript.Echo("Finished copying Logtalk files and directories.");
 WScript.Echo("");
 WScript.Echo("You may want to customize the default Logtalk compiler flags by renaming");
-WScript.Echo("and editing the \"settings-sample.lgt\" file found in the directory");
-WScript.Echo("\"\%LOGTALKUSER\%\". For more information on customizing Logtalk and your");
+WScript.Echo("and editing the \"settings-sample.lgt\" source file found in the directory");
+WScript.Echo("\"\%LOGTALKUSER\%\". For more information on how to customize Logtalk and the");
 WScript.Echo("working environment, consult the \"\%LOGTALKUSER\%\\CUSTOMIZE.md\" file.");
 WScript.Echo("");
 
@@ -219,10 +219,10 @@ WScript.Quit(0);
 
 function usage_help() {
 	WScript.Echo("");
-	WScript.Echo("This script copies the Logtalk per-user files and directories to the");
-	WScript.Echo("user home directory. The location can be set by the environment");
-	WScript.Echo("variable \"\%LOGTALKUSER\%\" (defaults to \"MyDocuments\\logtalk\" when the");
-	WScript.Echo("variable is not defined)");
+	WScript.Echo("This script copies all the Logtalk per-user files and directories to the");
+	WScript.Echo("user home directory. The location can be set by the environment variable");
+	WScript.Echo("\"\%LOGTALKUSER\%\" (defaults to \"MyDocuments\\logtalk\" when the variable is");
+	WScript.Echo("not defined)");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
 	WScript.Echo("  " + WScript.ScriptName + " help");
