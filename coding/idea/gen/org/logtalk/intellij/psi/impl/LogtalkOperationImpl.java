@@ -28,18 +28,6 @@ public class LogtalkOperationImpl extends ASTWrapperPsiElement implements Logtal
 
   @Override
   @Nullable
-  public LogtalkCustomBinaryOperation getCustomBinaryOperation() {
-    return findChildByClass(LogtalkCustomBinaryOperation.class);
-  }
-
-  @Override
-  @Nullable
-  public LogtalkCustomLeftOperation getCustomLeftOperation() {
-    return findChildByClass(LogtalkCustomLeftOperation.class);
-  }
-
-  @Override
-  @Nullable
   public LogtalkNativeBinaryOperation getNativeBinaryOperation() {
     return findChildByClass(LogtalkNativeBinaryOperation.class);
   }

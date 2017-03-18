@@ -21,10 +21,12 @@ sentence ::= (operation|compound|atom) DOT
 
 term ::= (operation|basic_term) //basic_term instead of term to avoid left recursion
 
-basic_term ::= (parenthesized_block|braced_block|list|map_reference|compound|atom|STRING|number|variable)
+basic_term ::= (parenthesized_block|braced_block|list|map_reference|number|variable|STRING|compound|atom)
 
-operation ::= (native_binary_operation|native_left_operation|
-                custom_binary_operation|custom_left_operation)
+operation ::= (native_binary_operation|native_left_operation)
+
+/*operation ::= (native_binary_operation|native_left_operation|
+                custom_binary_operation|custom_left_operation)*/
 
 native_binary_operation ::= basic_term known_binary_operator term
 
@@ -34,27 +36,20 @@ custom_binary_operation ::= basic_term atom term
 
 custom_left_operation ::= atom term
 
-atom ::= (  QUOTED_ATOM|
+
+atom ::= (  atom_keyword|
             UNQUOTED_ATOM|
-            KEYWORD_ATOM|
-            DIRECTIVE_UNQUOTED_ATOM|
-            DIRECTIVE_KEYWORD_ATOM|
-            HEAD_UNQUOTED_ATOM|
-            HEAD_KEYWORD_ATOM|
+            SYMBOLIC_ATOM|
             CUT|
-            CONS|
-            known_operator
+            QUOTED_ATOM
          )
+
 
 compound ::= compound_name LPAREN term RPAREN
 
-compound_name ::= ( QUOTED_COMPOUND_NAME|
+compound_name ::= ( compound_name_keyword|
                     UNQUOTED_COMPOUND_NAME|
-                    KEYWORD_COMPOUND_NAME|
-                    DIRECTIVE_UNQUOTED_COMPOUND_NAME|
-                    DIRECTIVE_KEYWORD_COMPOUND_NAME|
-                    HEAD_KEYWORD_COMPOUND_NAME|
-                    HEAD_UNQUOTED_COMPOUND_NAME
+                    QUOTED_COMPOUND_NAME
                   )
 
 list ::= LBRACKET term? RBRACKET
@@ -69,42 +64,50 @@ variable ::= (ANONYMOUS_VARIABLE|NAMED_VARIABLE)
 
 map_reference ::= (braced_block|variable) MAP_OP (atom|INTEGER|variable)
 
-known_operator ::= (known_binary_operator|known_left_operator)
 
-known_binary_operator ::= ( LONG_ARROW_OP|
-                            DIRECTIVE_OP|
-                            SEMICOLON_OP|PIPE_OP|
-                            IMPLICATION_OP|STAR_IMPLICATION_OP|
-                            COMMA|
-                            COLON_EQUALS_OP|
-                            LESS_THAN_OP|EQUALS_OP|EQUALS_DOT_DOT_OP|EQUALS_AT_EQUALS_OP|BACKSLASH_EQUALS_AT_EQUALS_OP|
-                            EQUALS_COLON_EQUALS_OP|LESS_OR_EQUALS_OP|DOUBLE_EQUALS_OP|EQUALS_BACKSLASH_EQUALS_OP|
-                            GREATER_THAN_OP|GREATER_OR_EQUALS_OP|AT_LESS_THAN_OP|AT_EQUALS_LESS_THAN_OP|
-                            AT_GREATER_THAN_OP|AT_GREATER_OR_EQUALS_OP|BACKSLASH_EQUALS_OP|BACKSLASH_DOUBLE_EQUALS_OP|
-                            AS_OP|IS_OP|BUTTERFLY_OP|COLON_LESS_THAN_OP|
-                            COLON_OP|
-                            PLUS_OP|MINUS_OP|SLASH_BACKSLASH_OP|BACKSLASH_SLASH_OP|XOR_OP|
-                            STAR_OP|SLASH_OP|DOUBLE_SLASH_OP|DIV_OP|RDIV_OP|DOUBLE_GREATER_THAN_OP|MOD_OP|REM_OP|
-                            DOUBLE_STAR_OP|
-                            CARET_OP|
-                            MAP_OP|
-                            DOLLAR_OP|
-                            LGT_METHOD_CALL_OP|
-                            LGT_SUPER_CALL_OP|
-                            LGT_CONTEXT_SWITCHING_OP
+
+
+//known_operator ::= (known_binary_operator|known_left_operator)
+
+valid_operator ::= atom_keyword|UNQUOTED_ATOM|SYMBOLIC_ATOM
+
+
+known_binary_operator ::= &valid_operator (
+                            '-->'|
+                            ':-'|
+                            ';'|'|'|
+                            '->'|'*->'|
+                            ','|
+                            ':='|
+                            '<'|'='|'=..'|'=@='|'\=@='|
+                            '=:='|'=<'|'=='|'=\='|
+                            '>'|'>='|'@<'|'@=<'|
+                            '@>'|'@>='|'\='|'\=='|
+                            'as'|'is'|'>:<'|':<'|
+                            ':'|
+                            '+'|'-'|'/\'|'\/'|'xor'|
+                            '*'|'/'|'//'|'div'|'rdiv'|'>>'|'mod'|'rem'|
+                            '**'|
+                            '^'|
+                            '::'|
+                            '^^'|
+                            '<<'
                             )
 
-known_left_operator ::=   ( DIRECTIVE_OP|
-                            QUERY_OP|
-                            DYNAMIC_OP|DISCONTIGUOUS_OP|INITIALIZATION_OP|META_PREDICATE_OP|MODULE_TRANSPARENT_OP|MULTIFILE_OP|
-                            PUBLIC_OP|THREAD_LOCAL_OP|THREAD_INITIALIZATION_OP|VOLATILE_OP|
-                            NOT_OP|
-                            QUESTION_MARK_OP|
-                            PLUS_OP|MINUS_OP|BACKSLASH_OP|
-                            AT|
-                            LGT_METHOD_CALL_OP|
-                            LGT_SUPER_CALL_OP
+
+known_left_operator ::= &valid_operator (
+                            ':-'|'?-'|
+                            'dynamic'|'discontiguous'|'initialization'|'meta_predicate'|'module_transparent'|'multifile'|
+                            'public'|'thread_local'|'thread_initialization'|'volatile'|
+                            '\+'|
+                            '?'|
+                            '+'|'-'|'\'|
+                            '$'|
+                            '@'|
+                            '::'|
+                            '^^'
                             )
+
 
 
 /*
@@ -129,3 +132,52 @@ http://www.swi-prolog.org/pldoc/man?section=operators
 100	yfx	.
 1	fx	$
  */
+
+
+
+
+
+compound_name_keyword ::= (
+'encoding' | 'initialization' | 'op' | 'set_logtalk_flag' | 'if' | 'elif' | 'calls' | 'category' |
+'include' | 'info' | 'object' | 'protocol' |
+'uses' | 'alias' | 'coinductive' | 'discontiguous' | 'dynamic' | 'meta_predicate' | 'meta_non_terminal' | 'mode' |
+'multifile' | 'private' | 'protected' | 'public' | 'synchronized' | 'use_module' |
+'parameter' | 'self' | 'sender' | 'this' | 'current_op' | 'current_predicate' | 'predicate_property' | 'abolish' | 'asserta' |
+ 'assertz' | 'clause' | 'retract' | 'retractall' | 'call' | 'once' | 'catch' | 'throw' | 'bagof' | 'findall' | 'forall' |
+ 'setof' | 'before' | 'after' | 'forward' | 'phrase' | 'expand_term' | 'term_expansion' | 'expand_goal' |
+ 'goal_expansion' | 'coinductive_success_hook' | 'ask_question' | 'message_hook' |
+ 'message_prefix_stream' | 'print_message' | 'print_message_tokens' | 'print_message_token' | 'question_hook' | 'question_prompt_stream'|
+ 'call' 'message_tokens'|
+ 'current_category' | 'current_object' | 'current_protocol' | 'category_property' | 'object_property' | 'protocol_property' |
+ 'create_category' | 'create_object' | 'create_protocol' | 'abolish_category' | 'abolish_object' | 'abolish_protocol' |
+ 'extends_object' | 'extends_protocol' | 'extends_category' |
+ 'implements_protocol' | 'imports_category' | 'instantiates_class' |
+ 'specializes_class' | 'complements_object' | 'abolish_events' | 'current_event' | 'define_events' |
+ 'threaded' | 'threaded_call' | 'threaded_once' | 'threaded_ignore' | 'threaded_exit' |
+ 'threaded_peek' | 'threaded_wait' | 'threaded_notify' | 'threaded_engine' | 'threaded_engine_create' | 'threaded_engine_destroy' |
+ 'threaded_engine_self' | 'threaded_engine_next' | 'threaded_engine_next_reified' | 'threaded_engine_yield' | 'threaded_engine_post' |
+ 'threaded_engine_fetch' | 'logtalk_compile' | 'logtalk_load' | 'logtalk_make' | 'logtalk_library_path' |
+ 'logtalk_load_context' | 'current_logtalk_flag' | 'create_logtalk_flag' |
+ 'implements' | 'imports' | 'complements' | 'extends' | 'instantiates' | 'specializes' |
+ 'ensure_loaded' | 'export' | 'reexport' | 'module' | 'set_prolog_flag' |
+ 'unify_with_occurs_check' | 'subsumes_term' | 'atom' | 'atomic' | 'integer' | 'float' | 'callable' | 'compound' | 'nonvar' |
+ 'var' | 'number' | 'ground' | 'acyclic_term' | 'compare' | 'functor' | 'arg' | 'copy_term' | 'numbervars' | 'term_variables' |
+ 'current_input' | 'current_output' | 'set_input' | 'set_output' | 'open' | 'close' | 'flush_output' | 'stream_property' |
+ 'at_end_of_stream' | 'set_stream_position' | 'get_char' | 'get_code' | 'peek_char' | 'peek_code' | 'put_char' | 'put_code' |
+ 'nl' | 'get_byte' | 'peek_byte' | 'put_byte' | 'read' | 'read_term' | 'writeq' | 'write' | 'write_canonical' | 'write_term' |
+ 'current_char_conversion' | 'char_conversion' | 'ignore' | 'atom_length' | 'atom_chars' |
+ 'atom_codes' | 'atom_concat' | 'sub_atom' | 'char_code' | 'number_chars' | 'number_codes' | 'current_prolog_flag' |
+ 'halt' | 'keysort' | 'sort' |
+ 'atan' | 'atan2' | 'acos' | 'asin' | 'sin' | 'cos' | 'tan' | 'sign' | 'abs' | 'truncate' | 'round' | 'ceiling' | 'exp' |
+ 'log' | 'sqrt' | 'rem' | 'mod' | 'div' | 'float_fractional_part' | 'float_integer_part' | 'floor' | 'min' | 'max' | 'xor'
+)
+
+
+atom_keyword ::= (
+'else' | 'endif' | 'dynamic' | 'end_category' | 'end_object' | 'end_protocol' | 'threaded' |
+'eos' |
+'logtalk_make' |
+'built_in' |
+'halt' | 'flush_output' | 'at_end_of_stream' | 'true' | 'fail' | 'false' | 'repeat' | 'nl' |
+'pi' | 'e'
+)

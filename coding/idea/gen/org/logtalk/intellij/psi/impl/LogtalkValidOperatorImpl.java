@@ -11,14 +11,14 @@ import static org.logtalk.intellij.psi.LogtalkTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.logtalk.intellij.psi.*;
 
-public class LogtalkKnownOperatorImpl extends ASTWrapperPsiElement implements LogtalkKnownOperator {
+public class LogtalkValidOperatorImpl extends ASTWrapperPsiElement implements LogtalkValidOperator {
 
-  public LogtalkKnownOperatorImpl(ASTNode node) {
+  public LogtalkValidOperatorImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LogtalkVisitor visitor) {
-    visitor.visitKnownOperator(this);
+    visitor.visitValidOperator(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,14 +28,8 @@ public class LogtalkKnownOperatorImpl extends ASTWrapperPsiElement implements Lo
 
   @Override
   @Nullable
-  public LogtalkKnownBinaryOperator getKnownBinaryOperator() {
-    return findChildByClass(LogtalkKnownBinaryOperator.class);
-  }
-
-  @Override
-  @Nullable
-  public LogtalkKnownLeftOperator getKnownLeftOperator() {
-    return findChildByClass(LogtalkKnownLeftOperator.class);
+  public LogtalkAtomKeyword getAtomKeyword() {
+    return findChildByClass(LogtalkAtomKeyword.class);
   }
 
 }

@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface LogtalkCompoundName extends PsiElement {
 
+  @Nullable
+  LogtalkCompoundNameKeyword getCompoundNameKeyword();
+
 }

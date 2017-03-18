@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LogtalkKnownOperator extends PsiElement {
-
-  @Nullable
-  LogtalkKnownBinaryOperator getKnownBinaryOperator();
-
-  @Nullable
-  LogtalkKnownLeftOperator getKnownLeftOperator();
+public interface LogtalkAtomKeyword extends PsiElement {
 
 }
