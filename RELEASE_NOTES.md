@@ -41,6 +41,9 @@ Documentation
 Library
 -------
 
+* ADDED: Type `predicate` to the library `type` object for checking for an
+object public predicate.
+
 * FIXED: The new operating-system types added in the previous release by the
 `os_types` category introduced a spurious choice-point for the `type::type/1`
 and `type::check/2` predicates.

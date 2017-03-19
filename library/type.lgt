@@ -21,12 +21,12 @@
 :- object(type).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/03/15,
+		date is 2017/03/19,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
-			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}',
+			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
 			'Atom derived types' - '{boolean, character}',
@@ -35,6 +35,7 @@
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}',
+			'predicate type notes' - 'This type is used to check for an object public predicate specified as Object::Functor/Arity.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'Stream types notes' - 'In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.',
 			'order type notes' - 'The three possible values of this type are the single character atoms <, =, and >.',
@@ -112,6 +113,8 @@
 	:- if(current_logtalk_flag(modules, supported)).
 		type(module_identifier).
 	:- endif.
+	% Logtalk object public predicate
+	type(predicate).
 	% Logtalk events
 	type(event).
 	% base types from the Prolog standard
@@ -294,6 +297,19 @@
 		).
 
 	:- endif.
+
+	% object public predicate
+
+	check(predicate, Term) :-
+		(	Term = Object::Predicate ->
+			(	check(object_identifier, Object),
+				check(predicate_indicator, Predicate),
+				Object::current_predicate(Predicate) ->
+				true
+			;	throw(existence_error(predicate, Object::Predicate))
+			)
+		;	throw(type_error(predicate, Term))
+		).
 
 	% events
 

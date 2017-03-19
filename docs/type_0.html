@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.4</code>
+            <code>1.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/3/15</code>
+            <code>2017/3/19</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -152,7 +152,7 @@
       <div class="section">
         <dl class="remarks">
           <dt class="comment">Logtalk specific types</dt>
-          <dd class="text">{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event}</dd>
+          <dd class="text">{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Prolog module related types (when the backend compiler supports modules)</dt>
@@ -185,6 +185,10 @@
         <dl class="remarks">
           <dt class="comment">Other types</dt>
           <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">predicate type notes</dt>
+          <dd class="text">This type is used to check for an object public predicate specified as Object::Functor/Arity.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">boolean type notes</dt>
