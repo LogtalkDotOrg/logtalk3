@@ -50,6 +50,9 @@ and `type::check/2` predicates.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Sample command for generating SVG diagrams from within the Atom text
+editor.
+
 * FIXED: Sample command for generating HTML documentation from within the Atom
 text editor.
 

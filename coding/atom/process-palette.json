@@ -176,6 +176,36 @@
       "menus": [
         "Logtalk"
       ]
+    },
+    {
+      "namespace": "Process Palette",
+      "action": "Generate SVG diagrams",
+      "command": "swilgt -g \"logtalk_load(diagrams(loader)),logtalk_load('{fileAbsPath | posix}'),os::change_directory('{fileDirAbsPath|posix}'),diagrams::directory('{fileDirAbsPath|posix}'),halt\" 2>&1 && cd {fileDirAbsPath|posix} && for f in *.dot; do dot -Tsvg \"$f\" > \"$(basename \"$f\" .dot).svg\" || continue; done",
+      "arguments": [],
+      "cwd": null,
+      "inputDialogs": [],
+      "env": {},
+      "keystroke": "cmd-6",
+      "stream": false,
+      "outputTarget": "panel",
+      "outputBufferSize": 80000,
+      "maxCompleted": 3,
+      "autoShowOutput": true,
+      "autoHideOutput": false,
+      "scrollLockEnabled": false,
+      "singular": true,
+      "promptToSave": true,
+      "saveOption": "referenced",
+      "patterns": [],
+      "successOutput": "{stdout}",
+      "errorOutput": "{stdout}\n{stderr}",
+      "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "successMessage": "Executed : {fullCommand}",
+      "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "menus": [
+        "Logtalk"
+      ]
     }
   ]
 }
