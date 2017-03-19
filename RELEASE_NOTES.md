@@ -30,8 +30,7 @@ Logtalk compiler and runtime
 * IMPROVED: Simplified code generated for multifile predicates.
 
 * FIXED: Regression in previous release in the compilation of multifile
-predicate clauses defined in categories that make calls to the `::/1-2`
-control constructs.
+predicate clauses that make calls to the `::/1-2` control constructs.
 
 Documentation
 -------------
@@ -52,6 +51,8 @@ and `type::check/2` predicates.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
+
+* UPDATED: IntelliJ IDEA plug-in. Contributed by Sergio Castro.
 
 * ADDED: Sample command for generating SVG diagrams from within the Atom text
 editor.
