@@ -47,6 +47,12 @@ and `type::check/2` predicates.
 
 * FIXED: Mode templates of some of the `java_utils_protocol` predicates.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Sample command for generating HTML documentation from within the Atom
+text editor.
+
 
 3.10.2 - March 13, 2017
 =======================
