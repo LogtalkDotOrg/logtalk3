@@ -10087,17 +10087,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% clause for an entity multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, _, BeginLine-EndLine),
-		'$lgt_execution_context_this_entity'(ExCtx, _, Other),
+		term_variables(Other, OtherVars),
+		term_variables(Head, HeadVars),
+		'$lgt_intersection'(OtherVars, HeadVars, CommonVars),
+		(	CommonVars == [] ->
+			true
+		;	% parametric entity sharing variables with the clause head
+			'$lgt_execution_context_this_entity'(ExCtx, _, Other)
+		),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
 		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
-	;	Head = ':'(Other, _) ->
+	;	Head = ':'(_, _) ->
 		% clause for a module multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, _, BeginLine-EndLine),
-		'$lgt_execution_context_this_entity'(ExCtx, _, Other),
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
@@ -10125,13 +10131,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Fact = Other::_ ->
 		% fact for an entity multifile predicate
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(Ctx, _, _, Other, _, _, _, _, _, _, ExCtx, _, _, _),
-		'$lgt_execution_context_this_entity'(ExCtx, _, Other)
-	;	Fact = ':'(Other, _) ->
+		term_variables(Other, OtherVars),
+		term_variables(Fact, FactVars),
+		'$lgt_intersection'(OtherVars, FactVars, CommonVars),
+		(	CommonVars == [] ->
+			true
+		;	% parametric entity sharing variables with the fact
+			'$lgt_comp_ctx'(Ctx, _, _, Other, _, _, _, _, _, _, ExCtx, _, _, _),
+			'$lgt_execution_context_this_entity'(ExCtx, _, Other)
+		)
+	;	Fact = ':'(_, _) ->
 		% fact for a module multifile predicate
-		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(Ctx, _, _, Other, _, _, _, _, _, _, ExCtx, _, _, _),
-		'$lgt_execution_context_this_entity'(ExCtx, _, Other)
+		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	;	% other facts
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	),
