@@ -127,7 +127,7 @@ OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | {COMBINABLE_OPERATOR_SYMB
 
     {DOUBLE_QUOTE}                                  { yybegin(DOUBLE_QUOTE_STRING);}
 
-    {UNQUOTED_ATOM}  /{LPAREN}                      { yybegin(SENTENCE); return LogtalkTypes.UNQUOTED_COMPOUND_NAME; }
+    {UNQUOTED_ATOM}/{LPAREN}                        { yybegin(SENTENCE); return LogtalkTypes.UNQUOTED_COMPOUND_NAME; }
 
     {LPAREN}                                        { yybegin(SENTENCE); return LogtalkTypes.LPAREN; }
 
@@ -200,7 +200,7 @@ OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | {COMBINABLE_OPERATOR_SYMB
 
     "\\" {SINGLE_QUOTE}                             {}
 
-    {SINGLE_QUOTE}  /{LPAREN}                       {
+    {SINGLE_QUOTE}/{LPAREN}                         {
                                                         yybegin(SENTENCE);
                                                         return LogtalkTypes.QUOTED_COMPOUND_NAME;
                                                     }
