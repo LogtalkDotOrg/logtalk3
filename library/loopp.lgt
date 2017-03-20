@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(loopp).
 
 	:- info([
-		version is 1.21,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2009/5/19,
+		date is 2017/03/20,
 		comment is 'Loop control constructs protocol.'
 	]).
 
@@ -50,6 +49,14 @@
 	:- info(foreach/3, [
 		comment is 'For each element Element in List call Goal.',
 		argnames is ['Element', 'List', 'Goal']
+	]).
+
+	:- public(foreach/4).
+	:- meta_predicate(foreach(*, *, *, 0)).
+	:- mode(foreach(@var, @var, +list(term), @callable), zero_or_one).
+	:- info(foreach/4, [
+		comment is 'For each element Element in List at position Index call Goal. Index starts at 1.',
+		argnames is ['Element', 'Index', 'List', 'Goal']
 	]).
 
 	:- public(forto/3).

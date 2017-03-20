@@ -40,6 +40,8 @@ Documentation
 Library
 -------
 
+* ADDED: Predicate `loop::foreach/4`. Suggested by Xin Wang.
+
 * ADDED: Type `predicate` to the library `type` object for checking for an
 object public predicate.
 

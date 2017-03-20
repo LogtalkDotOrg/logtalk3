@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(loop,
 	implements(loopp)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2016/05/13,
+		date is 2017/03/20,
 		comment is 'Loop control structures predicates.'
 	]).
 
@@ -43,14 +42,25 @@
 		whiledo(Condition, Action).
 
 	:- meta_predicate(foreach(*, *, 0)).
-	foreach(Count, List, Goal) :-
-		foreach_inv(List, Count, Goal).
+	foreach(Element, List, Goal) :-
+		foreach_inv(List, Element, Goal).
 
 	:- meta_predicate(foreach_inv(*, *, 0)).
 	foreach_inv([], _, _).
-	foreach_inv([Element| List], Count, Goal) :-
-		\+ \+ (Count = Element, call(Goal)),
-		foreach_inv(List, Count, Goal).
+	foreach_inv([Head| Tail], Element, Goal) :-
+		\+ \+ (Element = Head, call(Goal)),
+		foreach_inv(Tail, Element, Goal).
+
+	:- meta_predicate(foreach(*, *, *, 0)).
+	foreach(Element, Index, List, Goal) :-
+		foreach_inv(List, Element, 1, Index, Goal).
+
+	:- meta_predicate(foreach_inv(*, *, *, *, 0)).
+	foreach_inv([], _, _, _, _).
+	foreach_inv([Head| Tail], Element, Current, Index, Goal) :-
+		\+ \+ (Element = Head, Index = Current, call(Goal)),
+		Next is Current + 1,
+		foreach_inv(Tail, Element, Next, Index, Goal).
 
 	:- meta_predicate(forto_aux(*, *, *, *, 0)).
 	forto_aux(Count, First, Last, Increment, Goal) :-
