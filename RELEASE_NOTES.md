@@ -24,7 +24,10 @@ RELEASE NOTES
 3.10.4 - April ??, 2017
 =======================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* UPDATED: IntelliJ IDEA plug-in. Contributed by Sergio Castro.
 
 
 3.10.3 - March 20, 2017
