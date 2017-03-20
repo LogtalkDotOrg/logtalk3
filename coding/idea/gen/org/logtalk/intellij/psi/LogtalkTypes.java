@@ -9,10 +9,12 @@ import org.logtalk.intellij.psi.impl.*;
 public interface LogtalkTypes {
 
   IElementType ATOM = new LogtalkElementType("ATOM");
+  IElementType ATOM_KEYWORD = new LogtalkElementType("ATOM_KEYWORD");
   IElementType BASIC_TERM = new LogtalkElementType("BASIC_TERM");
   IElementType BRACED_BLOCK = new LogtalkElementType("BRACED_BLOCK");
   IElementType COMPOUND = new LogtalkElementType("COMPOUND");
   IElementType COMPOUND_NAME = new LogtalkElementType("COMPOUND_NAME");
+  IElementType COMPOUND_NAME_KEYWORD = new LogtalkElementType("COMPOUND_NAME_KEYWORD");
   IElementType CUSTOM_BINARY_OPERATION = new LogtalkElementType("CUSTOM_BINARY_OPERATION");
   IElementType CUSTOM_LEFT_OPERATION = new LogtalkElementType("CUSTOM_LEFT_OPERATION");
   IElementType KNOWN_BINARY_OPERATOR = new LogtalkElementType("KNOWN_BINARY_OPERATOR");
@@ -61,6 +63,9 @@ public interface LogtalkTypes {
        if (type == ATOM) {
         return new LogtalkAtomImpl(node);
       }
+      else if (type == ATOM_KEYWORD) {
+        return new LogtalkAtomKeywordImpl(node);
+      }
       else if (type == BASIC_TERM) {
         return new LogtalkBasicTermImpl(node);
       }
@@ -72,6 +77,9 @@ public interface LogtalkTypes {
       }
       else if (type == COMPOUND_NAME) {
         return new LogtalkCompoundNameImpl(node);
+      }
+      else if (type == COMPOUND_NAME_KEYWORD) {
+        return new LogtalkCompoundNameKeywordImpl(node);
       }
       else if (type == CUSTOM_BINARY_OPERATION) {
         return new LogtalkCustomBinaryOperationImpl(node);

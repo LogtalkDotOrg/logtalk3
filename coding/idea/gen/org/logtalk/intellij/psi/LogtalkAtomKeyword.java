@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LogtalkAtom extends PsiElement {
-
-  @Nullable
-  LogtalkAtomKeyword getAtomKeyword();
+public interface LogtalkAtomKeyword extends PsiElement {
 
 }

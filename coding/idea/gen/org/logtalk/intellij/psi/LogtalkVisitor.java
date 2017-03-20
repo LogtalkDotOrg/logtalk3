@@ -11,6 +11,10 @@ public class LogtalkVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAtomKeyword(@NotNull LogtalkAtomKeyword o) {
+    visitPsiElement(o);
+  }
+
   public void visitBasicTerm(@NotNull LogtalkBasicTerm o) {
     visitPsiElement(o);
   }
@@ -24,6 +28,10 @@ public class LogtalkVisitor extends PsiElementVisitor {
   }
 
   public void visitCompoundName(@NotNull LogtalkCompoundName o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCompoundNameKeyword(@NotNull LogtalkCompoundNameKeyword o) {
     visitPsiElement(o);
   }
 

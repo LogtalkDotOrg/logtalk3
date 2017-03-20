@@ -11,25 +11,19 @@ import static org.logtalk.intellij.psi.LogtalkTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.logtalk.intellij.psi.*;
 
-public class LogtalkValidOperatorImpl extends ASTWrapperPsiElement implements LogtalkValidOperator {
+public class LogtalkCompoundNameKeywordImpl extends ASTWrapperPsiElement implements LogtalkCompoundNameKeyword {
 
-  public LogtalkValidOperatorImpl(ASTNode node) {
+  public LogtalkCompoundNameKeywordImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LogtalkVisitor visitor) {
-    visitor.visitValidOperator(this);
+    visitor.visitCompoundNameKeyword(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof LogtalkVisitor) accept((LogtalkVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public LogtalkAtomKeyword getAtomKeyword() {
-    return findChildByClass(LogtalkAtomKeyword.class);
   }
 
 }

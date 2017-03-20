@@ -2,11 +2,13 @@ package org.logtalk.intellij.editor;
 
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
+import static org.logtalk.intellij.psi.LogtalkElementType.isAtomKeyword;
+import static org.logtalk.intellij.psi.LogtalkElementType.isCompoundNameKeyword;
+import static org.logtalk.intellij.psi.LogtalkElementType.isOperator;
 import static org.logtalk.intellij.psi.LogtalkElementType.isParenthesis;
 
 import org.jetbrains.annotations.NotNull;
 import org.logtalk.intellij.LogtalkLexerAdapter;
-import org.logtalk.intellij.psi.LogtalkPsiUtil;
 import org.logtalk.intellij.psi.LogtalkTypes;
 
 import com.intellij.lexer.Lexer;
@@ -14,7 +16,6 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
@@ -113,7 +114,9 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(LogtalkTypes.CUT)) {
+        if (isOperator(tokenType)) {
+            return OPERATOR_KEYS;
+        } else if (tokenType.equals(LogtalkTypes.CUT)) {
             return CUT_KEYS;
         } else if (tokenType.equals(LogtalkTypes.STRING)) {
             return STRING_KEYS;
@@ -133,10 +136,14 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
             return QUOTED_ATOM_KEYS;
         } else if (tokenType.equals(LogtalkTypes.UNQUOTED_ATOM)) {
             return UNQUOTED_ATOM_KEYS;
+        } else if (isAtomKeyword(tokenType)) {
+            return KEYWORD_ATOM_KEYS;
         } else if (tokenType.equals(LogtalkTypes.QUOTED_COMPOUND_NAME)) {
             return QUOTED_COMPOUND_NAME_KEYS;
         } else if (tokenType.equals(LogtalkTypes.UNQUOTED_COMPOUND_NAME)) {
             return UNQUOTED_COMPOUND_NAME_KEYS;
+        } else if (isCompoundNameKeyword(tokenType)) {
+            return KEYWORD_COMPOUND_NAME_KEYS;
         } else if (tokenType.equals(LogtalkTypes.ANONYMOUS_VARIABLE)) {
             return ANONYMOUS_VARIABLE_KEYS;
         } else if (tokenType.equals(LogtalkTypes.NAMED_VARIABLE)) {
@@ -152,15 +159,4 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
         }
     }
 
-    public TextAttributesKey[] getTokenHighlights(PsiElement element) {
-        if (LogtalkPsiUtil.isAtomKeyword(element)) {
-            return KEYWORD_ATOM_KEYS;
-        } else if (LogtalkPsiUtil.isCompoundNameKeyword(element)) {
-            return KEYWORD_COMPOUND_NAME_KEYS;
-        } else if (LogtalkPsiUtil.isOperator(element)){
-            return OPERATOR_KEYS;
-        } else {
-            return getTokenHighlights(LogtalkPsiUtil.getElementType(element));
-        }
-    }
 }
