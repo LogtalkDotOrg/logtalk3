@@ -26,10 +26,4 @@ public class LogtalkAtomImpl extends ASTWrapperPsiElement implements LogtalkAtom
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public LogtalkAtomKeyword getAtomKeyword() {
-    return findChildByClass(LogtalkAtomKeyword.class);
-  }
-
 }
