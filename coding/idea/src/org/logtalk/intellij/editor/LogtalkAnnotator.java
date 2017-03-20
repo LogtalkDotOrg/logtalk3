@@ -1,11 +1,9 @@
 package org.logtalk.intellij.editor;
 
-
-import static org.logtalk.intellij.psi.LogtalkElementType.getElementType;
-import static org.logtalk.intellij.psi.LogtalkElementType.isAtomKeyword;
-import static org.logtalk.intellij.psi.LogtalkElementType.isCompoundNameKeyword;
-import static org.logtalk.intellij.psi.LogtalkElementType.isKnownBinaryOperator;
-import static org.logtalk.intellij.psi.LogtalkElementType.isKnownLeftOperator;
+import static org.logtalk.intellij.psi.LogtalkPsiUtil.isAtomKeyword;
+import static org.logtalk.intellij.psi.LogtalkPsiUtil.isCompoundNameKeyword;
+import static org.logtalk.intellij.psi.LogtalkPsiUtil.isKnownBinaryOperator;
+import static org.logtalk.intellij.psi.LogtalkPsiUtil.isKnownLeftOperator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,9 +13,7 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
 
 public class LogtalkAnnotator implements Annotator {
 
@@ -28,8 +24,8 @@ public class LogtalkAnnotator implements Annotator {
         }
     }
 
-    private static void highlightTokens(PsiElement element, AnnotationHolder holder, SyntaxHighlighter highlighter) {
-        TextAttributesKey[] keys = highlighter.getTokenHighlights(getElementType(element));
+    private static void highlightTokens(PsiElement element, AnnotationHolder holder, LogtalkSyntaxHighlighter highlighter) {
+        TextAttributesKey[] keys = highlighter.getTokenHighlights(element);
         for (TextAttributesKey key : keys) {
             Annotation annotation = holder.createInfoAnnotation(element.getNode(), getMessage(element));
             TextAttributes attributes = EditorColorsManager.getInstance().getGlobalScheme().getAttributes(key);
@@ -38,22 +34,20 @@ public class LogtalkAnnotator implements Annotator {
     }
 
     private static boolean shouldAnnotate(PsiElement element) {
-        IElementType elementType = getElementType(element);
-        return isKnownBinaryOperator(elementType) ||
-                isKnownLeftOperator(elementType) ||
-                isCompoundNameKeyword(elementType) ||
-                isAtomKeyword(elementType);
+        return isKnownBinaryOperator(element) ||
+                isKnownLeftOperator(element) ||
+                isCompoundNameKeyword(element) ||
+                isAtomKeyword(element);
     }
 
     private static String getMessage(PsiElement element) {
-        IElementType elementType = getElementType(element);
-        if (isKnownBinaryOperator(elementType)) {
+        if (isKnownBinaryOperator(element)) {
             return "Binary operator";
-        } else if (isKnownLeftOperator(elementType)) {
+        } else if (isKnownLeftOperator(element)) {
             return "Left operator";
-        } else if (isCompoundNameKeyword(elementType)) {
+        } else if (isCompoundNameKeyword(element)) {
             return "Functor keyword";
-        } else if (isAtomKeyword(elementType)) {
+        } else if (isAtomKeyword(element)) {
             return "Atom keyword";
         } else {
             throw new AssertionError();

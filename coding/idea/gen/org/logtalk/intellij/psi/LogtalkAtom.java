@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface LogtalkAtom extends PsiElement {
 
-  @Nullable
-  LogtalkAtomKeyword getAtomKeyword();
-
 }

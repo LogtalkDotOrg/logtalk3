@@ -26,10 +26,4 @@ public class LogtalkCompoundNameImpl extends ASTWrapperPsiElement implements Log
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public LogtalkCompoundNameKeyword getCompoundNameKeyword() {
-    return findChildByClass(LogtalkCompoundNameKeyword.class);
-  }
-
 }
