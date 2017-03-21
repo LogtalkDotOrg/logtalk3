@@ -10,7 +10,7 @@
 <title>library</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-2394 4658,-2394 4658,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2017/03/20, 11:11</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2017/03/21, 19:04</text>
 <g id="clust1" class="cluster">
 <title>cluster_library_library</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
@@ -622,8 +622,8 @@
 <g id="clust95" class="cluster">
 <title>cluster_file_/Users/pmoura/logtalk/library/java_protocols.lgt</title>
 <g id="a_clust95"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_protocols.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/java_protocols.lgt">
-<path fill="#fffafa" stroke="#8b8989" d="M217,-1433C217,-1433 547,-1433 547,-1433 553,-1433 559,-1439 559,-1445 559,-1445 559,-1640 559,-1640 559,-1646 553,-1652 547,-1652 547,-1652 217,-1652 217,-1652 211,-1652 205,-1646 205,-1640 205,-1640 205,-1445 205,-1445 205,-1439 211,-1433 217,-1433"/>
-<text text-anchor="middle" x="267.5" y="-1440" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">java_protocols.lgt</text>
+<path fill="#fffafa" stroke="#8b8989" d="M217,-1423C217,-1423 547,-1423 547,-1423 553,-1423 559,-1429 559,-1435 559,-1435 559,-1650 559,-1650 559,-1656 553,-1662 547,-1662 547,-1662 217,-1662 217,-1662 211,-1662 205,-1656 205,-1650 205,-1650 205,-1435 205,-1435 205,-1429 211,-1423 217,-1423"/>
+<text text-anchor="middle" x="267.5" y="-1430" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">java_protocols.lgt</text>
 </a>
 </g>
 </g>
@@ -3605,58 +3605,64 @@
 <g id="node79" class="node">
 <title>java_utils_protocol</title>
 <g id="a_node79"><a xlink:href="http://logtalk.org/library/java_utils_protocol_0.html" xlink:title="http://logtalk.org/library/java_utils_protocol_0.html">
-<polygon fill="#7fffd4" stroke="#000000" points="363,-1642 215,-1642 215,-1462 369,-1462 369,-1636 363,-1642"/>
-<polyline fill="none" stroke="#000000" points="363,-1642 363,-1636 "/>
-<polyline fill="none" stroke="#000000" points="369,-1636 363,-1636 "/>
-<text text-anchor="start" x="223" y="-1629.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="229" y="-1629.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">java_utils_protocol</text>
-<text text-anchor="start" x="355" y="-1629.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<polygon fill="#7fffd4" stroke="#000000" points="363,-1652 215,-1652 215,-1452 369,-1452 369,-1646 363,-1652"/>
+<polyline fill="none" stroke="#000000" points="363,-1652 363,-1646 "/>
+<polyline fill="none" stroke="#000000" points="369,-1646 363,-1646 "/>
+<text text-anchor="start" x="223" y="-1639.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="229" y="-1639.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">java_utils_protocol</text>
+<text text-anchor="start" x="355" y="-1639.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="223" y="-1628.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="275" y="-1629.4" font-family="Courier,monospace" font-size="7.00" fill="#000000">protocol</text>
+<text text-anchor="start" x="355" y="-1628.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1618.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="275" y="-1619.4" font-family="Courier,monospace" font-size="7.00" fill="#000000">protocol</text>
-<text text-anchor="start" x="355" y="-1618.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1608.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="246" y="-1608.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">value_reference/2</text>
+<text text-anchor="start" x="355" y="-1608.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1598.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="246" y="-1598.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">value_reference/2</text>
+<text text-anchor="start" x="275.5" y="-1598.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">true/1</text>
 <text text-anchor="start" x="355" y="-1598.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1588.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="275.5" y="-1588.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">true/1</text>
+<text text-anchor="start" x="273" y="-1588.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">false/1</text>
 <text text-anchor="start" x="355" y="-1588.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1578.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="273" y="-1578.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">false/1</text>
+<text text-anchor="start" x="275.5" y="-1578.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">void/1</text>
 <text text-anchor="start" x="355" y="-1578.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1568.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="275.5" y="-1568.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">void/1</text>
+<text text-anchor="start" x="275.5" y="-1568.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">null/1</text>
 <text text-anchor="start" x="355" y="-1568.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1558.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="275.5" y="-1558.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">null/1</text>
+<text text-anchor="start" x="267.5" y="-1558.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_true/1</text>
 <text text-anchor="start" x="355" y="-1558.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1548.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="267.5" y="-1548.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_true/1</text>
+<text text-anchor="start" x="264.5" y="-1548.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_false/1</text>
 <text text-anchor="start" x="355" y="-1548.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1538.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="264.5" y="-1538.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_false/1</text>
+<text text-anchor="start" x="267.5" y="-1538.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_void/1</text>
 <text text-anchor="start" x="355" y="-1538.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1528.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="267.5" y="-1528.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_void/1</text>
+<text text-anchor="start" x="267.5" y="-1528.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_null/1</text>
 <text text-anchor="start" x="355" y="-1528.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1518.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="267.5" y="-1518.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">is_null/1</text>
+<text text-anchor="start" x="248.5" y="-1518.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">terms_to_array/2</text>
 <text text-anchor="start" x="355" y="-1518.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1508.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="248.5" y="-1508.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">terms_to_array/2</text>
+<text text-anchor="start" x="248.5" y="-1508.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">array_to_terms/3</text>
 <text text-anchor="start" x="355" y="-1508.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1498.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="248.5" y="-1498.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">array_to_terms/3</text>
+<text text-anchor="start" x="248.5" y="-1498.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">array_to_terms/2</text>
 <text text-anchor="start" x="355" y="-1498.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1488.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="248.5" y="-1488.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">array_to_terms/2</text>
+<text text-anchor="start" x="259.5" y="-1488.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">array_list/2</text>
 <text text-anchor="start" x="355" y="-1488.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1478.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="259.5" y="-1478.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">array_list/2</text>
+<text text-anchor="start" x="243" y="-1478.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">iterator_element/2</text>
 <text text-anchor="start" x="355" y="-1478.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 <text text-anchor="start" x="223" y="-1468.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
-<text text-anchor="start" x="243" y="-1468.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">iterator_element/2</text>
+<text text-anchor="start" x="243" y="-1468.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">decode_exception/2</text>
 <text text-anchor="start" x="355" y="-1468.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="223" y="-1458.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
+<text text-anchor="start" x="243" y="-1458.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">decode_exception/3</text>
+<text text-anchor="start" x="355" y="-1458.8" font-family="Courier,monospace" font-size="9.00" fill="#000000"> </text>
 </a>
 </g>
 </g>
@@ -3752,8 +3758,8 @@
 <g id="edge61" class="edge">
 <title>java&#45;&gt;java_utils_protocol</title>
 <g id="a_edge61"><a xlink:title="implements">
-<path fill="none" stroke="#000000" d="M344.9118,-164.0126C328.1799,-190.7386 300,-243.0212 300,-292 300,-292 300,-292 300,-1216 300,-1296.0407 297.703,-1386.7763 295.5707,-1453.7641"/>
-<ellipse fill="#000000" stroke="#000000" cx="295.4404" cy="-1457.8154" rx="4" ry="4"/>
+<path fill="none" stroke="#000000" d="M344.9118,-164.0126C328.1799,-190.7386 300,-243.0212 300,-292 300,-292 300,-292 300,-1216 300,-1291.9611 297.9312,-1377.5546 295.8977,-1443.3406"/>
+<ellipse fill="#000000" stroke="#000000" cx="295.7623" cy="-1447.6725" rx="4" ry="4"/>
 </a>
 </g>
 <text text-anchor="start" x="300" y="-771.8" font-family="Courier,monospace" font-size="9.00" fill="#000000">implements</text>

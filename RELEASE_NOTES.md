@@ -24,6 +24,11 @@ RELEASE NOTES
 3.10.4 - April ??, 2017
 =======================
 
+Library
+-------
+
+* ADDED: Predicates `java::decode_exception/2-3` for decoding Java exceptions.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

@@ -68,9 +68,9 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/03/16,
+		date is 2017/03/21,
 		comment is 'Abstract interface to Java utility predicates.'
 	]).
 
@@ -171,6 +171,20 @@
 	:- info(iterator_element/2, [
 		comment is 'Enumerates, by backtracking, all iterator elements.',
 		argnames is ['Iterator', 'Element']
+	]).
+
+	:- public(decode_exception/2).
+	:- mode(decode_exception(+callable, -atom), zero_or_one).
+	:- info(decode_exception/2, [
+		comment is 'Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.',
+		argnames is ['Exception', 'Cause']
+	]).
+
+	:- public(decode_exception/3).
+	:- mode(decode_exception(+callable, -atom, -list(atom)), zero_or_one).
+	:- info(decode_exception/3, [
+		comment is 'Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.',
+		argnames is ['Exception', 'Cause', 'StackTrace']
 	]).
 
 :- end_protocol.

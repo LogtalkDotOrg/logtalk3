@@ -89,15 +89,15 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/02/04,
+		date is 2017/03/21,
 		comment is 'Abstract interface to JPL API utility predicates.'
 	]).
 
 	:- use_module(jpl, [
 		jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,
-		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1,
+		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_ref/1,
 		jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
 		jpl_iterator_element/2,
 		jpl_call/4
@@ -158,5 +158,35 @@
 
 	iterator_element(Iterator, Element) :-
 		jpl_iterator_element(Iterator, Element).
+
+	decode_exception(error(java_exception(Exception),_), Cause) :-
+		!,
+		decode_exception(Exception, Cause).
+	decode_exception(java_exception(Exception), Cause) :-
+		!,
+		decode_exception(Exception, Cause).
+	decode_exception(Exception, Cause) :-
+		jpl_is_ref(Exception),
+		\+ jpl_is_null(Exception),
+		jpl_call(Exception, getCause, [], Cause).
+
+	decode_exception(error(java_exception(Exception),_), Cause, StackTrace) :-
+		!,
+		decode_exception(Exception, Cause, StackTrace).
+	decode_exception(java_exception(Exception), Cause, StackTrace) :-
+		!,
+		decode_exception(Exception, Cause, StackTrace).
+	decode_exception(Exception, Cause, StackTrace) :-
+		jpl_is_ref(Exception),
+		\+ jpl_is_null(Exception),
+		jpl_call(Exception, getCause, [], Cause),
+		jpl_call(Exception, getStackTrace, [], StackTrace0),
+		jpl_array_to_list(StackTrace0, StackTrace1),
+		decode_stack_trace_elements(StackTrace1, StackTrace).
+
+	decode_stack_trace_elements([], []).
+	decode_stack_trace_elements([Element| Elements], [String| Strings]) :-
+		jpl_call(Element, toString, [], String),
+		decode_stack_trace_elements(Elements, Strings).
 
 :- end_object.
