@@ -36,6 +36,11 @@ Library
 
 * ADDED: Predicates `java::decode_exception/2-3` for decoding Java exceptions.
 
+Tests
+-----
+
+* ADDED: Missing unit test for the `[]/1` message delegation control construct.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
