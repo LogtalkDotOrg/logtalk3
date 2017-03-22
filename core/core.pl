@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 4, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 4, rc2)).
 
 
 
@@ -16391,7 +16391,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		) ->
 		true
 	;	% unexpected compilation failure
-		retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 		'$lgt_compile_predicate_calls_error_handler'(Term, system_error)
 	).
 
@@ -16407,7 +16406,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_predicate_calls_error_handler'(Term, Error) :-
-	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 	'$lgt_internal_term_to_user_term'(Term, UserTerm),
 	throw(error(Error,UserTerm)).
 

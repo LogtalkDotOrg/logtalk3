@@ -24,6 +24,13 @@ RELEASE NOTES
 3.10.4 - April ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the compiler second stage error handling which could result
+in a silent source file compilation failure without an error message being
+printed. Thanks to Xin Wang for the bug report.
+
 Library
 -------
 
