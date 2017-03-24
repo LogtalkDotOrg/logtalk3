@@ -28,6 +28,12 @@ To install, copy the `pmoura.logtalk-0.0` folder to the following folder:
 
 (create the folder if it does not exist).
 
+The `logtalk.json` file defines snippets for defining entities and predicates.
+To install it, select the `Preferences > User Snippets` menu item and choose
+`Logtalk` in the resulting menu. This will open a `logtalk.json` file in the
+correct location. Replace or update the contents of this file with the file
+provided here.
+
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces); you may set the tab width on the editor preference
