@@ -51,6 +51,8 @@ IDEs, text editors, and syntax highlighters support
 
 * UPDATED: IntelliJ IDEA plug-in. Contributed by Sergio Castro.
 
+* FIXED: Renamed Visual Studio Code directory to `vscode`.
+
 
 3.10.3 - March 20, 2017
 =======================
