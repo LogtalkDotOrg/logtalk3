@@ -141,4 +141,18 @@
 	) :-
 		create_category(_, [], [uses(list,[member/2])], [member(H, [H| _])]).
 
+	% existential quantifier outside bagof/3 and setof/3 calls
+
+	throws(
+		object_existential_quantifier_misuse,
+		error(existence_error(procedure, (^)/2),_)
+	) :-
+		create_object(_, [], [], [(foo(X) :- X^bar(X))]).
+
+	throws(
+		category_existential_quantifier_misuse,
+		error(existence_error(procedure, (^)/2),_)
+	) :-
+		create_category(_, [], [], [(foo(X) :- X^bar(X))]).
+
 :- end_object.
