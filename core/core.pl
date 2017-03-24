@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 4, rc2)).
+'$lgt_version_data'(logtalk(3, 10, 4, rc3)).
 
 
 
@@ -14814,7 +14814,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_source_file_context'(Ctx, File, Lines) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		File = nil, Lines = 0-0
-	;	'$lgt_pp_term_variable_names_file_lines_'(_, _, File, Lines)
+	;	'$lgt_pp_term_variable_names_file_lines_'(_, _, File, Lines) ->
+		true
+	;	% e.g. when compiling auxiliary clauses at runtime
+		File = nil, Lines = 0-0
 	).
 
 

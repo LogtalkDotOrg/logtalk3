@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 in a silent source file compilation failure without an error message being
 printed. Thanks to Xin Wang for the bug report.
 
+* FIXED: Compiler bug when reporting an error for calls to the entity creation
+predicates that resulted in a generic error instead of the specific error.
+
 Library
 -------
 
