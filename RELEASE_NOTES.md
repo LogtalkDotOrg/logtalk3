@@ -44,6 +44,8 @@ Tests
 
 * ADDED: Missing unit test for the `[]/1` message delegation control construct.
 
+* ADDED: Tests to the `errors` example to check for expected compiler errors.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
