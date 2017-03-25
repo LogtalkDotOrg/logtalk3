@@ -25,7 +25,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\f3logtalk_tester\f1 is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \f2tester.lgt\f1 and \f2tester.logtalk\f1 source files. In case of failed unit tests, timed out test sets, or crashed test sets, this script returns an exit code of \f21\f1.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \fItester.lgt\fR and \fItester.logtalk\fR source files. In case of failed unit tests, timed out test sets, or crashed test sets, this script returns an exit code of \fI1\fR.
 
 .SH OPTIONS
 .TP
@@ -33,19 +33,19 @@ logtalk_tester \- Logtalk script for automating running unit tests
 Print script version.
 .TP
 .BI \-p
-Back-end Prolog compiler. Default is SWI-Prolog. The following identifiers are used: B-Prolog - \f2b\f1, CxProlog - \f2cx\f1, ECLiPSe - \f2eclipse\f1, GNU Prolog - \f2gnu\f1, JIProlog - \f2ji\f1, Lean Prolog - \f2lean\f1, Qu-Prolog - \f2qp\f1, SICStus Prolog - \f2sicstus\f1, SWI-Prolog - \f2swi\f1, SWI-Prolog with Logtalk pack - \f2swipack\f1, XSB - \f2xsb\f1, XSB-MT - \f2xsbmt\f1, YAP - \f2yap\f1.
+Back-end Prolog compiler. Default is SWI-Prolog. The following identifiers are used: B-Prolog - \fIb\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, JIProlog - \fIji\fR, Lean Prolog - \fIlean\fR, Qu-Prolog - \fIqp\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, XSB - \fIxsb\fR, XSB-MT - \fIxsbmt\fR, YAP - \fIyap\fR.
 .TP
 .BI \-m
-Compilation mode. Default is \f2normal\f1. Possible values are \f2normal\f1, \f2debug\f1, and \f2all\f1.
+Compilation mode. Default is \fInormal\fR. Possible values are \fInormal\fR, \fIdebug\fR, and \fIall\fR.
 .TP
 .BI \-f
-Format for writing the test results. Default is \f2default\f1. Possible values are \f2default\f1, \f2tap\f1, and \f2xunit\f1.
+Format for writing the test results. Default is \fIdefault\fR. Possible values are \fIdefault\fR, \fItap\fR, and \fIxunit\fR.
 .TP
 .BI \-d
-Directory to store the test results. Default is the local \f2./logtalk_tester_logs\f1 directory.
+Directory to store the test results. Default is the local \fI./logtalk_tester_logs\fR directory.
 .TP
 .BI \-t
-Timeout in seconds for running each test set. Default is \f20\f1; i.e. disabled.
+Timeout in seconds for running each test set. Default is \fI0\fR; i.e. disabled.
 .TP
 .BI \-s
 Path prefix to supress when printing test suite and test result paths. Default is the empty string.
@@ -72,7 +72,7 @@ Logtalk source file used for printing the Logtalk and back-end Prolog compiler v
 .SH "SEE ALSO"
 The Logtalk website at <http://logtalk.org/>
 .PP
-The Logtalk User and Reference Manuals at \f2$LOGTALKHOME/manuals/index.html\f1
+The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR
 
 .SH AUTHOR
 Paulo Moura <pmoura@logtalk.org>

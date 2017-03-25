@@ -34,6 +34,11 @@ printed. Thanks to Xin Wang for the bug report.
 * FIXED: Compiler bug when reporting an error for calls to the entity creation
 predicates that resulted in a generic error instead of the specific error.
 
+Documentation
+-------------
+
+* UPDATED: Formatting commands in `man` pages for better conversion to HTML.
+
 Library
 -------
 
