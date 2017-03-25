@@ -26,20 +26,14 @@ To install, copy the `pmoura.logtalk-0.0` folder to the following folder:
 
 	~/.vscode/extensions
 
-(create the folder if it does not exist).
-
-The `logtalk.json` file defines snippets for defining entities and predicates.
-To install it, select the `Preferences > User Snippets` menu item and choose
-`Logtalk` in the resulting menu. This will open a `logtalk.json` file in the
-correct location. Replace or update the contents of this file with the file
-provided here.
+(create the folder if it does not exist). This extension includes support
+for syntax highlighting and code folding. Snippets are also provided for
+entities and predicate declarations. In the case of entities, the defined
+triggers are `object`, `class`, `instance`, `protocol`, and `category`.
+In the case of predicates, the defined triggers are `public`, `protected`,
+and `private`.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces); you may set the tab width on the editor preference
 panel.
-
-Snippets are provided for entities and entity predicates. In the case of
-entities, the defined triggers are: object, class, instance, protocol, and
-category. In the case of predicates, the defined triggers are: public,
-protected, and private.
