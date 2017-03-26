@@ -20,6 +20,8 @@ ________________________________________________________________________
 README
 ======
 
+[![Join the chat at https://gitter.im/LogtalkDotOrg/logtalk](https://badges.gitter.im/LogtalkDotOrg/logtalk.svg)](https://gitter.im/LogtalkDotOrg/logtalk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 ABOUT
 -----
