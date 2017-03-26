@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <http://logtalk.org/>
+%  
+%  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
-%
+%  
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%
+%  
 %      http://www.apache.org/licenses/LICENSE-2.0
-%
+%  
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,9 +21,9 @@
 :- object(slow_print).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/10/18,
+		date is 2017/03/26,
 		comment is 'Simple example for using the synchronized/1 predicate directive.'
 	]).
 
@@ -45,13 +45,13 @@
 		repeat,
 			slow_print_abc,
 			thread_sleep(0.2),
-			fail.
+		fail.
 
 	repeat_123 :-
 		repeat,
 			slow_print_123,
 			thread_sleep(0.2),
-			fail.
+		fail.
 
 	slow_print_abc :-
 		write(a), thread_sleep(0.2),
