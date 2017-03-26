@@ -21,9 +21,9 @@
 :- object(slow_print).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/10/18,
+		date is 2017/03/26,
 		comment is 'Simple example for using the synchronized/1 predicate directive.'
 	]).
 
@@ -42,10 +42,16 @@
 		)).
 
 	repeat_abc :-
-		repeat, slow_print_abc, fail.
+		repeat,
+			slow_print_abc,
+			thread_sleep(0.2),
+		fail.
 
 	repeat_123 :-
-		repeat, slow_print_123, fail.
+		repeat,
+			slow_print_123,
+			thread_sleep(0.2),
+		fail.
 
 	slow_print_abc :-
 		write(a), thread_sleep(0.2),
