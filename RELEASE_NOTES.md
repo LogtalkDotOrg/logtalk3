@@ -34,6 +34,13 @@ printed. Thanks to Xin Wang for the bug report.
 * FIXED: Compiler bug when reporting an error for calls to the entity creation
 predicates that resulted in a generic error instead of the specific error.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Declare the compiler internal `'$lgt_current_engine_'/4` predicate as
+`volatile` when using SWI-Prolog to avoid issues with saved states. Thanks to
+Douglas Miles for the bug report.
+
 Documentation
 -------------
 
