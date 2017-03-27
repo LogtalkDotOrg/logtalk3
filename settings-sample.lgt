@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on November 7, 2016
+%  Last updated on March 27, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -86,7 +86,7 @@
 
 /*
 :- initialization(
-	logtalk_load(help(loader), [report(off)])
+	logtalk_load(help(loader))
 ).
 */
 
