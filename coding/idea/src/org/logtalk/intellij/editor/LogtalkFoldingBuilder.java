@@ -77,7 +77,7 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
             }
         }*/
         //return "...";
-        return psi.getText();
+        return collapseWhiteSpace(psi.getText());
     }
 
     @Override
@@ -85,11 +85,13 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
         return false;
     }
 
+    private static String collapseWhiteSpace(String toReduce) {
+        return toReduce.replaceAll("[\\s]+", " ");
+    }
 
     private static boolean spanMultipleLines(@NotNull ASTNode node, @NotNull Document document) {
         final TextRange range = node.getTextRange();
         return document.getLineNumber(range.getStartOffset()) < document.getLineNumber(range.getEndOffset());
     }
-
 
 }
