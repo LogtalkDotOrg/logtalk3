@@ -8,6 +8,7 @@ import static org.logtalk.intellij.psi.decorator.SentenceDecorator.isSentence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +23,8 @@ import com.intellij.psi.PsiElement;
 public class LogtalkFoldingBuilder implements FoldingBuilder {
 
     public static final int LIST_SIZE_FOLDING_THRESHOLD = 3;
+
+    private static final Pattern WHITES = Pattern.compile("[\\s]+");
 
     @NotNull
     @Override
@@ -86,7 +89,7 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
     }
 
     private static String collapseWhiteSpace(String toReduce) {
-        return toReduce.replaceAll("[\\s]+", " ");
+        return WHITES.matcher(toReduce).replaceAll(" ");
     }
 
     private static boolean spanMultipleLines(@NotNull ASTNode node, @NotNull Document document) {
