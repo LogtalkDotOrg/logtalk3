@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.31,
+		version is 1.32,
 		author is 'Paulo Moura',
-		date is 2017/02/27,
+		date is 2017/03/30,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -531,7 +531,8 @@
 
 		file_exists(File) :-
 			expand_path(File, ExpandedPath),
-			{file_exists(ExpandedPath)}.
+			{file_exists(ExpandedPath),
+			 file_property(ExpandedPath, type(regular))}.
 
 		file_modification_time(File, Time) :-
 			expand_path(File, ExpandedPath),
@@ -1345,7 +1346,8 @@
 
 		file_exists(File) :-
 			expand_path(File, Path),
-			{file_exists(Path)}.
+			{file_exists(Path),
+			 file_property(Path, size_in_bytes, _)}.
 
 		file_modification_time(File, Time) :-
 			expand_path(File, Path),

@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.16,
+		version is 1.17,
 		author is 'Paulo Moura',
-		date is 2017/02/20,
+		date is 2017/03/30,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -114,7 +114,7 @@
 	:- public(file_exists/1).
 	:- mode(file_exists(+atom), zero_or_one).
 	:- info(file_exists/1, [
-		comment is 'True if the specified file exists (irrespective of type and file permissions).',
+		comment is 'True if the specified file exists and is a regular file (irrespective of file permissions).',
 		argnames is ['File']
 	]).
 

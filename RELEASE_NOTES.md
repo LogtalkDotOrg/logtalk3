@@ -46,10 +46,16 @@ Documentation
 
 * UPDATED: Formatting commands in `man` pages for better conversion to HTML.
 
+* FIXED: Documentation of the library `os::file_exists/1` predicate to clarify
+that it checks for regular files. Thanks to Xin Wang for the bug report.
+
 Library
 -------
 
 * ADDED: Predicates `java::decode_exception/2-3` for decoding Java exceptions.
+
+* FIXED: Definition of the `os::file_exists/1` predicate for B-Prolog and
+Quintus Prolog to ensure that the specified file is a regular file.
 
 Tests
 -----
