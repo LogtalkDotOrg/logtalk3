@@ -44,5 +44,9 @@ To install the latest version of this plugin in IntelliJ IDEA follow these steps
 Known issues
 ------------
 
-The grammar still needs some work. Particularly, it does not show as errors
+- The grammar still needs some work. Particularly, it does not show as errors
 few sentences that should not be considered valid.
+
+- Syntax errors may occur in well constructed terms that are very long 
+(e.g., a compound with a huge argument list or a list term with lots of elements).
+To fix it, [set the JVM option](https://intellij-support.jetbrains.com/hc/en-us/articles/206544869-Configuring-JVM-options-and-platform-properties) _grammar.kit.gpub.max.level_ to a bigger value than its default _1000_.
