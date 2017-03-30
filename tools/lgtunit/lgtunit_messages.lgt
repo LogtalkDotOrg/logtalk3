@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2016/08/22,
+		date is 2017/03/28,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -145,13 +145,19 @@
 	message_tokens(code_coverage_header) -->
 		['clause coverage ratio and covered clauses per entity predicate'-[], nl].
 
+	message_tokens(entity_coverage_starts(_Entity)) -->
+		[].
+
 	message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered)) -->
 		{numbervars(Entity, 0, _)},
 		(	{Ratio = N/N} ->	
-			['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, '(all)'], nl]
 			% all clause are covered
+			['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, '(all)'], nl]
 		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl]
 		).
+
+	message_tokens(entity_coverage_ends(_Entity)) -->
+		[].
 
 	message_tokens(no_code_coverage_information_collected) -->
 		['no code coverage information collected'-[], nl].

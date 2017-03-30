@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.0,
+		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2017/02/27,
+		date is 2017/03/28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1392,7 +1392,9 @@
 
 	write_coverage_results([]).
 	write_coverage_results([Entity| Entities]) :-
+		print_message(silent, lgtunit, entity_coverage_starts(Entity)),
 		write_entity_coverage_information(Entity),
+		print_message(silent, lgtunit, entity_coverage_ends(Entity)),
 		write_coverage_results(Entities).
 
 	write_entity_coverage_information(Entity) :-

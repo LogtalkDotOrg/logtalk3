@@ -57,6 +57,12 @@ Library
 * FIXED: Definition of the `os::file_exists/1` predicate for B-Prolog and
 Quintus Prolog to ensure that the specified file is a regular file.
 
+Tools
+-----
+
+* ADDED: Messages `entity_coverage_starts/1` and `entity_coverage_ends/1` to
+the `lgtunit` tool for use when generating code coverage reports.
+
 Tests
 -----
 
