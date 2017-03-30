@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	version="2.0">
+
+<xsd:annotation>
+	<xsd:documentation>
+	XML Schema for Logtalk lgtunit tool code coverage reports.
+	</xsd:documentation>
+</xsd:annotation>
+ 
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>  
+%  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<xsd:element name="cover" type="cover"/>
+
+<xsd:complexType name="cover">
+	<xsd:sequence>
+		<xsd:element name="suite"		type="xsd:string"/>
+		<xsd:element name="basename"	type="xsd:string"/>
+		<xsd:element name="directory"	type="xsd:string"/>
+		<xsd:element name="timestamp"	type="xsd:string"/>
+		<xsd:element name="entities"	type="entities"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:simpleType name="entities">
+	<xsd:sequence>
+		<xsd:element name="entity"		type="entity"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:simpleType>
+
+<xsd:simpleType name="entity">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="predicates"	type="predicates"/>
+	</xsd:sequence>
+</xsd:simpleType>
+
+<xsd:simpleType name="predicates">
+	<xsd:sequence>
+		<xsd:element name="predicate"	type="predicate"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:simpleType>
+
+<xsd:complexType name="predicate">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="covered"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="total"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="percentage"	type="xsd:decimal"/>
+		<xsd:element name="clauses"		type="clauses"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:simpleType name="clauses">
+	<xsd:sequence>
+		<xsd:element name="clause"	type="xsd:nonNegativeInteger"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:simpleType>
+
+</xsd:schema>
