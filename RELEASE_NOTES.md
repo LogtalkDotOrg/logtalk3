@@ -63,6 +63,11 @@ Tools
 * ADDED: Messages `entity_coverage_starts/1` and `entity_coverage_ends/1` to
 the `lgtunit` tool for use when generating code coverage reports.
 
+* ADDED: Support for generating XML code coverage reports.
+
+* ADDED: Option to the `logtalk_tester.sh` script to generate XML code coverage
+reports.
+
 Tests
 -----
 

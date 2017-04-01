@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on February 27, 2017
+##   Last updated on April 2, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.22"
+	echo "$(basename "$0") 0.23"
 	exit 0
 }
 
@@ -73,6 +73,9 @@ format_default_goal="true"
 format_tap_goal="logtalk_load(lgtunit(tap_report))"
 format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
 
+coverage_default_goal="true"
+coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
+
 # default argument values
 
 base="$PWD"
@@ -83,7 +86,9 @@ logtalk=swilgt$extension
 logtalk_call="$logtalk -g"
 mode='normal'
 format='default'
+coverage='none'
 format_goal=$format_default_goal
+coverage_goal=$coverage_default_goal
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
@@ -149,7 +154,7 @@ usage_help()
 	echo  "case of failed unit tests, this script returns an exit code of 1."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-- arguments]"
+	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -164,13 +169,15 @@ usage_help()
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -s supress path prefix (default is $prefix)"
+	echo "  -c code coverage report (default is $coverage)"
+	echo "     (possible values are none and xml)"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vp:m:f:d:t:s:h" option
+while getopts "vp:m:f:d:t:s:c:h" option
 do
 	case $option in
 		v) print_version;;
@@ -180,6 +187,7 @@ do
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
+		c) c_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -295,6 +303,18 @@ elif [ "$f_arg" == "xunit" ] ; then
 	format_goal=$format_xunit_goal
 elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknow format: $f_arg"
+	usage_help
+	exit 1
+fi
+
+if [ "$c_arg" == "none" ] ; then
+	coverage='none'
+	coverage_goal=$coverage_default_goal
+elif [ "$c_arg" == "xml" ] ; then
+	coverage='xml'
+	format_goal=$coverage_xml_goal
+elif [ "$c_arg" != "" ] ; then
+	echo "Error! Unknow coverage report: $c_arg"
 	usage_help
 	exit 1
 fi
