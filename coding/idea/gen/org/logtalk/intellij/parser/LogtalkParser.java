@@ -335,6 +335,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   //                             '\+'|
   //                             '?'|
   //                             '+'|'-'|'\'|
+  //                             '++'|'--'|
   //                             '$'|
   //                             '@'|
   //                             '::'|
@@ -366,6 +367,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   //                             '\+'|
   //                             '?'|
   //                             '+'|'-'|'\'|
+  //                             '++'|'--'|
   //                             '$'|
   //                             '@'|
   //                             '::'|
@@ -391,6 +393,8 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "+");
     if (!r) r = consumeToken(b, "-");
     if (!r) r = consumeToken(b, "\\");
+    if (!r) r = consumeToken(b, "++");
+    if (!r) r = consumeToken(b, "--");
     if (!r) r = consumeToken(b, "$");
     if (!r) r = consumeToken(b, "@");
     if (!r) r = consumeToken(b, "::");
