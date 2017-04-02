@@ -1,26 +1,15 @@
 // This is a generated file. Not intended for manual editing.
 package org.logtalk.intellij.parser;
 
-import static com.intellij.lang.parser.GeneratedParserUtilBase.TRUE_CONDITION;
-import static com.intellij.lang.parser.GeneratedParserUtilBase._AND_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase._COLLAPSE_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase._NONE_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.adapt_builder_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.current_position_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.empty_element_parsed_guard_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.enter_section_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.exit_section_;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.nextTokenIs;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.recursion_guard_;
-import static org.logtalk.intellij.psi.LogtalkTypes.*;
-
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LightPsiParser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import com.intellij.lang.PsiParser;
+import static org.logtalk.intellij.psi.LogtalkTypes.*;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.lang.PsiParser;
+import com.intellij.lang.LightPsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class LogtalkParser implements PsiParser, LightPsiParser {
@@ -346,7 +335,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   //                             '\+'|
   //                             '?'|
   //                             '+'|'-'|'\'|
-  //                             '--'|
+  //                             '++'|'--'|
   //                             '$'|
   //                             '@'|
   //                             '::'|
@@ -378,7 +367,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   //                             '\+'|
   //                             '?'|
   //                             '+'|'-'|'\'|
-  //                             '--'|
+  //                             '++'|'--'|
   //                             '$'|
   //                             '@'|
   //                             '::'|
@@ -404,6 +393,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "+");
     if (!r) r = consumeToken(b, "-");
     if (!r) r = consumeToken(b, "\\");
+    if (!r) r = consumeToken(b, "++");
     if (!r) r = consumeToken(b, "--");
     if (!r) r = consumeToken(b, "$");
     if (!r) r = consumeToken(b, "@");
