@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 2, 2017
+##   Last updated on April 3, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -114,7 +114,7 @@ run_tests() {
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 	fi
 	if [ $tests_exit -eq 0 ] ; then
-		grep -a 'out of' "$results/$name.results" | sed 's/%/*****        /'
+		grep -a 'out of' "$results/$name.results" | grep -a 'clause coverage' | sed 's/%/*****        /'
 		grep -a 'no code coverage information collected' "$results/$name.results" | sed 's/%/*****        /'
 		grep -a '(not applicable)' "$results/$name.results" | sed 's/(/*****         (/'
 	elif [ $tests_exit -eq 124 ] ; then

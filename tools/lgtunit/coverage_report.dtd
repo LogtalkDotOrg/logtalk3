@@ -21,10 +21,10 @@
 -->
 
 
-<!ELEMENT cover (suite, basename, directory, timestamp, entities)>
+<!ELEMENT cover (testsuite, basename, directory, timestamp, entities, entities_covered, entities_total, entities_percentage, clauses_covered, clauses_total, clauses_percentage)>
 
 
-<!ELEMENT suite (#PCDATA)>
+<!ELEMENT testsuite (#PCDATA)>
 
 <!ELEMENT basename (#PCDATA)>
 
@@ -32,21 +32,22 @@
 
 <!ELEMENT timestamp (#PCDATA)>
 
-<!ELEMENT entities (entity*)>
-
-
-<!ELEMENT entity (name, predicate*)>
-
-<!ELEMENT name (#PCDATA)>
-
-<!ELEMENT predicate (name, covered, total, percentage, clauses)>
-
 <!ELEMENT covered (#PCDATA)>
 
 <!ELEMENT total (#PCDATA)>
 
 <!ELEMENT percentage (#PCDATA)>
 
-<!ELEMENT clauses (clause*)>
+<!ELEMENT entities (entity*)>
 
-<!ELEMENT clause (#PCDATA)>
+
+<!ELEMENT entity (name, predicates, covered, total, percentage)>
+
+<!ELEMENT name (#PCDATA)>
+
+<!ELEMENT predicates (predicate*)>
+
+
+<!ELEMENT predicate (name, clauses, covered, total)>
+
+<!ELEMENT clauses (#PCDATA)>

@@ -34,47 +34,55 @@
 
 <xsd:complexType name="cover">
 	<xsd:sequence>
-		<xsd:element name="suite"		type="xsd:string"/>
-		<xsd:element name="basename"	type="xsd:string"/>
-		<xsd:element name="directory"	type="xsd:string"/>
-		<xsd:element name="timestamp"	type="xsd:string"/>
-		<xsd:element name="entities"	type="entities"/>
+		<xsd:element name="testsuite"			type="xsd:string"/>
+		<xsd:element name="basename"			type="xsd:string"/>
+		<xsd:element name="directory"			type="xsd:string"/>
+		<xsd:element name="timestamp"			type="xsd:string"/>
+		<xsd:element name="entities"			type="entities"/>
+		<xsd:element name="entities_covered"	type="xsd:nonNegativeInteger"/>
+		<xsd:element name="entities_total"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="entities_percentage"	type="xsd:decimal"/>
+		<xsd:element name="clauses_covered"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="clauses_total"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="clauses_percentage"	type="xsd:decimal"/>
 	</xsd:sequence>
 </xsd:complexType>
 
-<xsd:simpleType name="entities">
+<xsd:complexType name="entities">
 	<xsd:sequence>
 		<xsd:element name="entity"		type="entity"	minOccurs="0" maxOccurs="unbounded"/>
 	</xsd:sequence>
-</xsd:simpleType>
+</xsd:complexType>
 
-<xsd:simpleType name="entity">
+<xsd:complexType name="entity">
 	<xsd:sequence>
 		<xsd:element name="name"		type="xsd:string"/>
 		<xsd:element name="predicates"	type="predicates"/>
+		<xsd:element name="covered"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="total"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="percentage"	type="xsd:decimal"/>
 	</xsd:sequence>
-</xsd:simpleType>
+</xsd:complexType>
 
-<xsd:simpleType name="predicates">
+<xsd:complexType name="predicates">
 	<xsd:sequence>
 		<xsd:element name="predicate"	type="predicate"	minOccurs="0" maxOccurs="unbounded"/>
 	</xsd:sequence>
-</xsd:simpleType>
+</xsd:complexType>
 
 <xsd:complexType name="predicate">
 	<xsd:sequence>
 		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="clauses"		type="xsd:string"/>
 		<xsd:element name="covered"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="total"		type="xsd:nonNegativeInteger"/>
-		<xsd:element name="percentage"	type="xsd:decimal"/>
-		<xsd:element name="clauses"		type="clauses"/>
 	</xsd:sequence>
 </xsd:complexType>
 
-<xsd:simpleType name="clauses">
+<xsd:complexType name="clauses">
 	<xsd:sequence>
 		<xsd:element name="clause"	type="xsd:nonNegativeInteger"	minOccurs="0" maxOccurs="unbounded"/>
 	</xsd:sequence>
-</xsd:simpleType>
+</xsd:complexType>
 
 </xsd:schema>

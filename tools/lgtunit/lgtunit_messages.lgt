@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2017/03/28,
+		date is 2017/04/03,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -132,16 +132,15 @@
 		clause_tokens(Clauses),
 		[nl].
 
-	message_tokens(covered_entities_and_clause_numbers(Entities, Clauses)) -->
-		entity_tokens(Entities),
-		[' covered containing '-[]],
-		clause_tokens(Clauses),
-		[nl].
+	message_tokens(covered_entities_numbers(Covered, Total, Percentage)) -->
+		['~d out of '-[Covered]],
+		entity_tokens(Total),
+		[' covered, ~f% entity coverage'-[Percentage], nl].
 
 	message_tokens(covered_clause_numbers(Covered, Total, Percentage)) -->
 		['~d out of '-[Covered]],
 		clause_tokens(Total),
-		[' covered, ~f% coverage'-[Percentage], nl].
+		[' covered, ~f% clause coverage'-[Percentage], nl].
 
 	message_tokens(code_coverage_header) -->
 		['clause coverage ratio and covered clauses per entity predicate'-[], nl].
@@ -149,11 +148,11 @@
 	message_tokens(entity_coverage_starts(_Entity)) -->
 		[].
 
-	message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered)) -->
-		(	{Ratio = N/N} ->	
+	message_tokens(entity_predicate_coverage(Entity, Predicate, Covered, Total, Clauses)) -->
+		(	{Covered =:= Total} ->	
 			% all clause are covered
-			['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, '(all)'], nl]
-		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl]
+			['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, '(all)'], nl]
+		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, Clauses], nl]
 		).
 
 	message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->

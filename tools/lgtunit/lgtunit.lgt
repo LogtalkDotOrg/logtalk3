@@ -1409,7 +1409,7 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Entity, Other::Functor/Arity, Covered, Covered))
 		),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Other::Functor/Arity, Covered/Total, Ns)),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Other::Functor/Arity, Covered, Total, Ns)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
@@ -1421,7 +1421,7 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Entity, Functor/Arity, Covered, Covered))
 		),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, Covered/Total, Ns)),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, Covered, Total, Ns)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_object(Entity),
@@ -1431,7 +1431,7 @@
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, 0/Total, [])),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, [])),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_category(Entity),
@@ -1441,7 +1441,7 @@
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, 0/Total, [])),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, [])),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		covered(Entity, Covered, Total),
@@ -1489,18 +1489,20 @@
 	number_of_clauses(_, _, 0).
 
 	write_coverage_results_summary(DeclaredEntities, TestedEntities) :-
-		length(DeclaredEntities, TotalDeclaredEntities),
-		number_of_clauses(DeclaredEntities, TotalClauses),
-		length(TestedEntities, TotalTestedEntities),
-		%number_of_clauses(TestedEntities, Clauses),
-		covered(Coverage, TestedClauses),
-		(	TotalClauses =:= 0 ->
-			Percentage is 0.0
-		;	Percentage is float(Coverage * 100 / TotalClauses)
+		length(DeclaredEntities, TotalEntities),
+		length(TestedEntities, CoveredEntities),
+		(	TotalEntities =:= 0 ->
+			PercentageEntities is 0.0
+		;	PercentageEntities is float(CoveredEntities * 100 / TotalEntities)
 		),
-		print_message(information, lgtunit, declared_entities_and_clause_numbers(TotalDeclaredEntities, TotalClauses)),
-		print_message(information, lgtunit, covered_entities_and_clause_numbers(TotalTestedEntities, TestedClauses)),
-		print_message(information, lgtunit, covered_clause_numbers(Coverage, TotalClauses, Percentage)).
+		covered(CoveredClauses, TotalClauses),
+		(	TotalClauses =:= 0 ->
+			PercentageClauses is 0.0
+		;	PercentageClauses is float(CoveredClauses * 100 / TotalClauses)
+		),
+		print_message(information, lgtunit, declared_entities_and_clause_numbers(TotalEntities, TotalClauses)),
+		print_message(information, lgtunit, covered_entities_numbers(CoveredEntities, TotalEntities, PercentageEntities)),
+		print_message(information, lgtunit, covered_clause_numbers(CoveredClauses, TotalClauses, PercentageClauses)).
 
 	covered(Entity, Coverage, Clauses) :-
 		findall(Covered-Total, covered_(Entity, _, Covered, Total), List),

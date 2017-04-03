@@ -56,7 +56,12 @@
 		open(ReportFile, write, _, [alias(coverage_report)]),
 		write(coverage_report, '<?xml version="1.0" encoding="UTF-8"?>'), nl(coverage_report),
 		write_xml_open_tag(cover),
-		write_xml_element(suite, Object),
+		(	logtalk::loaded_file_property(File, library(Library)) ->
+			TestSuite = library(Library)
+		;	% use the file directory
+			object_property(Object, file(_,TestSuite))
+		),	
+		write_xml_element(testsuite, TestSuite),
 		write_xml_element(basename, Basename),
 		write_xml_element(directory, Directory),
 		timestamp_(Year, Month, Day, Hours, Minutes, Seconds),
@@ -70,28 +75,42 @@
 		write_xml_element(name, Entity),
 		write_xml_open_tag(predicates).
 
-	% predicate
-	message_hook(entity_clause_coverage(_Entity, Predicate, Covered/Total, Clauses)) :-
-		(	Covered =:= Total ->
-			Percentage is 100.0
-		;	Percentage is float(100 * Covered / Total)
-		),
+	% predicate statistics
+	message_hook(entity_predicate_coverage(_Entity, Predicate, Covered, Total, Clauses)) :-
 		write_xml_open_tag(predicate),
 		write_xml_element(name, Predicate),
+		write_xml_element(clauses, Clauses),
 		write_xml_element(covered, Covered),
 		write_xml_element(total, Total),	
-		write_xml_element(percentage, Percentage),
-		write_xml_element(clauses, Clauses),
 		write_xml_close_tag(predicate).
+
+	% entity statistics
+	message_hook(entity_coverage(_Entity, Covered, Total, Percentage)) :-
+		write_xml_close_tag(predicates),
+		write_xml_element(covered, Covered),
+		write_xml_element(total, Total),	
+		write_xml_element(percentage, Percentage).
 
 	% entity end
 	message_hook(entity_coverage_ends(_Entity)) :-
-		write_xml_close_tag(predicates),
 		write_xml_close_tag(entity).
+
+	message_hook(declared_entities_and_clause_numbers(_TotalEntities, _TotalClauses)) :-
+		write_xml_close_tag(entities).
+
+	% global statistics
+	message_hook(covered_entities_numbers(Covered, Total, Percentage)) :-
+		write_xml_element(entities_covered, Covered),
+		write_xml_element(entities_total, Total),
+		write_xml_element(entities_percentage, Percentage).
+
+	message_hook(covered_clause_numbers(Covered, Total, Percentage)) :-
+		write_xml_element(clauses_covered, Covered),
+		write_xml_element(clauses_total, Total),
+		write_xml_element(clauses_percentage, Percentage).
 
 	% stop
 	message_hook(tests_ended) :-
-		write_xml_close_tag(entities),
 		write_xml_close_tag(cover),
 		close(coverage_report).
 
