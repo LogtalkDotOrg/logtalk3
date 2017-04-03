@@ -78,15 +78,14 @@ known_binary_operator ::= &valid_operator (
                             ';'|'|'|
                             '->'|'*->'|
                             ','|
-                            ':='|
-                            '<'|'='|'=..'|'=@='|'\=@='|
+                            '<'|'='|'=..'|
                             '=:='|'=<'|'=='|'=\='|
                             '>'|'>='|'@<'|'@=<'|
                             '@>'|'@>='|'\='|'\=='|
-                            'as'|'is'|'>:<'|':<'|
+                            'as'|'is'|
                             ':'|
                             '+'|'-'|'/\'|'\/'|'xor'|
-                            '*'|'/'|'//'|'div'|'rdiv'|'>>'|'mod'|'rem'|
+                            '*'|'/'|'//'|'div'|'>>'|'mod'|'rem'|
                             '**'|
                             '^'|
                             '::'|
@@ -96,9 +95,7 @@ known_binary_operator ::= &valid_operator (
 
 
 known_left_operator ::= &valid_operator (
-                            ':-'|'?-'|
-                            'dynamic'|'discontiguous'|'initialization'|'meta_predicate'|'module_transparent'|'multifile'|
-                            'public'|'thread_local'|'thread_initialization'|'volatile'|
+                            ':-'|
                             '\+'|
                             '?'|
                             '+'|'-'|'\'|
@@ -108,32 +105,3 @@ known_left_operator ::= &valid_operator (
                             '::'|
                             '^^'
                             )
-
-
-
-/*
-http://www.swi-prolog.org/pldoc/man?section=operators
-
-1200	xfx	-->, :-
-1200	fx	:-, ?-
-1150	fx	dynamic, discontiguous, initialization, meta_predicate, module_transparent, multifile, public, thread_local, thread_initialization, volatile
-1100	xfy	;, |
-1050	xfy	->, *->
-1000	xfy	,
-990	xfx	:=
-900	fy	\+
-700	xfx	<, =, =.., =@=, \=@=, =:=, =<, ==, =\=, >, >=, @<, @=<, @>, @>=, \=, \==, as, is, >:<, :<
-600	xfy	:
-500	yfx	+, -, /\, \/, xor
-500	fx	?
-400	yfx	*, /, //, div, rdiv, <<, >>, mod, rem
-200	xfx	**
-200	xfy	^
-200	fy	+, -, \
-100	yfx	.
-1	fx	$
- */
-
-
-
-
