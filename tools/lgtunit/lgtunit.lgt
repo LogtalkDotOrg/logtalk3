@@ -28,7 +28,7 @@
 	:- info([
 		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2017/03/28,
+		date is 2017/04/03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -432,12 +432,12 @@
 		argnames is ['Entity', 'Predicate', 'Clause']
 	]).
 
-	:- private(covered_/2).
-	:- dynamic(covered_/2).
-	:- mode(covered_(?integer, ?integer), zero_or_more).
-	:- info(covered_/2, [
+	:- private(covered_/4).
+	:- dynamic(covered_/4).
+	:- mode(covered_(?entity_identifier, ?callable, ?integer, ?integer), zero_or_more).
+	:- info(covered_/4, [
 		comment is 'Auxiliary predicate for collecting statistics on clause coverage.',
-		argnames is ['Covered', 'Total']
+		argnames is ['Entity', 'Predicate', 'Covered', 'Total']
 	]).
 
 	% we use the structured printing mechanism in order to allow unit tests
@@ -693,7 +693,8 @@
 		(	object_property(Self, file(File, Directory)) ->
 			atom_concat(Directory, File, Path),
 			print_message(information, lgtunit, running_tests_from_object_file(Self, Path))
-		;	print_message(information, lgtunit, running_tests_from_object(Self))
+		;	% source data information missing
+			print_message(information, lgtunit, running_tests_from_object(Self))
 		).
 
 	write_tests_results :-
@@ -1375,7 +1376,8 @@
 		).
 
 	reset_coverage_results :-
-		retractall(fired_(_, _, _)).
+		retractall(fired_(_, _, _)),
+		retractall(covered_(_, _, _, _)).
 
 	write_coverage_results :-
 		(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
@@ -1403,9 +1405,9 @@
 		number_of_clauses(Entity, Other::Functor/Arity, Total),
 		length(Ns, Covered),
 		(	Covered =< Total ->
-			assertz(covered_(Covered, Total))
+			assertz(covered_(Entity, Other::Functor/Arity, Covered, Total))
 		;	% likely a dynamic predicate with clauses asserted at runtime
-			assertz(covered_(Covered, Covered))
+			assertz(covered_(Entity, Other::Functor/Arity, Covered, Covered))
 		),
 		print_message(information, lgtunit, entity_clause_coverage(Entity, Other::Functor/Arity, Covered/Total, Ns)),
 		fail.
@@ -1415,9 +1417,9 @@
 		number_of_clauses(Entity, Functor/Arity, Total),
 		length(Ns, Covered),
 		(	Covered =< Total ->
-			assertz(covered_(Covered, Total))
+			assertz(covered_(Entity, Functor/Arity, Covered, Total))
 		;	% likely a dynamic predicate with clauses asserted at runtime
-			assertz(covered_(Covered, Covered))
+			assertz(covered_(Entity, Functor/Arity, Covered, Covered))
 		),
 		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, Covered/Total, Ns)),
 		fail.
@@ -1428,7 +1430,7 @@
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
-		assertz(covered_(0, Total)),
+		assertz(covered_(Entity, Functor/Arity, 0, Total)),
 		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, 0/Total, [])),
 		fail.
 	write_entity_coverage_information(Entity) :-
@@ -1438,10 +1440,16 @@
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
-		assertz(covered_(0, Total)),
+		assertz(covered_(Entity, Functor/Arity, 0, Total)),
 		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, 0/Total, [])),
 		fail.
-	write_entity_coverage_information(_).
+	write_entity_coverage_information(Entity) :-
+		covered(Entity, Covered, Total),
+		(	Total =:= 0 ->
+			Percentage is 0.0
+		;	Percentage is float(Covered * 100 / Total)
+		),
+		print_message(information, lgtunit, entity_coverage(Entity, Covered, Total, Percentage)).
 
 	number_of_clauses(Entities, Total) :-
 		entities_number_of_clauses(Entities, 0, Total).
@@ -1486,13 +1494,20 @@
 		length(TestedEntities, TotalTestedEntities),
 		%number_of_clauses(TestedEntities, Clauses),
 		covered(Coverage, TestedClauses),
-		Percentage is Coverage * 100 / TotalClauses,
+		(	TotalClauses =:= 0 ->
+			Percentage is 0.0
+		;	Percentage is float(Coverage * 100 / TotalClauses)
+		),
 		print_message(information, lgtunit, declared_entities_and_clause_numbers(TotalDeclaredEntities, TotalClauses)),
 		print_message(information, lgtunit, covered_entities_and_clause_numbers(TotalTestedEntities, TestedClauses)),
 		print_message(information, lgtunit, covered_clause_numbers(Coverage, TotalClauses, Percentage)).
 
+	covered(Entity, Coverage, Clauses) :-
+		findall(Covered-Total, covered_(Entity, _, Covered, Total), List),
+		sum_coverage(List, Coverage, Clauses).
+
 	covered(Coverage, Clauses) :-
-		findall(Covered-Total, retract(covered_(Covered, Total)), List),
+		findall(Covered-Total, covered_(_, _, Covered, Total), List),
 		sum_coverage(List, Coverage, Clauses).
 
 	sum_coverage(List, Coverage, Clauses) :-

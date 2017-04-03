@@ -48,6 +48,7 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(Message, lgtunit) -->
+		{numbervars(Message, 0, _)},
 		message_tokens(Message).
 
 	% messages for tests handling
@@ -149,12 +150,16 @@
 		[].
 
 	message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered)) -->
-		{numbervars(Entity, 0, _)},
 		(	{Ratio = N/N} ->	
 			% all clause are covered
 			['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, '(all)'], nl]
 		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl]
 		).
+
+	message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
+		['~q: ~d out of '-[Entity, Covered]],
+		clause_tokens(Total),
+		[' covered, ~f% coverage'-[Percentage], nl].
 
 	message_tokens(entity_coverage_ends(_Entity)) -->
 		[].

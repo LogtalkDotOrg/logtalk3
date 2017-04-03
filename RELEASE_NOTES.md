@@ -68,6 +68,8 @@ the `lgtunit` tool for use when generating code coverage reports.
 * ADDED: Option to the `logtalk_tester.sh` script to generate XML code coverage
 reports.
 
+* IMPROVED: Also print code coverage statistics per entity.
+
 Tests
 -----
 
