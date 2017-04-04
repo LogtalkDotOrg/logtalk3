@@ -39,8 +39,6 @@
 
 
 <xsl:template match="/">
-	<xsl:processing-instruction name="xml-stylesheet">href="logtalk.css" type="text/css"</xsl:processing-instruction>
-
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -55,38 +53,66 @@
 	<body>
 		<h1><xsl:value-of select="cover/testsuite" /></h1>
 		<p><xsl:value-of select="cover/timestamp" /></p>
-		<h4>Entity coverage</h4>
-		<span>
-			<xsl:value-of select="cover/entities_covered" />/<xsl:value-of select="cover/entities_total" />
-			<div class="percentage_bar">
-				<div class="percentage" style="width:{cover/entities_percentage}%">&#160;</div>
-				<div class="caption"><xsl:value-of select="cover/entities_percentage" />%</div>
-			</div>
-		</span>
-		<h4>Clause coverage</h4>
-		<span>
-			<xsl:value-of select="cover/clauses_covered" />/<xsl:value-of select="cover/clauses_total" />
-			<div class="percentage_bar">
-				<div class="percentage" style="width:{cover/clauses_percentage}%">&#160;</div>
-				<div class="caption"><xsl:value-of select="cover/clauses_percentage" />%</div>
-			</div>
-		</span>
+
+		<table style="width:50%; border: 1px solid black;">
+		    <tr>
+		      <th style="width:30%; border: 1px solid black;">Global Coverage</th>
+		      <th style="width:10%; border: 1px solid black;">Covered/Total</th> 
+		      <th style="width:10%; border: 1px solid black;">Percentage</th> 
+		    </tr>
+			<tr>
+				<td style="width:30%; border: 1px solid black;">Entities</td>
+				<td style="width:10%; border: 1px solid black; text-align:center">
+					<div class="percentage_bar">
+						<div class="percentage" style="width:{cover/entities_percentage}%">&#160;</div>
+						<div class="caption"><xsl:value-of select="cover/entities_covered" />/<xsl:value-of select="cover/entities_total" /></div>
+					</div>
+				</td>
+				<td style="width:10%; border: 1px solid black; text-align:center"><xsl:value-of select="cover/entities_percentage" /></td>
+			</tr>
+			<tr>
+				<td style="width:30%; border: 1px solid black;">Clauses</td>
+				<td style="width:10%; border: 1px solid black; text-align:center">
+					<div class="percentage_bar">
+						<div class="percentage" style="width:{cover/clauses_percentage}%">&#160;</div>
+						<div class="caption"><xsl:value-of select="cover/clauses_covered" />/<xsl:value-of select="cover/clauses_total" /></div>
+					</div>
+				</td>
+				<td style="width:10%; border: 1px solid black; text-align:center"><xsl:value-of select="cover/clauses_percentage" /></td>
+			</tr>
+		</table>
+
 		<h2>Entities</h2>
 		<xsl:apply-templates select="cover/entities" />
+
 	</body>
 	</html>
 </xsl:template>
 
 <xsl:template match="cover/entities">
 	<xsl:for-each select="entity">
-		<h3><xsl:value-of select="name" /></h3>
-		<span>
-			<xsl:value-of select="covered" />/<xsl:value-of select="total" />
-			<div class="percentage_bar">
-				<div class="percentage" style="width:{percentage}%">&#160;</div>
-				<div class="caption"><xsl:value-of select="percentage" />%</div>
-			</div>
-		</span>
+		<hr />
+		<h3><code><xsl:value-of select="name" /></code></h3>
+
+		<table style="width:50%; border: 1px solid black;">
+		    <tr>
+		      <th style="width:30%; border: 1px solid black;">Entity Coverage</th>
+		      <th style="width:10%; border: 1px solid black;">Covered/Total</th> 
+		      <th style="width:10%; border: 1px solid black;">Percentage</th> 
+		    </tr>
+			<tr>
+				<td style="width:30%; border: 1px solid black;">Clauses</td>
+				<td style="width:10%; border: 1px solid black; text-align:center">
+					<div class="percentage_bar">
+						<div class="percentage" style="width:{percentage}%">&#160;</div>
+						<div class="caption"><xsl:value-of select="covered" />/<xsl:value-of select="total" /></div>
+					</div>
+				</td>
+				<td style="width:10%; border: 1px solid black; text-align:center"><xsl:value-of select="percentage" /></td>
+			</tr>
+		</table>
+
+		<h4>Predicate Coverage</h4>
 		<xsl:apply-templates select="predicates" />
 	</xsl:for-each>
 </xsl:template>
@@ -100,7 +126,7 @@
 	    </tr>
 		<xsl:for-each select="predicate">
 			<tr>
-				<td style="width:30%; border: 1px solid black;"><xsl:value-of select="name" /></td>
+				<td style="width:30%; border: 1px solid black;"><code><xsl:value-of select="name" /></code></td>
 				<td style="width:10%; border: 1px solid black; text-align:center">
 					<span>
 						<div class="percentage_bar">
