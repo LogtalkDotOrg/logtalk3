@@ -124,6 +124,10 @@ run_tests() {
 		echo "*****         crash"
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
 	fi
+	if [ $coverage == 'xml' ] ; then
+		cp "$LOGTALKUSER/tools/lgtunit/coverage_report.dtd" .
+		cp "$LOGTALKUSER/tools/lgtunit/coverage_report.xsl" .
+	fi
 	return 0
 }
 
