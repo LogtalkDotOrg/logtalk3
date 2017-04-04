@@ -46,6 +46,6 @@
 <!ELEMENT predicates (predicate*)>
 
 
-<!ELEMENT predicate (name, clauses, covered, total)>
+<!ELEMENT predicate (name, clauses, covered, total, percentage)>
 
 <!ELEMENT clauses (#PCDATA)>

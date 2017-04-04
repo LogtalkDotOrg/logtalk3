@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet
 	version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-
-<xsl:output
-	method="html"
-	version="4.0"
-    indent="yes"
-    encoding="utf-8"
-	doctype-public="-//W3C//DTD HTML 4.01//EN"
-	doctype-system="http://www.w3.org/TR/html4/strict.dtd"/>
-
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns="http://www.w3.org/1999/xhtml">
 
 <!--
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,73 +28,91 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 -->
 
+<xsl:output
+	method="xml"
+	indent="yes"
+	encoding="utf-8"
+	omit-xml-declaration="no"
+	standalone="no"
+	doctype-public="-//W3C//DTD XHTML 1.1//EN"
+	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"/>
+
 
 <xsl:template match="/">
-	<html>
+	<xsl:processing-instruction name="xml-stylesheet">href="logtalk.css" type="text/css"</xsl:processing-instruction>
+
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><xsl:apply-templates select="logtalk_index/type" /></title>
-		<link rel="stylesheet" href="logtalk.css" type="text/css" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title><xsl:value-of select="cover/testsuite" /></title>
+		<style type="text/css">
+			.percentage_bar {background-color: #ff4500; position: relative; font-size: small; width: 200px; margin: 1px;}
+			.percentage_bar div {height: 20px; line-height: 20px;}
+			.percentage_bar .percentage {position: absolute; background-color: #32cd32; left: 0px top: 0px; z-index: 0;}
+			.percentage_bar .caption    {position: relative; text-align: center; color: #000; z-index: 1;}
+		</style>
 	</head>
 	<body>
-		<div class="header">
-			<h1 class="code"><xsl:apply-templates select="logtalk_index/type" /></h1>
-		</div>
-		<div class="predicates">
-			<xsl:apply-templates select="logtalk_index/entries" />
-		</div>
+		<h1><xsl:value-of select="cover/testsuite" /></h1>
+		<p><xsl:value-of select="cover/timestamp" /></p>
+		<h4>Entity coverage</h4>
+		<span>
+			<xsl:value-of select="cover/entities_covered" />/<xsl:value-of select="cover/entities_total" />
+			<div class="percentage_bar">
+				<div class="percentage" style="width:{cover/entities_percentage}%">&#160;</div>
+				<div class="caption"><xsl:value-of select="cover/entities_percentage" />%</div>
+			</div>
+		</span>
+		<h4>Clause coverage</h4>
+		<span>
+			<xsl:value-of select="cover/clauses_covered" />/<xsl:value-of select="cover/clauses_total" />
+			<div class="percentage_bar">
+				<div class="percentage" style="width:{cover/clauses_percentage}%">&#160;</div>
+				<div class="caption"><xsl:value-of select="cover/clauses_percentage" />%</div>
+			</div>
+		</span>
+		<h2>Entities</h2>
+		<xsl:apply-templates select="cover/entities" />
 	</body>
 	</html>
 </xsl:template>
 
-
-<xsl:template match="logtalk_index/type">
-	<xsl:if test=".='library'">
-		Library index
-	</xsl:if>
-	<xsl:if test=".='directory'">
-		Directory index
-	</xsl:if>
-	<xsl:if test=".='entity'">
-		Entity index
-	</xsl:if>
-	<xsl:if test=".='predicate'">
-		Predicate index
-	</xsl:if>
+<xsl:template match="cover/entities">
+	<xsl:for-each select="entity">
+		<h3><xsl:value-of select="name" /></h3>
+		<span>
+			<xsl:value-of select="covered" />/<xsl:value-of select="total" />
+			<div class="percentage_bar">
+				<div class="percentage" style="width:{percentage}%">&#160;</div>
+				<div class="caption"><xsl:value-of select="percentage" />%</div>
+			</div>
+		</span>
+		<xsl:apply-templates select="predicates" />
+	</xsl:for-each>
 </xsl:template>
 
-
-<xsl:template match="logtalk_index/entries">
-	<xsl:apply-templates select="entry" />
-</xsl:template>
-
-
-<xsl:template match="*/entry">
-	<dl>
-	<dt><code><xsl:apply-templates select="key" /></code></dt>
-		<xsl:for-each select="entities/entity">
-			<dd class ="code"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
+<xsl:template match="*/predicates">
+	<table style="width:100%; border: 1px solid black;">
+	    <tr>
+	      <th style="width:30%; border: 1px solid black;">Predicate</th>
+	      <th style="width:10%; border: 1px solid black;">Covered/Total</th> 
+	      <th style="width:60%; border: 1px solid black;">Clauses</th>
+	    </tr>
+		<xsl:for-each select="predicate">
+			<tr>
+				<td style="width:30%; border: 1px solid black;"><xsl:value-of select="name" /></td>
+				<td style="width:10%; border: 1px solid black; text-align:center">
+					<span>
+						<div class="percentage_bar">
+							<div class="percentage" style="width:{percentage}%">&#160;</div>
+							<div class="caption"><xsl:value-of select="covered" />/<xsl:value-of select="total" /></div>
+						</div>
+					</span>
+				</td>
+				<td style="width:60%; border: 1px solid black;"><xsl:value-of select="clauses" /></td>
+			</tr>
 		</xsl:for-each>
-	</dl>
+	</table>
 </xsl:template>
-
-
-<xsl:template match="*/key">
-	<xsl:choose>
-	    <xsl:when test=".='object'">
-			Objects
-		</xsl:when>
-	    <xsl:when test=".='protocol'">
-			Protocols
-		</xsl:when>
-	    <xsl:when test=".='category'">
-			Categories
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="." />
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
 
 </xsl:stylesheet>

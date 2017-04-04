@@ -62,7 +62,7 @@ Tools
 
 * CHANGED: Renamed message `covered_entities_and_clause_numbers/2` to
 `covered_entities_numbers/3` and message `entity_clause_coverage/4` to
-`entity_predicate_coverage/5` in the `lgtunit` tool to improve code coverage
+`entity_predicate_coverage/6` in the `lgtunit` tool to improve code coverage
 reports.
 
 * ADDED: Messages `entity_coverage_starts/1`, `entity_coverage_ends/1`, and

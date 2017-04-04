@@ -54,6 +54,8 @@
 		atom_concat(Directory, 'coverage_report.xml', ReportFile),
 		open(ReportFile, write, _, [alias(coverage_report)]),
 		write(coverage_report, '<?xml version="1.0" encoding="UTF-8"?>'), nl(coverage_report),
+		write(coverage_report, '<!DOCTYPE cover SYSTEM "coverage_report.dtd">'), nl(coverage_report),
+		write(coverage_report, '<?xml-stylesheet type="text/xsl" href="coverage_report.xsl"?>'), nl(coverage_report),
 		write_xml_open_tag(cover),
 		write_xml_element(testsuite, File),
 		write_xml_element(object, Object),
@@ -69,12 +71,13 @@
 		write_xml_open_tag(predicates).
 
 	% predicate statistics
-	message_hook(entity_predicate_coverage(_Entity, Predicate, Covered, Total, Clauses)) :-
+	message_hook(entity_predicate_coverage(_Entity, Predicate, Covered, Total, Percentage, Clauses)) :-
 		write_xml_open_tag(predicate),
 		write_xml_element(name, Predicate),
 		write_xml_element(clauses, Clauses),
 		write_xml_element(covered, Covered),
 		write_xml_element(total, Total),	
+		write_xml_element(percentage, Percentage),
 		write_xml_close_tag(predicate).
 
 	% entity statistics

@@ -28,7 +28,7 @@
 	:- info([
 		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2017/04/03,
+		date is 2017/04/04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1409,7 +1409,11 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Entity, Other::Functor/Arity, Covered, Covered))
 		),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Other::Functor/Arity, Covered, Total, Ns)),
+		(	Total =:= 0 ->
+			Percentage is 0.0
+		;	Percentage is float(Covered * 100 / Total)
+		),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Other::Functor/Arity, Covered, Total, Percentage, Ns)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
@@ -1421,7 +1425,11 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Entity, Functor/Arity, Covered, Covered))
 		),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, Covered, Total, Ns)),
+		(	Total =:= 0 ->
+			Percentage is 0.0
+		;	Percentage is float(Covered * 100 / Total)
+		),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, Covered, Total, Percentage, Ns)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_object(Entity),
@@ -1431,7 +1439,7 @@
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, [])),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, 0, [])),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_category(Entity),
@@ -1441,7 +1449,7 @@
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, [])),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, 0, [])),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		covered(Entity, Covered, Total),

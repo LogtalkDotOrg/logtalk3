@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2017/04/03,
+		date is 2017/04/04,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -148,7 +148,7 @@
 	message_tokens(entity_coverage_starts(_Entity)) -->
 		[].
 
-	message_tokens(entity_predicate_coverage(Entity, Predicate, Covered, Total, Clauses)) -->
+	message_tokens(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses)) -->
 		(	{Covered =:= Total} ->	
 			% all clause are covered
 			['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, '(all)'], nl]

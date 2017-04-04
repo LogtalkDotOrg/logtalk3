@@ -75,6 +75,7 @@
 		<xsd:element name="clauses"		type="xsd:string"/>
 		<xsd:element name="covered"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="total"		type="xsd:nonNegativeInteger"/>
+		<xsd:element name="percentage"	type="xsd:decimal"/>
 	</xsd:sequence>
 </xsd:complexType>
 
