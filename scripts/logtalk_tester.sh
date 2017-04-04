@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 3, 2017
+##   Last updated on April 4, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.23"
+	echo "$(basename "$0") 0.24"
 	exit 0
 }
 
@@ -101,15 +101,15 @@ run_tests() {
 	echo "***** Testing $unit_short"
 	name=${unit////__}
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$tester_optimal_goal"
+		run_test "$name" "$format_goal,$coverage_goal,$tester_optimal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$tester_normal_goal"
+		run_test "$name" "$format_goal,$coverage_goal,$tester_normal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$tester_debug_goal"
+		run_test "$name" "$format_goal,$coverage_goal,$tester_debug_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 	fi
@@ -312,7 +312,7 @@ if [ "$c_arg" == "none" ] ; then
 	coverage_goal=$coverage_default_goal
 elif [ "$c_arg" == "xml" ] ; then
 	coverage='xml'
-	format_goal=$coverage_xml_goal
+	coverage_goal=$coverage_xml_goal
 elif [ "$c_arg" != "" ] ; then
 	echo "Error! Unknow coverage report: $c_arg"
 	usage_help
