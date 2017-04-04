@@ -21,14 +21,12 @@
 -->
 
 
-<!ELEMENT cover (testsuite, basename, directory, timestamp, entities, entities_covered, entities_total, entities_percentage, clauses_covered, clauses_total, clauses_percentage)>
+<!ELEMENT cover (testsuite, object, timestamp, entities, entities_covered, entities_total, entities_percentage, clauses_covered, clauses_total, clauses_percentage)>
 
 
 <!ELEMENT testsuite (#PCDATA)>
 
-<!ELEMENT basename (#PCDATA)>
-
-<!ELEMENT directory (#PCDATA)>
+<!ELEMENT object (#PCDATA)>
 
 <!ELEMENT timestamp (#PCDATA)>
 

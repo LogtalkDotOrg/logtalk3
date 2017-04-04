@@ -35,8 +35,7 @@
 <xsd:complexType name="cover">
 	<xsd:sequence>
 		<xsd:element name="testsuite"			type="xsd:string"/>
-		<xsd:element name="basename"			type="xsd:string"/>
-		<xsd:element name="directory"			type="xsd:string"/>
+		<xsd:element name="object"				type="xsd:string"/>
 		<xsd:element name="timestamp"			type="xsd:string"/>
 		<xsd:element name="entities"			type="entities"/>
 		<xsd:element name="entities_covered"	type="xsd:nonNegativeInteger"/>

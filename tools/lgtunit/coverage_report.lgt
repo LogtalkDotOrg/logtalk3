@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2017/03/29,
+		date is 2017/04/04,
 		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.'
 	]).
 
@@ -50,20 +50,13 @@
 
 	% start
 	message_hook(running_tests_from_object_file(Object, File)) :-
-		logtalk::loaded_file_property(File, basename(Basename)),
 		logtalk::loaded_file_property(File, directory(Directory)),
 		atom_concat(Directory, 'coverage_report.xml', ReportFile),
 		open(ReportFile, write, _, [alias(coverage_report)]),
 		write(coverage_report, '<?xml version="1.0" encoding="UTF-8"?>'), nl(coverage_report),
 		write_xml_open_tag(cover),
-		(	logtalk::loaded_file_property(File, library(Library)) ->
-			TestSuite = library(Library)
-		;	% use the file directory
-			object_property(Object, file(_,TestSuite))
-		),	
-		write_xml_element(testsuite, TestSuite),
-		write_xml_element(basename, Basename),
-		write_xml_element(directory, Directory),
+		write_xml_element(testsuite, File),
+		write_xml_element(object, Object),
 		timestamp_(Year, Month, Day, Hours, Minutes, Seconds),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp),
 		write_xml_element(timestamp, TimeStamp),
@@ -147,6 +140,11 @@
 		write(coverage_report, Tag),
 		write(coverage_report, '>'), nl(coverage_report).
 
+	write_xml_close_tag(Tag) :-
+		write(coverage_report, '</'),
+		write(coverage_report, Tag),
+		write(coverage_report, '>'), nl(coverage_report).
+
 	write_xml_element(Tag, Text) :-
 		write(coverage_report, '<'),
 		write(coverage_report, Tag),
@@ -156,9 +154,9 @@
 		write(coverage_report, Tag),
 		write(coverage_report, '>'), nl(coverage_report).
 
-	write_xml_close_tag(Tag) :-
-		write(coverage_report, '</'),
+	write_xml_empty_tag(Tag) :-
+		write(coverage_report, '<'),
 		write(coverage_report, Tag),
-		write(coverage_report, '>'), nl(coverage_report).
+		write(coverage_report, '/>'), nl(coverage_report).
 
 :- end_object.
