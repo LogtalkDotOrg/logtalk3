@@ -125,8 +125,13 @@ run_tests() {
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
 	fi
 	if [ $coverage == 'xml' ] ; then
-		cp "$LOGTALKUSER/tools/lgtunit/coverage_report.dtd" .
-		cp "$LOGTALKUSER/tools/lgtunit/coverage_report.xsl" .
+		if [ -d "$LOGTALKUSER" ] ; then
+			cp "$LOGTALKUSER/tools/lgtunit/coverage_report.dtd" . || true
+			cp "$LOGTALKUSER/tools/lgtunit/coverage_report.xsl" . || true
+		elif [ -d "$LOGTALKHOME" ] ; then
+			cp "$LOGTALKHOME/tools/lgtunit/coverage_report.dtd" . || true
+			cp "$LOGTALKHOME/tools/lgtunit/coverage_report.xsl" . || true
+		fi
 	fi
 	return 0
 }
@@ -134,7 +139,7 @@ run_tests() {
 run_test() {
 	name="$1"
 	goal="$2"
-	if [ ${#args[@]} -eq 0 ]; then
+	if [ ${#args[@]} -eq 0 ] ; then
 		if [ "$timeout_command" != "" ] && [ $timeout -ne 0 ] ; then
 			$timeout_command $timeout $logtalk_call "$goal" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
 		else
