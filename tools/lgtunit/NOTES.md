@@ -437,7 +437,12 @@ Exporting code coverage results in XML format
 
 To export code coverage results in XML format, load the `coverage_report.lgt`
 file before running the tests. A file named `coverage_report.xml` will be
-created in the same directory as the object defining the tests.
+created in the same directory as the object defining the tests. The XML file
+can be opened in most web browsers (with the notorious exception of Google
+Chrome) by copying to the same directory the `coverage_report.dtd` and
+`coverage_report.xsl` files found on the `tools/lgtunit` directory. In
+alternative, a XSLT processor can be used to generate a `coverage_report.html`
+file instead of relying in a web browser for the transformation.
 
 
 Known issues
