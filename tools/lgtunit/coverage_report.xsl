@@ -103,8 +103,7 @@
 <xsl:template match="cover/entities">
 	<xsl:for-each select="entity">
 		<h3><code><xsl:value-of select="name" /></code></h3>
-
-		<table style="width:50%;">
+		<table style="width:50%; margin-bottom: 30px;">
 		    <tr>
 		      <th style="width:30%;">Entity Coverage</th>
 		      <th style="width:10%;">Covered/Total</th> 
@@ -121,8 +120,6 @@
 				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(percentage, '###.#')" /></td>
 			</tr>
 		</table>
-
-		<h4>Predicate Coverage</h4>
 		<xsl:apply-templates select="predicates" />
 	</xsl:for-each>
 </xsl:template>
@@ -130,9 +127,9 @@
 <xsl:template match="*/predicates">
 	<table style="width:100%;">
 	    <tr>
-	      <th style="width:30%;">Predicate/Non-terminal</th>
+	      <th style="width:30%;">Predicate/Non-terminal Coverage</th>
 	      <th style="width:15%;">Covered/Total</th> 
-	      <th style="width:55%;">Covered Clause Indexes</th>
+	      <th style="width:55%;">Covered Clause/Rule Indexes</th>
 	    </tr>
 		<xsl:for-each select="predicate">
 			<tr>
