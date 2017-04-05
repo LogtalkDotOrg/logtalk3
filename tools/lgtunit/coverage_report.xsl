@@ -111,7 +111,7 @@
 		      <th style="width:10%;">Percentage</th> 
 		    </tr>
 			<tr>
-				<td style="width:30%;">Clauses</td>
+				<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
 				<td style="width:10%; text-align:center">
 					<div class="percentage_bar">
 						<div class="percentage" style="width:{percentage}%">&#160;</div>
@@ -132,7 +132,7 @@
 	    <tr>
 	      <th style="width:30%;">Predicate/Non-terminal</th>
 	      <th style="width:15%;">Covered/Total</th> 
-	      <th style="width:55%;">Clauses</th>
+	      <th style="width:55%;">Covered Clause Indexes</th>
 	    </tr>
 		<xsl:for-each select="predicate">
 			<tr>
