@@ -7,7 +7,7 @@
 <!--
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
-%  XSLT stylesheet for viewing lgtunit code coverage report files in a browser
+%  XSLT stylesheet for viewing code coverage report XML files in a browser
 %  Last updated on April 5, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
@@ -79,7 +79,7 @@
 						<div class="caption"><xsl:value-of select="cover/entities_covered" />/<xsl:value-of select="cover/entities_total" /></div>
 					</div>
 				</td>
-				<td style="width:10%; text-align:center"><xsl:value-of select="cover/entities_percentage" /></td>
+				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/entities_percentage, '###.0')" /></td>
 			</tr>
 			<tr>
 				<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
@@ -89,7 +89,7 @@
 						<div class="caption"><xsl:value-of select="cover/clauses_covered" />/<xsl:value-of select="cover/clauses_total" /></div>
 					</div>
 				</td>
-				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/clauses_percentage, '###.#')" /></td>
+				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/clauses_percentage, '###.0')" /></td>
 			</tr>
 		</table>
 
@@ -117,7 +117,7 @@
 						<div class="caption"><xsl:value-of select="covered" />/<xsl:value-of select="total" /></div>
 					</div>
 				</td>
-				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(percentage, '###.#')" /></td>
+				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(percentage, '###.0')" /></td>
 			</tr>
 		</table>
 		<xsl:apply-templates select="predicates" />
