@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing lgtunit code coverage report files in a browser
-%  Last updated on March 28, 2017
+%  Last updated on April 5, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -82,7 +82,7 @@
 				<td style="width:10%; text-align:center"><xsl:value-of select="cover/entities_percentage" /></td>
 			</tr>
 			<tr>
-				<td style="width:30%;">Clauses</td>
+				<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
 				<td style="width:10%; text-align:center">
 					<div class="percentage_bar">
 						<div class="percentage" style="width:{cover/clauses_percentage}%">&#160;</div>
@@ -93,7 +93,7 @@
 			</tr>
 		</table>
 
-		<h2>Entities</h2>
+		<h2>Covered Entities</h2>
 		<xsl:apply-templates select="cover/entities" />
 
 	</body>
@@ -130,7 +130,7 @@
 <xsl:template match="*/predicates">
 	<table style="width:100%;">
 	    <tr>
-	      <th style="width:30%;">Predicate</th>
+	      <th style="width:30%;">Predicate/Non-terminal</th>
 	      <th style="width:15%;">Covered/Total</th> 
 	      <th style="width:55%;">Clauses</th>
 	    </tr>

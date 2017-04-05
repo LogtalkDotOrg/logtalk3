@@ -28,7 +28,7 @@
 	:- info([
 		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2017/04/04,
+		date is 2017/04/05,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1399,10 +1399,11 @@
 		print_message(silent, lgtunit, entity_coverage_ends(Entity)),
 		write_coverage_results(Entities).
 
+	% list entity contributed multifile predicates that were called
 	write_entity_coverage_information(Entity) :-
-		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
+		% do not consider dynamic clauses asserted at runtime (which have an index, N, of zero)
 		setof(N, (fired_(Entity, Other::Functor/Arity, N), N > 0), Ns),
-		number_of_clauses(Entity, Other::Functor/Arity, Total),
+		entity_indicator_number_of_clauses(Entity, Other::Functor/Arity, PredicateIndicator, Total),
 		length(Ns, Covered),
 		(	Covered =< Total ->
 			assertz(covered_(Entity, Other::Functor/Arity, Covered, Total))
@@ -1413,12 +1414,13 @@
 			Percentage is 0.0
 		;	Percentage is float(Covered * 100 / Total)
 		),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Other::Functor/Arity, Covered, Total, Percentage, Ns)),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, Covered, Total, Percentage, Ns)),
 		fail.
+	% list entity own predicates that were called
 	write_entity_coverage_information(Entity) :-
-		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
+		% do not consider dynamic clauses asserted at runtime (which have an index, N, of zero)
 		setof(N, (fired_(Entity, Functor/Arity, N), N > 0), Ns),
-		number_of_clauses(Entity, Functor/Arity, Total),
+		entity_indicator_number_of_clauses(Entity, Functor/Arity, PredicateIndicator, Total),
 		length(Ns, Covered),
 		(	Covered =< Total ->
 			assertz(covered_(Entity, Functor/Arity, Covered, Total))
@@ -1429,28 +1431,28 @@
 			Percentage is 0.0
 		;	Percentage is float(Covered * 100 / Total)
 		),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, Covered, Total, Percentage, Ns)),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, Covered, Total, Percentage, Ns)),
 		fail.
+	% list object predicates that were never called
 	write_entity_coverage_information(Entity) :-
 		current_object(Entity),
 		object_property(Entity, defines(Functor/Arity, Properties)),
-		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
+		% do not consider dynamic clauses asserted at runtime (which have an index, N, of zero)
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
-		memberchk(number_of_clauses(Total), Properties),
-		\+ memberchk(auxiliary, Properties),
+		properties_indicator_number_of_clauses(Properties, Functor/Arity, PredicateIndicator, Total),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, 0, [])),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, [])),
 		fail.
+	% list category predicates that were never called
 	write_entity_coverage_information(Entity) :-
 		current_category(Entity),
 		category_property(Entity, defines(Functor/Arity, Properties)),
-		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
-		\+ (fired_(Entity, Functor/Arity, N), N > 0),
-		memberchk(number_of_clauses(Total), Properties),
-		\+ memberchk(auxiliary, Properties),
+		\+ fired_(Entity, Functor/Arity, _),
+		properties_indicator_number_of_clauses(Properties, Functor/Arity, PredicateIndicator, Total),
 		assertz(covered_(Entity, Functor/Arity, 0, Total)),
-		print_message(information, lgtunit, entity_predicate_coverage(Entity, Functor/Arity, 0, Total, 0, [])),
+		print_message(information, lgtunit, entity_predicate_coverage(Entity, PredicateIndicator, 0, Total, 0, [])),
 		fail.
+	% print entity summary coverage statistics
 	write_entity_coverage_information(Entity) :-
 		covered(Entity, Covered, Total),
 		(	Total =:= 0 ->
@@ -1459,42 +1461,44 @@
 		),
 		print_message(information, lgtunit, entity_coverage(Entity, Covered, Total, Percentage)).
 
-	number_of_clauses(Entities, Total) :-
-		entities_number_of_clauses(Entities, 0, Total).
-
-	entities_number_of_clauses([], Total, Total).
-	entities_number_of_clauses([Entity| Entities], Total0, Total) :-
+	entity_indicator_number_of_clauses(Entity, Other::Functor/Arity, PredicateIndicator, NumberOfClauses) :-
+		!,
 		(	current_object(Entity) ->
-			object_property(Entity, number_of_user_clauses(EntityTotal))
-		;	current_category(Entity) ->
-			category_property(Entity, number_of_user_clauses(EntityTotal))
-		;	% protocol
-			EntityTotal = 0
+			object_property(Entity, provides(Functor/Arity, Other, DefinitionProperties))
+		;	current_category(Entity),
+			category_property(Entity, provides(Functor/Arity, Other, DefinitionProperties))
 		),
-		Total1 is Total0 + EntityTotal,
-		entities_number_of_clauses(Entities, Total1, Total).
+		(	member(number_of_clauses(NumberOfClauses), DefinitionProperties) ->
+			true
+		;	NumberOfClauses = 0
+		),
+		(	current_object(Other) ->
+			object_property(Other, declares(Functor/Arity, DeclarationProperties))
+		;	current_category(Other),
+			category_property(Other, declares(Functor/Arity, DeclarationProperties))
+		),
+		(	member(non_terminal(NonTerminal), DeclarationProperties) ->
+			PredicateIndicator = Other::NonTerminal
+		;	PredicateIndicator = Other::Functor/Arity
+		).
+	entity_indicator_number_of_clauses(Entity, Functor/Arity, PredicateIndicator, NumberOfClauses) :-
+		(	current_object(Entity) ->
+			object_property(Entity, defines(Functor/Arity, Properties))
+		;	current_category(Entity),
+			category_property(Entity, defines(Functor/Arity, Properties))
+		),
+		properties_indicator_number_of_clauses(Properties, Functor/Arity, PredicateIndicator, NumberOfClauses).
 
-	number_of_clauses(Entity, Other::Functor/Arity, Total) :-
-		current_object(Entity),
-		object_property(Entity, provides(Functor/Arity, Other, Properties)),
-		memberchk(number_of_clauses(Total), Properties),
-		!.
-	number_of_clauses(Entity, Functor/Arity, Total) :-
-		current_object(Entity),
-		object_property(Entity, defines(Functor/Arity, Properties)),
-		memberchk(number_of_clauses(Total), Properties),
-		!.
-	number_of_clauses(Entity, Other::Functor/Arity, Total) :-
-		current_category(Entity),
-		category_property(Entity, provides(Functor/Arity, Other, Properties)),
-		memberchk(number_of_clauses(Total), Properties),
-		!.
-	number_of_clauses(Entity, Functor/Arity, Total) :-
-		current_category(Entity),
-		category_property(Entity, defines(Functor/Arity, Properties)),
-		memberchk(number_of_clauses(Total), Properties),
-		!.
-	number_of_clauses(_, _, 0).
+	properties_indicator_number_of_clauses(Properties, PredicateIndicator0, PredicateIndicator, NumberOfClauses) :-
+		\+ memberchk(auxiliary, Properties),
+		(	member(number_of_clauses(NumberOfClauses), Properties) ->
+			true
+		;	NumberOfClauses = 0
+		),
+		(	member(non_terminal(PredicateIndicator), Properties) ->
+			true
+		;	PredicateIndicator = PredicateIndicator0
+		).
 
 	write_coverage_results_summary(DeclaredEntities, TestedEntities) :-
 		length(DeclaredEntities, TotalEntities),

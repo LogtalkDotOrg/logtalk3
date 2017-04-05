@@ -77,6 +77,9 @@ reports.
 * IMPROVED: Code coverage reports by also printing coverage statistics per
 entity.
 
+* IMPROVED: Code coverage reports by using non-terminal indicators when
+reporting coverage for predicates derived from non-terminals.
+
 Tests
 -----
 
