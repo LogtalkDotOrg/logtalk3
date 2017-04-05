@@ -22,11 +22,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/12,
+		date is 2017/04/05,
 		comment is 'Unit tests for the "localizations" example.'
 	]).
+
+	cover(my_game(_)).
+	cover(my_game_de_localization).
+	cover(my_game_en_localization).
+	cover(my_game_fr_localization).
+	cover(my_game_pt_localization).
 
 	test(localizations_1) :-
 		^^set_text_output(''),

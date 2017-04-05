@@ -21,7 +21,18 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
+	logtalk_load(
+		[
+			my_game,
+			my_game_de_localization,
+			my_game_en_localization,
+			my_game_fr_localization,
+			my_game_pt_localization
+		], [
+			source_data(on),
+			debug(on)
+		]
+	),
 	logtalk_load(tests, [hook(lgtunit)]),
 	set_logtalk_flag(report, on),
 	tests::run

@@ -84,6 +84,11 @@ Tests
 
 * ADDED: Tests to the `errors` example to check for expected compiler errors.
 
+Examples
+--------
+
+* CHANGED: The `localizations` example to generate a code coverage report.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
