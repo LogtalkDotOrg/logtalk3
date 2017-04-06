@@ -55,8 +55,8 @@ using the `apropos logtalk` command.
 	privileges)
 
 - `logtalk_tester.sh`  
-	shell script for automating running unit tests in the current directory
-	and recursively in all its sub-directories by scanning for either `tester.lgt`
+	shell script for automating running unit tests in the current directory and
+	recursively in all its sub-directories by scanning for either `tester.lgt`
 	or `tester.logtalk` files;
 	in its default output format, it reports, besides test results, compilation
 	warnings and errors (please note that, depending on the tests and on the

@@ -21,12 +21,14 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 0.1,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/04/04,
+		date is 2017/04/06,
 		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.'
 	]).
 
+	% the timestamp message is printed before the message that prints
+	% the testsuite file that we require to create the XML report
 	:- private(timestamp_/6).
 	:- dynamic(timestamp_/6).
 
