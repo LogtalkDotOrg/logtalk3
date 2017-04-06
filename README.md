@@ -150,8 +150,8 @@ CITATIONS
 
 If you find Logtalk useful, please include a citation on your publications.
 Consult the [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib) file for bibliographic
-references in BibTeX format (the Logtalk technical report published on 2000
-and the 2003 PhD thesis on Logtalk are good choices).
+references in BibTeX format (the Logtalk user and reference manuals and the
+2003 PhD thesis on Logtalk are good choices).
 
 
 CONTRIBUTIONS
