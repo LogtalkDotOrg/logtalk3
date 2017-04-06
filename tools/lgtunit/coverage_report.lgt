@@ -21,9 +21,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/04/06,
+		date is 2017/04/07,
 		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.'
 	]).
 
@@ -95,6 +95,15 @@
 
 	message_hook(declared_entities_and_clause_numbers(_TotalEntities, _TotalClauses)) :-
 		write_xml_close_tag(entities).
+
+	message_hook(no_code_coverage_information_collected) :-
+		write_xml_close_tag(entities),
+		write_xml_element(entities_covered, 0),
+		write_xml_element(entities_total, '?'),
+		write_xml_element(entities_percentage, 0.0),
+		write_xml_element(clauses_covered, 0),
+		write_xml_element(clauses_total, '?'),
+		write_xml_element(clauses_percentage, 0.0).
 
 	% global statistics
 	message_hook(covered_entities_numbers(Covered, Total, Percentage)) :-

@@ -24,7 +24,11 @@ RELEASE NOTES
 3.10.5 - April ??, 2017
 =======================
 
+Tools
+-----
 
+* FIXED: Generate a valid XML code coverage report when no code coverage
+information is collected.
 
 
 3.10.4 - April 6, 2017

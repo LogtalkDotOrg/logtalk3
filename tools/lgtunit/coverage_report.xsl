@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing code coverage report XML files in a browser
-%  Last updated on April 5, 2017
+%  Last updated on April 7, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -50,6 +50,7 @@
 			h1 {background-color: #f5f5f5; padding: 8px;}
 			h2 {background-color: #f5f5f5; padding: 6px;}
 			h3 {background-color: #f5f5f5; padding: 4px;}
+			h4 {padding: 2px;}
 			table {border: 1px solid black;}
 			th {border: 1px solid black;}
 			td {border: 1px solid black; padding: 3px;}
@@ -79,7 +80,7 @@
 						<div class="caption"><xsl:value-of select="cover/entities_covered" />/<xsl:value-of select="cover/entities_total" /></div>
 					</div>
 				</td>
-				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/entities_percentage, '###.0')" /></td>
+				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/entities_percentage, '##0.0')" /></td>
 			</tr>
 			<tr>
 				<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
@@ -89,7 +90,7 @@
 						<div class="caption"><xsl:value-of select="cover/clauses_covered" />/<xsl:value-of select="cover/clauses_total" /></div>
 					</div>
 				</td>
-				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/clauses_percentage, '###.0')" /></td>
+				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(cover/clauses_percentage, '##0.0')" /></td>
 			</tr>
 		</table>
 
@@ -101,27 +102,34 @@
 </xsl:template>
 
 <xsl:template match="cover/entities">
-	<xsl:for-each select="entity">
-		<h3><code><xsl:value-of select="name" /></code></h3>
-		<table style="width:50%; margin-bottom: 30px;">
-		    <tr>
-		      <th style="width:30%;">Entity Coverage</th>
-		      <th style="width:10%;">Covered/Total</th> 
-		      <th style="width:10%;">Percentage</th> 
-		    </tr>
-			<tr>
-				<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
-				<td style="width:10%; text-align:center">
-					<div class="percentage_bar">
-						<div class="percentage" style="width:{percentage}%">&#160;</div>
-						<div class="caption"><xsl:value-of select="covered" />/<xsl:value-of select="total" /></div>
-					</div>
-				</td>
-				<td style="width:10%; text-align:center"><xsl:value-of select="format-number(percentage, '###.0')" /></td>
-			</tr>
-		</table>
-		<xsl:apply-templates select="predicates" />
-	</xsl:for-each>
+	<xsl:choose>
+		<xsl:when test="entity">
+			<xsl:for-each select="entity">
+				<h3><code><xsl:value-of select="name" /></code></h3>
+				<table style="width:50%; margin-bottom: 30px;">
+				    <tr>
+				      <th style="width:30%;">Entity Coverage</th>
+				      <th style="width:10%;">Covered/Total</th> 
+				      <th style="width:10%;">Percentage</th> 
+				    </tr>
+					<tr>
+						<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
+						<td style="width:10%; text-align:center">
+							<div class="percentage_bar">
+								<div class="percentage" style="width:{percentage}%">&#160;</div>
+								<div class="caption"><xsl:value-of select="covered" />/<xsl:value-of select="total" /></div>
+							</div>
+						</td>
+						<td style="width:10%; text-align:center"><xsl:value-of select="format-number(percentage, '##0.0')" /></td>
+					</tr>
+				</table>
+				<xsl:apply-templates select="predicates" />
+			</xsl:for-each>
+		</xsl:when>
+		<xsl:otherwise>
+			<h4>(no code coverage information collected)</h4>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 <xsl:template match="*/predicates">
