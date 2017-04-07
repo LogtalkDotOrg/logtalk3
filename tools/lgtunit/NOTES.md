@@ -320,12 +320,12 @@ that you want to debug. For example, assuming your tests are defined in a
 	| ?- tests::run(test_foo).
 	...
 
-You can also compiling the code and the tests to be tested in debug mode but
-compile the tests without using the `hook/1` compiler option. Assuming that
-the `context_switching_calls` flag is set to `allow`, you can then use the
-`<</2` debugging control construct to debug the tests. For example, assuming
-that the identifier of test to be debugged is `test_foo` and that you used
-the `test/1` dialect:
+You can also compile the code and the tests in debug mode but without using
+the `hook/1` compiler option for the tests compilation. Assuming that the
+`context_switching_calls` flag is set to `allow`, you can then use the `<</2`
+debugging control construct to debug the tests. For example, assuming that
+the identifier of test to be debugged is `test_foo` and that you used the
+`test/1` dialect:
 
 	| ?- logtalk_load(debugger(loader)).
 	...
@@ -450,12 +450,17 @@ Exporting code coverage results in XML format
 
 To export code coverage results in XML format, load the `coverage_report.lgt`
 file before running the tests. A file named `coverage_report.xml` will be
-created in the same directory as the object defining the tests. The XML file
-can be opened in most web browsers (with the notorious exception of Google
-Chrome) by copying to the same directory the `coverage_report.dtd` and
-`coverage_report.xsl` files found on the `tools/lgtunit` directory. In
-alternative, a XSLT processor can be used to generate a `coverage_report.html`
-file instead of relying in a web browser for the transformation.
+created in the same directory as the object defining the tests.
+
+The XML file can be opened in most web browsers (with the notorious exception
+of Google Chrome) by copying to the same directory the `coverage_report.dtd`
+and `coverage_report.xsl` files found in the `tools/lgtunit` directory (when
+using the `logtalk_tester` script, these two files are copied automatically).
+In alternative, a XSLT processor can be used to generate an XHTML file instead
+of relying in a web browser for the transformation. For example, using the
+popular `xsltproc` XSLT processor:
+
+	$ xsltproc -o coverage_report.html coverage_report.xml
 
 
 Known issues
