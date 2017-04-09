@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.1,
+		version is 4.2,
 		author is 'Paulo Moura',
-		date is 2017/04/05,
+		date is 2017/04/09,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -850,7 +850,7 @@
 	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		check_for_valid_test_outcome(Test, Outcome0),
-		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
+		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
 		term_variables(Options, Variables),
 		parse_test_options(Options, Goal0, Test, Condition, Setup, Cleanup, Note),
@@ -868,7 +868,7 @@
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, [], Outcome) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		check_for_valid_test_outcome(Test, Outcome0),
-		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
+		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Position)))
@@ -899,8 +899,9 @@
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(Test, succeeds(Test, Position))).
-	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic) :- lgtunit::deterministic(Goal))]) :-
+	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic) :- lgtunit::deterministic(Head))]) :-
 		check_for_valid_test_identifier(Test),
+		compile_deterministic_test_aux_predicate(Test, Goal, Head),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(Test, deterministic(Test, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, [], fail) :- Goal)]) :-
@@ -1007,16 +1008,18 @@
 		;	print_message(error, lgtunit, invalid_test_outcome(Test, Outcome))
 		).
 
-	convert_test_outcome(true, Goal, true, Goal).
-	convert_test_outcome(true(Test), Goal, true, (Goal, Test)).
-	convert_test_outcome(deterministic, Goal, deterministic, lgtunit::deterministic(Goal)).
-	convert_test_outcome(deterministic(Test), Goal, deterministic, (lgtunit::deterministic(Goal), Test)).
-	convert_test_outcome(fail, Goal, fail, Goal).
-	convert_test_outcome(error(Ball), Goal, [error(Ball,_)], Goal).
-	convert_test_outcome(errors(Balls), Goal, Errors, Goal) :-
+	convert_test_outcome(true, _, Goal, true, Goal).
+	convert_test_outcome(true(Test), _, Goal, true, (Goal, Test)).
+	convert_test_outcome(deterministic, Test, Goal, deterministic, lgtunit::deterministic(Head)) :-
+		compile_deterministic_test_aux_predicate(Test, Goal, Head).
+	convert_test_outcome(deterministic(Check), Test, Goal, deterministic, (lgtunit::deterministic(Head), Check)) :-
+		compile_deterministic_test_aux_predicate(Test, Goal, Head).
+	convert_test_outcome(fail, _, Goal, fail, Goal).
+	convert_test_outcome(error(Ball), _, Goal, [error(Ball,_)], Goal).
+	convert_test_outcome(errors(Balls), _, Goal, Errors, Goal) :-
 		map_errors(Balls, Errors).
-	convert_test_outcome(ball(Ball), Goal, [Ball], Goal).
-	convert_test_outcome(balls(Balls), Goal, Balls, Goal).
+	convert_test_outcome(ball(Ball), _, Goal, [Ball], Goal).
+	convert_test_outcome(balls(Balls), _, Goal, Balls, Goal).
 
 	map_errors([], []).
 	map_errors([Ball| Balls], [error(Ball,_)| Errors]) :-
@@ -1065,11 +1068,11 @@
 		).
 	parse_test_options([Option| Options], TestGoal, Test, Condition, Setup, Cleanup, Note) :-
 		(	Option = condition(Goal) ->
-			compile_test_step_aux_predicate(Test, '_condition', Goal, Condition)
+			compile_test_step_aux_predicate(Test, '__condition', Goal, Condition)
 		;	Option = setup(Goal) ->
-			compile_test_step_aux_predicate(Test, '_setup', Goal, Setup)
+			compile_test_step_aux_predicate(Test, '__setup', Goal, Setup)
 		;	Option = cleanup(Goal) ->
-			compile_test_step_aux_predicate(Test, '_cleanup', Goal, Cleanup)
+			compile_test_step_aux_predicate(Test, '__cleanup', Goal, Cleanup)
 		;	Option = note(Note) ->
 			true
 		;	% ignore non-recognized options
@@ -1082,6 +1085,12 @@
 		logtalk_load_context(entity_name, Entity),
 		logtalk::execution_context(ExecutionContext, Entity, Entity, Entity, Entity, [], []),
 		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, ExecutionContext),
+		logtalk::compile_aux_clauses([(Head :- Goal)]).
+
+	compile_deterministic_test_aux_predicate(Test, Goal, Head) :-
+		atom_concat(Test, '__deterministic', Functor),
+		term_variables(Goal, Variables),
+		Head =.. [Functor| Variables],
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests) :-

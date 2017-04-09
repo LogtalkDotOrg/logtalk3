@@ -33,6 +33,8 @@ context built-in methods.
 Tools
 -----
 
+* IMPROVED: Performance of determinism tests when using the `lgtunit` tool.
+
 * FIXED: Generate a valid XML code coverage report when no code coverage
 information is collected.
 
