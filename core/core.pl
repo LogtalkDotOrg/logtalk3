@@ -11680,14 +11680,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = (This0 = This),
 		DPred = TPred,
 		DThis = This
-	),
-	(	nonvar(This0),
-		nonvar(This),
-		functor(This0, Functor, Arity),
-		\+ functor(This, Functor, Arity) ->
-		% mismatch between the argument of this/1 and the parametric object identifier
-		throw(domain_error(object_identifier, This))
-	;	true
 	).
 
 '$lgt_compile_body'(self(Self), TPred, '$lgt_debug'(goal(self(DSelf), DPred), ExCtx), Ctx) :-
