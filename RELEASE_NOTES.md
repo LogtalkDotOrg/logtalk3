@@ -24,11 +24,23 @@ RELEASE NOTES
 3.10.5 - April ??, 2017
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Regression introduced in release 3.10.2 when meta-calling execution
+context built-in methods.
+
 Tools
 -----
 
 * FIXED: Generate a valid XML code coverage report when no code coverage
 information is collected.
+
+Tests
+-----
+
+* ADDED: Unit tests for metas-calls to the `this/1` and `self/1` execution
+context built-in methods.
 
 
 3.10.4 - April 6, 2017

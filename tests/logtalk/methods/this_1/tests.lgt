@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/03/06,
+		date is 2017/04/09,
 		comment is 'Unit tests for the this/1 built-in method.'
 	]).
 
@@ -39,6 +39,11 @@
 		\+ this(other).
 
 	test(this_4) :-
+		Goal = this(This),
+		call(Goal),
+		This == tests.
+
+	test(this_5) :-
 		this_1_test_object_1::p(This),
 		This == this_1_test_object_1.
 

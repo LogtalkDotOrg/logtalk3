@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 4, stable)).
+'$lgt_version_data'(logtalk(3, 10, 5, rc1)).
 
 
 
@@ -3561,7 +3561,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
-			'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
+			'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -3655,7 +3655,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
-			'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
+			'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -4191,7 +4191,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
 	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input), Entity)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
-	'$lgt_comp_ctx'(Ctx, _, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
+	'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
 	catch('$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx), Error, throw(error(Error, logtalk(phrase(GRBody, Input), Entity)))),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, [] = S,
@@ -4211,7 +4211,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
 	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input, Rest), Entity)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
-	'$lgt_comp_ctx'(Ctx, _, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
+	'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
 	catch('$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx), Error, throw(error(Error, logtalk(phrase(GRBody, Input, Rest), Entity)))),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, Rest = S,
@@ -5393,7 +5393,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			call(DDef, Pred, ExCtx, TPred) ->
 			call(TPred)
 		;	% in the worst case we need to compile the meta-call
-			'$lgt_comp_ctx'(Ctx, _, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, Stack, _),
+			'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, Stack, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Entity)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -5406,7 +5406,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			call(Def, Pred, ExCtx, TPred) ->
 			call(TPred)
 		;	% in the worst case we need to compile the meta-call
-			'$lgt_comp_ctx'(Ctx, _, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, [], _),
+			'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, [], _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Entity)))),
 			(	Flags /\ 512 =:= 512 ->
 				% category compiled in debug mode
@@ -5439,7 +5439,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	MetaCallCtx = ExCtx-ExtraVars
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
-			'$lgt_comp_ctx'(Ctx, _, _, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
+			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerEntity)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -5457,7 +5457,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	MetaCallCtx = ExCtx-ExtraVars
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
-			'$lgt_comp_ctx'(Ctx, _, _, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
+			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerEntity)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -5505,7 +5505,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	call(DDef, Goal, ExCtx, TGoal) ->
 				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
 			;	% in the worst case we need to compile the goal
-				'$lgt_comp_ctx'(Ctx, _, _, Obj, Obj, Obj, Obj, Prefix, [], _, ExCtx, runtime, [], _),
+				'$lgt_comp_ctx'(Ctx, _, ExCtx, Obj, Obj, Obj, Obj, Prefix, [], _, ExCtx, runtime, [], _),
 				catch('$lgt_compile_body'(Goal, TGoal, DGoal, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
 				(	Flags /\ 512 =:= 512 ->
 					% object compiled in debug mode
