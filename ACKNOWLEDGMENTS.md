@@ -77,6 +77,7 @@ CONTRIBUTORS
 * Victor Lagerkvist (testing, library enhancements, made Verdi Neruda available)
 * Victor Noel (bug reports)
 * Vítor Santos Costa (red-black tree library)
+* Xin Wang (bug reports)
 
 A special thanks to all the Prolog implementers who fixed bugs and
 implemented enhancements that greatly helped in improving Logtalk
