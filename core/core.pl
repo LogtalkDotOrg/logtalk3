@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 5, rc2)).
+'$lgt_version_data'(logtalk(3, 10, 5, rc1)).
 
 
 
@@ -7921,10 +7921,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Flag =.. [Name, Value],
 	'$lgt_set_compiler_flags'([Flag]),
 	'$lgt_check_for_renamed_flag'(Name, Ctx).
-
-'$lgt_compile_file_directive'(create_logtalk_flag(Flag, Value, Options), _) :-
-	!,
-	create_logtalk_flag(Flag, Value, Options).
 
 '$lgt_compile_file_directive'(set_prolog_flag(Flag, Value), Ctx) :-
 	!,
@@ -17742,7 +17738,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_file_directive'(use_module(_, _)).
 '$lgt_file_directive'(ensure_loaded(_)).
 '$lgt_file_directive'(set_prolog_flag(_, _)).
-'$lgt_file_directive'(create_logtalk_flag(_, _, _)).
 '$lgt_file_directive'(set_logtalk_flag(_, _)).
 '$lgt_file_directive'(initialization(_)).
 '$lgt_file_directive'(op(_, _, _)).
