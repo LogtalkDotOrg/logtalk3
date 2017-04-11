@@ -6,7 +6,7 @@
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on February 17, 2017
+##   Last updated on April 11, 2017
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -47,6 +47,7 @@ eval $xslt_proc -o index.section refman.xsl index.html
 eval $xslt_proc -o glossary.section refman.xsl ../glossary.html
 eval $xslt_proc -o grammar.section refman.xsl grammar.html
 eval $xslt_proc -o directives/encoding_1.section refman.xsl directives/encoding_1.html
+eval $xslt_proc -o directives/create_logtalk_flag_3.section refman.xsl directives/create_logtalk_flag_3.html
 eval $xslt_proc -o directives/set_logtalk_flag_2.section refman.xsl directives/set_logtalk_flag_2.html
 eval $xslt_proc -o directives/if_1.section refman.xsl directives/if_1.html
 eval $xslt_proc -o directives/elif_1.section refman.xsl directives/elif_1.html
@@ -193,6 +194,7 @@ cat -s \
 	grammar.section \
 	directives.header \
 	directives/encoding_1.section \
+	directives/create_logtalk_flag_3.section \
 	directives/set_logtalk_flag_2.section \
 	directives/if_1.section \
 	directives/elif_1.section \

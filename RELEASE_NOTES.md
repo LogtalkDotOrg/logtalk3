@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Allow using the `create_logtalk_flag/3` built-in predicate also as a
+source file directive.
+
 * FIXED: Regression introduced in release 3.10.2 when meta-calling execution
 context built-in methods.
 
