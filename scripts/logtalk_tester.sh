@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 4, 2017
+##   Last updated on April 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.24"
+	echo "$(basename "$0") 0.25"
 	exit 0
 }
 
@@ -158,9 +158,10 @@ run_test() {
 usage_help()
 {
 	echo 
-	echo "This script automates running unit tests found on the current directory and recursively"
-	echo "in its sub-directories by scanning for tester.lgt and tester.logtalk source files. In"
-	echo  "case of failed unit tests, this script returns an exit code of 1."
+	echo "This script automates running unit tests found in the current directory"
+	echo "and recursively in its sub-directories by scanning for \"tester.logtalk\""
+	echo "and \"tester.lgt\" source files.  In case of failed unit tests, timed out"
+	echo "test sets, or crashed test sets, this script returns an exit code of 1."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-- arguments]"
