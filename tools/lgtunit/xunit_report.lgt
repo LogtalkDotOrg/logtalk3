@@ -18,12 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% define a flag to allow the logtalk_tester script to pass the
+% option to supress the test file and directory path prefix
+:- initialization(
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)])
+).
+
+
 :- object(xunit_report).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2016/03/12,
+		date is 2017/04/12,
 		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format in the same directory as the tests object file.'
 	]).
 
@@ -146,14 +153,26 @@
 		message_cache_(tests_results_summary(Tests, Skipped, _, Failures, _)).
 
 	testsuite_name(Name) :-
-		message_cache_(running_tests_from_object_file(_, Name)).
+		message_cache_(running_tests_from_object_file(_, File)),
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, Name, File) ->
+			true
+		;	Name = File
+		).
 
 	testsuite_package(Package) :-
 		message_cache_(running_tests_from_object_file(Object, File)),
 		(	logtalk::loaded_file_property(File, library(Library)) ->
 			Package = library(Library)
 		;	% use the file directory
-			object_property(Object, file(_,Package))
+			object_property(Object, file(_,Directory)),
+			% bypass the compiler as the flag is only created after loading this file
+			{current_logtalk_flag(suppress_path_prefix, Prefix)},
+			(	atom_concat(Prefix, Package, Directory) ->
+				true
+			;	Package = Directory
+			)
 		).
 
 	testsuite_time(Time) :-

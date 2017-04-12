@@ -18,6 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% define a flag to allow the logtalk_tester script to pass the
+% option to supress the test file and directory path prefix
+:- initialization(
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)])
+).
+
+
 :- object(tap_report).
 
 	:- info([

@@ -18,12 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% define a flag to allow the logtalk_tester script to pass the
+% option to supress the test file and directory path prefix
+:- initialization(
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)])
+).
+
+
 :- object(coverage_report).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/04/07,
+		date is 2017/04/12,
 		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.'
 	]).
 
@@ -59,7 +66,12 @@
 		write(coverage_report, '<!DOCTYPE cover SYSTEM "coverage_report.dtd">'), nl(coverage_report),
 		write(coverage_report, '<?xml-stylesheet type="text/xsl" href="coverage_report.xsl"?>'), nl(coverage_report),
 		write_xml_open_tag(cover),
-		write_xml_element(testsuite, File),
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, Suffix, File) ->
+			write_xml_element(testsuite, Suffix)
+		;	write_xml_element(testsuite, File)
+		),
 		write_xml_element(object, Object),
 		timestamp_(Year, Month, Day, Hours, Minutes, Seconds),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp),

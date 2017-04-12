@@ -89,6 +89,7 @@ format='default'
 coverage='none'
 format_goal=$format_default_goal
 coverage_goal=$coverage_default_goal
+flag_goal="true"
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
@@ -101,15 +102,15 @@ run_tests() {
 	echo "***** Testing $unit_short"
 	name=${unit////__}
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$coverage_goal,$tester_optimal_goal"
+		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$coverage_goal,$tester_normal_goal"
+		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$coverage_goal,$tester_debug_goal"
+		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 	fi
@@ -178,7 +179,7 @@ usage_help()
 	echo "     (possible values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
-	echo "  -s supress path prefix (default is $prefix)"
+	echo "  -s suppress path prefix (default is $prefix)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (possible values are none and xml)"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
@@ -348,6 +349,12 @@ fi
 
 if [ "$timeout_command" == "" ] ; then
 	echo "Warning! Timeout support not available. The timeout option will be ignored."
+fi
+
+if [[ "$prefix" != "" && ("$format" != "default" || "$coverage" != "none") ]] ; then
+	flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
+else
+	flag_goal="true"
 fi
 
 mkdir -p "$results"

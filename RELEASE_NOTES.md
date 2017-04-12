@@ -35,6 +35,9 @@ Tools
 
 * IMPROVED: Performance of determinism tests when using the `lgtunit` tool.
 
+* IMPROVED: Pass the path prefix to be suppressed from the `logtalk_tester`
+script to the code coverage and test results output and report objects.
+
 * FIXED: Generate a valid XML code coverage report when no code coverage
 information is collected.
 
