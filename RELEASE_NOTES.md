@@ -47,6 +47,12 @@ Tests
 * ADDED: Unit tests for metas-calls to the `this/1` and `self/1` execution
 context built-in methods.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Syntax highlighting test files for recently added instantiation
+mode operators.
+
 
 3.10.4 - April 6, 2017
 ======================

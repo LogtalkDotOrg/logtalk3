@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.34,
+		version is 1.35,
 		author is 'Paulo Moura',
-		date is 2016/06/18,
+		date is 2017/04/12,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -84,7 +84,7 @@ comment
 
 	:- private(ccc/2).
 	:- dynamic(ccc/2).
-	:- mode(ccc(@atom, ?atom), one_or_more).
+	:- mode(ccc(@atom, ?atom, ++list, --ground), one_or_more).
 	:- info(ccc/2, [
 		comment is 'Predicate brief description.',
 		argnames is ['Arg1', 'Arg2']
