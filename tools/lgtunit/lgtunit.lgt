@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.2,
+		version is 4.3,
 		author is 'Paulo Moura',
-		date is 2017/04/09,
+		date is 2017/04/12,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1397,9 +1397,18 @@
 		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
+	% we consider objects and categories with no clauses also
+	% as "fired" in order to reported them as covered
 	fired_entity(Entity) :-
 		::cover(Entity),
-		\+ \+ fired_(Entity, _, _).
+		(	fired_(Entity, _, _) ->
+			true
+		;	current_object(Entity) ->
+			object_property(Entity, number_of_user_clauses(0))
+		;	current_category(Entity) ->
+			category_property(Entity, number_of_user_clauses(0))
+		;	fail
+		).
 
 	write_coverage_results([]).
 	write_coverage_results([Entity| Entities]) :-
@@ -1464,9 +1473,14 @@
 	% print entity summary coverage statistics
 	write_entity_coverage_information(Entity) :-
 		covered(Entity, Covered, Total),
-		(	Total =:= 0 ->
+		(	Covered =:= 0, Total =:= 0 ->
+			% entity with no clauses
+			Percentage is 100.0
+		;	Total =:= 0 ->
+			% entity not covered
 			Percentage is 0.0
-		;	Percentage is float(Covered * 100 / Total)
+		;	% at least partially covered entity
+			Percentage is float(Covered * 100 / Total)
 		),
 		print_message(information, lgtunit, entity_coverage(Entity, Covered, Total, Percentage)).
 
@@ -1526,8 +1540,17 @@
 		print_message(information, lgtunit, covered_clause_numbers(CoveredClauses, TotalClauses, PercentageClauses)).
 
 	covered(Entity, Coverage, Clauses) :-
+		\+ \+ covered_(Entity, _, _, _),
+		!,
 		findall(Covered-Total, covered_(Entity, _, Covered, Total), List),
 		sum_coverage(List, Coverage, Clauses).
+	covered(Entity, 0, 0) :-
+		(	current_object(Entity) ->
+			object_property(Entity, number_of_user_clauses(0))
+		;	current_category(Entity) ->
+			category_property(Entity, number_of_user_clauses(0))
+		;	fail
+		).
 
 	covered(Coverage, Clauses) :-
 		findall(Covered-Total, covered_(_, _, Covered, Total), List),

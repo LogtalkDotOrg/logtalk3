@@ -33,9 +33,13 @@ context built-in methods.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool now counts objects and categories declared in a
+test set to be subject to collecting of code coverage data as covered entities
+when they have no clauses.
+
 * IMPROVED: Performance of determinism tests when using the `lgtunit` tool.
 
-* IMPROVED: Pass the path prefix to be suppressed from the `logtalk_tester`
+* IMPROVED: Pass the suppress path prefix option from the `logtalk_tester`
 script to the code coverage and test results output and report objects.
 
 * FIXED: Generate a valid XML code coverage report when no code coverage
