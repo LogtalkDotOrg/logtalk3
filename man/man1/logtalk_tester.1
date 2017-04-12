@@ -20,6 +20,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I prefix
 .B ] [-c
 .I report
+.B ] [-l
+.I level
 .B ] [--
 .I arguments
 .B ]
@@ -54,6 +56,9 @@ Path prefix to suppress when printing test suite and test result paths. Default 
 .TP
 .BI \-c
 Code coverage report. Default is \fInone\fR. Possible values are \fIxml\fR and \fInone\fR.
+.TP
+.BI \-l
+Directory depth level to look for test sets. A level of 1 means current directory only. Default is to recurse into all sub-directories.
 .TP
 .BI \--
 Arguments to be passed to the integration script used to run the tests (no default).

@@ -37,6 +37,9 @@ Tools
 test set to be subject to collecting of code coverage data as covered entities
 when they have no clauses.
 
+* ADDED: Option to the `logtalk_tester` script to specify the directory depth
+level to look for test sets.
+
 * IMPROVED: Performance of determinism tests when using the `lgtunit` tool.
 
 * IMPROVED: Pass the suppress path prefix option from the `logtalk_tester`

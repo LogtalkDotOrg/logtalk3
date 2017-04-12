@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.25"
+	echo "$(basename "$0") 0.26"
 	exit 0
 }
 
@@ -79,6 +79,7 @@ coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
 # default argument values
 
 base="$PWD"
+level=""
 results="$base/logtalk_tester_logs"
 backend=swipl
 prolog='SWI-Prolog'
@@ -165,7 +166,7 @@ usage_help()
 	echo "test sets, or crashed test sets, this script returns an exit code of 1."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-- arguments]"
+	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-l level] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -182,13 +183,14 @@ usage_help()
 	echo "  -s suppress path prefix (default is $prefix)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (possible values are none and xml)"
+	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vp:m:f:d:t:s:c:h" option
+while getopts "vp:m:f:d:t:s:c:l:h" option
 do
 	case $option in
 		v) print_version;;
@@ -199,6 +201,7 @@ do
 		t) t_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
+		l) l_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -347,6 +350,16 @@ if [ "$s_arg" != "" ] ; then
 	prefix="$s_arg"
 fi
 
+if [ "$l_arg" != "" ] ; then
+	if [[ "$l_arg" =~ ^[1-9][0-9]*$ ]] ; then
+		level="-maxdepth $l_arg"
+	else
+		echo "Error! Level must be an integer equal or greater than 1: $l_arg"
+		usage_help
+		exit 1
+	fi
+fi
+
 if [ "$timeout_command" == "" ] ; then
 	echo "Warning! Timeout support not available. The timeout option will be ignored."
 fi
@@ -372,7 +385,7 @@ grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
 
 testsets=0
-output="$(find "$base" -name "tester.lgt" -or -name "tester.logtalk")"
+output="$(find "$base" $level -name "tester.lgt" -or -name "tester.logtalk")"
 while read -r file && [ "$file" != "" ]; do
 	((testsets++))
 	run_tests "$file"
