@@ -470,7 +470,11 @@ Deterministic unit tests are currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers do the lack of a required built-in
 support that cannot be sensibly defined in Prolog.
 
-Code coverage is only available when testing Logtalk code.
+Code coverage is only available when testing Logtalk code. But Prolog modules
+can often be compiled as Logtalk objects and plain Prolog code may be wrapped
+in a Logtalk object by using `include/1` directives. These two workarounds may
+thus allow generating code coverage data also for Prolog code by defining tests
+that use the `<</2` control construct to call the Prolog predicates.
 
 
 Other notes
