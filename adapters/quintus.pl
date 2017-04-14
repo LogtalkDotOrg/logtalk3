@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on August 7, 2016
+%  Last updated on April 14, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -729,7 +729,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	line_count(Stream, LineBegin),
-	read_term(Stream, [variable_names(Variables)| Options], Term),
+	read_term(Stream, [syntax_errors(error), variable_names(Variables)| Options], Term),
 	line_count(Stream, LineEnd).
 
 

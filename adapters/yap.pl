@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on March 6, 2017
+%  Last updated on April 14, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -575,7 +575,7 @@
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options]),
+	read_term(Stream, Term, [syntax_errors(error), term_position(PositionBegin), variable_names(Variables)| Options]),
 	stream_position_data(line_count, PositionBegin, LineBegin),
 	stream_position(Stream, PositionEnd),
 	stream_position_data(line_count, PositionEnd, LineEnd).
