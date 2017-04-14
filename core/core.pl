@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 5, rc2)).
+'$lgt_version_data'(logtalk(3, 10, 5, rc3)).
 
 
 
@@ -11886,42 +11886,42 @@ create_logtalk_flag(Flag, Value, Options) :-
 % arithmetic predicates (portability checks)
 
 '$lgt_compile_body'(_ is Exp, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp),
 	fail.
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 < Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 =< Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 > Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_compile_body'(Exp1 >= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
@@ -12351,7 +12351,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_non_portable_prolog_built_in_call'(runtime, _).
 
-'$lgt_check_non_portable_prolog_built_in_call'(compile(_), Pred) :-
+'$lgt_check_non_portable_prolog_built_in_call'(compile(aux), _) :-
+	!.
+
+'$lgt_check_non_portable_prolog_built_in_call'(compile(user), Pred) :-
 	(	\+ '$lgt_pp_non_portable_predicate_'(Pred, _, _),
 		% not previously recorded as a non portable call
 		\+ '$lgt_iso_spec_predicate'(Pred) ->
