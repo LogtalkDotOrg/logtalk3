@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 5, rc3)).
+'$lgt_version_data'(logtalk(3, 10, 5, rc4)).
 
 
 
@@ -6034,7 +6034,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_write_entity_code'(Output),
 		Error,
-		'$lgt_compiler_stream_io_error_handler'(Output, Error)
+		'$lgt_compiler_output_stream_error_handler'(Output, Error)
 	).
 
 
@@ -6165,7 +6165,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_open'(SourceFile, read, Input, [alias(logtalk_compiler_input)]),
 		OpenError,
-		'$lgt_compiler_open_stream_error_handler'(OpenError)
+		'$lgt_compiler_stream_error_handler'(OpenError)
 	),
 	% look for an encoding/1 directive that, when present, must be the first term on a source file
 	catch(
@@ -6182,12 +6182,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_open'(ObjectFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
 		OpenError,
-		'$lgt_compiler_open_stream_error_handler'(OpenError)
+		'$lgt_compiler_stream_error_handler'(OpenError)
 	),
 	catch(
 		'$lgt_write_encoding_directive'(Output, SourceFile),
 		WriteError,
-		'$lgt_first_stage_error_handler'(WriteError)
+		'$lgt_compiler_stream_error_handler'(WriteError)
 	),
 	% generate a begin_of_file term for term-expansion
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user), _, 0-0),
@@ -6203,7 +6203,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_write_runtime_tables'(Output),
 		OutputError,
-		'$lgt_compiler_stream_io_error_handler'(Output, OutputError)
+		'$lgt_compiler_output_stream_error_handler'(Output, OutputError)
 	),
 	'$lgt_close'(Output),
 	'$lgt_restore_global_operator_table'.
@@ -6790,13 +6790,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compiler_stream_io_error_handler'(@stream, @compound)
+% '$lgt_compiler_output_stream_error_handler'(@stream, @compound)
 %
-% closes the stream being used for reading or writing terms, restores
+% closes the stream being used for writing compiled terms, restores
 % the operator table, reports the compilation error found, and, finally,
 % fails in order to abort the compilation process
 
-'$lgt_compiler_stream_io_error_handler'(Stream, Error) :-
+'$lgt_compiler_output_stream_error_handler'(Stream, Error) :-
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
@@ -6808,13 +6808,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compiler_open_stream_error_handler'(@compound)
+% '$lgt_compiler_stream_error_handler'(@compound)
 %
-% closes input and output stream if open, restores the operator table,
+% closes input and output streams if open, restores the operator table,
 % reports the compilation error found, and, finally, fails in order to
 % abort the compilation process
 
-'$lgt_compiler_open_stream_error_handler'(Error) :-
+'$lgt_compiler_stream_error_handler'(Error) :-
 	(	stream_property(Input, alias(logtalk_compiler_input)) ->
 		catch('$lgt_close'(Input), _, true)
 	;	true
