@@ -40,10 +40,10 @@ Print script version.
 Back-end Prolog compiler. Default is SWI-Prolog. The following identifiers are used: B-Prolog - \fIb\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, JIProlog - \fIji\fR, Lean Prolog - \fIlean\fR, Qu-Prolog - \fIqp\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, XSB - \fIxsb\fR, XSB-MT - \fIxsbmt\fR, YAP - \fIyap\fR.
 .TP
 .BI \-m
-Compilation mode. Default is \fInormal\fR. Possible values are \fInormal\fR, \fIdebug\fR, and \fIall\fR.
+Compilation mode. Default is \fInormal\fR. Valid values are \fInormal\fR, \fIdebug\fR, and \fIall\fR.
 .TP
 .BI \-f
-Format for writing the test results. Default is \fIdefault\fR. Possible values are \fIdefault\fR, \fItap\fR, and \fIxunit\fR.
+Format for writing the test results. Default is \fIdefault\fR. Valid values are \fIdefault\fR, \fItap\fR, and \fIxunit\fR.
 .TP
 .BI \-d
 Directory to store the test results. Default is the local \fI./logtalk_tester_logs\fR directory.
@@ -55,10 +55,10 @@ Timeout in seconds for running each test set. Default is \fI0\fR; i.e. disabled.
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.
 .TP
 .BI \-c
-Code coverage report. Default is \fInone\fR. Possible values are \fIxml\fR and \fInone\fR.
+Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fInone\fR.
 .TP
 .BI \-l
-Directory depth level to look for test sets. A level of 1 means current directory only. Default is to recurse into all sub-directories.
+Directory depth level to look for test sets. Level 1 means current directory only. Default is to recurse into all sub-directories.
 .TP
 .BI \--
 Arguments to be passed to the integration script used to run the tests (no default).
