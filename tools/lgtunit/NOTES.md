@@ -86,6 +86,10 @@ compiling and loading the `lgtunit` tool, the source code under testing, the
 unit tests, and for automatically run all the tests after loading. See e.g.
 the `../../tests` directory for examples of unit tests.
 
+Debugged test sets should preferably be compiled in optimal mode, specially
+when containing deterministic tests and when using the utility benchmarking
+predicates.
+
 
 Unit test dialects
 ------------------
@@ -224,12 +228,20 @@ A unit test object can define the `condition/0` predicate (which defaults to
 tests are skipped if the call to this predicate fails or generates an error.
 
 Individual tests that for some reason should be unconditionally skipped can
-have the test clause head prefixed with the `(-)/1` operator. The number of
-skipped tests is reported together with the numbers of passed and failed tests.
-To skip a test depending on some condition, use the `test/3` dialect and the
-`condition/1` option. The conditional compilation directives can also be used
-in alternative but note that in this case there will be no report on the number
-of skipped tests.
+have the test clause head prefixed with the `(-)/1` operator. For example:
+
+	- test(not_yet_ready) :-
+		...
+
+The number of skipped tests is reported together with the numbers of passed
+and failed tests. To skip a test depending on some condition, use the `test/3`
+dialect and the `condition/1` option. For example:
+
+	test(test_id, true, [condition(current_prolog_flag(bounded,true))) :-
+		...
+
+The conditional compilation directives can also be used in alternative but note
+that in this case there will be no report on the number of skipped tests.
 
 
 Testing non-deterministic predicates
