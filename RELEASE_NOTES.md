@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.10.5 - April ??, 2017
+3.10.5 - April 17, 2017
 =======================
 
 Logtalk compiler and runtime
@@ -39,7 +39,7 @@ Prolog adapter and integration files
 
 * FIXED: Adapter files for Quintus Prolog, SICStus Prolog, and YAP to ensure
 that changes to the `syntax_errors` Prolog flag do not affect the compiler
-which relies on exceptions being generated for syntax errors.
+which expects exceptions to be generated for syntax errors.
 
 Tools
 -----
