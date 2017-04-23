@@ -105,4 +105,6 @@
 		Entity \== Entity2,
 		^^defines_predicate(Entity2, Predicate).
 
+	metric_label('Coupling').
+
 :- end_object.

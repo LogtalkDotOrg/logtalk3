@@ -44,4 +44,6 @@
 		^^defines_predicate(Entity, Predicate, Properties),
 		memberchk(number_of_clauses(Noc), Properties).
 
+	metric_label('Number of Clauses').
+
 :- end_object.

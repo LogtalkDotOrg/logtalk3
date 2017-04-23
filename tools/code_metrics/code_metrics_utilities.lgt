@@ -224,11 +224,9 @@
 
 	% Auxiliary predicates
 
-	valid_call(Predicate) :-
-		(	Predicate = Functor/N
-		;	Predicate = ^^Functor/N
-		;	Predicate = ::Functor/N
-		;	Predicate = _::Functor/N
-		).
+	valid_call(_/_).
+	valid_call(^^_/_).
+	valid_call(::_/_).
+	valid_call(_::_/_).
 
 :- end_category.

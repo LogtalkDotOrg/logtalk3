@@ -95,15 +95,10 @@
 
 	% auxiliary predicates
 
-	% for expanding the metric objects into more meaninful names for the user
-	object_label(dit_metric, 'Depth of Inheritance').
-	object_label(coupling_metric, 'Coupling').
-	object_label(noc_metric, 'Number of Clauses').
-
-	metric_label(MetricObject, Label) :-
-		(	object_label(MetricObject, MetricLabel) ->
-			MetricLabel = Label
-		;	MetricObject = Label
+	metric_label(Metric, Label) :-
+		(	Metric::metric_label(Label) ->
+			true
+		;	Label = Metric
 		).
 
 	ground_term_copy(Term, GroundTerm) :-

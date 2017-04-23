@@ -54,4 +54,6 @@
 	depth(EntityKind, Entity, Depth, Depth) :-
 		\+ ^^ancestor(EntityKind, Entity, _, _).
 
+	metric_label('Depth of Inheritance').
+
 :- end_object.

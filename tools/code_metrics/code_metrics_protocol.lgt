@@ -36,9 +36,15 @@
 	:- public(entity_score/2).
 	:- mode(entity_score(?term, ?term), zero_or_more).
 	:- info(entity_score/2, [
-		version is 0.1,
 		comment is 'True if Score is a term that represents the metric score associated with Entity.',
 		argnames is ['Entity', 'Score']
+	]).
+
+	:- public(metric_label/1).
+	:- mode(metric_label(-atom), one).
+	:- info(metric_label/1, [
+		comment is 'Metric label for pretty printing of metrics data.',
+		argnames is ['Label']
 	]).
 
 :- end_protocol.
