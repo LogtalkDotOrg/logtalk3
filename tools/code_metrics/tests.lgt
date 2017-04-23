@@ -30,6 +30,9 @@
 	]).
 
 	cover(code_metrics).
+	cover(coupling_metric).
+	cover(dit_metric).
+	cover(noc_metric).
 
 	:- uses(code_metrics, [
 		all/0,

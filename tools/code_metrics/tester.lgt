@@ -19,11 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile(logtalk_library_path/2).
-:- dynamic(logtalk_library_path/2).
-
-logtalk_library_path(metrics, code_metrics('metrics/')).
-
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
@@ -33,7 +28,9 @@ logtalk_library_path(metrics, code_metrics('metrics/')).
 			code_metrics_utilities,
 			code_metrics,
 			code_metrics_messages,
-			metrics(loader)
+			'metrics/coupling_metric',
+			'metrics/dit_metric',
+			'metrics/noc_metric'		
 		],
 		[	
 			source_data(on),
