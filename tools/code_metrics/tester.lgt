@@ -30,7 +30,7 @@
 			code_metrics_messages,
 			'metrics/coupling_metric',
 			'metrics/dit_metric',
-			'metrics/noc_metric'		
+			'metrics/noc_metric'
 		],
 		[	
 			source_data(on),

@@ -24,5 +24,7 @@
 		dit_metric,
 		coupling_metric,
 		noc_metric
+	], [
+		optimize(on)
 	])
 ).

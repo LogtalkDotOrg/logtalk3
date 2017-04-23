@@ -33,6 +33,8 @@ for interface uniformity with the other developer tools.
 * IMPROVED: Generate code coverage data for all entities in the `code_metrics`
 tool.
 
+* FIXED: Compile the `code_metrics` tool in optimize mode.
+
 
 3.10.5 - April 17, 2017
 =======================

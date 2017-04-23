@@ -19,12 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile(logtalk_library_path/2).
-:- dynamic(logtalk_library_path/2).
-
-logtalk_library_path(metrics, code_metrics('metrics/')).
-
-
 :- initialization((
 	logtalk_load(library(basic_types_loader)),
 	logtalk_load(library(os_loader)),
@@ -33,6 +27,8 @@ logtalk_library_path(metrics, code_metrics('metrics/')).
 		code_metrics_utilities,
 		code_metrics_messages,
 		code_metrics,
-		metrics(loader)
+		'metrics/loader'
+	], [
+		optimize(on)
 	])
 )).
