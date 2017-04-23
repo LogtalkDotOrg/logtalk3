@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.6</code>
+            <code>1.7</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/2/27</code>
+            <code>2017/4/23</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -346,6 +346,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>loaded_file_property(?atom,?compound) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="file_type_extension/2" class="code">file_type_extension/2</h3>
+          <blockquote>
+            <p class="comment">Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file_type_extension(Type,Extension)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>file_type_extension(?atom,?atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

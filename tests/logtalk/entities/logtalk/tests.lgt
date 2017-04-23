@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2016/11/22,
+		date is 2017/04/23,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -112,6 +112,42 @@
 
 	fails(logtalk_13) :-
 		logtalk::expand_library_path(non_existing_library_alias(some_file), _).
+
+	% file_type_extension/2 tests
+
+	succeeds(logtalk_14) :-
+		forall(
+			logtalk::file_type_extension(Type, Extension),
+			(atom(Type), atom(Extension))
+		).
+
+	succeeds(logtalk_15) :-
+		setof(
+			Type,
+			Extension^(logtalk::file_type_extension(Type, Extension)),
+			Extensions
+		),
+		Extensions == [logtalk, object, prolog, source, tmp].
+
+	succeeds(logtalk_16) :-
+		findall(
+			LogtalkExtension,
+			logtalk::file_type_extension(logtalk, LogtalkExtension),
+			LogtalkExtensions
+		),
+		findall(
+			PrologExtension,
+			logtalk::file_type_extension(prolog, PrologExtension),
+			LogtalkPrologExtensions0,
+			LogtalkExtensions
+		),
+		sort(LogtalkPrologExtensions0, LogtalkPrologExtensions),
+		setof(
+			SourceExtension,
+			logtalk::file_type_extension(source, SourceExtension),
+			SourceExtensions
+		),
+		LogtalkPrologExtensions == SourceExtensions.
 
 	% auxiliary predicates
 

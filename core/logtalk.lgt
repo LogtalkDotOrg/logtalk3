@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2017/02/27,
+		date is 2017/04/23,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
 	]).
 
@@ -187,6 +187,13 @@
 	:- info(loaded_file_property/2, [
 		comment is 'Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, library/1, object/1, protocol/1, and category/1.',
 		argnames is ['Path', 'Property']
+	]).
+
+	:- public(file_type_extension/2).
+	:- mode(file_type_extension(?atom, ?atom), zero_or_more).
+	:- info(file_type_extension/2, [
+		comment is 'Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.',
+		argnames is ['Type', 'Extension']
 	]).
 
 	% hacking predicates
@@ -456,6 +463,13 @@
 	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
 		logtalk_library_path(Library, _),
 		{'$lgt_expand_library_alias'(Library, Directory)}, !.
+
+	file_type_extension(Type, Extension) :-
+		{'$lgt_file_extension'(Type, Extension)}.
+	file_type_extension(source, Extension) :-
+		{'$lgt_file_extension'(logtalk, Extension)}.
+	file_type_extension(source, Extension) :-
+		{'$lgt_file_extension'(prolog, Extension)}.
 
 	compile_aux_clauses(Clauses) :-
 		{'$lgt_compile_aux_clauses'(Clauses)}.
