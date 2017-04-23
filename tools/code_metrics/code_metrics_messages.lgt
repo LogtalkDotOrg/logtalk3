@@ -22,9 +22,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/03/07,
+		date is 2017/04/23,
 		comment is 'Message translations for the code_metrics tool.'
 	]).
 
@@ -45,9 +45,11 @@
 		{ground_term_copy(Message, GroundMessage)},
 		message_tokens(GroundMessage).
 
-	message_tokens(starting_code_analysis) --> [].
+	message_tokens(starting_code_analysis) -->
+		[].
 
-	message_tokens(finished_code_analysis) --> [].
+	message_tokens(finished_code_analysis) -->
+		[].
 
 	message_tokens(scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
 		{ Args = [Type, Year, Month, Day, Hours, Minutes, Seconds] },
@@ -63,8 +65,8 @@
 	message_tokens(scanning_file(File)) -->
 		['Scanning file ~w ...'-[File], nl].
 
-	message_tokens(scanning_item(Kind, Item)) -->
-		[nl, 'Scanning ~q ~w ...'-[Item, Kind], nl].
+	message_tokens(scanning_entity(Kind, Entity)) -->
+		[nl, 'Scanning ~q ~w ...'-[Entity, Kind], nl].
 
 	message_tokens(unknown(library, Library)) -->
 		['Library not defined: ~q'-[Library], nl].
@@ -72,13 +74,13 @@
 		['Directory does not exist: ~q'-[Directory], nl].
 	message_tokens(unknown(file, File)) -->
 		['File does not exist: ~q'-[File], nl].
-	message_tokens(unknown(item, Entity)) -->
-		['Item not loaded: ~q'-[Entity], nl].
+	message_tokens(unknown(entity, Entity)) -->
+		['Entity not loaded: ~q'-[Entity], nl].
 
-	message_tokens(item_score(Item, Metric, Score)) -->
-		item_score(Item, Metric, Score).
+	message_tokens(entity_score(Entity, Metric, Score)) -->
+		entity_score(Entity, Metric, Score).
 
-	item_score(_Item, Metric, Score) -->
+	entity_score(_Entity, Metric, Score) -->
 		{	(	Metric == dit_metric
 			;	Metric == coupling_metric
 			),
@@ -87,7 +89,7 @@
 		},
 		['~w score: ~w'-[Label, Score], nl].
 
-	item_score(_Item, noc_metric, predicate_noc(Predicate, Score)) -->
+	entity_score(_Entity, noc_metric, predicate_noc(Predicate, Score)) -->
 		{ metric_label(noc_metric, Label) },
 		['~w [~w]: ~w'-[Label, Predicate, Score], nl].
 

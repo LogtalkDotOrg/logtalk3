@@ -24,9 +24,9 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/02,
+		date is 2017/04/23,
 		comment is 'Analyzes the depth of inheritance for objects, protocols, and categories.',
 		remarks is [
 			'Depth' - 'The depth is the maximum length of a node to the root entity. Lower scores are generally better.',
@@ -37,7 +37,7 @@
 
 	:- uses(list, [max/2]).
 
-	item_score(Entity, Score) :-
+	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
 		depth(Entity, Score).
 

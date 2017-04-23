@@ -22,24 +22,23 @@
 :- protocol(code_metrics_protocol).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/02,
+		date is 2017/04/23,
 		comment is 'Protocol for code_metrics tool.',
 		remarks is [
 			'Usage' - 'This protocol should be implemented by any metric added to the system.',
-			'Item' - 'A term identifying an item of interest to be measured. This is normally an entity.',
-			'Score' - 'Score can be any type of term necessary to explain the nature of the item and its relationship to the metric in question.'
+			'Score' - 'Score can be any type of term necessary to explain the nature of the entity and its relationship to the metric in question.'
 		],
 		see_also is [code_metrics_utilities]
 	]).
 
-	:- public(item_score/2).
-	:- mode(item_score(?term, ?term), zero_or_more).
-	:- info(item_score/2, [
+	:- public(entity_score/2).
+	:- mode(entity_score(?term, ?term), zero_or_more).
+	:- info(entity_score/2, [
 		version is 0.1,
-		comment is 'True if Score is a term that represents the metric score associated with Item.',
-		argnames is ['Item', 'Score']
+		comment is 'True if Score is a term that represents the metric score associated with Entity.',
+		argnames is ['Entity', 'Score']
 	]).
 
 :- end_protocol.

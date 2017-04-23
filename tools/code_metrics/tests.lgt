@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/02/27,
+		date is 2017/04/23,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 
@@ -38,7 +38,7 @@
 		rdirectory/1,
 		directory/1,
 		file/1,
-		item/1
+		entity/1
 	]).
 
 	:- uses(lgtunit, [
@@ -163,7 +163,7 @@
 	% noc tests
 
 	test(noc_cat_a) :-
-		\+ noc_metric::item_score(cat_a, _).
+		\+ noc_metric::entity_score(cat_a, _).
 
 	test(noc_cat_b) :-
 		nocs_are(cat_b, Nocs),
@@ -174,7 +174,7 @@
 		Nocs == [foo/0-1].
 
 	test(noc_cat_d) :-
-		\+ noc_metric::item_score(cat_d, _).
+		\+ noc_metric::entity_score(cat_d, _).
 
 	test(wrong_clause(noc_obj_e)) :-
 		nocs_are(obj_e, Nocs),
@@ -201,30 +201,30 @@
 		Nocs == [foo/0-1].
 
 	test(noc_prot_a) :-
-		\+ noc_metric::item_score(prot_a, _).
+		\+ noc_metric::entity_score(prot_a, _).
 
 	test(noc_prot_b) :-
-		\+ noc_metric::item_score(prot_b, _).
+		\+ noc_metric::entity_score(prot_b, _).
 
 	test(noc_car) :-
-		\+ noc_metric::item_score(car, _).
+		\+ noc_metric::entity_score(car, _).
 
 	test(noc_vehicle) :-
-		\+ noc_metric::item_score(vehicle, _).
+		\+ noc_metric::entity_score(vehicle, _).
 
 	test(noc_meta_vehicle) :-
-		\+ noc_metric::item_score(meta_vehicle, _).
+		\+ noc_metric::entity_score(meta_vehicle, _).
 
 	test(noc_herring) :-
-		\+ noc_metric::item_score(herring, _).
+		\+ noc_metric::entity_score(herring, _).
 
 	test(noc_bird) :-
-		\+ noc_metric::item_score(bird, _).
+		\+ noc_metric::entity_score(bird, _).
 
 	% main interface tests
 
-	test(code_metrics_item) :-
-		deterministic(item(obj_c)).
+	test(code_metrics_entity) :-
+		deterministic(entity(obj_c)).
 
 	test(code_metrics_file) :-
 		object_property(lgtunit, file(File)),
@@ -249,18 +249,18 @@
 
 	% convenience
 
-	coupling_is(Item, N) :-
-		findall(C, coupling_metric::item_score(Item, C), Couplings),
+	coupling_is(Entity, N) :-
+		findall(C, coupling_metric::entity_score(Entity, C), Couplings),
 		Couplings == [N].
 
-	depth_is(Item, N) :-
-		findall(D, dit_metric::item_score(Item, D), Depths),
+	depth_is(Entity, N) :-
+		findall(D, dit_metric::entity_score(Entity, D), Depths),
 		Depths == [N].
 
-	nocs_are(Item, Nocs) :-
+	nocs_are(Entity, Nocs) :-
 		findall(
 			Predicate-Noc,
-			noc_metric::item_score(Item, predicate_noc(Predicate, Noc)),
+			noc_metric::entity_score(Entity, predicate_noc(Predicate, Noc)),
 			Nocs
 		).
 

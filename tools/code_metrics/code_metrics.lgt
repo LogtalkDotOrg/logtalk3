@@ -22,9 +22,9 @@
 :- object(code_metrics).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/03/07,
+		date is 2017/04/23,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -32,24 +32,24 @@
 	%% Paulo Moura and Barry Evans. The derivative code can be found in the Logtalk source
 	%% @ tools/dead_code_scanner/dead_code_scanner.lgt
 
-	:- public(item/1).
-	:- mode(item(+term), zero_or_one).
-	:- info(item/1, [
-		comment is 'Scans Item and prints a summary based on all applicable metrics.',
-		argnames is ['Item']
+	:- public(entity/1).
+	:- mode(entity(+term), zero_or_one).
+	:- info(entity/1, [
+		comment is 'Scans an entity and prints a summary based on all applicable metrics.',
+		argnames is ['Entity']
 	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), zero_or_one).
 	:- info(file/1, [
-		comment is 'Prints a metric summary of all items present in a file.',
+		comment is 'Prints a metric summary of all entities defined in a source file.',
 		argnames is ['File']
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Scans Directory and prints metrics summary.',
+		comment is 'Scans a directory and prints metrics summary for all its source files.',
 		argnames is ['Directory']
 	]).
 
@@ -63,7 +63,7 @@
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
-		comment is 'Prints a metrics summary of all loaded items from a given library.',
+		comment is 'Prints a metrics summary of all loaded entities from a given library.',
 		argnames is ['Library']
 	]).
 
@@ -77,40 +77,40 @@
 	:- public(all/0).
 	:- mode(all, one).
 	:- info(all/0, [
-		comment is 'Scans all loaded items and prints a report of all applicable metrics.'
+		comment is 'Scans all loaded entities and prints a report of all applicable metrics.'
 	]).
 
 	:- uses(logtalk, [print_message/3]).
 	:- uses(list, [member/2]).
 
-	%%%%%%%%%%%%%%%%
-	%% Item scans %%
-	%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%
+	%% Entity scans %%
+	%%%%%%%%%%%%%%%%%%
 
-	item(Item) :-
-		(	current_object(Item) ->
+	entity(Entity) :-
+		(	current_object(Entity) ->
 			Kind = object
-		;	current_category(Item) ->
+		;	current_category(Entity) ->
 			Kind = category
-		;	current_protocol(Item) ->
+		;	current_protocol(Entity) ->
 			Kind = protocol
-		;	print_message(warning, code_metrics, unknown(item,Item)),
+		;	print_message(warning, code_metrics, unknown(entity,Entity)),
 			fail
 		),
-		write_scan_header('Item'),
-		process_item(Kind, Item),
-		write_scan_footer('Item').
+		write_scan_header('Entity'),
+		process_entity(Kind, Entity),
+		write_scan_footer('Entity').
 
-	process_item(Kind, Item) :-
-		print_message(information, code_metrics, scanning_item(Kind, Item)),
+	process_entity(Kind, Entity) :-
+		print_message(information, code_metrics, scanning_entity(Kind, Entity)),
 		forall(
-			process_item_(Item, Metric, Score),
-			print_message(information, code_metrics, item_score(Item, Metric, Score))
+			process_entity_(Entity, Metric, Score),
+			print_message(information, code_metrics, entity_score(Entity, Metric, Score))
 		).
 
-	process_item_(Item, Metric, Score) :-
+	process_entity_(Entity, Metric, Score) :-
 		imports_category(Metric, code_metrics_utilities),
-		Metric::item_score(Item, Score).
+		Metric::entity_score(Entity, Score).
 
 	%%%%%%%%%%%%%%%%
 	%% File scans %%
@@ -128,16 +128,16 @@
 	process_file(Path) :-
 		print_message(information, code_metrics, scanning_file(Path)),
 		forall(
-			process_file_(Path, Kind, Item),
-			process_item(Kind, Item)
+			process_file_(Path, Kind, Entity),
+			process_entity(Kind, Entity)
 		).
 
-	process_file_(Path, Kind, Item) :-
-		(	logtalk::loaded_file_property(Path, object(Item)),
+	process_file_(Path, Kind, Entity) :-
+		(	logtalk::loaded_file_property(Path, object(Entity)),
 			Kind = object
-		;	logtalk::loaded_file_property(Path, protocol(Item)),
+		;	logtalk::loaded_file_property(Path, protocol(Entity)),
 			Kind = protocol
-		;	logtalk::loaded_file_property(Path, category(Item)),
+		;	logtalk::loaded_file_property(Path, category(Entity)),
 			Kind = category
 		).
 
@@ -260,24 +260,24 @@
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(TopPath, _RelativePath, LibraryPath).
 
-	%%%%%%%%%%%%%%%%%%%%
-	%% Scan all items %%
-	%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%% Scan all entities %%
+	%%%%%%%%%%%%%%%%%%%%%%%
 
 	all :-
-		write_scan_header('All items'),
+		write_scan_header('All entities'),
 		forall(
-			all(Kind, Item),
-			process_item(Kind, Item)
+			all(Kind, Entity),
+			process_entity(Kind, Entity)
 		),
-		write_scan_footer('All items').
+		write_scan_footer('All entities').
 
-	all(Kind, Item) :-
-		(	current_object(Item),
+	all(Kind, Entity) :-
+		(	current_object(Entity),
 			Kind = object
-		;	current_category(Item),
+		;	current_category(Entity),
 			Kind = category
-		;	current_protocol(Item),
+		;	current_protocol(Entity),
 			Kind = protocol
 		).
 

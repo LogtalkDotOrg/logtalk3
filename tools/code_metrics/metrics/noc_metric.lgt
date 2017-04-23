@@ -24,24 +24,24 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/09,
+		date is 2017/04/23,
 		comment is 'Number of clauses defined for a predicate in an object or category.'
 	]).
 
 	:- uses(list, [memberchk/2]).
 
-	item_score(Item, predicate_noc(Predicate, Noc)) :-
-		^^current_entity(Item),
-		^^entity_kind(Item, Kind),
+	entity_score(Entity, predicate_noc(Predicate, Noc)) :-
+		^^current_entity(Entity),
+		^^entity_kind(Entity, Kind),
 		(  Kind == object
 		;  Kind == category
 		),
-		defined_predicate_noc(Item, Predicate, Noc).
+		defined_predicate_noc(Entity, Predicate, Noc).
 
-	defined_predicate_noc(Item, Predicate, Noc) :-
-		^^defines_predicate(Item, Predicate, Properties),
+	defined_predicate_noc(Entity, Predicate, Noc) :-
+		^^defines_predicate(Entity, Predicate, Properties),
 		memberchk(number_of_clauses(Noc), Properties).
 
 :- end_object.

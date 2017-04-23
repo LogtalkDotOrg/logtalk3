@@ -24,12 +24,13 @@ Overview
 The purpose of this tool is to assess qualities of source code that may
 predict negative aspects such as complexity, error-proneness, and overall
 maintainability. It is meant to be extensible via the addition of metric
-objects into the `metric/` sub-directory. At the time of writing (2017/1/11),
-this metrics tool comes with three metrics out of the box: `Number of Clauses`,
-`Depth of Inheritance`, and `Coupling Score`. The method of scoring was
-strongly influenced by the metrics rating system in Microsoft Visual Studio and
-aims to eventually emulate the functionality of a maintainability index score.
-Please see `SCRIPT.txt` for common examples of usage.
+objects into the `metrics` sub-directory. Currently, three metrics are
+provided: "Number of Clauses", "Depth of Inheritance", and "Coupling Score".
+The method of scoring was strongly influenced by the metrics rating system
+in Microsoft Visual Studio and aims to eventually emulate the functionality
+of a maintainability index score.
+
+For usage examples, see the `SCRIPT.txt` file.
 
 
 Loading
@@ -38,12 +39,3 @@ Loading
 This tool can be loaded using the query:
 
 	| ?- logtalk_load(code_metrics(loader)).
-
-
-Issues
-------
-
-It's currently unknown whether the first argument for `item_score/2` should
-support any non-entities, hence the name was changed from `entity_score/2`
-to `item_score/2`. Therefore, the initial version of this tool may introduce
-some mental ambiguity. This issue should be resolved as the tool matures.

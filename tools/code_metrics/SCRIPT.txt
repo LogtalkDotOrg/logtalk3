@@ -36,7 +36,7 @@ ________________________________________________________________________
 ...
 
 
-% load the standard library and obtain metrics stats on all items:
+% load the standard library and obtain metrics stats for all its entities:
 
 | ?- logtalk_load(library(all_loader)).
 ...
@@ -45,20 +45,20 @@ ________________________________________________________________________
 ...
 
 
-% analyze metrics for a specific item:
+% analyze metrics for a specific entity:
 
-| ?- code_metrics::item(logtalk).
+| ?- code_metrics::entity(logtalk).
 ...
 
 
-% enumerate, by backtracking, the scores for number of clauses, depth of
-% inheritance tree, and coupling, for the built-in logtalk object:
+% enumerate, by backtracking, the scores for number of clauses, depth
+% of inheritance tree, and coupling, for the built-in logtalk object:
 
-| ?- noc_metric::item_score(logtalk, Score).
+| ?- noc_metric::entity_score(logtalk, Score).
 ...
 
-| ?- dit_metric::item_score(logtalk, Score).
+| ?- dit_metric::entity_score(logtalk, Score).
 ...
 
-| ?- coupling_metric::item_score(logtalk, Score).
+| ?- coupling_metric::entity_score(logtalk, Score).
 ...

@@ -222,8 +222,6 @@
 		\+ instantiates_class(Ancestor, Entity),
 		\+ specializes_class(Ancestor, Entity).
 
-
-
 	% Auxiliary predicates
 
 	valid_call(Predicate) :-

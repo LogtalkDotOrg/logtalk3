@@ -24,9 +24,9 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/01/02,
+		date is 2017/04/23,
 		comment is 'Analyzes the coupling score for objects, categories, and protocols.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
@@ -35,9 +35,9 @@
 		]
 	]).
 
-	:- uses(list, [memberchk/2]).
+	:- uses(list, [member/2]).
 
-	item_score(Entity, Score) :-
+	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
 		score(Entity, Score).
 
@@ -77,12 +77,12 @@
 	% Increment the score if there are any direct ancestors
 	unvisited_ancestor(EntityKind, Entity, Ancestor, LoggedEntities) :-
 		^^ancestor(EntityKind, Entity, _, Ancestor),
-		\+ memberchk(Ancestor, LoggedEntities).
+		\+ member(Ancestor, LoggedEntities).
 
 	% score any calls external to the entity being measured
 	unvisited_call(Entity, Entity2, LoggedEntities) :-
 		external_call(Entity, Entity2, _Caller, _Predicate),
-		\+ memberchk(Entity2, LoggedEntities),
+		\+ member(Entity2, LoggedEntities),
 		!.
 
 	external_call(Entity, Entity2, Caller, Predicate) :-
