@@ -116,8 +116,9 @@ compiler is supported and installed.
 DOCUMENTATION
 -------------
 
-A quick introduction for experienced programmers is available at the
-[Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
+A quick and highly recommended introduction for users comfortable with Prolog
+and with general knowledge about object-oriented programming is available at
+the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
 The reference and user manuals and the tutorial are provided in XHTML and
 PDF formats and can be found in the [manuals](manuals/) directory.
@@ -126,7 +127,7 @@ The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
 Logtalk updates since the first public version. Check it carefully if you
 have been using a previous Logtalk version.
 
-The documentation for the core, library, tools, and contributions entities
+The API documentation for the core, library, tools, and contributions entities
 is provided in XHTML format and can be found in the [docs](docs/) directory.
 
 Most directories include `NOTES.md` documenting files, which can be viewed
@@ -134,7 +135,8 @@ as plain text in any text editor but also nicely rendered as Markdown files
 (for e.g. easy conversion to HTML).
 
 On POSIX systems, there's also a man page for each shell script. A list of
-all the scripts can be generated using the `apropos logtalk` command.
+all the scripts can be generated using the `apropos logtalk` command. HTML
+versions of the man pages are also available at the Logtalk website.
 
 
 UPGRADING
