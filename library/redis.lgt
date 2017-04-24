@@ -24,7 +24,11 @@
 		version is 0.1,
 		author is 'Paulo Moura',
 		date is 2017/04/24,
-		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.'
+		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
+		remarks is [
+			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
+			'Valid arguments' - 'Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the double_quotes flag.'
+		]
 	]).
 
 	:- public(connect/1).

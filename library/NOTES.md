@@ -83,6 +83,10 @@ its own loader and notes files:
 	`types_loader.lgt`
 	`types.txt`
 
+* redis  
+	`redis_loader.lgt`
+	`redis.txt`
+
 There is also a file named `all_loader.lgt` that will load all entities in the 
 groups listed above. Simply type the goal:
 

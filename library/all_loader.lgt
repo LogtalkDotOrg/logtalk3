@@ -36,6 +36,7 @@
 		assignvars_loader,
 		hook_flows_loader,
 		java_loader,
+		redis_loader,
 		gensym,
 		counters,
 		streamvars
