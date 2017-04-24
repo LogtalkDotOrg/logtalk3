@@ -30,6 +30,12 @@ Logtalk compiler and runtime
 ADDED: Predicate `logtalk::file_type_extension/2` for accessing the file type
 extensions defined in the Prolog adapter files.
 
+Library
+-------
+
+* ADDED: Redis client library. Available when using GNU Prolog, SICStus Prolog,
+or SWI-Prolog as the backend compiler.
+
 Tools
 -----
 
