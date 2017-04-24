@@ -127,107 +127,6 @@
 		Minus1 == -1,
 		Exists0 == 0.
 
-	%% LISTS...
-
-	test(create_a_list_with_a_single_value) :-
-		connect(C),
-		send(C, flushall, status('OK')),
-		send(C, lpush(test_list, 42), number(1)),
-		send(C, llen(test_list), number(1)),
-		disconnect(C).
-
-	test(pop_only_entry_from_a_list) :-
-		connect(C),
-		send(C, lpop(test_list), bulk('42')),
-		send(C, llen(test_list), number(0)),
-		disconnect(C).
-
-	test(create_a_list_with_multiple_values_lpush_1) :-
-		connect(C),
-		send(C, lpush(test_list, 'Hello', world, 42), number(3)),
-		send(C, llen(test_list), number(3)),
-		disconnect(C).
-
-	test(lrange_on_existing_list_with_lpush_1) :-
-		connect(C),
-		send(C, lrange(test_list, 0, -1),
-			 [bulk('42'), bulk('world'), bulk('Hello')]),
-		disconnect(C).
-
-	test(create_a_list_with_multiple_values_lpush_2) :-
-		connect(C),
-		send(C, rpush(test_list, 'Hello', world, 42), number(3)),
-		send(C, llen(test_list), number(3)),
-		disconnect(C).
-
-	test(lrange_on_existing_list_with_lpush_2) :-
-		connect(C),
-		send(C, lrange(test_list, 0, -1),
-			 [bulk('Hello'), bulk('world'), bulk('42')]),
-		disconnect(C).
-
-	test(get_length_of_existing_list) :-
-		connect(C),
-		send(C, llen(test_list), number(3)),
-		disconnect(C).
-
-	test(get_values_by_lindex_position) :-
-		connect(C),
-		send(C, lindex(test_list,1), bulk('world')),
-		send(C, lindex(test_list,2), bulk('Hello')),
-		send(C, lindex(test_list,0), bulk('42')),
-		disconnect(C).
-
-	test(add_to_list_with_linset_command) :-
-		connect(C),
-		send(C, linsert(test_list, before, 42, 'FRIST'), number(4)),
-		send(C, linsert(test_list, after, world, 'custard creams rock'), number(5)),
-		send(C, lindex(test_list, 3), bulk('custard creams rock')),
-		send(C, lindex(test_list, -1), bulk('Hello')),
-		send(C, lindex(test_list, -3), bulk('world')),
-		send(C, lindex(test_list, 0), bulk('FRIST')),
-		disconnect(C).
-
-	test(popping_with_lpop_and_rpop) :-
-		connect(C),
-		send(C, lpop(test_list), bulk('FRIST')),
-		send(C, rpop(test_list), bulk('Hello')),
-		send(C, lpop(test_list), bulk('42')),
-		send(C, rpop(test_list), bulk('custard creams rock')),
-		send(C, lpop(test_list), bulk('world')),
-		disconnect(C).
-
-	%% STRINGS...
-
-	test(basic_string_get_and_set) :-
-		connect(C),
-		send(C, flushall, status('OK')),
-		send(C, set(test_string, 'Hello World'), status('OK')),
-		send(C, get(test_string), bulk('Hello World')),
-		disconnect(C).
-
-	test(extended_set_and_get_with_expiry) :-
-		connect(C),
-		send(C, flushall, status('OK')),
-		send(C, set(test_string, 'Miller time!', ex, 1), status('OK')),
-		sleep(2),
-		send(C, get(test_string), nil),
-		disconnect(C).
-
-	test(append_to_an_existing_string) :-
-	 	connect(C),
-		send(C, set(test_string, 'GNU Prolog'), status('OK')),
-	 	send(C, append(test_string, ' is Cool'), number(18)),
-		send(C, strlen(test_string), number(18)),
-	 	disconnect(C).
-
-	test(counting_bits_in_a_string) :-
-	 	connect(C),
-		send(C, flushall, status('OK')),
-		send(C, set('bitbucket(!)', 'U'), status('OK')),
-		send(C, bitcount('bitbucket(!)'), number(4)),
-	 	disconnect(C).
-
 	%% HASHES...
 
 	test(create_hash_with_data) :-
@@ -295,5 +194,104 @@
 		send(C, hdel(test_hash, unknown), number(0)),
 		send(C, hlen(test_hash), number(3)),
 		disconnect(C).
+
+	%% LISTS...
+
+	test(create_a_list_with_a_single_value) :-
+		connect(C),
+		send(C, flushall, status('OK')),
+		send(C, lpush(test_list, 42), number(1)),
+		send(C, llen(test_list), number(1)),
+		disconnect(C).
+
+	test(pop_only_entry_from_a_list) :-
+		connect(C),
+		send(C, lpop(test_list), bulk('42')),
+		send(C, llen(test_list), number(0)),
+		disconnect(C).
+
+	test(create_a_list_with_multiple_values_lpush_1) :-
+		connect(C),
+		send(C, lpush(test_list_1, 'Hello', world, 42), number(3)),
+		send(C, llen(test_list_1), number(3)),
+		disconnect(C).
+
+	test(lrange_on_existing_list_with_lpush_1) :-
+		connect(C),
+		send(C, lrange(test_list_1, 0, -1), [bulk('42'), bulk('world'), bulk('Hello')]),
+		disconnect(C).
+
+	test(create_a_list_with_multiple_values_lpush_2) :-
+		connect(C),
+		send(C, rpush(test_list_2, 'Hello', world, 42), number(3)),
+		send(C, llen(test_list_2), number(3)),
+		disconnect(C).
+
+	test(lrange_on_existing_list_with_lpush_2) :-
+		connect(C),
+		send(C, lrange(test_list_2, 0, -1), [bulk('Hello'), bulk('world'), bulk('42')]),
+		disconnect(C).
+
+	test(get_length_of_existing_list) :-
+		connect(C),
+		send(C, llen(test_list_1), number(3)),
+		disconnect(C).
+
+	test(get_values_by_lindex_position) :-
+		connect(C),
+		send(C, lindex(test_list_1,1), bulk('world')),
+		send(C, lindex(test_list_1,2), bulk('Hello')),
+		send(C, lindex(test_list_1,0), bulk('42')),
+		disconnect(C).
+
+	test(add_to_list_with_linset_command) :-
+		connect(C),
+		send(C, linsert(test_list_1, before, 42, 'FRIST'), number(4)),
+		send(C, linsert(test_list_1, after, world, 'custard creams rock'), number(5)),
+		send(C, lindex(test_list_1, 3), bulk('custard creams rock')),
+		send(C, lindex(test_list_1, -1), bulk('Hello')),
+		send(C, lindex(test_list_1, -3), bulk('world')),
+		send(C, lindex(test_list_1, 0), bulk('FRIST')),
+		disconnect(C).
+
+	test(popping_with_lpop_and_rpop) :-
+		connect(C),
+		send(C, lpop(test_list_1), bulk('FRIST')),
+		send(C, rpop(test_list_1), bulk('Hello')),
+		send(C, lpop(test_list_1), bulk('42')),
+		send(C, rpop(test_list_1), bulk('custard creams rock')),
+		send(C, lpop(test_list_1), bulk('world')),
+		disconnect(C).
+
+	%% STRINGS...
+
+	test(basic_string_get_and_set) :-
+		connect(C),
+		send(C, flushall, status('OK')),
+		send(C, set(test_string, 'Hello World'), status('OK')),
+		send(C, get(test_string), bulk('Hello World')),
+		disconnect(C).
+
+	test(extended_set_and_get_with_expiry) :-
+		connect(C),
+		send(C, flushall, status('OK')),
+		send(C, set(test_string, 'Miller time!', ex, 1), status('OK')),
+		sleep(2),
+		send(C, get(test_string), nil),
+		disconnect(C).
+
+	test(append_to_an_existing_string) :-
+	 	connect(C),
+		send(C, set(test_string, 'GNU Prolog'), status('OK')),
+	 	send(C, append(test_string, ' is Cool'), number(18)),
+		send(C, strlen(test_string), number(18)),
+	 	disconnect(C).
+
+	test(counting_bits_in_a_string) :-
+	 	connect(C),
+		send(C, flushall, status('OK')),
+		send(C, set('bitbucket(!)', 'U'), status('OK')),
+		send(C, bitcount('bitbucket(!)'), number(4)),
+	 	disconnect(C).
 
 :- end_object.
