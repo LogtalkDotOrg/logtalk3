@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.4,
+		version is 4.5,
 		author is 'Paulo Moura',
-		date is 2017/02/04,
+		date is 2017/04/24,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -166,16 +166,13 @@
 		),
 		memberchk(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
-		logtalk::loaded_file_property(Path, basename(File)),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		\+ member(Path, ExcludedFiles),
+		\+ member(Basename, ExcludedFiles),
+		os::decompose_file_name(Path, _, Name, _),
+		\+ member(Name, ExcludedFiles),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
-		\+ member(File, ExcludedFiles),
-		(	atom_concat(Source1, '.lgt', File) ->
-			\+ member(Source1, ExcludedFiles)
-		;	atom_concat(Source2, '.logtalk', File) ->
-			\+ member(Source2, ExcludedFiles)
-		;	true
-		),
-		process(File, DirectorySlash, Options, StreamOptions),
+		process(Basename, DirectorySlash, Options, StreamOptions),
 		fail.
 	output_directory_files(_, _).
 
@@ -243,14 +240,15 @@
 		!.
 
 	add_extension(Source, SourceWithExtension) :-
+		% ensure that Source is not specified using library notation
 		atom(Source),
-		(	sub_atom(Source, _, 4, 0, '.lgt') ->
+		os::decompose_file_name(Source, _, _, SourceExtension),
+		(	logtalk::file_type_extension(source, SourceExtension) ->
+			% source file extension present
 			SourceWithExtension = Source
-		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
-			SourceWithExtension = Source
-		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
-			;	atom_concat(Source, '.logtalk', SourceWithExtension)
-			)
+		;	% try possible source extensions
+			logtalk::file_type_extension(source, Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
 	process(File, Path, Options, StreamOptions) :-

@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2017/03/02,
+		date is 2017/04/24,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -673,11 +673,11 @@
 		\+ member(Path, [ExcludedFile| ExcludedFiles]),
 		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
 		% files in the exclusion list may be given with or without extension
-		\+ (	source_file_extension(Extension),
+		\+ (	logtalk::file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Path),
 				member(Source, [ExcludedFile| ExcludedFiles])
 		),
-		\+ (	source_file_extension(Extension),
+		\+ (	logtalk::file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Basename),
 				member(Source, [ExcludedFile| ExcludedFiles])
 		),
@@ -760,35 +760,30 @@
 		!.
 
 	add_extension(logtalk, Source, SourceWithExtension, Extension) :-
+		% ensure that Source is not specified using library notation
 		atom(Source),
-		\+ (
-			modules_diagram_support::source_file_extension(PrologExtension),
-			sub_atom(Source, _, _, 0, PrologExtension)
-		),
-		(	source_file_extension(Extension),
-			sub_atom(Source, _, _, 0, Extension) ->
-			SourceWithExtension = Source
+		os::decompose_file_name(Source, _, _, SourceExtension),
+		\+ modules_diagram_support::source_file_extension(SourceExtension),
+		(	logtalk::file_type_extension(logtalk, SourceExtension) ->
+			SourceWithExtension = Source,
+			Extension = SourceExtension
 		;	% no recognized extension in use
-			source_file_extension(Extension),
+			logtalk::file_type_extension(logtalk, Extension),
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
 	add_extension(prolog, Source, SourceWithExtension, Extension) :-
+		% ensure that Source is not specified using library notation
 		atom(Source),
-		\+ (
-			source_file_extension(Extension),
-			sub_atom(Source, _, _, 0, Extension)
-		),
-		(	modules_diagram_support::source_file_extension(Extension),
-			sub_atom(Source, _, _, 0, Extension) ->
-			SourceWithExtension = Source
+		os::decompose_file_name(Source, _, _, SourceExtension),
+		\+ logtalk::file_type_extension(logtalk, SourceExtension),
+		(	modules_diagram_support::source_file_extension(SourceExtension) ->
+			SourceWithExtension = Source,
+			Extension = SourceExtension
 		;	% no recognized extension in use
 			modules_diagram_support::source_file_extension(Extension),
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
-
-	source_file_extension('.lgt').
-	source_file_extension('.logtalk').
 
 	:- protected(ground_entity_identifier/3).
 	:- mode(ground_entity_identifier(+atom, +callable, -callable), one).

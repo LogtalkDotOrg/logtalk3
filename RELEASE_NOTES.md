@@ -41,6 +41,9 @@ tool.
 
 * FIXED: Compile the `code_metrics` tool in optimize mode.
 
+* UPDATED: The `code_metrics`, `dead_code_scanner`, `diagrams`, and `lgtdoc`
+tools to take advantage of the new `logtalk::file_type_extension/2` predicate.
+
 
 3.10.5 - April 17, 2017
 =======================

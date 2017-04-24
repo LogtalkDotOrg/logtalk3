@@ -2,9 +2,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.12,
+		version is 0.13,
 		author is 'Paulo Moura',
-		date is 2016/03/03,
+		date is 2017/04/24,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -107,8 +107,8 @@
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File),
-			\+ sub_atom(File, _, 4, 0, '.lgt'),
-			\+ sub_atom(File, _, 8, 0, '.logtalk').
+			os::decompose_file_name(File, _, _, Extension),
+			\+ logtalk::file_type_extension(logtalk, Extension).
 
 		property_source_file(parent(Parent), File) :-
 			{source_file_property(File, load_context(Parent0, _, _))},

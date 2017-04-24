@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/23,
+		date is 2017/04/24,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -169,14 +169,15 @@
 		!.
 
 	add_extension(Source, SourceWithExtension) :-
+		% ensure that Source is not specified using library notation
 		atom(Source),
-		(	sub_atom(Source, _, 4, 0, '.lgt') ->
+		os::decompose_file_name(Source, _, _, SourceExtension),
+		(	logtalk::file_type_extension(source, SourceExtension) ->
+			% source file extension present
 			SourceWithExtension = Source
-		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
-			SourceWithExtension = Source
-		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
-			;	atom_concat(Source, '.logtalk', SourceWithExtension)
-			)
+		;	% try possible source extensions
+			logtalk::file_type_extension(source, Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
 	%%%%%%%%%%%%%%%%%%%%%
