@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on March 27, 2017
+%  Last updated on April 24, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -81,12 +81,21 @@
 %  `adapters/NOTES.md` file for compatibility details.
 
 
-%  To load the `help` example at startup, which provides basic on-line help
+%  To load the `help` tool at startup, which provides basic on-line help
 %  for Logtalk, uncomment the following lines:
 
 /*
 :- initialization(
 	logtalk_load(help(loader))
+).
+*/
+
+
+%  To load most of developer tools at startup, uncomment the following lines:
+
+/*
+:- initialization(
+	logtalk_load(tools(loader))
 ).
 */
 
