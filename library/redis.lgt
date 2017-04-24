@@ -58,44 +58,74 @@
 	:- uses(list, [length/2]).
 
 	connect(Connection) :-
-		connect(Connection, localhost, 6379).
+		catch(
+			connect_to_server(Connection, localhost, 6379),
+			Error,
+			error_handler(Error, connect(Connection))
+		).
+
+	connect(Connection, Host, Port) :-
+		catch(
+			connect_to_server(Connection, Host, Port),
+			Error,
+			error_handler(Error, connect(Connection, Host, Port))
+		).
+
+	disconnect(Connection) :-
+		catch(
+			disconnect_from_server(Connection),
+			Error,
+			error_handler(Error, disconnect(Connection))
+		).
+
+	send(Connection, Request, Reply) :-
+		catch(
+			send_request(Connection, Request, Reply),
+			Error,
+			error_handler(Error, send(Connection, Request, Reply))
+		).
 
 	:- if(current_logtalk_flag(prolog_dialect, gnu)).
 
-	connect(redis(Input, Output, Socket), Host, Port) :-
+	connect_to_server(redis(Input, Output, Socket), Host, Port) :-
 		socket('AF_INET', Socket),
 		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
 		set_stream_type(Input, binary),
 		set_stream_type(Output, binary).
 
-	disconnect(redis(_, _, Socket)) :-
+	disconnect_from_server(redis(_, _, Socket)) :-
 		socket_close(Socket).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-	connect(redis(Stream, Stream, _), Host, Port) :-
+	connect_to_server(redis(Stream, Stream, _), Host, Port) :-
 		sockets:socket_client_open(inet(Host,Port), Stream, [type(binary), eof_action(eof)]).
 
-	disconnect(redis(Stream, _, _)) :-
+	disconnect_from_server(redis(Stream, _, _)) :-
 		close(Stream).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-	connect(redis(Input, Output, Socket), Host, Port) :-
+	connect_to_server(redis(Input, Output, Socket), Host, Port) :-
 		socket:tcp_socket(Socket),
 		socket:tcp_connect(Socket, Host:Port, Stream),
 		stream_pair(Stream, Input, Output),
 		set_stream(Stream, type(binary)).
 
-	disconnect(redis(_, _, Socket)) :-
+	disconnect_from_server(redis(_, _, Socket)) :-
 		socket:tcp_close_socket(Socket).
 
 	:- endif.
 
-	send(redis(Input, Output, _), Request, Reply) :-
+	send_request(redis(Input, Output, _), Request, Reply) :-
 		parse_request(Request, Bytes),
 		send_request(Bytes, Output),
 		parse_reply(Input, Reply).
+
+	error_handler(Error, Message) :-
+		self(Self),
+		sender(Sender),
+		throw(error(Error, logtalk(Self::Message, Sender))).
 
 	parse_request(Request, Bytes) :-
 		Request =.. Arguments,

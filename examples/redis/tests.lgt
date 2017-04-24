@@ -68,7 +68,6 @@
 		Set == 'OK',
 		Get == 'Objitsu'.
 	
-	
 	test(set_and_get_timeout) :-
 		connect(C),
 		send(C, config(set, timeout, 86400), status(Set)),
@@ -281,17 +280,17 @@
 		disconnect(C).
 
 	test(append_to_an_existing_string) :-
-	 	connect(C),
+		connect(C),
 		send(C, set(test_string, 'GNU Prolog'), status('OK')),
-	 	send(C, append(test_string, ' is Cool'), number(18)),
+		send(C, append(test_string, ' is Cool'), number(18)),
 		send(C, strlen(test_string), number(18)),
-	 	disconnect(C).
+		disconnect(C).
 
 	test(counting_bits_in_a_string) :-
-	 	connect(C),
+		connect(C),
 		send(C, flushall, status('OK')),
 		send(C, set('bitbucket(!)', 'U'), status('OK')),
 		send(C, bitcount('bitbucket(!)'), number(4)),
-	 	disconnect(C).
+		disconnect(C).
 
 :- end_object.
