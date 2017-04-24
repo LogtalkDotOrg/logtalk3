@@ -24,7 +24,7 @@
 		version is 0.1,
 		author is 'Paulo Moura',
 		date is 2017/04/24,
-		comment is 'Redis client'
+		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.'
 	]).
 
 	:- public(connect/1).
@@ -64,7 +64,7 @@
 
 	connect(redis(Input, Output, Socket), Host, Port) :-
 		socket('AF_INET', Socket),
-		socket_connect(S, 'AF_INET'(Host, Port), Input, Output),
+		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
 		set_stream_type(Input, binary),
 		set_stream_type(Output, binary).
 

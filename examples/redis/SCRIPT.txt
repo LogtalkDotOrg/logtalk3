@@ -15,13 +15,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
-
-Redis client library. Supports GNU Prolog, SICStus Prolog, and SWI-Prolog.
-For general information on Redis, including the available commands, visit:
-
-	https://redis.io
-
-To load this library, load the `redis_loader.lgt` utility file:
-
-	| ?- logtalk_load(library(redis_loader)).

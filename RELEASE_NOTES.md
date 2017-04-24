@@ -50,6 +50,11 @@ tool.
 * UPDATED: The `code_metrics`, `dead_code_scanner`, `diagrams`, and `lgtdoc`
 tools to take advantage of the new `logtalk::file_type_extension/2` predicate.
 
+Examples
+--------
+
+* ADDED: New `redis` example with unit tests for the Redis client library.
+
 
 3.10.5 - April 17, 2017
 =======================
