@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2017/04/24,
+		date is 2017/04/25,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
@@ -99,6 +99,20 @@
 
 	disconnect_from_server(redis(_, _, Socket)) :-
 		socket_close(Socket).
+
+	:- elif(current_logtalk_flag(prolog_dialect, qp)).
+
+	connect_to_server(redis(Input, Output, Socket), Host0, Port) :-
+		(	Host0 == localhost ->
+			Host = '127.0.0.1'
+		;	Host = Host0
+		),
+		tcp_client(Port, Host, Socket),
+		open_socket_stream(Socket, read, Input),
+		open_socket_stream(Socket, write, Output).
+
+	disconnect_from_server(redis(_, _, Socket)) :-
+		tcp_close(Socket).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 

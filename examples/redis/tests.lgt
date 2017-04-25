@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2017/04/24,
+		date is 2017/04/25,
 		comment is 'Unit tests for the "redis" example.'
 	]).
 
@@ -36,6 +36,8 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(system, [sleep/1]).
+	:- elif(current_logtalk_flag(prolog_dialect, qp)).
+		:- uses(user, [thread_sleep/1 as sleep/1]).
 	:- else.
 		% GNU Prolog and SWI-Prolog provide sleep/1 as a built-in
 		% predicate but list it here for improved documentation

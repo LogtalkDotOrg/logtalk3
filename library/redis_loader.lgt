@@ -25,6 +25,13 @@
 		logtalk_load(redis, [optimize(on)])
 	)).
 
+:- elif(current_logtalk_flag(prolog_dialect, qp)).
+
+	:- initialization((
+		logtalk_load(library(basic_types_loader)),
+		logtalk_load(redis, [optimize(on)])
+	)).
+
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 	:- use_module(library(sockets), []).
