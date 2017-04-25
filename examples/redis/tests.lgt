@@ -34,10 +34,16 @@
 		disconnect/1
 	]).
 
+	:- uses(list, [
+		length/2
+	]).
+
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(system, [sleep/1]).
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 		:- uses(user, [thread_sleep/1 as sleep/1]).
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+		:- uses(shell, [sleep/1]).
 	:- else.
 		% GNU Prolog and SWI-Prolog provide sleep/1 as a built-in
 		% predicate but list it here for improved documentation

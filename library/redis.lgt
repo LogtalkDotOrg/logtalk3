@@ -133,6 +133,23 @@
 	disconnect_from_server(redis(_, _, Socket)) :-
 		socket:tcp_close_socket(Socket).
 
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+	connect_to_server(redis(Socket, Socket, Socket), Host, Port) :-
+		{socket(Socket, _),
+		 socket_connect(Socket, Port, Host, _)}.
+
+	disconnect_from_server(redis(_, _, Socket)) :-
+		{socket_close(Socket, _)}.
+
+	put_byte(Socket, Byte) :-
+		{socket_put(Socket, Byte, _)}.
+
+	get_byte(Socket, Byte) :-
+		{socket_get0(Socket, Byte0, _), Byte0 = Byte}.
+
+	flush_output(_).
+
 	:- endif.
 
 	send_request(redis(Input, Output, _), Request, Reply) :-

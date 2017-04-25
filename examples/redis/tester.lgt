@@ -20,6 +20,8 @@
 
 :- if(current_logtalk_flag(prolog_dialect, sicstus)).
 	:- use_module(library(system), []).
+:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+	:- import(from(/(sleep,1), shell)).
 :- endif.
 
 :- initialization((

@@ -48,6 +48,18 @@
 		logtalk_load(redis, [optimize(on)])
 	)).
 
+:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+	:- import(from(/(socket,2), socket)).
+	:- import(from(/(socket_connect,4), socket)).
+	:- import(from(/(socket_close,2), socket)).
+	:- import(from(/(socket_put,3), socket)).
+	:- import(from(/(socket_get0,3), socket)).
+	:- initialization((
+		logtalk_load(library(basic_types_loader)),
+		logtalk_load(redis, [optimize(on)])
+	)).
+
 :- else.
 
 	:- initialization((write('(Redis client library not available)'), nl)).

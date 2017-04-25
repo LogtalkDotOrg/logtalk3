@@ -34,9 +34,9 @@ Library
 -------
 
 * ADDED: Redis client library. Available when using GNU Prolog, Qu-Prolog,
-SICStus Prolog, or SWI-Prolog as the backend compiler. Inspired by a GNU
-Prolog library written by Sean Charles. Thanks to Ebrahim Azarisooreh for
-porting and testing help.
+SICStus Prolog, SWI-Prolog, or XSB as the backend compiler. Inspired by a
+GNU Prolog library written by Sean Charles. Thanks to Ebrahim Azarisooreh
+for porting and testing help.
 
 Tools
 -----
