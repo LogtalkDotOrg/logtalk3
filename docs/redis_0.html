@@ -23,7 +23,7 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.1</code>
+            <code>0.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
@@ -36,7 +36,14 @@
             <code>static, context_switching_calls</code>
           </dd>
         </dl>
-        <p class="comment">(no dependencies on other files)</p>
+        <dl class="relations">
+          <dt class="key">provides:</dt>
+          <dd class="value">
+            <code>
+              <a href="logtalk_0.html#message_tokens//2">logtalk::message_tokens//2</a>
+            </code>
+          </dd>
+        </dl>
       </div>
     </div>
     <div class="predicates">
@@ -122,17 +129,37 @@
             </dd>
           </dl>
         </div>
+        <div class="section">
+          <h3 id="console/1" class="code">console/1</h3>
+          <blockquote>
+            <p class="comment">Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>console(Request)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>console(++callable) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
       </div>
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
     </div>

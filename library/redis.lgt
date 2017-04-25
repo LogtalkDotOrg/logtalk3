@@ -21,7 +21,7 @@
 :- object(redis).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2017/04/25,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
@@ -59,6 +59,14 @@
 		argnames is ['Connection', 'Request', 'Reply']
 	]).
 
+	:- public(console/1).
+	:- mode(console(++callable), one).
+	:- info(console/1, [
+		comment is 'Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.',
+		argnames is ['Request']
+	]).
+
+	:- uses(logtalk, [print_message/3]).
 	:- uses(list, [length/2]).
 
 	connect(Connection) :-
@@ -87,6 +95,13 @@
 			send_request(Connection, Request, Reply),
 			Error,
 			error_handler(Error, send(Connection, Request, Reply))
+		).
+
+	console(Request) :-
+		catch(
+			console_request(Request),
+			Error,
+			error_handler(Error, console(Request))
 		).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
@@ -162,6 +177,12 @@
 
 	:- endif.
 
+	console_request(Request) :-
+		connect(Connection),
+		send_request(Connection, Request, Reply),
+		disconnect(Connection),
+		print_reply(Reply).		
+
 	send_request(redis(Input, Output, _), Request, Reply) :-
 		parse_request(Request, Bytes),
 		send_request(Bytes, Output),
@@ -221,16 +242,12 @@
 		phrase(parse_line(Input), Codes),
 		atom_codes(Error, Codes),
 		throw(redis_error(Error)).
-
 	parse_reply((+), Input, status(Status)) :-
 		parse_status(Input, Status).
-
 	parse_reply((:), Input, number(Number)) :-
 		parse_number(Input, Number).
-
 	parse_reply(($), Input, Bulk) :-
 		parse_bulk(Input, Bulk).
-
 	parse_reply((*), Input, MBulk) :-
 		parse_mbulk(Input, MBulk).
 
@@ -266,10 +283,10 @@
 
 	parse_mbulk(Input, MBulk) :-
 		parse_number(Input, Length),
-		phrase(parse_mbulk(Length, Input), Out), !,
-		(	Out == [nil] ->
+		phrase(parse_mbulk(Length, Input), MBulk0), !,
+		(	MBulk0 == [nil] ->
 			MBulk = nil
-		;	MBulk = Out
+		;	MBulk = MBulk0
 		).
 
 	parse_mbulk(-1, _) -->
@@ -294,5 +311,29 @@
 		;	[Byte],
 			parse_line(Input)
 		).
+
+	print_reply([]).
+	print_reply([Head| Tail]) :-
+		print_reply(Head),
+		print_reply(Tail).
+	print_reply(bulk(String)) :-
+		print_message(information, redis, reply('STRING', String)).
+	print_reply(number(Number)) :-
+		print_message(information, redis, reply('NUMBER', Number)).
+	print_reply(status(Status)) :-
+		print_message(information, redis, reply('STATUS', Status)).
+	print_reply(nil) :-
+		print_message(information, redis, nil).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(Message, redis) -->
+		message_tokens(Message).
+
+	message_tokens(reply(Key, Value)) -->
+		['~w: ~w'-[Key, Value], nl].
+	message_tokens(nil) -->
+		['NIL'-[], nl].
 
 :- end_object.
