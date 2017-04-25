@@ -63,14 +63,14 @@
 
 	connect(Connection) :-
 		catch(
-			connect_to_server(Connection, localhost, 6379),
+			connect_to_server(localhost, 6379, Connection),
 			Error,
 			error_handler(Error, connect(Connection))
 		).
 
-	connect(Connection, Host, Port) :-
+	connect(Host, Port, Connection) :-
 		catch(
-			connect_to_server(Connection, Host, Port),
+			connect_to_server(Host, Port, Connection),
 			Error,
 			error_handler(Error, connect(Connection, Host, Port))
 		).
@@ -89,9 +89,19 @@
 			error_handler(Error, send(Connection, Request, Reply))
 		).
 
-	:- if(current_logtalk_flag(prolog_dialect, gnu)).
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-	connect_to_server(redis(Input, Output, Socket), Host, Port) :-
+	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
+		socket(internet, stream, Stream),
+		connect(Stream, Host/Port),
+		set_stream_property(Stream, encoding, octet).
+
+	disconnect_from_server(redis(Stream, _, _)) :-
+		close(Stream).
+
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+	connect_to_server(Host, Port, redis(Input, Output, Socket)) :-
 		socket('AF_INET', Socket),
 		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
 		set_stream_type(Input, binary),
@@ -102,7 +112,7 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 
-	connect_to_server(redis(Input, Output, Socket), Host0, Port) :-
+	connect_to_server(Host0, Port, redis(Input, Output, Socket)) :-
 		(	Host0 == localhost ->
 			Host = '127.0.0.1'
 		;	Host = Host0
@@ -116,7 +126,7 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-	connect_to_server(redis(Stream, Stream, _), Host, Port) :-
+	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
 		sockets:socket_client_open(inet(Host,Port), Stream, [type(binary), eof_action(eof)]).
 
 	disconnect_from_server(redis(Stream, _, _)) :-
@@ -124,7 +134,7 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-	connect_to_server(redis(Input, Output, Socket), Host, Port) :-
+	connect_to_server(Host, Port, redis(Input, Output, Socket)) :-
 		socket:tcp_socket(Socket),
 		socket:tcp_connect(Socket, Host:Port, Stream),
 		stream_pair(Stream, Input, Output),
@@ -135,7 +145,7 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
-	connect_to_server(redis(Socket, Socket, Socket), Host, Port) :-
+	connect_to_server(Host, Port, redis(Socket, Socket, Socket)) :-
 		{socket(Socket, _),
 		 socket_connect(Socket, Port, Host, _)}.
 

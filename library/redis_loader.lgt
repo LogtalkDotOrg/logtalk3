@@ -18,7 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, gnu)).
+:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+
+	:- initialization((
+		logtalk_load(library(basic_types_loader)),
+		logtalk_load(redis, [optimize(on)])
+	)).
+
+:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
 	:- initialization((
 		logtalk_load(library(basic_types_loader)),

@@ -59,7 +59,7 @@
 		Output == 'GNU Prolog rocks!'.
 
 	test(explicit_connection_and_echo) :-
-		connect(Connection, localhost, 6379),
+		connect(localhost, 6379, Connection),
 		send(Connection, echo('GNU Prolog rocks!'), bulk(Output)),
 		disconnect(Connection),
 		Output == 'GNU Prolog rocks!'.
