@@ -69,6 +69,8 @@
 	:- uses(logtalk, [print_message/3]).
 	:- uses(list, [length/2]).
 
+	% public predicates
+
 	connect(Connection) :-
 		catch(
 			connect_to_server(localhost, 6379, Connection),
@@ -103,6 +105,9 @@
 			Error,
 			error_handler(Error, console(Request))
 		).
+
+	% backend Prolog compier dependent auxiliary predicates
+	% (there is not standard sockets Prolog library)
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
@@ -176,6 +181,8 @@
 	flush_output(_).
 
 	:- endif.
+
+	% other auxiliary predicates
 
 	console_request(Request) :-
 		connect(Connection),

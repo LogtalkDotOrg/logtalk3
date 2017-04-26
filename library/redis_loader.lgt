@@ -69,6 +69,6 @@
 
 :- else.
 
-	:- initialization((write('(Redis client library not available)'), nl)).
+	:- initialization((write('(Redis client library not available for your backend Prolog compiler)'), nl)).
 
 :- endif.
