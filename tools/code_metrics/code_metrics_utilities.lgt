@@ -22,9 +22,9 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/02/27,
+		date is 2017/04/26,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
@@ -141,13 +141,11 @@
 
 	entity_calls(object, Entity, Caller, Call) :-
 		object_property(Entity, calls(Call, Properties)),
-		memberchk(caller(Caller), Properties),
-		valid_call(Call).
+		memberchk(caller(Caller), Properties).
 
 	entity_calls(category, Entity, Caller, Call) :-
 		category_property(Entity, calls(Call, Properties)),
-		memberchk(caller(Caller), Properties),
-		valid_call(Call).
+		memberchk(caller(Caller), Properties).
 
 	entity_updates(Entity, Updater, Update) :-
 		entity_kind(Entity, Kind),
@@ -156,13 +154,11 @@
 
 	entity_updates(object, Entity, Updater, Update) :-
 		object_property(Entity, updates(Update, Properties)),
-		memberchk(updater(Updater), Properties),
-		valid_call(Update).
+		memberchk(updater(Updater), Properties).
 
 	entity_updates(category, Entity, Updater, Update) :-
 		category_property(Entity, updates(Update, Properties)),
-		memberchk(updater(Updater), Properties),
-		valid_call(Update).
+		memberchk(updater(Updater), Properties).
 
 	defines_predicate(Entity, Predicate) :-
 		current_entity(Entity),
@@ -176,12 +172,10 @@
 
 	defines_predicate(object, Entity, Predicate, Properties) :-
 		object_property(Entity, defines(Predicate, Properties)),
-		\+ memberchk(auxiliary, Properties),
-		valid_call(Predicate).
+		\+ memberchk(auxiliary, Properties).
 	defines_predicate(category, Entity, Predicate, Properties) :-
 		category_property(Entity, defines(Predicate, Properties)),
-		\+ memberchk(auxiliary, Properties),
-		valid_call(Predicate).
+		\+ memberchk(auxiliary, Properties).
 
 	declares_predicate(Entity, Predicate) :-
 		current_entity(Entity),
@@ -221,12 +215,5 @@
 		specializes_class(Entity, Ancestor),
 		\+ instantiates_class(Ancestor, Entity),
 		\+ specializes_class(Ancestor, Entity).
-
-	% Auxiliary predicates
-
-	valid_call(_/_).
-	valid_call(^^_/_).
-	valid_call(::_/_).
-	valid_call(_::_/_).
 
 :- end_category.
