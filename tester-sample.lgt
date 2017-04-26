@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample tester file
-%  Last updated on June 30, 2016
+%  Last updated on April 26, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -23,19 +23,19 @@
 
 %  This is a sample tester file. Tester files are simply Logtalk source files
 %  whose main purpose is to load and run your application unit tests. Usually
-%  they contain just a Prolog initialization/1 directive wrapping Logtalk goals
-%  as exemplified below.
+%  they contain just an initialization/1 directive wrapping Logtalk goals as
+%  exemplified below.
 %
 %  The provided testing automation shell script, "logtalk_tester", looks for
-%  files named either "tester.lgt" or "tester.logtalk" in the current directory
-%  and its sub-directories when run.
+%  files named "tester.lgt" or "tester.logtalk" in the current directory and
+%  its sub-directories when run.
 
 
 :- initialization((
-	% minimize compilation reports to the essential ones
+	% minimize compilation reports to the essential ones (errors and warnings)
 	set_logtalk_flag(report, warnings),
-	% load any necessary library files; for example:
-	% logtalk_load(library(basic_types_loader)),
+	% load any necessary library filesfor your application; for example:
+	logtalk_load(library(basic_types_loader)),
 	% load the unit test tool
 	logtalk_load(lgtunit(loader)),
 	% load your application files (e.g. "source.lgt") enabling supporting for
@@ -44,8 +44,10 @@
 	% the "debug(on)" option for faster execution
 	logtalk_load(source, [source_data(on), debug(on)]),
 	% compile the unit tests file expanding it using "lgtunit" as the hook
-	% object to preprocess the tests
+	% object to preprocess the tests; if you have failing tests, add the
+	% option debug(on) to debug them (see "tools/lgtunit/NOTES.md" for
+	% debugging advice)
 	logtalk_load(tests, [hook(lgtunit)]),
-	% run all the unit tests
+	% run all the unit tests (assuming your tests object is named "tests")
 	tests::run
 )).

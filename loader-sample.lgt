@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample loader file
-%  Last updated on March 5, 2017
+%  Last updated on April 26, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -26,9 +26,9 @@
 %
 %  During development, loader files can be reloaded repeatedly. Therefore,
 %  any generic settings shared by all source files, such as library paths,
-%  global flag values, and initialization goals with side-effects, are
-%  best defined in a settings file saved in the application directory and
-%  by starting Logtalk from that directory.
+%  global flag values, and initialization goals with side-effects, may be
+%  defined in alternative in a settings file saved in the application
+%  directory and by starting Logtalk from that directory.
 
 %  If you need to preload plain Prolog files or Prolog module files (e.g.
 %  because those resources are used in the Logtalk code), do so preferably
@@ -39,14 +39,17 @@
 
 %  Load your application source files using calls to the logtalk_load/1-2
 %  built-in predicates but wrapping them in initialization/1 directives to
-%  ensure portability:
+%  ensure portability across backend Prolog systems:
 
 :- initialization((
 	logtalk_load([
 		logtalk_source_file_1,
 		logtalk_source_file_2,
 		...
+	], [
+		% required compiler options
 	])
 )).
 
-%  Multiple initialization/1 directives can be used when necessary.
+%  Multiple initialization/1 directives can be used when necessary; their
+%  goals will be called in order.
