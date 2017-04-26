@@ -17,13 +17,14 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+To example contains only unit tests for the Redis client library but
+these tests also serve as examples of using this library. To run all
+the unit tests, please see the `SCRIPT.txt` file.
 
-For a description of this example, please see the comments in the 
-`redis.lgt` source file.
-
-Unit tests originally written by Sean Charles for his GNU Prolog Redis
-client library:
+The unit tests were originally written by Sean Charles for his GNU Prolog
+Redis client library:
 
 	https://github.com/emacstheviking/gnuprolog-redisclient
+
+The Logtalk version is a straight-forward of the original tests using
+the `test/1` dialect of `lgtunit`.

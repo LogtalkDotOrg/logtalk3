@@ -24,8 +24,8 @@
 	:- info([
 		version is 0.1,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2017/04/25,
-		comment is 'Unit tests for the "redis" example.'
+		date is 2017/04/26,
+		comment is 'Unit tests for the "redis" library.'
 	]).
 
 	:- uses(redis, [
@@ -45,8 +45,8 @@
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		:- uses(shell, [sleep/1]).
 	:- else.
-		% GNU Prolog and SWI-Prolog provide sleep/1 as a built-in
-		% predicate but list it here for improved documentation
+		% ECLiPSe, GNU Prolog, and SWI-Prolog provide sleep/1 as
+		% a built-in predicate but we list it here for clarity
 		:- uses(user, [sleep/1]).
 	:- endif.
 
