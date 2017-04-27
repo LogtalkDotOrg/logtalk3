@@ -2492,12 +2492,14 @@ logtalk_make(Target) :-
 	fail.
 % recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
 '$lgt_logtalk_make'(all) :-
-	% find all files impacted by a change to compilation mode
+	% find all files impacted by a change to compilation mode (this excludes all files
+	% that are compiled with an explicit compilation mode set using the corresponding
+	% compiler option)
 	findall(
 		file(Path, Flags),
 		(	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, _),
-			atom_concat(Directory, Basename, Path),
-			'$lgt_changed_compilation_mode'(Mode, Flags)
+			'$lgt_changed_compilation_mode'(Mode, Flags),
+			atom_concat(Directory, Basename, Path)
 		),
 		Files
 	),
