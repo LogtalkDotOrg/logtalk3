@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 6, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 6, rc2)).
 
 
 
@@ -7926,7 +7926,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	% perform basic error and portability checking
 	'$lgt_compile_body'(set_prolog_flag(Flag, Value), _, _, Ctx),
-	% require a nonvar value
+	% require a bound value
 	'$lgt_check'(nonvar, Value),
 	% setting the flag during compilation may or may not work as expected
 	% depending on the flag and on the back-end Prolog compiler
@@ -10010,15 +10010,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Error,
 		throw(error(Error, clause(Clause)))
 	),
-	% sucessful translation; save the source data information for use in
-	% the second compiler stage (where it might be required by calls to
+	% sucessful first stage compilation; save the source data information for
+	% use in the second compiler stage (where it might be required by calls to
 	% the logtalk_load_context/2 predicate during goal expansion)
 	(	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines) ->
 		SourceData = sd(Term, VariableNames, File, Lines)
 	;	SourceData = nil
 	),
-	% check which compile clause to save (normal and debug) and if we have
-	% a clause defined by the user or an auxiliary clause
+	% check which compile clause to save (normal/optimal and debug) and
+	% if we have a clause defined by the user or an auxiliary clause
 	(	'$lgt_compiler_flag'(debug, on) ->
 		(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(DClause))
@@ -10181,7 +10181,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	assertz('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules)).
 
-% module multifile predicate
+% module multifile predicate clause
 '$lgt_clause_number'(':'(_, _), _, _, _, 0).
 
 '$lgt_clause_number'({Head}, Kind, File, Line, Clauses) :-
@@ -10227,7 +10227,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity).
 
-% not the first clause for this predicate; reuse the compiled head template
+% not the first clause for this user-defined predicate; reuse the compiled head template
 
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
 	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, _, user),
@@ -10387,14 +10387,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
+	'$lgt_check'(var_or_callable, Pred),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),	
 	(	var(Pred) ->
 		TPred = call(Pred),
 		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
 	;	Pred == ! ->
 		TPred = true
-	;	'$lgt_check'(callable, Pred),
-		TPred = Pred
+	;	'$lgt_cut_transparent_control_construct'(Pred) ->
+		TPred = call(Pred)
+	;	TPred = Pred
 	).
 
 % goal expansion (only applied at compile time)
@@ -14747,6 +14749,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_inline_calls_def'(_).
 
 
+
 % '$lgt_control_construct'(?callable)
 
 '$lgt_control_construct'((_ , _)).
@@ -14763,6 +14766,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_control_construct'(':'(_, _)).
 '$lgt_control_construct'(throw(_)).
 '$lgt_control_construct'('*->'(_, _)) :-
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
+
+
+
+% '$lgt_cut_transparent_control_construct'(?callable)
+
+'$lgt_cut_transparent_control_construct'((_ , _)).
+'$lgt_cut_transparent_control_construct'((_ ; _)).
+'$lgt_cut_transparent_control_construct'((_ -> _)).
+'$lgt_cut_transparent_control_construct'('*->'(_, _)) :-
 	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
 
 

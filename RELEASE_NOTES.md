@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 ADDED: Predicate `logtalk::file_type_extension/2` for accessing the file type
 extensions defined in the Prolog adapter files.
 
+* FIXED: Cases where the `{}/1` compiler bypass control construct would not be
+cut opaque.
+
 Tools
 -----
 

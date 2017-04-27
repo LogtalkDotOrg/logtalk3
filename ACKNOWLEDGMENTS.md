@@ -100,7 +100,7 @@ RESEARCH SUPPORT
 SPONSORS
 ========
 
-* Kyndi, Inc. - 2015-  
+* Kyndi, Inc. - 2015-Present
 * VivoMind Research, LLC - 2012-2013
 
 
