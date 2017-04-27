@@ -82,7 +82,7 @@ DOUBLE_QUOTE = \"
 
 FIRST_CHAR_MAP_PROPERTY = ([:letter:]|[:digit:]|"_")
 
-COMBINABLE_OPERATOR_SYMBOLS = "<" | ">" | "?" | "/" | ";" | ":" | "\\" | "|" | "=" | "+" | "-" | "*" | "&" | "^" | "%" | "$" | "#" | "@" | "~"
+COMBINABLE_OPERATOR_SYMBOLS = "<" | ">" | "?" | "/" | ";" | ":" | "\\" | "|" | "=" | "+" | "-" | "*" | "&" | "^" | "$" | "#" | "@" | "~"
 
 COMMA = ","
 NON_COMBINABLE_OPERATOR_SYMBOLS = {COMMA}
