@@ -50,6 +50,14 @@
 		:- uses(user, [sleep/1]).
 	:- endif.
 
+	% only run the tests if there's a Redis server running on localhost
+	condition :-
+		catch(
+			(connect(Connection), disconnect(Connection)),
+			_,
+			fail
+		).
+
 	%% CONNECTION...
 	
 	test(default_connection_and_echo) :-
