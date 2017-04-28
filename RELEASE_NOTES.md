@@ -33,6 +33,14 @@ extensions defined in the Prolog adapter files.
 * FIXED: Cases where the `{}/1` compiler bypass control construct would not be
 cut opaque.
 
+Library
+-------
+
+* ADDED: Redis client library. Available when using GNU Prolog, Qu-Prolog,
+SICStus Prolog, SWI-Prolog, or XSB as the backend compiler. Inspired by a
+GNU Prolog library written by Sean Charles. Thanks to Ebrahim Azarisooreh
+for porting and testing help.
+
 Tools
 -----
 
@@ -46,6 +54,11 @@ tool.
 
 * UPDATED: The `code_metrics`, `dead_code_scanner`, `diagrams`, and `lgtdoc`
 tools to take advantage of the new `logtalk::file_type_extension/2` predicate.
+
+Examples
+--------
+
+* ADDED: New `redis` example with unit tests for the Redis client library.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
