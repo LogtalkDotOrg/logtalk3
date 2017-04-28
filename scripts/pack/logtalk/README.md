@@ -21,6 +21,11 @@ This is a SWI-Prolog pack specific README file. The actual Logtalk
 README file can be found at `../logtalk-3.10.6/README.md`. Follows
 some notes on this pack version of Logtalk.
 
+The pack version of Logtalk is mainly targeted for the *deployment*
+of applications. For *development*, using the installers available
+from the Logtalk website are advisable as they provide a better user
+experience.
+
 Installing this pack simplifies loading Logtalk on-demand by simply
 using the directive (or the corresponding query):
 
