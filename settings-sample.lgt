@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on April 24, 2017
+%  Last updated on April 28, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -29,6 +29,9 @@
 %  defined here can always be overridden by using the `logtalk_compile/2` and
 %  `logtalk_load/2` built-in predicates or by using the `set_logtalk_flag/2`
 %  directive within the source files.
+%
+%  Settings files are also a convenient place to define your own shortcuts
+%  for commonly used queries (e.g. load the debugger and start tracing).
 %
 %  Logtalk looks for a settings file first in the startup directory (thus
 %  supporting per-project settings files). If not found, Logtalk looks for
