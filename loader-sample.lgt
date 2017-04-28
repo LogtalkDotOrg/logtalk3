@@ -53,3 +53,8 @@
 
 %  Multiple initialization/1 directives can be used when necessary; their
 %  goals will be called in order.
+
+%  Tip: don't use debug/1 or optimize/1 compiler options in `logtalk_load/2`
+%  calls to allow easy recompilation of source files for debugging during
+%  development. Later, when the code becomes stable, you can always add a
+%  `optimize(on)` compiler option for best performance.
