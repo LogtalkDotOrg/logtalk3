@@ -5700,8 +5700,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	atom_concat(Name, Extension, Basename),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
 	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
-	% change the current directory to the directory of the file being loaded as it can
-	% be a loader file loading other files in its directory using a relative path
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp),
 		\+ '$lgt_failed_file_'(SourceFile) ->
 		% we're attempting to reload a file
