@@ -283,6 +283,8 @@ backend Prolog compilers provide this functionality:
 - SWI-Prolog: `call_with_time_limit/2` library predicate
 - YAP: `time_out/3` library predicate
 
+The `logtalk_tester` automation script accepts a timeout option that can be used to set a limit per test set.
+
 
 Setup and cleanup goals
 -----------------------

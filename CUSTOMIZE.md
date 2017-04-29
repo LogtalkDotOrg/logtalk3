@@ -22,20 +22,20 @@ CUSTOMIZATION INSTRUCTIONS
 
 This file contains detailed instructions for customizing your Logtalk 
 installation and working environment. Customization is usually done on
-a per-user basis by editing a settings file on the Logtalk user folder 
-(whose path is stored on the `LOGTALKUSER` environment variable; this
-folder can be (re)created by running the `logtalk_user_setup` shell
-script; on Windows systems, you can use the installer and choose the
-corresponding install option). The default path for the Logtalk user
-folder is:
+a per-user basis by editing a settings file in the user homer folder
+or in the Logtalk user folder (its path is stored on the `LOGTALKUSER`
+environment variable; this folder can be (re)created by running the
+`logtalk_user_setup` shell script; on Windows systems, you can use the
+installer and choose the corresponding install option). The default
+path for the Logtalk user folder is:
 
 * POSIX systems  
     `$HOME/logtalk`
 * Windows  
     `My Documents\Logtalk`
 
-The Logtalk user folder is updated when you update Logtalk. Therefore, it
-shouldn't be used to store your Logtalk application's source code.
+The Logtalk user folder is updated when you update Logtalk. Therefore,
+it shouldn't be used to store your Logtalk application's source code.
 
 
 1. DEFINING A DEFAULT PROLOG BACKEND COMPILER

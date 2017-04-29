@@ -31,15 +31,14 @@ ADDED: Predicate `logtalk::file_type_extension/2` for accessing the file type
 extensions defined in the Prolog adapter files.
 
 * FIXED: Cases where the `{}/1` compiler bypass control construct would not be
-cut opaque.
+opaque to cuts.
 
 Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: All adapter files with definitions for `{+d}`, `{+n}`, and `{+o}`
-shortcuts for quickly changing compilation mode to (d)ebug, (n)ormal, or
-(o)ptimal *and* reload all files (affected by the change to the compilation
-mode).
+shortcuts for quickly changing compilation mode to debug, normal, or optimal
+*and* reload all files (affected by the change to the compilation mode).
 
 Library
 -------
