@@ -277,6 +277,7 @@ Unit tests with timeout limits
 There's no portable way to call a goal with a timeout limit. However, some
 backend Prolog compilers provide this functionality:
 
+- B-Prolog: `time_out/3` predicate
 - ECLiPSe: `timeout/3` and `timeout/7` library predicates
 - SICStus Prolog: `time_out/3` library predicate
 - SWI-Prolog: `call_with_time_limit/2` library predicate
@@ -469,8 +470,8 @@ of Google Chrome) by copying to the same directory the `coverage_report.dtd`
 and `coverage_report.xsl` files found in the `tools/lgtunit` directory (when
 using the `logtalk_tester` script, these two files are copied automatically).
 In alternative, a XSLT processor can be used to generate an XHTML file instead
-of relying in a web browser for the transformation. For example, using the
-popular `xsltproc` XSLT processor:
+of relying on a web browser for the transformation. For example, using the
+popular `xsltproc` processor:
 
 	$ xsltproc -o coverage_report.html coverage_report.xml
 
