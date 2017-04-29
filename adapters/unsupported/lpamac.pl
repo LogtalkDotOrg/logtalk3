@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on August 7, 2016
+%  Last updated on April 29, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -729,6 +729,19 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 {@} :-
 	!,
 	logtalk_make(circular).
+{+d} :-
+	!,
+	set_logtalk_flag(debug, on),
+	logtalk_make(all).
+{+n} :-
+	!,
+	set_logtalk_flag(debug, off),
+	set_logtalk_flag(optimize, off),
+	logtalk_make(all).
+{+o} :-
+	!,
+	set_logtalk_flag(optimize, on),
+	logtalk_make(all).
 
 
 {File, Files} :-

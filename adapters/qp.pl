@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on February 25, 2017
+%  Last updated on April 29, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -762,6 +762,19 @@ term_hash(_, _, _, _) :-
 {@} :-
 	!,
 	logtalk_make(circular).
+{+d} :-
+	!,
+	set_logtalk_flag(debug, on),
+	logtalk_make(all).
+{+n} :-
+	!,
+	set_logtalk_flag(debug, off),
+	set_logtalk_flag(optimize, off),
+	logtalk_make(all).
+{+o} :-
+	!,
+	set_logtalk_flag(optimize, on),
+	logtalk_make(all).
 
 
 {File, Files} :-
