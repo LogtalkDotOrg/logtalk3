@@ -252,8 +252,6 @@
 :- dynamic('$lgt_pp_def_'/1).
 % '$lgt_pp_ddef_'(Clause)
 :- dynamic('$lgt_pp_ddef_'/1).
-% '$lgt_pp_ddef_'(Clause)
-:- dynamic('$lgt_pp_ddef_'/1).
 % '$lgt_pp_super_'(Clause)
 :- dynamic('$lgt_pp_super_'/1).
 
@@ -2975,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 6, rc2)).
+'$lgt_version_data'(logtalk(3, 10, 6, rc3)).
 
 
 
@@ -5989,7 +5987,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_prolog_code'(ObjectFile, SourceFile, Options),
 		(	Action == loading ->
 			'$lgt_print_message'(silent(compiling), core, compiled_file(SourceFile, Flags))
-		;	% Action == compiling
+		;	% Action == compiling,
 			'$lgt_print_message'(comment(compiling), core, compiled_file(SourceFile, Flags))
 		)
 	).
@@ -6171,12 +6169,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_read_file_term'(SourceFile, Input, Term, [singletons(Singletons)], Lines),
 		InputError,
-		'$lgt_compiler_error_handler'(SourceFile, Lines, InputError)
+		'$lgt_compiler_first_term_error_handler'(SourceFile, Lines, InputError)
 	),
 	catch(
 		'$lgt_check_for_encoding_directive'(Term, SourceFile, Input, NewInput, OutputOptions),
 		FirstTermError,
-		'$lgt_compiler_error_handler'(SourceFile, Lines, FirstTermError)
+		'$lgt_compiler_first_term_error_handler'(SourceFile, Lines, FirstTermError)
 	),
 	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
 	catch(
@@ -6771,13 +6769,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compiler_error_handler'(+atom, +pair(integer), @compound)
+% '$lgt_compiler_first_term_error_handler'(+atom, +pair(integer), @compound)
 %
 % closes the stream being used for reading, restores the operator table,
 % reports the compilation error found, and, finally, fails in order to
 % abort the compilation process
 
-'$lgt_compiler_error_handler'(SourceFile, Lines, Error) :-
+'$lgt_compiler_first_term_error_handler'(SourceFile, Lines, Error) :-
+	(	nonvar(Lines) ->
+		true
+	;	% no line information available likely due to a syntax error
+		stream_property(Input, alias(logtalk_compiler_input)),
+		'$lgt_stream_current_line_number'(Input, Line) ->
+		Lines = Line-Line
+	;	% some backend Prolog compilers do not support, or do not always support
+		% (e.g. when a syntax error occurs) querying a stream line number
+		Lines = '-'(-1, -1)
+	),
 	stream_property(Input, alias(logtalk_compiler_input)), !,
 	'$lgt_print_message'(error, core, compiler_error(SourceFile, Lines, Error)),
 	'$lgt_restore_global_operator_table',
@@ -21746,8 +21754,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_default_hooks'
 %
-% compiles the default hooks specified on the backend Prolog compiler
-% adapter file for better performance when compiling source files
+% compiles the default hooks specified on the backend Prolog compiler adapter
+% file or settings file for better performance when compiling source files
 
 '$lgt_compile_default_hooks' :-
 	(	'$lgt_compiler_flag'(hook, Hook) ->

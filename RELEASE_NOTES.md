@@ -33,6 +33,9 @@ extensions defined in the Prolog adapter files.
 * FIXED: Cases where the `{}/1` compiler bypass control construct would not be
 opaque to cuts.
 
+* FIXED: Lack of source line data when there is a syntax error in the first
+term of a source file.
+
 Prolog adapter and integration files
 ------------------------------------
 
