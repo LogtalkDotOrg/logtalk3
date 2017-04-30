@@ -2973,7 +2973,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 6, rc3)).
+'$lgt_version_data'(logtalk(3, 10, 6, rc4)).
 
 
 
@@ -21700,10 +21700,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		atom_concat(DirectorySlash, SettingsFile, SettingsPath),
 		'$lgt_file_exists'(SettingsPath) ->
 		% settings file found; try to load it
-		catch(
-			(logtalk_load(SettingsPath, Options), Result = loaded(Directory)),
-			Error,
-			Result = error(Directory, Error)
+		(	logtalk_load(SettingsPath, Options) ->
+			Result = loaded(Directory)
+		;	Result = error(Directory)
 		)
 	;	% no settings file in this directory
 		fail
@@ -21721,8 +21720,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_settings_file'(disabled) :-
 	'$lgt_print_message'(comment(settings), core, settings_file_disabled).
 
-'$lgt_report_settings_file'(error(Path, Error)) :-
-	'$lgt_print_message'(error, core, error_loading_settings_file(Path, Error)).
+'$lgt_report_settings_file'(error(Path)) :-
+	'$lgt_print_message'(error, core, error_loading_settings_file(Path)).
 
 '$lgt_report_settings_file'(none(Flag)) :-
 	'$lgt_print_message'(comment(settings), core, no_settings_file_found(Flag)).

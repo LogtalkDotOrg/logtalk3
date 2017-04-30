@@ -36,6 +36,8 @@ opaque to cuts.
 * FIXED: Lack of source line data when there is a syntax error in the first
 term of a source file.
 
+* FIXED: Reporting of errors when attempting to load a settings file.
+
 Prolog adapter and integration files
 ------------------------------------
 
