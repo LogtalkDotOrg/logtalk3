@@ -2469,6 +2469,9 @@ logtalk_make(Target) :-
 
 
 '$lgt_valid_logtalk_make_target'(all).
+'$lgt_valid_logtalk_make_target'(debug).
+'$lgt_valid_logtalk_make_target'(normal).
+'$lgt_valid_logtalk_make_target'(optimal).
 '$lgt_valid_logtalk_make_target'(clean).
 '$lgt_valid_logtalk_make_target'(missing).
 '$lgt_valid_logtalk_make_target'(circular).
@@ -2511,6 +2514,19 @@ logtalk_make(Target) :-
 	fail.
 '$lgt_logtalk_make'(all) :-
 	'$lgt_print_message'(comment(make), core, modified_files_reloaded).
+
+'$lgt_logtalk_make'(debug) :-
+	'$lgt_set_compiler_flag'(debug, on),
+	'$lgt_logtalk_make'(all).
+
+'$lgt_logtalk_make'(normal) :-
+	'$lgt_set_compiler_flag'(debug, off),
+	'$lgt_set_compiler_flag'(optimize, off),
+	'$lgt_logtalk_make'(all).
+
+'$lgt_logtalk_make'(optimal) :-
+	'$lgt_set_compiler_flag'(optimize, on),
+	'$lgt_logtalk_make'(all).	
 
 '$lgt_logtalk_make'(clean) :-
 	'$lgt_loaded_file_'(_, _, _, _, _, ObjectFile, _),
@@ -2973,7 +2989,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 6, rc4)).
+'$lgt_version_data'(logtalk(3, 10, 6, rc5)).
 
 
 

@@ -1142,18 +1142,13 @@ term_expansion(
 	logtalk_make(circular).
 {+d} :-
 	!,
-	set_logtalk_flag(debug, on),
-	logtalk_make(all).
+	logtalk_make(debug).
 {+n} :-
 	!,
-	set_logtalk_flag(debug, off),
-	set_logtalk_flag(optimize, off),
-	logtalk_make(all).
+	logtalk_make(normal).
 {+o} :-
 	!,
-	set_logtalk_flag(optimize, on),
-	logtalk_make(all).
-
+	logtalk_make(optimal).
 
 {File, Files} :-
 	!,
