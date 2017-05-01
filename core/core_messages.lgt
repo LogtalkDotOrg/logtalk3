@@ -23,7 +23,7 @@
 	:- info([
 		version is 1.20,
 		author is 'Paulo Moura',
-		date is 2017/04/30,
+		date is 2017/05/01,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -254,7 +254,7 @@
 	message_tokens(settings_file_disabled) -->
 		['Loading of settings file disabled in the backend Prolog compiler adapter file.'-[], nl, nl].
 	message_tokens(error_loading_settings_file(Path)) -->
-		['Errors found while trying to load settings file from directory ~w'-[Path], nl, nl].
+		['Errors found while loading settings file from directory ~w'-[Path], nl, nl].
 	message_tokens(no_settings_file_found(allow)) -->
 		['No settings file found in the startup or Logtalk user directories.'-[], nl,
 		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl

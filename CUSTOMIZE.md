@@ -100,6 +100,9 @@ Some backend Prolog compilers don't support all the possible compilation
 flags values. In addition, some backend Prolog compilers provide limited
 support for settings files in some operating-systems.
 
+Settings filescan be debugged by compiling them with the `logtalk_compile/1-2`
+built-in predicates.
+
 
 4. CUSTOMIZING DOCUMENTATION PROCESSING SUPPORT
 -----------------------------------------------

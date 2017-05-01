@@ -2989,7 +2989,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 6, rc5)).
+'$lgt_version_data'(logtalk(3, 10, 6, rc6)).
 
 
 
@@ -5751,8 +5751,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_failed_file_'(SourceFile)),
 	% save the file loading dependency on a parent file if it exists
 	'$lgt_save_file_loading_dependency'(SourceFile),
-	% compile the source file to an intermediate Prolog file on disk
+	retractall('$lgt_file_loading_stack_'(SourceFile, Directory)),
 	asserta('$lgt_file_loading_stack_'(SourceFile, Directory)),
+	% compile the source file to an intermediate Prolog file on disk;
 	% a syntax error while reading the terms in a source file results
 	% in a printed message and failure instead of an exception but we
 	% need to pass the failure up to the caller
@@ -5769,7 +5770,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_save_file_loading_dependency'(SourceFile) :-
-	(	'$lgt_file_loading_stack_'(ParentSourceFile, _) ->
+	(	'$lgt_file_loading_stack_'(ParentSourceFile, _),
+		SourceFile \== ParentSourceFile ->
 		% as a file can have multiple parents, we only
 		% ensure that there aren't duplicated entries 
 		retractall('$lgt_parent_file_'(SourceFile, ParentSourceFile)),
@@ -7903,6 +7905,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% support the Logtalk term-expansion mechanism
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
+	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
 	catch(
 		'$lgt_compile_file_terms'(Terms, Path, Ctx),
@@ -8061,6 +8064,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
+	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
 	catch(
 		(	Mode == runtime ->
@@ -21716,7 +21720,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		atom_concat(DirectorySlash, SettingsFile, SettingsPath),
 		'$lgt_file_exists'(SettingsPath) ->
 		% settings file found; try to load it
-		(	logtalk_load(SettingsPath, Options) ->
+		(	catch(logtalk_load(SettingsPath, Options), _, fail) ->
 			Result = loaded(Directory)
 		;	Result = error(Directory)
 		)

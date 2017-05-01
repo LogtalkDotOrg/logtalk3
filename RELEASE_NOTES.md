@@ -43,6 +43,9 @@ term of a source file.
 
 * FIXED: Reporting of errors when attempting to load a settings file.
 
+* FIXED: Compiler loop when trying to recompile a broken source file without
+first fixing its errors.
+
 Prolog adapter and integration files
 ------------------------------------
 
