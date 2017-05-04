@@ -53,7 +53,7 @@ Compiles to disk and then loads to memory a <a href="../grammar.html#grammar_sou
 Note that only the errors related to problems in the predicate argument are listed below. This predicate fails when errors are found during compilation of a source file.
 </p>
 <p>
-Depending on the back-end Prolog compiler, the shortcut <code>{File}</code> may be used in alternative (check the adapter files for its availability).
+Depending on the back-end Prolog compiler, the shortcuts <code>{File}</code> or <code>{File1, File2, ...}</code> may be used in alternative. Check the adapter files for the availability of these shortcuts as they are not part of the language (and thus should only be used at the top-level interpreter).
 </p>
 
 <h4>Template and modes</h4>
@@ -95,7 +95,7 @@ logtalk_load(@list(source_file_name))</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 11, 2016</span>
+		<span>Last updated on: May 4, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_compile_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_load_2.html">next</a></span><br/>
