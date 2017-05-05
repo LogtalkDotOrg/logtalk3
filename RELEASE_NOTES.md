@@ -24,7 +24,10 @@ RELEASE NOTES
 3.10.7 - May ??, 2017
 =====================
 
+Library
+-------
 
+* FIXED: Bug in the `pairs::group_by_key/2` predicate.
 
 
 3.10.6 - May 1, 2017

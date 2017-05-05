@@ -22,8 +22,8 @@
 :- object(pairs).
 
 	:- info([
-		version is 1.3,
-		date is 2017/02/28,
+		version is 1.4,
+		date is 2017/05/05,
 		author is 'Paulo Moura',
 		comment is 'Useful predicates over lists of pairs (key-value terms).'
 	]).
@@ -112,7 +112,7 @@
 		Key == LookupKey,
 		!,
 		group(Pairs, LookupKey, Values, Groups).
-	group([Key-Value| Pairs], _, [Key-[Value| Values]| Groups]) :-
+	group([Key-Value| Pairs], _, [], [Key-[Value| Values]| Groups]) :-
 		group(Pairs, Key, Values, Groups).
 
 	map(Closure, List, Pairs) :-
