@@ -22,9 +22,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/04/24,
+		date is 2017/05/05,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -368,7 +368,7 @@
 		).
 
 	output_directory_files(Directory) :-
-		print_message(information, dead_code_scanner, scanning_directory(Directory)),
+		print_message(comment, dead_code_scanner, scanning_directory(Directory)),
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
@@ -393,7 +393,7 @@
 		write_scan_footer('Entity').
 
 	process_entity(Kind, Entity) :-
-		print_message(information, dead_code_scanner, scanning_entity(Kind, Entity)),
+		print_message(comment, dead_code_scanner, scanning_entity(Kind, Entity)),
 		Kind \== protocol,
 		predicate(Entity, Predicate, File, Line),
 		print_message(warning, dead_code_scanner, dead_predicate(Entity, Predicate, File, Line)),
@@ -446,7 +446,7 @@
 		).
 
 	process_file(Path) :-
-		print_message(information, dead_code_scanner, scanning_file(Path)),
+		print_message(comment, dead_code_scanner, scanning_file(Path)),
 		(	logtalk::loaded_file_property(Path, object(Entity)),
 			Kind = object
 		;	logtalk::loaded_file_property(Path, category(Entity)),
@@ -471,11 +471,11 @@
 	write_scan_header(Type) :-
 		print_message(silent, dead_code_scanner, scan_started),
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
-		print_message(information, dead_code_scanner, scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)).
+		print_message(comment, dead_code_scanner, scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)).
 
 	write_scan_footer(Type) :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
-		print_message(information, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
+		print_message(comment, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, dead_code_scanner, scan_ended).
 
 :- end_object.

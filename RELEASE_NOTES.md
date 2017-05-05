@@ -29,6 +29,13 @@ Library
 
 * FIXED: Bug in the `pairs::group_by_key/2` predicate.
 
+Tools
+-----
+
+* CHANGED: The `dead_code_scanner` tool log messages from type `information`
+to `comment` so that the tool output is minimized when setting the `report`
+flag to `warnings`.
+
 
 3.10.6 - May 1, 2017
 ====================
