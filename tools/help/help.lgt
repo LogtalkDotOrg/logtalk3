@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.11,
+		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2017/01/29,
+		date is 2017/05/05,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -45,12 +45,9 @@
 		write('On-line help is available for Logtalk built-in control constructs, built-in'), nl,
 		write('directives, built-in predicates, built-in non-terminals, built-in methods,'), nl,
 		write('and the standard library:'), nl, nl,
-		write('    help::Functor/Arity.'), nl,
-		write('    help::Functor//Arity. '), nl,
-		write('    help::library.'), nl,
-		write('    help::library(Functor/Arity).'), nl,
-		write('    help::library(Functor//Arity).'), nl,
-		write('    help::library(Entity).'), nl, nl,
+		write('    help::Functor/Arity.             help::Functor//Arity.'), nl,
+		write('    help::library.                   help::library(Entity).'), nl,
+		write('    help::library(Functor/Arity).    help::library(Functor//Arity).'), nl, nl,
 		write('The corresponding documentation page will open in your default web browser.'), nl,
 		write('To consult the Logtalk User and Reference manuals:'), nl, nl,
 		write('    help::manuals.'), nl, nl,
@@ -59,10 +56,15 @@
 		write('To recompile and reload all source files that have been changed since they'), nl,
 		write('were loaded the following shortcut can be used:'), nl, nl,
 		write('    {*}'), nl, nl,
-		write('To debug your code, first load the debugger tool and turn on the debug flag:'), nl, nl,
-		write('    {debugger(loader)}, set_logtalk_flag(debug, on).'), nl, nl,
-		write('Second, load the source files you want to debug and start the debugger tracer:'), nl, nl,
-		write('    debugger::trace.'), nl, nl.
+		write('To recompile your source files for debugging you can use the shortcut:'), nl, nl,
+		write('    {+d}'), nl, nl,
+		write('Next load the debugger and start tracing:'), nl, nl,
+		write('    {debugger(loader)}, debugger::trace.'), nl, nl,
+		write('Hint: you can preload the debuuger (and other developer tools) from your'), nl,
+		write('settings file (see the settings-sample.lgt file for instructions).'), nl, nl,
+		write('To lean more about available top-level shortcuts:'), nl, nl,
+		write('    help::logtalk_load/1.'), nl,
+		write('    help::logtalk_make/1.'), nl, nl.
 
 	:- public(('/')/2).
 	:- mode('/'(+atom, +integer), zero_or_one).
