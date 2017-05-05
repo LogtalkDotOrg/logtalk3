@@ -186,6 +186,13 @@
 :- dynamic(logtalk_library_path/2).
 
 
+% extension points for logtalk_make/1
+
+% logtalk_make_target_action(Target)
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+
 % term- and goal-expansion default compiler hooks
 
 % '$lgt_hook_term_expansion_'(Term, ExpandedTerms)
@@ -2462,7 +2469,8 @@ logtalk_make(Target) :-
 		'$lgt_print_message'(warning(make), core, no_make_target_specified),
 		fail
 	;	'$lgt_valid_logtalk_make_target'(Target) ->
-		'$lgt_logtalk_make'(Target)
+		'$lgt_logtalk_make'(Target),
+		'$lgt_logtalk_make_target_actions'(Target)
 	;	'$lgt_print_message'(warning(make), core, invalid_make_target(Target)),
 		fail
 	).
@@ -2473,8 +2481,14 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(normal).
 '$lgt_valid_logtalk_make_target'(optimal).
 '$lgt_valid_logtalk_make_target'(clean).
-'$lgt_valid_logtalk_make_target'(missing).
+'$lgt_valid_logtalk_make_target'(check).
 '$lgt_valid_logtalk_make_target'(circular).
+
+
+'$lgt_logtalk_make_target_actions'(Target) :-
+	logtalk_make_target_action(Target),
+	fail.
+'$lgt_logtalk_make_target_actions'(_).
 
 
 % single file failure or chain of loaded files leading to a compilation failure
@@ -2535,21 +2549,38 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make'(clean) :-
 	'$lgt_print_message'(comment(make), core, intermediate_files_deleted).
 
+'$lgt_logtalk_make'(check) :-
+	'$lgt_logtalk_make'(missing).
+
 '$lgt_logtalk_make'(missing) :-
+	'$lgt_print_message'(comment(make), core, scanning_for_missing_entities_predicates),
 	findall(Protocol, '$lgt_missing_protocol'(Protocol), Protocols),
-	'$lgt_print_message'(warning(make), core, missing_protocols(Protocols)),
+	(	Protocols == [] ->
+		true
+	;	'$lgt_print_message'(warning(make), core, missing_protocols(Protocols))
+	),
 	findall(Category, '$lgt_missing_category'(Category), Categories),
-	'$lgt_print_message'(warning(make), core, missing_categories(Categories)),
+	(	Categories == [] ->
+		true
+	;	'$lgt_print_message'(warning(make), core, missing_categories(Categories))
+	),
 	findall(Object, '$lgt_missing_object'(Object), Objects),
-	'$lgt_print_message'(warning(make), core, missing_objects(Objects)),
-	(	'$lgt_prolog_feature'(modules, supported) ->
+	(	Objects == [] ->
+		true
+	;	'$lgt_print_message'(warning(make), core, missing_objects(Objects))
+	),
+	(	'$lgt_prolog_feature'(modules, supported),
 		findall(Module, '$lgt_missing_module'(Module), Modules),
+		Modules \== [] ->
 		'$lgt_print_message'(warning(make), core, missing_modules(Modules))
 	;	true
 	),
 	findall(Predicate, '$lgt_missing_predicate'(Predicate), Predicates),
-	'$lgt_print_message'(warning(make), core, missing_predicates(Predicates)),
-	'$lgt_print_message'(comment(make), core, missing_entities_predicates_listed).
+	(	Predicates == [] ->
+		true
+	;	'$lgt_print_message'(warning(make), core, missing_predicates(Predicates))
+	),
+	'$lgt_print_message'(comment(make), core, completed_scanning_for_missing_entities_predicates).
 
 '$lgt_logtalk_make'(circular) :-
 	findall(CircularReference, '$lgt_circular_reference'(CircularReference), CircularReferences0),

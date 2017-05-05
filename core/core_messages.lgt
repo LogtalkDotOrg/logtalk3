@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.20,
+		version is 1.21,
 		author is 'Paulo Moura',
-		date is 2017/05/01,
+		date is 2017/05/05,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -125,8 +125,11 @@
 	message_tokens(intermediate_files_deleted) -->
 		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
 
-	message_tokens(missing_entities_predicates_listed) -->
-		['Completed listing of missing entities and predicates'-[], nl].
+	message_tokens(scanning_for_missing_entities_predicates) -->
+		['Scanning for missing entities and predicates ...'-[], nl].
+
+	message_tokens(completed_scanning_for_missing_entities_predicates) -->
+		['... completed scanning for missing entities and predicates'-[], nl].
 
 	message_tokens(circular_references_listed) -->
 		['Completed listing of circular dependencies'-[], nl].

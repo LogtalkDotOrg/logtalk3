@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for IF/Prolog 5.3
-%  Last updated on April 29, 2016
+%  Last updated on May 5, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -639,7 +639,7 @@ callable(Term) :-
 	logtalk_make(clean).
 {?} :-
 	!,
-	logtalk_make(missing).
+	logtalk_make(check).
 {@} :-
 	!,
 	logtalk_make(circular).

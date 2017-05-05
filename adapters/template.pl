@@ -622,7 +622,7 @@ term_hash(Term, Depth, Range, Hash) :-
 	logtalk_make(clean).
 {?} :-
 	!,
-	logtalk_make(missing).
+	logtalk_make(check).
 {@} :-
 	!,
 	logtalk_make(circular).

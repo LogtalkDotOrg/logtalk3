@@ -24,6 +24,14 @@ RELEASE NOTES
 3.10.7 - May ??, 2017
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* RENAMED: The `logtalk_make/1` target `missing` to `check`.
+
+* ADDED: Support for extending `logtalk_make/1` targets with user defined
+actions using the new multifile predicate `logtalk_make_target_action/1`.
+
 Library
 -------
 
