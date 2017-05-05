@@ -35,9 +35,13 @@ actions using the new multifile predicate `logtalk_make_target_action/1`.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The SWI-Prolog hooks file to automatically call this Prolog system
-`make/0` predicate when calling `logtalk_make/0` or `logtalk_make/1` with the
-`all` target.
+* ADDED: An `eclipsehooks.pl` file for integration with ECLiPSe developer
+tools. Added hook to automatically call the built-in `make/0` predicate
+when calling `logtalk_make/0` or `logtalk_make/1` with the `all` target.
+
+* UPDATED: The SWI-Prolog hooks file to automatically call the built-in
+`make/0` predicate when calling `logtalk_make/0` or `logtalk_make/1` with
+the `all` target.
 
 Library
 -------

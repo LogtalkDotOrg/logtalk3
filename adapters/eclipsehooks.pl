@@ -1,6 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Integration file for YAP
+%  Integration code for ECLiPSe 6.1#143 and later versions
+%  for integration with ECLiPSe developer tools.
+%
 %  Last updated on May 5, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
@@ -21,11 +23,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	% load Logtalk core files
-	reconsult('$LOGTALKHOME/adapters/yap.pl'),
-	reconsult('$LOGTALKHOME/paths/paths.pl'),
-	reconsult('$LOGTALKHOME/integration/logtalk_comp_yap.pl'),
-	% load integration hooks with YAP native developer tools
-	reconsult('$LOGTALKHOME/adapters/yaphooks.pl')
-)).
+% Call ECLiPSe make/0 when calling logtalk_make/0
+% or logtalk_make/1 with the target all
+
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+logtalk_make_target_action(all) :-
+	make.
