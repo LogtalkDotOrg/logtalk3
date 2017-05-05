@@ -368,7 +368,7 @@
 		).
 
 	output_directory_files(Directory) :-
-		print_message(comment, dead_code_scanner, scanning_directory(Directory)),
+		print_message(silent, dead_code_scanner, scanning_directory(Directory)),
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
@@ -393,7 +393,7 @@
 		write_scan_footer('Entity').
 
 	process_entity(Kind, Entity) :-
-		print_message(comment, dead_code_scanner, scanning_entity(Kind, Entity)),
+		print_message(silent, dead_code_scanner, scanning_entity(Kind, Entity)),
 		Kind \== protocol,
 		predicate(Entity, Predicate, File, Line),
 		print_message(warning, dead_code_scanner, dead_predicate(Entity, Predicate, File, Line)),
@@ -446,7 +446,7 @@
 		).
 
 	process_file(Path) :-
-		print_message(comment, dead_code_scanner, scanning_file(Path)),
+		print_message(silent, dead_code_scanner, scanning_file(Path)),
 		(	logtalk::loaded_file_property(Path, object(Entity)),
 			Kind = object
 		;	logtalk::loaded_file_property(Path, category(Entity)),
@@ -471,11 +471,13 @@
 	write_scan_header(Type) :-
 		print_message(silent, dead_code_scanner, scan_started),
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
-		print_message(comment, dead_code_scanner, scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)).
+		print_message(silent, dead_code_scanner, scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
+		print_message(comment, dead_code_scanner, scanning_for_dead_code).
 
 	write_scan_footer(Type) :-
+		print_message(comment, dead_code_scanner, completed_scanning_for_dead_code),
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
-		print_message(comment, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
+		print_message(silent, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, dead_code_scanner, scan_ended).
 
 :- end_object.

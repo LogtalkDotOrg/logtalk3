@@ -19,8 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% load the tool
+
 :- initialization((
 	logtalk_load(library(basic_types_loader)),
 	logtalk_load(library(os_loader)),
 	logtalk_load([dead_code_scanner, dead_code_scanner_messages], [optimize(on)])
 )).
+
+% integrate the tool with logtalk_make/1
+
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+logtalk_make_target_action(check) :-
+	dead_code_scanner::all.

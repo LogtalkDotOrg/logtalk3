@@ -22,9 +22,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/03/07,
+		date is 2017/05/05,
 		comment is 'Logtalk "dead_code_scanner" tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -49,6 +49,12 @@
 
 	message_tokens(scan_ended) -->
 		[].
+
+	message_tokens(scanning_for_dead_code) -->
+		['Scanning for dead code ...'-[], nl].
+
+	message_tokens(completed_scanning_for_dead_code) -->
+		['... completed scanning for dead code'-[], nl].
 
 	message_tokens(scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)) -->
 		['~w scan started at ~w/~w/~w, ~w:~w:~w'-[Type, Year, Month, Day, Hours, Minutes, Seconds], nl].

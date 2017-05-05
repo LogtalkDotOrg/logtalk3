@@ -44,6 +44,9 @@ Tools
 to `comment` so that the tool output is minimized when setting the `report`
 flag to `warnings`.
 
+* ADDED: Integration of the `dead_code_scanner` tool with the `logtalk_make/1`
+target `check`.
+
 
 3.10.6 - May 1, 2017
 ====================
