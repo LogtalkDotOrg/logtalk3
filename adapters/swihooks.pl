@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on December 8, 2016
+%  Last updated on May 5, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -86,6 +86,16 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	),
 	source_file_property(_, derived_from(Source,_)),
 	!.
+
+
+% Call SWI-Prolog make/0 when calling logtalk_make/0 or
+% logtalk_make/1 with the target all
+
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+logtalk_make_target_action(all) :-
+	make.
 
 /*
 :- if(current_predicate(prolog:make_hook/2)).
