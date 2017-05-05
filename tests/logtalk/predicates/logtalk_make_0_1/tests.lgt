@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2016/10/25,
+		date is 2017/05/05,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
 
@@ -58,11 +58,11 @@
 
 	test(logtalk_make_1_05) :-
 		% call in the "user" pseudo-object
-		{logtalk_make(missing)}.
+		{logtalk_make(check)}.
 
 	test(logtalk_make_1_06) :-
 		% call from within this object
-		logtalk_make(missing).
+		logtalk_make(check).
 
 	test(logtalk_make_1_07) :-
 		% call in the "user" pseudo-object
