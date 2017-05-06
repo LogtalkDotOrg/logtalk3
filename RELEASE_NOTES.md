@@ -58,6 +58,9 @@ flag to `warnings`.
 * ADDED: Integration of the `dead_code_scanner` tool with the `logtalk_make/1`
 target `check`.
 
+* FIXED: Exception in the `dead_code_scanner` tool when checking parametric
+entity properties.
+
 
 3.10.6 - May 1, 2017
 ====================
