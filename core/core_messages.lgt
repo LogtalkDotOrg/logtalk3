@@ -131,8 +131,11 @@
 	message_tokens(completed_scanning_for_missing_entities_predicates) -->
 		['... completed scanning for missing entities and predicates'-[], nl].
 
-	message_tokens(circular_references_listed) -->
-		['Completed listing of circular dependencies'-[], nl].
+	message_tokens(scanning_for_circular_dependencies) -->
+		['Scanning for circular entity dependencies ...'-[], nl].
+
+	message_tokens(completed_scanning_for_circular_dependencies) -->
+		['... completed scanning for circular entity dependencies'-[], nl].
 
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],

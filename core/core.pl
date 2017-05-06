@@ -2550,43 +2550,37 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(comment(make), core, intermediate_files_deleted).
 
 '$lgt_logtalk_make'(check) :-
-	'$lgt_logtalk_make'(missing).
-
-'$lgt_logtalk_make'(missing) :-
 	'$lgt_print_message'(comment(make), core, scanning_for_missing_entities_predicates),
-	findall(Protocol, '$lgt_missing_protocol'(Protocol), Protocols),
-	(	Protocols == [] ->
-		true
-	;	'$lgt_print_message'(warning(make), core, missing_protocols(Protocols))
-	),
-	findall(Category, '$lgt_missing_category'(Category), Categories),
-	(	Categories == [] ->
-		true
-	;	'$lgt_print_message'(warning(make), core, missing_categories(Categories))
-	),
-	findall(Object, '$lgt_missing_object'(Object), Objects),
-	(	Objects == [] ->
-		true
-	;	'$lgt_print_message'(warning(make), core, missing_objects(Objects))
-	),
-	(	'$lgt_prolog_feature'(modules, supported),
-		findall(Module, '$lgt_missing_module'(Module), Modules),
-		Modules \== [] ->
-		'$lgt_print_message'(warning(make), core, missing_modules(Modules))
-	;	true
-	),
-	findall(Predicate, '$lgt_missing_predicate'(Predicate), Predicates),
-	(	Predicates == [] ->
-		true
-	;	'$lgt_print_message'(warning(make), core, missing_predicates(Predicates))
-	),
+	setof(Protocol, '$lgt_missing_protocol'(Protocol), Protocols),
+	'$lgt_print_message'(warning(make), core, missing_protocols(Protocols)),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	setof(Category, '$lgt_missing_category'(Category), Categories),
+	'$lgt_print_message'(warning(make), core, missing_categories(Categories)),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	setof(Object, '$lgt_missing_object'(Object), Objects),
+	'$lgt_print_message'(warning(make), core, missing_objects(Objects)),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	'$lgt_prolog_feature'(modules, supported),
+	setof(Module, '$lgt_missing_module'(Module), Modules),
+	'$lgt_print_message'(warning(make), core, missing_modules(Modules)),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	setof(Predicate, '$lgt_missing_predicate'(Predicate), Predicates),
+	'$lgt_print_message'(warning(make), core, missing_predicates(Predicates)),
+	fail.
+'$lgt_logtalk_make'(check) :-
 	'$lgt_print_message'(comment(make), core, completed_scanning_for_missing_entities_predicates).
 
 '$lgt_logtalk_make'(circular) :-
-	findall(CircularReference, '$lgt_circular_reference'(CircularReference), CircularReferences0),
-	sort(CircularReferences0, CircularReferences),
+	'$lgt_print_message'(comment(make), core, scanning_for_circular_dependencies),
+	setof(CircularReference, '$lgt_circular_reference'(CircularReference), CircularReferences),
 	'$lgt_print_message'(warning(make), core, circular_references(CircularReferences)),
-	'$lgt_print_message'(comment(make), core, circular_references_listed).
+	fail.
+'$lgt_logtalk_make'(circular) :-
+	'$lgt_print_message'(comment(make), core, completed_scanning_for_circular_dependencies).
 
 
 % deal with changes to the default compilation mode
