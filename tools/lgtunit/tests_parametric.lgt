@@ -18,11 +18,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([tests_parametric, tests_dialects, tests_utils], [hook(lgtunit)]),
-	tests_parametric(1)::run,
-	tests_dialects::run,
-	tests_utils::run
-)).
+:- object(tests_parametric(_Parameter),
+	extends(lgtunit)).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2017/05/08,
+		comment is 'Unit tests for the "lgtunit" tool support for parametric tests.'
+	]).
+
+	test(parametric_01) :-
+		parameter(1, Parameter),
+		Parameter == 1.
+
+	deterministic(parametric_02) :-
+		parameter(1, Parameter),
+		Parameter == 1.
+
+	test(parametric_03, true) :-
+		parameter(1, Parameter),
+		Parameter == 1.
+
+	test(parametric_04, deterministic) :-
+		parameter(1, Parameter),
+		Parameter == 1.
+
+	test(parametric_05, deterministic, [condition(true)]) :-
+		parameter(1, Parameter),
+		Parameter == 1.
+
+:- end_object.

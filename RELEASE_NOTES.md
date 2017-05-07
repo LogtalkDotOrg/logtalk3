@@ -61,6 +61,11 @@ target `check`.
 * FIXED: Exception in the `dead_code_scanner` tool when checking parametric
 entity properties.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `lgtunit` tool support for parametric tests.
+
 
 3.10.6 - May 1, 2017
 ====================
