@@ -72,18 +72,17 @@
 		['[ ~w reloaded ]'-[File], nl].
 
 	message_tokens(compiling_file(File, _Flags)) -->
-		['[ compiling ~w'-[File]],
+		['[ compiling ~w '-[File]],
 		(	{current_logtalk_flag(debug, on)} ->
-			(	{current_logtalk_flag(hook, Hook)} ->
-				{ground_term_copy(Hook, GroundHook)},
-				[' in debug mode using the hook object ~q ... ]'-[GroundHook], nl]
-			;	[' in debug mode ... ]'-[], nl]
-			)
-		;	(	{current_logtalk_flag(hook, Hook)} ->
-				{ground_term_copy(Hook, GroundHook)},
-				[' using the hook object ~q ... ]'-[GroundHook], nl]
-			;	[' ... ]'-[], nl]
-			)
+			['in debug mode '-[]]
+		;	{current_logtalk_flag(optimize, on)} ->
+			['in optimal mode '-[]]
+		;	[]
+		),
+		(	{current_logtalk_flag(hook, Hook)} ->
+			{ground_term_copy(Hook, GroundHook)},
+			['using the hook object ~q ... ]'-[GroundHook], nl]
+			;	['... ]'-[], nl]
 		).
 
 	message_tokens(compiled_file(File, _Flags)) -->
