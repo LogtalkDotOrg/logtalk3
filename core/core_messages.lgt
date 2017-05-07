@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2017/05/05,
+		date is 2017/05/07,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -97,6 +97,8 @@
 	message_tokens(compiling_entity(Type, Entity)) -->
 		(	{current_logtalk_flag(debug, on)} ->
 			['- compiling ~w ~q in debug mode ... '-[Type, Entity], nl]
+		;	{current_logtalk_flag(optimize, on)} ->
+			['- compiling ~w ~q in optimal mode ... '-[Type, Entity], nl]
 		;	['- compiling ~w ~q ... '-[Type, Entity], nl]
 		).
 	message_tokens(compiled_entity(_Type, _Entity)) -->
