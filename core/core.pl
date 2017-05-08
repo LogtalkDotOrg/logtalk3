@@ -12293,7 +12293,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
-	'$lgt_check_for_tautology_or_falsehood_goal'(Pred),
 	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
 			% built-in Prolog meta-predicate declared in the adapter file in use
 			true
@@ -12323,7 +12322,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = Pred,
 		DPred = '$lgt_debug'(goal(Pred, Pred), ExCtx),
 		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
-		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred)
+		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred),
+		'$lgt_check_for_tautology_or_falsehood_goal'(Mode, Pred)
 	).
 
 % call to a Logtalk built-in predicate (that is not already handled)
@@ -12426,17 +12426,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 % check for likely typos in calls to some Prolog built-in predicates
 % that result in either tautologies or falsehoods
 
-'$lgt_check_for_tautology_or_falsehood_goal'(Goal) :-
-	'$lgt_candidate_tautology_or_falsehood_goal'(Goal),
-	ground(Goal),
-	!,
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	(	call(Goal) ->
-		'$lgt_print_message'(warning(general), core, goal_is_always_true(File, Lines, Type, Entity, Goal))
-	;	'$lgt_print_message'(warning(general), core, goal_is_always_false(File, Lines, Type, Entity, Goal))
+'$lgt_check_for_tautology_or_falsehood_goal'(runtime, _).
+
+'$lgt_check_for_tautology_or_falsehood_goal'(compile(aux), _) :-
+	!.
+
+'$lgt_check_for_tautology_or_falsehood_goal'(compile(user), Goal) :-
+	(	'$lgt_candidate_tautology_or_falsehood_goal'(Goal),
+		ground(Goal) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		(	call(Goal) ->
+			'$lgt_print_message'(warning(general), core, goal_is_always_true(File, Lines, Type, Entity, Goal))
+		;	'$lgt_print_message'(warning(general), core, goal_is_always_false(File, Lines, Type, Entity, Goal))
+		)
+	;	true
 	).
-'$lgt_check_for_tautology_or_falsehood_goal'(_).
 
 
 % unification
