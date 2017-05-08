@@ -33,7 +33,8 @@ Logtalk compiler and runtime
 actions using the new multifile predicate `logtalk_make_target_action/1`.
 
 * ADDED: Compiler lint checks for tautology and falsehood entity goals.
-Suggested by Barry Evans.
+Currently checked are calls to Prolog unification, comparison, and type
+testing built-in predicates. Suggested by Barry Evans.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -68,6 +69,12 @@ Tests
 -----
 
 * ADDED: Unit tests for the `lgtunit` tool support for parametric tests.
+
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate reporting of goals that are
+always true or false.
 
 
 3.10.6 - May 1, 2017

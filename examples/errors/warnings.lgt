@@ -133,3 +133,19 @@
 	before(_, _, _).
 
 :- end_object.
+
+
+
+:- object(tautology).
+
+	oops :- x \== y.
+
+:- end_object.
+
+
+
+:- object(falsewood).
+
+	damn :- x == y.
+
+:- end_object.
