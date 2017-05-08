@@ -3014,7 +3014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 7, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 7, rc2)).
 
 
 
@@ -12293,6 +12293,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
+	'$lgt_check_for_tautology_or_falsehood_goal'(Pred),
 	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
 			% built-in Prolog meta-predicate declared in the adapter file in use
 			true
@@ -12419,6 +12420,55 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_non_portable_predicate_'(Template, File, Lines))
 	;	true
 	).
+
+
+
+% check for likely typos in calls to some Prolog built-in predicates
+% that result in either tautologies or falsehoods
+
+'$lgt_check_for_tautology_or_falsehood_goal'(Goal) :-
+	'$lgt_candidate_tautology_or_falsehood_goal'(Goal),
+	ground(Goal),
+	!,
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	(	call(Goal) ->
+		'$lgt_print_message'(warning(general), core, goal_is_always_true(File, Lines, Type, Entity, Goal))
+	;	'$lgt_print_message'(warning(general), core, goal_is_always_false(File, Lines, Type, Entity, Goal))
+	).
+'$lgt_check_for_tautology_or_falsehood_goal'(_).
+
+
+% unification
+'$lgt_candidate_tautology_or_falsehood_goal'(_ = _).
+'$lgt_candidate_tautology_or_falsehood_goal'(unify_with_occurs_check(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ \= _).
+% term comparison
+'$lgt_candidate_tautology_or_falsehood_goal'(_ == _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ \== _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ @< _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ @=< _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ @> _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ @>= _).
+% arithmetic comparison
+'$lgt_candidate_tautology_or_falsehood_goal'(_ < _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ =< _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ > _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ >= _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ =:= _).
+'$lgt_candidate_tautology_or_falsehood_goal'(_ =\= _).
+% type testing
+'$lgt_candidate_tautology_or_falsehood_goal'(acyclic_term(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(atom(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(atomic(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(callable(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(compound(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(float(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(ground(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(integer(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(nonvar(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(number(_)).
+'$lgt_candidate_tautology_or_falsehood_goal'(var(_)).
 
 
 

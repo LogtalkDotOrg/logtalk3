@@ -32,6 +32,9 @@ Logtalk compiler and runtime
 * ADDED: Support for extending `logtalk_make/1` targets with user defined
 actions using the new multifile predicate `logtalk_make_target_action/1`.
 
+* ADDED: Compiler lint checks for tautology and falsehood entity goals.
+Suggested by Barry Evans.
+
 Prolog adapter and integration files
 ------------------------------------
 
