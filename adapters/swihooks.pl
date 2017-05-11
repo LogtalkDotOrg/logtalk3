@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 8, 2017
+%  Last updated on May 11, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -731,7 +731,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_category_property_resource'(*,*,*,*,*).
 :- meta_predicate '$lgt_category_property_resources'(*,*,*,*,*).
 
-:- meta_predicate '$lgt_check_for_tautology_or_falsehood_goal'(*).
+:- meta_predicate '$lgt_check_for_tautology_or_falsehood_goal'(*,*).
 
 :- meta_predicate '$lgt_assert_pred_def'(*,*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_send_to_self_nv'(*,*,*).
