@@ -21,6 +21,15 @@ RELEASE NOTES
 =============
 
 
+3.10.8 - May ??, 2017
+=====================
+
+Prolog adapter and integration files
+------------------------------------
+
+FIXED: SWI-Prolog hooks file to avoid a spurious meta-predicate lint warning.
+
+
 3.10.7 - May 10, 2017
 =====================
 
