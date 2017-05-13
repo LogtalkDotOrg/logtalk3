@@ -21,6 +21,7 @@ ________________________________________________________________________
 Logtalk Docker configuration for SWI-Prolog
 ===========================================
 
+
 Build arguments
 ---------------
 
@@ -28,6 +29,7 @@ Build arguments
 The Logtalk version to be built.
 
 Valid identifiers are as shown in the Logtalk GitHub repository at [release names](https://github.com/LogtalkDotOrg/logtalk3/releases). Defaults to `master`, which causes the Docker image to be built with the latest version of Logtalk in its master branch.
+
 
 Volumes
 -------
@@ -49,6 +51,8 @@ Building a Logtalk image
 #### Last stable release
 
 	docker build --build-arg LOGTALK_VERSION=lgt3091stable -t="logtalk/logtalk3-swi:3091" -t="logtalk/logtalk3-swi:latest" .
+
+Update the `lgt3091stable` and `3091` strings for the current version number.
 
 
 Running a Logtalk container

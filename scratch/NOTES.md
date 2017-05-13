@@ -23,4 +23,4 @@ it will be recreated the next time you run Logtalk.
 
 You may set the value of the `scratch_directory` flag to this folder if
 you want to collect in the same location the Prolog temporary files that
-are generated when compiling Logtalk source files.
+are generated when compiling Logtalk source files (e.g. for embedding).

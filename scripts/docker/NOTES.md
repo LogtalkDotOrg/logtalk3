@@ -31,3 +31,8 @@ includes the following files:
 - `README.md`  
 	the `README.md` file automatically used as the project description
 	when creating an automated build at Docker Hub
+
+The stable and nightly Docker images are available for downloading at
+the Docker Hub website:
+
+	https://hub.docker.com/u/logtalk/
