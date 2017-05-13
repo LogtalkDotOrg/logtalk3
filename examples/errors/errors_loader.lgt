@@ -30,6 +30,7 @@
 	(logtalk_load(control_construct_redefinition) -> true; true),
 	(logtalk_load(uses_predicate_repeated) -> true; true),
 	(logtalk_load(uses_predicate_conflict) -> true; true),
+	(logtalk_load(no_multifile_primary_declaration) -> true; true),
 	(logtalk_load(main_include_syntax_error) -> true; true),
 	(logtalk_load(main_include_compiler_error) -> true; true)
 )).

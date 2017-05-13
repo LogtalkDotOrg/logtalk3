@@ -3,9 +3,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/03/24,
+		date is 2017/05/14,
 		comment is 'Unit tests for the "errors" example.'
 	]).
 
@@ -13,13 +13,13 @@
 
 	throws(
 		object_redefines_built_in_method,
-		error(permission_error(modify,built_in_method,asserta/1),_)
+		error(permission_error(modify,built_in_method,asserta/1), _)
 	) :-
 		create_object(_, [], [], [asserta(_)]).
 
 	throws(
 		category_redefines_built_in_method,
-		error(permission_error(modify,built_in_method,asserta/1),_)
+		error(permission_error(modify,built_in_method,asserta/1), _)
 	) :-
 		create_category(_, [], [], [asserta(_)]).
 
@@ -27,13 +27,13 @@
 
 	throws(
 		object_invalid_clause_head,
-		error(type_error(callable,1234),_)
+		error(type_error(callable,1234), _)
 	) :-
 		create_object(_, [], [], [(1234 :- write(hello))]).
 
 	throws(
 		category_invalid_clause_head,
-		error(type_error(callable,1234),_)
+		error(type_error(callable,1234), _)
 	) :-
 		create_category(_, [], [], [(1234 :- write(hello))]).
 
@@ -41,13 +41,13 @@
 
 	throws(
 		object_invalid_clause_goal,
-		error(type_error(callable,1234),_)
+		error(type_error(callable,1234), _)
 	) :-
 		create_object(_, [], [], [(foo :- 1234)]).
 
 	throws(
 		category_invalid_clause_goal,
-		error(type_error(callable,1234),_)
+		error(type_error(callable,1234), _)
 	) :-
 		create_category(_, [], [], [(foo :- 1234)]).
 
@@ -55,19 +55,19 @@
 
 	throws(
 		object_unknown_directive,
-		error(domain_error(directive,index/2),_)
+		error(domain_error(directive,index/2), _)
 	) :-
 		create_object(_, [], [index(predicate/3, [1, 2])], []).
 
 	throws(
 		category_unknown_directive,
-		error(domain_error(directive,index/2),_)
+		error(domain_error(directive,index/2), _)
 	) :-
 		create_category(_, [], [index(predicate/3, [1, 2])], []).
 
 	throws(
 		protocol_unknown_directive,
-		error(domain_error(directive,index/2),_)
+		error(domain_error(directive,index/2), _)
 	) :-
 		create_protocol(_, [], [index(predicate/3, [1, 2])]).
 
@@ -75,19 +75,19 @@
 
 	throws(
 		object_invalid_directive_argument,
-		error(type_error(predicate_indicator,1234),_)
+		error(type_error(predicate_indicator,1234), _)
 	) :-
 		create_object(_, [], [public(1234)], []).
 
 	throws(
 		category_invalid_directive_argument,
-		error(type_error(predicate_indicator,1234),_)
+		error(type_error(predicate_indicator,1234), _)
 	) :-
 		create_category(_, [], [public(1234)], []).
 
 	throws(
 		protocol_invalid_directive_argument,
-		error(type_error(predicate_indicator,1234),_)
+		error(type_error(predicate_indicator,1234), _)
 	) :-
 		create_protocol(_, [], [public(1234)]).
 
@@ -95,7 +95,7 @@
 
 	throws(
 		category_defines_dynamic_predicate,
-		error(permission_error(define,dynamic_predicate,dynpred/1),_)
+		error(permission_error(define,dynamic_predicate,dynpred/1), _)
 	) :-
 		create_category(_, [], [dynamic(dynpred/1)], [dynpred(1)]).
 
@@ -103,13 +103,13 @@
 
 	throws(
 		object_control_construct_redefinition,
-		error(permission_error(modify,built_in_method,(::)/1),_)
+		error(permission_error(modify,built_in_method,(::)/1), _)
 	) :-
 		create_object(_, [], [], [::(_)]).
 
 	throws(
 		category_control_construct_redefinition,
-		error(permission_error(modify,built_in_method,(::)/1),_)
+		error(permission_error(modify,built_in_method,(::)/1), _)
 	) :-
 		create_category(_, [], [], [::(_)]).
 
@@ -117,13 +117,13 @@
 
 	throws(
 		object_uses_predicate_repeated,
-		error(permission_error(modify,uses_object_predicate,member/2),_)
+		error(permission_error(modify,uses_object_predicate,member/2), _)
 	) :-
 		create_object(_, [], [uses(list,[member/2]), uses(set,[member/2])], []).
 
 	throws(
 		category_uses_predicate_repeated,
-		error(permission_error(modify,uses_object_predicate,member/2),_)
+		error(permission_error(modify,uses_object_predicate,member/2), _)
 	) :-
 		create_category(_, [], [uses(list,[member/2]), uses(set,[member/2])], []).
 
@@ -131,13 +131,13 @@
 
 	throws(
 		object_uses_predicate_conflict,
-		error(permission_error(modify,uses_object_predicate,member/2),_)
+		error(permission_error(modify,uses_object_predicate,member/2), _)
 	) :-
 		create_object(_, [], [uses(list,[member/2])], [member(H, [H| _])]).
 
 	throws(
 		category_uses_predicate_conflict,
-		error(permission_error(modify,uses_object_predicate,member/2),_)
+		error(permission_error(modify,uses_object_predicate,member/2), _)
 	) :-
 		create_category(_, [], [uses(list,[member/2])], [member(H, [H| _])]).
 
@@ -145,14 +145,28 @@
 
 	throws(
 		object_existential_quantifier_misuse,
-		error(existence_error(procedure, (^)/2),_)
+		error(existence_error(procedure, (^)/2), _)
 	) :-
 		create_object(_, [], [], [(foo(X) :- X^bar(X))]).
 
 	throws(
 		category_existential_quantifier_misuse,
-		error(existence_error(procedure, (^)/2),_)
+		error(existence_error(procedure, (^)/2), _)
 	) :-
 		create_category(_, [], [], [(foo(X) :- X^bar(X))]).
+
+	% no multifile predicate primary declaration
+
+	throws(
+		no_multifile_primary_declaration_object,
+		error(permission_error(modify,predicate_declaration,loaded_file/1), _)
+	) :-
+		create_object(_, [], [multifile(logtalk::loaded_file/1), dynamic(logtalk::loaded_file/1)], []).
+
+	throws(
+		no_multifile_primary_declaration_category,
+		error(permission_error(modify,predicate_declaration,loaded_file/1), _)
+	) :-
+		create_category(_, [], [multifile(logtalk::loaded_file/1), dynamic(logtalk::loaded_file/1)], []).
 
 :- end_object.

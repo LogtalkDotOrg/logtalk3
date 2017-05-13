@@ -18,15 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(category_defines_dynamic_predicate).
+% whewn using a multifile predicate, there must be an object or
+% category holding the multifile predicate primary declaration
 
-	% dynamic predicates may be declared inside categories but ...
-	:- public(dynpred/1).
-	:- dynamic(dynpred/1).
+:- object(no_multifile_primary_declaration).
 
-	% ... defining clauses for dynamic predicates is not allowed
-	dynpred(1).
-	dynpred(2).
-	dynpred(3).
+	% attempt to make a predicate found in the
+	% built-in "logtalk" object multifile
+
+	:- multifile(logtalk::loaded_file/1).
+	:- dynamic(logtalk::loaded_file/1).
 
 :- end_object.

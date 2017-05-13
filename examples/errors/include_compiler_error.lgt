@@ -21,5 +21,7 @@
 foo.
 bar.
 baz.
+% the predicate a/0 is already declared
+% in the object including this file:
 :- private(a/0).
 zee.

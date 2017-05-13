@@ -19,5 +19,6 @@
 
 
 c.
+% missing period at the end of the next clause:
 d
 e.
