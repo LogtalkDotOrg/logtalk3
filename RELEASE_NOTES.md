@@ -29,6 +29,11 @@ Prolog adapter and integration files
 
 * FIXED: SWI-Prolog hooks file to avoid a spurious meta-predicate lint warning.
 
+Library
+-------
+
+* ADDED: New `optional` library. Suggested by Sergio Castro.
+
 Examples
 --------
 

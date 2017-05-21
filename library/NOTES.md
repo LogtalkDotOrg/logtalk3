@@ -66,6 +66,10 @@ its own loader and notes files:
 	`metapredicates_loader.lgt`
 	`metapredicates.txt`
 
+* optional  
+	`optional_loader.lgt`
+	`optional.txt`
+
 * os  
 	`os_loader.lgt`
 	`os.txt`
