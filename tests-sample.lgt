@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample tester file
-%  Last updated on June 30, 2016
+%  Last updated on May 21, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -32,23 +32,24 @@
 %  For API details, open the "docs/index.html" file in your web browser.
 
 
-% test suite objets are defined as prototypes extending the
-% "lgtunit" object, which implements the unit test framework
+%  test suite objets are defined as prototypes extending the "lgtunit" object
+%  which implements the unit test framework; parametric objects can be used
+%  in order to define parametrizable tests
+
 :- object(tests,
 	extends(lgtunit)).
 
-	% if you want to collect code coverage information, add
-	% one clause for the cover/1 predicate for which entity
-	% that should be covered
-	
+	% if you want to collect code coverage information, add one clause
+	% for the cover/1 predicate for which entity that should be covered
+
 	cover(my_object).
 	cover(my_other_object).
 	...
 
-	% several test idioms are supported with the most simple
-	% one being test/1; its argument is the test name, which
-	% must be unique in a test suite object; the test goal
-	% must succeed for the test to succeed
+	% several test idioms are supported with the most simple one being
+	% test/1; its argument is the test name, which must be unique in a
+	% test suite object; the test goal must succeed for the test to be
+	% successful
 
 	test(my_app_1) :-
 		% goal that must succeed for the test to pass
