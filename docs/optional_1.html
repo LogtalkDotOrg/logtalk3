@@ -149,7 +149,7 @@
         <div class="section">
           <h3 id="map/2" class="code">map/2</h3>
           <blockquote>
-            <p class="comment">When the the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns the new value as an optional reference. Otherwise returns an empty optional.</p>
+            <p class="comment">When the the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -167,6 +167,30 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>map(+callable,--nonvar) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="flat_map/2" class="code">flat_map/2</h3>
+          <blockquote>
+            <p class="comment">When the the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>flat_map(Closure,NewReference)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>flat_map(2,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>flat_map(+callable,--nonvar) &ndash; one</code>
             </dd>
           </dl>
         </div>

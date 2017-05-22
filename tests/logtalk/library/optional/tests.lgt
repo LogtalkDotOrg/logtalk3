@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2017/05/22,
 		comment is 'Unit tests for the "optional" library.'
@@ -88,6 +88,16 @@
 		optional::of(a, Ref), optional(Ref)::map(char_code, NewRef),
 		optional(NewRef)::get(Term), Term == 97.
 
+	% flat_map/2 tests
+
+	succeeds(optionals_flat_map_2_01) :-
+		optional::empty(Ref), optional(Ref)::flat_map(flat_map_closure, NewRef),
+		optional(NewRef)::is_empty.
+
+	succeeds(optionals_flat_map_2_02) :-
+		optional::of(a, Ref), optional(Ref)::flat_map(flat_map_closure, NewRef),
+		optional(NewRef)::get(Term), Term == 97.
+
 	% get/1 tests
 
 	throws(optionals_get_1_01, error(existence_error(optional_term,_), _)) :-
@@ -116,5 +126,11 @@
 	succeeds(optionals_or_else_get_2_02) :-
 		optional::of(1, Ref), optional(Ref)::or_else_get(Term, current_logtalk_flag(prolog_dialect)),
 		Term == 1.
+
+	% auxiliary predicates
+
+	flat_map_closure(Value, NewRef) :-
+		char_code(Value, NewValue),
+		optional::of(NewValue, NewRef).
 
 :- end_object.

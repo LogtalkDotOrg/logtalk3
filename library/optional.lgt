@@ -22,7 +22,7 @@
 :- object(optional).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2017/05/22,
 		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.'
@@ -99,7 +99,15 @@
 	:- meta_predicate(map(2, *)).
 	:- mode(map(+callable, --nonvar), one).
 	:- info(map/2, [
-		comment is 'When the the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns the new value as an optional reference. Otherwise returns an empty optional.',
+		comment is 'When the the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.',
+		argnames is ['Closure', 'NewReference']
+	]).
+
+	:- public(flat_map/2).
+	:- meta_predicate(flat_map(2, *)).
+	:- mode(flat_map(+callable, --nonvar), one).
+	:- info(flat_map/2, [
+		comment is 'When the the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.',
 		argnames is ['Closure', 'NewReference']
 	]).
 
@@ -159,6 +167,14 @@
 		(	Reference = the(Term),
 			call(Closure, Term, NewTerm) ->
 			NewReference = the(NewTerm)
+		;	NewReference = empty
+		).
+
+	flat_map(Closure, NewReference) :-
+		parameter(1, Reference),
+		(	Reference = the(Term),
+			call(Closure, Term, NewReference) ->
+			true
 		;	NewReference = empty
 		).
 
