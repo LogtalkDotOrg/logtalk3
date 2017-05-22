@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/05/21,
+		date is 2017/05/22,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
@@ -105,6 +105,16 @@
 
 	succeeds(optionals_or_else_2_02) :-
 		optional::of(1, Ref), optional(Ref)::or_else(Term, 0),
+		Term == 1.
+
+	% or_else_get/2 tests
+
+	succeeds(optionals_or_else_get_2_01) :-
+		optional::empty(Ref), optional(Ref)::or_else_get(Term, current_logtalk_flag(prolog_dialect)),
+		atom(Term).
+
+	succeeds(optionals_or_else_get_2_02) :-
+		optional::of(1, Ref), optional(Ref)::or_else_get(Term, current_logtalk_flag(prolog_dialect)),
 		Term == 1.
 
 :- end_object.
