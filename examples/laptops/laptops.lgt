@@ -185,7 +185,7 @@
 	new(Mainboard, Display, Keyboard, Laptop) :-
 		create_object(
 			Laptop,
-			% some protocol as the predefined laptops
+			% same protocol as the predefined laptops
 			[imports(laptop)],
 			[],
 			% specify the components for the new laptop
