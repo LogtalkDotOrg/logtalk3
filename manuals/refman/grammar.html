@@ -529,7 +529,6 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>"<code>:- threaded.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- uses(</code>" object_identifier "<code>).</code>" |</dd>
-				<dd>"<code>:- use_module(</code>" module_identifier  "<code>,</code>" module_predicate_indicator_alias_list "<code>).</code>" |</dd>
 				<dd>"<code>:- calls(</code>" protocol_identifiers "<code>).</code>" |</dd>
 				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
@@ -548,7 +547,6 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- uses(</code>" object_identifier "<code>).</code>" |</dd>
-				<dd>"<code>:- use_module(</code>" module_identifier  "<code>,</code>" predicate_indicator_alias_list "<code>).</code>" |</dd>
 				<dd>"<code>:- calls(</code>" protocol_identifiers "<code>).</code>" |</dd>
 				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
@@ -583,6 +581,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>alias_directive |</dd>
 				<dd>synchronized_directive |</dd>
 				<dd>uses_directive |</dd>
+				<dd>use_module_directive |</dd>
 				<dd>scope_directive |</dd>
 				<dd>mode_directive |</dd>
 				<dd>meta_predicate_directive |</dd>
@@ -606,6 +605,10 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>uses_directive ::=</dt>
 				<dd>"<code>:- uses(</code>" object_identifier "<code>,</code>" predicate_indicator_alias_list "<code>).</code>"</dd>
+		</dl>
+		<dl>
+			<dt>use_module_directive ::=</dt>
+				<dd>"<code>:- use_module(</code>" module_identifier  "<code>,</code>" module_predicate_indicator_alias_list "<code>).</code>" |</dd>
 		</dl>
 		<dl>
 			<dt>scope_directive ::=</dt>
@@ -1153,7 +1156,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 22, 2017</span>
+		<span>Last updated on: May 26, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
