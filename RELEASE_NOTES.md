@@ -29,6 +29,14 @@ Prolog adapter and integration files
 
 * FIXED: SWI-Prolog hooks file to avoid a spurious meta-predicate lint warning.
 
+Documentation
+-------------
+
+* FIXED: Outdated `include/1` directive documentation on limitations that no
+longer apply.
+
+* FIXED: Grammar description of the `use_module/2` directive.
+
 Library
 -------
 

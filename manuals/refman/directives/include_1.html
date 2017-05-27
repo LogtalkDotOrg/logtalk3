@@ -46,7 +46,10 @@
 
 <pre>include(File)</pre>
 <p>
-Includes a file contents, which must be valid terms, at the place of occurrence of the directive. The file can be specified as a relative path, an absolute path, or using library notation and is expanded as a source file name. Use of relative paths, however, is not advisable as backend compilers may not use the same concept of current directory when expanding the path. When using the reflection API, all file terms share the same line number as the directive. 
+Includes a file contents, which must be valid terms, at the place of occurrence of the directive. The file can be specified as a relative path, an absolute path, or using library notation and is expanded as a source file name. Relative paths are interpreted as relative to the path of the file contining the directive.
+</p>
+<p>
+When using the reflection API, terms from an included file can be distinguished from terms from the main file by looking for the <code>include/1</code> predicate declaration or definition property. For the included terms, the <code>line_count/1</code> property stores the term line number in the included file. 
 </p>
 <p>
 This directive can be used as either a source file directive or an entity directive. As an entity directive, it can be used both in entities defined in source files and with the entity creation built-in predicates.
@@ -70,7 +73,7 @@ This directive can be used as either a source file directive or an entity direct
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 10, 2017</span>
+		<span>Last updated on: May 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="end_protocol_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="info_1.html">next</a></span><br/>
