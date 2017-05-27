@@ -48,6 +48,12 @@ Examples
 * UPDATED: The `errors` example to illustrate the error reported when trying
 to define a multifile predicate in the absence of its primary declaration.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Reference to the `highlighter` source code highlighting package
+support for Logtalk.
+
 
 3.10.7 - May 10, 2017
 =====================
