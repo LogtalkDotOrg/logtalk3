@@ -32,6 +32,9 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `dynamic/1`, `initialization/1`, `if/1`,
+`elif/1`, `meta_non_terminal/1`, `mode/2`, and `multifile/1` directives.
+
 * FIXED: Outdated `include/1` directive documentation on limitations that no
 longer apply.
 

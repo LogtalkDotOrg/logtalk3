@@ -48,6 +48,9 @@
 <p>
 Supports embedded conditionals when performing conditional compilation. The code following the directive is compiled if <code>Goal</code> is true. The goal is subjected to goal expansion when the directive occurs in a source file.
 </p>
+<p>
+Conditional compilation goals cannot depend on predicate definitions contained in the same source file that contains the conditional compilation directives (as those predicates only become available after the file is fully compiled and loaded).
+</p>
 
 <h4>Template and modes</h4>
 
@@ -66,7 +69,7 @@ Supports embedded conditionals when performing conditional compilation. The code
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 3, 2016</span>
+		<span>Last updated on: May 28, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="if_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="else_0.html">next</a></span><br/>

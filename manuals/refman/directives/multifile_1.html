@@ -68,7 +68,10 @@ multifile(Module:Functor//Arity)
 multifile((Module1:Functor1//Arity1, ...))
 multifile([Module1:Functor1//Arity1, ...])</pre>
 <p>
-Declares multifile predicates and multifile grammar rule non-terminals. The predicate (or non-terminal) must also have a scope directive in the object (or category) holding its <em>primary declaration</em> (i.e. the declaration without the <code>Entity::</code> prefix). Protocols cannot declare multifile predicates as protocols cannot contain predicate definitions.
+Declares multifile predicates and multifile grammar rule non-terminals. In the case of object or category multifile predicates, the predicate (or non-terminal) must also have a scope directive in the object or category holding its <em>primary declaration</em> (i.e. the declaration without the <code>Entity::</code> prefix). Entities holding multifile predicate primary declarations must be compiled and loaded prior to any entities contributing with clauses for the multifile predicates.
+</p>
+<p>
+Protocols cannot declare multifile predicates as protocols cannot contain predicate definitions.
 </p>
 
 <h4>Template and modes</h4>
@@ -100,7 +103,7 @@ multifile(+module_identifier::+non_terminal_indicator_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 7, 2017</span>
+		<span>Last updated on: May 28, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="mode_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="op_3.html">next</a></span><br/>
