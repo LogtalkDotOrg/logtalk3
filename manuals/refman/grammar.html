@@ -634,7 +634,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>dynamic_directive ::=</dt>
-				<dd>"<code>:- dynamic(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>"</dd>
+				<dd>"<code>:- dynamic(</code>" qualified_predicate_indicator_term | qualified_non_terminal_indicator_term "<code>).</code>"</dd>
 		</dl>
 		<dl>
 			<dt>discontiguous_directive ::=</dt>
@@ -642,7 +642,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>multifile_directive ::=</dt>
-				<dd>"<code>:- multifile(</code>" predicate_indicator_term "<code>).</code>"</dd>
+				<dd>"<code>:- multifile(</code>" qualified_predicate_indicator_term | qualified_non_terminal_indicator_term "<code>).</code>"</dd>
 		</dl>
 		<dl>
 			<dt>coinductive_directive ::=</dt>
@@ -662,6 +662,28 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>predicate_indicator_list ::=</dt>
 				<dd>"<code>[</code>" predicate_indicator_sequence "<code>]</code>"</dd>
+		</dl>
+		<dl>
+			<dt>qualified_predicate_indicator_term ::=</dt>
+				<dd>qualified_predicate_indicator |</dd>
+				<dd>qualified_predicate_indicator_sequence |</dd>
+				<dd>qualified_predicate_indicator_list</dd>
+		</dl>
+		<dl>
+			<dt>qualified_predicate_indicator_sequence ::=</dt>
+				<dd>qualified_predicate_indicator |</dd>
+				<dd>qualified_predicate_indicator "<code>,</code>" qualified_predicate_indicator_sequence</dd>
+		</dl>
+		<dl>
+			<dt>qualified_predicate_indicator_list ::=</dt>
+				<dd>"<code>[</code>" qualified_predicate_indicator_sequence "<code>]</code>"</dd>
+		</dl>
+		<dl>
+			<dt>qualified_predicate_indicator ::=</dt>
+				<dd>predicate_indicator |</dd>
+				<dd>object_identifier "<code>::</code>" predicate_indicator |</dd>
+				<dd>category_identifier "<code>::</code>" predicate_indicator |</dd>
+				<dd>module_identifier "<code>:</code>" predicate_indicator</dd>
 		</dl>
 		<dl>
 			<dt>predicate_indicator_alias ::=</dt>
@@ -712,6 +734,28 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>non_terminal_indicator ::=</dt>
 				<dd><em>functor</em> "<code>//</code>" <em>arity</em></dd>
+		</dl>
+		<dl>
+			<dt>qualified_non_terminal_indicator_term ::=</dt>
+				<dd>qualified_non_terminal_indicator |</dd>
+				<dd>qualified_non_terminal_indicator_sequence |</dd>
+				<dd>qualified_non_terminal_indicator_list</dd>
+		</dl>
+		<dl>
+			<dt>qualified_non_terminal_indicator_sequence ::=</dt>
+				<dd>qualified_non_terminal_indicator |</dd>
+				<dd>qualified_non_terminal_indicator "<code>,</code>" qualified_non_terminal_indicator_sequence</dd>
+		</dl>
+		<dl>
+			<dt>qualified_non_terminal_indicator_list ::=</dt>
+				<dd>"<code>[</code>" qualified_non_terminal_indicator_sequence "<code>]</code>"</dd>
+		</dl>
+		<dl>
+			<dt>qualified_non_terminal_indicator ::=</dt>
+				<dd>non_terminal_indicator |</dd>
+				<dd>object_identifier "<code>::</code>" non_terminal_indicator |</dd>
+				<dd>category_identifier "<code>::</code>" non_terminal_indicator |</dd>
+				<dd>module_identifier "<code>:</code>" non_terminal_indicator</dd>
 		</dl>
 		<dl>
 			<dt>non_terminal_indicator_alias ::=</dt>
@@ -1156,7 +1200,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 26, 2017</span>
+		<span>Last updated on: May 28, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

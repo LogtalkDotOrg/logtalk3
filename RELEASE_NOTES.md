@@ -38,7 +38,8 @@ Documentation
 * FIXED: Outdated `include/1` directive documentation on limitations that no
 longer apply.
 
-* FIXED: Grammar description of the `use_module/2` directive.
+* FIXED: Grammar description of the `dynamic/1`, `multifile/1`, and
+`use_module/2` directives.
 
 Library
 -------
