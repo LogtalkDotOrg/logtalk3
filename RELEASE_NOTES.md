@@ -41,6 +41,9 @@ longer apply.
 * FIXED: Grammar description of the `dynamic/1`, `multifile/1`, and
 `use_module/2` directives.
 
+* FIXED: Typo in the error terms in the documentation of the `create_object/4`,
+`create_protocol/3`, and `create_category/4` built-in predicates.
+
 Library
 -------
 
