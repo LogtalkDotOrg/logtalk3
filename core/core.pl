@@ -3014,7 +3014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 8, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 8, rc2)).
 
 
 
@@ -10568,9 +10568,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	functor(TGoal, '$lgt_metacall', _) ->
 		TPred = TGoal,
 		DPred = DGoal
-	;	% be conservative and keep the call/1 wrapper to ensure cut semantics
+	;	'$lgt_cut_transparent_control_construct'(TGoal) ->
 		TPred = call(TGoal),
 		DPred = call(DGoal)
+	;	TPred = TGoal,
+		DPred = DGoal
 	).
 
 '$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), _, _, Ctx) :-
@@ -10599,7 +10601,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_extend_closure'(Closure, ExtraArgs, Goal),
 		\+ (functor(Goal, call, Arity), Arity >= 2) ->
 		% not a call to call/2-N itself; safe to compile it
-		'$lgt_compile_body'(Goal, TPred, _, Ctx)
+		'$lgt_compile_body'(Goal, TPred0, _, Ctx),
+		(	'$lgt_cut_transparent_control_construct'(TPred0) ->
+			TPred = call(TPred0)
+		;	TPred = TPred0
+		)
 	;	% runtime resolved meta-call (e.g. a lambda expression)
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, ExCtx)
 	),
@@ -14880,6 +14886,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_cut_transparent_control_construct'(?callable)
 
+'$lgt_cut_transparent_control_construct'(!).
 '$lgt_cut_transparent_control_construct'((_ , _)).
 '$lgt_cut_transparent_control_construct'((_ ; _)).
 '$lgt_cut_transparent_control_construct'((_ -> _)).

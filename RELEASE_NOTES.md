@@ -24,6 +24,13 @@ RELEASE NOTES
 3.10.8 - May ??, 2017
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug where the `call/2-N` built-in method would not be opaque to cuts.
+The bug occurred when the constructed goal was a call to a cut transparent
+control construct.
+
 Prolog adapter and integration files
 ------------------------------------
 
