@@ -69,6 +69,8 @@ methods to check that they are opaque to cuts.
 
 * IMPROVED: Unit tests for the `initialization/1` directive.
 
+* IMPROVED: Better test coverage of the `findall/4` built-in method.
+
 Examples
 --------
 

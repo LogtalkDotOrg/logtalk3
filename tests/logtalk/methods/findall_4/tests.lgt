@@ -22,19 +22,38 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/30,
+		date is 2017/05/29,
 		comment is 'Unit tests for the findall/4 built-in method.'
 	]).
 
-	test(findall_3_1) :-
+	test(findall_4_01) :-
+		findall(X, a(X, _), L, []),
+		L == [1, 2, 3, 4].
+
+	test(findall_4_02) :-
 		findall(X, a(X, _), L, [5, 6, 7]),
 		L == [1, 2, 3, 4, 5, 6, 7].
 
-	test(findall_3_2) :-
+	test(findall_4_03) :-
 		findall(Y-L, findall(X, a(X, Y), L, [5, 6, 7]), LL),
 		LL = [_-[1,2,3,4,5,6,7]].
+
+	test(findall_4_04) :-
+		findall(_, fail, L, [5, 6, 7]),
+		L == [5, 6, 7].
+
+	throws(findall_4_05, error(instantiation_error, logtalk(call(_),This))) :-
+		this(This),
+		findall(_X, _Goal, _L, _T).
+
+	throws(findall_4_06, error(type_error(callable,4), logtalk(call(4),This))) :-
+		this(This),
+		Goal = 4,
+		findall(_X, Goal, _L, _T).
+
+	% data for some of the tests
 
 	a(1, odd).
 	a(2, even).
