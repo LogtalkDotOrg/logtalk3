@@ -21726,9 +21726,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 				clean(on),
 				% use a scratch directory where we expect to have writing permission
 				scratch_directory(ScratchDirectory),
-				% optimize entity code, allow static binding to this entity resources,
-				% and prevent their redefinition
-				optimize(on), reload(skip),
+				% optimize entity code, allowing static binding to this entity resources
+				optimize(on),
 				% don't print any messages on the compilation and loading of these entities
 				report(off)
 			]
