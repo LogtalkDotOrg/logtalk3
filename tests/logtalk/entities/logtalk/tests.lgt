@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/04/23,
+		date is 2017/05/29,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -127,7 +127,12 @@
 			Extension^(logtalk::file_type_extension(Type, Extension)),
 			Extensions
 		),
-		Extensions == [logtalk, object, prolog, source, tmp].
+		(	Extensions == [logtalk, object, prolog, source, tmp] ->
+			true
+		;	% not all backend Prolog compilers generate temporary
+			% files when compiling source files
+			Extensions == [logtalk, object, prolog, source]
+		).
 
 	succeeds(logtalk_16) :-
 		findall(

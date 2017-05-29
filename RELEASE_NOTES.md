@@ -71,6 +71,10 @@ methods to check that they are opaque to cuts.
 
 * IMPROVED: Better test coverage of the `findall/4` built-in method.
 
+* FIXED: Unit test for the `logtalk::file_type_extension/2` predicate to
+account for backend Prolog compilers that don't generate temporary files
+when compiling source files.
+
 Examples
 --------
 
