@@ -133,7 +133,30 @@
 	fails(call_N_27) :-
 		call(e(_),_,_,_,_).
 
+	% call/1-N is opaque to cuts
+
+	succeeds(call_N_28) :-
+		findall(X, ((X = 1; X =2; X = 3), call(!)), L), 
+		L == [1, 2, 3].
+
+	succeeds(call_N_29) :-
+		findall(X, ((X = 1; X =2; X = 3), call((true,!))), L), 
+		L == [1, 2, 3].
+
+	succeeds(call_N_30) :-
+		findall(X, ((X = 1; X =2; X = 3), call((true;!))), L), 
+		L == [1, 1, 2, 2, 3, 3].
+
+	succeeds(call_N_31) :-
+		findall(X, ((X = 1; X =2; X = 3), call(','(true), !)), L), 
+		L == [1, 2, 3].
+
+	succeeds(call_N_32) :-
+		findall(X, ((X = 1; X =2; X = 3), call(';'(true), !)), L), 
+		L == [1, 1, 2, 2, 3, 3].
+
 	% some data for the tests
+
 	:- private(d/4).
 
 	:- private(e/5).
