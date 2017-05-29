@@ -22,25 +22,32 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/05/28,
+		date is 2017/05/29,
 		comment is 'Unit tests for the initialization/1 built-in directive.'
 	]).
 
-	:- set_logtalk_flag(context_switching_calls, allow).
+	% allow declaring new predicates at runtime
 	:- set_logtalk_flag(dynamic_declarations, allow).
+	% avoid distracting warnings
 	:- set_logtalk_flag(missing_directives, silent).
+	:- set_logtalk_flag(unknown_predicates, silent).
 
-	:- initialization(assertz(foo)).
+	% multiple initialization/1 directives must be executed in order
+	:- initialization(assertz(foo(1))).
+	:- initialization(assertz(foo(2))).
+	:- initialization(assertz(foo(3))).
 
+	% verify that the dynamic foo/1 predicate declaration is created
 	test(initialization_1_1) :-
-		current_predicate(foo/0),
-		predicate_property(foo, private),
-		predicate_property(foo, (dynamic)).
+		current_predicate(foo/1),
+		predicate_property(foo(_), private),
+		predicate_property(foo(_), (dynamic)).
 
+	% verify initialization/1 directives goal execution order
 	test(initialization_1_2) :-
-		this(This),
-		This<<foo.
+		findall(X, foo(X), L),
+		L == [1, 2, 3].
 
 :- end_object.

@@ -67,6 +67,8 @@ Tests
 * ADDED: Unit tests for the `call/1-N`, `ignore/1`, and `once/1` built-in
 methods to check that they are opaque to cuts.
 
+* IMPROVED: Unit tests for the `initialization/1` directive.
+
 Examples
 --------
 
