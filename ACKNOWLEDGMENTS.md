@@ -33,6 +33,7 @@ CONTRIBUTORS
 * Arun Majumdar (bug reports, usability suggestions)
 * Barry Evans (dead code scanner tool, usability suggestions)
 * Clara Dimene (GeSHi syntax highlighter)
+* Damien Roch (Docker support)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
 * Ebrahim Azarisooreh (code metrics tool)
