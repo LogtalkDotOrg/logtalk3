@@ -46,7 +46,7 @@
 
 <pre>use_module(Module, Predicates)</pre>
 <p>
-This directive is supported only when using a back-end Prolog compiler that supports modules. It declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as calls to explicitly-qualified module predicates. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Module:</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
+This directive declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as calls to explicitly-qualified module predicates. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Module:</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
 </p>
 <p>
 This directive is also used when compiling calls to the database and reflection built-in methods by examining these methods predicate arguments.
@@ -86,7 +86,7 @@ foo :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: May 29, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#directives">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>
