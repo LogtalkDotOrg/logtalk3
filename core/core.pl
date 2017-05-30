@@ -3014,7 +3014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 8, rc2)).
+'$lgt_version_data'(logtalk(3, 10, 8, stable)).
 
 
 
@@ -7877,7 +7877,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_file_directive'(@nonvar, +compilation_context)
 %
 % compiles file-level directives, i.e. directives that are not encapsulated in a Logtalk
-% entity error-checking is delegated in most cases to the back-end Prolog compiler
+% entity; error-checking is delegated in most cases to the back-end Prolog compiler
 
 '$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
