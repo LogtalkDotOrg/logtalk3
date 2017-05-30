@@ -22,9 +22,9 @@
 :- object(optional).
 
 	:- info([
-		version is 0.3,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/05/22,
+		date is 2017/05/30,
 		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.'
 	]).
 
@@ -52,9 +52,9 @@
 :- object(optional(_Reference)).
 
 	:- info([
-		version is 0.1,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/05/21,
+		date is 2017/05/30,
 		comment is 'Optional reference predicates. Require passing an optional reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference']
 	]).
