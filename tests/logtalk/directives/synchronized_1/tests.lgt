@@ -74,8 +74,8 @@
 		predicate_property(e(_,_,_,_), private),
 		predicate_property(e(_,_,_,_), synchronized).
 
-		% when threads are not supported, the synchronized/1 directive simply makes
-		% the predicates deterministic by wrapping its calls using once/1
+	% when threads are not supported, the synchronized/1 directive simply makes
+	% the predicates deterministic by wrapping its calls using once/1
 
 	test(synchronized_1_4) :-
 		findall(X, s(X), L),
