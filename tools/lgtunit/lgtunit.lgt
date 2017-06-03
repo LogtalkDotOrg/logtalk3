@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.3,
+		version is 4.4,
 		author is 'Paulo Moura',
-		date is 2017/04/12,
+		date is 2017/06/03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -64,8 +64,20 @@
 	:- meta_predicate(deterministic(0)).
 	:- mode(deterministic(+callable), zero_or_one).
 	:- info(deterministic/1, [
-		comment is 'True if a goal succeeds once without leaving choice-points.',
+		comment is 'True if the goal succeeds once without leaving choice-points.',
 		argnames is ['Goal']
+	]).
+
+	:- public(assertion/1).
+	:- meta_predicate(assertion(0)).
+	:- mode(assertion(+callable), one).
+	:- info(assertion/1, [
+		comment is 'True if the goal succeeds. Throws an error if the goal throws an error or fails.',
+		argnames is ['Goal'],
+		exceptions is [
+			'Goal fails' - assertion_failure('Goal'),
+			'Goal throws Error' - assertion_error('Goal', 'Error')
+		]
 	]).
 
 	:- public(quick_check/3).
@@ -446,7 +458,7 @@
 	% library support for quick check
 	:- uses(type, [arbitrary/2, shrink/3]).
 	% library list predicates
-	:- uses(list, [append/3, length/2, member/2, memberchk/2]).
+	:- uses(list, [append/3, length/2, member/2]).
 
 	% by default, run the unit tests
 	condition.
@@ -1009,10 +1021,10 @@
 		).
 
 	convert_test_outcome(true, _, Goal, true, Goal).
-	convert_test_outcome(true(Test), _, Goal, true, (Goal, Test)).
+	convert_test_outcome(true(Assertion), _, Goal, true, (Goal, lgtunit::assertion(Assertion))).
 	convert_test_outcome(deterministic, Test, Goal, deterministic, lgtunit::deterministic(Head)) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
-	convert_test_outcome(deterministic(Check), Test, Goal, deterministic, (lgtunit::deterministic(Head), Check)) :-
+	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic, (lgtunit::deterministic(Head), lgtunit::assertion(Assertion))) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(fail, _, Goal, fail, Goal).
 	convert_test_outcome(error(Ball), _, Goal, [error(Ball,_)], Goal).
@@ -1155,6 +1167,15 @@
 		deterministic(_) :-
 			throw(error(resource_error, deterministic/1)).
 	:- endif.
+
+	assertion(Goal) :-
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				true
+			;	throw(assertion_error(Goal, Error))
+			)
+		;	throw(assertion_failure(Goal))
+		).		
 
 	'=~='(Float1, Float2) :-
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
@@ -1513,7 +1534,7 @@
 		properties_indicator_number_of_clauses(Properties, Functor/Arity, PredicateIndicator, NumberOfClauses).
 
 	properties_indicator_number_of_clauses(Properties, PredicateIndicator0, PredicateIndicator, NumberOfClauses) :-
-		\+ memberchk(auxiliary, Properties),
+		\+ member(auxiliary, Properties),
 		(	member(number_of_clauses(NumberOfClauses), Properties) ->
 			true
 		;	NumberOfClauses = 0

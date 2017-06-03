@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2017/04/04,
+		date is 2017/06/03,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -194,6 +194,12 @@
 		['  test goal failed but should have throw an error'-[], nl].
 	failed_test_reason(error_instead_of_failure(Error)) -->
 		['  test goal throws an error but should have failed: ~q'-[Error], nl].
+	failed_test_reason(error_instead_of_success(assertion_error(Assertion, error(Error,_)))) -->
+		['  test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
+	failed_test_reason(error_instead_of_success(assertion_error(Assertion, Error))) -->
+		['  test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
+	failed_test_reason(error_instead_of_success(assertion_failure(Assertion))) -->
+		['  test assertion failed: ~q'-[Assertion], nl].
 	failed_test_reason(error_instead_of_success(Error)) -->
 		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
 	failed_test_reason(wrong_error(ExpectedError, Error)) -->

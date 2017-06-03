@@ -24,7 +24,13 @@ RELEASE NOTES
 3.10.9 - June ??, 2017
 ======================
 
+Tools
+-----
 
+* CHANGED: Reporting of the `lgtunit` test idioms `test/2-3` when using the
+`true(Assertion)` or `deterministic(Assertion)` outcomes to print assertion
+error and failure messages for easier debugging of failed tests.  Suggested
+by Ebrahim Azarisooreh.
 
 
 3.10.8 - May 30, 2017

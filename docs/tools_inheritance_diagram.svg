@@ -10,7 +10,7 @@
 <title>tools</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-2618 6696,-2618 6696,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk development tools</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2017/05/30, 01:36</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2017/06/03, 13:14</text>
 <g id="clust1" class="cluster">
 <title>cluster_rlibrary_tools</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/">
@@ -334,16 +334,16 @@
 <g id="clust51" class="cluster">
 <title>cluster_library_lgtunit</title>
 <g id="a_clust51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/">
-<path fill="#eee9e9" stroke="#8b8989" d="M486,-1166C486,-1166 1802,-1166 1802,-1166 1808,-1166 1814,-1172 1814,-1178 1814,-1178 1814,-1432 1814,-1432 1814,-1438 1808,-1444 1802,-1444 1802,-1444 486,-1444 486,-1444 480,-1444 474,-1438 474,-1432 474,-1432 474,-1178 474,-1178 474,-1172 480,-1166 486,-1166"/>
-<text text-anchor="middle" x="503.5" y="-1173" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">lgtunit</text>
+<path fill="#eee9e9" stroke="#8b8989" d="M486,-1161C486,-1161 1802,-1161 1802,-1161 1808,-1161 1814,-1167 1814,-1173 1814,-1173 1814,-1437 1814,-1437 1814,-1443 1808,-1449 1802,-1449 1802,-1449 486,-1449 486,-1449 480,-1449 474,-1443 474,-1437 474,-1437 474,-1173 474,-1173 474,-1167 480,-1161 486,-1161"/>
+<text text-anchor="middle" x="503.5" y="-1168" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">lgtunit</text>
 </a>
 </g>
 </g>
 <g id="clust53" class="cluster">
 <title>cluster_file_/Users/pmoura/logtalk/tools/lgtunit/lgtunit.lgt</title>
 <g id="a_clust53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtunit/lgtunit.lgt">
-<path fill="snow" stroke="#8b8989" d="M1648,-1195C1648,-1195 1792,-1195 1792,-1195 1798,-1195 1804,-1201 1804,-1207 1804,-1207 1804,-1422 1804,-1422 1804,-1428 1798,-1434 1792,-1434 1792,-1434 1648,-1434 1648,-1434 1642,-1434 1636,-1428 1636,-1422 1636,-1422 1636,-1207 1636,-1207 1636,-1201 1642,-1195 1648,-1195"/>
-<text text-anchor="middle" x="1677.5" y="-1202" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">lgtunit.lgt</text>
+<path fill="snow" stroke="#8b8989" d="M1648,-1190C1648,-1190 1792,-1190 1792,-1190 1798,-1190 1804,-1196 1804,-1202 1804,-1202 1804,-1427 1804,-1427 1804,-1433 1798,-1439 1792,-1439 1792,-1439 1648,-1439 1648,-1439 1642,-1439 1636,-1433 1636,-1427 1636,-1427 1636,-1202 1636,-1202 1636,-1196 1642,-1190 1648,-1190"/>
+<text text-anchor="middle" x="1677.5" y="-1197" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">lgtunit.lgt</text>
 </a>
 </g>
 </g>
@@ -1759,62 +1759,65 @@
 <g id="node42" class="node">
 <title>lgtunit</title>
 <g id="a_node42"><a xlink:href="http://logtalk.org/library/lgtunit_0.html" xlink:title="http://logtalk.org/library/lgtunit_0.html">
-<polygon fill="beige" stroke="black" points="1793.5,-1424 1646.5,-1424 1646.5,-1224 1793.5,-1224 1793.5,-1424"/>
-<text text-anchor="start" x="1655" y="-1411.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1697" y="-1411.2" font-family="Courier,monospace" font-size="11.00">lgtunit</text>
-<text text-anchor="start" x="1780" y="-1411.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1400.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1701.5" y="-1401.4" font-family="Courier,monospace" font-size="7.00">prototype</text>
-<text text-anchor="start" x="1780" y="-1400.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1390.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1380.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1701.5" y="-1380.8" font-family="Courier,monospace" font-size="9.00">cover/1</text>
-<text text-anchor="start" x="1780" y="-1380.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1370.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1706.5" y="-1370.8" font-family="Courier,monospace" font-size="9.00">run/0</text>
-<text text-anchor="start" x="1780" y="-1370.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1360.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1706.5" y="-1360.8" font-family="Courier,monospace" font-size="9.00">run/1</text>
-<text text-anchor="start" x="1780" y="-1360.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1350.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1706.5" y="-1350.8" font-family="Courier,monospace" font-size="9.00">run/2</text>
-<text text-anchor="start" x="1780" y="-1350.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1340.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1679.5" y="-1340.8" font-family="Courier,monospace" font-size="9.00">deterministic/1</text>
-<text text-anchor="start" x="1780" y="-1340.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1330.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1685" y="-1330.8" font-family="Courier,monospace" font-size="9.00">quick_check/3</text>
-<text text-anchor="start" x="1780" y="-1330.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1320.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1685" y="-1320.8" font-family="Courier,monospace" font-size="9.00">quick_check/2</text>
-<text text-anchor="start" x="1780" y="-1320.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1310.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1685" y="-1310.8" font-family="Courier,monospace" font-size="9.00">quick_check/1</text>
-<text text-anchor="start" x="1780" y="-1310.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1300.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1690.5" y="-1300.8" font-family="Courier,monospace" font-size="9.00">benchmark/2</text>
-<text text-anchor="start" x="1780" y="-1300.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1290.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1690.5" y="-1290.8" font-family="Courier,monospace" font-size="9.00">benchmark/3</text>
-<text text-anchor="start" x="1780" y="-1290.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1280.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1690.5" y="-1280.8" font-family="Courier,monospace" font-size="9.00">benchmark/4</text>
-<text text-anchor="start" x="1780" y="-1280.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1270.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1696" y="-1270.8" font-family="Courier,monospace" font-size="9.00">variant/2</text>
-<text text-anchor="start" x="1780" y="-1270.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1260.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1701.5" y="-1260.8" font-family="Courier,monospace" font-size="9.00">=~= / 2</text>
-<text text-anchor="start" x="1780" y="-1260.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1250.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1696" y="-1250.8" font-family="Courier,monospace" font-size="9.00">epsilon/1</text>
-<text text-anchor="start" x="1780" y="-1250.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1240.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1679.5" y="-1240.8" font-family="Courier,monospace" font-size="9.00">op(700,xfx,=~=)</text>
-<text text-anchor="start" x="1780" y="-1240.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1655" y="-1230.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="1661" y="-1230.8" font-family="Courier,monospace" font-size="9.00">logtalk::trace_event/2</text>
-<text text-anchor="start" x="1780" y="-1230.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<polygon fill="beige" stroke="black" points="1793.5,-1429 1646.5,-1429 1646.5,-1219 1793.5,-1219 1793.5,-1429"/>
+<text text-anchor="start" x="1655" y="-1416.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1697" y="-1416.2" font-family="Courier,monospace" font-size="11.00">lgtunit</text>
+<text text-anchor="start" x="1780" y="-1416.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1405.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1701.5" y="-1406.4" font-family="Courier,monospace" font-size="7.00">prototype</text>
+<text text-anchor="start" x="1780" y="-1405.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1395.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1385.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1701.5" y="-1385.8" font-family="Courier,monospace" font-size="9.00">cover/1</text>
+<text text-anchor="start" x="1780" y="-1385.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1375.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1706.5" y="-1375.8" font-family="Courier,monospace" font-size="9.00">run/0</text>
+<text text-anchor="start" x="1780" y="-1375.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1365.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1706.5" y="-1365.8" font-family="Courier,monospace" font-size="9.00">run/1</text>
+<text text-anchor="start" x="1780" y="-1365.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1355.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1706.5" y="-1355.8" font-family="Courier,monospace" font-size="9.00">run/2</text>
+<text text-anchor="start" x="1780" y="-1355.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1345.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1679.5" y="-1345.8" font-family="Courier,monospace" font-size="9.00">deterministic/1</text>
+<text text-anchor="start" x="1780" y="-1345.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1335.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1690.5" y="-1335.8" font-family="Courier,monospace" font-size="9.00">assertion/1</text>
+<text text-anchor="start" x="1780" y="-1335.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1325.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1685" y="-1325.8" font-family="Courier,monospace" font-size="9.00">quick_check/3</text>
+<text text-anchor="start" x="1780" y="-1325.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1315.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1685" y="-1315.8" font-family="Courier,monospace" font-size="9.00">quick_check/2</text>
+<text text-anchor="start" x="1780" y="-1315.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1305.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1685" y="-1305.8" font-family="Courier,monospace" font-size="9.00">quick_check/1</text>
+<text text-anchor="start" x="1780" y="-1305.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1295.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1690.5" y="-1295.8" font-family="Courier,monospace" font-size="9.00">benchmark/2</text>
+<text text-anchor="start" x="1780" y="-1295.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1285.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1690.5" y="-1285.8" font-family="Courier,monospace" font-size="9.00">benchmark/3</text>
+<text text-anchor="start" x="1780" y="-1285.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1275.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1690.5" y="-1275.8" font-family="Courier,monospace" font-size="9.00">benchmark/4</text>
+<text text-anchor="start" x="1780" y="-1275.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1265.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1696" y="-1265.8" font-family="Courier,monospace" font-size="9.00">variant/2</text>
+<text text-anchor="start" x="1780" y="-1265.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1255.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1701.5" y="-1255.8" font-family="Courier,monospace" font-size="9.00">=~= / 2</text>
+<text text-anchor="start" x="1780" y="-1255.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1245.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1696" y="-1245.8" font-family="Courier,monospace" font-size="9.00">epsilon/1</text>
+<text text-anchor="start" x="1780" y="-1245.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1235.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1679.5" y="-1235.8" font-family="Courier,monospace" font-size="9.00">op(700,xfx,=~=)</text>
+<text text-anchor="start" x="1780" y="-1235.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1655" y="-1225.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="1661" y="-1225.8" font-family="Courier,monospace" font-size="9.00">logtalk::trace_event/2</text>
+<text text-anchor="start" x="1780" y="-1225.8" font-family="Courier,monospace" font-size="9.00"> </text>
 </a>
 </g>
 </g>
@@ -1822,7 +1825,7 @@
 <g id="edge26" class="edge">
 <title>lgtunit&#45;&gt;expanding</title>
 <g id="a_edge26"><a xlink:title="implements">
-<path fill="none" stroke="black" d="M1658.4943,-1424.0861C1649.8037,-1433.4386 1640.2854,-1442.0121 1630,-1449 1507.1421,-1532.4694 1055.7861,-1612.9354 894.1017,-1639.6822"/>
+<path fill="none" stroke="black" d="M1653.6459,-1429.1319C1646.2983,-1436.52 1638.4053,-1443.2895 1630,-1449 1507.1421,-1532.4694 1055.7861,-1612.9354 894.1017,-1639.6822"/>
 <ellipse fill="black" stroke="black" cx="890.1105" cy="-1640.34" rx="4" ry="4"/>
 </a>
 </g>
