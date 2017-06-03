@@ -129,12 +129,12 @@ The possible values of the outcome argument are:
 
 - `true`  
 	the test is expected to succeed
-- `true(Test)`  
-	the test is expected to succeed and satisfy the goal `Test`
+- `true(Assertion)`  
+	the test is expected to succeed and satisfy the `Assertion` goal
 - `deterministic`  
 	the test is expected to succeed once without leaving a choice-point
-- `deterministic(Test)`  
-	the test is expected to succeed once without leaving a choice-point and satisfy the goal `Test`
+- `deterministic(Assertion)`  
+	the test is expected to succeed once without leaving a choice-point and satisfy the `Assertion` goal
 - `fail`  
 	the test is expected to fail
 - `error(Error)`  
@@ -145,6 +145,12 @@ The possible values of the outcome argument are:
 	the test is expected to throw the exception term `Ball`
 - `balls(Balls)`  
 	the test is expected to throw an exception term `Ball` where `Ball` is an element of the list `Balls`
+
+In the case of the `true(Assertion)` and `deterministic(Assertion)` outcomes,
+a message that includes the assertion goal is printed for assertion failures
+and warnings to help debugging failed unit tests. Note the this message is only
+printed when the test goal succeeds as its failure will prevent the assertion
+goal from being called.
 
 Some tests may require individual setup and/or cleanup goals. in this case,
 the following alternative test dialect can be used:
