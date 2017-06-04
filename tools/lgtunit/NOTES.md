@@ -201,7 +201,7 @@ QuickCheck
 QuickCheck was originally developed for Haskell. Implementations for several
 other programming languages soon followed. The idea is to express properties
 that predicates must comply with and automatically generate tests for those
-properties. The `lgtunit` tool supports both `quick_check/2-3` test idioms, as
+properties. The `lgtunit` tool supports both `quick_check/2-3` test dialects, as
 described above, and `quick_check/1-3` public predicates for interactive use:
 
 	quick_check(Template, Options, Result).
@@ -215,7 +215,7 @@ predicates print the test results. The template can be a `::/2`, `<</2`, or
 term, it will be used to construct a goal to be called in the context of the
 *sender* using the `<</2` debugging control construct.
 
-Properties are expressed using predicates. The QuickCheck test idioms and
+Properties are expressed using predicates. The QuickCheck test dialects and
 predicates take as argument the mode template for a property (defined as a
 local predicate) and generate random values for each input argument based
 on the type information. The mode template syntax is the same used in the
@@ -422,9 +422,15 @@ tests:
 
 - `variant/2` - to check when two terms are a variant of each other (e.g. to
 check expected test results against the actual results when they contain variables)
+- `assertion/1` - to generate an exception in case its goal argument fails or
+throws an error
 - `Float1 =~= Float2` - for approximate float comparison
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
+
+The `assertion/1` predicate can be used in the body of tests written using test
+dialects that don't support the specification of `deterministic(Assertion)` or
+`true(Assertion)` outcomes.
 
 As the `benchmark/2-3` predicates are meta-predicates, turning on the
 `optimize` compiler flag is advised to avoid runtime compilation of the
@@ -495,7 +501,7 @@ Code coverage is only available when testing Logtalk code. But Prolog modules
 can often be compiled as Logtalk objects and plain Prolog code may be wrapped
 in a Logtalk object by using `include/1` directives. These two workarounds may
 thus allow generating code coverage data also for Prolog code by defining tests
-that use the `<</2` control construct to call the Prolog predicates.
+that use the `<</2` debugging control construct to call the Prolog predicates.
 
 
 Other notes
