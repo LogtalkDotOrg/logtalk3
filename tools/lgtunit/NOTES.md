@@ -417,20 +417,20 @@ https://github.com/LogtalkDotOrg/logtalk3/wiki/Testing
 Utility predicates
 ------------------
 
-The `lgtunit` tool provides some utility predicates to simplify writing unit
-tests:
+The `lgtunit` tool provides some public utility predicates to simplify writing
+unit tests:
 
 - `variant/2` - to check when two terms are a variant of each other (e.g. to
-check expected test results against the actual results when they contain variables)
+check expected test results against actual results when they contain variables)
 - `assertion/1` - to generate an exception in case its goal argument fails or
 throws an error
 - `Float1 =~= Float2` - for approximate float comparison
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
 
-The `assertion/1` predicate can be used in the body of tests written using test
-dialects that don't support the specification of `deterministic(Assertion)` or
-`true(Assertion)` outcomes.
+The `assertion/1` predicate can be used in the body of tests written using the
+`test/1`, `succeeds/1`, and `deterministic/1` dialects to help differentiate
+between the test goal and checking the test goal results.
 
 As the `benchmark/2-3` predicates are meta-predicates, turning on the
 `optimize` compiler flag is advised to avoid runtime compilation of the

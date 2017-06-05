@@ -22,10 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/10/13,
+		date is 2017/06/05,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	% test/1 dialect
@@ -38,6 +42,9 @@
 
 	test(test_1_03) :-
 		catch(throw(error), _, true).
+
+	test(test_1_04) :-
+		assertion(true).
 
 	% test/2 dialect
 
@@ -122,30 +129,39 @@
 	test(test_3_09b, true, []) :-
 		check(c09), check(n09).
 
-	% "explicit" dialect
+	% "explicit" dialects
 
-	succeeds(explicit_01) :-
+	succeeds(succeeds_1_01) :-
 		true.
 
-	deterministic(explicit_02) :-
+	succeeds(succeeds_1_02) :-
+		assertion(true).
+
+	deterministic(deterministic_1_01) :-
 		true.
 
-	fails(explicit_03) :-
+	deterministic(deterministic_1_02) :-
+		assertion(true).
+
+	fails(fails_1_01) :-
 		fail.
 
-	throws(explicit_04, ball) :-
+	throws(throws_2_01, ball) :-
 		throw(ball).
 
-	throws(explicit_05, [ball1,ball2]) :-
+	throws(throws_2_02, [ball1,ball2]) :-
 		throw(ball1).
 
-	%  dialect
+	throws(throws_2_03, [ball1,ball2]) :-
+		throw(ball2).
 
-	quick_check(quick_check_01, integer(+integer), []).
+	% quick_check/2-3 dialect
 
-	quick_check(quick_check_02, integer(+integer), [n(25)]).
+	quick_check(quick_check_3_01, integer(+integer), []).
 
-	quick_check(quick_check_03, integer(+integer)).
+	quick_check(quick_check_3_02, integer(+integer), [n(25)]).
+
+	quick_check(quick_check_2_01, integer(+integer)).
 
 	% auxiliary predicates for checking that condition/1, setup/1, cleanup/1,
 	% and note/1 options in the test/3 dialect are processed
