@@ -27,6 +27,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: New `lgtunit::assertion/1` meta-predicate. Mainly used in the code
+generated for tests using the `test/2-3` idioms.
+
 * CHANGED: Reporting of the `lgtunit` test idioms `test/2-3` when using the
 `true(Assertion)` or `deterministic(Assertion)` outcomes to print assertion
 error and failure messages for easier debugging of failed tests.  Suggested
