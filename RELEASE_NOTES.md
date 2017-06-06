@@ -35,6 +35,12 @@ generated for tests using the `test/2-3` idioms.
 error and failure messages for easier debugging of failed tests.  Suggested
 by Ebrahim Azarisooreh.
 
+Examples
+--------
+
+* FIXED: Do not try to run the `redis` example unit tests when using backend
+Prolog systems that do not support the `redis` library.
+
 
 3.10.8 - May 30, 2017
 =====================

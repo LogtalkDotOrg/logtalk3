@@ -18,16 +18,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, sicstus)).
-	:- use_module(library(system), []).
-:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-	:- import(from(/(sleep,1), shell)).
-:- endif.
-
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(library(redis_loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	Dialect \== eclipse, Dialect \== gnu, Dialect \== qp, Dialect \== sicstus, Dialect \== swi, Dialect \== xsb
 )).
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- else.
+
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(system), []).
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+		:- import(from(/(sleep,1), shell)).
+	:- endif.
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(library(redis_loader)),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- endif.
