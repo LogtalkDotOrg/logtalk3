@@ -41,6 +41,8 @@ Examples
 * FIXED: Do not try to run the `redis` example unit tests when using backend
 Prolog systems that do not support the `redis` library.
 
+* FIXED: Singleton variable bug in the `inheritance` example.
+
 
 3.10.8 - May 30, 2017
 =====================

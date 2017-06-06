@@ -38,7 +38,7 @@ object predicates.
 			functor(Pred, Functor, Arity),
 			Pred \= interface,
 			predicate_property(Pred, scope(Scope)),
-			writeq(Functor/Arity), write(' - '), writeq(Prop), nl,
+			writeq(Functor/Arity), write(' - '), writeq(Scope), nl,
 		fail.
 	interface.
 
