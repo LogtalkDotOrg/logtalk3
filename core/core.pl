@@ -4580,7 +4580,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_send_to_self_'(+object_identifier, +term, +execution_context)
+% '$lgt_send_to_self_'(+object_identifier, +callable, +execution_context)
 %
 % the last clause of this dynamic binding cache predicate must always exist
 % and must call the predicate that generates the missing cache entry
@@ -4590,7 +4590,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_send_to_self_nv'(+object_identifier, +term, +execution_context)
+% '$lgt_send_to_self_nv'(+object_identifier, +callable, +execution_context)
 %
 % runtime processing of a message sending call when the arguments have already
 % been type-checked; generates a cache entry to speed up future calls
@@ -4676,7 +4676,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_send_to_obj_nv'(+object_identifier, +term, +execution_context)
+% '$lgt_send_to_obj_nv'(+object_identifier, +callable, +execution_context)
 %
 % runtime processing of an event-aware message sending call when the arguments
 % have already been type-checked; generates a cache entry to speed up future calls
@@ -7172,8 +7172,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % cleans all entries for all dynamic binding lookup caches
 %
-% this also have the side-effect of removing the catchall
-% clauses that generate the cache entries
+% this also have the side-effect of removing the catchall clauses
+% that generate the cache entries which we must then re-assert
 
 '$lgt_clean_lookup_caches' :-
 	retractall('$lgt_send_to_obj_'(_, _, _)),
@@ -7191,8 +7191,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % cleans all entries for a given predicate for all dynamic
 % binding lookup caches
 %
-% this also have the side-effect of removing the catchall
-% clauses that generate the cache entries
+% this also have the side-effect of removing the catchall clauses
+% that generate the cache entries which we must then re-assert
 
 '$lgt_clean_lookup_caches'(Pred) :-
 	retractall('$lgt_send_to_obj_'(_, Pred, _)),
@@ -7367,7 +7367,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_file_terms'(+list(term), +compilation_context)
+% '$lgt_compile_file_terms'(@list(term), +compilation_context)
 %
 % compiles a list of file terms (clauses, directives, or grammar rules)
 
@@ -7383,9 +7383,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_file_terms'(+list(term), +atom, +compilation_context)
+% '$lgt_compile_file_terms'(@list(term), +atom, +compilation_context)
 %
 % compiles a list of file terms (clauses, directives, or grammar rules)
+% found in an included file
 
 '$lgt_compile_file_terms'([Term-sd(Lines,VariableNames)| Terms], File, Ctx) :-
 	'$lgt_check'(nonvar, Term, term(Term)),
@@ -7546,9 +7547,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_runtime_terms'(+list(term), +atom)
+% '$lgt_compile_runtime_terms'(@list(term), +atom)
 %
 % compiles a list of runtime terms (clauses, directives, or grammar rules)
+% found in an included file
 %
 % note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_runtime_term'/2 predicate
@@ -7562,7 +7564,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_runtime_terms'(+list(term))
+% '$lgt_compile_runtime_terms'(@list(term))
 %
 % compiles a list of runtime terms (clauses, directives, or grammar rules)
 %
