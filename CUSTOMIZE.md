@@ -38,7 +38,7 @@ The Logtalk user folder is updated when you update Logtalk. Therefore,
 it shouldn't be used to store your Logtalk application's source code.
 
 
-DEFINING A DEFAULT PROLOG BACKEND COMPILER
+Defining a default Prolog backend compiler
 ------------------------------------------
 
 Users of POSIX systems may use the `logtalk_backend_select` shell script
@@ -46,7 +46,7 @@ to define an alias, `logtalk`, for one of the provided backend Prolog
 compiler integration scripts.
 
 
-SETTING LIBRARY PATHS
+Setting library paths
 ---------------------
 
 In Logtalk, a library is simply a directory containing source files. Library 
@@ -64,7 +64,7 @@ Library paths for your own source files directories are preferably defined in
 your settings file, described next.
 
 
-CUSTOMIZING LOGTALK SETTINGS
+Customizing Logtalk settings
 ----------------------------
 
 Logtalk interfaces with a specific backend Prolog compiler using a adapter
@@ -104,7 +104,7 @@ Settings files can be debugged by compiling them with the `logtalk_compile/1-2`
 built-in predicates.
 
 
-CUSTOMIZING DOCUMENTATION PROCESSING SUPPORT
+Customizing documentation processing support
 --------------------------------------------
 
 Inside your Logtalk user folder, you will find a `tools/lgtdoc/xml` folder
@@ -118,7 +118,7 @@ specify XML entities for your personal data that can be used with the Logtalk
 documenting directives. For details, see the `tools/lgtdoc/NOTES.md` file.
 
 
-ADDING LOGTALK SUPPORT TO TEXT EDITORS
+Adding Logtalk support to text editors
 --------------------------------------
 
 Inside your Logtalk user folder, you will find a `coding` folder, containing 

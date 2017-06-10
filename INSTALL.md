@@ -34,7 +34,7 @@ compilers.
 The POSIX shell scripts assume that `/bin/bash` is available.
 
 
-LOGTALK BASIC INSTALLATION
+Logtalk basic installation
 --------------------------
 
 Manual installation of Logtalk can be accomplished by decompressing the
@@ -101,7 +101,7 @@ can also easily generate the GUI installer yourself. See the instructions on
 the `scripts/windows/NOTES.md` file.
 
 
-SETTING LOGTALK ENVIRONMENT VARIABLES
+Setting Logtalk environment variables
 -------------------------------------
 
 You need to set two environment variables, `LOGTALKHOME` and `LOGTALKUSER`.
@@ -141,8 +141,8 @@ If you're using Windows, the provided GUI installer (which supports both admin
 and non-admin users) takes care of the definition of the environment variables.
 
 
-END-USER SETUP (COPYING LOGTALK USER-MODIFIABLE FILES TO USERS HOME DIRS)
--------------------------------------------------------------------------
+End-user setup (copying Logtalk user-modifiable files to users home directories)
+--------------------------------------------------------------------------------
 
 If you installed Logtalk on your home directory, then skip this step if and only
 if you have set both Logtalk environment variables (`LOGTALKHOME` and `LOGTALKUSER`)
@@ -176,7 +176,7 @@ above automatically make a backup of any existing Logtalk user folder but you
 should rely on your own backups).
 
 
-CREATING NEW PROLOG TOP-LEVELS FOR AUTOMATIC LOADING OF LOGTALK
+Creating new prolog top-levels for automatic loading of Logtalk
 ---------------------------------------------------------------
 
 Most Prolog compilers allows the user to define an initialization file that
@@ -189,7 +189,7 @@ files for other Prolog compilers. Be sure to read the `adapters/NOTES.md` file
 notes on the Prolog compilers that you intend to use.
 
 
-CUSTOMIZING LOGTALK
+Customizing Logtalk
 -------------------
 
 Please see the file [CUSTOMIZE.md](CUSTOMIZE.md) for details on how to
