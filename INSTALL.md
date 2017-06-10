@@ -34,8 +34,8 @@ compilers.
 The POSIX shell scripts assume that `/bin/bash` is available.
 
 
-1. LOGTALK BASIC INSTALLATION
------------------------------
+LOGTALK BASIC INSTALLATION
+--------------------------
 
 Manual installation of Logtalk can be accomplished by decompressing the
 sources archive (or by cloning the development git server), running an
@@ -101,8 +101,8 @@ can also easily generate the GUI installer yourself. See the instructions on
 the `scripts/windows/NOTES.md` file.
 
 
-2. SETTING LOGTALK ENVIRONMENT VARIABLES
-----------------------------------------
+SETTING LOGTALK ENVIRONMENT VARIABLES
+-------------------------------------
 
 You need to set two environment variables, `LOGTALKHOME` and `LOGTALKUSER`.
 The environment variable `LOGTALKHOME` should be set to the Logtalk installation 
@@ -141,8 +141,8 @@ If you're using Windows, the provided GUI installer (which supports both admin
 and non-admin users) takes care of the definition of the environment variables.
 
 
-3. END-USER SETUP (COPYING LOGTALK USER-MODIFIABLE FILES TO USERS HOME DIRS)
-----------------------------------------------------------------------------
+END-USER SETUP (COPYING LOGTALK USER-MODIFIABLE FILES TO USERS HOME DIRS)
+-------------------------------------------------------------------------
 
 If you installed Logtalk on your home directory, then skip this step if and only
 if you have set both Logtalk environment variables (`LOGTALKHOME` and `LOGTALKUSER`)
@@ -176,8 +176,8 @@ above automatically make a backup of any existing Logtalk user folder but you
 should rely on your own backups).
 
 
-4. CREATING NEW PROLOG TOP-LEVELS FOR AUTOMATIC LOADING OF LOGTALK
-------------------------------------------------------------------
+CREATING NEW PROLOG TOP-LEVELS FOR AUTOMATIC LOADING OF LOGTALK
+---------------------------------------------------------------
 
 Most Prolog compilers allows the user to define an initialization file that
 is automatically consulted at startup. These initialization files may contain
@@ -189,8 +189,8 @@ files for other Prolog compilers. Be sure to read the `adapters/NOTES.md` file
 notes on the Prolog compilers that you intend to use.
 
 
-5. CUSTOMIZING LOGTALK
-----------------------
+CUSTOMIZING LOGTALK
+-------------------
 
 Please see the file [CUSTOMIZE.md](CUSTOMIZE.md) for details on how to
 customize your Logtalk installation and working environment.

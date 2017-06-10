@@ -38,16 +38,16 @@ The Logtalk user folder is updated when you update Logtalk. Therefore,
 it shouldn't be used to store your Logtalk application's source code.
 
 
-1. DEFINING A DEFAULT PROLOG BACKEND COMPILER
----------------------------------------------
+DEFINING A DEFAULT PROLOG BACKEND COMPILER
+------------------------------------------
 
 Users of POSIX systems may use the `logtalk_backend_select` shell script
 to define an alias, `logtalk`, for one of the provided backend Prolog
 compiler integration scripts.
 
 
-2. SETTING LIBRARY PATHS
-------------------------
+SETTING LIBRARY PATHS
+---------------------
 
 In Logtalk, a library is simply a directory containing source files. Library 
 paths can be declared using the `logtalk_library_path/2` dynamic and multifile
@@ -64,8 +64,8 @@ Library paths for your own source files directories are preferably defined in
 your settings file, described next.
 
 
-3. CUSTOMIZING LOGTALK SETTINGS
--------------------------------
+CUSTOMIZING LOGTALK SETTINGS
+----------------------------
 
 Logtalk interfaces with a specific backend Prolog compiler using a adapter
 file that can be found on the `adapters` folder in the Logtalk installation
@@ -100,12 +100,12 @@ Some backend Prolog compilers don't support all the possible compilation
 flags values. In addition, some backend Prolog compilers provide limited
 support for settings files in some operating-systems.
 
-Settings filescan be debugged by compiling them with the `logtalk_compile/1-2`
+Settings files can be debugged by compiling them with the `logtalk_compile/1-2`
 built-in predicates.
 
 
-4. CUSTOMIZING DOCUMENTATION PROCESSING SUPPORT
------------------------------------------------
+CUSTOMIZING DOCUMENTATION PROCESSING SUPPORT
+--------------------------------------------
 
 Inside your Logtalk user folder, you will find a `tools/lgtdoc/xml` folder
 containing a set of shell scripts, CSS and XSLT style-sheets, and DTD and
@@ -118,8 +118,8 @@ specify XML entities for your personal data that can be used with the Logtalk
 documenting directives. For details, see the `tools/lgtdoc/NOTES.md` file.
 
 
-5. ADDING LOGTALK SUPPORT TO TEXT EDITORS
------------------------------------------
+ADDING LOGTALK SUPPORT TO TEXT EDITORS
+--------------------------------------
 
 Inside your Logtalk user folder, you will find a `coding` folder, containing 
 support files for several text editors, which add support for syntax 
