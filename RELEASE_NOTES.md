@@ -24,6 +24,13 @@ RELEASE NOTES
 3.10.9 - June ??, 2017
 ======================
 
+Library
+-------
+
+* CHANGED: Loader file for the `unicode_data` library to load all data files
+using the `reload(skip)` compiler option to prevent accidental reload of this
+large resource due to e.g. changes to the default compilation mode.
+
 Tools
 -----
 
