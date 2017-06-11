@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 11, 2017
+%  Last updated on June 11, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -88,8 +88,8 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	!.
 
 
-% Call SWI-Prolog make/0 when calling logtalk_make/0 or
-% logtalk_make/1 with the target all
+% Call SWI-Prolog make/0 when calling logtalk_make/0
+% or logtalk_make/1 with the target all
 
 :- multifile(logtalk_make_target_action/1).
 :- dynamic(logtalk_make_target_action/1).
@@ -98,6 +98,10 @@ logtalk_make_target_action(all) :-
 	make.
 
 /*
+% old code for integrating Logtalk and SWI-Prolog make support;
+% superseded by the code above with the introducion of the new
+% logtalk_make_target_action/1 hook predicate
+
 :- if(current_predicate(prolog:make_hook/2)).
 
 	:- multifile(prolog:make_hook/2).
@@ -118,18 +122,18 @@ user:prolog_exception_hook(Exception, Exception, Frame, CatchFrame) :-
 	prolog_frame_attribute(CatchFrame, predicate_indicator, PI),
 	memberchk(PI, [(::)/2, (<<)/2]),
     get_prolog_backtrace(Frame, 20, Trace),
-	'$lgt_swi_filter_filter_trace'(Trace, Tracefiltered),
+	'$lgt_swi_filter_trace'(Trace, Tracefiltered),
     format(user_error, 'Error: ~p', [Exception]), nl(user_error),
     print_prolog_backtrace(user_error, Tracefiltered), nl(user_error),
 	fail.
 
-'$lgt_swi_filter_filter_trace'([], []).
-'$lgt_swi_filter_filter_trace'([frame(N,C,G0)| Trace], [frame(N,C,Entity::Head)| Tracefiltered]) :-
+'$lgt_swi_filter_trace'([], []).
+'$lgt_swi_filter_trace'([frame(N,C,G0)| Trace], [frame(N,C,Entity::Head)| Tracefiltered]) :-
 	'$lgt_decompile_predicate_heads'(G0, Entity, _, Head),
 	!,
-	'$lgt_swi_filter_filter_trace'(Trace, Tracefiltered).
-'$lgt_swi_filter_filter_trace'([_| Trace], Tracefiltered) :-
-	'$lgt_swi_filter_filter_trace'(Trace, Tracefiltered).
+	'$lgt_swi_filter_trace'(Trace, Tracefiltered).
+'$lgt_swi_filter_trace'([_| Trace], Tracefiltered) :-
+	'$lgt_swi_filter_trace'(Trace, Tracefiltered).
 */
 
 % for e.g. the call stack in the SWI-Prolog graphical tracer
