@@ -24,6 +24,14 @@ RELEASE NOTES
 3.10.9 - June ??, 2017
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `defines/2` property returned by calls to the `object_property/2`
+and `category_property/2` predicates now returns a list with `number_of_rules(0)`
+and `number_of_clauses(0)` properties instead of an empty list for multifile and
+dynamic predicates with no local or initial set of clauses.
+
 Library
 -------
 

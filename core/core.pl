@@ -1120,8 +1120,8 @@ protocol_property(Ptc, Prop) :-
 		Properties = [auxiliary| Properties2]
 	;	Properties = Properties2
 	).
-
-'$lgt_entity_property_defines'(_, _, []).
+% likely a dynamic or a multifile predicate with no local clauses
+'$lgt_entity_property_defines'(_, _, [number_of_clauses(0), number_of_rules(0)]).
 
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
@@ -10106,7 +10106,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_clause'(+clause. +entity_identifier, -clause, -clause, +compilation_context)
+% '$lgt_compile_clause'(+clause, +entity_identifier, -clause, -clause, +compilation_context)
 %
 % compiles an entity clause into a normal clause and a debug clause
 %

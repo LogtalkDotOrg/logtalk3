@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/23,
+		date is 2017/06/11,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 
@@ -185,7 +185,7 @@
 
 	test(noc_obj_e) :-
 		nocs_are(obj_e, Nocs),
-		Nocs == [foo/0-1].
+		Nocs == [foo/0-1, fact/1-0].
 
 	test(noc_obj_d) :-
 		nocs_are(obj_d, Nocs),
@@ -201,7 +201,7 @@
 
 	test(noc_obj_c) :-
 		nocs_are(obj_c, Nocs),
-		Nocs == [foo/0-1].
+		Nocs == [foo/0-1, fact/1-0].
 
 	test(noc_prot_a) :-
 		\+ noc_metric::entity_score(prot_a, _).

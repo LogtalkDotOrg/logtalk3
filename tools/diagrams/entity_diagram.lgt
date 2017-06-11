@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2017/03/02,
+		date is 2017/06/11,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -262,9 +262,11 @@
 		{xref_diagram::diagram_name_suffix(Suffix0)},
 		atom_concat('_object', Suffix0, Suffix),
 		NodeOptions0 = Options,
-		(	object_property(Object, defines(_, [_|_])) ->
+		(	object_property(Object, defines(_, DefinesProperties)),
+			memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
+			NumberOfClauses > 0 ->
 			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)
-		;	% no defined predicates; xref diagram empty
+		;	% no locally defined predicates; xref diagram empty
 			NodeOptions = NodeOptions0
 		),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
@@ -300,9 +302,11 @@
 		{xref_diagram::diagram_name_suffix(Suffix0)},
 		atom_concat('_category', Suffix0, Suffix),
 		NodeOptions0 = Options,
-		(	category_property(Category, defines(_, [_|_])) ->
+		(	category_property(Category, defines(_, DefinesProperties)) ->
+			memberchk(number_of_clauses(NumberOfClauses), DefinesProperties),
+			NumberOfClauses > 0 ->
 			^^add_node_zoom_option(Name, Suffix, Options, NodeOptions0, NodeOptions)
-		;	% no defined predicates; xref diagram empty
+		;	% no locally defined predicates; xref diagram empty
 			NodeOptions = NodeOptions0
 		),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
