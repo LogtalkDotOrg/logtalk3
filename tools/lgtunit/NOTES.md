@@ -148,7 +148,7 @@ The possible values of the outcome argument are:
 
 In the case of the `true(Assertion)` and `deterministic(Assertion)` outcomes,
 a message that includes the assertion goal is printed for assertion failures
-and warnings to help debugging failed unit tests. Note the this message is only
+and errors to help debugging failed unit tests. Note the this message is only
 printed when the test goal succeeds as its failure will prevent the assertion
 goal from being called.
 
@@ -428,9 +428,11 @@ throws an error
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
 
-The `assertion/1` predicate can be used in the body of tests written using the
+The `assertion/1` predicate is used in the code generated for the `test/2-3`
+dialects. But it can also be used in the body of tests written using the
 `test/1`, `succeeds/1`, and `deterministic/1` dialects to help differentiate
-between the test goal and checking the test goal results.
+between the test goal and checking the test goal results and to provide more
+informative test failure messages.
 
 As the `benchmark/2-3` predicates are meta-predicates, turning on the
 `optimize` compiler flag is advised to avoid runtime compilation of the
