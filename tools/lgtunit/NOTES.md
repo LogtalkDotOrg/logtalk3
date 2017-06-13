@@ -370,10 +370,14 @@ and printed, you will need to compile the entities that you're testing
 using the flags `debug(on)` and `source_data(on)`. Be aware, however,
 that compiling in debug mode results in a performance penalty.
 
-A single unit test object my include tests for one or more entities (objects,
+A single unit test object may include tests for one or more entities (objects,
 protocols, and categories). The entities being tested by an unit test object
 for which code coverage information should be collected must be declared using
-the `cover/1` predicate.
+the `cover/1` predicate. For example, to collect code coverage data for the
+objects `foo` and `bar` include the two clauses:
+
+	cover(foo).
+	cover(bar).
 
 In the printed predicate clause coverage information, you may get a total
 number of clauses smaller than the covered clauses. This results from the
