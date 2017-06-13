@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on May 5, 2017
+%  Last updated on June 13, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -26,6 +26,7 @@
 
 :- use_module(library(system)).
 :- use_module(library(terms), [term_hash/4]).
+:- use_module(library(lists), [member/2]).
 
 :- set_prolog_flag(update_semantics, logical).
 :- set_prolog_flag(unknown, error).
@@ -282,10 +283,17 @@
 '$lgt_prolog_feature'(tabling, Tabling) :-
 	(	current_prolog_flag(system_options, tabling) ->
 		Tabling = supported
+	;	current_prolog_flag(system_options, Options),
+		member(tabling, Options) ->
+		Tabling = supported
 	;	Tabling = unsupported
 	).
 '$lgt_prolog_feature'(threads, Threads) :-
 	(	current_prolog_flag(system_options, threads) ->
+		Threads = supported,
+		thread_local('$lgt_engine_term_queue_'/2)
+	;	current_prolog_flag(system_options, Options),
+		member(threads, Options) ->
 		Threads = supported,
 		thread_local('$lgt_engine_term_queue_'/2)
 	;	Threads = unsupported
@@ -614,20 +622,6 @@
 	logtalk_load_context(entity_type, module),					% only when we're compiling a module as an object!
 	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
-'$lgt_yap_directive_expansion'(table(F/A), {table(TF/TA)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
-
-'$lgt_yap_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'([F/A| PIs], _, TPIs).
-
-'$lgt_yap_directive_expansion'(table(Head), {table(THead)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, _, THead, _),
-	functor(THead, _, Arity),
-	arg(Arity, THead, first).
-
 '$lgt_yap_directive_expansion'(encoding(Encoding1), encoding(Encoding2)) :-
 	nonvar(Encoding1),
 	'$lgt_yap_encoding_to_logtalk_encoding'(Encoding1, Encoding2).
@@ -652,6 +646,34 @@
 '$lgt_yap_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_yap_list_of_exports'(File, Module, Imports).
+
+'$lgt_yap_directive_expansion'(table(Predicates), {table(TPredicates)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_yap_table_directive_expansion'(Predicates, TPredicates).
+
+
+'$lgt_yap_table_directive_expansion'([Predicate| Predicates], [TPredicate| TPredicates]) :-
+	!,
+	'$lgt_yap_table_directive_predicate'(Predicate, TPredicate),
+	'$lgt_yap_table_directive_expansion'(Predicates, TPredicates).
+
+'$lgt_yap_table_directive_expansion'((Predicate, Predicates), (TPredicate, TPredicates)) :-
+	!,
+	'$lgt_yap_table_directive_predicate'(Predicate, TPredicate),
+	'$lgt_yap_table_directive_expansion'(Predicates, TPredicates).
+
+'$lgt_yap_table_directive_expansion'(Predicate, TPredicate) :-
+	'$lgt_yap_table_directive_predicate'(Predicate, TPredicate).
+
+
+'$lgt_yap_table_directive_predicate'(F/A, TF/TA) :-
+	!,
+	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
+
+'$lgt_yap_table_directive_predicate'(Head, THead) :-
+	'$lgt_compile_predicate_heads'(Head, _, THead, _),
+	functor(THead, _, Arity),
+	arg(Arity, THead, first).
 
 
 '$lgt_yap_list_of_exports'(File, Module, Exports) :-

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 5, 2017
+%  Last updated on June 13, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -690,15 +690,34 @@
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
 
-'$lgt_swi_directive_expansion'(table(F/A), {table(TF/TA)}) :-
+'$lgt_swi_directive_expansion'(table(Predicates), {table(TPredicates)}) :-
 	current_module(tabling),
 	logtalk_load_context(entity_type, _),
+	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
+
+
+'$lgt_swi_table_directive_expansion'([Predicate| Predicates], [TPredicate| TPredicates]) :-
+	!,
+	'$lgt_swi_table_directive_predicate'(Predicate, TPredicate),
+	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
+
+'$lgt_swi_table_directive_expansion'((Predicate, Predicates), (TPredicate, TPredicates)) :-
+	!,
+	'$lgt_swi_table_directive_predicate'(Predicate, TPredicate),
+	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
+
+'$lgt_swi_table_directive_expansion'(Predicate, TPredicate) :-
+	'$lgt_swi_table_directive_predicate'(Predicate, TPredicate).
+
+
+'$lgt_swi_table_directive_predicate'(F/A, TF/TA) :-
+	!,
 	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
 
-'$lgt_swi_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
-	current_module(tabling),
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'([F/A| PIs], _, TPIs).
+'$lgt_swi_table_directive_predicate'(Head, THead) :-
+	'$lgt_compile_predicate_heads'(Head, _, THead, _),
+	functor(THead, _, Arity),
+	arg(Arity, THead, first).
 
 
 '$lgt_swi_unify_head_thead_args'([], [_]).

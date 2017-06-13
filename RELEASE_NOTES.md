@@ -35,6 +35,12 @@ dynamic predicates with no local or initial set of clauses.
 * IMPROVED: Allow safe cases of static binding for objects compiled with the
 `complements` flag set to `restrict`.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Handle all `table/1` directive syntaxes when using YAP or SWI-Prolog
+as the backend compilers.
+
 Library
 -------
 
