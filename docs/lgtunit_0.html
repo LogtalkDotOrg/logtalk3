@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>4.4</code>
+            <code>4.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/6/3</code>
+            <code>2017/6/12</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -157,9 +157,9 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="assertion/1" class="code">assertion/1</h3>
+          <h3 id="assertion/2" class="code">assertion/2</h3>
           <blockquote>
-            <p class="comment">True if the goal succeeds. Throws an error if the goal throws an error or fails.</p>
+            <p class="comment">True if the goal succeeds. Throws an error using the assertion as argument if the goal throws an error or fails.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -168,19 +168,19 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>assertion(Goal)</code>
+              <code>assertion(Assertion,Goal)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>assertion(0)</code>
+              <code>assertion(*,0)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>assertion(+callable) &ndash; one</code>
+              <code>assertion(+callable,+callable) &ndash; one</code>
             </dd>
             <dt class="key">exceptions:</dt>
-            <dd class="value">Goal fails: <code>assertion_failure(Goal)</code></dd>
-            <dd class="value">Goal throws Error: <code>assertion_error(Goal,Error)</code></dd>
+            <dd class="value">Goal fails: <code>assertion_failure(Assertion)</code></dd>
+            <dd class="value">Goal throws Error: <code>assertion_error(Assertion,Error)</code></dd>
           </dl>
         </div>
         <div class="section">

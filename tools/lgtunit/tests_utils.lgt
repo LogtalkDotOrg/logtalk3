@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/04,
+		date is 2017/06/13,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -33,7 +33,7 @@
 		epsilon/1, ('=~=')/2,
 		deterministic/1,
 		variant/2,
-		assertion/1,
+		assertion/2,
 		quick_check/3, quick_check/2, quick_check/1
 	]).
 
@@ -129,18 +129,18 @@
 	test(variant_2_06) :-
 		\+ variant(a(1,_Y), a(_A,2)).
 
-	% assertion/1 tests
+	% assertion/2 tests
 
-	test(assertion_1_01) :-
-		assertion(integer(1)).
+	test(assertion_2_01) :-
+		assertion(1,integer(1)).
 
-	test(assertion_1_02) :-
-		catch(assertion(integer(1.1)), Error, true),
-		Error == assertion_failure(integer(1.1)).
+	test(assertion_2_02) :-
+		catch(assertion(2,integer(1.1)), Error, true),
+		Error == assertion_failure(2).
 
-	test(assertion_1_03) :-
-		catch(assertion(throw(e)), Error, true),
-		Error == assertion_error(throw(e), e).
+	test(assertion_2_03) :-
+		catch(assertion(3,throw(e)), Error, true),
+		Error == assertion_error(3, e).
 
 	% quick_check/3 tests
 

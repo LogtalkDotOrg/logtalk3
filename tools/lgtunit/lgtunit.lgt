@@ -19,16 +19,16 @@
 
 
 :- object(lgtunit,
-	implements(expanding)).		% built-in protocol for term and goal expansion methods
+	implements(expanding)).
 
 	% avoid a catch-22 due to the local definition
 	% of the logtalk::trace_event/2 predicate
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.4,
+		version is 4.5,
 		author is 'Paulo Moura',
-		date is 2017/06/03,
+		date is 2017/06/13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -68,15 +68,15 @@
 		argnames is ['Goal']
 	]).
 
-	:- public(assertion/1).
-	:- meta_predicate(assertion(0)).
-	:- mode(assertion(+callable), one).
-	:- info(assertion/1, [
-		comment is 'True if the goal succeeds. Throws an error if the goal throws an error or fails.',
-		argnames is ['Goal'],
+	:- public(assertion/2).
+	:- meta_predicate(assertion(*, 0)).
+	:- mode(assertion(+nonvar, +callable), one).
+	:- info(assertion/2, [
+		comment is 'True if the goal succeeds. Throws an error using the assertion as argument if the goal throws an error or fails.',
+		argnames is ['Assertion', 'Goal'],
 		exceptions is [
-			'Goal fails' - assertion_failure('Goal'),
-			'Goal throws Error' - assertion_error('Goal', 'Error')
+			'Goal fails' - assertion_failure('Assertion'),
+			'Goal throws Error' - assertion_error('Assertion', 'Error')
 		]
 	]).
 
@@ -1021,10 +1021,10 @@
 		).
 
 	convert_test_outcome(true, _, Goal, true, Goal).
-	convert_test_outcome(true(Assertion), _, Goal, true, (Goal, lgtunit::assertion(Assertion))).
+	convert_test_outcome(true(Assertion), _, Goal, true, (Goal, lgtunit::assertion(Assertion,Assertion))).
 	convert_test_outcome(deterministic, Test, Goal, deterministic, lgtunit::deterministic(Head)) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
-	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic, (lgtunit::deterministic(Head), lgtunit::assertion(Assertion))) :-
+	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic, (lgtunit::deterministic(Head), lgtunit::assertion(Assertion,Assertion))) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(fail, _, Goal, fail, Goal).
 	convert_test_outcome(error(Ball), _, Goal, [error(Ball,_)], Goal).
@@ -1168,14 +1168,14 @@
 			throw(error(resource_error, deterministic/1)).
 	:- endif.
 
-	assertion(Goal) :-
+	assertion(Assertion, Goal) :-
 		(	catch(Goal, Error, true) ->
 			(	var(Error) ->
 				true
-			;	throw(assertion_error(Goal, Error))
+			;	throw(assertion_error(Assertion, Error))
 			)
-		;	throw(assertion_failure(Goal))
-		).		
+		;	throw(assertion_failure(Assertion))
+		).
 
 	'=~='(Float1, Float2) :-
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:

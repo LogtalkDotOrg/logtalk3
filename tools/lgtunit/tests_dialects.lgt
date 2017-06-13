@@ -22,14 +22,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/05,
+		date is 2017/06/13,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
-	]).
-
-	:- uses(lgtunit, [
-		assertion/1
 	]).
 
 	% test/1 dialect
@@ -42,9 +38,6 @@
 
 	test(test_1_03) :-
 		catch(throw(error), _, true).
-
-	test(test_1_04) :-
-		assertion(true).
 
 	% test/2 dialect
 
@@ -134,14 +127,8 @@
 	succeeds(succeeds_1_01) :-
 		true.
 
-	succeeds(succeeds_1_02) :-
-		assertion(true).
-
 	deterministic(deterministic_1_01) :-
 		true.
-
-	deterministic(deterministic_1_02) :-
-		assertion(true).
 
 	fails(fails_1_01) :-
 		fail.

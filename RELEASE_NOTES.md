@@ -42,7 +42,7 @@ large resource due to e.g. changes to the default compilation mode.
 Tools
 -----
 
-* ADDED: New `lgtunit::assertion/1` meta-predicate. Mainly used in the code
+* ADDED: New `lgtunit::assertion/2` meta-predicate. Mainly used in the code
 generated for tests using the `test/2-3` idioms.
 
 * CHANGED: Reporting of the `lgtunit` test idioms `test/2-3` when using the
