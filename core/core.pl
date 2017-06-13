@@ -3014,7 +3014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 10, 9, rc1)).
+'$lgt_version_data'(logtalk(3, 10, 9, rc2)).
 
 
 
@@ -20468,8 +20468,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		ObjFlags /\ 2 =:= 0,
 		% object is static
 		ObjFlags /\ 64 =\= 64,
-		ObjFlags /\ 32 =\= 32,
-		% support for complementing categories is disallowed
+		% complementing categories flag not set to "allow"
 		'$lgt_term_template'(Pred, GPred),
 		call(Dcl, GPred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
 		% construct list of the meta-arguments that will be called in the "sender"
@@ -20486,6 +20485,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			true
 		;	GObj = DefCtn
 			% local definition
+		),
+		(	GObj \= DefCtn ->
+			% inherited definition; complementing categories
+			% flag must also not be set to "restrict"
+			ObjFlags /\ 32 =\= 32	
+		;	% local definition
+			true
 		),
 		% predicate definition found; use it only if it's safe
 		'$lgt_static_binding_safe_paths'(GObj, DclCtn, DefCtn),
@@ -20597,9 +20603,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
-	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, CtgFlags),
-	% check that the category is not compiled in debug mode
-	CtgFlags /\ 512 =\= 512,
+	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias, _, _, _) ->
 		true
@@ -20614,16 +20618,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% lookup predicate definition
 	call(Def, Pred, CExCtx, Call, DefCtn), !,
 	% predicate definition found; use it only if it's safe
-	'$lgt_static_binding_safe_paths'(Ctg, DclCtn, DefCtn).
+	'$lgt_static_binding_safe_paths'(Obj, DclCtn, DefCtn).
 
 
 '$lgt_obj_super_call_static_binding_prototype'(Obj, Alias, OExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, RelationScope)),
-	'$lgt_current_object_'(Parent, _, Dcl, Def, _, _, _, _, _, _, ParentFlags),
-	% check that the parent is not compiled in debug mode
-	ParentFlags /\ 512 =\= 512,
+	'$lgt_current_object_'(Parent, _, Dcl, Def, _, _, _, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Parent, Pred, Alias, _, _, _) ->
 		true
@@ -20658,9 +20660,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, RelationScope)),
-	'$lgt_current_object_'(Class, _, _, _, _, IDcl, IDef, _, _, _, ClassFlags),
-	% check that the class is not compiled in debug mode
-	ClassFlags /\ 512 =\= 512,
+	'$lgt_current_object_'(Class, _, _, _, _, IDcl, IDef, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Class, Pred, Alias, _, _, _) ->
 		true
@@ -20695,9 +20695,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, Superclass, RelationScope)),
-	'$lgt_current_object_'(Superclass, _, _, _, _, IDcl, IDef, _, _, _, SuperclassFlags),
-	% check that the superclass is not compiled in debug mode
-	SuperclassFlags /\ 512 =\= 512,
+	'$lgt_current_object_'(Superclass, _, _, _, _, IDcl, IDef, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Superclass, Pred, Alias, _, _, _) ->
 		true
@@ -20751,9 +20749,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, RelationScope)),
-	'$lgt_current_category_'(ExtCtg, _, Dcl, Def, _, ExtCtgFlags),
-	% check that the category is not compiled in debug mode
-	ExtCtgFlags /\ 512 =\= 512,
+	'$lgt_current_category_'(ExtCtg, _, Dcl, Def, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(ExtCtg, Pred, Alias, _, _, _) ->
 		true
@@ -20805,13 +20801,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_static_binding_safe_paths'(@entity_identifier, @entity_identifier, @entity_identifier)
 %
-% all entities in the inheritance-chain (from the entity that's the starting
-% point to both the declaration container and the definition container)
-% should be static-binding entities but currently we only check the end points
+% all ancestor entities up to the starting point for both the declaration
+% container and the definition container must be static-binding entities
 
 '$lgt_static_binding_safe_paths'(Entity, DclEntity, DefEntity) :-
-	'$lgt_static_binding_entity'(DclEntity),
-	'$lgt_static_binding_entity'(DefEntity),
+	(	DclEntity \= Entity ->
+		'$lgt_static_binding_entity'(DclEntity)
+	;	true
+	),
+	(	DefEntity \= Entity ->
+		'$lgt_static_binding_entity'(DefEntity)
+	;	true
+	),
 	'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity),
 	'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity).
 
@@ -20820,7 +20821,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, Flags) ->
 		Flags /\ 64 =\= 64,
 		Flags /\ 32 =\= 32
-		% support for complementing categories is disallowed
+		% support for complementing categories is disabled
 	;	'$lgt_current_protocol_'(Entity, _, _, _, Flags) ->
 		true
 	;	'$lgt_current_category_'(Entity, _, _, _, _, Flags)

@@ -32,6 +32,9 @@ and `category_property/2` predicates now returns a list with `number_of_rules(0)
 and `number_of_clauses(0)` properties instead of an empty list for multifile and
 dynamic predicates with no local or initial set of clauses.
 
+* IMPROVED: Allow safe cases of static binding for objects compiled with the
+`complements` flag set to `restrict`.
+
 Library
 -------
 
