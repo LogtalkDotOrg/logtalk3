@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.10.9 - June ??, 2017
+3.10.9 - June 14, 2017
 ======================
 
 Logtalk compiler and runtime
@@ -33,13 +33,14 @@ and `number_of_clauses(0)` properties instead of an empty list for multifile and
 dynamic predicates with no local or initial set of clauses.
 
 * IMPROVED: Allow safe cases of static binding for objects compiled with the
-`complements` flag set to `restrict`.
+`complements` flag set to `restrict`. This notably allows use of static binding
+for calls to the library `type::valid/2` and `type::check/2-3` predicates.
 
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Handle all `table/1` directive syntaxes when using YAP or SWI-Prolog
-as the backend compilers.
+* FIXED: Handle all possible `table/1` directive syntaxes when using SWI-Prolog
+or YAP as the backend compilers.
 
 Library
 -------
@@ -52,9 +53,9 @@ Tools
 -----
 
 * ADDED: New `lgtunit::assertion/2` meta-predicate. Mainly used in the code
-generated for tests using the `test/2-3` idioms.
+generated for tests using the `test/2-3` dialects.
 
-* CHANGED: Reporting of the `lgtunit` test idioms `test/2-3` when using the
+* CHANGED: Reporting of the `lgtunit` test dialects `test/2-3` when using the
 `true(Assertion)` or `deterministic(Assertion)` outcomes to print assertion
 error and failure messages for easier debugging of failed tests.  Suggested
 by Ebrahim Azarisooreh.
