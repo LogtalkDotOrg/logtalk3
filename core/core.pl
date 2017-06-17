@@ -21697,9 +21697,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % Logtalk, the pre-compiled entities are loaded prior to this file)
 
 '$lgt_load_built_in_entities'(ScratchDirectory) :-
-	(	'$lgt_expand_library_alias'(startup_scratch_directory, ScratchDirectory) ->
+	(	'$lgt_expand_library_alias'(scratch_directory, ScratchDirectory),
+		atom(ScratchDirectory) ->
 		% user override for the default scratch directory
-		true
+		'$lgt_set_compiler_flag'(scratch_directory, ScratchDirectory)
 	;	% use default scratch directory
 		'$lgt_expand_library_alias'(logtalk_user, LogtalkUserDirectory),
 		atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory)
