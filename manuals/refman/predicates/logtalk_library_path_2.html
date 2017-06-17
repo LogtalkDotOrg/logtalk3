@@ -54,6 +54,9 @@ Relative paths (e.g. <code>'../'</code> or <code>'./'</code>) should only be use
 <p>
 When working with a relocatable application, the actual application installation directory can be retrieved by calling the <a title="Consult reference manual" href="logtalk_load_context_2.html"><code>logtalk_load_context/2</code></a> predicate with the <code>directory</code> key and using the returned value to define the <code>logtalk_library_path/2</code> predicate. On a settings file, simply use an <a title="Consult reference manual" href="../directives/initialization_1.html"><code>initialization/1</code></a> directive to wrap the call to the <code>logtalk_load_context/2</code> predicate and the assert of the <code>logtalk_library_path/2</code> fact.
 </p>
+<p>
+This predicate may also be used to override the default startup scratch directory by defining the library alias <code>startup_scratch_directory</code> in a backend Prolog initialization file (assumed to be loaded prior to Logtalk loading). This allows e.g. Logtalk to be installed in a read-only directory by setting this alias to the operating-system directory for temporary files and by using a settings file to set the <code>scratch_directory</code> flag to the same or similar location. 
+</p>
 
 <h4>Template and modes</h4>
 
@@ -103,7 +106,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: June 17, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_make_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_load_context_2.html">next</a></span><br/>

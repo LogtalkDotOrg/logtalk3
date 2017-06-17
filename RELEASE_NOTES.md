@@ -24,7 +24,13 @@ RELEASE NOTES
 3.11.0 - July ??, 2017
 ======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* NEW: Allow overriding the default startup scratch directory by defining the
+library alias `startup_scratch_directory` in a backend Prolog initialization
+file (assumed to be loaded prior to Logtalk loading). After a discussion with
+Douglas R. Miles on supporting installing Logtalk in read-only directories.
 
 
 3.10.9 - June 14, 2017
