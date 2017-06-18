@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.22,
+		version is 1.23,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2013/08/10,
+		date is 2017/06/18,
 		comment is 'Unit tests for the "tabling" example.'
 	]).
 
@@ -32,9 +32,20 @@
 	cover(paths).
 
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
-	cover(mdt_paths_first).
-	cover(mdt_paths_min).
-	cover(mdt_paths_min_all).
+
+		cover(mdt_paths_first).
+		cover(mdt_paths_min).
+		cover(mdt_paths_min_all).
+
+	:- elif((
+		current_logtalk_flag(prolog_dialect, swi),
+		current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
+		(Major,Minor,Patch) @>= (7,5,9)
+	)).
+
+		cover(mdt_paths_first).
+		cover(mdt_paths_min).
+	
 	:- endif.
 
 	test(tabling_1) :-
@@ -45,19 +56,28 @@
 		fibonacci::fib(30, F),
 		F == 1346269.
 
-	:- if(current_logtalk_flag(prolog_dialect, yap)).
+	:- if((
+			current_logtalk_flag(prolog_dialect, yap)
+		; 	current_logtalk_flag(prolog_dialect, swi),
+			current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
+			(Major,Minor,Patch) @>= (7,5,9)
+	)).
 
-	test(tabling_3) :-
-		setof((Z, N), mdt_paths_first::path(a, Z, N), L),
-		L == [(a, 2), (b, 1)].
+		test(tabling_3) :-
+			setof((Z, N), mdt_paths_first::path(a, Z, N), L),
+			L == [(a, 2), (b, 1)].
 
-	test(tabling_4) :-
-		setof((Z, C), mdt_paths_min::path(a, Z, C), L),
-		L == [(b, 1), (c, 2), (d, 3)].
+		test(tabling_4) :-
+			setof((Z, C), mdt_paths_min::path(a, Z, C), L),
+			L == [(b, 1), (c, 2), (d, 3)].
 
-	test(tabling_5) :-
-		setof((Z, C, N), mdt_paths_min_all::path(a, Z, C, N), L),
-		L == [(b, 2, 1), (b, 2, 2), (c, 1, 1)].
+		:- if(current_logtalk_flag(prolog_dialect, yap)).
+
+			test(tabling_5) :-
+				setof((Z, C, N), mdt_paths_min_all::path(a, Z, C, N), L),
+				L == [(b, 2, 1), (b, 2, 2), (c, 1, 1)].
+
+		:- endif.
 
 	:- endif.
 

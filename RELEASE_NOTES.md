@@ -32,6 +32,12 @@ alias `scratch_directory` in a backend Prolog initialization file (assumed to
 be loaded prior to Logtalk loading). After a discussion with Douglas R. Miles
 on supporting installing Logtalk in read-only directories.
 
+Examples
+--------
+
+* UPDATED: The `tabling` example for the updated tabling support found in
+SWI-Prolog 7.5.9.
+
 
 3.10.9 - June 14, 2017
 ======================

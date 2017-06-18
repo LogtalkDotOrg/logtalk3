@@ -21,5 +21,5 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains an example of using tabled predicates within objects.
-Currently supported compilers include B-Prolog, XSB, and YAP (when compiled 
-with tabling enabled).
+Currently supported compilers include B-Prolog, XSB, SWI-Prolog (when the
+`tabling` library is available), and YAP (when compiled with tabling enabled).

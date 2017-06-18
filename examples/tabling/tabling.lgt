@@ -69,9 +69,16 @@
 :- end_object.
 
 
-:- if(current_logtalk_flag(prolog_dialect, yap)).
+:- if((
+		current_logtalk_flag(prolog_dialect, yap)
+	; 	current_logtalk_flag(prolog_dialect, swi),
+		current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
+		(Major,Minor,Patch) @>= (7,5,9)
+)).
 
-	:- set_prolog_flag(tabling_mode, local).
+	:- if(current_logtalk_flag(prolog_dialect, yap)).
+		:- set_prolog_flag(tabling_mode, local).
+	:- endif.
 
 	:- object(mdt_paths_first).
 
@@ -119,26 +126,30 @@
 	:- end_object.
 
 
-	:- object(mdt_paths_min_all).
+	:- if(current_logtalk_flag(prolog_dialect, yap)).
 
-		:- info([
-			version is 1.0,
-			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
-			date is 2012/10/20,
-			comment is 'Simple tabling example using graph paths.',
-			source is 'SLATE 2012 paper on mode directed tabling.'
-		]).
+		:- object(mdt_paths_min_all).
+    	
+			:- info([
+				version is 1.0,
+				author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
+				date is 2012/10/20,
+				comment is 'Simple tabling example using graph paths.',
+				source is 'SLATE 2012 paper on mode directed tabling.'
+			]).
+    	
+			:- public(path/4).
+			:- table(path(index, index, min, all)).
+    	
+			path(X, Z, C, N) :- path(X, Y, C1, N1), edge(Y, Z, C2), C is C1 + C2, N is N1 + 1.
+			path(X, Z, C, 1) :- edge(X, Z, C).
+    	
+			edge(a, b, 2).
+			edge(a, c, 1).
+			edge(c, b, 1).
+    	
+		:- end_object.
 
-		:- public(path/4).
-		:- table(path(index, index, min, all)).
-
-		path(X, Z, C, N) :- path(X, Y, C1, N1), edge(Y, Z, C2), C is C1 + C2, N is N1 + 1.
-		path(X, Z, C, 1) :- edge(X, Z, C).
-
-		edge(a, b, 2).
-		edge(a, c, 1).
-		edge(c, b, 1).
-
-	:- end_object.
+	:- endif.
 
 :- endif.
