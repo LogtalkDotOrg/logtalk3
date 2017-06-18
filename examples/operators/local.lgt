@@ -21,8 +21,10 @@
 % simple example of defining an operator local to a source file
 
 
-:- op(200, xfx, edge).	% global operator, visible within all
-						% entities defined in this source file
+% declare a global operator, visible within
+% all entities defined in this source file
+:- op(200, xfx, edge).
+
 
 :- object(graph).
 
@@ -60,5 +62,6 @@
 :- end_object.
 
 
-:- op(0, xfx, edge).	% "undefine" the operator, effectively
-						% making it local to this source file
+% "undefine" the operator, effectively
+% making it local to this source file
+:- op(0, xfx, edge).
