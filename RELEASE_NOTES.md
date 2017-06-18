@@ -30,7 +30,13 @@ Logtalk compiler and runtime
 * NEW: Allow overriding the default scratch directory by defining the library
 alias `scratch_directory` in a backend Prolog initialization file (assumed to
 be loaded prior to Logtalk loading). After a discussion with Douglas R. Miles
-on supporting installing Logtalk in read-only directories.
+on supporting installing Logtalk in a read-only directory and running multiple
+Logtalk instances concurrently without conflict.
+
+Documentation
+-------------
+
+* ADDED: `CONTRIBUTING.md` file detailing how best to contribute to Logtalk.
 
 Examples
 --------

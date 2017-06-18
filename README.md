@@ -159,15 +159,7 @@ references in BibTeX format (the Logtalk user and reference manuals and the
 CONTRIBUTIONS
 -------------
 
-Contributions, constructive criticism, patches, bug reports, and suggestions
-are always welcome. Major code and documentation contributions require the
-contributor to sign and submit a contributor license agreement and should
-be made available under the Logtalk license without any additional terms or
-conditions. Contributions using other licensing terms may also be distributed
-with Logtalk with the understanding that the terms of their use depends solely
-on the authors chosen licensing terms and may require a separate, independent,
-agreement between users and authors.
-
+Contributions are most welcome! See the `CONTRIBUTING.md` file for details.
 
 LEGAL
 -----
