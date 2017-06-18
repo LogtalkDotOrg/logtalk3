@@ -31,7 +31,7 @@ and their authors. Looking forward to see your name there.
 How to make a contribution
 --------------------------
 
-Create a ticket in our issue tracker at:
+Bur bug reports and suggestions, create a ticket in our issue tracker at:
 
 	https://github.com/LogtalkDotOrg/logtalk3/issues
 
@@ -44,14 +44,15 @@ In alternative, you can also join our discussion forums at:
 
 	http://forums.logtalk.org/
 
-In the case of code contributions, see the following resource to setup your
-development environment:
-
-	https://github.com/LogtalkDotOrg/logtalk3/wiki/Running-Developer-Versions
-
-Please follow the coding guidelines described at:
+In the case of code contributions, follow the coding guidelines described at:
 
 	https://github.com/LogtalkDotOrg/logtalk3/wiki/Coding-Style-Guidelines
+
+Submit your code contribution preferably by forking Logtalk, working on a topic
+branch, and creating a pull request. If you're not familiar with pull request
+based contributions to open source projects, see e.g.
+
+	https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
 
 When contributing compiler, runtime, or library enhancements, ensure there
 are no regressions by testing your contribution. For details, see:
