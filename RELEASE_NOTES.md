@@ -36,6 +36,13 @@ Logtalk instances concurrently without conflict.
 * CHANGED: The built-in predicate `current_event/5` to always instantiate the
 first argument when called with it unbound.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: SWI-Prolog adapter file optimization for message-sending goals made
+from within modules to account for Logtalk being loaded into a module other
+than `user`.
+
 Documentation
 -------------
 
