@@ -604,9 +604,8 @@ Obj<<Goal :-
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, ':'(Module,PI)), Context)) :-
 	% assuming we're running with a backend compiler supporting modules,
 	% check that the error is the context of the module where Logtalk is loaded
-	'$lgt_user_module_qualification'(xx, QualifiedGoal),
-	ground(QualifiedGoal),
-	QualifiedGoal = ':'(Module,xx),
+	atom(Module),
+	'$lgt_user_module_qualification'(xx, ':'(Module,xx)),
 	'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, PI), Context)).
 
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/6), _)) :-
@@ -17422,8 +17421,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Prefix, Heads).
 
 '$lgt_decompile_predicate_heads'(':'(Module,THead), Entity, Type, Prefix, Head) :-
-	'$lgt_user_module_qualification'(xx, QualifiedGoal),
-	QualifiedGoal = ':'(Module, xx),
+	atom(Module),
+	'$lgt_user_module_qualification'(xx, ':'(Module,xx)),
 	!,
 	'$lgt_decompile_predicate_heads'(THead, Entity, Type, Prefix, Head).
 
@@ -17565,8 +17564,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, Prefix, PIs).
 
 '$lgt_decompile_predicate_indicators'(':'(Module,TFunctor/TArity), Entity, Type, Prefix, Functor/Arity) :-
-	'$lgt_user_module_qualification'(xx, QualifiedGoal),
-	QualifiedGoal = ':'(Module, xx),
+	atom(Module),
+	'$lgt_user_module_qualification'(xx, ':'(Module,xx)),
 	!,
 	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, Type, Prefix, Functor/Arity).
 
