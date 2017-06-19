@@ -3014,7 +3014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc2)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc3)).
 
 
 
@@ -17421,6 +17421,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_decompile_predicate_heads'(THead, Entity, Type, Prefix, Head),
 	'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Prefix, Heads).
 
+'$lgt_decompile_predicate_heads'(':'(Module,THead), Entity, Type, Prefix, Head) :-
+	'$lgt_user_module_qualification'(xx, QualifiedGoal),
+	QualifiedGoal = ':'(Module, xx),
+	!,
+	'$lgt_decompile_predicate_heads'(THead, Entity, Type, Prefix, Head).
+
 '$lgt_decompile_predicate_heads'(THead, Entity, Type, Prefix, Head) :-
 	callable(THead),
 	functor(THead, TFunctor, TArity),
@@ -17557,6 +17563,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_decompile_predicate_indicators'(TPI, Entity, Type, Prefix, PI),
 	'$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, Prefix, PIs).
+
+'$lgt_decompile_predicate_indicators'(':'(Module,TFunctor/TArity), Entity, Type, Prefix, Functor/Arity) :-
+	'$lgt_user_module_qualification'(xx, QualifiedGoal),
+	QualifiedGoal = ':'(Module, xx),
+	!,
+	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, Type, Prefix, Functor/Arity).
 
 '$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, Type, Prefix, Functor/Arity) :-
 	(	var(Prefix) ->

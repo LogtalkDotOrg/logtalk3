@@ -36,6 +36,10 @@ Logtalk instances concurrently without conflict.
 * CHANGED: The built-in predicate `current_event/5` to always instantiate the
 first argument when called with it unbound.
 
+* FIXED: Utility predicates for the decompilation of predicate indicators and
+clause heads, when using a backend Prolog compiler that supports modules, to
+take into account Logtalk being loaded into a module other than `user`.
+
 Prolog adapter and integration files
 ------------------------------------
 
