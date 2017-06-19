@@ -1778,7 +1778,7 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 
 
 
-% current_event(?term, ?term, ?term, ?term, ?object_identifier)
+% current_event(?event, ?term, ?term, ?term, ?object_identifier)
 
 current_event(Event, Obj, Msg, Sender, Monitor) :-
 	'$lgt_check'(var_or_event, Event, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
@@ -1787,8 +1787,8 @@ current_event(Event, Obj, Msg, Sender, Monitor) :-
 	'$lgt_check'(var_or_object_identifier, Sender, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
 	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
 	(	var(Event) ->
-		(	'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)
-		;	'$lgt_after_event_'(Obj, Msg, Sender, Monitor, _)
+		(	'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _), Event = before
+		;	'$lgt_after_event_'(Obj, Msg, Sender, Monitor, _), Event = after
 		)
 	;	Event == before ->
 		'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)
@@ -3014,7 +3014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc1)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc2)).
 
 
 

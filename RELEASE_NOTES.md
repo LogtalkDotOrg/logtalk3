@@ -33,10 +33,20 @@ be loaded prior to Logtalk loading). After a discussion with Douglas R. Miles
 on supporting installing Logtalk in a read-only directory and running multiple
 Logtalk instances concurrently without conflict.
 
+* CHANGED: The built-in predicate `current_event/5` to always instantiate the
+first argument when called with it unbound.
+
 Documentation
 -------------
 
 * ADDED: `CONTRIBUTING.md` file detailing how best to contribute to Logtalk.
+
+Tests
+-----
+
+* ADDED: Some more tests for the `current_event/5` built-in predicate.
+
+* ADDED: Some more tests for the `before/3` and `after/3` built-in methods.
 
 Examples
 --------

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/10/16,
+		date is 2017/06/19,
 		comment is 'Unit tests for the before/3 built-in method.'
 	]).
 
@@ -42,6 +42,11 @@
 		assertz(message(Message)).
 
 	test(before_3_1) :-
+		current_event(Event, Object, _, Sender, Monitor),
+		this(This),
+		Event == before, Object == logtalk, Sender == user, Monitor == This.
+
+	test(before_3_2) :-
 		{logtalk::entity_prefix(logtalk, Prefix)},
 		message(entity_prefix(logtalk, Prefix)).
 
