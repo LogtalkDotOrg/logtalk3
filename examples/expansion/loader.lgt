@@ -18,13 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% some backend Prolog compilers such as SWI-Prolog define a 'public'
-% operator, which can cause syntax errors when loading this example
-:- if(current_op(_, fx, (public))).
-	:- op(0, fx, (public)).
-:- endif.
-
-
 :- initialization((
 	logtalk_load([library(basic_types_loader), library(hook_flows_loader)]),
 	logtalk_load([expansion, hooks, pipeline]),

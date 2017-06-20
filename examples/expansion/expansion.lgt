@@ -55,7 +55,7 @@
 
 
 :- object(exp_public,
-	imports(public::number_conversion)).
+	imports((public)::number_conversion)).
 
 	% the "expanding" protocol implemented by the imported category,
 	% "number_conversion", declares term_expansion/2 and goal_expansion/2
