@@ -7366,12 +7366,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_file_terms'(@list(term), +atom, +compilation_context)
+% '$lgt_compile_include_file_terms'(@list(term), +atom, +compilation_context)
 %
 % compiles a list of file terms (clauses, directives, or grammar rules)
 % found in an included file
 
-'$lgt_compile_file_terms'([Term-sd(Lines,VariableNames)| Terms], File, Ctx) :-
+'$lgt_compile_include_file_terms'([Term-sd(Lines,VariableNames)| Terms], File, Ctx) :-
 	'$lgt_check'(nonvar, Term, term(Term)),
 	% only the compilation context mode and position should be shared between different terms
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, _),
@@ -7379,9 +7379,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
 	assertz('$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines)),
 	'$lgt_compile_file_term'(Term, NewCtx),
-	'$lgt_compile_file_terms'(Terms, File, Ctx).
+	'$lgt_compile_include_file_terms'(Terms, File, Ctx).
 
-'$lgt_compile_file_terms'([], _, _).
+'$lgt_compile_include_file_terms'([], _, _).
 
 
 
@@ -7918,7 +7918,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
 	catch(
-		'$lgt_compile_file_terms'(Terms, Path, Ctx),
+		'$lgt_compile_include_file_terms'(Terms, Path, Ctx),
 		Error,
 		(retract('$lgt_file_loading_stack_'(Path, Directory)), throw(Error))
 	),
@@ -8079,7 +8079,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		(	Mode == runtime ->
 			'$lgt_compile_runtime_terms'(Terms, Path)
-		;	'$lgt_compile_file_terms'(Terms, Path, Ctx)
+		;	'$lgt_compile_include_file_terms'(Terms, Path, Ctx)
 		),
 		Error,
 		(retract('$lgt_file_loading_stack_'(Path, Directory)), throw(Error))
