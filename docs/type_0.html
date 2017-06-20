@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.5</code>
+            <code>1.6</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/3/19</code>
+            <code>2017/6/20</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -156,7 +156,7 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Prolog module related types (when the backend compiler supports modules)</dt>
-          <dd class="text">{module, module_identifier}</dd>
+          <dd class="text">{module, module_identifier, qualified_callable}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Base types from Prolog</dt>
@@ -225,6 +225,10 @@
         <dl class="remarks">
           <dt class="comment">types(Types) notes</dt>
           <dd class="text">Allows checking if a term is a valid value for one of the types in a list of types.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">qualified_callable notes</dt>
+          <dd class="text">Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Caveats</dt>

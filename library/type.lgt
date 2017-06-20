@@ -21,13 +21,13 @@
 :- object(type).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2017/03/19,
+		date is 2017/06/20,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
-			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier}',
+			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
 			'Atom derived types' - '{boolean, character}',
 			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
@@ -45,6 +45,7 @@
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'var_or(Type) notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
 			'types(Types) notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
+			'qualified_callable notes' - 'Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
 			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.',
 			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.'
@@ -129,6 +130,10 @@
 	type(compound).
 	type(callable).
 	type(ground).
+	% other type predicates
+	:- if(current_logtalk_flag(modules, supported)).
+		type(qualified_callable).
+	:- endif.
 	% number derived types
 	type(positive_integer).
 	type(negative_integer).
@@ -400,6 +405,23 @@
 			true
 		;	throw(instantiation_error)
 		).
+
+	% other type predicates
+
+	:- if(current_logtalk_flag(modules, supported)).
+
+	check(qualified_callable, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term = ':'(Module, Goal) ->
+			check(module_identifier, Module),
+			check(qualified_callable, Goal)
+		;	callable(Term) ->
+			true
+		;	throw(type_error(callable, Term))
+		).
+
+	:- endif.
 
 	% atom derived types
 

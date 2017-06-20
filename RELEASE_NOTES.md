@@ -52,6 +52,13 @@ Documentation
 
 * ADDED: `CONTRIBUTING.md` file detailing how best to contribute to Logtalk.
 
+Library
+-------
+
+* ADDED: Type `qualified_callable` to the `type` library object for checking
+possibly module-qualified callable term. Available when using a backend Prolog
+system supporting modules.
+
 Tests
 -----
 
