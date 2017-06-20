@@ -58,33 +58,33 @@ send_to_object_test_object(2).
 
 	% tests for runtime bound messages
 
-	throws(send_to_object_2_1, error(instantiation_error,logtalk(send_to_object_test_object(_)::_,user))) :-
+	throws(send_to_object_2_01, error(instantiation_error,logtalk(send_to_object_test_object(_)::_,user))) :-
 		send_to_object_test_object(_)::rt(_).
 
-	throws(send_to_object_2_2, error(type_error(callable,1),logtalk(send_to_object_test_object(_)::1,user))) :-
+	throws(send_to_object_2_02, error(type_error(callable,1),logtalk(send_to_object_test_object(_)::1,user))) :-
 		send_to_object_test_object(_)::rt(1).
 
-	throws(send_to_object_2_3, error(permission_error(access,private_predicate,s/4),logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
+	throws(send_to_object_2_03, error(permission_error(access,private_predicate,s/4),logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
 		send_to_object_test_object(_)::rt(s(_,_,_,_)).
 
-	throws(send_to_object_2_4, error(existence_error(predicate_declaration,t/1),logtalk(send_to_object_test_object(_)::t(_),user))) :-
+	throws(send_to_object_2_04, error(existence_error(predicate_declaration,t/1),logtalk(send_to_object_test_object(_)::t(_),user))) :-
 		send_to_object_test_object(_)::rt(t(_)).
 
-	throws(send_to_object_2_5, error(existence_error(predicate_declaration,atom/1),logtalk(send_to_object_test_object(_)::atom(a),user))) :-
+	throws(send_to_object_2_05, error(existence_error(predicate_declaration,atom/1),logtalk(send_to_object_test_object(_)::atom(a),user))) :-
 		send_to_object_test_object(_)::rt(atom(a)).
 
-	succeeds(send_to_object_2_6) :-
+	succeeds(send_to_object_2_06) :-
 		send_to_object_test_object(1)::rt(p(X)),
 		X == 1.
 
-	succeeds(send_to_object_2_7) :-
+	succeeds(send_to_object_2_07) :-
 		{send_to_object_test_object(_)}::rt(p(X)),
 		X == 2.
 
-	succeeds(send_to_object_2_8) :-
+	succeeds(send_to_object_2_08) :-
 		send_to_object_test_object(_)::rt({atom(a)}).
 
-	succeeds(send_to_object_2_9) :-
+	succeeds(send_to_object_2_09) :-
 		send_to_object_test_object(_)::rt(({atom(a)}, {number(1)})).
 
 	fails(send_to_object_2_10) :-

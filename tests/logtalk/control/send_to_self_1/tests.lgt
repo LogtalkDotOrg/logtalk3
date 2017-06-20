@@ -98,33 +98,33 @@
 
 	% tests for runtime bound messages
 
-	throws(send_to_self_1_1, error(instantiation_error,logtalk(::_,send_to_self_test_object_1))) :-
+	throws(send_to_self_1_01, error(instantiation_error,logtalk(::_,send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::rt(_).
 
-	throws(send_to_self_1_2, error(type_error(callable,1),logtalk(::1,send_to_self_test_object_1))) :-
+	throws(send_to_self_1_02, error(type_error(callable,1),logtalk(::1,send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::rt(1).
 
-	throws(send_to_self_1_3, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_03, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::rt(s(_)).
 
-	throws(send_to_self_1_4, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_04, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::rt(t(_)).
 
-	throws(send_to_self_1_5, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_05, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::rt(atom(a)).
 
-	succeeds(send_to_self_1_6) :-
+	succeeds(send_to_self_1_06) :-
 		send_to_self_test_object_2::rt(p(X)),
 		X == 2.
 
-	succeeds(send_to_self_1_7) :-
+	succeeds(send_to_self_1_07) :-
 		send_to_self_test_object_2::rt(r(X)),
 		X == 3.
 
-	succeeds(send_to_self_1_8) :-
+	succeeds(send_to_self_1_08) :-
 		send_to_self_test_object_2::rt({atom(a)}).
 
-	succeeds(send_to_self_1_9) :-
+	succeeds(send_to_self_1_09) :-
 		send_to_self_test_object_2::rt(({atom(a)}, {number(1)})).
 
 	fails(send_to_self_1_10) :-
