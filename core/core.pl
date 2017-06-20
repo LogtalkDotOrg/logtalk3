@@ -7366,22 +7366,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_file_terms'(@list(term), +compilation_context)
-%
-% compiles a list of file terms (clauses, directives, or grammar rules)
-
-'$lgt_compile_file_terms'([Term| Terms], Ctx) :-
-	'$lgt_check'(nonvar, Term, term(Term)),
-	% only the compilation context mode and position should be shared between different terms
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	'$lgt_compile_file_term'(Term, NewCtx),
-	'$lgt_compile_file_terms'(Terms, Ctx).
-
-'$lgt_compile_file_terms'([], _).
-
-
-
 % '$lgt_compile_file_terms'(@list(term), +atom, +compilation_context)
 %
 % compiles a list of file terms (clauses, directives, or grammar rules)
