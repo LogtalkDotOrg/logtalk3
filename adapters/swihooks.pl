@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 11, 2017
+%  Last updated on June 20, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -745,6 +745,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate threaded_call(*,*).
 :- meta_predicate threaded_call(*).
 :- meta_predicate threaded_once(*).
+:- meta_predicate threaded(*).
 
 :- meta_predicate '$lgt_threaded_goal'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_call'(*,*,*,*).

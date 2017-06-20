@@ -47,6 +47,9 @@ Prolog adapter and integration files
 from within modules to account for Logtalk being loaded into a module other
 than `user`.
 
+* FIXED: Missing dummy meta-predicate directive for the `threaded/1` built-in
+predicate in the SWI-Prolog hooks file.
+
 Documentation
 -------------
 
