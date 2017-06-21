@@ -1864,7 +1864,7 @@ threaded(Goals) :-
 	throw(error(resource_error(threads), logtalk(threaded(Goals), user))).
 
 threaded(Goals) :-
-	'$lgt_check'(callable, Goals, logtalk(threaded(Goals), _)),
+	'$lgt_check'(qualified_callable, Goals, logtalk(threaded(Goals), _)),
 	'$lgt_compile_threaded_call'(Goals, MTGoals),
 	catch(MTGoals, Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1876,7 +1876,7 @@ threaded_call(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_call(Goal, Tag), user))).
 
 threaded_call(Goal, Tag) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_call(Goal, Tag), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal, Tag), _)),
 	'$lgt_check'(var, Tag, logtalk(threaded_call(Goal, Tag), _)),
 	catch('$lgt_threaded_call_tagged'(Goal, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1888,7 +1888,7 @@ threaded_call(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_call(Goal), user))).
 
 threaded_call(Goal) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_call(Goal), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal), _)),
 	catch('$lgt_threaded_call'(Goal, Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1899,7 +1899,7 @@ threaded_once(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_once(Goal, Tag), user))).
 
 threaded_once(Goal, Tag) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_once(Goal, Tag), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal, Tag), _)),
 	'$lgt_check'(var, Tag, logtalk(threaded_once(Goal, Tag), _)),
 	catch('$lgt_threaded_once_tagged'(Goal, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1911,7 +1911,7 @@ threaded_once(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_once(Goal), user))).
 
 threaded_once(Goal) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_once(Goal), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal), _)),
 	catch('$lgt_threaded_once'(Goal, Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1967,7 +1967,7 @@ threaded_peek(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_peek(Goal), user))).
 
 threaded_peek(Goal) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_peek(Goal), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal), _)),
 	catch('$lgt_threaded_peek'(Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -3013,7 +3013,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc3)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc4)).
 
 
 
@@ -19663,7 +19663,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % this prevents programming errors going unnoticed
 
 '$lgt_threaded_ignore'(Goal, TGoal, This) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_ignore(Goal), This)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_ignore(Goal), This)),
 	thread_create(catch(TGoal, _, true), _, [detached(true)]).
 
 
@@ -19900,7 +19900,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)))
 	;	true
 	),
-	'$lgt_check'(callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
 	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
 	message_queue_create(TermQueue),
 	thread_create('$lgt_mt_engine_goal'(ThisQueue, TermQueue, AnswerTemplate, TGoal, Engine), Id, []),
@@ -21252,6 +21252,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check'(var_or_callable, Term, Context) :-
 	(	var(Term) ->
 		true
+	;	callable(Term) ->
+		true
+	;	throw(error(type_error(callable, Term), Context))
+	).
+
+'$lgt_check'(qualified_callable, Term, Context) :-
+	(	'$lgt_prolog_feature'(modules, supported) ->
+		'$lgt_check'(qualified_callable_, Term, Context)
+	;	'$lgt_check'(callable, Term, Context)
+	).
+
+'$lgt_check'(qualified_callable_, Term, Context) :-
+	(	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	Term = ':'(Module, Goal) ->
+		'$lgt_check'(module_identifier, Module, Context),
+		'$lgt_check'(qualified_callable_, Goal, Context)
 	;	callable(Term) ->
 		true
 	;	throw(error(type_error(callable, Term), Context))

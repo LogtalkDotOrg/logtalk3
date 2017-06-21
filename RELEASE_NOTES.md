@@ -36,6 +36,9 @@ Logtalk instances concurrently without conflict.
 * CHANGED: The built-in predicate `current_event/5` to always instantiate the
 first argument when called with it unbound.
 
+* IMPROVED: Error-checking of the multi-threading and threaded engine built-in
+predicates when the goal arguments are module qualified.
+
 * FIXED: Utility predicates for the decompilation of predicate indicators and
 clause heads, when using a backend Prolog compiler that supports modules, to
 take into account Logtalk being loaded into a module other than `user`.
@@ -59,7 +62,7 @@ Library
 -------
 
 * ADDED: Type `qualified_callable` to the `type` library object for checking
-possibly module-qualified callable term. Available when using a backend Prolog
+possibly module-qualified callable terms. Available when using a backend Prolog
 system supporting modules.
 
 Tests
