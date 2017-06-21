@@ -1932,7 +1932,7 @@ threaded_exit(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_exit(Goal, Tag), user))).
 
 threaded_exit(Goal, Tag) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_exit(Goal, Tag), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal, Tag), _)),
 	'$lgt_check'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), _)),
 	catch('$lgt_threaded_exit_tagged'(Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1944,7 +1944,7 @@ threaded_exit(Goal) :-
 	throw(error(resource_error(threads), logtalk(threaded_exit(Goal), user))).
 
 threaded_exit(Goal) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_exit(Goal), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal), _)),
 	catch('$lgt_threaded_exit'(Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -1955,7 +1955,7 @@ threaded_peek(Goal, Tag) :-
 	throw(error(resource_error(threads), logtalk(threaded_peek(Goal, Tag), user))).
 
 threaded_peek(Goal, Tag) :-
-	'$lgt_check'(callable, Goal, logtalk(threaded_peek(Goal, Tag), _)),
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal, Tag), _)),
 	'$lgt_check'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), _)),
 	catch('$lgt_threaded_peek_tagged'(Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
