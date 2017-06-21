@@ -82,8 +82,10 @@ Examples
 * UPDATED: The `tabling` example for the updated tabling support found in
 SWI-Prolog 7.5.9.
 
-* UPDATED: The `expansion` example to avoid having to check for and undefined
+* UPDATED: The `expansion` example to avoid having to check for and undefine
 a backend Prolog system `public` operator to avoid compilation syntax errors.
+
+* UPDATED: Simplified the `operators` example to not require the `os` library.
 
 
 3.10.9 - June 14, 2017
