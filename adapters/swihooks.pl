@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 20, 2017
+%  Last updated on June 21, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -740,13 +740,6 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_assert_pred_def'(*,*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_send_to_self_nv'(*,*,*).
 
-:- meta_predicate threaded_ignore(*).
-:- meta_predicate threaded_once(*,*).
-:- meta_predicate threaded_call(*,*).
-:- meta_predicate threaded_call(*).
-:- meta_predicate threaded_once(*).
-:- meta_predicate threaded(*).
-
 :- meta_predicate '$lgt_threaded_goal'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_call'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_once'(*,*,*,*).
@@ -774,7 +767,6 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_metacall_sender'(*,*,*,*).
 :- meta_predicate '$lgt_metacall_local'(*,*).
 
-:- meta_predicate threaded_engine_create(*,*,*).
 :- meta_predicate '$lgt_mt_engine_goal'(*,*,*,*,*).
 :- meta_predicate '$lgt_threaded_engine_create_protected'(*,*,*,*,*).
 :- meta_predicate '$lgt_threaded_engine_create'(*,*,*,*,*).

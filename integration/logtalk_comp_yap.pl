@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for YAP
-%  Last updated on September 2, 2014
+%  Last updated on June 21, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -23,5 +23,19 @@
 
 :- no_source.
 :- set_prolog_flag(generate_debug_info, false).
+
+% multi-threading meta-predicates
+:- meta_predicate threaded_call(0, *).
+:- meta_predicate threaded_call(0).
+:- meta_predicate threaded_exit(0, *).
+:- meta_predicate threaded_exit(0).
+:- meta_predicate threaded_peek(0, *).
+:- meta_predicate threaded_peek(0).
+:- meta_predicate threaded(0).
+:- meta_predicate threaded_once(0, *).
+:- meta_predicate threaded_once(0).
+:- meta_predicate threaded_ignore(0).
+% threaded engines meta-predicates
+:- meta_predicate threaded_engine_create(*, 0, *).
 
 :- include('../core/core.pl').

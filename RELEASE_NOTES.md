@@ -46,6 +46,10 @@ take into account Logtalk being loaded into a module other than `user`.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Meta-predicate directives for the multi-threading and threaded engine
+built-in predicates to support implicit module qualified goal arguments when
+using SWI-Prolog or YAP as the backend Prolog system.
+
 * FIXED: SWI-Prolog adapter file optimization for message-sending goals made
 from within modules to account for Logtalk being loaded into a module other
 than `user`.

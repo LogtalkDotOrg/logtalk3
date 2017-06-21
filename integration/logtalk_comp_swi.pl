@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on October 8, 2015
+%  Last updated on June 21, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -52,6 +52,20 @@
 	'$lgt_metacall'/2, '$lgt_metacall'/3, '$lgt_quantified_metacall'/3,
 	'$lgt_metacall_local'/2, '$lgt_metacall_sender'/4
 )).
+
+% multi-threading meta-predicates
+:- meta_predicate threaded_call(0, *).
+:- meta_predicate threaded_call(0).
+:- meta_predicate threaded_exit(0, *).
+:- meta_predicate threaded_exit(0).
+:- meta_predicate threaded_peek(0, *).
+:- meta_predicate threaded_peek(0).
+:- meta_predicate threaded(0).
+:- meta_predicate threaded_once(0, *).
+:- meta_predicate threaded_once(0).
+:- meta_predicate threaded_ignore(0).
+% threaded engines meta-predicates
+:- meta_predicate threaded_engine_create(*, 0, *).
 
 % the following index/1 directives may or may not improve performance
 % depending on your application; you can comment them out if necessary;
