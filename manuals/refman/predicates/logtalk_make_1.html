@@ -52,7 +52,7 @@ Allows reloading all Logtalk source files that have been modified since last loa
 There are also three variants of the <code>all</code> target: <code>debug</code>, <code>normal</code>, and <code>optimal</code>. These targets change the compilation mode (by changing the default value of the <code>debug</code> and <code>optimize</code> flags) and reload all files affected.
 </p>
 <p>
-When using the <code>all</code> target, only source files loaded using the <code>logtalk_load/1-2</code> predicates are reloaded. Non-modified files will also be reloaded when there is a change to the compilation mode (i.e. when the files were loaded without explicit <code>debug/1</code> or <code>optimize/1</code> flags and the default values of these flags changed after loading; no check is made, however, for other implicit compiler flags that may have changed since loading).
+When using the <code>all</code> target, only source files loaded using the <code>logtalk_load/1-2</code> predicates are reloaded. Non-modified files will also be reloaded when there is a change to the compilation mode (i.e. when the files were loaded without explicit <code>debug/1</code> or <code>optimize/1</code> flags and the default values of these flags changed after loading; no check is made, however, for other implicit compiler flags that may have changed since loading). When an included file is modified, this target reloads its main file (i.e. the file that contains the <code>include/1</code> directive).
 </p>
 <p>
 When using the <code>check</code> or <code>circular</code> targets, be sure to compile your source files with the <code>source_date</code> flag turned on for complete and detailed reports.
@@ -93,7 +93,7 @@ The target actions can be extended by defining clauses for the multifile and dyn
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 5, 2017</span>
+		<span>Last updated on: June 25, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_make_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_library_path_2.html">next</a></span><br/>
