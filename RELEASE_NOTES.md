@@ -33,6 +33,10 @@ be loaded prior to Logtalk loading). After a discussion with Douglas R. Miles
 on supporting installing Logtalk in a read-only directory and running multiple
 Logtalk instances concurrently without conflict.
 
+* NEW: The `logtalk_make/0-1` built-in predicates are now aware of included
+files. A change to an included file since loaded now triggers reloading of
+the main file.
+
 * CHANGED: The built-in predicate `current_event/5` to always instantiate the
 first argument when called with it unbound.
 

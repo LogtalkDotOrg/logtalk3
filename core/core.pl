@@ -139,6 +139,9 @@
 % '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)
 :- multifile('$lgt_loaded_file_'/7).
 :- dynamic('$lgt_loaded_file_'/7).
+% '$lgt_included_file_'(File, MainBasename, MainDirectory, TimeStamp)
+:- multifile('$lgt_included_file_'/4).
+:- dynamic('$lgt_included_file_'/4).
 % '$lgt_failed_file_'(SourceFile)
 :- dynamic('$lgt_failed_file_'/1).
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
@@ -2504,6 +2507,18 @@ logtalk_make(Target) :-
 	LoadingTimeStamp @< CurrentTimeStamp,
 	logtalk_load(Path, Flags),
 	fail.
+% recompilation of included source files since last loaded
+'$lgt_logtalk_make'(all) :-
+	'$lgt_included_file_'(Path, MainBasename, MainDirectory, LoadingTimeStamp),
+	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
+	LoadingTimeStamp @< CurrentTimeStamp,
+	% force reloding by changing the main file time stamp to 0.0, a value that in the standard term
+	% comparison order used to compare time stamps comes before any integer or float actual time stamp
+	retract('$lgt_loaded_file_'(MainBasename, MainDirectory, Mode, Flags, TextProperties, ObjectFile, _)),
+	assertz('$lgt_loaded_file_'(MainBasename, MainDirectory, Mode, Flags, TextProperties, ObjectFile, 0.0)),
+	atom_concat(MainDirectory, MainBasename, MainPath),
+	logtalk_load(MainPath, Flags),
+	fail.
 % recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
 '$lgt_logtalk_make'(all) :-
 	% find all files impacted by a change to compilation mode (this excludes all files
@@ -3013,7 +3028,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc4)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc5)).
 
 
 
@@ -7909,14 +7924,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile, Imports)), sd(Term,VariableNames,File,Lines), Lines)).
 
+% handling of this Prolog directive is necessary to
+% support the Logtalk term-expansion mechanism
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
-	% handling of this Prolog directive is necessary to
-	% support the Logtalk term-expansion mechanism
+	% read the file terms for compilation
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
+	% save the dependency in the main file to support make
+	'$lgt_pp_file_paths_flags_'(MainBasename, MainDirectory, _, _, _),
+	'$lgt_file_modification_time'(Path, TimeStamp),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, MainBasename, MainDirectory, TimeStamp))),
+	% save loading stack to deal with failed compilation
 	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
+	% compile the included file terms
 	catch(
 		'$lgt_compile_include_file_terms'(Terms, Path, Ctx),
 		Error,
@@ -8072,10 +8094,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(instantiation_error).
 
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
+	% read the file terms for compilation
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
+	% save the dependency in the main file to support make
+	'$lgt_pp_file_paths_flags_'(MainBasename, MainDirectory, _, _, _),
+	'$lgt_file_modification_time'(Path, TimeStamp),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, MainBasename, MainDirectory, TimeStamp))),
+	% save loading stack to deal with failed compilation
 	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
+	% compile the included file terms
 	catch(
 		(	Mode == runtime ->
 			'$lgt_compile_runtime_terms'(Terms, Path)
@@ -16928,7 +16957,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_category_'/3),
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_object_'/3),
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_protocol_'/3),
-	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_loaded_file_'/7).
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_loaded_file_'/7),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_included_file_'/4).
 
 
 '$lgt_write_runtime_clauses'(Stream, Path, Functor/Arity) :-
