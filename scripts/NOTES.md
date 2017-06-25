@@ -120,6 +120,11 @@ using the `apropos logtalk` command.
 - `pack`  
 	support files for creating a `logtalk` SWI-Prolog pack
 
+- `pack-experimental`  
+	support files for an experimental version of the SWI-Prolog pack
+	that loads Logtalk into a `logtalk` module instead of loading it
+	into `user`
+
 - `windows`  
 	directory containing files used when building Windows GUI installers
 

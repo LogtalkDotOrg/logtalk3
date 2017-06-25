@@ -88,6 +88,12 @@ a backend Prolog system `public` operator to avoid compilation syntax errors.
 
 * UPDATED: Simplified the `operators` example to not require the `os` library.
 
+Installers and installation scripts
+-----------------------------------
+
+* ADDED: An *experimental* version of the SWI-Prolog pack that loads Logtalk
+into a `logtalk` module instead of loading it into `user`.
+
 
 3.10.9 - June 14, 2017
 ======================
