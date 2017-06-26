@@ -414,20 +414,12 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(Message, debug, Component, _) :-
-		(	logtalk::message_prefix_stream(debug, Component, Prefix, Stream) ->
-			true
-		;	Prefix = '>>> ',
-			Stream = user_error
-		),
+	logtalk::message_hook(Message, debug, _, _) :-
+		logtalk::message_prefix_stream(debug, core, Prefix, Stream),
 		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
 
-	logtalk::message_hook(Message, debug(Topic), Component, _) :-
-		(	logtalk::message_prefix_stream(debug(Topic), Component, Prefix, Stream) ->
-			true
-		;	Prefix = '>>> ',
-			Stream = user_error
-		),
+	logtalk::message_hook(Message, debug(Topic), _, _) :-
+		logtalk::message_prefix_stream(debug(Topic), core, Prefix, Stream),
 		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
 
 :- end_category.
