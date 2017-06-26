@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.23,
+		version is 1.24,
 		author is 'Paulo Moura',
-		date is 2017/05/08,
+		date is 2017/06/26,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -46,6 +46,8 @@
 	message_prefix_stream(warning(_),     '*     ', user_error).
 	message_prefix_stream(error,          '!     ', user_error).
 	message_prefix_stream(error(_),       '!     ', user_error).
+	message_prefix_stream(debug,          '>>> ',   user_error).
+	message_prefix_stream(debug(_),       '>>> ',   user_error).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
