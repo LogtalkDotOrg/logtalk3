@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2017/04/23,
+		date is 2017/06/26,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
 	]).
 
@@ -272,6 +272,8 @@
 			Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl]
 		;	phrase(message_tokens(Message, Component), Tokens) ->
 			true
+		;	Kind == debug ->
+			Tokens = [term(Message, []), nl]
 		;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Message], nl]
 		).
 
@@ -296,6 +298,12 @@
 		!.
 	default_print_message(warning(_), _, _) :-
 		current_logtalk_flag(report, off),
+		!.
+	default_print_message(debug, _, _) :-
+		\+ current_logtalk_flag(debug, on),
+		!.
+	default_print_message(debug(_), _, _) :-
+		\+ current_logtalk_flag(debug, on),
 		!.
 	default_print_message(Kind, Component, Tokens) :-
 		(	message_prefix_stream(Kind, Component, Prefix, Stream) ->
@@ -332,6 +340,8 @@
 	default_message_prefix_stream(warning(_),     '*     ', user_error).
 	default_message_prefix_stream(error,          '!     ', user_error).
 	default_message_prefix_stream(error(_),       '!     ', user_error).
+	default_message_prefix_stream(debug,          '>>> ',   user_error).
+	default_message_prefix_stream(debug(_),       '>>> ',   user_error).
 
 	print_message_tokens(Stream, Prefix, Tokens) :-
 		(	Tokens = [at_same_line| _] ->
