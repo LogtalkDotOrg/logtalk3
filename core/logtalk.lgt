@@ -272,8 +272,6 @@
 			Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl]
 		;	phrase(message_tokens(Message, Component), Tokens) ->
 			true
-		;	Kind == debug ->
-			Tokens = [term(Message, []), nl]
 		;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Message], nl]
 		).
 

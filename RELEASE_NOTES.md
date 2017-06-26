@@ -39,9 +39,6 @@ the main file.
 
 * NEW: Support for printing messages of kind `debug` and `debug(_)`. These
 messages are only printed, by default, when the `debug` flag is turned on.
-Moreover, in the absence of a `message_tokens//2` grammar rule to translate
-the message term, the message is written as passed to the `write/2` standard
-predicate followed by a newline and using `user_error` as the output stream.
 
 * CHANGED: The built-in predicate `current_event/5` to always instantiate the
 first argument when called with it unbound.
