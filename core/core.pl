@@ -3028,7 +3028,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc6)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc7)).
 
 
 
@@ -8097,10 +8097,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% read the file terms for compilation
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Directory, Path, Terms),
-	% save the dependency in the main file to support make
-	'$lgt_pp_file_paths_flags_'(MainBasename, MainDirectory, _, _, _),
-	'$lgt_file_modification_time'(Path, TimeStamp),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, MainBasename, MainDirectory, TimeStamp))),
+	% save the dependency in the main file to support make if compiling a source file
+	(	Mode == runtime ->
+		true
+	;	'$lgt_pp_file_paths_flags_'(MainBasename, MainDirectory, _, _, _),
+		'$lgt_file_modification_time'(Path, TimeStamp),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, MainBasename, MainDirectory, TimeStamp)))
+	),
 	% save loading stack to deal with failed compilation
 	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
