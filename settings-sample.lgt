@@ -414,6 +414,12 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
+	% in this example, we use the "core" component prefix and stream for debug messages;
+	% an alternative transformation would be e.g. to print the terms quoted by adding a
+	% quote(true) option to term/2; we could also use copy_term/2 and numbervars/3 on the
+	% message term and add the option numbervars(true) to term/2 for pretty-print of
+	% messages containing variables
+
 	logtalk::message_hook(Message, debug, _, _) :-
 		logtalk::message_prefix_stream(debug, core, Prefix, Stream),
 		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
