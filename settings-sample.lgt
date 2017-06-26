@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on April 28, 2017
+%  Last updated on June 26, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -399,6 +399,36 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	logtalk::message_hook(_Message, silent(Key), core, Tokens) :-
 		logtalk::message_prefix_stream(comment(Key), core, Prefix, Stream),
 		logtalk::print_message_tokens(Stream, Prefix, Tokens).
+
+:- end_category.
+*/
+
+
+%  To convert all debug and debug(Topic) messages to the equivalent of a
+%  write(Message), nl goal without the need to specify message_tokens//2
+%  rules for converting all messages:
+
+/*
+:- category(my_lazy_debug_message_processing).
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(Message, debug, Component, _) :-
+		(	logtalk::message_prefix_stream(debug, Component, Prefix, Stream) ->
+			true
+		;	Prefix = '>>> ',
+			Stream = user_error
+		),
+		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
+
+	logtalk::message_hook(Message, debug(Topic), Component, _) :-
+		(	logtalk::message_prefix_stream(debug(Topic), Component, Prefix, Stream) ->
+			true
+		;	Prefix = '>>> ',
+			Stream = user_error
+		),
+		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
 
 :- end_category.
 */
