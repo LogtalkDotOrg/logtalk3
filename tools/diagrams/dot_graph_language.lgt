@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.9,
+		version is 2.10,
 		author is 'Paulo Moura',
-		date is 2017/01/06,
+		date is 2017/06/27,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -255,6 +255,7 @@
 	% file relations
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).
+	edge_arrow(includes_file, normal).
 	% library relations
 	edge_arrow(depends_on_library, normal).
 	edge_arrow(loads_library, normal).

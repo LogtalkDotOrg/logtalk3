@@ -84,6 +84,12 @@ Library
 possibly module-qualified callable terms. Available when using a backend Prolog
 system supporting modules.
 
+Tools
+-----
+
+* UPDATED: The `diagrams` tool to also display included files in file loading
+diagrams.
+
 Tests
 -----
 

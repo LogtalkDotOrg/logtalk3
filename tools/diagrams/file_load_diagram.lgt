@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2017/06/27,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -33,8 +33,8 @@
 		member/2
 	]).
 
-	% first, output the file node
-	output_file(Path, Basename, _Directory, Options) :-
+	% output the file node
+	output_file(Path, Basename, _, Options) :-
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
@@ -44,7 +44,21 @@
 		),
 		^^remember_included_file(Path),
 		fail.
-	% second, output edges for all files loaded by this file
+	% output nodes for all included files
+	output_file(Path, _, _, Options) :-
+		logtalk::loaded_file_property(Path, includes(IncludePath)),
+		os::decompose_file_name(IncludePath, _, Name0, Extension),
+		atom_concat(Name0, Extension, Basename),
+		^^filter_file_extension(Basename, Options, Name),
+		^^add_link_options(IncludePath, Options, LinkingOptions),
+		^^omit_path_prefix(IncludePath, Options, Relative),
+		(	member(directory_paths(true), Options) ->
+			^^output_node(Relative, Name, file, [Relative], file, LinkingOptions)
+		;	^^output_node(Relative, Name, file, [], file, LinkingOptions)
+		),
+		^^remember_included_file(IncludePath),
+		fail.
+	% output edges for all files loaded by this file
 	output_file(Path, _, _, Options) :-
 		^^omit_path_prefix(Path, Options, Relative),
 		logtalk::loaded_file_property(OtherPath, parent(Path)),
@@ -52,6 +66,15 @@
 			^^omit_path_prefix(OtherPath, Options, OtherRelative),
 			^^save_edge(Relative, OtherRelative, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
+	% output edges for all files included by this file
+	output_file(Path, _, _, Options) :-
+		^^omit_path_prefix(Path, Options, Relative),
+		logtalk::loaded_file_property(Path, includes(IncludePath)),
+			^^remember_referenced_logtalk_file(IncludePath),
+			^^omit_path_prefix(IncludePath, Options, IncludeRelative),
+			^^save_edge(Relative, IncludeRelative, [includes], includes_file, [tooltip(includes)| Options]),
+		fail.
+	% output edges for loaded Prolog module files
 	output_file(Path, _, _, Options) :-
 		^^omit_path_prefix(Path, Options, Relative),
 		modules_diagram_support::loaded_file_property(OtherPath, parent(Path)),
