@@ -63,7 +63,8 @@ relations and entity predicate call cross-reference relations
 
 The following file diagrams are supported:
 
-- file loading dependency diagrams showing which files load other files
+- file loading dependency diagrams showing which files load or include
+other files
 - file dependency diagrams showing which files contain entities with
 references to entities defined in other files
 

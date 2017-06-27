@@ -162,7 +162,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/14,
-		comment is 'Predicates for generating file contents dependency diagrams in DOT format.'
+		comment is 'Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.'
 	]).
 
 :- end_object.

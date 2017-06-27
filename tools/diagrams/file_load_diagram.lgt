@@ -25,7 +25,7 @@
 		version is 2.6,
 		author is 'Paulo Moura',
 		date is 2017/06/27,
-		comment is 'Predicates for generating file loading dependency diagrams.',
+		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format']
 	]).
 
@@ -139,7 +139,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/08,
-		comment is 'Predicates for generating file loading dependency diagrams in DOT format.'
+		comment is 'Predicates for generating file loading dependency diagrams in DOT format. A dependency exists when a file loads or includes another file.'
 	]).
 
 :- end_object.
