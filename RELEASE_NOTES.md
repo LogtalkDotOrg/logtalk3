@@ -40,6 +40,10 @@ the main file.
 * NEW: Support for printing messages of kind `debug` and `debug(_)`. These
 messages are only printed, by default, when the `debug` flag is turned on.
 
+* ADDED: Property `includes(File)` to the `logtalk::loaded_file_property/2`
+predicate to allow enumerating, by backtracking, all files included by a
+loaded file (using `include/1` directives).
+
 * CHANGED: The built-in predicate `current_event/5` to always instantiate the
 first argument when called with it unbound.
 
@@ -65,6 +69,8 @@ Documentation
 -------------
 
 * ADDED: `CONTRIBUTING.md` file detailing how best to contribute to Logtalk.
+
+* ADDED: User Manual section on debugging messages.
 
 * UPDATED: The `settings-sample.lgt` with a code sample on how to convert all
 `debug` and `debug(_)` messages into the equivalent of a `write(Message), nl`
