@@ -386,7 +386,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>debug(Option)</code></dt>
-			<dd>Controls the compilation of source files in debug mode (the Logtalk default debugger can only be used with files compiled in this mode). Possible option values are <code>on</code> and <code>off</code> (the usual default). Turning on this flag automatically turns off the <code>optimize</code> flag.</dd>
+			<dd>Controls the compilation of source files in debug mode (the Logtalk default debugger can only be used with files compiled in this mode). Also controls, by default, printing of <code>debug></code> and <code>debug(Topic)</code> messages. Possible option values are <code>on</code> and <code>off</code> (the usual default). Turning on this flag automatically turns off the <code>optimize</code> flag.</dd>
 	</dl>
 	<dl>
 		<dt><code>reload(Option)</code></dt>
@@ -450,7 +450,7 @@ The Logtalk distribution includes in its <code>tools</code> directory a command-
 This tool implements debugging features similar to those found on most Prolog systems. There are some differences, however, between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features when compared with some of the more sophisticated Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk decorates clauses with source information to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
 </p>
 
-<h3 id="programming_debugmode">Compiling source files and entities in debug mode</h3>
+<h3 id="programming_debug_mode">Compiling source files and entities in debug mode</h3>
 
 <p>
 Compilation of source files in debug mode is controlled by the compiler flag <code>debug</code>. The default value for this flag, usually <code>off</code>, is defined in the adapter files. Its value may be changed at runtime by writing:
@@ -470,7 +470,7 @@ The compiler flag <code>clean</code> should be turned on whenever the debug flag
 To compile only a specific entity in debug mode, use the <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive inside the entity.
 </p>
 
-<h3 id="programming_boxmodel">Logtalk Procedure Box model</h3>
+<h3 id="programming_box_model">Logtalk Procedure Box model</h3>
 
 <p>
 Logtalk uses a <em>Procedure Box model</em> similar to those found on most Prolog compilers. The traditional Prolog procedure box model uses four ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control flow when a predicate clause is used during program execution: 
@@ -528,7 +528,7 @@ The abbreviations defined in Logtalk are similar to those defined on some Prolog
 By default, the debugger pauses at every port for user interaction.
 </p>
 
-<h3>Defining spy points<a id="programming_spypoints"></a></h3>
+<h3>Defining spy points<a id="programming_spy_points"></a></h3>
 
 <p>
 Logtalk spy points can be defined by simply stating which file line numbers or predicates should be spied, as in most Prolog debuggers, or by fully specifying the context for activating a spy point. In the case of line number spy points, the line number must correspond to the first line of an entity clause. To simplify the definition of line number spy points, these are specified using the entity identifier instead of the file name (as all entities share a single namespace, an entity can only be defined in a single file). 
@@ -788,10 +788,49 @@ When not debugging, we can use a second hook object to discard the <code>debug/1
 The Logtalk compiler automatically removes any redundant calls to the built-in predicate <code>true/0</code> when compiling object predicates.
 </p>
 
+<h3 id="programming_debugging_messages">Debugging messages</h3>
+
+<p>
+Calls to the <code>logtalk::print_message/3</code> predicate where the message kind is either <code>debug</code> or <code>debug(_)</code> are only printed, by default, when the <code>debug</code> flag is turned on. Note that using these messages does not require compiling the code in debug mode, only turning on the flag. These print messages goals can always be combined with hooks as described in the previous section to remove them in production ready code. To avoid having to define <code>message_tokens//2</code> grammar rules for translating each debug message, you can intercept and convert them. For example: 
+</p>
+<pre>:- category(my_lazy_debug_message_processing).
+
+    :- multifile(logtalk::message_hook/4).
+    :- dynamic(logtalk::message_hook/4).
+
+    % in this example, we use the "core" component prefix and stream for debug messages;
+    % an alternative transformation would be e.g. to print the terms quoted by adding a
+    % quote(true) option to term/2; we could also use copy_term/2 and numbervars/3 on the
+    % message term and add the option numbervars(true) to term/2 for pretty-print of
+    % messages containing variables
+
+    logtalk::message_hook(Message, debug, _, _) :-
+        logtalk::message_prefix_stream(debug, core, Prefix, Stream),
+        logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
+
+    logtalk::message_hook(Message, debug(Topic), _, _) :-
+        logtalk::message_prefix_stream(debug(Topic), core, Prefix, Stream),
+        logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
+
+:- end_category.</pre>
+<p>
+With this category loaded (e.g. from your settings file), we can then use goals such as:
+</p>
+<pre>?- logtalk::print_message(debug, core, 'Phase 1 completed').
+true.
+
+?- set_logtalk_flag(debug, on).
+true.
+
+?- logtalk::print_message(debug, core, 'Phase 1 completed').
+>>> Phase 1 completed
+true.
+</pre>
+
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 5, 2017</span>
+		<span>Last updated on: June 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

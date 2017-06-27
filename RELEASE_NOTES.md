@@ -68,7 +68,7 @@ Documentation
 
 * UPDATED: The `settings-sample.lgt` with a code sample on how to convert all
 `debug` and `debug(_)` messages into the equivalent of a `write(Message), nl`
-goal without the need to specify `message_tokens//2` rules for converting all
+goal without the need to specify `message_tokens//2` rules for converting the
 messages.
 
 Library
