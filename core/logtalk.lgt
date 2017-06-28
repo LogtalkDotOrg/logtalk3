@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2017/06/27,
+		date is 2017/06/28,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
 	]).
 
@@ -252,7 +252,7 @@
 	:- mode(execution_context(?nonvar, ?entity_identifier, ?object_identifier, ?object_identifier, ?object_identifier, @list(callable), @list(callable)), zero_or_one).
 	:- info(execution_context/7, [
 		comment is 'Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.',
-		argnames is ['ExecutionContext', 'Entity', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
+		argnames is ['ExecutionContext', 'Entity', 'Sender', 'This', 'Self', 'MetaCallContext', 'CoinductionStack']
 	]).
 
 	print_message(Kind, Component, Message) :-
@@ -499,8 +499,8 @@
 	decompile_predicate_heads(THeads, Entity, Type, Heads) :-
 		{'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)}.
 
-	execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, Stack) :-
-		{'$lgt_execution_context'(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, Stack)}.
+	execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack) :-
+		{'$lgt_execution_context'(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack)}.
 
 :- end_object.
 
