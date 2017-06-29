@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2017/06/29 (1.1.20)
+ *  -  Added syntax coloring of the context/1 method
  * 2016/06/18 (1.1.19)
  *  -  Fixed for the rename of some of the engine predicates
  * 2016/05/29 (1.1.18)
@@ -142,7 +144,7 @@ $language_data = array(
             // event handlers
             'after', 'before', 'forward',
             // execution-context methods
-            'parameter', 'self', 'sender', 'this',
+            'context', 'parameter', 'self', 'sender', 'this',
             // predicate reflection
             'current_predicate', 'predicate_property',
             // DCGs and term expansion

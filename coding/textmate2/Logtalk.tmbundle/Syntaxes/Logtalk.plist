@@ -321,7 +321,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(parameter|se(lf|nder)|this)(?=[(])</string>
+			<string>\b(context|parameter|se(lf|nder)|this)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.execution-context.logtalk</string>
 		</dict>

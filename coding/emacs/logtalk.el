@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: January 14, 2017
-;; Version: 1.32
+;; Last modification date: June 29, 2017
+;; Version: 1.33
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.32"
+(defvar logtalk-mode-version "1.33"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -108,7 +108,7 @@
 
 (setq logtalk-font-lock-built-in-methods
 	'(
-		("\\<\\(parameter\\|se\\(?:lf\\|nder\\)\\|this\\)\\([(]\\)" 1 'logtalk-built-in-method-face)
+		("\\<\\(context\\|parameter\\|se\\(?:lf\\|nder\\)\\|this\\)\\([(]\\)" 1 'logtalk-built-in-method-face)
 		("\\<\\(current_predicate\\|predicate_property\\)\\([(]\\)" 1 'logtalk-built-in-method-face)
 		("\\<\\(a\\(?:bolish\\|ssert[az]\\)\\|clause\\|retract\\(?:all\\)?\\)\\([(]\\)" 1 'logtalk-built-in-method-face)
 		("\\<\\(bagof\\|f\\(?:\\(?:ind\\|or\\)all\\)\\|setof\\)\\([(]\\)" 1 'logtalk-built-in-method-face)

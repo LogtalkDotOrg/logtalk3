@@ -1,7 +1,7 @@
 ; TextPad syntax definitions for Logtalk (http://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	June 18, 2016
+; Last changed in: 	June 29, 2017
 ;
 ; Tags used and suggested colors:
 ;   Keywords 1	message sending operators	blue
@@ -181,6 +181,7 @@ retractall
 [Keywords 5]
 
 ; Logtalk built-in methods
+context
 parameter
 self
 sender

@@ -220,6 +220,7 @@
 			<false/>
 			<key>Regular Expressions</key>
 			<array>
+				<string>[^A-Za-z0-9_](context)\(</string>
 				<string>[^A-Za-z0-9_](parameter)\(</string>
 				<string>[^A-Za-z0-9_](self)\(</string>
 				<string>[^A-Za-z0-9_](sender)\(</string>

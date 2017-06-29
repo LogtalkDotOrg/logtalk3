@@ -15,7 +15,7 @@ class LogtalkLexer(RegexLexer):
     """
     For `Logtalk <http://logtalk.org/>`_ source code.
 
-    :copyright: 2008-2016 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2017 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
@@ -47,7 +47,7 @@ class LogtalkLexer(RegexLexer):
             # Message forwarding handler
             (r'forward(?=[(])', Keyword),
             # Execution-context methods
-            (r'(parameter|this|se(lf|nder))(?=[(])', Keyword),
+            (r'(context|parameter|this|se(lf|nder))(?=[(])', Keyword),
             # Reflection
             (r'(current_predicate|predicate_property)(?=[(])', Keyword),
             # DCGs and term expansion

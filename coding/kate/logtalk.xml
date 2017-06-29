@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Logtalk" version="2.7" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
+<language name="Logtalk" version="2.8" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
 
 	<highlighting>
 
@@ -15,7 +15,7 @@
 				<!-- Message forwarding handler -->
 				<RegExpr String = "\bforward(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Method execution context -->
-				<RegExpr String = "\b(parameter|this|se(lf|nder))(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\b(context|parameter|this|se(lf|nder))(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Reflection -->
 				<RegExpr String = "\b(current_predicate|predicate_property)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- DCGs -->

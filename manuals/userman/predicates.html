@@ -660,7 +660,7 @@ Logtalk defines a set of built-in object predicates or methods to access message
 <h3 id="predicates_context">Execution context methods</h3>
 
 <p>
-Logtalk defines four built-in private methods to access an object execution context. These methods (with the possible exception of <code>parameter/2</code>) are translated to a single unification performed at compile time with a clause head context argument. Therefore, they can be freely used without worrying about performance penalties. When called from inside a category, these methods refer to the execution context of the object importing the category. These methods cannot be used as messages to objects.
+Logtalk defines five built-in private methods to access an object execution context. These methods are in the common usage scenarios translated to a single unification performed at compile time with a clause head context argument. Therefore, they can be freely used without worrying about performance penalties. When called from inside a category, these methods refer to the execution context of the object importing the category. These methods are private and cannot be used as messages to objects.
 </p>
 <p>
 To find the object that received the message under execution we may use the <a title="Consult reference manual" href="../refman/methods/self_1.html"><code>self/1</code></a> method. We may also retrieve the object that has sent the message under execution using the <a title="Consult reference manual" href="../refman/methods/sender_1.html"><code>sender/1</code></a> method.
@@ -731,6 +731,16 @@ yes</pre>
 <p>
 Calls to the <code>parameter/2</code> method are translated to a compile time unification when the second argument is a variable. When the second argument is bound, the calls are translated to a call to the built-in predicate <code>arg/3</code>.
 </p>
+<p>
+When type-checking predicate arguments, it is often useful to include the predicate execution context when reporting an argument error. The <a title="Consult reference manual" href="../refman/methods/context_1.html"><code>context/1</code></a> method provides access to that context. For example, assume a predicate <code>foo/2</code> that takes an atom and an integer as arguments. We could type-check the arguments by writing (using the library <code>type</code> object):
+</p>
+<pre>foo(A, N) :-
+    % type-check arguments
+    context(Context),
+    type::check(atom, A, Context),
+    type::check(integer, N, Context),
+    % arguments are fine; go ahead
+    ... .</pre>
 
 <h3 id="predicates_database">Database methods</h3>
 
@@ -1054,7 +1064,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 7, 2017</span>
+		<span>Last updated on: June 28, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

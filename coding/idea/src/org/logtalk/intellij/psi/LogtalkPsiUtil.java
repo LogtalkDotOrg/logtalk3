@@ -26,7 +26,7 @@ public class LogtalkPsiUtil {
             "include" , "info" , "object" , "protocol" ,
             "uses" , "alias" , "coinductive" , "discontiguous" , "dynamic" , "meta_predicate" , "meta_non_terminal" , "mode" ,
             "multifile" , "private" , "protected" , "public" , "synchronized" , "use_module" ,
-            "parameter" , "self" , "sender" , "this" , "current_op" , "current_predicate" , "predicate_property" , "abolish" , "asserta" ,
+            "context", "parameter" , "self" , "sender" , "this" , "current_op" , "current_predicate" , "predicate_property" , "abolish" , "asserta" ,
             "assertz" , "clause" , "retract" , "retractall" , "call" , "once" , "catch" , "throw" , "bagof" , "findall" , "forall" ,
             "setof" , "before" , "after" , "forward" , "phrase" , "expand_term" , "term_expansion" , "expand_goal" ,
             "goal_expansion" , "coinductive_success_hook" , "ask_question" , "message_hook" ,

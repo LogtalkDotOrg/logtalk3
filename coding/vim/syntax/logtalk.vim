@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	June 18, 2016
+" Last Change:	June 29, 2017
 
 
 " Quit when a syntax file was already loaded:
@@ -148,6 +148,7 @@ syn match	logtalkBuiltIn		"\<threaded_engine\(_\(create\|destroy\|self\|next\|ne
 
 " Logtalk built-in methods
 
+syn match	logtalkBuiltInMethod	"\<context\ze("
 syn match	logtalkBuiltInMethod	"\<parameter\ze("
 syn match	logtalkBuiltInMethod	"\<se\(lf\|nder\)\ze("
 syn match	logtalkBuiltInMethod	"\<this\ze("

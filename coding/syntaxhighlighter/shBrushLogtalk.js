@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on June 18, 2016
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on June 29, 2017
 
 		this.regexList = [
 		  // variables
@@ -40,7 +40,7 @@
 			// message forwarding handler methods
 			{ regex: new RegExp("\\bforward(?=[(])", 'g'), css: 'keyword'},
 			// execution-context methods
-			{ regex: new RegExp("\\b(parameter|this|se(lf|nder))(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(context|parameter|this|se(lf|nder))(?=[(])", 'g'), css: 'keyword'},
 			// reflection methods
 			{ regex: new RegExp("\\b(current_predicate|predicate_property)(?=[(])", 'g'), css: 'keyword'},
 			// term and goal expansion methods

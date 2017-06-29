@@ -6,7 +6,7 @@
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on February 17, 2017
+##   Last updated on June 28, 2017
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -132,6 +132,7 @@ eval $xslt_proc -o predicates/logtalk_load_context_2.section refman.xsl predicat
 eval $xslt_proc -o predicates/current_logtalk_flag_2.section refman.xsl predicates/current_logtalk_flag_2.html
 eval $xslt_proc -o predicates/set_logtalk_flag_2.section refman.xsl predicates/set_logtalk_flag_2.html
 eval $xslt_proc -o predicates/create_logtalk_flag_3.section refman.xsl predicates/create_logtalk_flag_3.html
+eval $xslt_proc -o methods/context_1.section refman.xsl methods/context_1.html
 eval $xslt_proc -o methods/parameter_2.section refman.xsl methods/parameter_2.html
 eval $xslt_proc -o methods/self_1.section refman.xsl methods/self_1.html
 eval $xslt_proc -o methods/sender_1.section refman.xsl methods/sender_1.html
@@ -280,6 +281,7 @@ cat -s \
 	predicates/set_logtalk_flag_2.section \
 	predicates/create_logtalk_flag_3.section \
 	methods.header \
+	methods/context_1.section \
 	methods/parameter_2.section \
 	methods/self_1.section \
 	methods/sender_1.section \

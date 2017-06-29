@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2016 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2017 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -135,6 +135,7 @@
 
 		<context id="built-in-methods" style-ref="built-in">
 			<!-- Method execution context -->
+			<keyword>(context)(?=[(])</keyword>
 			<keyword>(parameter)(?=[(])</keyword>
 			<keyword>(se(lf|nder))(?=[(])</keyword>
 			<keyword>(this)(?=[(])</keyword>

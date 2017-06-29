@@ -27,25 +27,29 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* NEW: Allow overriding the default scratch directory by defining the library
-alias `scratch_directory` in a backend Prolog initialization file (assumed to
-be loaded prior to Logtalk loading). After a discussion with Douglas R. Miles
-on supporting installing Logtalk in a read-only directory and running multiple
-Logtalk instances concurrently without conflict.
+* CHANGED: The built-in predicate `current_event/5` to always instantiate the
+first argument when called with it unbound.
 
-* NEW: The `logtalk_make/0-1` built-in predicates are now aware of included
-files. A change to an included file since loaded now triggers reloading of
-the main file.
+* ADDED: Support for overriding the default scratch directory by defining
+the library alias `scratch_directory` in a backend Prolog initialization file
+(assumed to be loaded prior to Logtalk loading). After a discussion with
+Douglas R. Miles on supporting installing Logtalk in a read-only directory
+and running multiple Logtalk instances concurrently without conflict.
 
-* NEW: Support for printing messages of kind `debug` and `debug(_)`. These
+* ADDED: A `context/1` built-in context execution method to provide access
+to a predicate call execution context. Mainly used for providing a default
+error context when type-checking predicate arguments.
+
+* ADDED: Support for printing messages of kind `debug` and `debug(_)`. These
 messages are only printed, by default, when the `debug` flag is turned on.
 
 * ADDED: Property `includes(File)` to the `logtalk::loaded_file_property/2`
 predicate to allow enumerating, by backtracking, all files included by a
 loaded file (using `include/1` directives).
 
-* CHANGED: The built-in predicate `current_event/5` to always instantiate the
-first argument when called with it unbound.
+* IMPROVED: The `logtalk_make/0-1` predicates are now aware of included files.
+A change to an included file since loaded now triggers reloading of the main
+file.
 
 * IMPROVED: Error-checking of the multi-threading and threaded engine built-in
 predicates when the goal arguments are module qualified.
@@ -113,6 +117,12 @@ Installers and installation scripts
 
 * ADDED: An *experimental* version of the SWI-Prolog pack that loads Logtalk
 into a `logtalk` module instead of loading it into `user`.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the new `context/1` built-in method to
+most of the supported text editors and syntax highlighters.
 
 
 3.10.9 - June 14, 2017

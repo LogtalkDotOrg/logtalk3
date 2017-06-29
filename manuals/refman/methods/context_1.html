@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in method: context/1</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Built-in method: context/1</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; context/1</div>
+
+<h2 id="methods_context_1" class="codenp">context/1</h2>
+
+<h4>Description</h4>
+
+<pre>context(Context)</pre>
+<p>
+Returns the execution context for a predicate call using the format <code>logtalk(Call,ExecutionContext)</code>. Mainly used for providing a default error context when type-checking predicate arguments. The <code>ExecutionContext</code> should be regarded as an opaque term, which can be decoded using the <code>logtalk::execution_context/7</code> predicate. 
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>context(--callable)</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt>Context is not a variable:</dt>
+		<dd><code>type_error(var, Context)</code></dd>
+</dl>
+
+<h4>Examples</h4>
+
+<pre>foo(A, N) :-
+    % type-check arguments
+    context(Context),
+    type::check(atom, A, Context),
+    type::check(integer, N, Context),
+    % arguments are fine; go ahead
+    ... .</pre>
+
+<h4>See also</h4>
+
+<p>
+<code><a href="parameter_2.html">parameter/2</a></code>, <code><a href="self_1.html">self/1</a></code>, <code><a href="sender_1.html">sender/1</a></code>, <code><a href="this_1.html">this/1</a></code>
+</p>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
+		<span>Last updated on: June 28, 2017</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="parameter_2.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

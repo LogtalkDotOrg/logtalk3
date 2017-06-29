@@ -53,6 +53,7 @@
 			</keywords>
 
 			<keywords id="Built-in Methods" color="#1A1AA6" useforautocomplete="yes">
+				<regex>\b(context)\(</regex>
 				<regex>\b(parameter)\(</regex>
 				<regex>\b(se(?:lf|nder))\(</regex>
 				<regex>\b(this)\(</regex>

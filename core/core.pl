@@ -3028,7 +3028,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc8)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc9)).
 
 
 
@@ -10154,7 +10154,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
 	;	Head = Other::_ ->
-		% clause for an entity multifile predicate
+		% clause for an object or category multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, _, _, BodyExCtx, Mode, _, BeginLine-EndLine),
 		term_variables(Other, OtherVars),
@@ -11727,8 +11727,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % calls to these methods are compiled inline whenever possible by unifying
 % the method argument with the corresponding execution context argument;
-% calls with instantiated arguments are not inlined as the call may be used
-% as e.g. a condition in an if-then-else control construct
+% with the exception of context/1, calls with instantiated arguments are
+% not inlined as the call may be used as e.g. a condition in an if-then-else
+% control construct
+
+'$lgt_compile_body'(context(Context), true, '$lgt_debug'(goal(context(Context), true), ExCtx), Ctx) :-
+	!,
+	'$lgt_check'(var, Context),
+	'$lgt_comp_ctx_head'(Ctx, Head0),
+	(	Head0 = _::Head ->
+		true
+	;	Head0 = ':'(_,Head) ->
+		true
+	;	Head0 = Head
+	),
+	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
+	Context = logtalk(Head, ExCtx).
 
 '$lgt_compile_body'(sender(Sender), TPred, '$lgt_debug'(goal(sender(DSender), DPred), ExCtx), Ctx) :-
 	!,
@@ -17753,6 +17767,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(catch(_,_,_), p, catch(0, *, 0), 1).
 '$lgt_built_in_method_spec'(throw(_), p, no, 1).
 % execution context methods
+'$lgt_built_in_method_spec'(context(_), p, no, 1).
 '$lgt_built_in_method_spec'(parameter(_,_), p, no, 1).
 '$lgt_built_in_method_spec'(self(_), p, no, 1).
 '$lgt_built_in_method_spec'(sender(_), p, no, 1).

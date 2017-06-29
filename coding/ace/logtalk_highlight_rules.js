@@ -167,7 +167,7 @@ var LogtalkHighlightRules = function() {
            regex: '\\b((?:for|retract)all)(?=[(])' },
          { caseInsensitive: false,
            token: 'support.function.execution-context.logtalk',
-           regex: '\\b(?:parameter|se(?:lf|nder)|this)(?=[(])' },
+           regex: '\\b(?:context|parameter|se(?:lf|nder)|this)(?=[(])' },
          { token: 'support.function.database.logtalk',
            regex: '\\b(?:a(?:bolish|ssert(?:a|z))|clause|retract(all)?)(?=[(])' },
          { token: 'support.function.all-solutions.logtalk',

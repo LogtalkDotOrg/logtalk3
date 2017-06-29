@@ -48,7 +48,7 @@ Keywords={
     Group=1
   },
   { Id=3,
-    Regex=[[ (parameter|this|se(lf|nder))(?=[(]) ]],
+    Regex=[[ (context|parameter|this|se(lf|nder))(?=[(]) ]],
     Group=1
   },
   { Id=3, --refelection
