@@ -45,13 +45,13 @@
 <p>
 All error handling is done in Logtalk by using the ISO defined <code>catch/3</code> and <code>throw/1</code> predicates <a title="ISO Prolog Standard" href="../bibliography.html#ISO95">[ISO 95]</a>. Errors thrown by Logtalk have the following format:
 </p>
-<pre>error(Error, logtalk(Goal, Entity))</pre>
+<pre>error(Error, logtalk(Goal, GoalContext))</pre>
 <p>
-In this exception term, <code>Goal</code> is the goal that triggered the error <code>Error</code> and <code>Entity</code> is the entity in whose context <code>Goal</code> is called. For example:
+In this exception term, <code>Goal</code> is the goal that triggered the error <code>Error</code> and <code>GoalContext</code> is the context in which <code>Goal</code> is called. For example:
 </p>
 <pre>error(permission_error(modify,private_predicate,p), logtalk(foo::abolish(p/0),user))</pre>
 <p>
-Note, however, that <code>Goal</code> and <code>Entity</code> can be variables when the corresponding information is not available (usually due to compiler optimizations that throw away the necessary error context information).
+Note, however, that <code>Goal</code> and <code>GoalContext</code> can be variables when the corresponding information is not available (usually due to compiler optimizations that throw away the necessary error context information). In particular, the <code>GoalContext</code> can be, when instantiated, just the entity calling the goal or a full execution context depending on how much (or how little) information is available when an exception occurs.
 </p>
 
 <h2>Compiler warnings and errors<a id="errors_compiler"></a></h2>
@@ -161,7 +161,7 @@ More sophisticated definitions are, of course, possible.
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 24, 2016</span>
+		<span>Last updated on: June 29, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="threads.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="documenting.html">next</a></span><br/>
