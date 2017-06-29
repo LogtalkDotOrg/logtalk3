@@ -18,15 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(difflist,
 	implements(listp),
 	extends(compound)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2017/06/29,
 		comment is 'Difference list predicates.'
 	]).
 
@@ -474,13 +473,12 @@
 		valid2(Tail-Back).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(difflist, Term), Context))
 		).
 
 :- end_object.

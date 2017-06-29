@@ -18,15 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(list,
 	implements(listp),
 	extends(compound)).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2017/06/29,
 		comment is 'List predicates.'
 	]).
 
@@ -460,13 +459,12 @@
 		valid(List).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(list, Term), Context))
 		).
 
 :- end_object.

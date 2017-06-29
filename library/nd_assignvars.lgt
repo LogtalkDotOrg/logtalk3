@@ -33,9 +33,9 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2016/11/06,
+		date is 2017/06/29,
 		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms).'
 	]).
 
@@ -43,22 +43,19 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 		assignable(Assignable) :-
 			nonvar(Assignable),
-			self(Self),
-			sender(Sender),
-			throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable), Sender))).
+			context(Context),
+			throw(error(type_error(variable, Assignable), Context)).
 		assignable(Assignable) :-
 			create_mutable(s(_), Assignable).
 
 		assignable(Assignable, Init) :-
 			nonvar(Assignable),
-			self(Self),
-			sender(Sender),
-			throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable, Init), Sender))).
+			context(Context),
+			throw(error(type_error(variable, Assignable), Context)).
 		assignable(Assignable, Init) :-
 			var(Init),
-			self(Self),
-			sender(Sender),
-			throw(error(instantiation_error, logtalk(Self::assignable(Assignable, Init), Sender))).
+			context(Context),
+			throw(error(instantiation_error, Context)).
 		assignable(Assignable, Init) :-
 			create_mutable(s(Init), Assignable).
 
@@ -73,23 +70,20 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 		assignable(Assignable) :-
 			nonvar(Assignable),
-			self(Self),
-			sender(Sender),
-			throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable), Sender))).
+			context(Context),
+			throw(error(type_error(variable, Assignable), Context)).
 		assignable(Assignable) :-
 			gensym(Assignable),
 			'?:='(Assignable, s(_)).
 
 		assignable(Assignable, Init) :-
 			nonvar(Assignable),
-			self(Self),
-			sender(Sender),
-			throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable, Init), Sender))).
+			context(Context),
+			throw(error(type_error(variable, Assignable), Context)).
 		assignable(Assignable, Init) :-
 			var(Init),
-			self(Self),
-			sender(Sender),
-			throw(error(instantiation_error, logtalk(Self::assignable(Assignable, Init), Sender))).
+			context(Context),
+			throw(error(instantiation_error, Context)).
 		assignable(Assignable, Init) :-
 			gensym(Assignable),
 			'?:='(Assignable, s(Init)).
@@ -108,21 +102,18 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 		assignable(Assignable) :-
 			nonvar(Assignable),
-			self(Self),
-			sender(Sender),
-			throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable), Sender))).
+			context(Context),
+			throw(error(type_error(variable, Assignable), Context)).
 		assignable('$'(_,_)).
 
-		assignable(Assignable, Init) :-
+		assignable(Assignable, _) :-
 			nonvar(Assignable),
-			self(Self),
-			sender(Sender),
-			throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable, Init), Sender))).
-		assignable(Assignable, Init) :-
+			context(Context),
+			throw(error(type_error(variable, Assignable), Context)).
+		assignable(_, Init) :-
 			var(Init),
-			self(Self),
-			sender(Sender),
-			throw(error(instantiation_error, logtalk(Self::assignable(Assignable, Init), Sender))).
+			context(Context),
+			throw(error(instantiation_error, Context)).
 		assignable('$'(Init,_), Init).
 
 		Assignable <= Value :-

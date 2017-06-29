@@ -22,9 +22,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2009/3/6,
+		date is 2017/06/29,
 		comment is 'Number data type predicates.'
 	]).
 
@@ -32,13 +32,12 @@
 		number(Number).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	number(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(number, Term), Context))
 		).
 
 :- end_object.

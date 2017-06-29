@@ -18,19 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(set(_Type),
 	extends(set)).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2010/2/10,
+		date is 2017/06/29,
 		comment is 'Set predicates with elements constrained to a single type.',
 		parnames is ['Type']
 	]).
 
-	valid((-)) :-				% catch variables
+	valid((-)) :-
+		% catch variables
 		!,
 		fail.
 	valid([]) :-
@@ -38,7 +38,8 @@
 	valid([Element| Set]) :-
 		check_order(Set, Element).
 
-	check_order((-), _) :-	% catch unbound tails
+	check_order((-), _) :-
+		% catch unbound tails
 		!,
 		fail.
 	check_order([], _) :-
@@ -51,13 +52,13 @@
 		check_order(Set, Element2).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	this(This),
+			throw(error(type_error(This, Term), Context))
 		).
 
 :- end_object.

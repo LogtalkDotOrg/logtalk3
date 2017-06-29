@@ -21,9 +21,9 @@
 :- object(redis).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2017/04/25,
+		date is 2017/06/29,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
@@ -72,38 +72,43 @@
 	% public predicates
 
 	connect(Connection) :-
+		context(Context),
 		catch(
 			connect_to_server(localhost, 6379, Connection),
 			Error,
-			error_handler(Error, connect(Connection))
+			throw(error(Error, Context))
 		).
 
 	connect(Host, Port, Connection) :-
+		context(Context),
 		catch(
 			connect_to_server(Host, Port, Connection),
 			Error,
-			error_handler(Error, connect(Connection, Host, Port))
+			throw(error(Error, Context))
 		).
 
 	disconnect(Connection) :-
+		context(Context),
 		catch(
 			disconnect_from_server(Connection),
 			Error,
-			error_handler(Error, disconnect(Connection))
+			throw(error(Error, Context))
 		).
 
 	send(Connection, Request, Reply) :-
+		context(Context),
 		catch(
 			send_request(Connection, Request, Reply),
 			Error,
-			error_handler(Error, send(Connection, Request, Reply))
+			throw(error(Error, Context))
 		).
 
 	console(Request) :-
+		context(Context),
 		catch(
 			console_request(Request),
 			Error,
-			error_handler(Error, console(Request))
+			throw(error(Error, Context))
 		).
 
 	% backend Prolog compier dependent auxiliary predicates
@@ -194,11 +199,6 @@
 		parse_request(Request, Bytes),
 		send_request(Bytes, Output),
 		parse_reply(Input, Reply).
-
-	error_handler(Error, Message) :-
-		self(Self),
-		sender(Sender),
-		throw(error(Error, logtalk(Self::Message, Sender))).
 
 	parse_request(Request, Bytes) :-
 		Request =.. Arguments,

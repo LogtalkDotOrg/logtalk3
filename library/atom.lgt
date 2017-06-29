@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(atom,
 	extends(atomic)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/01/31,
+		date is 2017/06/29,
 		comment is 'Atom data type predicates.'
 	]).
 
@@ -84,13 +83,12 @@
 		atom(Atom).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	atom(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(atom, Term), Context))
 		).
 
 :- end_object.

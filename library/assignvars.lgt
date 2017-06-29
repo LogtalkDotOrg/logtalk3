@@ -36,36 +36,32 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2015/07/31,
+		date is 2017/06/29,
 		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms).'
 	]).
 
 	assignable(Assignable) :-
 		nonvar(Assignable),
-		self(Self),
-		sender(Sender),
-		throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable), Sender))).
+		context(Context),
+		throw(error(type_error(variable, Assignable), Context)).
 	assignable([_| _]).
 
 	assignable(Assignable, Init) :-
 		nonvar(Assignable),
-		self(Self),
-		sender(Sender),
-		throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable, Init), Sender))).
+		context(Context),
+		throw(error(type_error(variable, Assignable), Context)).
 	assignable(Assignable, Init) :-
 		var(Init),
-		self(Self),
-		sender(Sender),
-		throw(error(instantiation_error, logtalk(Self::assignable(Assignable, Init), Sender))).
+		context(Context),
+		throw(error(instantiation_error, Context)).
 	assignable([_, Init| _], Init).
 
 	Assignable <= Value :-
 		var(Value),
-		self(Self),
-		sender(Sender),
-		throw(error(instantiation_error, logtalk(Self::Assignable <= Value, Sender))).
+		context(Context),
+		throw(error(instantiation_error, Context)).
 
 	[_| Tail] <= Value :-
 		put_assign([_| Tail], Value).
@@ -78,9 +74,8 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 
 	Assignable => Value :-
 		var(Assignable),
-		self(Self),
-		sender(Sender),
-		throw(error(instantiation_error, logtalk(Self::Assignable => Value, Sender))).
+		context(Context),
+		throw(error(instantiation_error, Context)).
 
 	[_| Tail] => Value :-
 		nonvar(Tail),

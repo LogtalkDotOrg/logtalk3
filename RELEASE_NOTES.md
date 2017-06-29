@@ -88,6 +88,9 @@ Library
 possibly module-qualified callable terms. Available when using a backend Prolog
 system supporting modules.
 
+* UPDATED: Error-checking code in library entities to use the new `context/1`
+method.
+
 Tools
 -----
 

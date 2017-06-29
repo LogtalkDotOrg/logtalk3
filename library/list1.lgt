@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(list(_Type),
 	extends(list)).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2010/2/10,
+		date is 2017/06/29,
 		comment is 'List predicates with elements constrained to a single type.',
 		parnames is ['Type']
 	]).
@@ -40,13 +39,13 @@
 		valid(List).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	this(This),
+			throw(error(type_error(This, Term), Context))
 		).
 
 :- end_object.

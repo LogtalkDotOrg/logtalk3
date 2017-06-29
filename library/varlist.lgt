@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(varlist,
 	implements(varlistp)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2009/4/25,
+		date is 2017/06/29,
 		comment is 'List of variables predicates.'
 	]).
 
@@ -201,13 +200,12 @@
 		valid(List).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(varlist, Term), Context))
 		).
 
 :- end_object.

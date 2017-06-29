@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(compound,
 	extends(term)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2009/3/6,
+		date is 2017/06/29,
 		comment is 'Compound data type.'
 	]).
 
@@ -33,13 +32,12 @@
 		compound(Compound).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	compound(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(compound, Term), Context))
 		).
 
 :- end_object.

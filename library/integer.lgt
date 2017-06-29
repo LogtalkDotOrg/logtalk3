@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(integer,
 	extends(number)).
 
 	:- info([
-		version is 1.51,
+		version is 1.52,
 		author is 'Paulo Moura',
-		date is 2011/9/19,
+		date is 2017/06/29,
 		comment is 'Integer data type predicates.'
 	]).
 
@@ -145,13 +144,12 @@
 		integer(Integer).
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
+		context(Context),
 		(	integer(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			throw(error(instantiation_error, Context))
+		;	throw(error(type_error(integer, Term), Context))
 		).
 
 :- end_object.

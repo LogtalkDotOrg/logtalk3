@@ -22,9 +22,9 @@
 :- object(optional).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/05/30,
+		date is 2017/06/29,
 		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.'
 	]).
 
@@ -181,9 +181,8 @@
 	get(Term) :-
 		parameter(1, Reference),
 		(	Reference == empty ->
-			self(Self),
-			sender(Sender),
-			throw(error(existence_error(optional_term,Reference), logtalk(Self::get(Term), Sender)))
+			context(Context),
+			throw(error(existence_error(optional_term,Reference), Context))
 		;	Reference = the(Term)
 		).
 
