@@ -49,18 +49,17 @@
 	imports(((initialization), proto_hierarchy))).
 
 	:- info([
-		version is 1.2,
-		date is 2006/12/14,
+		version is 1.3,
+		date is 2017/06/29,
 		author is 'Paulo Moura',
 		comment is 'Minimal predicates for all prototypes. Default root of the extension graph.'
 	]).
 
 	:- uses(event_registry, [del_monitors/4]).
 
-	clone(Clone) :-
-		self(Self),
-		sender(Sender),
-		throw(error(descendant_responsability, Self::clone(Clone), Sender)).
+	clone(_Clone) :-
+		context(Context),
+		throw(error(descendant_responsability, Context)).
 
 	default_free_option(del_monitors).
 

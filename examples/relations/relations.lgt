@@ -264,8 +264,8 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.31,
-		date is 2013/04/23,
+		version is 1.32,
+		date is 2017/06/29,
 		author is 'Esteban Zimanyi, Paulo Moura',
 		comment is 'Enables the representation of relations between independent objects.'
 	]).
@@ -279,27 +279,24 @@
 	tuples(Tuples) :-
 		findall(Tuple, ::tuple_(Tuple), Tuples).
 
-	add_tuple(Tuple) :-
+	add_tuple(_Tuple) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::add_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
 	add_tuple(Tuple) :-
 		::descriptor(Descriptor),
 		\+ same_length(Tuple, Descriptor),
-		self(Self),
-		sender(Sender),
-		throw(error(invalid_length, Self::add_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(invalid_length, Context)).
 
 	add_tuple(Tuple) :-
 		::descriptor(Descriptor),
 		::key(Key),
 		make_tuple_template(Tuple, Descriptor, Key, Template),
 		::tuple(Template),
-		self(Self),
-		sender(Sender),
-		throw(error(breaks_key(Key), Self::add_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(breaks_key(Key), Context)).
 
 	add_tuple(Tuple) :-
 		::descriptor(Descriptor),
@@ -308,9 +305,8 @@
 		::cardinality(Role, _, Maximum),
 		::plays_role_n_times(Object, Role, Number),
 		Maximum = Number,
-		self(Self),
-		sender(Sender),
-		throw(error(breaks_max_cardinality(Object, Role, Maximum), Self::add_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(breaks_max_cardinality(Object, Role, Maximum), Context)).
 
 	add_tuple(Tuple) :-
 		::descriptor(Descriptor),
@@ -321,9 +317,8 @@
 			\+ Domain::valid(Object)
 		;	\+ Object::ancestor(Domain)
 		),
-		self(Self),
-		sender(Sender),
-		throw(error(breaks_domain(Object, Role, Domain), Self::add_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(breaks_domain(Object, Role, Domain), Context)).
 
 	add_tuple(Tuple) :-
 		::assertz(tuple_(Tuple)),
@@ -338,11 +333,10 @@
 		),
 	make_tuple_template(Objects, Roles, Key, Rest).
 
-	remove_tuple(Tuple) :-
+	remove_tuple(_Tuple) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::remove_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
 	remove_tuple(Tuple) :-
 		::descriptor(Descriptor),
@@ -351,9 +345,8 @@
 		::cardinality(Role, Minimum, _),
 		::plays_role_n_times(Object, Role, Number),
 		Minimum = Number,
-		self(Self),
-		sender(Sender),
-		throw(error(breaks_min_cardinality(Object, Role, Minimum), Self::remove_tuple(Tuple), Sender)).
+		context(Context),
+		throw(error(breaks_min_cardinality(Object, Role, Minimum), Context)).
 
 	remove_tuple(Tuple) :-
 		::retract(tuple_(Tuple)),
@@ -405,17 +398,15 @@
 	domain(Role, Domain) :-
 		::domain_(Role, Domain).
 
-	set_domains(Domains) :-
+	set_domains(_Domains) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::set_domains(Domains), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
-	set_domains(Domains) :-
+	set_domains(_Domains) :-
 		::tuple(_),
-		self(Self),
-		sender(Sender),
-		throw(error(non_empty_relation, Self::set_domains(Domains), Sender)).
+		context(Context),
+		throw(error(non_empty_relation, Context)).
 
 	set_domains(Domains) :-
 		::descriptor(Descriptor),
@@ -454,23 +445,20 @@
 	keys(Keys) :-
 		findall(Key, ::key_(Key), Keys).
 
-	set_keys(Keys) :-
+	set_keys(_Keys) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::set_keys(Keys), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
-	set_keys(Keys) :-
+	set_keys(_Keys) :-
 		::tuple(_),
-		self(Self),
-		sender(Sender),
-		throw(error(non_empty_relation, Self::set_keys(Keys), Sender)).
+		context(Context),
+		throw(error(non_empty_relation, Context)).
 
 	set_keys(Keys) :-
 		\+ valid_keys(Keys),
-		self(Self),
-		sender(Sender),
-		throw(error(invalid_key, Self::set_keys(Keys), Sender)).
+		context(Context),
+		throw(error(invalid_key, Context)).
 
 	set_keys(Keys) :-
 		::retractall(key_(_)),
@@ -504,30 +492,26 @@
 	delete_option(Role, Option) :-
 		::delete_option_(Role, Option).
 
-	set_delete_options(Options) :-
+	set_delete_options(_Options) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::set_delete_options(Options), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
-	set_delete_options(Options) :-
+	set_delete_options(_Options) :-
 		::tuple(_),
-		self(Self),
-		sender(Sender),
-		throw(error(non_empty_relation, Self::set_delete_options(Options), Sender)).
+		context(Context),
+		throw(error(non_empty_relation, Context)).
 
 	set_delete_options(Options) :-
 		::descriptor(Descriptor),
 		\+ same_length(Options, Descriptor),
-		self(Self),
-		sender(Sender),
-		throw(error(invalid_length, Self::set_delete_options(Options), Sender)).
+		context(Context),
+		throw(error(invalid_length, Context)).
 
 	set_delete_options(Options) :-
 		\+ valid_delete_options(Options),
-		self(Self),
-		sender(Sender),
-		throw(error(invalid_delete_option, Self::set_delete_options(Options), Sender)).
+		context(Context),
+		throw(error(invalid_delete_option, Context)).
 
 	set_delete_options(Options) :-
 		::descriptor(Descriptor),
@@ -556,23 +540,20 @@
 	cardinality(Role, Min, Max) :-
 		::cardinality_(Role, Min, Max).
 
-	set_cardinalities(Cardinalities) :-
+	set_cardinalities(_Cardinalities) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::set_cardinalities(Cardinalities), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
-	set_cardinalities(Cardinalities) :-
+	set_cardinalities(_Cardinalities) :-
 		::tuple(_),
-		self(Self),
-		sender(Sender),
-		throw(error(non_empty_relation, Self::set_cardinalities(Cardinalities), Sender)).
+		context(Context),
+		throw(error(non_empty_relation, Context)).
 
 	set_cardinalities(Cardinalities) :-
 		\+ valid_cardinalities(Cardinalities),
-		self(Self),
-		sender(Sender),
-		throw(error(invalid_cardinality, Self::set_cardinalities(Cardinalities), Sender)).
+		context(Context),
+		throw(error(invalid_cardinality, Context)).
 
 	set_cardinalities(Cardinalities) :-
 		::descriptor(Descriptor),
@@ -782,10 +763,9 @@
 		after_event_registry::del_monitors(Object, Message, _, Self),
 		del_object_after_monitors(Messages, Object).
 
-	propagate(Event, Message, Object, Role, Tuple) :-
-		self(Self),
-		sender(Sender),
-		throw(error(desc_responsibility, Self::propagate(Event, Message, Object, Role, Tuple), Sender)).
+	propagate(_Event, _Message, _Object, _Role, _Tuple) :-
+		context(Context),
+		throw(error(desc_responsibility, Context)).
 
 	activ_point(Role, Event, Message) :-
 		::activ_points_(Role, Event, Messages),
@@ -794,11 +774,10 @@
 	activ_points(Role, Event, List) :-
 		::activ_points_(Role, Event, List).
 
-	set_activ_points(Role, Event, List) :-
+	set_activ_points(_Role, _Event, _List) :-
 		\+ ::descriptor(_),
-		self(Self),
-		sender(Sender),
-		throw(error(descriptor_not_defined, Self::set_activ_points(Role, Event, List), Sender)).
+		context(Context),
+		throw(error(descriptor_not_defined, Context)).
 
 	set_activ_points(Role, Event, List) :-
 		::descriptor(Descriptor),

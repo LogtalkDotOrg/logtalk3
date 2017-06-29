@@ -115,6 +115,9 @@ a backend Prolog system `public` operator to avoid compilation syntax errors.
 
 * UPDATED: Simplified the `operators` example to not require the `os` library.
 
+* UPDATED: Error-checking code in example entities to use the new `context/1`
+method.
+
 Installers and installation scripts
 -----------------------------------
 

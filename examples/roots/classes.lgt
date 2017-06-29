@@ -153,9 +153,9 @@
 	specializes(abstract_class)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2005/3/12,
+		date is 2017/06/29,
 		comment is 'Default metaclass for all classes.'
 	]).
 
@@ -176,10 +176,9 @@
 		create_object(Object, [instantiates(Self)], [], []),
 		Object::init(Options).
 
-	clone(Object, Clone) :-
-		self(Self),
-		sender(Sender),
-		throw(error(subclass_responsability, Self::clone(Object, Clone), Sender)).
+	clone(_Object, _Clone) :-
+		context(Context),
+		throw(error(subclass_responsability, Context)).
 
 	delete(Object) :-
 		::delete(Object, []).
@@ -233,10 +232,9 @@
 		N1 is N + 1,
 		next_integer(N1, N2).
 
-	equals(Instance1, Instance2) :-
-		self(Self),
-		sender(Sender),
-		throw(error(subclass_responsability, Self::equals(Instance1, Instance2), Sender)).
+	equals(_Instance1, _Instance2) :-
+		context(Context),
+		throw(error(subclass_responsability, Context)).
 
 	abstract_class :-
 		fail.

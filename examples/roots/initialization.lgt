@@ -21,9 +21,9 @@
 :- category(initialization).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2008/10/10,
+		date is 2017/06/29,
 		comment is 'Object initialization protocol.'
 	]).
 
@@ -155,10 +155,9 @@
 		::process_init_option(Option) ->
 		process_init_options(Options).
 
-	process_init_option(Option) :-
-		self(Self),
-		sender(Sender),
-		throw(error(existence_error(predicate_definition), Self::process_init_option(Option), Sender)).
+	process_init_option(_Option) :-
+		context(Context),
+		throw(error(existence_error(predicate_definition), Context)).
 
 	free(Options) :-
 		valid_free_options(Options),
@@ -181,10 +180,9 @@
 		::process_free_option(Option) ->
 		process_free_options(Options).
 
-	process_free_option(Option) :-
-		self(Self),
-		sender(Sender),
-		throw(error(existence_error(predicate_definition), Self::process_free_option(Option), Sender)).
+	process_free_option(_Option) :-
+		context(Context),
+		throw(error(existence_error(predicate_definition), Context)).
 
 	merge_options([], Defaults, Defaults).
 	merge_options([Option-Value| Options], Defaults, [Option-Value| Options2]) :-
