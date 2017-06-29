@@ -18,22 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(context_1_test_object,
-	imports(context_1_test_category)).
+:- category(context_1_test_category).
 
-	:- public(foo/2).
+	:- public(bar/1).
 
-	foo(X, Y) :-
+	bar(X) :-
 		context(Context),
-		type::check(atom, X, Context),
-		type::check(integer, Y, Context).
+		type::check(list, X, Context).
 
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(a, b, X, Y) :-
-		context(Context),
-		type::check(atom, X, Context),
-		type::check(integer, Y, Context).
-
-:- end_object.
+:- end_category.

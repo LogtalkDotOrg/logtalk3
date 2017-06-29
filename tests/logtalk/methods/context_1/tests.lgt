@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/06/28,
+		date is 2017/06/29,
 		comment is 'Unit tests for the context/1 built-in method.'
 	]).
 
@@ -47,6 +47,18 @@
 		CoinductionStack == [].		
 
 	test(context_3) :-
+		catch({context_1_test_object::bar(1)}, error(Error,logtalk(Call,ExecutionContext)), true),
+		Error == type_error(list, 1),
+		Call == bar(1),
+		logtalk::execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack),
+		Entity == context_1_test_category,
+		Sender == user,
+		This == context_1_test_object,
+		Self == context_1_test_object,
+		MetaCallContext == [],
+		CoinductionStack == [].		
+
+	test(context_4) :-
 		catch({logtalk::message_hook(a,b,c,d)}, error(Error,logtalk(Call,ExecutionContext)), true),
 		Error == type_error(integer, d),
 		Call == message_hook(a,b,c,d),
