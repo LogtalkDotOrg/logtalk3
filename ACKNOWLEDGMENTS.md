@@ -36,6 +36,7 @@ CONTRIBUTORS
 * Damien Roch (Docker support)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
+* Douglas R. Miles (suggestions, bug reports, Logtalk on SWISH experiments)
 * Ebrahim Azarisooreh (code metrics tool)
 * Eva Stöwe (PDT support for Logtalk)
 * Feliks Kluzniak (coinduction examples and bug reports)
