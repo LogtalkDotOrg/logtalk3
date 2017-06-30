@@ -44,6 +44,63 @@ bb(0).
 	bb(4).
 :- endif.
 
+% tests of if/1...else/0...if/1...endif/0
+bb(5).
+
+:- if(fail).
+	bb(6).
+:- else.
+	bb(7).
+	:- if(true).
+		bb(8).
+	:- elif(true).
+		bb(9).
+	:- endif.
+	bb(10).
+:- endif.
+
+bb(11).
+
+:- if(fail).
+	bb(12).
+:- else.
+	bb(13).
+	:- if(true).
+		bb(14).
+	:- elif(fail).
+		bb(15).
+	:- endif.
+	bb(16).
+:- endif.
+
+bb(17).
+
+:- if(fail).
+	bb(18).
+:- else.
+	bb(19).
+	:- if(fail).
+		bb(20).
+	:- elif(true).
+		bb(21).
+	:- endif.
+	bb(22).
+:- endif.
+
+bb(23).
+
+:- if(fail).
+	bb(24).
+:- else.
+	bb(25).
+	:- if(fail).
+		bb(26).
+	:- elif(fail).
+		bb(27).
+	:- endif.
+	bb(28).
+:- endif.
+
 % tests of if/1...elif/1...else/0...endif/0
 cc(0).
 

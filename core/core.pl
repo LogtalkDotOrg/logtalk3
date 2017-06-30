@@ -3028,7 +3028,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 0, rc9)).
+'$lgt_version_data'(logtalk(3, 11, 0, rc10)).
 
 
 
@@ -7730,6 +7730,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% the corresponding if is true so we must skip this elif
 		retractall('$lgt_pp_cc_skipping_'),
 		assertz('$lgt_pp_cc_skipping_'),
+		retract('$lgt_pp_cc_mode_'(_)),
 		asserta('$lgt_pp_cc_mode_'(skip_all))
 	;	Mode == skip_all ->
 		true
@@ -7767,6 +7768,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% Mode == seek_else ->
 		% the corresponding if is false
+		retract('$lgt_pp_cc_mode_'(_)),
+		asserta('$lgt_pp_cc_mode_'(compile)),
 		retractall('$lgt_pp_cc_skipping_')
 	),
 	!.

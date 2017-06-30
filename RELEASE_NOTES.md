@@ -58,6 +58,8 @@ predicates when the goal arguments are module qualified.
 clause heads, when using a backend Prolog compiler that supports modules, to
 take into account Logtalk being loaded into a module other than `user`.
 
+* FIXED: Bug in the processing of nested conditional compilation directives.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -105,6 +107,8 @@ Tests
 * ADDED: Some more tests for the `current_event/5` built-in predicate.
 
 * ADDED: Some more tests for the `before/3` and `after/3` built-in methods.
+
+* ADDED: Some more tests for the conditional compilation directives.
 
 Examples
 --------

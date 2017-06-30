@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/08/03,
+		date is 2017/06/30,
 		comment is 'Unit tests for the if/1 and other conditional compilation built-in directives.'
 	]).
 
@@ -43,6 +43,15 @@
 		bb(1), \+ bb(2).
 	test(if_else_endif_2) :-
 		\+ bb(3), bb(4).
+
+	test(if_else_if_endif_1) :-
+		bb(5), \+ bb(6), bb(7), bb(8), \+ bb(9), bb(10).
+	test(if_else_if_endif_2) :-
+		bb(11), \+ bb(12), bb(13), bb(14), \+ bb(15), bb(16).
+	test(if_else_if_endif_3) :-
+		bb(17), \+ bb(18), bb(19), \+ bb(20), bb(21), bb(22).
+	test(if_else_if_endif_4) :-
+		bb(23), \+ bb(24), bb(25), \+ bb(26), \+ bb(27), bb(28).
 
 	test(if_elif_else_endif_0) :-
 		cc(0).
