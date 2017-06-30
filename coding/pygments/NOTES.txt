@@ -30,15 +30,17 @@ the command:
 
 	$ pygmentize -H lexer Logtalk
 
-If support for Logtalk is outdated, replace its definition in the following file
-(its prefix depends on where Python is installed):
+If support for Logtalk is outdated, replace its definition inside one of the
+following files (its prefix depends on where Python is installed):
 
-	site-packages/pygments/lexers/other.py
+	site-packages/pygments/lexers/prolog.py (recent Pygments versions)
+	site-packages/pygments/lexers/other.py  (older Pygments versions)
 
 with the contents of the `logtalk.py` from the Logtalk distribution and compile
 the updated file:
 
-	$ python -m py_compile other.py	
+	$ python -m py_compile prolog.py (recent Pygments versions)
+	$ python -m py_compile other.py  (older Pygments versions)
 
 Finally, rebuild the lexer mappings by typing:
 
