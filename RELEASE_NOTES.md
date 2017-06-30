@@ -136,6 +136,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Syntax coloring support for the new `context/1` built-in method to
 most of the supported text editors and syntax highlighters.
 
+* FIXED: Vim syntax coloring support for the `create_logtalk_flag/3` and
+`current_logtalk_flag/2` built-in predicates.
+
 
 3.10.9 - June 14, 2017
 ======================
