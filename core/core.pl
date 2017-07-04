@@ -2493,11 +2493,9 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make_target_actions'(_).
 
 
-% single file failure or chain of loaded files leading to a compilation failure
 '$lgt_logtalk_make'(all) :-
 	'$lgt_failed_file_'(Path),
-	% the following predicate may no longer be defined depending
-	% on what caused the failure, hence the next clause
+	% the following predicate may no longer be defined depending on what caused the failure
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, Flags),
 	logtalk_load(Path, Flags),
 	fail.
@@ -3040,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 11, 1, rc2)).
 
 
 
@@ -5809,9 +5807,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% in a printed message and failure instead of an exception but we
 	% need to pass the failure up to the caller
 	(	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, loading) ->
-		retractall('$lgt_failed_file_'(SourceFile))
-	;	assertz('$lgt_failed_file_'(SourceFile)),
-		retractall('$lgt_file_loading_stack_'(SourceFile, Directory)),
+		true
+	;	retractall('$lgt_file_loading_stack_'(SourceFile, Directory)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile),
 		fail
 	),
@@ -5864,7 +5861,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% loading of the intermediate Prolog file failed
 		retractall('$lgt_file_loading_stack_'(SourceFile, _)),
-		assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
 	% cleanup intermediate files if necessary
@@ -6072,9 +6068,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_propagate_failure_to_parent_files'(File) :-
 	(	'$lgt_parent_file_'(File, Parent) ->
-		asserta('$lgt_failed_file_'(Parent)),
 		'$lgt_propagate_failure_to_parent_files'(Parent)
-	;	true
+	;	assertz('$lgt_failed_file_'(File))
 	).
 
 

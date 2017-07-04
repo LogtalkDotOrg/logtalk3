@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Minimize the number of file reloads triggered by calls to the
+`logtalk_make/0-1` predicates.
+
 * FIXED: Case where the `logtalk_make/0-1` predicates would fail to reload a
 file whose compilation generated a compiler error.
 
