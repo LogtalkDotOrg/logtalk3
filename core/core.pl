@@ -2496,7 +2496,19 @@ logtalk_make(Target) :-
 % single file failure or chain of loaded files leading to a compilation failure
 '$lgt_logtalk_make'(all) :-
 	'$lgt_failed_file_'(Path),
+	% the following predicate may no longer be defined depending
+	% on what caused the failure, hence the next clause
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, Flags),
+	logtalk_load(Path, Flags),
+	fail.
+'$lgt_logtalk_make'(all) :-
+	'$lgt_failed_file_'(Path),
+	'$lgt_decompose_file_name'(Path, Directory, Name, Extension),
+	atom_concat(Name, Extension, Basename),
+	% force reloding by changing the main file time stamp to 0.0, a value that in the standard term
+	% comparison order used to compare time stamps comes before any integer or float actual time stamp
+	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, _)),
+	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, 0.0)),
 	logtalk_load(Path, Flags),
 	fail.
 % recompilation of changed source files since last loaded

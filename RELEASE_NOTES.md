@@ -24,7 +24,11 @@ RELEASE NOTES
 3.11.1 - August ??, 2017
 ========================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: Case where the `logtalk_make/0-1` predicates would fail to reload a
+file whose compilation generated a compiler error.
 
 
 3.11.0 - July 3, 2017
