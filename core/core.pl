@@ -5811,6 +5811,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, loading) ->
 		retractall('$lgt_failed_file_'(SourceFile))
 	;	assertz('$lgt_failed_file_'(SourceFile)),
+		retractall('$lgt_file_loading_stack_'(SourceFile, Directory)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile),
 		fail
 	),

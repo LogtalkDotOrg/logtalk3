@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * FIXED: Case where the `logtalk_make/0-1` predicates would fail to reload a
 file whose compilation generated a compiler error.
 
+* FIXED: Case where trying to reload a file with compilation errors without
+first fixing those errors could lead to an endless loop.
+
 
 3.11.0 - July 3, 2017
 =====================
