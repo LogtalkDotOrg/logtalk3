@@ -36,6 +36,11 @@ file whose compilation generated a compiler error.
 * FIXED: Case where trying to reload a file with compilation errors without
 first fixing those errors could lead to an endless loop.
 
+Tools
+-----
+
+* FIXED: Display of non-library nodes in library load and dependency diagrams.
+
 
 3.11.0 - July 3, 2017
 =====================

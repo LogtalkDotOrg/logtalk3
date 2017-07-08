@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2016/11/09,
+		date is 2017/07/08,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format']
 	]).
@@ -90,7 +90,8 @@
 		(	Kind == module ->
 			modules_diagram_support::module_property(Other, file(OtherPath)),
 			OtherLibrary = Other
-		;	logtalk::loaded_file_property(OtherPath, library(OtherLibrary))
+		;	logtalk::loaded_file_property(OtherPath, library(OtherLibrary)),
+			OtherLibrary \== startup
 		),
 		OtherLibrary \== Library.
 

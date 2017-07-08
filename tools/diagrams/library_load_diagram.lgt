@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2016/11/08,
+		date is 2017/07/08,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -55,15 +55,16 @@
 		^^remember_included_library(Library, Directory),
 		fail.
 	% second, output edges for all libraries loaded by files in this library
-	output_library(_Library, Directory, Options) :-
-		% any library Logtalk or Prolog file may load other files
+	output_library(Library, Directory, Options) :-
+		% any Logtalk or Prolog library file may load other files
 		(	logtalk::loaded_file_property(File, directory(Directory))
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
 		),
 		% look for a file in another library that have this file as parent
 		(	logtalk::loaded_file_property(Other, parent(File)),
-			logtalk::loaded_file_property(Other, directory(OtherDirectory)),
-			OtherDirectory \== Directory
+			logtalk::loaded_file_property(Other, library(OtherLibrary)),
+			OtherLibrary \== startup, Library \== OtherLibrary,
+			logtalk::loaded_file_property(Other, directory(OtherDirectory))
 		;	modules_diagram_support::loaded_file_property(Other, parent(File)),
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
 			OtherDirectory \== Directory,
