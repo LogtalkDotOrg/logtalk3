@@ -36,6 +36,9 @@ file whose compilation generated a compiler error.
 * FIXED: Case where trying to reload a file with compilation errors without
 first fixing those errors could lead to an endless loop.
 
+* FIXED: Default message when no settings file is found at startup to mention
+all three possible lookup directories.
+
 Tools
 -----
 
