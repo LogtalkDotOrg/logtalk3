@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2017/06/27,
+		date is 2017/07/10,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format']
 	]).
@@ -119,8 +119,8 @@
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, don't exclude any library sub-directories:
-	default_option(exclude_libraries([])).
+	% by default, exclude only the "startup" library:
+	default_option(exclude_libraries([startup])).
 	% by default, don't zooming into libraries and entities:
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for zoom linked diagrams

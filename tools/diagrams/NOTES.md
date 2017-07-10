@@ -229,7 +229,7 @@ generated diagrams. For entity diagrams the options are:
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
-	list of sub-libraries to exclude (default is `[]`)
+	list of libraries to exclude (default is `[startup]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
@@ -272,7 +272,7 @@ For file diagrams the options are:
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
-	list of sub-libraries to exclude (default is `[]`)
+	list of libraries to exclude (default is `[startup]`)
 - `zoom(Boolean)`  
 	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
@@ -303,7 +303,7 @@ For library diagrams the options are:
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
-	list of sub-libraries to exclude (default is `[]`)
+	list of libraries to exclude (default is `[startup]`)
 - `zoom(Boolean)`  
 	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  

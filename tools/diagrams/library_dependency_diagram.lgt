@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2017/07/08,
+		date is 2017/07/10,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format']
 	]).
@@ -90,8 +90,7 @@
 		(	Kind == module ->
 			modules_diagram_support::module_property(Other, file(OtherPath)),
 			OtherLibrary = Other
-		;	logtalk::loaded_file_property(OtherPath, library(OtherLibrary)),
-			OtherLibrary \== startup
+		;	logtalk::loaded_file_property(OtherPath, library(OtherLibrary))
 		),
 		OtherLibrary \== Library.
 
@@ -156,8 +155,8 @@
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
-	% by default, don't exclude any library sub-directories:
-	default_option(exclude_libraries([])).
+	% by default, exclude only the "startup" library:
+	default_option(exclude_libraries([startup])).
 	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('directory_index.html', '#')).
 	% by default, don't zooming into libraries and entities:

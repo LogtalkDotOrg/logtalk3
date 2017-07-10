@@ -42,6 +42,9 @@ all three possible lookup directories.
 Tools
 -----
 
+* CHANGED: The `diagrams` tool `exclude_libraries/1` option to exclude the
+`startup` library by default.
+
 * FIXED: Display of non-library nodes in library load and dependency diagrams.
 
 

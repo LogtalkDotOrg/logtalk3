@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2017/06/11,
+		date is 2017/07/10,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -747,8 +747,8 @@
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, don't exclude any library sub-directories:
-	default_option(exclude_libraries([])).
+	% by default, exclude only the "startup" library:
+	default_option(exclude_libraries([startup])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
 	% by default, don't generate cluster, file, and entity URLs:

@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2016/11/01,
+		date is 2017/07/10,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -142,8 +142,8 @@
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, don't exclude any library sub-directories:
-	default_option(exclude_libraries([])).
+	% by default, exclude only the "startup" library:
+	default_option(exclude_libraries([startup])).
 	% by default, don't zooming into libraries and entities:
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for zoom linked diagrams

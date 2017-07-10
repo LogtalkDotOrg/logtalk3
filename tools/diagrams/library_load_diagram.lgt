@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2017/07/08,
+		date is 2017/07/10,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -61,9 +61,11 @@
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
 		),
 		% look for a file in another library that have this file as parent
-		(	logtalk::loaded_file_property(Other, parent(File)),
+		(	memberchk(exclude_libraries(ExcludedLibraries), Options),
+			logtalk::loaded_file_property(Other, parent(File)),
 			logtalk::loaded_file_property(Other, library(OtherLibrary)),
-			OtherLibrary \== startup, Library \== OtherLibrary,
+			Library \== OtherLibrary,
+			\+ member(OtherLibrary, ExcludedLibraries),
 			logtalk::loaded_file_property(Other, directory(OtherDirectory))
 		;	modules_diagram_support::loaded_file_property(Other, parent(File)),
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
@@ -115,8 +117,8 @@
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, don't exclude any library sub-directories:
-	default_option(exclude_libraries([])).
+	% by default, exclude only the "startup" library:
+	default_option(exclude_libraries([startup])).
 	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('directory_index.html', '#')).
 	% by default, don't zooming into libraries and entities:
