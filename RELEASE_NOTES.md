@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The compiler no longer requires calls to the Prolog database and
+reflection predicates where the first argument is a module-qualified term to
+be wrapped using the `{}/1` compiler bypass control construct.
+
 * IMPROVED: Compiler error-checking for calls to the Prolog database and
 reflection predicates where the first argument is a module-qualified term.
 
