@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 1, rc3)).
+'$lgt_version_data'(logtalk(3, 11, 1, rc4)).
 
 
 
@@ -11205,6 +11205,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Pred),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::current_predicate(Pred), TPred, DPred, Ctx)
@@ -11242,6 +11244,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Term),
 	Term = ':'(Module, Head),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Head),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::predicate_property(Head, Prop), TPred, DPred, Ctx)
@@ -11279,6 +11283,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Pred),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::abolish(Pred), TCond, DCond, Ctx)
@@ -11337,9 +11343,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		QHead = ':'(Module,Head) ->
 		Clause = (Head :- Body)
 	;	QClause = ':'(Module,Head),
-		Clause = Head
+		Clause = Head,
+		Body = true
 	),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Head),
+	'$lgt_check'(var_or_callable, Body),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::asserta(Clause), TCond, DCond, Ctx)
@@ -11419,9 +11429,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		QHead = ':'(Module,Head) ->
 		Clause = (Head :- Body)
 	;	QClause = ':'(Module,Head),
-		Clause = Head
+		Clause = Head,
+		Body = true
 	),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Head),
+	'$lgt_check'(var_or_callable, Body),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::assertz(Clause), TCond, DCond, Ctx)
@@ -11498,6 +11512,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(QHead),
 	QHead = ':'(Module, Head),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Head),
+	'$lgt_check'(var_or_callable, Body),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::clause(Head, Body), TCond, DCond, Ctx)
@@ -11554,9 +11571,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		QHead = ':'(Module,Head) ->
 		Clause = (Head :- Body)
 	;	QClause = ':'(Module,Head),
-		Clause = Head
+		Clause = Head,
+		Body = true
 	),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Head),
+	'$lgt_check'(var_or_callable, Body),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::retract(Clause), TCond, DCond, Ctx)
@@ -11635,6 +11656,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(QHead),
 	QHead = ':'(Module, Head),
 	!,
+	'$lgt_check'(var_or_module_identifier, Module),
+	'$lgt_check'(var_or_callable, Head),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::retractall(Head), TCond, DCond, Ctx)

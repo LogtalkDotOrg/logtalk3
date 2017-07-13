@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compiler error-checking for calls to the Prolog database and
+reflection predicates where the first argument is a module-qualified term.
+
 * IMPROVED: Minimize the number of file reloads triggered by calls to the
 `logtalk_make/0-1` predicates.
 
