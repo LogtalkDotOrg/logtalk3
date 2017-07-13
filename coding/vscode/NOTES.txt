@@ -22,16 +22,19 @@ files with the Visual Studio Code text editor:
 
 	http://code.visualstudio.com/
 
-To install, copy the `pmoura.logtalk-0.0` folder to the following folder:
+To install, copy the `pmoura.logtalk-0.0.2` folder to the following folder:
 
 	~/.vscode/extensions
 
-(create the folder if it does not exist). This extension includes support
+Create the folder if it does not exist. This extension includes support
 for syntax highlighting and code folding. Snippets are also provided for
 entities and predicate declarations. In the case of entities, the defined
 triggers are `object`, `class`, `instance`, `protocol`, and `category`.
 In the case of predicates, the defined triggers are `public`, `protected`,
 and `private`.
+
+Copy the file `tasks.json` to the your workspace folder. Edit it to choose
+and customize the Prolog integration shortcut that you want to use.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width

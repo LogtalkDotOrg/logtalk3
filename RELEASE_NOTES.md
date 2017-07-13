@@ -47,6 +47,11 @@ Tools
 
 * FIXED: Display of non-library nodes in library load and dependency diagrams.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Sample `tasks.json` file for the Visual Studio Code text editor.
+
 
 3.11.0 - July 3, 2017
 =====================
