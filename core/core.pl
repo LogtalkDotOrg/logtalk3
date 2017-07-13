@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 1, rc2)).
+'$lgt_version_data'(logtalk(3, 11, 1, rc3)).
 
 
 
@@ -6464,13 +6464,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_add_referenced_module'(@protocol_identifier, @compilation_context)
+% '$lgt_add_referenced_module'(@term, @compilation_context)
 %
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
-	(	'$lgt_pp_referenced_module_'(Module, _, _) ->
+	(	var(Module) ->
+		% module instantiated only at runtime
+		true
+	;	'$lgt_pp_referenced_module_'(Module, _, _) ->
 		% not the first reference to this module
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->

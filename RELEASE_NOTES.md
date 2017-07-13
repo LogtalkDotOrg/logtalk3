@@ -39,6 +39,9 @@ first fixing those errors could lead to an endless loop.
 * FIXED: Default message when no settings file is found at startup to mention
 all three possible lookup directories.
 
+* FIXED: Saving referenced modules for use by the reflection API when the
+module is only bound at runtime.
+
 Tools
 -----
 
