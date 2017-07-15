@@ -2,10 +2,10 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"taskName": "Compile file",
+			"taskName": "Logtalk: Compile file",
 			"type": "shell",
 			"command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('${file}')),halt\" 2>&1",
-			"group": "test",
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
@@ -31,7 +31,7 @@
 			}
 		},
 		{
-			"taskName": "Run unit tests",
+			"taskName": "Logtalk: Run unit tests",
 			"type": "shell",
 			"command": "swilgt -g \"ignore(logtalk_load('${fileDirname}/tester')),halt\" 2>&1",
 			"group": "test",
@@ -41,40 +41,40 @@
 			}
 		},
 		{
-			"taskName": "Scan for dead code",
+			"taskName": "Logtalk: Scan for dead code",
 			"type": "shell",
 			"command": "swilgt -g \"set_logtalk_flag(report,warnings),ignore(logtalk_load('${file}')),flush_output,logtalk_load(dead_code_scanner(loader)),dead_code_scanner::all,halt\" 2>&1",
-			"group": "test",
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
 			}
 		},
 		{
-			"taskName": "Run doclet",
+			"taskName": "Logtalk: Run doclet",
 			"type": "shell",
 			"command": "swilgt -g \"logtalk_load(doclet(loader)),ignore(logtalk_load('${fileDirname}/doclet')),halt\" 2>&1",
-			"group": "test",
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
 			}
 		},
 		{
-			"taskName": "Generate HTML documentation",
+			"taskName": "Logtalk: Generate HTML documentation",
 			"type": "shell",
 			"command": "swilgt -g \"logtalk_load(lgtdoc(loader)),logtalk_load('${file}'),os::change_directory('${fileDirname}'),lgtdoc::directory('${fileDirname}'),halt\" 2>&1 && cd ${fileDirname}/xml_docs && lgt2html && code index.html",
-			"group": "test",
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
 			}
 		},
 		{
-			"taskName": "Generate SVG diagrams",
+			"taskName": "Logtalk: Generate SVG diagrams",
 			"type": "shell",
 			"command": "swilgt -g \"logtalk_load(diagrams(loader)),logtalk_load('${file}'),os::change_directory('${fileDirname}'),diagrams::directory('${fileDirname}'),halt\" 2>&1 && cd ${fileDirname} && for f in *.dot; do dot -Tsvg \"$f\" > \"$(basename \"$f\" .dot).svg\" || continue; done",
-			"group": "test",
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "new"
