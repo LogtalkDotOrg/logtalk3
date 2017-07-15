@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.25,
+		version is 1.26,
 		author is 'Paulo Moura',
-		date is 2017/07/08,
+		date is 2017/07/15,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -301,7 +301,7 @@
 
 	message_tokens(compiler_error(File, Lines, Error)) -->
 		error_term_tokens(Error),
-		message_context(File, Lines).
+		error_message_context(File, Lines).
 
 	message_tokens(compiler_stream_error(Error)) -->
 		error_term_tokens(Error).
@@ -462,7 +462,6 @@
 			['Singleton variable: ~w'-[Name], nl]
 		;	['Singleton variables: ~w'-[Names], nl]
 		),
-		term_type_tokens(Term),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(singleton_variables(File, Lines, Names, Term)) -->
@@ -470,7 +469,6 @@
 			['Singleton variable: ~w'-[Name], nl]
 		;	['Singleton variables: ~w'-[Names], nl]
 		),
-		term_type_tokens(Term),
 		message_context(File, Lines).
 
 	message_tokens(compilation_and_loading_warnings(CCounter, LCounter)) -->
@@ -531,7 +529,8 @@
 		error_tokens(Error),
 		term_tokens(Term).
 	error_term_tokens(Error) -->
-		error_tokens(Error).
+		error_tokens(Error),
+		term_tokens(term(_)).
 
 	% based on the ISO Prolog Core standard
 	error_tokens(instantiation_error) -->
@@ -561,67 +560,53 @@
 	term_tokens(entity(Type, Entity)) -->
 		['  in ~w ~q'-[Type, Entity], nl].
 	term_tokens(directive(Directive)) -->
-		['  in directive :- ~q'-[Directive], nl].
+		(	{callable(Directive)} ->
+			{functor(Directive, Functor, Arity)},
+			['  in directive ~q/~w'-[Functor, Arity], nl]
+		;	['  in directive'-[], nl]
+		).
 	term_tokens(clause(Clause)) -->
-		['  in clause ~q'-[Clause], nl].
-	term_tokens(grammar_rule(Rule)) -->
-		['  in grammar rule ~q'-[Rule], nl].
-	term_tokens(term(Term)) -->
-		['  in term ~q'-[Term], nl].
-	term_tokens(Term) -->
-		['  in ~q'-[Term], nl].
-
-	term_type_tokens((:- Term)) -->
-		(	{var(Term)} ->
-			[]
-		;	['  in directive '-[]], predicate_indicator_tokens(Term), [nl]
+		(	{\+ callable(Clause)} ->
+			['  in clause'-[], nl]
+		;	{Clause = (Head :- _), callable(Head)} ->
+			{functor(Head, Functor, Arity)},
+			['  in clause for predicate ~q/~w'-[Functor, Arity], nl]
+		;	{Clause \= (_ :- _)} ->
+			{functor(Clause, Functor, Arity)},
+			['  in clause for predicate ~q/~w'-[Functor, Arity], nl]
+		;	['  in clause'-[], nl]
 		).
-	term_type_tokens((Term :- _)) -->
-		(	{var(Term)} ->
-			[]
-		;	['  in clause for predicate '-[]], predicate_indicator_tokens(Term), [nl]
+	term_tokens(grammar_rule(Left --> _)) -->
+		(	{\+ callable(Left)} ->
+			['  in grammar rule'-[], nl]
+		;	{Left = (Head, _), callable(Head)} ->
+			{functor(Head, Functor, Arity)},
+			['  in grammar rule for non-terminal ~q//~w'-[Functor, Arity], nl]
+		;	{Left \= (_, _)} ->
+			{functor(Left, Functor, Arity)},
+			['  in grammar rule for non-terminal ~q//~w'-[Functor, Arity], nl]
+		;	['  in grammar rule'-[], nl]
 		).
-	term_type_tokens((Term, _ --> _)) -->
-		(	{var(Term)} ->
-			[]
-		;	['  in grammar rule for non-terminal '-[]], non_terminal_indicator_tokens(Term), [nl]
-		).
-	term_type_tokens((Term --> _)) -->
-		(	{var(Term)} ->
-			[]
-		;	['  in grammar rule for non-terminal '-[]], non_terminal_indicator_tokens(Term), [nl]
-		).
-	term_type_tokens(Term) -->		% facts
-		(	{var(Term)} ->
-			[]
-		;	['  in clause for predicate '-[]], predicate_indicator_tokens(Term), [nl]
-		).
-
-	predicate_indicator_tokens(Entity::Term) -->
-		(	{var(Term)} ->
-			['~q'-[Entity::Term]]
-		;	{functor(Term, Functor, Arity)},
-			['~q'-[Entity::Functor/Arity]]
-		).
-	predicate_indicator_tokens(Term) -->
-		{functor(Term, Functor, Arity)},
-		['~q'-[Functor/Arity]].
-
-	non_terminal_indicator_tokens(Entity::Term) -->
-		(	{var(Term)} ->
-			['~q'-[Entity::Term]]
-		;	{functor(Term, Functor, Arity)},
-			['~q'-[Entity::Functor//Arity]]
-		).
-	non_terminal_indicator_tokens(Term) -->
-		{functor(Term, Functor, Arity)},
-		['~q'-[Functor//Arity]].
+	term_tokens(term(_)) -->
+		['  in term'-[], nl].
+	term_tokens(_) -->
+		['  in term'-[], nl].
 
 	message_context(File, Lines, Type, Entity) -->
 		['  while compiling ~w ~q'-[Type, Entity], nl],
-		message_context(File, Lines).
+		(	{Lines = Line-Line} ->
+			['  in file ~w at or above line ~d'-[File, Line], nl]
+		;	['  in file ~w between lines ~w'-[File, Lines], nl]
+		).
 
 	message_context(File, Lines) -->
+		['  while compiling file'-[], nl],
+		(	{Lines = Line-Line} ->
+			['  in file ~w at or above line ~d'-[File, Line], nl]
+		;	['  in file ~w between lines ~w'-[File, Lines], nl]
+		).
+
+	error_message_context(File, Lines) -->
 		(	{Lines = Line-Line} ->
 			['  in file ~w at or above line ~d'-[File, Line], nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl]

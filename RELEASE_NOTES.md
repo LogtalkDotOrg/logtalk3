@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compiler warning and error messages to make them more uniform to
+facilitate parsing by editors and IDEs and to avoid printing potentially large
+terms.
+
 * IMPROVED: The compiler no longer requires calls to the Prolog database and
 reflection predicates where the first argument is a module-qualified term to
 be wrapped using the `{}/1` compiler bypass control construct.
