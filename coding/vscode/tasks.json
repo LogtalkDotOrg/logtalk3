@@ -23,9 +23,9 @@
 						"code": 1
 					},
 					{
-						"regexp": "^[\\*!]\\s+in\\s+file\\s+(.*)\\s+at\\s+or\\s+above\\s+line\\s+(\\d+)$",
+						"regexp": "^[\\*!]\\s+in\\s+file\\s+(.*)\\s+(at\\s+or\\s+above\\s+line|between\\s+lines)\\s+(\\d+).*$",
 						"file": 1,
-						"line": 2
+						"line": 3
 					}
 				]
 			}
