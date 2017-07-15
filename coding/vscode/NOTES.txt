@@ -33,8 +33,8 @@ triggers are `object`, `class`, `instance`, `protocol`, and `category`.
 In the case of predicates, the defined triggers are `public`, `protected`,
 and `private`.
 
-Copy the file `tasks.json` to the your workspace folder. Edit it to choose
-and customize the Prolog integration shortcut that you want to use.
+Copy the file `tasks.json` to the your workspace `.vscode` folder. Edit it to
+choose and customize the Prolog integration shortcut that you want to use.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
