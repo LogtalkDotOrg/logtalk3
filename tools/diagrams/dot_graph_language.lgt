@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.10,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2017/06/27,
+		date is 2017/07/16,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -354,7 +354,6 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
-		:- import(from(/(term_to_atom,2), string)).
 		write_term_to_chars(Term, Chars) :-
 			{term_to_atom(Term, Atom), atom_chars(Atom, Chars)}.
 
@@ -371,3 +370,8 @@
 	:- endif.
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, xsb)).
+	:- import(from(/(term_to_atom,2), string)).
+:- endif.

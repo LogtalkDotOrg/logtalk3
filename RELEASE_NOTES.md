@@ -61,6 +61,8 @@ Tools
 
 * FIXED: Display of non-library nodes in library load and dependency diagrams.
 
+* FIXED: The `diagrams` tool `dot_graph_language` object for XSB.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
