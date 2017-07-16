@@ -64,7 +64,10 @@ Tools
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: Sample `tasks.json` file for the Visual Studio Code text editor.
+* ADDED: Sample `tasks.json` file for the Visual Studio Code text editor. The
+compile file, run tests, and scan for dead code tasks include problem matchers
+to allow quick jumping to compiler errors, warnings, failed tests, and dead
+predicate locations.
 
 
 3.11.0 - July 3, 2017
