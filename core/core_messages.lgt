@@ -576,13 +576,13 @@
 			['  in clause for predicate ~q/~w'-[Functor, Arity], nl]
 		;	['  in clause'-[], nl]
 		).
-	term_tokens(grammar_rule(Left --> _)) -->
+	term_tokens(grammar_rule('-->'(Left, _))) -->
 		(	{\+ callable(Left)} ->
 			['  in grammar rule'-[], nl]
-		;	{Left = (Head, _), callable(Head)} ->
+		;	{Left = ','(Head, _), callable(Head)} ->
 			{functor(Head, Functor, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Functor, Arity], nl]
-		;	{Left \= (_, _)} ->
+		;	{Left \= ','(_, _)} ->
 			{functor(Left, Functor, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Functor, Arity], nl]
 		;	['  in grammar rule'-[], nl]
