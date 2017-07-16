@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/02/20,
+		date is 2017/07/16,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -198,18 +198,18 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		atom_concat(Directory, test_file, TestFile),
-		catch(os::delete_file(TestFile), _, true),
+		catch(ignore(os::delete_file(TestFile)), _, true),
 		atom_concat(Directory, test_file_1, TestFile1),
-		catch(os::delete_file(TestFile1), _, true),
+		catch(ignore(os::delete_file(TestFile1)), _, true),
 		atom_concat(Directory, test_file_2, TestFile2),
-		catch(os::delete_file(TestFile2), _, true),
+		catch(ignore(os::delete_file(TestFile2)), _, true),
 		atom_concat(Directory, test_sub_directory, SubDirectory),
-		catch(os::delete_directory(SubDirectory), _, true),
+		catch(ignore(os::delete_directory(SubDirectory)), _, true),
 		atom_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory3),
-		catch(os::delete_directory(SubDirectory3), _, true),
+		catch(ignore(os::delete_directory(SubDirectory3)), _, true),
 		atom_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory2),
-		catch(os::delete_directory(SubDirectory2), _, true),
+		catch(ignore(os::delete_directory(SubDirectory2)), _, true),
 		atom_concat(Directory, 'sub_directory1', SubDirectory1),
-		catch(os::delete_directory(SubDirectory1), _, true).
+		catch(ignore(os::delete_directory(SubDirectory1)), _, true).
 
 :- end_object.
