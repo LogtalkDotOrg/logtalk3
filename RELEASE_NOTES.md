@@ -21,34 +21,34 @@ RELEASE NOTES
 =============
 
 
-3.11.1 - August ??, 2017
-========================
+3.11.1 - July 17, 2017
+======================
 
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: Compiler warning and error messages to make them more uniform to
-facilitate parsing by editors and IDEs and to avoid printing potentially large
-terms.
+* IMPROVED: Compiler warning and error messages to make them more uniform
+to facilitate parsing by editors and IDEs and to avoid printing potentially
+large terms.
 
-* IMPROVED: The compiler no longer requires calls to the Prolog database and
-reflection predicates where the first argument is a module-qualified term to
-be wrapped using the `{}/1` compiler bypass control construct.
+* IMPROVED: The compiler no longer requires calls to the database and
+reflection predicates where the first argument is a module-qualified
+term to be wrapped using the `{}/1` compiler bypass control construct.
 
-* IMPROVED: Compiler error-checking for calls to the Prolog database and
-reflection predicates where the first argument is a module-qualified term.
+* IMPROVED: Compiler error-checking for database and reflection predicate
+calls where the first argument is a module-qualified term.
 
 * IMPROVED: Minimize the number of file reloads triggered by calls to the
 `logtalk_make/0-1` predicates.
 
-* FIXED: Case where the `logtalk_make/0-1` predicates would fail to reload a
-file whose compilation generated a compiler error.
+* FIXED: Case where the `logtalk_make/0-1` predicates would fail to reload
+a file whose compilation generated a compiler error.
 
 * FIXED: Case where trying to reload a file with compilation errors without
 first fixing those errors could lead to an endless loop.
 
 * FIXED: Default message when no settings file is found at startup to mention
-all three possible lookup directories.
+all three lookup directories.
 
 * FIXED: Saving referenced modules for use by the reflection API when the
 module is only bound at runtime.
