@@ -24,7 +24,10 @@ RELEASE NOTES
 3.11.2 - August ??, 2017
 ========================
 
+Tools
+-----
 
+* ADDED: Test outcome `false` as an alias to test outcome `fail`.
 
 
 3.11.1 - July 17, 2017

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.5,
+		version is 4.6,
 		author is 'Paulo Moura',
-		date is 2017/06/13,
+		date is 2017/07/22,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1015,10 +1015,21 @@
 	check_for_valid_test_outcome(Test, Outcome) :-
 		(	var(Outcome) ->
 			print_message(error, lgtunit, non_instantiated_test_outcome(Test))
-		;	member(Outcome, [true, true(_), deterministic, deterministic(_), fail,error(_), errors(_), ball(_), balls(_)]) ->
+		;	valid_test_outcome(Outcome) ->
 			true
 		;	print_message(error, lgtunit, invalid_test_outcome(Test, Outcome))
 		).
+
+	valid_test_outcome(true).
+	valid_test_outcome(true(_)).
+	valid_test_outcome(deterministic).
+	valid_test_outcome(deterministic(_)).
+	valid_test_outcome(fail).
+	valid_test_outcome(false).
+	valid_test_outcome(error(_)).
+	valid_test_outcome(errors(_)).
+	valid_test_outcome(ball(_)).
+	valid_test_outcome(balls(_)).
 
 	convert_test_outcome(true, _, Goal, true, Goal).
 	convert_test_outcome(true(Assertion), _, Goal, true, (Goal, lgtunit::assertion(Assertion,Assertion))).
@@ -1027,6 +1038,7 @@
 	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic, (lgtunit::deterministic(Head), lgtunit::assertion(Assertion,Assertion))) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(fail, _, Goal, fail, Goal).
+	convert_test_outcome(false, _, Goal, fail, Goal).
 	convert_test_outcome(error(Ball), _, Goal, [error(Ball,_)], Goal).
 	convert_test_outcome(errors(Balls), _, Goal, Errors, Goal) :-
 		map_errors(Balls, Errors).

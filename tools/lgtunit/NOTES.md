@@ -137,6 +137,8 @@ The possible values of the outcome argument are:
 	the test is expected to succeed once without leaving a choice-point and satisfy the `Assertion` goal
 - `fail`  
 	the test is expected to fail
+- `false`  
+	the test is expected to fail
 - `error(Error)`  
 	the test is expected to throw the exception term `error(Error, _)`
 - `errors(Errors)`  
