@@ -24,6 +24,12 @@ RELEASE NOTES
 3.11.2 - August ??, 2017
 ========================
 
+Library
+-------
+
+* ADDED: Definitions for number and float derived types to the `type` library
+object.
+
 Tools
 -----
 

@@ -21,16 +21,18 @@
 :- object(type).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2017/07/04,
+		date is 2017/07/23,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
 			'Atom derived types' - '{boolean, character}',
-			'Number derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
+			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
+			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
+			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
@@ -136,6 +138,17 @@
 		type(qualified_callable).
 	:- endif.
 	% number derived types
+	type(positive_number).
+	type(negative_number).
+	type(non_positive_number).
+	type(non_negative_number).
+	% float derived types
+	type(positive_float).
+	type(negative_float).
+	type(non_positive_float).
+	type(non_negative_float).
+	type(probability).
+	% integer derived types
 	type(positive_integer).
 	type(negative_integer).
 	type(non_positive_integer).
@@ -463,6 +476,100 @@
 		).
 
 	% number derived types
+
+	check(positive_number, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ number(Term) ->
+			throw(type_error(number, Term))
+		;	Term =< 0 ->
+			throw(domain_error(positive_number, Term))
+		;	true
+		).
+
+	check(negative_number, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ number(Term) ->
+			throw(type_error(number, Term))
+		;	Term >= 0 ->
+			throw(domain_error(negative_number, Term))
+		;	true
+		).
+
+	check(non_negative_number, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ number(Term) ->
+			throw(type_error(number, Term))
+		;	Term < 0 ->
+			throw(domain_error(non_negative_number, Term))
+		;	true
+		).
+
+	check(non_positive_number, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ number(Term) ->
+			throw(type_error(number, Term))
+		;	Term > 0 ->
+			throw(domain_error(non_positive_number, Term))
+		;	true
+		).
+
+	% float derived types
+
+	check(positive_float, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ float(Term) ->
+			throw(type_error(float, Term))
+		;	Term =< 0 ->
+			throw(domain_error(positive_float, Term))
+		;	true
+		).
+
+	check(negative_float, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ float(Term) ->
+			throw(type_error(float, Term))
+		;	Term >= 0 ->
+			throw(domain_error(negative_float, Term))
+		;	true
+		).
+
+	check(non_negative_float, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ float(Term) ->
+			throw(type_error(float, Term))
+		;	Term < 0 ->
+			throw(domain_error(non_negative_float, Term))
+		;	true
+		).
+
+	check(non_positive_float, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ float(Term) ->
+			throw(type_error(float, Term))
+		;	Term > 0 ->
+			throw(domain_error(non_positive_float, Term))
+		;	true
+		).
+
+	check(probability, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ float(Term) ->
+			throw(type_error(float, Term))
+		;	0.0 =< Term, Term =< 1.0 ->
+			throw(domain_error(probability, Term))
+		;	true
+		).
+
+	% integer derived types
 
 	check(positive_integer, Term) :-
 		(	var(Term) ->
