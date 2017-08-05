@@ -355,7 +355,7 @@
 	check(nonvar, Term) :-
 		(	nonvar(Term) ->
 			true
-		;	throw(type_error(nonvar, Term))
+		;	throw(instantiation_error)
 		).
 
 	check(atomic, Term) :-

@@ -30,6 +30,9 @@ Library
 * ADDED: Definitions for number and float derived types to the `type` library
 object.
 
+* FIXED: The definition of the type `nonvar` in the `type` library object to
+throw an `instantiation_error` when the checked term is not instantiated.
+
 Tools
 -----
 
