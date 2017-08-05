@@ -24,6 +24,13 @@ RELEASE NOTES
 3.11.2 - August ??, 2017
 ========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The SWI-Prolog adapter file to no longer try to expand `include/1`
+directives when compiling a module as an object as these are now handled by
+the Logtalk compiler.
+
 Library
 -------
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on June 19, 2017
+%  Last updated on August 5, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -623,13 +623,6 @@
 		Expanded  =  {(:- ExpandedDirective)}
 	;	Expanded  =  (:- Expanded0)
 	).
-
-'$lgt_swi_directive_expansion'(include(File), Terms) :-
-	% just an hack for simple cases
-	logtalk_load_context(entity_type, module),
-	% auto-loading might be turned off
-	use_module(library(readutil), []),
-	readutil:read_file_to_terms(File, Terms, [extensions([pl, ''])]).
 
 '$lgt_swi_directive_expansion'(public(_), []) :-
 	% used to provide information about module predicates to the cross-referencer
