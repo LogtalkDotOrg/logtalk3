@@ -27,6 +27,10 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: The SWI-Prolog adapter file to also try to term-expand directives
+`use_module/1-2`, `ensure_loaded/1`, and `reexport/1-2` whose file spec is a
+file in the current directory.
+
 * FIXED: The SWI-Prolog adapter file to no longer try to expand `include/1`
 directives when compiling a module as an object as these are now handled by
 the Logtalk compiler.

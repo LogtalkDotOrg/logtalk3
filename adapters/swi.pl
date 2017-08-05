@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on August 5, 2017
+%  Last updated on August 6, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -719,14 +719,22 @@
 
 
 '$lgt_swi_list_of_exports'(File, Module, Exports) :-
-	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail)]),
+	(	logtalk_load_context(directory, Directory)
+	;	logtalk_load_context(file, IncludeFile),
+		file_directory_name(IncludeFile, Directory)
+	),
+	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail), relative_to(Directory)]),
 	module_property(Module, file(Path)),	% only succeeds for loaded modules
 	module_property(Module, exports(Exports)),
 	!.
 '$lgt_swi_list_of_exports'(File, Module, Exports) :-
-	(	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail)])
+	(	logtalk_load_context(directory, Directory)
+	;	logtalk_load_context(file, IncludeFile),
+		file_directory_name(IncludeFile, Directory)
+	),
+	(	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail), relative_to(Directory)])
 	;	% we may be compiling Prolog module files as Logtalk objects
-		absolute_file_name(File, Path, [extensions(['.lgt']), access(read), file_errors(fail)])
+		absolute_file_name(File, Path, [extensions(['.lgt']), access(read), file_errors(fail), relative_to(Directory)])
 	),
 	open(Path, read, In),
 	(	peek_char(In, #) ->					% deal with #! script; if not present
@@ -738,7 +746,8 @@
 		file_base_name(Path, Base),
 		file_name_extension(Module, _, Base)
 	;	true
-	).
+	),
+	!.
 
 '$lgt_swi_read_module_directive'(Stream, Module, Exports) :-
 	read(Stream, FirstTerm),
