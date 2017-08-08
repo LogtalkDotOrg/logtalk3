@@ -46,6 +46,8 @@ the Logtalk compiler.
 Library
 -------
 
+* ADDED: Definition of type `optional` to the `optional` library object.
+
 * ADDED: Definitions for number and float derived types to the `type` library
 object.
 

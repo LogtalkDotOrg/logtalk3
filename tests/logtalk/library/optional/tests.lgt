@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2017/05/22,
+		date is 2017/08/08,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
@@ -126,6 +126,28 @@
 	succeeds(optional_or_else_get_2_02) :-
 		optional::of(1, Ref), optional(Ref)::or_else_get(Term, current_logtalk_flag(prolog_dialect)),
 		Term == 1.
+
+	% "optional" type tests
+
+	succeeds(optional_type_checking_support_01) :-
+		optional::empty(Ref),
+		type::check(optional, Ref).
+
+	succeeds(optional_type_checking_support_02) :-
+		optional::of(1, Ref),
+		type::check(optional, Ref).
+
+	throws(optional_type_checking_support_03, instantiation_error) :-
+		type::check(optional, _).
+
+	throws(optional_type_checking_support_04, type_error(optional,12345)) :-
+		type::check(optional, 12345).
+
+	throws(optional_type_checking_support_05, type_error(optional,foobar)) :-
+		type::check(optional, foobar).
+
+	throws(optional_type_checking_support_06, type_error(optional,foo(bar,baz))) :-
+		type::check(optional, foo(bar,baz)).
 
 	% auxiliary predicates
 

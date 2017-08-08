@@ -22,10 +22,13 @@
 :- object(optional).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
-		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.'
+		date is 2017/08/08,
+		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
+		remarks is [
+			'Type-checking support' - 'This object also defines a type "optinal" for use with the "type" library object.'
+		]
 	]).
 
 	:- public(empty/1).
@@ -45,6 +48,36 @@
 	empty(empty).
 
 	of(Term, the(Term)).
+
+	:- multifile(type::type/1).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(type::type/1).
+	:- endif.
+
+	% clauses for the type::type/1 predicate must always be defined with
+	% an instantiated first argument to keep calls deterministic by taking
+	% advantage of first argument indexing
+	type::type(optional).
+
+	:- multifile(type::check/2).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(type::check/2).
+	:- endif.
+
+	% clauses for the type::check/2 predicate must always be defined with
+	% an instantiated first argument to keep calls deterministic by taking
+	% advantage of first argument indexing
+	type::check(optional, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term == empty ->
+			true
+		;	Term = the(_) ->
+			true
+		;	throw(type_error(optional, Term))
+		).
 
 :- end_object.
 
