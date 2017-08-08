@@ -24,6 +24,14 @@ RELEASE NOTES
 3.11.2 - August ??, 2017
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Calls to the `logtalk_load/1-2` predicates now fail when loading the
+generated Prolog intermediate code unexpectedly fails (usually caused by to a
+backend Prolog compiler bug). In previous versions, an informative error
+message was printed but the call succeeded.
+
 Prolog adapter and integration files
 ------------------------------------
 

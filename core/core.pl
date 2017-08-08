@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 11, 2, rc2)).
 
 
 
@@ -5861,7 +5861,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% loading of the intermediate Prolog file failed
 		retractall('$lgt_file_loading_stack_'(SourceFile, _)),
-		'$lgt_propagate_failure_to_parent_files'(SourceFile)
+		'$lgt_propagate_failure_to_parent_files'(SourceFile),
+		'$lgt_delete_intermediate_files'(ObjectFile),
+		fail
 	),
 	% cleanup intermediate files if necessary
 	(	'$lgt_member'(clean(on), Flags) ->
