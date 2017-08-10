@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2017/07/10,
+		date is 2017/08/10,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parnames is ['Format']
 	]).
@@ -47,8 +47,7 @@
 	% output nodes for all included files
 	output_file(Path, _, _, Options) :-
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
-		os::decompose_file_name(IncludePath, _, Name0, Extension),
-		atom_concat(Name0, Extension, Basename),
+		os::decompose_file_name(IncludePath, _, Basename),
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(IncludePath, Options, LinkingOptions),
 		^^omit_path_prefix(IncludePath, Options, Relative),

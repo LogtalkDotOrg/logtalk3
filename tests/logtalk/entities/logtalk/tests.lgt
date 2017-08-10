@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/05/29,
+		date is 2017/08/10,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -72,8 +72,7 @@
 	succeeds(logtalk_08) :-
 		forall(
 			(	logtalk::loaded_file(File),
-				os::decompose_file_name(File, Directory, Name, Extension),
-				atom_concat(Name, Extension, Basename)
+				os::decompose_file_name(File, Directory, Basename)
 			),
 			(	logtalk::loaded_file_property(File, directory(Directory0)), Directory0 == Directory,
 				logtalk::loaded_file_property(File, basename(Basename0)), Basename0 == Basename

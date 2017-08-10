@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.5,
+		version is 4.6,
 		author is 'Paulo Moura',
-		date is 2017/04/24,
+		date is 2017/08/10,
 		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -140,7 +140,7 @@
 
 	sub_directory(Directory, ExcludedPaths, SubDirectory) :-
 		logtalk::loaded_file(Path),
-		os::decompose_file_name(Path, SubDirectory, _, _),
+		os::decompose_file_name(Path, SubDirectory, _),
 		atom_concat(Directory, RelativePath, SubDirectory),
 		\+ member(RelativePath, ExcludedPaths).
 

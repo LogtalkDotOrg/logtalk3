@@ -2,9 +2,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.13,
+		version is 0.14,
 		author is 'Paulo Moura',
-		date is 2017/04/24,
+		date is 2017/08/10,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -316,8 +316,7 @@
 			{current_module(Module, File)}.
 		property_module(file(Basename, Directory), Module) :-
 			{current_module(Module, File)},
-			decompose_file_name(File, Directory, Name, Extension),
-			atom_concat(Name, Extension, Basename).
+			os::decompose_file_name(File, Directory, Basename).
 
 		module_predicate_properties(Module, Functor/Arity, Properties) :-
 			functor(Predicate, Functor, Arity),
@@ -337,53 +336,10 @@
 			fail.
 		property_source_file(directory(Directory), File) :-
 			{source_file(File)},
-			decompose_file_name(File, Directory, _, _).
+			os::decompose_file_name(File, Directory, _).
 		property_source_file(basename(Basename), File) :-
 			{source_file(File)},
-			decompose_file_name(File, _, Name, Extension),
-			atom_concat(Name, Extension, Basename).
-
-		decompose_file_name(File, Directory, Name, Extension) :-
-			% avoid using 0'Char notation as backend Prolog compilers
-			% that don't support it also need to *parse* this code
-			char_code('/', SlashCode),
-			char_code('.', PeriodCode),
-			atom_codes(File, FileCodes),
-			(	strrch(FileCodes, SlashCode, [_Slash| BasenameCodes]) ->
-				atom_codes(Basename, BasenameCodes),
-				atom_concat(Directory, Basename, File)
-			;	Directory = './',
-				atom_codes(Basename, FileCodes),
-				BasenameCodes = FileCodes
-			),
-			(	strrch(BasenameCodes, PeriodCode, ExtensionCodes) ->
-				atom_codes(Extension, ExtensionCodes),
-				atom_concat(Name, Extension, Basename)
-			;	Name = Basename,
-				Extension = ''
-			).
-
-		% the following auxiliary predicate was written by Per Mildner and 
-		% is used here (renamed just to avoid conflicts) with permission
-		strrch(Xs, G, Ys) :-
-			Xs = [X| Xs1],
-			(	X == G ->
-				strrch1(Xs1, G, Xs, Ys)
-			;	strrch(Xs1, G, Ys)
-			).
-
-		strrch1(Xs, _G, _Prev, _Ys) :-
-			var(Xs),
-			!,
-			fail.
-		strrch1([], _G, Prev, Ys) :-
-			Ys = Prev.
-		strrch1(Xs, G, Prev, Ys) :-
-			Xs = [X| Xs1],
-			(	X == G ->
-				strrch1(Xs1, G, Xs, Ys)
-			;	strrch1(Xs1, G, Prev, Ys)
-			).
+			os::decompose_file_name(File, _, Basename).
 
 		source_file_extension('.pl').
 		source_file_extension('.prolog').

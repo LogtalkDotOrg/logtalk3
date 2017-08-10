@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.9,
+		version is 0.10,
 		author is 'Paulo Moura',
-		date is 2016/10/26,
+		date is 2017/08/10,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is [''.pl'',''.pro'',''.prolog''])',
@@ -503,9 +503,8 @@
 		fail.
 	save_wrapper_object(_, Path, Options) :-
 		memberchk(include_wrapped_files(true), Options),
-		os::decompose_file_name(Path, _, Name, Extension),
-		atom_concat(Name, Extension, File),
-		print_message(raw, wrapper, add_directive(include(File))),
+		os::decompose_file_name(Path, _, Basename),
+		print_message(raw, wrapper, add_directive(include(Basename))),
 		fail.
 	save_wrapper_object(_, _, _) :-
 		print_message(raw, wrapper, add_directive(end_object)),

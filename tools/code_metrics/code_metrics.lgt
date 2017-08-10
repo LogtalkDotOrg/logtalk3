@@ -22,9 +22,9 @@
 :- object(code_metrics).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/24,
+		date is 2017/08/10,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -221,7 +221,7 @@
 
 	sub_directory(Directory, SubDirectory) :-
 		logtalk::loaded_file(Path),
-		os::decompose_file_name(Path, SubDirectory, _, _),
+		os::decompose_file_name(Path, SubDirectory, _),
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
 	%%%%%%%%%%%%%%%%%%%

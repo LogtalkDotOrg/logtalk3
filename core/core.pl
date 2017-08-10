@@ -9377,7 +9377,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_compile_aux_clauses'([(Alias :- Obj::Original)])	
 	),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	% ensure that the this uses/2 directive is found when looking for senders of this message
+	% ensure that the uses/2 directive is found when looking for senders of this message
 	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
 	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, Lines)).
 

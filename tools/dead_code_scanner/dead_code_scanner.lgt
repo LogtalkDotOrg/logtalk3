@@ -22,9 +22,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0.10,
+		version is 0.11,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2017/05/06,
+		date is 2017/08/10,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -354,7 +354,7 @@
 
 	sub_directory(Directory, SubDirectory) :-
 		logtalk::loaded_file(Path),
-		os::decompose_file_name(Path, SubDirectory, _, _),
+		os::decompose_file_name(Path, SubDirectory, _),
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
 	directory(Directory) :-
