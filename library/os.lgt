@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.32,
+		version is 1.33,
 		author is 'Paulo Moura',
-		date is 2017/03/30,
+		date is 2017/08/10,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1642,6 +1642,17 @@
 
 	:- endif.
 
+
+	decompose_file_name(File, Directory, Basename) :-
+		atom_codes(File, FileCodes),
+		char_code('/', SlashCode),
+		(	strrch(FileCodes, SlashCode, [_Slash| BasenameCodes]) ->
+			atom_codes(Basename, BasenameCodes),
+			atom_concat(Directory, Basename, File)
+		;	Directory = './',
+			Basename = File
+		).
+
 	decompose_file_name(File, Directory, Name, Extension) :-
 		atom_codes(File, FileCodes),
 		char_code('/', SlashCode),
@@ -1649,7 +1660,7 @@
 			atom_codes(Basename, BasenameCodes),
 			atom_concat(Directory, Basename, File)
 		;	Directory = './',
-			atom_codes(Basename, FileCodes),
+			Basename = File,
 			BasenameCodes = FileCodes
 		),
 		char_code('.', DotCode),

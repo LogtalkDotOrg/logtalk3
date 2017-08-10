@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2017/03/30,
+		date is 2017/08/10,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -55,10 +55,17 @@
 		argnames is ['Path', 'ExpandedPath']
 	]).
 
+	:- public(decompose_file_name/3).
+	:- mode(decompose_file_name(+atom, ?atom, ?atom), one).
+	:- info(decompose_file_name/3, [
+		comment is 'Decomposes a file path into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).',
+		argnames is ['Path', 'Directory', 'Basename']
+	]).
+
 	:- public(decompose_file_name/4).
 	:- mode(decompose_file_name(+atom, ?atom, ?atom, ?atom), one).
 	:- info(decompose_file_name/4, [
-		comment is 'Decomposes a file path into its directory (which always ends with a slash), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).',
+		comment is 'Decomposes a file path into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).',
 		argnames is ['Path', 'Directory', 'Name', 'Extension']
 	]).
 

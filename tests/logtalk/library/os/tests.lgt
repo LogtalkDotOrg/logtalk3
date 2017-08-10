@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2017/07/16,
+		date is 2017/08/10,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -47,6 +47,26 @@
 		integer(Seconds),
 		integer(Miliseconds).
 
+	test(os_decompose_file_name_3_01) :-
+		os::decompose_file_name('/home/user/foo.bar', Directory, Basename),
+		Directory == '/home/user/',
+		Basename == 'foo.bar'.
+
+	test(os_decompose_file_name_3_02) :-
+		os::decompose_file_name('/home/user/foo', Directory, Basename),
+		Directory == '/home/user/',
+		Basename == foo.
+
+	test(os_decompose_file_name_3_03) :-
+		os::decompose_file_name('/home/user/', Directory, Basename),
+		Directory == '/home/user/',
+		Basename == ''.
+
+	test(os_decompose_file_name_3_04) :-
+		os::decompose_file_name('foo.bar', Directory, Basename),
+		Directory == './',
+		Basename == 'foo.bar'.
+
 	test(os_decompose_file_name_4_01) :-
 		os::decompose_file_name('/home/user/foo.bar', Directory, Name, Extension),
 		Directory == '/home/user/',
@@ -64,6 +84,12 @@
 		Directory == '/home/user/',
 		Name == '',
 		Extension == ''.
+
+	test(os_decompose_file_name_4_04) :-
+		os::decompose_file_name('foo.bar', Directory, Name, Extension),
+		Directory == './',
+		Name == 'foo',
+		Extension == '.bar'.
 
 	test(os_cpu_time_1_01) :-
 		os::cpu_time(Seconds),

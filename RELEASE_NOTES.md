@@ -46,6 +46,9 @@ the Logtalk compiler.
 Library
 -------
 
+* ADDED: Predicate `os::decompose_file_name/3` to decompose a file into its
+directory and basename.
+
 * ADDED: Definition of type `optional` to the `optional` library object.
 
 * ADDED: Definitions for number and float derived types to the `type` library
