@@ -26,7 +26,8 @@
 		version is 2.7,
 		author is 'Paulo Moura',
 		date is 2017/06/29,
-		comment is 'List predicates.'
+		comment is 'List predicates.',
+		see_also is [list(_), numberlist, varlist, difflist]
 	]).
 
 	:- public(as_difflist/2).

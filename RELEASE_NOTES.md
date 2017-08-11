@@ -46,6 +46,8 @@ the Logtalk compiler.
 Library
 -------
 
+* ADDED: Cross-referencing information to several library entities.
+
 * ADDED: Predicate `os::decompose_file_name/3` to decompose a file into its
 directory and basename.
 

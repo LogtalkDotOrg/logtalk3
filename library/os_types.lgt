@@ -32,7 +32,7 @@
 			'Type directory' - 'For checking if a term is an atom and an existing directory.',
 			'Type environment_variable' - 'For checking if a term is an atom and an existing environment variable.'
 		],
-		see_also is [osp, os]
+		see_also is [osp, os, type]
 	]).
 
 	:- multifile(type::type/1).

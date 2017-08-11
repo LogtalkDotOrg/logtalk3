@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(bintree,
 	implements(dictionaryp),
 	extends(compound)).
@@ -27,7 +26,8 @@
 		version is 2.2,
 		author is 'Paulo Moura and Paul Fodor',
 		date is 2016/05/13,
-		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.'
+		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
+		see_also is [rbtree]
 	]).
 
 	:- public(preorder/2).

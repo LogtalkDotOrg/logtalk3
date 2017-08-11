@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(sample,
 	imports(statistics)).
 
@@ -26,7 +25,8 @@
 		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2013/04/19,
-		comment is 'Statistical sample represented as a list of numbers.'
+		comment is 'Statistical sample represented as a list of numbers.',
+		see_also is [population]
 	]).
 
 	skewness([X| Xs], Skewness) :-

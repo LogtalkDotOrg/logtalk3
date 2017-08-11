@@ -25,7 +25,8 @@
 		version is 1.10,
 		author is 'Paulo Moura',
 		date is 2016/02/24,
-		comment is 'List protocol.'
+		comment is 'List protocol.',
+		see_also is [numberlistp, varlistp]
 	]).
 
 	:- public(append/2).

@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(numberlistp).
 
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2011/12/15,
-		comment is 'List of numbers protocol.'
+		comment is 'List of numbers protocol.',
+		see_also is [listp, varlistp]
 	]).
 
 	:- public(product/2).

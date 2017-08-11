@@ -24,7 +24,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2016/10/06,
-		comment is 'List of variables protocol.'
+		comment is 'List of variables protocol.',
+		see_also is [listp, numberlistp]
 	]).
 
 	:- public(append/3).

@@ -28,7 +28,8 @@
 		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type "optinal" for use with the "type" library object.'
-		]
+		],
+		see_also is [optional(_)]
 	]).
 
 	:- public(empty/1).
@@ -89,7 +90,8 @@
 		author is 'Paulo Moura',
 		date is 2017/05/30,
 		comment is 'Optional reference predicates. Require passing an optional reference constructed using the "optional" object as a parameter.',
-		parnames is ['Reference']
+		parnames is ['Reference'],
+		see_also is [optional]
 	]).
 
 	:- public(is_empty/0).

@@ -25,7 +25,8 @@
 		version is 5.2,
 		date is 2016/10/06,
 		author is 'Paulo Moura',
-		comment is 'Some useful meta-predicates.'
+		comment is 'Some useful meta-predicates.',
+		see_also is [meta_compiler]
 	]).
 
 	:- alias(metap, [

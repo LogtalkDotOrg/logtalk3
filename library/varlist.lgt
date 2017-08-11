@@ -25,7 +25,8 @@
 		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2017/06/29,
-		comment is 'List of variables predicates.'
+		comment is 'List of variables predicates.',
+		see_also is [list, list(_), numberlist, difflist]
 	]).
 
 	append([], List, List).

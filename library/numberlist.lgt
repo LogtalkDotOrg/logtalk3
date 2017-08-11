@@ -26,7 +26,8 @@
 		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2017/06/29,
-		comment is 'List of numbers predicates.'
+		comment is 'List of numbers predicates.',
+		see_also is [list, list(_), varlist, difflist]
 	]).
 
 	average([], 0.0).

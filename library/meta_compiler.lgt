@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(meta_compiler,
 	implements(expanding)).
 
@@ -26,7 +25,8 @@
 		version is 0.8,
 		date is 2015/12/02,
 		author is 'Paulo Moura',
-		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.'
+		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
+		see_also is [meta]
 	]).
 
 	:- uses(list, [append/3, length/2]).

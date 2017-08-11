@@ -23,7 +23,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(rbtree,
 	implements(dictionaryp),
 	extends(compound)).
@@ -32,7 +31,8 @@
 		version is 1.2,
 		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
 		date is 2017/02/04,
-		comment is 'Red-Black trees. Uses standard order to compare keys.'
+		comment is 'Red-Black trees. Uses standard order to compare keys.',
+		see_also is [bintree]
 	]).
 
 	:- public(partial_map/4).

@@ -52,7 +52,8 @@
 			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.',
 			'Error context' - 'The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.',
 			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.'
-		]
+		],
+		see_also is [arbitrary]
 	]).
 
 	:- set_logtalk_flag(complements, restrict).
