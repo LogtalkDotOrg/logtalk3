@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on November 3, 2014
+%  Last updated on August 11, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -128,7 +128,7 @@
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<h4 class="code">(no dependencies on other files)</h4>
+			<h4 class="code">(no dependencies on other entities)</h4>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>

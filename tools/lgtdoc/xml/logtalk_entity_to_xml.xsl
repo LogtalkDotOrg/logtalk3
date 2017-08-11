@@ -17,7 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on March 14, 2016
+%  Last updated on August 11, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -166,7 +166,7 @@
 		</dl>
 		</xsl:when>
 		<xsl:otherwise>
-			<p class="comment">(no dependencies on other files)</p>
+			<p class="comment">(no dependencies on other entities)</p>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>

@@ -360,7 +360,7 @@
 					font-family="serif" 
 					font-style="italic"
 					space-before="4pt">
-				(no dependencies on other files)
+				(no dependencies on other entities)
 			</fo:block>
 		</xsl:otherwise>
 	</xsl:choose>

@@ -62,6 +62,9 @@ Tools
 
 * ADDED: Test outcome `false` as an alias to test outcome `fail`.
 
+* FIXED: Note on lack of dependencies on other entities when converting entity
+API documentation into human-readable formats.
+
 
 3.11.1 - July 17, 2017
 ======================
