@@ -96,7 +96,7 @@
 		argnames is ['Type', 'Term'],
 		exceptions is [
 			'Term is not bound as required' - 'instantiation_error',
-			'Term is not of the specified type' - 'type_error(Type, Term)',
+			'Term is bound but not of the specified type' - 'type_error(Type, Term)',
 			'Term is the of the correct type but not in the specified domain' - 'domain_error(Domain, Term)',
 			'Term is the of the correct type and domain but the resource it represents does not exist' - 'existence_error(Type, Term)'
 		]
