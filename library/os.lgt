@@ -47,7 +47,8 @@
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
 			'Missing implementations' - 'A few predicates (e.g. wall_time/1) cannot be implemented in some backend Prolog systems.'
-		]
+		],
+		see_also is [os_types]
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).

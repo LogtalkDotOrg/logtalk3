@@ -24,7 +24,8 @@
 		version is 1.18,
 		author is 'Paulo Moura',
 		date is 2017/08/10,
-		comment is 'Portable operating-system access protocol.'
+		comment is 'Portable operating-system access protocol.',
+		see_also is [os_types]
 	]).
 
 	:- public(pid/1).
