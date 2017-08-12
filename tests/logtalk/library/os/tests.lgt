@@ -209,12 +209,12 @@
 			WorkingDirectory == DirectoryNoSlash
 		).
 
-	test(os_expand_path_2_01) :-
+	test(os_absolute_file_name_2_01) :-
 		this(This),
 		object_property(This, file(File,Directory)),
 		atom_concat(Directory, File, Path),
 		os::change_directory(Directory),
-		os::expand_path(File, ExpandedFile),
+		os::absolute_file_name(File, ExpandedFile),
 		ExpandedFile == Path.
 
 	setup :-

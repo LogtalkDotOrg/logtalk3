@@ -101,14 +101,14 @@
 		{peek_char(s, _)}.
 
 	succeeds(sics_peek_char_2_15) :-
-		os::expand_path(t, Path),
+		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{peek_char(Stream, C1), peek_char(Stream, C1), peek_char(Stream, C2)},
 		C1 == end_of_file, C2 == end_of_file.
 
 	succeeds(sics_peek_char_2_16) :-
-		os::expand_path(t, Path),
+		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
 		catch({peek_char(Stream, _)}, Error, Error = error(representation_error(character),_)).

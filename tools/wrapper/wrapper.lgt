@@ -271,7 +271,7 @@
 		append(DirectoriesList, AllSubDirectories).
 
 	sub_directories(Directory, ExcludedDirectories, SubDirectories) :-
-		os::expand_path(Directory, Path),
+		os::absolute_file_name(Directory, Path),
 		os::directory_files(Path, Files),
 		(	sub_atom(Path, _, 1, 0, '/') ->
 			PathSlash = Path
@@ -359,7 +359,7 @@
 
 	file_being_advised([File| _], ExcludedFiles, File, Path, Directory, Name) :-
 		\+ member(File, ExcludedFiles),
-		os::expand_path(File, Path),
+		os::absolute_file_name(File, Path),
 		\+ member(Path, ExcludedFiles),
 		os::decompose_file_name(File, Directory, Name, Extension),
 		\+ member(Name, ExcludedFiles),
@@ -666,7 +666,7 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		os::expand_path(Directory, NormalizedDirectory0),
+		os::absolute_file_name(Directory, NormalizedDirectory0),
 		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
 			NormalizedDirectory = NormalizedDirectory0
 		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)

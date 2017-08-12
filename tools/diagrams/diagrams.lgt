@@ -194,7 +194,7 @@
 	]).
 
 	directory(Directory) :-
-		os::expand_path(Directory, Path),
+		os::absolute_file_name(Directory, Path),
 		os::decompose_file_name(Path, _, Project, _),
 		::directory(Project, Directory, []).
 

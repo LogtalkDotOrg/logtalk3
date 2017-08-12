@@ -1679,7 +1679,7 @@
 
 	check_text_output(Alias, Expected) :-
 		close(Alias),
-		os::expand_path('test_output.text', Path),
+		os::absolute_file_name('test_output.text', Path),
 		open(Path, read, InputStream),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
@@ -1688,7 +1688,7 @@
 	check_text_output(Expected) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::expand_path('test_output.text', Path),
+		os::absolute_file_name('test_output.text', Path),
 		open(Path, read, InputStream),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
@@ -1710,7 +1710,7 @@
 
 	check_binary_output(Alias, Expected) :-
 		close(Alias),
-		os::expand_path('test_output.binary', Path),
+		os::absolute_file_name('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
@@ -1719,7 +1719,7 @@
 	check_binary_output(Expected) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::expand_path('test_output.binary', Path),
+		os::absolute_file_name('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
@@ -1731,25 +1731,25 @@
 	% other predicates for testing input/output predicates
 
 	create_text_file(File, Contents) :-
-		os::expand_path(File, Path),
+		os::absolute_file_name(File, Path),
 		open(Path, write, Stream),
 		write_text_contents(Stream, Contents),
 		close(Stream).
 
 	create_binary_file(File, Bytes) :-
-		os::expand_path(File, Path),
+		os::absolute_file_name(File, Path),
 		open(Path, write, Stream, [type(binary)]),
 		write_binary_contents(Bytes, Stream),
 		close(Stream).
 
 	check_text_file(File, Expected) :-
-		os::expand_path(File, Path),
+		os::absolute_file_name(File, Path),
 		open(Path, read, Stream),
 		get_text_contents(Stream, Expected, Contents),
 		Expected == Contents.
 
 	check_binary_file(File, Expected) :-
-		os::expand_path(File, Path),
+		os::absolute_file_name(File, Path),
 		open(Path, read, Stream, [type(binary)]),
 		get_binary_contents(Stream, Expected, Contents),
 		Expected == Contents.
@@ -1760,7 +1760,7 @@
 		clean_file(File, _).
 
 	clean_file(File, Path) :-
-		os::expand_path(File, Path),
+		os::absolute_file_name(File, Path),
 		% the file can be associated with more than one stream
 		forall(
 			stream_property(Stream, file_name(Path)),
@@ -1832,7 +1832,7 @@
 		).
 
 	closed_input_stream(ReadStream, Options) :-
-		os::expand_path(temporary_file, Path),
+		os::absolute_file_name(temporary_file, Path),
 		open(Path, write, WriteStream),
 		close(WriteStream),
 		open(Path, read, ReadStream, Options),
@@ -1840,13 +1840,13 @@
 		os::delete_file(Path).
 
 	closed_output_stream(WriteStream, Options) :-
-		os::expand_path(temporary_file, Path),
+		os::absolute_file_name(temporary_file, Path),
 		open(Path, write, WriteStream, Options),
 		close(WriteStream),
 		os::delete_file(Path).
 
 	stream_position(Position) :-
-		os::expand_path(temporary_file, Path),
+		os::absolute_file_name(temporary_file, Path),
 		open(Path, write, Stream, [reposition(true)]),
 		stream_property(Stream, position(Position)),
 		close(Stream),

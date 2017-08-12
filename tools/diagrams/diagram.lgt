@@ -270,7 +270,7 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		os::expand_path(Directory, NormalizedDirectory0),
+		os::absolute_file_name(Directory, NormalizedDirectory0),
 		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
 			NormalizedDirectory = NormalizedDirectory0
 		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
@@ -344,7 +344,7 @@
 	]).
 
 	directory(Directory) :-
-		os::expand_path(Directory, Path),
+		os::absolute_file_name(Directory, Path),
 		os::decompose_file_name(Path, _, Project, _),
 		::directory(Project, Directory, []).
 
@@ -746,14 +746,14 @@
 		!.
 	% Logtalk file given using a full path
 	locate_file(Source0, Basename, Extension, Directory, Path) :-
-		os::expand_path(Source0, Source),
+		os::absolute_file_name(Source0, Source),
 		add_extension(logtalk, Source, Path, Extension),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		!.
 	% Prolog file given using a full path
 	locate_file(Source0, Basename, Extension, Directory, Path) :-
-		os::expand_path(Source0, Source),
+		os::absolute_file_name(Source0, Source),
 		add_extension(prolog, Source, Path, Extension),
 		modules_diagram_support::loaded_file_property(Source, basename(Basename)),
 		modules_diagram_support::loaded_file_property(Source, directory(Directory)),

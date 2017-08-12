@@ -67,7 +67,7 @@
 		{put_code(S, 0'a)}.
 
 	throws(iso_put_code_2_09, error(permission_error(output,binary_stream,S),_)) :-
-		os::expand_path(t, Path),
+		os::absolute_file_name(t, Path),
 		open(Path, write, S, [type(binary)]),
 		{put_code(S, 0'a)}.
 

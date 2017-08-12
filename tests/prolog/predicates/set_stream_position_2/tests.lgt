@@ -61,7 +61,7 @@
 		{set_stream_position(st_i, foo)}.
 
 	throws(sics_set_stream_position_2_06, error(permission_error(reposition,stream,S),_)) :-
-		os::expand_path(foo, Path),
+		os::absolute_file_name(foo, Path),
 		{open(Path, write, FS), stream_property(FS, position(Pos)), current_input(S)},
 		{set_stream_position(S, Pos)}.
 

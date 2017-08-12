@@ -111,7 +111,7 @@
 		C1 == -1, C2 == -1.
 
 	succeeds(sics_peek_code_2_17) :-
-		os::expand_path(t, Path),
+		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
 		catch({peek_code(Stream, _)}, Error, Error = error(representation_error(character),_)).

@@ -162,7 +162,7 @@
 		sub_atom(Functor, 0, _, _, Prefix),
 		atom_concat('$LOGTALKHOME', Path, Page0),
 		atom_concat(Page0, File, Page1),
-		os::expand_path(Page1, Page).
+		os::absolute_file_name(Page1, Page).
 
 	:- public(completions/2).
 	:- mode(completions(+atom, -lists(pair)), zero_or_more).

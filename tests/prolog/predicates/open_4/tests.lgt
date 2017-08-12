@@ -31,18 +31,18 @@
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.5.4
 
 	succeeds(iso_open_4_01) :-
-		os::expand_path('roger_data', Path),
+		os::absolute_file_name('roger_data', Path),
 		^^create_binary_file(Path, []),
 		{open(Path, read, D, [type(binary)]),
 		 at_end_of_stream(D)}.
 
 	succeeds(iso_open_4_02) :-
-		os::expand_path('scowen', Path),
+		os::absolute_file_name('scowen', Path),
 		{open(Path, write, D, [alias(editor)]),
 		 stream_property(D, alias(editor))}.
 
 	succeeds(iso_open_4_03) :-
-		os::expand_path('dave', Path),
+		os::absolute_file_name('dave', Path),
 		^^create_text_file(Path, 'foo.'),
 		{open(Path, read, DD, []),
 		 read(DD, foo),
@@ -84,11 +84,11 @@
 		{open(foo, write, _, [bar])}.
 
 	throws(sics_open_4_15, error(existence_error(source_sink,Path),_)) :-
-		os::expand_path('nonexistent', Path),
+		os::absolute_file_name('nonexistent', Path),
 		{open(Path, read, _)}.
 
 	throws(sics_open_4_16, error(permission_error(open,source_sink,alias(a)),_)) :-
-		os::expand_path(foo, Path),
+		os::absolute_file_name(foo, Path),
 		{open(Path, write, _, [alias(a)]),
 		 open(bar, write, _, [alias(a)])}.
 

@@ -114,7 +114,7 @@
 	rdirectory(Directory, UserOptions) :-
 		reset,
 		merge_options(UserOptions, Options),
-		os::expand_path(Directory, Path),
+		os::absolute_file_name(Directory, Path),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
@@ -147,7 +147,7 @@
 	directory(Directory, UserOptions) :-
 		reset,
 		merge_options(UserOptions, Options),
-		os::expand_path(Directory, Path),
+		os::absolute_file_name(Directory, Path),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
@@ -1387,7 +1387,7 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		os::expand_path(Directory, NormalizedDirectory0),
+		os::absolute_file_name(Directory, NormalizedDirectory0),
 		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
 			NormalizedDirectory = NormalizedDirectory0
 		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
@@ -1396,7 +1396,7 @@
 
 	normalize_file_paths([], []).
 	normalize_file_paths([File| Files], [NormalizedFile| NormalizedFiles]) :-
-		os::expand_path(File, NormalizedFile),
+		os::absolute_file_name(File, NormalizedFile),
 		normalize_file_paths(Files, NormalizedFiles).
 
 	reset :-

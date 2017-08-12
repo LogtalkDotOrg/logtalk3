@@ -33,7 +33,7 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	succeeds(sics_flush_output_1_01) :-
-		os::expand_path(foo, Path),
+		os::absolute_file_name(foo, Path),
 		open(Path, write, S), write(S, foo),
 		{flush_output(S)},
 		^^check_text_file(Path, 'foo').
@@ -50,7 +50,7 @@
 		{flush_output(S)}.
 
 	throws(sics_flush_output_1_05, error(permission_error(output,stream,S),_)) :-
-		os::expand_path(foo, Path),
+		os::absolute_file_name(foo, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S),
 		{flush_output(S)}.

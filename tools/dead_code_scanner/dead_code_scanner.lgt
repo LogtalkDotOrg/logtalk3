@@ -332,7 +332,7 @@
 		).
 
 	rdirectory(Directory) :-
-		(	os::expand_path(Directory, Path),
+		(	os::absolute_file_name(Directory, Path),
 			os::directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
 			output_rdirectory(Path),
@@ -358,7 +358,7 @@
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
 	directory(Directory) :-
-		(	os::expand_path(Directory, Path),
+		(	os::absolute_file_name(Directory, Path),
 			os::directory_exists(Path) ->
 			write_scan_header('Directory'),
 			output_directory_files(Path),

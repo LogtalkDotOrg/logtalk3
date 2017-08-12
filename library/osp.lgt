@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2017/08/10,
+		date is 2017/08/12,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os_types]
 	]).
@@ -49,25 +49,25 @@
 		argnames is ['Command']
 	]).
 
-	:- public(expand_path/2).
-	:- mode(expand_path(+atom, -atom), one).
-	:- info(expand_path/2, [
-		comment is 'Expands a file path to an absolute file path.',
-		argnames is ['Path', 'ExpandedPath']
+	:- public(absolute_file_name/2).
+	:- mode(absolute_file_name(+atom, -atom), one).
+	:- info(absolute_file_name/2, [
+		comment is 'Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.',
+		argnames is ['File', 'Path']
 	]).
 
 	:- public(decompose_file_name/3).
 	:- mode(decompose_file_name(+atom, ?atom, ?atom), one).
 	:- info(decompose_file_name/3, [
-		comment is 'Decomposes a file path into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).',
-		argnames is ['Path', 'Directory', 'Basename']
+		comment is 'Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).',
+		argnames is ['File', 'Directory', 'Basename']
 	]).
 
 	:- public(decompose_file_name/4).
 	:- mode(decompose_file_name(+atom, ?atom, ?atom, ?atom), one).
 	:- info(decompose_file_name/4, [
-		comment is 'Decomposes a file path into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).',
-		argnames is ['Path', 'Directory', 'Name', 'Extension']
+		comment is 'Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).',
+		argnames is ['File', 'Directory', 'Name', 'Extension']
 	]).
 
 	:- public(make_directory/1).

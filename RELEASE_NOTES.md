@@ -46,10 +46,13 @@ the Logtalk compiler.
 Library
 -------
 
-* ADDED: Cross-referencing information to several library entities.
+* RENAMED: The `os::expand_path/2` predicate to `os::absolute_file_name/2`.
+The old name is deprecated but still available as an alias.
 
 * ADDED: Predicate `os::decompose_file_name/3` to decompose a file into its
 directory and basename.
+
+* ADDED: Cross-referencing information to several library entities.
 
 * ADDED: Definition of type `optional` to the `optional` library object.
 

@@ -35,8 +35,8 @@
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.8.4
 
 	succeeds(iso_stream_property_2_01) :-
-		os::expand_path(foo, FooPath),
-		os::expand_path(bar, BarPath),
+		os::absolute_file_name(foo, FooPath),
+		os::absolute_file_name(bar, BarPath),
 		^^create_text_file(FooPath, ''),
 		open(FooPath, read, S1),
 		open(BarPath, write, S2),
@@ -45,7 +45,7 @@
 		memberchk(S2-BarPath, L).
 
 	succeeds(iso_stream_property_2_02) :-
-		os::expand_path(bar, BarPath),
+		os::absolute_file_name(bar, BarPath),
 		open(BarPath, write, FOut),
 		current_output(COut),
 		findall(S, {stream_property(S, output)}, L),

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.18</code>
+            <code>1.19</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/8/10</code>
+            <code>2017/8/12</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -103,9 +103,9 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="expand_path/2" class="code">expand_path/2</h3>
+          <h3 id="absolute_file_name/2" class="code">absolute_file_name/2</h3>
           <blockquote>
-            <p class="comment">Expands a file path to an absolute file path.</p>
+            <p class="comment">Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -114,18 +114,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>expand_path(Path,ExpandedPath)</code>
+              <code>absolute_file_name(File,Path)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>expand_path(+atom,-atom) &ndash; one</code>
+              <code>absolute_file_name(+atom,-atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
           <h3 id="decompose_file_name/3" class="code">decompose_file_name/3</h3>
           <blockquote>
-            <p class="comment">Decomposes a file path into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).</p>
+            <p class="comment">Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -134,7 +134,7 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>decompose_file_name(Path,Directory,Basename)</code>
+              <code>decompose_file_name(File,Directory,Basename)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
@@ -145,7 +145,7 @@
         <div class="section">
           <h3 id="decompose_file_name/4" class="code">decompose_file_name/4</h3>
           <blockquote>
-            <p class="comment">Decomposes a file path into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).</p>
+            <p class="comment">Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -154,7 +154,7 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>decompose_file_name(Path,Directory,Name,Extension)</code>
+              <code>decompose_file_name(File,Directory,Name,Extension)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">

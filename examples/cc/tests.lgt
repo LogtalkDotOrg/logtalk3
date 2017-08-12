@@ -32,36 +32,36 @@
 		os::environment_variable('LOGTALKUSER', _).
 
 	test(cc_02) :-
-		os::expand_path('$LOGTALKUSER/examples/cc/', _).
+		os::absolute_file_name('$LOGTALKUSER/examples/cc/', _).
 
 	test(cc_03) :-
 		os::working_directory(Current),
-		os::expand_path(Current, Path),
+		os::absolute_file_name(Current, Path),
 		os::change_directory('/'),
 		os::change_directory(Path).
 
 	test(cc_04) :-
-		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
+		os::absolute_file_name('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
 		os::directory_exists(files),
 		os::file_exists('files/bar.txt').
 
 	test(cc_05) :-
-		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
+		os::absolute_file_name('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
 		os::change_directory(files),
 		os::file_exists('bar.txt'),
 		os::file_size('bar.txt', 0).
 
 	test(cc_06) :-
-		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
+		os::absolute_file_name('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
 		os::rename_file('files/bar.txt', 'files/foo.txt'),
 		os::file_exists('files/foo.txt'),
 		os::rename_file('files/foo.txt', 'files/bar.txt').
 
 	test(cc_07) :-
-		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
+		os::absolute_file_name('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
 		os::make_directory(bar),
 		os::delete_directory(bar).
@@ -100,7 +100,7 @@
 		Directory == ('/'), Name == '', Extension == ''.
 
 	test(cc_16) :-
-		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
+		os::absolute_file_name('$LOGTALKUSER/examples/cc/', Path),
 		os::directory_files(Path, Files),
 		memberchk('.', Files),
 		memberchk('..', Files),

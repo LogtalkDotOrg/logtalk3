@@ -33,7 +33,7 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	succeeds(sics_close_1_01) :-
-		os::expand_path(foo, Path),
+		os::absolute_file_name(foo, Path),
 		open(Path, write, S),
 		{close(S)},
 		^^check_text_file(Path, '').
