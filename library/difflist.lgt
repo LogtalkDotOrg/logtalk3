@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2017/06/29,
 		comment is 'Difference list predicates.',
-		see_also is [list, list(_), numberlist]
+		see_also is [list, list(_), numberlist, varlist]
 	]).
 
 	:- public(add/3).

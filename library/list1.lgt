@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/06/29,
 		comment is 'List predicates with elements constrained to a single type.',
-		parnames is ['Type']
+		parnames is ['Type'],
+		see_also is [list, numberlist, varlist, difflist]
 	]).
 
 	valid((-)) :-		% catch variables and lists with unbound tails
