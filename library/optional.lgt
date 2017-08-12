@@ -27,9 +27,9 @@
 		date is 2017/08/08,
 		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
 		remarks is [
-			'Type-checking support' - 'This object also defines a type "optinal" for use with the "type" library object.'
+			'Type-checking support' - 'This object also defines a type "optional" for use with the "type" library object.'
 		],
-		see_also is [optional(_)]
+		see_also is [optional(_), type]
 	]).
 
 	:- public(empty/1).
