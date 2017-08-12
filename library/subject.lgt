@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(subject).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2003/02/09,
-		comment is 'Smalltalk dependent handling predicates.'
+		comment is 'Smalltalk dependent handling predicates.',
+		see_also is [observer]
 	]).
 
 	:- public(changed/0).

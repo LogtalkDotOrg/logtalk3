@@ -18,14 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(observer).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2003/02/09,
-		comment is 'Smalltalk dependent protocol.'
+		comment is 'Smalltalk dependent protocol.',
+		see_also is [subject]
 	]).
 
 	:- public(update/1).
