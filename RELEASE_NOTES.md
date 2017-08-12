@@ -62,6 +62,8 @@ throw an `instantiation_error` when the checked term is not instantiated.
 Tools
 -----
 
+* ADDED: Cross-referencing information to the `diagrams` tool entities.
+
 * ADDED: Test outcome `false` as an alias to test outcome `fail`.
 
 * FIXED: Note on lack of dependencies on other entities when converting entity

@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/07/10,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -775,7 +776,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/01,
-		comment is 'Predicates for generating entity diagrams in DOT format with both inheritance and cross-referencing relation edges.'
+		comment is 'Predicates for generating entity diagrams in DOT format with both inheritance and cross-referencing relation edges.',
+		see_also is [inheritance_diagram, uses_diagram, xref_diagram]
 	]).
 
 :- end_object.

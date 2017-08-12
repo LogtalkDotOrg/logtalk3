@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/07/10,
 		comment is 'Predicates for generating library loading dependency diagrams.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [library_dependency_diagram(_), file_dependency_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -139,7 +140,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2016/02/29,
-		comment is 'Predicates for generating library loading dependency diagrams in DOT format.'
+		comment is 'Predicates for generating library loading dependency diagrams in DOT format.',
+		see_also is [library_dependency_diagram, file_dependency_diagram]
 	]).
 
 :- end_object.

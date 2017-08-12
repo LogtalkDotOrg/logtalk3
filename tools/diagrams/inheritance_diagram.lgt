@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/07/10,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
 	]).
 
 	% by default, diagram layout is bottom to top:
@@ -85,7 +86,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/15,
-		comment is 'Predicates for generating entity diagrams in DOT format with inheritance relation edges but no cross-referencing relation edges.'
+		comment is 'Predicates for generating entity diagrams in DOT format with inheritance relation edges but no cross-referencing relation edges.',
+		see_also is [entity_diagram, uses_diagram, xref_diagram]
 	]).
 
 :- end_object.

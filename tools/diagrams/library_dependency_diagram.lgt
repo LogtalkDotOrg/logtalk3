@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/07/10,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [library_load_diagram(_), file_load_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -177,7 +178,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2016/02/29,
-		comment is 'Predicates for generating library dependency diagrams in DOT format.'
+		comment is 'Predicates for generating library dependency diagrams in DOT format.',
+		see_also is [library_load_diagram, file_load_diagram]
 	]).
 
 :- end_object.

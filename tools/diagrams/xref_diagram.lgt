@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/07/10,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -578,7 +579,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/01,
-		comment is 'Predicates for generating predicate call cross-referencing diagrams in DOT format.'
+		comment is 'Predicates for generating predicate call cross-referencing diagrams in DOT format.',
+		see_also is [entity_diagram, inheritance_diagram, uses_diagram]
 	]).
 
 :- end_object.

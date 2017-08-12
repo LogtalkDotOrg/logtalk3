@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/08/10,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [file_dependency_diagram(_), library_dependency_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -138,7 +139,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/08,
-		comment is 'Predicates for generating file loading dependency diagrams in DOT format. A dependency exists when a file loads or includes another file.'
+		comment is 'Predicates for generating file loading dependency diagrams in DOT format. A dependency exists when a file loads or includes another file.',
+		see_also is [file_dependency_diagram, library_dependency_diagram]
 	]).
 
 :- end_object.

@@ -26,7 +26,8 @@
 		author is 'Paulo Moura',
 		date is 2017/07/10,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
-		parnames is ['Format']
+		parnames is ['Format'],
+		see_also is [file_load_diagram(_), library_load_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -162,7 +163,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/14,
-		comment is 'Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.'
+		comment is 'Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.',
+		see_also is [file_load_diagram, library_load_diagram]
 	]).
 
 :- end_object.
