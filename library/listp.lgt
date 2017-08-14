@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(listp).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2017/08/15,
 		comment is 'List protocol.',
 		see_also is [numberlistp, varlistp]
 	]).
@@ -213,6 +212,14 @@
 		argnames is ['Prefix', 'List']
 	]).
 
+	:- public(proper_prefix/3).
+	:- mode(proper_prefix(?list, +integer, +list), zero_or_one).
+	:- mode(proper_prefix(?list, -integer, +list), zero_or_more).
+	:- info(proper_prefix/3, [
+		comment is 'Prefix is a proper prefix of length Length of List.',
+		argnames is ['Prefix', 'Length', 'List']
+	]).
+
 	:- public(reverse/2).
 	:- mode(reverse(+list, ?list), zero_or_one).
 	:- mode(reverse(?list, +list), zero_or_one).
@@ -286,7 +293,7 @@
 	:- public(split/4).
 	:- mode(split(+list, +integer, -list(list), -list), zero_or_one).
 	:- info(split/4, [
-		comment is 'Splits a list into sublists of a given length. Also returns the remaining elements. Fails if the length is zero or negative.',
+		comment is 'Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.',
 		argnames is ['List', 'Length', 'Sublists', 'Remaining']
 	]).
 
@@ -345,6 +352,28 @@
 	:- info(proper_suffix/2, [
 		comment is 'Suffix is a proper suffix of List.',
 		argnames is ['Suffix', 'List']
+	]).
+
+	:- public(proper_suffix/3).
+	:- mode(proper_suffix(?list, +integer, +list), zero_or_one).
+	:- mode(proper_suffix(?list, -integer, +list), zero_or_more).
+	:- info(proper_suffix/3, [
+		comment is 'Suffix is a proper suffix of length Length of List.',
+		argnames is ['Suffix', 'Length', 'List']
+	]).
+
+	:- public(take/3).
+	:- mode(take(+integer, +list, -list), zero_or_one).
+	:- info(take/3, [
+		comment is 'Takes the first N elements of a list. Fails if the list have fewer than N elements.',
+		argnames is ['N', 'List', 'Elements']
+	]).
+
+	:- public(drop/3).
+	:- mode(drop(+integer, +list, -list), zero_or_one).
+	:- info(drop/3, [
+		comment is 'Drops the first N elements of a list. Fails if the list have fewer than N elements.',
+		argnames is ['N', 'List', 'Remaining']
 	]).
 
 :- end_protocol.

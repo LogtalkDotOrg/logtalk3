@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>1.11</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/2/24</code>
+            <code>2017/8/15</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -570,6 +570,29 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="proper_prefix/3" class="code">proper_prefix/3</h3>
+          <blockquote>
+            <p class="comment">Prefix is a proper prefix of length Length of List.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>proper_prefix(Prefix,Length,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>proper_prefix(?list,+integer,+list) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>proper_prefix(?list,-integer,+list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="reverse/2" class="code">reverse/2</h3>
           <blockquote>
             <p class="comment">Reverses a list.</p>
@@ -774,7 +797,7 @@
         <div class="section">
           <h3 id="split/4" class="code">split/4</h3>
           <blockquote>
-            <p class="comment">Splits a list into sublists of a given length. Also returns the remaining elements. Fails if the length is zero or negative.</p>
+            <p class="comment">Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -951,6 +974,69 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>proper_suffix(?list,+list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="proper_suffix/3" class="code">proper_suffix/3</h3>
+          <blockquote>
+            <p class="comment">Suffix is a proper suffix of length Length of List.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>proper_suffix(Suffix,Length,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>proper_suffix(?list,+integer,+list) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>proper_suffix(?list,-integer,+list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="take/3" class="code">take/3</h3>
+          <blockquote>
+            <p class="comment">Takes the first N elements of a list. Fails if the list have fewer than N elements.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>take(N,List,Elements)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>take(+integer,+list,-list) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="drop/3" class="code">drop/3</h3>
+          <blockquote>
+            <p class="comment">Drops the first N elements of a list. Fails if the list have fewer than N elements.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>drop(N,List,Remaining)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>drop(+integer,+list,-list) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

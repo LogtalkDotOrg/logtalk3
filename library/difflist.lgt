@@ -23,7 +23,7 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
 		date is 2017/08/15,
 		comment is 'Difference list predicates.',
@@ -285,6 +285,20 @@
 		ListTail \== Back2,
 		proper_prefix(PrefixTail-Back1, ListTail-Back2).
 
+	proper_prefix(Prefix, Length, List) :-
+		(	var(Length) ->	
+			proper_prefix(Prefix, 0, Length, List)
+		;	proper_prefix(Prefix, 0, Length, List),
+			!
+		).
+
+	proper_prefix(List, Length, Length, [_| _]-_) :-
+		unify_with_occurs_check(List, Back-Back).
+	proper_prefix([Head| PrefixTail]-Back1, Length0, Length, [Head| ListTail]-Back2) :-
+		ListTail \== Back2,
+		Length1 is Length0 + 1,
+		proper_prefix(PrefixTail-Back1, Length1, Length, ListTail-Back2).
+
 	reverse(List-Back, Reversed-Back) :-
 		same_length(List-Back, Reversed-Back),
 		reverse(List-Back, Back-Back, Reversed-Back).
@@ -461,6 +475,27 @@
 
 	proper_suffix(Suffix, [_| Tail]-Back) :-
 		suffix(Suffix, Tail-Back).
+
+	proper_suffix(Suffix, Length, [_| Tail]-Back) :-
+		suffix(Suffix, Length, Tail-Back).
+
+	take(0, _, List) :-
+		!,
+		unify_with_occurs_check(List, Back-Back).
+	take(N, [Element| Tail]-Back1, [Element| Elements]-Back2) :-
+		Tail \== Back1,
+		N > 0,
+		M is N - 1,
+		take(M, Tail-Back1, Elements-Back2).
+
+	drop(0, List1-Back1, List2-Back2) :-
+		!,
+		unify_with_occurs_check(List1-Back1, List2-Back2).
+	drop(N, [_| Tail]-Back1, Remaining) :-
+		Tail \== Back1,
+		N > 0,
+		M is N - 1,
+		drop(M, Tail-Back1, Remaining).
 
 	valid(List) :-
 		nonvar(List),

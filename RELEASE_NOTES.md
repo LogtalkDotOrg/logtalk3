@@ -54,6 +54,9 @@ directory and basename.
 
 * ADDED: Cross-referencing information to several library entities.
 
+* ADDED: Predicates `proper_prefix/3`, `proper_suffix/3`, `take/3`, and
+`drop/3` to `listp`, `list`, and `difflist` entities.
+
 * FIXED: Definition of the predicate `difflist::proper_prefix/2`.
 
 * ADDED: Definition of type `optional` to the `optional` library object.

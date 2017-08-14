@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017/08/15,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist]
 	]).
@@ -285,6 +285,18 @@
 	proper_prefix([Head| PrefixTail], [Head| ListTail]) :-
 		proper_prefix(PrefixTail, ListTail).
 
+	proper_prefix(Prefix, Length, List) :-
+		(	var(Length) ->	
+			proper_prefix(Prefix, 0, Length, List)
+		;	proper_prefix(Prefix, 0, Length, List),
+			!
+		).
+
+	proper_prefix([], Length, Length, [_| _]).
+	proper_prefix([Element| Tail], Length0, Length, [Element| Tail2]) :-
+		Length1 is Length0 + 1,
+		proper_prefix(Tail, Length1, Length, Tail2).
+
 	reverse(List, Reversed) :-
 		reverse(List, [], Reversed, Reversed).
 
@@ -452,6 +464,9 @@
 	proper_suffix(Suffix, [_| Tail]) :-
 		suffix(Suffix, Tail).
 
+	proper_suffix(Suffix, Length, [_| Tail]) :-
+		suffix(Suffix, Length, Tail).
+
 	valid((-)) :-		% catch variables and lists with unbound tails
 		!,
 		fail.
@@ -467,5 +482,19 @@
 			throw(error(instantiation_error, Context))
 		;	throw(error(type_error(list, Term), Context))
 		).
+
+	take(0, _, []) :-
+		!.
+	take(N, [Element| Tail], [Element| Elements]) :-
+		N > 0,
+		M is N - 1,
+		take(M, Tail, Elements).
+
+	drop(0, List, List) :-
+		!.
+	drop(N, [_| Tail], Remaining) :-
+		N > 0,
+		M is N - 1,
+		drop(M, Tail, Remaining).
 
 :- end_object.
