@@ -155,7 +155,7 @@ run_test() {
 		fi
 	fi
 	exit=$?
-	if ! grep -q "tests:" "$results/$name.results" && ! grep -q "tests skipped" "$results/$name.results"; then
+	if ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q "tests:" "$results/$name.results" && ! grep -q "tests skipped" "$results/$name.results"; then
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
 	fi
 	return $exit
@@ -420,7 +420,7 @@ grep -s -a -h -F '*     ' -- *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Skipped"
 echo "*******************************************************************************"
-grep -s -a 'tests skipped' -- *.results | sed 's/tests skipped//' | sed 's|__|/|g' | sed "s|^$prefix||" | sed "s|^% ||"
+grep -s -a 'tests skipped' -- *.results | sed 's/% tests skipped//' | sed 's/.results://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Broken"
 echo "*******************************************************************************"
