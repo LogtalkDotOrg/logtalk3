@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 15, 2017
+##   Last updated on August 14, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.26"
+	echo "$(basename "$0") 0.27"
 	exit 0
 }
 
@@ -154,7 +154,11 @@ run_test() {
 			$logtalk_call "$goal" -- "${args[@]}" < /dev/null > "$results/$name.results" 2> "$results/$name.errors"
 		fi
 	fi
-	return $?
+	exit=$?
+	if ! grep -q "tests:" "$results/$name.results" && ! grep -q "tests skipped" "$results/$name.results"; then
+		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
+	fi
+	return $exit
 }
 
 usage_help()
@@ -393,9 +397,11 @@ while read -r file && [ "$file" != "" ]; do
 done <<< "$output"
 
 cd "$results" || exit 1
+testsetskipped=$(cat -- *.results | grep -c 'tests skipped')
 timeouts=$(cat -- *.errors | grep -c 'LOGTALK_TIMEOUT')
 crashes=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
-testsetruns=$((testsets-timeouts-crashes))
+broken=$(cat -- *.errors | grep -c 'LOGTALK_BROKEN')
+testsetruns=$((testsets-timeouts-crashes-broken))
 skipped=$(cat -- *.results | grep -c ': skipped')
 passed=$(cat -- *.results | grep -c ': success')
 failed=$(cat -- *.results | grep -c ': failure')
@@ -411,6 +417,14 @@ grep -s -a -h '!     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
 grep -s -a -h '!     ' -- *.results | sed 's/.results//' | tee -a errors.all
 grep -s -a -h -F '*     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
 grep -s -a -h -F '*     ' -- *.results | sed 's/.results//' | tee -a errors.all
+echo "*******************************************************************************"
+echo "***** Skipped"
+echo "*******************************************************************************"
+grep -s -a 'tests skipped' -- *.results | sed 's/tests skipped//' | sed 's|__|/|g' | sed "s|^$prefix||" | sed "s|^% ||"
+echo "*******************************************************************************"
+echo "***** Broken"
+echo "*******************************************************************************"
+grep -s -a 'LOGTALK_BROKEN' -- *.errors | sed 's/LOGTALK_BROKEN//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
@@ -428,7 +442,7 @@ echo "***** Failed tests"
 echo "*******************************************************************************"
 grep -s -a ': failure' -- *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||" | sed "s|^!     ||"
 echo "*******************************************************************************"
-echo "***** $testsets test sets: $testsetruns completed, $timeouts timeouts, $crashes crashes"
+echo "***** $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
 
@@ -437,7 +451,7 @@ end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 echo "***** Batch testing ended @ $end_date"
 echo '*******************************************************************************'
 
-if [ "$failed" -eq 0 ] && [ "$timeouts" -eq 0 ] && [ "$crashes" -eq 0 ] ; then
+if [ "$failed" -eq 0 ] && [ "$timeouts" -eq 0 ] && [ "$crashes" -eq 0 ] && [ "$broken" -eq 0 ] ; then
 	exit 0
 else
 	exit 1

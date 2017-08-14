@@ -69,6 +69,9 @@ Tools
 
 * ADDED: Test outcome `false` as an alias to test outcome `fail`.
 
+* IMPROVED: The `logtalk_tester` script now also reports skipped and broken
+test suites.
+
 * FIXED: Note on lack of dependencies on other entities when converting entity
 API documentation into human-readable formats.
 
