@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017/08/15,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -282,6 +282,7 @@
 	proper_prefix(Prefix, [_| _]-_) :-
 		unify_with_occurs_check(Prefix, Back1-Back1).
 	proper_prefix([Head| PrefixTail]-Back1, [Head| ListTail]-Back2) :-
+		ListTail \== Back2,
 		proper_prefix(PrefixTail-Back1, ListTail-Back2).
 
 	reverse(List-Back, Reversed-Back) :-
