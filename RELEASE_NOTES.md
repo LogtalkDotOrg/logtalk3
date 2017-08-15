@@ -27,10 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Calls to the `logtalk_load/1-2` predicates now fail when loading the
-generated Prolog intermediate code unexpectedly fails (usually caused by to a
-backend Prolog compiler bug). In previous versions, an informative error
-message was printed but the call succeeded.
+* FIXED: Calls to the `logtalk_load/1-2` predicates now fail when loading
+the generated Prolog intermediate code unexpectedly fails (usually due to
+a backend Prolog compiler bug). In previous versions, an informative error
+message was printed but the call still succeeded.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -40,8 +40,8 @@ Prolog adapter and integration files
 file in the current directory.
 
 * FIXED: The SWI-Prolog adapter file to no longer try to expand `include/1`
-directives when compiling a module as an object as these are now handled by
-the Logtalk compiler.
+directives when compiling a module as an object as these directives are now
+handled by the Logtalk compiler.
 
 Library
 -------
@@ -55,7 +55,7 @@ directory and basename.
 * ADDED: Cross-referencing information to several library entities.
 
 * ADDED: Predicates `proper_prefix/3`, `proper_suffix/3`, `take/3`, and
-`drop/3` to `listp`, `list`, and `difflist` entities.
+`drop/3` to the `listp`, `list`, and `difflist` entities.
 
 * FIXED: Definition of the predicate `difflist::proper_prefix/2`.
 
