@@ -21,7 +21,7 @@ logtalk_doclet \- Logtalk script for automating running doclets
 .B logtalk_doclet -h
 
 .SH DESCRIPTION
-\fBlogtalk_doclet\fR is a script for automating running Logtalk doclets. This script runs doclets found on a directory and recursively in its sub-directories by scanning for \fIdoclet.lgt\fR and \fIdoclet.logtalk\fR source files. In case of failed doclets, timed out doclets, or crashed tdoclets, this script returns an exit code of \fI1\fR. The script assumes that the doclets use an \fIinitialization/1\fR directive to automatically run the documentation generation goal at loading time.
+\fBlogtalk_doclet\fR is a script for automating running Logtalk doclets. This script runs doclets found on a directory and recursively in its sub-directories by scanning for \fIdoclet.lgt\fR and \fIdoclet.logtalk\fR source files. The script assumes that the doclets use an \fIinitialization/1\fR directive to automatically run the documentation generation goal at loading time. A non-zero exit status is returned in case of failed doclets, timed out doclets, or crashed doclets.
 
 .SH OPTIONS
 .TP
