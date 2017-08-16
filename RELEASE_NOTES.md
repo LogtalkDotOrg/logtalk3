@@ -79,8 +79,12 @@ entities.
 test suites.
 
 * IMPROVED: The `logtalk_tester` script now returns different non-zero exit
-status for failed tests, timed out test sets, broken test sets, and crashes
-when executing test sets. See the script man page for details.
+status for failed tests, timed out test sets, broken test sets, and crashed
+test sets. See the script man page for details.
+
+* IMPROVED: The `logtalk_doclet` script now returns different non-zero exit
+status for failed doclets, timed out doclets, and crashed doclets. See the
+script man page for details.
 
 * FIXED: Note on lack of dependencies on other entities when converting entity
 API documentation into human-readable formats.

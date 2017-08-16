@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on February 17, 2017
+##   Last updated on August 16, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.4"
 	exit 0
 }
 
@@ -295,8 +295,12 @@ end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 echo "***** Batch documentation processing ended @ $end_date"
 echo '*******************************************************************************'
 
-if [ "$failures" -eq 0 ] && [ "$timeouts" -eq 0 ] && [ "$crashes" -eq 0 ] ; then
-	exit 0
-else
+if [ "$crashes" -gt 0 ] ; then
+	exit 7
+elif [ "$timeouts" -gt 0 ] ; then
+	exit 3
+elif [ "$failures" -gt 0 ] ; then
 	exit 1
+else
+	exit 0
 fi

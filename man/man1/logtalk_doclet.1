@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "September 29, 2016" "Logtalk 3.08.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "August 16, 2017" "Logtalk 3.11.2" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -45,6 +45,20 @@ Arguments to be passed to the integration script used to run the doclets (no def
 .TP
 .B \-h
 Provide help on script usage.
+
+.SH "EXIT STATUS"
+.TP
+.B 0
+All doclets succeeded and there are no timed out or crashed doclets.
+.TP
+.B 1
+Some doclets failed but there are no timed out or crashed doclets.
+.TP
+.B 3
+One or more doclets timed out while executing but there are no crashed doclets.
+.TP
+.B 7
+One or more doclets crashed the process running them.
 
 .SH ENVIRONMENT
 .TP
