@@ -451,8 +451,14 @@ end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 echo "***** Batch testing ended @ $end_date"
 echo '*******************************************************************************'
 
-if [ "$failed" -eq 0 ] && [ "$timeouts" -eq 0 ] && [ "$crashes" -eq 0 ] && [ "$broken" -eq 0 ] ; then
-	exit 0
-else
+if [ "$crashes" -gt 0 ] ; then
+	exit 7
+elif [ "$broken" -gt 0 ] ; then
+	exit 5
+elif [ "$timeouts" -gt 0 ] ; then
+	exit 3
+elif [ "$failed" -gt 0 ] ; then
 	exit 1
+else
+	exit 0
 fi

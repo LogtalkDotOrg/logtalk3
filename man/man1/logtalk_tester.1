@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "August 14, 2017" "Logtalk 3.11.2" "Logtalk Documentation"
+.TH logtalk_tester 1 "August 16, 2017" "Logtalk 3.11.2" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -29,7 +29,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \fItester.lgt\fR and \fItester.logtalk\fR source files. In case of failed unit tests, timed out test sets, broken test sets, or crashed test sets, this script returns an exit code of \fI1\fR.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors.
 
 .SH OPTIONS
 .TP
@@ -65,6 +65,23 @@ Arguments to be passed to the integration script used to run the tests (no defau
 .TP
 .B \-h
 Provide help on script usage.
+
+.SH "EXIT STATUS"
+.TP
+.B 0
+All non-skipped tests pass and there are no broken, timed out, or crashed test sets.
+.TP
+.B 1
+Some tests fail but there are no broken, timed out, or crashed test sets.
+.TP
+.B 3
+One or more test sets timed out while executing.
+.TP
+.B 5
+One or more test sets are broken and thus could not be executed.
+.TP
+.B 7
+One or more test sets crashed the process running them.
 
 .SH ENVIRONMENT
 .TP

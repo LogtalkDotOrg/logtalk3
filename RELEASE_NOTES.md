@@ -70,12 +70,17 @@ throw an `instantiation_error` when the checked term is not instantiated.
 Tools
 -----
 
-* ADDED: Cross-referencing information to the `diagrams` tool entities.
+* ADDED: Cross-referencing information to the `doclet` and `diagrams` tool
+entities.
 
 * ADDED: Test outcome `false` as an alias to test outcome `fail`.
 
 * IMPROVED: The `logtalk_tester` script now also reports skipped and broken
 test suites.
+
+* IMPROVED: The `logtalk_tester` script now returns different non-zero exit
+status for failed tests, timed out test sets, broken test sets, and crashes
+when executing test sets. See the script man page for details.
 
 * FIXED: Note on lack of dependencies on other entities when converting entity
 API documentation into human-readable formats.
