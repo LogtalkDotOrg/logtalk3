@@ -70,8 +70,12 @@
 
 % between(+integer, +integer, ?integer)
 
-:- ensure_loaded(library(util)).
-:- import between/3 from util.
+:- if(\+ get_flag(between/3, type, built_in)).
+
+	:- ensure_loaded(library(util)).
+	:- import between/3 from util.
+
+:- endif.
 
 
 % findall(?term, +callable, ?list, +list)
