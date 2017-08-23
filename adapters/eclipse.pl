@@ -35,7 +35,7 @@
 
 :- if((get_flag(version_as_list, Version), Version @>= [7])).
 	:- use_module(library(threads)).
-	:- if(get_flag(mutex_property/2, defined, off)).
+	:- if(\+ get_flag(mutex_property/2, defined, on)).
 		mutex_property(_, alias(Alias)) :-
 			catch(with_mutex(Alias,true), _, fail).
 	:- endif.
