@@ -21,12 +21,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% this file should be loaded into module "user" with language set to "iso";
+% the provided "eclipselgt.sh" script ensures that by using the "eclipse"
+% command-line options "-L iso -t user"
+
 :- pragma(system).
 :- pragma(nodebug).
 
-:- use_module(library(iso)).
-:- ensure_loaded(library(iso_strict)).
-:- import compare/3, term_variables/2 from iso_strict.
+:- if((get_flag(version_as_list, Version), Version @< [7,0,24])).
+	:- ensure_loaded(library(iso_strict)).
+	:- import compare/3, term_variables/2 from iso_strict.
+:- endif.
+
+:- if((get_flag(version_as_list, Version), Version @>= [7])).
+	:- use_module(library(threads)).
+:- endif.
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
@@ -157,7 +166,12 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable) -- not supported
+% setup_call_cleanup(+callable, +callable, +callable)
+
+:- if((get_flag(version_as_list, Version), Version @> [7,0,24])).
+    :- ensure_loaded(library(prolog_extras)).
+    :- import setup_call_cleanup/3 from prolog_extras.
+:- endif.
 
 
 
@@ -261,7 +275,11 @@ forall(Generate, Test) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
-'$lgt_prolog_feature'(threads, unsupported).
+:- if(get_flag(thread_create/3, defined, on)).
+	'$lgt_prolog_feature'(threads, supported).
+:- else.
+	'$lgt_prolog_feature'(threads, unsupported).
+:- endif.
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, supported).
 '$lgt_prolog_feature'(unicode, unsupported).

@@ -43,6 +43,13 @@ file in the current directory.
 directives when compiling a module as an object as these directives are now
 handled by the Logtalk compiler.
 
+* UPDATED: The ECLiPSe adapter file to load the `setup_call_cleanup` and
+`threads` libraries when available for experimental multi-threading support.
+Thanks to Joachim Schimpf for feedback, testing, and patches.
+
+* FIXED: The ECLiPSe adapter file for recent changes to this system ISO Prolog
+libraries.
+
 * FIXED: The ECLiPSe adapter file expansion of `import/1` and `reexport/1`
 directives.
 
