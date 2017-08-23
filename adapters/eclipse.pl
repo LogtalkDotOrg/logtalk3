@@ -35,6 +35,10 @@
 
 :- if((get_flag(version_as_list, Version), Version @>= [7])).
 	:- use_module(library(threads)).
+	:- if(get_flag(mutex_property/2, defined, off)).
+		mutex_property(_, alias(Alias)) :-
+			catch(with_mutex(Alias,true), _, fail).
+	:- endif.
 :- endif.
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
