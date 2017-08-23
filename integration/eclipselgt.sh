@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for ECLiPSe
-##   Last updated on February 22, 2017
+##   Last updated on August 23, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -96,4 +96,4 @@ fi
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec eclipse -L iso -t user -b "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"
+exec eclipse -L iso -t user -f "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"
