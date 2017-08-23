@@ -279,11 +279,11 @@ forall(Generate, Test) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
-:- if(get_flag(thread_create/3, defined, on)).
-	'$lgt_prolog_feature'(threads, supported).
-:- else.
+%:- if(get_flag(thread_create/3, defined, on)).
+%	'$lgt_prolog_feature'(threads, supported).
+%:- else.
 	'$lgt_prolog_feature'(threads, unsupported).
-:- endif.
+%:- endif.
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, supported).
 '$lgt_prolog_feature'(unicode, unsupported).

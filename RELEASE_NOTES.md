@@ -44,7 +44,8 @@ directives when compiling a module as an object as these directives are now
 handled by the Logtalk compiler.
 
 * UPDATED: The ECLiPSe adapter file to load the `setup_call_cleanup` and
-`threads` libraries when available for experimental multi-threading support.
+`threads` libraries when available. As multi-threading support when using
+this backend system is still experimental, it is turned off by default.
 Thanks to Joachim Schimpf for feedback, testing, and patches.
 
 * FIXED: The ECLiPSe adapter file for recent changes to this system ISO Prolog
