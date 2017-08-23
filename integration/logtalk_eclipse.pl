@@ -26,4 +26,4 @@
 :- compile('$LOGTALKHOME/paths/paths.pl').
 :- compile('$LOGTALKHOME/integration/logtalk_comp_eclipse.pl').
 % load integration hooks with ECLiPSe native developer tools
-:- compile('$LOGTALKHOME/adapters/eclipsehooks.pl')
+:- compile('$LOGTALKHOME/adapters/eclipsehooks.pl').
