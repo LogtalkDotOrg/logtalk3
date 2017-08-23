@@ -43,6 +43,9 @@ file in the current directory.
 directives when compiling a module as an object as these directives are now
 handled by the Logtalk compiler.
 
+* FIXED: The ECLiPSe adapter file expansion of `import/1` and `reexport/1`
+directives.
+
 Library
 -------
 

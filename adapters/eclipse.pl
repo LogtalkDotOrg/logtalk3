@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on May 5, 2017
+%  Last updated on August 23, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -591,7 +591,7 @@ forall(Generate, Test) :-
 	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 
 '$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), use_module(Module, Imports)) :-
-	'$lgt_flatten_list'([Conjunction], Imports).
+	'$lgt_flatten_to_list'(Conjunction, Imports).
 
 '$lgt_eclipse_directive_expansion'(local(Functor/Arity), private(Functor/Arity)).
 '$lgt_eclipse_directive_expansion'(local(op(Priority, Spec, Operators)), op(Priority, Spec, Operators)).
@@ -605,7 +605,7 @@ forall(Generate, Test) :-
 	'$lgt_eclipse_list_of_exports'(File, Module, Exports).
 
 '$lgt_eclipse_directive_expansion'(reexport(from(Conjunction, Module)), reexport(Module, Exports)) :-
-	'$lgt_flatten_list'([Conjunction], Exports).
+	'$lgt_flatten_to_list'(Conjunction, Exports).
 
 '$lgt_eclipse_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
 	logtalk_load_context(entity_type, _),
