@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on August 23, 2017
+%  Last updated on August 24, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -31,6 +31,11 @@
 :- if((get_flag(version_as_list, Version), Version @< [7,0,24])).
 	:- ensure_loaded(library(iso_strict)).
 	:- import compare/3, term_variables/2 from iso_strict.
+:- endif.
+
+:- if((get_flag(version_as_list, Version), Version @>= [7,0,26])).
+	:- ensure_loaded(library(prolog_extras)).
+	:- import predicate_property/2 from prolog_extras.
 :- endif.
 
 :- if((get_flag(version_as_list, Version), Version @>= [7])).
@@ -151,7 +156,12 @@ forall(Generate, Test) :-
 '$lgt_eclipse_module_predicate_property'(Module, Predicate, meta_predicate(Template)) :-
 	get_flag(Predicate, meta_predicate, Template)@Module.
 
-'$lgt_eclipse_plain_predicate_property'(numbervars/3, built_in).
+:- if(\+ get_flag(numbervars/3, type, built_in)).
+	'$lgt_eclipse_plain_predicate_property'(numbervars/3, built_in).
+:- endif.
+:- if(get_flag(predicate_property/2, defined, on)).
+	'$lgt_eclipse_plain_predicate_property'(predicate_property/2, built_in).
+:- endif.
 '$lgt_eclipse_plain_predicate_property'(Predicate, built_in) :-
 	get_flag(Predicate, type, built_in).
 '$lgt_eclipse_plain_predicate_property'(Predicate, dynamic) :-

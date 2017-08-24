@@ -48,6 +48,10 @@ handled by the Logtalk compiler.
 this backend system is still experimental, it is turned off by default.
 Thanks to Joachim Schimpf for feedback, testing, and patches.
 
+* UPDATED: The ECLiPSe adapter file to import into `user` the standard
+`predicate_property/2` predicate when available (requires version 7.0.26
+or later).
+
 * FIXED: The ECLiPSe adapter file for recent changes to this system ISO Prolog
 libraries.
 
