@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2017/08/24,
 		comment is 'Unit tests for the ISO Prolog standard put_code/1-2 built-in predicates.'
 	]).
 
@@ -84,7 +84,7 @@
 		^^set_text_input(s, ''),
 		{put_code(s, 1)}.
 
-	throws(lgt_put_code_2_13, error(permission_error(output,binary_stream,s),_)) :-
+	throws(lgt_put_code_2_13, error(permission_error(output,binary_stream,_),_)) :-
 		^^set_binary_output(s, []),
 		{put_code(s, 1)}.
 

@@ -100,6 +100,15 @@ script man page for details.
 * FIXED: Note on lack of dependencies on other entities when converting entity
 API documentation into human-readable formats.
 
+Tests
+-----
+
+* FIXED: Tests for ISO Prolog compliance of the `get_byte/2`, `get_char/2`,
+`get_code/2`, `peek_byte/2`, `peek_char/2`, `peek_code/2`, `put_byte/2`,
+`put_char/2`, `put_code/2`, `read_term/3`, and `write_term/3` built-in
+predicates when trying to get input from a stream. Thanks to Joachim Schimpf
+for the bug report.
+
 
 3.11.1 - July 17, 2017
 ======================

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2015/06/01,
+		date is 2017/08/24,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -96,7 +96,7 @@
 		current_output(S),
 		{peek_char(S, _)}.
 
-	throws(sics_peek_char_2_14, error(permission_error(input,binary_stream,s),_)) :-
+	throws(sics_peek_char_2_14, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{peek_char(s, _)}.
 

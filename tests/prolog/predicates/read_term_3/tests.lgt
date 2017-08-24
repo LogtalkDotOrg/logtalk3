@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2017/08/24,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -162,7 +162,7 @@
 		^^set_text_output(s, ''),
 		{read(s, _)}.
 
-	throws(lgt_read_term_3_26, error(permission_error(input,binary_stream,s),_)) :-
+	throws(lgt_read_term_3_26, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{read(s, _)}.
 

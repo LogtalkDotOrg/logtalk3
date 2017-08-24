@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2015/06/01,
+		date is 2017/08/24,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -129,7 +129,7 @@
 		^^set_text_output(s, ''),
 		{get_char(s, _)}.
 
-	throws(lgt_get_char_2_19, error(permission_error(input,binary_stream,s),_)) :-
+	throws(lgt_get_char_2_19, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{get_char(s, _)}.
 
