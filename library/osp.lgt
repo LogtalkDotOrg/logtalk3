@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.19,
+		version is 1.20,
 		author is 'Paulo Moura',
-		date is 2017/08/12,
+		date is 2017/08/25,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os_types]
 	]).
@@ -108,7 +108,7 @@
 	:- public(directory_files/2).
 	:- mode(directory_files(+atom, -list(atom)), one).
 	:- info(directory_files/2, [
-		comment is 'Returns a list of all the files (including directories and regular files) in the given directory.',
+		comment is 'Returns a list of all the files (including directories, regular files, and hidden directories and files) in the given directory.',
 		argnames is ['Directory', 'Files']
 	]).
 
