@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on June 13, 2017
+%  Last updated on August 26, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -290,12 +290,10 @@
 	).
 '$lgt_prolog_feature'(threads, Threads) :-
 	(	current_prolog_flag(system_options, threads) ->
-		Threads = supported,
-		thread_local('$lgt_engine_term_queue_'/2)
+		Threads = supported
 	;	current_prolog_flag(system_options, Options),
 		member(threads, Options) ->
-		Threads = supported,
-		thread_local('$lgt_engine_term_queue_'/2)
+		Threads = supported
 	;	Threads = unsupported
 	).
 '$lgt_prolog_feature'(modules, supported).

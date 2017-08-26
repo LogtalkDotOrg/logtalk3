@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The implementation of threaded engines no longer requires the
+use of a thread local dynamic predicate.
+
 * IMPROVED: Replaced use of the `mutex_lock/1` and `mutex_unlock/1` Prolog
 predicates in the implementation of the `threaded_engine_create/3` and
 `threaded_engine_destroy/1` predicates.

@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 2, rc3)).
+'$lgt_version_data'(logtalk(3, 11, 2, rc4)).
 
 
 
@@ -20001,17 +20001,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 % always terminates with a status of "true" when an exception occurs or there
 % aren't any more solutions for the engine goal
 %
-% we use a thread local predicate, '$lgt_engine_term_queue_'/2, to store the
-% engine name and the engine term queue in the thread itself to workaround
-% random timing issues when accessing the '$lgt_current_engine_'/4 dynamic
-% predicate that can result in unexpected errors; this thread local predicate
-% is declared in the adapter files of backend Prolog compilers with compatible
-% multi-threading support to avoid portability issues with this compiler/runtime
-% file
+% we use the object queue to store a '$lgt_engine_term_queue'/3 term with the
+% engine name and the engine term queue to workaround random timing issues when
+% accessing the '$lgt_current_engine_'/4 dynamic predicate that can result in
+% unexpected errors
 
 '$lgt_mt_engine_goal'(ThisQueue, TermQueue, Answer, Goal, Engine) :-
 	thread_self(Id),
-	assertz('$lgt_engine_term_queue_'(Engine, TermQueue)),
+	thread_send_message(ThisQueue, '$lgt_engine_term_queue'(Engine, TermQueue, Id)),
 	(	setup_call_cleanup(true, catch(Goal, Error, true), Deterministic = true),
 		(	var(Error) ->
 			(	var(Deterministic) ->
@@ -20132,8 +20129,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % fails if not called from within an engine
 
-'$lgt_threaded_engine_self'(_This, Engine) :-
-	'$lgt_engine_term_queue_'(Engine0, _),
+'$lgt_threaded_engine_self'(This, Engine) :-
+	thread_self(Id),
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+	thread_peek_message(Queue, '$lgt_engine_term_queue'(Engine0, _, Id)),
 	!,
 	Engine = Engine0.
 
@@ -20147,7 +20146,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_engine_yield'(Answer, This) :-
 	thread_self(Id),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	'$lgt_engine_term_queue_'(Engine, _),
+	thread_peek_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id)),
 	thread_send_message(Queue, '$lgt_answer'(Engine, Id, Answer, success)),
 	thread_get_message(_).
 
@@ -20173,9 +20172,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % fails if not called from within an engine or if we are
 % destroying a running engine
 
-'$lgt_threaded_engine_fetch'(Term, _This) :-
+'$lgt_threaded_engine_fetch'(Term, This) :-
+	thread_self(Id),
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	(	% check if calling from within an engine
-		'$lgt_engine_term_queue_'(_, TermQueue) ->
+		thread_peek_message(Queue, '$lgt_engine_term_queue'(_, TermQueue, Id)) ->
 		% engine exists; go ahead and retrieve a message from its mailbox
 		thread_get_message(TermQueue, Term),
 		Term \== '$lgt_aborted'
@@ -20226,6 +20227,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% return failures after consuming all solutions if present
 		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, failure)) ->
 			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, failure))
+		;	true
+		),
+		% remove the cache entry for the engine term queue handle
+		(	thread_peek_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id)) ->
+			thread_get_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id))
 		;	true
 		)
 	;	% engine doesn't exist
