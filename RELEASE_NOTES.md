@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Replaced use of the `mutex_lock/1` and `mutex_unlock/1` Prolog
+predicates in the implementation of the `threaded_engine_create/3` and
+`threaded_engine_destroy/1` predicates.
+
 * FIXED: Calls to the `logtalk_load/1-2` predicates now fail when loading
 the generated Prolog intermediate code unexpectedly fails (usually due to
 a backend Prolog compiler bug). In previous versions, an informative error

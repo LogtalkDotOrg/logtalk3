@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 2, rc2)).
+'$lgt_version_data'(logtalk(3, 11, 2, rc3)).
 
 
 
@@ -19973,10 +19973,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine) :-
-	setup_call_cleanup(
-		mutex_lock('$lgt_engines'),
-		'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, This, Engine),
-		mutex_unlock('$lgt_engines')
+	with_mutex(
+		'$lgt_engines',
+		'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, This, Engine)
 	).
 
 
@@ -20189,10 +20188,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % a request for the next solution or a term to be processed
 
 '$lgt_threaded_engine_destroy'(Engine, This) :-
-	setup_call_cleanup(
-		mutex_lock('$lgt_engines'),
-		'$lgt_threaded_engine_destroy_protected'(Engine, This),
-		mutex_unlock('$lgt_engines')
+	with_mutex(
+		'$lgt_engines',
+		'$lgt_threaded_engine_destroy_protected'(Engine, This)
 	).
 
 
@@ -20202,7 +20200,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 		retract('$lgt_current_engine_'(This, Engine, TermQueue, Id)) ->
 		(	thread_property(Id, status(running)) ->
-			% protect the call to thread_signal/1 as the thread may terminate
+			% protect the call to thread_signal/2 as the thread may terminate
 			% between checking its status and this call
 			catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
 			% send a term to the engine term queue first as this queue is explicitly
