@@ -21,9 +21,9 @@
 :- object(lazy).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2016/06/15,
+		date is 2017/08/26,
 		comment is 'Lazy meta-predicates implemented using coroutining and threaded engines.'
 	]).
 
@@ -36,6 +36,24 @@
 		comment is 'Lazy findall/3 alternative using coroutining and threaded engines.',
 		argnames is ['Template', 'Goal', 'LazyList']
 	]).
+
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+
+	find_all(Template, Goal, LazyList):-
+		threaded_engine_create(Template, Goal, Engine),
+		(	threaded_engine_next(Engine, Head) ->
+			swi:freeze(LazyList, source_lazy_list(LazyList, Head, Engine))
+		;	threaded_engine_destroy(Engine)
+		).
+
+	source_lazy_list([Head| LazyTail], Head, Engine) :-
+		(	threaded_engine_next(Engine, Next) ->
+			swi:freeze(LazyTail, source_lazy_list(LazyTail, Next, Engine))
+		;	LazyTail = [],
+			threaded_engine_destroy(Engine)
+		).
+
+	:- else.
 
 	find_all(Template, Goal, LazyList):-
 		threaded_engine_create(Template, Goal, Engine),
@@ -50,5 +68,7 @@
 		;	LazyTail = [],
 			threaded_engine_destroy(Engine)
 		).
+
+	:- endif.
 
 :- end_object.

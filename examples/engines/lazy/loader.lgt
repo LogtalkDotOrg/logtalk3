@@ -26,6 +26,16 @@
 		logtalk_load(lazy)
 	)).
 
+:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+	:- ensure_loaded(library(swi)).
+
+	:- initialization((
+		logtalk_load(library(basic_types_loader)),
+		logtalk_load(library(random_loader)),
+		logtalk_load(lazy)
+	)).
+
 :- else.
 
 	:- initialization((write('WARNING: example not supported on this back-end Prolog compiler!'), nl)).

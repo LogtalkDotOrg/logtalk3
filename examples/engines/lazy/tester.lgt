@@ -28,6 +28,18 @@
 		tests::run
 	)).
 
+:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+	:- ensure_loaded(library(swi)).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(loader),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
 :- else.
 
 	:- initialization((
