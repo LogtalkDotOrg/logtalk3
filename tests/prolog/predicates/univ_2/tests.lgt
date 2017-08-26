@@ -120,4 +120,16 @@
 	fails(lgt_univ_2_19) :-
 		{'=..'(1, [_, _])}.
 
+	fails(lgt_univ_2_20) :-
+		{'=..'(a, [_, _])}.
+
+	fails(lgt_univ_2_21) :-
+		{'=..'(1, [])}.
+
+	fails(lgt_univ_2_22) :-
+		{'=..'(a, [])}.
+
+	fails(lgt_univ_2_23) :-
+		{'=..'(a(1), [])}.
+
 :- end_object.
