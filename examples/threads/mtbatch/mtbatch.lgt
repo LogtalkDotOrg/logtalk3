@@ -21,9 +21,9 @@
 :- object(mtbatch).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2017/08/26,
 		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
 	]).
 
@@ -551,6 +551,19 @@
 		write_average(Average) :-
 			put_char('\t'),
 			fmt_write("%4f", Average),
+			flush_output.
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		walltime_begin(Walltime) :-
+			statistics(times, [_, _, Time]).
+
+		walltime_end(Walltime) :-
+			statistics(times, [_, _, Time]).
+
+		write_average(Average) :-
+			put_char('\t'),
+			{format('~4f', [Average])},
 			flush_output.
 
 	:- else.

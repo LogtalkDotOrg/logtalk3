@@ -104,6 +104,11 @@ script man page for details.
 * FIXED: Note on lack of dependencies on other entities when converting entity
 API documentation into human-readable formats.
 
+Examples
+--------
+
+* UPDATED: The `mtbatch` example to support ECLiPSe.
+
 Tests
 -----
 
