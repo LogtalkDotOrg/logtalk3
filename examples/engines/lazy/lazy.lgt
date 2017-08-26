@@ -39,6 +39,8 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
+	:- meta_predicate(swi:freeze(*, 0)).
+
 	find_all(Template, Goal, LazyList):-
 		threaded_engine_create(Template, Goal, Engine),
 		(	threaded_engine_next(Engine, Head) ->
