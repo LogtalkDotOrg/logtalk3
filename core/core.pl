@@ -19670,6 +19670,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_wait_synch_ctg'(+mutex_identifier, @term, @object_identifier)
+%
+% calls to the threaded_wait/1 predicate from synchronized category predicates
 
 '$lgt_threaded_wait_synch_ctg'(Mutex, Msg, This) :-
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _),
@@ -19680,6 +19682,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_threaded_wait_synch'(+mutex_identifier, @term, +entity_prefix)
+%
+% calls to the threaded_wait/1 predicate from synchronized object predicates
 
 '$lgt_threaded_wait_synch'(Mutex, Msg, Prefix) :-
 	mutex_unlock(Mutex),
@@ -20178,6 +20182,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% engine does not exist
 		fail
 	).
+
 
 
 % '$lgt_threaded_engine_destroy'(@nonvar, @object_identifier)
