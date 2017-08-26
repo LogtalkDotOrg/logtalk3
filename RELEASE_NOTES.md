@@ -112,6 +112,8 @@ Examples
 Tests
 -----
 
+* ADDED: Additional compliance test for the `=../2` standard Prolog predicate.
+
 * FIXED: Tests for ISO Prolog compliance of the `get_byte/2`, `get_char/2`,
 `get_code/2`, `peek_byte/2`, `peek_char/2`, `peek_code/2`, `put_byte/2`,
 `put_char/2`, `put_code/2`, `read_term/3`, and `write_term/3` built-in

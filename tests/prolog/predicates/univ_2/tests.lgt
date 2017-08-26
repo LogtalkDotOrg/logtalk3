@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2017/08/26,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -114,5 +114,10 @@
 			N > 0, N1 is N-1,
 			list_of(N1, A, L).
 	:- endif.
+
+	% tests from the Logtalk portability work
+
+	fails(lgt_univ_2_19) :-
+		{'=..'(1, [_, _])}.
 
 :- end_object.
