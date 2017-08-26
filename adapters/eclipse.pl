@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on August 24, 2017
+%  Last updated on August 26, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -162,6 +162,27 @@ forall(Generate, Test) :-
 :- if(get_flag(predicate_property/2, defined, on)).
 	'$lgt_eclipse_plain_predicate_property'(predicate_property/2, built_in).
 :- endif.
+:- if((get_flag(version_as_list, Version), Version @>= [7])).
+	'$lgt_eclipse_plain_predicate_property'(thread_exit/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_sleep/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_property/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_self/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_create/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_create/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_create/3, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_join/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_signal/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_peek_message/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_peek_message/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_get_message/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_get_message/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_send_message/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(thread_send_message/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(mutex_create/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(mutex_create/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(with_mutex/2, built_in).
+:- endif.
+
 '$lgt_eclipse_plain_predicate_property'(Predicate, built_in) :-
 	get_flag(Predicate, type, built_in).
 '$lgt_eclipse_plain_predicate_property'(Predicate, dynamic) :-
