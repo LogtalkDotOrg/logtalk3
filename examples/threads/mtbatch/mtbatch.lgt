@@ -556,10 +556,10 @@
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		walltime_begin(Walltime) :-
-			statistics(times, [_, _, Time]).
+			statistics(times, [_, _, Walltime]).
 
 		walltime_end(Walltime) :-
-			statistics(times, [_, _, Time]).
+			statistics(times, [_, _, Walltime]).
 
 		write_average(Average) :-
 			put_char('\t'),
