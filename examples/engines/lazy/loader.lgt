@@ -26,7 +26,10 @@
 		logtalk_load(lazy)
 	)).
 
-:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+:- elif((
+	current_logtalk_flag(prolog_dialect, eclipse),
+	current_logtalk_flag(threads, supported)
+)).
 
 	:- ensure_loaded(library(swi)).
 

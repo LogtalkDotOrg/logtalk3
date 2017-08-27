@@ -19,8 +19,9 @@
 
 
 :- if((
-	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == swi; Dialect == eclipse)
+		current_logtalk_flag(prolog_dialect, swi)
+	;	current_logtalk_flag(prolog_dialect, eclipse),
+		current_logtalk_flag(threads, supported)
 )).
 
 	:- initialization(
