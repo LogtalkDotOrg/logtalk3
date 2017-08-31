@@ -21,6 +21,19 @@ RELEASE NOTES
 =============
 
 
+3.11.3 - September ??, 2017
+===========================
+
+Tools
+-----
+
+* FIXED: The `logtalk_tester` shell script no longer exports the `LC_ALL`
+environment variable and instead uses it only locally to fix the tests sorting
+order when searching for the `tester.lgt` and `tester.logtalk` files. This
+change fixes tests sorting order in Ubuntu and avoids locale-related issues in
+Centos/RHEL.
+
+
 3.11.2 - August 28, 2017
 ========================
 

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on August 14, 2017
+##   Last updated on August 31, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -23,8 +23,6 @@
 #############################################################################
 
 # loosely based on a unit test automation script contributed by Parker Jones
-
-export LC_ALL=C
 
 print_version() {
 	echo "$(basename "$0") 0.27"
@@ -390,7 +388,7 @@ grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
 
 testsets=0
-output="$(find "$base" $level -name "tester.lgt" -or -name "tester.logtalk")"
+output="$(find "$base" $level -name "tester.lgt" -or -name "tester.logtalk" | LC_ALL=C sort)"
 while read -r file && [ "$file" != "" ]; do
 	((testsets++))
 	run_tests "$file"
