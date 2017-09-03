@@ -35,6 +35,9 @@ and `private`.
 
 Copy the file `tasks.json` to the your workspace `.vscode` folder. Edit it to
 choose and customize the Prolog integration shortcut that you want to use.
+Defined tasks include file compilation, running unit tests, scanning for
+dead code, running doclets, generating HTML documentation, and generating
+SVG diagrams.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
