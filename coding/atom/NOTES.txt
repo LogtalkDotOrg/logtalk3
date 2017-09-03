@@ -58,12 +58,13 @@ shell must be specified; e.g. the Bash shell provided by Git for Windows).
 2. `atom_ctags`
 
 By installing this package and the Logtalk ctags support (see `../ctags`), it
-is possible to use Atom's `Command Palette` to index and browse Logtalk code.
+is possible to use Atom's `Command Palette` to index and browse Logtalk code
+(e.g. to search and navigate to entity and predicate declarations).
 
 3. `atom-html-preview`
 
-One of the packages that allows convenient rendering of HTML files, including
-those generated for API documentation of Logtalk code.
+One of the packages that allows convenient rendering of HTML and SVG files,
+including those generated for API documentation of Logtalk code.
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
