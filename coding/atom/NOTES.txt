@@ -44,7 +44,9 @@ Several Atom packages can be useful for Logtalk development. Those include:
 
 The provided `process-palette.json` file defines commands for compiling a file
 from within Atom allowing clicking on warnings and errors and jump to their
-location, for scanning for dead code, and for generating HTML documentation.
+location, for running unit tests, for scanning for dead code, for generating
+HTML documentation, and for generating diagrams.
+
 For using these commands, install the `process-palette` package and replace
 or merge the contents of the file with default file found at `~/.atom`. If
 no `~/.atom/process-palette.json` file exists just copy the provided file
