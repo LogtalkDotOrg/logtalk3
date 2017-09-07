@@ -187,11 +187,11 @@
 	failed_test_reason(success_instead_of_failure) -->
 		['  test goal succeeded but should have failed'-[], nl].
 	failed_test_reason(success_instead_of_error) -->
-		['  test goal succeeded but should have throw an error'-[], nl].
+		['  test goal succeeded but should have thrown an error'-[], nl].
 	failed_test_reason(failure_instead_of_success) -->
 		['  test goal failed but should have succeeded'-[], nl].
 	failed_test_reason(failure_instead_of_error) -->
-		['  test goal failed but should have throw an error'-[], nl].
+		['  test goal failed but should have thrown an error'-[], nl].
 	failed_test_reason(error_instead_of_failure(Error)) -->
 		['  test goal throws an error but should have failed: ~q'-[Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_error(Assertion, error(Error,_)))) -->
