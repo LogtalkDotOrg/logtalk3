@@ -1715,41 +1715,54 @@
 			filter_extensions(Files1, [Extension| Extensions], Files2)
 		;	Files2 = Files1
 		),
+		(	list::member(dot_files(Boolean), Options),
+			Boolean == false ->
+			filter_dot_files(Files2, Files3)
+		;	Files3 = Files2
+		),
 		(	list::member(paths(Paths), Options) ->
 			(	Paths == relative ->
-				Files = Files2
+				Files = Files3
 			;	Paths == absolute ->
-				expand_relative_paths(Files2, Directory, Files)
-			;	Files = Files2
+				expand_relative_paths(Files3, Directory, Files)
+			;	Files = Files3
 			)
-		;	Files = Files2
+		;	Files = Files3
 		).
 
 	filter_regular([], _, []).
-	filter_regular([File0| Files0], Directory, Files1) :-
+	filter_regular([File0| Files0], Directory, Files) :-
 		atom_concat(Directory, File0, Path0),
 		(	file_exists(Path0) ->
-			Files1 = [File0| Rest1],
-			filter_regular(Files0, Directory, Rest1)
-		;	filter_regular(Files0, Directory, Files1)
+			Files = [File0| Rest],
+			filter_regular(Files0, Directory, Rest)
+		;	filter_regular(Files0, Directory, Files)
 		).
 
 	filter_directories([], _, []).
-	filter_directories([File0| Files0], Directory, Files1) :-
+	filter_directories([File0| Files0], Directory, Files) :-
 		atom_concat(Directory, File0, Path0),
 		(	directory_exists(Path0) ->
-			Files1 = [File0| Rest1],
-			filter_directories(Files0, Directory, Rest1)
-		;	filter_directories(Files0, Directory, Files1)
+			Files = [File0| Rest],
+			filter_directories(Files0, Directory, Rest)
+		;	filter_directories(Files0, Directory, Files)
 		).
 
 	filter_extensions([], _, []).
-	filter_extensions([File0| Files0], Extensions, Files1) :-
+	filter_extensions([File0| Files0], Extensions, Files) :-
 		decompose_file_name(File0, _, _, Extension),
 		(	list::member(Extension, Extensions) ->
-			Files1 = [File0| Rest1],
-			filter_extensions(Files0, Extensions, Rest1)
-		;	filter_extensions(Files0, Extensions, Files1)
+			Files = [File0| Rest],
+			filter_extensions(Files0, Extensions, Rest)
+		;	filter_extensions(Files0, Extensions, Files)
+		).
+
+	filter_dot_files([], []).
+	filter_dot_files([File0| Files0], Files) :-
+		(	sub_atom(File0, 0, 1, _, '.') ->
+			filter_dot_files(Files0, Files)
+		;	Files = [File0| Rest],
+			filter_dot_files(Files0, Rest)
 		).
 
 	expand_relative_paths([], _, []).
