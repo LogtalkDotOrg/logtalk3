@@ -115,7 +115,7 @@
 	:- public(directory_files/3).
 	:- mode(directory_files(+atom, -list(atom), +list(compound)), one).
 	:- info(directory_files/3, [
-		comment is 'Returns a list of all files in a directory filtered by the given options (paths/1 - {relative,absolute}, type/1 - {regular,directory}, extensions/1 - extensions list, dot_files/1 - boolean). Invalid options are ignored.',
+		comment is 'Returns a filtered list of directory files. Filter options are: paths/1 - {relative,absolute}, type/1 - {all,regular,directory}, extensions/1 - list, and dot_files/1 - boolean. Invalid options are ignored. Default options equivalent to directory_files/2.',
 		argnames is ['Directory', 'Files', 'Options']
 	]).
 
