@@ -24,6 +24,12 @@ RELEASE NOTES
 3.11.3 - September ??, 2017
 ===========================
 
+Library
+-------
+
+* ADDED: Predicate `os::directory_files/3` to return directory files filtered
+by type, extensions, and using either relative or absolute paths.
+
 Tools
 -----
 

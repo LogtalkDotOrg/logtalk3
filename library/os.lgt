@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.34,
+		version is 1.35,
 		author is 'Paulo Moura',
-		date is 2017/08/12,
+		date is 2017/09/10,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1650,7 +1650,6 @@
 
 	:- endif.
 
-
 	decompose_file_name(File, Directory, Basename) :-
 		atom_codes(File, FileCodes),
 		char_code('/', SlashCode),
@@ -1694,6 +1693,69 @@
 			strrch1(Xs1, G, [X| Xs1], Ys)
 		;	strrch1(Xs1, G, Prev, Ys)
 		).
+
+	directory_files(Directory0, Files, Options) :-
+		directory_files(Directory0, Files0),
+		(	sub_atom(Directory0, _, 1, 0, '/') ->
+			Directory1 = Directory
+		;	atom_concat(Directory0, '/', Directory1)
+		),
+		absolute_file_name(Directory1, Directory),
+		(	list::member(type(Type), Options) ->
+			(	Type == regular ->
+				filter_regular(Files0, Directory, Files1)
+			;	Type == directory ->
+				filter_directories(Files0, Directory, Files1)
+			;	Files1 = Files0
+			)
+		;	Files1 = Files0
+		),
+		(	list::member(extensions([Extension| Extensions]), Options),
+			ground([Extension| Extensions]) ->
+			filter_extensions(Files1, [Extension| Extensions], Files2)
+		;	Files2 = Files1
+		),
+		(	list::member(paths(Paths), Options) ->
+			(	Paths == relative ->
+				Files = Files2
+			;	Paths == absolute ->
+				expand_relative_paths(Files2, Directory, Files)
+			;	Files = Files2
+			)
+		;	Files = Files2
+		).
+
+	filter_regular([], _, []).
+	filter_regular([File0| Files0], Directory, Files1) :-
+		atom_concat(Directory, File0, Path0),
+		(	file_exists(Path0) ->
+			Files1 = [File0| Rest1],
+			filter_regular(Files0, Directory, Rest1)
+		;	filter_regular(Files0, Directory, Files1)
+		).
+
+	filter_directories([], _, []).
+	filter_directories([File0| Files0], Directory, Files1) :-
+		atom_concat(Directory, File0, Path0),
+		(	directory_exists(Path0) ->
+			Files1 = [File0| Rest1],
+			filter_directories(Files0, Directory, Rest1)
+		;	filter_directories(Files0, Directory, Files1)
+		).
+
+	filter_extensions([], _, []).
+	filter_extensions([File0| Files0], Extensions, Files1) :-
+		decompose_file_name(File0, _, _, Extension),
+		(	list::member(Extension, Extensions) ->
+			Files1 = [File0| Rest1],
+			filter_extensions(Files0, Extensions, Rest1)
+		;	filter_extensions(Files0, Extensions, Files1)
+		).
+
+	expand_relative_paths([], _, []).
+	expand_relative_paths([File0| Files0], Directory, [File1| Files1]) :-
+		atom_concat(Directory, File0, File1),
+		expand_relative_paths(Files0, Directory, Files1).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),

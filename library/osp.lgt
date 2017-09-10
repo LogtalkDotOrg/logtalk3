@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.20,
+		version is 1.21,
 		author is 'Paulo Moura',
-		date is 2017/08/25,
+		date is 2017/09/10,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os_types]
 	]).
@@ -108,8 +108,15 @@
 	:- public(directory_files/2).
 	:- mode(directory_files(+atom, -list(atom)), one).
 	:- info(directory_files/2, [
-		comment is 'Returns a list of all the files (including directories, regular files, and hidden directories and files) in the given directory.',
+		comment is 'Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory.',
 		argnames is ['Directory', 'Files']
+	]).
+
+	:- public(directory_files/3).
+	:- mode(directory_files(+atom, -list(atom), +list(compound)), one).
+	:- info(directory_files/3, [
+		comment is 'Returns a list of all files in a directory filtered by the given options (paths/1 - {relative,absolute}, type/1 - {regular,directory}, extensions/1 - extensions list). Default options give same results as directory_files/2. Invalid options are ignored.',
+		argnames is ['Directory', 'Files', 'Options']
 	]).
 
 	:- public(directory_exists/1).
