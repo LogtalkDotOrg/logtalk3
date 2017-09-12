@@ -24,6 +24,15 @@ RELEASE NOTES
 3.11.3 - September ??, 2017
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Default translation of `debug` and `debug(_)` messages. The message
+term is printed as passed to a `write/2` predicate call followed by a `nl/1`
+call. This allows the message printing mechanism to be used for debugging
+messages without requiring the definition of `message_tokens//2` translation
+rules for each message.
+
 Library
 -------
 
