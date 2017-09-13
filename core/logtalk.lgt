@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.11,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2017/09/12,
+		date is 2017/06/28,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
 	]).
 
@@ -272,8 +272,6 @@
 			Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl]
 		;	phrase(message_tokens(Message, Component), Tokens) ->
 			true
-		;	nonvar(Kind), functor(Kind, debug, _) ->
-			Tokens = [term(Message,[numbervars(true)]), nl]
 		;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Message], nl]
 		).
 
