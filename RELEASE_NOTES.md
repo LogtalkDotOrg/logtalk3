@@ -24,6 +24,12 @@ RELEASE NOTES
 3.11.3 - September ??, 2017
 ===========================
 
+Documentation
+-------------
+
+* ADDED: Documentation of the default set of message kinds and printing
+defaults for each kind of message to the `logtalk` built-in object.
+
 Library
 -------
 

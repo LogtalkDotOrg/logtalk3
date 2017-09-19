@@ -33,10 +33,19 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2017/06/28,
-		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.'
+		date is 2017/09/19,
+		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
+		remarks is [
+			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
+			'Printing of silent messages' - 'By default, silent messages are not printed. These messages are only useful when intercepted.',
+			'Printing of banner and comment messages' - 'By default, banner and comment messages are only printed when the report flag is turned on.',
+			'Printing of help, information, and question messages' - 'These messages are always printed by default as they provide requested output.',
+			'Printing of warning messages' - 'By default, warning messages are not printed when the report flag is turned off.',
+			'Printing of error messages' - 'These messages are always printed by default.',
+			'Printing of debug messages' - 'By default, debug messages are only printed when the debug flag is turned on.'
+		]
 	]).
 
 	:- built_in.
@@ -330,6 +339,7 @@
 	default_message_prefix_stream(banner,         '',       user_output).
 	default_message_prefix_stream(help,           '',       user_output).
 	default_message_prefix_stream(question,       '',       user_output).
+	default_message_prefix_stream(question(_),    '',       user_output).
 	default_message_prefix_stream(information,    '% ',     user_output).
 	default_message_prefix_stream(information(_), '% ',     user_output).
 	default_message_prefix_stream(comment,        '% ',     user_output).

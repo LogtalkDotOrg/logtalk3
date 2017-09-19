@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>1.11</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/6/28</code>
+            <code>2017/9/19</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -556,7 +556,34 @@
     <div class="remarks">
       <h2>Remarks</h2>
       <div class="section">
-        <h3 class="comment">(none)</h3>
+        <dl class="remarks">
+          <dt class="comment">Message kinds</dt>
+          <dd class="text">The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Printing of silent messages</dt>
+          <dd class="text">By default, silent messages are not printed. These messages are only useful when intercepted.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Printing of banner and comment messages</dt>
+          <dd class="text">By default, banner and comment messages are only printed when the report flag is turned on.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Printing of help, information, and question messages</dt>
+          <dd class="text">These messages are always printed by default as they provide requested output.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Printing of warning messages</dt>
+          <dd class="text">By default, warning messages are not printed when the report flag is turned off.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Printing of error messages</dt>
+          <dd class="text">These messages are always printed by default.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Printing of debug messages</dt>
+          <dd class="text">By default, debug messages are only printed when the debug flag is turned on.</dd>
+        </dl>
       </div>
     </div>
     <div class="see_also">
