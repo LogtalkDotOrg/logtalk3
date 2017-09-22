@@ -22,30 +22,21 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/06/13,
+		date is 2017/09/22,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
 	:- uses(lgtunit, [
-		benchmark/3, benchmark/2,
+		benchmark/2, benchmark_reified/3,
+		benchmark/3,
 		epsilon/1, ('=~=')/2,
 		deterministic/1,
 		variant/2,
 		assertion/2,
 		quick_check/3, quick_check/2, quick_check/1
 	]).
-
-	% benchmark/3 tests
-
-	test(benchmark_3_01) :-
-		benchmark(atom_codes('sample test atom',_), 100, Time),
-		float(Time).
-
-	test(benchmark_3_02) :-
-		benchmark(fail, 100, Time),
-		float(Time).
 
 	% benchmark/2 tests
 
@@ -55,6 +46,30 @@
 
 	test(benchmark_2_02) :-
 		benchmark(fail, Time),
+		float(Time).
+
+	% benchmark_reified/3 tests
+
+	test(benchmark_reified_3_01) :-
+		benchmark_reified(throw(err), Time, Result),
+		float(Time), Result == error(err).
+
+	test(benchmark_reified_3_02) :-
+		benchmark_reified(true, Time, Result),
+		float(Time), Result == success.
+
+	test(benchmark_reified_3_03) :-
+		benchmark_reified(fail, Time, Result),
+		float(Time), Result == failure.
+
+	% benchmark/3 tests
+
+	test(benchmark_3_01) :-
+		benchmark(atom_codes('sample test atom',_), 100, Time),
+		float(Time).
+
+	test(benchmark_3_02) :-
+		benchmark(fail, 100, Time),
 		float(Time).
 
 	% epsilon/1 tests

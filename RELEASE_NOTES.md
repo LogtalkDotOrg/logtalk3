@@ -48,6 +48,10 @@ relative or absolute paths, and files starting with a dot can be filtered out.
 Tools
 -----
 
+* ADDED: Predicate `benchmark_reified/3` to `lgtunit` as a variant of the
+predicate `benchmark/2` returning the goal result (`success`, `failure`, or
+`error(Error)`).
+
 * FIXED: The `logtalk_tester` shell script no longer exports the `LC_ALL`
 environment variable and instead uses it only locally to fix the tests sorting
 order when searching for the `tester.lgt` and `tester.logtalk` files. This

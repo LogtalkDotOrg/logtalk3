@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.6,
+		version is 4.7,
 		author is 'Paulo Moura',
-		date is 2017/07/22,
+		date is 2017/09/22,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -107,6 +107,14 @@
 	:- info(benchmark/2, [
 		comment is 'Benchmarks a goal and returns the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Time']
+	]).
+
+	:- public(benchmark_reified/3).
+	:- meta_predicate(benchmark_reified(0, *, *)).
+	:- mode(benchmark_reified(+callable, -float, -callable), one).
+	:- info(benchmark_reified/3, [
+		comment is 'Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)).',
+		argnames is ['Goal', 'Time', 'Result']
 	]).
 
 	:- public(benchmark/3).
@@ -1332,6 +1340,18 @@
 	benchmark(Goal, Time) :-
 		os::cpu_time(Time0),
 		ignore(Goal),
+		os::cpu_time(Time1),
+		Time is Time1 - Time0.
+
+	benchmark_reified(Goal, Time, Result) :-
+		os::cpu_time(Time0),
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				Result = success
+			;	Result = error(Error)
+			)
+		;	Result = failure
+		),
 		os::cpu_time(Time1),
 		Time is Time1 - Time0.
 
