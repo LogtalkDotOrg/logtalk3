@@ -47,10 +47,10 @@
 			'Printing of debug messages' - 'By default, debug messages are only printed when the debug flag is turned on.',
 			'Meta messages' - 'A meta message is a message that have another message as argument. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
 			'@Message meta message' - 'By default, the message argument is printed as passed to the write/1 predicate followed by a newline.',
-			'Key-Value meta message' - 'By default, the message pair is printed as "Key: Value" followed by a newline.',
+			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. Both Key and Value are printed as passed to writeq/1.',
+			'Title:Text meta message' - 'By default, the message is printed as "Title: Text" followed by a newline. Both Key and Value are printed as passed to write/1.',
 			'List meta message' - 'By default, the list items are printed one per line.',
-			'Title:List meta message' - 'By default, the message title is printed followed by the indented list items printed one per line.',
-			'Title:NonListTerm meta message' - 'By default, the message title is printed followed by a newline and the indented term.'
+			'Title:List meta message' - 'By default, the message title is printed followed by the indented list items printed one per line.'
 		]
 	]).
 
@@ -420,10 +420,10 @@
 	default_message_tokens(Key-Value) -->
 		['~q: ~q'-[Key, Value], nl].
 	default_message_tokens(Title:[Item| Items]) -->
-		['~q:'-[Title], nl],
+		['~w:'-[Title], nl],
 		default_message_tokens_tab_list([Item| Items]).
 	default_message_tokens(Title:Term) -->
-		['~q:'-[Title], nl, '  ~w'-[Term], nl]. 
+		['~w: ~w'-[Title, Term], nl].
 
 	default_message_tokens_list_item(Key-Value) -->
 		['~q: ~q'-[Key, Value], nl].

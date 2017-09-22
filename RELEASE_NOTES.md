@@ -41,7 +41,7 @@ defaults for each kind of message to the `logtalk` built-in object.
 Library
 -------
 
-* ADDED: Predicate `os::directory_files/3` to return a filtered list of files. 
+* ADDED: Predicate `os::directory_files/3` to return a filtered list of files.
 Files can be filtered by type or file extensions, can be returned using either
 relative or absolute paths, and files starting with a dot can be filtered out.
 
