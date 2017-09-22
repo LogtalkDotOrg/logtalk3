@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.11</code>
+            <code>1.12</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/9/19</code>
+            <code>2017/9/22</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -583,6 +583,30 @@
         <dl class="remarks">
           <dt class="comment">Printing of debug messages</dt>
           <dd class="text">By default, debug messages are only printed when the debug flag is turned on.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Meta messages</dt>
+          <dd class="text">A meta message is a message that have another message as argument. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">@Message meta message</dt>
+          <dd class="text">By default, the message argument is printed as passed to the write/1 predicate followed by a newline.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Key-Value meta message</dt>
+          <dd class="text">By default, the message pair is printed as "Key: Value" followed by a newline.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">List meta message</dt>
+          <dd class="text">By default, the list items are printed one per line.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Title:List meta message</dt>
+          <dd class="text">By default, the message title is printed followed by the indented list items printed one per line.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Title:NonListTerm meta message</dt>
+          <dd class="text">By default, the message title is printed followed by a newline and the indented term.</dd>
         </dl>
       </div>
     </div>

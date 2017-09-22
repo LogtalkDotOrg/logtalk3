@@ -24,6 +24,14 @@ RELEASE NOTES
 3.11.3 - September ??, 2017
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Defined a set of meta messages for use with the message printing
+mechanism that don't require user-defined tokenization rules for default
+handling. These meta messages are typically used for debugging messages.
+See the API documentation on the `logtalk` built-in object for details.
+
 Documentation
 -------------
 
