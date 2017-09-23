@@ -69,7 +69,8 @@ Use of local meta-calls with goal arguments only know at runtime can result
 in false positives. When using library or user-defined meta-predicates, it
 can be helpful to compile the source files with the `optimize` flag turned
 on so that the meta-calls may be resolved at compile time and thus allow
-calling information for the meta-arguments to be recorded.
+calling information for the meta-arguments to be recorded, avoiding false
+positives for predicates that are only meta-called.
 
 
 Other notes
