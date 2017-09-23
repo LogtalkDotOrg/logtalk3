@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 11, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 11, 3, rc3)).
 
 
 
@@ -9370,15 +9370,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% allow for runtime use by adding a local definition that calls the remote
 	% definition except when the remote is a built-in predicate in "user" with
 	% no alias being defined
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	(	Obj == user,
 		OriginalFunctor == AliasFunctor,
 		'$lgt_predicate_property'(Original, built_in) ->
 		true
-	;	'$lgt_compile_aux_clauses'([(Alias :- Obj::Original)])	
+	;	'$lgt_compile_aux_clauses'([(Alias :- Obj::Original)]),
+		% ensure that the uses/2 directive is found when looking for senders of this message
+		'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias)
 	),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	% ensure that the uses/2 directive is found when looking for senders of this message
-	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
 	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, Lines)).
 
 '$lgt_compile_uses_directive_predicate_resource'(_, AliasFunctor, Arity, _, _) :-

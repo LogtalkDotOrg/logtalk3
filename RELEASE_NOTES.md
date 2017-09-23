@@ -32,6 +32,11 @@ mechanism that don't require user-defined tokenization rules for default
 handling. These meta messages are typically used for debugging messages.
 See the API documentation on the `logtalk` built-in object for details.
 
+* FIXED: When using `uses/2` directives to declare a dependency on a `user`
+built-in predicate, a `calls/2` entity property would be wrongly recorded as
+no linking clause for the predicate is required and thus would be created to
+cope with runtime constructed calls.
+
 Documentation
 -------------
 
