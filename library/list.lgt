@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.8,
+		version is 2.9,
 		author is 'Paulo Moura',
-		date is 2017/08/15,
+		date is 2017/09/24,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist]
 	]).
@@ -94,6 +94,8 @@
 		),
 		hamming_distance(Xs, Ys, Distance1, Distance).
 
+	% keysort/2 is now a standard predicate provided
+	% by all supported backend Proliog systems
 	keysort(List, Sorted) :-
 		{keysort(List, Sorted)}.
 
@@ -195,6 +197,9 @@
 		msort_(X2s, C, Y2s),
 		merge_keep_dups(Y1s, Y2s, C, Ys).
 
+	split((-), _, _) :-
+		context(Context),
+		throw(error(instantiation_error, Context)).
 	split([], [], []).
 	split([X| Xs], [X| Ys], Zs) :-
 		split(Xs, Zs, Ys).
@@ -350,17 +355,10 @@
 	selectchk(Old, [Head| OldTail], New, [Head| NewTail]) :-
 		selectchk(Old, OldTail, New, NewTail).
 
-	:- if(predicate_property(sort(_, _), built_in)).
-
-		sort(List, Sorted) :-
-			{sort(List, Sorted)}.
-
-	:- else.
-
-		sort(List, Sorted) :-
-			setof(Element, member(Element, List), Sorted).
-
-	:- endif.
+	% sort/2 is now a standard predicate provided
+	% by all supported backend Proliog systems
+	sort(List, Sorted) :-
+		{sort(List, Sorted)}.
 
 	:- meta_predicate(sort(3, *, *)).
 	:- meta_predicate(sort_(*, 3, *)).
@@ -399,6 +397,84 @@
 		!,
 		split_aux(Remaining0, N, Sublists, Remaining).
 	split_aux(List, _, [], List).
+
+	:- if((
+		predicate_property(sort(_, _), built_in),
+		current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		sort(Key, Order, List, Sorted) :-
+			{sort(Key, Order, List, Sorted)}.
+
+	:- else.
+
+		sort((-), _, _, _) :-
+			context(Context),
+			throw(error(instantiation_error, Context)).
+		sort(_, (-), _, _) :-
+			context(Context),
+			throw(error(instantiation_error, Context)).
+		% whole terms comparisons
+		sort(0, @<, List, Sorted) :-
+			!,
+			sort(List, Sorted).
+		sort(0, @=<, List, Sorted) :-
+			!,
+			msort(List, Sorted).
+		sort(0, @>, List, Sorted) :-
+			!,
+			sort(List, Sorted0),
+			reverse(Sorted0, Sorted).
+		sort(0, @>=, List, Sorted) :-
+			!,
+			msort(List, Sorted0),
+			reverse(Sorted0, Sorted).
+		% general case
+		sort(Key, Order, List, Sorted) :-
+			sort_(List, Key, Order, Sorted).
+
+		sort_([], _, _, []) :- !.
+		sort_([X], _, _, [X]) :- !.
+		sort_([X, Y| Xs], Key, Order, Ys) :-
+			split([X, Y| Xs], X1s, X2s),
+			sort_(X1s, Key, Order, Y1s),
+			sort_(X2s, Key, Order, Y2s),
+			merge(Y1s, Y2s, Key, Order, Ys).
+
+		merge([], Xs, _, _, Xs) :- !.
+		merge(Xs, [], _, _, Xs) :- !.
+		merge([X| Xs], [Y| Ys], Key, Order, Zs) :-
+			arg(Key, X, XKey),
+			arg(Key, Y, YKey),
+			compare(R, XKey, YKey),
+			merge(R, [X| Xs], [Y| Ys], Key, Order, Zs).
+
+		merge(<, [X| Xs], [Y| Ys], Key, @<, [X| Zs]) :-
+			!,
+			merge(Xs, [Y| Ys], Key, @<, Zs).
+		merge(<, [X| Xs], [Y| Ys], Key, @=<, [X| Zs]) :-
+			!,
+			merge(Xs, [Y| Ys], Key, @=<, Zs).
+		merge(<, [X| Xs], [Y| Ys], Key, Order, [Y| Zs]) :-
+			merge([X | Xs], Ys, Key, Order, Zs).
+		merge(=, [X| Xs], [_| Ys], Key, @<, [X| Zs]) :-
+			!,
+			merge(Xs, Ys, Key, @<, Zs).
+		merge(=, [_| Xs], [Y| Ys], Key, @>, [Y| Zs]) :-
+			!,
+			merge(Xs, Ys, Key, @>, Zs).
+		merge(=, [X| Xs], [Y| Ys], Key, Order, [X, Y| Zs]) :-
+			merge(Xs, Ys, Key, Order, Zs).
+		merge(>, [X| Xs], [Y| Ys], Key, @>, [X| Zs]) :-
+			!,
+			merge(Xs, [Y| Ys], Key, @>, Zs).
+		merge(>, [X| Xs], [Y| Ys], Key, @>=, [X| Zs]) :-
+			!,
+			merge(Xs, [Y| Ys], Key, @>=, Zs).
+		merge(>, [X| Xs], [Y| Ys], Key, Order, [Y| Zs]) :-
+			merge([X | Xs], Ys, Key, Order, Zs).
+
+	:- endif.
 
 	sublist(List, List).
 	sublist(Sublist, [Head| Tail]) :-

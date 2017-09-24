@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.11</code>
+            <code>1.12</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/8/15</code>
+            <code>2017/9/24</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -791,6 +791,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>sort(+callable,+list,-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="sort/4" class="code">sort/4</h3>
+          <blockquote>
+            <p class="comment">Sorts a list using the given key and order. @&lt; and @&gt; orders remove duplicates while @=&lt; and @&gt;= orders keep them. @&lt; and @=&lt; specify ascending order while @&gt; and @&gt;= specify descending order. When the key is zero, the whole term is used for comparisons.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>sort(Key,Order,List,Sorted)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>sort(+non_negative_integer,+atom,+list,-list) &ndash; one</code>
             </dd>
           </dl>
         </div>

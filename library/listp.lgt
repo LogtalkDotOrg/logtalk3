@@ -21,9 +21,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2017/08/15,
+		date is 2017/09/24,
 		comment is 'List protocol.',
 		see_also is [numberlistp, varlistp]
 	]).
@@ -288,6 +288,13 @@
 	:- info(sort/3, [
 		comment is 'Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).',
 		argnames is ['Closure', 'List', 'Sorted']
+	]).
+
+	:- public(sort/4).
+	:- mode(sort(+non_negative_integer, +atom, +list, -list), one).
+	:- info(sort/4, [
+		comment is 'Sorts a list using the given key and order. @< and @> orders remove duplicates while @=< and @>= orders keep them. @< and @=< specify ascending order while @> and @>= specify descending order. When the key is zero, the whole term is used for comparisons.',
+		argnames is ['Key', 'Order', 'List', 'Sorted']
 	]).
 
 	:- public(split/4).
