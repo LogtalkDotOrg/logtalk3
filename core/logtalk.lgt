@@ -35,7 +35,7 @@
 	:- info([
 		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2017/09/22,
+		date is 2017/09/24,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
@@ -46,11 +46,10 @@
 			'Printing of error messages' - 'These messages are always printed by default.',
 			'Printing of debug messages' - 'By default, debug messages are only printed when the debug flag is turned on.',
 			'Meta messages' - 'A meta message is a message that have another message as argument. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
-			'@Message meta message' - 'By default, the message argument is printed as passed to the write/1 predicate followed by a newline.',
-			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. Both Key and Value are printed as passed to writeq/1.',
-			'Title:Text meta message' - 'By default, the message is printed as "Title: Text" followed by a newline. Both Key and Value are printed as passed to write/1.',
-			'List meta message' - 'By default, the list items are printed one per line.',
-			'Title:List meta message' - 'By default, the message title is printed followed by the indented list items printed one per line.'
+			'@Message meta message' - 'By default, the message is printed as passed to the write/1 predicate followed by a newline.',
+			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the writeq/1 predicate.',
+			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.',
+			'Title::List meta message' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.'
 		]
 	]).
 
@@ -411,30 +410,30 @@
 	default_print_message_token(end(_), _, _, _).
 
 	default_message_tokens(@Message) -->
-		['~w'- [Message], nl].
+		['~w'-[Message], nl].
+	default_message_tokens(Key-Value) -->
+		{copy_term(Value, Copy), numbervars(Copy, 0, _)},
+		['~w: ~q'-[Key, Copy], nl].
 	default_message_tokens([]) -->
 		[].
-	default_message_tokens([Message| Messages]) -->
-		default_message_tokens_list_item(Message),
-		default_message_tokens(Messages).
-	default_message_tokens(Key-Value) -->
-		['~q: ~q'-[Key, Value], nl].
-	default_message_tokens(Title:[Item| Items]) -->
+	default_message_tokens([Item| Items]) -->
+		{copy_term([Item| Items], Copy), numbervars(Copy, 0, _)},
+		default_message_tokens_list(Copy).
+	default_message_tokens(Title::List) -->
+		{copy_term(List, Copy), numbervars(Copy, 0, _)},
 		['~w:'-[Title], nl],
-		default_message_tokens_tab_list([Item| Items]).
-	default_message_tokens(Title:Term) -->
-		['~w: ~w'-[Title, Term], nl].
+		default_message_tokens_list(Copy).
+
+	default_message_tokens_list([]) -->
+		[].
+	default_message_tokens_list([Item| Items]) -->
+		['- '-[]], default_message_tokens_list_item(Item),
+		default_message_tokens_list(Items).
 
 	default_message_tokens_list_item(Key-Value) -->
 		['~q: ~q'-[Key, Value], nl].
 	default_message_tokens_list_item(Item) -->
-		['~w'- [Item], nl].
-
-	default_message_tokens_tab_list([]) -->
-		[].
-	default_message_tokens_tab_list([Item| Items]) -->
-		['  '-[]], default_message_tokens_list_item(Item),
-		default_message_tokens_tab_list(Items).
+		['~q'- [Item], nl].
 
 	ask_question(Kind, Component, Question, Check, Answer) :-
 		message_term_to_tokens(Question, Kind, Component, Tokens),

@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/9/22</code>
+            <code>2017/9/24</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -590,23 +590,19 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">@Message meta message</dt>
-          <dd class="text">By default, the message argument is printed as passed to the write/1 predicate followed by a newline.</dd>
+          <dd class="text">By default, the message is printed as passed to the write/1 predicate followed by a newline.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Key-Value meta message</dt>
-          <dd class="text">By default, the message is printed as "Key: Value" followed by a newline. Both Key and Value are printed as passed to writeq/1.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Title:Text meta message</dt>
-          <dd class="text">By default, the message is printed as "Title: Text" followed by a newline. Both Key and Value are printed as passed to write/1.</dd>
+          <dd class="text">By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the writeq/1 predicate.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">List meta message</dt>
-          <dd class="text">By default, the list items are printed one per line.</dd>
+          <dd class="text">By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Title:List meta message</dt>
-          <dd class="text">By default, the message title is printed followed by the indented list items printed one per line.</dd>
+          <dt class="comment">Title::List meta message</dt>
+          <dd class="text">By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</dd>
         </dl>
       </div>
     </div>
