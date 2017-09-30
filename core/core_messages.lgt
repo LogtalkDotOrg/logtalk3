@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.26,
+		version is 1.27,
 		author is 'Paulo Moura',
-		date is 2017/07/15,
+		date is 2017/09/30,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -457,14 +457,14 @@
 		['Compiling query as an initialization goal: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(singleton_variables(File, Lines, Type, Entity, Names, Term)) -->
+	message_tokens(singleton_variables(File, Lines, Type, Entity, Names, _Term)) -->
 		(	{Names = [Name]} ->
 			['Singleton variable: ~w'-[Name], nl]
 		;	['Singleton variables: ~w'-[Names], nl]
 		),
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(singleton_variables(File, Lines, Names, Term)) -->
+	message_tokens(singleton_variables(File, Lines, Names, _Term)) -->
 		(	{Names = [Name]} ->
 			['Singleton variable: ~w'-[Name], nl]
 		;	['Singleton variables: ~w'-[Names], nl]
