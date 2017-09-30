@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2017/09/24,
+		date is 2017/09/30,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist]
 	]).
@@ -95,7 +95,7 @@
 		hamming_distance(Xs, Ys, Distance1, Distance).
 
 	% keysort/2 is now a standard predicate provided
-	% by all supported backend Proliog systems
+	% by all supported backend Prolog systems
 	keysort(List, Sorted) :-
 		{keysort(List, Sorted)}.
 
@@ -356,7 +356,7 @@
 		selectchk(Old, OldTail, New, NewTail).
 
 	% sort/2 is now a standard predicate provided
-	% by all supported backend Proliog systems
+	% by all supported backend Prolog systems
 	sort(List, Sorted) :-
 		{sort(List, Sorted)}.
 
@@ -399,7 +399,7 @@
 	split_aux(List, _, [], List).
 
 	:- if((
-		predicate_property(sort(_, _), built_in),
+		predicate_property(sort(_,_,_,_), built_in),
 		current_logtalk_flag(prolog_dialect, swi)
 	)).
 
@@ -417,13 +417,13 @@
 		% whole terms comparisons
 		sort(0, @<, List, Sorted) :-
 			!,
-			sort(List, Sorted).
+			{sort(List, Sorted)}.
 		sort(0, @=<, List, Sorted) :-
 			!,
 			msort(List, Sorted).
 		sort(0, @>, List, Sorted) :-
 			!,
-			sort(List, Sorted0),
+			{sort(List, Sorted0)},
 			reverse(Sorted0, Sorted).
 		sort(0, @>=, List, Sorted) :-
 			!,
