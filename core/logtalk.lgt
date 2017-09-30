@@ -35,7 +35,7 @@
 	:- info([
 		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2017/09/24,
+		date is 2017/09/30,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
@@ -45,7 +45,7 @@
 			'Printing of warning messages' - 'By default, warning messages are not printed when the report flag is turned off.',
 			'Printing of error messages' - 'These messages are always printed by default.',
 			'Printing of debug messages' - 'By default, debug messages are only printed when the debug flag is turned on.',
-			'Meta messages' - 'A meta message is a message that have another message as argument. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
+			'Meta messages' - 'A meta message is a message that have another message as argument and are typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
 			'@Message meta message' - 'By default, the message is printed as passed to the write/1 predicate followed by a newline.',
 			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the writeq/1 predicate.',
 			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.',
