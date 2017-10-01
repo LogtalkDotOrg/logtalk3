@@ -46,8 +46,9 @@
 
 <pre>assertz(Head)
 assertz((Head:-Body))</pre>
+
 <p>
-Asserts a clause as the last one for an object's dynamic predicate. If the predicate is not previously declared (using a scope directive), then a dynamic predicate declaration is added to the object (assuming that we are asserting locally or that the compiler flag <code>dynamic_declarations</code> was set to <code>allow</code> when the object was created or compiled).
+Asserts a clause as the last one for a dynamic predicate. When the predicate indicator for <code>Head</code> is declared in a <code>uses/2</code> or <code>use_module/2</code> directive, the clause is asserted in the referenced object or module. Otherwise the clause is asserted for an object's dynamic predicate. If the predicate is not previously declared (using a scope directive), then a dynamic predicate declaration is added to the object (assuming that we are asserting locally or that the compiler flag <code>dynamic_declarations</code> was set to <code>allow</code> when the object was created or compiled).
 </p>
 <p>
 This method may be used to assert clauses for predicates that are not declared dynamic for dynamic objects provided that the predicates are declared in <em>this</em>. This allows easy initialization of dynamically created objects when writing constructors.
@@ -93,12 +94,14 @@ This method may be used to assert clauses for predicates that are not declared d
 <code><a href="abolish_1.html">abolish/1</a></code>, <code><a href="asserta_1.html">asserta/1</a></code>, <code><a href="clause_2.html">clause/2</a></code>, <code><a href="retract_1.html">retract/1</a></code>, <code><a href="retractall_1.html">retractall/1</a></code>
 <br/>
 <code><a href="../directives/dynamic_0.html">dynamic/0</a></code>, <code><a href="../directives/dynamic_1.html">dynamic/1</a></code>
+<br/>
+<code><a href="../directives/uses_2.html">uses/2</a></code>, <code><a href="../directives/use_module_2.html">use_module/2</a></code>
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 28, 2017</span>
+		<span>Last updated on: October 1, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="asserta_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="clause_2.html">next</a></span><br/>

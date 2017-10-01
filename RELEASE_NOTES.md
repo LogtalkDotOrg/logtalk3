@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.11.3 - September ??, 2017
-===========================
+3.11.3 - October ??, 2017
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -42,6 +42,8 @@ Documentation
 
 * ADDED: Documentation of the default set of message kinds and printing
 defaults for each kind of message to the `logtalk` built-in object.
+
+* IMPROVED: Documentation for the built-in database and reflection methods.
 
 Library
 -------
