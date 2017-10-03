@@ -21,9 +21,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2011/12/15,
+		date is 2017/10/03,
 		comment is 'List of numbers protocol.',
 		see_also is [listp, varlistp]
 	]).
@@ -101,6 +101,42 @@
 	:- info(scalar_product/3, [
 		comment is 'Calculates the scalar product of two lists of numbers. Fails if the two lists are empty or not of the same length.',
 		argnames is ['List1', 'List2', 'Product']
+	]).
+
+	:- public(normalize_range/2).
+	:- mode(normalize_range(+list(number), -list(float)), one).
+	:- info(normalize_range/2, [
+		comment is 'Normalizes a list of numbers into the 0.0–1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		argnames is ['List', 'NormalizedList']
+	]).
+
+	:- public(normalize_range/4).
+	:- mode(normalize_range(+list(number), +number, +number, -list(float)), one).
+	:- info(normalize_range/4, [
+		comment is 'Normalizes a list of numbers into the given range. Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		argnames is ['List', 'Minimum', 'Maximum', 'NormalizedList']
+	]).
+
+	:- public(normalize_unit/2).
+	:- mode(normalize_unit(+list(number), -list(float)), one).
+	:- info(normalize_unit/2, [
+		comment is 'Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		argnames is ['List', 'NormalizedList']
+	]).
+
+	:- public(normalize_scalar/2).
+	:- mode(normalize_scalar(+list(number), -list(float)), one).
+	:- info(normalize_scalar/2, [
+		comment is 'Normalizes a list of numbers such that the sum of all numbers is equal to one. Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		argnames is ['List', 'NormalizedList']
+	]).
+
+	:- public(rescale/3).
+	:- mode(rescale(+list(integer), +integer, -list(integer)), one).
+	:- mode(rescale(+list(number), +float, -list(float)), one).
+	:- info(rescale/3, [
+		comment is 'Rescales all numbers in a list by the given factor.',
+		argnames is ['List', 'Factor', 'RescaledList']
 	]).
 
 :- end_protocol.

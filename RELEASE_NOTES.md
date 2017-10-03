@@ -55,6 +55,9 @@ built-in predicate specification.
 Files can be filtered by type or file extensions, can be returned using either
 relative or absolute paths, and files starting with a dot can be filtered out.
 
+* ADDED: Normalization predicates `normalize_range/2-4`, `normalize_unit/2`,
+`normalize_scalar/2`, and `rescale/3` to the `numberlist` library object.
+
 * ADDED: Predicate `z_normalization/2` to the `statistics` library.
 
 Tools

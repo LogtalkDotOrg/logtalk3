@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.3</code>
+            <code>1.4</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011/12/15</code>
+            <code>2017/10/3</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -254,6 +254,109 @@
             </dd>
             <dd class="value">
               <code>scalar_product(+list(float),+list(float),-float) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="normalize_range/2" class="code">normalize_range/2</h3>
+          <blockquote>
+            <p class="comment">Normalizes a list of numbers into the 0.0–1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>normalize_range(List,NormalizedList)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>normalize_range(+list(number),-list(float)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="normalize_range/4" class="code">normalize_range/4</h3>
+          <blockquote>
+            <p class="comment">Normalizes a list of numbers into the given range. Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>normalize_range(List,Minimum,Maximum,NormalizedList)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>normalize_range(+list(number),+number,+number,-list(float)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="normalize_unit/2" class="code">normalize_unit/2</h3>
+          <blockquote>
+            <p class="comment">Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>normalize_unit(List,NormalizedList)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>normalize_unit(+list(number),-list(float)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="normalize_scalar/2" class="code">normalize_scalar/2</h3>
+          <blockquote>
+            <p class="comment">Normalizes a list of numbers such that the sum of all numbers is equal to one. Caller must handle arithmetic exceptions if the input list if not normalizable.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>normalize_scalar(List,NormalizedList)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>normalize_scalar(+list(number),-list(float)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="rescale/3" class="code">rescale/3</h3>
+          <blockquote>
+            <p class="comment">Rescales all numbers in a list by the given factor.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rescale(List,Factor,RescaledList)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>rescale(+list(integer),+integer,-list(integer)) &ndash; one</code>
+            </dd>
+            <dd class="value">
+              <code>rescale(+list(number),+float,-list(float)) &ndash; one</code>
             </dd>
           </dl>
         </div>

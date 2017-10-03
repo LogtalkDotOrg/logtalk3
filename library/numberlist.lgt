@@ -23,9 +23,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017/10/03,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -45,20 +45,20 @@
 		min(Xs, X, Min).
 
 	min([], Min, Min).
-	min([X| Xs], Aux, Min) :-
-		(	X < Aux ->
+	min([X| Xs], Min0, Min) :-
+		(	X < Min0 ->
 			min(Xs, X, Min)
-		;	min(Xs, Aux, Min)
+		;	min(Xs, Min0, Min)
 		).
 
 	max([X| Xs], Max) :-
 		max(Xs, X, Max).
 
 	max([], Max, Max).
-	max([X| Xs], Aux, Max) :-
-		(	X > Aux ->
+	max([X| Xs], Max0, Max) :-
+		(	X > Max0 ->
 			max(Xs, X, Max)
-		;	max(Xs, Aux, Max)
+		;	max(Xs, Max0, Max)
 		).
 
 	product([X| Xs], Product) :-
@@ -147,6 +147,58 @@
 	scalar_product([X| Xs], [Y| Ys], Product0, Product) :-
 		Product1 is Product0 + X * Y,
 		scalar_product(Xs, Ys, Product1, Product).
+
+	normalize_range([], []).
+	normalize_range([X| Xs], [Y| Ys]) :-
+		min_max_list([X| Xs], Min, Max),
+		Range is Max - Min,
+		normalize_range_2([X| Xs], Min, Range, [Y| Ys]).
+
+	normalize_range_2([], _, _, []).
+	normalize_range_2([X| Xs], Min, Range, [Y| Ys]) :-
+		Y is (X - Min) / Range,
+		normalize_range_2(Xs, Min, Range, Ys).
+
+	normalize_range([], _, _, []).
+	normalize_range([X| Xs], NewMin, NewMax, [Y| Ys]) :-
+		min_max_list([X| Xs], Min, Max),
+		Range is Max - Min,
+		NewRange is NewMax - NewMin,
+		normalize_range_4([X| Xs], Min, Max, Range, NewMin, NewRange, [Y| Ys]).
+
+	normalize_range_4([], _, _, _, _, _, []).
+	normalize_range_4([X| Xs], Min, Max, Range, NewMin, NewRange, [Y| Ys]) :-
+		Y is (X - Min) * NewRange / Range + NewMin,
+		normalize_range_4(Xs, Min, Max, Range, NewMin, NewRange, Ys).
+
+	min_max_list([X| Xs], Min, Max) :-
+		min_max_list(Xs, X, Min, X, Max).
+
+	min_max_list([], Min, Min, Max, Max).
+	min_max_list([X| Xs], Min0, Min, Max0, Max) :-
+		(	X < Min0 ->
+			min_max_list(Xs, X, Min, Max0, Max)
+		;	X > Max0 ->
+			min_max_list(Xs, Min0, Min, X, Max)
+		;	min_max_list(Xs, Min0, Min, Max0, Max)
+		).
+
+	normalize_unit([], []).
+	normalize_unit([X| Xs], [Y| Ys]) :-
+		euclidean_norm([X| Xs], Norm),
+		Factor is 1 / Norm,
+		rescale([X| Xs], Factor, [Y| Ys]).
+
+	normalize_scalar([], []).
+	normalize_scalar([X| Xs], [Y| Ys]) :-
+		sum([X| Xs], Sum),
+		Factor is 1 / Sum,
+		rescale([X| Xs], Factor, [Y| Ys]).
+
+	rescale([], _, []).
+	rescale([X| Xs], Factor, [Y| Ys]) :-
+		Y is X * Factor,
+		rescale(Xs, Factor, Ys).
 
 	valid((-)) :-		% catch variables and lists with unbound tails
 		!,
