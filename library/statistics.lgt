@@ -23,9 +23,9 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2008/11/11,
+		date is 2017/10/03,
 		comment is 'Statistical calculations over a list of numbers.'
 	]).
 
@@ -197,6 +197,16 @@
 	sum([X| Xs], Acc, Sum) :-
 		Acc2 is Acc + X,
 		sum(Xs, Acc2, Sum).
+
+	z_normalization(Xs, Ys) :-
+		arithmetic_mean(Xs, Mean),
+		::standard_deviation(Xs, Deviation),
+		z_normalization(Xs, Mean, Deviation, Ys).
+
+	z_normalization([], _, _, []).
+	z_normalization([X| Xs], Mean, Deviation, [Y| Ys]) :-
+		Y is (X - Mean) / Deviation,
+		z_normalization(Xs, Mean, Deviation, Ys).
 
 	valid((-)) :-		% catch variables and lists with unbound tails
 		!,

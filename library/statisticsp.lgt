@@ -22,9 +22,9 @@
 :- protocol(statisticsp).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2009/1/5,
+		date is 2017/10/03,
 		comment is 'Statistical calculations over a list of numbers protocol.'
 	]).
 
@@ -152,6 +152,13 @@
 	:- info(variance/2, [
 		comment is 'Calculates the unbiased variance of a list of numbers. Fails if the list is empty.',
 		argnames is ['List', 'Variance']
+	]).
+
+	:- public(z_normalization/2).
+	:- mode(z_normalization(+list(number), -list(float)), zero_or_one).
+	:- info(z_normalization/2, [
+		comment is 'Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.',
+		argnames is ['List', 'NormalizedList']
 	]).
 
 	:- public(valid/1).

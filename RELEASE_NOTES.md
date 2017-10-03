@@ -55,6 +55,8 @@ built-in predicate specification.
 Files can be filtered by type or file extensions, can be returned using either
 relative or absolute paths, and files starting with a dot can be filtered out.
 
+* ADDED: Predicate `z_normalization/2` to the `statistics` library.
+
 Tools
 -----
 
