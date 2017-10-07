@@ -80,6 +80,8 @@ Tests
 
 * ADDED: Tests for the `os::directory_files/2-3` library predicates.
 
+* ADDED: Tests for the `list::sort/4` library predicate.
+
 
 3.11.2 - August 28, 2017
 ========================
