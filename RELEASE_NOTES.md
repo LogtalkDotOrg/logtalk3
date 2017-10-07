@@ -78,6 +78,8 @@ Tests
 
 * ADDED: More tests for the `between/3` de facto standard Prolog predicate.
 
+* ADDED: Tests for the `os::directory_files/2-3` library predicates.
+
 
 3.11.2 - August 28, 2017
 ========================

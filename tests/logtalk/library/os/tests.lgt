@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2017/08/10,
+		date is 2017/10/07,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -216,6 +216,54 @@
 		os::change_directory(Directory),
 		os::absolute_file_name(File, ExpandedFile),
 		ExpandedFile == Path.
+
+	test(os_directory_files_2_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files),
+		list::memberchk('tests.lgt', Files),
+		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_3_01) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(regular)]),
+		list::memberchk('tests.lgt', Files),
+		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_3_02) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(directory)]),
+		\+ list::member('tests.lgt', Files),
+		\+ list::member('tester.lgt', Files).
+
+	test(os_directory_files_3_03) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [dot_files(false), paths(relative)]),
+		forall(
+			list::member(File, Files),
+			\+ os::expand_path(File, File)
+		).
+
+	test(os_directory_files_3_04) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [dot_files(false), paths(absolute)]),
+		forall(
+			list::member(File, Files),
+			os::expand_path(File, File)
+		).
+
+	test(os_directory_files_3_05) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [dot_files(false)]),
+		forall(
+			list::member(File, Files),
+			\+ sub_atom(File, 0, 1, _, '.')
+		).
 
 	setup :-
 		cleanup.
