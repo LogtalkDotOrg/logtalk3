@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2017/09/30,
+		date is 2017/10/07,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist]
 	]).
@@ -399,8 +399,8 @@
 	split_aux(List, _, [], List).
 
 	:- if((
-		predicate_property(sort(_,_,_,_), built_in),
-		current_logtalk_flag(prolog_dialect, swi)
+		current_logtalk_flag(prolog_dialect, swi),
+		predicate_property(sort(_,_,_,_), built_in)
 	)).
 
 		sort(Key, Order, List, Sorted) :-
