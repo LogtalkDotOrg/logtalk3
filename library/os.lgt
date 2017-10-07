@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.35,
+		version is 1.36,
 		author is 'Paulo Moura',
-		date is 2017/09/10,
+		date is 2017/10/07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1697,7 +1697,7 @@
 	directory_files(Directory0, Files, Options) :-
 		directory_files(Directory0, Files0),
 		(	sub_atom(Directory0, _, 1, 0, '/') ->
-			Directory1 = Directory
+			Directory1 = Directory0
 		;	atom_concat(Directory0, '/', Directory1)
 		),
 		absolute_file_name(Directory1, Directory),
