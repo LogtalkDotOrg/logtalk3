@@ -21,9 +21,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/10/03,
+		date is 2017/10/07,
 		comment is 'List of numbers protocol.',
 		see_also is [listp, varlistp]
 	]).
@@ -106,7 +106,7 @@
 	:- public(normalize_range/2).
 	:- mode(normalize_range(+list(number), -list(float)), one).
 	:- info(normalize_range/2, [
-		comment is 'Normalizes a list of numbers into the 0.0–1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		comment is 'Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.',
 		argnames is ['List', 'NormalizedList']
 	]).
 
