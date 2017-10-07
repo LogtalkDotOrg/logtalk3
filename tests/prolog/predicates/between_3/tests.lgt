@@ -27,36 +27,51 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/05,
+		date is 2017/10/07,
 		comment is 'Unit tests for the de facto Prolog standard between/3 built-in predicate.'
 	]).
 
-	succeeds(commons_between_3_01) :-
+	deterministic(commons_between_3_01) :-
+		{between(1,5,1)}.
+
+	deterministic(commons_between_3_02) :-
+		{between(1,5,3)}.
+
+	deterministic(commons_between_3_03) :-
+		{between(1,5,5)}.
+
+	fails(commons_between_3_04) :-
+		{between(1,3,0)}.
+
+	fails(commons_between_3_05) :-
+		{between(1,3,5)}.
+
+	fails(commons_between_3_06) :-
+		{between(1, 0, _)}.
+
+	succeeds(commons_between_3_07) :-
 		findall(N, {between(1,3,N)}, L),
 		L == [1, 2, 3].
 
-	succeeds(commons_between_3_02) :-
+	succeeds(commons_between_3_08) :-
 		findall(N, {between(1,1,N)}, L),
 		L == [1].
 
-	fails(commons_between_3_03) :-
-		{between(1, 0, _)}.
-
-	throws(commons_between_3_04, error(instantiation_error,_)) :-
+	throws(commons_between_3_09, error(instantiation_error,_)) :-
 		{between(_, 3, _)}.
 
-	throws(commons_between_3_05, error(instantiation_error,_)) :-
+	throws(commons_between_3_10, error(instantiation_error,_)) :-
 		{between(1, _, _)}.
 
-	throws(commons_between_3_06, error(type_error(integer,a),_)) :-
+	throws(commons_between_3_11, error(type_error(integer,a),_)) :-
 		{between(a, 3, _)}.
 
-	throws(commons_between_3_07, error(type_error(integer,a),_)) :-
+	throws(commons_between_3_12, error(type_error(integer,a),_)) :-
 		{between(1, a, _)}.
 
-	throws(commons_between_3_08, error(type_error(integer,a),_)) :-
+	throws(commons_between_3_13, error(type_error(integer,a),_)) :-
 		{between(1, 3, a)}.
 
 :- end_object.

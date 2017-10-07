@@ -73,6 +73,11 @@ order when searching for the `tester.lgt` and `tester.logtalk` files. This
 change fixes tests sorting order in Ubuntu and avoids locale-related issues in
 Centos/RHEL.
 
+Tests
+-----
+
+* ADDED: More tests for the `between/3` de facto standard Prolog predicate.
+
 
 3.11.2 - August 28, 2017
 ========================
