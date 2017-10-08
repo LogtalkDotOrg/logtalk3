@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.37,
+		version is 1.38,
 		author is 'Paulo Moura',
 		date is 2017/10/08,
 		comment is 'Portable operating-system access predicates.',
@@ -230,7 +230,8 @@
 
 		file_exists(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath)}.
+			{file_exists(ExpandedPath),
+			 file_property(ExpandedPath, type(regular))}.
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, ExpandedPath),
