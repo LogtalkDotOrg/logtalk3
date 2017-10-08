@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2017/10/07,
 		comment is 'Unit tests for the "os" object.'
@@ -241,7 +241,7 @@
 	test(os_directory_files_3_03) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		os::directory_files(Directory, Files, [dot_files(false), paths(relative)]),
+		os::directory_files(Directory, Files, [type(regular), paths(relative)]),
 		forall(
 			list::member(File, Files),
 			\+ os::absolute_file_name(File, File)
@@ -250,7 +250,7 @@
 	test(os_directory_files_3_04) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		os::directory_files(Directory, Files, [dot_files(false), paths(absolute)]),
+		os::directory_files(Directory, Files, [type(regular), paths(absolute)]),
 		forall(
 			list::member(File, Files),
 			os::absolute_file_name(File, File)
