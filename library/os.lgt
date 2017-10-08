@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.41,
+		version is 1.42,
 		author is 'Paulo Moura',
 		date is 2017/10/08,
 		comment is 'Portable operating-system access predicates.',
@@ -992,11 +992,11 @@
 
 		date_time(0, 0, 0, 0, 0, 0, 0).
 
-		cpu_time(Time) :-
-			{Time is cputime}.
+		cpu_time(Seconds) :-
+			{Seconds is cputime}.
 
-		wall_time(_) :-
-			throw(not_available(wall_time/1)).
+		wall_time(Seconds) :-
+			{Seconds is currtime}.
 
 		operating_system_type(Type) :-
 			{os_name(Name)},
@@ -1129,8 +1129,8 @@
 			{statistics(runtime, [Miliseconds,_])},
 			Seconds is Miliseconds / 1000.
 
-		wall_time(_) :-
-			throw(not_available(wall_time/1)).
+		wall_time(Seconds) :-
+			{gettimeofday(Seconds)}.
 
 		operating_system_type(Type) :-
 			(	environment_variable('COMSPEC', _) ->
@@ -1547,8 +1547,9 @@
 			{Miliseconds is cputime},
 			Seconds is Miliseconds / 1000.
 
-		wall_time(_) :-
-			throw(not_available(wall_time/1)).
+		wall_time(Seconds) :-
+			{get_time(Miliseconds)},
+			Seconds is Miliseconds / 1000.
 
 		operating_system_type(Type) :-
 			{invoke('java.lang.System', getProperty('java.lang.String'), ['os.name'], Name)},
