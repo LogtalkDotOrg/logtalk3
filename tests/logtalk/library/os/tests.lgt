@@ -244,7 +244,7 @@
 		os::directory_files(Directory, Files, [dot_files(false), paths(relative)]),
 		forall(
 			list::member(File, Files),
-			\+ os::expand_path(File, File)
+			\+ os::absolute_file_name(File, File)
 		).
 
 	test(os_directory_files_3_04) :-
@@ -253,7 +253,7 @@
 		os::directory_files(Directory, Files, [dot_files(false), paths(absolute)]),
 		forall(
 			list::member(File, Files),
-			os::expand_path(File, File)
+			os::absolute_file_name(File, File)
 		).
 
 	test(os_directory_files_3_05) :-
