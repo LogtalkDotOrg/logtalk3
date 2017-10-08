@@ -60,6 +60,8 @@ relative or absolute paths, and files starting with a dot can be filtered out.
 
 * ADDED: Predicate `z_normalization/2` to the `statistics` library.
 
+* ADDED: Definition of predicate `os::delete_directory/1` for CxProlog.
+
 * FIXED: Bug in the definition of the predicate `os::file_exists/1` for YAP
 where the predicate all succeed with any kind of file instead of just for
 regular files.

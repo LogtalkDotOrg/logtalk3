@@ -933,8 +933,9 @@
 		make_directory_path(Directory) :-
 			make_directory_path_portable(Directory).
 
-		delete_directory(_) :-
-			throw(not_available(delete_directory/1)).
+		delete_directory(Directory) :-
+			{absolute_file_name(Directory, ExpandedPath),
+			 fs_delete(ExpandedPath)}.
 
 		change_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
