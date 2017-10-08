@@ -64,6 +64,8 @@ relative or absolute paths, and files starting with a dot can be filtered out.
 where the predicate all succeed with any kind of file instead of just for
 regular files.
 
+* FIXED: Broken definition of predicate `os::delete_directory/1` for YAP.
+
 Tools
 -----
 

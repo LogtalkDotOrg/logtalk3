@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.38,
+		version is 1.39,
 		author is 'Paulo Moura',
 		date is 2017/10/08,
 		comment is 'Portable operating-system access predicates.',
@@ -211,7 +211,7 @@
 
 		delete_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{delete_directory(ExpandedPath)}.
+			{delete_file(ExpandedPath)}.
 
 		change_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
