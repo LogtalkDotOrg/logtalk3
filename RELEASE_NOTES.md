@@ -68,6 +68,9 @@ regular files.
 
 * FIXED: Broken definition of predicate `os::delete_directory/1` for YAP.
 
+* FIXED: Definition of the predicate `os::absolute_file_name/2` for XSB when
+both arguments are instantiated.
+
 Tools
 -----
 

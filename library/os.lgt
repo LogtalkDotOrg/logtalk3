@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.39,
+		version is 1.41,
 		author is 'Paulo Moura',
 		date is 2017/10/08,
 		comment is 'Portable operating-system access predicates.',
@@ -295,7 +295,8 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{expand_atom(Path, EnvVarExpandedPath),
-			 path_sysop(expand, EnvVarExpandedPath, ExpandedPath)}.
+			 path_sysop(expand, EnvVarExpandedPath, ExpandedPath0)},
+			ExpandedPath = ExpandedPath0.
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
