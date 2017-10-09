@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2017/10/07,
+		date is 2017/10/09,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -257,6 +257,26 @@
 		).
 
 	test(os_directory_files_3_05) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(regular), paths(relative), extensions(['.lgt'])]),
+		list::memberchk('tests.lgt', Files),
+		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_3_06) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(regular), paths(relative), extensions([])]),
+		list::memberchk('tests.lgt', Files),
+		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_3_07) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(regular), paths(relative), extensions(['.foo'])]),
+		Files == [].
+
+	test(os_directory_files_3_08) :-
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [dot_files(false)]),
