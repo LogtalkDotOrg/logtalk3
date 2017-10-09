@@ -24,7 +24,7 @@
 :- module(logtalk, []).
 
 :-	prolog_load_context(directory, Directory),
-	atom_concat(Directory, '/../logtalk-3.11.3/', Location),
+	atom_concat(Directory, '/../logtalk-3.12.0/', Location),
 	setenv('LOGTALKHOME', Location),
 	setenv('LOGTALKUSER', Location),
-	user:load_files('../logtalk-3.11.3/integration/logtalk_swi.pl').
+	user:load_files('../logtalk-3.12.0/integration/logtalk_swi.pl').
