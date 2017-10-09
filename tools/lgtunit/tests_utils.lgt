@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/09/22,
+		date is 2017/10/09,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -38,166 +38,207 @@
 		quick_check/3, quick_check/2, quick_check/1
 	]).
 
+	:- discontiguous([
+		succeeds/1, throws/2
+	]).
+
 	% benchmark/2 tests
 
-	test(benchmark_2_01) :-
+	succeeds(benchmark_2_01) :-
 		benchmark(atom_codes('sample test atom',_), Time),
 		float(Time).
 
-	test(benchmark_2_02) :-
+	succeeds(benchmark_2_02) :-
 		benchmark(fail, Time),
 		float(Time).
 
 	% benchmark_reified/3 tests
 
-	test(benchmark_reified_3_01) :-
+	succeeds(benchmark_reified_3_01) :-
 		benchmark_reified(throw(err), Time, Result),
 		float(Time), Result == error(err).
 
-	test(benchmark_reified_3_02) :-
+	succeeds(benchmark_reified_3_02) :-
 		benchmark_reified(true, Time, Result),
 		float(Time), Result == success.
 
-	test(benchmark_reified_3_03) :-
+	succeeds(benchmark_reified_3_03) :-
 		benchmark_reified(fail, Time, Result),
 		float(Time), Result == failure.
 
 	% benchmark/3 tests
 
-	test(benchmark_3_01) :-
+	succeeds(benchmark_3_01) :-
 		benchmark(atom_codes('sample test atom',_), 100, Time),
 		float(Time).
 
-	test(benchmark_3_02) :-
+	succeeds(benchmark_3_02) :-
 		benchmark(fail, 100, Time),
 		float(Time).
 
 	% epsilon/1 tests
 
-	test(epsilon_1_01) :-
+	succeeds(epsilon_1_01) :-
 		epsilon(Epsilon),
 		float(Epsilon),
 		Epsilon > 0.
 
 	% ('=~=')/2 tests
 
-	test('=~=_2_01') :-
+	succeeds('=~=_2_01') :-
 		'=~='(0.0, 0.0).
 
-	test('=~=_2_02') :-
+	succeeds('=~=_2_02') :-
 		epsilon(Epsilon),
 		EpsilonX10 is Epsilon*10,
 		'=~='(Epsilon, EpsilonX10).
 
-	test('=~=_2_03') :-
+	succeeds('=~=_2_03') :-
 		epsilon(Epsilon),
 		EpsilonX100 is Epsilon*100,
 		'=~='(Epsilon, EpsilonX100).
 
-	test('=~=_2_04') :-
+	succeeds('=~=_2_04') :-
 		epsilon(Epsilon),
 		EpsilonX1000 is Epsilon*1000,
 		\+ '=~='(Epsilon, EpsilonX1000).
 
-	test('=~=_2_05') :-
+	succeeds('=~=_2_05') :-
 		\+ '=~='(0.0, 0.0001).
 
-	test('=~=_2_06') :-
+	succeeds('=~=_2_06') :-
 		\+ '=~='(0.0, 1.0).
+
+	succeeds('=~=_2_07') :-
+		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,3.0]).
+
+	succeeds('=~=_2_08') :-
+		\+ '=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,2.0]).
+
+	succeeds('=~=_2_09') :-
+		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,3.0]]).
+
+	succeeds('=~=_2_10') :-
+		\+ '=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,2.0]]).
+
+	throws('=~=_2_11', error(instantiation_error,_)) :-
+		'=~='(_, _).
+
+	throws('=~=_2_12', error(instantiation_error,_)) :-
+		'=~='(1.0, _).
+
+	throws('=~=_2_13', error(instantiation_error,_)) :-
+		'=~='(_, 2.0).
+
+	throws('=~=_2_14', error(instantiation_error,_)) :-
+		'=~='([0.0,1.0,2.0,_], [0.0,1.0,2.0,_]).
+
+	throws('=~=_2_15', error(instantiation_error,_)) :-
+		'=~='([0.0,1.0,2.0,_], [0.0,1.0,2.0,3.0]).
+
+	throws('=~=_2_16', error(instantiation_error,_)) :-
+		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,_]).
+
+	throws('=~=_2_17', error(instantiation_error,_)) :-
+		'=~='([[0.0,1.0],[2.0,_]], [[0.0,1.0],[2.0,_]]).
+
+	throws('=~=_2_18', error(instantiation_error,_)) :-
+		'=~='([[0.0,1.0],[2.0,_]], [[0.0,1.0],[2.0,3.0]]).
+
+	throws('=~=_2_19', error(instantiation_error,_)) :-
+		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,_]]).
 
 	% deterministic/1 tests
 
-	test(deterministic_1_01) :-
+	succeeds(deterministic_1_01) :-
 		findall(1, deterministic(true), Solutions),
 		Solutions == [1].
 
-	test(deterministic_1_02) :-
+	succeeds(deterministic_1_02) :-
 		findall(1, deterministic(once(repeat)), Solutions),
 		Solutions == [1].
 
-	test(deterministic_1_03) :-
+	succeeds(deterministic_1_03) :-
 		\+ deterministic(fail).
 
-	test(deterministic_1_04) :-
+	succeeds(deterministic_1_04) :-
 		\+ deterministic(repeat).
 
-	test(deterministic_1_05) :-
+	succeeds(deterministic_1_05) :-
 		\+ deterministic((N=1; N=2)).
 
 	% variant/2 tests
 
-	test(variant_2_01) :-
+	succeeds(variant_2_01) :-
 		variant(1, 1).
 
-	test(variant_2_02) :-
+	succeeds(variant_2_02) :-
 		variant(X, X).
 
-	test(variant_2_03) :-
+	succeeds(variant_2_03) :-
 		variant(_X, _Y).
 
-	test(variant_2_04) :-
+	succeeds(variant_2_04) :-
 		variant(a(_X,_Y), a(_A,_B)).
 
-	test(variant_2_05) :-
+	succeeds(variant_2_05) :-
 		\+ variant(1, 2).
 
-	test(variant_2_06) :-
+	succeeds(variant_2_06) :-
 		\+ variant(a(1,_Y), a(_A,2)).
 
 	% assertion/2 tests
 
-	test(assertion_2_01) :-
+	succeeds(assertion_2_01) :-
 		assertion(1,integer(1)).
 
-	test(assertion_2_02) :-
-		catch(assertion(2,integer(1.1)), Error, true),
-		Error == assertion_failure(2).
+	throws(assertion_2_02, assertion_failure(2)) :-
+		assertion(2, integer(1.1)).
 
-	test(assertion_2_03) :-
-		catch(assertion(3,throw(e)), Error, true),
-		Error == assertion_error(3, e).
+	throws(assertion_2_03, assertion_error(3, e)) :-
+		assertion(3, throw(e)).
 
 	% quick_check/3 tests
 
-	test(quick_check_3_01) :-
+	succeeds(quick_check_3_01) :-
 		quick_check(atom(+atom), Result, []),
 		Result == passed.
 
-	test(quick_check_3_02) :-
+	succeeds(quick_check_3_02) :-
 		quick_check(atom(+atom), Result, [n(25)]),
 		Result == passed.
 
-	test(quick_check_3_03) :-
+	succeeds(quick_check_3_03) :-
 		quick_check(atom(+integer), Result, []),
 		Result = failed(atom(Integer)), integer(Integer).
 
-	test(quick_check_3_04) :-
+	succeeds(quick_check_3_04) :-
 		quick_check(atom(+integer), Result, [n(25)]),
 		Result = failed(atom(Integer)), integer(Integer).
 
 	% quick_check/2 tests
 
-	test(quick_check_2_01) :-
+	succeeds(quick_check_2_01) :-
 		quick_check(atom(+atom), []),
 		quick_check_passed(N), N == 100.
 
-	test(quick_check_2_02) :-
+	succeeds(quick_check_2_02) :-
 		quick_check(atom(+atom), [n(25)]),
 		quick_check_passed(N), N == 25.
 
-	test(quick_check_2_03) :-
+	succeeds(quick_check_2_03) :-
 		\+ quick_check(atom(+integer), []).
 
-	test(quick_check_2_04) :-
+	succeeds(quick_check_2_04) :-
 		\+ quick_check(atom(+integer), [n(25)]).
 
 	% quick_check/1 tests
 
-	test(quick_check_1_01) :-
+	succeeds(quick_check_1_01) :-
 		quick_check(atom(+atom)),
 		quick_check_passed(N), N == 100.
 
-	test(quick_check_1_02) :-
+	succeeds(quick_check_1_02) :-
 		\+ quick_check(atom(+integer)).
 
 	% supress quick_check/1-3 messages and save option values for tests

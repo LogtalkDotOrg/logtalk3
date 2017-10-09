@@ -81,8 +81,8 @@ Tools
 predicate `benchmark/2` returning the goal result (`success`, `failure`, or
 `error(Error)`).
 
-* UPDATED: Generalized the `=~=/2` predicate of `lgtunit` to allow comparison
-of the corresponding elements in two lists of floats.
+* UPDATED: Generalized the `=~=/2` predicate of `lgtunit` to also support the
+comparison of the corresponding elements in two lists of floats.
 
 * FIXED: The `logtalk_tester` shell script no longer exports the `LC_ALL`
 environment variable and instead uses it only locally to fix the tests sorting
@@ -100,6 +100,8 @@ Tests
 * ADDED: Tests for the `list::sort/4` library predicate.
 
 * ADDED: Tests for the new list of numbers normalization predicates.
+
+* ADDED: Tests for the generalized `lgtunit::(=~=)/2` predicate.
 
 
 3.11.2 - August 28, 2017
