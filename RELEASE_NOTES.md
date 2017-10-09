@@ -99,6 +99,8 @@ Tests
 
 * ADDED: Tests for the `list::sort/4` library predicate.
 
+* ADDED: Tests for the new list of numbers normalization predicates.
+
 
 3.11.2 - August 28, 2017
 ========================
