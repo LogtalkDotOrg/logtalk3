@@ -74,6 +74,9 @@ regular files.
 * FIXED: Definition of the predicate `os::absolute_file_name/2` for XSB when
 both arguments are instantiated.
 
+* FIXED: Predicate `os::working_directory/1` when using GNU Prolog as the
+backend compiler on Windows.
+
 Tools
 -----
 
