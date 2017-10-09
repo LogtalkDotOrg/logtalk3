@@ -32,6 +32,14 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
+	test(sample_standard_deviation_2_01) :-
+		sample::standard_deviation([35,36,46,68,70], StandardDeviation),
+		StandardDeviation =~= 17.0.
+
+	test(sample_z_arithmetic_mean_2_01) :-
+		sample::arithmetic_mean([35,36,46,68,70], Mean),
+		Mean =~= 51.0.
+
 	test(sample_z_normalization_2_01) :-
 		sample::z_normalization([35,36,46,68,70], ZScores),
 		ZScores =~= [-0.9411764705882353,-0.8823529411764706,-0.29411764705882354,1.0,1.1176470588235294].
