@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.8,
+		version is 4.9,
 		author is 'Paulo Moura',
-		date is 2017/09/30,
+		date is 2017/10/09,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -143,8 +143,9 @@
 	:- public(op(700, xfx, ('=~='))).
 	:- public(('=~=')/2).
 	:- mode('=~='(+float, +float), zero_or_one).
+	:- mode('=~='(+list(float), +list(float)), zero_or_one).
 	:- info(('=~=')/2, [
-		comment is 'Compares two floats for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Handy when writing certain unit tests but the default precision values may not be adequate for all cases.',
+		comment is 'Compares two floats (or two lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. But note that the default precision values may not be adequate for all cases.',
 		argnames is ['Float1', 'Float2']
 	]).
 
@@ -1197,6 +1198,12 @@
 		;	throw(assertion_failure(Assertion))
 		).
 
+	'=~='([], []) :-
+		!.
+	'=~='([Float1| Floats1], [Float2| Floats2]) :-
+		!,
+		'=~='(Float1, Float2),
+		'=~='(Floats1, Floats2).
 	'=~='(Float1, Float2) :-
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
 			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->

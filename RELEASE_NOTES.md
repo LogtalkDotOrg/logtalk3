@@ -81,6 +81,9 @@ Tools
 predicate `benchmark/2` returning the goal result (`success`, `failure`, or
 `error(Error)`).
 
+* UPDATED: Generalized the `=~=/2` predicate of `lgtunit` to allow comparison
+of the corresponding elements in two lists of floats.
+
 * FIXED: The `logtalk_tester` shell script no longer exports the `LC_ALL`
 environment variable and instead uses it only locally to fix the tests sorting
 order when searching for the `tester.lgt` and `tester.logtalk` files. This

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>4.8</code>
+            <code>4.9</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/9/30</code>
+            <code>2017/10/9</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -362,7 +362,7 @@
         <div class="section">
           <h3 id="=~= / 2" class="code">=~= / 2</h3>
           <blockquote>
-            <p class="comment">Compares two floats for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Handy when writing certain unit tests but the default precision values may not be adequate for all cases.</p>
+            <p class="comment">Compares two floats (or two lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. But note that the default precision values may not be adequate for all cases.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -376,6 +376,9 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>=~=(+float,+float) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>=~=(+list(float),+list(float)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
