@@ -1198,6 +1198,14 @@
 		;	throw(assertion_failure(Assertion))
 		).
 
+	'=~='(Float1, _) :-
+		var(Float1),
+		context(Context),
+		throw(error(instantiation_error,Context)).
+	'=~='(_, Float2) :-
+		var(Float2),
+		context(Context),
+		throw(error(instantiation_error,Context)).
 	'=~='([], []) :-
 		!.
 	'=~='([Float1| Floats1], [Float2| Floats2]) :-
