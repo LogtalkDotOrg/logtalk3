@@ -90,11 +90,11 @@
 
 	test(numberlist_normalize_range_2_01) :-
 		numberlist::normalize_range([2,2,1,0], Normalized),
-		Normalized == [1,1,0.5,0].
+		Normalized =~= [1.0,1.0,0.5,0.0].
 
 	test(numberlist_normalize_range_4_01) :-
 		numberlist::normalize_range([2,2,1,0], 0, 100, Normalized),
-		Normalized == [100,100,50,0].
+		Normalized =~= [100.0,100.0,50.0,0.0].
 
 	test(numberlist_normalize_unit_2_01) :-
 		numberlist::normalize_unit([2,2,1,0], Normalized),
