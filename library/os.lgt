@@ -1776,7 +1776,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		Dialect \== swi, Dialect \== qp, Dialect \== quints
+		Dialect \== swi, Dialect \== qp, Dialect \== quintus
 	)).
 
 		make_directory_path_portable(Path) :-
