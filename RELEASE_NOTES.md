@@ -24,7 +24,11 @@ RELEASE NOTES
 3.12.1 - November ??, 2017
 ==========================
 
+Tools
+-----
 
+* FIXED: The documentation of the instantiations modes of the predicates
+`lgtunit::benchmark/3-4`.
 
 
 3.12.0 - October 10, 2017

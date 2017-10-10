@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.9,
+		version is 4.11,
 		author is 'Paulo Moura',
-		date is 2017/10/09,
+		date is 2017/10/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -119,7 +119,7 @@
 
 	:- public(benchmark/3).
 	:- meta_predicate(benchmark(0, *, *)).
-	:- mode(benchmark(+callable, +integer, -float), one).
+	:- mode(benchmark(@callable, +positive_integer, -float), one).
 	:- info(benchmark/3, [
 		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Repetitions', 'Time']
@@ -127,7 +127,7 @@
 
 	:- public(benchmark/4).
 	:- meta_predicate(benchmark(0, *, *, *)).
-	:- mode(benchmark(+callable, +integer, +atom, -float), one).
+	:- mode(benchmark(@callable, +positive_integer, +atom, -float), one).
 	:- info(benchmark/4, [
 		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Repetitions', 'Clock', 'Time']
