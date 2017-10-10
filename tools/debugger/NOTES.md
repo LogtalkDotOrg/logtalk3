@@ -47,6 +47,10 @@ Note that this tool cannot be loaded at the same time as other tools (e.g.
 the ports profiler) that also provide a debug handler, which must be unique
 in a running session.
 
+When the code to be debugged runs computationally expensive initializations,
+loading this tool after the code may have a noticeable impact in loading
+times.
+
 
 Usage
 -----
@@ -59,6 +63,11 @@ source files using the `debug(on)` compiler flag. For example:
 In alternative, you may also turn on the `debug` flag globally by typing:
 
 	| ?- set_logtalk_flag(debug, on).
+
+But note that loader files may override this flag setting (e.g. by using
+`debug(off)` or `optimize(on)` options for loaded files). If that's the
+case, you will need to either edit the loader files or write customized
+loader files enabling debugging.
 
 Logtalk also provides basic support for the SWI-Prolog graphical tracer.
 The required settings are described in the `settings-sample.lgt` file.
