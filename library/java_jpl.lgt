@@ -89,15 +89,16 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/03/21,
+		date is 2017/10/16,
 		comment is 'Abstract interface to JPL API utility predicates.'
 	]).
 
 	:- use_module(jpl, [
 		jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,
-		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_ref/1,
+		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_object/1,
+		jpl_is_ref/1,
 		jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
 		jpl_iterator_element/2,
 		jpl_call/4
@@ -139,6 +140,9 @@
 
 	is_null(Reference) :-
 		jpl_is_null(Reference).
+
+	is_object(Reference) :-
+		jpl_is_object(Reference).
 
 	terms_to_array(Terms, Array) :-
 		jpl_terms_to_array(Terms, Array).

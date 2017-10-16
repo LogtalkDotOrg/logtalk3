@@ -68,9 +68,9 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/03/21,
+		date is 2017/10/16,
 		comment is 'Abstract interface to Java utility predicates.'
 	]).
 
@@ -134,6 +134,13 @@
 	:- mode(is_null(@term), zero_or_one).
 	:- info(is_null/1, [
 		comment is 'True when the argument is the Java value null. Fails if the argument is not instantiated.',
+		argnames is ['Reference']
+	]).
+
+	:- public(is_object/1).
+	:- mode(is_object(@term), zero_or_one).
+	:- info(is_object/1, [
+		comment is 'True when the argument is a reference to a Java object. Fails if the argument is not instantiated.',
 		argnames is ['Reference']
 	]).
 

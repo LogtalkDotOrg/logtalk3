@@ -24,10 +24,15 @@ RELEASE NOTES
 3.12.1 - November ??, 2017
 ==========================
 
+Library
+-------
+
+* ADDED: Predicate `java::is_object/1` to the library.
+
 Tools
 -----
 
-* FIXED: The documentation of the instantiations modes of the predicates
+* FIXED: The documentation of the instantiation modes of the predicates
 `lgtunit::benchmark/3-4`.
 
 

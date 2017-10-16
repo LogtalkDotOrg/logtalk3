@@ -88,9 +88,9 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2017/10/16,
 		comment is 'Abstract interface to JIProlog API utility predicates.'
 	]).
 
@@ -118,5 +118,8 @@
 
 	is_null(Reference) :-
 		Reference == [].
+
+	is_object(Reference) :-
+		{catch(get_class(Reference), _, fail)}.
 
 :- end_object.
