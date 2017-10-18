@@ -10313,13 +10313,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity).
 
-% not the first clause for this user-defined predicate; reuse the compiled head template
+% not the first clause for this predicate; reuse the compiled head template
 
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
-	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, _, user),
+	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode, Origin),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	'$lgt_pp_previous_predicate_'(Head, user) ->
+	% only check for a discontiguous predicate for user-defined predicates
+	(	Origin == aux ->
+		true
+	;	'$lgt_pp_previous_predicate_'(Head, Origin) ->
 		true
 	;	% clauses for the predicate are discontiguous
 		'$lgt_check_discontiguous_directive'(Head, Ctx)

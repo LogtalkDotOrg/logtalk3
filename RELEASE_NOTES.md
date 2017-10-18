@@ -24,6 +24,12 @@ RELEASE NOTES
 3.12.1 - November ??, 2017
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: A harmless performance bug where compilation of auxiliary predicates
+would result in duplicated entity predicate definition table entries.
+
 Library
 -------
 
