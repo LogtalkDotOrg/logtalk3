@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2017/09/30,
+		date is 2017/10/18,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Message kinds' - 'The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.',
@@ -314,10 +314,10 @@
 		current_logtalk_flag(report, off),
 		!.
 	default_print_message(debug, _, _) :-
-		\+ current_logtalk_flag(debug, on),
+		current_logtalk_flag(debug, off),
 		!.
 	default_print_message(debug(_), _, _) :-
-		\+ current_logtalk_flag(debug, on),
+		current_logtalk_flag(debug, off),
 		!.
 	default_print_message(Kind, Component, Tokens) :-
 		(	message_prefix_stream(Kind, Component, Prefix, Stream) ->
