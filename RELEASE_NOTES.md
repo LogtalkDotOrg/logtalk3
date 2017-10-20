@@ -41,6 +41,11 @@ Tools
 * FIXED: The documentation of the instantiation modes of the predicates
 `lgtunit::benchmark/3-4`.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Logtalk support installation instructions for the Atom text editor.
+
 
 3.12.0 - October 10, 2017
 =========================

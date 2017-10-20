@@ -26,9 +26,10 @@ packages. The conversion process is described at:
 
 	https://atom.io/docs/latest/converting-a-text-mate-bundle
 
-The following shell command can be used:
+The following shell commands can be used:
 
 	$ apm init --package ~/.atom/packages/language-logtalk --convert $LOGTALKHOME/coding/textmate2/Logtalk.tmbundle
+	$ sed -i.bak "s/0.0.0/$(sed -e 's/-.*$//' < $LOGTALKUSER/VERSION.txt)/" ~/.atom/packages/language-logtalk/package.json
 
 If the `apm` command is not available, you can install it by selecting Atom's
 menu option `Install Shell Commands`.
