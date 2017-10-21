@@ -39,3 +39,11 @@ Loading
 This tool can be loaded using the query:
 
 	| ?- logtalk_load(code_metrics(loader)).
+
+
+Third-party tools
+-----------------
+
+`cloc` is an open-source command-line program that counts blank lines, comment
+lines, and lines of source code in many programming languages including Logtalk.
+It is available at https://github.com/AlDanial/cloc
