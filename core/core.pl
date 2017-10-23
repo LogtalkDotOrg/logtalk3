@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 12, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 12, 1, rc2)).
 
 
 
@@ -6720,7 +6720,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_predicate_properties'(Entity, _) :-
 	'$lgt_pp_mode_'(Mode, Solutions, _, _),
 		functor(Mode, Functor, Arity),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)))),
+		(	'$lgt_pp_non_terminal_'(Functor, Arity, ExtArity) ->
+			assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, mode(Mode, Solutions))))
+		;	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions))))
+		),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, _) :-

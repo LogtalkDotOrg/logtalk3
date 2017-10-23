@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: A bug where the entity property `declares/2` would fail to return
+`mode/2` properties for non-terminals.
+
 * FIXED: A harmless performance bug where compilation of auxiliary predicates
 would result in duplicated entity predicate definition table entries.
 
