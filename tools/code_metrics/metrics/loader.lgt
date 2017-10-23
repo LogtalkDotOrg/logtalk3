@@ -23,7 +23,8 @@
 	logtalk_load([
 		dit_metric,
 		coupling_metric,
-		noc_metric
+		noc_metric,
+		doc_metric
 	], [
 		optimize(on)
 	])

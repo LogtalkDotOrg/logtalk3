@@ -38,6 +38,9 @@ Library
 Tools
 -----
 
+* ADDED: Preliminary version of a documentation metric to the `code_metrics`
+tool.
+
 * FIXED: The documentation of the instantiation modes of the predicates
 `lgtunit::benchmark/3-4`.
 
