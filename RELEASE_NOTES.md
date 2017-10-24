@@ -31,9 +31,6 @@ Logtalk compiler and runtime
 example, and contribution paths) for use when embedding or deploying
 applications where e.g. tools or example paths should not included.
 
-Definition for the `startup` library alias, corresponding to the
-Logtalk startup directory, to the `paths/paths.pl` file.
-
 * FIXED: A bug where the entity property `declares/2` would fail to return
 `mode/2` properties for non-terminals.
 
