@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.12,
+		version is 0.13,
 		author is 'Paulo Moura',
-		date is 2017/05/05,
+		date is 2017/10/25,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -60,7 +60,7 @@
 		write('    {+d}'), nl, nl,
 		write('Next load the debugger and start tracing:'), nl, nl,
 		write('    {debugger(loader)}, debugger::trace.'), nl, nl,
-		write('Hint: you can preload the debuuger (and other developer tools) from your'), nl,
+		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
 		write('settings file (see the settings-sample.lgt file for instructions).'), nl, nl,
 		write('To lean more about available top-level shortcuts:'), nl, nl,
 		write('    help::logtalk_load/1.'), nl,
@@ -315,6 +315,7 @@
 	built_in_method(self, 1, '/manuals/refman/methods/', 'self_1.html').
 	built_in_method(sender, 1, '/manuals/refman/methods/', 'sender_1.html').
 	built_in_method(this, 1, '/manuals/refman/methods/', 'this_1.html').
+	built_in_method(context, 1, '/manuals/refman/methods/', 'context_1.html').
 
 	built_in_method(current_op, 3, '/manuals/refman/methods/', 'current_op_3.html').
 	built_in_method(current_predicate, 1, '/manuals/refman/methods/', 'current_predicate_1.html').
