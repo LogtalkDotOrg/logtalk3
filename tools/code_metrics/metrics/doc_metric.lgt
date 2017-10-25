@@ -23,18 +23,82 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/10/23,
+		date is 2017/10/25,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a percentage where a 100% score means that all expected documentation information is present.',
-			'Score heights' - 'The score is split between 20% for the entity documentation and 80% for the entity predicates documentation.'
+			'Score weights' - 'The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customizewd using the predicate entity_predicates_weights_hook/2.',
+			'Score customization' - 'The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.'
 		]
 	]).
 
+	:- public(entity_predicates_weights_hook/2).
+	:- multifile(entity_predicates_weights_hook/2).
+	:- dynamic(entity_predicates_weights_hook/2).
+	:- mode(entity_predicates_weights_hook(?integer, ?integer), zero_or_one).
+	:- info(entity_predicates_weights_hook/2, [
+		comment is 'Relative weight between entity documentation and predicates documentation. The sum of the two values must be equal to 100.',
+		argnames is ['EntityWeight', 'PredicatesWeight']
+	]).
+
+	:- public(entity_info_score_hook/2).
+	:- multifile(entity_info_score_hook/2).
+	:- dynamic(entity_info_score_hook/2).
+	:- mode(entity_info_score_hook(?term, ?integer), zero_or_one).
+	:- info(entity_info_score_hook/2, [
+		comment is 'Maximum score for entity info/1 directives.',
+		argnames is ['Entity', 'MaximumScore']
+	]).
+
+	:- public(entity_info_pair_score_hook/3).
+	:- multifile(entity_info_pair_score_hook/3).
+	:- dynamic(entity_info_pair_score_hook/3).
+	:- mode(entity_info_pair_score_hook(?callable, ?term, ?integer), zero_or_more).
+	:- info(entity_info_pair_score_hook/3, [
+		comment is 'Score for relevant entity info/1 directive pairs.',
+		argnames is ['Pair', 'Entity', 'Score']
+	]).
+
+	:- public(predicate_mode_score_hook/3).
+	:- multifile(predicate_mode_score_hook/3).
+	:- dynamic(predicate_mode_score_hook/3).
+	:- mode(predicate_mode_score_hook(?term, ?term, ?integer), zero_or_more).
+	:- info(predicate_mode_score_hook/3, [
+		comment is 'Maximum score for predicate mode/2 directives.',
+		argnames is ['Entity', 'Predicate', 'MaximumScore']
+	]).
+
+	:- public(predicate_mode_score_hook/5).
+	:- multifile(predicate_mode_score_hook/5).
+	:- dynamic(predicate_mode_score_hook/5).
+	:- mode(predicate_mode_score_hook(?term, ?term, ?term, ?term, ?integer), zero_or_one).
+	:- info(predicate_mode_score_hook/5, [
+		comment is 'Score for a predicate mode/2 directives.',
+		argnames is ['Template', 'Solutions', 'Entity', 'Predicate', 'Score']
+	]).
+
+	:- public(predicate_info_score_hook/3).
+	:- multifile(predicate_info_score_hook/3).
+	:- dynamic(predicate_info_score_hook/3).
+	:- mode(predicate_info_score_hook(?term, ?term, ?integer), zero_or_one).
+	:- info(predicate_info_score_hook/3, [
+		comment is 'Maximum score for predicate info/2 directives.',
+		argnames is ['Entity', 'Predicate', 'MaximumScore']
+	]).
+
+	:- public(predicate_info_pair_score_hook/4).
+	:- multifile(predicate_info_pair_score_hook/4).
+	:- dynamic(predicate_info_pair_score_hook/4).
+	:- mode(predicate_info_pair_score_hook(?callable, ?term, ?term, ?integer), zero_or_more).
+	:- info(predicate_info_pair_score_hook/4, [
+		comment is 'Score for a predicate info/2 directive pairs.',
+		argnames is ['Pair', 'Entity', 'Predicate', 'Score']
+	]).
+
 	:- uses(list, [
-		length/2, select/3
+		length/2, member/2
 	]).
 
 	:- uses(numberlist, [
@@ -48,7 +112,14 @@
 	score(Entity, Score) :-
 		info_1_score(Entity, Info1Score),
 		info_2_score(Entity, Info2Score),
-		Score is Info1Score * 20 / 100 + Info2Score * 80 / 100.
+		(	entity_predicates_weights_hook(EntityWeight, PredicatesWeight) ->
+			true
+		;	entity_predicates_weights(EntityWeight, PredicatesWeight)
+		),
+		Score is Info1Score * EntityWeight / 100 + Info2Score * PredicatesWeight / 100.
+
+	% defauls
+	entity_predicates_weights(20, 80).
 
 	info_1_score(Entity, Score) :-
 		(	^^entity_property(Entity, info(Info)) ->
@@ -58,28 +129,21 @@
 
 	info_1_score(Entity, Info, Score) :-
 		info_1_score(Info, Entity, 0, Score0),
-		(	atom(Entity) ->
-			Score is Score0 * 100 / 40
-		;	% parametric entity
-			Score is Score0 * 100 / 50
-		).
+		(	entity_info_score_hook(Entity, MaximumScore) ->
+			true
+		;	entity_info_score(Entity, MaximumScore)
+		),
+		Score is Score0 * 100 / MaximumScore.
 
 	info_1_score([], _, Score, Score).
 	info_1_score([Pair| Pairs], Entity, Score0, Score) :-
-		(	info_1_pair_score(Pair, Entity, PairScore) ->
+		(	entity_info_pair_score_hook(Pair, Entity, PairScore) ->
+			Score1 is Score0 + PairScore
+		;	entity_info_pair_score(Pair, Entity, PairScore) ->
 			Score1 is Score0 + PairScore
 		;	Score1 is Score0
 		),
 		info_1_score(Pairs, Entity, Score1, Score).
-
-	info_1_pair_score(author(Author), _, 10) :-
-		atom_length(Author, Length), Length >= 2.
-	info_1_pair_score(version(_), _, 10).
-	info_1_pair_score(date(_), _, 10).
-	info_1_pair_score(comment(Comment), _, 10) :-
-		atom_length(Comment, Length), Length >= 10.
-	info_1_pair_score(parnames(_), _, 10).
-	info_1_pair_score(parameters(_), _, 10).
 
 	info_2_score(Entity, Score) :-
 		findall(
@@ -96,38 +160,74 @@
 
 	info_2_predicate_score(Entity, Score) :-
 		^^entity_property(Entity, declares(Predicate, Properties)),
-		(	select(mode(_,_), Properties, OtherProperties) ->
-			info_2_predicate_score(OtherProperties, Predicate, 10, Score0)
-		;	info_2_predicate_score(Properties, Predicate, 0, Score0)
+		(	member(mode(Template,Solutions), Properties) ->
+			(	predicate_mode_score_hook(Template, Solutions, Entity, Predicate, ModeScore) ->
+				true
+			;	predicate_mode_score(Template, Solutions, Entity, Predicate, ModeScore) ->
+				true
+			;	ModeScore is 0
+			)
+		;	ModeScore is 0
 		),
-		(	Predicate = _/0 ->
-			Score is Score0 * 100 / 20
-		;	Score is Score0 * 100 / 30
+		(	predicate_mode_score_hook(Entity, Predicate, MaximumModeScore) ->
+			true
+		;	predicate_mode_score(Entity, Predicate, MaximumModeScore)
+		),
+		(	member(info(Pairs), Properties) ->
+			(	info_2_pairs_score(Pairs, Entity, Predicate, 0, InfoScore) ->
+				true
+			;	InfoScore is 0
+			)
+		;	InfoScore is 0
+		),
+		(	predicate_info_score_hook(Entity, Predicate, MaximumInfoScore) ->
+			true
+		;	predicate_info_score(Entity, Predicate, MaximumInfoScore)
+		),
+		Score is (ModeScore + InfoScore) * 100 / (MaximumModeScore + MaximumInfoScore).
+
+	info_2_pairs_score([], _, _, Score, Score).
+	info_2_pairs_score([Pair| Pairs], Entity, Predicate, Score0, Score) :-
+		(	predicate_info_pair_score_hook(Pair, Entity, Predicate, PairScore) ->
+			Score1 is Score0 + PairScore
+		;	predicate_info_pair_score(Pair, Entity, Predicate, PairScore) ->
+			Score1 is Score0 + PairScore
+		;	Score1 is Score0
+		),
+		info_2_pairs_score(Pairs, Entity, Predicate, Score1, Score).
+
+	% entity info/1 defauls
+
+	entity_info_score(Entity, MaximumScore) :-
+		(	atom(Entity) ->
+			MaximumScore is 40
+		;	% parametric entity
+			MaximumScore is 50
 		).
 
-	info_2_predicate_score([], _, Score, Score).
-	info_2_predicate_score([Pair| Pairs], Predicate, Score0, Score) :-
-		(	info_2_pair_score(Pair, Predicate, PairScore) ->
-			Score1 is Score0 + PairScore
-		;	Score1 is Score0
-		),
-		info_2_predicate_score(Pairs, Predicate, Score1, Score).
-
-	info_2_pair_score(info(Pairs), Predicate, Score) :-
-		info_2_info_score(Pairs, Predicate, 0, Score).
-
-	info_2_info_score([], _, Score, Score).
-	info_2_info_score([Pair| Pairs], Predicate, Score0, Score) :-
-		(	info_2_info_score(Pair, Predicate, PairScore) ->
-			Score1 is Score0 + PairScore
-		;	Score1 is Score0
-		),
-		info_2_info_score(Pairs, Predicate, Score1, Score).
-
-	info_2_info_score(comment(Comment), _, 10) :-
+	entity_info_pair_score(author(Author), _, 10) :-
+		atom_length(Author, Length), Length >= 2.
+	entity_info_pair_score(version(_), _, 10).
+	entity_info_pair_score(date(_), _, 10).
+	entity_info_pair_score(comment(Comment), _, 10) :-
 		atom_length(Comment, Length), Length >= 10.
-	info_2_info_score(argnames(_), _, 10).
-	info_2_info_score(arguments(_), _, 10).
+	entity_info_pair_score(parnames(_), _, 10).
+	entity_info_pair_score(parameters(_), _, 10).
+
+	% predicate mode/2 directive defaults
+
+	predicate_mode_score(_Entity, _Predicate, 10).
+
+	predicate_mode_score(_Template, _Solutions, _Entity, _Predicate, 10).
+
+	% predicate info/2 directive defaults
+
+	predicate_info_score(_Entity, _Predicate, 20).
+
+	predicate_info_pair_score(comment(Comment), _, _, 10) :-
+		atom_length(Comment, Length), Length >= 10.
+	predicate_info_pair_score(argnames(_), _, _, 10).
+	predicate_info_pair_score(arguments(_), _, _, 10).
 
 	metric_label('Documentation').
 

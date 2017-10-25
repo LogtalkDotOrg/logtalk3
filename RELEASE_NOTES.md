@@ -45,8 +45,7 @@ Library
 Tools
 -----
 
-* ADDED: Preliminary version of a documentation metric to the `code_metrics`
-tool.
+* ADDED: User-customizable documentation metric to the `code_metrics` tool.
 
 * UPDATED: The `help` tool for the recently added `context/1` built-in method.
 
