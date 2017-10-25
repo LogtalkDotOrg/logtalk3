@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on March 31, 2017
+%  Last updated on October 25, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -202,6 +202,7 @@ logtalk_library_path(patching, examples('patching/')).
 logtalk_library_path(parametric, examples('parametric/')).
 logtalk_library_path(pardicts, examples('pardicts/')).
 logtalk_library_path(people, examples('people/')).
+logtalk_library_path(persistency, examples('persistency/')).
 logtalk_library_path(philosophers, threads('philosophers/')).
 logtalk_library_path(poem, examples('poem/')).
 logtalk_library_path(points, examples('points/')).

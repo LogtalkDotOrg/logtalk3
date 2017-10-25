@@ -53,6 +53,12 @@ tool.
 * FIXED: The documentation of the instantiation modes of the predicates
 `lgtunit::benchmark/3-4`.
 
+Examples
+--------
+
+* ADDED: A new example, `persistency` illustrating a very simple solution for
+persisting an object dynamic state across sessions.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
