@@ -148,8 +148,10 @@ diagram use a dashed border.
 Supported graph languages
 -------------------------
 
-Currently only the DOT graph language is supported (tested with version
-2.36.0; visit the <http://www.graphviz.org/> website for more information).
+Currently only the DOT graph language is supported (tested with Graphviz
+version 2.36.0; visit the <http://www.graphviz.org/> website for more
+information). Versions 2.40 and 2.41 have a nasty regression in the SVG
+exporter where text overflows the boxes that should contain it.
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG, PDF,
