@@ -428,17 +428,18 @@ unit tests:
 
 - `variant/2` - to check when two terms are a variant of each other (e.g. to
 check expected test results against actual results when they contain variables)
-- `assertion/2` - to generate an exception in case its goal argument fails or
-throws an error
+- `assertion/2` - to generate an exception in case its assertion goal argument
+fails or throws an error
 - `Float1 =~= Float2` - for approximate float comparison
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
 
 The `assertion/2` predicate is used in the code generated for the `test/2-3`
-dialects. But it can also be used in the body of tests written using the
-`test/1`, `succeeds/1`, and `deterministic/1` dialects to help differentiate
-between the test goal and checking the test goal results and to provide more
-informative test failure messages.
+dialects. But can also be used in the body of tests where using two or more
+assertions is convenient or in the body of tests written using the `test/1`,
+`succeeds/1`, and `deterministic/1` dialects to help differentiate between the
+test goal and checking the test goal results and to provide more informative
+test failure messages.
 
 As the `benchmark/2-3` predicates are meta-predicates, turning on the
 `optimize` compiler flag is advised to avoid runtime compilation of the

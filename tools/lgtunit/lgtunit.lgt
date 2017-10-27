@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.11,
+		version is 4.12,
 		author is 'Paulo Moura',
-		date is 2017/10/10,
+		date is 2017/10/27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -72,11 +72,11 @@
 	:- meta_predicate(assertion(*, 0)).
 	:- mode(assertion(+nonvar, +callable), one).
 	:- info(assertion/2, [
-		comment is 'True if the goal succeeds. Throws an error using the assertion as argument if the goal throws an error or fails.',
-		argnames is ['Assertion', 'Goal'],
+		comment is 'True if the assertion goal succeeds. Throws an error using the description as argument if the assertion goal throws an error or fails. The description argument helps to distinguish between different assertions in the same test body.',
+		argnames is ['Description', 'Assertion'],
 		exceptions is [
-			'Goal fails' - assertion_failure('Assertion'),
-			'Goal throws Error' - assertion_error('Assertion', 'Error')
+			'Assertion goal fails' - assertion_failure('Description'),
+			'Assertion goal throws Error' - assertion_error('Description', 'Error')
 		]
 	]).
 
