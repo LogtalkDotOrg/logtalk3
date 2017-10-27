@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on February 3, 2017
+##   Last updated on October 27, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
@@ -21,7 +21,7 @@
 ## 
 #############################################################################
 
-FROM swipl/swipl:latest
+FROM swipl:latest
 
 MAINTAINER Sergio Castro <sergioc78@gmail.com>
 

@@ -58,6 +58,12 @@ Examples
 * ADDED: A new example, `persistency` illustrating a very simple solution for
 persisting an object dynamic state across sessions.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Docker file for SWI-Prolog as `swipl` is now an official Docker
+repository.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
