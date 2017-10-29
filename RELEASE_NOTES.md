@@ -61,6 +61,8 @@ persisting an object dynamic state across sessions.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: File `.travis.yml` for supporting automated Travis CI builds.
+
 * FIXED: The Docker file for SWI-Prolog as `swipl` is now an official Docker
 repository.
 
