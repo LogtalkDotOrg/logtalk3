@@ -7,7 +7,7 @@ services:
 
 install:
 - docker pull swipl:stable
-- sudo LogtalkDotOrg/logtalk3/scripts/install.sh
+- sudo scripts/install.sh
 
 script:
 - docker run -it --name test --entrypoint=/bin/bash library/swipl -c "logtalk_user_setup && cd ~/logtalk/tests/logtalk && logtalk_tester"
