@@ -18,8 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((	current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap),
-		absolute_file_name(library(jpl), [file_type(prolog), access(read)], _)
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap),
+	exists_source(library(jpl))
 )).
 
 	:- use_module(library(jpl), []).

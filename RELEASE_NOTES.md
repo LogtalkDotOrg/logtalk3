@@ -58,10 +58,14 @@ Examples
 * ADDED: A new example, `persistency` illustrating a very simple solution for
 persisting an object dynamic state across sessions.
 
+* FIXED: Detection of the SWI-Prolog/YAP JPL library in the `java` example.
+
 Installers and installation scripts
 -----------------------------------
 
-* ADDED: File `.travis.yml` for supporting automated Travis CI builds.
+* ADDED: File `.travis.yml` for supporting automated Travis CI builds. The
+builds check that Logtalk can be successfully installed and that all its
+specific unit tests pass.
 
 * FIXED: The Docker file for SWI-Prolog as `swipl` is now an official Docker
 repository.
