@@ -24,11 +24,13 @@ Overview
 The purpose of this tool is to assess qualities of source code that may
 predict negative aspects such as complexity, error-proneness, and overall
 maintainability. It is meant to be extensible via the addition of metric
-objects into the `metrics` sub-directory. Currently, three metrics are
-provided: "Number of Clauses", "Depth of Inheritance", and "Coupling Score".
-The method of scoring was strongly influenced by the metrics rating system
-in Microsoft Visual Studio and aims to eventually emulate the functionality
-of a maintainability index score.
+objects into the `metrics` sub-directory. Currently, four metrics are
+provided: "Number of Clauses", "Depth of Inheritance", "Coupling Score",
+and "Documentation".
+
+The coupling score method was strongly influenced by the metrics rating
+system in Microsoft Visual Studio and aims to eventually emulate the
+functionality of a maintainability index score.
 
 For usage examples, see the `SCRIPT.txt` file.
 
