@@ -9,4 +9,4 @@ install:
 - docker pull swipl:stable
 
 script:
-- docker run -it --name test --entrypoint=/bin/bash -v ${PWD}:/logtalk3 library/swipl -c "/logtalk3/scripts/install.sh && logtalk_user_setup && cd ~/logtalk/tests/logtalk && logtalk_tester"
+- docker run -it --name test --entrypoint=/bin/bash -v ${PWD}:/logtalk3 library/swipl -c "/logtalk3/scripts/install.sh && logtalk_user_setup && cd ~/logtalk/tests/logtalk && logtalk_tester && cd ~/logtalk/tools && logtalk_tester && cd ~/logtalk/examples && logtalk_tester && cd ~/logtalk/contributions && logtalk_tester"

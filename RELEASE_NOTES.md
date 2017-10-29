@@ -64,8 +64,8 @@ Installers and installation scripts
 -----------------------------------
 
 * ADDED: File `.travis.yml` for supporting automated Travis CI builds. The
-builds check that Logtalk can be successfully installed and that all its
-specific unit tests pass.
+builds check that Logtalk can be successfully installed and that all unit
+tests (with the exception of the Prolog compliance tests) pass.
 
 * FIXED: The Docker file for SWI-Prolog as `swipl` is now an official Docker
 repository.
