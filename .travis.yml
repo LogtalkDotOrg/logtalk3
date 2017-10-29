@@ -5,11 +5,8 @@ language: bash
 services:
 - docker
 
-before_install:
-- docker pull logtalk/logtalk3-swi-nightly
-- docker ps -a
-- docker run -it --name test --entrypoint=/bin/bash logtalk/logtalk3-swi-nightly
+install:
+- docker pull swipl:stable
 
 script:
-- bash logtalk_user_setup
-- bash cd /logtalkuser_prefix/logtalk/tests/logtalk && logtalk_tester
+- docker run -it --name test --entrypoint=/bin/bash library/swipl -c "logtalk_user_setup && cd ~/logtalk/tests/logtalk && logtalk_tester"
