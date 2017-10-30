@@ -15,7 +15,7 @@ public class SequenceDecorator extends PsiElementDecorator {
 
     public static boolean isSequence(PsiElement psiElement) {
         return isOperation(psiElement) &&
-                operationDecorator(psiElement).getOperatorText().equals(SEQUENCE_SEPARATOR) &&
+                operationDecorator(psiElement).getOperatorSymbol().equals(SEQUENCE_SEPARATOR) &&
                 psiElement.getChildren().length <= 2;
     }
 

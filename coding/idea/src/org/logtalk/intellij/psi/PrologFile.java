@@ -33,5 +33,4 @@ public class PrologFile extends PsiFileBase {
         return super.getIcon(flags);
     }
 
-
 }

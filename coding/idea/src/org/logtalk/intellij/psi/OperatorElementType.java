@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public class OperatorElementType extends LogtalkElementType {
+
     public OperatorElementType(@NotNull @NonNls final String debugName) {
         super(debugName);
     }

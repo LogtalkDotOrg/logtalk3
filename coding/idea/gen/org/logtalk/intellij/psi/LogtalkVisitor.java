@@ -67,6 +67,10 @@ public class LogtalkVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitOperator(@NotNull LogtalkOperator o) {
+    visitPsiElement(o);
+  }
+
   public void visitParenthesizedBlock(@NotNull LogtalkParenthesizedBlock o) {
     visitPsiElement(o);
   }

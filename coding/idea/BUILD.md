@@ -23,9 +23,12 @@ for IntelliJ.
 
 ## Preliminary steps
 
+- Install the IntelliJ [Gradle plugin](https://www.jetbrains.com/help/idea/gradle.html).
+
 - Accomplish the preliminary steps for plugin development as recommended at
 the [IntelliJ Platform SDK DevGuide](http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/setting_up_environment.html).
 Particularly, verify that the _IntelliJ Platform SDK_ is properly configured.
+
 
 ## Configuring the project
 
@@ -38,29 +41,27 @@ Click `Next`.
 - In the `Project name` text field write: `logtalk-idea`.  In the `Project
 location` text field write: `<LOGTALK_DIR>/coding/idea`. Click `Finish`.
 
-- In the `Project` view, right click on the `gen` folder and select
-`Mark Directory as` -> `Generated Sources Root`.
 
 
 ## Running the plugin
 
-The first time you run the plugin you may need to create a `Run Configuration`.
-Follow these steps:
+This plugin uses Gradle. In order to build and test the plugin from IntelliJ, open the Gradle view:
+(`View` menu, select `Tool Windows -> Gradle`). 
+In the Gradle view, available Gradle tasks can be found under `Tasks -> intellij`.
 
-- Select the `logtalk-idea` module in the `Project` view.
+To see the plugin in action, execute the `runIde` task. 
+A new IntelliJ instance will run with the plugin installed.
 
-- From the `Run` menu choose `Run Plugin`.
 
 
 ## Preparing the plugin for deployment.
 
 - Once the new version is looking good, update the version number and change
 notes at the `plugin.xml` deployment descriptor. It is located in the
-`resources/META-INF` directory.
+`resources/META-INF/` directory.
 
-- From the `Build` menu, select `Prepare Plugin Module <plugin name> for
-deployment`.  A deployable plugin jar file will be generated in the plugin
-directory.
+- In order to build the plugin, execute the `buildPlugin` Gradle task. 
+A deployable plugin jar file will be generated under the `build/distributions/` directory.
 
 
 ## Deploying the plugin.

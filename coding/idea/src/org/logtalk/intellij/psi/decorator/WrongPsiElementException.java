@@ -7,10 +7,9 @@ public class WrongPsiElementException extends RuntimeException {
 
     private final PsiElement actual;
     private final String expected;
-    //private final List<Class<? extends PsiElement>> expected;
 
 
-    public WrongPsiElementException(PsiElement actual, Class<? extends PsiElement>... expected) {
+    public WrongPsiElementException(PsiElement actual, Class<? extends PsiElement> expected) {
         this(actual, expected.toString());
     }
 

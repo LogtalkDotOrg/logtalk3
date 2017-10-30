@@ -1,15 +1,26 @@
 // This is a generated file. Not intended for manual editing.
 package org.logtalk.intellij.parser;
 
+import static com.intellij.lang.parser.GeneratedParserUtilBase.TRUE_CONDITION;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._AND_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._COLLAPSE_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._NONE_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.adapt_builder_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.current_position_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.empty_element_parsed_guard_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.enter_section_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.exit_section_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.nextTokenIs;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.recursion_guard_;
+import static org.logtalk.intellij.psi.LogtalkTypes.*;
+
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.LightPsiParser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static org.logtalk.intellij.psi.LogtalkTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.LightPsiParser;
+import com.intellij.psi.tree.IElementType;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class LogtalkParser implements PsiParser, LightPsiParser {
@@ -68,6 +79,9 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     else if (t == OPERATION) {
       r = operation(b, 0);
     }
+    else if (t == OPERATOR) {
+      r = operator(b, 0);
+    }
     else if (t == PARENTHESIZED_BLOCK) {
       r = parenthesized_block(b, 0);
     }
@@ -96,7 +110,6 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // UNQUOTED_ATOM|
   //             SYMBOLIC_ATOM|
-  //             CUT|
   //             QUOTED_ATOM
   public static boolean atom(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "atom")) return false;
@@ -104,7 +117,6 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ATOM, "<atom>");
     r = consumeToken(b, UNQUOTED_ATOM);
     if (!r) r = consumeToken(b, SYMBOLIC_ATOM);
-    if (!r) r = consumeToken(b, CUT);
     if (!r) r = consumeToken(b, QUOTED_ATOM);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -217,15 +229,14 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   //                             ';'|'|'|
   //                             '->'|'*->'|
   //                             ','|
-  //                             ':='|
-  //                             '<'|'='|'=..'|'=@='|'\=@='|
+  //                             '<'|'='|'=..'|
   //                             '=:='|'=<'|'=='|'=\='|
   //                             '>'|'>='|'@<'|'@=<'|
   //                             '@>'|'@>='|'\='|'\=='|
-  //                             'as'|'is'|'>:<'|':<'|
+  //                             'as'|'is'|
   //                             ':'|
   //                             '+'|'-'|'/\'|'\/'|'xor'|
-  //                             '*'|'/'|'//'|'div'|'rdiv'|'>>'|'mod'|'rem'|
+  //                             '*'|'/'|'//'|'div'|'>>'|'mod'|'rem'|
   //                             '**'|
   //                             '^'|
   //                             '::'|
@@ -257,15 +268,14 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
   //                             ';'|'|'|
   //                             '->'|'*->'|
   //                             ','|
-  //                             ':='|
-  //                             '<'|'='|'=..'|'=@='|'\=@='|
+  //                             '<'|'='|'=..'|
   //                             '=:='|'=<'|'=='|'=\='|
   //                             '>'|'>='|'@<'|'@=<'|
   //                             '@>'|'@>='|'\='|'\=='|
-  //                             'as'|'is'|'>:<'|':<'|
+  //                             'as'|'is'|
   //                             ':'|
   //                             '+'|'-'|'/\'|'\/'|'xor'|
-  //                             '*'|'/'|'//'|'div'|'rdiv'|'>>'|'mod'|'rem'|
+  //                             '*'|'/'|'//'|'div'|'>>'|'mod'|'rem'|
   //                             '**'|
   //                             '^'|
   //                             '::'|
@@ -282,12 +292,9 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "->");
     if (!r) r = consumeToken(b, "*->");
     if (!r) r = consumeToken(b, ",");
-    if (!r) r = consumeToken(b, ":=");
     if (!r) r = consumeToken(b, "<");
     if (!r) r = consumeToken(b, "=");
     if (!r) r = consumeToken(b, "=..");
-    if (!r) r = consumeToken(b, "=@=");
-    if (!r) r = consumeToken(b, "\\=@=");
     if (!r) r = consumeToken(b, "=:=");
     if (!r) r = consumeToken(b, "=<");
     if (!r) r = consumeToken(b, "==");
@@ -302,8 +309,6 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "\\==");
     if (!r) r = consumeToken(b, "as");
     if (!r) r = consumeToken(b, "is");
-    if (!r) r = consumeToken(b, ">:<");
-    if (!r) r = consumeToken(b, ":<");
     if (!r) r = consumeToken(b, ":");
     if (!r) r = consumeToken(b, "+");
     if (!r) r = consumeToken(b, "-");
@@ -314,7 +319,6 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "/");
     if (!r) r = consumeToken(b, "//");
     if (!r) r = consumeToken(b, "div");
-    if (!r) r = consumeToken(b, "rdiv");
     if (!r) r = consumeToken(b, ">>");
     if (!r) r = consumeToken(b, "mod");
     if (!r) r = consumeToken(b, "rem");
@@ -329,9 +333,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // &valid_operator (
-  //                             ':-'|'?-'|
-  //                             'dynamic'|'discontiguous'|'initialization'|'meta_predicate'|'module_transparent'|'multifile'|
-  //                             'public'|'thread_local'|'thread_initialization'|'volatile'|
+  //                             ':-'|
   //                             '\+'|
   //                             '?'|
   //                             '+'|'-'|'\'|
@@ -361,9 +363,7 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ':-'|'?-'|
-  //                             'dynamic'|'discontiguous'|'initialization'|'meta_predicate'|'module_transparent'|'multifile'|
-  //                             'public'|'thread_local'|'thread_initialization'|'volatile'|
+  // ':-'|
   //                             '\+'|
   //                             '?'|
   //                             '+'|'-'|'\'|
@@ -377,17 +377,6 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ":-");
-    if (!r) r = consumeToken(b, "?-");
-    if (!r) r = consumeToken(b, "dynamic");
-    if (!r) r = consumeToken(b, "discontiguous");
-    if (!r) r = consumeToken(b, "initialization");
-    if (!r) r = consumeToken(b, "meta_predicate");
-    if (!r) r = consumeToken(b, "module_transparent");
-    if (!r) r = consumeToken(b, "multifile");
-    if (!r) r = consumeToken(b, "public");
-    if (!r) r = consumeToken(b, "thread_local");
-    if (!r) r = consumeToken(b, "thread_initialization");
-    if (!r) r = consumeToken(b, "volatile");
     if (!r) r = consumeToken(b, "\\+");
     if (!r) r = consumeToken(b, "?");
     if (!r) r = consumeToken(b, "+");
@@ -522,6 +511,19 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, OPERATION, "<operation>");
     r = native_binary_operation(b, l + 1);
     if (!r) r = native_left_operation(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // UNQUOTED_ATOM|SYMBOLIC_ATOM
+  public static boolean operator(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operator")) return false;
+    if (!nextTokenIs(b, "<operator>", SYMBOLIC_ATOM, UNQUOTED_ATOM)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OPERATOR, "<operator>");
+    r = consumeToken(b, UNQUOTED_ATOM);
+    if (!r) r = consumeToken(b, SYMBOLIC_ATOM);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
