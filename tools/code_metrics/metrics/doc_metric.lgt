@@ -23,9 +23,9 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2017/10/29,
+		date is 2017/10/30,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a percentage where a 100% score means that all expected documentation information is present.',
@@ -226,7 +226,28 @@
 
 	predicate_mode_score(_Entity, _Predicate, 10).
 
-	predicate_mode_score(_Template, _Solutions, _Entity, _Predicate, 10).
+	predicate_mode_score(Template, _Solutions, _Entity, _Predicate, Score) :-
+		Template =.. [_| Arguments],
+		arguments_with_type_information(Arguments, 0, NumberOfArguments, 0, NumberOfCompoundArguments),
+		(	NumberOfArguments =:= 0 ->
+			% predicate with no arguments
+			Score is 10
+		;	NumberOfCompoundArguments =:= 0 ->
+			% no type information present
+			Score is 3
+		;	% type information present for at least one of the arguments
+			Ratio is NumberOfArguments / NumberOfCompoundArguments,
+			Score is 3 + 7 / Ratio
+		).
+
+	arguments_with_type_information([], NumberOfArguments, NumberOfArguments, NumberOfCompoundArguments, NumberOfCompoundArguments).
+	arguments_with_type_information([Argument| Arguments], NumberOfArguments0, NumberOfArguments, NumberOfCompoundArguments0, NumberOfCompoundArguments) :-
+		NumberOfArguments1 is NumberOfArguments0 + 1,
+		(	compound(Argument) ->
+			NumberOfCompoundArguments1 is NumberOfCompoundArguments0 + 1
+		;	NumberOfCompoundArguments1 is NumberOfCompoundArguments0
+		),
+		arguments_with_type_information(Arguments, NumberOfArguments1, NumberOfArguments, NumberOfCompoundArguments1, NumberOfCompoundArguments).
 
 	% predicate info/2 directive defaults
 
