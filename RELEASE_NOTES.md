@@ -42,6 +42,9 @@ Library
 
 * ADDED: Predicate `java::is_object/1` to the library.
 
+* FIXED: Ensure the `atom::split/3` predicate always throws a type error when
+the first argument is not bound to an atom.
+
 Tools
 -----
 

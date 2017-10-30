@@ -22,9 +22,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017/10/30,
 		comment is 'Atom data type predicates.'
 	]).
 
@@ -77,7 +77,9 @@
 		Skip is Before + Length,
 		sub_atom(Atom, Skip, _, 0, Suffix),
 		split(Suffix, Delimiter, Length, SubAtoms).
-	split(Atom, _, _, [Atom]).
+	split(Atom, _, _, [Atom]) :-
+		% ensure type_error(atom, Atom) if Atom is not an atom
+		sub_atom(Atom, 0, _, 0, Atom).
 
 	valid(Atom) :-
 		atom(Atom).
