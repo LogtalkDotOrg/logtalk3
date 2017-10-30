@@ -113,9 +113,7 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(LogtalkTypes.CUT)) {
-            return CUT_KEYS;
-        } else if (tokenType.equals(LogtalkTypes.STRING)) {
+        if (tokenType.equals(LogtalkTypes.STRING)) {
             return STRING_KEYS;
         } else if (tokenType.equals(LogtalkTypes.INTEGER)) {
             return INTEGER_KEYS;
@@ -162,5 +160,6 @@ public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
         } else {
             return getTokenHighlights(LogtalkPsiUtil.getElementType(element));
         }
+
     }
 }

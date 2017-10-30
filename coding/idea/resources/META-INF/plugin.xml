@@ -1,7 +1,7 @@
-<idea-plugin version="2">
+<idea-plugin>
   <id>org.logtalk</id>
   <name>Logtalk</name>
-  <version>1.0.9</version>
+  <version>1.0.10</version>
   <vendor email="sergioc78@gmail.com" url="http://logtalk.org/">Logtalk</vendor>
 
   <description><![CDATA[
@@ -10,7 +10,10 @@
 
 
   <change-notes><![CDATA[
-      Minor improvement in the grammar.
+      Correcting bugs in the grammar related to symbols between parentheses.
+      For example, (.) is now considered a valid term.
+
+      Simplifying building by means of Gradle.
     ]]>
   </change-notes>
 

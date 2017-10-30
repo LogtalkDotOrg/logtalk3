@@ -45,22 +45,21 @@ public class OperationDecorator extends PsiElementDecorator {
         }
     }
 
-    public String getOperatorText() {
+    public String getOperatorSymbol() {
         return getOperator().getText();
     }
 
     public boolean isDirective() {
-        return isLeft() && getOperatorText().equals(DIRECTIVE_OPERATOR);
+        return isLeft() && getOperatorSymbol().equals(DIRECTIVE_OPERATOR);
     }
 
 
     public boolean isRule() {
-        return isBinary() && getOperatorText().equals(RULE_OPERATOR);
+        return isBinary() && getOperatorSymbol().equals(RULE_OPERATOR);
     }
 
     public boolean isGrammarRule() {
-        return isBinary() && getOperatorText().equals(GRAMMAR__RULE_OPERATOR);
+        return isBinary() && getOperatorSymbol().equals(GRAMMAR__RULE_OPERATOR);
     }
-
 
 }

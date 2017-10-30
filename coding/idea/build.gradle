@@ -1,0 +1,46 @@
+
+
+/*
+This build is configured according to the following instructions:
+- https://github.com/JetBrains/gradle-intellij-plugin/blob/master/README.md
+- http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system.html
+- https://github.com/JetBrains/gradle-intellij-plugin
+- https://docs.gradle.org/current/userguide/idea_plugin.html
+*/
+
+
+plugins {
+    id "org.jetbrains.intellij" version "0.2.17"
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'idea'
+/*apply plugin: 'org.jetbrains.intellij'*/
+apply plugin: 'java'
+
+intellij {
+    pluginName 'Logtalk'
+    version '2017.2.5' //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    type = 'IC'
+}
+
+
+group 'org.jetbrains'
+version '1.0.10' // Plugin version
+
+
+allprojects {
+    sourceSets {
+        main {
+            java.srcDirs 'src', 'gen'
+            resources.srcDirs 'resources'
+        }
+    }
+}
+
+dependencies {
+    // compile group: 'com.google.guava', name: 'guava', version: '22.0'
+}

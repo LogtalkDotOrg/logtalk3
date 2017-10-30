@@ -1,10 +1,31 @@
 // This is a generated file. Not intended for manual editing.
 package org.logtalk.intellij.psi;
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.PsiElement;
+import org.logtalk.intellij.psi.impl.LogtalkAtomImpl;
+import org.logtalk.intellij.psi.impl.LogtalkBasicTermImpl;
+import org.logtalk.intellij.psi.impl.LogtalkBracedBlockImpl;
+import org.logtalk.intellij.psi.impl.LogtalkCompoundImpl;
+import org.logtalk.intellij.psi.impl.LogtalkCompoundNameImpl;
+import org.logtalk.intellij.psi.impl.LogtalkCustomBinaryOperationImpl;
+import org.logtalk.intellij.psi.impl.LogtalkCustomLeftOperationImpl;
+import org.logtalk.intellij.psi.impl.LogtalkKnownBinaryOperatorImpl;
+import org.logtalk.intellij.psi.impl.LogtalkKnownLeftOperatorImpl;
+import org.logtalk.intellij.psi.impl.LogtalkListImpl;
+import org.logtalk.intellij.psi.impl.LogtalkMapReferenceImpl;
+import org.logtalk.intellij.psi.impl.LogtalkNativeBinaryOperationImpl;
+import org.logtalk.intellij.psi.impl.LogtalkNativeLeftOperationImpl;
+import org.logtalk.intellij.psi.impl.LogtalkNumberImpl;
+import org.logtalk.intellij.psi.impl.LogtalkOperationImpl;
+import org.logtalk.intellij.psi.impl.LogtalkOperatorImpl;
+import org.logtalk.intellij.psi.impl.LogtalkParenthesizedBlockImpl;
+import org.logtalk.intellij.psi.impl.LogtalkSentenceImpl;
+import org.logtalk.intellij.psi.impl.LogtalkTermImpl;
+import org.logtalk.intellij.psi.impl.LogtalkValidOperatorImpl;
+import org.logtalk.intellij.psi.impl.LogtalkVariableImpl;
+
 import com.intellij.lang.ASTNode;
-import org.logtalk.intellij.psi.impl.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 
 public interface LogtalkTypes {
 
@@ -23,6 +44,7 @@ public interface LogtalkTypes {
   IElementType NATIVE_LEFT_OPERATION = new LogtalkElementType("NATIVE_LEFT_OPERATION");
   IElementType NUMBER = new LogtalkElementType("NUMBER");
   IElementType OPERATION = new LogtalkElementType("OPERATION");
+  IElementType OPERATOR = new LogtalkElementType("OPERATOR");
   IElementType PARENTHESIZED_BLOCK = new LogtalkElementType("PARENTHESIZED_BLOCK");
   IElementType SENTENCE = new LogtalkElementType("SENTENCE");
   IElementType TERM = new LogtalkElementType("TERM");
@@ -34,7 +56,6 @@ public interface LogtalkTypes {
   IElementType CHAR_CODE = new LogtalkTokenType("CHAR_CODE");
   IElementType COMMENT = new LogtalkTokenType("COMMENT");
   IElementType CRLF = new LogtalkTokenType("CRLF");
-  IElementType CUT = new LogtalkTokenType("CUT");
   IElementType DOT = new LogtalkTokenType("DOT");
   IElementType FLOAT = new LogtalkTokenType("FLOAT");
   IElementType HEX_NUMBER = new LogtalkTokenType("HEX_NUMBER");
@@ -102,6 +123,9 @@ public interface LogtalkTypes {
       }
       else if (type == OPERATION) {
         return new LogtalkOperationImpl(node);
+      }
+      else if (type == OPERATOR) {
+        return new LogtalkOperatorImpl(node);
       }
       else if (type == PARENTHESIZED_BLOCK) {
         return new LogtalkParenthesizedBlockImpl(node);

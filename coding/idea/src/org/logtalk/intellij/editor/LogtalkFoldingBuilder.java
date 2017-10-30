@@ -29,7 +29,7 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
     @NotNull
     @Override
     public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
-        final List<FoldingDescriptor> descriptors = new ArrayList<>();
+        List<FoldingDescriptor> descriptors = new ArrayList<>();
         collectDescriptorsRecursively(node, document, descriptors);
         return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
     }
@@ -73,7 +73,7 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
                 OperationDecorator operation = operationDecorator(psi.getFirstChild());
                 if (operation.isRule() || operation.isGrammarRule()) {
                     *//*String head = operation.getFirstChild().getFirstChild().getText();
-                    return head + " " + operation.getOperatorText() + " ...";*//*
+                    return head + " " + operation.getOperatorSymbol() + " ...";*//*
                 } else if (operation.isDirective()) {
                     //return operation.getFirstChild().getChildren()[1].getFirstChild().getText() + ".";
                 }

@@ -23,7 +23,11 @@ term ::= (operation|basic_term) //basic_term instead of term to avoid left recur
 
 basic_term ::= (parenthesized_block|braced_block|list|map_reference|number|variable|STRING|compound|atom)
 
+operator ::= (UNQUOTED_ATOM|SYMBOLIC_ATOM)
+
 operation ::= (native_binary_operation|native_left_operation)
+
+//operation ::= basic_term{2}
 
 /*operation ::= (native_binary_operation|native_left_operation|
                 custom_binary_operation|custom_left_operation)*/
@@ -37,10 +41,12 @@ custom_binary_operation ::= basic_term atom term
 custom_left_operation ::= atom term
 
 
+
+
+
 atom ::= (
             UNQUOTED_ATOM|
             SYMBOLIC_ATOM|
-            CUT|
             QUOTED_ATOM
          )
 

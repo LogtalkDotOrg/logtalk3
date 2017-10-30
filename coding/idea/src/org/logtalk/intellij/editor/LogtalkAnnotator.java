@@ -24,20 +24,20 @@ public class LogtalkAnnotator implements Annotator {
         }
     }
 
-    private static void highlightTokens(PsiElement element, AnnotationHolder holder, LogtalkSyntaxHighlighter highlighter) {
-        TextAttributesKey[] keys = highlighter.getTokenHighlights(element);
-        for (TextAttributesKey key : keys) {
-            Annotation annotation = holder.createInfoAnnotation(element.getNode(), getMessage(element));
-            TextAttributes attributes = EditorColorsManager.getInstance().getGlobalScheme().getAttributes(key);
-            annotation.setEnforcedTextAttributes(attributes);
-        }
-    }
-
     private static boolean shouldAnnotate(PsiElement element) {
         return isKnownBinaryOperator(element) ||
                 isKnownLeftOperator(element) ||
                 isCompoundNameKeyword(element) ||
                 isAtomKeyword(element);
+    }
+
+    private static void highlightTokens(PsiElement element, AnnotationHolder holder, LogtalkSyntaxHighlighter highlighter) {
+        TextAttributesKey[] keys = highlighter.getTokenHighlights(element);
+        Annotation annotation = holder.createInfoAnnotation(element.getNode(), getMessage(element));
+        for (TextAttributesKey key : keys) {
+            TextAttributes attributes = EditorColorsManager.getInstance().getGlobalScheme().getAttributes(key);
+            annotation.setEnforcedTextAttributes(attributes);
+        }
     }
 
     private static String getMessage(PsiElement element) {

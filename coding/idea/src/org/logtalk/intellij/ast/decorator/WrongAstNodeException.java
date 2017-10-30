@@ -8,7 +8,7 @@ public class WrongAstNodeException extends RuntimeException {
     private final IElementType actual;
     private final String expected;
 
-    public WrongAstNodeException(IElementType actual, IElementType... expected) {
+    public WrongAstNodeException(IElementType actual, IElementType expected) {
         this(actual, expected.toString());
     }
 
