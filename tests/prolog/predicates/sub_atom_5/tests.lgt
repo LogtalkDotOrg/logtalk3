@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/09,
+		date is 2017/10/30,
 		comment is 'Unit tests for the ISO Prolog standard integer/1 built-in predicate.'
 	]).
 
@@ -160,5 +160,11 @@
 
 	succeeds(lgt_sub_atom_5_36) :-
 		forall({sub_atom('123', _, _, _, SA)}, {atom(SA)}).
+
+	throws(lgt_sub_atom_5_37, error(type_error(atom,2),_)) :-
+		{sub_atom(2, _, _, _, _)}.
+
+	throws(lgt_sub_atom_5_38, error(type_error(atom,2.2),_)) :-
+		{sub_atom(2.2, _, _, _, _)}.
 
 :- end_object.

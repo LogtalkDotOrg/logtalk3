@@ -52,6 +52,12 @@ Tools
 * FIXED: The documentation of the instantiation modes of the predicates
 `lgtunit::benchmark/3-4`.
 
+Tests
+-----
+
+* ADDED: Missing `sub_atom/5` predicate Prolog compliance tests for the
+expected error when the first argument is bound to a number.
+
 Examples
 --------
 
