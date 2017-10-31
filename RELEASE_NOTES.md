@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Compiler support for detecting calls to local static predicates with no
+matching clauses (aka trivial fails).
+
 * ADDED: Four alternative library paths files (splitting the core, tool,
 example, and contribution paths) for use when embedding or deploying
 applications where e.g. tools or example paths should not included.

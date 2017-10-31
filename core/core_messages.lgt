@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.27,
+		version is 1.28,
 		author is 'Paulo Moura',
-		date is 2017/09/30,
+		date is 2017/10/31,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -340,6 +340,10 @@
 
 	message_tokens(goal_is_always_false(File, Lines, Type, Entity, Goal)) -->
 		['Goal is always false: ~q'-[Goal], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(no_matching_clause_for_goal(File, Lines, Type, Entity, Goal)) -->
+		['No matching clause for goal: ~q'-[Goal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_object(File, Lines, Type, Entity, Object)) -->

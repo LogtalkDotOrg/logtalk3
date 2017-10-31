@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 12, 1, rc2)).
+'$lgt_version_data'(logtalk(3, 12, 1, rc3)).
 
 
 
@@ -12326,6 +12326,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, ExCtx, TPred0, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_check_for_trivial_fails'(Mode, Pred),
 	functor(TPred0, TFunctor, TArity),
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta),
 		% local user-defined meta-predicate
@@ -12524,6 +12525,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	true
 	).
+
+
+
+% check for trivial fails due to no matching local clause being available for a goal;
+% currently we only perform this check for local static predicates
+
+'$lgt_check_for_trivial_fails'(runtime, _).
+
+'$lgt_check_for_trivial_fails'(compile(aux), _) :-
+	!.
+
+'$lgt_check_for_trivial_fails'(compile(user), Call) :-
+	(	\+ '$lgt_pp_dynamic_'(Call),
+		\+ '$lgt_pp_def_'(Call),
+		\+ '$lgt_pp_def_'((Call :- _)) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(warning(general), core, no_matching_clause_for_goal(File, Lines, Type, Entity, Call))
+	;	true
+	).
+
 
 
 % unification
