@@ -12282,6 +12282,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _),
 	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, _, _, _) ->
+		'$lgt_check_for_trivial_fails'(Mode, Pred),
 		% convert the call to the original coinductive predicate into a call to the auxiliary
 		% predicate whose compiled normal and debug forms are already computed
 		functor(TCPred, TCFunctor, TCArity),
@@ -12307,6 +12308,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% not a recursive call
 	!,
 	(	'$lgt_pp_defines_predicate_'(Pred, _, ExCtx, TPred0, _, _) ->
+		'$lgt_check_for_trivial_fails'(Mode, Pred),
 		(	'$lgt_prolog_feature'(threads, supported) ->
 			TPred = with_mutex(Mutex, TPred0)
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
