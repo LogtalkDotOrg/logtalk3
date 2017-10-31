@@ -71,6 +71,8 @@ Examples
 * ADDED: A new example, `persistency` illustrating a very simple solution for
 persisting an object dynamic state across sessions.
 
+* UPDATED: The `errors` example to illustrate trivial fail warnings.
+
 * FIXED: Detection of the SWI-Prolog/YAP JPL library in the `java` example.
 
 Installers and installation scripts

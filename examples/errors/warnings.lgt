@@ -149,3 +149,15 @@
 	damn :- x == y.
 
 :- end_object.
+
+
+
+:- object(trivial_fails).
+
+	foo :-
+		bar(1).
+
+	bar([]).
+	bar([_| _]).
+
+:- end_object.

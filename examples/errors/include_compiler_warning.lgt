@@ -26,3 +26,9 @@ ghi :-
 
 mno :-
 	not_defined.
+
+bar :-
+	baz(a).
+
+baz([]).
+baz([_| _]).
