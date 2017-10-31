@@ -12281,8 +12281,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _),
-	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, _, _, _) ->
-		'$lgt_check_for_trivial_fails'(Mode, Pred),
+	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, TPred0, _, _) ->
+		'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 		% convert the call to the original coinductive predicate into a call to the auxiliary
 		% predicate whose compiled normal and debug forms are already computed
 		functor(TCPred, TCFunctor, TCArity),
@@ -12308,7 +12308,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% not a recursive call
 	!,
 	(	'$lgt_pp_defines_predicate_'(Pred, _, ExCtx, TPred0, _, _) ->
-		'$lgt_check_for_trivial_fails'(Mode, Pred),
+		'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 		(	'$lgt_prolog_feature'(threads, supported) ->
 			TPred = with_mutex(Mutex, TPred0)
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
@@ -12328,7 +12328,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, ExCtx, TPred0, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
-	'$lgt_check_for_trivial_fails'(Mode, Pred),
+	'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 	functor(TPred0, TFunctor, TArity),
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta),
 		% local user-defined meta-predicate
@@ -12533,15 +12533,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 % check for trivial fails due to no matching local clause being available for a goal;
 % currently we only perform this check for local static predicates
 
-'$lgt_check_for_trivial_fails'(runtime, _).
+'$lgt_check_for_trivial_fails'(runtime, _, _, _).
 
-'$lgt_check_for_trivial_fails'(compile(aux), _) :-
+'$lgt_check_for_trivial_fails'(compile(aux), _, _, _) :-
 	!.
 
-'$lgt_check_for_trivial_fails'(compile(user), Call) :-
-	(	\+ '$lgt_pp_dynamic_'(Call),
-		\+ '$lgt_pp_def_'(Call),
-		\+ '$lgt_pp_def_'((Call :- _)) ->
+'$lgt_check_for_trivial_fails'(compile(user), Call, TCall, Head) :-
+	(	Call \= Head,
+		\+ '$lgt_pp_dynamic_'(Call),
+		\+ '$lgt_pp_multifile_'(Call, _, _),
+		\+ '$lgt_pp_entity_term_'(sfact(TCall), _, _),
+		\+ '$lgt_pp_entity_term_'(dfact(TCall, _), _, _),
+		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(drule(TCall, _, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(dsrule(TCall, _, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(ddrule(TCall, _, _, _, _), _, _),
+		\+ '$lgt_pp_final_entity_term_'(TCall, _),
+		\+ '$lgt_pp_final_entity_term_'((TCall :- _), _),
+		\+ '$lgt_pp_entity_aux_clause_'(sfact(TCall)),
+		\+ '$lgt_pp_entity_aux_clause_'(srule(TCall, _, _)),
+		\+ '$lgt_pp_final_entity_aux_clause_'(TCall),
+		\+ '$lgt_pp_final_entity_aux_clause_'((TCall :- _)) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, no_matching_clause_for_goal(File, Lines, Type, Entity, Call))
