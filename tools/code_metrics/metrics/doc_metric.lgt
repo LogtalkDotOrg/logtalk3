@@ -23,9 +23,9 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2017/10/30,
+		date is 2017/10/31,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a percentage where a 100% score means that all expected documentation information is present.',
@@ -251,7 +251,11 @@
 
 	% predicate info/2 directive defaults
 
-	predicate_info_score(_Entity, _Predicate, 20).
+	predicate_info_score(_Entity, _/Arity, Score) :-
+		(	Arity =:= 0 ->
+			Score is 10
+		;	Score is 20
+		).
 
 	predicate_info_pair_score(comment(Comment), _, _, 10) :-
 		atom_length(Comment, Length), Length >= 10.
