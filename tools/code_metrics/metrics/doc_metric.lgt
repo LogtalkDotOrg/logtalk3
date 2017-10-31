@@ -23,7 +23,7 @@
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
 		date is 2017/10/31,
 		comment is 'Entity and entity predicates documentation score.',
@@ -220,7 +220,24 @@
 	entity_info_pair_score(comment(Comment), _, 10) :-
 		atom_length(Comment, Length), Length >= 10.
 	entity_info_pair_score(parnames(_), _, 10).
-	entity_info_pair_score(parameters(_), _, 10).
+	entity_info_pair_score(parameters(Parameters), _, Score) :-
+		parameters_with_descriptions(Parameters, 0, NumberOfParameters, 0, NumberOfDescriptions),
+		(	NumberOfDescriptions =:= 0 ->
+			% no parameter descriptions present
+			Score is 3
+		;	% parameter description present for at least one of the parameters
+			Ratio is NumberOfParameters / NumberOfDescriptions,
+			Score is 3 + 7 / Ratio
+		).
+		
+	parameters_with_descriptions([], NumberOfParameters, NumberOfParameters, NumberOfDescriptions, NumberOfDescriptions).
+	parameters_with_descriptions([_-Description| Parameters], NumberOfParameters0, NumberOfParameters, NumberOfDescriptions0, NumberOfDescriptions) :-
+		NumberOfParameters1 is NumberOfParameters0 + 1,
+		(	atom_length(Description, Length), Length >= 10 ->
+			NumberOfDescriptions1 is NumberOfDescriptions0 + 1
+		;	NumberOfDescriptions1 is NumberOfDescriptions0
+		),
+		parameters_with_descriptions(Parameters, NumberOfParameters1, NumberOfParameters, NumberOfDescriptions1, NumberOfDescriptions).
 
 	% predicate mode/2 directive defaults
 
