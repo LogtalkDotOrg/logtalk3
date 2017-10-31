@@ -260,6 +260,23 @@
 	predicate_info_pair_score(comment(Comment), _, _, 10) :-
 		atom_length(Comment, Length), Length >= 10.
 	predicate_info_pair_score(argnames(_), _, _, 10).
-	predicate_info_pair_score(arguments(_), _, _, 10).
+	predicate_info_pair_score(arguments(Arguments), _, _, Score) :-
+		arguments_with_descriptions(Arguments, 0, NumberOfArguments, 0, NumberOfDescriptions),
+		(	NumberOfDescriptions =:= 0 ->
+			% no argument descriptions present
+			Score is 3
+		;	% argument description present for at least one of the arguments
+			Ratio is NumberOfArguments / NumberOfDescriptions,
+			Score is 3 + 7 / Ratio
+		).
+		
+	arguments_with_descriptions([], NumberOfArguments, NumberOfArguments, NumberOfDescriptions, NumberOfDescriptions).
+	arguments_with_descriptions([_-Description| Arguments], NumberOfArguments0, NumberOfArguments, NumberOfDescriptions0, NumberOfDescriptions) :-
+		NumberOfArguments1 is NumberOfArguments0 + 1,
+		(	atom_length(Description, Length), Length >= 10 ->
+			NumberOfDescriptions1 is NumberOfDescriptions0 + 1
+		;	NumberOfDescriptions1 is NumberOfDescriptions0
+		),
+		arguments_with_descriptions(Arguments, NumberOfArguments1, NumberOfArguments, NumberOfDescriptions1, NumberOfDescriptions).
 
 :- end_object.
