@@ -168,6 +168,14 @@
 		argnames is ['Term', 'Closure']
 	]).
 
+	:- public(or_else_call/2).
+	:- meta_predicate(or_else_call(*, 0)).
+	:- mode(or_else_call(--term, +callable), zero_or_one).
+	:- info(or_else_call/2, [
+		comment is 'Returns the optional reference term if not empty or calls a goal if the optional is empty.',
+		argnames is ['Term', 'Goal']
+	]).
+
 	is_empty :-
 		parameter(1, empty).
 
@@ -233,6 +241,13 @@
 		(	Reference == empty ->
 			call(Closure, Term),
 			!
+		;	Reference = the(Term)
+		).
+
+	or_else_call(Term, Goal) :-
+		parameter(1, Reference),
+		(	Reference == empty ->
+			once(Goal)
 		;	Reference = the(Term)
 		).
 

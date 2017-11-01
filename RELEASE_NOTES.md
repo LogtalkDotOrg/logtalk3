@@ -45,12 +45,14 @@ Library
 
 * ADDED: Predicate `java::is_object/1` to the library.
 
-* FIXED: Ensure the `atom::split/3` predicate always throws an error when the
-first argument is not bound to an atom (assuming a compliant implementation of
-the `sub_atom/5` predicate).
+* ADDED: Meta-predicate `optional(Reference)::or_else_call/2`.
 
 * FIXED: Meta-predicate directive for the `optional(Reference)::or_else_get/2`
 predicate.
+
+* FIXED: Ensure the `atom::split/3` predicate always throws an error when the
+first argument is not bound to an atom (assuming a compliant implementation of
+the `sub_atom/5` predicate).
 
 Tools
 -----
