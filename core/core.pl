@@ -12531,7 +12531,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % check for trivial fails due to no matching local clause being available for a goal;
-% currently we only perform this check for local static predicates
+% this check is only performed for local static predicates as dynamic or multifile
+% predicates can get new clauses at runtime
 
 '$lgt_check_for_trivial_fails'(runtime, _, _, _).
 
@@ -12540,20 +12541,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_trivial_fails'(compile(user), Call, TCall, Head) :-
 	(	Call \= Head,
+		% not a recursive call which can originate from a predicate with a single clause
 		\+ '$lgt_pp_dynamic_'(Call),
 		\+ '$lgt_pp_multifile_'(Call, _, _),
+		% not a dynmaic or multifile predicate
 		\+ '$lgt_pp_entity_term_'(fact(TCall), _, _),
 		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
 		\+ '$lgt_pp_entity_term_'(dfact(TCall, _), _, _),
 		\+ '$lgt_pp_entity_term_'(dsrule(TCall, _, _, _), _, _),
+		% not a yet to be compiled user-defined fact or rule
 		\+ '$lgt_pp_final_entity_term_'(TCall, _),
 		\+ '$lgt_pp_final_entity_term_'((TCall :- _), _),
+		% not an already compiled user-defined fact or rule
 		\+ '$lgt_pp_entity_aux_clause_'(fact(TCall)),
 		\+ '$lgt_pp_entity_aux_clause_'(srule(TCall, _, _)),
 		\+ '$lgt_pp_entity_aux_clause_'(dfact(TCall, _)),
 		\+ '$lgt_pp_entity_aux_clause_'(dsrule(TCall, _, _, _)),
+		% not a yet to be compiled auxiliary fact or rule
 		\+ '$lgt_pp_final_entity_aux_clause_'(TCall),
 		\+ '$lgt_pp_final_entity_aux_clause_'((TCall :- _)) ->
+		% not an already compiled auxiliary fact or rule
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, no_matching_clause_for_goal(File, Lines, Type, Entity, Call))
