@@ -49,6 +49,9 @@ Library
 first argument is not bound to an atom (assuming a compliant implementation of
 the `sub_atom/5` predicate).
 
+* FIXED: Meta-predicate directive for the `optional(Reference)::or_else_get/2`
+predicate.
+
 Tools
 -----
 
