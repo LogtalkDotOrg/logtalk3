@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 12, 1, rc3)).
+'$lgt_version_data'(logtalk(3, 12, 1, rc4)).
 
 
 
@@ -10210,7 +10210,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_clause_number'(PI, rule, File, BeginLine, N).
 
-'$lgt_compile_clause'(Fact, Entity, sfact(TFact), dfact(TFact,DHead), Ctx) :-
+'$lgt_compile_clause'(Fact, Entity, fact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
@@ -12542,16 +12542,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Call \= Head,
 		\+ '$lgt_pp_dynamic_'(Call),
 		\+ '$lgt_pp_multifile_'(Call, _, _),
-		\+ '$lgt_pp_entity_term_'(sfact(TCall), _, _),
-		\+ '$lgt_pp_entity_term_'(dfact(TCall, _), _, _),
+		\+ '$lgt_pp_entity_term_'(fact(TCall), _, _),
 		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
-		\+ '$lgt_pp_entity_term_'(drule(TCall, _, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(dfact(TCall, _), _, _),
 		\+ '$lgt_pp_entity_term_'(dsrule(TCall, _, _, _), _, _),
-		\+ '$lgt_pp_entity_term_'(ddrule(TCall, _, _, _, _), _, _),
 		\+ '$lgt_pp_final_entity_term_'(TCall, _),
 		\+ '$lgt_pp_final_entity_term_'((TCall :- _), _),
-		\+ '$lgt_pp_entity_aux_clause_'(sfact(TCall)),
+		\+ '$lgt_pp_entity_aux_clause_'(fact(TCall)),
 		\+ '$lgt_pp_entity_aux_clause_'(srule(TCall, _, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(dfact(TCall, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(dsrule(TCall, _, _, _)),
 		\+ '$lgt_pp_final_entity_aux_clause_'(TCall),
 		\+ '$lgt_pp_final_entity_aux_clause_'((TCall :- _)) ->
 		'$lgt_increment_compiling_warnings_counter',
@@ -16716,10 +16716,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(dgoal(Body,Ctx), _, DBody) :-
 	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
-% static predicate fact
-'$lgt_compile_predicate_calls'(sfact(TFact), _, TFact).
+% predicate fact
+'$lgt_compile_predicate_calls'(fact(TFact), _, TFact).
 
-% dynamic predicate fact
+% debug version of a predicate fact
 '$lgt_compile_predicate_calls'(dfact(TFact,DHead), _, (TFact:-DHead)).
 
 % supported Prolog meta-directives (specified in the adapter files) 
