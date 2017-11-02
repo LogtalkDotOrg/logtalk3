@@ -88,7 +88,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/11/01,
+		date is 2017/11/02,
 		comment is 'Optional reference predicates. Require passing an optional reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
@@ -172,7 +172,7 @@
 	:- meta_predicate(or_else_call(*, 0)).
 	:- mode(or_else_call(--term, +callable), zero_or_one).
 	:- info(or_else_call/2, [
-		comment is 'Returns the optional reference term if not empty or calls a goal if the optional is empty.',
+		comment is 'Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty.',
 		argnames is ['Term', 'Goal']
 	]).
 
