@@ -157,6 +157,9 @@
 :- end_object.
 
 
+% avoid a warning with the next entity definitions
+:- set_logtalk_flag(unknown_entities, silent).
+
 
 :- object(class,
 	instantiates(class),
@@ -165,12 +168,10 @@
 :- end_object.
 
 
-
 :- object(object,
 	instantiates(class)).
 
 :- end_object.
-
 
 
 :- object(abstract_class,
