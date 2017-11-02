@@ -40,6 +40,11 @@ applications where e.g. tools or example paths should not included.
 * FIXED: A harmless performance bug where compilation of auxiliary predicates
 would result in duplicated entity predicate definition table entries.
 
+Documentation
+-------------
+
+* ADDED: User manual section describing the compiler linter checks.
+
 Library
 -------
 
@@ -52,7 +57,7 @@ predicate.
 
 * FIXED: Ensure the `atom::split/3` predicate always throws an error when the
 first argument is not bound to an atom (assuming a compliant implementation of
-the `sub_atom/5` predicate).
+the standard `sub_atom/5` predicate).
 
 Tools
 -----

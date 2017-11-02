@@ -155,7 +155,7 @@ Both predicates expect a source file name or a list of source file names as an a
 If you have more than a few source files then you may want to use a loader helper file containing the calls to the <code>logtalk_load/1-2</code> predicates. Consulting or compiling the loader file will then compile and load all your Logtalk entities into memory (see below for details).
 </p>
 <p>
-With most Prolog back-end compilers, you can use the shorthands <code>{File}</code> for <code>logtalk_load(File)</code> and <code>{File1, File2, ...}</code> for <code>logtalk_load([File1, File2, ...])</code>. The use these shorthands should be restricted to the Logtalk/Prolog top-level interpreter as their are not part of the language specification and may be commented out in case of conflicts with backend Prolog compiler features.
+With most Prolog back-end compilers, you can use the shorthands <code>{File}</code> for <code>logtalk_load(File)</code> and <code>{File1, File2, ...}</code> for <code>logtalk_load([File1, File2, ...])</code>. The use these shorthands should be restricted to the Logtalk/Prolog top-level interpreter as they are not part of the language specification and may be commented out in case of conflicts with backend Prolog compiler features.
 </p>
 <p>
 The built-in predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_make_0.html"><code>logtalk_make/0</code></a> can be used to reload all modified source files. Files are also reloaded when the compilation mode changes. For example, assume that you have loaded your application files and found a bug. You can easily recompile the files in debug mode by using the queries:
@@ -241,6 +241,12 @@ The best way to take advantage of this feature is to load at startup a source fi
 </p>
 <p>
 The library notation provides functionality inspired by the <code>file_search_path/2</code> mechanism introduced by Quintus Prolog and later adopted by some other Prolog compilers.
+</p>
+
+<h3 id="programming_linter">Compiler linter</h3>
+
+<p>
+The compiler includes a linter that checks for a wide range of possible problems in source files. Notably, the compiler checks for unknown entities, unknown predicates, undefined predicates (i.e. predicates that are declared but not defined), missing directives (including missing <code>dynamic/1</code> and <code>meta_predicate/1</code> directives), redefined built-in predicates, calls to non-portable predicates, singleton variables, tautology and falsehood goals (i.e. goals that are can be replaced by <code>true</code> or <code>fail</code>), and trivial fails (i.e. calls to predicates with no match clauses). Some of the linter warnings are controlled by compiler flags. See the next section for details.
 </p>
 
 <h3 id="programming_flags">Compiler flags</h3>
@@ -830,7 +836,7 @@ true.
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 27, 2017</span>
+		<span>Last updated on: November 2, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
