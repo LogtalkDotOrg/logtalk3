@@ -27,8 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* NEW: Compiler support for detecting calls to local static predicates with no
-matching clauses (aka trivial fails).
+* NEW: Compiler support for detecting calls to local static predicates with
+no matching clauses (aka trivial fails).
 
 * ADDED: Four alternative library paths files (splitting the core, tool,
 example, and contribution paths) for use when embedding or deploying
@@ -55,6 +55,9 @@ with the `optional(_)::get/1` predicate by throwing the same exception when
 the optional is empty and a term cannot be computed.
 
 * ADDED: Predicate `java::is_object/1` to the library.
+
+* ADDED: Experimental `maybe` library object providing types and predicates
+for type-checking and handling optionals.
 
 * ADDED: Meta-predicate `optional(_)::or_else_call/2`.
 
