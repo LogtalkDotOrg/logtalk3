@@ -88,8 +88,8 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/11/02,
-		comment is 'Optional reference predicates. Require passing an optional reference constructed using the "optional" object as a parameter.',
+		date is 2017/11/03,
+		comment is 'Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
 	]).
@@ -97,13 +97,13 @@
 	:- public(is_empty/0).
 	:- mode(is_empty, zero_or_one).
 	:- info(is_empty/0, [
-		comment is 'True if the optional reference is empty.'
+		comment is 'True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.'
 	]).
 
 	:- public(is_present/0).
 	:- mode(is_present, zero_or_one).
 	:- info(is_present/0, [
-		comment is 'True if the optional reference holds a term.'
+		comment is 'True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.'
 	]).
 
 	:- public(if_empty/1).
@@ -172,7 +172,7 @@
 	:- meta_predicate(or_else_call(*, 0)).
 	:- mode(or_else_call(--term, +callable), zero_or_one).
 	:- info(or_else_call/2, [
-		comment is 'Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty.',
+		comment is 'Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Often called from within all solutions predicates as an alternative to the get/1 predicate by using fail/0 as the goal to skip empty optionals.',
 		argnames is ['Term', 'Goal']
 	]).
 

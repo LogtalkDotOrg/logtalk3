@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">optional(Reference)</h1>
       <blockquote>
-        <p class="comment">Optional reference predicates. Require passing an optional reference constructed using the "optional" object as a parameter.</p>
+        <p class="comment">Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/11/2</code>
+            <code>2017/11/3</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="is_empty/0" class="code">is_empty/0</h3>
           <blockquote>
-            <p class="comment">True if the optional reference is empty.</p>
+            <p class="comment">True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -61,7 +61,7 @@
         <div class="section">
           <h3 id="is_present/0" class="code">is_present/0</h3>
           <blockquote>
-            <p class="comment">True if the optional reference holds a term.</p>
+            <p class="comment">True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -261,7 +261,7 @@
         <div class="section">
           <h3 id="or_else_call/2" class="code">or_else_call/2</h3>
           <blockquote>
-            <p class="comment">Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty.</p>
+            <p class="comment">Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Often called from within all solutions predicates as an alternative to the get/1 predicate by using fail/0 as the goal to skip empty optionals.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
