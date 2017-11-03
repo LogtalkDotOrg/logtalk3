@@ -162,7 +162,7 @@
 
 	:- public(or_else_get/2).
 	:- meta_predicate(or_else_get(*, 1)).
-	:- mode(or_else_get(--term, +callable), one).
+	:- mode(or_else_get(--term, +callable), zero_or_one).
 	:- info(or_else_get/2, [
 		comment is 'Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty.',
 		argnames is ['Term', 'Closure']

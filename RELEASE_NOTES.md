@@ -45,6 +45,8 @@ Documentation
 
 * ADDED: User manual section describing the compiler linter checks.
 
+* IMPROVED: API documentation of the `optional` library.
+
 Library
 -------
 
