@@ -50,11 +50,15 @@ Documentation
 Library
 -------
 
+* CHANGED: The `optional(_)::or_else_get/2` meta-predicate to be consistent
+with the `optional(_)::get/1` predicate by throwing the same exception when
+the optional is empty and a term cannot be computed.
+
 * ADDED: Predicate `java::is_object/1` to the library.
 
-* ADDED: Meta-predicate `optional(Reference)::or_else_call/2`.
+* ADDED: Meta-predicate `optional(_)::or_else_call/2`.
 
-* FIXED: Meta-predicate directive for the `optional(Reference)::or_else_get/2`
+* FIXED: Meta-predicate directive for the `optional(_)::or_else_get/2`
 predicate.
 
 * FIXED: Ensure the `atom::split/3` predicate always throws an error when the

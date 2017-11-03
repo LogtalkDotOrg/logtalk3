@@ -23,7 +23,7 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.1</code>
+            <code>1.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
@@ -197,7 +197,7 @@
         <div class="section">
           <h3 id="get/1" class="code">get/1</h3>
           <blockquote>
-            <p class="comment">Returns the optional reference term if not empty. Throws a resource error otherwise.</p>
+            <p class="comment">Returns the optional reference term if not empty. Throws an error otherwise.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -212,6 +212,8 @@
             <dd class="value">
               <code>get(--term) &ndash; one</code>
             </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Optional is empty: <code>existence_error(optional_term,Reference)</code></dd>
           </dl>
         </div>
         <div class="section">
@@ -237,7 +239,7 @@
         <div class="section">
           <h3 id="or_else_get/2" class="code">or_else_get/2</h3>
           <blockquote>
-            <p class="comment">Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty.</p>
+            <p class="comment">Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -254,8 +256,10 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>or_else_get(--term,+callable) &ndash; zero_or_one</code>
+              <code>or_else_get(--term,+callable) &ndash; one</code>
             </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Optional is empty and a term cannot be computed: <code>existence_error(optional_term,Reference)</code></dd>
           </dl>
         </div>
         <div class="section">

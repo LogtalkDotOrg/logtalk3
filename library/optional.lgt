@@ -86,7 +86,7 @@
 :- object(optional(_Reference)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2017/11/03,
 		comment is 'Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.',
@@ -149,8 +149,9 @@
 	:- public(get/1).
 	:- mode(get(--term), one).
 	:- info(get/1, [
-		comment is 'Returns the optional reference term if not empty. Throws a resource error otherwise.',
-		argnames is ['Term']
+		comment is 'Returns the optional reference term if not empty. Throws an error otherwise.',
+		argnames is ['Term'],
+		exceptions is ['Optional is empty' - existence_error(optional_term,'Reference')]
 	]).
 
 	:- public(or_else/2).
@@ -162,10 +163,11 @@
 
 	:- public(or_else_get/2).
 	:- meta_predicate(or_else_get(*, 1)).
-	:- mode(or_else_get(--term, +callable), zero_or_one).
+	:- mode(or_else_get(--term, +callable), one).
 	:- info(or_else_get/2, [
-		comment is 'Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty.',
-		argnames is ['Term', 'Closure']
+		comment is 'Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.',
+		argnames is ['Term', 'Closure'],
+		exceptions is ['Optional is empty and a term cannot be computed' - existence_error(optional_term,'Reference')]
 	]).
 
 	:- public(or_else_call/2).
@@ -239,8 +241,11 @@
 	or_else_get(Term, Closure) :-
 		parameter(1, Reference),
 		(	Reference == empty ->
-			call(Closure, Term),
-			!
+			context(Context),
+			(	catch(call(Closure, Term), _, throw(error(existence_error(optional_term,Reference), Context))) ->
+				true
+			;	throw(error(existence_error(optional_term,Reference), Context))
+			)
 		;	Reference = the(Term)
 		).
 
