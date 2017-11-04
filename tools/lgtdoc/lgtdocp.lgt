@@ -21,16 +21,16 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 3.0,
+		version is 3.1,
 		author is 'Paulo Moura',
-		date is 2016/02/19,
+		date is 2017/11/04,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
 			'xml_spec(Specification) option' - 'XML documenting files specification format. Possible option values are "dtd" (DTD specification; default) and "xsd" (XML Schema specification).',
 			'xml_spec_reference(Reference) option' - 'Reference to the XML specification file in XML documenting files. Possible values are "local" (default; DTD/XSD file in the same folder as the XML files), "web" (logtalk.org website DTD/XSD file), and "standalone" (no reference to specification files).',
-			'entity_xsl_file(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
-			'index_xsl_file(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
+			'entity_xsl_file(File) option' - 'XSLT file to use with generated XML documenting files. Default is "logtalk_entity_to_xml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
+			'index_xsl_file(File) option' - 'XSLT file to use with generated XML documenting files. Default is "logtalk_index_to_xml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
 			'xml_docs_directory(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.',
 			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
 			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',

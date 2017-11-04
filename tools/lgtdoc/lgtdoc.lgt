@@ -22,10 +22,10 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.6,
+		version is 4.7,
 		author is 'Paulo Moura',
-		date is 2017/08/10,
-		comment is 'Documenting tool. Generates XML documenting files for entities and for library, directory, entity, and predicate indexes.'
+		date is 2017/11/04,
+		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
 	:- private(option_/2).
@@ -70,10 +70,11 @@
 
 	rlibrary(Library, UserOptions) :-
 		reset,
-		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
+		os::change_directory(TopPath),
+		merge_options(UserOptions, Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options),
@@ -98,10 +99,11 @@
 
 	library(Library, UserOptions) :-
 		reset,
-		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
+		os::change_directory(Path),
+		merge_options(UserOptions, Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
@@ -113,10 +115,11 @@
 
 	rdirectory(Directory, UserOptions) :-
 		reset,
-		merge_options(UserOptions, Options),
 		os::absolute_file_name(Directory, Path),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
+		os::change_directory(Path),
+		merge_options(UserOptions, Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_rdirectory(Path, Options),
@@ -146,10 +149,11 @@
 
 	directory(Directory, UserOptions) :-
 		reset,
-		merge_options(UserOptions, Options),
 		os::absolute_file_name(Directory, Path),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
+		os::change_directory(Path),
+		merge_options(UserOptions, Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
@@ -179,9 +183,10 @@
 	file(Source, UserOptions) :-
 		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
+		os::working_directory(Current),
+		os::change_directory(Directory),
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
-		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		process(Basename, Directory, Options, StreamOptions),
@@ -354,7 +359,7 @@
 		),
 		memberchk(xml_spec(XMLSpec), Options),
 		memberchk(entity_xsl_file(XSL), Options),
-		once(kind_ref_doctype_xsd(logtalk, XMLSRef, DocTypeURL, XSDURL)),
+		once(kind_ref_doctype_xsd(entity, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream).
 
 	write_xml_header(standalone, Encoding, _, DocType-_, XSL, _, Stream) :-
@@ -1254,9 +1259,9 @@
 		write_xml_close_tag(Stream, logtalk_index),
 		close(Stream).
 
-	kind_ref_doctype_xsd(logtalk, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(logtalk, web, logtalk_entity-'http://logtalk.org/xml/4.1/logtalk_entity.dtd', 'http://logtalk.org/xml/4.1/logtalk_entity.xsd').
-	kind_ref_doctype_xsd(logtalk, standalone, logtalk_entity-none, none).
+	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'http://logtalk.org/xml/4.1/logtalk_entity.dtd', 'http://logtalk.org/xml/4.1/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, web, logtalk_index-'http://logtalk.org/xml/4.1/logtalk_index.dtd', 'http://logtalk.org/xml/4.1/logtalk_index.xsd').
@@ -1361,8 +1366,8 @@
 		(member(xml_docs_directory(Directory0), UserOptions) -> true; option(xml_docs_directory, Directory0)),
 		(member(xml_spec_reference(XMLSRef), UserOptions) -> true; option(xml_spec_reference, XMLSRef)),
 		(member(xml_spec(XMLSpec), UserOptions) -> true; option(xml_spec, XMLSpec)),
-		(member(entity_xsl_file(EntityXSL0), UserOptions) -> true; option(entity_xsl_file, EntityXSL0)),
-		(member(index_xsl_file(IndexXSL0), UserOptions) -> true; option(index_xsl_file, IndexXSL0)),
+		(member(entity_xsl_file(EntityXSL), UserOptions) -> true; option(entity_xsl_file, EntityXSL)),
+		(member(index_xsl_file(IndexXSL), UserOptions) -> true; option(index_xsl_file, IndexXSL)),
 		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
 		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
 		% by default, don't omit any path prefixes:
@@ -1374,7 +1379,6 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
 		normalize_directory_paths([Directory0| Prefixes0], [Directory| Prefixes]),
-		normalize_file_paths([EntityXSL0, IndexXSL0], [EntityXSL, IndexXSL]),
 		normalize_file_paths(ExcludedFiles0, ExcludedFiles),
 		normalize_directory_paths(ExcludedPaths0, ExcludedPaths),
 		Options = [
