@@ -71,6 +71,9 @@ the standard `sub_atom/5` predicate).
 Tools
 -----
 
+* CHANGED: Default value of the `lgtdoc` tool option `omit_path_prefixes/1` to
+omit the home directory. 
+
 * ADDED: User-customizable documentation metric to the `code_metrics` tool.
 
 * UPDATED: The `help` tool for the recently added `context/1` built-in method.

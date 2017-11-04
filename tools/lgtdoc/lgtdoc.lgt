@@ -22,7 +22,7 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.7,
+		version is 4.8,
 		author is 'Paulo Moura',
 		date is 2017/11/04,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
@@ -1308,7 +1308,11 @@
 	default_option(xml_docs_directory, './xml_docs/').
 	default_option(bom, true).
 	default_option(encoding, 'UTF-8').
-	default_option(omit_path_prefixes, []).
+	default_option(omit_path_prefixes, Prefixes) :-
+		(	logtalk::expand_library_path(home, Home) ->
+			Prefixes = [Home]
+		;	Prefixes = []
+		).
 	default_option(exclude_files, []).
 	default_option(exclude_paths, []).
 	default_option(exclude_entities, []).

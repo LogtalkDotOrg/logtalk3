@@ -21,7 +21,7 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 3.1,
+		version is 3.2,
 		author is 'Paulo Moura',
 		date is 2017/11/04,
 		comment is 'Documenting tool protocol.',
@@ -34,7 +34,7 @@
 			'xml_docs_directory(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.',
 			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
 			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
-			'omit_path_prefixes(Prefixes) option' - 'List of path prefixes (atoms) to omit when outputting directories.',
+			'omit_path_prefixes(Prefixes) option' - 'List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.',
 			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
 			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
 			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.',
