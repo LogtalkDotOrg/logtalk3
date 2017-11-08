@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.12.1 - November ??, 2017
-==========================
+3.13.0 - November 8, 2017
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -118,6 +118,9 @@ IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
 * UPDATED: Logtalk support installation instructions for the Atom text editor.
+
+* UPDATED: Logtalk support installation instructions for the Visual Studio Code
+text editor.
 
 
 3.12.0 - October 10, 2017
