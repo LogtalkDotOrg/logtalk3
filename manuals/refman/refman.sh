@@ -6,7 +6,7 @@
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on June 28, 2017
+##   Last updated on November 9, 2017
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -152,6 +152,14 @@ eval $xslt_proc -o methods/once_1.section refman.xsl methods/once_1.html
 eval $xslt_proc -o methods/not_1.section refman.xsl methods/not_1.html
 eval $xslt_proc -o methods/catch_3.section refman.xsl methods/catch_3.html
 eval $xslt_proc -o methods/throw_1.section refman.xsl methods/throw_1.html
+eval $xslt_proc -o methods/instantiation_error_0.section refman.xsl methods/instantiation_error_0.html
+eval $xslt_proc -o methods/type_error_2.section refman.xsl methods/type_error_2.html
+eval $xslt_proc -o methods/domain_error_2.section refman.xsl methods/domain_error_2.html
+eval $xslt_proc -o methods/existence_error_2.section refman.xsl methods/existence_error_2.html
+eval $xslt_proc -o methods/permission_error_3.section refman.xsl methods/permission_error_3.html
+eval $xslt_proc -o methods/representation_error_1.section refman.xsl methods/representation_error_1.html
+eval $xslt_proc -o methods/evaluation_error_1.section refman.xsl methods/evaluation_error_1.html
+eval $xslt_proc -o methods/resource_error_1.section refman.xsl methods/resource_error_1.html
 eval $xslt_proc -o methods/bagof_3.section refman.xsl methods/bagof_3.html
 eval $xslt_proc -o methods/findall_3.section refman.xsl methods/findall_3.html
 eval $xslt_proc -o methods/findall_4.section refman.xsl methods/findall_4.html
@@ -301,6 +309,14 @@ cat -s \
 	methods/not_1.section \
 	methods/catch_3.section \
 	methods/throw_1.section \
+	methods/instantiation_error_0.section \
+	methods/type_error_2.section \
+	methods/domain_error_2.section \
+	methods/existence_error_2.section \
+	methods/permission_error_3.section \
+	methods/representation_error_1.section \
+	methods/evaluation_error_1.section \
+	methods/resource_error_1.section \
 	methods/bagof_3.section \
 	methods/findall_3.section \
 	methods/findall_4.section \

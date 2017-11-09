@@ -10661,6 +10661,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx).
 
+% error handling and throwing predicates
+
 '$lgt_compile_body'(catch(Goal, Catcher, Recovery), catch(TGoal, Catcher, TRecovery), '$lgt_debug'(goal(catch(Goal, Catcher, Recovery), catch(DGoal, Catcher, DRecovery)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -10670,6 +10672,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(throw(Error), throw(Error), '$lgt_debug'(goal(throw(Error), throw(Error)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+'$lgt_compile_body'(instantiation_error, TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(instantiation_error, TPred, DPred, Ctx).
+
+'$lgt_compile_body'(type_error(Type,Culprit), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(type_error(Type,Culprit), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(domain_error(Domain,Culprit), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(domain_error(Domain,Culprit), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(existence_error(Thing,Culprit), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(existence_error(Thing,Culprit), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(permission_error(Operation,Permission,Culprit), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(permission_error(Operation,Permission,Culprit), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(representation_error(Flag), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(representation_error(Flag), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(evaluation_error(Error), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(evaluation_error(Error), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(resource_error(Resource), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(resource_error(Resource), TPred, DPred, Ctx).
 
 % lambda expressions support predicates
 
@@ -12461,6 +12495,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Goal = (Goal0, true)
 	;	Goal = Goal0
 	).
+
+
+
+% '$lgt_compile_error_predicate'(+compilation_context, -compound)
+%
+% compiles a call to one of the built-in error predicates;
+% these predicates are shorthands to context/1 + throw/1
+
+'$lgt_compile_error_predicate'(Exception, TPred, DPred, Ctx) :-
+	'$lgt_comp_ctx_head'(Ctx, Head0),
+	(	Head0 = _::Head ->
+		true
+	;	Head0 = ':'(_,Head) ->
+		true
+	;	Head0 = Head
+	),
+	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
+	TPred = throw(error(Exception, logtalk(Head, ExCtx))),
+	DPred = '$lgt_debug'(goal(Exception, TPred), ExCtx).
 
 
 
@@ -17854,6 +17907,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 % exception handling methods
 '$lgt_built_in_method_spec'(catch(_,_,_), p, catch(0, *, 0), 1).
 '$lgt_built_in_method_spec'(throw(_), p, no, 1).
+% error predicates
+'$lgt_built_in_method_spec'(instantiation_error, p, no, 1).
+'$lgt_built_in_method_spec'(type_error(_,_), p, no, 1).
+'$lgt_built_in_method_spec'(domain_error(_,_), p, no, 1).
+'$lgt_built_in_method_spec'(existence_error(_,_), p, no, 1).
+'$lgt_built_in_method_spec'(permission_error(_,_,_), p, no, 1).
+'$lgt_built_in_method_spec'(representation_error(_), p, no, 1).
+'$lgt_built_in_method_spec'(evaluation_error(_), p, no, 1).
+'$lgt_built_in_method_spec'(resource_error(_), p, no, 1).
 % execution context methods
 '$lgt_built_in_method_spec'(context(_), p, no, 1).
 '$lgt_built_in_method_spec'(parameter(_,_), p, no, 1).

@@ -24,7 +24,30 @@ RELEASE NOTES
 3.14.0 - December ??, 2017
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
 
+* NEW: Convenience error throwing built-in methods `instantiation_error/0`,
+`type_error/2`, `domain_error/2`, `existence_error/2`, `permission_error/3`,
+`representation_error/1`, `evaluation_error/1`, and `resource_error/1`. These
+methods throw standard `error/2` exception terms and are equivalent to a
+sequence of `context/1` and `throw/1` method calls.
+
+Documentation
+-------------
+
+* ADDED: User and Reference manual sections on the new error throwing built-in
+methods.
+
+Tools
+-----
+
+* UPDATED: The `help` tool for the new error throwing built-in methods.
+
+Tests
+-----
+
+* ADDED: Unit tests for the new error throwing built-in methods.
 
 
 3.13.0 - November 8, 2017

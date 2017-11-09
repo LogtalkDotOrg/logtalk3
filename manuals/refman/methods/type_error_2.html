@@ -27,7 +27,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk built-in method: throw/1</title>
+	<title>Logtalk built-in method: type_error/2</title>
 	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
 </head>
@@ -35,31 +35,29 @@
 <body>
 
 <div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Built-in method: throw/1</div>
+<div class="top-right">Built-in method: type_error/2</div>
 <div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; throw/1</div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; type_error/2</div>
 
-<h2 id="methods_throw_1" class="codenp">throw/1</h2>
+<h2 id="methods_type_error_2" class="codenp">type_error/2</h2>
 
 <h4>Description</h4>
 
-<pre>throw(Exception)</pre>
+<pre>type_error(Type, Culprit)</pre>
+
 <p>
-Throws an exception. This built-in predicate is declared as a private method and thus cannot be used as a message to an object.
+Throws an <code>error(type_error(Type,Culprit), logtalk(Head,Context))</code> exception term where <code>Head</code> is the head of the clause from where this predicate is called and <code>Context</code> is the execution context of the call. This built-in predicate is declared as a private method and thus cannot be used as a message to an object.
 </p>
 
 <h4>Template and modes</h4>
 
-<pre>throw(+nonvar)</pre>
+<pre>type_error(+nonvar,+term)</pre>
 
 <h4>Errors</h4>
 
 <dl>
-	<dt>Exception is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>Exception does not unify with the second argument of any call of <a href="catch_3.html"><code>catch/3</code></a>:</dt>
-		<dd><code>system_error</code></dd>
+	<dt><code>(none)</code></dt>
 </dl>
 
 <h4>Examples</h4>
@@ -71,18 +69,18 @@ Throws an exception. This built-in predicate is declared as a private method and
 <h4>See also</h4>
 
 <p>
-<code><a href="catch_3.html">catch/3</a></code>, <code><a href="context_1.html">context/1</a></code>
+<code><a href="catch_3.html">catch/3</a></code>, <code><a href="throw_1.html">throw/1</a></code>, <code><a href="context_1.html">context/1</a></code>
 <br/>
-<code><a href="instantiation_error_0.html">instantiation_error/0</a></code>, <code><a href="type_error_2.html">type_error/2</a></code>, <code><a href="domain_error_2.html">domain_error/2</a></code>, <code><a href="existence_error_2.html">existence_error/2</a></code>, <code><a href="permission_error_3.html">permission_error/3</a></code>, <code><a href="representation_error_1.html">representation_error/1</a></code>, <code><a href="evaluation_error_1.html">evaluation_error/1</a></code>, <code><a href="resource_error_1.html">resource_error/1</a></code> 
+<code><a href="instantiation_error_0.html">instantiation_error/0</a></code>, <code><a href="domain_error_2.html">domain_error/2</a></code>, <code><a href="existence_error_2.html">existence_error/2</a></code>, <code><a href="permission_error_3.html">permission_error/3</a></code>, <code><a href="representation_error_1.html">representation_error/1</a></code>, <code><a href="evaluation_error_1.html">evaluation_error/1</a></code>, <code><a href="resource_error_1.html">resource_error/1</a></code>
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 9, 2015</span>
+		<span>Last updated on: November 9, 2017</span>
 	</div>
 	<div class="navbottom">
-		<span><a href="catch_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>
+		<span><a href="instantiation_error_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="domain_error_2.html">next</a></span><br/>
 		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
 	</div>
 </div>

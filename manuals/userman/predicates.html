@@ -742,6 +742,12 @@ When type-checking predicate arguments, it is often useful to include the predic
     % arguments are fine; go ahead
     ... .</pre>
 
+<h3 id="predicates_errors">Error handling and throwing methods</h3>
+
+<p>
+Besides the <a title="Consult reference manual" href="../refman/methods/catch_3.html"><code>catch/3</code></a> and <a title="Consult reference manual" href="../refman/methods/throw_1.html"><code>throw/1</code></a> methods inherited from Prolog, Logtalk also provides a set of convenience methods to throw standard <code>error/2</code> exception terms: <a title="Consult reference manual" href="../refman/methods/instantiation_error_0.html"><code>instantiation_error/0</code></a>, <a title="Consult reference manual" href="../refman/methods/type_error_2.html"><code>type_error/2</code></a>, <a title="Consult reference manual" href="../refman/methods/domain_error_2.html"><code>domain_error/2</code></a>, <a title="Consult reference manual" href="../refman/methods/existence_error_2.html"><code>existence_error/2</code></a>, <a title="Consult reference manual" href="../refman/methods/permission_error_3.html"><code>permission_error/3</code></a>, <a title="Consult reference manual" href="../refman/methods/representation_error_1.html"><code>representation_error/1</code></a>, <a title="Consult reference manual" href="../refman/methods/evaluation_error_1.html"><code>evaluation_error/1</code></a>, and <a title="Consult reference manual" href="../refman/methods/resource_error_1.html"><code>resource_error/1</code></a>.
+</p>
+
 <h3 id="predicates_database">Database methods</h3>
 
 <p>
@@ -1064,7 +1070,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 28, 2017</span>
+		<span>Last updated on: November 9, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

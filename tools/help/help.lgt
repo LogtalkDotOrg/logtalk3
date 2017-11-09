@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.13,
+		version is 0.14,
 		author is 'Paulo Moura',
-		date is 2017/10/25,
+		date is 2017/11/09,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -335,6 +335,15 @@
 
 	built_in_method(catch, 3, '/manuals/refman/methods/', 'catch_3.html').
 	built_in_method(throw, 1, '/manuals/refman/methods/', 'throw_1.html').
+
+	built_in_method(instantiation_error, 0, '/manuals/refman/methods/', 'instantiation_error_0.html').
+	built_in_method(type_error, 2, '/manuals/refman/methods/', 'type_error_2.html').
+	built_in_method(domain_error, 2, '/manuals/refman/methods/', 'domain_error_2.html').
+	built_in_method(existence_error, 2, '/manuals/refman/methods/', 'existence_error_2.html').
+	built_in_method(permission_error, 3, '/manuals/refman/methods/', 'permission_error_3.html').
+	built_in_method(representation_error, 1, '/manuals/refman/methods/', 'representation_error_1.html').
+	built_in_method(evaluation_error, 1, '/manuals/refman/methods/', 'evaluation_error_1.html').
+	built_in_method(resource_error, 1, '/manuals/refman/methods/', 'resource_error_1.html').
 
 	built_in_method(bagof, 3, '/manuals/refman/methods/', 'bagof_3.html').
 	built_in_method(findall, 3, '/manuals/refman/methods/', 'findall_3.html').
