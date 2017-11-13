@@ -254,8 +254,8 @@
 			<keyword>((current_)?char_conversion)(?=[(])</keyword>
 			<!-- Logic and control -->
 			<keyword>(ca(ll|tch)|ignore|once|throw)(?=[(])</keyword>
-			<keyword>(true|fa(il|lse)|repeat)(?![-!(^~])</keyword>
-			<keyword>((instantiation|type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(])</keyword>
+			<keyword>(true|fa(il|lse)|repeat|instantiation_error)(?![-!(^~])</keyword>
+			<keyword>((type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(])</keyword>
 			<!-- Atomic term processing -->
 			<keyword>(atom_(length|c(hars|o(ncat|des))))(?=[(])</keyword>
 			<keyword>(sub_atom)(?=[(])</keyword>

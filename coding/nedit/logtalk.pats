@@ -33,9 +33,9 @@ nedit.highlightPatterns: Logtalk:1:0{\n\
 	Message sending operators:"::|\\^\\^":::Keyword::\n\
 	Category predicate direct call:":":::Keyword::\n\
 	External call:"[{}]":::Keyword::\n\
-	Control constructs:"!|;|\\-\\-\\>|\\-\\>|<(true|fail|false)>":::Subroutine::\n\
+	Control constructs:"!|;|\\-\\-\\>|\\-\\>|<(true|fail|false|instantiation_error)>":::Subroutine::\n\
 	Control constructs:"<(call|catch|throw)(?=[(])":::Subroutine::\n\
-	Control constructs:"<(instantiation_error|type_error|domain_error|existence_error|permission_error|representation_error|evaluation_error|resource_error)(?=[(])":::Subroutine::\n\
+	Control constructs:"<(type_error|domain_error|existence_error|permission_error|representation_error|evaluation_error|resource_error)(?=[(])":::Subroutine::\n\
 	Block comment:"/\\*":"\\*/"::Comment::\n\
 	Line comment:"%":"$"::Comment::\n\
 	Number:"0'.":::Numeric Const::\n\

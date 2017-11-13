@@ -198,7 +198,6 @@
 				<string>[^A-Za-z0-9_](call)\(</string>
 				<string>[^A-Za-z0-9_](catch)\(</string>
 				<string>[^A-Za-z0-9_](throw)\(</string>
-				<string>[^A-Za-z0-9_](instantiation_error)\(</string>
 				<string>[^A-Za-z0-9_](type_error)\(</string>
 				<string>[^A-Za-z0-9_](domain_error)\(</string>
 				<string>[^A-Za-z0-9_](existence_error)\(</string>
@@ -212,6 +211,7 @@
 				<string>true</string>
 				<string>fail</string>
 				<string>false</string>
+				<string>instantiation_error</string>
 			</array>
 		</dict>
 

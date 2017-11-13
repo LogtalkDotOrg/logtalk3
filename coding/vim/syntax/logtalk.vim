@@ -191,7 +191,8 @@ syn match	logtalkOperator		";"
 syn match	logtalkOperator		"-->"
 syn match	logtalkOperator		"->"
 syn match	logtalkKeyword		"\<throw\ze("
-syn match	logtalkKeyword		"\<\(instantiation\|type\|domain\|existence\|permission\|representation\|evaluation\|resource\)_error\ze("
+syn match	logtalkKeyword		"\<\instantiation_error\>"
+syn match	logtalkKeyword		"\<\(type\|domain\|existence\|permission\|representation\|evaluation\|resource\)_error\ze("
 
 
 " Term unification

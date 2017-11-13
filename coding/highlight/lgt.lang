@@ -61,8 +61,8 @@ $KEYWORDS(kwc)=regex((clause|retract(all)?)(?=[(]), 1)
 $KEYWORDS(kwc)=regex((a(bolish|ssert(a|z)))(?=[(]), 1)
 # control
 $KEYWORDS(kwc)=regex((throw|ca(ll|tch))(?=[(]), 1)
-$KEYWORDS(kwc)=regex((fa(il|lse)|true), 1)
-$KEYWORDS(kwc)=regex(((instantiation|type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(]), 1)
+$KEYWORDS(kwc)=regex((fa(il|lse)|true|instantiation_error), 1)
+$KEYWORDS(kwc)=regex(((type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(]), 1)
 # all solutions
 $KEYWORDS(kwc)=regex((bagof|setof|findall|forall)(?=[(]), 1)
 # multi-threading predicates

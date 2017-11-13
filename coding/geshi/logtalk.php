@@ -172,7 +172,7 @@ $language_data = array(
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control
             'call', 'catch', 'ignore', 'once', 'throw',
-			'instantiation_error', 'type_error', 'domain_error', 'existence_error', 'permission_error',
+			'type_error', 'domain_error', 'existence_error', 'permission_error',
 			'representation_error', 'evaluation_error', 'resource_error'
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',
@@ -219,7 +219,7 @@ $language_data = array(
         // Built-in predicates (no arguments)
         5 => array(
             // control
-            'fail', 'false', 'repeat', 'true',
+            'fail', 'false', 'repeat', 'true', 'instantiation_error',
             // character and byte input/output predicates
             'nl',
             // implementation defined hooks functions

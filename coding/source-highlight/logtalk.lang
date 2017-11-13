@@ -31,7 +31,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<(clause|retract(all)?)(?=\()',
 			'\<a(bolish|ssert(a|z))(?=\()',
 			'\<(ca(ll|tch)|throw)(?=\()',
-			'\<(instantiation|type|domain|existence|permission|representation|evaluation|resource)_error(?=\()',
+			'\<(type|domain|existence|permission|representation|evaluation|resource)_error(?=\()',
 			'\<((bag|set)of|f(ind|or)all)(?=\()',
 			'\<threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=\()',
 			'\<threaded_engine(_(create|destroy|self|next|next_reified|yield|post|fetch))?(?=\()',
@@ -61,7 +61,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<halt(?=\()', '\<(halt)\>',
 			'\<(ignore|once)(?=\()',
 			'\<((key)?sort)(?=\()',
-			'\<(true|fa(il|lse)|repeat)\>',
+			'\<(true|fa(il|lse)|repeat|instantiation_error)\>',
 			'\<(e|pi|as|is|rem|mod|div)\>'
 
 

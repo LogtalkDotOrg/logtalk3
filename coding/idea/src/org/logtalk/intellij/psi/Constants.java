@@ -15,7 +15,7 @@ public class Constants {
     public static final Set<String> ATOM_KEYWORDS = new HashSet<>(asList( //newHashSet(
             "else" , "endif" , "dynamic" ,
             "end_category" , "end_object" , "end_protocol" , "threaded" , "eos" , "logtalk_make" , "built_in" , "halt" ,
-            "flush_output" , "at_end_of_stream" , "true" , "fail" , "false" , "repeat" , "nl" , "pi" , "e"));
+            "flush_output" , "at_end_of_stream" , "true" , "fail" , "false" , "repeat" , "instantiation_error" , "nl" , "pi" , "e"));
 
     public static final Set<String> COMPOUND_NAME_KEYWORDS = new HashSet<>(asList( //newHashSet
             "encoding" , "initialization" , "op" ,
@@ -25,7 +25,7 @@ public class Constants {
             "multifile" , "private" , "protected" , "public" , "synchronized" , "use_module" ,
             "context", "parameter" , "self" , "sender" , "this" , "current_op" , "current_predicate" , "predicate_property" , "abolish" , "asserta" ,
             "assertz" , "clause" , "retract" , "retractall" , "call" , "once" , "catch" , "throw" ,
-			"instantiation_error" , "type_error" , "domain_error" , "existence_error" ,
+			"type_error" , "domain_error" , "existence_error" ,
 			"permission_error" , "representation_error" , "evaluation_error", "resource_error" ,
 			"bagof" , "findall" , "forall" , "setof" ,
 			"before" , "after" , "forward" , "phrase" , "expand_term" , "term_expansion" , "expand_goal" ,

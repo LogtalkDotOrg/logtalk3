@@ -85,8 +85,8 @@
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\ba(bolish|ssert(a|z))(?=[(])</SEQ_REGEXP>
 		<!-- Control -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(ca(ll|tch)|throw)(?=[(])</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(fa(il|lse)|true)\b</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(instantiation|type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(fa(il|lse)|true|instantiation_error)\b</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])</SEQ_REGEXP>
 		<!-- All solutions -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b((bag|set)of|f(ind|or)all)(?=[(])</SEQ_REGEXP>
 		<!-- Multi-threading predicates -->

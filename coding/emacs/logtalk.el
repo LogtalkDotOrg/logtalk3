@@ -135,7 +135,8 @@
 		("\\<\\(ca\\(?:ll\\|tch\\)\\|throw\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(fa\\(?:il\\|lse\\)\\|true\\)\\>" 0 'logtalk-built-in-predicate-face)
 		("\\(!\\|->\\|;\\)" 0 'logtalk-built-in-predicate-face)
-		("\\<\\(\\(?:instantiation\\|type\\|domain\\|existence\\|permission\\|representation\\|evaluation\\|resource\\)_error\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<instantiation_error\\>" 0 'logtalk-built-in-predicate-face)
+		("\\<\\(\\(?:type\\|domain\\|existence\\|permission\\|representation\\|evaluation\\|resource\\)_error\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; multi-threading:
 		;;

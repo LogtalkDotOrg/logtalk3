@@ -50,7 +50,7 @@
 				<regex>\s(-&gt;)\s</regex>
 				<regex>(!)</regex>
 				<regex>(;)</regex>
-				<regex>\b(instantiation_error)\(</regex>
+				<regex>\b(instantiation_error)[^[(A-Za-z_]]</regex>
 				<regex>\b(type_error)\(</regex>
 				<regex>\b(domain_error)\(</regex>
 				<regex>\b(existence_error)\(</regex>

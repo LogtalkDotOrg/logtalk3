@@ -72,8 +72,8 @@ class LogtalkLexer(RegexLexer):
             (r'a(bolish|ssert(a|z))(?=[(])', Keyword),
             # Control constructs
             (r'(ca(ll|tch)|throw)(?=[(])', Keyword),
-            (r'(fa(il|lse)|true)\b', Keyword),
-            (r'(instantiation|type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])', Keyword),
+            (r'(fa(il|lse)|true|instantiation_error)\b', Keyword),
+            (r'(type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])', Keyword),
             # All solutions
             (r'((bag|set)of|f(ind|or)all)(?=[(])', Keyword),
             # Multi-threading predicates
