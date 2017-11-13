@@ -205,6 +205,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b((instantiation|type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(])</string>
+			<key>name</key>
+			<string>support.function.control.logtalk</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b((get|p(eek|ut))_(c(har|ode)|byte)|nl)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.chars-and-bytes-io.logtalk</string>

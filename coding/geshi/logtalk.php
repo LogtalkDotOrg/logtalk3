@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2017/11/13 (1.1.21)
+ *  -  Added syntax coloring of the error throwing built-in methods
  * 2017/06/29 (1.1.20)
  *  -  Added syntax coloring of the context/1 method
  * 2016/06/18 (1.1.19)
@@ -170,6 +172,8 @@ $language_data = array(
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control
             'call', 'catch', 'ignore', 'once', 'throw',
+			'instantiation_error', 'type_error', 'domain_error', 'existence_error', 'permission_error',
+			'representation_error', 'evaluation_error', 'resource_error'
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',
             // multi-threading predicates

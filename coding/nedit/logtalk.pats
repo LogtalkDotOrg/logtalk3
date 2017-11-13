@@ -2,7 +2,7 @@
 !
 ! Author: Paulo Moura (pmoura at logtalk.org)
 !
-! Last changed in: June 29, 2017
+! Last changed in: November 13, 2017
 !
 !
 ! To install this patterns file:
@@ -35,6 +35,7 @@ nedit.highlightPatterns: Logtalk:1:0{\n\
 	External call:"[{}]":::Keyword::\n\
 	Control constructs:"!|;|\\-\\-\\>|\\-\\>|<(true|fail|false)>":::Subroutine::\n\
 	Control constructs:"<(call|catch|throw)(?=[(])":::Subroutine::\n\
+	Control constructs:"<(instantiation_error|type_error|domain_error|existence_error|permission_error|representation_error|evaluation_error|resource_error)(?=[(])":::Subroutine::\n\
 	Block comment:"/\\*":"\\*/"::Comment::\n\
 	Line comment:"%":"$"::Comment::\n\
 	Number:"0'.":::Numeric Const::\n\

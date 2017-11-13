@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on June 29, 2017
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on November 13, 2017
 
 		this.regexList = [
 		  // variables
@@ -96,6 +96,7 @@
 			{ regex: new RegExp("\\b(ca(ll|tch)|throw)(?=[(])", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(true|fa(il|lse)|repeat)\\b", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(ignore|once)(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(instantiation|type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])", 'g'), css: 'keyword'},
 			// directives
 			{ regex: new RegExp("^\\s*:\-\\s(c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=[(])", 'gm'), css: 'preprocessor' },
 			{ regex: new RegExp("^\\s*:\-\\s(e(lse|nd(if|_(category|object|protocol)))|built_in|dynamic|synchronized|threaded)\.", 'gm'), css: 'preprocessor' },

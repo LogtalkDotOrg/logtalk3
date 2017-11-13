@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	June 30, 2017
+" Last Change:	November 13, 2017
 
 
 " Quit when a syntax file was already loaded:
@@ -191,6 +191,7 @@ syn match	logtalkOperator		";"
 syn match	logtalkOperator		"-->"
 syn match	logtalkOperator		"->"
 syn match	logtalkKeyword		"\<throw\ze("
+syn match	logtalkKeyword		"\<\(instantiation\|type\|domain\|existence\|permission\|representation\|evaluation\|resource\)_error\ze("
 
 
 " Term unification

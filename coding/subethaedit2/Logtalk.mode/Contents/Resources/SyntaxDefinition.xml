@@ -50,6 +50,14 @@
 				<regex>\s(-&gt;)\s</regex>
 				<regex>(!)</regex>
 				<regex>(;)</regex>
+				<regex>\b(instantiation_error)\(</regex>
+				<regex>\b(type_error)\(</regex>
+				<regex>\b(domain_error)\(</regex>
+				<regex>\b(existence_error)\(</regex>
+				<regex>\b(permission_error)\(</regex>
+				<regex>\b(representation_error)\(</regex>
+				<regex>\b(evaluation_error)\(</regex>
+				<regex>\b(resource_error)\(</regex>
 			</keywords>
 
 			<keywords id="Built-in Methods" color="#1A1AA6" useforautocomplete="yes">

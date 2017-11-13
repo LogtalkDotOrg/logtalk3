@@ -7,13 +7,13 @@
 	written by		Paulo Moura
 	version			1.700
 	created on		May 5, 2002
-	last revised	June 29, 2017
+	last revised	November 13, 2017
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
 	same subdirectory and add (if not present) the following entry:
 
-	<MODE NAME="logtalk" FILE="logtalk.xml" FILE_NAME_GLOB="*.{lgt}" />
+	<MODE NAME="logtalk" FILE="logtalk.xml" FILE_NAME_GLOB="*.{lgt,logtalk}" />
 -->
 
 <MODE>
@@ -86,6 +86,7 @@
 		<!-- Control -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(ca(ll|tch)|throw)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(fa(il|lse)|true)\b</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(instantiation|type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])</SEQ_REGEXP>
 		<!-- All solutions -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b((bag|set)of|f(ind|or)all)(?=[(])</SEQ_REGEXP>
 		<!-- Multi-threading predicates -->

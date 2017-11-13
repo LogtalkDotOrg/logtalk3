@@ -198,6 +198,14 @@
 				<string>[^A-Za-z0-9_](call)\(</string>
 				<string>[^A-Za-z0-9_](catch)\(</string>
 				<string>[^A-Za-z0-9_](throw)\(</string>
+				<string>[^A-Za-z0-9_](instantiation_error)\(</string>
+				<string>[^A-Za-z0-9_](type_error)\(</string>
+				<string>[^A-Za-z0-9_](domain_error)\(</string>
+				<string>[^A-Za-z0-9_](existence_error)\(</string>
+				<string>[^A-Za-z0-9_](permission_error)\(</string>
+				<string>[^A-Za-z0-9_](representation_error)\(</string>
+				<string>[^A-Za-z0-9_](evaluation_error)\(</string>
+				<string>[^A-Za-z0-9_](resource_error)\(</string>
 			</array>
 			<key>Plain Strings</key>
 			<array>

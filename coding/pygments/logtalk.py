@@ -73,6 +73,7 @@ class LogtalkLexer(RegexLexer):
             # Control constructs
             (r'(ca(ll|tch)|throw)(?=[(])', Keyword),
             (r'(fa(il|lse)|true)\b', Keyword),
+            (r'(instantiation|type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])', Keyword),
             # All solutions
             (r'((bag|set)of|f(ind|or)all)(?=[(])', Keyword),
             # Multi-threading predicates

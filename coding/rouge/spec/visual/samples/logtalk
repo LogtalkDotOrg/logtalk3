@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.36,
+		version is 1.37,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2017/11/13,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -181,7 +181,15 @@ comment
 
 	exception_methods :-
 		catch(Goal, Error, Catcher),
-		throw(Error).
+		throw(Error),
+		instantiation_error,
+		type_error(Type, Culprit),
+		domain_error(Domain, Culprit),
+		existence_error(Thing, Culprit),
+		permission_error(Operation, Permission, Culprit),
+		representation_error(Flag),
+		evaluation_error(Exception),
+		resource_error(Resource).
 
 	all_solutions_methods :-
 		bagof(Term, Goal, List),
