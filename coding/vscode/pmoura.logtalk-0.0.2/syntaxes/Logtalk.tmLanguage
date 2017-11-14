@@ -189,13 +189,19 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(true|fa(il|lse)|repeat)\b(?![-!(^~])</string>
+			<string>\b(true|fa(il|lse)|repeat|instantiation_error)\b(?![-!(^~])</string>
 			<key>name</key>
 			<string>support.function.control.logtalk</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>\b(ca(ll|tch)|ignore|throw|once)(?=[(])</string>
+			<key>name</key>
+			<string>support.function.control.logtalk</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b((type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.control.logtalk</string>
 		</dict>
