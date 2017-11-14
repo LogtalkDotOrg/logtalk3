@@ -51,7 +51,7 @@ Keywords={
     Regex=[[ (context|parameter|this|se(lf|nder))(?=[(]) ]],
     Group=1
   },
-  { Id=3, --refelection
+  { Id=3, --reflection
     Regex=[[ (current_predicate|predicate_property)(?=[(]) ]],
     Group=1
   },
@@ -112,11 +112,11 @@ Keywords={
     Group=1
   },
   { Id=3, --control
-    Regex=[[ (call|catch|throw)(?=[(]) ]],
+    Regex=[[ (call|catch|throw|(type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(]) ]],
     Group=1
   },
-  { Id=3,
-    Regex=[[ (fa(il|lse|)|true) ]],
+  { Id=3, --control
+    Regex=[[ (fa(il|lse|)|true|instantiation_error) ]],
     Group=1
   },
   { Id=3, --all solutions
