@@ -54,6 +54,8 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Syntax coloring support for the new error throwing built-in methods.
 
+* UPDATED: Logtalk support installation instructions for the Kate text editor.
+
 
 3.13.0 - November 8, 2017
 =========================
