@@ -27,6 +27,14 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Support for _parameter variables_ providing an alternative to the
+`parameter/2` and `this/1` built-in methods to access entity parameters.
+Parameter variables are variables used in the parametric entity identifier
+that start and end with an underscore (`_VariableName_`). Any occurrence
+of a parameter variable in an entity clause is implicitly unified with the
+entity parameter. This allows entity parameters to be added, rearranged, or
+removed without requiring any changes to the clauses that refer to them.
+
 * NEW: Convenience error throwing built-in methods `instantiation_error/0`,
 `type_error/2`, `domain_error/2`, `existence_error/2`, `permission_error/3`,
 `representation_error/1`, `evaluation_error/1`, and `resource_error/1`. These
@@ -48,6 +56,13 @@ Tests
 -----
 
 * ADDED: Unit tests for the new error throwing built-in methods.
+
+Examples
+--------
+
+* ADDED: A new example, `parvars`, providing an alternative version of the
+`parametric` example using _parameter variables_ instead of the `parameter/2`
+and `this/1` built-in methods to access entity parameters.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

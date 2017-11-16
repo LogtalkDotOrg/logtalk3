@@ -292,6 +292,9 @@ Follows a short description of each included example (in alphabetical order):
 	simple SWI-Prolog only example of using a dictionary term
 	for representing object parameters
 
+- `parvars`  
+	variant of the `parametric` example using parameter variables
+
 - `people`  
 	simple example of defining object constructors
 

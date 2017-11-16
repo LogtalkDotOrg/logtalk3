@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc1)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc2)).
 
 
 
@@ -7194,7 +7194,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_built_in_'),
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
-	retractall('$lgt_pp_aux_predicate_counter_'(_)).
+	retractall('$lgt_pp_aux_predicate_counter_'(_)),
+	retractall('$lgt_pp_parameter_variables_'(_)).
 
 
 
@@ -7424,6 +7425,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we throw an error
 
 '$lgt_compile_file_term'(Term, Ctx) :-
+	'$lgt_unify_parameter_variables'(Term, Ctx),
 	(	Term = {_} ->
 		% bypass control construct; skip term-expansion
 		'$lgt_compile_expanded_term'(Term, Term, Ctx)
@@ -7470,7 +7472,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_expanded_terms'([ExpandedTerm| ExpandedTerms], Term, Ctx) :-
 	!,
 	'$lgt_compile_expanded_term'(ExpandedTerm, Term, Ctx),
-	'$lgt_compile_expanded_terms'(ExpandedTerms, Term, Ctx).
+	% ensure that only the compilation context mode and the entity prefix are
+	% shared between different clauses but keep the current clause position
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines),
+	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines),	
+	'$lgt_compile_expanded_terms'(ExpandedTerms, Term, NewCtx).
 
 '$lgt_compile_expanded_terms'([], _, _) :-
 	!.
@@ -8183,7 +8189,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj)),
 		'$lgt_compile_object_relations'(Relations, Obj, Ctx),
-		'$lgt_compile_object_identifier'(Obj, Ctx)
+		'$lgt_compile_object_identifier'(Obj, Ctx),
+		'$lgt_save_parameter_variables'(Obj)
 	).
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
@@ -8287,7 +8294,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg)),
 		'$lgt_compile_category_identifier'(Ctg, Ctx),
-		'$lgt_compile_category_relations'(Relations, Ctg, Ctx)
+		'$lgt_compile_category_relations'(Relations, Ctg, Ctx),
+		'$lgt_save_parameter_variables'(Ctg)
 	).
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
@@ -10089,13 +10097,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(permission_error(define, clause, Entity), clause(Clause)))
 	;	true
 	),
-	% ensure that only the compilation context mode and the entity prefix are
-	% shared between different clauses but keep the current clause position
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines),
-	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines),
-	% we're compiling an entity clause
 	catch(
-		'$lgt_compile_clause'(Clause, Entity, TClause, DClause, NewCtx),
+		'$lgt_compile_clause'(Clause, Entity, TClause, DClause, Ctx),
 		Error,
 		throw(error(Error, clause(Clause)))
 	),
@@ -10233,6 +10237,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% fact for a module multifile predicate
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	;	% other facts
+		(	var(ExCtx) ->
+			true
+		;	'$lgt_unify_head_thead_arguments'(Fact, TFact, ExCtx)
+		),
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	),
 	'$lgt_clause_number'(PI, fact, File, BeginLine, N).
@@ -14553,6 +14561,69 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 
 '$lgt_remove_redundant_calls'(Goal, Goal).
+
+
+
+% '$lgt_save_parameter_variables'(@object_identifier)
+% '$lgt_save_parameter_variables'(@category_identifier)
+%
+%
+
+:- dynamic('$lgt_pp_parameter_variables_'/1).
+
+'$lgt_save_parameter_variables'(Entity) :-
+	compound(Entity),
+	'$lgt_pp_term_variable_names_file_lines_'(_, VariableNames, _, _),
+	!,
+	'$lgt_parameter_variable_pairs'(VariableNames, 1, ParameterVariablePairs),
+	assertz('$lgt_pp_parameter_variables_'(ParameterVariablePairs)).
+
+'$lgt_save_parameter_variables'(_).
+
+
+'$lgt_parameter_variable_pairs'([], _, []).
+
+'$lgt_parameter_variable_pairs'([VariableName=_| VariableNames], Position, [VariableName-Position| ParameterVariablePairs]) :-
+	sub_atom(VariableName, 0, 1, After, '_'),
+	After >= 2,
+	sub_atom(VariableName, _, 1, 0, '_'),
+	!,
+	NextPosition is Position + 1,
+	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
+
+'$lgt_parameter_variable_pairs'([_| VariableNames], Position, ParameterVariablePairs) :-
+	NextPosition is Position + 1,
+	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
+
+
+'$lgt_unify_parameter_variables'(Term, Ctx) :-
+	'$lgt_pp_parameter_variables_'(ParameterVariables),
+	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, _, _),
+	(	'$lgt_pp_entity_'(_, Entity, _, _, _) ->
+		% compile time; instantiate the Entity argument in the compilation context
+		true
+	;	% runtime <</2 call; Entity alreay instantiated in the compilation context
+		true
+	),
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
+	'$lgt_unify_parameter_variables'(VariableNames, ParameterVariables, Entity, Unified),
+	Unified == true,
+	!.
+
+'$lgt_unify_parameter_variables'(_, _).
+
+
+'$lgt_unify_parameter_variables'([], _, _, _).
+
+'$lgt_unify_parameter_variables'([VariableName=Variable| VariableNames], ParameterVariables, Entity, true) :-
+	'$lgt_member'(VariableName-Position, ParameterVariables),
+	!,
+	arg(Position, Entity, Variable),
+	'$lgt_unify_parameter_variables'(VariableNames, ParameterVariables, Entity, true).
+
+'$lgt_unify_parameter_variables'([_| VariableNames], ParameterVariables, Entity, Unified) :-
+	'$lgt_unify_parameter_variables'(VariableNames, ParameterVariables, Entity, Unified).
 
 
 
