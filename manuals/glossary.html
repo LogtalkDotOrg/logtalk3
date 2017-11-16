@@ -182,13 +182,18 @@
 <dd>An object, implementing the <code>expanding</code> built-in protocol, defining term- and goal-expansion clauses, used in the compilation of Logtalk source files. An hook object can be specified using the compiler flag <code>hook/1</code>.</dd>
 
 <dt id="parametric" class="glossary"><strong>parametric object</strong></dt>
-<dd>An object whose name is a compound term containing free variables that can be used to parameterize the object predicates.</dd>
+<dd>An object whose name is a compound term containing free variables that can be used to parameterize the object predicates, Parametric categories are also supported.</dd>
 
 <dt id="parametric_proxy" class="glossary"><strong>parametric object proxy</strong></dt>
 <dd>A compound term (usually represented as a plain Prolog fact) with the same functor and with the same number of arguments as the identifier of a parametric object.</dd>
 
 </dl></dd>
 
+<dt id="parameter" class="glossary"><strong>parameter</strong></dt>
+<dd>An argument of a parametric object or a parametric category.</dd>
+
+<dt id="parameter_variable" class="glossary"><strong>parameter variable</strong></dt>
+<dd>A variable used as parameter in a parametric object or a parametric category using the syntax <code>_VariableName_</code>. Occurrences of parameter variables in entity clauses are implicitly unified with the corresponding entity parameters.</dd>
 
 <dt id="parent" class="glossary"><strong>parent</strong></dt>
 <dd>A prototype that is extended by another prototype.</dd>
@@ -278,7 +283,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 14, 2017</span>
+		<span>Last updated on: November 16, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>

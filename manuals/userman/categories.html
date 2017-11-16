@@ -430,20 +430,20 @@ This alternative should only be used when the user knows a priori that the categ
 <h2 id="categories_parametric">Parametric categories</h2>
 
 <p>
-Category predicates can be parameterized in the same way as object predicates by using a compound term as the category identifier and by calling the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method in the category predicate clauses. Category parameter values can be defined by the importing objects. For example:
+Category predicates can be parameterized in the same way as object predicates by using a compound term as the category identifier. The category parameters can be accessed by calling the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> or <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a> built-in local methods in the category predicate clauses or by using <a class="glossary" title="Go to glossary definition" href="../glossary.html#parameter_variable"><em>parameter variables</em></a>. Category parameter values can be defined by the importing objects. For example:
 </p>
 <pre>:- object(speech(Season, Event),
     imports([dress(Season), speech(Event)])).
     ...
 :- end_object.</pre>
 <p>
-Note that access to category parameters is only possible using the <code>parameter/2</code> method from within the category. Calls to the <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a> built-in local method from category predicates always access the importing object identifier (and thus object parameters, not category parameters).
+Note that access to category parameters is only possible from within the category. In particular, calls to the <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a> built-in local method from category predicates always access the importing object identifier (and thus object parameters, not category parameters).
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 5, 2017</span>
+		<span>Last updated on: November 16, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

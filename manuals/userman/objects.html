@@ -179,7 +179,7 @@ We can use, in the same application, both prototype and class-based hierarchies 
 Parametric objects have a compound term for name instead of an atom. This compound term usually contains free variables that can be instantiated when sending or as a consequence of sending a message to the object, thus acting as object parameters. The object predicates can then be coded to depend on those parameters, which are logical variables shared by all object predicates. When an object state is set at object creation and never changed, parameters provide a better solution than using the object's database via asserts. Parametric objects can also be used to associate a set of predicates to terms that share a common functor and arity.
 </p>
 <p>
-In order to give access to an object parameters, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method:
+In order to give access to an object parameter, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method:
 </p>
 <pre>:- object(Functor(Arg1, Arg2, ...)).
 
@@ -201,7 +201,10 @@ An alternative solution is to use the built-in local method <a title="Consult re
         this(foo(Arg)),
         ... .</pre>
 <p>
-Both solutions are equally efficient because the runtime cost of the methods <code>this/1</code> and <code>parameter/2</code> is negligible. The drawback of this second solution is that we must check all calls of <code>this/1</code> if we change the object name. Note that we can't use these method with the message sending operators (<a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a>, <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a>, or <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a>).
+Both solutions are equally efficient as calls to the methods <code>this/1</code> and <code>parameter/2</code> are usually compiled inline into a clause head unification. The drawback of this second solution is that we must check all calls of <code>this/1</code> if we change the object name. Note that we can't use these method with the message sending operators (<a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a>, <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a>, or <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a>).
+</p>
+<p>
+A third alternative to access object parameters is to use <a class="glossary" title="Go to glossary definition" href="../glossary.html#parameter_variable"><em>parameter variables</em></a>. Although parameter variables introduce a concept of entity global variables, they allow object parameters to be added, rearranged, or removed without requiring any changes to the clauses that refer to them. Note that using parameter variables doesn't change the fact that entity parameters are logical variables.
 </p>
 <p>
 When storing a parametric object in its own source file, the convention is to name the file after the object, with the object arity appended. For instance, when defining an object named <code>sort(Type)</code>, we may save it in a <code>sort_1.lgt</code> text file. This way it is easy to avoid file name clashes when saving Logtalk entities that have the same functor but different arity.
@@ -568,7 +571,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 5, 2017</span>
+		<span>Last updated on: November 16, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
