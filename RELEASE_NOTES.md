@@ -34,12 +34,20 @@ that start and end with an underscore (`_VariableName_`). Any occurrence
 of a parameter variable in an entity clause is implicitly unified with the
 entity parameter. This allows entity parameters to be added, rearranged, or
 removed without requiring any changes to the clauses that refer to them.
+Parameter variables are only supported for parametric entities defined in
+source files.
 
 * NEW: Convenience error throwing built-in methods `instantiation_error/0`,
 `type_error/2`, `domain_error/2`, `existence_error/2`, `permission_error/3`,
 `representation_error/1`, `evaluation_error/1`, and `resource_error/1`. These
 methods throw standard `error/2` exception terms and are equivalent to a
 sequence of `context/1` and `throw/1` method calls.
+
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Workaround lack of compliance of B-Prolog and Qu-Prolog `read_term/3`
+option `variable_names/1`.
 
 Documentation
 -------------
