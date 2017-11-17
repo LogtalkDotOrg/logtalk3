@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on May 5, 2017
+%  Last updated on November 17, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -556,8 +556,15 @@ format(Format, Arguments) :-
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	stream_property(Stream, line_number(LineBegin)),
-	read_term(Stream, Term, [variable_names(Variables)| Options]),
-	stream_property(Stream, line_number(LineEnd)).
+	read_term(Stream, Term, [variable_names(Variables0)| Options]),
+	stream_property(Stream, line_number(LineEnd)),
+	% workaround lack of compliance of the variable_names/1 option
+	'$lgt_qp_fix_variable_names'(Variables0, Variables).
+
+
+'$lgt_qp_fix_variable_names'([], []).
+'$lgt_qp_fix_variable_names'([Variable=Name| Variables0], [Name=Variable| Variables]) :-
+	'$lgt_qp_fix_variable_names'(Variables0, Variables).
 
 
 
