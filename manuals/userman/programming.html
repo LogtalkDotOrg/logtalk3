@@ -797,46 +797,56 @@ The Logtalk compiler automatically removes any redundant calls to the built-in p
 <h3 id="programming_debugging_messages">Debugging messages</h3>
 
 <p>
-Calls to the <code>logtalk::print_message/3</code> predicate where the message kind is either <code>debug</code> or <code>debug(_)</code> are only printed, by default, when the <code>debug</code> flag is turned on. Note that using these messages does not require compiling the code in debug mode, only turning on the flag. These print messages goals can always be combined with hooks as described in the previous section to remove them in production ready code. To avoid having to define <code>message_tokens//2</code> grammar rules for translating each debug message, you can intercept and convert them. For example: 
+Calls to the <code>logtalk::print_message/3</code> predicate where the message kind is either <code>debug</code> or <code>debug(_)</code> are only printed, by default, when the <code>debug</code> flag is turned on. Note that using these messages does not require compiling the code in debug mode, only turning on the flag. To avoid having to define <code>message_tokens//2</code> grammar rules for translating each debug message, Logtalk provides default tokenization for four <em>meta-messages</em> that cover the most common cases:
 </p>
-<pre>:- category(my_lazy_debug_message_processing).
-
-    :- multifile(logtalk::message_hook/4).
-    :- dynamic(logtalk::message_hook/4).
-
-    % in this example, we use the "core" component prefix and stream for debug messages;
-    % an alternative transformation would be e.g. to print the terms quoted by adding a
-    % quote(true) option to term/2; we could also use copy_term/2 and numbervars/3 on the
-    % message term and add the option numbervars(true) to term/2 for pretty-print of
-    % messages containing variables
-
-    logtalk::message_hook(Message, debug, _, _) :-
-        logtalk::message_prefix_stream(debug, core, Prefix, Stream),
-        logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
-
-    logtalk::message_hook(Message, debug(Topic), _, _) :-
-        logtalk::message_prefix_stream(debug(Topic), core, Prefix, Stream),
-        logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
-
-:- end_category.</pre>
+<dl>
+	<dt><code>@Message</code></dt>
+		<dd>By default, the message is printed as passed to the <code>write/1</code> predicate followed by a newline.</dd>
+	<dt><code>Key-Value</code></dt>
+		<dd>By default, the message is printed as <code>Key: Value</code> followed by a newline. The value is printed as passed to the <code>writeq/1</code> predicate.</dd>
+	<dt><code>List</code></dt>
+		<dd>By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the <code>writeq/1</code> predicate.</dd>
+	<dt><code>Title::List</code></dt>
+		<dd>By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the <code>writeq/1</code> predicate.</dd>
+</dl>
 <p>
-With this category loaded (e.g. from your settings file), we can then use goals such as:
+These print messages goals can always be combined with hooks as described in the previous section to remove them in production ready code.
 </p>
-<pre>?- logtalk::print_message(debug, core, 'Phase 1 completed').
-true.
+<p>
+Some simple examples of using these meta-messages:
+</p>
+<pre>| ?- logtalk::print_message(debug, core, @'Phase 1 completed').
+yes
 
-?- set_logtalk_flag(debug, on).
-true.
+| ?- set_logtalk_flag(debug, on).
+yes
 
-?- logtalk::print_message(debug, core, 'Phase 1 completed').
+| ?- logtalk::print_message(debug, core, @'Phase 1 completed').
 >>> Phase 1 completed
-true.
+yes
+
+| ?- logtalk::print_message(debug, core, answer-42).
+>>> answer: 42
+yes
+
+| ?- logtalk::print_message(debug, core, ['Arthur Dent','Ford Prefect','Marvin']).
+>>> - 'Arthur Dent'
+>>> - 'Ford Prefect'
+>>> - 'Marvin'
+yes
+
+| ?- logtalk::print_message(debug, core, 'Names'::['Arthur Dent','Ford Prefect','Marvin']).
+>>> Names:
+>>> - 'Arthur Dent'
+>>> - 'Ford Prefect'
+>>> - 'Marvin'
+yes
 </pre>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 2, 2017</span>
+		<span>Last updated on: November 18, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
