@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on June 26, 2017
+%  Last updated on November 18, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -399,34 +399,6 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	logtalk::message_hook(_Message, silent(Key), core, Tokens) :-
 		logtalk::message_prefix_stream(comment(Key), core, Prefix, Stream),
 		logtalk::print_message_tokens(Stream, Prefix, Tokens).
-
-:- end_category.
-*/
-
-
-%  To convert all debug and debug(Topic) messages to the equivalent of a
-%  write(Message), nl goal without the need to specify message_tokens//2
-%  rules for converting all messages:
-
-/*
-:- category(my_lazy_debug_message_processing).
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	% in this example, we use the "core" component prefix and stream for debug messages;
-	% an alternative transformation would be e.g. to print the terms quoted by adding a
-	% quote(true) option to term/2; we could also use copy_term/2 and numbervars/3 on the
-	% message term and add the option numbervars(true) to term/2 for pretty-print of
-	% messages containing variables
-
-	logtalk::message_hook(Message, debug, _, _) :-
-		logtalk::message_prefix_stream(debug, core, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
-
-	logtalk::message_hook(Message, debug(Topic), _, _) :-
-		logtalk::message_prefix_stream(debug(Topic), core, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, [term(Message, []), nl]).
 
 :- end_category.
 */

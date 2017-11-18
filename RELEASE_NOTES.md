@@ -55,6 +55,8 @@ Documentation
 * ADDED: User and Reference manual sections on the new error throwing built-in
 methods.
 
+* UPDATED: User Manual section on debugging messages.
+
 Tools
 -----
 
