@@ -24,16 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2017/11/19,
 		comment is 'Unit tests for the permission_error/3 built-in method.'
 	]).
 
 	throws(permission_error_3_1, error(permission_error(modify,static_predicate,foo/1), logtalk(predicate,_))) :-
 		predicate.
 
+	throws(instantiation_error_0_2, error(permission_error(modify,static_predicate,foo/1), logtalk(message_tokens(1,permission_error_3_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, permission_error_3_test), _).
+
 	% auxiliar predicates
 
 	predicate :-
 		permission_error(modify, static_predicate, foo/1).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(1, permission_error_3_test) -->
+		{permission_error(modify, static_predicate, foo/1)}.
 
 :- end_object.

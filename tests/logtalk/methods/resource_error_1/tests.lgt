@@ -24,16 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2017/11/19,
 		comment is 'Unit tests for the resource_error/1 built-in method.'
 	]).
 
 	throws(resource_error_1_1, error(resource_error(memory), logtalk(predicate,_))) :-
 		predicate.
 
+	throws(resource_error_1_2, error(resource_error(memory), logtalk(message_tokens(1,rresource_error_1_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, rresource_error_1_test), _).
+
 	% auxiliar predicates
 
 	predicate :-
 		resource_error(memory).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(1, rresource_error_1_test) -->
+		{resource_error(memory)}.
 
 :- end_object.

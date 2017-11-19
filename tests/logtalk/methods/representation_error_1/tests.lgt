@@ -24,16 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2017/11/19,
 		comment is 'Unit tests for the representation_error/1 built-in method.'
 	]).
 
 	throws(representation_error_1_1, error(representation_error(character), logtalk(predicate,_))) :-
 		predicate.
 
+	throws(instantiation_error_0_2, error(representation_error(character), logtalk(message_tokens(1,representation_error_1_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, representation_error_1_test), _).
+
 	% auxiliar predicates
 
 	predicate :-
 		representation_error(character).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(1, representation_error_1_test) -->
+		{representation_error(character)}.
 
 :- end_object.

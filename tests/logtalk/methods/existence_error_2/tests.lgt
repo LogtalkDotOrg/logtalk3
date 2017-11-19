@@ -24,16 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2017/11/19,
 		comment is 'Unit tests for the existence_error/2 built-in method.'
 	]).
 
 	throws(existence_error_2_1, error(existence_error(procedure,foo/1), logtalk(predicate,_))) :-
 		predicate.
 
+	throws(existence_error_2_2, error(existence_error(procedure,foo/1), logtalk(message_tokens(1,existence_error_2_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, existence_error_2_test), _).
+
 	% auxiliar predicates
 
 	predicate :-
 		existence_error(procedure, foo/1).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(1, existence_error_2_test) -->
+		{existence_error(procedure, foo/1)}.
 
 :- end_object.

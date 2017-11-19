@@ -24,16 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2017/11/19,
 		comment is 'Unit tests for the instantiation_error/0 built-in method.'
 	]).
 
 	throws(instantiation_error_0_1, error(instantiation_error, logtalk(predicate,_))) :-
 		predicate.
 
+	throws(instantiation_error_0_2, error(instantiation_error, logtalk(message_tokens(1,instantiation_error_0_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, instantiation_error_0_test), _).
+
 	% auxiliar predicates
 
 	predicate :-
 		instantiation_error.
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(1, instantiation_error_0_test) -->
+		{instantiation_error}.
 
 :- end_object.

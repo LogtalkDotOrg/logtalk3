@@ -24,16 +24,25 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2017/11/19,
 		comment is 'Unit tests for the evaluation_error/1 built-in method.'
 	]).
 
 	throws(evaluation_error_1_1, error(evaluation_error(zero_divisor), logtalk(predicate,_))) :-
 		predicate.
 
+	throws(evaluation_error_1_2, error(evaluation_error(zero_divisor), logtalk(message_tokens(1,evaluation_error_1_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, evaluation_error_1_test), _).
+
 	% auxiliar predicates
 
 	predicate :-
 		evaluation_error(zero_divisor).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(1, evaluation_error_1_test) -->
+		{evaluation_error(zero_divisor)}.
 
 :- end_object.
