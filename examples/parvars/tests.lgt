@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/14,
+		date is 2017/11/19,
 		comment is 'Unit tests for the "parvars" example.'
 	]).
 
@@ -39,22 +39,22 @@
 	cover(speech(_)).
 	cover(speech(_, _)).
 
-	test(parvars_1) :-
+	test(parvars_01) :-
 		findall(X, [1, 2, 3]::member(X), Solutions),
 		Solutions == [1, 2, 3].
 
-	test(parvars_2) :-
+	test(parvars_02) :-
 		findall(X, [1, 2, 3]::last(X), Solutions),
 		Solutions == [3].
 
-	test(parvars_3) :-
+	test(parvars_03) :-
 		findall(X, [1, 2, 3]::nextto(2,X), Solutions),
 		Solutions == [3].
 
-	test(parvars_4) :-
+	test(parvars_04) :-
 		\+ '[]'::member(_).
 
-	test(parvars_5) :-
+	test(parvars_05) :-
 		rectangle(W, H, X, Y)::init, rectangle(W, H, X, Y)::move(3, 4, NR), NR::position(X2, Y2),
 		W  == 2,
 		H  == 1,
@@ -64,17 +64,25 @@
 		X2 == 3,
 		Y2 == 4.
 
-	test(parvars_6) :-
+	test(parvars_06) :-
 		person(sally, 20)::grow_older(NewId),
 		NewId == person(sally, 21).
 
-	test(parvars_7) :-
+	test(parvars_07) :-
 		employee(sally, 21, 1200)::give_raise(250, NewId),
 		NewId == employee(sally, 21, 1450).
 
-	test(parvars_8) :-
+	test(parvars_08) :-
 		speech(winter, wedding)::advice(Clothes, Speech),
 		Clothes == [pants, sleeves, heavy],
 		Speech == [happy, jokes].
+
+	test(parvars_09) :-
+		date(2017, 11, 19)::(year(Year), month(Month), day(Day)),
+		Year == 2017, Month == 11, Day == 19.
+
+	test(parvars_10) :-
+		time(21, 33, 42)::(hours(Hours), mins(Mins), secs(Secs)),
+		Hours == 21, Mins == 33, Secs == 42.
 
 :- end_object.

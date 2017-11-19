@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2014/08/14,
+		date is 2017/11/19,
 		comment is 'Unit tests for the "parametric" example.'
 	]).
 
@@ -39,22 +39,22 @@
 	cover(speech(_)).
 	cover(speech(_, _)).
 
-	test(parametric_1) :-
+	test(parametric_01) :-
 		findall(X, [1, 2, 3]::member(X), Solutions),
 		Solutions == [1, 2, 3].
 
-	test(parametric_2) :-
+	test(parametric_02) :-
 		findall(X, [1, 2, 3]::last(X), Solutions),
 		Solutions == [3].
 
-	test(parametric_3) :-
+	test(parametric_03) :-
 		findall(X, [1, 2, 3]::nextto(2,X), Solutions),
 		Solutions == [3].
 
-	test(parametric_4) :-
+	test(parametric_04) :-
 		\+ '[]'::member(_).
 
-	test(parametric_5) :-
+	test(parametric_05) :-
 		rectangle(W, H, X, Y)::init, rectangle(W, H, X, Y)::move(3, 4, NR), NR::position(X2, Y2),
 		W  == 2,
 		H  == 1,
@@ -64,17 +64,25 @@
 		X2 == 3,
 		Y2 == 4.
 
-	test(parametric_6) :-
+	test(parametric_06) :-
 		person(sally, 20)::grow_older(NewId),
 		NewId == person(sally, 21).
 
-	test(parametric_7) :-
+	test(parametric_07) :-
 		employee(sally, 21, 1200)::give_raise(250, NewId),
 		NewId == employee(sally, 21, 1450).
 
-	test(parametric_8) :-
+	test(parametric_08) :-
 		speech(winter, wedding)::advice(Clothes, Speech),
 		Clothes == [pants, sleeves, heavy],
 		Speech == [happy, jokes].
+
+	test(parametric_09) :-
+		date(2017, 11, 19)::(year(Year), month(Month), day(Day)),
+		Year == 2017, Month == 11, Day == 19.
+
+	test(parametric_10) :-
+		time(21, 33, 42)::(hours(Hours), mins(Mins), secs(Secs)),
+		Hours == 21, Mins == 33, Secs == 42.
 
 :- end_object.
