@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2017/06/03,
+		date is 2017/11/23,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -60,13 +60,13 @@
 		[].
 
 	message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
-		[nl, 'tests started at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl].
+		[nl, 'tests started at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
 
 	message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
 		['tests ended at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
-		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl].
+		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
 
 	message_tokens(running_tests_from_object(Object)) -->
 		['running tests from object ~q'-[Object], nl].
@@ -84,8 +84,8 @@
 
 	message_tokens(tests_results_summary(Total, Skipped, Passed, Failed, Note)) -->
 		(	{Note == ''} ->
-			['~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl]
-		;	['~d tests: ~d skipped, ~d passed, ~d failed (~w)'-[Total, Skipped, Passed, Failed, Note], nl]
+			[nl, '~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl]
+		;	[nl, '~d tests: ~d skipped, ~d passed, ~d failed (~w)'-[Total, Skipped, Passed, Failed, Note], nl]
 		).
 
 	message_tokens(passed_test(Test, _File, _Position, Note)) -->
@@ -140,10 +140,10 @@
 	message_tokens(covered_clause_numbers(Covered, Total, Percentage)) -->
 		['~d out of '-[Covered]],
 		clause_tokens(Total),
-		[' covered, ~f% clause coverage'-[Percentage], nl].
+		[' covered, ~f% clause coverage'-[Percentage], nl, nl].
 
 	message_tokens(code_coverage_header) -->
-		['clause coverage ratio and covered clauses per entity predicate'-[], nl].
+		[nl, 'clause coverage ratio and covered clauses per entity predicate'-[], nl, nl].
 
 	message_tokens(entity_coverage_starts(_Entity)) -->
 		[].
@@ -158,7 +158,7 @@
 	message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
 		['~q: ~d out of '-[Entity, Covered]],
 		clause_tokens(Total),
-		[' covered, ~f% coverage'-[Percentage], nl].
+		[' covered, ~f% coverage'-[Percentage], nl, nl].
 
 	message_tokens(entity_coverage_ends(_Entity)) -->
 		[].

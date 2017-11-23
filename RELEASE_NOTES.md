@@ -66,6 +66,8 @@ predicate.
 Tools
 -----
 
+* IMPROVED: Readability of the default console output of the `lgtunit` tool.
+
 * UPDATED: The `help` tool for the new error throwing built-in methods.
 
 Tests
