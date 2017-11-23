@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc3)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc4)).
 
 
 
@@ -6749,7 +6749,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_singleton_variables'([Singleton| Singletons], Term) :-
 	(	'$lgt_compiler_flag'(singleton_variables, warning),
-		'$lgt_filter_singleton_variables'([Singleton| Singletons], Term, Names),
+		'$lgt_filter_singleton_variable_names'([Singleton| Singletons], Term, Names),
 		Names \== [] ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
@@ -6762,22 +6762,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_filter_singleton_variables'(@list, -list(atom))
+% '$lgt_filter_singleton_variable_names'(@list, -list(atom))
 %
 % filters variables whose name start with an underscore from a singletons list if
 % the corresponding compiler flag sets their interpretation to don't care variables
 
-'$lgt_filter_singleton_variables'(List, Term, Result) :-
+'$lgt_filter_singleton_variable_names'(Singletons, Term, Names) :-
 	(	'$lgt_compiler_flag'(underscore_variables, dont_care) ->
-		'$lgt_filter_dont_care_variables'(List, Result)
-	;	'$lgt_pp_entity_'(_, Entity, _, _, _),
-		term_variables(Entity, [_| _]) ->
-		'$lgt_filter_parameter_variables'(List, Result)
+		'$lgt_filter_dont_care_variables'(Singletons, Names)
+	;	'$lgt_pp_parameter_variables_'(ParameterVariables) ->
+		'$lgt_filter_parameter_variables'(Singletons, ParameterVariables, Names)
 	;	Term = (:- Directive),
 		nonvar(Directive),
 		'$lgt_logtalk_opening_directive'(Directive) ->
-		'$lgt_filter_parameter_variables'(List, Result)
-	;	'$lgt_singleton_variable_names'(List, Result)
+		'$lgt_filter_parameter_variables'(Singletons, Names)
+	;	'$lgt_singleton_variable_names'(Singletons, Names)
 	).
 
 
@@ -6797,12 +6796,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
+'$lgt_filter_parameter_variables'([], _, []).
+
+'$lgt_filter_parameter_variables'([Name = _| Singletons], ParameterVariables, Names) :-
+	(	'$lgt_member'(Name-_, ParameterVariables) ->
+		'$lgt_filter_parameter_variables'(Singletons, ParameterVariables, Names)
+	;	Names = [Name| Rest],
+		'$lgt_filter_parameter_variables'(Singletons, ParameterVariables, Rest)
+	).
+
+
 '$lgt_filter_parameter_variables'([], []).
 
 '$lgt_filter_parameter_variables'([Name = _| Singletons], Names) :-
-	(	sub_atom(Name, 0, 1, After, '_'),
-		After >= 2,
-		sub_atom(Name, _, 1, 0, '_') ->
+	(	'$lgt_parameter_variable_name'(Name) ->
 		'$lgt_filter_parameter_variables'(Singletons, Names)
 	;	Names = [Name| Rest],
 		'$lgt_filter_parameter_variables'(Singletons, Rest)
@@ -14586,7 +14593,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_save_parameter_variables'(@object_identifier)
 % '$lgt_save_parameter_variables'(@category_identifier)
 %
-%
+% saves the parameter variable names and positions found
+% in parametric entity identifiers for later processing
 
 :- dynamic('$lgt_pp_parameter_variables_'/1).
 
@@ -14603,9 +14611,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_parameter_variable_pairs'([], _, []).
 
 '$lgt_parameter_variable_pairs'([VariableName=_| VariableNames], Position, [VariableName-Position| ParameterVariablePairs]) :-
-	sub_atom(VariableName, 0, 1, After, '_'),
-	After >= 2,
-	sub_atom(VariableName, _, 1, 0, '_'),
+	'$lgt_parameter_variable_name'(VariableName),
 	!,
 	NextPosition is Position + 1,
 	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
@@ -14614,6 +14620,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	NextPosition is Position + 1,
 	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
 
+
+
+% '$lgt_parameter_variable_name'(+atom)
+%
+% checks if a variable name is a parameter variable name
+
+'$lgt_parameter_variable_name'(VariableName) :-
+	sub_atom(VariableName, 0, 1, After, '_'),
+	After >= 2,
+	sub_atom(VariableName, _, 1, 0, '_').
+
+
+
+% '$lgt_unify_parameter_variables'(+callable, +compilation_context)
+%
+% unifies any parameter variables found in a parametric entity term
+% with the corresponding entity parameters
 
 '$lgt_unify_parameter_variables'(Term, Ctx) :-
 	'$lgt_pp_parameter_variables_'(ParameterVariables),
@@ -14627,6 +14650,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_unify_parameter_variables'(VariableNames, ParameterVariables, Entity, Unified),
+	% ensure that the compilation context is only further instantiated when the
+	% term contains at least a parameter variable that is successfully unified
 	Unified == true,
 	!.
 
