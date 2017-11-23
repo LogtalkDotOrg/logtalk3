@@ -3038,7 +3038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc2)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc3)).
 
 
 
@@ -6749,7 +6749,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_singleton_variables'([Singleton| Singletons], Term) :-
 	(	'$lgt_compiler_flag'(singleton_variables, warning),
-		'$lgt_filter_singleton_variables'([Singleton| Singletons], Names),
+		'$lgt_filter_singleton_variables'([Singleton| Singletons], Term, Names),
 		Names \== [] ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
@@ -6767,9 +6767,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 % filters variables whose name start with an underscore from a singletons list if
 % the corresponding compiler flag sets their interpretation to don't care variables
 
-'$lgt_filter_singleton_variables'(List, Result) :-
+'$lgt_filter_singleton_variables'(List, Term, Result) :-
 	(	'$lgt_compiler_flag'(underscore_variables, dont_care) ->
 		'$lgt_filter_dont_care_variables'(List, Result)
+	;	'$lgt_pp_entity_'(_, Entity, _, _, _),
+		term_variables(Entity, [_| _]) ->
+		'$lgt_filter_parameter_variables'(List, Result)
+	;	Term = (:- Directive),
+		nonvar(Directive),
+		'$lgt_logtalk_opening_directive'(Directive) ->
+		'$lgt_filter_parameter_variables'(List, Result)
 	;	'$lgt_singleton_variable_names'(List, Result)
 	).
 
@@ -6787,6 +6794,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_filter_dont_care_variables'(Singletons, Names)
 	;	Names = [Name| Rest],
 		'$lgt_filter_dont_care_variables'(Singletons, Rest)
+	).
+
+
+'$lgt_filter_parameter_variables'([], []).
+
+'$lgt_filter_parameter_variables'([Name = _| Singletons], Names) :-
+	(	sub_atom(Name, 0, 1, After, '_'),
+		After >= 2,
+		sub_atom(Name, _, 1, 0, '_') ->
+		'$lgt_filter_parameter_variables'(Singletons, Names)
+	;	Names = [Name| Rest],
+		'$lgt_filter_parameter_variables'(Singletons, Rest)
 	).
 
 
