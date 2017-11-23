@@ -57,6 +57,12 @@ methods.
 
 * UPDATED: User Manual section on debugging messages.
 
+Library
+-------
+
+* ADDED: Options `prefixes/1` and `suffixes/1` to the `os::directory_files/3`
+predicate.
+
 Tools
 -----
 
@@ -66,6 +72,8 @@ Tests
 -----
 
 * ADDED: Unit tests for the new error throwing built-in methods.
+
+* ADDED: Unit tests for the new `os::directory_files/3` predicate options.
 
 Examples
 --------

@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2017/09/10,
+		date is 2017/11/22,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os_types]
 	]).
@@ -115,7 +115,7 @@
 	:- public(directory_files/3).
 	:- mode(directory_files(+atom, -list(atom), +list(compound)), one).
 	:- info(directory_files/3, [
-		comment is 'Returns a filtered list of directory files. Filter options are: paths/1 - {relative,absolute}, type/1 - {all,regular,directory}, extensions/1 - list, and dot_files/1 - boolean. Invalid options are ignored. Default options equivalent to directory_files/2.',
+		comment is 'Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 - all/regular/directory, extensions/1 - list, prefixes/1 - list, suffixes/1 - list, dot_files/1 - boolean. Invalid options ignored. Defaults equivalent to directory_files/2.',
 		argnames is ['Directory', 'Files', 'Options']
 	]).
 

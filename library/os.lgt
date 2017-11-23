@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.43,
+		version is 1.44,
 		author is 'Paulo Moura',
-		date is 2017/10/09,
+		date is 2017/11/22,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1720,19 +1720,27 @@
 			filter_extensions(Files1, [Extension| Extensions], Files2)
 		;	Files2 = Files1
 		),
-		(	list::member(dot_files(Boolean), Options),
-			Boolean == false ->
-			filter_dot_files(Files2, Files3)
+		(	list::member(prefixes([Prefix| Prefixes]), Options),
+			ground([Prefix| Prefixes]) ->
+			filter_prefixes(Files2, [Prefix| Prefixes], Files3)
 		;	Files3 = Files2
 		),
+		(	list::member(suffixes([Suffix| Suffixes]), Options),
+			ground([Suffix| Suffixes]) ->
+			filter_suffixes(Files3, [Suffix| Suffixes], Files4)
+		;	Files4 = Files3
+		),
+		(	list::member(dot_files(Boolean), Options),
+			Boolean == false ->
+			filter_dot_files(Files4, Files5)
+		;	Files5 = Files4
+		),
 		(	list::member(paths(Paths), Options) ->
-			(	Paths == relative ->
-				Files = Files3
-			;	Paths == absolute ->
-				expand_relative_paths(Files3, Directory, Files)
-			;	Files = Files3
+			(	Paths == absolute ->
+				expand_relative_paths(Files5, Directory, Files)
+			;	Files = Files5
 			)
-		;	Files = Files3
+		;	Files = Files5
 		).
 
 	filter_regular([], _, []).
@@ -1760,6 +1768,24 @@
 			Files = [File0| Rest],
 			filter_extensions(Files0, Extensions, Rest)
 		;	filter_extensions(Files0, Extensions, Files)
+		).
+
+	filter_prefixes([], _, []).
+	filter_prefixes([File0| Files0], Prefixes, Files) :-
+		(	list::member(Prefix, Prefixes),
+			sub_atom(File0, 0, _, _, Prefix) ->
+			Files = [File0| Rest],
+			filter_prefixes(Files0, Prefixes, Rest)
+		;	filter_prefixes(Files0, Prefixes, Files)
+		).
+
+	filter_suffixes([], _, []).
+	filter_suffixes([File0| Files0], Suffixes, Files) :-
+		(	list::member(Suffix, Suffixes),
+			sub_atom(File0, _, _, 0, Suffix) ->
+			Files = [File0| Rest],
+			filter_suffixes(Files0, Suffixes, Rest)
+		;	filter_suffixes(Files0, Suffixes, Files)
 		).
 
 	filter_dot_files([], []).

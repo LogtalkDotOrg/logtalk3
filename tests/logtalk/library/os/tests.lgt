@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2017/10/09,
+		date is 2017/11/22,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -284,6 +284,20 @@
 			list::member(File, Files),
 			\+ sub_atom(File, 0, 1, _, '.')
 		).
+
+	test(os_directory_files_3_09) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(regular), paths(relative), prefixes(['test'])]),
+		list::memberchk('tests.lgt', Files),
+		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_3_10) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::directory_files(Directory, Files, [type(regular), paths(relative), suffixes(['r.lgt'])]),
+		\+ list::member('tests.lgt', Files),
+		list::memberchk('tester.lgt', Files).
 
 	setup :-
 		cleanup.
