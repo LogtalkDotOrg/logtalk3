@@ -33,10 +33,10 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2017/06/29,
-		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms).'
+		date is 2017/11/24,
+		comment is 'Assignable variables (supporting backtracable assignment of non-variable terms).'
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
@@ -48,11 +48,11 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 		assignable(Assignable) :-
 			create_mutable(s(_), Assignable).
 
-		assignable(Assignable, Init) :-
+		assignable(Assignable, _) :-
 			nonvar(Assignable),
 			context(Context),
 			throw(error(type_error(variable, Assignable), Context)).
-		assignable(Assignable, Init) :-
+		assignable(_, Init) :-
 			var(Init),
 			context(Context),
 			throw(error(instantiation_error, Context)).
@@ -76,11 +76,11 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 			gensym(Assignable),
 			'?:='(Assignable, s(_)).
 
-		assignable(Assignable, Init) :-
+		assignable(Assignable, _) :-
 			nonvar(Assignable),
 			context(Context),
 			throw(error(type_error(variable, Assignable), Context)).
-		assignable(Assignable, Init) :-
+		assignable(_, Init) :-
 			var(Init),
 			context(Context),
 			throw(error(instantiation_error, Context)).
