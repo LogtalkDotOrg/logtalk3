@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/08/26,
+		date is 2017/11/24,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -108,11 +108,6 @@
 			{current_prolog_flag(max_arity, Max)},
 			N is Max+1, list_of(N, 1, L),
 			{'=..'(_X, [f|L])}.
-
-		list_of(0, _, []).
-		list_of(N, A, [A|L]) :-
-			N > 0, N1 is N-1,
-			list_of(N1, A, L).
 	:- endif.
 
 	% tests from the Logtalk portability work
@@ -131,5 +126,14 @@
 
 	fails(lgt_univ_2_23) :-
 		{'=..'(a(1), [])}.
+
+	% auxiliary predicates
+
+	:- if(\+ current_prolog_flag(max_arity, unbounded)).
+		list_of(0, _, []).
+		list_of(N, A, [A|L]) :-
+			N > 0, N1 is N-1,
+			list_of(N1, A, L).
+	:- endif.
 
 :- end_object.
