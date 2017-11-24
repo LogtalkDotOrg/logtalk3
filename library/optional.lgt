@@ -25,7 +25,7 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2017/08/08,
-		comment is 'Constructors for optional references. An optional reference repesents a term that may or may not be present. Optional references shoud be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
+		comment is 'Constructors for optional references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type "optional" for use with the "type" library object.'
 		],
