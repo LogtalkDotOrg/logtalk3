@@ -303,6 +303,9 @@
 % '$lgt_pp_module_'(Module)
 :- dynamic('$lgt_pp_module_'/1).
 
+% '$lgt_pp_module_'(ParameterVariables)
+:- dynamic('$lgt_pp_parameter_variables_'/1).
+
 % '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, Lines)
 :- dynamic('$lgt_pp_uses_predicate_'/4).
 % '$lgt_pp_uses_non_terminal_'(Obj, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, Lines)
@@ -7150,6 +7153,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_category_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_entity_'(_, _, _, _, _)),
 	retractall('$lgt_pp_module_'(_)),
+	retractall('$lgt_pp_parameter_variables_'(_)),
 	retractall('$lgt_pp_complemented_object_'(_, _, _, _, _)),
 	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_imported_category_'(_, _, _, _, _, _)),
@@ -7220,8 +7224,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_built_in_'),
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
-	retractall('$lgt_pp_aux_predicate_counter_'(_)),
-	retractall('$lgt_pp_parameter_variables_'(_)).
+	retractall('$lgt_pp_aux_predicate_counter_'(_)).
 
 
 
@@ -14595,8 +14598,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % saves the parameter variable names and positions found
 % in parametric entity identifiers for later processing
-
-:- dynamic('$lgt_pp_parameter_variables_'/1).
 
 '$lgt_save_parameter_variables'(Entity) :-
 	compound(Entity),
