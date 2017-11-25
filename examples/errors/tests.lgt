@@ -55,19 +55,19 @@
 
 	throws(
 		object_unknown_directive,
-		error(domain_error(directive,index/2), _)
+		error(domain_error(directive,(index)/2), _)
 	) :-
 		create_object(_, [], [index(predicate/3, [1, 2])], []).
 
 	throws(
 		category_unknown_directive,
-		error(domain_error(directive,index/2), _)
+		error(domain_error(directive,(index)/2), _)
 	) :-
 		create_category(_, [], [index(predicate/3, [1, 2])], []).
 
 	throws(
 		protocol_unknown_directive,
-		error(domain_error(directive,index/2), _)
+		error(domain_error(directive,(index)/2), _)
 	) :-
 		create_protocol(_, [], [index(predicate/3, [1, 2])]).
 
