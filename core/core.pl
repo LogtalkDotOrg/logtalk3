@@ -3041,7 +3041,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc4)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc5)).
 
 
 
@@ -21392,6 +21392,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_term'(Stream, Term, [], Lines, VariableNames),
 	'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, Terms).
 
+'$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
+	var(Term),
+	% delay the instantiation error
+	!,
+	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
+	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
 '$lgt_read_stream_to_terms_runtime'(end_of_file, _, _, _, []) :-
 	!.
 '$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
@@ -21403,6 +21409,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_term'(Stream, Term, [singletons(Singletons)], Lines, VariableNames),
 	'$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, Stream, Terms).
 
+'$lgt_read_stream_to_terms_compile'(Term, _, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
+	var(Term),
+	% delay the instantiation error
+	!,
+	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
+	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, Stream, Terms).
 '$lgt_read_stream_to_terms_compile'(end_of_file, _, _, _, _, []) :-
 	!.
 '$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-

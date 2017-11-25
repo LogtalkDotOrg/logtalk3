@@ -43,6 +43,9 @@ source files.
 methods throw standard `error/2` exception terms and are equivalent to a
 sequence of `context/1` and `throw/1` method calls.
 
+* FIXED: Detection of variable file terms and reporting of the corresponding
+instantiation errors when processing `include/1` directives.
+
 Prolog adapter and integration files
 ------------------------------------
 
