@@ -30,6 +30,7 @@ CONTRIBUTORS
 * Andreas Becker (PDT support for Logtalk, bug reports)
 * Anne Ogborn (bug reports, usability suggestions)
 * Artur Miguel Dias (testing, lambda expression examples)
+* Artur Wang (Visual Studio Code support for Logtalk)
 * Arun Majumdar (bug reports, usability suggestions)
 * Barry Evans (dead code scanner tool, usability suggestions)
 * Clara Dimene (GeSHi syntax highlighter)
