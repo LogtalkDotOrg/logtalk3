@@ -87,6 +87,9 @@ Examples
 `parametric` example using _parameter variables_ instead of the `parameter/2`
 and `this/1` built-in methods to access entity parameters.
 
+* UPDATED: The `errors` example to illustrate detection of variable file terms
+when processing `include/1` directives.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

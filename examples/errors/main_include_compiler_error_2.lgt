@@ -18,15 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(main_include_compiler_error).
+:- object(main_include_compiler_error_2).
 
-	:- public(a/0).
-
-	a.
-
-	:- include(include_compiler_error).
-
-	f.
-	g.
+	:- include(include_compiler_error_2).
 
 :- end_object.

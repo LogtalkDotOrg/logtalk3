@@ -32,5 +32,6 @@
 	(logtalk_load(uses_predicate_conflict) -> true; true),
 	(logtalk_load(no_multifile_primary_declaration) -> true; true),
 	(logtalk_load(main_include_syntax_error) -> true; true),
-	(logtalk_load(main_include_compiler_error) -> true; true)
+	(logtalk_load(main_include_compiler_error_1) -> true; true),
+	(logtalk_load(main_include_compiler_error_2) -> true; true)
 )).
