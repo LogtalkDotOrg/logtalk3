@@ -244,7 +244,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2017/11/16,
-		comment is 'A simple representation for people using parametric objects.',
+		comment is 'A simple representation for persons data using parametric objects.',
 		parnames is ['Name', 'Age']
 	]).
 
@@ -262,7 +262,7 @@
 	:- protected(age/3).
 	:- mode(age(?integer, ?integer, -object_identifier), zero_or_one).
 	:- info(age/3, [
-		comment is 'Rectangle area.',
+		comment is 'Constructs a new object identifier with an updated age.',
 		argnames is ['Age', 'NewAge', 'NewId']
 	]).
 
@@ -278,7 +278,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2017/11/16,
-		comment is 'A simple representation for employees using parametric objects.',
+		comment is 'A simple representation for employees data using parametric objects.',
 		parnames is ['Name', 'Age', 'Salary']
 	]).
 
@@ -296,7 +296,7 @@
 	:- protected(salary/3).
 	:- mode(salary(?integer, ?integer, -object_identifier), zero_or_one).
 	:- info(salary/3, [
-		comment is 'Rectangle area.',
+		comment is 'Constructs a new object identifier with an updated salary.',
 		argnames is ['Salary', 'NewSalary', 'NewId']
 	]).
 
@@ -317,7 +317,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2017/11/16,
-		comment is 'Description',
+		comment is 'Dress advice according to the season.',
 		parnames is ['Season']
 	]).
 
@@ -340,7 +340,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2017/11/16,
-		comment is 'Description',
+		comment is 'Speech advice according to the event.',
 		parnames is ['Event']
 	]).
 
@@ -362,7 +362,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2017/11/16,
-		comment is 'Description',
+		comment is 'Speech and dress advice according to the season and the event.',
 		parnames is ['Season', 'Event']
 	]).
 
