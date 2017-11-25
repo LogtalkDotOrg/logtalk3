@@ -7433,12 +7433,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % found in an included file
 
 '$lgt_compile_include_file_terms'([Term-sd(Lines,VariableNames)| Terms], File, Ctx) :-
+	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
+	assertz('$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines)),
 	'$lgt_check'(nonvar, Term, term(Term)),
 	% only the compilation context mode and position should be shared between different terms
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, _),
 	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	retractall('$lgt_pp_term_variable_names_file_lines_'(_, _, _, _)),
-	assertz('$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines)),
 	'$lgt_compile_file_term'(Term, NewCtx),
 	'$lgt_compile_include_file_terms'(Terms, File, Ctx).
 
