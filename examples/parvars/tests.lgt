@@ -78,11 +78,11 @@
 		Speech == [happy, jokes].
 
 	test(parvars_09) :-
-		date(2017, 11, 19)::(year(Year), month(Month), day(Day)),
+		date(2017, 11, 19) :: (year(Year), month(Month), day(Day)),
 		Year == 2017, Month == 11, Day == 19.
 
 	test(parvars_10) :-
-		time(21, 33, 42)::(hours(Hours), mins(Mins), secs(Secs)),
+		time(21, 33, 42) :: (hours(Hours), mins(Mins), secs(Secs)),
 		Hours == 21, Mins == 33, Secs == 42.
 
 :- end_object.
