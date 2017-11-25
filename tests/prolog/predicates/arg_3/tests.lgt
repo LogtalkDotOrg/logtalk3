@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2017/11/25,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -103,5 +103,15 @@
 	throws(sics_arg_3_16, error(type_error(compound,3),_)) :-
 		% try to delay the expected error to runtime
 		{G = arg(1, 3, _A), call(G)}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_arg_3_17) :-
+		arg(1, [Head| _], Var),
+		Var == Head.
+
+	succeeds(lgt_arg_3_17) :-
+		arg(2, [_| Tail], Var),
+		Var == Tail.
 
 :- end_object.

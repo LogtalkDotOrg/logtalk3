@@ -80,6 +80,8 @@ Tests
 
 * ADDED: Unit tests for the new `os::directory_files/3` predicate options.
 
+* ADDED: Two more tests for the Prolog standard `arg/3` built-in predicate.
+
 Examples
 --------
 
