@@ -3041,7 +3041,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc5)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc6)).
 
 
 
@@ -14602,8 +14602,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_save_parameter_variables'(Entity) :-
 	compound(Entity),
 	'$lgt_pp_term_variable_names_file_lines_'(_, VariableNames, _, _),
-	!,
 	'$lgt_parameter_variable_pairs'(VariableNames, 1, ParameterVariablePairs),
+	ParameterVariablePairs \== [],
+	!,
 	assertz('$lgt_pp_parameter_variables_'(ParameterVariablePairs)).
 
 '$lgt_save_parameter_variables'(_).
@@ -14642,6 +14643,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_unify_parameter_variables'(Term, Ctx) :-
 	'$lgt_pp_parameter_variables_'(ParameterVariables),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, _, _),
+	VariableNames \== [],
 	(	'$lgt_pp_entity_'(_, Entity, _, _, _) ->
 		% compile time; instantiate the Entity argument in the compilation context
 		true
