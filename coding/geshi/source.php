@@ -49,9 +49,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.37,
+		version is 1.38,
 		author is 'Paulo Moura',
-		date is 2017/11/13,
+		date is 2017/11/27,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -191,7 +191,7 @@ comment
 		predicate_property(Predicate, Property).
 
 	database_methods :-
-		abolish(Functor/Arity),
+		abolish(Name/Arity),
 		asserta(Clause),
 		assertz(Clause),
 		clause(Head, Body),
@@ -313,7 +313,7 @@ comment
 		Term1 @> Term2.
 
 	term_creation_and_decomposition :-
-		functor(Term, Functor, Arity),
+		functor(Term, Name, Arity),
 		arg(N, Term, Arg),
 		Term =.. [Functor| Args],
 		copy_term(Term, Copy),

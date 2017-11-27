@@ -34,11 +34,11 @@ object predicates.
 
 	interface :-
 		% find predicates visible in "this"
-		current_predicate(Functor/Arity),
-			functor(Pred, Functor, Arity),
+		current_predicate(Name/Arity),
+			functor(Pred, Name, Arity),
 			Pred \= interface,
 			predicate_property(Pred, scope(Scope)),
-			writeq(Functor/Arity), write(' - '), writeq(Scope), nl,
+			writeq(Name/Arity), write(' - '), writeq(Scope), nl,
 		fail.
 	interface.
 

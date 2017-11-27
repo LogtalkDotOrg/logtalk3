@@ -74,12 +74,12 @@ Note that, despite the correct functor for this control construct being (traditi
 		<dd><code>type_error(object_identifier, Object)</code></dd>
 	<dt>Message is neither a variable nor a callable term:</dt>
 		<dd><code>type_error(callable, Message)</code></dd>
-	<dt>Message, with predicate indicator Functor/Arity, is declared private:</dt>
-		<dd><code>permission_error(access, private_predicate, Functor/Arity)</code></dd>
-	<dt>Message, with predicate indicator Functor/Arity, is declared protected:</dt>
-		<dd><code>permission_error(access, protected_predicate, Functor/Arity)</code></dd>
-	<dt>Message, with predicate indicator Functor/Arity, is not declared:</dt>
-		<dd><code>existence_error(predicate_declaration, Functor/Arity)</code></dd>
+	<dt>Message, with predicate indicator Name/Arity, is declared private:</dt>
+		<dd><code>permission_error(access, private_predicate, Name/Arity)</code></dd>
+	<dt>Message, with predicate indicator Name/Arity, is declared protected:</dt>
+		<dd><code>permission_error(access, protected_predicate, Name/Arity)</code></dd>
+	<dt>Message, with predicate indicator Name/Arity, is not declared:</dt>
+		<dd><code>existence_error(predicate_declaration, Name/Arity)</code></dd>
 	<dt>Object does not exist:</dt>
 		<dd><code>existence_error(object, Object)</code></dd>
 </dl>
@@ -88,8 +88,8 @@ Note that, despite the correct functor for this control construct being (traditi
 		<dd><code>instantiation_error</code></dd>
 	<dt>Proxy is neither a variable nor an object identifier:</dt>
 		<dd><code>type_error(object_identifier, Proxy)</code></dd>
-	<dt>Proxy, with predicate indicator Functor/Arity, does not exist in the <em>user</em> pseudo-object:</dt>
-		<dd><code>existence_error(procedure, Functor/Arity)</code></dd>
+	<dt>Proxy, with predicate indicator Name/Arity, does not exist in the <em>user</em> pseudo-object:</dt>
+		<dd><code>existence_error(procedure, Name/Arity)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -109,7 +109,7 @@ Note that, despite the correct functor for this control construct being (traditi
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 25, 2016</span>
+		<span>Last updated on: November 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>

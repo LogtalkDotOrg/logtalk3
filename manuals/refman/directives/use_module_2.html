@@ -52,7 +52,7 @@ This directive declares that all calls (made from predicates defined in the cate
 This directive is also used when compiling calls to the database and reflection built-in methods by examining these methods predicate arguments.
 </p>
 <p>
-It is possible to specify a predicate alias using the notation <code>Functor/Arity as Alias/Arity</code> or, in alternative, the notation <code>Functor/Arity:Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
+It is possible to specify a predicate alias using the notation <code>Name/Arity as Alias/Arity</code> or, in alternative, the notation <code>Name/Arity:Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
 </p>
 <p>
 Note that this directive differs from the directive with the same name found on some Prolog implementations by requiring the first argument to be a module name (an atom) instead of a file specification. In Logtalk, there's no mixing between <em>loading</em> a resource and (declaring the) <em>using</em> (of) a resource. As a consequence, this directive doesn't automatically load the module. Loading the module file is dependent of the used backend Prolog compiler and must be done separately (usually, using a source file <code>use_module/1</code> or <code>use_module/2</code> directive in the entity file or in the application loader file). Also note that the name of the module may differ from the name of the module file.
@@ -86,7 +86,7 @@ foo :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 29, 2017</span>
+		<span>Last updated on: November 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#directives">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>

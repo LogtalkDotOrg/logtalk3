@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2016/10/14,
+		date is 2017/11/27,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -65,7 +65,7 @@
 		spy(logtalk-13),
 		spy(user, logtalk, _, _),
 		deterministic(debug),
-		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
 		spying(Sender, This, _, _), Sender == user, This = logtalk.
 
@@ -79,7 +79,7 @@
 		spy(logtalk-13),
 		spy(user, logtalk, _, _),
 		deterministic(nodebug),
-		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
 		spying(Sender, This, _, _), Sender == user, This = logtalk.
 
@@ -114,7 +114,7 @@
 		spy(logtalk-13),
 		spy(user, logtalk, _, _),
 		deterministic(trace),
-		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
 		spying(Sender, This, _, _), Sender == user, This = logtalk.
 
@@ -128,7 +128,7 @@
 		spy(logtalk-13),
 		spy(user, logtalk, _, _),
 		deterministic(notrace),
-		spying(Functor/Arity), Functor == foo, Arity == 1,
+		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
 		spying(Sender, This, _, _), Sender == user, This = logtalk.
 

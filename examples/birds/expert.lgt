@@ -54,7 +54,7 @@
 
 	check(Bird) :-
 		forall(
-			(::descriptor(Functor/Arity), functor(Predicate, Functor, Arity), Bird::Predicate),
+			(::descriptor(Name/Arity), functor(Predicate, Name, Arity), Bird::Predicate),
 			call(Predicate)
 		).
 

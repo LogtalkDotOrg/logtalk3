@@ -65,14 +65,14 @@ This method may be used to retract clauses for predicates that are not declared 
 		<dd><code>instantiation_error</code></dd>
 	<dt>Head is neither a variable nor a callable term:</dt>
 		<dd><code>type_error(callable, Head)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is that of a private predicate:</dt>
-		<dd><code>permission_error(modify, private_predicate, Functor/Arity)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is that of a protected predicate:</dt>
-		<dd><code>permission_error(modify, protected_predicate, Functor/Arity)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is that of a static predicate:</dt>
-		<dd><code>permission_error(modify, static_predicate, Functor/Arity)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is not declared:</dt>
-		<dd><code>existence_error(predicate_declaration, Functor/Arity)</code></dd>
+	<dt>The predicate indicator of Head, Name/Arity, is that of a private predicate:</dt>
+		<dd><code>permission_error(modify, private_predicate, Name/Arity)</code></dd>
+	<dt>The predicate indicator of Head, Name/Arity, is that of a protected predicate:</dt>
+		<dd><code>permission_error(modify, protected_predicate, Name/Arity)</code></dd>
+	<dt>The predicate indicator of Head, Name/Arity, is that of a static predicate:</dt>
+		<dd><code>permission_error(modify, static_predicate, Name/Arity)</code></dd>
+	<dt>The predicate indicator of Head, Name/Arity, is not declared:</dt>
+		<dd><code>existence_error(predicate_declaration, Name/Arity)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -99,7 +99,7 @@ This method may be used to retract clauses for predicates that are not declared 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 1, 2017</span>
+		<span>Last updated on: November 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="clause_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="retractall_1.html">next</a></span><br/>

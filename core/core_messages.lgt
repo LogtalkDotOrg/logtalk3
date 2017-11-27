@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.28,
+		version is 1.29,
 		author is 'Paulo Moura',
-		date is 2017/10/31,
+		date is 2017/11/27,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -565,30 +565,30 @@
 		['  in ~w ~q'-[Type, Entity], nl].
 	term_tokens(directive(Directive)) -->
 		(	{callable(Directive)} ->
-			{functor(Directive, Functor, Arity)},
-			['  in directive ~q/~w'-[Functor, Arity], nl]
+			{functor(Directive, Name, Arity)},
+			['  in directive ~q/~w'-[Name, Arity], nl]
 		;	['  in directive'-[], nl]
 		).
 	term_tokens(clause(Clause)) -->
 		(	{\+ callable(Clause)} ->
 			['  in clause'-[], nl]
 		;	{Clause = (Head :- _), callable(Head)} ->
-			{functor(Head, Functor, Arity)},
-			['  in clause for predicate ~q/~w'-[Functor, Arity], nl]
+			{functor(Head, Name, Arity)},
+			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
 		;	{Clause \= (_ :- _)} ->
-			{functor(Clause, Functor, Arity)},
-			['  in clause for predicate ~q/~w'-[Functor, Arity], nl]
+			{functor(Clause, Name, Arity)},
+			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
 		;	['  in clause'-[], nl]
 		).
 	term_tokens(grammar_rule('-->'(Left, _))) -->
 		(	{\+ callable(Left)} ->
 			['  in grammar rule'-[], nl]
 		;	{Left = ','(Head, _), callable(Head)} ->
-			{functor(Head, Functor, Arity)},
-			['  in grammar rule for non-terminal ~q//~w'-[Functor, Arity], nl]
+			{functor(Head, Name, Arity)},
+			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
 		;	{Left \= ','(_, _)} ->
-			{functor(Left, Functor, Arity)},
-			['  in grammar rule for non-terminal ~q//~w'-[Functor, Arity], nl]
+			{functor(Left, Name, Arity)},
+			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
 		;	['  in grammar rule'-[], nl]
 		).
 	term_tokens(term(_)) -->

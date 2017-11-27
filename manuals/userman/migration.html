@@ -68,7 +68,7 @@ Encapsulating Prolog code using Logtalk objects is simple. First, for each sourc
 <p>
 Prolog <em>multifile</em> predicates are used when clauses for the same predicate are spread among several source files. When encapsulating plain Prolog code that uses multifile predicates, is often the case that the clauses of the multifile predicates get spread between different objects and categories but conversion is straight-forward. In the Logtalk object (or category) holding the multifile predicate <em>primary</em> declaration, add a <a title="Consult user manual" href="predicates.html#predicates_scope">predicate scope directive</a> and a <a title="Consult user manual" href="predicates.html#predicates_multifile"><code>multifile/1</code></a> directive. In all other objects (or categories) defining clauses for the multifile predicate, add a <code>multifile/1</code> directive and predicate clauses using the format:
 </p>
-<pre>:- multifile(Entity::Functor/Arity).
+<pre>:- multifile(Entity::Name/Arity).
 
 Entity::Functor(...) :-
     ...
@@ -134,11 +134,11 @@ Currently, Logtalk supports the following module directives:
 	<dt><code>module/2</code></dt>
 		<dd>The module name becomes the object name. The exported predicates become public object predicates. The exported grammar rule non-terminals become public grammar rule non-terminals. The exported operators become public object operators but are not active elsewhere when loading the code.</dd>
 	<dt><code>use_module/2</code></dt>
-		<dd>This directive is compiled as a Logtalk <a title="Consult reference manual" href="../refman/directives/uses_2.html"><code>uses/2</code></a> directive in order to ensure correct compilation of the module predicate clauses. The first argument of this directive must be the module <strong>name</strong> (an atom), not a module file specification (the adapter files attempt to use the Prolog dialect level term-expansion mechanism to find the module name from the module file specification). Note that the module is not automatically loaded by Logtalk (as it would be when compiling the directive using Prolog instead of Logtalk; the programmer may also want the specified module to be compiled as an object). The second argument must be a predicate indicator (<code>Functor/Arity</code>), a grammar rule non-terminal indicator (<code>Functor//Arity</code>), a operator declaration, or a list of predicate indicators, grammar rule non-terminal indicators, and operator declarations.</dd>
+		<dd>This directive is compiled as a Logtalk <a title="Consult reference manual" href="../refman/directives/uses_2.html"><code>uses/2</code></a> directive in order to ensure correct compilation of the module predicate clauses. The first argument of this directive must be the module <strong>name</strong> (an atom), not a module file specification (the adapter files attempt to use the Prolog dialect level term-expansion mechanism to find the module name from the module file specification). Note that the module is not automatically loaded by Logtalk (as it would be when compiling the directive using Prolog instead of Logtalk; the programmer may also want the specified module to be compiled as an object). The second argument must be a predicate indicator (<code>Name/Arity</code>), a grammar rule non-terminal indicator (<code>Name//Arity</code>), a operator declaration, or a list of predicate indicators, grammar rule non-terminal indicators, and operator declarations.</dd>
 	<dt><code>export/1</code></dt>
-		<dd>Exported predicates are compiled as public object predicates. The argument must be a predicate indicator (<code>Functor/Arity</code>), a grammar rule non-terminal indicator (<code>Functor//Arity</code>), a operator declaration, or a list of predicate indicators, grammar rule non-terminal indicators, and operator declarations.</dd>
+		<dd>Exported predicates are compiled as public object predicates. The argument must be a predicate indicator (<code>Name/Arity</code>), a grammar rule non-terminal indicator (<code>Name//Arity</code>), a operator declaration, or a list of predicate indicators, grammar rule non-terminal indicators, and operator declarations.</dd>
 	<dt><code>reexport/2</code></dt>
-		<dd>Reexported predicates are compiled as public object predicates. The first argument is the module name. The second argument must be a predicate indicator (<code>Functor/Arity</code>), a grammar rule non-terminal indicator (<code>Functor//Arity</code>), a operator declaration, or a list of predicate indicators, grammar rule non-terminal indicators, and operator declarations.</dd>
+		<dd>Reexported predicates are compiled as public object predicates. The first argument is the module name. The second argument must be a predicate indicator (<code>Name/Arity</code>), a grammar rule non-terminal indicator (<code>Name//Arity</code>), a operator declaration, or a list of predicate indicators, grammar rule non-terminal indicators, and operator declarations.</dd>
 	<dt><code>meta_predicate/1</code></dt>
 		<dd>Module meta-predicates become object meta-predicates. Only predicate arguments marked as goals or closures (using an integer) are interpreted as meta-arguments. In addition, Prolog module meta-predicates and Logtalk meta-predicates don't share the same explicit-qualification calling semantics: in Logtalk, meta-arguments are always called in the context of the <em>sender</em>.</dd>
 </dl>
@@ -256,14 +256,14 @@ Logtalk supports the compilation of such clauses within objects and categories. 
 :- end_object.
 </pre>
 <p>
-The Logtalk compiler will print a warning if the <code>multifile/1</code> directive is missing. These multifile predicates may also be declared dynamic using the same <code>Module:Functor/Arity</code> notation.
+The Logtalk compiler will print a warning if the <code>multifile/1</code> directive is missing. These multifile predicates may also be declared dynamic using the same <code>Module:Name/Arity</code> notation.
 </p>
 
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 14, 2017</span>
+		<span>Last updated on: November 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="programming.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

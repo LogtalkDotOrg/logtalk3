@@ -46,12 +46,12 @@
 		assertz(private_predicate).
 
 	dynamic_predicates :-
-		current_predicate(Functor/Arity),
-		functor(Predicate, Functor, Arity),
+		current_predicate(Name/Arity),
+		functor(Predicate, Name, Arity),
 		predicate_property(Predicate, (dynamic)),
 		predicate_property(Predicate, Scope),
 		scope(Scope),
-		writeq(Functor/Arity), write(' - '), writeq(Scope), nl,
+		writeq(Name/Arity), write(' - '), writeq(Scope), nl,
 		fail.
 
 	dynamic_predicates.

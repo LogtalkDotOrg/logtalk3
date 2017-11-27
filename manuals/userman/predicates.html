@@ -162,9 +162,9 @@ The following meta-predicate mode arguments are for use only when writing backen
 </p>
 <dl>
 	<dt><code>/</code></dt>
-		<dd>Predicate indicator (<code>Functor/Arity</code>), list of predicate indicators, or conjunction of predicate indicators.</dd>
+		<dd>Predicate indicator (<code>Name/Arity</code>), list of predicate indicators, or conjunction of predicate indicators.</dd>
 	<dt><code>//</code></dt>
-		<dd>Non-terminal indicator (<code>Functor//Arity</code>), list of predicate indicators, or conjunction of predicate indicators.</dd>
+		<dd>Non-terminal indicator (<code>Name//Arity</code>), list of predicate indicators, or conjunction of predicate indicators.</dd>
 	<dt><code>[0]</code></dt>
 		<dd>List of goals.</dd>
 	<dt><code>[N]</code></dt>
@@ -338,7 +338,7 @@ Thus, when sending the message <code>member/2</code> to <code>my_data_structure<
 <p>
 A predicate can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info_2.html"><code>info/2</code></a> directive:
 </p>
-<pre>:- info(Functor/Arity, List).</pre>
+<pre>:- info(Name/Arity, List).</pre>
 <p>
 The second argument is a list of <code>Key is Value</code> terms. See the <a href="documenting.html">Documenting Logtalk programs</a> section for details.
 </p>
@@ -348,7 +348,7 @@ The second argument is a list of <code>Key is Value</code> terms. See the <a hre
 <p>
 A predicate can be declared <em>multifile</em> by using the <a title="Consult reference manual" href="../refman/directives/multifile_1.html"><code>multifile/1</code></a> directive:
 </p>
-<pre>:- multifile(Functor/Arity).</pre>
+<pre>:- multifile(Name/Arity).</pre>
 <p>
 This allows clauses for a predicate to be defined in several objects and/or categories. This is a directive that should be used with care. Support for this directive have been added to Logtalk primarily to support migration of Prolog module code. Spreading clauses for a predicate among several Logtalk entities can be handy in some cases but can also make your code difficult to understand. Logtalk precludes using a multifile predicate for breaking object encapsulation by checking that the object (or category) declaring the predicate (using a scope directive) defines it also as multifile. This entity is said to contain the <em>primary declaration</em> for the multifile predicate. In addition, note that the <code>multifile/1</code> directive is mandatory when defining multifile predicates.
 </p>
@@ -393,7 +393,7 @@ yes
 Entities containing primary multifile predicate declarations must always be compiled before entities defining clauses for those multifile predicates. The Logtalk compiler will print a warning if the scope directive is missing.
 </p>
 <p>
-Multifile predicates may also be declared dynamic using the same <code>Entity::Functor/Arity</code> notation (multifile predicates are static by default).
+Multifile predicates may also be declared dynamic using the same <code>Entity::Name/Arity</code> notation (multifile predicates are static by default).
 </p>
 <p>
 When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category defining the clause. This allows clauses for multifile predicates to call local object or category predicates. But the values of the <em>sender</em>, <em>this</em>, and <em>self</em> in the implicit execution context are passed from the clause head to the clause body. This is necessary to ensure that these values are always valid and to allow multifile predicate clauses to be defined in categories. A call to the <code>parameter/2</code> execution context methods, however, retrieves parameters of the entity defining the clause, not from the entity for which the clause is defined. The parameters of the entity for which the clause is defined can be accessed by simple unification at the clause head.
@@ -644,7 +644,7 @@ yes</pre>
 This is the expected result as the expansion of the grammar rule into a clause leaves the <code>{bar}</code> goal untouched, which, in turn, is converted into the goal <code>bar</code> when the clause is compiled.
 </p>
 <p>
-A grammar rule non-terminal may be declared as dynamic or discontiguous, as any object predicate, using the same <code><em>Functor//Arity</em></code> notation illustrated above for the scope directives. In addition, grammar rule non-terminals can be documented using the <a title="Consult reference manual" href="../refman/directives/info_2.html"><code>info/2</code></a> directive, as in the following example:
+A grammar rule non-terminal may be declared as dynamic or discontiguous, as any object predicate, using the same <code><em>Name//Arity</em></code> notation illustrated above for the scope directives. In addition, grammar rule non-terminals can be documented using the <a title="Consult reference manual" href="../refman/directives/info_2.html"><code>info/2</code></a> directive, as in the following example:
 </p>
 <pre>:- public(sentence//0).
 
@@ -971,12 +971,12 @@ The properties <code>declared_in/1-2</code>, <code>defined_in/1-2</code>, and <c
 <p>
 We can find, by backtracking, all visible user predicates by calling the <a title="Consult reference manual" href="../refman/methods/current_predicate_1.html"><code>current_predicate/1</code></a> built-in method. This method respects the predicate's scope declarations. For instance, the following call:
 </p>
-<pre>| ?- some_object::current_predicate(Functor/Arity).</pre>
+<pre>| ?- some_object::current_predicate(Name/Arity).</pre>
 <p>
 will only return user predicates that are declared public. The predicate property <code>non_terminal/1</code> may be used to retrieve all grammar rule non-terminals declared for an object. For example:
 </p>
 <pre>current_non_terminal(Object, NonTerminal//Args) :-
-    Object::current_predicate(Functor/Arity),
+    Object::current_predicate(Name/Arity),
     functor(Predicate, Functor, Arity),
     Object::predicate_property(Predicate, non_terminal(NonTerminal//Args)).</pre>
 <p>
@@ -1070,7 +1070,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 9, 2017</span>
+		<span>Last updated on: November 27, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
