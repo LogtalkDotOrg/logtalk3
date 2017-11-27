@@ -22,9 +22,9 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/26,
+		date is 2017/11/27,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
@@ -33,7 +33,7 @@
 		see_also is [code_metrics_protocol]
 	]).
 
-	:- uses(list, [memberchk/2]).
+	:- uses(list, [member/2, memberchk/2]).
 
 	:- private(ancestor/4).
 	:- mode(ancestor(?entity, ?entity_identifier, ?entity, ?entity_identifier), zero_or_more).
@@ -172,10 +172,10 @@
 
 	defines_predicate(object, Entity, Predicate, Properties) :-
 		object_property(Entity, defines(Predicate, Properties)),
-		\+ memberchk(auxiliary, Properties).
+		\+ member(auxiliary, Properties).
 	defines_predicate(category, Entity, Predicate, Properties) :-
 		category_property(Entity, defines(Predicate, Properties)),
-		\+ memberchk(auxiliary, Properties).
+		\+ member(auxiliary, Properties).
 
 	declares_predicate(Entity, Predicate) :-
 		current_entity(Entity),

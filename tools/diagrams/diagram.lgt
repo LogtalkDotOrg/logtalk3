@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.9,
+		version is 2.11,
 		author is 'Paulo Moura',
-		date is 2017/04/24,
+		date is 2017/11/27,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -119,7 +119,7 @@
 		format_object(Format),
 		memberchk(exclude_libraries(ExcludedLibraries), Options),
 		logtalk_library_path(Library, _),
-		\+ memberchk(Library, ExcludedLibraries),
+		\+ member(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		% loaded library
@@ -559,7 +559,7 @@
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
 		logtalk_library_path(Library, _),
 		Library \== TopLibrary,
-		\+ memberchk(Library, ExcludedLibraries),
+		\+ member(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Path),
 		atom_concat(TopPath, RelativePath, Path),
 		RelativePath \== ''.
