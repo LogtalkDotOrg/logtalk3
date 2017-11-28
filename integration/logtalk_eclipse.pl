@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for ECLiPSe
-%  Last updated on May 5, 2017
+%  Last updated on November 28, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -25,5 +25,3 @@
 :- compile('$LOGTALKHOME/adapters/eclipse.pl').
 :- compile('$LOGTALKHOME/paths/paths.pl').
 :- compile('$LOGTALKHOME/integration/logtalk_comp_eclipse.pl').
-% load integration hooks with ECLiPSe native developer tools
-:- compile('$LOGTALKHOME/adapters/eclipsehooks.pl').

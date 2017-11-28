@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on November 18, 2017
+%  Last updated on November 28, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -100,6 +100,25 @@
 :- initialization(
 	logtalk_load(tools(loader))
 ).
+*/
+
+
+%  To call ECLiPSe/SWI-Prolog make/0 when calling logtalk_make/0 or
+%  logtalk_make/1 with the target all, uncomment the following lines:
+
+/*
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == eclipse; Dialect == swi)
+)).
+
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+logtalk_make_target_action(all) :-
+	make.
+
+:- endif.
 */
 
 

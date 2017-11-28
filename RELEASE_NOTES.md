@@ -49,6 +49,10 @@ instantiation errors when processing `include/1` directives.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: Moved the definition of the `logtalk_make_target_action/1` hook
+predicate for ECLiPSe and SWI-Prolog from the corresponding hooks file into
+the `settings-sample.lgt` file.
+
 * FIXED: Workaround lack of compliance of B-Prolog and Qu-Prolog `read_term/3`
 option `variable_names/1`.
 
