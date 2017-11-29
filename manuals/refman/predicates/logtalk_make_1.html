@@ -67,7 +67,7 @@ When using the <code>circular</code> target, be prepared for a lengthy computati
 Depending on the back-end Prolog compiler, the shortcuts <code>{*}</code>, <code>{!}</code>, <code>{?}</code>, and <code>{@}</code> may be used in alternative to, respectively, <code>logtalk_make(all)</code>, <code>logtalk_make(clean)</code>, <code>logtalk_make(check)</code>, and <code>logtalk_make(circular)</code>. The shortcuts <code>{+d}</code>, <code>{+n}</code>, and <code>{+o}</code> may be used in alternative to, respectively, <code>logtalk_make(debug)</code>, <code>logtalk_make(normal)</code>, and <code>logtalk_make(optimal)</code>. Check the adapter files for the availability of these shortcuts as they are not part of the language (and thus should only be used at the top-level interpreter).
 </p>
 <p>
-The target actions can be extended by defining clauses for the multifile and dynamic predicate <code>logtalk_make_target_action(Target)</code> where <code>Target</code> is one of the targets listed above. The additional actions are run after the default ones.
+The target actions can be extended by defining clauses for the multifile and dynamic hook predicate <code>logtalk_make_target_action(Target)</code> where <code>Target</code> is one of the targets listed above. The additional user defined actions are run after the default ones.
 </p>
 
 <h4>Template and modes</h4>
@@ -93,7 +93,7 @@ The target actions can be extended by defining clauses for the multifile and dyn
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 25, 2017</span>
+		<span>Last updated on: November 29, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_make_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_library_path_2.html">next</a></span><br/>

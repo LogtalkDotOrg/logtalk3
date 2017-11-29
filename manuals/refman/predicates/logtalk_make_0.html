@@ -51,6 +51,9 @@ Reloads all Logtalk source files that have been modified since the time they are
 <p>
 Depending on the back-end Prolog compiler, the shortcut <code>{*}</code> may be used in alternative. Check the adapter files for the availability of these shortcuts as they are not part of the language (and thus should only be used at the top-level interpreter).
 </p>
+<p>
+This predicate can be extended by the user by defining clauses for the <code>logtalk_make_target_action/1</code> multifile and dynamic hook predicate using the argument <code>all</code>. The additional user defined actions are run after the default one.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -75,7 +78,7 @@ Depending on the back-end Prolog compiler, the shortcut <code>{*}</code> may be 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 25, 2017</span>
+		<span>Last updated on: November 29, 2017</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_load_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_make_1.html">next</a></span><br/>
