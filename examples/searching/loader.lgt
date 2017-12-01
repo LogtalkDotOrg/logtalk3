@@ -35,11 +35,16 @@
 		search_strategy,
 		blind_search1,
 		heuristic_search1,
-		performance]),
-	logtalk_load([			% the actual search methods are compiled with
-		breadth_first1,		% the option events(allow) to allow the use of
-		depth_first1,		% the "performance" monitor
+		performance
+	]),
+	% the actual search methods are compiled using the events(allow)
+	% option to allow the use of the "performance" monitor
+	logtalk_load([
+		breadth_first1,
+		depth_first1,
 		best_first1,
-		hill_climbing1],
-		[events(allow)])
+		hill_climbing1
+	], [
+		events(allow)
+	])
 )).
