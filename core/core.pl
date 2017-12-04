@@ -2673,34 +2673,35 @@ logtalk_make(Target) :-
 	'$lgt_missing_reference'(Entity, _, Reference).
 
 '$lgt_missing_object'(Object-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(Object::_, _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(Object::_, _, _, _, Location)),
 	% note that the next call always fails when Object is not bound
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 
 '$lgt_missing_module'(Module-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(':'(Module,_), _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(':'(Module,_), _, _, _, Location)),
 	% note that the next call always fails when Module is not bound;
 	% given the call, assume that the backend compiler supports modules
 	\+ current_module(Module),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 
 % find missing predicates for logtalk_make/1
 
 '$lgt_missing_predicate'((Object::Predicate)-Reference) :-
-	\+ '$lgt_implements_protocol_'(Object, forwarding, _),
-	'$lgt_entity_property_'(Entity, calls(Object::Predicate, _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(Object::Predicate, _, _, _, Location)),
 	% the object may only be known at runtime; reject those cases
 	nonvar(Object),
 	% require loaded objects as the missing objects are already listed
 	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	% ignore objects that can forward the predicates calls
+	\+ '$lgt_implements_protocol_'(Object, forwarding, _),
 	\+ '$lgt_current_predicate'(Object, Predicate, Entity, p(p(p))),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 '$lgt_missing_predicate'((^^Functor/Arity)-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(^^Functor/Arity, _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(^^Functor/Arity, _, _, _, Location)),
 	functor(Template, Functor, Arity),
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, IDcl, _, _, _, _, _) ->
 		(	\+ '$lgt_instantiates_class_'(Entity, _, _),
@@ -2713,10 +2714,10 @@ logtalk_make(Target) :-
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),
 		\+ call(Dcl, Template, _, _, _, _)
 	),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 '$lgt_missing_predicate'((::Functor/Arity)-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(::Functor/Arity, _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(::Functor/Arity, _, _, _, Location)),
 	functor(Template, Functor, Arity),
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, IDcl, _, _, _, _, _) ->
 		(	\+ '$lgt_instantiates_class_'(Entity, _, _),
@@ -2729,10 +2730,10 @@ logtalk_make(Target) :-
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),
 		\+ call(Dcl, Template, _, _, _, _)
 	),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 '$lgt_missing_predicate'((Functor/Arity)-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(Functor/Arity, _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(Functor/Arity, _, _, _, Location)),
 	(	'$lgt_current_object_'(Entity, _, Dcl, Def, _, _, _, DDcl, DDef, _, Flags) ->
 		\+ '$lgt_object_property_declares'(Entity, Dcl, DDcl, Flags, Functor/Arity, _),
 		\+ '$lgt_object_property_defines'(Entity, Def, DDef, Functor/Arity, _)
@@ -2740,41 +2741,51 @@ logtalk_make(Target) :-
 		\+ '$lgt_category_property_declares'(Entity, Dcl, Functor/Arity, _),
 		\+ '$lgt_category_property_defines'(Entity, Def, Functor/Arity, _)
 	),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 '$lgt_missing_predicate'((':'(Module,Predicate))-Reference) :-
 	'$lgt_prolog_feature'(modules, supported),
-	'$lgt_entity_property_'(Entity, calls(':'(Module,Predicate), _, _, _, Line)),
+	'$lgt_entity_property_'(Entity, calls(':'(Module,Predicate), _, _, _, Location)),
 	% the module may only be known at runtime; reject those cases
 	nonvar(Module),
 	% require loaded modules as the missing modules are already listed
 	current_module(Module),
 	\+ current_predicate(':'(Module,Predicate)),
-	'$lgt_missing_reference'(Entity, Line, Reference).
+	'$lgt_missing_reference'(Entity, Location, Reference).
 
 
 % construct reference term for missing entities and predicates
 
-'$lgt_missing_reference'(Entity, Line, reference(Kind,Entity,Path,StartLine)) :-
+'$lgt_missing_reference'(Entity, Location, reference(Kind,Entity,Path,StartLine)) :-
+	% find the entity type
 	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
 		Kind = protocol
 	;	'$lgt_current_category_'(Entity, _, _, _, _, _) ->
 		Kind = category
-	;	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _),
 		Kind = object
-	;	Kind = module
 	),
-	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,EntityLine,_)) ->
-		atom_concat(Directory, File, Path)
-	;	Path = ''
-	),
-	(	Path == '' ->
-		StartLine = -1
-	;	var(Line) ->
-		StartLine = EntityLine
-	;	Line =:= -1 ->
-		StartLine = EntityLine
-	;	StartLine = Line
+	% find the reference file and line
+	(	nonvar(Location),
+		Location = Path-Line ->
+		% reference found in included file
+		(	integer(Line) ->
+			StartLine = Line
+		;	% backend Prolog system that doesn't report line numbers
+			StartLine = -1
+		)
+	;	% either reference found in main file or dynamically created entity
+		(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,_,_)) ->
+			atom_concat(Directory, File, Path)
+		;	% dynamically created entity
+			Path = ''
+		),
+		(	integer(Location) ->
+			StartLine = Location
+		;	% either dynamically created entity or backend Prolog
+			% system that doesn't report line numbers
+			StartLine = -1
+		)
 	).
 
 
@@ -3041,7 +3052,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc6)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc7)).
 
 
 
