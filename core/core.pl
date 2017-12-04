@@ -2775,16 +2775,17 @@ logtalk_make(Target) :-
 			StartLine = -1
 		)
 	;	% either reference found in main file or dynamically created entity
-		(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,_,_)) ->
+		(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,EntityLine,_)) ->
 			atom_concat(Directory, File, Path)
 		;	% dynamically created entity
-			Path = ''
+			Path = '',
+			EntityLine = -1
 		),
 		(	integer(Location) ->
 			StartLine = Location
 		;	% either dynamically created entity or backend Prolog
 			% system that doesn't report line numbers
-			StartLine = -1
+			StartLine = EntityLine
 		)
 	).
 
