@@ -25,7 +25,7 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2017/08/08,
-		comment is 'Constructors for optional references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
+		comment is 'Constructors for optional term references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type "optional" for use with the "type" library object.'
 		],
@@ -86,9 +86,9 @@
 :- object(optional(_Reference)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/11/03,
+		date is 2017/12/04,
 		comment is 'Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
@@ -174,8 +174,15 @@
 	:- meta_predicate(or_else_call(*, 0)).
 	:- mode(or_else_call(--term, +callable), zero_or_one).
 	:- info(or_else_call/2, [
-		comment is 'Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Often called from within all solutions predicates as an alternative to the get/1 predicate by using fail/0 as the goal to skip empty optionals.',
+		comment is 'Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Can be used e.g. to generate an exception for empty optionals.',
 		argnames is ['Term', 'Goal']
+	]).
+
+	:- public(or_else_fail/1).
+	:- mode(or_else_fail(--term), zero_or_one).
+	:- info(or_else_fail/1, [
+		comment is 'Returns the optional reference term if not empty. Fails otherwise. Usually called to skip over empty optionals.',
+		argnames is ['Term']
 	]).
 
 	is_empty :-
@@ -255,5 +262,8 @@
 			once(Goal)
 		;	Reference = the(Term)
 		).
+
+	or_else_fail(Term) :-
+		parameter(1, the(Term)).
 
 :- end_object.

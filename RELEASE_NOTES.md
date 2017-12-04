@@ -46,8 +46,8 @@ sequence of `context/1` and `throw/1` method calls.
 * FIXED: Detection of variable file terms and reporting of the corresponding
 instantiation errors when processing `include/1` directives.
 
-* FIXED: Error when calling `logtalk_make(check)` with missing predicates
-found in included files.
+* FIXED: Runtime error when calling `logtalk_make(check)` with missing
+predicates found in included files.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -72,6 +72,8 @@ Library
 
 * ADDED: Options `prefixes/1` and `suffixes/1` to the `os::directory_files/3`
 predicate.
+
+* ADDED: Predicate `optional(_)::or_else_fail/1`.
 
 Tools
 -----
