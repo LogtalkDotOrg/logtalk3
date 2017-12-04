@@ -22,14 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2017/08/08,
+		date is 2017/12/04,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
 	:- discontiguous([
-		succeeds/1, throws/2
+		fails/1, succeeds/1, throws/2
 	]).
 
 	% is_empty/0 tests
@@ -125,6 +125,25 @@
 
 	succeeds(optional_or_else_get_2_02) :-
 		optional::of(1, Ref), optional(Ref)::or_else_get(Term, current_logtalk_flag(prolog_dialect)),
+		Term == 1.
+
+	% or_else_call/2 tests
+
+	succeeds(optional_or_else_call_2_01) :-
+		optional::empty(Ref), optional(Ref)::or_else_call(Term, X = 1),
+		X == 1.
+
+	succeeds(optional_or_else_call_2_02) :-
+		optional::of(1, Ref), optional(Ref)::or_else_call(Term, X = 1),
+		var(X).
+
+	% or_else_fail/1 tests
+
+	fails(optional_or_else_fail_1_01) :-
+		optional::empty(Ref), optional(Ref)::or_else_fail(_).
+
+	succeeds(optional_or_else_fail_1_02) :-
+		optional::of(1, Ref), optional(Ref)::or_else_fail(Term),
 		Term == 1.
 
 	% "optional" type tests

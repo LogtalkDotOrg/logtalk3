@@ -91,6 +91,9 @@ Tests
 
 * ADDED: Two more tests for the Prolog standard `arg/3` built-in predicate.
 
+* ADDED: Unit tests for the `optional` library predicates `or_else_call/2`
+and `or_else_fail/1`
+
 Examples
 --------
 
