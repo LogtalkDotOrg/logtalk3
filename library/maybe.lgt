@@ -21,9 +21,9 @@
 :- object(maybe).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/11/03,
+		date is 2017/12/05,
 		comment is 'Types and predicates for type-checking and handling optionals. Inspired by Haskell.',
 		see_also is [optional, optional(_)]
 	]).
@@ -61,7 +61,7 @@
 
 	cat([], []).
 	cat([Optional| Optionals], Values) :-
-		(	optional(Optional)::or_else_call(Value, fail) ->
+		(	optional(Optional)::or_else_fail(Value) ->
 			Values = [Value| RestValues]
 		;	Values = RestValues
 		),
