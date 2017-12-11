@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on May 5, 2017
+%  Last updated on December 11, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -738,6 +738,9 @@ term_hash(_, _, _, _) :-
 {@} :-
 	!,
 	logtalk_make(circular).
+{#} :-
+	!,
+	logtalk_make(documentation).
 {+d} :-
 	!,
 	logtalk_make(debug).

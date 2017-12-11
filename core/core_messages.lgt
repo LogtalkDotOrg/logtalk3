@@ -140,6 +140,9 @@
 	message_tokens(completed_scanning_for_circular_dependencies) -->
 		['... completed scanning for circular entity dependencies'-[], nl].
 
+	message_tokens(running_all_defined_documentation_actions) -->
+		['Running all defined documentation actions ...'-[], nl].
+
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],
 		(	{Protocols == []} ->

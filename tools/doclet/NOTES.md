@@ -55,6 +55,15 @@ running doclets. The script expects the doclet source files to be named either
 script man page for details.
 
 
+Integration with the make tool
+------------------------------
+
+Loading this tool adds a definition for the `logtalk_make_target_action/1`
+hook predicate for the target `documentation`. The hook definition checks
+that a single doclet object is loaded and, if true, sends an `update/0`
+message to it.
+
+
 Other notes
 -----------
 

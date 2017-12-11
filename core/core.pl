@@ -2488,6 +2488,7 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(clean).
 '$lgt_valid_logtalk_make_target'(check).
 '$lgt_valid_logtalk_make_target'(circular).
+'$lgt_valid_logtalk_make_target'(documentation).
 
 
 '$lgt_logtalk_make_target_actions'(Target) :-
@@ -2608,6 +2609,9 @@ logtalk_make(Target) :-
 	fail.
 '$lgt_logtalk_make'(circular) :-
 	'$lgt_print_message'(comment(make), core, completed_scanning_for_circular_dependencies).
+
+'$lgt_logtalk_make'(documentation) :-
+	'$lgt_print_message'(comment(make), core, running_all_defined_documentation_actions).
 
 
 % deal with changes to the default compilation mode
@@ -3053,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 0, rc7)).
+'$lgt_version_data'(logtalk(3, 14, 0, rc8)).
 
 
 

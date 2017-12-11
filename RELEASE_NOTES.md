@@ -43,6 +43,9 @@ source files.
 methods throw standard `error/2` exception terms and are equivalent to a
 sequence of `context/1` and `throw/1` method calls.
 
+* ADDED: New `documentation` target to the `logtalk_make/1` built-in predicate.
+This target runs all defined documentation actions.
+
 * FIXED: Detection of variable file terms and reporting of the corresponding
 instantiation errors when processing `include/1` directives.
 
@@ -55,6 +58,9 @@ Prolog adapter and integration files
 * CHANGED: Moved the definition of the `logtalk_make_target_action/1` hook
 predicate for ECLiPSe and SWI-Prolog from the corresponding hooks file into
 the `settings-sample.lgt` file.
+
+* ADDED: Shortcut `{#}` for calling `logtalk_make(documentation)` to all the
+adapter files.
 
 * FIXED: Workaround lack of compliance of B-Prolog and Qu-Prolog `read_term/3`
 option `variable_names/1`.
@@ -81,6 +87,11 @@ Tools
 * IMPROVED: Readability of the default console output of the `lgtunit` tool.
 
 * UPDATED: The `help` tool for the new error throwing built-in methods.
+
+* UPDATED: The `doclet` tool to add a definition for the hook predicate
+`logtalk_make_target_action/1` with target `documentation` on loading.
+The hook definition checks that a single doclet object is loaded and, if
+true, sends an `update/0` message to it.
 
 Tests
 -----

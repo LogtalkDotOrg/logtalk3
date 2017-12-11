@@ -18,7 +18,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% load the tool
+
 :- initialization((
 	logtalk_load(library(os_loader)),
 	logtalk_load(doclet, [optimize(on)])
 )).
+
+% integrate the tool with logtalk_make/1
+
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+logtalk_make_target_action(documentation) :-
+	findall(Doclet, extends_object(Doclet, doclet), Doclets),
+	(	Doclets = [MyDoclet] ->
+		MyDoclet::update
+	;	true
+	).
