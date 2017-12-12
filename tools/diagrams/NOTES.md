@@ -360,8 +360,11 @@ When that is not the case, notably when generating cross-referencing diagrams,
 missing entities can result in incomplete diagrams.
 
 The Graphviz command-line utilities, e.g. `dot`, are notorious for random
-crashes, often requiring re-doing conversions from `.dot` files to other
-formats.
+crashes (segmentation faults usuallu), often requiring re-doing conversions
+from `.dot` files to other formats. A possible workaround is to repeat the
+command until it completes without error. For example:
+
+	$ for file in *.dot; do flag=0; while [ $flag -eq 0 ]; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; done; done
 
 The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 

@@ -22,9 +22,9 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/10/30,
+		date is 2017/12/12,
 		comment is 'Example of a doclet object generating linking diagrams using the zoom/1 option.'
 	]).
 
@@ -49,7 +49,9 @@
 
 	% define one clause per shell command to be executed
 	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && cp $LOGTALKUSER/tools/diagrams/zoom.png .').
-	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && for f in *.dot; do dot -Tsvg $f > ${f%.*}.svg; done').
+	% GraphViz dot command crashes randomly with a segmentation fault;
+	% workaround it by repeating the command until it completes without error
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && for file in *.dot; do flag=0; while [ $flag -eq 0 ]; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; done; done').
 	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
 
 	% auxiliary predicates

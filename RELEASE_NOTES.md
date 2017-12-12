@@ -73,6 +73,9 @@ methods.
 
 * UPDATED: User Manual section on debugging messages.
 
+* UPDATED: The `diagrams` tool documentation with a workaround for the GraphViz
+dot command random crashes.
+
 Library
 -------
 
