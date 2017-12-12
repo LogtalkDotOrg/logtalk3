@@ -51,7 +51,7 @@
 	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && cp $LOGTALKUSER/tools/diagrams/zoom.png .').
 	% GraphViz dot command crashes randomly with a segmentation fault;
 	% workaround it by repeating the command until it completes without error
-	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && for file in *.dot; do flag=0; while [ $flag -eq 0 ]; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; done; done').
+	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && for file in *.dot; do flag=0; counter=10; while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; (( --counter )); done; done').
 	shell_command('cd "$LOGTALKUSER/tools/doclet/docs" && rm -f *.xml && rm -f *.dtd && rm -f *.xsd && rm -f custom.ent && rm -f *.dot').
 
 	% auxiliary predicates

@@ -364,7 +364,7 @@ crashes (segmentation faults usuallu), often requiring re-doing conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
 command until it completes without error. For example:
 
-	$ for file in *.dot; do flag=0; while [ $flag -eq 0 ]; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; done; done
+	$ for file in *.dot; do flag=0; counter=10; while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do dot -Tsvg $file > ${file%.*}.svg; if [ $? == 0 ]; then flag=1; fi; (( --counter )); done; done
 
 The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 

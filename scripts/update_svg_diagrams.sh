@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on April 4, 2017
+##   Last updated on December 12, 2017
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -141,7 +141,15 @@ $logtalk "$library_goal"
 $logtalk "$tools_goal"
 
 for f in *.dot; do
-	dot -Tsvg "$f" > "${f%.*}.svg"
+	flag=0
+	counter=10
+	while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do
+		dot -Tsvg "$f" > "${f%.*}.svg"
+		if [ $? == 0 ]; then
+			flag=1
+		fi
+		(( --counter ))
+	done
 done
 
 rm ./*.dot
