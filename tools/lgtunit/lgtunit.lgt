@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.12,
+		version is 4.13,
 		author is 'Paulo Moura',
-		date is 2017/10/27,
+		date is 2017/12/13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1069,6 +1069,8 @@
 	check_for_valid_test_identifier(Test) :-
 		(	var(Test) ->
 			print_message(error, lgtunit, non_instantiated_test_identifier)
+		;	\+ callable(Test) ->
+			print_message(error, lgtunit, non_callable_test_identifier(Test))
 		;	test_(Test, _) ->
 			print_message(error, lgtunit, repeated_test_identifier(Test))
 		;	true
@@ -1114,17 +1116,27 @@
 		parse_test_options(Options, TestGoal, Test, Condition, Setup, Cleanup, Note).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
-		atom_concat(Test, Step, Head),
+		test_name_to_atom_prefix(Test, Prefix),
+		atom_concat(Prefix, Step, Head),
 		logtalk_load_context(entity_name, Entity),
 		logtalk::execution_context(ExecutionContext, Entity, Entity, Entity, Entity, [], []),
 		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, ExecutionContext),
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	compile_deterministic_test_aux_predicate(Test, Goal, Head) :-
-		atom_concat(Test, '__deterministic', Functor),
+		test_name_to_atom_prefix(Test, Prefix),
+		atom_concat(Prefix, '_deterministic', Functor),
 		term_variables(Goal, Variables),
 		Head =.. [Functor| Variables],
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
+
+	test_name_to_atom_prefix(Test, Prefix) :-
+		functor(Test, Name, Arity),
+		atom_concat(Name, '_', Prefix0),
+		number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom, ArityCodes),
+		atom_concat(Prefix0, ArityAtom, Prefix1),
+		atom_concat(Prefix1, '_', Prefix).
 
 	parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests) :-
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),

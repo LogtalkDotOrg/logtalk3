@@ -395,6 +395,8 @@ entities.
 
 * ADDED: Test outcome `false` as an alias to test outcome `fail`.
 
+* UPDATED: The `lgtunit` tool to support callable terms as test identifiers.
+
 * IMPROVED: The `logtalk_tester` script now also reports skipped and broken
 test suites.
 
