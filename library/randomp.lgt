@@ -21,9 +21,9 @@
 :- protocol(randomp).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2017/02/25,
+		date is 2017/12/13,
 		comment is 'Random number generator protocol.'
 	]).
 
@@ -100,12 +100,6 @@
 		argnames is ['Length', 'Lower', 'Upper', 'Set']
 	]).
 
-	:- public(reset_seed/0).
-	:- mode(reset_seed, one).
-	:- info(reset_seed/0, [
-		comment is 'Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.'
-	]).
-
 	:- public(get_seed/1).
 	:- mode(get_seed(-ground), one).
 	:- info(get_seed/1, [
@@ -117,13 +111,6 @@
 	:- mode(set_seed(+ground), one).
 	:- info(set_seed/1, [
 		comment is 'Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.',
-		argnames is ['Seed']
-	]).
-
-	:- public(randomize/1).
-	:- mode(randomize(+positive_integer), one).
-	:- info(randomize/1, [
-		comment is 'Randomizes the random generator using a positive integer to compute a new seed.',
 		argnames is ['Seed']
 	]).
 

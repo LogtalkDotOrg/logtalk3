@@ -22,9 +22,9 @@ file:
 
 	| ?- logtalk_load(library(random_loader)).
 
-The `random` object implements portable random number generators and
-supports multiple random number generators, using different seeds, by
-defining derived objects. For example:
+The `random` object implements portable random number generator and
+supports multiple random number generators, using different seeds,
+by defining derived objects. For example:
 
 	:- object(my_random_generator_1,
 		extends(ramdom)).
@@ -32,3 +32,21 @@ defining derived objects. For example:
 		:- intialization(::reset_seed).
 
 	:- end_object.
+
+The `fast_random` object also implements a portable random number
+generator but does not support deriving multiple random number
+generators.
+
+The `random` and `fast_random` objects manage the random number
+generator seed using internal dynamic state. Care must be taken
+when using these objects from multi-threaded applications as there
+is not portable solution to protect seed updates from signals and
+prevent inconsistent state when threads are canceled.
+
+The `backend_random` object uses the native backend Prolog compiler
+random number generator for the basic random/1, get_seed/1, and
+set_seed/1 predicates and a portable implementation for all the
+remaining predicates. This makes the object stateless, which can
+allow reliable use from multiple threads. Consult the backend
+Prolog compiler documentation for details on its random number
+generator properties.

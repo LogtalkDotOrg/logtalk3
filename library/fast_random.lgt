@@ -18,18 +18,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(random,
+:- object(fast_random,
 	implements(randomp)).
 
 	:- info([
 		version is 2.2,
 		author is 'Paulo Moura',
 		date is 2017/12/13,
-		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe.',
+		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe.',
 		remarks is [
-			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.'
+			'Single random number generator' - 'This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.'
 		],
-		see_also is [fast_random, backend_random]
+		see_also is [random, backend_random]
 	]).
 
 	:- public(reset_seed/0).
@@ -56,7 +56,7 @@
 		reset_seed/0, get_seed/1, set_seed/1, randomize/1
 	]).
 
-	:- initialization(::reset_seed).
+	:- initialization(reset_seed).
 
 	:- private(seed_/3).
 	:- dynamic(seed_/3).
@@ -67,9 +67,9 @@
 	]).
 
 	random(Random) :-
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		random(A0, A1, A2, B0, B1, B2, Random),
-		::asserta(seed_(B0, B1, B2)).
+		asserta(seed_(B0, B1, B2)).
 
 	random(A0, A1, A2, B0, B1, B2, Random) :-
 		B0 is (A0*171) mod 30269,
@@ -109,9 +109,9 @@
 		integer(Lower),
 		integer(Upper),
 		Upper >= Lower,
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		sequence(Length, Lower, Upper, A0, A1, A2, B0, B1, B2, Sequence),
-		::asserta(seed_(B0, B1, B2)).
+		asserta(seed_(B0, B1, B2)).
 
 	sequence(0, _, _, S0, S1, S2, S0, S1, S2, []) :-
 		!.
@@ -128,9 +128,9 @@
 		integer(Upper),
 		Upper >= Lower,
 		Length =< Upper - Lower + 1,
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		set(Length, Lower, Upper, A0, A1, A2, B0, B1, B2, [], Set),
-		::asserta(seed_(B0, B1, B2)).
+		asserta(seed_(B0, B1, B2)).
 
 	set(0, _, _, S0, S1, S2, S0, S1, S2, List, Set) :-
 		!,
@@ -145,9 +145,9 @@
 		).
 
 	permutation(List, Permutation) :-
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		add_random_key(List, A0, A1, A2, B0, B1, B2, KeyList),
-		::asserta(seed_(B0, B1, B2)),
+		asserta(seed_(B0, B1, B2)),
 		keysort(KeyList, SortedKeyList),
 		remove_random_key(SortedKeyList, Permutation).
 
@@ -181,9 +181,9 @@
 		integer(Upper),
 		Upper >= Lower,
 		!,
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		randseq(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), List),
-		::asserta(seed_(B0, B1, B2)),
+		asserta(seed_(B0, B1, B2)),
 		map_truncate(List, Sequence).
 	randseq(Length, Lower, Upper, Sequence) :-
 		integer(Length),
@@ -191,9 +191,9 @@
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		randseq(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), Sequence),
-		::asserta(seed_(B0, B1, B2)).
+		asserta(seed_(B0, B1, B2)).
 
 	randseq(0, _, _, Seed, Seed, []) :-
 		!.
@@ -216,18 +216,18 @@
 		Upper >= Lower,
 		Length =< Upper - Lower,
 		!,
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		randset(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), [], Set),
-		::asserta(seed_(B0, B1, B2)).
+		asserta(seed_(B0, B1, B2)).
 	randset(Length, Lower, Upper, Set) :-
 		integer(Length),
 		Length >= 0,
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		::retract(seed_(A0, A1, A2)),
+		retract(seed_(A0, A1, A2)),
 		randset(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), [], Set),
-		::asserta(seed_(B0, B1, B2)).
+		asserta(seed_(B0, B1, B2)).
 
 	randset(0, _, _, Seed, Seed, List, Set) :-
 		!,
@@ -251,23 +251,23 @@
 		not_member(T, R).
 
 	reset_seed :-
-		::retractall(seed_(_, _, _)),
-		::asserta(seed_(3172, 9814, 20125)).
+		retractall(seed_(_, _, _)),
+		asserta(seed_(3172, 9814, 20125)).
 
 	get_seed(seed(S0, S1, S2)) :-
-		::seed_(S0, S1, S2).
+		seed_(S0, S1, S2).
 
 	set_seed(seed(S0, S1, S2)) :-
-		::retractall(seed_(_, _, _)),
-		::asserta(seed_(S0, S1, S2)).
+		retractall(seed_(_, _, _)),
+		asserta(seed_(S0, S1, S2)).
 
 	randomize(Seed) :-
 		integer(Seed),
 		Seed > 0,
-		::retractall(seed_(_, _, _)),
+		retractall(seed_(_, _, _)),
 		S0 is Seed mod 30269,
 		S1 is Seed mod 30307,
 		S2 is Seed mod 30323,
-		::asserta(seed_(S0, S1, S2)).
+		asserta(seed_(S0, S1, S2)).
 
 :- end_object.

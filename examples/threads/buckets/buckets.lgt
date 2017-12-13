@@ -39,6 +39,8 @@
 	:- private([bucket/2, buckets/1, transfer/3]).
 	:- synchronized([bucket/2, buckets/1, transfer/3]).
 
+	:- uses(backend_random, [random/3]).
+
 	start :-
 		% by default, create ten buckets with initial random integer values
 		% in the interval [0, 10[ and print their contents ten times
@@ -66,7 +68,7 @@
 	create_buckets(0, _, _, Sum, Sum) :-
 		!.
 	create_buckets(N, Min, Max, Sum0, Sum) :-
-		random::random(Min, Max, Value),
+		random(Min, Max, Value),
 		asserta(bucket_(N,Value)),
 		M is N - 1,
 		Sum1 is Sum0 + Value,
@@ -95,8 +97,8 @@
 	match_loop(N) :-
 		% randomly select two buckets
 		M is N + 1,
-		random::random(1, M, Bucket1),
-		random::random(1, M, Bucket2),
+		random(1, M, Bucket1),
+		random(1, M, Bucket2),
 		% access their contents
 		bucket(Bucket1, Value1),
 		bucket(Bucket2, Value2),
@@ -113,12 +115,12 @@
 	redistribute_loop(N) :-
 		% randomly select two buckets
 		M is N + 1,
-		random::random(1, M, FromBucket),
-		random::random(1, M, ToBucket),
+		random(1, M, FromBucket),
+		random(1, M, ToBucket),
 		% access bucket from where we transfer
 		bucket(FromBucket, Current),
 		Limit is Current + 1,
-		random::random(0, Limit, Delta),
+		random(0, Limit, Delta),
 		transfer(FromBucket, Delta, ToBucket),
 		redistribute_loop(N).
 

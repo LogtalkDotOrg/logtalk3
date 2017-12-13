@@ -361,6 +361,11 @@ directives.
 Library
 -------
 
+* CHANGED: Moved the declarations of the `randomp` protocol `reset_seed/0`
+and `randomize/1` predicates to the `random` object.
+
+* ADDED: New random library `fast_random` and `backend_random` objects.
+
 * RENAMED: The `os::expand_path/2` predicate to `os::absolute_file_name/2`.
 The old name is deprecated but still available as an alias.
 

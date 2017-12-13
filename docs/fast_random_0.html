@@ -3,15 +3,15 @@
 <?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>random</title>
+    <title>fast_random</title>
     <link rel="stylesheet" href="logtalk.css" type="text/css"/>
   </head>
   <body>
     <div class="header">
       <p class="type">object</p>
-      <h1 class="code">random</h1>
+      <h1 class="code">fast_random</h1>
       <blockquote>
-        <p class="comment">Portable random number generator predicates. Core predicates originally written by Richard O'Keefe.</p>
+        <p class="comment">Fast portable random number generator predicates. Core predicates originally written by Richard O'Keefe.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -124,8 +124,8 @@
       <h2>Remarks</h2>
       <div class="section">
         <dl class="remarks">
-          <dt class="comment">Multiple random number generators</dt>
-          <dd class="text">To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.</dd>
+          <dt class="comment">Single random number generator</dt>
+          <dd class="text">This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.</dd>
         </dl>
       </div>
     </div>
@@ -134,7 +134,7 @@
       <div class="section">
         <ul>
           <li class="code">
-            <a href="fast_random_0.html">fast_random</a>
+            <a href="random_0.html">random</a>
           </li>
           <li class="code">
             <a href="backend_random_0.html">backend_random</a>
