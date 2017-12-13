@@ -79,6 +79,11 @@ dot command random crashes.
 Library
 -------
 
+* CHANGED: Moved the declarations of the `randomp` protocol `reset_seed/0`
+and `randomize/1` predicates to the `random` object.
+
+* ADDED: New random library `fast_random` and `backend_random` objects.
+
 * ADDED: Options `prefixes/1` and `suffixes/1` to the `os::directory_files/3`
 predicate.
 
@@ -88,6 +93,8 @@ Tools
 -----
 
 * IMPROVED: Readability of the default console output of the `lgtunit` tool.
+
+* UPDATED: The `lgtunit` tool to support callable terms as test identifiers.
 
 * UPDATED: The `help` tool for the new error throwing built-in methods.
 
@@ -117,6 +124,9 @@ and `this/1` built-in methods to access entity parameters.
 
 * UPDATED: The `errors` example to illustrate detection of variable file terms
 when processing `include/1` directives.
+
+* UPDATED: The `buckets` multi-threading example to use the new library
+`backend_random` stateless object.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
@@ -361,11 +371,6 @@ directives.
 Library
 -------
 
-* CHANGED: Moved the declarations of the `randomp` protocol `reset_seed/0`
-and `randomize/1` predicates to the `random` object.
-
-* ADDED: New random library `fast_random` and `backend_random` objects.
-
 * RENAMED: The `os::expand_path/2` predicate to `os::absolute_file_name/2`.
 The old name is deprecated but still available as an alias.
 
@@ -394,8 +399,6 @@ Tools
 entities.
 
 * ADDED: Test outcome `false` as an alias to test outcome `fail`.
-
-* UPDATED: The `lgtunit` tool to support callable terms as test identifiers.
 
 * IMPROVED: The `logtalk_tester` script now also reports skipped and broken
 test suites.
