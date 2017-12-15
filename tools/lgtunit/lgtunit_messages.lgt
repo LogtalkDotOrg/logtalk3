@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.11,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2017/12/13,
+		date is 2017/12/15,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -72,7 +72,7 @@
 		['running tests from object ~q'-[Object], nl].
 
 	message_tokens(completed_tests_from_object(Object)) -->
-		['completed tests from object ~q'-[Object], nl].
+		['completed tests from object ~q'-[Object], nl, nl].
 
 	message_tokens(tests_skipped(_Object, Note)) -->
 		(	{Note == ''} ->
@@ -82,30 +82,30 @@
 
 	% messages for test results
 
-	message_tokens(tests_results_summary(Total, Skipped, Passed, Failed, Note)) -->
+	message_tokens(tests_results_summary(_Object, Total, Skipped, Passed, Failed, Note)) -->
 		(	{Note == ''} ->
 			[nl, '~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl]
 		;	[nl, '~d tests: ~d skipped, ~d passed, ~d failed (~w)'-[Total, Skipped, Passed, Failed, Note], nl]
 		).
 
-	message_tokens(passed_test(Test, _File, _Position, Note)) -->
+	message_tokens(passed_test(_Object, Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
-			['~w: success'-[Test], nl]
-		;	['~w: success (~w)'-[Test, Note], nl]
+			['~q: success'-[Test], nl]
+		;	['~q: success (~w)'-[Test, Note], nl]
 		).
 
-	message_tokens(failed_test(Test, File, Position, Reason, Note)) -->
+	message_tokens(failed_test(_Object, Test, File, Position, Reason, Note)) -->
 		(	{Note == ''} ->
-			['~w: failure '-[Test], nl]
-		;	['~w: failure (~w)'-[Test, Note], nl]
+			['~q: failure '-[Test], nl]
+		;	['~q: failure (~w)'-[Test, Note], nl]
 		),
 		failed_test_reason(Reason),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
-	message_tokens(skipped_test(Test, _File, _Position, Note)) -->
+	message_tokens(skipped_test(_Object, Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
-			['~w: skipped'-[Test], nl]
-		;	['~w: skipped (~w)'-[Test, Note], nl]
+			['~q: skipped'-[Test], nl]
+		;	['~q: skipped (~w)'-[Test, Note], nl]
 		).
 
 	message_tokens(quick_check_passed(NumberOfTests)) -->
@@ -114,8 +114,8 @@
 	message_tokens(quick_check_failed(Goal)) -->
 		failed_test_reason(quick_check_failed(Goal)).
 
-	message_tokens(failed_cleanup(Test, File, Position, Reason)) -->
-		failed_cleanup_reason(Reason, Test),
+	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
+		failed_cleanup_reason(Reason, _Object, Test),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
 	message_tokens(broken_step(Step, Object, Error)) -->
@@ -171,18 +171,18 @@
 	message_tokens(non_instantiated_test_identifier) -->
 		['non-instantiated test identifier found'-[], nl].
 
-	message_tokens(non_callable_test_identifier(Test)) -->
+	message_tokens(non_callable_test_identifier(_Object, Test)) -->
 		['non-callable test identifier found: ~q'-[Test], nl].
 
-	message_tokens(repeated_test_identifier(Test)) -->
+	message_tokens(repeated_test_identifier(_Object, Test)) -->
 		['repeated test identifier found: ~q'-[Test], nl].
 
 	% messages for test outcome errors
 
-	message_tokens(non_instantiated_test_outcome(Test)) -->
+	message_tokens(non_instantiated_test_outcome(_Object, Test)) -->
 		['non-instantiated test outcome found: ~q'-[Test], nl].
 
-	message_tokens(invalid_test_outcome(Test, Outcome)) -->
+	message_tokens(invalid_test_outcome(_Object, Test, Outcome)) -->
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
 
 	% auxiliary grammar rules
@@ -216,10 +216,10 @@
 	failed_test_reason(step_failure(Step)) -->
 		['  ~w goal failed but should have succeeded: ~q'-[Step], nl].
 
-	failed_cleanup_reason(error(Error), Test) -->
-		['  test ~w cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
-	failed_cleanup_reason(failure, Test) -->
-		['  test ~w cleanup goal failed but should have succeeded'-[Test], nl].
+	failed_cleanup_reason(error(Error), _Object, Test) -->
+		['  test ~q cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
+	failed_cleanup_reason(failure, _Object, Test) -->
+		['  test ~q cleanup goal failed but should have succeeded'-[Test], nl].
 
 	entity_tokens(Entities) -->
 		(	{Entities =:= 1} ->

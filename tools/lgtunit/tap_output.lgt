@@ -28,10 +28,24 @@
 :- object(tap_output).
 
 	:- info([
-		version is 0.5,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2016/03/16,
+		date is 2017/12/15,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.'
+	]).
+
+	:- private(generating_/0).
+	:- dynamic(generating_/0).
+	:- mode(generating_, zero_or_one).
+	:- info(generating_/0, [
+		comment is 'Flag to detect report in progress when processing two or more test sets as a unified set.'
+	]).
+
+	:- private(partial_/1).
+	:- dynamic(partial_/1).
+	:- mode(partial_(?integer), zero_or_more).
+	:- info(partial_/1, [
+		comment is 'Cache of total of tests per test set.'
 	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
@@ -44,12 +58,18 @@
 
 	% start
 	message_hook(running_tests_from_object_file(_, _)) :-
-		write('TAP version 13'), nl.
+		(	generating_ ->
+			true
+		;	write('TAP version 13'), nl,
+			assertz(generating_),
+			retractall(partial_(_))	
+		).
+	% test results summary
+	message_hook(tests_results_summary(_, Partial, _, _, _, _)) :-
+		assertz(partial_(Partial)).
 	% stop
-	message_hook(tests_results_summary(Total, _, _, _, _)) :-
-		number_codes(Total, Codes),
-		atom_codes(TotalAtom, Codes),
-		write('1..'), write(TotalAtom), nl.
+	message_hook(tests_end_date_time(_, _, _, _, _, _)) :-
+		retractall(generating_).
 	% broken step
 	message_hook(broken_step(condition, _, Error)) :-
 		write('Bail out! Test suite condition unexpected error: '), pretty_print_term(Error), nl.
@@ -67,19 +87,26 @@
 		),
 		nl.
 	% passed test
-	message_hook(passed_test(Test, _, _, Note)) :-
-		write('ok '), write(Test),
+	message_hook(passed_test(Object, Test, _, _, Note)) :-
+		write('ok '), writeq(Test), write(' @ '), writeq(Object),
 		write_test_note(passed, Note).
 	% failed test
-	message_hook(failed_test(Test, _, _, Reason, Note)) :-
-		write('not ok '), write(Test),
+	message_hook(failed_test(Object, Test, _, _, Reason, Note)) :-
+		write('not ok '), writeq(Test), write(' @ '), writeq(Object),
 		write_test_note(failed, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
-	message_hook(skipped_test(Test, _, _, Note)) :-
-		write('ok '), write(Test), write(' # skip'),
+	message_hook(skipped_test(Object, Test, _, _, Note)) :-
+		write('ok '), writeq(Test), write(' @ '), writeq(Object),
+		write(' # skip'),
 		write_test_note(skipped, Note).
 	% code coverage results
+	message_hook(code_coverage_header) :-
+		findall(Partial, partial_(Partial), Partials),
+		sum(Partials, Total),
+		number_codes(Total, Codes),
+		atom_codes(TotalAtom, Codes),
+		write('1..'), write(TotalAtom), nl.
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write('  ---'), nl,
 		write('  coverage: '), write(Percentage), write('%'), nl,
@@ -138,5 +165,13 @@
 			numbervars(Term, 0, _),
 			write_term(Term, [numbervars(true), quoted(true)])
 		).
+
+	sum(List, Sum) :-
+		sum(List, 0, Sum).
+
+	sum([], Sum, Sum).
+	sum([N| Ns], Sum0, Sum) :-
+		Sum1 is Sum0 + N,
+		sum(Ns, Sum1, Sum).
 
 :- end_object.

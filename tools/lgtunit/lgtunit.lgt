@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 4.13,
+		version is 5.0,
 		author is 'Paulo Moura',
-		date is 2017/12/13,
+		date is 2017/12/15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -58,6 +58,13 @@
 	:- info(run/2, [
 		comment is 'Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).',
 		argnames is ['File', 'Mode']
+	]).
+
+	:- public(run_test_sets/1).
+	:- mode(run_test_sets(+list(object_identifier)), zero_or_one).
+	:- info(run_test_sets/1, [
+		comment is 'Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.',
+		argnames is ['TestObjects']
 	]).
 
 	:- public(deterministic/1).
@@ -167,6 +174,13 @@
 	:- info(run_tests/2, [
 		comment is 'Runs a list of defined tests.',
 		argnames is ['Tests', 'File']
+	]).
+
+	:- protected(run_test_set/1).
+	:- mode(run_test_set(+atom), one).
+	:- info(run_test_set/1, [
+		comment is 'Runs a test set as part of running two or more test sets as a unified set. Order is one of the atoms {first, middle, last}.',
+		argnames is ['Order']
 	]).
 
 	:- protected(run_quick_check_tests/2).
@@ -406,6 +420,13 @@
 		argnames is ['Position']
 	]).
 
+	:- private(running_test_sets_/0).
+	:- dynamic(running_test_sets_/0).
+	:- mode(running_test_sets_, zero_or_one).
+	:- info(running_test_sets_/0, [
+		comment is 'Internal flag used when running two or more test sets as a unified set.'
+	]).
+
 	:- private(test/3).
 	:- mode(test(?atom, ?list(variable), ?nonvar), zero_or_more).
 	:- info(test/3, [
@@ -495,9 +516,82 @@
 	run :-
 		% save the current output stream
 		current_output(Output),
+		retractall(running_test_sets_),
 		reset_test_counters,
 		reset_coverage_results,
 		write_tests_header,
+		write_tests_object,
+		(	run_condition ->
+			(	run_setup ->
+				::run_tests,
+				run_cleanup,
+				write_tests_results,
+				write_coverage_results
+			;	tests_skipped
+			)
+		;	tests_skipped
+		),
+		write_tests_footer,
+		% restore the current output stream
+		set_output(Output).
+
+	run_test_sets([First, Next| Others]) :-
+		retractall(running_test_sets_),
+		assertz(running_test_sets_),
+		current_object(First),
+		First::run_test_set(first),
+		run_test_sets(Others, Next).
+
+	run_test_sets([], Last) :-
+		current_object(Last),
+		Last::run_test_set(last),
+		retractall(running_test_sets_).
+	run_test_sets([Next| Rest], Middle) :-
+		current_object(Middle),
+		Middle::run_test_set(middle),
+		run_test_sets(Rest, Next).
+
+	run_test_set(first) :-
+		% save the current output stream
+		current_output(Output),
+		reset_test_counters,
+		reset_coverage_results,
+		write_tests_header,
+		write_tests_object,
+		(	run_condition ->
+			(	run_setup ->
+				::run_tests,
+				run_cleanup,
+				write_tests_results
+			;	tests_skipped
+			)
+		;	tests_skipped
+		),
+		% restore the current output stream
+		set_output(Output).		
+
+	run_test_set(middle) :-
+		% save the current output stream
+		current_output(Output),
+		reset_test_counters,
+		write_tests_object,
+		(	run_condition ->
+			(	run_setup ->
+				::run_tests,
+				run_cleanup,
+				write_tests_results
+			;	tests_skipped
+			)
+		;	tests_skipped
+		),
+		% restore the current output stream
+		set_output(Output).
+
+	run_test_set(last) :-
+		% save the current output stream
+		current_output(Output),
+		reset_test_counters,
+		write_tests_object,
 		(	run_condition ->
 			(	run_setup ->
 				::run_tests,
@@ -522,9 +616,9 @@
 		run_cleanup.
 
 	run_test(Test) :-
-		self(Self),
+		self(Object),
 		::test_(Test, Spec),
-		object_property(Self, file(File)),
+		object_property(Object, file(File)),
 		% save the current input and output streams
 		current_input(Input), current_output(Output),
 		run_test(Spec, File, Output),
@@ -707,26 +801,28 @@
 		).
 
 	write_tests_header :-
-		self(Self),
 		print_message(silent, lgtunit, tests_started),
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
-		print_message(information, lgtunit, tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
-		(	object_property(Self, file(File, Directory)) ->
+		print_message(information, lgtunit, tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)).
+
+	write_tests_object :-
+		self(Object),
+		(	object_property(Object, file(File, Directory)) ->
 			atom_concat(Directory, File, Path),
-			print_message(information, lgtunit, running_tests_from_object_file(Self, Path))
+			print_message(information, lgtunit, running_tests_from_object_file(Object, Path))
 		;	% source data information missing
-			print_message(information, lgtunit, running_tests_from_object(Self))
+			print_message(information, lgtunit, running_tests_from_object(Object))
 		).
 
 	write_tests_results :-
-		self(Self),
+		self(Object),
 		::skipped_(Skipped),
 		::passed_(Passed),
 		::failed_(Failed),
 		Total is Skipped + Passed + Failed,
 		::note(Note),
-		print_message(information, lgtunit, tests_results_summary(Total, Skipped, Passed, Failed, Note)),
-		print_message(information, lgtunit, completed_tests_from_object(Self)).
+		print_message(information, lgtunit, tests_results_summary(Object, Total, Skipped, Passed, Failed, Note)),
+		print_message(information, lgtunit, completed_tests_from_object(Object)).
 
 	write_tests_footer :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
@@ -734,33 +830,36 @@
 		print_message(silent, lgtunit, tests_ended).
 
 	passed_test(Test, File, Position, Note, Output) :-
+		self(Object),
 		increment_passed_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(information, lgtunit, passed_test(Test, File, Position, Note)),
+		print_message(information, lgtunit, passed_test(Object, Test, File, Position, Note)),
 		set_output(Current).
 
 	passed_test(Test, File, Position, Output) :-
 		passed_test(Test, File, Position, '', Output).
 
 	failed_test(Test, File, Position, Reason, Note, Output) :-
+		self(Object),
 		increment_failed_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, failed_test(Test, File, Position, Reason, Note)),
+		print_message(error, lgtunit, failed_test(Object, Test, File, Position, Reason, Note)),
 		set_output(Current).
 
 	failed_test(Test, File, Position, Reason, Output) :-
 		failed_test(Test, File, Position, Reason, '', Output).
 
 	skipped_test(Test, File, Position, Note, Output) :-
+		self(Object),
 		increment_skipped_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(information, lgtunit, skipped_test(Test, File, Position, Note)),
+		print_message(information, lgtunit, skipped_test(Object, Test, File, Position, Note)),
 		set_output(Current).
 
 	skipped_test(Test, File, Position, Output) :-
@@ -807,18 +906,19 @@
 		).
 
 	broken_step(Step, Error) :-
-		self(Self),
-		print_message(error, lgtunit, broken_step(Step, Self, Error)).
+		self(Object),
+		print_message(error, lgtunit, broken_step(Step, Object, Error)).
 
 	failed_step(Step) :-
-		self(Self),
-		print_message(error, lgtunit, failed_step(Step, Self)).
+		self(Object),
+		print_message(error, lgtunit, failed_step(Step, Object)).
 
 	failed_cleanup(Test, File, Position, Reason, Output) :-
+		self(Object),
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, failed_cleanup(Test, File, Position, Reason)),
+		print_message(error, lgtunit, failed_cleanup(Object, Test, File, Position, Reason)),
 		set_output(Current).
 
 	reset_compilation_counters :-
@@ -1067,12 +1167,13 @@
 	test_idiom_head(throws(Test, _), Test).
 
 	check_for_valid_test_identifier(Test) :-
+		self(Object),
 		(	var(Test) ->
 			print_message(error, lgtunit, non_instantiated_test_identifier)
 		;	\+ callable(Test) ->
-			print_message(error, lgtunit, non_callable_test_identifier(Test))
+			print_message(error, lgtunit, non_callable_test_identifier(Object, Test))
 		;	test_(Test, _) ->
-			print_message(error, lgtunit, repeated_test_identifier(Test))
+			print_message(error, lgtunit, repeated_test_identifier(Object, Test))
 		;	true
 		).
 

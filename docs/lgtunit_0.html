@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>4.13</code>
+            <code>5.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/12/13</code>
+            <code>2017/12/15</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -129,6 +129,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>run(+atom,+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="run_test_sets/1" class="code">run_test_sets/1</h3>
+          <blockquote>
+            <p class="comment">Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>run_test_sets(TestObjects)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>run_test_sets(+list(object_identifier)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -438,6 +458,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>run_tests(+list(callable),+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="run_test_set/1" class="code">run_test_set/1</h3>
+          <blockquote>
+            <p class="comment">Runs a test set as part of running two or more test sets as a unified set. Order is one of the atoms {first, middle, last}.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>run_test_set(Order)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>run_test_set(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -1112,6 +1152,22 @@
       </div>
       <div class="private">
         <h2>Private predicates</h2>
+        <div class="section">
+          <h3 id="running_test_sets_/0" class="code">running_test_sets_/0</h3>
+          <blockquote>
+            <p class="comment">Internal flag used when running two or more test sets as a unified set.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>running_test_sets_ &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
         <div class="section">
           <h3 id="test/3" class="code">test/3</h3>
           <blockquote>

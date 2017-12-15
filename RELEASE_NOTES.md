@@ -92,6 +92,12 @@ predicate.
 Tools
 -----
 
+* NEW: Support for running a set of test suites as a unified suite to the
+`lgtunit` tool, generating a single code coverage report, a single TAP
+report/output, and a single xUnit report/output. This allows better tool
+scalability when using parametric test objects or multiple tests objects
+per unit.
+
 * IMPROVED: Readability of the default console output of the `lgtunit` tool.
 
 * UPDATED: The `lgtunit` tool to support callable terms as test identifiers.

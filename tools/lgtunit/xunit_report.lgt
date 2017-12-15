@@ -28,9 +28,9 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 0.5,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/04/12,
+		date is 2017/12/15,
 		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format in the same directory as the tests object file.'
 	]).
 
@@ -53,18 +53,20 @@
 		fail.
 
 	% start
-	message_hook(running_tests_from_object_file(_, File)) :-
-		logtalk::loaded_file_property(File, directory(Directory)),
-		atom_concat(Directory, 'xunit_report.xml', ReportFile),
-		open(ReportFile, write, _, [alias(xunit_report)]).
-	% stop
-	message_hook(tests_ended) :-
-		close(xunit_report).
-
 	message_hook(tests_start_date_time(Year,Month,Day,Hours,Minutes,Seconds)) :-
 		!,
 		retractall(message_cache_(_)),
 		assertz(message_cache_(tests_start_date_time(Year,Month,Day,Hours,Minutes,Seconds))).
+	message_hook(running_tests_from_object_file(_, File)) :-
+		logtalk::loaded_file_property(File, directory(Directory)),
+		atom_concat(Directory, 'xunit_report.xml', ReportFile),
+		(	stream_property(_, alias(xunit_report)) ->
+			true
+		;	open(ReportFile, write, _, [alias(xunit_report)])
+		).
+	% stop
+	message_hook(tests_ended) :-
+		close(xunit_report).
 	message_hook(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds)) :-
 		!,
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
@@ -112,16 +114,10 @@
 		write_xml_close_tag(testsuite).
 
 	write_test_elements :-
-		test(Test),
-		write_testcase_element(Test),
+		testcase_classname_name_time(Test, ClassName, Name, Time),
+		write_testcase_element_tags(Test, ClassName, Name, Time),
 		fail.
 	write_test_elements.
-
-	write_testcase_element(Test) :-
-		testcase_classname(Test, ClassName),
-		testcase_name(Test, Name),
-		testcase_time(Test, Time),
-		write_testcase_element_tags(Test, ClassName, Name, Time).
 
 	write_testcase_element_tags(passed_test(_Test, _File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_empty_tag(testcase, [classname-ClassName,name-Name,time-Time]).
@@ -150,10 +146,21 @@
 	% "testsuite" tag attributes
 
 	testsuite_stats(Tests, 0, Failures, Skipped) :-
-		message_cache_(tests_results_summary(Tests, Skipped, _, Failures, _)).
+		testsuite_stats(0, Tests, 0, Failures, 0, Skipped).
+	
+	testsuite_stats(Tests0, Tests, Failures0, Failures, Skipped0, Skipped) :-
+		(	retract(message_cache_(tests_results_summary(_Object, PartialTests, PartialSkipped, _, PartialFailures, _))) ->
+			Tests1 is Tests0 + PartialTests,
+			Failures1 is Failures0 + PartialFailures,
+			Skipped1 is Skipped0 + PartialSkipped,
+			testsuite_stats(Tests1, Tests, Failures1, Failures, Skipped1, Skipped)
+		;	Tests is Tests0,
+			Failures is Failures0,
+			Skipped is Skipped0
+		).
 
 	testsuite_name(Name) :-
-		message_cache_(running_tests_from_object_file(_, File)),
+		once(message_cache_(running_tests_from_object_file(_, File))),
 		% bypass the compiler as the flag is only created after loading this file
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
 		(	atom_concat(Prefix, Name, File) ->
@@ -162,8 +169,9 @@
 		).
 
 	testsuite_package(Package) :-
-		message_cache_(running_tests_from_object_file(Object, File)),
-		(	logtalk::loaded_file_property(File, library(Library)) ->
+		once(message_cache_(running_tests_from_object_file(Object, File))),
+		(	logtalk::loaded_file_property(File, library(Library)),
+			Library \== startup ->
 			Package = library(Library)
 		;	% use the file directory
 			object_property(Object, file(_,Directory)),
@@ -183,25 +191,14 @@
 		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp).
 
-	% "testcase" tag attributes
-
-	testcase_classname(_Test, ClassName) :-
-		message_cache_(running_tests_from_object_file(ClassName, _)).
-
-	testcase_name(passed_test(Test,_,_,_), Test).
-	testcase_name(failed_test(Test,_,_,_,_), Test).
-	testcase_name(skipped_test(Test,_,_,_), Test).
-
-	testcase_time(_, 0.0).
-
 	% "testcase" tag predicates
 
-	test(passed_test(Test, File, Position, Note)) :-
-		message_cache_(passed_test(Test, File, Position, Note)).
-	test(failed_test(Test, File, Position, Reason, Note)) :-
-		message_cache_(failed_test(Test, File, Position, Reason, Note)).
-	test(skipped_test(Test, File, Position, Note)) :-
-		message_cache_(skipped_test(Test, File, Position, Note)).
+	testcase_classname_name_time(passed_test(Test, File, Position, Note), Object, Test, 0.0) :-
+		message_cache_(passed_test(Object, Test, File, Position, Note)).
+	testcase_classname_name_time(failed_test(Test, File, Position, Reason, Note), Object, Test, 0.0) :-
+		message_cache_(failed_test(Object, Test, File, Position, Reason, Note)).
+	testcase_classname_name_time(skipped_test(Test, File, Position, Note), Object, Test, 0.0) :-
+		message_cache_(skipped_test(Object, Test, File, Position, Note)).
 
 	% date and time auxiliary predicates
 
