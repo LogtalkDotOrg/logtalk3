@@ -98,6 +98,9 @@ report/output, and a single xUnit report/output. This allows better tool
 scalability when using parametric test objects or multiple tests objects
 per unit.
 
+* CHANGED: Several print message terms of the `lgtunit` tool, adding the
+test object as an additional argument, to support the new tool features.
+
 * IMPROVED: Readability of the default console output of the `lgtunit` tool.
 
 * UPDATED: The `lgtunit` tool to support callable terms as test identifiers.
