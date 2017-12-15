@@ -28,6 +28,12 @@ This tool is inspired by the xUnit frameworks architecture and by the works of
 Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog
 `plunit` package).
 
+Tests are defined in objects, which represent a test set or suite. In simple
+cases, we usually define a single object containing the unit tests. But it is
+also possible to use parametric test objects or multiple objects defining
+parametrizable tests or test subsets for testing more complex units and
+facilitate tests maintenance.
+
 
 Main files
 ----------
@@ -462,6 +468,10 @@ load the `xunit_report.lgt` file before running the tests. A file named
 `xunit_report.xml` will be created in the same directory as the object
 defining the tests.
 
+When running a set of test suites as a single unified suite, the single
+xUnit report is created in the directory of the first test suite object
+in the set.
+
 
 Exporting unit test results in the TAP output format
 ----------------------------------------------------
@@ -479,6 +489,10 @@ as the object defining the tests.
 When using the `test/3` dialect with the TAP format, a `note/1` option
 whose argument is an atom starting with a `TODO` or `todo` word results
 in a test report with a TAP TODO directive.
+
+When running a set of test suites as a single unified suite, the single
+TAP report is created in the directory of the first test suite object in
+the set.
 
 
 Exporting code coverage results in XML format
