@@ -54,6 +54,10 @@ its own loader and notes files:
 	`events_loader.lgt`
 	`events.txt`
 
+* expected  
+	`expected_loader.lgt`
+	`expected.txt`
+
 * hierarchies  
 	`hierarchies_loader.lgt`
 	`hierarchies.txt`

@@ -89,6 +89,8 @@ predicate.
 
 * ADDED: Predicate `optional(_)::or_else_fail/1`.
 
+* ADDED: New `expected` library.
+
 Tools
 -----
 
