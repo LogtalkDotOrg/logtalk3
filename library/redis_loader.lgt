@@ -21,21 +21,21 @@
 :- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types_loader),
 		logtalk_load(redis, [optimize(on)])
 	)).
 
 :- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types_loader),
 		logtalk_load(redis, [optimize(on)])
 	)).
 
 :- elif(current_logtalk_flag(prolog_dialect, qp)).
 
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types_loader),
 		logtalk_load(redis, [optimize(on)])
 	)).
 
@@ -43,7 +43,7 @@
 
 	:- use_module(library(sockets), []).
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types_loader),
 		logtalk_load(redis, [optimize(on)])
 	)).
 
@@ -51,7 +51,7 @@
 
 	:- use_module(library(socket), []).
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types_loader),
 		logtalk_load(redis, [optimize(on)])
 	)).
 
@@ -63,7 +63,7 @@
 	:- import(from(/(socket_put,3), socket)).
 	:- import(from(/(socket_get0,3), socket)).
 	:- initialization((
-		logtalk_load(library(basic_types_loader)),
+		logtalk_load(basic_types_loader),
 		logtalk_load(redis, [optimize(on)])
 	)).
 
