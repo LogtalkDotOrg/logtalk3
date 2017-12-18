@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.2</code>
+            <code>0.3</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/12/5</code>
+            <code>2017/12/18</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -46,6 +46,16 @@
           <dd class="value">
             <code>
               <a href="type_0.html#check/2">type::check/2</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="arbitrary_0.html#arbitrary/1">arbitrary::arbitrary/1</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="arbitrary_0.html#arbitrary/2">arbitrary::arbitrary/2</a>
             </code>
           </dd>
         </dl>
@@ -97,7 +107,14 @@
     <div class="remarks">
       <h2>Remarks</h2>
       <div class="section">
-        <h3 class="comment">(none)</h3>
+        <dl class="remarks">
+          <dt class="comment">Type maybe(Type)</dt>
+          <dd class="text">Allows type-checking optional references where the optional term must be of the given type.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">QuickCheck support</dt>
+          <dd class="text">Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.</dd>
+        </dl>
       </div>
     </div>
     <div class="see_also">
@@ -109,6 +126,12 @@
           </li>
           <li class="code">
             <a href="optional_1.html">optional(Reference)</a>
+          </li>
+          <li class="code">
+            <a href="type_0.html">type</a>
+          </li>
+          <li class="code">
+            <a href="arbitrary_0.html">arbitrary</a>
           </li>
         </ul>
       </div>

@@ -21,11 +21,15 @@
 :- object(maybe).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2017/12/05,
+		date is 2017/12/18,
 		comment is 'Types and predicates for type-checking and handling optionals. Inspired by Haskell.',
-		see_also is [optional, optional(_)]
+		remarks is [
+			'Type maybe(Type)' - 'Allows type-checking optional references where the optional term must be of the given type.',
+			'QuickCheck support' - 'Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.'
+		],
+		see_also is [optional, optional(_), type, arbitrary]
 	]).
 
 	:- public(cat/2).
@@ -41,9 +45,6 @@
 		:- dynamic(type::type/1).
 	:- endif.
 
-	% clauses for the type::type/1 predicate must always be defined with
-	% an instantiated first argument to keep calls deterministic by taking
-	% advantage of first argument indexing
 	type::type(maybe(_)).
 
 	:- multifile(type::check/2).
@@ -52,12 +53,31 @@
 		:- dynamic(type::check/2).
 	:- endif.
 
-	% clauses for the type::check/2 predicate must always be defined with
-	% an instantiated first argument to keep calls deterministic by taking
-	% advantage of first argument indexing
 	type::check(maybe(Type), Term) :-
 		type::check(optional, Term),
 		optional(Term)::if_present(type::check(Type)).
+
+	:- multifile(arbitrary::arbitrary/1).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(arbitrary::arbitrary/1).
+	:- endif.
+
+	arbitrary::arbitrary(maybe(_)).
+
+	:- multifile(arbitrary::arbitrary/2).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(arbitrary::arbitrary/2).
+	:- endif.
+
+	arbitrary::arbitrary(maybe(Type), Arbitrary) :-
+		random::random(Random),
+		(	Random < 0.5 ->
+			optional::empty(Arbitrary)
+		;	type::arbitrary(Type, Term),
+			optional::of(Term, Arbitrary)	
+		).
 
 	cat([], []).
 	cat([Optional| Optionals], Values) :-

@@ -87,6 +87,9 @@ and `randomize/1` predicates to the `random` object.
 * ADDED: Options `prefixes/1` and `suffixes/1` to the `os::directory_files/3`
 predicate.
 
+* ADDED: Clauses for the `arbitrary::arbitrary/1-2` predicates to the `maybe`
+object to allow generating random values for the `maybe(Type)` type.
+
 * ADDED: Predicate `optional(_)::or_else_fail/1`.
 
 * ADDED: New `expected` library.
