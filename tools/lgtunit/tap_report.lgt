@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/12/15,
+		date is 2017/12/21,
 		comment is 'Intercepts unit test execution messages and generates a tap_report.txt file using the TAP output format in the same directory as the tests object file.'
 	]).
 
@@ -101,6 +101,8 @@
 		write(tap_report, ' # skip'),
 		write_test_note(skipped, Note).
 	% code coverage results
+	message_hook(no_code_coverage_information_collected) :-
+		message_hook(code_coverage_header).
 	message_hook(code_coverage_header) :-
 		findall(Partial, partial_(Partial), Partials),
 		sum(Partials, Total),
