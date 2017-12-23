@@ -18,12 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(metap).
 
 	:- info([
-		version is 6.0,
-		date is 2015/12/02,
+		version is 6.1,
+		date is 2015/12/23,
 		author is 'Paulo Moura',
 		comment is 'Useful meta-predicates protocol.'
 	]).
@@ -199,7 +198,7 @@
 	:- public(map_reduce/5).
 	:- meta_predicate(map_reduce(2, 3, *, *, *)).
 	:- mode(map_reduce(+callable, +callable, +term, ?list, ?term), zero_or_more).
-	:- info(map/5, [
+	:- info(map_reduce/5, [
 		comment is 'Map a list and apply a fold left (reduce) to the resulting list.',
 		argnames is ['Map', 'Reduce', 'Accumulator', 'List', 'Result']
 	]).

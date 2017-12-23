@@ -94,6 +94,9 @@ object to allow generating random values for the `maybe(Type)` type.
 
 * ADDED: New `expected` library.
 
+* FIXED: Typo in the `info/2` directive for the `metap::map_reduce/5` predicate
+that prevented its description to be displayed in the API HTML documentation.
+
 Tools
 -----
 
