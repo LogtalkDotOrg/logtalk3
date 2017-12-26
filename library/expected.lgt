@@ -87,7 +87,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/12/16,
+		date is 2017/12/26,
 		comment is 'Expected term reference predicates. Requires passing an expected reference constructed using the "expected" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [expected]
@@ -121,6 +121,22 @@
 		argnames is ['Closure']
 	]).
 
+	:- public(unexpected/1).
+	:- mode(unexpected(--term), one).
+	:- info(unexpected/1, [
+		comment is 'Returns the unexpected reference term if not an expected term. Throws an error otherwise.',
+		argnames is ['Unexpected'],
+		exceptions is ['Expected reference holds an expected term' - existence_error(unexpected_term,'Reference')]
+	]).
+
+	:- public(expected/1).
+	:- mode(expected(--term), one).
+	:- info(expected/1, [
+		comment is 'Returns the expected reference term if not an unexpected term. Throws an error otherwise.',
+		argnames is ['Expected'],
+		exceptions is ['Expected reference holds an unexpected term' - existence_error(expected_term,'Reference')]
+	]).
+
 	:- public(map/2).
 	:- meta_predicate(map(2, *)).
 	:- mode(map(+callable, --nonvar), one).
@@ -135,14 +151,6 @@
 	:- info(flat_map/2, [
 		comment is 'When the the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.',
 		argnames is ['Closure', 'NewReference']
-	]).
-
-	:- public(get/1).
-	:- mode(get(--term), one).
-	:- info(get/1, [
-		comment is 'Returns the expected reference term if not an unexpected term. Throws an error otherwise.',
-		argnames is ['Expected'],
-		exceptions is ['Expected reference holds an unexpected term' - existence_error(expected_term,'Reference')]
 	]).
 
 	:- public(or_else/2).
@@ -196,6 +204,22 @@
 		;	true
 		).
 
+	unexpected(Expected) :-
+		parameter(1, Reference),
+		(	Reference = unexpected(Unexpected) ->
+			true
+		;	context(Context),
+			throw(error(existence_error(unexpected_term,Reference), Context))
+		).
+
+	expected(Expected) :-
+		parameter(1, Reference),
+		(	Reference = expected(Expected) ->
+			true
+		;	context(Context),
+			throw(error(existence_error(expected_term,Reference), Context))
+		).
+
 	map(Closure, NewReference) :-
 		parameter(1, Reference),
 		(	Reference = expected(Term),
@@ -210,14 +234,6 @@
 			catch(call(Closure, Term, NewReference), _, fail) ->
 			true
 		;	NewReference = Reference
-		).
-
-	get(Expected) :-
-		parameter(1, Reference),
-		(	Reference = expected(Expected) ->
-			true
-		;	context(Context),
-			throw(error(existence_error(expected_term,Reference), Context))
 		).
 
 	or_else(Term, Default) :-

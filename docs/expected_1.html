@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/12/16</code>
+            <code>2017/12/26</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -123,6 +123,50 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="unexpected/1" class="code">unexpected/1</h3>
+          <blockquote>
+            <p class="comment">Returns the unexpected reference term if not an expected term. Throws an error otherwise.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>unexpected(Unexpected)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>unexpected(--term) &ndash; one</code>
+            </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Expected reference holds an expected term: <code>existence_error(unexpected_term,Reference)</code></dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="expected/1" class="code">expected/1</h3>
+          <blockquote>
+            <p class="comment">Returns the expected reference term if not an unexpected term. Throws an error otherwise.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>expected(Expected)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>expected(--term) &ndash; one</code>
+            </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Expected reference holds an unexpected term: <code>existence_error(expected_term,Reference)</code></dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="map/2" class="code">map/2</h3>
           <blockquote>
             <p class="comment">When the the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.</p>
@@ -168,28 +212,6 @@
             <dd class="value">
               <code>flat_map(+callable,--nonvar) &ndash; one</code>
             </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="get/1" class="code">get/1</h3>
-          <blockquote>
-            <p class="comment">Returns the expected reference term if not an unexpected term. Throws an error otherwise.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>get(Expected)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>get(--term) &ndash; one</code>
-            </dd>
-            <dt class="key">exceptions:</dt>
-            <dd class="value">Expected reference holds an unexpected term: <code>existence_error(expected_term,Reference)</code></dd>
           </dl>
         </div>
         <div class="section">
