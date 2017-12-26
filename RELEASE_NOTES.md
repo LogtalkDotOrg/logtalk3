@@ -92,7 +92,10 @@ object to allow generating random values for the `maybe(Type)` type.
 
 * ADDED: Predicate `optional(_)::or_else_fail/1`.
 
-* ADDED: New `expected` library.
+* ADDED: New `expected` library for representing expected term references.
+
+* ADDED: Experimental `either` library object providing types and predicates
+for type-checking and handling expected term references.
 
 * FIXED: Typo in the `info/2` directive for the `metap::map_reduce/5` predicate
 that prevented its description to be displayed in the API HTML documentation.
