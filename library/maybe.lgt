@@ -36,7 +36,7 @@
 	:- mode(cat(+list(optional), -list), one).
 	:- info(cat/2, [
 		comment is 'Returns the values stored in the non-empty optionals.',
-		argnames is ['Optionals', 'List']
+		argnames is ['Optionals', 'Values']
 	]).
 
 	:- multifile(type::type/1).
