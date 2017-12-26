@@ -173,6 +173,11 @@ built-in predicates for separate compilation and loading. To generate
 flag to `off` and add the option `output:eco` to the Logtalk `prolog_loader`
 flag.
 
+ECLiPSe 7.0.25 and later versions multi-threading and engines support 
+provide enough support for Logtalk threaded engines. But other Logtalk
+multi-threading features cannot currently be supported due to missing
+mutex predicates and missing thread creation options.
+
 
 GNU Prolog 1.4.2 and later versions
 -----------------------------------

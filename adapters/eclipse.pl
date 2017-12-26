@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on December 11, 2017
+%  Last updated on December 26, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
@@ -181,6 +181,9 @@ forall(Generate, Test) :-
 	'$lgt_eclipse_plain_predicate_property'(mutex_create/1, built_in).
 	'$lgt_eclipse_plain_predicate_property'(mutex_create/2, built_in).
 	'$lgt_eclipse_plain_predicate_property'(with_mutex/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(message_queue_create/2, built_in).
+	'$lgt_eclipse_plain_predicate_property'(message_queue_create/1, built_in).
+	'$lgt_eclipse_plain_predicate_property'(message_queue_destroy/1, built_in).
 :- endif.
 
 '$lgt_eclipse_plain_predicate_property'(Predicate, built_in) :-
