@@ -123,8 +123,10 @@ test object as an additional argument, to support the new tool features.
 The hook definition checks that a single doclet object is loaded and, if
 true, sends an `update/0` message to it.
 
-* RENAMED: The `code_metrics` tool `code_metric_protocols` protocol to
-`code_metric_protocol`.
+* RENAMED: The `code_metric_protocols` protocol to `code_metric_protocol`.
+
+* IMPROVED: The `code_metrics_messages` no longer requires changes when
+adding a new metric.
 
 Tests
 -----

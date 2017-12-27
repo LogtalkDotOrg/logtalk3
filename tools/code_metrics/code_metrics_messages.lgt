@@ -22,9 +22,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/10/23,
+		date is 2017/12/27,
 		comment is 'Message translations for the code_metrics tool.'
 	]).
 
@@ -81,13 +81,7 @@
 		entity_score(Entity, Metric, Score).
 
 	entity_score(_Entity, Metric, Score) -->
-		{	(	Metric == dit_metric
-			;	Metric == coupling_metric
-			;	Metric == doc_metric
-			),
-			!,
-			metric_label(Metric, Label)
-		},
+		{metric_label(Metric, Label)},
 		['~w score: ~w'-[Label, Score], nl].
 
 	entity_score(_Entity, noc_metric, predicate_noc(Predicate, Score)) -->
@@ -97,7 +91,8 @@
 	% auxiliary predicates
 
 	metric_label(Metric, Label) :-
-		(	Metric::metric_label(Label) ->
+		(	conforms_to_protocol(Metric, code_metric_protocol),
+			Metric::metric_label(Label) ->
 			true
 		;	Label = Metric
 		).
