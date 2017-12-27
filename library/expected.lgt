@@ -87,7 +87,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/12/26,
+		date is 2017/12/27,
 		comment is 'Expected term reference predicates. Requires passing an expected reference constructed using the "expected" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [expected]
@@ -204,7 +204,7 @@
 		;	true
 		).
 
-	unexpected(Expected) :-
+	unexpected(Unexpected) :-
 		parameter(1, Reference),
 		(	Reference = unexpected(Unexpected) ->
 			true
