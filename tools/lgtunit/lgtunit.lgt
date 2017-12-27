@@ -28,7 +28,7 @@
 	:- info([
 		version is 5.0,
 		author is 'Paulo Moura',
-		date is 2017/12/15,
+		date is 2017/12/27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -538,9 +538,11 @@
 	run_test_sets([First, Next| Others]) :-
 		retractall(running_test_sets_),
 		assertz(running_test_sets_),
+		reset_coverage_results,
 		current_object(First),
 		First::run_test_set(first),
-		run_test_sets(Others, Next).
+		run_test_sets(Others, Next),
+		write_coverage_results([First, Next| Others]).
 
 	run_test_sets([], Last) :-
 		current_object(Last),
@@ -555,7 +557,6 @@
 		% save the current output stream
 		current_output(Output),
 		reset_test_counters,
-		reset_coverage_results,
 		write_tests_header,
 		write_tests_object,
 		(	run_condition ->
@@ -596,8 +597,7 @@
 			(	run_setup ->
 				::run_tests,
 				run_cleanup,
-				write_tests_results,
-				write_coverage_results
+				write_tests_results
 			;	tests_skipped
 			)
 		;	tests_skipped
@@ -1572,14 +1572,36 @@
 	write_coverage_results :-
 		(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
 			print_message(information, lgtunit, code_coverage_header),
-			write_coverage_results(TestedEntities),
+			write_entity_coverage_results(TestedEntities),
 			setof(DeclaredEntity, ::cover(DeclaredEntity), DeclaredEntities),
+			write_coverage_results_summary(DeclaredEntities, TestedEntities)
+		;	print_message(information, lgtunit, no_code_coverage_information_collected)
+		).
+
+	write_coverage_results(TestSets) :-
+		(	setof(TestedEntity, fired_entity(TestSets, TestedEntity), TestedEntities) ->
+			print_message(information, lgtunit, code_coverage_header),
+			write_entity_coverage_results(TestedEntities),
+			setof(DeclaredEntity, TestSet^(member(TestSet, TestSets), TestSet::cover(DeclaredEntity)), DeclaredEntities),
 			write_coverage_results_summary(DeclaredEntities, TestedEntities)
 		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
 	% we consider objects and categories with no clauses also
 	% as "fired" in order to reported them as covered
+
+	fired_entity(TestSets, Entity) :-
+		member(TestSet, TestSets),
+		TestSet::cover(Entity),
+		(	fired_(Entity, _, _) ->
+			true
+		;	current_object(Entity) ->
+			object_property(Entity, number_of_user_clauses(0))
+		;	current_category(Entity) ->
+			category_property(Entity, number_of_user_clauses(0))
+		;	fail
+		).
+
 	fired_entity(Entity) :-
 		::cover(Entity),
 		(	fired_(Entity, _, _) ->
@@ -1591,12 +1613,12 @@
 		;	fail
 		).
 
-	write_coverage_results([]).
-	write_coverage_results([Entity| Entities]) :-
+	write_entity_coverage_results([]).
+	write_entity_coverage_results([Entity| Entities]) :-
 		print_message(silent, lgtunit, entity_coverage_starts(Entity)),
 		write_entity_coverage_information(Entity),
 		print_message(silent, lgtunit, entity_coverage_ends(Entity)),
-		write_coverage_results(Entities).
+		write_entity_coverage_results(Entities).
 
 	% list entity contributed multifile predicates that were called
 	write_entity_coverage_information(Entity) :-
