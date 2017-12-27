@@ -24,7 +24,7 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(
 		[
-			code_metrics_protocol,
+			code_metric_protocol,
 			code_metrics_utilities,
 			code_metrics,
 			code_metrics_messages,

@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(code_metrics_protocol).
+:- protocol(code_metric_protocol).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/23,
-		comment is 'Protocol for code_metrics tool.',
+		date is 2017/12/27,
+		comment is 'Protocol for individual metrics.',
 		remarks is [
 			'Usage' - 'This protocol should be implemented by any metric added to the system.',
 			'Score' - 'Score can be any type of term necessary to explain the nature of the entity and its relationship to the metric in question.'

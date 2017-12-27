@@ -20,13 +20,13 @@
 
 
 :- object(dit_metric,
-	implements(code_metrics_protocol),
+	implements(code_metric_protocol),
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/23,
+		date is 2017/12/27,
 		comment is 'Analyzes the depth of inheritance for objects, protocols, and categories.',
 		remarks is [
 			'Depth' - 'The depth is the maximum length of a node to the root entity. Lower scores are generally better.',

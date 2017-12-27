@@ -20,13 +20,13 @@
 
 
 :- object(noc_metric,
-	implements(code_metrics_protocol),
+	implements(code_metric_protocol),
 	imports(code_metrics_utilities)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/04/23,
+		date is 2017/12/27,
 		comment is 'Number of clauses defined for a predicate in an object or category.'
 	]).
 

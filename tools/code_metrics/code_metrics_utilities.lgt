@@ -22,15 +22,15 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/11/27,
+		date is 2017/12/27,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
 			'Predicate Scope' - 'This is meant for internal use by metrics only. As such, all provided predicates are private.'
 		],
-		see_also is [code_metrics_protocol]
+		see_also is [code_metric_protocol]
 	]).
 
 	:- uses(list, [member/2, memberchk/2]).
