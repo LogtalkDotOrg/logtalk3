@@ -23,31 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/06/11,
-		comment is 'Unit tests for code metrics framework.'
+		date is 2017/12/28,
+		comment is 'Unit tests for depth of inheritance code metric.'
 	]).
 
 	cover(code_metric).
 	cover(code_metrics_utilities).
 	cover(dit_metric).
-
-	:- uses(dit_metric, [
-		all/0,
-		rlibrary/1,
-		library/1,
-		rdirectory/1,
-		directory/1,
-		file/1,
-		entity/1
-	]).
-
-	:- uses(lgtunit, [
-		deterministic/1
-	]).
-
-	% DIT tests
 
 	test(dit_reflexive_obj) :-
 		depth_is(object, 2).

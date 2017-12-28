@@ -23,13 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/06/11,
+		date is 2017/12/28,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 
 	cover(code_metric).
+	cover(code_metrics_utilities).
 	cover(code_metrics).
 
 	:- uses(code_metrics, [
