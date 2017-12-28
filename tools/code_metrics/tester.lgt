@@ -21,16 +21,20 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	logtalk_load(library(types_loader)),
+	logtalk_load(library(os_loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(
 		[
 			code_metric_protocol,
 			code_metrics_utilities,
-			code_metrics,
+			code_metric,
 			code_metrics_messages,
-			'metrics/coupling_metric',
-			'metrics/dit_metric',
-			'metrics/noc_metric'
+			dit_metric,
+			coupling_metric,
+			noc_metric,
+			doc_metric,
+			code_metrics
 		],
 		[	
 			source_data(on),
@@ -38,6 +42,22 @@
 		]
 	),
 	logtalk_load(test_entities, [source_data(on)]),
-	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
-	tests::run
+	logtalk_load(
+		[
+			coupling_metric_tests,
+			dit_metric_tests,
+			doc_metric_tests,
+			noc_metric_tests,
+			code_metrics_tests
+		], [
+			hook(lgtunit), optimize(on)
+		]
+	),
+	lgtunit::run_test_sets([
+		coupling_metric_tests,
+		dit_metric_tests,
+		doc_metric_tests,
+		noc_metric_tests,
+		code_metrics_tests
+	])
 )).

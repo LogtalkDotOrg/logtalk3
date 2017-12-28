@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(noc_metric_tests,
 	extends(lgtunit)).
 
 	:- info([
@@ -30,9 +30,10 @@
 	]).
 
 	cover(code_metric).
-	cover(code_metrics).
+	cover(code_metrics_utilities).
+	cover(noc_metric).
 
-	:- uses(code_metrics, [
+	:- uses(noc_metric, [
 		all/0,
 		rlibrary/1,
 		library/1,
@@ -46,29 +47,73 @@
 		deterministic/1
 	]).
 
-	test(code_metrics_entity) :-
-		deterministic(entity(obj_c)).
+	test(noc_cat_a) :-
+		\+ noc_metric::entity_score(cat_a, _).
 
-	test(code_metrics_file) :-
-		object_property(lgtunit, file(File)),
-		deterministic(file(File)).
+	test(noc_cat_b) :-
+		nocs_are(cat_b, Nocs),
+		Nocs == [foo/0-1].
 
-	test(code_metrics_library) :-
-		deterministic(library(lgtunit)).
+	test(noc_cat_c) :-
+		nocs_are(cat_c, Nocs),
+		Nocs == [foo/0-1].
 
-	test(code_metrics_rlibrary) :-
-		deterministic(rlibrary(lgtunit)).
+	test(noc_cat_d) :-
+		\+ noc_metric::entity_score(cat_d, _).
 
-	test(code_metrics_directory) :-
-		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(directory(Directory)).
+	test(wrong_clause(noc_obj_e)) :-
+		nocs_are(obj_e, Nocs),
+		\+ Nocs == [foo/0-2].
 
-	test(code_metrics_rdirectory) :-
-		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(rdirectory(Directory)).
+	test(noc_obj_e) :-
+		nocs_are(obj_e, Nocs),
+		Nocs == [foo/0-1, fact/1-0].
 
-	test(code_metrics_all) :-
-		deterministic(all).
+	test(noc_obj_d) :-
+		nocs_are(obj_d, Nocs),
+		Nocs == [bar/0-1, foo/0-1].
+
+	test(noc_obj_a) :-
+		nocs_are(obj_a, Nocs),
+		Nocs == [foo/0-1, bar/0-1, baz/1-2].
+
+	test(noc_obj_b) :-
+		nocs_are(obj_b, Nocs),
+		Nocs == [foo/0-1].
+
+	test(noc_obj_c) :-
+		nocs_are(obj_c, Nocs),
+		Nocs == [foo/0-1, fact/1-0].
+
+	test(noc_prot_a) :-
+		\+ noc_metric::entity_score(prot_a, _).
+
+	test(noc_prot_b) :-
+		\+ noc_metric::entity_score(prot_b, _).
+
+	test(noc_car) :-
+		\+ noc_metric::entity_score(car, _).
+
+	test(noc_vehicle) :-
+		\+ noc_metric::entity_score(vehicle, _).
+
+	test(noc_meta_vehicle) :-
+		\+ noc_metric::entity_score(meta_vehicle, _).
+
+	test(noc_herring) :-
+		\+ noc_metric::entity_score(herring, _).
+
+	test(noc_bird) :-
+		\+ noc_metric::entity_score(bird, _).
+
+	% auxiliary predicates
+
+	nocs_are(Entity, Nocs) :-
+		findall(
+			Predicate-Noc,
+			noc_metric::entity_score(Entity, predicate_noc(Predicate, Noc)),
+			Nocs
+		).
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

@@ -26,8 +26,12 @@
 		code_metric_protocol,
 		code_metrics_utilities,
 		code_metrics_messages,
-		code_metrics,
-		'metrics/loader'
+		code_metric,
+		dit_metric,
+		coupling_metric,
+		noc_metric,
+		doc_metric,
+		code_metrics
 	], [
 		optimize(on)
 	])

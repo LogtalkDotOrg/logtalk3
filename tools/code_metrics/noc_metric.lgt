@@ -19,13 +19,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([
-		dit_metric,
-		coupling_metric,
-		noc_metric,
-		doc_metric
-	], [
-		optimize(on)
-	])
-).
+:- object(noc_metric,
+	implements(code_metric_protocol),
+	imports((code_metrics_utilities, code_metric))).
+
+	:- info([
+		version is 0.4,
+		author is 'Ebrahim Azarisooreh',
+		date is 2017/12/28,
+		comment is 'Number of clauses defined for a predicate in an object or category.'
+	]).
+
+	:- uses(list, [memberchk/2]).
+
+	entity_score(Entity, predicate_noc(Predicate, Noc)) :-
+		^^current_entity(Entity),
+		^^entity_kind(Entity, Kind),
+		(  Kind == object
+		;  Kind == category
+		),
+		defined_predicate_noc(Entity, Predicate, Noc).
+
+	defined_predicate_noc(Entity, Predicate, Noc) :-
+		^^defines_predicate(Entity, Predicate, Properties),
+		memberchk(number_of_clauses(Noc), Properties).
+
+	metric_label('Number of Clauses').
+
+:- end_object.

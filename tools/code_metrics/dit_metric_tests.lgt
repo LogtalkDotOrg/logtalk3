@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(dit_metric_tests,
 	extends(lgtunit)).
 
 	:- info([
@@ -30,9 +30,10 @@
 	]).
 
 	cover(code_metric).
-	cover(code_metrics).
+	cover(code_metrics_utilities).
+	cover(dit_metric).
 
-	:- uses(code_metrics, [
+	:- uses(dit_metric, [
 		all/0,
 		rlibrary/1,
 		library/1,
@@ -46,29 +47,73 @@
 		deterministic/1
 	]).
 
-	test(code_metrics_entity) :-
-		deterministic(entity(obj_c)).
+	% DIT tests
 
-	test(code_metrics_file) :-
-		object_property(lgtunit, file(File)),
-		deterministic(file(File)).
+	test(dit_reflexive_obj) :-
+		depth_is(object, 2).
 
-	test(code_metrics_library) :-
-		deterministic(library(lgtunit)).
+	test(dit_reflexive_class) :-
+		depth_is(class, 1).
 
-	test(code_metrics_rlibrary) :-
-		deterministic(rlibrary(lgtunit)).
+	test(dit_reflexive_abstract_class) :-
+		depth_is(abstract_class, 3).
 
-	test(code_metrics_directory) :-
-		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(directory(Directory)).
+	test(dit_obj_a) :-
+		depth_is(obj_a, 3).
 
-	test(code_metrics_rdirectory) :-
-		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(rdirectory(Directory)).
+	test(dit_obj_b) :-
+		depth_is(obj_b, 4).
 
-	test(code_metrics_all) :-
-		deterministic(all).
+	test(dit_obj_c) :-
+		depth_is(obj_c, 5).
+
+	test(dit_obj_d) :-
+		depth_is(obj_d, 1).
+
+	test(dit_obj_e) :-
+		depth_is(obj_e, 1).
+
+	test(wrong_output(dit_obj_c)) :-
+		\+ depth_is(obj_c, 7).
+
+	test(dit_cat_a) :-
+		depth_is(cat_a, 2).
+
+	test(dit_cat_b) :-
+		depth_is(cat_b, 3).
+
+	test(dit_cat_c) :-
+		depth_is(cat_c, 2).
+
+	test(dit_cat_d) :-
+		depth_is(cat_d, 1).
+
+	test(dit_prot_a) :-
+		depth_is(prot_a, 1).
+
+	test(dit_prot_b) :-
+		depth_is(prot_b, 2).
+
+	test(wrong_output(dit_prot_c)) :-
+		\+ depth_is(prot_a, 0).
+
+	test(dit_herring) :-
+		depth_is(herring, 2).
+
+	test(dit_car) :-
+		depth_is(car, 3).
+
+	test(dit_meta_vehicle) :-
+		depth_is(meta_vehicle, 1).
+
+	test(dit_vehicle) :-
+		depth_is(vehicle, 2).
+
+	% auxiliary predicates
+
+	depth_is(Entity, N) :-
+		findall(D, dit_metric::entity_score(Entity, D), Depths),
+		Depths == [N].
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

@@ -19,31 +19,39 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(noc_metric,
-	implements(code_metric_protocol),
-	imports(code_metrics_utilities)).
+:- object(doc_metric_tests,
+	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/27,
-		comment is 'Number of clauses defined for a predicate in an object or category.'
+		date is 2017/06/11,
+		comment is 'Unit tests for code metrics framework.'
 	]).
 
-	:- uses(list, [memberchk/2]).
+	cover(code_metric).
+	cover(doc_metric).
 
-	entity_score(Entity, predicate_noc(Predicate, Noc)) :-
-		^^current_entity(Entity),
-		^^entity_kind(Entity, Kind),
-		(  Kind == object
-		;  Kind == category
-		),
-		defined_predicate_noc(Entity, Predicate, Noc).
+	:- uses(doc_metric, [
+		all/0,
+		rlibrary/1,
+		library/1,
+		rdirectory/1,
+		directory/1,
+		file/1,
+		entity/1
+	]).
 
-	defined_predicate_noc(Entity, Predicate, Noc) :-
-		^^defines_predicate(Entity, Predicate, Properties),
-		memberchk(number_of_clauses(Noc), Properties).
+	:- uses(lgtunit, [
+		deterministic/1
+	]).
 
-	metric_label('Number of Clauses').
+	% suppress all messages from the "code_metrics"
+	% component to not pollute the unit tests output
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 :- end_object.

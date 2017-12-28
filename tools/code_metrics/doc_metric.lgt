@@ -20,12 +20,12 @@
 
 :- object(doc_metric,
 	implements(code_metric_protocol),
-	imports(code_metrics_utilities)).
+	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
 		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2017/12/27,
+		date is 2017/12/28,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a percentage where a 100% score means that all expected documentation information is present.',

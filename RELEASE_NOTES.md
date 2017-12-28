@@ -125,8 +125,10 @@ true, sends an `update/0` message to it.
 
 * RENAMED: The `code_metric_protocols` protocol to `code_metric_protocol`.
 
-* IMPROVED: The `code_metrics_messages` no longer requires changes when
-adding a new metric.
+* IMPROVED: The `code_metrics_messages` category no longer requires changes
+when adding a new metric.
+
+* UPDATED: The `code_metrics` tool to allow applying individual metrics.
 
 Tests
 -----

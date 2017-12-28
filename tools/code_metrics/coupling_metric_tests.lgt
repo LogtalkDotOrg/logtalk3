@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(coupling_metric_tests,
 	extends(lgtunit)).
 
 	:- info([
@@ -30,9 +30,10 @@
 	]).
 
 	cover(code_metric).
-	cover(code_metrics).
+	cover(code_metrics_utilities).
+	cover(coupling_metric).
 
-	:- uses(code_metrics, [
+	:- uses(coupling_metric, [
 		all/0,
 		rlibrary/1,
 		library/1,
@@ -46,29 +47,62 @@
 		deterministic/1
 	]).
 
-	test(code_metrics_entity) :-
-		deterministic(entity(obj_c)).
+	test(coupling_obj_a) :-
+		coupling_is(obj_a, 3).
 
-	test(code_metrics_file) :-
-		object_property(lgtunit, file(File)),
-		deterministic(file(File)).
+	test(coupling_obj_b) :-
+		coupling_is(obj_b, 2).
 
-	test(code_metrics_library) :-
-		deterministic(library(lgtunit)).
+	test(coupling_obj_c) :-
+		coupling_is(obj_c, 2).
 
-	test(code_metrics_rlibrary) :-
-		deterministic(rlibrary(lgtunit)).
+	test(coupling_obj_d) :-
+		coupling_is(obj_d, 1).
 
-	test(code_metrics_directory) :-
-		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(directory(Directory)).
+	test(coupling_obj_e) :-
+		coupling_is(obj_e, 0).
 
-	test(code_metrics_rdirectory) :-
-		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(rdirectory(Directory)).
+	test(wrong_output(coupling_obj_c)) :-
+		\+ coupling_is(obj_c, 10).
 
-	test(code_metrics_all) :-
-		deterministic(all).
+	test(coupling_cat_a) :-
+		coupling_is(cat_a, 1).
+
+	test(coupling_cat_b) :-
+		coupling_is(cat_b, 2).
+
+	test(coupling_cat_c) :-
+		coupling_is(cat_c, 2).
+
+	test(coupling_cat_d) :-
+		coupling_is(cat_d, 0).
+
+	test(wrong_output(coupling_cat_c)) :-
+		\+ coupling_is(obj_c, 4).
+
+	test(coupling_prot_a) :-
+		coupling_is(prot_a, 0).
+
+	test(coupling_prot_b) :-
+		coupling_is(prot_b, 1).
+
+	test(coupling_herring) :-
+		coupling_is(herring, 1).
+
+	test(coupling_car) :-
+		coupling_is(car, 1).
+
+	test(coupling_meta_vehicle) :-
+		coupling_is(meta_vehicle, 0).
+
+	test(coupling_vehicle) :-
+		coupling_is(vehicle, 1).
+
+	% auxiliary predicates
+
+	coupling_is(Entity, N) :-
+		findall(C, coupling_metric::entity_score(Entity, C), Couplings),
+		Couplings == [N].
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

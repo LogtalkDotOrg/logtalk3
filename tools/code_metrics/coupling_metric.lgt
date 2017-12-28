@@ -21,12 +21,12 @@
 
 :- object(coupling_metric,
 	implements(code_metric_protocol),
-	imports(code_metrics_utilities)).
+	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/27,
+		date is 2017/12/28,
 		comment is 'Analyzes the coupling score for objects, categories, and protocols.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
