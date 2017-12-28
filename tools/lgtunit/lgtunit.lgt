@@ -28,7 +28,7 @@
 	:- info([
 		version is 5.0,
 		author is 'Paulo Moura',
-		date is 2017/12/27,
+		date is 2017/12/28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1172,8 +1172,10 @@
 			print_message(error, lgtunit, non_instantiated_test_identifier)
 		;	\+ callable(Test) ->
 			print_message(error, lgtunit, non_callable_test_identifier(Object, Test))
-		;	test_(Test, _) ->
-			print_message(error, lgtunit, repeated_test_identifier(Object, Test))
+		;	functor(Test, Functor, Arity),
+			functor(Template, Functor, Arity),
+			test_(Template, _) ->
+			print_message(error, lgtunit, repeated_test_identifier(Object, Template))
 		;	true
 		).
 
