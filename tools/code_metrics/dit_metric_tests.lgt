@@ -57,7 +57,7 @@
 	test(dit_obj_e) :-
 		depth_is(obj_e, 1).
 
-	test(wrong_output(dit_obj_c)) :-
+	test(dit_obj_c_wrong_output) :-
 		\+ depth_is(obj_c, 7).
 
 	test(dit_cat_a) :-
@@ -78,7 +78,7 @@
 	test(dit_prot_b) :-
 		depth_is(prot_b, 2).
 
-	test(wrong_output(dit_prot_c)) :-
+	test(dit_prot_c_wrong_output) :-
 		\+ depth_is(prot_a, 0).
 
 	test(dit_herring) :-

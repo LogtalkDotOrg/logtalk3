@@ -48,7 +48,7 @@
 	test(coupling_obj_e) :-
 		coupling_is(obj_e, 0).
 
-	test(wrong_output(coupling_obj_c)) :-
+	test(coupling_obj_c_wrong_output) :-
 		\+ coupling_is(obj_c, 10).
 
 	test(coupling_cat_a) :-
@@ -63,7 +63,7 @@
 	test(coupling_cat_d) :-
 		coupling_is(cat_d, 0).
 
-	test(wrong_output(coupling_cat_c)) :-
+	test(coupling_cat_c_wrong_output) :-
 		\+ coupling_is(obj_c, 4).
 
 	test(coupling_prot_a) :-
