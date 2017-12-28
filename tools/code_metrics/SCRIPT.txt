@@ -30,24 +30,24 @@ ________________________________________________________________________
 ...
 
 
-% apply the tool to itself:
+% apply all loaded metrics the tool to itself:
 
 | ?- code_metrics::library(code_metrics).
 ...
 
 
-% load the standard library and obtain metrics stats for all its entities:
+% load the standard library and obtain coupling metric stats for all its entities:
 
 | ?- logtalk_load(library(all_loader)).
 ...
 
-| ?- code_metrics::library(library).
+| ?- coupling_metric::library(library).
 ...
 
 
-% analyze metrics for a specific entity:
+% apply the documentation metric to a specific entity:
 
-| ?- code_metrics::entity(logtalk).
+| ?- doc_metric::entity(logtalk).
 ...
 
 
