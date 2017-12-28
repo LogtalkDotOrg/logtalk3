@@ -32,6 +32,27 @@
 	cover(code_metric).
 	cover(doc_metric).
 
+	test(doc_expanding) :-
+		doc_metric_valid(expanding).
+
+	test(doc_forwarding) :-
+		doc_metric_valid(forwarding).
+
+	test(doc_monitoring) :-
+		doc_metric_valid(monitoring).
+
+	test(doc_logtalk) :-
+		doc_metric_valid(logtalk).
+
+	test(doc_user) :-
+		doc_metric_valid(user).
+
+	% auxiliary predicates
+
+	doc_metric_valid(Entity) :-
+		doc_metric::entity_score(Entity, Score),
+		0 =< Score, Score =< 100.
+
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output
 
