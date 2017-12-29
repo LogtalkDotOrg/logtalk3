@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/27,
+		date is 2017/12/29,
 		comment is 'Message translations for the code_metrics tool.'
 	]).
 
@@ -80,13 +80,13 @@
 	message_tokens(entity_score(Entity, Metric, Score)) -->
 		entity_score(Entity, Metric, Score).
 
+	entity_score(_Entity, noc_metric, predicate_noc(Predicate, Score)) -->
+		{ metric_label(noc_metric, Label) },
+		['~w: ~w - ~w'-[Label, Predicate, Score], nl].
+
 	entity_score(_Entity, Metric, Score) -->
 		{metric_label(Metric, Label)},
 		['~w score: ~w'-[Label, Score], nl].
-
-	entity_score(_Entity, noc_metric, predicate_noc(Predicate, Score)) -->
-		{ metric_label(noc_metric, Label) },
-		['~w [~w]: ~w'-[Label, Predicate, Score], nl].
 
 	% auxiliary predicates
 
