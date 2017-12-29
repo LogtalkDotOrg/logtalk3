@@ -176,11 +176,10 @@
 		argnames is ['Tests', 'File']
 	]).
 
-	:- protected(run_test_set/1).
-	:- mode(run_test_set(+atom), one).
-	:- info(run_test_set/1, [
-		comment is 'Runs a test set as part of running two or more test sets as a unified set. Order is one of the atoms {first, middle, last}.',
-		argnames is ['Order']
+	:- protected(run_test_set/0).
+	:- mode(run_test_set, one).
+	:- info(run_test_set/0, [
+		comment is 'Runs a test set as part of running two or more test sets as a unified set.'
 	]).
 
 	:- protected(run_quick_check_tests/2).
@@ -547,25 +546,22 @@
 		retractall(running_test_sets_),
 		assertz(running_test_sets_),
 		reset_coverage_results,
-		current_object(First),
-		First::run_test_set(first),
-		run_test_sets(Others, Next),
-		write_coverage_results([First, Next| Others]).
-
-	run_test_sets([], Last) :-
-		current_object(Last),
-		Last::run_test_set(last),
+		write_tests_header,
+		run_test_sets_([First, Next| Others]),
+		write_coverage_results([First, Next| Others]),
+		write_tests_footer,
 		retractall(running_test_sets_).
-	run_test_sets([Next| Rest], Middle) :-
-		current_object(Middle),
-		Middle::run_test_set(middle),
-		run_test_sets(Rest, Next).
 
-	run_test_set(first) :-
+	run_test_sets_([]).
+	run_test_sets_([TestSet| TestSets]) :-
+		current_object(TestSet),
+		TestSet::run_test_set,
+		run_test_sets_(TestSets).
+
+	run_test_set :-
 		% save the current output stream
 		current_output(Output),
 		reset_test_counters,
-		write_tests_header,
 		write_tests_object,
 		(	run_condition ->
 			(	run_setup ->
@@ -578,41 +574,6 @@
 		),
 		% restore the current output stream
 		set_output(Output).		
-
-	run_test_set(middle) :-
-		% save the current output stream
-		current_output(Output),
-		reset_test_counters,
-		write_tests_object,
-		(	run_condition ->
-			(	run_setup ->
-				::run_tests,
-				run_cleanup,
-				write_tests_results
-			;	tests_skipped
-			)
-		;	tests_skipped
-		),
-		% restore the current output stream
-		set_output(Output).
-
-	run_test_set(last) :-
-		% save the current output stream
-		current_output(Output),
-		reset_test_counters,
-		write_tests_object,
-		(	run_condition ->
-			(	run_setup ->
-				::run_tests,
-				run_cleanup,
-				write_tests_results
-			;	tests_skipped
-			)
-		;	tests_skipped
-		),
-		write_tests_footer,
-		% restore the current output stream
-		set_output(Output).
 
 	run(Test) :-
 		atom(Test),
