@@ -188,9 +188,9 @@ to specify the number of random tests that will be generated and run (defaults
 to 100 tests).
 
 In all dialects, `Test` is a callable term, usually an atom, that uniquely
-identifies a test. An error message is printed if duplicated identifiers (i.e.
-identifiers with the same functor and arity) are found. These errors must be
-corrected otherwise the test results can be misleading.
+identifies a test. An error message is printed if duplicated test identifiers
+are found. These errors must be corrected otherwise the test results can be
+misleading.
 
 For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.

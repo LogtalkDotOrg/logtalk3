@@ -28,7 +28,7 @@
 	:- info([
 		version is 5.0,
 		author is 'Paulo Moura',
-		date is 2017/12/28,
+		date is 2017/12/29,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -432,6 +432,14 @@
 	:- info(test/3, [
 		comment is 'Specifies a unit test.',
 		argnames is ['Identifier', 'Variables', 'Outcome']
+	]).
+
+	:- private(auxiliary_predicate_counter_/1).
+	:- dynamic(auxiliary_predicate_counter_/1).
+	:- mode(auxiliary_predicate_counter_(?integer), one_or_more).
+	:- info(auxiliary_predicate_counter_/1, [
+		comment is 'Counter for generarting unique auxiliary predicate names.',
+		argnames is ['Counter']
 	]).
 
 	:- private(test_/2).
@@ -922,6 +930,8 @@
 		set_output(Current).
 
 	reset_compilation_counters :-
+		retractall(auxiliary_predicate_counter_(_)),
+		assertz(auxiliary_predicate_counter_(0)),
 		retractall(test_(_, _)).
 
 	increment_skipped_tests_counter :-
@@ -1172,6 +1182,9 @@
 			print_message(error, lgtunit, non_instantiated_test_identifier)
 		;	\+ callable(Test) ->
 			print_message(error, lgtunit, non_callable_test_identifier(Object, Test))
+		;	ground(Test),
+			test_(Test, _) ->
+			print_message(error, lgtunit, repeated_test_identifier(Object, Test))
 		;	functor(Test, Functor, Arity),
 			functor(Template, Functor, Arity),
 			test_(Template, _) ->
@@ -1239,7 +1252,13 @@
 		number_codes(Arity, ArityCodes),
 		atom_codes(ArityAtom, ArityCodes),
 		atom_concat(Prefix0, ArityAtom, Prefix1),
-		atom_concat(Prefix1, '_', Prefix).
+		atom_concat(Prefix1, '_', Prefix2),
+		retract(auxiliary_predicate_counter_(OldCounter)), !,
+		NewCounter is OldCounter + 1,
+		assertz(auxiliary_predicate_counter_(NewCounter)),
+		number_codes(NewCounter, CounterCodes),
+		atom_codes(CounterAtom, CounterCodes),
+		atom_concat(Prefix2, CounterAtom, Prefix).
 
 	parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests) :-
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
