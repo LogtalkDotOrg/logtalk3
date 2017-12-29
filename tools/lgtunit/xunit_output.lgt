@@ -30,7 +30,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/12/15,
+		date is 2017/12/29,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.'
 	]).
 
@@ -133,7 +133,18 @@
 	% "testsuite" tag attributes
 
 	testsuite_stats(Tests, 0, Failures, Skipped) :-
-		message_cache_(tests_results_summary(_Object, Tests, Skipped, _, Failures, _)).
+		testsuite_stats(0, Tests, 0, Failures, 0, Skipped).
+	
+	testsuite_stats(Tests0, Tests, Failures0, Failures, Skipped0, Skipped) :-
+		(	retract(message_cache_(tests_results_summary(_Object, PartialTests, PartialSkipped, _, PartialFailures, _))) ->
+			Tests1 is Tests0 + PartialTests,
+			Failures1 is Failures0 + PartialFailures,
+			Skipped1 is Skipped0 + PartialSkipped,
+			testsuite_stats(Tests1, Tests, Failures1, Failures, Skipped1, Skipped)
+		;	Tests is Tests0,
+			Failures is Failures0,
+			Skipped is Skipped0
+		).
 
 	testsuite_name(Name) :-
 		message_cache_(running_tests_from_object_file(_, File)),
