@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/28,
+		date is 2017/12/29,
 		comment is 'Unit tests for entity number of clauses metric.'
 	]).
 
@@ -47,7 +47,7 @@
 	test(noc_cat_d) :-
 		\+ noc_metric::entity_score(cat_d, _).
 
-	test(wrong_clause(noc_obj_e)) :-
+	test(noc_obj_e_wrong_clause) :-
 		nocs_are(obj_e, Nocs),
 		\+ Nocs == [foo/0-2].
 
