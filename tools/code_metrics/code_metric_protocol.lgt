@@ -22,10 +22,10 @@
 :- protocol(code_metric_protocol).
 
 	:- info([
-		version is 0.3,
-		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/27,
-		comment is 'Protocol for individual metrics.',
+		version is 0.4,
+		author is 'Ebrahim Azarisooreh and Paulo Moura',
+		date is 2017/12/31,
+		comment is 'Protocol for individual code metrics.',
 		remarks is [
 			'Usage' - 'This protocol should be implemented by any metric added to the system.',
 			'Score' - 'Score can be any type of term necessary to explain the nature of the entity and its relationship to the metric in question.'
@@ -34,17 +34,17 @@
 	]).
 
 	:- public(entity_score/2).
-	:- mode(entity_score(?term, ?term), zero_or_more).
+	:- mode(entity_score(?entity_identifier, ?nonvar), zero_or_more).
 	:- info(entity_score/2, [
 		comment is 'True if Score is a term that represents the metric score associated with Entity.',
 		argnames is ['Entity', 'Score']
 	]).
 
-	:- public(metric_label/1).
-	:- mode(metric_label(-atom), one).
-	:- info(metric_label/1, [
-		comment is 'Metric label for pretty printing of metrics data.',
-		argnames is ['Label']
+	:- public(entity_score//2).
+	:- mode(entity_score(@entity_identifier, @nonvar), one).
+	:- info(entity_score//2, [
+		comment is 'Pretty prints the entity score.',
+		argnames is ['Entity', 'Score']
 	]).
 
 :- end_protocol.

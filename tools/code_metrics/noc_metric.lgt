@@ -26,7 +26,7 @@
 	:- info([
 		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/28,
+		date is 2017/12/31,
 		comment is 'Number of clauses defined for a predicate in an object or category.'
 	]).
 
@@ -44,6 +44,7 @@
 		^^defines_predicate(Entity, Predicate, Properties),
 		memberchk(number_of_clauses(Noc), Properties).
 
-	metric_label('Number of Clauses').
+	entity_score(_Entity, predicate_noc(Predicate, Score)) -->
+		['Number of Clauses: ~w - ~w'-[Predicate, Score], nl].
 
 :- end_object.

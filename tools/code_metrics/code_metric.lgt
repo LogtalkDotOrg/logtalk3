@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.6,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2017/12/28,
+		date is 2017/12/31,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -317,5 +317,9 @@
 			scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)
 		),
 		print_message(silent, code_metrics, scan_ended).
+
+	entity_score(_Entity, Score) -->
+		{self(Metric)},
+		['~w score: ~w'-[Metric, Score], nl].
 
 :- end_category.

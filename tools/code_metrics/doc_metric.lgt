@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2017/12/28,
+		date is 2017/12/31,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a percentage where a 100% score means that all expected documentation information is present.',
@@ -295,5 +295,8 @@
 		;	NumberOfDescriptions1 is NumberOfDescriptions0
 		),
 		arguments_with_descriptions(Arguments, NumberOfArguments1, NumberOfArguments, NumberOfDescriptions1, NumberOfDescriptions).
+
+	entity_score(_Entity, Score) -->
+		['Documentation score: ~w'-[Score], nl].
 
 :- end_object.

@@ -26,7 +26,7 @@
 	:- info([
 		version is 0.4,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/28,
+		date is 2017/12/31,
 		comment is 'Analyzes the coupling score for objects, categories, and protocols.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
@@ -105,6 +105,7 @@
 		Entity \== Entity2,
 		^^defines_predicate(Entity2, Predicate).
 
-	metric_label('Coupling').
+	entity_score(_Entity, Score) -->
+		['Coupling score: ~w'-[Score], nl].
 
 :- end_object.
