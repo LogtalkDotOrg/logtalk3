@@ -33,7 +33,7 @@
  		logtalk::print_message(information, code_metrics, scanning_entity(Kind, Entity)),
 		forall(
 			process_entity_(Entity, Metric, Score),
-			logtalk::print_message(information, code_metrics, entity_score(Entity, Metric, Score))
+			logtalk::print_message(information, code_metrics, entity_score(Metric, Entity, Score))
 		).
 
 	process_entity_(Entity, Metric, Score) :-
