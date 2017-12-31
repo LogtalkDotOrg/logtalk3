@@ -77,17 +77,10 @@
 	message_tokens(unknown(entity, Entity)) -->
 		['Entity not loaded: ~q'-[Entity], nl].
 
-	message_tokens(entity_score(Entity, Metric, Score)) -->
+	message_tokens(entity_score(Metric, Entity, Score)) -->
 		Metric::entity_score(Entity, Score).
 
 	% auxiliary predicates
-
-	metric_label(Metric, Label) :-
-		(	conforms_to_protocol(Metric, code_metric_protocol),
-			Metric::metric_label(Label) ->
-			true
-		;	Label = Metric
-		).
 
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),

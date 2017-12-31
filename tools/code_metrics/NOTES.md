@@ -22,9 +22,23 @@ Overview
 --------
 
 The purpose of this tool is to assess qualities of source code that may
-predict negative aspects such as complexity, error-proneness, and overall
-maintainability. It is meant to be extensible via the addition of objects
-implementing new metrics. Currently, the following metrics are provided:
+predict negative aspects such as entity coupling, cohesion, complexity,
+error-proneness, and overall maintainability. It is meant to be extensible
+via the addition of objects implementing new metrics.
+
+
+Loading
+-------
+
+This tool can be loaded using the query:
+
+	| ?- logtalk_load(code_metrics(loader)).
+
+
+Available metrics
+-----------------
+
+Currently, the following metrics are provided:
 
 - Number of Clauses (`noc_metric`)
 - Depth of Inheritance (`dit_metric`)
@@ -41,12 +55,13 @@ loaded individual metrics.
 For usage examples, see the `SCRIPT.txt` file.
 
 
-Loading
--------
+Defining new metrics
+--------------------
 
-This tool can be loaded using the query:
-
-	| ?- logtalk_load(code_metrics(loader)).
+New metrics can be implemented by defining an object that imports the
+`code_metric` category and implements the `entity_score/2` predicate
+(to compute the metric for a given entity) and the `entity_score//2`
+non-terminal for pretty-printing of the computed scores.
 
 
 Third-party tools

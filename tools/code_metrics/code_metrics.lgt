@@ -20,13 +20,12 @@
 
 
 :- object(code_metrics,
-	implements(code_metric_protocol),
 	imports(code_metric)).
 
 	:- info([
 		version is 0.1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2017/12/28,
+		date is 2017/12/31,
 		comment is 'Helper object to apply all loaded code metrics.'
 	]).
 
@@ -38,7 +37,7 @@
 		).
 
 	process_entity_(Entity, Metric, Score) :-
-		conforms_to_protocol(Metric, code_metric_protocol),
+		imports_category(Metric, code_metric),
 		Metric::entity_score(Entity, Score).
 
 :- end_object.

@@ -20,11 +20,10 @@
 
 
 :- object(noc_metric,
-	implements(code_metric_protocol),
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
 		date is 2017/12/31,
 		comment is 'Number of clauses defined for a predicate in an object or category.'
@@ -35,9 +34,7 @@
 	entity_score(Entity, predicate_noc(Predicate, Noc)) :-
 		^^current_entity(Entity),
 		^^entity_kind(Entity, Kind),
-		(  Kind == object
-		;  Kind == category
-		),
+		Kind \== protocol,
 		defined_predicate_noc(Entity, Predicate, Noc).
 
 	defined_predicate_noc(Entity, Predicate, Noc) :-

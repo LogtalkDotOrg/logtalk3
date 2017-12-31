@@ -19,7 +19,6 @@
 
 
 :- object(doc_metric,
-	implements(code_metric_protocol),
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([

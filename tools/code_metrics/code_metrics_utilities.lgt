@@ -29,8 +29,7 @@
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
 			'Predicate Scope' - 'This is meant for internal use by metrics only. As such, all provided predicates are private.'
-		],
-		see_also is [code_metric_protocol]
+		]
 	]).
 
 	:- uses(list, [member/2, memberchk/2]).

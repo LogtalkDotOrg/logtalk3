@@ -20,14 +20,13 @@
 
 
 :- object(coupling_metric,
-	implements(code_metric_protocol),
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
 		date is 2017/12/31,
-		comment is 'Analyzes the coupling score for objects, categories, and protocols.',
+		comment is 'Analyzes entity coupling scores.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
 			'Ancestors' - 'Any direct inheritance relations to the entity in question will also increment the score. Duplicate entity couplings will not be scored multiple times.',
@@ -39,23 +38,11 @@
 
 	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
-		score(Entity, Score).
-
-	score(Entity, Score) :-
-		^^entity_kind(Entity, EntityKind),
-		(   EntityKind == object
-		;   EntityKind == category
-		),
-		!,
-		coupling_score(EntityKind, Entity, Score).
-
-	score(Protocol, Score) :-
-		^^entity_kind(Protocol, protocol),
-		coupling_score_protocol(Protocol, 0, Score, []).
-
-	% Measure the coupling scores for objects and categories
-	coupling_score(EntityKind, Entity, Score) :-
-		coupling_score(EntityKind, Entity, 0, Score, []).
+		^^entity_kind(Entity, Kind),
+		(	Kind == protocol ->
+			coupling_score_protocol(Entity, 0, Score, [])
+		;	coupling_score(Kind, Entity, 0, Score, [])
+		).
 
 	coupling_score_protocol(Protocol, Score0, Score, LoggedEntities) :-
 		(   unvisited_ancestor(protocol, Protocol, Ancestor, LoggedEntities)
@@ -64,13 +51,14 @@
 		;   Score0 = Score
 		).
 
-	coupling_score(EntityKind, Entity, Score0, Score, LoggedEntities) :-
-		(   unvisited_ancestor(EntityKind, Entity, Ancestor, LoggedEntities)
+	% measure the coupling scores for objects and categories
+	coupling_score(Kind, Entity, Score0, Score, LoggedEntities) :-
+		(   unvisited_ancestor(Kind, Entity, Ancestor, LoggedEntities)
 		->  Score1 is Score0 + 1,
-			coupling_score(EntityKind, Entity, Score1, Score, [Ancestor|LoggedEntities])
+			coupling_score(Kind, Entity, Score1, Score, [Ancestor| LoggedEntities])
 		;   unvisited_call(Entity, Entity2, LoggedEntities)
 		->  Score1 is Score0 + 1,
-			coupling_score(EntityKind, Entity, Score1, Score, [Entity2|LoggedEntities])
+			coupling_score(Kind, Entity, Score1, Score, [Entity2| LoggedEntities])
 		;   Score0 = Score
 		).
 

@@ -80,10 +80,24 @@
 		comment is 'Scans all loaded entities and prints a report of all applicable metrics.'
 	]).
 
+	:- public(entity_score/2).
+	:- mode(entity_score(@entity_identifier, -nonvar), zero_or_more).
+	:- info(entity_score/2, [
+		comment is 'Score is a term that represents the metric score associated with Entity. Fails if the metric does not apply.',
+		argnames is ['Entity', 'Score']
+	]).
+
+	:- public(entity_score//2).
+	:- mode(entity_score(@entity_identifier, @nonvar), one).
+	:- info(entity_score//2, [
+		comment is 'Pretty prints the entity score.',
+		argnames is ['Entity', 'Score']
+	]).
+
 	:- protected(process_entity/2).
-	:- mode(process_entity(+atom, +entity_identifier), one).
+	:- mode(process_entity(+atom, @entity_identifier), one).
 	:- info(process_entity/2, [
-		comment is 'Processes an entity of the given kind.',
+		comment is 'Processes an entity of the given kind. Fails if the metric does not apply.',
 		argnames is ['Kind', 'Entity']
 	]).
 
@@ -107,12 +121,6 @@
 		write_scan_header('Entity'),
 		::process_entity(Kind, Entity),
 		write_scan_footer('Entity').
-
-	process_entity(Kind, Entity) :-
-		print_message(information, code_metrics, scanning_entity(Kind, Entity)),
-		self(Metric),
-		::entity_score(Entity, Score),
-		print_message(information, code_metrics, entity_score(Entity, Metric, Score)).
 
 	%%%%%%%%%%%%%%%%
 	%% File scans %%
@@ -317,6 +325,16 @@
 			scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)
 		),
 		print_message(silent, code_metrics, scan_ended).
+
+	% default definitions
+
+	process_entity(Kind, Entity) :-
+		self(Metric),
+		print_message(information, code_metrics, scanning_entity(Kind, Entity)),
+		forall(
+			::entity_score(Entity, Score),
+			print_message(information, code_metrics, entity_score(Metric, Entity, Score))
+		).
 
 	entity_score(_Entity, Score) -->
 		{self(Metric)},

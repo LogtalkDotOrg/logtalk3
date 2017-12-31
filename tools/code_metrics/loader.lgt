@@ -23,7 +23,6 @@
 	logtalk_load(library(types_loader)),
 	logtalk_load(library(os_loader)),
 	logtalk_load([
-		code_metric_protocol,
 		code_metrics_utilities,
 		code_metrics_messages,
 		code_metric,
