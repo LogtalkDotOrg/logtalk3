@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.14.0 - December ??, 2017
-==========================
+3.14.0 - January ??, 2018
+=========================
 
 Logtalk compiler and runtime
 ----------------------------

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright 1998-2017 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
