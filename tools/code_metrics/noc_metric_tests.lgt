@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/29,
+		date is 2018/01/01,
 		comment is 'Unit tests for entity number of clauses metric.'
 	]).
 
@@ -33,73 +33,73 @@
 	cover(code_metrics_utilities).
 	cover(noc_metric).
 
+	:- uses(noc_metric, [entity_score/2]).
+
 	test(noc_cat_a) :-
-		\+ noc_metric::entity_score(cat_a, _).
+		entity_score(cat_a, Nocs), 
+		Nocs == [].
 
 	test(noc_cat_b) :-
-		nocs_are(cat_b, Nocs),
+		entity_score(cat_b, Nocs),
 		Nocs == [foo/0-1].
 
 	test(noc_cat_c) :-
-		nocs_are(cat_c, Nocs),
+		entity_score(cat_c, Nocs),
 		Nocs == [foo/0-1].
 
 	test(noc_cat_d) :-
-		\+ noc_metric::entity_score(cat_d, _).
+		entity_score(cat_d, Nocs),
+		Nocs == [].
 
 	test(noc_obj_e_wrong_clause) :-
-		nocs_are(obj_e, Nocs),
+		entity_score(obj_e, Nocs),
 		\+ Nocs == [foo/0-2].
 
 	test(noc_obj_e) :-
-		nocs_are(obj_e, Nocs),
+		entity_score(obj_e, Nocs),
 		Nocs == [foo/0-1, fact/1-0].
 
 	test(noc_obj_d) :-
-		nocs_are(obj_d, Nocs),
+		entity_score(obj_d, Nocs),
 		Nocs == [bar/0-1, foo/0-1].
 
 	test(noc_obj_a) :-
-		nocs_are(obj_a, Nocs),
+		entity_score(obj_a, Nocs),
 		Nocs == [foo/0-1, bar/0-1, baz/1-2].
 
 	test(noc_obj_b) :-
-		nocs_are(obj_b, Nocs),
+		entity_score(obj_b, Nocs),
 		Nocs == [foo/0-1].
 
 	test(noc_obj_c) :-
-		nocs_are(obj_c, Nocs),
+		entity_score(obj_c, Nocs),
 		Nocs == [foo/0-1, fact/1-0].
 
 	test(noc_prot_a) :-
-		\+ noc_metric::entity_score(prot_a, _).
+		\+ entity_score(prot_a, _).
 
 	test(noc_prot_b) :-
-		\+ noc_metric::entity_score(prot_b, _).
+		\+ entity_score(prot_b, _).
 
 	test(noc_car) :-
-		\+ noc_metric::entity_score(car, _).
+		entity_score(car, Nocs),
+		Nocs == [].
 
 	test(noc_vehicle) :-
-		\+ noc_metric::entity_score(vehicle, _).
+		entity_score(vehicle, Nocs),
+		Nocs == [].
 
 	test(noc_meta_vehicle) :-
-		\+ noc_metric::entity_score(meta_vehicle, _).
+		entity_score(meta_vehicle, Nocs),
+		Nocs == [].
 
 	test(noc_herring) :-
-		\+ noc_metric::entity_score(herring, _).
+		entity_score(herring, Nocs),
+		Nocs == [].
 
 	test(noc_bird) :-
-		\+ noc_metric::entity_score(bird, _).
-
-	% auxiliary predicates
-
-	nocs_are(Entity, Nocs) :-
-		findall(
-			Predicate-Noc,
-			noc_metric::entity_score(Entity, predicate_noc(Predicate, Noc)),
-			Nocs
-		).
+		entity_score(bird, Nocs),
+		Nocs == [].
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

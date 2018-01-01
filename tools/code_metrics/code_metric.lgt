@@ -22,9 +22,9 @@
 :- category(code_metric).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2017/12/31,
+		date is 2018/01/01,
 		comment is 'Logtalk frontend for analyzing source code via metrics.'
 	]).
 
@@ -81,7 +81,7 @@
 	]).
 
 	:- public(entity_score/2).
-	:- mode(entity_score(@entity_identifier, -nonvar), zero_or_more).
+	:- mode(entity_score(@entity_identifier, -nonvar), zero_or_one).
 	:- info(entity_score/2, [
 		comment is 'Score is a term that represents the metric score associated with Entity. Fails if the metric does not apply.',
 		argnames is ['Entity', 'Score']
@@ -329,11 +329,11 @@
 	% default definitions
 
 	process_entity(Kind, Entity) :-
-		self(Metric),
 		print_message(information, code_metrics, scanning_entity(Kind, Entity)),
-		forall(
-			::entity_score(Entity, Score),
+		(	::entity_score(Entity, Score) ->
+			self(Metric),
 			print_message(information, code_metrics, entity_score(Metric, Entity, Score))
+		;	true
 		).
 
 	entity_score(_Entity, Score) -->

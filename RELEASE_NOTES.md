@@ -125,6 +125,9 @@ true, sends an `update/0` message to it.
 
 * REMOVED: The `code_metric_protocols` protocol.
 
+* CHANGED: The `code_metrics` predicate `entity_score/2` is now specified as
+deterministic.
+
 * IMPROVED: The `code_metrics_messages` category no longer requires changes
 when adding a new metric.
 
