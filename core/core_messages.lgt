@@ -196,8 +196,8 @@
 	message_tokens(banner) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
 		(	{Status == stable} ->
-			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2017 Paulo Moura'-[], nl, nl]
-		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2017 Paulo Moura'-[], nl, nl]
+			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2018 Paulo Moura'-[], nl, nl]
+		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2018 Paulo Moura'-[], nl, nl]
 		).
 
 	message_tokens(default_flags) -->
