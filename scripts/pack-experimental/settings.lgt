@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  sample settings file
-%  Last updated on June 14, 2016
+%  Sample settings file
+%  Last updated on November 28, 2017
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -22,22 +22,27 @@
 
 
 %  This is a sample settings file for Logtalk that can be used to override
-%  the default flag values in the back-end Prolog compiler adapter files.
+%  the default flag values in the backend Prolog compiler adapter files.
 %  This is specially useful when Logtalk is installed system-wide in a
 %  read-only directory. Using settings files allows Logtalk to easily support
-%  user-specific settings. Note that the settings defined here can always
-%  be overridden by using the `logtalk_compile/2` and `logtalk_load/2` built-in
-%  predicates or by using the `set_logtalk_flag/2` directive within the source
-%  files.
+%  user-specific and project-specific settings. Note that the settings
+%  defined here can always be overridden by using the `logtalk_compile/2` and
+%  `logtalk_load/2` built-in predicates or by using the `set_logtalk_flag/2`
+%  directive within the source files.
+%
+%  Settings files are also a convenient place to define your own shortcuts
+%  for commonly used queries (e.g. load the debugger and start tracing).
 %
 %  Logtalk looks for a settings file first in the startup directory (thus
 %  supporting per-project settings files). If not found, Logtalk looks for
-%  a settings file in the Logtalk user directory. If no settings file is
-%  found, Logtalk will use the default flag values defined in the backend
-%  Prolog compiler adapter file. It's however possible to restrict searching
-%  of settings files to the Logtalk user directory and to disable settings
-%  files by changing the definition of the read-only flag `settings_file`
-%  in the used Prolog adapter file.
+%  a settings file in the Logtalk user directory. If still not found, Logtalk
+%  for a settings file in the home directory. If no settings file is found,
+%  Logtalk will use the default flag values defined in the backend Prolog
+%  compiler adapter file. It's however possible to restrict searching
+%  of settings files to the Logtalk user directory and to the home directory
+%  or to disable settings files by changing the definition of the read-only
+%  flag `settings_file` in the used Prolog adapter file from `allow` to,
+%  respectively, `restrict` or `deny`.
 %
 %  Logtalk uses the value of the `LOGTALK_STARTUP_DIRECTORY` environment
 %  variable for the startup directory and the value of the `LOGTALKUSER`
@@ -62,7 +67,7 @@
 %  as the scope of the `set_logtalk_flag/2` directive is local to the entity
 %  or the source file containing it.
 %
-%  If you use more than one back-end Prolog compiler and want to use per
+%  If you use more than one backend Prolog compiler and want to use per
 %  compiler settings, you can use the Logtalk conditional compilation
 %  directives and the `prolog_dialect` compiler flag. See the User and
 %  Reference Manuals for details.
@@ -71,21 +76,49 @@
 %  be printed by default if syntax errors are found. Be sure to debug and
 %  test your settings files as regular Logtalk source files before using
 %  them (you may use the `logtalk_compile/1-2` built-in predicates to compile
-%  the settings files without loading them).
+%  the settings files without loading them to check for syntax errors).
 %
-%  Limitations of the back-end Prolog compilers may prevent settings files
+%  Limitations of the backend Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially
 %  when running on non-POSIX operating systems such as Windows. Check the 
 %  `adapters/NOTES.md` file for compatibility details.
 
 
-%  To load the `help` example at startup, which provides basic on-line help
+%  To load the `help` tool at startup, which provides basic on-line help
 %  for Logtalk, uncomment the following lines:
 
 /*
 :- initialization(
-	logtalk_load(help(loader), [report(off)])
+	logtalk_load(help(loader))
 ).
+*/
+
+
+%  To load most of developer tools at startup, uncomment the following lines:
+
+/*
+:- initialization(
+	logtalk_load(tools(loader))
+).
+*/
+
+
+%  To call ECLiPSe/SWI-Prolog make/0 when calling logtalk_make/0 or
+%  logtalk_make/1 with the target all, uncomment the following lines:
+
+/*
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == eclipse; Dialect == swi)
+)).
+
+:- multifile(logtalk_make_target_action/1).
+:- dynamic(logtalk_make_target_action/1).
+
+logtalk_make_target_action(all) :-
+	make.
+
+:- endif.
 */
 
 
@@ -96,9 +129,20 @@
 :- multifile(logtalk_library_path/2).
 :- dynamic(logtalk_library_path/2).
 
-logtalk_library_path(my_project, '$HOME/my_project/').
+logtalk_library_path(my_project, home('my_project/')).
 logtalk_library_path(my_project_libraries, my_project('libraries/')).
 logtalk_library_path(my_project_examples, my_project('examples/')).
+*/
+
+
+%  To define a "library" alias for your project while making it
+%  relocatable, edit and uncomment the following lines:
+
+/*
+:- initialization((
+    logtalk_load_context(directory, Directory),
+    assertz(logtalk_library_path(my_project, Directory))
+)).
 */
 
 
@@ -178,8 +222,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To compile all your source files for debugging using the SWI-Prolog
-%  graphical tracer (stable version 6.2.0 or later; development version
-%  6.1.11 or later), uncomment the following lines:
+%  graphical tracer, uncomment the following lines:
 
 /*
 :- if(current_logtalk_flag(prolog_dialect, swi)).
@@ -205,8 +248,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To compile all your source files for profiling using the SWI-Prolog
-%  graphical profiler (stable version 6.2.0 or later; development version
-%  6.1.11 or later), uncomment the following lines:
+%  graphical profiler, uncomment the following lines:
 
 /*
 :- if(current_logtalk_flag(prolog_dialect, swi)).
@@ -214,7 +256,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	:- use_module(library(statistics)).
 
 	:- initialization((
-		set_logtalk_flag(code_prefix, '.'),
+		set_logtalk_flag(code_prefix, '.')
 	)).
 
 :- endif.
@@ -288,6 +330,26 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
+%  To fully support hot-patching of compiled code at runtime uncomment the
+%  following lines:
+
+/*
+:- initialization((
+	set_logtalk_flag(complements, allow)
+)).
+*/
+
+
+%  To support adding new features to compiled code at runtime uncomment the
+%  following lines:
+
+/*
+:- initialization((
+	set_logtalk_flag(complements, restrict)
+)).
+*/
+
+
 %  To prevent using the <</2 debugging context-switching control construct
 %  to bypass object encapsulation rules uncomment the following lines:
 
@@ -316,7 +378,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 %  source file compilation and loading reports)
 
 
-:- category(my_logtalk_startup_settings).
+:- category(my_terse_logtalk_startup_settings).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
@@ -344,7 +406,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 %  lines:
 
 /*
-:- category(my_logtalk_message_settings).
+:- category(my_verbose_logtalk_message_settings).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

@@ -160,6 +160,12 @@ when processing `include/1` directives.
 * UPDATED: The `buckets` multi-threading example to use the new library
 `backend_random` stateless object.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: Synced the settings files used by the SWI-Prolog packs with the
+settings sample file.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
