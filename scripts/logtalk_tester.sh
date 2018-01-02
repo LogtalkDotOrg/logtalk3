@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on August 31, 2017
+##   Last updated on January 2, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.27"
+	echo "$(basename "$0") 0.28"
 	exit 0
 }
 
@@ -153,7 +153,7 @@ run_test() {
 		fi
 	fi
 	exit=$?
-	if ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q "tests:" "$results/$name.results" && ! grep -q "tests skipped" "$results/$name.results"; then
+	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q "tests:" "$results/$name.results" && ! grep -q "tests skipped" "$results/$name.results"; then
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
 	fi
 	return $exit

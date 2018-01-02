@@ -133,6 +133,9 @@ when adding a new metric.
 
 * UPDATED: The `code_metrics` tool to allow applying individual metrics.
 
+* FIXED: The `logtalk_tester` shell script detection of broken tests sets
+where test set crashes would also be reported as broken test sets.
+
 Tests
 -----
 
