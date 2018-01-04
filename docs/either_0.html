@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>either</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">either</h1>
+      <blockquote>
+        <p class="comment">Types and predicates for type-checking and handling expecteds.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>0.1</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2017/12/26</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <dl class="relations">
+          <dt class="key">provides:</dt>
+          <dd class="value">
+            <code>
+              <a href="type_0.html#type/1">type::type/1</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="type_0.html#check/2">type::check/2</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="arbitrary_0.html#arbitrary/1">arbitrary::arbitrary/1</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="arbitrary_0.html#arbitrary/2">arbitrary::arbitrary/2</a>
+            </code>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 id="expecteds/2" class="code">expecteds/2</h3>
+          <blockquote>
+            <p class="comment">Returns the values stored in the expcted references that hold an expected term.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>expecteds(References,Expecteds)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>expecteds(+list(expected),-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="unexpecteds/2" class="code">unexpecteds/2</h3>
+          <blockquote>
+            <p class="comment">Returns the values stored in the expcted references that hold an expected term.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>unexpecteds(References,Unexpecteds)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>unexpecteds(+list(expected),-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="partition/3" class="code">partition/3</h3>
+          <blockquote>
+            <p class="comment">Retrieves and partitions the values stored in the expcted references.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>partition(References,Expecteds,Unexpecteds)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>partition(+list(expected),-list,-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <dl class="remarks">
+          <dt class="comment">Type either(ExpectedType, UnexpctedType)</dt>
+          <dd class="text">Allows type-checking expected references where the expected and unexpected terms must be of the given types.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">QuickCheck support</dt>
+          <dd class="text">Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpctedType) type.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="see_also">
+      <h2>See also</h2>
+      <div class="section">
+        <ul>
+          <li class="code">
+            <a href="expected_0.html">expected</a>
+          </li>
+          <li class="code">
+            <a href="expected_1.html">expected(Reference)</a>
+          </li>
+          <li class="code">
+            <a href="type_0.html">type</a>
+          </li>
+          <li class="code">
+            <a href="arbitrary_0.html">arbitrary</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
