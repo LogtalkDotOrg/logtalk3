@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to Mardown text files conversion script 
-##   Last updated on February 17, 2017
+##   Last updated on February 8, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -98,8 +98,8 @@ usage_help()
 	echo "current directory to Markdown text files"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-d directory] [-i index] [-t title] [-p processor]"
-	echo "  `basename $0` -h"
+	echo "  $(basename $0) [-d directory] [-i index] [-t title] [-p processor]"
+	echo "  $(basename $0) -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"
@@ -124,8 +124,8 @@ create_index_file()
 		echo "* [Entity index](entity_index.md)" >> "$index_file"
 		echo "* [Predicate index](predicate_index.md)" >> "$index_file"
 	else
-		for file in `grep -l "<logtalk_entity" *.xml`; do
-			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		for file in $(grep -l "<logtalk_entity" *.xml); do
+			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 			entity=${name%_*}
 			pars=${name##*_}
 			echo "  indexing $name.html"
@@ -138,7 +138,7 @@ create_index_file()
 		done
 	fi
 
-	date="`eval date`"
+	date="$(eval date)"
 	echo "" >> "$index_file"
 	echo "Generated on "$date >> "$index_file"
 }
@@ -199,21 +199,21 @@ if ! [ -e "./logtalk_index.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd .
 fi
 
-if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
+if [ $((grep -l "<logtalk" *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "converting XML files to Markdown text files..."
-	for file in `grep -l "<logtalk_entity" *.xml`; do
+	for file in $(grep -l "<logtalk_entity" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.md\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.md\" \"$file\" \"$entity_xslt\";;
 			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.md\";;
 		esac
 	done
-	for file in `grep -l "<logtalk_index" *.xml`; do
+	for file in $(grep -l "<logtalk_index" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.md\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.md\" \"$file\" \"$index_xslt\";;

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on February 17, 2017
+##   Last updated on February 8, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -95,8 +95,8 @@ usage_help()
 	echo "current directory to text files"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-d directory] [-p processor]"
-	echo "  `basename $0` -h"
+	echo "  $(basename $0) [-d directory] [-p processor]"
+	echo "  $(basename $0) -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"
@@ -144,21 +144,21 @@ if ! [ -e "./logtalk_entity.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
+if [ $((grep -l "<logtalk" *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "converting XML files to text files..."
-	for file in `grep -l "<logtalk_entity" *.xml`; do
+	for file in $(grep -l "<logtalk_entity" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.txt\" \"$file\" \"$entity_xslt\";;
 			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.txt\";;
 		esac
 	done
-	for file in `grep -l "<logtalk_index" *.xml`; do
+	for file in $(grep -l "<logtalk_index" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.txt\" \"$file\" \"$index_xslt\";;

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Qu-Prolog
-##   Last updated on February 25, 2017
+##   Last updated on February 6, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -78,8 +78,8 @@ if [ -d "$LOGTALKUSER" ]; then
 		echo "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	else
-		system_version=`cat "$LOGTALKHOME/VERSION.txt"`
-		user_version=`cat "$LOGTALKUSER/VERSION.txt"`
+		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
 		if [ "$user_version" \< "$system_version" ]; then
 			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
 			echo "    $user_version < $system_version"
@@ -93,6 +93,6 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=`pwd`
+export LOGTALK_STARTUP_DIRECTORY=$(pwd)
 
 exec qp -s 3072 -d 3072 -h 8192 -e 256 -C 256 -H 1536 -l "$LOGTALKHOME/integration/logtalk_qp.pl" "$@"

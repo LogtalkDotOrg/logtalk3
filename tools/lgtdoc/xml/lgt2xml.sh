@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on February 17, 2017
+##   Last updated on February 8, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -90,8 +90,8 @@ usage_help()
 	echo "documenting files in the current directory"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-f format] [-i index] [-t title]"
-	echo "  `basename $0` -h"
+	echo "  $(basename $0) [-f format] [-i index] [-t title]"
+	echo "  $(basename $0) -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f format of the index file (either xhtml or html; default is $format)"
@@ -134,8 +134,8 @@ create_index_file()
 		echo "    <li><a href=\"entity_index.xml\">Entity index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"predicate_index.xml\">Predicate index</a></li>" >> "$index_file"
 	else
-		for file in `grep -l "<logtalk_entity" *.xml`; do
-			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		for file in $(grep -l "<logtalk_entity" *.xml); do
+			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 			entity=${name%_*}
 			pars=${name##*_}
 			echo "  indexing $file"
@@ -150,7 +150,7 @@ create_index_file()
 
 	echo "</ul>" >> "$index_file"
 
-	date="`eval date`"
+	date="$(eval date)"
 
 	echo "<p>Generated on "$date"</p>" >> "$index_file"
 	echo "</body>" >> "$index_file"
@@ -216,7 +216,7 @@ if ! [ -e "./logtalk_index_to_xml.xsl" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index_to_xml.xsl .
 fi
 
-if [ `(ls *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
+if [ $((ls *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "generating $index_file file..."
 	create_index_file

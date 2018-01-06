@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on February 17, 2017
+##   Last updated on February 8, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -98,8 +98,8 @@ usage_help()
 	echo "current directory to PDF files"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-f format] [-d directory] [-p processor]"
-	echo "  `basename $0` -h"
+	echo "  $(basename $0) [-f format] [-d directory] [-p processor]"
+	echo "  $(basename $0) -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f paper format (either a4 or us; default is $format)"
@@ -164,12 +164,12 @@ if ! [ -e "./logtalk_entity.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
+if [ $((grep -l "<logtalk" *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "converting XML files to PDF..."
-	for file in `grep -l "<logtalk_entity" *.xml`; do
+	for file in $(grep -l "<logtalk_entity" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case $processor in
 			xinc)	eval xinc -xml \"$file\" -xsl \"$xsl\" -pdf \"$directory\"/\"$name.pdf\" 2> /dev/null;;
 			*)		eval $processor -q -xml \"$file\" -xsl \"$xsl\" -pdf \"$directory\"/\"$name.pdf\";;

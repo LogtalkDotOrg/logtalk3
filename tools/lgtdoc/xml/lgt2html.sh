@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on February 17, 2017
+##   Last updated on February 8, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -103,8 +103,8 @@ usage_help()
 	echo "current directory to XHTML or HTML files"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-f format] [-d directory] [-i index] [-t title] [-p processor]"
-	echo "  `basename $0` -h"
+	echo "  $(basename $0) [-f format] [-d directory] [-i index] [-t title] [-p processor]"
+	echo "  $(basename $0) -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f output file format (either xhtml or html; default is $format)"
@@ -149,8 +149,8 @@ create_index_file()
 		echo "    <li><a href=\"entity_index.html\">Entity index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"predicate_index.html\">Predicate index</a></li>" >> "$index_file"
 	else
-		for file in `grep -l "<logtalk_entity" *.xml`; do
-			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		for file in $(grep -l "<logtalk_entity" *.xml); do
+			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 			entity=${name%_*}
 			pars=${name##*_}
 			echo "  indexing $name.html"
@@ -165,7 +165,7 @@ create_index_file()
 
 	echo "</ul>" >> "$index_file"
 
-	date="`eval date`"
+	date="$(eval date)"
 
 	echo "<p>Generated on "$date"</p>" >> "$index_file"
 	echo "</body>" >> "$index_file"
@@ -249,21 +249,21 @@ if ! [ -e "$directory/logtalk.css" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.css "$directory"
 fi
 
-if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
+if [ $((grep -l "<logtalk" *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "converting XML files..."
-	for file in `grep -l "<logtalk_entity" *.xml`; do
+	for file in $(grep -l "<logtalk_entity" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$entity_xslt\";;
 			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.html\";;
 		esac
 	done
-	for file in `grep -l "<logtalk_index" *.xml`; do
+	for file in $(grep -l "<logtalk_index" *.xml); do
 		echo "  converting $file"
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$index_xslt\";;

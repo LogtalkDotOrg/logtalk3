@@ -24,7 +24,17 @@ RELEASE NOTES
 3.14.1 - February ??, 2018
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
 
+* UPDATED: Removed use of Bash deprecated features from the Prolog integration
+scripts.
+
+Tools
+-----
+
+* UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
+helper scripts.
 
 
 3.14.0 - January 4, 2018

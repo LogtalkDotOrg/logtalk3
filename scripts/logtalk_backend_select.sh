@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk back-end Prolog compiler select script
-##   Last updated on February 17, 2017
+##   Last updated on February 6, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 
 
 print_version() {
-	echo "Current `basename $0` version:"
+	echo "Current $(basename $0) version:"
 	echo "  0.6"
 	exit 0
 }
@@ -32,40 +32,40 @@ print_version() {
 
 list_backends() {
     echo "Available back-end Prolog compilers:"
-	if [ -e `command -v bplgt` ]  && [ "`command -v bp`" != "" ] ; then
+	if [ -e $(command -v bplgt) ] && [ "$(command -v bp)" != "" ] ; then
 		echo -n "  bplgt"
 	fi
-	if [ -e `command -v cxlgt` ]  && [ "`command -v cxprolog`" != "" ] ; then
+	if [ -e $(command -v cxlgt) ] && [ "$(command -v cxprolog)" != "" ] ; then
 		echo -n "  cxlgt"
 	fi
-	if [ -e `command -v eclipselgt` ]  && [ "`command -v eclipse`" != "" ] ; then
+	if [ -e $(command -v eclipselgt) ] && [ "$(command -v eclipse)" != "" ] ; then
 		echo -n "  eclipselgt"
 	fi
-	if [ -e `command -v gplgt` ]  && [ "`command -v gprolog`" != "" ] ; then
+	if [ -e $(command -v gplgt) ] && [ "$(command -v gprolog)" != "" ] ; then
 		echo -n "  gplgt"
 	fi
-	if [ -e `command -v jiplgt` ]  && [ "`command -v jipconsole.sh`" != "" ] ; then
+	if [ -e $(command -v jiplgt) ] && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		echo -n "  jiplgt"
 	fi
-	if [ -e `command -v lplgt` ]  && [ "`command -v lprolog`" != "" ] ; then
+	if [ -e $(command -v lplgt) ] && [ "$(command -v lprolog)" != "" ] ; then
 		echo -n "  lplgt"
 	fi
-	if [ -e `command -v qplgt` ]  && [ "`command -v qp`" != "" ] ; then
+	if [ -e $(command -v qplgt) ] && [ "$(command -v qp)" != "" ] ; then
 		echo -n "  qplgt"
 	fi
-	if [ -e `command -v sicstuslgt` ]  && [ "`command -v sicstus`" != "" ] ; then
+	if [ -e $(command -v sicstuslgt) ] && [ "$(command -v sicstus)" != "" ] ; then
 		echo -n "  sicstuslgt"
 	fi
-	if [ -e `command -v swilgt` ]  && [ "`command -v swipl`" != "" ] ; then
+	if [ -e $(command -v swilgt) ] && [ "$(command -v swipl)" != "" ] ; then
 		echo -n "  swilgt"
 	fi
-	if [ -e `command -v xsblgt` ]  && [ "`command -v xsb`" != "" ] ; then
+	if [ -e $(command -v xsblgt) ] && [ "$(command -v xsb)" != "" ] ; then
 		echo -n "  xsblgt"
 	fi
-	if [ -e `command -v xsbmtlgt` ]  && [ "`command -v xsb-mt`" != "" ] ; then
+	if [ -e $(command -v xsbmtlgt) ] && [ "$(command -v xsb-mt)" != "" ] ; then
 		echo -n "  xsbmtlgt"
 	fi
-	if [ -e `command -v yaplgt` ]  && [ "`command -v yap`" != "" ] ; then
+	if [ -e $(command -v yaplgt) ] && [ "$(command -v yap)" != "" ] ; then
 		echo -n "  yaplgt"
 	fi
 	echo
@@ -75,9 +75,9 @@ list_backends() {
 
 show_selected() {
     echo "Current Prolog integration script:"
-    if [ -e `command -v logtalk` ] && [ "`command -v logtalk`" != "" ] ; then
+    if [ -e $(command -v logtalk) ] && [ "$(command -v logtalk)" != "" ] ; then
 		echo -n "  "
-		readlink `command -v logtalk`
+		readlink $(command -v logtalk)
     else
         echo "  none"
     fi
@@ -91,11 +91,11 @@ usage_help() {
 	echo "creating a symbolic link, \"logtalk\", to the corresponding integration script."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` integration-script"
-	echo "  `basename $0` -v"
-	echo "  `basename $0` -l"
-	echo "  `basename $0` -s"
-	echo "  `basename $0` -h"
+	echo "  $(basename $0) integration-script"
+	echo "  $(basename $0) -v"
+	echo "  $(basename $0) -l"
+	echo "  $(basename $0) -s"
+	echo "  $(basename $0) -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print script version"
@@ -108,29 +108,29 @@ usage_help() {
 
 
 valid_backend() {
-	if [ "$1" == "bplgt" ] && [ -e `command -v bplgt` ]  && [ "`command -v bp`" != "" ] ; then
+	if [ "$1" == "bplgt" ] && [ -e $(command -v bplgt) ]  && [ "$(command -v bp)" != "" ] ; then
 		return 0
-	elif [ "$1" == "cxlgt" ] && [ -e `command -v cxlgt` ]  && [ "`command -v cxprolog`" != "" ] ; then
+	elif [ "$1" == "cxlgt" ] && [ -e $(command -v cxlgt) ]  && [ "$(command -v cxprolog)" != "" ] ; then
 		return 0
-	elif [ "$1" == "eclipselgt" ] && [ -e `command -v eclipselgt` ]  && [ "`command -v eclipse`" != "" ] ; then
+	elif [ "$1" == "eclipselgt" ] && [ -e $(command -v eclipselgt) ]  && [ "$(command -v eclipse)" != "" ] ; then
 		return 0
-	elif [ "$1" == "gplgt" ] && [ -e `command -v gplgt` ]  && [ "`command -v gprolog`" != "" ] ; then
+	elif [ "$1" == "gplgt" ] && [ -e $(command -v gplgt) ]  && [ "$(command -v gprolog)" != "" ] ; then
 		return 0
-	elif [ "$1" == "jiplgt" ] && [ -e `command -v jiplgt` ]  && [ "`command -v jipconsole.sh`" != "" ] ; then
+	elif [ "$1" == "jiplgt" ] && [ -e $(command -v jiplgt) ]  && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		return 0
-	elif [ "$1" == "lplgt" ] && [ -e `command -v lplgt` ]  && [ "`command -v lprolog`" != "" ] ; then
+	elif [ "$1" == "lplgt" ] && [ -e $(command -v lplgt) ]  && [ "$(command -v lprolog)" != "" ] ; then
 		return 0
-	elif [ "$1" == "qplgt" ] && [ -e `command -v qplgt` ]  && [ "`command -v qp`" != "" ] ; then
+	elif [ "$1" == "qplgt" ] && [ -e $(command -v qplgt) ]  && [ "$(command -v qp)" != "" ] ; then
 		return 0
-	elif [ "$1" == "sicstuslgt" ] && [ -e `command -v sicstuslgt` ]  && [ "`command -v sicstus`" != "" ] ; then
+	elif [ "$1" == "sicstuslgt" ] && [ -e $(command -v sicstuslgt) ]  && [ "$(command -v sicstus)" != "" ] ; then
 		return 0
-	elif [ "$1" == "swilgt" ] && [ -e `command -v swilgt` ]  && [ "`command -v swipl`" != "" ] ; then
+	elif [ "$1" == "swilgt" ] && [ -e $(command -v swilgt) ]  && [ "$(command -v swipl)" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsblgt" ] && [ -e `command -v xsblgt` ]  && [ "`command -v xsb`" != "" ] ; then
+	elif [ "$1" == "xsblgt" ] && [ -e $(command -v xsblgt) ]  && [ "$(command -v xsb)" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsbmtlgt" ] && [ -e `command -v xsbmtlgt` ]  && [ "`command -v xsb-mt`" != "" ] ; then
+	elif [ "$1" == "xsbmtlgt" ] && [ -e $(command -v xsbmtlgt) ]  && [ "$(command -v xsb-mt)" != "" ] ; then
 		return 0
-	elif [ "$1" == "yaplgt" ] && [ -e `command -v yaplgt` ]  && [ "`command -v yap`" != "" ] ; then
+	elif [ "$1" == "yaplgt" ] && [ -e $(command -v yaplgt) ]  && [ "$(command -v yap)" != "" ] ; then
 		return 0
 	else
 		return 1
@@ -144,7 +144,7 @@ switch_backend() {
     	echo "Invalid Prolog integration script: $1"
     	exit 1
 	else
-		cd $(dirname `command -v $1`)
+		cd $(dirname $(command -v $1))
 		rm -f logtalk
 		ln -sf $1 logtalk
 		error=$?
