@@ -36,6 +36,12 @@ Tools
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.
 
+Contributions
+-------------
+
+* FIXED: Typo in `flags` contribution in the scope directive of the predicate
+`print_flags/0`.
+
 
 3.14.0 - January 4, 2018
 ========================

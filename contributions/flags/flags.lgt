@@ -209,7 +209,7 @@
 		comment is 'Flag validation protocol. Must be implemented by validator objects.'
 	]).
 
-	:- public(validate/0).
+	:- public(print_flags/0).
 	:- mode(print_flags, zero_or_one).
 	:- info(print_flags/0, [
 		comment is 'Validates the validator object itself.'
