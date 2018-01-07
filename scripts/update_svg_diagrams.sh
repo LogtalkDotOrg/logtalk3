@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on December 12, 2017
+##   Last updated on February 8, 2018
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -49,6 +49,8 @@ library_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), 
 
 tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
 
+contributions_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(contributions(loader)), inheritance_diagram::rlibrary(contributions, [title('Logtalk third-party contributions'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]), halt."
+
 
 print_version() {
 	echo "$(basename "$0") 0.7"
@@ -59,7 +61,8 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script updates the SVG diagrams of the core entities, the library, and the development tools."
+	echo "This script updates the SVG diagrams of the core entities, the library,"
+	echo "the development tools, and the third-party contributions."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog]"
@@ -139,6 +142,7 @@ cd ../docs || exit 1
 $logtalk "$core_goal"
 $logtalk "$library_goal"
 $logtalk "$tools_goal"
+$logtalk "$contributions_goal"
 
 for f in *.dot; do
 	flag=0

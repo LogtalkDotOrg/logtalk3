@@ -30,6 +30,11 @@ Prolog adapter and integration files
 * UPDATED: Removed use of Bash deprecated features from the Prolog integration
 scripts.
 
+Documentation
+-------------
+
+* ADDED: Inheritance diagram for the third-party contributions.
+
 Tools
 -----
 

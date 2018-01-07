@@ -26,8 +26,11 @@ the appearance of the pages by changing the included `logtalk.css`
 CSS file.
 
 This directory also includes SVG inheritance diagrams for the core
-entities,the library, and the development tools:
+entities, the library, and the development tools:
 
 - `core_inheritance_diagram.svg`
 - `library_inheritance_diagram.svg`
 - `tools_inheritance_diagram.svg`
+- `contributions_inheritance_diagram.svg`
+
+The diagrams embed links to both API documentation and source code.
