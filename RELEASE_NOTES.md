@@ -35,6 +35,11 @@ Documentation
 
 * ADDED: Inheritance diagram for the third-party contributions.
 
+Library
+-------
+
+* FIXED: Workaround XSB parser bug when loading the `random` library.
+
 Tools
 -----
 
