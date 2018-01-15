@@ -36,9 +36,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/01/15,
 		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms).'
 	]).
 
@@ -48,17 +48,17 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		throw(error(type_error(variable, Assignable), Context)).
 	assignable([_| _]).
 
-	assignable(Assignable, Init) :-
+	assignable(Assignable, _Init) :-
 		nonvar(Assignable),
 		context(Context),
 		throw(error(type_error(variable, Assignable), Context)).
-	assignable(Assignable, Init) :-
+	assignable(_Assignable, Init) :-
 		var(Init),
 		context(Context),
 		throw(error(instantiation_error, Context)).
 	assignable([_, Init| _], Init).
 
-	Assignable <= Value :-
+	_Assignable <= Value :-
 		var(Value),
 		context(Context),
 		throw(error(instantiation_error, Context)).
@@ -72,7 +72,7 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		;	Tail = [Value| _]
 		).
 
-	Assignable => Value :-
+	Assignable => _Value :-
 		var(Assignable),
 		context(Context),
 		throw(error(instantiation_error, Context)).
