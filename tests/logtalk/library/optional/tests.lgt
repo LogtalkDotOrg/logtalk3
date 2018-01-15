@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2017/12/04,
+		date is 2018/01/15,
 		comment is 'Unit tests for the "optional" library.'
 	]).
 
@@ -130,11 +130,11 @@
 	% or_else_call/2 tests
 
 	succeeds(optional_or_else_call_2_01) :-
-		optional::empty(Ref), optional(Ref)::or_else_call(Term, X = 1),
+		optional::empty(Ref), optional(Ref)::or_else_call(_, X = 1),
 		X == 1.
 
 	succeeds(optional_or_else_call_2_02) :-
-		optional::of(1, Ref), optional(Ref)::or_else_call(Term, X = 1),
+		optional::of(1, Ref), optional(Ref)::or_else_call(_, X = 1),
 		var(X).
 
 	% or_else_fail/1 tests
