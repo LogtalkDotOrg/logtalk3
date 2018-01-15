@@ -83,8 +83,8 @@ files defining the test objects using the option `hook(lgtunit)`. For example:
 	| ?- logtalk_load(my_tests, [hook(lgtunit)]).
 
 As the term-expansion mechanism applies to all the contents of a source file,
-the source files defining the test objects shouldn't contain entities other
-than the test objects. Additional code necessary for the tests should go to
+the source files defining the test objects should preferably not contain entities
+other than the test objects. Additional code necessary for the tests should go to
 separate files.
 
 See the `../../tester-sample.lgt` file for an example of a loader file for
@@ -95,6 +95,29 @@ the `../../tests` directory for examples of unit tests.
 Debugged test sets should preferably be compiled in optimal mode, specially
 when containing deterministic tests and when using the utility benchmarking
 predicates.
+
+
+Running unit tests
+------------------
+
+Assuming that your test object is named `tests`, after compiling and loading its
+source file, you can run the tests by typing:
+
+    | ?- tests::run.
+
+Usually, this goal is called automatically from an `initialization/1` directive
+in a `tester.lgt` loader file.
+
+When testing complex _units_, it is often desirable to split the tests between
+several test objects or using parametric test objects to be able to run the same
+tests using different parameters (e.g. different data sets). In this case, you
+can run all test subsets using the goal:
+
+    | ?- lgtunit::run_test_sets([...])
+
+where the `run_test_sets/1` predicate argument is a list of test object
+identifiers. This predicate makes possible to get a single code coverage
+report that takes into account all the tests.
 
 
 Unit test dialects

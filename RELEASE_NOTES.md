@@ -35,6 +35,8 @@ Documentation
 
 * ADDED: Inheritance diagram for the third-party contributions.
 
+* IMPROVED: Documentation of the `lgtunit` tool.
+
 Library
 -------
 
