@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on December 11, 2017
+%  Last updated on January 18, 2018
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -139,7 +139,7 @@ forall(Generate, Test) :-
 
 	setup_call_cleanup(Setup, Call, Cleanup) :-
 		once(Setup),
-		call_cleanup(Call, catch(Cleanup,_,true)).
+		call_cleanup(Call, (Cleanup->true;true)).
 
 :- endif.
 

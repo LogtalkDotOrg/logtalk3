@@ -30,6 +30,9 @@ Prolog adapter and integration files
 * UPDATED: Removed use of Bash deprecated features from the Prolog integration
 scripts.
 
+* CHANGED: The SICStus Prolog definition for the missing `setup_call_cleanup/3`
+built-in predicate to ignore success or failure of the cleanup goal.
+
 Documentation
 -------------
 
