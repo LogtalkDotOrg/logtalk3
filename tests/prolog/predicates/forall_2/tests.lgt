@@ -29,9 +29,9 @@ a(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2018/01/19,
 		comment is 'Unit tests for the de facto Prolog standard forall/2 built-in predicate.'
 	]).
 
@@ -59,12 +59,15 @@ a(3).
 	throws(commons_forall_2_08, error(instantiation_error,_)) :-
 		{forall(true, _)}.
 
-	throws(commons_forall_2_09, [error(type_error(callable,1),_), error(type_error(callable,':'(user,1)),_)]) :-
-		% the second exception term is used in some of the Prolog compilers supporting modules
+	% don't require a specific non-callable term in the following tests
+	% as it is implementation dependent and the specification of this
+	% predicate is still informal
+
+	throws(commons_forall_2_09, error(type_error(callable,_),_)) :-
 		Goal = 1,
 		{forall(Goal, true)}.
 
-	throws(commons_forall_2_10, error(type_error(callable,1),_)) :-
+	throws(commons_forall_2_10, error(type_error(callable,_),_)) :-
 		Goal = 1,
 		{forall(true, Goal)}.
 

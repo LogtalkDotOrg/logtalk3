@@ -51,6 +51,13 @@ Tools
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.
 
+Tests
+-----
+
+* CHANGED: Generalize the tests for the de facto standard `forall/2` predicate
+that check for type errors as the non-callable term reported is implementation
+dependent and the specification of this predicate is still informal.
+
 Contributions
 -------------
 
