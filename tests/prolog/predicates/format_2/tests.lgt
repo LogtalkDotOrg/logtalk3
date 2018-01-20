@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_prolog_flag(double_quotes, codes).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
