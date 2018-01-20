@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on December 11, 2017
+%  Last updated on January 20, 2018
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -344,8 +344,7 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_directory_hash_as_atom'(Directory, Hash) :-
 	term_hash(Directory, Hash0),
-	number_codes(Hash0, Codes),
-	atom_codes(Hash, Codes).
+	number_atom(Hash0, Hash).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
