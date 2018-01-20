@@ -184,7 +184,9 @@ GNU Prolog 1.4.2 and later versions
 
 	gnu.pl
 
-GNU Prolog supports the ISO Prolog standard. No problems expected.
+GNU Prolog supports the ISO Prolog standard. No problems expected. The
+adapter file sets the `strict_iso` flag to `off`. This is recommended
+but not required to support Logtalk.
 
 You can generate a new Prolog top level that embeds Logtalk by following
 the steps (exemplified for POSIX systems):
