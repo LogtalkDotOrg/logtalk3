@@ -31,72 +31,82 @@
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
-	succeeds(lgt_format_3_01) :-
+	succeeds(lgt_format_2_empty_control_sequence) :-
 		^^set_text_output(''),
 		{format('', [])},
 		^^check_text_output('').
 
-	succeeds(lgt_format_3_02) :-
+	succeeds(lgt_format_2_empty_arguments) :-
 		^^set_text_output(''),
 		{format('abc', [])},
 		^^check_text_output('abc').
 
-	succeeds(lgt_format_3_03) :-
+	succeeds(lgt_format_2_tilde) :-
 		^^set_text_output(''),
 		{format('~~', [])},
 		^^check_text_output('~').
 
-	succeeds(lgt_format_3_04) :-
+	succeeds(lgt_format_2_write) :-
 		^^set_text_output(''),
 		{format('~w', ['ABC'])},
 		^^check_text_output('ABC').
 
-	succeeds(lgt_format_3_05) :-
+	succeeds(lgt_format_2_quoted) :-
 		^^set_text_output(''),
 		{format('~q', ['ABC'])},
 		^^check_text_output('\'ABC\'').
 
-	succeeds(lgt_format_3_06) :-
+	succeeds(lgt_format_2_canonical) :-
 		^^set_text_output(''),
 		{format('~k', [(:-a)])},
 		^^check_text_output(':-(a)').
 
-	succeeds(lgt_format_3_07) :-
+	succeeds(lgt_format_2_atom) :-
 		^^set_text_output(''),
 		{format('~a', [abc])},
 		^^check_text_output(abc).
 
-	succeeds(lgt_format_3_08) :-
+	succeeds(lgt_format_2_code) :-
 		^^set_text_output(''),
 		{format('~c', [65])},
 		^^check_text_output('A').
 
-	succeeds(lgt_format_3_09) :-
+	succeeds(lgt_format_2_code_n) :-
+		^^set_text_output(''),
+		{format('~8c', [65])},
+		^^check_text_output('AAAAAAAA').
+
+	succeeds(lgt_format_2_string) :-
 		^^set_text_output(''),
 		{format('~s', ["ABC"])},
 		^^check_text_output('ABC').
 
-	succeeds(lgt_format_3_10) :-
+	succeeds(lgt_format_2_new_line) :-
 		^^set_text_output(''),
 		{format('~n', [])},
 		^^check_text_output('\n').
 
-	- succeeds(lgt_format_3_11) :-
+	succeeds(lgt_format_2_new_line_n) :-
 		^^set_text_output(''),
-		{format('~t', [])},
-		^^check_text_output('        ').
+		{format('~4n', [])},
+		^^check_text_output('\n\n\n\n').
 
-	succeeds(lgt_format_3_12) :-
+	- succeeds(lgt_format_2_tab) :-
+		^^set_text_output(''),
+		{format('~t~a~8|', [abc])},
+		^^check_text_output('     abc').
+
+	succeeds(lgt_format_2_ignore) :-
 		^^set_text_output(''),
 		{format('~a~i~a', [a,b,c])},
 		^^check_text_output(ac).
 
-	succeeds(lgt_format_3_13) :-
+	succeeds(lgt_format_2_decimal) :-
 		^^set_text_output(''),
 		{format('~d', [123])},
 		^^check_text_output('123').
 
-	succeeds(lgt_format_3_14) :-
+	succeeds(lgt_format_2_float) :-
 		^^set_text_output(''),
 		{format('~4f', [-1.0e-1])},
 		^^check_text_output('-0.1000').

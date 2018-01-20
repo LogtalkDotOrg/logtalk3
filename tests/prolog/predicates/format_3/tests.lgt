@@ -31,85 +31,97 @@
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
-	succeeds(lgt_format_3_01) :-
+	succeeds(lgt_format_3_empty_control_sequence) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '', [])},
 		^^check_text_output('').
 
-	succeeds(lgt_format_3_02) :-
+	succeeds(lgt_format_3_empty_arguments) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, 'abc', [])},
 		^^check_text_output('abc').
 
-	succeeds(lgt_format_3_03) :-
+	succeeds(lgt_format_3_tilde) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~~', [])},
 		^^check_text_output('~').
 
-	succeeds(lgt_format_3_04) :-
+	succeeds(lgt_format_3_write) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~w', ['ABC'])},
 		^^check_text_output('ABC').
 
-	succeeds(lgt_format_3_05) :-
+	succeeds(lgt_format_3_quoted) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~q', ['ABC'])},
 		^^check_text_output('\'ABC\'').
 
-	succeeds(lgt_format_3_06) :-
+	succeeds(lgt_format_3_canonical) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~k', [(:-a)])},
 		^^check_text_output(':-(a)').
 
-	succeeds(lgt_format_3_07) :-
+	succeeds(lgt_format_3_atom) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~a', [abc])},
 		^^check_text_output(abc).
 
-	succeeds(lgt_format_3_08) :-
+	succeeds(lgt_format_3_code) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~c', [65])},
 		^^check_text_output('A').
 
-	succeeds(lgt_format_3_09) :-
+	succeeds(lgt_format_3_code_n) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~8c', [65])},
+		^^check_text_output('AAAAAAAA').
+
+	succeeds(lgt_format_3_string) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~s', ["ABC"])},
 		^^check_text_output('ABC').
 
-	succeeds(lgt_format_3_10) :-
+	succeeds(lgt_format_3_new_line) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~n', [])},
 		^^check_text_output('\n').
 
-	- succeeds(lgt_format_3_11) :-
+	succeeds(lgt_format_3_new_line_n) :-
 		^^set_text_output(''),
 		current_output(S),
-		{format(S, '~t', [])},
-		^^check_text_output('        ').
+		{format(S, '~4n', [])},
+		^^check_text_output('\n\n\n\n').
 
-	succeeds(lgt_format_3_12) :-
+	- succeeds(lgt_format_3_tab) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~t~a~8|', [abc])},
+		^^check_text_output('     abc').
+
+	succeeds(lgt_format_3_ignore) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~a~i~a', [a,b,c])},
 		^^check_text_output(ac).
 
-	succeeds(lgt_format_3_13) :-
+	succeeds(lgt_format_3_decimal) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~d', [123])},
 		^^check_text_output('123').
 
-	succeeds(lgt_format_3_14) :-
+	succeeds(lgt_format_3_float) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~4f', [-1.0e-1])},
