@@ -33,8 +33,9 @@ scripts.
 * UPDATED: The GNU Prolog adapter file with a faster version of the internal
 `'$lgt_directory_hash_as_atom'/2` predicate.
 
-* CHANGED: The SICStus Prolog definition for the missing `setup_call_cleanup/3`
-built-in predicate to ignore success or failure of the cleanup goal.
+* CHANGED: The CxProlog, SICStus Prolog, and XSB definitions for the missing
+`setup_call_cleanup/3` built-in predicate to ignore success or failure of the
+cleanup goal.
 
 Documentation
 -------------

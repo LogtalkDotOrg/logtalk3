@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on December 11, 2017
+%  Last updated on January 21, 2018
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -102,14 +102,7 @@
 
 setup_call_cleanup(Setup, Call, Cleanup) :-
 	once(Setup),
-	call_cleanup(Call, catch(Cleanup,_,true)).
-
-
-% setup_call_catcher_cleanup(+callable, +callable, ?term, +callable)
-
-setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
-	once(Setup),
-	catch(Call, Catcher, catch(Cleanup,_,true)).
+	call_cleanup(Call, (Cleanup->true;true)).
 
 
 
