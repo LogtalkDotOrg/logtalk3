@@ -27,15 +27,18 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: The CxProlog, SICStus Prolog, and XSB definitions for the missing
+`setup_call_cleanup/3` built-in predicate to ignore success or failure of the
+cleanup goal.
+
 * UPDATED: Removed use of Bash deprecated features from the Prolog integration
 scripts.
 
 * UPDATED: The GNU Prolog adapter file with a faster version of the internal
 `'$lgt_directory_hash_as_atom'/2` predicate.
 
-* CHANGED: The CxProlog, SICStus Prolog, and XSB definitions for the missing
-`setup_call_cleanup/3` built-in predicate to ignore success or failure of the
-cleanup goal.
+* FIXED: Error when embedding Logtalk in a GNU Prolog executable. The error
+resulted from a `gplc` issue that required a workaround in the `logtalk.lgt`.
 
 Documentation
 -------------

@@ -550,12 +550,15 @@
 
 :- if(current_logtalk_flag(prolog_dialect, gnu)).
 	% workaround apparent gplc bug when dealing with multifile predicates
+	% that are called from a file but not defined in that file
 	:- multifile(logtalk_library_path/2).
 	:- dynamic(logtalk_library_path/2).
 	:- multifile('$lgt_current_protocol_'/5).
 	:- dynamic('$lgt_current_protocol_'/5).
 	:- multifile('$lgt_current_category_'/6).
 	:- dynamic('$lgt_current_category_'/6).
+	:- multifile('$lgt_included_file_'/4).
+	:- dynamic('$lgt_included_file_'/4).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	% workaround XSB atom-based module system
 	:- import(from(/(format,3), format)).
