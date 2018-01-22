@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2014/09/10,
+		date is 2018/01/22,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -97,23 +97,23 @@
 
 	test(dcgs_15) :-
 		findall(Components, url::parse("https://logtalk.org", Components), Solutions),
-		Solutions == [[protocol(http), address([logtalk, org]), path([]), file('')]].
+		Solutions == [[protocol(https), address([logtalk, org]), path([]), file('')]].
 
 	test(dcgs_16) :-
 		findall(Components, url::parse("https://logtalk.org/", Components), Solutions),
-		Solutions == [[protocol(http), address([logtalk, org]), path(['']), file('')]].
+		Solutions == [[protocol(https), address([logtalk, org]), path(['']), file('')]].
 
 	test(dcgs_17) :-
 		findall(Components, url::parse("https://logtalk.org/cvs", Components), Solutions),
-		Solutions == [[protocol(http), address([logtalk, org]), path([cvs]), file('')]].
+		Solutions == [[protocol(https), address([logtalk, org]), path([cvs]), file('')]].
 
 	test(dcgs_18) :-
 		findall(Components, url::parse("https://logtalk.org/cvs.html", Components), Solutions),
-		Solutions == [[protocol(http), address([logtalk, org]), path([]), file('cvs.html')]].
+		Solutions == [[protocol(https), address([logtalk, org]), path([]), file('cvs.html')]].
 
 	test(dcgs_19) :-
 		findall(Components, url::parse("https://logtalk.org/files/update", Components), Solutions),
-		Solutions == [[protocol(http), address([logtalk, org]), path([files,update]), file('')]].
+		Solutions == [[protocol(https), address([logtalk, org]), path([files,update]), file('')]].
 
 	test(dcgs_20) :-
 		iban::valid("GB82 WEST 1234 5698 7654 32").		
