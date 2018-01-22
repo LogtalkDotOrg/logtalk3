@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/08/03,
+		date is 2018/01/22,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -198,7 +198,7 @@
 	throws(sics_current_op_3_41, error(domain_error(operator_specifier,yfy),_)) :-
 		{current_op(_, yfy, _)}.
 
-	throws(sics_current_op_3_42, error(type_error(atom,0),_)) :-
+	throws(sics_current_op_3_42, [error(type_error(atom,0),_), error(domain_error(operator_specifier,0),_)]) :-
 		% the standard specifies a domain_error(operator_specifier,0) for this case
 		% but domain errors imply that the type is correct, which is not the case here
 		{current_op(_, 0, _)}.

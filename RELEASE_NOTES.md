@@ -67,6 +67,10 @@ dependent and the specification of this predicate is still informal.
 
 * ADDED: Unit tests for the de facto standard `format/2-3` predicates.
 
+* UPDATED: A `current_op/3` unit test that checks the expected error when the
+operator specifier is not an atom to accept both the ISO mandated error term
+(which doesn't follow the standard policy for errors) and the correct one.
+
 Contributions
 -------------
 
