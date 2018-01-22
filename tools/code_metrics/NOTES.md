@@ -54,6 +54,8 @@ loaded individual metrics.
 
 For usage examples, see the `SCRIPT.txt` file.
 
+For code coverage metrics, see the `lgtunit` tool documentation.
+
 
 Defining new metrics
 --------------------

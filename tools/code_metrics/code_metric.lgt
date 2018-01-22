@@ -22,62 +22,62 @@
 :- category(code_metric).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/01/01,
-		comment is 'Logtalk frontend for analyzing source code via metrics.'
+		date is 2018/01/22,
+		comment is 'Core predicates for computing source code metrics.'
 	]).
 
-	%% Much of this interface was adapted from `dead_code_scanner` interface code authored by
-	%% Paulo Moura and Barry Evans. The derivative code can be found in the Logtalk source
-	%% @ tools/dead_code_scanner/dead_code_scanner.lgt
+	% Much of this interface was adapted from `dead_code_scanner` interface code authored
+	% by Paulo Moura and Barry Evans. The original code can be found in the Logtalk source
+	% @ tools/dead_code_scanner/dead_code_scanner.lgt
 
 	:- public(entity/1).
 	:- mode(entity(+term), zero_or_one).
 	:- info(entity/1, [
-		comment is 'Scans an entity and prints a summary based on all applicable metrics.',
+		comment is 'Scans an entity and prints its metric score.',
 		argnames is ['Entity']
 	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), zero_or_one).
 	:- info(file/1, [
-		comment is 'Prints a metric summary of all entities defined in a source file.',
+		comment is 'Prints metric scores for all the entities defined in a loaded source file.',
 		argnames is ['File']
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Scans a directory and prints metrics summary for all its source files.',
+		comment is 'Scans a directory and prints metric scores for all entities defined in its loaded source files.',
 		argnames is ['Directory']
 	]).
 
 	:- public(rdirectory/1).
 	:- mode(rdirectory(+atom), one).
 	:- info(rdirectory/1, [
-		comment is 'Recursive version of directory/1.',
+		comment is 'Recursive version of the directory/1 predicate.',
 		argnames is ['Directory']
 	]).
 
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
-		comment is 'Prints a metrics summary of all loaded entities from a given library.',
+		comment is 'Prints metrics scores for all loaded entities from a given library.',
 		argnames is ['Library']
 	]).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
-		comment is 'Recursive version of library/1.',
+		comment is 'Recursive version of the library/1 predicate.',
 		argnames is ['Library']
 	]).
 
 	:- public(all/0).
 	:- mode(all, one).
 	:- info(all/0, [
-		comment is 'Scans all loaded entities and prints a report of all applicable metrics.'
+		comment is 'Scans all loaded entities and prints their metric scores.'
 	]).
 
 	:- public(entity_score/2).
@@ -138,11 +138,11 @@
 	process_file(Path) :-
 		print_message(information, code_metrics, scanning_file(Path)),
 		forall(
-			process_file_(Path, Kind, Entity),
+			file_entity(Path, Kind, Entity),
 			::process_entity(Kind, Entity)
 		).
 
-	process_file_(Path, Kind, Entity) :-
+	file_entity(Path, Kind, Entity) :-
 		(	logtalk::loaded_file_property(Path, object(Entity)),
 			Kind = object
 		;	logtalk::loaded_file_property(Path, protocol(Entity)),
@@ -297,11 +297,11 @@
 	output_directory_files(Directory) :-
 		print_message(information, code_metrics, scanning_directory(Directory)),
 		forall(
-			output_directory_files_(Directory, Path),
+			directory_file(Directory, Path),
 			process_file(Path)
 		).
 
-	output_directory_files_(Directory, Path) :-
+	directory_file(Directory, Path) :-
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
