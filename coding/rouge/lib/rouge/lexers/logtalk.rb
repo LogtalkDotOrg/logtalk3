@@ -4,7 +4,7 @@ module Rouge
   module Lexers
     class Logtalk < RegexLexer
       title "Logtalk"
-      desc "The Logtalk programming language (http://logtalk.org/)"
+      desc "The Logtalk programming language (https://logtalk.org/)"
       tag 'logtalk'
       aliases 'logtalk'
       filenames '*.lgt', '*.logtalk'

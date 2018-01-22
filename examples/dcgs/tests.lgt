@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 %  
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -96,23 +96,23 @@
 		Solutions == [word(child, children)-word(singular, plural)].
 
 	test(dcgs_15) :-
-		findall(Components, url::parse("http://logtalk.org", Components), Solutions),
+		findall(Components, url::parse("https://logtalk.org", Components), Solutions),
 		Solutions == [[protocol(http), address([logtalk, org]), path([]), file('')]].
 
 	test(dcgs_16) :-
-		findall(Components, url::parse("http://logtalk.org/", Components), Solutions),
+		findall(Components, url::parse("https://logtalk.org/", Components), Solutions),
 		Solutions == [[protocol(http), address([logtalk, org]), path(['']), file('')]].
 
 	test(dcgs_17) :-
-		findall(Components, url::parse("http://logtalk.org/cvs", Components), Solutions),
+		findall(Components, url::parse("https://logtalk.org/cvs", Components), Solutions),
 		Solutions == [[protocol(http), address([logtalk, org]), path([cvs]), file('')]].
 
 	test(dcgs_18) :-
-		findall(Components, url::parse("http://logtalk.org/cvs.html", Components), Solutions),
+		findall(Components, url::parse("https://logtalk.org/cvs.html", Components), Solutions),
 		Solutions == [[protocol(http), address([logtalk, org]), path([]), file('cvs.html')]].
 
 	test(dcgs_19) :-
-		findall(Components, url::parse("http://logtalk.org/files/update", Components), Solutions),
+		findall(Components, url::parse("https://logtalk.org/files/update", Components), Solutions),
 		Solutions == [[protocol(http), address([logtalk, org]), path([files,update]), file('')]].
 
 	test(dcgs_20) :-

@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,7 @@ you can join us for live discussion at our chat room:
 
 In alternative, you can also join our discussion forums at:
 
-	http://forums.logtalk.org/
+	https://forums.logtalk.org/
 
 In the case of code contributions, follow the coding guidelines described at:
 

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <http://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 2010 Vitor Santos Costa
 %
 %  This code implements Red-Black trees as described in:

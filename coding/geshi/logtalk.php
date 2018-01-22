@@ -4,7 +4,7 @@
  * -----------
  *
  * Author: Paulo Moura (pmoura@logtalk.org)
- * Copyright: (c) 2009-2014 Paulo Moura (http://logtalk.org/)
+ * Copyright: (c) 2009-2014 Paulo Moura (https://logtalk.org/)
  * Release Version: 1.0.8.6
  * Date Started: 2009/10/24
  *

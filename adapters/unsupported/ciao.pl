@@ -3,7 +3,7 @@
 %  Adapter file for Ciao Prolog 1.14.0
 %  Last updated on December 11, 2017
 %
-%  This file is part of Logtalk <http://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");

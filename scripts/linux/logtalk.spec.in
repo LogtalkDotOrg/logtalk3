@@ -5,9 +5,9 @@ Release: 1
 License: ASL 2.0
 Group: Development/Languages
 Packager: Paulo Moura <pmoura@logtalk.org>
-Source: http://logtalk.org/files/LOGTALK_INSTALL_DIRECTORY.tar.bz2
+Source: https://logtalk.org/files/LOGTALK_INSTALL_DIRECTORY.tar.bz2
 BuildArchitectures: noarch
-URL: http://logtalk.org/
+URL: https://logtalk.org/
 AutoReqProv: no
 %description
 Logtalk is an object-oriented logic programming language that can use most Prolog implementations as a back-end compiler. As a multi-paradigm language, it includes support for both prototypes and classes, protocols (interfaces), component-based programming through category-based composition, event-driven programming, and high-level multi-threading programming.

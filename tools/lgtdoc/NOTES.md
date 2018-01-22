@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/lgtdoc/](http://logtalk.org/docs/directory_index.html#tools/lgtdoc/)
+[docs/directory_index.html#tools/lgtdoc/](https://logtalk.org/docs/directory_index.html#tools/lgtdoc/)
 
 
 Loading

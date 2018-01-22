@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,12 +28,12 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/debugger/](http://logtalk.org/docs/directory_index.html#tools/debugger/)
+[docs/directory_index.html#tools/debugger/](https://logtalk.org/docs/directory_index.html#tools/debugger/)
 
 For more information on using the debugger, open in a web browser the
 following file and consult the debugging section of the User Manual:
 
-[manuals/userman/programming.html#programming_debugging](http://logtalk.org/manuals/userman/programming.html#programming_debugging)
+[manuals/userman/programming.html#programming_debugging](https://logtalk.org/manuals/userman/programming.html#programming_debugging)
 
 
 Loading

@@ -1,7 +1,7 @@
 
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,5 +31,5 @@ API documentation
 To consult the documentation of the `logtalk_make/0-1` built-in
 predicates, open in a web browser the links:
 
-[manuals/refman/logtalk_make_0.html](http://logtalk.org/manuals/refman/logtalk_make_0.html)
-[manuals/refman/logtalk_make_1.html](http://logtalk.org/manuals/refman/logtalk_make_1.html)
+[manuals/refman/logtalk_make_0.html](https://logtalk.org/manuals/refman/logtalk_make_0.html)
+[manuals/refman/logtalk_make_1.html](https://logtalk.org/manuals/refman/logtalk_make_1.html)

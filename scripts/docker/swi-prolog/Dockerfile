@@ -3,7 +3,7 @@
 ##   Logtalk Dockerfile
 ##   Last updated on October 27, 2017
 ## 
-##   This file is part of Logtalk <http://logtalk.org/>  
+##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
 ##   Paulo Moura <pmoura@logtalk.org>
 ##   

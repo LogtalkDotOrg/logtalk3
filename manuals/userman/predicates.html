@@ -5,7 +5,7 @@
 <!--
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <https://logtalk.org/>    
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -539,7 +539,7 @@ _G1792+_G1807#=Z,
 _G1789+_G1804#=Z ;
 ...</pre>
 <p>
-As illustrated by the above examples, lambda expression syntax reuses the ISO Prolog construct <code>{}/1</code> and the standard operators <code>(/)/2</code> and <code>(&gt;&gt;)/2</code>, thus avoiding defining new operators, which is always tricky for a portable system such as Logtalk. The operator <code>(&gt;&gt;)/2</code> was chosen as it suggests an arrow, similar to the syntax used in other languages such as OCaml and Haskell to connect lambda parameters with lambda functions. This syntax was also chosen in order to simplify parsing, error checking, and compilation of lambda expressions. The full specification of the lambda expression syntax can be found in the <a href="http://logtalk.org/manuals/refman/grammar.html#grammar_lambdas">reference manual</a>.
+As illustrated by the above examples, lambda expression syntax reuses the ISO Prolog construct <code>{}/1</code> and the standard operators <code>(/)/2</code> and <code>(&gt;&gt;)/2</code>, thus avoiding defining new operators, which is always tricky for a portable system such as Logtalk. The operator <code>(&gt;&gt;)/2</code> was chosen as it suggests an arrow, similar to the syntax used in other languages such as OCaml and Haskell to connect lambda parameters with lambda functions. This syntax was also chosen in order to simplify parsing, error checking, and compilation of lambda expressions. The full specification of the lambda expression syntax can be found in the <a href="https://logtalk.org/manuals/refman/grammar.html#grammar_lambdas">reference manual</a>.
 </p>
 <p>
 The compiler checks whenever possible that all variables in a lambda expression are either classified as free variables or as lambda parameters. The use of non-classified variables in a lambda expression should be regarded as a programming error. Unfortunately, the dynamic features of the language and lack of sufficient information at compile time may prevent the compiler of checking all uses of lambda expressions. The compiler also checks if a variable is classified as both a free variable and a lambda parameter. An optimizing meta-predicate and lambda expression compiler, based on the term-expansion mechanism, is provided for practical performance.
@@ -1069,7 +1069,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 
 <div class="footer">
 	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
 		<span>Last updated on: November 27, 2017</span>
 	</div>
 	<div class="navbottom">

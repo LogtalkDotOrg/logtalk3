@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ ________________________________________________________________________
 This folder contains useful objects, categories, and protocols. For full
 documentation see:
 
-[../docs/index.html](http://logtalk.org/docs/index.html)
+[../docs/index.html](https://logtalk.org/docs/index.html)
 
 A plain Prolog version of the Unicode 6.2 standard is also included in the
 `unicode_data` folder. See its `README.md` file for details.

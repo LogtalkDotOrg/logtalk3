@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -133,22 +133,22 @@ yes
 
 % parsing URLs:
 
-| ?- url::parse("http://logtalk.org", Components).
+| ?- url::parse("https://logtalk.org", Components).
 
 Components = [protocol(http), address([logtalk, org]), path([]), file('')] 
 yes
 
-| ?- url::parse("http://logtalk.org/", Components).
+| ?- url::parse("https://logtalk.org/", Components).
 
 Components = [protocol(http), address([logtalk, org]), path(['']), file('')] 
 yes
 
-| ?- url::parse("http://logtalk.org/cvs", Components).
+| ?- url::parse("https://logtalk.org/cvs", Components).
 
 Components = [protocol(http), address([logtalk, org]), path([cvs]), file('')] 
 yes
 
-| ?- url::parse("http://logtalk.org/cvs.html", Components).
+| ?- url::parse("https://logtalk.org/cvs.html", Components).
 
 Components = [protocol(http), address([logtalk, org]), path([]), file('cvs.html')] 
 yes

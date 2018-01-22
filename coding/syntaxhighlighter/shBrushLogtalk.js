@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on November 13, 2017
+		// Contributed by Paulo Moura (https://logtalk.org/); last revised on November 13, 2017
 
 		this.regexList = [
 		  // variables

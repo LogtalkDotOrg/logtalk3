@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -105,20 +105,20 @@ yes
 % opens the corresponding file, and clicking on an entity or predicate
 % node opens its documentation:
 
-| ?- entity_diagram::library(core, [title('Logtalk core entities'), node_type_captions(true), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- entity_diagram::library(core, [title('Logtalk core entities'), node_type_captions(true), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
 true.
 
-| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
 true.
 
-| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
 yes
 
 
 % the utility objects diagrams/0-1 allows generating all supported diagrams
 % at once:
 
-| ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
 yes
 
 

@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 2016 Barry Evans <barryevans@kyndi.com> and  
 Paulo Moura <pmoura@logtalk.org>
 
@@ -51,7 +51,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/dead_code_scanner/](http://logtalk.org/docs/directory_index.html#tools/dead_code_scanner/)
+[docs/directory_index.html#tools/dead_code_scanner/](https://logtalk.org/docs/directory_index.html#tools/dead_code_scanner/)
 
 
 Loading

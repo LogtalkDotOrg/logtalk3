@@ -19,7 +19,7 @@
 %  XSLT stylesheet for viewing XML documenting files in a browser
 %  Last updated on July 5, 2016
 %
-%  This file is part of Logtalk <http://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 %  
 %  Licensed under the Apache License, Version 2.0 (the "License");

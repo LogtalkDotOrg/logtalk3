@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ For more information about these scripts and their dependencies, consult
 the corresponding `man` page (e.g. `man yaplgt`). The `man` pages are also
 available at:
 
-http://logtalk.org/man/
+https://logtalk.org/man/
 
 On Windows systems, the Logtalk installer makes the Prolog integration
 shortcuts available from the `Start Menu/Programs/Logtalk` menu. But

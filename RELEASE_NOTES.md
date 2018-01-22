@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,8 @@ scripts.
 `'$lgt_directory_hash_as_atom'/2` predicate.
 
 * FIXED: Error when embedding Logtalk in a GNU Prolog executable. The error
-resulted from a `gplc` issue that required a workaround in the `logtalk.lgt`.
+is due to a `gplc` issue with multifile predicates that requires a workaround
+in the `logtalk.lgt` core file.
 
 Documentation
 -------------

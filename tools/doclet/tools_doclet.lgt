@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 %  
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,7 +59,7 @@
 	common_options([
 		node_type_captions(true),
 		output_directory('$LOGTALKUSER/tools/doclet/docs'),
-		url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'),
+		url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'),
 		omit_path_prefixes(['$LOGTALKUSER/', '$LOGTALKHOME/'])
 	]).
 

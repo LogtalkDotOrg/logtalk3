@@ -16,7 +16,7 @@
 /**
  * @fileoverview
  * Registers a language handler for Logtalk.
- * http://logtalk.org/
+ * https://logtalk.org/
  * @author Paulo Moura
  */
 

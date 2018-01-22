@@ -1,6 +1,6 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ LOGTALK WEB SITE
 
 The latest stable release of the Logtalk is always available at the URL:
 
-<http://logtalk.org/>
+<https://logtalk.org/>
 
 At this address you can also find additional documentation and information
 about Logtalk.
@@ -55,7 +55,7 @@ REGISTRATION
 To register as a Logtalk user either use the registration form found at
 the Logtalk web site:
 
-<http://logtalk.org/regform.html>
+<https://logtalk.org/regform.html>
 
 or send an email message to:
 
@@ -74,13 +74,13 @@ SUPPORT
 
 Support channels include:
 
-* Community discussion forums: <http://forums.logtalk.org/>
+* Community discussion forums: <https://forums.logtalk.org/>
 * Community live chat room: <https://gitter.im/LogtalkDotOrg/logtalk3>
-* Commercial support: <http://logtalk.pt/>
+* Commercial support: <https://logtalk.pt/>
 
 For more information on support options, please consult the web page:
 
-<http://logtalk.org/support.html>
+<https://logtalk.org/support.html>
 
 
 INSTALLATION

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <http://logtalk.org/>
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 2016 Barry Evans <barryevans@kyndi.com> and
 %  Paulo Moura <pmoura@logtalk.org>
 %

@@ -1,4 +1,4 @@
-;; logtalk.el -- font lock support for Logtalk (http://logtalk.org/)
+;; logtalk.el -- font lock support for Logtalk (https://logtalk.org/)
 
 ;; Copyright (c) 2003-2017 Paulo Moura
 

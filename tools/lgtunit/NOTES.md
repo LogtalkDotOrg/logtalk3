@@ -1,7 +1,7 @@
 
 ________________________________________________________________________
 
-This file is part of Logtalk <http://logtalk.org/>  
+This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,7 +53,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/lgtunit/](http://logtalk.org/docs/directory_index.html#tools/lgtunit/)
+[docs/directory_index.html#tools/lgtunit/](https://logtalk.org/docs/directory_index.html#tools/lgtunit/)
 
 
 Loading
@@ -442,7 +442,7 @@ or installation scripts, there is also a `man` page for the script:
 
 An HTML version of this man page can be found at:
 
-http://logtalk.org/man/logtalk_tester.html
+https://logtalk.org/man/logtalk_tester.html
 
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:

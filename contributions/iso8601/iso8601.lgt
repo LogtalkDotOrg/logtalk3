@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright (c) 2004-2005 Daniel L. Dudley
 %  
 %  Licensed under the Apache License, Version 2.0 (the "License");

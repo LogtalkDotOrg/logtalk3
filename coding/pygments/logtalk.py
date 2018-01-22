@@ -13,7 +13,7 @@ __all__ = ['LogtalkLexer']
 
 class LogtalkLexer(RegexLexer):
     """
-    For `Logtalk <http://logtalk.org/>`_ source code.
+    For `Logtalk <https://logtalk.org/>`_ source code.
 
     :copyright: 2008-2017 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
