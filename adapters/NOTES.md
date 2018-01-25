@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on December 5, 2016
+Last updated on January 25, 2018
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -82,7 +82,7 @@ following table summarizes the availability of these features:
 | :--------------: | :-----------: | :-----------: | :-----------: | :-----------: |  
 |  B-Prolog        |      yes      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |      yes      |      yes      |       no      |  
-|  ECLiPSe         |       no      |      yes      |       no      |       no      |  
+|  ECLiPSe         |       no      |      yes      |       no      |  partial      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |  
 |  Lean Prolog     |       no      |       no      |      yes      |       no      |  
@@ -96,7 +96,8 @@ following table summarizes the availability of these features:
 A value of "yes" means at least partial support (but some limitations may be
 present and a recent version of the Prolog system may be required). A value
 of "no" may simply mean that the backend Prolog compiler doesn't provide a
-*compatible* implementation of the required features.
+*compatible* implementation of the required features. For "partial" values,
+see the Prolog system notes.
 
 
 template adapter file

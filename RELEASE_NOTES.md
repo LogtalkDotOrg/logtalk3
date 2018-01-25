@@ -34,6 +34,8 @@ cleanup goal.
 * UPDATED: Removed use of Bash deprecated features from the Prolog integration
 scripts.
 
+* UPDATED: The ECLiPSe adapter file for the final release of ECLiPSe 7.0.
+
 * UPDATED: The GNU Prolog adapter file with a faster version of the internal
 `'$lgt_directory_hash_as_atom'/2` predicate.
 

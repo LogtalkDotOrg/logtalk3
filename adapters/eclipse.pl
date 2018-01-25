@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on December 26, 2017
+%  Last updated on January 25, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -240,7 +240,14 @@ forall(Generate, Test) :-
 '$lgt_prolog_meta_predicate'(subcall(_, _), subcall(0, *), predicate).
 '$lgt_prolog_meta_predicate'(suspend(_, _, _), suspend(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(suspend(_, _, _, _), suspend(0, *, *, *), predicate).
-
+:- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
+	'$lgt_prolog_meta_predicate'(engine_post(_, _), engine_post(*, 0), predicate).
+	'$lgt_prolog_meta_predicate'(thread_create(_), thread_create(0), predicate).
+	'$lgt_prolog_meta_predicate'(thread_create(_, _), thread_create(0, *), predicate).
+	'$lgt_prolog_meta_predicate'(thread_create(_, _, _), thread_create(0, *, *), predicate).
+	'$lgt_prolog_meta_predicate'(thread_signal(_, _), thread_signal(*, 0), predicate).
+	'$lgt_prolog_meta_predicate'(with_mutex(_, _), with_mutex(*, 0), predicate).
+:- endif.
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
 
@@ -604,13 +611,19 @@ forall(Generate, Test) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	get_stream_info(Stream, line, LineBegin),
-	(	read_term(Stream, Term, [variable_names(Variables)| Options]) ->
-		get_stream_info(Stream, line, LineEnd)
-	;	throw(syntax_error)
-	).
-
+:- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+		get_stream_info(Stream, line, LineBegin),
+		read_term(Stream, Term, [syntax_errors(error), variable_names(Variables)| Options]),
+		get_stream_info(Stream, line, LineEnd).
+:- else.
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+		get_stream_info(Stream, line, LineBegin),
+		(	read_term(Stream, Term, [variable_names(Variables)| Options]) ->
+			get_stream_info(Stream, line, LineEnd)
+		;	throw(syntax_error)
+		).
+:- endif.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
