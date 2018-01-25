@@ -6,7 +6,7 @@
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on November 9, 2017
+##   Last updated on January 25, 2018
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -127,6 +127,7 @@ eval $xslt_proc -o predicates/logtalk_load_1.section refman.xsl predicates/logta
 eval $xslt_proc -o predicates/logtalk_load_2.section refman.xsl predicates/logtalk_load_2.html
 eval $xslt_proc -o predicates/logtalk_make_0.section refman.xsl predicates/logtalk_make_0.html
 eval $xslt_proc -o predicates/logtalk_make_1.section refman.xsl predicates/logtalk_make_1.html
+eval $xslt_proc -o predicates/logtalk_make_target_action_1.section refman.xsl predicates/logtalk_make_target_action_1.html
 eval $xslt_proc -o predicates/logtalk_library_path_2.section refman.xsl predicates/logtalk_library_path_2.html
 eval $xslt_proc -o predicates/logtalk_load_context_2.section refman.xsl predicates/logtalk_load_context_2.html
 eval $xslt_proc -o predicates/current_logtalk_flag_2.section refman.xsl predicates/current_logtalk_flag_2.html
@@ -283,6 +284,7 @@ cat -s \
 	predicates/logtalk_load_2.section \
 	predicates/logtalk_make_0.section \
 	predicates/logtalk_make_1.section \
+	predicates/logtalk_make_target_action_1.section \
 	predicates/logtalk_library_path_2.section \
 	predicates/logtalk_load_context_2.section \
 	predicates/current_logtalk_flag_2.section \

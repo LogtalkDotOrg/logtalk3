@@ -44,6 +44,9 @@ in the `logtalk.lgt` core file.
 Documentation
 -------------
 
+* ADDED: Missing reference manual section on the `logtalk_make_target_action/1`
+hook predicate.
+
 * ADDED: Inheritance diagram for the third-party contributions.
 
 * IMPROVED: Documentation of the `lgtunit` tool.
