@@ -77,6 +77,10 @@ dependent and the specification of this predicate is still informal.
 operator specifier is not an atom to accept both the ISO mandated error term
 (which doesn't follow the standard policy for errors) and the correct one.
 
+* FIXED: The unit tests for the ISO Prolog standard `call/1` control construct
+to delay expected errors to runtime to avoid aborting the tests compilation
+with type errors when using some backend Prolog compilers such as XSB.
+
 Contributions
 -------------
 

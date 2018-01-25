@@ -32,10 +32,10 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/14,
-		comment is 'Unit tests for the ISO Prolog standard call/1 built-in predicate.'
+		date is 2018/01/25,
+		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
 	:- discontiguous([
@@ -54,7 +54,8 @@ a(2).
 		{call((fail, _X))}.
 
 	fails(iso_call_1_04) :-
-		{call((fail, call(1)))}.
+		X = 1,
+		{call((fail, call(X)))}.
 
 	throws(iso_call_1_05, error(instantiation_error,_)) :-
 		{b(_)}.
@@ -75,24 +76,29 @@ a(2).
 		{call((write(3), _X))}.
 
 	throws(iso_call_1_10, error(type_error(callable,1),_)) :-
-		{call((write(3), call(1)))}.
+		X = 1,
+		{call((write(3), call(X)))}.
 
 	throws(iso_call_1_11, error(instantiation_error,_)) :-
 		{call(_X)}.
 
 	throws(iso_call_1_12, error(type_error(callable,1),_)) :-
-		{call(1)}.
+		X = 1,
+		{call(X)}.
 
 	throws(iso_call_1_13, [error(type_error(callable,(fail,1)),_), error(type_error(callable,1),_)]) :-
 		% the second exception term is a common but not strictly conforming alternative
-		{call((fail, 1))}.
+		X = 1,
+		{call((fail, X))}.
 
 	throws(iso_call_1_14, [error(type_error(callable,(write(3),1)),_), error(type_error(callable,1),_)]) :-
 		% the second exception term is a common but not strictly conforming alternative
-		{call((write(3), 1))}.
+		X = 1,
+		{call((write(3), X))}.
 
 	throws(iso_call_1_15, [error(type_error(callable,(1;true)),_), error(type_error(callable,1),_)]) :-
 		% the second exception term is a common but not strictly conforming alternative
-		{call((1; true))}.
+		X = 1,
+		{call((X; true))}.
 
 :- end_object.
