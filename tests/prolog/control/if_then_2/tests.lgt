@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2018/01/26,
 		comment is 'Unit tests for the ISO Prolog standard (->)/2 control construct.'
 	]).
 
@@ -49,6 +49,23 @@
 
 	succeeds(iso_if_then_2_06) :-
 		findall(X, {'->'(true, ';'(X=1, X=2))}, L),
-		L == [1,2].
+		L == [1, 2].
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_if_then_2_07) :-
+		% implicit cut in the if part
+		findall(X, {'->'(';'(X=1, X=2), true)}, L),
+		L == [1].
+
+	succeeds(lgt_if_then_2_08) :-
+		% if part is cut opaque
+		findall(X, {';'(X=1, X=2), '->'(!, true)}, L),
+		L == [1, 2].
+
+	succeeds(lgt_if_then_2_09) :-
+		% then part is cut transparent
+		findall(X, {';'(X=1, X=2), '->'(true, !)}, L),
+		L == [1].
 
 :- end_object.
