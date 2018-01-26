@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on January 21, 2018
+%  Last updated on January 26, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -63,7 +63,7 @@
 
 findall(Term, Goal, List, Tail) :-
 	findall(Term, Goal, List0),
-	'$lgt_append'(List0, Tail, List).
+	app(List0, Tail, List).
 
 
 % forall(+callable, +callable) -- built-in
