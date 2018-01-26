@@ -84,6 +84,9 @@ with type errors when using some backend Prolog compilers such as XSB.
 * FIXED: The unit tests for the ISO Prolog standard `call/2-N` built-in
 predicates assumed that the `:/2` operator was defined for all backend.
 
+* FIXED: Workaround XSB parser bug in the unit tests for the ISO Prolog
+standard !/0 control construct.
+ 
 Contributions
 -------------
 

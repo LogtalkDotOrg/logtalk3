@@ -31,9 +31,9 @@ goal(write('Three ')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2018/01/26,
 		comment is 'Unit tests for the ISO Prolog standard !/0 control construct.'
 	]).
 
@@ -101,7 +101,7 @@ goal(write('Three ')).
 		L == [!, true].
 
 	succeeds(eclipse_cut_0_18) :-
-		findall(X, {(G=((X=1;X=2),!);G=(X=3)), call(G)}, L),
+		findall(X, {(G = ((X=1; X=2), !); G = (X=3)), call(G)}, L),
 		L == [1, 3].
 
 	succeeds(eclipse_cut_0_19) :-
