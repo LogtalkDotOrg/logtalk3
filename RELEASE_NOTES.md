@@ -81,6 +81,9 @@ operator specifier is not an atom to accept both the ISO mandated error term
 to delay expected errors to runtime to avoid aborting the tests compilation
 with type errors when using some backend Prolog compilers such as XSB.
 
+* FIXED: The unit tests for the ISO Prolog standard `call/2-N` built-in
+predicates assumed that the `:/2` operator was defined for all backend.
+
 Contributions
 -------------
 

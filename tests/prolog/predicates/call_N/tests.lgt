@@ -30,9 +30,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2015/05/19,
+		date is 2018/01/26,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -146,21 +146,21 @@ call_n_maplist(Cont, [E|Es]) :-
 
 	throws(eclipse_call_N_23, [
 			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,('user':(fail),'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			error(type_error(callable,(':'(user,fail),':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
 		{call(',', fail, 3)}.
 
 	throws(eclipse_call_N_24, [
 			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,('user':(!);'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			error(type_error(callable,(':'(user,!);':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
 		{call(';', !, 3)}.
 
 	throws(eclipse_call_N_25, [
 			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,('user':(fail)->'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			error(type_error(callable,(':'(user,fail)->':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
 		{call('->', fail, 3)}.
@@ -171,21 +171,21 @@ call_n_maplist(Cont, [E|Es]) :-
 
 	throws(eclipse_call_N_27, [
 			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,('user':(fail),'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			error(type_error(callable,(':'(user,fail),':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
 		{call(','(fail), 3)}.
 
 	throws(eclipse_call_N_28, [
 			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,('user':(!);'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			error(type_error(callable,(':'(user,!);':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
 		{call(';'(!), 3)}.
 
 	throws(eclipse_call_N_29, [
 			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,('user':(fail)->'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			error(type_error(callable,(':'(user,fail)->':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
 		{call('->'(fail), 3)}.
