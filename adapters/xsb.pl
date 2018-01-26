@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on January 21, 2018
+%  Last updated on January 26, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -63,10 +63,14 @@
 % forall(+callable, +callable) -- built-in
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+
+:- import format/3 from format.
 
 
-% format(+character_code_list_or_atom, +list) -- built-in
+% format(+character_code_list_or_atom, +list)
+
+:- import format/2 from format.
 
 
 % numbervars(?term, +integer, ?integer) -- built-in

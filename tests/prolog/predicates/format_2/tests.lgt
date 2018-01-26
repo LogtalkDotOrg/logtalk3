@@ -115,3 +115,9 @@
 		^^clean_text_input.
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, xsb)).
+	% workaround XSB atom-based module system
+	:- import(from(/(format,2), format)).
+:- endif.
