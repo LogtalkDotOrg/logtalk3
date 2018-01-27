@@ -73,6 +73,8 @@ dependent and the specification of this predicate is still informal.
 
 * ADDED: Unit tests for the de facto standard `format/2-3` predicates.
 
+* ADDED: Unit tests for the de facto standard `e/0` built-in evaluable functor.
+
 * ADDED: Unit tests for the ISO Prolog standard `false/0` control construct.
 
 * ADDED: Additional unit tests for the `->/2` control construct to check for
