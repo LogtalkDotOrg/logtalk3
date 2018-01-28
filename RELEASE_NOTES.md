@@ -80,8 +80,9 @@ dependent and the specification of this predicate is still informal.
 * ADDED: Additional unit tests for the `->/2` control construct to check for
 correct behavior when the arguments contain cuts.
 
-* UPDATED: Unit tests for the ISO Prolog standard `^/2` built-in function for
-the ISO/IEC 13211-1 Technical Corrigendum 3:2017.
+* UPDATED: Unit tests for the ISO Prolog standard `^/2` built-in function and
+the `functor/3` built-in predicate for the changes in the ISO/IEC 13211-1
+Technical Corrigendum 3:2017.
 
 * UPDATED: A `current_op/3` unit test that checks the expected error when the
 operator specifier is not an atom to accept both the ISO mandated error term

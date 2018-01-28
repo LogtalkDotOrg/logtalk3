@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/26,
+		date is 2018/01/28,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
 	]).
 
@@ -33,6 +33,7 @@
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.1.4
+	% updated for the changesa in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
 
 	succeeds(iso_functor_3_01) :-
 		{functor(foo(a,b,c), foo, 3)}.
@@ -91,8 +92,8 @@
 		{G = functor(_F, foo(a), 1), call(G)}.
 
 	:- if(current_prolog_flag(max_arity, unbounded)).
-		succeeds(iso_functor_3_17) :-
-			true.
+		throws(iso_functor_3_17, error(type_error(evaluable,unbounded/0),_)) :-
+			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
 	:- else.
 		throws(iso_functor_3_17, error(representation_error(max_arity),_)) :-
 			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
