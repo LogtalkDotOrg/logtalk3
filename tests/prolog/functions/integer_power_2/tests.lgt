@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/05,
+		date is 2018/01/28,
 		comment is 'Unit tests for the ISO Prolog standard (^)/2 built-in function.'
 	]).
 
@@ -32,7 +32,7 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
-	% tests from the ISO/IEC 13211-1 Technical Corrigendum 2:2012-02, section 9.3.10.4
+	% tests from the ISO/IEC 13211-1 Technical Corrigendum 3:2017, section 9.3.10.4
 
 	succeeds(iso_integer_power_2_01) :-
 		{X is ^(0,0)},
@@ -55,61 +55,62 @@
 		X == 7625597484987.
 
 	throws(iso_integer_power_2_06, error(type_error(float,2),_)) :-
-		% the ISO standard specifies an evaluation_error(undefined) but there seems
-		% to be consensus that the correct exception is a type_error(float,...)
-		% see also http://eclipseclp.org/wiki/Prolog/IsoErrata
 		{_X is 2^(-1)}.
 
 	succeeds(iso_integer_power_2_07) :-
+		{X is 2.0^(-1)},
+		X =~= 0.5.
+
+	succeeds(iso_integer_power_2_08) :-
 		{X is 1^(-1)},
 		X == 1.
 
-	succeeds(iso_integer_power_2_08) :-
+	succeeds(iso_integer_power_2_09) :-
 		{X is 0^0},
 		X == 1.
 
-	succeeds(iso_integer_power_2_09) :-
+	succeeds(iso_integer_power_2_10) :-
 		{X is 2^ -1.5},
 		X =~= 0.353553.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_integer_power_2_10, error(instantiation_error,_)) :-
+	throws(lgt_integer_power_2_11, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is 3^N}.
 
-	throws(lgt_integer_power_2_11, error(instantiation_error,_)) :-
+	throws(lgt_integer_power_2_12, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is N^3}.
 
-	throws(lgt_integer_power_2_12, error(type_error(evaluable,foo/0),_)) :-
-		% try to delay the error to runtime
-		foo(0, Foo),
-		{_X is 3^Foo}.
-
 	throws(lgt_integer_power_2_13, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
-		{_X is Foo^3}.
-
-	throws(lgt_integer_power_2_14, error(type_error(evaluable,foo/1),_)) :-
-		% try to delay the error to runtime
-		foo(1, Foo),
 		{_X is 3^Foo}.
+
+	throws(lgt_integer_power_2_14, error(type_error(evaluable,foo/0),_)) :-
+		% try to delay the error to runtime
+		foo(0, Foo),
+		{_X is Foo^3}.
 
 	throws(lgt_integer_power_2_15, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
+		{_X is 3^Foo}.
+
+	throws(lgt_integer_power_2_16, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
 		{_X is Foo^3}.
 
-	throws(lgt_integer_power_2_16, error(type_error(evaluable,foo/2),_)) :-
+	throws(lgt_integer_power_2_17, error(type_error(evaluable,foo/2),_)) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is 3^Foo}.
 
-	throws(lgt_integer_power_2_17, error(type_error(evaluable,foo/2),_)) :-
+	throws(lgt_integer_power_2_18, error(type_error(evaluable,foo/2),_)) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is Foo^3}.
