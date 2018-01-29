@@ -104,6 +104,12 @@ Contributions
 * FIXED: Typo in `flags` contribution in the scope directive of the predicate
 `print_flags/0`.
 
+Installers and installation scripts
+-----------------------------------
+
+* ADDED: Bash shell script to create a new GNU-Prolog top-level executable
+that embeds the Logtalk compiler/runtime.
+
 
 3.14.0 - January 4, 2018
 ========================
