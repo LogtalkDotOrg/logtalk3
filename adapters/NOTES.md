@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on January 25, 2018
+Last updated on January 30, 2018
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -492,8 +492,8 @@ Due to the relative long release cycle of XSB, you may need to use its
 development version if the recommended version is not yet available as
 a stable release.
 
-A know issue in XSB 3.5.0 is that this version doesn't support static
-multifile predicates. This limitation may be fixed in later versions.
+Know multifile predicate issues in XSB 3.8.0 and earlier versions have now
+been fixed in the current XSB development version; use it if possible.
 
 The definition of the `as` operator used in Logtalk when declaring predicate
 (or non-terminal) aliases conflicts with the definition of this operator in
