@@ -64,6 +64,10 @@ Tools
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.
 
+* FIXED: Updated the `logtalk_tester` shell script to use the GNU `sed` command
+when available to workaround failed tests resulting in invalid byte sequences
+in test log files. This issue can result in a truncated list of failed tests.
+
 Tests
 -----
 

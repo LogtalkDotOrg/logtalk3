@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 2, 2018
+##   Last updated on January 30, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.28"
+	echo "$(basename "$0") 0.29"
 	exit 0
 }
 
@@ -93,6 +93,13 @@ flag_goal="true"
 timeout=0
 prefix="$HOME/"
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 run_tests() {
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
@@ -103,20 +110,20 @@ run_tests() {
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
 		tests_exit=$?
-		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
+		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
 		tests_exit=$?
-		grep -a 'tests:' "$results/$name.results" | sed 's/%/*****        /'
+		grep -a 'tests:' "$results/$name.results" | $sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
 		tests_exit=$?
-		grep -a 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
+		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (debug)/'
 	fi
 	if [ $tests_exit -eq 0 ] ; then
-		grep -a 'out of' "$results/$name.results" | grep -a 'clause coverage' | sed 's/%/*****        /'
-		grep -a 'no code coverage information collected' "$results/$name.results" | sed 's/%/*****        /'
-		grep -a '(not applicable)' "$results/$name.results" | sed 's/(/*****         (/'
+		grep -a 'out of' "$results/$name.results" | grep -a 'clause coverage' | $sed 's/%/*****        /'
+		grep -a 'no code coverage information collected' "$results/$name.results" | $sed 's/%/*****        /'
+		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/*****         (/'
 	elif [ $tests_exit -eq 124 ] ; then
 		echo "*****         timeout"
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
@@ -385,7 +392,7 @@ echo '**************************************************************************
 echo "***** Batch testing started @ $start_date"
 $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep -a "Logtalk version:" "$results"/tester_versions.txt
-grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
+grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
 
 testsets=0
 output="$(find "$base" $level -name "tester.lgt" -or -name "tester.logtalk" | LC_ALL=C sort)"
@@ -409,36 +416,36 @@ echo "**************************************************************************
 echo "***** Compilation errors/warnings and failed unit tests"
 echo "***** (compilation errors/warnings might be expected depending on the test)"
 echo "*******************************************************************************"
-grep -s -a -A2 'syntax_error' -- *.results | sed 's/.results//' | tee errors.all
-grep -s -a -A2 'syntax_error' -- *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h '!     ' -- *.results | sed 's/.results//' | tee -a errors.all
-grep -s -a -h -F '*     ' -- *.errors | sed 's/.errors//' | tee -a errors.all
-grep -s -a -h -F '*     ' -- *.results | sed 's/.results//' | tee -a errors.all
+grep -s -a -A2 'syntax_error' -- *.results | $sed 's/.results//' | tee errors.all
+grep -s -a -A2 'syntax_error' -- *.errors | $sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' -- *.errors | $sed 's/.errors//' | tee -a errors.all
+grep -s -a -h '!     ' -- *.results | $sed 's/.results//' | tee -a errors.all
+grep -s -a -h -F '*     ' -- *.errors | $sed 's/.errors//' | tee -a errors.all
+grep -s -a -h -F '*     ' -- *.results | $sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Skipped"
 echo "*******************************************************************************"
-grep -s -a 'tests skipped' -- *.results | sed 's/% tests skipped//' | sed 's/.results://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'tests skipped' -- *.results | $sed 's/% tests skipped//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Broken"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_BROKEN' -- *.errors | sed 's/LOGTALK_BROKEN//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_BROKEN' -- *.errors | $sed 's/LOGTALK_BROKEN//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Timeouts"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | sed 's/LOGTALK_TIMEOUT//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | $sed 's/LOGTALK_TIMEOUT//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Crashes"
 echo "*******************************************************************************"
-grep -s -a 'LOGTALK_CRASH' -- *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
+grep -s -a 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep -s -a ': skipped' -- *.results | sed 's/: skipped//' | sed 's/.results:% / - /' | sed 's|__|/|g' | sed "s|^$prefix||" | sed "s|^% ||"
+grep -s -a ': skipped' -- *.results | $sed 's/: skipped//' | $sed 's/.results:% / - /' | $sed 's|__|/|g' | $sed "s|^$prefix||" | $sed "s|^% ||"
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep -s -a ': failure' -- *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | sed "s|^$prefix||" | sed "s|^!     ||"
+grep -s -a ': failure' -- *.results | $sed 's/: failure//' | $sed 's/.results:!     / - /' | $sed 's|__|/|g' | $sed "s|^$prefix||" | $sed "s|^!     ||"
 echo "*******************************************************************************"
 echo "***** $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timeouts, $crashes crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"

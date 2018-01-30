@@ -72,7 +72,9 @@ using the `apropos logtalk` command.
 	executable directories to the system path environment variable;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
 	by the GNU coreutils package), it will use it to run each test set if the
-	`timeout` option is set to a value greater than zero
+	`timeout` option is set to a value greater than zero;
+	installation of the GNU `sed` command, when no available by default, is
+	strongly recommended
 
 - `logtalk_doclet.sh`  
 	shell script for automating running doclets in the current directory and
