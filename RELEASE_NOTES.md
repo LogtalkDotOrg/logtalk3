@@ -119,6 +119,9 @@ Installers and installation scripts
 * ADDED: Bash shell script to create a new GNU-Prolog top-level executable
 that embeds the Logtalk compiler/runtime.
 
+* UPDATED: The Windows installation script to also detect ECLiPSe 7.1
+development versions now that the 7.0 version is final.
+
 
 3.14.0 - January 4, 2018
 ========================
