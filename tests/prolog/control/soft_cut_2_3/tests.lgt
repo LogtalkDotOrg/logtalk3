@@ -54,7 +54,7 @@ condition_opaque_to_cut_3(2).
 	]).
 
 	:- discontiguous([
-		succeeds/1, fails/1, throws/2
+		succeeds/1, fails/1
 	]).
 
 	succeeds(commons_soft_cut_2_3_01) :-
