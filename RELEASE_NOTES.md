@@ -96,8 +96,13 @@ with type errors when using some backend Prolog compilers such as XSB.
 predicates assumed that the `:/2` operator was defined for all backend.
 
 * FIXED: Workaround XSB parser bug in the unit tests for the ISO Prolog
-standard !/0 control construct.
- 
+standard `!/0` control construct.
+
+Examples
+--------
+* UPDATED: The `multifile` example to also run when using XSB as the backend
+compiler. Requires XSB r9206 or a later version.
+
 Contributions
 -------------
 

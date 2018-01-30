@@ -18,14 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
-
-	% XSB doesn't support static multifile predicates
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, qp)).
+:- if(current_logtalk_flag(prolog_dialect, qp)).
 
 	% Qu-Prolog doesn't support static multifile predicates
 	:- initialization((

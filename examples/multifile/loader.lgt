@@ -18,13 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(\+ (current_logtalk_flag(prolog_dialect, Dialect), (Dialect == qp; Dialect == xsb))).
+:- if(\+ current_logtalk_flag(prolog_dialect, qp)).
 
 	:- initialization(logtalk_load([main, other, more])).
 
 :- else.
 
-	% Qu-Prolog and XSB only support dynamic multifile predicates
+	% Qu-Prolog only supports dynamic multifile predicates
 	:- initialization((write('WARNING: example not supported on this back-end Prolog compiler!'), nl)).
 
 :- endif.
