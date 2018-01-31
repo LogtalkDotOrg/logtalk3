@@ -23,4 +23,4 @@ from Logtalk core files and Logtalk source files.
 The following scripts are provided:
 
 - `swipl_logtalk_qlf.sh`  
-	creates a QLF file with the Logtalk compiler and runtime
+	creates a `logtalk.qlf` file with the Logtalk compiler and runtime

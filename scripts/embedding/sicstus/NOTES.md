@@ -23,4 +23,4 @@ files from Logtalk core files and Logtalk source files.
 The following scripts are provided:
 
 - `sicstus_logtalk_po.sh`  
-	creates a `.po` file with the Logtalk compiler and runtime
+	creates a `logtalk.po` file with the Logtalk compiler and runtime

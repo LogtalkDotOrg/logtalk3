@@ -23,4 +23,4 @@ from Logtalk core files and Logtalk source files.
 The following scripts are provided:
 
 - `xsb_logtalk_xwam.sh`  
-	creates a `.xwam` file with the Logtalk compiler and runtime
+	creates a `logtalk.xwam` file with the Logtalk compiler and runtime

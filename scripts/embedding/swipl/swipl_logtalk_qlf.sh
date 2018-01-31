@@ -72,7 +72,7 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script creates a SWI-Prolog QLF file with the Logtalk compiler and runtime"
+	echo "This script creates a SWI-Prolog logtalk.qlf file with the Logtalk compiler and runtime"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"

@@ -72,7 +72,7 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script creates a SICStus Prolog .po file with the Logtalk compiler and runtime"
+	echo "This script creates a XSB logtalk.xwam file with the Logtalk compiler and runtime"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"
