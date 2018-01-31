@@ -108,6 +108,10 @@ using the `apropos logtalk` command.
 - `docker`  
 	directory containing support files for building Docker containers
 
+- `embedding`  
+	directory containing scripts for embedding the Logtalk compiler/runtime
+	and Logtalk applications using selected backend Prolog compilers
+
 - `freedesktop`  
 	directory containing support files for adding the Logtalk mime-type
 	to the freedesktop.org shared mime-info database
