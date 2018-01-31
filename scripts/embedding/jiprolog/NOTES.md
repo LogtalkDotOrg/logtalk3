@@ -17,9 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains scripts for selected backend Prolog compilers
-for embedding Logtalk and Logtalk applications. Embedding usually
-requires precompiling the Logtalk core files and the application source
-files. The scripts should be regarded as starting points as actual use
-requires customization (e.g. starting goal, inclusion of a top-level
-interpreter, custom Logtalk settings, etc).
+This directory contains example scripts for creating JIProlog `.jip` files
+from Logtalk core files and Logtalk source files.
+
+The following scripts are provided:
+
+- `jiprolog_logtalk_jip.sh`  
+	creates a `logtalk.jip` file with the Logtalk compiler and runtime
