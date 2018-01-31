@@ -17,8 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains scripts for selected backend Prolog compilers
-for embedding Logtalk and Logtalk applications. The scripts should be
-regarded as starting points as actual use requires customization (e.g.
-starting goal, inclusion of a top-level interpreter, custom Logtalk
-settings, etc).
+This directory contains example scripts for creating SWI-Prolog QLF files
+from Logtalk core files and Logtalk source files.
+
+The following scripts are provided:
+
+- `swipl_logtalk_qlf.sh`  
+	creates a QLF file with the Logtalk compiler and runtime

@@ -72,7 +72,7 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script creates a new GNU Prolog top-level interpreter that embeds Logtalk"
+	echo "This script creates a SWI-Prolog QLF file with the Logtalk compiler and runtime"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"
@@ -116,12 +116,24 @@ else
 	extension=''
 fi
 
-gplgt$extension --query-goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt"
+swilgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')])" -t "halt"
 
-cp "$LOGTALKHOME/adapters/gnu.pl" .
+cp "$LOGTALKHOME/adapters/swi.pl" .
 cp "$LOGTALKHOME/paths/paths.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
-gplc -o logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl core.pl paths.pl
+cat \
+    swi.pl \
+    paths.pl \
+    expanding*_lgt.pl \
+    monitoring*_lgt.pl \
+    forwarding*_lgt.pl \
+    user*_lgt.pl \
+    logtalk*_lgt.pl \
+    core_messages*_lgt.pl \
+    core.pl \
+    > logtalk.pl
+
+swipl -g "qcompile(logtalk)" -t "halt"
 
 rm *.pl

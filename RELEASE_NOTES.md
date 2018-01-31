@@ -118,8 +118,11 @@ Contributions
 Installers and installation scripts
 -----------------------------------
 
-* ADDED: Bash shell script to create a new GNU-Prolog top-level executable
+* ADDED: Bash shell script to create a new GNU Prolog top-level executable
 that embeds the Logtalk compiler/runtime.
+
+* ADDED: Bash shell script to create a SWI-Prolog QLF file with the Logtalk
+compiler/runtime.
 
 * UPDATED: The Windows installation script to also detect ECLiPSe 7.1
 development versions now that the 7.0 version is final.
