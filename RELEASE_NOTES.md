@@ -133,6 +133,9 @@ compiler/runtime.
 * ADDED: Bash shell script to create a JIProlog `.jip` file with the Logtalk
 compiler/runtime.
 
+* ADDED: Bash shell script to create a ECLiPSe `.asm` file with the Logtalk
+compiler/runtime.
+
 * UPDATED: The Windows installation script to also detect ECLiPSe 7.1
 development versions now that the 7.0 version is final.
 
