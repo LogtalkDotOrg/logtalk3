@@ -2,8 +2,8 @@
 
 #############################################################################
 ## 
-##   This script creates a new GNU Prolog top-level
-##   interpreter that embeds Logtalk
+##   This script creates a SICStus Prolog logtalk.po file
+##   with the Logtalk compiler and runtime
 ## 
 ##   Last updated on January 31, 2018
 ## 

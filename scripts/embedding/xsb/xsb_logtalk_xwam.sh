@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   This script creates a SWI-Prolog logtalk.qlf file
+##   This script creates a XSB logtalk.xwam file
 ##   with the Logtalk compiler and runtime
 ## 
 ##   Last updated on January 31, 2018
@@ -72,7 +72,7 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script creates a SWI-Prolog QLF file with the Logtalk compiler and runtime"
+	echo "This script creates a SICStus Prolog .po file with the Logtalk compiler and runtime"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"
@@ -116,24 +116,26 @@ else
 	extension=''
 fi
 
-swilgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')])" -t "halt"
+xsblgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt."
 
-cp "$LOGTALKHOME/adapters/swi.pl" .
+cp "$LOGTALKHOME/adapters/xsb.pl" .
 cp "$LOGTALKHOME/paths/paths.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 cat \
-    swi.pl \
+    xsb.pl \
     paths.pl \
-    expanding*_lgt.pl \
-    monitoring*_lgt.pl \
-    forwarding*_lgt.pl \
-    user*_lgt.pl \
-    logtalk*_lgt.pl \
-    core_messages*_lgt.pl \
+    expanding*_lgt.P \
+    monitoring*_lgt.P \
+    forwarding*_lgt.P \
+    user*_lgt.P \
+    logtalk*_lgt.P \
+    core_messages*_lgt.P \
     core.pl \
     > logtalk.pl
 
-swipl -g "qcompile(logtalk)" -t "halt"
+xsb -e "compile(logtalk),halt."
 
 rm *.pl
+rm *.P
+rm *_lgt.xwam
