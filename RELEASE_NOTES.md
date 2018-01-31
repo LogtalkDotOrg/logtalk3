@@ -124,6 +124,9 @@ that embeds the Logtalk compiler/runtime.
 * ADDED: Bash shell script to create a SWI-Prolog QLF file with the Logtalk
 compiler/runtime.
 
+* ADDED: Bash shell script to create a SICStus Prolog `.po` file with the
+Logtalk compiler/runtime.
+
 * UPDATED: The Windows installation script to also detect ECLiPSe 7.1
 development versions now that the 7.0 version is final.
 
