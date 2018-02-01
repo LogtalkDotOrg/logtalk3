@@ -61,6 +61,10 @@ Library
 Tools
 -----
 
+* ADDED: Support to the `diagrams` tool to generate predicate cross-referencing
+diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
+source file line for the corresponding predicate clause. 
+
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.
 

@@ -247,6 +247,12 @@ generated diagrams. For entity diagrams the options are:
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
+In the particular case of cross-referencing diagrams, there is also the option:
+
+- `url_line_references(Host)`  
+	syntax for the URL source file line part (an atom; possible values are `{github,gitlab,bitbucket}`; default is `github`);
+	when using this option, the `CodeURLPrefix` should be a permanent link (i.e. it should include the commit SHA1)
+
 For file diagrams the options are:
 
 - `layout(Layout)`  

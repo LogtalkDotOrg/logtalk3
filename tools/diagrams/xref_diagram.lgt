@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.16,
+		version is 2.17,
 		author is 'Paulo Moura',
-		date is 2017/07/10,
+		date is 2018/02/01,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -32,6 +32,10 @@
 
 	:- uses(list, [
 		member/2, memberchk/2
+	]).
+
+	:- uses(os, [
+		decompose_file_name/3
 	]).
 
 	:- public(entity/2).
@@ -173,34 +177,38 @@
 		),
 		fail.
 	process(Kind, Entity, Options) :-
-		calls_local_predicate(Kind, Entity, Caller, Callee),
+		calls_local_predicate(Kind, Entity, Caller, Line, Callee),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Callee),
-		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
+		add_xref_code_url(Options, Entity, Line, XRefOptions),
+		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process(Kind, Entity, Options) :-
-		calls_self_predicate(Kind, Entity, Caller, Callee),
+		calls_self_predicate(Kind, Entity, Caller, Line, Callee),
 		\+ ^^edge(Caller, Callee, ['calls in self'], calls_self_predicate, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Callee),
-		^^save_edge(Caller, Callee, ['calls in self'], calls_self_predicate, [tooltip('calls in self')| Options]),
+		add_xref_code_url(Options, Entity, Line, XRefOptions),
+		^^save_edge(Caller, Callee, ['calls in self'], calls_self_predicate, [tooltip('calls in self')| XRefOptions]),
 		fail.
 	process(Kind, Entity, Options) :-
-		calls_super_predicate(Kind, Entity, Caller, Callee),
+		calls_super_predicate(Kind, Entity, Caller, Line, Callee),
 		\+ ^^edge(Caller, Callee, ['super call'], calls_super_predicate, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Callee),
-		^^save_edge(Caller, Callee, ['super call'], calls_super_predicate, [tooltip('super call')| Options]),
+		add_xref_code_url(Options, Entity, Line, XRefOptions),
+		^^save_edge(Caller, Callee, ['super call'], calls_super_predicate, [tooltip('super call')| XRefOptions]),
 		fail.
 	process(Kind, Entity, Options) :-
-		calls_external_predicate(Kind, Entity, Caller, Callee),
+		calls_external_predicate(Kind, Entity, Caller, Line, Callee),
 		remember_external_predicate(Callee),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
-		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
+		add_xref_code_url(Options, Entity, Line, XRefOptions),
+		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process(Kind, Entity, Options) :-
-		updates_predicate(Kind, Entity, Caller, Dynamic),
+		updates_predicate(Kind, Entity, Caller, Line, Dynamic),
 		(	Dynamic = ::_ ->
 			Tooltip = 'updates in self',
 			EdgeKind = updates_self_predicate
@@ -213,7 +221,8 @@
 		\+ ^^edge(Caller, Dynamic, [Tooltip], EdgeKind, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Dynamic),
-		^^save_edge(Caller, Dynamic, [Tooltip], EdgeKind, [tooltip(Tooltip)| Options]),
+		add_xref_code_url(Options, Entity, Line, XRefOptions),
+		^^save_edge(Caller, Dynamic, [Tooltip], EdgeKind, [tooltip(Tooltip)| XRefOptions]),
 		fail.
 	process(_, _, _) :-
 		retract(included_predicate_(Predicate)),
@@ -309,13 +318,63 @@
 		;	PredicateOptions = Options
 		).
 
-	calls_local_predicate(module, Entity, Caller, Callee) :-
+	add_xref_code_url(Options, Entity, Line, XRefOptions) :-
+		(	(	current_object(Entity) ->
+				object_property(Entity, file(Path))
+			;	current_category(Entity) ->
+				object_property(Entity, file(Path))
+			;	current_protocol(Entity) ->
+				protocol_property(Entity, file(Path))
+			;	% entity is not loaded
+				fail
+			),
+			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
+				atom_concat(Prefix, _, Path) ->
+				true
+			;	member(url_prefixes(CodePrefix, _), Options)
+			) ->
+			memberchk(omit_path_prefixes(PathPrefixes), Options),
+			(	member(PathPrefix, PathPrefixes),
+				atom_concat(PathPrefix, RelativePath, Path) ->
+				true
+			;	RelativePath = Path
+			),
+			memberchk(entity_url_suffix_target(_, Target), Options),
+			atom_concat(CodePrefix, RelativePath, CodeURL0),
+			(	Target == '' ->
+				CodeURL = CodeURL0
+			;	Line = -1 ->
+				CodeURL = CodeURL0
+			;	member(url_line_references(bitbucket), Options) ->
+				decompose_file_name(RelativePath, _, File),
+				atom_concat(CodeURL0, '?fileviewer=file-view-default#', CodeURL1),
+				atom_concat(CodeURL1, File, CodeURL2),
+				atom_concat(CodeURL2, '-', CodeURL3),
+				number_codes(Line, LineCodes),
+				atom_codes(LineAtom, LineCodes),
+				atom_concat(CodeURL3, LineAtom, CodeURL)
+			;	% assume github or gitlab line reference syntax
+				atom_concat(CodeURL0, Target, CodeURL1),
+				atom_concat(CodeURL1, 'L', CodeURL2),
+				number_codes(Line, LineCodes),
+				atom_codes(LineAtom, LineCodes),
+				atom_concat(CodeURL2, LineAtom, CodeURL)
+			),
+			XRefOptions = [urls(CodeURL, '')| Options]
+		;	XRefOptions = Options
+		).
+
+	calls_local_predicate(module, Entity, Caller, Line, Callee) :-
 		!,
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
 		Callee \= _::_,
 		Callee \= ':'(_, _),
-		memberchk(caller(Caller), Properties).
-	calls_local_predicate(Kind, Entity, Caller, Callee) :-
+		memberchk(caller(Caller), Properties),
+		(	member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		).
+	calls_local_predicate(Kind, Entity, Caller, Line, Callee) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
 		Callee0 \= _::_,
@@ -324,6 +383,10 @@
 		Callee0 \= _<<_,
 		Callee0 \= ':'(_, _),
 		memberchk(caller(Caller0), CallsProperties),
+		(	member(line_count(Line), CallsProperties) ->
+			true
+		;	Line = -1
+		),
 		(	entity_property(Kind, Entity, defines(Callee0, CalleeDefinesProperties)),
 			member(non_terminal(CalleeNonTerminal), CalleeDefinesProperties) ->
 			Callee = CalleeNonTerminal
@@ -345,11 +408,15 @@
 		;	Caller = Caller0
 		).
 
-	calls_super_predicate(Kind, Entity, Caller, Callee) :-
+	calls_super_predicate(Kind, Entity, Caller, Line, Callee) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(^^Callee0, CallsProperties)),
 		ground(Callee0),
 		memberchk(caller(Caller0), CallsProperties),
+		(	member(line_count(Line), CallsProperties) ->
+			true
+		;	Line = -1
+		),
 		(	Caller0 = From::Predicate ->
 			% multifile predicate caller (unlikely but possible)
 			Predicate = Functor/Arity,
@@ -381,11 +448,15 @@
 		;	Callee = Callee0
 		).
 
-	calls_self_predicate(Kind, Entity, Caller, Callee) :-
+	calls_self_predicate(Kind, Entity, Caller, Line, Callee) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(::Callee, CallsProperties)),
 		ground(Callee),
 		memberchk(caller(Caller0), CallsProperties),
+		(	member(line_count(Line), CallsProperties) ->
+			true
+		;	Line = -1
+		),
 		(	Caller0 = From::Predicate ->
 			% multifile predicate caller
 			Predicate = Functor/Arity,
@@ -411,18 +482,26 @@
 		;	Caller = Caller0
 		).
 
-	calls_external_predicate(module, Entity, Caller, Callee) :-
+	calls_external_predicate(module, Entity, Caller, Line, Callee) :-
 		!,
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
 		(	Callee = Object::_, nonvar(Object)
 		;	Callee = ':'(Module,_), nonvar(Module)
 		),
-		memberchk(caller(Caller), Properties).
-	calls_external_predicate(Kind, Entity, Caller, Object::Callee) :-
+		memberchk(caller(Caller), Properties),
+		(	member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		).
+	calls_external_predicate(Kind, Entity, Caller, Line, Object::Callee) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Object::Callee0, CallsProperties)),
 		nonvar(Object),
 		memberchk(caller(Caller0), CallsProperties),
+		(	member(line_count(Line), CallsProperties) ->
+			true
+		;	Line = -1
+		),
 		entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
 		\+ member(auxiliary, CallerProperties),
 		Callee0 = Functor/Arity,
@@ -441,15 +520,19 @@
 			Caller = CallerNonTerminal
 		;	Caller = Caller0
 		).
-	calls_external_predicate(Kind, Entity, Caller, ':'(Module,Callee)) :-
+	calls_external_predicate(Kind, Entity, Caller, Line, ':'(Module,Callee)) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(':'(Module,Callee), Properties)),
 		nonvar(Module),
 		memberchk(caller(Caller), Properties),
+		(	member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		),
 		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
 		\+ member(auxiliary, CallerProperties).
 
-	updates_predicate(Kind, Entity, Updater, Dynamic) :-
+	updates_predicate(Kind, Entity, Updater, Line, Dynamic) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, updates(Dynamic, UpdatesProperties)),
 		(	Dynamic = Object::PredicateIndicator ->
@@ -458,6 +541,10 @@
 		;	ground(Dynamic)
 		),
 		memberchk(updater(Updater0), UpdatesProperties),
+		(	member(line_count(Line), UpdatesProperties) ->
+			true
+		;	Line = -1
+		),
 		(	Updater0 = From::Predicate ->
 			(	current_object(From) ->
 				FromKind = object
@@ -565,6 +652,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for zoom linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+	% by default, assume GitHub/GitLab line references in URLs
+	default_option(url_line_references(github)).
 
 	diagram_name_suffix('_xref_diagram').
 

@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 2.11,
+		version is 2.12,
 		author is 'Paulo Moura',
-		date is 2017/07/16,
+		date is 2018/02/01,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -225,8 +225,12 @@
 		write(Stream, End),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, arrowhead, ArrowHead),
-		(	member(tooltip(Tooltip), Options) ->
-			write_key_value_comma(Stream, tooltip, Tooltip)
+		(	member(urls(URL, _), Options),
+			URL \== '' ->
+			write_key_value_comma(Stream, 'URL', URL),
+			write_key_value_comma(Stream, labeltooltip, URL)
+		;	member(tooltip(Tooltip), Options) ->
+			write_key_value_comma(Stream, labeltooltip, Tooltip)
 		;	true
 		),
 		write(Stream, 'label=<'),
@@ -283,9 +287,14 @@
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-
+		write_edge_lines(Lines, Line, Stream).
+
+	write_edge_lines([], Line, Stream) :-
+		write_escaped_term(Stream, Line).
+	write_edge_lines([Next| Lines], Line, Stream) :-
 		write_escaped_term(Stream, Line),
 		write(Stream, '<BR/>'),
-		write_edge_lines(Lines, Stream).
+		write_edge_lines(Lines, Next, Stream).
 
 	% CDATA tags are not officially supported in dot as of version 2.38
 	% and are broken as they don't escape problematic characters; we try
