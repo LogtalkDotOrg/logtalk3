@@ -23,35 +23,28 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.6,
-		author is 'Ebrahim Azarisooreh',
-		date is 2018/01/01,
+		version is 0.7,
+		author is 'Ebrahim Azarisooreh and Paulo Moura',
+		date is 2018/02/01,
 		comment is 'Number of clauses defined for a predicate in an object or category.'
 	]).
 
-	:- uses(list, [memberchk/2]).
-
-	entity_score(Entity, PredicateNocs) :-
+	entity_score(Entity, TotalNocs) :-
 		^^current_entity(Entity),
 		^^entity_kind(Entity, Kind),
 		Kind \== protocol,
 		findall(
-			Predicate-Noc,
-			defined_predicate_noc(Entity, Predicate, Noc),
-			PredicateNocs
-		).
+			Noc,
+			defined_predicate_noc(Entity, _, Noc),
+			Nocs
+		),
+		numberlist::sum(Nocs, TotalNocs).
 
 	defined_predicate_noc(Entity, Predicate, Noc) :-
 		^^defines_predicate(Entity, Predicate, Properties),
-		memberchk(number_of_clauses(Noc), Properties).
+		list::memberchk(number_of_clauses(Noc), Properties).
 
-	entity_score(_Entity, PredicateNocs) -->
-		entity_score(PredicateNocs).
-
-	entity_score([]) -->
-		[].
-	entity_score([Predicate-Noc| PredicateNocs]) -->
-		['Number of Clauses: ~w - ~w'-[Predicate, Noc], nl],
-		entity_score(PredicateNocs).
+	entity_score(_Entity, TotalNocs) -->
+		['Number of Clauses: ~w'-[TotalNocs], nl].
 
 :- end_object.

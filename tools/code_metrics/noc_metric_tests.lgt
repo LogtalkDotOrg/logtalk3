@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
-		author is 'Ebrahim Azarisooreh',
-		date is 2018/01/01,
+		version is 0.7,
+		author is 'Ebrahim Azarisooreh and Paulo Moura',
+		date is 2018/02/01,
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
@@ -37,43 +37,43 @@
 
 	test(noc_cat_a) :-
 		entity_score(cat_a, Nocs), 
-		Nocs == [].
+		Nocs == 0.
 
 	test(noc_cat_b) :-
 		entity_score(cat_b, Nocs),
-		Nocs == [foo/0-1].
+		Nocs == 1.
 
 	test(noc_cat_c) :-
 		entity_score(cat_c, Nocs),
-		Nocs == [foo/0-1].
+		Nocs == 1.
 
 	test(noc_cat_d) :-
 		entity_score(cat_d, Nocs),
-		Nocs == [].
+		Nocs == 0.
 
 	test(noc_obj_e_wrong_clause) :-
 		entity_score(obj_e, Nocs),
-		\+ Nocs == [foo/0-2].
+		\+ Nocs == 2.
 
 	test(noc_obj_e) :-
 		entity_score(obj_e, Nocs),
-		Nocs == [foo/0-1, fact/1-0].
+		Nocs == 1.
 
 	test(noc_obj_d) :-
 		entity_score(obj_d, Nocs),
-		Nocs == [bar/0-1, foo/0-1].
+		Nocs == 2.
 
 	test(noc_obj_a) :-
 		entity_score(obj_a, Nocs),
-		Nocs == [foo/0-1, bar/0-1, baz/1-2].
+		Nocs == 4.
 
 	test(noc_obj_b) :-
 		entity_score(obj_b, Nocs),
-		Nocs == [foo/0-1].
+		Nocs == 1.
 
 	test(noc_obj_c) :-
 		entity_score(obj_c, Nocs),
-		Nocs == [foo/0-1, fact/1-0].
+		Nocs == 1.
 
 	test(noc_prot_a) :-
 		\+ entity_score(prot_a, _).
@@ -83,23 +83,23 @@
 
 	test(noc_car) :-
 		entity_score(car, Nocs),
-		Nocs == [].
+		Nocs == 0.
 
 	test(noc_vehicle) :-
 		entity_score(vehicle, Nocs),
-		Nocs == [].
+		Nocs == 0.
 
 	test(noc_meta_vehicle) :-
 		entity_score(meta_vehicle, Nocs),
-		Nocs == [].
+		Nocs == 0.
 
 	test(noc_herring) :-
 		entity_score(herring, Nocs),
-		Nocs == [].
+		Nocs == 0.
 
 	test(noc_bird) :-
 		entity_score(bird, Nocs),
-		Nocs == [].
+		Nocs == 0.
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output
