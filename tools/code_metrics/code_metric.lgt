@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.8,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/01/22,
+		date is 2018/01/24,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -97,8 +97,56 @@
 	:- protected(process_entity/2).
 	:- mode(process_entity(+atom, @entity_identifier), one).
 	:- info(process_entity/2, [
-		comment is 'Processes an entity of the given kind. Fails if the metric does not apply.',
+		comment is 'Processes an entity of the given kind.',
 		argnames is ['Kind', 'Entity']
+	]).
+
+	:- protected(process_file/1).
+	:- mode(process_file(+atom), one).
+	:- info(process_file/1, [
+		comment is 'Processes a source file.',
+		argnames is ['Path']
+	]).
+
+	:- protected(process_directory/1).
+	:- mode(process_directory(+atom), one).
+	:- info(process_directory/1, [
+		comment is 'Processes a directory of source files.',
+		argnames is ['Path']
+	]).
+
+	:- protected(process_rdirectory/1).
+	:- mode(process_rdirectory(+atom), one).
+	:- info(process_rdirectory/1, [
+		comment is 'Recursively process a directory of source files.',
+		argnames is ['Path']
+	]).
+
+	:- protected(process_rlibrary/1).
+	:- mode(process_rlibrary(+atom), one).
+	:- info(process_rlibrary/1, [
+		comment is 'Recursively process a library of source files.',
+		argnames is ['Path']
+	]).
+
+	:- protected(process_all/0).
+	:- mode(process_all, one).
+	:- info(process_all/0, [
+		comment is 'Processes all loaded source code.'
+	]).
+
+	:- protected(sub_directory/2).
+	:- mode(sub_directory(+atom, -atom), one).
+	:- info(sub_directory/2, [
+		comment is 'Enumerates, by backtracking, all directory sub-directories containing loaded files.',
+		argnames is ['Directory', 'SubDirectory']
+	]).
+
+	:- protected(sub_library/2).
+	:- mode(sub_library(+atom, -atom), one).
+	:- info(sub_library/2, [
+		comment is 'Enumerates, by backtracking, all library sub-library paths.',
+		argnames is ['Library', 'SubLibraryPath']
 	]).
 
 	:- uses(logtalk, [print_message/3]).
@@ -129,7 +177,7 @@
 	file(Source) :-
 		(	locate_file(Source, Path) ->
 			write_scan_header('File'),
-			process_file(Path),
+			::process_file(Path),
 			write_scan_footer('File')
 		;	print_message(warning, code_metrics, unknown(file,Source)),
 			fail
@@ -198,7 +246,7 @@
 		(	os::absolute_file_name(Directory, Path),
 			os::directory_exists(Path) ->
 			write_scan_header('Directory'),
-			output_directory_files(Path),
+			::process_directory(Path),
 			write_scan_footer('Directory')
 		;	print_message(warning, code_metrics, unknown(directory,Directory)),
 			fail
@@ -212,21 +260,21 @@
 		(	os::absolute_file_name(Directory, Path),
 			os::directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
-			output_rdirectory(Path),
+			::process_rdirectory(Path),
 			write_scan_footer('Recursive directory')
 		;	print_message(warning, code_metrics, unknown(directory,Directory)),
 			fail
 		).
 
-	output_rdirectory(Directory) :-
+	process_rdirectory(Directory) :-
 		setof(
 			SubDirectory,
-			sub_directory(Directory, SubDirectory),
+			::sub_directory(Directory, SubDirectory),
 			SubDirectories
 		),
 		forall(
 			member(SubDirectory, SubDirectories),
-			output_directory_files(SubDirectory)
+			::process_directory(SubDirectory)
 		).
 
 	sub_directory(Directory, SubDirectory) :-
@@ -241,7 +289,7 @@
 	library(Library) :-
 		(	logtalk::expand_library_path(Library, Path) ->
 			write_scan_header('Library'),
-			output_directory_files(Path),
+			::process_directory(Path),
 			write_scan_footer('Library')
 		;	print_message(warning, code_metrics, unknown(library,Library)),
 			fail
@@ -254,16 +302,16 @@
 	rlibrary(Library) :-
 		(	logtalk::expand_library_path(Library, TopPath) ->
 			write_scan_header('Recursive library'),
-			output_rlibrary(TopPath),
+			::process_rlibrary(TopPath),
 			write_scan_footer('Recursive library')
 		;	print_message(warning, code_metrics, unknown(library,Library)),
 			fail
 		).
 
-	output_rlibrary(TopPath) :-
+	process_rlibrary(TopPath) :-
 		forall(
 			sub_library(TopPath, LibraryPath),
-			output_directory_files(LibraryPath)
+			::process_directory(LibraryPath)
 		).
 
 	sub_library(TopPath, LibraryPath) :-
@@ -277,11 +325,14 @@
 
 	all :-
 		write_scan_header('All entities'),
+		::process_all,
+		write_scan_footer('All entities').
+
+	process_all :-
 		forall(
 			all(Kind, Entity),
 			::process_entity(Kind, Entity)
-		),
-		write_scan_footer('All entities').
+		).
 
 	all(Kind, Entity) :-
 		(	current_object(Entity),
@@ -294,11 +345,11 @@
 
 	% internal/common predicates
 
-	output_directory_files(Directory) :-
+	process_directory(Directory) :-
 		print_message(information, code_metrics, scanning_directory(Directory)),
 		forall(
 			directory_file(Directory, Path),
-			process_file(Path)
+			::process_file(Path)
 		).
 
 	directory_file(Directory, Path) :-

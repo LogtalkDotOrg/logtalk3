@@ -10,7 +10,7 @@
 <title>core</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-548 904,-548 904,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk core entities</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2017/11/08, 10:30</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2018/02/01, 19:16</text>
 <g id="clust1" class="cluster"><title>cluster_library_core</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/core/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/core/">
 <path fill="#eee9e9" stroke="#8b8989" d="M20,-38C20,-38 880,-38 880,-38 886,-38 892,-44 892,-50 892,-50 892,-524 892,-524 892,-530 886,-536 880,-536 880,-536 20,-536 20,-536 14,-536 8,-530 8,-524 8,-524 8,-50 8,-50 8,-44 14,-38 20,-38"/>
@@ -138,12 +138,15 @@
 </g>
 <!-- user&#45;&gt;forwarding -->
 <g id="edge1" class="edge"><title>user&#45;&gt;forwarding</title>
-<g id="a_edge1"><a xlink:title="implements">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/core/" xlink:title="implements">
 <path fill="none" stroke="black" d="M544,-249.329C544,-291.992 544,-402.638 544,-457.781"/>
 <ellipse fill="black" stroke="black" cx="544" cy="-461.818" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/core/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/core/">
 <text text-anchor="start" x="544" y="-413.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- logtalk -->
 <g id="node5" class="node"><title>logtalk</title>

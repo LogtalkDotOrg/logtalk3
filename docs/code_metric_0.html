@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/1/22</code>
+            <code>2018/1/24</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -216,7 +216,7 @@
         <div class="section">
           <h3 id="process_entity/2" class="code">process_entity/2</h3>
           <blockquote>
-            <p class="comment">Processes an entity of the given kind. Fails if the metric does not apply.</p>
+            <p class="comment">Processes an entity of the given kind.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -230,6 +230,142 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>process_entity(+atom,@entity_identifier) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="process_file/1" class="code">process_file/1</h3>
+          <blockquote>
+            <p class="comment">Processes a source file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>process_file(Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>process_file(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="process_directory/1" class="code">process_directory/1</h3>
+          <blockquote>
+            <p class="comment">Processes a directory of source files.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>process_directory(Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>process_directory(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="process_rdirectory/1" class="code">process_rdirectory/1</h3>
+          <blockquote>
+            <p class="comment">Recursively process a directory of source files.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>process_rdirectory(Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>process_rdirectory(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="process_rlibrary/1" class="code">process_rlibrary/1</h3>
+          <blockquote>
+            <p class="comment">Recursively process a library of source files.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>process_rlibrary(Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>process_rlibrary(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="process_all/0" class="code">process_all/0</h3>
+          <blockquote>
+            <p class="comment">Processes all loaded source code.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>process_all &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="sub_directory/2" class="code">sub_directory/2</h3>
+          <blockquote>
+            <p class="comment">Enumerates, by backtracking, all directory sub-directories containing loaded files.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>sub_directory(Directory,SubDirectory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>sub_directory(+atom,-atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="sub_library/2" class="code">sub_library/2</h3>
+          <blockquote>
+            <p class="comment">Enumerates, by backtracking, all library sub-library paths.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>sub_library(Library,SubLibraryPath)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>sub_library(+atom,-atom) &ndash; one</code>
             </dd>
           </dl>
         </div>

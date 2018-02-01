@@ -65,6 +65,11 @@ Tools
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
 source file line for the corresponding predicate clause. 
 
+* ADDED: Simple source code size metric to the `diagrams` tool.
+
+* IMPROVED: New version of the `code_metrics` tool with an extended interface
+for simplifying implementation of new code metrics.
+
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.
 

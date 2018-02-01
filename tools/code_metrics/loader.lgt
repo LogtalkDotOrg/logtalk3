@@ -30,6 +30,7 @@
 		coupling_metric,
 		noc_metric,
 		doc_metric,
+		size_metric,
 		code_metrics
 	], [
 		optimize(on)

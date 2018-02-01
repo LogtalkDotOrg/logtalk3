@@ -33,6 +33,7 @@
 			coupling_metric,
 			noc_metric,
 			doc_metric,
+			size_metric,
 			code_metrics
 		],
 		[	
@@ -47,6 +48,7 @@
 			dit_metric_tests,
 			doc_metric_tests,
 			noc_metric_tests,
+			size_metric_tests,
 			code_metrics_tests
 		], [
 			hook(lgtunit), optimize(on)
@@ -57,6 +59,7 @@
 		dit_metric_tests,
 		doc_metric_tests,
 		noc_metric_tests,
+		size_metric_tests,
 		code_metrics_tests
 	])
 )).

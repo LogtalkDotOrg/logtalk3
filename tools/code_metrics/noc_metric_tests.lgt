@@ -26,7 +26,7 @@
 		version is 0.6,
 		author is 'Ebrahim Azarisooreh',
 		date is 2018/01/01,
-		comment is 'Unit tests for entity number of clauses metric.'
+		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
 	cover(code_metric).

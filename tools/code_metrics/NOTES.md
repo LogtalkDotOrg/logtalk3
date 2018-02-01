@@ -44,6 +44,9 @@ Currently, the following metrics are provided:
 - Depth of Inheritance (`dit_metric`)
 - Coupling Score (`coupling_metric`)
 - Documentation (`doc_metric`)
+- Source code size (`size_metric`)
+
+All metrics require the source code to be analyzed to be loaded.
 
 The coupling score method was strongly influenced by the metrics rating
 system in Microsoft Visual Studio and aims to eventually emulate the

@@ -19,42 +19,60 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(doc_metric_tests,
+:- object(size_metric_tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 0.1,
-		author is 'Paulo Moura',
-		date is 2017/12/28,
-		comment is 'Unit tests for the code documentation metric.'
+		author is 'Ebrahim Azarisooreh',
+		date is 2018/01/23,
+		comment is 'Unit tests for the source code size metric.'
 	]).
 
 	cover(code_metric).
-	cover(doc_metric).
+	cover(size_metric_utilities).
+	cover(size_metric).
 
-	test(doc_expanding) :-
-		doc_metric_valid(expanding).
+	:- uses(size_metric, [
+		all/0,
+		rlibrary/1,
+		library/1,
+		rdirectory/1,
+		directory/1,
+		file/1,
+		entity/1
+	]).
 
-	test(doc_forwarding) :-
-		doc_metric_valid(forwarding).
+	:- uses(lgtunit, [
+		deterministic/1
+	]).
 
-	test(doc_monitoring) :-
-		doc_metric_valid(monitoring).
+	test(size_metric_entity) :-
+		deterministic(entity(logtalk)).
 
-	test(doc_logtalk) :-
-		doc_metric_valid(logtalk).
+	test(size_metric_file) :-
+		object_property(logtalk, file(File)),
+		deterministic(file(File)).
 
-	test(doc_user) :-
-		doc_metric_valid(user).
+	test(size_metric_library) :-
+		deterministic(library(core)).
 
-	% auxiliary predicates
+	test(size_metric_rlibrary) :-
+		deterministic(rlibrary(core)).
 
-	doc_metric_valid(Entity) :-
-		doc_metric::entity_score(Entity, Score),
-		0 =< Score, Score =< 100.
+	test(size_metric_directory) :-
+		logtalk::expand_library_path(core, Directory),
+		deterministic(directory(Directory)).
+
+	test(size_metric_rdirectory) :-
+		logtalk::expand_library_path(core, Directory),
+		deterministic(rdirectory(Directory)).
+
+	test(size_metric_all) :-
+		deterministic(all).
 
 	% suppress all messages from the "code_metrics"
-	% component to not pollute the unit tests output
+	% tool to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

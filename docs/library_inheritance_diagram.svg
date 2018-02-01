@@ -10,7 +10,7 @@
 <title>library</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-2064 5429,-2064 5429,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2017/12/26, 19:56</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2018/02/01, 19:16</text>
 <g id="clust1" class="cluster"><title>cluster_library_library</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <path fill="#eee9e9" stroke="#8b8989" d="M20,-38C20,-38 5405,-38 5405,-38 5411,-38 5417,-44 5417,-50 5417,-50 5417,-2040 5417,-2040 5417,-2046 5411,-2052 5405,-2052 5405,-2052 20,-2052 20,-2052 14,-2052 8,-2046 8,-2040 8,-2040 8,-50 8,-50 8,-44 14,-38 20,-38"/>
@@ -691,12 +691,15 @@
 </g>
 <!-- term&#45;&gt;termp -->
 <g id="edge1" class="edge"><title>term&#45;&gt;termp</title>
-<g id="a_edge1"><a xlink:title="implements">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4953,-1782.29C4953,-1803.12 4953,-1839.58 4953,-1873.74"/>
 <ellipse fill="black" stroke="black" cx="4953" cy="-1877.9" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4953" y="-1829.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- atomic -->
 <g id="node3" class="node"><title>atomic</title>
@@ -713,12 +716,15 @@
 </g>
 <!-- atomic&#45;&gt;term -->
 <g id="edge2" class="edge"><title>atomic&#45;&gt;term</title>
-<g id="a_edge2"><a xlink:title="extends">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4953,-1399.36C4953,-1459.87 4953,-1661.8 4953,-1735.65"/>
 <polygon fill="black" stroke="black" points="4953,-1745.97 4948.5,-1735.97 4953,-1740.97 4953,-1735.97 4953,-1735.97 4953,-1735.97 4953,-1740.97 4957.5,-1735.97 4953,-1745.97 4953,-1745.97"/>
 </a>
 </g>
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4953" y="-1693.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- atom -->
 <g id="node4" class="node"><title>atom</title>
@@ -742,12 +748,15 @@
 </g>
 <!-- atom&#45;&gt;atomic -->
 <g id="edge3" class="edge"><title>atom&#45;&gt;atomic</title>
-<g id="a_edge3"><a xlink:title="extends">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M5066.31,-921.078C5049.16,-958.623 5019.95,-1026.36 5003,-1087 4976.22,-1182.81 4961.42,-1300.48 4955.74,-1352.75"/>
 <polygon fill="black" stroke="black" points="4954.67,-1362.88 4951.25,-1352.46 4955.2,-1357.91 4955.72,-1352.94 4955.72,-1352.94 4955.72,-1352.94 4955.2,-1357.91 4960.2,-1353.41 4954.67,-1362.88 4954.67,-1362.88"/>
 </a>
 </g>
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="5009" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- number -->
 <g id="node5" class="node"><title>number</title>
@@ -764,12 +773,15 @@
 </g>
 <!-- number&#45;&gt;atomic -->
 <g id="edge4" class="edge"><title>number&#45;&gt;atomic</title>
-<g id="a_edge4"><a xlink:title="extends">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4953,-909.082C4953,-981.47 4953,-1263.29 4953,-1352.66"/>
 <polygon fill="black" stroke="black" points="4953,-1362.8 4948.5,-1352.8 4953,-1357.8 4953,-1352.8 4953,-1352.8 4953,-1352.8 4953,-1357.8 4957.5,-1352.8 4953,-1362.8 4953,-1362.8"/>
 </a>
 </g>
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4953" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- float -->
 <g id="node6" class="node"><title>float</title>
@@ -786,12 +798,15 @@
 </g>
 <!-- float&#45;&gt;number -->
 <g id="edge5" class="edge"><title>float&#45;&gt;number</title>
-<g id="a_edge5"><a xlink:title="extends">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M5363.72,-529.075C5362.27,-561.885 5354.47,-634.184 5315,-676 5274.76,-718.637 5248.26,-708.405 5191,-721 5150.05,-730.007 5035.87,-710.965 5003,-737 4964.69,-767.349 4955.39,-827.648 4953.34,-862.805"/>
 <polygon fill="black" stroke="black" points="4952.91,-872.847 4948.84,-862.665 4953.13,-867.852 4953.34,-862.856 4953.34,-862.856 4953.34,-862.856 4953.13,-867.852 4957.83,-863.047 4952.91,-872.847 4952.91,-872.847"/>
 </a>
 </g>
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="5252" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- integer -->
 <g id="node7" class="node"><title>integer</title>
@@ -821,12 +836,15 @@
 </g>
 <!-- integer&#45;&gt;number -->
 <g id="edge6" class="edge"><title>integer&#45;&gt;number</title>
-<g id="a_edge6"><a xlink:title="extends">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4847.18,-551.029C4871.22,-628.021 4924.18,-797.681 4944.67,-863.33"/>
 <polygon fill="black" stroke="black" points="4947.68,-872.943 4940.4,-864.738 4946.19,-868.17 4944.7,-863.397 4944.7,-863.397 4944.7,-863.397 4946.19,-868.17 4948.99,-862.056 4947.68,-872.943 4947.68,-872.943"/>
 </a>
 </g>
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4897" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- compound -->
 <g id="node8" class="node"><title>compound</title>
@@ -843,12 +861,15 @@
 </g>
 <!-- compound&#45;&gt;term -->
 <g id="edge7" class="edge"><title>compound&#45;&gt;term</title>
-<g id="a_edge7"><a xlink:title="extends">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4458.29,-1399.01C4457.29,-1446.85 4461.32,-1583.78 4535,-1656 4588.56,-1708.5 4814.08,-1744.34 4909.77,-1757.46"/>
 <polygon fill="black" stroke="black" points="4919.97,-1758.83 4909.46,-1761.95 4915.02,-1758.16 4910.06,-1757.49 4910.06,-1757.49 4910.06,-1757.49 4915.02,-1758.16 4910.67,-1753.03 4919.97,-1758.83 4919.97,-1758.83"/>
 </a>
 </g>
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4625" y="-1693.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- listp -->
 <g id="node9" class="node"><title>listp</title>
@@ -1032,21 +1053,27 @@
 </g>
 <!-- list&#45;&gt;compound -->
 <g id="edge9" class="edge"><title>list&#45;&gt;compound</title>
-<g id="a_edge9"><a xlink:title="extends">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4554.04,-916.2C4537.21,-998.356 4482.3,-1266.28 4464.57,-1352.8"/>
 <polygon fill="black" stroke="black" points="4462.56,-1362.65 4460.15,-1351.95 4463.56,-1357.75 4464.56,-1352.85 4464.56,-1352.85 4464.56,-1352.85 4463.56,-1357.75 4468.97,-1353.76 4462.56,-1362.65 4462.56,-1362.65"/>
 </a>
 </g>
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4524" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- list&#45;&gt;listp -->
 <g id="edge8" class="edge"><title>list&#45;&gt;listp</title>
-<g id="a_edge8"><a xlink:title="implements">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4570.05,-916.288C4586.79,-953.145 4619.55,-1025.43 4647,-1087 4667.47,-1132.92 4689.58,-1182.98 4709.62,-1228.51"/>
 <ellipse fill="black" stroke="black" cx="4711.34" cy="-1232.41" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4638" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- type -->
 <g id="node11" class="node"><title>type</title>
@@ -1101,13 +1128,16 @@
 </g>
 <!-- type&#45;&gt;arbitrary -->
 <g id="edge37" class="edge"><title>type&#45;&gt;arbitrary</title>
-<g id="a_edge37"><a xlink:title="complements">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="complements">
 <path fill="none" stroke="black" d="M5351.41,-216.179C5331.29,-278.811 5292,-401.065 5271.01,-466.389"/>
 <polygon fill="none" stroke="black" points="5271.74,-477.207 5264.12,-474.759 5266.57,-467.143 5274.19,-469.59 5271.74,-477.207"/>
 <polyline fill="none" stroke="black" points="5270.38,-468.367 5270.99,-466.463 "/>
 </a>
 </g>
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="5323" y="-303.8" font-family="Courier,monospace" font-size="9.00">complements</text>
+</a>
+</g>
 </g>
 <!-- osp -->
 <g id="node12" class="node"><title>osp</title>
@@ -1221,12 +1251,15 @@
 </g>
 <!-- os&#45;&gt;osp -->
 <g id="edge10" class="edge"><title>os&#45;&gt;osp</title>
-<g id="a_edge10"><a xlink:title="implements">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M5259.41,-194.435C5244.88,-223.947 5214.03,-286.583 5183.62,-348.332"/>
 <ellipse fill="black" stroke="black" cx="5181.68" cy="-352.267" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="5205" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- os_types -->
 <g id="node14" class="node"><title>os_types</title>
@@ -1297,12 +1330,15 @@
 </g>
 <!-- callable&#45;&gt;term -->
 <g id="edge11" class="edge"><title>callable&#45;&gt;term</title>
-<g id="a_edge11"><a xlink:title="extends">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M5057,-1399.3C5053.67,-1448.4 5040.42,-1592.11 4995,-1701 4989.59,-1713.97 4981.26,-1727.04 4973.44,-1737.82"/>
 <polygon fill="black" stroke="black" points="4967.34,-1745.92 4969.76,-1735.22 4970.35,-1741.92 4973.36,-1737.93 4973.36,-1737.93 4973.36,-1737.93 4970.35,-1741.92 4976.95,-1740.63 4967.34,-1745.92 4967.34,-1745.92"/>
 </a>
 </g>
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4998" y="-1693.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- characterp -->
 <g id="node17" class="node"><title>characterp</title>
@@ -1398,21 +1434,27 @@
 </g>
 <!-- character&#45;&gt;atom -->
 <g id="edge13" class="edge"><title>character&#45;&gt;atom</title>
-<g id="a_edge13"><a xlink:title="extends">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4956.88,-529.224C4976.35,-586.288 5039.09,-770.122 5066.72,-851.091"/>
 <polygon fill="black" stroke="black" points="5070.07,-860.898 5062.58,-852.888 5068.45,-856.166 5066.84,-851.434 5066.84,-851.434 5066.84,-851.434 5068.45,-856.166 5071.1,-849.981 5070.07,-860.898 5070.07,-860.898"/>
 </a>
 </g>
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="5019" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- character&#45;&gt;characterp -->
 <g id="edge12" class="edge"><title>character&#45;&gt;characterp</title>
-<g id="a_edge12"><a xlink:title="implements">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4952.77,-529.223C4957,-561.969 4970.57,-633.704 5011,-676 5059.59,-726.834 5105.68,-688.922 5157,-737 5164.1,-743.653 5170.63,-751.115 5176.62,-759.067"/>
 <ellipse fill="black" stroke="black" cx="5179.18" cy="-762.614" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="5132" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- natural -->
 <g id="node19" class="node"><title>natural</title>
@@ -1429,12 +1471,15 @@
 </g>
 <!-- natural&#45;&gt;integer -->
 <g id="edge14" class="edge"><title>natural&#45;&gt;integer</title>
-<g id="a_edge14"><a xlink:title="extends">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4899.44,-194.435C4889.39,-243.642 4860.54,-384.931 4845.08,-460.66"/>
 <polygon fill="black" stroke="black" points="4842.99,-470.894 4840.58,-460.196 4843.99,-465.996 4844.99,-461.097 4844.99,-461.097 4844.99,-461.097 4843.99,-465.996 4849.4,-461.997 4842.99,-470.894 4842.99,-470.894"/>
 </a>
 </g>
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4877" y="-303.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- list(Type) -->
 <g id="node20" class="node"><title>list(Type)</title>
@@ -1451,12 +1496,15 @@
 </g>
 <!-- list(Type)&#45;&gt;list -->
 <g id="edge15" class="edge"><title>list(Type)&#45;&gt;list</title>
-<g id="a_edge15"><a xlink:title="extends">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4587.47,-529.03C4584.4,-563.414 4577.33,-643.595 4572,-711 4568.01,-761.463 4563.85,-819.968 4561.34,-855.983"/>
 <polygon fill="black" stroke="black" points="4560.65,-865.962 4556.85,-855.674 4560.99,-860.974 4561.34,-855.986 4561.34,-855.986 4561.34,-855.986 4560.99,-860.974 4565.83,-856.298 4560.65,-865.962 4560.65,-865.962"/>
 </a>
 </g>
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4572" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- difflist -->
 <g id="node21" class="node"><title>difflist</title>
@@ -1480,21 +1528,27 @@
 </g>
 <!-- difflist&#45;&gt;compound -->
 <g id="edge17" class="edge"><title>difflist&#45;&gt;compound</title>
-<g id="a_edge17"><a xlink:title="extends">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4841.97,-921.237C4834.52,-950.889 4819.22,-996.497 4791,-1026 4758.98,-1059.47 4741.61,-1058.54 4697,-1071 4662.16,-1080.73 4562.49,-1063.48 4535,-1087 4455.68,-1154.86 4453.7,-1293.82 4456.79,-1352.68"/>
 <polygon fill="black" stroke="black" points="4457.41,-1362.7 4452.3,-1353 4457.1,-1357.71 4456.79,-1352.72 4456.79,-1352.72 4456.79,-1352.72 4457.1,-1357.71 4461.28,-1352.45 4457.41,-1362.7 4457.41,-1362.7"/>
 </a>
 </g>
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4735" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- difflist&#45;&gt;listp -->
 <g id="edge16" class="edge"><title>difflist&#45;&gt;listp</title>
-<g id="a_edge16"><a xlink:title="implements">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4843.71,-921.065C4838.02,-959.621 4827.39,-1031.69 4816.21,-1107.48"/>
 <ellipse fill="black" stroke="black" cx="4815.57" cy="-1111.82" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4822" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- numberlistp -->
 <g id="node22" class="node"><title>numberlistp</title>
@@ -1572,21 +1626,27 @@
 </g>
 <!-- numberlist&#45;&gt;list -->
 <g id="edge19" class="edge"><title>numberlist&#45;&gt;list</title>
-<g id="a_edge19"><a xlink:title="extends">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4708.47,-529.313C4697.09,-559.31 4672.79,-622.835 4651,-676 4643.8,-693.561 4597.69,-800.445 4573.6,-856.205"/>
 <polygon fill="black" stroke="black" points="4569.52,-865.665 4569.35,-854.701 4571.5,-861.075 4573.48,-856.485 4573.48,-856.485 4573.48,-856.485 4571.5,-861.075 4577.61,-858.27 4569.52,-865.665 4569.52,-865.665"/>
 </a>
 </g>
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4636" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- numberlist&#45;&gt;numberlistp -->
 <g id="edge18" class="edge"><title>numberlist&#45;&gt;numberlistp</title>
-<g id="a_edge18"><a xlink:title="implements">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4714.68,-529.224C4713.85,-574.158 4711.56,-697.691 4709.89,-787.714"/>
 <ellipse fill="black" stroke="black" cx="4709.82" cy="-791.771" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4712" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- varlistp -->
 <g id="node24" class="node"><title>varlistp</title>
@@ -1685,12 +1745,15 @@
 </g>
 <!-- varlist&#45;&gt;varlistp -->
 <g id="edge20" class="edge"><title>varlist&#45;&gt;varlistp</title>
-<g id="a_edge20"><a xlink:title="implements">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4791.09,-194.086C4783.24,-214.255 4767.45,-247.398 4743,-266 4663.61,-326.397 4599.99,-259.007 4527,-327 4513.05,-339.992 4502.05,-356.15 4493.36,-373.446"/>
 <ellipse fill="black" stroke="black" cx="4491.51" cy="-377.315" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4566" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- queuep -->
 <g id="node26" class="node"><title>queuep</title>
@@ -1750,21 +1813,27 @@
 </g>
 <!-- queue&#45;&gt;compound -->
 <g id="edge22" class="edge"><title>queue&#45;&gt;compound</title>
-<g id="a_edge22"><a xlink:title="extends">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4446.46,-909.082C4448.38,-981.47 4455.89,-1263.29 4458.27,-1352.66"/>
 <polygon fill="black" stroke="black" points="4458.54,-1362.8 4453.78,-1352.93 4458.41,-1357.81 4458.28,-1352.81 4458.28,-1352.81 4458.28,-1352.81 4458.41,-1357.81 4462.77,-1352.69 4458.54,-1362.8 4458.54,-1362.8"/>
 </a>
 </g>
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4451" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- queue&#45;&gt;queuep -->
 <g id="edge21" class="edge"><title>queue&#45;&gt;queuep</title>
-<g id="a_edge21"><a xlink:title="implements">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4448.15,-909.336C4452.43,-937.108 4464.38,-991.904 4495,-1026 4518.51,-1052.18 4546.27,-1031.87 4566,-1061 4615.26,-1133.7 4613.22,-1238.24 4604.45,-1307.59"/>
 <ellipse fill="black" stroke="black" cx="4603.87" cy="-1311.9" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4571" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- dictionaryp -->
 <g id="node28" class="node"><title>dictionaryp</title>
@@ -1870,21 +1939,27 @@
 </g>
 <!-- bintree&#45;&gt;compound -->
 <g id="edge24" class="edge"><title>bintree&#45;&gt;compound</title>
-<g id="a_edge24"><a xlink:title="extends">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4146.3,-926.236C4154.96,-955.754 4171.11,-997.934 4198,-1026 4228.94,-1058.29 4245.4,-1057.41 4288,-1071 4332.13,-1085.08 4357.05,-1055.48 4391,-1087 4466.85,-1157.44 4466.01,-1294.47 4461.76,-1352.73"/>
 <polygon fill="black" stroke="black" points="4460.92,-1362.97 4457.26,-1352.64 4461.33,-1357.99 4461.74,-1353.01 4461.74,-1353.01 4461.74,-1353.01 4461.33,-1357.99 4466.22,-1353.38 4460.92,-1362.97 4460.92,-1362.97"/>
 </a>
 </g>
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4288" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- bintree&#45;&gt;dictionaryp -->
 <g id="edge23" class="edge"><title>bintree&#45;&gt;dictionaryp</title>
-<g id="a_edge23"><a xlink:title="implements">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4119.79,-926.092C4103.09,-959.41 4079.55,-1012.11 4070,-1061 4058.17,-1121.61 4056.45,-1189.94 4058.28,-1247.77"/>
 <ellipse fill="black" stroke="black" cx="4058.43" cy="-1251.86" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4070" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- rbtree -->
 <g id="node30" class="node"><title>rbtree</title>
@@ -1905,21 +1980,27 @@
 </g>
 <!-- rbtree&#45;&gt;compound -->
 <g id="edge26" class="edge"><title>rbtree&#45;&gt;compound</title>
-<g id="a_edge26"><a xlink:title="extends">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M3921.67,-916.26C3930.05,-946.58 3948.69,-997.894 3984,-1026 4034.52,-1066.21 4064.66,-1038.02 4125,-1061 4133.92,-1064.4 4134.81,-1068.41 4144,-1071 4170.47,-1078.46 4370.03,-1069.2 4391,-1087 4470.27,-1154.28 4467.37,-1294.14 4462.16,-1352.99"/>
 <polygon fill="black" stroke="black" points="4461.18,-1363 4457.68,-1352.61 4461.67,-1358.02 4462.16,-1353.04 4462.16,-1353.04 4462.16,-1353.04 4461.67,-1358.02 4466.64,-1353.48 4461.18,-1363 4461.18,-1363"/>
 </a>
 </g>
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4144" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- rbtree&#45;&gt;dictionaryp -->
 <g id="edge25" class="edge"><title>rbtree&#45;&gt;dictionaryp</title>
-<g id="a_edge25"><a xlink:title="implements">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M3911.27,-916.201C3905.36,-954.085 3900.18,-1027.55 3938,-1071 3956.12,-1091.82 3978.71,-1067.26 3998,-1087 4039.41,-1129.37 4058.08,-1191.54 4066.03,-1247.73"/>
 <ellipse fill="black" stroke="black" cx="4066.59" cy="-1252.01" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3938" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- setp -->
 <g id="node31" class="node"><title>setp</title>
@@ -2015,21 +2096,27 @@
 </g>
 <!-- set&#45;&gt;compound -->
 <g id="edge28" class="edge"><title>set&#45;&gt;compound</title>
-<g id="a_edge28"><a xlink:title="extends">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4032.57,-909.387C4036.04,-937.73 4046.91,-993.941 4080,-1026 4115.63,-1060.52 4139.08,-1044.88 4186,-1061 4198.5,-1065.29 4201.09,-1068.16 4214,-1071 4252.57,-1079.49 4361.22,-1061.06 4391,-1087 4469.23,-1155.12 4467,-1293.93 4462.07,-1352.72"/>
 <polygon fill="black" stroke="black" points="4461.14,-1362.73 4457.58,-1352.36 4461.6,-1357.75 4462.07,-1352.77 4462.07,-1352.77 4462.07,-1352.77 4461.6,-1357.75 4466.55,-1353.19 4461.14,-1362.73 4461.14,-1362.73"/>
 </a>
 </g>
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4214" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- set&#45;&gt;setp -->
 <g id="edge27" class="edge"><title>set&#45;&gt;setp</title>
-<g id="a_edge27"><a xlink:title="implements">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4027.53,-909.082C4016.77,-962.141 3983.18,-1127.72 3958.87,-1247.56"/>
 <ellipse fill="black" stroke="black" cx="3958" cy="-1251.82" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3997" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- set(Type) -->
 <g id="node33" class="node"><title>set(Type)</title>
@@ -2046,12 +2133,15 @@
 </g>
 <!-- set(Type)&#45;&gt;set -->
 <g id="edge29" class="edge"><title>set(Type)&#45;&gt;set</title>
-<g id="a_edge29"><a xlink:title="extends">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4133.12,-529.224C4116.13,-589.244 4059.45,-789.502 4038.7,-862.811"/>
 <polygon fill="black" stroke="black" points="4035.9,-872.675 4034.3,-861.827 4037.27,-867.864 4038.63,-863.053 4038.63,-863.053 4038.63,-863.053 4037.27,-867.864 4042.96,-864.278 4035.9,-872.675 4035.9,-872.675"/>
 </a>
 </g>
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4082" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- heapp -->
 <g id="node34" class="node"><title>heapp</title>
@@ -2114,21 +2204,27 @@
 </g>
 <!-- heap(Order)&#45;&gt;compound -->
 <g id="edge31" class="edge"><title>heap(Order)&#45;&gt;compound</title>
-<g id="a_edge31"><a xlink:title="extends">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4336.27,-909.107C4347.25,-939.435 4370.28,-1004.74 4386,-1061 4415.89,-1167.96 4442.69,-1297.56 4453.7,-1352.87"/>
 <polygon fill="black" stroke="black" points="4455.69,-1362.91 4449.33,-1353.97 4454.72,-1358.01 4453.74,-1353.1 4453.74,-1353.1 4453.74,-1353.1 4454.72,-1358.01 4458.16,-1352.23 4455.69,-1362.91 4455.69,-1362.91"/>
 </a>
 </g>
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4389" y="-1063.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- heap(Order)&#45;&gt;heapp -->
 <g id="edge30" class="edge"><title>heap(Order)&#45;&gt;heapp</title>
-<g id="a_edge30"><a xlink:title="implements">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4330,-909.082C4330,-970.943 4330,-1185.75 4330,-1302.69"/>
 <ellipse fill="black" stroke="black" cx="4330" cy="-1306.94" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4330" y="-1063.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- minheap -->
 <g id="node36" class="node"><title>minheap</title>
@@ -2145,12 +2241,15 @@
 </g>
 <!-- minheap&#45;&gt;heap(Order) -->
 <g id="edge32" class="edge"><title>minheap&#45;&gt;heap(Order)</title>
-<g id="a_edge32"><a xlink:title="extends">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4342.41,-529.224C4340.35,-589.121 4333.48,-788.682 4330.95,-862.359"/>
 <polygon fill="black" stroke="black" points="4330.6,-872.675 4326.44,-862.526 4330.77,-867.678 4330.94,-862.681 4330.94,-862.681 4330.94,-862.681 4330.77,-867.678 4335.44,-862.835 4330.6,-872.675 4330.6,-872.675"/>
 </a>
 </g>
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4337" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- maxheap -->
 <g id="node37" class="node"><title>maxheap</title>
@@ -2167,12 +2266,15 @@
 </g>
 <!-- maxheap&#45;&gt;heap(Order) -->
 <g id="edge33" class="edge"><title>maxheap&#45;&gt;heap(Order)</title>
-<g id="a_edge33"><a xlink:title="extends">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M4253.65,-529.224C4266.35,-589.244 4308.73,-789.502 4324.25,-862.811"/>
 <polygon fill="black" stroke="black" points="4326.33,-872.675 4319.86,-863.823 4325.3,-867.783 4324.26,-862.891 4324.26,-862.891 4324.26,-862.891 4325.3,-867.783 4328.67,-861.96 4326.33,-872.675 4326.33,-872.675"/>
 </a>
 </g>
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4293" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- comparingp -->
 <g id="node38" class="node"><title>comparingp</title>
@@ -2282,12 +2384,15 @@
 </g>
 <!-- random&#45;&gt;randomp -->
 <g id="edge34" class="edge"><title>random&#45;&gt;randomp</title>
-<g id="a_edge34"><a xlink:title="implements">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4256.69,-206.006C4245.51,-225.01 4228.87,-249.327 4209,-266 4160.42,-306.772 4122.65,-280.064 4080,-327 4055.82,-353.611 4040.33,-389.739 4030.5,-422.866"/>
 <ellipse fill="black" stroke="black" cx="4029.34" cy="-426.922" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4116" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- backend_random -->
 <g id="node41" class="node"><title>backend_random</title>
@@ -2304,12 +2409,15 @@
 </g>
 <!-- backend_random&#45;&gt;randomp -->
 <g id="edge35" class="edge"><title>backend_random&#45;&gt;randomp</title>
-<g id="a_edge35"><a xlink:title="implements">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4531.74,-194.155C4518.75,-214.393 4494.46,-247.604 4465,-266 4398.7,-307.395 4372.08,-298.045 4295,-311 4247.75,-318.941 4118.16,-298.026 4080,-327 4049.99,-349.787 4033.6,-387.467 4024.66,-422.733"/>
 <ellipse fill="black" stroke="black" cx="4023.69" cy="-426.795" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4373" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- fast_random -->
 <g id="node42" class="node"><title>fast_random</title>
@@ -2333,12 +2441,15 @@
 </g>
 <!-- fast_random&#45;&gt;randomp -->
 <g id="edge36" class="edge"><title>fast_random&#45;&gt;randomp</title>
-<g id="a_edge36"><a xlink:title="implements">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4384.7,-206.245C4373.01,-225.857 4355.17,-250.788 4333,-266 4272.8,-307.317 4246.22,-294.912 4175,-311 4133.24,-320.434 4112.86,-299.556 4080,-327 4051.32,-350.95 4035.1,-388.377 4025.93,-423.159"/>
 <ellipse fill="black" stroke="black" cx="4024.94" cy="-427.119" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="4236" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- datep -->
 <g id="node44" class="node"><title>datep</title>
@@ -2389,12 +2500,15 @@
 </g>
 <!-- date&#45;&gt;datep -->
 <g id="edge38" class="edge"><title>date&#45;&gt;datep</title>
-<g id="a_edge38"><a xlink:title="implements">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4156.68,-194.096C4149.68,-213.963 4135.55,-246.506 4113,-266 4054.48,-316.585 4005.02,-272.634 3950,-327 3915.8,-360.795 3897.73,-412.926 3888.4,-452.917"/>
 <ellipse fill="black" stroke="black" cx="3887.52" cy="-456.84" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3993" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- timep -->
 <g id="node46" class="node"><title>timep</title>
@@ -2436,12 +2550,15 @@
 </g>
 <!-- time&#45;&gt;timep -->
 <g id="edge39" class="edge"><title>time&#45;&gt;timep</title>
-<g id="a_edge39"><a xlink:title="implements">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M4061.04,-194.024C4054.31,-214.131 4040.37,-247.214 4017,-266 3942.24,-326.088 3878.51,-259.874 3810,-327 3771.95,-364.285 3758.8,-426.354 3754.3,-467.721"/>
 <ellipse fill="black" stroke="black" cx="3753.9" cy="-471.725" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3847" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- event_registryp -->
 <g id="node48" class="node"><title>event_registryp</title>
@@ -2495,12 +2612,15 @@
 </g>
 <!-- event_registry&#45;&gt;event_registryp -->
 <g id="edge40" class="edge"><title>event_registry&#45;&gt;event_registryp</title>
-<g id="a_edge40"><a xlink:title="implements">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M3555.35,-194.435C3564.28,-240.917 3589.01,-369.566 3603.99,-447.504"/>
 <ellipse fill="black" stroke="black" cx="3604.83" cy="-451.887" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3577" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- before_event_registry -->
 <g id="node50" class="node"><title>before_event_registry</title>
@@ -2517,12 +2637,15 @@
 </g>
 <!-- before_event_registry&#45;&gt;event_registryp -->
 <g id="edge41" class="edge"><title>before_event_registry&#45;&gt;event_registryp</title>
-<g id="a_edge41"><a xlink:title="implements">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M3901.86,-194.234C3882.65,-213.07 3850.09,-243.554 3819,-266 3786.55,-289.426 3777.34,-294.227 3741,-311 3721.73,-319.896 3711.53,-312.529 3696,-327 3661.52,-359.134 3641.1,-408.741 3629.53,-448.204"/>
 <ellipse fill="black" stroke="black" cx="3628.42" cy="-452.105" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3762" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- after_event_registry -->
 <g id="node51" class="node"><title>after_event_registry</title>
@@ -2539,12 +2662,15 @@
 </g>
 <!-- after_event_registry&#45;&gt;event_registryp -->
 <g id="edge42" class="edge"><title>after_event_registry&#45;&gt;event_registryp</title>
-<g id="a_edge42"><a xlink:title="implements">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M3718.35,-194.435C3703.24,-241.011 3661.38,-370.087 3636.12,-447.976"/>
 <ellipse fill="black" stroke="black" cx="3634.81" cy="-452.01" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3683" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- monitorp -->
 <g id="node52" class="node"><title>monitorp</title>
@@ -2600,12 +2726,15 @@
 </g>
 <!-- monitor&#45;&gt;monitorp -->
 <g id="edge43" class="edge"><title>monitor&#45;&gt;monitorp</title>
-<g id="a_edge43"><a xlink:title="implements">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M3424.73,-194.435C3429.33,-240.917 3442.08,-369.566 3449.81,-447.504"/>
 <ellipse fill="black" stroke="black" cx="3450.24" cy="-451.834" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3436" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- observer -->
 <g id="node54" class="node"><title>observer</title>
@@ -2721,12 +2850,15 @@
 </g>
 <!-- proto_hierarchyp&#45;&gt;hierarchyp -->
 <g id="edge44" class="edge"><title>proto_hierarchyp&#45;&gt;hierarchyp</title>
-<g id="a_edge44"><a xlink:title="extends">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M3281.33,-551.029C3261.46,-617.507 3220.93,-753.072 3197.6,-831.117"/>
 <polygon fill="black" stroke="black" points="3194.71,-840.806 3193.26,-829.936 3196.14,-836.015 3197.57,-831.225 3197.57,-831.225 3197.57,-831.225 3196.14,-836.015 3201.88,-832.514 3194.71,-840.806 3194.71,-840.806"/>
 </a>
 </g>
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3234" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- proto_hierarchy -->
 <g id="node58" class="node"><title>proto_hierarchy</title>
@@ -2745,12 +2877,15 @@
 </g>
 <!-- proto_hierarchy&#45;&gt;proto_hierarchyp -->
 <g id="edge45" class="edge"><title>proto_hierarchy&#45;&gt;proto_hierarchyp</title>
-<g id="a_edge45"><a xlink:title="implements">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M3041.86,-194.116C3056.67,-213.124 3082.42,-244.021 3109,-266 3149.41,-299.419 3175.16,-287.805 3210,-327 3245.09,-366.478 3267.71,-423.271 3280.33,-463.088"/>
 <ellipse fill="black" stroke="black" cx="3281.54" cy="-466.994" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3192" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- class_hierarchyp -->
 <g id="node59" class="node"><title>class_hierarchyp</title>
@@ -2818,12 +2953,15 @@
 </g>
 <!-- class_hierarchyp&#45;&gt;hierarchyp -->
 <g id="edge46" class="edge"><title>class_hierarchyp&#45;&gt;hierarchyp</title>
-<g id="a_edge46"><a xlink:title="extends">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M3137.24,-611.315C3147.94,-681.061 3161.9,-772.021 3170.9,-830.721"/>
 <polygon fill="black" stroke="black" points="3172.47,-840.934 3166.51,-831.733 3171.71,-835.992 3170.95,-831.05 3170.95,-831.05 3170.95,-831.05 3171.71,-835.992 3175.4,-830.367 3172.47,-840.934 3172.47,-840.934"/>
 </a>
 </g>
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3153" y="-713.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- class_hierarchy -->
 <g id="node60" class="node"><title>class_hierarchy</title>
@@ -2842,12 +2980,15 @@
 </g>
 <!-- class_hierarchy&#45;&gt;class_hierarchyp -->
 <g id="edge47" class="edge"><title>class_hierarchy&#45;&gt;class_hierarchyp</title>
-<g id="a_edge47"><a xlink:title="implements">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2884.84,-194.3C2900.12,-212.924 2925.89,-242.974 2951,-266 2984.22,-296.456 3003.27,-292.277 3032,-327 3050.77,-349.691 3066.85,-376.956 3080,-403.428"/>
 <ellipse fill="black" stroke="black" cx="3081.87" cy="-407.274" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="3016" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- metap -->
 <g id="node61" class="node"><title>metap</title>
@@ -2946,12 +3087,15 @@
 </g>
 <!-- meta&#45;&gt;metap -->
 <g id="edge48" class="edge"><title>meta&#45;&gt;metap</title>
-<g id="a_edge48"><a xlink:title="implements">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2750.54,-194.298C2758.41,-213.469 2773.11,-244.512 2793,-266 2826.58,-302.277 2854.64,-288.791 2886,-327 2897.41,-340.898 2907.25,-356.786 2915.68,-373.264"/>
 <ellipse fill="black" stroke="black" cx="2917.68" cy="-377.288" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2870" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- loopp -->
 <g id="node63" class="node"><title>loopp</title>
@@ -3014,12 +3158,15 @@
 </g>
 <!-- loop&#45;&gt;loopp -->
 <g id="edge49" class="edge"><title>loop&#45;&gt;loopp</title>
-<g id="a_edge49"><a xlink:title="implements">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2655.22,-194.179C2663.6,-212.967 2678.65,-243.409 2697,-266 2723.23,-298.293 2744.89,-292.406 2768,-327 2789.15,-358.659 2803.35,-398.361 2812.61,-432.687"/>
 <ellipse fill="black" stroke="black" cx="2813.73" cy="-436.962" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2755" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- statisticsp -->
 <g id="node65" class="node"><title>statisticsp</title>
@@ -3114,12 +3261,15 @@
 </g>
 <!-- statistics&#45;&gt;statisticsp -->
 <g id="edge50" class="edge"><title>statistics&#45;&gt;statisticsp</title>
-<g id="a_edge50"><a xlink:title="implements">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2706,-529.224C2706,-570.121 2706,-676.129 2706,-762.721"/>
 <ellipse fill="black" stroke="black" cx="2706" cy="-766.771" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2706" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- population -->
 <g id="node67" class="node"><title>population</title>
@@ -3136,13 +3286,16 @@
 </g>
 <!-- population&#45;&gt;statistics -->
 <g id="edge51" class="edge"><title>population&#45;&gt;statistics</title>
-<g id="a_edge51"><a xlink:title="imports">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="imports">
 <path fill="none" stroke="black" d="M2448.2,-194.152C2459.22,-213.477 2479.2,-244.932 2503,-266 2534.13,-293.556 2546.52,-295.28 2585,-311 2609.36,-320.95 2622.82,-308.987 2642,-327 2686.39,-368.684 2700,-442.845 2704.17,-482.763"/>
 <polygon fill="black" stroke="black" points="2709.08,-492.462 2701.11,-493.194 2700.38,-485.227 2708.34,-484.496 2709.08,-492.462"/>
 <polyline fill="none" stroke="black" points="2704.36,-484.861 2704.18,-482.87 "/>
 </a>
 </g>
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2585" y="-303.8" font-family="Courier,monospace" font-size="9.00">imports</text>
+</a>
+</g>
 </g>
 <!-- sample -->
 <g id="node68" class="node"><title>sample</title>
@@ -3159,13 +3312,16 @@
 </g>
 <!-- sample&#45;&gt;statistics -->
 <g id="edge52" class="edge"><title>sample&#45;&gt;statistics</title>
-<g id="a_edge52"><a xlink:title="imports">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="imports">
 <path fill="none" stroke="black" d="M2560.19,-194.297C2569.92,-212.405 2585.95,-241.551 2601,-266 2618.12,-293.817 2627.38,-297.789 2642,-327 2668.46,-379.869 2688.74,-446.346 2698.87,-482.864"/>
 <polygon fill="black" stroke="black" points="2705.42,-491.708 2697.7,-493.812 2695.6,-486.093 2703.32,-483.99 2705.42,-491.708"/>
 <polyline fill="none" stroke="black" points="2699.46,-485.042 2698.93,-483.112 "/>
 </a>
 </g>
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2633" y="-303.8" font-family="Courier,monospace" font-size="9.00">imports</text>
+</a>
+</g>
 </g>
 <!-- intervalp -->
 <g id="node69" class="node"><title>intervalp</title>
@@ -3243,12 +3399,15 @@
 </g>
 <!-- interval&#45;&gt;intervalp -->
 <g id="edge53" class="edge"><title>interval&#45;&gt;intervalp</title>
-<g id="a_edge53"><a xlink:title="implements">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2328.93,-194.101C2339.16,-212.821 2357.08,-243.204 2377,-266 2397.33,-289.267 2402.33,-297.245 2430,-311 2459.35,-325.591 2477.13,-305.64 2502,-327 2526.31,-347.88 2542.34,-378.111 2552.89,-408.006"/>
 <ellipse fill="black" stroke="black" cx="2554.18" cy="-411.804" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2430" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- loggingp -->
 <g id="node71" class="node"><title>loggingp</title>
@@ -3304,12 +3463,15 @@
 </g>
 <!-- logging&#45;&gt;loggingp -->
 <g id="edge54" class="edge"><title>logging&#45;&gt;loggingp</title>
-<g id="a_edge54"><a xlink:title="implements">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2119.79,-194.078C2128.3,-213.626 2144.54,-245.571 2167,-266 2200.97,-296.896 2216.29,-296.93 2260,-311 2299.51,-323.717 2319.59,-301.075 2352,-327 2389.02,-356.614 2408.21,-407.377 2418.03,-447.937"/>
 <ellipse fill="black" stroke="black" cx="2418.98" cy="-452.006" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2260" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- logger -->
 <g id="node73" class="node"><title>logger</title>
@@ -3326,12 +3488,15 @@
 </g>
 <!-- logger&#45;&gt;loggingp -->
 <g id="edge55" class="edge"><title>logger&#45;&gt;loggingp</title>
-<g id="a_edge55"><a xlink:title="implements">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2221.87,-194.178C2230.1,-213.241 2245.26,-244.187 2265,-266 2272.92,-274.754 2344.61,-317.794 2352,-327 2380.45,-362.438 2399.78,-410.033 2411.82,-447.8"/>
 <ellipse fill="black" stroke="black" cx="2413.09" cy="-451.883" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2330" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- gensym -->
 <g id="node74" class="node"><title>gensym</title>
@@ -3386,12 +3551,15 @@
 </g>
 <!-- meta_compiler&#45;&gt;expanding -->
 <g id="edge56" class="edge"><title>meta_compiler&#45;&gt;expanding</title>
-<g id="a_edge56"><a xlink:title="implements">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M2276.52,-529.103C2267.61,-560.725 2245.23,-629.354 2208,-676 2137.56,-764.261 2022.62,-835.237 1962.13,-868.861"/>
 <ellipse fill="black" stroke="black" cx="1958.53" cy="-870.843" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2176" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- assignvarsp -->
 <g id="node76" class="node"><title>assignvarsp</title>
@@ -3442,12 +3610,15 @@
 </g>
 <!-- assignvars&#45;&gt;assignvarsp -->
 <g id="edge57" class="edge"><title>assignvars&#45;&gt;assignvarsp</title>
-<g id="a_edge57"><a xlink:title="implements">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M1871.61,-194.278C1882.21,-214.015 1901.95,-246.136 1927,-266 1982.43,-309.945 2024.93,-276.052 2074,-327 2106.93,-361.187 2124.18,-412.732 2133.05,-452.415"/>
 <ellipse fill="black" stroke="black" cx="2133.98" cy="-456.78" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="2054" y="-303.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- hook_pipeline(Pipeline) -->
 <g id="node78" class="node"><title>hook_pipeline(Pipeline)</title>
@@ -3464,12 +3635,15 @@
 </g>
 <!-- hook_pipeline(Pipeline)&#45;&gt;expanding -->
 <g id="edge58" class="edge"><title>hook_pipeline(Pipeline)&#45;&gt;expanding</title>
-<g id="a_edge58"><a xlink:title="implements">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M1830.37,-529.224C1845.74,-589.736 1897.31,-792.794 1915.55,-864.588"/>
 <ellipse fill="black" stroke="black" cx="1916.62" cy="-868.798" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="1877" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- hook_set(Set) -->
 <g id="node79" class="node"><title>hook_set(Set)</title>
@@ -3486,12 +3660,15 @@
 </g>
 <!-- hook_set(Set)&#45;&gt;expanding -->
 <g id="edge59" class="edge"><title>hook_set(Set)&#45;&gt;expanding</title>
-<g id="a_edge59"><a xlink:title="implements">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M1999.31,-529.224C1986.34,-589.736 1942.83,-792.794 1927.45,-864.588"/>
 <ellipse fill="black" stroke="black" cx="1926.55" cy="-868.764" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="1961" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- java_access_protocol -->
 <g id="node80" class="node"><title>java_access_protocol</title>
@@ -3606,12 +3783,15 @@
 </g>
 <!-- java(Reference,ReturnValue)&#45;&gt;java_access_protocol -->
 <g id="edge61" class="edge"><title>java(Reference,ReturnValue)&#45;&gt;java_access_protocol</title>
-<g id="a_edge61"><a xlink:title="implements">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M1602,-529.224C1602,-583.372 1602,-751.66 1602,-837.9"/>
 <ellipse fill="black" stroke="black" cx="1602" cy="-841.983" rx="4" ry="4"/>
 </a>
 </g>
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="1602" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- forwarding -->
 <g id="node95" class="node"><title>forwarding</title>
@@ -3630,12 +3810,15 @@
 </g>
 <!-- java(Reference,ReturnValue)&#45;&gt;forwarding -->
 <g id="edge60" class="edge"><title>java(Reference,ReturnValue)&#45;&gt;forwarding</title>
-<g id="a_edge60"><a xlink:title="implements">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M1611.2,-529.224C1643.67,-589.982 1752.94,-794.447 1790.88,-865.457"/>
 <ellipse fill="black" stroke="black" cx="1792.86" cy="-869.147" rx="4.00002" ry="4.00002"/>
 </a>
 </g>
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="1710" y="-713.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- java(Reference) -->
 <g id="node83" class="node"><title>java(Reference)</title>
@@ -3652,12 +3835,15 @@
 </g>
 <!-- java(Reference)&#45;&gt;java(Reference,ReturnValue) -->
 <g id="edge62" class="edge"><title>java(Reference)&#45;&gt;java(Reference,ReturnValue)</title>
-<g id="a_edge62"><a xlink:title="extends">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="extends">
 <path fill="none" stroke="black" d="M1639.91,-194.435C1633.36,-248.944 1613.24,-416.447 1605.28,-482.659"/>
 <polygon fill="black" stroke="black" points="1604.07,-492.738 1600.8,-482.273 1604.67,-487.774 1605.27,-482.809 1605.27,-482.809 1605.27,-482.809 1604.67,-487.774 1609.73,-483.346 1604.07,-492.738 1604.07,-492.738"/>
 </a>
 </g>
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="1627" y="-303.8" font-family="Courier,monospace" font-size="9.00">extends</text>
+</a>
+</g>
 </g>
 <!-- java -->
 <g id="node84" class="node"><title>java</title>
@@ -3674,12 +3860,15 @@
 </g>
 <!-- java&#45;&gt;java_utils_protocol -->
 <g id="edge63" class="edge"><title>java&#45;&gt;java_utils_protocol</title>
-<g id="a_edge63"><a xlink:title="implements">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
 <path fill="none" stroke="black" d="M1518.38,-194.083C1509.03,-212.265 1493.37,-241.703 1478,-266 1460.13,-294.249 1444.5,-295.264 1434,-327 1384.41,-476.878 1394.2,-661.715 1408.19,-777.755"/>
 <ellipse fill="black" stroke="black" cx="1408.72" cy="-782.02" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <text text-anchor="start" x="1434" y="-508.8" font-family="Courier,monospace" font-size="9.00">implements</text>
+</a>
+</g>
 </g>
 <!-- redis -->
 <g id="node85" class="node"><title>redis</title>

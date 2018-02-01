@@ -26,7 +26,7 @@
 		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
 		date is 2017/12/28,
-		comment is 'Unit tests for depth of inheritance code metric.'
+		comment is 'Unit tests for the depth of inheritance code metric.'
 	]).
 
 	cover(code_metric).
