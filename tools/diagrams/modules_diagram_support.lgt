@@ -2,9 +2,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.14,
+		version is 0.15,
 		author is 'Paulo Moura',
-		date is 2017/08/10,
+		date is 2018/02/02,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -67,7 +67,7 @@
 			 atom_concat(Directory0, '/', Directory),
 			 file_base_name(File, Basename)			
 			}.
-		property_module(calls(Callee, [caller(Caller)]), Module) :-
+		property_module(calls(Callee, [caller(Caller)| OtherProperties]), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
 			 xref_called(File, Callee0, Caller0),
@@ -76,6 +76,10 @@
 				Caller = ':'(ForModule,CallerFunctor/CallerArity)
 			 ;	functor(Caller0, CallerFunctor, CallerArity),
 			 	Caller = CallerFunctor/CallerArity
+			 ),
+			 (	xref_defined(File, Caller0, local(Line)) ->
+			 	OtherProperties = [line_count(Line)]
+			 ;	OtherProperties = []
 			 ),
 			 functor(Caller, CallerFunctor, CallerArity),
 			 (	Callee0 = Object::Callee1 ->
@@ -165,7 +169,7 @@
 			 atom_concat(Directory0, '/', Directory),
 			 file_base_name(File, Basename)			
 			}.
-		property_module(calls(Callee, [caller(Caller)]), Module) :-
+		property_module(calls(Callee, [caller(Caller)| OtherProperties]), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
 			 xref_called(File, Callee0, Caller0),
@@ -174,6 +178,10 @@
 				Caller = ':'(ForModule,CallerFunctor/CallerArity)
 			 ;	functor(Caller0, CallerFunctor, CallerArity),
 			 	Caller = CallerFunctor/CallerArity
+			 ),
+			 (	xref_defined(File, Caller0, local(Line)) ->
+			 	OtherProperties = [line_count(Line)]
+			 ;	OtherProperties = []
 			 ),
 			 (	Callee0 = Object::Callee1 ->
 			 	functor(Callee1, CalleeFunctor, CalleeArity),

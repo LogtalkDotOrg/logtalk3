@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.17,
+		version is 2.18,
 		author is 'Paulo Moura',
-		date is 2018/02/01,
+		date is 2018/02/02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -323,8 +323,8 @@
 				object_property(Entity, file(Path))
 			;	current_category(Entity) ->
 				object_property(Entity, file(Path))
-			;	current_protocol(Entity) ->
-				protocol_property(Entity, file(Path))
+			;	{atom(Entity), current_module(Entity)} ->
+				modules_diagram_support::module_property(Entity, file(Path))
 			;	% entity is not loaded
 				fail
 			),

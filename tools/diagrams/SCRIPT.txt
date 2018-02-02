@@ -130,6 +130,8 @@ yes
 | ?- {diagrams(loader)}, use_module(library(csv)), xref_diagram::files(csv, [csv,record,pure_input,debug,option,error], [node_type_captions(true),layout(top_to_bottom)]).
 yes
 
+| ?- {diagrams(loader)}, current_prolog_flag(home, Home), atom_concat(Home, '/library', Path), use_module(library(csv)), xref_diagram::entity(csv, [node_type_captions(true),layout(top_to_bottom),url_prefixes('https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', 'http://www.swi-prolog.org/pldoc/man?section='), omit_path_prefixes([Path])]).
+
 
 % SWI-Prolog libraries entity diagram (with links to GitHub SWI-Prolog
 % repository and the modules documentation in the SWI-Prolog website):
@@ -141,5 +143,5 @@ yes
 % using its full path as using only the name would pick the "pairs"
 % Logtalk object instead
 
-| ?- module_property(pairs, file(PairsFile)), findall(Path, file_search_path(library, Path), Paths), entity_diagram::files('SWI-Prolog library', [aggregate, apply, assoc, broadcast, charsio, check, clpfd, csv, debug, gensym, lists, nb_set, www_browser, option, optparse, ordsets, PairsFile, pio, predicate_options, prolog_pack, prolog_xref, quasi_quotations, random, readutil, record, simplex, thread_pool, ugraphs, url, varnumbers], [url_prefixes('https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', 'http://www.swi-prolog.org/pldoc/man?section='), entity_url_suffix_target('',''), omit_path_prefixes(Paths)]).
+| ?- {diagrams(loader)}, module_property(pairs, file(PairsFile)), findall(Path, file_search_path(library, Path), Paths), current_prolog_flag(home, Home), atom_concat(Home, '/library', HomePath), entity_diagram::files('SWI-Prolog library', [aggregate, apply, assoc, broadcast, charsio, check, clpfd, csv, debug, gensym, lists, nb_set, www_browser, option, optparse, ordsets, PairsFile, pio, predicate_options, prolog_pack, prolog_xref, quasi_quotations, random, readutil, record, simplex, thread_pool, ugraphs, url, varnumbers], [url_prefixes('https://github.com/SWI-Prolog/swipl-devel/tree/master/library/', 'http://www.swi-prolog.org/pldoc/man?section='), entity_url_suffix_target('',''), omit_path_prefixes([HomePath| Paths])]).
 yes
