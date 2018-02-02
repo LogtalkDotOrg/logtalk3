@@ -71,7 +71,7 @@ source file line for the corresponding predicate clause.
 for simplifying implementation of new code metrics.
 
 * CHANGED: The number of clauses metric to print just the total number of
-clauses per entity.
+clauses per entity, library, file, or directory.
 
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.

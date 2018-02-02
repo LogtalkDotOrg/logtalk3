@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/01,
+		date is 2018/02/02,
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
@@ -76,10 +76,12 @@
 		Nocs == 1.
 
 	test(noc_prot_a) :-
-		\+ entity_score(prot_a, _).
+		entity_score(prot_a, Nocs),
+		Nocs == 0.
 
 	test(noc_prot_b) :-
-		\+ entity_score(prot_b, _).
+		entity_score(prot_b, Nocs),
+		Nocs == 0.
 
 	test(noc_car) :-
 		entity_score(car, Nocs),
