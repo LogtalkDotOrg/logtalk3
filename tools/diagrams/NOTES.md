@@ -29,7 +29,16 @@ cross-referencing diagrams for plain Prolog files.
 
 Linking library diagrams to entity diagrams to predicate cross-referencing
 diagrams is also supported when using SVG output. This feature allows using
-diagrams for navigating complex code by zooming into details.
+diagrams for navigating complex code by zooming into details. SVG output
+can also easily link to both source code repositories and API documentation.
+This allows diagrams to be used for source code navigation.
+
+All diagrams support a comprehensive set of options to customize the final
+contents and appearance.
+
+Diagram generation can be easily automated using the `doclet` tool and the
+`logtalk_doclet` script. See the `doclet` tool examples and documentation
+for details.
 
 
 API documentation
