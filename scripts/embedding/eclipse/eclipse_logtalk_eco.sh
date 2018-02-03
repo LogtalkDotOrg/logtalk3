@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   This script creates a ECLiPSe logtalk.asm file
+##   This script creates a ECLiPSe logtalk.eco file
 ##   with the Logtalk compiler and runtime
 ## 
 ##   Last updated on January 31, 2018
@@ -72,7 +72,7 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script creates a ECLiPSe logtalk.asm file with the Logtalk compiler and runtime"
+	echo "This script creates a ECLiPSe logtalk.eco file with the Logtalk compiler and runtime"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"
@@ -134,6 +134,6 @@ cat \
     core.pl \
     > logtalk.pl
 
-eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:asm]),halt"
+eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:eco]),halt"
 
 rm *.pl

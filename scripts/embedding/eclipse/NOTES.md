@@ -17,10 +17,10 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains example scripts for creating ECLiPSe `.asm` files
+This directory contains example scripts for creating ECLiPSe `.eco` files
 from Logtalk core files and Logtalk source files.
 
 The following scripts are provided:
 
-- `eclipse_logtalk_asm.sh`  
-	creates a `logtalk.asm` file with the Logtalk compiler and runtime
+- `eclipse_logtalk_eco.sh`  
+	creates a `logtalk.eco` file with the Logtalk compiler and runtime
