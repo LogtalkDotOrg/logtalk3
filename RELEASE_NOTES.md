@@ -56,6 +56,8 @@ hook predicate.
 Library
 -------
 
+* FIXED: Added missing `either` library source file.
+
 * FIXED: Workaround XSB parser bug when loading the `random` library.
 
 Tools
