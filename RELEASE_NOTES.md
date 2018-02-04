@@ -53,6 +53,9 @@ hook predicate.
 
 * IMPROVED: Documentation of the `lgtunit` tool.
 
+* FIXED: The `update_html_docs.sh` script to also update the contributions API
+documentation.
+
 Library
 -------
 
