@@ -158,7 +158,7 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.36.0; visit the <http://www.graphviz.org/> website for more
+version 2.38.0; visit the <http://www.graphviz.org/> website for more
 information). Versions 2.40 and 2.41 have a nasty regression in the SVG
 exporter where text overflows the boxes that should contain it.
 
@@ -228,13 +228,13 @@ generated diagrams. For entity diagrams the options are:
 - `node_type_captions(Boolean)`  
 	print/omit node type captions (`true` or `false`; default is `true`)
 - `inheritance_relations(Boolean)`  
-	print/omit inheritance relations (default depends on the specific diagram)
+	print/omit inheritance relations (`true` or `false`; default is `true` for entity inheritance diagrams and `false` for other entity diagrams)
 - `provide_relations(Boolean)`  
-	print/omit provide relations (default depends on the specific diagram)
+	print/omit provide relations (`true` or `false`; default is `false`)
 - `xref_relations(Boolean)`  
-	print/omit predicate call cross reference relations (default depends on the specific diagram)
+	print/omit predicate call cross reference relations (`true` or `false`; default depends on the specific diagram)
 - `xref_calls(Boolean)`  
-	print/omit predicate cross reference calls (default depends on the specific diagram)
+	print/omit predicate cross reference calls (`true` or `false`; default depends on the specific diagram)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)
 - `exclude_files(Files)`  
@@ -252,7 +252,7 @@ generated diagrams. For entity diagrams the options are:
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `zoom(Boolean)`  
-	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
+	add/omit zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
@@ -291,7 +291,7 @@ For file diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
-	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
+	add/omit zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
@@ -322,7 +322,7 @@ For library diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
-	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
+	add/omit zoom links and icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
 	extension for zoom linked diagrams (an atom; default is `'.svg'`)
 
