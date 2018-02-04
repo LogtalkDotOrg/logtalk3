@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2017/07/10,
+		date is 2018/02/04,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format'],
 		see_also is [library_dependency_diagram(_), file_dependency_diagram(_)]
@@ -118,8 +118,8 @@
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, exclude only the "startup" library:
-	default_option(exclude_libraries([startup])).
+	% by default, exclude only the "startup" and "scratch_directory" libraries:
+	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('directory_index.html', '#')).
 	% by default, don't zooming into libraries and entities:

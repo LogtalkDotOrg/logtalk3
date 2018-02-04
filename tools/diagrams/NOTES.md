@@ -212,13 +212,13 @@ A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
 
 - `layout(Layout)`  
-	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default depends on the kind of diagram)
+	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `bottom_to_top`)
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
 	print/omit current date and time (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
-	print/omit public predicates (default depends on the specific diagram)
+	print/omit public predicates (`true` or `false`; default is `true`)
 - `file_labels(Boolean)`  
 	print/omit file labels (`true` or `false`; default is `true`)
 - `file_extensions(Boolean)`  
@@ -240,7 +240,7 @@ generated diagrams. For entity diagrams the options are:
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
-	list of libraries to exclude (default is `[startup]`)
+	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 - `path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)`  
@@ -265,7 +265,7 @@ In the particular case of cross-referencing diagrams, there is also the option:
 For file diagrams the options are:
 
 - `layout(Layout)`  
-	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default depends on the kind of diagram)
+	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `top_to_bottom`)
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
@@ -289,7 +289,7 @@ For file diagrams the options are:
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
-	list of libraries to exclude (default is `[startup]`)
+	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
 	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  
@@ -298,7 +298,7 @@ For file diagrams the options are:
 For library diagrams the options are:
 
 - `layout(Layout)`  
-	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default depends on the kind of diagram)
+	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `top_to_bottom`)
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
@@ -320,7 +320,7 @@ For library diagrams the options are:
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
-	list of libraries to exclude (default is `[startup]`)
+	list of libraries to exclude (default is `[startup, scratch_directory]`)
 - `zoom(Boolean)`  
 	add/omit zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 - `zoom_url_suffix(Suffix)`  

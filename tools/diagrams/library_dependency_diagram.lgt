@@ -22,9 +22,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2017/07/10,
+		date is 2018/02/04,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format'],
 		see_also is [library_load_diagram(_), file_load_diagram(_)]
@@ -156,8 +156,8 @@
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
-	% by default, exclude only the "startup" library:
-	default_option(exclude_libraries([startup])).
+	% by default, exclude only the "startup" and "scratch_directory" libraries:
+	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('directory_index.html', '#')).
 	% by default, don't zooming into libraries and entities:

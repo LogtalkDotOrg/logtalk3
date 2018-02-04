@@ -65,6 +65,9 @@ Tools
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
 source file line for the corresponding predicate clause. 
 
+* UPDATED: The `diagrams` tool option `exclude_libraries/1` to also exclude the
+`scratch_directory` library.
+
 * ADDED: Simple source code size metric to the `code_metrics` tool.
 
 * IMPROVED: New version of the `code_metrics` tool with an extended interface
