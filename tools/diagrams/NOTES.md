@@ -226,7 +226,7 @@ generated diagrams. For entity diagrams the options are:
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `true`)
 - `node_type_captions(Boolean)`  
-	print/omit node type captions (`true` or `false`; default is `false`)
+	print/omit node type captions (`true` or `false`; default is `true`)
 - `inheritance_relations(Boolean)`  
 	print/omit inheritance relations (default depends on the specific diagram)
 - `provide_relations(Boolean)`  
