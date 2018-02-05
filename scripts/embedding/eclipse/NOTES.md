@@ -18,9 +18,12 @@ ________________________________________________________________________
 
 
 This directory contains example scripts for creating ECLiPSe `.eco` files
-from Logtalk core files and Logtalk source files.
+from Logtalk core files and Logtalk source files. Note that loading these
+`.eco` files requires starting ECLiPSe with the command-line options
+`-L iso -t user`.
 
 The following scripts are provided:
 
 - `eclipse_logtalk_eco.sh`  
-	creates a `logtalk.eco` file with the Logtalk compiler and runtime
+	creates a `logtalk.eco` file with the Logtalk compiler and runtime;
+	the file can be loaded using `eclipse -L iso -t user -f logtalk.eco`
