@@ -66,6 +66,11 @@ Library
 Tools
 -----
 
+* ADDED: Predicates to the `lgtunit` tool that return assertions to be used
+when checking for expected text and binary input and output. These predicates
+provide an alternative to the predicates that check text and binary input and
+output. These new predicates can be used for easier debugging of failed tests.
+
 * ADDED: Support to the `diagrams` tool to generate predicate cross-referencing
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
 source file line for the corresponding predicate clause. 

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 5.0,
+		version is 6.0,
 		author is 'Paulo Moura',
-		date is 2017/12/29,
+		date is 2018/02/05,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -237,7 +237,7 @@
 	:- protected(check_text_input/2).
 	:- mode(check_text_input(+atom, +atom), zero_or_one).
 	:- info(check_text_input/2, [
-		comment is 'Checks that the temporary file being written have the expected text contents.',
+		comment is 'Checks that the temporary file (referenced with the given alias) being written have the expected text contents.',
 		argnames is ['Alias', 'Contents']
 	]).
 
@@ -246,6 +246,20 @@
 	:- info(check_text_input/1, [
 		comment is 'Checks that the temporary file being written have the expected text contents.',
 		argnames is ['Contents']
+	]).
+
+	:- protected(text_input_assertion/3).
+	:- mode(text_input_assertion(+atom, +atom, --callable), one).
+	:- info(text_input_assertion/3, [
+		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Assertion']
+	]).
+
+	:- protected(text_input_assertion/2).
+	:- mode(text_input_assertion(+atom, --callable), one).
+	:- info(text_input_assertion/2, [
+		comment is 'Returns an assertion for checking that the temporary file being written have the expected text contents.',
+		argnames is ['Contents', 'Assertion']
 	]).
 
 	:- protected(clean_text_input/0).
@@ -289,6 +303,20 @@
 		argnames is ['Bytes']
 	]).
 
+	:- protected(binary_input_assertion/3).
+	:- mode(binary_input_assertion(+atom, +list(byte), --callable), one).
+	:- info(binary_input_assertion/3, [
+		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.',
+		argnames is ['Alias', 'Bytes', 'Assertion']
+	]).
+
+	:- protected(binary_input_assertion/2).
+	:- mode(binary_input_assertion(+list(byte), --callable), one).
+	:- info(binary_input_assertion/2, [
+		comment is 'Returns an assertion for checking that the temporary file have the expected binary contents.',
+		argnames is ['Bytes', 'Assertion']
+	]).
+
 	:- protected(clean_binary_input/0).
 	:- mode(clean_binary_input, one).
 	:- info(clean_binary_input/0, [
@@ -312,7 +340,7 @@
 	:- protected(check_text_output/2).
 	:- mode(check_text_output(+atom, +atom), zero_or_one).
 	:- info(check_text_output/2, [
-		comment is 'Checks that the temporary file being written have the expected text contents.',
+		comment is 'Checks that the temporary file (referenced with the given alias) being written have the expected text contents.',
 		argnames is ['Alias', 'Contents']
 	]).
 
@@ -321,6 +349,20 @@
 	:- info(check_text_output/1, [
 		comment is 'Checks that the temporary file being written have the expected text contents.',
 		argnames is ['Contents']
+	]).
+
+	:- protected(text_output_assertion/3).
+	:- mode(text_output_assertion(+atom, +atom, --callable), one).
+	:- info(text_output_assertion/3, [
+		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Assertion']
+	]).
+
+	:- protected(text_output_assertion/2).
+	:- mode(text_output_assertion(+atom, --callable), one).
+	:- info(text_output_assertion/2, [
+		comment is 'Returns an assertion for checking that the temporary file being written have the expected text contents.',
+		argnames is ['Contents', 'Assertion']
 	]).
 
 	:- protected(clean_text_output/0).
@@ -355,6 +397,20 @@
 	:- info(check_binary_output/1, [
 		comment is 'Checks that the temporary file have the expected binary contents.',
 		argnames is ['Bytes']
+	]).
+
+	:- protected(binary_output_assertion/3).
+	:- mode(binary_output_assertion(+atom, +list(byte), --callable), one).
+	:- info(binary_output_assertion/3, [
+		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.',
+		argnames is ['Alias', 'Bytes', 'Assertion']
+	]).
+
+	:- protected(binary_output_assertion/2).
+	:- mode(binary_output_assertion(+list(byte), --callable), one).
+	:- info(binary_output_assertion/2, [
+		comment is 'Returns an assertion for checking that the temporary file have the expected binary contents.',
+		argnames is ['Bytes', 'Assertion']
 	]).
 
 	:- protected(clean_binary_output/0).
@@ -1781,6 +1837,15 @@
 		clean_text_input,
 		Expected == Contents.
 
+	text_input_assertion(Alias, Expected, Expected == Contents) :-
+		get_text_contents(Alias, Expected, Contents),
+		clean_text_input.
+
+	text_input_assertion(Expected, Expected == Contents) :-
+		current_input(Stream),
+		get_text_contents(Stream, Expected, Contents),
+		clean_text_input.
+
 	clean_text_input :-
 		clean_file('test_input.text', _).
 
@@ -1812,6 +1877,15 @@
 		get_binary_contents(Stream, Expected, Contents),
 		clean_binary_input,
 		Expected == Contents.
+
+	binary_input_assertion(Alias, Expected, Expected == Contents) :-
+		get_binary_contents(Alias, Expected, Contents),
+		clean_binary_input.
+
+	binary_input_assertion(Expected, Expected == Contents) :-
+		current_input(Stream),
+		get_binary_contents(Stream, Expected, Contents),
+		clean_binary_input.
 
 	clean_binary_input :-
 		clean_file('test_input.binary', _).
@@ -1846,6 +1920,21 @@
 		clean_text_output,
 		Expected == Contents.
 
+	text_output_assertion(Alias, Expected, Expected == Contents) :-
+		close(Alias),
+		os::absolute_file_name('test_output.text', Path),
+		open(Path, read, InputStream),
+		get_text_contents(InputStream, Expected, Contents),
+		clean_text_output.
+
+	text_output_assertion(Expected, Expected == Contents) :-
+		current_output(OutputStream),
+		close(OutputStream),
+		os::absolute_file_name('test_output.text', Path),
+		open(Path, read, InputStream),
+		get_text_contents(InputStream, Expected, Contents),
+		clean_text_output.
+
 	clean_text_output :-
 		clean_file('test_output.text', _).
 
@@ -1876,6 +1965,21 @@
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
 		Expected == Contents.
+
+	binary_output_assertion(Alias, Expected, Expected == Contents) :-
+		close(Alias),
+		os::absolute_file_name('test_output.binary', Path),
+		open(Path, read, InputStream, [type(binary)]),
+		get_binary_contents(InputStream, Expected, Contents),
+		clean_binary_output.
+
+	binary_output_assertion(Expected, Expected == Contents) :-
+		current_output(OutputStream),
+		close(OutputStream),
+		os::absolute_file_name('test_output.binary', Path),
+		open(Path, read, InputStream, [type(binary)]),
+		get_binary_contents(InputStream, Expected, Contents),
+		clean_binary_output.
 
 	clean_binary_output :-
 		clean_file('test_output.binary', _).

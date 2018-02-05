@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>5.0</code>
+            <code>6.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/12/29</code>
+            <code>2018/2/5</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -624,7 +624,7 @@
         <div class="section">
           <h3 id="check_text_input/2" class="code">check_text_input/2</h3>
           <blockquote>
-            <p class="comment">Checks that the temporary file being written have the expected text contents.</p>
+            <p class="comment">Checks that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -658,6 +658,46 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>check_text_input(+atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="text_input_assertion/3" class="code">text_input_assertion/3</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>text_input_assertion(Alias,Contents,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>text_input_assertion(+atom,+atom,--callable) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="text_input_assertion/2" class="code">text_input_assertion/2</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file being written have the expected text contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>text_input_assertion(Contents,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>text_input_assertion(+atom,--callable) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -778,6 +818,46 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="binary_input_assertion/3" class="code">binary_input_assertion/3</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>binary_input_assertion(Alias,Bytes,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>binary_input_assertion(+atom,+list(byte),--callable) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="binary_input_assertion/2" class="code">binary_input_assertion/2</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file have the expected binary contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>binary_input_assertion(Bytes,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>binary_input_assertion(+list(byte),--callable) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="clean_binary_input/0" class="code">clean_binary_input/0</h3>
           <blockquote>
             <p class="comment">Cleans the temporary file used when testing binary input.</p>
@@ -836,7 +916,7 @@
         <div class="section">
           <h3 id="check_text_output/2" class="code">check_text_output/2</h3>
           <blockquote>
-            <p class="comment">Checks that the temporary file being written have the expected text contents.</p>
+            <p class="comment">Checks that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -870,6 +950,46 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>check_text_output(+atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="text_output_assertion/3" class="code">text_output_assertion/3</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>text_output_assertion(Alias,Contents,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>text_output_assertion(+atom,+atom,--callable) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="text_output_assertion/2" class="code">text_output_assertion/2</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file being written have the expected text contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>text_output_assertion(Contents,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>text_output_assertion(+atom,--callable) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -966,6 +1086,46 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>check_binary_output(+list(byte)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="binary_output_assertion/3" class="code">binary_output_assertion/3</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>binary_output_assertion(Alias,Bytes,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>binary_output_assertion(+atom,+list(byte),--callable) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="binary_output_assertion/2" class="code">binary_output_assertion/2</h3>
+          <blockquote>
+            <p class="comment">Returns an assertion for checking that the temporary file have the expected binary contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>binary_output_assertion(Bytes,Assertion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>binary_output_assertion(+list(byte),--callable) &ndash; one</code>
             </dd>
           </dl>
         </div>
