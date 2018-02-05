@@ -20,7 +20,7 @@ ________________________________________________________________________
 README
 ======
 
-[![Join the chat at https://gitter.im/LogtalkDotOrg/logtalk3](https://badges.gitter.im/LogtalkDotOrg/logtalk3.svg)](https://gitter.im/LogtalkDotOrg/logtalk3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/LogtalkDotOrg/logtalk3.svg?branch=master)](https://travis-ci.org/LogtalkDotOrg/logtalk3) [![Join the chat at https://gitter.im/LogtalkDotOrg/logtalk3](https://badges.gitter.im/LogtalkDotOrg/logtalk3.svg)](https://gitter.im/LogtalkDotOrg/logtalk3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 ABOUT
