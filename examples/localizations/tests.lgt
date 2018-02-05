@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/04/05,
+		date is 2018/02/05,
 		comment is 'Unit tests for the "localizations" example.'
 	]).
 
@@ -34,25 +34,25 @@
 	cover(my_game_fr_localization).
 	cover(my_game_pt_localization).
 
-	test(localizations_1) :-
+	test(localizations_1, true(Assertion)) :-
 		^^set_text_output(''),
 		my_game(de)::banner,
-		^^check_text_output('>>> Willkommen Sie bei Mein tolles Spiel!\n').
+		^^text_output_assertion('>>> Willkommen Sie bei Mein tolles Spiel!\n', Assertion).
 
-	test(localizations_2) :-
+	test(localizations_2, true(Assertion)) :-
 		^^set_text_output(''),
 		my_game(en)::banner,
-		^^check_text_output('>>> Welcome to my great game!\n').
+		^^text_output_assertion('>>> Welcome to my great game!\n', Assertion).
 
-	test(localizations_3) :-
+	test(localizations_3, true(Assertion)) :-
 		^^set_text_output(''),
 		my_game(fr)::banner,
-		^^check_text_output('>>> Bienvenue sur mon grand jeu!\n').
+		^^text_output_assertion('>>> Bienvenue sur mon grand jeu!\n', Assertion).
 
-	test(localizations_4) :-
+	test(localizations_4, true(Assertion)) :-
 		^^set_text_output(''),
 		my_game(pt)::banner,
-		^^check_text_output('>>> Bem vindo ao meu grande jogo!\n').
+		^^text_output_assertion('>>> Bem vindo ao meu grande jogo!\n', Assertion).
 
 	cleanup :-
 		^^clean_text_output.

@@ -131,6 +131,11 @@ standard `!/0` control construct.
 
 Examples
 --------
+
+* CHANGED: The `localizations` example to illustrate the use of the new
+`lgtunit` predicates that return assertions to be used when checking for
+expected text and binary input and output.
+
 * UPDATED: The `multifile` example to also run when using XSB as the backend
 compiler. Requires XSB r9206 or a later version.
 
