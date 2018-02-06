@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/01/20,
+		date is 2018/02/06,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
@@ -91,6 +91,22 @@
 		{format(S, '~s', ["ABC"])},
 		^^check_text_output('ABC').
 
+	:- if(os::operating_system_type(windows)).
+
+	succeeds(lgt_format_3_new_line) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~n', [])},
+		^^check_text_output('\r\n').
+
+	succeeds(lgt_format_3_new_line_n) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~4n', [])},
+		^^check_text_output('\r\n\r\n\r\n\r\n').
+
+	:- else.
+
 	succeeds(lgt_format_3_new_line) :-
 		^^set_text_output(''),
 		current_output(S),
@@ -102,6 +118,8 @@
 		current_output(S),
 		{format(S, '~4n', [])},
 		^^check_text_output('\n\n\n\n').
+
+	:- endif.
 
 	- succeeds(lgt_format_3_tab) :-
 		^^set_text_output(''),
