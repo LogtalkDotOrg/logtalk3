@@ -47,9 +47,9 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/05/08,
+		date is 2018/02/06,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 
@@ -106,5 +106,17 @@ condition_opaque_to_cut_3(2).
 	succeeds(commons_soft_cut_2_3_15) :-
 		findall(X, {condition_opaque_to_cut_3(X)}, L),
 		L == [1, 2].
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_soft_cut_2_3_16) :-
+		% if part is cut opaque
+		findall(X, {';'(X=1, X=2), '*->'(!, true)}, L),
+		L == [1, 2].
+
+	succeeds(lgt_soft_cut_2_3_17) :-
+		% then part is cut transparent
+		findall(X, {';'(X=1, X=2), '*->'(true, !)}, L),
+		L == [1].
 
 :- end_object.
