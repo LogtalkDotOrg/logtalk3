@@ -25,125 +25,125 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2018/02/06,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
-	succeeds(lgt_format_3_empty_control_sequence) :-
+	test(lgt_format_3_empty_control_sequence, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '', [])},
-		^^check_text_output('').
+		^^text_output_assertion('', Assertion).
 
-	succeeds(lgt_format_3_empty_arguments) :-
+	test(lgt_format_3_empty_arguments, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, 'abc', [])},
-		^^check_text_output('abc').
+		^^text_output_assertion('abc', Assertion).
 
-	succeeds(lgt_format_3_tilde) :-
+	test(lgt_format_3_tilde, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~~', [])},
-		^^check_text_output('~').
+		^^text_output_assertion('~', Assertion).
 
-	succeeds(lgt_format_3_write) :-
+	test(lgt_format_3_write, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~w', ['ABC'])},
-		^^check_text_output('ABC').
+		^^text_output_assertion('ABC', Assertion).
 
-	succeeds(lgt_format_3_quoted) :-
+	test(lgt_format_3_quoted, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~q', ['ABC'])},
-		^^check_text_output('\'ABC\'').
+		^^text_output_assertion('\'ABC\'', Assertion).
 
-	succeeds(lgt_format_3_canonical) :-
+	test(lgt_format_3_canonical, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~k', [(:-a)])},
-		^^check_text_output(':-(a)').
+		^^text_output_assertion(':-(a)', Assertion).
 
-	succeeds(lgt_format_3_atom) :-
+	test(lgt_format_3_atom, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~a', [abc])},
-		^^check_text_output(abc).
+		^^text_output_assertion(abc, Assertion).
 
-	succeeds(lgt_format_3_code) :-
+	test(lgt_format_3_code, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~c', [65])},
-		^^check_text_output('A').
+		^^text_output_assertion('A', Assertion).
 
-	succeeds(lgt_format_3_code_n) :-
+	test(lgt_format_3_code_n, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~8c', [65])},
-		^^check_text_output('AAAAAAAA').
+		^^text_output_assertion('AAAAAAAA', Assertion).
 
-	succeeds(lgt_format_3_string) :-
+	test(lgt_format_3_string, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~s', ["ABC"])},
-		^^check_text_output('ABC').
+		^^text_output_assertion('ABC', Assertion).
 
 	:- if(os::operating_system_type(windows)).
 
-	succeeds(lgt_format_3_new_line) :-
+	test(lgt_format_3_new_line, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~n', [])},
-		^^check_text_output('\r\n').
+		^^text_output_assertion('\r\n', Assertion).
 
-	succeeds(lgt_format_3_new_line_n) :-
+	test(lgt_format_3_new_line_n, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~4n', [])},
-		^^check_text_output('\r\n\r\n\r\n\r\n').
+		^^text_output_assertion('\r\n\r\n\r\n\r\n', Assertion).
 
 	:- else.
 
-	succeeds(lgt_format_3_new_line) :-
+	test(lgt_format_3_new_line, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~n', [])},
-		^^check_text_output('\n').
+		^^text_output_assertion('\n', Assertion).
 
-	succeeds(lgt_format_3_new_line_n) :-
+	test(lgt_format_3_new_line_n, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~4n', [])},
-		^^check_text_output('\n\n\n\n').
+		^^text_output_assertion('\n\n\n\n', Assertion).
 
 	:- endif.
 
-	- succeeds(lgt_format_3_tab) :-
+	- test(lgt_format_3_tab, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~t~a~8|', [abc])},
-		^^check_text_output('     abc').
+		^^text_output_assertion('     abc', Assertion).
 
-	succeeds(lgt_format_3_ignore) :-
+	test(lgt_format_3_ignore, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~a~i~a', [a,b,c])},
-		^^check_text_output(ac).
+		^^text_output_assertion(ac, Assertion).
 
-	succeeds(lgt_format_3_decimal) :-
+	test(lgt_format_3_decimal, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~d', [123])},
-		^^check_text_output('123').
+		^^text_output_assertion('123', Assertion).
 
-	succeeds(lgt_format_3_float) :-
+	test(lgt_format_3_float, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{format(S, '~4f', [-1.0e-1])},
-		^^check_text_output('-0.1000').
+		^^text_output_assertion('-0.1000', Assertion).
 
 	cleanup :-
 		^^clean_text_input.
