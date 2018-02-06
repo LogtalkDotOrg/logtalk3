@@ -136,6 +136,8 @@ Examples
 `lgtunit` predicates that return assertions to be used when checking for
 expected text and binary input and output.
 
+* FIXED: The `localizations` example when using Windows.
+
 * UPDATED: The `multifile` example to also run when using XSB as the backend
 compiler. Requires XSB r9206 or a later version.
 
