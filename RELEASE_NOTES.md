@@ -114,6 +114,9 @@ correct behavior when the arguments contain cuts.
 * ADDED: Additional unit tests for the `*->/2` control construct to check for
 correct behavior when the arguments contain cuts.
 
+* ADDED: Additional unit test for the ISO Prolog standard `nl/1` built-in
+predicate.
+
 * UPDATED: Unit tests for the ISO Prolog standard `^/2` built-in function and
 the `functor/3` built-in predicate for the changes in the ISO/IEC 13211-1
 Technical Corrigendum 3:2017.
