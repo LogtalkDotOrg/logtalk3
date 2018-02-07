@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/11/25,
+		date is 2018/02/07,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -110,7 +110,7 @@
 		arg(1, [Head| _], Var),
 		Var == Head.
 
-	succeeds(lgt_arg_3_17) :-
+	succeeds(lgt_arg_3_18) :-
 		arg(2, [_| Tail], Var),
 		Var == Tail.
 
