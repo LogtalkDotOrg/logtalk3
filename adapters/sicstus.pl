@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on January 18, 2018
+%  Last updated on February 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -560,10 +560,11 @@ forall(Generate, Test) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	stream_position(Stream, PositionBegin),
-	stream_position_data(line_count, PositionBegin, LineCountBegin),
-	LineBegin is LineCountBegin + 1,
-	read_term(Stream, Term, [syntax_errors(error), variable_names(Variables)| Options]),
+	read_term(Stream, Term, [layout(Layout), syntax_errors(error), variable_names(Variables)| Options]),
+	(	Layout = [LineBegin| _] ->
+		true
+	;	LineBegin = Layout
+	),
 	stream_position(Stream, PositionEnd),
 	stream_position_data(line_count, PositionEnd, LineCountEnd),
 	LineEnd is LineCountEnd + 1.

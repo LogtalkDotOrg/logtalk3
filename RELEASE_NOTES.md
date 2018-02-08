@@ -31,6 +31,8 @@ Prolog adapter and integration files
 `setup_call_cleanup/3` built-in predicate to ignore success or failure of the
 cleanup goal.
 
+* IMPROVED: The accuracy of file term positions when using SICStus Prolog.
+
 * UPDATED: Removed use of Bash deprecated features from the Prolog integration
 scripts.
 
