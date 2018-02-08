@@ -56,6 +56,8 @@ hook predicate.
 * FIXED: The `update_html_docs.sh` script to also update the contributions API
 documentation.
 
+* UPDATED: Notes on the Windows installer.
+
 Library
 -------
 
@@ -117,7 +119,7 @@ correct behavior when the arguments contain cuts.
 * ADDED: Additional unit test for the ISO Prolog standard `nl/1` built-in
 predicate.
 
-* ADDED: Additional unit test for the ISO Prolog standard `close/1-2` built-in
+* ADDED: Additional unit tests for the ISO Prolog standard `close/1-2` built-in
 predicates.
 
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit

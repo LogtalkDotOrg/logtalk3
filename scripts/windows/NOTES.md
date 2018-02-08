@@ -30,6 +30,15 @@ The installer creates integration shortcuts that start Logtalk in the
 the `Start in` setting to `%CD%`. However, this works on Windows XP
 but is ignored on Windows 7.
 
+Note that the integration shortcuts are only created for the Prolog
+systems that are detected when running the installer. Most Prolog
+installers write entries in the Windows registry that are read by
+the Logtalk installer. Some Prolog systems, however, use environment
+variables. If a shortcut is not being created for a supported and
+installed Prolog compiler, possibly due to a non standard install,
+check the registry and environment variable assumptions made by the
+installer.
+
 As Logtalk first looks at startup for a `settings.lgt` file in the
 current directory, in order to use a project-specific settings file,
 copy the desired shortcut to the project directory and use its path
