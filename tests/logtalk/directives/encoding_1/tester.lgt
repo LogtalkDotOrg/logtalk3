@@ -23,7 +23,6 @@
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(lgtunit(loader)),
-		logtalk_load([iso_8859_1, utf_8_bom, utf_8_no_bom]),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
 	)).

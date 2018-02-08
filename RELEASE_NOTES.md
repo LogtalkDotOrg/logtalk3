@@ -102,6 +102,9 @@ Tests
 that check for type errors as the non-callable term reported is implementation
 dependent and the specification of this predicate is still informal.
 
+* IMPROVED: Tests for the Logtalk `encoding/1` directive to better cope with
+different backend Prolog systems supporting different sets of text encodings.
+
 * ADDED: Unit tests for the soft-cut `if/3` built-in predicate.
 
 * ADDED: Unit tests for the de facto standard `format/2-3` predicates.
