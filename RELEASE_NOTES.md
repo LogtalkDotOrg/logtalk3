@@ -122,6 +122,9 @@ predicate.
 * ADDED: Additional unit tests for the ISO Prolog standard `close/1-2` built-in
 predicates.
 
+* ADDED: Additional unit test for the ISO Prolog standard `current_op/3`
+built-in predicate.
+
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.
 

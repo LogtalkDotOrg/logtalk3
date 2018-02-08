@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/01/22,
+		date is 2018/02/08,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -221,6 +221,12 @@
 	succeeds(iso_current_op_3_46) :-
 		{current_op(P, T, '+')},
 		P == 200, T == fy.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_current_op_3_47) :-
+		setof(P-T, {current_op(P, T, '-')}, PTs),
+        PTs == [200-fy, 500-yfx].
 
 	infix(yfx).
 	infix(xfx).
