@@ -226,7 +226,7 @@
 
 	succeeds(lgt_current_op_3_47) :-
 		setof(P-T, {current_op(P, T, '-')}, PTs),
-        PTs == [200-fy, 500-yfx].
+		PTs == [200-fy, 500-yfx].
 
 	infix(yfx).
 	infix(xfx).

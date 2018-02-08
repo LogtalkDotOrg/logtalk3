@@ -28,9 +28,9 @@
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
-    :- discontiguous([
-        succeeds/1, throws/2
-    ]).
+	:- discontiguous([
+		succeeds/1, throws/2
+	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.6
 
@@ -112,7 +112,7 @@
 
 	cleanup :-
 		^^clean_file(foo),
-        ^^clean_text_output,
+		^^clean_text_output,
 		^^clean_text_input.
 
 :- end_object.
