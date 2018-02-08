@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/09/07,
+		date is 2018/02/08,
 		comment is 'Unit tests for the call/1-N built-in method.'
 	]).
 
@@ -63,10 +63,12 @@
 		call(Goal).
 
 	throws(call_N_8, error(existence_error(procedure,_),_)) :-
-		call(foo(_), _).
+		Closure = foo(_),
+		call(Closure, _).
 
 	throws(call_N_9, error(existence_error(procedure,_),_)) :-
-		call(foo, _, _).
+		Closure = foo,
+		call(Closure, _, _).
 
 	succeeds(call_N_10) :-
 		call(a(X)),

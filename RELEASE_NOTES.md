@@ -151,6 +151,9 @@ predicates assumed that the `:/2` operator was defined for all backend.
 * FIXED: Workaround XSB parser bug in the unit tests for the ISO Prolog
 standard `!/0` control construct.
 
+* FIXED: The unit tests for the `call/N` Logtalk method to delay expected
+errors to runtime.
+
 Examples
 --------
 
