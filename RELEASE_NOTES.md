@@ -117,6 +117,9 @@ correct behavior when the arguments contain cuts.
 * ADDED: Additional unit test for the ISO Prolog standard `nl/1` built-in
 predicate.
 
+* ADDED: Additional unit test for the ISO Prolog standard `close/1-2` built-in
+predicates.
+
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.
 

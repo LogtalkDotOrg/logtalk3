@@ -22,11 +22,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2017/02/08,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
+
+    :- discontiguous([
+        succeeds/1, throws/2
+    ]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.6
 
@@ -93,8 +97,22 @@
 		^^closed_output_stream(S, []),
 		{close(S, [force(true)])}.
 
+	succeeds(lgt_close_1_16) :-
+		^^set_text_input(''),
+		current_input(S),
+		{close(S, [force(true)])}.
+
+	succeeds(lgt_close_1_17) :-
+		^^set_text_input(s, ''),
+		{close(s, [force(true)])}.
+
+	throws(lgt_close_1_18, error(existence_error(stream,S),_)) :-
+		^^closed_input_stream(S, []),
+		{close(S, [force(true)])}.
+
 	cleanup :-
 		^^clean_file(foo),
-		^^clean_text_output.
+        ^^clean_text_output,
+		^^clean_text_input.
 
 :- end_object.
