@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/07/07,
+		date is 2018/02/09,
 		comment is 'Unit tests for the logtalk_load/1-2 built-in predicates.'
 	]).
 
@@ -65,34 +65,34 @@
 		logtalk_load([non_exisiting_file]).
 
 	succeeds(logtalk_load_1_11) :-
-		logtalk_load(a1, []).
+		logtalk_load(a1).
 
 	succeeds(logtalk_load_1_12) :-
-		logtalk_load(a2, []).
+		logtalk_load(a2).
 
 	succeeds(logtalk_load_1_13) :-
-		logtalk_load(a3, []).
+		logtalk_load(a3).
 
 	succeeds(logtalk_load_1_14) :-
-		logtalk_load(a4, []).
+		logtalk_load(a4).
 
 	succeeds(logtalk_load_1_15) :-
-		logtalk_load('a5.b.c', []).
+		logtalk_load('a5.b.c').
 
 	succeeds(logtalk_load_1_16) :-
-		logtalk_load('a6.b.c', []).
+		logtalk_load('a6.b.c').
 
 	succeeds(logtalk_load_1_17) :-
-		logtalk_load('a7.b.c', []).
+		logtalk_load('a7.b.c').
 
 	succeeds(logtalk_load_1_18) :-
-		logtalk_load('a8.b.c', []).
+		logtalk_load('a8.b.c').
 
 	succeeds(logtalk_load_1_19) :-
-		logtalk_load('a9.foo', []).
+		logtalk_load('a9.foo').
 
 	succeeds(logtalk_load_1_20) :-
-		logtalk_load(a10, []).
+		logtalk_load(a10).
 
 	% logtalk_load/2
 

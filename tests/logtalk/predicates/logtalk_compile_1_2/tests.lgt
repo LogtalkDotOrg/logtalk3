@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/07/07,
+		date is 2018/02/09,
 		comment is 'Unit tests for the logtalk_compile/1-2 built-in predicates.'
 	]).
 
@@ -65,34 +65,34 @@
 		logtalk_compile([non_exisiting_file]).
 
 	succeeds(logtalk_compile_1_11) :-
-		logtalk_compile(a1, []).
+		logtalk_compile(a1).
 
 	succeeds(logtalk_compile_1_12) :-
-		logtalk_compile(a2, []).
+		logtalk_compile(a2).
 
 	succeeds(logtalk_compile_1_13) :-
-		logtalk_compile(a3, []).
+		logtalk_compile(a3).
 
 	succeeds(logtalk_compile_1_14) :-
-		logtalk_compile(a4, []).
+		logtalk_compile(a4).
 
 	succeeds(logtalk_compile_1_15) :-
-		logtalk_compile('a5.b.c', []).
+		logtalk_compile('a5.b.c').
 
 	succeeds(logtalk_compile_1_16) :-
-		logtalk_compile('a6.b.c', []).
+		logtalk_compile('a6.b.c').
 
 	succeeds(logtalk_compile_1_17) :-
-		logtalk_compile('a7.b.c', []).
+		logtalk_compile('a7.b.c').
 
 	succeeds(logtalk_compile_1_18) :-
-		logtalk_compile('a8.b.c', []).
+		logtalk_compile('a8.b.c').
 
 	succeeds(logtalk_compile_1_19) :-
-		logtalk_compile('a9.foo', []).
+		logtalk_compile('a9.foo').
 
 	succeeds(logtalk_compile_1_20) :-
-		logtalk_compile(a10, []).
+		logtalk_compile(a10).
 
 	% logtalk_compile/2
 
