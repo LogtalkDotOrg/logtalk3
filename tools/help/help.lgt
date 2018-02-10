@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.14,
+		version is 0.15,
 		author is 'Paulo Moura',
-		date is 2017/11/09,
+		date is 2018/02/10,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -42,29 +42,25 @@
 
 	help :-
 		nl,
-		write('On-line help is available for Logtalk built-in control constructs, built-in'), nl,
-		write('directives, built-in predicates, built-in non-terminals, built-in methods,'), nl,
-		write('and the standard library:'), nl, nl,
+		write('On-line help is available for Logtalk built-in control constructs, directives,'), nl,
+		write('predicates, non-terminals, methods, and the standard library:'), nl, nl,
 		write('    help::Functor/Arity.             help::Functor//Arity.'), nl,
 		write('    help::library.                   help::library(Entity).'), nl,
 		write('    help::library(Functor/Arity).    help::library(Functor//Arity).'), nl, nl,
-		write('The corresponding documentation page will open in your default web browser.'), nl,
-		write('To consult the Logtalk User and Reference manuals:'), nl, nl,
+		write('The help page opens in your default web browser. To consult the manuals:'), nl, nl,
 		write('    help::manuals.'), nl, nl,
 		write('To compile and load source files the following shortcut can be used:'), nl, nl,
 		write('    {File1, File2, ...}'), nl, nl,
-		write('To recompile and reload all source files that have been changed since they'), nl,
-		write('were loaded the following shortcut can be used:'), nl, nl,
+		write('To recompile and reload modified files, the following shortcut can be used:'), nl, nl,
 		write('    {*}'), nl, nl,
 		write('To recompile your source files for debugging you can use the shortcut:'), nl, nl,
 		write('    {+d}'), nl, nl,
-		write('Next load the debugger and start tracing:'), nl, nl,
+		write('Next, load the debugger and start tracing:'), nl, nl,
 		write('    {debugger(loader)}, debugger::trace.'), nl, nl,
-		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
-		write('settings file (see the settings-sample.lgt file for instructions).'), nl, nl,
 		write('To lean more about available top-level shortcuts:'), nl, nl,
-		write('    help::logtalk_load/1.'), nl,
-		write('    help::logtalk_make/1.'), nl, nl.
+		write('    help::logtalk_load/1.            help::logtalk_make/1.'), nl, nl,
+		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
+		write('settings file (see the settings-sample.lgt file for instructions).'), nl, nl.
 
 	:- public(('/')/2).
 	:- mode('/'(+atom, +integer), zero_or_one).
