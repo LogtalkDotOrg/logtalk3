@@ -50,8 +50,8 @@ scripts.
 `'$lgt_directory_hash_as_atom'/2` predicate.
 
 * FIXED: Error when embedding Logtalk in a GNU Prolog executable. The error
-is due to a `gplc` issue with multifile predicates that requires a workaround
-in the `logtalk.lgt` core file.
+is due to a `gplc` limitation with multifile predicates that requires a
+workaround in the `logtalk.lgt` core file.
 
 Documentation
 -------------

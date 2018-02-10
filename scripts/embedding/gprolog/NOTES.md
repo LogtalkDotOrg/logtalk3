@@ -25,3 +25,14 @@ The following scripts are provided:
 - `gprolog_embed_logtalk.sh`  
 	creates a `logtalk` executable that embeds the Logtalk compiler and
 	runtime; starts the top-level interpreter when run
+
+Known issues
+------------
+
+A `gplc` limitation when compiling calls to multifile predicates requires
+files that contain those calls but don't define clauses for the multifile
+predicates to include the multifile predicate directives.
+
+`gplc` seems to collect file initialization goals in a stack. This may
+dictate listing the files being compiled by it in a specific order to
+avoid predicate existence errors.
