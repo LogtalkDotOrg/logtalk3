@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2018/02/10,
 		comment is 'Unit tests for the ISO Prolog standard integer/1 built-in predicate.'
 	]).
 
@@ -44,5 +44,10 @@
 
 	fails(iso_integer_1_05) :-
 		{integer(atom)}.
+
+	% tests from the Logtalk portability work
+
+	fails(lgt_integer_1_06) :-
+		{integer(1.0)}.
 
 :- end_object.
