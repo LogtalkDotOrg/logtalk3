@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 14, 1, rc2)).
 
 
 
@@ -13452,9 +13452,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_object'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, Events, NewCtx), Events, Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
-	'$lgt_comp_ctx'(NewCtx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred).
+	'$lgt_comp_ctx'(Ctx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
+	'$lgt_comp_ctx'(NewCtx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
 
 % broadcasting control constructs
 
@@ -13728,9 +13727,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(Pred, '$lgt_send_to_self'(Pred, This, NewCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
-	'$lgt_comp_ctx'(NewCtx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred).
+	'$lgt_comp_ctx'(Ctx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
+	'$lgt_comp_ctx'(NewCtx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
 
 % broadcasting control constructs
 
@@ -13945,8 +13943,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	var(Pred) ->
 		% translation performed at runtime
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
+		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
 	;	callable(Pred) ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_obj_related_entities_are_static',
@@ -13964,13 +13961,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% super calls from predicates defined in complementing categories
 	% lookup inherited definitions in the complemented object ancestors
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Pred) ->
 		TPred = (
 			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 			'$lgt_obj_super_call'(Super, Pred, ExCtx)
-		),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
+		)
 	;	callable(Pred) ->
 		TPred = (
 			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
@@ -13986,9 +13982,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(existence_error(ancestor, category))
 	;	var(Pred) ->
 		% translation performed at runtime
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
-		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx),
-		'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred)
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
 		(	'$lgt_compiler_flag'(optimize, on),
@@ -17995,13 +17990,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % control constructs
-'$lgt_built_in_method_spec'(_::_, p, '::'(*, 0), 1).
-'$lgt_built_in_method_spec'(::_, p, '::'(0), 1).
-'$lgt_built_in_method_spec'([_], p, [(::)], 1).
-'$lgt_built_in_method_spec'(^^_, p, '^^'(0), 1).
+'$lgt_built_in_method_spec'(_::_, p, '::'(*, *), 1).
+'$lgt_built_in_method_spec'(::_, p, '::'(*), 1).
+'$lgt_built_in_method_spec'([_], p, [*], 1).
+'$lgt_built_in_method_spec'(^^_, p, '^^'(*), 1).
 '$lgt_built_in_method_spec'(_<<_, p, '<<'(*, 0), 1).
 '$lgt_built_in_method_spec'(_>>_, p, '>>'(*, 0), 1).
-'$lgt_built_in_method_spec'(':'(_), p, ':'(0), 1).	% deprecated
+'$lgt_built_in_method_spec'(':'(_), p, ':'(*), 1).	% deprecated
 '$lgt_built_in_method_spec'(':'(_,_), p, ':'(*, 0), 1) :-
 	'$lgt_prolog_feature'(modules, supported).
 '$lgt_built_in_method_spec'({_}, p(p(p)), '{}'(0), 1).

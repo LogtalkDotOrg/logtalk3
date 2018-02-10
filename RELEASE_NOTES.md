@@ -24,6 +24,14 @@ RELEASE NOTES
 3.14.1 - February ??, 2018
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `::/1-2`, `^^/1`, and `[]/1` control constructs are no longer
+declared as meta-predicates and the compiler no longer warns about missing
+meta-predicate directives when using these constructs with runtime bound
+arguments.
+
 Prolog adapter and integration files
 ------------------------------------
 
