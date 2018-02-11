@@ -38,9 +38,9 @@
 
 	rd(N, Sums) :-
 		integer::sequence(1, N, List),
-	    threaded_engine_create(_, sum(0), Engine),
-	    meta::maplist(list_to_sums(Engine), List, Sums),
-	    threaded_engine_destroy(Engine).
+		threaded_engine_create(_, sum(0), Engine),
+		meta::maplist(list_to_sums(Engine), List, Sums),
+		threaded_engine_destroy(Engine).
 
 	sum(Sum) :-
 		threaded_engine_fetch(New),

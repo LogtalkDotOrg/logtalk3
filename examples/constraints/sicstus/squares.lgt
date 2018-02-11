@@ -61,9 +61,9 @@
 
 	dual_labeling([], [], _, J, J).
 	dual_labeling([X|L1], L2, I, J0, J) :-
-		(   integer(X) -> dual_labeling(L1, L2, I, J0, J)
-		;   X #= I, dual_labeling(L1, L2, I, J0, J)
-		;   X #> I,
+		(	integer(X) -> dual_labeling(L1, L2, I, J0, J)
+		;	X #= I, dual_labeling(L1, L2, I, J0, J)
+		;	X #> I,
 			fd_min(X, J1),
 			J2 is min(J0,J1),
 			L2 = [X|L3],
@@ -122,13 +122,13 @@
 		state_no_overlap(X, Y, S, Xs, Ys, Ss, Type).
 
 	no_overlap(spec, X1, _Y1, S1, X2, _Y2, _S2) :-
-			leqc(X1, S1, X2).
+		leqc(X1, S1, X2).
 	no_overlap(spec, X1, _Y1, _S1, X2, _Y2, S2) :-
-			leqc(X2, S2, X1).
+		leqc(X2, S2, X1).
 	no_overlap(spec, _X1, Y1, S1, _X2, Y2, _S2) :-
-			leqc(Y1, S1, Y2).
+		leqc(Y1, S1, Y2).
 	no_overlap(spec, _X1, Y1, _S1, _X2, Y2, S2) :-
-			leqc(Y2, S2, Y1).
+		leqc(Y2, S2, Y1).
 	no_overlap(card, X1, Y1, S1, X2, Y2, S2) :-
 		X1+S1 #=< X2 #<=> B1,
 		X2+S2 #=< X1 #<=> B2,

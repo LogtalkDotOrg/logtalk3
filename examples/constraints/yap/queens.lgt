@@ -132,9 +132,11 @@
 	finish :-
 		format("copypage\n", []),
 		% fill the buffer to make 'gs' process all generated output
-		ignore((between(1,500,_),
-				format("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", []),
-				fail)),
+		ignore((
+			between(1,500,_),
+			format("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", []),
+			fail
+		)),
 		flush_output.
 
 	%?- show(N, [ff], Qs).

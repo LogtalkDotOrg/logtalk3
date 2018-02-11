@@ -34,8 +34,9 @@
 :- object(knight).
 
 	:- use_module(clpfd, [
-					op(700, xfx, #=), op(700, xfx, in), op(700, xfx, ins),
-					(#=)/2, circuit/1, (in)/2, (ins)/2, label/1]).
+		op(700, xfx, #=), op(700, xfx, in), op(700, xfx, ins),
+		(#=)/2, circuit/1, (in)/2, (ins)/2, label/1
+	]).
 
 	:- uses(list, [append/2, length/2, nth1/3]).
 	:- uses(meta, [map/2::maplist/2]).

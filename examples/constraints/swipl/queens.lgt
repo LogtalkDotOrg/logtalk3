@@ -32,7 +32,8 @@
 :- object(queens).
 
 	:- use_module(clpfd, [
-		op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=), op(760, yfx, #<==>), op(700, xfx, #>), op(700, xfx, ins),
+		op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=),
+		op(760, yfx, #<==>), op(700, xfx, #>), op(700, xfx, ins),
 		(#=)/2, (#\=)/2, (#<==>)/2, (#>)/2, (ins)/2, labeling/2
 	]).
 

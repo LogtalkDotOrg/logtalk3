@@ -116,7 +116,7 @@
 		Solutions == [[protocol(https), address([logtalk, org]), path([files,update]), file('')]].
 
 	test(dcgs_20) :-
-		iban::valid("GB82 WEST 1234 5698 7654 32").		
+		iban::valid("GB82 WEST 1234 5698 7654 32").
 	:- endif.
 
 	test(dcgs_21) :-

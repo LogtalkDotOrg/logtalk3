@@ -27,8 +27,9 @@
 	:- public(solve/1).
 
 	:- use_module(clpfd, [
-					op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=), op(700, xfx, ins),
-					(#=)/2, (#\=)/2, all_different/1, (ins)/2, label/1]).
+		op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=), op(700, xfx, ins),
+		(#=)/2, (#\=)/2, all_different/1, (ins)/2, label/1
+	]).
 
 	solve([S,E,N,D] + [M,O,R,E] = [M,O,N,E,Y]) :-
 		Vars = [S,E,N,D,M,O,R,Y],

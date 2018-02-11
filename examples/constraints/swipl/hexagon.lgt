@@ -37,8 +37,9 @@ H   I   J   K   L
 :- object(hexagon).
 
 	:- use_module(clpfd, [
-					op(450, xfx, ..), op(700, xfx, ins),
-					all_different/1, (ins)/2, labeling/2, sum/3]).
+		op(450, xfx, ..), op(700, xfx, ins),
+		all_different/1, (ins)/2, labeling/2, sum/3
+	]).
 
 	:- uses(meta, [map/2::maplist/2]).
 
@@ -51,9 +52,11 @@ H   I   J   K   L
 		Vs = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S],
 		Vs ins 1..19,
 		all_different(Vs),
-		maplist(sum38, [[A,B,C], [D,E,F,G], [H,I,J,K,L], [M,N,O,P], [Q,R,S],
-		                [H,D,A], [M,I,E,B], [Q,N,J,F,C], [R,O,K,G], [S,P,L],
-		                [C,G,L], [B,F,K,P], [A,E,J,O,S], [D,I,N,R], [H,M,Q]]),
+		maplist(sum38, [
+			[A,B,C], [D,E,F,G], [H,I,J,K,L], [M,N,O,P], [Q,R,S],
+			[H,D,A], [M,I,E,B], [Q,N,J,F,C], [R,O,K,G], [S,P,L],
+			[C,G,L], [B,F,K,P], [A,E,J,O,S], [D,I,N,R], [H,M,Q]
+		]),
 		labeling([ff], Vs).
 
 	%?- mhex(Vs).
