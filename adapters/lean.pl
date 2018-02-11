@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Lean Prolog 4.5.7 and later versions
-%  Last updated on December 11, 2017
+%  Last updated on February 11, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -928,7 +928,7 @@ term_hash(_, _, _, _) :-
 {@} :-
 	!,
 	logtalk_make(circular).
-{#} :-
+{'#'} :-
 	!,
 	logtalk_make(documentation).
 {+d} :-

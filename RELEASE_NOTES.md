@@ -53,6 +53,8 @@ scripts.
 is due to a `gplc` limitation with multifile predicates that requires a
 workaround in the `logtalk.lgt` core file.
 
+* FIXED: Workaround parser issue in the Lean Prolog adapter file.
+
 Documentation
 -------------
 
