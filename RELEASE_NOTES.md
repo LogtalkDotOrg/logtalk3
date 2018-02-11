@@ -49,6 +49,10 @@ scripts.
 * UPDATED: The GNU Prolog adapter file with a faster version of the internal
 `'$lgt_directory_hash_as_atom'/2` predicate.
 
+* UPDATED: The JIProlog adapter file to detect the operating-system and choose
+accordingly the default value for the scratch directory (`./lgt_tmp/` when
+running on Windows and `./.lgt_tmp/` otherwise).
+
 * FIXED: Error when embedding Logtalk in a GNU Prolog executable. The error
 is due to a `gplc` limitation with multifile predicates that requires a
 workaround in the `logtalk.lgt` core file.

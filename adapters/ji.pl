@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.2.8 or later versions
-%  Last updated on December 11, 2017
+%  Last updated on February 11, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -265,7 +265,13 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, './').
+'$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
+	(	invoke('java.lang.System', getProperty('java.lang.String'), ['os.name'], Name),
+		sub_atom(Name, 0, 7, _, 'Windows') ->
+		ScratchDirectory = './lgt_tmp/'
+	;	% assume POSIX system
+		ScratchDirectory = './.lgt_tmp/'
+	).
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
