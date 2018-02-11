@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 1, rc2)).
+'$lgt_version_data'(logtalk(3, 14, 1, rc3)).
 
 
 
@@ -5774,7 +5774,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_file'(File, Flags) :-
 	(	'$lgt_source_file_name'(File, Directory, Name, Extension, SourceFile),
-		catch('$lgt_file_exists'(SourceFile), _, fail) ->
+		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
@@ -6039,7 +6039,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
 	(	'$lgt_source_file_name'(File, Directory, Name, Extension, SourceFile),
-		catch('$lgt_file_exists'(SourceFile), _, fail) ->
+		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
@@ -8125,7 +8125,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% try to expand to an existing Prolog file
 		'$lgt_source_file_name'(FileSpec, _, _, Extension, ExpandedFile),
 		'$lgt_file_extension'(prolog, Extension),
-		catch('$lgt_file_exists'(ExpandedFile), _, fail) ->
+		'$lgt_file_exists'(ExpandedFile) ->
 		true
 	;	% otherwise try the file spec as-is
 		ExpandedFile = FileSpec
@@ -21368,7 +21368,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% avoid a loading loop by checking that the file name is different
 		% from the name of the file containing the include/1 directive
 		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
-		catch('$lgt_file_exists'(SourceFile), _, fail) ->
+		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(existence_error(file, File))
 	),
