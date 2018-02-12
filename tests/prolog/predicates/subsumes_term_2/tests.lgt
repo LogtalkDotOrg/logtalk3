@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2018/02/12,
 		comment is 'Unit tests for the ISO Prolog standard subsumes_term/2 built-in predicate.'
 	]).
 
@@ -51,5 +51,10 @@
 
 	succeeds(iso_subsumes_term_2_06) :-
 		{subsumes_term(X, Y), subsumes_term(Y, f(X))}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_subsumes_term_2_07) :-
+		{subsumes_term(c(A, [e(A)]), c(B, [e(B)]))}.
 
 :- end_object.
