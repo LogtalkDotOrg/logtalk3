@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 1, rc3)).
+'$lgt_version_data'(logtalk(3, 14, 1, rc4)).
 
 
 
@@ -12646,7 +12646,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_check_for_trivial_fails'(compile(user), Call, TCall, Head) :-
-	(	Call \= Head,
+	(	copy_term(Head, HeadCopy),
+		Call \= HeadCopy,
 		% not a recursive call which can originate from a predicate with a single clause
 		\+ '$lgt_pp_dynamic_'(Call),
 		\+ '$lgt_pp_multifile_'(Call, _, _),
