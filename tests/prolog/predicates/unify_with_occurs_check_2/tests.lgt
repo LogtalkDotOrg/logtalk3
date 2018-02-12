@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2018/02/12,
 		comment is 'Unit tests for the ISO Prolog standard unify_with_occurs_check/2 built-in predicate.'
 	]).
 
@@ -81,5 +81,10 @@
 
 	fails(iso_unify_with_occurs_check_2_16) :-
 		{unify_with_occurs_check(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+
+	% tests from the Logtalk portability work
+
+	fails(lgt_unify_with_occurs_check_2_17) :-
+		{unify_with_occurs_check(X, [_| X])}.
 
 :- end_object.

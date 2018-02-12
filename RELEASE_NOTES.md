@@ -136,8 +136,9 @@ different backend Prolog systems supporting different sets of text encodings.
 * ADDED: Additional unit tests for the `->/2` and `*->/2` control constructs
 to check for correct behavior when the arguments contain cuts.
 
-* ADDED: Additional unit tests for the ISO Prolog standard `close/1-2`,
-`nl/1`, `current_op/3`, `integer/1`, and `float/1` built-in predicates.
+* ADDED: Additional unit tests for the ISO Prolog standard `acyclic_term/1`,
+`close/1-2`, `current_op/3`, `float/1`, `integer/1`, `nl/1`, and
+`unify_with_occurs_check/2` built-in predicates.
 
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2018/02/12,
 		comment is 'Unit tests for the ISO Prolog standard acyclic_term/1 built-in predicate.'
 	]).
 
@@ -40,10 +40,17 @@
 	)).
 		fails(iso_acyclic_term_1_02) :-
 			{X = f(X), acyclic_term(X)}.
+
+		fails(lgt_acyclic_term_1_03) :-
+			{X = [_| X], acyclic_term(X)}.
 	:- else.
 		- fails(iso_acyclic_term_1_02) :-
 			% STO; Undefined
 			{X = f(X), acyclic_term(X)}.
+
+		- fails(lgt_acyclic_term_1_03) :-
+			% STO; Undefined
+			{X = [_| X], acyclic_term(X)}.
 	:- endif.
 
 :- end_object.
