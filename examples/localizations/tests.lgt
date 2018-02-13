@@ -36,9 +36,9 @@
 
 	:- if((
 		os::operating_system_type(windows),
-		\+ current_logtalk_flag(dialect, ji),
-		\+ current_logtalk_flag(dialect, sicstus),
-		\+ current_logtalk_flag(dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
 	)).
 
 	test(localizations_1, true(Assertion)) :-
