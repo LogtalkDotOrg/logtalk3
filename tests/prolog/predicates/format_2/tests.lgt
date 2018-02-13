@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/02/06,
+		date is 2018/02/13,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -81,7 +81,12 @@
 		{format('~s', ["ABC"])},
 		^^text_output_assertion('ABC', Assertion).
 
-	:- if(os::operating_system_type(windows)).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(dialect, ji),
+		\+ current_logtalk_flag(dialect, sicstus),
+		\+ current_logtalk_flag(dialect, swi)
+	)).
 
 	test(lgt_format_2_new_line, true(Assertion)) :-
 		^^set_text_output(''),

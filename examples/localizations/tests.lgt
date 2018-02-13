@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/02/06,
+		date is 2018/02/13,
 		comment is 'Unit tests for the "localizations" example.'
 	]).
 
@@ -34,7 +34,12 @@
 	cover(my_game_fr_localization).
 	cover(my_game_pt_localization).
 
-	:- if(os::operating_system_type(windows)).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(dialect, ji),
+		\+ current_logtalk_flag(dialect, sicstus),
+		\+ current_logtalk_flag(dialect, swi)
+	)).
 
 	test(localizations_1, true(Assertion)) :-
 		^^set_text_output(''),

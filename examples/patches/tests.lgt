@@ -28,7 +28,12 @@
 		comment is 'Unit tests for the "patches" example.'
 	]).
 
-	:- if(os::operating_system_type(windows)).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(dialect, ji),
+		\+ current_logtalk_flag(dialect, sicstus),
+		\+ current_logtalk_flag(dialect, swi)
+	)).
 
 	succeeds(patches_1) :-
 		^^set_text_output(''),
