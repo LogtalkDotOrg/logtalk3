@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/01/22,
+		date is 2018/02/13,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -87,6 +87,7 @@
 
 	:- if(\+ current_logtalk_flag(prolog_dialect, lean)).
 	% Lean Prolog doesn't support the 0'<char> used in these examples
+
 	test(dcgs_13) :-
 		findall(XML, xml::convert(word(child, children), word(singular, plural), XML), Solutions),
 		Solutions == ['<word><singular>child</singular><plural>children</plural></word>'].
@@ -115,8 +116,14 @@
 		findall(Components, url::parse("https://logtalk.org/files/update", Components), Solutions),
 		Solutions == [[protocol(https), address([logtalk, org]), path([files,update]), file('')]].
 
+	:- if(current_prolog_flag(bounded, false)).
 	test(dcgs_20) :-
 		iban::valid("GB82 WEST 1234 5698 7654 32").
+	:- else.
+	- test(dcgs_20) :-
+		iban::valid("GB82 WEST 1234 5698 7654 32").
+	:- endif.
+
 	:- endif.
 
 	test(dcgs_21) :-
