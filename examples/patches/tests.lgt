@@ -22,16 +22,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/07/21,
+		date is 2018/02/13,
 		comment is 'Unit tests for the "patches" example.'
 	]).
+
+	:- if(os::operating_system_type(windows)).
+
+	succeeds(patches_1) :-
+		^^set_text_output(''),
+		proto::init,
+		^^check_text_output('parent init\r\nproto init\r\n').
+
+	:- else.
 
 	succeeds(patches_1) :-
 		^^set_text_output(''),
 		proto::init,
 		^^check_text_output('parent init\nproto init\n').
+
+	:- endif.
 
 	succeeds(patches_2) :-
 		proto::pet(Pet),
