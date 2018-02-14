@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on January 20, 2018
+%  Last updated on February 14, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -475,7 +475,8 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	line_count(Stream, LineBegin),
 	read_term(Stream, Term, [syntax_error(error), variable_names(Variables)| Options]),
-	line_count(Stream, LineEnd).
+	line_count(Stream, LineEnd0),
+	LineEnd is LineEnd0 + 1.
 
 
 
