@@ -47,7 +47,8 @@ Published on the web:
 		version is 1.0,
 		date is 2004/5/1,
 		author is 'Paulo Moura',
-		comment is 'Passing a note logical puzzle']).
+		comment is 'Passing a note logical puzzle'
+	]).
 
 	:- public(students/1).
 	:- mode(students(-list), one).

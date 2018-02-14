@@ -107,13 +107,13 @@
 		trace(B, Depth).
 	trace(A, Depth) :-
 		write_trace(call, A, Depth),
-   	 	% retrieve clauses in "this", i.e. in the database
+		% retrieve clauses in "this", i.e. in the database
 		% of the object importing this category
 		clause(A, B),
 		Depth2 is Depth + 1,
 		trace(B, Depth2),
 		(	write_trace(exit, A, Depth)
-		;   write_trace(redo, A, Depth),
+		;	write_trace(redo, A, Depth),
 			fail
 		).
 	trace(A, Depth) :-

@@ -7,7 +7,9 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Flattens conjunction of goals with the form f & g into a list [f,g]. Based on source code from The Craft of Prolog, by Richard O''Keefe']).
+		comment is 'Flattens conjunction of goals with the form f & g into a list [f,g].',
+		source is 'Based on source code from The Craft of Prolog, by Richard O''Keefe'
+	]).
 
 	:- protected(flatten_goals//1).
 	:- mode(flatten_goals(+callable), one).

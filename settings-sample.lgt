@@ -140,8 +140,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
-    logtalk_load_context(directory, Directory),
-    assertz(logtalk_library_path(my_project, Directory))
+	logtalk_load_context(directory, Directory),
+	assertz(logtalk_library_path(my_project, Directory))
 )).
 */
 

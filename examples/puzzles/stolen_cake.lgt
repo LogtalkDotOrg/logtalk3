@@ -51,7 +51,8 @@ Published on the web:
 		date is 2008/10/28,
 		author is 'Paulo Moura',
 		comment is 'Who Stole the cake logical puzzle by Kevin Stone',
-		source is 'http://www.brainbashers.com/showpuzzles.asp?puzzle=ZFSC']).
+		source is 'http://www.brainbashers.com/showpuzzles.asp?puzzle=ZFSC'
+	]).
 
 	:- public(thief/1).
 	:- mode(thief(?atom), zero_or_one).

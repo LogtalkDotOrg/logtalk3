@@ -45,7 +45,8 @@ Who owns the zebra and who drinks water?
 		version is 1.1,
 		date is 2014/09/27,
 		author is 'Paulo Moura and Markus Triska',
-		comment is 'Houses logical puzzle']).
+		comment is 'Houses logical puzzle'
+	]).
 
 	:- public(houses/1).
 	:- mode(houses(-list), one).

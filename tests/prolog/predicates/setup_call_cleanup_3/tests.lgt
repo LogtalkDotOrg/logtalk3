@@ -79,8 +79,8 @@ test_error_choice :-
 
 	succeeds(swi_setup_call_cleanup_3_06) :-
 		{	setup_call_cleanup(true, (ndet(X), assertz(v(X))), assertz(v(done))),
-	    	fail
-		;   findall(V, retract(v(V)), Vs)
+			fail
+		;	findall(V, retract(v(V)), Vs)
 		},
 		Vs == [a,b,done],
 		{retractall(v(_))}.

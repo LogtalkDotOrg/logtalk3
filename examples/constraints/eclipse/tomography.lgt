@@ -87,19 +87,19 @@
 		dim(Board, [M,N]),
 		write('   '),
 		( for(J,1,N), param(ColSums) do
-		    ColSum is subscript(ColSums, [J]),
-		    printf('%2d', ColSum)
+			ColSum is subscript(ColSums, [J]),
+			printf('%2d', ColSum)
 		), nl,
 		( for(I,1,M), param(RowSums,Board,N) do
-		    RowSum is subscript(RowSums, [I]),
-		    printf('%2d ', RowSum),
-		    ( for(J,1,N), param(Board,I) do
+			RowSum is subscript(RowSums, [I]),
+			printf('%2d ', RowSum),
+			( for(J,1,N), param(Board,I) do
 			X is subscript(Board, [I,J]),
 			( X==0 -> write('  ')
 			; X==1 -> write(' *')
 			;         write(' ?')
 			)
-		    ), nl
+			), nl
 		), nl.
 
 	% sample data

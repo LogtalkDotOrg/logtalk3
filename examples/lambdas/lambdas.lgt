@@ -168,15 +168,15 @@
 
 		bench2 :-
 			sequence(1, 100000, List),
-			(   (   write('Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:'), nl,
+			(	(	write('Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:'), nl,
 					time(add1(List, _))
 				;	write('Adding 1 to every integer in the list [1..100000] using map/3 with the integer::plus/3 predicate:'), nl,
 					time(sum(List, _))
-				;   write('Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:'), nl,
+				;	write('Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:'), nl,
 					time(map([X,Y]>>{Y is X+1}, List, _))
 				),
 				fail
-			;   true
+			;	true
 		).
 
 		sum(List1, List2) :-

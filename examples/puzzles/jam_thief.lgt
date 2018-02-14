@@ -36,7 +36,8 @@ Assuming, as we do, that fairy-tale characters either always lie or always tell 
 		version is 1.0,
 		date is 2004/4/29,
 		author is 'Paulo Moura',
-		comment is 'Who Stole the Jam logical puzzle']).
+		comment is 'Who Stole the Jam logical puzzle'
+	]).
 
 	:- public(thief/1).
 	:- mode(thief(?atom), zero_or_one).
