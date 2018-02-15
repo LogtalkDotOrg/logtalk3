@@ -107,15 +107,15 @@
 	% tests from the Logtalk portability work
 
 	succeeds(lgt_arg_3_17) :-
-		arg(1, [Head| _], Arg),
+		{arg(1, [Head| _], Arg)},
 		Arg == Head.
 
 	succeeds(lgt_arg_3_18) :-
-		arg(2, [_| Tail], Arg),
+		{arg(2, [_| Tail], Arg)},
 		Arg == Tail.
 
 	succeeds(lgt_arg_3_19) :-
-		arg(2, [_], Arg),
+		{arg(2, [_], Arg)},
 		Arg == [].
 
 :- end_object.
