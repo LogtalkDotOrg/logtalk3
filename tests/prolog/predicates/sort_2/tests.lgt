@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/06/01,
+		date is 2018/02/15,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -84,5 +84,11 @@
 
 	throws(eclipse_sort_2_11, error(type_error(list,[a|b]),_)) :-
 		{sort([], [a|b])}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_sort_2_12) :-
+		{sort([[e],[c,d],[a,b]], Sorted)},
+		Sorted == [[a,b],[c,d],[e]].
 
 :- end_object.
