@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/02/07,
+		date is 2018/02/15,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -107,11 +107,15 @@
 	% tests from the Logtalk portability work
 
 	succeeds(lgt_arg_3_17) :-
-		arg(1, [Head| _], Var),
-		Var == Head.
+		arg(1, [Head| _], Arg),
+		Arg == Head.
 
 	succeeds(lgt_arg_3_18) :-
-		arg(2, [_| Tail], Var),
-		Var == Tail.
+		arg(2, [_| Tail], Arg),
+		Arg == Tail.
+
+	succeeds(lgt_arg_3_19) :-
+		arg(2, [_], Arg),
+		Arg == [].
 
 :- end_object.
