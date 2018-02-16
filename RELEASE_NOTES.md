@@ -39,6 +39,9 @@ backend Prolog compiler performs unifications using occurs check by default.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: The GNU Prolog adapter file to require version 1.4.5 or later due
+to a critical bug fix in the handling of multifile predicates.
+
 * CHANGED: The CxProlog, SICStus Prolog, and XSB definitions for the missing
 `setup_call_cleanup/3` built-in predicate to ignore success or failure of the
 cleanup goal.

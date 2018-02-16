@@ -194,7 +194,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, gnu).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, gprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((1,4,2))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((1,4,5))).
 '$lgt_prolog_feature'(prolog_conformance, Mode) :-
 	(	current_prolog_flag(strict_iso, on) ->
 		Mode = strict
