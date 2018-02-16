@@ -182,6 +182,9 @@ compiler. Requires XSB r9206 or a later version.
 * FIXED: The `dcgs` example `iban` test to be skipped when using backend
 Prolog compilers with bounded arithmetic.
 
+* FIXED: The `errors` example to allow its `warnings_loader` file to succeed
+with only warnings as intended with more backend Prolog systems.
+
 Contributions
 -------------
 

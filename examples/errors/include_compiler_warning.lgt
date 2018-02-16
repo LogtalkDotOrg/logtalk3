@@ -19,7 +19,7 @@
 
 
 abc :-
-	consult(def).
+	tell(def).
 
 ghi :-
 	jkl.

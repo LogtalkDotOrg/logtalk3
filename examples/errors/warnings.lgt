@@ -85,7 +85,7 @@
 		compare(Result, first, second),
 		retractall(result(Result, _)),
 		sort([], []),
-		consult(file).
+		tell(file).
 
 :- end_object.
 
