@@ -61,8 +61,8 @@ running on Windows and `./.lgt_tmp/` otherwise).
 is due to a `gplc` limitation with multifile predicates that requires a
 workaround in the `logtalk.lgt` core file.
 
-* FIXED: Compiler report of term end line in warnings and errors when using
-GNU Prolog.
+* FIXED: Compiler report of term start and end lines in warnings and errors
+when using GNU Prolog. Thanks to Daniel Diaz for his advice.
 
 * FIXED: Workaround parser issue in the Lean Prolog adapter file.
 
