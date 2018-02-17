@@ -105,6 +105,9 @@ when checking for expected text and binary input and output. These predicates
 provide an alternative to the predicates that check text and binary input and
 output. These new predicates can be used for easier debugging of failed tests.
 
+* ADDED: Predicate `deterministic/2` to the `lgtunit` tool. This predicate is
+a reified version of the `deterministic/1` predicate.
+
 * ADDED: Support to the `diagrams` tool to generate predicate cross-referencing
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
 source file line for the corresponding predicate clause. 
@@ -151,6 +154,8 @@ to check for correct behavior when the arguments contain cuts.
 * ADDED: Additional unit tests for the ISO Prolog standard `acyclic_term/1`,
 `close/1-2`, `current_op/3`, `float/1`, `integer/1`, `nl/1`, `sort/2`,
 `subsumes_term/2`, and `unify_with_occurs_check/2` built-in predicates.
+
+* ADDED: Unit tests for the new `lgtunit::deterministic/2` predicate.
 
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.

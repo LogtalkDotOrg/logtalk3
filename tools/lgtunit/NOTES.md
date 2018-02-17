@@ -463,6 +463,8 @@ fails or throws an error
 - `Float1 =~= Float2` - for approximate float comparison
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
+- `deterministic(Goal)`
+- `deterministic(Goal, Deterministic)`
 
 The `assertion/2` predicate is used in the code generated for the `test/2-3`
 dialects. But can also be used in the body of tests where using two or more
@@ -471,9 +473,9 @@ assertions is convenient or in the body of tests written using the `test/1`,
 test goal and checking the test goal results and to provide more informative
 test failure messages.
 
-As the `benchmark/2-3` predicates are meta-predicates, turning on the
-`optimize` compiler flag is advised to avoid runtime compilation of the
-meta-argument, which would add an overhead to the timing results.
+As the `benchmark/2-3` and `deterministic/1-2` predicates are meta-predicates,
+turning on the `optimize` compiler flag is advised to avoid runtime compilation
+of the meta-argument, which would add an overhead to the timing results.
 
 Consult the `lgtunit` object documentation (`docs/tools.html`) for further
 details on these predicates.

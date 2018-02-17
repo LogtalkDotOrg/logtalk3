@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/10/09,
+		date is 2018/02/17,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -32,7 +32,7 @@
 		benchmark/2, benchmark_reified/3,
 		benchmark/3,
 		epsilon/1, ('=~=')/2,
-		deterministic/1,
+		deterministic/1, deterministic/2,
 		variant/2,
 		assertion/2,
 		quick_check/3, quick_check/2, quick_check/1
@@ -166,6 +166,27 @@
 
 	succeeds(deterministic_1_05) :-
 		\+ deterministic((N=1; N=2)).
+
+	% deterministic/2 tests
+
+	succeeds(deterministic_2_01) :-
+		deterministic(true, Deterministic),
+		Deterministic == true.
+
+	succeeds(deterministic_2_02) :-
+		deterministic(once(repeat), Deterministic),
+		Deterministic == true.
+
+	succeeds(deterministic_2_03) :-
+		\+ deterministic(fail, _).
+
+	succeeds(deterministic_2_04) :-
+		deterministic(repeat, Deterministic),
+		Deterministic == false.
+
+	succeeds(deterministic_2_05) :-
+		deterministic((N=1; N=2), Deterministic),
+		Deterministic == false.
 
 	% variant/2 tests
 

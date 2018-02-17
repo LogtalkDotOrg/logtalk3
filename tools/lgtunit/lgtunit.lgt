@@ -28,7 +28,7 @@
 	:- info([
 		version is 6.0,
 		author is 'Paulo Moura',
-		date is 2018/02/05,
+		date is 2018/02/17,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -73,6 +73,14 @@
 	:- info(deterministic/1, [
 		comment is 'True if the goal succeeds once without leaving choice-points.',
 		argnames is ['Goal']
+	]).
+
+	:- public(deterministic/2).
+	:- meta_predicate(deterministic(0, *)).
+	:- mode(deterministic(+callable, --atom), zero_or_one).
+	:- info(deterministic/2, [
+		comment is 'Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.',
+		argnames is ['Goal', 'Deterministic']
 	]).
 
 	:- public(assertion/2).
@@ -1294,20 +1302,31 @@
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
+
 		% avoid portability warnings
 		:- uses(user, [setup_call_cleanup/3]).
 		:- meta_predicate(user::setup_call_cleanup(0,0,0)).
 
 		deterministic(Goal) :-
 			setup_call_cleanup(true, Goal, Deterministic = true),
-			(	nonvar(Deterministic) ->
-				!
-			;	!,
+			(	var(Deterministic) ->
+				!,
 				fail
+			;	true
 			).
+
+		deterministic(Goal, Deterministic) :-
+			setup_call_cleanup(true, Goal, Deterministic = true),
+			(	var(Deterministic) ->
+				Deterministic = false,
+				!
+			;	true
+			).
+
 	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
 				(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
 	)).
+
 		% avoid portability warnings
 		:- uses(user, [call_cleanup/2]).
 		:- meta_predicate(user::call_cleanup(0,0)).
@@ -1317,8 +1336,17 @@
 			(	var(Deterministic) ->
 				!,
 				fail
-			;	!
+			;	true
 			).
+
+		deterministic(Goal, Deterministic) :-
+			call_cleanup(Goal, Deterministic = true),
+			(	var(Deterministic) ->
+				Deterministic = false,
+				!
+			;	true
+			).
+
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 		% avoid portability warnings
 		:- uses(user, [call_det/2]).
@@ -1328,16 +1356,38 @@
 			call_det(Goal, Deterministic),
 			!,
 			Deterministic == true.
+
+		deterministic(Goal, Deterministic) :-
+			call_det(Goal, Deterministic),
+			!.
+
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
 		deterministic(Goal) :-
 			{sepia_kernel:get_cut(Before)},
 			call(Goal),
 			{sepia_kernel:get_cut(After)},
 			!,
 			Before == After.
+
+		deterministic(Goal, Deterministic) :-
+			{sepia_kernel:get_cut(Before)},
+			call(Goal),
+			{sepia_kernel:get_cut(After)},
+			!,
+			(	Before == After ->
+				Deterministic = true
+			;	Deterministic = false
+			).
+
 	:- else.
+
 		deterministic(_) :-
 			throw(error(resource_error, deterministic/1)).
+
+		deterministic(_, _) :-
+			throw(error(resource_error, deterministic/2)).
+
 	:- endif.
 
 	assertion(Assertion, Goal) :-
