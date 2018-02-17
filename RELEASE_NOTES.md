@@ -153,7 +153,8 @@ to check for correct behavior when the arguments contain cuts.
 
 * ADDED: Additional unit tests for the ISO Prolog standard `acyclic_term/1`,
 `close/1-2`, `current_op/3`, `float/1`, `integer/1`, `nl/1`, `sort/2`,
-`subsumes_term/2`, and `unify_with_occurs_check/2` built-in predicates.
+`subsumes_term/2`, `term_variables/2`, and `unify_with_occurs_check/2`
+built-in predicates.
 
 * ADDED: Unit tests for the new `lgtunit::deterministic/2` predicate.
 

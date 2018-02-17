@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2018/02/17,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -81,5 +81,11 @@
 	succeeds(eclipse_term_variables_2_10) :-
 		{term_variables(foo(X,Y,X,Z), Vs)},
 		Vs == [X,Y,Z].
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_term_variables_2_11) :-
+		{term_variables([Z,Z], Vs)},
+		Vs == [Z].
 
 :- end_object.
