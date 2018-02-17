@@ -45,6 +45,9 @@ to a critical bug fix in the handling of multifile predicates.
 * CHANGED: The JIProlog adapter file to require version 4.1.6.1 or later due
 to critical bug fixes.
 
+* CHANGED: The XSB adapter file to require version 3.8.0 or later due to
+critical bug fixes.
+
 * CHANGED: The CxProlog, SICStus Prolog, and XSB definitions for the missing
 `setup_call_cleanup/3` built-in predicate to ignore success or failure of the
 cleanup goal.

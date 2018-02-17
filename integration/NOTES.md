@@ -28,15 +28,15 @@ system path):
 * B-Prolog (version 7.8 or later):         `bplgt`
 * CxProlog (version 0.98.1 or later):      `cxlgt`
 * ECLiPSe (version 6.1#143 or later):      `eclipselgt`
-* GNU Prolog (version 1.4.2 or later):     `gplgt`
-* JIProlog (version 4.1.2.8 or later):     `jiplgt`     (first run may require `sudo`)
+* GNU Prolog (version 1.4.5 or later):     `gplgt`
+* JIProlog (version 4.1.6.1 or later):     `jiplgt`     (first run may require `sudo`)
 * Lean Prolog (version 4.5.4 or later):    `lplgt`
 * Qu-Prolog (version 9.7 or later):        `qplgt`
 * Quintus Prolog (version 3.3 or later):   `quintuslgt`
 * SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
 * SWI-Prolog (version 6.6.0 or later):     `swilgt`
-* XSB (version 3.5.0 or later):            `xsblgt`     (first run may require `sudo`)
-* XSB MT (version 3.5.0 or later):         `xsbmtlgt`   (first run may require `sudo`)
+* XSB (version 3.8.0 or later):            `xsblgt`     (first run may require `sudo`)
+* XSB MT (version 3.8.0 or later):         `xsbmtlgt`   (first run may require `sudo`)
 * YAP (version 6.3.4 or later):            `yaplgt`
 
 For more information about these scripts and their dependencies, consult

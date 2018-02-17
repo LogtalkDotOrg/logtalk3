@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on January 30, 2018
+; Last updated on February 16, 2018
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -70,15 +70,15 @@ Name: "prolog"; Description: "Prolog integration (back-end compiler support)"; T
 Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.98.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\ji"; Description: "JIProlog integration (version 4.1.2.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.5 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\ji"; Description: "JIProlog integration (version 4.1.6.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\lean"; Description: "Lean Prolog (experimental) integration (version 4.5.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\xsb"; Description: "XSB integration (version 3.5.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\xsbmt"; Description: "XSB-MT integration (version 3.5.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\xsb"; Description: "XSB integration (version 3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\xsbmt"; Description: "XSB-MT integration (version 3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (version 6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (version 6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 

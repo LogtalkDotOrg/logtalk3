@@ -180,7 +180,7 @@ multi-threading features cannot currently be supported due to missing
 mutex predicates and missing thread creation options.
 
 
-GNU Prolog 1.4.2 and later versions
+GNU Prolog 1.4.5 and later versions
 -----------------------------------
 
 	gnu.pl
@@ -232,7 +232,7 @@ to type:
 	$ logtalk
 
 
-JIProlog 4.1.2.8 and later versions
+JIProlog 4.1.6.1 and later versions
 -----------------------------------
 
 	ji.pl
@@ -476,7 +476,7 @@ terms are decorated with additional source file location information for
 integration with the SWI-Prolog own development tools.
 
 
-XSB 3.5.0 and later versions
+XSB 3.8.0 and later versions
 ----------------------------
 
 	xsb.pl
