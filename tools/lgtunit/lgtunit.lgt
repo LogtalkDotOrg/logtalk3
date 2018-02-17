@@ -1030,7 +1030,7 @@
 		parse_test_options(Options, Goal0, Test, Condition, Setup, Cleanup, Note),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
-		;	Outcome == deterministic ->
+		;	Outcome = deterministic(_) ->
 			assertz(test_(Test, deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
 		;	Outcome == fail ->
 			assertz(test_(Test, fails(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
@@ -1046,7 +1046,7 @@
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Position)))
-		;	Outcome == deterministic ->
+		;	Outcome = deterministic(_) ->
 			assertz(test_(Test, deterministic(Test, Position)))
 		;	Outcome == fail ->
 			assertz(test_(Test, fails(Test, Position)))
