@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2017/12/15,
+		date is 2018/02/17,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -93,6 +93,14 @@
 			['~q: success'-[Test], nl]
 		;	['~q: success (~w)'-[Test, Note], nl]
 		).
+
+	message_tokens(non_deterministic_success(_Object, Test, File, Position, Note)) -->
+		(	{Note == ''} ->
+			['~q: failure'-[Test], nl]
+		;	['~q: failure (~w)'-[Test, Note], nl]
+		),
+		failed_test_reason(non_deterministic_success),
+		['  in file ~w between lines ~w'-[File, Position], nl].
 
 	message_tokens(failed_test(_Object, Test, File, Position, Reason, Note)) -->
 		(	{Note == ''} ->
@@ -195,6 +203,8 @@
 		['  test goal failed but should have succeeded'-[], nl].
 	failed_test_reason(failure_instead_of_error) -->
 		['  test goal failed but should have thrown an error'-[], nl].
+	failed_test_reason(non_deterministic_success) -->
+		['  test goal succeeded non-deterministically'-[], nl].
 	failed_test_reason(error_instead_of_failure(Error)) -->
 		['  test goal throws an error but should have failed: ~q'-[Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_error(Assertion, error(Error,_)))) -->

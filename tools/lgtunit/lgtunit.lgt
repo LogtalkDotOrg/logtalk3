@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.0,
+		version is 6.1,
 		author is 'Paulo Moura',
 		date is 2018/02/17,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
@@ -716,9 +716,12 @@
 	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Output)) ->
+				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Output)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position, Note, Output)
+						(	Deterministic == true ->
+							passed_test(Test, File, Position, Note, Output)
+						;	non_deterministic_success(Test, File, Position, Note, Output)
+						)
 					;	true
 					)
 				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Output)
@@ -793,9 +796,12 @@
 		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
 		).
 	run_test(deterministic(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
+		(	catch(::test(Test, _, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
 			(	var(Error) ->
-				passed_test(Test, File, Position, Output)
+				(	Deterministic == true ->
+					passed_test(Test, File, Position, Output)
+				;	non_deterministic_success(Test, File, Position, Output)
+				)
 			;	true
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
@@ -873,6 +879,18 @@
 
 	passed_test(Test, File, Position, Output) :-
 		passed_test(Test, File, Position, '', Output).
+
+	non_deterministic_success(Test, File, Position, Note, Output) :-
+		self(Object),
+		increment_failed_tests_counter,
+		% ensure that any redirection of the current output stream by
+		% the test itself doesn't affect printing the test results
+		current_output(Current), set_output(Output),
+		print_message(error, lgtunit, non_deterministic_success(Object, Test, File, Position, Note)),
+		set_output(Current).
+
+	non_deterministic_success(Test, File, Position, Output) :-
+		non_deterministic_success(Test, File, Position, '', Output).
 
 	failed_test(Test, File, Position, Reason, Note, Output) :-
 		self(Object),
@@ -1055,7 +1073,7 @@
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(Test, succeeds(Test, Position))).
-	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic) :- lgtunit::deterministic(Head))]) :-
+	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic(Deterministic)) :- lgtunit::deterministic(Head,Deterministic))]) :-
 		check_for_valid_test_identifier(Test),
 		compile_deterministic_test_aux_predicate(Test, Goal, Head),
 		logtalk_load_context(term_position, Position),
@@ -1177,9 +1195,9 @@
 
 	convert_test_outcome(true, _, Goal, true, Goal).
 	convert_test_outcome(true(Assertion), _, Goal, true, (Goal, lgtunit::assertion(Assertion,Assertion))).
-	convert_test_outcome(deterministic, Test, Goal, deterministic, lgtunit::deterministic(Head)) :-
+	convert_test_outcome(deterministic, Test, Goal, deterministic(Deterministic), lgtunit::deterministic(Head,Deterministic)) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
-	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic, (lgtunit::deterministic(Head), lgtunit::assertion(Assertion,Assertion))) :-
+	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic(Deterministic), (lgtunit::deterministic(Head,Deterministic), lgtunit::assertion(Assertion,Assertion))) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(fail, _, Goal, fail, Goal).
 	convert_test_outcome(false, _, Goal, fail, Goal).
