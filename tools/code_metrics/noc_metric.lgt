@@ -25,8 +25,8 @@
 	:- info([
 		version is 0.8,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/02,
-		comment is 'Number of clauses defined for a predicate in an object or category.'
+		date is 2018/02/18,
+		comment is 'Number of entity clauses metric.'
 	]).
 
 	entity_score(Entity, Nocs) :-
@@ -61,9 +61,12 @@
 		file_score(File, TotalNocs),
 		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
 
-	process_directory(Directory) :-
+	directory_score(Directory, TotalNocs) :-
 		findall(Nocs, directory_file_nocs(Directory, _, Nocs), NocsList),
-		numberlist::sum(NocsList, TotalNocs),
+		numberlist::sum(NocsList, TotalNocs).
+
+	process_directory(Directory) :-
+		directory_score(Directory, TotalNocs),
 		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
 
 	directory_file_nocs(Directory, File, Nocs) :-
@@ -74,7 +77,7 @@
 		logtalk::loaded_file_property(File, directory(DirectorySlash)),
 		file_score(File, Nocs).
 
-	process_rdirectory(Directory) :-
+	rdirectory_score(Directory, TotalNocs) :-
 		setof(
 			SubDirectory,
 			^^sub_directory(Directory, SubDirectory),
@@ -87,10 +90,21 @@
 			),
 			NocsList
 		),
-		numberlist::sum(NocsList, TotalNocs),
+		numberlist::sum(NocsList, TotalNocs).
+
+	process_rdirectory(Directory) :-
+		rdirectory_score(Directory, TotalNocs),
 		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
 
-	process_rlibrary(Library) :-
+	library_score(Library, TotalNocs) :-
+		logtalk::expand_library_path(Library, Directory),
+		directory_score(Directory, TotalNocs).
+
+	process_library(Library) :-
+		library_score(Library, TotalNocs),
+		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).		
+
+	rlibrary_score(Library, TotalNocs) :-
 		setof(
 			Path,
 			^^sub_library(Library, Path),
@@ -103,10 +117,13 @@
 			),
 			NocsList
 		),
-		numberlist::sum(NocsList, TotalNocs),
+		numberlist::sum(NocsList, TotalNocs).
+
+	process_rlibrary(Library) :-
+		rlibrary_score(Library, TotalNocs),
 		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).		
 
-	process_all :-
+	all_score(TotalNocs) :-
 		findall(
 			Nocs,
 			(	logtalk::loaded_file(File),
@@ -114,7 +131,10 @@
 			),
 			NocsList
 		),
-		numberlist::sum(NocsList, TotalNocs),
+		numberlist::sum(NocsList, TotalNocs).
+
+	process_all :-
+		all_score(TotalNocs),
 		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
 
 	entity_score(_Entity, Nocs) -->

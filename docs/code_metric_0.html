@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/1/24</code>
+            <code>2018/2/18</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -181,7 +181,7 @@
         <div class="section">
           <h3 id="entity_score/2" class="code">entity_score/2</h3>
           <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with Entity. Fails if the metric does not apply.</p>
+            <p class="comment">Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -191,6 +191,126 @@
             <dt class="key">template:</dt>
             <dd class="value">
               <code>entity_score(Entity,Score)</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="library_score/2" class="code">library_score/2</h3>
+          <blockquote>
+            <p class="comment">Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>library_score(Library,Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>library_score(@atom,-ground) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="rlibrary_score/2" class="code">rlibrary_score/2</h3>
+          <blockquote>
+            <p class="comment">Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rlibrary_score(Library,Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>rlibrary_score(@atom,-ground) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="file_score/2" class="code">file_score/2</h3>
+          <blockquote>
+            <p class="comment">Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file_score(File,Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>file_score(@atom,-ground) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directory_score/2" class="code">directory_score/2</h3>
+          <blockquote>
+            <p class="comment">Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory_score(Directory,Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directory_score(@atom,-ground) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="rdirectory_score/2" class="code">rdirectory_score/2</h3>
+          <blockquote>
+            <p class="comment">Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rdirectory_score(Directory,Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>rdirectory_score(@atom,-ground) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="all_score/1" class="code">all_score/1</h3>
+          <blockquote>
+            <p class="comment">Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>all_score(Score)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>all_score(-ground) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

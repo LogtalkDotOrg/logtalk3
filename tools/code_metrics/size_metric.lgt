@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2018/02/01,
+		date is 2018/02/18,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes.'
 	]).
 
@@ -34,17 +34,22 @@
 		os::file_size(File, Size).
 
 	process_entity(_, Entity) :-
-		^^entity_property(Entity, file(File)),
-		os::file_size(File, Size),
+		entity_score(Entity, Size),
 		logtalk::print_message(information, code_metrics, source_code_size(Size)).
+
+	file_score(File, Size) :-
+		os::file_size(File, Size).
 
 	process_file(File) :-
-		os::file_size(File, Size),
+		file_score(File, Size),
 		logtalk::print_message(information, code_metrics, source_code_size(Size)).
 
-	process_directory(Directory) :-
+	directory_score(Directory, TotalSize) :-
 		findall(Size, directory_file_size(Directory, _, Size), Sizes),
-		numberlist::sum(Sizes, TotalSize),
+		numberlist::sum(Sizes, TotalSize).
+
+	process_directory(Directory) :-
+		directory_score(Directory, TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
 
 	directory_file_size(Directory, File, Size) :-
@@ -55,7 +60,7 @@
 		logtalk::loaded_file_property(File, directory(DirectorySlash)),
 		os::file_size(File, Size).
 
-	process_rdirectory(Directory) :-
+	rdirectory_score(Directory, TotalSize) :-
 		setof(
 			SubDirectory,
 			^^sub_directory(Directory, SubDirectory),
@@ -68,10 +73,13 @@
 			),
 			Sizes
 		),
-		numberlist::sum(Sizes, TotalSize),
+		numberlist::sum(Sizes, TotalSize).
+
+	process_rdirectory(Directory) :-
+		rdirectory_score(Directory, TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
 
-	process_rlibrary(Library) :-
+	rlibrary_score(Library, TotalSize) :-
 		setof(
 			Path,
 			^^sub_library(Library, Path),
@@ -84,10 +92,13 @@
 			),
 			Sizes
 		),
-		numberlist::sum(Sizes, TotalSize),
+		numberlist::sum(Sizes, TotalSize).
+
+	process_rlibrary(Library) :-
+		rlibrary_score(Library, TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).		
 
-	process_all :-
+	all_score(TotalSize) :-
 		findall(
 			Size,
 			(	logtalk::loaded_file(File),
@@ -95,7 +106,10 @@
 			),
 			Sizes
 		),
-		numberlist::sum(Sizes, TotalSize),
+		numberlist::sum(Sizes, TotalSize).
+
+	process_all :-
+		all_score(TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
 
 	entity_score(_Entity, Size) -->

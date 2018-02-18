@@ -24,7 +24,7 @@
 	:- info([
 		version is 0.8,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/01/24,
+		date is 2018/02/18,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -81,14 +81,56 @@
 	]).
 
 	:- public(entity_score/2).
-	:- mode(entity_score(@entity_identifier, -nonvar), zero_or_one).
+	:- mode(entity_score(@entity_identifier, -ground), zero_or_one).
 	:- info(entity_score/2, [
-		comment is 'Score is a term that represents the metric score associated with Entity. Fails if the metric does not apply.',
+		comment is 'Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.',
 		argnames is ['Entity', 'Score']
 	]).
 
+	:- public(library_score/2).
+	:- mode(library_score(@atom, -ground), zero_or_one).
+	:- info(library_score/2, [
+		comment is 'Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.',
+		argnames is ['Library', 'Score']
+	]).
+
+	:- public(rlibrary_score/2).
+	:- mode(rlibrary_score(@atom, -ground), zero_or_one).
+	:- info(rlibrary_score/2, [
+		comment is 'Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.',
+		argnames is ['Library', 'Score']
+	]).
+
+	:- public(file_score/2).
+	:- mode(file_score(@atom, -ground), zero_or_one).
+	:- info(file_score/2, [
+		comment is 'Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.',
+		argnames is ['File', 'Score']
+	]).
+
+	:- public(directory_score/2).
+	:- mode(directory_score(@atom, -ground), zero_or_one).
+	:- info(directory_score/2, [
+		comment is 'Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.',
+		argnames is ['Directory', 'Score']
+	]).
+
+	:- public(rdirectory_score/2).
+	:- mode(rdirectory_score(@atom, -ground), zero_or_one).
+	:- info(rdirectory_score/2, [
+		comment is 'Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.',
+		argnames is ['Directory', 'Score']
+	]).
+
+	:- public(all_score/1).
+	:- mode(all_score(-ground), zero_or_one).
+	:- info(all_score/1, [
+		comment is 'Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.',
+		argnames is ['Score']
+	]).
+
 	:- public(entity_score//2).
-	:- mode(entity_score(@entity_identifier, @nonvar), one).
+	:- mode(entity_score(@entity_identifier, +ground), one).
 	:- info(entity_score//2, [
 		comment is 'Pretty prints the entity score.',
 		argnames is ['Entity', 'Score']

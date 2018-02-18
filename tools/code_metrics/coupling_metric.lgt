@@ -45,21 +45,21 @@
 		).
 
 	coupling_score_protocol(Protocol, Score0, Score, LoggedEntities) :-
-		(   unvisited_ancestor(protocol, Protocol, Ancestor, LoggedEntities)
-		->  Score1 is Score0 + 1,
+		(	unvisited_ancestor(protocol, Protocol, Ancestor, LoggedEntities)
+		->	Score1 is Score0 + 1,
 			coupling_score_protocol(Protocol, Score1, Score, [Ancestor|LoggedEntities])
-		;   Score0 = Score
+		;	Score0 = Score
 		).
 
 	% measure the coupling scores for objects and categories
 	coupling_score(Kind, Entity, Score0, Score, LoggedEntities) :-
-		(   unvisited_ancestor(Kind, Entity, Ancestor, LoggedEntities)
-		->  Score1 is Score0 + 1,
+		(	unvisited_ancestor(Kind, Entity, Ancestor, LoggedEntities)
+		->	Score1 is Score0 + 1,
 			coupling_score(Kind, Entity, Score1, Score, [Ancestor| LoggedEntities])
-		;   unvisited_call(Entity, Entity2, LoggedEntities)
-		->  Score1 is Score0 + 1,
+		;	unvisited_call(Entity, Entity2, LoggedEntities)
+		->	Score1 is Score0 + 1,
 			coupling_score(Kind, Entity, Score1, Score, [Entity2| LoggedEntities])
-		;   Score0 = Score
+		;	Score0 = Score
 		).
 
 	% Increment the score if there are any direct ancestors
@@ -85,8 +85,8 @@
 		Entity \== Obj.
 
 	external_call_(Entity, Entity2, Predicate) :-
-		(   Predicate = Functor/N
-		;   Predicate = ^^Functor/N
+		(	Predicate = Functor/N
+		;	Predicate = ^^Functor/N
 		),
 		\+ ^^defines_predicate(Entity, Predicate),
 		^^current_entity(Entity2),
