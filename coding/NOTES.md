@@ -55,3 +55,12 @@ which some editors lack.
 Some text editors supporting regular expressions contain bugs and/or 
 hard-coded limitations that prevent full optimization of the syntax 
 coloring patterns.
+
+
+Online code formatters
+----------------------
+
+http://hilite.me is an online service that converts code snippets into
+pretty-printed HTML format. It supports many programming languages,
+including Logtalk and Prolog.
+
