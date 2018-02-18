@@ -28,19 +28,19 @@
 		comment is 'Unit tests for the "lgtunit" tool support for parametric tests.'
 	]).
 
-	test(parametric_01) :-
+	test(parametric_01, true, []) :-
 		parameter(1, Parameter),
 		Parameter == 1.
 
-	deterministic(parametric_02) :-
+	test(parametric_02, deterministic, []) :-
 		parameter(1, Parameter),
 		Parameter == 1.
 
-	test(parametric_03, true) :-
+	test(parametric_03, true, []) :-
 		parameter(1, Parameter),
 		Parameter == 1.
 
-	test(parametric_04, deterministic) :-
+	test(parametric_04, deterministic, []) :-
 		parameter(1, Parameter),
 		Parameter == 1.
 
