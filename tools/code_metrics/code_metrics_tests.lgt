@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/28,
+		date is 2018/02/18,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 
@@ -43,33 +43,29 @@
 		entity/1
 	]).
 
-	:- uses(lgtunit, [
-		deterministic/1
-	]).
+	test(code_metrics_entity, deterministic) :-
+		entity(obj_c).
 
-	test(code_metrics_entity) :-
-		deterministic(entity(obj_c)).
-
-	test(code_metrics_file) :-
+	test(code_metrics_file, deterministic) :-
 		object_property(lgtunit, file(File)),
-		deterministic(file(File)).
+		file(File).
 
-	test(code_metrics_library) :-
-		deterministic(library(lgtunit)).
+	test(code_metrics_library, deterministic) :-
+		library(lgtunit).
 
-	test(code_metrics_rlibrary) :-
-		deterministic(rlibrary(lgtunit)).
+	test(code_metrics_rlibrary, deterministic) :-
+		rlibrary(lgtunit).
 
-	test(code_metrics_directory) :-
+	test(code_metrics_directory, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(directory(Directory)).
+		directory(Directory).
 
-	test(code_metrics_rdirectory) :-
+	test(code_metrics_rdirectory, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(rdirectory(Directory)).
+		rdirectory(Directory).
 
-	test(code_metrics_all) :-
-		deterministic(all).
+	test(code_metrics_all, deterministic) :-
+		all.
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

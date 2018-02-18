@@ -188,6 +188,9 @@ standard `!/0` control construct.
 * FIXED: The unit tests for the `call/N` Logtalk method to delay expected
 errors to runtime.
 
+* FIXED: The tools unit tests to use the `test/2` dialect with a
+`deterministic` outcome for easier diagnosing of failed tests.
+
 Examples
 --------
 

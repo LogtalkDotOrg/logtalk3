@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2016/10/13,
+		date is 2018/02/18,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -54,47 +54,47 @@
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic
 
-	test(lgtdoc_all_1_01) :-
+	test(lgtdoc_all_1_01, deterministic) :-
 		deterministic(all([])).
 
-	test(lgtdoc_all_0_01) :-
-		deterministic(all).
+	test(lgtdoc_all_0_01, deterministic) :-
+		all.
 
-	test(lgtdoc_library_2_01) :-
-		deterministic(library(lgtunit, [])).
+	test(lgtdoc_library_2_01, deterministic) :-
+		library(lgtunit, []).
 
-	test(lgtdoc_library_1_01) :-
-		deterministic(library(lgtunit)).
+	test(lgtdoc_library_1_01, deterministic) :-
+		library(lgtunit).
 
-	test(lgtdoc_rlibrary_2_01) :-
-		deterministic(rlibrary(lgtunit, [])).
+	test(lgtdoc_rlibrary_2_01, deterministic) :-
+		rlibrary(lgtunit, []).
 
-	test(lgtdoc_rlibrary_1_01) :-
-		deterministic(rlibrary(lgtunit)).
+	test(lgtdoc_rlibrary_1_01, deterministic) :-
+		rlibrary(lgtunit).
 
-	test(lgtdoc_file_2_01) :-
+	test(lgtdoc_file_2_01, deterministic) :-
 		object_property(lgtunit, file(File)),
-		deterministic(file(File, [])).
+		file(File, []).
 
-	test(lgtdoc_file_1_01) :-
+	test(lgtdoc_file_1_01, deterministic) :-
 		object_property(lgtunit, file(File)),
-		deterministic(file(File)).
+		file(File).
 
-	test(lgtdoc_directory_2_01) :-
+	test(lgtdoc_directory_2_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(directory(Directory, [])).
+		directory(Directory, []).
 
-	test(lgtdoc_directory_1_01) :-
+	test(lgtdoc_directory_1_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(directory(Directory)).
+		directory(Directory).
 
-	test(lgtdoc_rdirectory_2_01) :-
+	test(lgtdoc_rdirectory_2_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(rdirectory(Directory, [])).
+		rdirectory(Directory, []).
 
-	test(lgtdoc_rdirectory_1_01) :-
+	test(lgtdoc_rdirectory_1_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		deterministic(rdirectory(Directory)).
+		rdirectory(Directory).
 
 	cleanup :-
 		this(This),

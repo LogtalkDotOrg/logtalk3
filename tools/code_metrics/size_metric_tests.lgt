@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
-		author is 'Ebrahim Azarisooreh',
-		date is 2018/01/23,
+		version is 0.2,
+		author is 'Paulo Moura',
+		date is 2018/02/18,
 		comment is 'Unit tests for the source code size metric.'
 	]).
 
@@ -43,33 +43,29 @@
 		entity/1
 	]).
 
-	:- uses(lgtunit, [
-		deterministic/1
-	]).
-
-	test(size_metric_entity) :-
-		deterministic(entity(logtalk)).
+	test(size_metric_entity, deterministic) :-
+		entity(logtalk).
 
 	test(size_metric_file) :-
 		object_property(logtalk, file(File)),
-		deterministic(file(File)).
+		file(File).
 
-	test(size_metric_library) :-
-		deterministic(library(core)).
+	test(size_metric_library, deterministic) :-
+		library(core).
 
-	test(size_metric_rlibrary) :-
-		deterministic(rlibrary(core)).
+	test(size_metric_rlibrary, deterministic) :-
+		rlibrary(core).
 
-	test(size_metric_directory) :-
+	test(size_metric_directory, deterministic) :-
 		logtalk::expand_library_path(core, Directory),
-		deterministic(directory(Directory)).
+		directory(Directory).
 
-	test(size_metric_rdirectory) :-
+	test(size_metric_rdirectory, deterministic) :-
 		logtalk::expand_library_path(core, Directory),
-		deterministic(rdirectory(Directory)).
+		rdirectory(Directory).
 
-	test(size_metric_all) :-
-		deterministic(all).
+	test(size_metric_all, deterministic) :-
+		all.
 
 	% suppress all messages from the "code_metrics"
 	% tool to not pollute the unit tests output
