@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2017/12/13,
+		date is 2018/02/19,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe.',
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.'
@@ -83,7 +83,7 @@
 		integer(Upper),
 		Upper >= Lower,
 		random(Float),
-		Random is truncate((Float * (Upper - Lower + 1) + Lower)).
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower.
 
 	member(Random, List) :-
 		length(List, Length),
