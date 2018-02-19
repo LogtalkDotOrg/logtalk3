@@ -136,6 +136,10 @@ helper scripts.
 when available to workaround failed tests resulting in invalid byte sequences
 in test log files. This issue can result in a truncated list of failed tests.
 
+* FIXED: The coupling metric failed to consider external calls to Prolog module
+predicates and would give wrong results when predicates with the same functor
+are declared in multiple objects.
+
 Tests
 -----
 

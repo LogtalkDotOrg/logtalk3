@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.5,
-		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/31,
+		version is 0.6,
+		author is 'Ebrahim Azarisooreh and Paulo Moura',
+		date is 2018/02/19,
 		comment is 'Analyzes entity coupling scores.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
@@ -75,23 +75,16 @@
 
 	external_call(Entity, Entity2, Caller, Predicate) :-
 		^^entity_calls(Entity, Caller, Predicate),
-		external_call_(Entity, Entity2, Predicate).
+		external_call_(Predicate, Entity, Entity2).
 
 	external_call(Entity, Entity2, Caller, Predicate) :-
 		^^entity_updates(Entity, Caller, Predicate),
-		external_call_(Entity, Entity2, Predicate).
+		external_call_(Predicate, Entity, Entity2).
 
-	external_call_(Entity, Obj, Obj::_Functor/_N) :-
+	external_call_(Obj::_Name/_Arity, Entity, Obj) :-
 		Entity \== Obj.
 
-	external_call_(Entity, Entity2, Predicate) :-
-		(	Predicate = Functor/N
-		;	Predicate = ^^Functor/N
-		),
-		\+ ^^defines_predicate(Entity, Predicate),
-		^^current_entity(Entity2),
-		Entity \== Entity2,
-		^^defines_predicate(Entity2, Predicate).
+	external_call_(':'(Module,_Name/_Arity), _, Module).
 
 	entity_score(_Entity, Score) -->
 		['Coupling score: ~w'-[Score], nl].
