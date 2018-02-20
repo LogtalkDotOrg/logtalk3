@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/02/18,
+		date is 2018/02/20,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
 	]).
 
@@ -154,5 +154,11 @@
 
 	succeeds(lgt_term_comparison_35) :-
 		{'@<'((4,0,1), (4,1,0))}.
+
+	succeeds(lgt_term_comparison_36) :-
+		{'@<'(b/0, a//0)}.
+
+	fails(lgt_term_comparison_37) :-
+		{'@<'(a//0, a/0)}.
 
 :- end_object.
