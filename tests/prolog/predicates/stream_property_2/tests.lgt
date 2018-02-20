@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2018/02/20,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 
@@ -82,6 +82,17 @@
 
 	fails(sics_stream_property_2_07) :-
 		{stream_property(_S, type(binary))}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_stream_property_2_08) :-
+		stream_property(S, alias(user_error)),
+		findall(P, {stream_property(S, P)}, L),
+		memberchk(output, L),
+		memberchk(eof_action(reset), L),
+		memberchk(mode(append), L),
+		memberchk(reposition(false), L),
+		memberchk(type(text), L).
 
 	cleanup :-
 		^^clean_file(foo),
