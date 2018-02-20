@@ -158,7 +158,8 @@ different backend Prolog systems supporting different sets of text encodings.
 
 * ADDED: Unit tests for the soft-cut `if/3` built-in predicate.
 
-* ADDED: Unit tests for the de facto standard `format/2-3` predicates.
+* ADDED: Unit tests for the de facto standard `format/2-3` and `msort/2`
+predicates.
 
 * ADDED: Unit tests for the de facto standard `e/0` built-in evaluable functor.
 
