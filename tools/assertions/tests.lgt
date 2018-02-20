@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/07/07,
+		date is 2018/02/20,
 		comment is 'Unit tests for the "assertions" tool.'
 	]).
 
@@ -34,6 +34,7 @@
 	]).
 
 	cover(assertions).
+	cover(assertions(_)).
 
 	% assertion/1 tests
 

@@ -121,6 +121,9 @@ source file line for the corresponding predicate clause.
 * UPDATED: The `diagrams` tool option `exclude_libraries/1` to also exclude the
 `scratch_directory` library.
 
+* UPDATED: The `assertions` tool to allow generating code coverage information
+when running its tests.
+
 * ADDED: Predicates to the `code_metrics` tool to compute file, directory, and
 library scores. Modified most metrics to compute these new scores.
 
