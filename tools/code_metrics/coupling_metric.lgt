@@ -23,10 +23,10 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/19,
-		comment is 'Analyzes entity coupling scores.',
+		date is 2018/02/20,
+		comment is 'Analyzes entity efferent coupling.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
 			'Ancestors' - 'Any direct inheritance relations to the entity in question will also increment the score. Duplicate entity couplings will not be scored multiple times.',
@@ -87,6 +87,6 @@
 	external_call_(':'(Module,_Name/_Arity), _, Module).
 
 	entity_score(_Entity, Score) -->
-		['Coupling score: ~w'-[Score], nl].
+		['Efferent coupling score: ~w'-[Score], nl].
 
 :- end_object.
