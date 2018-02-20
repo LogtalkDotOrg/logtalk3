@@ -359,6 +359,12 @@ same line as the test results.
 Debugging failed unit tests
 ---------------------------
 
+Debugging of failed unit tests is usually easy if you use assertions as the
+reason for the assertion failures is printed out. Thus, use preferably the
+`test/2-3` dialects with `true(Assertion)` or `deterministic(Assertion)`
+outcomes. If a test checks multiple assertions, you can use the predicate
+`assertion/2` in the test body.
+
 In order to debug failed unit tests, start by compiling the unit test objects
 and the code being tested in debug mode. Load the debugger and trace the test
 that you want to debug. For example, assuming your tests are defined in a
