@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/02/13,
+		date is 2018/02/20,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -133,7 +133,7 @@
 		^^text_output_assertion('-0.1000', Assertion).
 
 	cleanup :-
-		^^clean_text_input.
+		^^clean_text_output.
 
 :- end_object.
 
