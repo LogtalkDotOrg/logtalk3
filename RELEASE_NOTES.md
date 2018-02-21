@@ -103,6 +103,9 @@ of negative integers. Thanks to Ebrahim Azarisooreh for the bug report.
 Tools
 -----
 
+* IMPROVED: The `lgtunit` tool QuickCheck test dialects and predicates now
+also check output arguments for the `--` and `-` instantiation modes.
+
 * IMPROVED: The `lgtunit` tool deterministic tests now indicate if the test
 failed due to the test goal succeeding non-deterministically.
 

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.1,
+		version is 6.2,
 		author is 'Paulo Moura',
-		date is 2018/02/17,
+		date is 2018/02/21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1495,16 +1495,22 @@
 		generate_arbitrary_arguments(Types, Arguments),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
-		(	catch(Goal, _, shrink_failed_test(Types, Goal, Template)) ->
+		(	catch(run_quick_check_test(Goal, Types, Arguments), Error, shrink_failed_test(Types, Goal, Template, Error)) ->
 			true
-		;	shrink_failed_test(Types, Goal, Template)
+		;	shrink_failed_test(Types, Goal, Template, _)
 		).
+
+	:- meta_predicate(run_quick_check_test(*, *, *)).
+	run_quick_check_test(Goal, Types, Arguments) :-
+		call(Goal),
+		check_output_arguments(Types, Arguments, Goal).
 
 	generate_arbitrary_arguments([], []).
 	generate_arbitrary_arguments([Type| Types], [Argument| Arguments]) :-
 		generate_arbitrary_argument(Type, Argument),
 		generate_arbitrary_arguments(Types, Arguments).
 
+	generate_arbitrary_argument('--'(_), _).
 	generate_arbitrary_argument('-'(_), _).
 	generate_arbitrary_argument('++'(Type), Arbitrary) :-
 		arbitrary(Type, Arbitrary).
@@ -1515,19 +1521,36 @@
 	generate_arbitrary_argument('@'(Type), Arbitrary) :-
 		arbitrary(Type, Arbitrary).
 
-	shrink_failed_test(Types, Goal, Template) :-
-		shrink_failed_test(16, Types, Goal, Template).
+	check_output_arguments([], [], _).
+	check_output_arguments([Type| Types], [Argument| Arguments], Goal) :-
+		check_output_argument(Type, Argument, Goal),
+		check_output_arguments(Types, Arguments, Goal).
 
-	shrink_failed_test(Depth, Types, Goal, Template) :-
+	check_output_argument('--'(Type), Argument, Goal) :-
+		!,
+		type::check(Type, Argument, Goal).
+	check_output_argument('-'(Type), Argument, Goal) :-
+		!,
+		type::check(Type, Argument, Goal).
+	check_output_argument(_, _, _).
+
+	shrink_failed_test(Types, Goal, Template, Error) :-
+		(	Error = error(_, Goal) ->
+			true
+		;	true
+		),
+		shrink_failed_test_depth(16, Types, Goal, Template).
+
+	shrink_failed_test_depth(Depth, Types, Goal, Template) :-
 		Depth > 0,
 		shrink_goal(Types, Goal, Small),
 		!,
 		NextDepth is Depth - 1,
 		(	catch(Small, _, shrink_failed_test(NextDepth, Types, Small, Template)) ->
 			quick_check_failed(Goal, Template)
-		;	shrink_failed_test(NextDepth, Types, Small, Template)
+		;	shrink_failed_test_depth(NextDepth, Types, Small, Template)
 		).
-	shrink_failed_test(_, _, Goal, Template) :-
+	shrink_failed_test_depth(_, _, Goal, Template) :-
 		quick_check_failed(Goal, Template).
 
 	shrink_goal(Types, Large, Small) :-
