@@ -250,13 +250,18 @@ term, it will be used to construct a goal to be called in the context of the
 Properties are expressed using predicates. The QuickCheck test dialects and
 predicates take as argument the mode template for a property, generate random
 values for each input argument based on the type information, and check each
-output argument (specified using either the `-` or the `--` instantiation
-modes) for the expected types. The mode template syntax is the same used in
-the `info/2` predicate directives. An optional argument, `n/1`, allows the
-specification of the number of random tests that will be generated and run.
-The user can define new types to use in the property mode templates to use
-with its QuickCheck tests by defining clauses for the `arbitrary` library
-category multifile predicates.
+output argument.
+
+The mode template syntax is the same used in the `info/2` predicate directives.
+Only output arguments specified using either `-` or `--` instantiation modes
+are currently checked. If there are `?` instantiation modes in your template,
+you can always split the tests for those arguments using two templates with
+`-` and `+` instantiation modes for each of the `?` arguments.
+
+An optional argument, `n/1`, allows the specification of the number of random
+tests that will be generated and run. The user can define new types to use in
+the property mode templates to use with its QuickCheck tests by defining
+clauses for the `arbitrary` library category multifile predicates.
 
 Note that is possible to complement the random tests performed by QuickCheck
 by defining a surrogate predicate that calls the predicate being tested and
