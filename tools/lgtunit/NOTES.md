@@ -248,14 +248,19 @@ term, it will be used to construct a goal to be called in the context of the
 *sender* using the `<</2` debugging control construct.
 
 Properties are expressed using predicates. The QuickCheck test dialects and
-predicates take as argument the mode template for a property (defined as a
-local predicate) and generate random values for each input argument based
-on the type information. The mode template syntax is the same used in the
-`info/2` predicate directives. An optional argument, `n/1`, allows the
+predicates take as argument the mode template for a property, generate random
+values for each input argument based on the type information, and check each
+output argument (specified using either the `-` or the `--` instantiation
+modes) for the expected types. The mode template syntax is the same used in
+the `info/2` predicate directives. An optional argument, `n/1`, allows the
 specification of the number of random tests that will be generated and run.
 The user can define new types to use in the property mode templates to use
 with its QuickCheck tests by defining clauses for the `arbitrary` library
 category multifile predicates.
+
+Note that is possible to complement the random tests performed by QuickCheck
+by defining a surrogate predicate that calls the predicate being tested and
+performs additional checks on the generated random values.
 
 
 Skipping unit tests
