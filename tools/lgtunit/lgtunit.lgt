@@ -1495,7 +1495,11 @@
 		generate_arbitrary_arguments(Types, Arguments),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate],
-		(	catch(run_quick_check_test(Goal, Types, Arguments), Error, shrink_failed_test(Types, Goal, Template, Error)) ->
+		(	catch(
+				run_quick_check_test(Goal, Types, Arguments),
+				Error,
+				shrink_failed_test(Types, Goal, Template, Error)
+			) ->
 			true
 		;	shrink_failed_test(Types, Goal, Template, _)
 		).
@@ -1527,12 +1531,15 @@
 		check_output_arguments(Types, Arguments, Goal).
 
 	check_output_argument('--'(Type), Argument, Goal) :-
-		!,
 		type::check(Type, Argument, Goal).
 	check_output_argument('-'(Type), Argument, Goal) :-
-		!,
 		type::check(Type, Argument, Goal).
-	check_output_argument(_, _, _).
+	check_output_argument('++'(_), _, _).
+	check_output_argument('+'(Type), Argument, Goal) :-
+		type::check(Type, Argument, Goal).
+	check_output_argument('?'(Type), Argument, Goal) :-
+		type::check(Type, Argument, Goal).
+	check_output_argument('@'(_), _, _).
 
 	shrink_failed_test(Types, Goal, Template, Error) :-
 		(	Error = error(_, Goal) ->

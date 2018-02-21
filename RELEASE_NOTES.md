@@ -104,7 +104,7 @@ Tools
 -----
 
 * IMPROVED: The `lgtunit` tool QuickCheck test dialects and predicates now
-also check output arguments for the `--` and `-` instantiation modes.
+also check output arguments.
 
 * IMPROVED: The `lgtunit` tool deterministic tests now indicate if the test
 failed due to the test goal succeeding non-deterministically.
