@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2016/11/06,
+		date is 2018/02/22,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -394,6 +394,12 @@
 
 	shrink(list(_), Large, Small) :-
 		shrink_list(Large, Small).
+
+	shrink(compound, Large, Small) :-
+		Large =.. [LargeFunctor| LargeArguments],
+		shrink(atom, LargeFunctor, SmallFunctor),
+		shrink(list, LargeArguments, SmallArguments),
+		Small =.. [SmallFunctor| SmallArguments].
 
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies

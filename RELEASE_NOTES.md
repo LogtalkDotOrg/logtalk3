@@ -93,6 +93,8 @@ documentation.
 Library
 -------
 
+* ADDED: Support for shrink compound terms to the `arbitrary` category.
+
 * FIXED: Added missing `either` library source file.
 
 * FIXED: Workaround XSB parser bug when loading the `random` library.
