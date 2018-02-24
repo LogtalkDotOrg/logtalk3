@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/02/18,
+		date is 2018/02/24,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -55,7 +55,7 @@
 	% predicates succeed as expected and are deterministic
 
 	test(lgtdoc_all_1_01, deterministic) :-
-		deterministic(all([])).
+		all([]).
 
 	test(lgtdoc_all_0_01, deterministic) :-
 		all.
