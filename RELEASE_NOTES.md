@@ -111,6 +111,9 @@ also check output arguments.
 * IMPROVED: The `lgtunit` tool deterministic tests now indicate if the test
 failed due to the test goal succeeding non-deterministically.
 
+* IMPROVED: The `lgtunit::run/1` predicate now also prints test results and
+code coverage summaries.
+
 * ADDED: Predicates to the `lgtunit` tool that return assertions to be used
 when checking for expected text and binary input and output. These predicates
 provide an alternative to the predicates that check text and binary input and

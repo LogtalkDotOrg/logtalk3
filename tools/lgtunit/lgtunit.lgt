@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.2,
+		version is 6.3,
 		author is 'Paulo Moura',
-		date is 2018/02/21,
+		date is 2018/02/25,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -644,9 +644,13 @@
 		!,
 		run([Test]).
 	run(Tests) :-
+		reset_test_counters,
+		reset_coverage_results,
 		run_setup,
 		forall(member(Test, Tests), run_test(Test)),
-		run_cleanup.
+		run_cleanup,
+		write_tests_results,
+		write_coverage_results.
 
 	run_test(Test) :-
 		self(Object),
