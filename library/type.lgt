@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2017/07/23,
+		date is 2018/02/25,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -33,7 +33,7 @@
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
-			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type)}',
+			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}',
@@ -170,6 +170,7 @@
 	type(partial_list).
 	type(list_or_partial_list).
 	type(list(_Type)).
+	type(list(_Type, _Min, _Max)).
 	type(pair).
 	type(pair(_KeyType, _ValueType)).
 	type(cyclic).
@@ -710,6 +711,23 @@
 		;	is_list(Term) ->
 			is_list_of_type(Term, Type)
 		;	throw(type_error(list(Type), Term))
+		).
+
+	check(list(Type, Min, Max), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ is_list(Term) ->
+			throw(type_error(list(Type,Min,Max), Term))
+		;	is_list_of_type(Term, Type) ->
+			(	list::min(Term, MinOfTerm),
+				MinOfTerm @< Min ->
+				throw(type_error(list(Type,Min,Max), Term))
+			;	list::max(Term, MaxOfTerm),
+				MaxOfTerm @> Max ->
+				throw(type_error(list(Type,Min,Max), Term))
+			;	true
+			)
+		;	throw(type_error(list(Type,Min,Max), Term))
 		).
 
 	check(pair, Term) :-
