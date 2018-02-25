@@ -186,6 +186,8 @@ to check for correct behavior when the arguments contain cuts.
 
 * ADDED: Unit tests for the new `lgtunit::deterministic/2` predicate.
 
+* ADDED: Unit tests for the `random` library.
+
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.
 
