@@ -96,7 +96,11 @@ Library
 * ADDED: Type `list(Type, Min, Max)` to the `type` library object for type-
 checking lists with bounded terms. Term comparison uses standard order.
 
-* ADDED: Support for shrink compound terms to the `arbitrary` category.
+* ADDED: Support for generating and shrink arbitrary values for the new
+`list(Type, Min, Max)` type to the `arbitrary` category.
+
+* ADDED: Support for shrink non-empty lists and compound terms to the
+`arbitrary` category.
 
 * FIXED: Added missing `either` library source file.
 

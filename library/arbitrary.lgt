@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/02/22,
+		date is 2018/02/26,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -121,6 +121,7 @@
 	arbitrary(non_empty_list).
 	arbitrary(list(_Type)).
 	arbitrary(non_empty_list(_Type)).
+	arbitrary(list(_Type, _Min, _Max)).
 	arbitrary(pair).
 	arbitrary(pair(_KeyType, _ValueType)).
 	arbitrary(between(_Type, _Lower, _Upper)).
@@ -336,6 +337,11 @@
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type).
 
+	arbitrary(list(Type,Min,Max), Arbitrary) :-
+		between(0, 42, Length),
+		length(Arbitrary, Length),
+		map_arbitrary(Arbitrary, Type, Min, Max).
+
 	arbitrary(pair, ArbitraryKey-ArbitraryValue) :-
 		arbitrary(nonvar, ArbitraryKey),
 		arbitrary(nonvar, ArbitraryValue).
@@ -395,6 +401,15 @@
 	shrink(list(_), Large, Small) :-
 		shrink_list(Large, Small).
 
+	shrink(non_empty_list, Large, Small) :-
+		shrink_list(Large, Small).
+
+	shrink(non_empty_list(_), Large, Small) :-
+		shrink_list(Large, Small).
+
+	shrink(list(_,_,_), Large, Small) :-
+		shrink_list(Large, Small).
+
 	shrink(compound, Large, Small) :-
 		Large =.. [LargeFunctor| LargeArguments],
 		shrink(atom, LargeFunctor, SmallFunctor),
@@ -419,6 +434,11 @@
 	map_arbitrary([Head| Tail], Type) :-
 		arbitrary(Type, Head),
 		map_arbitrary(Tail, Type).
+
+	map_arbitrary([], _, _, _).
+	map_arbitrary([Head| Tail], Type, Min, Max) :-
+		arbitrary(between(Type, Min, Max), Head),
+		map_arbitrary(Tail, Type, Min, Max).
 
 	shrink_list([], []).
 	shrink_list([Head| Tail], [Head| Small]) :-
