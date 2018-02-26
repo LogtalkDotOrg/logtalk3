@@ -450,7 +450,13 @@
 		Small > 0.
 
 	shrink(float, Large, Small) :-
-		Small is Large / 2.
+		Small is Large / 2.0.
+
+	shrink(non_negative_float, Large, Small) :-
+		Small is Large / 2.0.
+
+	shrink(positive_float, Large, Small) :-
+		Small is Large / 2.0.
 
 	shrink(list, Large, Small) :-
 		shrink(list(_), Large, Small).
