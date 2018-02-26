@@ -21,18 +21,20 @@ ________________________________________________________________________
 Overview
 --------
 
-The `lgtunit` tool provides unit testing support for Logtalk. It can be used
-for testing both Logtalk and Prolog code.
+The `lgtunit` tool provides testing support for Logtalk. It can also be used
+for testing Prolog code.
 
 This tool is inspired by the xUnit frameworks architecture and by the works of
 Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog
 `plunit` package).
 
-Tests are defined in objects, which represent a test set or suite. In simple
-cases, we usually define a single object containing the unit tests. But it is
-also possible to use parametric test objects or multiple objects defining
-parametrizable tests or test subsets for testing more complex units and
-facilitate tests maintenance.
+Tests are defined in objects, which represent a _test set_ or _test suite_.
+In simple cases, we usually define a single object containing the tests. But
+it is also possible to use parametric test objects or multiple objects
+defining parametrizable tests or test subsets for testing more complex units
+and facilitate tests maintenance. Parametric test objects are specially
+useful to test multiple implementations of the same protocol using a single
+set of tests by passing the implementation object as a parameter value.
 
 
 Main files
@@ -68,7 +70,7 @@ Compiling and loading unit tests
 --------------------------------
 
 In order to write your own unit tests, define objects extending the `lgtunit`
-object:
+object. For example:
 
 	:- object(tests,
 		extends(lgtunit)).
@@ -149,8 +151,7 @@ the exception term `Ball` or one of the exception terms in the list
 `Balls`. The specified exception must subsume the generated exception
 for the test to succeed.
 
-An alternative test dialect that can be used with the same expressive
-power is:
+An alternative test dialect that can be used with more expressive power is:
 
 	test(Test, Outcome) :- Goal.
 
@@ -183,8 +184,8 @@ and errors to help debugging failed unit tests. Note the this message is only
 printed when the test goal succeeds as its failure will prevent the assertion
 goal from being called.
 
-Some tests may require individual setup and/or cleanup goals. in this case,
-the following alternative test dialect can be used:
+Some tests may require individual condition, setup, or cleanup goals. in this
+case, the following alternative test dialect can be used:
 
 	test(Test, Outcome, Options) :- Goal.
 
@@ -326,7 +327,8 @@ backend Prolog compilers provide this functionality:
 - SWI-Prolog: `call_with_time_limit/2` library predicate
 - YAP: `time_out/3` library predicate
 
-The `logtalk_tester` automation script accepts a timeout option that can be used to set a limit per test set.
+The `logtalk_tester` automation script accepts a timeout option that can be
+used to set a limit per test set.
 
 
 Setup and cleanup goals
