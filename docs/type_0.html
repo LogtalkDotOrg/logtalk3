@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.9</code>
+            <code>1.11</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/2/25</code>
+            <code>2018/2/26</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -192,7 +192,7 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Other types</dt>
-          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}</dd>
+          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">predicate type notes</dt>
@@ -229,6 +229,10 @@
         <dl class="remarks">
           <dt class="comment">var_or(Type) notes</dt>
           <dd class="text">Allows checking if a term is either a variable or a valid value of the given type.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">ground(Type) notes</dt>
+          <dd class="text">Allows checking if a term is ground and a valid value of the given type.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">types(Types) notes</dt>

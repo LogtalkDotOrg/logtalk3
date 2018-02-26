@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2018/02/26,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -130,6 +130,7 @@
 	% other types
 	arbitrary(one_of(_Type, _Set)).
 	arbitrary(var_or(_Type)).
+	arbitrary(ground(_Type)).
 	arbitrary(types(_Types)).
 
 	% entities
@@ -382,6 +383,13 @@
 	arbitrary(var_or(Type), Arbitrary) :-
 		arbitrary(types([var, Type]), Arbitrary).
 
+	arbitrary(ground(Type), Arbitrary) :-
+		Type \== var,
+		repeat,
+		arbitrary(Type, Arbitrary),
+		ground(Arbitrary),
+		!.
+
 	arbitrary(types(Types), Arbitrary) :-
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
@@ -396,6 +404,10 @@
 
 	shrink(non_negative_integer, Large, Small) :-
 		Small is Large // 2.
+
+	shrink(positive_integer, Large, Small) :-
+		Small is Large // 2,
+		Small > 0.
 
 	shrink(float, Large, Small) :-
 		Small is Large / 2.
@@ -420,6 +432,9 @@
 		shrink(atom, LargeFunctor, SmallFunctor),
 		shrink(list, LargeArguments, SmallArguments),
 		Small =.. [SmallFunctor| SmallArguments].
+
+	shrink(ground(Type), Large, Small) :-
+		shrink(Type, Large, Small).
 
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies

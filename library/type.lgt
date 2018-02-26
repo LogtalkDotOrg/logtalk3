@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2018/02/25,
+		date is 2018/02/26,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -36,7 +36,7 @@
 			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
-			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), types(Types)}',
+			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
 			'predicate type notes' - 'This type is used to check for an object public predicate specified as Object::Functor/Arity.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'Stream types notes' - 'In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.',
@@ -46,6 +46,7 @@
 			'property(Type, Lambda) type notes' - 'Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]>>Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.',
 			'one_of(Type, Set) type notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
 			'var_or(Type) notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
+			'ground(Type) notes' - 'Allows checking if a term is ground and a valid value of the given type.',
 			'types(Types) notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
 			'qualified_callable notes' - 'Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
@@ -183,6 +184,7 @@
 	% other types
 	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
+	type(ground(_Type)).
 	type(types(_Types)).
 
 	valid(Type, Term) :-
@@ -827,6 +829,12 @@
 		(	var(Term) ->
 			true
 		;	check(Type, Term)
+		).
+
+	check(ground(Type), Term) :-
+		(	ground(Term) ->
+			check(Type, Term)
+		;	throw(instantiation_error)
 		).
 
 	check(types(Types), Term) :-
