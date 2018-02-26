@@ -102,6 +102,7 @@
 	arbitrary(negative_integer).
 	arbitrary(non_positive_integer).
 	arbitrary(non_negative_integer).
+	arbitrary(probability).
 	arbitrary(byte).
 	arbitrary(character_code).
 	arbitrary(character_code(_CharSet)).
@@ -276,6 +277,10 @@
 
 	arbitrary(non_positive_integer, Arbitrary) :-
 		between(-1000, 0, Arbitrary).
+
+	arbitrary(probability, Arbitrary) :-
+		between(0, 1000, Integer),
+		Arbitrary is Integer / 1000.0.
 
 	arbitrary(byte, Arbitrary) :-
 		between(0, 255, Arbitrary).

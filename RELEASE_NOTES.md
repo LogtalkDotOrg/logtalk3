@@ -99,6 +99,9 @@ checking lists with bounded terms. Term comparison uses standard order.
 * ADDED: Support for generating and shrink arbitrary values for the new
 `list(Type, Min, Max)` type to the `arbitrary` category.
 
+* ADDED: Support for generating arbitrary probability values to the
+`arbitrary` category.
+
 * ADDED: Support for shrink non-empty lists and compound terms to the
 `arbitrary` category.
 
