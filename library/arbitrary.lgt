@@ -473,6 +473,10 @@
 	shrink(list(_,_,_), Large, Small) :-
 		shrink_list(Large, Small).
 
+	shrink(pair(KeyType, ValueType), LargeKey-LargeValue, SmallKey-SmallValue) :-
+		shrink(KeyType, LargeKey, SmallKey),
+		shrink(ValueType, LargeValue, SmallValue).
+
 	shrink(compound, Large, Small) :-
 		Large =.. [LargeFunctor| LargeArguments],
 		shrink(atom, LargeFunctor, SmallFunctor),

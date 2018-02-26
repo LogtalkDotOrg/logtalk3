@@ -106,7 +106,7 @@ category.
 category.
 
 * ADDED: Support for shrink additional number, list, predicate/non-terminal
-indicator, compound, and callable terms to the `arbitrary` category.
+indicator, pair, compound, and callable terms to the `arbitrary` category.
 
 * FIXED: Added missing `either` library source file.
 
