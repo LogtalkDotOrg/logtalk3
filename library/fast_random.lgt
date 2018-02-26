@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2017/12/13,
+		date is 2018/02/25,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.'
@@ -83,7 +83,7 @@
 		integer(Upper),
 		Upper >= Lower,
 		random(Float),
-		Random is truncate((Float * (Upper - Lower + 1) + Lower)).
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower.
 
 	member(Random, List) :-
 		length(List, Length),
@@ -118,7 +118,7 @@
 	sequence(N, Lower, Upper, A0, A1, A2, S0, S1, S2, [Random| Sequence]) :-
 		N2 is N - 1,
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Random is truncate(Float * (Upper - Lower + 1) + Lower),
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		sequence(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
@@ -137,7 +137,7 @@
 		sort(List, Set).
 	set(N, Lower, Upper, A0, A1, A2, S0, S1, S2, Acc, Set) :-
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Random is truncate(Float * (Upper - Lower + 1) + Lower),
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
 			set(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, [Random| Acc], Set)

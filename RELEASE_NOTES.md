@@ -102,8 +102,9 @@ checking lists with bounded terms. Term comparison uses standard order.
 
 * FIXED: Workaround XSB parser bug when loading the `random` library.
 
-* FIXED: Bug in the `random::between/3` predicate when working with a range
-of negative integers. Thanks to Ebrahim Azarisooreh for the bug report.
+* FIXED: Bug in the `random` library predicates `between/3`, `sequence/4`,
+and `set/4` when working with a range of negative integers. Thanks to Ebrahim
+Azarisooreh for the bug report.
 
 Tools
 -----

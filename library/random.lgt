@@ -118,7 +118,7 @@
 	sequence(N, Lower, Upper, A0, A1, A2, S0, S1, S2, [Random| Sequence]) :-
 		N2 is N - 1,
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Random is truncate(Float * (Upper - Lower + 1) + Lower),
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		sequence(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
@@ -137,7 +137,7 @@
 		sort(List, Set).
 	set(N, Lower, Upper, A0, A1, A2, S0, S1, S2, Acc, Set) :-
 		random(A0, A1, A2, B0, B1, B2, Float),
-		Random is truncate(Float * (Upper - Lower + 1) + Lower),
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
 			set(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, [Random| Acc], Set)

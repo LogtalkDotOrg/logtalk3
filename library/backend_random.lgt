@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/01/15,
+		date is 2018/02/25,
 		comment is 'Random number generator predicates using the backend Prolog compiler own random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler own random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.',
@@ -42,7 +42,7 @@
 		integer(Upper),
 		Upper >= Lower,
 		random(Float),
-		Random is truncate((Float * (Upper - Lower + 1) + Lower)).
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower.
 
 	member(Random, List) :-
 		length(List, Length),
@@ -75,7 +75,7 @@
 	sequence_aux(N, Lower, Upper, [Random| Sequence]) :-
 		N2 is N - 1,
 		random(Float),
-		Random is truncate(Float * (Upper - Lower + 1) + Lower),
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		sequence_aux(N2, Lower, Upper, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
@@ -92,7 +92,7 @@
 		sort(List, Set).
 	set(N, Lower, Upper, Acc, Set) :-
 		random(Float),
-		Random is truncate(Float * (Upper - Lower + 1) + Lower),
+		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
 			set(N2, Lower, Upper, [Random| Acc], Set)

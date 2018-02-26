@@ -44,7 +44,9 @@
 
 	% between/3 tests
 
-	quick_check(random_between_3_01, random_between_3(-between(integer, 1, 4))).
+	quick_check(random_between_3_01, random_between_3_positive(-between(integer, 1, 4))).
+
+	quick_check(random_between_3_02, random_between_3_negative(-between(integer, -4, -1))).
 
 	% member/2 tests
 
@@ -66,17 +68,27 @@
 
 	% sequence/4 tests
 
-	quick_check(random_sequence_4_02, random_sequence_4(-property(list(integer), [Sequence]>>length(Sequence,10)))).
+	quick_check(random_sequence_4_01, random_sequence_4_positive(-property(list(integer), [Sequence]>>length(Sequence,10)))).
 
-	quick_check(random_sequence_4_03, random_sequence_4(-list(integer,1,100))).
+	quick_check(random_sequence_4_02, random_sequence_4_positive(-list(integer,1,100))).
+
+	quick_check(random_sequence_4_03, random_sequence_4_negative(-property(list(integer), [Sequence]>>length(Sequence,10)))).
+
+	quick_check(random_sequence_4_04, random_sequence_4_negative(-list(integer,-100,-1))).
 
 	% set/4 tests
 
-	quick_check(random_set_4_01, random_set_4(-property(list(integer), [Set]>>msort(Set,Set)))).
+	quick_check(random_set_4_01, random_set_4_positive(-property(list(integer), [Set]>>msort(Set,Set)))).
 
-	quick_check(random_set_4_02, random_set_4(-property(list(integer), [Set]>>length(Set,10)))).
+	quick_check(random_set_4_02, random_set_4_positive(-property(list(integer), [Set]>>length(Set,10)))).
 
-	quick_check(random_set_4_03, random_set_4(-list(integer,1,100))).
+	quick_check(random_set_4_03, random_set_4_positive(-list(integer,1,100))).
+
+	quick_check(random_set_4_04, random_set_4_negative(-property(list(integer), [Set]>>msort(Set,Set)))).
+
+	quick_check(random_set_4_05, random_set_4_negative(-property(list(integer), [Set]>>length(Set,10)))).
+
+	quick_check(random_set_4_06, random_set_4_negative(-list(integer,-100,-1))).
 
 	% get_seed/1 tests
 
@@ -88,8 +100,11 @@
 
 	% auxiliary predicates
 
-	random_between_3(Random) :-
+	random_between_3_positive(Random) :-
 		_RandomObject_::between(1, 4, Random).
+
+	random_between_3_negative(Random) :-
+		_RandomObject_::between(-4, -1, Random).
 
 	random_member_2(N) :-
 		_RandomObject_::member(N, [a,b,c,d,e,f,g,h,i,j]).
@@ -100,11 +115,17 @@
 	random_permutation_2(Permutation) :-
 		_RandomObject_::permutation([0,1,2,3,4,5,6,7,8,9], Permutation).
 
-	random_sequence_4(Sequence) :-
+	random_sequence_4_positive(Sequence) :-
 		_RandomObject_::sequence(10, 1, 100, Sequence).
 
-	random_set_4(Set) :-
+	random_sequence_4_negative(Sequence) :-
+		_RandomObject_::sequence(10, -100, -1, Sequence).
+
+	random_set_4_positive(Set) :-
 		_RandomObject_::set(10, 1, 100, Set).
+
+	random_set_4_negative(Set) :-
+		_RandomObject_::set(10, -100, -1, Set).
 
 	random_set_seed_1(Seed) :-
 		_RandomObject_::get_seed(Seed),
