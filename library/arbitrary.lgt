@@ -102,6 +102,14 @@
 	arbitrary(negative_integer).
 	arbitrary(non_positive_integer).
 	arbitrary(non_negative_integer).
+	arbitrary(positive_float).
+	arbitrary(negative_float).
+	arbitrary(non_positive_float).
+	arbitrary(non_negative_float).
+	arbitrary(positive_number).
+	arbitrary(negative_number).
+	arbitrary(non_positive_number).
+	arbitrary(non_negative_number).
 	arbitrary(probability).
 	arbitrary(byte).
 	arbitrary(character_code).
@@ -267,6 +275,18 @@
 
 	% number derived types
 
+	arbitrary(positive_number, Arbitrary) :-
+		arbitrary(types([positive_integer,positive_float]), Arbitrary).
+
+	arbitrary(negative_number, Arbitrary) :-
+		arbitrary(types([negative_integer,negative_float]), Arbitrary).
+
+	arbitrary(non_positive_number, Arbitrary) :-
+		arbitrary(types([non_positive_integer,non_positive_float]), Arbitrary).
+
+	arbitrary(non_negative_number, Arbitrary) :-
+		arbitrary(types([non_negative_integer,non_negative_float]), Arbitrary).
+
 	arbitrary(positive_integer, Arbitrary) :-
 		between(1, 1000, Arbitrary).
 
@@ -278,6 +298,26 @@
 
 	arbitrary(non_positive_integer, Arbitrary) :-
 		between(-1000, 0, Arbitrary).
+
+	arbitrary(positive_float, Arbitrary) :-
+		arbitrary(positive_integer, Integer),
+		random(Factor),
+		Arbitrary is Integer * Factor.
+
+	arbitrary(negtive_float, Arbitrary) :-
+		arbitrary(negtive_integer, Integer),
+		random(Factor),
+		Arbitrary is Integer * Factor.
+
+	arbitrary(non_positive_float, Arbitrary) :-
+		arbitrary(non_positive_integer, Integer),
+		random(Factor),
+		Arbitrary is Integer * Factor.
+
+	arbitrary(non_negative_float, Arbitrary) :-
+		arbitrary(non_negtive_integer, Integer),
+		random(Factor),
+		Arbitrary is Integer * Factor.
 
 	arbitrary(probability, Arbitrary) :-
 		between(0, 1000, Integer),

@@ -102,8 +102,8 @@ category.
 * ADDED: Support for generating and shrink arbitrary values for the new
 `list(Type, Min, Max)` type to the `arbitrary` category.
 
-* ADDED: Support for generating arbitrary probability values to the
-`arbitrary` category.
+* ADDED: Support for generating values for all number types to the `arbitrary`
+category.
 
 * ADDED: Support for shrink positive integers, non-empty lists and compound
 terms to the `arbitrary` category.
