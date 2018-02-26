@@ -488,6 +488,20 @@
 		;	shrink(compound, Large, Small)
 		).
 
+	shrink(predicate_indicator, LargeName/LargeArity, SmallName/SmallArity) :-
+		shrink(atom, LargeName, SmallName),
+		shrink(non_negative_integer, LargeArity, SmallArity).
+
+	shrink(non_terminal_indicator, LargeName//LargeArity, SmallName//SmallArity) :-
+		shrink(atom, LargeName, SmallName),
+		shrink(non_negative_integer, LargeArity, SmallArity).
+
+	shrink(predicate_or_non_terminal_indicator, Large, Small) :-
+		(	Large = _/_ ->
+			shrink(predicate_indicator, Large, Small)
+		;	shrink(non_terminal_indicator, Large, Small)
+		).
+
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies
 

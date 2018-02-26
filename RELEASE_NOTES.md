@@ -105,8 +105,8 @@ category.
 * ADDED: Support for generating values for all number types to the `arbitrary`
 category.
 
-* ADDED: Support for shrink positive integers, non-empty lists and compound
-terms to the `arbitrary` category.
+* ADDED: Support for shrink additional number, list, predicate/non-terminal
+indicator, compound, and callable terms to the `arbitrary` category.
 
 * FIXED: Added missing `either` library source file.
 
