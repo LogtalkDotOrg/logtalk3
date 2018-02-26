@@ -482,6 +482,12 @@
 	shrink(ground(Type), Large, Small) :-
 		shrink(Type, Large, Small).
 
+	shrink(callable, Large, Small) :-
+		(	atom(Large) ->
+			shrink(atom, Large, Small)
+		;	shrink(compound, Large, Small)
+		).
+
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies
 
