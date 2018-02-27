@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.3,
+		version is 6.4,
 		author is 'Paulo Moura',
-		date is 2018/02/25,
+		date is 2018/02/28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1528,6 +1528,7 @@
 		arbitrary(types([var,Type]), Arbitrary).
 	generate_arbitrary_argument('@'(Type), Arbitrary) :-
 		arbitrary(Type, Arbitrary).
+	generate_arbitrary_argument('{}'(Argument), Argument).
 
 	check_output_arguments([], [], _).
 	check_output_arguments([Type| Types], [Argument| Arguments], Goal) :-
@@ -1544,6 +1545,7 @@
 	check_output_argument('?'(Type), Argument, Goal) :-
 		type::check(Type, Argument, Goal).
 	check_output_argument('@'(_), _, _).
+	check_output_argument('{}'(_), _, _).
 
 	shrink_failed_test(Types, Goal, Template, Error) :-
 		(	Error = error(_, Goal) ->

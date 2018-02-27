@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2018/02/17,
+		date is 2018/02/27,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -253,6 +253,12 @@
 	succeeds(quick_check_2_04) :-
 		\+ quick_check(atom(+integer), [n(25)]).
 
+	succeeds(quick_check_2_05) :-
+		quick_check(type::valid({integer}, +integer), []).
+
+	succeeds(quick_check_2_06) :-
+		quick_check(type::valid({integer}, +integer), [n(50)]).
+
 	% quick_check/1 tests
 
 	succeeds(quick_check_1_01) :-
@@ -261,6 +267,9 @@
 
 	succeeds(quick_check_1_02) :-
 		\+ quick_check(atom(+integer)).
+
+	succeeds(quick_check_1_03) :-
+		quick_check(type::valid({integer}, +integer)).
 
 	% supress quick_check/1-3 messages and save option values for tests
 

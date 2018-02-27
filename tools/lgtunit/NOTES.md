@@ -234,8 +234,9 @@ QuickCheck
 QuickCheck was originally developed for Haskell. Implementations for several
 other programming languages soon followed. The idea is to express properties
 that predicates must comply with and automatically generate tests for those
-properties. The `lgtunit` tool supports both `quick_check/2-3` test dialects, as
-described above, and `quick_check/1-3` public predicates for interactive use:
+properties. The `lgtunit` tool supports both `quick_check/2-3` test dialects,
+as described above, and `quick_check/1-3` public predicates for interactive
+use:
 
 	quick_check(Template, Options, Result).
 	quick_check(Template, Options).
@@ -252,7 +253,16 @@ Properties are expressed using predicates. The QuickCheck test dialects and
 predicates take as argument the mode template for a property, generate random
 values for each input argument based on the type information, and check each
 output argument. The mode template syntax is the same used in the `info/2`
-predicate directives.
+predicate directives with an additional notation, `{}/1`, for passing argument
+values as-is instead of generating random values for these arguments. For
+example, assume that we want to verify the `type::valid/2` predicate, which
+takes as first argument a type. Randomly generating random types would be
+cumbersome at best but the main problem is that we need to generate random
+values for the second argument according to the first argument. Using the
+`{}/1` notation we can solve this problem for any specific type, e.g. integer,
+by writing:
+
+	| ?- lgtunit::quick_check(type::valid({integer}, +integer)).
 
 An optional argument, `n/1`, allows the specification of the number of random
 tests that will be generated and run. The user can define new types to use in

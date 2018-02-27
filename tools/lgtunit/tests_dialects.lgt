@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/12/15,
+		date is 2018/02/27,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -148,7 +148,13 @@
 
 	quick_check(quick_check_3_02, integer(+integer), [n(25)]).
 
+	quick_check(quick_check_3_03, type::valid({integer}, +integer), []).
+
+	quick_check(quick_check_3_04, type::valid({integer}, +integer), [n(50)]).
+
 	quick_check(quick_check_2_01, integer(+integer)).
+
+	quick_check(quick_check_2_02, type::valid({integer}, +integer)).
 
 	% auxiliary predicates for checking that condition/1, setup/1, cleanup/1,
 	% and note/1 options in the test/3 dialect are processed

@@ -120,6 +120,10 @@ Tools
 -----
 
 * IMPROVED: The `lgtunit` tool QuickCheck test dialects and predicates now
+accept a `{}/1` template argument notation for specifying argument values
+as-is instead of generating random values for those arguments.
+
+* IMPROVED: The `lgtunit` tool QuickCheck test dialects and predicates now
 also check output arguments.
 
 * IMPROVED: The `lgtunit` tool deterministic tests now indicate if the test
