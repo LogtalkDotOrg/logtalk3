@@ -81,9 +81,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2016/07/08,
+		date is 2018/02/27,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -151,11 +151,11 @@
 
 	test(logtalk_load_context_2_11) :-
 		result(term, Term),
-		::variant(Term, a(A,B,B,A)).
+		^^variant(Term, a(A,B,B,A)).
 
 	test(logtalk_load_context_2_12) :-
 		result(variable_names, VariableNames),
-		::variant(VariableNames, ['A'=_, 'B'=_]).
+		^^variant(VariableNames, ['A'=_, 'B'=_]).
 
 	test(logtalk_load_context_2_13) :-
 		result(term_position, TermPosition), ground(TermPosition).

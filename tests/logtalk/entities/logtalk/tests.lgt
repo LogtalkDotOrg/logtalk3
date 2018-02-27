@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2017/08/10,
+		date is 2018/02/27,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -42,14 +42,14 @@
 	succeeds(logtalk_03) :-
 		logtalk::entity_prefix(foo(_), Prefix),
 		logtalk::entity_prefix(Entity, Prefix),
-		::variant(Entity, foo(_)).
+		^^variant(Entity, foo(_)).
 
 	succeeds(logtalk_04) :-
 		logtalk::compile_predicate_heads(bar(_), logtalk, Compiled, _),
 		logtalk::decompile_predicate_heads(Compiled, Entity, Type, Decompiled),
 		Entity == logtalk,
 		Type == object,
-		::variant(Decompiled, bar(_)).
+		^^variant(Decompiled, bar(_)).
 
 	succeeds(logtalk_05) :-
 		logtalk::compile_predicate_indicators(bar/1, logtalk, Compiled),

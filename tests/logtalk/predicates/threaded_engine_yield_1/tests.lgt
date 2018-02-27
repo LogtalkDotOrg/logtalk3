@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/06/15,
+		date is 2018/02/27,
 		comment is 'Unit tests for the threaded_engine_yield/1 built-in predicate.'
 	]).
 
@@ -44,7 +44,7 @@
 	succeeds(threaded_engine_yield_1_03) :-
 		threaded_engine_create(none, return_compound, test_engine_2),
 		threaded_engine_next(test_engine_2, Answer),
-		::variant(Answer, f(X,_,X)).
+		^^variant(Answer, f(X,_,X)).
 
 	succeeds(threaded_engine_yield_1_04) :-
 		threaded_engine_create(none, return_var, test_engine_3),
