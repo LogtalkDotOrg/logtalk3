@@ -116,6 +116,9 @@ indicator, pair, compound, and callable terms to the `arbitrary` category.
 and `set/4` when working with a range of negative integers. Thanks to Ebrahim
 Azarisooreh for the bug report.
 
+* FIXED: Typo in the OS type `directory` exception term generated when a
+directory does not exist.
+
 Tools
 -----
 

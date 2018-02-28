@@ -21,9 +21,9 @@
 :- category(os_types).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/03/15,
+		date is 2018/02/28,
 		comment is 'A set of operating-system related types.',
 		remarks is [
 			'Provided types' - 'This category adds "file", "file(Extensions)", "directory", and "environment_variable" types for type-checking when using the "type" library object.',
@@ -86,7 +86,7 @@
 			throw(type_error(atom, Term))
 		;	os::directory_exists(Term) ->
 			true
-		;	throw(existence_error(file, Term))
+		;	throw(existence_error(directory, Term))
 		).
 	type::check(environment_variable, Term) :-
 		(	var(Term) ->
