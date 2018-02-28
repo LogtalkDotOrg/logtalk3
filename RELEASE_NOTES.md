@@ -147,6 +147,9 @@ a reified version of the `deterministic/1` predicate.
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
 source file line for the corresponding predicate clause. 
 
+* ADDED: Predicate `port/5` to the `ports` tool for public access to collected
+port profiling data.
+
 * UPDATED: The `diagrams` tool option `exclude_libraries/1` to also exclude the
 `scratch_directory` library.
 

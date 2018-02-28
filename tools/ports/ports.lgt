@@ -56,6 +56,13 @@
 		argnames is ['Entity']
 	]).
 
+	:- public(port/5).
+	:- mode(port(?atom, ?entity_identifier, ?atom, ?integer, ?integer), zero_or_more).
+	:- info(port/5, [
+		comment is 'Enumerates, by backtracking, all collected port profiling data.',
+		argnames is ['Port', 'Entity', 'Functor', 'Arity', 'Count']
+	]).
+
 	:- private(port_/5).
 	:- dynamic(port_/5).
 	:- mode(port_(?atom, ?entity_identifier, ?atom, ?integer, ?integer), zero_or_more).
@@ -185,6 +192,9 @@
 	reset(Entity) :-
 		entity_spec_to_template(Entity, EntityTemplate),
 		retractall(port_(_, EntityTemplate, _, _, _)).
+
+	port(Port, Entity, Functor, Arity, Count) :-
+		port_(Port, Entity, Functor, Arity, Count).
 
 	% auxiliary predicates
 
