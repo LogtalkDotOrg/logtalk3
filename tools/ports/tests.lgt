@@ -29,24 +29,63 @@
 	]).
 
 	:- uses(ports, [
-		data/0, data/1,
+		data/0, data/1, port/5,
 		reset/0, reset/1
 	]).
+
+	setup :-
+		foo::solutions.
 
 	deterministic(ports_data_0_01) :-
 		data.
 
 	deterministic(ports_data_1_01) :-
-		data(logtalk).
+		data(foo).
 
 	deterministic(ports_data_1_02) :-
 		data(non_existant).
+
+	succeeds(ports_port_5_01) :-
+		port(fact, foo, Functor, Arity, Count),
+		Functor/Arity == solutions/0, Count == 1.
+
+	succeeds(ports_port_5_02) :-
+		port(rule, foo, Functor, Arity, Count),
+		Functor/Arity == solutions/0, Count == 1.
+
+	succeeds(ports_port_5_03) :-
+		port(call, foo, Functor, Arity, Count),
+		Functor/Arity == solutions/0, Count == 1.
+
+	succeeds(ports_port_5_04) :-
+		port(exit, foo, Functor, Arity, Count),
+		Functor/Arity == solutions/0, Count == 1.
+
+	succeeds(ports_port_5_05) :-
+		port(fact, bar, Functor, Arity, Count),
+		Functor/Arity == qux/1, Count == 6.
+
+	succeeds(ports_port_5_06) :-
+		port(call, bar, Functor, Arity, Count),
+		Functor/Arity == qux/1, Count == 2.
+
+	succeeds(ports_port_5_07) :-
+		port(exit, bar, Functor, Arity, Count),
+		Functor/Arity == qux/1, Count == 2.
+
+	succeeds(ports_port_5_08) :-
+		port(nd_exit, bar, Functor, Arity, Count),
+		Functor/Arity == qux/1, Count == 4.
+
+	succeeds(ports_port_5_09) :-
+		port(redo, bar, Functor, Arity, Count),
+		Functor/Arity == qux/1, Count == 4.
 
 	deterministic(ports_reset_0_01) :-
 		reset.
 
 	deterministic(ports_reset_1_01) :-
-		reset(logtalk).
+		reset(foo).
 
 	deterministic(ports_reset_1_02) :-
 		reset(non_existant).

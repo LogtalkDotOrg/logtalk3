@@ -18,11 +18,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(ports, [source_data(on)]),
-	logtalk_load(test_entities, [debug(on), source_data(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(bar).
+
+	:- public(bar/2).
+	bar(X, Y) :-
+		baz(X),
+		qux(Y).
+
+	baz(1).
+	baz(2).
+
+	qux(a).
+	qux(b).
+	qux(c).
+
+:- end_object.
+
+
+:- object(foo).
+
+	:- public(solutions/0).
+	solutions :-
+		bar::bar(_, _),
+		fail.
+	solutions.
+
+:- end_object.
