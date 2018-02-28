@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2017/02/27,
+		date is 2018/02/28,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -69,16 +69,16 @@
 	% predicate for detecting multiple instances of the handler and for
 	% better error reporting
 	:- multifile(logtalk::debug_handler_provider/1).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		% Qu-Prolog and XSB don't support static multifile predicates
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		% Qu-Prolog does not support static multifile predicates
 		:- dynamic(logtalk::debug_handler_provider/1).
 	:- endif.
 
 	logtalk::debug_handler_provider(ports).
 
 	:- multifile(logtalk::debug_handler/2).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		% Qu-Prolog and XSB don't support static multifile predicates
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		% Qu-Prolog does not support static multifile predicates
 		:- dynamic(logtalk::debug_handler/2).
 	:- endif.
 

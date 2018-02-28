@@ -206,6 +206,8 @@ to check for correct behavior when the arguments contain cuts.
 
 * ADDED: Unit tests for the `random` library.
 
+* ADDED: Elementary unit tests for the `ports` tool.
+
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.
 
