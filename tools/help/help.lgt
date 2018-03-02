@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.15,
+		version is 0.16,
 		author is 'Paulo Moura',
-		date is 2018/02/10,
+		date is 2018/03/02,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -187,8 +187,7 @@
 	built_in_directive(else, 0, '/manuals/refman/directives/', 'else_0.html').
 	built_in_directive(endif, 0, '/manuals/refman/directives/', 'endif_0.html').
 
-	built_in_directive(calls, 1, '/manuals/refman/directives/', 'calls_1.html').
-	built_in_directive(category, N, '/manuals/refman/directives/', 'category1_3.html') :-
+	built_in_directive(category, N, '/manuals/refman/directives/', 'category_1_3.html') :-
 		between(1, 3, N).
 	built_in_directive(dynamic, 0, '/manuals/refman/directives/', 'dynamic_0.html').
 	built_in_directive(end_category, 0, '/manuals/refman/directives/', 'end_category_0.html').
@@ -199,10 +198,9 @@
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization_1.html').
 	built_in_directive(object, N, '/manuals/refman/directives/', 'object_1_5.html') :-
 		between(1, 5, N).
-	built_in_directive(protocol, N, '/manuals/refman/directives/', 'protocol1_2.html') :-
+	built_in_directive(protocol, N, '/manuals/refman/directives/', 'protocol_1_2.html') :-
 		between(1, 2, N).
 	built_in_directive(threaded, 0, '/manuals/refman/directives/', 'threaded_0.html').
-	built_in_directive(uses, 1, '/manuals/refman/directives/', 'uses_1.html').
 
 	built_in_directive(alias, 2, '/manuals/refman/directives/', 'alias_2.html').
 	built_in_directive(coinductive, 1, '/manuals/refman/directives/', 'coinductive_1.html').
@@ -265,15 +263,15 @@
 	built_in_predicate(define_events, 5, '/manuals/refman/predicates/', 'define_events_5.html').
 
 	built_in_predicate(threaded, 1, '/manuals/refman/predicates/', 'threaded_1.html').
-	built_in_predicate(threaded_call, 1, '/manuals/refman/predicates/', 'threaded_call1_2.html').
-	built_in_predicate(threaded_call, 2, '/manuals/refman/predicates/', 'threaded_call1_2.html').
-	built_in_predicate(threaded_once, 1, '/manuals/refman/predicates/', 'threaded_once1_2.html').
-	built_in_predicate(threaded_once, 2, '/manuals/refman/predicates/', 'threaded_once1_2.html').
+	built_in_predicate(threaded_call, 1, '/manuals/refman/predicates/', 'threaded_call_1_2.html').
+	built_in_predicate(threaded_call, 2, '/manuals/refman/predicates/', 'threaded_call_1_2.html').
+	built_in_predicate(threaded_once, 1, '/manuals/refman/predicates/', 'threaded_once_1_2.html').
+	built_in_predicate(threaded_once, 2, '/manuals/refman/predicates/', 'threaded_once_1_2.html').
 	built_in_predicate(threaded_ignore, 1, '/manuals/refman/predicates/', 'threaded_ignore_1.html').
-	built_in_predicate(threaded_exit, 1, '/manuals/refman/predicates/', 'threaded_exit1_2.html').
-	built_in_predicate(threaded_exit, 2, '/manuals/refman/predicates/', 'threaded_exit1_2.html').
-	built_in_predicate(threaded_peek, 1, '/manuals/refman/predicates/', 'threaded_peek1_2.html').
-	built_in_predicate(threaded_peek, 2, '/manuals/refman/predicates/', 'threaded_peek1_2.html').
+	built_in_predicate(threaded_exit, 1, '/manuals/refman/predicates/', 'threaded_exit_1_2.html').
+	built_in_predicate(threaded_exit, 2, '/manuals/refman/predicates/', 'threaded_exit_1_2.html').
+	built_in_predicate(threaded_peek, 1, '/manuals/refman/predicates/', 'threaded_peek_1_2.html').
+	built_in_predicate(threaded_peek, 2, '/manuals/refman/predicates/', 'threaded_peek_1_2.html').
 	built_in_predicate(threaded_wait, 1, '/manuals/refman/predicates/', 'threaded_wait_1.html').
 	built_in_predicate(threaded_notify, 1, '/manuals/refman/predicates/', 'threaded_notify_1.html').
 
