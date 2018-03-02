@@ -213,6 +213,8 @@ to check for correct behavior when the arguments contain cuts.
 
 * ADDED: Elementary unit tests for the `ports` tool.
 
+* ADDED: Unit tests for the `help` tool.
+
 * UPDATED: The ISO Prolog standard `write_term/3` built-in predicate unit
 tests to use assertions for easier debugging.
 
