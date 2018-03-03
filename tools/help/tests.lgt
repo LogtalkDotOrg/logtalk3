@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2018/03/03,
 		comment is 'Unit tests for the "help" tool.'
@@ -66,6 +66,11 @@
 	test(help_0_01) :-
 		^^set_text_output(''),
 		help.
+
+	% check forward/1 definition
+	test(help_0_02) :-
+		^^set_text_output(''),
+		help::foo42.
 
 	% ('/')/2 tests
 
