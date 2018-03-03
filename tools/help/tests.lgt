@@ -22,13 +22,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2018/03/03,
 		comment is 'Unit tests for the "help" tool.'
 	]).
 
 	:- uses(help, [
+		completion/2,
+		completions/2,
 		built_in_directive/4,
 		built_in_predicate/4,
 		built_in_method/4,
@@ -47,20 +49,48 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		member/2,
+		msort/2
 	]).
 
 	cover(help).
 
+	% completion/2 tests
+
+	test(completion_2_01) :-
+		setof(Completion, completion(implements, Completion), Completions),
+		ground(Completions),
+		Completions = [
+			implements_protocol/2-ImplementsProtocol2Page,
+			implements_protocol/3-ImplementsProtocol3Page
+		],
+		file_exists(ImplementsProtocol2Page),
+		file_exists(ImplementsProtocol3Page).
+
+	% completions/2 tests
+
+	test(completions_2_01) :-
+		completions(implements, Completions0),
+		ground(Completions0),
+		msort(Completions0, Completions),
+		Completions = [
+			implements_protocol/2-ImplementsProtocol2Page,
+			implements_protocol/3-ImplementsProtocol3Page
+		],
+		file_exists(ImplementsProtocol2Page),
+		file_exists(ImplementsProtocol3Page).
+
 	% built_in_directive/4 tests
 
 	test(built_in_directive_4_01) :-
+		% check that all referenced files actually exist
 		forall(
 			built_in_directive(Functor, Arity, Path, File),
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
 		).
 
 	test(built_in_directive_4_02) :-
+		% check that all files are referenced from the tool
 		forall(
 			directory_page(directives, Path, File),
 			assertion(Path-File, built_in_directive(_, _, Path, File))
@@ -69,12 +99,14 @@
 	% built_in_predicate/4 tests
 
 	test(built_in_predicate_4_01) :-
+		% check that all referenced files actually exist
 		forall(
 			built_in_predicate(Functor, Arity, Path, File),
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
 		).
 
 	test(built_in_predicate_4_02) :-
+		% check that all files are referenced from the tool
 		forall(
 			directory_page(predicates, Path, File),
 			assertion(Path-File, built_in_predicate(_, _, Path, File))
@@ -83,12 +115,14 @@
 	% built_in_method/4 tests
 
 	test(built_in_method_4_01) :-
+		% check that all referenced files actually exist
 		forall(
 			built_in_method(Functor, Arity, Path, File),
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
 		).
 
 	test(built_in_method_4_02) :-
+		% check that all files are referenced from the tool
 		forall(
 			directory_page(methods, Path, File),
 			assertion(Path-File, (built_in_method(_, _, Path, File); built_in_non_terminal(_, _, Path, File)))
@@ -97,12 +131,14 @@
 	% control_construct/4 tests
 
 	test(control_construct_4_01) :-
+		% check that all referenced files actually exist
 		forall(
 			control_construct(Functor, Arity, Path, File),
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
 		).
 
 	test(control_construct_4_02) :-
+		% check that all files are referenced from the tool
 		forall(
 			directory_page(control, Path, File),
 			assertion(Path-File, control_construct(_, _, Path, File))
@@ -111,6 +147,7 @@
 	% built_in_non_terminal/4 tests
 
 	test(built_in_non_terminal_4_01) :-
+		% check that all referenced files actually exist
 		forall(
 			built_in_non_terminal(Functor, Arity, Path, File),
 			assertion(Functor//Arity, documentation_page_exists(Path, File))
