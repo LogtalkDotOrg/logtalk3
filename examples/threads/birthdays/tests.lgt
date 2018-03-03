@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2013/05/27,
+		date is 2018/03/03,
 		comment is 'Unit tests for the "threads/birthdays" example.'
 	]).
 
@@ -41,6 +41,7 @@
 		paul::new_friend(nathalie).
 
 	test(birthdays_3) :-
+		^^set_text_output(''),
 		{nathalie::birthday}.
 
 	test(birthdays_4) :-
@@ -48,6 +49,7 @@
 		Age == 33.
 
 	cleanup :-
-		set_logtalk_flag(events, deny).
+		set_logtalk_flag(events, deny),
+		^^clean_text_output.
 
 :- end_object.

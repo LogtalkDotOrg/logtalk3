@@ -260,6 +260,9 @@ Prolog compilers with bounded arithmetic.
 * FIXED: The `errors` example to allow its `warnings_loader` file to succeed
 with only warnings as intended with more backend Prolog systems.
 
+* FIXED: The tests for the `birthdays` multi-threading example to suppress
+output.
+
 Contributions
 -------------
 
