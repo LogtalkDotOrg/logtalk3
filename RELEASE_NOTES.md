@@ -178,7 +178,7 @@ in test log files. This issue can result in a truncated list of failed tests.
 predicates and would give wrong results when predicates with the same functor
 are declared in multiple objects.
 
-* FIXED: Broken links to documentation pages in the `help` tool.
+* FIXED: Missing and broken links to documentation pages in the `help` tool.
 
 Tests
 -----

@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.16,
+		version is 0.17,
 		author is 'Paulo Moura',
-		date is 2018/03/02,
+		date is 2018/03/03,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -193,6 +193,7 @@
 	built_in_directive(end_category, 0, '/manuals/refman/directives/', 'end_category_0.html').
 	built_in_directive(end_object, 0, '/manuals/refman/directives/', 'end_object_0.html').
 	built_in_directive(end_protocol, 0, '/manuals/refman/directives/', 'end_protocol_0.html').
+	built_in_directive(built_in, 0, '/manuals/refman/directives/', 'built_in_0.html').
 	built_in_directive(include, 1, '/manuals/refman/directives/', 'include_1.html').
 	built_in_directive(info, 1, '/manuals/refman/directives/', 'info_1.html').
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization_1.html').
@@ -257,6 +258,8 @@
 	built_in_predicate(specializes_class, 2, '/manuals/refman/predicates/', 'specializes_class_2_3.html').
 	built_in_predicate(specializes_class, 3, '/manuals/refman/predicates/', 'specializes_class_2_3.html').
 	built_in_predicate(complements_object, 2, '/manuals/refman/predicates/', 'complements_object_2.html').
+	built_in_predicate(conforms_to_protocol, N, '/manuals/refman/predicates/', 'conforms_to_protocol_2_3.html') :-
+		between(2, 3, N).
 
 	built_in_predicate(abolish_events, 5, '/manuals/refman/predicates/', 'abolish_events_5.html').
 	built_in_predicate(current_event, 5, '/manuals/refman/predicates/', 'current_event_5.html').
@@ -291,6 +294,7 @@
 	built_in_predicate(logtalk_load, 2, '/manuals/refman/predicates/', 'logtalk_load_2.html').
 	built_in_predicate(logtalk_make, 0, '/manuals/refman/predicates/', 'logtalk_make_0.html').
 	built_in_predicate(logtalk_make, 1, '/manuals/refman/predicates/', 'logtalk_make_1.html').
+	built_in_predicate(logtalk_make_target_action, 1, '/manuals/refman/predicates/', 'logtalk_make_target_action_1.html').
 	built_in_predicate(logtalk_library_path, 2, '/manuals/refman/predicates/', 'logtalk_library_path_2.html').
 	built_in_predicate(logtalk_load_context, 2, '/manuals/refman/predicates/', 'logtalk_load_context_2.html').
 
@@ -326,6 +330,7 @@
 		between(1, 8, N).
 	built_in_method(once, 1, '/manuals/refman/methods/', 'once_1.html').
 	built_in_method((\+), 1, '/manuals/refman/methods/', 'not_1.html').
+	built_in_method(ignore, 1, '/manuals/refman/methods/', 'ignore_1.html').
 
 	built_in_method(catch, 3, '/manuals/refman/methods/', 'catch_3.html').
 	built_in_method(throw, 1, '/manuals/refman/methods/', 'throw_1.html').

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2018/03/02,
+		date is 2018/03/03,
 		comment is 'Unit tests for the "help" tool.'
 	]).
 
@@ -37,12 +37,17 @@
 	]).
 
 	:- uses(os, [
+		directory_files/3,
 		environment_variable/2,
 		file_exists/1
 	]).
 
 	:- uses(lgtunit, [
 		assertion/2
+	]).
+
+	:- uses(list, [
+		member/2
 	]).
 
 	cover(help).
@@ -55,12 +60,24 @@
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
 		).
 
+	test(built_in_directive_4_02) :-
+		forall(
+			directory_page(directives, Path, File),
+			assertion(Path-File, built_in_directive(_, _, Path, File))
+		).
+
 	% built_in_predicate/4 tests
 
 	test(built_in_predicate_4_01) :-
 		forall(
 			built_in_predicate(Functor, Arity, Path, File),
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
+		).
+
+	test(built_in_predicate_4_02) :-
+		forall(
+			directory_page(predicates, Path, File),
+			assertion(Path-File, built_in_predicate(_, _, Path, File))
 		).
 
 	% built_in_method/4 tests
@@ -71,12 +88,24 @@
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
 		).
 
+	test(built_in_method_4_02) :-
+		forall(
+			directory_page(methods, Path, File),
+			assertion(Path-File, (built_in_method(_, _, Path, File); built_in_non_terminal(_, _, Path, File)))
+		).
+
 	% control_construct/4 tests
 
 	test(control_construct_4_01) :-
 		forall(
 			control_construct(Functor, Arity, Path, File),
 			assertion(Functor/Arity, documentation_page_exists(Path, File))
+		).
+
+	test(control_construct_4_02) :-
+		forall(
+			directory_page(control, Path, File),
+			assertion(Path-File, control_construct(_, _, Path, File))
 		).
 
 	% built_in_non_terminal/4 tests
@@ -94,5 +123,14 @@
 		atom_concat(LOGTALKUSER, Path, AbsolutePath0),
 		atom_concat(AbsolutePath0, File, AbsolutePath),
 		file_exists(AbsolutePath).
+
+	directory_page(SubDirectory, Path, File) :-
+		environment_variable('LOGTALKUSER', LOGTALKUSER),
+		atom_concat(LOGTALKUSER, '/manuals/refman/', AbsolutePath0),
+		atom_concat(AbsolutePath0, SubDirectory, AbsolutePath),
+		atom_concat('/manuals/refman/', SubDirectory, Path0),
+		atom_concat(Path0, '/', Path),
+		directory_files(AbsolutePath, Files, [extensions(['.html'])]),
+		member(File, Files).
 
 :- end_object.
