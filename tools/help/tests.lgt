@@ -22,13 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2018/03/03,
 		comment is 'Unit tests for the "help" tool.'
 	]).
 
 	:- uses(help, [
+		help/0,
+		('/')/2,
+		('//')/2,
 		completion/2,
 		completions/2,
 		built_in_directive/4,
@@ -55,6 +58,35 @@
 
 	cover(help).
 
+	cleanup :-
+		^^clean_text_output.
+
+	% help/0 tests
+
+	test(help_0_01) :-
+		^^set_text_output(''),
+		help.
+
+	% ('/')/2 tests
+
+	test(slash_2_01) :-
+		^^set_text_output(''),
+		help::implements_protocol/_.
+
+	test(slash_2_02) :-
+		^^set_text_output(''),
+		\+ help::foo42/_.
+
+	% ('//')/2 tests
+
+	test(double_slash_2_01) :-
+		^^set_text_output(''),
+		help::call//_.
+
+	test(double_slash_2_02) :-
+		^^set_text_output(''),
+		\+ help::foo42//_.
+
 	% completion/2 tests
 
 	test(completion_2_01) :-
@@ -66,6 +98,9 @@
 		],
 		file_exists(ImplementsProtocol2Page),
 		file_exists(ImplementsProtocol3Page).
+
+	test(completion_2_02) :-
+		\+ completion(foo42, _).
 
 	% completions/2 tests
 
@@ -79,6 +114,10 @@
 		],
 		file_exists(ImplementsProtocol2Page),
 		file_exists(ImplementsProtocol3Page).
+
+	test(completions_2_02) :-
+		completions(foo42, Completions),
+		Completions == [].
 
 	% built_in_directive/4 tests
 
