@@ -41,7 +41,7 @@
 		paul::new_friend(nathalie).
 
 	test(birthdays_3) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		{nathalie::birthday}.
 
 	test(birthdays_4) :-
@@ -49,7 +49,6 @@
 		Age == 33.
 
 	cleanup :-
-		set_logtalk_flag(events, deny),
-		^^clean_text_output.
+		set_logtalk_flag(events, deny).
 
 :- end_object.

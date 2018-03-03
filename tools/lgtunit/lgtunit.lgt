@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.4,
+		version is 6.5,
 		author is 'Paulo Moura',
-		date is 2018/02/28,
+		date is 2018/03/03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -219,6 +219,18 @@
 	:- mode(note(?atom), zero_or_one).
 	:- info(note/1, [
 		comment is 'Note to be printed after the test results. Defaults to the empty atom.'
+	]).
+
+	:- protected(suppress_text_output/0).
+	:- mode(suppress_text_output, one).
+	:- info(suppress_text_output/0, [
+		comment is 'Suppresses text output. Useful to avoid irrelevant text output from predicates being tested to clutter the test logs.'
+	]).
+
+	:- protected(suppress_binary_output/0).
+	:- mode(suppress_binary_output, one).
+	:- info(suppress_binary_output/0, [
+		comment is 'Suppresses binary output. Useful to avoid irrelevant binary output from predicates being tested to clutter the test logs.'
 	]).
 
 	:- protected(set_text_input/3).
@@ -1909,6 +1921,30 @@
 		Coverage1 is Coverage0 + Covered,
 		Clauses1 is Clauses0 + Total,
 		sum_coverage(List, Coverage1, Coverage, Clauses1, Clauses).
+
+	% support for suppressing output
+
+	:- if(os::operating_system_type(windows)).
+
+	suppress_text_output :-
+		open('nul', write, Stream, [type(text)]),
+		set_output(Stream).
+
+	suppress_binary_output :-
+		open('nul', write, Stream, [type(binary)]),
+		set_output(Stream).
+
+	:- else.	% assume a POSIX system
+
+	suppress_text_output :-
+		open('/dev/null', write, Stream, [type(text)]),
+		set_output(Stream).
+
+	suppress_binary_output :-
+		open('/dev/null', write, Stream, [type(binary)]),
+		set_output(Stream).
+
+	:- endif.
 
 	% support for testing input predicates
 

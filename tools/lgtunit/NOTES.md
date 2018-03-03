@@ -328,13 +328,11 @@ standard input/output predicates.
 Suppressing tested predicates output
 ------------------------------------
 
-Sometimes predicates being tested output text that at best clutters testing
-logs and at worse can interfere with parsing of test logs. If that output
-itself is not under testing, you can suppress it by starting the test with
-the goal `^^set_text_output('')`. You can also make this call from the test
-`setup/1` option. To cleanup the temporary file that captured the output,
-call the `^^clean_text_output` from the test `cleanup/1` option or from the
-test suite `cleanup/0` definition.
+Sometimes predicates being tested output text or binary data that at best
+clutters testing logs and at worse can interfere with parsing of test
+logs. If that output itself is not under testing, you can suppress it by
+using the goals `^^suppress_text_output` or `^^suppress_binary_output` at
+the beginning of the tests.
 
 
 Unit tests with timeout limits

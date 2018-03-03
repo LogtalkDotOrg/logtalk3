@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
 		date is 2018/03/03,
 		comment is 'Unit tests for the "help" tool.'
@@ -58,38 +58,35 @@
 
 	cover(help).
 
-	cleanup :-
-		^^clean_text_output.
-
 	% help/0 tests
 
 	test(help_0_01) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		help.
 
 	% check forward/1 definition
 	test(help_0_02) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		help::foo42.
 
 	% ('/')/2 tests
 
 	test(slash_2_01) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		help::implements_protocol/_.
 
 	test(slash_2_02) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		\+ help::foo42/_.
 
 	% ('//')/2 tests
 
 	test(double_slash_2_01) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		help::call//_.
 
 	test(double_slash_2_02) :-
-		^^set_text_output(''),
+		^^suppress_text_output,
 		\+ help::foo42//_.
 
 	% completion/2 tests

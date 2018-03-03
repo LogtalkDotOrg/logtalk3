@@ -143,6 +143,10 @@ output. These new predicates can be used for easier debugging of failed tests.
 * ADDED: Predicate `deterministic/2` to the `lgtunit` tool. This predicate is
 a reified version of the `deterministic/1` predicate.
 
+* ADDED: Predicates `suppress_text_output/0` and `suppress_binary_output/0` to
+the `lgtunit` tool. Useful to avoid irrelevant output from predicates being
+tested cluttering the test logs.
+
 * ADDED: Support to the `diagrams` tool to generate predicate cross-referencing
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
 source file line for the corresponding predicate clause. 
