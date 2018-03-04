@@ -40,7 +40,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.45,
+		version is 1.46,
 		author is 'Paulo Moura',
 		date is 2018/03/04,
 		comment is 'Portable operating-system access predicates.',
@@ -221,7 +221,8 @@
 			{getcwd(Directory)}.
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -425,7 +426,8 @@
 			 absolute_file_name(Directory0, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			{absolute_file_name(Directory, ExpandedPath),
+			 directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -534,7 +536,8 @@
 			{working_directory(Directory)}.
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			absolute_file_name(Path, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -635,7 +638,8 @@
 			{current_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{findall(File1, file_member_of_directory(Directory, File1, _), Files1),
+			absolute_file_name(Directory, Path),
+			{findall(File1, file_member_of_directory(Path, File1, _), Files1),
 			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
 			 append(['.', '..'| Directories1], Files1, Files)}.
 
@@ -734,7 +738,8 @@
 			 atom_string(Directory, DirectoryString)}.
 
 		directory_files(Directory, Files) :-
-			{read_directory(Directory, '*', Directories0, Files0),
+			{canonical_path_name(Directory, ExpandedPath),
+			 read_directory(ExpandedPath, '*', Directories0, Files0),
 			 findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
 			 findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
 			 append(['.', '..'| Directories1], Files1, Files)}.
@@ -842,7 +847,8 @@
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			{absolute_file_name(Path, ExpandedPath),
+			 directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -1349,7 +1355,8 @@
 			{absolute_file_name('.', Directory)}.
 
 		directory_files(Directory, Files) :-
-			{findall(File1, file_member_of_directory(Directory, File1, _), Files1),
+			absolute_file_name(Directory, ExpandedPath),
+			{findall(File1, file_member_of_directory(ExpandedPath, File1, _), Files1),
 			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
 			 append(['.', '..'| Directories1], Files1, Files)}.
 
@@ -1500,7 +1507,8 @@
 			convert_file_path(Directory0, Directory).
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),

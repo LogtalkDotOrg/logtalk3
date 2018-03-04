@@ -122,6 +122,9 @@ directory does not exist.
 * FIXED: Bug in the implementation of the `os::operating_system_type/1`
 predicate for GNU Prolog.
 
+* FIXED: Ensure that the `os::directory_file/2` predicate always expands its
+first argument for all supported backend Prolog systems.
+
 Tools
 -----
 
