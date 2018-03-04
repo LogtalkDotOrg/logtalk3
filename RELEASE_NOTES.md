@@ -219,6 +219,8 @@ to check for correct behavior when the arguments contain cuts.
 
 * ADDED: Unit tests for the new `lgtunit::deterministic/2` predicate.
 
+* ADDED: Unit tests for the `lgtunit` tool input/output testing predicates.
+
 * ADDED: Unit tests for the `random` library.
 
 * ADDED: Elementary unit tests for the `ports` tool.

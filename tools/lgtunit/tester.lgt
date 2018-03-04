@@ -21,10 +21,18 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load([tests_parametric, tests_dialects, tests_utils], [hook(lgtunit)]),
+	logtalk_load([
+		tests_parametric,
+		tests_dialects,
+		tests_utils,
+		tests_io_predicates
+	], [
+		hook(lgtunit)
+	]),
 	lgtunit::run_test_sets([
 		tests_parametric(1),
 		tests_dialects,
-		tests_utils
+		tests_utils,
+		tests_io_predicates
 	])
 )).
