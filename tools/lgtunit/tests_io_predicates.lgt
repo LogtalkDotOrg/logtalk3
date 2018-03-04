@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2018/03/04,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
@@ -149,6 +149,55 @@
 		^^set_binary_input(alias, [65,66,67]),
 		^^binary_input_assertion(alias, [65,66,67], Assertion),
 		^^clean_binary_input.
+
+	% create_text_file/2 tests
+
+	test(create_text_file_2_01, deterministic(Term == foo42)) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_text_file(File, 'foo42.'),
+		open(File, read, Stream, [type(text)]),
+		read_term(Stream, Term, []).
+
+	% create_binary_file/2 tests
+
+	test(create_binary_file_2_01, deterministic([Byte1,Byte2,Byte3] == [65,66,67])) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_binary_file(File, [65,66,67]),
+		open(File, read, Stream, [type(binary)]),
+		get_byte(Stream, Byte1),
+		get_byte(Stream, Byte2),
+		get_byte(Stream, Byte3).
+
+	% check_text_file/2 tests
+
+	test(check_text_file_2_01, deterministic) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_text_file(File, 'foo42.'),
+		^^check_text_file(File, 'foo42.').
+
+	% check_binary_file/2 tests
+
+	test(check_binary_file_2_01, deterministic) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_binary_file(File, [65,66,67]),
+		^^check_binary_file(File, [65,66,67]).
+
+	% clean_file/1 tests
+
+	test(clean_file_1_01, deterministic(\+ os::file_exists(File))) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		open(File, write, _),
+		^^clean_file(File).
 
 	% closed_input_stream/2 tests
 
