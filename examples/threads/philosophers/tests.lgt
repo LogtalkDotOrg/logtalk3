@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/08/06,
+		date is 2018/03/04,
 		comment is 'Unit tests for the "threads/philosophers" example.'
 	]).
 
@@ -36,6 +36,7 @@
 	cover(philosopher(_, _, _)).
 
 	test(philosophers_1) :-
+		^^suppress_text_output,
 		threaded_ignore(p1::run(5, 5)),
 		threaded_ignore(p2::run(5, 5)),
 		threaded_ignore(p3::run(5, 5)),
@@ -43,6 +44,7 @@
 		threaded_ignore(p5::run(5, 5)).
 
 	test(philosophers_2) :-
+		^^suppress_text_output,
 		threaded_ignore(philosopher(p1,cs1,cs2)::run(5, 5)),
 		threaded_ignore(philosopher(p2,cs2,cs3)::run(5, 5)),
 		threaded_ignore(philosopher(p3,cs3,cs4)::run(5, 5)),
