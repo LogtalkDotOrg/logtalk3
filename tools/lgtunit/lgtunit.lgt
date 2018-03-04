@@ -1346,7 +1346,7 @@
 			(	var(Deterministic) ->
 				!,
 				fail
-			;	!
+			;	true
 			).
 
 		deterministic(Goal, Deterministic) :-
@@ -1370,7 +1370,7 @@
 			(	var(Deterministic) ->
 				!,
 				fail
-			;	!
+			;	true
 			).
 
 		deterministic(Goal, Deterministic) :-
