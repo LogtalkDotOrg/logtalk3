@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2018/03/03,
+		date is 2018/03/04,
 		comment is 'Unit tests for the "help" tool.'
 	]).
 
@@ -197,13 +197,13 @@
 	% auxiliary predicates
 
 	documentation_page_exists(Path, File) :-
-		environment_variable('LOGTALKUSER', LOGTALKUSER),
+		environment_variable('LOGTALKHOME', LOGTALKUSER),
 		atom_concat(LOGTALKUSER, Path, AbsolutePath0),
 		atom_concat(AbsolutePath0, File, AbsolutePath),
 		file_exists(AbsolutePath).
 
 	directory_page(SubDirectory, Path, File) :-
-		environment_variable('LOGTALKUSER', LOGTALKUSER),
+		environment_variable('LOGTALKHOME', LOGTALKUSER),
 		atom_concat(LOGTALKUSER, '/manuals/refman/', AbsolutePath0),
 		atom_concat(AbsolutePath0, SubDirectory, AbsolutePath),
 		atom_concat('/manuals/refman/', SubDirectory, Path0),
