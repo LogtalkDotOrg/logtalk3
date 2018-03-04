@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2018/02/25,
+		date is 2018/03/04,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -34,7 +34,6 @@
 	cover(fast_random).
 
 	:- uses(list, [
-		length/2, member/2, msort/2,
 		min/2, max/2
 	]).
 
@@ -57,36 +56,36 @@
 	quick_check(
 		random_select_3_01,
 		random_select_3(
-			-property(atom, [Random]>>member(Random,[a,b,c,d,e,f,g,h,i,j])),
-			-property(list(atom), [All]>>msort(All,[a,b,c,d,e,f,g,h,i,j]))
+			-property(atom, [Random]>>(list::member(Random,[a,b,c,d,e,f,g,h,i,j]))),
+			-property(list(atom), [All]>>(list::msort(All,[a,b,c,d,e,f,g,h,i,j])))
 		)
 	).
 
 	% permutation/2 tests
 
-	quick_check(random_permutation_2_01, random_permutation_2(-property(list(integer), [Permutation]>>msort(Permutation,[0,1,2,3,4,5,6,7,8,9])))).
+	quick_check(random_permutation_2_01, random_permutation_2(-property(list(integer), [Permutation]>>(list::msort(Permutation,[0,1,2,3,4,5,6,7,8,9]))))).
 
 	% sequence/4 tests
 
-	quick_check(random_sequence_4_01, random_sequence_4_positive(-property(list(integer), [Sequence]>>length(Sequence,10)))).
+	quick_check(random_sequence_4_01, random_sequence_4_positive(-property(list(integer), [Sequence]>>(list::length(Sequence,10))))).
 
 	quick_check(random_sequence_4_02, random_sequence_4_positive(-list(integer,1,100))).
 
-	quick_check(random_sequence_4_03, random_sequence_4_negative(-property(list(integer), [Sequence]>>length(Sequence,10)))).
+	quick_check(random_sequence_4_03, random_sequence_4_negative(-property(list(integer), [Sequence]>>(list::length(Sequence,10))))).
 
 	quick_check(random_sequence_4_04, random_sequence_4_negative(-list(integer,-100,-1))).
 
 	% set/4 tests
 
-	quick_check(random_set_4_01, random_set_4_positive(-property(list(integer), [Set]>>msort(Set,Set)))).
+	quick_check(random_set_4_01, random_set_4_positive(-property(list(integer), [Set]>>(list::msort(Set,Set))))).
 
-	quick_check(random_set_4_02, random_set_4_positive(-property(list(integer), [Set]>>length(Set,10)))).
+	quick_check(random_set_4_02, random_set_4_positive(-property(list(integer), [Set]>>(list::length(Set,10))))).
 
 	quick_check(random_set_4_03, random_set_4_positive(-list(integer,1,100))).
 
-	quick_check(random_set_4_04, random_set_4_negative(-property(list(integer), [Set]>>msort(Set,Set)))).
+	quick_check(random_set_4_04, random_set_4_negative(-property(list(integer), [Set]>>(list::msort(Set,Set))))).
 
-	quick_check(random_set_4_05, random_set_4_negative(-property(list(integer), [Set]>>length(Set,10)))).
+	quick_check(random_set_4_05, random_set_4_negative(-property(list(integer), [Set]>>(list::length(Set,10))))).
 
 	quick_check(random_set_4_06, random_set_4_negative(-list(integer,-100,-1))).
 
