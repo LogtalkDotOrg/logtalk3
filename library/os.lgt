@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.44,
+		version is 1.45,
 		author is 'Paulo Moura',
-		date is 2017/11/22,
+		date is 2018/03/04,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -476,7 +476,8 @@
 			Seconds is Miliseconds / 1000.
 
 		operating_system_type(Type) :-
-			(	{os_version(windows)} ->
+			(	{os_version(Version)},
+				sub_atom(Version, _, _, _, 'Windows') ->
 				Type = windows
 			;	Type = unix
 			).

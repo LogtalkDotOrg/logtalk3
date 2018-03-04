@@ -119,6 +119,9 @@ Azarisooreh for the bug report.
 * FIXED: Typo in the OS type `directory` exception term generated when a
 directory does not exist.
 
+* FIXED: Bug in the implementation of the `os::operating_system_type/1`
+predicate for GNU Prolog.
+
 Tools
 -----
 
