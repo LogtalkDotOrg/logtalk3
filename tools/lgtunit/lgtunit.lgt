@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.5,
+		version is 6.6,
 		author is 'Paulo Moura',
-		date is 2018/03/03,
+		date is 2018/03/04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1346,16 +1346,16 @@
 			(	var(Deterministic) ->
 				!,
 				fail
-			;	true
+			;	!
 			).
 
 		deterministic(Goal, Deterministic) :-
 			setup_call_cleanup(true, Goal, Deterministic = true),
 			(	var(Deterministic) ->
-				Deterministic = false,
-				!
+				Deterministic = false
 			;	true
-			).
+			),
+			!.
 
 	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
 				(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
@@ -1370,16 +1370,16 @@
 			(	var(Deterministic) ->
 				!,
 				fail
-			;	true
+			;	!
 			).
 
 		deterministic(Goal, Deterministic) :-
-			call_cleanup(Goal, Deterministic = true),
-			(	var(Deterministic) ->
-				Deterministic = false,
-				!
-			;	true
-			).
+			call_cleanup(Goal, Deterministic0 = true),
+			(	var(Deterministic0) ->
+				Deterministic = false
+			;	Deterministic = true
+			),
+			!.
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 		% avoid portability warnings
