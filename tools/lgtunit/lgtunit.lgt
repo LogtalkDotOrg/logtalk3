@@ -236,7 +236,7 @@
 	:- protected(set_text_input/3).
 	:- mode(set_text_input(+atom, +atom, +list(stream_option)), one).
 	:- info(set_text_input/3, [
-		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.',
+		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Contents', 'Options']
 	]).
 
@@ -291,7 +291,7 @@
 	:- protected(set_binary_input/3).
 	:- mode(set_binary_input(+atom, +list(byte), +list(stream_option)), one).
 	:- info(set_binary_input/3, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.',
+		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Bytes', 'Options']
 	]).
 
