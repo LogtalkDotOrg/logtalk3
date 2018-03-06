@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/02/27,
+		date is 2018/03/06,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -211,13 +211,19 @@
 	% assertion/2 tests
 
 	succeeds(assertion_2_01) :-
-		assertion(1,integer(1)).
+		% delay calling the assertion to runtime
+		Assertion = integer(1),
+		assertion(1, Assertion).
 
 	throws(assertion_2_02, assertion_failure(2)) :-
-		assertion(2, integer(1.1)).
+		% delay calling the assertion to runtime
+		Assertion = integer(1.1),
+		assertion(2, Assertion).
 
 	throws(assertion_2_03, assertion_error(3, e)) :-
-		assertion(3, throw(e)).
+		% delay calling the assertion to runtime
+		Assertion = throw(e),
+		assertion(3, Assertion).
 
 	% quick_check/3 tests
 
