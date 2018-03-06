@@ -32,6 +32,9 @@ declared as meta-predicates and the compiler no longer warns about missing
 meta-predicate directives when using these constructs with runtime bound
 arguments.
 
+* IMPROVED: Runtime performance by recognizing additional cases where static
+binding can be applied.
+
 * FIXED: Avoid a false positive when checking for trivial fails when there
 is a single clause for a predicate that makes a recursive call and the used
 backend Prolog compiler performs unifications using occurs check by default.

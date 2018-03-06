@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 14, 1, rc4)).
+'$lgt_version_data'(logtalk(3, 14, 1, rc5)).
 
 
 
@@ -21243,23 +21243,44 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_entity_ancestor'(Entity, protocol, Protocol, Kind, Kind) :-
 	'$lgt_implements_protocol_'(Entity, Protocol, _).
 
+'$lgt_entity_ancestor'(Entity, protocol, Protocol, Kind, Kind) :-
+	'$lgt_pp_runtime_clause_'('$lgt_implements_protocol_'(Entity, Protocol, _)).
+
 '$lgt_entity_ancestor'(Entity, protocol, Protocol, protocol, protocol) :-
 	'$lgt_extends_protocol_'(Entity, Protocol, _).
+
+'$lgt_entity_ancestor'(Entity, protocol, Protocol, protocol, protocol) :-
+	'$lgt_pp_runtime_clause_'('$lgt_extends_protocol_'(Entity, Protocol, _)).
 
 '$lgt_entity_ancestor'(Entity, category, Category, category, category) :-
 	'$lgt_extends_category_'(Entity, Category, _).
 
+'$lgt_entity_ancestor'(Entity, category, Category, category, category) :-
+	'$lgt_pp_runtime_clause_'('$lgt_extends_category_'(Entity, Category, _)).
+
 '$lgt_entity_ancestor'(Entity, category, Category, Kind, Kind) :-
 	'$lgt_imports_category_'(Entity, Category, _).
+
+'$lgt_entity_ancestor'(Entity, category, Category, Kind, Kind) :-
+	'$lgt_pp_runtime_clause_'('$lgt_imports_category_'(Entity, Category, _)).
 
 '$lgt_entity_ancestor'(Entity, object, Parent, prototype, prototype) :-
 	'$lgt_extends_object_'(Entity, Parent, _).
 
+'$lgt_entity_ancestor'(Entity, object, Parent, prototype, prototype) :-
+	'$lgt_pp_runtime_clause_'('$lgt_extends_object_'(Entity, Parent, _)).
+
 '$lgt_entity_ancestor'(Entity, object, Class, instance, superclass) :-
 	'$lgt_instantiates_class_'(Entity, Class, _).
 
+'$lgt_entity_ancestor'(Entity, object, Class, instance, superclass) :-
+	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Entity, Class, _)).
+
 '$lgt_entity_ancestor'(Entity, object, Superclass, superclass, superclass) :-
 	'$lgt_specializes_class_'(Entity, Superclass, _).
+
+'$lgt_entity_ancestor'(Entity, object, Superclass, superclass, superclass) :-
+	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Entity, Superclass, _)).
 
 
 
