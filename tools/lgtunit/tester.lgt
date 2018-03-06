@@ -20,6 +20,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	set_logtalk_flag(optimize, on),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([
 		tests_parametric,
@@ -27,7 +28,7 @@
 		tests_utils,
 		tests_io_predicates
 	], [
-		hook(lgtunit), optimize(on)
+		hook(lgtunit)
 	]),
 	lgtunit::run_test_sets([
 		tests_parametric(1),
