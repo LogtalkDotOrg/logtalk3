@@ -27,7 +27,7 @@
 		tests_utils,
 		tests_io_predicates
 	], [
-		hook(lgtunit)
+		hook(lgtunit), optimize(on)
 	]),
 	lgtunit::run_test_sets([
 		tests_parametric(1),
