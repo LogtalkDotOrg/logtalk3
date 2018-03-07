@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.22,
+		version is 1.23,
 		author is 'Paulo Moura',
-		date is 2017/11/22,
+		date is 2018/03/07,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os_types]
 	]).
@@ -215,6 +215,13 @@
 	:- info(command_line_arguments/1, [
 		comment is 'Returns a list with the command line arguments that occur after "--".',
 		argnames is ['Arguments']
+	]).
+
+	:- public(sleep/1).
+	:- mode(sleep(+number), one).
+	:- info(sleep/1, [
+		comment is 'Suspends execution the given number of seconds.',
+		argnames is ['Seconds']
 	]).
 
 :- end_protocol.

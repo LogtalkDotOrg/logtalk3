@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2017/11/22,
+		date is 2018/03/07,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -298,6 +298,9 @@
 		os::directory_files(Directory, Files, [type(regular), paths(relative), suffixes(['r.lgt'])]),
 		\+ list::member('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
+
+	test(os_sleep_1_01) :-
+		os::sleep(1).
 
 	setup :-
 		cleanup.

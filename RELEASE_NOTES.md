@@ -111,6 +111,8 @@ category.
 * ADDED: Support for shrink additional number, list, predicate/non-terminal
 indicator, pair, compound, and callable terms to the `arbitrary` category.
 
+* ADDED: Predicate `sleep/1` to the `os` library.
+
 * FIXED: Added missing `either` library source file.
 
 * FIXED: Workaround XSB parser bug when loading the `random` library.

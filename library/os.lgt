@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.46,
+		version is 1.47,
 		author is 'Paulo Moura',
-		date is 2018/03/04,
+		date is 2018/03/07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -113,8 +113,8 @@
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{directory_files(ExpandedPath, Files)}.
+			absolute_file_name(Directory, Path),
+			{directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -175,6 +175,9 @@
 		command_line_arguments(Arguments) :-
 			{current_prolog_flag(argv, Arguments)}.
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
 		pid(PID) :-
@@ -221,8 +224,8 @@
 			{getcwd(Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{directory_files(ExpandedPath, Files)}.
+			absolute_file_name(Directory, Path),
+			{directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -283,6 +286,9 @@
 		command_line_arguments(Arguments) :-
 			{current_prolog_flag(argv, Arguments)}.
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
 		pid(PID) :-
@@ -321,8 +327,8 @@
 			{path_sysop(cwd, Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{findall(File, list_directory(ExpandedPath, File), Files)}.
+			absolute_file_name(Directory, Path),
+			{findall(File, list_directory(Path, File), Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -389,6 +395,9 @@
 		command_line_arguments(_) :-
 			throw(not_available(command_line_arguments/1)).
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
 		pid(PID) :-
@@ -426,8 +435,8 @@
 			 absolute_file_name(Directory0, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 directory_files(ExpandedPath, Files)}.
+			{absolute_file_name(Directory, Path),
+			 directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -487,6 +496,9 @@
 		command_line_arguments(Arguments) :-
 			{argument_list(Arguments)}.
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, b)).
 
 		:- if(predicate_property(getpid(_), _)).
@@ -536,8 +548,8 @@
 			{working_directory(Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Path, ExpandedPath),
-			{directory_files(ExpandedPath, Files)}.
+			absolute_file_name(Directory, Path),
+			{directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -601,6 +613,12 @@
 			!.
 		find_arguments([_| Arguments0], Arguments) :-
 			find_arguments(Arguments0, Arguments).
+
+		sleep(Seconds) :-
+			number_codes(Seconds, Codes),
+			atom_codes(SecondsAtom, Codes),
+			atom_concat('sleep ', SecondsAtom, Command),
+			{system(Command)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
@@ -698,6 +716,9 @@
 		command_line_arguments(Arguments) :-
 			{current_prolog_flag(argv, Arguments)}.
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		pid(PID) :-
@@ -738,8 +759,8 @@
 			 atom_string(Directory, DirectoryString)}.
 
 		directory_files(Directory, Files) :-
-			{canonical_path_name(Directory, ExpandedPath),
-			 read_directory(ExpandedPath, '*', Directories0, Files0),
+			{canonical_path_name(Directory, Path),
+			 read_directory(Path, '*', Directories0, Files0),
 			 findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
 			 findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
 			 append(['.', '..'| Directories1], Files1, Files)}.
@@ -811,6 +832,9 @@
 			{argv(all, Arguments0),
 			findall(Argument, (member(Argument0, Arguments0), atom_string(Argument, Argument0)), [_| Arguments])}.
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, ciao)).
 
 		pid(PID) :-
@@ -847,8 +871,8 @@
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Path, ExpandedPath),
-			 directory_files(ExpandedPath, Files)}.
+			{absolute_file_name(Directory, Path),
+			 directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -915,6 +939,12 @@
 		command_line_arguments(_) :-
 			throw(not_available(command_line_arguments/1)).
 
+		sleep(Seconds) :-
+			number_codes(Seconds, Codes),
+			atom_codes(SecondsAtom, Codes),
+			atom_concat('sleep ', SecondsAtom, Command),
+			{shell(Command)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, cx)).
 
 		pid(PID) :-
@@ -954,8 +984,8 @@
 			{fs_cwd(Directory)}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 fs_cwd(CurrentDirectory, ExpandedPath),
+			{absolute_file_name(Directory, Path),
+			 fs_cwd(CurrentDirectory, Path),
 			 fs_files(Files),
 			 fs_cwd(_, CurrentDirectory)}.
 
@@ -1024,6 +1054,12 @@
 			!.
 		find_arguments([_| Arguments0], Arguments) :-
 			find_arguments(Arguments0, Arguments).
+
+		sleep(Seconds) :-
+			number_codes(Seconds, Codes),
+			atom_codes(SecondsAtom, Codes),
+			atom_concat('sleep ', SecondsAtom, Command),
+			{os_run(Command)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 
@@ -1149,6 +1185,9 @@
 		command_line_arguments(Arguments) :-
 			{get_args(Arguments)}.
 
+		sleep(Seconds) :-
+			{thread_sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
 
 		pid(_) :-
@@ -1210,8 +1249,8 @@
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{working_directory(CurrentDirectory, ExpandedPath),
+			absolute_file_name(Directory, Path),
+			{working_directory(CurrentDirectory, Path),
 			 dirs(Directories0),
 			 files(Files0),
 			 append(['.', '..'| Directories0], Files0, Files),
@@ -1292,6 +1331,9 @@
 		command_line_arguments(Arguments) :-
 			{get_cmd_line_args(Arguments)}.
 
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, quintus)).
 
 		pid(_) :-
@@ -1355,8 +1397,8 @@
 			{absolute_file_name('.', Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{findall(File1, file_member_of_directory(ExpandedPath, File1, _), Files1),
+			absolute_file_name(Directory, Path),
+			{findall(File1, file_member_of_directory(Path, File1, _), Files1),
 			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
 			 append(['.', '..'| Directories1], Files1, Files)}.
 
@@ -1425,6 +1467,12 @@
 			!.
 		find_arguments([_| Arguments0], Arguments) :-
 			find_arguments(Arguments0, Arguments).
+
+		sleep(Seconds) :-
+			number_chars(Seconds, Chars),
+			atom_chars(Chars, SecondsAtom),
+			atom_concat('sleep ', SecondsAtom, Command),
+			{unix(shell(Command))}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, ji)).
 
@@ -1507,8 +1555,8 @@
 			convert_file_path(Directory0, Directory).
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{directory_files(ExpandedPath, Files)}.
+			absolute_file_name(Directory, Path),
+			{directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1570,6 +1618,10 @@
 
 		command_line_arguments(_) :-
 			throw(not_available(command_line_arguments/1)).
+
+		sleep(Seconds) :-
+			Miliseconds is Seconds * 1000,
+			{sleep(Miliseconds)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, jekejeke)).
 
@@ -1657,6 +1709,9 @@
 
 		command_line_arguments(_) :-
 			throw(not_available(command_line_arguments/1)).
+
+		sleep(_) :-
+			throw(not_available(sleep/1)).
 
 	:- else.
 
