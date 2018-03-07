@@ -22,55 +22,114 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2017/05/05,
+		date is 2018/03/07,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
 
-	% logtalk_make/0
+	setup :-
+		create_main_file(Main),
+		create_included_file(_),
+		logtalk_load(Main, [reload(changed)]).
+
+	cleanup :-
+		main_file(Main),
+		catch(ignore(os::delete_file(Main)), _, true),
+		included_file(Included),
+		catch(ignore(os::delete_file(Included)), _, true).
+
+	% logtalk_make/0 tests
 
 	test(logtalk_make_0_01) :-
-		% call in the "user" pseudo-object
-		{logtalk_make}.
-
-	test(logtalk_make_0_02) :-
-		% call from within this object
 		logtalk_make.
 
-	% logtalk_make/1
+	% logtalk_make/1 tests
 
-	test(logtalk_make_1_01) :-
-		% call in the "user" pseudo-object
-		{logtalk_make(all)}.
-
-	test(logtalk_make_1_02) :-
-		% call from within this object
+	test(logtalk_make_1_all_01) :-
 		logtalk_make(all).
 
-	test(logtalk_make_1_03) :-
-		% call in the "user" pseudo-object
-		{logtalk_make(clean)}.
+	test(logtalk_make_1_all_02, true({foo(4)})) :-
+		os::sleep(1),
+		update_main_file(_),
+		logtalk_make(all).
 
-	test(logtalk_make_1_04) :-
-		% call from within this object
+	test(logtalk_make_1_all_03, true({bar(4)})) :-
+		os::sleep(1),
+		update_included_file(_),
+		logtalk_make(all).
+
+	test(logtalk_make_1_clean_01) :-
 		logtalk_make(clean).
 
-	test(logtalk_make_1_05) :-
-		% call in the "user" pseudo-object
-		{logtalk_make(check)}.
+	test(logtalk_make_1_clean_02) :-
+		set_logtalk_flag(clean, off),
+		logtalk_load(doclet(doclet), [reload(always)]),
+		object_property(doclet, file(File)),
+		logtalk::loaded_file_property(File, target(Target)),
+		os::file_exists(Target),
+		logtalk_make(clean),
+		\+ os::file_exists(Target).
 
-	test(logtalk_make_1_06) :-
-		% call from within this object
+	test(logtalk_make_1_check_01) :-
 		logtalk_make(check).
 
-	test(logtalk_make_1_07) :-
-		% call in the "user" pseudo-object
-		{logtalk_make(circular)}.
-
-	test(logtalk_make_1_08) :-
-		% call from within this object
+	test(logtalk_make_1_circular_01) :-
 		logtalk_make(circular).
+
+	test(logtalk_make_1_documentation_01) :-
+		logtalk_make(documentation).
+
+	- test(logtalk_make_1_debug_01) :-
+		logtalk_make(debug).
+
+	- test(logtalk_make_1_normal_01) :-
+		logtalk_make(normal).
+
+	- test(logtalk_make_1_optimal_01) :-
+		logtalk_make(optimal).
+
+	% auxiliary predicates
+
+	main_file(Main) :-
+		this(Object),
+		object_property(Object, file(_,Directory)),
+		atom_concat(Directory,'main_file.lgt', Main).
+
+	included_file(Included) :-
+		this(Object),
+		object_property(Object, file(_,Directory)),
+		atom_concat(Directory,'included_file.lgt', Included).
+
+	create_main_file(Main) :-
+		main_file(Main),
+		open(Main, write, Stream),
+		included_file(Included),
+		writeq(Stream, (:- include(Included))), write(Stream, '.\n\n'),
+		write(Stream, foo(1)), write(Stream, '.\n'),
+		write(Stream, foo(2)), write(Stream, '.\n'),
+		write(Stream, foo(3)), write(Stream, '.\n'),
+		close(Stream).
+
+	update_main_file(Main) :-
+		main_file(Main),
+		open(Main, append, Stream),
+		write(Stream, foo(4)), write(Stream, '.\n'),
+		close(Stream).
+
+	create_included_file(Included) :-
+		included_file(Included),
+		open(Included, write, Stream),
+		write(Stream, bar(1)), write(Stream, '.\n'),
+		write(Stream, bar(2)), write(Stream, '.\n'),
+		write(Stream, bar(3)), write(Stream, '.\n'),
+		close(Stream).
+
+	update_included_file(Included) :-
+		included_file(Included),
+		open(Included, append, Stream),
+		write(Stream, bar(4)), write(Stream, '.\n'),
+		close(Stream).
 
 	% supress all logtalk_make/0-1 messages to not pollute the unit tests output
 

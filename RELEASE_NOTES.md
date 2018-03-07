@@ -207,6 +207,8 @@ dependent and the specification of this predicate is still informal.
 * IMPROVED: Tests for the Logtalk `encoding/1` directive to better cope with
 different backend Prolog systems supporting different sets of text encodings.
 
+* IMPROVED: Tests for the `logtalk_make/0-1` predicates.
+
 * ADDED: Unit tests for the soft-cut `if/3` built-in predicate.
 
 * ADDED: Unit tests for the de facto standard `format/2-3` and `msort/2`
