@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "August 16, 2017" "Logtalk 3.11.2" "Logtalk Documentation"
+.TH logtalk_tester 1 "March 7, 2018" "Logtalk 3.14.1" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -22,6 +22,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I report
 .B ] [-l
 .I level
+.B ] [-g
+.I goal
 .B ] [--
 .I arguments
 .B ]
@@ -59,6 +61,9 @@ Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fIn
 .TP
 .BI \-l
 Directory depth level to look for test sets. Level 1 means current directory only. Default is to recurse into all sub-directories.
+.TP
+.BI \-g
+Initialization goal. Default is true.
 .TP
 .BI \--
 Arguments to be passed to the integration script used to run the tests (no default).
@@ -105,4 +110,4 @@ The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2017 Paulo Moura.
+Copyright (c) 1998-2018 Paulo Moura.

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 30, 2018
+##   Last updated on March 7, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.29"
+	echo "$(basename "$0") 0.30"
 	exit 0
 }
 
@@ -89,6 +89,7 @@ coverage='none'
 format_goal=$format_default_goal
 coverage_goal=$coverage_default_goal
 flag_goal="true"
+initialization_goal="true"
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
@@ -108,15 +109,15 @@ run_tests() {
 	echo "***** Testing $unit_short"
 	name=${unit////__}
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
+		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_optimal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
+		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_normal_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | $sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		run_test "$name" "$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
+		run_test "$name" "$initialization_goal,$format_goal,$coverage_goal,$flag_goal,$tester_debug_goal"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | $sed 's/%/***** (debug)/'
 	fi
@@ -194,13 +195,14 @@ usage_help()
 	echo "     (valid values are none and xml)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
+	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vp:m:f:d:t:s:c:l:h" option
+while getopts "vp:m:f:d:t:s:c:l:g:h" option
 do
 	case $option in
 		v) print_version;;
@@ -212,6 +214,7 @@ do
 		s) s_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		g) g_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -368,6 +371,10 @@ if [ "$l_arg" != "" ] ; then
 		usage_help
 		exit 1
 	fi
+fi
+
+if [ "$g_arg" != "" ] ; then
+	initialization_goal="$g_arg"
 fi
 
 if [ "$timeout_command" == "" ] ; then

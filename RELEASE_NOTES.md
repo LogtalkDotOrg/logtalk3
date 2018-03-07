@@ -183,9 +183,11 @@ clauses per entity, library, file, or directory.
 * UPDATED: Removed use of Bash deprecated features from the `lgtdoc` tool
 helper scripts.
 
-* FIXED: Updated the `logtalk_tester` shell script to use the GNU `sed` command
-when available to workaround failed tests resulting in invalid byte sequences
-in test log files. This issue can result in a truncated list of failed tests.
+* ADDED: Option to pass an initialization goal to the `logtalk_tester` script.
+
+* FIXED: Updated the `logtalk_tester` script to use the GNU `sed` command when
+available to workaround failed tests resulting in invalid byte sequences in
+test log files. This issue can result in a truncated list of failed tests.
 
 * FIXED: The coupling metric failed to consider external calls to Prolog module
 predicates and would give wrong results when predicates with the same functor
