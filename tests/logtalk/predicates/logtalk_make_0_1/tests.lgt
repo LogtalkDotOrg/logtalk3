@@ -29,9 +29,8 @@
 	]).
 
 	setup :-
-		create_main_file(Main),
-		create_included_file(_),
-		logtalk_load(Main, [reload(changed)]).
+		create_main_file(_),
+		create_included_file(_).
 
 	cleanup :-
 		main_file(Main),
@@ -50,6 +49,8 @@
 		logtalk_make(all).
 
 	test(logtalk_make_1_all_02, true({foo(4)})) :-
+		main_file(Main),
+		logtalk_load(Main, [reload(changed)]),
 		os::sleep(1),
 		update_main_file(_),
 		logtalk_make(all).
@@ -92,14 +93,15 @@
 	% auxiliary predicates
 
 	main_file(Main) :-
-		this(Object),
-		object_property(Object, file(_,Directory)),
-		atom_concat(Directory,'main_file.lgt', Main).
+		file_path('main_file.lgt', Main).
 
 	included_file(Included) :-
+		file_path('included_file.lgt', Included).
+
+	file_path(File, Path) :-
 		this(Object),
 		object_property(Object, file(_,Directory)),
-		atom_concat(Directory,'included_file.lgt', Included).
+		atom_concat(Directory, File, Path).
 
 	create_main_file(Main) :-
 		main_file(Main),
