@@ -51,53 +51,21 @@ At this address you can also find additional documentation and information
 about Logtalk.
 
 
-REGISTRATION
-------------
-
-To register as a Logtalk user either use the registration form found at
-the Logtalk web site:
-
-<https://logtalk.org/regform.html>
-
-or send an email message to:
-
-<registration@logtalk.org>
-
-with the following information:
-
-email address, first and last name, organization, organization type
-(education, commercial, government, ...), Prolog compilers you use
-(optional), platforms (mac, pc, unix, ...) (optional), projects where
-you intend to use Logtalk (optional)
-
-
-SUPPORT
--------
-
-Support channels include:
-
-* Community discussion forums: <https://forums.logtalk.org/>
-* Community live chat room: <https://gitter.im/LogtalkDotOrg/logtalk3>
-* Commercial support: <https://logtalk.pt/>
-
-For more information on support options, please consult the web page:
-
-<https://logtalk.org/support.html>
-
-
 INSTALLATION
 ------------
 
 Logtalk can be installed either from sources by running a couple of shell
-scripts  or by using one of the provided installers, depending on your
-operating system. For manual installation, see the [INSTALL.md](INSTALL.md)
-file for detailed instructions.
+scripts or by using one of the [provided installers](https://logtalk.org/download.html),
+depending on your operating system. For manual installation, see the
+[INSTALL.md](INSTALL.md) file for detailed instructions.
 
 See the user manual for a description of the source files organization
 and for using instructions (to read the user manual open the
-[index](manuals/index.html) file in a web browser). Most files are
-formatted using tabs (the recommended setting is a tab width equivalent
-to 4 spaces).
+[index](manuals/index.html) file in a web browser).
+
+If you are upgrading from a previous Logtalk version, please check the
+[UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
+programs or your custom adapter files to run under this new version.
 
 
 CUSTOMIZATION
@@ -123,7 +91,11 @@ and with general knowledge about object-oriented programming is available at
 the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
 The reference and user manuals and the tutorial are provided in XHTML and
-PDF formats and can be found in the [manuals](manuals/) directory.
+PDF formats and can be found in the [manuals](manuals/) directory. It's also
+available online at:
+
+<https://logtalk.org/documentation.html>
+
 
 The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
 Logtalk updates since the first public version. Check it carefully if you
@@ -141,12 +113,38 @@ all the scripts can be generated using the `apropos logtalk` command. HTML
 versions of the man pages are also available at the Logtalk website.
 
 
-UPGRADING
----------
+REGISTRATION
+------------
 
-If you are upgrading from a previous Logtalk version, please check the
-[UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
-programs or your custom adapter files to run under this new version.
+To register as a Logtalk user either use the registration form found at
+the Logtalk web site:
+
+<https://logtalk.org/regform.html>
+
+or send an email message to:
+
+<registration@logtalk.org>
+
+with the following information:
+
+email address, first and last name, organization, organization type
+(education, commercial, government, ...), Prolog compilers you use
+(optional), platforms (mac, pc, unix, ...) (optional), projects where
+you intend to use Logtalk (optional)
+
+
+SUPPORT
+-------
+
+Support channels include:
+
+* Professional services: <https://logtalk.pt/>
+* Community discussion forums: <https://forums.logtalk.org/>
+* Community live chat room: <https://gitter.im/LogtalkDotOrg/logtalk3>
+
+For more information on support options, please consult the web page:
+
+<https://logtalk.org/support.html>
 
 
 CITATIONS
@@ -161,7 +159,7 @@ references in BibTeX format (the Logtalk user and reference manuals and the
 CONTRIBUTIONS
 -------------
 
-Contributions are most welcome! See the `CONTRIBUTING.md` file for details.
+Contributions are most welcome! See the [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
 
 LEGAL
 -----
