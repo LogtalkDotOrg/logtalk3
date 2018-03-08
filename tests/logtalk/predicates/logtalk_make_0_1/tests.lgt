@@ -22,11 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2018/03/07,
+		date is 2018/03/08,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
+
+	:- private(target_action_/1).
+	:- dynamic(target_action_/1).
 
 	setup :-
 		create_main_file(_),
@@ -36,26 +39,37 @@
 		main_file(Main),
 		catch(ignore(os::delete_file(Main)), _, true),
 		included_file(Included),
-		catch(ignore(os::delete_file(Included)), _, true).
+		catch(ignore(os::delete_file(Included)), _, true),
+		retractall(target_action_(_)).
 
 	% logtalk_make/0 tests
 
 	test(logtalk_make_0_01) :-
 		logtalk_make.
 
+	test(logtalk_make_0_02) :-
+		logtalk_make,
+		target_action_(Action),
+		Action == all.
+
 	% logtalk_make/1 tests
 
 	test(logtalk_make_1_all_01) :-
 		logtalk_make(all).
 
-	test(logtalk_make_1_all_02, true({foo(4)})) :-
+	test(logtalk_make_1_all_02) :-
+		logtalk_make(all),
+		target_action_(Action),
+		Action == all.
+
+	test(logtalk_make_1_all_03, true({foo(4)})) :-
 		main_file(Main),
 		logtalk_load(Main, [reload(changed)]),
 		os::sleep(1),
 		update_main_file(_),
 		logtalk_make(all).
 
-	test(logtalk_make_1_all_03, true({bar(4)})) :-
+	test(logtalk_make_1_all_04, true({bar(4)})) :-
 		os::sleep(1),
 		update_included_file(_),
 		logtalk_make(all).
@@ -75,11 +89,26 @@
 	test(logtalk_make_1_check_01) :-
 		logtalk_make(check).
 
+	test(logtalk_make_1_check_02) :-
+		logtalk_make(check),
+		target_action_(Action),
+		Action == check.
+
 	test(logtalk_make_1_circular_01) :-
 		logtalk_make(circular).
 
+	test(logtalk_make_1_circular_02) :-
+		logtalk_make(circular),
+		target_action_(Action),
+		Action == circular.
+
 	test(logtalk_make_1_documentation_01) :-
 		logtalk_make(documentation).
+
+	test(logtalk_make_1_documentation_02) :-
+		logtalk_make(documentation),
+		target_action_(Action),
+		Action == documentation.
 
 	- test(logtalk_make_1_debug_01) :-
 		logtalk_make(debug).
@@ -132,6 +161,23 @@
 		open(Included, append, Stream),
 		write(Stream, bar(4)), write(Stream, '.\n'),
 		close(Stream).
+
+	% define target actions for the tests
+
+	:- multifile(user::logtalk_make_target_action/1).
+	:- dynamic(user::logtalk_make_target_action/1).
+
+	user::logtalk_make_target_action(all) :-
+		assertz(target_action_(all)).
+
+	user::logtalk_make_target_action(circular) :-
+		assertz(target_action_(circular)).
+
+	user::logtalk_make_target_action(check) :-
+		assertz(target_action_(check)).
+
+	user::logtalk_make_target_action(documentation) :-
+		assertz(target_action_(documentation)).
 
 	% supress all logtalk_make/0-1 messages to not pollute the unit tests output
 
