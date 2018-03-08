@@ -55,9 +55,9 @@ INSTALLATION
 ------------
 
 Logtalk can be installed either from sources by running a couple of shell
-scripts or by using one of the [provided installers](https://logtalk.org/download.html),
-depending on your operating system. For manual installation, see the
-[INSTALL.md](INSTALL.md) file for detailed instructions.
+scripts or by using an [installer](https://logtalk.org/download.html) for your
+operating system. For manual installation, see the [INSTALL.md](INSTALL.md)
+file for detailed instructions.
 
 See the user manual for a description of the source files organization
 and for using instructions (to read the user manual open the
@@ -90,11 +90,10 @@ A quick and highly recommended introduction for users comfortable with Prolog
 and with general knowledge about object-oriented programming is available at
 the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
-The reference and user manuals and the tutorial are provided in XHTML and
-PDF formats and can be found in the [manuals](manuals/) directory. It's also
-available online at:
+The reference and user manuals are provided in XHTML and PDF formats and can be
+found in the [manuals](manuals/) directory. They are also available online at:
 
-<https://logtalk.org/documentation.html>
+https://logtalk.org/manuals/index.html
 
 
 The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
@@ -102,15 +101,19 @@ Logtalk updates since the first public version. Check it carefully if you
 have been using a previous Logtalk version.
 
 The API documentation for the core, library, tools, and contributions entities
-is provided in XHTML format and can be found in the [docs](docs/) directory.
+is provided in XHTML format and can be found in the [docs](docs/) directory and
+also available online at:
+
+https://logtalk.org/library/index.html
 
 Most directories include `NOTES.md` documenting files, which can be viewed
 as plain text in any text editor but also nicely rendered as Markdown files
 (for e.g. easy conversion to HTML).
 
-On POSIX systems, there's also a man page for each shell script. A list of
-all the scripts can be generated using the `apropos logtalk` command. HTML
-versions of the man pages are also available at the Logtalk website.
+On POSIX systems, there's also a [man page](man/man1) for each shell script.
+A list of all the scripts can be generated using the `apropos logtalk` command.
+[HTML versions](https://logtalk.org/man/) of the man pages are also available
+at the Logtalk website.
 
 
 REGISTRATION
@@ -119,11 +122,11 @@ REGISTRATION
 To register as a Logtalk user either use the registration form found at
 the Logtalk web site:
 
-<https://logtalk.org/regform.html>
+https://logtalk.org/regform.html
 
 or send an email message to:
 
-<registration@logtalk.org>
+registration@logtalk.org
 
 with the following information:
 
@@ -138,13 +141,13 @@ SUPPORT
 
 Support channels include:
 
-* Professional services: <https://logtalk.pt/>
-* Community discussion forums: <https://forums.logtalk.org/>
-* Community live chat room: <https://gitter.im/LogtalkDotOrg/logtalk3>
+* [Professional services](https://logtalk.pt/)
+* [Community discussion forums](https://forums.logtalk.org/)
+* [Community live chat room](https://gitter.im/LogtalkDotOrg/logtalk3)
 
 For more information on support options, please consult the web page:
 
-<https://logtalk.org/support.html>
+https://logtalk.org/support.html
 
 
 CITATIONS
@@ -159,7 +162,8 @@ references in BibTeX format (the Logtalk user and reference manuals and the
 CONTRIBUTIONS
 -------------
 
-Contributions are most welcome! See the [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
+Contributions are most welcome! See the [CONTRIBUTING.md](CONTRIBUTING.md) file
+for details.
 
 LEGAL
 -----
