@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2018/03/08,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
@@ -168,15 +168,19 @@
 	:- dynamic(user::logtalk_make_target_action/1).
 
 	user::logtalk_make_target_action(all) :-
+		retractall(target_action_(all)),
 		assertz(target_action_(all)).
 
 	user::logtalk_make_target_action(circular) :-
+		retractall(target_action_(circular)),
 		assertz(target_action_(circular)).
 
 	user::logtalk_make_target_action(check) :-
+		retractall(target_action_(check)),
 		assertz(target_action_(check)).
 
 	user::logtalk_make_target_action(documentation) :-
+		retractall(target_action_(documentation)),
 		assertz(target_action_(documentation)).
 
 	% supress all logtalk_make/0-1 messages to not pollute the unit tests output
