@@ -22,19 +22,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/02/20,
+		date is 2018/03/08,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.8.4
 
-	succeeds(iso_stream_property_2_01) :-
+	test(iso_stream_property_2_01, deterministic) :-
 		os::absolute_file_name(foo, FooPath),
 		os::absolute_file_name(bar, BarPath),
 		^^create_text_file(FooPath, ''),
@@ -44,7 +40,7 @@
 		memberchk(S1-FooPath, L),
 		memberchk(S2-BarPath, L).
 
-	succeeds(iso_stream_property_2_02) :-
+	test(iso_stream_property_2_02, deterministic) :-
 		os::absolute_file_name(bar, BarPath),
 		open(BarPath, write, FOut),
 		current_output(COut),
@@ -54,49 +50,95 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_stream_property_2_03, error(domain_error(stream,foo),_)) :-
+	test(sics_stream_property_2_03, error(domain_error(stream,foo))) :-
 		{stream_property(foo, _S)}.
 
-	throws(sics_stream_property_2_04, error(domain_error(stream_property,foo),_)) :-
+	test(sics_stream_property_2_04, error(domain_error(stream_property,foo))) :-
 		{stream_property(_S, foo)}.
 
-	succeeds(sics_stream_property_2_05) :-
+	test(sics_stream_property_2_05a, deterministic) :-
 		current_input(S),
 		findall(P, {stream_property(S, P)}, L),
-		memberchk(input, L),
-		memberchk(alias(user_input), L),
-		memberchk(eof_action(reset), L),
-		memberchk(mode(read), L),
-		memberchk(reposition(false), L),
-		memberchk(type(text), L).
+		memberchk(input, L).
 
-	succeeds(sics_stream_property_2_06) :-
+	test(sics_stream_property_2_05b, deterministic) :-
+		current_input(S),
+		findall(A, {stream_property(S, alias(A))}, L),
+		memberchk(user_input, L).
+
+	test(sics_stream_property_2_05c, deterministic(Action == reset)) :-
+		current_input(S),
+		{stream_property(S, eof_action(Action))}.
+
+	test(sics_stream_property_2_05d, deterministic(Mode == read)) :-
+		current_input(S),
+		{stream_property(S, mode(Mode))}.
+
+	test(sics_stream_property_2_05e, deterministic(Reposition == false)) :-
+		current_input(S),
+		{stream_property(S, reposition(Reposition))}.
+
+	test(sics_stream_property_2_05f, deterministic(Type == text)) :-
+		current_input(S),
+		{stream_property(S, type(Type))}.
+
+	test(sics_stream_property_2_06a, deterministic) :-
 		current_output(S),
 		findall(P, {stream_property(S, P)}, L),
-		memberchk(output, L),
-		memberchk(alias(user_output), L),
-		memberchk(eof_action(reset), L),
-		memberchk(mode(append), L),
-		memberchk(reposition(false), L),
-		memberchk(type(text), L).
+		memberchk(output, L).
 
-	fails(sics_stream_property_2_07) :-
+	test(sics_stream_property_2_06b, deterministic) :-
+		current_output(S),
+		findall(A, {stream_property(S, alias(A))}, L),
+		memberchk(user_output, L).
+
+	test(sics_stream_property_2_06c, deterministic(Action == reset)) :-
+		current_output(S),
+		{stream_property(S, eof_action(Action))}.
+
+	test(sics_stream_property_2_06d, deterministic(Mode == append)) :-
+		current_output(S),
+		{stream_property(S, mode(Mode))}.
+
+	test(sics_stream_property_2_06e, deterministic(Reposition == false)) :-
+		current_output(S),
+		{stream_property(S, reposition(Reposition))}.
+
+	test(sics_stream_property_2_06f, deterministic(Type == text)) :-
+		current_output(S),
+		{stream_property(S, type(Type))}.
+
+	test(sics_stream_property_2_07, fail) :-
 		{stream_property(_S, type(binary))}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_stream_property_2_08) :-
+	test(lgt_stream_property_2_08a, true) :-
 		stream_property(S, alias(user_error)),
 		findall(P, {stream_property(S, P)}, L),
-		memberchk(output, L),
-		memberchk(eof_action(reset), L),
-		memberchk(mode(append), L),
-		memberchk(reposition(false), L),
-		memberchk(type(text), L).
+		memberchk(output, L).
+
+	test(lgt_stream_property_2_08b, true(Action == reset)) :-
+		stream_property(S, alias(user_error)),
+		{stream_property(S, eof_action(Action))}.
+
+	test(lgt_stream_property_2_08c, true(Mode == append)) :-
+		stream_property(S, alias(user_error)),
+		{stream_property(S, mode(Mode))}.
+
+	test(lgt_stream_property_2_08d, true(Reposition == false)) :-
+		stream_property(S, alias(user_error)),
+		{stream_property(S, reposition(Reposition))}.
+
+	test(lgt_stream_property_2_08e, true(Type == text)) :-
+		stream_property(S, alias(user_error)),
+		{stream_property(S, type(Type))}.
 
 	cleanup :-
 		^^clean_file(foo),
 		^^clean_file(bar).
+
+	% auxiliary predicates
 
 	memberchk(Element, [Head| _]) :-
 		Element == Head,

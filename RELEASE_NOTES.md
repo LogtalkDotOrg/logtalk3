@@ -204,6 +204,9 @@ Tests
 that check for type errors as the non-callable term reported is implementation
 dependent and the specification of this predicate is still informal.
 
+* CHANGED: Split the tests for the standard stream properties to simplify
+checking which individual properties are not compliant.
+
 * IMPROVED: Tests for the Logtalk `encoding/1` directive to better cope with
 different backend Prolog systems supporting different sets of text encodings.
 
