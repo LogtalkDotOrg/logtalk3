@@ -125,11 +125,10 @@ report that takes into account all the tests.
 Unit test dialects
 ------------------
 
-Multiple test _dialects_ are supported by default. Other test dialects can
-be easily defined by extending the `lgtunit` object and by term-expanding
-the new dialect into one of the default dialects.
+Multiple test _dialects_ are supported by default. See the next section on how
+to define your own test dialects.
 
-Unit tests can be written using any of the following dialects:
+Unit tests can be written using any of the following predefined dialects:
 
 	test(Test) :- Goal.
 
@@ -228,6 +227,44 @@ an object internal predicates, make sure that the `context_switching_calls`
 compiler flag is set to `allow` for those objects.
 
 
+User-defined unit test dialects
+-------------------------------
+
+Additional test dialects can be easily defined by extending the `lgtunit`
+object and by term-expanding the new dialect into one of the default dialects.
+As an example, suppose that you want a dialect where you can simply write a
+file with clauses using the format:
+
+	test_identifier :-
+		test_goal.
+
+First, we define an expansion for this file into a test object:
+
+	:- object(simple_dialect,
+		implements(expanding)).
+	
+		term_expansion(begin_of_file, [(:- object(tests,extends(lgtunit)))]).
+		term_expansion((Head :- Body), [test(Head) :- Body]).
+		term_expansion(end_of_file, [(:- end_object)]).
+	
+	:- end_object.
+
+Then we can use this hook object to expand and run tests written in this
+idiom by using a `tester.lgt` driver file with contents such as:
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(library(hook_flows_loader)),
+		logtalk_load(simple_dialect),
+		logtalk_load(tests, [hook(hook_pipeline([simple_dialect,lgtunit]))]),
+		tests::run
+	)).
+
+The hook pipeline first applies our `simple_dialect` expansion followed by
+the default `lgtunit` expansion.
+
+
 QuickCheck
 ----------
 
@@ -247,7 +284,25 @@ or `failed(Goal)` with Goal being the random test that failed). The other two
 predicates print the test results. The template can be a `::/2`, `<</2`, or
 `:/2` qualified callable term. When the template is an unqualified callable
 term, it will be used to construct a goal to be called in the context of the
-*sender* using the `<</2` debugging control construct.
+*sender* using the `<</2` debugging control construct. A simple example by
+passing an incorrect template:
+
+	| ?- lgtunit::quick_check(random::random(-negative_float)).
+	*       quick check test failure:
+	*         random::random(0.09230089279334841)
+	no
+
+Another example using a Prolog module predicate:
+
+	| ?- lgtunit::quick_check(
+			pairs:pairs_keys_values(
+				+list(pair(atom,integer)),
+				-list(atom),
+				-list(integer)
+			)
+		).
+	% 100 random tests passed
+	yes
 
 Properties are expressed using predicates. The QuickCheck test dialects and
 predicates take as argument the mode template for a property, generate random
