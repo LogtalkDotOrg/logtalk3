@@ -21,7 +21,9 @@
 :- if(current_logtalk_flag(prolog_dialect, swi)).
 
 	:- initialization((
-		consult(xpce_hooks),
+		logtalk_load_context(directory, Directory),
+		atom_concat(Directory, xpce_hooks, Path),
+		consult(Path),
 		logtalk_load(file_viewer)
 	)).
 

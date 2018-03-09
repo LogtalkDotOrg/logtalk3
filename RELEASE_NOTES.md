@@ -287,6 +287,8 @@ with only warnings as intended with more backend Prolog systems.
 * FIXED: The tests for the `birthdays` and `philosophers` multi-threading
 examples to suppress irrelevant output.
 
+* FIXED: The `xpce` example to allow loading it from any directory.
+
 Contributions
 -------------
 
