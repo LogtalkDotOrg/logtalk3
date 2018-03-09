@@ -23,7 +23,7 @@ README
 [![Build Status](https://travis-ci.org/LogtalkDotOrg/logtalk3.svg?branch=master)](https://travis-ci.org/LogtalkDotOrg/logtalk3) [![Join the chat at https://gitter.im/LogtalkDotOrg/logtalk3](https://badges.gitter.im/LogtalkDotOrg/logtalk3.svg)](https://gitter.im/LogtalkDotOrg/logtalk3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-ABOUT
+About
 -----
 
 Logtalk is an *object-oriented logic programming language* that extends and
@@ -40,8 +40,8 @@ multi-threading programming. Logtalk uses standard Prolog syntax with the
 addition of some operators and directives for a smooth learning path.
 
 
-LOGTALK WEB SITE
-----------------
+Logtalk website
+---------------
 
 The latest stable release of the Logtalk is always available at the URL:
 
@@ -51,7 +51,7 @@ At this address you can also find additional documentation and information
 about Logtalk.
 
 
-INSTALLATION
+Installation
 ------------
 
 Logtalk can be installed either from sources by running a couple of shell
@@ -68,14 +68,14 @@ If you are upgrading from a previous Logtalk version, please check the
 programs or your custom adapter files to run under this new version.
 
 
-CUSTOMIZATION
+Customization
 -------------
 
 The [CUSTOMIZE.md](CUSTOMIZE.md) file provides detailed instructions for
 customizing the Logtalk installation and working environment.
 
 
-RUNNING
+Running
 -------
 
 The [QUICK_START.md](QUICK_START.md) file provides quick instructions for
@@ -83,7 +83,7 @@ those of you in a hurry to run Logtalk, provided that your favorite Prolog
 compiler is supported and installed.
 
 
-DOCUMENTATION
+Documentation
 -------------
 
 A quick and highly recommended introduction for users comfortable with Prolog
@@ -116,7 +116,7 @@ A list of all the scripts can be generated using the `apropos logtalk` command.
 at the Logtalk website.
 
 
-REGISTRATION
+Registration
 ------------
 
 To register as a Logtalk user either use the registration form found at
@@ -136,7 +136,7 @@ email address, first and last name, organization, organization type
 you intend to use Logtalk (optional)
 
 
-SUPPORT
+Support
 -------
 
 Support channels include:
@@ -150,7 +150,7 @@ For more information on support options, please consult the web page:
 https://logtalk.org/support.html
 
 
-CITATIONS
+Citations
 ---------
 
 If you find Logtalk useful, please include a citation on your publications.
@@ -159,13 +159,13 @@ references in BibTeX format (the Logtalk user and reference manuals and the
 2003 PhD thesis on Logtalk are good choices).
 
 
-CONTRIBUTIONS
+Contributions
 -------------
 
 Contributions are most welcome! See the [CONTRIBUTING.md](CONTRIBUTING.md) file
 for details.
 
-LEGAL
+Legal
 -----
 
 Logtalk is copyrighted by Paulo Moura and made available under the Apache
