@@ -23,6 +23,6 @@ ________________________________________________________________________
 ...
 
 
-% start the file viewer (replace the directory placeholder by an existing directory):
+% start the file viewer:
 
-| ?- view::file_viewer('/home/jdoe').
+| ?- view::file_viewer('$HOME').
