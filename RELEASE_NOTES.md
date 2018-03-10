@@ -140,6 +140,9 @@ as-is instead of generating random values for those arguments.
 * IMPROVED: The `lgtunit` tool QuickCheck test dialects and predicates now
 also check output arguments.
 
+* IMPROVED: The `lgtunit` tool QuickCheck support now reports non-expected
+errors such as the tested predicate not existing.
+
 * IMPROVED: The `lgtunit` tool deterministic tests now indicate if the test
 failed due to the test goal succeeding non-deterministically.
 

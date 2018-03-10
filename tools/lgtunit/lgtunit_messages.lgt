@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2018/02/17,
+		date is 2018/03/10,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -120,7 +120,12 @@
 		['~w random tests passed'-[NumberOfTests], nl].
 
 	message_tokens(quick_check_failed(Goal)) -->
-		failed_test_reason(quick_check_failed(Goal)).
+		['quick check test failure:'-[], nl, '  ~q'-[Goal], nl].
+
+	message_tokens(quick_check_error(error(Error,_), _Goal)) -->
+		['quick check test error:'-[], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(Error, _Goal)) -->
+		['quick check test error:'-[], nl, '  ~q'-[Error], nl].
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),
@@ -219,7 +224,12 @@
 		['  test goal throws the wrong error: expected ~q but got ~q'-[ExpectedError, Error], nl].
 
 	failed_test_reason(quick_check_failed(Goal)) -->
-		['  quick check test failure:'-[], nl, '    ~q'-[Goal], nl].
+		['  quick check test failure: ~q'-[Goal], nl].
+
+	failed_test_reason(quick_check_error(error(Error,_), _Goal)) -->
+		['  quick check test error: ~q'-[Error], nl].
+	failed_test_reason(quick_check_error(Error, _Goal)) -->
+		['  quick check test error: ~q'-[Error], nl].
 
 	failed_test_reason(step_error(Step, Error)) -->
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2018/03/06,
+		date is 2018/03/10,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -39,7 +39,7 @@
 	]).
 
 	:- discontiguous([
-		succeeds/1, throws/2
+		succeeds/1, fails/1, throws/2
 	]).
 
 	% benchmark/2 tests
@@ -243,6 +243,18 @@
 		quick_check(atom(+integer), Result, [n(25)]),
 		Result = failed(atom(Integer)), integer(Integer).
 
+	succeeds(quick_check_3_05) :-
+		quick_check(_, Result, []),
+		Result = error(instantiation_error, _).
+
+	succeeds(quick_check_3_06) :-
+		quick_check(1, Result, []),
+		Result = error(type_error(callable,1), _).
+
+	succeeds(quick_check_3_07) :-
+		quick_check(type::foo42(+integer), Result, []),
+		Result = error(existence_error(predicate_declaration,foo42/1), _).
+
 	% quick_check/2 tests
 
 	succeeds(quick_check_2_01) :-
@@ -265,6 +277,15 @@
 	succeeds(quick_check_2_06) :-
 		quick_check(type::valid({integer}, +integer), [n(50)]).
 
+	fails(quick_check_2_07) :-
+		quick_check(_, []).
+
+	fails(quick_check_2_08) :-
+		quick_check(1, []).
+
+	fails(quick_check_2_09) :-
+		quick_check(type::foo42(+integer), []).
+
 	% quick_check/1 tests
 
 	succeeds(quick_check_1_01) :-
@@ -276,6 +297,15 @@
 
 	succeeds(quick_check_1_03) :-
 		quick_check(type::valid({integer}, +integer)).
+
+	fails(quick_check_1_04) :-
+		quick_check(_).
+
+	fails(quick_check_1_05) :-
+		quick_check(1).
+
+	fails(quick_check_1_06) :-
+		quick_check(type::foo42(+integer)).
 
 	% supress quick_check/1-3 messages and save option values for tests
 
@@ -289,5 +319,6 @@
 		retractall(quick_check_passed(_)),
 		assertz(quick_check_passed(NumberOfTests)).
 	logtalk::message_hook(quick_check_failed(_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_error(_,_), _, lgtunit, _).
 
 :- end_object.

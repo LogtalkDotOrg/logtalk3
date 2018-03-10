@@ -279,13 +279,17 @@ use:
 	quick_check(Template, Options).
 	quick_check(Template).
 
-The `quick_check/3` predicate returns results in reified form (either `passed`
-or `failed(Goal)` with Goal being the random test that failed). The other two
-predicates print the test results. The template can be a `::/2`, `<</2`, or
-`:/2` qualified callable term. When the template is an unqualified callable
-term, it will be used to construct a goal to be called in the context of the
-*sender* using the `<</2` debugging control construct. A simple example by
-passing an incorrect template:
+The `quick_check/3` predicate returns results in reified form:
+
+- `passed`,
+- `failed(Goal)` with Goal being the random test that failed
+- `error(Error, Template)`
+
+The other two predicates print the test results. The template can be a `::/2`,
+`<</2`, or `:/2` qualified callable term. When the template is an unqualified
+callable term, it will be used to construct a goal to be called in the context
+of the *sender* using the `<</2` debugging control construct. A simple example
+by passing an incorrect template:
 
 	| ?- lgtunit::quick_check(random::random(-negative_float)).
 	*       quick check test failure:

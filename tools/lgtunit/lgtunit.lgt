@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.6,
+		version is 6.7,
 		author is 'Paulo Moura',
-		date is 2018/03/04,
+		date is 2018/03/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -98,7 +98,7 @@
 	:- public(quick_check/3).
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- info(quick_check/3, [
-		comment is 'Generates and runs random tests for a given predicate given its mode template reporting the result in reified form: "passed" or "failed(Goal)" where Goal is the test that failed. Accepts an option n(NumberOfTests). Default is to run 100 random tests.',
+		comment is 'Reified version of the quick_check/2 predicate. Reports the result as "passed", "failed(Goal)" where Goal is the test that failed, or "error(Error,Template)".',
 		argnames is ['Template', 'Result', 'Options']
 	]).
 
@@ -569,7 +569,7 @@
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
-	:- uses(type, [arbitrary/2, shrink/3]).
+	:- uses(type, [check/2, arbitrary/2, shrink/3]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2]).
 
@@ -781,8 +781,8 @@
 	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, quick_check), quick_check_failed(Goal), failed_test(Test, File, Position, quick_check_failed(Goal), Output)) ->
-					(	var(Goal) ->
+				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+					(	var(Error) ->
 						passed_test(Test, File, Position, Note, Output)
 					;	true
 					)
@@ -795,8 +795,8 @@
 		).
 	% quick_check/2 dialect
 	run_test(quick_check(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, quick_check), quick_check_failed(Goal), failed_test(Test, File, Position, quick_check_failed(Goal), Output)) ->
-			(	var(Goal) ->
+		(	catch(::test(Test, _, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+			(	var(Error) ->
 				passed_test(Test, File, Position, Output)
 			;	true
 			)
@@ -1472,8 +1472,12 @@
 		catch(run_quick_check_tests(Template, NumberOfTests), Error, true),
 		(	var(Error) ->
 			Result = passed
-		;	Error = quick_check_failed(Goal),
+		;	Error = quick_check_failed(Goal) ->
 			Result = failed(Goal)
+		;	Error = quick_check_error(error(Exception,_), Goal) ->
+			Result = error(Exception, Goal)
+		;	Error = quick_check_error(Exception, Goal),
+			Result = error(Exception, Goal)
 		).
 
 	quick_check(Template, Options) :-
@@ -1489,7 +1493,7 @@
 		quick_check(Template, []).
 
 	run_quick_check_tests(Template, NumberOfTests) :-
-		callable(Template),
+		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template))),
 		integer(NumberOfTests),
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
@@ -1514,16 +1518,16 @@
 		(	catch(
 				run_quick_check_test(Goal, Types, Arguments),
 				Error,
-				shrink_failed_test(Types, Goal, Template, Error)
+				throw(quick_check_error(Error, Goal))
 			) ->
 			true
-		;	shrink_failed_test(Types, Goal, Template, _)
+		;	shrink_failed_test(16, Types, Goal, Template)
 		).
 
 	:- meta_predicate(run_quick_check_test(*, *, *)).
 	run_quick_check_test(Goal, Types, Arguments) :-
 		call(Goal),
-		check_output_arguments(Types, Arguments, Goal).
+		check_output_arguments(Types, Arguments, quick_check_goal(Goal)).
 
 	generate_arbitrary_arguments([], []).
 	generate_arbitrary_arguments([Type| Types], [Argument| Arguments]) :-
@@ -1559,23 +1563,16 @@
 	check_output_argument('@'(_), _, _).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Types, Goal, Template, Error) :-
-		(	Error = error(_, Goal) ->
-			true
-		;	true
-		),
-		shrink_failed_test_depth(16, Types, Goal, Template).
-
-	shrink_failed_test_depth(Depth, Types, Goal, Template) :-
+	shrink_failed_test(Depth, Types, Goal, Template) :-
 		Depth > 0,
 		shrink_goal(Types, Goal, Small),
 		!,
 		NextDepth is Depth - 1,
 		(	catch(Small, _, shrink_failed_test(NextDepth, Types, Small, Template)) ->
 			quick_check_failed(Goal, Template)
-		;	shrink_failed_test_depth(NextDepth, Types, Small, Template)
+		;	shrink_failed_test(NextDepth, Types, Small, Template)
 		).
-	shrink_failed_test_depth(_, _, Goal, Template) :-
+	shrink_failed_test(_, _, Goal, Template) :-
 		quick_check_failed(Goal, Template).
 
 	shrink_goal(Types, Large, Small) :-
