@@ -130,6 +130,8 @@ predicate for GNU Prolog.
 * FIXED: Ensure that the `os::directory_file/2` predicate always expands its
 first argument for all supported backend Prolog systems.
 
+* FIXED: Bug in the definition of the `difflist::valid/1` predicate.
+
 Tools
 -----
 

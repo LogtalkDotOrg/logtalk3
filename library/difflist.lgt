@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2017/08/15,
+		date is 2018/03/11,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -502,8 +502,10 @@
 		valid2(List).
 
 	valid2(List-Back) :-
-		List == Back,
-		!.
+		var(List),
+		var(Back),
+		!,
+		List == Back.
 	valid2(List-Back) :-
 		nonvar(List),
 		List = [_| Tail],
