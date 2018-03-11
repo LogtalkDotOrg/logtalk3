@@ -23,15 +23,15 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.12,
+		version is 2.13,
 		author is 'Paulo Moura',
-		date is 2017/10/07,
+		date is 2018/03/10,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist]
 	]).
 
 	:- public(as_difflist/2).
-	:- mode(as_difflist(+list, -list), one).
+	:- mode(as_difflist(+list, -difflist), one).
 	:- info(as_difflist/2, [
 		comment is 'Converts a list to a difference list.',
 		argnames is ['List', 'Diffist']

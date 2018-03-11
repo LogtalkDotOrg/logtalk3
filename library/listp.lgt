@@ -21,9 +21,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2017/09/24,
+		date is 2018/03/10,
 		comment is 'List protocol.',
 		see_also is [numberlistp, varlistp]
 	]).
@@ -78,7 +78,7 @@
 	]).
 
 	:- public(keysort/2).
-	:- mode(keysort(+list, -list), one).
+	:- mode(keysort(+list(pair), -list(pair)), one).
 	:- info(keysort/2, [
 		comment is 'Sorts a list of key-value pairs in ascending order.',
 		argnames is ['List', 'Sorted']
