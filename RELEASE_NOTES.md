@@ -99,6 +99,9 @@ Library
 * ADDED: Type `list(Type, Min, Max)` to the `type` library object for type-
 checking lists with bounded terms. Term comparison uses standard order.
 
+* ADDED: Types `difference_list` and `difference_list(Type)` to the library
+`type` object and the `arbitrary` category.
+
 * ADDED: Type `ground(Type)` to the `type` library object and the `arbitrary`
 category.
 

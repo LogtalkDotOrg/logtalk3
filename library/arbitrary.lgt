@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2018/02/26,
+		date is 2018/03/11,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -131,6 +131,8 @@
 	arbitrary(list(_Type)).
 	arbitrary(non_empty_list(_Type)).
 	arbitrary(list(_Type, _Min, _Max)).
+	arbitrary(difference_list).
+	arbitrary(difference_list(_Type)).
 	arbitrary(pair).
 	arbitrary(pair(_KeyType, _ValueType)).
 	arbitrary(between(_Type, _Lower, _Upper)).
@@ -388,6 +390,14 @@
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type, Min, Max).
 
+	arbitrary(difference_list, Arbitrary) :-
+		arbitrary(difference_list(types([var,atom(ascii_printable),integer,float])), Arbitrary).
+
+	arbitrary(difference_list(Type), Arbitrary) :-
+		between(0, 42, Length),
+		length(Arbitrary0, Length),
+		map_arbitrary(Arbitrary0, Arbitrary, Type).
+
 	arbitrary(pair, ArbitraryKey-ArbitraryValue) :-
 		arbitrary(nonvar, ArbitraryKey),
 		arbitrary(nonvar, ArbitraryValue).
@@ -529,6 +539,11 @@
 	map_arbitrary([Head| Tail], Type, Min, Max) :-
 		arbitrary(between(Type, Min, Max), Head),
 		map_arbitrary(Tail, Type, Min, Max).
+
+	map_arbitrary([], Back-Back, _).
+	map_arbitrary([Head| Tail], [Head| TailBack]-Back, Type) :-
+		arbitrary(Type, Head),
+		map_arbitrary(Tail, TailBack-Back, Type).
 
 	shrink_list([], []).
 	shrink_list([Head| Tail], [Head| Small]) :-

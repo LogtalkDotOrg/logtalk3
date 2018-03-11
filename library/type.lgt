@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2018/02/26,
+		date is 2018/03/11,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -33,7 +33,7 @@
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
-			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max)}',
+			'List types (compound derived types)' - '{list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), difference_list, difference_list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
@@ -172,6 +172,7 @@
 	type(list_or_partial_list).
 	type(list(_Type)).
 	type(list(_Type, _Min, _Max)).
+	type(difference_list).
 	type(pair).
 	type(pair(_KeyType, _ValueType)).
 	type(cyclic).
@@ -732,6 +733,22 @@
 		;	throw(type_error(list(Type,Min,Max), Term))
 		).
 
+	check(difference_list, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_difference_list(Term) ->
+			true
+		;	throw(type_error(difference_list, Term))
+		).
+
+	check(difference_list(Type), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	is_difference_list(Term) ->
+			is_difference_list_of_type(Term, Type)
+		;	throw(type_error(difference_list, Term))
+		).
+
 	check(pair, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
@@ -883,6 +900,23 @@
 	is_list_of_type([Term| Terms], Type) :-
 		check(Type, Term),
 		is_list_of_type(Terms, Type).
+
+	is_difference_list(Var1 - Var2) :-
+		var(Var1),
+		var(Var2),
+		!,
+		Var1 == Var2.
+	is_difference_list([_| Tail]-End) :-
+		is_difference_list(Tail-End).
+
+	is_difference_list_of_type(Var1 - Var2, _) :-
+		var(Var1),
+		var(Var2),
+		!,
+		Var1 == Var2.
+	is_difference_list_of_type([Head| Tail]-End, Type) :-
+		check(Type, Head),
+		is_difference_list_of_type(Tail-End, Type).
 
 	member(Head, [Head| _]).
 	member(Head, [_| Tail]) :-
