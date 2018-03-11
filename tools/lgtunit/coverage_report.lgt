@@ -28,9 +28,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/04/12,
+		date is 2018/03/11,
 		comment is 'Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.'
 	]).
 
@@ -85,21 +85,26 @@
 		write_xml_open_tag(predicates).
 
 	% predicate statistics
-	message_hook(entity_predicate_coverage(_Entity, Predicate, Covered, Total, Percentage, Clauses)) :-
+	message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, Percentage, Clauses)) :-
 		write_xml_open_tag(predicate),
 		write_xml_element(name, Predicate),
 		write_xml_element(clauses, Clauses),
 		write_xml_element(covered, Covered),
 		write_xml_element(total, Total),	
 		write_xml_element(percentage, Percentage),
+		entity_predicate_line(Entity, Predicate, Line),
+		write_xml_element(line, Line),
 		write_xml_close_tag(predicate).
 
 	% entity statistics
-	message_hook(entity_coverage(_Entity, Covered, Total, Percentage)) :-
+	message_hook(entity_coverage(Entity, Covered, Total, Percentage)) :-
 		write_xml_close_tag(predicates),
 		write_xml_element(covered, Covered),
 		write_xml_element(total, Total),	
-		write_xml_element(percentage, Percentage).
+		write_xml_element(percentage, Percentage),
+		entity_file(Entity, File, Line),
+		write_xml_element(file, File),
+		write_xml_element(line, Line).
 
 	% entity end
 	message_hook(entity_coverage_ends(_Entity)) :-
@@ -184,5 +189,43 @@
 		write(coverage_report, '<'),
 		write(coverage_report, Tag),
 		write(coverage_report, '/>'), nl(coverage_report).
+
+	% other auxiliary predicates
+
+	entity_file(Entity, File, Line) :-
+		(	current_object(Entity) ->
+			object_property(Entity, file(File0)),
+			object_property(Entity, lines(Line, _))
+		;	current_category(Entity) ->
+			category_property(Entity, file(File0)),
+			category_property(Entity, lines(Line, _))
+		;	atom(Entity), current_protocol(Entity) ->
+			protocol_property(Entity, file(File0)),
+			protocol_property(Entity, lines(Line, _))
+		;	File0 = '',
+			Line = -1
+		),
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, File, File0) ->
+			true
+		;	File = File0
+		).
+
+	entity_predicate_line(Entity, Predicate, Line) :-
+		(	current_object(Entity) ->
+			object_property(Entity, defines(Predicate, Properties))
+		;	current_category(Entity) ->
+			category_property(Entity, defines(Predicate, Properties))
+		;	Properties = []
+		),
+		(	member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		).
+
+	member(Element, [Element| _]).
+	member(Element, [_| List]) :-
+		member(Element, List).
 
 :- end_object.

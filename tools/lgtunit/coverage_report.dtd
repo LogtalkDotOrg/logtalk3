@@ -39,13 +39,13 @@
 <!ELEMENT entities (entity*)>
 
 
-<!ELEMENT entity (name, predicates, covered, total, percentage)>
+<!ELEMENT entity (name, predicates, covered, total, percentage, file, line)>
 
 <!ELEMENT name (#PCDATA)>
 
 <!ELEMENT predicates (predicate*)>
 
 
-<!ELEMENT predicate (name, clauses, covered, total, percentage)>
+<!ELEMENT predicate (name, clauses, covered, total, percentage, line)>
 
 <!ELEMENT clauses (#PCDATA)>

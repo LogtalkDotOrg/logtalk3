@@ -60,6 +60,8 @@
 		<xsd:element name="covered"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="total"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="percentage"	type="xsd:decimal"/>
+		<xsd:element name="file"		type="xsd:string"/>
+		<xsd:element name="line"		type="xsd:integer"/>
 	</xsd:sequence>
 </xsd:complexType>
 
@@ -76,6 +78,7 @@
 		<xsd:element name="covered"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="total"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="percentage"	type="xsd:decimal"/>
+		<xsd:element name="line"		type="xsd:integer"/>
 	</xsd:sequence>
 </xsd:complexType>
 
