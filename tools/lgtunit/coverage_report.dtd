@@ -45,6 +45,10 @@
 
 <!ELEMENT predicates (predicate*)>
 
+<!ELEMENT file (#PCDATA)>
+
+<!ELEMENT line (#PCDATA)>
+
 
 <!ELEMENT predicate (name, clauses, covered, total, percentage, line)>
 

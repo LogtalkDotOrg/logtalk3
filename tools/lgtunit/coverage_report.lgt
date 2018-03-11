@@ -92,7 +92,7 @@
 		write_xml_element(covered, Covered),
 		write_xml_element(total, Total),	
 		write_xml_element(percentage, Percentage),
-		entity_predicate_line(Entity, Predicate, Line),
+		entity_predicate_line(Predicate, Entity, Line),
 		write_xml_element(line, Line),
 		write_xml_close_tag(predicate).
 
@@ -212,11 +212,14 @@
 		;	File = File0
 		).
 
-	entity_predicate_line(Entity, Predicate, Line) :-
+	entity_predicate_line(Functor//Arity, Entity, Line) :-
+		ExtendedArity is Arity + 2,
+		entity_predicate_line(Functor/ExtendedArity, Entity, Line).
+	entity_predicate_line(Functor/Arity, Entity, Line) :-
 		(	current_object(Entity) ->
-			object_property(Entity, defines(Predicate, Properties))
+			object_property(Entity, defines(Functor/Arity, Properties))
 		;	current_category(Entity) ->
-			category_property(Entity, defines(Predicate, Properties))
+			category_property(Entity, defines(Functor/Arity, Properties))
 		;	Properties = []
 		),
 		(	member(line_count(Line), Properties) ->
