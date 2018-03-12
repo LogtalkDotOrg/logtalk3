@@ -87,6 +87,9 @@ setof_3_member(X, [_| L]) :-
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
+	:- uses(lgtunit, [variant/2]).
+	:- uses(list, [msort/2]).
+
 	:- discontiguous([
 		succeeds/1, fails/1, throws/2
 	]).
@@ -256,19 +259,20 @@ setof_3_member(X, [_| L]) :-
 		L == ['A', 'B', 'C'].
 
 	succeeds(lgt_setof_3_34) :-
-		findall(T1-T2-L, {setof(T3, a(T1, T2, T3), L)}, Ls),
-		^^variant(
-			Ls,
+		findall(T2-L-T1, {setof(T3, a(T1, T2, T3), L)}, Ls),
+		msort(Ls, Ss),
+		variant(
+			Ss,
 			[
-				bar(_) - s/0 - [1,2,3],
-				bar(_) - t/1 - [1,2,3],
-				bar(_) - u/2 - [1,2,3],
-				baz(_) - v/0 - [1,2,3],
-				baz(_) - x/1 - [1,2,3],
-				baz(_) - z/2 - [1,2,3],
-				foo(_) - p/0 - [1,2,3],
-				foo(_) - q/1 - [1,2,3],
-				foo(_) - r/2 - [1,2,3]
+				p/0 - [1,2,3]- foo(_),
+				q/1 - [1,2,3]- foo(_),
+				r/2 - [1,2,3]- foo(_),
+				s/0 - [1,2,3]- bar(_),
+				t/1 - [1,2,3]- bar(_),
+				u/2 - [1,2,3]- bar(_),
+				v/0 - [1,2,3]- baz(_),
+				x/1 - [1,2,3]- baz(_),
+				z/2 - [1,2,3]- baz(_)
 			]
 		).
 
