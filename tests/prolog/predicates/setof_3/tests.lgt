@@ -43,6 +43,34 @@ c(2, b, 'B').
 c(1, a, 'A').
 c(3, c, 'C').
 
+a(foo(_), p/0, 1).
+a(baz(_), x/1, 2).
+a(foo(_), p/0, 2).
+a(bar(_), s/0, 2).
+a(foo(_), p/0, 3).
+a(foo(_), q/1, 1).
+a(foo(_), r/2, 2).
+a(bar(_), s/0, 1).
+a(bar(_), s/0, 3).
+a(foo(_), q/1, 2).
+a(foo(_), q/1, 3).
+a(foo(_), r/2, 1).
+a(bar(_), t/1, 1).
+a(bar(_), t/1, 2).
+a(bar(_), u/2, 2).
+a(bar(_), u/2, 3).
+a(baz(_), v/0, 1).
+a(baz(_), v/0, 2).
+a(bar(_), t/1, 3).
+a(bar(_), u/2, 1).
+a(baz(_), v/0, 3).
+a(baz(_), x/1, 1).
+a(foo(_), r/2, 3).
+a(baz(_), x/1, 3).
+a(baz(_), z/2, 1).
+a(baz(_), z/2, 2).
+a(baz(_), z/2, 3).
+
 % avoid conflicts with a possible member/2 built-in predicate
 setof_3_member(X, [X| _]).
 setof_3_member(X, [_| L]) :-
@@ -53,9 +81,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2015/08/25,
+		date is 2018/03/12,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -209,27 +237,42 @@ setof_3_member(X, [_| L]) :-
 	throws(sics_setof_3_29, error(type_error(list,[A|1]),_)) :-
 		{setof(X, X=1, [A|1])}.
 
-	% tests from the Logtalk portability work
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_setof_3_30, error(type_error(list,12),_)) :-
+		{setof(X, (X=2; X=1), 12)}.
+
+	throws(eclipse_setof_3_31, error(type_error(list,[1|2]),_)) :-
+		{setof(X, (X=2; X=1), [1|2])}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_bagof_3_30) :-
+	succeeds(lgt_setof_3_32) :-
 		{setof(Z, X^Y^c(X,Y,Z), L)},
 		L == ['A', 'B', 'C'].
 
-	succeeds(lgt_bagof_3_31) :-
+	succeeds(lgt_setof_3_33) :-
 		{setof(Z, t(X,Y)^c(X,Y,Z), L)},
 		L == ['A', 'B', 'C'].
 
-	throws(lgt_setof_3_32, error(instantiation_error,_)) :-
+	succeeds(lgt_setof_3_34) :-
+		findall(T1-T2-L, {setof(T3, a(T1, T2, T3), L)}, Ls),
+		^^variant(
+			Ls,
+			[
+				bar(_) - s/0 - [1,2,3],
+				bar(_) - t/1 - [1,2,3],
+				bar(_) - u/2 - [1,2,3],
+				baz(_) - v/0 - [1,2,3],
+				baz(_) - x/1 - [1,2,3],
+				baz(_) - z/2 - [1,2,3],
+				foo(_) - p/0 - [1,2,3],
+				foo(_) - q/1 - [1,2,3],
+				foo(_) - r/2 - [1,2,3]
+			]
+		).
+
+	throws(lgt_setof_3_35, error(instantiation_error,_)) :-
 		{setof(_X, _Y^_Z, _L)}.
-
-	% tests from the ECLiPSe test suite
-
-	throws(eclipse_setof_3_33, error(type_error(list,12),_)) :-
-		{setof(X, (X=2; X=1), 12)}.
-
-	throws(eclipse_setof_3_34, error(type_error(list,[1|2]),_)) :-
-		{bagof(X, (X=2; X=1), [1|2])}.
 
 :- end_object.
