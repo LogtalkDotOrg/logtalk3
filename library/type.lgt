@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2018/03/11,
+		date is 2018/03/13,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -906,7 +906,9 @@
 		var(Var2),
 		!,
 		Var1 == Var2.
-	is_difference_list([_| Tail]-End) :-
+	is_difference_list(List-End) :-
+		nonvar(List),
+		List = [_| Tail],
 		is_difference_list(Tail-End).
 
 	is_difference_list_of_type(Var1 - Var2, _) :-
@@ -914,7 +916,9 @@
 		var(Var2),
 		!,
 		Var1 == Var2.
-	is_difference_list_of_type([Head| Tail]-End, Type) :-
+	is_difference_list_of_type(List-End, Type) :-
+		nonvar(List),
+		List = [Head| Tail],
 		check(Type, Head),
 		is_difference_list_of_type(Tail-End, Type).
 
