@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/03/11,
+		date is 2018/03/13,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -98,19 +98,21 @@
 	arbitrary(compound).
 	arbitrary(callable).
 	% number derived types
-	arbitrary(positive_integer).
-	arbitrary(negative_integer).
-	arbitrary(non_positive_integer).
-	arbitrary(non_negative_integer).
-	arbitrary(positive_float).
-	arbitrary(negative_float).
-	arbitrary(non_positive_float).
-	arbitrary(non_negative_float).
 	arbitrary(positive_number).
 	arbitrary(negative_number).
 	arbitrary(non_positive_number).
 	arbitrary(non_negative_number).
+	% float derived types
+	arbitrary(positive_float).
+	arbitrary(negative_float).
+	arbitrary(non_positive_float).
+	arbitrary(non_negative_float).
 	arbitrary(probability).
+	% integer derived types
+	arbitrary(positive_integer).
+	arbitrary(negative_integer).
+	arbitrary(non_positive_integer).
+	arbitrary(non_negative_integer).
 	arbitrary(byte).
 	arbitrary(character_code).
 	arbitrary(character_code(_CharSet)).
@@ -126,6 +128,7 @@
 	arbitrary(non_terminal_indicator).
 	arbitrary(predicate_or_non_terminal_indicator).
 	arbitrary(clause).
+	arbitrary(clause_or_partial_clause).
 	arbitrary(list).
 	arbitrary(non_empty_list).
 	arbitrary(list(_Type)).
@@ -369,6 +372,16 @@
 			arbitrary(callable, ArbitraryBody)
 		).
 
+	arbitrary(clause_or_partial_clause, Arbitrary) :-
+		member(Kind, [fact, rule]),
+		(	Kind == fact ->
+			arbitrary(callable, Arbitrary)
+		;	% Kind == rule,
+			Arbitrary = (ArbitraryHead :- ArbitraryBody),
+			arbitrary(callable, ArbitraryHead),
+			arbitrary(types([var,callable]), ArbitraryBody)
+		).
+
 	arbitrary(list, Arbitrary) :-
 		arbitrary(list(types([var,atom(ascii_printable),integer,float])), Arbitrary).
 
@@ -514,6 +527,25 @@
 		(	Large = _/_ ->
 			shrink(predicate_indicator, Large, Small)
 		;	shrink(non_terminal_indicator, Large, Small)
+		).
+
+	shrink(clause, Large, Small) :-
+		(	Large = (Head :- Body) ->
+			shrink(callable, Head, SmallHead),
+			shrink(callable, Body, SmallBody),
+			Small = (SmallHead :- SmallBody)
+		;	shrink(callable, Large, Small)
+		).
+
+	shrink(clause_or_partial_clause, Large, Small) :-
+		(	Large = (Head :- Body) ->
+			shrink(callable, Head, SmallHead),
+			(	var(Body) ->
+				SmallBody = Body
+			;	shrink(callable, Body, SmallBody)
+			),
+			Small = (SmallHead :- SmallBody)
+		;	shrink(callable, Large, Small)
 		).
 
 	% auxiliary predicates; we could use the Logtalk standard library

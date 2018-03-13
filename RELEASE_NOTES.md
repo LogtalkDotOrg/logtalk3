@@ -111,8 +111,12 @@ category.
 * ADDED: Support for generating values for all number types to the `arbitrary`
 category.
 
+* ADDED: Support for generating and shrink `clause_or_partial_clause` terms
+to the `arbitrary` category.
+
 * ADDED: Support for shrink additional number, list, predicate/non-terminal
-indicator, pair, compound, and callable terms to the `arbitrary` category.
+indicator, pair, compound, callable, and clause terms to the `arbitrary`
+category.
 
 * ADDED: Predicate `sleep/1` to the `os` library.
 
