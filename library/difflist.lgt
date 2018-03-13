@@ -23,22 +23,22 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2018/03/11,
+		date is 2018/03/13,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
 
 	:- public(add/3).
-	:- mode(add(@term, +list, -list), one).
+	:- mode(add(@term, +difference_list, -difference_list), one).
 	:- info(add/3, [
 		comment is 'Adds a term to the end of a difference list.',
 		argnames is ['Term', 'DiffList', 'NewDiffList']
 	]).
 
 	:- public(as_list/2).
-	:- mode(as_list(+list, -list), one).
+	:- mode(as_list(+difference_list, -list), one).
 	:- info(as_list/2, [
 		comment is 'Converts a difference list to a normal list.',
 		argnames is ['DiffList', 'List']
