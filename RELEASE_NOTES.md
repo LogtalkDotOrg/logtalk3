@@ -139,6 +139,9 @@ first argument for all supported backend Prolog systems.
 
 * FIXED: Bug in the definition of the `difflist::valid/1` predicate.
 
+* FIXED: Bug in the `arbitrary` category `shrink/3` predicate where an empty
+list would be shrink to itself.
+
 Tools
 -----
 

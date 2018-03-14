@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2018/03/13,
+		date is 2018/03/14,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -97,6 +97,7 @@
 	arbitrary(float).
 	arbitrary(compound).
 	arbitrary(callable).
+	arbitrary(ground).
 	% number derived types
 	arbitrary(positive_number).
 	arbitrary(negative_number).
@@ -224,7 +225,7 @@
 	arbitrary(var, _).
 
 	arbitrary(nonvar, Arbitrary) :-
-		arbitrary(types([atom(ascii_printable), integer, float, compound]), Arbitrary).
+		arbitrary(types([atom(ascii_printable), integer, float, compound, list]), Arbitrary).
 
 	arbitrary(atomic, Arbitrary) :-
 		arbitrary(types([atom(ascii_printable), integer, float]), Arbitrary).
@@ -251,6 +252,9 @@
 
 	arbitrary(callable, Arbitrary) :-
 		arbitrary(types([atom(ascii_printable), compound]), Arbitrary).
+
+	arbitrary(ground, Arbitrary) :-
+		arbitrary(types([atom(ascii_printable), integer, float, ground(compound), ground(list)]), Arbitrary).
 
 	% atom derived types
 
@@ -459,6 +463,7 @@
 
 	shrink(atom, Large, Small) :-
 		atom_codes(Large, LargeCodes),
+		LargeCodes \== [],
 		shrink_list(LargeCodes, SmallCodes),
 		atom_codes(Small, SmallCodes).
 
@@ -485,6 +490,7 @@
 		shrink(list(_), Large, Small).
 
 	shrink(list(_), Large, Small) :-
+		Large \== [],
 		shrink_list(Large, Small).
 
 	shrink(non_empty_list, Large, Small) :-
@@ -494,6 +500,7 @@
 		shrink_list(Large, Small).
 
 	shrink(list(_,_,_), Large, Small) :-
+		Large \== [],
 		shrink_list(Large, Small).
 
 	shrink(pair(KeyType, ValueType), LargeKey-LargeValue, SmallKey-SmallValue) :-
@@ -505,6 +512,21 @@
 		shrink(atom, LargeFunctor, SmallFunctor),
 		shrink(list, LargeArguments, SmallArguments),
 		Small =.. [SmallFunctor| SmallArguments].
+
+	shrink(ground, Large, Small) :-
+		(	atom(Large) ->
+			shrink(atom, Large, Small)
+		;	integer(Large) ->
+			shrink(integer, Large, Small)
+		;	float(Large) ->
+			shrink(float, Large, Small)
+		;	Large = [] ->
+			fail
+		;	Large = [_| _] ->
+			shrink(list, Large, Small)
+		;	% compound(Large),
+			shrink(compound, Large, Small)
+		).
 
 	shrink(ground(Type), Large, Small) :-
 		shrink(Type, Large, Small).
@@ -578,11 +600,11 @@
 		map_arbitrary(Tail, TailBack-Back, Type).
 
 	shrink_list([], []).
-	shrink_list([Head| Tail], [Head| Small]) :-
-		shrink_list_discard_one(Tail, Small).
+	shrink_list([_| Tail], Small) :-
+		shrink_list_keep_next(Tail, Small).
 
-	shrink_list_discard_one([], []).
-	shrink_list_discard_one([_| Tail], Small) :-
+	shrink_list_keep_next([], []).
+	shrink_list_keep_next([Head| Tail], [Head| Small]) :-
 		shrink_list(Tail, Small).
 
 :- end_category.
