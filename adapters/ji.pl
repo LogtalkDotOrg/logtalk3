@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.6.1 or later versions
-%  Last updated on February 16, 2018
+%  Last updated on March 14, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -78,57 +78,10 @@
 % forall(+callable, +callable) -- built-in
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list)
-
-format(Stream, Format, Arguments) :-
-	atom_codes(Format, Codes),
-	format_(Codes, Stream, Arguments).
-
-format_([], _, _).
-format_([0'~, Spec| Codes], Stream, Arguments) :-
-	!,
-	format_spec_(Spec, Stream, Arguments, RemainingArguments),
-	format_(Codes, Stream, RemainingArguments).
-format_([Code| Codes], Stream, Arguments) :-
-	put_code(Stream, Code),
-	format_(Codes, Stream, Arguments).
-
-format_spec_(0'a, Stream, [Argument| Arguments], Arguments) :-
-%	atom(Argument),
-	write(Stream, Argument).
-format_spec_(0'c, Stream, [Argument| Arguments], Arguments) :-
-	put_code(Stream, Argument).
-format_spec_(0's, Stream, [Argument| Arguments], Arguments) :-
-	atom_codes(Atom, Argument),
-	write(Stream, Atom).
-format_spec_(0'w, Stream, [Argument| Arguments], Arguments) :-
-	write(Stream, Argument).
-format_spec_(0'q, Stream, [Argument| Arguments], Arguments) :-
-	writeq(Stream, Argument).
-format_spec_(0'k, Stream, [Argument| Arguments], Arguments) :-
-	write_canonical(Stream, Argument).
-format_spec_(0'd, Stream, [Argument| Arguments], Arguments) :-
-	write(Stream, Argument).
-format_spec_(0'D, Stream, [Argument| Arguments], Arguments) :-
-	write(Stream, Argument).
-format_spec_(0'f, Stream, [Argument| Arguments], Arguments) :-
-	write(Stream, Argument).
-format_spec_(0'g, Stream, [Argument| Arguments], Arguments) :-
-	write(Stream, Argument).
-format_spec_(0'G, Stream, [Argument| Arguments], Arguments) :-
-	write(Stream, Argument).
-format_spec_(0'i, _, [_| Arguments], Arguments).
-format_spec_(0'n, Stream, Arguments, Arguments) :-
-	nl(Stream).
-format_spec_(0'~, Stream, Arguments, Arguments) :-
-	put_code(Stream, 0'~).
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
 
 
-% format(+character_code_list_or_atom, +list)
-
-format(Format, Arguments) :-
-	current_output(Stream),
-	format(Stream, Format, Arguments).
+% format(+character_code_list_or_atom, +list) -- built-in
 
 
 % numbervars(?term, +integer, ?integer) -- built-in

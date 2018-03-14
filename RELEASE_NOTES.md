@@ -46,7 +46,8 @@ Prolog adapter and integration files
 to a critical bug fix in the handling of multifile predicates.
 
 * CHANGED: The JIProlog adapter file to require version 4.1.6.1 or later due
-to critical bug fixes.
+to critical bug fixes and the addition of the de facto standard `format/2-3`
+predicates.
 
 * CHANGED: The XSB adapter file to require version 3.8.0 or later due to
 critical bug fixes.
@@ -115,8 +116,8 @@ category.
 to the `arbitrary` category.
 
 * ADDED: Support for shrink additional number, list, predicate/non-terminal
-indicator, pair, compound, callable, and clause terms to the `arbitrary`
-category.
+indicator, pair, compound, callable, clause, and ground terms to the
+`arbitrary` category.
 
 * ADDED: Predicate `sleep/1` to the `os` library.
 
