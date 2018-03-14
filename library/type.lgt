@@ -571,8 +571,8 @@
 		;	\+ float(Term) ->
 			throw(type_error(float, Term))
 		;	0.0 =< Term, Term =< 1.0 ->
-			throw(domain_error(probability, Term))
-		;	true
+			true
+		;	throw(domain_error(probability, Term))
 		).
 
 	% integer derived types
