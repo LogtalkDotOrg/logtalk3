@@ -46,8 +46,9 @@ Prolog adapter and integration files
 to a critical bug fix in the handling of multifile predicates.
 
 * CHANGED: The JIProlog adapter file to require version 4.1.6.1 or later due
-to critical bug fixes and the addition of the de facto standard `format/2-3`
-predicates.
+to critical bug fixes, updated versions of the file system access predicates
+that expand paths with environment variables, and the addition of the de
+facto standard `format/2-3` predicates.
 
 * CHANGED: The XSB adapter file to require version 3.8.0 or later due to
 critical bug fixes.
@@ -120,6 +121,8 @@ indicator, pair, compound, callable, clause, and ground terms to the
 `arbitrary` category.
 
 * ADDED: Predicate `sleep/1` to the `os` library.
+
+* UPDATED: The `os` library for JIProlog changes in upcoming version 4.1.6.1.
 
 * FIXED: Added missing `either` library source file.
 

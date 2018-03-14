@@ -258,33 +258,7 @@
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	% first expand any environment variable
-	'$lgt_ji_expand_environment'(Path, ExpandedPath0),
-	(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
-			% assume POSIX full path 
-		;	sub_atom(ExpandedPath0, 1, 1, _, ':')
-			% assume Windows full Path starting with a drive letter followed by ":"
-		) ->
-		% assume full path
-		ExpandedPath = ExpandedPath0
-	;	% assume path relative to the current directory
-		'$lgt_current_directory'(Directory),
-		atom_concat(Directory, ExpandedPath0, ExpandedPath)
-	).
-
-
-'$lgt_ji_expand_environment'(Path, ExpandedPath) :-
-	'$lgt_ji_convert_file_path'(Path, Path1),
-	(	sub_atom(Path1, 0, 1, _, '$'),
-		sub_atom(Path1, Before, _, _, '/') ->
-		End is Before - 1,
-		sub_atom(Path1, 1, End, _, Variable),
-		sub_atom(Path1, Before, _, 0, Rest),
-		'$lgt_environment_variable'(Variable, Value0),
-		'$lgt_ji_convert_file_path'(Value0, Value),
-		atom_concat(Value, Rest, ExpandedPath)
-	;	Path1 = ExpandedPath
-	).
+	absolute_file_name(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
@@ -345,8 +319,7 @@
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	'$lgt_expand_path'(Directory, Expanded),
-	chdir(Expanded).
+	chdir(Directory).
 
 
 % '$lgt_make_directory'(+atom)
@@ -354,10 +327,9 @@
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	'$lgt_expand_path'(Directory, Expanded),
-	(	exists_directory(Expanded) ->
+	(	exists_directory(Directory) ->
 		true
-	;	make_directory(Expanded)
+	;	make_directory(Directory)
 	).
 
 

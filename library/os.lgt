@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.47,
+		version is 1.48,
 		author is 'Paulo Moura',
-		date is 2018/03/07,
+		date is 2018/03/14,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1486,36 +1486,7 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			% first expand any environment variable
-			expand_environment(Path, ExpandedPath0),
-			(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
-					% assume POSIX full path 
-				;	sub_atom(ExpandedPath0, 1, 1, _, ':')
-					% assume Windows full Path starting with a drive letter followed by ":"
-				) ->
-				% assume full path
-				ExpandedPath = ExpandedPath0
-			;	% assume path relative to the current directory
-				working_directory(Current),
-				(	sub_atom(Current, _, 1, 0, '/') ->
-					Directory = Current
-				;	atom_concat(Current, '/', Directory)
-				),
-				atom_concat(Directory, ExpandedPath0, ExpandedPath)
-			).
-
-		expand_environment(Path, ExpandedPath) :-
-			convert_file_path(Path, Path1),
-			(	sub_atom(Path1, 0, 1, _, '$'),
-				sub_atom(Path1, Before, _, _, '/') ->
-				End is Before - 1,
-				sub_atom(Path1, 1, End, _, Variable),
-				sub_atom(Path1, Before, _, 0, Rest),
-				environment_variable(Variable, Value0),
-				convert_file_path(Value0, Value),
-				atom_concat(Value, Rest, ExpandedPath)
-			;	Path1 = ExpandedPath
-			).
+			{absolute_file_name(Path, ExpandedPath)}.
 
 		convert_file_path(File, Converted) :-
 			atom_codes(File, FileCodes),
@@ -1533,58 +1504,47 @@
 			reverse_slashes(Codes, Backslash, Slah, ConvertedCodes).
 
 		make_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			(	{exists_directory(ExpandedPath)} ->
+			(	{exists_directory(Directory)} ->
 				true
-			;	{make_directory(ExpandedPath)}
+			;	{make_directory(Directory)}
 			).
 
 		make_directory_path(Directory) :-
 			make_directory(Directory).
 
 		delete_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{delete_directory(ExpandedPath)}.
+			{delete_directory(Directory)}.
 
 		change_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{chdir(ExpandedPath)}.
+			{chdir(Directory)}.
 
 		working_directory(Directory) :-
 			{working_directory(Directory0, Directory0)},
 			convert_file_path(Directory0, Directory).
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, Path),
-			{directory_files(Path, Files)}.
+			{directory_files(Directory, Files)}.
 
 		directory_exists(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{exists_directory(ExpandedPath)}.
+			{exists_directory(Directory)}.
 
 		file_exists(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{exists_file(ExpandedPath)}.
+			{exists_file(File), \+ exists_directory(File)}.
 
 		file_modification_time(File, Time) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_attributes(ExpandedPath, _, _, _, _, _, Time)}.
+			{file_attributes(File, _, _, _, _, _, Time)}.
 
 		file_size(File, Size) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_attributes(ExpandedPath, _, _, _, _, Size, _)}.
+			{file_attributes(File, _, _, _, _, Size, _)}.
 
 		file_permission(_, _) :-
 			throw(not_available(file_permission/2)).
 
 		rename_file(Old, New) :-
-			absolute_file_name(Old, OldExpandedPath),
-			absolute_file_name(New, NewExpandedPath),
-			{rename_file(OldExpandedPath, NewExpandedPath)}.
+			{rename_file(Old, New)}.
 
 		delete_file(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
+			{delete_file(File)}.
 
 		environment_variable(Variable, Value) :-
 			(	{invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value)},
