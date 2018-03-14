@@ -498,6 +498,28 @@
 		shrink_list(LargeCodes, SmallCodes),
 		atom_codes(Small, SmallCodes).
 
+	shrink(non_empty_atom, Large, Small) :-
+		shrink(atom, Large, Small),
+		Small \== ''.
+
+	shrink(number, Large, Small) :-
+		(	integer(Large) ->
+			shrink(integer, Large, Small)
+		;	shrink(float, Large, Small)
+		).
+
+	shrink(non_negative_number, Large, Small) :-
+		(	integer(Large) ->
+			shrink(non_negative_integer, Large, Small)
+		;	shrink(non_negative_float, Large, Small)
+		).
+
+	shrink(positive_number, Large, Small) :-
+		(	integer(Large) ->
+			shrink(positive_integer, Large, Small)
+		;	shrink(positive_float, Large, Small)
+		).
+
 	shrink(integer, Large, Small) :-
 		Small is Large // 2.
 
