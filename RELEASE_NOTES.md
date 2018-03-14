@@ -119,8 +119,8 @@ category.
 to the `arbitrary` category.
 
 * ADDED: Support for shrink additional number, list, predicate/non-terminal
-indicator, pair, compound, callable, clause, and ground terms to the
-`arbitrary` category.
+indicator, pair, compound, callable, clause, ground, and entity identifier
+terms to the `arbitrary` category.
 
 * ADDED: Predicate `sleep/1` to the `os` library.
 

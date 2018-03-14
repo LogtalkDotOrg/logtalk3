@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
 		date is 2018/03/14,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -67,6 +67,8 @@
 		comment is 'Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.',
 		argnames is ['Type', 'Large', 'Small']
 	]).
+
+	% arbitrary/1
 
 	% Logtalk entity types
 	arbitrary(entity).
@@ -146,6 +148,8 @@
 	arbitrary(var_or(_Type)).
 	arbitrary(ground(_Type)).
 	arbitrary(types(_Types)).
+
+	% arbitrary/2
 
 	% entities
 
@@ -460,6 +464,33 @@
 	arbitrary(types(Types), Arbitrary) :-
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
+
+	% shrink/3
+
+	shrink(entity_identifier, Large, Small) :-
+		shrink(atom, Large, Small).
+
+	shrink(object_identifier, Large, Small) :-
+		(	atom(Large) ->
+			shrink(atom, Large, Small)
+		;	shrink(compound, Large, Small)
+		).
+
+	shrink(protocol_identifier, Large, Small) :-
+		shrink(atom, Large, Small).
+
+	shrink(category_identifier, Large, Small) :-
+		(	atom(Large) ->
+			shrink(atom, Large, Small)
+		;	shrink(compound, Large, Small)
+		).
+
+	:- if(current_logtalk_flag(modules, supported)).
+
+	shrink(module_identifier, Large, Small) :-
+		shrink(atom, Large, Small).
+
+	:- endif.
 
 	shrink(atom, Large, Small) :-
 		atom_codes(Large, LargeCodes),
