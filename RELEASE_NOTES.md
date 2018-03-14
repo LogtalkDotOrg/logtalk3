@@ -98,6 +98,9 @@ documentation.
 Library
 -------
 
+* CHANGED: Generating arbitrary pairs now only uses non-empty atoms or
+integers for the key.
+
 * ADDED: Type `list(Type, Min, Max)` to the `type` library object for type-
 checking lists with bounded terms. Term comparison uses standard order.
 

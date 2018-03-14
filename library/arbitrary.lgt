@@ -420,7 +420,7 @@
 		map_arbitrary(Arbitrary0, Arbitrary, Type).
 
 	arbitrary(pair, ArbitraryKey-ArbitraryValue) :-
-		arbitrary(nonvar, ArbitraryKey),
+		arbitrary(types([non_empty_atom,integer]), ArbitraryKey),
 		arbitrary(nonvar, ArbitraryValue).
 
 	arbitrary(pair(KeyType, ValueType), ArbitraryKey-ArbitraryValue) :-
@@ -555,6 +555,12 @@
 	shrink(list(_,_,_), Large, Small) :-
 		Large \== [],
 		shrink_list(Large, Small).
+
+	shrink(pair, LargeKey-Value, SmallKey-Value) :-
+		(	atom(LargeKey) ->
+			shrink(non_empty_atom, LargeKey, SmallKey)
+		;	shrink(integer, LargeKey, SmallKey)
+		).
 
 	shrink(pair(KeyType, ValueType), LargeKey-LargeValue, SmallKey-SmallValue) :-
 		shrink(KeyType, LargeKey, SmallKey),
