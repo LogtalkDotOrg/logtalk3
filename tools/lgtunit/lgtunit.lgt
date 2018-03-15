@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.7,
+		version is 6.8,
 		author is 'Paulo Moura',
-		date is 2018/03/10,
+		date is 2018/03/15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -81,6 +81,18 @@
 	:- info(deterministic/2, [
 		comment is 'Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.',
 		argnames is ['Goal', 'Deterministic']
+	]).
+
+	:- public(assertion/1).
+	:- meta_predicate(assertion(::)).
+	:- mode(assertion(+callable), one).
+	:- info(assertion/1, [
+		comment is 'True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.',
+		argnames is ['Assertion'],
+		exceptions is [
+			'Assertion goal fails' - assertion_failure('Assertion'),
+			'Assertion goal throws Error' - assertion_error('Assertion', 'Error')
+		]
 	]).
 
 	:- public(assertion/2).
@@ -1423,6 +1435,9 @@
 			throw(error(resource_error, deterministic/2)).
 
 	:- endif.
+
+	assertion(Goal) :-
+		assertion(Goal, Goal).
 
 	assertion(Assertion, Goal) :-
 		(	catch(Goal, Error, true) ->

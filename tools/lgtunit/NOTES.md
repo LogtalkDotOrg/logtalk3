@@ -1,4 +1,3 @@
-
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -126,7 +125,7 @@ tool by calling the goal that runs the tests from a definition of the hook
 predicate `logtalk_make_target_action/1`. For example, by adding to the
 tests `tester.lgt` driver file the following code:
 
-	% integrate the tool with logtalk_make/1
+	% integrate the tests with logtalk_make/1
 	:- multifile(logtalk_make_target_action/1).
 	:- dynamic(logtalk_make_target_action/1).
 
@@ -557,18 +556,24 @@ https://github.com/LogtalkDotOrg/logtalk3/wiki/Testing
 Utility predicates
 ------------------
 
-The `lgtunit` tool provides some public utility predicates to simplify writing
-unit tests:
+The `lgtunit` tool provides several public utility predicates to simplify
+writing unit tests:
 
-- `variant/2` - to check when two terms are a variant of each other (e.g. to
-check expected test results against actual results when they contain variables)
-- `assertion/2` - to generate an exception in case its assertion goal argument
+- `variant(Term1, Term2)` - to check when two terms are a variant of each
+other (e.g. to check expected test results against actual results when they
+contain variables)
+- `assertion(Goal)` - to generate an exception in case the goal argument
 fails or throws an error
+- `assertion(Name, Goal)` - to generate an exception in case the goal
+argument fails or throws an error
 - `Float1 =~= Float2` - for approximate float comparison
-- `benchmark(Goal, Time)`
-- `benchmark(Goal, Repetitions, Time)`
-- `deterministic(Goal)`
-- `deterministic(Goal, Deterministic)`
+- `benchmark(Goal, Time)` - for timing a goal
+- `benchmark(Goal, Repetitions, Time)` - for finding the average time
+to prove a goal
+- `deterministic(Goal)` - for checking that a predicate succeeds without
+leaving a choice-point
+- `deterministic(Goal, Deterministic)` - reified version of the
+`deterministic/1` predicate
 
 The `assertion/2` predicate is used in the code generated for the `test/2-3`
 dialects. But can also be used in the body of tests where using two or more

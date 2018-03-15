@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2018/03/10,
+		date is 2018/03/15,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -34,7 +34,7 @@
 		epsilon/1, ('=~=')/2,
 		deterministic/1, deterministic/2,
 		variant/2,
-		assertion/2,
+		assertion/1, assertion/2,
 		quick_check/3, quick_check/2, quick_check/1
 	]).
 
@@ -208,6 +208,43 @@
 	succeeds(variant_2_06) :-
 		\+ variant(a(1,_Y), a(_A,2)).
 
+	% assertion/1 tests
+
+	succeeds(assertion_1_01) :-
+		% delay calling the assertion to runtime
+		Assertion = integer(1),
+		assertion(Assertion).
+
+	succeeds(assertion_1_02) :-
+		% delay calling the assertion to runtime
+		Assertion = foo(1),
+		assertion(Assertion).
+
+	throws(assertion_1_03, assertion_failure(integer(1.1))) :-
+		% delay calling the assertion to runtime
+		Assertion = integer(1.1),
+		assertion(Assertion).
+
+	throws(assertion_1_04, assertion_failure(variant(1,2))) :-
+		% delay calling the assertion to runtime
+		Assertion = variant(1, 2),
+		assertion(Assertion).
+
+	throws(assertion_1_05, assertion_failure(foo(2))) :-
+		% delay calling the assertion to runtime
+		Assertion = foo(2),
+		assertion(Assertion).
+
+	throws(assertion_1_06, assertion_error(throw(e), e)) :-
+		% delay calling the assertion to runtime
+		Assertion = throw(e),
+		assertion(Assertion).
+
+	throws(assertion_1_07, assertion_error(foobar(1), error(existence_error(procedure,_),_))) :-
+		% delay calling the assertion to runtime
+		Assertion = foobar(1),
+		assertion(Assertion).
+
 	% assertion/2 tests
 
 	succeeds(assertion_2_01) :-
@@ -225,6 +262,10 @@
 		Assertion = throw(e),
 		assertion(3, Assertion).
 
+	throws(assertion_2_04, assertion_error(4, error(existence_error(procedure,_),_))) :-
+		% delay calling the assertion to runtime
+		Assertion = foobar(1),
+		assertion(4, Assertion).
 	% quick_check/3 tests
 
 	succeeds(quick_check_3_01) :-
@@ -306,6 +347,10 @@
 
 	fails(quick_check_1_06) :-
 		quick_check(type::foo42(+integer)).
+
+	% auxiliary predicates
+
+	foo(1).
 
 	% supress quick_check/1-3 messages and save option values for tests
 
