@@ -80,6 +80,8 @@ when using GNU Prolog. Thanks to Daniel Diaz for his advice.
 
 * FIXED: Workaround parser issue in the Lean Prolog adapter file.
 
+* FIXED: Handling of the `float/1` function in the Quintus Prolog adapter file.
+
 Documentation
 -------------
 

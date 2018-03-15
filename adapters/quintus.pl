@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on December 11, 2017
+%  Last updated on March 15, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -813,7 +813,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_quintus_arithmetic_function_1'(ceiling(X), Result, X, ResultX, ceiling(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(cos(X), Result, X, ResultX, cos(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(exp(X), Result, X, ResultX, exp(ResultX, Result)).
-'$lgt_quintus_arithmetic_function_1'(float(X), Result, X, ResultX, float(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(float(X), Result, X, ResultX, Result is float(ResultX)).
 '$lgt_quintus_arithmetic_function_1'(floor(X), Result, X, ResultX, floor(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(log(X), Result, X, ResultX, log(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(round(X), Result, X, ResultX, round(ResultX, Result)).
