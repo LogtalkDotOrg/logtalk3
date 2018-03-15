@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2018/03/14,
+		date is 2018/03/15,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -33,7 +33,7 @@
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
-			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), difference_list, difference_list(Type)}',
+			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
@@ -173,7 +173,9 @@
 	type(list_or_partial_list).
 	type(list(_Type)).
 	type(list(_Type, _Min, _Max)).
+	type(non_empty_list(_Type)).
 	type(difference_list).
+	type(difference_list(_Type)).
 	type(pair).
 	type(pair(_KeyType, _ValueType)).
 	type(cyclic).
@@ -742,6 +744,16 @@
 			;	true
 			)
 		;	throw(type_error(list(Type,Min,Max), Term))
+		).
+
+	check(non_empty_list(Type), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term == [] ->
+			throw(type_error(non_empty_list(Type), Term))
+		;	is_list(Term) ->
+			is_list_of_type(Term, Type)
+		;	throw(type_error(non_empty_list(Type), Term))
 		).
 
 	check(difference_list, Term) :-

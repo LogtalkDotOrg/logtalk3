@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2018/03/14,
+		date is 2018/03/15,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -556,6 +556,13 @@
 		Large \== [],
 		shrink_list(Large, Small).
 
+	shrink(difference_list, Large, Small) :-
+		shrink(difference_list(_), Large, Small).
+
+	shrink(difference_list(_), Large-Back, Small) :-
+		Large \== Back,
+		shrink_difference_list(Large-Back, Small).
+
 	shrink(pair, LargeKey-Value, SmallKey-Value) :-
 		(	atom(LargeKey) ->
 			shrink(non_empty_atom, LargeKey, SmallKey)
@@ -665,5 +672,17 @@
 	shrink_list_keep_next([], []).
 	shrink_list_keep_next([Head| Tail], [Head| Small]) :-
 		shrink_list(Tail, Small).
+
+	shrink_difference_list(List-Back, List-Back) :-
+		List == Back,
+		!.
+	shrink_difference_list([_| Tail]-Back, Small) :-
+		shrink_difference_list_keep_next(Tail-Back, Small).
+
+	shrink_difference_list_keep_next(List-Back, List-Back) :-
+		List == Back,
+		!.
+	shrink_difference_list_keep_next([Head| Tail]-Back, [Head| Small]-Back) :-
+		shrink_difference_list(Tail-Back, Small-Back).
 
 :- end_category.
