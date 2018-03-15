@@ -21,7 +21,7 @@
 :- object(type).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
 		date is 2018/03/15,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
@@ -29,7 +29,7 @@
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
-			'Atom derived types' - '{boolean, character}',
+			'Atom derived types' - '{non_empty_atom, boolean, character}',
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
@@ -158,6 +158,7 @@
 	type(byte).
 	type(character_code).
 	% atom derived types
+	type(non_empty_atom).
 	type(boolean).
 	type(character).
 	type(order).
@@ -446,6 +447,16 @@
 	:- endif.
 
 	% atom derived types
+
+	check(non_empty_atom, Term) :-
+		(	Term == '' ->
+			throw(type_error(non_empty_atom, Term))
+		;	atom(Term) ->
+			true
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(non_empty_atom, Term))
+		).
 
 	check(boolean, Term) :-
 		(	Term == true ->
