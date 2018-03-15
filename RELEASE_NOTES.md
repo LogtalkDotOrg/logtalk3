@@ -82,6 +82,9 @@ when using GNU Prolog. Thanks to Daniel Diaz for his advice.
 
 * FIXED: Handling of the `float/1` function in the Quintus Prolog adapter file.
 
+* ADDED: Hacks for some missing standard byte and char input/output predicates
+to the Quintus Prolog adapter file.
+
 Documentation
 -------------
 

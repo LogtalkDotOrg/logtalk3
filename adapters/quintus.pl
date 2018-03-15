@@ -66,12 +66,24 @@
 '$lgt_iso_predicate'(current_predicate(_)).
 '$lgt_iso_predicate'(current_prolog_flag(_, _)).
 '$lgt_iso_predicate'(flush_output).
+'$lgt_iso_predicate'(get_byte(_)).
+'$lgt_iso_predicate'(get_byte(_, _)).
+'$lgt_iso_predicate'(get_char(_)).
+'$lgt_iso_predicate'(get_char(_, _)).
 '$lgt_iso_predicate'(get_code(_)).
 '$lgt_iso_predicate'(get_code(_, _)).
 '$lgt_iso_predicate'(number_codes(_, _)).
 '$lgt_iso_predicate'(once(_)).
+'$lgt_iso_predicate'(peek_byte(_)).
+'$lgt_iso_predicate'(peek_byte(_, _)).
+'$lgt_iso_predicate'(peek_char(_)).
+'$lgt_iso_predicate'(peek_char(_, _)).
 '$lgt_iso_predicate'(peek_code(_)).
 '$lgt_iso_predicate'(peek_code(_, _)).
+'$lgt_iso_predicate'(put_byte(_)).
+'$lgt_iso_predicate'(put_byte(_, _)).
+'$lgt_iso_predicate'(put_char(_)).
+'$lgt_iso_predicate'(put_char(_, _)).
 '$lgt_iso_predicate'(put_code(_)).
 '$lgt_iso_predicate'(put_code(_, _)).
 '$lgt_iso_predicate'(set_prolog_flag(_, _)).
@@ -149,6 +161,24 @@ flush_output :-
 	flush_output(Stream).
 
 
+get_byte(Stream, Byte) :-
+	get0(Stream, Byte).
+
+
+get_byte(Byte) :-
+	get0(Byte).
+
+
+get_char(Stream, Char) :-
+	get0(Stream, Code),
+	atom_chars(Char, [Code]).
+
+
+get_char(Char) :-
+	get0(Code),
+	atom_chars(Char, [Code]).
+
+
 get_code(Stream, Code) :-
 	get0(Stream, Code).
 
@@ -166,12 +196,48 @@ once(Goal) :-
 	!.
 
 
+peek_byte(Stream, Byte) :-
+	peek_char(Stream, Byte).
+
+
+peek_byte(Byte) :-
+	peek_char(Byte).
+
+
+peek_char(Stream, Char) :-
+	peek_char(Stream, Code),
+	atom_chars(Char, [Code]).
+
+
+peek_char(Char) :-
+	peek_char(Code),
+	atom_chars(Char, [Code]).
+
+
 peek_code(Stream, Code) :-
 	peek_char(Stream, Code).
 
 
 peek_code(Code) :-
 	peek_char(Code).
+
+
+put_byte(Stream, Byte) :-
+	put(Stream, Byte).
+
+
+put_byte(Byte) :-
+	put(Byte).
+
+
+put_char(Stream, Char) :-
+	atom_chars(Char, [Code]),	
+	put(Stream, Code).
+
+
+put_char(Char) :-
+	atom_chars(Char, [Code]),	
+	put(Code).
 
 
 put_code(Stream, Code) :-
