@@ -31,7 +31,7 @@
 	complements(type)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
 		date is 2018/03/15,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
@@ -317,8 +317,8 @@
 		random(Factor),
 		Arbitrary is Integer * Factor.
 
-	arbitrary(negtive_float, Arbitrary) :-
-		arbitrary(negtive_integer, Integer),
+	arbitrary(negative_float, Arbitrary) :-
+		arbitrary(negative_integer, Integer),
 		random(Factor),
 		Arbitrary is Integer * Factor.
 
@@ -328,7 +328,7 @@
 		Arbitrary is Integer * Factor.
 
 	arbitrary(non_negative_float, Arbitrary) :-
-		arbitrary(non_negtive_integer, Integer),
+		arbitrary(non_negative_integer, Integer),
 		random(Factor),
 		Arbitrary is Integer * Factor.
 
