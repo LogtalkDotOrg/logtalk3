@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/10/09,
+		date is 2018/03/15,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -107,5 +107,16 @@
 	test(numberlist_rescale_3_01) :-
 		numberlist::rescale([1,2,3,4], 2, Rescaled),
 		Rescaled == [2,4,6,8].
+
+	test(type_arbitrary_2_01) :-
+		forall(
+			(	type::type(Type),
+				ground(Type),
+				type::arbitrary(Type)
+			),
+			(	lgtunit::assertion(arbitrary(Type), type::arbitrary(Type, Arbitrary)),
+				lgtunit::assertion(check(Type), type::check(Type, Arbitrary))
+			)
+		).
 
 :- end_object.
