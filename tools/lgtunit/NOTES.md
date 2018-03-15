@@ -121,6 +121,18 @@ where the `run_test_sets/1` predicate argument is a list of test object
 identifiers. This predicate makes possible to get a single code coverage
 report that takes into account all the tests.
 
+It's also possible to automatically run loaded tests when using the `make`
+tool by calling the goal that runs the tests from a definition of the hook
+predicate `logtalk_make_target_action/1`. For example, by adding to the
+tests `tester.lgt` driver file the following code:
+
+	% integrate the tool with logtalk_make/1
+	:- multifile(logtalk_make_target_action/1).
+	:- dynamic(logtalk_make_target_action/1).
+
+	logtalk_make_target_action(check) :-
+		tests::run.
+
 
 Unit test dialects
 ------------------
