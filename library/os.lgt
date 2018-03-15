@@ -40,9 +40,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.48,
+		version is 1.49,
 		author is 'Paulo Moura',
-		date is 2018/03/14,
+		date is 2018/03/15,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1486,7 +1486,8 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath0)},
+			convert_file_path(ExpandedPath0, ExpandedPath).
 
 		convert_file_path(File, Converted) :-
 			atom_codes(File, FileCodes),

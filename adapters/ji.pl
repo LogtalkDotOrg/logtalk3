@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.6.1 or later versions
-%  Last updated on March 14, 2018
+%  Last updated on March 15, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -258,7 +258,8 @@
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	absolute_file_name(Path, ExpandedPath).
+	absolute_file_name(Path, ExpandedPath0),
+	'$lgt_ji_convert_file_path'(ExpandedPath0, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
