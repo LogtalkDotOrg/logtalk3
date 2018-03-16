@@ -234,9 +234,11 @@ to specify the number of random tests that will be generated and run (defaults
 to 100 tests).
 
 In all dialects, `Test` is a callable term, usually an atom, that uniquely
-identifies a test. An error message is printed if duplicated test identifiers
-are found. These errors must be corrected otherwise the test results can be
-misleading.
+identifies a test. This simplifies reporting failed tests and running tests
+selectively. An error message is printed if duplicated test identifiers are
+found. These errors must be corrected otherwise the reported test results
+can be misleading. Ideally, tests should be named in a descriptive way that
+clearly states the purpose of the test and what is being tested.
 
 For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.
