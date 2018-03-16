@@ -132,6 +132,18 @@ tests `tester.lgt` driver file the following code:
 	logtalk_make_target_action(check) :-
 		tests::run.
 
+Alternatively, you can define the predicate `make/1` inside the test set
+object. For example:
+
+	make(check).
+
+This clause will cause all tests to be run when calling the `logtalk_make/1`
+predicate with the target `check`. The other possible target is `all`.
+
+Note that you can have multiple tests driver files. For example, one driver
+file that runs the tests collecting code coverage data and a quicker driver
+file that skips code coverage and compiles the tests in optimized mode.
+
 
 Unit test dialects
 ------------------

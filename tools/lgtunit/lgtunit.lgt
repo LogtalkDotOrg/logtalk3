@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.8,
+		version is 6.9,
 		author is 'Paulo Moura',
-		date is 2018/03/15,
+		date is 2018/03/16,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -225,6 +225,12 @@
 	:- mode(cleanup, zero_or_one).
 	:- info(cleanup/0, [
 		comment is 'Cleanup environment after running the test set. Defaults to the goal true.'
+	]).
+
+	:- protected(make/1).
+	:- mode(make(?atom), zero_or_one).
+	:- info(make/1, [
+		comment is 'Make target for automatically running the test set when calling the logtalk_make/1 built-in predicate. No default. Possible values are {all, check}.'
 	]).
 
 	:- protected(note/1).
@@ -1133,6 +1139,14 @@
 		logtalk_load_context(term_position, Position),
 		default_quick_check_number_of_tests(NumberOfTests),
 		assertz(test_(Test, quick_check(Test, Position))).
+
+	% make target for automatically running the tests
+	term_expansion(make(Target), [make(Target), (:- initialization({assertz((logtalk_make_target_action(Target) :- Tests::run))}))]) :-
+		logtalk_load_context(entity_identifier, Tests),
+		(	Target == all ->
+			true
+		;	Target == check
+		).
 
 	% support the deprecated unit/1 predicate which may still be in use in old code
 	term_expansion(unit(Entity), [cover(Entity)]).

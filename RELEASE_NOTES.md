@@ -179,6 +179,11 @@ failed due to the test goal succeeding non-deterministically.
 * IMPROVED: The `lgtunit::run/1` predicate now also prints test results and
 code coverage summaries.
 
+* ADDED: Support for automatically running a test set when calling the built-in
+predicate `logtalk_make/1`. Test set objects can now define a `make(Target)`
+clause with a `check` or `all` argument to define the make target action that
+will trigger the tests.
+
 * ADDED: Utility predicate `assertion/1` to the `lgtunit` tool.
 
 * ADDED: Predicates to the `lgtunit` tool that return assertions to be used
