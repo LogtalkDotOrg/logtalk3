@@ -665,6 +665,19 @@ popular `xsltproc` processor:
 
 	$ xsltproc -o coverage_report.html coverage_report.xml
 
+The coverage report can include links to the source code when hosted on
+Bitbucket, GitHub, or GitLab. This requires passing the base URL as the
+value for the `url` XSLT parameter. The exact syntax depends on the XSLT
+processor, however. For example:
+
+	$ xsltproc --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master -o coverage_report.html coverage_report.xml
+
+Note that the URL should be a permanent link (i.e. it should include the
+commit SHA1). It's also necessary to suppress the local path prefix in the
+generated `coverage_report.xml` file. For example:
+
+	$ logtalk_tester -c xml -s $HOME/logtalk/
+
 
 Known issues
 ------------

@@ -28,6 +28,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 -->
 
+<xsl:param name="url">none</xsl:param>
+
 <xsl:output
 	method="xml"
 	indent="yes"
@@ -105,7 +107,18 @@
 	<xsl:choose>
 		<xsl:when test="entity">
 			<xsl:for-each select="entity">
-				<h3><code><xsl:value-of select="name" /></code></h3>
+				<xsl:choose>
+					<xsl:when test="$url=none">
+						<h3><code><xsl:value-of select="name" /></code></h3>
+					</xsl:when>
+					<xsl:when test="contains($url,'bitbucket')">
+						<h3><code><a href="{$url}/{file}?fileviewer=file-view-default#{line}"><xsl:value-of select="name" /></a></code></h3>
+					</xsl:when>
+					<!-- assume GitHub or GitLab line reference syntax -->
+					<xsl:otherwise>
+						<h3><code><a href="{$url}/{file}#L{line}"><xsl:value-of select="name" /></a></code></h3>
+					</xsl:otherwise>
+				</xsl:choose>
 				<table style="width:50%; margin-bottom: 30px;">
 				    <tr>
 				      <th style="width:30%;">Entity Coverage</th>
@@ -141,7 +154,18 @@
 	    </tr>
 		<xsl:for-each select="predicate">
 			<tr>
-				<td style="width:30%;"><code><xsl:value-of select="name" /></code></td>
+				<xsl:choose>
+					<xsl:when test="$url=none">
+						<td style="width:30%;"><code><xsl:value-of select="name" /></code></td>
+					</xsl:when>
+					<xsl:when test="contains($url,'bitbucket')">
+						<td style="width:30%;"><code><a href="{$url}/{../../file}?fileviewer=file-view-default#{line}"><xsl:value-of select="name" /></a></code></td>
+					</xsl:when>
+					<!-- assume GitHub or GitLab line reference syntax -->
+					<xsl:otherwise>
+						<td style="width:30%;"><code><a href="{$url}/{../../file}#L{line}"><xsl:value-of select="name" /></a></code></td>
+					</xsl:otherwise>
+				</xsl:choose>
 				<td style="width:15%; text-align:center">
 					<span>
 						<div class="percentage_bar">
