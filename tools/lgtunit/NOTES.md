@@ -447,7 +447,11 @@ test results. By intercepting the unit test framework message printing calls
 integrating tools can also access these annotations.
 
 Units can define a global annotation using the predicate `note/1`. To define
-per test annotations, use the `test/3` dialect and the `note/1` option.
+per test annotations, use the `test/3` dialect and the `note/1` option. For
+example, you can inform why a test is being skipped by writing:
+
+	- test(foo_1, true, [note('Waiting for Deep Thought answer')]) :-
+		...
 
 Annotations are written, by default, between parenthesis after and in the
 same line as the test results.
