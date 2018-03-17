@@ -670,7 +670,9 @@ Bitbucket, GitHub, or GitLab. This requires passing the base URL as the
 value for the `url` XSLT parameter. The exact syntax depends on the XSLT
 processor, however. For example:
 
-	$ xsltproc --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master -o coverage_report.html coverage_report.xml
+	$ xsltproc \
+	  --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
+	  -o coverage_report.html coverage_report.xml
 
 Note that the URL should be a permanent link (i.e. it should include the
 commit SHA1). It's also necessary to suppress the local path prefix in the
@@ -681,7 +683,10 @@ generated `coverage_report.xml` file. For example:
 Alternatively, you can pass the local path prefix to be suppressed to the
 XSLT processor:
 
-	$ xsltproc --stringparam prefix logtalk/ --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master -o coverage_report.html coverage_report.xml
+	$ xsltproc \
+	  --stringparam prefix logtalk/ \
+	  --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
+	  -o coverage_report.html coverage_report.xml
 
 If you are using Bitbucket, GitHub, or GitLab on your own servers, the `url`
 parameter may not contain a `bitbucket`, `github`, or `gitlab` string. In
