@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing code coverage report XML files in a browser
-%  Last updated on April 7, 2017
+%  Last updated on March 17, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -29,6 +29,9 @@
 -->
 
 <xsl:param name="url">none</xsl:param>
+<xsl:param name="host">github</xsl:param>
+<xsl:param name="prefix"/>
+
 
 <xsl:output
 	method="xml"
@@ -69,11 +72,11 @@
 		</p>
 
 		<table style="width:50%;">
-		    <tr>
-		      <th style="width:30%;">Global Coverage</th>
-		      <th style="width:10%;">Covered/Total</th> 
-		      <th style="width:10%;">Percentage</th> 
-		    </tr>
+			<tr>
+				<th style="width:30%;">Global Coverage</th>
+				<th style="width:10%;">Covered/Total</th> 
+				<th style="width:10%;">Percentage</th> 
+			</tr>
 			<tr>
 				<td style="width:30%;">Entities</td>
 				<td style="width:10%; text-align:center">
@@ -107,24 +110,19 @@
 	<xsl:choose>
 		<xsl:when test="entity">
 			<xsl:for-each select="entity">
-				<xsl:choose>
-					<xsl:when test="$url=none">
-						<h3><code><xsl:value-of select="name" /></code></h3>
-					</xsl:when>
-					<xsl:when test="contains($url,'bitbucket')">
-						<h3><code><a href="{$url}/{file}?fileviewer=file-view-default#{line}"><xsl:value-of select="name" /></a></code></h3>
-					</xsl:when>
-					<!-- assume GitHub or GitLab line reference syntax -->
-					<xsl:otherwise>
-						<h3><code><a href="{$url}/{file}#L{line}"><xsl:value-of select="name" /></a></code></h3>
-					</xsl:otherwise>
-				</xsl:choose>
+				<h3>
+					<xsl:call-template name="link">
+						<xsl:with-param name="file" select="substring-after(file, $prefix)"/>
+						<xsl:with-param name="line" select="line"/>
+						<xsl:with-param name="name" select="name"/>
+					</xsl:call-template>
+				</h3>
 				<table style="width:50%; margin-bottom: 30px;">
-				    <tr>
-				      <th style="width:30%;">Entity Coverage</th>
-				      <th style="width:10%;">Covered/Total</th> 
-				      <th style="width:10%;">Percentage</th> 
-				    </tr>
+					<tr>
+						<th style="width:30%;">Entity Coverage</th>
+						<th style="width:10%;">Covered/Total</th> 
+						<th style="width:10%;">Percentage</th> 
+					</tr>
 					<tr>
 						<td style="width:30%;">Predicate Clauses and Grammar Rules</td>
 						<td style="width:10%; text-align:center">
@@ -147,25 +145,20 @@
 
 <xsl:template match="*/predicates">
 	<table style="width:100%;">
-	    <tr>
-	      <th style="width:30%;">Predicate/Non-terminal Coverage</th>
-	      <th style="width:15%;">Covered/Total</th> 
-	      <th style="width:55%;">Covered Clause/Rule Indexes</th>
-	    </tr>
+		<tr>
+			<th style="width:30%;">Predicate/Non-terminal Coverage</th>
+			<th style="width:15%;">Covered/Total</th> 
+			<th style="width:55%;">Covered Clause/Rule Indexes</th>
+		</tr>
 		<xsl:for-each select="predicate">
 			<tr>
-				<xsl:choose>
-					<xsl:when test="$url=none">
-						<td style="width:30%;"><code><xsl:value-of select="name" /></code></td>
-					</xsl:when>
-					<xsl:when test="contains($url,'bitbucket')">
-						<td style="width:30%;"><code><a href="{$url}/{../../file}?fileviewer=file-view-default#{line}"><xsl:value-of select="name" /></a></code></td>
-					</xsl:when>
-					<!-- assume GitHub or GitLab line reference syntax -->
-					<xsl:otherwise>
-						<td style="width:30%;"><code><a href="{$url}/{../../file}#L{line}"><xsl:value-of select="name" /></a></code></td>
-					</xsl:otherwise>
-				</xsl:choose>
+				<td style="width:30%;">
+					<xsl:call-template name="link">
+						<xsl:with-param name="file" select="substring-after(../../file, $prefix)"/>
+						<xsl:with-param name="line" select="line"/>
+						<xsl:with-param name="name" select="name"/>
+					</xsl:call-template>
+				</td>
 				<td style="width:15%; text-align:center">
 					<span>
 						<div class="percentage_bar">
@@ -178,6 +171,21 @@
 			</tr>
 		</xsl:for-each>
 	</table>
+</xsl:template>
+
+<xsl:template name="link">
+	<xsl:param name="file"/>
+	<xsl:param name="line"/>
+	<xsl:param name="name"/>
+	<xsl:choose>
+		<xsl:when test="$host=bitbucket or contains($url,'bitbucket')">
+			<code><a href="{$url}/{$file}?fileviewer=file-view-default#{$line}"><xsl:value-of select="$name" /></a></code>
+		</xsl:when> 
+		<!-- assume GitHub or GitLab line reference syntax -->
+		<xsl:otherwise>
+			<code><a href="{$url}/{$file}#L{$line}"><xsl:value-of select="$name" /></a></code>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>

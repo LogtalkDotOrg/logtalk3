@@ -678,6 +678,16 @@ generated `coverage_report.xml` file. For example:
 
 	$ logtalk_tester -c xml -s $HOME/logtalk/
 
+Alternatively, you can pass the local path prefix to be suppressed to the
+XSLT processor:
+
+	$ xsltproc --stringparam prefix logtalk/ --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master -o coverage_report.html coverage_report.xml
+
+If you are using Bitbucket, GitHub, or GitLab on your own servers, the `url`
+parameter may not contain a `bitbucket`, `github`, or `gitlab` string. In
+this case, you can use the XSLT parameter `host` to indicate which service
+are you running.
+
 
 Known issues
 ------------
