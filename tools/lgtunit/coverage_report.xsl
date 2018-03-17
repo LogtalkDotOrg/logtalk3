@@ -28,8 +28,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 -->
 
-<xsl:param name="url">none</xsl:param>
+
+<!-- base URL to be used when generating links -->
+<xsl:param name="url"/>
+<!-- host provider (different providers use different syntax for line number references in links) -->
 <xsl:param name="host">github</xsl:param>
+<!-- local path prefix to be suppressed when generating links-->
 <xsl:param name="prefix"/>
 
 
@@ -173,11 +177,15 @@
 	</table>
 </xsl:template>
 
+<!-- generate a link from a given file and line number for name taking into account the base URL and path -->
 <xsl:template name="link">
 	<xsl:param name="file"/>
 	<xsl:param name="line"/>
 	<xsl:param name="name"/>
 	<xsl:choose>
+		<xsl:when test="$url=''">
+			<code><xsl:value-of select="$name" /></code>
+		</xsl:when> 
 		<xsl:when test="$host=bitbucket or contains($url,'bitbucket')">
 			<code><a href="{$url}/{$file}?fileviewer=file-view-default#{$line}"><xsl:value-of select="$name" /></a></code>
 		</xsl:when> 
