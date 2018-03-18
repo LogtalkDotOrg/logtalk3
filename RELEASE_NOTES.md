@@ -322,6 +322,9 @@ Examples
 `lgtunit` predicates that return assertions to be used when checking for
 expected text and binary input and output.
 
+* UPDATED: The `errors` example to illustrate the compiler errors when
+duplicated scope and meta-predicate directives are found.
+
 * UPDATED: The `multifile` example to also run when using XSB as the backend
 compiler. Requires XSB r9206 or a later version.
 
