@@ -32,8 +32,8 @@ declared as meta-predicates and the compiler no longer warns about missing
 meta-predicate directives when using these constructs with runtime bound
 arguments.
 
-* ADDED: Detection of duplicated `meta_predicate/1` and `meta_non_terminal/1`
-directives.
+* ADDED: Also check for duplicated `discontiguous/1`, `dynamic/1`,
+`meta_predicate/1`, and `meta_non_terminal/1` directives.
 
 * IMPROVED: Runtime performance by recognizing additional cases where static
 binding can be applied.
@@ -323,7 +323,7 @@ Examples
 expected text and binary input and output.
 
 * UPDATED: The `errors` example to illustrate the compiler errors when
-duplicated scope and meta-predicate directives are found.
+duplicated directives are found.
 
 * UPDATED: The `multifile` example to also run when using XSB as the backend
 compiler. Requires XSB r9206 or a later version.

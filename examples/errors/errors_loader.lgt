@@ -26,6 +26,8 @@
 	(logtalk_load(duplicated_scope_directives) -> true; true),
 	(logtalk_load(duplicated_meta_predicate_directives) -> true; true),
 	(logtalk_load(duplicated_meta_non_terminal_directives) -> true; true),
+	(logtalk_load(duplicated_dynamic_directives) -> true; true),
+	(logtalk_load(duplicated_discontiguous_directives) -> true; true),
 	(logtalk_load(non_instantiated_directive) -> true; true),
 	(logtalk_load(invalid_directive_argument) -> true; true),
 	(logtalk_load(unmatched_directive) -> true; true),

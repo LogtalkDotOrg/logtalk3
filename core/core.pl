@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 15, 0, rc2)).
+'$lgt_version_data'(logtalk(3, 15, 0, rc3)).
 
 
 
@@ -8901,10 +8901,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(dynamic(Functor/Arity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
 	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(dynamic(TFunctor/TArity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
 
@@ -8912,10 +8914,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(Pred, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(dynamic(Functor/ExtArity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
 	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(dynamic(TFunctor/TArity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
 
@@ -8923,8 +8927,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Module == user ->
+		'$lgt_check_for_duplicated_directive'(dynamic(Functor/Arity), ':'(Module, Pred)),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
 	;	'$lgt_check'(module_identifier, Module),
+		'$lgt_check_for_duplicated_directive'(dynamic(':'(Module, Functor/Arity)), ':'(Module, Pred)),
 		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/Arity))))
 	).
 
@@ -8932,8 +8938,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Module == user ->
+		'$lgt_check_for_duplicated_directive'(dynamic(Functor/ExtArity), ':'(Module, NonTerminal)),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
 	;	'$lgt_check'(module_identifier, Module),
+		'$lgt_check_for_duplicated_directive'(dynamic(':'(Module, Functor/ExtArity)), ':'(Module, NonTerminal)),
 		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/ExtArity))))
 	).
 
@@ -8944,7 +8952,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_synchronized_'(Head, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
-	;	assertz('$lgt_pp_dynamic_'(Head))
+	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, Pred),
+		assertz('$lgt_pp_dynamic_'(Head))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(NonTerminal) :-
@@ -8954,7 +8963,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_synchronized_'(Head, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
-	;	assertz('$lgt_pp_dynamic_'(Head))
+	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, NonTerminal),
+		assertz('$lgt_pp_dynamic_'(Head))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(Resource) :-
@@ -8963,6 +8973,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_dynamic_directive_resource'(_) :-
 	throw(instantiation_error).
+
+
+'$lgt_check_for_duplicated_dynamic_directive'(Head, PI) :-
+	(	'$lgt_pp_dynamic_'(Head) ->
+		throw(permission_error(modify, dynamic_predicate, PI))
+	;	true
+	).
 
 
 
@@ -8984,10 +9001,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(discontiguous(Functor/Arity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
 	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(discontiguous(TFunctor/TArity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
 
@@ -8995,10 +9014,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(discontiguous(Functor/ExtArity), Entity::NonTerminal),
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
 	;	'$lgt_check'(entity_identifier, Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(discontiguous(TFunctor/TArity), Entity::NonTerminal),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
 
@@ -9006,8 +9027,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Module == user ->
+		'$lgt_check_for_duplicated_directive'(discontiguous(Functor/Arity), ':'(Module, Pred)),
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
 	;	'$lgt_check'(module_identifier, Module),
+		'$lgt_check_for_duplicated_directive'(discontiguous(':'(Module, Functor/Arity)), ':'(Module, Pred)),
 		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/Arity))))
 	).
 
@@ -9015,8 +9038,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Module == user ->
+		'$lgt_check_for_duplicated_directive'(discontiguous(Functor/ExtArity), ':'(Module, NonTerminal)),
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
 	;	'$lgt_check'(module_identifier, Module),
+		'$lgt_check_for_duplicated_directive'(discontiguous(':'(Module, Functor/ExtArity)), ':'(Module, NonTerminal)),
 		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/ExtArity))))
 	).
 
@@ -9024,12 +9049,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
+	'$lgt_check_for_duplicated_discontiguous_directive'(Head, Pred),
 	assertz('$lgt_pp_discontiguous_'(Head)).
 
 '$lgt_compile_discontiguous_directive_resource'(NonTerminal) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
+	'$lgt_check_for_duplicated_discontiguous_directive'(Head, NonTerminal),
 	assertz('$lgt_pp_discontiguous_'(Head)).
 
 '$lgt_compile_discontiguous_directive_resource'(Resource) :-
@@ -9038,6 +9065,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_discontiguous_directive_resource'(_) :-
 	throw(instantiation_error).
+
+
+'$lgt_check_for_duplicated_discontiguous_directive'(Head, PI) :-
+	(	'$lgt_pp_discontiguous_'(Head) ->
+		throw(permission_error(modify, discontiguous_predicate, PI))
+	;	true
+	).
 
 
 
@@ -9669,6 +9703,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_module_meta_predicate_directive'(Templates, ConvertedTemplates).
 
 '$lgt_compile_module_meta_predicate_directive'([], []).
+
+
+
+% '$lgt_check_for_duplicated_directive'(@callable, @callable)
+
+'$lgt_check_for_duplicated_directive'(Directive, Argument) :-
+	(	'$lgt_pp_directive_'(Directive) ->
+		functor(Directive, Functor, _),
+		atom_concat(Functor, '_directive', Permission),
+		throw(permission_error(modify, Permission, Argument))
+	;	true
+	).
 
 
 
