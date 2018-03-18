@@ -33,7 +33,7 @@ meta-predicate directives when using these constructs with runtime bound
 arguments.
 
 * ADDED: Also check for duplicated `discontiguous/1`, `dynamic/1`,
-`meta_predicate/1`, and `meta_non_terminal/1` directives.
+`meta_predicate/1`, `meta_non_terminal/1`, and `multifile/1` directives.
 
 * IMPROVED: Runtime performance by recognizing additional cases where static
 binding can be applied.

@@ -9222,12 +9222,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(multifile(Functor/Arity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
 	;	'$lgt_check'(entity_identifier, Entity),
 		functor(Template, Functor, Arity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), Entity::Pred),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, predicate_declaration, Pred))
 	).
@@ -9236,12 +9238,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(multifile(Functor/ExtArity), Entity::NonTerminal),
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
 	;	'$lgt_check'(entity_identifier, Entity),
 		functor(Template, Functor, ExtArity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), Entity::NonTerminal),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, non_terminal_declaration, NonTerminal))
 	).
@@ -9250,8 +9254,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Module == user ->
+		'$lgt_check_for_duplicated_directive'(multifile(Functor/Arity), ':'(Module, Pred)),
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
 	;	'$lgt_check'(module_identifier, Module),
+		'$lgt_check_for_duplicated_directive'(multifile(':'(Module, Functor/Arity)), ':'(Module, Pred)),
 		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))))
 	).
 
@@ -9259,8 +9265,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Module == user ->
+		'$lgt_check_for_duplicated_directive'(multifile(Functor/Arity), ':'(Module, NonTerminal)),
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
 	;	'$lgt_check'(module_identifier, Module),
+		'$lgt_check_for_duplicated_directive'(multifile(':'(Module, Functor/ExtArity)), ':'(Module, NonTerminal)),
 		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/ExtArity))))
 	).
 
@@ -9275,6 +9283,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), Pred),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
 
@@ -9289,6 +9298,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), NonTerminal),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
 
