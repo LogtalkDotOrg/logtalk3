@@ -164,7 +164,7 @@
 
 
 
-:- object(duplicated_multifile_directives).
+:- object(duplicated_multifile_directive).
 
 	:- public(foo/1).
 	:- multifile(foo/1).
@@ -179,7 +179,7 @@
 
 
 
-:- object(duplicated_dynamic_directives).
+:- object(duplicated_dynamic_directive).
 
 	:- dynamic(foo/1).
 
@@ -193,7 +193,7 @@
 
 
 
-:- object(duplicated_discontiguous_directives).
+:- object(duplicated_discontiguous_directive).
 
 	:- discontiguous(foo/1).
 
@@ -202,5 +202,30 @@
 	foo(3).
 
 	:- discontiguous(foo/1).
+
+:- end_object.
+
+
+
+:- object(duplicated_meta_predicte_directive).
+
+	:- meta_predicate(foo(0)).
+
+	foo(X) :-
+		call(X).
+
+	:- meta_predicate(foo(0)).
+
+:- end_object.
+
+
+
+:- object(duplicated_meta_non_terminal_directive).
+
+	:- meta_non_terminal(foo(0)).
+
+	foo(X) --> call(X).
+
+	:- meta_non_terminal(foo(0)).
 
 :- end_object.
