@@ -32,6 +32,9 @@ declared as meta-predicates and the compiler no longer warns about missing
 meta-predicate directives when using these constructs with runtime bound
 arguments.
 
+* ADDED: Detection of duplicated `meta_predicate/1` and `meta_non_terminal/1`
+directives.
+
 * IMPROVED: Runtime performance by recognizing additional cases where static
 binding can be applied.
 
@@ -156,6 +159,9 @@ first argument for all supported backend Prolog systems.
 
 * FIXED: Bug in the `arbitrary` category `shrink/3` predicate where an empty
 list would be shrink to itself.
+
+* FIXED: Fix typos in `meta_predicate/1` directives in the library objects
+`bintree` and `rbtree`.
 
 Tools
 -----

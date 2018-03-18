@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 15, 0, rc1)).
+'$lgt_version_data'(logtalk(3, 15, 0, rc2)).
 
 
 
@@ -9060,6 +9060,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_term_template'(Meta, Template),
+	'$lgt_check_for_duplicated_meta_predicate_directives'(Entity::Template, Entity::Meta),
 	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Meta)).
 
 '$lgt_compile_meta_predicate_directive_resource'(':'(Module, Meta)) :-
@@ -9067,12 +9068,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(module_identifier, Module),
 	'$lgt_term_template'(Meta, Template),
+	'$lgt_check_for_duplicated_meta_predicate_directives'(':'(Module,Template), ':'(Module,Meta)),
 	assertz('$lgt_pp_meta_predicate_'(':'(Module,Template), ':'(Module,Meta))).
 
 '$lgt_compile_meta_predicate_directive_resource'(Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_term_template'(Meta, Template),
+	'$lgt_check_for_duplicated_meta_predicate_directives'(Template, Meta),
 	assertz('$lgt_pp_meta_predicate_'(Template, Meta)).
 
 '$lgt_compile_meta_predicate_directive_resource'(Meta) :-
@@ -9081,6 +9084,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_meta_predicate_directive_resource'(_) :-
 	throw(instantiation_error).
+
+
+'$lgt_check_for_duplicated_meta_predicate_directives'(Template, Meta) :-
+	(	'$lgt_pp_meta_predicate_'(Template, _) ->
+		throw(permission_error(modify, meta_predicate_template, Meta))
+	;	true
+	).
 
 
 
@@ -9104,6 +9114,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
+	'$lgt_check_for_duplicated_meta_non_terminal_directives'(Entity::Template, Entity::Meta),
 	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta)).
 
 '$lgt_compile_meta_non_terminal_directive_resource'(':'(Module, Meta)) :-
@@ -9112,6 +9123,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(module_identifier, Module),
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
+	'$lgt_check_for_duplicated_meta_non_terminal_directives'(':'(Module, Template), ':'(Module, Meta)),
 	assertz('$lgt_pp_meta_predicate_'(':'(Module, Template), ':'(Module, ExtendedMeta))).
 
 '$lgt_compile_meta_non_terminal_directive_resource'(Meta) :-
@@ -9119,6 +9131,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
+	'$lgt_check_for_duplicated_meta_non_terminal_directives'(Template, Meta),
 	assertz('$lgt_pp_meta_predicate_'(Template, ExtendedMeta)).
 
 '$lgt_compile_meta_non_terminal_directive_resource'(Meta) :-
@@ -9143,6 +9156,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	ExtendedArg = Arg
 	),
 	'$lgt_compile_meta_non_terminal_directive_args'(Args, ExtendedArgs).
+
+
+'$lgt_check_for_duplicated_meta_non_terminal_directives'(Template, Meta) :-
+	(	'$lgt_pp_meta_predicate_'(Template, _) ->
+		throw(permission_error(modify, meta_non_terminal_template, Meta))
+	;	true
+	).
 
 
 
