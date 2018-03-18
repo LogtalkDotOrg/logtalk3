@@ -161,3 +161,46 @@
 	bar([_| _]).
 
 :- end_object.
+
+
+
+:- object(duplicated_multifile_directives).
+
+	:- public(foo/1).
+	:- multifile(foo/1).
+
+	foo(1).
+	foo(2).
+	foo(3).
+
+	:- multifile(foo/1).
+
+:- end_object.
+
+
+
+:- object(duplicated_dynamic_directives).
+
+	:- dynamic(foo/1).
+
+	foo(1).
+	foo(2).
+	foo(3).
+
+	:- dynamic(foo/1).
+
+:- end_object.
+
+
+
+:- object(duplicated_discontiguous_directives).
+
+	:- discontiguous(foo/1).
+
+	foo(1).
+	foo(2).
+	foo(3).
+
+	:- discontiguous(foo/1).
+
+:- end_object.
