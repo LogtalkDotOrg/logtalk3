@@ -28,9 +28,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
-		date is 2017/02/04,
+		date is 2018/03/18,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [bintree]
 	]).
@@ -188,8 +188,8 @@
 	update_red(<, red(Left,Key0,Value0,Right), Key, OldValue, Value, red(Left,Key0,Value0,NewRight)) :-
 		update(Right, Key, OldValue, Value, NewRight).
 
-	:- meta_predicate(apply(*, *, 2, *)).
-	%apply(black('',_,_,''), _, _, _) :- !, fail.
+	:- meta_predicate(apply_(*, *, 2, *)).
+	%apply_(black('',_,_,''), _, _, _) :- !, fail.
 	apply_(black(Left,Key0,Value0,Right), Key, Closure, black(NewLeft,Key0,Value,NewRight)) :-
 		Left \= [],
 		compare(Order, Key0, Key),
