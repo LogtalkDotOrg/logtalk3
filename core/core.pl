@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 15, 0, rc5)).
+'$lgt_version_data'(logtalk(3, 15, 0, rc6)).
 
 
 
@@ -6354,7 +6354,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% check that the encoding/1 directive is found in the first line
 		(	BeginLine =:= 1 ->
 			true
-		;	'$lgt_print_message'(warning(general), core, misplaced_encoding_directive(File, BeginLine-EndLine))
+		;	'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(warning(general), core, misplaced_encoding_directive(File, BeginLine-EndLine))
 		),
 		% close and reopen the source file using the specified encoding
 		'$lgt_close'(Input),
@@ -7956,6 +7957,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% encoding/1 directive already processed
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
 		'$lgt_print_message'(warning(general), core, ignored_directive(File, Lines, encoding/1))
 	).
@@ -8977,6 +8979,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_dynamic_directive'(Head, PI) :-
 	(	'$lgt_pp_dynamic_'(Head) ->
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, dynamic(PI)))
 	;	true
@@ -9070,6 +9073,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_discontiguous_directive'(Head, PI) :-
 	(	'$lgt_pp_discontiguous_'(Head) ->
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, discontiguous(PI)))
 	;	true
@@ -9124,6 +9128,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_meta_predicate_directive'(Template, Meta) :-
 	(	'$lgt_pp_meta_predicate_'(Template, Meta) ->
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, meta_predicate(Meta)))
 	;	'$lgt_pp_meta_predicate_'(Template, _) ->
@@ -9199,6 +9204,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_meta_non_terminal_directive'(Template, ExtendedMeta, Meta) :-
 	(	'$lgt_pp_meta_predicate_'(Template, ExtendedMeta) ->
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, meta_non_terminal(Meta)))
 	;	'$lgt_pp_meta_predicate_'(Template, _) ->
@@ -9728,6 +9734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_duplicated_directive'(TDirective, Directive) :-
 	(	'$lgt_pp_directive_'(TDirective) ->
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, Directive))
 	;	true
@@ -10537,6 +10544,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_head'(logtalk::debug_handler_provider(_), _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$logtalk#0.debug_handler_provider#1'(Provider, _),
+	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(general), core, debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)),
 	fail.

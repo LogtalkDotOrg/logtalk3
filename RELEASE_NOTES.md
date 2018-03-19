@@ -42,6 +42,9 @@ binding can be applied.
 is a single clause for a predicate that makes a recursive call and the used
 backend Prolog compiler performs unifications using occurs check by default.
 
+* FIXED: Reporting of misplaced or ignored `encoding/1` directives and of
+duplicated debug handlers would not increment the warnings counter.
+
 Prolog adapter and integration files
 ------------------------------------
 
