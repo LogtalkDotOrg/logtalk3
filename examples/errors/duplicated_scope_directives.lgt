@@ -26,6 +26,6 @@
 	foo(2).
 	foo(3).
 
-	:- public(foo/1).
+	:- protected(foo/1).
 
 :- end_object.

@@ -3057,7 +3057,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 15, 0, rc6)).
+'$lgt_version_data'(logtalk(3, 15, 0, rc7)).
 
 
 
@@ -8812,21 +8812,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope, _, _) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
-	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
+	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators), Scope),
 	'$lgt_scope'(Scope, InternalScope),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, InternalScope).
 
 '$lgt_compile_scope_directive_resource'(Functor/Arity, Scope, File, Line) :-
 	'$lgt_valid_predicate_indicator'(Functor/Arity, Functor, Arity),
 	!,
-	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity),
+	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope),
 	'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity),
 	assertz('$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line)).
 
 '$lgt_compile_scope_directive_resource'(Functor//Arity, Scope, File, Line) :-
 	'$lgt_valid_non_terminal_indicator'(Functor//Arity, Functor, Arity, ExtArity),
 	!,
-	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity),
+	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope),
 	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
 	'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity),
 	assertz('$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, Line)).
@@ -8849,24 +8849,42 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_private_'(Functor, Arity)).
 
 
-'$lgt_check_for_duplicated_scope_directives'(op(_, _, [])) :-
+'$lgt_check_for_duplicated_scope_directives'(op(_, _, []), _) :-
 	!.
 
-'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, [Operator| Operators])) :-
+'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, [Operator| Operators]), Scope) :-
 	!,
-	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		Directive =.. [Scope, op(Priority, Specifier, Operator)],
+		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, Directive))
+	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
 		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
-	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators))
+	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators), Scope)
 	).
 
-'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operator)) :-
-	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
+'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operator), Scope) :-
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		Directive =.. [Scope, op(Priority, Specifier, Operator)],
+		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, Directive))
+	;	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
 		throw(permission_error(modify, predicate_scope, op(Priority, Specifier, Operator)))
 	;	true
 	).
 
-'$lgt_check_for_duplicated_scope_directives'(Functor/Arity) :-
-	(	(	'$lgt_pp_public_'(Functor, Arity)
+'$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope) :-
+	(	(	Scope == (public), '$lgt_pp_public_'(Functor, Arity)
+		;	Scope == protected, '$lgt_pp_protected_'(Functor, Arity)
+		;	Scope == (private), '$lgt_pp_private_'(Functor, Arity)
+		) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		Directive =.. [Scope, Functor/Arity],
+		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, Directive))
+	;	(	'$lgt_pp_public_'(Functor, Arity)
 		;	'$lgt_pp_protected_'(Functor, Arity)
 		;	'$lgt_pp_private_'(Functor, Arity)
 		) ->
@@ -8874,8 +8892,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity) :-
-	(	(	'$lgt_pp_public_'(Functor, ExtArity)
+'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope) :-
+	(	(	Scope == (public), '$lgt_pp_public_'(Functor, ExtArity)
+		;	Scope == protected, '$lgt_pp_protected_'(Functor, ExtArity)
+		;	Scope == (private), '$lgt_pp_private_'(Functor, ExtArity)
+		) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		Directive =.. [Scope, Functor//Arity],
+		'$lgt_print_message'(warning(general), core, duplicated_directive(File, Lines, Type, Entity, Directive))
+	;	(	'$lgt_pp_public_'(Functor, ExtArity)
 		;	'$lgt_pp_protected_'(Functor, ExtArity)
 		;	'$lgt_pp_private_'(Functor, ExtArity)
 		) ->

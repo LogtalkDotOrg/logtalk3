@@ -35,6 +35,10 @@ arguments.
 * ADDED: Also check for duplicated `discontiguous/1`, `dynamic/1`,
 `meta_predicate/1`, `meta_non_terminal/1`, and `multifile/1` directives.
 
+* IMPROVED: Distinguish between repeated scope directives (which now print a
+compiler warning) and conflicting scope directives (which continue to generate
+a compiler error).
+
 * IMPROVED: Runtime performance by recognizing additional cases where static
 binding can be applied.
 

@@ -164,6 +164,20 @@
 
 
 
+:- object(duplicated_scope_directive).
+
+	:- public(foo/1).
+
+	foo(1).
+	foo(2).
+	foo(3).
+
+	:- public(foo/1).
+
+:- end_object.
+
+
+
 :- object(duplicated_multifile_directive).
 
 	:- public(foo/1).
