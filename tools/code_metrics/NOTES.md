@@ -42,14 +42,14 @@ Currently, the following metrics are provided:
 
 - Number of Clauses (`noc_metric`)
 - Depth of Inheritance (`dit_metric`)
-- Coupling Score (`coupling_metric`)
+- Efferent coupling, afferent coupling, instability, and abstractness (`coupling_metric`)
 - Documentation (`doc_metric`)
 - Source code size (`size_metric`)
 
 All metrics require the source code to be analyzed to be loaded.
 
-The coupling score method was strongly influenced by the metrics rating
-system in Microsoft Visual Studio and aims to eventually emulate the
+The coupling metric was influenced by the metrics rating system
+in Microsoft Visual Studio and aims to eventually emulate the
 functionality of a maintainability index score.
 
 An helper object, `code_metrics`, is also provided allowing running all

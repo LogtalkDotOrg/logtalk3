@@ -31,16 +31,17 @@
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
 			'Afferent coupling (Ca)' - 'Number of entities that depend on an entity.',
 			'Instability (I)' - 'Computed as Ce / (Ce + Ca). Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a fully stable entity and 1 indicating a fully unstable entity.',
-			'Entity score' - 'Represented as the compound term ce_ca_i(Ce,Ca,I).',
-			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories'
+			'Abstractness (A)' - 'Computed as the ratio between the number of static predicates with scope directives without and a local definition and the total number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.',
+			'Entity score' - 'Represented as the compound term ce_ca_i_a(Ce,Ca,I,A).',
+			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.'
 		]
 	]).
 
 	:- uses(list, [
-		append/2, length/2, member/2
+		append/2, length/2, member/2, memberchk/2
 	]).
 
-	entity_score(Entity, ce_ca_i(Efferent,Afferent,Instability)) :-
+	entity_score(Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) :-
 		(	var(Entity) ->
 			^^current_entity(Entity)
 		;	true
@@ -51,7 +52,8 @@
 		(	Efferent =:= 0 ->
 			Instability = 0.0
 		;	Instability is Efferent / (Efferent + Afferent)
-		).
+		),
+		abstractness(Kind, Entity, Abstractness).
 
 	% efferent coupling
 
@@ -125,6 +127,52 @@
 		sort(Entities, SortedEntities),
 		length(SortedEntities, Score).
 
+	% abstractness
+
+	abstractness(protocol, _, 1.0).
+	abstractness(category, Entity, Abstractness) :-
+		findall(
+			DeclaredPredicate,
+			(	category_property(Entity, declares(DeclaredPredicate, Properties)),
+				memberchk(static, Properties)
+			),
+			DeclaredPredicates
+		),
+		length(DeclaredPredicates, Declared),
+		findall(
+			DefinedPredicate,
+			(	member(DefinedPredicate, DeclaredPredicates),
+				category_property(Entity, defines(DefinedPredicate, _))
+			),
+			DefinedPredicates
+		),
+		length(DefinedPredicates, Defined),
+		(	Declared =:= 0 ->
+			Abstractness is 0.0
+		;	Abstractness is (Declared - Defined) / Declared
+		).
+	abstractness(object, Entity, Abstractness) :-
+		findall(
+			DeclaredPredicate,
+			(	object_property(Entity, declares(DeclaredPredicate, Properties)),
+				memberchk(static, Properties)
+			),
+			DeclaredPredicates
+		),
+		length(DeclaredPredicates, Declared),
+		findall(
+			DefinedPredicate,
+			(	member(DefinedPredicate, DeclaredPredicates),
+				object_property(Entity, defines(DefinedPredicate, _))
+			),
+			DefinedPredicates
+		),
+		length(DefinedPredicates, Defined),
+		(	Declared =:= 0 ->
+			Abstractness is 0.0
+		;	Abstractness is (Declared - Defined) / Declared
+		).
+
 	% auxiliary predicates
 
 	% increment the score if there are any direct ancestors
@@ -173,9 +221,10 @@
 		% but no explict self updates
 		Entity \= Object.
 
-	entity_score(_Entity, ce_ca_i(Efferent,Afferent,Instability)) -->
-		['Efferent coupling score: ~w'-[Efferent], nl],
-		['Afferent coupling score: ~w'-[Afferent], nl],
-		['Instability score: ~w'-[Instability], nl].
+	entity_score(_Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) -->
+		['Efferent coupling: ~w'-[Efferent], nl],
+		['Afferent coupling: ~w'-[Afferent], nl],
+		['Instability: ~w'-[Instability], nl],
+		['Abstractness: ~w'-[Abstractness], nl].
 
 :- end_object.

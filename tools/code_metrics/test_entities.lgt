@@ -38,8 +38,8 @@
 
 :- object(obj_e).
 
-	:- dynamic(fact/1).
 	:- public([foo/0, fact/1]).
+	:- dynamic(fact/1).
 
 	foo :-
 		true.
