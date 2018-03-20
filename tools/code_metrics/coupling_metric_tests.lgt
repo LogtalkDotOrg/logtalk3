@@ -25,8 +25,12 @@
 	:- info([
 		version is 0.5,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/28,
+		date is 2018/03/20,
 		comment is 'Unit tests for entity coupling code metric.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, '=~='), '=~='/2
 	]).
 
 	cover(code_metric).
@@ -34,61 +38,57 @@
 	cover(coupling_metric).
 
 	test(coupling_obj_a) :-
-		coupling_is(obj_a, 3).
+		coupling_is(obj_a, 3, 2, 0.6).
 
 	test(coupling_obj_b) :-
-		coupling_is(obj_b, 2).
+		coupling_is(obj_b, 2, 2, 0.5).
 
 	test(coupling_obj_c) :-
-		coupling_is(obj_c, 2).
+		coupling_is(obj_c, 2, 0, 1.0).
 
 	test(coupling_obj_d) :-
-		coupling_is(obj_d, 1).
+		coupling_is(obj_d, 1, 1, 0.5).
 
 	test(coupling_obj_e) :-
-		coupling_is(obj_e, 0).
-
-	test(coupling_obj_c_wrong_output) :-
-		\+ coupling_is(obj_c, 10).
+		coupling_is(obj_e, 0, 3, 0).
 
 	test(coupling_cat_a) :-
-		coupling_is(cat_a, 1).
+		coupling_is(cat_a, 1, 2, 0.3333333333333333).
 
 	test(coupling_cat_b) :-
-		coupling_is(cat_b, 2).
+		coupling_is(cat_b, 2, 0, 1.0).
 
 	test(coupling_cat_c) :-
-		coupling_is(cat_c, 2).
+		coupling_is(cat_c, 2, 0, 1.0).
 
 	test(coupling_cat_d) :-
-		coupling_is(cat_d, 0).
-
-	test(coupling_cat_c_wrong_output) :-
-		\+ coupling_is(obj_c, 4).
+		coupling_is(cat_d, 0, 1, 0.0).
 
 	test(coupling_prot_a) :-
-		coupling_is(prot_a, 0).
+		coupling_is(prot_a, 0, 2, 0.0).
 
 	test(coupling_prot_b) :-
-		coupling_is(prot_b, 1).
+		coupling_is(prot_b, 1, 1, 0.5).
 
 	test(coupling_herring) :-
-		coupling_is(herring, 1).
+		coupling_is(herring, 1, 0, 1.0).
 
 	test(coupling_car) :-
-		coupling_is(car, 1).
+		coupling_is(car, 1, 0, 1.0).
 
 	test(coupling_meta_vehicle) :-
-		coupling_is(meta_vehicle, 0).
+		coupling_is(meta_vehicle, 0, 1, 0.0).
 
 	test(coupling_vehicle) :-
-		coupling_is(vehicle, 1).
+		coupling_is(vehicle, 1, 1, 0.5).
 
 	% auxiliary predicates
 
-	coupling_is(Entity, N) :-
-		findall(C, coupling_metric::entity_score(Entity, C), Couplings),
-		Couplings == [N].
+	coupling_is(Entity, Ce, Ca, I) :-
+		coupling_metric::entity_score(Entity, ce_ca_i(Ce0,Ca0,I0)),
+		Ce == Ce0,
+		Ca == Ca0,
+		I =~= I0.
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

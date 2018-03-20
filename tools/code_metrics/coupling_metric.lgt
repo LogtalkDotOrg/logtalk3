@@ -23,46 +23,112 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
 		date is 2018/03/20,
-		comment is 'Analyzes entity efferent coupling.',
+		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
 		remarks is [
-			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
-			'Ancestors' - 'Any direct inheritance relations to the entity in question will also increment the score. Duplicate entity couplings will not be scored multiple times.',
+			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
+			'Afferent coupling (Ca)' - 'Number of entities that depend on an entity.',
+			'Instability (I)' - 'Computed as Ce / (Ce + Ca). Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a fully stable entity and 1 indicating a fully unstable entity.',
+			'Entity score' - 'Represented as the compound term ce_ca_i(Ce,Ca,I).',
+			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories',
 			'Interpretation' - 'Generally speaking, lower scores are better.'
 		]
 	]).
 
-	:- uses(list, [member/2]).
+	:- uses(list, [
+		append/2, length/2, member/2
+	]).
 
-	entity_score(Entity, Score) :-
-		^^current_entity(Entity),
+	entity_score(Entity, ce_ca_i(Efferent,Afferent,Instability)) :-
+		(	var(Entity) ->
+			^^current_entity(Entity)
+		;	true
+		),
 		^^entity_kind(Entity, Kind),
-		(	Kind == protocol ->
-			efferent_coupling_score_protocol(Entity, 0, Score, [])
-		;	efferent_coupling_score(Kind, Entity, 0, Score, [])
+		efferent_coupling(Kind, Entity, Efferent),
+		afferent_coupling(Kind, Entity, Afferent),
+		(	Efferent =:= 0 ->
+			Instability = 0.0
+		;	Instability is Efferent / (Efferent + Afferent)
 		).
 
-	efferent_coupling_score_protocol(Protocol, Score0, Score, LoggedEntities) :-
+	% efferent coupling
+
+	efferent_coupling(protocol, Entity, Score) :-
+		efferent_coupling_protocol(Entity, 0, Score, []).
+	efferent_coupling(category, Entity, Score) :-
+		efferent_coupling_other(category, Entity, 0, Score, []).
+	efferent_coupling(object, Entity, Score) :-
+		efferent_coupling_other(object, Entity, 0, Score, []).
+
+	efferent_coupling_protocol(Protocol, Score0, Score, LoggedEntities) :-
 		(	unvisited_ancestor(protocol, Protocol, Ancestor, LoggedEntities)
 		->	Score1 is Score0 + 1,
-			efferent_coupling_score_protocol(Protocol, Score1, Score, [Ancestor|LoggedEntities])
+			efferent_coupling_protocol(Protocol, Score1, Score, [Ancestor|LoggedEntities])
 		;	Score0 = Score
 		).
 
 	% measure the coupling scores for objects and categories
-	efferent_coupling_score(Kind, Entity, Score0, Score, LoggedEntities) :-
+	efferent_coupling_other(Kind, Entity, Score0, Score, LoggedEntities) :-
 		(	unvisited_ancestor(Kind, Entity, Ancestor, LoggedEntities)
 		->	Score1 is Score0 + 1,
-			efferent_coupling_score(Kind, Entity, Score1, Score, [Ancestor| LoggedEntities])
+			efferent_coupling_other(Kind, Entity, Score1, Score, [Ancestor| LoggedEntities])
 		;	unvisited_call(Entity, Entity2, LoggedEntities)
 		->	Score1 is Score0 + 1,
-			efferent_coupling_score(Kind, Entity, Score1, Score, [Entity2| LoggedEntities])
+			efferent_coupling_other(Kind, Entity, Score1, Score, [Entity2| LoggedEntities])
 		;	Score0 = Score
 		).
 
-	% Increment the score if there are any direct ancestors
+	% afferent coupling
+
+	afferent_coupling(protocol, Entity, Score) :-
+		afferent_coupling_protocol(Entity, Score).
+	afferent_coupling(category, Entity, Score) :-
+		afferent_coupling_category(Entity, Score).
+	afferent_coupling(object, Entity, Score) :-
+		afferent_coupling_object(Entity, Score).
+	
+	afferent_coupling_protocol(Protocol, Score) :-
+		(	setof(Entity, implements_protocol(Entity,Protocol), Implementers) ->
+			length(Implementers, NumberOfImplementers)
+		;	NumberOfImplementers = 0
+		),
+		(	setof(Descendant, extends_protocol(Descendant,Protocol), Descendants) ->
+			length(Descendants, NumberOfDescendants)
+		;	NumberOfDescendants = 0
+		),
+		Score is NumberOfImplementers + NumberOfDescendants.
+
+	afferent_coupling_category(Category, Score) :-
+		(	setof(Entity, imports_category(Entity,Category), Entities) ->
+			length(Entities, NumberOfImporters)
+		;	NumberOfImporters = 0
+		),
+		(	setof(Descendant, extends_category(Descendant,Category), Descendants) ->
+			length(Descendants, NumberOfDescendants)
+		;	NumberOfDescendants = 0
+		),
+		(	setof(Object, complements_object(Category, Object), Objects) ->
+			length(Objects, NumberOfComplementedObjects)
+		;	NumberOfComplementedObjects = 0
+		),
+		Score is NumberOfImporters + NumberOfDescendants + NumberOfComplementedObjects.
+
+	afferent_coupling_object(Object, Score) :-
+		findall(Prototype, extends_object(Prototype,Object), Prototypes),
+		findall(Instance, (instantiates_class(Instance,Object), Instance \= Object), Instances),
+		findall(Subclass, specializes_class(Subclass,Object), Subclasses),
+		findall(Sender, entity_sends_message_to_object(Sender, Object), Senders),
+		findall(Updater, entity_updates_object_predicate(Updater, Object), Updaters),
+		append([Prototypes,Instances,Subclasses,Senders,Updaters], Entities),
+		sort(Entities, SortedEntities),
+		length(SortedEntities, Score).
+
+	% auxiliary predicates
+
+	% increment the score if there are any direct ancestors
 	unvisited_ancestor(EntityKind, Entity, Ancestor, LoggedEntities) :-
 		^^ancestor(EntityKind, Entity, _, Ancestor),
 		\+ member(Ancestor, LoggedEntities).
@@ -86,7 +152,27 @@
 
 	external_call_(':'(Module,_Name/_Arity), _, Module).
 
-	entity_score(_Entity, Score) -->
-		['Efferent coupling score: ~w'-[Score], nl].
+	entity_sends_message_to_object(Entity, Object) :-
+		functor(Object, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	object_property(Entity, calls(Target::_, _))
+		;	category_property(Entity, calls(Target::_, _))
+		),
+		nonvar(Target),
+		Target = Template.
+
+	entity_updates_object_predicate(Entity, Object) :-
+		functor(Object, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	object_property(Entity, updates(Target::_, _))
+		;	category_property(Entity, updates(Target::_, _))
+		),
+		nonvar(Target),
+		Target = Template.
+
+	entity_score(_Entity, ce_ca_i(Efferent,Afferent,Instability)) -->
+		['Efferent coupling score: ~w'-[Efferent], nl],
+		['Afferent coupling score: ~w'-[Afferent], nl],
+		['Instability score: ~w'-[Instability], nl].
 
 :- end_object.
