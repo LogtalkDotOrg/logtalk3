@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/20,
+		date is 2018/03/20,
 		comment is 'Analyzes entity efferent coupling.',
 		remarks is [
 			'Calls and Updates' - 'Any calls or dynamic updates to predicates in external objects or categories increments the coupling score.',
@@ -40,25 +40,25 @@
 		^^current_entity(Entity),
 		^^entity_kind(Entity, Kind),
 		(	Kind == protocol ->
-			coupling_score_protocol(Entity, 0, Score, [])
-		;	coupling_score(Kind, Entity, 0, Score, [])
+			efferent_coupling_score_protocol(Entity, 0, Score, [])
+		;	efferent_coupling_score(Kind, Entity, 0, Score, [])
 		).
 
-	coupling_score_protocol(Protocol, Score0, Score, LoggedEntities) :-
+	efferent_coupling_score_protocol(Protocol, Score0, Score, LoggedEntities) :-
 		(	unvisited_ancestor(protocol, Protocol, Ancestor, LoggedEntities)
 		->	Score1 is Score0 + 1,
-			coupling_score_protocol(Protocol, Score1, Score, [Ancestor|LoggedEntities])
+			efferent_coupling_score_protocol(Protocol, Score1, Score, [Ancestor|LoggedEntities])
 		;	Score0 = Score
 		).
 
 	% measure the coupling scores for objects and categories
-	coupling_score(Kind, Entity, Score0, Score, LoggedEntities) :-
+	efferent_coupling_score(Kind, Entity, Score0, Score, LoggedEntities) :-
 		(	unvisited_ancestor(Kind, Entity, Ancestor, LoggedEntities)
 		->	Score1 is Score0 + 1,
-			coupling_score(Kind, Entity, Score1, Score, [Ancestor| LoggedEntities])
+			efferent_coupling_score(Kind, Entity, Score1, Score, [Ancestor| LoggedEntities])
 		;	unvisited_call(Entity, Entity2, LoggedEntities)
 		->	Score1 is Score0 + 1,
-			coupling_score(Kind, Entity, Score1, Score, [Entity2| LoggedEntities])
+			efferent_coupling_score(Kind, Entity, Score1, Score, [Entity2| LoggedEntities])
 		;	Score0 = Score
 		).
 
