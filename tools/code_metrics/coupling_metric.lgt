@@ -32,8 +32,7 @@
 			'Afferent coupling (Ca)' - 'Number of entities that depend on an entity.',
 			'Instability (I)' - 'Computed as Ce / (Ce + Ca). Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a fully stable entity and 1 indicating a fully unstable entity.',
 			'Entity score' - 'Represented as the compound term ce_ca_i(Ce,Ca,I).',
-			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories',
-			'Interpretation' - 'Generally speaking, lower scores are better.'
+			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories'
 		]
 	]).
 
@@ -159,7 +158,9 @@
 		;	category_property(Entity, calls(Target::_, _))
 		),
 		nonvar(Target),
-		Target = Template.
+		Target = Template,
+		% but no explict self messages
+		Entity \= Object.
 
 	entity_updates_object_predicate(Entity, Object) :-
 		functor(Object, Functor, Arity),
@@ -168,7 +169,9 @@
 		;	category_property(Entity, updates(Target::_, _))
 		),
 		nonvar(Target),
-		Target = Template.
+		Target = Template,
+		% but no explict self updates
+		Entity \= Object.
 
 	entity_score(_Entity, ce_ca_i(Efferent,Afferent,Instability)) -->
 		['Efferent coupling score: ~w'-[Efferent], nl],
