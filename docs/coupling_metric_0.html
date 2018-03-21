@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/3/20</code>
+            <code>2018/3/21</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -86,19 +86,19 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Instability (I)</dt>
-          <dd class="text">Computed as Ce / (Ce + Ca). Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a fully stable entity and 1 indicating a fully unstable entity.</dd>
+          <dd class="text">Computed as Ce / (Ce + Ca). Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Abstractness (A)</dt>
+          <dd class="text">Computed as the ratio between the number of static predicates with scope directives without and a local definition and the total number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Entity score</dt>
-          <dd class="text">Represented as the compound term ce_ca_i(Ce,Ca,I).</dd>
+          <dd class="text">Represented as the compound term ce_ca_i_a(Ce,Ca,I,A).</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Dependencies count</dt>
-          <dd class="text">Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Interpretation</dt>
-          <dd class="text">Generally speaking, lower scores are better.</dd>
+          <dd class="text">Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.</dd>
         </dl>
       </div>
     </div>

@@ -48,9 +48,12 @@ Currently, the following metrics are provided:
 
 All metrics require the source code to be analyzed to be loaded.
 
-The coupling metric was influenced by the metrics rating system
-in Microsoft Visual Studio and aims to eventually emulate the
-functionality of a maintainability index score.
+For interpretation of the coupling metric scores, see e.g. the original
+paper by Robert Martin, "OO Design Quality Metrics".
+
+The coupling metric was also influenced by the metrics rating system in
+Microsoft Visual Studio and aims to eventually emulate the functionality
+of a maintainability index score.
 
 An helper object, `code_metrics`, is also provided allowing running all
 loaded individual metrics.
@@ -64,18 +67,16 @@ Defining new metrics
 --------------------
 
 New metrics can be implemented by defining an object that imports the
-`code_metric` category and implements the `entity_score/2` predicate
-(to compute the metric for a given entity) and the `entity_score//2`
-non-terminal for pretty-printing of the computed scores.
+`code_metric` category and implements its score predicates.
 
 
 Third-party tools
 -----------------
 
-`cloc` is an open-source command-line program that counts blank lines, comment
-lines, and lines of source code in many programming languages including Logtalk.
-It is available at https://github.com/AlDanial/cloc
+`cloc` is an open-source command-line program that counts blank lines,
+comment lines, and lines of source code in many programming languages
+including Logtalk. Available at https://github.com/AlDanial/cloc
 
-`ohcount` is an open-source command-line program that counts blank lines, comment
-lines, and lines of source code in many programming languages including Logtalk.
-It is available at https://github.com/blackducksoftware/ohcount
+`ohcount` is an open-source command-line program that counts blank lines,
+comment lines, and lines of source code in many programming languages
+including Logtalk. Available at https://github.com/blackducksoftware/ohcount
