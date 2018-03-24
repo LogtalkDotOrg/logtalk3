@@ -10993,6 +10993,146 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), setof(Term, DGoal, List)), ExCtx)
 	).
 
+% entity enumeration and entity relations predicates
+
+'$lgt_compile_body'(current_object(Obj), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
+	DPred = '$lgt_debug'(goal(current_object(Obj), TPred), ExCtx).
+
+'$lgt_compile_body'(current_protocol(Ptc), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_current_protocol_'(Ptc, _, _, _, _),
+	DPred = '$lgt_debug'(goal(current_protocol(Ptc), TPred), ExCtx).
+
+'$lgt_compile_body'(current_category(Ctg), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_current_category_'(Ctg, _, _, _, _, _),
+	DPred = '$lgt_debug'(goal(current_category(Ctg), TPred), ExCtx).
+
+
+'$lgt_compile_body'(extends_protocol(Ptc, ExtPtc), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_check'(var_or_protocol_identifier, ExtPtc),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_extends_protocol_'(Ptc, ExtPtc, _),
+	DPred = '$lgt_debug'(goal(extends_protocol(Ptc, ExtPtc), TPred), ExCtx).
+
+'$lgt_compile_body'(extends_protocol(Ptc, ExtPtc, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_check'(var_or_protocol_identifier, ExtPtc),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_extends_protocol_'(Ptc, ExtPtc, Scope),
+	DPred = '$lgt_debug'(goal(extends_protocol(Ptc, ExtPtc, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(implements_protocol(ObjOrCtg, Ptc), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_implements_protocol_'(ObjOrCtg, Ptc, _),
+	DPred = '$lgt_debug'(goal(implements_protocol(ObjOrCtg, Ptc), TPred), ExCtx).
+
+'$lgt_compile_body'(implements_protocol(ObjOrCtg, Ptc, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope),
+	DPred = '$lgt_debug'(goal(implements_protocol(ObjOrCtg, Ptc, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(imports_category(Obj, Ctg), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_imports_category_'(Obj, Ctg, _),
+	DPred = '$lgt_debug'(goal(imports_category(Obj, Ctg), TPred), ExCtx).
+
+'$lgt_compile_body'(imports_category(Obj, Ctg, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_imports_category_'(Obj, Ctg, Scope),
+	DPred = '$lgt_debug'(goal(imports_category(Obj, Ctg, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(instantiates_class(Obj, Class), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_object_identifier, Class),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_instantiates_class_'(Obj, Class, _),
+	DPred = '$lgt_debug'(goal(instantiates_class(Obj, Class), TPred), ExCtx).
+
+'$lgt_compile_body'(instantiates_class(Obj, Class, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_object_identifier, Class),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_instantiates_class_'(Obj, Class, Scope),
+	DPred = '$lgt_debug'(goal(instantiates_class(Obj, Class, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(specializes_class(Class, Superclass), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Class),
+	'$lgt_check'(var_or_object_identifier, Superclass),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_specializes_class_'(Class, Superclass, _),
+	DPred = '$lgt_debug'(goal(specializes_class(Class, Superclass), TPred), ExCtx).
+
+'$lgt_compile_body'(specializes_class(Class, Superclass, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Class),
+	'$lgt_check'(var_or_object_identifier, Superclass),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_specializes_class_'(Class, Superclass, Scope),
+	DPred = '$lgt_debug'(goal(specializes_class(Class, Superclass, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(extends_category(Ctg, ExtCtg), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_check'(var_or_category_identifier, ExtCtg),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_extends_category_'(Ctg, ExtCtg, _),
+	DPred = '$lgt_debug'(goal(extends_category(Ctg, ExtCtg), TPred), ExCtx).
+
+'$lgt_compile_body'(extends_category(Ctg, ExtCtg, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_check'(var_or_category_identifier, ExtCtg),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_extends_category_'(Ctg, ExtCtg, Scope),
+	DPred = '$lgt_debug'(goal(extends_category(Ctg, ExtCtg, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(extends_object(Prototype, Parent), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Prototype),
+	'$lgt_check'(var_or_object_identifier, Parent),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_extends_object_'(Prototype, Parent, _),
+	DPred = '$lgt_debug'(goal(extends_object(Prototype, Parent), TPred), ExCtx).
+
+'$lgt_compile_body'(extends_object(Prototype, Parent, Scope), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Prototype),
+	'$lgt_check'(var_or_object_identifier, Parent),
+	'$lgt_check'(var_or_scope, Scope),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_extends_object_'(Prototype, Parent, Scope),
+	DPred = '$lgt_debug'(goal(extends_object(Prototype, Parent, Scope), TPred), ExCtx).
+
+
+'$lgt_compile_body'(complements_object(Category, Object), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_category_identifier, Category),
+	'$lgt_check'(var_or_object_identifier, Object),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_complemented_object_'(Object, Category, _, _, _),
+	DPred = '$lgt_debug'(goal(complements_object(Category, Object), TPred), ExCtx).
+
 % multi-threading meta-predicates
 
 '$lgt_compile_body'(threaded(_), _, _, _) :-

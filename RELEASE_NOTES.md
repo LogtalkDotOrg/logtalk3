@@ -24,6 +24,12 @@ RELEASE NOTES
 3.16.0 - May ??, 2018
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Compile calls to the current entity and entity relations built-in
+predicates for improved performance by doing compile time type-checking.
+
 Tests
 -----
 
