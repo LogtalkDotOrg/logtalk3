@@ -11133,6 +11133,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TPred = '$lgt_complemented_object_'(Object, Category, _, _, _),
 	DPred = '$lgt_debug'(goal(complements_object(Category, Object), TPred), ExCtx).
 
+
+'$lgt_compile_body'(conforms_to_protocol(ObjOrCtg, Protocol), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
+	'$lgt_check'(var_or_protocol_identifier, Protocol),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	var(ObjOrCtg) ->
+		TPred = '$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _)
+	;	var(Protocol) ->
+		TPred = '$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _)
+	;	% deterministic query
+		TPred = ('$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _) -> true)
+	),
+	DPred = '$lgt_debug'(goal(complements_object(Category, Object), TPred), ExCtx).
+
+
 % multi-threading meta-predicates
 
 '$lgt_compile_body'(threaded(_), _, _, _) :-
