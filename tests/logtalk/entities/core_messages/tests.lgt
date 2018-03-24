@@ -22,14 +22,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/09/28,
+		date is 2018/03/24,
 		comment is 'Unit tests for the "core_messages" built-in category.'
 	]).
 
 	test(core_messages_1) :-
-		current_category(core_messages),
+		current_category(core_messages).
+
+	test(core_messages_2) :-
 		category_property(core_messages, built_in).
+
+	test(core_messages_3) :-
+		category_property(core_messages, static).
 
 :- end_object.

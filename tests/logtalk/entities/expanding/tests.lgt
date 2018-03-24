@@ -22,17 +22,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2018/03/24,
 		comment is 'Unit tests for the "expanding" built-in protocol.'
 	]).
 
 	test(expanding_1) :-
-		current_protocol(expanding),
-		protocol_property(expanding, built_in).
+		current_protocol(expanding).
 
 	test(expanding_2) :-
+		protocol_property(expanding, built_in).
+
+	test(expanding_3) :-
+		protocol_property(expanding, static).
+
+	test(expanding_4) :-
 		protocol_property(expanding, public(Predicates)),
 		ground(Predicates),
 		memberchk(goal_expansion/2, Predicates),

@@ -22,17 +22,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2018/03/24,
 		comment is 'Unit tests for the "monitoring" built-in protocol.'
 	]).
 
 	test(monitoring_1) :-
-		current_protocol(monitoring),
-		protocol_property(monitoring, built_in).
+		current_protocol(monitoring).
 
 	test(monitoring_2) :-
+		protocol_property(monitoring, built_in).
+
+	test(monitoring_3) :-
+		protocol_property(monitoring, static).
+
+	test(monitoring_4) :-
 		protocol_property(monitoring, public(Predicates)),
 		ground(Predicates),
 		memberchk(before/3, Predicates),

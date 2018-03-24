@@ -22,14 +22,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/09/28,
+		date is 2018/03/24,
 		comment is 'Unit tests for the "user" built-in object.'
 	]).
 
+	% basic properties
+
 	test(user_1) :-
-		current_object(user),
+		current_object(user).
+
+	test(user_2) :-
 		object_property(user, built_in).
+
+	test(user_3) :-
+		object_property(user, static).
+
+	test(user_4) :-
+		(	current_logtalk_flag(threads, supported) ->
+			object_property(user, threaded)
+		;	true
+		).
 
 :- end_object.

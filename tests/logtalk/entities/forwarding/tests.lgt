@@ -22,17 +22,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2018/03/24,
 		comment is 'Unit tests for the "forwarding" built-in protocol.'
 	]).
 
 	test(forwarding_1) :-
-		current_protocol(forwarding),
+		current_protocol(forwarding).
+
+	test(forwarding_2) :-
 		protocol_property(forwarding, built_in).
 
-	test(monitoring_2) :-
+	test(forwarding_3) :-
+		protocol_property(forwarding, static).
+
+	test(forwarding_4) :-
 		protocol_property(forwarding, public(Predicates)),
 		ground(Predicates),
 		memberchk(forward/1, Predicates).

@@ -22,36 +22,49 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/02/27,
+		date is 2018/03/24,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
+	% basic properties
+
 	succeeds(logtalk_01) :-
-		current_object(logtalk),
+		current_object(logtalk).
+
+	succeeds(logtalk_02) :-
 		object_property(logtalk, built_in).
+
+	succeeds(logtalk_03) :-
+		object_property(logtalk, static).
+
+	succeeds(logtalk_04) :-
+		(	current_logtalk_flag(threads, supported) ->
+			object_property(logtalk, threaded)
+		;	true
+		).
 
 	% entity_prefix/2 tests
 
-	succeeds(logtalk_02) :-
+	succeeds(logtalk_05) :-
 		logtalk::entity_prefix(foo, Prefix),
 		logtalk::entity_prefix(Entity, Prefix),
 		Entity == foo.
 
-	succeeds(logtalk_03) :-
+	succeeds(logtalk_06) :-
 		logtalk::entity_prefix(foo(_), Prefix),
 		logtalk::entity_prefix(Entity, Prefix),
 		^^variant(Entity, foo(_)).
 
-	succeeds(logtalk_04) :-
+	succeeds(logtalk_07) :-
 		logtalk::compile_predicate_heads(bar(_), logtalk, Compiled, _),
 		logtalk::decompile_predicate_heads(Compiled, Entity, Type, Decompiled),
 		Entity == logtalk,
 		Type == object,
 		^^variant(Decompiled, bar(_)).
 
-	succeeds(logtalk_05) :-
+	succeeds(logtalk_08) :-
 		logtalk::compile_predicate_indicators(bar/1, logtalk, Compiled),
 		logtalk::decompile_predicate_indicators(Compiled, Entity, Type, Decompiled),
 		Entity == logtalk,
@@ -60,16 +73,16 @@
 
 	% loaded_file/1 tests
 
-	succeeds(logtalk_06) :-
+	succeeds(logtalk_09) :-
 		forall(
 			logtalk::loaded_file(File),
 			atom(File)
 		).
 
-	fails(logtalk_07) :-
+	fails(logtalk_10) :-
 		logtalk::loaded_file(non_loaded_file).
 
-	succeeds(logtalk_08) :-
+	succeeds(logtalk_11) :-
 		forall(
 			(	logtalk::loaded_file(File),
 				os::decompose_file_name(File, Directory, Basename)
@@ -81,7 +94,7 @@
 
 	% loaded_file_property/2 tests
 
-	succeeds(logtalk_09) :-
+	succeeds(logtalk_12) :-
 		logtalk::loaded_file_property(SourceFile, basename('tests.lgt')), !,
 		logtalk::loaded_file_property(SourceFile, directory(Directory)), atom(Directory),
 		logtalk::loaded_file_property(SourceFile, mode(Mode)), atom(Mode), mode(Mode),
@@ -98,29 +111,29 @@
 
 	% expand_library_path/2 tests
 
-	deterministic(logtalk_10) :-
+	deterministic(logtalk_13) :-
 		logtalk::expand_library_path(core, Path),
 		atom(Path).
 
-	deterministic(logtalk_11) :-
+	deterministic(logtalk_14) :-
 		logtalk::expand_library_path(core(logtalk), Path),
 		atom(Path).
 
-	fails(logtalk_12) :-
+	fails(logtalk_15) :-
 		logtalk::expand_library_path(non_existing_library_alias, _).
 
-	fails(logtalk_13) :-
+	fails(logtalk_16) :-
 		logtalk::expand_library_path(non_existing_library_alias(some_file), _).
 
 	% file_type_extension/2 tests
 
-	succeeds(logtalk_14) :-
+	succeeds(logtalk_17) :-
 		forall(
 			logtalk::file_type_extension(Type, Extension),
 			(atom(Type), atom(Extension))
 		).
 
-	succeeds(logtalk_15) :-
+	succeeds(logtalk_18) :-
 		setof(
 			Type,
 			Extension^(logtalk::file_type_extension(Type, Extension)),
@@ -133,7 +146,7 @@
 			Extensions == [logtalk, object, prolog, source]
 		).
 
-	succeeds(logtalk_16) :-
+	succeeds(logtalk_19) :-
 		findall(
 			LogtalkExtension,
 			logtalk::file_type_extension(logtalk, LogtalkExtension),

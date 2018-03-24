@@ -24,6 +24,10 @@ RELEASE NOTES
 3.16.0 - May ??, 2018
 =====================
 
+Tests
+-----
+
+* CHANGED: Refactoring of the built-in entity tests.
 
 
 3.15.0 - March 21, 2018
