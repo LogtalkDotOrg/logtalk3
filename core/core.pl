@@ -11145,8 +11145,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% deterministic query
 		TPred = ('$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _) -> true)
 	),
-	DPred = '$lgt_debug'(goal(complements_object(Category, Object), TPred), ExCtx).
-
+	DPred = '$lgt_debug'(goal(conforms_to_protocol(ObjOrCtg, Protocol), TPred), ExCtx).
 
 % multi-threading meta-predicates
 
