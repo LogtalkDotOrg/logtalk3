@@ -22355,13 +22355,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_built_in_entity'(Entity, Type, File, ScratchDirectory) :-
 	(	Type == protocol,
-		current_protocol(Entity) ->
+		'$lgt_current_protocol_'(Entity, _, _, _, _) ->
 		true
 	;	Type == category,
-		current_category(Entity) ->
+		'$lgt_current_category_'(Entity, _, _, _, _, _) ->
 		true
 	;	Type == object,
-		current_object(Entity) ->
+		'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	% not an embedded entity; compile and load it
 		logtalk_load(
