@@ -695,7 +695,8 @@ Obj<<Goal :-
 % current_object(?object_identifier)
 
 current_object(Obj) :-
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_object(Obj), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_object(Obj), ExCtx)),
 	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _).
 
 
@@ -703,7 +704,8 @@ current_object(Obj) :-
 % current_protocol(?protocol_identifier)
 
 current_protocol(Ptc) :-
-	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(current_protocol(Ptc), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(current_protocol(Ptc), ExCtx)),
 	'$lgt_current_protocol_'(Ptc, _, _, _, _).
 
 
@@ -711,7 +713,8 @@ current_protocol(Ptc) :-
 % current_category(?category_identifier)
 
 current_category(Ctg) :-
-	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(current_category(Ctg), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(current_category(Ctg), ExCtx)),
 	'$lgt_current_category_'(Ctg, _, _, _, _, _).
 
 
@@ -1512,8 +1515,9 @@ abolish_protocol(Ptc) :-
 % implements_protocol(?category_identifier, ?protocol_identifier)
 
 implements_protocol(ObjOrCtg, Ptc) :-
-	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc), _)),
-	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc), ExCtx)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc), ExCtx)),
 	'$lgt_implements_protocol_'(ObjOrCtg, Ptc, _).
 
 
@@ -1522,9 +1526,10 @@ implements_protocol(ObjOrCtg, Ptc) :-
 % implements_protocol(?category_identifier, ?protocol_identifier, ?atom)
 
 implements_protocol(ObjOrCtg, Ptc, Scope) :-
-	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
-	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), ExCtx)),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(implements_protocol(ObjOrCtg, Ptc, Scope), ExCtx)),
 	'$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope).
 
 
@@ -1532,8 +1537,9 @@ implements_protocol(ObjOrCtg, Ptc, Scope) :-
 % imports_category(?object_identifier, ?category_identifier)
 
 imports_category(Obj, Ctg) :-
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg), _)),
-	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg), ExCtx)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg), ExCtx)),
 	'$lgt_imports_category_'(Obj, Ctg, _).
 
 
@@ -1541,9 +1547,10 @@ imports_category(Obj, Ctg) :-
 % imports_category(?object_identifier, ?category_identifier, ?atom)
 
 imports_category(Obj, Ctg, Scope) :-
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg, Scope), _)),
-	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(imports_category(Obj, Ctg, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(imports_category(Obj, Ctg, Scope), ExCtx)),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(imports_category(Obj, Ctg, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(imports_category(Obj, Ctg, Scope), ExCtx)),
 	'$lgt_imports_category_'(Obj, Ctg, Scope).
 
 
@@ -1551,8 +1558,9 @@ imports_category(Obj, Ctg, Scope) :-
 % instantiates_class(?object_identifier, ?object_identifier)
 
 instantiates_class(Obj, Class) :-
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class), _)),
-	'$lgt_check'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class), ExCtx)),
 	'$lgt_instantiates_class_'(Obj, Class, _).
 
 
@@ -1560,9 +1568,10 @@ instantiates_class(Obj, Class) :-
 % instantiates_class(?object_identifier, ?object_identifier, ?atom)
 
 instantiates_class(Obj, Class, Scope) :-
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class, Scope), _)),
-	'$lgt_check'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(instantiates_class(Obj, Class, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(instantiates_class(Obj, Class, Scope), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(instantiates_class(Obj, Class, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(instantiates_class(Obj, Class, Scope), ExCtx)),
 	'$lgt_instantiates_class_'(Obj, Class, Scope).
 
 
@@ -1570,8 +1579,9 @@ instantiates_class(Obj, Class, Scope) :-
 % specializes_class(?object_identifier, ?object_identifier)
 
 specializes_class(Class, Superclass) :-
-	'$lgt_check'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass), _)),
-	'$lgt_check'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass), ExCtx)),
 	'$lgt_specializes_class_'(Class, Superclass, _).
 
 
@@ -1579,9 +1589,10 @@ specializes_class(Class, Superclass) :-
 % specializes_class(?object_identifier, ?object_identifier, ?atom)
 
 specializes_class(Class, Superclass, Scope) :-
-	'$lgt_check'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass, Scope), _)),
-	'$lgt_check'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(specializes_class(Class, Superclass, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Class, logtalk(specializes_class(Class, Superclass, Scope), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Superclass, logtalk(specializes_class(Class, Superclass, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(specializes_class(Class, Superclass, Scope), ExCtx)),
 	'$lgt_specializes_class_'(Class, Superclass, Scope).
 
 
@@ -1589,8 +1600,9 @@ specializes_class(Class, Superclass, Scope) :-
 % extends_category(?category_identifier, ?category_identifier)
 
 extends_category(Ctg, ExtCtg) :-
-	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg), _)),
-	'$lgt_check'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg), ExCtx)),
+	'$lgt_check'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg), ExCtx)),
 	'$lgt_extends_category_'(Ctg, ExtCtg, _).
 
 
@@ -1598,9 +1610,10 @@ extends_category(Ctg, ExtCtg) :-
 % extends_category(?category_identifier, ?category_identifier, ?atom)
 
 extends_category(Ctg, ExtCtg, Scope) :-
-	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
-	'$lgt_check'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(extends_category(Ctg, ExtCtg, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(extends_category(Ctg, ExtCtg, Scope), ExCtx)),
+	'$lgt_check'(var_or_category_identifier, ExtCtg, logtalk(extends_category(Ctg, ExtCtg, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(extends_category(Ctg, ExtCtg, Scope), ExCtx)),
 	'$lgt_extends_category_'(Ctg, ExtCtg, Scope).
 
 
@@ -1608,8 +1621,9 @@ extends_category(Ctg, ExtCtg, Scope) :-
 % extends_protocol(?protocol_identifier, ?protocol_identifier)
 
 extends_protocol(Ptc, ExtPtc) :-
-	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc), _)),
-	'$lgt_check'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc), ExCtx)),
+	'$lgt_check'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc), ExCtx)),
 	'$lgt_extends_protocol_'(Ptc, ExtPtc, _).
 
 
@@ -1617,9 +1631,10 @@ extends_protocol(Ptc, ExtPtc) :-
 % extends_protocol(?protocol_identifier, ?protocol_identifier, ?atom)
 
 extends_protocol(Ptc, ExtPtc, Scope) :-
-	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
-	'$lgt_check'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(extends_protocol(Ptc, ExtPtc, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), ExCtx)),
+	'$lgt_check'(var_or_protocol_identifier, ExtPtc, logtalk(extends_protocol(Ptc, ExtPtc, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(extends_protocol(Ptc, ExtPtc, Scope), ExCtx)),
 	'$lgt_extends_protocol_'(Ptc, ExtPtc, Scope).
 
 
@@ -1627,8 +1642,9 @@ extends_protocol(Ptc, ExtPtc, Scope) :-
 % extends_object(?object_identifier, ?object_identifier)
 
 extends_object(Prototype, Parent) :-
-	'$lgt_check'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent), _)),
-	'$lgt_check'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent), ExCtx)),
 	'$lgt_extends_object_'(Prototype, Parent, _).
 
 
@@ -1636,9 +1652,10 @@ extends_object(Prototype, Parent) :-
 % extends_object(?object_identifier, ?object_identifier, ?atom)
 
 extends_object(Prototype, Parent, Scope) :-
-	'$lgt_check'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent, Scope), _)),
-	'$lgt_check'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(extends_object(Prototype, Parent, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Prototype, logtalk(extends_object(Prototype, Parent, Scope), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Parent, logtalk(extends_object(Prototype, Parent, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(extends_object(Prototype, Parent, Scope), ExCtx)),
 	'$lgt_extends_object_'(Prototype, Parent, Scope).
 
 
@@ -1646,8 +1663,9 @@ extends_object(Prototype, Parent, Scope) :-
 % complements_object(?category_identifier, ?object_identifier)
 
 complements_object(Category, Object) :-
-	'$lgt_check'(var_or_category_identifier, Category, logtalk(complements_object(Category, Object), _)),
-	'$lgt_check'(var_or_object_identifier, Object, logtalk(complements_object(Category, Object), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_category_identifier, Category, logtalk(complements_object(Category, Object), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Object, logtalk(complements_object(Category, Object), ExCtx)),
 	'$lgt_complemented_object_'(Object, Category, _, _, _).
 
 
@@ -1656,8 +1674,9 @@ complements_object(Category, Object) :-
 % conforms_to_protocol(?category_identifier, ?protocol_identifier)
 
 conforms_to_protocol(ObjOrCtg, Protocol) :-
-	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
-	'$lgt_check'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), ExCtx)),
+	'$lgt_check'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), ExCtx)),
 	(	var(ObjOrCtg) ->
 		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _)
 	;	var(Protocol) ->
@@ -1673,9 +1692,10 @@ conforms_to_protocol(ObjOrCtg, Protocol) :-
 % conforms_to_protocol(?category_identifier, ?protocol_identifier, ?atom)
 
 conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
-	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
-	'$lgt_check'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
-	'$lgt_check'(var_or_scope, Scope, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), ExCtx)),
+	'$lgt_check'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), ExCtx)),
+	'$lgt_check'(var_or_scope, Scope, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), ExCtx)),
 	(	var(ObjOrCtg) ->
 		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, Scope)
 	;	var(Protocol) ->
