@@ -27,8 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: Compile calls to the current entity and entity relations built-in
-predicates for improved performance by doing compile time type-checking.
+* IMPROVED: Compile calls to the current entity, entity relations, and events
+built-in predicates for improved performance by performing compile time type-
+checking.
 
 Tests
 -----

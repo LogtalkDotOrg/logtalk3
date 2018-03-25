@@ -22,26 +22,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/19,
+		date is 2018/03/24,
 		comment is 'Unit tests for the current_event/5 built-in predicate.'
 	]).
 
 	throws(current_event_5_01, error(type_error(event, foo), logtalk(current_event(foo,_,_,_,_), _))) :-
-		current_event(foo, _, _, _, _).
+		{current_event(foo, _, _, _, _)}.
 
 	throws(current_event_5_02, error(type_error(object_identifier, 1), logtalk(current_event(_,1,_,_,_), _))) :-
-		current_event(_, 1, _, _, _).
+		{current_event(_, 1, _, _, _)}.
 
 	throws(current_event_5_03, error(type_error(callable, 1), logtalk(current_event(_,_,1,_,_), _))) :-
-		current_event(_, _, 1, _, _).
+		{current_event(_, _, 1, _, _)}.
 
 	throws(current_event_5_04, error(type_error(object_identifier, 1), logtalk(current_event(_,_,_,1,_), _))) :-
-		current_event(_, _, _, 1, _).
+		{current_event(_, _, _, 1, _)}.
 
 	throws(current_event_5_05, error(type_error(object_identifier, 1), logtalk(current_event(_,_,_,_,1), _))) :-
-		current_event(_, _, _, _, 1).
+		{current_event(_, _, _, _, 1)}.
 
 	succeeds(current_event_5_06) :-
 		create_object(Monitor, [implements(monitoring)], [], [before(_,_,_)]),

@@ -1786,42 +1786,47 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 % current_event(?event, ?term, ?term, ?term, ?object_identifier)
 
 current_event(Event, Obj, Msg, Sender, Monitor) :-
-	'$lgt_check'(var_or_event, Event, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_callable, Msg, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Sender, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
-	(	var(Event) ->
-		(	'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _), Event = before
-		;	'$lgt_after_event_'(Obj, Msg, Sender, Monitor, _), Event = after
-		)
-	;	Event == before ->
-		'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)
-	;	% Event == after
-		'$lgt_after_event_'(Obj, Msg, Sender, Monitor, _)
-	).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_event, Event, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_callable, Msg, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Sender, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_current_event'(Event, Obj, Msg, Sender, Monitor).
+
+
+'$lgt_current_event'(before, Obj, Msg, Sender, Monitor) :-
+	'$lgt_before_event_'(Obj, Msg, Sender, Monitor, _).
+
+'$lgt_current_event'(after, Obj, Msg, Sender, Monitor) :-
+	'$lgt_after_event_'(Obj, Msg, Sender, Monitor, _).
 
 
 
 % define_events(@term, @term, @term, @term, +object_identifier)
 
 define_events(Event, Obj, Msg, Sender, Monitor) :-
-	'$lgt_check'(var_or_event, Event, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_callable, Msg, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Sender, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(object_identifier, Monitor, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_event, Event, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_callable, Msg, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Sender, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_define_events'(Event, Obj, Msg, Sender, Monitor, ExCtx).
+
+
+'$lgt_define_events'(Event, Obj, Msg, Sender, Monitor, ExCtx) :-
+	'$lgt_check'(object_identifier, Monitor, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
 	(	'$lgt_current_object_'(Monitor, _, _, Def, _, _, _, _, _, _, _) ->
-		'$lgt_execution_context'(ExCtx, _, Monitor, Monitor, Monitor, [], []),
+		'$lgt_execution_context'(MonitorExCtx, _, Monitor, Monitor, Monitor, [], []),
 		(	var(Event) ->
-			'$lgt_define_events'(before, Obj, Msg, Sender, Monitor, Def, ExCtx),
-			'$lgt_define_events'(after, Obj, Msg, Sender, Monitor, Def, ExCtx)
+			'$lgt_define_events'(before, Obj, Msg, Sender, Monitor, Def, MonitorExCtx),
+			'$lgt_define_events'(after, Obj, Msg, Sender, Monitor, Def, MonitorExCtx)
 		;	Event == before ->
-			'$lgt_define_events'(before, Obj, Msg, Sender, Monitor, Def, ExCtx)
+			'$lgt_define_events'(before, Obj, Msg, Sender, Monitor, Def, MonitorExCtx)
 		;	% Event == after
-			'$lgt_define_events'(after, Obj, Msg, Sender, Monitor, Def, ExCtx)
+			'$lgt_define_events'(after, Obj, Msg, Sender, Monitor, Def, MonitorExCtx)
 		)
-	;	throw(error(existence_error(object, Monitor), logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)))
+	;	throw(error(existence_error(object, Monitor), logtalk(define_events(Event, Obj, Msg, Sender, Monitor), ExCtx)))
 	).
 
 
@@ -1829,14 +1834,14 @@ define_events(Event, Obj, Msg, Sender, Monitor) :-
 	(	call(Def, before(Obj, Msg, Sender), ExCtx, Call, _, _) ->
 		retractall('$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)),
 		assertz('$lgt_before_event_'(Obj, Msg, Sender, Monitor, Call))
-	;	throw(error(existence_error(procedure, before/3), logtalk(define_events(before, Obj, Msg, Sender, Monitor), _)))
+	;	throw(error(existence_error(procedure, before/3), logtalk(define_events(before, Obj, Msg, Sender, Monitor), ExCtx)))
 	).
 
 '$lgt_define_events'(after, Obj, Msg, Sender, Monitor, Def, ExCtx) :-
 	(	call(Def, after(Obj, Msg, Sender), ExCtx, Call, _, _) ->
 		retractall('$lgt_after_event_'(Obj, Msg, Sender, Monitor, _)),
 		assertz('$lgt_after_event_'(Obj, Msg, Sender, Monitor, Call))
-	;	throw(error(existence_error(procedure, after/3), logtalk(define_events(after, Obj, Msg, Sender, Monitor), _)))
+	;	throw(error(existence_error(procedure, after/3), logtalk(define_events(after, Obj, Msg, Sender, Monitor), ExCtx)))
 	).
 
 
@@ -1844,11 +1849,16 @@ define_events(Event, Obj, Msg, Sender, Monitor) :-
 % abolish_events(@term, @term, @term, @term, @term)
 
 abolish_events(Event, Obj, Msg, Sender, Monitor) :-
-	'$lgt_check'(var_or_event, Event, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_callable, Msg, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Sender, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
-	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_event, Event, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_callable, Msg, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Sender, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_check'(var_or_object_identifier, Monitor, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), ExCtx)),
+	'$lgt_abolish_events'(Event, Obj, Msg, Sender, Monitor).
+
+
+'$lgt_abolish_events'(Event, Obj, Msg, Sender, Monitor) :-
 	(	var(Event) ->
 		retractall('$lgt_before_event_'(Obj, Msg, Sender, Monitor, _)),
 		retractall('$lgt_after_event_'(Obj, Msg, Sender, Monitor, _))
@@ -11146,6 +11156,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = ('$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _) -> true)
 	),
 	DPred = '$lgt_debug'(goal(conforms_to_protocol(ObjOrCtg, Protocol), TPred), ExCtx).
+
+% events predicates
+
+'$lgt_compile_body'(current_event(Event, Obj, Msg, Sender, Monitor), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_event, Event),
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_callable, Msg),
+	'$lgt_check'(var_or_object_identifier, Sender),
+	'$lgt_check'(var_or_object_identifier, Monitor),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_current_event'(Event, Obj, Msg, Sender, Monitor),
+	DPred = '$lgt_debug'(goal(current_event(Event, Obj, Msg, Sender, Monitor), TPred), ExCtx).
+
+'$lgt_compile_body'(define_events(Event, Obj, Msg, Sender, Monitor), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_event, Event),
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_callable, Msg),
+	'$lgt_check'(var_or_object_identifier, Sender),
+	'$lgt_check'(var_or_object_identifier, Monitor),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_define_events'(Event, Obj, Msg, Sender, Monitor, ExCtx),
+	DPred = '$lgt_debug'(goal(define_events(Event, Obj, Msg, Sender, Monitor), TPred), ExCtx).
+
+'$lgt_compile_body'(abolish_events(Event, Obj, Msg, Sender, Monitor), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_event, Event),
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_callable, Msg),
+	'$lgt_check'(var_or_object_identifier, Sender),
+	'$lgt_check'(var_or_object_identifier, Monitor),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_abolish_events'(Event, Obj, Msg, Sender, Monitor),
+	DPred = '$lgt_debug'(goal(abolish_events(Event, Obj, Msg, Sender, Monitor), TPred), ExCtx).
 
 % multi-threading meta-predicates
 
