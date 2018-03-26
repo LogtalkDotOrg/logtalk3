@@ -1416,7 +1416,12 @@ create_protocol(Ptc, Relations, Directives) :-
 % abolish_object(+object_identifier)
 
 abolish_object(Obj) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(abolish_object(Obj), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(object_identifier, Obj, logtalk(abolish_object(Obj), ExCtx)),
+	'$lgt_abolish_object'(Obj, ExCtx).
+
+
+'$lgt_abolish_object'(Obj, ExCtx) :-
 	(	'$lgt_current_object_'(Obj, _, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags) ->
 		(	Flags /\ 2 =:= 2 ->
 			% dynamic object
@@ -1445,9 +1450,9 @@ abolish_object(Obj) :-
 				'$lgt_threaded_engine_destroy'(Engine, Obj)
 			),
 			'$lgt_clean_lookup_caches'
-		;	throw(error(permission_error(modify, static_object, Obj), logtalk(abolish_object(Obj), _)))
+		;	throw(error(permission_error(modify, static_object, Obj), logtalk(abolish_object(Obj), ExCtx)))
 		)
-	;	throw(error(existence_error(object, Obj), logtalk(abolish_object(Obj), _)))
+	;	throw(error(existence_error(object, Obj), logtalk(abolish_object(Obj), ExCtx)))
 	).
 
 
@@ -1455,7 +1460,12 @@ abolish_object(Obj) :-
 % abolish_category(+category_identifier)
 
 abolish_category(Ctg) :-
-	'$lgt_check'(category_identifier, Ctg, logtalk(abolish_category(Ctg), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(category_identifier, Ctg, logtalk(abolish_category(Ctg), ExCtx)),
+	'$lgt_abolish_category'(Ctg, ExCtx).
+
+
+'$lgt_abolish_category'(Ctg, ExCtx) :-
 	(	'$lgt_current_category_'(Ctg, _, Dcl, Def, Rnm, Flags) ->
 		(	Flags /\ 2 =:= 2 ->
 			% dynamic category
@@ -1472,9 +1482,9 @@ abolish_category(Ctg) :-
 			retractall('$lgt_implements_protocol_'(Ctg, _, _)),
 			retractall('$lgt_complemented_object_'(_, Ctg, _, _, _)),
 			'$lgt_clean_lookup_caches'
-		;	throw(error(permission_error(modify, static_category, Ctg), logtalk(abolish_category(Ctg), _)))
+		;	throw(error(permission_error(modify, static_category, Ctg), logtalk(abolish_category(Ctg), ExCtx)))
 		)
-	;	throw(error(existence_error(category, Ctg), logtalk(abolish_category(Ctg), _)))
+	;	throw(error(existence_error(category, Ctg), logtalk(abolish_category(Ctg), ExCtx)))
 	).
 
 
@@ -1482,7 +1492,12 @@ abolish_category(Ctg) :-
 % abolish_protocol(@protocol_identifier)
 
 abolish_protocol(Ptc) :-
-	'$lgt_check'(protocol_identifier, Ptc, logtalk(abolish_protocol(Ptc), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(protocol_identifier, Ptc, logtalk(abolish_protocol(Ptc), ExCtx)),
+	'$lgt_abolish_protocol'(Ptc, ExCtx).
+
+
+'$lgt_abolish_protocol'(Ptc, ExCtx) :-
 	(	'$lgt_current_protocol_'(Ptc, _, Dcl, Rnm, Flags) ->
 		(	Flags /\ 2 =:= 2 ->
 			% dynamic protocol
@@ -1494,9 +1509,9 @@ abolish_protocol(Ptc) :-
 			retractall('$lgt_predicate_property_'(Ptc, _, _)),
 			retractall('$lgt_extends_protocol_'(Ptc, _, _)),
 			'$lgt_clean_lookup_caches'
-		;	throw(error(permission_error(modify, static_protocol, Ptc), logtalk(abolish_protocol(Ptc), _)))
+		;	throw(error(permission_error(modify, static_protocol, Ptc), logtalk(abolish_protocol(Ptc), ExCtx)))
 		)
-	;	throw(error(existence_error(protocol, Ptc), logtalk(abolish_protocol(Ptc), _)))
+	;	throw(error(existence_error(protocol, Ptc), logtalk(abolish_protocol(Ptc), ExCtx)))
 	).
 
 
@@ -11022,7 +11037,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), setof(Term, DGoal, List)), ExCtx)
 	).
 
-% entity enumeration and entity relations predicates
+% entity enumeration predicates
 
 '$lgt_compile_body'(current_object(Obj), TPred, DPred, Ctx) :-
 	'$lgt_check'(var_or_object_identifier, Obj),
@@ -11042,6 +11057,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TPred = '$lgt_current_category_'(Ctg, _, _, _, _, _),
 	DPred = '$lgt_debug'(goal(current_category(Ctg), TPred), ExCtx).
 
+% dynamic entity abolishing predicates
+
+'$lgt_compile_body'(abolish_object(Obj), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_abolish_object'(Obj, ExCtx),
+	DPred = '$lgt_debug'(goal(abolish_object(Obj), TPred), ExCtx).
+
+'$lgt_compile_body'(abolish_protocol(Ptc), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_protocol_identifier, Obj),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_abolish_protocol'(Ptc, ExCtx),
+	DPred = '$lgt_debug'(goal(abolish_protocol(Ptc), TPred), ExCtx).
+
+'$lgt_compile_body'(abolish_category(Ctg), TPred, DPred, Ctx) :-
+	'$lgt_check'(var_or_category_identifier, Obj),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_abolish_category'(Ctg, ExCtx),
+	DPred = '$lgt_debug'(goal(abolish_category(Ctg), TPred), ExCtx).
+
+% entity relations predicates
 
 '$lgt_compile_body'(extends_protocol(Ptc, ExtPtc), TPred, DPred, Ctx) :-
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
