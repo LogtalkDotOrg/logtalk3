@@ -1239,6 +1239,11 @@ protocol_property(Ptc, Prop) :-
 % create_object(?object_identifier, +list, +list, +list)
 
 create_object(Obj, Relations, Directives, Clauses) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx).
+
+
+'$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx) :-
 	nonvar(Obj),
 	(	\+ callable(Obj),
 		throw(error(type_error(object_identifier, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
@@ -1252,18 +1257,18 @@ create_object(Obj, Relations, Directives, Clauses) :-
 		throw(error(permission_error(create, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
 	).
 
-create_object(Obj, Relations, Directives, Clauses) :-
+'$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx) :-
 	'$lgt_check'(list, Relations, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
 	'$lgt_check'(list, Directives, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
 	'$lgt_check'(list, Clauses, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
 	catch(
-		'$lgt_create_object'(Obj, Relations, Directives, Clauses),
+		'$lgt_create_object_checked'(Obj, Relations, Directives, Clauses),
 		Error,
 		'$lgt_create_entity_error_handler'(Error, create_object(Obj, Relations, Directives, Clauses))
 	).
 
 
-'$lgt_create_object'(Obj, Relations, Directives, Clauses) :-
+'$lgt_create_object_checked'(Obj, Relations, Directives, Clauses) :-
 	(	var(Obj) ->
 		'$lgt_generate_entity_identifier'(object, Obj)
 	;	true
@@ -1293,6 +1298,11 @@ create_object(Obj, Relations, Directives, Clauses) :-
 % create_category(?category_identifier, +list, +list, +list)
 
 create_category(Ctg, Relations, Directives, Clauses) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx).
+
+
+'$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx) :-
 	nonvar(Ctg),
 	(	\+ callable(Ctg),
 		throw(error(type_error(category_identifier, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), _)))
@@ -1304,18 +1314,18 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 		throw(error(permission_error(modify, protocol, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), _)))
 	).
 
-create_category(Ctg, Relations, Directives, Clauses) :-
+'$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx) :-
 	'$lgt_check'(list, Relations, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
 	'$lgt_check'(list, Directives, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
 	'$lgt_check'(list, Clauses, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
 	catch(
-		'$lgt_create_category'(Ctg, Relations, Directives, Clauses),
+		'$lgt_create_category_checked'(Ctg, Relations, Directives, Clauses),
 		Error,
 		'$lgt_create_entity_error_handler'(Error, create_category(Ctg, Relations, Directives, Clauses))
 	).
 
 
-'$lgt_create_category'(Ctg, Relations, Directives, Clauses) :-
+'$lgt_create_category_checked'(Ctg, Relations, Directives, Clauses) :-
 	(	var(Ctg) ->
 		'$lgt_generate_entity_identifier'(category, Ctg)
 	;	true
@@ -1348,6 +1358,11 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 % create_protocol(?protocol_identifier, +list, +list)
 
 create_protocol(Ptc, Relations, Directives) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx).
+
+
+'$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx) :-
 	nonvar(Ptc),
 	(	\+ atom(Ptc),
 		throw(error(type_error(protocol_identifier, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), _)))
@@ -1359,17 +1374,17 @@ create_protocol(Ptc, Relations, Directives) :-
 		throw(error(permission_error(modify, category, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), _)))
 	).
 
-create_protocol(Ptc, Relations, Directives) :-
+'$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx) :-
 	'$lgt_check'(list, Relations, logtalk(create_protocol(Ptc, Relations, Directives), _)),
 	'$lgt_check'(list, Directives, logtalk(create_protocol(Ptc, Relations, Directives), _)),
 	catch(
-		'$lgt_create_protocol'(Ptc, Relations, Directives),
+		'$lgt_create_protocol_checked'(Ptc, Relations, Directives),
 		Error,
 		'$lgt_create_entity_error_handler'(Error, create_protocol(Ptc, Relations, Directives))
 	).
 
 
-'$lgt_create_protocol'(Ptc, Relations, Directives) :-
+'$lgt_create_protocol_checked'(Ptc, Relations, Directives) :-
 	(	var(Ptc) ->
 		'$lgt_generate_entity_identifier'(protocol, Ptc)
 	;	true
@@ -11202,6 +11217,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_category_property'(Ctg, Prop, ExCtx),
 	DPred = '$lgt_debug'(goal(category_property(Ctg, Prop), TPred), ExCtx).
+
+% dynamic entity creation predicates
+
+'$lgt_compile_body'(create_object(Obj, Relations, Directives, Clauses), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_object_property, Prop),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx),
+	DPred = '$lgt_debug'(goal(create_object(Obj, Relations, Directives, Clauses), TPred), ExCtx).
+
+'$lgt_compile_body'(create_protocol(Ptc, Relations, Directives), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_check'(var_or_protocol_property, Prop),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx),
+	DPred = '$lgt_debug'(goal(create_protocol(Ptc, Relations, Directives), TPred), ExCtx).
+
+'$lgt_compile_body'(create_category(Ctg, Relations, Directives, Clauses), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_check'(var_or_category_property, Prop),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx),
+	DPred = '$lgt_debug'(goal(create_category(Ctg, Relations, Directives, Clauses), TPred), ExCtx).
 
 % dynamic entity abolishing predicates
 

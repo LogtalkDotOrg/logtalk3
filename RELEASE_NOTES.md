@@ -31,9 +31,9 @@ Logtalk compiler and runtime
 `logtalk(Call, Entity)` to use the new `logtalk(Call, ExecutionContext)`
 format.
 
-* IMPROVED: Compile calls to the current entity, entity relations, abolishing
-entity, and events built-in predicates to perform compile time type-checking
-and to return the actual execution context in case of runtime error.
+* CHANGED: Compile calls to the built-in predicates to perform compile time
+type-checking and to return the actual execution context in case of runtime
+error.
 
 Tests
 -----
