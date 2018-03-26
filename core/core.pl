@@ -698,6 +698,10 @@ Obj<<Goal :-
 
 current_object(Obj) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_current_object'(Obj, ExCtx).
+
+
+'$lgt_current_object'(Obj, ExCtx) :-
 	'$lgt_check'(var_or_object_identifier, Obj, logtalk(current_object(Obj), ExCtx)),
 	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _).
 
@@ -707,6 +711,10 @@ current_object(Obj) :-
 
 current_protocol(Ptc) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_current_protocol'(Ptc, ExCtx).
+
+
+'$lgt_current_protocol'(Ptc, ExCtx) :-
 	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(current_protocol(Ptc), ExCtx)),
 	'$lgt_current_protocol_'(Ptc, _, _, _, _).
 
@@ -716,6 +724,10 @@ current_protocol(Ptc) :-
 
 current_category(Ctg) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_current_category'(Ctg, ExCtx).
+
+
+'$lgt_current_category'(Ctg, ExCtx) :-
 	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(current_category(Ctg), ExCtx)),
 	'$lgt_current_category_'(Ctg, _, _, _, _, _).
 
@@ -11054,19 +11066,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(current_object(Obj), TPred, DPred, Ctx) :-
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	TPred = '$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
+	(	var(Obj) ->
+		TPred = '$lgt_current_object'(Obj, ExCtx)
+	;	TPred = '$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)
+	),
 	DPred = '$lgt_debug'(goal(current_object(Obj), TPred), ExCtx).
 
 '$lgt_compile_body'(current_protocol(Ptc), TPred, DPred, Ctx) :-
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	TPred = '$lgt_current_protocol_'(Ptc, _, _, _, _),
+	(	var(Ptc) ->
+		TPred = '$lgt_current_protocol'(Ptc, ExCtx)
+	;	TPred = '$lgt_current_protocol_'(Ptc, _, _, _, _)
+	),
 	DPred = '$lgt_debug'(goal(current_protocol(Ptc), TPred), ExCtx).
 
 '$lgt_compile_body'(current_category(Ctg), TPred, DPred, Ctx) :-
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	TPred = '$lgt_current_category_'(Ctg, _, _, _, _, _),
+	(	var(Ctg) ->
+		TPred = '$lgt_current_category'(Ctg, ExCtx)
+	;	TPred = '$lgt_current_category_'(Ctg, _, _, _, _, _)
+	),
 	DPred = '$lgt_debug'(goal(current_category(Ctg), TPred), ExCtx).
 
 % dynamic entity abolishing predicates
