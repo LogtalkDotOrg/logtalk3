@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/10/07,
+		date is 2018/03/26,
 		comment is 'Unit tests for the "complements/allow" example.'
 	]).
 
@@ -45,10 +45,12 @@
 		Scope == (public).
 
 	test(complements_allow_4) :-
+		^^suppress_text_output,
 		employee::name(Name),
 		Name == john.
 
 	test(complements_allow_5) :-
+		^^suppress_text_output,
 		employee::predicates(Predicates),
 		list::msort(Predicates, PredicatesSorted),
 		PredicatesSorted = [after/3, age/1, before/3, income/1, name/1, predicates/1, salary/1].
@@ -66,6 +68,7 @@
 		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
 	test(complements_allow_8) :-
+		^^suppress_text_output,
 		employee::salary(Salary),
 		Salary == 42000.
 

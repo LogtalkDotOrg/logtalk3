@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2014/10/08,
+		date is 2018/03/26,
 		comment is 'Unit tests for the "complements/restrict" example.'
 	]).
 
@@ -46,9 +46,11 @@
 		Scope == (public).
 
 	test(complements_restrict_4) :-
+		^^suppress_text_output,
 		my_vault::open('!"#$%&/()=').
 
 	test(complements_restrict_5) :-
+		^^suppress_text_output,
 		\+ my_vault::open('1234567890').
 
 :- end_object.
