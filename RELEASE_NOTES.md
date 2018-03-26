@@ -34,7 +34,7 @@ checking.
 Tests
 -----
 
-* CHANGED: Refactoring of the built-in entity tests.
+* CHANGED: Refactoring of the built-in entity and event tests.
 
 
 3.15.0 - March 21, 2018

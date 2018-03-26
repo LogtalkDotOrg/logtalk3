@@ -24,28 +24,34 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/26,
 		comment is 'Unit tests for the implements_protocol/2-3 built-in predicates.'
 	]).
 
 	throws(implements_protocol_2_1, error(type_error(object_identifier, 1), logtalk(implements_protocol(1, _), _))) :-
+		% delay the error to runtime
 		{implements_protocol(1, _)}.
 
 	throws(implements_protocol_2_2, error(type_error(protocol_identifier, 1), logtalk(implements_protocol(_, 1), _))) :-
+		% delay the error to runtime
 		{implements_protocol(_, 1)}.
 
 	% implements_protocol/3 tests
 
 	throws(implements_protocol_3_1, error(type_error(object_identifier, 1), logtalk(implements_protocol(1, _, _), _))) :-
+		% delay the error to runtime
 		{implements_protocol(1, _, _)}.
 
 	throws(implements_protocol_3_2, error(type_error(protocol_identifier, 1), logtalk(implements_protocol(_, 1, _), _))) :-
+		% delay the error to runtime
 		{implements_protocol(_, 1, _)}.
 
 	throws(implements_protocol_3_3, error(type_error(atom, 1), logtalk(implements_protocol(_, _, 1), _))) :-
+		% delay the error to runtime
 		{implements_protocol(_, _, 1)}.
 
 	throws(implements_protocol_3_4, error(domain_error(scope, a), logtalk(implements_protocol(_, _, a), _))) :-
+		% delay the error to runtime
 		{implements_protocol(_, _, a)}.
 
 :- end_object.

@@ -24,30 +24,36 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/26,
 		comment is 'Unit tests for the extends_protocol/2-3 built-in predicates.'
 	]).
 
 	% extends_protocol/2 tests
 
 	throws(extends_protocol_2_1, error(type_error(protocol_identifier, 1), logtalk(extends_protocol(1, _), _))) :-
+		% delay the error to runtime
 		{extends_protocol(1, _)}.
 
 	throws(extends_protocol_2_2, error(type_error(protocol_identifier, 1), logtalk(extends_protocol(_, 1), _))) :-
+		% delay the error to runtime
 		{extends_protocol(_, 1)}.
 
 	% extends_protocol/3 tests
 
 	throws(extends_protocol_3_1, error(type_error(protocol_identifier, 1), logtalk(extends_protocol(1, _, _), _))) :-
+		% delay the error to runtime
 		{extends_protocol(1, _, _)}.
 
 	throws(extends_protocol_3_2, error(type_error(protocol_identifier, 1), logtalk(extends_protocol(_, 1, _), _))) :-
+		% delay the error to runtime
 		{extends_protocol(_, 1, _)}.
 
 	throws(extends_protocol_3_3, error(type_error(atom, 1), logtalk(extends_protocol(_, _, 1), _))) :-
+		% delay the error to runtime
 		{extends_protocol(_, _, 1)}.
 
 	throws(extends_protocol_3_4, error(domain_error(scope, a), logtalk(extends_protocol(_, _, a), _))) :-
+		% delay the error to runtime
 		{extends_protocol(_, _, a)}.
 
 :- end_object.

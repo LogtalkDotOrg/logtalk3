@@ -24,17 +24,20 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/26,
 		comment is 'Unit tests for the current_object/1 built-in predicate.'
 	]).
 
 	throws(current_object_1_1, error(type_error(object_identifier, 1), logtalk(current_object(1), _))) :-
+		% delay the error to runtime
 		{current_object(1)}.
 
 	succeeds(current_object_1_2) :-
+		% delay the error to runtime
 		{current_object(logtalk)}.
 
 	fails(current_object_1_3) :-
+		% delay the error to runtime
 		{current_object(non_exisiting_object)}.
 
 :- end_object.

@@ -24,23 +24,28 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/26,
 		comment is 'Unit tests for the abolish_events/5 built-in predicate.'
 	]).
 
 	throws(abolish_events_5_1, error(type_error(event, foo), logtalk(abolish_events(foo,_,_,_,_), _))) :-
+		% delay the error to runtime
 		{abolish_events(foo, _, _, _, _)}.
 
 	throws(abolish_events_5_2, error(type_error(object_identifier, 1), logtalk(abolish_events(_,1,_,_,_), _))) :-
+		% delay the error to runtime
 		{abolish_events(_, 1, _, _, _)}.
 
 	throws(abolish_events_5_3, error(type_error(callable, 1), logtalk(abolish_events(_,_,1,_,_), _))) :-
+		% delay the error to runtime
 		{abolish_events(_, _, 1, _, _)}.
 
 	throws(abolish_events_5_4, error(type_error(object_identifier, 1), logtalk(abolish_events(_,_,_,1,_), _))) :-
+		% delay the error to runtime
 		{abolish_events(_, _, _, 1, _)}.
 
 	throws(abolish_events_5_5, error(type_error(object_identifier, 1), logtalk(abolish_events(_,_,_,_,1), _))) :-
+		% delay the error to runtime
 		{abolish_events(_, _, _, _, 1)}.
 
 	succeeds(abolish_events_5_6) :-
