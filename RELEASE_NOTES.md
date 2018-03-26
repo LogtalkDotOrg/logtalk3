@@ -32,8 +32,8 @@ Logtalk compiler and runtime
 format.
 
 * IMPROVED: Compile calls to the current entity, entity relations, abolishing
-entity, and events built-in predicates for improved performance by performing
-compile time type-checking.
+entity, and events built-in predicates to perform compile time type-checking
+and to return the actual execution context in case of runtime error.
 
 Tests
 -----
