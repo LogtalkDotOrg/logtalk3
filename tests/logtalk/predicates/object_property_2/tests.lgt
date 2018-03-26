@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2017/01/06,
+		date is 2018/03/27,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -33,13 +33,16 @@
 	]).
 
 	throws(object_property_2_01, error(type_error(object_identifier, 1), logtalk(object_property(1, static), _))) :-
-		object_property(1, static).
+		% delay the error to runtime
+		{object_property(1, static)}.
 
 	throws(object_property_2_02, error(type_error(callable, 1), logtalk(object_property(logtalk, 1), _))) :-
-		object_property(logtalk, 1).
+		% delay the error to runtime
+		{object_property(logtalk, 1)}.
 
 	throws(object_property_2_03, error(domain_error(object_property, foo), logtalk(object_property(logtalk, foo), _))) :-
-		object_property(logtalk, foo).
+		% delay the error to runtime
+		{object_property(logtalk, foo)}.
 
 	fails(object_property_2_04) :-
 		object_property(non_exisiting_object, _).

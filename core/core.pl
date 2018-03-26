@@ -740,6 +740,10 @@ current_category(Ctg) :-
 
 object_property(Obj, Prop) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_object_property'(Obj, Prop, ExCtx).
+
+
+'$lgt_object_property'(Obj, Prop, ExCtx) :-
 	'$lgt_check'(var_or_object_identifier, Obj, logtalk(object_property(Obj, Prop), ExCtx)),
 	'$lgt_check'(var_or_object_property, Prop, logtalk(object_property(Obj, Prop), ExCtx)),
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, DDcl, DDef, Rnm, Flags),
@@ -869,6 +873,10 @@ object_property(Obj, Prop) :-
 
 category_property(Ctg, Prop) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_category_property'(Ctg, Prop, ExCtx).
+
+
+'$lgt_category_property'(Ctg, Prop, ExCtx) :-
 	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(category_property(Ctg, Prop), ExCtx)),
 	'$lgt_check'(var_or_category_property, Prop, logtalk(category_property(Ctg, Prop), ExCtx)),
 	'$lgt_current_category_'(Ctg, _, Dcl, Def, Rnm, Flags),
@@ -973,6 +981,10 @@ category_property(Ctg, Prop) :-
 
 protocol_property(Ptc, Prop) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_protocol_property'(Ptc, Prop, ExCtx).
+
+
+'$lgt_protocol_property'(Ptc, Prop, ExCtx) :-
 	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(protocol_property(Ptc, Prop), ExCtx)),
 	'$lgt_check'(var_or_protocol_property, Prop, logtalk(protocol_property(Ptc, Prop), ExCtx)),
 	'$lgt_current_protocol_'(Ptc, _, Dcl, Rnm, Flags),
@@ -11136,6 +11148,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % entity enumeration predicates
 
 '$lgt_compile_body'(current_object(Obj), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Obj) ->
@@ -11145,6 +11158,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(current_object(Obj), TPred), ExCtx).
 
 '$lgt_compile_body'(current_protocol(Ptc), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Ptc) ->
@@ -11154,6 +11168,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(current_protocol(Ptc), TPred), ExCtx).
 
 '$lgt_compile_body'(current_category(Ctg), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Ctg) ->
@@ -11162,9 +11177,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	DPred = '$lgt_debug'(goal(current_category(Ctg), TPred), ExCtx).
 
+% entity property predicates
+
+'$lgt_compile_body'(object_property(Obj, Prop), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(var_or_object_identifier, Obj),
+	'$lgt_check'(var_or_object_property, Prop),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_object_property'(Obj, Prop, ExCtx),
+	DPred = '$lgt_debug'(goal(object_property(Obj, Prop), TPred), ExCtx).
+
+'$lgt_compile_body'(protocol_property(Ptc, Prop), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(var_or_protocol_identifier, Ptc),
+	'$lgt_check'(var_or_protocol_property, Prop),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_protocol_property'(Ptc, Prop, ExCtx),
+	DPred = '$lgt_debug'(goal(protocol_property(Ptc, Prop), TPred), ExCtx).
+
+'$lgt_compile_body'(category_property(Ctg, Prop), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(var_or_category_identifier, Ctg),
+	'$lgt_check'(var_or_category_property, Prop),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_category_property'(Ctg, Prop, ExCtx),
+	DPred = '$lgt_debug'(goal(category_property(Ctg, Prop), TPred), ExCtx).
+
 % dynamic entity abolishing predicates
 
 '$lgt_compile_body'(abolish_object(Obj), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Obj) ->
@@ -11174,6 +11216,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(abolish_object(Obj), TPred), ExCtx).
 
 '$lgt_compile_body'(abolish_protocol(Ptc), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Ptc) ->
@@ -11183,6 +11226,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(abolish_protocol(Ptc), TPred), ExCtx).
 
 '$lgt_compile_body'(abolish_category(Ctg), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	var(Ctg) ->
@@ -11194,6 +11238,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % entity relations predicates
 
 '$lgt_compile_body'(extends_protocol(Ptc, ExtPtc), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_check'(var_or_protocol_identifier, ExtPtc),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11201,6 +11246,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(extends_protocol(Ptc, ExtPtc), TPred), ExCtx).
 
 '$lgt_compile_body'(extends_protocol(Ptc, ExtPtc, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_check'(var_or_protocol_identifier, ExtPtc),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11210,6 +11256,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(implements_protocol(ObjOrCtg, Ptc), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11217,6 +11264,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(implements_protocol(ObjOrCtg, Ptc), TPred), ExCtx).
 
 '$lgt_compile_body'(implements_protocol(ObjOrCtg, Ptc, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11226,6 +11274,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(imports_category(Obj, Ctg), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11233,6 +11282,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(imports_category(Obj, Ctg), TPred), ExCtx).
 
 '$lgt_compile_body'(imports_category(Obj, Ctg, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11242,6 +11292,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(instantiates_class(Obj, Class), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_object_identifier, Class),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11249,6 +11300,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(instantiates_class(Obj, Class), TPred), ExCtx).
 
 '$lgt_compile_body'(instantiates_class(Obj, Class, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_object_identifier, Class),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11258,6 +11310,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(specializes_class(Class, Superclass), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Class),
 	'$lgt_check'(var_or_object_identifier, Superclass),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11265,6 +11318,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(specializes_class(Class, Superclass), TPred), ExCtx).
 
 '$lgt_compile_body'(specializes_class(Class, Superclass, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Class),
 	'$lgt_check'(var_or_object_identifier, Superclass),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11274,6 +11328,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(extends_category(Ctg, ExtCtg), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_check'(var_or_category_identifier, ExtCtg),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11281,6 +11336,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(extends_category(Ctg, ExtCtg), TPred), ExCtx).
 
 '$lgt_compile_body'(extends_category(Ctg, ExtCtg, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_category_identifier, Ctg),
 	'$lgt_check'(var_or_category_identifier, ExtCtg),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11290,6 +11346,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(extends_object(Prototype, Parent), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Prototype),
 	'$lgt_check'(var_or_object_identifier, Parent),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11297,6 +11354,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(extends_object(Prototype, Parent), TPred), ExCtx).
 
 '$lgt_compile_body'(extends_object(Prototype, Parent, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, Prototype),
 	'$lgt_check'(var_or_object_identifier, Parent),
 	'$lgt_check'(var_or_scope, Scope),
@@ -11306,6 +11364,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(complements_object(Category, Object), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_category_identifier, Category),
 	'$lgt_check'(var_or_object_identifier, Object),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11314,6 +11373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_body'(conforms_to_protocol(ObjOrCtg, Protocol), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
 	'$lgt_check'(var_or_protocol_identifier, Protocol),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11321,6 +11381,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(conforms_to_protocol(ObjOrCtg, Protocol), TPred), ExCtx).
 
 '$lgt_compile_body'(conforms_to_protocol(ObjOrCtg, Protocol, Scope), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_object_identifier, ObjOrCtg),
 	'$lgt_check'(var_or_protocol_identifier, Protocol),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -11330,6 +11391,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % events predicates
 
 '$lgt_compile_body'(current_event(Event, Obj, Msg, Sender, Monitor), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_event, Event),
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_callable, Msg),
@@ -11340,6 +11402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(current_event(Event, Obj, Msg, Sender, Monitor), TPred), ExCtx).
 
 '$lgt_compile_body'(define_events(Event, Obj, Msg, Sender, Monitor), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_event, Event),
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_callable, Msg),
@@ -11350,6 +11413,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(define_events(Event, Obj, Msg, Sender, Monitor), TPred), ExCtx).
 
 '$lgt_compile_body'(abolish_events(Event, Obj, Msg, Sender, Monitor), TPred, DPred, Ctx) :-
+	!,
 	'$lgt_check'(var_or_event, Event),
 	'$lgt_check'(var_or_object_identifier, Obj),
 	'$lgt_check'(var_or_callable, Msg),

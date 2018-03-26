@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2016/03/20,
+		date is 2018/03/27,
 		comment is 'Unit tests for the protocol_property/2 built-in predicate.'
 	]).
 
@@ -33,13 +33,16 @@
 	]).
 
 	throws(protocol_property_2_01, error(type_error(protocol_identifier, 1), logtalk(protocol_property(1, static), _))) :-
-		protocol_property(1, static).
+		% delay the error to runtime
+		{protocol_property(1, static)}.
 
 	throws(protocol_property_2_02, error(type_error(callable, 1), logtalk(protocol_property(monitoring, 1), _))) :-
-		protocol_property(monitoring, 1).
+		% delay the error to runtime
+		{protocol_property(monitoring, 1)}.
 
 	throws(protocol_property_2_03, error(domain_error(protocol_property, foo), logtalk(protocol_property(monitoring, foo), _))) :-
-		protocol_property(monitoring, foo).
+		% delay the error to runtime
+		{protocol_property(monitoring, foo)}.
 
 	fails(protocol_property_2_04) :-
 		protocol_property(non_exisiting_protocol, _).

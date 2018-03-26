@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2017/01/06,
+		date is 2018/03/27,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -33,13 +33,16 @@
 	]).
 
 	throws(category_property_2_01, error(type_error(category_identifier, 1), logtalk(category_property(1, static), _))) :-
-		category_property(1, static).
+		% delay the error to runtime
+		{category_property(1, static)}.
 
 	throws(category_property_2_02, error(type_error(callable, 1), logtalk(category_property(monitoring, 1), _))) :-
-		category_property(monitoring, 1).
+		% delay the error to runtime
+		{category_property(monitoring, 1)}.
 
 	throws(category_property_2_03, error(domain_error(category_property, foo), logtalk(category_property(monitoring, foo), _))) :-
-		category_property(monitoring, foo).
+		% delay the error to runtime
+		{category_property(monitoring, foo)}.
 
 	fails(category_property_2_04) :-
 		category_property(non_exisiting_category, _).
