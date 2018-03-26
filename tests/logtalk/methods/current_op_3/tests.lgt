@@ -27,36 +27,36 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2016/02/16,
+		date is 2018/03/24,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
-	throws(current_op_3_1, error(type_error(integer,a), logtalk(This::current_op(a,_,_),user))) :-
+	throws(current_op_3_1, error(type_error(integer,a), logtalk(This::current_op(a,_,_),_))) :-
 		this(This),
 		{This::current_op(a, _, _)}.
 
-	throws(current_op_3_2, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),user))) :-
+	throws(current_op_3_2, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),_))) :-
 		this(This),
 		{This::current_op(3000, _, _)}.
 
-	throws(current_op_3_3, error(type_error(atom,1), logtalk(This::current_op(_,1,_),user))) :-
+	throws(current_op_3_3, error(type_error(atom,1), logtalk(This::current_op(_,1,_),_))) :-
 		this(This),
 		{This::current_op(_, 1, _)}.
 
-	throws(current_op_3_4, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),user))) :-
+	throws(current_op_3_4, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),_))) :-
 		this(This),
 		{This::current_op(_, a, _)}.
 
-	throws(current_op_3_5, error(type_error(atom,1), logtalk(This::current_op(_,_,1),user))) :-
+	throws(current_op_3_5, error(type_error(atom,1), logtalk(This::current_op(_,_,1),_))) :-
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	throws(current_op_3_6, error(instantiation_error, logtalk(_::current_op(_,_,_),test_object_1))) :-
+	throws(current_op_3_6, error(instantiation_error, logtalk(_::current_op(_,_,_),_))) :-
 		{test_object_1::ie(_)}.
 
-	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),test_object_1))) :-
+	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),_))) :-
 		{test_object_1::te}.
 
 	succeeds(current_op_3_8) :-

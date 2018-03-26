@@ -74,9 +74,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/03/22,
+		date is 2018/03/26,
 		comment is 'Unit tests for the []/1 built-in control construct.'
 	]).
 
@@ -100,16 +100,19 @@
 		{delegate_message_test_object_2::t(X)},
 		X == user.
 
-	throws(delegate_message_1_06, error(instantiation_error, logtalk(logtalk<<[_], user))) :-
+	throws(delegate_message_1_06, error(instantiation_error, logtalk(logtalk<<[_], _))) :-
+		% delay the error to runtime
 		{logtalk << [_]}.
 
-	throws(delegate_message_1_07, error(type_error(callable, 1), logtalk(logtalk<<[1], user))) :-
+	throws(delegate_message_1_07, error(type_error(callable, 1), logtalk(logtalk<<[1], _))) :-
+		% delay the error to runtime
 		{logtalk << [1]}.
 
-	throws(delegate_message_1_08, error(domain_error(message_sending_goal, foo), logtalk(logtalk<<[foo], user))) :-
+	throws(delegate_message_1_08, error(domain_error(message_sending_goal, foo), logtalk(logtalk<<[foo], _))) :-
+		% delay the error to runtime
 		{logtalk << [foo]}.
 
-	throws(delegate_message_1_09, error(permission_error(access, object, user), logtalk([user::foo], delegate_message_test_object_2))) :-
+	throws(delegate_message_1_09, error(permission_error(access, object, user), logtalk([user::foo], _))) :-
 		{delegate_message_test_object_2::u}.
 
 :- end_object.

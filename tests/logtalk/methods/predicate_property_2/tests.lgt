@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2017/01/05,
+		date is 2018/03/24,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -37,22 +37,22 @@ a(1).
 		succeeds/1, fails/1, throws/2
 	]).
 
-	throws(predicate_property_2_01, error(instantiation_error,logtalk(This::predicate_property(_,_),user))) :-
+	throws(predicate_property_2_01, error(instantiation_error,logtalk(This::predicate_property(_,_),_))) :-
 		this(This),
 		{This::predicate_property(_, _)}.
 
-	throws(predicate_property_2_02, error(type_error(callable, 1),logtalk(This::predicate_property(1, _),user))) :-
+	throws(predicate_property_2_02, error(type_error(callable, 1),logtalk(This::predicate_property(1, _),_))) :-
 		this(This),
 		{This::predicate_property(1, _)}.
 
-	throws(predicate_property_2_03, error(domain_error(predicate_property, bar),logtalk(This::predicate_property(foo, bar),user))) :-
+	throws(predicate_property_2_03, error(domain_error(predicate_property, bar),logtalk(This::predicate_property(foo, bar),_))) :-
 		this(This),
 		{This::predicate_property(foo, bar)}.
 
-	throws(predicate_property_2_04, error(instantiation_error, logtalk(_::predicate_property(foo,_),test_object))) :-
+	throws(predicate_property_2_04, error(instantiation_error, logtalk(_::predicate_property(foo,_),_))) :-
 		{test_object::ie(_)}.
 
-	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(1::predicate_property(foo,_),test_object))) :-
+	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(1::predicate_property(foo,_),_))) :-
 		{test_object::te}.
 
 	% Prolog built-in predicates are interpreted as private predicates
@@ -70,7 +70,7 @@ a(1).
 		this(This),
 		{This::predicate_property(write(_), _)}.
 
-	% test properties of a user-defined predicate
+	% test properties of a _-defined predicate
 
 	succeeds(predicate_property_2_09) :-
 		test_object::predicate_property(ie(_), scope(Scope)),

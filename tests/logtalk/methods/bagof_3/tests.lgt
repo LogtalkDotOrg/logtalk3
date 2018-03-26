@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/09/08,
+		date is 2018/03/24,
 		comment is 'Unit tests for the bagof/3 built-in method.'
 	]).
 
@@ -106,12 +106,10 @@
 	fails(bagof_3_16) :-
 		bagof(_X, fail, _L).
 
-	throws(bagof_3_17, error(instantiation_error,logtalk(call(_),This))) :-
-		this(This),
+	throws(bagof_3_17, error(instantiation_error,logtalk(call(_),_))) :-
 		bagof(_, _, _).
 
-	throws(bagof_3_18, error(type_error(callable,1),logtalk(call(1),This))) :-
-		this(This),
+	throws(bagof_3_18, error(type_error(callable,1),logtalk(call(1),_))) :-
 		Goal = 1,
 		bagof(_, Goal, _).
 

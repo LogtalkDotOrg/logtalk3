@@ -46,9 +46,9 @@ send_to_object_test_object(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/11/07,
+		date is 2018/03/26,
 		comment is 'Unit tests for the (::)/2 built-in control construct.'
 	]).
 
@@ -58,19 +58,19 @@ send_to_object_test_object(2).
 
 	% tests for runtime bound messages
 
-	throws(send_to_object_2_01, error(instantiation_error,logtalk(send_to_object_test_object(_)::_,user))) :-
+	throws(send_to_object_2_01, error(instantiation_error,logtalk(send_to_object_test_object(_)::_,_))) :-
 		send_to_object_test_object(_)::rt(_).
 
-	throws(send_to_object_2_02, error(type_error(callable,1),logtalk(send_to_object_test_object(_)::1,user))) :-
+	throws(send_to_object_2_02, error(type_error(callable,1),logtalk(send_to_object_test_object(_)::1,_))) :-
 		send_to_object_test_object(_)::rt(1).
 
-	throws(send_to_object_2_03, error(permission_error(access,private_predicate,s/4),logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
+	throws(send_to_object_2_03, error(permission_error(access,private_predicate,s/4),logtalk(send_to_object_test_object(_)::s(_,_,_,_),_))) :-
 		send_to_object_test_object(_)::rt(s(_,_,_,_)).
 
-	throws(send_to_object_2_04, error(existence_error(predicate_declaration,t/1),logtalk(send_to_object_test_object(_)::t(_),user))) :-
+	throws(send_to_object_2_04, error(existence_error(predicate_declaration,t/1),logtalk(send_to_object_test_object(_)::t(_),_))) :-
 		send_to_object_test_object(_)::rt(t(_)).
 
-	throws(send_to_object_2_05, error(existence_error(predicate_declaration,atom/1),logtalk(send_to_object_test_object(_)::atom(a),user))) :-
+	throws(send_to_object_2_05, error(existence_error(predicate_declaration,atom/1),logtalk(send_to_object_test_object(_)::atom(a),_))) :-
 		send_to_object_test_object(_)::rt(atom(a)).
 
 	succeeds(send_to_object_2_06) :-
@@ -92,40 +92,52 @@ send_to_object_test_object(2).
 
 	% tests for compile-time bound messages
 
-	throws(send_to_object_2_11, error(instantiation_error, logtalk(_::true,user))) :-
+	throws(send_to_object_2_11, error(instantiation_error, logtalk(_::true,_))) :-
+		% delay the error to runtime
 		{_::true}.
 
-	throws(send_to_object_2_12, error(type_error(object_identifier,1), logtalk(1::true,user))) :-
+	throws(send_to_object_2_12, error(type_error(object_identifier,1), logtalk(1::true,_))) :-
+		% delay the error to runtime
 		{1::true}.
 
-	throws(send_to_object_2_13, error(instantiation_error, logtalk(logtalk::_,user))) :-
+	throws(send_to_object_2_13, error(instantiation_error, logtalk(logtalk::_,_))) :-
+		% delay the error to runtime
 		{logtalk::_}.
 
-	throws(send_to_object_2_14, error(type_error(callable,1), logtalk(logtalk::1,user))) :-
+	throws(send_to_object_2_14, error(type_error(callable,1), logtalk(logtalk::1,_))) :-
+		% delay the error to runtime
 		{logtalk::1}.
 
-	throws(send_to_object_2_15, error(existence_error(object,foo), logtalk(foo::true,user))) :-
+	throws(send_to_object_2_15, error(existence_error(object,foo), logtalk(foo::true,_))) :-
+		% delay the error to runtime
 		{foo::true}.
 
-	throws(send_to_object_2_16, error(existence_error(predicate_declaration,foo/0), logtalk(logtalk::foo,user))) :-
+	throws(send_to_object_2_16, error(existence_error(predicate_declaration,foo/0), logtalk(logtalk::foo,_))) :-
+		% delay the error to runtime
 		{logtalk::foo}.
 
-	throws(send_to_object_2_17, error(existence_error(predicate_declaration,atom/1), logtalk(logtalk::atom(a),user))) :-
+	throws(send_to_object_2_17, error(existence_error(predicate_declaration,atom/1), logtalk(logtalk::atom(a),_))) :-
+		% delay the error to runtime
 		{logtalk::atom(a)}.
 
-	throws(send_to_object_2_18, error(permission_error(access,protected_predicate,r/3), logtalk(send_to_object_test_object(_)::r(_,_,_),user))) :-
+	throws(send_to_object_2_18, error(permission_error(access,protected_predicate,r/3), logtalk(send_to_object_test_object(_)::r(_,_,_),_))) :-
+		% delay the error to runtime
 		{send_to_object_test_object(_)::r(_,_,_)}.
 
-	throws(send_to_object_2_19, error(permission_error(access, private_predicate,s/4), logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
+	throws(send_to_object_2_19, error(permission_error(access, private_predicate,s/4), logtalk(send_to_object_test_object(_)::s(_,_,_,_),_))) :-
+		% delay the error to runtime
 		{send_to_object_test_object(_)::s(_,_,_,_)}.
 
 	throws(send_to_object_2_20, error(instantiation_error, _)) :-
+		% delay the error to runtime
 		{{_}::true}.
 
 	throws(send_to_object_2_21, error(type_error(callable,1), _)) :-
+		% delay the error to runtime
 		{{1}::true}.
 
 	throws(send_to_object_2_22, error(existence_error(procedure,foo/0), _)) :-
+		% delay the error to runtime
 		{{foo}::true}.
 
 	succeeds(send_to_object_2_23) :-

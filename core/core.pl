@@ -491,7 +491,8 @@
 
 Obj::Pred :-
 	var(Obj),
-	throw(error(instantiation_error, logtalk(Obj::Pred, user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
+	throw(error(instantiation_error, logtalk(Obj::Pred, ExCtx))).
 
 {Obj}::Pred :-
 	!,
@@ -500,7 +501,7 @@ Obj::Pred :-
 	catch(
 		'$lgt_compile_message_to_object'(Pred, {Obj}, Call, allow, Ctx),
 		Error,
-		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))
+		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, ExCtx)))
 	),
 	(	nonvar(Obj),
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
@@ -517,7 +518,7 @@ Obj::Pred :-
 	catch(
 		'$lgt_compile_message_to_object'(Pred, Obj, Call, allow, Ctx),
 		Error,
-		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))
+		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, ExCtx)))
 	),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
@@ -533,35 +534,36 @@ Obj::Pred :-
 
 Obj<<Goal :-
 	var(Obj),
-	throw(error(instantiation_error, logtalk(Obj<<Goal, user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
+	throw(error(instantiation_error, logtalk(Obj<<Goal, ExCtx))).
 
 {Obj}<<Goal :-
 	!,
+	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch(
-		'$lgt_compile_context_switch_call'({Obj}, Goal, Call, user),
+		'$lgt_compile_context_switch_call'({Obj}, Goal, Call, ExCtx),
 		Error,
-		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, user)))
+		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, ExCtx)))
 	),
 	(	nonvar(Obj),
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal({Obj}<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object or invalid object identifier
 		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 Obj<<Goal :-
+	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch(
-		'$lgt_compile_context_switch_call'(Obj, Goal, Call, user),
+		'$lgt_compile_context_switch_call'(Obj, Goal, Call, ExCtx),
 		Error,
-		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user)))
+		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, ExCtx)))
 	),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal(Obj<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
 		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
@@ -725,8 +727,9 @@ current_category(Ctg) :-
 % created when the predicate is called with a bound property argument
 
 object_property(Obj, Prop) :-
-	'$lgt_check'(var_or_object_identifier, Obj, logtalk(object_property(Obj, Prop), _)),
-	'$lgt_check'(var_or_object_property, Prop, logtalk(object_property(Obj, Prop), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_object_identifier, Obj, logtalk(object_property(Obj, Prop), ExCtx)),
+	'$lgt_check'(var_or_object_property, Prop, logtalk(object_property(Obj, Prop), ExCtx)),
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, DDcl, DDef, Rnm, Flags),
 	'$lgt_object_property'(Prop, Obj, Dcl, Def, DDcl, DDef, Rnm, Flags).
 
@@ -853,8 +856,9 @@ object_property(Obj, Prop) :-
 % created when the predicate is called with a bound property argument
 
 category_property(Ctg, Prop) :-
-	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(category_property(Ctg, Prop), _)),
-	'$lgt_check'(var_or_category_property, Prop, logtalk(category_property(Ctg, Prop), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_category_identifier, Ctg, logtalk(category_property(Ctg, Prop), ExCtx)),
+	'$lgt_check'(var_or_category_property, Prop, logtalk(category_property(Ctg, Prop), ExCtx)),
 	'$lgt_current_category_'(Ctg, _, Dcl, Def, Rnm, Flags),
 	'$lgt_category_property'(Prop, Ctg, Dcl, Def, Rnm, Flags).
 
@@ -956,8 +960,9 @@ category_property(Ctg, Prop) :-
 % created when the predicate is called with a bound property argument
 
 protocol_property(Ptc, Prop) :-
-	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(protocol_property(Ptc, Prop), _)),
-	'$lgt_check'(var_or_protocol_property, Prop, logtalk(protocol_property(Ptc, Prop), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_check'(var_or_protocol_identifier, Ptc, logtalk(protocol_property(Ptc, Prop), ExCtx)),
+	'$lgt_check'(var_or_protocol_property, Prop, logtalk(protocol_property(Ptc, Prop), ExCtx)),
 	'$lgt_current_protocol_'(Ptc, _, Dcl, Rnm, Flags),
 	'$lgt_protocol_property'(Prop, Ptc, Dcl, Rnm, Flags).
 
@@ -1897,7 +1902,8 @@ abolish_events(Event, Obj, Msg, Sender, Monitor) :-
 
 threaded(Goals) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded(Goals), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded(Goals), ExCtx))).
 
 threaded(Goals) :-
 	'$lgt_check'(qualified_callable, Goals, logtalk(threaded(Goals), _)),
@@ -1909,7 +1915,8 @@ threaded(Goals) :-
 
 threaded_call(Goal, Tag) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_call(Goal, Tag), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_call(Goal, Tag), ExCtx))).
 
 threaded_call(Goal, Tag) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal, Tag), _)),
@@ -1921,7 +1928,8 @@ threaded_call(Goal, Tag) :-
 
 threaded_call(Goal) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_call(Goal), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_call(Goal), ExCtx))).
 
 threaded_call(Goal) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal), _)),
@@ -1932,7 +1940,8 @@ threaded_call(Goal) :-
 
 threaded_once(Goal, Tag) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_once(Goal, Tag), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_once(Goal, Tag), ExCtx))).
 
 threaded_once(Goal, Tag) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal, Tag), _)),
@@ -1944,7 +1953,8 @@ threaded_once(Goal, Tag) :-
 
 threaded_once(Goal) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_once(Goal), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_once(Goal), ExCtx))).
 
 threaded_once(Goal) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal), _)),
@@ -1955,7 +1965,8 @@ threaded_once(Goal) :-
 
 threaded_ignore(Goal) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_ignore(Goal), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_ignore(Goal), ExCtx))).
 
 threaded_ignore(Goal) :-
 	catch('$lgt_threaded_ignore'(Goal, Goal, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -1965,7 +1976,8 @@ threaded_ignore(Goal) :-
 
 threaded_exit(Goal, Tag) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_exit(Goal, Tag), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_exit(Goal, Tag), ExCtx))).
 
 threaded_exit(Goal, Tag) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal, Tag), _)),
@@ -1977,7 +1989,8 @@ threaded_exit(Goal, Tag) :-
 
 threaded_exit(Goal) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_exit(Goal), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_exit(Goal), ExCtx))).
 
 threaded_exit(Goal) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal), _)),
@@ -1988,7 +2001,8 @@ threaded_exit(Goal) :-
 
 threaded_peek(Goal, Tag) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_peek(Goal, Tag), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_peek(Goal, Tag), ExCtx))).
 
 threaded_peek(Goal, Tag) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal, Tag), _)),
@@ -2000,7 +2014,8 @@ threaded_peek(Goal, Tag) :-
 
 threaded_peek(Goal) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_peek(Goal), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_peek(Goal), ExCtx))).
 
 threaded_peek(Goal) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal), _)),
@@ -2011,7 +2026,8 @@ threaded_peek(Goal) :-
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx))).
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	catch('$lgt_threaded_engine_create'(AnswerTemplate, Goal, Goal, user, Engine), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2021,7 +2037,8 @@ threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 
 threaded_engine_self(Engine) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_self(Engine), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_self(Engine), ExCtx))).
 
 threaded_engine_self(Engine) :-
 	'$lgt_threaded_engine_self'(user, Engine).
@@ -2031,7 +2048,8 @@ threaded_engine_self(Engine) :-
 
 threaded_engine(Engine) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine(Engine), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine(Engine), ExCtx))).
 
 threaded_engine(Engine) :-
 	'$lgt_current_engine'(user, Engine).
@@ -2041,7 +2059,8 @@ threaded_engine(Engine) :-
 
 threaded_engine_next(Engine, Answer) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_next(Engine, Answer), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_next(Engine, Answer), ExCtx))).
 
 threaded_engine_next(Engine, Answer) :-
 	catch('$lgt_threaded_engine_next'(Engine, Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2051,7 +2070,8 @@ threaded_engine_next(Engine, Answer) :-
 
 threaded_engine_next_reified(Engine, Answer) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_next_reified(Engine, Answer), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_next_reified(Engine, Answer), ExCtx))).
 
 threaded_engine_next_reified(Engine, Answer) :-
 	catch('$lgt_threaded_engine_next_reified'(Engine, Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2061,7 +2081,8 @@ threaded_engine_next_reified(Engine, Answer) :-
 
 threaded_engine_yield(Answer) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_yield(Answer), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_yield(Answer), ExCtx))).
 
 threaded_engine_yield(Answer) :-
 	catch('$lgt_threaded_engine_yield'(Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2071,7 +2092,8 @@ threaded_engine_yield(Answer) :-
 
 threaded_engine_post(Engine, Term) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_post(Engine, Term), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_post(Engine, Term), ExCtx))).
 
 threaded_engine_post(Engine, Term) :-
 	catch('$lgt_threaded_engine_post'(Engine, Term, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2081,7 +2103,8 @@ threaded_engine_post(Engine, Term) :-
 
 threaded_engine_fetch(Term) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Term), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Term), ExCtx))).
 
 threaded_engine_fetch(Term) :-
 	catch('$lgt_threaded_engine_fetch'(Term, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2091,7 +2114,8 @@ threaded_engine_fetch(Term) :-
 
 threaded_engine_destroy(Engine) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_engine_destroy(Engine), _))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_engine_destroy(Engine), ExCtx))).
 
 threaded_engine_destroy(Engine) :-
 	catch('$lgt_threaded_engine_destroy'(Engine, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2101,7 +2125,8 @@ threaded_engine_destroy(Engine) :-
 
 threaded_wait(Message) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_wait(Message), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_wait(Message), ExCtx))).
 
 threaded_wait(Message) :-
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
@@ -2112,7 +2137,8 @@ threaded_wait(Message) :-
 
 threaded_notify(Message) :-
 	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(error(resource_error(threads), logtalk(threaded_notify(Message), user))).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	throw(error(resource_error(threads), logtalk(threaded_notify(Message), ExCtx))).
 
 threaded_notify(Message) :-
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
@@ -3100,22 +3126,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_object_exists'(@var, +callable, +object_identifier)
-% '$lgt_object_exists'(+object_identifier, +callable, +object_identifier)
+% '$lgt_object_exists'(@var, +callable, +execution_context)
+% '$lgt_object_exists'(+object_identifier, +callable, +execution_context)
 %
 % checks if an object exists at runtime; this is necessary in order to
 % prevent trivial messages such as true/0 or repeat/0 from succeeding
 % when the target object doesn't exist; used in the compilation of ::/2
 % calls
 
-'$lgt_object_exists'(Obj, Pred, Sender) :-
+'$lgt_object_exists'(Obj, Pred, ExCtx) :-
 	(	var(Obj) ->
-		throw(error(instantiation_error, logtalk(Obj::Pred, Sender)))
+		throw(error(instantiation_error, logtalk(Obj::Pred, ExCtx)))
 	;	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	% we have already verified that Obj is a valid object identifier when
 		% we generated the call to this predicate
-		throw(error(existence_error(object, Obj), logtalk(Obj::Pred, Sender)))
+		throw(error(existence_error(object, Obj), logtalk(Obj::Pred, ExCtx)))
 	).
 
 
@@ -4719,10 +4745,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_send_to_obj_rt'(Obj, Pred, Events, Ctx) :-
 	% we must ensure that the message is valid before compiling the
 	% message sending goal otherwise an endless loop would result
-	'$lgt_comp_ctx_this'(Ctx, Sender),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	% avoid an endless loop if the message is not a callable term
-	'$lgt_check'(callable, Pred, logtalk(Obj::Pred, Sender)),
-	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
+	'$lgt_check'(callable, Pred, logtalk(Obj::Pred, ExCtx)),
+	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx), Error, throw(error(Error, logtalk(Obj::Pred, ExCtx)))),
 	call(TPred).
 
 
@@ -4733,8 +4759,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % receiver object is not known at compile time
 
 '$lgt_send_to_obj'(Obj, Pred, SenderExCtx) :-
-	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, SenderExCtx)),
 	'$lgt_send_to_obj_'(Obj, Pred, SenderExCtx).
 
 
@@ -4810,27 +4835,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	% message is not within the scope of the sender
 			functor(Pred, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
-			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
+				throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
+			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 			)
 		)
 	;	% no predicate declaration, check if it's a private built-in method
 		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
+		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, [], []),
 		call(Call)
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 	).
 
-'$lgt_send_to_obj_nv_inner'({Proxy}, Pred, Sender, SenderExCtx) :-
+'$lgt_send_to_obj_nv_inner'({Proxy}, Pred, _, SenderExCtx) :-
 	!,
 	% parametric object proxy
-	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, Sender)))),
+	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, SenderExCtx)))),
 	'$lgt_send_to_obj_'(Proxy, Pred, SenderExCtx).
 
 '$lgt_send_to_obj_nv_inner'(Obj, Pred, _, _) :-
@@ -4841,8 +4866,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% allow Obj::Pred to be used as a shortcut for calling module predicates
 	':'(Obj, Pred).
 
-'$lgt_send_to_obj_nv_inner'(Obj, Pred, Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::Pred, Sender))).
+'$lgt_send_to_obj_nv_inner'(Obj, Pred, _, SenderExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(Obj::Pred, SenderExCtx))).
 
 
 
@@ -4868,8 +4893,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the receiver object is not known at compile time
 
 '$lgt_send_to_obj_ne'(Obj, Pred, SenderExCtx) :-
-	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, SenderExCtx)),
 	'$lgt_send_to_obj_ne_'(Obj, Pred, SenderExCtx).
 
 
@@ -4933,28 +4957,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	% message is not within the scope of the sender
 			functor(Pred, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
-			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
+				throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
+			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 			)
 		)
 	;	% no predicate declaration, check if it's a private built-in method
 		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
+		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, [], []),
 		call(Call)
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 	).
 
 '$lgt_send_to_obj_ne_nv'({Proxy}, Pred, SenderExCtx) :-
 	!,
 	% parametric object proxy
-	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
-	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, Sender)))),
+	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, SenderExCtx)))),
 	'$lgt_send_to_obj_ne_'(Proxy, Pred, SenderExCtx).
 
 '$lgt_send_to_obj_ne_nv'(Obj, Pred, _) :-
@@ -4966,8 +4989,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	':'(Obj, Pred).
 
 '$lgt_send_to_obj_ne_nv'(Obj, Pred, SenderExCtx) :-
-	'$lgt_execution_context'(SenderExCtx, _, _, Sender, _, _, _),
-	throw(error(existence_error(object, Obj), logtalk(Obj::Pred, Sender))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::Pred, SenderExCtx))).
 
 
 
@@ -4977,8 +4999,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % not known at compile time
 
 '$lgt_obj_super_call'(Super, Pred, ExCtx) :-
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	'$lgt_check'(callable, Pred, logtalk(^^Pred, This)),
+	'$lgt_check'(callable, Pred, logtalk(^^Pred, ExCtx)),
 	'$lgt_obj_super_call_'(Super, Pred, ExCtx).
 
 
@@ -5032,15 +5053,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Pred, Functor, Arity),
-			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
+			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, ExCtx)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method
 		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
+		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, ExCtx)))
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, This)))
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, ExCtx)))
 	).
 
 
@@ -5051,7 +5072,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % is not known at compile time
 
 '$lgt_ctg_super_call'(Ctg, Pred, ExCtx) :-
-	'$lgt_check'(callable, Pred, logtalk(^^Pred, Ctg)),
+	'$lgt_check'(callable, Pred, logtalk(^^Pred, ExCtx)),
 	'$lgt_ctg_super_call_'(Ctg, Pred, ExCtx).
 
 
@@ -5094,15 +5115,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Pred, Functor, Arity),
-			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
+			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, ExCtx)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method
 		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
+		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, ExCtx)))
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, Ctg)))
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, ExCtx)))
 	).
 
 
@@ -5135,8 +5156,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_metacall'(Closure, ExtraArgs, ExCtx) :-
 	var(Closure),
 	Call =.. [call, Closure| ExtraArgs],
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	throw(error(instantiation_error, logtalk(Call, This))).
+	throw(error(instantiation_error, logtalk(Call, ExCtx))).
 
 '$lgt_metacall'('$lgt_closure'(TFunctor, TArgs, ExCtx), ExtraArgs, _) :-
 	!,
@@ -5157,16 +5177,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		call(Goal)
 	;	var(Closure) ->
 		Call =.. [call, {Closure}| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	Call =.. [call, {Closure}| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	).
 
 '$lgt_metacall'(::Closure, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_execution_context'(ExCtx, _, _, This, Self0, MetaCallCtx, _),
+	'$lgt_execution_context'(ExCtx, _, _, _, Self0, MetaCallCtx, _),
 	(	MetaCallCtx = CallerExCtx-MetaArgs,
 		'$lgt_member_var'(::Closure, MetaArgs) ->
 		'$lgt_execution_context'(CallerExCtx, _, _, _, Self, _, _),
@@ -5184,14 +5202,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_send_to_self_'(Self, Goal, SelfExCtx)
 	;	var(Closure) ->
 		Call =.. [call, ::Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	Call =.. [call, ::Closure| ExtraArgs],
-		throw(error(type_error(callable, ::Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, ::Closure), logtalk(Call, ExCtx)))
 	).
 
 '$lgt_metacall'(^^Closure, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_execution_context'(ExCtx, Entity0, _, This, _, MetaCallCtx, _),
+	'$lgt_execution_context'(ExCtx, Entity0, _, _, _, MetaCallCtx, _),
 	(	MetaCallCtx = CallerExCtx-MetaArgs,
 		'$lgt_member_var'(^^Closure, MetaArgs) ->
 		'$lgt_execution_context'(CallerExCtx, Entity, _, _, _, _, _),
@@ -5207,11 +5225,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Goal =.. [Functor| FullArgs]
 	;	var(Closure) ->
 		Call =.. [call, ^^Closure| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	Call =.. [call, ^^Closure| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	),
 	(	'$lgt_current_object_'(Entity, _, _, _, Super, _, _, _, _, _, _) ->
 		'$lgt_obj_super_call_'(Super, Goal, SuperExCtx)
@@ -5239,20 +5255,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	var(Obj) ->
 		Call =.. [call, Obj::Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	var(Closure) ->
 		Call =.. [call, Obj::Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	\+ callable(Closure) ->
 		Call =.. [call, Obj::Closure| ExtraArgs],
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	;	Call =.. [call, Obj::Closure| ExtraArgs],
-		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, ExCtx)))
 	).
 
 '$lgt_metacall'([Obj::Closure], ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_execution_context'(ExCtx, _, Sender0, This, _, MetaCallCtx0, _),
+	'$lgt_execution_context'(ExCtx, _, Sender0, _, _, MetaCallCtx0, _),
 	(	MetaCallCtx0 = CallerExCtx0-_ ->
 		'$lgt_execution_context'(CallerExCtx0, _, Sender, _, _, _, _)
 	;	CallerExCtx0 = ExCtx,
@@ -5272,45 +5288,39 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	var(Obj) ->
 		Call =.. [call, [Obj::Closure]| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	var(Closure) ->
 		Call =.. [call, [Obj::Closure]| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	\+ callable(Closure) ->
 		Call =.. [call, [Obj::Closure]| ExtraArgs],
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	;	\+ callable(Obj) ->
 		Call =.. [call, [Obj::Closure]| ExtraArgs],
-		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, ExCtx)))
 	;	% Obj = Sender ->
 		Call =.. [call, [Obj::Closure]| ExtraArgs],
-		throw(error(permission_error(access, object, Sender), logtalk(Call, This)))
+		throw(error(permission_error(access, object, Sender), logtalk(Call, ExCtx)))
 	).
 
 '$lgt_metacall'(Obj<<Closure, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_execution_context'(ExCtx, _, Sender0, This, _, MetaCallCtx, _),
-	(	MetaCallCtx = _-MetaArgs,
-		'$lgt_member_var'(Obj<<Closure, MetaArgs) ->
-		Sender = Sender0
-	;	Sender = This
-	),
 	(	callable(Obj), callable(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		'$lgt_call_within_context_nv'(Obj, Goal, Sender)
+		'$lgt_call_within_context_nv'(Obj, Goal, ExCtx)
 	;	var(Obj) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	var(Closure) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	\+ callable(Closure) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	;	Call =.. [call, Obj<<Closure| ExtraArgs],
-		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, ExCtx)))
 	).
 
 '$lgt_metacall'(':'(Module, Closure), ExtraArgs, ExCtx) :-
@@ -5322,24 +5332,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 		':'(Module, Goal)
 	;	var(Module) ->
 		Call =.. [call, ':'(Module, Closure)| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	var(Closure) ->
 		Call =.. [call, ':'(Module, Closure)| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(instantiation_error, logtalk(Call, This)))
+		throw(error(instantiation_error, logtalk(Call, ExCtx)))
 	;	\+ atom(Module) ->
 		Call =.. [call, ':'(Module, Closure)| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(module_identifier, Module), logtalk(Call, This)))
+		throw(error(type_error(module_identifier, Module), logtalk(Call, ExCtx)))
 	;	Call =.. [call, ':'(Module, Closure)| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	).
 
 '$lgt_metacall'(Free/Lambda, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_check'(curly_bracketed_term, Free, logtalk(Free/Lambda, This)),
+	'$lgt_check'(curly_bracketed_term, Free, logtalk(Free/Lambda, ExCtx)),
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
 	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Lambda, MetaCallCtx),
 	'$lgt_copy_term_without_constraints'(Free/Lambda+MetaCallCtx, Free/LambdaCopy+MetaCallCtxCopy),
@@ -5348,7 +5354,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_metacall'(Free/Parameters>>Lambda, ExtraArgs, ExCtx) :-
 	!,
-	'$lgt_check'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Lambda, This)),
+	'$lgt_check'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Lambda, ExCtx)),
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
 	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Parameters>>Lambda, MetaCallCtx),
 	'$lgt_copy_term_without_constraints'(Free/Parameters>>Lambda+MetaCallCtx, Free/ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
@@ -5373,8 +5379,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs]
 	;	Call =.. [call, Closure| ExtraArgs],
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+		throw(error(type_error(callable, Closure), logtalk(Call, ExCtx)))
 	),
 	(	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx-MetaArgs, _),
 		'$lgt_member_var'(Closure, MetaArgs) ->
@@ -5434,8 +5439,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_metacall'(Goal, ExCtx) :-
 	var(Goal),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	throw(error(instantiation_error, logtalk(call(Goal), This))).
+	throw(error(instantiation_error, logtalk(call(Goal), ExCtx))).
 
 '$lgt_metacall'({Goal}, ExCtx) :-
 	% pre-compiled meta-calls or calls in "user" (compiler bypass)
@@ -5443,10 +5447,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	callable(Goal) ->
 		call(Goal)
 	;	var(Goal) ->
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(instantiation_error, logtalk({Goal}, This)))
-	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(callable, Goal), logtalk({Goal}, This)))
+		throw(error(instantiation_error, logtalk({Goal}, ExCtx)))
+	;	throw(error(type_error(callable, Goal), logtalk({Goal}, ExCtx)))
 	).
 
 '$lgt_metacall'(Goal, ExCtx) :-
@@ -5469,8 +5471,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_quantified_metacall'(Goal, _, ExCtx) :-
 	var(Goal),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	throw(error(instantiation_error, logtalk(call(Goal), This))).
+	throw(error(instantiation_error, logtalk(call(Goal), ExCtx))).
 
 '$lgt_quantified_metacall'({Goal}, _, ExCtx) :-
 	% pre-compiled meta-calls or calls in "user" (compiler bypass)
@@ -5478,10 +5479,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	callable(Goal) ->
 		call(Goal)
 	;	var(Goal) ->
-		'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(instantiation_error, logtalk({Goal}, This)))
-	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(type_error(callable, Goal), logtalk({Goal}, This)))
+		throw(error(instantiation_error, logtalk({Goal}, ExCtx)))
+	;	throw(error(type_error(callable, Goal), logtalk({Goal}, ExCtx)))
 	).
 
 '$lgt_quantified_metacall'(QGoal, Goal, ExCtx) :-
@@ -5508,11 +5507,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 			call(TPred)
 		;	% in the worst case we need to compile the meta-call
 			'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, Stack, _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Entity)))),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), ExCtx)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Entity))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Entity))))
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), ExCtx))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), ExCtx))))
 			)
 		)
 	;	'$lgt_current_category_'(Entity, Prefix, _, Def, _, Flags),
@@ -5521,11 +5520,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 			call(TPred)
 		;	% in the worst case we need to compile the meta-call
 			'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, [], _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Entity)))),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), ExCtx)))),
 			(	Flags /\ 512 =:= 512 ->
 				% category compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Entity))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Entity))))
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), ExCtx))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), ExCtx))))
 			)
 		)
 	).
@@ -5539,7 +5538,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_metacall_sender'(Pred, ExCtx, CallerExCtx, ExtraVars) :-
 	'$lgt_execution_context'(CallerExCtx, CallerEntity, Sender, This, Self, _, Stack),
 	(	CallerEntity == user ->
-		catch(Pred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
+		catch(Pred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerExCtx))))
 	;	'$lgt_current_object_'(CallerEntity, CallerPrefix, _, Def, _, _, _, _, DDef, _, Flags) ->
 		(	% in the most common case we're meta-calling a user defined static predicate
 			call(Def, Pred, CallerExCtx, TPred) ->
@@ -5554,11 +5553,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
 			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerEntity)))),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerExCtx)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerExCtx))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerExCtx))))
 			)
 		)
 	;	'$lgt_current_category_'(CallerEntity, CallerPrefix, _, Def, _, Flags),
@@ -5572,11 +5571,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
 			'$lgt_comp_ctx'(Ctx, _, NewCallerExCtx, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerEntity)))),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerExCtx)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerExCtx))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerExCtx))))
 			)
 		)
 	).
@@ -5592,44 +5591,44 @@ create_logtalk_flag(Flag, Value, Options) :-
 % context-switching call can be disabled in a per-object basis by using the compiler
 % flag "context_switching_calls"
 
-'$lgt_call_within_context'(Obj, Goal, This) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj<<Goal, This)),
-	'$lgt_check'(callable, Goal, logtalk(Obj<<Goal, This)),
-	'$lgt_compile_context_switch_call'(Obj, Goal, TGoal, This),
+'$lgt_call_within_context'(Obj, Goal, ExCtx) :-
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj<<Goal, ExCtx)),
+	'$lgt_check'(callable, Goal, logtalk(Obj<<Goal, ExCtx)),
+	'$lgt_compile_context_switch_call'(Obj, Goal, TGoal, ExCtx),
 	call(TGoal).
 
 
 
-% '$lgt_call_within_context_nv'(+object_identifier, +callable, +object_identifier)
+% '$lgt_call_within_context_nv'(+object_identifier, +callable, +execution_context)
 %
 % calls a goal within the context of the specified object (arguments type-checked
 % at compile time)
 
-'$lgt_call_within_context_nv'(Obj, Goal, This) :-
+'$lgt_call_within_context_nv'(Obj, Goal, ExCtx) :-
 	(	Obj == user ->
-		catch(Goal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(user<<Goal, This))))
+		catch(Goal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(user<<Goal, ExCtx))))
 	;	'$lgt_current_object_'(Obj, Prefix, _, Def, _, _, _, _, DDef, _, Flags) ->
 		(	Flags /\ 256 =:= 256 ->
 			% object compiled with context-switching calls allowed
-			'$lgt_execution_context'(ExCtx, Obj, Obj, Obj, Obj, [], []),
+			'$lgt_execution_context'(ObjExCtx, Obj, Obj, Obj, Obj, [], []),
 			(	% in the most common case we're calling a user defined static predicate
-				call(Def, Goal, ExCtx, TGoal) ->
-				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
+				call(Def, Goal, ObjExCtx, TGoal) ->
+				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, ExCtx))))
 				% or a user defined dynamic predicate
-			;	call(DDef, Goal, ExCtx, TGoal) ->
-				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
+			;	call(DDef, Goal, ObjExCtx, TGoal) ->
+				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, ExCtx))))
 			;	% in the worst case we need to compile the goal
-				'$lgt_comp_ctx'(Ctx, _, ExCtx, Obj, Obj, Obj, Obj, Prefix, [], _, ExCtx, runtime, [], _),
-				catch('$lgt_compile_body'(Goal, TGoal, DGoal, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
+				'$lgt_comp_ctx'(ObjCtx, _, ObjExCtx, Obj, Obj, Obj, Obj, Prefix, [], _, ObjExCtx, runtime, [], _),
+				catch('$lgt_compile_body'(Goal, TGoal, DGoal, ObjCtx), Error, throw(error(Error, logtalk(Obj<<Goal, ExCtx)))),
 				(	Flags /\ 512 =:= 512 ->
 					% object compiled in debug mode
-					catch(DGoal, Error, throw(error(Error, logtalk(Obj<<Goal, This))))
-				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
+					catch(DGoal, Error, throw(error(Error, logtalk(Obj<<Goal, ExCtx))))
+				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, ExCtx))))
 				)
 			)
-		;	throw(error(permission_error(access, database, Goal), logtalk(Obj<<Goal, This)))
+		;	throw(error(permission_error(access, database, Goal), logtalk(Obj<<Goal, ExCtx)))
 		)
-	;	throw(error(existence_error(object, Obj), logtalk(Obj<<Goal, This)))
+	;	throw(error(existence_error(object, Obj), logtalk(Obj<<Goal, ExCtx)))
 	).
 
 
@@ -11541,9 +11540,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Obj<<Pred, TPred, '$lgt_debug'(goal(Obj<<Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	'$lgt_compile_context_switch_call'(Obj, Pred, TPred, This).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_compile_context_switch_call'(Obj, Pred, TPred, ExCtx).
 
 % calling category predicates directly (deprecated control construct)
 
@@ -13814,30 +13812,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % built-in methods that cannot be redefined
 
-'$lgt_compile_message_to_object'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), _, Ctx) :-
+'$lgt_compile_message_to_object'(!, Obj, ('$lgt_object_exists'(Obj, !, ExCtx), !), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_compile_message_to_object'(true, Obj, ('$lgt_object_exists'(Obj, true, This), true), _, Ctx) :-
+'$lgt_compile_message_to_object'(true, Obj, ('$lgt_object_exists'(Obj, true, ExCtx), true), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_compile_message_to_object'(fail, Obj, ('$lgt_object_exists'(Obj, fail, This), fail), _, Ctx) :-
+'$lgt_compile_message_to_object'(fail, Obj, ('$lgt_object_exists'(Obj, fail, ExCtx), fail), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_compile_message_to_object'(false, Obj, ('$lgt_object_exists'(Obj, false, This), false), _, Ctx) :-
+'$lgt_compile_message_to_object'(false, Obj, ('$lgt_object_exists'(Obj, false, ExCtx), false), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_compile_message_to_object'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), _, Ctx) :-
+'$lgt_compile_message_to_object'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, ExCtx), repeat), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 % reflection built-in predicates
 
@@ -14367,28 +14360,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_context_switch_call'(@term, @term, -callable, @object_identifier)
+% '$lgt_compile_context_switch_call'(@term, @term, -callable, @execution_context)
 %
 % compiles context switching calls
 
-'$lgt_compile_context_switch_call'(Obj, Goal, TGoal, This) :-
+'$lgt_compile_context_switch_call'(Obj, Goal, TGoal, ExCtx) :-
 	(	var(Obj) ->
 		'$lgt_check'(var_or_callable, Goal),
-		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
+		TGoal = '$lgt_call_within_context'(Obj, Goal, ExCtx)
 	;	Obj = {Proxy} ->
 		'$lgt_check'(var_or_callable, Proxy),
 		(	var(Proxy) ->
 			CallProxy = call(Proxy)
 		;	CallProxy = Proxy	
 		),
-		'$lgt_compile_context_switch_call'(Proxy, Goal, TGoal0, This),
+		'$lgt_compile_context_switch_call'(Proxy, Goal, TGoal0, ExCtx),
 		TGoal = (CallProxy, TGoal0)
 	;	var(Goal) ->
 		'$lgt_check'(var_or_object_identifier, Obj),
-		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
+		TGoal = '$lgt_call_within_context'(Obj, Goal, ExCtx)
 	;	'$lgt_check'(object_identifier, Obj),
 		'$lgt_check'(callable, Goal),
-		TGoal = '$lgt_call_within_context_nv'(Obj, Goal, This)
+		TGoal = '$lgt_call_within_context_nv'(Obj, Goal, ExCtx)
 	).
 
 

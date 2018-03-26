@@ -48,36 +48,45 @@ context_switch_test_object(3).
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/12/04,
+		date is 2018/03/26,
 		comment is 'Unit tests for the (<<)/2 built-in control construct.'
 	]).
 
-	throws(context_switch_2_01, error(instantiation_error, logtalk(_<<goal,user))) :-
+	throws(context_switch_2_01, error(instantiation_error, logtalk(_<<goal,_))) :-
+		% delay the error to runtime
 		{_ << goal}.
 
-	throws(context_switch_2_02, error(instantiation_error, logtalk(logtalk<<_,user))) :-
+	throws(context_switch_2_02, error(instantiation_error, logtalk(logtalk<<_,_))) :-
+		% delay the error to runtime
 		{logtalk << _}.
 
-	throws(context_switch_2_03, error(type_error(object_identifier, 3), logtalk(3<<goal,user))) :- 
+	throws(context_switch_2_03, error(type_error(object_identifier, 3), logtalk(3<<goal,_))) :- 
+		% delay the error to runtime
 		{3 << goal}.
 
-	throws(context_switch_2_04, error(type_error(callable, 3), logtalk(object<<3,user))) :-
+	throws(context_switch_2_04, error(type_error(callable, 3), logtalk(object<<3,_))) :-
+		% delay the error to runtime
 		{object << 3}.
 
-	throws(context_switch_2_05, error(existence_error(procedure, goal/0), logtalk(This<<goal,user))) :-
+	throws(context_switch_2_05, error(existence_error(procedure, goal/0), logtalk(This<<goal,_))) :-
 		this(This),
+		% delay the error to runtime
 		{This << goal}.
 
-	throws(context_switch_2_06, error(existence_error(object, foo), logtalk(foo<<goal,user))) :-
+	throws(context_switch_2_06, error(existence_error(object, foo), logtalk(foo<<goal,_))) :-
+		% delay the error to runtime
 		{foo << goal}.
 
-	throws(context_switch_2_07, error(permission_error(access, database, p), logtalk(context_switch_test_object<<p,user))) :-
+	throws(context_switch_2_07, error(permission_error(access, database, p), logtalk(context_switch_test_object<<p,_))) :-
+		% delay the error to runtime
 		{context_switch_test_object << p}.
 
 	succeeds(context_switch_2_08) :-
+		% delay the error to runtime
 		{user << true}.
 
 	succeeds(context_switch_2_09) :-
+		% delay the error to runtime
 		{logtalk << true}.
 
 	succeeds(context_switch_2_10) :-

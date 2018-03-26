@@ -29,9 +29,9 @@ b(1, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2016/05/05,
+		date is 2018/03/24,
 		comment is 'Unit tests for the current_predicate/1 built-in method.'
 	]).
 
@@ -39,26 +39,26 @@ b(1, 2).
 		succeeds/1, fails/1, throws/2
 	]).
 
-	throws(current_predicate_1_01, error(type_error(predicate_indicator, 1), logtalk(This::current_predicate(1),user))) :-
+	throws(current_predicate_1_01, error(type_error(predicate_indicator, 1), logtalk(This::current_predicate(1),_))) :-
 		this(This),
 		{This::current_predicate(1)}.
 
-	throws(current_predicate_1_02, error(type_error(atom,1), logtalk(This::current_predicate(1/b),user))) :-
+	throws(current_predicate_1_02, error(type_error(atom,1), logtalk(This::current_predicate(1/b),_))) :-
 		this(This),
 		{This::current_predicate(1/b)}.
 
-	throws(current_predicate_1_03, error(type_error(integer,b), logtalk(This::current_predicate(a/b),user))) :-
+	throws(current_predicate_1_03, error(type_error(integer,b), logtalk(This::current_predicate(a/b),_))) :-
 		this(This),
 		{This::current_predicate(a/b)}.
 
-	throws(current_predicate_1_04, error(domain_error(not_less_than_zero, -1), logtalk(This::current_predicate(a/(-1)),user))) :-
+	throws(current_predicate_1_04, error(domain_error(not_less_than_zero, -1), logtalk(This::current_predicate(a/(-1)),_))) :-
 		this(This),
 		{This::current_predicate(a/(-1))}.
 
-	throws(current_predicate_1_05, error(instantiation_error, logtalk(_::current_predicate(foo/1),test_object))) :-
+	throws(current_predicate_1_05, error(instantiation_error, logtalk(_::current_predicate(foo/1),_))) :-
 		{test_object::ie(_)}.
 
-	throws(current_predicate_1_06, error(type_error(object_identifier, 1), logtalk(1::current_predicate(foo/1),test_object))) :-
+	throws(current_predicate_1_06, error(type_error(object_identifier, 1), logtalk(1::current_predicate(foo/1),_))) :-
 		{test_object::te}.
 
 	succeeds(current_predicate_1_07) :-

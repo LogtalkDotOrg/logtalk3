@@ -58,22 +58,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/02/26,
+		date is 2018/03/24,
 		comment is 'Unit tests for the (^^)/1 built-in control construct.'
 	]).
 
-	throws(call_super_1_1, error(instantiation_error,logtalk(^^_,call_super_test_object_2))) :-
+	throws(call_super_1_1, error(instantiation_error,logtalk(^^_,_))) :-
 		call_super_test_object_2::p(_).
 
-	throws(call_super_1_2, error(type_error(callable,1),logtalk(^^1,call_super_test_object_2))) :-
+	throws(call_super_1_2, error(type_error(callable,1),logtalk(^^1,_))) :-
 		call_super_test_object_2::p(1).
 
-	throws(call_super_1_3, error(permission_error(access,private_predicate,s/1),logtalk(^^s(_),call_super_test_object_2))) :-
+	throws(call_super_1_3, error(permission_error(access,private_predicate,s/1),logtalk(^^s(_),_))) :-
 		call_super_test_object_2::p(s(_)).
 
-	throws(call_super_1_4, error(existence_error(predicate_declaration,t/1),logtalk(^^t(_),call_super_test_object_2))) :-
+	throws(call_super_1_4, error(existence_error(predicate_declaration,t/1),logtalk(^^t(_),_))) :-
 		call_super_test_object_2::p(t(_)).
 
 	succeeds(call_super_1_5) :-

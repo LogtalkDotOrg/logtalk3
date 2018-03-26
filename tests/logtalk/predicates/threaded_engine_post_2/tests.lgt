@@ -22,22 +22,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/06/10,
+		date is 2018/03/24,
 		comment is 'Unit tests for the threaded_engine_post/2 built-in predicate.'
 	]).
 
 	:- threaded.
 
 	% engine argument must be bound at runtime (but no error at compile time)
-	throws(threaded_engine_post_2_01, error(instantiation_error, logtalk(threaded_engine_post(_,_), This))) :-
-		this(This),
+	throws(threaded_engine_post_2_01, error(instantiation_error, logtalk(threaded_engine_post(_,_),_))) :-
 		threaded_engine_post(_, _).
 
 	% engine must exist
-	throws(threaded_engine_post_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_), This))) :-
-		this(This),
+	throws(threaded_engine_post_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_),_))) :-
 		threaded_engine_post(foo, _).
 
 	% posting terms to an engine term queue is independent of
