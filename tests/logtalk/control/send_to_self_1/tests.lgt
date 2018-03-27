@@ -86,9 +86,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/03/31,
+		date is 2018/03/28,
 		comment is 'Unit tests for the (::)/1 built-in control construct.'
 	]).
 
@@ -98,19 +98,19 @@
 
 	% tests for runtime bound messages
 
-	throws(send_to_self_1_01, error(instantiation_error,logtalk(::_,send_to_self_test_object_1))) :-
+	throws(send_to_self_1_01, error(instantiation_error,logtalk(::_,_))) :-
 		send_to_self_test_object_2::rt(_).
 
-	throws(send_to_self_1_02, error(type_error(callable,1),logtalk(::1,send_to_self_test_object_1))) :-
+	throws(send_to_self_1_02, error(type_error(callable,1),logtalk(::1,_))) :-
 		send_to_self_test_object_2::rt(1).
 
-	throws(send_to_self_1_03, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_03, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),_))) :-
 		send_to_self_test_object_2::rt(s(_)).
 
-	throws(send_to_self_1_04, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_04, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),_))) :-
 		send_to_self_test_object_2::rt(t(_)).
 
-	throws(send_to_self_1_05, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_05, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),_))) :-
 		send_to_self_test_object_2::rt(atom(a)).
 
 	succeeds(send_to_self_1_06) :-
@@ -132,13 +132,13 @@
 
 	% tests for compile-time bound messages
 
-	throws(send_to_self_1_11, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_11, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),_))) :-
 		send_to_self_test_object_2::ct_s(_).
 
-	throws(send_to_self_1_12, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_12, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),_))) :-
 		send_to_self_test_object_2::ct_t(_).
 
-	throws(send_to_self_1_13, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_13, error(existence_error(predicate_declaration,atom/1),logtalk(::atom(a),_))) :-
 		send_to_self_test_object_2::ct_b3.
 
 	succeeds(send_to_self_1_14) :-
