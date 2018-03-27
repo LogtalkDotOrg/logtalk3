@@ -32,8 +32,8 @@ Logtalk compiler and runtime
 format.
 
 * CHANGED: Compile calls to the built-in predicates to perform compile time
-type-checking and to return the actual execution context in case of runtime
-error.
+type-checking when the arguments are sufficiently instantiated and to return
+the actual execution context in case of runtime error.
 
 Tests
 -----

@@ -3113,8 +3113,13 @@ logtalk_load_context(stream, Stream) :-
 % the logtalk_compile/2 and logtalk_load/2 predicates
 
 set_logtalk_flag(Flag, Value) :-
-	'$lgt_check'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), _)),
-	'$lgt_check'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_set_logtalk_flag'(Flag, Value, ExCtx).
+
+
+'$lgt_set_logtalk_flag'(Flag, Value, ExCtx) :-
+	'$lgt_check'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), ExCtx)),
+	'$lgt_check'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), ExCtx)),
 	'$lgt_set_compiler_flag'(Flag, Value).
 
 
@@ -3142,6 +3147,11 @@ set_logtalk_flag(Flag, Value) :-
 % tests/gets flag values
 
 current_logtalk_flag(Flag, Value) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_current_logtalk_flag'(Flag, Value, ExCtx).
+
+
+'$lgt_current_logtalk_flag'(Flag, Value, ExCtx) :-
 	(	var(Flag) ->
 		(	'$lgt_valid_flag'(Flag)
 		;	'$lgt_user_defined_flag_'(Flag, _, _)
@@ -3151,7 +3161,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compiler_flag'(Flag, Value)
 	;	'$lgt_user_defined_flag_'(Flag, _, _) ->
 		'$lgt_compiler_flag'(Flag, Value)
-	;	'$lgt_check'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _))
+	;	'$lgt_check'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), ExCtx))
 	).
 
 
@@ -3164,51 +3174,56 @@ current_logtalk_flag(Flag, Value) :-
 % built-in predicate of SWI-Prolog
 
 create_logtalk_flag(Flag, Value, Options) :-
-	'$lgt_check'(atom, Flag, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
-	'$lgt_check'(ground, Value, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
-	'$lgt_check'(ground, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
-	'$lgt_check'(list, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx).
+
+
+'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx) :-
+	'$lgt_check'(atom, Flag, logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx)),
+	'$lgt_check'(ground, Value, logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx)),
+	'$lgt_check'(ground, Options, logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx)),
+	'$lgt_check'(list, Options, logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx)),
 	fail.
 
-create_logtalk_flag(Flag, Value, Options) :-
+'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx) :-
 	'$lgt_valid_flag'(Flag),
-	throw(error(permission_error(modify,flag,Flag), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+	throw(error(permission_error(modify,flag,Flag), logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx))).
 
-create_logtalk_flag(Flag, Value, Options) :-
+'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx) :-
 	'$lgt_member'(Option, Options),
 	Option \= access(_),
 	Option \= keep(_),
 	Option \= type(_),
-	throw(error(domain_error(flag_option,Option), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+	throw(error(domain_error(flag_option,Option), logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx))).
 
-create_logtalk_flag(Flag, Value, Options) :-
+'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx) :-
 	'$lgt_member'(access(Access), Options),
 	Access \== read_write,
 	Access \== read_only,
-	throw(error(domain_error(flag_option,access(Access)), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+	throw(error(domain_error(flag_option,access(Access)), logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx))).
 
-create_logtalk_flag(Flag, Value, Options) :-
+'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx) :-
 	'$lgt_member'(keep(Keep), Options),
 	Keep \== true,
 	Keep \== false,
-	throw(error(domain_error(flag_option,keep(Keep)), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+	throw(error(domain_error(flag_option,keep(Keep)), logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx))).
 
-create_logtalk_flag(Flag, Value, Options) :-
+'$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx) :-
 	'$lgt_member'(type(Type0), Options),
 	(	'$lgt_map_user_defined_flag_type'(Type0, Type) ->
 		(	call(Type, Value) ->
 			fail
-		;	throw(error(type_error(Type0,Value), logtalk(create_logtalk_flag(Flag, Value, Options), _)))
+		;	throw(error(type_error(Type0,Value), logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx)))
 		)
-	;	throw(error(domain_error(flag_option,type(Type0)), logtalk(create_logtalk_flag(Flag, Value, Options), _)))
+	;	throw(error(domain_error(flag_option,type(Type0)), logtalk(create_logtalk_flag(Flag, Value, Options), ExCtx)))
 	).
 
-create_logtalk_flag(Flag, _, Options) :-
+'$lgt_create_logtalk_flag'(Flag, _, Options, _) :-
 	'$lgt_user_defined_flag_'(Flag, _, _),
 	'$lgt_member'(keep(true), Options),
 	!.
 
-create_logtalk_flag(Flag, Value, Options) :-
+'$lgt_create_logtalk_flag'(Flag, Value, Options, _) :-
 	(	'$lgt_member'(access(Access), Options) ->
 		true
 	;	Access = read_write
@@ -12602,7 +12617,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
-% Logtalk flag predicates (just error checking when one of the arguments isn't instantiated)
+% Logtalk flag predicates
 
 '$lgt_compile_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
@@ -12615,9 +12630,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
-'$lgt_compile_body'(set_logtalk_flag(Flag, _), _, _, _) :-
+'$lgt_compile_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
+	!,
 	'$lgt_check'(var_or_read_write_flag, Flag),
-	fail.
+	TPred = '$lgt_set_logtalk_flag'(Flag, Value, ExCtx),
+	DPred = set_logtalk_flag(Flag, Value),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	nonvar(Flag) ->
+		'$lgt_check_for_renamed_flag'(Flag, Ctx)
+	;	true
+	).
 
 '$lgt_compile_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
@@ -12630,9 +12652,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
-'$lgt_compile_body'(current_logtalk_flag(Flag, _), _, _, _) :-
+'$lgt_compile_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
+	!,
 	'$lgt_check'(var_or_flag, Flag),
-	fail.
+	TPred = '$lgt_current_logtalk_flag'(Flag, Value, ExCtx),
+	DPred = current_logtalk_flag(Flag, Value),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	nonvar(Flag) ->
+		'$lgt_check_for_renamed_flag'(Flag, Ctx)
+	;	true
+	).
+
+'$lgt_compile_body'(create_logtalk_flag(Flag, Value, Options), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
+	!,
+	'$lgt_check'(atom, Flag),
+	'$lgt_check'(ground, Value),
+	'$lgt_check'(ground, Options),
+	'$lgt_check'(list, Options),
+	TPred = '$lgt_create_logtalk_flag'(Flag, Value, Options, ExCtx),
+	DPred = create_logtalk_flag(Flag, Value, Options),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 % Prolog flag predicates (just basic error and portability checking)
 
