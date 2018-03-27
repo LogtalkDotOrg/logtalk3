@@ -1246,21 +1246,21 @@ create_object(Obj, Relations, Directives, Clauses) :-
 '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx) :-
 	nonvar(Obj),
 	(	\+ callable(Obj),
-		throw(error(type_error(object_identifier, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
+		throw(error(type_error(object_identifier, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
-		throw(error(permission_error(modify, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(modify, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_category_'(Obj, _, _, _, _, _),
-		throw(error(permission_error(modify, category, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(modify, category, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_protocol_'(Obj, _, _, _, _),
-		throw(error(permission_error(modify, protocol, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(modify, protocol, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	;	functor(Obj, '{}', 1),
-		throw(error(permission_error(create, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(create, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	).
 
 '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx) :-
-	'$lgt_check'(list, Relations, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
-	'$lgt_check'(list, Directives, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
-	'$lgt_check'(list, Clauses, logtalk(create_object(Obj, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Relations, logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)),
+	'$lgt_check'(list, Directives, logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)),
+	'$lgt_check'(list, Clauses, logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)),
 	catch(
 		'$lgt_create_object_checked'(Obj, Relations, Directives, Clauses),
 		Error,
@@ -1305,19 +1305,19 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx) :-
 	nonvar(Ctg),
 	(	\+ callable(Ctg),
-		throw(error(type_error(category_identifier, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), _)))
+		throw(error(type_error(category_identifier, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_category_'(Ctg, _, _, _, _, _),
-		throw(error(permission_error(modify, category, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(modify, category, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _),
-		throw(error(permission_error(modify, object, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(modify, object, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_protocol_'(Ctg, _, _, _, _),
-		throw(error(permission_error(modify, protocol, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), _)))
+		throw(error(permission_error(modify, protocol, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
 	).
 
 '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx) :-
-	'$lgt_check'(list, Relations, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
-	'$lgt_check'(list, Directives, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
-	'$lgt_check'(list, Clauses, logtalk(create_category(Ctg, Relations, Directives, Clauses), _)),
+	'$lgt_check'(list, Relations, logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)),
+	'$lgt_check'(list, Directives, logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)),
+	'$lgt_check'(list, Clauses, logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)),
 	catch(
 		'$lgt_create_category_checked'(Ctg, Relations, Directives, Clauses),
 		Error,
@@ -1365,18 +1365,18 @@ create_protocol(Ptc, Relations, Directives) :-
 '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx) :-
 	nonvar(Ptc),
 	(	\+ atom(Ptc),
-		throw(error(type_error(protocol_identifier, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), _)))
+		throw(error(type_error(protocol_identifier, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), ExCtx)))
 	;	'$lgt_current_protocol_'(Ptc, _, _, _, _),
-		throw(error(permission_error(modify, protocol, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), _)))
+		throw(error(permission_error(modify, protocol, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), ExCtx)))
 	;	'$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _),
-		throw(error(permission_error(modify, object, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), _)))
+		throw(error(permission_error(modify, object, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), ExCtx)))
 	;	'$lgt_current_category_'(Ptc, _, _, _, _, _),
-		throw(error(permission_error(modify, category, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), _)))
+		throw(error(permission_error(modify, category, Ptc), logtalk(create_protocol(Ptc, Relations, Directives), ExCtx)))
 	).
 
 '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx) :-
-	'$lgt_check'(list, Relations, logtalk(create_protocol(Ptc, Relations, Directives), _)),
-	'$lgt_check'(list, Directives, logtalk(create_protocol(Ptc, Relations, Directives), _)),
+	'$lgt_check'(list, Relations, logtalk(create_protocol(Ptc, Relations, Directives), ExCtx)),
+	'$lgt_check'(list, Directives, logtalk(create_protocol(Ptc, Relations, Directives), ExCtx)),
 	catch(
 		'$lgt_create_protocol_checked'(Ptc, Relations, Directives),
 		Error,
@@ -11314,7 +11314,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(create_object(Obj, Relations, Directives, Clauses), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_object_identifier, Obj),
-	'$lgt_check'(var_or_object_property, Prop),
+	'$lgt_check'(list_or_partial_list, Relations),
+	'$lgt_check'(list_or_partial_list, Directives),
+	'$lgt_check'(list_or_partial_list, Clauses),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx),
 	DPred = '$lgt_debug'(goal(create_object(Obj, Relations, Directives, Clauses), TPred), ExCtx).
@@ -11322,7 +11324,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(create_protocol(Ptc, Relations, Directives), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_protocol_identifier, Ptc),
-	'$lgt_check'(var_or_protocol_property, Prop),
+	'$lgt_check'(list_or_partial_list, Relations),
+	'$lgt_check'(list_or_partial_list, Directives),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx),
 	DPred = '$lgt_debug'(goal(create_protocol(Ptc, Relations, Directives), TPred), ExCtx).
@@ -11330,7 +11333,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(create_category(Ctg, Relations, Directives, Clauses), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_category_identifier, Ctg),
-	'$lgt_check'(var_or_category_property, Prop),
+	'$lgt_check'(list_or_partial_list, Relations),
+	'$lgt_check'(list_or_partial_list, Directives),
+	'$lgt_check'(list_or_partial_list, Clauses),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx),
 	DPred = '$lgt_debug'(goal(create_category(Ctg, Relations, Directives, Clauses), TPred), ExCtx).
