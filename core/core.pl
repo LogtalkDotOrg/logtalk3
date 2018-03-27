@@ -2325,11 +2325,31 @@ threaded_notify(Message) :-
 % compiles to disk a source file or list of source files using default flags
 
 logtalk_compile(Files) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_logtalk_compile'(Files, ExCtx).
+
+
+'$lgt_logtalk_compile'(Files, ExCtx) :-
 	catch(
-		logtalk_compile(Files, []),
+		'$lgt_logtalk_compile_files'(Files),
 		error(Error, _),
-		throw(error(Error, logtalk(logtalk_compile(Files), _)))
+		'$lgt_logtalk_compile_error_handler'(Error, Files, ExCtx)
 	).
+
+
+'$lgt_logtalk_compile_files'(Files) :-
+	'$lgt_init_warnings_counter'(logtalk_compile(Files)),
+	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
+	'$lgt_compile_files'(ExpandedFiles, []),
+	'$lgt_report_warning_numbers'(logtalk_compile(Files)),
+	'$lgt_clean_pp_file_clauses'.
+
+
+'$lgt_logtalk_compile_error_handler'(Error, Files, ExCtx) :-
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_reset_warnings_counter',
+	throw(error(Error, logtalk(logtalk_compile(Files), ExCtx))).
 
 
 
@@ -2343,14 +2363,19 @@ logtalk_compile(Files) :-
 % value should only be used in the default code for printing messages
 
 logtalk_compile(Files, Flags) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_logtalk_compile'(Files, Flags, ExCtx).
+
+
+'$lgt_logtalk_compile'(Files, Flags, ExCtx) :-
 	catch(
-		'$lgt_logtalk_compile'(Files, Flags),
+		'$lgt_logtalk_compile_files'(Files, Flags),
 		error(Error, _),
-		'$lgt_logtalk_compile_error_handler'(Error, Files, Flags)
+		'$lgt_logtalk_compile_error_handler'(Error, Files, Flags, ExCtx)
 	).
 
 
-'$lgt_logtalk_compile'(Files, Flags) :-
+'$lgt_logtalk_compile_files'(Files, Flags) :-
 	'$lgt_init_warnings_counter'(logtalk_compile(Files, Flags)),
 	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
@@ -2359,11 +2384,11 @@ logtalk_compile(Files, Flags) :-
 	'$lgt_clean_pp_file_clauses'.
 
 
-'$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
+'$lgt_logtalk_compile_error_handler'(Error, Files, Flags, ExCtx) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
-	throw(error(Error, logtalk(logtalk_compile(Files, Flags), _))).
+	throw(error(Error, logtalk(logtalk_compile(Files, Flags), ExCtx))).
 
 
 
@@ -2603,11 +2628,31 @@ logtalk_compile(Files, Flags) :-
 % or a list of source files using default compiler flags
 
 logtalk_load(Files) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_logtalk_load'(Files, ExCtx).
+
+
+'$lgt_logtalk_load'(Files, ExCtx) :-
 	catch(
-		logtalk_load(Files, []),
+		'$lgt_logtalk_load_files'(Files),
 		error(Error, _),
-		throw(error(Error, logtalk(logtalk_load(Files), _)))
+		'$lgt_logtalk_load_error_handler'(Error, Files, ExCtx)
 	).
+
+
+'$lgt_logtalk_load_files'(Files) :-
+	'$lgt_init_warnings_counter'(logtalk_load(Files)),
+	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
+	'$lgt_load_files'(ExpandedFiles, []),
+	'$lgt_report_warning_numbers'(logtalk_load(Files)),
+	'$lgt_clean_pp_file_clauses'.
+
+
+'$lgt_logtalk_load_error_handler'(Error, Files, ExCtx) :-
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_reset_warnings_counter',
+	throw(error(Error, logtalk(logtalk_load(Files), ExCtx))).
 
 
 
@@ -2623,14 +2668,19 @@ logtalk_load(Files) :-
 % printing messages
 
 logtalk_load(Files, Flags) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_logtalk_load'(Files, Flags, ExCtx).
+
+
+'$lgt_logtalk_load'(Files, Flags, ExCtx) :-
 	catch(
-		'$lgt_logtalk_load'(Files, Flags),
+		'$lgt_logtalk_load_files'(Files, Flags),
 		error(Error, _),
-		'$lgt_logtalk_load_error_handler'(Error, Files, Flags)
+		'$lgt_logtalk_load_error_handler'(Error, Files, Flags, ExCtx)
 	).
 
 
-'$lgt_logtalk_load'(Files, Flags) :-
+'$lgt_logtalk_load_files'(Files, Flags) :-
 	'$lgt_init_warnings_counter'(logtalk_load(Files, Flags)),
 	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
@@ -2639,11 +2689,11 @@ logtalk_load(Files, Flags) :-
 	'$lgt_clean_pp_file_clauses'.
 
 
-'$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
+'$lgt_logtalk_load_error_handler'(Error, Files, Flags, ExCtx) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
-	throw(error(Error, logtalk(logtalk_load(Files, Flags), _))).
+	throw(error(Error, logtalk(logtalk_load(Files, Flags), ExCtx))).
 
 
 
@@ -11174,6 +11224,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = setof(Term, TGoal, List),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), setof(Term, DGoal, List)), ExCtx)
 	).
+
+% file compilation and loading predicates
+
+'$lgt_compile_body'(logtalk_compile(Files), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_logtalk_compile'(Files, ExCtx),
+	DPred = '$lgt_debug'(goal(logtalk_compile(Files), TPred), ExCtx).
+
+'$lgt_compile_body'(logtalk_compile(Files, Flags), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_logtalk_compile'(Files, Flags, ExCtx),
+	DPred = '$lgt_debug'(goal(logtalk_compile(Files, Flags), TPred), ExCtx).
+
+'$lgt_compile_body'(logtalk_load(Files), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_logtalk_load'(Files, ExCtx),
+	DPred = '$lgt_debug'(goal(logtalk_load(Files), TPred), ExCtx).
+
+'$lgt_compile_body'(logtalk_load(Files, Flags), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_logtalk_load'(Files, Flags, ExCtx),
+	DPred = '$lgt_debug'(goal(logtalk_load(Files, Flags), TPred), ExCtx).
 
 % entity enumeration predicates
 
