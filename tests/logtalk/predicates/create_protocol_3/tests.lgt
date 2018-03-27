@@ -78,4 +78,36 @@
 		% delay the error to runtime
 		{create_protocol(Protocol, [extends(Category)], [])}.
 
+	succeeds(create_protocol_3_13) :-
+		create_protocol(Protocol, [], []),
+		atom(Protocol).
+
+	succeeds(create_protocol_3_14) :-
+		create_protocol(create_protocol_3_test_protocol, [], []),
+		abolish_protocol(create_protocol_3_test_protocol).
+
+	succeeds(create_protocol_3_15) :-
+		create_protocol(Protocol, [], []),
+		abolish_protocol(Protocol).
+
+	succeeds(create_protocol_3_16) :-
+		create_protocol(Parent, [], [public([p/1, q/1])]),
+		create_protocol(Descendant, [extends(Parent)], []),
+		abolish_protocol(Descendant),
+		abolish_protocol(Parent).
+
+	throws(create_protocol_3_17, error(permission_error(extend, self, _), logtalk(create_protocol(Protocol, [extends(Protocol)], []), _))) :-
+		% delay the error to runtime
+		{create_protocol(Protocol, [extends(Protocol)], [])}.
+
+	throws(create_protocol_3_18, error(type_error(protocol, Category), logtalk(create_protocol(Protocol, [extends(Category)], []), _))) :-
+		create_category(Category, [], [], []),
+		% delay the error to runtime
+		{create_protocol(Protocol, [extends(Category)], [])}.
+
+	throws(create_protocol_3_19, error(type_error(protocol, Object), logtalk(create_protocol(Protocol, [extends(Object)], []), _))) :-
+		create_object(Object, [], [], []),
+		% delay the error to runtime
+		{create_protocol(Protocol, [extends(Object)], [])}.
+
 :- end_object.

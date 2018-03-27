@@ -40,6 +40,9 @@ Tests
 
 * CHANGED: Refactoring of the built-in entity and event tests.
 
+* ADDED: Missing tests for error conditions of the `create_protocol/3`
+built-in predicate.
+
 
 3.15.0 - March 21, 2018
 =======================
