@@ -28,31 +28,31 @@
 		comment is 'Unit tests for the assertz/1 built-in method.'
 	]).
 
-	throws(assertz_1_1, error(instantiation_error, logtalk(test_object::assertz(_),_))) :-
+	throws(assertz_1_01, error(instantiation_error, logtalk(assertz(_),_))) :-
 		{test_object::assertz(_)}.
 
-	throws(assertz_1_2, error(instantiation_error, logtalk(test_object::assertz((_:-_)),_))) :-
+	throws(assertz_1_02, error(instantiation_error, logtalk(assertz((_:-_)),_))) :-
 		{test_object::assertz((_ :- _))}.
 
-	throws(assertz_1_3, error(type_error(callable, 1), logtalk(test_object::assertz(1),_))) :-
+	throws(assertz_1_03, error(type_error(callable, 1), logtalk(test_object::assertz(1),_))) :-
 		{test_object::assertz(1)}.
 
-	throws(assertz_1_4, error(type_error(callable, 1), logtalk(test_object::assertz((1:-_)),_))) :-
+	throws(assertz_1_04, error(type_error(callable, 1), logtalk(test_object::assertz((1:-_)),_))) :-
 		{test_object::assertz((1 :- _))}.
 
-	throws(assertz_1_5, error(type_error(callable, 1), logtalk(test_object::assertz((p:-1)),_))) :-
+	throws(assertz_1_05, error(type_error(callable, 1), logtalk(test_object::assertz((p:-1)),_))) :-
 		{test_object::assertz((p :- 1))}.
 
-	throws(assertz_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz(q(_,_)),_))) :-
+	throws(assertz_1_06, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz(q(_,_)),_))) :-
 		{test_object::assertz(q(_,_))}.
 
-	throws(assertz_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz((q(_,_) :- nl)),_))) :-
+	throws(assertz_1_07, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz((q(_,_) :- nl)),_))) :-
 		{test_object::assertz((q(_,_) :- nl))}.
 
-	throws(assertz_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(assertz(r(_,_,_)),_))) :-
+	throws(assertz_1_08, error(permission_error(modify, private_predicate, r/3), logtalk(assertz(r(_,_,_)),_))) :-
 		{test_object::assertz(r(_,_,_))}.
 
-	throws(assertz_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(assertz((r(_,_,_) :- nl)),_))) :-
+	throws(assertz_1_09, error(permission_error(modify, private_predicate, r/3), logtalk(assertz((r(_,_,_) :- nl)),_))) :-
 		{test_object::assertz((r(_,_,_) :- nl))}.
 
 	throws(assertz_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(assertz(s(_,_,_,_)),_))) :-

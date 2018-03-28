@@ -49,10 +49,10 @@ a(1).
 		this(This),
 		{This::predicate_property(foo, bar)}.
 
-	throws(predicate_property_2_04, error(instantiation_error, logtalk(predicate_property(foo,_),_))) :-
+	throws(predicate_property_2_04, error(instantiation_error, logtalk(_::predicate_property(foo,_),_))) :-
 		{test_object::ie(_)}.
 
-	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(predicate_property(foo,_),_))) :-
+	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(1::predicate_property(foo,_),_))) :-
 		{test_object::te}.
 
 	% Prolog built-in predicates are interpreted as private predicates

@@ -33,37 +33,37 @@
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
-	throws(current_op_3_1, error(type_error(integer,a), logtalk(This::current_op(a,_,_),_))) :-
+	throws(current_op_3_01, error(type_error(integer,a), logtalk(This::current_op(a,_,_),_))) :-
 		this(This),
 		{This::current_op(a, _, _)}.
 
-	throws(current_op_3_2, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),_))) :-
+	throws(current_op_3_02, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),_))) :-
 		this(This),
 		{This::current_op(3000, _, _)}.
 
-	throws(current_op_3_3, error(type_error(atom,1), logtalk(This::current_op(_,1,_),_))) :-
+	throws(current_op_3_03, error(type_error(atom,1), logtalk(This::current_op(_,1,_),_))) :-
 		this(This),
 		{This::current_op(_, 1, _)}.
 
-	throws(current_op_3_4, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),_))) :-
+	throws(current_op_3_04, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),_))) :-
 		this(This),
 		{This::current_op(_, a, _)}.
 
-	throws(current_op_3_5, error(type_error(atom,1), logtalk(This::current_op(_,_,1),_))) :-
+	throws(current_op_3_05, error(type_error(atom,1), logtalk(This::current_op(_,_,1),_))) :-
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	throws(current_op_3_6, error(instantiation_error, logtalk(current_op(_,_,_),_))) :-
+	throws(current_op_3_06, error(instantiation_error, logtalk(_::current_op(_,_,_),_))) :-
 		{test_object_1::ie(_)}.
 
-	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(current_op(_,_,_),_))) :-
+	throws(current_op_3_07, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),_))) :-
 		{test_object_1::te}.
 
-	succeeds(current_op_3_8) :-
+	succeeds(current_op_3_08) :-
 		setof(Operator, test_object_1<<current_op(501, xfx, Operator), Operators),
 		Operators == [abc, def, ghi].
 
-	succeeds(current_op_3_9) :-
+	succeeds(current_op_3_09) :-
 		setof(Operator, test_object_1::current_op(501, xfx, Operator), Operators),
 		Operators == [abc].
 

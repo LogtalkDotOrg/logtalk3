@@ -37,37 +37,37 @@ foobaz.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the clause/2 built-in method.'
 	]).
 
-	throws(clause_2_1, error(instantiation_error, logtalk(test_object::clause(_,_),_))) :-
+	throws(clause_2_01, error(instantiation_error, logtalk(clause(_,_),_))) :-
 		{test_object::clause(_, _)}.
 
-	throws(clause_2_2, error(type_error(callable, 1), logtalk(test_object::clause(1,_),_))) :-
+	throws(clause_2_02, error(type_error(callable, 1), logtalk(test_object::clause(1,_),_))) :-
 		{test_object::clause(1, _)}.
 
-	throws(clause_2_3, error(type_error(callable, 1), logtalk(test_object::clause(head,1),_))) :-
+	throws(clause_2_03, error(type_error(callable, 1), logtalk(test_object::clause(head,1),_))) :-
 		{test_object::clause(head, 1)}.
 
-	throws(clause_2_4, error(permission_error(access, protected_predicate, q/2), logtalk(test_object::clause(q(_,_),_),_))) :-
+	throws(clause_2_04, error(permission_error(access, protected_predicate, q/2), logtalk(clause(q(_,_),_),_))) :-
 		{test_object::clause(q(_,_), _)}.
 
-	throws(clause_2_5, error(permission_error(access, private_predicate, r/3), logtalk(test_object::clause(r(_,_,_),_),_))) :-
+	throws(clause_2_05, error(permission_error(access, private_predicate, r/3), logtalk(clause(r(_,_,_),_),_))) :-
 		{test_object::clause(r(_,_,_), _)}.
 
-	throws(clause_2_6, error(permission_error(access, static_predicate, s/4), logtalk(test_object::clause(s(_,_,_,_),_),_))) :-
+	throws(clause_2_06, error(permission_error(access, static_predicate, s/4), logtalk(clause(s(_,_,_,_),_),_))) :-
 		{test_object::clause(s(_,_,_,_), _)}.
 
-	throws(clause_2_7, error(existence_error(predicate_declaration, unknown/1), logtalk(test_object::clause(unknown(_),_),_))) :-
+	throws(clause_2_07, error(existence_error(predicate_declaration, unknown/1), logtalk(clause(unknown(_),_),_))) :-
 		{test_object::clause(unknown(_), _)}.
 
-	throws(clause_2_8, error(instantiation_error, logtalk(_::clause(foo,_),_))) :-
+	throws(clause_2_08, error(instantiation_error, logtalk(_::clause(foo,_),_))) :-
 		{test_object::ie(_)}.
 
-	throws(clause_2_9, error(type_error(object_identifier, 1), logtalk(1::clause(foo,_),_))) :-
+	throws(clause_2_09, error(type_error(object_identifier, 1), logtalk(1::clause(foo,_),_))) :-
 		{test_object::te}.
 
 	succeeds(clause_2_10) :-

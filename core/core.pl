@@ -595,10 +595,6 @@ Obj<<Goal :-
 	!,
 	'$lgt_runtime_error_handler'(error(Error, Context)).
 
-'$lgt_runtime_error_handler'(error(Error, logtalk(Object::Goal, user))) :-
-	Object == user,
-	throw(error(Error, Goal)).
-
 '$lgt_runtime_error_handler'(error(existence_error(thread,Queue), TContext)) :-
 	'$lgt_runtime_thread_error_handler_helper'(TContext, Context),
 	throw(error(existence_error(thread,Queue), Context)).
@@ -643,23 +639,18 @@ Obj<<Goal :-
 		throw(error(existence_error(category, CtgOrPtc), logtalk(_, _)))
 	).
 
-'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/TArity), logtalk(Goal, Entity))) :-
+'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/TArity), logtalk(Goal, ExCtx))) :-
 	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, _, _, Functor/Arity),
-	throw(error(existence_error(procedure, Functor/Arity), logtalk(Goal, Entity))).
-
-'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/TArity), _)) :-
-	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, _, Functor/Arity),
-	functor(Goal, Functor, Arity),
-	throw(error(existence_error(procedure, Functor/Arity), logtalk(Goal, Entity))).
+	throw(error(existence_error(procedure, Functor/Arity), logtalk(Goal, ExCtx))).
 
 '$lgt_runtime_normalized_error_handler'(Error) :-
 	throw(Error).
 
 
-'$lgt_runtime_thread_error_handler_helper'(logtalk(threaded_exit(TGoal),This), logtalk(threaded_exit(Goal),This)) :-
+'$lgt_runtime_thread_error_handler_helper'(logtalk(threaded_exit(TGoal),ExCtx), logtalk(threaded_exit(Goal),ExCtx)) :-
 	'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal).
 
-'$lgt_runtime_thread_error_handler_helper'(logtalk(threaded_exit(TGoal,Tag),This), logtalk(threaded_exit(Goal,Tag),This)) :-
+'$lgt_runtime_thread_error_handler_helper'(logtalk(threaded_exit(TGoal,Tag),ExCtx), logtalk(threaded_exit(Goal,Tag),ExCtx)) :-
 	'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal).
 
 '$lgt_runtime_thread_error_handler_helper'(Context, Context).
@@ -3365,7 +3356,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % local operator declarations without a scope declaration are invisible
 
 '$lgt_current_op'(Obj, Priority, Specifier, Operator, Sender, Scope, ExCtx) :-
-	'$lgt_check'(object, Obj, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
+	'$lgt_check'(object, Obj, logtalk(Obj::current_op(Priority, Specifier, Operator), ExCtx)),
 	'$lgt_check'(var_or_operator_priority, Priority, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
 	'$lgt_check'(var_or_operator_specifier, Specifier, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
 	'$lgt_check'(var_or_atom, Operator, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
@@ -3450,7 +3441,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property'(Obj, Pred, Prop, _, _, ExCtx) :-
 	'$lgt_check'(callable, Pred, logtalk(predicate_property(Pred, Prop), ExCtx)),
 	'$lgt_check'(var_or_predicate_property, Prop, logtalk(predicate_property(Pred, Prop), ExCtx)),
-	'$lgt_check'(object, Obj, logtalk(predicate_property(Pred, Prop), ExCtx)),
+	'$lgt_check'(object, Obj, logtalk(Obj::predicate_property(Pred, Prop), ExCtx)),
 	fail.
 
 '$lgt_predicate_property'(user, Pred, Prop, _, _, _) :-
@@ -3817,7 +3808,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % abolish/1 built-in method
 
 '$lgt_abolish'(Obj, Pred, Sender, TestScope, ExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(abolish(Pred), ExCtx)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::abolish(Pred), ExCtx)),
 	'$lgt_check'(predicate_indicator, Pred, logtalk(abolish(Pred), ExCtx)),
 	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope, ExCtx).
 
@@ -3874,7 +3865,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_abolish_checked'(Obj, Pred, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(abolish(Pred), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::abolish(Pred), ExCtx))).
 
 
 
@@ -3893,8 +3884,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	asserta(TClause).
 
 '$lgt_asserta'(Obj, Clause, Sender, TestScope, DclScope, ExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::asserta(Clause), Sender)),
-	'$lgt_check'(clause, Clause, logtalk(Obj::asserta(Clause), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::asserta(Clause), ExCtx)),
+	'$lgt_check'(clause, Clause, logtalk(asserta(Clause), ExCtx)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
 			'$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx)
@@ -3968,7 +3959,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_asserta_fact_checked'(Obj, Head, _, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(asserta(Head), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::asserta(Head), ExCtx))).
 
 
 
@@ -3988,7 +3979,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_assertz'(Obj, Clause, Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::assertz(Clause), Sender)),
-	'$lgt_check'(clause, Clause, logtalk(Obj::assertz(Clause), Sender)),
+	'$lgt_check'(clause, Clause, logtalk(assertz(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
 			'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx)
@@ -4027,7 +4018,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_assertz_rule_checked'(Obj, Clause, _, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), assertz(Clause), ExCtx)).
+	throw(error(existence_error(object, Obj), logtalk(Obj::assertz(Clause), ExCtx))).
 
 
 '$lgt_assertz_fact_checked'(Obj, Head, Sender, _, _, _) :-
@@ -4062,7 +4053,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_assertz_fact_checked'(Obj, Head, _, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(assertz(Head), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::assertz(Head), ExCtx))).
 
 
 
@@ -4132,7 +4123,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_clause'(Obj, Head, Body, Sender, TestScope) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::clause(Head, Body), Sender)),
-	'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(Obj::clause(Head, Body), Sender)),
+	'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(clause(Head, Body), Sender)),
 	'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope).
 
 
@@ -4170,13 +4161,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::clause(Head, Body), Sender)))
-				;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::clause(Head, Body), Sender)))
+					throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(clause(Head, Body), Sender)))
+				;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(clause(Head, Body), Sender)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(Obj::clause(Head, Body), Sender)))
+			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(clause(Head, Body), Sender)))
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
@@ -4190,7 +4181,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	TBody = Body
 			)
 		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::clause(Head, Body), Sender)))
+			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body), Sender)))
 		)
 	).
 
@@ -4216,7 +4207,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_update_ddef_table_opt'(UClause).
 
 '$lgt_retract'(Obj, Clause, Sender, TestScope, ExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(retract(Clause), ExCtx)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retract(Clause), ExCtx)),
 	'$lgt_check'(clause_or_partial_clause, Clause, logtalk(retract(Clause), ExCtx)),
 	(	Clause = (Head :- Body) ->
 		(	var(Body) ->
@@ -4284,7 +4275,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_retract_var_body_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(retract((Head:-Body)), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::retract((Head:-Body)), ExCtx))).
 
 
 '$lgt_retract_rule_checked'(Obj, (Head:-Body), Sender, TestScope, ExCtx) :-
@@ -4324,7 +4315,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_retract_rule_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(retract((Head:-Body)), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::retract((Head:-Body)), ExCtx))).
 
 
 '$lgt_retract_fact_checked'(Obj, Head, Sender, _, _) :-
@@ -4385,7 +4376,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_retract_fact_checked'(Obj, Head, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(retract(Head), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::retract(Head), ExCtx))).
 
 
 
@@ -4406,7 +4397,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_update_ddef_table_opt'(UClause).
 
 '$lgt_retractall'(Obj, Head, Sender, TestScope, ExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(retractall(Head), ExCtx)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retractall(Head), ExCtx)),
 	'$lgt_check'(callable, Head, logtalk(retractall(Head), ExCtx)),
 	'$lgt_retractall_checked'(Obj, Head, Sender, TestScope, ExCtx).
 
@@ -4466,7 +4457,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_retractall_checked'(Obj, Head, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(retractall(Head), ExCtx))).
+	throw(error(existence_error(object, Obj), logtalk(Obj::retractall(Head), ExCtx))).
 
 
 
