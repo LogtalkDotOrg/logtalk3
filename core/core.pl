@@ -2059,7 +2059,6 @@ threaded_call(Goal, Tag) :-
 
 threaded_call(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal, Tag), ExCtx)),
 	'$lgt_check'(var, Tag, logtalk(threaded_call(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_call_tagged'(Goal, Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -2073,7 +2072,6 @@ threaded_call(Goal) :-
 
 threaded_call(Goal) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal), ExCtx)),
 	catch('$lgt_threaded_call'(Goal, Goal, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2086,7 +2084,6 @@ threaded_once(Goal, Tag) :-
 
 threaded_once(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal, Tag), ExCtx)),
 	'$lgt_check'(var, Tag, logtalk(threaded_once(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_once_tagged'(Goal, Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -2100,7 +2097,6 @@ threaded_once(Goal) :-
 
 threaded_once(Goal) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal), ExCtx)),
 	catch('$lgt_threaded_once'(Goal, Goal, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2126,7 +2122,6 @@ threaded_exit(Goal, Tag) :-
 threaded_exit(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal, Tag), ExCtx)),
-	'$lgt_check'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_exit_tagged'(Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2153,8 +2148,7 @@ threaded_peek(Goal, Tag) :-
 threaded_peek(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal, Tag), ExCtx)),
-	'$lgt_check'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), ExCtx)),
-	catch('$lgt_threaded_peek_tagged'(Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
+	catch('$lgt_threaded_peek_tagged'(Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
 % threaded_peek(+callable)
@@ -2167,7 +2161,7 @@ threaded_peek(Goal) :-
 threaded_peek(Goal) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal), ExCtx)),
-	catch('$lgt_threaded_peek'(Goal, user, user), Error, '$lgt_runtime_error_handler'(Error)).
+	catch('$lgt_threaded_peek'(Goal, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
 
 
 % threaded_engine_create(@term, @callable, ?nonvar)
@@ -2178,7 +2172,8 @@ threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	throw(error(resource_error(threads), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx))).
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
-	catch('$lgt_threaded_engine_create'(AnswerTemplate, Goal, Goal, user, Engine), Error, '$lgt_runtime_error_handler'(Error)).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	catch('$lgt_threaded_engine_create'(AnswerTemplate, Goal, Goal, ExCtx, Engine), Error, '$lgt_runtime_error_handler'(Error)).
 
 
 % threaded_engine(?nonvar)
@@ -11698,11 +11693,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(threaded_peek(Goal, Tag), MTGoal, '$lgt_debug'(goal(threaded_peek(Goal, Tag), MDGoal), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_peek_tagged'(TGoal, This, Self, Tag),
-	MDGoal = '$lgt_threaded_peek_tagged'(DGoal, This, Self, Tag),
-	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
+	MTGoal = '$lgt_threaded_peek_tagged'(TGoal, ExCtx, Tag),
+	MDGoal = '$lgt_threaded_peek_tagged'(DGoal, ExCtx, Tag).
 
 
 '$lgt_compile_body'(threaded_peek(_), _, _, _) :-
@@ -11712,11 +11706,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(threaded_peek(Goal), MTGoal, '$lgt_debug'(goal(threaded_peek(Goal), MDGoal), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_peek'(TGoal, This, Self),
-	MDGoal = '$lgt_threaded_peek'(DGoal, This, Self),
-	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
+	MTGoal = '$lgt_threaded_peek'(TGoal, ExCtx),
+	MDGoal = '$lgt_threaded_peek'(DGoal, ExCtx).
 
 
 '$lgt_compile_body'(threaded_engine_create(_, _, _), _, _, _) :-
@@ -11726,11 +11719,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(threaded_engine_create(AnswerTemplate, Goal, Engine), MTGoal, '$lgt_debug'(goal(threaded_engine_create(AnswerTemplate, Goal, Engine), MDGoal), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine),
-	MDGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, DGoal, This, Engine),
-	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _).
+	MTGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, ExCtx, Engine),
+	MDGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, DGoal, ExCtx, Engine).
 
 
 '$lgt_compile_body'(threaded_engine_self(_), _, _, _) :-
@@ -20810,23 +20802,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_threaded_peek'(+callable, +object_identifier, +object_identifier)
+% '$lgt_threaded_peek'(+callable, @execution_context)
 
-'$lgt_threaded_peek'(Goal, This, Self) :-
+'$lgt_threaded_peek'(Goal, ExCtx) :-
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, [], _, _)).
 
 
 
-% '$lgt_threaded_peek_tagged'(+callable, +object_identifier, +object_identifier, @nonvar)
+% '$lgt_threaded_peek_tagged'(+callable, @execution_context, @nonvar)
 
-'$lgt_threaded_peek_tagged'(Goal, This, Self, Tag) :-
-	(	var(Tag) ->
-		throw(error(instantiation_error, logtalk(threaded_peek(Goal, Tag), This)))
-	;	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
-		'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-		thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, _, _))
-	).
+'$lgt_threaded_peek_tagged'(Goal, ExCtx, Tag) :-
+	'$lgt_check'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), ExCtx)),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+	thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, _, _)).
 
 
 
@@ -20865,11 +20856,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_threaded_exit_tagged'(+callable, @execution_context, @nonvar)
 
 '$lgt_threaded_exit_tagged'(Goal, ExCtx, Tag) :-
-	(	var(Tag) ->
-		throw(error(instantiation_error, logtalk(threaded_exit(Goal, Tag), ExCtx)))
-	;	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
-		'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-		% first check if there is a thread running for proving the goal before proceeding
+	'$lgt_check'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), ExCtx)),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
+	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
+	(	% first check if there is a thread running for proving the goal before proceeding
 		thread_peek_message(Queue, '$lgt_thread_id'(Type, Goal, This, Self, Tag, Id)) ->
 		% answering thread exists; go ahead and retrieve the solution(s)
 		thread_get_message(Queue, '$lgt_thread_id'(Type, Goal, This, Self, Tag, Id)),
@@ -20877,7 +20867,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			setup_call_cleanup(
 				true,
 				'$lgt_mt_det_reply'(Queue, Goal, This, Self, Tag, Id),
-				thread_join(Id, _))
+				thread_join(Id, _)
+			)
 		;	setup_call_cleanup(
 				true,
 				'$lgt_mt_non_det_reply'(Queue, Goal, This, Self, Tag, Id),
@@ -20931,21 +20922,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the engine thread is only created if the original goal is callable; this prevents
 % programming errors going unnoticed until we try to retrieve the first answer
 
-'$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, This, Engine) :-
+'$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, ExCtx, Engine) :-
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx)),
 	with_mutex(
 		'$lgt_engines',
-		'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, This, Engine)
+		'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, ExCtx, Engine)
 	).
 
 
-'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, This, Engine) :-
+'$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, ExCtx, Engine) :-
+	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _),
 	(	var(Engine) ->
 		'$lgt_new_threaded_tag'(Engine)
 	;	'$lgt_current_engine_'(This, Engine, _, _) ->
-		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)))
+		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx)))
 	;	true
 	),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), This)),
 	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
 	message_queue_create(TermQueue),
 	thread_create('$lgt_mt_engine_goal'(ThisQueue, TermQueue, AnswerTemplate, TGoal, Engine), Id, []),
