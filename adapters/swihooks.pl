@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on November 28, 2017
+%  Last updated on March 28, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -145,7 +145,7 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj'(_, _, _), '::/2 (event transparent)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_ne'(_, _, _), '::/2 (event transparent)') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_send_to_self'(_, _, _), '::/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_self'(_, _), '::/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
@@ -200,10 +200,10 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_or'(_, _, _), 'threaded/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_and'(_, _, _), 'threaded/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_ignore'(_, _, _), 'threaded_ignore/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call'(_, _, _, _), 'threaded_call/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once'(_, _, _, _), 'threaded_once/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call_tagged'(_, _, _, _, _), 'threaded_call/2') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once_tagged'(_, _, _, _, _), 'threaded_once/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call'(_, _, _), 'threaded_call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once'(_, _, _), 'threaded_once/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call_tagged'(_, _, _, _), 'threaded_call/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once_tagged'(_, _, _, _), 'threaded_once/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek'(_, _, _, _), 'threaded_peek/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek_tagged'(_, _, _, _, _), 'threaded_peek/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit'(_, _, _, _), 'threaded_exit/1') :- !.
@@ -358,7 +358,7 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne_'(Obj, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_'(Obj, Msg, _), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self'(_, Msg, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self'(Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self_nv'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self_'(_, Msg, _), TermPos, TermPos) :- !.
 
@@ -460,16 +460,16 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(clause(Head, Body), _, '$lgt_clause_checked'(_, Head, Body, _, p(_)), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(::clause(Head, Body), _, '$lgt_clause_checked'(_, Head, Body, _, p(_)), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(Obj::retract(Head), _, '$lgt_retract_fact_checked'(Obj, Head, _, p(p(p))), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(retract(Head), _, '$lgt_retract_fact_checked'(_, Head, _, p(_)), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(::retract(Head), _, '$lgt_retract_fact_checked'(_, Head, _, p(_)), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Obj::retract(Clause), _, '$lgt_retract_rule_checked'(Obj, Clause, _, p(p(p))), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(retract(Clause), _, '$lgt_retract_rule_checked'(_, Clause, _, p(_)), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(::retract(Clause), _, '$lgt_retract_rule_checked'(_, Clause, _, p(_)), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::retract(Head), _, '$lgt_retract_fact_checked'(Obj, Head, _, p(p(p)), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(retract(Head), _, '$lgt_retract_fact_checked'(_, Head, _, p(_), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::retract(Head), _, '$lgt_retract_fact_checked'(_, Head, _, p(_), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::retract(Clause), _, '$lgt_retract_rule_checked'(Obj, Clause, _, p(p(p)), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(retract(Clause), _, '$lgt_retract_rule_checked'(_, Clause, _, p(_), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::retract(Clause), _, '$lgt_retract_rule_checked'(_, Clause, _, p(_), _), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(Obj::retractall(Head), _, '$lgt_retractall_checked'(Obj, Head, _, p(p(p))), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(retractall(Head), _, '$lgt_retractall_checked'(_, Head, _, p(_)), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(::retractall(Head), _, '$lgt_retractall_checked'(_, Head, _, p(_)), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::retractall(Head), _, '$lgt_retractall_checked'(Obj, Head, _, p(p(p)), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(retractall(Head), _, '$lgt_retractall_checked'(_, Head, _, p(_), _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::retractall(Head), _, '$lgt_retractall_checked'(_, Head, _, p(_), _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(read_term(Stream, Term, Options), _, '$lgt_iso_read_term'(Stream, Term, Options, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(read_term(Term, Options), _, '$lgt_iso_read_term'(Term, Options, _), TermPos, TermPos) :- !.
@@ -497,10 +497,10 @@ user:portray(c(This, Entity, Rest)) :-
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
 
 '$lgt_swi_unify_clause_body'(threaded_ignore(Goal), _, '$lgt_threaded_ignore'(Goal, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_call(Goal), _, '$lgt_threaded_call'(Goal, _, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_once(Goal), _, '$lgt_threaded_once'(Goal, _, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_call(Goal, Tag), _, '$lgt_threaded_call_tagged'(Goal, _, _, _, Tag), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(threaded_once(Goal, Tag), _, '$lgt_threaded_once_tagged'(Goal, _, _, _, Tag), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_call(Goal), _, '$lgt_threaded_call'(Goal, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_once(Goal), _, '$lgt_threaded_once'(Goal, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_call(Goal, Tag), _, '$lgt_threaded_call_tagged'(Goal, _, _, Tag), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(threaded_once(Goal, Tag), _, '$lgt_threaded_once_tagged'(Goal, _, _, Tag), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(threaded_peek(Goal), Entity, '$lgt_threaded_peek'(TGoal, _, _, _), TermPos0, TermPos) :- !,
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
@@ -718,15 +718,15 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_send_to_self_nv'(*,*,*).
 
 :- meta_predicate '$lgt_threaded_goal'(*,*,*,*).
-:- meta_predicate '$lgt_threaded_call'(*,*,*,*).
-:- meta_predicate '$lgt_threaded_once'(*,*,*,*).
+:- meta_predicate '$lgt_threaded_call'(*,*,*).
+:- meta_predicate '$lgt_threaded_once'(*,*,*).
 :- meta_predicate '$lgt_ctg_super_call_'(*,*,*).
 :- meta_predicate '$lgt_send_to_obj_'(*,*,*).
 :- meta_predicate '$lgt_obj_super_call_'(*,*,*).
 :- meta_predicate '$lgt_send_to_obj_ne_'(*,*,*).
-:- meta_predicate '$lgt_threaded_once_tagged'(*,*,*,*,*).
+:- meta_predicate '$lgt_threaded_once_tagged'(*,*,*,*).
 :- meta_predicate '$lgt_send_to_self_'(*,*,*).
-:- meta_predicate '$lgt_threaded_call_tagged'(*,*,*,*,*).
+:- meta_predicate '$lgt_threaded_call_tagged'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_ignore'(*,*,*).
 
 :- meta_predicate '$lgt_send_to_obj_rt'(*,*,*,*).
@@ -734,7 +734,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_ctg_super_call'(*,*,*).
 :- meta_predicate '$lgt_obj_super_call'(*,*,*).
 :- meta_predicate '$lgt_send_to_obj'(*,*,*).
-:- meta_predicate '$lgt_send_to_self'(*,*,*).
+:- meta_predicate '$lgt_send_to_self'(*,*).
 :- meta_predicate '$lgt_call_within_context_nv'(*,*,*).
 :- meta_predicate '$lgt_call_within_context'(*,*,*).
 

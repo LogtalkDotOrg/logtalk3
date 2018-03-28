@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the assertz/1 built-in method.'
 	]).
 
@@ -43,25 +43,25 @@
 	throws(assertz_1_5, error(type_error(callable, 1), logtalk(test_object::assertz((p:-1)),_))) :-
 		{test_object::assertz((p :- 1))}.
 
-	throws(assertz_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::assertz(q(_,_)),_))) :-
+	throws(assertz_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz(q(_,_)),_))) :-
 		{test_object::assertz(q(_,_))}.
 
-	throws(assertz_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::assertz((q(_,_) :-nl)),_))) :-
+	throws(assertz_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz((q(_,_) :- nl)),_))) :-
 		{test_object::assertz((q(_,_) :- nl))}.
 
-	throws(assertz_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::assertz(r(_,_,_)),_))) :-
+	throws(assertz_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(assertz(r(_,_,_)),_))) :-
 		{test_object::assertz(r(_,_,_))}.
 
-	throws(assertz_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::assertz((r(_,_,_) :-nl)),_))) :-
+	throws(assertz_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(assertz((r(_,_,_) :- nl)),_))) :-
 		{test_object::assertz((r(_,_,_) :- nl))}.
 
-	throws(assertz_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::assertz(s(_,_,_,_)),_))) :-
+	throws(assertz_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(assertz(s(_,_,_,_)),_))) :-
 		{test_object::assertz(s(_,_,_,_))}.
 
-	throws(assertz_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::assertz((s(_,_,_,_) :-nl)),_))) :-
+	throws(assertz_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(assertz((s(_,_,_,_) :- nl)),_))) :-
 		{test_object::assertz((s(_,_,_,_) :- nl))}.
 
-	throws(assertz_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(test_object::assertz(new),_))) :-
+	throws(assertz_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(assertz(new),_))) :-
 		{test_object::assertz(new)}.
 
 	throws(assertz_1_13, error(instantiation_error, logtalk(_::assertz(foo),_))) :-

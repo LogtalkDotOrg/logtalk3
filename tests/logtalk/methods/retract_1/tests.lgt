@@ -31,16 +31,16 @@ baz(1). baz(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the retract/1 built-in method.'
 	]).
 
-	throws(retract_1_1, error(instantiation_error, logtalk(test_object::retract(_),_))) :-
+	throws(retract_1_1, error(instantiation_error, logtalk(retract(_),_))) :-
 		{test_object::retract(_)}.
 
-	throws(retract_1_2, error(instantiation_error, logtalk(test_object::retract((_:-_)),_))) :-
+	throws(retract_1_2, error(instantiation_error, logtalk(retract((_:-_)),_))) :-
 		{test_object::retract((_ :- _))}.
 
 	throws(retract_1_3, error(type_error(callable, 1), logtalk(test_object::retract(1),_))) :-
@@ -49,22 +49,22 @@ baz(1). baz(2).
 	throws(retract_1_4, error(type_error(callable, 1), logtalk(test_object::retract((1:-_)),_))) :-
 		{test_object::retract((1 :- _))}.
 
-	throws(retract_1_5, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::retract(q(_,_)),_))) :-
+	throws(retract_1_5, error(permission_error(modify, protected_predicate, q/2), logtalk(retract(q(_,_)),_))) :-
 		{test_object::retract(q(_,_))}.
 
-	throws(retract_1_6, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::retract(r(_,_,_)),_))) :-
+	throws(retract_1_6, error(permission_error(modify, private_predicate, r/3), logtalk(retract(r(_,_,_)),_))) :-
 		{test_object::retract(r(_,_,_))}.
 
-	throws(retract_1_7, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::retract(s(_,_,_,_)),_))) :-
+	throws(retract_1_7, error(permission_error(modify, static_predicate, s/4), logtalk(retract(s(_,_,_,_)),_))) :-
 		{test_object::retract(s(_,_,_,_))}.
 
-	throws(retract_1_8, error(existence_error(predicate_declaration, unknown/1), logtalk(test_object::retract(unknown(_)),_))) :-
+	throws(retract_1_8, error(existence_error(predicate_declaration, unknown/1), logtalk(retract(unknown(_)),_))) :-
 		{test_object::retract(unknown(_))}.
 
-	throws(retract_1_9, error(instantiation_error, logtalk(_::retract(foo),_))) :-
+	throws(retract_1_9, error(instantiation_error, logtalk(retract(foo),_))) :-
 		{test_object::ie(_)}.
 
-	throws(retract_1_10, error(type_error(object_identifier, 1), logtalk(1::retract(foo),_))) :-
+	throws(retract_1_10, error(type_error(object_identifier, 1), logtalk(retract(foo),_))) :-
 		{test_object::te}.
 
 	succeeds(retract_1_11) :-

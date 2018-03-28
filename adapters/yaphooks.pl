@@ -3,7 +3,7 @@
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
 %
-%  Last updated on June 27, 2016
+%  Last updated on March 28, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -35,7 +35,7 @@ user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event-aware)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj_ne'(_, _, _), '::/2 (event transparent)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
+user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
@@ -67,9 +67,9 @@ user:prolog_predicate_name(user:'$lgt_asserta_rule_checked'(_, _, _, _, _), 'ass
 user:prolog_predicate_name(user:'$lgt_assertz_fact_checked'(_, _, _, _, _), 'assertz/1') :- !.
 user:prolog_predicate_name(user:'$lgt_assertz_rule_checked'(_, _, _, _, _), 'assertz/1') :- !.
 user:prolog_predicate_name(user:'$lgt_clause_checked'(_, _, _, _, _), 'clause/2') :- !.
-user:prolog_predicate_name(user:'$lgt_retract_fact_checked'(_, _, _, _), 'retract/1') :- !.
-user:prolog_predicate_name(user:'$lgt_retract_rule_checked'(_, _, _, _), 'retract/1') :- !.
-user:prolog_predicate_name(user:'$lgt_retractall_checked'(_, _, _, _), 'retractall/1') :- !.
+user:prolog_predicate_name(user:'$lgt_retract_fact_checked'(_, _, _, _, _), 'retract/1') :- !.
+user:prolog_predicate_name(user:'$lgt_retract_rule_checked'(_, _, _, _, _), 'retract/1') :- !.
+user:prolog_predicate_name(user:'$lgt_retractall_checked'(_, _, _, _, _), 'retractall/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_iso_read_term'(_, _, _, _), 'read_term/3') :- !.
 user:prolog_predicate_name(user:'$lgt_iso_read_term'(_, _, _), 'read_term/2') :- !.
@@ -88,10 +88,10 @@ user:prolog_predicate_name(user:'$lgt_category_parameter'(_, _, _, _), 'paramete
 user:prolog_predicate_name(user:'$lgt_threaded_or'(_, _, _), 'threaded/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_and'(_, _, _), 'threaded/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_ignore'(_, _, _), 'threaded_ignore/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_call'(_, _, _, _), 'threaded_call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_once'(_, _, _, _), 'threaded_once/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_call_tagged'(_, _, _, _, _), 'threaded_call/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_once_tagged'(_, _, _, _, _), 'threaded_once/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_call'(_, _, _), 'threaded_call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_once'(_, _, _), 'threaded_once/1') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_call_tagged'(_, _, _, _), 'threaded_call/2') :- !.
+user:prolog_predicate_name(user:'$lgt_threaded_once_tagged'(_, _, _, _), 'threaded_once/2') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_peek'(_, _, _, _), 'threaded_peek/1') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_peek_tagged'(_, _, _, _, _), 'threaded_peek/2') :- !.
 user:prolog_predicate_name(user:'$lgt_threaded_exit'(_, _, _, _), 'threaded_exit/1') :- !.

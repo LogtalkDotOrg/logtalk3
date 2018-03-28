@@ -37,22 +37,22 @@ foobaz(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the abolish/1 built-in method.'
 	]).
 
-	throws(abolish_1_1, error(instantiation_error, logtalk(test_object::abolish(_),_))) :-
+	throws(abolish_1_1, error(instantiation_error, logtalk(abolish(_),_))) :-
 		{test_object::abolish(_)}.
 
-	throws(abolish_1_2, error(instantiation_error, logtalk(test_object::abolish(_/1),_))) :-
+	throws(abolish_1_2, error(instantiation_error, logtalk(abolish(_/1),_))) :-
 		{test_object::abolish(_/1)}.
 
-	throws(abolish_1_3, error(instantiation_error, logtalk(test_object::abolish(foo/_),_))) :-
+	throws(abolish_1_3, error(instantiation_error, logtalk(abolish(foo/_),_))) :-
 		{test_object::abolish(foo/_)}.
 
-	throws(abolish_1_4, error(instantiation_error, logtalk(test_object::abolish(foo/_),_))) :-
+	throws(abolish_1_4, error(instantiation_error, logtalk(abolish(foo/_),_))) :-
 		{test_object::abolish(foo/_)}.
 
 	throws(abolish_1_5, error(type_error(predicate_indicator, foo), logtalk(test_object::abolish(foo),_))) :-
@@ -64,25 +64,25 @@ foobaz(1).
 	throws(abolish_1_7, error(type_error(integer, bar), logtalk(test_object::abolish(foo/bar),_))) :-
 		{test_object::abolish(foo/bar)}.
 
-	throws(abolish_1_8, error(permission_error(modify, predicate_declaration, p/1), logtalk(test_object::abolish(p/1),_))) :-
+	throws(abolish_1_8, error(permission_error(modify, predicate_declaration, p/1), logtalk(abolish(p/1),_))) :-
 		{test_object::abolish(p/1)}.
 
-	throws(abolish_1_9, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::abolish(q/2),_))) :-
+	throws(abolish_1_9, error(permission_error(modify, protected_predicate, q/2), logtalk(abolish(q/2),_))) :-
 		{test_object::abolish(q/2)}.
 
-	throws(abolish_1_10, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::abolish(r/3),_))) :-
+	throws(abolish_1_10, error(permission_error(modify, private_predicate, r/3), logtalk(abolish(r/3),_))) :-
 		{test_object::abolish(r/3)}.
 
-	throws(abolish_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::abolish(s/4),_))) :-
+	throws(abolish_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(abolish(s/4),_))) :-
 		{test_object::abolish(s/4)}.
 
-	throws(abolish_1_12, error(existence_error(predicate_declaration, foo/0), logtalk(test_object::abolish(foo/0),_))) :-
+	throws(abolish_1_12, error(existence_error(predicate_declaration, foo/0), logtalk(abolish(foo/0),_))) :-
 		{test_object::abolish(foo/0)}.
 
-	throws(abolish_1_13, error(instantiation_error, logtalk(_::abolish(foo/1),test_object))) :-
+	throws(abolish_1_13, error(instantiation_error, logtalk(abolish(foo/1),_))) :-
 		{test_object::ie(_)}.
 
-	throws(abolish_1_14, error(type_error(object_identifier, 1), logtalk(1::abolish(foo/1),test_object))) :-
+	throws(abolish_1_14, error(type_error(object_identifier, 1), logtalk(abolish(foo/1),_))) :-
 		{test_object::te}.
 
 	succeeds(abolish_1_15) :-

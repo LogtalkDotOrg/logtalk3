@@ -3812,20 +3812,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_abolish'(+object_identifier, +predicate_indicator, +object_identifier, +scope)
+% '$lgt_abolish'(+object_identifier, +predicate_indicator, +object_identifier, +scope, @execution_context)
 %
 % abolish/1 built-in method
 
-'$lgt_abolish'(Obj, Pred, Sender, TestScope) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::abolish(Pred), Sender)),
-	'$lgt_check'(predicate_indicator, Pred, logtalk(Obj::abolish(Pred), Sender)),
-	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope).
+'$lgt_abolish'(Obj, Pred, Sender, TestScope, ExCtx) :-
+	'$lgt_check'(object_identifier, Obj, logtalk(abolish(Pred), ExCtx)),
+	'$lgt_check'(predicate_indicator, Pred, logtalk(abolish(Pred), ExCtx)),
+	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope, ExCtx).
 
-'$lgt_abolish_checked'(user, Functor/Arity, _, _) :-
+'$lgt_abolish_checked'(user, Functor/Arity, _, _, _) :-
 	!,
 	abolish(Functor/Arity).
 
-'$lgt_abolish_checked'(Obj, Functor/Arity, Sender, TestScope) :-
+'$lgt_abolish_checked'(Obj, Functor/Arity, Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, DDcl, DDef, _, ObjFlags),
 	!,
 	functor(Pred, Functor, Arity),
@@ -3835,14 +3835,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 			% predicate is within the scope of the sender
 			(	PredFlags /\ 2 =:= 2 ->
 				% static declaration for a dynamic predicate
-				throw(error(permission_error(modify, predicate_declaration, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
+				throw(error(permission_error(modify, predicate_declaration, Functor/Arity), logtalk(abolish(Functor/Arity), ExCtx)))
 			;	% predicate is static
-				throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
+				throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(abolish(Functor/Arity), ExCtx)))
 			)
 		;	% predicate is not within the scope of the sender
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(abolish(Functor/Arity), ExCtx)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(abolish(Functor/Arity), ExCtx)))
 			)
 		)
 	;	% no static predicate declaration...
@@ -3870,206 +3870,206 @@ create_logtalk_flag(Flag, Value, Options) :-
 		retractall(DDefClause),
 		'$lgt_clean_lookup_caches'(Pred)
 	;	% no predicate declaration
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(abolish(Functor/Arity), ExCtx)))
 	).
 
-'$lgt_abolish_checked'(Obj, Pred, Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::abolish(Pred), Sender))).
+'$lgt_abolish_checked'(Obj, Pred, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(abolish(Pred), ExCtx))).
 
 
 
-% '$lgt_asserta'(+object_identifier, @clause, +object_identifier, +scope, +scope)
+% '$lgt_asserta'(+object_identifier, @clause, +object_identifier, +scope, +scope, @execution_context)
 %
 % asserta/1 built-in method
 %
 % asserting facts uses a caching mechanism that saves the compiled form of the
 % facts to improve performance
 
-'$lgt_asserta'(Obj, Clause, Sender, _, _) :-
+'$lgt_asserta'(Obj, Clause, Sender, _, _, _) :-
 	nonvar(Obj),
 	nonvar(Clause),
 	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, _),
 	!,
 	asserta(TClause).
 
-'$lgt_asserta'(Obj, Clause, Sender, TestScope, DclScope) :-
+'$lgt_asserta'(Obj, Clause, Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::asserta(Clause), Sender)),
 	'$lgt_check'(clause, Clause, logtalk(Obj::asserta(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
-			'$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope)
-		;	'$lgt_asserta_rule_checked'(Obj, Clause, Sender, TestScope, DclScope)
+			'$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx)
+		;	'$lgt_asserta_rule_checked'(Obj, Clause, Sender, TestScope, DclScope, ExCtx)
 		)
-	;	'$lgt_asserta_fact_checked'(Obj, Clause, Sender, TestScope, DclScope)
+	;	'$lgt_asserta_fact_checked'(Obj, Clause, Sender, TestScope, DclScope, ExCtx)
 	).
 
 
-'$lgt_asserta_rule_checked'(Obj, (Head:-Body), Sender, TestScope, DclScope) :-
+'$lgt_asserta_rule_checked'(Obj, (Head:-Body), Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::asserta((Head:-Body)), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, asserta((Head:-Body)), ExCtx),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, _),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, GExCtx, THead, _),
 			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
-			'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
+			'$lgt_comp_ctx'(Ctx, Head, GExCtx, _, _, _, _, Prefix, MetaArgs, _, GExCtx, runtime, _, _),
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), ExCtx), DBody)))
+				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), GExCtx), DBody)))
 			;	asserta((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::asserta((Head:-Body)), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::asserta((Head:-Body)), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(asserta((Head:-Body)), ExCtx)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(asserta((Head:-Body)), ExCtx)))
 			)
 		)
 	;	% predicate is static
 		functor(Head, Functor, Arity),
-		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::asserta((Head:-Body)), Sender)))
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(asserta((Head:-Body)), ExCtx)))
 	).
 
-'$lgt_asserta_rule_checked'(Obj, Clause, Sender, _, _) :-
-	throw(error(existence_error(object, Obj), Obj::asserta(Clause), Sender)).
+'$lgt_asserta_rule_checked'(Obj, Clause, _, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), Obj::asserta(Clause), ExCtx)).
 
 
-'$lgt_asserta_fact_checked'(Obj, Head, Sender, _, _) :-
+'$lgt_asserta_fact_checked'(Obj, Head, Sender, _, _, _) :-
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, _),
 	!,
 	asserta(THead).
 
-'$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope) :-
+'$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::asserta(Head), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, asserta(Head), ExCtx),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, Update),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, GExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), ExCtx)))
+				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), GExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
 				asserta(THead)
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::asserta(Head), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::asserta(Head), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(asserta(Head), ExCtx)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(asserta(Head), ExCtx)))
 			)
 		)
 	;	% predicate is static
 		functor(Head, Functor, Arity),
-		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::asserta(Head), Sender)))
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(asserta(Head), ExCtx)))
 	).
 
-'$lgt_asserta_fact_checked'(Obj, Head, Sender, _, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::asserta(Head), Sender))).
+'$lgt_asserta_fact_checked'(Obj, Head, _, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(asserta(Head), ExCtx))).
 
 
 
-% '$lgt_assertz'(+object_identifier, @clause, +object_identifier, +scope, +scope)
+% '$lgt_assertz'(+object_identifier, @clause, +object_identifier, +scope, +scope, @execution_context)
 %
 % assertz/1 built-in method
 %
 % asserting facts uses a caching mechanism that saves the compiled form of the
 % facts to improve performance
 
-'$lgt_assertz'(Obj, Clause, Sender, _, _) :-
+'$lgt_assertz'(Obj, Clause, Sender, _, _, _) :-
 	nonvar(Obj),
 	nonvar(Clause),
 	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, _),
 	!,
 	assertz(TClause).
 
-'$lgt_assertz'(Obj, Clause, Sender, TestScope, DclScope) :-
+'$lgt_assertz'(Obj, Clause, Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::assertz(Clause), Sender)),
 	'$lgt_check'(clause, Clause, logtalk(Obj::assertz(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
-			'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope)
-		;	'$lgt_assertz_rule_checked'(Obj, Clause, Sender, TestScope, DclScope)
+			'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx)
+		;	'$lgt_assertz_rule_checked'(Obj, Clause, Sender, TestScope, DclScope, ExCtx)
 		)
-	;	'$lgt_assertz_fact_checked'(Obj, Clause, Sender, TestScope, DclScope)
+	;	'$lgt_assertz_fact_checked'(Obj, Clause, Sender, TestScope, DclScope, ExCtx)
 	).
 
 
-'$lgt_assertz_rule_checked'(Obj, (Head:-Body), Sender, TestScope, DclScope) :-
+'$lgt_assertz_rule_checked'(Obj, (Head:-Body), Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::assertz((Head:-Body)), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, assertz((Head:-Body)), ExCtx),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, _),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, GExCtx, THead, _),
 			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
-			'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
+			'$lgt_comp_ctx'(Ctx, Head, GExCtx, _, _, _, _, Prefix, MetaArgs, _, GExCtx, runtime, _, _),
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), ExCtx), DBody)))
+				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), GExCtx), DBody)))
 			;	assertz((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::assertz((Head:-Body)), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::assertz((Head:-Body)), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(assertz((Head:-Body)), ExCtx)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(assertz((Head:-Body)), ExCtx)))
 			)
 		)
 	;	% predicate is static
 		functor(Head, Functor, Arity),
-		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::assertz((Head:-Body)), Sender)))
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(assertz((Head:-Body)), ExCtx)))
 	).
 
-'$lgt_assertz_rule_checked'(Obj, Clause, Sender, _, _) :-
-	throw(error(existence_error(object, Obj), Obj::assertz(Clause), Sender)).
+'$lgt_assertz_rule_checked'(Obj, Clause, _, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), assertz(Clause), ExCtx)).
 
 
-'$lgt_assertz_fact_checked'(Obj, Head, Sender, _, _) :-
+'$lgt_assertz_fact_checked'(Obj, Head, Sender, _, _, _) :-
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, _),
 	!,
 	assertz(THead).
 
-'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope) :-
+'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::assertz(Head), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, assertz(Head), ExCtx),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, Update),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, GExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), ExCtx)))
+				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), GExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
 				assertz(THead)
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::assertz(Head), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::assertz(Head), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(assertz(Head), ExCtx)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(assertz(Head), ExCtx)))
 			)
 		)
 	;	% predicate is static
 		functor(Head, Functor, Arity),
-		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::assertz(Head), Sender)))
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(assertz(Head), ExCtx)))
 	).
 
-'$lgt_assertz_fact_checked'(Obj, Head, Sender, _, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::assertz(Head), Sender))).
+'$lgt_assertz_fact_checked'(Obj, Head, _, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(assertz(Head), ExCtx))).
 
 
 
 % gets or sets (if it doesn't exist) the declaration for an asserted predicate (but we must
 % not add a scope declaration when asserting clauses for a *local* dynamic predicate)
 
-'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, ObjFlags, Pred, Scope, Type, Meta, SCtn, DclScope, Goal, Sender) :-
+'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, ObjFlags, Pred, Scope, Type, Meta, SCtn, DclScope, Goal, ExCtx) :-
 	(	call(Dcl, Pred, Scope, Meta, PredFlags, SCtn, _) ->
 		% predicate declaration found; get predicate type
 		(	PredFlags /\ 2 =:= 2 ->
@@ -4091,7 +4091,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Scope = DclScope, Type = (dynamic), Meta = no, SCtn = Obj
 	;	% object doesn't allow dynamic declaration of new predicates
 		functor(Pred, Functor, Arity),
-		throw(error(permission_error(create, predicate_declaration, Functor/Arity), logtalk(Goal, Sender)))
+		throw(error(permission_error(create, predicate_declaration, Functor/Arity), logtalk(Goal, ExCtx)))
 	).
 
 
@@ -4199,7 +4199,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_retract'(+object_identifier, @clause, +object_identifier, +scope)
+% '$lgt_retract'(+object_identifier, @clause, +object_identifier, +scope, @execution_context)
 %
 % retract/1 built-in method
 %
@@ -4215,21 +4215,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retract(TClause),
 	'$lgt_update_ddef_table_opt'(UClause).
 
-'$lgt_retract'(Obj, Clause, Sender, TestScope) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retract(Clause), Sender)),
-	'$lgt_check'(clause_or_partial_clause, Clause, logtalk(Obj::retract(Clause), Sender)),
+'$lgt_retract'(Obj, Clause, Sender, TestScope, ExCtx) :-
+	'$lgt_check'(object_identifier, Obj, logtalk(retract(Clause), ExCtx)),
+	'$lgt_check'(clause_or_partial_clause, Clause, logtalk(retract(Clause), ExCtx)),
 	(	Clause = (Head :- Body) ->
 		(	var(Body) ->
-			'$lgt_retract_var_body_checked'(Obj, Clause, Sender, TestScope)
+			'$lgt_retract_var_body_checked'(Obj, Clause, Sender, TestScope, ExCtx)
 		;	Body == true ->
-			'$lgt_retract_fact_checked'(Obj, Head, Sender, TestScope)
-		;	'$lgt_retract_rule_checked'(Obj, Clause, Sender, TestScope)
+			'$lgt_retract_fact_checked'(Obj, Head, Sender, TestScope, ExCtx)
+		;	'$lgt_retract_rule_checked'(Obj, Clause, Sender, TestScope, ExCtx)
 		)
-	;	'$lgt_retract_fact_checked'(Obj, Clause, Sender, TestScope)
+	;	'$lgt_retract_fact_checked'(Obj, Clause, Sender, TestScope, ExCtx)
 	).
 
 
-'$lgt_retract_var_body_checked'(Obj, (Head:-Body), Sender, TestScope) :-
+'$lgt_retract_var_body_checked'(Obj, (Head:-Body), Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
@@ -4259,13 +4259,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
@@ -4279,15 +4279,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	TBody = Body
 			)
 		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 		)
 	).
 
-'$lgt_retract_var_body_checked'(Obj, (Head:-Body), Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::retract((Head:-Body)), Sender))).
+'$lgt_retract_var_body_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(retract((Head:-Body)), ExCtx))).
 
 
-'$lgt_retract_rule_checked'(Obj, (Head:-Body), Sender, TestScope) :-
+'$lgt_retract_rule_checked'(Obj, (Head:-Body), Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
@@ -4305,13 +4305,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
@@ -4319,21 +4319,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_unwrap_compiled_head'(THead0, THead),
 			retract((THead :- ('$lgt_nop'(Body), _)))
 		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 		)
 	).
 
-'$lgt_retract_rule_checked'(Obj, (Head:-Body), Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::retract((Head:-Body)), Sender))).
+'$lgt_retract_rule_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(retract((Head:-Body)), ExCtx))).
 
 
-'$lgt_retract_fact_checked'(Obj, Head, Sender, _) :-
+'$lgt_retract_fact_checked'(Obj, Head, Sender, _, _) :-
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
 	!,
 	retract(THead),
 	'$lgt_update_ddef_table_opt'(UClause).
 
-'$lgt_retract_fact_checked'(Obj, Head, Sender, TestScope) :-
+'$lgt_retract_fact_checked'(Obj, Head, Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
@@ -4362,13 +4362,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(retract(Head), ExCtx)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(retract(Head), ExCtx)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retract(Head), ExCtx)))
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	call(DDef, Head, _, THead0) ->
@@ -4380,16 +4380,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 				retract(THead)
 			)
 		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
+			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract(Head), ExCtx)))
 		)
 	).
 
-'$lgt_retract_fact_checked'(Obj, Head, Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::retract(Head), Sender))).
+'$lgt_retract_fact_checked'(Obj, Head, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(retract(Head), ExCtx))).
 
 
 
-% '$lgt_retractall'(+object_identifier, @callable, +object_identifier, +scope)
+% '$lgt_retractall'(+object_identifier, @callable, +object_identifier, +scope, @execution_context)
 %
 % retractall/1 built-in method
 %
@@ -4397,7 +4397,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % predicate allows any inherited clauses to be found again as they are
 % no longer being overridden
 
-'$lgt_retractall'(Obj, Head, Sender, _) :-
+'$lgt_retractall'(Obj, Head, Sender, _, _) :-
 	nonvar(Obj),
 	nonvar(Head),
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
@@ -4405,19 +4405,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall(THead),
 	'$lgt_update_ddef_table_opt'(UClause).
 
-'$lgt_retractall'(Obj, Head, Sender, TestScope) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retractall(Head), Sender)),
-	'$lgt_check'(callable, Head, logtalk(Obj::retractall(Head), Sender)),
-	'$lgt_retractall_checked'(Obj, Head, Sender, TestScope).
+'$lgt_retractall'(Obj, Head, Sender, TestScope, ExCtx) :-
+	'$lgt_check'(object_identifier, Obj, logtalk(retractall(Head), ExCtx)),
+	'$lgt_check'(callable, Head, logtalk(retractall(Head), ExCtx)),
+	'$lgt_retractall_checked'(Obj, Head, Sender, TestScope, ExCtx).
 
 
-'$lgt_retractall_checked'(Obj, Head, Sender, _) :-
+'$lgt_retractall_checked'(Obj, Head, Sender, _, _) :-
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
 	!,
 	retractall(THead),
 	'$lgt_update_ddef_table_opt'(UClause).
 
-'$lgt_retractall_checked'(Obj, Head, Sender, TestScope) :-
+'$lgt_retractall_checked'(Obj, Head, Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
@@ -4442,13 +4442,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(retractall(Head), ExCtx)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(retractall(Head), ExCtx)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retractall(Head), ExCtx)))
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
@@ -4461,12 +4461,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 			),
 			retractall(THead)
 		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
+			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retractall(Head), ExCtx)))
 		)
 	).
 
-'$lgt_retractall_checked'(Obj, Head, Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::retractall(Head), Sender))).
+'$lgt_retractall_checked'(Obj, Head, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(retractall(Head), ExCtx))).
 
 
 
@@ -12101,10 +12101,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_check_dynamic_directive'(Mode, Pred),
 	(	ground(Pred) ->
-		TCond = '$lgt_abolish_checked'(Database, Pred, Database, p(_)),
+		TCond = '$lgt_abolish_checked'(Database, Pred, Database, p(_), ExCtx),
 		'$lgt_remember_updated_predicate'(Mode, Pred, Head)
 	;	% partially instantiated predicate indicator; runtime check required
-		TCond = '$lgt_abolish'(Database, Pred, Database, p(_))
+		TCond = '$lgt_abolish'(Database, Pred, Database, p(_), ExCtx)
 	),
 	DCond = '$lgt_debug'(goal(abolish(Pred), TCond), ExCtx).
 
@@ -12186,12 +12186,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
-					TCond = '$lgt_asserta_fact_checked'(Database, Head, Database, p(_), p)
-				;	TCond = '$lgt_asserta_rule_checked'(Database, Clause, Database, p(_), p)
+					TCond = '$lgt_asserta_fact_checked'(Database, Head, Database, p(_), p, ExCtx)
+				;	TCond = '$lgt_asserta_rule_checked'(Database, Clause, Database, p(_), p, ExCtx)
 				),
 				functor(Head, Functor, Arity),
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
-			;	TCond = '$lgt_asserta_fact_checked'(Database, Clause, Database, p(_), p),
+			;	TCond = '$lgt_asserta_fact_checked'(Database, Clause, Database, p(_), p, ExCtx),
 				functor(Clause, Functor, Arity),
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 			)
@@ -12268,16 +12268,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
-			TCond = '$lgt_assertz'(Database, Clause, Database, p(_), p)
+			TCond = '$lgt_assertz'(Database, Clause, Database, p(_), p, ExCtx)
 		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
-					TCond = '$lgt_assertz_fact_checked'(Database, Head, Database, p(_), p)
-				;	TCond = '$lgt_assertz_rule_checked'(Database, Clause, Database, p(_), p)
+					TCond = '$lgt_assertz_fact_checked'(Database, Head, Database, p(_), p, ExCtx)
+				;	TCond = '$lgt_assertz_rule_checked'(Database, Clause, Database, p(_), p, ExCtx)
 				),
 				functor(Head, Functor, Arity),
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
-			;	TCond = '$lgt_assertz_fact_checked'(Database, Clause, Database, p(_), p),
+			;	TCond = '$lgt_assertz_fact_checked'(Database, Clause, Database, p(_), p, ExCtx),
 				functor(Clause, Functor, Arity),
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 			)
@@ -12410,18 +12410,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
-			TCond = '$lgt_retract'(Database, Clause, Database, p(_))
+			TCond = '$lgt_retract'(Database, Clause, Database, p(_), ExCtx)
 		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	var(Body) ->
-					'$lgt_retract_var_body_checked'(Database, Clause, Database, p(_))
+					'$lgt_retract_var_body_checked'(Database, Clause, Database, p(_), ExCtx)
 				;	Body == true ->
-					TCond = '$lgt_retract_fact_checked'(Database, Head, Database, p(_))
-				;	TCond = '$lgt_retract_rule_checked'(Database, Clause, Database, p(_))
+					TCond = '$lgt_retract_fact_checked'(Database, Head, Database, p(_), ExCtx)
+				;	TCond = '$lgt_retract_rule_checked'(Database, Clause, Database, p(_), ExCtx)
 				),
 				functor(Head, Functor, Arity),
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
-			;	TCond = '$lgt_retract_fact_checked'(Database, Clause, Database, p(_)),
+			;	TCond = '$lgt_retract_fact_checked'(Database, Clause, Database, p(_), ExCtx),
 				functor(Clause, Functor, Arity),
 				'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 			)
@@ -12475,9 +12475,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	var(Head) ->
-			TCond = '$lgt_retractall'(Database, Head, Database, p(_))
+			TCond = '$lgt_retractall'(Database, Head, Database, p(_), ExCtx)
 		;	'$lgt_check'(callable, Head),
-			TCond = '$lgt_retractall_checked'(Database, Head, Database, p(_)),
+			TCond = '$lgt_retractall_checked'(Database, Head, Database, p(_), ExCtx),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 		),
@@ -14239,12 +14239,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	var(Obj) ->
-		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
+		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)), ExCtx)
 	;	ground(Pred) ->
-		TPred = '$lgt_abolish_checked'(Obj, Pred, This, p(p(p))),
+		TPred = '$lgt_abolish_checked'(Obj, Pred, This, p(p(p)), ExCtx),
 		'$lgt_remember_updated_predicate'(Mode, Obj::Pred, Head)
 	;	% partially instantiated predicate indicator; runtime check required
-		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
+		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)), ExCtx)
 	).
 
 '$lgt_compile_message_to_object'(assert(Clause), Obj, TPred, Events, Ctx) :-
@@ -14256,20 +14256,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
-		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
+		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)), ExCtx)
 	;	var(Obj) ->
 		'$lgt_check'(clause_or_partial_clause, Clause),
-		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
+		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
 			(	'$lgt_compiler_flag'(optimize, on),
 				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
 				TPred = asserta(THead)
-			;	TPred = '$lgt_asserta_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
+			;	TPred = '$lgt_asserta_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)), ExCtx)
 			),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
-		;	TPred = '$lgt_asserta_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p))),
+		;	TPred = '$lgt_asserta_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)), ExCtx),
 			Clause = (Head :- _),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
@@ -14281,20 +14281,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
-		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
+		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)), ExCtx)
 	;	var(Obj) ->
 		'$lgt_check'(clause_or_partial_clause, Clause),
-		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
+		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
 			(	'$lgt_compiler_flag'(optimize, on),
 				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
 				TPred = assertz(THead)
-			;	TPred = '$lgt_assertz_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
+			;	TPred = '$lgt_assertz_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)), ExCtx)
 			),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
-		;	TPred = '$lgt_assertz_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p))),
+		;	TPred = '$lgt_assertz_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)), ExCtx),
 			Clause = (Head :- _),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
@@ -14321,25 +14321,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
-		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
+		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)), ExCtx)
 	;	var(Obj) ->
 		'$lgt_check'(clause_or_partial_clause, Clause),
-		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
+		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
-				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
+				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)), ExCtx)
 			;	Body == true ->
 				(	'$lgt_compiler_flag'(optimize, on),
 					'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
 					TPred = retract(THead)
-				;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
+				;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)), ExCtx)
 				)
-			;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
+			;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)), ExCtx)
 			),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
-		;	TPred = '$lgt_retract_fact_checked'(Obj, Clause, This, p(p(p))),
+		;	TPred = '$lgt_retract_fact_checked'(Obj, Clause, This, p(p(p)), ExCtx),
 			functor(Clause, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		)
@@ -14350,15 +14350,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	var(Head) ->
-		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
+		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)), ExCtx)
 	;	var(Obj) ->
 		'$lgt_check'(callable, Head),
-		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
+		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)), ExCtx)
 	;	'$lgt_check'(callable, Head),
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
 			TPred = retractall(THead)
-		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
+		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)), ExCtx)
 		),
 		functor(Head, Functor, Arity),
 		'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
@@ -14501,12 +14501,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(abolish(Pred), TPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, This, Self, _, _, _, _, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
 	(	ground(Pred) ->
-		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_)),
+		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_), ExCtx),
 		'$lgt_remember_updated_predicate'(Mode, ::Pred, Head)
 	;	% partially instantiated predicate indicator; runtime check required
-		TPred = '$lgt_abolish'(Self, Pred, This, p(_))
+		TPred = '$lgt_abolish'(Self, Pred, This, p(_), ExCtx)
 	).
 
 '$lgt_compile_message_to_self'(assert(Clause), TPred, Ctx) :-
@@ -14515,18 +14515,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(asserta(Clause), TPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, _, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
-		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p))
+		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
-				TPred = '$lgt_asserta_fact_checked'(Self, Head, This, p(_), p(p))
-			;	TPred = '$lgt_asserta_rule_checked'(Self, Clause, This, p(_), p(p))
+				TPred = '$lgt_asserta_fact_checked'(Self, Head, This, p(_), p(p), ExCtx)
+			;	TPred = '$lgt_asserta_rule_checked'(Self, Clause, This, p(_), p(p), ExCtx)
 			),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
-		;	TPred = '$lgt_asserta_fact_checked'(Self, Clause, This, p(_), p(p)),
+		;	TPred = '$lgt_asserta_fact_checked'(Self, Clause, This, p(_), p(p), ExCtx),
 			functor(Clause, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
 		)
@@ -14534,18 +14534,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(assertz(Clause), TPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, _, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
-		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p))
+		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
-				TPred = '$lgt_assertz_fact_checked'(Self, Head, This, p(_), p(p))
-			;	TPred = '$lgt_assertz_rule_checked'(Self, Clause, This, p(_), p(p))
+				TPred = '$lgt_assertz_fact_checked'(Self, Head, This, p(_), p(p), ExCtx)
+			;	TPred = '$lgt_assertz_rule_checked'(Self, Clause, This, p(_), p(p), ExCtx)
 			),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
-		;	TPred = '$lgt_assertz_fact_checked'(Self, Clause, This, p(_), p(p)),
+		;	TPred = '$lgt_assertz_fact_checked'(Self, Clause, This, p(_), p(p), ExCtx),
 			functor(Clause, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
 		)
@@ -14564,20 +14564,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(retract(Clause), TPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, _, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
-		TPred = '$lgt_retract'(Self, Clause, This, p(_))
+		TPred = '$lgt_retract'(Self, Clause, This, p(_), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
-				'$lgt_retract_var_body_checked'(Self, Clause, This, p(_))
+				'$lgt_retract_var_body_checked'(Self, Clause, This, p(_), ExCtx)
 			;	Body == true ->
-				TPred = '$lgt_retract_fact_checked'(Self, Head, This, p(_))
-			;	TPred = '$lgt_retract_rule_checked'(Self, Clause, This, p(_))
+				TPred = '$lgt_retract_fact_checked'(Self, Head, This, p(_), ExCtx)
+			;	TPred = '$lgt_retract_rule_checked'(Self, Clause, This, p(_), ExCtx)
 			),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
-		;	TPred = '$lgt_retract_fact_checked'(Self, Clause, This, p(_)),
+		;	TPred = '$lgt_retract_fact_checked'(Self, Clause, This, p(_), ExCtx),
 			functor(Clause, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
 		)
@@ -14585,11 +14585,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(retractall(Head), TPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, _, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
 	(	var(Head) ->
-		TPred = '$lgt_retractall'(Self, Head, This, p(_))
+		TPred = '$lgt_retractall'(Self, Head, This, p(_), ExCtx)
 	;	'$lgt_check'(callable, Head),
-		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_)),
+		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_), ExCtx),
 		functor(Head, Functor, Arity),
 		'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
 	).

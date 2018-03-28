@@ -31,34 +31,34 @@ baz(1). baz(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the retractall/1 built-in method.'
 	]).
 
-	throws(retractall_1_1, error(instantiation_error, logtalk(test_object::retractall(_),_))) :-
+	throws(retractall_1_1, error(instantiation_error, logtalk(retractall(_),_))) :-
 		{test_object::retractall(_)}.
 
 	throws(retractall_1_2, error(type_error(callable, 1), logtalk(test_object::retractall(1),_))) :-
 		{test_object::retractall(1)}.
 
-	throws(retractall_1_3, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::retractall(q(_,_)),_))) :-
+	throws(retractall_1_3, error(permission_error(modify, protected_predicate, q/2), logtalk(retractall(q(_,_)),_))) :-
 		{test_object::retractall(q(_,_))}.
 
-	throws(retractall_1_4, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::retractall(r(_,_,_)),_))) :-
+	throws(retractall_1_4, error(permission_error(modify, private_predicate, r/3), logtalk(retractall(r(_,_,_)),_))) :-
 		{test_object::retractall(r(_,_,_))}.
 
-	throws(retractall_1_5, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::retractall(s(_,_,_,_)),_))) :-
+	throws(retractall_1_5, error(permission_error(modify, static_predicate, s/4), logtalk(retractall(s(_,_,_,_)),_))) :-
 		{test_object::retractall(s(_,_,_,_))}.
 
-	throws(retractall_1_6, error(existence_error(predicate_declaration, unknown/1), logtalk(test_object::retractall(unknown(_)),_))) :-
+	throws(retractall_1_6, error(existence_error(predicate_declaration, unknown/1), logtalk(retractall(unknown(_)),_))) :-
 		{test_object::retractall(unknown(_))}.
 
-	throws(retractall_1_7, error(instantiation_error, logtalk(_::retractall(foo),_))) :-
+	throws(retractall_1_7, error(instantiation_error, logtalk(retractall(foo),_))) :-
 		{test_object::ie(_)}.
 
-	throws(retractall_1_8, error(type_error(object_identifier, 1), logtalk(1::retractall(foo),_))) :-
+	throws(retractall_1_8, error(type_error(object_identifier, 1), logtalk(retractall(foo),_))) :-
 		{test_object::te}.
 
 	succeeds(retractall_1_9) :-
