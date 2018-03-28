@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -37,7 +37,7 @@ a(1).
 		succeeds/1, fails/1, throws/2
 	]).
 
-	throws(predicate_property_2_01, error(instantiation_error,logtalk(This::predicate_property(_,_),_))) :-
+	throws(predicate_property_2_01, error(instantiation_error,logtalk(predicate_property(_,_),_))) :-
 		this(This),
 		{This::predicate_property(_, _)}.
 
@@ -49,10 +49,10 @@ a(1).
 		this(This),
 		{This::predicate_property(foo, bar)}.
 
-	throws(predicate_property_2_04, error(instantiation_error, logtalk(_::predicate_property(foo,_),_))) :-
+	throws(predicate_property_2_04, error(instantiation_error, logtalk(predicate_property(foo,_),_))) :-
 		{test_object::ie(_)}.
 
-	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(1::predicate_property(foo,_),_))) :-
+	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(predicate_property(foo,_),_))) :-
 		{test_object::te}.
 
 	% Prolog built-in predicates are interpreted as private predicates

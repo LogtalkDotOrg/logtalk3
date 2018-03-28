@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2018/03/24,
+		date is 2018/03/28,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
@@ -53,10 +53,10 @@
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	throws(current_op_3_6, error(instantiation_error, logtalk(_::current_op(_,_,_),_))) :-
+	throws(current_op_3_6, error(instantiation_error, logtalk(current_op(_,_,_),_))) :-
 		{test_object_1::ie(_)}.
 
-	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),_))) :-
+	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(current_op(_,_,_),_))) :-
 		{test_object_1::te}.
 
 	succeeds(current_op_3_8) :-

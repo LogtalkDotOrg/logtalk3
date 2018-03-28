@@ -2954,7 +2954,7 @@ logtalk_make(Target) :-
 	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	% ignore objects that can forward the predicates calls
 	\+ '$lgt_implements_protocol_'(Object, forwarding, _),
-	\+ '$lgt_current_predicate'(Object, Predicate, Entity, p(p(p))),
+	\+ '$lgt_current_predicate'(Object, Predicate, Entity, p(p(p)), _),
 	'$lgt_missing_reference'(Entity, Location, Reference).
 
 '$lgt_missing_predicate'((^^Functor/Arity)-Reference) :-
@@ -3358,17 +3358,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_current_op'(+object_identifier, ?operator_priority, ?operator_specifier, ?atom, +object_identifier, +scope)
+% '$lgt_current_op'(+object_identifier, ?operator_priority, ?operator_specifier, ?atom, +object_identifier, +scope, @execution_context)
 %
 % current_op/3 built-in method
 %
 % local operator declarations without a scope declaration are invisible
 
-'$lgt_current_op'(Obj, Priority, Specifier, Operator, Sender, Scope) :-
-	'$lgt_check'(object, Obj, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	'$lgt_check'(var_or_operator_priority, Priority, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	'$lgt_check'(var_or_operator_specifier, Specifier, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	'$lgt_check'(var_or_atom, Operator, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+'$lgt_current_op'(Obj, Priority, Specifier, Operator, Sender, Scope, ExCtx) :-
+	'$lgt_check'(object, Obj, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
+	'$lgt_check'(var_or_operator_priority, Priority, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
+	'$lgt_check'(var_or_operator_specifier, Specifier, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
+	'$lgt_check'(var_or_atom, Operator, logtalk(current_op(Priority, Specifier, Operator), ExCtx)),
 	(	Obj == user ->
 		current_op(Priority, Specifier, Operator)
 	;	'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, OpScope)),
@@ -3386,22 +3386,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_current_predicate'(+object_identifier, ?predicate_indicator, +object_identifier, +scope)
+% '$lgt_current_predicate'(+object_identifier, ?predicate_indicator, +object_identifier, +scope, @execution_context)
 %
 % current_predicate/1 built-in method
 %
 % local predicates without a scope declaration are invisible
 
-'$lgt_current_predicate'(Obj, Pred, Sender, _) :-
-	'$lgt_check'(var_or_predicate_indicator, Pred, logtalk(Obj::current_predicate(Pred), Sender)),
+'$lgt_current_predicate'(Obj, Pred, Sender, _, ExCtx) :-
+	'$lgt_check'(var_or_predicate_indicator, Pred, logtalk(current_predicate(Pred), ExCtx)),
 	'$lgt_check'(object, Obj, logtalk(Obj::current_predicate(Pred), Sender)),
 	fail.
 
-'$lgt_current_predicate'(user, Pred, _, _) :-
+'$lgt_current_predicate'(user, Pred, _, _, _) :-
 	!,
 	current_predicate(Pred).
 
-'$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
+'$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope, _) :-
 	ground(Functor/Arity),
 	!,
 	% make the current_predicate/1 method deterministic when its argument is ground
@@ -3417,7 +3417,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	fail
 	).
 
-'$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
+'$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope, _) :-
 	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
 	% use findall/3 + sort/2 to avoid a setof/3 call with five
 	% existentially-qualified variables or an auxiliary predicate
@@ -3437,7 +3437,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_predicate_property'(+object_identifier, @callable, ?predicate_property, +object_identifier, +scope)
+% '$lgt_predicate_property'(+object_identifier, @callable, ?predicate_property, +object_identifier, +scope, @execution_context)
 %
 % predicate_property/2 built-in method
 %
@@ -3447,17 +3447,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the implementation ensures that no spurious choice-points are created when
 % the method is called with a bound and deterministic property argument
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Sender, _) :-
-	'$lgt_check'(callable, Pred, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
-	'$lgt_check'(var_or_predicate_property, Prop, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
-	'$lgt_check'(object, Obj, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
+'$lgt_predicate_property'(Obj, Pred, Prop, _, _, ExCtx) :-
+	'$lgt_check'(callable, Pred, logtalk(predicate_property(Pred, Prop), ExCtx)),
+	'$lgt_check'(var_or_predicate_property, Prop, logtalk(predicate_property(Pred, Prop), ExCtx)),
+	'$lgt_check'(object, Obj, logtalk(predicate_property(Pred, Prop), ExCtx)),
 	fail.
 
-'$lgt_predicate_property'(user, Pred, Prop, _, _) :-
+'$lgt_predicate_property'(user, Pred, Prop, _, _, _) :-
 	!,
 	'$lgt_predicate_property'(Pred, Prop).
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope, _) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, Rnm, ObjFlags),
 	call(Dcl, Pred, PredScope, Meta, PredFlags, SCtn, TCtn),
 	% predicate declaration found
@@ -3485,7 +3485,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_predicate_property_user'(Prop, Pred, Original, Entity, ScopeAsAtom, Meta, PredFlags, TCtn, Obj, Def, Rnm)
 	).
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope, _) :-
 	'$lgt_built_in_method'(Pred, PredScope, Meta, Flags),
 	!,
 	(	\+ \+ PredScope = LookupScope ->
@@ -3495,12 +3495,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_scope'(ScopeAsAtom, PredScope),
 	'$lgt_predicate_property_built_in_method'(Prop, Pred, ScopeAsAtom, Meta, Flags).
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _, _) :-
 	'$lgt_logtalk_built_in_predicate'(Pred, Meta),
 	!,
 	'$lgt_predicate_property_logtalk_built_in'(Prop, Meta).
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _, _) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
 	'$lgt_predicate_property_prolog_built_in'(Prop, Pred).
@@ -11976,7 +11976,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(var_or_atom, Operator),
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
-	TPred = '$lgt_current_op'(Database, Priority, Specifier, Operator, Database, p(_)),
+	TPred = '$lgt_current_op'(Database, Priority, Specifier, Operator, Database, p(_), ExCtx),
 	DPred = '$lgt_debug'(goal(current_op(Priority, Specifier, Operator), TPred), ExCtx).
 
 '$lgt_compile_body'(current_predicate(Term), TPred, DPred, Ctx) :-
@@ -12015,7 +12015,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
-	TPred = '$lgt_current_predicate'(Database, Pred, Database, p(_)),
+	TPred = '$lgt_current_predicate'(Database, Pred, Database, p(_), ExCtx),
 	DPred = '$lgt_debug'(goal(current_predicate(Pred), TPred), ExCtx).
 
 '$lgt_compile_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
@@ -12052,7 +12052,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(var_or_predicate_property, Prop),
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
-	TPred = '$lgt_predicate_property'(Database, Pred, Prop, Database, p(_)),
+	TPred = '$lgt_predicate_property'(Database, Pred, Prop, Database, p(_), ExCtx),
 	DPred = '$lgt_debug'(goal(predicate_property(Pred, Prop), TPred), ExCtx).
 
 % database handling built-in predicates
@@ -14210,7 +14210,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reflection built-in predicates
 
-'$lgt_compile_message_to_object'(current_op(Priority, Specifier, Operator), Obj, '$lgt_current_op'(Obj, Priority, Specifier, Operator, This, p(p(p))), _, Ctx) :-
+'$lgt_compile_message_to_object'(current_op(Priority, Specifier, Operator), Obj, '$lgt_current_op'(Obj, Priority, Specifier, Operator, This, p(p(p)), ExCtx), _, Ctx) :-
 	!,
 	'$lgt_check'(var_or_operator_priority, Priority),
 	'$lgt_check'(var_or_operator_specifier, Specifier),
@@ -14218,13 +14218,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
-'$lgt_compile_message_to_object'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), _, Ctx) :-
+'$lgt_compile_message_to_object'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p)), ExCtx), _, Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
-'$lgt_compile_message_to_object'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), _, Ctx) :-
+'$lgt_compile_message_to_object'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p)), ExCtx), _, Ctx) :-
 	!,
 	'$lgt_check'(var_or_callable, Pred),
 	'$lgt_check'(var_or_predicate_property, Prop),
@@ -14475,26 +14475,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reflection built-in predicates
 
-'$lgt_compile_message_to_self'(current_op(Priority, Specifier, Operator), '$lgt_current_op'(Self, Priority, Specifier, Operator, This, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(current_op(Priority, Specifier, Operator), '$lgt_current_op'(Self, Priority, Specifier, Operator, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_operator_priority, Priority),
 	'$lgt_check'(var_or_operator_specifier, Specifier),
 	'$lgt_check'(var_or_atom, Operator),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _).
 
-'$lgt_compile_message_to_self'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx_self'(Ctx, Self),
 	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_self'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_callable, Pred),
 	'$lgt_check'(var_or_predicate_property, Prop),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _).
 
 % database handling built-in predicates
 
