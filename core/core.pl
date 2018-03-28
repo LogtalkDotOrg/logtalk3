@@ -14476,8 +14476,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
-	'$lgt_comp_ctx_self'(Ctx, Self),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _).
 
 '$lgt_compile_message_to_self'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_), ExCtx), Ctx) :-
 	!,
