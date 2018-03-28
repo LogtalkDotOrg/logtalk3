@@ -2253,7 +2253,6 @@ threaded_engine_fetch(Term) :-
 	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Term), ExCtx))).
 
 threaded_engine_fetch(Term) :-
-	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	catch('$lgt_threaded_engine_fetch'(Term, user), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -4677,14 +4676,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_expand_term_message'(+object_identifier,   ?term, ?term, +object_identifier, @scope)
-% '$lgt_expand_term_message'(+category_identifier, ?term, ?term, +object_identifier, @scope)
+% '$lgt_expand_term_message'(+object_identifier,   ?term, ?term, +object_identifier, @scope, @execution_context)
 %
 % expand_term/2 messages
 %
 % calls the term_expansion/2 user-defined hook predicate if defined and within scope
 
-'$lgt_expand_term_message'(Entity, Term, Expansion, Sender, Scope) :-
+'$lgt_expand_term_message'(Entity, Term, Expansion, Sender, Scope, ExCtx) :-
 	(	var(Term) ->
 		Expansion = Term
 	;	'$lgt_term_expansion_message'(Entity, Term, Expand, Sender, Scope) ->
@@ -4695,7 +4693,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		catch(
 			'$lgt_dcg_rule'(Term, Clause, Ctx),
 			Error,
-			throw(error(Error, logtalk(expand_term(Term,_), Sender)))
+			throw(error(Error, logtalk(expand_term(Term,_), ExCtx)))
 		),
 		(	Clause = (Head :- Body),
 			'$lgt_compiler_flag'(optimize, on) ->
@@ -5589,7 +5587,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
 	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Parameters>>Lambda, MetaCallCtx),
 	'$lgt_copy_term_without_constraints'(Parameters>>Lambda+MetaCallCtx, ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
-	'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Parameters>>Lambda, This),
+	'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Parameters>>Lambda, ExCtx),
 	'$lgt_execution_context'(NewExCtx, Entity, Sender, This, Self, MetaCallCtxCopy, Stack),
 	'$lgt_metacall'(LambdaCopy, Rest, NewExCtx).
 
@@ -5610,23 +5608,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_unify_lambda_parameters'((-), _, _, Lambda, This) :-
+'$lgt_unify_lambda_parameters'((-), _, _, Lambda, ExCtx) :-
 	% catch variables and lists with unbound tails
 	(	Lambda = _/Parameters>>_
 	;	Lambda = Parameters>>_
 	),
-	throw(error(type_error(list, Parameters), logtalk(Lambda, This))).
+	throw(error(type_error(list, Parameters), logtalk(Lambda, ExCtx))).
 
 '$lgt_unify_lambda_parameters'([], ExtraArguments, ExtraArguments, _, _) :-
 	!.
 
-'$lgt_unify_lambda_parameters'([Parameter| Parameters], [Argument| Arguments], ExtraArguments, Lambda, This) :-
+'$lgt_unify_lambda_parameters'([Parameter| Parameters], [Argument| Arguments], ExtraArguments, Lambda, ExCtx) :-
 	!,
 	Parameter = Argument,
-	'$lgt_unify_lambda_parameters'(Parameters, Arguments, ExtraArguments, Lambda, This).
+	'$lgt_unify_lambda_parameters'(Parameters, Arguments, ExtraArguments, Lambda, ExCtx).
 
-'$lgt_unify_lambda_parameters'(_, _, _, Lambda, This) :-
-	throw(error(representation_error(lambda_parameters), logtalk(Lambda, This))).
+'$lgt_unify_lambda_parameters'(_, _, _, Lambda, ExCtx) :-
+	throw(error(representation_error(lambda_parameters), logtalk(Lambda, ExCtx))).
 
 
 % when using currying, the "inner" lambda expressions must be executed in the same context as the "outer"
@@ -14368,7 +14366,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % term and goal expansion predicates
 
-'$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term_message'(Obj, Term, Expansion, This, p(p(p))), _, Ctx) :-
+'$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term_message'(Obj, Term, Expansion, This, p(p(p)), ExCtx), _, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
@@ -14598,7 +14596,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % term and goal expansion predicates
 
-'$lgt_compile_message_to_self'(expand_term(Term, Expansion), '$lgt_expand_term_message'(Self, Term, Expansion, This, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(expand_term(Term, Expansion), '$lgt_expand_term_message'(Self, Term, Expansion, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
