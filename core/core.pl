@@ -4117,17 +4117,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_clause'(+object_identifier, +callable, ?callable, +object_identifier, +scope)
+% '$lgt_clause'(+object_identifier, +callable, ?callable, +object_identifier, +scope, @execution_context)
 %
 % clause/2 built-in method
 
-'$lgt_clause'(Obj, Head, Body, Sender, TestScope) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::clause(Head, Body), Sender)),
-	'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(clause(Head, Body), Sender)),
-	'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope).
+'$lgt_clause'(Obj, Head, Body, Sender, TestScope, ExCtx) :-
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::clause(Head, Body), ExCtx)),
+	'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(clause(Head, Body), ExCtx)),
+	'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope, ExCtx).
 
 
-'$lgt_clause_checked'(Obj, Head, Body, Sender, _) :-
+'$lgt_clause_checked'(Obj, Head, Body, Sender, _, _) :-
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, _),
 	!,
 	clause(THead, TBody),
@@ -4141,7 +4141,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TBody = Body
 	).
 
-'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope) :-
+'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
@@ -4161,13 +4161,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(clause(Head, Body), Sender)))
-				;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(clause(Head, Body), Sender)))
+					throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
+				;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(clause(Head, Body), Sender)))
+			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
@@ -4181,12 +4181,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	TBody = Body
 			)
 		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body), Sender)))
+			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
 		)
 	).
 
-'$lgt_clause_checked'(Obj, Head, Body, Sender, _) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::clause(Head, Body), Sender))).
+'$lgt_clause_checked'(Obj, Head, Body, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(Obj::clause(Head, Body), ExCtx))).
 
 
 
@@ -12326,9 +12326,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
-			TCond = '$lgt_clause'(Database, Head, Body, Database, p(_))
+			TCond = '$lgt_clause'(Database, Head, Body, Database, p(_), ExCtx)
 		;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
-			TCond = '$lgt_clause_checked'(Database, Head, Body, Database, p(_)),
+			TCond = '$lgt_clause_checked'(Database, Head, Body, Database, p(_), ExCtx),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 		),
@@ -14300,11 +14300,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
-		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
+		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
 		(	var(Obj) ->
-			TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p))),
+			TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)), ExCtx)
+		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)), ExCtx),
 			functor(Head, Functor, Arity),
 			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		)
@@ -14474,18 +14474,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(var_or_operator_priority, Priority),
 	'$lgt_check'(var_or_operator_specifier, Specifier),
 	'$lgt_check'(var_or_atom, Operator),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
 '$lgt_compile_message_to_self'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
 '$lgt_compile_message_to_self'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_callable, Pred),
 	'$lgt_check'(var_or_predicate_property, Prop),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
 % database handling built-in predicates
 
@@ -14493,6 +14496,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	(	ground(Pred) ->
 		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_), ExCtx),
 		'$lgt_remember_updated_predicate'(Mode, ::Pred, Head)
@@ -14507,6 +14511,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(asserta(Clause), TPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
@@ -14526,6 +14531,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(assertz(Clause), TPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
@@ -14544,11 +14550,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(clause(Head, Body), TPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, _, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
-		TPred = '$lgt_clause'(Self, Head, Body, This, p(_))
+		TPred = '$lgt_clause'(Self, Head, Body, This, p(_), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, (Head :- Body)),
-		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_)),
+		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_), ExCtx),
 		functor(Head, Functor, Arity),
 		'$lgt_remember_updated_predicate'(Mode, ::Functor/Arity, CallerHead)
 	).
@@ -14556,6 +14563,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(retract(Clause), TPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Self, Clause, This, p(_), ExCtx)
 	;	'$lgt_check'(clause_or_partial_clause, Clause),
@@ -14577,6 +14585,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_self'(retractall(Head), TPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, This, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Self, Head, This, p(_), ExCtx)
 	;	'$lgt_check'(callable, Head),
