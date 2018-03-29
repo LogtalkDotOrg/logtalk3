@@ -11873,8 +11873,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(::Pred, TPred, '$lgt_debug'(goal(::Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_message_to_self'(Pred, TPred, Ctx).
 
 '$lgt_compile_body'(^^Pred, TPred, '$lgt_debug'(goal(^^Pred, TPred), ExCtx), Ctx) :-
@@ -14623,6 +14622,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(Pred, '$lgt_send_to_self_'(Self, Pred, ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Self, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, _, Self, _, _),
 	functor(Pred, Functor, Arity),
 	'$lgt_remember_called_self_predicate'(Mode, Functor/Arity, Head),
 	!.
