@@ -4948,18 +4948,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_send_to_obj_rt'(+object_identifier, +callable, +atom, +compilation_context)
+% '$lgt_send_to_obj_rt'(?term, ?term, +atom, +compilation_context)
 %
-% runtime processing of a message sending call when the message and possibly the
-% receiver object are not known at compile time
+% runtime processing of a message sending call when the message and
+% possibly the receiver object are not known at compile time
 
 '$lgt_send_to_obj_rt'(Obj, Pred, Events, Ctx) :-
 	% we must ensure that the message is valid before compiling the
-	% message sending goal otherwise an endless loop would result
+	% message sending goal otherwise an endless loop could result
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	% avoid an endless loop if the message is not a callable term
 	'$lgt_check'(callable, Pred, logtalk(Obj::Pred, ExCtx)),
-	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx), Error, throw(error(Error, logtalk(Obj::Pred, ExCtx)))),
+	catch(
+		'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx),
+		Error,
+		throw(error(Error, logtalk(Obj::Pred, ExCtx)))
+	),
 	call(TPred).
 
 
