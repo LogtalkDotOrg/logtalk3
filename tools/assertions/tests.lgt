@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/02/20,
+		date is 2018/03/29,
 		comment is 'Unit tests for the "assertions" tool.'
 	]).
 
@@ -85,17 +85,17 @@
 
 	message(assertion_success(ground(x)), silent).
 	message(assertion_failure(22 is 2+2), error).
-	message(assertion_error(1,error(type_error(callable,1),logtalk(call(1),tests))), error).
+	message(assertion_error(1,error(type_error(callable,1),logtalk(call(1),_))), error).
 
 	message(assertion_success(assertions_4,ground(x)), silent).
 	message(assertion_failure(assertions_5,22 is 2+2), error).
-	message(assertion_error(assertions_6,1,error(type_error(callable,1),logtalk(call(1),tests))), error).
+	message(assertion_error(assertions_6,1,error(type_error(callable,1),logtalk(call(1),_))), error).
 
 	message(assertion_success(Context,ground(x)), silent) :-
 		check_context(Context).
 	message(assertion_failure(Context,22 is 2+2), error) :-
 		check_context(Context).
-	message(assertion_error(Context,1,error(type_error(callable,1),logtalk(call(1),source))), error) :-
+	message(assertion_error(Context,1,error(type_error(callable,1),logtalk(call(1),_))), error) :-
 		check_context(Context).
 
 	check_context(file_lines(File,BeginLine-EndLine)) :-
