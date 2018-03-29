@@ -35,6 +35,12 @@ format.
 type-checking when the arguments are sufficiently instantiated and to return
 the actual execution context in case of runtime error.
 
+Documentation
+-------------
+
+* FIXED: Typo in link to the `context/1` built-in method from the Reference
+Manual index.
+
 Tests
 -----
 
