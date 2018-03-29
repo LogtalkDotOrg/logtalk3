@@ -3385,7 +3385,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_current_predicate'(Obj, Pred, Sender, _, ExCtx) :-
 	'$lgt_check'(var_or_predicate_indicator, Pred, logtalk(current_predicate(Pred), ExCtx)),
-	'$lgt_check'(object, Obj, logtalk(Obj::current_predicate(Pred), Sender)),
+	'$lgt_check'(object, Obj, logtalk(Obj::current_predicate(Pred), ExCtx)),
 	fail.
 
 '$lgt_current_predicate'(user, Pred, _, _, _) :-
@@ -3978,8 +3978,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz(TClause).
 
 '$lgt_assertz'(Obj, Clause, Sender, TestScope, DclScope, ExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::assertz(Clause), Sender)),
-	'$lgt_check'(clause, Clause, logtalk(assertz(Clause), Sender)),
+	'$lgt_check'(object_identifier, Obj, logtalk(Obj::assertz(Clause), ExCtx)),
+	'$lgt_check'(clause, Clause, logtalk(assertz(Clause), ExCtx)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
 			'$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope, ExCtx)
