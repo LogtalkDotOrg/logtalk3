@@ -22,15 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/04/14,
+		date is 2018/03/29,
 		comment is 'Unit tests for the "threads/blackboard" example.'
 	]).
 
 	:- threaded.
 
 	test(blackboard_1) :-
+		^^suppress_text_output,
 		threaded_ignore(teacher::run(4)),
 		threaded_ignore(student::run(10)).
 

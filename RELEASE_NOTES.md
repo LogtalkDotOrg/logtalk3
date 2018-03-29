@@ -43,6 +43,9 @@ Tests
 * ADDED: Missing tests for error conditions of the `create_protocol/3`
 built-in predicate.
 
+* FIXED: The tests for the `blackboard` multi-threading example to suppress
+irrelevant output.
+
 
 3.15.0 - March 21, 2018
 =======================
