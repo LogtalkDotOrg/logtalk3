@@ -1255,7 +1255,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	catch(
 		'$lgt_create_object_checked'(Obj, Relations, Directives, Clauses),
 		Error,
-		'$lgt_create_entity_error_handler'(Error, create_object(Obj, Relations, Directives, Clauses))
+		'$lgt_create_entity_error_handler'(Error, create_object(Obj, Relations, Directives, Clauses), ExCtx)
 	).
 
 
@@ -1312,7 +1312,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	catch(
 		'$lgt_create_category_checked'(Ctg, Relations, Directives, Clauses),
 		Error,
-		'$lgt_create_entity_error_handler'(Error, create_category(Ctg, Relations, Directives, Clauses))
+		'$lgt_create_entity_error_handler'(Error, create_category(Ctg, Relations, Directives, Clauses), ExCtx)
 	).
 
 
@@ -1371,7 +1371,7 @@ create_protocol(Ptc, Relations, Directives) :-
 	catch(
 		'$lgt_create_protocol_checked'(Ptc, Relations, Directives),
 		Error,
-		'$lgt_create_entity_error_handler'(Error, create_protocol(Ptc, Relations, Directives))
+		'$lgt_create_entity_error_handler'(Error, create_protocol(Ptc, Relations, Directives), ExCtx)
 	).
 
 
@@ -1426,20 +1426,20 @@ create_protocol(Ptc, Relations, Directives) :-
 
 
 
-% '$lgt_create_entity_error_handler'(@nonvar, @callable)
+% '$lgt_create_entity_error_handler'(@nonvar, @callable, @execution_context)
 %
 % error handler for the dynamic entity creation built-in predicates;
 % handles both compiler first stage and second stage errors
 
-'$lgt_create_entity_error_handler'(error(Error,_), Goal) :-
+'$lgt_create_entity_error_handler'(error(Error,_), Goal, ExCtx) :-
 	% compiler second stage error
-	'$lgt_create_entity_error_handler'(Error, Goal).
+	'$lgt_create_entity_error_handler'(Error, Goal, ExCtx).
 
-'$lgt_create_entity_error_handler'(Error, Goal) :-
+'$lgt_create_entity_error_handler'(Error, Goal, ExCtx) :-
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
-	throw(error(Error, logtalk(Goal, _))).
+	throw(error(Error, logtalk(Goal, ExCtx))).
 
 
 
@@ -3316,7 +3316,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b1)).
+'$lgt_version_data'(logtalk(3, 16, 0, b2)).
 
 
 
@@ -3383,7 +3383,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % local predicates without a scope declaration are invisible
 
-'$lgt_current_predicate'(Obj, Pred, Sender, _, ExCtx) :-
+'$lgt_current_predicate'(Obj, Pred, _, _, ExCtx) :-
 	'$lgt_check'(var_or_predicate_indicator, Pred, logtalk(current_predicate(Pred), ExCtx)),
 	'$lgt_check'(object, Obj, logtalk(Obj::current_predicate(Pred), ExCtx)),
 	fail.
