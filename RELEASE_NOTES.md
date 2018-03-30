@@ -27,7 +27,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Most cases where exception context arguments used the old format
+* CHANGED: All cases where exception context arguments used the old format
 `logtalk(Call, Entity)` to use the new `logtalk(Call, ExecutionContext)`
 format.
 

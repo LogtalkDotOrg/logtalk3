@@ -3,7 +3,7 @@
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
 %
-%  Last updated on March 28, 2018
+%  Last updated on March 30, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -48,8 +48,10 @@ user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :-
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
 
-user:prolog_predicate_name(user:'$lgt_expand_term'(_, _, _, _, _), 'expand_term/2') :- !.
-user:prolog_predicate_name(user:'$lgt_expand_goal'(_, _, _, _, _), 'expand_goal/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_term_local'(_, _, _, _), 'expand_term/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_term_message'(_, _, _, _, _, _), 'expand_term/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_goal_local'(_, _, _, _), 'expand_goal/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_goal_message'(_, _, _, _, _), 'expand_goal/2') :- !.
 
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _), 'phrase/2') :- !.
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
@@ -61,12 +63,12 @@ user:prolog_predicate_name(user:'$lgt_current_op'(_, _, _, _, _, _), 'current_op
 user:prolog_predicate_name(user:'$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
 user:prolog_predicate_name(user:'$lgt_predicate_property'(_, _, _, _, _), 'predicate_property/2') :- !.
 
-user:prolog_predicate_name(user:'$lgt_abolish_checked'(_, _, _, _), 'abolish/1') :- !.
-user:prolog_predicate_name(user:'$lgt_asserta_fact_checked'(_, _, _, _, _), 'asserta/1') :- !.
-user:prolog_predicate_name(user:'$lgt_asserta_rule_checked'(_, _, _, _, _), 'asserta/1') :- !.
-user:prolog_predicate_name(user:'$lgt_assertz_fact_checked'(_, _, _, _, _), 'assertz/1') :- !.
-user:prolog_predicate_name(user:'$lgt_assertz_rule_checked'(_, _, _, _, _), 'assertz/1') :- !.
-user:prolog_predicate_name(user:'$lgt_clause_checked'(_, _, _, _, _), 'clause/2') :- !.
+user:prolog_predicate_name(user:'$lgt_abolish_checked'(_, _, _, _, _), 'abolish/1') :- !.
+user:prolog_predicate_name(user:'$lgt_asserta_fact_checked'(_, _, _, _, _, _), 'asserta/1') :- !.
+user:prolog_predicate_name(user:'$lgt_asserta_rule_checked'(_, _, _, _, _, _), 'asserta/1') :- !.
+user:prolog_predicate_name(user:'$lgt_assertz_fact_checked'(_, _, _, _, _, _), 'assertz/1') :- !.
+user:prolog_predicate_name(user:'$lgt_assertz_rule_checked'(_, _, _, _, _, _), 'assertz/1') :- !.
+user:prolog_predicate_name(user:'$lgt_clause_checked'(_, _, _, _, _, _), 'clause/2') :- !.
 user:prolog_predicate_name(user:'$lgt_retract_fact_checked'(_, _, _, _, _), 'retract/1') :- !.
 user:prolog_predicate_name(user:'$lgt_retract_rule_checked'(_, _, _, _, _), 'retract/1') :- !.
 user:prolog_predicate_name(user:'$lgt_retractall_checked'(_, _, _, _, _), 'retractall/1') :- !.

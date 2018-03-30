@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on March 28, 2018
+%  Last updated on March 30, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -159,7 +159,7 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
 
 '$lgt_swi_prolog_predicate_name'('$lgt_expand_term_local'(_, _, _, _), 'expand_term/2') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_expand_term_message'(_, _, _, _, _), 'expand_term/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_expand_term_message'(_, _, _, _, _, _), 'expand_term/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_expand_goal_local'(_, _, _, _), 'expand_goal/2') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_expand_goal_message'(_, _, _, _, _), 'expand_goal/2') :- !.
 
@@ -173,15 +173,15 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_predicate_property'(_, _, _, _, _), 'predicate_property/2') :- !.
 
-'$lgt_swi_prolog_predicate_name'('$lgt_abolish_checked'(_, _, _, _), 'abolish/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_asserta_fact_checked'(_, _, _, _, _), 'asserta/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_asserta_rule_checked'(_, _, _, _, _), 'asserta/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_assertz_fact_checked'(_, _, _, _, _), 'assertz/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_assertz_rule_checked'(_, _, _, _, _), 'assertz/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_clause_checked'(_, _, _, _, _), 'clause/2') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_retract_fact_checked'(_, _, _, _), 'retract/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_retract_rule_checked'(_, _, _, _), 'retract/1') :- !.
-'$lgt_swi_prolog_predicate_name'('$lgt_retractall_checked'(_, _, _, _), 'retractall/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_abolish_checked'(_, _, _, _, _), 'abolish/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_asserta_fact_checked'(_, _, _, _, _, _), 'asserta/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_asserta_rule_checked'(_, _, _, _, _, _), 'asserta/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_assertz_fact_checked'(_, _, _, _, _, _), 'assertz/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_assertz_rule_checked'(_, _, _, _, _, _), 'assertz/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_clause_checked'(_, _, _, _, _, _), 'clause/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_retract_fact_checked'(_, _, _, _, _), 'retract/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_retract_rule_checked'(_, _, _, _, _), 'retract/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_retractall_checked'(_, _, _, _, _), 'retractall/1') :- !.
 
 '$lgt_swi_prolog_predicate_name'('$lgt_iso_read_term'(_, _, _, _), 'read_term/3') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_iso_read_term'(_, _, _), 'read_term/2') :- !.
