@@ -41,6 +41,12 @@ Documentation
 * FIXED: Typo in link to the `context/1` built-in method from the Reference
 Manual index.
 
+Tools
+-----
+
+* IMPROVED: The `lgtunit` tool output for failed tests due to the wrong error
+being generated.
+
 Tests
 -----
 

@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2018/03/10,
+		date is 2018/03/30,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -221,7 +221,9 @@
 	failed_test_reason(error_instead_of_success(Error)) -->
 		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
 	failed_test_reason(wrong_error(ExpectedError, Error)) -->
-		['  test goal throws the wrong error: expected ~q but got ~q'-[ExpectedError, Error], nl].
+		['  test goal throws the wrong error:'-[], nl],
+		['    expected ~q'-[ExpectedError], nl],
+		['    but got  ~q'-[Error], nl].
 
 	failed_test_reason(quick_check_failed(Goal)) -->
 		['  quick check test failure: ~q'-[Goal], nl].
