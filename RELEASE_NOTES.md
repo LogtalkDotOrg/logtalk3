@@ -58,6 +58,12 @@ built-in predicate.
 * FIXED: The tests for the `blackboard` multi-threading example to suppress
 irrelevant output.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The `logtalk_user_setup.sh` and the Windows installer to also create
+links to the `ACKNOWLEDGMENTS.md` and `CONTRIBUTING.md` files.
+
 
 3.15.0 - March 21, 2018
 =======================

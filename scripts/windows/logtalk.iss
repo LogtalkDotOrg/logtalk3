@@ -1,5 +1,5 @@
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on February 16, 2018
+; Last updated on April 1, 2018
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -126,9 +126,12 @@ Type: files; Name: "{app}\integration\*.xwam"
 Type: files; Name: "{app}\paths\*.xwam"
 
 [Icons]
+Name: "{group}\Acknowledgments"; Filename: "{app}\ACKNOWLEDGMENTS.md"; Components: base
 Name: "{group}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: base
+Name: "{group}\Contributing"; Filename: "{app}\CONTRIBUTING.md"; Components: base
 Name: "{group}\User and Reference Manuals"; Filename: "{app}\manuals\index.html"; Components: base
 Name: "{group}\License"; Filename: "{app}\LICENSE.txt"; Components: base
+Name: "{group}\Quick Start"; Filename: "{app}\QUICK_START.md"; Components: base
 Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: base
 Name: "{group}\Read Me"; Filename: "{app}\README.md"; Components: base
 Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: base
@@ -167,11 +170,14 @@ Name: "{group}\Logtalk - YAP (window)"; Filename: "{code:GetYAPWinExePath}"; Par
 
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Components: base
 
+Name: "{code:GetLgtUserDir}\Acknowledgments"; Filename: "{app}\ACKNOWLEDGMENTS.md"; Components: user
 Name: "{code:GetLgtUserDir}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: user
+Name: "{code:GetLgtUserDir}\Contributing"; Filename: "{app}\CONTRIBUTING.md"; Components: user
 Name: "{code:GetLgtUserDir}\License"; Filename: "{app}\LICENSE.txt"; Components: user
+Name: "{code:GetLgtUserDir}\Quick Start"; Filename: "{app}\QUICK_START.md"; Components: user
 Name: "{code:GetLgtUserDir}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: user
 Name: "{code:GetLgtUserDir}\Read Me"; Filename: "{app}\README.md"; Components: user
-Name: "{code:GetLgtUserDir}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: user
+Name: "{code:GetLgtUserDir}\Customization Instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: user
 Name: "{code:GetLgtUserDir}\adapters"; Filename: "{app}\adapters"; Components: user
 Name: "{code:GetLgtUserDir}\manuals"; Filename: "{app}\manuals"; Components: user
 Name: "{code:GetLgtUserDir}\paths"; Filename: "{app}\paths"; Components: user
