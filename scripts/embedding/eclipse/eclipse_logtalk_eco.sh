@@ -65,7 +65,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.2"
 	exit 0
 }
 
@@ -122,6 +122,21 @@ cp "$LOGTALKHOME/adapters/eclipse.pl" .
 cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
+echo ":- discontiguous('\$lgt_current_protocol_'/5)." > logtalk.pl
+echo ":- discontiguous('\$lgt_current_category_'/6)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_current_object_'/11)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_entity_property_'/2)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_predicate_property_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_implements_protocol_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_imports_category_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_instantiates_class_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_specializes_class_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_extends_category_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_extends_object_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> logtalk.pl
+echo ":- discontiguous('\$lgt_included_file_'/4)." >> logtalk.pl
+
 cat \
     eclipse.pl \
     paths_core.pl \
@@ -132,7 +147,7 @@ cat \
     logtalk*_lgt.pl \
     core_messages*_lgt.pl \
     core.pl \
-    > logtalk.pl
+    >> logtalk.pl
 
 eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:eco]),halt"
 

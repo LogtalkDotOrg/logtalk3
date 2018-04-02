@@ -61,11 +61,14 @@ irrelevant output.
 Installers and installation scripts
 -----------------------------------
 
-* UPDATED: The sample embedding scripts to use the `paths_core.pl` minimal file
-instead of the full `paths.pl` file.
+* UPDATED: The sample embedding scripts to use the `paths_core.pl` minimal
+file instead of the full `paths.pl` file.
 
-* FIXED: The `logtalk_user_setup.sh` and the Windows installer to also create
-links to the `ACKNOWLEDGMENTS.md` and `CONTRIBUTING.md` files.
+* FIXED: The sample embedding scripts for ECLiPSe, SICStus Prolog, and
+SWI-Prolog to avoid discontiguous predicate warnings.
+
+* FIXED: The `logtalk_user_setup.sh` and the Windows installer to also
+create links to the `ACKNOWLEDGMENTS.md` and `CONTRIBUTING.md` files.
 
 
 3.15.0 - March 21, 2018
