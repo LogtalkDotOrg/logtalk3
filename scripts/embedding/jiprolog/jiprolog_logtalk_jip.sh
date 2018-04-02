@@ -5,7 +5,7 @@
 ##   This script creates a JIProlog logtalk.jip file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on January 31, 2018
+##   Last updated on April 2, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -119,12 +119,12 @@ fi
 jiplgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt"
 
 cp "$LOGTALKHOME/adapters/ji.pl" .
-cp "$LOGTALKHOME/paths/paths.pl" .
+cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 cat \
     ji.pl \
-    paths.pl \
+    paths_core.pl \
     expanding*_lgt.pl \
     monitoring*_lgt.pl \
     forwarding*_lgt.pl \

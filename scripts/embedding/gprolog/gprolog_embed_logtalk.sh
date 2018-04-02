@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level
 ##   interpreter that embeds Logtalk
 ## 
-##   Last updated on January 31, 2018
+##   Last updated on April 2, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -119,9 +119,9 @@ fi
 gplgt$extension --query-goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt"
 
 cp "$LOGTALKHOME/adapters/gnu.pl" .
-cp "$LOGTALKHOME/paths/paths.pl" .
+cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
-gplc -o logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl core.pl paths.pl
+gplc -o logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl core.pl paths_core.pl
 
 rm *.pl
