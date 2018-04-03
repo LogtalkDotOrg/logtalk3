@@ -61,6 +61,10 @@ irrelevant output.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The sample embedding scripts for ECLiPSe, GNU Prolog, JIProlog,
+SICStus Prolog, and SWI-Prolog to also allow embedding an optional settings
+file and an optional application.
+
 * UPDATED: The sample embedding scripts to use the `paths_core.pl` minimal
 file instead of the full `paths.pl` file.
 

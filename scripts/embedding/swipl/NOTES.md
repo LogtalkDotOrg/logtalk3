@@ -24,3 +24,4 @@ The following scripts are provided:
 
 - `swipl_logtalk_qlf.sh`  
 	creates a `logtalk.qlf` file with the Logtalk compiler and runtime
+	and an optional `application.qlf` file for an application

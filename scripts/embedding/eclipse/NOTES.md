@@ -25,5 +25,8 @@ from Logtalk core files and Logtalk source files. Note that loading these
 The following scripts are provided:
 
 - `eclipse_logtalk_eco.sh`  
-	creates a `logtalk.eco` file with the Logtalk compiler and runtime;
-	the file can be loaded using `eclipse -L iso -t user -f logtalk.eco`
+	creates a `logtalk.eco` file with the Logtalk compiler and runtime
+	and an optional `application.eco` file for an application
+	
+The `.eco` files can be loaded using the `-f` command-line option. For
+example, `eclipse -L iso -t user -f logtalk.eco`.

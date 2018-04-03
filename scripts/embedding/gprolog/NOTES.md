@@ -18,13 +18,13 @@ ________________________________________________________________________
 
 
 This directory contains example scripts for creating GNU Prolog generated
-executable files that embed Logtalk.
+executable files that embed Logtalk and an optional Logtalk application.
 
 The following scripts are provided:
 
 - `gprolog_embed_logtalk.sh`  
-	creates a `logtalk` executable that embeds the Logtalk compiler and
-	runtime; starts the top-level interpreter when run
+	creates a `logtalk` executable that embeds the Logtalk compiler/runtime
+	and an optional application; starts the top-level interpreter when run
 
 Known issues
 ------------

@@ -5,7 +5,7 @@
 ##   This script creates a JIProlog logtalk.jip file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on April 2, 2018
+##   Last updated on April 3, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -65,33 +65,41 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
 usage_help()
 {
 	echo 
-	echo "This script creates a JIProlog logtalk.jip file with the Logtalk compiler and runtime"
+	echo "This script creates a JIProlog logtalk.jip file with the Logtalk compiler"
+	echo "and runtime and an optional application.jip file from an application source"
+	echo "code given its loader file."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"
+	echo "  $(basename "$0") [-l loader]"
+	echo "  $(basename "$0") [-s settings]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -d directory to use for intermediate and final results (default is $HOME/collect)"
+	echo "  -l optional loader file for the application"
+	echo "  -s optional settings file for the application"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vd:h" option
+while getopts "vd:l:s:h" option
 do
 	case $option in
 		v) print_version;;
 		d) d_arg="$OPTARG";;
+		l) l_arg="$OPTARG";;
+		s) s_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -99,6 +107,28 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$l_arg" != "" ] ; then
+	if [ -f "$l_arg" ] ; then
+		loader="$l_arg"
+	else
+		echo "The $l_arg loader file does not exist!"
+		exit 1
+	fi
+else
+	loader=""
+fi
+
+if [ "$s_arg" != "" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!"
+		exit 1
+	fi
+else
+	settings=""
 fi
 
 mkdir -p "$directory"
@@ -116,25 +146,53 @@ else
 	extension=''
 fi
 
-jiplgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt"
-
 cp "$LOGTALKHOME/adapters/ji.pl" .
 cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
-cat \
-    ji.pl \
-    paths_core.pl \
-    expanding*_lgt.pl \
-    monitoring*_lgt.pl \
-    forwarding*_lgt.pl \
-    user*_lgt.pl \
-    logtalk*_lgt.pl \
-    core_messages*_lgt.pl \
-    core.pl \
-    > logtalk.pl
+jiplgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt"
+
+if [ "$settings" != "" ] ; then
+	jiplgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')]),halt"
+	cat \
+	    ji.pl \
+	    paths_core.pl \
+	    expanding*_lgt.pl \
+	    monitoring*_lgt.pl \
+	    forwarding*_lgt.pl \
+	    user*_lgt.pl \
+	    logtalk*_lgt.pl \
+	    core_messages*_lgt.pl \
+		settings*_lgt.pl \
+	    core.pl \
+	    > logtalk.pl
+else
+	cat \
+	    ji.pl \
+	    paths_core.pl \
+	    expanding*_lgt.pl \
+	    monitoring*_lgt.pl \
+	    forwarding*_lgt.pl \
+	    user*_lgt.pl \
+	    logtalk*_lgt.pl \
+	    core_messages*_lgt.pl \
+	    core.pl \
+	    > logtalk.pl
+fi
 
 java -jar "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),compile('logtalk.pl'),halt"
 
 rm *.pl
 rm *_lgt.jip
+
+if [ "$loader" != "" ] ; then
+	mkdir -p "$directory/application"
+	cd "$directory/application"
+	jiplgt$extension -g "set_logtalk_flag(source_data, off),set_logtalk_flag(optimize, on),set_logtalk_flag(clean, off),set_logtalk_flag(context_switching_calls, deny),set_logtalk_flag(scratch_directory, '$directory/application'),logtalk_load('$loader', [clean(on)]),halt"
+	rm -f $directory/application/*loader*
+	cat $(ls -t $directory/application/*.pl) > application.pl
+	java -jar "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('../logtalk.jip'),compile('application.pl'),halt"
+	mv application.jip ..
+	rm *.pl
+	rm *_lgt.jip
+fi

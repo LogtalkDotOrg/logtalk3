@@ -5,7 +5,7 @@
 ##   This script creates a SICStus Prolog logtalk.po file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on April 2, 2018
+##   Last updated on April 3, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -65,33 +65,41 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.2"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
 usage_help()
 {
 	echo 
-	echo "This script creates a SICStus Prolog logtalk.po file with the Logtalk compiler and runtime"
+	echo "This script creates a SICStus Prolog logtalk.po file with the Logtalk compiler"
+	echo "and runtime and an optional application.po file from an application source"
+	echo "code given its loader file."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory]"
+	echo "  $(basename "$0") [-l loader]"
+	echo "  $(basename "$0") [-s settings]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -d directory to use for intermediate and final results (default is $HOME/collect)"
+	echo "  -l optional loader file for the application"
+	echo "  -s optional settings file for the application"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vd:h" option
+while getopts "vd:l:s:h" option
 do
 	case $option in
 		v) print_version;;
 		d) d_arg="$OPTARG";;
+		l) l_arg="$OPTARG";;
+		s) s_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -99,6 +107,28 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$l_arg" != "" ] ; then
+	if [ -f "$l_arg" ] ; then
+		loader="$l_arg"
+	else
+		echo "The $l_arg loader file does not exist!"
+		exit 1
+	fi
+else
+	loader=""
+fi
+
+if [ "$s_arg" != "" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!"
+		exit 1
+	fi
+else
+	settings=""
 fi
 
 mkdir -p "$directory"
@@ -116,39 +146,50 @@ else
 	extension=''
 fi
 
-sicstuslgt$extension --goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt."
-
 cp "$LOGTALKHOME/adapters/sicstus.pl" .
 cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
-echo ":- discontiguous('\$lgt_current_protocol_'/5)." > logtalk.pl
-echo ":- discontiguous('\$lgt_current_category_'/6)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_current_object_'/11)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_entity_property_'/2)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_predicate_property_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_implements_protocol_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_imports_category_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_instantiates_class_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_specializes_class_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_extends_category_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_extends_object_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_included_file_'/4)." >> logtalk.pl
+sicstuslgt$extension --goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt."
 
-cat \
-    sicstus.pl \
-    paths_core.pl \
-    expanding*_lgt.pl \
-    monitoring*_lgt.pl \
-    forwarding*_lgt.pl \
-    user*_lgt.pl \
-    logtalk*_lgt.pl \
-    core_messages*_lgt.pl \
-    core.pl \
-    >> logtalk.pl
+if [ "$settings" != "" ] ; then
+	sicstuslgt$extension --goal "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')]),halt."
+	cat \
+	    sicstus.pl \
+	    paths_core.pl \
+	    expanding*_lgt.pl \
+	    monitoring*_lgt.pl \
+	    forwarding*_lgt.pl \
+	    user*_lgt.pl \
+	    logtalk*_lgt.pl \
+	    core_messages*_lgt.pl \
+		settings*_lgt.pl \
+	    core.pl \
+	    > logtalk.pl
+else
+	cat \
+	    sicstus.pl \
+	    paths_core.pl \
+	    expanding*_lgt.pl \
+	    monitoring*_lgt.pl \
+	    forwarding*_lgt.pl \
+	    user*_lgt.pl \
+	    logtalk*_lgt.pl \
+	    core_messages*_lgt.pl \
+	    core.pl \
+	    > logtalk.pl
+fi
 
-sicstus --goal "compile(logtalk),save_files(logtalk,logtalk),halt."
-
+sicstus$extension --goal "set_prolog_flag(discontiguous_warnings,off),compile(logtalk),save_files(logtalk,logtalk),halt."
 rm *.pl
+
+if [ "$loader" != "" ] ; then
+	mkdir -p "$directory/application"
+	cd "$directory/application"
+	sicstuslgt$extension --goal "set_logtalk_flag(source_data, off),set_logtalk_flag(optimize, on),set_logtalk_flag(clean, off),set_logtalk_flag(context_switching_calls, deny),set_logtalk_flag(scratch_directory, '$directory/application'),logtalk_load('$loader', [clean(on)]),halt."
+	rm -f $directory/application/*loader*
+	cat $(ls -t $directory/application/*.pl) > application.pl
+	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_prolog_flag(discontiguous_warnings,off),compile(application),save_files(application,(application)),halt."
+	mv application.po ..
+	rm *.pl
+fi

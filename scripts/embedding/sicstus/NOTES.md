@@ -24,3 +24,4 @@ The following scripts are provided:
 
 - `sicstus_logtalk_po.sh`  
 	creates a `logtalk.po` file with the Logtalk compiler and runtime
+	and an optional `application.po` file for an application
