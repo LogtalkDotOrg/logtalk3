@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on April 1, 2018
+##   Last updated on April 3, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -141,9 +141,11 @@ ln -sf "$LOGTALKHOME"/README.md "$LOGTALKUSER"/README.md
 ln -sf "$LOGTALKHOME"/RELEASE_NOTES.md "$LOGTALKUSER"/RELEASE_NOTES.md
 ln -sf "$LOGTALKHOME"/UPGRADING.md "$LOGTALKUSER"/UPGRADING.md
 ln -sf "$LOGTALKHOME"/adapters "$LOGTALKUSER"/adapters
+ln -sf "$LOGTALKHOME"/coding "$LOGTALKUSER"/coding
+ln -sf "$LOGTALKHOME"/integration "$LOGTALKUSER"/integration
 ln -sf "$LOGTALKHOME"/manuals "$LOGTALKUSER"/manuals
 ln -sf "$LOGTALKHOME"/paths "$LOGTALKUSER"/paths
-ln -sf "$LOGTALKHOME"/coding "$LOGTALKUSER"/coding
+ln -sf "$LOGTALKHOME"/scripts "$LOGTALKUSER"/scripts
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2html.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2html
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2pdf.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2pdf
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2xml.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2xml

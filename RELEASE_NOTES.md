@@ -77,8 +77,11 @@ file instead of the full `paths.pl` file.
 * FIXED: The sample embedding scripts for ECLiPSe, SICStus Prolog, and
 SWI-Prolog to avoid discontiguous predicate warnings.
 
-* FIXED: The `logtalk_user_setup.sh` and the Windows installer to also
-create links to the `ACKNOWLEDGMENTS.md` and `CONTRIBUTING.md` files.
+* UPDATED: The `logtalk_user_setup.sh` script and the Windows installer to
+also create links to the `ACKNOWLEDGMENTS.md` and `CONTRIBUTING.md` files.
+
+* UPDATED: The `logtalk_user_setup.sh` script to also create links to the
+`integration` and `scripts` directories.
 
 
 3.15.0 - March 21, 2018
