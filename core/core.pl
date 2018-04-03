@@ -481,7 +481,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  top-level interpreter versions of the message sending and context
-%  switching calls control constructs
+%  switching call control constructs
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -16102,11 +16102,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_construct_def_clause'(Def, Head, ExCtx, THead, Clause) :-
 	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
-		(	'$lgt_prolog_feature'(threads, supported) ->
-			'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
+		'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
+		(	'$lgt_prolog_feature'(threads, supported) ->			
 			Clause =.. [Def, Head, ExCtx, with_mutex(Mutex,Call)]
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
-			'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
 			Clause =.. [Def, Head, ExCtx, once(Call)]
 		)
 	;	'$lgt_pp_coinductive_'(Head, _, ExCtx, TCHead, _, _, _) ->
