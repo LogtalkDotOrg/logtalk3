@@ -22,4 +22,7 @@ for embedding Logtalk and Logtalk applications. Embedding usually
 requires precompiling the Logtalk core files and the application source
 files. The scripts should be regarded as starting points as actual use
 requires customization (e.g. starting goal, inclusion of a top-level
-interpreter, custom Logtalk settings, etc).
+interpreter, custom Logtalk settings, etc). An alternative, available
+in some backend Prolog compilers such as SICStus Prolog, SWI-Prolog,
+and YAP is to create a *saved state* after loading Logtalk and a Logtalk
+application.

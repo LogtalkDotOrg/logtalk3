@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample loader file
-%  Last updated on April 26, 2017
+%  Last updated on April 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -26,9 +26,9 @@
 %
 %  During development, loader files can be reloaded repeatedly. Therefore,
 %  any generic settings shared by all source files, such as library paths,
-%  global flag values, and initialization goals with side-effects, may be
-%  defined in alternative in a settings file saved in the application
-%  directory and by starting Logtalk from that directory.
+%  global flag values, and initialization goals with side-effects, are best
+%  defined in in a settings file saved in the application directory and by
+%  starting Logtalk from that directory.
 
 %  If you need to preload plain Prolog files or Prolog module files (e.g.
 %  because those resources are used in the Logtalk code), do so preferably
@@ -47,7 +47,7 @@
 		logtalk_source_file_2,
 		...
 	], [
-		% required compiler options
+		% required file specific compiler options
 	])
 )).
 
@@ -57,4 +57,5 @@
 %  Tip: don't use debug/1 or optimize/1 compiler options in `logtalk_load/2`
 %  calls to allow easy recompilation of source files for debugging during
 %  development. Later, when the code becomes stable, you can always add a
-%  `optimize(on)` compiler option for best performance.
+%  `optimize(on)` compiler option or set the `optimize` flag globally from
+%  your settings file for best performance.
