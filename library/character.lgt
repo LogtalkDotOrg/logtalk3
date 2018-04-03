@@ -23,9 +23,9 @@
 	extends(atom)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/04/03,
 		comment is 'Character predicates (most of them assume an ASCII representation).'
 	]).
 
@@ -88,15 +88,23 @@
 	is_vowel('O').
 	is_vowel('U').
 
-	is_white_space(' ').
-	is_white_space('\t').
+	is_white_space(Character) :-
+		char_code(Character, Code),
+		is_white_space_code(Code).
 
-	is_layout(' ').
-	is_layout('\t').
-	is_layout('\f').
-	is_layout('\r').
-	is_layout('\n').
-	is_layout('\v').
+	is_white_space_code(32). % space
+	is_white_space_code(9).  % horizontal tab
+
+	is_layout(Character) :-
+		char_code(Character, Code),
+		is_layout_code(Code).
+
+	is_layout_code(32). % space
+	is_layout_code(9).  % horizontal tab
+	is_layout_code(12). % form feed
+	is_layout_code(13). % carriage return
+	is_layout_code(10). % line line
+	is_layout_code(11). % vertical tab
 
 	is_quote('''').
 	is_quote('"').
