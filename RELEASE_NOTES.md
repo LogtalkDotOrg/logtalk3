@@ -44,6 +44,8 @@ Manual index.
 Library
 -------
 
+* ADDED: Type-check and arbitrary term generation for grammar rules.
+
 * FIXED: Portability issue with some backend Prolog compilers when embedding
 the `character` library object.
 

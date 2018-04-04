@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.16,
+		version is 1.17,
 		author is 'Paulo Moura',
-		date is 2018/03/15,
+		date is 2018/04/04,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -34,7 +34,7 @@
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
 			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
 			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}',
-			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, pair, pair(KeyType,ValueType), cyclic, acyclic}',
+			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
 			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
 			'predicate type notes' - 'This type is used to check for an object public predicate specified as Object::Functor/Arity.',
@@ -168,6 +168,7 @@
 	type(predicate_or_non_terminal_indicator).
 	type(clause).
 	type(clause_or_partial_clause).
+	type(grammar_rule).
 	type(list).
 	type(non_empty_list).
 	type(partial_list).
@@ -696,6 +697,17 @@
 		;	callable(Term) ->
 			true
 		;	throw(type_error(clause_or_partial_clause, Term))
+		).
+
+	check(grammar_rule, Term) :-
+		(	Term = (Head, List --> Body) ->
+			check(callable, Head),
+			check(list, List),
+			check(callable, Body)		
+		;	Term = (Head --> Body) ->
+			check(callable, Head),
+			check(callable, Body)		
+		;	throw(type_error(grammar_rule, Term))
 		).
 
 	check(list, Term) :-

@@ -31,9 +31,9 @@
 	complements(type)).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2018/03/15,
+		date is 2018/04/04,
 		comment is 'Adds predicates for generating random values for selected types to the library "type" object.',
 		remarks is [
 			'Atom character sets' - 'When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.'
@@ -388,6 +388,18 @@
 			Arbitrary = (ArbitraryHead :- ArbitraryBody),
 			arbitrary(callable, ArbitraryHead),
 			arbitrary(types([var,callable]), ArbitraryBody)
+		).
+
+	arbitrary(grammar_rule, Arbitrary) :-
+		member(Kind, [push_back, simple]),
+		(	Kind == push_back ->
+			Arbitrary = (ArbitraryHead, ArbitraryList --> ArbitraryBody),
+			arbitrary(callable, ArbitraryHead),
+			arbitrary(list, ArbitraryList),
+			arbitrary(types([list,callable]), ArbitraryBody)
+		;	Arbitrary = (ArbitraryHead --> ArbitraryBody),
+			arbitrary(callable, ArbitraryHead),
+			arbitrary(types([list,callable]), ArbitraryBody)
 		).
 
 	arbitrary(list, Arbitrary) :-
