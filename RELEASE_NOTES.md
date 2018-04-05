@@ -38,6 +38,10 @@ the actual execution context in case of runtime error.
 * ADDED: Compiler option `relative_to/1` to allow specifying a directory for
 resolving relative source file paths.
 
+* CHANGED: The compilation of calls to the built-in `logtalk_compile/1-2` and
+`logtalk_load/1-2` predicates to add a default `relative_to/1` compiler option
+with the argument set to the directory of the source file containing the call.
+
 Documentation
 -------------
 
