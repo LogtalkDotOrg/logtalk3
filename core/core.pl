@@ -3326,7 +3326,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b3)).
+'$lgt_version_data'(logtalk(3, 16, 0, b4)).
 
 
 
@@ -7969,19 +7969,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_check'(callable, Goal, directive(if(Goal))),
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-		Goal \== ExpandedGoal,
+		'$lgt_comp_ctx'(NewCtx, _, _, user, user, user, user, _, [], [], NewExCtx, compile(aux), [], _),
+		'$lgt_execution_context'(NewExCtx, user, user, user, user, [], []),
+		'$lgt_compile_body'(Goal, ExpandedGoal, _, NewCtx),
 		!,
-		'$lgt_compile_directive'(if(ExpandedGoal), Ctx)
+		'$lgt_compile_directive'(if({ExpandedGoal}), Ctx)
 	).
-
-'$lgt_compile_directive'(if(predicate_property(Pred, Prop)), Ctx) :-
-	!,	% workaround lack of standardization of the predicate_property/2 predicate
-	'$lgt_compile_directive'(if('$lgt_predicate_property'(Pred, Prop)), Ctx).
-
-'$lgt_compile_directive'(if(\+ predicate_property(Pred, Prop)), Ctx) :-
-	!,	% workaround lack of standardization of the predicate_property/2 predicate
-	'$lgt_compile_directive'(if(\+ '$lgt_predicate_property'(Pred, Prop)), Ctx).
 
 '$lgt_compile_directive'(if(Goal), _) :-
 	'$lgt_pp_cc_mode_'(Value),
@@ -8034,19 +8027,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_check'(callable, Goal, directive(elif(Goal))),
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-		Goal \== ExpandedGoal,
+		'$lgt_comp_ctx'(NewCtx, _, _, user, user, user, user, _, [], [], NewExCtx, compile(aux), [], _),
+		'$lgt_execution_context'(NewExCtx, user, user, user, user, [], []),
+		'$lgt_compile_body'(Goal, ExpandedGoal, _, NewCtx),
 		!,
-		'$lgt_compile_directive'(elif(ExpandedGoal), Ctx)
+		'$lgt_compile_directive'(elif({ExpandedGoal}), Ctx)
 	).
-
-'$lgt_compile_directive'(elif(predicate_property(Pred, Prop)), Ctx) :-
-	!,	% workaround lack of standardization of the predicate_property/2 predicate
-	'$lgt_compile_directive'(elif('$lgt_predicate_property'(Pred, Prop)), Ctx).
-
-'$lgt_compile_directive'(elif(\+ predicate_property(Pred, Prop)), Ctx) :-
-	!,	% workaround lack of standardization of the predicate_property/2 predicate
-	'$lgt_compile_directive'(elif(\+ '$lgt_predicate_property'(Pred, Prop)), Ctx).
 
 '$lgt_compile_directive'(elif(Goal), _) :-
 	'$lgt_pp_cc_mode_'(Mode),
@@ -8290,9 +8276,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		% goals are only expanded when compiling a source file
-		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-		Goal \== ExpandedGoal ->
-		'$lgt_compile_file_directive'(initialization(ExpandedGoal), Ctx)
+		'$lgt_comp_ctx'(NewCtx, _, _, user, user, user, user, _, [], [], NewExCtx, compile(aux), [], _),
+		'$lgt_execution_context'(NewExCtx, user, user, user, user, [], []),
+		'$lgt_compile_body'(Goal, ExpandedGoal, _, NewCtx) ->
+		assertz('$lgt_pp_file_initialization_'(ExpandedGoal, Lines))
 	;	assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	).
 
@@ -11983,6 +11970,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 % reflection built-in predicates
 
 '$lgt_compile_body'(current_op(Priority, Specifier, Operator), TPred, DPred, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	Entity == user,
+	% usually a call from an initialization or conditional compilation directive
+	!,
+	TPred = current_op(Priority, Specifier, Operator),
+	DPred = '$lgt_debug'(goal(current_op(Priority, Specifier, Operator), TPred), ExCtx).
+
+'$lgt_compile_body'(current_op(Priority, Specifier, Operator), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_operator_priority, Priority),
 	'$lgt_check'(var_or_operator_specifier, Specifier),
@@ -11991,6 +11986,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	TPred = '$lgt_current_op'(Database, Priority, Specifier, Operator, Database, p(_), ExCtx),
 	DPred = '$lgt_debug'(goal(current_op(Priority, Specifier, Operator), TPred), ExCtx).
+
+'$lgt_compile_body'(current_predicate(Term), TPred, DPred, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	Entity == user,
+	% usually a call from an initialization or conditional compilation directive
+	!,
+	TPred = current_predicate(Term),
+	DPred = '$lgt_debug'(goal(current_predicate(Term), TPred), ExCtx).
 
 '$lgt_compile_body'(current_predicate(Term), TPred, DPred, Ctx) :-
 	nonvar(Term),
@@ -12030,6 +12033,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 	TPred = '$lgt_current_predicate'(Database, Pred, Database, p(_), ExCtx),
 	DPred = '$lgt_debug'(goal(current_predicate(Pred), TPred), ExCtx).
+
+'$lgt_compile_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	Entity == user,
+	% usually a call from an initialization or conditional compilation directive
+	!,
+	TPred = '$lgt_predicate_property'(Term, Prop),
+	DPred = '$lgt_debug'(goal(predicate_property(Term, Prop), TPred), ExCtx).
 
 '$lgt_compile_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
 	nonvar(Term),
@@ -13083,6 +13094,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 % call to a local user-defined predicate
+
+'$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	Entity == user,
+	% usually a call from an initialization or conditional compilation directive
+	!,
+	TPred = Pred,
+	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred),

@@ -42,6 +42,9 @@ resolving relative source file paths.
 `logtalk_load/1-2` predicates to add a default `relative_to/1` compiler option
 with the argument set to the directory of the source file containing the call.
 
+* ADDED: Support for goal-expansion of complex goal arguments found in
+`initialization/1`, `if/1`, and `elif/1` directives.
+
 Documentation
 -------------
 
