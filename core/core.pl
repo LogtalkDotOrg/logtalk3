@@ -6016,7 +6016,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles to disk and then loads to memory a source file
 
 '$lgt_load_file'(File, Flags) :-
-	(	'$lgt_source_file_name'(File, Directory, Name, Extension, SourceFile),
+	(	'$lgt_source_file_name'(File, Flags, Directory, Name, Extension, SourceFile),
 		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
@@ -6281,7 +6281,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
-	(	'$lgt_source_file_name'(File, Directory, Name, Extension, SourceFile),
+	(	'$lgt_source_file_name'(File, Flags, Directory, Name, Extension, SourceFile),
 		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
@@ -6375,7 +6375,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_source_file_name'(+atom, -atom, -atom, -atom, -atom)
+% '$lgt_source_file_name'(+atom, +list(callable), -atom, -atom, -atom, -atom)
 %
 % converts a source file specification into a source file directory, basename,
 % and full path
@@ -6388,14 +6388,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 % file extension; callers should test if the returned full path exists and
 % commit to that solution when not simply generating all possible solutions
 
-'$lgt_source_file_name'(FilePath, Directory, Name, Extension, SourceFile) :-
+'$lgt_source_file_name'(FilePath, Flags, Directory, Name, Extension, SourceFile) :-
 	(	'$lgt_expand_path'(FilePath, FilePath) ->
 		% assume full path
 		SourceFile0 = FilePath
-	;	% assume relative path
+	;	% assume relative path and try possible alternatives
 		(	once('$lgt_file_loading_stack_'(_, ParentDirectory)),
 			% parent file exists; try first a path relative to its directory
 			atom_concat(ParentDirectory, FilePath, SourceFile0)
+		;	'$lgt_member'(relative_to(BasePath), Flags),
+			(	sub_atom(BasePath, _, 1, 0, '/') ->
+				atom_concat(BasePath, FilePath, SourceFile0)
+			;	atom_concat(BasePath, '/', BasePathSlash),
+				atom_concat(BasePathSlash, FilePath, SourceFile0)
+			)
 		;	% we may have a relative file path without any parent file
 			% (e.g. when the user changes the working directory to the
 			% directory containing the file to be loaded)
@@ -8368,7 +8374,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_expand_module_file_specification'(FileSpec, ExpandedFile) :-
 	(	atom(FileSpec),
 		% try to expand to an existing Prolog file
-		'$lgt_source_file_name'(FileSpec, _, _, Extension, ExpandedFile),
+		'$lgt_source_file_name'(FileSpec, [], _, _, Extension, ExpandedFile),
 		'$lgt_file_extension'(prolog, Extension),
 		'$lgt_file_exists'(ExpandedFile) ->
 		true
@@ -19504,6 +19510,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(clean).
 '$lgt_valid_flag'(source_data).
 '$lgt_valid_flag'(reload).
+'$lgt_valid_flag'(relative_to).
 % read-only compilation flags
 '$lgt_valid_flag'(version_data).
 '$lgt_valid_flag'(version).		% deprecated
@@ -19601,6 +19608,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(reload, always) :- !.
 '$lgt_valid_flag_value'(reload, changed) :- !.
 '$lgt_valid_flag_value'(reload, skip) :- !.
+
+'$lgt_valid_flag_value'(relative_to, Directory) :-
+	atom(Directory).
 
 '$lgt_valid_flag_value'(debug, on) :- !.
 '$lgt_valid_flag_value'(debug, off) :- !.
@@ -22093,7 +22103,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(FileError)
 	),
 	% find the full file name as the extension may be missing
-	(	'$lgt_source_file_name'(ExpandedFile, Directory, _, _, SourceFile),
+	(	'$lgt_source_file_name'(ExpandedFile, [], Directory, _, _, SourceFile),
 		% avoid a loading loop by checking that the file name is different
 		% from the name of the file containing the include/1 directive
 		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),

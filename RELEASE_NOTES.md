@@ -35,6 +35,9 @@ format.
 type-checking when the arguments are sufficiently instantiated and to return
 the actual execution context in case of runtime error.
 
+* ADDED: Compiler option `relative_to/1` to allow specifying a directory for
+resolving relative source file paths.
+
 Documentation
 -------------
 
