@@ -81,6 +81,8 @@ irrelevant output.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Sample Bash shell embedding script for YAP.
+
 * UPDATED: The sample embedding scripts for ECLiPSe, GNU Prolog, JIProlog,
 SICStus Prolog, and SWI-Prolog to also allow embedding an optional settings
 file and an optional application.
