@@ -27,4 +27,7 @@ in some backend Prolog compilers such as SICStus Prolog, SWI-Prolog,
 and YAP is to create a *saved state* after loading Logtalk and a Logtalk
 application. In both solutions, the `reload` flag should usually be set
 to `skip` (in the used settings file) to prevent reloading of already
-loaded code when running the embedded application.
+loaded code when running the embedded application and the embedded
+application or saved state should be run in a process that sets (just
+for itself) the `LOGTALKHOME` and `LOGTALKUSER` environment variables
+to the values used during the pre-compilation of the Logtalk resources.
