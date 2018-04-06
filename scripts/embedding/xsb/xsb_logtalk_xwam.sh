@@ -5,7 +5,7 @@
 ##   This script creates a XSB logtalk.xwam file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on April 2, 2018
+##   Last updated on April 6, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -26,6 +26,7 @@
 
 
 directory="$HOME/collect"
+paths="$LOGTALKHOME/paths/paths_core.pl"
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -65,7 +66,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.2"
 	exit 0
 }
 
@@ -75,23 +76,25 @@ usage_help()
 	echo "This script creates a XSB logtalk.xwam file with the Logtalk compiler and runtime"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory]"
+	echo "  $(basename "$0") [-d directory] [-p paths]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -d directory to use for intermediate and final results (default is $HOME/collect)"
+	echo "  -p library paths file (default is $LOGTALKHOME/paths/paths_core.pl)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vd:h" option
+while getopts "vd:p:h" option
 do
 	case $option in
 		v) print_version;;
 		d) d_arg="$OPTARG";;
+		p) p_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -99,6 +102,15 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$p_arg" != "" ] ; then
+	if [ -f "$p_arg" ] ; then
+		paths="$p_arg"
+	else
+		echo "The $p_arg library paths file does not exist!"
+		exit 1
+	fi
 fi
 
 mkdir -p "$directory"
@@ -119,20 +131,19 @@ fi
 xsblgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt."
 
 cp "$LOGTALKHOME/adapters/xsb.pl" .
-cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 cat \
-    xsb.pl \
-    paths_core.pl \
-    expanding*_lgt.P \
-    monitoring*_lgt.P \
-    forwarding*_lgt.P \
-    user*_lgt.P \
-    logtalk*_lgt.P \
-    core_messages*_lgt.P \
-    core.pl \
-    > logtalk.pl
+	xsb.pl \
+	"$paths" \
+	expanding*_lgt.P \
+	monitoring*_lgt.P \
+	forwarding*_lgt.P \
+	user*_lgt.P \
+	logtalk*_lgt.P \
+	core_messages*_lgt.P \
+	core.pl \
+	> logtalk.pl
 
 xsb -e "compile(logtalk),halt."
 

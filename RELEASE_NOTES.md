@@ -83,8 +83,8 @@ Installers and installation scripts
 SICStus Prolog, and SWI-Prolog to also allow embedding an optional settings
 file and an optional application.
 
-* UPDATED: The sample embedding scripts to use the `paths_core.pl` minimal
-file instead of the full `paths.pl` file.
+* UPDATED: The sample embedding scripts to allow selecting a library paths
+file other than the `paths_core.pl` default file.
 
 * FIXED: The sample embedding scripts for ECLiPSe, SICStus Prolog, and
 SWI-Prolog to avoid discontiguous predicate warnings.

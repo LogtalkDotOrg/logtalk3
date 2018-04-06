@@ -5,7 +5,7 @@
 ##   This script creates a ECLiPSe logtalk.eco file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on April 3, 2018
+##   Last updated on April 6, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -26,6 +26,7 @@
 
 
 directory="$HOME/collect"
+paths="$LOGTALKHOME/paths/paths_core.pl"
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -65,7 +66,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.4"
 	exit 0
 }
 
@@ -77,15 +78,14 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory]"
-	echo "  $(basename "$0") [-l loader]"
-	echo "  $(basename "$0") [-s settings]"
+	echo "  $(basename "$0") [-d directory] [-p paths] [-l loader] [-s settings]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -d directory to use for intermediate and final results (default is $HOME/collect)"
+	echo "  -p library paths file (default is $LOGTALKHOME/paths/paths_core.pl)"
 	echo "  -l optional loader file for the application"
 	echo "  -s optional settings file for the application"
 	echo "  -h help"
@@ -93,11 +93,12 @@ usage_help()
 	exit 0
 }
 
-while getopts "vd:l:s:h" option
+while getopts "vd:p:l:s:h" option
 do
 	case $option in
 		v) print_version;;
 		d) d_arg="$OPTARG";;
+		p) p_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		h) usage_help;;
@@ -107,6 +108,15 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$p_arg" != "" ] ; then
+	if [ -f "$p_arg" ] ; then
+		paths="$p_arg"
+	else
+		echo "The $p_arg library paths file does not exist!"
+		exit 1
+	fi
 fi
 
 if [ "$l_arg" != "" ] ; then
@@ -147,7 +157,6 @@ else
 fi
 
 cp "$LOGTALKHOME/adapters/eclipse.pl" .
-cp "$LOGTALKHOME/paths/paths_core.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 echo ":- discontiguous('\$lgt_current_protocol_'/5)." > logtalk.pl
@@ -170,29 +179,29 @@ eclipselgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(
 if [ "$settings" != "" ] ; then
 	eclipselgt$extension -L iso -t user -e "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')]),halt"
 	cat \
-	    eclipse.pl \
-	    paths_core.pl \
-	    expanding*_lgt.pl \
-	    monitoring*_lgt.pl \
-	    forwarding*_lgt.pl \
-	    user*_lgt.pl \
-	    logtalk*_lgt.pl \
-	    core_messages*_lgt.pl \
+		eclipse.pl \
+		"$paths" \
+		expanding*_lgt.pl \
+		monitoring*_lgt.pl \
+		forwarding*_lgt.pl \
+		user*_lgt.pl \
+		logtalk*_lgt.pl \
+		core_messages*_lgt.pl \
 		settings*_lgt.pl \
-	    core.pl \
-	    > logtalk.pl
+		core.pl \
+		> logtalk.pl
 else
 	cat \
-	    eclipse.pl \
-	    paths_core.pl \
-	    expanding*_lgt.pl \
-	    monitoring*_lgt.pl \
-	    forwarding*_lgt.pl \
-	    user*_lgt.pl \
-	    logtalk*_lgt.pl \
-	    core_messages*_lgt.pl \
-	    core.pl \
-	    > logtalk.pl
+		eclipse.pl \
+		"$paths" \
+		expanding*_lgt.pl \
+		monitoring*_lgt.pl \
+		forwarding*_lgt.pl \
+		user*_lgt.pl \
+		logtalk*_lgt.pl \
+		core_messages*_lgt.pl \
+		core.pl \
+		> logtalk.pl
 fi
 
 eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:eco]),halt"
@@ -201,8 +210,7 @@ rm *.pl
 if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
 	cd "$directory/application"
-	eclipselgt$extension -L iso -t user -e "set_logtalk_flag(source_data, off),set_logtalk_flag(optimize, on),set_logtalk_flag(clean, off),set_logtalk_flag(context_switching_calls, deny),set_logtalk_flag(scratch_directory, '$directory/application'),logtalk_load('$loader', [clean(on)]),halt"
-	rm -f $directory/application/*loader*
+	eclipselgt$extension -L iso -t user -e "set_logtalk_flag(source_data, off),set_logtalk_flag(optimize, on),set_logtalk_flag(clean, off),set_logtalk_flag(context_switching_calls, deny),set_logtalk_flag(scratch_directory, '$directory/application'),logtalk_load('$loader'),halt"
 	cat $(ls -t $directory/application/*.pl) > application.pl
 	eclipse -L iso -t user -f $directory/logtalk.eco -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	mv application.eco ..
