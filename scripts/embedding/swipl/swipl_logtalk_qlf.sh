@@ -27,6 +27,7 @@
 
 directory="$HOME/collect"
 paths="$LOGTALKHOME/paths/paths_core.pl"
+hooks="$LOGTALKHOME/adapters/swihooks.pl"
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -66,7 +67,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
 
@@ -78,14 +79,15 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-p paths] [-l loader] [-s settings]"
+	echo "  $(basename "$0") [-d directory] [-p paths] [-h hooks] [-l loader] [-s settings]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -d directory to use for intermediate and final results (default is $HOME/collect)"
-	echo "  -p library paths file (default is $LOGTALKHOME/paths/paths_core.pl)"
+	echo "  -d directory to use for intermediate and final results (default is $directory)"
+	echo "  -p library paths file (default is $paths)"
+	echo "  -h SWI-Prolog hooks file (default is $hooks)"
 	echo "  -l optional loader file for the application"
 	echo "  -s optional settings file for the application"
 	echo "  -h help"
@@ -93,12 +95,13 @@ usage_help()
 	exit 0
 }
 
-while getopts "vd:p:l:s:h" option
+while getopts "vd:p:h:l:s:h" option
 do
 	case $option in
 		v) print_version;;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
+		h) h_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		h) usage_help;;
@@ -115,6 +118,15 @@ if [ "$p_arg" != "" ] ; then
 		paths="$p_arg"
 	else
 		echo "The $p_arg library paths file does not exist!"
+		exit 1
+	fi
+fi
+
+if [ "$h_arg" != "" ] ; then
+	if [ -f "$h_arg" ] ; then
+		hooks="$h_arg"
+	else
+		echo "The $h_arg hooks file does not exist!"
 		exit 1
 	fi
 fi
@@ -174,6 +186,7 @@ if [ "$settings" != "" ] ; then
 		core_messages*_lgt.pl \
 		settings*_lgt.pl \
 		core.pl \
+		"$hooks" \
 		> logtalk.pl
 else
 	cat \
@@ -186,6 +199,7 @@ else
 		logtalk*_lgt.pl \
 		core_messages*_lgt.pl \
 		core.pl \
+		"$hooks" \
 		> logtalk.pl
 fi
 

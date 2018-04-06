@@ -66,7 +66,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.2"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
@@ -82,8 +82,8 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -d directory to use for intermediate and final results (default is $HOME/collect)"
-	echo "  -p library paths file (default is $LOGTALKHOME/paths/paths_core.pl)"
+	echo "  -d directory to use for intermediate and final results (default is $directory)"
+	echo "  -p library paths file (default is $paths)"
 	echo "  -h help"
 	echo
 	exit 0
