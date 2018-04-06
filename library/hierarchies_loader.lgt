@@ -23,5 +23,7 @@
 		hierarchyp,
 		proto_hierarchyp, proto_hierarchy,
 		class_hierarchyp, class_hierarchy
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 ).
