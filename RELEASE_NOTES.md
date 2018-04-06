@@ -35,12 +35,13 @@ format.
 type-checking when the arguments are sufficiently instantiated and to return
 the actual execution context in case of runtime error.
 
+* CHANGED: The compilation of calls to the built-in `logtalk_compile/1-2`
+and `logtalk_load/1-2` predicates to pass the directory of the source file
+containing the call. This notably allows generated code for loader files to
+be relocatable, thus simplifying embedding of applications.
+
 * ADDED: Compiler option `relative_to/1` to allow specifying a directory for
 resolving relative source file paths.
-
-* CHANGED: The compilation of calls to the built-in `logtalk_compile/1-2` and
-`logtalk_load/1-2` predicates to add a default `relative_to/1` compiler option
-with the argument set to the directory of the source file containing the call.
 
 * ADDED: Support for goal-expansion of complex goal arguments found in
 `initialization/1`, `if/1`, and `elif/1` directives.

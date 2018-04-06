@@ -2341,7 +2341,7 @@ logtalk_compile(Files) :-
 '$lgt_logtalk_compile_files'(Files, Directory) :-
 	'$lgt_init_warnings_counter'(logtalk_compile(Files)),
 	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
-	'$lgt_compile_files'(ExpandedFiles, [relative_to(Directory)]),
+	'$lgt_compile_files'(ExpandedFiles, ['$relative_to'(Directory)]),
 	'$lgt_report_warning_numbers'(logtalk_compile(Files)),
 	'$lgt_clean_pp_file_clauses'.
 
@@ -2383,7 +2383,7 @@ logtalk_compile(Files, Flags) :-
 	'$lgt_check_compiler_flags'(Flags),
 	(	'$lgt_member'(relative_to(_), Flags) ->
 		'$lgt_compile_files'(ExpandedFiles, Flags)
-	;	'$lgt_compile_files'(ExpandedFiles, [relative_to(Directory)| Flags])
+	;	'$lgt_compile_files'(ExpandedFiles, ['$relative_to'(Directory)| Flags])
 	),
 	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
 	'$lgt_clean_pp_file_clauses'.
@@ -2649,7 +2649,7 @@ logtalk_load(Files) :-
 '$lgt_logtalk_load_files'(Files, Directory) :-
 	'$lgt_init_warnings_counter'(logtalk_load(Files)),
 	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
-	'$lgt_load_files'(ExpandedFiles, [relative_to(Directory)]),
+	'$lgt_load_files'(ExpandedFiles, ['$relative_to'(Directory)]),
 	'$lgt_report_warning_numbers'(logtalk_load(Files)),
 	'$lgt_clean_pp_file_clauses'.
 
@@ -2693,7 +2693,7 @@ logtalk_load(Files, Flags) :-
 	'$lgt_check_compiler_flags'(Flags),
 	(	'$lgt_member'(relative_to(_), Flags) ->
 		'$lgt_load_files'(ExpandedFiles, Flags)
-	;	'$lgt_load_files'(ExpandedFiles, [relative_to(Directory)| Flags])
+	;	'$lgt_load_files'(ExpandedFiles, ['$relative_to'(Directory)| Flags])
 	),
 	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
 	'$lgt_clean_pp_file_clauses'.
@@ -6025,8 +6025,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles to disk and then loads to memory a source file
 
-'$lgt_load_file'(File, Flags) :-
-	(	'$lgt_source_file_name'(File, Flags, Directory, Name, Extension, SourceFile),
+'$lgt_load_file'(File, [RelativeTo| Flags]) :-
+	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
 		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
@@ -6287,11 +6287,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_files'([], _) :-
 	!.
 
-'$lgt_compile_files'([File| Files], Flags) :-
+'$lgt_compile_files'([File| Files], [RelativeTo| Flags]) :-
 	!,
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
-	(	'$lgt_source_file_name'(File, Flags, Directory, Name, Extension, SourceFile),
+	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
 		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
@@ -6301,7 +6301,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
 	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, compiling),
-	'$lgt_compile_files'(Files, Flags).
+	'$lgt_compile_files'(Files, [RelativeTo| Flags]).
 
 '$lgt_compile_files'(File, Flags) :-
 	'$lgt_compile_files'([File], Flags).
@@ -6406,7 +6406,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	once('$lgt_file_loading_stack_'(_, ParentDirectory)),
 			% parent file exists; try first a path relative to its directory
 			atom_concat(ParentDirectory, FilePath, SourceFile0)
-		;	'$lgt_member'(relative_to(BasePath), Flags),
+		;	(	'$lgt_member'(relative_to(BasePath), Flags)
+			;	'$lgt_member'('$relative_to'(BasePath), Flags)
+			),
 			(	sub_atom(BasePath, _, 1, 0, '/') ->
 				atom_concat(BasePath, FilePath, SourceFile0)
 			;	atom_concat(BasePath, '/', BasePathSlash),
@@ -19544,6 +19546,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(source_data).
 '$lgt_valid_flag'(reload).
 '$lgt_valid_flag'(relative_to).
+'$lgt_valid_flag'('$relative_to').
 % read-only compilation flags
 '$lgt_valid_flag'(version_data).
 '$lgt_valid_flag'(version).		% deprecated
@@ -19643,6 +19646,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(reload, skip) :- !.
 
 '$lgt_valid_flag_value'(relative_to, Directory) :-
+	atom(Directory).
+'$lgt_valid_flag_value'('$relative_to', Directory) :-
 	atom(Directory).
 
 '$lgt_valid_flag_value'(debug, on) :- !.
