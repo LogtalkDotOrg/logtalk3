@@ -177,7 +177,7 @@ else
 	touch application.pl
 fi
 
-gplc -o logtalk gnu.pl paths.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl settings*_lgt.pl core.pl $(ls application/*.pl)
+gplc -o logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl $(ls application/*.pl) core.pl  settings*_lgt.pl paths.pl
 
 rm *.pl
 rm application/*.pl
