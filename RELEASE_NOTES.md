@@ -37,8 +37,9 @@ the actual execution context in case of runtime error.
 
 * CHANGED: The compilation of calls to the built-in `logtalk_compile/1-2`
 and `logtalk_load/1-2` predicates to pass the directory of the source file
-containing the call. This notably allows generated code for loader files to
-be relocatable, thus simplifying embedding of applications.
+containing the call, which is used for default resolving of relative source
+file paths. This notably allows the generated code for loader files to be
+relocatable, thus simplifying embedding of applications.
 
 * ADDED: Compiler option `relative_to/1` to allow specifying a directory for
 resolving relative source file paths.

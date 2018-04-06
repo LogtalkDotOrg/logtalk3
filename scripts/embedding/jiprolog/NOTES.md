@@ -25,3 +25,5 @@ The following scripts are provided:
 - `jiprolog_logtalk_jip.sh`  
 	creates a `logtalk.jip` file with the Logtalk compiler and runtime
 	and an optional `application.jip` file for an application
+
+The `.jip` files can be loaded using the `load/1` JIProlog predicate.

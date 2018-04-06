@@ -29,4 +29,4 @@ The following scripts are provided:
 	and an optional `application.eco` file for an application
 	
 The `.eco` files can be loaded using the `-f` command-line option. For
-example, `eclipse -L iso -t user -f logtalk.eco`.
+example, `eclipse -L iso -t user -f logtalk.eco -f application.eco`.
