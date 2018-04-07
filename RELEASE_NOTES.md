@@ -47,6 +47,10 @@ resolving relative source file paths.
 * ADDED: Support for goal-expansion of complex goal arguments found in
 `initialization/1`, `if/1`, and `elif/1` directives.
 
+* ADDED: Read-only compiler option `engines`. Useful to signal that a backend
+Prolog compiler provides sufficient low level multi-threading features for
+supporting Logtalk threaded engines.
+
 Documentation
 -------------
 

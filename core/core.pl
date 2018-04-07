@@ -2158,7 +2158,7 @@ threaded_peek(Goal) :-
 % threaded_engine_create(@term, @callable, ?nonvar)
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx))).
 
@@ -2170,7 +2170,7 @@ threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 % threaded_engine(?nonvar)
 
 threaded_engine_self(Engine) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_self(Engine), ExCtx))).
 
@@ -2181,7 +2181,7 @@ threaded_engine_self(Engine) :-
 % threaded_engine(?nonvar)
 
 threaded_engine(Engine) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine(Engine), ExCtx))).
 
@@ -2192,7 +2192,7 @@ threaded_engine(Engine) :-
 % threaded_engine_next(@nonvar, ?term)
 
 threaded_engine_next(Engine, Answer) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_next(Engine, Answer), ExCtx))).
 
@@ -2204,7 +2204,7 @@ threaded_engine_next(Engine, Answer) :-
 % threaded_engine_next_reified(@nonvar, ?term)
 
 threaded_engine_next_reified(Engine, Answer) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_next_reified(Engine, Answer), ExCtx))).
 
@@ -2216,7 +2216,7 @@ threaded_engine_next_reified(Engine, Answer) :-
 % threaded_engine_yield(@term)
 
 threaded_engine_yield(Answer) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_yield(Answer), ExCtx))).
 
@@ -2227,7 +2227,7 @@ threaded_engine_yield(Answer) :-
 % threaded_engine_post(@nonvar, @term)
 
 threaded_engine_post(Engine, Term) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_post(Engine, Term), ExCtx))).
 
@@ -2239,7 +2239,7 @@ threaded_engine_post(Engine, Term) :-
 % threaded_engine_fetch(?term)
 
 threaded_engine_fetch(Term) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Term), ExCtx))).
 
@@ -2250,7 +2250,7 @@ threaded_engine_fetch(Term) :-
 % threaded_engine_destroy(+nonvar)
 
 threaded_engine_destroy(Engine) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
+	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	throw(error(resource_error(threads), logtalk(threaded_engine_destroy(Engine), ExCtx))).
 
@@ -3326,7 +3326,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b4)).
+'$lgt_version_data'(logtalk(3, 16, 0, b5)).
 
 
 
@@ -8639,7 +8639,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_logtalk_directive'(threaded, _) :-
 	'$lgt_pp_entity_'(Type, _, _, _, _),
-	(	'$lgt_prolog_feature'(threads, unsupported) ->
+	(	'$lgt_prolog_feature'(engines, unsupported),
+		'$lgt_prolog_feature'(threads, unsupported) ->
 		throw(resource_error(threads))
 	;	Type == object ->
 		assertz('$lgt_pp_threaded_')
@@ -19552,13 +19553,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(version).		% deprecated
 % startup flags
 '$lgt_valid_flag'(settings_file).
-% back-end Prolog features
+% back-end Prolog compiler information
 '$lgt_valid_flag'(prolog_dialect).
 '$lgt_valid_flag'(prolog_version).
 '$lgt_valid_flag'(prolog_compatible_version).
 '$lgt_valid_flag'(prolog_conformance).
+% features requiring specific back-end Prolog compiler support
 '$lgt_valid_flag'(unicode).
 '$lgt_valid_flag'(encoding_directive).
+'$lgt_valid_flag'(engines).
 '$lgt_valid_flag'(threads).
 '$lgt_valid_flag'(modules).
 '$lgt_valid_flag'(tabling).
@@ -19589,6 +19592,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_read_only_flag'(prolog_conformance).
 '$lgt_read_only_flag'(unicode).
 '$lgt_read_only_flag'(encoding_directive).
+'$lgt_read_only_flag'(engines).
 '$lgt_read_only_flag'(threads).
 '$lgt_read_only_flag'(modules).
 '$lgt_read_only_flag'(tabling).
@@ -19702,6 +19706,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(encoding_directive, full) :- !.
 '$lgt_valid_flag_value'(encoding_directive, source) :- !.
 '$lgt_valid_flag_value'(encoding_directive, unsupported) :- !.
+
+'$lgt_valid_flag_value'(engines, supported) :- !.
+'$lgt_valid_flag_value'(engines, unsupported) :- !.
 
 '$lgt_valid_flag_value'(threads, supported) :- !.
 '$lgt_valid_flag_value'(threads, unsupported) :- !.
@@ -23024,8 +23031,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % on back-end Prolog compilers with bounded integers)
 
 '$lgt_start_runtime_threading' :-
-	(	'$lgt_prolog_feature'(threads, supported) ->
-		mutex_create(_, [alias('$lgt_engines')]),
+	(	'$lgt_prolog_feature'(engines, supported) ->
+		mutex_create(_, [alias('$lgt_engines')])
+	;	true
+	),
+	(	(	'$lgt_prolog_feature'(engines, supported)
+		;	'$lgt_prolog_feature'(threads, supported)
+		) ->
 		mutex_create(_, [alias('$lgt_threaded_tag')]),
 		(	current_prolog_flag(bounded, true) ->
 			current_prolog_flag(min_integer, Min),
