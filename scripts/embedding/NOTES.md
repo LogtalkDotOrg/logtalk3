@@ -31,3 +31,6 @@ loaded code when running the embedded application and the embedded
 application or saved state should be run in a process that sets (just
 for itself) the `LOGTALKHOME` and `LOGTALKUSER` environment variables
 to the values used during the pre-compilation of the Logtalk resources.
+
+See the `settings-embedding-sample.lgt` for suggestions on defined a
+settings file for embedding applications.
