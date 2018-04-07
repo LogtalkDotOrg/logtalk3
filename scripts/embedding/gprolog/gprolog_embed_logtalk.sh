@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level
 ##   interpreter that embeds Logtalk
 ## 
-##   Last updated on April 6, 2018
+##   Last updated on April 7, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -66,7 +66,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
@@ -171,7 +171,10 @@ fi
 if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
 	cd "$directory/application"
-	gplgt$extension --query-goal "set_logtalk_flag(source_data, off),set_logtalk_flag(optimize, on),set_logtalk_flag(clean, off),set_logtalk_flag(context_switching_calls, deny),set_logtalk_flag(scratch_directory, '$directory/application'),logtalk_load('$loader'),halt"
+	if [ "$settings" != "" ] ; then
+		cp "$settings" ./settings.lgt
+	fi
+	gplgt$extension --query-goal "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
 	cd ..
 else
 	touch application.pl

@@ -24,6 +24,7 @@ $ ./gprolog_embed_logtalk.sh
 $ cd ~/collect
 $ ./logtalk
 
+
 % create a GNU Prolog executable that includes the Logtalk compiler/runtime
 % and the "searching" example:
 
@@ -42,3 +43,23 @@ $ ./swipl_logtalk_qlf.sh -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk
 $ cd ~/collect
 $ swipl -g "[logtalk, application], qsave_program(spider, [goal('::'(spider,start)), stand_alone(true)])" -t "halt"
 $ ./spider
+
+
+% create a SICStus Prolog saved state from the "sleepy" text adventure example:
+
+$ cd $LOGTALKHOME/scripts/embedding/sicstus/
+$ ./sicstus_logtalk_po.sh -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd ~/collect
+$ sicstus --goal "load_files(['logtalk.po','application.po']), save_program(sleepy, '::'(sleepy,start)), halt."
+$ chmod a+x sleepy.sav
+$ ./sleepy.sav
+
+
+% create a YAP saved state from the "wumpus" text adventure example:
+
+$ cd $LOGTALKHOME/scripts/embedding/yap/
+$ ./yap_logtalk_pl.sh -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd ~/collect
+$ yap -g "consult([logtalk,application]), save_program(wumpus, '::'(wumpus,main)), halt."
+$ chmod a+x wumpus
+$ ./wumpus

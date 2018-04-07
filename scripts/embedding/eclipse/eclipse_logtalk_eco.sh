@@ -5,7 +5,7 @@
 ##   This script creates a ECLiPSe logtalk.eco file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on April 6, 2018
+##   Last updated on April 7, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -66,7 +66,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
@@ -78,7 +78,7 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-p paths] [-l loader] [-s settings]"
+	echo "  $(basename "$0") [-d directory] [-p paths] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -86,8 +86,8 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -d directory to use for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
+	echo "  -s optional settings file"
 	echo "  -l optional loader file for the application"
-	echo "  -s optional settings file for the application"
 	echo "  -h help"
 	echo
 	exit 0
@@ -210,7 +210,7 @@ rm *.pl
 if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
 	cd "$directory/application"
-	eclipselgt$extension -L iso -t user -e "set_logtalk_flag(source_data, off),set_logtalk_flag(optimize, on),set_logtalk_flag(clean, off),set_logtalk_flag(context_switching_calls, deny),set_logtalk_flag(scratch_directory, '$directory/application'),logtalk_load('$loader'),halt"
+	eclipse -L iso -t user -f $directory/logtalk.eco -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
 	cat $(ls -t $directory/application/*.pl) > application.pl
 	eclipse -L iso -t user -f $directory/logtalk.eco -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	mv application.eco ..
