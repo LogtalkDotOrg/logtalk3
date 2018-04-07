@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on December 11, 2017
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -264,6 +264,7 @@ write_term(Stream, Term, _) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).

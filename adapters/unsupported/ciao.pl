@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on December 11, 2017
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -230,6 +230,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).

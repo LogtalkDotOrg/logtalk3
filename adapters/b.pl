@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on December 11, 2017
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -227,6 +227,7 @@ findall(Term, Goal, List, Tail) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, supported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).

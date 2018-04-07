@@ -30,7 +30,7 @@
 
 :- elif((
 	current_logtalk_flag(prolog_dialect, eclipse),
-	current_logtalk_flag(threads, supported)
+	current_logtalk_flag(engines, supported)
 )).
 
 	:- ensure_loaded(library(swi)).

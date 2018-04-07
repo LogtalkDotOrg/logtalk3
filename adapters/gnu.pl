@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on February 16, 2018
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -203,6 +203,7 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 :- if(predicate_property(current_module(_), built_in)).
 	'$lgt_prolog_feature'(modules, supported).

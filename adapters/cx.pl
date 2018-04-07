@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on January 26, 2018
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -204,6 +204,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, supported).

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on December 11, 2017
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -277,10 +277,15 @@
 		Tabling = supported
 	;	Tabling = unsupported
 	).
+'$lgt_prolog_feature'(engines, Engines) :-
+	(	current_prolog_flag(threads, true) ->
+		Engines = supported,
+		volatile('$lgt_current_engine_'/4)
+	;	Engines = unsupported
+	).
 '$lgt_prolog_feature'(threads, Threads) :-
 	(	current_prolog_flag(threads, true) ->
-		Threads = supported,
-		volatile('$lgt_current_engine_'/4)
+		Threads = supported
 	;	Threads = unsupported
 	).
 '$lgt_prolog_feature'(modules, supported).

@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.31,
+		version is 1.32,
 		author is 'Paulo Moura',
-		date is 2018/03/18,
+		date is 2018/04/08,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -226,6 +226,7 @@
 		 current_logtalk_flag(prolog_loader, PrologLoader),
 		 current_logtalk_flag(prolog_dialect, PrologDialect),
 		 current_logtalk_flag(modules, Modules),
+		 current_logtalk_flag(engines, Engines),
 		 current_logtalk_flag(threads, Threads),
 		 current_logtalk_flag(tabling, Tabling),
 		 current_logtalk_flag(coinduction, Coinduction),
@@ -250,7 +251,7 @@
 			'  prolog_loader:   ~w'-[PrologLoader], nl,
 			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
 			'  prolog_dialect: ~w, modules: ~w, threads: ~w'-[PrologDialect, Modules, Threads], nl,
-			'  tabling: ~w, coinduction: ~w'-[Tabling, Coinduction], nl,
+			'  engines: ~w, tabling: ~w, coinduction: ~w'-[Engines, Tabling, Coinduction], nl,
 			'  unicode: ~w, encoding_directive: ~w'-[Unicode, Encodings], nl, nl
 		].
 

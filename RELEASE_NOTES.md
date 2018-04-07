@@ -51,6 +51,12 @@ resolving relative source file paths.
 Prolog compiler provides sufficient low level multi-threading features for
 supporting Logtalk threaded engines.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The ECLiPSe adapter file to enable Logtalk threaded engines when
+running version 7.0.35 or later.
+
 Documentation
 -------------
 
@@ -81,6 +87,12 @@ built-in predicate.
 
 * FIXED: The tests for the `blackboard` multi-threading example to suppress
 irrelevant output.
+
+Examples
+--------
+
+* CHANGED: Enable running the threaded engines examples when using ECLiPSe
+7.0.35 or a later version.
 
 Installers and installation scripts
 -----------------------------------

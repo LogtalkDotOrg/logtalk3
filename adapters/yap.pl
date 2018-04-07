@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on December 11, 2017
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -287,6 +287,14 @@
 		member(tabling, Options) ->
 		Tabling = supported
 	;	Tabling = unsupported
+	).
+'$lgt_prolog_feature'(engines, Engines) :-
+	(	current_prolog_flag(system_options, threads) ->
+		Engines = supported
+	;	current_prolog_flag(system_options, Options),
+		member(threads, Options) ->
+		Engines = supported
+	;	Engines = unsupported
 	).
 '$lgt_prolog_feature'(threads, Threads) :-
 	(	current_prolog_flag(system_options, threads) ->

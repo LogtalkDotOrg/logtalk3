@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on January 25, 2018
+%  Last updated on April 8, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -320,11 +320,12 @@ forall(Generate, Test) :-
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
-%:- if(get_flag(thread_create/3, defined, on)).
-%	'$lgt_prolog_feature'(threads, supported).
-%:- else.
-	'$lgt_prolog_feature'(threads, unsupported).
-%:- endif.
+:- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
+	'$lgt_prolog_feature'(engines, supported).
+:- else.
+	'$lgt_prolog_feature'(engines, unsupported).
+:- endif.
+'$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, supported).
 '$lgt_prolog_feature'(unicode, unsupported).
