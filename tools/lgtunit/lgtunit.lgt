@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.9,
+		version is 6.11,
 		author is 'Paulo Moura',
-		date is 2018/03/16,
+		date is 2018/04/08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -84,7 +84,7 @@
 	]).
 
 	:- public(assertion/1).
-	:- meta_predicate(assertion(::)).
+	:- meta_predicate(assertion('::')).
 	:- mode(assertion(+callable), one).
 	:- info(assertion/1, [
 		comment is 'True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.',

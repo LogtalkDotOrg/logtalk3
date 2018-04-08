@@ -77,6 +77,8 @@ Tools
 * IMPROVED: The `lgtunit` tool output format for failed tests due to the wrong
 error being generated.
 
+* FIXED: Workaround a Lean Prolog parser bug when loading the `lgtunit` tool.
+
 Tests
 -----
 
