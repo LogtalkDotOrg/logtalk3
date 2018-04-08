@@ -81,9 +81,10 @@ settings on the `settings-sample.lgt` for configuration suggestions.
 You may customize the Logtalk compiler flags and add your own library paths
 by coping or renaming the `settings-sample.lgt` file in your Logtalk user
 folder to `settings.lgt` and editing it. The `settings.lgt` file may also be
-stored in your home directory. Settings in this file override the default
-values in the adapter files. Some of the default flag values that you may
-want to change include:
+stored in your home directory. For application specific settings, save the
+`settings.lgt` file in the application root directory and start Logtalk from
+it. Settings in this file override the default values in the adapter files.
+Some of the default flag values that you may want to change include:
 
 * `report`  
     for less verbose startup and compilation reports
@@ -99,6 +100,9 @@ Check the `adapters/NOTES.md` file for Prolog specific compatibility notes.
 Some backend Prolog compilers don't support all the possible compilation
 flags values. In addition, some backend Prolog compilers provide limited
 support for settings files in some operating-systems.
+
+Detailed information on all compiler flags can be found in the User Manual
+section on installing Logtalk.
 
 Settings files can be debugged by compiling them with the `logtalk_compile/1-2`
 built-in predicates.
