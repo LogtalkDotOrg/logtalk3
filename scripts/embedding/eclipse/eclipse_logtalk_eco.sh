@@ -74,8 +74,8 @@ usage_help()
 {
 	echo 
 	echo "This script creates a ECLiPSe logtalk.eco file with the Logtalk compiler and"
-	echo "and runtime and an optional application.eco file from an application source"
-	echo "code given its loader file."
+	echo "runtime and an optional application.eco file from an application source code"
+	echo "given its loader file."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory] [-p paths] [-s settings] [-l loader]"

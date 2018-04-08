@@ -73,7 +73,8 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script creates a XSB logtalk.xwam file with the Logtalk compiler and runtime"
+	echo "This script creates a XSB logtalk.xwam file with the Logtalk compiler"
+	echo "and runtime"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory] [-p paths]"

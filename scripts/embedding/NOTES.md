@@ -17,20 +17,22 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains scripts for selected backend Prolog compilers
-for embedding Logtalk and Logtalk applications. Embedding usually
-requires precompiling the Logtalk core files and the application source
-files. The scripts should be regarded as starting points as actual use
-requires customization (e.g. starting goal, inclusion of a top-level
-interpreter, custom startup settings, etc). An alternative, available
-in some backend Prolog compilers such as SICStus Prolog, SWI-Prolog,
-and YAP is to create a *saved state* after loading Logtalk and a Logtalk
-application. In both solutions, the `reload` flag should usually be set
-to `skip` (in the used settings file) to prevent reloading of already
-loaded code when running the embedded application and the embedded
-application or saved state should be run in a process that sets (just
-for itself) the `LOGTALKHOME` and `LOGTALKUSER` environment variables
-to the values used during the pre-compilation of the Logtalk resources.
+This directory contains sample scripts for selected backend Prolog
+compilers for embedding Logtalk and Logtalk applications. See the
+`SCRIPT.txt` file for usage examples.
 
-See the `settings-embedding-sample.lgt` for suggestions on defined a
-settings file for embedding applications.
+Embedding usually requires precompiling the Logtalk core files and
+the application source files. These sample scripts should be regarded
+as starting points as actual use requires customization (e.g. the
+starting goal, inclusion of a top-level interpreter, etc). The scripts
+accept a command-line option for specifying a settings file. See the
+`settings-embedding-sample.lgt` file for settings suggestions for
+embedding applications. An alternative, available in some backend
+Prolog compilers such as SICStus Prolog, SWI-Prolog, and YAP is to
+create a *saved state* after loading Logtalk and a Logtalk application.
+In both solutions, the `reload` flag should usually be set to `skip`
+(in the used settings file) to prevent reloading of already loaded code
+when running the embedded application and the embedded application or
+saved state should be run in a process that sets (just for itself) the
+`LOGTALKHOME` and `LOGTALKUSER` environment variables to the values
+used during the pre-compilation of the Logtalk resources.
