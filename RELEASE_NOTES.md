@@ -87,6 +87,9 @@ Tests
 * ADDED: Missing tests for error conditions of the `create_protocol/3`
 built-in predicate.
 
+* ADDED: Missing tests for several flags for the `current_logtalk_flag/2`
+built-in predicate.
+
 * FIXED: The tests for the `blackboard` multi-threading example to suppress
 irrelevant output.
 

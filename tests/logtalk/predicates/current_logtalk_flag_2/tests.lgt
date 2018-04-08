@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2013/05/15,
+		date is 2018/04/08,
 		comment is 'Unit tests for the current_logtalk_flag/2 built-in predicate.'
 	]).
 
@@ -38,42 +38,121 @@
 	throws(current_logtalk_flag_2_2, error(domain_error(flag, non_existing_flag), logtalk(current_logtalk_flag(non_existing_flag, _), _))) :-
 		{current_logtalk_flag(non_existing_flag, _)}.
 
+	% lint flags
+
 	succeeds(unknown_entities_flag) :-
 		test_flag(unknown_entities, warning, silent).
+
 	succeeds(unknown_predicates_flag) :-
 		test_flag(unknown_predicates, warning, silent).
+
 	succeeds(undefined_predicates_flag) :-
 		test_flag(undefined_predicates, warning, silent).
+
+	succeeds(missing_directives_flag) :-
+		test_flag(missing_directives, warning, silent).
+
+	succeeds(redefined_built_ins_flag) :-
+		test_flag(redefined_built_ins, warning, silent).
+
 	succeeds(portability_flag) :-
 		test_flag(portability, warning, silent).
+
 	succeeds(singleton_variables_flag) :-
 		test_flag(singleton_variables, warning, silent).
+
 	succeeds(underscore_variables_flag) :-
 		test_flag(underscore_variables, singletons, dont_care).
 
+	% compilation flags
+
+	succeeds(source_data_flag) :-
+		test_flag(source_data, on, off).
+
 	succeeds(clean_flag) :-
 		test_flag(clean, on, off).
+
 	succeeds(debug_flag) :-
 		test_flag(debug, on, off).
 
+	succeeds(optimize_flag) :-
+		test_flag(optimize, on, off).
+
+	succeeds(report_flag) :-
+		current_logtalk_flag(report, Value),
+		once((Value == on; Value == warnings; Value == off)).
+
+	succeeds(reload_flag) :-
+		current_logtalk_flag(reload, Value),
+		once((Value == always; Value == changed; Value == skip)).
+
+	succeeds(code_prefix_flag) :-
+		current_logtalk_flag(code_prefix, Value),
+		atom(Value).
+
+	succeeds(scratch_directory_flag) :-
+		current_logtalk_flag(scratch_directory, Value),
+		atom(Value).
+
+	% optional features flags
+
 	succeeds(complements_flag) :-
 		test_flag(complements, allow, deny).
+
 	succeeds(dynamic_declarations_flag) :-
 		test_flag(dynamic_declarations, allow, deny).
+
 	succeeds(context_switching_calls_flag) :-
 		test_flag(context_switching_calls, allow, deny).
+
 	succeeds(events_flag) :-
 		test_flag(events, allow, deny).
+
+	% backend Prolog compiler flags:
+
+	succeeds(prolog_compiler_flag) :-
+		current_logtalk_flag(prolog_compiler, Value),
+		type::valid(list, Value).
+
+	succeeds(prolog_loader_flag) :-
+		current_logtalk_flag(prolog_loader, Value),
+		type::valid(list, Value).
+
+	% read-only flags
+
+	succeeds(prolog_dialect_flag) :-
+		current_logtalk_flag(prolog_dialect, Value),
+		atom(Value).
 
 	succeeds(modules_flag) :-
 		current_logtalk_flag(modules, Value),
 		once((Value == supported; Value == unsupported)).
+
+	succeeds(coinduction_flag) :-
+		current_logtalk_flag(coinduction, Value),
+		once((Value == supported; Value == unsupported)).
+
+	succeeds(engines_flag) :-
+		current_logtalk_flag(engines, Value),
+		once((Value == supported; Value == unsupported)).
+
 	succeeds(threads_flag) :-
 		current_logtalk_flag(threads, Value),
 		once((Value == supported; Value == unsupported)).
+
 	succeeds(tabling_flag) :-
 		current_logtalk_flag(tabling, Value),
 		once((Value == supported; Value == unsupported)).
+
+	succeeds(unicode_flag) :-
+		current_logtalk_flag(unicode, Value),
+		once((Value == full; Value == bmp; Value == unsupported)).
+
+	succeeds(encoding_directive_flag) :-
+		current_logtalk_flag(encoding_directive, Value),
+		once((Value == full; Value == source; Value == unsupported)).
+
+	% auxiliary predicates
 
 	test_flag(Flag, On, Off) :-
 		current_logtalk_flag(Flag, Current),
