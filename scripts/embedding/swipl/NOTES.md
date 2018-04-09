@@ -25,3 +25,6 @@ The following scripts are provided:
 - `swipl_logtalk_qlf.sh`  
 	creates a `logtalk.qlf` file with the Logtalk compiler and runtime
 	and an optional `application.qlf` file for an application
+
+See the script usage examples in the `../SCRIPT.txt` file on how to
+create a SWI-Prolog saved state that includes a Logtalk application.

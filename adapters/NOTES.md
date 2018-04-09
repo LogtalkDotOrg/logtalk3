@@ -179,6 +179,9 @@ provide enough support for Logtalk threaded engines. But other Logtalk
 multi-threading features cannot currently be supported due to missing
 mutex predicates and missing thread creation options.
 
+See the `scripts/embedding/eclipse` directory for a sample shell script
+that can help in pre-compiling Logtalk and Logtalk applications.
+
 
 GNU Prolog 1.4.5 and later versions
 -----------------------------------
@@ -189,47 +192,9 @@ GNU Prolog supports the ISO Prolog standard. No problems expected. The
 adapter file sets the `strict_iso` flag to `off`. This is recommended
 but not required to support Logtalk.
 
-You can generate a new Prolog top level that embeds Logtalk by following
-the steps (exemplified for POSIX systems):
-
-	$ mkdir -p $HOME/collect
-	$ cd $HOME/collect
-	$ gplgt
-	...
-	| ?- logtalk_compile([
-			core(expanding),
-			core(monitoring),
-			core(forwarding),
-			core(user),
-			core(logtalk),
-			core(core_messages)],
-			[optimize(on), scratch_directory('$HOME/collect')]).
-
-	$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
-	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
-	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
-
-Edit the `$HOME/collect/core.pl` file and add the line `:- built_in.` to
-the top. Then:
-
-	$ cd $HOME/collect
-	$ gplc -o logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl  core.pl paths.pl
-
-Note that we use regular expressions for the files that contain the
-pre-compiled built-in entities as their names may include a directory
-hash, which is used to avoid file names conflicts.
-
-You can ignore any suspicious predicate warnings about the `{}/1` predicate
-that might be printed when running the `gplc` command. Note that the order of
-the files when calling `gplc` is important. Finally, move the new executable
-to a directory in your system PATH. For example:
-
-	$ mv logtalk /usr/local/bin/
-
-This way, every time you want to work with Logtalk you will just need 
-to type:
-
-	$ logtalk
+See the `scripts/embedding/gprolog` directory for a sample shell script
+that can generate e.g. a new Prolog top level that embeds Logtalk and
+optionally a Logtalk application.
 
 
 JIProlog 4.1.6.1 and later versions
@@ -240,55 +205,10 @@ JIProlog 4.1.6.1 and later versions
 Written with the help of Ugo Chirico, JIProlog author (but if you find any
 Logtalk problem please report it to me).
 
-To generate `.jip` files from Logtalk source files, use the built-in
-`logtalk_compile/1-2` or the `logtalk_load/1-2` predicates with the
-`clean` flag turned off.
-
-Logtalk can be embedded in JIProlog by creating a `logtalk.jar` by following
-these steps:
-
-	$ mkdir -p $HOME/collect
-	$ cd $HOME/collect
-	$ jiplgt
-	...
-	| ?- logtalk_compile([
-			core(expanding),
-			core(monitoring),
-			core(forwarding),
-			core(user),
-			core(logtalk),
-			core(core_messages)],
-			[optimize(on), scratch_directory('$HOME/collect')]).
-	...
-
-	$ cp $LOGTALKHOME/adapters/ji.pl $HOME/collect/ji.pl
-	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
-	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
-
-	| ?- compile('ji.pl'), compile('paths.pl'), compile('core.pl').
-	...
-
-Next, create a `$HOME/collect/init.pl` with the contents:
-
-	:- load('ji.jip').
-	:- load('paths.jip').
-	:- load('expanding_lgt.jip').
-	:- load('monitoring_lgt.jip').
-	:- load('forwarding_lgt.jip').
-	:- load('user_lgt.jip').
-	:- load('logtalk_lgt.jip').
-	:- load('core_messages_lgt.jip').
-	:- load('core.jip').
-
-We now have all the necessary files to create the `logtalk.jar` file:
-
-	$ jar cf logtalk.jar init.pl *.jip
-
-The `logtalk.jar` file can be distributed with the other JIProlog `.jar`
-files. Logtalk can also be loaded on demand from the `logtalk.jar` file
-by using the `load_library/1` JIProlog built-in predicate:
-
-	| ?- load_library('logtalk.jar').
+See the `scripts/embedding/jiprolog` directory for a sample shell script
+for embedding Logtalk and optionally a Logtalk application. The script
+documentation also explains how to generate JAR files with pre-compiled
+Logtalk applications.
 
 
 Lean Prolog 4.5.4 and later versions
@@ -370,6 +290,9 @@ SICStus Prolog 4.1.0 and later versions
 Adapter file for SICStus Prolog. Use of the latest SICStus Prolog version
 is recommended due to improved standards compliance. No problems expected.
 Please report any problem found (with a solution if possible).
+
+See the `scripts/embedding/sicstus` directory for a sample shell script
+that can help in pre-compiling Logtalk and Logtalk applications.
 
 
 SWI-Prolog 6.6.0 and later versions
@@ -475,6 +398,11 @@ to the information collected for Logtalk own reflection features, all file
 terms are decorated with additional source file location information for
 integration with the SWI-Prolog own development tools.
 
+See the `scripts/embedding/swipl` directory for a sample shell script
+that can help in generating QLF files from Logtalk and optionally a
+Logtalk application. The script documentation also explains how to
+generated saved states that include Logtalk applications.
+
 
 XSB 3.8.0 and later versions
 ----------------------------
@@ -513,6 +441,9 @@ Changes in the XSB development version after the 3.7.0 release introduce an
 incompatibility with a setting for the `scratch_directory` flag other than
 `./`. This issue may or may not be fixed in the next XSB stable release.
 
+See the `scripts/embedding/xsb` directory for a sample shell script
+that can help in pre-compiling Logtalk.
+
 
 YAP 6.3.4 and later versions
 ----------------------------
@@ -530,3 +461,8 @@ integration between Logtalk and YAP.
 
 Note that YAP can be compiled with or without support for features like
 tabling or threads.
+
+See the `scripts/embedding/yap` directory for a sample shell script
+that can help in pre-compiling Logtalk and Logtalk applications. The
+script documentation also explains how to generated saved states that
+include Logtalk applications.

@@ -26,4 +26,19 @@ The following scripts are provided:
 	creates a `logtalk.jip` file with the Logtalk compiler and runtime
 	and an optional `application.jip` file for an application
 
-The `.jip` files can be loaded using the `load/1` JIProlog predicate.
+The `.jip` files can be loaded using the `load/1` JIProlog predicate. It
+is also possible to create a JAR file from the `.jip` files. For example,
+by creating a `init.pl` with the contents:
+
+	:- load('logtalk.jip').
+	:- load('application.jip').
+
+And then typing:
+
+	$ jar cf logtalk.jar init.pl *.jip
+
+The `logtalk.jar` file could then be distributed with the other JIProlog
+`.jar` files. Logtalk could also be loaded on demand from the `logtalk.jar`
+file by using the `load_library/1` JIProlog built-in predicate:
+
+	| ?- load_library('logtalk.jar').

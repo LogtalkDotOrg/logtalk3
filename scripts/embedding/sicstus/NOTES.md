@@ -27,3 +27,6 @@ The following scripts are provided:
 	and an optional `application.po` file for an application
 
 The `.po` files can be loaded using the `load_files/1-2` predicates.
+
+See the script usage examples in the `../SCRIPT.txt` file on how to
+create a SICStus Prolog saved state that includes a Logtalk application.

@@ -37,6 +37,7 @@ files that contain those calls but don't define clauses for the multifile
 predicates to include the multifile predicate directives (or to meta-call
 the multifile predicates).
 
-`gplc` seems to collect file initialization goals in a stack. This may
-dictate listing the files being compiled by it in a specific order to
-avoid predicate existence errors.
+Be sure to read the GNU Prolog manual on `gplc`, specially the discussion
+on how the calling order for initialization goals found different files
+is machine-dependent. This may dictate listing the files being compiled
+by it in a specific order to avoid runtime predicate existence errors.
