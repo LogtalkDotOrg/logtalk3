@@ -3316,7 +3316,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b6)).
+'$lgt_version_data'(logtalk(3, 16, 0, b7)).
 
 
 
@@ -13399,7 +13399,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_check_for_trivial_fails'(compile(user), Call, TCall, Head) :-
-	(	copy_term(Head, HeadCopy),
+	(	% workaround possible creation of a cyclic term with some backend
+		% Prolog compilers implementation of the \=2 predicate
+		copy_term(Head, HeadCopy),
 		Call \= HeadCopy,
 		% not a recursive call which can originate from a predicate with a single clause
 		\+ '$lgt_pp_dynamic_'(Call),
@@ -13459,6 +13461,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_candidate_tautology_or_falsehood_goal'(nonvar(_)).
 '$lgt_candidate_tautology_or_falsehood_goal'(number(_)).
 '$lgt_candidate_tautology_or_falsehood_goal'(var(_)).
+% negation if argument is also a candidate
+'$lgt_candidate_tautology_or_falsehood_goal'(\+ Goal) :-
+	callable(Goal),
+	'$lgt_candidate_tautology_or_falsehood_goal'(Goal).
 
 
 
@@ -21527,10 +21533,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % multi-threading predicates
 
 '$lgt_new_threaded_tag'(New) :-
-	with_mutex('$lgt_threaded_tag',
-		(retract('$lgt_threaded_tag_counter_'(Old)),
-		 New is Old + 1,
-		 asserta('$lgt_threaded_tag_counter_'(New)))).
+	with_mutex(
+		'$lgt_threaded_tag',
+		(	retract('$lgt_threaded_tag_counter_'(Old)),
+		 	New is Old + 1,
+		 	asserta('$lgt_threaded_tag_counter_'(New))
+		)
+	).
 
 
 

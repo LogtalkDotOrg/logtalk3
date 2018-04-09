@@ -54,6 +54,9 @@ duplicated directive warnings.
 Prolog compiler provides sufficient low level multi-threading features for
 supporting Logtalk threaded engines.
 
+* IMPROVED: Also look into the argument of `(\+)/1` goals when checking for
+goals that are always true or always false.
+
 Prolog adapter and integration files
 ------------------------------------
 

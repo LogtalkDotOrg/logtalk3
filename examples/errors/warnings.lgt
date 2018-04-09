@@ -140,6 +140,8 @@
 
 	oops :- x \== y.
 
+	really :- \+ x == y.
+
 :- end_object.
 
 
@@ -147,6 +149,8 @@
 :- object(falsewood).
 
 	damn :- x == y.
+
+	rats :- \+ x \== y.
 
 :- end_object.
 
