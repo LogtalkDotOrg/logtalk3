@@ -78,20 +78,20 @@ Some Logtalk features are optional and require compatible support for specific
 (and sometimes not yet standard) features by the backend Prolog compilers. The
 following table summarizes the availability of these features:
 
-|  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Threads    |  
-| :--------------: | :-----------: | :-----------: | :-----------: | :-----------: |  
-|  B-Prolog        |      yes      |       no      |       no      |       no      |  
-|  CxProlog        |       no      |      yes      |      yes      |       no      |  
-|  ECLiPSe         |       no      |      yes      |       no      |  partial      |  
-|  JIProlog        |       no      |       no      |      yes      |       no      |  
-|  GNU Prolog      |       no      |       no      |       no      |       no      |  
-|  Lean Prolog     |       no      |       no      |      yes      |       no      |  
-|  Qu-Prolog       |       no      |       no      |       no      |       no      |  
-|  Quintus Prolog  |       no      |       no      |       no      |       no      |  
-|  SICStus Prolog  |       no      |      yes      |      yes      |       no      |  
-|  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |  
-|  XSB             |      yes      |       no      |       no      |      yes      |  
-|  YAP             |      yes      |      yes      |      yes      |      yes      |  
+|  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  
+| :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
+|  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |  
+|  CxProlog        |       no      |      yes      |      yes      |       no      |       no      |  
+|  ECLiPSe         |       no      |      yes      |       no      |      yes      |     partial   |  
+|  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
+|  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
+|  Lean Prolog     |       no      |       no      |      yes      |       no      |       no      |  
+|  Qu-Prolog       |       no      |       no      |       no      |       no      |       no      |  
+|  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
+|  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
+|  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
+|  XSB             |      yes      |       no      |       no      |       no      |      yes      |  
+|  YAP             |      yes      |      yes      |      yes      |       no      |      yes      |  
 
 A value of "yes" means at least partial support (but some limitations may be
 present and a recent version of the Prolog system may be required). A value
