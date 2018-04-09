@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.32,
+		version is 1.33,
 		author is 'Paulo Moura',
-		date is 2018/04/08,
+		date is 2018/04/09,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -207,6 +207,7 @@
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
 		 current_logtalk_flag(missing_directives, Missing),
+		 current_logtalk_flag(duplicated_directives, Duplicated),
 		 current_logtalk_flag(singleton_variables, Singletons),
 		 current_logtalk_flag(underscore_variables, Underscore),
 		 current_logtalk_flag(complements, Complements),
@@ -236,8 +237,9 @@
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
-			'  portability: ~w, unknown_entities: ~w'-[Portability, UnknownEntities], nl,
-			'  missing_directives: ~w, redefined_built_ins: ~w'-[Missing, Redefined], nl,
+			'  unknown_entities: ~w'-[UnknownEntities], nl,
+			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
+			'  portability: ~w, redefined_built_ins: ~w'-[Portability, Redefined], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,

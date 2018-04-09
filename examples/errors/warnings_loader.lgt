@@ -25,6 +25,7 @@
 		],
 		[	redefined_built_ins(warning),
 			missing_directives(warning),
+			duplicated_directives(warning),
 			unknown_entities(warning),
 		 	unknown_predicates(warning),
 		 	undefined_predicates(warning),

@@ -44,6 +44,9 @@ relocatable, thus simplifying embedding of applications.
 * ADDED: Compiler option `relative_to/1` to allow specifying a directory for
 resolving relative source file paths.
 
+* ADDED: Compiler option `duplicated_directives/1` to control printing of
+duplicated directive warnings.
+
 * ADDED: Support for goal-expansion of complex goal arguments found in
 `initialization/1`, `if/1`, and `elif/1` directives.
 
