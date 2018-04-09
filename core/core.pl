@@ -2289,7 +2289,8 @@ threaded_notify(Message) :-
 
 % '$lgt_compiler_flag'(+atom, ?nonvar)
 %
-% gets/checks the current value of a compiler flag
+% gets/checks the current value of a compiler flag; the default flag
+% values and the backend Prolog feature flags are cached at startup
 
 '$lgt_compiler_flag'(Name, Value) :-
 	(	'$lgt_pp_entity_compiler_flag_'(Name, CurrentValue) ->
@@ -2301,20 +2302,9 @@ threaded_notify(Message) :-
 		Value = CurrentValue
 	;	'$lgt_current_flag_'(Name, CurrentValue) ->
 		% default value for the current Logtalk session,
-		% set by calls to the set_logtalk_flag/2 predicate
+		% cached or set by calls to the set_logtalk_flag/2 predicate
 		Value = CurrentValue
-	;	'$lgt_default_flag'(Name, CurrentValue) ->
-		% default value, defined on the Prolog adapter files
-		Value = CurrentValue
-	;	'$lgt_prolog_feature'(Name, CurrentValue) ->
-		% back-end Prolog compiler features
-		Value = CurrentValue
-	;	Name == version_data ->
-		'$lgt_version_data'(Value)
-	;	Name == version ->
-		% deprecated flag
-		'$lgt_version_data'(logtalk(Major,Minor,Patch,_)),
-		Value = version(Major, Minor, Patch)
+	;	fail
 	).
 
 
@@ -23071,10 +23061,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % Logtalk runtime initialization
 
 '$lgt_runtime_initialization' :-
+	'$lgt_cache_compiler_flags',
 	'$lgt_initialize_dynamic_entity_counters',
 	'$lgt_load_built_in_entities'(ScratchDirectory),
 	'$lgt_load_settings_file'(ScratchDirectory, Result),
-	'$lgt_cache_compiler_flags',
 	'$lgt_print_message'(banner, core, banner),
 	'$lgt_print_message'(comment(settings), core, default_flags),
 	'$lgt_compile_default_hooks',
