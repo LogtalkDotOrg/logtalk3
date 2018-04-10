@@ -301,6 +301,8 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).
+'$lgt_default_flag'(trivial_goal_fails, warning).
+'$lgt_default_flag'(always_true_or_false_goals, warning).
 '$lgt_default_flag'(lambda_variables, warning).
 '$lgt_default_flag'(underscore_variables, singletons).
 % optional features compilation flags:

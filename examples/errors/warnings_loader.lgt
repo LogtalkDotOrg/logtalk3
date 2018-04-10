@@ -29,6 +29,9 @@
 			unknown_entities(warning),
 		 	unknown_predicates(warning),
 		 	undefined_predicates(warning),
+			trivial_goal_fails(warning),
+			always_true_or_false_goals(warning),
+			lambda_variables(warning),
 		 	singleton_variables(warning),
 		 	portability(warning),
 			report(on)

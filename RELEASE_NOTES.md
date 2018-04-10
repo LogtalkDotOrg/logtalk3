@@ -50,15 +50,21 @@ duplicated directive warnings.
 * ADDED: Compiler option `lambda_variables/1` to control printing of lambda
 variable related warnings.
 
+* ADDED: Compiler option `trivial_goal_fails/1` to control printing of
+warnings for calls to local static predicates with no matching clauses.
+
+* ADDED: Compiler option `always_true_or_false_goals/1` to control printing
+of warnings for goals that are always true or false.
+
+* ADDED: Compiler option `lambda_variables/1` to control printing of lambda
+variable related warnings.
+
 * ADDED: Support for goal-expansion of complex goal arguments found in
 `initialization/1`, `if/1`, and `elif/1` directives.
 
 * ADDED: Read-only compiler option `engines`. Useful to signal that a backend
 Prolog compiler provides sufficient low level multi-threading features for
 supporting Logtalk threaded engines.
-
-* IMPROVED: Also look into the argument of `(\+)/1` goals when checking for
-goals that are always true or always false.
 
 Prolog adapter and integration files
 ------------------------------------

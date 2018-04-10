@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
 		date is 2018/04/10,
 		comment is 'Unit tests for the current_logtalk_flag/2 built-in predicate.'
@@ -54,6 +54,12 @@
 
 	succeeds(duplicated_directives_flag) :-
 		test_flag(duplicated_directives, warning, silent).
+
+	succeeds(trivial_goal_fails_flag) :-
+		test_flag(trivial_goal_fails, warning, silent).
+
+	succeeds(always_true_or_false_goals_flag) :-
+		test_flag(always_true_or_false_goals, warning, silent).
 
 	succeeds(lambda_variables_flag) :-
 		test_flag(lambda_variables, warning, silent).

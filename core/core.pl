@@ -13377,12 +13377,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_tautology_or_falsehood_goal'(compile(user), Goal) :-
 	(	'$lgt_candidate_tautology_or_falsehood_goal'(Goal),
-		ground(Goal) ->
+		ground(Goal),
+		'$lgt_compiler_flag'(always_true_or_false_goals, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		(	call(Goal) ->
-			'$lgt_print_message'(warning(general), core, goal_is_always_true(File, Lines, Type, Entity, Goal))
-		;	'$lgt_print_message'(warning(general), core, goal_is_always_false(File, Lines, Type, Entity, Goal))
+			'$lgt_print_message'(warning(always_true_or_false_goals), core, goal_is_always_true(File, Lines, Type, Entity, Goal))
+		;	'$lgt_print_message'(warning(always_true_or_false_goals), core, goal_is_always_false(File, Lines, Type, Entity, Goal))
 		)
 	;	true
 	).
@@ -13399,7 +13400,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_check_for_trivial_fails'(compile(user), Call, TCall, Head) :-
-	(	% workaround possible creation of a cyclic term with some backend
+	(	'$lgt_compiler_flag'(trivial_goal_fails, warning),
+		% workaround possible creation of a cyclic term with some backend
 		% Prolog compilers implementation of the \=2 predicate
 		copy_term(Head, HeadCopy),
 		Call \= HeadCopy,
@@ -13425,11 +13427,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not an already compiled auxiliary fact or rule
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, no_matching_clause_for_goal(File, Lines, Type, Entity, Call))
+		'$lgt_print_message'(warning(trivial_goal_fails), core, no_matching_clause_for_goal(File, Lines, Type, Entity, Call))
 	;	true
 	).
 
 
+
+% '$lgt_candidate_tautology_or_falsehood_goal'(@callable).
 
 % unification
 '$lgt_candidate_tautology_or_falsehood_goal'(_ = _).
@@ -13461,10 +13465,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_candidate_tautology_or_falsehood_goal'(nonvar(_)).
 '$lgt_candidate_tautology_or_falsehood_goal'(number(_)).
 '$lgt_candidate_tautology_or_falsehood_goal'(var(_)).
-% negation if argument is also a candidate
-'$lgt_candidate_tautology_or_falsehood_goal'(\+ Goal) :-
-	callable(Goal),
-	'$lgt_candidate_tautology_or_falsehood_goal'(Goal).
 
 
 
@@ -19230,7 +19230,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
-	(	UnqualifiedVars \== [] ->
+	(	UnqualifiedVars \== [],
+		'$lgt_compiler_flag'(lambda_variables, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(lambda_variables), core, unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal))
@@ -19255,7 +19256,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Free, FreeVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_intersection'(FreeVars, ParameterVars, MixedUpVars),
-	(	MixedUpVars \== [] ->
+	(	MixedUpVars \== [],
+		'$lgt_compiler_flag'(lambda_variables, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(warning(lambda_variables), core, variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal))
@@ -19550,6 +19552,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(missing_directives).
 '$lgt_valid_flag'(duplicated_directives).
 '$lgt_valid_flag'(lambda_variables).
+'$lgt_valid_flag'(trivial_goal_fails).
+'$lgt_valid_flag'(always_true_or_false_goals).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -19649,6 +19653,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(lambda_variables, silent) :- !.
 '$lgt_valid_flag_value'(lambda_variables, warning) :- !.
+
+'$lgt_valid_flag_value'(trivial_goal_fails, silent) :- !.
+'$lgt_valid_flag_value'(trivial_goal_fails, warning) :- !.
+
+'$lgt_valid_flag_value'(always_true_or_false_goals, silent) :- !.
+'$lgt_valid_flag_value'(always_true_or_false_goals, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
