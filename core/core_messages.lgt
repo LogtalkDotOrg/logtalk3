@@ -505,11 +505,11 @@
 			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
 		).
 
-	message_tokens(renamed_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag)) -->
+	message_tokens(deprecated_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag)) -->
 		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(renamed_compiler_flag(File, Lines, Flag, NewFlag)) -->
+	message_tokens(deprecated_compiler_flag(File, Lines, Flag, NewFlag)) -->
 		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
 		message_context(File, Lines).
 

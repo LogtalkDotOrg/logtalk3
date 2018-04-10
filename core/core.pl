@@ -19793,8 +19793,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
-			'$lgt_print_message'(warning(general), core, renamed_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag))
-		;	'$lgt_print_message'(warning(general), core, renamed_compiler_flag(File, Lines, Flag, NewFlag))
+			'$lgt_print_message'(warning(deprecated), core, deprecated_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag))
+		;	'$lgt_print_message'(warning(deprecated), core, deprecated_compiler_flag(File, Lines, Flag, NewFlag))
 		)
 	;	true
 	).
