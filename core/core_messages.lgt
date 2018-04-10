@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.35,
+		version is 1.36,
 		author is 'Paulo Moura',
 		date is 2018/04/10,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -519,6 +519,10 @@
 
 	message_tokens(deprecated_directive(File, Lines, Type, Entity, Directive)) -->
 		['The ~w directive is deprecated'-[Directive], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(deprecated_predicate(File, Lines, Type, Entity, Predicate)) -->
+		['The ~w predicate is deprecated'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(ignored_directive(File, Lines, Directive)) -->

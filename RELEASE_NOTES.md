@@ -41,6 +41,8 @@ containing the call, which is used for default resolving of relative source
 file paths. This notably allows the generated code for loader files to be
 relocatable, thus simplifying embedding of applications.
 
+* CHANGED: Report `assert/1` predicate calls and messages as deprecated.
+
 * ADDED: Compiler option `relative_to/1` to allow specifying a directory for
 resolving relative source file paths.
 

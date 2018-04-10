@@ -12152,8 +12152,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(assert(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_check_non_portable_prolog_built_in_call'(Mode, assert(Clause)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1))
+	;	true
+	),
 	'$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx).
 
 '$lgt_compile_body'(asserta(QClause), TCond, DCond, Ctx) :-
@@ -14305,6 +14311,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(assert(Clause), Obj, TPred, Events, Ctx) :-
 	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1))
+	;	true
+	),
 	'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, Events, Ctx).
 
 '$lgt_compile_message_to_object'(asserta(Clause), Obj, TPred, _, Ctx) :-
@@ -14568,6 +14582,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(assert(Clause), TPred, Ctx) :-
 	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(deprecated), core, deprecated_predicate(File, Lines, Type, Entity, assert/1))
+	;	true
+	),
 	'$lgt_compile_message_to_self'(assertz(Clause), TPred, Ctx).
 
 '$lgt_compile_message_to_self'(asserta(Clause), TPred, Ctx) :-
@@ -19789,7 +19811,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_renamed_flag'(Flag, Ctx) :-
 	(	'$lgt_renamed_compiler_flag'(Flag, NewFlag),
-		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
