@@ -21,7 +21,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.34,
+		version is 1.35,
 		author is 'Paulo Moura',
 		date is 2018/04/10,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
@@ -206,6 +206,7 @@
 		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
+		 current_logtalk_flag(deprecated, Deprecated),
 		 current_logtalk_flag(missing_directives, Missing),
 		 current_logtalk_flag(duplicated_directives, Duplicated),
 		 current_logtalk_flag(trivial_goal_fails, Trivial),
@@ -242,7 +243,7 @@
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
 			'  unknown_entities: ~w'-[UnknownEntities], nl,
 			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
-			'  portability: ~w, redefined_built_ins: ~w'-[Portability, Redefined], nl,
+			'  portability: ~w, redefined_built_ins: ~w, deprecated: ~w'-[Portability, Redefined, Deprecated], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
 			'  lambda_variables: ~w'-[Lambda], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,

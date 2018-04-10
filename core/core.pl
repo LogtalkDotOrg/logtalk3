@@ -8694,10 +8694,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(uses(Obj), Ctx) :-
 	'$lgt_check'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj, Ctx),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, deprecated_directive(File, Lines, Type, Entity, uses/1))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_directive(File, Lines, Type, Entity, uses/1))
 	;	true
 	).
 
@@ -8736,10 +8737,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(calls(Ptcs), Ctx) :-
 	'$lgt_flatten_to_list'(Ptcs, PtcsFlatted),
 	'$lgt_compile_calls_directive'(PtcsFlatted, Ctx),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, deprecated_directive(File, Lines, Type, Entity, calls/1))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_directive(File, Lines, Type, Entity, calls/1))
 	;	true
 	).
 
@@ -8866,10 +8868,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(alias(Entity, Original, Alias), Ctx) :-
 	(	\+ '$lgt_pp_predicate_alias_'(_, _, _, _, _, _),
 		% not already reported (we assume that there's no mix of alias/2 and alias/3 directives!)
-		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, This),
-		'$lgt_print_message'(warning(general), core, deprecated_directive(File, Lines, Type, This, alias/3))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_directive(File, Lines, Type, This, alias/3))
 	;	true
 	),
 	'$lgt_compile_logtalk_directive'(alias(Entity, [as(Original,Alias)]), Ctx).
@@ -11913,10 +11916,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
 	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, deprecated_control_construct(File, Lines, Type, Entity, (:)/1))
+		'$lgt_print_message'(warning(deprecated), core, deprecated_control_construct(File, Lines, Type, Entity, (:)/1))
 	;	true
 	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -19554,6 +19558,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(lambda_variables).
 '$lgt_valid_flag'(trivial_goal_fails).
 '$lgt_valid_flag'(always_true_or_false_goals).
+'$lgt_valid_flag'(deprecated).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -19659,6 +19664,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(always_true_or_false_goals, silent) :- !.
 '$lgt_valid_flag_value'(always_true_or_false_goals, warning) :- !.
+
+'$lgt_valid_flag_value'(deprecated, silent) :- !.
+'$lgt_valid_flag_value'(deprecated, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.

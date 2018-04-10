@@ -59,6 +59,9 @@ of warnings for goals that are always true or false.
 * ADDED: Compiler option `lambda_variables/1` to control printing of lambda
 variable related warnings.
 
+* ADDED: Compiler option `deprecated/1` to control printing of deprecated
+directive and deprecated control construct warnings.
+
 * ADDED: Support for goal-expansion of complex goal arguments found in
 `initialization/1`, `if/1`, and `elif/1` directives.
 

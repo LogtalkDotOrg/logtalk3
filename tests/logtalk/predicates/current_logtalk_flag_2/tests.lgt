@@ -64,11 +64,14 @@
 	succeeds(lambda_variables_flag) :-
 		test_flag(lambda_variables, warning, silent).
 
+	succeeds(portability_flag) :-
+		test_flag(portability, warning, silent).
+
 	succeeds(redefined_built_ins_flag) :-
 		test_flag(redefined_built_ins, warning, silent).
 
-	succeeds(portability_flag) :-
-		test_flag(portability, warning, silent).
+	succeeds(deprecated_flag) :-
+		test_flag(deprecated, warning, silent).
 
 	succeeds(singleton_variables_flag) :-
 		test_flag(singleton_variables, warning, silent).

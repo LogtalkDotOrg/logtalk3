@@ -292,6 +292,7 @@ write_term(Stream, Term, _) :-
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
+'$lgt_default_flag'(deprecated, warning).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).
 '$lgt_default_flag'(trivial_goal_fails, warning).
