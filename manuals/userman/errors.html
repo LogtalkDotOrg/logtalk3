@@ -118,10 +118,22 @@ A warning will be reported for any missing dynamic, discontiguous, meta-predicat
 A warning will be reported for any duplicated scope, multifile, dynamic, discontiguous, meta-predicate, and meta-non-terminal directives. Note that conflicting directives for the same predicate are handled as errors, not as duplicated directive warnings.
 </p>
 
+<h3 id="errors_always_true_or_false_goals">Goals that are always true or false</h3>
+
+<p>
+A warning will be reported for any goal that is always true or false. This is usually caused by typos in the code. For example, writing <code>X == y</code> instead of <code>X == Y</code>.
+</p>
+
 <h3 id="errors_trivial_fails">Trivial fails</h3>
 
 <p>
 A warning will be reported for any call to a local static predicate with no matching clause.
+</p>
+
+<h3 id="errors_lambda_variables">Lambda variables</h3>
+
+<p>
+A warning will be reported for lambda expressions with unclassified variables (not listed as either lambda free or lambda parameter variables) or where variables play a dual role (as both lambda free and lambda parameter variables).
 </p>
 
 <h3 id="errors_predicate_redefinition">Redefinition of predicates declared in <code>uses/2</code> and <code>use_module/2</code> directives</h3>
@@ -173,7 +185,7 @@ More sophisticated definitions are, of course, possible.
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 9, 2018</span>
+		<span>Last updated on: April 10, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="threads.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="documenting.html">next</a></span><br/>

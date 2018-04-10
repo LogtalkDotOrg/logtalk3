@@ -226,6 +226,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).
+'$lgt_default_flag'(lambda_variables, warning).
 '$lgt_default_flag'(underscore_variables, singletons).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).

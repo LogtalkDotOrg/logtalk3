@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on April 9, 2018
+%  Last updated on April 10, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -283,6 +283,7 @@ forall(Generate, Test) :-
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(duplicated_directives, warning).
+'$lgt_default_flag'(lambda_variables, warning).
 :- if((current_prolog_flag(version_data, sicstus(Major,Minor,_,_,_)), (Major,Minor) @>= (4,3))).
 	'$lgt_default_flag'(underscore_variables, dont_care).
 :- else.

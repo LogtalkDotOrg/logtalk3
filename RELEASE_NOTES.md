@@ -47,6 +47,9 @@ resolving relative source file paths.
 * ADDED: Compiler option `duplicated_directives/1` to control printing of
 duplicated directive warnings.
 
+* ADDED: Compiler option `lambda_variables/1` to control printing of lambda
+variable related warnings.
+
 * ADDED: Support for goal-expansion of complex goal arguments found in
 `initialization/1`, `if/1`, and `elif/1` directives.
 

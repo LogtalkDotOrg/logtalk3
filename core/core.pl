@@ -19233,7 +19233,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	UnqualifiedVars \== [] ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal))
+		'$lgt_print_message'(warning(lambda_variables), core, unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal))
 	;	true
 	).
 
@@ -19258,7 +19258,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	MixedUpVars \== [] ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal))
+		'$lgt_print_message'(warning(lambda_variables), core, variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal))
 	;	true
 	).
 
@@ -19549,6 +19549,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(redefined_built_ins).
 '$lgt_valid_flag'(missing_directives).
 '$lgt_valid_flag'(duplicated_directives).
+'$lgt_valid_flag'(lambda_variables).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -19645,6 +19646,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(duplicated_directives, silent) :- !.
 '$lgt_valid_flag_value'(duplicated_directives, warning) :- !.
+
+'$lgt_valid_flag_value'(lambda_variables, silent) :- !.
+'$lgt_valid_flag_value'(lambda_variables, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
