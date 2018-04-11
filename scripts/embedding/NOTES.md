@@ -49,3 +49,8 @@ of the Logtalk resources. For example, in a POSIX system, you can use
 something like:
 
 	$ LOGTALKHOME=/usr/local/share/logtalk LOGTALKUSER=/home/user/logtalk ./saved_state
+
+In alternative, pass to the embedding script a paths file where the
+`logtalk_home` and `logtalk_user` library aliases are defined using
+fixed paths that do not depend on the values of the environment
+variables.
