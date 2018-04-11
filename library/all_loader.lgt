@@ -42,5 +42,7 @@
 		gensym,
 		counters,
 		streamvars
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 ).

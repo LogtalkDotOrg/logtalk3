@@ -24,5 +24,8 @@
 		before_event_registry, after_event_registry,
 		monitorp, monitor
 	],
-	[events(allow), optimize(on)])
+	[
+		events(allow),
+		optimize(on)
+	])
 ).

@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization(
 	logtalk_load([
 		termp, term,
@@ -38,5 +37,7 @@
 		heapp, heaps,
 		comparingp,
 		type
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 ).
