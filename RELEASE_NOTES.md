@@ -83,6 +83,12 @@ Prolog adapter and integration files
 * CHANGED: The ECLiPSe adapter file to enable Logtalk threaded engines when
 running version 7.0.35 or later.
 
+* CHANGED: The GNU Prolog integration script and the Windows shortcut to use
+the `--entry-goal` command-line option to load Logtalk. This change allows
+the previously used `--init-goal` option to be available for passing goals
+that must be run before loading Logtalk (e.g. for setting a unique scratch
+directory for running parallel Logtalk processes).
+
 Documentation
 -------------
 

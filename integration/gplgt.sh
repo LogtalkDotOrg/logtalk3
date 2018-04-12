@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for GNU Prolog
-##   Last updated on February 6, 2018
+##   Last updated on April 12, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -102,4 +102,4 @@ if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
 	export LINEDIT='gui=no'
 fi
 
-exec gprolog --init-goal "['\$LOGTALKHOME/integration/logtalk_gp.pl']" "$@"
+exec gprolog --entry-goal "['\$LOGTALKHOME/integration/logtalk_gp.pl']" "$@"
