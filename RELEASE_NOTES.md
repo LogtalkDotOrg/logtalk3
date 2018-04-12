@@ -43,6 +43,12 @@ relocatable, thus simplifying embedding of applications.
 
 * CHANGED: Report `assert/1` predicate calls and messages as deprecated.
 
+* CHANGED: The `paths.pl` and `paths_core.pl` files to always set the library
+aliases `logtalk_home` and `logtalk_user` to the corresponding environment
+variables. Previously, the aliases would be set to the current directory when
+the variables are not defined but that is no longer necessary when embedding
+Logtalk and Logtalk applications.
+
 * ADDED: Compiler option `relative_to/1` to allow specifying a directory for
 resolving relative source file paths.
 

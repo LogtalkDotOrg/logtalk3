@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on November 17, 2017
+%  Last updated on April 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -28,12 +28,11 @@
 :- multifile(logtalk_library_path/2).
 :- dynamic(logtalk_library_path/2).
 
-% when the LOGTALKHOME or the LOGTALKUSER environment variables are not
-% defined (we may be e.g. embedding Logtalk in a compiled application),
-% assume the current directory as their value
+:- multifile(logtalk_library_path/2).
+:- dynamic(logtalk_library_path/2).
 
+% Logtalk startup directory
 :- initialization((
-	% Logtalk startup directory
 	(	'$lgt_environment_variable'('LOGTALK_STARTUP_DIRECTORY', _) ->
 		LOGTALK_STARTUP_DIRECTORY = '$LOGTALK_STARTUP_DIRECTORY/'
 	;	'$lgt_current_directory'(LOGTALK_STARTUP_DIRECTORY0),
@@ -42,28 +41,14 @@
 		;	atom_concat(LOGTALK_STARTUP_DIRECTORY0, '/', LOGTALK_STARTUP_DIRECTORY)
 		)
 	),
-	assertz(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY)),
-	% Logtalk installation directory
-	(	'$lgt_environment_variable'('LOGTALKHOME', _) ->
-		LOGTALKHOME = '$LOGTALKHOME/'
-	;	'$lgt_current_directory'(LOGTALKHOME0),
-		(	sub_atom(LOGTALKHOME0, _, _, 0, '/') ->
-			LOGTALKHOME = LOGTALKHOME0
-		;	atom_concat(LOGTALKHOME0, '/', LOGTALKHOME)
-		)
-	),
-	assertz(logtalk_library_path(logtalk_home, LOGTALKHOME)),
-	% Logtalk user directory
-	(	'$lgt_environment_variable'('LOGTALKUSER', _) ->
-		LOGTALKUSER = '$LOGTALKUSER/'
-	;	'$lgt_current_directory'(LOGTALKUSER0),
-		(	sub_atom(LOGTALKUSER0, _, _, 0, '/') ->
-			LOGTALKUSER = LOGTALKUSER0
-		;	atom_concat(LOGTALKUSER0, '/', LOGTALKUSER)
-		)
-	),
-	assertz(logtalk_library_path(logtalk_user, LOGTALKUSER))
+	assertz(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY))
 )).
+
+% Logtalk installation directory
+logtalk_library_path(logtalk_home, '$LOGTALKHOME/').
+
+% Logtalk user directory
+logtalk_library_path(logtalk_user, '$LOGTALKUSER/').
 
 % user home directory
 logtalk_library_path(home, HOME) :-
