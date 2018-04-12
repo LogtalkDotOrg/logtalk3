@@ -3316,7 +3316,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b7)).
+'$lgt_version_data'(logtalk(3, 16, 0, b8)).
 
 
 
@@ -7654,6 +7654,106 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_expand_directive_goal'(+callable, -callable)
+%
+% expands a directive goal
+%
+% used to expand file level initialization/1 goals and conditional
+% compilation directive goals (if/1 and elif/1) and deal with some
+% special cases
+
+'$lgt_expand_directive_goal'(Goal, call(Goal)) :-
+	var(Goal),
+	!.
+
+'$lgt_expand_directive_goal'({Goal}, Goal) :-
+	!.
+
+'$lgt_expand_directive_goal'(Goal, ExpandedGoal) :-
+	'$lgt_expand_file_goal'(Goal, ExpandedGoal0),
+	Goal \== ExpandedGoal0,
+	!,
+	'$lgt_expand_directive_goal'(ExpandedGoal0, ExpandedGoal).
+
+'$lgt_expand_directive_goal'((Goal1, Goal2), (ExpandedGoal1, ExpandedGoal2)) :-
+	!,
+	'$lgt_expand_directive_goal'(Goal1, ExpandedGoal1),
+	'$lgt_expand_directive_goal'(Goal2, ExpandedGoal2).
+
+'$lgt_expand_directive_goal'((IfThen; Else), (TIf -> TThen; TElse)) :-
+	nonvar(IfThen),
+	IfThen = (If -> Then),
+	!,
+	'$lgt_expand_directive_goal'(If, TIf),
+	'$lgt_expand_directive_goal'(Then, TThen),
+	'$lgt_expand_directive_goal'(Else, TElse).
+
+'$lgt_expand_directive_goal'((IfThen; Else), ('*->'(TIf, TThen); TElse)) :-
+	nonvar(IfThen),
+	IfThen = '*->'(If, Then),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	!,
+	'$lgt_expand_directive_goal'(If, TIf),
+	'$lgt_expand_directive_goal'(Then, TThen),
+	'$lgt_expand_directive_goal'(Else, TElse).
+
+'$lgt_expand_directive_goal'((Goal1; Goal2), (ExpandedGoal1; ExpandedGoal2)) :-
+	!,
+	'$lgt_expand_directive_goal'(Goal1, ExpandedGoal0),
+	'$lgt_fix_disjunction_left_side'(ExpandedGoal0, ExpandedGoal1),
+	'$lgt_expand_directive_goal'(Goal2, ExpandedGoal2).
+
+'$lgt_expand_directive_goal'('*->'(Goal1, Goal2), '*->'(ExpandedGoal1, ExpandedGoal2)) :-
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	!,
+	'$lgt_expand_directive_goal'(Goal1, ExpandedGoal1),
+	'$lgt_expand_directive_goal'(Goal2, ExpandedGoal2).
+
+'$lgt_expand_directive_goal'((Goal1 -> Goal2), (ExpandedGoal1 -> ExpandedGoal2)) :-
+	!,
+	'$lgt_expand_directive_goal'(Goal1, ExpandedGoal1),
+	'$lgt_expand_directive_goal'(Goal2, ExpandedGoal2).
+
+'$lgt_expand_directive_goal'(\+ Goal, \+ ExpandedGoal) :-
+	!,
+	'$lgt_expand_directive_goal'(Goal, ExpandedGoal).
+
+'$lgt_expand_directive_goal'(catch(Goal, Catcher, Recovery), catch(ExpandedGoal, Catcher, ExpandedRecovery)) :-
+	!,
+	'$lgt_expand_directive_goal'(Goal, ExpandedGoal),
+	'$lgt_expand_directive_goal'(Recovery, ExpandedRecovery).
+
+% workaround lack of compliance by some backend Prolog compilers
+'$lgt_expand_directive_goal'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Pred, Prop)) :-
+	!.
+
+% expand calls to the logtalk_compile/1-2 and logtalk_load/1-2 predicates to
+% add a directory argiument for default resolving of relative file paths
+
+'$lgt_expand_directive_goal'(logtalk_compile(Files), '$lgt_logtalk_compile'(Files, Directory, ExCtx)) :-
+	!,
+	'$lgt_pp_file_paths_flags_'(_, Directory, _, _, _),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
+
+'$lgt_expand_directive_goal'(logtalk_compile(Files, Flags), '$lgt_logtalk_compile'(Files, Flags, Directory, ExCtx)) :-
+	!,
+	'$lgt_pp_file_paths_flags_'(_, Directory, _, _, _),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
+
+'$lgt_expand_directive_goal'(logtalk_load(Files), '$lgt_logtalk_load'(Files, Directory, ExCtx)) :-
+	!,
+	'$lgt_pp_file_paths_flags_'(_, Directory, _, _, _),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
+
+'$lgt_expand_directive_goal'(logtalk_load(Files, Flags), '$lgt_logtalk_load'(Files, Flags, Directory, ExCtx)) :-
+	!,
+	'$lgt_pp_file_paths_flags_'(_, Directory, _, _, _),
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
+
+'$lgt_expand_directive_goal'(Goal, Goal).
+
+
+
 % '$lgt_expand_file_goal'(+callable, -callable)
 %
 % expands a goal; fails if no goal expansion hook is defined
@@ -7961,9 +8061,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_check'(callable, Goal, directive(if(Goal))),
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_comp_ctx'(NewCtx, _, _, user, user, user, user, _, [], [], NewExCtx, compile(aux), [], _),
-		'$lgt_execution_context'(NewExCtx, user, user, user, user, [], []),
-		'$lgt_compile_body'(Goal, ExpandedGoal, _, NewCtx),
+		'$lgt_expand_directive_goal'(Goal, ExpandedGoal),
+		Goal \== ExpandedGoal,
 		!,
 		'$lgt_compile_directive'(if({ExpandedGoal}), Ctx)
 	).
@@ -8019,9 +8118,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_check'(callable, Goal, directive(elif(Goal))),
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_comp_ctx'(NewCtx, _, _, user, user, user, user, _, [], [], NewExCtx, compile(aux), [], _),
-		'$lgt_execution_context'(NewExCtx, user, user, user, user, [], []),
-		'$lgt_compile_body'(Goal, ExpandedGoal, _, NewCtx),
+		'$lgt_expand_directive_goal'(Goal, ExpandedGoal),
+		Goal \== ExpandedGoal,
 		!,
 		'$lgt_compile_directive'(elif({ExpandedGoal}), Ctx)
 	).
@@ -8268,9 +8366,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		% goals are only expanded when compiling a source file
-		'$lgt_comp_ctx'(NewCtx, _, _, user, user, user, user, _, [], [], NewExCtx, compile(aux), [], _),
-		'$lgt_execution_context'(NewExCtx, user, user, user, user, [], []),
-		'$lgt_compile_body'(Goal, ExpandedGoal, _, NewCtx) ->
+		'$lgt_expand_directive_goal'(Goal, ExpandedGoal),
+		Goal \== ExpandedGoal ->
 		assertz('$lgt_pp_file_initialization_'(ExpandedGoal, Lines))
 	;	assertz('$lgt_pp_file_initialization_'(Goal, Lines))
 	).
