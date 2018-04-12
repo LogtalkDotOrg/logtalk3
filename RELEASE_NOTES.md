@@ -147,6 +147,9 @@ file and an optional application.
 * UPDATED: The sample embedding scripts to allow selecting a library paths
 file other than the `paths_core.pl` default file.
 
+* UPDATED: The sample embedding scripts to allow expanding library aliases
+paths to avoid dependencies on environment variables.
+
 * FIXED: The sample embedding scripts for ECLiPSe, SICStus Prolog, and
 SWI-Prolog to avoid discontiguous predicate warnings.
 

@@ -2,10 +2,11 @@
 
 #############################################################################
 ## 
-##   This script creates a SWI-Prolog logtalk.qlf file
-##   with the Logtalk compiler and runtime
+##   This script creates a SWI-Prolog logtalk.qlf file with the Logtalk
+##   compiler and runtime and optionally an application.qlf file with a
+##   Logtalk application
 ## 
-##   Last updated on April 7, 2018
+##   Last updated on April 12, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -28,6 +29,7 @@
 directory="$HOME/collect"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 hooks="$LOGTALKHOME/adapters/swihooks.pl"
+compile="false"
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
@@ -67,7 +69,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -79,31 +81,33 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-p paths] [-h hooks] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-h hooks] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory to use for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
-	echo "  -h SWI-Prolog hooks file (default is $hooks)"
+	echo "  -h YAP hooks file (default is $hooks)"
 	echo "  -s optional settings file"
 	echo "  -l optional loader file for the application"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vd:p:h:l:s:h" option
+while getopts "cd:p:h:l:s:vh" option
 do
 	case $option in
-		v) print_version;;
+		c) compile="true";;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		h) h_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
+		v) print_version;;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -173,11 +177,21 @@ cp "$LOGTALKHOME/core/core.pl" .
 
 swilgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')])" -t "halt"
 
+if [ "$compile" != "false" ] ; then
+	swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$directory')]),halt"
+else
+	cp "$paths" "$directory/paths_lgt.pl"
+fi
+
 if [ "$settings" != "" ] ; then
-	swilgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')])" -t "halt"
+	if [ "$compile" != "false" ] ; then
+		swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$directory')]),halt"
+	else
+		swilgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')])" -t "halt"
+	fi
 	cat \
 		swi.pl \
-		"$paths" \
+		paths_*.pl \
 		expanding*_lgt.pl \
 		monitoring*_lgt.pl \
 		forwarding*_lgt.pl \
@@ -191,7 +205,7 @@ if [ "$settings" != "" ] ; then
 else
 	cat \
 		swi.pl \
-		"$paths" \
+		paths_*.pl \
 		expanding*_lgt.pl \
 		monitoring*_lgt.pl \
 		forwarding*_lgt.pl \

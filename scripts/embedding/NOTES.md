@@ -41,7 +41,11 @@ Prolog compiler documentation.
 
 In both solutions, the `reload` flag should usually be set to `skip`
 (in the used settings file) to prevent reloading of already loaded code
-when running the embedded application or saved state. Moreover, the
+when running the embedded application or saved state.
+
+To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
+environment variables, the sample scripts allow expanding of library
+aliases paths. If for some reason this option is not desirable, the
 embedded application or saved state should be run in a process that
 sets (possibly just for itself) the `LOGTALKHOME` and `LOGTALKUSER`
 environment variables to the values used during the pre-compilation
@@ -49,8 +53,3 @@ of the Logtalk resources. For example, in a POSIX system, you can use
 something like:
 
 	$ LOGTALKHOME=/usr/local/share/logtalk LOGTALKUSER=/home/user/logtalk ./saved_state
-
-In alternative, pass to the embedding script a paths file where the
-`logtalk_home` and `logtalk_user` library aliases are defined using
-fixed paths that do not depend on the values of the environment
-variables.
