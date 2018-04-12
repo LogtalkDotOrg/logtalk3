@@ -95,6 +95,10 @@ Manual index.
 Library
 -------
 
+* ADDED: Hook object, `expand_library_alias_paths`, for expanding library alias
+paths in logtalk_library_path/2 facts. Mainly used when embedding Logtalk and
+Logtalk applications.
+
 * ADDED: Type-check and arbitrary term generation for grammar rules.
 
 * FIXED: Portability issue with some backend Prolog compilers when embedding
