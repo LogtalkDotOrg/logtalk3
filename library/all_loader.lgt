@@ -39,6 +39,7 @@
 		redis_loader,
 		optional_loader,
 		expected_loader,
+		expand_library_alias_paths_loader,
 		gensym,
 		counters,
 		streamvars
