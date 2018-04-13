@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on April 12, 2018
+##   Last updated on April 13, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -68,7 +68,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -227,7 +227,7 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
 	cd "$directory/application"
 	eclipse -L iso -t user -f $directory/logtalk.eco -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
-	cat $(ls -t $directory/application/*.pl) > application.pl
+	cat $(ls -rt $directory/application/*.pl) > application.pl
 	eclipse -L iso -t user -f $directory/logtalk.eco -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	mv application.eco ..
 	rm *.pl

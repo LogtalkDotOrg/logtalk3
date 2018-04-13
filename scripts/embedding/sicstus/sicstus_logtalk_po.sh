@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on April 12, 2018
+##   Last updated on April 13, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -68,7 +68,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -212,7 +212,7 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
 	cd "$directory/application"
 	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt."
-	cat $(ls -t $directory/application/*.pl) > application.pl
+	cat $(ls -rt $directory/application/*.pl) > application.pl
 	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_prolog_flag(discontiguous_warnings,off),compile(application),save_files(application,application),halt."
 	mv application.po ..
 	rm *.pl
