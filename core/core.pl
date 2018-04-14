@@ -228,9 +228,10 @@
 :- multifile('$logtalk#0.debug_handler#2'/3).
 
 
-% internal initialization flag
+% internal initialization flags
 
 :- dynamic('$lgt_built_in_entities_loaded_'/0).
+:- dynamic('$lgt_runtime_initialization_completed_'/0).
 
 
 % user-defined flags
@@ -3316,7 +3317,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b8)).
+'$lgt_version_data'(logtalk(3, 16, 0, b9)).
 
 
 
@@ -7728,7 +7729,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 % expand calls to the logtalk_compile/1-2 and logtalk_load/1-2 predicates to
-% add a directory argiument for default resolving of relative file paths
+% add a directory argument for default resolving of relative file paths
 
 '$lgt_expand_directive_goal'(logtalk_compile(Files), '$lgt_logtalk_compile'(Files, Directory, ExCtx)) :-
 	!,
@@ -23235,6 +23236,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % Logtalk runtime initialization
+%
+% when embedding Logtalk in a saved state created by a backend Prolog
+% compiler, the runtime initialization may be triggered again when
+% running the saved state; we use a dynamic predicate as a flag to
+% prevent redoing this initialization
+
+'$lgt_runtime_initialization' :-
+	'$lgt_runtime_initialization_completed_',
+	!.
 
 '$lgt_runtime_initialization' :-
 	'$lgt_cache_compiler_flags',
@@ -23247,7 +23257,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_start_runtime_threading',
 	'$lgt_report_settings_file'(Result),
 	'$lgt_print_message'(comment(help), core, help),
-	'$lgt_check_prolog_version'.
+	'$lgt_check_prolog_version',
+	assertz('$lgt_runtime_initialization_completed_').
 
 
 :- initialization('$lgt_runtime_initialization').

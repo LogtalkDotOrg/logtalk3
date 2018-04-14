@@ -77,6 +77,9 @@ directive, control construct, and flag warnings.
 Prolog compiler provides sufficient low level multi-threading features for
 supporting Logtalk threaded engines.
 
+FIXED: Avoid trying to redo the startup initialization when including Logtalk
+in a backend Prolog saved state.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -86,8 +89,8 @@ running version 7.0.35 or later.
 * CHANGED: The GNU Prolog integration script and the Windows shortcut to use
 the `--entry-goal` command-line option to load Logtalk. This change allows
 the previously used `--init-goal` option to be available for passing goals
-that must be run before loading Logtalk (e.g. for setting a unique scratch
-directory for running parallel Logtalk processes).
+that must be run before loading Logtalk (e.g. for setting unique scratch
+directories when running parallel Logtalk processes).
 
 Documentation
 -------------
