@@ -60,6 +60,6 @@ $ ./sleepy.sav
 $ cd $LOGTALKHOME/scripts/embedding/yap/
 $ ./yap_logtalk_pl.sh -c -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect
-$ yap -g "consult([logtalk,application]), save_program(wumpus, '::'(wumpus,main)), halt."
+$ yap -g "consult([logtalk,application]), save_program(wumpus, '::'(wumpus,main)), halt"
 $ chmod a+x wumpus
 $ ./wumpus

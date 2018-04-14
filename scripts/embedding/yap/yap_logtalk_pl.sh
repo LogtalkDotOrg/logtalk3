@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 13, 2018
+##   Last updated on April 14, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -218,6 +218,9 @@ else
 fi
 
 rm *.yap
+rm yap.pl
+rm core.pl
+rm -f yaphooks.pl
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
