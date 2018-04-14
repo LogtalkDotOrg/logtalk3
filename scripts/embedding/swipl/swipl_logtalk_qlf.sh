@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on April 13, 2018
+##   Last updated on April 15, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -178,14 +178,14 @@ cp "$LOGTALKHOME/core/core.pl" .
 swilgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')])" -t "halt"
 
 if [ "$compile" != "false" ] ; then
-	swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$directory')]),halt"
+	swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$directory')])" -t "halt"
 else
 	cp "$paths" "$directory/paths_lgt.pl"
 fi
 
 if [ "$settings" != "" ] ; then
 	if [ "$compile" != "false" ] ; then
-		swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$directory')]),halt"
+		swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$directory')])" -t "halt"
 	else
 		swilgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')])" -t "halt"
 	fi
