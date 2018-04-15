@@ -25,9 +25,6 @@
 #############################################################################
 
 
-directory="$HOME/collect"
-paths="$LOGTALKHOME/paths/paths_core.pl"
-
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
 	echo "to your Logtalk installation directory!"
@@ -65,8 +62,70 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 	exit 1
 fi
 
+if ! [ "$LOGTALKUSER" ]; then
+	echo "The environment variable LOGTALKUSER should be defined first, pointing"
+	echo "to your Logtalk user directory!"
+	echo "Trying the default location for the Logtalk user directory..."
+	echo
+	export LOGTALKUSER=$HOME/logtalk
+fi
+
+if [ -d "$LOGTALKUSER" ]; then
+	if ! [ -f "$LOGTALKUSER/VERSION.txt" ]; then
+		echo "Cannot find version information in the Logtalk user directory at $LOGTALKUSER!"
+		echo "Creating an up-to-date Logtalk user directory..."
+		logtalk_user_setup
+	else
+		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
+		if [ "$user_version" \< "$system_version" ]; then
+			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
+			echo "    $user_version < $system_version"
+			echo "Creating an up-to-date Logtalk user directory..."
+			logtalk_user_setup
+		fi
+	fi
+else
+	echo "Cannot find \$LOGTALKUSER directory! Creating a new Logtalk user directory"
+	echo "by running the \"logtalk_user_setup\" shell script:"
+	logtalk_user_setup
+fi
+
+if ! [ "$LOGTALKUSER" ]; then
+	echo "The environment variable LOGTALKUSER should be defined first, pointing"
+	echo "to your Logtalk user directory!"
+	echo "Trying the default location for the Logtalk user directory..."
+	echo
+	export LOGTALKUSER=$HOME/logtalk
+fi
+
+if [ -d "$LOGTALKUSER" ]; then
+	if ! [ -f "$LOGTALKUSER/VERSION.txt" ]; then
+		echo "Cannot find version information in the Logtalk user directory at $LOGTALKUSER!"
+		echo "Creating an up-to-date Logtalk user directory..."
+		logtalk_user_setup
+	else
+		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
+		if [ "$user_version" \< "$system_version" ]; then
+			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
+			echo "    $user_version < $system_version"
+			echo "Creating an up-to-date Logtalk user directory..."
+			logtalk_user_setup
+		fi
+	fi
+else
+	echo "Cannot find \$LOGTALKUSER directory! Creating a new Logtalk user directory"
+	echo "by running the \"logtalk_user_setup\" shell script:"
+	logtalk_user_setup
+fi
+
+# default values
+directory="$HOME/collect"
+paths="$LOGTALKHOME/paths/paths_core.pl"
+
 print_version() {
-	echo "$(basename "$0") 0.8"
+	echo "$(basename "$0") 0.9"
 	exit 0
 }
 
