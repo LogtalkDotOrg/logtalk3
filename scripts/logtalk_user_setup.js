@@ -221,7 +221,7 @@ function usage_help() {
 	WScript.Echo("This script copies all the Logtalk per-user files and directories to the");
 	WScript.Echo("user home directory. The location can be set by the environment variable");
 	WScript.Echo("\"\%LOGTALKUSER\%\" (defaults to \"MyDocuments\\logtalk\" when the variable is");
-	WScript.Echo("not defined)");
+	WScript.Echo("not defined).");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
 	WScript.Echo("  " + WScript.ScriptName + " help");

@@ -25,7 +25,7 @@
 echo
 echo "This script copies all the Logtalk per-user files and directories to the"
 echo "user home directory. The location can be set by the environment variable"
-echo "\$LOGTALKUSER (defaults to \"~/logtalk\" when the variable is not defined)"
+echo "\$LOGTALKUSER (defaults to \"~/logtalk\" when the variable is not defined)."
 echo
 
 if ! [ "$LOGTALKHOME" ]; then
