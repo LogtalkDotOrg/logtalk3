@@ -5,7 +5,7 @@
 ##   This script creates a XSB logtalk.xwam file
 ##   with the Logtalk compiler and runtime
 ## 
-##   Last updated on April 6, 2018
+##   Last updated on April 15, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -66,7 +66,7 @@ elif ! [ -d "$LOGTALKHOME" ]; then
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -77,25 +77,33 @@ usage_help()
 	echo "and runtime"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-p paths]"
+	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-h hooks] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory to use for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
+	echo "  -h YAP hooks file (default is $hooks)"
+	echo "  -s optional settings file"
+	echo "  -l optional loader file for the application"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vd:p:h" option
+while getopts "cd:p:h:l:s:vh" option
 do
 	case $option in
-		v) print_version;;
+		c) compile="true";;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
+		h) h_arg="$OPTARG";;
+		l) l_arg="$OPTARG";;
+		s) s_arg="$OPTARG";;
+		v) print_version;;
 		h) usage_help;;
 		*) usage_help;;
 	esac
@@ -114,6 +122,37 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
+if [ "$h_arg" != "" ] ; then
+	if [ -f "$h_arg" ] ; then
+		hooks="$h_arg"
+	else
+		echo "The $h_arg hooks file does not exist!"
+		exit 1
+	fi
+fi
+
+if [ "$l_arg" != "" ] ; then
+	if [ -f "$l_arg" ] ; then
+		loader="$l_arg"
+	else
+		echo "The $l_arg loader file does not exist!"
+		exit 1
+	fi
+else
+	loader=""
+fi
+
+if [ "$s_arg" != "" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!"
+		exit 1
+	fi
+else
+	settings=""
+fi
+
 mkdir -p "$directory"
 cd "$directory"
 
@@ -129,25 +168,63 @@ else
 	extension=''
 fi
 
-xsblgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt."
-
 cp "$LOGTALKHOME/adapters/xsb.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
-cat \
-	xsb.pl \
-	"$paths" \
-	expanding*_lgt.P \
-	monitoring*_lgt.P \
-	forwarding*_lgt.P \
-	user*_lgt.P \
-	logtalk*_lgt.P \
-	core_messages*_lgt.P \
-	core.pl \
-	> logtalk.pl
+xsblgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$directory')]),halt."
+
+if [ "$compile" != "false" ] ; then
+	xsblgt$extension -e "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$directory')]),halt."
+else
+	cp "$paths" "$directory/paths_lgt.P"
+fi
+
+if [ "$settings" != "" ] ; then
+	if [ "$compile" != "false" ] ; then
+		xsblgt$extension -e "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$directory')]),halt."
+	else
+		xsblgt$extension -e "logtalk_compile('$settings',[optimize(on),scratch_directory('$directory')]),halt."
+	fi
+	cat \
+		xsb.pl \
+		paths_*.P \
+		expanding*_lgt.P \
+		monitoring*_lgt.P \
+		forwarding*_lgt.P \
+		user*_lgt.P \
+		logtalk*_lgt.P \
+		core_messages*_lgt.P \
+		settings*_lgt.P \
+		core.pl \
+		> logtalk.pl
+else
+	cat \
+		xsb.pl \
+		paths_*.P \
+		expanding*_lgt.P \
+		monitoring*_lgt.P \
+		forwarding*_lgt.P \
+		user*_lgt.P \
+		logtalk*_lgt.P \
+		core_messages*_lgt.P \
+		core.pl \
+		> logtalk.pl
+fi
 
 xsb -e "compile(logtalk),halt."
 
 rm *.pl
 rm *.P
+rm *_pl.xwam
 rm *_lgt.xwam
+
+if [ "$loader" != "" ] ; then
+	mkdir -p "$directory/application"
+	cd "$directory/application"
+	xsblgt$extension -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt."
+	cat $(ls -rt $directory/application/*.P) > application.P
+	xsblgt$extension -e "compile(application),halt."
+	mv application.xwam ..
+	rm *.P
+	rm *.xwam
+fi
