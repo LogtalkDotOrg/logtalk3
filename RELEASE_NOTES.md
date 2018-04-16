@@ -107,6 +107,11 @@ Manual index.
 Library
 -------
 
+* ADDED: Prolog file, `parallel_logtalk_processes_setup.pl`, with sample code
+for selected backend Prolog compilers for initializing Logtalk processes such
+that each process uses a unique scratch directory therefore allowing parallel
+process execution (e.g. for usage at continuous integration servers).
+
 * ADDED: Hook object, `expand_library_alias_paths`, for expanding library alias
 paths in logtalk_library_path/2 facts. Mainly used when embedding Logtalk and
 Logtalk applications.
