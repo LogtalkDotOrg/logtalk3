@@ -92,6 +92,9 @@ the previously used `--init-goal` option to be available for passing goals
 that must be run before loading Logtalk (e.g. for setting unique scratch
 directories when running parallel Logtalk processes).
 
+* CHANGED: Restore using of default values for the `scratch_directory` flag
+on XSB.
+
 Documentation
 -------------
 

@@ -261,7 +261,13 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, './').
+'$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
+	(	expand_atom('$COMSPEC', _) ->
+		% Windows systems define this environment variable...
+		ScratchDirectory = './lgt_tmp/'
+	;	% ... but not POSIX systems
+		ScratchDirectory = './.lgt_tmp/'
+	).
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
