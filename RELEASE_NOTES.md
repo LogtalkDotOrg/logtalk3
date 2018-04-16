@@ -129,6 +129,9 @@ Tests
 
 * CHANGED: Refactoring of the built-in entity and event tests.
 
+* ADDED: Tests for calls to the `logtalk_load_context/2` built-in predicate
+from file and entity `initialization/1` directives.
+
 * ADDED: Missing tests for error conditions of the `create_protocol/3`
 built-in predicate.
 

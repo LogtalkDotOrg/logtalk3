@@ -18,11 +18,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- initialization((
+	logtalk_load_context(source, Source),
+	assertz(logtalk_library_path(hook_source, Source))
+)).
+
+
 :- object(hook,
 	implements(expanding)).
 
 	:- public(result/2).
 	:- dynamic(result/2).
+
+	:- initialization((
+		logtalk_load_context(directory, Directory),
+		{assertz(logtalk_library_path(hook_directory, Directory))}
+	)).
 
 	term_expansion(a(_,_,_,_), _) :-
 		logtalk_load_context(term, Term),
@@ -73,17 +84,27 @@
 		assertz(result(stream, Stream)),
 		fail.
 
+	:- initialization((
+		logtalk_load_context(basename, Basename),
+		{assertz(logtalk_library_path(hook_basename, Basename))}
+	)).
+
 :- end_object.
 
+
+:- initialization((
+	logtalk_load_context(file, File),
+	assertz(logtalk_library_path(hook_file, File))
+)).
 
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/02/27,
+		date is 2018/04/16,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -97,7 +118,7 @@
 		atom_concat(Directory, 'sample.lgt', Source),
 		logtalk_load(Source, [hook(hook)]).
 
-	% only true during source file compilation
+	% only true during source file compilation when called from a clause
 	test(logtalk_load_context_2_01) :-
 		\+ logtalk_load_context(_, _).
 
@@ -159,5 +180,27 @@
 
 	test(logtalk_load_context_2_13) :-
 		result(term_position, TermPosition), ground(TermPosition).
+
+	% calls from initialization/1 directives
+
+	test(logtalk_load_context_2_14) :-
+		object_property(hook, file(Source0)),
+		logtalk_library_path(hook_source, Source),
+		Source0 == Source.
+
+	test(logtalk_load_context_2_15) :-
+		object_property(hook, file(_, Directory0)),
+		logtalk_library_path(hook_directory, Directory),
+		Directory0 == Directory.
+
+	test(logtalk_load_context_2_16) :-
+		object_property(hook, file(Basename0,_)),
+		logtalk_library_path(hook_basename, Basename),
+		Basename0 == Basename.
+
+	test(logtalk_load_context_2_17) :-
+		object_property(hook, file(File0)),
+		logtalk_library_path(hook_file, File),
+		File0 == File.
 
 :- end_object.
