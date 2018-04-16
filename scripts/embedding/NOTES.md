@@ -25,10 +25,10 @@ These scripts allow pre-compilation of the Logtalk compiler/runtime
 and optionally of a Logtalk application. This is a common requirement
 for embedding. These sample scripts should be regarded as starting
 points as actual use requires customization (e.g. the starting goal,
-inclusion of a top-level interpreter, etc). The scripts accept a
-command-line option for specifying a settings file. See the
-`settings-embedding-sample.lgt` file for settings suggestions for
-embedding applications.
+inclusion of a top-level interpreter, etc). The scripts also accept
+command-lines options for specifying a paths files and a settings
+file. See the `settings-embedding-sample.lgt` file for settings
+suggestions for embedding applications.
 
 An alternative, available in some backend Prolog compilers such as
 SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
@@ -40,15 +40,15 @@ For details on creating and using saved states, see your backend
 Prolog compiler documentation.
 
 In both solutions, the `reload` flag should usually be set to `skip`
-(in the used settings file) to prevent reloading of already loaded code
-when running the embedded application or saved state.
+(in the used settings file) to prevent reloading of already loaded
+code when running the embedded application or saved state.
 
 To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
 environment variables, the sample scripts allow expansion of library
-aliases paths in the passed paths and settings files. If for some
-reason this option is not desirable, the embedded application or saved
-state should be run in a process that sets (possibly just for itself)
-the `LOGTALKHOME` and `LOGTALKUSER` environment variables to the values
+aliases paths in the paths and settings files. If for some reason
+this option is not desirable, the embedded application or saved state
+should be run in a process that sets (possibly just for itself) the
+`LOGTALKHOME` and `LOGTALKUSER` environment variables to the values
 used during the pre-compilation of the Logtalk resources. For example,
 in a POSIX system, you can use something like:
 
