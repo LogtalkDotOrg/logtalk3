@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on April 15, 2018
+##   Last updated on April 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -109,17 +109,16 @@ usage_help()
 	echo "source code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-h hooks] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
-	echo "  -d directory to use for intermediate and final results (default is $directory)"
+	echo "  -d directory for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
-	echo "  -h YAP hooks file (default is $hooks)"
-	echo "  -s optional settings file"
-	echo "  -l optional loader file for the application"
+	echo "  -s settings file"
+	echo "  -l loader file for the application"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo

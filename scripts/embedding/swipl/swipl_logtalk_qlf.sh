@@ -117,11 +117,11 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
-	echo "  -d directory to use for intermediate and final results (default is $directory)"
+	echo "  -d directory for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
 	echo "  -h hooks file (default is $hooks)"
-	echo "  -s optional settings file"
-	echo "  -l optional loader file for the application"
+	echo "  -s settings file"
+	echo "  -l loader file for the application"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
