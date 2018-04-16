@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 15, 2018
+##   Last updated on April 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -119,7 +119,7 @@ usage_help()
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory to use for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
-	echo "  -h YAP hooks file (default is $hooks)"
+	echo "  -h hooks file (default is $hooks)"
 	echo "  -s optional settings file"
 	echo "  -l optional loader file for the application"
 	echo "  -v print version of $(basename "$0")"
