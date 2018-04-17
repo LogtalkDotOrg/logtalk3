@@ -95,13 +95,24 @@ its own loader and notes files:
 	`redis_loader.lgt`
 	`redis.txt`
 
-There is also a file named `all_loader.lgt` that will load all entities in the 
+For helping when embedding Logtalk and Logtalk applications:
+
+* expand library alias paths
+	`expand_library_alias_paths_loader.lgt`
+
+There is a file named `all_loader.lgt` that will load all entities in the 
 groups listed above. Simply type the goal:
 
 	| ?- logtalk_load(library(all_loader)).
 
 Specific notes about each group of objects, categories, and protocols can be 
 found in the corresponding `*.txt` files.
+
+A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
+sample code for selected backend Prolog compilers for initializing Logtalk
+processes such that each process uses a unique scratch directory therefore
+allowing parallel process execution (e.g. for usage at continuous integration
+servers).
 
 Some of the files contained in this directory represent work in progress and 
 are not loaded by default by any loader utility file.
