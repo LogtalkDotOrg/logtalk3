@@ -24,3 +24,4 @@ The following scripts are provided:
 
 - `xsb_logtalk_xwam.sh`  
 	creates a `logtalk.xwam` file with the Logtalk compiler and runtime
+	and an optional `application.xwam` file for an application
