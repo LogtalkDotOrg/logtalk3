@@ -76,7 +76,8 @@ the User Manual).
 
 The default compiler flag settings are appropriated for the *development*
 (but not necessarily for the *deployment*) of applications. Check the example
-settings on the `settings-sample.lgt` for configuration suggestions.
+settings on the `settings-sample.lgt` for configuration suggestions. Check
+also the `scripts/embedding/settings-embedding-sample.lgt` file.
 
 You may customize the Logtalk compiler flags and add your own library paths
 by coping or renaming the `settings-sample.lgt` file in your Logtalk user

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample embedding settings file
-%  Last updated on April 7, 2018
+%  Last updated on April 17, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -64,17 +64,18 @@ logtalk_library_path(my_application_libraries, my_application('libraries/')).
 %  Common settings for embedded applications:
 
 :- initialization((
+	% be silent except for warnings (set to "off" for final deliverable)
+	set_logtalk_flag(report, warnings),
 	% prevent reloading of embedded code
 	set_logtalk_flag(reload, skip),
-	% optimize execution
-	set_logtalk_flag(debug, off),
+	% optimize performance
 	set_logtalk_flag(optimize, on),
-	% lock your entities to prevent breaking encapsulation
+	% do not save source file data
 	set_logtalk_flag(source_data, off),
+	% lock your entities to prevent breaking encapsulation
 	set_logtalk_flag(events, deny),
 	set_logtalk_flag(complements, deny),
 	set_logtalk_flag(dynamic_declarations, deny),
-	% prevent using the <</2 debugging control construct to bypass object encapsulation
 	set_logtalk_flag(context_switching_calls, deny)
 )).
 
