@@ -22,8 +22,13 @@
 
 
 % load Logtalk core files
-:- set_prolog_flag(informational, off).
-:- compile('$LOGTALKHOME/adapters/sicstus.pl').
-:- compile('$LOGTALKHOME/paths/paths.pl').
-:- set_prolog_flag(informational, on).
-:- compile('$LOGTALKHOME/core/core.pl').
+:- ((	current_prolog_flag(informational, off) ->
+		compile('$LOGTALKHOME/adapters/sicstus.pl'),
+		compile('$LOGTALKHOME/paths/paths.pl'),
+		compile('$LOGTALKHOME/core/core.pl')
+	;	set_prolog_flag(informational, off),
+		compile('$LOGTALKHOME/adapters/sicstus.pl'),
+		compile('$LOGTALKHOME/paths/paths.pl'),
+		set_prolog_flag(informational, on),
+		compile('$LOGTALKHOME/core/core.pl')
+)).
