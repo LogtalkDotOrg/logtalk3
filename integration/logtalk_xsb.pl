@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for XSB
-%  Last updated on October 11, 2013
+%  Last updated on April 17, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -24,9 +24,9 @@
 :- import expand_atom/2 from standard.
 % load Logtalk core files
 :-	(	expand_atom('$LOGTALKHOME/adapters/xsb.pl', Adapter),
-		reconsult(Adapter),
+		reconsult(Adapter, [+optimize, -verbo]),
 		expand_atom('$LOGTALKHOME/paths/paths.pl', Paths),
-		reconsult(Paths),
+		reconsult(Paths, [+optimize, -verbo]),
 		expand_atom('$LOGTALKHOME/integration/logtalk_comp_xsb.pl', Core),
-		reconsult(Core)
+		reconsult(Core, [+optimize, -verbo])
 	).
