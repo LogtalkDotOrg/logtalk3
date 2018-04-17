@@ -41,6 +41,10 @@ containing the call, which is used for default resolving of relative source
 file paths. This notably allows the generated code for loader files to be
 relocatable, thus simplifying embedding of applications.
 
+* CHANGED: Resolve calls to the `logtalk_load_context/2` built-in predicate
+from source file `initialization/1` directives at compile time when the first
+argument is instantiated.
+
 * CHANGED: Report `assert/1` predicate calls and messages as deprecated.
 
 * CHANGED: The `paths.pl` and `paths_core.pl` files to always set the library
