@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SICStus Prolog
-%  Last updated on October 11, 2013
+%  Last updated on April 17, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,8 @@
 
 
 % load Logtalk core files
+:- set_prolog_flag(informational, off).
 :- compile('$LOGTALKHOME/adapters/sicstus.pl').
 :- compile('$LOGTALKHOME/paths/paths.pl').
+:- set_prolog_flag(informational, on).
 :- compile('$LOGTALKHOME/core/core.pl').

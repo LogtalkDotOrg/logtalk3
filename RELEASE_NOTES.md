@@ -99,6 +99,8 @@ directories when running parallel Logtalk processes).
 * CHANGED: Restore using of default values for the `scratch_directory` flag
 on XSB.
 
+* IMPROVED: Less verbose Logtalk startup when using SICStus Prolog.
+
 Documentation
 -------------
 
