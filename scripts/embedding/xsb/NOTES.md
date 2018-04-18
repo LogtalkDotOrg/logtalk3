@@ -25,3 +25,11 @@ The following scripts are provided:
 - `xsb_logtalk_xwam.sh`  
 	creates a `logtalk.xwam` file with the Logtalk compiler and runtime
 	and an optional `application.xwam` file for an application
+
+Know issues
+-----------
+
+A ISO Prolog standard compliance bug in the handling of `initialization/1`
+directives by XSB currently prevents passing a settings file to the script.
+The same bug may also result also in predicate redefined warnings when
+loading generated `application.xwam` files.
