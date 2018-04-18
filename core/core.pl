@@ -3100,10 +3100,6 @@ logtalk_make(Target) :-
 % this predicate is the Logtalk version of the prolog_load_context/2
 % predicate found on some compilers such as Quintus Prolog, SICStus
 % Prolog, SWI-Prolog, and YAP
-%
-% keys that use information from the '$lgt_pp_file_paths_flags_'/5 predicate
-% can be used in calls wrapped by initialization/1 directives as this predicate
-% is only reinitialized after loading the generated intermediate Prolog file
 
 logtalk_load_context(source, SourceFile) :-
 	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _).
@@ -3118,6 +3114,8 @@ logtalk_load_context(target, ObjectFile) :-
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _).
 
 logtalk_load_context(flags, Flags) :-
+	% only returns the explicit flags passed in the second argument
+	% of the logtalk_compile/2 and logtalk_load/2 predicates
 	'$lgt_pp_file_paths_flags_'(_, _, _, _, Flags).
 
 logtalk_load_context(entity_name, Entity) :-
@@ -3143,6 +3141,9 @@ logtalk_load_context(variable_names, VariableNames) :-
 	'$lgt_pp_term_variable_names_file_lines_'(_, VariableNames, _, _).
 
 logtalk_load_context(file, File) :-
+	% when compiling terms from an included file, this key returns the full
+	% path of the included file unlike the "source" key which always returns
+	% the full path of the main file
 	'$lgt_pp_term_variable_names_file_lines_'(_, _, File, _).
 
 logtalk_load_context(term_position, Lines) :-
@@ -3160,8 +3161,8 @@ logtalk_load_context(stream, Stream) :-
 %
 % global flag values can always be overridden when compiling and loading source
 % files by using either a set_logtalk_flag/2 directive (whose scope is local to
-% the file containing it) or by passing a list of flag values in the calls to
-% the logtalk_compile/2 and logtalk_load/2 predicates
+% the file or the entity containing it) or by passing a list of flag values in
+% the calls to the logtalk_compile/2 and logtalk_load/2 predicates
 
 set_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -3343,8 +3344,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(instantiation_error, logtalk(Obj::Pred, ExCtx)))
 	;	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		true
-	;	% we have already verified that Obj is a valid object identifier when
-		% we generated the call to this predicate
+	;	% we have already verified that we have is a valid object identifier
+		% when we generated calls to this predicate
 		throw(error(existence_error(object, Obj), logtalk(Obj::Pred, ExCtx)))
 	).
 
@@ -23218,10 +23219,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_start_runtime_threading'
 %
-% initializes the asynchronous threaded calls tag counter support for
-% compilers supporting multi-threading programming (currently we use
-% integers, which impose a limitation on the maximum number of tags
-% on back-end Prolog compilers with bounded integers)
+% initializes the engines mutext plus the asynchronous threaded calls mutex
+% and tag counter support for compilers supporting multi-threading programming
+% (currently we use integers for the tag counter, which impose a limitation on
+% the maximum number of tags on back-end Prolog compilers with bounded integers)
 
 '$lgt_start_runtime_threading' :-
 	(	'$lgt_prolog_feature'(engines, supported) ->
