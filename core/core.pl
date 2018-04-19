@@ -2724,9 +2724,7 @@ logtalk_make :-
 
 % logtalk_make(+atom)
 %
-% performs a make target: reload of changed Logtalk source files, cleaning
-% all intermediate Prolog files, listing all missing entities, or listing
-% circular entity references
+% performs a make target
 
 logtalk_make(Target) :-
 	(	var(Target) ->
@@ -2740,13 +2738,21 @@ logtalk_make(Target) :-
 	).
 
 
+% reload of changed Logtalk source files
 '$lgt_valid_logtalk_make_target'(all).
+% recompile files in debug mode
 '$lgt_valid_logtalk_make_target'(debug).
+% recompile files in normal mode
 '$lgt_valid_logtalk_make_target'(normal).
+% recompile files in optimal mode
 '$lgt_valid_logtalk_make_target'(optimal).
+% clean all intermediate Prolog files
 '$lgt_valid_logtalk_make_target'(clean).
+% list missing entities and missing predicates
 '$lgt_valid_logtalk_make_target'(check).
+% list circular entity references
 '$lgt_valid_logtalk_make_target'(circular).
+% generate documentation
 '$lgt_valid_logtalk_make_target'(documentation).
 
 
@@ -2891,7 +2897,7 @@ logtalk_make(Target) :-
 	).
 
 
-% find missing entities for logtalk_make/1
+% find missing entities for logtalk_make(check)
 
 '$lgt_missing_protocol'(Protocol-Reference) :-
 	'$lgt_implements_protocol_'(Entity, Protocol, _),
@@ -2950,7 +2956,7 @@ logtalk_make(Target) :-
 	'$lgt_missing_reference'(Entity, Location, Reference).
 
 
-% find missing predicates for logtalk_make/1
+% find missing predicates for logtalk_make(check)
 
 '$lgt_missing_predicate'((Object::Predicate)-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(Object::Predicate, _, _, _, Location)),
@@ -3053,8 +3059,8 @@ logtalk_make(Target) :-
 	).
 
 
-% find circular dependencies for logtalk_make/1; we only check for
-% mutual and triangular dependencies due to the computational cost
+% find circular dependencies for logtalk_make(circular); we only check
+% for mutual and triangular dependencies due to the computational cost
 
 '$lgt_circular_reference'((Object1-Object2)-references([Path1-Line1,Path2-Line2])) :-
 	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
@@ -3114,6 +3120,9 @@ logtalk_make(Target) :-
 % this predicate is the Logtalk version of the prolog_load_context/2
 % predicate found on some compilers such as Quintus Prolog, SICStus
 % Prolog, SWI-Prolog, and YAP
+%
+% when called from initialization/1 directives, calls to this predicate
+% are resolved at compile time when the key is instantiated
 
 logtalk_load_context(source, SourceFile) :-
 	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _).
@@ -3125,6 +3134,7 @@ logtalk_load_context(basename, Basename) :-
 	'$lgt_pp_file_paths_flags_'(Basename, _, _, _, _).
 
 logtalk_load_context(target, ObjectFile) :-
+	% full path of the generated intermediate Prolog file
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _).
 
 logtalk_load_context(flags, Flags) :-
@@ -3133,7 +3143,7 @@ logtalk_load_context(flags, Flags) :-
 	'$lgt_pp_file_paths_flags_'(_, _, _, _, Flags).
 
 logtalk_load_context(entity_name, Entity) :-
-	% deprecated key
+	% deprecated key; use entity_identifier key instead
 	'$lgt_pp_entity_'(_, Entity, _, _, _).
 
 logtalk_load_context(entity_identifier, Entity) :-
@@ -3149,9 +3159,11 @@ logtalk_load_context(entity_type, Type) :-
 	).
 
 logtalk_load_context(term, Term) :-
+	% full file term being compiled
 	'$lgt_pp_term_variable_names_file_lines_'(Term, _, _, _).
 
 logtalk_load_context(variable_names, VariableNames) :-
+	% variable names for the full file term being compiled
 	'$lgt_pp_term_variable_names_file_lines_'(_, VariableNames, _, _).
 
 logtalk_load_context(file, File) :-
@@ -3161,6 +3173,7 @@ logtalk_load_context(file, File) :-
 	'$lgt_pp_term_variable_names_file_lines_'(_, _, File, _).
 
 logtalk_load_context(term_position, Lines) :-
+	% term position of the full file term being compiled
 	'$lgt_pp_term_variable_names_file_lines_'(_, _, _, Lines).
 
 logtalk_load_context(stream, Stream) :-
