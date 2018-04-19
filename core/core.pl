@@ -18388,7 +18388,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_construct_prototype_functors'(+object_identifier, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom)
 %
-% constructs functors used in the compiled code of a prototype
+% constructs functors used in the compiled code of an object playing the role of a prototype
 
 '$lgt_construct_prototype_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
 	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags),
@@ -18410,7 +18410,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_construct_ic_functors'(+object_identifier, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom)
 %
-% constructs functors used in the compiled code of a class or an instance
+% constructs functors used in the compiled code of an object playing the role of a class or an instance
 
 '$lgt_construct_ic_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
 	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags),
@@ -18855,6 +18855,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_built_in_predicate'(Pred) :-
 	'$lgt_iso_predicate'(Pred),
+	% hack for missing ISO standard predicate defined in the used adapter file
 	!.
 
 

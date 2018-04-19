@@ -104,8 +104,8 @@ on XSB.
 Documentation
 -------------
 
-* UPDATED: The documentation of the built-in predicates `logtalk_load/1-2`
-and `logtalk_compile/1-2`.
+* UPDATED: The documentation of the built-in predicates `logtalk_load/1-2`,
+`logtalk_compile/1-2`, and `logtalk_load_context/2`.
 
 * FIXED: Typo in link to the `context/1` built-in method from the Reference
 Manual index.
