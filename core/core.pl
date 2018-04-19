@@ -2312,6 +2312,10 @@ threaded_notify(Message) :-
 % logtalk_compile(@list(source_file_name))
 %
 % compiles to disk a source file or list of source files using default flags
+%
+% top-level calls use the current working directory for resolving any relative
+% source file paths while compiled calls in a source file use the source file
+% directory by default
 
 logtalk_compile(Files) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -2347,6 +2351,10 @@ logtalk_compile(Files) :-
 % logtalk_compile(@list(source_file_name), @list(compiler_flag))
 %
 % compiles to disk a source file or a list of source files using a list of flags
+%
+% top-level calls use the current working directory for resolving any relative
+% source file paths while compiled calls in a source file use the source file
+% directory by default
 %
 % note that we can only clean the compiler flags after reporting warning numbers as the
 % report/1 flag might be included in the list of flags but we cannot test for it as its
@@ -2618,8 +2626,12 @@ logtalk_compile(Files, Flags) :-
 % logtalk_load(@source_file_name)
 % logtalk_load(@list(source_file_name))
 %
-% compiles to disk and then loads to memory a source file
-% or a list of source files using default compiler flags
+% compiles to disk and then loads to memory a source file or a list of source
+% files using default compiler flags
+%
+% top-level calls use the current working directory for resolving any relative
+% source file paths while compiled calls in a source file use the source file
+% directory by default
 
 logtalk_load(Files) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -2654,8 +2666,12 @@ logtalk_load(Files) :-
 % logtalk_load(@source_file_name, @list(compiler_flag))
 % logtalk_load(@list(source_file_name), @list(compiler_flag))
 %
-% compiles to disk and then loads to memory a source file or a list of
-% source files using a list of compiler flags
+% compiles to disk and then loads to memory a source file or a list of source
+% files using a list of compiler flags
+%
+% top-level calls use the current working directory for resolving any relative
+% source file paths while compiled calls in a source file use the source file
+% directory by default
 %
 % note that we can only clean the compiler flags after reporting warning
 % numbers as the report/1 flag might be in the list of flags but we cannot
