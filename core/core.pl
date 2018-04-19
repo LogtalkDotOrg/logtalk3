@@ -3715,7 +3715,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_scope'(?atom, ?nonvar).
 %
-% converts between user and internal scope terms;
+% converts between user and internal scope representation;
 % this representation was chosen as it allows testing if a scope is either
 % public or protected by a single unification step with the p(_) term
 
@@ -6080,7 +6080,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
-	;	% first time loading this source file or previous attempt failed due compilation error
+	;	% first time loading this source file or previous attempt failed due to compilation error
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Directory),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
@@ -6245,7 +6245,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	OldFile == NewFile ->
-		% assume we're reloading the same source file and thus consider entity redefinitions normal
+		% either reloading the same source file or no source file data is available; consider entity redefinition normal
 		'$lgt_print_message'(comment(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
 		'$lgt_increment_loading_warnings_counter',
@@ -19862,6 +19862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(relative_to, Directory) :-
 	atom(Directory).
 '$lgt_valid_flag_value'('$relative_to', Directory) :-
+	% internal flag; just for documenting value type
 	atom(Directory).
 
 '$lgt_valid_flag_value'(debug, on) :- !.
