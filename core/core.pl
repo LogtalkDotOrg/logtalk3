@@ -6228,17 +6228,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	% check file information using the file_lines/4 entity property, if available
 		'$lgt_entity_property_'(Entity, file_lines(OldBasename, OldDirectory, _, _)),
 		'$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBasename, NewDirectory, Start, End))) ->
-		atom_concat(OldDirectory, OldBasename, OldFile0),
-		atom_concat(NewDirectory, NewBasename, NewFile0),
-		Lines = Start-End,
-		(	OldFile0 \== NewFile0 ->
-			OldFile = OldFile0,
-			NewFile = NewFile0
-		;	% we're reloading the same file
-			OldFile = nil,
-			NewFile = nil
-		)
-	;	% no file_lines/4 entity property
+		atom_concat(OldDirectory, OldBasename, OldFile),
+		atom_concat(NewDirectory, NewBasename, NewFile),
+		Lines = Start-End
+	;	% no file_lines/4 entity property (due to compilation with the source_data flag turned off)
 		OldFile = nil,
 		NewFile = nil,
 		Lines = '-'(-1, -1)
@@ -6251,7 +6244,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % prints an informative message or a warning for a redefined entity
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
-	(	NewFile == nil ->
+	(	OldFile == NewFile ->
 		% assume we're reloading the same source file and thus consider entity redefinitions normal
 		'$lgt_print_message'(comment(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
