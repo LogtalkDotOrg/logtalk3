@@ -2301,11 +2301,9 @@ threaded_notify(Message) :-
 		% flag value as defined in the flags argument of the
 		% compiling/loading predicates or in the source file
 		Value = CurrentValue
-	;	'$lgt_current_flag_'(Name, CurrentValue) ->
+	;	'$lgt_current_flag_'(Name, Value)
 		% default value for the current Logtalk session,
 		% cached or set by calls to the set_logtalk_flag/2 predicate
-		Value = CurrentValue
-	;	fail
 	).
 
 
