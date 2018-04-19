@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.16.0 - May ??, 2018
-=====================
+3.16.0 - April ??, 2018
+=======================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -80,6 +80,10 @@ directive, control construct, and flag warnings.
 * ADDED: Read-only compiler option `engines`. Useful to signal that a backend
 Prolog compiler provides sufficient low level multi-threading features for
 supporting Logtalk threaded engines.
+
+* IMPROVED: Compile calls to the `set_logtalk_flag/2` built-in predicate from
+source file `initialization/1` directives when sufficiently instantiated to
+improve performance by avoid runtime type-checking.
 
 FIXED: Avoid trying to redo the startup initialization when including Logtalk
 in a backend Prolog saved state.

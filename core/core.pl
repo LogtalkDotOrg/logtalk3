@@ -3345,7 +3345,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, b9)).
+'$lgt_version_data'(logtalk(3, 16, 0, rc1)).
 
 
 
@@ -7746,8 +7746,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_expand_file_directive_goal'(Recovery, ExpandedRecovery).
 
 % workaround lack of compliance by some backend Prolog compilers
+
 '$lgt_expand_file_directive_goal'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Pred, Prop)) :-
 	!.
+
+% expand calls to set_logtalk_flag/2 when possible to avoid the need of runtime type-checking
+
+'$lgt_expand_file_directive_goal'(set_logtalk_flag(Flag, Value), '$lgt_set_compiler_flag'(Flag, Value)) :-
+	nonvar(Flag),
+	nonvar(Value),
+	!,
+	'$lgt_check'(read_write_flag, Flag),
+	'$lgt_check'(flag_value, Flag + Value).
 
 % expand calls to the logtalk_compile/1-2 and logtalk_load/1-2 predicates to
 % add a directory argument for default resolving of relative file paths
