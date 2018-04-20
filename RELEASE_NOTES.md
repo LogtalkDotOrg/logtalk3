@@ -174,7 +174,7 @@ Installers and installation scripts
 * ADDED: Sample embedding settings file and examples of using the embedding
 scripts.
 
-* ADDED: Sample Bash shell embedding script for YAP.
+* ADDED: Sample Bash shell embedding scripts for CxProlog and YAP.
 
 * UPDATED: The sample embedding scripts to also allow embedding an optional
 settings file and an optional application.
