@@ -26,6 +26,11 @@ The following scripts are provided:
 	creates a `logtalk.xwam` file with the Logtalk compiler and runtime
 	and an optional `application.xwam` file for an application
 
+The `.xwam` files can be loaded by XSB using the `loader:load/1` predicate.
+For example:
+
+	| ?- loader:load(logtalk).
+
 Know issues
 -----------
 
