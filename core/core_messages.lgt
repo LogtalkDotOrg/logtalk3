@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.37,
+		version is 1.38,
 		author is 'Paulo Moura',
-		date is 2018/04/19,
+		date is 2018/04/20,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -119,6 +119,9 @@
 
 	message_tokens(invalid_make_target(Target)) -->
 		['Invalid make target: ~w'-[Target], nl].
+
+	message_tokens(reload_files_in_mode(Mode)) -->
+		['Reloading files in ~w mode'-[Mode], nl].
 
 	message_tokens(modified_files_reloaded) -->
 		['Reloaded all Logtalk source files modified or that required'-[], nl,

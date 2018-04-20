@@ -2823,15 +2823,18 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(comment(make), core, modified_files_reloaded).
 
 '$lgt_logtalk_make'(debug) :-
+	'$lgt_print_message'(comment(make), core, reload_files_in_mode(debug)),
 	'$lgt_set_compiler_flag'(debug, on),
 	'$lgt_logtalk_make'(all).
 
 '$lgt_logtalk_make'(normal) :-
+	'$lgt_print_message'(comment(make), core, reload_files_in_mode(normal)),
 	'$lgt_set_compiler_flag'(debug, off),
 	'$lgt_set_compiler_flag'(optimize, off),
 	'$lgt_logtalk_make'(all).
 
 '$lgt_logtalk_make'(optimal) :-
+	'$lgt_print_message'(comment(make), core, reload_files_in_mode(optimal)),
 	'$lgt_set_compiler_flag'(optimize, on),
 	'$lgt_logtalk_make'(all).	
 
@@ -3345,7 +3348,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 16, 0, rc1)).
+'$lgt_version_data'(logtalk(3, 16, 0, rc2)).
 
 
 

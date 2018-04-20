@@ -85,6 +85,9 @@ supporting Logtalk threaded engines.
 source file `initialization/1` directives when sufficiently instantiated to
 improve performance by avoid runtime type-checking.
 
+* IMPROVED: Feedback to user when using the `logtalk_make/1` predicate with
+targets `debug`, `normal`, or `optimal`.
+
 FIXED: Avoid trying to redo the startup initialization when including Logtalk
 in a backend Prolog saved state.
 
