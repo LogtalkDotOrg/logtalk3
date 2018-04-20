@@ -46,13 +46,16 @@
 
 <pre>initialization(Goal)</pre>
 <p>
-When used within an object, this directive defines a goal to be called immediately after the object has been loaded into memory. When used at a global level within a source file, this directive defines a goal to be called immediately after the compiled source file is loaded into memory.
+When used within an object, this directive defines a goal to be called after the object has been loaded into memory. When used at a global level within a source file, this directive defines a goal to be called after the compiled source file is loaded into memory.
 </p>
 <p>
 Multiple initialization directives can be used in a source file or in an object. Their goals will be called in order at loading time.
 </p>
 <p>
 Categories and protocols cannot contain initialization directives as the initialization goals would lack a complete execution context which is only available for objects.
+</p>
+<p>
+Although technically a global <code>initialization/1</code> directive in a source file is a Prolog directive, calls to Logtalk built-in predicates from it are usually compiled to improve performance and providing better support for embedded applications.
 </p>
 
 <h4>Template and modes</h4>
@@ -67,7 +70,7 @@ Categories and protocols cannot contain initialization directives as the initial
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 28, 2017</span>
+		<span>Last updated on: April 20, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="info_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="object_1_5.html">next</a></span><br/>
