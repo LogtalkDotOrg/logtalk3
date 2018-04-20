@@ -48,9 +48,9 @@ Remarks:
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paula Marisa Sampaio',
-		date is 2011/04/01,
+		date is 2018/04/20,
 		comment is 'Salt state-space search problem (updated from the original 1.0 version to support heuristics).',
 		parnames is ['Accumulator', 'Measure1', 'Measure2']
 	]).
@@ -125,27 +125,21 @@ Remarks:
 		!.
 	heuristic((Acc, X, _, _), 0.3) :-
 		parameter(1, Acc),
-		(	X mod Acc =:= 0 ->
-			Cost is X // Acc
-		;	Acc mod X =:= 0 ->
-			Cost is Acc // X
+		(	X mod Acc =:= 0 
+		;	Acc mod X =:= 0
 		),
 		!.
 	heuristic((Acc, _, Y, _), 0.3) :-
 		parameter(1, Acc),
-		(	Y mod Acc =:= 0 ->
-			Cost is Y // Acc
-		;	Acc mod Y =:= 0 ->
-			Cost is Acc // Y
+		(	Y mod Acc =:= 0
+		;	Acc mod Y =:= 0
 		),
 		!.
 	heuristic((Acc, X, Y, _), 0.4) :-
 		parameter(1, Acc),
 		Diff is abs(X - Y),
-		(	Diff mod Acc =:= 0 ->
-			Cost is Diff // Acc
-		;	Acc mod Diff =:= 0 ->
-			Cost is Acc // Diff
+		(	Diff mod Acc =:= 0
+		;	Acc mod Diff =:= 0
 		),
 		!.
 	heuristic((_, _, _, _), 0.5).

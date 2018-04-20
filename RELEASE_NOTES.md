@@ -165,6 +165,9 @@ Examples
 * CHANGED: Enable running the threaded engines examples when using ECLiPSe
 7.0.35 or a later version.
 
+* FIXED: Singleton variable in branch warnings in the `searching` example
+`slat/3` object heuristics.
+
 Installers and installation scripts
 -----------------------------------
 
