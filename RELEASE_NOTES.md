@@ -24,6 +24,11 @@ RELEASE NOTES
 3.17.0 - May ??, 2018
 =====================
 
+Examples
+--------
+
+* CLEANUP: Simplified the threaded engines loader and tester files to check
+only the `engines` flag when testing for compatibility.
 
 
 3.16.0 - April 24, 2018

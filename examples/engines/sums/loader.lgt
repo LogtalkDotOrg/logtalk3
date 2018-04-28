@@ -18,11 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-		current_logtalk_flag(prolog_dialect, swi)
-	;	current_logtalk_flag(prolog_dialect, eclipse),
-		current_logtalk_flag(engines, supported)
-)).
+:- if(current_logtalk_flag(engines, supported)).
 
 	:- initialization((
 		logtalk_load(library(basic_types_loader)),
