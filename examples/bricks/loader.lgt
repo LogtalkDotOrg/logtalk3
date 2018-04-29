@@ -23,5 +23,9 @@
 	logtalk_load(library(metapredicates_loader)),
 	logtalk_load(roots(loader)),
 	logtalk_load(relations(loader)),
-	logtalk_load(bricks)
+	% compile messages with event support and turn event support on in order to 
+	% both use the "stack_monitor" monitor for visualizing stack changes and to
+	% allow the constrained relation "brick_stack" to perform its magic:
+	logtalk_load(bricks, [events(allow)]),	
+	set_logtalk_flag(events, allow)
 )).
