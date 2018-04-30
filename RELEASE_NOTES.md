@@ -30,6 +30,12 @@ Examples
 * CLEANUP: Simplified the threaded engines loader and tester files to check
 only the `engines` flag when testing for compatibility.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Spurious warnings when running the GNU Prolog embedding script when
+creating an executable with just the Logtalk compiler and runtime.
+
 
 3.16.0 - April 24, 2018
 =======================
