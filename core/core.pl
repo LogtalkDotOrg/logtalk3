@@ -19083,6 +19083,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_entity_directive'(calls(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_, _)).
+'$lgt_logtalk_entity_directive'(use_module(_, _)).
 '$lgt_logtalk_entity_directive'(include(_)).
 '$lgt_logtalk_entity_directive'(initialization(_)).
 '$lgt_logtalk_entity_directive'((dynamic)).
@@ -19090,8 +19091,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_entity_directive'(info(_)).
 '$lgt_logtalk_entity_directive'(threaded).
 '$lgt_logtalk_entity_directive'(set_logtalk_flag(_, _)).
-% Prolog module directives that can be used within objects and categories
-'$lgt_logtalk_entity_directive'(use_module(_, _)).
 
 
 '$lgt_logtalk_predicate_directive'(synchronized(_)).
