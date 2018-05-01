@@ -30,6 +30,9 @@ Examples
 * CLEANUP: Simplified the threaded engines loader and tester files to check
 only the `engines` flag when testing for compatibility.
 
+* FIXED: Outdated sample query in the `SCRIPT.txt` file for the `benchmarks`
+example. Thanks to Per Mildner for reporting.
+
 Installers and installation scripts
 -----------------------------------
 

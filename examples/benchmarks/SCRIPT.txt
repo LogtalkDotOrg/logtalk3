@@ -21,21 +21,20 @@ ________________________________________________________________________
 % (you must quit and restart Logtalk for each testing scenario):
 
 
-% run benchmarks with event support turned on and without using static binding:
+% run benchmarks with event support turned on and using static binding:
 
 | ?- logtalk_load(benchmarks(loader_events)).
 ...
 
 
-% run benchmarks with event support turned off and without using static binding:
+% run benchmarks with event support turned off and using static binding:
 
 | ?- logtalk_load(benchmarks(loader_no_events)).
 ...
 
+% or simply:
 
-% run benchmarks with event support turned off and using static binding:
-
-| ?- logtalk_load(benchmarks(loader_static_binding)).
+| ?- logtalk_load(benchmarks(loader)).
 ...
 
 
@@ -85,6 +84,12 @@ yes
 % run all the benchmark tests the default number of times:
 
 | ?- benchmarks::run.
+...
+
+
+% run all the benchmark tests 100000 times:
+
+| ?- benchmarks::run(100000).
 ...
 
 
