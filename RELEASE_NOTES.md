@@ -39,6 +39,9 @@ Installers and installation scripts
 * FIXED: Spurious warnings when running the GNU Prolog embedding script when
 creating an executable with just the Logtalk compiler and runtime.
 
+* FIXED: The `debian/copyright` file to be machine parseable. Thanks to Per
+Mildner for reporting.
+
 
 3.16.0 - April 24, 2018
 =======================
