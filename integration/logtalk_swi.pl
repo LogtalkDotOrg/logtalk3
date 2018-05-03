@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on May 7, 2017
+%  Last updated on May 3, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -27,5 +27,5 @@
 	atom_concat(LogtalkHome, '/adapters/swi.pl', AdapterFile), consult(AdapterFile),
 	atom_concat(LogtalkHome, '/paths/paths.pl', PathsFile), consult(PathsFile),
 	atom_concat(LogtalkHome, '/integration/logtalk_comp_swi.pl', IntegrationFile), consult(IntegrationFile),
-	% load integration hooks with YAP native developer tools
+	% load integration hooks with SWI-Prolog native developer tools
 	atom_concat(LogtalkHome, '/adapters/swihooks.pl', HooksFile), consult(HooksFile).
