@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on April 10, 2018
+%  Last updated on May 4, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -682,9 +682,7 @@
 	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
 
 '$lgt_yap_table_directive_predicate'(Head, THead) :-
-	'$lgt_compile_predicate_heads'(Head, _, THead, _),
-	functor(THead, _, Arity),
-	arg(Arity, THead, first).
+	'$lgt_compile_predicate_heads'(Head, _, THead, _).
 
 
 '$lgt_yap_list_of_exports'(File, Module, Exports) :-

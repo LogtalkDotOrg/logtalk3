@@ -24,6 +24,12 @@ RELEASE NOTES
 3.17.0 - May ??, 2018
 =====================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Compilation of `table/1` directives for SWI-Prolog and YAP when using
+mode-directed tabling. After discussion in the SWI-Prolog mailing list.
+
 Examples
 --------
 
