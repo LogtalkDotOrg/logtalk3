@@ -29,9 +29,16 @@ ________________________________________________________________________
 | ?- brick::new(a, [position-(8, 1)]), brick::new(b, [position-(6, 1)]), brick::new(c, [position-(4, 1)]), brick::new(d, [position-(2, 1)]).
 yes
 
+
 % set up ascii stack monitor so we can watch the bricks moving
 
 | ?- after_event_registry::set_monitor(_, move(_,_), _, stack_monitor).
+yes
+
+
+% ensure that top-level message goals generate events
+
+| ?- set_logtalk_flag(events, allow).
 yes
 
 

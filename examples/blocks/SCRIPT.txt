@@ -29,9 +29,16 @@ ________________________________________________________________________
 | ?- block::new(a, [position-(8, 1)]), block::new(b, [position-(6, 1)]), block::new(c, [position-(4, 1)]), block::new(d, [position-(2, 1)]).
 yes
 
+
 % set up ascii stack monitor so we can watch the blocks moving
 
 | ?- define_events(after, _, move(_,_), _, stack_monitor).
+yes
+
+
+% ensure that top-level message goals generate events
+
+| ?- set_logtalk_flag(events, allow).
 yes
 
 
