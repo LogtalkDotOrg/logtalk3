@@ -844,15 +844,21 @@ user:goal_expansion(phrase(Rule, Input), ExpandedGoal) :-
 	'$lgt_user_module_qualification'('$lgt_phrase'(Rule, Input, ExCtx), ExpandedGoal).
 % optimize messages sent from modules (including "user")
 user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
-	(	prolog_load_context(module, user) ->
-		Events = allow
-	;	'$lgt_compiler_flag'(events, Events)
-	),
+	% find out in which module Logtalk was loaded (usually, "user") 
+	'$lgt_user_module_qualification'(xx, QualifiedGoal),
+	QualifiedGoal = ':'(UserModule, xx),
+	% this module plays the role of the Logtalk pseudo-object "user"
 	(	prolog_load_context(term_position, Position),
 		stream_position_data(line_count, Position, Line) ->
-		true
+		% loading a file
+		prolog_load_context(module, Module),
+		Module \== UserModule,
+		% loading a Prolog module file
+		'$lgt_compiler_flag'(events, Events)
 	;	% top-level goal
-		Line = -1
+		Line = -1,
+		% use default value of the "events" flag
+		'$lgt_current_flag_'(events, Events)
 	),
 	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, Obj, _, [], [], ExCtx, compile(aux), [], Line-Line),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),

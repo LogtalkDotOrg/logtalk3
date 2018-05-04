@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/11/06,
+		date is 2018/04/04,
 		comment is 'Pseudo-object "user" representing the plain Prolog database.'
 	]).
 
@@ -33,7 +33,6 @@
 	:- set_logtalk_flag(context_switching_calls, allow).
 	:- set_logtalk_flag(dynamic_declarations, allow).
 	:- set_logtalk_flag(complements, deny).
-	:- set_logtalk_flag(events, allow).
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.
 	:- endif.

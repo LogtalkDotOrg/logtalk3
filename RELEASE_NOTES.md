@@ -24,6 +24,15 @@ RELEASE NOTES
 3.17.0 - May ??, 2018
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Calls from the `user` pseudo-object now use the the default value
+of the `events` flag instead of a fixed `allow` value. This change provides
+more intuitive semantics whew playing with event-aware applications at the
+top-level interpreter and also avoids the small event-handling overhead for
+messages sent from `user` when not using events.
+
 Prolog adapter and integration files
 ------------------------------------
 

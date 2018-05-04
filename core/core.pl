@@ -497,10 +497,12 @@ Obj::Pred :-
 
 {Obj}::Pred :-
 	!,
+	% use current default value of the "events" flag
+	'$lgt_current_flag_'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch(
-		'$lgt_compile_message_to_object'(Pred, {Obj}, Call, allow, Ctx),
+		'$lgt_compile_message_to_object'(Pred, {Obj}, Call, Events, Ctx),
 		Error,
 		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, ExCtx)))
 	),
@@ -514,10 +516,12 @@ Obj::Pred :-
 	).
 
 Obj::Pred :-
+	% use current default value of the "events" flag
+	'$lgt_current_flag_'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch(
-		'$lgt_compile_message_to_object'(Pred, Obj, Call, allow, Ctx),
+		'$lgt_compile_message_to_object'(Pred, Obj, Call, Events, Ctx),
 		Error,
 		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, ExCtx)))
 	),
@@ -760,8 +764,11 @@ object_property(Obj, Prop) :-
 		true
 	;	Flags /\ 32 =:= 32
 	).
-'$lgt_object_property'(events, _, _, _, _, _, _, Flags) :-
-	Flags /\ 16 =:= 16.
+'$lgt_object_property'(events, Obj, _, _, _, _, _, Flags) :-
+	(	Obj == user ->
+		'$lgt_current_flag_'(events, allow)
+	;	Flags /\ 16 =:= 16
+	).
 '$lgt_object_property'(source_data, _, _, _, _, _, _, Flags) :-
 	Flags /\ 8 =:= 8.
 '$lgt_object_property'(threaded, _, _, _, _, _, _, Flags) :-
