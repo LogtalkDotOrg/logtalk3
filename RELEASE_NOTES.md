@@ -39,6 +39,9 @@ only the `engines` flag when testing for compatibility.
 * IMPROVED: The `bricks` and `blocks` examples no longer change the default
 value of the `events` flag.
 
+* UPDATED: The `tabling` example for the tabling library becoming native in
+the forthcoming SWI-Prolog 7.7.14 version.
+
 * FIXED: Outdated sample query in the `SCRIPT.txt` file for the `benchmarks`
 example. Thanks to Per Mildner for reporting.
 

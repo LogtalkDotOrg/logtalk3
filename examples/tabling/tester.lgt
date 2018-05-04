@@ -20,7 +20,11 @@
 
 :- if(current_logtalk_flag(tabling, supported)).
 
-	:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- if((
+		current_logtalk_flag(prolog_dialect, swi),
+		current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
+		Major =< 7, Minor =< 7, Patch =< 13
+	)).
 		:- use_module(library(tabling)).
 	:- endif.
 
