@@ -18,6 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% generate events for all messages by default so that the "block_stack"
+% and "stack_monitor" objects can perform their magic
+:- set_logtalk_flag(events, allow).
+
+
 :- object(brick,
 	instantiates(class),
 	specializes(object)).
@@ -83,13 +88,11 @@
 	instantiates(constrained_relation)).
 
 	:- info([
-		version is 1.1,
-		date is 2014/12/04,
+		version is 1.2,
+		date is 2018/04/04,
 		author is 'Paulo Moura',
 		comment is 'Stack of bricks as a constrained binary relation.'
 	]).
-
-	:- set_logtalk_flag(events, deny).
 
 	descriptor_([top, bottom]).
 
@@ -107,10 +110,10 @@
 	add_tuple([A, B]) :-
 		B::position(Xb, Yb),
 		Ya2 is Yb + 1,
-		% send the next message from the "user" pseudo-object in order to generate
-		% the necessary event to allow the "stack_monitor" to visualize stack
-		% changes and the constrained relation "brick_stack" to perform its magic
-		{A::move(Xb, Ya2)},
+		% keep the original sender when moving blocks in order to generate the
+		% necessary event to allow the "stack_monitor" to visualize stack changes
+		% and the constrained relation "brick_stack" to perform its magic
+		[A::move(Xb, Ya2)],
 		^^add_tuple([A, B]).
 
 	activ_points_(top, before, []).
@@ -130,10 +133,10 @@
 	propagate(after, move(X, Y), Bottom, bottom, [Top, Bottom]) :-
 		!,
 		Y2 is Y + 1,
-		% send the next message from the "user" pseudo-object in order to generate
-		% the necessary event to allow the "stack_monitor" to visualize stack
-		% changes and the constrained relation "brick_stack" to perform its magic
-		{Top::move(X, Y2)}.
+		% keep the original sender when moving blocks in order to generate the
+		% necessary event to allow the "stack_monitor" to visualize stack changes
+		% and the constrained relation "brick_stack" to perform its magic
+		[Top::move(X, Y2)].
 
 :- end_object.
 

@@ -19,7 +19,7 @@
 
 
 % generate events for all messages by default so that the "block_stack"
-% and "stack_monitor" objects can perform threir magic
+% and "stack_monitor" objects can perform their magic
 :- set_logtalk_flag(events, allow).
 
 

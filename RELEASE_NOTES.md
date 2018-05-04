@@ -30,8 +30,8 @@ Examples
 * CLEANUP: Simplified the threaded engines loader and tester files to check
 only the `engines` flag when testing for compatibility.
 
-* IMPROVED: The `blocks` example no longer changes the default value of the
-`events` flag.
+* IMPROVED: The `bricks` and `blocks` examples no longer change the default
+value of the `events` flag.
 
 * FIXED: Outdated sample query in the `SCRIPT.txt` file for the `benchmarks`
 example. Thanks to Per Mildner for reporting.
