@@ -21,12 +21,18 @@
 :- object(tests,
 	extends(lgtunit)).
 
+	% avoid warnings as the tests create at runtime new objects with
+	% fixed indentifiers that are used as references in other tests
 	:- set_logtalk_flag(unknown_entities, silent).
 
+	% generate events for all messages so that the
+	% "block_stack" object can perform its magic
+	:- set_logtalk_flag(events, allow).
+
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/05/25,
+		date is 2018/04/04,
 		comment is 'Unit tests for the "blocks" example.'
 	]).
 

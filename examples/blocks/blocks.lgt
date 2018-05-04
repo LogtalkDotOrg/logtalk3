@@ -18,6 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% generate events for all messages by default so that the "block_stack"
+% and "stack_monitor" objects can perform threir magic
+:- set_logtalk_flag(events, allow).
+
+
 :- object(block,
 	instantiates(class),
 	specializes(object)).
@@ -202,6 +207,8 @@
 		author is 'Paulo Moura',
 		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks everytime a block is moved.'
 	]).
+
+	:- set_logtalk_flag(events, deny).
 
 	:- uses(loop, [forto/4, fordownto/4]).
 	:- uses(list, [member/2, last/2]).
