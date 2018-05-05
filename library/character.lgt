@@ -23,9 +23,9 @@
 	extends(atom)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/04/03,
+		date is 2018/05/04,
 		comment is 'Character predicates (most of them assume an ASCII representation).'
 	]).
 
@@ -34,17 +34,17 @@
 		Code >= 0,
 		Code =< 127.
 
-	is_alpha('_').
+	is_alpha('_') :- !.
 	is_alpha(Char) :-
 		is_letter(Char).
 
 	is_letter(Char) :-
-		is_lower_case(Char).
+		is_lower_case(Char), !.
 	is_letter(Char) :-
 		is_upper_case(Char).
 
 	is_alphanumeric(Char) :-
-		is_alpha(Char).
+		is_alpha(Char), !.
 	is_alphanumeric(Char) :-
 		is_dec_digit(Char).
 
@@ -61,10 +61,10 @@
 
 	is_hex_digit(Digit) :-
 		Digit @>= '0',
-		Digit @=< '9'.
+		Digit @=< '9', !.
 	is_hex_digit(Digit) :-
 		Digit @>= 'A',
-		Digit @=< 'F'.
+		Digit @=< 'F', !.
 	is_hex_digit(Digit) :-
 		Digit @>= a,
 		Digit @=< f.
