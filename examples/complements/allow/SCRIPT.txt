@@ -31,6 +31,13 @@ Name = john
 yes
 
 
+%  ask "employee" its salary:
+
+| ?- employee::salary(Salary).
+Salary = 23500
+yes
+
+
 % check the protocol of the object "employee":
 
 | ?- findall(Predicate, employee::current_predicate(Predicate), Predicates).
