@@ -33,6 +33,11 @@ more intuitive semantics whew playing with event-aware applications at the
 top-level interpreter and also avoids the small event-handling overhead for
 messages sent from `user` when not using events.
 
+* FIXED: An unwanted dependency on the message sender for calls to the
+`threaded_call/1-2`, `threaded_once/1-2`, `threaded_peek/1-2` and
+`threaded_exit/1-2` predicates that could result in unexpected failures
+when accessing threaded goals results.
+
 Prolog adapter and integration files
 ------------------------------------
 

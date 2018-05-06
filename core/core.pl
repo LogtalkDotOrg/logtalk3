@@ -3355,7 +3355,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 17, 0, b1)).
+'$lgt_version_data'(logtalk(3, 17, 0, b2)).
 
 
 
@@ -11846,12 +11846,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_exit(Goal, Tag), MTGoal, '$lgt_debug'(goal(threaded_exit(Goal, Tag), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_exit(Goal, Tag), TGoal, '$lgt_debug'(goal(threaded_exit(Goal, Tag), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_exit_tagged'(TGoal, ExCtx, Tag),
-	MDGoal = '$lgt_threaded_exit_tagged'(DGoal, ExCtx, Tag).
+	% compile the goal just for type-checking and collecting source data
+	'$lgt_compile_body'(Goal, _, _, Ctx),
+	TGoal = '$lgt_threaded_exit_tagged'(Goal, ExCtx, Tag).
 
 
 '$lgt_compile_body'(threaded_exit(_), _, _, _) :-
@@ -11859,12 +11859,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_exit(Goal), MTGoal, '$lgt_debug'(goal(threaded_exit(Goal), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_exit(Goal), TGoal, '$lgt_debug'(goal(threaded_exit(Goal), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_exit'(TGoal, ExCtx),
-	MDGoal = '$lgt_threaded_exit'(DGoal, ExCtx).
+	% compile the goal just for type-checking and collecting source data
+	'$lgt_compile_body'(Goal, _, _, Ctx),
+	TGoal = '$lgt_threaded_exit'(Goal, ExCtx).
 
 
 '$lgt_compile_body'(threaded_peek(_, _), _, _, _) :-
@@ -11872,12 +11872,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_peek(Goal, Tag), MTGoal, '$lgt_debug'(goal(threaded_peek(Goal, Tag), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_peek(Goal, Tag), TGoal, '$lgt_debug'(goal(threaded_peek(Goal, Tag), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_peek_tagged'(TGoal, ExCtx, Tag),
-	MDGoal = '$lgt_threaded_peek_tagged'(DGoal, ExCtx, Tag).
+	% compile the goal just for type-checking and collecting source data
+	'$lgt_compile_body'(Goal, _, _, Ctx),
+	TGoal = '$lgt_threaded_peek_tagged'(Goal, ExCtx, Tag).
 
 
 '$lgt_compile_body'(threaded_peek(_), _, _, _) :-
@@ -11885,12 +11885,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_peek(Goal), MTGoal, '$lgt_debug'(goal(threaded_peek(Goal), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_peek(Goal), TGoal, '$lgt_debug'(goal(threaded_peek(Goal), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx),
-	MTGoal = '$lgt_threaded_peek'(TGoal, ExCtx),
-	MDGoal = '$lgt_threaded_peek'(DGoal, ExCtx).
+	% compile the goal just for type-checking and collecting source data
+	'$lgt_compile_body'(Goal, _, _, Ctx),
+	TGoal = '$lgt_threaded_peek'(Goal, ExCtx).
 
 
 '$lgt_compile_body'(threaded_engine_create(_, _, _), _, _, _) :-
@@ -20997,8 +20997,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	thread_create('$lgt_mt_non_det_goal'(Queue, TGoal, This, Self, []), Id, []),
-	thread_send_message(Queue, '$lgt_thread_id'(call, TGoal, This, Self, [], Id)).
+	thread_create('$lgt_mt_non_det_goal'(Queue, Goal, TGoal, This, Self, []), Id, []),
+	thread_send_message(Queue, '$lgt_thread_id'(call, Goal, This, Self, [], Id)).
 
 
 
@@ -21011,8 +21011,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	thread_create('$lgt_mt_det_goal'(Queue, TGoal, This, Self, []), Id, []),
-	thread_send_message(Queue, '$lgt_thread_id'(once, TGoal, This, Self, [], Id)).
+	thread_create('$lgt_mt_det_goal'(Queue, Goal, TGoal, This, Self, []), Id, []),
+	thread_send_message(Queue, '$lgt_thread_id'(once, Goal, This, Self, [], Id)).
 
 
 
@@ -21026,8 +21026,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	'$lgt_new_threaded_tag'(Tag),
-	thread_create('$lgt_mt_non_det_goal'(Queue, TGoal, This, Self, Tag), Id, []),
-	thread_send_message(Queue, '$lgt_thread_id'(call, TGoal, This, Self, Tag, Id)).
+	thread_create('$lgt_mt_non_det_goal'(Queue, Goal, TGoal, This, Self, Tag), Id, []),
+	thread_send_message(Queue, '$lgt_thread_id'(call, Goal, This, Self, Tag, Id)).
 
 
 
@@ -21041,18 +21041,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	'$lgt_new_threaded_tag'(Tag),
-	thread_create('$lgt_mt_det_goal'(Queue, TGoal, This, Self, Tag), Id, []),
-	thread_send_message(Queue, '$lgt_thread_id'(once, TGoal, This, Self, Tag, Id)).
+	thread_create('$lgt_mt_det_goal'(Queue, Goal, TGoal, This, Self, Tag), Id, []),
+	thread_send_message(Queue, '$lgt_thread_id'(once, Goal, This, Self, Tag, Id)).
 
 
 
-% '$lgt_mt_det_goal'(+message_queue_identifier, +callable, +object_identifier, +object_identifier, @nonvar)
+% '$lgt_mt_det_goal'(+message_queue_identifier, +callable, +callable, +object_identifier, +object_identifier, @nonvar)
 %
 % processes a deterministic message received by an object's message queue
 
-'$lgt_mt_det_goal'(Queue, Goal, This, Self, Tag) :-
+'$lgt_mt_det_goal'(Queue, Goal, TGoal, This, Self, Tag) :-
 	thread_self(Id),
-	(	catch(Goal, Error, true) ->
+	(	catch(TGoal, Error, true) ->
 		(	var(Error) ->
 			thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, success, Id))
 		;	thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, Error, Id))
@@ -21062,13 +21062,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_mt_non_det_goal'(+atom, +callable, +object_identifier, +object_identifier, @nonvar)
+% '$lgt_mt_non_det_goal'(+atom, +callable, +callable, +object_identifier, +object_identifier, @nonvar)
 %
 % processes a non-deterministic message received by an object's message queue
 
-'$lgt_mt_non_det_goal'(Queue, Goal, This, Self, Tag) :-
+'$lgt_mt_non_det_goal'(Queue, Goal, TGoal, This, Self, Tag) :-
 	thread_self(Id),
-	(	catch(Goal, Error, true),
+	(	catch(TGoal, Error, true),
 		(	var(Error) ->
 			thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, success, Id)),
 			thread_get_message(Message),

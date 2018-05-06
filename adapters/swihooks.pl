@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on March 30, 2018
+%  Last updated on May 6, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -690,13 +690,13 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_assert_pred_dcl'(*,*,*,*,*,*,*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_define_events'(*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_threaded_or'(*,*,*).
-:- meta_predicate '$lgt_mt_non_det_goal'(*,*,*,*,*).
+:- meta_predicate '$lgt_mt_non_det_goal'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_protocol_property_declares'(*,*,*,*).
 :- meta_predicate '$lgt_guarded_method_call'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_and'(*,*,*).
 :- meta_predicate '$lgt_category_property_defines'(*,*,*,*).
 :- meta_predicate '$lgt_protocol_property'(*,*,*,*,*).
-:- meta_predicate '$lgt_mt_det_goal'(*,*,*,*,*).
+:- meta_predicate '$lgt_mt_det_goal'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_abolish_entity_predicates'(*).
 :- meta_predicate '$lgt_predicate_property_user'(*,*,*,*,*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_send_to_obj_ne_nv'(*,*,*).
