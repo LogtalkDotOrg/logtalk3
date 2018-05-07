@@ -3355,7 +3355,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 17, 0, b2)).
+'$lgt_version_data'(logtalk(3, 17, 0, b3)).
 
 
 
@@ -14667,6 +14667,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
 	'$lgt_comp_ctx'(NewCtx, Head, _, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
+
+% suspicious use of ::/1 instead of a local predicate call in clauses that
+% apparently are meant to implement recursive predicate definitions where
+% the user intention is to call the local predicate
+
+'$lgt_compile_message_to_self'(Pred, _, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_), _, _),
+	functor(Pred, Functor, Arity),
+	functor(Head, Functor, Arity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(general), core, suspicious_call(File, Lines, Type, Entity, ::Pred)),
+	fail.
 
 % broadcasting control constructs
 

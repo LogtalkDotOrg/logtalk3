@@ -33,6 +33,11 @@ more intuitive semantics whew playing with event-aware applications at the
 top-level interpreter and also avoids the small event-handling overhead for
 messages sent from `user` when not using events.
 
+* ADDED: Compiler lint check and warning for suspicious calls to the message
+to self control construct, `::/1`, in clauses that apparently are meant to
+implement recursive predicate definitions where the user intention is to call
+the local predicate.
+
 * FIXED: An unwanted dependency on the message sender for calls to the
 `threaded_call/1-2`, `threaded_once/1-2`, `threaded_peek/1-2` and
 `threaded_exit/1-2` predicates that could result in unexpected failures
