@@ -3355,7 +3355,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 17, 0, b3)).
+'$lgt_version_data'(logtalk(3, 17, 0, b4)).
 
 
 
@@ -5012,8 +5012,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % receiver object is not known at compile time
 
 '$lgt_send_to_obj'(Obj, Pred, SenderExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, SenderExCtx)),
-	'$lgt_send_to_obj_'(Obj, Pred, SenderExCtx).
+	(	nonvar(Obj) ->
+		'$lgt_send_to_obj_'(Obj, Pred, SenderExCtx)
+	;	throw(error(instantiation_error, logtalk(Obj::Pred, SenderExCtx)))
+	).
 
 
 
@@ -5120,6 +5122,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	':'(Obj, Pred).
 
 '$lgt_send_to_obj_nv_inner'(Obj, Pred, _, SenderExCtx) :-
+	\+ callable(Obj),
+	throw(error(type_error(object_identifier, Obj), logtalk(Obj::Pred, SenderExCtx))).
+
+'$lgt_send_to_obj_nv_inner'(Obj, Pred, _, SenderExCtx) :-
 	throw(error(existence_error(object, Obj), logtalk(Obj::Pred, SenderExCtx))).
 
 
@@ -5146,8 +5152,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the receiver object is not known at compile time
 
 '$lgt_send_to_obj_ne'(Obj, Pred, SenderExCtx) :-
-	'$lgt_check'(object_identifier, Obj, logtalk(Obj::Pred, SenderExCtx)),
-	'$lgt_send_to_obj_ne_'(Obj, Pred, SenderExCtx).
+	(	nonvar(Obj) ->
+		'$lgt_send_to_obj_ne_'(Obj, Pred, SenderExCtx)
+	;	throw(error(instantiation_error, logtalk(Obj::Pred, SenderExCtx)))
+	).
 
 
 
@@ -5240,6 +5248,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	% allow Obj::Pred to be used as a shortcut for calling module predicates
 	':'(Obj, Pred).
+
+'$lgt_send_to_obj_ne_nv'(Obj, Pred, SenderExCtx) :-
+	\+ callable(Obj),
+	throw(error(type_error(object_identifier, Obj), logtalk(Obj::Pred, SenderExCtx))).
 
 '$lgt_send_to_obj_ne_nv'(Obj, Pred, SenderExCtx) :-
 	throw(error(existence_error(object, Obj), logtalk(Obj::Pred, SenderExCtx))).
