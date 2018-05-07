@@ -8480,6 +8480,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning),
 		\+ '$lgt_file_directive'(Directive) ->
+		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_file_directive(File, Lines, Directive))
 	;	true
 	).

@@ -43,6 +43,9 @@ the local predicate.
 `threaded_exit/1-2` predicates that could result in unexpected failures
 when accessing threaded goals results.
 
+* FIXED: Increment the compiler warnings counter when printing a non-standard
+file directive portability warning.
+
 Prolog adapter and integration files
 ------------------------------------
 
