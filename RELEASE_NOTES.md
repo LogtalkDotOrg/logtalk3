@@ -76,6 +76,11 @@ suspicious calls.
 * FIXED: Outdated sample query in the `SCRIPT.txt` file for the `benchmarks`
 example. Thanks to Per Mildner for reporting.
 
+Contributions
+-------------
+
+* FIXED: Missing meta-predicate directive in the `verdi_neruda` contribution.
+
 Installers and installation scripts
 -----------------------------------
 

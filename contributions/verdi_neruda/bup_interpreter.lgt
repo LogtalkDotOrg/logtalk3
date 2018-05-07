@@ -3,9 +3,9 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.',
-		date is 2010/06/13,
+		date is 2018/05/07,
 		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.'
 	]).
 
@@ -126,6 +126,8 @@
 	satisfy_all([X|Xs], Int, Pending, DB) :-
 		satisfy_atom(Int, X, DB),
 		satisfy_all(Xs, Int, Pending, DB).
+
+	:- meta_predicate(satisfy_atom(*, ::, *)).
 
 	satisfy_atom(_, {A}, _) :-
 		!,
