@@ -67,6 +67,9 @@ value of the `events` flag.
 * UPDATED: The `tabling` example for the tabling library becoming native in
 the forthcoming SWI-Prolog 7.7.14 version.
 
+* UPDATED: The `errors` example to illustrate the new compiler lint check for
+suspicious calls.
+
 * FIXED: Outdated sample query in the `SCRIPT.txt` file for the `benchmarks`
 example. Thanks to Per Mildner for reporting.
 

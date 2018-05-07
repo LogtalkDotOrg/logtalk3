@@ -247,3 +247,14 @@
 	:- meta_non_terminal(foo(0)).
 
 :- end_object.
+
+
+
+:- object(suspicious_call).
+
+	recursive([]).
+	recursive([H| T]) :-
+		::single(H),
+		::recursive(T).
+
+:- end_object.
