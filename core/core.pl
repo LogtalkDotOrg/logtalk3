@@ -766,8 +766,10 @@ object_property(Obj, Prop) :-
 	).
 '$lgt_object_property'(events, Obj, _, _, _, _, _, Flags) :-
 	(	Obj == user ->
+		% depends on the current default value of the flag
 		'$lgt_current_flag_'(events, allow)
-	;	Flags /\ 16 =:= 16
+	;	% fixed value (at compilation time) for all other objects
+		Flags /\ 16 =:= 16
 	).
 '$lgt_object_property'(source_data, _, _, _, _, _, _, Flags) :-
 	Flags /\ 8 =:= 8.
@@ -5009,7 +5011,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_send_to_obj'(+object_identifier, +callable, +execution_context)
 %
 % runtime processing of an event-aware message sending call when the
-% receiver object is not known at compile time
+% receiver object is not known at compile time; as using the cache
+% only requires a bound first argument, we delay errors other than an
+% instantiation error for a small performance gain
 
 '$lgt_send_to_obj'(Obj, Pred, SenderExCtx) :-
 	(	nonvar(Obj) ->
@@ -5149,7 +5153,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_send_to_obj_ne'(+object_identifier, +callable, +execution_context)
 %
 % runtime processing of an event-transparent message sending call when
-% the receiver object is not known at compile time
+% the receiver object is not known at compile time; as using the cache
+% only requires a bound first argument, we delay errors other than an
+% instantiation error for a small performance gain
 
 '$lgt_send_to_obj_ne'(Obj, Pred, SenderExCtx) :-
 	(	nonvar(Obj) ->

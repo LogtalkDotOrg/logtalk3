@@ -38,8 +38,8 @@ to self control construct, `::/1`, in clauses that apparently are meant to
 implement recursive predicate definitions where the user intention is to call
 the local predicate.
 
-* IMPROVED: Small dynamic binding performance optimization (~10%) for message
-sending calls.
+* IMPROVED: Small dynamic binding performance optimization (~10%) for `::/2`
+calls.
 
 * FIXED: An unwanted dependency on the message sender for calls to the
 `threaded_call/1-2`, `threaded_once/1-2`, `threaded_peek/1-2` and
@@ -64,7 +64,7 @@ library object.
 Tests
 -----
 
-* ADDED: Additional unit test for the `user` pseudo-object.
+* ADDED: Additional unit tests for the `logtalk` and `user` built-in objects.
 
 Examples
 --------
