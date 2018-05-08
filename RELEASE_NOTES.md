@@ -61,6 +61,11 @@ Library
 * FIXED: Spurious choice-points for some of the predicates of the `character`
 library object.
 
+Tests
+-----
+
+* ADDED: Additional unit test for the `user` pseudo-object.
+
 Examples
 --------
 
