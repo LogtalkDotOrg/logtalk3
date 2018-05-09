@@ -31,7 +31,7 @@ and their authors. Looking forward to see your name there.
 How to make a contribution
 --------------------------
 
-Bur bug reports and suggestions, create a ticket in our issue tracker at:
+For bug reports and suggestions, create a ticket in our issue tracker at:
 
 	https://github.com/LogtalkDotOrg/logtalk3/issues
 
@@ -44,7 +44,8 @@ In alternative, you can also join our discussion forums at:
 
 	https://forums.logtalk.org/
 
-In the case of code contributions, follow the coding guidelines described at:
+In the case of code contributions, you are required to follow the coding
+guidelines described at:
 
 	https://github.com/LogtalkDotOrg/logtalk3/wiki/Coding-Style-Guidelines
 
