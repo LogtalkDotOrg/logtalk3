@@ -20,15 +20,15 @@ ________________________________________________________________________
 MANUAL INSTALLATION INSTRUCTIONS
 ================================
 
-The recommended way of installing Logtalk is to use, whenever possible, one 
+The recommended way of installing Logtalk is to use, whenever possible, one
 of the provided installers that are available from the Logtalk web site.
 
 This file contains detailed instructions for  *manual* installation and
-configuration of Logtalk. You should also consult 
+configuration of Logtalk. You should also consult
 the [scripts/NOTES.md](scripts/NOTES.md) and
 [integration/NOTES.md](integration/NOTES.md) files for a description of a
 set of shell scripts that might be used for Logtalk installation on some
-operating-systems and for easy Logtalk integration with popular Prolog 
+operating-systems and for easy Logtalk integration with popular Prolog
 compilers.
 
 The POSIX shell scripts assume that `/bin/bash` is available.
@@ -38,8 +38,8 @@ Logtalk basic installation
 --------------------------
 
 Manual installation of Logtalk can be accomplished by decompressing the
-sources archive (or by cloning the development git server), running an
-installation script, and defining a couple of environment variables. You can
+sources archive (or by cloning the development git server), optionally running
+an installation script, and defining a couple of environment variables. You can
 install Logtalk in any user accessible location. Whenever possible, it is
 recommended that Logtalk be installed by a user with administrative rights,
 as described below. This leads to a setup where each Logtalk user may freely
@@ -47,8 +47,19 @@ try and modify the provided examples, library, and tool files with the option
 of, at any time, restoring the files to its original state by simply running
 one of the provided scripts.
 
+* Using the sources or git clone directory
+
+In this case, there is no installation procedure other than uncompressing the
+sources (or cloning the git repository) into a convenient directory. Simply
+skip to the section below on setting the Logtalk environment variables and
+use the directory as the value for both the `LOGTALKHOME` and `LOGTALKUSER`
+variables.
 
 * Installing for a single user with no administrative rights:
+
+If you want to keep a pristine copy of the sources (or avoid possible merge
+conflicts when updating your git clone) use the provided installation script
+to copy the files that typically you want to play with and modify elsewhere.
 
 For POSIX systems, first, open a terminal, change the current directory to
 the Logtalk directory, and then type:
@@ -75,8 +86,8 @@ the Logtalk directory, and then type:
 	% cd scripts
 	% sudo ./install.sh
 
-This installation script makes all files read-only for non-admin users in 
-order to avoid user tampering. This is a convenient setup for computer labs, 
+This installation script makes all files read-only for non-admin users in
+order to avoid user tampering. This is a convenient setup for computer labs,
 given that making directories world-writable is a security risk. The install
 script accepts an installation prefix as argument. For example:
 
@@ -105,11 +116,11 @@ Setting Logtalk environment variables
 -------------------------------------
 
 You need to set two environment variables, `LOGTALKHOME` and `LOGTALKUSER`.
-The environment variable `LOGTALKHOME` should be set to the Logtalk installation 
-directory. The environment variable `LOGTALKUSER` should point to a directory 
+The environment variable `LOGTALKHOME` should be set to the Logtalk installation
+directory. The environment variable `LOGTALKUSER` should point to a directory
 in your home directory where you want to store the user-specific Logtalk files
-(by default, `$HOME/logtalk` on POSIX systems and `My Documents\Logtalk` on 
-Windows). Both environment variables may be set for all users by a user with 
+(by default, `$HOME/logtalk` on POSIX systems and `My Documents\Logtalk` on
+Windows). Both environment variables may be set for all users by a user with
 administration privileges.
 
 For POSIX systems, add the following lines to your `~/.profile` file:
@@ -131,10 +142,10 @@ Don't use relative paths such as `../` or `./` in the definition of the environm
 variables. Some Prolog compilers don't expand environment variables, resulting
 in `file not found` errors when attempting to use the Logtalk integration scripts.
 
-When using the provided shell script for installing Logtalk, a symbolic link 
-to the Logtalk installation directory is automatically created. The link is 
-named `logtalk`. In this case, you may use this symbolic link to define the 
-`LOGTALKHOME` environment variable in order to avoid breaking it when upgrading 
+When using the provided shell script for installing Logtalk, a symbolic link
+to the Logtalk installation directory is automatically created. The link is
+named `logtalk`. In this case, you may use this symbolic link to define the
+`LOGTALKHOME` environment variable in order to avoid breaking it when upgrading
 Logtalk.
 
 If you're using Windows, the provided GUI installer (which supports both admin
@@ -144,9 +155,8 @@ and non-admin users) takes care of the definition of the environment variables.
 End-user setup (copying Logtalk user-modifiable files to users home directories)
 --------------------------------------------------------------------------------
 
-If you installed Logtalk on your home directory, then skip this step if and only
-if you have set both Logtalk environment variables (`LOGTALKHOME` and `LOGTALKUSER`)
-to point to the same directory.
+Skip this step if you have set both Logtalk environment variables
+(`LOGTALKHOME` and `LOGTALKUSER`) to point to the same directory.
 
 Each user must make a local copy of the Logtalk user-modifiable files (examples,
 libraries, tools, and other supporting files) in his/her home directory. These
@@ -159,9 +169,9 @@ the `scripts/NOTES.md` file for details):
 	`C:\> logtalk_user_setup`
 
 The local copies made by the `logtalk_user_setup` scripts have both read and
-write permissions for the user running the script. When used with one of the 
-back-end Prolog compilers for which an integration script is provided on 
-the `integration` directory, this setup as the advantage of allowing each 
+write permissions for the user running the script. When used with one of the
+back-end Prolog compilers for which an integration script is provided on
+the `integration` directory, this setup as the advantage of allowing each
 end-user to independently customize default compilation flags, library paths,
 and modify and experiment with the provided libraries and examples.
 
@@ -182,7 +192,7 @@ Creating new prolog top-levels for automatic loading of Logtalk
 Most Prolog compilers allows the user to define an initialization file that
 is automatically consulted at startup. These initialization files may contain
 directives for loading other files, such as the Logtalk adapter file and the
-Logtalk compiler/runtime. The `$LOGTALKHOME/integration` sub-directory 
+Logtalk compiler/runtime. The `$LOGTALKHOME/integration` sub-directory
 contains shell scripts for running Logtalk with all supported back-end Prolog
 compilers. You can use these scripts as examples when creating initialization
 files for other Prolog compilers. Be sure to read the `adapters/NOTES.md` file

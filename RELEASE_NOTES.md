@@ -55,6 +55,11 @@ Prolog adapter and integration files
 * FIXED: Compilation of `table/1` directives for SWI-Prolog and YAP when using
 mode-directed tabling. After discussion in the SWI-Prolog mailing list.
 
+Documentation
+-------------
+
+* UPDATED: Manual installation instructions.
+
 Library
 -------
 
