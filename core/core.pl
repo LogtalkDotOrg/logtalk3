@@ -809,8 +809,8 @@ object_property(Obj, Prop) :-
 	'$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, p, Resources).
 '$lgt_object_property'(declares(Predicate, Properties), Obj, Dcl, _, DDcl, _, _, Flags) :-
 	'$lgt_object_property_declares'(Obj, Dcl, DDcl, Flags, Predicate, Properties).
-'$lgt_object_property'(defines(Predicate, Properties), Obj, _, Def, _, DDef, _, _) :-
-	'$lgt_object_property_defines'(Obj, Def, DDef, Predicate, Properties).
+'$lgt_object_property'(defines(Predicate, Properties), Obj, _, Def, _, DDef, _, Flags) :-
+	'$lgt_object_property_defines'(Obj, Def, DDef, Predicate, Flags, Properties).
 '$lgt_object_property'(includes(Predicate, From, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_includes'(Obj, Predicate, From, Properties).
 '$lgt_object_property'(provides(Predicate, To, Properties), Obj, _, _, _, _, _, _) :-
@@ -924,8 +924,8 @@ category_property(Ctg, Prop) :-
 	'$lgt_category_property_resources'(Ctg, Dcl, Flags, p, Resources).
 '$lgt_category_property'(declares(Predicate, Properties), Ctg, Dcl, _, _, _) :-
 	'$lgt_category_property_declares'(Ctg, Dcl, Predicate, Properties).
-'$lgt_category_property'(defines(Predicate, Properties), Ctg, _, Def, _, _) :-
-	'$lgt_category_property_defines'(Ctg, Def, Predicate, Properties).
+'$lgt_category_property'(defines(Predicate, Properties), Ctg, _, Def, _, Flags) :-
+	'$lgt_category_property_defines'(Ctg, Def, Predicate, Flags, Properties).
 '$lgt_category_property'(includes(Predicate, From, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_includes'(Ctg, Predicate, From, Properties).
 '$lgt_category_property'(provides(Predicate, To, Properties), Ctg, _, _, _, _) :-
@@ -1121,21 +1121,21 @@ protocol_property(Ptc, Prop) :-
 	).
 
 
-'$lgt_object_property_defines'(Obj, Def, DDef, Functor/Arity, Properties) :-
+'$lgt_object_property_defines'(Obj, Def, DDef, Functor/Arity, Flags, Properties) :-
 	(	call(Def, Predicate, _, _)
 	;	call(DDef, Predicate, _, _)
 	),
 	functor(Predicate, Functor, Arity),
-	'$lgt_entity_property_defines'(Obj, Functor/Arity, Properties).
+	'$lgt_entity_property_defines'(Obj, Functor/Arity, Flags, Properties).
 
 
-'$lgt_category_property_defines'(Ctg, Def, Functor/Arity, Properties) :-
+'$lgt_category_property_defines'(Ctg, Def, Functor/Arity, Flags, Properties) :-
 	call(Def, Predicate, _, _, Ctg),
 	functor(Predicate, Functor, Arity),
-	'$lgt_entity_property_defines'(Ctg, Functor/Arity, Properties).
+	'$lgt_entity_property_defines'(Ctg, Functor/Arity, Flags, Properties).
 
 
-'$lgt_entity_property_defines'(Entity, Functor/Arity, Properties) :-
+'$lgt_entity_property_defines'(Entity, Functor/Arity, _, Properties) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_location(Flags, Clauses, Rules, Location)),
 	!,
 	(	Location = File-Line ->
@@ -1159,7 +1159,13 @@ protocol_property(Ptc, Prop) :-
 	;	Properties = Properties2
 	).
 % likely a dynamic or a multifile predicate with no local clauses
-'$lgt_entity_property_defines'(_, _, [number_of_clauses(0), number_of_rules(0)]).
+'$lgt_entity_property_defines'(_, _, Flags, [number_of_clauses(0), number_of_rules(0)]) :-
+	Flags /\ 2 =:= 0,
+	% static entity
+	!.
+
+% dynamically created entity
+'$lgt_entity_property_defines'(_, _, _, []).
 
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
@@ -3017,10 +3023,10 @@ logtalk_make(Target) :-
 	'$lgt_entity_property_'(Entity, calls(Functor/Arity, _, _, _, Location)),
 	(	'$lgt_current_object_'(Entity, _, Dcl, Def, _, _, _, DDcl, DDef, _, Flags) ->
 		\+ '$lgt_object_property_declares'(Entity, Dcl, DDcl, Flags, Functor/Arity, _),
-		\+ '$lgt_object_property_defines'(Entity, Def, DDef, Functor/Arity, _)
+		\+ '$lgt_object_property_defines'(Entity, Def, DDef, Functor/Arity, _, _)
 	;	'$lgt_current_category_'(Entity, _, Dcl, Def, _, _),
 		\+ '$lgt_category_property_declares'(Entity, Dcl, Functor/Arity, _),
-		\+ '$lgt_category_property_defines'(Entity, Def, Functor/Arity, _)
+		\+ '$lgt_category_property_defines'(Entity, Def, Functor/Arity, _, _)
 	),
 	'$lgt_missing_reference'(Entity, Location, Reference).
 

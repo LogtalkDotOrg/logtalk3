@@ -49,6 +49,10 @@ when accessing threaded goals results.
 * FIXED: Increment the compiler warnings counter when printing a non-standard
 file directive portability warning.
 
+* FIXED: Don't return `number_of_clauses/1` and `number_of_rules/1` predicate
+definition properties when calling the built-in predicates `object_property/2`
+and `category_property/2` for dynamically created entities.
+
 Prolog adapter and integration files
 ------------------------------------
 
