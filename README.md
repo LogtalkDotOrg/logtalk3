@@ -103,7 +103,6 @@ found in the [manuals](manuals/) directory. They are also available online at:
 
 https://logtalk.org/manuals/index.html
 
-
 The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
 Logtalk updates since the first public version. Check it carefully if you
 have been using a previous Logtalk version.
@@ -114,12 +113,10 @@ also available online at:
 
 https://logtalk.org/library/index.html
 
-Most directories include `NOTES.md` documenting files, which can be viewed
-as plain text in any text editor but also nicely rendered as Markdown files
-(for e.g. easy conversion to HTML).
+Most directories include `NOTES.md` or `NOTES.txt ` documentation files.
 
-On POSIX systems, there's also a [man page](man/man1) for each shell script.
-A list of all the scripts can be generated using the `apropos logtalk` command.
+On POSIX systems, there's also a [man page](man/man1) for most shell scripts.
+A list of these scripts can be generated using the `apropos logtalk` command.
 [HTML versions](https://logtalk.org/man/) of the man pages are also available
 at the Logtalk website.
 
