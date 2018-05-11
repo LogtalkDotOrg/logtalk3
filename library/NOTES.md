@@ -25,14 +25,13 @@ documentation see:
 A plain Prolog version of the Unicode 6.2 standard is also included in the
 `unicode_data` folder. See its `README.md` file for details.
 
-As a general rule, always use the corresponding loader file to load
-library entities. The available loader files are described below.
-
-Most library entities are part of small hierarchies or depend on other
-entities and thus cannot be loaded and compiled separately (e.g. the
-`list` object implements the `listp` protocol and is part of a basic
-types hierarchy). Using the loader files takes care of all dependencies
-and also ensure compilation in optimized mode.
+As a general rule, **always** use the corresponding loader file to load
+library entities. The available loader files are described below. Most
+library entities are part of small hierarchies or depend on other entities
+and thus cannot be loaded and compiled separately (e.g. the `list` object
+implements the `listp` protocol and is part of a basic types hierarchy).
+Using the loader files takes care of all dependencies and also ensures
+compilation in optimized mode.
 
 The library loader files can be loaded using the `library(<loader file>)`
 notation as argument for the compiling and loading predicates. For example:
