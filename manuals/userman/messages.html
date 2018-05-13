@@ -150,7 +150,7 @@ When events are not used, is possible to turn off event generation on a per obje
 <h2 id="messages_performance">Message sending performance</h2>
 
 <p>
-Logtalk supports both static binding and dynamic binding. Static binding is used whenever messages are sent (using <code>::/2</code>) to static objects already loaded and with the <code>optimize</code> compiler flag turned on. When that is not the case (or when using <code>::/1</code>), Logtalk uses dynamic binding coupled with a caching mechanism that avoids repeated lookups of predicate declarations and predicate definitions. This is a solution common to other programming languages supporting dynamic binding. Message lookups are automatically cached the first time a message is sent. Cache entries are automatically removed when loading entities or using Logtalk dynamic features that invalidate the cached lookups.
+Logtalk supports both static binding and dynamic binding. Static binding is used whenever messages are sent (using the <code>::/2</code> control construct) to static objects already loaded and with the <code>optimize</code> compiler flag turned on. When that is not the case (or when using the <code>::/1</code> control construct), Logtalk uses dynamic binding coupled with a caching mechanism that avoids repeated lookups of predicate declarations and predicate definitions. This is a solution common to other programming languages supporting dynamic binding. Message lookups are automatically cached the first time a message is sent. Cache entries are automatically removed when loading entities or using Logtalk dynamic features that invalidate the cached lookups.
 </p>
 <p>
 Whenever static binding is used, message sending performance is roughly the same as a predicate call in plain Prolog. When discussing Logtalk dynamic binding performance, two distinct cases should be considered: messages sent by the user from the top-level interpreter and messages sent from compiled objects. In addition, the message declaration and definition lookups may, or may not be already cached by the runtime engine. In what follows, we will assume that the message lookups are already cached.
@@ -162,21 +162,21 @@ Whenever static binding is used, message sending performance is roughly the same
 In order to better understand the performance tradeoffs of using Logtalk dynamic binding when compared to plain Prolog or to Prolog module systems, is useful to translate message processing in terms of predicate calls. However, in doing this, we should keep in mind that the number of predicate calls is not necessarily proportional to the time taken to execute them.
 </p>
 <p>
-With event-support turned on, a message sent from a compiled object to another object translates to three predicate calls:
+With event-support turned on, a message sent from a compiled object (or category) to another object translates to a minimum of five predicate calls:
 </p>
 <dl>
 	<dt>checking for <em>before</em> events</dt>
-		<dd>one call to the built-in predicate <code>\+/1</code>, assuming that no events are defined</dd>
+		<dd>one call to the built-in predicate <code>\+/1</code> and a call to its argument, assuming that no events are defined</dd>
 	<dt>method call using the cached lookup</dt>
 		<dd>one call to a dynamic predicate (the cache entry)</dd>
 	<dt>checking for <em>after</em> events</dt>
-		<dd>one call to the built-in predicate <code>\+/1</code>, assuming that no events are defined</dd>
+		<dd>one call to the built-in predicate <code>\+/1</code> and a call to its argument, assuming that no events are defined</dd>
 </dl>
 <p>
 Given that events can be dynamically defined at runtime, there is no room for reducing the number of predicate calls without turning off support for event-driven programming. When events are defined, the number of predicate calls grows proportional to the number of events and event handlers (monitors). Event-driven programming support can be switched off for specific object using the compiler flag <a title="Consult compiler flag details" href="programming.html#programming_flags"><code>events/1</code></a>. Doing so, reduces the number of predicate calls from three to just one.
 </p>
 <p>
-Messages to <em>self</em> and <em>super</em> calls are transparent regarding events and, as such, imply only one predicate call (to the cache entry, a dynamic predicate).
+Messages to <em>self</em> are transparent regarding events and, as such, imply only one predicate call (to the cache entry, a dynamic predicate).
 </p>
 <p>
 When a message is sent by the user from the top-level interpreter, Logtalk needs to perform a runtime translation of the message term in order to prove the corresponding goal. Thus, while sending a message from a compiled object corresponds to either three predicate calls (event-support on) or one predicate call (event-support off), the same message sent by the user from the top-level interpreter necessarily implies an overhead. Considering the time taken for the user to type the goal and read the reply, this overhead is of no practical consequence.
