@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.39,
+		version is 1.41,
 		author is 'Paulo Moura',
-		date is 2018/05/07,
+		date is 2018/05/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -145,6 +145,9 @@
 
 	message_tokens(running_all_defined_documentation_actions) -->
 		['Running all defined documentation actions ...'-[], nl].
+
+	message_tokens(dynamic_binding_caches_deleted) -->
+		['Dynamic binding caches deleted'-[], nl].
 
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],

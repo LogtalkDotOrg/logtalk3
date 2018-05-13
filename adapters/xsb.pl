@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on April 16, 2018
+%  Last updated on May 13, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -803,6 +803,9 @@ term_hash(_, _, _, _) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{$} :-
+	!,
+	logtalk_make(caches).
 
 {File, Files} :-
 	!,

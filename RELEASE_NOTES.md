@@ -38,6 +38,9 @@ to self control construct, `::/1`, in clauses that apparently are meant to
 implement recursive predicate definitions where the user intention is to call
 the local predicate.
 
+* ADDED: New make target, `caches`, for cleaning the dynamic binding caches.
+Mainly for development use, specially when benchmarking.
+
 * IMPROVED: Small dynamic binding performance optimization (~10%) for `::/2`
 calls.
 
@@ -55,6 +58,8 @@ and `category_property/2` for dynamically created entities.
 
 Prolog adapter and integration files
 ------------------------------------
+
+* ADDED: Make shortcut, `$`, for the new `caches` target to all adapter files.
 
 * FIXED: Compilation of `table/1` directives for SWI-Prolog and YAP when using
 mode-directed tabling. After discussion in the SWI-Prolog mailing list.

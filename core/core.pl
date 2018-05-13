@@ -2769,6 +2769,9 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(circular).
 % generate documentation
 '$lgt_valid_logtalk_make_target'(documentation).
+% clean dynamic binding caches
+'$lgt_valid_logtalk_make_target'(caches).
+
 
 
 '$lgt_logtalk_make_target_actions'(Target) :-
@@ -2895,6 +2898,10 @@ logtalk_make(Target) :-
 
 '$lgt_logtalk_make'(documentation) :-
 	'$lgt_print_message'(comment(make), core, running_all_defined_documentation_actions).
+
+'$lgt_logtalk_make'(caches) :-
+	'$lgt_clean_lookup_caches',
+	'$lgt_print_message'(comment(make), core, dynamic_binding_caches_deleted).
 
 
 % deal with changes to the default compilation mode
@@ -3363,7 +3370,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 17, 0, b4)).
+'$lgt_version_data'(logtalk(3, 17, 0, b5)).
 
 
 

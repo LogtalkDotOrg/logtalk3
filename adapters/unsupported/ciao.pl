@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on April 10, 2018
+%  Last updated on May 13, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -747,6 +747,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{$} :-
+	!,
+	logtalk_make(caches).
 
 {File, Files} :-
 	!,

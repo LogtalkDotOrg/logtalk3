@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on April 10, 2018
+%  Last updated on May 13, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -850,6 +850,9 @@ forall(Generate, Test) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{$} :-
+	!,
+	logtalk_make(caches).
 
 {File, Files} :-
 	!,
