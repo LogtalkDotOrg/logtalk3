@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 13, 2018
+%  Last updated on May 14, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -693,7 +693,6 @@
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
 
 '$lgt_swi_directive_expansion'(table(Predicates), {table(TPredicates)}) :-
-	current_module(tabling),
 	logtalk_load_context(entity_type, _),
 	'$lgt_swi_table_directive_expansion'(Predicates, TPredicates).
 
