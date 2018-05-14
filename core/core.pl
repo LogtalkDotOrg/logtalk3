@@ -3370,7 +3370,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 17, 0, b5)).
+'$lgt_version_data'(logtalk(3, 17, 0, b6)).
 
 
 
@@ -5280,11 +5280,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_obj_super_call'(+atom, +term, +execution_context)
 %
 % runtime processing of an object "super" call when the predicate called is
-% not known at compile time
+% not known at compile time; as using the cache only requires a bound first
+% argument, we delay errors other than an instantiation error for a small
+% performance gain
 
 '$lgt_obj_super_call'(Super, Pred, ExCtx) :-
-	'$lgt_check'(callable, Pred, logtalk(^^Pred, ExCtx)),
-	'$lgt_obj_super_call_'(Super, Pred, ExCtx).
+	(	nonvar(Pred) ->
+		'$lgt_obj_super_call_'(Super, Pred, ExCtx)
+	;	throw(error(instantiation_error, logtalk(^^Pred, ExCtx)))
+	).
 
 
 
@@ -5343,6 +5347,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, ExCtx)))
+	;	% non-callable term error
+		\+ callable(Pred) ->
+		throw(error(type_error(callable, Pred), logtalk(^^Pred, ExCtx)))
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, ExCtx)))
@@ -5353,11 +5360,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_ctg_super_call'(+category_identifier, +term, +execution_context)
 %
 % runtime processing of a category "super" call when the predicate called
-% is not known at compile time
+% is not known at compile time;  as using the cache only requires a bound
+% first argument, we delay errors other than an instantiation error for a
+% small performance gain
 
 '$lgt_ctg_super_call'(Ctg, Pred, ExCtx) :-
-	'$lgt_check'(callable, Pred, logtalk(^^Pred, ExCtx)),
-	'$lgt_ctg_super_call_'(Ctg, Pred, ExCtx).
+	(	nonvar(Pred) ->
+		'$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
+	;	throw(error(instantiation_error, logtalk(^^Pred, ExCtx)))
+	).
+
 
 
 
@@ -5405,6 +5417,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, ExCtx)))
+	;	% non-callable term error
+		\+ callable(Pred) ->
+		throw(error(type_error(callable, Pred), logtalk(^^Pred, ExCtx)))
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, ExCtx)))

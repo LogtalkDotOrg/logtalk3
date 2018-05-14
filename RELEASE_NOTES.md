@@ -42,7 +42,8 @@ the local predicate.
 Mainly for development use, specially when benchmarking.
 
 * IMPROVED: Small dynamic binding performance optimization (~10%) for `::/2`
-calls.
+calls (when the object is only know at runtime) and `^^/2` calls (when the
+predicate is only know at runtime).
 
 * FIXED: An unwanted dependency on the message sender for calls to the
 `threaded_call/1-2`, `threaded_once/1-2`, `threaded_peek/1-2` and
