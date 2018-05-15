@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on April 3, 2018
+##   Last updated on May 15, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -49,6 +49,7 @@ if ! [ "$LOGTALKHOME" ]; then
 	elif [ -f "$( cd "$( dirname "$0" )" && pwd )/../core/core.pl" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
+	else
 		echo "Unable to locate Logtalk installation directory!"
 		echo
 		exit 1
