@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on May 15, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -50,7 +50,7 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
 	else
-		echo "Unable to locate Logtalk installation directory!"
+		echo "Unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
@@ -58,9 +58,9 @@ if ! [ "$LOGTALKHOME" ]; then
 	echo "LOGTALKHOME pointing to \"$LOGTALKHOME\"."
 	echo
 elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-	echo "Its current value is: $LOGTALKHOME"
-	echo "The variable must be set to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+	echo "Its current value is: $LOGTALKHOME" >&2
+	echo "The variable must be set to your Logtalk installation directory!" >&2
 	echo
 	exit 1
 fi

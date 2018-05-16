@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk back-end Prolog compiler select script
-##   Last updated on February 6, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 print_version() {
 	echo "Current $(basename $0) version:"
-	echo "  0.6"
+	echo "  0.7"
 	exit 0
 }
 
@@ -91,11 +91,11 @@ usage_help() {
 	echo "creating a symbolic link, \"logtalk\", to the corresponding integration script."
 	echo
 	echo "Usage:"
-	echo "  $(basename $0) integration-script"
-	echo "  $(basename $0) -v"
-	echo "  $(basename $0) -l"
-	echo "  $(basename $0) -s"
-	echo "  $(basename $0) -h"
+	echo "  $(basename "$0") integration-script"
+	echo "  $(basename "$0") -v"
+	echo "  $(basename "$0") -l"
+	echo "  $(basename "$0") -s"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print script version"
@@ -103,7 +103,6 @@ usage_help() {
 	echo "  -s show the currently selected Prolog integration script"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
 
@@ -139,18 +138,18 @@ valid_backend() {
 
 
 switch_backend() {
-	valid_backend $1
+	valid_backend "$1"
 	if [ 0 != ${?} ]; then
-    	echo "Invalid Prolog integration script: $1"
+    	echo "Invalid Prolog integration script: $1" >&2
     	exit 1
 	else
-		cd $(dirname $(command -v $1))
+		cd $(dirname $(command -v "$1")) || exit 1
 		rm -f logtalk
-		ln -sf $1 logtalk
+		ln -sf "$1" logtalk
 		error=$?
 		if [ 0 != $error ]; then
-			echo "An error occurred when switching the default Prolog integration script!"
-			echo "Check that you are executing this script with the necessary permissions."
+			echo "An error occurred when switching the default Prolog integration script!" >&2
+			echo "Check that you are executing this script with the necessary permissions." >&2
 			exit 1
     	else
 			echo "Switched to the Prolog integration script:"
@@ -167,19 +166,20 @@ do
 		v) print_version;;
 		l) list_backends;;
 		s) show_selected;;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
 
 if [ "$1" == "" ]; then
 	usage_help
+	exit 0
 else
-	switch_backend $1
+	switch_backend "$1"
 	error=$?
 	if [ 0 != $error ]; then
-		echo "An error occurred when switching to the $1 Prolog integration script!"
+		echo "An error occurred when switching to the $1 Prolog integration script!" >&2
 		exit 1
 	fi
 	exit 0

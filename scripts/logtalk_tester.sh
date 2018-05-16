@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 7, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.30"
+	echo "$(basename "$0") 0.31"
 	exit 0
 }
 
@@ -172,8 +172,8 @@ usage_help()
 	echo 
 	echo "This script automates running unit tests found in the current directory"
 	echo "and recursively in its sub-directories by scanning for \"tester.logtalk\""
-	echo "and \"tester.lgt\" source files.  In case of failed unit tests, timed out"
-	echo "test sets, or crashed test sets, this script returns an exit code of 1."
+	echo "and \"tester.lgt\" source files. In case of failed unit tests or test set"
+	echo "errors, this script returns a non-zero exit code."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-l level] [-- arguments]"
@@ -199,7 +199,6 @@ usage_help()
 	echo "  -- arguments to be passed to the integration script used to run the tests (no default)"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
 while getopts "vp:m:f:d:t:s:c:l:g:h" option
@@ -215,8 +214,8 @@ do
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		g) g_arg="$OPTARG";;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
@@ -292,16 +291,16 @@ elif [ "$p_arg" == "yap" ] ; then
 	logtalk=yaplgt$extension
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" != "" ] ; then
-	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
+	echo "Error! Unsupported back-end Prolog compiler: $p_arg" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $backend)" ] ; then
-    echo "Error! Default back-end Prolog compiler not found: $prolog"
+    echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
 	usage_help
     exit 1
 elif [ ! "$(command -v $logtalk)" ] ; then
-    echo "Error! $logtalk integration script for $prolog not found."
-	echo "       Check that its directory is in your execution path."
+    echo "Error! $logtalk integration script for $prolog not found." >&2
+	echo "       Check that its directory is in your execution path." >&2
     exit 1
 fi
 
@@ -314,7 +313,7 @@ elif [ "$m_arg" == "debug" ] ; then
 elif [ "$m_arg" == "all" ] ; then
 	mode='all'
 elif [ "$m_arg" != "" ] ; then
-	echo "Error! Unknow compilation mode: $m_arg"
+	echo "Error! Unknow compilation mode: $m_arg" >&2
 	usage_help
 	exit 1
 fi
@@ -329,7 +328,7 @@ elif [ "$f_arg" == "xunit" ] ; then
 	format='xunit'
 	format_goal=$format_xunit_goal
 elif [ "$f_arg" != "" ] ; then
-	echo "Error! Unknow format: $f_arg"
+	echo "Error! Unknow format: $f_arg" >&2
 	usage_help
 	exit 1
 fi
@@ -341,7 +340,7 @@ elif [ "$c_arg" == "xml" ] ; then
 	coverage='xml'
 	coverage_goal=$coverage_xml_goal
 elif [ "$c_arg" != "" ] ; then
-	echo "Error! Unknow coverage report: $c_arg"
+	echo "Error! Unknow coverage report: $c_arg" >&2
 	usage_help
 	exit 1
 fi
@@ -367,7 +366,7 @@ if [ "$l_arg" != "" ] ; then
 	if [[ "$l_arg" =~ ^[1-9][0-9]*$ ]] ; then
 		level="-maxdepth $l_arg"
 	else
-		echo "Error! Level must be an integer equal or greater than 1: $l_arg"
+		echo "Error! Level must be an integer equal or greater than 1: $l_arg" >&2
 		usage_help
 		exit 1
 	fi
@@ -378,7 +377,7 @@ if [ "$g_arg" != "" ] ; then
 fi
 
 if [ "$timeout_command" == "" ] ; then
-	echo "Warning! Timeout support not available. The timeout option will be ignored."
+	echo "Warning! Timeout support not available. The timeout option will be ignored." >&2
 fi
 
 if [[ "$prefix" != "" && ("$format" != "default" || "$coverage" != "none") ]] ; then

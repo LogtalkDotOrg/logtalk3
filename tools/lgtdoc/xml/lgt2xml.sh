@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on February 8, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -46,15 +46,15 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
 	else
-		echo "... unable to locate Logtalk installation directory!"
+		echo "... unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
 	echo
 elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-	echo "Its current value is: $LOGTALKHOME"
-	echo "The variable must be set to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+	echo "Its current value is: $LOGTALKHOME" >&2
+	echo "The variable must be set to your Logtalk installation directory!" >&2
 	echo
 	exit 1
 fi
@@ -90,8 +90,8 @@ usage_help()
 	echo "documenting files in the current directory"
 	echo
 	echo "Usage:"
-	echo "  $(basename $0) [-f format] [-i index] [-t title]"
-	echo "  $(basename $0) -h"
+	echo "  $(basename "$0") [-f format] [-i index] [-t title]"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f format of the index file (either xhtml or html; default is $format)"
@@ -99,7 +99,6 @@ usage_help()
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -h help"
 	echo
-	exit 1
 }
 
 create_index_file()
@@ -121,11 +120,11 @@ create_index_file()
 
 	echo "<head>" >> "$index_file"
 	echo "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" >> "$index_file"
-	echo "    <title>"$index_title"</title>" >> "$index_file"
+	echo "    <title>$index_title</title>" >> "$index_file"
 	echo "    <link rel=\"stylesheet\" href=\"logtalk.css\" type=\"text/css\"/>" >> "$index_file"
 	echo "</head>" >> "$index_file"
 	echo "<body>" >> "$index_file"
-	echo "<h1>"$index_title"</h1>" >> "$index_file"
+	echo "<h1>$index_title</h1>" >> "$index_file"
 	echo "<ul>" >> "$index_file"
 
 	if [ -e "./directory_index.xml" ] ; then
@@ -134,16 +133,16 @@ create_index_file()
 		echo "    <li><a href=\"entity_index.xml\">Entity index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"predicate_index.xml\">Predicate index</a></li>" >> "$index_file"
 	else
-		for file in $(grep -l "<logtalk_entity" *.xml); do
+		for file in $(grep -l "<logtalk_entity" ./*.xml); do
 			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 			entity=${name%_*}
 			pars=${name##*_}
 			echo "  indexing $file"
 			if [ $pars -gt 0 ]
 			then
-				echo "    <li><a href=\""$file"\">"$entity"/"$pars"</a></li>" >> "$index_file"
+				echo "    <li><a href=\"$file\">$entity/$pars</a></li>" >> "$index_file"
 			else
-				echo "    <li><a href=\""$file"\">"$entity"</a></li>" >> "$index_file"
+				echo "    <li><a href=\"$file\">$entity</a></li>" >> "$index_file"
 			fi
 		done
 	fi
@@ -152,7 +151,7 @@ create_index_file()
 
 	date="$(eval date)"
 
-	echo "<p>Generated on "$date"</p>" >> "$index_file"
+	echo "<p>Generated on $date</p>" >> "$index_file"
 	echo "</body>" >> "$index_file"
 	echo "</html>" >> "$index_file"
 }
@@ -163,13 +162,13 @@ do
 		f) f_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
 if [ "$f_arg" != "" ] && [ "$f_arg" != "xhtml" ] && [ "$f_arg" != "html" ] ; then
-	echo "Error! Unsupported output format: $f_arg"
+	echo "Error! Unsupported output format: $f_arg" >&2
 	usage_help
 	exit 1
 elif [ "$f_arg" != "" ] ; then
@@ -216,7 +215,7 @@ if ! [ -e "./logtalk_index_to_xml.xsl" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index_to_xml.xsl .
 fi
 
-if [ $((ls *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
+if [ $( (ls ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "generating $index_file file..."
 	create_index_file

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on February 8, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -46,15 +46,15 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
 	else
-		echo "... unable to locate Logtalk installation directory!"
+		echo "... unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
 	echo
 elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-	echo "Its current value is: $LOGTALKHOME"
-	echo "The variable must be set to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+	echo "Its current value is: $LOGTALKHOME" >&2
+	echo "The variable must be set to your Logtalk installation directory!" >&2
 	echo
 	exit 1
 fi
@@ -95,15 +95,14 @@ usage_help()
 	echo "current directory to text files"
 	echo
 	echo "Usage:"
-	echo "  $(basename $0) [-d directory] [-p processor]"
-	echo "  $(basename $0) -h"
+	echo "  $(basename "$0") [-d directory] [-p processor]"
+	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -h help"
 	echo
-	exit 1
 }
 
 while getopts "d:p:h" Option
@@ -111,13 +110,13 @@ do
 	case $Option in
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
 if [ "$d_arg" != "" ] && [ ! -d "$d_arg" ] ; then
-	echo "Error! directory does not exists: $d_arg"
+	echo "Error! directory does not exists: $d_arg" >&2
 	usage_help
 	exit 1
 elif [ "$d_arg" != "" ] ; then
@@ -125,7 +124,7 @@ elif [ "$d_arg" != "" ] ; then
 fi
 
 if [ "$p_arg" != "" ] && [ "$p_arg" != "fop" ] && [ "$p_arg" != "xep" ] && [ "$p_arg" != "xinc" ] ; then
-	echo "Error! Unsupported XSL-FO processor: $p_arg"
+	echo "Error! Unsupported XSL-FO processor: $p_arg" >&2
 	usage_help
 	exit 1
 elif [ "$p_arg" != "" ] ; then
@@ -144,10 +143,10 @@ if ! [ -e "./logtalk_entity.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if [ $((grep -l "<logtalk" *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
+if [ $( (grep -l "<logtalk" ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
 	echo "converting XML files to text files..."
-	for file in $(grep -l "<logtalk_entity" *.xml); do
+	for file in $(grep -l "<logtalk_entity" ./*.xml); do
 		echo "  converting $file"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
@@ -156,7 +155,7 @@ if [ $((grep -l "<logtalk" *.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.txt\";;
 		esac
 	done
-	for file in $(grep -l "<logtalk_index" *.xml); do
+	for file in $(grep -l "<logtalk_index" ./*.xml); do
 		echo "  converting $file"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in

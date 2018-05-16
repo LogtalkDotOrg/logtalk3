@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on February 12, 2017
+##   Last updated on May 16, 2017
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -39,14 +39,14 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME=/opt/share/logtalk
 		echo "Using Logtalk installation at \"/opt/share/logtalk\""
 	else
-		echo "Unable to locate Logtalk installation directory!"
+		echo "Unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
 	elif ! [ -d "$LOGTALKHOME" ]; then
-		echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-		echo "Its current value is: $LOGTALKHOME"
-		echo "The variable must be set to your Logtalk installation directory!"
+		echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+		echo "Its current value is: $LOGTALKHOME" >&2
+		echo "The variable must be set to your Logtalk installation directory!" >&2
 		echo
 		exit 1
 fi

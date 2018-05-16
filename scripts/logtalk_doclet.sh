@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on August 16, 2017
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
 
@@ -110,7 +110,7 @@ usage_help()
 	echo 
 	echo "This script automates running doclets found on the current directory and recursively"
 	echo "in its sub-directories by scanning for doclet.lgt and doclet.logtalk source files. In"
-	echo  "case of failed doclets, this script returns an exit code of 1."
+	echo  "case of failed doclets or doclet errors, this script returns a non-zero exit code."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog] [-d results] [-t timeout] [-- arguments]"
@@ -127,7 +127,6 @@ usage_help()
 	echo "  -- arguments to be passed to the integration script used to run the doclets (no default)"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
 while getopts "vp:m:f:d:t:s:h" option
@@ -138,8 +137,8 @@ do
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
@@ -206,16 +205,16 @@ elif [ "$p_arg" == "yap" ] ; then
 	logtalk=yaplgt$extension
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" != "" ] ; then
-	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
+	echo "Error! Unsupported back-end Prolog compiler: $p_arg" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $backend)" ] ; then
-    echo "Error! Default back-end Prolog compiler not found: $prolog"
+    echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
 	usage_help
     exit 1
 elif [ ! "$(command -v $logtalk)" ] ; then
-    echo "Error! $logtalk integration script for $prolog not found."
-	echo "       Check that its directory is in your execution path."
+    echo "Error! $logtalk integration script for $prolog not found." >&2
+	echo "       Check that its directory is in your execution path." >&2
     exit 1
 fi
 
@@ -236,7 +235,7 @@ if [ "$s_arg" != "" ] ; then
 fi
 
 if [ "$timeout_command" == "" ] ; then
-	echo "Warning! Timeout support not available. The timeout option will be ignored."
+	echo "Warning! Timeout support not available. The timeout option will be ignored." >&2
 fi
 
 mkdir -p "$results"

@@ -76,6 +76,13 @@ Library
 * FIXED: Spurious choice-points for some of the predicates of the `character`
 library object.
 
+Tools
+-----
+
+* UPDATED: All `lgtdoc` scripts to write error messages to `stderr`.
+
+* CLEANUP: Style issues in all `lgtdoc` scripts.
+
 Tests
 -----
 
@@ -106,6 +113,10 @@ Contributions
 
 Installers and installation scripts
 -----------------------------------
+
+* UPDATED: All bundled scripts to write error messages to `stderr`.
+
+* CLEANUP: Style issues in all bundled scripts.
 
 * FIXED: Spurious warnings when running the GNU Prolog embedding script when
 creating an executable with just the Logtalk compiler and runtime.

@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on April 16, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -49,16 +49,16 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
 	else
-		echo "... unable to locate Logtalk installation directory!"
+		echo "... unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
 	echo
 	export LOGTALKHOME=$LOGTALKHOME
 elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-	echo "Its current value is: $LOGTALKHOME"
-	echo "The variable must be set to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+	echo "Its current value is: $LOGTALKHOME" >&2
+	echo "The variable must be set to your Logtalk installation directory!" >&2
 	echo
 	exit 1
 fi
@@ -98,7 +98,7 @@ paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -123,7 +123,6 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
 while getopts "cd:p:h:l:s:vh" option
@@ -132,12 +131,11 @@ do
 		c) compile="true";;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
-		h) h_arg="$OPTARG";;
-		l) l_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
+		l) l_arg="$OPTARG";;
 		v) print_version;;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
@@ -149,7 +147,7 @@ if [ "$p_arg" != "" ] ; then
 	if [ -f "$p_arg" ] ; then
 		paths="$p_arg"
 	else
-		echo "The $p_arg library paths file does not exist!"
+		echo "The $p_arg library paths file does not exist!" >&2
 		exit 1
 	fi
 fi
@@ -158,7 +156,7 @@ if [ "$l_arg" != "" ] ; then
 	if [ -f "$l_arg" ] ; then
 		loader="$l_arg"
 	else
-		echo "The $l_arg loader file does not exist!"
+		echo "The $l_arg loader file does not exist!" >&2
 		exit 1
 	fi
 else
@@ -169,7 +167,7 @@ if [ "$s_arg" != "" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
-		echo "The $s_arg settings file does not exist!"
+		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
 else
@@ -177,7 +175,7 @@ else
 fi
 
 mkdir -p "$directory"
-cd "$directory"
+cd "$directory" || exit 1
 
 operating_system=$(uname -s)
 
@@ -250,14 +248,14 @@ else
 fi
 
 eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:eco]),halt"
-rm *.pl
+rm ./*.pl
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
-	cd "$directory/application"
-	eclipse -L iso -t user -f $directory/logtalk.eco -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
-	cat $(ls -rt $directory/application/*.pl) > application.pl
-	eclipse -L iso -t user -f $directory/logtalk.eco -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
+	cd "$directory/application" || exit 1
+	eclipse -L iso -t user -f "$directory/logtalk.eco" -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
+	cat $(ls -rt "$directory/application"/*.pl) > application.pl
+	eclipse -L iso -t user -f "$directory/logtalk.eco" -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	mv application.eco ..
-	rm *.pl
+	rm ./*.pl
 fi

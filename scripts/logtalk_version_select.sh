@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk version select script
-##   Last updated on February 17, 2017
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.8"
+	echo "$(basename "$0") 0.9"
 	exit 0
 }
 
@@ -40,7 +40,7 @@ list_versions() {
 	else
 		echo "none"
 	fi
-	exit 1
+	exit 0
 }
 
 
@@ -73,7 +73,6 @@ usage_help() {
 	echo "  -s show the currently selected version"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
 
@@ -93,7 +92,7 @@ valid_version() {
 switch_version() {
 	valid_version "$1"
 	if [ 0 != ${?} ]; then
-    	echo "Invalid version: $1"
+    	echo "Invalid version: $1" >&2
     	exit 1
 	else
 		cd "$prefix" || exit 1
@@ -122,16 +121,16 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME=/opt/share/logtalk
 		echo "... using Logtalk installation found at /opt/share/logtalk"
 	else
-		echo "... unable to locate Logtalk installation directory!"
+		echo "... unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
 	echo
 	export LOGTALKHOME=$LOGTALKHOME
 elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-	echo "Its current value is: $LOGTALKHOME"
-	echo "The variable must be set to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+	echo "Its current value is: $LOGTALKHOME" >&2
+	echo "The variable must be set to your Logtalk installation directory!" >&2
 	echo
 	exit 1
 fi
@@ -146,19 +145,20 @@ do
 		v) print_version;;
 		l) list_versions;;
 		s) show_selected;;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
 
 if [ "$1" == "" ]; then
 	usage_help
+	exit 0
 else
 	switch_version "$1"
 	error=$?
 	if [ 0 != $error ]; then
-		echo "An error occurred when activating version \"$version\"!"
+		echo "An error occurred when activating version \"$version\"!" >&2
 		exit 1
 	fi
 	exit 0

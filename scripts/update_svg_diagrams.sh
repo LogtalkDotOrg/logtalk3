@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on February 8, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ contributions_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data
 
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -75,7 +75,6 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
 
@@ -84,8 +83,8 @@ do
 	case $option in
 		v) print_version;;
 		p) p_arg="$OPTARG";;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
@@ -127,11 +126,11 @@ elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
 	logtalk="yaplgt$extension -g"
 elif [ "$p_arg" != "" ] ; then
-	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
+	echo "Error! Unsupported back-end Prolog compiler: $p_arg" >&2
 	usage_help
 	exit 1
 elif [ ! "$(command -v $backend)" ] ; then
-    echo "Error! Default back-end Prolog compiler not found: $prolog"
+    echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
 	usage_help
     exit 1
 fi

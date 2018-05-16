@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 16, 2018
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -49,16 +49,16 @@ if ! [ "$LOGTALKHOME" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
 	else
-		echo "... unable to locate Logtalk installation directory!"
+		echo "... unable to locate Logtalk installation directory!" >&2
 		echo
 		exit 1
 	fi
 	echo
 	export LOGTALKHOME=$LOGTALKHOME
 elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!"
-	echo "Its current value is: $LOGTALKHOME"
-	echo "The variable must be set to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
+	echo "Its current value is: $LOGTALKHOME" >&2
+	echo "The variable must be set to your Logtalk installation directory!" >&2
 	echo
 	exit 1
 fi
@@ -99,7 +99,7 @@ hooks="$LOGTALKHOME/adapters/yaphooks.pl"
 compile="false"
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -111,7 +111,7 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-h hooks] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-k hooks] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -119,27 +119,26 @@ usage_help()
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory for intermediate and final results (default is $directory)"
 	echo "  -p library paths file (default is $paths)"
-	echo "  -h hooks file (default is $hooks)"
+	echo "  -k hooks file (default is $hooks)"
 	echo "  -s settings file"
 	echo "  -l loader file for the application"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
-	exit 0
 }
 
-while getopts "cd:p:h:l:s:vh" option
+while getopts "cd:p:k:l:s:vh" option
 do
 	case $option in
 		c) compile="true";;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
-		h) h_arg="$OPTARG";;
+		k) k_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		v) print_version;;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
@@ -151,16 +150,16 @@ if [ "$p_arg" != "" ] ; then
 	if [ -f "$p_arg" ] ; then
 		paths="$p_arg"
 	else
-		echo "The $p_arg library paths file does not exist!"
+		echo "The $p_arg library paths file does not exist!" >&2
 		exit 1
 	fi
 fi
 
-if [ "$h_arg" != "" ] ; then
-	if [ -f "$h_arg" ] ; then
-		hooks="$h_arg"
+if [ "$k_arg" != "" ] ; then
+	if [ -f "$k_arg" ] ; then
+		hooks="$k_arg"
 	else
-		echo "The $h_arg hooks file does not exist!"
+		echo "The $k_arg hooks file does not exist!" >&2
 		exit 1
 	fi
 fi
@@ -169,7 +168,7 @@ if [ "$l_arg" != "" ] ; then
 	if [ -f "$l_arg" ] ; then
 		loader="$l_arg"
 	else
-		echo "The $l_arg loader file does not exist!"
+		echo "The $l_arg loader file does not exist!" >&2
 		exit 1
 	fi
 else
@@ -180,7 +179,7 @@ if [ "$s_arg" != "" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
-		echo "The $s_arg settings file does not exist!"
+		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
 else
@@ -188,7 +187,7 @@ else
 fi
 
 mkdir -p "$directory"
-cd "$directory"
+cd "$directory" || exit 1
 
 operating_system=$(uname -s)
 
@@ -247,15 +246,15 @@ else
 		> logtalk.pl
 fi
 
-rm *.yap
+rm ./*.yap
 rm yap.pl
 rm core.pl
 rm -f yaphooks.pl
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$directory/application"
-	cd "$directory/application"
+	cd "$directory/application" || exit 1
 	yap -g "consult('../logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$directory/application'),logtalk_load('$loader'),halt"
-	cat $(ls -rt $directory/application/*.yap) > ../application.pl
-	rm *.yap
+	cat $(ls -rt "$directory/application"/*.yap) > ../application.pl
+	rm ./*.yap
 fi

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on February 17, 2017
+##   Last updated on May 16, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -61,7 +61,6 @@ usage_help()
 	echo "  -v print script version"
 	echo "  -h help"
 	echo
-	exit 1
 }
 
 while getopts "p:d:vh" option
@@ -70,8 +69,8 @@ do
 		v) print_version;;
 		p) prefix_argument="$OPTARG";;
 		d) directory_argument="$OPTARG";;
-		h) usage_help;;
-		*) usage_help;;
+		h) usage_help; exit;;
+		*) usage_help; exit;;
 	esac
 done
 
@@ -92,7 +91,7 @@ else
 fi
 
 if [ ! -w "$prefix" ] ; then
-	echo "Error! No write permission for the prefix directory: $prefix"
+	echo "Error! No write permission for the prefix directory: $prefix" >&2
 	usage_help
 	exit 1
 fi
