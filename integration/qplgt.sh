@@ -93,6 +93,7 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 exec qp -s 3072 -d 3072 -h 8192 -e 256 -C 256 -H 1536 -l "$LOGTALKHOME/integration/logtalk_qp.pl" "$@"

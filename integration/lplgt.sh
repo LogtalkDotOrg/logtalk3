@@ -94,6 +94,7 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 exec lprolog "['$LOGTALKHOME/integration/logtalk_lean']" $1 $2 $3 $4 $5 $6 $7 $8

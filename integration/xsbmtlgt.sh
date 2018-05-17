@@ -93,6 +93,7 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 exec xsb-mt --shared_predicates -l -e "['$LOGTALKHOME/integration/logtalk_xsbmt.pl']." "$@"

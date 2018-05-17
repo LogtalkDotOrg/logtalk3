@@ -94,6 +94,7 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 exec bp -i "$LOGTALKHOME/integration/logtalk_bp.pl" "$@"

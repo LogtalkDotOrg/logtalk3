@@ -93,6 +93,7 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 exec prolog +l "$LOGTALKHOME/integration/logtalk_quintus.pl" +z "$LOGTALKHOME" "$LOGTALKUSER" "$LOGTALK_STARTUP_DIRECTORY" "$@"

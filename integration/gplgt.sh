@@ -94,7 +94,8 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 operating_system=$(uname -s)
 if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then

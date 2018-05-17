@@ -94,6 +94,7 @@ else
 	logtalk_user_setup
 fi
 
-export LOGTALK_STARTUP_DIRECTORY=$(pwd)
+LOGTALK_STARTUP_DIRECTORY=$(pwd)
+export LOGTALK_STARTUP_DIRECTORY
 
 exec eclipse -L iso -t user -f "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"
