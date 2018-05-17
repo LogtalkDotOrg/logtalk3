@@ -62,6 +62,8 @@ Prolog adapter and integration files
 
 * ADDED: Make shortcut, `$`, for the new `caches` target to all adapter files.
 
+* UPDATED: All integration scripts to write error messages to `stderr`.
+
 * FIXED: Compilation of `table/1` directives for SWI-Prolog and YAP when using
 mode-directed tabling. After discussion in the SWI-Prolog mailing list.
 
