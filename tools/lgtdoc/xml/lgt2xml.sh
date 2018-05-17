@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on May 16, 2018
+##   Last updated on May 17, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -217,9 +217,9 @@ fi
 
 if [ $( (ls ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 	echo
-	echo "generating $index_file file..."
+	echo "generating $(basename "$index_file") file..."
 	create_index_file
-	echo "$index_file file generated"
+	echo "$(basename "$index_file") file generated"
 	echo
 else
 	echo

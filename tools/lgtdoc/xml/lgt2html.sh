@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on May 16, 2018
+##   Last updated on May 17, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -272,9 +272,9 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo "conversion done"
 	echo
 	index_file="$directory/$index_file"
-	echo "generating $index_file file..."
+	echo "generating $(basename "$index_file") file..."
 	create_index_file
-	echo "index $index_file generated"
+	echo "$(basename "$index_file") file generated"
 	echo
 else
 	echo
