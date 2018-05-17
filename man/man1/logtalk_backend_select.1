@@ -1,4 +1,4 @@
-.TH logtalk_backend_select 1 "January 31, 2014" "Logtalk 3.00.0" "Logtalk Documentation"
+.TH logtalk_backend_select 1 "May 17, 2018" "Logtalk 3.17.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_backend_select \- Logtalk script for defining an alias, logtalk, to a chosen back-end Prolog integration script
@@ -9,6 +9,8 @@ logtalk_backend_select \- Logtalk script for defining an alias, logtalk, to a ch
 .B logtalk_backend_select -l
 .br
 .B logtalk_backend_select -s
+.br
+.B logtalk_backend_select -r
 .br
 .B logtalk_backend_select 
 .I integration-script
@@ -28,6 +30,9 @@ List available Prolog integration scripts.
 .TP
 .BI \-s
 Show the currently selected Prolog integration script.
+.TP
+.BI \-r
+Remove the logtalk alias.
 .TP
 .B \-h
 Provide help on script usage.
@@ -51,4 +56,4 @@ logtalk_user_setup(1),\ logtalk_version_select(1)
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2015 Paulo Moura.
+Copyright (c) 1998-2018 Paulo Moura.

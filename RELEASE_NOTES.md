@@ -116,6 +116,9 @@ Contributions
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The `logtalk_backend_select` script to also allow removing the
+`logtalk` alias to the selected integration script.
+
 * UPDATED: All bundled scripts to write error messages to `stderr`.
 
 * CLEANUP: Style issues in all bundled scripts.
