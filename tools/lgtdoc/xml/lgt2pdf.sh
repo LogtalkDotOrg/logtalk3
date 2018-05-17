@@ -163,11 +163,11 @@ if ! [ -e "./logtalk_entity.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if [ $( (grep -l "<logtalk" ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
+if grep -q "<logtalk" ./*.xml ; then
 	echo
 	echo "converting XML files to PDF..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
-		echo "  converting $file"
+		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case $processor in
 			xinc)	eval xinc -xml \"$file\" -xsl \"$xsl\" -pdf \"$directory\"/\"$name.pdf\" 2> /dev/null;;

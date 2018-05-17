@@ -143,11 +143,11 @@ if ! [ -e "./logtalk_entity.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if [ $( (grep -l "<logtalk" ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
+if grep -q "<logtalk" ./*.xml ; then
 	echo
 	echo "converting XML files to text files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
-		echo "  converting $file"
+		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$entity_xslt\" \"$file\";;
@@ -156,7 +156,7 @@ if [ $( (grep -l "<logtalk" ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 		esac
 	done
 	for file in $(grep -l "<logtalk_index" ./*.xml); do
-		echo "  converting $file"
+		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.txt\" \"$index_xslt\" \"$file\";;

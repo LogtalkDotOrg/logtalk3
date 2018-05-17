@@ -248,11 +248,11 @@ if ! [ -e "$directory/logtalk.css" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.css "$directory"
 fi
 
-if [ $( (grep -l "<logtalk" ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
+if grep -q "<logtalk" ./*.xml ; then
 	echo
 	echo "converting XML files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
-		echo "  converting $file"
+		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$entity_xslt\" \"$file\";;
@@ -261,7 +261,7 @@ if [ $( (grep -l "<logtalk" ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
 		esac
 	done
 	for file in $(grep -l "<logtalk_index" ./*.xml); do
-		echo "  converting $file"
+		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$index_xslt\" \"$file\";;
