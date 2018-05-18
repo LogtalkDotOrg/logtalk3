@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on May 16, 2018
+##   Last updated on May 18, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ contributions_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data
 
 
 print_version() {
-	echo "$(basename "$0") 0.8"
+	echo "$(basename "$0") 0.9"
 	exit 0
 }
 
@@ -143,12 +143,14 @@ $logtalk "$library_goal"
 $logtalk "$tools_goal"
 $logtalk "$contributions_goal"
 
+
 for f in *.dot; do
 	flag=0
 	counter=10
+	# use loop to workaround dot random crashes by retrying
+	# the conversion in case of a crash up to 10 times
 	while [ $flag -eq 0 ] && [ $counter -ge 0 ] ; do
-		dot -Tsvg "$f" > "${f%.*}.svg"
-		if [ $? == 0 ]; then
+		if dot -Tsvg "$f" > "${f%.*}.svg" ; then
 			flag=1
 		fi
 		(( --counter ))
