@@ -295,13 +295,13 @@ elif [ "$p_arg" != "" ] ; then
 	usage_help
 	exit 1
 elif [ ! "$(command -v $backend)" ] ; then
-    echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
+	echo "Error! Default back-end Prolog compiler not found: $prolog" >&2
 	usage_help
-    exit 1
+	exit 1
 elif [ ! "$(command -v $logtalk)" ] ; then
-    echo "Error! $logtalk integration script for $prolog not found." >&2
+	echo "Error! $logtalk integration script for $prolog not found." >&2
 	echo "       Check that its directory is in your execution path." >&2
-    exit 1
+	exit 1
 fi
 
 if [ "$m_arg" == "optimal" ] ; then

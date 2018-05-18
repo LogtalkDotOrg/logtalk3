@@ -30,7 +30,7 @@ print_version() {
 
 
 list_versions() {
-    echo "Available versions:"
+	echo "Available versions:"
 	if [ $( (ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null ) -gt 0 ]; then
 		for path in $(ls -d "$prefix"/logtalk-*); do
 			file=$(basename "$path")
@@ -45,13 +45,13 @@ list_versions() {
 
 
 show_selected() {
-    echo "Selected version:"
-    if [ -e "$LOGTALKHOME" ]; then
+	echo "Selected version:"
+	if [ -e "$LOGTALKHOME" ]; then
 		echo -n "  "
 		readlink "$LOGTALKHOME"
-    else
-        echo "  none"
-    fi
+	else
+		echo "  none"
+	fi
 	exit 0
 }
 
@@ -78,12 +78,12 @@ usage_help() {
 
 valid_version() {
 	if [ $( (ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null ) -gt 0 ]; then
-	    for path in $(ls -d "$prefix"/logtalk-*); do
+		for path in $(ls -d "$prefix"/logtalk-*); do
 			version=$(basename "$path")
-	        if [ "$1" == "$version" ]; then
-	            return 0
-	        fi
-	    done
+			if [ "$1" == "$version" ]; then
+				return 0
+			fi
+		done
 	fi
 	return 1
 }

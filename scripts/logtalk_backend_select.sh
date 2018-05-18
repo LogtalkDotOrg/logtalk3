@@ -31,7 +31,7 @@ print_version() {
 
 
 list_backends() {
-    echo "Available back-end Prolog compilers:"
+	echo "Available back-end Prolog compilers:"
 	if [ -e "$(command -v bplgt)" ] && [ "$(command -v bp)" != "" ] ; then
 		echo -n "  bplgt"
 	fi
