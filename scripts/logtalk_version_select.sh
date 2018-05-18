@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk version select script
-##   Last updated on May 16, 2018
+##   Last updated on May 18, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -24,17 +24,17 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
 
 list_versions() {
 	echo "Available versions:"
-	if [ $( (ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null ) -gt 0 ]; then
-		for path in $(ls -d "$prefix"/logtalk-*); do
-			file=$(basename "$path")
-			echo "  $file"
+	if ls -d "$prefix"/logtalk-* 1> /dev/null 2>&1 ; then
+		for path in "$prefix"/logtalk-* ; do
+			[ -d "$path" ] || continue
+			echo "  $(basename "$path")"
 		done
 		echo
 	else
@@ -76,30 +76,21 @@ usage_help() {
 }
 
 
-valid_version() {
-	if [ $( (ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null ) -gt 0 ]; then
-		for path in $(ls -d "$prefix"/logtalk-*); do
-			version=$(basename "$path")
-			if [ "$1" == "$version" ]; then
-				return 0
-			fi
-		done
-	fi
-	return 1
-}
-
-
 switch_version() {
-	valid_version "$1"
-	if [ 0 != ${?} ]; then
-    	echo "Invalid version: $1" >&2
-    	exit 1
-	else
+	if [ -d "$prefix/$1" ]; then
 		cd "$prefix" || exit 1
 		rm -f logtalk
-		ln -sf "$1" logtalk
-    	echo "Switched to version: $1"
-		exit 0
+		if ln -sf "$1" logtalk ; then
+			echo "Switched to version: $1"
+			exit 0
+		else
+			echo "An error occurred when switching the Logtalk version!" >&2
+			echo "Check that you are executing this script with the necessary permissions." >&2
+			exit 1
+		fi
+	else
+		echo "Invalid version: $1" >&2
+		exit 1
 	fi
 }
 
@@ -158,7 +149,7 @@ else
 	switch_version "$1"
 	error=$?
 	if [ 0 != $error ]; then
-		echo "An error occurred when activating version \"$version\"!" >&2
+		echo "An error occurred when activating version \"$1\"!" >&2
 		exit 1
 	fi
 	exit 0
