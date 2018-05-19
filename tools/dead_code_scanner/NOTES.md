@@ -28,7 +28,7 @@ or indirectly, by any predicate with a (local or inherited) scope directive.
 Predicates (and non-terminals) listed in `uses/2` and `use_module/2` directives
 but that are not used are also classified as dead code.
 
-Basides dead code, this tool can also help detect other problems in the code
+Besides dead code, this tool can also help detect other problems in the code
 than often result in reporting false positives. For example, typos in `alias/2`
 directives, missing scope directives, and missing `meta_non_terminal/1` and
 `meta_predicate/1` directives.

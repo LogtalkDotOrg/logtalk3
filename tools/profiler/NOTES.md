@@ -36,16 +36,16 @@ For sample queries, please see the `SCRIPT.txt` file.
 Supported backend Prolog compilers
 ----------------------------------
 
-Currently, this tool suports the profilers provided with SICStus Prolog 4,
+Currently, this tool supports the profilers provided with SICStus Prolog 4,
 SWI-Prolog, and YAP. The tool includes two files:
 
 - `yap_profiler.lgt`  
-	simple wrapper for the YAP count profiler 
+	simple wrapper for the YAP count profiler
 
 - `sicstus_profiler.lgt`  
 	simple wrapper for the SICStus Prolog 4 profiler
 
-Logtalk also supports the YAP tick profiler (using the latest YAP devel
+Logtalk also supports the YAP tick profiler (using the latest YAP development
 version) and the SWI-Prolog XPCE profiler. When using the XPCE profiler,
 you can avoid profiling the Logtalk compiler (which is invoked e.g. when
 you use the `(::)/2` message-sending operator at the top-level) by typing:

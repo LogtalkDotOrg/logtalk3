@@ -56,8 +56,8 @@ with selected backend Prolog compiler profilers that are not portable.
 The `wrapper` tool is also not loaded by default given its beta status.
 
 To load a specific tool, either change your Prolog working directory
-to the tool folder and then compile and load the corresponding loader 
-utility file or simply use library notation as argument for the 
+to the tool folder and then compile and load the corresponding loader
+utility file or simply use library notation as argument for the
 compiling and loading predicates. For example:
 
 	| ?- logtalk_load(lgtunit(loader)).
@@ -70,7 +70,7 @@ Specific notes about each tool can be found in the corresponding `NOTES.md`
 files. Basic XHTML documentation about each tool can be found on the `docs`
 directory (open the `docs/index.html` file with your web browser). The
 documentation for these tools can be regenerated using the shell scripts
-`../scripts/update_html_docs.sh` and `../scripts/update_svg_docs.sh`.
+`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
 
 
 Other notes

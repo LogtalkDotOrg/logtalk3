@@ -21,7 +21,7 @@ Overview
 --------
 
 This tool provides basic on-line help for Logtalk when running in a limited
-set of operating-systems. 
+set of operating-systems.
 
 
 API documentation
@@ -55,7 +55,7 @@ Know issues
 -----------
 
 On macOS, the `open` command used to open documentation URLs drops the anchors,
-thus preventing navigating to the specified postion on the documentation page.
+thus preventing navigating to the specified position on the documentation page.
 
 
 Other notes

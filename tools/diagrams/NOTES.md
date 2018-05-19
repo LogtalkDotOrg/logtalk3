@@ -79,7 +79,7 @@ references to entities defined in other files
 
 File dependency diagrams are specially useful in revealing dependencies
 that are not represented in file loading diagrams due to files being
-loaded indirectly by files external to the libraries being documented. 
+loaded indirectly by files external to the libraries being documented.
 
 The following library diagrams are supported:
 
@@ -375,7 +375,7 @@ When that is not the case, notably when generating cross-referencing diagrams,
 missing entities can result in incomplete diagrams.
 
 The Graphviz command-line utilities, e.g. `dot`, are notorious for random
-crashes (segmentation faults usuallu), often requiring re-doing conversions
+crashes (segmentation faults usually), often requiring re-doing conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
 command until it completes without error. For example:
 
@@ -386,7 +386,7 @@ The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
 	https://www.iconfinder.com/xinhstudio
 
 Currently, only the `zoom.png` file is used. A copy of this file must exist
-in any directory used for publishing diagrams using it. 
+in any directory used for publishing diagrams using it.
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
