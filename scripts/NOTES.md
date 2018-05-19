@@ -18,19 +18,23 @@ ________________________________________________________________________
 
 
 This directory contains support files for creating Docker containers and
-shell scripts used for Logtalk testing, packaging, installation, and
-integration with Prolog compilers. Those with extension `.sh` are bash
-shells scripts for MacOS X, Linux, and similar systems. Those with
-extension `.js` are JScript command-line scripts for Windows; they require
-WSH 5.6 or later version to be installed and should be run using
-`cscript.exe` from a DOS command line shell (you may download WSH 5.6
+shell scripts used for Logtalk documenting, testing, managing, packaging,
+and installation.
+
+Scripts extension `.sh` are Bash shells scripts for macOS, Linux, and
+similar systems.
+
+Scripts with extension `.js` are JScript command-line scripts for Windows.
+They require WSH 5.6 or later version to be installed and should be run
+using `cscript.exe` from a DOS command line shell (you may download WSH 5.6
 from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
 Man pages are provided for all POSIX shell scripts, which can be listed
-using the `apropos logtalk` command.
+using the `apropos logtalk` command. HTML versions of the man pages are
+also available in the Logtalk website.
 
 - `build_release.sh`  
-	helper script for building most of the distribution files of a new 
+	helper script for building most of the distribution files of a new
 	Logtalk release; accepts as an optional argument a version identifier
 	(e.g. 3.00.0-a8)
 
@@ -50,8 +54,8 @@ using the `apropos logtalk` command.
 	installation directory (for example, `./install.sh -p $HOME`)
 
 - `uninstall.sh`  
-	shell script for de-installing Logtalk in Unix and Unix-like operating 
-	systems (must be run from this directory by a user with administration 
+	shell script for de-installing Logtalk in Unix and Unix-like operating
+	systems (must be run from this directory by a user with administration
 	privileges)
 
 - `logtalk_tester.sh`  
@@ -71,7 +75,7 @@ using the `apropos logtalk` command.
 	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
 	executable directories to the system path environment variable;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
-	by the GNU coreutils package), it will use it to run each test set if the
+	by the GNU `coreutils` package), it will use it to run each test set if the
 	`timeout` option is set to a value greater than zero;
 	installation of the GNU `sed` command, when no available by default, is
 	strongly recommended
@@ -120,7 +124,7 @@ using the `apropos logtalk` command.
 	directory containing files used when building
 
 - `macosx`  
-	directory containing files used when building MacOS X installer 
+	directory containing files used when building MacOS X installer
 	packages
 
 - `pack`  
@@ -135,13 +139,13 @@ using the `apropos logtalk` command.
 	directory containing files used when building Windows GUI installers
 
 - `logtalk_user_setup.sh` and `logtalk_user_setup.js`  
-	end-user scripts for copying the Logtalk user-modifiable files and 
-	directories to the location pointed by the environment variable 
-	`LOGTALKUSER` (defaults to `~/logtalk` on POSIX operating-systems 
-	and to `My Documents\Logtalk` on Windows when the variable is not 
-	defined); must be run by each end-user in order to ensure proper 
-	permissions for the copied files; the `LOGTALKHOME` environment 
-	variable must be defined (pointing to the Logtalk installation 
+	end-user scripts for copying the Logtalk user-modifiable files and
+	directories to the location pointed by the environment variable
+	`LOGTALKUSER` (defaults to `~/logtalk` on POSIX operating-systems
+	and to `My Documents\Logtalk` on Windows when the variable is not
+	defined); must be run by each end-user in order to ensure proper
+	permissions for the copied files; the `LOGTALKHOME` environment
+	variable must be defined (pointing to the Logtalk installation
 	directory)
 - `logtalk_user_setup.bat`  
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
