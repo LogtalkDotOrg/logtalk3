@@ -39,18 +39,28 @@ how to select the back-end Prolog compiler.
 To run all the provided unit tests with e.g. SWI-Prolog as the back-end
 compiler, open a terminal and type:
 
+	$ cd $LOGTALKUSER
+	$ logtalk_tester -p swi
+	...
+
+You can also run the test sets individually:
+
 	$ cd $LOGTALKUSER/tests/logtalk
 	$ logtalk_tester -p swi
 	...
+
 	$ cd $LOGTALKUSER/tests/prolog
 	$ logtalk_tester -p swi
 	...
+
 	$ cd $LOGTALKUSER/tools
 	$ logtalk_tester -p swi
 	...
+
 	$ cd $LOGTALKUSER/examples
 	$ logtalk_tester -p swi
 	...
+
 	$ cd $LOGTALKUSER/contributions
 	$ logtalk_tester -p swi
 	...
