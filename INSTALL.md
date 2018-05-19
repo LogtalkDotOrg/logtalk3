@@ -20,8 +20,9 @@ ________________________________________________________________________
 MANUAL INSTALLATION INSTRUCTIONS
 ================================
 
-The recommended way of installing Logtalk is to use, whenever possible, one
-of the provided installers that are available from the Logtalk web site.
+The recommended way of installing Logtalk is to use, whenever possible,
+one of the provided installers that can be downloaded from the
+[Logtalk web site](https://logtalk.org).
 
 This file contains detailed instructions for  *manual* installation and
 configuration of Logtalk. You should also consult
@@ -152,8 +153,8 @@ If you're using Windows, the provided GUI installer (which supports both admin
 and non-admin users) takes care of the definition of the environment variables.
 
 
-End-user setup (copying Logtalk user-modifiable files to users home directories)
---------------------------------------------------------------------------------
+End-user setup
+--------------
 
 Skip this step if you have set both Logtalk environment variables
 (`LOGTALKHOME` and `LOGTALKUSER`) to point to the same directory.
@@ -186,17 +187,14 @@ above automatically make a backup of any existing Logtalk user folder but you
 should rely on your own backups).
 
 
-Creating new prolog top-levels for automatic loading of Logtalk
----------------------------------------------------------------
+Automatically loading Logtalk at Prolog startup
+-----------------------------------------------
 
-Most Prolog compilers allows the user to define an initialization file that
-is automatically consulted at startup. These initialization files may contain
-directives for loading other files, such as the Logtalk adapter file and the
-Logtalk compiler/runtime. The `$LOGTALKHOME/integration` sub-directory
-contains shell scripts for running Logtalk with all supported back-end Prolog
-compilers. You can use these scripts as examples when creating initialization
-files for other Prolog compilers. Be sure to read the `adapters/NOTES.md` file
-notes on the Prolog compilers that you intend to use.
+The `$LOGTALKHOME/integration` sub-directory contains shell scripts for running
+Logtalk with all supported back-end Prolog compilers. You can use these scripts
+as examples when creating initialization files for other Prolog compilers. Be
+sure to read the `adapters/NOTES.md` file notes on the Prolog compilers that
+you intend to use.
 
 
 Customizing Logtalk
