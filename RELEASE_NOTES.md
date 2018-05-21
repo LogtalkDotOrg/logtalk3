@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.17.0 - May ??, 2018
+3.17.0 - May 21, 2018
 =====================
 
 Logtalk compiler and runtime
@@ -129,8 +129,9 @@ creating an executable with just the Logtalk compiler and runtime.
 * FIXED: The `debian/copyright` file to be machine parseable. Thanks to Per
 Mildner for reporting.
 
-* FIXED: Missing `else` in the `logtalk_user_setup.sh` script that could result
-in a misleading message when the `LOGTALKHOME` is not defined.
+* FIXED: Missing `else` in the `logtalk_user_setup.sh` script that could
+result in a misleading message when the `LOGTALKHOME` environment variables
+is not defined.
 
 
 3.16.0 - April 24, 2018

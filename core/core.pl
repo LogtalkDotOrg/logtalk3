@@ -3370,7 +3370,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 17, 0, b6)).
+'$lgt_version_data'(logtalk(3, 17, 0, stable)).
 
 
 
