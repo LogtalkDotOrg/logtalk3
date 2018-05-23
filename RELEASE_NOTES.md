@@ -30,6 +30,11 @@ Logtalk compiler and runtime
 * FIXED: Enable inlining of calls in linking clauses to Prolog module
 predicates.
 
+Library
+-------
+
+* ADDED: Predicate `invoke/2` to the Java interface library.
+
 
 3.17.0 - May 21, 2018
 =====================

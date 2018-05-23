@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.01</code>
+            <code>1.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/9/22</code>
+            <code>2018/5/23</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -139,6 +139,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>invoke(@nonvar) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="invoke/2" class="code">invoke/2</h3>
+          <blockquote>
+            <p class="comment">Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>invoke(Functor,Arguments)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>invoke(@nonvar,@list) &ndash; one</code>
             </dd>
           </dl>
         </div>

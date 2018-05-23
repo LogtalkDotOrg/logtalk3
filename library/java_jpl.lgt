@@ -22,9 +22,9 @@
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2016/09/22,
+		date is 2018/05/23,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object',
@@ -57,6 +57,11 @@
 	invoke(Message) :-
 		parameter(1, Reference),
 		Message =.. [Functor| Arguments],
+		jpl_call(Reference, Functor, Arguments, Output),
+		parameter(2, Output).
+
+	invoke(Functor, Arguments) :-
+		parameter(1, Reference),
 		jpl_call(Reference, Functor, Arguments, Output),
 		parameter(2, Output).
 

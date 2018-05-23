@@ -21,9 +21,9 @@
 :- protocol(java_access_protocol).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2016/09/22,
+		date is 2018/05/23,
 		comment is 'Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.'
 	]).
 
@@ -60,6 +60,13 @@
 	:- info(invoke/1, [
 		comment is 'Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.',
 		argnames is ['Method']
+	]).
+
+	:- public(invoke/2).
+	:- mode(invoke(@nonvar, @list), one).
+	:- info(invoke/2, [
+		comment is 'Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.',
+		argnames is ['Functor', 'Arguments']
 	]).
 
 :- end_protocol.

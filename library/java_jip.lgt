@@ -22,9 +22,9 @@
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/09/22,
+		date is 2018/05/23,
 		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
 		parnames is ['Reference', 'ReturnValue']
 	]).
@@ -57,6 +57,15 @@
 	invoke(Message) :-
 		parameter(1, Reference),
 		Message =.. [Functor| Parameters],
+		functor(Message, Functor, Arity),
+		functor(Proto, Functor, Arity),
+		get_methods(Reference, Methods),
+		memberchk(Proto, Methods),
+		invoke(Reference, Proto, Parameters, Output),
+		parameter(2, Output).
+
+	invoke(Functor, Parameters) :-
+		parameter(1, Reference),
 		functor(Message, Functor, Arity),
 		functor(Proto, Functor, Arity),
 		get_methods(Reference, Methods),
