@@ -26,9 +26,9 @@
 :- object(jlist).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2016/09/19,
+		date is 2018/05/23,
 		comment is 'JList dialog example from the JPL distribution.'
 	]).
 
@@ -44,10 +44,9 @@
 		java('javax.swing.JList')::new([DefaultListModel], List),
 		java(Frame, ContentPane)::getContentPane,
 		java(ContentPane)::add(List),
-		(	current_protocol(Protocol),
-			java(DefaultListModel)::addElement(Protocol),
-			fail
-		;	true
+		forall(
+			current_protocol(Protocol),
+			java(DefaultListModel)::addElement(Protocol)
 		),
 		java(Frame)::pack,
 		java(Frame, Height)::getHeight,
