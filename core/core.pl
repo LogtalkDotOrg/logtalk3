@@ -16133,10 +16133,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_), user),
 	% source file user-defined predicate
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
-	\+ '$lgt_control_construct'(TBody),
-	\+ '$lgt_logtalk_meta_predicate'(TBody, _, _),
-	% body is not a control construct or a built-in meta-predicate
+	(	TBody = ':'(_, _) ->
+		% allow inlining of Prolog module predicate calls
+		true
+	;	\+ '$lgt_control_construct'(TBody),
+		\+ '$lgt_logtalk_meta_predicate'(TBody, _, _)
+		% body is not otherwise a control construct or a built-in meta-predicate
+	),
 	(	TBody = ':'(Module, Body) ->
+		% call to a Prolog module predicate
 		atom(Module),
 		callable(Body)
 	;	'$lgt_predicate_property'(TBody, built_in),

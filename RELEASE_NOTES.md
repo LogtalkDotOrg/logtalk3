@@ -24,6 +24,11 @@ RELEASE NOTES
 3.18.0 - June ??, 2018
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Enable inlining of calls in linking clauses to Prolog module
+predicates.
 
 
 3.17.0 - May 21, 2018
