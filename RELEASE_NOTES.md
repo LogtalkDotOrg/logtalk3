@@ -46,6 +46,9 @@ hook object when run using the JPL-based Java interface library.
 * UPDATED: The `inlining` example to illustrate inlining of linking clauses
 that call Prolog module predicates.
 
+* IMPROVED: State representation for the `salt/3` state-space in the
+`searching` example.
+
 
 3.17.0 - May 21, 2018
 =====================

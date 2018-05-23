@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/04/20,
+		date is 2018/05/23,
 		comment is 'Unit tests for the "searching" example.'
 	]).
 
@@ -73,7 +73,7 @@
 	test(searching_6) :-
 		salt(100, 500, 200)::initial_state(Initial),
 		breadth_first(6)::solve(salt(100, 500, 200), Initial, Path),
-		Path == [(0,0,0,all_empty),(0,500,0,fill(m1)),(0,300,200,transfer(m1,m2)),(0,300,0,empty(m2)),(0,100,200,transfer(m1,m2)),(100,0,200,transfer(m1,acc))].
+		Path == [s(0,0,0,all_empty),s(0,500,0,fill(m1)),s(0,300,200,transfer(m1,m2)),s(0,300,0,empty(m2)),s(0,100,200,transfer(m1,m2)),s(100,0,200,transfer(m1,acc))].
 
 	% test 7.  % generate all solutions then check this path is one of them
 	test(searching_7) :-
