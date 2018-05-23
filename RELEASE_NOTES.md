@@ -35,6 +35,9 @@ Library
 
 * ADDED: Predicate `invoke/2` to the Java interface library.
 
+* ADDED: Hook object, `java_hook`, to optimize calls to the JPL-based Java
+interface library.
+
 
 3.17.0 - May 21, 2018
 =====================

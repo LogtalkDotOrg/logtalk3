@@ -199,3 +199,26 @@
 		decode_stack_trace_elements(Elements, Strings).
 
 :- end_object.
+
+
+:- object(java_hook,
+	implements(expanding)).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2018/05/23,
+		comment is 'Hook object to optimize messages to the java/1-2 objects that otherwise would trigger the forward/1 handler.'
+	]).
+
+	goal_expansion(java(Reference,ReturnValue)::Message, java(Reference,ReturnValue)::invoke(Functor,Arguments)) :-
+		callable(Message),
+		\+ java(_,_)::predicate_property(Message, (public)),
+		Message =.. [Functor| Arguments].
+
+	goal_expansion(java(Reference)::Message, java(Reference)::invoke(Functor,Arguments)) :-
+		callable(Message),
+		\+ java(_)::predicate_property(Message, (public)),
+		Message =.. [Functor| Arguments].
+
+:- end_object.
