@@ -18,8 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(optimize, on).
-
 :- if(current_logtalk_flag(prolog_dialect, swi)).
 	:- use_module(library(statistics), []).
 :- endif.
@@ -28,9 +26,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2016/09/19,
+		date is 2018/05/23,
 		comment is 'Some benchmarks for the "jpl" example.'
 	]).
 
@@ -45,10 +43,6 @@
 		% now we can run the benchmarks
 		writeq(((jpl:jpl_new('java.util.Date', [], I1), jpl:jpl_call(I1, getYear, [], _)))), nl,
 		time((jpl:jpl_new('java.util.Date', [], I1), jpl:jpl_call(I1, getYear, [], _))),
-		writeq((java('java.util.Date')::new(I2), java(I2, Year2)::invoke(getYear))), nl,
-		time((java('java.util.Date')::new(I2), java(I2, Year2)::invoke(getYear))),
-		writeq((java('java.util.Date')::new(I3), java(I3)::invoke(getYear))), nl,
-		time((java('java.util.Date')::new(I3), java(I3)::invoke(getYear))),
 		writeq((java('java.util.Date')::new(I4), java(I4, Year3)::getYear)), nl,
 		time((java('java.util.Date')::new(I4), java(I4, Year3)::getYear)),
 		writeq((java('java.util.Date')::new(I5), java(I5)::getYear)), nl,

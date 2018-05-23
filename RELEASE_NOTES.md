@@ -38,6 +38,12 @@ Library
 * ADDED: Hook object, `java_hook`, to optimize calls to the JPL-based Java
 interface library.
 
+Examples
+--------
+
+* UPDATED: The `java` example to take advantage of the library `java_hook`
+hook object when run using the JPL-based Java interface library.
+
 
 3.17.0 - May 21, 2018
 =====================

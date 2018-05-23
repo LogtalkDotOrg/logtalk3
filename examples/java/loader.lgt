@@ -24,8 +24,8 @@
 
 		:- initialization((
 			logtalk_load(library(java_loader)),
-			logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on)]),
-			logtalk_load(benchmarks, [optimize(on)])
+			logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on), hook(java_hook)]),
+			logtalk_load(benchmarks, [optimize(on), hook(java_hook)])
 		)).
 
 	:- else.
