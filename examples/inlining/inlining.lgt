@@ -70,6 +70,8 @@ a(3, c, 'C').
 	a(N, C) :-
 		a(N, C, _).
 
+	% yet another common case is linking clauses that call Prolog module predicates
+
 	:- if(current_logtalk_flag(modules, supported)).
 
 		:- if(current_module(lists)).

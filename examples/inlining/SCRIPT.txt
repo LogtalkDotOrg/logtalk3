@@ -25,9 +25,9 @@ ________________________________________________________________________
 
 % check that the between/3 predicate is inlined:
 
-| ?- inlining::predicate_property(between(_,_,_), inline).
+| ?- inlining::predicate_property(a(_,_), inline).
 yes
 
-| ?- object_property(inlining, defines(between/3, Properties)).
+| ?- object_property(inlining, defines(a/2, Properties)).
 Properties = [..., inline, ...]
 yes
