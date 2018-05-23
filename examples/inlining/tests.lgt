@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/10/23,
+		date is 2018/05/23,
 		comment is 'Unit tests for the "inlining" example.'
 	]).
 
@@ -86,5 +86,22 @@
 		object_property(inlining, defines(a/2, Properties)),
 		ground(Properties),
 		memberchk(inline, Properties).
+
+	:- if(current_logtalk_flag(modules, supported)).
+
+		:- if(current_module(lists)).
+
+			test(inlining_10) :-
+				findall(X, inlining::member(X, [1,2,3]), L),
+				L == [1,2,3].
+
+			test(inlining_11) :-
+				object_property(inlining, defines(member/2, Properties)),
+				ground(Properties),
+				memberchk(inline, Properties).
+
+		:- endif.
+
+	:- endif.
 
 :- end_object.

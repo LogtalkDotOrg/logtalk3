@@ -27,8 +27,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Enable inlining of calls in linking clauses to Prolog module
-predicates.
+* FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
 Library
 -------
@@ -43,6 +42,9 @@ Examples
 
 * UPDATED: The `java` example to take advantage of the library `java_hook`
 hook object when run using the JPL-based Java interface library.
+
+* UPDATED: The `inlining` example to illustrate inlining of linking clauses
+that call Prolog module predicates.
 
 
 3.17.0 - May 21, 2018

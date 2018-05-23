@@ -27,14 +27,14 @@ a(3, c, 'C').
 :- object(inlining).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2016/10/23,
+		date is 2018/05/23,
 		comment is 'Simple object for illustrating and testing inlining of predicate definitions.'
 	]).
 
 	:- public([
-		integer/1, map/2, a/2
+		integer/1, map/2, a/2, member/2
 	]).
 
 	:- uses(user, [
@@ -69,5 +69,18 @@ a(3, c, 'C').
 	
 	a(N, C) :-
 		a(N, C, _).
+
+	:- if(current_logtalk_flag(modules, supported)).
+
+		:- if(current_module(lists)).
+
+			member(X, L) :-
+				% use canonical syntax to avoid compilation errors when using
+				% a backend Prolog compiler that does not support modules
+				':'(lists, member(X, L)).
+
+		:- endif.
+
+	:- endif.
 
 :- end_object.
