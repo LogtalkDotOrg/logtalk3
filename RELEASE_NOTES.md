@@ -35,6 +35,12 @@ only declared in some of the supported backend Prolog compilers.
 
 * FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
+Documentation
+-------------
+
+* ADDED: Explain the caveats of setting a Prolog module or `user` as a hook
+object in the user manual.
+
 Library
 -------
 
