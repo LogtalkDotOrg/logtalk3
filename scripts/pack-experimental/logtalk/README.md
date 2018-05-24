@@ -29,10 +29,10 @@ Prolog module standard and the differences between modules systems (e.g.
 in operator and meta-predicate handling) can cause portability issues and
 different behavior in corner cases.
 
-The pack version of Logtalk is mainly targeted for the *deployment*
-of applications. For *development*, using the installers available
-from the Logtalk website are advisable as they provide a better user
-experience.
+The pack version of Logtalk is mainly targeted for specific application
+*deployment* scenarios. For *development*, using one of the installers
+available from the Logtalk website is strongly advised for a much better
+user experience.
 
 Installing this pack simplifies loading Logtalk on-demand by simply
 using the directive (or the corresponding query):
