@@ -27,6 +27,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `user` object now also implements the `expanding` protocol by
+defining `term_expansion/2` and `goal_expansion/2` as multifile and dynamic
+predicates. This change avoids predicate existence errors when compiling
+source files with the `hook` flag to `user` as the expansion predicates are
+only declared in some of the supported backend Prolog compilers.
+
 * FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
 Library

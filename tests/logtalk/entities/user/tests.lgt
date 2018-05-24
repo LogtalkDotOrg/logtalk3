@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/05/08,
+		date is 2018/05/24,
 		comment is 'Unit tests for the "user" built-in object.'
 	]).
 
@@ -64,5 +64,11 @@
 	test(user_09) :-
 		set_logtalk_flag(events, deny),
 		\+ object_property(user, events).
+
+	% implemented protocols
+
+	test(user_10) :-
+		setof(Protocol-Scope, implements_protocol(user, Protocol, Scope), List),
+		List == [expanding-(public), forwarding-(public)].
 
 :- end_object.

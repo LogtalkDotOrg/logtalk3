@@ -19,12 +19,12 @@
 
 
 :- object(user,
-	implements(forwarding)).
+	implements((expanding, forwarding))).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/04/04,
+		date is 2018/05/24,
 		comment is 'Pseudo-object "user" representing the plain Prolog database.'
 	]).
 
@@ -43,5 +43,16 @@
 	% this translation
 	forward(Message) :-
 		{call(Message)}.
+
+	% ensure that setting the "hook" flag to "user" will not result in
+	% predicate existence errors during compilation of source files as
+	% the expansion predicates are only declared in some of the supported
+	% backend Prolog compilers
+
+	:- multifile(user::term_expansion/2).
+	:- dynamic(user::term_expansion/2).
+
+	:- multifile(user::goal_expansion/2).
+	:- dynamic(user::goal_expansion/2).
 
 :- end_object.
