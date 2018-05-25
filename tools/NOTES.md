@@ -24,6 +24,7 @@ The following developer tools are available, each one with its own
 `loader.lgt` loader file (except make which is a built-in tool) and
 `NOTES.md` documentation files:
 
+- asdf
 - assertions
 - code_metrics
 - dead_code_scanner

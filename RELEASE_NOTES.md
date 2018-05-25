@@ -49,6 +49,12 @@ Library
 * ADDED: Hook object, `java_hook`, to optimize calls to the JPL-based Java
 interface library.
 
+Tools
+-----
+
+* ADDED: Description and link to the Logtalk plugin for the `asdf` extendable
+version manager.
+
 Examples
 --------
 
