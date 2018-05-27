@@ -1287,7 +1287,8 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	% internal functors are different for each case
 	'$lgt_compile_object_relations'(Relations, Obj, Ctx),
 	'$lgt_compile_object_identifier'(Obj, Ctx),
-	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
+	assertz('$lgt_pp_dynamic_'),
+	'$lgt_compile_logtalk_directives'(Directives, Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
 	'$lgt_generate_def_table_clauses'(Ctx),
@@ -1341,7 +1342,8 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1)),
 	'$lgt_compile_category_identifier'(Ctg, Ctx),
 	'$lgt_compile_category_relations'(Relations, Ctg, Ctx),
-	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
+	assertz('$lgt_pp_dynamic_'),
+	'$lgt_compile_logtalk_directives'(Directives, Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
 	'$lgt_generate_def_table_clauses'(Ctx),
@@ -1400,7 +1402,8 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1)),
 	'$lgt_compile_protocol_identifier'(Ptc, Ctx),
 	'$lgt_compile_protocol_relations'(Relations, Ptc, Ctx),
-	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
+	assertz('$lgt_pp_dynamic_'),
+	'$lgt_compile_logtalk_directives'(Directives, Ctx),
 	'$lgt_generate_protocol_clauses',
 	'$lgt_generate_protocol_directives',
 	'$lgt_assert_dynamic_entity'(protocol),
