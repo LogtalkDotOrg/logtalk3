@@ -76,7 +76,7 @@ yes
 yes
 
 
-% the template of the quick_check/1-3 predicates can also use the the
+% the template of the quick_check/1-3 predicates can also use the
 % ::/2 and <</2 control constructs:
 
 | ?- lgtunit::quick_check(list::length(+list, -integer)).

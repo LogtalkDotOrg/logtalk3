@@ -80,7 +80,7 @@ that call Prolog module predicates.
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Calls from the `user` pseudo-object now use the the default value
+* CHANGED: Calls from the `user` pseudo-object now use the default value
 of the `events` flag instead of a fixed `allow` value. This change provides
 more intuitive semantics whew playing with event-aware applications at the
 top-level interpreter and also avoids the small event-handling overhead for
@@ -8578,7 +8578,7 @@ This may happen e.g. when a parametric category is used to hold definitions
 for multifile predicates.
 
 * IMPROVED: When the `report` flag value is set to `warnings`, only suppress
-`information/1` messages whose argument is not the the atom `requested`.
+`information/1` messages whose argument is not the atom `requested`.
 
 * NEW: Accept `phrase//1` as a built-in non-terminal in the body of grammar
 rules. From Richard O'Keefe feedback on the SWI-Prolog mailing list.
@@ -14312,7 +14312,7 @@ Updated the Logtalk shell installation script to create the $prefix/bin
 directory if it does not exist.
 
 The lgt2pdf.sh and lgt2html.sh shell scripts now use "rm -f" when removing 
-the DTD and XSD files in order to avoid prompting the the user about the file 
+the DTD and XSD files in order to avoid prompting the user about the file 
 permissions.
 
 Updated the cplgtdirs.sh shell script to make all copied files user writable.

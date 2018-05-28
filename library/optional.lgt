@@ -88,7 +88,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/12/04,
+		date is 2018/05/28,
 		comment is 'Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
@@ -134,7 +134,7 @@
 	:- meta_predicate(map(2, *)).
 	:- mode(map(+callable, --nonvar), one).
 	:- info(map/2, [
-		comment is 'When the the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.',
+		comment is 'When the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.',
 		argnames is ['Closure', 'NewReference']
 	]).
 
@@ -142,7 +142,7 @@
 	:- meta_predicate(flat_map(2, *)).
 	:- mode(flat_map(+callable, --nonvar), one).
 	:- info(flat_map/2, [
-		comment is 'When the the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.',
+		comment is 'When the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.',
 		argnames is ['Closure', 'NewReference']
 	]).
 

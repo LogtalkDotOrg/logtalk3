@@ -87,7 +87,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2017/12/27,
+		date is 2018/05/28,
 		comment is 'Expected term reference predicates. Requires passing an expected reference constructed using the "expected" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [expected]
@@ -141,7 +141,7 @@
 	:- meta_predicate(map(2, *)).
 	:- mode(map(+callable, --nonvar), one).
 	:- info(map/2, [
-		comment is 'When the the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.',
+		comment is 'When the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.',
 		argnames is ['Closure', 'NewReference']
 	]).
 
@@ -149,7 +149,7 @@
 	:- meta_predicate(flat_map(2, *)).
 	:- mode(flat_map(+callable, --nonvar), one).
 	:- info(flat_map/2, [
-		comment is 'When the the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.',
+		comment is 'When the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.',
 		argnames is ['Closure', 'NewReference']
 	]).
 
