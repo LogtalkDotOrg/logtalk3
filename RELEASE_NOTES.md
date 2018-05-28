@@ -33,6 +33,9 @@ predicates. This change avoids predicate existence errors when compiling
 source files with the `hook` flag to `user` as the expansion predicates are
 only declared in some of the supported backend Prolog compilers.
 
+* IMPROVED: Small entity compilation and dynamic entity creation performance
+improvement (from ~2% to ~9%).
+
 * FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
 Prolog adapter and integration files

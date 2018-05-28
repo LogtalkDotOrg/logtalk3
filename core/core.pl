@@ -1298,7 +1298,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_assert_dynamic_entity'(object),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_cc_clauses',
-	'$lgt_clean_pp_entity_clauses',
+	'$lgt_clean_pp_object_clauses',
 	'$lgt_clean_pp_runtime_clauses'.
 
 
@@ -1353,7 +1353,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_assert_dynamic_entity'(category),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_cc_clauses',
-	'$lgt_clean_pp_entity_clauses',
+	'$lgt_clean_pp_category_clauses',
 	'$lgt_clean_pp_runtime_clauses',
 	% complementing categories can invalidate dynamic binding cache entries
 	(	'$lgt_member'(Relation, Relations),
@@ -1409,7 +1409,7 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_assert_dynamic_entity'(protocol),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_cc_clauses',
-	'$lgt_clean_pp_entity_clauses',
+	'$lgt_clean_pp_protocol_clauses',
 	'$lgt_clean_pp_runtime_clauses'.
 
 
@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 18, 0, b2)).
+'$lgt_version_data'(logtalk(3, 18, 0, b3)).
 
 
 
@@ -7330,7 +7330,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_add_entity_source_data'(Type, Entity),
 	'$lgt_save_entity_runtime_clause'(Type),
 	'$lgt_restore_file_operator_table',
-	'$lgt_clean_pp_entity_clauses'.
+	'$lgt_clean_pp_entity_clauses'(Type).
 
 
 '$lgt_second_stage_error_handler'(Error) :-
@@ -7496,57 +7496,56 @@ create_logtalk_flag(Flag, Value, Options) :-
 % cleans up all dynamic predicates used during entity compilation
 
 '$lgt_clean_pp_entity_clauses' :-
-	retractall('$lgt_pp_entity_compiler_flag_'(_, _)),
+	'$lgt_clean_pp_object_clauses',
+	'$lgt_clean_pp_protocol_clauses',
+	'$lgt_clean_pp_category_clauses'.
+
+'$lgt_clean_pp_entity_clauses'(object) :-
+	'$lgt_clean_pp_object_clauses'.
+
+'$lgt_clean_pp_entity_clauses'(protocol) :-
+	'$lgt_clean_pp_protocol_clauses'.
+
+'$lgt_clean_pp_entity_clauses'(category) :-
+	'$lgt_clean_pp_category_clauses'.
+
+'$lgt_clean_pp_object_clauses' :-
 	retractall('$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _)),
-	retractall('$lgt_pp_protocol_'(_, _, _, _, _)),
-	retractall('$lgt_pp_category_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_entity_'(_, _, _, _, _)),
 	retractall('$lgt_pp_module_'(_)),
-	retractall('$lgt_pp_parameter_variables_'(_)),
-	retractall('$lgt_pp_complemented_object_'(_, _, _, _, _)),
-	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
+	retractall('$lgt_pp_object_initialization_'(_, _, _)),
+	retractall('$lgt_pp_final_object_initialization_'(_, _)),
 	retractall('$lgt_pp_imported_category_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _)),
+	retractall('$lgt_pp_threaded_'),
+	'$lgt_clean_pp_common_object_category_clauses',
+	'$lgt_clean_pp_common_entity_clauses'.
+
+'$lgt_clean_pp_protocol_clauses' :-
+	retractall('$lgt_pp_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_extended_protocol_'(_, _, _, _, _)),
+	'$lgt_clean_pp_common_entity_clauses'.
+
+'$lgt_clean_pp_category_clauses' :-
+	retractall('$lgt_pp_category_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_complemented_object_'(_, _, _, _, _)),
 	retractall('$lgt_pp_extended_category_'(_, _, _, _, _, _)),
+	'$lgt_clean_pp_common_object_category_clauses',
+	'$lgt_clean_pp_common_entity_clauses'.
+
+'$lgt_clean_pp_common_object_category_clauses' :-
+	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
+	retractall('$lgt_pp_parameter_variables_'(_)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_use_module_non_terminal_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_entity_info_'(_)),
-	retractall('$lgt_pp_predicate_info_'(_, _)),
-	retractall('$lgt_pp_directive_'(_)),
-	retractall('$lgt_pp_synchronized_'(_, _)),
-	retractall('$lgt_pp_predicate_mutex_counter_'(_)),
-	retractall('$lgt_pp_public_'(_, _)),
-	retractall('$lgt_pp_protected_'(_, _)),
-	retractall('$lgt_pp_private_'(_, _)),
-	retractall('$lgt_pp_dynamic_'(_)),
-	retractall('$lgt_pp_discontiguous_'(_)),
-	retractall('$lgt_pp_multifile_'(_, _, _)),
-	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
-	retractall('$lgt_pp_mode_'(_, _, _, _)),
-	retractall('$lgt_pp_meta_predicate_'(_, _)),
-	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_non_terminal_'(_, _, _)),
-	retractall('$lgt_pp_object_initialization_'(_, _, _)),
-	retractall('$lgt_pp_final_object_initialization_'(_, _)),
-	retractall('$lgt_pp_entity_meta_directive_'(_, _, _)),
-	retractall('$lgt_pp_dcl_'(_)),
 	retractall('$lgt_pp_def_'(_)),
 	retractall('$lgt_pp_ddef_'(_)),
 	retractall('$lgt_pp_super_'(_)),
-	% clean any plain Prolog terms appearing before an entity definition
-	retractall('$lgt_pp_prolog_term_'(_, _, _)),
-	retractall('$lgt_pp_entity_term_'(_, _, _)),
-	retractall('$lgt_pp_final_entity_term_'(_, _)),
-	retractall('$lgt_pp_entity_aux_clause_'(_)),
-	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
 	retractall('$lgt_pp_number_of_clauses_rules_'(_, _, _, _)),
 	retractall('$lgt_pp_number_of_clauses_rules_'(_, _, _, _, _)),
-	retractall('$lgt_pp_predicate_declaration_location_'(_, _, _, _)),
 	retractall('$lgt_pp_predicate_definition_location_'(_, _, _, _)),
 	retractall('$lgt_pp_predicate_definition_location_'(_, _, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
@@ -7565,14 +7564,42 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_referenced_object_'(_, _, _)),
-	retractall('$lgt_pp_referenced_protocol_'(_, _, _)),
 	retractall('$lgt_pp_referenced_category_'(_, _, _)),
 	retractall('$lgt_pp_referenced_module_'(_, _, _)),
 	retractall('$lgt_pp_referenced_object_message_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_referenced_module_predicate_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_referenced_module_predicate_'(_, _, _, _, _, _)).
+
+'$lgt_clean_pp_common_entity_clauses' :-
+	retractall('$lgt_pp_entity_compiler_flag_'(_, _)),
+	retractall('$lgt_pp_entity_'(_, _, _, _, _)),
+	retractall('$lgt_pp_entity_info_'(_)),
+	retractall('$lgt_pp_predicate_info_'(_, _)),
+	retractall('$lgt_pp_directive_'(_)),
+	retractall('$lgt_pp_synchronized_'(_, _)),
+	retractall('$lgt_pp_predicate_mutex_counter_'(_)),
+	retractall('$lgt_pp_public_'(_, _)),
+	retractall('$lgt_pp_protected_'(_, _)),
+	retractall('$lgt_pp_private_'(_, _)),
+	retractall('$lgt_pp_dynamic_'(_)),
+	retractall('$lgt_pp_discontiguous_'(_)),
+	retractall('$lgt_pp_multifile_'(_, _, _)),
+	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
+	retractall('$lgt_pp_mode_'(_, _, _, _)),
+	retractall('$lgt_pp_meta_predicate_'(_, _)),
+	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_non_terminal_'(_, _, _)),
+	retractall('$lgt_pp_entity_meta_directive_'(_, _, _)),
+	retractall('$lgt_pp_dcl_'(_)),
+	% clean any plain Prolog terms appearing before an entity definition
+	retractall('$lgt_pp_prolog_term_'(_, _, _)),
+	retractall('$lgt_pp_entity_term_'(_, _, _)),
+	retractall('$lgt_pp_final_entity_term_'(_, _)),
+	retractall('$lgt_pp_entity_aux_clause_'(_)),
+	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
+	retractall('$lgt_pp_predicate_declaration_location_'(_, _, _, _)),
+	retractall('$lgt_pp_referenced_protocol_'(_, _, _)),
 	retractall('$lgt_pp_built_in_'),
 	retractall('$lgt_pp_dynamic_'),
-	retractall('$lgt_pp_threaded_'),
 	retractall('$lgt_pp_aux_predicate_counter_'(_)).
 
 
