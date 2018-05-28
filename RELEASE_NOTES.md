@@ -35,6 +35,12 @@ only declared in some of the supported backend Prolog compilers.
 
 * FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: SWI-Prolog integration to avoid the `listing/0` predicate listing
+Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
+
 Documentation
 -------------
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on June 21, 2017
+%  Last updated on May 28, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -79,5 +79,84 @@
 	:- index('$lgt_ctg_super_call_'(1, 1, 0)).
 	:- index('$lgt_db_lookup_cache_'(1, 1, 0, 0, 0)).
 :- endif.
+
+:- lock_predicate('::'/2).
+:- lock_predicate('<<'/2).
+:- lock_predicate('{}'/1).
+
+:- lock_predicate(current_category/1).
+:- lock_predicate(current_object/1).
+:- lock_predicate(current_protocol/1).
+
+:- lock_predicate(category_property/2).
+:- lock_predicate(object_property/2).
+:- lock_predicate(protocol_property/2).
+
+:- lock_predicate(create_category/4).
+:- lock_predicate(create_object/4).
+:- lock_predicate(create_protocol/3).
+
+:- lock_predicate(abolish_object/1).
+:- lock_predicate(abolish_protocol/1).
+:- lock_predicate(abolish_category/1).
+
+:- lock_predicate(extends_object/2).
+:- lock_predicate(extends_object/3).
+:- lock_predicate(extends_protocol/2).
+:- lock_predicate(extends_protocol/3).
+:- lock_predicate(extends_category/2).
+:- lock_predicate(extends_category/3).
+:- lock_predicate(implements_protocol/2).
+:- lock_predicate(implements_protocol/3).
+:- lock_predicate(conforms_to_protocol/2).
+:- lock_predicate(conforms_to_protocol/3).
+:- lock_predicate(complements_object/2).
+:- lock_predicate(imports_category/2).
+:- lock_predicate(imports_category/3).
+:- lock_predicate(instantiates_class/2).
+:- lock_predicate(instantiates_class/3).
+:- lock_predicate(specializes_class/2).
+:- lock_predicate(specializes_class/3).
+
+:- lock_predicate(abolish_events/5).
+:- lock_predicate(current_event/5).
+:- lock_predicate(define_events/5).
+
+:- lock_predicate(threaded/1).
+:- lock_predicate(threaded_call/1).
+:- lock_predicate(threaded_call/2).
+:- lock_predicate(threaded_once/1).
+:- lock_predicate(threaded_once/2).
+:- lock_predicate(threaded_ignore/1).
+:- lock_predicate(threaded_exit/1).
+:- lock_predicate(threaded_exit/2).
+:- lock_predicate(threaded_peek/1).
+:- lock_predicate(threaded_peek/2).
+:- lock_predicate(threaded_wait/1).
+:- lock_predicate(threaded_notify/1).
+
+:- lock_predicate(threaded_engine_create/3).
+:- lock_predicate(threaded_engine_destroy/1).
+:- lock_predicate(threaded_engine/1).
+:- lock_predicate(threaded_engine_self/1).
+:- lock_predicate(threaded_engine_next/2).
+:- lock_predicate(threaded_engine_next_reified/2).
+:- lock_predicate(threaded_engine_yield/1).
+:- lock_predicate(threaded_engine_post/2).
+:- lock_predicate(threaded_engine_fetch/1).
+
+:- lock_predicate(logtalk_compile/1).
+:- lock_predicate(logtalk_compile/2).
+:- lock_predicate(logtalk_load/1).
+:- lock_predicate(logtalk_load/2).
+:- lock_predicate(logtalk_make/0).
+:- lock_predicate(logtalk_make/1).
+:- lock_predicate(logtalk_make_target_action/1).
+:- lock_predicate(logtalk_library_path/2).
+:- lock_predicate(logtalk_load_context/2).
+
+:- lock_predicate(current_logtalk_flag/2).
+:- lock_predicate(set_logtalk_flag/2).
+:- lock_predicate(create_logtalk_flag/3).
 
 :- include('../core/core.pl').
