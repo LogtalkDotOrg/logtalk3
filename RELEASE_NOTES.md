@@ -31,10 +31,11 @@ Logtalk compiler and runtime
 defining `term_expansion/2` and `goal_expansion/2` as multifile and dynamic
 predicates. This change avoids predicate existence errors when compiling
 source files with the `hook` flag to `user` as the expansion predicates are
-only declared in some of the supported backend Prolog compilers.
+only natively declared in some of the supported backend Prolog compilers.
 
-* IMPROVED: Small entity compilation and dynamic entity creation performance
-improvement (from ~2% to ~9%).
+* IMPROVED: Entity compilation and dynamic entity creation performance
+improvement (up to ~2% for objects, ~5% for categories, and ~18% for
+protocols).
 
 * FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
@@ -43,6 +44,8 @@ Prolog adapter and integration files
 
 * IMPROVED: SWI-Prolog integration to avoid the `listing/0` predicate listing
 Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
+
+* FIXED: Two harmless warnings when using SWI-Prolog `make/0` predicate.
 
 Documentation
 -------------
@@ -10393,7 +10396,7 @@ Include a XHTML version of the library documentation on the directory
 Improved the "examples/tester.sh" script in order to support running the
 example unit tests compiled in debug mode.
 
-Added a a simple maze search problem using a depth-first strategy with
+Added a simple maze search problem using a depth-first strategy with
 loop detection to the "benchmarks" example.
 
 Corrected a wrong declaration for the predicate environment_variable/2

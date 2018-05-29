@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 6, 2018
+%  Last updated on May 29, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -678,7 +678,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_category_property'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_send_to_obj_nv_inner'(*,*,*,*).
 :- meta_predicate '$lgt_object_property_declares'(*,*,*,*,*,*).
-:- meta_predicate '$lgt_object_property_defines'(*,*,*,*,*).
+:- meta_predicate '$lgt_object_property_defines'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_find_original_predicate'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_find_original_predicate'(*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_entity_property_alias'(*,*,*,*,*).
@@ -694,7 +694,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate '$lgt_protocol_property_declares'(*,*,*,*).
 :- meta_predicate '$lgt_guarded_method_call'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_and'(*,*,*).
-:- meta_predicate '$lgt_category_property_defines'(*,*,*,*).
+:- meta_predicate '$lgt_category_property_defines'(*,*,*,*,*).
 :- meta_predicate '$lgt_protocol_property'(*,*,*,*,*).
 :- meta_predicate '$lgt_mt_det_goal'(*,*,*,*,*,*).
 :- meta_predicate '$lgt_abolish_entity_predicates'(*).
