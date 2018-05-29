@@ -6755,10 +6755,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % runtime resolved ::/2 calls
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(user)),
-	% compiling a reference in a source file
-	!,
-	(	'$lgt_pp_referenced_object_'(Obj, _, _) ->
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	(	Mode == runtime ->
+		true
+	;	Mode == compile(aux) ->
+		true
+	;	% compiling a reference in a source file
+		'$lgt_pp_referenced_object_'(Obj, _, _) ->
 		% not the first reference to this object
 		true
 	;	atom(Obj) ->
@@ -6770,8 +6773,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		assertz('$lgt_pp_referenced_object_'(Template, File, Lines))
 	).
 
-'$lgt_add_referenced_object'(_, _).
-
 
 
 % '$lgt_add_referenced_protocol'(@protocol_identifier, @compilation_context)
@@ -6780,15 +6781,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc, Ctx) :-
-	(	'$lgt_pp_referenced_protocol_'(Ptc, _, _) ->
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	(	Mode == runtime ->
+		true
+	;	Mode == compile(aux) ->
+		true
+	;	% compiling a reference in a source file
+		'$lgt_pp_referenced_protocol_'(Ptc, _, _) ->
 		% not the first reference to this protocol
 		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
-		% compiling a reference in a source file
-		'$lgt_source_file_context'(File, Lines),
+	;	'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, File, Lines))
-	;	% not a source file reference
-		true
 	).
 
 
@@ -6799,21 +6802,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg, Ctx) :-
-	(	'$lgt_pp_referenced_category_'(Ctg, _, _) ->
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	(	Mode == runtime ->
+		true
+	;	Mode == compile(aux) ->
+		true
+	;	% compiling a reference in a source file
+		'$lgt_pp_referenced_category_'(Ctg, _, _) ->
 		% not the first reference to this category
 		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
-		% compiling a reference in a source file
-		(	atom(Ctg) ->
-			'$lgt_source_file_context'(File, Lines),
-			assertz('$lgt_pp_referenced_category_'(Ctg, File, Lines))
-		;	% parametric category
-			'$lgt_term_template'(Ctg, Template),
-			'$lgt_source_file_context'(File, Lines),
-			assertz('$lgt_pp_referenced_category_'(Template, File, Lines))
-		)
-	;	% not a source file reference
-		true
+	;	atom(Ctg) ->
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_referenced_category_'(Ctg, File, Lines))
+	;	% parametric category
+		'$lgt_term_template'(Ctg, Template),
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_referenced_category_'(Template, File, Lines))
 	).
 
 
@@ -6824,18 +6828,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
-	(	var(Module) ->
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	(	Mode == runtime ->
+		true
+	;	Mode == compile(aux) ->
+		true
+	;	% compiling a reference in a source file
+		var(Module) ->
 		% module instantiated only at runtime
 		true
 	;	'$lgt_pp_referenced_module_'(Module, _, _) ->
 		% not the first reference to this module
 		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
-		% compiling a reference in a source file
-		'$lgt_source_file_context'(File, Lines),
+	;	'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_referenced_module_'(Module, File, Lines))
-	;	% not a source file reference
-		true
 	).
 
 
@@ -16759,7 +16765,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Pred, Functor, Arity),
 	(	'$lgt_pp_meta_predicate_'(Pred, Template) ->
 		Meta = Template,
-		MetaPredicate = 64
+		MetaPredicate = 64				% 0b01000000
 	;	Meta = no,
 		MetaPredicate = 0
 	),
@@ -16779,8 +16785,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Synchronized = 4				% 0b00000100
 	;	Synchronized = 0
 	),
-	(	('$lgt_pp_dynamic_'; '$lgt_pp_dynamic_'(Pred)) ->
+	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2						% 0b00000010
+	;	'$lgt_pp_dynamic_'(Pred) ->
+		Dynamic = 2						% 0b00000010	
 	;	Dynamic = 0
 	),
 	Flags is MetaPredicate + Coinductive + Multifile + NonTerminal + Synchronized + Dynamic,
