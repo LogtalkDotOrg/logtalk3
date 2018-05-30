@@ -1,0 +1,67 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>  
+Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(edcgs(loader)).
+...
+
+
+% construct a [1,2,...,N] list:
+
+| ?- list_constructors::flist(7, [], L).
+L = [1, 2, 3, 4, 5, 6, 7]
+yes
+
+% construct a [N,...,2,1] list:
+
+| ?- list_constructors::rlist(7, L, []).
+L = [7, 6, 5, 4, 3, 2, 1]
+yes
+
+
+% sum the natural numbers 1..4:
+
+| ?- list_sums::sum_first_n(4, 0, Sum),
+Sum = 10
+yes
+
+% sum the elements of a list:
+
+| ?- list_sums::sum([2,2,3], Sum).
+Sum = 7
+yes
+
+
+% return the set of elements present in a list:
+
+| ?- unique::unique([a], Unique).
+Unique = [a]
+yes
+
+| ?- unique::unique([a,b,a], Unique).
+Unique = [a,b]
+yes
+
+
+% compute the length of a list:
+
+| ?- synopsis::len([a,b,a], Len).
+Len = 3
+yes

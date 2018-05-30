@@ -56,6 +56,8 @@ object in the user manual.
 Library
 -------
 
+* ADDED: Port of Peter Van Roy EDCGs implementation.
+
 * ADDED: Predicate `invoke/2` to the Java interface library.
 
 * ADDED: Hook object, `java_hook`, to optimize calls to the JPL-based Java
@@ -72,6 +74,9 @@ entities declared as covered but without any tests for their predicates.
 
 Examples
 --------
+
+* ADDED: Example `edcgs` with a port of Peter Van Roy and Michael Hendricks
+EDCGs examples.
 
 * UPDATED: The `java` example to take advantage of the library `java_hook`
 hook object when run using the JPL-based Java interface library.

@@ -18,33 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([
-		types_loader,
-		arbitrary_loader,
-		os_loader,
-		dates_loader,
-		events_loader,
-		dependents_loader,
-		hierarchies_loader,
-		metapredicates_loader,
-		random_loader,
-		statistics_loader,
-		intervals_loader,
-		logging_loader,
-		meta_compiler_loader,
-		assignvars_loader,
-		hook_flows_loader,
-		java_loader,
-		redis_loader,
-		optional_loader,
-		expected_loader,
-		expand_library_alias_paths_loader,
-		edcg_loader,
-		gensym,
-		counters,
-		streamvars
-	], [
-		optimize(on)
-	])
-).
+:- initialization((
+	logtalk_load(library(edcg_loader)),
+	logtalk_load(library(types_loader)),
+	logtalk_load([gemini, list_constructors, list_sums, synopsis, unique], [hook(edcg)])
+)).
