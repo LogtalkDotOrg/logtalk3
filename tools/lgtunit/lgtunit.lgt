@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.11,
+		version is 6.12,
 		author is 'Paulo Moura',
-		date is 2018/04/08,
+		date is 2018/05/30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1855,7 +1855,7 @@
 		fail.
 	% print entity summary coverage statistics
 	write_entity_coverage_information(Entity) :-
-		covered(Entity, Covered, Total),
+		covered_entity(Entity, Covered, Total),
 		(	Covered =:= 0, Total =:= 0 ->
 			% entity with no clauses
 			Percentage is 100.0
@@ -1913,7 +1913,7 @@
 			PercentageEntities is 0.0
 		;	PercentageEntities is float(CoveredEntities * 100 / TotalEntities)
 		),
-		covered(CoveredClauses, TotalClauses),
+		covered_entities(DeclaredEntities, CoveredClauses, TotalClauses),
 		(	TotalClauses =:= 0 ->
 			PercentageClauses is 0.0
 		;	PercentageClauses is float(CoveredClauses * 100 / TotalClauses)
@@ -1922,21 +1922,27 @@
 		print_message(information, lgtunit, covered_entities_numbers(CoveredEntities, TotalEntities, PercentageEntities)),
 		print_message(information, lgtunit, covered_clause_numbers(CoveredClauses, TotalClauses, PercentageClauses)).
 
-	covered(Entity, Coverage, Clauses) :-
+	covered_entity(Entity, Coverage, Clauses) :-
 		\+ \+ covered_(Entity, _, _, _),
 		!,
 		findall(Covered-Total, covered_(Entity, _, Covered, Total), List),
 		sum_coverage(List, Coverage, Clauses).
-	covered(Entity, 0, 0) :-
+	covered_entity(Entity, 0, Clauses) :-
 		(	current_object(Entity) ->
-			object_property(Entity, number_of_user_clauses(0))
+			object_property(Entity, number_of_user_clauses(Clauses))
 		;	current_category(Entity) ->
-			category_property(Entity, number_of_user_clauses(0))
+			category_property(Entity, number_of_user_clauses(Clauses))
 		;	fail
 		).
 
-	covered(Coverage, Clauses) :-
-		findall(Covered-Total, covered_(_, _, Covered, Total), List),
+	covered_entities(Entities, Coverage, Clauses) :-
+		findall(
+			Covered-Total,
+			(	member(Entity, Entities),
+				covered_entity(Entity, Covered, Total)
+			),
+			List
+		),
 		sum_coverage(List, Coverage, Clauses).
 
 	sum_coverage(List, Coverage, Clauses) :-
