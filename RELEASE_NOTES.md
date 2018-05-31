@@ -27,7 +27,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: The `user` object now also implements the `expanding` protocol by
+* UPDATED: The `user` object now also implements the `expanding` protocol by
 defining `term_expansion/2` and `goal_expansion/2` as multifile and dynamic
 predicates. This change avoids predicate existence errors when compiling
 source files with the `hook` flag to `user` as the expansion predicates are
@@ -61,7 +61,7 @@ Library
 * ADDED: Predicate `invoke/2` to the Java interface library.
 
 * ADDED: Hook object, `java_hook`, to optimize calls to the JPL-based Java
-interface library.
+interface library (ensuring zero overhead compared with direct use of JPL).
 
 Tools
 -----
@@ -76,7 +76,7 @@ Examples
 --------
 
 * ADDED: Example `edcgs` with a port of Peter Van Roy and Michael Hendricks
-EDCGs examples.
+EDCGs examples and tests.
 
 * UPDATED: The `java` example to take advantage of the library `java_hook`
 hook object when run using the JPL-based Java interface library.
