@@ -49,9 +49,9 @@ guidelines described at:
 
 https://github.com/LogtalkDotOrg/logtalk3/wiki/Coding-Style-Guidelines
 
-Submit your code contribution preferably by forking Logtalk, working on a topic
-branch, and creating a pull request. If you're not familiar with pull request
-based contributions to open source projects, see e.g.
+Submit your code contribution by forking Logtalk, working on a topic branch,
+and creating a pull request. If you're not familiar with pull request based
+contributions to open source projects, see e.g.
 
 https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
 
@@ -74,12 +74,12 @@ they don't break support for other systems.
 Integrating your contribution
 -----------------------------
 
-Major code and documentation contributions may require the contributor to
-sign-off that they adhere to the Developer Certificate of Origin (DCO):
+Major code and documentation contributions require the contributor to sign-off
+that they adhere to the Developer Certificate of Origin (DCO):
 
 https://developercertificate.org
 
-and should be made available under the Logtalk license without any additional
+and must be made available under the Logtalk license without any additional
 terms or conditions. Contributions using other licensing terms may also be
 distributed with Logtalk with the understanding that the terms of their use
 depends solely on the authors chosen licensing terms and may require a separate,
