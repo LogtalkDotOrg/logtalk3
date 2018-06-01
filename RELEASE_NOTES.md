@@ -50,6 +50,10 @@ Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
 Documentation
 -------------
 
+* CHANGED: Updated the contributing guidelines, moving from the Contribution
+License Agreement (CLA) to the more developer friendly Developer Certificate
+of Origin (DCO).
+
 * ADDED: Explain the caveats of setting a Prolog module or `user` as a hook
 object in the user manual.
 
