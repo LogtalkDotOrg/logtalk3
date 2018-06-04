@@ -43,60 +43,60 @@ its own loader and notes files:
 
 * assignvars  
 	`assignvars_loader.lgt`
-	`assignvars.txt`
+	`assignvars.md`
 
 * dependents  
 	`dependents_loader.lgt`
-	`dependents.txt`
+	`dependents.md`
 
 * edcg  
 	`edcg_loader.lgt`
-	`edcg.txt`
+	`edcg.md`
 
 * events  
 	`events_loader.lgt`
-	`events.txt`
+	`events.md`
 
 * expected  
 	`expected_loader.lgt`
-	`expected.txt`
+	`expected.md`
 
 * hierarchies  
 	`hierarchies_loader.lgt`
-	`hierarchies.txt`
+	`hierarchies.md`
 
 * java  
 	`java_loader.lgt`
-	`java.txt`
+	`java.md`
 
 * metapredicates  
 	`metapredicates_loader.lgt`
-	`metapredicates.txt`
+	`metapredicates.md`
 
 * optional  
 	`optional_loader.lgt`
-	`optional.txt`
+	`optional.md`
 
 * os  
 	`os_loader.lgt`
-	`os.txt`
+	`os.md`
 
 * random  
 	`random_loader.lgt`
-	`random.txt`
+	`random.md`
 
 * statistics  
 	`statistics_loader.lgt`
-	`statistics.txt`
+	`statistics.md`
 
 * types  
 	`basic_types_loader.lgt`
 	`types_loader.lgt`
-	`types.txt`
+	`types.md`
 
 * redis  
 	`redis_loader.lgt`
-	`redis.txt`
+	`redis.md`
 
 For helping when embedding Logtalk and Logtalk applications:
 
@@ -109,7 +109,7 @@ groups listed above. Simply type the goal:
 	| ?- logtalk_load(library(all_loader)).
 
 Specific notes about each group of objects, categories, and protocols can be 
-found in the corresponding `*.txt` files.
+found in the corresponding `*.md` files.
 
 A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
 sample code for selected backend Prolog compilers for initializing Logtalk

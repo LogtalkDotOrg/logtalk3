@@ -60,6 +60,8 @@ object in the user manual.
 Library
 -------
 
+* CHANGED: All individual library documentation files to Markdown files.
+
 * ADDED: Port of Peter Van Roy EDCGs implementation.
 
 * ADDED: Predicate `invoke/2` to the Java interface library.
