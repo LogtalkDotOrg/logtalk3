@@ -69,6 +69,8 @@ Library
 * ADDED: Hook object, `java_hook`, to optimize calls to the JPL-based Java
 interface library (ensuring zero overhead compared with direct use of JPL).
 
+* IMPROVED: Documentation of most of the libraries.
+
 Tools
 -----
 

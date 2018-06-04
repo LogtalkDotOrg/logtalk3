@@ -20,9 +20,15 @@ ________________________________________________________________________
 About
 -----
 
-This library provides an implementation of *expected* terms with an API that
-is inspired by the `optional` library and C++ standardization proposals for
-an `Expected<T>` type.
+This library provides an implementation of *expected term references* with
+an API that is inspired by the `optional` library and C++ standardization
+proposals for an `Expected<T>` type. An expected term reference is an opaque
+term that either contains a term or contains some information about why the
+expected term is not present. Expected term references provide an alternative
+to generating an exception (or a failure) when something unexpected happens
+when asking for a term. This allows e.g. separating the code that retrieves
+or constructs terms from the code that processes them, which is then free to
+deal if necessary and at its convenience with any unexpected events.
 
 
 Loading
