@@ -22,54 +22,40 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2016/10/10,
+		date is 2018/06/04,
 		comment is 'Bridge puzzle.'
 	]).
 
-	:- uses(list, [append/3]).
 	:- uses(numberlist, [min/2, max/2]).
 	:- uses(set, [insert/3, insert_all/3, select/3]).
 
-	initial_state(start, ([], right, [1,3,6,8,12])).
+	initial_state(start, s([], right, [1,3,6,8,12])).
 
-	goal_state(end, ([1,3,6,8,12], left, [])).
+	goal_state(end, s([1,3,6,8,12], left, [])).
 
-	next_state((Left1, left, Right1), (Left2, right, Right2), Slower) :-	% two persons
-		append(List, [Person1| Persons], Left1),
-		select(Person2, Persons, Others),
-		append(List, Others, Left2),
-		insert_all([Person1, Person2], Right1, Right2),
-		(	Person1 > Person2 ->
-			Slower = Person1
-		;	Slower = Person2
-		).
-	next_state((Left1, right, Right1), (Left2, left, Right2), Slower) :-	% two persons
-		append(List, [Person1| Persons], Right1),
-		select(Person2, Persons, Others),
-		append(List, Others, Right2),
-		insert_all([Person1, Person2], Left1, Left2),
-		(	Person1 > Person2 ->
-			Slower = Person1
-		;	Slower = Person2
-		).
-	next_state((Left1, left, Right1), (Left2, right, Right2), Person) :-	% one person
-		select(Person, Left1, Left2),
-		insert(Right1, Person, Right2).
-	next_state((Left1, right, Right1), (Left2, left, Right2), Person) :-	% one person
-		select(Person, Right1, Right2),
-		insert(Left1, Person, Left2).
+	% two persons
+	next_state(s(Left0, left, Right0), s(Left, right, Right), Cost) :-
+		select(Person1, Left0, Left1),
+		select(Person2, Left1, Left),
+		insert_all([Person1, Person2], Right0, Right),
+		Cost is max(Person1, Person2).
+	% one person
+	next_state(s(Left0, left, Right0), s(Left, right, Right), Person) :-
+		select(Person, Left0, Left),
+		insert(Right0, Person, Right).
+	% reverse
+	next_state(s(Left0, right, Right0), s(Left, left, Right), Cost) :-
+		next_state(s(Right0, left, Left0), s(Right, right, Left), Cost).
 
-	heuristic((Left, Lamp, Right), Heuristic) :-
+	heuristic(s(Left, Lamp, Right), Heuristic) :-
 		(	Lamp = left ->
 			min(Left, Heuristic)
-		;	max(Right, Max),
-			min(Right, Min),
-			Heuristic is Max + Min
+		;	min(Right, Heuristic)
 		).
 
-	print_state((Left, Lamp, Right)) :-
+	print_state(s(Left, Lamp, Right)) :-
 		write_list(Left),
 		(	Lamp = left ->
 			write(' lamp _|____________|_ ')

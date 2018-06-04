@@ -109,16 +109,15 @@ yes
 6 8 12  _|____________|_ lamp 1 3 
 1 3 6 8 12  lamp _|____________|_ 
 solution length: 8
-state transitions: 367
-ratio solution length / state transitions: 0.0217984
+state transitions (including previous solutions): 555
+ratio solution length / state transitions: 0.014414414414414415
 minimum branching degree: 1
-average branching degree: 7.32579
+average branching degree: 7.32579185520362
 maximum branching degree: 15
-time: 0.28
-
-Initial = [], right, [1, 3, 6, 8, 12]
-Path = [ ([], right, [1, 3, 6, 8, 12]), ([1, 3], left, [6, 8, 12]), ([3], right, [1, 6, 8, 12]), ([1, 3, 6], left, [8, 12]), ([3, 6], right, [1, 8|...]), ([3, 6|...], left, [1]), ([6|...], right, [...|...]), ([...|...], ..., ...)]
-Cost = 29 
+time: 0.012381000000000086
+Initial = s([], right, [1, 3, 6, 8, 12]),
+Path = [s([], right, [1, 3, 6, 8, 12]), s([1, 3], left, [6, 8, 12]), s([3], right, [1, 6, 8, 12]), s([1, 3, 6], left, [8, 12]), s([3, 6], right, [1, 8, 12]), s([3, 6|...], left, [1]), s([6|...], right, [1|...]), s([...|...], left, [])],
+Cost = 29
 
 yes
 

@@ -93,6 +93,9 @@ that call Prolog module predicates.
 * IMPROVED: State representation for the `salt/3` state-space in the
 `searching` example.
 
+* IMPROVED: Simplified the `bridge` puzzle solution in the `searching`
+example.
+
 * FIXED: The `searching` example for the events related changes in the
 previous version for the `user` pseudo-object.
 
