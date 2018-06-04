@@ -17,6 +17,9 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
 Redis client library. Supports GNU Prolog, Qu-Prolog, SICStus Prolog,
 SWI-Prolog, and XSB. Support for ECLiPSe is also included but requires
 a fix for an ECLiPSe bug that is expected in a forthcoming version of
@@ -27,9 +30,17 @@ commands, visit:
 
 	https://redis.io
 
+
+Loading
+-------
+
 To load this library, load the `redis_loader.lgt` utility file:
 
 	| ?- logtalk_load(library(redis_loader)).
+
+
+Know issues
+-----------
 
 Recent version of macOS seem to disable the mapping of `localhost` to
 `127.0.0.1`. This issue may prevent running this library unit tests

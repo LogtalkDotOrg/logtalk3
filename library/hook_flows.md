@@ -17,11 +17,18 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this group load the `hook_flows_loader.lgt`
-utility file:
-
-	| ?- logtalk_load(library(hook_flows_loader)).
+About
+-----
 
 The `hook_pipeline` and `hook_set` parametric objects in this group implement
 common scenarios of combining multiple hook objects for the expansion of source
 files.
+
+
+Loading
+-------
+
+To load all entities in this group load the `hook_flows_loader.lgt`
+utility file:
+
+	| ?- logtalk_load(library(hook_flows_loader)).

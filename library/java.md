@@ -17,6 +17,9 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
 The library Java entities define a minimal abstraction for calling Java
 from Logtalk. This abstraction makes use of Logtalk parametric objects
 and allows creating Java object, accessing Java class fields, and calling
@@ -34,4 +37,16 @@ and an optional second parameter holds the return value. Together with a
 forward message handler, this allows the use of Java messages with the same
 functor and number of arguments as found in the relevant JavaDocs.
 
-For usage examples and unti tests, see the `java` example.
+
+Loading
+-------
+
+To load all entities in this group load the `java_loader.lgt` loader file:
+
+	| ?- logtalk_load(library(java_loader)).
+
+
+Usage
+-----
+
+For usage examples and unit tests, see the `java` example.

@@ -17,12 +17,19 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this group load the `dependents_loader.lgt`
-utility file:
-
-	| ?- logtalk_load(library(dependents_loader)).
+About
+-----
 
 The `observer` and `subject` categories implement the Smalltalk 
 dependents handling mechanism. This mechanism can be used as an
 alternative to Logtalk's system-wide support for event-driven
 programming.
+
+
+Loading
+-------
+
+To load all entities in this group load the `dependents_loader.lgt`
+utility file:
+
+	| ?- logtalk_load(library(dependents_loader)).

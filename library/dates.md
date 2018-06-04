@@ -17,10 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this group load the `dates_loader.lgt` utility 
-file:
-
-	| ?- logtalk_load(library(dates_loader)).
+About
+-----
 
 The `date` object implements some useful calendar date predicates.
 
@@ -29,3 +27,12 @@ The `time` object implements some useful time predicates.
 Please note that some of the functionality of these objects depends 
 on the chosen Prolog support for accessing operating system time and 
 date data.
+
+
+Loading
+-------
+
+To load all entities in this group load the `dates_loader.lgt` utility 
+file:
+
+	| ?- logtalk_load(library(dates_loader)).

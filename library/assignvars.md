@@ -17,10 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this group load the `assignvars_loader.lgt` utility 
-file:
-
-	| ?- logtalk_load(library(assignvars_loader)).
+About
+-----
 
 The `assignvarsp` protocol declares the predicates used for logical assignment 
 of Prolog terms developed by Nobukuni Kino.
@@ -36,3 +34,12 @@ SWI-Prolog, and YAP.
 For more information on assignvars, please consult the URL:
 
 	http://www.kprolog.com/en/logical_assignment/
+
+
+Loading
+-------
+
+To load all entities in this group load the `assignvars_loader.lgt` utility 
+file:
+
+	| ?- logtalk_load(library(assignvars_loader)).

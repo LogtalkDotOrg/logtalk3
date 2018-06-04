@@ -17,11 +17,44 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
+This library provides an implementation of *expected* terms with an API that
+is inspired by the `optional` library and C++ standardization proposals for
+an `Expected<T>` type.
+
+
+Loading
+-------
+
 To load all entities in this library load the `expected_loader.lgt` utility
 file:
 
 	| ?- logtalk_load(library(expected_loader)).
 
-This library provides an implementation of expected terms with an API that
-is inspired by the `optional` library and C++ standardization proposals for
-an `Expected<T>` type.
+
+Usage
+-----
+
+The `expected` object provides constructors for expected term references. For
+example:
+
+	| ?- expected::of_expected(1, Ref).
+	...
+
+The created expected term references can then be passed as parameters to the
+`expected/1` parametric object. For example:
+
+	| ?- expected::of_expected(1, Ref), expected(Ref)::or_else(Term, 0).
+	Ref = expected(1),
+	Term = 1
+	yes
+
+	| ?- expected::of_unexpected(-1, Ref), expected(Ref)::or_else(Term, 0).
+	Ref = unexpected(-1),
+	Term = 0
+	yes
+
+The `either` object provides types and predicates for extended type-checking
+and predicate for handling lists of expected terms.

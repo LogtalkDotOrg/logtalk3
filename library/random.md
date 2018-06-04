@@ -17,10 +17,23 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
+This library provides random number generators.
+
+
+Loading
+-------
+
 To load all entities in this library load the `random_loader.lgt` utility
 file:
 
 	| ?- logtalk_load(library(random_loader)).
+
+
+Usage
+-----
 
 The `random` object implements portable random number generator and
 supports multiple random number generators, using different seeds,

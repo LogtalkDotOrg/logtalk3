@@ -21,13 +21,13 @@
 :- object(either).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2017/12/26,
-		comment is 'Types and predicates for type-checking and handling expecteds.',
+		date is 2018/06/04,
+		comment is 'Types and predicates for extended type-checking of expected term references and for handling list of expected term references.',
 		remarks is [
-			'Type either(ExpectedType, UnexpctedType)' - 'Allows type-checking expected references where the expected and unexpected terms must be of the given types.',
-			'QuickCheck support' - 'Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpctedType) type.'
+			'Type either(ExpectedType, UnexpectedType)' - 'Allows type-checking expected references where the expected and unexpected terms must be of the given types.',
+			'QuickCheck support' - 'Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.'
 		],
 		see_also is [expected, expected(_), type, arbitrary]
 	]).
@@ -35,21 +35,21 @@
 	:- public(expecteds/2).
 	:- mode(expecteds(+list(expected), -list), one).
 	:- info(expecteds/2, [
-		comment is 'Returns the values stored in the expcted references that hold an expected term.',
+		comment is 'Returns the values stored in the expected term references that hold an expected term.',
 		argnames is ['References', 'Expecteds']
 	]).
 
 	:- public(unexpecteds/2).
 	:- mode(unexpecteds(+list(expected), -list), one).
 	:- info(unexpecteds/2, [
-		comment is 'Returns the values stored in the expcted references that hold an expected term.',
+		comment is 'Returns the values stored in the expected term references that hold an expected term.',
 		argnames is ['References', 'Unexpecteds']
 	]).
 
 	:- public(partition/3).
 	:- mode(partition(+list(expected), -list, -list), one).
 	:- info(partition/3, [
-		comment is 'Retrieves and partitions the values stored in the expcted references.',
+		comment is 'Retrieves and partitions the values stored in the expected term references.',
 		argnames is ['References', 'Expecteds', 'Unexpecteds']
 	]).
 
@@ -67,10 +67,10 @@
 		:- dynamic(type::check/2).
 	:- endif.
 
-	type::check(either(ExpectedType, UnexpctedType), Term) :-
+	type::check(either(ExpectedType, UnexpectedType), Term) :-
 		type::check(expected, Term),
 		expected(Term)::if_expected(type::check(ExpectedType)),
-		expected(Term)::if_unexpected(type::check(UnexpctedType)).
+		expected(Term)::if_unexpected(type::check(UnexpectedType)).
 
 	:- multifile(arbitrary::arbitrary/1).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog
@@ -86,13 +86,13 @@
 		:- dynamic(arbitrary::arbitrary/2).
 	:- endif.
 
-	arbitrary::arbitrary(either(ExpectedType, UnexpctedType), Arbitrary) :-
+	arbitrary::arbitrary(either(ExpectedType, UnexpectedType), Arbitrary) :-
 		random::random(Random),
 		(	Random < 0.5 ->
 			type::arbitrary(ExpectedType, Expected),
 			expected::of_expected(Expected, Arbitrary)
-		;	type::arbitrary(UnexpctedType, Unexpcted),
-			expected::of_unexpected(Unexpcted, Arbitrary)	
+		;	type::arbitrary(UnexpectedType, Unexpected),
+			expected::of_unexpected(Unexpected, Arbitrary)	
 		).
 
 	expecteds([], []).
@@ -104,23 +104,23 @@
 		expecteds(References, Rest).
 
 	unexpecteds([], []).
-	unexpecteds([Reference| References], Unexpcteds) :-
+	unexpecteds([Reference| References], Unexpecteds) :-
 		(	expected(Reference)::is_expected ->
-			Unexpcteds = Rest
-		;	expected(Reference)::unexpected(Unexpcted),
-			Unexpcteds = [Unexpcted| Rest]
+			Unexpecteds = Rest
+		;	expected(Reference)::unexpected(Unexpected),
+			Unexpecteds = [Unexpected| Rest]
 		),
 		unexpecteds(References, Rest).
 
 	partition([], [], []).
-	partition([Reference| References], Expecteds, Unexpcteds) :-
+	partition([Reference| References], Expecteds, Unexpecteds) :-
 		(	expected(Reference)::or_else_fail(Expected) ->
 			Expecteds = [Expected| Rest],
-			Unexpcteds = RestUnexpcteds
-		;	expected(Reference)::unexpected(Unexpcted),
+			Unexpecteds = RestUnexpecteds
+		;	expected(Reference)::unexpected(Unexpected),
 			Expecteds = RestExpecteds,
-			Unexpcteds = [Unexpcted| Rest]
+			Unexpecteds = [Unexpected| Rest]
 		),
-		partition(References, RestExpecteds, RestUnexpcteds).
+		partition(References, RestExpecteds, RestUnexpecteds).
 
 :- end_object.

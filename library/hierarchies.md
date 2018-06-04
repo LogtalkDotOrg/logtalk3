@@ -17,10 +17,17 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
+This library provides objects implementing reflection predicates over
+class and prototype hierarchies.
+
+
+Loading
+-------
+
 To load all entities in this group load the `hierarchies_loader.lgt` 
 utility file:
 
 	| ?- logtalk_load(library(hierarchies_loader)).
-
-These objects implement reflection predicates over class and prototype 
-hierarchies.

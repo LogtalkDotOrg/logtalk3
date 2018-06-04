@@ -17,13 +17,28 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
+This library provides implementations of common meta-predicates.
+
+The `meta` object implements common Prolog meta-predicates like `map/3` and
+`fold_left/4`.
+
+The `loop` object implements several kinds of loops typical of imperative 
+languages.
+
+
+Loading
+-------
+
 To load all entities in this group load the `metapredicates_loader.lgt`
 utility file:
 
 	| ?- logtalk_load(library(metapredicates_loader)).
 
-The `loop` object implements several kinds of loops typical of imperative 
-languages.
 
-The `meta`object implements common Prolog meta-predicates like `map/3` and
-`fold_left/4`.
+Usage
+-----
+
+See the `metapredicates` example and unit tests.

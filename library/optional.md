@@ -17,11 +17,18 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this library load the `optional_loader.lgt` utility
-file:
-
-	| ?- logtalk_load(library(optional_loader)).
+About
+-----
 
 This library provides an implementation of optional terms with an API modeled
 after the Java 8 `Optional` class (mainly due to this library being requested
 by users working in Logtalk/Java hybrid applications).
+
+
+Loading
+-------
+
+To load all entities in this library load the `optional_loader.lgt` loader
+file:
+
+	| ?- logtalk_load(library(optional_loader)).

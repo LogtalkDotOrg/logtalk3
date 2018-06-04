@@ -17,7 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-# About
+About
+-----
 
 The `arbitrary` category adds predicates for generating random values
 for selected types to the `type` object, complementing its type checking
@@ -26,14 +27,18 @@ by the user with definitions for new types by defining clauses for
 multifile predicates. This library is notably used in the QuickCheck
 implementation by the `lgtunit` tool.
 
-# Loading
+
+Loading
+-------
 
 The `arbitrary_loader.lgt` file loads the `type` object and the `arbitrary`
 category:
 
 	| ?- logtalk_load(library(arbitrary_loader)).
 
-# Usage
+
+Usage
+-----
 
 To define a generator of arbitrary values for a type, define a clause for the
 `type::arbitrary/1` multifile predicate specifying the type and a clause for
@@ -54,6 +59,8 @@ for shrinking arbitrary values for QuickCheck usage. For example:
     type::shrink(foo, Large, Small) :-
         ...
 
-# Examples
+
+Examples
+--------
 
 See the implementation of the `optional` and `expected`  libraries.

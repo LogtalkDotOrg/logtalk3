@@ -17,17 +17,24 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this group load the `types_loader.lgt` utility 
-file:
+About
+-----
 
-	| ?- logtalk_load(library(types_loader)).
-
-These objects implement predicates over standard Prolog term types and 
+This library implements predicates over standard Prolog term types and 
 also term representing common data structures such as lists, difference
 lists, binary trees, queues, heaps, dictionaries, sets, and pairs.
 
 It also includes a user-extensible `type` object defining type checking
 predicates over common Logtalk and Prolog term types.
+
+
+Loading
+-------
+
+To load all entities in this group load the `types_loader.lgt` utility 
+file:
+
+	| ?- logtalk_load(library(types_loader)).
 
 In case your code only requires the basic types, you can load in
 alternative the `basic_types_loader.lgt` utility file:

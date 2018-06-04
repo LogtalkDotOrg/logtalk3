@@ -18,12 +18,19 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this group load the `statistics_loader.lgt`
-utility file:
-
-	| ?- logtalk_load(library(statistics_loader)).
+About
+-----
 
 The entities in this group define some useful predicates for descriptive
 statistics. Data is represented as a list of numbers (integers or floats).
 Use the object `sample` of your data represents a sample. Use the object 
 `population` if your data represents a population.
+
+
+Loading
+-------
+
+To load all entities in this group load the `statistics_loader.lgt`
+utility file:
+
+	| ?- logtalk_load(library(statistics_loader)).

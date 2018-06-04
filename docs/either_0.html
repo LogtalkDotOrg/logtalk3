@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">either</h1>
       <blockquote>
-        <p class="comment">Types and predicates for type-checking and handling expecteds.</p>
+        <p class="comment">Types and predicates for extended type-checking of expected term references and for handling list of expected term references.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.1</code>
+            <code>0.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2017/12/26</code>
+            <code>2018/6/4</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -67,7 +67,7 @@
         <div class="section">
           <h3 id="expecteds/2" class="code">expecteds/2</h3>
           <blockquote>
-            <p class="comment">Returns the values stored in the expcted references that hold an expected term.</p>
+            <p class="comment">Returns the values stored in the expected term references that hold an expected term.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -87,7 +87,7 @@
         <div class="section">
           <h3 id="unexpecteds/2" class="code">unexpecteds/2</h3>
           <blockquote>
-            <p class="comment">Returns the values stored in the expcted references that hold an expected term.</p>
+            <p class="comment">Returns the values stored in the expected term references that hold an expected term.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -107,7 +107,7 @@
         <div class="section">
           <h3 id="partition/3" class="code">partition/3</h3>
           <blockquote>
-            <p class="comment">Retrieves and partitions the values stored in the expcted references.</p>
+            <p class="comment">Retrieves and partitions the values stored in the expected term references.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -148,12 +148,12 @@
       <h2>Remarks</h2>
       <div class="section">
         <dl class="remarks">
-          <dt class="comment">Type either(ExpectedType, UnexpctedType)</dt>
+          <dt class="comment">Type either(ExpectedType, UnexpectedType)</dt>
           <dd class="text">Allows type-checking expected references where the expected and unexpected terms must be of the given types.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">QuickCheck support</dt>
-          <dd class="text">Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpctedType) type.</dd>
+          <dd class="text">Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.</dd>
         </dl>
       </div>
     </div>

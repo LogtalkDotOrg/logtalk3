@@ -17,10 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load all entities in this library load the `events_loader.lgt` utility 
-file:
-
-	| ?- logtalk_load(library(events_loader)).
+About
+-----
 
 The objects `event_registry`, `before_event_registry`, and `after_event_registry`
 implement convenient predicates for registering before and after events.
@@ -34,3 +32,12 @@ The monitor object implements more sophisticated event handling predicates.
 
 Some of the objects assume that the chosen Prolog compiler defines the Prolog
 standard `sort/2` built-in predicate.
+
+
+Loading
+-------
+
+To load all entities in this library load the `events_loader.lgt` loader 
+file:
+
+	| ?- logtalk_load(library(events_loader)).
