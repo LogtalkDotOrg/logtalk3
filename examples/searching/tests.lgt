@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/05/23,
+		date is 2018/06/04,
 		comment is 'Unit tests for the "searching" example.'
 	]).
 
@@ -50,7 +50,7 @@
 	test(searching_3) :-
 		bridge::initial_state(Initial),
 		hill_climbing(30)::solve(bridge, Initial, Path, Cost),
-		Path == [([],right,[1,3,6,8,12]),([1,3],left,[6,8,12]),([3],right,[1,6,8,12]),([1,3,6],left,[8,12]),([3,6],right,[1,8,12]),([3,6,8,12],left,[1]),([6,8,12],right,[1,3]),([1,3,6,8,12],left,[])],
+		Path == [s([],right,[1,3,6,8,12]),s([1,3],left,[6,8,12]),s([3],right,[1,6,8,12]),s([1,3,6],left,[8,12]),s([3,6],right,[1,8,12]),s([3,6,8,12],left,[1]),s([6,8,12],right,[1,3]),s([1,3,6,8,12],left,[])],
 		Cost == 29.
 
 	% test 4.  % generate all solutions then check this path is one of them
