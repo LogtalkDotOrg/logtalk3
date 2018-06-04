@@ -23,6 +23,8 @@
 	logtalk_load(library(metapredicates_loader)),
 	logtalk_load(library(dates_loader)),
 	logtalk_load(roots(loader)),
+	set_logtalk_flag(events, allow),
+	% puzzles
 	logtalk_load([
 		state_space,
 		water_jug,
@@ -34,17 +36,17 @@
 		salt3,
 		search_strategy,
 		blind_search1,
-		heuristic_search1,
-		performance
+		heuristic_search1
 	]),
-	% the actual search methods are compiled using the events(allow)
-	% option to allow the use of the "performance" monitor
+	% search methods
 	logtalk_load([
 		breadth_first1,
 		depth_first1,
 		best_first1,
 		hill_climbing1
-	], [
-		events(allow)
+	]),
+	% monitors
+	logtalk_load([
+		performance
 	])
 )).

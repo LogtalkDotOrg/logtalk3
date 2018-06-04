@@ -93,6 +93,9 @@ that call Prolog module predicates.
 * IMPROVED: State representation for the `salt/3` state-space in the
 `searching` example.
 
+* FIXED: The `searching` example for the events related changes in the
+previous version for the `user` pseudo-object.
+
 
 3.17.0 - May 21, 2018
 =====================
