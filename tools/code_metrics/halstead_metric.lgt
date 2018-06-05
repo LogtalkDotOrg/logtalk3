@@ -23,22 +23,22 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2018/06/05,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		remarks is [
-			'Pn' - 'Number of predicates.',
-			'PAn' - 'Number of predicate arguments (assumes all distinct).',
-			'Cn' - 'Total number of predicate calls.',
-			'CAn' - 'Total number of predicate call arguments (assumes all distinct).',
-			'EV' - 'Entity vocabulary: EV = Pn + An.',
-			'EL' - 'Entity length: EL = Cn + CAn.',
-			'V' - 'Volume: V = EL * log2(EV).',
-			'D' - 'Difficulty: D = (Pn/2) * (CAn/An)',
-			'E' - 'Effort: E = D * V.',
-			'T' - 'Time required to program: T = E/18 seconds.',
-			'B' - 'Number of delivered bugs: B = V/3000',
+			'Pn'  - 'Number of predicates',
+			'PAn' - 'Number of predicate arguments (assumes all distinct)',
+			'Cn'  - 'Number of predicate/message calls',
+			'CAn' - 'Number of predicate/message call arguments (assumes all distinct)',
+			'EV'  - 'Entity vocabulary: EV = Pn + An',
+			'EL'  - 'Entity length: EL = Cn + CAn',
+			'V'   - 'Volume: V = EL * log2(EV)',
+			'D'   - 'Difficulty: D = (Pn/2) * (CAn/An)',
+			'E'   - 'Effort: E = D * V',
+			'T'   - 'Time required to program: T = E/18 seconds',
+			'B'   - 'Number of delivered bugs: B = V/3000',
 			'Entity score' - 'Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.'
 		]
 	]).
@@ -55,8 +55,14 @@
 		predicate_data(Kind, Entity, Pn, PAn, Cn, CAn),
 		EV is Pn + PAn,
 		EL is Cn + CAn,
-		V is EL * log(EV) / log(2),
-		D is (Pn /2 ) * (CAn / PAn),
+		(	EV > 0 ->
+			V is EL * log(EV) / log(2)
+		;	V is 0.0
+		),
+		(	PAn > 0 ->
+			D is (Pn /2 ) * (CAn / PAn)
+		;	D is 0.0
+		),
 		E is D * V,
 		T is E / 18,
 		B is V / 3000.
@@ -117,14 +123,14 @@
 	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
 		['Number of predicates: ~d'-[Pn], nl],
 		['Number of predicate arguments (assumes all distinct): ~d'-[PAn], nl],
-		['Total number of predicate calls: ~d'-[Cn], nl],
-		['Total number of predicate call arguments (assumes all distinct): ~d.'-[CAn], nl],
+		['Number of predicate calls: ~d'-[Cn], nl],
+		['Number of predicate call arguments (assumes all distinct): ~d.'-[CAn], nl],
 		['Entity vocabulary: ~d'-[EV], nl],
 		['Entity length: ~d'-[EL], nl],
 		['Volume: ~f'-[V], nl],
 		['Difficulty: ~f'-[D], nl],
 		['Effort: ~f'-[E], nl],
-		['Time required to program: ~f'-[T], nl],
+		['Time required to program: ~f seconds'-[T], nl],
 		['Number of delivered bugs: ~f'-[B], nl].
 
 :- end_object.

@@ -34,6 +34,7 @@
 			noc_metric,
 			doc_metric,
 			size_metric,
+			halstead_metric,
 			code_metrics
 		],
 		[	
@@ -49,6 +50,7 @@
 			doc_metric_tests,
 			noc_metric_tests,
 			size_metric_tests,
+			halstead_metric_tests,
 			code_metrics_tests
 		], [
 			hook(lgtunit), optimize(on)
@@ -60,6 +62,7 @@
 		doc_metric_tests,
 		noc_metric_tests,
 		size_metric_tests,
+		halstead_metric_tests,
 		code_metrics_tests
 	])
 )).
