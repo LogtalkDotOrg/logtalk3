@@ -80,6 +80,8 @@ Tools
 * ADDED: Description and link to the Logtalk plugin for the `asdf` extendable
 version manager.
 
+* ADDED: Halstead complexity metric to the `code_metrics` tool.
+
 * FIXED: The `lgtunit` tool global clause coverage statistics when there are
 entities declared as covered but without any tests for their predicates.
 

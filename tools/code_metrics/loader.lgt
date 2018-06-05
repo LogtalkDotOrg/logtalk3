@@ -31,6 +31,7 @@
 		noc_metric,
 		doc_metric,
 		size_metric,
+		halstead_metric,
 		code_metrics
 	], [
 		optimize(on)
