@@ -42,6 +42,9 @@ protocols).
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The JIProlog adapter file to recognize the `*->/2` soft-cut control
+construct as built-in.
+
 * IMPROVED: SWI-Prolog integration to avoid the `listing/0` predicate listing
 Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
 

@@ -108,6 +108,7 @@
 
 % '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 
+'$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct) :- !.
 '$lgt_prolog_meta_predicate'(Callable, Template, predicate) :-
 	predicate_property(Callable, meta_predicate(Template)),
 	predicate_property(Callable, built_in),
