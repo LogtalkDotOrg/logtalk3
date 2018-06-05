@@ -28,6 +28,13 @@ It also includes a user-extensible `type` object defining type checking
 predicates over common Logtalk and Prolog term types.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 
@@ -36,7 +43,7 @@ file:
 
 	| ?- logtalk_load(library(types_loader)).
 
-In case your code only requires the basic types, you can load in
+In case your code only requires the most basic types, you can load in
 alternative the `basic_types_loader.lgt` utility file:
 
 	| ?- logtalk_load(library(basic_types_loader)).

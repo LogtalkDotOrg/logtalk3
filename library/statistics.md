@@ -27,6 +27,13 @@ Use the object `sample` of your data represents a sample. Use the object
 `population` if your data represents a population.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

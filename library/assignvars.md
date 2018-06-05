@@ -36,6 +36,13 @@ For more information on assignvars, please consult the URL:
 	http://www.kprolog.com/en/logical_assignment/
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

@@ -29,6 +29,13 @@ The `loop` object implements several kinds of loops typical of imperative
 languages.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

@@ -20,7 +20,15 @@ ________________________________________________________________________
 About
 -----
 
-This library provides random number generators.
+This library provides portable random number generators and an abstraction
+over native backend Prolog compiler random number generator if available.
+
+
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
 
 
 Loading

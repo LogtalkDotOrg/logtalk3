@@ -31,6 +31,13 @@ or constructs terms from the code that processes them, which is then free to
 deal if necessary and at its convenience with any unexpected events.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

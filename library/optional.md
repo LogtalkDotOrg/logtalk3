@@ -33,6 +33,13 @@ deal if necessary and at its convenience with any case where the optional
 terms are not present.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

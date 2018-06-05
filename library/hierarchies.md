@@ -24,6 +24,13 @@ This library provides objects implementing reflection predicates over
 class and prototype hierarchies.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

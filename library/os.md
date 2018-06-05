@@ -27,8 +27,15 @@ They should be used with care and fully tested in your application domain
 as some backend Prolog compilers have buggy and inconsistent interfaces,
 specially across operating-systems.
 
-The `os_types.lgt` file defines some useful operating-system types for
+The `os_types` category defines some useful operating-system types for
 type-checking when using with the `type` library object.
+
+
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
 
 
 Loading

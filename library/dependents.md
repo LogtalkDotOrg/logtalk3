@@ -26,6 +26,13 @@ alternative to Logtalk's system-wide support for event-driven
 programming.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

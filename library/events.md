@@ -28,10 +28,14 @@ basic event handler predicates (`before/3` and `after/3`). You will need to refe
 to this protocol in your objects if you want to use the super control structure
 `(^^/1)` with these predicates.
 
-The monitor object implements more sophisticated event handling predicates.
+The `monitor` object implements more sophisticated event handling predicates.
 
-Some of the objects assume that the chosen Prolog compiler defines the Prolog
-standard `sort/2` built-in predicate.
+
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
 
 
 Loading

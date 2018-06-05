@@ -29,6 +29,13 @@ on the chosen Prolog support for accessing operating system time and
 date data.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 

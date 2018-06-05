@@ -17,6 +17,23 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
+Just a `all_loader.lgt` loader file that loads all individual libraries.
+Useful when regenerating documentation for all libraries.
+
+
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
+Loading
+-------
+
 The `all_loader.lgt` file will load all the library entities (with the
 exception of the large Unicode data files) loaded by the other loader
 files:

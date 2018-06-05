@@ -38,6 +38,13 @@ forward message handler, this allows the use of Java messages with the same
 functor and number of arguments as found in the relevant JavaDocs.
 
 
+API documentation
+-----------------
+
+Open the [../docs/index.html](../docs/index.html) file in a web browser
+and choose the library index.
+
+
 Loading
 -------
 
@@ -48,5 +55,14 @@ To load all entities in this group load the `java_loader.lgt` loader file:
 
 Usage
 -----
+
+The two main objects in this library are `java(Reference, ReturnValue)` and
+`java(_Reference)`. Use the latter if you want to ignore the return value or
+when calling a void Java method.
+
+The `java` object implements utility predicates. For some backend Java
+interfaces such as JPL (available in SWI-Prolog and YAP) there is also
+a `java_hook` hook object for removing any overhead when using this
+library abstraction.
 
 For usage examples and unit tests, see the `java` example.
