@@ -23,15 +23,15 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/06/05,
+		date is 2018/06/06,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		remarks is [
-			'Pn'  - 'Number of predicates',
-			'PAn' - 'Number of predicate arguments (assumes all distinct)',
-			'Cn'  - 'Number of predicate/message calls',
-			'CAn' - 'Number of predicate/message call arguments (assumes all distinct)',
+			'Pn'  - 'Number of predicates (declared + defined but not declared)',
+			'PAn' - 'Number of predicate arguments (assumed distinct)',
+			'Cn'  - 'Number of calls + number of clauses',
+			'CAn' - 'Number of call arguments + number of clause arguments (assumed distinct)',
 			'EV'  - 'Entity vocabulary: EV = Pn + An',
 			'EL'  - 'Entity length: EL = Cn + CAn',
 			'V'   - 'Volume: V = EL * log2(EV)',
@@ -43,7 +43,7 @@
 		]
 	]).
 
-	:- uses(list, [length/2]).
+	:- uses(list, [length/2, memberchk/2]).
 	:- uses(numberlist, [sum/2]).
 
 	entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) :-
@@ -93,8 +93,20 @@
 			),
 			CalleeArities
 		),
-		length(CalleeArities, Cn),
-		sum(CalleeArities, CAn).
+		length(CalleeArities, Cn0),
+		category_property(Entity, number_of_user_clauses(Cls)),
+		Cn is Cn0 + Cls,
+		sum(CalleeArities, CAn0),
+		findall(
+			CallerDatum,
+			(	category_property(Entity, defines(_/CallerArity, Properties)),
+				memberchk(number_of_clauses(NumberOfClauses), Properties),
+				CallerDatum is CallerArity * NumberOfClauses
+			),
+			CallerData
+		),
+		sum(CallerData, CAn1),
+		CAn is CAn0 + CAn1.
 	predicate_data(object, Entity, Pn, PAn, Cn, CAn) :-
 		findall(
 			PredicateArity,
@@ -113,18 +125,30 @@
 			),
 			CalleeArities
 		),
-		length(CalleeArities, Cn),
-		sum(CalleeArities, CAn).
+		length(CalleeArities, Cn0),
+		object_property(Entity, number_of_user_clauses(Cls)),
+		Cn is Cn0 + Cls,
+		sum(CalleeArities, CAn0),
+		findall(
+			CallerDatum,
+			(	object_property(Entity, defines(_/CallerArity, Properties)),
+				memberchk(number_of_clauses(NumberOfClauses), Properties),
+				CallerDatum is CallerArity * NumberOfClauses
+			),
+			CallerData
+		),
+		sum(CallerData, CAn1),
+		CAn is CAn0 + CAn1.
 
 	callee_arity(_::_/Arity, Arity).
 	callee_arity(_:_/Arity, Arity).
 	callee_arity(_/Arity, Arity).
 
 	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
-		['Number of predicates: ~d'-[Pn], nl],
-		['Number of predicate arguments (assumes all distinct): ~d'-[PAn], nl],
-		['Number of predicate calls: ~d'-[Cn], nl],
-		['Number of predicate call arguments (assumes all distinct): ~d.'-[CAn], nl],
+		['Number of predicates (declared + defined but not declared): ~d'-[Pn], nl],
+		['Number of predicate arguments (assumed distinct): ~d'-[PAn], nl],
+		['Number of calls + number of clauses: ~d'-[Cn], nl],
+		['Number of call arguments + number of clause arguments (assumed distinct): ~d'-[CAn], nl],
 		['Entity vocabulary: ~d'-[EV], nl],
 		['Entity length: ~d'-[EL], nl],
 		['Volume: ~f'-[V], nl],
