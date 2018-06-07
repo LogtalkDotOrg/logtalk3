@@ -25,7 +25,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2018/06/05,
+		date is 2018/06/08,
 		comment is 'Unit tests for the Halstead complexity metric.'
 	]).
 
@@ -60,7 +60,7 @@
 		number(V), V >= 0,
 		number(D), D >= 0,
 		number(E), E >= 0,
-		number(T), T >= 0,
+		integer(T), T >= 0,
 		number(B), B >= 0.
 
 	% suppress all messages from the "code_metrics"

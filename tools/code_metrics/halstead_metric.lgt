@@ -23,16 +23,18 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2018/06/06,
+		date is 2018/06/08,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		remarks is [
-			'Pn'  - 'Number of predicates (declared + defined but not declared)',
+			'Definition of operators' - 'Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.',
+			'Definition of operands' - 'Predicate arguments are abstracted and interpreted as distinct operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.',
+			'Pn'  - 'Number of distinct predicates (declared, defined, or called)',
 			'PAn' - 'Number of predicate arguments (assumed distinct)',
 			'Cn'  - 'Number of calls + number of clauses',
-			'CAn' - 'Number of call arguments + number of clause arguments (assumed distinct)',
-			'EV'  - 'Entity vocabulary: EV = Pn + An',
+			'CAn' - 'Number of call arguments + number of clause arguments',
+			'EV'  - 'Entity vocabulary: EV = Pn + PAn',
 			'EL'  - 'Entity length: EL = Cn + CAn',
 			'V'   - 'Volume: V = EL * log2(EV)',
 			'D'   - 'Difficulty: D = (Pn/2) * (CAn/An)',
@@ -45,6 +47,7 @@
 
 	:- uses(list, [length/2, memberchk/2]).
 	:- uses(numberlist, [sum/2]).
+	:- uses(pairs, [values/2]).
 
 	entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) :-
 		(	var(Entity) ->
@@ -64,7 +67,7 @@
 		;	D is 0.0
 		),
 		E is D * V,
-		T is E / 18,
+		T is round(E / 18),
 		B is V / 3000.
 
 	predicate_data(protocol, Entity, Pn, PAn, 0, 0) :-
@@ -77,14 +80,18 @@
 		sum(Arities, PAn).
 	predicate_data(category, Entity, Pn, PAn, Cn, CAn) :-
 		findall(
-			PredicateArity,
-			(	category_property(Entity, declares(_/PredicateArity, _))
-			;	category_property(Entity, defines(Functor/PredicateArity, _)),
-				\+ category_property(Entity, declares(Functor/PredicateArity, _))
+			Predicate-Arity,
+			(	(	category_property(Entity, declares(Predicate, _))
+				;	category_property(Entity, defines(Predicate, _))
+				;	category_property(Entity, calls(Predicate, _))
+				),
+				callee_arity(Predicate, Arity)
 			),
-			PredicateArities
+			PredicatesArities
 		),
-		length(PredicateArities, Pn),
+		sort(PredicatesArities, DistinctPredicatesArities),
+		length(DistinctPredicatesArities, Pn),
+		values(DistinctPredicatesArities, PredicateArities),
 		sum(PredicateArities, PAn),
 		findall(
 			CalleeArity,
@@ -109,14 +116,18 @@
 		CAn is CAn0 + CAn1.
 	predicate_data(object, Entity, Pn, PAn, Cn, CAn) :-
 		findall(
-			PredicateArity,
-			(	object_property(Entity, declares(_/PredicateArity, _))
-			;	object_property(Entity, defines(Functor/PredicateArity, _)),
-				\+ object_property(Entity, declares(Functor/PredicateArity, _))
+			Predicate-Arity,
+			(	(	object_property(Entity, declares(Predicate, _))
+				;	object_property(Entity, defines(Predicate, _))
+				;	object_property(Entity, calls(Predicate, _))
+				),
+				callee_arity(Predicate, Arity)
 			),
-			PredicateArities
+			PredicatesArities
 		),
-		length(PredicateArities, Pn),
+		sort(PredicatesArities, DistinctPredicatesArities),
+		length(DistinctPredicatesArities, Pn),
+		values(DistinctPredicatesArities, PredicateArities),
 		sum(PredicateArities, PAn),
 		findall(
 			CalleeArity,
@@ -145,16 +156,16 @@
 	callee_arity(_/Arity, Arity).
 
 	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
-		['Number of predicates (declared + defined but not declared): ~d'-[Pn], nl],
+		['Number of distinct predicates (declared, defined, or called): ~d'-[Pn], nl],
 		['Number of predicate arguments (assumed distinct): ~d'-[PAn], nl],
 		['Number of calls + number of clauses: ~d'-[Cn], nl],
-		['Number of call arguments + number of clause arguments (assumed distinct): ~d'-[CAn], nl],
+		['Number of call arguments + number of clause arguments: ~d'-[CAn], nl],
 		['Entity vocabulary: ~d'-[EV], nl],
 		['Entity length: ~d'-[EL], nl],
 		['Volume: ~f'-[V], nl],
 		['Difficulty: ~f'-[D], nl],
 		['Effort: ~f'-[E], nl],
-		['Time required to program: ~f seconds'-[T], nl],
+		['Time required to program: ~d seconds'-[T], nl],
 		['Number of delivered bugs: ~f'-[B], nl].
 
 :- end_object.
