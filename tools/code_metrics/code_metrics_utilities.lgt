@@ -22,9 +22,9 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Ebrahim Azarisooreh',
-		date is 2017/12/27,
+		date is 2018/06/08,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
@@ -89,7 +89,7 @@
 	:- private(entity_property/2).
 	:- mode(entity_property(+entity_identifier, -term), zero_or_more).
 	:- info(entity_property/2, [
-		comment is 'True if Property is a valid property of Entity. Entity can be either category, protocol, or object.',
+		comment is 'True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.',
 		argnames is ['Entity', 'Property']
 
 	]).
@@ -120,7 +120,8 @@
 			Kind = object
 		;	current_category(Entity) ->
 			Kind = category
-		;	current_protocol(Entity),
+		;	atom(Entity),
+			current_protocol(Entity),
 			Kind = protocol
 		).
 
@@ -129,7 +130,8 @@
 			object_property(Entity, Property)
 		;	current_category(Entity) ->
 			category_property(Entity, Property)
-		;	current_protocol(Entity),
+		;	atom(Entity),
+			current_protocol(Entity),
 			protocol_property(Entity, Property)
 		).
 

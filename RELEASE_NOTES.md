@@ -85,6 +85,10 @@ version manager.
 * FIXED: The `lgtunit` tool global clause coverage statistics when there are
 entities declared as covered but without any tests for their predicates.
 
+* FIXED: Error instead of failure in the `code_metrics` tool when calling the
+`entity/1` and `entity_score/2` predicates with a compound term for a non-
+loaded parametric category or object.
+
 Examples
 --------
 
