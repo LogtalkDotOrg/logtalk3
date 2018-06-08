@@ -27,7 +27,7 @@
 		date is 2018/06/08,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
-			'Score range' - 'Score is a percentage where a 100% score means that all expected documentation information is present.',
+			'Score range' - 'Score is a integer percentage where a 100% score means that all expected documentation information is present.',
 			'Score weights' - 'The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.',
 			'Score customization' - 'The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.'
 		]
@@ -117,8 +117,8 @@
 		),
 		(	Info2Score =:= -1 ->
 			% no declared predicates
-			Score is Info1Score
-		;	Score is Info1Score * EntityWeight / 100 + Info2Score * PredicatesWeight / 100
+			Score is round(Info1Score)
+		;	Score is round(Info1Score * EntityWeight / 100 + Info2Score * PredicatesWeight / 100)
 		).
 
 	info_1_score(Entity, Score) :-
