@@ -19,14 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(halstead_metric,
+:- object(halstead_metric(_Stroud),
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
 		date is 2018/06/08,
 		comment is 'Computes Halstead complexity numbers for an entity.',
+		parameters is ['Stroud' - 'Coeficient for computing the time required to prgram.'],
 		remarks is [
 			'Definition of operators' - 'Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.',
 			'Definition of operands' - 'Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.',
@@ -39,7 +40,7 @@
 			'V'   - 'Volume: V = EL * log2(EV)',
 			'D'   - 'Difficulty: D = (Pn/2) * (CAn/An)',
 			'E'   - 'Effort: E = D * V',
-			'T'   - 'Time required to program: T = E/18 seconds',
+			'T'   - 'Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)',
 			'B'   - 'Number of delivered bugs: B = V/3000',
 			'Entity score' - 'Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.'
 		]
@@ -50,6 +51,11 @@
 	:- uses(pairs, [values/2]).
 
 	entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) :-
+		parameter(1, Stroud),
+		(	var(Stroud) ->
+			Stroud = 18
+		;	true
+		),
 		(	var(Entity) ->
 			^^current_entity(Entity)
 		;	true
@@ -67,7 +73,7 @@
 		;	D is 0.0
 		),
 		E is D * V,
-		T is round(E / 18),
+		T is round(E / Stroud),
 		B is V / 3000.
 
 	predicate_data(protocol, Entity, Pn, PAn, 0, 0) :-
@@ -85,7 +91,7 @@
 				;	category_property(Entity, defines(Predicate, _))
 				;	category_property(Entity, calls(Predicate, _))
 				),
-				callee_arity(Predicate, Arity)
+				predicate_arity(Predicate, Arity)
 			),
 			PredicatesArities
 		),
@@ -96,7 +102,7 @@
 		findall(
 			CalleeArity,
 			(	category_property(Entity, calls(Predicate, _)),
-				callee_arity(Predicate, CalleeArity)
+				predicate_arity(Predicate, CalleeArity)
 			),
 			CalleeArities
 		),
@@ -121,7 +127,7 @@
 				;	object_property(Entity, defines(Predicate, _))
 				;	object_property(Entity, calls(Predicate, _))
 				),
-				callee_arity(Predicate, Arity)
+				predicate_arity(Predicate, Arity)
 			),
 			PredicatesArities
 		),
@@ -132,7 +138,7 @@
 		findall(
 			CalleeArity,
 			(	object_property(Entity, calls(Callee, _)),
-				callee_arity(Callee, CalleeArity)
+				predicate_arity(Callee, CalleeArity)
 			),
 			CalleeArities
 		),
@@ -151,11 +157,11 @@
 		sum(CallerData, CAn1),
 		CAn is CAn0 + CAn1.
 
-	callee_arity(_::_/Arity, Arity).
-	callee_arity(::_/Arity, Arity).
-	callee_arity(^^_/Arity, Arity).
-	callee_arity(_:_/Arity, Arity).
-	callee_arity(_/Arity, Arity).
+	predicate_arity(_::_/Arity, Arity).
+	predicate_arity(::_/Arity, Arity).
+	predicate_arity(^^_/Arity, Arity).
+	predicate_arity(_:_/Arity, Arity).
+	predicate_arity(_/Arity, Arity).
 
 	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
 		['Number of distinct predicates (declared, defined, or called): ~d'-[Pn], nl],
@@ -169,5 +175,18 @@
 		['Effort: ~f'-[E], nl],
 		['Time required to program: ~d seconds'-[T], nl],
 		['Number of delivered bugs: ~f'-[B], nl].
+
+:- end_object.
+
+
+:- object(halstead_metric,
+	extends(halstead_metric(18))).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2018/06/08,
+		comment is 'Computes Halstead complexity numbers for an entity using a Stroud of 18.'
+	]).
 
 :- end_object.
