@@ -29,8 +29,12 @@
 		comment is 'Unit tests for the Halstead complexity metric.'
 	]).
 
+	:- uses(halstead_metric, [entity_score/2]).
+
 	cover(code_metric).
 	cover(halstead_metric).
+
+	% basic validity tests
 
 	test(halstead_expanding) :-
 		halstead_metric_valid(expanding).
@@ -47,16 +51,33 @@
 	test(halstead_user) :-
 		halstead_metric_valid(user).
 
+	% metric math tests
+
+	test(halstead_h_ptc) :-
+		entity_score(h_ptc, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
+		Pn == 2, PAn == 3,
+		Cn == 0, CAn == 0.
+
+	test(halstead_h_ctg) :-
+		entity_score(h_ctg, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
+		Pn == 2, PAn == 2,
+		Cn == 5, CAn == 4.
+
+	test(halstead_h_obj) :-
+		entity_score(h_obj, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
+		Pn == 4, PAn == 4,
+		Cn == 4, CAn == 2.
+
 	% auxiliary predicates
 
 	halstead_metric_valid(Entity) :-
-		halstead_metric::entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)),
+		entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)),
 		integer(Pn), Pn >= 0,
 		integer(PAn), PAn >= 0,
 		integer(Cn), Cn >= 0,
 		integer(CAn), CAn >= 0,
-		integer(EV), EV >= 0,
-		integer(EL), EL >= 0,
+		integer(EV), EV >= 0, EV is Pn + PAn,
+		integer(EL), EL >= 0, EL is Cn + CAn,
 		number(V), V >= 0,
 		number(D), D >= 0,
 		number(E), E >= 0,

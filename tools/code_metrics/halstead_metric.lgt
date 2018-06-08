@@ -23,17 +23,17 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2018/06/08,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		remarks is [
 			'Definition of operators' - 'Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.',
-			'Definition of operands' - 'Predicate arguments are abstracted and interpreted as distinct operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.',
+			'Definition of operands' - 'Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.',
 			'Pn'  - 'Number of distinct predicates (declared, defined, or called)',
 			'PAn' - 'Number of predicate arguments (assumed distinct)',
-			'Cn'  - 'Number of calls + number of clauses',
-			'CAn' - 'Number of call arguments + number of clause arguments',
+			'Cn'  - 'Number of predicate calls + number of clauses',
+			'CAn' - 'Number of predicate call arguments + number of arguments in facts',
 			'EV'  - 'Entity vocabulary: EV = Pn + PAn',
 			'EL'  - 'Entity length: EL = Cn + CAn',
 			'V'   - 'Volume: V = EL * log2(EV)',
@@ -108,7 +108,8 @@
 			CallerDatum,
 			(	category_property(Entity, defines(_/CallerArity, Properties)),
 				memberchk(number_of_clauses(NumberOfClauses), Properties),
-				CallerDatum is CallerArity * NumberOfClauses
+				memberchk(number_of_rules(NumberOfRules), Properties),
+				CallerDatum is CallerArity * (NumberOfClauses - NumberOfRules)
 			),
 			CallerData
 		),
@@ -144,7 +145,8 @@
 			CallerDatum,
 			(	object_property(Entity, defines(_/CallerArity, Properties)),
 				memberchk(number_of_clauses(NumberOfClauses), Properties),
-				CallerDatum is CallerArity * NumberOfClauses
+				memberchk(number_of_rules(NumberOfRules), Properties),
+				CallerDatum is CallerArity * (NumberOfClauses - NumberOfRules)
 			),
 			CallerData
 		),
@@ -152,14 +154,16 @@
 		CAn is CAn0 + CAn1.
 
 	callee_arity(_::_/Arity, Arity).
+	callee_arity(::_/Arity, Arity).
+	callee_arity(^^_/Arity, Arity).
 	callee_arity(_:_/Arity, Arity).
 	callee_arity(_/Arity, Arity).
 
 	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
 		['Number of distinct predicates (declared, defined, or called): ~d'-[Pn], nl],
 		['Number of predicate arguments (assumed distinct): ~d'-[PAn], nl],
-		['Number of calls + number of clauses: ~d'-[Cn], nl],
-		['Number of call arguments + number of clause arguments: ~d'-[CAn], nl],
+		['Number of predicate calls + number of clauses: ~d'-[Cn], nl],
+		['Number of predicate call arguments + number of arguments in facts: ~d'-[CAn], nl],
 		['Entity vocabulary: ~d'-[EV], nl],
 		['Entity length: ~d'-[EL], nl],
 		['Volume: ~f'-[V], nl],

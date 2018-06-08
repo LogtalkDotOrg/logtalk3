@@ -179,3 +179,52 @@
 	specializes(object)).
 
 :- end_object.
+
+
+% Halstead metric test entities
+
+:- protocol(h_ptc).
+
+	:- public(foo/1).
+	:- public(bar/2).
+
+	% two distinct predicates => Pn = 2; PAn = 3
+	% no clauses => Cn = 0; CAn = 0
+
+:- end_protocol.
+
+
+:- category(h_ctg).
+
+	:- public(foo/1).
+
+	foo(X) :-
+		bar(X).
+
+	bar(1).
+	bar(2).
+	bar(3).
+
+	% two distinct predicates => Pn = 2; PAn = 2
+	% one predicate call + four clauses => Cn = 5
+	% one predicate call argument + three facts with one argument each => CAn = 4
+
+:- end_category.
+
+
+:- object(h_obj,
+	imports(h_ctg)).
+
+	:- public(baz/1).
+
+	baz(X) :-
+		^^foo(X).
+
+	local(F) :-
+		logtalk::loaded_file(F).
+
+	% four distinct predicates => Pn = 4; PAn = 3
+	% two predicate calls + two clauses => Cn = 4
+	% two predicate call arguments + zero facts => CAn = 2
+
+:- end_object.
