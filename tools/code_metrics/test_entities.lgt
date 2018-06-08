@@ -207,7 +207,7 @@
 
 	% two distinct predicates => Pn = 2; PAn = 2
 	% one predicate call + four clauses => Cn = 5
-	% one predicate call argument + three facts with one argument each => CAn = 4
+	% one predicate call argument + four clause head arguments => CAn = 5
 
 :- end_category.
 
@@ -225,6 +225,6 @@
 
 	% four distinct predicates => Pn = 4; PAn = 3
 	% two predicate calls + two clauses => Cn = 4
-	% two predicate call arguments + zero facts => CAn = 2
+	% two predicate call arguments + two clause head arguments => CAn = 4
 
 :- end_object.

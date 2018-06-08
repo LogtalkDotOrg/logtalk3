@@ -61,12 +61,12 @@
 	test(halstead_h_ctg) :-
 		entity_score(h_ctg, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
 		Pn == 2, PAn == 2,
-		Cn == 5, CAn == 4.
+		Cn == 5, CAn == 5.
 
 	test(halstead_h_obj) :-
 		entity_score(h_obj, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
 		Pn == 4, PAn == 4,
-		Cn == 4, CAn == 2.
+		Cn == 4, CAn == 4.
 
 	% auxiliary predicates
 

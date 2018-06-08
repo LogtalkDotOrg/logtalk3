@@ -33,7 +33,7 @@
 			'Pn'  - 'Number of distinct predicates (declared, defined, or called)',
 			'PAn' - 'Number of predicate arguments (assumed distinct)',
 			'Cn'  - 'Number of predicate calls + number of clauses',
-			'CAn' - 'Number of predicate call arguments + number of arguments in facts',
+			'CAn' - 'Number of predicate call arguments + number of clause head arguments',
 			'EV'  - 'Entity vocabulary: EV = Pn + PAn',
 			'EL'  - 'Entity length: EL = Cn + CAn',
 			'V'   - 'Volume: V = EL * log2(EV)',
@@ -108,8 +108,7 @@
 			CallerDatum,
 			(	category_property(Entity, defines(_/CallerArity, Properties)),
 				memberchk(number_of_clauses(NumberOfClauses), Properties),
-				memberchk(number_of_rules(NumberOfRules), Properties),
-				CallerDatum is CallerArity * (NumberOfClauses - NumberOfRules)
+				CallerDatum is CallerArity * NumberOfClauses
 			),
 			CallerData
 		),
@@ -145,8 +144,7 @@
 			CallerDatum,
 			(	object_property(Entity, defines(_/CallerArity, Properties)),
 				memberchk(number_of_clauses(NumberOfClauses), Properties),
-				memberchk(number_of_rules(NumberOfRules), Properties),
-				CallerDatum is CallerArity * (NumberOfClauses - NumberOfRules)
+				CallerDatum is CallerArity * NumberOfClauses
 			),
 			CallerData
 		),
@@ -163,7 +161,7 @@
 		['Number of distinct predicates (declared, defined, or called): ~d'-[Pn], nl],
 		['Number of predicate arguments (assumed distinct): ~d'-[PAn], nl],
 		['Number of predicate calls + number of clauses: ~d'-[Cn], nl],
-		['Number of predicate call arguments + number of arguments in facts: ~d'-[CAn], nl],
+		['Number of predicate call arguments + number of clause head arguments: ~d'-[CAn], nl],
 		['Entity vocabulary: ~d'-[EV], nl],
 		['Entity length: ~d'-[EL], nl],
 		['Volume: ~f'-[V], nl],
