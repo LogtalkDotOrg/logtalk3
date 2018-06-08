@@ -23,10 +23,10 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/02/18,
-		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes.'
+		date is 2018/06/08,
+		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
 	]).
 
 	entity_score(Entity, Size) :-
@@ -119,6 +119,6 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(source_code_size(Size), code_metrics) -->
-		['Source code size (upper bound): ~w'-[Size], nl].
+		['Source code size (upper bound): ~w bytes'-[Size], nl].
 
 :- end_object.
