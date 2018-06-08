@@ -188,7 +188,7 @@
 	:- public(foo/1).
 	:- public(bar/2).
 
-	% two distinct predicates => Pn = 2; PAn = 3
+	% two distinct predicates with a total of three arguments => Pn = 2; PAn = 3
 	% no clauses => Cn = 0; CAn = 0
 
 :- end_protocol.
@@ -205,7 +205,7 @@
 	bar(2).
 	bar(3).
 
-	% two distinct predicates => Pn = 2; PAn = 2
+	% two distinct predicates, both with a single argument => Pn = 2; PAn = 2
 	% one predicate call + four clauses => Cn = 5
 	% one predicate call argument + four clause head arguments => CAn = 5
 
@@ -223,7 +223,7 @@
 	local(F) :-
 		logtalk::loaded_file(F).
 
-	% four distinct predicates => Pn = 4; PAn = 3
+	% four distinct predicates, all with a single argument => Pn = 4; PAn = 4
 	% two predicate calls + two clauses => Cn = 4
 	% two predicate call arguments + two clause head arguments => CAn = 4
 
