@@ -636,7 +636,18 @@ term_hash(Term, Depth, Range, Hash) :-
 {#} :-
 	!,
 	logtalk_make(documentation).
-
+{+d} :-
+	!,
+	logtalk_make(debug).
+{+n} :-
+	!,
+	logtalk_make(normal).
+{+o} :-
+	!,
+	logtalk_make(optimal).
+{$} :-
+	!,
+	logtalk_make(caches).
 
 {File, Files} :-
 	!,
