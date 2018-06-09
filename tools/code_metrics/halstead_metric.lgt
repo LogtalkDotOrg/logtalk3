@@ -24,9 +24,9 @@
 	:- info([
 		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2018/06/08,
+		date is 2018/06/09,
 		comment is 'Computes Halstead complexity numbers for an entity.',
-		parameters is ['Stroud' - 'Coeficient for computing the time required to prgram.'],
+		parameters is ['Stroud' - 'Coeficient for computing the time required to program.'],
 		remarks is [
 			'Definition of operators' - 'Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.',
 			'Definition of operands' - 'Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.',
