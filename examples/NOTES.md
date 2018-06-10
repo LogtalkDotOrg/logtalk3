@@ -282,6 +282,12 @@ Follows a short description of each included example (in alphabetical order):
 - `operators`  
 	example of using operators local to objects and categories
 
+- `optionals`  
+	illustrates using the optional terms library to decouple data
+	acquisition, which must be able to represent optional values,
+	from data processing, which decides how to handle those values
+	and their absence
+
 - `patches`  
 	example of using complementing categories to patch broken
 	object code
