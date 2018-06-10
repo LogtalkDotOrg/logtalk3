@@ -165,6 +165,11 @@ Follows a short description of each included example (in alphabetical order):
 - `expansion`  
 	example illustrating the term and goal expansion mechanisms
 
+- `expecteds`  
+	illustrates using the expected terms library to decouple data
+	acquisition, which must be resilient to unexpected events,
+	from data processing, which decides how to handle those events
+
 - `family`  
 	classical family relations example
 
