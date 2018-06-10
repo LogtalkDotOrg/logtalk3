@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 30, 2018
+%  Last updated on June 10, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -137,6 +137,7 @@ logtalk_library_path(encodings, examples('encodings/')).
 logtalk_library_path(engines, examples('engines/')).
 logtalk_library_path(errors, examples('errors/')).
 logtalk_library_path(expansion, examples('expansion/')).
+logtalk_library_path(expecteds, examples('expecteds/')).
 logtalk_library_path(family, examples('family/')).
 logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).

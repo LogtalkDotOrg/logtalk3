@@ -95,6 +95,9 @@ Examples
 * ADDED: Example `edcgs` with a port of Peter Van Roy and Michael Hendricks
 EDCGs examples and tests.
 
+* ADDED: Example `expecteds` illustrating the use of the expected terms
+library.
+
 * UPDATED: The `java` example to take advantage of the library `java_hook`
 hook object when run using the JPL-based Java interface library.
 
