@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on May 13, 2018
+%  Last updated on June 13, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -745,9 +745,10 @@ forall(Generate, Test) :-
 % '$lgt_normalize_error_term'(@callable, -callable)
 
 '$lgt_normalize_error_term'(
-	error(existence_error(procedure, ':'(user, Functor/Arity)), Context),
-	error(existence_error(procedure, Functor/Arity), Context)
-).
+	error(existence_error(procedure, Module:Predicate), Context),
+	error(existence_error(procedure, Predicate), Context)
+) :-
+	'$lgt_user_module_qualification'(Predicate, Module:Predicate).
 
 
 

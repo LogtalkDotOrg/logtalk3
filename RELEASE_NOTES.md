@@ -50,6 +50,9 @@ Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
 
 * FIXED: Two harmless warnings when using SWI-Prolog `make/0` predicate.
 
+* FIXED: SICStus Prolog error normalization when Logtalk is loaded into a
+module other than `user`.
+
 Documentation
 -------------
 
