@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 29, 2018
+%  Last updated on June 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -84,8 +84,44 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	;	'$lgt_file_extension'(logtalk, DotExtension),
 		atom_concat(LogtalkPath, DotExtension, Source)
 	),
-	source_file_property(_, derived_from(Source,_)),
-	!.
+	source_file_property(_, derived_from(Source,_)).
+
+prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
+	atom(Spec),
+	logtalk::loaded_file_property(Source, basename(Basename)),
+	(	Spec == Source ->
+		true
+	;	Spec == Basename ->
+		true
+	;	file_name_extension(Spec, _, Basename)
+	).
+
+prolog_edit:locate(Spec, include_file(Source), [file(Source)]) :-
+	atom(Spec),
+	logtalk::loaded_file_property(_, includes(Source)),
+	file_base_name(Source, Basename),
+	(	Spec == Source ->
+		true
+	;	Spec == Basename ->
+		true
+	;	file_name_extension(Spec, _, Basename)
+	).
+
+prolog_edit:locate(Spec, EntitySpec, [file(Source), line(Line)]) :-
+	callable(Spec),
+	(	current_object(Spec) ->
+		object_property(Spec, file(Source)),
+		object_property(Spec, lines(Line,_)),
+		EntitySpec = object(Spec)
+	;	current_category(Spec) ->
+		category_property(Spec, file(Source)),
+		category_property(Spec, lines(Line,_)),
+		EntitySpec = category(Spec)
+	;	atom(Spec), current_protocol(Spec) ->
+		protocol_property(Spec, file(Source)),
+		protocol_property(Spec, lines(Line,_)),
+		EntitySpec = protocol(Spec)
+	).
 
 
 /*	

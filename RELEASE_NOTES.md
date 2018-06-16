@@ -45,6 +45,9 @@ Prolog adapter and integration files
 * UPDATED: The JIProlog adapter file to recognize the `*->/2` soft-cut control
 construct as built-in.
 
+* UPDATED: Support for SWI-Prolog `edit/1` predicate to also locate source
+files (without forcing library notation), included files, and entities.
+
 * IMPROVED: SWI-Prolog integration to avoid the `listing/0` predicate listing
 Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
 
