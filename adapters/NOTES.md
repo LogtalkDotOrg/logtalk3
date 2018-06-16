@@ -308,10 +308,12 @@ To improve the integration between Logtalk and SWI-Prolog, the file
 `swihooks.pl` allows loading of Logtalk source files using SWI-Prolog
 `load_files/2` and `consult/1` predicates and adds support for the `edit/1`
 and `make/0` predicates, the XPCE profiler, and the XPCE graphical tracer.
-Note, however, that in the case of syntax errors in a Logtalk source file,
-the `make/0` predicate will not detect the fixed file as no intermediate
-Prolog file was generated in the first loading attempt (use instead the
-`logtalk_make/0-1` predicates in this case).
+The profiler and tracer also require specific Logtalk startup settings (see
+the `settings-sample.lgt` file for details). Note, however, that in the case
+of syntax errors in a Logtalk source file, the `make/0` predicate will not
+detect the fixed file as no intermediate Prolog file was generated in the
+first loading attempt (use instead the `logtalk_make/0-1` predicates in this
+case).
 
 The `swihooks.pl` file includes experimental and commented out code for
 writing stack trace for errors generated from top-level message sending

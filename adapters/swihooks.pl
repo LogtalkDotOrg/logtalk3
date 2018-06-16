@@ -71,6 +71,7 @@ user:prolog_load_file(_:Spec, Flags) :-
 
 :- multifile(prolog_edit:locate/3).
 
+% source files (library notation)
 prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	compound(Spec),
 	Spec =.. [Library, Name],
@@ -85,7 +86,7 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 		atom_concat(LogtalkPath, DotExtension, Source)
 	),
 	source_file_property(_, derived_from(Source,_)).
-
+% source files (by basename)
 prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	atom(Spec),
 	logtalk::loaded_file_property(Source, basename(Basename)),
@@ -95,7 +96,7 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 		true
 	;	file_name_extension(Spec, _, Basename)
 	).
-
+% included files
 prolog_edit:locate(Spec, include_file(Source), [file(Source)]) :-
 	atom(Spec),
 	logtalk::loaded_file_property(_, includes(Source)),
@@ -106,7 +107,7 @@ prolog_edit:locate(Spec, include_file(Source), [file(Source)]) :-
 		true
 	;	file_name_extension(Spec, _, Basename)
 	).
-
+% entities
 prolog_edit:locate(Spec, EntitySpec, [file(Source), line(Line)]) :-
 	callable(Spec),
 	(	current_object(Spec) ->
@@ -121,6 +122,34 @@ prolog_edit:locate(Spec, EntitySpec, [file(Source), line(Line)]) :-
 		protocol_property(Spec, file(Source)),
 		protocol_property(Spec, lines(Line,_)),
 		EntitySpec = protocol(Spec)
+	).
+% public predicates
+prolog_edit:locate(Entity::Predicate, EntityPredicateSpec, [file(Source), line(Line)]) :-
+	callable(Entity),
+	current_object(Entity),
+	(	Predicate = Functor/Arity ->
+		true
+	;	atom(Predicate),
+		Functor = Predicate
+	),
+	Entity::current_predicate(Functor/Arity),
+	functor(Template, Functor, Arity),
+	(	Entity::predicate_property(Template, declared_in(DeclarationEntity, Line)),
+		(	current_object(DeclarationEntity) ->
+			object_property(DeclarationEntity, file(Source))
+		;	current_category(DeclarationEntity) ->
+			category_property(DeclarationEntity, file(Source))
+		;	atom(DeclarationEntity),
+			protocol_property(DeclarationEntity, file(Source))
+		),
+		EntityPredicateSpec = declaration(Functor/Arity)
+	;	Entity::predicate_property(Template, defined_in(DefinitionEntity, Line)),
+		(	current_object(DefinitionEntity) ->
+			object_property(DefinitionEntity, file(Source))
+		;	current_category(DefinitionEntity),
+			category_property(DefinitionEntity, file(Source))
+		),
+		EntityPredicateSpec = definition(Functor/Arity)
 	).
 
 

@@ -46,7 +46,8 @@ Prolog adapter and integration files
 construct as built-in.
 
 * UPDATED: Support for SWI-Prolog `edit/1` predicate to also locate source
-files (without forcing library notation), included files, and entities.
+files (without forcing library notation), included files, entities, and
+object public predicates declaration and definition.
 
 * IMPROVED: SWI-Prolog integration to avoid the `listing/0` predicate listing
 Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
