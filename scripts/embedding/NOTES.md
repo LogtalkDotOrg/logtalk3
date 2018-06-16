@@ -23,12 +23,13 @@ compilers for embedding Logtalk and Logtalk applications. See the
 
 These scripts allow pre-compilation of the Logtalk compiler/runtime
 and optionally of a Logtalk application. This is a common requirement
-for embedding. These sample scripts should be regarded as starting
-points as actual use requires customization (e.g. the starting goal,
-inclusion of a top-level interpreter, etc). The scripts also accept
-command-lines options for specifying a paths files and a settings
-file. See the `settings-embedding-sample.lgt` file for settings
-suggestions for embedding applications.
+for embedding, specially when deploying applications in read-only file
+systems. These sample scripts should be regarded as starting points as
+actual use requires customization (e.g. the starting goal, inclusion of
+a top-level interpreter, etc). The scripts also accept command-lines
+options for specifying a paths files and a settings file. See the
+`settings-embedding-sample.lgt` file for settings suggestions for
+embedding applications.
 
 An alternative, available in some backend Prolog compilers such as
 SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
