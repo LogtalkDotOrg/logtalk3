@@ -44,9 +44,15 @@
 
 <h4>Description</h4>
 
-<pre>use_module(Module, Predicates)</pre>
+<pre>use_module(Module, Predicates)
+use_module(Object, PredicatesAndAliases)
+
+use_module(Object, NonTerminals)
+use_module(Object, NonTerminalsAndAliases)
+
+use_module(Module, Operators)</pre>
 <p>
-This directive declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as calls to explicitly-qualified module predicates. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Module:</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
+This directive declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates (or non-terminals) are to be interpreted as calls to explicitly-qualified module predicates (or non-terminals). Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Module:</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
 </p>
 <p>
 This directive is also used when compiling calls to the database and reflection built-in methods by examining these methods predicate arguments.
@@ -63,7 +69,13 @@ The modules should be loaded prior to the compilation of entities that call the 
 
 <h4>Template and modes</h4>
 
-<pre>use_module(+module_identifier, +predicate_indicator_list)</pre>
+<pre>use_module(+module_identifier, +predicate_indicator_list)
+use_module(+module_identifier, +predicate_indicator_alias_list)
+
+use_module(+module_identifier, +non_terminal_indicator_list)
+use_module(+module_identifier, +non_terminal_indicator_alias_list)
+
+use_module(+module_identifier, +operator_list)</pre>
 
 <h4>Examples</h4>
 
@@ -86,7 +98,7 @@ foo :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 27, 2017</span>
+		<span>Last updated on: June 17, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#directives">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>

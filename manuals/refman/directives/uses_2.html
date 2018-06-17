@@ -48,7 +48,9 @@
 uses(Object, PredicatesAndAliases)
 
 uses(Object, NonTerminals)
-uses(Object, NonTerminalsAndAliases)</pre>
+uses(Object, NonTerminalsAndAliases)
+
+uses(Object, Operators)</pre>
 <p>
 Declares that all calls made from predicates (or non-terminals) defined in the category or object containing the directive to the specified predicates (or non-terminals) are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the  calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
 </p>
@@ -68,7 +70,9 @@ To enable the use of static binding, and thus optimal message sending performanc
 uses(+object_identifier, +predicate_indicator_alias_list)
 
 uses(+object_identifier, +non_terminal_indicator_list)
-uses(+object_identifier, +non_terminal_indicator_alias_list)</pre>
+uses(+object_identifier, +non_terminal_indicator_alias_list)
+
+uses(+object_identifier, +operator_list)</pre>
 
 
 <h4>Examples</h4>
@@ -85,8 +89,8 @@ foo :-
 <p>
 Another example, using the extended notation that allows us to define predicate aliases:
 </p>
-<pre>:- uses(btrees, [new/1::new_btree/1]).
-:- uses(queues, [new/1::new_queue/1]).
+<pre>:- uses(btrees, [new/1 as new_btree/1]).
+:- uses(queues, [new/1 as new_queue/1]).
 
 btree_to_queue :-
     ...,
@@ -103,7 +107,7 @@ btree_to_queue :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 27, 2017</span>
+		<span>Last updated on: June 17, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="synchronized_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>

@@ -67,6 +67,8 @@ of Origin (DCO).
 * ADDED: Explain the caveats of setting a Prolog module or `user` as a hook
 object in the user manual.
 
+* IMPROVED: Documentation of the `uses/2` and `use_module/2` directives.
+
 Library
 -------
 
