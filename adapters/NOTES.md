@@ -403,7 +403,7 @@ integration with the SWI-Prolog own development tools.
 See the `scripts/embedding/swipl` directory for a sample shell script
 that can help in generating QLF files from Logtalk and optionally a
 Logtalk application. The script documentation also explains how to
-generated saved states that include Logtalk applications.
+generate saved states that include Logtalk applications.
 
 
 XSB 3.8.0 and later versions

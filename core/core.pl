@@ -14468,12 +14468,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 % suspicious use of ::/2 instead of ::/1 to send a message to "self"
 
 '$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, compile(_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_execution_context'(ExCtx, _, _, _, Self, _, _),
 	Self == Obj,
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(general), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, ::Pred)),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, ::Pred)),
 	fail.
 
 % translation performed at runtime
@@ -14768,11 +14769,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_self'(Pred, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, compile(_), _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
 	functor(Pred, Functor, Arity),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(general), core, suspicious_call(File, Lines, Type, Entity, ::Pred, Pred)),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, ::Pred, Pred)),
 	fail.
 
 % broadcasting control constructs
@@ -19857,6 +19859,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(missing_directives).
 '$lgt_valid_flag'(duplicated_directives).
 '$lgt_valid_flag'(lambda_variables).
+'$lgt_valid_flag'(suspicious_calls).
 '$lgt_valid_flag'(trivial_goal_fails).
 '$lgt_valid_flag'(always_true_or_false_goals).
 '$lgt_valid_flag'(deprecated).
@@ -19959,6 +19962,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(lambda_variables, silent) :- !.
 '$lgt_valid_flag_value'(lambda_variables, warning) :- !.
+
+'$lgt_valid_flag_value'(suspicious_calls, silent) :- !.
+'$lgt_valid_flag_value'(suspicious_calls, warning) :- !.
 
 '$lgt_valid_flag_value'(trivial_goal_fails, silent) :- !.
 '$lgt_valid_flag_value'(trivial_goal_fails, warning) :- !.

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on May 13, 2018
+%  Last updated on June 18, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -280,6 +280,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(trivial_goal_fails, warning).
 '$lgt_default_flag'(always_true_or_false_goals, warning).
 '$lgt_default_flag'(lambda_variables, warning).
+'$lgt_default_flag'(suspicious_calls, warning).
 '$lgt_default_flag'(underscore_variables, singletons).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
