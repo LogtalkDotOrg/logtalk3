@@ -43,10 +43,10 @@
 <h1 id="features_features">Logtalk main features</h1>
 
 <p>
-Some years ago, I decided that the best way to learn object-oriented programming was to build my own object-oriented language. Prolog always being my favorite language, I chose to extend it with object-oriented capabilities. Eventually this work has lead to the Logtalk system. The first public release of Logtalk 1.x occurred in February of 1995. Based on feedback by users and on the author subsequent work, the second major version went public in July of 1998.
+Several years ago, I decided that the best way to learn object-oriented programming was to build my own object-oriented language. Prolog always being my favorite language, I chose to extend it with object-oriented capabilities. Strong motivation also come from my frustration with Prolog shortcomings for writing large applications. Eventually this work has lead to the Logtalk programing language as its know today. The first system to use the name Logtalk appeared in February of 1995. At that time, Logtalk was mainly an experiment in computational reflection with a rudimentary runtime and no compiler. Based on feedback by users and on the author subsequent work, the name was retained and Logtalk as created as a full programming language focusing on using object-oriented concepts for code encapsulation and reuse. Its first public alpha version was released in July of 1998 with the first stable release (2.0) following in February of 1999. Development of the third generation of Logtalk started in 2012 with the first public alpha version in August of 2012 and the first stable release (3.0.0) in January of 2015.
 </p>
 <p>
-Although this version of Logtalk shares many ideas and goals with previous 1.x versions, programs written for one version are not compatible with the other (however, conversion from previous versions can easily be accomplished in most cases). This is a consequence of the desire to have a more friendly system, with a very smooth learning curve, bringing Logtalk programming closer to traditional Prolog programming. There are, of course, also other important changes, that result in a more powerful and funnier system. Logtalk 2.x development provides the following features:
+Logtalk provides the following features:
 </p>
 
 <h2 id="features_logic">Integration of logic and object-oriented programming</h2>
@@ -155,7 +155,7 @@ The Logtalk system has been designed to be compatible with most Prolog compilers
 The current Logtalk implementation works as a trans-compiler: Logtalk source files are first compiled to Prolog source files, which are then compiled by the chosen Prolog compiler. Therefore, Logtalk performance necessarily depends on the back-end Prolog compiler. The Logtalk compiler preserves the programmers choices when writing efficient code that takes advantage of tail recursion and first-argument indexing.
 </p>
 <p>
-As an object-oriented language, Logtalk uses both static binding and dynamic binding for matching messages and methods. Furthermore, Logtalk entities (objects, protocols, and categories) are independently compiled, allowing for a very flexible programming development. Entities can be edited, compiled, and loaded at runtime, without necessarily implying recompilation of all related entities.
+As an object-oriented language, Logtalk can use both static binding and dynamic binding for matching messages and methods. Furthermore, Logtalk entities (objects, protocols, and categories) are independently compiled, allowing for a very flexible programming development. Entities can be edited, compiled, and loaded at runtime, without necessarily implying recompilation of all related entities.
 </p>
 <p>
 When dynamic binding is used, the Logtalk runtime engine implements caching of method lookups (including messages to <em>self</em> and <em>super</em> calls), ensuring a performance level close to what could be achieved when using static binding.
@@ -176,26 +176,26 @@ Logtalk, being a superset of Prolog, shares with it the same preferred areas of 
 		<dd>Logtalk objects, coupled with event-driven programming features, enable easy implementation of frame-like systems and similar structured knowledge representations.</dd>
 </dl>
 <dl>
-	<dt><strong>Blackboard systems, agent-based systems and systems with complex object relationships</strong></dt>
+	<dt><strong>Blackboard systems, agent-based systems, and systems with complex object relationships</strong></dt>
 		<dd>Logtalk support for event-driven programming can provide a basis for the dynamic and reactive nature of blackboard type applications.</dd>
 </dl>
 <dl>
 	<dt><strong>Highly portable applications</strong></dt>
-		<dd>Logtalk is compatible with almost any modern Prolog compiler. Used as a way to provide Prolog with namespaces, it avoids the porting problems of most Prolog module systems. Platform, operating system, or compiler specific code can be isolated from the rest of the code by encapsulating it in objects with well defined interfaces.</dd>
+		<dd>Logtalk is compatible with most modern Prolog systems that support official and de facto standards. Used as a way to provide Prolog with namespaces, it avoids the porting problems of most Prolog module systems. Platform, operating system, or compiler specific code can be isolated from the rest of the code by encapsulating it in objects with well defined interfaces.</dd>
 </dl>
 <dl>
 	<dt><strong>Alternative to a Prolog module system</strong></dt>
-		<dd>Logtalk can be used as an alternative to a Prolog compiler module system. Any Prolog application that use modules can be converted to a Logtalk application, improving portability across Prolog compilers and taking advantage of the stronger encapsulation and reuse framework provided by Logtalk object-oriented features.</dd>
+		<dd>Logtalk can be used as an alternative to a Prolog compiler module system. Most Prolog applications that use modules can be converted into Logtalk applications, improving portability across Prolog systems and taking advantage of the stronger encapsulation and reuse framework provided by Logtalk object-oriented features.</dd>
 </dl>
 <dl>
 	<dt><strong>Integration with other programming languages</strong></dt>
-		<dd>Logtalk support for most key object-oriented features helps users integrating Prolog with object-oriented languages like C++, Java, or Smalltalk by providing an high-level mapping between the two languages.</dd>
+		<dd>Logtalk support for most key object-oriented features helps users integrating Prolog with object-oriented languages like C++, Java, or Smalltalk by facilitating an high-level mapping between the two languages.</dd>
 </dl>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 25, 2011</span>
+		<span>Last updated on: June 18, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="messages.html">next</a></span><br/>

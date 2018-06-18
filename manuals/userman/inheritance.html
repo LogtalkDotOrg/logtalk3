@@ -49,7 +49,7 @@ The inheritance mechanisms found on object-oriented programming languages allow 
 Logtalk uses a depth-first lookup procedure for finding predicate declarations and predicate definitions, as explained below. The lookup procedures locate the entities holding the predicate declaration and the predicate definition using, respectively, the predicate indicator and the predicate template (constructed from the predicate indicator).
 </p>
 <p>
-The <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> predicate directive may be used to defining alternative names for inherited predicates for solving inheritance conflicts and for giving access to all inherited definitions.
+The <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> predicate directive may be used to defining alternative names for inherited predicates, for solving inheritance conflicts, and for giving access to all inherited definitions.
 </p>
 
 <h2 id="inheritance_protocol">Protocol inheritance</h2>
@@ -85,7 +85,7 @@ The search order for predicate definitions is similar to the search for predicat
 <h3 id="inheritance_implementation_class">Search order for class hierarchies</h3>
 
 <p>
-The search order for predicate definitions is similar to the search for predicate declarations except that implemented protocols are ignored (as they can only contain predicate directives) and that the search starts at the instance itself (that received the message) before proceeding, if no predicate definition is found there, to the instance classes.
+The search order for predicate definitions is similar to the search for predicate declarations except that implemented protocols are ignored (as they can only contain predicate directives) and that the search starts at the instance itself (that received the message) before proceeding, if no predicate definition is found there, to the instance classes and then to the class superclasses.
 </p>
 
 <h3 id="inheritance_implementation_redefinition">Inheritance versus predicate redefinition</h3>
@@ -192,7 +192,6 @@ Union of the new with the inherited definitions: all the definitions are taken i
 Foo = 3 ;
 Foo = 1 ;
 Foo = 2 ;
-
 no</pre>
 
 <h4 id="inheritance_selective">Selective inheritance</h4>
@@ -231,7 +230,7 @@ no</pre>
 <h2 id="inheritance_types">Public, protected, and private inheritance</h2>
 
 <p>
-To make all <a href="../glossary.html#public_predicate">public predicates</a> declared via implemented protocols, imported categories, or inherited objects <a href="../glossary.html#protected_predicate">protected</a> or to make all public and protected predicates <a href="../glossary.html#private_predicate">private</a> we prefix the entity's name with the corresponding keyword. For instance:
+To make all <a href="../glossary.html#public_predicate">public predicates</a> declared via implemented protocols, imported categories, or ancestor objects <a href="../glossary.html#protected_predicate">protected</a> or to make all public and protected predicates <a href="../glossary.html#private_predicate">private</a> we prefix the entity's name with the corresponding keyword. For instance:
 </p>
 <pre>:- object(Object,
     implements(private::Protocol)).       % all the Protocol public and protected
@@ -271,13 +270,13 @@ It is not possible to discuss inheritance mechanisms without referring to the lo
 Until now, no solution that we might consider satisfactory for all the problems presented by the multiple inheritance mechanisms has been found. From the simplicity of some extensions that use the Prolog search strategy like <a href="../bibliography.html#McCabe92">[McCabe 92]</a> or <a href="../bibliography.html#Moss94">[Moss 94]</a> and to the sophisticated algorithms of CLOS <a href="../bibliography.html#Bobrow88">[Bobrow 88]</a>, there is no adequate solution for all the situations. Besides, the use of multiple inheritance carries some complex problems in the domain of software engineering, particularly in the reuse and maintenance of the applications. All these problems are substantially reduced if we preferably use in our software development composition mechanisms instead of specialization mechanisms <a href="../bibliography.html#Taenzer89">[Taenzer 89]</a>. Multiple inheritance can and should be seen more as a useful analysis and project abstraction, than as an implementation technique <a href="../bibliography.html#Shan93">[Shan 93]</a>. Logtalk provides first-class support for software composition using <a title="Consult user manual" href="categories.html"><em>categories</em></a>.
 </p>
 <p>
-Nevertheless, Logtalk supports multi-inheritance by enabling an object to extend, instantiate, or specialize more than one object. The current Logtalk release provides a predicate directive, <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a>, which may be used to solve some multi-inheritance conflicts. Lastly, it should be noted that the multi-inheritance support does not compromise performance when we use single-inheritance.
+Nevertheless, Logtalk supports multi-inheritance by enabling an object to extend, instantiate, or specialize more than one object. The current Logtalk release provides a predicate directive, <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a>, which may be used to solve some multi-inheritance conflicts. Lastly, it should be noted that the multi-inheritance support does not affect performance when we use single-inheritance.
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 14, 2017</span>
+		<span>Last updated on: June 18, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="predicates.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="events.html">next</a></span><br/>
