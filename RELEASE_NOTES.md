@@ -33,6 +33,9 @@ predicates. This change avoids predicate existence errors when compiling
 source files with the `hook` flag to `user` as the expansion predicates are
 only natively declared in some of the supported backend Prolog compilers.
 
+* ADDED: Compiler option `suspicious_calls/1` to control printing of
+suspicious call warnings.
+
 * ADDED: Compiler lint check and warning for `::/2` calls that send a message
 to _self_ instead of using the `::/1` control construct.
 
