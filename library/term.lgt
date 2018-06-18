@@ -23,9 +23,9 @@
 	implements(termp)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2014/04/28,
+		date is 2018/06/18,
 		comment is 'Prolog term utility predicates.'
 	]).
 
@@ -78,7 +78,7 @@
 		occurs(N2, Var, Term).
 
 	subsumes(General, Specific) :-
-		{subsumes_term(General, Specific)}.
+		subsumes_term(General, Specific).
 
 	var_member_chk(Var, [Head| Tail]) :-
 		(	Var == Head ->
@@ -106,14 +106,14 @@
 	check(_).
 
 	variant(Term1, Term2) :-
-		\+ \+ {subsumes_term(Term1, Term2)},
-		\+ \+ {subsumes_term(Term2, Term1)}.
+		\+ \+ subsumes_term(Term1, Term2),
+		\+ \+ subsumes_term(Term2, Term1).
 
 	vars(Term, Vars) :-			% deprecated
-		{term_variables(Term, Vars)}.
+		term_variables(Term, Vars).
 
 	variables(Term, Vars) :-
-		{term_variables(Term, Vars)}.
+		term_variables(Term, Vars).
 
 	singletons(Term, Singletons) :-
 		term_to_vars(Term, [], Vars),

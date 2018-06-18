@@ -28,9 +28,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Vitor Santos Costa; adapted to Logtalk by Paulo Moura.',
-		date is 2018/03/18,
+		date is 2018/06/18,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [bintree]
 	]).
@@ -648,7 +648,7 @@
 		keys(Right, Keys0, Keys1).
 
 	as_dictionary(List, Tree) :-
-		{sort(List, Sorted)},
+		sort(List, Sorted),
 		ord_list_to_rbtree(Sorted, Tree).
 
 	ord_list_to_rbtree([], t(Nil,Nil)) :-

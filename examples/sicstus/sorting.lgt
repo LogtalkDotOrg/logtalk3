@@ -100,8 +100,8 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
-		date is 2000/4/22,
+		version is 1.01,
+		date is 2018/06/18,
 		comment is 'Implements comparison between visible colors.'
 	]).
 
@@ -126,10 +126,10 @@
 		{N1 >= N2}.
 
 	Colour1 =:= Colour2 :-
-		{Colour1 == Colour2}.
+		Colour1 == Colour2.
 
 	Colour1 =\= Colour2 :-
-		{Colour1 \== Colour2}.
+		Colour1 \== Colour2.
 
 	order(red, 1).
 	order(orange, 2).
