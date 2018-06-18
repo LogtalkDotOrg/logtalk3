@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 18, 0, b3)).
+'$lgt_version_data'(logtalk(3, 18, 0, b4)).
 
 
 
@@ -14464,6 +14464,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% invalid object identifier
 		throw(type_error(object_identifier, Obj))
 	).
+
+% suspicious use of ::/2 instead of ::/1 to send a message to "self"
+
+'$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_execution_context'(ExCtx, _, _, _, Self, _, _),
+	Self == Obj,
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(general), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, ::Pred)),
+	fail.
 
 % translation performed at runtime
 
