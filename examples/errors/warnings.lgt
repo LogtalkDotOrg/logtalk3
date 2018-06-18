@@ -250,11 +250,15 @@
 
 
 
-:- object(suspicious_call).
+:- object(suspicious_calls).
 
 	recursive([]).
 	recursive([H| T]) :-
 		::single(H),
 		::recursive(T).
+
+	foo :-
+		self(Self),
+		Self::bar.
 
 :- end_object.

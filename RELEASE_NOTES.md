@@ -122,6 +122,9 @@ hook object when run using the JPL-based Java interface library.
 * UPDATED: The `inlining` example to illustrate inlining of linking clauses
 that call Prolog module predicates.
 
+* UPDATED: The `errors` example to illustrate the new compiler lint check for
+suspicious calls to the `::/2` control construct.
+
 * IMPROVED: State representation for the `salt/3` state-space in the
 `searching` example.
 
