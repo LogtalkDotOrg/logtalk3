@@ -33,6 +33,9 @@ predicates. This change avoids predicate existence errors when compiling
 source files with the `hook` flag to `user` as the expansion predicates are
 only natively declared in some of the supported backend Prolog compilers.
 
+* IMPROVED: Suspicious call lint warnings now also print the recommended
+alternative call.
+
 * IMPROVED: Entity compilation and dynamic entity creation performance
 improvement (up to ~2% for objects, ~5% for categories, and ~18% for
 protocols).

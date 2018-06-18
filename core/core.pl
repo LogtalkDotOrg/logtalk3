@@ -14761,7 +14761,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(general), core, suspicious_call(File, Lines, Type, Entity, ::Pred)),
+	'$lgt_print_message'(warning(general), core, suspicious_call(File, Lines, Type, Entity, ::Pred, Pred)),
 	fail.
 
 % broadcasting control constructs
