@@ -14477,6 +14477,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, ::Pred)),
 	fail.
 
+% suspicious use of ::/2 in objects to call a local predicate
+
+'$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, compile(_), _, _),
+	'$lgt_pp_entity_'(object, _, _, _, _),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _),
+	This == Obj,
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, Obj::Pred, Pred)),
+	fail.
+
 % translation performed at runtime
 
 '$lgt_compile_message_to_object'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, Events, NewCtx), Events, Ctx) :-

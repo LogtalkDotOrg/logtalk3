@@ -39,6 +39,9 @@ suspicious call warnings.
 * ADDED: Compiler lint check and warning for `::/2` calls that send a message
 to _self_ instead of using the `::/1` control construct.
 
+* ADDED: Compiler lint check and warning for `::/2` calls in objects that send
+a message to _this_ instead of simply calling the local predicate.
+
 * IMPROVED: Suspicious call lint warnings now also print the recommended
 alternative call.
 

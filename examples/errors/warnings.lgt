@@ -261,4 +261,10 @@
 		self(Self),
 		Self::bar.
 
+	bar :-
+		this(This),
+		This::baz.
+
+	baz.
+
 :- end_object.
