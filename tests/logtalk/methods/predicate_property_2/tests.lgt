@@ -27,11 +27,13 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2018/06/20,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
+
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	:- discontiguous([
 		succeeds/1, fails/1, throws/2

@@ -29,6 +29,8 @@
 	:- public(public_predicate/0).
 	:- dynamic(public_predicate/0).
 
+	:- set_logtalk_flag(suspicious_calls, silent).
+
 	object_assert :-
 		self(Self),
 		Self::assertz(public_predicate).
