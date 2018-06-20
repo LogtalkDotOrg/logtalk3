@@ -51,6 +51,10 @@ protocols).
 
 * FIXED: Enable inlining of linking clauses that call Prolog module predicates.
 
+* FIXED: Reporting of singleton variables using parameter variable syntax for
+backend Prolog systems with the `underscore_variables` compiler option set to
+`dont_care`.
+
 Prolog adapter and integration files
 ------------------------------------
 

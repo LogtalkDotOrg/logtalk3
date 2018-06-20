@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 18, 0, b4)).
+'$lgt_version_data'(logtalk(3, 18, 0, b5)).
 
 
 
@@ -7127,14 +7127,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_filter_singleton_variable_names'(Singletons, Term, Names) :-
 	(	'$lgt_compiler_flag'(underscore_variables, dont_care) ->
-		'$lgt_filter_dont_care_variables'(Singletons, Names)
-	;	'$lgt_pp_parameter_variables_'(ParameterVariables) ->
-		'$lgt_filter_parameter_variables'(Singletons, ParameterVariables, Names)
+		'$lgt_filter_dont_care_variables'(Singletons, SingletonsFiltered)
+	;	SingletonsFiltered = Singletons
+	),
+	(	'$lgt_pp_parameter_variables_'(ParameterVariables) ->
+		'$lgt_filter_parameter_variables'(SingletonsFiltered, ParameterVariables, Names)
 	;	Term = (:- Directive),
 		nonvar(Directive),
 		'$lgt_logtalk_opening_directive'(Directive) ->
-		'$lgt_filter_parameter_variables'(Singletons, Names)
-	;	'$lgt_singleton_variable_names'(Singletons, Names)
+		'$lgt_filter_parameter_variables'(SingletonsFiltered, Names)
+	;	'$lgt_singleton_variable_names'(SingletonsFiltered, Names)
 	).
 
 
@@ -7146,31 +7148,34 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_filter_dont_care_variables'([], []).
 
-'$lgt_filter_dont_care_variables'([Name = _| Singletons], Names) :-
-	(	sub_atom(Name, 0, 1, _, '_') ->
-		'$lgt_filter_dont_care_variables'(Singletons, Names)
-	;	Names = [Name| Rest],
-		'$lgt_filter_dont_care_variables'(Singletons, Rest)
+'$lgt_filter_dont_care_variables'([Name = Variable| VariableNames], FilteredVariableNames) :-
+	(	'$lgt_parameter_variable_name'(Name) ->
+		FilteredVariableNames = [Name = Variable| Rest],
+		'$lgt_filter_dont_care_variables'(VariableNames, Rest)
+	;	sub_atom(Name, 0, 1, _, '_') ->
+		'$lgt_filter_dont_care_variables'(VariableNames, FilteredVariableNames)
+	;	FilteredVariableNames = [Name = Variable| Rest],
+		'$lgt_filter_dont_care_variables'(VariableNames, Rest)
 	).
 
 
 '$lgt_filter_parameter_variables'([], _, []).
 
-'$lgt_filter_parameter_variables'([Name = _| Singletons], ParameterVariables, Names) :-
+'$lgt_filter_parameter_variables'([Name = _| VariableNames], ParameterVariables, Names) :-
 	(	'$lgt_member'(Name-_, ParameterVariables) ->
-		'$lgt_filter_parameter_variables'(Singletons, ParameterVariables, Names)
+		'$lgt_filter_parameter_variables'(VariableNames, ParameterVariables, Names)
 	;	Names = [Name| Rest],
-		'$lgt_filter_parameter_variables'(Singletons, ParameterVariables, Rest)
+		'$lgt_filter_parameter_variables'(VariableNames, ParameterVariables, Rest)
 	).
 
 
 '$lgt_filter_parameter_variables'([], []).
 
-'$lgt_filter_parameter_variables'([Name = _| Singletons], Names) :-
+'$lgt_filter_parameter_variables'([Name = _| VariableNames], Names) :-
 	(	'$lgt_parameter_variable_name'(Name) ->
-		'$lgt_filter_parameter_variables'(Singletons, Names)
+		'$lgt_filter_parameter_variables'(VariableNames, Names)
 	;	Names = [Name| Rest],
-		'$lgt_filter_parameter_variables'(Singletons, Rest)
+		'$lgt_filter_parameter_variables'(VariableNames, Rest)
 	).
 
 
