@@ -179,7 +179,7 @@
 <dd>An object specifying the steps necessary to (re)generate the API documentation for a project. See the <code>lgtdoc</code> tool for details.</dd>
 
 <dt id="hook" class="glossary"><strong>hook object</strong></dt>
-<dd>An object, implementing the <code>expanding</code> built-in protocol, defining term- and goal-expansion clauses, used in the compilation of Logtalk source files. An hook object can be specified using the compiler flag <code>hook/1</code>.</dd>
+<dd>An object, implementing the <code>expanding</code> built-in protocol, defining term- and goal-expansion clauses, used in the compilation of Logtalk or Prolog source files. An hook object can be specified using the compiler flag <code>hook/1</code>. It can also be specified using a <code>set_logtalk_flag/2</code> directive in the source files to be expanded.</dd>
 
 <dt id="parametric" class="glossary"><strong>parametric entity</strong></dt>
 <dd>An object or category whose name is a compound term containing free variables that can be used to parameterize the object predicates. Parameters are logical variables implicitly shared by all the entity predicate clauses.</dd>
@@ -190,7 +190,7 @@
 </dl></dd>
 
 <dt id="parameter" class="glossary"><strong>parameter</strong></dt>
-<dd>An argument of a parametric object or a parametric category. Parameters are logical variables implicitly shared by all the entity predicate clauses.</dd>
+<dd>An argument of a parametric object or a parametric category identifier. Parameters are logical variables implicitly shared by all the entity predicate clauses.</dd>
 
 <dt id="parameter_variable" class="glossary"><strong>parameter variable</strong></dt>
 <dd>A variable used as parameter in a parametric object or a parametric category using the syntax <code>_VariableName_</code>. Occurrences of parameter variables in entity clauses are implicitly unified with the corresponding entity parameters.</dd>
@@ -286,7 +286,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 18, 2018</span>
+		<span>Last updated on: June 20, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
