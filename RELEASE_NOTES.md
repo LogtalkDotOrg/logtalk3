@@ -61,6 +61,10 @@ Prolog adapter and integration files
 * CHANGED: Deleted the `portray/1` hook for Logtalk goals execution context
 from the `swihooks.pl` file.
 
+* UPDATED: The SWI-Prolog adapter file by adding to the `prolog_loader/1` flag
+definition the new `load_files/2` option `optimise(true)`. Requires SWI-Prolog
+7.7.17 or later version (the option is silently ignored in previous versions).
+
 * UPDATED: SWI-Prolog experimental hack to get a top-level stack trace for
 errors generated from message sending calls. Commented out by default in the
 `swihooks.pl` file.

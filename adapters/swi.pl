@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on June 18, 2018
+%  Last updated on June 21, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -346,7 +346,7 @@
 '$lgt_default_flag'(debug, off).
 % Prolog compiler and loader flags:
 '$lgt_default_flag'(prolog_compiler, []).
-'$lgt_default_flag'(prolog_loader, [silent(true)]).
+'$lgt_default_flag'(prolog_loader, [silent(true), optimise(true)]).
 
 
 
