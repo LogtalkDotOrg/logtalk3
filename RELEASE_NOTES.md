@@ -58,6 +58,9 @@ backend Prolog systems with the `underscore_variables` compiler option set to
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: Deleted the `portray/1` hook for Logtalk goals execution context
+from the `swihooks.pl` file.
+
 * UPDATED: The JIProlog adapter file to recognize the `*->/2` soft-cut control
 construct as built-in.
 

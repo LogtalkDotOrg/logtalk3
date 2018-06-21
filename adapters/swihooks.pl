@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 16, 2018
+%  Last updated on June 21, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -364,24 +364,8 @@ prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Binding
 	atom_concat(CodePrefix, _, TFunctor),
 	N is Arity - 1,
 	memberchk(N=IVar, Offsets),
-	Names1 = ['<Entity, Sender, This, Self, MetaVars, CoinductionStack>'=IVar| Names],
+	Names1 = ['c(This, Entity, r(Sender, Self, MetaCallCtx, CoinductionStack))'=IVar| Names],
 	prolog_clause:make_varnames(xx, xx, Offsets, Names1, Bindings).
-
-
-:- multifile(user:portray/1).
-:- dynamic(user:portray/1).
-
-user:portray(c(This, Entity, Rest)) :-
-	callable(Rest),
-	Rest = r(Sender, Self, MetaCallCtx, CoinductionStack),
-	write('<'),
-	writeq(Entity), write(','),
-	writeq(Sender), write(','),
-	writeq(This), write(','),
-	writeq(Self), write(','),
-	writeq(MetaCallCtx), write(','),
-	writeq(CoinductionStack), write(','),
-	write('>').
 
 
 '$lgt_swi_unify_clause'((Head :- Body), (THead :- TBody), TermPos0, TermPos) :-
