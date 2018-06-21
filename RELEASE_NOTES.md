@@ -61,6 +61,10 @@ Prolog adapter and integration files
 * CHANGED: Deleted the `portray/1` hook for Logtalk goals execution context
 from the `swihooks.pl` file.
 
+* UPDATED: SWI-Prolog experimental hack to get a top-level stack trace for
+errors generated from message sending calls. Commented out by default in the
+`swihooks.pl` file.
+
 * UPDATED: The JIProlog adapter file to recognize the `*->/2` soft-cut control
 construct as built-in.
 

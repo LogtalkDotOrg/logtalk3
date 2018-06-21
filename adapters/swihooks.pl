@@ -153,29 +153,43 @@ prolog_edit:locate(Entity::Predicate, EntityPredicateSpec, [file(Source), line(L
 	).
 
 
-/*	
 % experimental hack to get a stack trace for errors
 % generated from top-level message sending calls
-
+/*
 :- use_module(library(prolog_stack)).
 
-user:prolog_exception_hook(Exception, Exception, Frame, CatchFrame) :-
-	\+ atom(CatchFrame),
-	prolog_frame_attribute(CatchFrame, predicate_indicator, PI),
-	memberchk(PI, [(::)/2, (<<)/2]),
+%user:prolog_exception_hook(error(Error,logtalk(Goal,ExCtx)), error(Error,logtalk(Goal,ExCtx)), Frame, _CatchFrame) :-
+user:prolog_exception_hook(Error, Error, Frame, _CatchFrame) :-
+	Error \= error(_, context(_,_)),
+	% SWI-Prolog default hook handles errors with a context/2 context argument
     get_prolog_backtrace(Frame, 20, Trace),
-	'$lgt_swi_filter_trace'(Trace, Tracefiltered),
-    format(user_error, 'Error: ~p', [Exception]), nl(user_error),
-    print_prolog_backtrace(user_error, Tracefiltered), nl(user_error),
+	'$lgt_swi_filter_trace'(Trace, TraceFiltered),
+    '$swi_print_backtrace'(TraceFiltered, Error),
 	fail.
 
 '$lgt_swi_filter_trace'([], []).
-'$lgt_swi_filter_trace'([frame(N,C,G0)| Trace], [frame(N,C,Entity::Head)| Tracefiltered]) :-
+'$lgt_swi_filter_trace'([frame(_,_,'$toplevel':_)| Trace], TraceFiltered) :-
+	!,
+	'$lgt_swi_filter_trace'(Trace, TraceFiltered).
+'$lgt_swi_filter_trace'([frame(N,C,G0)| Trace], [frame(N,C,Entity-Head)| TraceFiltered]) :-
 	'$lgt_decompile_predicate_heads'(G0, Entity, _, Head),
 	!,
-	'$lgt_swi_filter_trace'(Trace, Tracefiltered).
-'$lgt_swi_filter_trace'([_| Trace], Tracefiltered) :-
-	'$lgt_swi_filter_trace'(Trace, Tracefiltered).
+	'$lgt_swi_filter_trace'(Trace, TraceFiltered).
+'$lgt_swi_filter_trace'([frame(N,C,G)| Trace], [frame(N,C,L)| TraceFiltered]) :-
+	'$lgt_swi_unify_clause_body'(L, _, G, _, _),
+	!,
+	'$lgt_swi_filter_trace'(Trace, TraceFiltered).
+'$lgt_swi_filter_trace'([_| Trace], TraceFiltered) :-
+	'$lgt_swi_filter_trace'(Trace, TraceFiltered).
+
+'$swi_print_backtrace'(TraceFiltered, Error) :-
+    format(user_error, 'Error: ~p~n~n', [Error]),
+	'$swi_print_backtrace'(TraceFiltered).
+
+'$swi_print_backtrace'([]).
+'$swi_print_backtrace'([frame(_,_,Goal)| Frames]) :-
+    format(user_error, '~q~n', [Goal]),
+	'$swi_print_backtrace'(Frames).
 */
 
 % for e.g. the call stack in the SWI-Prolog graphical tracer
