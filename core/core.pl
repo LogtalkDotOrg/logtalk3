@@ -11148,6 +11148,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % compiler bypass control construct (opaque to cuts)
 
+%'$lgt_compile_body'({Pred}, _, _, Ctx) :-
+%	callable(Pred),
+%	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_), _, _),
+%	'$lgt_compiler_flag'(suspicious_calls, warning),
+%	'$lgt_iso_spec_predicate'(Pred),
+%	\+ '$lgt_control_construct'(Pred),
+%	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+%	% call to a standard Prolog predicate that is not being locally redefined
+% 	'$lgt_increment_compiling_warnings_counter',
+% 	'$lgt_source_file_context'(File, Lines, Type, Entity),
+%	'$lgt_print_message'(warning(suspicious_calls), core, suspicious_call(File, Lines, Type, Entity, {Pred}, Pred)),
+%	fail.
+
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_callable, Pred),
