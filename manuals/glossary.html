@@ -53,17 +53,17 @@
 <dd><dl>
 
 <dt id="complementing_category" class="glossary"><strong>complementing category</strong></dt>
-<dd>A category used for hot patching an existing object (or set of objects).</dd>
+<dd>A category used for hot patching an existing object (or a set of objects).</dd>
 
 </dl></dd>
 
 <dt id="class" class="glossary"><strong>class</strong></dt>
-<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects (its instances). An object can also be interpreted as a class when it instantiates itself.</dd>
+<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects that instantiates it). An object can also be interpreted as a class when it instantiates itself.</dd>
 
 <dd><dl>
 
 <dt id="abstractclass" class="glossary"><strong>abstract class</strong></dt>
-<dd>A class that cannot be instantiated. Usually used to store common predicates that are inherited by other classes.</dd>
+<dd>A class that cannot be instantiated. Usually used to contain common predicates that are inherited by other classes.</dd>
 
 <dt id="metaclass" class="glossary"><strong>metaclass</strong></dt>
 <dd>The class of a class, when interpreted as an instance. Metaclass instances are themselves classes.</dd>
@@ -96,13 +96,13 @@
 </dl></dd>
 
 <dt id="encapsulation" class="glossary"><strong>encapsulation</strong></dt>
-<dd>The hiding of an object implementation. This promotes software reuse by isolating users from implementation details.  Encapsulation is enforced in Logtalk by using predicate scope directives.</dd>
+<dd>The hiding of an object implementation. This promotes software reuse by isolating the object clients from its implementation details. Encapsulation is enforced in Logtalk by using predicate scope directives.</dd>
 
 <dt id="entity" class="glossary"><strong>entity</strong></dt>
 <dd>Generic name for Logtalk compilation units: objects, categories, and protocols.</dd>
 
 <dt id="event" class="glossary"><strong>event</strong></dt>
-<dd>The sending of a message to an object. An event can be expressed as an ordered tuple: <code>(Event, Object, Message, Sender)</code>. Logtalk distinguish between the sending of a message - <code>before</code> event - and the return of control to the sender - <code>after</code> event.</dd>
+<dd>The sending of a message to an object. An event can be expressed as an ordered tuple: <code>(Event, Object, Message, Sender)</code>. Logtalk distinguish between the sending of a message &mdash; <code>before</code> event &mdash; and the return of control to the sender &mdash; <code>after</code> event.</dd>
 
 <dt id="grammar_rule" class="glossary"><strong>grammar rule</strong></dt>
 <dd>An alternative notation for predicates used to parse or generate sentences on some language. This notation hides the arguments used to pass the sequences of tokens being processed, thus simplifying the representation of grammars. Grammar rules are represented using as functor the infix operator <code>(--&gt;)/2</code> instead of the <code>(:-)/2</code> operator used with predicate clauses.</dd>
@@ -113,7 +113,7 @@
 <dd>A syntactic category of words or phrases. A non-terminal is identified by its <em>non-terminal indicator</em>, i.e. by its name and number of arguments using the notation <code>Name//Arity</code>.</dd>
 
 <dt id="terminal" class="glossary"><strong>grammar rule terminal</strong></dt>
-<dd>A word or a basic symbol of a language.</dd>
+<dd>A word or basic symbol of a language.</dd>
 
 </dl></dd>
 
@@ -132,7 +132,7 @@
 <dd>All public predicates are inherited as protected. No change for protected or private predicates.</dd>
 
 <dt id="public_inheritance" class="glossary"><strong>public inheritance</strong></dt>
-<dd>All inherited predicates maintain the declared scope.</dd>
+<dd>All inherited predicates maintain their declared scope.</dd>
 
 </dl></dd>
 
@@ -152,7 +152,7 @@
 <dd>A program capable of running other programs written in the same language.</dd>
 
 <dt id="method" class="glossary"><strong>method</strong></dt>
-<dd>Set of predicate clauses used to answer a message sent to an object. Logtalk supports both static binding and dynamic binding to find which method to run to answer a message.</dd>
+<dd>The predicate definition used to answer a message sent to an object. Logtalk supports both static binding and dynamic binding to find which method to run to answer a message.</dd>
 
 <dd><dl>
 
@@ -176,7 +176,7 @@
 <dd><dl>
 
 <dt id="doclet" class="glossary"><strong>doclet object</strong></dt>
-<dd>An object specifying the steps necessary to (re)generate the API documentation for a project. See the <code>lgtdoc</code> tool for details.</dd>
+<dd>An object specifying the steps necessary to (re)generate the API documentation for a project. See the <code>doclet</code> and <code>lgtdoc</code> tool for details.</dd>
 
 <dt id="hook" class="glossary"><strong>hook object</strong></dt>
 <dd>An object, implementing the <code>expanding</code> built-in protocol, defining term- and goal-expansion clauses, used in the compilation of Logtalk or Prolog source files. An hook object can be specified using the compiler flag <code>hook/1</code>. It can also be specified using a <code>set_logtalk_flag/2</code> directive in the source files to be expanded.</dd>
@@ -245,16 +245,16 @@
 <dd>An entity that contains predicate declarations. A predicate is declared using a scope directive together, optionally, by other predicate directives. Protocols support the separation between interface and implementation, can be implemented by both objects and categories, and can be extended by other protocols. A protocol should be functionally-cohesive, specifying a single functionality.</dd>
 
 <dt id="prototype" class="glossary"><strong>prototype</strong></dt>
-<dd>A self-describing object that may extend or be extended by other objects. An object with no declared relations with other objects is always interpreted as a prototype.</dd>
+<dd>A self-describing object that may extend or be extended by other objects. An object with no instantiation or specialization relations with other objects is always interpreted as a prototype.</dd>
 
 <dt id="self" class="glossary"><strong>self</strong></dt>
-<dd>The original object that received the message under processing.</dd>
+<dd>The object that received the message under processing.</dd>
 
 <dt id="sender" class="glossary"><strong>sender</strong></dt>
 <dd>An object that sends a message to other object. When a message is sent from within a category, the <em>sender</em> is the object importing the category.</dd>
 
 <dt id="specialization" class="glossary"><strong>specialization</strong></dt>
-<dd>A class is specialized by constructing a new class that inherit its predicates and possibly add new ones.</dd>
+<dd>A class is specialized by defining a new class that inherit its predicates and possibly add new ones.</dd>
 
 <dt id="source_file" class="glossary"><strong>source file</strong></dt>
 <dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk entities may be defined in a single source file. Prolog code may be intermixed with entity definitions.</dd>
@@ -279,14 +279,14 @@
 </dl></dd>
 
 <dt id="this" class="glossary"><strong>this</strong></dt>
-<dd>The object that contains the predicate clause under execution. When the predicate clause is contained in a category, <em>this</em> is a reference to the object importing the category.</dd>
+<dd>The object that contains the predicate clause under execution. When the predicate clause is contained in a category, <em>this</em> is a reference to the object importing the category for which the predicate clause is being executed.</dd>
 
 </dl>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 20, 2018</span>
+		<span>Last updated on: June 24, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
