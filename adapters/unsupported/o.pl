@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for O-Prolog
-%  Last updated on June 23, 2018
+%  Last updated on June 24, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -494,8 +494,8 @@ numbervars(Term, From, Next) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	?????
+'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1), Variables) :-
+	read_term(Stream, Term, [variable_names(Variables)| Options]).
 
 
 
@@ -612,8 +612,8 @@ numbervars(Term, From, Next) :-
 
 % term_hash(@callable, +integer, +integer, -integer)
 
-term_hash(Term, Depth, Range, Hash) :-
-	?????
+term_hash(_, _, _, _) :-
+	fail.
 
 
 
