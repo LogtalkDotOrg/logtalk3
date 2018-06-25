@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2017/08/24,
+		date is 2018/06/25,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -165,6 +165,11 @@
 	throws(lgt_read_term_3_26, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{read(s, _)}.
+
+	succeeds(lgt_read_term_3_27) :-
+		^^set_text_input('foo(_X,_Y,_x,_y). '),
+		{read_term(T, [singletons(S)])},
+		compound(T), T = foo(A, B, C, D), S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D].
 
 	cleanup :-
 		^^clean_text_input,

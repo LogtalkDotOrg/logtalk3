@@ -126,6 +126,12 @@ entities declared as covered but without any tests for their predicates.
 `entity/1` and `entity_score/2` predicates with a compound term for a non-
 loaded parametric category or object.
 
+Tests
+-----
+
+* ADDED: Unit test for the ISO standard `read_term/3` predicate `singletons/1`
+option.
+
 Examples
 --------
 
