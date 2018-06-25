@@ -65,6 +65,10 @@ from the `swihooks.pl` file.
 definition the new `load_files/2` option `optimise(true)`. Requires SWI-Prolog
 7.7.17 or later version (the option is silently ignored in previous versions).
 
+* UPDATED: The SWI-Prolog adapter file to detect the recent ISO standard
+compliance fix to the `read_term/3` predicate `singletons/1` option and set
+the `underscore_variables` flag accordingly.
+
 * UPDATED: SWI-Prolog experimental hack to get a top-level stack trace for
 errors generated from message sending calls. Commented out by default in the
 `swihooks.pl` file.

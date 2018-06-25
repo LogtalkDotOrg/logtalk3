@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on June 21, 2018
+%  Last updated on June 25, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -321,7 +321,11 @@
 '$lgt_default_flag'(always_true_or_false_goals, warning).
 '$lgt_default_flag'(lambda_variables, warning).
 '$lgt_default_flag'(suspicious_calls, warning).
-'$lgt_default_flag'(underscore_variables, singletons).
+:- if((read_term_from_atom('a(_X)', _, [singletons(L)]), L == [])).
+	'$lgt_default_flag'(underscore_variables, singletons).
+:- else.
+	'$lgt_default_flag'(underscore_variables, dont_care).
+:- endif.
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).
