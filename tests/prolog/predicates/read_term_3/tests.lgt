@@ -48,7 +48,7 @@
 	succeeds(iso_read_term_3_03) :-
 		^^set_text_input(st_o, ['foo(A+Roger,A+_). ','term2. ...']),
 		{read_term(st_o, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		T = foo(X1+X2,X1+X3), VL = [X1,X2,X3], VN = ['A'=X1,'Roger'=X2], VS = ['Roger'=X2],
+		T = foo(X1+X2,X1+X3), VL == [X1,X2,X3], VN == ['A'=X1,'Roger'=X2], VS == ['Roger'=X2],
 		^^check_text_input(st_o, ' term2. ...').
 
 	succeeds(iso_read_term_3_04) :-
