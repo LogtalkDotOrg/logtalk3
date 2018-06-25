@@ -132,6 +132,9 @@ Tests
 * ADDED: Unit test for the ISO standard `read_term/3` predicate `singletons/1`
 option.
 
+* ADDED: Unit tests for the ISO standard `write_term/3` predicate `quoted/1`
+and `ignore_ops/1` options.
+
 Examples
 --------
 

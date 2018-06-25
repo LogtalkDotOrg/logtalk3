@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2018/02/06,
+		date is 2018/06/25,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -135,6 +135,30 @@
 	test(lgt_write_term_3_23, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{write(s, a)}.
+
+	test(lgt_write_term_3_24, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, 'A', [quoted(false)])},
+		^^text_output_assertion('A', Assertion).
+
+	test(lgt_write_term_3_25, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, 'A', [quoted(true)])},
+		^^text_output_assertion('\'A\'', Assertion).
+
+	test(lgt_write_term_3_26, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, 1+2, [ignore_ops(false)])},
+		^^text_output_assertion('1+2', Assertion).
+
+	test(lgt_write_term_3_27, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, 1+2, [ignore_ops(true)])},
+		^^text_output_assertion('+(1,2)', Assertion).
 
 	cleanup :-
 		^^clean_binary_output,
