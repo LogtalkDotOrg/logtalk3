@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.18.0 - June ??, 2018
+3.18.0 - June 26, 2018
 ======================
 
 Logtalk compiler and runtime
@@ -71,10 +71,8 @@ the `underscore_variables` flag accordingly.
 
 * UPDATED: SWI-Prolog experimental hack to get a top-level stack trace for
 errors generated from message sending calls. Commented out by default in the
-`swihooks.pl` file.
-
-* UPDATED: The JIProlog adapter file to recognize the `*->/2` soft-cut control
-construct as built-in.
+`swihooks.pl` file. Thanks to Jan Wielemaker for his clarifications about
+the stack trace mechanism.
 
 * UPDATED: Support for SWI-Prolog `edit/1` predicate to also locate source
 files (without forcing library notation), included files, entities, and
@@ -84,6 +82,9 @@ object public predicates declaration and definition.
 Logtalk built-in predicates. Requires recent SWI-Prolog bug fix.
 
 * FIXED: Two harmless warnings when using SWI-Prolog `make/0` predicate.
+
+* UPDATED: The JIProlog adapter file to recognize the `*->/2` soft-cut control
+construct as built-in.
 
 * FIXED: SICStus Prolog error normalization when Logtalk is loaded into a
 module other than `user`.
