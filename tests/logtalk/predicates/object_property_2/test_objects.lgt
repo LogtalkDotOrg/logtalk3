@@ -224,3 +224,6 @@
 	:- endif.
 
 :- end_object.
+
+
+:- module(module, []).

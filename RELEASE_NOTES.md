@@ -24,7 +24,11 @@ RELEASE NOTES
 3.19.0 - July ??, 2018
 ======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* ADDED: Object property `module` for objects that result from the compilation
+of Prolog modules.
 
 
 3.18.0 - June 26, 2018

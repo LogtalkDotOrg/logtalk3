@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2018/03/27,
+		date is 2018/06/27,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -236,182 +236,195 @@
 			(member(line_count(Line), Properties), integer(Line))
 		).
 
+	% modules compiled as objects
+
+	succeeds(object_property_2_29) :-
+		findall(Property, object_property(module,Property), Properties),
+		ground(Properties), member(module, Properties).
+
 	% check that all queries with explicit properties are valid
 
-	fails(object_property_2_29) :-
+	fails(object_property_2_30) :-
 		object_property(empty_object, built_in),
 		fail.
 
-	fails(object_property_2_30) :-
+	fails(object_property_2_31) :-
 		object_property(empty_object, (dynamic)),
 		fail.
 
-	fails(object_property_2_31) :-
+	fails(object_property_2_32) :-
 		object_property(empty_object, static),
 		fail.
 
-	fails(object_property_2_32) :-
+	fails(object_property_2_33) :-
 		object_property(empty_object, debugging),
 		fail.
 
-	fails(object_property_2_33) :-
+	fails(object_property_2_34) :-
 		object_property(empty_object, public(_)),
 		fail.
 
-	fails(object_property_2_34) :-
+	fails(object_property_2_35) :-
 		object_property(empty_object, protected(_)),
 		fail.
 
-	fails(object_property_2_35) :-
+	fails(object_property_2_36) :-
 		object_property(empty_object, private(_)),
 		fail.
 
-	fails(object_property_2_36) :-
+	fails(object_property_2_37) :-
 		object_property(empty_object, declares(_, _)),
 		fail.
 
-	fails(object_property_2_37) :-
+	fails(object_property_2_38) :-
 		object_property(empty_object, alias(_, _)),
 		fail.
 
-	fails(object_property_2_38) :-
+	fails(object_property_2_39) :-
 		object_property(empty_object, source_data),
 		fail.
 
-	fails(object_property_2_39) :-
+	fails(object_property_2_40) :-
 		object_property(empty_object, info(_)),
 		fail.
 
-	fails(object_property_2_40) :-
+	fails(object_property_2_41) :-
 		object_property(empty_object, file(_)),
 		fail.
 
-	fails(object_property_2_41) :-
+	fails(object_property_2_42) :-
 		object_property(empty_object, file(_, _)),
 		fail.
 
-	fails(object_property_2_42) :-
+	fails(object_property_2_43) :-
 		object_property(empty_object, lines(_, _)),
 		fail.
 
-	fails(object_property_2_43) :-
+	fails(object_property_2_44) :-
 		object_property(empty_object, events),
 		fail.
 
-	fails(object_property_2_44) :-
+	fails(object_property_2_45) :-
 		object_property(empty_object, defines(_, _)),
 		fail.
 
-	fails(object_property_2_45) :-
+	fails(object_property_2_46) :-
 		object_property(empty_object, includes(_, _, _)),
 		fail.
 
-	fails(object_property_2_46) :-
+	fails(object_property_2_47) :-
 		object_property(empty_object, provides(_, _, _)),
 		fail.
 
-	fails(object_property_2_47) :-
+	fails(object_property_2_48) :-
 		object_property(empty_object, calls(_, _)),
 		fail.
 
-	fails(object_property_2_48) :-
+	fails(object_property_2_49) :-
 		object_property(empty_object, number_of_clauses(_)),
 		fail.
 
-	fails(object_property_2_49) :-
+	fails(object_property_2_50) :-
 		object_property(empty_object, number_of_rules(_)),
 		fail.
 
-	fails(object_property_2_50) :-
+	fails(object_property_2_51) :-
 		object_property(empty_object, number_of_user_clauses(_)),
 		fail.
 
-	fails(object_property_2_51) :-
+	fails(object_property_2_52) :-
 		object_property(empty_object, number_of_user_rules(_)),
 		fail.
 
-	fails(object_property_2_52) :-
+	fails(object_property_2_53) :-
 		object_property(empty_object, threaded),
 		fail.
 
-	fails(object_property_2_53) :-
+	fails(object_property_2_54) :-
 		object_property(empty_object, context_switching_calls),
 		fail.
 
-	fails(object_property_2_54) :-
+	fails(object_property_2_55) :-
 		object_property(empty_object, dynamic_declarations),
 		fail.
 
-	fails(object_property_2_55) :-
+	fails(object_property_2_56) :-
 		object_property(empty_object, complements),
 		fail.
 
-	fails(object_property_2_56) :-
+	fails(object_property_2_57) :-
 		object_property(empty_object, complements(_)),
+		fail.
+
+	fails(object_property_2_58) :-
+		object_property(empty_object, module),
 		fail.
 
 	% determinism tests
 
-	deterministic(object_property_2_57) :-
+	deterministic(object_property_2_59) :-
 		object_property(debug_object, debugging).
 
-	deterministic(object_property_2_58) :-
+	deterministic(object_property_2_60) :-
 		object_property(test_object, source_data).
 
-	deterministic(object_property_2_59) :-
+	deterministic(object_property_2_61) :-
 		object_property(dynamic_object, (dynamic)).
 
-	deterministic(object_property_2_60) :-
+	deterministic(object_property_2_62) :-
 		object_property(test_object, static).
 
-	deterministic(object_property_2_61) :-
+	deterministic(object_property_2_63) :-
 		object_property(built_in_object, built_in).
 
-	deterministic(object_property_2_62) :-
+	deterministic(object_property_2_64) :-
 		object_property(test_object, file(_)).
 
-	deterministic(object_property_2_63) :-
+	deterministic(object_property_2_65) :-
 		object_property(test_object, file(_, _)).
 
-	deterministic(object_property_2_64) :-
+	deterministic(object_property_2_66) :-
 		object_property(test_object, lines(_, _)).
 
-	deterministic(object_property_2_65) :-
+	deterministic(object_property_2_67) :-
 		object_property(test_object, info(_)).
 
-	deterministic(object_property_2_66) :-
+	deterministic(object_property_2_68) :-
 		object_property(options_object, events).
 
-	deterministic(object_property_2_67) :-
+	deterministic(object_property_2_69) :-
 		object_property(test_object, number_of_clauses(_)).
 
-	deterministic(object_property_2_68) :-
+	deterministic(object_property_2_70) :-
 		object_property(test_object, number_of_rules(_)).
 
-	deterministic(object_property_2_69) :-
+	deterministic(object_property_2_71) :-
 		object_property(test_object, number_of_user_clauses(_)).
 
-	deterministic(object_property_2_70) :-
+	deterministic(object_property_2_72) :-
 		object_property(test_object, number_of_user_rules(_)).
 
-	deterministic(object_property_2_71) :-
+	deterministic(object_property_2_73) :-
 		object_property(options_object, context_switching_calls).
 
-	deterministic(object_property_2_72) :-
+	deterministic(object_property_2_74) :-
 		object_property(options_object, dynamic_declarations).
 
-	deterministic(object_property_2_73) :-
+	deterministic(object_property_2_75) :-
 		object_property(options_object, complements(_)).
 
-	deterministic(object_property_2_74) :-
+	deterministic(object_property_2_76) :-
 		object_property(options_object, complements).
 
 	:- if(current_logtalk_flag(threads, supported)).
-		deterministic(object_property_2_75) :-
+		deterministic(object_property_2_77) :-
 			object_property(threaded_object, threaded).
 	:- else.
-		- deterministic(object_property_2_75).
+		- deterministic(object_property_2_77).
 	:- endif.
+
+	deterministic(object_property_2_78) :-
+		object_property(module, module).
 
 	% auxiliary predicates (avoid library dependencies)
 

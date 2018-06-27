@@ -746,6 +746,8 @@ object_property(Obj, Prop) :-
 	'$lgt_object_property'(Prop, Obj, Dcl, Def, DDcl, DDef, Rnm, Flags).
 
 
+'$lgt_object_property'(module, _, _, _, _, _, _, Flags) :-
+	Flags /\ 1024 =:= 1024.
 '$lgt_object_property'(debugging, _, _, _, _, _, _, Flags) :-
 	Flags /\ 512 =:= 512.
 '$lgt_object_property'(context_switching_calls, _, _, _, _, _, _, Flags) :-
@@ -7401,6 +7403,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Flags is Debug + Events + SourceData + Dynamic + BuiltIn.
 
 '$lgt_compile_entity_flags'(object, Flags) :-
+	(	'$lgt_pp_module_'(_) ->
+		Module = 1024
+	;	Module = 0
+	),
 	(	'$lgt_compiler_flag'(debug, on) ->
 		Debug = 512
 	;	Debug = 0
@@ -7441,7 +7447,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		BuiltIn = 1
 	;	BuiltIn = 0
 	),
-	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + SourceData + Threaded + Dynamic + BuiltIn.
+	Flags is Module + Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + SourceData + Threaded + Dynamic + BuiltIn.
 
 
 
@@ -19872,6 +19878,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_object_property'(complements).
 % object can be complemented by categories
 '$lgt_valid_object_property'(complements(_)).
+% object resulted from the compilation of a Prolog module
+'$lgt_valid_object_property'(module).
 
 
 
