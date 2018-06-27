@@ -304,7 +304,7 @@
 % '$lgt_pp_module_'(Module)
 :- dynamic('$lgt_pp_module_'/1).
 
-% '$lgt_pp_module_'(ParameterVariables)
+% '$lgt_pp_parameter_variables_'(ParameterVariables)
 :- dynamic('$lgt_pp_parameter_variables_'/1).
 
 % '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, Lines)
