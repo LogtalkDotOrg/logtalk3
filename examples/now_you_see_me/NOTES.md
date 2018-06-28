@@ -17,11 +17,11 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This example illustrates that the implementation of dynamic predicates
-must ensure that retracting all local clauses for an inherited dynamic
-predicate restores the visibility of any inherited definition. For more
-information on this example, please see the comments in the example
-source files.
+This example illustrates that the implementation of dynamic predicates must
+ensure that retracting all local clauses for an inherited dynamic predicate
+restores the visibility of any inherited definition. For more information on
+this example, please see the comments in the example source files. The example
+is inspired by the "Now You See Me" movie, whose main characters are four
+stage magicians known as the "Four Horsemen".
