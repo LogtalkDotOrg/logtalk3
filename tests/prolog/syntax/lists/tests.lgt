@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/07,
+		date is 2018/06/28,
 		comment is 'Unit tests for the ISO Prolog standard list syntax.'
 	]).
 
@@ -44,6 +44,28 @@
 		^^set_text_input('[a|b]. '),
 		{read(T)},
 		T == .(a, b).
+
+	% invalid lists
+
+	throws(lgt_list_04, error(syntax_error(_), _)) :-
+		^^set_text_input('[|]. '),
+		{read(_)}.		
+
+	throws(lgt_list_05, error(syntax_error(_), _)) :-
+		^^set_text_input('[1|]. '),
+		{read(_)}.		
+
+	throws(lgt_list_06, error(syntax_error(_), _)) :-
+		^^set_text_input('[|1]. '),
+		{read(_)}.		
+
+	throws(lgt_list_07, error(syntax_error(_), _)) :-
+		^^set_text_input('[1,2,3,]. '),
+		{read(_)}.		
+
+	throws(lgt_list_08, error(syntax_error(_), _)) :-
+		^^set_text_input('[1|2|3]. '),
+		{read(_)}.		
 
 	cleanup :-
 		^^clean_text_input.
