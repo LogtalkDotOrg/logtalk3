@@ -60,7 +60,7 @@ Follows a short description of each included example (in alphabetical order):
 	implementation of the Ackermann arithmetic function
 
 - `adventure`  
-    some simple examples of text adventures
+	some simple examples of text adventures
 
 - `aliases`  
 	example of using the `alias/2` predicate directive to provide 
@@ -275,9 +275,13 @@ Follows a short description of each included example (in alphabetical order):
 	example of defining new types using the user-extensible `type`
 	library object
 
-- `named_databases`
-    example of an implementation of the Lean Prolog API for named
-    databases for Prolog compilers with a module system
+- `named_databases`  
+	example of an implementation of the Lean Prolog API for named
+	databases for Prolog compilers with a module system
+
+- `now_you_see_me`  
+	example illustrating requirements dictated by inheritance semantics
+	for the implementation of dynamic predicates
 
 - `operators`  
 	example of using operators local to objects and categories

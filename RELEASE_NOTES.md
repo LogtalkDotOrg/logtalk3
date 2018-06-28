@@ -34,7 +34,13 @@ Tests
 -----
 
 * ADDED: Tests for syntax errors in atoms, lists, and numbers to the Prolog
-compliance suite. 
+compliance suite.
+
+Examples
+--------
+
+* ADDED: Example `now_you_see_me` illustrating requirements dictated by
+inheritance semantics for the implementation of dynamic predicates.
 
 
 3.18.0 - June 26, 2018
