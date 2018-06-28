@@ -33,8 +33,8 @@ of Prolog modules.
 Tests
 -----
 
-* ADDED: Tests for syntax errors in lists and numbers to the Prolog compliance
-suite. 
+* ADDED: Tests for syntax errors in atoms, lists, and numbers to the Prolog
+compliance suite. 
 
 
 3.18.0 - June 26, 2018

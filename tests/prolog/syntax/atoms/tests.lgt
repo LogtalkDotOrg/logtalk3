@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/07,
+		date is 2018/06/28,
 		comment is 'Unit tests for the ISO Prolog standard atom syntax.'
 	]).
 
@@ -71,6 +71,20 @@
 		^^set_text_input('\'a\\x53\\b\'. '),
 		{read(T)},
 		T == 'aSb'.
+
+	% invalid atoms
+
+	throws(lgt_atom_09, error(syntax_error(_),_)) :-
+		^^set_text_input('\'a\\128\\b\'. '),
+		{read(_)}.
+
+	throws(lgt_atom_10, error(syntax_error(_),_)) :-
+		^^set_text_input('\'a\\x5G\\b\'. '),
+		{read(_)}.
+
+	throws(lgt_atom_11, error(syntax_error(_),_)) :-
+		^^set_text_input('\'a\\X5G\\b\'. '),
+		{read(_)}.
 
 	cleanup :-
 		^^clean_text_input.
