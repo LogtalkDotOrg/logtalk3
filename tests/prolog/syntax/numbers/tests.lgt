@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/01/14,
+		date is 2018/06/28,
 		comment is 'Unit tests for the ISO Prolog standard numbers syntax plus tests for de facto standard syntax extensions.'
 	]).
 
@@ -181,6 +181,40 @@
 		^^set_text_input('0\'\'. '),
 		{read(T)},
 		T == 39.
+
+	% invalid numbers
+
+	throws(lgt_number_27, error(syntax_error(_), _)) :-
+		^^set_text_input('.0. '),
+		{read(_)}.		
+
+	throws(lgt_number_28, error(syntax_error(_), _)) :-
+		^^set_text_input('.33. '),
+		{read(_)}.		
+
+	throws(lgt_number_29, error(syntax_error(_), _)) :-
+		^^set_text_input('1e. '),
+		{read(_)}.		
+
+	throws(lgt_number_30, error(syntax_error(_), _)) :-
+		^^set_text_input('1e33. '),
+		{read(_)}.		
+
+	throws(lgt_number_31, error(syntax_error(_), _)) :-
+		^^set_text_input('1E33. '),
+		{read(_)}.		
+
+	throws(lgt_number_32, error(syntax_error(_), _)) :-
+		^^set_text_input('0b101020. '),
+		{read(_)}.		
+
+	throws(lgt_number_33, error(syntax_error(_), _)) :-
+		^^set_text_input('0o31784. '),
+		{read(_)}.		
+
+	throws(lgt_number_34, error(syntax_error(_), _)) :-
+		^^set_text_input('0x31AG84. '),
+		{read(_)}.		
 
 	cleanup :-
 		^^clean_text_input.

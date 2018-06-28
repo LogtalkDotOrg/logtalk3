@@ -30,6 +30,11 @@ Logtalk compiler and runtime
 * ADDED: Object property `module` for objects that result from the compilation
 of Prolog modules.
 
+Tests
+-----
+
+* ADDED: Tests for syntax errors in numbers to the Prolog compliance suite. 
+
 
 3.18.0 - June 26, 2018
 ======================
