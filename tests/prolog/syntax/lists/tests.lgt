@@ -49,23 +49,23 @@
 
 	throws(lgt_list_04, error(syntax_error(_), _)) :-
 		^^set_text_input('[|]. '),
-		{read(_)}.		
+		{read(_)}.
 
 	throws(lgt_list_05, error(syntax_error(_), _)) :-
 		^^set_text_input('[1|]. '),
-		{read(_)}.		
+		{read(_)}.
 
 	throws(lgt_list_06, error(syntax_error(_), _)) :-
 		^^set_text_input('[|1]. '),
-		{read(_)}.		
+		{read(_)}.
 
 	throws(lgt_list_07, error(syntax_error(_), _)) :-
 		^^set_text_input('[1,2,3,]. '),
-		{read(_)}.		
+		{read(_)}.
 
 	throws(lgt_list_08, error(syntax_error(_), _)) :-
 		^^set_text_input('[1|2|3]. '),
-		{read(_)}.		
+		{read(_)}.
 
 	cleanup :-
 		^^clean_text_input.
