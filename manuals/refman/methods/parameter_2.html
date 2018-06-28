@@ -48,6 +48,9 @@
 <p>
 Used in <a class="glossary" title="Go to glossary definition" href="../../glossary.html#parametric">parametric objects</a> (and parametric categories), this private method provides runtime access to the parameter values of the entity that contains the predicate clause whose body is being executed by using the argument number in the entity identifier. This predicate is implemented as a unification between its second argument and the corresponding implicit execution-context argument in the predicate containing the call. This unification occurs at the clause head when the second argument is not instantiated (the most common case). When the second argument is instantiated, the unification must be delayed to runtime and thus occurs at the clause body. See also <a href="this_1.html"><code>this/1</code></a>.
 </p>
+<p>
+Entity parameters can also be accessed using <em>parametric variables</em>, which use the syntax <code>_VariableName_</code>. The compiler recognizes occurrences of these variables in entity clauses. Parametric variables allows us to abstract parameter positions thus simplifying code maintenance. 
+</p>
 
 <h4>Template and modes</h4>
 
@@ -81,6 +84,22 @@ Used in <a class="glossary" title="Go to glossary definition" href="../../glossa
 
     ...</pre>
 
+<p>
+The same example using <em>parametric variables</em>:
+</p>
+
+<pre>:- object(box(_Color_, _Weight_)).
+
+    ...
+    
+    color(_Color_).
+
+    heavy :-
+        _Weight_ &gt; 10.
+
+    ...</pre>
+ 
+
 <h4>See also</h4>
 
 <p>
@@ -90,7 +109,7 @@ Used in <a class="glossary" title="Go to glossary definition" href="../../glossa
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: June 28, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="context_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="self_1.html">next</a></span><br/>
