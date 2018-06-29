@@ -17,17 +17,17 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains several examples of Logtalk programs. A brief 
+This folder contains several examples of Logtalk programs. A brief
 description of each example is included below.
 
-Each example folder contains a `NOTES.md` file and a loader helper file 
+Each example folder contains a `NOTES.md` file and a loader helper file
 (usually named `loader.lgt`) that can be used to compile and load the
 example source code. Most examples also contain a `SCRIPT.txt` file with
 instructions on how to load the example and sample queries for you to try.
 
-Most of these examples require objects, protocols, and categories that 
-are defined in the Logtalk standard library or in other examples. See 
-the `NOTES.md` files inside the library folder, plus the `NOTES.md` 
+Most of these examples require objects, protocols, and categories that
+are defined in the Logtalk standard library or in other examples. See
+the `NOTES.md` files inside the library folder, plus the `NOTES.md`
 and `SCRIPT.txt` files inside each example folder.
 
 Some examples may redefine objects already loaded from other examples.
@@ -36,7 +36,7 @@ It might be necessary to restart Logtalk after playing with some examples.
 Some of the examples have been adapted from public Prolog code or from
 Prolog text books and are copyrighted by the respective authors.
 
-These are programming examples, meaning that you should study the source 
+These are programming examples, meaning that you should study the source
 files to fully understand them. Note, however, that some examples main
 purpose is to illustrate general principles rather than being adequate,
 efficient solutions for deployment code.
@@ -63,12 +63,12 @@ Follows a short description of each included example (in alphabetical order):
 	some simple examples of text adventures
 
 - `aliases`  
-	example of using the `alias/2` predicate directive to provide 
-	alternative names to inherited predicates in order to improve 
+	example of using the `alias/2` predicate directive to provide
+	alternative names to inherited predicates in order to improve
 	readability or to solve multi-inheritance conflicts
 
 - `assignvars`  
-	example of using assignable variables in the context of parametric 
+	example of using assignable variables in the context of parametric
 	objects in order to represent object state
 
 - `assumptions`  
@@ -81,7 +81,7 @@ Follows a short description of each included example (in alphabetical order):
 	(requires Logtalk to be run with B-Prolog, SWI-Prolog, XSB, or YAP)
 
 - `benchmarks`  
-	simple benchmarks for helping comparing the performance of Logtalk 
+	simple benchmarks for helping comparing the performance of Logtalk
 	message sending when using different backend Prolog compilers and
 	for comparing performance of message sending calls with predicate
 	calls in plain Prolog and explicitly-qualified Prolog module calls
@@ -123,7 +123,7 @@ Follows a short description of each included example (in alphabetical order):
 	SWI-Prolog, or YAP)
 
 - `complements`  
-	example of using a category to explicitly complement an existing 
+	examples of using a category to explicitly complement an existing
 	object, either for hot patching or for adding new functionality
 
 - `constraints`  
@@ -134,7 +134,7 @@ Follows a short description of each included example (in alphabetical order):
 	examples of using DCG rules inside objects and categories
 
 - `debug_hooks`  
-	simple example of using compilation hooks and term expansion for 
+	simple example of using compilation hooks and term expansion for
 	conditional compilation of debug statements
 
 - `delegates`  
@@ -145,7 +145,7 @@ Follows a short description of each included example (in alphabetical order):
 	(multi-inheritance conflicts and ambiguities)
 
 - `dynpred`  
-	example of using some of the built-in database handling methods 
+	example of using some of the built-in database handling methods
 	in order to implement dynamic object state
 
 - `engines`  
@@ -154,9 +154,9 @@ Follows a short description of each included example (in alphabetical order):
 	to be run with SWI-Prolog)
 
 - `encodings`  
-	very simple example of using the new, experimental `encoding/1` 
+	very simple example of using the experimental `encoding/1`
 	directive (requires Logtalk to be run with YAP, SWI-Prolog,
-	CxProlog, K-Prolog, SICStus Prolog, or Lean Prolog)
+	CxProlog, JIProlog, SICStus Prolog, or Lean Prolog)
 
 - `errors`  
 	example showing the Logtalk compiler warning and error reporting
@@ -191,7 +191,7 @@ Follows a short description of each included example (in alphabetical order):
 	file directive and an entity directive
 
 - `inheritance`  
-	examples of public, protected, and private inheritance using both 
+	examples of public, protected, and private inheritance using both
 	prototypes and classes/instances
 
 - `inlining`  
@@ -199,7 +199,7 @@ Follows a short description of each included example (in alphabetical order):
 	definitions
 
 - `instmethods`  
-	example of instance defined methods; also illustrates the use of 
+	example of instance defined methods; also illustrates the use of
 	"super calls" to call overridden method definitions
 
 - `instvars`  
@@ -230,11 +230,11 @@ Follows a short description of each included example (in alphabetical order):
 	languages
 
 - `logging`  
-	example of using a category to define a simple logging support for 
+	example of using a category to define a simple logging support for
 	objects
 
 - `logic`  
-	example of a translator of first-order predicate logic propositions 
+	example of a translator of first-order predicate logic propositions
 	to conjunctive normal form and to clausal form
 
 - `lpa`  
@@ -251,7 +251,7 @@ Follows a short description of each included example (in alphabetical order):
 	meta-predicates
 
 - `metainterpreters`  
-	some examples of simple meta-interpreters defined as categories 
+	some examples of simple meta-interpreters defined as categories
 	that can be imported by "database" objects
 
 - `mi`  
@@ -264,7 +264,7 @@ Follows a short description of each included example (in alphabetical order):
 	simple example of compiling Prolog modules as objects
 
 - `msglog`  
-	example of using events and monitors for recording, replaying, 
+	example of using events and monitors for recording, replaying,
 	and printing user messages
 
 - `multifile`  
@@ -321,8 +321,8 @@ Follows a short description of each included example (in alphabetical order):
 	examples adapted from the Ben Staveley-Taylor POEM system
 
 - `points`  
-	example adapted from SICStus Objects documentation; defines 
-	a simple class hierarchy of points illustrating how to use 
+	example adapted from SICStus Objects documentation; defines
+	a simple class hierarchy of points illustrating how to use
 	categories as object components
 
 - `polygons`  
@@ -335,7 +335,7 @@ Follows a short description of each included example (in alphabetical order):
 	example illustrating the concept of prototypes
 
 - `proxies`  
-	example of using parametric object proxies for an efficient 
+	example of using parametric object proxies for an efficient
 	representation of objects with read-only state
 
 - `puzzles`  
@@ -354,13 +354,13 @@ Follows a short description of each included example (in alphabetical order):
 	example of a simple class-based reflective system
 
 - `relations`  
-	objects implementing predicates for dealing with relations and 
+	objects implementing predicates for dealing with relations and
 	constrained relations between objects; used by other examples
 
 - `roots`  
-	objects, protocols, and categories used by some of the other 
-	examples; illustrates how you can define object creation and 
-	abolishing methods, complete with initialization and termination 
+	objects, protocols, and categories used by some of the other
+	examples; illustrates how you can define object creation and
+	abolishing methods, complete with initialization and termination
 	options
 
 - `searching`  
@@ -373,7 +373,7 @@ Follows a short description of each included example (in alphabetical order):
 	implementation of meta-predicates
 
 - `shapes`  
-	simple geometric shapes implemented as both a prototype hierarchy 
+	simple geometric shapes implemented as both a prototype hierarchy
 	and a class hierarchy for comparing both approaches
 
 - `sicstus`  
@@ -384,28 +384,28 @@ Follows a short description of each included example (in alphabetical order):
 	and module meta-predicates that take closures as arguments
 
 - `symdiff`  
-	example of using parametric objects to implement symbolic 
+	example of using parametric objects to implement symbolic
 	expression differentiation and simplification
 
 - `tabling`  
 	simple example of using tabling directives within objects
-	(requires Logtalk to be run with B-Prolog, XSB, or YAP)
+	(requires Logtalk to be run with B-Prolog, SWI-Prolog, XSB, or YAP)
 
 - `testing`  
 	some examples of writing unit tests
 
 - `threads`  
-	several simple examples of multi-threading programming, some of 
+	several simple examples of multi-threading programming, some of
 	them intended only for benchmarking multi-threading Prolog compilers
 	(requires Logtalk to be run with YAP, SWI-Prolog, or XSB)
 
 - `viewpoints`  
-	example on how to implement property sharing and value sharing 
+	example on how to implement property sharing and value sharing
 	with prototypes
 
 - `xpce`  
 	SWI-Prolog only example of using XPCE from Logtalk
 
 - `wrappers`  
-	example of using the new `begin_of_file` term generated when compiling
+	example of using the `begin_of_file` term generated when compiling
 	a source file to define object wrappers for plain Prolog code
