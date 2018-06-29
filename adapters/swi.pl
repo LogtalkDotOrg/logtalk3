@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on June 25, 2018
+%  Last updated on June 29, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -735,8 +735,15 @@
 		file_directory_name(IncludeFile, Directory)
 	),
 	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail), relative_to(Directory)]),
-	module_property(Module, file(Path)),	% only succeeds for loaded modules
-	module_property(Module, exports(Exports)),
+	(	module_property(Module, file(Path)),
+		% only succeeds for loaded modules
+		module_property(Module, exports(Exports)) ->
+		true
+	;	object_property(Module, file(Path)),
+		object_property(Module, module),
+		% module compiled as an object
+		object_property(Module, public(Exports))
+	),
 	!.
 '$lgt_swi_list_of_exports'(File, Module, Exports) :-
 	(	logtalk_load_context(directory, Directory)
@@ -745,7 +752,7 @@
 	),
 	(	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail), relative_to(Directory)])
 	;	% we may be compiling Prolog module files as Logtalk objects
-		absolute_file_name(File, Path, [extensions(['.lgt']), access(read), file_errors(fail), relative_to(Directory)])
+		absolute_file_name(File, Path, [extensions(['.lgt','.logtalk']), access(read), file_errors(fail), relative_to(Directory)])
 	),
 	open(Path, read, In),
 	(	peek_char(In, #) ->					% deal with #! script; if not present

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on June 18, 2018
+%  Last updated on June 29, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -690,7 +690,7 @@
 	(	absolute_file_name(File, Path, [file_type(prolog), access(read), file_errors(fail)]),
 		file_property(Path, type(regular))
 	;	% we may be compiling Prolog module files as Logtalk objects
-		absolute_file_name(File, Path, [extensions(['.lgt']), access(read), file_errors(fail)])
+		absolute_file_name(File, Path, [extensions(['.lgt','.logtalk']), access(read), file_errors(fail)])
 	),
 	open(Path, read, In),
 	(	peek_char(In, #) ->		% deal with #! script; if not present

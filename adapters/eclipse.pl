@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on June 18, 2018
+%  Last updated on June 29, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -696,7 +696,7 @@ forall(Generate, Test) :-
 	(	get_flag(prolog_suffix, Suffixes), existing_file(File, Suffixes, [], ExtRel) ->
 		true
 	;	% we may be compiling Prolog module files as Logtalk objects
-		existing_file(File, [`.lgt`], [], ExtRel) ->
+		existing_file(File, [`.lgt`,`.logtalk`], [], ExtRel) ->
 		true
 	;	ExtRel = File
 	),
