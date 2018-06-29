@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>    
+%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in method: system_error/0</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Built-in method: system_error/0</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; system_error/0</div>
+
+<h2 id="methods_system_error_0" class="codenp">system_error/0</h2>
+
+<h4>Description</h4>
+
+<pre>system_error(Description)</pre>
+
+<p>
+Throws an <code>error(system_error(Description), logtalk(Head,Context))</code> exception term where <code>Head</code> is the head of the clause from where this predicate is called and <code>Context</code> is the execution context of the call. This built-in predicate is declared as a private method and thus cannot be used as a message to an object.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>system_error(+nonvar)</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt><code>(none)</code></dt>
+</dl>
+
+<h4>Examples</h4>
+
+<dl>
+	<dt><code>(none)</code></dt>
+</dl>
+
+<h4>See also</h4>
+
+<p>
+<code><a href="catch_3.html">catch/3</a></code>, <code><a href="throw_1.html">throw/1</a></code>, <code><a href="context_1.html">context/1</a></code>
+<br/>
+<code><a href="instantiation_error_0.html">instantiation_error/0</a></code>, <code><a href="type_error_2.html">type_error/2</a></code>, <code><a href="domain_error_2.html">domain_error/2</a></code>, <code><a href="existence_error_2.html">existence_error/2</a></code>, <code><a href="permission_error_3.html">permission_error/3</a></code>, <code><a href="representation_error_1.html">representation_error/1</a></code>, <code><a href="evaluation_error_1.html">evaluation_error/1</a></code>, <code><a href="syntax_error_1.html">syntax_error/1</a></code>
+</p>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
+		<span>Last updated on: June 29, 2018</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="evaluation_error_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>
