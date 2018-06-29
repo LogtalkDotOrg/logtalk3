@@ -344,7 +344,7 @@
 	built_in_method(evaluation_error, 1, '/manuals/refman/methods/', 'evaluation_error_1.html').
 	built_in_method(resource_error, 1, '/manuals/refman/methods/', 'resource_error_1.html').
 	built_in_method(syntax_error, 1, '/manuals/refman/methods/', 'syntax_error_1.html').
-	built_in_method(system_error, 0, '/manuals/refman/methods/', 'resource_error_0.html').
+	built_in_method(system_error, 0, '/manuals/refman/methods/', 'system_error_0.html').
 
 	built_in_method(bagof, 3, '/manuals/refman/methods/', 'bagof_3.html').
 	built_in_method(findall, 3, '/manuals/refman/methods/', 'findall_3.html').
