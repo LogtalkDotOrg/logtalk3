@@ -49,13 +49,13 @@
 Includes a file contents, which must be valid terms, at the place of occurrence of the directive. The file can be specified as a relative path, an absolute path, or using library notation and is expanded as a source file name. Relative paths are interpreted as relative to the path of the file contining the directive.
 </p>
 <p>
-When using the reflection API, terms from an included file can be distinguished from terms from the main file by looking for the <code>include/1</code> predicate declaration or definition property. For the included terms, the <code>line_count/1</code> property stores the term line number in the included file. 
+When using the reflection API, predicates from an included file can be distinguished from predicates from the main file by looking for the <code>include/1</code> predicate declaration or definition property. For the included predicates, the <code>line_count/1</code> property stores the term line number in the included file. 
 </p>
 <p>
 This directive can be used as either a source file directive or an entity directive. As an entity directive, it can be used both in entities defined in source files and with the entity creation built-in predicates.
 </p>
 <p>
-When using this directive as an argument in a call to the <code>create_object/4</code> and <code>create_category/4</code> predicates, the objects will not be recreated or redefined when the included file(s) are modified and the <code>logtalk_make/0-1</code> predicates are called.
+Note that when using this directive as an argument in a call to the <code>create_object/4</code> and <code>create_category/4</code> predicates, the objects will not be recreated or redefined when the included file(s) are modified and the <code>logtalk_make/0-1</code> predicates are called.
 </p>
 
 <h4>Template and modes</h4>
@@ -71,12 +71,12 @@ When using this directive as an argument in a call to the <code>create_object/4<
 
 :- include('/home/me/databases/cities.pl').
 
-?- create_object(cities, [], [public(city/4), include('/home/me/dbs/cities.pl')], []).</pre>
+| ?- create_object(cities, [], [public(city/4), include('/home/me/dbs/cities.pl')], []).</pre>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 20, 2018</span>
+		<span>Last updated on: June 29, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="end_protocol_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="info_1.html">next</a></span><br/>
