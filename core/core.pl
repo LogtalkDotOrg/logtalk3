@@ -3375,7 +3375,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b1)).
+'$lgt_version_data'(logtalk(3, 19, 0, b2)).
 
 
 
@@ -11395,6 +11395,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_error_predicate'(resource_error(Resource), TPred, DPred, Ctx).
 
+'$lgt_compile_body'(syntax_error(Description), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(syntax_error(Description), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(system_error, TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
+
 % lambda expressions support predicates
 
 '$lgt_compile_body'(Parameters>>Lambda, _, _, Ctx) :-
@@ -19151,6 +19159,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(representation_error(_), p, no, 1).
 '$lgt_built_in_method_spec'(evaluation_error(_), p, no, 1).
 '$lgt_built_in_method_spec'(resource_error(_), p, no, 1).
+'$lgt_built_in_method_spec'(syntax_error(_), p, no, 1).
+'$lgt_built_in_method_spec'(system_error, p, no, 1).
 % execution context methods
 '$lgt_built_in_method_spec'(context(_), p, no, 1).
 '$lgt_built_in_method_spec'(parameter(_,_), p, no, 1).

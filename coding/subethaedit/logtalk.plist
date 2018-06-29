@@ -205,6 +205,7 @@
 				<string>[^A-Za-z0-9_](representation_error)\(</string>
 				<string>[^A-Za-z0-9_](evaluation_error)\(</string>
 				<string>[^A-Za-z0-9_](resource_error)\(</string>
+				<string>[^A-Za-z0-9_](syntax_error)\(</string>
 			</array>
 			<key>Plain Strings</key>
 			<array>
@@ -212,6 +213,7 @@
 				<string>fail</string>
 				<string>false</string>
 				<string>instantiation_error</string>
+				<string>system_error</string>
 			</array>
 		</dict>
 

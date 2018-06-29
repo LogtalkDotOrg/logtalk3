@@ -30,6 +30,10 @@ Logtalk compiler and runtime
 * ADDED: Object property `module` for objects that result from the compilation
 of Prolog modules.
 
+* ADDED: Convenience error throwing built-in methods `syntax_error/1` and
+`system_error/0`. These methods throw standard `error/2` exception terms
+and are equivalent to a sequence of `context/1` and `throw/1` method calls.
+
 Tests
 -----
 
@@ -41,6 +45,11 @@ Examples
 
 * ADDED: Example `now_you_see_me` illustrating requirements dictated by
 inheritance semantics for the implementation of dynamic predicates.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the new error throwing built-in methods.
 
 
 3.18.0 - June 26, 2018

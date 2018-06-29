@@ -112,11 +112,11 @@ Keywords={
     Group=1
   },
   { Id=3, --control
-    Regex=[[ (call|catch|throw|(type|domain|existence|permission|representation|evaluation|resource)_error)(?=[(]) ]],
+    Regex=[[ (call|catch|throw|(type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(]) ]],
     Group=1
   },
   { Id=3, --control
-    Regex=[[ (fa(il|lse|)|true|instantiation_error) ]],
+    Regex=[[ (fa(il|lse|)|true|(instantiation|system)_error) ]],
     Group=1
   },
   { Id=3, --all solutions

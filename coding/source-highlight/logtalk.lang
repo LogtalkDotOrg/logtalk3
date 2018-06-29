@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (https://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on November 13, 2017
+#	last revised on June 29, 2018
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -31,7 +31,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<(clause|retract(all)?)(?=\()',
 			'\<a(bolish|ssert(a|z))(?=\()',
 			'\<(ca(ll|tch)|throw)(?=\()',
-			'\<(type|domain|existence|permission|representation|evaluation|resource)_error(?=\()',
+			'\<(type|domain|existence|permission|representation|evaluation|resource|syntax)_error(?=\()',
 			'\<((bag|set)of|f(ind|or)all)(?=\()',
 			'\<threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=\()',
 			'\<threaded_engine(_(create|destroy|self|next|next_reified|yield|post|fetch))?(?=\()',
@@ -61,7 +61,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<halt(?=\()', '\<(halt)\>',
 			'\<(ignore|once)(?=\()',
 			'\<((key)?sort)(?=\()',
-			'\<(true|fa(il|lse)|repeat|instantiation_error)\>',
+			'\<(true|fa(il|lse)|repeat|(instantiation|system)_error)\>',
 			'\<(e|pi|as|is|rem|mod|div)\>'
 
 

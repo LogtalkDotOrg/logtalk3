@@ -15,7 +15,7 @@ class LogtalkLexer(RegexLexer):
     """
     For `Logtalk <https://logtalk.org/>`_ source code.
 
-    :copyright: 2008-2017 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2018 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
@@ -72,8 +72,8 @@ class LogtalkLexer(RegexLexer):
             (r'a(bolish|ssert(a|z))(?=[(])', Keyword),
             # Control constructs
             (r'(ca(ll|tch)|throw)(?=[(])', Keyword),
-            (r'(fa(il|lse)|true|instantiation_error)\b', Keyword),
-            (r'(type|domain|existence|permission|representation|evaluation|resource)_error(?=[(])', Keyword),
+            (r'(fa(il|lse)|true|(instantiation|system)_error)\b', Keyword),
+            (r'(type|domain|existence|permission|representation|evaluation|resource|syntax)_error(?=[(])', Keyword),
             # All solutions
             (r'((bag|set)of|f(ind|or)all)(?=[(])', Keyword),
             # Multi-threading predicates

@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0.17,
+		version is 0.18,
 		author is 'Paulo Moura',
-		date is 2018/03/03,
+		date is 2018/06/29,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -343,6 +343,8 @@
 	built_in_method(representation_error, 1, '/manuals/refman/methods/', 'representation_error_1.html').
 	built_in_method(evaluation_error, 1, '/manuals/refman/methods/', 'evaluation_error_1.html').
 	built_in_method(resource_error, 1, '/manuals/refman/methods/', 'resource_error_1.html').
+	built_in_method(syntax_error, 1, '/manuals/refman/methods/', 'syntax_error_1.html').
+	built_in_method(system_error, 0, '/manuals/refman/methods/', 'resource_error_0.html').
 
 	built_in_method(bagof, 3, '/manuals/refman/methods/', 'bagof_3.html').
 	built_in_method(findall, 3, '/manuals/refman/methods/', 'findall_3.html').

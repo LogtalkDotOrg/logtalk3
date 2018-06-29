@@ -1,11 +1,11 @@
 ;; logtalk.el -- font lock support for Logtalk (https://logtalk.org/)
 
-;; Copyright (c) 2003-2017 Paulo Moura
+;; Copyright (c) 2003-2018 Paulo Moura
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: November 13, 2017
-;; Version: 1.34
+;; Last modification date: June 29, 2018
+;; Version: 1.35
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.34"
+(defvar logtalk-mode-version "1.35"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -135,8 +135,8 @@
 		("\\<\\(ca\\(?:ll\\|tch\\)\\|throw\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(fa\\(?:il\\|lse\\)\\|true\\)\\>" 0 'logtalk-built-in-predicate-face)
 		("\\(!\\|->\\|;\\)" 0 'logtalk-built-in-predicate-face)
-		("\\<instantiation_error\\>" 0 'logtalk-built-in-predicate-face)
-		("\\<\\(\\(?:type\\|domain\\|existence\\|permission\\|representation\\|evaluation\\|resource\\)_error\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(\\(?:instantiation\\|system\\)_error\\>" 0 'logtalk-built-in-predicate-face)
+		("\\<\\(\\(?:type\\|domain\\|existence\\|permission\\|representation\\|evaluation\\|resource\\|syntax\\)_error\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; multi-threading:
 		;;

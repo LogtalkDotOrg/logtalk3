@@ -4,7 +4,7 @@
  * -----------
  *
  * Author: Paulo Moura (pmoura@logtalk.org)
- * Copyright: (c) 2009-2014 Paulo Moura (https://logtalk.org/)
+ * Copyright: (c) 2009-2018 Paulo Moura (https://logtalk.org/)
  * Release Version: 1.0.8.6
  * Date Started: 2009/10/24
  *
@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2018/06/29 (1.1.22)
+ *  -  Added syntax coloring of the error throwing built-in methods
  * 2017/11/13 (1.1.21)
  *  -  Added syntax coloring of the error throwing built-in methods
  * 2017/06/29 (1.1.20)
@@ -173,7 +175,8 @@ $language_data = array(
             // control
             'call', 'catch', 'ignore', 'once', 'throw',
 			'type_error', 'domain_error', 'existence_error', 'permission_error',
-			'representation_error', 'evaluation_error', 'resource_error'
+			'representation_error', 'evaluation_error', 'resource_error',
+			'syntax_error',
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',
             // multi-threading predicates
@@ -219,7 +222,7 @@ $language_data = array(
         // Built-in predicates (no arguments)
         5 => array(
             // control
-            'fail', 'false', 'repeat', 'true', 'instantiation_error',
+            'fail', 'false', 'repeat', 'true', 'instantiation_error', 'system_error',
             // character and byte input/output predicates
             'nl',
             // implementation defined hooks functions

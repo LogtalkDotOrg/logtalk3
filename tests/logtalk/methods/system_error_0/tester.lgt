@@ -18,31 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
-
-	:- info([
-		version is 1.01,
-		author is 'Paulo Moura',
-		date is 2018/06/29,
-		comment is 'Unit tests for the representation_error/1 built-in method.'
-	]).
-
-	throws(representation_error_1_1, error(representation_error(character), logtalk(predicate,_))) :-
-		predicate.
-
-	throws(representation_error_1_2, error(representation_error(character), logtalk(message_tokens(1,representation_error_1_test,_,_),_))) :-
-		phrase(logtalk::message_tokens(1, representation_error_1_test), _).
-
-	% auxiliar predicates
-
-	predicate :-
-		representation_error(character).
-
-	:- multifile(logtalk::message_tokens//2).
-	:- dynamic(logtalk::message_tokens//2).
-
-	logtalk::message_tokens(1, representation_error_1_test) -->
-		{representation_error(character)}.
-
-:- end_object.
+:- initialization((
+	set_logtalk_flag(report, warnings),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
+)).

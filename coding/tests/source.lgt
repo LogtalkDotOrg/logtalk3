@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.38,
+		version is 1.39,
 		author is 'Paulo Moura',
-		date is 2017/11/27,
+		date is 2018/06/29,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -189,7 +189,9 @@ comment
 		permission_error(Operation, Permission, Culprit),
 		representation_error(Flag),
 		evaluation_error(Exception),
-		resource_error(Resource).
+		resource_error(Resource),
+		syntax_error(Description),
+		system_error.
 
 	all_solutions_methods :-
 		bagof(Term, Goal, List),

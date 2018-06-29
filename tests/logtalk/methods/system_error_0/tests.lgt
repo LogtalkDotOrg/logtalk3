@@ -22,27 +22,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.01,
+		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2018/06/29,
-		comment is 'Unit tests for the representation_error/1 built-in method.'
+		comment is 'Unit tests for the system_error/0 built-in method.'
 	]).
 
-	throws(representation_error_1_1, error(representation_error(character), logtalk(predicate,_))) :-
+	throws(system_error_1_1, error(system_error, logtalk(predicate,_))) :-
 		predicate.
 
-	throws(representation_error_1_2, error(representation_error(character), logtalk(message_tokens(1,representation_error_1_test,_,_),_))) :-
-		phrase(logtalk::message_tokens(1, representation_error_1_test), _).
+	throws(instantiation_error_0_2, error(system_error, logtalk(message_tokens(1,system_error_1_test,_,_),_))) :-
+		phrase(logtalk::message_tokens(1, system_error_1_test), _).
 
 	% auxiliar predicates
 
 	predicate :-
-		representation_error(character).
+		system_error.
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(1, representation_error_1_test) -->
-		{representation_error(character)}.
+	logtalk::message_tokens(1, system_error_1_test) -->
+		{system_error}.
 
 :- end_object.

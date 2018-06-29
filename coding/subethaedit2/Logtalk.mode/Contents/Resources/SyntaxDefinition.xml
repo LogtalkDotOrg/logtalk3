@@ -58,6 +58,8 @@
 				<regex>\b(representation_error)\(</regex>
 				<regex>\b(evaluation_error)\(</regex>
 				<regex>\b(resource_error)\(</regex>
+				<regex>\b(syntax_error)\(</regex>
+				<regex>\b(system_error)[^[(A-Za-z_]]</regex>
 			</keywords>
 
 			<keywords id="Built-in Methods" color="#1A1AA6" useforautocomplete="yes">

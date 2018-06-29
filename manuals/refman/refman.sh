@@ -6,7 +6,7 @@
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on January 25, 2018
+##   Last updated on June 29, 2018
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -161,6 +161,8 @@ eval $xslt_proc -o methods/permission_error_3.section refman.xsl methods/permiss
 eval $xslt_proc -o methods/representation_error_1.section refman.xsl methods/representation_error_1.html
 eval $xslt_proc -o methods/evaluation_error_1.section refman.xsl methods/evaluation_error_1.html
 eval $xslt_proc -o methods/resource_error_1.section refman.xsl methods/resource_error_1.html
+eval $xslt_proc -o methods/syntax_error_1.section refman.xsl methods/syntax_error_1.html
+eval $xslt_proc -o methods/system_error_0.section refman.xsl methods/system_error_0.html
 eval $xslt_proc -o methods/bagof_3.section refman.xsl methods/bagof_3.html
 eval $xslt_proc -o methods/findall_3.section refman.xsl methods/findall_3.html
 eval $xslt_proc -o methods/findall_4.section refman.xsl methods/findall_4.html
@@ -319,6 +321,8 @@ cat -s \
 	methods/representation_error_1.section \
 	methods/evaluation_error_1.section \
 	methods/resource_error_1.section \
+	methods/syntax_error_1.section \
+	methods/system_error_0.section \
 	methods/bagof_3.section \
 	methods/findall_3.section \
 	methods/findall_4.section \
