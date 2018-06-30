@@ -34,6 +34,12 @@ of Prolog modules.
 `system_error/0`. These methods throw standard `error/2` exception terms
 and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 
+Documentation
+-------------
+
+* IMPROVED: Fixed several typos and improved several sections of the reference
+manual.
+
 Tests
 -----
 

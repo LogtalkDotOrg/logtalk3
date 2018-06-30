@@ -55,10 +55,13 @@
 <dt id="complementing_category" class="glossary"><strong>complementing category</strong></dt>
 <dd>A category used for hot patching an existing object (or a set of objects).</dd>
 
+<dt id="parametric_category" class="glossary"><strong>parametric category</strong></dt>
+<dd>See parametric entity.</dd>
+
 </dl></dd>
 
 <dt id="class" class="glossary"><strong>class</strong></dt>
-<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects that instantiates it). An object can also be interpreted as a class when it instantiates itself.</dd>
+<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects that instantiates it. An object can also be interpreted as a class when it instantiates itself.</dd>
 
 <dd><dl>
 
@@ -100,6 +103,13 @@
 
 <dt id="entity" class="glossary"><strong>entity</strong></dt>
 <dd>Generic name for Logtalk compilation units: objects, categories, and protocols.</dd>
+
+<dd><dl>
+
+<dt id="parametric" class="glossary"><strong>parametric entity</strong></dt>
+<dd>An object or category whose identifier is a compound term containing free variables that can be used to parameterize the entity predicates. Parameters are logical variables implicitly shared by all the entity clauses.</dd>
+
+</dl></dd>
 
 <dt id="event" class="glossary"><strong>event</strong></dt>
 <dd>The sending of a message to an object. An event can be expressed as an ordered tuple: <code>(Event, Object, Message, Sender)</code>. Logtalk distinguish between the sending of a message &mdash; <code>before</code> event &mdash; and the return of control to the sender &mdash; <code>after</code> event.</dd>
@@ -181,8 +191,8 @@
 <dt id="hook" class="glossary"><strong>hook object</strong></dt>
 <dd>An object, implementing the <code>expanding</code> built-in protocol, defining term- and goal-expansion clauses, used in the compilation of Logtalk or Prolog source files. An hook object can be specified using the compiler flag <code>hook/1</code>. It can also be specified using a <code>set_logtalk_flag/2</code> directive in the source files to be expanded.</dd>
 
-<dt id="parametric" class="glossary"><strong>parametric entity</strong></dt>
-<dd>An object or category whose name is a compound term containing free variables that can be used to parameterize the object predicates. Parameters are logical variables implicitly shared by all the entity predicate clauses.</dd>
+<dt id="parametric_object" class="glossary"><strong>parametric object</strong></dt>
+<dd>See parametric entity.</dd>
 
 <dt id="parametric_proxy" class="glossary"><strong>parametric object proxy</strong></dt>
 <dd>A compound term (usually represented as a plain Prolog fact) with the same functor and with the same number of arguments as the identifier of a parametric object.</dd>
@@ -242,7 +252,7 @@
 <dd>A program that collects data about other program performance.</dd>
 
 <dt id="protocol" class="glossary"><strong>protocol</strong></dt>
-<dd>An entity that contains predicate declarations. A predicate is declared using a scope directive together, optionally, by other predicate directives. Protocols support the separation between interface and implementation, can be implemented by both objects and categories, and can be extended by other protocols. A protocol should be functionally-cohesive, specifying a single functionality.</dd>
+<dd>An entity that contains predicate declarations. A predicate is declared using a scope directive. It may be further specified by additional predicate directives. Protocols support the separation between interface and implementation, can be implemented by both objects and categories, and can be extended by other protocols. A protocol should be functionally-cohesive, specifying a single functionality.</dd>
 
 <dt id="prototype" class="glossary"><strong>prototype</strong></dt>
 <dd>A self-describing object that may extend or be extended by other objects. An object with no instantiation or specialization relations with other objects is always interpreted as a prototype.</dd>
@@ -286,7 +296,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 24, 2018</span>
+		<span>Last updated on: June 30, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
