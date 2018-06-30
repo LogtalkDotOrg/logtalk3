@@ -37,8 +37,8 @@ and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 Tests
 -----
 
-* ADDED: Tests for syntax errors in atoms, lists, and numbers to the Prolog
-compliance suite.
+* ADDED: Tests for syntax errors in atoms, lists, numbers, and curly bracketed
+terms to the Prolog compliance suite.
 
 Examples
 --------
