@@ -43,7 +43,7 @@
 <h1 id="grammar_grammar">Grammar</h1>
 
 <p>
-The Logtalk grammar is here described using Backus-Naur Form syntax. Non-terminal symbols in <em>italics</em> have the definition found in the ISO Prolog Standard. Terminal symbols are represented in a <code>fixed width font</code> and between double-quotes.
+The Logtalk grammar is here described using Backus-Naur Form syntax. Non-terminal symbols in <em>italics</em> have the definition found in the ISO Prolog Core standard. Terminal symbols are represented in a <code>fixed width font</code> and between double-quotes.
 </p>
 
 
@@ -60,7 +60,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 
 	<dl>
 		<dt>object ::=</dt>
-			<dd>begin_object_directive [ object_directives ] [ clauses ] end_object_directive.</dd>
+			<dd>begin_object_directive [ object_terms ] end_object_directive.</dd>
 	</dl>
 	<dl>
 		<dt>begin_object_directive ::=</dt>
@@ -104,7 +104,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 
 	<dl>
 		<dt>category ::=</dt>
-			<dd>begin_category_directive [ category_directives ] [ clauses ] end_category_directive.</dd>
+			<dd>begin_category_directive [ category_terms ] end_category_directive.</dd>
 	</dl>
 	<dl>
 		<dt>begin_category_directive ::=</dt>
@@ -485,11 +485,38 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 	</dl>
 
 
+<h2 id="grammar_terms">Terms</h2>
+
+	<h3 id="grammar_object_terms">Object terms</h3>
+		<dl>
+			<dt>object_terms ::=</dt>
+				<dd>object_term |</dd>
+				<dd>object_term object_terms</dd>
+		</dl>
+		<dl>
+			<dt>object_term ::=</dt>
+				<dd>object_directive |</dd>
+				<dd>clause |</dd>
+				<dd>grammar_rule</dd>
+		</dl>
+
+	<h3 id="grammar_category_terms">Category terms</h3>
+		<dl>
+			<dt>category_terms ::=</dt>
+				<dd>category_term |</dd>
+				<dd>category_term category_terms</dd>
+		</dl>
+		<dl>
+			<dt>category_term ::=</dt>
+				<dd>category_directive |</dd>
+				<dd>clause |</dd>
+				<dd>grammar_rule</dd>
+		</dl>
 
 <h2 id="grammar_directives">Directives</h2>
 
 	<h3 id="grammar_source_file_directives">Source file directives</h3>
-			<dl>
+		<dl>
 			<dt>source_file_directives ::=</dt>
 				<dd>source_file_directive |</dd>
 				<dd>source_file_directive source_file_directives</dd>
@@ -1204,7 +1231,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 27, 2017</span>
+		<span>Last updated on: June 30, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
