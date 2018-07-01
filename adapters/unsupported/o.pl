@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for O-Prolog
-%  Last updated on June 24, 2018
+%  Adapter file for O-Prolog 1.07 and later versions
+%  Last updated on July 1, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -54,11 +54,7 @@
 % between(+integer, +integer, ?integer) -- built-in
 
 
-% findall(?term, +callable, ?list, +list)
-
-findall(Term, Goal, List, Tail) :-
-	findall(Term, Goal, List0),
-	append(List0, Tail, List).
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable)
@@ -122,10 +118,7 @@ format(Format, Arguments) :-
 	format(Stream, Format, Arguments).
 
 
-% numbervars(?term, +integer, ?integer) -- built-in ????
-
-numbervars(Term, From, Next) :-
-	?????
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -143,7 +136,7 @@ numbervars(Term, From, Next) :-
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	?????
+	predicate_property(Pred, Prop).
 
 
 
@@ -158,7 +151,7 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable) -- built-in ????
+% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 
@@ -237,9 +230,8 @@ numbervars(Term, From, Next) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, o).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Path)) :-
-	?????
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((Major, Minor, Path))).
+'$lgt_prolog_feature'(prolog_version, (1, 0, 7)).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 0, 7))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
@@ -311,8 +303,7 @@ numbervars(Term, From, Next) :-
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
-	?????
+'$lgt_prolog_os_file_name'(Path, Path).
 
 
 % '$lgt_expand_path'(+nonvar, -atom)
@@ -320,7 +311,7 @@ numbervars(Term, From, Next) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	?????
+	expand_path(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
@@ -328,7 +319,7 @@ numbervars(Term, From, Next) :-
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	?????
+	file_exists(File).
 
 
 % '$lgt_delete_file'(+atom)
@@ -336,7 +327,7 @@ numbervars(Term, From, Next) :-
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	?????
+	delete_file(File).
 
 
 % '$lgt_directory_exists'(+atom)
@@ -344,7 +335,7 @@ numbervars(Term, From, Next) :-
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	?????
+	directory_exists(Directory).
 
 
 % '$lgt_current_directory'(-atom)
@@ -352,7 +343,7 @@ numbervars(Term, From, Next) :-
 % gets current working directory
 
 '$lgt_current_directory'(Directory) :-
-	?????
+	current_directory(Directory).
 
 
 % '$lgt_change_directory'(+atom)
@@ -360,7 +351,7 @@ numbervars(Term, From, Next) :-
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	?????
+	change_directory(Directory).
 
 
 % '$lgt_make_directory'(+atom)
@@ -368,7 +359,7 @@ numbervars(Term, From, Next) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	?????
+	make_directory(Directory).
 
 
 % '$lgt_directory_hash_as_atom'(+atom, -atom)
@@ -400,8 +391,7 @@ numbervars(Term, From, Next) :-
 %
 % gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_file_modification_time'(File, Time) :-
-	?????
+'$lgt_file_modification_time'(_File, 0).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
@@ -409,7 +399,7 @@ numbervars(Term, From, Next) :-
 % access to operating-system environment variables
 
 '$lgt_environment_variable'(Variable, Value) :-
-	?????
+	environment_variable(Variable, Value).
 
 
 % '$lgt_startup_directory'(-atom)
@@ -417,7 +407,10 @@ numbervars(Term, From, Next) :-
 % returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
-	?????
+	(	environment_variable('LOGTALK_STARTUP_DIRECTORY', Directory) ->
+		true
+	;	current_directory(Directory)
+	).
 
 
 % '$lgt_user_directory'(-atom)
@@ -425,7 +418,7 @@ numbervars(Term, From, Next) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	?????
+	environment_variable('LOGTALKUSER', Directory).
 
 
 % '$lgt_home_directory'(-atom)
@@ -433,7 +426,7 @@ numbervars(Term, From, Next) :-
 % returns the Logtalk home directory; fails if unknown
 
 '$lgt_home_directory'(Directory) :-
-	?????
+	environment_variable('LOGTALKHOME', Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
@@ -443,7 +436,7 @@ numbervars(Term, From, Next) :-
 % be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	?????
+	decompose_file_name(File, Directory, Name, Extension).
 
 
 
@@ -457,8 +450,7 @@ numbervars(Term, From, Next) :-
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(Stream, Line) :-
-	?????
+'$lgt_stream_current_line_number'(_, -1).
 
 
 
