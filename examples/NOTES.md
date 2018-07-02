@@ -238,7 +238,8 @@ Follows a short description of each included example (in alphabetical order):
 	to conjunctive normal form and to clausal form
 
 - `lpa`  
-	examples adapted from the LPA Prolog++ system
+	examples adapted from the LPA Prolog++ system (an expert system for
+	automobile fault diagnosis and a timetables example)
 
 - `metaclasses`
 	example of using classes and metaclasses
@@ -301,7 +302,7 @@ Follows a short description of each included example (in alphabetical order):
 	broken object code
 
 - `parametric`  
-	simple example of parametric objects
+	simple examples of parametric objects
 
 - `pardicts`  
 	simple SWI-Prolog only example of using a dictionary term
@@ -373,7 +374,7 @@ Follows a short description of each included example (in alphabetical order):
 	implementation of meta-predicates
 
 - `shapes`  
-	simple geometric shapes implemented as both a prototype hierarchy
+	simple geometric shapes implemented as both a prototype hierarchy 
 	and a class hierarchy for comparing both approaches
 
 - `sicstus`  
