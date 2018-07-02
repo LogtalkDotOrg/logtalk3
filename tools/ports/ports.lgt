@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2018/02/28,
+		date is 2018/07/02,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -131,7 +131,6 @@
 	port(_::_, _, _) :- !.
 	port(::_, _, _) :- !.
 	port(^^_, _, _) :- !.
-	port(:_, _, _) :- !.
 	port(':'(_,_), _, _) :- !.
 	port(_<<_, _, _) :- !.
 	port(_>>_, _, _) :- !.

@@ -34,6 +34,14 @@ of Prolog modules.
 `system_error/0`. These methods throw standard `error/2` exception terms
 and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 
+* REMOVED: Support for deprecated Logtalk 2.x `calls/1`, `uses/1`, and
+`alias/3` directives.
+
+* REMOVED: Support for deprecated Logtalk 2.x `:/1` control construct.
+
+* REMOVED: Support for deprecated Logtalk 2.x `unknown`, `singletons`,
+`tmpdir`, and `version` compiler flags.
+
 Documentation
 -------------
 

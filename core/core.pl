@@ -38,8 +38,6 @@
 :- op(600,  fy, ::).
 % "super" call (calls an inherited or imported method definition)
 :- op(600,  fy, ^^).
-% imported category predicate call operator (deprecated)
-:- op(600,  fy,  :).
 
 
 % mode operators
@@ -3375,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b2)).
+'$lgt_version_data'(logtalk(3, 19, 0, b3)).
 
 
 
@@ -8525,14 +8523,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), sd(Term,VariableNames,File,Lines), Lines)).
 
-'$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), Ctx) :-
+'$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), _) :-
 	!,
 	'$lgt_check'(read_write_flag, Name),
 	'$lgt_check'(flag_value, Name+Value),
 	% local scope (restricted to the source file being compiled)
 	Flag =.. [Name, Value],
-	'$lgt_set_compiler_flags'([Flag]),
-	'$lgt_check_for_renamed_flag'(Name, Ctx).
+	'$lgt_set_compiler_flags'([Flag]).
 
 '$lgt_compile_file_directive'(set_prolog_flag(Flag, Value), Ctx) :-
 	!,
@@ -8857,12 +8854,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % set_logtalk_flag/2 entity directive
 
-'$lgt_compile_logtalk_directive'(set_logtalk_flag(Flag, Value), Ctx) :-
+'$lgt_compile_logtalk_directive'(set_logtalk_flag(Flag, Value), _) :-
 	'$lgt_check'(read_write_flag, Flag),
 	'$lgt_check'(flag_value, Flag+Value),
 	retractall('$lgt_pp_entity_compiler_flag_'(Flag, _)),
-	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)),
-	'$lgt_check_for_renamed_flag'(Flag, Ctx).
+	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)).
 
 % declare an entity as built-in
 
@@ -8933,19 +8929,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, Ctx).
 
-% uses/1 entity directive (deprecated)
-
-'$lgt_compile_logtalk_directive'(uses(Obj), Ctx) :-
-	'$lgt_check'(object_identifier, Obj),
-	'$lgt_add_referenced_object'(Obj, Ctx),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_compiler_flag'(deprecated, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(deprecated), core, deprecated_directive(File, Lines, Type, Entity, uses/1))
-	;	true
-	).
-
 % use_module/2 module directive
 %
 % the first argument must be a module identifier; when a file specification
@@ -8975,19 +8958,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(module_identifier, Module),
 	'$lgt_check'(list, Exports),
 	'$lgt_compile_reexport_directive'(Exports, Module, Ctx).
-
-% calls/1 entity directive (deprecated)
-
-'$lgt_compile_logtalk_directive'(calls(Ptcs), Ctx) :-
-	'$lgt_flatten_to_list'(Ptcs, PtcsFlatted),
-	'$lgt_compile_calls_directive'(PtcsFlatted, Ctx),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_compiler_flag'(deprecated, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(deprecated), core, deprecated_directive(File, Lines, Type, Entity, calls/1))
-	;	true
-	).
 
 % info/1 entity directive
 
@@ -9107,20 +9077,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(entity_identifier, Entity),
 	'$lgt_compile_alias_directive'(Resources, Resources, Entity, Ctx).
 
-% alias/3 predicate directive (deprecated)
-
-'$lgt_compile_logtalk_directive'(alias(Entity, Original, Alias), Ctx) :-
-	(	\+ '$lgt_pp_predicate_alias_'(_, _, _, _, _, _),
-		% not already reported (we assume that there's no mix of alias/2 and alias/3 directives!)
-		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_compiler_flag'(deprecated, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, This),
-		'$lgt_print_message'(warning(deprecated), core, deprecated_directive(File, Lines, Type, This, alias/3))
-	;	true
-	),
-	'$lgt_compile_logtalk_directive'(alias(Entity, [as(Original,Alias)]), Ctx).
-
 
 
 % '$lgt_compile_alias_directive'(+list, +list, @entity_identifier, +compilation_context)
@@ -9193,19 +9149,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_alias_directive_resource'(_//_, Functor2/Arity2, _, _) :-
 	throw(type_error(non_terminal_indicator, Functor2/Arity2)).
-
-
-
-% '$lgt_compile_calls_directive'(+list, @compilation_context)
-%
-% auxiliary predicate for compiling calls/1 directives
-
-'$lgt_compile_calls_directive'([Ptc| Ptcs], Ctx) :-
-	'$lgt_check'(protocol_identifier, Ptc),
-	'$lgt_add_referenced_protocol'(Ptc, Ctx),
-	'$lgt_compile_calls_directive'(Ptcs, Ctx).
-
-'$lgt_compile_calls_directive'([], _).
 
 
 
@@ -12192,20 +12135,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_context_switch_call'(Obj, Pred, TPred, ExCtx).
 
-% calling category predicates directly (deprecated control construct)
-
-'$lgt_compile_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_compiler_flag'(deprecated, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(warning(deprecated), core, deprecated_control_construct(File, Lines, Type, Entity, (:)/1))
-	;	true
-	),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_super_call'(Pred, TPred, Ctx).
-
 % calling explicitly qualified module predicates
 
 '$lgt_compile_body'(':'(_, Callable), TPred, DPred, Ctx) :-
@@ -13036,19 +12965,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(flag_value, Flag + Value),
 	TPred = '$lgt_set_compiler_flag'(Flag, Value),
 	DPred = set_logtalk_flag(Flag, Value),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_check_for_renamed_flag'(Flag, Ctx).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_compile_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_read_write_flag, Flag),
 	TPred = '$lgt_set_logtalk_flag'(Flag, Value, ExCtx),
 	DPred = set_logtalk_flag(Flag, Value),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	nonvar(Flag) ->
-		'$lgt_check_for_renamed_flag'(Flag, Ctx)
-	;	true
-	).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_compile_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
@@ -13058,19 +12982,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(flag_value, Flag + Value),
 	TPred = '$lgt_compiler_flag'(Flag, Value),
 	DPred = current_logtalk_flag(Flag, Value),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_check_for_renamed_flag'(Flag, Ctx).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_compile_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var_or_flag, Flag),
 	TPred = '$lgt_current_logtalk_flag'(Flag, Value, ExCtx),
 	DPred = current_logtalk_flag(Flag, Value),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	nonvar(Flag) ->
-		'$lgt_check_for_renamed_flag'(Flag, Ctx)
-	;	true
-	).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_compile_body'(create_logtalk_flag(Flag, Value, Options), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	!,
@@ -14169,11 +14088,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
 
 '$lgt_extend_closure'(^^Closure, ExtArgs, ^^Msg) :-
-	!,
-	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
-
-'$lgt_extend_closure'(:Closure, ExtArgs, :Msg) :-
-	% deprecated control construct
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
 
@@ -19110,7 +19024,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(^^_, p, '^^'(*), 1).
 '$lgt_built_in_method_spec'(_<<_, p, '<<'(*, 0), 1).
 '$lgt_built_in_method_spec'(_>>_, p, '>>'(*, 0), 1).
-'$lgt_built_in_method_spec'(':'(_), p, ':'(*), 1).	% deprecated
 '$lgt_built_in_method_spec'(':'(_,_), p, ':'(*, 0), 1) :-
 	'$lgt_prolog_feature'(modules, supported).
 '$lgt_built_in_method_spec'({_}, p(p(p)), '{}'(0), 1).
@@ -19250,8 +19163,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_logtalk_entity_directive'(built_in).
-'$lgt_logtalk_entity_directive'(calls(_)).	% deprecated
-'$lgt_logtalk_entity_directive'(uses(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_, _)).
 '$lgt_logtalk_entity_directive'(use_module(_, _)).
 '$lgt_logtalk_entity_directive'(include(_)).
@@ -19274,7 +19185,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_predicate_directive'(mode(_, _)).
 '$lgt_logtalk_predicate_directive'(info(_, _)).
 '$lgt_logtalk_predicate_directive'(alias(_, _)).
-'$lgt_logtalk_predicate_directive'(alias(_, _, _)).	% deprecated
 '$lgt_logtalk_predicate_directive'(multifile(_)).
 '$lgt_logtalk_predicate_directive'(coinductive(_)).
 % Prolog module directives that are recognized when compiling modules as objects
@@ -19931,7 +19841,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'('$relative_to').
 % read-only compilation flags
 '$lgt_valid_flag'(version_data).
-'$lgt_valid_flag'(version).		% deprecated
 % startup flags
 '$lgt_valid_flag'(settings_file).
 % back-end Prolog compiler information
@@ -19950,10 +19859,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 % back-end Prolog compiler and loader options
 '$lgt_valid_flag'(prolog_compiler).
 '$lgt_valid_flag'(prolog_loader).
-% renamed (and thus deprecated) flags
-'$lgt_valid_flag'(unknown).
-'$lgt_valid_flag'(singletons).
-'$lgt_valid_flag'(tmpdir).
 
 
 
@@ -19963,7 +19868,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % Logtalk version flags
 '$lgt_read_only_flag'(version_data).
-'$lgt_read_only_flag'(version).		% deprecated
 % startup flags
 '$lgt_read_only_flag'(settings_file).
 % back-end Prolog compiler features
@@ -20083,8 +19987,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(version_data, Version) :-
 	functor(Version, logtalk, 4).
-'$lgt_valid_flag_value'(version, Version) :-
-	functor(Version, version, 3).
 
 '$lgt_valid_flag_value'(settings_file, allow) :- !.
 '$lgt_valid_flag_value'(settings_file, restrict) :- !.
@@ -20121,41 +20023,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(coinduction, supported) :- !.
 '$lgt_valid_flag_value'(coinduction, unsupported) :- !.
-
-% renamed flags
-
-'$lgt_valid_flag_value'(OldFlag, Value) :-
-	'$lgt_renamed_compiler_flag'(OldFlag, NewFlag),
-	'$lgt_valid_flag_value'(NewFlag, Value).
-
-
-
-% '$lgt_renamed_compiler_flag'(+atom, -atom)
-%
-% renamed compiler flags (from Logtalk 2.x)
-
-'$lgt_renamed_compiler_flag'(unknown, unknown_entities).
-'$lgt_renamed_compiler_flag'(singletons, singleton_variables).
-'$lgt_renamed_compiler_flag'(tmpdir, scratch_directory).
-
-
-
-% '$lgt_check_for_renamed_flag'(+atom, @compilation_context)
-%
-% check for use of a renamed compiler flag (from Logtalk 2.x)
-
-'$lgt_check_for_renamed_flag'(Flag, Ctx) :-
-	(	'$lgt_renamed_compiler_flag'(Flag, NewFlag),
-		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_compiler_flag'(deprecated, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines),
-		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
-			'$lgt_print_message'(warning(deprecated), core, deprecated_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag))
-		;	'$lgt_print_message'(warning(deprecated), core, deprecated_compiler_flag(File, Lines, Flag, NewFlag))
-		)
-	;	true
-	).
 
 
 
@@ -20561,19 +20428,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_dcg_ctg_call'(@dcgbody, @var, @var, -body)
-%
-% translates a direct call to a grammar rule in an imported category (deprecated)
-
-'$lgt_dcg_ctg_call'(Var, S0, S, phrase(:Var, S0, S)) :-
-	var(Var),
-	!.
-
-'$lgt_dcg_ctg_call'(NonTerminal, S0, S, :Pred) :-
-	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Pred).
-
-
-
 % '$lgt_dcg_body'(@dcgbody, @var, @var, -body, @compilation_context)
 %
 % translates a grammar rule body into a Prolog clause body
@@ -20593,10 +20447,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_dcg_body'(^^RGoal, S0, S, CGoal, _) :-
 	!,
 	'$lgt_dcg_super_call'(RGoal, S0, S, CGoal).
-
-'$lgt_dcg_body'(:RGoal, S0, S, CGoal, _) :-
-	!,
-	'$lgt_dcg_ctg_call'(RGoal, S0, S, CGoal).
 
 '$lgt_dcg_body'(':'(Module, RGoal), S0, S, CGoal, _) :-
 	!,
@@ -23408,9 +23258,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_cache_compiler_flags' :-
 	'$lgt_version_data'(logtalk(Major, Minor, Patch, Status)),
-	assertz('$lgt_current_flag_'(version_data, logtalk(Major, Minor, Patch, Status))),
-	% also support the deprecated Logtalk 2.x "version" flag
-	assertz('$lgt_current_flag_'(version, version(Major, Minor, Patch))).
+	assertz('$lgt_current_flag_'(version_data, logtalk(Major, Minor, Patch, Status))).
 
 
 
