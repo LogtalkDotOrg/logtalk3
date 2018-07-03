@@ -45,6 +45,9 @@ and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 * FIXED: Processing of the `include/1` directive when the included file
 contains `op/3` directives.
 
+* FIXED: Performance bug that prevented using static-binding optimizations
+for meta-arguments of meta-predicate messages sent from `user`.
+
 Documentation
 -------------
 
