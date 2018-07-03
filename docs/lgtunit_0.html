@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>6.12</code>
+            <code>6.13</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/5/30</code>
+            <code>2018/7/3</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -317,7 +317,7 @@
         <div class="section">
           <h3 id="benchmark/2" class="code">benchmark/2</h3>
           <blockquote>
-            <p class="comment">Benchmarks a goal and returns the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
+            <p class="comment">Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -341,7 +341,7 @@
         <div class="section">
           <h3 id="benchmark_reified/3" class="code">benchmark_reified/3</h3>
           <blockquote>
-            <p class="comment">Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)).</p>
+            <p class="comment">Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -365,7 +365,7 @@
         <div class="section">
           <h3 id="benchmark/3" class="code">benchmark/3</h3>
           <blockquote>
-            <p class="comment">Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
+            <p class="comment">Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.12,
+		version is 6.13,
 		author is 'Paulo Moura',
-		date is 2018/05/30,
+		date is 2018/07/03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -132,7 +132,7 @@
 	:- meta_predicate(benchmark(0, *)).
 	:- mode(benchmark(+callable, -float), one).
 	:- info(benchmark/2, [
-		comment is 'Benchmarks a goal and returns the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
+		comment is 'Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Time']
 	]).
 
@@ -140,7 +140,7 @@
 	:- meta_predicate(benchmark_reified(0, *, *)).
 	:- mode(benchmark_reified(+callable, -float, -callable), one).
 	:- info(benchmark_reified/3, [
-		comment is 'Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)).',
+		comment is 'Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.',
 		argnames is ['Goal', 'Time', 'Result']
 	]).
 
@@ -148,7 +148,7 @@
 	:- meta_predicate(benchmark(0, *, *)).
 	:- mode(benchmark(@callable, +positive_integer, -float), one).
 	:- info(benchmark/3, [
-		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
+		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.',
 		argnames is ['Goal', 'Repetitions', 'Time']
 	]).
 
