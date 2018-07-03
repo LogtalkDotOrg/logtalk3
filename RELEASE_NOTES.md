@@ -42,6 +42,9 @@ and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 * REMOVED: Support for deprecated Logtalk 2.x `unknown`, `singletons`,
 `tmpdir`, and `version` compiler flags.
 
+* FIXED: Processing of the `include/1` directive when the included file
+contains `op/3` directives.
+
 Documentation
 -------------
 
@@ -53,6 +56,8 @@ Tests
 
 * ADDED: Tests for syntax errors in atoms, lists, numbers, and curly bracketed
 terms to the Prolog compliance suite.
+
+* ADDED: Test for included files that contain `op/3` operators.
 
 Examples
 --------

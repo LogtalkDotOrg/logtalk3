@@ -30,7 +30,7 @@
 
 
 
-% message sending operators
+% message sending and super call operators
 
 % message sending to an explicit object
 :- op(600, xfy, ::).
@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b3)).
+'$lgt_version_data'(logtalk(3, 19, 0, b4)).
 
 
 
@@ -13565,7 +13565,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_non_portable_prolog_built_in_call'(compile(user), Pred) :-
 	(	\+ '$lgt_pp_non_portable_predicate_'(Pred, _, _),
-		% not previously recorded as a non portable call
+		% not already recorded as a non portable call
 		\+ '$lgt_iso_spec_predicate'(Pred) ->
 		% bona fide non-portable Prolog built-in predicate
 		'$lgt_term_template'(Pred, Template),
@@ -15991,7 +15991,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm, Ctx) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	% ensure that a new complementing category will take preference over
-	% a previously loaded complementing category for the same object
+	% any previously loaded complementing category for the same object
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)), Lines)),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
@@ -16014,7 +16014,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_specializes_class_'(Obj, _, _),
 		\+ '$lgt_specializes_class_'(_, Obj, _)
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
-		% object defined previously in the same file; check that it's a prototype
+		% object defined in the same file we're compiling; check that it's a prototype
 		\+ '$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _)),
@@ -16040,7 +16040,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_specializes_class_'(_, Obj, _)
 		), !
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
-		% object defined previously in the same file; check that it's an instance or a class
+		% object defined in the same file we're compiling; check that it's an instance or a class
 		(	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _))
@@ -18916,7 +18916,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_hooks'(+callable)
 %
 % compiles the user-defined default compiler hooks
-% (replacing any previously defined hooks)
+% (replacing any existing defined hooks)
 
 '$lgt_compile_hooks'(HookEntity) :-
 	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
@@ -22451,6 +22451,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
 '$lgt_read_stream_to_terms_runtime'(end_of_file, _, _, _, []) :-
 	!.
+'$lgt_read_stream_to_terms_runtime'((:- op(Priority, Specifier, Operators)), Lines, VariableNames, Stream, [(:- op(Priority, Specifier, Operators))-sd(Lines,VariableNames)| Terms]) :-
+	!,
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
+	(	'$lgt_pp_entity_'(_, _, _, _, _) ->
+		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l)
+	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
+	),
+	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
+	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
 '$lgt_read_stream_to_terms_runtime'(Term, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	'$lgt_read_term'(Stream, NextTerm, [], NextLines, NextVariableNames),
 	'$lgt_read_stream_to_terms_runtime'(NextTerm, NextLines, NextVariableNames, Stream, Terms).
@@ -22468,6 +22477,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, Stream, Terms).
 '$lgt_read_stream_to_terms_compile'(end_of_file, _, _, _, _, []) :-
 	!.
+'$lgt_read_stream_to_terms_compile'((:- op(Priority, Specifier, Operators)), _, Lines, VariableNames, Stream, [(:- op(Priority, Specifier, Operators))-sd(Lines,VariableNames)| Terms]) :-
+	!,
+	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
+	(	'$lgt_pp_entity_'(_, _, _, _, _) ->
+		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l)
+	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators)
+	),
+	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
+	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, NextLines, NextVariableNames, Stream, Terms).
 '$lgt_read_stream_to_terms_compile'(Term, Singletons, Lines, VariableNames, Stream, [Term-sd(Lines,VariableNames)| Terms]) :-
 	'$lgt_report_singleton_variables'(Singletons, Term),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], NextLines, NextVariableNames),
