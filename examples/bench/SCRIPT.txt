@@ -42,3 +42,11 @@ yes
 | ?- lgtunit::benchmark(boyer::top,1000,Time).
 Time = ...
 yes
+
+% for accurate timings of ::/2 goals, the lgtunit::benchmark/3 calls
+% should be made from compiled code in order to avoid the top-level
+% interpretation of the goals; an handy alternative is to use:
+
+| ?- logtalk<<(lgtunit::benchmark(boyer::top,1000,Time)).
+Time = ...
+yes
