@@ -80,6 +80,10 @@ Follows a short description of each included example (in alphabetical order):
 	Logtalk objects and categories
 	(requires Logtalk to be run with B-Prolog, SWI-Prolog, XSB, or YAP)
 
+- `bench`  
+	classic set of plain Prolog benchmark programs and Logtalk wrappers
+	for those programs
+
 - `benchmarks`  
 	simple benchmarks for helping comparing the performance of Logtalk
 	message sending when using different backend Prolog compilers and

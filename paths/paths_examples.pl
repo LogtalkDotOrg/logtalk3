@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 28, 2018
+%  Last updated on July 4, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -39,6 +39,7 @@ logtalk_library_path(assignvars, examples('assignvars/')).
 logtalk_library_path(assumptions, examples('assumptions/')).
 logtalk_library_path(attvars, examples('attvars/')).
 logtalk_library_path(barriers, threads('barriers/')).
+logtalk_library_path(bench, examples('bench/')).
 logtalk_library_path(benchmarks, examples('benchmarks/')).
 logtalk_library_path(birds, examples('birds/')).
 logtalk_library_path(birthdays, threads('birthdays/')).

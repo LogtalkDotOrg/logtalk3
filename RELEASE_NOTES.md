@@ -68,6 +68,10 @@ Examples
 * ADDED: Example `now_you_see_me` illustrating requirements dictated by
 inheritance semantics for the implementation of dynamic predicates.
 
+* ADDED: Example `bench` with a classic set of Prolog benchmark programs and
+Logtalk wrappers for those programs. Copied from SWI-Prolog after discussion
+with Jan Wielemaker.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
