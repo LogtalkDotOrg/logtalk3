@@ -50,3 +50,18 @@ yes
 | ?- logtalk<<(lgtunit::benchmark(boyer::top,1000,Time)).
 Time = ...
 yes
+
+
+% some Prolog compilers such as SWI-Prolog and YAP provide a handy time/1
+% predicate that may also be used in alternative to the `lgtunit` benchmark
+% predicates (the adapter files for these two systems ensure the argument
+% of the time/1 is fully compiled prior to calling it):
+
+| ?- time(true).  % autoload if necessary
+...
+
+| ?- time((between(1,1000,_),top,fail;true)).
+...
+
+| ?- time((between(1,1000,_),boyer::top,fail;true)).
+...
