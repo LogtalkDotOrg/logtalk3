@@ -54,6 +54,12 @@ Documentation
 * IMPROVED: Fixed several typos and improved several sections of the reference
 manual.
 
+Tools
+-----
+
+* FIXED: Float type error in the `code_metrics` documentation metric when
+using some backend Prolog systems.
+
 Tests
 -----
 
