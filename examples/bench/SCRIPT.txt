@@ -43,8 +43,8 @@ yes
 Time = ...
 yes
 
-% for accurate timings of ::/2 goals, the lgtunit::benchmark/3 calls
-% should be made from compiled code in order to avoid the top-level
+% for accurate timings of compiled ::/2 goals, the lgtunit::benchmark/3
+% calls should be made from compiled code in order to avoid the top-level
 % interpretation of the goals; an handy alternative is to use:
 
 | ?- logtalk<<(lgtunit::benchmark(boyer::top,1000,Time)).
@@ -54,8 +54,8 @@ yes
 
 % some Prolog compilers such as SWI-Prolog and YAP provide a handy time/1
 % predicate that may also be used in alternative to the `lgtunit` benchmark
-% predicates (the adapter files for these two systems ensure the argument
-% of the time/1 is fully compiled prior to calling it):
+% predicates (the adapter files for these two systems ensure that ::/2 goals
+% in the argument of the time/1 are fully compiled prior to calling them):
 
 | ?- time(true).  % autoload if necessary
 ...
