@@ -61,7 +61,9 @@
 
 	:- public(list/0).
 	list :-
-		% list all visible horseman
+		% list all visible horseman; note that, because the
+		% horseman/1 predicate is dynamic, static binding is
+		% not possible for the ^^/1 call 
 		forall(^^horseman(Horseman), (write(Horseman), nl)).
 
 	:- public(all/1).

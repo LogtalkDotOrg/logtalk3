@@ -58,7 +58,7 @@ Tools
 -----
 
 * FIXED: Float type error in the `code_metrics` documentation metric when
-using some backend Prolog systems.
+using some backend Prolog systems such as ECLiPSe.
 
 Tests
 -----
@@ -72,7 +72,8 @@ Examples
 --------
 
 * ADDED: Example `now_you_see_me` illustrating requirements dictated by
-inheritance semantics for the implementation of dynamic predicates.
+inheritance semantics for the implementation of `^^/1` calls and dynamic
+predicates.
 
 * ADDED: Example `bench` with a classic set of Prolog benchmark programs and
 Logtalk wrappers for those programs. Copied from SWI-Prolog after discussion
