@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for O-Prolog 1.07 and later versions
-%  Last updated on July 1, 2018
+%  Adapter file for O-Prolog 1.10 and later versions
+%  Last updated on July 11, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -229,9 +229,9 @@ format(Format, Arguments) :-
 %
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
-'$lgt_prolog_feature'(prolog_dialect, o).
-'$lgt_prolog_feature'(prolog_version, (1, 0, 7)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 0, 7))).
+'$lgt_prolog_feature'(prolog_dialect, opl).
+'$lgt_prolog_feature'(prolog_version, (1, 1, 0)).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 1, 0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
@@ -391,7 +391,8 @@ format(Format, Arguments) :-
 %
 % gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_file_modification_time'(_File, 0).
+'$lgt_file_modification_time'(File, Time) :-
+	file_modification_time(File, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
