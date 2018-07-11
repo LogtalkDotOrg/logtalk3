@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.13,
+		version is 6.14,
 		author is 'Paulo Moura',
-		date is 2018/07/03,
+		date is 2018/07/11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1492,6 +1492,9 @@
 	)).
 		epsilon(Epsilon) :-
 			{Epsilon is epsilon}.
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		epsilon(Epsilon) :-
+			{Epsilon is nexttoward(1.0, 2.0) - 1.0}.
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
