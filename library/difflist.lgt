@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2018/03/13,
+		date is 2018/07/11,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -512,12 +512,11 @@
 		valid2(Tail-Back).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(difflist, Term), Context))
+			instantiation_error
+		;	type_error(difflist, Term)
 		).
 
 :- end_object.

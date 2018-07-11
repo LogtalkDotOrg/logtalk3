@@ -86,9 +86,9 @@
 :- object(optional(_Reference)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/05/28,
+		date is 2018/07/11,
 		comment is 'Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [optional]
@@ -233,8 +233,7 @@
 	get(Term) :-
 		parameter(1, Reference),
 		(	Reference == empty ->
-			context(Context),
-			throw(error(existence_error(optional_term,Reference), Context))
+			existence_error(optional_term, Reference)
 		;	Reference = the(Term)
 		).
 
@@ -248,10 +247,9 @@
 	or_else_get(Term, Closure) :-
 		parameter(1, Reference),
 		(	Reference == empty ->
-			context(Context),
-			(	catch(call(Closure, Term), _, throw(error(existence_error(optional_term,Reference), Context))) ->
+			(	catch(call(Closure, Term), _, existence_error(optional_term,Reference)) ->
 				true
-			;	throw(error(existence_error(optional_term,Reference), Context))
+			;	existence_error(optional_term, Reference)
 			)
 		;	Reference = the(Term)
 		).

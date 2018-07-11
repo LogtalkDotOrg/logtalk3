@@ -54,11 +54,20 @@ Documentation
 * IMPROVED: Fixed several typos and improved several sections of the reference
 manual.
 
+Library
+-------
+
+* UPDATED: Several library objects to take advantage of the recently introduced
+error throwing built-in methods.
+
 Tools
 -----
 
 * UPDATED: The `lgtunit` tool to use an accurate `epsilon` value when using
 ECLiPSe as the backend compiler.
+
+* UPDATED: The `lgtunit` tool to take advantage of the recently introduced
+error throwing built-in methods.
 
 * FIXED: Float type error in the `code_metrics` documentation metric when
 using some backend Prolog systems such as ECLiPSe.

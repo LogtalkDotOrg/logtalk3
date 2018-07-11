@@ -22,9 +22,9 @@
 	extends(number)).
 
 	:- info([
-		version is 1.52,
+		version is 1.53,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'Integer data type predicates.'
 	]).
 
@@ -144,12 +144,11 @@
 		integer(Integer).
 
 	check(Term) :-
-		context(Context),
 		(	integer(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(integer, Term), Context))
+			instantiation_error
+		;	type_error(integer, Term)
 		).
 
 :- end_object.

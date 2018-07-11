@@ -22,9 +22,9 @@
 	implements(varlistp)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'List of variables predicates.',
 		see_also is [list, list(_), numberlist, difflist]
 	]).
@@ -201,12 +201,11 @@
 		valid(List).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(varlist, Term), Context))
+			instantiation_error
+		;	type_error(varlist, Term)
 		).
 
 :- end_object.

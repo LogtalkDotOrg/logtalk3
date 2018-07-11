@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura.',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.'
 	]).
 
@@ -258,12 +258,11 @@
 		check_order(Set, Element2).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(set, Term), Context))
+			instantiation_error
+		;	type_error(set, Term)
 		).
 
 :- end_object.

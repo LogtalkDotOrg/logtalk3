@@ -11,9 +11,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 :- object(streamvars).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'Stream variables (supporting logical, backtracable, adding and retrieving of terms).'
 	]).
 
@@ -57,14 +57,12 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 
 	new(StreamVar) :-
 		nonvar(StreamVar),
-		context(Context),
-		throw(error(type_error(variable, StreamVar), Context)).
+		type_error(variable, StreamVar).
 	new([_| _]).
 
 	new(StreamVar, _) :-
 		nonvar(StreamVar),
-		context(Context),
-		throw(error(type_error(variable, StreamVar), Context)).
+		type_error(variable, StreamVar).
 	new([_, v(Init)| _], Init).
 
 	[_| Tail] <= Value :-

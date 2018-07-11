@@ -22,9 +22,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'Atomic data type predicates.'
 	]).
 
@@ -32,12 +32,11 @@
 		atomic(Atomic).
 
 	check(Term) :-
-		context(Context),
 		(	atomic(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(atomic, Term), Context))
+			instantiation_error
+		;	type_error(atomic, Term)
 		).
 
 :- end_object.

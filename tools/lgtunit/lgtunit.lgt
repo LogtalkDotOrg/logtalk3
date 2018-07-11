@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.14,
+		version is 6.15,
 		author is 'Paulo Moura',
 		date is 2018/07/11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
@@ -1443,10 +1443,10 @@
 	:- else.
 
 		deterministic(_) :-
-			throw(error(resource_error, deterministic/1)).
+			resource_error(deterministic/1).
 
 		deterministic(_, _) :-
-			throw(error(resource_error, deterministic/2)).
+			resource_error(deterministic/2).
 
 	:- endif.
 
@@ -1464,12 +1464,10 @@
 
 	'=~='(Float1, _) :-
 		var(Float1),
-		context(Context),
-		throw(error(instantiation_error,Context)).
+		instantiation_error.
 	'=~='(_, Float2) :-
 		var(Float2),
-		context(Context),
-		throw(error(instantiation_error,Context)).
+		instantiation_error.
 	'=~='([], []) :-
 		!.
 	'=~='([Float1| Floats1], [Float2| Floats2]) :-

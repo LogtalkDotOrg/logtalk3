@@ -22,9 +22,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'Compound data type.'
 	]).
 
@@ -32,12 +32,11 @@
 		compound(Compound).
 
 	check(Term) :-
-		context(Context),
 		(	compound(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(compound, Term), Context))
+			instantiation_error
+		;	type_error(compound, Term)
 		).
 
 :- end_object.

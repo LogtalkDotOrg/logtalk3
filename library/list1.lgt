@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'List predicates with elements constrained to a single type.',
 		parnames is ['Type'],
 		see_also is [list, numberlist, varlist, difflist]
@@ -40,13 +40,12 @@
 		valid(List).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
+			instantiation_error
 		;	this(This),
-			throw(error(type_error(This, Term), Context))
+			type_error(This, Term)
 		).
 
 :- end_object.

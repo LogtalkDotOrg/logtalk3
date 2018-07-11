@@ -85,9 +85,9 @@
 :- object(expected(_Reference)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2018/05/28,
+		date is 2018/07/11,
 		comment is 'Expected term reference predicates. Requires passing an expected reference constructed using the "expected" object as a parameter.',
 		parnames is ['Reference'],
 		see_also is [expected]
@@ -208,16 +208,14 @@
 		parameter(1, Reference),
 		(	Reference = unexpected(Unexpected) ->
 			true
-		;	context(Context),
-			throw(error(existence_error(unexpected_term,Reference), Context))
+		;	existence_error(unexpected_term,Reference)
 		).
 
 	expected(Expected) :-
 		parameter(1, Reference),
 		(	Reference = expected(Expected) ->
 			true
-		;	context(Context),
-			throw(error(existence_error(expected_term,Reference), Context))
+		;	existence_error(expected_term,Reference)
 		).
 
 	map(Closure, NewReference) :-
@@ -245,12 +243,11 @@
 
 	or_else_get(Term, Closure) :-
 		parameter(1, Reference),
-		context(Context),
 		(	Reference = expected(Term) ->
 			true
-		;	catch(call(Closure, Term), _, throw(error(existence_error(expected_term,Reference), Context))) ->
+		;	catch(call(Closure, Term), _, existence_error(expected_term,Reference)) ->
 			true
-		;	throw(error(existence_error(expected_term,Reference), Context))
+		;	existence_error(expected_term, Reference)
 		).
 
 	or_else_call(Expected, Goal) :-

@@ -23,9 +23,9 @@
 	extends(atom)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2018/05/04,
+		date is 2018/07/11,
 		comment is 'Character predicates (most of them assume an ASCII representation).'
 	]).
 
@@ -174,12 +174,11 @@
 		atom_length(Character, 1).
 
 	check(Term) :-
-		context(Context),
 		(	atom(Term), atom_length(Term, 1) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(character, Term), Context))
+			instantiation_error
+		;	type_error(character, Term)
 		).
 
 :- end_object.

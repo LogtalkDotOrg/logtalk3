@@ -33,9 +33,9 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 	implements(assignvarsp)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2017/11/24,
+		date is 2018/07/11,
 		comment is 'Assignable variables (supporting backtracable assignment of non-variable terms).'
 	]).
 
@@ -43,19 +43,16 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 		assignable(Assignable) :-
 			nonvar(Assignable),
-			context(Context),
-			throw(error(type_error(variable, Assignable), Context)).
+			type_error(variable, Assignable).
 		assignable(Assignable) :-
 			create_mutable(s(_), Assignable).
 
 		assignable(Assignable, _) :-
 			nonvar(Assignable),
-			context(Context),
-			throw(error(type_error(variable, Assignable), Context)).
+			type_error(variable, Assignable).
 		assignable(_, Init) :-
 			var(Init),
-			context(Context),
-			throw(error(instantiation_error, Context)).
+			instantiation_error.
 		assignable(Assignable, Init) :-
 			create_mutable(s(Init), Assignable).
 
@@ -70,20 +67,17 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 		assignable(Assignable) :-
 			nonvar(Assignable),
-			context(Context),
-			throw(error(type_error(variable, Assignable), Context)).
+			type_error(variable, Assignable).
 		assignable(Assignable) :-
 			gensym(Assignable),
 			'?:='(Assignable, s(_)).
 
 		assignable(Assignable, _) :-
 			nonvar(Assignable),
-			context(Context),
-			throw(error(type_error(variable, Assignable), Context)).
+			type_error(variable, Assignable).
 		assignable(_, Init) :-
 			var(Init),
-			context(Context),
-			throw(error(instantiation_error, Context)).
+			instantiation_error.
 		assignable(Assignable, Init) :-
 			gensym(Assignable),
 			'?:='(Assignable, s(Init)).
@@ -102,18 +96,15 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 		assignable(Assignable) :-
 			nonvar(Assignable),
-			context(Context),
-			throw(error(type_error(variable, Assignable), Context)).
+			type_error(variable, Assignable).
 		assignable('$'(_,_)).
 
 		assignable(Assignable, _) :-
 			nonvar(Assignable),
-			context(Context),
-			throw(error(type_error(variable, Assignable), Context)).
+			type_error(variable, Assignable).
 		assignable(_, Init) :-
 			var(Init),
-			context(Context),
-			throw(error(instantiation_error, Context)).
+			instantiation_error.
 		assignable('$'(Init,_), Init).
 
 		Assignable <= Value :-

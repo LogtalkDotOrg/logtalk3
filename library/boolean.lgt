@@ -22,9 +22,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2017/06/29,
+		date is 2018/07/11,
 		comment is 'Boolean data type predicates.'
 	]).
 
@@ -37,7 +37,7 @@
 
 	eval(Expression, Value) :-
 		(	var(Expression) ->
-			throw(instantiation_error)
+			instantiation_error
 		;	call(Expression) ->
 			Value = true
 		;	Value = false
@@ -58,12 +58,11 @@
 		valid(BE).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(boolean, Term), Context))
+			instantiation_error
+		;	type_error(boolean, Term)
 		).
 
 :- end_object.

@@ -23,9 +23,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2017/10/03,
+		date is 2018/07/11,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -209,12 +209,11 @@
 		valid(List).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(numberlist, Term), Context))
+			instantiation_error
+		;	type_error(numberlist, Term)
 		).
 
 :- end_object.

@@ -198,8 +198,7 @@
 		merge_keep_dups(Y1s, Y2s, C, Ys).
 
 	split((-), _, _) :-
-		context(Context),
-		throw(error(instantiation_error, Context)).
+		instantiation_error.
 	split([], [], []).
 	split([X| Xs], [X| Ys], Zs) :-
 		split(Xs, Zs, Ys).
@@ -409,11 +408,9 @@
 	:- else.
 
 		sort((-), _, _, _) :-
-			context(Context),
-			throw(error(instantiation_error, Context)).
+			instantiation_error.
 		sort(_, (-), _, _) :-
-			context(Context),
-			throw(error(instantiation_error, Context)).
+			instantiation_error.
 		% whole terms comparisons
 		sort(0, @<, List, Sorted) :-
 			!,
@@ -551,12 +548,11 @@
 		valid(List).
 
 	check(Term) :-
-		context(Context),
 		(	valid(Term) ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, Context))
-		;	throw(error(type_error(list, Term), Context))
+			instantiation_error
+		;	type_error(list, Term)
 		).
 
 	take(0, _, []) :-
