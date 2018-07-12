@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on June 18, 2018
+%  Last updated on July 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -471,9 +471,15 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, quintus).
-'$lgt_prolog_feature'(prolog_version, Version) :-
-	prolog_flag(version, Version).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(('3.3'))).
+'$lgt_prolog_feature'(prolog_version, v(Major,Minor,0)) :-
+	prolog_flag(version, Version),
+	substring(Version, MajorAtom, 0, 1, 2),
+	atom_chars(MajorAtom, MajorCodes),
+	number_chars(Major, MajorCodes),
+	substring(Version, MinorAtom, 2, 1, 0),
+	atom_chars(MinorAtom, MinorCodes),
+	number_chars(Minor, MinorCodes).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(3,3,0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).

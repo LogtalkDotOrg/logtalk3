@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on June 18, 2018
+%  Last updated on July 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -236,9 +236,9 @@ numbervars(Term, From, Next) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, tu).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Path)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
 	?????
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((2, 9, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(2, 9, 0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).

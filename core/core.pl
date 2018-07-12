@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b5)).
+'$lgt_version_data'(logtalk(3, 19, 0, b6)).
 
 
 
@@ -19995,9 +19995,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(prolog_dialect, Dialect) :-
 	atom(Dialect).
 '$lgt_valid_flag_value'(prolog_version, Version) :-
-	compound(Version).
+	compound(Version),
+	functor(Version, v, 3).
 '$lgt_valid_flag_value'(prolog_compatible_version, Version) :-
-	compound(Version).
+	compound(Version),
+	functor(Version, v, 3).
 '$lgt_valid_flag_value'(prolog_conformance, strict) :- !.
 '$lgt_valid_flag_value'(prolog_conformance, lax) :- !.
 

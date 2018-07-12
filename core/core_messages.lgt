@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.42,
+		version is 1.43,
 		author is 'Paulo Moura',
-		date is 2018/06/18,
+		date is 2018/07/12,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -193,10 +193,10 @@
 
 	% startup messages
 
-	message_tokens(possibly_incompatible_prolog_version(Current, Compatible)) -->
+	message_tokens(possibly_incompatible_prolog_version(v(Major,Minor,Patch), v(Major0,Minor0,Patch0))) -->
 		['Possibly incompatible backend Prolog compiler version detected!'-[], nl,
-		 'Running Prolog compiler version: ~w'-[Current], nl,
-		 'Advised Prolog compiler version: ~w'-[Compatible], nl
+		 'Running Prolog compiler version: ~d.~d.~d'-[Major, Minor, Patch], nl,
+		 'Advised Prolog compiler version: ~d.~d.~d'-[Major0, Minor0, Patch0], nl
 		].
 
 	message_tokens(banner) -->

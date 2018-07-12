@@ -48,6 +48,12 @@ contains `op/3` directives.
 * FIXED: Performance bug that prevented using static-binding optimizations
 for meta-arguments of meta-predicate messages sent from `user`.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The representation of the Prolog version as returned by the
+`prolog_version` flag now uses a `v/3` compound term.
+
 Documentation
 -------------
 

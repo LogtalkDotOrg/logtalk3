@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Jekejeke Prolog 1.0.4 and later versions
-%  Last updated on June 18, 2018
+%  Last updated on July 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -252,9 +252,9 @@ format(Format, Arguments) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, jekejeke).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jekejeke(Major, Minor, Patch)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 0, 4))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 0, 4))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).

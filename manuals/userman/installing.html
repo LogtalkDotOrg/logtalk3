@@ -238,11 +238,11 @@ The adapter files specifies <em>default</em> values for most of the Logtalk comp
 </dl>
 <dl>
 	<dt><code>prolog_version</code></dt>
-		<dd>Version of the back-end Prolog compiler (a compound term, <code>(Major, Minor, Patch)</code>, whose arguments are integers). This flag availability depends on the Prolog compiler. Checking the value of this flag fails for any Prolog compiler that does not provide access to version data.</dd>
+		<dd>Version of the back-end Prolog compiler (a compound term, <code>v(Major, Minor, Patch)</code>, whose arguments are integers). This flag availability depends on the Prolog compiler. Checking the value of this flag fails for any Prolog compiler that does not provide access to version data.</dd>
 </dl>
 <dl>
 	<dt><code>prolog_compatible_version</code></dt>
-		<dd>Compatible version of the back-end Prolog compiler (a compound term, usually with the format <code>@&gt;=((Major, Minor, Patch))</code>, whose arguments are integers). This flag availability depends on the Prolog compiler. Checking the value of this flag fails for any Prolog compiler that does not provide access to version data.</dd>
+		<dd>Compatible version of the back-end Prolog compiler (a compound term, usually with the format <code>@&gt;=(v(Major, Minor, Patch))</code>, whose arguments are integers). This flag availability depends on the Prolog compiler. Checking the value of this flag fails for any Prolog compiler that does not provide access to version data.</dd>
 </dl>
 <dl>
 	<dt><code>prolog_conformance</code></dt>
@@ -340,7 +340,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 8, 2018</span>
+		<span>Last updated on: July 12, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

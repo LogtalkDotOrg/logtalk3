@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on June 18, 2018
+%  Last updated on July 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -192,9 +192,9 @@ setup_call_cleanup(_, _, _) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, gnu).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, gprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((1,4,5))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,4,5))).
 '$lgt_prolog_feature'(prolog_conformance, Mode) :-
 	(	current_prolog_flag(strict_iso, on) ->
 		Mode = strict

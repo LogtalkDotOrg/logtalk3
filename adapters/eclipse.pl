@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on June 29, 2018
+%  Last updated on July 12, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -313,9 +313,9 @@ forall(Generate, Test) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, eclipse).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Build)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Build)) :-
 	get_flag(version_as_list, [Major, Minor, Build]).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,1,143))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(6,1,143))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).

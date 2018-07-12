@@ -190,9 +190,9 @@ numbervars(Term, From, Next) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, ?????).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Path)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
 	?????
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((Major, Minor, Path))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
 '$lgt_prolog_feature'(prolog_conformance, ?????).	% either lax or strict
 
 '$lgt_prolog_feature'(encoding_directive, ?????).
