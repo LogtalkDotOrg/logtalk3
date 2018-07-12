@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.15,
+		version is 6.16,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2018/07/12,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1478,11 +1478,8 @@
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
 			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
 			true
-		;	% if that fails, test the relative error (protected by a catch/3 to avoid division errors)
-			% by using as the divisor the larger float in order to make argument order irrelevant:
-			abs(Float1) > abs(Float2) ->
-			catch(abs((Float1 - Float2) / Float1) < 0.00001, _, fail)	% 99.999% accuracy
-		;	catch(abs((Float1 - Float2) / Float2) < 0.00001, _, fail)
+		;	% if that fails, test the relative error (99.999% accuracy):
+			abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))
 		).
 
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),

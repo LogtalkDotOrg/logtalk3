@@ -69,6 +69,8 @@ error throwing built-in methods.
 Tools
 -----
 
+* IMPROVED: Simplified the implementation of the `lgtunit` predicate `=~=/2`.
+
 * UPDATED: The `lgtunit` tool to use an accurate `epsilon` value when using
 ECLiPSe as the backend compiler.
 
