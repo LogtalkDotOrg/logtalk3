@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2018/07/12,
 		comment is 'Unit tests for the de facto standard epsilon/0 built-in evaluable functor.'
 	]).
 
@@ -37,5 +37,17 @@
 	succeeds(lgt_epsilon_0_01) :-
 		{X is epsilon},
 		float(X), X > 0.
+
+	succeeds(lgt_epsilon_0_02) :-
+		{1.0 + epsilon > 1.0}.
+
+	succeeds(lgt_epsilon_0_03) :-
+		{1.0 + epsilon / 2.0 =:= 1.0}.
+
+	fails(lgt_epsilon_0_04) :-
+		{2.0 + epsilon > 2.0}.
+
+	succeeds(lgt_epsilon_0_05) :-
+		{2.0 + epsilon =:= 2.0}.
 
 :- end_object.

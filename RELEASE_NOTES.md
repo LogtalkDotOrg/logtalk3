@@ -83,7 +83,7 @@ using some backend Prolog systems such as ECLiPSe.
 Tests
 -----
 
-* ADDED: Test for the de facto standard `epsilon/0` evaluable functor.
+* ADDED: Tests for the de facto standard `epsilon/0` evaluable functor.
 
 * ADDED: Tests for syntax errors in atoms, lists, numbers, and curly bracketed
 terms to the Prolog compliance suite.
