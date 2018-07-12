@@ -20,7 +20,7 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, swi),
-	current_logtalk_flag(prolog_version, (7, _, _))
+	current_logtalk_flag(prolog_version, v(7, _, _))
 )).
 
 	:- initialization((

@@ -18,18 +18,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(profiler,
 	implements(profilerp)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2013/10/03,
+		date is 2018/07/12,
 		comment is 'Simple wrapper for the SICStus Prolog profiler.'
 	]).
 
-	:- if((current_logtalk_flag(prolog_version, (4, Minor, _)), Minor >= 2)).
+	:- if((current_logtalk_flag(prolog_version, v(4, Minor, _)), Minor >= 2)).
 
 		load(File) :-
 			logtalk_load(File).

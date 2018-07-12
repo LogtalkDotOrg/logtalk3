@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2018/04/10,
+		date is 2018/07/12,
 		comment is 'Unit tests for the current_logtalk_flag/2 built-in predicate.'
 	]).
 
@@ -142,7 +142,8 @@
 	succeeds(prolog_version) :-
 		current_logtalk_flag(prolog_version, Value),
 		ground(Value),
-		callable(Value).
+		callable(Value),
+		functor(Value, v, 3).
 		
 	succeeds(prolog_compatible_version) :-
 		current_logtalk_flag(prolog_compatible_version, Value),
