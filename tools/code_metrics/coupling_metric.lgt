@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.9,
+		version is 0.11,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/03/21,
+		date is 2018/07/13,
 		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
@@ -51,7 +51,7 @@
 		afferent_coupling(Kind, Entity, Afferent),
 		(	Efferent =:= 0 ->
 			Instability = 0.0
-		;	Instability is Efferent / (Efferent + Afferent)
+		;	Instability is float(Efferent / (Efferent + Afferent))
 		),
 		abstractness(Kind, Entity, Abstractness).
 
@@ -149,7 +149,7 @@
 		length(DefinedPredicates, Defined),
 		(	Declared =:= 0 ->
 			Abstractness is 0.0
-		;	Abstractness is (Declared - Defined) / Declared
+		;	Abstractness is float((Declared - Defined) / Declared)
 		).
 	abstractness(object, Entity, Abstractness) :-
 		findall(
@@ -170,7 +170,7 @@
 		length(DefinedPredicates, Defined),
 		(	Declared =:= 0 ->
 			Abstractness is 0.0
-		;	Abstractness is (Declared - Defined) / Declared
+		;	Abstractness is float((Declared - Defined) / Declared)
 		).
 
 	% auxiliary predicates

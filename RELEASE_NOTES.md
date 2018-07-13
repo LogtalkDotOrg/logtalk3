@@ -90,6 +90,11 @@ error throwing built-in methods.
 * FIXED: Float type error in the `code_metrics` documentation metric when
 using some backend Prolog systems such as ECLiPSe.
 
+* FIXED: Workaround for some backend Prolog compilers lack of float arithmetic
+standard compliance to ensure that coupling metric entity scores return float
+values for instability and abstractness instead of integers when the fractional
+part is zero.
+
 Tests
 -----
 
