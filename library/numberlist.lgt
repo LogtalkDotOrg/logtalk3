@@ -23,9 +23,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2018/07/13,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -156,7 +156,7 @@
 
 	normalize_range_2([], _, _, []).
 	normalize_range_2([X| Xs], Min, Range, [Y| Ys]) :-
-		Y is (X - Min) / Range,
+		Y is float((X - Min) / Range),
 		normalize_range_2(Xs, Min, Range, Ys).
 
 	normalize_range([], _, _, []).
@@ -168,7 +168,7 @@
 
 	normalize_range_4([], _, _, _, _, _, []).
 	normalize_range_4([X| Xs], Min, Max, Range, NewMin, NewRange, [Y| Ys]) :-
-		Y is (X - Min) * NewRange / Range + NewMin,
+		Y is float((X - Min) * NewRange / Range + NewMin),
 		normalize_range_4(Xs, Min, Max, Range, NewMin, NewRange, Ys).
 
 	min_max_list([X| Xs], Min, Max) :-

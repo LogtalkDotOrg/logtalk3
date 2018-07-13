@@ -69,6 +69,10 @@ type-checked variants of the same predicates found in the `lgtunit` tool.
 * UPDATED: Several library objects to take advantage of the recently introduced
 error throwing built-in methods.
 
+* FIXED: Workaround for some backend Prolog compilers lack of float arithmetic
+standard compliance to ensure that statistics and number list predicates that
+compute floats don't return integers when the fractional part is zero.
+
 Tools
 -----
 

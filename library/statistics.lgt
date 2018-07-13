@@ -23,9 +23,9 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2017/10/03,
+		date is 2018/07/13,
 		comment is 'Statistical calculations over a list of numbers.'
 	]).
 
@@ -33,7 +33,7 @@
 		arithmetic_mean(Xs, 1, _, X, Mean).
 
 	arithmetic_mean([], Length, Length, Sum, Mean) :-
-		Mean is Sum / Length.
+		Mean is float(Sum / Length).
 	arithmetic_mean([X| Xs], Lacc, Length, Sacc, Mean) :-
 		Lacc2 is Lacc + 1,
 		Sacc2 is Sacc + X,
@@ -43,7 +43,7 @@
 		geometric_mean(Xs, 1, X, Mean).
 
 	geometric_mean([], Length, Product, Mean) :-
-		Mean is Product ** (1.0 / Length).
+		Mean is float(Product ** (1.0 / Length)).
 	geometric_mean([X| Xs], Lacc, Pacc, Mean) :-
 		Lacc2 is Lacc + 1,
 		Pacc2 is Pacc * X,
@@ -54,7 +54,7 @@
 		harmonic_mean(Xs, 1, Sum, Mean).
 
 	harmonic_mean([], Length, Sum, Mean) :-
-		Mean is Length / Sum.
+		Mean is float(Length / Sum).
 	harmonic_mean([X| Xs], Lacc, Sacc, Mean) :-
 		Lacc2 is Lacc + 1,
 		Sacc2 is Sacc + 1.0 / X,
@@ -63,16 +63,16 @@
 	mean_deviation([X| Xs], Deviation) :-
 		arithmetic_mean(Xs, 1, Length, X, Mean),
 		average_deviation([X| Xs], Mean, 1, Length, 0, Sum),
-		Deviation is Sum / Length.
+		Deviation is float(Sum / Length).
 
 	median_deviation([X| Xs], Deviation) :-
 		median([X| Xs], Median, Length),
 		average_deviation([X| Xs], Median, 1, Length, 0, Sum),
-		Deviation is Sum / Length.
+		Deviation is float(Sum / Length).
 
 	average_deviation([X| Xs], CentralTendency, Deviation) :-
 		average_deviation([X| Xs], CentralTendency, 1, Length, 0, Sum),
-		Deviation is Sum / Length.
+		Deviation is float(Sum / Length).
 
 	average_deviation([], _, Length, Length, Sum, Sum).
 	average_deviation([X| Xs], CentralTendency, Lacc, Length, Sacc, Sum) :-
@@ -83,11 +83,11 @@
 	coefficient_of_variation([X| Xs], Coefficient) :-
 		::standard_deviation([X| Xs], Deviation),
 		arithmetic_mean([X| Xs], Mean),
-		Coefficient is Deviation / Mean.
+		Coefficient is float(Deviation / Mean).
 
 	relative_standard_deviation(Xs, Percentage) :-
 		coefficient_of_variation(Xs, Coefficient),
-		Percentage is Coefficient * 100.
+		Percentage is float(Coefficient * 100).
 
 	variance([], Length, Length, _, M2, M2).
 	variance([X| Xs], Lacc, Length, Mean, M2acc, M2) :-
@@ -205,7 +205,7 @@
 
 	z_normalization([], _, _, []).
 	z_normalization([X| Xs], Mean, Deviation, [Y| Ys]) :-
-		Y is (X - Mean) / Deviation,
+		Y is float((X - Mean) / Deviation),
 		z_normalization(Xs, Mean, Deviation, Ys).
 
 	valid((-)) :-		% catch variables and lists with unbound tails
