@@ -22,16 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2018/03/15,
+		date is 2018/07/13,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
 	:- uses(lgtunit, [
 		benchmark/2, benchmark_reified/3,
 		benchmark/3,
-		epsilon/1, ('=~=')/2,
+		epsilon/1, ('=~=')/2, approximate_equality/4,
 		deterministic/1, deterministic/2,
 		variant/2,
 		assertion/1, assertion/2,
@@ -83,6 +83,38 @@
 		float(Epsilon),
 		Epsilon > 0.
 
+	% approximate_equality/4 tests
+
+	succeeds(approximate_equality_4_01) :-
+		approximate_equality(0.0, 0.0, 1e-9, 1e-16).
+
+	succeeds(approximate_equality_4_02) :-
+		approximate_equality(100.0, 99.95, 1e-3, 1e-6).
+
+	throws(approximate_equality_4_03, error(instantiation_error,_)) :-
+		approximate_equality(_, 99.95, 1e-3, 1e-6).
+
+	throws(approximate_equality_4_04, error(instantiation_error,_)) :-
+		approximate_equality(100.0, _, 1e-3, 1e-6).
+
+	throws(approximate_equality_4_05, error(instantiation_error,_)) :-
+		approximate_equality(100.0, 99.95, _, 1e-6).
+
+	throws(approximate_equality_4_06, error(instantiation_error,_)) :-
+		approximate_equality(100.0, 99.95, 1e-3, _).
+
+	throws(approximate_equality_4_07, error(type_error(float,a),_)) :-
+		approximate_equality(a, 99.95, 1e-3, 1e-6).
+
+	throws(approximate_equality_4_08, error(type_error(float,a),_)) :-
+		approximate_equality(100.0, a, 1e-3, 1e-6).
+
+	throws(approximate_equality_4_09, error(type_error(float,a),_)) :-
+		approximate_equality(100.0, 99.95, a, 1e-6).
+
+	throws(approximate_equality_4_10, error(type_error(float,a),_)) :-
+		approximate_equality(100.0, 99.95, 1e-3, a).
+
 	% ('=~=')/2 tests
 
 	succeeds('=~=_2_01') :-
@@ -122,31 +154,40 @@
 		\+ '=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,2.0]]).
 
 	throws('=~=_2_11', error(instantiation_error,_)) :-
-		'=~='(_, _).
-
-	throws('=~=_2_12', error(instantiation_error,_)) :-
 		'=~='(1.0, _).
 
-	throws('=~=_2_13', error(instantiation_error,_)) :-
+	throws('=~=_2_12', error(instantiation_error,_)) :-
 		'=~='(_, 2.0).
 
-	throws('=~=_2_14', error(instantiation_error,_)) :-
-		'=~='([0.0,1.0,2.0,_], [0.0,1.0,2.0,_]).
-
-	throws('=~=_2_15', error(instantiation_error,_)) :-
+	throws('=~=_2_13', error(instantiation_error,_)) :-
 		'=~='([0.0,1.0,2.0,_], [0.0,1.0,2.0,3.0]).
 
-	throws('=~=_2_16', error(instantiation_error,_)) :-
+	throws('=~=_2_14', error(instantiation_error,_)) :-
 		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,_]).
 
-	throws('=~=_2_17', error(instantiation_error,_)) :-
-		'=~='([[0.0,1.0],[2.0,_]], [[0.0,1.0],[2.0,_]]).
-
-	throws('=~=_2_18', error(instantiation_error,_)) :-
+	throws('=~=_2_15', error(instantiation_error,_)) :-
 		'=~='([[0.0,1.0],[2.0,_]], [[0.0,1.0],[2.0,3.0]]).
 
-	throws('=~=_2_19', error(instantiation_error,_)) :-
+	throws('=~=_2_16', error(instantiation_error,_)) :-
 		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,_]]).
+
+	throws('=~=_2_17', error(type_error(float,a),_)) :-
+		'=~='(1.0, a).
+
+	throws('=~=_2_18', error(type_error(float,a),_)) :-
+		'=~='(a, 2.0).
+
+	throws('=~=_2_19', error(type_error(float,a),_)) :-
+		'=~='([0.0,1.0,2.0,a], [0.0,1.0,2.0,3.0]).
+
+	throws('=~=_2_20', error(type_error(float,a),_)) :-
+		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,a]).
+
+	throws('=~=_2_21', error(type_error(float,a),_)) :-
+		'=~='([[0.0,1.0],[2.0,a]], [[0.0,1.0],[2.0,3.0]]).
+
+	throws('=~=_2_22', error(type_error(float,a),_)) :-
+		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,a]]).
 
 	% deterministic/1 tests
 

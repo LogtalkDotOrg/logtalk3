@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.16,
+		version is 6.17,
 		author is 'Paulo Moura',
-		date is 2018/07/12,
+		date is 2018/07/13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -167,12 +167,19 @@
 		argnames is ['Term1', 'Term2']
 	]).
 
+	:- public(approximate_equality/4).
+	:- mode(approximate_equality(+float, +float, +float, +float), zero_or_one).
+	:- info(approximate_equality/4, [
+		comment is 'Compares two floats for approximate equality using the provided relative and absolute tolerances using the de facto standard formula abs(Float1 - Float2) =< max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance). Type-checked.',
+		argnames is ['Float1', 'Float2', 'RelativeTolerance', 'AbsoluteTolerance']
+	]).
+
 	:- public(op(700, xfx, ('=~='))).
 	:- public(('=~=')/2).
 	:- mode('=~='(+float, +float), zero_or_one).
 	:- mode('=~='(+list(float), +list(float)), zero_or_one).
 	:- info(('=~=')/2, [
-		comment is 'Compares two floats (or two lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. But note that the default precision values may not be adequate for all cases.',
+		comment is 'Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.',
 		argnames is ['Float1', 'Float2']
 	]).
 
@@ -1462,6 +1469,14 @@
 		;	throw(assertion_failure(Assertion))
 		).
 
+	approximate_equality(Float1, Float2, RelativeTolerance, AbsoluteTolerance) :-
+		context(Context),
+		type::check(float, Float1, Context),
+		type::check(float, Float2, Context),
+		type::check(float, RelativeTolerance, Context),
+		type::check(float, AbsoluteTolerance, Context),
+		abs(Float1 - Float2) =< max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance).
+
 	'=~='(Float1, _) :-
 		var(Float1),
 		instantiation_error.
@@ -1475,6 +1490,9 @@
 		'=~='(Float1, Float2),
 		'=~='(Floats1, Floats2).
 	'=~='(Float1, Float2) :-
+		context(Context),
+		type::check(float, Float1, Context),
+		type::check(float, Float2, Context),
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
 			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
 			true

@@ -63,13 +63,19 @@ manual.
 Library
 -------
 
+* ADDED: Float predicates `approximate_equality/4` and `=~=/2`. These are non
+type-checked variants of the same predicates found in the `lgtunit` tool.
+
 * UPDATED: Several library objects to take advantage of the recently introduced
 error throwing built-in methods.
 
 Tools
 -----
 
-* IMPROVED: Simplified the implementation of the `lgtunit` predicate `=~=/2`.
+* ADDED: Utility predicate `approximate_equality/4` to the `lgtunit` tool.
+
+* IMPROVED: Simplified the implementation of the `lgtunit` predicate `=~=/2`
+and added more strict type-checking.
 
 * UPDATED: The `lgtunit` tool to use an accurate `epsilon` value when using
 ECLiPSe as the backend compiler.

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>6.16</code>
+            <code>6.17</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/7/12</code>
+            <code>2018/7/13</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -431,9 +431,29 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="approximate_equality/4" class="code">approximate_equality/4</h3>
+          <blockquote>
+            <p class="comment">Compares two floats for approximate equality using the provided relative and absolute tolerances using the de facto standard formula abs(Float1 - Float2) =&lt; max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance). Type-checked.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>approximate_equality(Float1,Float2,RelativeTolerance,AbsoluteTolerance)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>approximate_equality(+float,+float,+float,+float) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="=~= / 2" class="code">=~= / 2</h3>
           <blockquote>
-            <p class="comment">Compares two floats (or two lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. But note that the default precision values may not be adequate for all cases.</p>
+            <p class="comment">Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
