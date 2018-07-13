@@ -63,8 +63,10 @@ manual.
 Library
 -------
 
-* ADDED: Float predicates `approximate_equality/4` and `=~=/2`. These are non
-type-checked variants of the same predicates found in the `lgtunit` tool.
+* ADDED: Utility predicates `approximately_equal/3`, `essentially_equal/3`,
+and `tolerance_equal/4` to the `number` object and `=~=/2` to the `float`
+object. These are non type-checked variants of the same predicates found in
+the `lgtunit` tool.
 
 * UPDATED: Several library objects to take advantage of the recently introduced
 error throwing built-in methods.
@@ -76,7 +78,9 @@ compute floats don't return integers when the fractional part is zero.
 Tools
 -----
 
-* ADDED: Utility predicate `approximate_equality/4` to the `lgtunit` tool.
+* ADDED: Utility predicates `approximately_equal/3`, `essentially_equal/3`,
+and `tolerance_equal/4` to the `lgtunit` tool. These are type-checked variants
+of the same predicates found in the `number` library object.
 
 * IMPROVED: Simplified the implementation of the `lgtunit` predicate `=~=/2`
 and added more strict type-checking.

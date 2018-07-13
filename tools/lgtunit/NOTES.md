@@ -580,14 +580,25 @@ writing unit tests:
 - `variant(Term1, Term2)` - to check when two terms are a variant of each
 other (e.g. to check expected test results against actual results when they
 contain variables)
+
 - `assertion(Goal)` - to generate an exception in case the goal argument
 fails or throws an error
 - `assertion(Name, Goal)` - to generate an exception in case the goal
 argument fails or throws an error
-- `Float1 =~= Float2` - for approximate float comparison
+
+- `approximately_equal(Number1, Number2, Epsilon)` - for number approximate equality
+- `essentially_equal(Number1, Number2, Epsilon)` - for number essential equality
+- `tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)` - for number equality within tolerances
+
+- `Float1 =~= Float2` - for float close equality
+
 - `benchmark(Goal, Time)` - for timing a goal
+- `benchmark_reified(Goal, Time, Result)` - reified version of `benchmark/2`
 - `benchmark(Goal, Repetitions, Time)` - for finding the average time
 to prove a goal
+- `benchmark(Goal, Repetitions, Clock, Time)` - for finding the average time
+to prove a goal using a cpu or a wall clock
+
 - `deterministic(Goal)` - for checking that a predicate succeeds without
 leaving a choice-point
 - `deterministic(Goal, Deterministic)` - reified version of the

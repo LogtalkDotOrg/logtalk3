@@ -431,9 +431,9 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="approximate_equality/4" class="code">approximate_equality/4</h3>
+          <h3 id="approximately_equal/3" class="code">approximately_equal/3</h3>
           <blockquote>
-            <p class="comment">Compares two floats for approximate equality using the provided relative and absolute tolerances using the de facto standard formula abs(Float1 - Float2) =&lt; max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance). Type-checked.</p>
+            <p class="comment">Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -442,11 +442,51 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>approximate_equality(Float1,Float2,RelativeTolerance,AbsoluteTolerance)</code>
+              <code>approximately_equal(Number1,Number2,Epsilon)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>approximate_equality(+float,+float,+float,+float) &ndash; zero_or_one</code>
+              <code>approximately_equal(+number,+number,+number) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="essentially_equal/3" class="code">essentially_equal/3</h3>
+          <blockquote>
+            <p class="comment">Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>essentially_equal(Number1,Number2,Epsilon)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>essentially_equal(+number,+number,+number) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="tolerance_equal/4" class="code">tolerance_equal/4</h3>
+          <blockquote>
+            <p class="comment">Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =&lt; max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>tolerance_equal(+number,+number,+number,+number) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

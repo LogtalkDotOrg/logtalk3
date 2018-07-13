@@ -31,7 +31,8 @@
 	:- uses(lgtunit, [
 		benchmark/2, benchmark_reified/3,
 		benchmark/3,
-		epsilon/1, ('=~=')/2, approximate_equality/4,
+		epsilon/1, ('=~=')/2,
+		approximately_equal/3, essentially_equal/3, tolerance_equal/4,
 		deterministic/1, deterministic/2,
 		variant/2,
 		assertion/1, assertion/2,
@@ -83,37 +84,95 @@
 		float(Epsilon),
 		Epsilon > 0.
 
-	% approximate_equality/4 tests
+	% approximately_equal/3 tests
 
-	succeeds(approximate_equality_4_01) :-
-		approximate_equality(0.0, 0.0, 1e-9, 1e-16).
+	succeeds(approximately_equal_3_01) :-
+		approximately_equal(95.1, 100.0, 0.05).
 
-	succeeds(approximate_equality_4_02) :-
-		approximate_equality(100.0, 99.95, 1e-3, 1e-6).
+	fails(approximately_equal_3_02) :-
+		approximately_equal(94.7, 100.0, 0.05).
 
-	throws(approximate_equality_4_03, error(instantiation_error,_)) :-
-		approximate_equality(_, 99.95, 1e-3, 1e-6).
+	throws(approximately_equal_3_03, error(instantiation_error,_)) :-
+		approximately_equal(_, 100.0, 0.05).
 
-	throws(approximate_equality_4_04, error(instantiation_error,_)) :-
-		approximate_equality(100.0, _, 1e-3, 1e-6).
+	throws(approximately_equal_3_04, error(instantiation_error,_)) :-
+		approximately_equal(95.1, _, 0.05).
 
-	throws(approximate_equality_4_05, error(instantiation_error,_)) :-
-		approximate_equality(100.0, 99.95, _, 1e-6).
+	throws(approximately_equal_3_05, error(instantiation_error,_)) :-
+		approximately_equal(95.1, 100.0, _).
 
-	throws(approximate_equality_4_06, error(instantiation_error,_)) :-
-		approximate_equality(100.0, 99.95, 1e-3, _).
+	throws(approximately_equal_3_06, error(type_error(number,a),_)) :-
+		approximately_equal(a, 100.0, 0.05).
 
-	throws(approximate_equality_4_07, error(type_error(float,a),_)) :-
-		approximate_equality(a, 99.95, 1e-3, 1e-6).
+	throws(approximately_equal_3_07, error(type_error(number,a),_)) :-
+		approximately_equal(95.1, a, 0.05).
 
-	throws(approximate_equality_4_08, error(type_error(float,a),_)) :-
-		approximate_equality(100.0, a, 1e-3, 1e-6).
+	throws(approximately_equal_3_08, error(type_error(number,a),_)) :-
+		approximately_equal(95.1, 100.0, a).
 
-	throws(approximate_equality_4_09, error(type_error(float,a),_)) :-
-		approximate_equality(100.0, 99.95, a, 1e-6).
+	% essentially_equal/3 tests
 
-	throws(approximate_equality_4_10, error(type_error(float,a),_)) :-
-		approximate_equality(100.0, 99.95, 1e-3, a).
+	succeeds(essentially_equal_3_01) :-
+		essentially_equal(98.7, 100.0, 0.05).
+
+	fails(essentially_equal_3_02) :-
+		essentially_equal(95.1, 100.0, 0.05).
+
+	throws(essentially_equal_3_03, error(instantiation_error,_)) :-
+		essentially_equal(_, 100.0, 0.05).
+
+	throws(essentially_equal_3_04, error(instantiation_error,_)) :-
+		essentially_equal(95.1, _, 0.05).
+
+	throws(essentially_equal_3_05, error(instantiation_error,_)) :-
+		essentially_equal(95.1, 100.0, _).
+
+	throws(essentially_equal_3_06, error(type_error(number,a),_)) :-
+		essentially_equal(a, 100.0, 0.05).
+
+	throws(essentially_equal_3_07, error(type_error(number,a),_)) :-
+		essentially_equal(95.1, a, 0.05).
+
+	throws(essentially_equal_3_08, error(type_error(number,a),_)) :-
+		essentially_equal(95.1, 100.0, a).
+
+	% tolerance_equal/4 tests
+
+	succeeds(tolerance_equal_4_01) :-
+		tolerance_equal(0.0, 0.0, 1e-9, 1e-16).
+
+	succeeds(tolerance_equal_4_02) :-
+		tolerance_equal(100.0, 99.95, 1e-3, 1e-6).
+
+	succeeds(tolerance_equal_4_03) :-
+		tolerance_equal(100, 95, 0.05, 1).
+
+	fails(tolerance_equal_4_04) :-
+		tolerance_equal(100, 94, 0.05, 1).
+
+	throws(tolerance_equal_4_05, error(instantiation_error,_)) :-
+		tolerance_equal(_, 99.95, 1e-3, 1e-6).
+
+	throws(tolerance_equal_4_06, error(instantiation_error,_)) :-
+		tolerance_equal(100.0, _, 1e-3, 1e-6).
+
+	throws(tolerance_equal_4_07, error(instantiation_error,_)) :-
+		tolerance_equal(100.0, 99.95, _, 1e-6).
+
+	throws(tolerance_equal_4_08, error(instantiation_error,_)) :-
+		tolerance_equal(100.0, 99.95, 1e-3, _).
+
+	throws(tolerance_equal_4_09, error(type_error(number,a),_)) :-
+		tolerance_equal(a, 99.95, 1e-3, 1e-6).
+
+	throws(tolerance_equal_4_10, error(type_error(number,a),_)) :-
+		tolerance_equal(100.0, a, 1e-3, 1e-6).
+
+	throws(tolerance_equal_4_11, error(type_error(number,a),_)) :-
+		tolerance_equal(100.0, 99.95, a, 1e-6).
+
+	throws(tolerance_equal_4_12, error(type_error(number,a),_)) :-
+		tolerance_equal(100.0, 99.95, 1e-3, a).
 
 	% ('=~=')/2 tests
 

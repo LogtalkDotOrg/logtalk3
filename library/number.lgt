@@ -22,11 +22,41 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/07/11,
+		date is 2018/07/13,
 		comment is 'Number data type predicates.'
 	]).
+
+	:- public(approximately_equal/3).
+	:- mode(approximately_equal(+number, +number, +number), zero_or_one).
+	:- info(approximately_equal/3, [
+		comment is 'Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.',
+		argnames is ['Number1', 'Number2', 'Epsilon']
+	]).
+
+	:- public(essentially_equal/3).
+	:- mode(essentially_equal(+number, +number, +number), zero_or_one).
+	:- info(essentially_equal/3, [
+		comment is 'Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.',
+		argnames is ['Number1', 'Number2', 'Epsilon']
+	]).
+
+	:- public(tolerance_equal/4).
+	:- mode(tolerance_equal(+number, +number, +number, +number), zero_or_one).
+	:- info(tolerance_equal/4, [
+		comment is 'Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). No type-checking.',
+		argnames is ['Number1', 'Number2', 'RelativeTolerance', 'AbsoluteTolerance']
+	]).
+
+	approximately_equal(Number1, Number2, Epsilon) :-
+		abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon.
+
+	essentially_equal(Number1, Number2, Epsilon) :-
+		abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon.
+
+	tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance) :-
+		abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance).
 
 	valid(Number) :-
 		number(Number).

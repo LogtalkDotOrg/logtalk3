@@ -167,11 +167,25 @@
 		argnames is ['Term1', 'Term2']
 	]).
 
-	:- public(approximate_equality/4).
-	:- mode(approximate_equality(+float, +float, +float, +float), zero_or_one).
-	:- info(approximate_equality/4, [
-		comment is 'Compares two floats for approximate equality using the provided relative and absolute tolerances using the de facto standard formula abs(Float1 - Float2) =< max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance). Type-checked.',
-		argnames is ['Float1', 'Float2', 'RelativeTolerance', 'AbsoluteTolerance']
+	:- public(approximately_equal/3).
+	:- mode(approximately_equal(+number, +number, +number), zero_or_one).
+	:- info(approximately_equal/3, [
+		comment is 'Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.',
+		argnames is ['Number1', 'Number2', 'Epsilon']
+	]).
+
+	:- public(essentially_equal/3).
+	:- mode(essentially_equal(+number, +number, +number), zero_or_one).
+	:- info(essentially_equal/3, [
+		comment is 'Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.',
+		argnames is ['Number1', 'Number2', 'Epsilon']
+	]).
+
+	:- public(tolerance_equal/4).
+	:- mode(tolerance_equal(+number, +number, +number, +number), zero_or_one).
+	:- info(tolerance_equal/4, [
+		comment is 'Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.',
+		argnames is ['Number1', 'Number2', 'RelativeTolerance', 'AbsoluteTolerance']
 	]).
 
 	:- public(op(700, xfx, ('=~='))).
@@ -1469,13 +1483,27 @@
 		;	throw(assertion_failure(Assertion))
 		).
 
-	approximate_equality(Float1, Float2, RelativeTolerance, AbsoluteTolerance) :-
+	approximately_equal(Number1, Number2, Epsilon) :-
 		context(Context),
-		type::check(float, Float1, Context),
-		type::check(float, Float2, Context),
-		type::check(float, RelativeTolerance, Context),
-		type::check(float, AbsoluteTolerance, Context),
-		abs(Float1 - Float2) =< max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance).
+		type::check(number, Number1, Context),
+		type::check(number, Number2, Context),
+		type::check(number, Epsilon, Context),
+		abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon.
+
+	essentially_equal(Number1, Number2, Epsilon) :-
+		context(Context),
+		type::check(number, Number1, Context),
+		type::check(number, Number2, Context),
+		type::check(number, Epsilon, Context),
+		abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon.
+
+	tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance) :-
+		context(Context),
+		type::check(number, Number1, Context),
+		type::check(number, Number2, Context),
+		type::check(number, RelativeTolerance, Context),
+		type::check(number, AbsoluteTolerance, Context),
+		abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance).
 
 	'=~='(Float1, _) :-
 		var(Float1),

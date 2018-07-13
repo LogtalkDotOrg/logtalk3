@@ -28,13 +28,6 @@
 		comment is 'Floating point numbers data type predicates.'
 	]).
 
-	:- public(approximate_equality/4).
-	:- mode(approximate_equality(+float, +float, +float, +float), zero_or_one).
-	:- info(approximate_equality/4, [
-		comment is 'Compares two floats for approximate equality using the provided relative and absolute tolerances using the de facto standard formula abs(Float1 - Float2) =< max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance). No type-checking.',
-		argnames is ['Float1', 'Float2', 'RelativeTolerance', 'AbsoluteTolerance']
-	]).
-
 	:- public(op(700, xfx, ('=~='))).
 	:- public(('=~=')/2).
 	:- mode('=~='(+float, +float), zero_or_one).
@@ -43,9 +36,6 @@
 		comment is 'Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.',
 		argnames is ['Float1', 'Float2']
 	]).
-
-	approximate_equality(Float1, Float2, RelativeTolerance, AbsoluteTolerance) :-
-		abs(Float1 - Float2) =< max(RelativeTolerance * max(abs(Float1), abs(Float2)), AbsoluteTolerance).
 
 	'=~='([], []) :-
 		!.
