@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on July 12, 2018
+%  Last updated on July 14, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -55,15 +55,7 @@
 % between(+integer, +integer, ?integer) -- built-in
 
 
-% findall(?term, +callable, ?list, +list)
-
-:- if(\+ predicate_property(findall(_,_,_,_), built_in)).
-
-	findall(Term, Goal, List, Tail) :-
-		findall(Term, Goal, List0),
-		append(List0, Tail, List).
-
-:- endif.
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable) -- built-in
