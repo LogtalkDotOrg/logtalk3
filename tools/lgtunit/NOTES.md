@@ -589,8 +589,7 @@ argument fails or throws an error
 - `approximately_equal(Number1, Number2, Epsilon)` - for number approximate equality
 - `essentially_equal(Number1, Number2, Epsilon)` - for number essential equality
 - `tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)` - for number equality within tolerances
-
-- `Float1 =~= Float2` - for float close equality
+- `Number1 =~= Number2` - for number (or list of numbers) close equality (usually floating point numbers)
 
 - `benchmark(Goal, Time)` - for timing a goal
 - `benchmark_reified(Goal, Time, Result)` - reified version of `benchmark/2`

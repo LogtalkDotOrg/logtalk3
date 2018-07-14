@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2018/07/13,
+		date is 2018/07/14,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -230,22 +230,22 @@
 	throws('=~=_2_16', error(instantiation_error,_)) :-
 		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,_]]).
 
-	throws('=~=_2_17', error(type_error(float,a),_)) :-
+	throws('=~=_2_17', error(type_error(number,a),_)) :-
 		'=~='(1.0, a).
 
-	throws('=~=_2_18', error(type_error(float,a),_)) :-
+	throws('=~=_2_18', error(type_error(number,a),_)) :-
 		'=~='(a, 2.0).
 
-	throws('=~=_2_19', error(type_error(float,a),_)) :-
+	throws('=~=_2_19', error(type_error(number,a),_)) :-
 		'=~='([0.0,1.0,2.0,a], [0.0,1.0,2.0,3.0]).
 
-	throws('=~=_2_20', error(type_error(float,a),_)) :-
+	throws('=~=_2_20', error(type_error(number,a),_)) :-
 		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,a]).
 
-	throws('=~=_2_21', error(type_error(float,a),_)) :-
+	throws('=~=_2_21', error(type_error(number,a),_)) :-
 		'=~='([[0.0,1.0],[2.0,a]], [[0.0,1.0],[2.0,3.0]]).
 
-	throws('=~=_2_22', error(type_error(float,a),_)) :-
+	throws('=~=_2_22', error(type_error(number,a),_)) :-
 		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,a]]).
 
 	% deterministic/1 tests

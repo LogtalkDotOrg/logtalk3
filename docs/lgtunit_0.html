@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>6.17</code>
+            <code>6.18</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/7/13</code>
+            <code>2018/7/14</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -493,7 +493,7 @@
         <div class="section">
           <h3 id="=~= / 2" class="code">=~= / 2</h3>
           <blockquote>
-            <p class="comment">Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.</p>
+            <p class="comment">Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -502,14 +502,14 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>=~=(Float1,Float2)</code>
+              <code>=~=(Number1,Number2)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>=~=(+float,+float) &ndash; zero_or_one</code>
+              <code>=~=(+number,+number) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>=~=(+list(float),+list(float)) &ndash; zero_or_one</code>
+              <code>=~=(+list(number),+list(number)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

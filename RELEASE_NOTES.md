@@ -64,9 +64,8 @@ Library
 -------
 
 * ADDED: Utility predicates `approximately_equal/3`, `essentially_equal/3`,
-and `tolerance_equal/4` to the `number` object and `=~=/2` to the `float`
-object. These are non type-checked variants of the same predicates found in
-the `lgtunit` tool.
+`tolerance_equal/4`, and `=~=/2` to the `number` object. These predicates are
+non type-checked variants of the same predicates found in the `lgtunit` tool.
 
 * UPDATED: Several library objects to take advantage of the recently introduced
 error throwing built-in methods.

@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.17,
+		version is 6.18,
 		author is 'Paulo Moura',
-		date is 2018/07/13,
+		date is 2018/07/14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -190,11 +190,11 @@
 
 	:- public(op(700, xfx, ('=~='))).
 	:- public(('=~=')/2).
-	:- mode('=~='(+float, +float), zero_or_one).
-	:- mode('=~='(+list(float), +list(float)), zero_or_one).
+	:- mode('=~='(+number, +number), zero_or_one).
+	:- mode('=~='(+list(number), +list(number)), zero_or_one).
 	:- info(('=~=')/2, [
-		comment is 'Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.',
-		argnames is ['Float1', 'Float2']
+		comment is 'Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.',
+		argnames is ['Number1', 'Number2']
 	]).
 
 	:- public(epsilon/1).
@@ -1519,8 +1519,10 @@
 		'=~='(Floats1, Floats2).
 	'=~='(Float1, Float2) :-
 		context(Context),
-		type::check(float, Float1, Context),
-		type::check(float, Float2, Context),
+		% some backend Prolog systems have non-compliant implementations of
+		% float operators such as (/)/2 that can produce integer results
+		type::check(number, Float1, Context),
+		type::check(number, Float2, Context),
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
 			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
 			true
