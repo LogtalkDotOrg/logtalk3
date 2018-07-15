@@ -365,30 +365,6 @@ numbervars(Term, From, Next) :-
 	?????
 
 
-% '$lgt_startup_directory'(-atom)
-%
-% returns the Logtalk startup directory
-
-'$lgt_startup_directory'(Directory) :-
-	?????
-
-
-% '$lgt_user_directory'(-atom)
-%
-% returns the Logtalk user directory; fails if unknown
-
-'$lgt_user_directory'(Directory) :-
-	?????
-
-
-% '$lgt_home_directory'(-atom)
-%
-% returns the Logtalk home directory; fails if unknown
-
-'$lgt_home_directory'(Directory) :-
-	?????
-
-
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
 %
 % decomposes a file path in its components; the directory must always end

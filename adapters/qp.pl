@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on July 12, 2018
+%  Last updated on July 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -447,30 +447,6 @@ format(Format, Arguments) :-
 
 '$lgt_environment_variable'(Variable, Value) :-
 	getenv(Variable, Value).
-
-
-% '$lgt_startup_directory'(-atom)
-%
-% returns the Logtalk startup directory
-
-'$lgt_startup_directory'(Directory) :-
-	getenv('LOGTALK_STARTUP_DIRECTORY', Directory).
-
-
-% '$lgt_user_directory'(-atom)
-%
-% returns the Logtalk user directory; fails if unknown
-
-'$lgt_user_directory'(Directory) :-
-	getenv('LOGTALKUSER', Directory).
-
-
-% '$lgt_home_directory'(-atom)
-%
-% returns the Logtalk home directory; fails if unknown
-
-'$lgt_home_directory'(Directory) :-
-	getenv('LOGTALKHOME', Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

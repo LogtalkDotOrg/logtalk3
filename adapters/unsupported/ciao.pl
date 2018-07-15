@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on July 12, 2018
+%  Last updated on July 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -397,35 +397,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_environment_variable'(Variable, Value) :-
 	getenvstr(Variable, String),
 	atom_codes(Value, String).
-
-
-% '$lgt_startup_directory'(-atom)
-%
-% returns the Logtalk startup directory
-
-'$lgt_startup_directory'(Directory) :-
-	(	getenvstr('LOGTALK_STARTUP_DIRECTORY', String) ->
-		atom_codes(Directory, String)
-	;	working_directory(Directory, Directory)
-	).
-
-
-% '$lgt_user_directory'(-atom)
-%
-% returns the Logtalk user directory; fails if unknown
-
-'$lgt_user_directory'(Directory) :-
-	getenvstr('LOGTALKUSER', String),
-	atom_codes(Directory, String).
-
-
-% '$lgt_home_directory'(-atom)
-%
-% returns the Logtalk home directory; fails if unknown
-
-'$lgt_home_directory'(Directory) :-
-	getenvstr('LOGTALKHOME', String),
-	atom_codes(Directory, String).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

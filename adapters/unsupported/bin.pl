@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on July 12, 2018
+%  Last updated on July 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -426,33 +426,6 @@ write_term(Stream, Term, _) :-
 
 '$lgt_environment_variable'(Variable, Value) :-
 	unix_getenv(Variable, Value).
-
-
-% '$lgt_startup_directory'(-atom)
-%
-% returns the Logtalk startup directory
-
-'$lgt_startup_directory'(Directory) :-
-	(	unix_getenv('LOGTALK_STARTUP_DIRECTORY', Directory) ->
-		true
-	;	pwd(Chars), atom_chars(Directory, Chars)
-	).
-
-
-% '$lgt_user_directory'(-atom)
-%
-% returns the Logtalk user directory; fails if unknown
-
-'$lgt_user_directory'(Directory) :-
-	unix_getenv('LOGTALKUSER', Directory).
-
-
-% '$lgt_home_directory'(-atom)
-%
-% returns the Logtalk home directory; fails if unknown
-
-'$lgt_home_directory'(Directory) :-
-	unix_getenv('LOGTALKHOME', Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

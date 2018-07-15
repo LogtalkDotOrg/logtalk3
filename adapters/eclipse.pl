@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on July 12, 2018
+%  Last updated on July 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -520,36 +520,6 @@ forall(Generate, Test) :-
 '$lgt_environment_variable'(Variable, Value) :-
 	getenv(Variable, ValueString),
 	atom_string(Value, ValueString).
-
-
-% '$lgt_startup_directory'(-atom)
-%
-% returns the Logtalk startup directory
-
-'$lgt_startup_directory'(Directory) :-
-	(	getenv('LOGTALK_STARTUP_DIRECTORY', DirectoryString) ->
-		true
-	;	getcwd(DirectoryString)
-	),
-	atom_string(Directory, DirectoryString).
-
-
-% '$lgt_user_directory'(-atom)
-%
-% returns the Logtalk user directory; fails if unknown
-
-'$lgt_user_directory'(Directory) :-
-	getenv('LOGTALKUSER', DirectoryString),
-	atom_string(Directory, DirectoryString).
-
-
-% '$lgt_home_directory'(-atom)
-%
-% returns the Logtalk home directory; fails if unknown
-
-'$lgt_home_directory'(Directory) :-
-	getenv('LOGTALKHOME', DirectoryString),
-	atom_string(Directory, DirectoryString).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

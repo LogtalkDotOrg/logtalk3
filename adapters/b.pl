@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on July 12, 2018
+%  Last updated on July 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -419,33 +419,6 @@ findall(Term, Goal, List, Tail) :-
 
 '$lgt_environment_variable'(Variable, Value) :-
 	environ(Variable, Value).
-
-
-% '$lgt_startup_directory'(-atom)
-%
-% returns the Logtalk startup directory
-
-'$lgt_startup_directory'(Directory) :-
-	(	environ('LOGTALK_STARTUP_DIRECTORY', Directory) ->
-		true
-	;	working_directory(Directory)
-	).
-
-
-% '$lgt_user_directory'(-atom)
-%
-% returns the Logtalk user directory; fails if unknown
-
-'$lgt_user_directory'(Directory) :-
-	environ('LOGTALKUSER', Directory).
-
-
-% '$lgt_home_directory'(-atom)
-%
-% returns the Logtalk home directory; fails if unknown
-
-'$lgt_home_directory'(Directory) :-
-	environ('LOGTALKHOME', Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

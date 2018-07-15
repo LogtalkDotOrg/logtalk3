@@ -54,6 +54,9 @@ Prolog adapter and integration files
 * CHANGED: The representation of the Prolog version as returned by the
 `prolog_version` flag now uses a `v/3` compound term.
 
+* REMOVED: The `'$lgt_startup_directory'/1`, `'$lgt_user_directory'/1`, and
+`'$lgt_home_directory'/1` internal predicates from all adapter files.
+
 * UPDATED: GNU Prolog adapter file to assume version 1.4.5 or later.
 
 Documentation

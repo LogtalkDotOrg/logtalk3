@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b6)).
+'$lgt_version_data'(logtalk(3, 19, 0, b7)).
 
 
 
@@ -23116,8 +23116,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % Logtalk, the pre-compiled entities are loaded prior to this file)
 
 '$lgt_load_built_in_entities'(ScratchDirectory) :-
-	(	'$lgt_expand_library_alias'(scratch_directory, ScratchDirectory),
-		atom(ScratchDirectory) ->
+	(	'$lgt_expand_library_alias'(scratch_directory, ScratchDirectory) ->
 		% user override for the default scratch directory
 		'$lgt_set_compiler_flag'(scratch_directory, ScratchDirectory)
 	;	% use default scratch directory
@@ -23193,7 +23192,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_load_settings_file'(restrict, Options, Result) :-
 	% lookup for a settings file restricted to the Logtalk user directory or home directory
 	(	% first lookup for a settings file in the Logtalk user directory
-		'$lgt_user_directory'(User),
+		'$lgt_expand_library_alias'(logtalk_user, User),
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% if not found, lookup for a settings file in the user home directory
@@ -23206,11 +23205,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_settings_file'(allow, Options, Result) :-
 	(	% first lookup for a settings file in the startup directory
-		'$lgt_startup_directory'(Startup),
+		'$lgt_expand_library_alias'(startup, Startup),
 		'$lgt_load_settings_file_from_directory'(Startup, Options, Result) ->
 		true
 	;	% if not found, lookup for a settings file in the Logtalk user directory
-		'$lgt_user_directory'(User),
+		'$lgt_expand_library_alias'(logtalk_user, User),
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% if still not found, lookup for a settings file in the user home directory
