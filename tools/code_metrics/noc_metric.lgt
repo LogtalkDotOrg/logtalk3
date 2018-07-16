@@ -23,53 +23,54 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/18,
-		comment is 'Number of entity clauses metric.'
+		date is 2018/07/16,
+		comment is 'Number of entity clauses metric. The score is represented using the compound term number_of_clauses(Total, User).'
 	]).
 
-	entity_score(Entity, Nocs) :-
+	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
 		^^entity_kind(Entity, Kind),
-		(	Kind == protocol ->
-			Nocs = 0
-		;	Kind == object ->
-			object_property(Entity, number_of_clauses(Nocs))
-		;	Kind == category ->
-			category_property(Entity, number_of_clauses(Nocs))
-		;	fail
-		).
+		entity_score(Kind, Entity, Score).
+
+	entity_score(object, Entity, number_of_clauses(Total, User)) :-
+		object_property(Entity, number_of_clauses(Total)),
+		object_property(Entity, number_of_user_clauses(User)).
+	entity_score(category, Entity, number_of_clauses(Total, User)) :-
+		category_property(Entity, number_of_clauses(Total)),
+		category_property(Entity, number_of_user_clauses(User)).
+	entity_score(protocol, _, number_of_clauses(0, 0)).
 
 	process_entity(_, Entity) :-
-		entity_score(Entity, Nocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(Nocs)).
+		entity_score(Entity, Score),
+		logtalk::print_message(information, code_metrics, Score).
 
-	file_score(File, TotalNocs) :-
+	file_score(File, Score) :-
 		findall(
-			Nocs,
+			EntityScore,
 			(	logtalk::loaded_file_property(File, object(Object)),
-				object_property(Object, number_of_clauses(Nocs))
+				entity_score(object, Object, EntityScore)
 			;	logtalk::loaded_file_property(File, category(Category)),
-				category_property(Category, number_of_clauses(Nocs))
+				entity_score(category, Category, EntityScore)
 			),
-			NocsList
+			EntityScores
 		),
-		numberlist::sum(NocsList, TotalNocs).
+		sum_scores(EntityScores, Score).
 
 	process_file(File) :-
-		file_score(File, TotalNocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
+		file_score(File, Score),
+		logtalk::print_message(information, code_metrics, Score).
 
-	directory_score(Directory, TotalNocs) :-
-		findall(Nocs, directory_file_nocs(Directory, _, Nocs), NocsList),
-		numberlist::sum(NocsList, TotalNocs).
+	directory_score(Directory, Score) :-
+		findall(FileScore, directory_file_score(Directory, _, FileScore), FileScores),
+		sum_scores(FileScores, Score).
 
 	process_directory(Directory) :-
-		directory_score(Directory, TotalNocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
+		directory_score(Directory, Score),
+		logtalk::print_message(information, code_metrics, Score).
 
-	directory_file_nocs(Directory, File, Nocs) :-
+	directory_file_score(Directory, File, Nocs) :-
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
@@ -77,73 +78,85 @@
 		logtalk::loaded_file_property(File, directory(DirectorySlash)),
 		file_score(File, Nocs).
 
-	rdirectory_score(Directory, TotalNocs) :-
+	rdirectory_score(Directory, Score) :-
 		setof(
 			SubDirectory,
 			^^sub_directory(Directory, SubDirectory),
 			SubDirectories
 		),
 		findall(
-			Nocs,
+			FileScore,
 			(	list::member(SubDirectory, SubDirectories),
-				directory_file_nocs(SubDirectory, _, Nocs)
+				directory_file_score(SubDirectory, _, FileScore)
 			),
-			NocsList
+			FileScores
 		),
-		numberlist::sum(NocsList, TotalNocs).
+		sum_scores(FileScores, Score).
 
 	process_rdirectory(Directory) :-
-		rdirectory_score(Directory, TotalNocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
+		rdirectory_score(Directory, Score),
+		logtalk::print_message(information, code_metrics, Score).
 
-	library_score(Library, TotalNocs) :-
+	library_score(Library, Score) :-
 		logtalk::expand_library_path(Library, Directory),
-		directory_score(Directory, TotalNocs).
+		directory_score(Directory, Score).
 
 	process_library(Library) :-
-		library_score(Library, TotalNocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).		
+		library_score(Library, Score),
+		logtalk::print_message(information, code_metrics, Score).		
 
-	rlibrary_score(Library, TotalNocs) :-
+	rlibrary_score(Library, Score) :-
 		setof(
 			Path,
 			^^sub_library(Library, Path),
 			Paths
 		),
 		findall(
-			Nocs,
+			FileScore,
 			(	list::member(Path, Paths),
-				directory_file_nocs(Path, _, Nocs)
+				directory_file_score(Path, _, FileScore)
 			),
-			NocsList
+			FileScores
 		),
-		numberlist::sum(NocsList, TotalNocs).
+		sum_scores(FileScores, Score).
 
 	process_rlibrary(Library) :-
-		rlibrary_score(Library, TotalNocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).		
+		rlibrary_score(Library, Score),
+		logtalk::print_message(information, code_metrics, Score).		
 
-	all_score(TotalNocs) :-
+	all_score(Score) :-
 		findall(
-			Nocs,
+			FileScore,
 			(	logtalk::loaded_file(File),
-				file_score(File, Nocs)
+				file_score(File, FileScore)
 			),
-			NocsList
+			FileScores
 		),
-		numberlist::sum(NocsList, TotalNocs).
+		sum_scores(FileScores, Score).
 
 	process_all :-
-		all_score(TotalNocs),
-		logtalk::print_message(information, code_metrics, number_of_clauses(TotalNocs)).
+		all_score(Score),
+		logtalk::print_message(information, code_metrics, Score).
 
-	entity_score(_Entity, Nocs) -->
-		['Number of Clauses: ~w'-[Nocs], nl].
+	entity_score(_Entity, number_of_clauses(Total,User)) -->
+		['Number of Clauses: ~w'-[Total], nl],
+		['Number of User Clauses: ~w'-[User], nl].
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(number_of_clauses(Nocs), code_metrics) -->
-		['Number of Clauses: ~w'-[Nocs], nl].
+	logtalk::message_tokens(number_of_clauses(Total,User), code_metrics) -->
+		['Number of Clauses: ~w'-[Total], nl],
+		['Number of User Clauses: ~w'-[User], nl].
+
+	sum_scores([], number_of_clauses(0,0)).
+	sum_scores([number_of_clauses(Total0,User0)| Numbers], number_of_clauses(Total,User)) :-
+		sum_scores(Numbers, Total0, Total, User0, User).
+
+	sum_scores([], Total, Total, User, User).
+	sum_scores([number_of_clauses(Total1,User1)| Numbers], Total0, Total, User0, User) :-
+		Total2 is Total0 + Total1,
+		User2 is User0 + User1,
+		sum_scores(Numbers, Total2, Total, User2, User).
 
 :- end_object.

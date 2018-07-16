@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/02/02,
+		date is 2018/07/16,
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
@@ -36,72 +36,72 @@
 	:- uses(noc_metric, [entity_score/2]).
 
 	test(noc_cat_a) :-
-		entity_score(cat_a, Nocs), 
-		Nocs == 0.
+		entity_score(cat_a, Score), 
+		Score == number_of_clauses(0, 0).
 
 	test(noc_cat_b) :-
-		entity_score(cat_b, Nocs),
-		Nocs == 1.
+		entity_score(cat_b, Score),
+		Score == number_of_clauses(1, 1).
 
 	test(noc_cat_c) :-
-		entity_score(cat_c, Nocs),
-		Nocs == 1.
+		entity_score(cat_c, Score),
+		Score == number_of_clauses(1, 1).
 
 	test(noc_cat_d) :-
-		entity_score(cat_d, Nocs),
-		Nocs == 0.
+		entity_score(cat_d, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_obj_e_wrong_clause) :-
-		entity_score(obj_e, Nocs),
-		\+ Nocs == 2.
+		entity_score(obj_e, Score),
+		\+ Score == number_of_clauses(2, 2).
 
 	test(noc_obj_e) :-
-		entity_score(obj_e, Nocs),
-		Nocs == 1.
+		entity_score(obj_e, Score),
+		Score == number_of_clauses(1, 1).
 
 	test(noc_obj_d) :-
-		entity_score(obj_d, Nocs),
-		Nocs == 2.
+		entity_score(obj_d, Score),
+		Score == number_of_clauses(2, 2).
 
 	test(noc_obj_a) :-
-		entity_score(obj_a, Nocs),
-		Nocs == 4.
+		entity_score(obj_a, Score),
+		Score == number_of_clauses(4, 4).
 
 	test(noc_obj_b) :-
-		entity_score(obj_b, Nocs),
-		Nocs == 1.
+		entity_score(obj_b, Score),
+		Score == number_of_clauses(1, 1).
 
 	test(noc_obj_c) :-
-		entity_score(obj_c, Nocs),
-		Nocs == 1.
+		entity_score(obj_c, Score),
+		Score == number_of_clauses(1, 1).
 
 	test(noc_prot_a) :-
-		entity_score(prot_a, Nocs),
-		Nocs == 0.
+		entity_score(prot_a, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_prot_b) :-
-		entity_score(prot_b, Nocs),
-		Nocs == 0.
+		entity_score(prot_b, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_car) :-
-		entity_score(car, Nocs),
-		Nocs == 0.
+		entity_score(car, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_vehicle) :-
-		entity_score(vehicle, Nocs),
-		Nocs == 0.
+		entity_score(vehicle, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_meta_vehicle) :-
-		entity_score(meta_vehicle, Nocs),
-		Nocs == 0.
+		entity_score(meta_vehicle, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_herring) :-
-		entity_score(herring, Nocs),
-		Nocs == 0.
+		entity_score(herring, Score),
+		Score == number_of_clauses(0, 0).
 
 	test(noc_bird) :-
-		entity_score(bird, Nocs),
-		Nocs == 0.
+		entity_score(bird, Score),
+		Score == number_of_clauses(0, 0).
 
 	% suppress all messages from the "code_metrics"
 	% component to not pollute the unit tests output

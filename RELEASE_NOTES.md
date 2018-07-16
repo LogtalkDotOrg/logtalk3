@@ -82,6 +82,9 @@ compute floats don't return integers when the fractional part is zero.
 Tools
 -----
 
+* CHANGED: The number of entity clauses metric to compute both the total number
+of clauses and the number of user clauses.
+
 * ADDED: Utility predicates `approximately_equal/3`, `essentially_equal/3`,
 and `tolerance_equal/4` to the `lgtunit` tool. These are type-checked variants
 of the same predicates found in the `number` library object.
