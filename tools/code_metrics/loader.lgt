@@ -29,6 +29,7 @@
 		dit_metric,
 		coupling_metric,
 		noc_metric,
+		nor_metric,
 		doc_metric,
 		size_metric,
 		halstead_metric,

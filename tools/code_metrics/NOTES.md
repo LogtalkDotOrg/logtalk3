@@ -41,13 +41,15 @@ Available metrics
 Currently, the following metrics are provided:
 
 - Number of Clauses (`noc_metric`)
+- Number of Rules (`nor_metric`)
 - Depth of Inheritance (`dit_metric`)
 - Efferent coupling, afferent coupling, instability, and abstractness (`coupling_metric`)
 - Documentation (`doc_metric`)
 - Source code size (`size_metric`)
 - Halstead complexity (`halstead_metric`)
 
-All metrics require the source code to be analyzed to be loaded.
+All metrics require the source code to be analyzed to be loaded with the
+`source_data` flag turned on.
 
 For interpretation of the coupling metric scores, see e.g. the original
 paper by Robert Martin, "OO Design Quality Metrics".

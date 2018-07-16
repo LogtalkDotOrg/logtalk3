@@ -32,6 +32,7 @@
 			dit_metric,
 			coupling_metric,
 			noc_metric,
+			nor_metric,
 			doc_metric,
 			size_metric,
 			halstead_metric,
@@ -49,6 +50,7 @@
 			dit_metric_tests,
 			doc_metric_tests,
 			noc_metric_tests,
+			nor_metric_tests,
 			size_metric_tests,
 			halstead_metric_tests,
 			code_metrics_tests
@@ -61,6 +63,7 @@
 		dit_metric_tests,
 		doc_metric_tests,
 		noc_metric_tests,
+		nor_metric_tests,
 		size_metric_tests,
 		halstead_metric_tests,
 		code_metrics_tests
