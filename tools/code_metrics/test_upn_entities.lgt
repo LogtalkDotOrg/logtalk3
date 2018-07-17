@@ -43,7 +43,7 @@
 
 	begin :-
 		diagnose(X), !, nl,
-		write('Your illness may be: '), write( X), nl, nl, clear_facts.
+		write('Your illness may be: '), write(X), nl, nl, clear_facts.
 	begin :-
 		write('Cannot diagnose your illness.'), nl, nl, clear_facts.
 

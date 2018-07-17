@@ -52,8 +52,29 @@ Currently, the following metrics are provided:
 All metrics require the source code to be analyzed to be loaded with the
 `source_data` flag turned on.
 
+An helper object, `code_metrics`, is also provided allowing running all
+loaded individual metrics.
+
+For usage examples, see the `SCRIPT.txt` file.
+
+For code coverage metrics, see the `lgtunit` tool documentation.
+
 For interpretation of the coupling metric scores, see e.g. the original
-paper by Robert Martin, "OO Design Quality Metrics".
+paper by Robert Martin, "OO Design Quality Metrics":
+
+@inproceedings{citeulike:1579528,
+	author = {Martin, Robert},
+	booktitle = {Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics},
+	citeulike-article-id = {1579528},
+	citeulike-linkout-0 = {http://www.objectmentor.com/resources/articles/oodmetrc.pdf},
+	keywords = {diplomarbeit},
+	organization = {OOPSLA'94},
+	posted-at = {2007-08-21 11:08:44},
+	priority = {0},
+	title = {{OO} Design Quality Metrics - An Analysis of Dependencies},
+	url = {http://www.objectmentor.com/resources/articles/oodmetrc.pdf},
+	year = {1994}
+}
 
 The Halstead metric computation uses the reflection API for performance.
 The main consequence of this choice is that we abstract all predicate
@@ -80,13 +101,6 @@ paper:
 	url = "http://www.sciencedirect.com/science/article/pii/S0164121298100420",
 	author = "Trevor T Moores"
 }
-
-An helper object, `code_metrics`, is also provided allowing running all
-loaded individual metrics.
-
-For usage examples, see the `SCRIPT.txt` file.
-
-For code coverage metrics, see the `lgtunit` tool documentation.
 
 
 Defining new metrics
