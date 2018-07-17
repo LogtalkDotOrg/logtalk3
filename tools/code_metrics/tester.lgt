@@ -48,7 +48,7 @@
 	logtalk_load(
 		[
 			test_entities,
-			test_upn_entities
+			third_party_test_entities
 		], [
 			source_data(on)
 		]
