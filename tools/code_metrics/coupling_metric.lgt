@@ -23,15 +23,15 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.11,
+		version is 0.12,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018/07/13,
+		date is 2018/07/17,
 		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
 			'Afferent coupling (Ca)' - 'Number of entities that depend on an entity.',
 			'Instability (I)' - 'Computed as Ce / (Ce + Ca). Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.',
-			'Abstractness (A)' - 'Computed as the ratio between the number of static predicates with scope directives without and a local definition and the total number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.',
+			'Abstractness (A)' - 'Computed as the ratio between the number of static predicates with scope directives without a local definition and the number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.',
 			'Entity score' - 'Represented as the compound term ce_ca_i_a(Ce,Ca,I,A).',
 			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.'
 		]
@@ -205,6 +205,7 @@
 		(	object_property(Entity, calls(Target::_, _))
 		;	category_property(Entity, calls(Target::_, _))
 		),
+		% discard message sending calls where the target is only known at runtime
 		nonvar(Target),
 		Target = Template,
 		% but no explict self messages
@@ -216,6 +217,7 @@
 		(	object_property(Entity, updates(Target::_, _))
 		;	category_property(Entity, updates(Target::_, _))
 		),
+		% discard message sending calls where the target is only known at runtime
 		nonvar(Target),
 		Target = Template,
 		% but no explict self updates
