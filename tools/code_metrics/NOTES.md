@@ -42,6 +42,7 @@ Currently, the following metrics are provided:
 
 - Number of Clauses (`noc_metric`)
 - Number of Rules (`nor_metric`)
+- Unique Predicate Nodes (`upn_metric`)
 - Depth of Inheritance (`dit_metric`)
 - Efferent coupling, afferent coupling, instability, and abstractness (`coupling_metric`)
 - Documentation (`doc_metric`)
@@ -63,6 +64,22 @@ syntactic literals, which would imply a much large computation cost.
 The coupling metric was also influenced by the metrics rating system in
 Microsoft Visual Studio and aims to eventually emulate the functionality
 of a maintainability index score.
+
+The unique predicate nodes (UPN) metric is described in the following
+paper:
+
+@article{MOORES199845,
+	title = "Applying Complexity Measures to Rule-Based Prolog Programs",
+	journal = "Journal of Systems and Software",
+	volume = "44",
+	number = "1",
+	pages = "45 - 52",
+	year = "1998",
+	issn = "0164-1212",
+	doi = "https://doi.org/10.1016/S0164-1212(98)10042-0",
+	url = "http://www.sciencedirect.com/science/article/pii/S0164121298100420",
+	author = "Trevor T Moores"
+}
 
 An helper object, `code_metrics`, is also provided allowing running all
 loaded individual metrics.

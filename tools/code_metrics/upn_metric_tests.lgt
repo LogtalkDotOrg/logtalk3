@@ -19,23 +19,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(types_loader)),
-	logtalk_load(library(os_loader)),
-	logtalk_load([
-		code_metrics_utilities,
-		code_metrics_messages,
-		code_metric,
-		dit_metric,
-		coupling_metric,
-		noc_metric,
-		nor_metric,
-		upn_metric,
-		doc_metric,
-		size_metric,
-		halstead_metric,
-		code_metrics
-	], [
-		optimize(on)
-	])
-)).
+:- object(upn_metric_tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 0.1,
+		author is 'Paulo Moura',
+		date is 2018/07/17,
+		comment is 'Unit tests for the unique predicate nodes metric.'
+	]).
+
+	cover(code_metric).
+	cover(code_metrics_utilities).
+	cover(upn_metric).
+
+	:- uses(upn_metric, [entity_score/2]).
+
+	test(upn_metric_01) :-
+		entity_score(expert_system, Score), 
+		Score == 5.
+
+	% suppress all messages from the "code_metrics"
+	% component to not pollute the unit tests output
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
+
+:- end_object.

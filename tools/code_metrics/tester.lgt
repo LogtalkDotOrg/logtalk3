@@ -33,6 +33,7 @@
 			coupling_metric,
 			noc_metric,
 			nor_metric,
+			upn_metric,
 			doc_metric,
 			size_metric,
 			halstead_metric,
@@ -43,7 +44,14 @@
 			debug(on)
 		]
 	),
-	logtalk_load(test_entities, [source_data(on)]),
+	logtalk_load(
+		[
+			test_entities,
+			test_upn_entities
+		], [
+			source_data(on)
+		]
+	),
 	logtalk_load(
 		[
 			coupling_metric_tests,
@@ -51,6 +59,7 @@
 			doc_metric_tests,
 			noc_metric_tests,
 			nor_metric_tests,
+			upn_metric_tests,
 			size_metric_tests,
 			halstead_metric_tests,
 			code_metrics_tests
@@ -64,6 +73,7 @@
 		doc_metric_tests,
 		noc_metric_tests,
 		nor_metric_tests,
+		upn_metric_tests,
 		size_metric_tests,
 		halstead_metric_tests,
 		code_metrics_tests
