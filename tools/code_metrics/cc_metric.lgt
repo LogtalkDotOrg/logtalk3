@@ -29,9 +29,9 @@
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
-	:- uses(list, [
-		member/2, memberchk/2
-	]).
+	:- uses(list, [length/2, member/2, memberchk/2]).
+	:- uses(numberlist, [sum/2]).
+	:- uses(logtalk, [expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3]).
 
 	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
@@ -118,38 +118,38 @@
 
 	process_entity(Kind, Entity) :-
 		entity_score(Kind, Entity, Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	file_score(File, Score) :-
 		findall(
 			EntityScore,
-			(	logtalk::loaded_file_property(File, object(Object)),
+			(	loaded_file_property(File, object(Object)),
 				entity_score(object, Object, EntityScore)
-			;	logtalk::loaded_file_property(File, category(Category)),
+			;	loaded_file_property(File, category(Category)),
 				entity_score(category, Category, EntityScore)
 			),
 			EntityScores
 		),
-		numberlist::sum(EntityScores, Score).
+		sum(EntityScores, Score).
 
 	process_file(File) :-
 		file_score(File, Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	directory_score(Directory, Score) :-
 		findall(FileScore, directory_file_score(Directory, _, FileScore), FileScores),
-		numberlist::sum(FileScores, Score).
+		sum(FileScores, Score).
 
 	process_directory(Directory) :-
 		directory_score(Directory, Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	directory_file_score(Directory, File, Nocs) :-
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		logtalk::loaded_file_property(File, directory(DirectorySlash)),
+		loaded_file_property(File, directory(DirectorySlash)),
 		file_score(File, Nocs).
 
 	rdirectory_score(Directory, Score) :-
@@ -160,24 +160,24 @@
 		),
 		findall(
 			DirectoryScore,
-			(	list::member(SubDirectory, SubDirectories),
+			(	member(SubDirectory, SubDirectories),
 				directory_file_score(SubDirectory, _, DirectoryScore)
 			),
 			DirectoryScores
 		),
-		numberlist::sum(DirectoryScores, Score).
+		sum(DirectoryScores, Score).
 
 	process_rdirectory(Directory) :-
 		rdirectory_score(Directory, Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	library_score(Library, Score) :-
-		logtalk::expand_library_path(Library, Directory),
+		expand_library_path(Library, Directory),
 		directory_score(Directory, Score).
 
 	process_library(Library) :-
 		library_score(Library, Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).		
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).		
 
 	rlibrary_score(Library, Score) :-
 		setof(
@@ -187,32 +187,32 @@
 		),
 		findall(
 			DirectoryScore,
-			(	list::member(Path, Paths),
+			(	member(Path, Paths),
 				directory_file_score(Path, _, DirectoryScore)
 			),
 			DirectoryScores
 		),
-		numberlist::sum(DirectoryScores, Score).
+		sum(DirectoryScores, Score).
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).		
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).		
 
 	all_score(Score) :-
 		findall(
 			FileScore,
-			(	logtalk::loaded_file(File),
+			(	loaded_file(File),
 				file_score(File, FileScore)
 			),
 			FileScores
 		),
-		numberlist::sum(FileScores, Score).
+		sum(FileScores, Score).
 
 	process_all :-
 		all_score(Score),
-		logtalk::print_message(information, code_metrics, cyclomatic_complexity(Score)).
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	entity_score(_Entity, unique_predicates_nodes(Total)) -->
+	entity_score(_Entity, cyclomatic_complexity(Total)) -->
 		['Cyclomatic complexity: ~w'-[Total], nl].
 
 	:- multifile(logtalk::message_tokens//2).
