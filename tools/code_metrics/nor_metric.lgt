@@ -42,8 +42,8 @@
 		category_property(Entity, number_of_user_rules(User)).
 	entity_score(protocol, _, number_of_rules(0, 0)).
 
-	process_entity(_, Entity) :-
-		entity_score(Entity, Score),
+	process_entity(Kind, Entity) :-
+		entity_score(Kind, Entity, Score),
 		logtalk::print_message(information, code_metrics, Score).
 
 	file_score(File, Score) :-
