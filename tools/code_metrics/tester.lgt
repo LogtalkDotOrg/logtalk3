@@ -36,6 +36,7 @@
 			upn_metric,
 			doc_metric,
 			size_metric,
+			cc_metric,
 			halstead_metric,
 			code_metrics
 		],
@@ -61,6 +62,7 @@
 			nor_metric_tests,
 			upn_metric_tests,
 			size_metric_tests,
+			cc_metric_tests,
 			halstead_metric_tests,
 			code_metrics_tests
 		], [
@@ -75,6 +77,7 @@
 		nor_metric_tests,
 		upn_metric_tests,
 		size_metric_tests,
+		cc_metric_tests,
 		halstead_metric_tests,
 		code_metrics_tests
 	])

@@ -43,6 +43,7 @@ Currently, the following metrics are provided:
 - Number of Clauses (`noc_metric`)
 - Number of Rules (`nor_metric`)
 - Unique Predicate Nodes (`upn_metric`)
+- Cyclomatic Complexity (`cc_metric`)
 - Depth of Inheritance (`dit_metric`)
 - Efferent coupling, afferent coupling, instability, and abstractness (`coupling_metric`)
 - Documentation (`doc_metric`)
@@ -107,7 +108,9 @@ Defining new metrics
 --------------------
 
 New metrics can be implemented by defining an object that imports the
-`code_metric` category and implements its score predicates.
+`code_metric` category and implements its score predicates. There is
+also a `code_metrics_utilities` category that defines useful predicates
+for the definition of metrics.
 
 
 Third-party tools

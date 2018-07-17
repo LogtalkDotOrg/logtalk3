@@ -88,6 +88,8 @@ of clauses and the number of user clauses.
 * ADDED: Number of entity rules metric, computing both the total number of
 rules and the number of user rules.
 
+* ADDED: Cyclomatic complexity metric.
+
 * ADDED: Utility predicates `approximately_equal/3`, `essentially_equal/3`,
 and `tolerance_equal/4` to the `lgtunit` tool. These are type-checked variants
 of the same predicates found in the `number` library object.
