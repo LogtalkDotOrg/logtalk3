@@ -22,18 +22,18 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2018/06/09,
+		date is 2018/07/18,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		parameters is ['Stroud' - 'Coeficient for computing the time required to program.'],
 		remarks is [
 			'Definition of operators' - 'Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.',
 			'Definition of operands' - 'Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.',
-			'Pn'  - 'Number of distinct predicates (declared, defined, or called)',
+			'Pn'  - 'Number of distinct predicates (declared, defined, called, or updated)',
 			'PAn' - 'Number of predicate arguments (assumed distinct)',
-			'Cn'  - 'Number of predicate calls + number of clauses',
-			'CAn' - 'Number of predicate call arguments + number of clause head arguments',
+			'Cn'  - 'Number of predicate calls/updates + number of clauses',
+			'CAn' - 'Number of predicate call/update arguments + number of clause head arguments',
 			'EV'  - 'Entity vocabulary: EV = Pn + PAn',
 			'EL'  - 'Entity length: EL = Cn + CAn',
 			'V'   - 'Volume: V = EL * log2(EV)',
@@ -89,6 +89,7 @@
 			(	(	category_property(Entity, declares(Predicate, _))
 				;	category_property(Entity, defines(Predicate, _))
 				;	category_property(Entity, calls(Predicate, _))
+				;	category_property(Entity, updates(Predicate, _))
 				),
 				predicate_arity(Predicate, Arity)
 			),
@@ -100,8 +101,10 @@
 		sum(PredicateArities, PAn),
 		findall(
 			CalleeArity,
-			(	category_property(Entity, calls(Predicate, _)),
-				predicate_arity(Predicate, CalleeArity)
+			(	(	category_property(Entity, calls(Callee, _))
+				;	category_property(Entity, updates(Callee, _))
+				),
+				predicate_arity(Callee, CalleeArity)
 			),
 			CalleeArities
 		),
@@ -125,6 +128,7 @@
 			(	(	object_property(Entity, declares(Predicate, _))
 				;	object_property(Entity, defines(Predicate, _))
 				;	object_property(Entity, calls(Predicate, _))
+				;	object_property(Entity, updates(Predicate, _))
 				),
 				predicate_arity(Predicate, Arity)
 			),
@@ -136,7 +140,9 @@
 		sum(PredicateArities, PAn),
 		findall(
 			CalleeArity,
-			(	object_property(Entity, calls(Callee, _)),
+			(	(	object_property(Entity, calls(Callee, _))
+				;	object_property(Entity, updates(Callee, _))
+				),
 				predicate_arity(Callee, CalleeArity)
 			),
 			CalleeArities
@@ -163,10 +169,10 @@
 	predicate_arity(_/Arity, Arity).
 
 	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
-		['Number of distinct predicates (declared, defined, or called): ~d'-[Pn], nl],
+		['Number of distinct predicates (declared, defined, called, or updated): ~d'-[Pn], nl],
 		['Number of predicate arguments (assumed distinct): ~d'-[PAn], nl],
-		['Number of predicate calls + number of clauses: ~d'-[Cn], nl],
-		['Number of predicate call arguments + number of clause head arguments: ~d'-[CAn], nl],
+		['Number of predicate calls/updates + number of clauses: ~d'-[Cn], nl],
+		['Number of predicate call/update arguments + number of clause head arguments: ~d'-[CAn], nl],
 		['Entity vocabulary: ~d'-[EV], nl],
 		['Entity length: ~d'-[EL], nl],
 		['Volume: ~f'-[V], nl],
