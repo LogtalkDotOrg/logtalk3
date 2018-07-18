@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2018/07/17,
+		date is 2018/07/18,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
@@ -89,11 +89,17 @@
 		length(AllEdgesSorted, Edges).
 
 	predicate_nodes(object, Entity, Nodes) :-
-		findall(Predicate, object_property(Entity, defines(Predicate, _)), Predicates),
-		length(Predicates, Nodes).
+		findall(Caller, object_property(Entity, defines(Caller, _)), Bag0),
+		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
+		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
+		sort(Bag, Sorted),
+		length(Sorted, Nodes).
 	predicate_nodes(category, Entity, Nodes) :-
-		findall(Predicate, category_property(Entity, defines(Predicate, _)), Predicates),
-		length(Predicates, Nodes).
+		findall(Caller, category_property(Entity, defines(Caller, _)), Bag0),
+		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
+		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
+		sort(Bag, Sorted),
+		length(Sorted, Nodes).
 
 	connected_components(object, Entity, Components) :-
 		findall(

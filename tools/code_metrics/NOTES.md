@@ -103,6 +103,25 @@ paper:
 	author = "Trevor T Moores"
 }
 
+The cyclomatic complexity metric uses the same predicate abstraction as the
+UPN metric and it is also described in the above paper besides the original
+paper by Thomas J. McCabe:
+
+@inproceedings{McCabe:1976:CM:800253.807712,
+	author = {McCabe, Thomas J.},
+	title = {A Complexity Measure},
+	booktitle = {Proceedings of the 2Nd International Conference on Software Engineering},
+	series = {ICSE '76},
+	year = {1976},
+	location = {San Francisco, California, USA},
+	pages = {407--},
+	url = {http://dl.acm.org/citation.cfm?id=800253.807712},
+	acmid = {807712},
+	publisher = {IEEE Computer Society Press},
+	address = {Los Alamitos, CA, USA},
+	keywords = {Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing},
+} 
+
 
 Defining new metrics
 --------------------

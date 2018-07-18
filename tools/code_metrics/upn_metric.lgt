@@ -23,10 +23,10 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2018/07/18,
-		comment is 'Number of unique predicates nodes metric. The score is represented by a non-negative integer.'
+		comment is 'Number of unique predicates nodes metric. The nodes include called and updated predicates indepedently of where they are defined. The score is represented by a non-negative integer.'
 	]).
 
 	:- uses(list, [length/2, member/2]).
