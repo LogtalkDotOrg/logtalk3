@@ -25,9 +25,13 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2018/07/17,
+		date is 2018/07/18,
 		comment is 'Number of unique predicates nodes metric. The score is represented by a non-negative integer.'
 	]).
+
+	:- uses(list, [length/2, member/2]).
+	:- uses(numberlist, [sum/2]).
+	:- uses(logtalk, [expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3]).
 
 	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
@@ -50,38 +54,38 @@
 
 	process_entity(Kind, Entity) :-
 		entity_score(Kind, Entity, Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	file_score(File, Score) :-
 		findall(
 			EntityScore,
-			(	logtalk::loaded_file_property(File, object(Object)),
+			(	loaded_file_property(File, object(Object)),
 				entity_score(object, Object, EntityScore)
-			;	logtalk::loaded_file_property(File, category(Category)),
+			;	loaded_file_property(File, category(Category)),
 				entity_score(category, Category, EntityScore)
 			),
 			EntityScores
 		),
-		numberlist::sum(EntityScores, Score).
+		sum(EntityScores, Score).
 
 	process_file(File) :-
 		file_score(File, Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	directory_score(Directory, Score) :-
 		findall(FileScore, directory_file_score(Directory, _, FileScore), FileScores),
-		numberlist::sum(FileScores, Score).
+		sum(FileScores, Score).
 
 	process_directory(Directory) :-
 		directory_score(Directory, Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	directory_file_score(Directory, File, Nocs) :-
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		logtalk::loaded_file_property(File, directory(DirectorySlash)),
+		loaded_file_property(File, directory(DirectorySlash)),
 		file_score(File, Nocs).
 
 	rdirectory_score(Directory, Score) :-
@@ -97,19 +101,19 @@
 			),
 			DirectoryScores
 		),
-		numberlist::sum(DirectoryScores, Score).
+		sum(DirectoryScores, Score).
 
 	process_rdirectory(Directory) :-
 		rdirectory_score(Directory, Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	library_score(Library, Score) :-
-		logtalk::expand_library_path(Library, Directory),
+		expand_library_path(Library, Directory),
 		directory_score(Directory, Score).
 
 	process_library(Library) :-
 		library_score(Library, Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).		
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).		
 
 	rlibrary_score(Library, Score) :-
 		setof(
@@ -124,25 +128,25 @@
 			),
 			DirectoryScores
 		),
-		numberlist::sum(DirectoryScores, Score).
+		sum(DirectoryScores, Score).
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).		
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).		
 
 	all_score(Score) :-
 		findall(
 			FileScore,
-			(	logtalk::loaded_file(File),
+			(	loaded_file(File),
 				file_score(File, FileScore)
 			),
 			FileScores
 		),
-		numberlist::sum(FileScores, Score).
+		sum(FileScores, Score).
 
 	process_all :-
 		all_score(Score),
-		logtalk::print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	entity_score(_Entity, unique_predicates_nodes(Total)) -->
 		['Number of Unique Predicates Nodes: ~w'-[Total], nl].
