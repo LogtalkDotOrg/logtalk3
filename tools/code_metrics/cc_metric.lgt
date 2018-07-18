@@ -217,7 +217,7 @@
 		all_score(Score),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	entity_score(_Entity, cyclomatic_complexity(Total)) -->
+	entity_score(_Entity, Total) -->
 		['Cyclomatic complexity: ~w'-[Total], nl].
 
 	:- multifile(logtalk::message_tokens//2).

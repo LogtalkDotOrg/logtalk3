@@ -148,7 +148,7 @@
 		all_score(Score),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	entity_score(_Entity, unique_predicates_nodes(Total)) -->
+	entity_score(_Entity, Total) -->
 		['Number of Unique Predicates Nodes: ~w'-[Total], nl].
 
 	:- multifile(logtalk::message_tokens//2).
