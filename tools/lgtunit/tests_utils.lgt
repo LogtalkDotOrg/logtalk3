@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2018/07/14,
+		date is 2018/07/18,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -139,10 +139,10 @@
 	% tolerance_equal/4 tests
 
 	succeeds(tolerance_equal_4_01) :-
-		tolerance_equal(0.0, 0.0, 1e-9, 1e-16).
+		tolerance_equal(0.0, 0.0, 1.0e-9, 1.0e-16).
 
 	succeeds(tolerance_equal_4_02) :-
-		tolerance_equal(100.0, 99.95, 1e-3, 1e-6).
+		tolerance_equal(100.0, 99.95, 1.0e-3, 1.0e-6).
 
 	succeeds(tolerance_equal_4_03) :-
 		tolerance_equal(100, 95, 0.05, 1).
@@ -151,28 +151,28 @@
 		tolerance_equal(100, 94, 0.05, 1).
 
 	throws(tolerance_equal_4_05, error(instantiation_error,_)) :-
-		tolerance_equal(_, 99.95, 1e-3, 1e-6).
+		tolerance_equal(_, 99.95, 1.0e-3, 1.0e-6).
 
 	throws(tolerance_equal_4_06, error(instantiation_error,_)) :-
-		tolerance_equal(100.0, _, 1e-3, 1e-6).
+		tolerance_equal(100.0, _, 1.0e-3, 1.0e-6).
 
 	throws(tolerance_equal_4_07, error(instantiation_error,_)) :-
-		tolerance_equal(100.0, 99.95, _, 1e-6).
+		tolerance_equal(100.0, 99.95, _, 1.0e-6).
 
 	throws(tolerance_equal_4_08, error(instantiation_error,_)) :-
-		tolerance_equal(100.0, 99.95, 1e-3, _).
+		tolerance_equal(100.0, 99.95, 1.0e-3, _).
 
 	throws(tolerance_equal_4_09, error(type_error(number,a),_)) :-
-		tolerance_equal(a, 99.95, 1e-3, 1e-6).
+		tolerance_equal(a, 99.95, 1.0e-3, 1.0e-6).
 
 	throws(tolerance_equal_4_10, error(type_error(number,a),_)) :-
-		tolerance_equal(100.0, a, 1e-3, 1e-6).
+		tolerance_equal(100.0, a, 1.0e-3, 1.0e-6).
 
 	throws(tolerance_equal_4_11, error(type_error(number,a),_)) :-
-		tolerance_equal(100.0, 99.95, a, 1e-6).
+		tolerance_equal(100.0, 99.95, a, 1.0e-6).
 
 	throws(tolerance_equal_4_12, error(type_error(number,a),_)) :-
-		tolerance_equal(100.0, 99.95, 1e-3, a).
+		tolerance_equal(100.0, 99.95, 1.0e-3, a).
 
 	% ('=~=')/2 tests
 
