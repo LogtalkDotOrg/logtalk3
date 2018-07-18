@@ -3373,7 +3373,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b7)).
+'$lgt_version_data'(logtalk(3, 19, 0, b8)).
 
 
 
@@ -23099,14 +23099,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_initialize_dynamic_entity_counters'
+% dynamic entity counters initial definitions
 %
 % counters used when generating identifiers for dynamically created entities
 
-'$lgt_initialize_dynamic_entity_counters' :-
-	assertz('$lgt_dynamic_entity_counter_'(object,   o, 1)),
-	assertz('$lgt_dynamic_entity_counter_'(protocol, p, 1)),
-	assertz('$lgt_dynamic_entity_counter_'(category, c, 1)).
+'$lgt_dynamic_entity_counter_'(object,   o, 1).
+'$lgt_dynamic_entity_counter_'(protocol, p, 1).
+'$lgt_dynamic_entity_counter_'(category, c, 1).
 
 
 
@@ -23353,7 +23352,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_runtime_initialization' :-
 	'$lgt_cache_compiler_flags',
-	'$lgt_initialize_dynamic_entity_counters',
 	'$lgt_load_built_in_entities'(ScratchDirectory),
 	'$lgt_load_settings_file'(ScratchDirectory, Result),
 	'$lgt_print_message'(banner, core, banner),
