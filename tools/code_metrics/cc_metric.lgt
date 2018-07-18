@@ -44,8 +44,7 @@
 		predicate_edges(Kind, Entity, Edges),
 		predicate_nodes(Kind, Entity, Nodes),
 		connected_components(Kind, Entity, Components),
-		Score is Edges - Nodes + 2 * Components,
-		writeq(Edges - Nodes + 2 * Components), nl.
+		Score is Edges - Nodes + 2 * Components.
 
 	predicate_edges(object, Entity, Edges) :-
 		findall(
