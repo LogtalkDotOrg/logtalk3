@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for O-Prolog 1.11 and later versions
-%  Last updated on July 16, 2018
+%  Adapter file for O-Prolog 1.12 and later versions
+%  Last updated on July 19, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -232,7 +232,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, opl).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, opl(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 1, 1))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 1, 2))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
