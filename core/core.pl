@@ -18921,8 +18921,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_hooks'(HookEntity) :-
 	'$lgt_comp_ctx'(Ctx, _, _, user, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, HookEntity, [], []),
-	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, allow, Ctx),
-	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, allow, Ctx),
+	'$lgt_current_flag_'(events, Events),	
+	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, Events, Ctx),
+	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, Events, Ctx),
 	retractall('$lgt_hook_term_expansion_'(_, _)),
 	assertz((
 		'$lgt_hook_term_expansion_'(Term, ExpandedTerm) :-
@@ -21880,6 +21881,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Closure \= _::_,
 		UserClosure = Closure
 	),
+	% goal or closure called in "user"
 	!,
 	'$lgt_check'(var_or_callable, UserClosure).
 
@@ -21920,10 +21922,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) :-
 	functor(TGoal, TFunctor, TArity),
 	TGoal =.. [TFunctor| TAllArgs],
+	% subtract the number of extra arguments and the execution context argument
 	Arity is TArity - N - 1,
 	Arity >= 0,
+	% unify the compiled closure arguments from the compiled goal arguments
 	'$lgt_length'(TArgs, 0, Arity),
 	'$lgt_append'(TArgs, _, TAllArgs),
+	% unify the execution context argument using the compiled goal
 	arg(TArity, TGoal, ExCtx),
 	!.
 

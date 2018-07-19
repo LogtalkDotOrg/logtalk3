@@ -42,6 +42,9 @@ and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 * REMOVED: Support for deprecated Logtalk 2.x `unknown`, `singletons`,
 `tmpdir`, and `version` compiler flags.
 
+* CHANGED: The user-defined default compiler hooks are now compiled using the
+default value of the `events` flag.
+
 * IMPROVED: Simplified and faster runtime initialization.
 
 * FIXED: Processing of the `include/1` directive when the included file
