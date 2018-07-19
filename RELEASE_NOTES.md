@@ -42,7 +42,7 @@ and are equivalent to a sequence of `context/1` and `throw/1` method calls.
 * REMOVED: Support for deprecated Logtalk 2.x `unknown`, `singletons`,
 `tmpdir`, and `version` compiler flags.
 
-* IMPROVED: Simplified initialization of the dynamic entity counters.
+* IMPROVED: Simplified and faster runtime initialization.
 
 * FIXED: Processing of the `include/1` directive when the included file
 contains `op/3` directives.

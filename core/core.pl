@@ -23262,7 +23262,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_cache_compiler_flags' :-
 	'$lgt_default_flag'(Name, Value),
-	\+ '$lgt_current_flag_'(Name, _),
 	assertz('$lgt_current_flag_'(Name, Value)),
 	fail.
 
