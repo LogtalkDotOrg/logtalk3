@@ -23224,7 +23224,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_file_extension'(logtalk, Extension),
 		% more than one possible extension may be listed in the used adapter file
 		atom_concat(settings, Extension, SettingsFile),
-		% construct full path to the possible settings file
+		% construct full path to the possible settings file; directories resulting
+		% from library alias expansion are guaranteed to end with a slash
 		atom_concat(Directory, SettingsFile, SettingsPath),
 		'$lgt_file_exists'(SettingsPath) ->
 		% settings file found; try to load it
@@ -23271,8 +23272,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_cache_compiler_flags' :-
-	'$lgt_version_data'(logtalk(Major, Minor, Patch, Status)),
-	assertz('$lgt_current_flag_'(version_data, logtalk(Major, Minor, Patch, Status))).
+	'$lgt_version_data'(VersionData),
+	assertz('$lgt_current_flag_'(version_data, VersionData)).
 
 
 
