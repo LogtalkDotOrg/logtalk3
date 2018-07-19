@@ -61,6 +61,9 @@ Prolog adapter and integration files
 
 * UPDATED: GNU Prolog adapter file to assume version 1.4.5 or later.
 
+* FIXED: Quintus Prolog adapter file no longer tries to redefined the built-in
+`peek_char/1-2` predicates.
+
 Documentation
 -------------
 

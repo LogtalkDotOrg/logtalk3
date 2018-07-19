@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on July 16, 2018
+%  Last updated on July 19, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -76,8 +76,6 @@
 '$lgt_iso_predicate'(once(_)).
 '$lgt_iso_predicate'(peek_byte(_)).
 '$lgt_iso_predicate'(peek_byte(_, _)).
-'$lgt_iso_predicate'(peek_char(_)).
-'$lgt_iso_predicate'(peek_char(_, _)).
 '$lgt_iso_predicate'(peek_code(_)).
 '$lgt_iso_predicate'(peek_code(_, _)).
 '$lgt_iso_predicate'(put_byte(_)).
@@ -202,16 +200,6 @@ peek_byte(Stream, Byte) :-
 
 peek_byte(Byte) :-
 	peek_char(Byte).
-
-
-peek_char(Stream, Char) :-
-	peek_char(Stream, Code),
-	atom_chars(Char, [Code]).
-
-
-peek_char(Char) :-
-	peek_char(Code),
-	atom_chars(Char, [Code]).
 
 
 peek_code(Stream, Code) :-
