@@ -2587,8 +2587,9 @@ logtalk_compile(Files, Flags) :-
 		(	current_object(HookEntity) ->
 			'$lgt_comp_ctx'(Ctx, _, _, user, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
 			'$lgt_execution_context'(ExCtx, user, user, user, HookEntity, [], []),
-			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, allow, Ctx),
-			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, allow, Ctx)
+			'$lgt_current_flag_'(events, Events),
+			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, Events, Ctx),
+			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, Events, Ctx)
 		;	atom(HookEntity),
 			'$lgt_prolog_feature'(modules, supported),
 			current_module(HookEntity) ->
@@ -3373,7 +3374,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 19, 0, b8)).
+'$lgt_version_data'(logtalk(3, 19, 0, b9)).
 
 
 
