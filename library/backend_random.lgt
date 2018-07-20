@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2018/07/08,
+		date is 2018/07/20,
 		comment is 'Random number generator predicates using the backend Prolog compiler own random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler own random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.',
@@ -250,5 +250,22 @@
 		set_seed(Seed) :- {random:setrand(Seed)}.
 		random(Random) :- {random:random(Random)}.
 	:- endif.
+
+	maybe :-
+		random(Random),
+		Random < 0.5.
+
+	maybe(Probability) :-
+		float(Probability),
+		0.0 =< Probability, Probability =< 1.0,
+		random(Random),
+		Random < Probability.
+
+	maybe(K, N) :-
+		integer(K), integer(N),
+		0 =< K, K =< N,
+		random(Float),
+		Random is truncate(Float * N),
+		Random < K.
 
 :- end_object.

@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2018/02/25,
+		date is 2018/07/20,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.'
@@ -269,5 +269,22 @@
 		S1 is Seed mod 30307,
 		S2 is Seed mod 30323,
 		asserta(seed_(S0, S1, S2)).
+
+	maybe :-
+		random(Random),
+		Random < 0.5.
+
+	maybe(Probability) :-
+		float(Probability),
+		0.0 =< Probability, Probability =< 1.0,
+		random(Random),
+		Random < Probability.
+
+	maybe(K, N) :-
+		integer(K), integer(N),
+		0 =< K, K =< N,
+		random(Float),
+		Random is truncate(Float * N),
+		Random < K.
 
 :- end_object.

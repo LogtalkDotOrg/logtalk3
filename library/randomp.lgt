@@ -21,9 +21,9 @@
 :- protocol(randomp).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2017/12/13,
+		date is 2018/07/20,
 		comment is 'Random number generator protocol.'
 	]).
 
@@ -112,6 +112,26 @@
 	:- info(set_seed/1, [
 		comment is 'Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.',
 		argnames is ['Seed']
+	]).
+
+	:- public(maybe/0).
+	:- mode(maybe, zero_or_one).
+	:- info(maybe/0, [
+		comment is 'Succeeds or fails with equal probability.'
+	]).
+
+	:- public(maybe/1).
+	:- mode(maybe(+float), zero_or_one).
+	:- info(maybe/1, [
+		comment is 'Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].',
+		argnames is ['Probability']
+	]).
+
+	:- public(maybe/2).
+	:- mode(maybe(+integer, +integer), zero_or_one).
+	:- info(maybe/2, [
+		comment is 'Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.',
+		argnames is ['K', 'N']
 	]).
 
 :- end_protocol.

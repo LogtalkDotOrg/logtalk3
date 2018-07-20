@@ -85,6 +85,8 @@ Library
 `tolerance_equal/4`, and `=~=/2` to the `number` object. These predicates are
 non type-checked variants of the same predicates found in the `lgtunit` tool.
 
+* ADDED: Predicates `maybe/0-2` to the `random` library.
+
 * UPDATED: Several library objects to take advantage of the recently introduced
 error throwing built-in methods.
 

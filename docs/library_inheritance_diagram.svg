@@ -10,7 +10,7 @@
 <title>library</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-2074 6146,-2074 6146,4 -4,4"/>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Logtalk library</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2018/07/14, 12:47</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">Generated on 2018/07/20, 10:58</text>
 <g id="clust1" class="cluster"><title>cluster_library_library</title>
 <g id="a_clust1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
 <path fill="#eee9e9" stroke="#8b8989" d="M20,-38C20,-38 6122,-38 6122,-38 6128,-38 6134,-44 6134,-50 6134,-50 6134,-2050 6134,-2050 6134,-2056 6128,-2062 6122,-2062 6122,-2062 20,-2062 20,-2062 14,-2062 8,-2056 8,-2050 8,-2050 8,-50 8,-50 8,-44 14,-38 20,-38"/>
@@ -272,8 +272,8 @@
 </g>
 <g id="clust44" class="cluster"><title>cluster_file_/Users/pmoura/logtalk/library/randomp.lgt</title>
 <g id="a_clust44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/randomp.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/randomp.lgt">
-<path fill="snow" stroke="#8b8989" d="M4585,-407C4585,-407 4681,-407 4681,-407 4687,-407 4693,-413 4693,-419 4693,-419 4693,-594 4693,-594 4693,-600 4687,-606 4681,-606 4681,-606 4585,-606 4585,-606 4579,-606 4573,-600 4573,-594 4573,-594 4573,-419 4573,-419 4573,-413 4579,-407 4585,-407"/>
-<text text-anchor="middle" x="4614.5" y="-414" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">randomp.lgt</text>
+<path fill="snow" stroke="#8b8989" d="M4585,-392C4585,-392 4681,-392 4681,-392 4687,-392 4693,-398 4693,-404 4693,-404 4693,-609 4693,-609 4693,-615 4687,-621 4681,-621 4681,-621 4585,-621 4585,-621 4579,-621 4573,-615 4573,-609 4573,-609 4573,-404 4573,-404 4573,-398 4579,-392 4585,-392"/>
+<text text-anchor="middle" x="4614.5" y="-399" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">randomp.lgt</text>
 </a>
 </g>
 </g>
@@ -2346,52 +2346,61 @@
 <!-- randomp -->
 <g id="node39" class="node"><title>randomp</title>
 <g id="a_node39"><a xlink:href="https://logtalk.org/library/randomp_0.html" xlink:title="https://logtalk.org/library/randomp_0.html">
-<polygon fill="aquamarine" stroke="black" points="4676.5,-596 4583.5,-596 4583.5,-436 4682.5,-436 4682.5,-590 4676.5,-596"/>
-<polyline fill="none" stroke="black" points="4676.5,-596 4676.5,-590 "/>
-<polyline fill="none" stroke="black" points="4682.5,-590 4676.5,-590 "/>
-<text text-anchor="start" x="4592" y="-583.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4610" y="-583.2" font-family="Courier,monospace" font-size="11.00">randomp</text>
-<text text-anchor="start" x="4669" y="-583.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4616.5" y="-573.4" font-family="Courier,monospace" font-size="7.00">protocol</text>
-<text text-anchor="start" x="4669" y="-572.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-562.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4611.5" y="-552.8" font-family="Courier,monospace" font-size="9.00">random/1</text>
-<text text-anchor="start" x="4669" y="-552.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4609" y="-542.8" font-family="Courier,monospace" font-size="9.00">between/3</text>
-<text text-anchor="start" x="4669" y="-542.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4611.5" y="-532.8" font-family="Courier,monospace" font-size="9.00">member/2</text>
-<text text-anchor="start" x="4669" y="-532.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4611.5" y="-522.8" font-family="Courier,monospace" font-size="9.00">select/3</text>
-<text text-anchor="start" x="4669" y="-522.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4598" y="-512.8" font-family="Courier,monospace" font-size="9.00">permutation/2</text>
-<text text-anchor="start" x="4669" y="-512.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4606" y="-502.8" font-family="Courier,monospace" font-size="9.00">sequence/4</text>
-<text text-anchor="start" x="4669" y="-502.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4619.5" y="-492.8" font-family="Courier,monospace" font-size="9.00">set/4</text>
-<text text-anchor="start" x="4669" y="-492.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4611.5" y="-482.8" font-family="Courier,monospace" font-size="9.00">random/3</text>
-<text text-anchor="start" x="4669" y="-482.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4609" y="-472.8" font-family="Courier,monospace" font-size="9.00">randseq/4</text>
-<text text-anchor="start" x="4669" y="-472.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4609" y="-462.8" font-family="Courier,monospace" font-size="9.00">randset/4</text>
-<text text-anchor="start" x="4669" y="-462.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4606" y="-452.8" font-family="Courier,monospace" font-size="9.00">get_seed/1</text>
-<text text-anchor="start" x="4669" y="-452.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4592" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
-<text text-anchor="start" x="4606" y="-442.8" font-family="Courier,monospace" font-size="9.00">set_seed/1</text>
-<text text-anchor="start" x="4669" y="-442.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<polygon fill="aquamarine" stroke="black" points="4676.5,-611 4583.5,-611 4583.5,-421 4682.5,-421 4682.5,-605 4676.5,-611"/>
+<polyline fill="none" stroke="black" points="4676.5,-611 4676.5,-605 "/>
+<polyline fill="none" stroke="black" points="4682.5,-605 4676.5,-605 "/>
+<text text-anchor="start" x="4592" y="-598.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4610" y="-598.2" font-family="Courier,monospace" font-size="11.00">randomp</text>
+<text text-anchor="start" x="4669" y="-598.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-587.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4616.5" y="-588.4" font-family="Courier,monospace" font-size="7.00">protocol</text>
+<text text-anchor="start" x="4669" y="-587.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-577.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-567.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4611.5" y="-567.8" font-family="Courier,monospace" font-size="9.00">random/1</text>
+<text text-anchor="start" x="4669" y="-567.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-557.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4609" y="-557.8" font-family="Courier,monospace" font-size="9.00">between/3</text>
+<text text-anchor="start" x="4669" y="-557.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-547.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4611.5" y="-547.8" font-family="Courier,monospace" font-size="9.00">member/2</text>
+<text text-anchor="start" x="4669" y="-547.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-537.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4611.5" y="-537.8" font-family="Courier,monospace" font-size="9.00">select/3</text>
+<text text-anchor="start" x="4669" y="-537.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-527.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4598" y="-527.8" font-family="Courier,monospace" font-size="9.00">permutation/2</text>
+<text text-anchor="start" x="4669" y="-527.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-517.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4606" y="-517.8" font-family="Courier,monospace" font-size="9.00">sequence/4</text>
+<text text-anchor="start" x="4669" y="-517.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-507.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4619.5" y="-507.8" font-family="Courier,monospace" font-size="9.00">set/4</text>
+<text text-anchor="start" x="4669" y="-507.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-497.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4611.5" y="-497.8" font-family="Courier,monospace" font-size="9.00">random/3</text>
+<text text-anchor="start" x="4669" y="-497.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-487.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4609" y="-487.8" font-family="Courier,monospace" font-size="9.00">randseq/4</text>
+<text text-anchor="start" x="4669" y="-487.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-477.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4609" y="-477.8" font-family="Courier,monospace" font-size="9.00">randset/4</text>
+<text text-anchor="start" x="4669" y="-477.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-467.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4606" y="-467.8" font-family="Courier,monospace" font-size="9.00">get_seed/1</text>
+<text text-anchor="start" x="4669" y="-467.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-457.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4606" y="-457.8" font-family="Courier,monospace" font-size="9.00">set_seed/1</text>
+<text text-anchor="start" x="4669" y="-457.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-447.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4614.5" y="-447.8" font-family="Courier,monospace" font-size="9.00">maybe/0</text>
+<text text-anchor="start" x="4669" y="-447.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-437.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4614.5" y="-437.8" font-family="Courier,monospace" font-size="9.00">maybe/1</text>
+<text text-anchor="start" x="4669" y="-437.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4592" y="-427.8" font-family="Courier,monospace" font-size="9.00"> </text>
+<text text-anchor="start" x="4614.5" y="-427.8" font-family="Courier,monospace" font-size="9.00">maybe/2</text>
+<text text-anchor="start" x="4669" y="-427.8" font-family="Courier,monospace" font-size="9.00"> </text>
 </a>
 </g>
 </g>
@@ -2418,8 +2427,8 @@
 <!-- random&#45;&gt;randomp -->
 <g id="edge34" class="edge"><title>random&#45;&gt;randomp</title>
 <g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
-<path fill="none" stroke="black" d="M5194.46,-206.152C5183.77,-225.981 5166.99,-251.212 5145,-266 5071.91,-315.145 5039.14,-298.176 4952,-311 4924.13,-315.101 4721.45,-309.995 4699,-327 4667.46,-350.884 4650.93,-390.948 4642.29,-427.97"/>
-<ellipse fill="black" stroke="black" cx="4641.43" cy="-431.91" rx="4.00001" ry="4.00001"/>
+<path fill="none" stroke="black" d="M5194.46,-206.152C5183.77,-225.981 5166.99,-251.212 5145,-266 5071.91,-315.145 5039.14,-298.176 4952,-311 4924.13,-315.101 4721.45,-309.995 4699,-327 4671.68,-347.687 4655.62,-380.514 4646.2,-412.987"/>
+<ellipse fill="black" stroke="black" cx="4645.12" cy="-416.927" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
 <g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
@@ -2443,8 +2452,8 @@
 <!-- backend_random&#45;&gt;randomp -->
 <g id="edge35" class="edge"><title>backend_random&#45;&gt;randomp</title>
 <g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
-<path fill="none" stroke="black" d="M5059.75,-194.17C5046.77,-214.422 5022.49,-247.646 4993,-266 4925.92,-307.754 4898.55,-295.833 4821,-311 4794.17,-316.249 4720.23,-309.769 4699,-327 4668.66,-351.624 4652.25,-391.119 4643.37,-427.569"/>
-<ellipse fill="black" stroke="black" cx="4642.38" cy="-431.881" rx="4.00001" ry="4.00001"/>
+<path fill="none" stroke="black" d="M5059.75,-194.17C5046.77,-214.422 5022.49,-247.646 4993,-266 4925.92,-307.754 4898.55,-295.833 4821,-311 4794.17,-316.249 4720.23,-309.769 4699,-327 4672.64,-348.392 4656.79,-381.009 4647.27,-413.102"/>
+<ellipse fill="black" stroke="black" cx="4646.19" cy="-416.954" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
 <g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
@@ -2475,8 +2484,8 @@
 <!-- fast_random&#45;&gt;randomp -->
 <g id="edge36" class="edge"><title>fast_random&#45;&gt;randomp</title>
 <g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="implements">
-<path fill="none" stroke="black" d="M4912.03,-206.098C4900.16,-225.389 4882.36,-250.001 4861,-266 4845.61,-277.53 4712.45,-313.248 4699,-327 4672.36,-354.249 4656.42,-392.861 4646.91,-428.011"/>
-<ellipse fill="black" stroke="black" cx="4645.87" cy="-432.048" rx="4.00001" ry="4.00001"/>
+<path fill="none" stroke="black" d="M4912.03,-206.098C4900.16,-225.389 4882.36,-250.001 4861,-266 4845.61,-277.53 4712.45,-313.248 4699,-327 4676.15,-350.371 4661.17,-382.103 4651.38,-412.839"/>
+<ellipse fill="black" stroke="black" cx="4650.16" cy="-416.801" rx="4.00001" ry="4.00001"/>
 </a>
 </g>
 <g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/master/library/">
