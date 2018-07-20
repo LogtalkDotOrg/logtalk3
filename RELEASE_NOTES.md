@@ -53,6 +53,11 @@ contains `op/3` directives.
 * FIXED: Performance bug that prevented using static-binding optimizations
 for meta-arguments of meta-predicate messages sent from `user`.
 
+* FIXED: Load the core entity source files using the `reload(skip)` option.
+
+* FIXED: The `logtalk_make/1` predicate no longer tries to reload files that
+were loaded using the `reload(skip)` option.
+
 Prolog adapter and integration files
 ------------------------------------
 

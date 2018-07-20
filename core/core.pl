@@ -57,11 +57,11 @@
 
 
 % bitwise left-shift operator (used for context-switching calls)
-% some back-end Prolog compilers don't declare this ISO Prolog standard operator!
+% some backend Prolog compilers don't declare this ISO Prolog standard operator!
 :- op(400, yfx, <<).
 
 % bitwise right-shift operator (used for lambda expressions)
-% some back-end Prolog compilers don't declare this ISO Prolog standard operator!
+% some backend Prolog compilers don't declare this ISO Prolog standard operator!
 :- op(400, yfx, >>).
 
 
@@ -1419,7 +1419,7 @@ create_protocol(Ptc, Relations, Directives) :-
 % generates a new, unique, entity identifier by appending an integer to a base char
 %
 % note that it's possible to run out of (generated) entity identifiers when using a
-% back-end Prolog compiler with bounded integer support
+% backend Prolog compiler with bounded integer support
 
 '$lgt_generate_entity_identifier'(Kind, Identifier) :-
 	retract('$lgt_dynamic_entity_counter_'(Kind, Base, Count)),
@@ -2806,6 +2806,7 @@ logtalk_make(Target) :-
 	atom_concat(Directory, Basename, Path),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
+	\+ '$lgt_member'(reload(skip), Flags),
 	logtalk_load(Path, Flags),
 	fail.
 % recompilation of included source files since last loaded
@@ -3206,7 +3207,7 @@ logtalk_load_context(term_position, Lines) :-
 	'$lgt_pp_term_variable_names_file_lines_'(_, _, _, Lines).
 
 logtalk_load_context(stream, Stream) :-
-	% avoid a spurious choice-point with some back-end Prolog compilers
+	% avoid a spurious choice-point with some backend Prolog compilers
 	stream_property(Stream, alias(logtalk_compiler_input)), !.
 
 
@@ -6071,7 +6072,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %  compiler
 %
 %  compiles Logtalk source files into intermediate Prolog source files
-%  and calls the back-end Prolog compiler on the generated files
+%  and calls the backend Prolog compiler on the generated files
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -6438,7 +6439,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % writes to disk the entity compiled code
 
 '$lgt_write_entity_code' :-
-	% avoid a spurious choice-point with some back-end Prolog compilers
+	% avoid a spurious choice-point with some backend Prolog compilers
 	stream_property(Output, alias(logtalk_compiler_output)), !,
 	catch(
 		'$lgt_write_entity_code'(Output),
@@ -8428,7 +8429,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_file_directive'(@nonvar, +compilation_context)
 %
 % compiles file-level directives, i.e. directives that are not encapsulated in a Logtalk
-% entity; error-checking is delegated in most cases to the back-end Prolog compiler
+% entity; error-checking is delegated in most cases to the backend Prolog compiler
 
 '$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
@@ -8539,7 +8540,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% require a bound value
 	'$lgt_check'(nonvar, Value),
 	% setting the flag during compilation may or may not work as expected
-	% depending on the flag and on the back-end Prolog compiler
+	% depending on the flag and on the backend Prolog compiler
 	set_prolog_flag(Flag, Value),
 	% we also copy the directive to the generated intermediate Prolog file
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
@@ -8576,6 +8577,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
+
+% auxiliar predicate for performing basic error checking if file level
+% predicate directive arguments
 
 '$lgt_check_file_predicate_directive_arguments'([Pred| Preds], Property) :-
 	!,
@@ -8617,7 +8621,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_logtalk_directives'(+list(term), +compilation_context)
 %
-% compiles a list of directives
+% compiles a list of Logtalk directives
 %
 % note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_logtalk_directive'/2 predicate
@@ -12161,13 +12165,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	;	\+ '$lgt_prolog_built_in_database_predicate'(Pred),
-		% the meta-predicate templates for the back-end Prolog database predicates are usually
+		% the meta-predicate templates for the backend Prolog database predicates are usually
 		% not usable from Logtalk due the ambiguity of the ":" meta-argument qualifier but they
 		% pose no problems when operating in a module database; in this particular case, the
 		% explicit-qualified call can be compiled as-is
 		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
 			% we're either overriding the original meta-predicate template or working around a
-			% back-end Prolog compiler limitation in providing access to meta-predicate templates
+			% backend Prolog compiler limitation in providing access to meta-predicate templates
 		;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
 		) ->
 		% we're compiling a call to a module meta-predicate
@@ -13106,7 +13110,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 
-% blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
+% blackboard predicates (requires a backend Prolog compiler natively supporting these built-in predicates)
 
 '$lgt_compile_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
@@ -17975,10 +17979,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Else = (BodyStack = [Head| HeadStack], THead)
 	),
 	(	'$lgt_prolog_meta_predicate'('*->'(_, _), _, _) ->
-		% back-end Prolog compiler supports the soft-cut control construct
+		% backend Prolog compiler supports the soft-cut control construct
 		assertz('$lgt_pp_entity_aux_clause_'({(TCHead :- Header, ('*->'(If, Then); Else))}))
 	;	'$lgt_prolog_meta_predicate'(if(_, _, _), _, _) ->
-		% back-end Prolog compiler supports the if/3 soft-cut built-in meta-predicate
+		% backend Prolog compiler supports the if/3 soft-cut built-in meta-predicate
 		assertz('$lgt_pp_entity_aux_clause_'({(TCHead :- Header, if(If, Then, Else))}))
 	;	% the adapter file for the backend Prolog compiler declares that coinduction
 		% is supported but it seems to be missing the necessary declaration for the
@@ -19845,12 +19849,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(version_data).
 % startup flags
 '$lgt_valid_flag'(settings_file).
-% back-end Prolog compiler information
+% backend Prolog compiler information
 '$lgt_valid_flag'(prolog_dialect).
 '$lgt_valid_flag'(prolog_version).
 '$lgt_valid_flag'(prolog_compatible_version).
 '$lgt_valid_flag'(prolog_conformance).
-% features requiring specific back-end Prolog compiler support
+% features requiring specific backend Prolog compiler support
 '$lgt_valid_flag'(unicode).
 '$lgt_valid_flag'(encoding_directive).
 '$lgt_valid_flag'(engines).
@@ -19858,7 +19862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(modules).
 '$lgt_valid_flag'(tabling).
 '$lgt_valid_flag'(coinduction).
-% back-end Prolog compiler and loader options
+% backend Prolog compiler and loader options
 '$lgt_valid_flag'(prolog_compiler).
 '$lgt_valid_flag'(prolog_loader).
 
@@ -19872,7 +19876,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_read_only_flag'(version_data).
 % startup flags
 '$lgt_read_only_flag'(settings_file).
-% back-end Prolog compiler features
+% backend Prolog compiler features
 '$lgt_read_only_flag'(prolog_dialect).
 '$lgt_read_only_flag'(prolog_version).
 '$lgt_read_only_flag'(prolog_compatible_version).
@@ -23161,7 +23165,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 				% optimize entity code, allowing static binding to this entity resources
 				optimize(on),
 				% don't print any messages on the compilation and loading of these entities
-				report(off)
+				report(off),
+				% prevent any attempts of logtalk_make(all) to reload this file
+				reload(skip)
 			]
 		)
 	).
@@ -23173,7 +23179,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % loads any settings file defined by the user; settings files are compiled
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
 % are deleted using the clean/1 compiler flag in order to prevent problems
-% when switching between back-end Prolog compilers
+% when switching between backend Prolog compilers
 
 '$lgt_load_settings_file'(ScratchDirectory, Result) :-
 	'$lgt_default_flag'(settings_file, Value),
@@ -23301,7 +23307,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % initializes the engines mutext plus the asynchronous threaded calls mutex
 % and tag counter support for compilers supporting multi-threading programming
 % (currently we use integers for the tag counter, which impose a limitation on
-% the maximum number of tags on back-end Prolog compilers with bounded integers)
+% the maximum number of tags on backend Prolog compilers with bounded integers)
 
 '$lgt_start_runtime_threading' :-
 	(	'$lgt_prolog_feature'(engines, supported) ->
@@ -23324,9 +23330,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_check_prolog_version'
 %
-% checks for a compatible back-end Prolog compiler version
+% checks for a compatible backend Prolog compiler version
 %
-% note, however, that an old and incompatible back-end Prolog version may
+% note, however, that an old and incompatible backend Prolog version may
 % break Logtalk initialization before this checking predicate is called
 
 '$lgt_check_prolog_version' :-
