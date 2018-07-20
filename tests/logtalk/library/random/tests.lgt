@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2018/07/20,
 		comment is 'Unit tests for the "random" library.',
@@ -34,7 +34,7 @@
 	cover(fast_random).
 
 	:- uses(list, [length/2, min/2, max/2]).
-	:- uses(user, [between/3]).
+	:- uses(integer, [between/3]).
 
 	% random/1 tests
 

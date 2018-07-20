@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.18,
+		version is 6.19,
 		author is 'Paulo Moura',
-		date is 2018/07/14,
+		date is 2018/07/20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -611,6 +611,9 @@
 	:- uses(type, [check/2, arbitrary/2, shrink/3]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2]).
+	% don't assume that between/3 is a built-in predicate as some backend
+	% Prolog systems still provide it as a library predicate
+	:- uses(integer, [between/3]).
 
 	% by default, run the unit tests
 	condition.
@@ -1573,7 +1576,7 @@
 		decompose_quick_check_template(Template, Entity, Operator, Predicate),
 		Predicate =.. [Name| Types],
 		forall(
-			{between(1, NumberOfTests, _)},
+			between(1, NumberOfTests, _),
 			run_quick_check_test(Template, Entity, Operator, Name, Types)
 		).
 
@@ -2334,11 +2337,6 @@
 		member_var(Var, Tail).
 
 :- end_object.
-
-
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
-	:- import(from(/(between,3), basics)).
-:- endif.
 
 
 % avoid polluting SWI-Prolog meta-predicate analysis with "lgtunit"

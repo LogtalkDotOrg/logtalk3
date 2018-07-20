@@ -128,6 +128,10 @@ standard compliance to ensure that coupling metric entity scores return float
 values for instability and abstractness instead of integers when the fractional
 part is zero.
 
+* FIXED: Workaround `lgtunit` portability issue when running on XSB due to
+the de facto standard `between/3` predicate being a library predicate and
+the semantics of XSB atom-based module system.
+
 Tests
 -----
 
