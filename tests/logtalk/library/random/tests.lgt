@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2018/03/04,
+		date is 2018/07/20,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -33,9 +33,8 @@
 	cover(backend_random).
 	cover(fast_random).
 
-	:- uses(list, [
-		min/2, max/2
-	]).
+	:- uses(list, [length/2, min/2, max/2]).
+	:- uses(user, [between/3]).
 
 	% random/1 tests
 
@@ -96,6 +95,24 @@
 	% set_seed/1 tests
 
 	quick_check(random_set_seed_1_01, random_set_seed_1(-ground)).
+
+	% maybe/0 tests
+
+	succeeds(random_maybe_0_01) :-
+		findall(1, (between(1,10000,_), _RandomObject_::maybe), List),
+		length(List, Length), 4900 =< Length, Length =< 5100.
+
+	% maybe/1 tests
+
+	succeeds(random_maybe_1_01) :-
+		findall(1, (between(1,10000,_), _RandomObject_::maybe(0.5)), List),
+		length(List, Length), 4900 =< Length, Length =< 5100.
+
+	% maybe/2 tests
+
+	succeeds(random_maybe_2_01) :-
+		findall(1, (between(1,10000,_), _RandomObject_::maybe(5,10)), List),
+		length(List, Length), 4900 =< Length, Length =< 5100.
 
 	% auxiliary predicates
 

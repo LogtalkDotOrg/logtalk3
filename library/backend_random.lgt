@@ -25,9 +25,9 @@
 		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2018/07/20,
-		comment is 'Random number generator predicates using the backend Prolog compiler own random generator.',
+		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
-			'Implementation' - 'The backend Prolog compiler own random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.',
+			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.',
 			'Portability' - 'B-Prolog, CxProlog, ECLiPSe, JIProlog, Lean Prolog, Qu-Prolog, Quintus Prolog do not provide implementations for the get_seed/1 and set_seed/1 predicates and calling these predicates simply succeed without performing any action.'
 		],
 		see_also is [random, fast_random]

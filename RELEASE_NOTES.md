@@ -138,6 +138,8 @@ terms to the Prolog compliance suite.
 
 * ADDED: Test for included files that contain `op/3` operators.
 
+* ADDED: Tests for the `random` library `maybe/0-2` predicates.
+
 Examples
 --------
 
