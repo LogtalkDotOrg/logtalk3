@@ -121,14 +121,14 @@
 	]).
 
 	:- public(maybe/1).
-	:- mode(maybe(+float), zero_or_one).
+	:- mode(maybe(+probability), zero_or_one).
 	:- info(maybe/1, [
 		comment is 'Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].',
 		argnames is ['Probability']
 	]).
 
 	:- public(maybe/2).
-	:- mode(maybe(+integer, +integer), zero_or_one).
+	:- mode(maybe(+non_negative_integer, +non_negative_integer), zero_or_one).
 	:- info(maybe/2, [
 		comment is 'Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.',
 		argnames is ['K', 'N']
