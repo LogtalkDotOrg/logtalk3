@@ -72,6 +72,9 @@ Prolog adapter and integration files
 * FIXED: Quintus Prolog adapter file no longer tries to redefined the built-in
 `peek_char/1-2` predicates.
 
+* FIXED: Workaround Lean Prolog lack of compliance of when returning the list
+of variables of a read term. 
+
 Documentation
 -------------
 
@@ -130,7 +133,7 @@ part is zero.
 
 * FIXED: Workaround `lgtunit` portability issue when running on XSB due to
 the de facto standard `between/3` predicate being a library predicate and
-the semantics of XSB atom-based module system.
+the semantics of the XSB atom-based module system.
 
 Tests
 -----

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Lean Prolog 4.5.7 and later versions
-%  Last updated on July 16, 2018
+%  Last updated on July 21, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -576,13 +576,18 @@ to_engine(Interactor, Pattern, Goal) :-
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	'$lgt_read_term_options'(Options),
-	read_term(Stream, yes, Term, Variables, LineBegin0, LineEnd),
-	LineBegin is LineBegin0 + 1.
+	read_term(Stream, yes, Term, Variables0, LineBegin0, LineEnd),
+	LineBegin is LineBegin0 + 1,
+	'$lgt_lean_fix_variables_list'(Variables0, Variables).
 
 
 % hack for the only two cases of list of options used by the compiler
 '$lgt_read_term_options'([]).
 '$lgt_read_term_options'([singletons([])]).
+
+'$lgt_lean_fix_variables_list'([], []).
+'$lgt_lean_fix_variables_list'([Name-Variable| Variables0], [Name=Variable| Variables]) :-
+	'$lgt_lean_fix_variables_list'(Variables0, Variables).
 
 
 
