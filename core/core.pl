@@ -11125,6 +11125,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Pred == ! ->
 		TPred = true
 	;	'$lgt_cut_transparent_control_construct'(Pred) ->
+		% we need to keep the call/1 wrapper to preserve {}/1 cut-opaque semantics
 		TPred = call(Pred)
 	;	TPred = Pred
 	).
@@ -11246,6 +11247,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = TGoal,
 		DPred = DGoal
 	;	'$lgt_cut_transparent_control_construct'(TGoal) ->
+		% we need to keep the call/1 wrapper to preserve call/1 cut-opaque semantics
 		TPred = call(TGoal),
 		DPred = call(DGoal)
 	;	TPred = TGoal,
@@ -11280,6 +11282,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% not a call to call/2-N itself; safe to compile it
 		'$lgt_compile_body'(Goal, TPred0, _, Ctx),
 		(	'$lgt_cut_transparent_control_construct'(TPred0) ->
+			% we need to keep the call/1 wrapper to preserve call/2-N cut-opaque semantics
 			TPred = call(TPred0)
 		;	TPred = TPred0
 		)
@@ -16197,6 +16200,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_control_construct'(?callable)
+%
+% table of control constructs; mainly used to help decide
+% if a predicate definition should be compiled inline
 
 '$lgt_control_construct'((_ , _)).
 '$lgt_control_construct'((_ ; _)).
@@ -16217,6 +16223,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_cut_transparent_control_construct'(?callable)
+%
+% table of cut-transparent control constructs; used during
+% compilation to check if call/1-N wrappers need to be keep
+% for preserving source code semantics when the goal/closure
+% argument is bound
 
 '$lgt_cut_transparent_control_construct'(!).
 '$lgt_cut_transparent_control_construct'((_ , _)).
