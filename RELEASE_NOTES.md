@@ -69,11 +69,14 @@ Prolog adapter and integration files
 
 * UPDATED: GNU Prolog adapter file to assume version 1.4.5 or later.
 
-* FIXED: Quintus Prolog adapter file no longer tries to redefined the built-in
+* FIXED: Quintus Prolog adapter file no longer tries to redefine the built-in
 `peek_char/1-2` predicates.
 
 * FIXED: Workaround Lean Prolog lack of compliance of when returning the list
-of variables of a read term. 
+of variables of a read term.
+
+* FIXED: Workaround Qu-Prolog lack of support for the `float/1` arithmetic
+function.
 
 Documentation
 -------------
@@ -106,7 +109,7 @@ of clauses and the number of user clauses.
 * ADDED: Number of entity rules metric, computing both the total number of
 rules and the number of user rules.
 
-* ADDED: Cyclomatic complexity metric.
+* ADDED: Cyclomatic complexity metric. Experimental.
 
 * UPDATED: The Halstead metric to also take into account updated predicates.
 

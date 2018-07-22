@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on July 16, 2018
+%  Last updated on July 22, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -578,8 +578,9 @@ format(Format, Arguments) :-
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_goal_expansion'(X is FloatCall, X is Exp) :-
+	nonvar(FloatCall),
+	FloatCall = float(Exp).
 
 
 
