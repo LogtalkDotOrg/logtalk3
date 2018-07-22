@@ -578,7 +578,7 @@ format(Format, Arguments) :-
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(X is FloatCall, X is Exp) :-
+'$lgt_prolog_goal_expansion'(X is FloatCall, X is Exp * 1.0) :-
 	nonvar(FloatCall),
 	FloatCall = float(Exp).
 

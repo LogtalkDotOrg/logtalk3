@@ -75,8 +75,8 @@ Prolog adapter and integration files
 * FIXED: Workaround Lean Prolog lack of compliance of when returning the list
 of variables of a read term.
 
-* FIXED: Workaround Qu-Prolog lack of support for the `float/1` arithmetic
-function.
+* FIXED: Workaround Qu-Prolog lack of support for the standard `float/1`
+arithmetic function.
 
 Documentation
 -------------
