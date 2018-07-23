@@ -6848,7 +6848,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_add_referenced_object_message'(@callable, @term, @callable, @callable, @term)
+% '$lgt_add_referenced_object_message'(@compilation_mode, @term, @callable, @callable, @term)
 %
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
@@ -6881,7 +6881,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_add_referenced_module_predicate'(@callable, @term, @callable, @callable, @term)
+% '$lgt_add_referenced_module_predicate'(@compilation_mode, @term, @callable, @callable, @term)
 %
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
@@ -13542,6 +13542,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_check_for_meta_predicate_directive'(@compilation_mode, @callable, @term)
+%
 % remember missing meta_predicate/1 directives
 
 '$lgt_check_for_meta_predicate_directive'(runtime, _, _).
@@ -13552,20 +13554,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_for_meta_predicate_directive'(compile(user), Head, MetaArg) :-
 	'$lgt_term_template'(Head, Template),
 	(	'$lgt_pp_meta_predicate_'(Template, _) ->
+		% meta_predicate/1 directive is present
 		true
 	;	'$lgt_pp_missing_meta_predicate_directive_'(Template, _, _) ->
+		% missing meta_predicate/1 directive already recorded
 		true
 	;	term_variables(MetaArg, MetaArgVars),
 		term_variables(Head, HeadVars),
 		'$lgt_member'(MetaArgVar, MetaArgVars),
 		'$lgt_member_var'(MetaArgVar, HeadVars) ->
+		% the meta-argument is a head argument
 		'$lgt_source_file_context'(File, Lines),
+		% delay reporting to the end of entity compilation to avoid repeated reports for
+		% the same missing directive when a meta-predicate have two or more clauses
 		assertz('$lgt_pp_missing_meta_predicate_directive_'(Template, File, Lines))
 	;	true
 	).
 
 
 
+% '$lgt_check_non_portable_prolog_built_in_call'(@compilation_mode, @callable)
+%
 % remember non-portable Prolog built-in predicate calls
 
 '$lgt_check_non_portable_prolog_built_in_call'(runtime, _).
@@ -13586,6 +13595,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_check_for_tautology_or_falsehood_goal'(@compilation_mode, @callable)
+%
 % check for likely typos in calls to some Prolog built-in predicates
 % that result in either tautologies or falsehoods
 
@@ -13609,6 +13620,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_check_for_trivial_fails'(@compilation_mode, @callable, @callable, @callable)
+%
 % check for trivial fails due to no matching local clause being available for a goal;
 % this check is only performed for local static predicates as dynamic or multifile
 % predicates can get new clauses at runtime
@@ -13687,7 +13700,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_called_predicate'(@callable, +predicate_indicator, +predicate_indicator, @callable)
+% '$lgt_remember_called_predicate'(@compilation_mode, +predicate_indicator, +predicate_indicator, @callable)
 %
 % used for checking calls to undefined predicates and for collecting cross-referencing information
 
@@ -13721,7 +13734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_called_self_predicate'(@callable, +predicate_indicator, @callable)
+% '$lgt_remember_called_self_predicate'(@compilation_mode, +predicate_indicator, @callable)
 %
 % used for checking calls to undefined predicates and for collecting cross-referencing information
 
@@ -13752,7 +13765,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_called_super_predicate'(@callable, +predicate_indicator, @callable)
+% '$lgt_remember_called_super_predicate'(@compilation_mode, +predicate_indicator, @callable)
 %
 % used for checking calls to undefined predicates and for collecting cross-referencing information
 
@@ -13783,7 +13796,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_updated_predicate'(@callable, @term, @callable)
+% '$lgt_remember_updated_predicate'(@compilation_mode, @term, @callable)
 %
 % used for collecting cross-referencing information
 
@@ -14214,7 +14227,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_dynamic_directive'(@term, @term)
+% '$lgt_check_dynamic_directive'(@compilation_mode, @term)
 %
 % checks for a dynamic/1 directive for a predicate that is an argument to the
 % database built-in methods; the predicate may be non-instantiated or only
@@ -14245,11 +14258,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_dynamic_directive'(Head) :-
 	(	'$lgt_pp_dynamic_'(Head) ->
+		% dynamic/1 directive is present
 		true
 	;	'$lgt_pp_missing_dynamic_directive_'(Head, _, _) ->
+		% missing dynamic/1 directive already recorded
 		true
 	;	'$lgt_term_template'(Head, Template),
 		'$lgt_source_file_context'(File, Lines),
+		% delay reporting to the end of entity compilation to avoid repeated reports for
+		% the same missing directive when a dynamic predicate have two or more clauses
 		assertz('$lgt_pp_missing_dynamic_directive_'(Template, File, Lines))
 	).
 
@@ -14266,12 +14283,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% discontiguous directive present
 		true
 	;	'$lgt_pp_missing_discontiguous_directive_'(Head, _, _) ->
-		% discontiguous directive missing already recorded
+		% missing discontiguous/1 directive already recorded
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(user)) ->
 		% compiling a source file clause; record missing discontiguous directive
 		'$lgt_term_template'(Head, Template),
 		'$lgt_source_file_context'(File, Lines),
+		% delay reporting to the end of entity compilation to avoid repeated reports for the same
+		% missing directive when there multiple discontiguous blocks for the same predicate
 		assertz('$lgt_pp_missing_discontiguous_directive_'(Template, File, Lines))
 	;	% runtime compilation or compiling an auxiliary predicate clause
 		true
@@ -16499,7 +16518,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_for_redefined_built_in'(@callable, @callable, @execution_context, @callable, @pair)
+% '$lgt_check_for_redefined_built_in'(@compilation_mode, @callable, @execution_context, @callable, @pair)
 %
 % this predicate is called when adding a def/ddef clause after finding the first clause
 % for a predicate or when no clauses are defined for a declared predicate
@@ -16536,7 +16555,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_defined_predicate'(@callable, @callable, +predicate_indicator, +execution_context, @callable)
+% '$lgt_remember_defined_predicate'(@compilation_mode, @callable, +predicate_indicator, +execution_context, @callable)
 %
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
@@ -18100,6 +18119,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_report_unknown_predicate_call'(@compilation_mode, @callable)
+%
 % reports unknown predicates and non-terminals
 
 '$lgt_report_unknown_predicate_call'(runtime, _).
@@ -18129,6 +18150,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_report_undefined_predicate_call'(@compilation_mode, @callable)
+%
 % reports calls to declared, static, but undefined predicates and non-terminals
 
 '$lgt_report_undefined_predicate_call'(runtime, _).
@@ -18158,6 +18181,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_report_non_portable_calls'(@entity_type, @entity_identifier)
+%
 % reports non-portable predicate and function calls in the body of object and category predicates
 
 '$lgt_report_non_portable_calls'(Type, Entity) :-
