@@ -13939,8 +13939,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles the meta-arguments contained in the list of arguments of a call to a Prolog
 % meta-predicate or meta-directive (assumes Logtalk meta-predicate notation)
 %
-% this predicate fails if meta-arguments other than goal and closures are not
-% sufficiently instantiated
+% this predicate fails when meta-arguments other than goal and closures are not
+% sufficiently instantiated or a meta-argument mode indicator is not supported
 
 '$lgt_compile_prolog_meta_arguments'([], [], _, [], []).
 
@@ -13948,18 +13948,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	nonvar(Arg),
 		'$lgt_module_meta_argument'(MArg, Arg),
 		'$lgt_prolog_feature'(modules, supported) ->
+		% explicitly-qualified meta-argument
 		TArg = Arg, DArg = Arg
 	;	integer(MArg),
 		MArg > 0 ->
+		% closure meta-argument
 		'$lgt_compile_prolog_meta_argument'(closure(MArg), Arg, Ctx, TArg, DArg)
-	;	'$lgt_compile_prolog_meta_argument'(MArg, Arg, Ctx, TArg, DArg)
+	;	% remaining cases
+		'$lgt_compile_prolog_meta_argument'(MArg, Arg, Ctx, TArg, DArg)
 	),
 	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
 
 
-'$lgt_module_meta_argument'(1, ':'(_)) :-
-	!.
-'$lgt_module_meta_argument'(_, ':'(_,_)).
+'$lgt_module_meta_argument'(0, ':'(_,_)).
+'$lgt_module_meta_argument'(1, ':'(_)).
 
 
 '$lgt_compile_prolog_meta_argument'(closure(N), Arg, Ctx, TArg, DArg) :-
