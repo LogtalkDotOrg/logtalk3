@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Minerva 2.4
-%  Last updated on July 16, 2018
+%  Last updated on July 23, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -131,6 +131,12 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
 
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
+
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
 	fail.
 
 

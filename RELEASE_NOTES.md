@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for defining additional Prolog built-in predicates for lint
+checks of goals that are always true or false to the adapter files using the
+hook predicate `'$lgt_candidate_tautology_or_falsehood_goal_hook'/1`.
+
 * ADDED: Object property `module` for objects that result from the compilation
 of Prolog modules.
 

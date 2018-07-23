@@ -144,6 +144,12 @@ numbervars(Term, From, Next) :-
 	fail.
 
 
+% '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
+
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
+	fail.
+
+
 % '$lgt_prolog_database_predicate'(@callable)
 
 '$lgt_prolog_database_predicate'(_) :-
