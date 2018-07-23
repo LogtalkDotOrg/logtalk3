@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2018/07/20,
+		date is 2018/07/23,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -100,19 +100,22 @@
 
 	succeeds(random_maybe_0_01) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe), List),
-		length(List, Length), 4900 =< Length, Length =< 5100.
+		% 2% margin for checking for an even distribution
+		length(List, Length), 4800 =< Length, Length =< 5200.
 
 	% maybe/1 tests
 
 	succeeds(random_maybe_1_01) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe(0.5)), List),
-		length(List, Length), 4900 =< Length, Length =< 5100.
+		% 2% margin for checking for an even distribution
+		length(List, Length), 4800 =< Length, Length =< 5200.
 
 	% maybe/2 tests
 
 	succeeds(random_maybe_2_01) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe(5,10)), List),
-		length(List, Length), 4900 =< Length, Length =< 5100.
+		% 2% margin for checking for an even distribution
+		length(List, Length), 4800 =< Length, Length =< 5200.
 
 	% auxiliary predicates
 
