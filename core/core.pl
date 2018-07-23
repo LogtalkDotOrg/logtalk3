@@ -16000,8 +16000,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(type_error(object, Obj))
 	;	'$lgt_is_category'(Obj) ->
 		throw(type_error(object, Obj))
-	;	'$lgt_term_template'(Obj, Ctg) ->
-		throw(permission_error(complement, self, Obj))
 	;	fail
 	).
 
@@ -16227,7 +16225,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_control_construct'(?callable)
 %
-% table of control constructs; mainly used to help decide
+% partial table of control constructs; mainly used to help decide
 % if a predicate definition should be compiled inline
 
 '$lgt_control_construct'((_ , _)).
