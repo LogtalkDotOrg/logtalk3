@@ -7338,7 +7338,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_entity'(Type, Entity, Ctx) :-
 	'$lgt_generate_entity_code'(Type, Ctx),
 	'$lgt_inline_calls'(Type),
-	'$lgt_report_problems'(Type, Entity),
+	'$lgt_report_lint_issues'(Type, Entity),
 	'$lgt_write_entity_code',
 	'$lgt_add_entity_source_data'(Type, Entity),
 	'$lgt_save_entity_runtime_clause'(Type),
@@ -11107,6 +11107,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_), _, _),
 %	'$lgt_compiler_flag'(suspicious_calls, warning),
 %	'$lgt_iso_spec_predicate'(Pred),
+%	\+ '$lgt_built_in_method'(Pred, _, _, _),
+%	% not a Logtalk built-in method that have a Prolog counterpart
 %	\+ '$lgt_control_construct'(Pred),
 %	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
 %	% call to a standard Prolog predicate that is not being locally redefined
@@ -16240,11 +16242,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_problems'(+atom, @entity_identifier)
+% '$lgt_report_lint_issues'(+atom, @entity_identifier)
 %
-% reports any potential problem found while compiling an entity
+% reports detected lint issues found while compiling an entity
+% (note that some lint issues are reported during compilation)
 
-'$lgt_report_problems'(Type, Entity) :-
+'$lgt_report_lint_issues'(Type, Entity) :-
 	'$lgt_report_missing_directives'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity).

@@ -111,7 +111,8 @@ rules and the number of user rules.
 
 * ADDED: Cyclomatic complexity metric. Experimental.
 
-* UPDATED: The Halstead metric to also take into account updated predicates.
+* UPDATED: The Halstead metric to also take into account updates to dynamic
+predicates.
 
 * ADDED: Utility predicates `approximately_equal/3`, `essentially_equal/3`,
 and `tolerance_equal/4` to the `lgtunit` tool. These are type-checked variants
