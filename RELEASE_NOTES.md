@@ -62,6 +62,9 @@ for meta-arguments of meta-predicate messages sent from `user`.
 * FIXED: The `logtalk_make/1` predicate no longer tries to reload files that
 were loaded using the `reload(skip)` option.
 
+* FIXED: Detection of instantiation errors when compiling entity relations
+crafted using an entity argument list with a variable tail.
+
 Prolog adapter and integration files
 ------------------------------------
 

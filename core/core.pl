@@ -15811,8 +15811,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_implements_protocol_relation'(+list, @category_identifier, @compilation_context)
 %
 % compiles an "implements" relation between a category or an object and a list of protocols
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
-'$lgt_compile_implements_protocol_relation'([], _, _).
 
 '$lgt_compile_implements_protocol_relation'([Ref| Refs], ObjOrCtg, Ctx) :-
 	'$lgt_check_entity_reference'(protocol, Ref, Scope, Ptc),
@@ -15829,13 +15831,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_implements_protocol_relation'(Refs, ObjOrCtg, Ctx)
 	).
 
+'$lgt_compile_implements_protocol_relation'([], _, _).
+
 
 
 % '$lgt_compile_imports_category_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles an "imports" relation between an object and a list of categories
-
-'$lgt_compile_imports_category_relation'([], _, _).
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_imports_category_relation'([Ref| Refs], Obj, Ctx) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, Ctg),
@@ -15852,13 +15857,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_imports_category_relation'(Refs, Obj, Ctx)
 	).
 
+'$lgt_compile_imports_category_relation'([], _, _).
+
 
 
 % '$lgt_compile_instantiates_class_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles an "instantiates" relation between an instance and a list of classes
-
-'$lgt_compile_instantiates_class_relation'([], _, _).
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_instantiates_class_relation'([Ref| Refs], Obj, Ctx) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Class),
@@ -15877,13 +15885,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_instantiates_class_relation'(Refs, Obj, Ctx)
 	).
 
+'$lgt_compile_instantiates_class_relation'([], _, _).
+
 
 
 % '$lgt_compile_specializes_class_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles a "specializes" relation between a class and a list of superclasses
-
-'$lgt_compile_specializes_class_relation'([], _, _).
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_specializes_class_relation'([Ref| Refs], Class, Ctx) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Superclass),
@@ -15904,13 +15915,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_specializes_class_relation'(Refs, Class, Ctx)
 	).
 
+'$lgt_compile_specializes_class_relation'([], _, _).
+
 
 
 % '$lgt_compile_extends_object_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles an "extends" relation between a prototype and a list of parents
-
-'$lgt_compile_extends_object_relation'([], _, _).
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_extends_object_relation'([Ref| Refs], Obj, Ctx) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Parent),
@@ -15933,13 +15947,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_extends_object_relation'(Refs, Obj, Ctx)
 	).
 
+'$lgt_compile_extends_object_relation'([], _, _).
+
 
 
 % '$lgt_compile_extends_protocol_relation'(+list, @protocol_identifier, @compilation_context)
 %
 % compiles an "extends" relation between a protocol and a list of protocols
-
-'$lgt_compile_extends_protocol_relation'([], _, _).
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_extends_protocol_relation'([Ref| Refs], Ptc, Ctx) :-
 	'$lgt_check_entity_reference'(protocol, Ref, Scope, ExtPtc),
@@ -15956,13 +15973,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_extends_protocol_relation'(Refs, Ptc, Ctx)
 	).
 
+'$lgt_compile_extends_protocol_relation'([], _, _).
+
 
 
 % '$lgt_compile_extends_category_relation'(+list, @category_identifier, @compilation_context)
 %
 % compiles an "extends" relation between a category and a list of categories
-
-'$lgt_compile_extends_category_relation'([], _, _).
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_extends_category_relation'([Ref| Refs], Ctg, Ctx) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, ExtCtg),
@@ -15979,18 +15999,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_extends_category_relation'(Refs, Ctg, Ctx)
 	).
 
+'$lgt_compile_extends_category_relation'([], _, _).
+
 
 
 % '$lgt_compile_complements_object_relation'(+list, @category_identifier, @compilation_context)
 %
 % compiles a "complements" relation between a category and a list of objects
+%
+% note that the clause order ensures that instantiation errors will be caught by the call to
+% the '$lgt_check_entity_reference'/4 predicate
 
 '$lgt_compile_complements_object_relation'(Objs, Ctg, Ctx) :-
 	'$lgt_pp_category_'(Ctg, _, Dcl, Def, Rnm, _),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
 
-
-'$lgt_compile_complements_object_relation'([], _, _, _, _, _).
 
 '$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _, _) :-
 	'$lgt_check'(object_identifier, Obj),
@@ -16028,6 +16051,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)), Lines)),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
+
+'$lgt_compile_complements_object_relation'([], _, _, _, _, _).
 
 
 
