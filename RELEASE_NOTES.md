@@ -74,6 +74,9 @@ with a dynamic declaration with no clauses where a subsequent call to the
 predicate using the `<</2` debugging control construct would fail instead
 of generating a predicate existence error.
 
+* FIXED: The compiler would not recognize the `logtalk_make_target_action/1`
+predicate as a built-in predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 

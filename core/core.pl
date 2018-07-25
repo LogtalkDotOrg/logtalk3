@@ -20232,6 +20232,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_built_in_predicate'(logtalk_make(_), no).
 '$lgt_logtalk_built_in_predicate'(logtalk_load_context(_, _), no).
 '$lgt_logtalk_built_in_predicate'(logtalk_library_path(_, _), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_make_target_action(_), no).
 % entity properties
 '$lgt_logtalk_built_in_predicate'(protocol_property(_, _), no).
 '$lgt_logtalk_built_in_predicate'(category_property(_, _), no).
