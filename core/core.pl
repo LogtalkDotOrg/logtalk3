@@ -3871,12 +3871,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(predicate_indicator, Pred, logtalk(abolish(Pred), ExCtx)),
 	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope, ExCtx).
 
+
 '$lgt_abolish_checked'(user, Functor/Arity, _, _, _) :-
 	!,
 	abolish(Functor/Arity).
 
 '$lgt_abolish_checked'(Obj, Functor/Arity, Sender, TestScope, ExCtx) :-
-	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, DDcl, DDef, _, ObjFlags),
+	'$lgt_current_object_'(Obj, Prefix, Dcl, _, _, _, _, DDcl, DDef, _, ObjFlags),
 	!,
 	functor(Pred, Functor, Arity),
 	(	call(Dcl, Pred, Scope, _, PredFlags) ->
@@ -3900,15 +3901,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% ... but dynamic declarations are allowed
 		DDclClause =.. [DDcl, Pred, _],
 		call(DDclClause) ->
+		% dynamic predicate declaration found
 		retractall(DDclClause),
 		DDefClause =.. [DDef, Pred, _, TPred0],
 		(	call(DDefClause) ->
+			% predicate clauses exist
 			'$lgt_unwrap_compiled_head'(TPred0, TPred),
 			functor(TPred, TFunctor, TArity),
 			abolish(TFunctor/TArity),
 			retractall(DDefClause),
 			'$lgt_clean_lookup_caches'(Pred)
-		;	true
+		;	% no predicate clauses currently exist but may have existed in the past
+			'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+			abolish(TFunctor/TArity)
 		)
 	;	% no dynamic predicate declaration found
 		DDefClause =.. [DDef, Pred, _, TPred0],

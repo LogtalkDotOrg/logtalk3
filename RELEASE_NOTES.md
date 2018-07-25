@@ -69,6 +69,11 @@ crafted using an entity argument list with a variable tail.
 dynamic predicate without a scope directive from objects other than the
 object containing the predicate.
 
+* FIXED: Bug in the `abolish/1` method when abolishing a dynamic predicate
+with a dynamic declaration with no clauses where a subsequent call to the
+predicate using the `<</2` debugging control construct would fail instead
+of generating a predicate existence error.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -164,6 +169,9 @@ terms to the Prolog compliance suite.
 
 * ADDED: Tests for the `retract/1` and `retractall/1` built-in methods for
 local dynamic predicates with no scope directives.
+
+* ADDED: Tests for the `abolish/1` built-in method when calling an abolished
+dynamic predicate with a dynamic declaration.
 
 Examples
 --------

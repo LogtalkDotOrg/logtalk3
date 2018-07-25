@@ -37,9 +37,9 @@ foobaz(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2018/07/25,
 		comment is 'Unit tests for the abolish/1 built-in method.'
 	]).
 
@@ -79,13 +79,43 @@ foobaz(1).
 	throws(abolish_1_12, error(existence_error(predicate_declaration, foo/0), logtalk(abolish(foo/0),_))) :-
 		{test_object::abolish(foo/0)}.
 
-	throws(abolish_1_13, error(instantiation_error, logtalk(_::abolish(foo/1),_))) :-
+	throws(abolish_1_13, error(existence_error(predicate_declaration, p/1), logtalk(_::p(_),_))) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
+		Object::assertz(p(1)),
+		% clauses exist before abolishing
+		Object::abolish(p/1),
+		Object::p(_).
+
+	throws(abolish_1_14, error(existence_error(predicate_declaration, p/1), logtalk(_::p(_),_))) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
+		Object::assertz(p(1)),
+		Object::retract(p(_)),
+		% clauses don't exist before abolishing
+		Object::abolish(p/1),
+		Object::p(_).
+
+	throws(abolish_1_15, error(existence_error(procedure, p/1), logtalk(_<<p(_),_))) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
+		Object::assertz(p(1)),
+		% clauses exist before abolishing
+		Object::abolish(p/1),
+		Object<<p(_).
+
+	throws(abolish_1_16, error(existence_error(procedure, p/1), logtalk(_<<p(_),_))) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
+		Object::assertz(p(1)),
+		Object::retract(p(_)),
+		% clauses don't exist before abolishing
+		Object::abolish(p/1),
+		Object<<p(_).
+
+	throws(abolish_1_17, error(instantiation_error, logtalk(_::abolish(foo/1),_))) :-
 		{test_object::ie(_)}.
 
-	throws(abolish_1_14, error(type_error(object_identifier, 1), logtalk(1::abolish(foo/1),_))) :-
+	throws(abolish_1_18, error(type_error(object_identifier, 1), logtalk(1::abolish(foo/1),_))) :-
 		{test_object::te}.
 
-	succeeds(abolish_1_15) :-
+	succeeds(abolish_1_19) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::assertz(a(1)),
 		Object::current_predicate(a/1),
@@ -100,22 +130,22 @@ foobaz(1).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(abolish_1_16) :-
+	succeeds(abolish_1_20) :-
 		user::abolish(bar/1),
 		\+ {current_predicate(bar/1)}.
 
-	succeeds(abolish_1_17) :-
+	succeeds(abolish_1_21) :-
 		baz_predicate_indicator(Baz),
 		user::abolish(Baz),
 		\+ {current_predicate(baz/1)}.
 
-	succeeds(abolish_1_18) :-
+	succeeds(abolish_1_22) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::abolish(foobar/1),
 		\+ {current_predicate(foobar/1)}.
 
-	succeeds(abolish_1_19) :-
+	succeeds(abolish_1_23) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		foobaz_predicate_indicator(FooBaz),
