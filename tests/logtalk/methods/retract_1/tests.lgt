@@ -31,9 +31,9 @@ baz(1). baz(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2018/07/25,
 		comment is 'Unit tests for the retract/1 built-in method.'
 	]).
 
@@ -61,13 +61,16 @@ baz(1). baz(2).
 	throws(retract_1_08, error(existence_error(predicate_declaration, unknown/1), logtalk(retract(unknown(_)),_))) :-
 		{test_object::retract(unknown(_))}.
 
-	throws(retract_1_09, error(instantiation_error, logtalk(_::retract(foo),_))) :-
+	throws(retract_1_09, error(existence_error(predicate_declaration, local/1), logtalk(retract(local(_)),_))) :-
+		{test_object::retract(local(_))}.
+
+	throws(retract_1_10, error(instantiation_error, logtalk(_::retract(foo),_))) :-
 		{test_object::ie(_)}.
 
-	throws(retract_1_10, error(type_error(object_identifier, 1), logtalk(1::retract(foo),_))) :-
+	throws(retract_1_11, error(type_error(object_identifier, 1), logtalk(1::retract(foo),_))) :-
 		{test_object::te}.
 
-	succeeds(retract_1_11) :-
+	succeeds(retract_1_12) :-
 		test_object::retract((t(X) :-true)),
 		X == 1,
 		t2_head(T2),
@@ -76,7 +79,7 @@ baz(1). baz(2).
 		test_object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)).
 
-	succeeds(retract_1_12) :-
+	succeeds(retract_1_13) :-
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retract((t(X) :-true)),
 		X == 1,
@@ -89,21 +92,21 @@ baz(1). baz(2).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(retract_1_13) :-
+	succeeds(retract_1_14) :-
 		user::retract(bar(X)),
 		X == 1.
 
-	succeeds(retract_1_14) :-
+	succeeds(retract_1_15) :-
 		bar_clause(Baz),
 		user::retract(Baz).
 
-	succeeds(retract_1_15) :-
+	succeeds(retract_1_16) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::retract(baz(X)),
 		X == 1.
 
-	succeeds(retract_1_16) :-
+	succeeds(retract_1_17) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		baz_clause(Baz),

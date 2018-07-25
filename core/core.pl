@@ -4228,20 +4228,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
 		)
-	;	% local dynamic predicate with no scope declaration
-		(	Obj = Sender,
-			(call(DDef, Head, _, THead0); call(Def, Head, _, THead0)) ->
-			'$lgt_unwrap_compiled_head'(THead0, THead),
-			clause(THead, TBody),
-			(	TBody = ('$lgt_nop'(Body), _) ->
-				true
-			;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
-				Body = true
-			;	TBody = Body
-			)
-		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
+	;	Obj = Sender,
+		(call(DDef, Head, _, THead0); call(Def, Head, _, THead0)) ->
+		% local dynamic predicate with no scope declaration
+		'$lgt_unwrap_compiled_head'(THead0, THead),
+		clause(THead, TBody),
+		(	TBody = ('$lgt_nop'(Body), _) ->
+			true
+		;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
+			Body = true
+		;	TBody = Body
 		)
+	;	% unknown predicate
+		functor(Head, Functor, Arity),
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
 	).
 
 '$lgt_clause_checked'(Obj, Head, Body, _, _, ExCtx) :-
@@ -4317,20 +4317,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 		)
-	;	% local dynamic predicate with no scope declaration
-		(	Obj = Sender,
-			call(DDef, Head, _, THead0) ->
-			'$lgt_unwrap_compiled_head'(THead0, THead),
-			retract((THead :- TBody)),
-			(	TBody = ('$lgt_nop'(Body), _) ->
-				true
-			;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
-				Body = true
-			;	TBody = Body
-			)
-		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
+	;	Obj = Sender,
+		call(DDef, Head, _, THead0) ->
+		% local dynamic predicate with no scope declaration
+		'$lgt_unwrap_compiled_head'(THead0, THead),
+		retract((THead :- TBody)),
+		(	TBody = ('$lgt_nop'(Body), _) ->
+			true
+		;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
+			Body = true
+		;	TBody = Body
 		)
+	;	% unknown predicate
+		functor(Head, Functor, Arity),
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 	).
 
 '$lgt_retract_var_body_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
@@ -4363,14 +4363,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 		)
-	;	% local dynamic predicate with no scope declaration
-		(	Obj = Sender,
-			call(DDef, Head, _, THead0) ->
-			'$lgt_unwrap_compiled_head'(THead0, THead),
-			retract((THead :- ('$lgt_nop'(Body), _)))
-		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
-		)
+	;	Obj = Sender,
+		call(DDef, Head, _, THead0) ->
+		% local dynamic predicate with no scope declaration
+		'$lgt_unwrap_compiled_head'(THead0, THead),
+		retract((THead :- ('$lgt_nop'(Body), _)))
+	;	% unknown predicate
+		functor(Head, Functor, Arity),
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract((Head:-Body)), ExCtx)))
 	).
 
 '$lgt_retract_rule_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
@@ -4420,18 +4420,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retract(Head), ExCtx)))
 		)
-	;	% local dynamic predicate with no scope declaration
-		(	call(DDef, Head, _, THead0) ->
-			'$lgt_unwrap_compiled_head'(THead0, THead),
-			(	ObjFlags /\ 512 =:= 512 ->
-				% object compiled in debug mode
-				retract((THead :- '$lgt_debug'(fact(_, _, _, _, _), _)))
-			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead),
-				retract(THead)
-			)
-		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract(Head), ExCtx)))
+	;	Obj = Sender,
+		call(DDef, Head, _, THead0) ->
+		% local dynamic predicate with no scope declaration
+		'$lgt_unwrap_compiled_head'(THead0, THead),
+		(	ObjFlags /\ 512 =:= 512 ->
+			% object compiled in debug mode
+			retract((THead :- '$lgt_debug'(fact(_, _, _, _, _), _)))
+		;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead),
+			retract(THead)
 		)
+	;	% unknown predicate
+		functor(Head, Functor, Arity),
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retract(Head), ExCtx)))
 	).
 
 '$lgt_retract_fact_checked'(Obj, Head, _, _, ExCtx) :-
@@ -4471,6 +4472,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
+		% predicate scope declaration found
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
 			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			Type = (dynamic),
@@ -4500,19 +4502,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Head, Functor, Arity),
 			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(retractall(Head), ExCtx)))
 		)
-	;	% local dynamic predicate with no scope declaration
-		(	Obj = Sender,
-			call(DDef, Head, _, THead0) ->
-			'$lgt_unwrap_compiled_head'(THead0, THead),
-			(	ObjFlags /\ 512 =:= 512 ->
-				% object compiled in debug mode
-				true
-			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead)
-			),
-			retractall(THead)
-		;	functor(Head, Functor, Arity),
-			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retractall(Head), ExCtx)))
-		)
+	;	Obj = Sender,
+		call(DDef, Head, _, THead0) ->
+		% local dynamic predicate with no scope declaration
+		'$lgt_unwrap_compiled_head'(THead0, THead),
+		(	ObjFlags /\ 512 =:= 512 ->
+			% object compiled in debug mode
+			true
+		;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead)
+		),
+		retractall(THead)
+	;	% unknown predicate
+		functor(Head, Functor, Arity),
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(retractall(Head), ExCtx)))
 	).
 
 '$lgt_retractall_checked'(Obj, Head, _, _, ExCtx) :-

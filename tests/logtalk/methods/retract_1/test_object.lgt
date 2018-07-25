@@ -47,4 +47,9 @@
 		Object = 1,
 		Object::retract(foo).
 
+	:- dynamic(local/1).
+	local(1).
+	local(2).
+	local(3).
+
 :- end_object.

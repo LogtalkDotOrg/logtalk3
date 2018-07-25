@@ -31,9 +31,9 @@ baz(1). baz(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/03/28,
+		date is 2018/07/25,
 		comment is 'Unit tests for the retractall/1 built-in method.'
 	]).
 
@@ -55,13 +55,16 @@ baz(1). baz(2).
 	throws(retractall_1_06, error(existence_error(predicate_declaration, unknown/1), logtalk(retractall(unknown(_)),_))) :-
 		{test_object::retractall(unknown(_))}.
 
-	throws(retractall_1_07, error(instantiation_error, logtalk(_::retractall(foo),_))) :-
+	throws(retractall_1_07, error(existence_error(predicate_declaration, local/1), logtalk(retractall(local(_)),_))) :-
+		{test_object::retractall(local(_))}.
+
+	throws(retractall_1_08, error(instantiation_error, logtalk(_::retractall(foo),_))) :-
 		{test_object::ie(_)}.
 
-	throws(retractall_1_08, error(type_error(object_identifier, 1), logtalk(1::retractall(foo),_))) :-
+	throws(retractall_1_09, error(type_error(object_identifier, 1), logtalk(1::retractall(foo),_))) :-
 		{test_object::te}.
 
-	succeeds(retractall_1_09) :-
+	succeeds(retractall_1_10) :-
 		test_object::retractall(t(3)),
 		test_object::t(1),
 		t2_head(T2),
@@ -70,7 +73,7 @@ baz(1). baz(2).
 		test_object::retractall(t(_)),
 		\+ test_object::t(_).
 
-	succeeds(retractall_1_10) :-
+	succeeds(retractall_1_11) :-
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retractall(t(3)),
 		Object::t(1),
@@ -83,22 +86,22 @@ baz(1). baz(2).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(retractall_1_11) :-
+	succeeds(retractall_1_12) :-
 		user::retractall(bar(1)),
 		{bar(2)}.
 
-	succeeds(retractall_1_12) :-
+	succeeds(retractall_1_13) :-
 		bar_clause(Baz),
 		user::retractall(Baz),
 		\+ {bar(_)}.
 
-	succeeds(retractall_1_13) :-
+	succeeds(retractall_1_14) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::retractall(baz(1)),
 		{baz(2)}.
 
-	succeeds(retractall_1_14) :-
+	succeeds(retractall_1_15) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		baz_clause(Baz),

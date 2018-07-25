@@ -65,6 +65,10 @@ were loaded using the `reload(skip)` option.
 * FIXED: Detection of instantiation errors when compiling entity relations
 crafted using an entity argument list with a variable tail.
 
+* FIXED: The `retract/1` method would allow retracting clauses for a local
+dynamic predicate without a scope directive from objects other than the
+object containing the predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -157,6 +161,9 @@ terms to the Prolog compliance suite.
 * ADDED: Test for included files that contain `op/3` operators.
 
 * ADDED: Tests for the `random` library `maybe/0-2` predicates.
+
+* ADDED: Tests for the `retract/1` and `retractall/1` built-in methods for
+local dynamic predicates with no scope directives.
 
 Examples
 --------
