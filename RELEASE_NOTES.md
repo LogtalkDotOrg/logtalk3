@@ -196,6 +196,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Syntax coloring support for the `logtalk_make_target_action/1`
 built-in predicate.
 
+* ADDED: Note on Textadept Logtalk syntax coloring support contributed by
+Michael T. Richter.
+
 
 3.18.0 - June 26, 2018
 ======================
