@@ -168,7 +168,8 @@ terms to the Prolog compliance suite.
 
 * ADDED: Test for included files that contain `op/3` operators.
 
-* ADDED: Tests for the `random` library `maybe/0-2` predicates.
+* ADDED: Tests for the `random` library `maybe/0-2` predicates. The tests use
+a 2% margin for checking for an even distribution.
 
 * ADDED: Tests for the `retract/1` and `retractall/1` built-in methods for
 local dynamic predicates with no scope directives.
