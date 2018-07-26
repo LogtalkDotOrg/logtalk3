@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (https://logtalk.org/); last revised on June 29, 2018
+		// Contributed by Paulo Moura (https://logtalk.org/); last revised on July 26, 2018
 
 		this.regexList = [
 		  // variables
@@ -33,7 +33,7 @@
 			{ regex: new RegExp("\\b(create|current|set)_logtalk_flag(?=[(])", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(set|current)_prolog_flag(?=[(])", 'g'), css: 'keyword'},
 			// compiling and loading built-in predicates
-			{ regex: new RegExp("\\blogtalk_(compile|l(oad|oad_context|ibrary_path)|make)(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\blogtalk_(compile|l(oad|oad_context|ibrary_path)|make(_target_action)?)(?=[(])", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(logtalk_make)\\b", 'g'), css: 'keyword'},
 			// event handler methods
 			{ regex: new RegExp("\\b(after|before)(?=[(])", 'g'), css: 'keyword'},

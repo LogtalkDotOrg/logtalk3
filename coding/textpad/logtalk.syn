@@ -1,7 +1,7 @@
 ; TextPad syntax definitions for Logtalk (https://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	June 29, 2017
+; Last changed in: 	July 26, 2018
 ;
 ; Tags used and suggested colors:
 ;   Keywords 1	message sending operators	blue
@@ -157,6 +157,7 @@ logtalk_compile
 logtalk_load
 logtalk_library_path
 logtalk_make
+logtalk_make_target_action
 threaded
 threaded_call
 threaded_once

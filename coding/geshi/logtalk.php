@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2018/07/26 (1.1.23)
+ *  -  Added syntax coloring of the logtalk_make_target_action/1 predicate
  * 2018/06/29 (1.1.22)
  *  -  Added syntax coloring of the error throwing built-in methods
  * 2017/11/13 (1.1.21)
@@ -169,14 +171,15 @@ $language_data = array(
             'current_logtalk_flag', 'set_logtalk_flag', 'create_logtalk_flag',
             'current_prolog_flag', 'set_prolog_flag',
             // compiling, loading, and library path
-            'logtalk_compile', 'logtalk_library_path', 'logtalk_load', 'logtalk_load_context', 'logtalk_make',
+            'logtalk_compile', 'logtalk_library_path', 'logtalk_load', 'logtalk_load_context',
+            'logtalk_make', 'logtalk_make_target_action',
             // database
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control
             'call', 'catch', 'ignore', 'once', 'throw',
-			'type_error', 'domain_error', 'existence_error', 'permission_error',
-			'representation_error', 'evaluation_error', 'resource_error',
-			'syntax_error',
+            'type_error', 'domain_error', 'existence_error', 'permission_error',
+            'representation_error', 'evaluation_error', 'resource_error',
+            'syntax_error',
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',
             // multi-threading predicates
@@ -186,7 +189,7 @@ $language_data = array(
             // engine predicates
             'threaded_engine',
             'threaded_engine_create', 'threaded_engine_destroy', 'threaded_engine_self',
-			'threaded_engine_next', 'threaded_engine_next_reified', 'threaded_engine_yield',
+            'threaded_engine_next', 'threaded_engine_next_reified', 'threaded_engine_yield',
             'threaded_engine_post', 'threaded_engine_fetch',
             // term unification
             'subsumes_term', 'unify_with_occurs_check',
@@ -238,7 +241,7 @@ $language_data = array(
             'div', 'rem', 'mod', 'abs', 'sign', 'floor', 'truncate', 'round', 'ceiling',
             'cos', 'acos', 'asin', 'atan', 'atan2', 'exp', 'log', 'sin', 'sqrt', 'tan',
             'min', 'max',
-			'xor'
+            'xor'
             ),
         // Evaluable functors (no arguments)
         7 => array(
@@ -271,8 +274,8 @@ $language_data = array(
             '=..',
             // unification
             '=', '\\=',
-			// alias operator
-			'as'
+            // alias operator
+            'as'
             ),
         2 => array(
             // clause and directive functors

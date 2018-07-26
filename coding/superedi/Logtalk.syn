@@ -1,7 +1,7 @@
 ; Superedi syntax definitions for Logtalk (https://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	June 18, 2016
+; Last changed in: 	July 26, 2018
 
 
 C=1
@@ -157,6 +157,7 @@ logtalk_compile
 logtalk_load
 logtalk_library_path
 logtalk_make
+logtalk_make_target_action
 threaded
 threaded_call
 threaded_once

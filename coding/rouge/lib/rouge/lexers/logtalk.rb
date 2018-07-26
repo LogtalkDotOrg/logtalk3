@@ -54,7 +54,7 @@ module Rouge
         rule /(create_logtalk_flag|current_logtalk_flag|set_logtalk_flag)(?=[(])/, Keyword
         # Compiling, loading, and library paths
         rule /(logtalk_compile|logtalk_load)(?=[(])/, Keyword
-        rule /(logtalk_library_path|logtalk_load_context|logtalk_make)(?=[(])/, Keyword
+        rule /(logtalk_library_path|logtalk_load_context|logtalk_make|logtalk_make_target_action)(?=[(])/, Keyword
         rule /\blogtalk_make\b/, Keyword
         # Database
         rule /(clause|retract|retractall)(?=[(])/, Keyword

@@ -195,6 +195,7 @@ logtalk_library_path(, )
 logtalk_load_context(, )
 logtalk_make()
 logtalk_make
+logtalk_make_target_action()
 
 current_input()
 current_output()

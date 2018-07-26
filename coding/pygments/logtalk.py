@@ -65,7 +65,7 @@ class LogtalkLexer(RegexLexer):
             # Flags
             (r'(create|current|set)_logtalk_flag(?=[(])', Keyword),
             # Compiling, loading, and library paths
-            (r'logtalk_(compile|l(ibrary_path|oad|oad_context)|make)(?=[(])', Keyword),
+            (r'logtalk_(compile|l(ibrary_path|oad|oad_context)|make(_target_action)?)(?=[(])', Keyword),
             (r'\blogtalk_make\b', Keyword),
             # Database
             (r'(clause|retract(all)?)(?=[(])', Keyword),

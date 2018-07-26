@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: June 29, 2018
-;; Version: 1.35
+;; Last modification date: July 26, 2018
+;; Version: 1.36
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.35"
+(defvar logtalk-mode-version "1.36"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -125,7 +125,7 @@
 		("\\<\\(co\\(?:mplements_object\\|nforms_to_protocol\\)\\|extends_\\(?:object\\|protocol\\|category\\)\\|i\\(?:mp\\(?:lements_protocol\\|orts_category\\)\\|nstantiates_class\\)\\|specializes_class\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(\\(?:abolish\\|define\\)_events\\|current_event\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(\\(?:c\\(?:reate\\|urrent\\)\\|set\\)_logtalk_flag\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
-		("\\<\\(logtalk_\\(?:compile\\|load\\|library_path\\|load_context\\|make\\)\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(logtalk_\\(?:compile\\|load\\|library_path\\|load_context\\|make\\(?:_target_action\\)\\)\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<logtalk_make\\>" 0 'logtalk-built-in-predicate-face)
 		("\\<\\(forall\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(retractall\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
@@ -135,7 +135,7 @@
 		("\\<\\(ca\\(?:ll\\|tch\\)\\|throw\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(fa\\(?:il\\|lse\\)\\|true\\)\\>" 0 'logtalk-built-in-predicate-face)
 		("\\(!\\|->\\|;\\)" 0 'logtalk-built-in-predicate-face)
-		("\\<\\(\\(?:instantiation\\|system\\)_error\\>" 0 'logtalk-built-in-predicate-face)
+		("\\<\\(?:instantiation\\|system\\)_error\\>" 0 'logtalk-built-in-predicate-face)
 		("\\<\\(\\(?:type\\|domain\\|existence\\|permission\\|representation\\|evaluation\\|resource\\|syntax\\)_error\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; multi-threading:
@@ -215,7 +215,7 @@
 		;;
 		;; atomic term processing:
 		;;
-        ("\\<\\(atom_\\(?:c\\(?:hars\\|o\\(?:des\\|ncat\\)\\)\\|length\\)\\|char_code\\|number_c\\(?:har\\|ode\\)s\\|sub_atom\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(atom_\\(?:c\\(?:hars\\|o\\(?:des\\|ncat\\)\\)\\|length\\)\\|char_code\\|number_c\\(?:har\\|ode\\)s\\|sub_atom\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; sorting
 		;;

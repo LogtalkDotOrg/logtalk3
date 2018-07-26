@@ -193,6 +193,9 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Syntax coloring support for the new error throwing built-in methods.
 
+* ADDED: Syntax coloring support for the `logtalk_make_target_action/1`
+built-in predicate.
+
 
 3.18.0 - June 26, 2018
 ======================

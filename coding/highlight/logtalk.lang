@@ -96,7 +96,7 @@ Keywords={
     Group=1
   },
   { Id=3, --compiling, loading, and library paths
-    Regex=[[ (logtalk_(compile|l(ibrary_path|oad|oad_context)|make))(?=[(]) ]],
+    Regex=[[ (logtalk_(compile|l(ibrary_path|oad|oad_context)|make(_target_action)?))(?=[(]) ]],
     Group=1
   },
   { Id=3, --compiling, loading, and library paths

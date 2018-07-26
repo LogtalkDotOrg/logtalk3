@@ -145,7 +145,7 @@ var LogtalkHighlightRules = function() {
          { token: 'support.function.prolog-flags.logtalk',
            regex: '\\b((?:se|curren)t_prolog_flag)(?=[(])' },
          { token: 'support.function.compiling-and-loading.logtalk',
-           regex: '\\b(logtalk_(?:compile|l(?:ibrary_path|oad|oad_context)|make))(?=[(])' },
+           regex: '\\b(logtalk_(?:compile|l(?:ibrary_path|oad|oad_context)|make(_target_action)?))(?=[(])' },
          { token: 'support.function.compiling-and-loading.logtalk',
            regex: '\\b(logtalk_make)\\b' },
          { caseInsensitive: false,

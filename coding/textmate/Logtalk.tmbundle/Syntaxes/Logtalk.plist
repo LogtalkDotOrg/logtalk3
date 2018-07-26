@@ -277,7 +277,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(logtalk_(compile|l(ibrary_path|oad|oad_context)|make))(?=[(])</string>
+			<string>\b(logtalk_(compile|l(ibrary_path|oad|oad_context)|make(_target_action)?))(?=[(])</string>
 			<key>name</key>
 			<string>support.function.compiling-and-loading.logtalk</string>
 		</dict>
