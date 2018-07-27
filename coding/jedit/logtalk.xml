@@ -5,7 +5,7 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by		Paulo Moura
-	version			1.800
+	version			1.900
 	created on		May 5, 2002
 	last revised	July 27, 2018
 
@@ -24,8 +24,8 @@
 		<PROPERTY NAME="commentEnd" VALUE="*/" />
 		<PROPERTY NAME="tabSize" VALUE="4" />
 		<PROPERTY NAME="indentSize" VALUE="4" />
-        <!-- Auto indent -->
-        <PROPERTY NAME="indentNextLine" VALUE="((^\s*:-\s(object|protocol|category)\(.*,$)|.*\s:-$)" />
+		<!-- Auto indent -->
+		<PROPERTY NAME="indentNextLine" VALUE="((^\s*:-\s(object|protocol|category)\(.*,$)|.*\s:-$)" />
 	</PROPS>
 
 	<RULES SET="MAIN" IGNORE_CASE="FALSE">
@@ -41,7 +41,7 @@
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(category|object|protocol)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\send_(category|object|protocol)(?=[.])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\smodule(?=[(])</SEQ_REGEXP>
- 		<!-- Predicate scope directives -->
+		<!-- Predicate scope directives -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\sp(ublic|r(otected|ivate))(?=[(])</SEQ_REGEXP>
 		<!-- Conditional compilation directives -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(el)?if(?=[(])</SEQ_REGEXP>
@@ -447,6 +447,12 @@
 			<NULL>portability</NULL>
 			<NULL>redefined_built_ins</NULL>
 			<NULL>missing_directives</NULL>
+			<NULL>duplicated_directives</NULL>
+			<NULL>deprecated</NULL>
+			<NULL>trivial_goal_fails</NULL>
+			<NULL>always_true_or_false_goals</NULL>
+			<NULL>lambda_variables</NULL>
+			<NULL>suspicious_calls</NULL>
 			<NULL>complements</NULL>
 			<NULL>dynamic_declarations</NULL>
 			<NULL>events</NULL>
@@ -466,6 +472,7 @@
 			<NULL>prolog_compatible_version</NULL>
 			<NULL>encoding_directive</NULL>
 			<NULL>threads</NULL>
+			<NULL>engines</NULL>
 			<NULL>modules</NULL>
 			<NULL>tabling</NULL>
 			<NULL>coinduction</NULL>

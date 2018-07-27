@@ -244,6 +244,12 @@
 			<string>portability</string>
 			<string>redefined_built_ins</string>
 			<string>missing_directives</string>
+			<string>duplicated_directives</string>
+			<string>deprecated</string>
+			<string>trivial_goal_fails</string>
+			<string>always_true_or_false_goals</string>
+			<string>lambda_variables</string>
+			<string>suspicious_calls</string>
 			<string>complements</string>
 			<string>dynamic_declarations</string>
 			<string>events</string>
@@ -263,6 +269,7 @@
 			<string>prolog_compatible_version</string>
 			<string>encoding_directive</string>
 			<string>threads</string>
+			<string>engines</string>
 			<string>modules</string>
 			<string>tabling</string>
 			<string>coinduction</string>

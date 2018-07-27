@@ -199,6 +199,8 @@ built-in predicate.
 * ADDED: Note on Textadept Logtalk syntax coloring support contributed by
 Michael T. Richter.
 
+* UPDATED: Text completions for supported text editors.
+
 
 3.18.0 - June 26, 2018
 ======================

@@ -308,6 +308,12 @@ underscore_variables
 portability
 redefined_built_ins
 missing_directives
+duplicated_directives
+deprecated
+trivial_goal_fails
+always_true_or_false_goals
+lambda_variables
+suspicious_calls
 complements
 dynamic_declarations
 events
@@ -327,6 +333,7 @@ prolog_version
 prolog_compatible_version
 encoding_directive
 threads
+engines
 modules
 tabling
 coinduction
