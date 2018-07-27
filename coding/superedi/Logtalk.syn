@@ -207,6 +207,16 @@ expand_goal
 goal_expansion
 term_expansion
 phrase
+instantiation_error
+type_error
+domain_error
+existence_error
+permission_error
+representation_error
+evaluation_error
+resource_error
+syntax_error
+system_error
 
 ; Mode operators
 ?
