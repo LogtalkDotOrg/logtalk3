@@ -7,7 +7,7 @@
 	written by		Paulo Moura
 	version			1.800
 	created on		May 5, 2002
-	last revised	June 29, 2018
+	last revised	July 27, 2018
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -247,12 +247,16 @@
 			<NULL>abolish_events</NULL>
 			<NULL>abolish_object</NULL>
 			<NULL>abolish_protocol</NULL>
+			<NULL>abs</NULL>
+			<NULL>acos</NULL>
 			<NULL>acyclic_term</NULL>
 			<NULL>after</NULL>
 			<NULL>alias</NULL>
 			<NULL>arg</NULL>
+			<NULL>asin</NULL>
 			<NULL>asserta</NULL>
 			<NULL>assertz</NULL>
+			<NULL>atan</NULL>
 			<NULL>atom</NULL>
 			<NULL>atomic</NULL>
 			<NULL>atom_chars</NULL>
@@ -269,6 +273,7 @@
 			<NULL>catch</NULL>
 			<NULL>category</NULL>
 			<NULL>category_property</NULL>
+			<NULL>ceiling</NULL>
 			<NULL>char_code</NULL>
 			<NULL>char_conversion</NULL>
 			<NULL>clause</NULL>
@@ -281,10 +286,11 @@
 			<NULL>conforms_to_protocol</NULL>
 			<NULL>context</NULL>
 			<NULL>copy_term</NULL>
+			<NULL>cos</NULL>
 			<NULL>create_category</NULL>
+			<NULL>create_logtalk_flag</NULL>
 			<NULL>create_object</NULL>
 			<NULL>create_protocol</NULL>
-			<NULL>create_logtalk_flag</NULL>
 			<NULL>current_category</NULL>
 			<NULL>current_char_conversion</NULL>
 			<NULL>current_event</NULL>
@@ -298,20 +304,28 @@
 			<NULL>current_protocol</NULL>
 			<NULL>define_events</NULL>
 			<NULL>discontiguous</NULL>
+			<NULL>domain_error</NULL>
 			<NULL>dynamic</NULL>
+			<NULL>e</NULL>
 			<NULL>encoding</NULL>
 			<NULL>end_category</NULL>
 			<NULL>end_object</NULL>
 			<NULL>end_protocol</NULL>
+			<NULL>evaluation_error</NULL>
+			<NULL>existence_error</NULL>
+			<NULL>exp</NULL>
 			<NULL>expand_term</NULL>
 			<NULL>extends</NULL>
+			<NULL>extends_category</NULL>
 			<NULL>extends_object</NULL>
 			<NULL>extends_protocol</NULL>
-			<NULL>extends_category</NULL>
 			<NULL>fail</NULL>
 			<NULL>false</NULL>
 			<NULL>findall</NULL>
 			<NULL>float</NULL>
+			<NULL>float_fractional_part</NULL>
+			<NULL>float_integer_part</NULL>
+			<NULL>floor</NULL>
 			<NULL>flush_output</NULL>
 			<NULL>forall</NULL>
 			<NULL>forward</NULL>
@@ -319,6 +333,7 @@
 			<NULL>get_byte</NULL>
 			<NULL>get_char</NULL>
 			<NULL>get_code</NULL>
+			<NULL>goal_expansion</NULL>
 			<NULL>ground</NULL>
 			<NULL>halt</NULL>
 			<NULL>implements</NULL>
@@ -329,24 +344,29 @@
 			<NULL>initialization</NULL>
 			<NULL>instantiates</NULL>
 			<NULL>instantiates_class</NULL>
+			<NULL>instantiation_error</NULL>
 			<NULL>integer</NULL>
 			<NULL>keysort</NULL>
+			<NULL>log</NULL>
 			<NULL>logtalk_compile</NULL>
 			<NULL>logtalk_library_path</NULL>
 			<NULL>logtalk_load</NULL>
+			<NULL>logtalk_load_context</NULL>
 			<NULL>logtalk_make</NULL>
 			<NULL>logtalk_make_target_action</NULL>
-			<NULL>logtalk_load_context</NULL>
-			<NULL>meta_predicate</NULL>
+			<NULL>max</NULL>
 			<NULL>meta_non_terminal</NULL>
+			<NULL>meta_predicate</NULL>
+			<NULL>min</NULL>
+			<NULL>mod</NULL>
 			<NULL>mode</NULL>
 			<NULL>multifile</NULL>
 			<NULL>nl</NULL>
 			<NULL>nonvar</NULL>
 			<NULL>number</NULL>
+			<NULL>numbervars</NULL>
 			<NULL>number_chars</NULL>
 			<NULL>number_codes</NULL>
-			<NULL>numbervars</NULL>
 			<NULL>object</NULL>
 			<NULL>object_property</NULL>
 			<NULL>once</NULL>
@@ -356,7 +376,9 @@
 			<NULL>peek_byte</NULL>
 			<NULL>peek_char</NULL>
 			<NULL>peek_code</NULL>
+			<NULL>permission_error</NULL>
 			<NULL>phrase</NULL>
+			<NULL>pi</NULL>
 			<NULL>predicate_property</NULL>
 			<NULL>private</NULL>
 			<NULL>protected</NULL>
@@ -368,9 +390,13 @@
 			<NULL>put_code</NULL>
 			<NULL>read</NULL>
 			<NULL>read_term</NULL>
+			<NULL>rem</NULL>
 			<NULL>repeat</NULL>
+			<NULL>representation_error</NULL>
+			<NULL>resource_error</NULL>
 			<NULL>retract</NULL>
 			<NULL>retractall</NULL>
+			<NULL>round</NULL>
 			<NULL>self</NULL>
 			<NULL>sender</NULL>
 			<NULL>setof</NULL>
@@ -379,55 +405,39 @@
 			<NULL>set_output</NULL>
 			<NULL>set_prolog_flag</NULL>
 			<NULL>set_stream_position</NULL>
+			<NULL>sign</NULL>
+			<NULL>sin</NULL>
 			<NULL>sort</NULL>
 			<NULL>specializes</NULL>
 			<NULL>specializes_class</NULL>
+			<NULL>sqrt</NULL>
 			<NULL>stream_property</NULL>
 			<NULL>subsumes_term</NULL>
 			<NULL>sub_atom</NULL>
 			<NULL>synchronized</NULL>
-			<NULL>goal_expansion</NULL>
+			<NULL>syntax_error</NULL>
+			<NULL>system_error</NULL>
 			<NULL>term_expansion</NULL>
 			<NULL>term_variables</NULL>
 			<NULL>this</NULL>
 			<NULL>threaded</NULL>
 			<NULL>threaded_call</NULL>
-			<NULL>threaded_once</NULL>
-			<NULL>threaded_ignore</NULL>
 			<NULL>threaded_exit</NULL>
+			<NULL>threaded_ignore</NULL>
+			<NULL>threaded_notify</NULL>
+			<NULL>threaded_once</NULL>
 			<NULL>threaded_peek</NULL>
 			<NULL>threaded_wait</NULL>
-			<NULL>threaded_notify</NULL>
 			<NULL>throw</NULL>
 			<NULL>true</NULL>
+			<NULL>truncate</NULL>
+			<NULL>type_error</NULL>
 			<NULL>unify_with_occurs_check</NULL>
 			<NULL>uses</NULL>
 			<NULL>var</NULL>
 			<NULL>write</NULL>
 			<NULL>writeq</NULL>
 			<NULL>write_canonical</NULL>
-			<NULL>abs</NULL>
-			<NULL>acos</NULL>
-			<NULL>asin</NULL>
-			<NULL>atan</NULL>
-			<NULL>ceiling</NULL>
-			<NULL>cos</NULL>
-			<NULL>exp</NULL>
-			<NULL>float_fractional_part</NULL>
-			<NULL>float_integer_part</NULL>
-			<NULL>floor</NULL>
-			<NULL>log</NULL>
-			<NULL>e</NULL>
-			<NULL>pi</NULL>
-			<NULL>max</NULL>
-			<NULL>min</NULL>
-			<NULL>mod</NULL>
-			<NULL>rem</NULL>
-			<NULL>round</NULL>
-			<NULL>sign</NULL>
-			<NULL>sin</NULL>
-			<NULL>sqrt</NULL>
-			<NULL>truncate</NULL>
 			<!-- flag names -->
 			<NULL>unknown_entities</NULL>
 			<NULL>singleton_variables</NULL>
