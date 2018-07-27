@@ -191,6 +191,8 @@ with Jan Wielemaker.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Support for the highlight.js syntax highlighter.
+
 * ADDED: Syntax coloring support for the new error throwing built-in methods.
 
 * ADDED: Syntax coloring support for the `logtalk_make_target_action/1`
