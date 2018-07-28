@@ -35,6 +35,19 @@ function(hljs) {
     relevance: 0
   };
 
+  var CURLY_BRACKTED_TERMS = {
+    begin: /\{/, end: /\}/,
+    relevance: 0
+  };
+
+  var DOUBLE_QUOTE_STRINGS = hljs.QUOTE_STRING_MODE;
+
+  var BACKTICK_STRINGS = {
+    className: 'string',
+    begin: /`/, end: /`/,
+    contains: [hljs.BACKSLASH_ESCAPE]
+  };
+
   var PARENTED = {
     begin: /\(/, end: /\)/,
     relevance: 0
@@ -45,58 +58,54 @@ function(hljs) {
     relevance: 0
   };
 
-  var CURLY_BRACKTED_TERMS = {
-	begin: /\{/, end: /\}/,
-    relevance: 0
-  };
-
   var LINE_COMMENTS = {
     className: 'comment',
-    begin: /%/, end: /$/
+    begin: /%/, end: /$/,
+    relevance: 2
   };
 
   var BLOCK_COMMENTS = hljs.C_BLOCK_COMMENT_MODE;
 
-  var BACKTICK_STRINGS = {
-    className: 'string',
-    begin: /`/, end: /`/,
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
-
   var HEAD_BODY_CONJUNCTION = {
     className: 'built_in',
     begin: /:-|-->/,
-    relevance: 0
+    relevance: 2
   };
 
   var MESSAGE_SENDING = {
     className: 'built_in',
     begin: /::/,
-    relevance: 0
+    relevance: 2
   };
 
   var SUPER_CALL = {
     className: 'built_in',
     begin: /\^\^/,
-    relevance: 0
+    relevance: 2
   };
 
-  var ARGUMENTS = {
-    className: 'params',
-    begin: /\(/, end: /\)/,
-    contains: [ATOMS, QUOTED_ATOMS, NUMBERS, VARIABLES]
-  };
+  var BASIC_TERMS = [
+    ATOMS,
+    QUOTED_ATOMS,
+    VARIABLES,
+    NUMBERS,
+    CURLY_BRACKTED_TERMS,
+    DOUBLE_QUOTE_STRINGS,
+    BACKTICK_STRINGS,
+    PARENTED,
+    LISTS
+  ];
 
   var PARAMETERS = {
     className: 'params',
     begin: /\(/, end: /\)/,
-    contains: [ATOMS, QUOTED_ATOMS, NUMBERS, VARIABLES, ARGUMENTS]
+    relevance: 0
   };
 
   var DIRECTIVES = {
     className: 'keyword',
     begin: /^\s*:-\s/, end: '\\.',
-    relevance: 0,
+    relevance: 2,
     excludeBegin: false,
     excludeEnd: false,
     returnBegin: false,
@@ -111,19 +120,20 @@ function(hljs) {
     ATOMS,
     QUOTED_ATOMS,
     VARIABLES,
-    hljs.BACKSLASH_ESCAPE,
     NUMBERS,
     PARENTED,
     LISTS,
     CURLY_BRACKTED_TERMS,
     LINE_COMMENTS,
     BLOCK_COMMENTS,
-    BACKTICK_STRINGS
+    BACKTICK_STRINGS,
+    DOUBLE_QUOTE_STRINGS
   ];
 
-  PARENTED.contains = inner;
-  LISTS.contains = inner;
-  CURLY_BRACKTED_TERMS.contains = inner;
+  PARENTED.contains = BASIC_TERMS;
+  LISTS.contains = BASIC_TERMS;
+  CURLY_BRACKTED_TERMS.contains = BASIC_TERMS;
+  PARAMETERS.contains = BASIC_TERMS;
 
   return {
     aliases: ['logtalk', 'lgt'],
