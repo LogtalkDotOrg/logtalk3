@@ -1345,7 +1345,7 @@
 	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
 		test_name_to_atom_prefix(Test, Prefix),
 		atom_concat(Prefix, Step, Head),
-		logtalk_load_context(entity_name, Entity),
+		logtalk_load_context(entity_identifier, Entity),
 		logtalk::execution_context(ExecutionContext, Entity, Entity, Entity, Entity, [], []),
 		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, ExecutionContext),
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
