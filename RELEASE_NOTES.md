@@ -158,6 +158,9 @@ part is zero.
 the de facto standard `between/3` predicate being a library predicate and
 the semantics of the XSB atom-based module system.
 
+* FIXED: Bug in the `lgtunit` tool that prevented marking tests using the
+`quick_check/2-3` dialects as skipped.
+
 Tests
 -----
 

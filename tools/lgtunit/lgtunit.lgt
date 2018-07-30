@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.19,
+		version is 6.21,
 		author is 'Paulo Moura',
-		date is 2018/07/20,
+		date is 2018/07/30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1284,6 +1284,8 @@
 	test_idiom_head(deterministic(Test), Test).
 	test_idiom_head(fails(Test), Test).
 	test_idiom_head(throws(Test, _), Test).
+	test_idiom_head(quick_check(Test, _, _), Test).
+	test_idiom_head(quick_check(Test, _), Test).
 
 	check_for_valid_test_identifier(Test) :-
 		self(Object),
