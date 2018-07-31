@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.21,
+		version is 6.22,
 		author is 'Paulo Moura',
 		date is 2018/07/30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
@@ -820,10 +820,10 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	% quick_check/3 dialect
-	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(quick_check(Test, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+				(	catch(::test(Test, _, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
 					(	var(Error) ->
 						passed_test(Test, File, Position, Note, Output)
 					;	true
@@ -1153,9 +1153,8 @@
 	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		term_variables(Options, Variables),
 		parse_quick_check_options(Options, Test, Condition, Setup, Cleanup, Note, NumberOfTests),
-		assertz(test_(Test, quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note))).
+		assertz(test_(Test, quick_check(Test, Position, Condition, Setup, Cleanup, Note))).
 
 	% unit test idiom quick_check/2
 	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, NumberOfTests))]) :-

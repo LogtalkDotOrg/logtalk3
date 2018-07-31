@@ -137,6 +137,8 @@ predicates.
 and `tolerance_equal/4` to the `lgtunit` tool. These are type-checked variants
 of the same predicates found in the `number` library object.
 
+* IMPROVED: Simplified handling of `quick_test/3` test dialect by `lgtunit`.
+
 * IMPROVED: Simplified the implementation of the `lgtunit` predicate `=~=/2`
 and added more strict type-checking.
 
