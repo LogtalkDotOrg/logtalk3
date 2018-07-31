@@ -707,6 +707,9 @@ are you running.
 Known issues
 ------------
 
+Parameter variables (`_VariableName_`) cannot currently be used in the
+definition of test options (e.g. `condition/1).
+
 Deterministic unit tests are currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers do the lack of a required built-in
 support that cannot be sensibly defined in Prolog.

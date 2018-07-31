@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.22,
+		version is 6.23,
 		author is 'Paulo Moura',
-		date is 2018/07/30,
+		date is 2018/07/31,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -981,20 +981,22 @@
 
 	:- meta_predicate(run_test_condition(*, *, *, *, *, *)).
 
-	run_test_condition(Test, Goal, File, Position, Note, Output) :-
+	run_test_condition(Test, Condition, File, Position, Note, Output) :-
+		option_goal(Condition, Goal),
 		% expected either success or failure; error means user error 
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,Output), fail))
+		;	catch(Goal, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,Output), fail))
 		).
 
 	:- meta_predicate(run_test_setup(*, *, *, *, *, *)).
 
-	run_test_setup(Test, Goal, File, Position, Note, Output) :-
+	run_test_setup(Test, Setup, File, Position, Note, Output) :-
+		option_goal(Setup, Goal),
 		% expected success; failure or error means user error 
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, failed_test(Test,File,Position,step_error(setup,Error),Note,Output)) ->
+		;	catch(Goal, Error, failed_test(Test,File,Position,step_error(setup,Error),Note,Output)) ->
 			(	var(Error) ->
 				true
 			;	fail
@@ -1005,14 +1007,24 @@
 
 	:- meta_predicate(run_test_cleanup(*, *, *, *, *)).
 
-	run_test_cleanup(Test, Goal, File, Position, Output) :-
+	run_test_cleanup(Test, Cleanup, File, Position, Output) :-
+		option_goal(Cleanup, Goal),
 		% expected success; failure or error means user error 
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, failed_cleanup(Test,File,Position,error(Error),Output)) ->
+		;	catch(Goal, Error, failed_cleanup(Test,File,Position,error(Error),Output)) ->
 			true
 		;	failed_cleanup(Test, File, Position, failure, Output)
 		).
+
+	option_goal(Object::Message, Object::Message) :-
+		!.
+	option_goal(Object<<Goal, Object<<Goal) :-
+		!.
+	option_goal(':'(Module,Goal), ':'(Module,Goal)) :-
+		!.
+	option_goal(Goal, Sender<<Goal) :-
+		sender(Sender).
 
 	broken_step(Step, Error) :-
 		self(Object),
@@ -1341,12 +1353,9 @@
 		),
 		parse_test_options(Options, TestGoal, Test, Condition, Setup, Cleanup, Note).
 
-	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
+	compile_test_step_aux_predicate(Test, Step, Goal, Head) :-
 		test_name_to_atom_prefix(Test, Prefix),
 		atom_concat(Prefix, Step, Head),
-		logtalk_load_context(entity_identifier, Entity),
-		logtalk::execution_context(ExecutionContext, Entity, Entity, Entity, Entity, [], []),
-		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, ExecutionContext),
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	compile_deterministic_test_aux_predicate(Test, Goal, Head) :-
@@ -2338,12 +2347,3 @@
 		member_var(Var, Tail).
 
 :- end_object.
-
-
-% avoid polluting SWI-Prolog meta-predicate analysis with "lgtunit"
-% private meta-predicates
-:- if(current_logtalk_flag(prolog_dialect, swi)).
-	{:- meta_predicate('$lgtunit#0.run_test_condition#6'(*,0,*,*,*,*,*))}.
-	{:- meta_predicate('$lgtunit#0.run_test_setup#6'(*,0,*,*,*,*,*))}.
-	{:- meta_predicate('$lgtunit#0.run_test_cleanup#5'(*,0,*,*,*,*))}.
-:- endif.

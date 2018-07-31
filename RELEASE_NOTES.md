@@ -163,6 +163,10 @@ the semantics of the XSB atom-based module system.
 * FIXED: Bug in the `lgtunit` tool that prevented marking tests using the
 `quick_check/2-3` dialects as skipped.
 
+* FIXED: Generation of auxiliary predicates for test options by the `lgtunit`
+tool would result in unexpected failures when the predicates accessed entity
+parameters.
+
 Tests
 -----
 
