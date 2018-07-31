@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2018/07/23,
+		date is 2018/07/31,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -90,11 +90,11 @@
 
 	% get_seed/1 tests
 
-	quick_check(random_get_seed_1_01, _RandomObject_::get_seed(-ground)).
+	quick_check(random_get_seed_1_01, _RandomObject_::get_seed(-ground), [condition(not_backend_random_object)]).
 
 	% set_seed/1 tests
 
-	quick_check(random_set_seed_1_01, random_set_seed_1(-ground)).
+	quick_check(random_set_seed_1_01, random_set_seed_1(-ground), [condition(not_backend_random_object)]).
 
 	% maybe/0 tests
 
@@ -149,5 +149,8 @@
 	random_set_seed_1(Seed) :-
 		_RandomObject_::get_seed(Seed),
 		_RandomObject_::set_seed(Seed).
+
+	not_backend_random_object :-
+		_RandomObject_ \== backend_random.
 
 :- end_object.
