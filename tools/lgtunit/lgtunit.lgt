@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 6.23,
+		version is 6.24,
 		author is 'Paulo Moura',
-		date is 2018/07/31,
+		date is 2018/08/01,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.'
 	]).
 
@@ -1018,6 +1018,10 @@
 		).
 
 	option_goal(Object::Message, Object::Message) :-
+		!.
+	option_goal(::Message, ::Message) :-
+		!.
+	option_goal(^^Message, ^^Message) :-
 		!.
 	option_goal(Object<<Goal, Object<<Goal) :-
 		!.
