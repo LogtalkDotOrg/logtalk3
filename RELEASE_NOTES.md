@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.19.0 - July ??, 2018
-======================
+3.19.0 - August 1, 2018
+=======================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -115,9 +115,10 @@ non type-checked variants of the same predicates found in the `lgtunit` tool.
 * UPDATED: Several library objects to take advantage of the recently introduced
 error throwing built-in methods.
 
-* FIXED: Workaround for some backend Prolog compilers lack of float arithmetic
-standard compliance to ensure that statistics and number list predicates that
-compute floats don't return integers when the fractional part is zero.
+* FIXED: Workaround for some backend Prolog compilers (such as SWI-Prolog)
+lack of float arithmetic standard compliance to ensure that statistics and
+number list predicates that compute floats don't return integers when the
+fractional part is zero.
 
 Tools
 -----
@@ -151,10 +152,10 @@ error throwing built-in methods.
 * FIXED: Float type error in the `code_metrics` documentation metric when
 using some backend Prolog systems such as ECLiPSe.
 
-* FIXED: Workaround for some backend Prolog compilers lack of float arithmetic
-standard compliance to ensure that coupling metric entity scores return float
-values for instability and abstractness instead of integers when the fractional
-part is zero.
+* FIXED: Workaround for some backend Prolog compilers (such as SWI-Prolog)
+lack of float arithmetic standard compliance to ensure that coupling metric
+entity scores return float values for instability and abstractness instead
+of integers when the fractional part is zero.
 
 * FIXED: Workaround `lgtunit` portability issue when running on XSB due to
 the de facto standard `between/3` predicate being a library predicate and
