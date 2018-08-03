@@ -213,7 +213,7 @@ var LogtalkHighlightRules = function() {
          { token: 'constant.numeric.logtalk',
            regex: '\\b(\\d+\\.?\\d*((e|E)(\\+|-)?\\d+)?)\\b' },
          { token: 'variable.other.logtalk',
-           regex: '\\b([A-Z_][A-Za-z0-9_]*)\\b' } ] }
+           regex: '\\b([A-Z_][A-Za-z0-9_]*)\\b' } ] };
     
     this.normalizeRules();
 };
