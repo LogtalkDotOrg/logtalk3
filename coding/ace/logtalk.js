@@ -49,9 +49,9 @@ var Mode = function() {
 oop.inherits(Mode, TextMode);
 
 (function() {
-    this.lineCommentStart = "//";
+    this.lineCommentStart = "%";
     this.blockComment = {start: "/*", end: "*/"};
-    // Extra logic goes here.
+    this.$id = "ace/mode/logtalk";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;
