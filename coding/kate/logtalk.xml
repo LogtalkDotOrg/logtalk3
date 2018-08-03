@@ -196,6 +196,7 @@
 				<DetectChar char = "&quot;" attribute = "String" context = "string" />
 				<DetectChar char = "'" attribute = "String" context = "atom" />
 				<!-- Numbers -->
+				<RegExpr String = "0'\\." attribute = "Number" context = "#stay" />
 				<RegExpr String = "0'." attribute = "Number" context = "#stay" />
 				<RegExpr String = "0b[0-1]+" attribute = "Number" context = "#stay" />
 				<RegExpr String = "0o[0-7]+" attribute = "Number" context = "#stay" />
