@@ -30,7 +30,7 @@ PR['registerLangHandler'](
           // quoted atoms
           [PR['PR_LITERAL'], /^\'(?:[^\'\\\n\x0C\r]|\\[^&])+\'?/, null, "'"],
           // numbers
-          [PR['PR_LITERAL'], /^(?:0'[\\].|0'.|0b[0-1]+|0o[0-7]+|0x[\da-f]+|\d+(?:\.\d+)?(?:e[+\-]?\d+)?)/i, null, '0123456789']
+          [PR['PR_LITERAL'], /^(?:0'\\.|0'.|0b[0-1]+|0o[0-7]+|0x[\da-f]+|\d+(?:\.\d+)?(?:e[+\-]?\d+)?)/i, null, '0123456789']
         ],
         [
           // single-line comments begin with %
@@ -38,8 +38,8 @@ PR['registerLangHandler'](
           // block comments are delimited by /* and */
           [PR['PR_COMMENT'], /^\/\*[\s\S]*?\*\//],
           // directives
-          [PR['PR_KEYWORD'], /^\s*:-\s(c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))/],
-          [PR['PR_KEYWORD'], /^\s*:-\s(e(lse|nd(if|_(category|object|protocol)))|built_in|dynamic|synchronized|threaded)/],
+          [PR['PR_KEYWORD'], /^\s*:-\s(?:category|coinductive|public|protocol|protected|private|elif|encoding|ensure_loaded|export|if|include|initialization|info|imports|alias|dynamic|discontiguous|meta_non_terminal|meta_predicate|mode|module|multifile|reexport|set_logtalk_flag|set_prolog_flag|synchronized|object|op|uses|use_module)\b/],
+          [PR['PR_KEYWORD'], /^\s*:-\s(?:else|endif|end_category|end_object|end_protocol|built_in|dynamic|threaded)\./],
           // variables
           [PR['PR_TYPE'], /^[A-Z_][a-zA-Z0-9_]*/],
           // operators

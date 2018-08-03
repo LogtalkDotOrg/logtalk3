@@ -49,9 +49,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.42,
+		version is 1.43,
 		author is 'Paulo Moura',
-		date is 2018/08/02,
+		date is 2018/08/03,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -59,8 +59,6 @@ comment
 	:- threaded.
 	:- dynamic.
 	:- initialization(some_goal(X, Y)).
-	:- calls(some_other_protocol).
-	:- uses(another_object).
 
 	:- alias(set, [member/2 as set_member/2]).
 	:- alias(words, [singular//0 as peculiar//0]).
