@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (https://logtalk.org/); last revised on July 26, 2018
+		// Contributed by Paulo Moura (https://logtalk.org/); last revised on August 2, 2018
 
 		this.regexList = [
 		  // variables
@@ -17,7 +17,7 @@
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' },
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString, css: 'string' },
 			// numbers
-			{ regex: new RegExp("0\'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|[-+]?[0-9]+(\.[0-9]+)?([eE]([-+])?[0-9]+)?", 'gi'), css: 'value' },
+			{ regex: new RegExp("0\'\\\\.|0\'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|[-+]?[0-9]+(\.[0-9]+)?([eE]([-+])?[0-9]+)?", 'gi'), css: 'value' },
 			// entity creation and abolishing built-in predicates
 			{ regex: new RegExp("\\b(abolish|c(urrent|reate))_(object|protocol|category)(?=[(])", 'g'), css: 'keyword'},
 			// entity property built-in predicates

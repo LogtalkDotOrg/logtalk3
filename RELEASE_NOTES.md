@@ -24,7 +24,11 @@ RELEASE NOTES
 3.20.0 - September ??, 2018
 ===========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* ADDED: Support for the 0'\Char number notation to most text editors and
+syntax highlighters.
 
 
 3.19.0 - August 1, 2018

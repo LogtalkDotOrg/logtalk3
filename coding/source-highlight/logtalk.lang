@@ -76,7 +76,7 @@ preproc =	'\<(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?
 
 normal =	'\<[a-z][A-Za-z0-9_]*'
 
-number =	'0\'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE]([-+])?[0-9]+)?'
+number =	'0\'\\.|0\'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\.[0-9]+)?([eE]([-+])?[0-9]+)?'
 
 symbol =	"^",
 			"::", "^^", ":",

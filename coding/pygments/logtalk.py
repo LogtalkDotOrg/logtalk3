@@ -35,6 +35,7 @@ class LogtalkLexer(RegexLexer):
             (r'\n', Text),
             (r'\s+', Text),
             # Numbers
+            (r"0'\\.", Number),
             (r"0'.", Number),
             (r'0b[01]+', Number.Bin),
             (r'0o[0-7]+', Number.Oct),

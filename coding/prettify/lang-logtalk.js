@@ -30,7 +30,7 @@ PR['registerLangHandler'](
           // quoted atoms
           [PR['PR_LITERAL'], /^\'(?:[^\'\\\n\x0C\r]|\\[^&])+\'?/, null, "'"],
           // numbers
-          [PR['PR_LITERAL'], /^(?:0'.|0b[0-1]+|0o[0-7]+|0x[\da-f]+|\d+(?:\.\d+)?(?:e[+\-]?\d+)?)/i, null, '0123456789']
+          [PR['PR_LITERAL'], /^(?:0'[\\].|0'.|0b[0-1]+|0o[0-7]+|0x[\da-f]+|\d+(?:\.\d+)?(?:e[+\-]?\d+)?)/i, null, '0123456789']
         ],
         [
           // single-line comments begin with %

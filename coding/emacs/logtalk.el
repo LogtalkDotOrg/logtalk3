@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: July 26, 2018
-;; Version: 1.36
+;; Last modification date: August 3, 2018
+;; Version: 1.37
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.36"
+(defvar logtalk-mode-version "1.37"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -254,6 +254,7 @@
 		("\\<\\(0x[[:xdigit:]]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0o[0-7]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0b[0-1]+\\)\\>" 1 'logtalk-number-face)
+		("\\<\\(0['][\\].\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0['].\\)\\>" 1 'logtalk-number-face)
 		("\\<\\([0-9]+\\([.][0-9]+\\)?\\([eE][+-][0-9]+\\)?\\)\\>" 1 'logtalk-number-face)
 	))

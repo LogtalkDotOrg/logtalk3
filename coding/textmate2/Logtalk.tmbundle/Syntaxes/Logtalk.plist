@@ -453,7 +453,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(0'.|0''|0'")</string>
+			<string>\b(0'[\\]?.|0''|0'")</string>
 			<key>name</key>
 			<string>constant.numeric.logtalk</string>
 		</dict>

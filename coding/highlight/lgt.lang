@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2018.07.26
-# Version: 1.26
+#    Date: 2018.08.03
+# Version: 1.27
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -136,6 +136,7 @@ $KEYWORDS(kwd)=regex((/\\|\\/|>>|\\))
 $STRINGDELIMITERS=" '
 
 # numbers
+$KEYWORDS(kwc)=regex((0['][\\].), 1)
 $KEYWORDS(kwc)=regex((0['].), 1)
 $KEYWORDS(kwc)=regex((0b[0-1]+|0o[0-7]+|0x\p{XDigit}+), 1)
 $KEYWORDS(kwc)=regex((\d+(\.\d+)?([eE]([-+])?\d+)?), 1)

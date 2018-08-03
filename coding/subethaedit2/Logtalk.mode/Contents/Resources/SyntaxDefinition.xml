@@ -233,7 +233,7 @@
 				<regex>(?&lt;=[^\w\d]|^)(0b[0-1]+)</regex>
 				<regex>(?&lt;=[^\w\d]|^)(0o[0-7]+)</regex>
 				<regex>(?&lt;=[^\w\d]|^)(0x\h+)</regex>
-				<regex>(?&lt;=[^\w\d]|^)(0'.)</regex>
+				<regex>(?&lt;=[^\w\d]|^)(0'[\\]?.)</regex>
 				<regex>(?&lt;=[^\w\d]|^)([+-]?\d+(?:\.\d+)?(?:[eE](?:[+-])?\d+)?)</regex>
 			</keywords>
 
@@ -273,12 +273,12 @@
 			</keywords>
 
 			<state id="Strings" color="#881314" useforautocomplete="no">
-				<begin><regex>(?&lt;!0')"</regex></begin>
+				<begin><regex>(?&lt;!0'|0'\\)"</regex></begin>
 				<end><regex>"</regex></end>
 			</state>
 
 			<state id="Quoted Atoms" color="#881314" useforautocomplete="no">
-				<begin><regex>(?&lt;!0|0')'</regex></begin>
+				<begin><regex>(?&lt;!0|0'|0'\\)'</regex></begin>
 				<end><regex>'</regex></end>
 			</state>
 
@@ -288,7 +288,7 @@
 			</state>
 
 			<state id="Single Comment" color="#236E25" font-style="italic" useforautocomplete="no">
-			<begin><regex>(?&lt;!0')%</regex></begin>
+			<begin><regex>(?&lt;!0'|0'\\)%</regex></begin>
 			<end><regex>[\n\r]</regex></end>
 		</state>
 

@@ -316,7 +316,7 @@
 
 		<context id="number" style-ref="number">
 			<match extended="true">
-	        \b(0'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d+)?([eE]([-+])?\d+)?)
+	        \b(0'\\.|0'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d+)?([eE]([-+])?\d+)?)
 			</match>
 		</context>
 

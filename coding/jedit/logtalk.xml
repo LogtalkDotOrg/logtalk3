@@ -156,6 +156,7 @@
 		</SPAN>
 
 		<!-- Character code constants -->
+		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0'\\.</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0'.</SEQ_REGEXP>
 		<!-- Binary, octal, and hexadecimal numbers -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0b[0-1]+</SEQ_REGEXP>
