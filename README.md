@@ -120,6 +120,9 @@ A list of these scripts can be generated using the `apropos logtalk` command.
 [HTML versions](https://logtalk.org/man/) of the man pages are also available
 at the Logtalk website.
 
+Additional useful information is available in the official repository
+[wiki](https://github.com/LogtalkDotOrg/logtalk3/wiki) at GitHub.
+
 
 Registration
 ------------
