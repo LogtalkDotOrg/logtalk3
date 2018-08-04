@@ -178,7 +178,7 @@
 				<RegExpr String = "\bp(ublic|r(otected|ivate))(?=[(])" attribute = "Directive" context = "#pop" />
 				<!-- Other directives -->
 				<RegExpr String = "\be(n(coding|sure_loaded)|xport)(?=[(])" attribute = "Directive" context = "#pop" />
-			   	<RegExpr String = "\bin(clude|itialization|fo)(?=[(])" attribute = "Directive" context = "#pop" />
+				<RegExpr String = "\bin(clude|itialization|fo)(?=[(])" attribute = "Directive" context = "#pop" />
 				<RegExpr String = "\b(built_in|dynamic|synchronized|threaded)[.]" attribute = "Directive" context = "#pop" />
 				<RegExpr String = "\b(alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])" attribute = "Directive" context = "#pop" />
 				<RegExpr String = "\bop(?=[(])" attribute = "Directive" context = "#pop" />
