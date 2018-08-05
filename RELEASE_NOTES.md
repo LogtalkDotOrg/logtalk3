@@ -30,6 +30,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Support for the 0'\Char number notation to most text editors and
 syntax highlighters.
 
+* ADDED: Note on the Vis a multi-platform text editor support for Logtalk
+syntax highlighting.
+
 
 3.19.0 - August 1, 2018
 =======================
