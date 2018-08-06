@@ -18,41 +18,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, swi), \+ current_prolog_flag(double_quotes, codes))).
-	:- set_prolog_flag(double_quotes, codes).
-:- endif.
+:- object(lambdas).
 
+	:- info([
+		version is 0.1,
+		author is 'Paulo Moura',
+		date is 2018/08/06,
+		comment is 'Example using lambda expressions in grammar rules.',
+		source is 'Adapted from example posted by Kuniaki Mukai in the SWI-Prolog mailing list.'
+	]).
 
-:- initialization(
-	logtalk_load([
-		parsep,
-		enigma,
-		parsetree,
-		sentences,
-		tokenizer,
-		morse,
-		shell,
-		walker,
-		bom,
-		faa,
-		bypass,
-		dcgtest,
-		metas,
-		lambdas
-	])
-).
+	% silent variables with dual role in lambda expresions warnings
+	:- set_logtalk_flag(lambda_variables, silent).
 
-:- if(\+ current_logtalk_flag(prolog_dialect, lean)).
+	:- public(aa//1).
 
-	% Lean Prolog doesn't support the 0'<char> used in these examples
-	:- initialization(
-		logtalk_load([
-			calculator,
-			iban,
-			macaddr,
-			url,
-			xml
-		])
-	).
+	aa([]) --> [].
+	aa([X,X|Xs]) --> {X}/[[X|Y],Y]>>true, aa(Xs).
 
-:- endif.
+:- end_object.

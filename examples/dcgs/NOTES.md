@@ -57,6 +57,8 @@ categories:
 - `iban`  
 	IBAN validation; this example can generate very large integers during
 	validation and thus may not work with all backend Prolog compilers
+- `lambdas`  
+	example of using lambda expressions in grammar rules
 
 This folder includes an example, `tokenizer`, adapted with permission from 
 a Michael A. Covington example:

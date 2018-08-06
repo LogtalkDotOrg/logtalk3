@@ -33,6 +33,12 @@ the actual meta-call don't share variables with the clause head.
 * IMPROVED: Allow using lambda expressions in grammar rules without requiring
 a `call//1` wrapper.
 
+Examples
+--------
+
+* ADDED: Examples and tests of using lambda expressions in grammar rules to
+the `dcgs` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

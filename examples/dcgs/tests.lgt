@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/02/13,
+		date is 2018/08/06,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -173,5 +173,15 @@
 	test(dcgs_31) :-
 		client::successors([1,2,3], Successors),
 		Successors == [2,3,4].
+
+	% lambda expressions in grammar rules
+
+	test(dcgs_32) :-
+		logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]),
+		Duplicates == [a,a,b,b,c,c].	
+
+	test(dcgs_33) :-
+		logtalk << phrase(lambdas::aa([a,a,b,b,c,c]), Singletons),
+		Singletons == [a,b,c].	
 
 :- end_object.
