@@ -29,6 +29,10 @@ website:
 These support files are dual-licensed under the Apache License 2.0 and
 the GtkSourceView 2.x license.
 
+Recent versions of GtkSourceView may already contain support for Logtalk.
+However, this directory may contain updated support files. If that is the
+case, install the Logtalk support files as described next.
+
 To install, copy the file `logtalk.lang` to the following system-wide
 directory:
 
