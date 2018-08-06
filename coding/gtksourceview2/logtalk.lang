@@ -40,13 +40,13 @@
     <style id="number" _name="Number" map-to="def:decimal"/>
     <style id="built-in" _name="Keyword" map-to="def:keyword"/>
     <style id="variable" _name="Variable" map-to="def:identifier"/>
-        <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
+    <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
   </styles>
 
   <definitions>
 
     <define-regex id="escaped-character" extended="true">
-        \\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)
+      \\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)
     </define-regex>
 
     <context id="string" style-ref="string" end-at-line-end="true">
@@ -99,22 +99,22 @@
     </context>
 
     <context id="conditional-compilation-directives" style-ref="directive">
-       <prefix>^\s*:-\s</prefix>
+      <prefix>^\s*:-\s</prefix>
       <keyword>(e(lse|ndif))(?=[.])</keyword>
       <keyword>((el)?if)(?=[(])</keyword>
     </context>
 
     <context id="source-file-directives" style-ref="directive">
-       <prefix>^\s*:-\s</prefix>
+      <prefix>^\s*:-\s</prefix>
       <keyword>(en(coding|sure_loaded))(?=[(])</keyword>
       <keyword>(set_(logtalk|prolog)_flag)(?=[(])</keyword>
     </context>
 
     <context id="predicate-directives" style-ref="directive">
-       <prefix>^\s*:-\s</prefix>
+      <prefix>^\s*:-\s</prefix>
       <!-- Scope directives -->
       <keyword>(p(ublic|r(otected|ivate)))(?=[(])</keyword>
-       <!-- Multi-threading directives -->
+      <!-- Multi-threading directives -->
       <keyword>(synchronized)(?=[(])</keyword>
       <keyword>(synchronized)(?=[.])</keyword>
       <keyword>(threaded)(?=[.])</keyword>
@@ -316,13 +316,13 @@
 
     <context id="number" style-ref="number">
       <match extended="true">
-          \b(0'[\\].|0'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d+)?([eE]([-+])?\d+)?)
+        \b(0'[\\].|0'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d+)?([eE]([-+])?\d+)?)
       </match>
     </context>
 
     <context id="variable" style-ref="variable">
       <match extended="true">
-      \b[A-Z_][a-zA-Z0-9_]*
+        \b[A-Z_][a-zA-Z0-9_]*
       </match>
     </context>
 
