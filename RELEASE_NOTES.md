@@ -24,13 +24,18 @@ RELEASE NOTES
 3.20.0 - September ??, 2018
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Allow using lambda expressions in grammar rules.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
 * ADDED: Support for the 0'\Char number notation to most text editors and
 syntax highlighters.
 
-* ADDED: Note on the Vis a multi-platform text editor support for Logtalk
+* ADDED: Note on the Vis multi-platform text editor support for Logtalk
 syntax highlighting.
 
 

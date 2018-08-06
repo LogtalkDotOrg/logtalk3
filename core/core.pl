@@ -11363,7 +11363,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
 
-% lambda expressions support predicates
+% lambda expressions
 
 '$lgt_compile_body'(Parameters>>Lambda, _, _, Ctx) :-
 	'$lgt_check_lambda_expression'(Parameters>>Lambda, Ctx),
@@ -20517,6 +20517,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_body'(Var, S0, S, phrase(Var, S0, S), _) :-
 	var(Var),
+	!.
+
+'$lgt_dcg_body'(Parameters>>Lambda, S0, S, call(Parameters>>Lambda, S0, S), _) :-
+	!.
+
+'$lgt_dcg_body'(Free/Lambda, S0, S, call(Free/Lambda, S0, S), _) :-
 	!.
 
 '$lgt_dcg_body'(Obj::RGoal, S0, S, CGoal, _) :-
