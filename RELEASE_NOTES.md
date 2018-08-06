@@ -27,7 +27,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: Allow using lambda expressions in grammar rules.
+* IMPROVED: Avoid spurious missing `meta_predicate/1` directive warnings when
+the actual meta-call don't share variables with the clause head.
+
+* IMPROVED: Allow using lambda expressions in grammar rules without requiring
+a `call//1` wrapper.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
