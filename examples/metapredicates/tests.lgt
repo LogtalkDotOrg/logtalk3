@@ -18,6 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_prolog_flag(double_quotes, codes).	% for the "grammar" object tests
+
 
 % entities for testing meta-predicates calling meta-predicates and passing
 % closures corresponding to control constructs
@@ -366,5 +368,9 @@
 	test(metapredicates_37) :-
 		wrappers_client::s(L),
 		L == [2, 1, 3].
+
+	test(metapredicates_38) :-
+		grammar::codes("123", Codes),
+		Codes == [49, 50, 51].
 
 :- end_object.

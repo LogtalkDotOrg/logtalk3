@@ -18,16 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(meta_compiler_loader)),
-	set_logtalk_flag(hook, meta_compiler),
-	logtalk_load([
-		metapredicates(predicates),
-		metapredicates(closures),
-		metapredicates(metapredicates),
-		metapredicates(fibonacci),
-		metapredicates(company),
-		metapredicates(wrappers),
-		metapredicates(grammar)
-	])
-)).
+:- set_prolog_flag(double_quotes, codes).
+
+
+:- object(grammar).
+
+	:- public(codes/2).
+	codes(String, Codes) :-
+		meta::maplist([X,Y]>>phrase(code(X), [Y]), String, Codes).
+
+	code(X) --> [X].
+
+:- end_object.
