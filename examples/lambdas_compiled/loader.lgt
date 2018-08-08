@@ -23,6 +23,7 @@
 :- endif.
 
 :- initialization((
+	set_logtalk_flag(optimize, on),
 	logtalk_load(library(meta_compiler_loader)),
 	set_logtalk_flag(hook, meta_compiler),
 	logtalk_load(lambdas(lambdas))

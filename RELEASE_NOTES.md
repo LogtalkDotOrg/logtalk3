@@ -41,10 +41,16 @@ Library
 -------
 
 * FIXED: Term-expansion cleanup actions for the `edcgs` and `meta_compiler`
-library objects.
+library objects. Due to the compiler being a multi-pass compiler, cleanup
+actions should be performed when an open entity directive is found instead
+of when expanding the ending entity directive.
 
 Examples
 --------
+
+* CHANGED: Compile the `lambdas` and `lambdas_compiled` examples with the
+`optimize` flag turned so that the benchmarks best reflect the overheads
+of meta-predicates and lambda expressions.
 
 * ADDED: Examples and tests of using lambda expressions in grammar rules to
 the `dcgs` example.
