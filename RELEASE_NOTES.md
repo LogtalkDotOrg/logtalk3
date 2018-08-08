@@ -33,6 +33,12 @@ the actual meta-call don't share variables with the clause head.
 * IMPROVED: Allow using lambda expressions in grammar rules without requiring
 a `call//1` wrapper.
 
+Library
+-------
+
+* FIXED: Term-expansion cleanup actions for the `edcgs` and `meta_compiler`
+library objects.
+
 Examples
 --------
 

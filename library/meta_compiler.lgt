@@ -22,8 +22,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.8,
-		date is 2015/12/02,
+		version is 0.9,
+		date is 2018/08/08,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		see_also is [meta]
@@ -35,6 +35,8 @@
 	:- private(generated_predicate/1).
 	:- dynamic(generated_predicate/1).
 
+	term_expansion(begin_of_file, begin_of_file) :-
+		retractall(generated_predicate(_)).
 	term_expansion((:- Directive), [(:- Directive)]) :-
 		nonvar(Directive),
 		functor(Directive, Functor, Arity),
@@ -44,14 +46,7 @@
 		;	Functor == category, Arity =< 3
 		),
 		retractall(generated_predicate(_)).
-
-	term_expansion((:- end_object), [(:- end_object)]) :-
-		retractall(generated_predicate(_)).
-
-	term_expansion((:- end_protocol), [(:- end_protocol)]) :-
-		retractall(generated_predicate(_)).
-
-	term_expansion((:- end_category), [(:- end_category)]) :-
+	term_expansion(end_of_file, end_of_file) :-
 		retractall(generated_predicate(_)).
 
 	goal_expansion(meta::include(Closure, List, Included), ExpandedGoal) :-
@@ -195,7 +190,8 @@
 				],
 			replace_functor([map_(List, Args)| Clauses0], map_, AuxFunctor, [ExpandedGoal| Clauses]),
 			logtalk::compile_aux_clauses(Clauses),
-			assertz(generated_predicate(AuxFunctor/2))
+			assertz(generated_predicate(AuxFunctor/2)),
+			write(user_error, assertz(generated_predicate(AuxFunctor/2))), nl(user_error)
 		).
 
 	goal_expansion(meta::succeeds(Closure, List), ExpandedGoal) :-
@@ -217,7 +213,8 @@
 				],
 			replace_functor([map_(List1, Args, List2)| Clauses0], map_, AuxFunctor, [ExpandedGoal| Clauses]),
 			logtalk::compile_aux_clauses(Clauses),
-			assertz(generated_predicate(AuxFunctor/3))
+			assertz(generated_predicate(AuxFunctor/3)),
+			write(user_error, assertz(generated_predicate(AuxFunctor/3))), nl(user_error)
 		).
 
 	goal_expansion(meta::maplist(Closure, List1, List2), ExpandedGoal) :-

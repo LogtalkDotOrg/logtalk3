@@ -27,9 +27,9 @@ SOFTWARE.
 	implements(expanding)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Peter Van Roy; adapted to Logtalk by Paulo Moura.',
-		date is 2018/05/30,
+		date is 2018/08/08,
 		comment is 'Multiple hidden parameters: an extension to Prolog''s DCG notation.',
 		copyright is 'Copyright (C) 1992 Peter Van Roy',
 		license is 'MIT'
@@ -71,9 +71,14 @@ SOFTWARE.
 
 	term_expansion(begin_of_file, [begin_of_file, (:- op(1200, xfx, '-->>'))]) :-
 		cleanup.
-	term_expansion((:- end_object), (:- end_object)) :-
-		cleanup.
-	term_expansion((:- end_category), (:- end_category)) :-
+	term_expansion((:- Directive), [(:- Directive)]) :-
+		nonvar(Directive),
+		functor(Directive, Functor, Arity),
+		Arity >= 1,
+		(	Functor == object, Arity =< 5 ->
+			true
+		;	Functor == category, Arity =< 3
+		),
 		cleanup.
 	term_expansion(end_of_file, end_of_file) :-
 		cleanup.
