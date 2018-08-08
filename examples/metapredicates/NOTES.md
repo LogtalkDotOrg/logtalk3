@@ -47,3 +47,6 @@ This example defines the following objects:
 - `predicates`  
 	object defining some predicates for testing meta-predicates defined 
 	in the Logtalk library
+
+- `grammar`  
+	object illustrating using `phrase/2` as a meta-predicate meta-argument
