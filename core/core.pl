@@ -3375,7 +3375,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 20, 0, b02)).
+'$lgt_version_data'(logtalk(3, 20, 0, b03)).
 
 
 
@@ -22005,11 +22005,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% predicates may be marked as built-in predicates
 		fail
 	;	'$lgt_built_in_predicate'(TGoal) ->
-		% built-in predicates may result from goal-expansion during compilation
-		'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, _),
+		% built-in predicates may result from goal-expansion during
+		% compilation or from inlining of user predicate definitions
+		'$lgt_built_in_goal_to_closure'(N, TGoal, TFunctor, TArgs),	
 		TClosure0 =.. [TFunctor| TArgs],
 		TClosure = {TClosure0}
-	;	'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) ->
+	;	'$lgt_user_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) ->
 		TClosure = '$lgt_closure'(TFunctor, TArgs, ExCtx)
 	;	% runtime resolved meta-call
 		fail
@@ -22020,7 +22021,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx).
 
 
-'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) :-
+'$lgt_built_in_goal_to_closure'(N, TGoal, TFunctor, TArgs) :-
+	functor(TGoal, TFunctor, TArity),
+	TGoal =.. [TFunctor| TAllArgs],
+	% subtract the number of extra arguments
+	Arity is TArity - N,
+	TArity >= 0,
+	% unify the compiled closure arguments from the compiled goal arguments
+	'$lgt_length'(TArgs, 0, Arity),
+	'$lgt_append'(TArgs, _, TAllArgs),
+	!.
+
+
+'$lgt_user_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) :-
 	functor(TGoal, TFunctor, TArity),
 	TGoal =.. [TFunctor| TAllArgs],
 	% subtract the number of extra arguments and the execution context argument

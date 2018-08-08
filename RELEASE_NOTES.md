@@ -33,6 +33,10 @@ the actual meta-call don't share variables with the clause head.
 * IMPROVED: Allow using lambda expressions in grammar rules without requiring
 a `call//1` wrapper.
 
+* FIXED: Optimization bug in the compilation of a closure meta-argument when
+the resulting goal is a call to a Prolog built-in predicate due to inlining of
+a user predicate definition.
+
 Library
 -------
 
