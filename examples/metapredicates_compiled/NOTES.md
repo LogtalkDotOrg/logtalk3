@@ -19,4 +19,6 @@ ________________________________________________________________________
 
 This is a pseudo-example, based on the `metapredicates` example,
 that is only used for testing library support for compilation of
-calls to meta-predicates.
+calls to meta-predicates and lambda expressions that removes the
+implied overhead making their performance practical and equal or
+close to the first-order alternatives.
