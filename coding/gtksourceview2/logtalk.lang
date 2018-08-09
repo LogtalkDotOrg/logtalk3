@@ -20,7 +20,7 @@
  Boston, MA 02111-1307, USA.
 
 -->
-<language id="logtalk" _name="Logtalk" version="2.0" _section="Sources">
+<language id="logtalk" name="Logtalk" version="2.0" _section="Source">
 
   <metadata>
     <property name="mimetypes">text/x-logtalk</property>
@@ -31,16 +31,16 @@
   </metadata>
 
   <styles>
-    <style id="comment" _name="Comment" map-to="def:comment"/>
-    <style id="operator" _name="Operator" map-to="def:operator"/>
-    <style id="error" _name="Error" map-to="def:error"/>
-    <style id="string" _name="String" map-to="def:string"/>
-    <style id="entity" _name="Data type" map-to="def:type"/>
-    <style id="directive" _name="Preprocessor directive" map-to="def:preprocessor"/>
-    <style id="number" _name="Number" map-to="def:decimal"/>
-    <style id="built-in" _name="Keyword" map-to="def:keyword"/>
-    <style id="variable" _name="Variable" map-to="def:identifier"/>
-    <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
+    <style id="comment" name="Comment" map-to="def:comment"/>
+    <style id="operator" name="Operator" map-to="def:operator"/>
+    <style id="error" name="Error" map-to="def:error"/>
+    <style id="string" name="String" map-to="def:string"/>
+    <style id="entity" name="Data type" map-to="def:type"/>
+    <style id="directive" name="Preprocessor directive" map-to="def:preprocessor"/>
+    <style id="number" name="Number" map-to="def:decimal"/>
+    <style id="built-in" name="Keyword" map-to="def:keyword"/>
+    <style id="variable" name="Variable" map-to="def:identifier"/>
+    <style id="escaped-character" name="Escaped Character" map-to="def:special-char"/>
   </styles>
 
   <definitions>
