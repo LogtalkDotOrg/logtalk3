@@ -22,8 +22,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.9,
-		date is 2018/08/08,
+		version is 0.11,
+		date is 2018/08/09,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		see_also is [meta]
@@ -190,8 +190,7 @@
 				],
 			replace_functor([map_(List, Args)| Clauses0], map_, AuxFunctor, [ExpandedGoal| Clauses]),
 			logtalk::compile_aux_clauses(Clauses),
-			assertz(generated_predicate(AuxFunctor/2)),
-			write(user_error, assertz(generated_predicate(AuxFunctor/2))), nl(user_error)
+			assertz(generated_predicate(AuxFunctor/2))
 		).
 
 	goal_expansion(meta::succeeds(Closure, List), ExpandedGoal) :-
@@ -213,8 +212,7 @@
 				],
 			replace_functor([map_(List1, Args, List2)| Clauses0], map_, AuxFunctor, [ExpandedGoal| Clauses]),
 			logtalk::compile_aux_clauses(Clauses),
-			assertz(generated_predicate(AuxFunctor/3)),
-			write(user_error, assertz(generated_predicate(AuxFunctor/3))), nl(user_error)
+			assertz(generated_predicate(AuxFunctor/3))
 		).
 
 	goal_expansion(meta::maplist(Closure, List1, List2), ExpandedGoal) :-
