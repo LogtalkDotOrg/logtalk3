@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on July 4, 2018
+%  Last updated on August 14, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -215,6 +215,7 @@ logtalk_library_path(shapes_ph, examples('shapes/ph/')).
 logtalk_library_path(sicstus, examples('sicstus/')).
 logtalk_library_path(sorting, threads('sorting/')).
 logtalk_library_path(sums, engines('sums/')).
+logtalk_library_path(super_calls, examples('super_calls/')).
 logtalk_library_path(symbiosis, examples('symbiosis/')).
 logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).

@@ -384,6 +384,10 @@ Follows a short description of each included example (in alphabetical order):
 - `sicstus`  
 	examples adapted from SICStus Objects documentation
 
+- `super_calls`  
+	simple example illustrating that "super" calls preserve the value
+	of "self"
+
 - `symbiosis`
 	examples of using Prolog non-standard built-in meta-predicates
 	and module meta-predicates that take closures as arguments

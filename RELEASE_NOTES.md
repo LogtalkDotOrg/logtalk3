@@ -60,6 +60,9 @@ of meta-predicates and lambda expressions.
 * ADDED: Examples and tests of using lambda expressions in grammar rules to
 the `dcgs` example.
 
+* ADDED: Simple example, `super_calls`, illustrating that "super" calls
+preserve the value of "self".
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
