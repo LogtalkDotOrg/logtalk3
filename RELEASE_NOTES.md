@@ -37,6 +37,11 @@ a `call//1` wrapper.
 the resulting goal is a call to a Prolog built-in predicate due to inlining of
 a user predicate definition.
 
+Documentation
+-------------
+
+* IMPROVED: Reference manual description of the `^^/1` control construct.
+
 Library
 -------
 
