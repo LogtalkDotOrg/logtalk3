@@ -91,13 +91,13 @@ Follows a short description of each included example (in alphabetical order):
 	calls in plain Prolog and explicitly-qualified Prolog module calls
 	(when applicable)
 
-- `blocks`  
-	simpler version of the `bricks` example; illustrates how to use events
-	to avoid breaking object encapsulation when handling object relations
-
 - `birds`  
 	bird identification expert system
 	(example adapted from the "Adventure in Prolog" Amzi! book)
+
+- `blocks`  
+	simpler version of the `bricks` example; illustrates how to use events
+	to avoid breaking object encapsulation when handling object relations
 
 - `bottles`  
 	99 bottles of beer on the wall! Sing along!
@@ -152,15 +152,18 @@ Follows a short description of each included example (in alphabetical order):
 	example of using some of the built-in database handling methods
 	in order to implement dynamic object state
 
-- `engines`  
-	examples of using threaded engines to implement fluents, lazy
-	meta-predicates, interactors, and simple agents (requires Logtalk
-	to be run with SWI-Prolog)
+- `edcgs`  
+	several examples of Extended Definite Clause Grammars (EDCGs)
 
 - `encodings`  
 	very simple example of using the experimental `encoding/1`
 	directive (requires Logtalk to be run with YAP, SWI-Prolog,
 	CxProlog, JIProlog, SICStus Prolog, or Lean Prolog)
+
+- `engines`  
+	examples of using threaded engines to implement fluents, lazy
+	meta-predicates, interactors, and simple agents (requires Logtalk
+	to be run with SWI-Prolog)
 
 - `errors`  
 	example showing the Logtalk compiler warning and error reporting
@@ -248,16 +251,16 @@ Follows a short description of each included example (in alphabetical order):
 - `metaclasses`
 	example of using classes and metaclasses
 
+- `metainterpreters`  
+	some examples of simple meta-interpreters defined as categories
+	that can be imported by "database" objects
+
 - `metapredicates`  
 	example of using meta-predicates in Logtalk objects
 
 - `metapredicates_compiled`  
 	pseudo-example for testing compilation of calls to library
 	meta-predicates
-
-- `metainterpreters`  
-	some examples of simple meta-interpreters defined as categories
-	that can be imported by "database" objects
 
 - `mi`  
 	simple multi-inheritance examples
@@ -297,14 +300,6 @@ Follows a short description of each included example (in alphabetical order):
 	from data processing, which decides how to handle those values
 	and their absence
 
-- `patches`  
-	example of using complementing categories to patch broken
-	object code
-
-- `patching`  
-	another example of using complementing categories to patch
-	broken object code
-
 - `parametric`  
 	simple examples of parametric objects
 
@@ -314,6 +309,14 @@ Follows a short description of each included example (in alphabetical order):
 
 - `parvars`  
 	variant of the `parametric` example using parameter variables
+
+- `patches`  
+	example of using complementing categories to patch broken
+	object code
+
+- `patching`  
+	another example of using complementing categories to patch
+	broken object code
 
 - `people`  
 	simple example of defining object constructors
@@ -412,9 +415,9 @@ Follows a short description of each included example (in alphabetical order):
 	example on how to implement property sharing and value sharing
 	with prototypes
 
-- `xpce`  
-	SWI-Prolog only example of using XPCE from Logtalk
-
 - `wrappers`  
 	example of using the `begin_of_file` term generated when compiling
 	a source file to define object wrappers for plain Prolog code
+
+- `xpce`  
+	SWI-Prolog only example of using XPCE from Logtalk
