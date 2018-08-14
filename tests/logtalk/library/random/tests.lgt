@@ -22,16 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2018/07/31,
+		date is 2018/08/14,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
 
 	cover(random).
-	cover(backend_random).
 	cover(fast_random).
+	cover(backend_random).
 
 	:- uses(list, [length/2, min/2, max/2]).
 	:- uses(integer, [between/3]).
@@ -114,6 +114,20 @@
 
 	succeeds(random_maybe_2_01) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe(5,10)), List),
+		% 2% margin for checking for an even distribution
+		length(List, Length), 4800 =< Length, Length =< 5200.
+
+	% maybe_call/1 tests
+
+	succeeds(random_maybe_call_1_01) :-
+		findall(1, (between(1,10000,_), _RandomObject_::maybe_call(true)), List),
+		% 2% margin for checking for an even distribution
+		length(List, Length), 4800 =< Length, Length =< 5200.
+
+	% maybe_call/2 tests
+
+	succeeds(random_maybe_call_2_01) :-
+		findall(1, (between(1,10000,_), _RandomObject_::maybe_call(0.5,true)), List),
 		% 2% margin for checking for an even distribution
 		length(List, Length), 4800 =< Length, Length =< 5200.
 

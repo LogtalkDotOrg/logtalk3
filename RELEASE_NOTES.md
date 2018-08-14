@@ -45,6 +45,8 @@ Documentation
 Library
 -------
 
+* ADDED: Predicates `maybe_call/1-2` to the `random` library.
+
 * FIXED: Term-expansion cleanup actions for the `edcgs` and `meta_compiler`
 library objects. Due to the compiler being a multi-pass compiler, cleanup
 actions should be performed when an open entity directive is found instead

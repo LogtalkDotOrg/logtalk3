@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2018/07/20,
+		date is 2018/08/14,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.'
@@ -286,5 +286,19 @@
 		random(Float),
 		Random is truncate(Float * N),
 		Random < K.
+
+	:- meta_predicate(maybe_call(0)).
+	maybe_call(Goal) :-
+		random(Random),
+		Random < 0.5,
+		once(Goal).
+
+	:- meta_predicate(maybe_call(*, 0)).
+	maybe_call(Probability, Goal) :-
+		float(Probability),
+		0.0 =< Probability, Probability =< 1.0,
+		random(Random),
+		Random < Probability,
+		once(Goal).
 
 :- end_object.

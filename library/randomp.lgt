@@ -21,9 +21,9 @@
 :- protocol(randomp).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2018/07/20,
+		date is 2018/08/14,
 		comment is 'Random number generator protocol.'
 	]).
 
@@ -132,6 +132,22 @@
 	:- info(maybe/2, [
 		comment is 'Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.',
 		argnames is ['K', 'N']
+	]).
+
+	:- public(maybe_call/1).
+	:- meta_predicate(maybe_call(0)).
+	:- mode(maybe_call(+callable), zero_or_one).
+	:- info(maybe_call/1, [
+		comment is 'Calls a goal or fails without calling it with equal probability. When the goal is called, it determines if this predicate succeeds once or fails.',
+		argnames is ['Goal']
+	]).
+
+	:- public(maybe_call/2).
+	:- meta_predicate(maybe_call(*, 0)).
+	:- mode(maybe_call(+probability, +callable), zero_or_one).
+	:- info(maybe_call/2, [
+		comment is 'Calls a goal or fails without calling it with probability Probability. When the goal is called, it determines if this predicate succeeds once or fails.',
+		argnames is ['Probability', 'Goal']
 	]).
 
 :- end_protocol.

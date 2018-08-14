@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2018/07/20,
+		date is 2018/08/14,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.',
@@ -267,5 +267,19 @@
 		random(Float),
 		Random is truncate(Float * N),
 		Random < K.
+
+	:- meta_predicate(maybe_call(0)).
+	maybe_call(Goal) :-
+		random(Random),
+		Random < 0.5,
+		once(Goal).
+
+	:- meta_predicate(maybe_call(*, 0)).
+	maybe_call(Probability, Goal) :-
+		float(Probability),
+		0.0 =< Probability, Probability =< 1.0,
+		random(Random),
+		Random < Probability,
+		once(Goal).
 
 :- end_object.
