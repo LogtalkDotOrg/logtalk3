@@ -20066,6 +20066,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_is_list'(Options).
 
 '$lgt_valid_flag_value'(version_data, Version) :-
+	compound(Version),
 	functor(Version, logtalk, 4).
 
 '$lgt_valid_flag_value'(settings_file, allow) :- !.
