@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2018/08/06,
+		date is 2018/08/16,
 		comment is 'Example using lambda expressions in grammar rules.',
 		source is 'Adapted from example posted by Kuniaki Mukai in the SWI-Prolog mailing list.'
 	]).
@@ -35,5 +35,14 @@
 
 	aa([]) --> [].
 	aa([X,X|Xs]) --> {X}/[[X|Y],Y]>>true, aa(Xs).
+
+	% note that the definition of the aa//1 non-terminal is just to
+	% *exemplify* the use of lambda expressions in grammar rules as
+	% the same functionality could be simply implemented as follows:
+
+	:- public(bb//1).
+
+	bb([]) --> [].
+	bb([X,X|Xs]) --> [X], bb(Xs).
 
 :- end_object.

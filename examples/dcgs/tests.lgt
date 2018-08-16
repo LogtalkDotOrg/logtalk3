@@ -178,10 +178,18 @@
 
 	test(dcgs_32) :-
 		logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]),
-		Duplicates == [a,a,b,b,c,c].	
+		Duplicates == [a,a,b,b,c,c].
 
 	test(dcgs_33) :-
 		logtalk << phrase(lambdas::aa([a,a,b,b,c,c]), Singletons),
-		Singletons == [a,b,c].	
+		Singletons == [a,b,c].
+
+	test(dcgs_34) :-
+		logtalk << phrase(lambdas::bb(Duplicates), [a,b,c]),
+		Duplicates == [a,a,b,b,c,c].
+
+	test(dcgs_35) :-
+		logtalk << phrase(lambdas::bb([a,a,b,b,c,c]), Singletons),
+		Singletons == [a,b,c].
 
 :- end_object.
