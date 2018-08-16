@@ -3375,7 +3375,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 20, 0, b03)).
+'$lgt_version_data'(logtalk(3, 20, 0, b04)).
 
 
 
@@ -20523,26 +20523,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(Var),
 	!.
 
-'$lgt_dcg_body'(Free/Parameters>>Lambda, S0, S, Goal, Ctx) :-
+'$lgt_dcg_body'(Free/Parameters>>Lambda, S0, S, call(Free/Parameters>>Lambda, S0, S), Ctx) :-
 	!,
 	'$lgt_check_lambda_expression'(Free/Parameters>>Lambda, Ctx),
-	(	Parameters = [S0, S] ->
-		Goal = Lambda
-	;	throw(representation_error(lambda_parameters))
-	).
-
-'$lgt_dcg_body'(Parameters>>Lambda, S0, S, Lambda, Ctx) :-
-	!,
-	'$lgt_check_lambda_expression'(Parameters>>Lambda, Ctx),
-	(	Parameters = [S0, S] ->
+	(	\+ Parameters \= [_, _] ->
 		true
 	;	throw(representation_error(lambda_parameters))
 	).
 
-'$lgt_dcg_body'(Free/Lambda, S0, S, Goal, Ctx) :-
+'$lgt_dcg_body'(Parameters>>Lambda, S0, S, call(Parameters>>Lambda, S0, S), Ctx) :-
 	!,
-	'$lgt_check_lambda_expression'(Free/Lambda, Ctx),
-	'$lgt_dcg_body'(Lambda, S0, S, Goal, Ctx).
+	'$lgt_check_lambda_expression'(Parameters>>Lambda, Ctx),
+	(	\+ Parameters \= [_, _] ->
+		true
+	;	throw(representation_error(lambda_parameters))
+	).
+
+'$lgt_dcg_body'(Free/Lambda, S0, S, call(Free/Lambda, S0, S), Ctx) :-
+	!,
+	'$lgt_check_lambda_expression'(Free/Lambda, Ctx).
 
 '$lgt_dcg_body'(Obj::RGoal, S0, S, CGoal, _) :-
 	!,
