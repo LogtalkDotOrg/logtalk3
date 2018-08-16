@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.9,
+		version is 1.11,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2018/08/06,
+		date is 2018/08/16,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -133,28 +133,28 @@
 	% non-terminal and lambda expressions:
 
 	test(dcgs_22) :-
-		logtalk << phrase(call([[], []]>>true), [], []).
+		logtalk << phrase([[], []]>>true, [], []).
 
 	test(dcgs_23) :-
-		logtalk << phrase(call([[], []]>>true), Input, Rest),
+		logtalk << phrase([[], []]>>true, Input, Rest),
 		Input == [], Rest == [].
 
 	test(dcgs_24) :-
-		logtalk << phrase(call([Input, Rest]>>(set::subtract(Input, Rest, [1]))), [1,2,3], [2,3]).
+		logtalk << phrase([Input, Rest]>>(set::subtract(Input, Rest, [1])), [1,2,3], [2,3]).
 
 	% three nasty examples of getting a grammar rule difference list arguments
 	% as they require using variables as both lambda free and lambda parameters
 
 	test(dcgs_25) :-
-		logtalk << phrase(call({Input,Rest}/[Input,Rest]>>true), [1,2,3], [2,3]),
+		logtalk << phrase({Input,Rest}/[Input,Rest]>>true, [1,2,3], [2,3]),
 		Input == [1,2,3], Rest == [2,3].
 
 	test(dcgs_26) :-
-		logtalk << phrase(call({Rest}/[_,Rest]>>true), [1,2,3], [2,3]),
+		logtalk << phrase({Rest}/[_,Rest]>>true, [1,2,3], [2,3]),
 		Rest == [2,3].
 
 	test(dcgs_27) :-
-		logtalk << phrase(call({Element}/[[Element|_],_]>>true), [1,2,3], [2,3]),
+		logtalk << phrase({Element}/[[Element|_],_]>>true, [1,2,3], [2,3]),
 		Element == 1.
 
 	% cuts in the first argument of phrase/2-3 calls must be local and not extend outside:
