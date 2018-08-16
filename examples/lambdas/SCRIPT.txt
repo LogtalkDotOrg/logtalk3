@@ -347,10 +347,10 @@ yes
 % SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
 
 ?- lambda_benchmarks::bench1.
-Using map/2 with a closure for testing less(0, X) with X in [1..100000]:
-% 1,500,027 inferences, 0.430 CPU in 0.435 seconds (99% CPU, 3488435 Lips)
-Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:
-% 2,500,002 inferences, 0.870 CPU in 0.874 seconds (99% CPU, 2873566 Lips)
+Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
+% 600,004 inferences, 0.091 CPU in 0.095 seconds (95% CPU, 6618178 Lips)
+Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
+% 2,300,030 inferences, 0.479 CPU in 0.481 seconds (100% CPU, 4801322 Lips)
 true.
 
 % the second benchmarks is based on code posted by Jan Wielemaker in
@@ -358,9 +358,9 @@ true.
 
 ?- lambda_benchmarks::bench2.
 Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:
-% 100,000 inferences, 0.020 CPU in 0.022 seconds (91% CPU, 5000000 Lips)
+% 100,002 inferences, 0.015 CPU in 0.016 seconds (93% CPU, 6702547 Lips)
 Adding 1 to every integer in the list [1..100000] using map/3 with the integer::plus/3 predicate:
-% 1,500,045 inferences, 0.390 CPU in 0.395 seconds (99% CPU, 3846269 Lips)
+% 700,004 inferences, 0.133 CPU in 0.134 seconds (99% CPU, 5257456 Lips)
 Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:
-% 2,100,002 inferences, 0.750 CPU in 0.754 seconds (99% CPU, 2800003 Lips)
+% 1,800,030 inferences, 0.439 CPU in 0.442 seconds (99% CPU, 4100651 Lips)
 true.

@@ -27,17 +27,17 @@ ________________________________________________________________________
 % SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
 
 ?- lambda_benchmarks::bench1.
-Using map/2 with a closure for testing less(0, X) with X in [1..100000]:
-% 200,002 inferences, 0.030 CPU in 0.024 seconds (123% CPU, 6666733 Lips)
-Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:
-% 300,002 inferences, 0.010 CPU in 0.017 seconds (60% CPU, 30000200 Lips)
+Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
+% 200,003 inferences, 0.015 CPU in 0.018 seconds (83% CPU, 13027814 Lips)
+Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
+% 300,002 inferences, 0.010 CPU in 0.010 seconds (97% CPU, 31059323 Lips)
 true.
 
 ?- lambda_benchmarks::bench2.
 Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:
-% 100,002 inferences, 0.020 CPU in 0.020 seconds (101% CPU, 5000100 Lips)
+% 100,002 inferences, 0.014 CPU in 0.015 seconds (93% CPU, 6909556 Lips)
 Adding 1 to every integer in the list [1..100000] using map/3 with the integer::plus/3 predicate:
-% 300,003 inferences, 0.100 CPU in 0.102 seconds (98% CPU, 3000030 Lips)
+% 200,004 inferences, 0.047 CPU in 0.047 seconds (98% CPU, 4296911 Lips)
 Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:
-% 200,002 inferences, 0.020 CPU in 0.025 seconds (80% CPU, 10000100 Lips)
+% 200,002 inferences, 0.019 CPU in 0.019 seconds (98% CPU, 10666204 Lips)
 true.
