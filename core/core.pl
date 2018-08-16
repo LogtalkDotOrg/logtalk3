@@ -18640,6 +18640,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_entity_to_prefix'(@entity_identifier, -atom)
 %
 % converts an entity identifier into an entity prefix (used in the compiled code)
+% note that objects, categories, and protocols share the same namespace
 
 '$lgt_entity_to_prefix'(Entity, Prefix) :-
 	(	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
@@ -18656,6 +18657,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_prefix_to_entity'(+atom, -entity_identifier)
 %
 % reverses the entity prefix used in the compiled code
+% note that objects, categories, and protocols share the same namespace
 
 '$lgt_prefix_to_entity'(Prefix, Entity) :-
 	(	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
@@ -19571,6 +19573,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % each lambda goal variable should be either a lambda free variable or a lambda parameter
 
 '$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, _) :-
+	% take into account currying to avoid false positives
 	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
