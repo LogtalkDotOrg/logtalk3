@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkBasicTermImpl extends ASTWrapperPsiElement implements LogtalkBasicTerm {
 
-  public LogtalkBasicTermImpl(ASTNode node) {
+  public LogtalkBasicTermImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -54,6 +54,12 @@ public class LogtalkBasicTermImpl extends ASTWrapperPsiElement implements Logtal
   @Nullable
   public LogtalkMapReference getMapReference() {
     return findChildByClass(LogtalkMapReference.class);
+  }
+
+  @Override
+  @Nullable
+  public LogtalkMapTerm getMapTerm() {
+    return findChildByClass(LogtalkMapTerm.class);
   }
 
   @Override

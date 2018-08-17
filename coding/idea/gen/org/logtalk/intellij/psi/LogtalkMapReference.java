@@ -11,7 +11,7 @@ public interface LogtalkMapReference extends PsiElement {
   LogtalkAtom getAtom();
 
   @Nullable
-  LogtalkBracedBlock getBracedBlock();
+  LogtalkMapTerm getMapTerm();
 
   @NotNull
   List<LogtalkVariable> getVariableList();

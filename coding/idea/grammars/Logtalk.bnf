@@ -17,46 +17,45 @@ logtalkFile ::= item_*
 
 private item_ ::= (sentence|COMMENT|CRLF)
 
-sentence ::= (operation|compound|atom) DOT
+sentence ::= term DOT
 
 term ::= (operation|basic_term) //basic_term instead of term to avoid left recursion
 
-basic_term ::= (parenthesized_block|braced_block|list|map_reference|number|variable|STRING|compound|atom)
+basic_term ::= (number|STRING|map_reference|map_term|variable|compound|atom|parenthesized_block|braced_block|list)
 
-operator ::= (UNQUOTED_ATOM|SYMBOLIC_ATOM)
+// operator ::= (UNQUOTED_ATOM|SYMBOLIC_ATOM)
 
-operation ::= (native_binary_operation|native_left_operation)
+// operation ::= (native_binary_operation|native_left_operation)
 
-//operation ::= basic_term{2}
+// operation ::= basic_term{2}
 
 /*operation ::= (native_binary_operation|native_left_operation|
                 custom_binary_operation|custom_left_operation)*/
 
-native_binary_operation ::= basic_term known_binary_operator term
+// native_binary_operation ::= basic_term known_binary_operator term
 
-native_left_operation ::= known_left_operator term
+// native_left_operation ::= known_left_operator term
 
-custom_binary_operation ::= basic_term atom term
+// custom_binary_operation ::= basic_term atom term
 
-custom_left_operation ::= atom term
+// custom_left_operation ::= atom term
+
+// SWI specific extensions
+//map_key ::= (UNQUOTED_ATOM | QUOTED_ATOM | INTEGER)
+map_name ::= (UNQUOTED_ATOM | QUOTED_ATOM | variable)
+//map_entry ::= map_key ':' term
+//map_entries ::= map_entry | map_entry COMMA map_entries
+map_term ::= map_name LBRACE term? RBRACE
+map_reference ::= (map_term|variable) MAP_OP (atom|INTEGER|variable)
 
 
+operation ::= basic_term term
 
-
-
-atom ::= (
-            UNQUOTED_ATOM|
-            SYMBOLIC_ATOM|
-            QUOTED_ATOM
-         )
-
+atom ::= (UNQUOTED_ATOM | SYMBOLIC_ATOM | QUOTED_ATOM)
 
 compound ::= compound_name LPAREN term RPAREN
 
-compound_name ::= (
-                    UNQUOTED_COMPOUND_NAME|
-                    QUOTED_COMPOUND_NAME
-                  )
+compound_name ::= (UNQUOTED_COMPOUND_NAME | QUOTED_COMPOUND_NAME)
 
 list ::= LBRACKET term? RBRACKET
 
@@ -68,13 +67,14 @@ number ::= (INTEGER|FLOAT|BIN_NUMBER|OCT_NUMBER|HEX_NUMBER|CHAR_CODE)
 
 variable ::= (ANONYMOUS_VARIABLE|NAMED_VARIABLE)
 
-map_reference ::= (braced_block|variable) MAP_OP (atom|INTEGER|variable)
+
 
 
 
 
 //known_operator ::= (known_binary_operator|known_left_operator)
 
+/*
 valid_operator ::= UNQUOTED_ATOM|SYMBOLIC_ATOM
 
 
@@ -111,3 +111,4 @@ known_left_operator ::= &valid_operator (
                             '::'|
                             '^^'
                             )
+*/

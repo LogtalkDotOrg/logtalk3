@@ -7,13 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface LogtalkSentence extends PsiElement {
 
-  @Nullable
-  LogtalkAtom getAtom();
-
-  @Nullable
-  LogtalkCompound getCompound();
-
-  @Nullable
-  LogtalkOperation getOperation();
+  @NotNull
+  LogtalkTerm getTerm();
 
 }

@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkParenthesizedBlockImpl extends ASTWrapperPsiElement implements LogtalkParenthesizedBlock {
 
-  public LogtalkParenthesizedBlockImpl(ASTNode node) {
+  public LogtalkParenthesizedBlockImpl(@NotNull ASTNode node) {
     super(node);
   }
 

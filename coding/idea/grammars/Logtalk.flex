@@ -33,8 +33,10 @@ RBRACE = "}"
 CUT = "!"
 DOT = "."
 
-//CONS = "[|]"  //specific to SWI
+//specific to SWI
+//CONS = "[|]"
 //MAP_OP = {DOT}
+FIRST_CHAR_MAP_PROPERTY = ([:letter:]|[:digit:]|"_")
 
 BIN_PREFIX = "0b"
 OCT_PREFIX = "0o"
@@ -77,17 +79,16 @@ NON_PRINTABLE = ({CRLF}|{WHITE_SPACE})+
 NON_CODE = ({NON_PRINTABLE}|{ANY_BLOCK_COMMENT})+
 
 
-FIRST_CHAR_MAP_PROPERTY = ([:letter:]|[:digit:]|"_")
-
 COMBINABLE_OPERATOR_SYMBOLS = "<" | ">" | "?" | "/" | ";" | ":" | "\\" | "|" | "=" | "+" | "-" | "*" | "&" | "^" | "$" | "#" | "@" | "~"
 
 COMMA = ","
 NON_COMBINABLE_OPERATOR_SYMBOLS = {COMMA} | {CUT}
 
-OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | {COMBINABLE_OPERATOR_SYMBOLS}+ | ({COMBINABLE_OPERATOR_SYMBOLS} | {DOT}){2}
+OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | {COMBINABLE_OPERATOR_SYMBOLS}+ | ({COMBINABLE_OPERATOR_SYMBOLS} | {DOT}){2,5} //should be 2 or more, but I do not know yet how to write that
 
 //parenthesized operator symbols
 PAR_OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | ({COMBINABLE_OPERATOR_SYMBOLS} | {DOT})+
+
 
 %state SENTENCE, PARENTHESIZED_SYMBOLS, SINGLE_QUOTE_STRING, DOUBLE_QUOTE_STRING, CHAR_CODE
 

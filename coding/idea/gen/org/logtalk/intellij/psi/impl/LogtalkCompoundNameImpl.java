@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkCompoundNameImpl extends ASTWrapperPsiElement implements LogtalkCompoundName {
 
-  public LogtalkCompoundNameImpl(ASTNode node) {
+  public LogtalkCompoundNameImpl(@NotNull ASTNode node) {
     super(node);
   }
 

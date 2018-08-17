@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkMapReferenceImpl extends ASTWrapperPsiElement implements LogtalkMapReference {
 
-  public LogtalkMapReferenceImpl(ASTNode node) {
+  public LogtalkMapReferenceImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -34,8 +34,8 @@ public class LogtalkMapReferenceImpl extends ASTWrapperPsiElement implements Log
 
   @Override
   @Nullable
-  public LogtalkBracedBlock getBracedBlock() {
-    return findChildByClass(LogtalkBracedBlock.class);
+  public LogtalkMapTerm getMapTerm() {
+    return findChildByClass(LogtalkMapTerm.class);
   }
 
   @Override

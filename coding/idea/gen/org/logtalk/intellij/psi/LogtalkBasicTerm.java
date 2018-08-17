@@ -23,6 +23,9 @@ public interface LogtalkBasicTerm extends PsiElement {
   LogtalkMapReference getMapReference();
 
   @Nullable
+  LogtalkMapTerm getMapTerm();
+
+  @Nullable
   LogtalkNumber getNumber();
 
   @Nullable

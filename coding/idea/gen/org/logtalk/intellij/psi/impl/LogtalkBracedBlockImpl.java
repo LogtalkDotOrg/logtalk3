@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkBracedBlockImpl extends ASTWrapperPsiElement implements LogtalkBracedBlock {
 
-  public LogtalkBracedBlockImpl(ASTNode node) {
+  public LogtalkBracedBlockImpl(@NotNull ASTNode node) {
     super(node);
   }
 

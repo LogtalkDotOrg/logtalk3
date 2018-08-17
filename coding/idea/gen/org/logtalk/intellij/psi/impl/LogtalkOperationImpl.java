@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkOperationImpl extends ASTWrapperPsiElement implements LogtalkOperation {
 
-  public LogtalkOperationImpl(ASTNode node) {
+  public LogtalkOperationImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -27,15 +27,15 @@ public class LogtalkOperationImpl extends ASTWrapperPsiElement implements Logtal
   }
 
   @Override
-  @Nullable
-  public LogtalkNativeBinaryOperation getNativeBinaryOperation() {
-    return findChildByClass(LogtalkNativeBinaryOperation.class);
+  @NotNull
+  public LogtalkBasicTerm getBasicTerm() {
+    return findNotNullChildByClass(LogtalkBasicTerm.class);
   }
 
   @Override
-  @Nullable
-  public LogtalkNativeLeftOperation getNativeLeftOperation() {
-    return findChildByClass(LogtalkNativeLeftOperation.class);
+  @NotNull
+  public LogtalkTerm getTerm() {
+    return findNotNullChildByClass(LogtalkTerm.class);
   }
 
 }

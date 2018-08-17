@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkSentenceImpl extends ASTWrapperPsiElement implements LogtalkSentence {
 
-  public LogtalkSentenceImpl(ASTNode node) {
+  public LogtalkSentenceImpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -27,21 +27,9 @@ public class LogtalkSentenceImpl extends ASTWrapperPsiElement implements Logtalk
   }
 
   @Override
-  @Nullable
-  public LogtalkAtom getAtom() {
-    return findChildByClass(LogtalkAtom.class);
-  }
-
-  @Override
-  @Nullable
-  public LogtalkCompound getCompound() {
-    return findChildByClass(LogtalkCompound.class);
-  }
-
-  @Override
-  @Nullable
-  public LogtalkOperation getOperation() {
-    return findChildByClass(LogtalkOperation.class);
+  @NotNull
+  public LogtalkTerm getTerm() {
+    return findNotNullChildByClass(LogtalkTerm.class);
   }
 
 }

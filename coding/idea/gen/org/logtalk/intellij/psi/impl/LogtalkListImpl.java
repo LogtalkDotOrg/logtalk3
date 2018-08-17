@@ -13,7 +13,7 @@ import org.logtalk.intellij.psi.*;
 
 public class LogtalkListImpl extends ASTWrapperPsiElement implements LogtalkList {
 
-  public LogtalkListImpl(ASTNode node) {
+  public LogtalkListImpl(@NotNull ASTNode node) {
     super(node);
   }
 
