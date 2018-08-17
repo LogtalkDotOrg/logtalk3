@@ -21,9 +21,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2018/03/10,
+		date is 2018/08/17,
 		comment is 'List protocol.',
 		see_also is [numberlistp, varlistp]
 	]).
@@ -45,14 +45,14 @@
 	:- public(delete/3).
 	:- mode(delete(@list, @term, ?list), one).
 	:- info(delete/3, [
-		comment is 'Deletes from a list all occurrences of an element returning the list of remaining elements.',
+		comment is 'Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ==/2 for element comparison.',
 		argnames is ['List', 'Element', 'Remaining']
 	]).
 
 	:- public(delete_matches/3).
 	:- mode(delete_matches(@list, @term, ?list), one).
 	:- info(delete_matches/3, [
-		comment is 'Deletes all matching elements from a list, returning the list of remaining elements.',
+		comment is 'Deletes all matching elements from a list, returning the list of remaining elements. Uses =/2 for element comparison.',
 		argnames is ['List', 'Element', 'Remaining']
 	]).
 
