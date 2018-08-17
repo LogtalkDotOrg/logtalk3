@@ -18,14 +18,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(setp).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2011/02/16,
+		date is 2018/08/17,
 		comment is 'Set protocol.'
+	]).
+
+	:- public(as_set/2).
+	:- mode(as_set(@list, -set), one).
+	:- info(as_set/2, [
+		comment is 'Returns a set with all unique elements from the given list.',
+		argnames is ['List', 'Set']
+	]).
+
+	:- public(as_list/2).
+	:- mode(as_list(@set, -list), one).
+	:- info(as_list/2, [
+		comment is 'Returns a list with all elements of the given set.',
+		argnames is ['Set', 'List']
 	]).
 
 	:- public(delete/3).

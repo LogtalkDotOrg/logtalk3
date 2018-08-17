@@ -23,11 +23,16 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.7,
-		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura.',
-		date is 2018/07/11,
+		version is 1.8,
+		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
+		date is 2018/08/17,
 		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.'
 	]).
+
+	as_set(List, Set) :-
+		sort(List, Set).
+
+	as_list(List, List).
 
 	delete([], _, []).
 	delete([Head| Tail], Element, Remaining) :-

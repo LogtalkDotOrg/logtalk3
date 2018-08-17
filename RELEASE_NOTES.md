@@ -50,6 +50,8 @@ Library
 
 * ADDED: Predicates `maybe_call/1-2` to the `random` library.
 
+* ADDED: Predicates `as_set/2` and `as_list/2` to the sets library.
+
 * UPDATED: The meta-compiler to also process closures that are explicitly
 module qualified.
 
