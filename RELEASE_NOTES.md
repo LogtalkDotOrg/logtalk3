@@ -37,6 +37,9 @@ a `call//1` wrapper.
 the resulting goal is a call to a Prolog built-in predicate due to inlining of
 a user predicate definition.
 
+* FIXED: Optimization bug in the compilation of a closure meta-argument when
+the resulting goal is a call to a Prolog `:/2` control construct.
+
 Documentation
 -------------
 

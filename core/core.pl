@@ -3375,7 +3375,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 20, 0, b04)).
+'$lgt_version_data'(logtalk(3, 20, 0, b05)).
 
 
 
@@ -21982,7 +21982,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Closure = Obj::UserClosure, Obj == user
 	;	Closure = {UserClosure}
 	;	'$lgt_comp_ctx_entity'(Ctx, Entity), Entity == user,
-		Closure \= _::_,
+		\+ '$lgt_control_construct'(Closure),
 		UserClosure = Closure
 	),
 	% goal or closure called in "user"
@@ -22001,6 +22001,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx),
 	functor(TGoal, TFunctor, _),
 	(	Goal == TGoal ->
+		\+ '$lgt_control_construct'(TGoal),
 		% either a built-in predicate or a predicate called in "user"
 		TClosure = {Closure}
 	;	sub_atom(TFunctor, 0, 5, _, '$lgt_') ->
@@ -22008,6 +22009,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% predicates may be marked as built-in predicates
 		fail
 	;	'$lgt_built_in_predicate'(TGoal) ->
+		\+ '$lgt_control_construct'(TGoal),
 		% built-in predicates may result from goal-expansion during
 		% compilation or from inlining of user predicate definitions
 		'$lgt_built_in_goal_to_closure'(N, TGoal, TFunctor, TArgs),	
