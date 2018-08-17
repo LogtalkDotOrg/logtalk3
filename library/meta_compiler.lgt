@@ -22,8 +22,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.11,
-		date is 2018/08/09,
+		version is 0.12,
+		date is 2018/08/16,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		see_also is [meta]
@@ -485,6 +485,20 @@
 		Goal =.. [ClosureFunctor| GoalArgs],
 		\+ control_construct(Goal),
 		logtalk::compile_aux_clauses([(Head :- Object::Goal)]).
+	decompose_closure({Free}/':'(Module,Closure), MetaArity, Functor, Arity, FreeList, GFreeList) :-
+		!,
+		callable(Closure),
+		gensym('lambda_', Functor),
+		conjunction_to_list(Free, FreeList, Arity),
+		length(GFreeList, Arity),
+		length(Parameters, MetaArity),
+		append(FreeList, Parameters, Args),
+		Head =.. [Functor| Args],
+		Closure =.. [ClosureFunctor| ClosureArgs],
+		append(ClosureArgs, Parameters, GoalArgs),
+		Goal =.. [ClosureFunctor| GoalArgs],
+		\+ control_construct(Goal),
+		logtalk::compile_aux_clauses([(Head :- ':'(Module,Goal))]).
 	decompose_closure({Free}/{Closure}, MetaArity, Functor, Arity, FreeList, GFreeList) :-
 		!,
 		callable(Closure),
@@ -524,6 +538,10 @@
 		!,
 		nonvar(Closure),
 		decompose_closure(Closure, MetaArity, Functor, Arity, Args, GArgs).
+	decompose_closure(':'(Module,Closure), MetaArity, ':'(Module,Functor), Arity, Args, GArgs) :-
+		!,
+		nonvar(Closure),
+		decompose_closure(Closure, MetaArity, Functor, Arity, Args, GArgs).
 	decompose_closure({Closure}, MetaArity, {Functor}, Arity, Args, GArgs) :-
 		!,
 		nonvar(Closure),
@@ -540,6 +558,9 @@
 		GClosure =.. [Functor| GArgs].
 
 	extend_closure(Object::Functor, ClosureArgs, ExtraArgs, Object::Goal) :-
+		!,
+		extend_closure(Functor, ClosureArgs, ExtraArgs, Goal).
+	extend_closure(':'(Module,Functor), ClosureArgs, ExtraArgs, ':'(Module,Goal)) :-
 		!,
 		extend_closure(Functor, ClosureArgs, ExtraArgs, Goal).
 	extend_closure({Functor}, ClosureArgs, ExtraArgs, {Goal}) :-
@@ -587,6 +608,7 @@
 	control_construct(_ / _).
 	control_construct(_ >> _).
 	control_construct(_ << _).
+	control_construct(':'(_, _)).
 
 	conjunction_to_list(Conjunction, Terms, N) :-
 		conjunction_to_list(Conjunction, Terms, 1, N).
