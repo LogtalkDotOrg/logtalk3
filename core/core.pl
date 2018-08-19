@@ -2465,7 +2465,8 @@ logtalk_compile(Files, Flags) :-
 %
 % check if the source file names are valid (but not if the file exists)
 % and return their absolute paths when using library notation or when
-% they start with an environment variable
+% they start with an environment variable (assumes environment variables
+% use POSIX syntax in Prolog internal file paths)
 
 '$lgt_check_and_expand_source_files'([File| Files], [Path| Paths]) :-
 	!,
@@ -2489,12 +2490,14 @@ logtalk_compile(Files, Flags) :-
 	;	compound(File),
 		File =.. [Library, Basename],
 		atom(Basename) ->
+		% library notation
 		'$lgt_prolog_os_file_name'(NormalizedBasename, Basename),
 		(	'$lgt_expand_library_alias'(Library, Directory) ->
 			atom_concat(Directory, NormalizedBasename, Path)
 		;	throw(error(existence_error(library, Library), _))
 		)
-	;	ground(File) ->
+	;	% invalid source file specification
+		ground(File) ->
 		throw(error(type_error(source_file_name, File), _))
 	;	throw(error(instantiation_error, _))
 	).
@@ -2554,7 +2557,8 @@ logtalk_compile(Files, Flags) :-
 	;	Flag =.. [Name, Value] ->
 		'$lgt_check'(read_write_flag, Name, _),
 		'$lgt_check'(flag_value, Name+Value, _)
-	;	compound(Flag) ->
+	;	% invalid flag syntax
+		compound(Flag) ->
 		throw(error(domain_error(compiler_flag, Flag), _))
 	;	throw(error(type_error(compound, Flag), _))
 	),
@@ -2574,6 +2578,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_set_compiler_flags'(Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
+	% only one of the optimize and debug flags can be turned on at the same time
 	(	'$lgt_member'(optimize(on), Flags) ->
 		retractall('$lgt_pp_file_compiler_flag_'(debug, _)),
 		assertz('$lgt_pp_file_compiler_flag_'(debug, off))
@@ -2775,7 +2780,6 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(documentation).
 % clean dynamic binding caches
 '$lgt_valid_logtalk_make_target'(caches).
-
 
 
 '$lgt_logtalk_make_target_actions'(Target) :-
@@ -3235,6 +3239,7 @@ set_logtalk_flag(Flag, Value) :-
 '$lgt_set_compiler_flag'(Flag, Value) :-
 	retractall('$lgt_current_flag_'(Flag, _)),
 	assertz('$lgt_current_flag_'(Flag, Value)),
+	% only one of the optimize and debug flags can be turned on at the same time
 	(	Flag == optimize, Value == on ->
 		retractall('$lgt_current_flag_'(debug, _)),
 		assertz('$lgt_current_flag_'(debug, off))
@@ -8117,7 +8122,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_runtime_terms'(@list(term), +atom)
+% '$lgt_compile_runtime_include_file_terms'(@list(term), +atom)
 %
 % compiles a list of runtime terms (clauses, directives, or grammar rules)
 % found in an included file
@@ -8125,12 +8130,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_runtime_term'/2 predicate
 
-'$lgt_compile_runtime_terms'([Term-_| Terms], File) :-
+'$lgt_compile_runtime_include_file_terms'([Term-_| Terms], File) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, runtime, _, '-'(0,0)),
 	'$lgt_compile_runtime_term'(Term, Ctx),
-	'$lgt_compile_runtime_terms'(Terms, File).
+	'$lgt_compile_runtime_include_file_terms'(Terms, File).
 
-'$lgt_compile_runtime_terms'([], _).
+'$lgt_compile_runtime_include_file_terms'([], _).
 
 
 
@@ -8673,7 +8678,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% compile the included file terms
 	catch(
 		(	Mode == runtime ->
-			'$lgt_compile_runtime_terms'(Terms, Path)
+			'$lgt_compile_runtime_include_file_terms'(Terms, Path)
 		;	'$lgt_compile_include_file_terms'(Terms, Path, Ctx)
 		),
 		Error,
