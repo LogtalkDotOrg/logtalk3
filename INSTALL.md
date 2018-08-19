@@ -53,8 +53,8 @@ one of the provided scripts.
 In this case, there is no installation procedure other than uncompressing the
 sources (or cloning the git repository) into a convenient directory. Simply
 skip to the section below on setting the Logtalk environment variables and
-use the directory as the value for both the `LOGTALKHOME` and `LOGTALKUSER`
-variables.
+use the directory full path as the value for both the `LOGTALKHOME` and
+`LOGTALKUSER` variables.
 
 * Installing for a single user with no administrative rights:
 
