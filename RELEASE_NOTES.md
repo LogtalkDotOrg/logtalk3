@@ -73,6 +73,9 @@ the `dcgs` example.
 * ADDED: Simple example, `super_calls`, illustrating that "super" calls
 preserve the value of "self".
 
+* UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
+help visually illustrate the differences between left and right folds.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

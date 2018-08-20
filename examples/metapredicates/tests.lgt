@@ -203,9 +203,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/12/02,
+		date is 2018/08/20,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 
@@ -372,5 +372,13 @@
 	test(metapredicates_38) :-
 		grammar::codes("123", Codes),
 		Codes == [49, 50, 51].
+
+	test(metapredicates_39) :-
+		folds::left(Left),
+		Left == '(((((((((0+1)+2)+3)+4)+5)+6)+7)+8)+9)'.
+
+	test(metapredicates_40) :-
+		folds::right(Right),
+		Right == '(1+(2+(3+(4+(5+(6+(7+(8+(9+0)))))))))'.
 
 :- end_object.
