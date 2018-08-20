@@ -381,4 +381,12 @@
 		folds::right(Right),
 		Right == '(1+(2+(3+(4+(5+(6+(7+(8+(9+0)))))))))'.
 
+	test(metapredicates_41) :-
+		meta::fold_left([Y, X, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R),
+		R == [9, 8, 7, 6, 5, 4, 3, 2, 1].
+
+	test(metapredicates_42) :-
+		meta::fold_right([X, Y, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R),
+		R == [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
 :- end_object.
