@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 14, 2018
+%  Last updated on August 21, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -148,6 +148,7 @@ logtalk_library_path(relations, examples('relations/')).
 logtalk_library_path(roots, examples('roots/')).
 logtalk_library_path(searching, examples('searching/')).
 logtalk_library_path(securemp, examples('securemp/')).
+logtalk_library_path(self_messages, examples('self_messages/')).
 logtalk_library_path(shapes_ch, examples('shapes/ch/')).
 logtalk_library_path(shapes_ph, examples('shapes/ph/')).
 logtalk_library_path(sicstus, examples('sicstus/')).

@@ -380,6 +380,9 @@ Follows a short description of each included example (in alphabetical order):
 	a set of source files for testing Logtalk secure
 	implementation of meta-predicates
 
+- `self_messages`  
+	simple example illustrating the semantics of messages to "self"
+
 - `shapes`  
 	simple geometric shapes implemented as both a prototype hierarchy 
 	and a class hierarchy for comparing both approaches
