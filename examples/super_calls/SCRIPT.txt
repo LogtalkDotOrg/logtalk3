@@ -37,10 +37,19 @@ Local = prototype
 yes
 
 
-% the test/1 predicate makes a "super" call, which preserves "self",
-% to the get_local/1 predicate:
+% the prototype::test/1 predicate makes a "super" call, which preserves "self",
+% to the inherited get_local/1 predicate:
 
 | ?- prototype::test(Local).
 
 Local = prototype
+yes
+
+
+% the prototype::wrong/1 predicate sends a message to the parent, which resets
+% "self" to the message receiver:
+
+| ?- prototype::wrong(Local).
+
+Local = parent
 yes

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2018/08/14,
+		date is 2018/08/21,
 		comment is 'Unit tests for the "super_calls" example.'
 	]).
 
@@ -42,5 +42,9 @@
 	test(super_calls_03) :-
 		prototype::test(Local),
 		Local == prototype.
+
+	test(super_calls_04) :-
+		prototype::wrong(Local),
+		Local == parent.
 
 :- end_object.

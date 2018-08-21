@@ -35,7 +35,13 @@
 
 	:- public(test/1).
 	test(Local) :-
+		% ^^/2 goals, aka super calls, preserve self
 		^^get_local(Local).
+
+	:- public(wrong/1).
+	wrong(Local) :-
+		% ::/2 messages reset self to receiver 
+		parent::get_local(Local).
 
 	local(prototype).
 
