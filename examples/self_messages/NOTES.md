@@ -20,6 +20,6 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This simple programming example illustrates the semantics of messages to
-"self" (using the ::/1 control construct), i.e. to the object that received
-the message being processed.
+This simple programming example illustrates the semantics of messages
+to "self" (using the `::/1` control construct), i.e. to the object that
+received the message being processed.
