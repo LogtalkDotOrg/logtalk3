@@ -48,6 +48,9 @@ Documentation
 Library
 -------
 
+* ADDED: Support for describing registered meta-types using the new multifile
+predicate `type::meta_type/3`.
+
 * ADDED: Predicates `maybe_call/1-2` to the `random` library.
 
 * ADDED: Predicates `as_set/2` and `as_list/2` to the sets library.

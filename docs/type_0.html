@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.17</code>
+            <code>1.18</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2018/4/4</code>
+            <code>2018/8/28</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -59,6 +59,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>type(?callable) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="meta_type/3" class="code">meta_type/3</h3>
+          <blockquote>
+            <p class="comment">Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static, multifile</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>meta_type(MetaType,SubTypes,Values)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>meta_type(?callable,-list,-list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -192,7 +212,7 @@
         </dl>
         <dl class="remarks">
           <dt class="comment">Other types</dt>
-          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}</dd>
+          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">predicate type notes</dt>
@@ -239,6 +259,10 @@
           <dd class="text">Allows checking if a term is a valid value for one of the types in a list of types.</dd>
         </dl>
         <dl class="remarks">
+          <dt class="comment">type notes</dt>
+          <dd class="text">Allows checking if a term is a valid type.</dd>
+        </dl>
+        <dl class="remarks">
           <dt class="comment">qualified_callable notes</dt>
           <dd class="text">Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.</dd>
         </dl>
@@ -257,6 +281,10 @@
         <dl class="remarks">
           <dt class="comment">Registering new types</dt>
           <dd class="text">New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Meta-types</dt>
+          <dd class="text">Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</dd>
         </dl>
       </div>
     </div>

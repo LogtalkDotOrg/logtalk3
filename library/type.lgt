@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2018/04/04,
+		date is 2018/08/28,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
@@ -36,7 +36,7 @@
 			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
-			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types)}',
+			'Other types' - '{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}',
 			'predicate type notes' - 'This type is used to check for an object public predicate specified as Object::Functor/Arity.',
 			'boolean type notes' - 'The two value of this type are the atoms true and false.',
 			'Stream types notes' - 'In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.',
@@ -48,11 +48,13 @@
 			'var_or(Type) notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
 			'ground(Type) notes' - 'Allows checking if a term is ground and a valid value of the given type.',
 			'types(Types) notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
+			'type notes' - 'Allows checking if a term is a valid type.',
 			'qualified_callable notes' - 'Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.',
 			'Caveats' - 'The type argument to the predicates is never itself type-checked for performance reasons.',
 			'Design choices' - 'The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.',
 			'Error context' - 'The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.',
-			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.'
+			'Registering new types' - 'New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
+			'Meta-types' - 'Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.'
 		],
 		see_also is [arbitrary, os_types]
 	]).
@@ -69,6 +71,18 @@
 	:- info(type/1, [
 		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.',
 		argnames is ['Type']
+	]).
+
+	:- public(meta_type/3).
+	:- multifile(meta_type/3).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+		:- dynamic(meta_type/3).
+	:- endif.
+	:- mode(meta_type(?callable, -list, -list), zero_or_more).
+	:- info(meta_type/3, [
+		comment is 'Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.',
+		argnames is ['MetaType', 'SubTypes', 'Values']
 	]).
 
 	:- public(valid/2).
@@ -192,6 +206,19 @@
 	type(var_or(_Type)).
 	type(ground(_Type)).
 	type(types(_Types)).
+	type(type).
+
+	meta_type(list(Type), [Type], []).
+	meta_type(list(Type, Min, Max), [Type], [Min, Max]).
+	meta_type(non_empty_list(Type), [Type], []).
+	meta_type(difference_list(Type), [Type], []).
+	meta_type(pair(KeyType, ValueType), [KeyType, ValueType], []).
+	meta_type(between(Type, Lower, Upper), [Type], [Lower, Upper]).
+	meta_type(property(Type, _), [Type], []).
+	meta_type(one_of(Type, Values), [Type], Values).
+	meta_type(var_or(Type), [Type], []).
+	meta_type(ground(Type), [Type], []).
+	meta_type(types(Types), Types, []).
 
 	valid(Type, Term) :-
 		catch(check(Type, Term), _, fail).
@@ -907,8 +934,21 @@
 		;	throw(domain_error(types(Types), Term))
 		).
 
+	check(type, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	meta_type(Term, [Type], Values) ->
+			check(type, Type),
+			check(list(Type), Values)
+		;	meta_type(Term, Types, _) ->
+			forall(member(Type, Types), check(type, Type))
+		;	type(Term) ->
+			true
+		;	throw(domain_error(type, Term))
+		).
+
 	% auxiliary predicates; we could use the Logtalk standard library
-	% for some of them but we prefer to avoid any object dependencies
+	% for some of them but we prefer to avoid any object dependencies	
 
 	code_upper_limit(Upper) :-
 		current_logtalk_flag(unicode, Unicode),
