@@ -137,6 +137,19 @@ R = [1, 2, 3, 4, 5, 6, 7, 8, 9].
 yes
 
 
+% we can compose left folds:
+
+| ?- meta::fold_left([X,Y,Z]>>(Z is X + Y), 0, [1,2,3], Sum).
+
+Sum = 6
+yes
+
+| ?- meta::fold_left(meta::fold_left([X,Y,Z]>>(Z is X + Y)), 0, [[1,2,3],[4,5,6]], Sum).
+
+Sum = 21
+yes
+
+
 % use the fold_left/4 meta-predicate with a predicate defined in the
 % pseudo-object "user":
 
