@@ -70,6 +70,8 @@ of meta-predicates and lambda expressions.
 * ADDED: Examples and tests of using lambda expressions in grammar rules to
 the `dcgs` example.
 
+* ADDED: Simple examples, `scopes`, illustrating predicate scope semantics.
+
 * ADDED: Simple example, `self_messages`, illustrating the semantics of
 messages to "self".
 

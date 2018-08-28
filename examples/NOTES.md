@@ -371,6 +371,9 @@ Follows a short description of each included example (in alphabetical order):
 	abolishing methods, complete with initialization and termination
 	options
 
+- `scopes`  
+	simple example illustrating predicate scope semantics
+
 - `searching`  
 	state-space searching framework
 	(this example includes some code adapted from Ivan Bratko's "Prolog

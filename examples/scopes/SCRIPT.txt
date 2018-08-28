@@ -1,0 +1,85 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>  
+Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(scopes(loader)).
+...
+
+
+% we can always send a message for a public predicate:
+
+| ?- prototype::foo(Foo).
+
+Foo = 1
+yes
+
+
+% but we cannot send messages for protected or private predicates:
+
+| ?- prototype::bar(_).
+
+error(permission_error(access,protected_predicate,bar/1),logtalk(prototype::bar(_),c(user,user,r(user,prototype,[],[]))))
+
+| ?- prototype::baz(_).
+
+uncaught exception: error(permission_error(access,private_predicate,baz/1),logtalk(prototype::baz(_),c(user,user,r(user,prototype,[],[]))))
+
+
+% same for local predicates not declared by a scope directive; note the
+% different exception term compared with the two previous queries:
+
+| ?- prototype::local(_).
+
+error(existence_error(predicate_declaration,local/1),logtalk(prototype::local(_),c(user,user,r(user,prototype,[],[]))))
+
+
+% from the object holding the scope directives, we can always access any
+% predicate redefinition in the descendants (note that the p_foo/1, p_bar/1,
+% and p_baz/1 predicates are declared public, defined in the "prototype"
+% object, and inherited by the "descendant" object):
+
+| ?- descendant::p_foo(Foo).
+
+Foo = 2
+yes
+
+| ?- descendant::p_bar(Bar).
+
+Bar = 2
+yes
+
+| ?- descendant::p_baz(Baz).
+
+Baz = 2
+yes
+
+
+% from descendant objects, we can access inherited predicate definitions for
+% public and protected predicates:
+
+| ?- descendant::d_foo(Foo).
+
+Foo = 1
+yes
+
+| ?- descendant::d_bar(Bar).
+
+Bar = 1
+yes
