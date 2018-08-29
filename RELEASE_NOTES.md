@@ -83,7 +83,11 @@ messages to "self".
 * ADDED: Simple example, `super_calls`, illustrating that "super" calls
 preserve the value of "self".
 
-* ADDED: Simple example, `elephants`, illustrating the concept of prototypes.
+* ADDED: Simple example, `elephants`, illustrating the concept of prototype.
+
+* ADDED: Simple example, `protocols`, illustrating the concept of protocol.
+
+* ADDED: Simple example, `categories`, illustrating the concept of category.
 
 * UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
 help visually illustrate the differences between left and right folds.

@@ -50,6 +50,7 @@ logtalk_library_path(bricks, examples('bricks/')).
 logtalk_library_path(buckets, threads('buckets/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(carengines, examples('carengines/')).
+logtalk_library_path(categories, examples('categories/')).
 logtalk_library_path(cc, examples('cc/')).
 logtalk_library_path(checkpoint, threads('checkpoint/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
@@ -138,6 +139,7 @@ logtalk_library_path(points, examples('points/')).
 logtalk_library_path(polygons, examples('polygons/')).
 logtalk_library_path(primes, threads('primes/')).
 logtalk_library_path(profiling, examples('profiling/')).
+logtalk_library_path(protocols, examples('protocols/')).
 logtalk_library_path(prototypes, examples('prototypes/')).
 logtalk_library_path(proxies, examples('proxies/')).
 logtalk_library_path(puzzles, examples('puzzles/')).
