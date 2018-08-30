@@ -55,7 +55,7 @@ baz(1). baz(2).
 	throws(retractall_1_06, error(existence_error(predicate_declaration, unknown/1), logtalk(retractall(unknown(_)),_))) :-
 		{test_object::retractall(unknown(_))}.
 
-	throws(retractall_1_07, error(existence_error(predicate_declaration, local/1), logtalk(retractall(local(_)),_))) :-
+	throws(retractall_1_07, error(existence_error(predicate_declaration, (local)/1), logtalk(retractall(local(_)),_))) :-
 		{test_object::retractall(local(_))}.
 
 	throws(retractall_1_08, error(instantiation_error, logtalk(_::retractall(foo),_))) :-
