@@ -18,11 +18,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(protocols, [source_data(on), debug(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2018/08/30,
+		comment is 'Unit tests for the "planets" example.'
+	]).
+
+	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+
+	test(planets_01) :-
+		earth::weight(m1, W1),
+		W1 =~= 29.41995.
+
+	test(planets_02) :-
+		mars::weight(m1, W1),
+		W1 =~= 11.162279999999999.
+
+	test(planets_03) :-
+		earth::weight(m2, W2),
+		W2 =~= 39.2266.
+
+	test(planets_04) :-
+		mars::weight(m2, W2),
+		W2 =~= 14.88304.
+
+:- end_object.

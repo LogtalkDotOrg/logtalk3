@@ -19,5 +19,5 @@
 
 
 :- initialization(
-	logtalk_load(categories)
+	logtalk_load(planets)
 ).

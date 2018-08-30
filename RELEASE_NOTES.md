@@ -85,9 +85,8 @@ preserve the value of "self".
 
 * ADDED: Simple example, `elephants`, illustrating the concept of prototype.
 
-* ADDED: Simple example, `protocols`, illustrating the concept of protocol.
-
-* ADDED: Simple example, `categories`, illustrating the concept of category.
+* ADDED: Simple example, `planets`, illustrating the concepts of protocol
+and category.
 
 * UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
 help visually illustrate the differences between left and right folds.

@@ -18,8 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% we start by defining a protocol declaring predicates for common physical
-% properties:
+% a protocol contains a functionality cohesive set of predicate declarations
+% and can be implemented by any number of objects and categories; in this
+% example, we start by defining a protocol declaring predicates for common
+% physical properties:
 
 :- protocol(physical_properties).
 
@@ -50,21 +52,39 @@
 :- end_object.
 
 
-% let's define another protocol for describing planetary properties:
+% a category is a fine grained unit of code reuse, used to encapsulate a
+% cohesive set of predicate declarations and definitions, implementing a
+% single functionality, that can be imported into any object
 
-:- protocol(planetary_properties).
+% categories can be interpreted as the dual concept of protocols, with
+% both aiming for functional coheasion with the difference being that
+% categories can both declare and define predicates
+
+% in this example, we define a category for declaring planetary properties
+% and declaring and defining planetary computations; we don't want to use
+% an object as the gravitational_acceleration/1 predicate can only be defined
+% for a concrete planet
+
+:- category(planet).
 
     :- public([
-		 gravitational_acceleration/1
+		 gravitational_acceleration/1,
+		 weight/2
 	]).
 
-:- end_protocol.
+	weight(Object, Weight) :-
+		Object::mass(Mass),
+		::gravitational_acceleration(Acceleration),
+		Weight is Mass * Acceleration.
+
+:- end_category.
 
 
-% this protocol can be implemented by objects representing e.g. Earth and Mars:
+% this category can be imported by any number of objects representing actual
+% planets, for example, Earth and Mars:
 
 :- object(earth,
-	implements(planetary_properties)).
+	imports(planet)).
 
 	gravitational_acceleration(9.80665).
 
@@ -72,28 +92,9 @@
 
 
 :- object(mars,
-	implements(planetary_properties)).
+	imports(planet)).
 
 	gravitational_acceleration(3.72076).
 
 :- end_object.
 
-
-% finally, lets define an object with a public predicate for computing the
-% weight of an object on a given planet:
-
-:- object(planetary_computations).
-
-	:- public(weight/3).
-
-	weight(Planet, Object, Weight) :-
-		Object::mass(Mass),
-		Planet::gravitational_acceleration(Acceleration),
-		Weight is Mass * Acceleration.
-
-:- end_object.
-
-
-% at this point, you may be thinking: why not move the weight computation
-% into the objects representing each planet? look into the "categories"
-% example for a followup to this example
