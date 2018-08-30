@@ -325,6 +325,9 @@ Follows a short description of each included example (in alphabetical order):
 	illustrates a very simple solution for persisting an object
 	dynamic state across sessions
 
+- `planets`  
+	simple example illustrating the concepts of protocol and category
+
 - `poem`  
 	examples adapted from the Ben Staveley-Taylor POEM system
 
