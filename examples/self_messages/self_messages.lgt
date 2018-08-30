@@ -35,7 +35,7 @@
 		% call the undefined/1 predicate in "self"
 		::undefined(Undefined).
 
-	:- protected(local/1).
+	:- protected((local)/1).
 	local(parent).
 
 	:- protected(default/1).

@@ -24,7 +24,7 @@
 	get_local(Local) :-
 		::local(Local).
 
-	:- protected(local/1).
+	:- protected((local)/1).
 	local(parent).
 
 :- end_object.

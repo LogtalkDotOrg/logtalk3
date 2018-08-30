@@ -43,7 +43,7 @@
 	throws(scopes_03, error(permission_error(access,private_predicate,baz/1),_)) :-
 		prototype::baz(_).
 
-	throws(scopes_04, error(existence_error(predicate_declaration,local/1),_)) :-
+	throws(scopes_04, error(existence_error(predicate_declaration,(local)/1),_)) :-
 		prototype::local(_).
 
 	succeeds(scopes_05) :-
