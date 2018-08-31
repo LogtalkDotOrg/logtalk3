@@ -88,6 +88,9 @@ preserve the value of "self".
 * ADDED: Simple example, `planets`, illustrating the concepts of protocol
 and category.
 
+* ADDED: Simple example, `roles`, illustrating the different roles that an
+object can play.
+
 * UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
 help visually illustrate the differences between left and right folds.
 

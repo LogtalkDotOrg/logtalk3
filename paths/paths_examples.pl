@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 30, 2018
+%  Last updated on August 31, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -148,6 +148,7 @@ logtalk_library_path(recipes, examples('recipes/')).
 logtalk_library_path(redis, examples('redis/')).
 logtalk_library_path(reflection, examples('reflection/')).
 logtalk_library_path(relations, examples('relations/')).
+logtalk_library_path(roles, examples('roles/')).
 logtalk_library_path(roots, examples('roots/')).
 logtalk_library_path(scopes, examples('scopes/')).
 logtalk_library_path(searching, examples('searching/')).

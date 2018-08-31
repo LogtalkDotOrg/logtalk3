@@ -1,0 +1,81 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>  
+Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(roles(loader)).
+...
+
+
+% prototypes can declare and defined their own predicates:
+
+| ?- prototype::foo(Foo).
+
+Foo = 1
+yes
+
+
+% derived prototypes inherit predicates from their parents:
+
+| ?- descendant::foo(Foo).
+
+Foo = 2 
+yes
+
+| ?- descendant::bar(X, Y).
+
+X = 1,
+Y = 2
+yes
+
+
+% a class that is its own metaclass can access its own predicates:
+
+| ?- class::foo(Foo).
+
+Foo = 1
+yes
+
+
+% a subclass that doesn't have a metaclass cannot receive any message:
+
+| ?- subclass::current_predicate(_).
+
+no
+
+
+% an instance can receive messages for predicates declared in its
+% class(es) and in its class(es) superclass(es):
+
+| ?- instance::current_predicate(P).
+
+P = bar/2 ;
+P = foo/1
+yes
+
+| ?- instance::foo(Foo).
+
+Foo = 2
+yes
+
+| ?- instance::bar(X, Y).
+
+X = 1,
+Y = 2
+yes
