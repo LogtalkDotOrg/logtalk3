@@ -32,8 +32,6 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
-	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.15.4
-
 	succeeds(lgt_e_0_01) :-
 		{X is e},
 		X =~= 2.7182818284590451.
