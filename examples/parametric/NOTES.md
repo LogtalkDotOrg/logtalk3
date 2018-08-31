@@ -21,3 +21,8 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains some examples of parametric objects and categories.
+Object and category parameters are logical variables that are shared with
+all the entity predicates. This example illustrates accessing parameters
+using the `parameter/1` and `this/1` built-in methods. Parameters can also
+be accessed using _parameter variables_ as illustrated by the `parvars`
+example.
