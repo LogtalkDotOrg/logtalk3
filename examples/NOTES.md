@@ -368,6 +368,10 @@ Follows a short description of each included example (in alphabetical order):
 	objects implementing predicates for dealing with relations and
 	constrained relations between objects; used by other examples
 
+- `roles`  
+	simple example illustrating the different roles that can be
+	played by an object
+
 - `roots`  
 	objects, protocols, and categories used by some of the other
 	examples; illustrates how you can define object creation and
