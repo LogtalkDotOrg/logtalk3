@@ -18,36 +18,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% hook object can be specified either using a hook/1 compiler option
-% in calls to the logtalk_compile/2 and logtalk_load/2 predicates or
-% as follows using the set_logtalk_flag/2 directive at the beginning
-% of a source file
-:- set_logtalk_flag(hook, pardicts_hook).
-
-
-:- object(obj(_)).
+:- object(obj(_Dict_)).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/05/23,
-		comment is 'Simple object for testing goal-expansion of access to a dictionary parameter.'
+		date is 2018/09/03,
+		comment is 'Simple object for testing passing a dict as the object parameter.'
 	]).
 
-	:- public(init/1).
-	init(Pairs) :-
-		parameter_create(Pairs).
+	:- public(sum/1).
+	sum(Sum) :-
+		Sum is _Dict_.m + _Dict_.n.
 
-	:- public(get/2).
-	get(Key, Value) :-
-		get_parameter(Key, Value).
+	:- public(product/1).
+	product(Product) :-
+		Product is _Dict_.m * _Dict_.n.
 
-	:- public(b_set/2).
-	b_set(Key, Value) :-
-		b_set_parameter(Key, Value).
-
-	:- public(nb_set/2).
-	nb_set(Key, Value) :-
-		nb_set_parameter(Key, Value).
+	:- public(double/0).
+	double :-
+		M2 is _Dict_.m * 2,
+		b_set_dict(m, _Dict_, M2),
+		N2 is _Dict_.n * 2,
+		b_set_dict(n, _Dict_, N2).
 
 :- end_object.

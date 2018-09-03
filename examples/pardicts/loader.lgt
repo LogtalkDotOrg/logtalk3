@@ -23,10 +23,9 @@
 	current_logtalk_flag(prolog_version, v(7, _, _))
 )).
 
-	:- initialization((
-		logtalk_load(pardicts_hook, [optimize(on)]),
-		logtalk_load(source, [optimize(on)])
-	)).
+	:- initialization(
+		logtalk_load(pardicts)
+	).
 
 :- else.
 

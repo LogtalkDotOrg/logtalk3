@@ -69,7 +69,7 @@ Examples
 --------
 
 * CHANGED: Compile the `lambdas` and `lambdas_compiled` examples with the
-`optimize` flag turned so that the benchmarks best reflect the overheads
+`optimize` flag turned on so that the benchmarks best reflect the overheads
 of meta-predicates and lambda expressions.
 
 * ADDED: Examples and tests of using lambda expressions in grammar rules to
@@ -93,6 +93,8 @@ object can play.
 
 * UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
 help visually illustrate the differences between left and right folds.
+
+* IMPROVED: Simplified the `pardicts` example by using parameter variables.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

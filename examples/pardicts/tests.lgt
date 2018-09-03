@@ -22,21 +22,23 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/05/23,
 		comment is 'Unit tests for the "pardicts" example.'
 	]).
 
-	test(dicts_1) :-
-		obj(Dict)::init([a-1, b-2, c-3]),
-		setof(Value, Key^(obj(Dict)::get(Key, Value)), Values),
-		Values == [1, 2, 3].
+	test(dicts_01) :-
+		obj(_{m:2,n:3})::sum(Sum),
+		Sum == 5.
 
-	test(dicts_2) :-
-		obj(Dict)::init([a-1, b-2, c-3]),
-		obj(Dict)::nb_set(b, 9),
-		obj(Dict)::get(b, Value),
-		Value == 9.
+	test(dicts_02) :-
+		obj(_{m:2,n:3})::product(Sum),
+		Sum == 6.
+
+	test(dicts_03) :-
+		Dict = _{m:2,n:3},
+		obj(Dict)::double,
+		Dict.m == 4, Dict.n == 6.
 
 :- end_object.
