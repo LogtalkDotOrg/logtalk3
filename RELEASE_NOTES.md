@@ -91,6 +91,9 @@ and category.
 * ADDED: Simple example, `roles`, illustrating the different roles that an
 object can play.
 
+* ADDED: Simple example, `clustering`, of using a Java library for performing
+clustering of a set of numbers.
+
 * UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
 help visually illustrate the differences between left and right folds.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 31, 2018
+%  Last updated on September 4, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -122,6 +122,7 @@ logtalk_library_path(clp_gprolog, constraints('gprolog/')).
 logtalk_library_path(clp_sicstus, constraints('sicstus/')).
 logtalk_library_path(clp_swipl, constraints('swipl/')).
 logtalk_library_path(clp_yap, constraints('yap/')).
+logtalk_library_path(clustering, examples('clustering/')).
 logtalk_library_path(coinduction, examples('coinduction/')).
 logtalk_library_path(complements_allow, examples('complements/allow/')).
 logtalk_library_path(complements_restrict, examples('complements/restrict/')).

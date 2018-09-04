@@ -121,6 +121,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of implementation of class variables
 	(as found in Smalltalk; i.e. shared instance variables)
 
+- `clustering`  
+	example of using a Java library for performing clustering
+	of a set of numbers
+
 - `coinduction`  
 	experimental example of coinductive predicates
 	(requires Logtalk to be run with CxProlog, ECLiPSE, SICStus Prolog,
