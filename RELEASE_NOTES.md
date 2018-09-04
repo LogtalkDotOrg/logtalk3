@@ -57,6 +57,8 @@ predicate `type::meta_type/3`.
 
 * ADDED: Predicates `as_set/2` and `as_list/2` to the sets library.
 
+* IMPROVED: Performance of the Java library when using JPL as the backend.
+
 * UPDATED: The meta-compiler to also process closures that are explicitly
 module qualified.
 

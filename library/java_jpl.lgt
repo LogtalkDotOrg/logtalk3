@@ -18,13 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(java(_Reference, _ReturnValue),
+:- object(java(_Reference_, _ReturnValue_),
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2018/05/23,
+		date is 2018/09/04,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object',
@@ -39,37 +39,27 @@
 	]).
 
 	get_field(Field, Value) :-
-		parameter(1, ClassOrObject),
-		jpl_get(ClassOrObject, Field, Value).
+		jpl_get(_Reference_, Field, Value).
 
 	set_field(Field, Value) :-
-		parameter(1, ClassOrObject),
-		jpl_set(ClassOrObject, Field, Value).
+		jpl_set(_Reference_, Field, Value).
 
-	new(Parameters, Instance) :- 
-		parameter(1, Class),
-		jpl_new(Class, Parameters, Instance),
-		parameter(2, Instance).
+	new(Parameters, _ReturnValue_) :- 
+		jpl_new(_Reference_, Parameters, _ReturnValue_).
 
-	new(Instance) :- 
-		new([], Instance).
+	new(_ReturnValue_) :- 
+		jpl_new(_Reference_, [], _ReturnValue_).
 
 	invoke(Message) :-
-		parameter(1, Reference),
 		Message =.. [Functor| Arguments],
-		jpl_call(Reference, Functor, Arguments, Output),
-		parameter(2, Output).
+		jpl_call(_Reference_, Functor, Arguments, _ReturnValue_).
 
 	invoke(Functor, Arguments) :-
-		parameter(1, Reference),
-		jpl_call(Reference, Functor, Arguments, Output),
-		parameter(2, Output).
+		jpl_call(_Reference_, Functor, Arguments, _ReturnValue_).
 
 	forward(Message) :-
-		parameter(1, Reference),
 		Message =.. [Functor| Arguments],
-		jpl_call(Reference, Functor, Arguments, Output),
-		parameter(2, Output).
+		jpl_call(_Reference_, Functor, Arguments, _ReturnValue_).
 
 :- end_object.
 
