@@ -68,7 +68,8 @@
 			error(_, JavaException),
 			convert_cluster_java_exception(JavaException, Context)
 		),
-		Limit is NumberOfClusters - 1,
+		java(Results, Size)::size,
+		Limit is Size - 1,
 		findall(
 			Cluster,
 			(	between(0, Limit, N),
@@ -92,5 +93,7 @@
 		throw(error(resource_error(math_illegal_argument_exception), Context)).
 	convert_cluster_java_exception('org.apache.commons.math3.exception.ConvergenceException', Context) :-
 		throw(error(resource_error(convergence_exception), Context)).
+	convert_cluster_java_exception('org.apache.commons.math3.exception.NumberIsTooSmallException', Context) :-
+		throw(error(resource_error(number_is_too_small_exception), Context)).
 
 :- end_object.
