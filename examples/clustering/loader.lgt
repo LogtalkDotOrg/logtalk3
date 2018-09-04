@@ -26,7 +26,7 @@
 	:- initialization((
 		logtalk_load(library(basic_types_loader)),
 		logtalk_load(library(java_loader)),
-		logtalk_load(clustering, [optimize(on)])
+		logtalk_load(clustering, [optimize(on), hook(java_hook)])
 	)).
 
 :- else.
