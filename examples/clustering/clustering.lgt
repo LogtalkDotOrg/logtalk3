@@ -41,7 +41,10 @@
 			'NumberOfClusters neither a variable nor a positive integer' - type_error(positive_integer, 'NumberOfClusters'),
 			'MaxIterations is not instantiated' - instantiation_error,
 			'MaxIterations neither a variable nor a positive integer' - type_error(positive_integer, 'MaxIterations'),
-			'Clusters is not a variable' - type_error(var, 'Clusters')
+			'Clusters is not a variable' - type_error(var, 'Clusters'),
+			'One of the arguments is illegal' - resource_error(math_illegal_argument_exception),
+			'Clustering algorithm convergence failure' - resource_error(convergence_exception),
+			'Number of values is too small' - resource_error(number_is_too_small_exception)
 		]
 	]).
 
@@ -49,11 +52,16 @@
 	:- uses(type, [check/3]).
 
 	clusters(Values, NumberOfClusters, MaxIterations, Clusters) :-
+		% type check all arguments to minimize the possible exceptions in
+		% the Java side
 		context(Context),
 		check(list(number), Values, Context),
 		check(positive_integer, NumberOfClusters, Context),
 		check(positive_integer, MaxIterations, Context),
 		check(var, Clusters, Context),
+		% data must be passed to the clustering method using an instance of
+		% a class that implements the Clusterable interface; we use here the
+		% DoublePoint class that's also provided by the Apache Math library
 		java('java.util.ArrayList')::new(List),
 		forall(
 			member(Value, Values),
@@ -68,8 +76,12 @@
 			error(_, JavaException),
 			convert_cluster_java_exception(JavaException, Context)
 		),
+		% we should get the same number of clusters that we specified
+		% but just in case ...
 		java(Results, Size)::size,
 		Limit is Size - 1,
+		% getting the set of computed clusters requires unwrapping the
+		% wrapped DoublePoint instances
 		findall(
 			Cluster,
 			(	between(0, Limit, N),
