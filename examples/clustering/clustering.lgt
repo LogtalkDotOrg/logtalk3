@@ -73,9 +73,9 @@
 		findall(
 			Cluster,
 			(	between(0, Limit, N),
-				java(Results, LocationWrapper0)::get(N),
-				java(LocationWrapper0, LocationWrapper)::getPoints,
-				java(LocationWrapper, Array)::toArray,
+				java(Results, Result)::get(N),
+				java(Result, Points)::getPoints,
+				java(Points, Array)::toArray,
 				java::array_list(Array, DoublePoints),
 				findall(
 					ClusterValue,
