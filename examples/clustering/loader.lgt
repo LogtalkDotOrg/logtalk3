@@ -18,21 +18,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap),
+	exists_source(library(jpl))
+)).
 
-	:- if(exists_source(library(jpl))).
-
-		:- initialization((
-			logtalk_load(library(basic_types_loader)),
-			logtalk_load(library(java_loader)),
-			logtalk_load(clustering, [optimize(on)])
-		)).
-
-	:- else.
-
-		:- initialization((write('(JPL library not available)'), nl)).
-
-	:- endif.
+	:- initialization((
+		logtalk_load(library(basic_types_loader)),
+		logtalk_load(library(java_loader)),
+		logtalk_load(clustering, [optimize(on)])
+	)).
 
 :- else.
 

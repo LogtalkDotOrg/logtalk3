@@ -18,25 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap),
+	exists_source(library(jpl))
+)).
 
-	:- if(exists_source(library(jpl))).
-
-		:- initialization((
-			set_logtalk_flag(report, warnings),
-			logtalk_load(lgtunit(loader)),
-			logtalk_load(library(basic_types_loader)),
-			logtalk_load(library(java_loader)),
-			logtalk_load(clustering, [source_data(on), debug(on)]),
-			logtalk_load(tests, [hook(lgtunit)]),
-			tests::run
-		)).
-
-	:- else.
-
-		:- initialization((write('(JPL library not available)'), nl)).
-
-	:- endif.
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(library(basic_types_loader)),
+		logtalk_load(library(java_loader)),
+		logtalk_load(clustering, [source_data(on), debug(on)]),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
 
 :- else.
 
