@@ -18,7 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
+:- if((
+	current_logtalk_flag(prolog_dialect, swi),
+	current_prolog_flag(gui, true)
+)).
 
 	:- initialization((
 		logtalk_load_context(directory, Directory),

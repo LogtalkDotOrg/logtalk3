@@ -97,6 +97,8 @@ clustering of a set of numbers.
 * UPDATED: The `metapredicates` and `metapredicates_compiled` examples to
 help visually illustrate the differences between left and right folds.
 
+* UPDATED: The `xpce` example loader files to detect if XPCE is available.
+
 * IMPROVED: Simplified the `pardicts` example by using parameter variables.
 
 IDEs, text editors, and syntax highlighters support

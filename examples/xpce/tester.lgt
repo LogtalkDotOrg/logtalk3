@@ -18,7 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
+:- if((
+	current_logtalk_flag(prolog_dialect, swi),
+	current_prolog_flag(gui, true)
+)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
