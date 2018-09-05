@@ -1,62 +1,139 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 Tahoma;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue255;}
-\paperw11900\paperh16840\vieww19120\viewh15660\viewkind0
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c100000;\cssrgb\c1680\c19835\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\vieww22460\viewh15760\viewkind0
 \deftab720
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\partightenfactor0
 
 \f0\b\fs16 \cf0 README\
 
 \b0 \
-1. About\
-2. Logtalk web site\
-3. Registration\
-4. Support\
-5. Installation\
-6. Customization\
-7. Running\
-8. Documentation\
-9. Upgrading\
-10. Citations\
-11. Contributions\
-12. Legal\
-\
 \
 
-\b 1. ABOUT\
+\b ABOUT\
 
 \b0 \
-Logtalk is an *object-oriented logic programming language* that extends and\
-leverages the Prolog language with a feature set suitable for programming\
-in the large. As a multi-paradigm language, it includes support for both\
-prototypes and classes, protocols (interfaces), component-based programming\
-through category-based composition, event-driven programming, coinduction,\
-and high-level multi-threading programming. Logtalk uses standard Prolog\
-syntax with the addition of some operators and directives and can be used\
-with any Prolog implementation compliant with official and de facto\
-standards as the back-end compiler.\
+Logtalk is a 
+\b declarative object-oriented logic programming language
+\b0  that\
+extends and leverages the Prolog language with a feature set suitable for\
+programming in the large. Logtalk supports modern code encapsulation and\
+code reuse mechanisms without compromising the declarative programming\
+features of Prolog.\
+\
+Logtalk is implemented as a trans-compiler in highly portable code and can\
+use most modern and standards compliant Prolog implementations as a backend\
+compiler.\
+\
+As a multi-paradigm language, Logtalk includes support for both *prototypes*\
+and *classes*, *protocols* (*interfaces*), *categories* (components and\
+hot-patching), *event-driven programming*, *coinduction*, *lambda expressions*,\
+and *high-level multi-threading programming*. Logtalk uses standard Prolog\
+syntax with the addition of some operators and directives for a smooth learning\
+path.\
+\
+Logtalk is distributed under a commercial friendly license and includes full\
+documentation, portable libraries, portable developer tools, and a large number\
+of programming examples to help get you started.\
 \
 \
 
-\b 2. LOGTALK WEB SITE\
+\b LOGTALK WEB SITE\
 
 \b0 \
 The latest release of the Logtalk package is always available at the URL:\
 \
-	{\field{\*\fldinst{HYPERLINK "http://logtalk.org/"}}{\fldrslt \cf2 \ul \ulc2 http://logtalk.org/}}\
+	{\field{\*\fldinst{HYPERLINK "http://logtalk.org/"}}{\fldrslt \cf2 \ul \ulc2 https://logtalk.org/}}\
 \
 At this address you can also find additional documentation and information\
 about Logtalk.\
 \
 \
 
-\b 3. REGISTRATION\
+\b INSTALLATION\
+
+\b0 \
+Logtalk can be installed either from sources by running a couple of shell\
+scripts or by using an installer ({\field{\*\fldinst{HYPERLINK "https://logtalk.org/download.html"}}{\fldrslt \cf3 https://logtalk.org/download.html}}) for your\
+operating system. For manual installation, see the INSTALL.md file for\
+detailed instructions.\
+\
+See the user manual for a description of the source files organization\
+and for using instructions (to read the user manual open the\
+manuals/index.html file in a web browser).\
+\
+If you are upgrading from a previous Logtalk version, please check the\
+UPGRADING.md file for instructions on how to upgrade your\
+programs or your custom adapter files to run under this new version.\
+\
+\
+
+\b CUSTOMIZATION\
+
+\b0 \
+The file CUSTOMIZE.txt provides detailed instructions for customizing the\
+Logtalk installation and working environment.\
+\
+\
+
+\b RUNNING\
+
+\b0 \
+The file QUICK_START.txt provides quick instructions for those of you\
+in a hurry to run Logtalk, provided that your favorite Prolog compiler\
+is supported.\
+\
+\
+
+\b DOCUMENTATION\
+
+\b0 \
+A quick and highly recommended introduction for users comfortable with Prolog\
+and with general knowledge about object-oriented programming is available at\
+the "Learn X in Y minutes" website:\
+\
+	{\field{\*\fldinst{HYPERLINK "https://learnxinyminutes.com/docs/logtalk/"}}{\fldrslt \cf3 https://learnxinyminutes.com/docs/logtalk/}}\
+\
+The reference and user manuals are provided in XHTML and PDF formats and\
+can be found in the manuals directory. They are also available online at:\
+\
+	{\field{\*\fldinst{HYPERLINK "https://logtalk.org/manuals/index.html"}}{\fldrslt \cf3 https://logtalk.org/manuals/index.html}}\
+\
+The RELEASE_NOTES.md file contains descriptions of all\
+Logtalk updates since the first public version. Check it carefully if you\
+have been using a previous Logtalk version.\
+\
+The API documentation for the core, library, tools, and contributions entities\
+is provided in XHTML format and can be found in the docs directory and\
+also available online at:\
+\
+	{\field{\*\fldinst{HYPERLINK "https://logtalk.org/library/index.html"}}{\fldrslt \cf3 https://logtalk.org/library/index.html}}\
+\
+Most directories include NOTES.md or NOTES.txt documentation files.\
+\
+On POSIX systems, there's also a man page for most shell scripts.\
+A list of these scripts can be generated using the apropos logtalk command.\
+HTML versions of the man pages are also available\
+at the Logtalk website:\
+\
+	{\field{\*\fldinst{HYPERLINK "https://logtalk.org/man/"}}{\fldrslt \cf3 https://logtalk.org/man/}}\
+\
+Additional useful information is available in the official repository wiki at GitHub:\
+\
+	{\field{\*\fldinst{HYPERLINK "https://github.com/LogtalkDotOrg/logtalk3/wiki"}}{\fldrslt \cf3 https://github.com/LogtalkDotOrg/logtalk3/wiki}}\
+\
+\
+
+\b REGISTRATION\
 
 \b0 \
 To register as a Logtalk user either use the registration form found at \
 the Logtalk web site:\
 \
-	{\field{\*\fldinst{HYPERLINK "http://logtalk.org/regform.html"}}{\fldrslt \cf2 \ul \ulc2 http://logtalk.org/regform.html}}\
+	{\field{\*\fldinst{HYPERLINK "http://logtalk.org/regform.html"}}{\fldrslt \cf2 \ul \ulc2 https://logtalk.org/regform.html}}\
 \
 or send an email message to:\
 \
@@ -71,73 +148,24 @@ you intend to use Logtalk (optional)\
 \
 \
 
-\b 4. SUPPORT\
+\b SUPPORT\
 
 \b0 \
-For support options, please consult the page:\
+Support channels include:\
 \
-	{\field{\*\fldinst{HYPERLINK "http://logtalk.org/support.html"}}{\fldrslt \cf2 \ul \ulc2 http://logtalk.org/support.html}}\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}Professional services at {\field{\*\fldinst{HYPERLINK "https://logtalk.pt/"}}{\fldrslt \cf3 https://logtalk.pt/}}\
+{\listtext	\uc0\u8226 	}Community discussion forums at {\field{\*\fldinst{HYPERLINK "https://forums.logtalk.org/"}}{\fldrslt \cf3 https://forums.logtalk.org/}}\
+{\listtext	\uc0\u8226 	}Community live chat room at {\field{\*\fldinst{HYPERLINK "https://gitter.im/LogtalkDotOrg/logtalk3"}}{\fldrslt \cf3 https://gitter.im/LogtalkDotOrg/logtalk3}}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\partightenfactor0
+\cf0 \
+For more information on support options, please consult the web page:\
 \
-\
-
-\b 5. INSTALLATION\
-
-\b0 \
-Logtalk can be installed either from sources by running a few shell scripts \
-or by using one of the provided installers, depending on your operating \
-system. For manual installation, see the file INSTALL.txt for detailed \
-instructions.\
-\
-See the user manual for a description of the source files organization \
-and for using instructions (to read the user manual open the file \
-manuals/index.html with a web browser). Most files are formatted using\
-tabs (the recommended setting is a tab width equivalent to 4 spaces).\
+	{\field{\*\fldinst{HYPERLINK "http://logtalk.org/support.html"}}{\fldrslt \cf2 \ul \ulc2 https://logtalk.org/support.html}}\
 \
 \
 
-\b 6. CUSTOMIZATION\
-
-\b0 \
-The file CUSTOMIZE.txt provides detailed instructions for customizing the\
-Logtalk installation and working environment.\
-\
-\
-
-\b 7. RUNNING\
-
-\b0 \
-The file QUICK_START.txt provides quick instructions for those of you\
-in a hurry to run Logtalk, provided that your favorite Prolog compiler\
-is supported.\
-\
-\
-
-\b 8. DOCUMENTATION\
-
-\b0 \
-The reference and user manuals and the tutorial are provided in XHTML format \
-and can be found in the manuals directory. PDF versions of the reference\
-and user manuals can be downloaded from the Logtalk web site.\
-\
-The file RELEASE_NOTES.txt contains descriptions of all Logtalk updates \
-since the first public version. Read it carefully if you have been using a \
-previous Logtalk version.\
-\
-The documentation for the Logtalk library is provided in XHTML format and\
-can be found in the library/docs directory.\
-\
-\
-
-\b 9. UPGRADING\
-
-\b0 \
-If you are upgrading from a previous Logtalk version, please check the file \
-UPGRADING.txt for instructions on how to upgrade your programs or your \
-custom adapter files to run under this new version.\
-\
-\
-
-\b 10. CITATIONS\
+\b CITATIONS\
 
 \b0 \
 If you find Logtalk useful, please include a citation on your publications.\
@@ -147,21 +175,14 @@ thesis on Logtalk are good choices).\
 \
 \
 
-\b 11. CONTRIBUTIONS\
+\b CONTRIBUTIONS\
 
 \b0 \
-Contributions, constructive criticism, patches, bug reports, and suggestions\
-are always welcome. Major code and documentation contributions require the\
-contributor to sign and submit a contributor license agreement and should\
-be made available under the Logtalk license without any additional terms or\
-conditions. Contributions using other licensing terms may also be distributed\
-with Logtalk with the understanding that the terms of their use depends solely\
-on the authors chosen licensing terms and may require a separate, independent,\
-agreement between users and authors.\
+Contributions are most welcome! See the CONTRIBUTING.md file for details.\
 \
 \
 
-\b 12. LEGAL\
+\b LEGAL\
 
 \b0 \
 Logtalk is copyrighted by Paulo Moura and made available under the Apache\
