@@ -28,4 +28,18 @@
 		comment is 'Tests for the "clustering" example.'
 	]).
 
+	condition :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'jars', JarsDirectory),
+		os::directory_files(JarsDirectory, Files),
+		list::member(File, Files),
+		atom_concat('commons-math3-', Suffix, File),
+		sub_atom(Suffix, _, 4, 0, '.jar').
+
+	test(clustering_01) :-
+		clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters),
+		sort(Clusters, SortedClusters),
+		SortedClusters == [[1.0], [1.5, 1.8], [3.5, 3.6], [4.0, 4.2]].
+
 :- end_object.
