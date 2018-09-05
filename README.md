@@ -113,7 +113,7 @@ also available online at:
 
 https://logtalk.org/library/index.html
 
-Most directories include `NOTES.md` or `NOTES.txt ` documentation files.
+Most directories include `NOTES.md` or `NOTES.txt` documentation files.
 
 On POSIX systems, there's also a [man page](man/man1) for most shell scripts.
 A list of these scripts can be generated using the `apropos logtalk` command.
