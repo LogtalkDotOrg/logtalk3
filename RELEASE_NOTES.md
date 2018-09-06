@@ -24,7 +24,10 @@ RELEASE NOTES
 3.21.0 - October ??, 2018
 =========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* ADDED: Sublime Text syntax file using the new `.sublime-syntax` format.
 
 
 3.20.0 - September 5, 2018
