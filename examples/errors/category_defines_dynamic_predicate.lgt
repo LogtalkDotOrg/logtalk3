@@ -20,11 +20,11 @@
 
 :- category(category_defines_dynamic_predicate).
 
-	% dynamic predicates may be declared inside categories but ...
+	% dynamic predicates may be *declared* inside categories but ...
 	:- public(dynpred/1).
 	:- dynamic(dynpred/1).
 
-	% ... defining clauses for dynamic predicates is not allowed
+	% ... *defining* clauses for dynamic predicates is not allowed
 	dynpred(1).
 	dynpred(2).
 	dynpred(3).

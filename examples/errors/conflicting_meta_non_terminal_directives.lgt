@@ -18,13 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(duplicated_meta_predicte_directives).
+:- object(conflicting_meta_non_terminal_directives).
 
-	:- meta_predicate(foo(0)).
+	:- meta_non_terminal(foo(0)).
 
-	foo(X) :-
-		call(X).
+	foo(X) --> call(X).
 
-	:- meta_predicate(foo(*)).
+	:- meta_non_terminal(foo(*)).
 
 :- end_object.

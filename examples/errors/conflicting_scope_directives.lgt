@@ -18,12 +18,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(duplicated_meta_non_terminal_directives).
+:- object(conflicting_scope_directives).
 
-	:- meta_non_terminal(foo(0)).
+	:- public(foo/1).
 
-	foo(X) --> call(X).
+	foo(1).
+	foo(2).
+	foo(3).
 
-	:- meta_non_terminal(foo(*)).
+	:- protected(foo/1).
 
 :- end_object.

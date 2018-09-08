@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(duplicated_scope_directives).
+:- object(conflicting_meta_predicate_directives).
 
-	:- public(foo/1).
+	:- meta_predicate(foo(0)).
 
-	foo(1).
-	foo(2).
-	foo(3).
+	foo(X) :-
+		call(X).
 
-	:- protected(foo/1).
+	:- meta_predicate(foo(*)).
 
 :- end_object.

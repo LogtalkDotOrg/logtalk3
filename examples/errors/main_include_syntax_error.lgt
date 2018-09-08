@@ -23,6 +23,7 @@
 	a.
 	b.
 
+	% try to include a file that contains a syntax error
 	:- include(include_syntax_error).
 
 	f.

@@ -24,6 +24,12 @@ RELEASE NOTES
 3.21.0 - October ??, 2018
 =========================
 
+Examples
+--------
+
+* IMPROVED: The source code comments of the `errors` example and renamed some
+entities for clarity.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

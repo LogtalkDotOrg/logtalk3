@@ -18,8 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% whewn using a multifile predicate, there must be an object or
+% when using a multifile predicate, there must be an object or
 % category holding the multifile predicate primary declaration
+%
+% the object or category holding the multifile predicate primary
+% declaration must be compiled first
 
 :- object(no_multifile_primary_declaration).
 
