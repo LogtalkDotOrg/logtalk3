@@ -22,4 +22,5 @@ file.
 
 This simple programming example illustrates that "super" calls (the ^^/1
 control construct) preserve the value of "self" when calling an inherited
-definition.
+definition. This allows any `::/1` goal in the called inherited definition
+to work as expected in the correct context.

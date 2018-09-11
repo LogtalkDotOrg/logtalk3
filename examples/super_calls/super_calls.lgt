@@ -33,8 +33,8 @@
 :- object(prototype,
 	extends(parent)).
 
-	:- public(test/1).
-	test(Local) :-
+	:- public(correct/1).
+	correct(Local) :-
 		% ^^/2 goals, aka super calls, preserve self
 		^^get_local(Local).
 

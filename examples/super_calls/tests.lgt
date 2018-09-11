@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2018/08/21,
+		date is 2018/09/11,
 		comment is 'Unit tests for the "super_calls" example.'
 	]).
 
@@ -40,7 +40,7 @@
 		Local == prototype.
 
 	test(super_calls_03) :-
-		prototype::test(Local),
+		prototype::correct(Local),
 		Local == prototype.
 
 	test(super_calls_04) :-
