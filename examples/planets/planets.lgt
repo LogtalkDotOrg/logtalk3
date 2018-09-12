@@ -25,7 +25,7 @@
 
 :- protocol(physical_properties).
 
-    :- public([
+	:- public([
 		mass/1, volume/1
 	]).
 
@@ -35,18 +35,18 @@
 % next, we define two objects, m1 and m2, implementing the protocol:
 
 :- object(m1,
-    implements(physical_properties)).
+	implements(physical_properties)).
 
-    mass(3).
+	mass(3).
 	volume(2.17).
 
 :- end_object.
 
 
 :- object(m2,
-    implements(physical_properties)).
+	implements(physical_properties)).
 
-    mass(4).
+	mass(4).
 	volume(9.21).
 
 :- end_object.
@@ -67,9 +67,9 @@
 
 :- category(planet).
 
-    :- public([
-		 gravitational_acceleration/1,
-		 weight/2
+	:- public([
+		gravitational_acceleration/1,
+		weight/2
 	]).
 
 	weight(Object, Weight) :-
