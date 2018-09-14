@@ -105,28 +105,29 @@ the same as the first time it was loaded).
 Deprecated directives, control constructs, and flags
 ----------------------------------------------------
 
-The `:/1` control construct is deprecated in Logtalk 3.x. Its functionality
-is subsumed by the `^^/1` control construct (aka "super" control construct),
-which have been generalized to allow calling any imported or inherited
-predicate. In addition, static binding support for the `^^/1` control
-construct have been implemented (enabled by turning on the `optimize`
-compiler flag).
+The `:/1` control construct is deprecated and only available up to version
+3.18.0. Its functionality is now subsumed by the `^^/1` control construct
+(aka "super" control construct), which have been generalized to allow
+calling any imported or inherited predicate. In addition, static binding
+support for the `^^/1` control construct have been implemented (enabled by
+turning on the `optimize` compiler flag).
 
-The documentation only directives `calls/1` and `uses/1` are deprecated. The
-reflection API in Logtalk 3.x now returns all object (and module) dependencies
-found on sufficiently instantiated `::/2` and `:/2` calls when compiling an
-object or a category.
+The documentation only directives `calls/1` and `uses/1` are deprecated and
+only available up to version 3.18.0. The reflection API in Logtalk 3.x now
+returns all object (and module) dependencies found on sufficiently instantiated
+`::/2` and `:/2` calls when compiling an object or a category.
 
 The `alias/3` directive is deprecated and replaced by the new `alias/2`
 directive.
 
-The `version` flag is deprecated. New code that doesn't require compatibility
-with Logtalk 2.x should use instead the new `version_data` flag.
+The `version` flag is deprecated and only available up to version 3.18.0.
+New code that doesn't require compatibility with Logtalk 2.x should use
+instead the new `version_data` flag.
 
-The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed in Logtalk
-3.x for clarity to, respectively, `unknown_entities`, `singleton_variables`,
-and `scratch_directory`. The old names are deprecated and should only be used
-when compatibility with Logtalk 2.x is still required.
+The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed for clarity
+to, respectively, `unknown_entities`, `singleton_variables`, and
+`scratch_directory`. The old names are deprecated and only available up to
+version 3.18.0.
 
 Stricter syntax
 ---------------
