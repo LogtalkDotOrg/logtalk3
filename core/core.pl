@@ -1946,7 +1946,7 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 
 % public relations don't change predicate scopes
 '$lgt_filter_scope'((public), Scope, Scope).
-% protected relatiosn change public predicates to protected predicates
+% protected relations change public predicates to protected predicates
 '$lgt_filter_scope'(protected, Scope, protected) :-
 	Scope \= (private).
 
@@ -3756,11 +3756,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_scope'((private), p).
 '$lgt_scope'(protected, p(p)).
-'$lgt_scope'((public), p(p(p))).
+'$lgt_scope'((public),  p(p(p))).
 
 
 
-% '$lgt_filter_scope'(+nonvar, -nonvar)
+% '$lgt_filter_scope'(@nonvar, -nonvar)
 %
 % filters the predicate scope;
 % used in the implementation of protected-qualified relations between entities;
@@ -3772,7 +3772,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_filter_scope_container'(+nonvar, +object_identifier, +object_identifier, -object_identifier)
+% '$lgt_filter_scope_container'(@nonvar, @object_identifier, @object_identifier, -object_identifier)
 %
 % filters the predicate scope container;
 % used in the implementation of private-qualified relations between entities;
@@ -11177,7 +11177,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % existential quantifier outside bagof/3 and setof/3 calls
 
 '$lgt_compile_body'(_^_, _, _, _) :-
-	% in some weird cases, the use may be defining a (^)/2 predicate ...
+	% in some unusual cases, the user may be defining a (^)/2 predicate ...
 	\+ '$lgt_pp_defines_predicate_'(_^_, _, _, _, _, _),
 	% ... but otherwise (^)/2 cannot be used outside bagof/3 and setof/3 calls
 	throw(existence_error(procedure, (^)/2)).
@@ -13543,10 +13543,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_error_predicate'(Exception, TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx_head'(Ctx, Head0),
 	(	Head0 = _::Head ->
+		% object (or category) multifile predicate clause
 		true
 	;	Head0 = ':'(_,Head) ->
+		% module multifile predicate clause
 		true
-	;	Head0 = Head
+	;	% non-multifile predicate
+		Head0 = Head
 	),
 	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
 	TPred = throw(error(Exception, logtalk(Head, ExCtx))),
@@ -18399,7 +18402,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_initialization_goal'(InitializationGoal) :-
 	findall(
 		Line-Goal,
-		('$lgt_pp_file_object_initialization_'(_, Goal, Line-_); '$lgt_pp_file_initialization_'(Goal, Line-_)),
+		(	'$lgt_pp_file_object_initialization_'(_, Goal, Line-_)
+		;	'$lgt_pp_file_initialization_'(Goal, Line-_)
+		),
 		LineGoals
 	),
 	keysort(LineGoals, SortedLineGoals),
