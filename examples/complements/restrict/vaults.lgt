@@ -43,7 +43,7 @@
 :- end_object.
 
 
-% define a "my_vault" object, which is lives in fear of being hacked:
+% define a "my_vault" object, which lives in fear of being hacked:
 
 :- object(my_vault,
 	extends(vault)).
