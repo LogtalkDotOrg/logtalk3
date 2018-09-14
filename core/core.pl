@@ -16863,6 +16863,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_dynamic_',
 	% static entities only otherwise abolishing the dynamic entity would result
 	% in an attempt to retract a clause for the fail/0 built-in control construct
+	\+ '$lgt_pp_complemented_object_'(_, _, _, _, _),
+	% not compiling a complementing category, which can add a scope directive
+	% for predicates that are only defined in the complemented objects 
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)

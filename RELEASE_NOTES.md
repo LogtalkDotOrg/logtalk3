@@ -24,6 +24,13 @@ RELEASE NOTES
 3.21.0 - October ??, 2018
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Allow a complementing category to add a predicate scope directive but
+no predicate definition allowing any definitions in the complemented objects
+to be found and used.
+
 Examples
 --------
 
