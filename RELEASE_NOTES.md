@@ -27,9 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Allow a complementing category to add a predicate scope directive but
-no predicate definition allowing any definitions in the complemented objects
-to be found and used.
+* CHANGED: Allow a complementing category to add a predicate scope directive
+but no predicate definition allowing any definitions in complemented objects
+(compiled with the `complements` flag set to `allow`) to be found and used.
 
 Examples
 --------
