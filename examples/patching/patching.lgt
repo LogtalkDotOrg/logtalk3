@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% define an broken object, which will be fixed by defining a complementing
+% define a broken object, which will be fixed by defining a complementing
 % category containing patches:
 
 :- object(broken).
@@ -41,6 +41,11 @@
 	last([], Last, Last).
 	last([Head| Tail], _, Last) :-
 		last(Tail, Head, Last).
+
+	% missing scope directive
+	nextto(X, Y, [X, Y| _]).
+	nextto(X, Y, [_| Tail]) :-
+		nextto(X, Y, Tail).
 
 :- end_object.
 
@@ -80,6 +85,11 @@
 	last([Head| Tail], _, Last) :-
 		last(Tail, Head, Last).
 
+	% missing scope directive
+	nextto(X, Y, [X, Y| _]).
+	nextto(X, Y, [_| Tail]) :-
+		nextto(X, Y, Tail).
+
 :- end_object.
 
 
@@ -106,5 +116,8 @@
 
 	% correct the scope of the last/3 auxiliary predicate
 	:- private(last/3).
+
+	% add the missing scope directive for the nextto/3 predicate
+	:- public(nextto/3).
 
 :- end_category.

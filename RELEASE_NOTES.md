@@ -37,6 +37,9 @@ Examples
 * IMPROVED: The source code comments of the `errors` example and renamed some
 entities for clarity.
 
+* UPDATED: The `patching` example to illustrate how to use a complementing
+category to add a missing predicate scope directive to an object.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

@@ -43,6 +43,7 @@ no
 | ?- broken::is_proper_list([a,b,c|_]).
 no
 
+
 % verify the patch in the "patch" category for the wrong scope of the last/3
 % predicate declared in the object "broken":
 
@@ -50,3 +51,10 @@ no
     permission_error(access, private_predicate, last/3),
     broken::last(_, _, _),
     user)
+
+
+% verify the patch in the "patch" category for the wrong scope of the last/3
+% predicate declared in the object "broken":
+
+| ?- broken::nextto(2, 3, [1,2,3]).
+yes

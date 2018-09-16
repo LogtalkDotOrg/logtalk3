@@ -22,13 +22,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2016/08/22,
+		date is 2018/09/16,
 		comment is 'Unit tests for the "patching" example.'
 	]).
-
-	:- uses(list, [memberchk/2]).
 
 	cover(broken).
 	cover(metaclass).
@@ -36,32 +34,39 @@
 	cover(instance).
 	cover(patch).
 
-	succeeds(patching_1) :-
-		setof((Category, Object), complements_object(Category, Object), Pairs),
-		ground(Pairs), memberchk((patch,broken), Pairs), memberchk((patch,broken_class), Pairs).
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
 
-	succeeds(patching_2) :-
+	succeeds(patching_01) :-
+		setof(Object, complements_object(patch, Object), Objects),
+		Objects == [broken, broken_class].
+
+	succeeds(patching_02) :-
 		broken::is_proper_list([1,2,3]).
 
-	succeeds(patching_3) :-
+	succeeds(patching_03) :-
 		instance::is_proper_list([1,2,3]).
 
-	fails(patching_4) :-
+	fails(patching_04) :-
 		broken::is_proper_list(_).
 
-	fails(patching_5) :-
+	fails(patching_05) :-
 		instance::is_proper_list(_).
 
-	fails(patching_6) :-
+	fails(patching_06) :-
 		broken::is_proper_list([a,b,c|_]).
 
-	fails(patching_7) :-
+	fails(patching_07) :-
 		instance::is_proper_list([a,b,c|_]).
 
-	throws(patching_8, error(permission_error(access, private_predicate, last/3), _)) :- 
+	throws(patching_08, error(permission_error(access, private_predicate, last/3), _)) :- 
 		broken::last(_, _, _).
 
-	throws(patching_9, error(permission_error(access, private_predicate, last/3), _)) :- 
+	throws(patching_09, error(permission_error(access, private_predicate, last/3), _)) :- 
 		instance::last(_, _, _).
+
+	succeeds(patching_10) :-
+		broken::nextto(2, 3, [1,2,3]).
 
 :- end_object.
