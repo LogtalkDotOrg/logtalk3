@@ -31,6 +31,13 @@ Logtalk compiler and runtime
 but no predicate definition allowing any definitions in complemented objects
 (compiled with the `complements` flag set to `allow`) to be found and used.
 
+Prolog adapter and integration files
+------------------------------------
+
+* REMOVED: Unsupported/non-functional adapter file for Jekejeke Prolog as
+requested by its developer who claims that Jekejeke Prolog license forbids
+using it to run Logtalk.
+
 Examples
 --------
 
