@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample loader file
-%  Last updated on April 3, 2018
+%  Last updated on September 16, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -56,6 +56,6 @@
 
 %  Tip: don't use debug/1 or optimize/1 compiler options in `logtalk_load/2`
 %  calls to allow easy recompilation of source files for debugging during
-%  development. Later, when the code becomes stable, you can always add a
-%  `optimize(on)` compiler option or set the `optimize` flag globally from
-%  your settings file for best performance.
+%  development using the make tool. Later, when the code becomes stable, you
+%  can always add a `optimize(on)` compiler option or set the `optimize` flag
+%  globally from your settings file for best performance.
