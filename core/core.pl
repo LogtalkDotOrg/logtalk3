@@ -3267,6 +3267,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_current_logtalk_flag'(Flag, Value, ExCtx) :-
 	(	var(Flag) ->
+		% enumerate, by backtracking, existing flags
 		(	'$lgt_valid_flag'(Flag)
 		;	'$lgt_user_defined_flag_'(Flag, _, _)
 		),
@@ -3275,7 +3276,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compiler_flag'(Flag, Value)
 	;	'$lgt_user_defined_flag_'(Flag, _, _) ->
 		'$lgt_compiler_flag'(Flag, Value)
-	;	'$lgt_check'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), ExCtx))
+	;	% invalid flag; generate error
+		'$lgt_check'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), ExCtx))
 	).
 
 
@@ -3364,6 +3366,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_current_flag_'(Flag, Value)).
 
 
+% map the flag type to a closure that can be called with the flag
+% value as argument for type-checking
 '$lgt_map_user_defined_flag_type'(boolean, '$lgt_is_boolean').
 '$lgt_map_user_defined_flag_type'(atom, atom).
 '$lgt_map_user_defined_flag_type'(integer, integer).
@@ -6318,7 +6322,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	OldFile == NewFile ->
-		% either reloading the same source file or no source file data is available; consider entity redefinition normal
+		% either reloading the same source file or no source file data is available; assume entity redefinition normal
 		'$lgt_print_message'(comment(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
 		'$lgt_increment_loading_warnings_counter',
@@ -6647,7 +6651,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_write_runtime_clauses'(Output, SourceFile),
 	% write initialization/1 directive at the end of the file to improve
 	% compatibility with non-ISO compliant Prolog compilers
-	'$lgt_write_initialization_call'(Output, SourceFile).
+	'$lgt_write_initialization_directive'(Output, SourceFile).
 
 
 '$lgt_generate_loaded_file_table_entry'(SourceFile) :-
@@ -6661,7 +6665,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	% ... or if the file modification date changed (e.g. to fix compilation errors)
 	'$lgt_file_modification_time'(SourceFile, TimeStamp),
-	% compute text properties, which are only available after successful file compilation
+	% compute text properties that are only available after successful file compilation
 	(	'$lgt_pp_file_encoding_'(Encoding, _, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			TextProperties = [encoding(Encoding), BOM]
@@ -18385,12 +18389,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_write_initialization_call'(@stream, +atom)
+% '$lgt_write_initialization_directive'(@stream, +atom)
 %
-% writes the initialization goal for the compiled source file, a
-% conjunction of the initialization goals of the defined entities
+% writes the initialization directive for the compiled source file,
+% a conjunction of the initialization goals of the defined entities
 
-'$lgt_write_initialization_call'(Stream, Path) :-
+'$lgt_write_initialization_directive'(Stream, Path) :-
 	'$lgt_initialization_goal'(Goal),
 	(	Goal == true ->
 		true
@@ -18401,8 +18405,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_initialization_goal'(-callable)
 %
-% source file initialization goal constructed from each object initialization
-% goals and from the source file initialization/1 directive if present
+% source file initialization goal constructed from object initialization
+% directives and from source file initialization/1 directives if present
 
 '$lgt_initialization_goal'(InitializationGoal) :-
 	findall(
@@ -18412,6 +18416,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 		LineGoals
 	),
+	% ensure source file textual order for the initialization goals
+	% (this assumes that the backend Prolog system provides access to
+	% read term position...)
 	keysort(LineGoals, SortedLineGoals),
 	findall(
 		Goal,
@@ -23324,7 +23331,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% optimize any entity code present, allowing static binding to
 		% entity resources, and preventing their redefinition
 		optimize(on), reload(skip),
-		% don't print any compilation and loading messages
+		% don't print any compilation or loading messages
 		report(off)
 	],
 	'$lgt_load_settings_file'(Value, Options, Result).
