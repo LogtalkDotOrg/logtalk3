@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on July 23, 2018
+%  Last updated on September 18, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -46,7 +46,7 @@
 
 :- if(\+ license:license(asl2, _, _)).
 	:- multifile(license:license/3).
-	license:license(asl2, lgpl, [
+	license:license(asl2, permissive, [
 		comment('Apache License 2.0'),
 		url('http://www.apache.org/licenses/LICENSE-2.0')
 	]).
