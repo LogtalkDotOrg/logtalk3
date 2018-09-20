@@ -53,7 +53,7 @@ In Logtalk, a library is simply a directory containing source files. Library
 paths can be declared using the `logtalk_library_path/2` dynamic and multifile
 predicate. This allows compiling and loading of libraries and library files
 using the library names instead of the full library paths. It also makes it
-easy to relocate libraries.
+easier to relocate libraries.
 
 Inside your Logtalk user folder, you will find a `paths` folder containing
 a sample file which, when loaded, defines the library paths for the standard
@@ -71,8 +71,8 @@ Logtalk interfaces with a specific backend Prolog compiler using a adapter
 file that can be found on the `adapters` folder in the Logtalk installation
 folder. These adapter files define default values of the flags that are used
 by Logtalk when compiling source files (for a full description of these flags,
-consult the `Writing, Running, and Debugging Logtalk Programs` section of
-the User Manual).
+consult the `Writing, Running, and Debugging Logtalk Programs` section of the
+User Manual).
 
 The default compiler flag settings are appropriated for the *development*
 (but not necessarily for the *deployment*) of applications. Check the example
@@ -94,7 +94,7 @@ Some of the default flag values that you may want to change include:
     to move compiler generated temporary files out of the way or to
     collect them in a single place for embedding Logtalk applications
 
-* `portability` and `underscore_variables`  
+* `portability`  
     essential if you're writing portable Logtalk applications
 
 Check the `adapters/NOTES.md` file for Prolog specific compatibility notes.
@@ -129,6 +129,6 @@ Adding Logtalk support to text editors and IDEs
 Inside your Logtalk user folder, you will find a `coding` folder, containing
 support files for several text editors, which add support for syntax
 highlighting and other text editing services for Logtalk source files.
-Support for several syntax highlighters (used e.g. in web pages and in wikis
-and issue trackers) is also included. For details, see the `coding/NOTES.md`
+Support for several syntax highlighters (used e.g. in web pages, wikis, and
+issue trackers) is also included. For details, see the `coding/NOTES.md`
 file.
