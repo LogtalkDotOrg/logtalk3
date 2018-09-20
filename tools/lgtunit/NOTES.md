@@ -65,8 +65,8 @@ This tool can be loaded using the query:
 	| ?- logtalk_load(lgtunit(loader)).
 
 
-Compiling and loading unit tests
---------------------------------
+Writing, compiling, and loading unit tests
+------------------------------------------
 
 In order to write your own unit tests, define objects extending the `lgtunit`
 object. For example:
@@ -248,8 +248,8 @@ code coverage.
 Parameterized unit tests can be easily defined by using parametric objects.
 
 Note: when using the `(<<)/2` debugging control construct to access and test
-an object internal predicates, make sure that the `context_switching_calls`
-compiler flag is set to `allow` for those objects.
+an object internal (i.e. non public) predicates, make sure that the compiler
+flag `context_switching_calls` is set to `allow` for those objects.
 
 
 User-defined unit test dialects
@@ -708,7 +708,7 @@ Known issues
 ------------
 
 Parameter variables (`_VariableName_`) cannot currently be used in the
-definition of test options (e.g. `condition/1).
+definition of test options (e.g. `condition/1`).
 
 Deterministic unit tests are currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers do the lack of a required built-in
