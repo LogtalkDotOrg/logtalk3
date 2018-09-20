@@ -65,7 +65,7 @@ see our unit testing framework documentation at:
 
 https://github.com/LogtalkDotOrg/logtalk3/blob/master/tools/lgtunit/NOTES.md
 
-Please note that portability is main Logtalk feature. As a general rule, new
+Please note that portability is a main Logtalk feature. As a general rule, new
 code should depend only on standard or de factor standard features available
 from the supported backend Prolog systems. But contributions that enhance the
 integration with a particular backend Prolog system are also sought as long
