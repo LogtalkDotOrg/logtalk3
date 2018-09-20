@@ -18,10 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/*	This example illustrates how to associate a set of predicates with a
-	compound term.   Parameters can be accessed from within an object by
-	using the execution-context built-in methods this/1 and parameter/2;
-	both alternatives are illustrated below.
+/*
+	This example illustrates how to associate a set of predicates with a
+	compound term. Parameters can be accessed from within an object by
+	using either (1) execution-context built-in methods parameter/2 and
+	this/1 or (2) using parameter variables. The second alternative is
+	illustrated below. Parameter variables are variables in the entity
+	opening directive that use the syntax _VarName_.
 */
 
 

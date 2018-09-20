@@ -33,6 +33,7 @@
 :- object(fred,
 	extends(clyde)).
 
+	% override inherited definition
 	color(white).
 
 :- end_object.

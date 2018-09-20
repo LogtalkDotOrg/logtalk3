@@ -18,8 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% note that the following directive is a *Logtalk* include/1
-% directive, *not* a Prolog include/1 directive
+% note that the following directive is compiled as a *Logtalk* include/1
+% directive, *not* as a Prolog include/1 directive to avoid portability
+% issues between backend Prolog compilers
 :- include('vowels.pl').
 
 

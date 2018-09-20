@@ -66,6 +66,7 @@ a(3, c, 'C').
 	map_(_, _).
 
 	% another common case is to define accessors to a plain Prolog table
+	% (see the uses/2 directive above)
 	
 	a(N, C) :-
 		a(N, C, _).
