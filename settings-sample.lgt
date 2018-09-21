@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on November 28, 2017
+%  Last updated on September 21, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -50,9 +50,9 @@
 %  scripts automatically set the `LOGTALK_STARTUP_DIRECTORY` variable.
 %  On Windows systems, the integration shortcuts `Start in` field is set by
 %  default to `%LOGTALKUSER%` as the `%CD%` alternative only works on some
-%  versions. A workaround to use per-project settings files is to copy the
-%  shortcut to the project directory and to and edit its `Target` field to
-%  prefix its content with:
+%  Windows versions. A workaround to use per-project settings files is to
+%  copy the shortcut to the project directory and to and edit its `Target`
+%  field to prefix its content with:
 %
 %  C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
 %
@@ -91,7 +91,7 @@
 :- initialization(
 	logtalk_load(help(loader))
 ).
-*/
+%*/
 
 
 %  To load most of developer tools at startup, uncomment the following lines:
@@ -100,7 +100,7 @@
 :- initialization(
 	logtalk_load(tools(loader))
 ).
-*/
+%*/
 
 
 %  To call ECLiPSe/SWI-Prolog make/0 when calling logtalk_make/0 or
@@ -119,11 +119,11 @@ logtalk_make_target_action(all) :-
 	make.
 
 :- endif.
-*/
+%*/
 
 
 %  To define a "library" alias for your projects, edit and uncomment the
-%  following lines (the library path must end with a slash character):
+%  following lines (the library paths must end with a slash character):
 
 /*
 :- multifile(logtalk_library_path/2).
@@ -132,7 +132,7 @@ logtalk_make_target_action(all) :-
 logtalk_library_path(my_project, home('my_project/')).
 logtalk_library_path(my_project_libraries, my_project('libraries/')).
 logtalk_library_path(my_project_examples, my_project('examples/')).
-*/
+%*/
 
 
 %  To define a "library" alias for your project while making it
@@ -143,7 +143,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	logtalk_load_context(directory, Directory),
 	assertz(logtalk_library_path(my_project, Directory))
 )).
-*/
+%*/
 
 
 %  To define a common directory for Logtalk compiler generated temporary
@@ -152,9 +152,9 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
-	set_logtalk_flag(scratch_directory, '$LOGTALKUSER/logtalk/scratch/')
+	set_logtalk_flag(scratch_directory, '$LOGTALKUSER/scratch/')
 )).
-*/
+%*/
 
 
 %  To make Logtalk completely silent for batch processing uncomment the
@@ -167,7 +167,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	%set_prolog_flag(informational, off),               % SICStus Prolog
 	set_logtalk_flag(report, off)
 )).
-*/
+%*/
 
 
 %  To make Logtalk startup and compilation less verbose uncomment the
@@ -177,7 +177,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(report, warnings)
 )).
-*/
+%*/
 
 
 %  To compile all your source files for debugging using the Logtalk
@@ -196,7 +196,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(optimize, off),
 	set_logtalk_flag(source_data, on)
 )).
-*/
+%*/
 
 
 % To take advantage of ECLiPSe `.eco` files, uncomment the
@@ -207,7 +207,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(clean, off),
 	set_logtalk_flag(prolog_loader, [output:eco])
 )).
-*/
+%*/
 
 
 % To take advantage of SWI-Prolog `.qlf` files, uncomment the
@@ -218,7 +218,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(clean, off),
 	set_logtalk_flag(prolog_loader, [qcompile(auto)])
 )).
-*/
+%*/
 
 
 %  To compile all your source files for debugging using the SWI-Prolog
@@ -244,7 +244,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	)).
 
 :- endif.
-*/
+%*/
 
 
 %  To compile all your source files for profiling using the SWI-Prolog
@@ -260,7 +260,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	)).
 
 :- endif.
-*/
+%*/
 
 
 %  To use PDT for Logtalk development, uncomment the following lines:
@@ -274,7 +274,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(source_data, on),
 	set_prolog_flag(optimise, off)
 )).
-*/
+%*/
 
 
 %  To automatically delete temporary files generated during the compilation
@@ -285,7 +285,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(clean, on)
 )).
-*/
+%*/
 
 
 %  To avoid recompilation of stable source files (assuming a single backend
@@ -296,7 +296,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(clean, off),
 	set_logtalk_flag(reload, changed)
 )).
-*/
+%*/
 
 
 %  To develop portable Logtalk applications uncomment the following lines
@@ -306,11 +306,11 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
-	set_logtalk_flag(unknown_predicates, warning),
 	set_logtalk_flag(portability, warning),
+	set_logtalk_flag(unknown_predicates, warning),
 	set_logtalk_flag(missing_directives, warning)
 )).
-*/
+%*/
 
 
 %  To maximize performance when deploying an application by turning on all
@@ -327,7 +327,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(complements, deny),
 	set_logtalk_flag(dynamic_declarations, deny)
 )).
-*/
+%*/
 
 
 %  To fully support hot-patching of compiled code at runtime uncomment the
@@ -337,17 +337,17 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(complements, allow)
 )).
-*/
+%*/
 
 
-%  To support adding new features to compiled code at runtime uncomment the
-%  following lines:
+%  To support adding new features (but not patching existing ones) to
+%  compiled code at runtime uncomment the following lines:
 
 /*
 :- initialization((
 	set_logtalk_flag(complements, restrict)
 )).
-*/
+%*/
 
 
 %  To prevent using the <</2 debugging context-switching control construct
@@ -357,7 +357,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(context_switching_calls, deny)
 )).
-*/
+%*/
 
 
 %  To lock your entities to prevent breaking encapsulation, uncomment the
@@ -370,7 +370,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(dynamic_declarations, deny),
 	set_logtalk_flag(source_data, off)
 )).
-*/
+%*/
 
 
 %  To suppress some or all startup messages, uncomment the following lines:
@@ -399,7 +399,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	%logtalk::message_hook(_, comment(help), core, _).
 
 :- end_category.
-*/
+%*/
 
 
 %  To print all otherwise silent compiler messages, uncomment the following
@@ -420,4 +420,4 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 		logtalk::print_message_tokens(Stream, Prefix, Tokens).
 
 :- end_category.
-*/
+%*/
