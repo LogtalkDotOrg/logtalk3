@@ -52,4 +52,34 @@
 		delete_file(Directory),
 		make_directory(Directory).
 
+:- elif(current_prolog_flag(dialect, eclipse)).
+
+	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_eclipse.pl" > combined.pl && eclipse  -L iso -t user -f combined.pl
+
+	logtalk_library_path(scratch_directory, Directory) :-
+		get_flag(tmp_dir, TMP_DIR0),
+		atom_string(TMP_DIR, TMP_DIR0),
+		get_flag(unix_time, Time),
+		number_codes(Time, TimeCodes),
+		atom_codes(TimeAtom, TimeCodes),
+		atom_concat(TMP_DIR, logtalk, Directory0),
+		atom_concat(Directory0, TimeAtom, Directory),
+		mkdir(Directory).
+
+:- elif(current_prolog_flag(dialect, sicstus)).
+
+	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
+
+	:- use_module(library(system), [environ/2, now/1]).
+	:- use_module(library(file_systems), [make_directory/1]).
+
+	logtalk_library_path(scratch_directory, Directory) :-
+		environ('SP_TEMP_DIR', SP_TEMP_DIR),
+		now(Time),
+		number_codes(Time, TimeCodes),
+		atom_codes(TimeAtom, TimeCodes),
+		atom_concat(SP_TEMP_DIR, logtalk, Directory0),
+		atom_concat(Directory0, TimeAtom, Directory),
+		make_directory(Directory).
+
 :- endif.

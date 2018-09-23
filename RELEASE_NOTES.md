@@ -38,6 +38,12 @@ Prolog adapter and integration files
 requested by its developer who claims that Jekejeke Prolog license forbids
 using it to run Logtalk.
 
+Library
+-------
+
+* UPDATED: The `parallel_logtalk_processes_setup.pl` Prolog file with sample
+code for ECLiPSe and SICStus Prolog.
+
 Examples
 --------
 
