@@ -24,6 +24,7 @@
 :- if(current_prolog_flag(dialect, swi)).
 
 	% usage: swilgt -f parallel_logtalk_processes_setup.pl
+	% in alternative, add the code to your .swiplrc or swipl.ini file and start Logtalk as usual
 
 	:- use_module(library(uuid), []).
 
@@ -44,6 +45,7 @@
 :- elif(current_prolog_flag(dialect, yap)).
 
 	% usage: yaplgt -f parallel_logtalk_processes_setup.pl
+	% in alternative, add the code to your  ~/.yaprc, ~/.prologrc, or ~/prolog.ini file and start Logtalk as usual
 
 	:- use_module(library(system)).
 
@@ -69,6 +71,7 @@
 :- elif(current_prolog_flag(dialect, sicstus)).
 
 	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
+	% in alternative, add the code to your ~/.sicstusrc or ~/sicstus.ini file and start Logtalk as usual
 
 	:- use_module(library(system), [environ/2, now/1]).
 	:- use_module(library(file_systems), [make_directory/1]).
