@@ -44,7 +44,7 @@
 	]).
 
 	identify :-
-		::retractall(known_(_, _, _)),
+		retractall(known_(_, _, _)),
 		write('Bird identification expert system'), nl, nl,
 		forall(
 			(order::leaf(Bird), check(Bird)),
@@ -110,26 +110,26 @@
 		ask(wings, X).
 
 	ask(Attribute, Value) :-
-		::known_(yes, Attribute, Value),
+		known_(yes, Attribute, Value),
 		!.
 	ask(Attribute, Value) :-
-		::known_(_, Attribute, Value),
+		known_(_, Attribute, Value),
 		!, fail.
 	ask(Attribute, _) :-
-		::known_(yes, Attribute, _),
+		known_(yes, Attribute, _),
 		!, fail.
 	ask(Attribute, Value) :-
 		write(Attribute), write(': '), write(Value), write('? (yes or no): '),
 		flush_output,
 		read(Answer),
-		::asserta(known_(Answer, Attribute, Value)),
+		asserta(known_(Answer, Attribute, Value)),
 		Answer = yes.
 
 	menuask(Attribute,Value, _) :-
-		::known_(yes, Attribute, Value),
+		known_(yes, Attribute, Value),
 		!.
 	menuask(Attribute, _, _) :-
-		::known_(yes, Attribute, _),
+		known_(yes, Attribute, _),
 		!, fail.
 	menuask(Attribute, AskValue, Menu) :-
 		nl, write('What is the value for '), write(Attribute), write('?'), nl,
@@ -138,7 +138,7 @@
 		flush_output,
 		read(Num), nl,
 		pick_menu(Num, AnswerValue, Menu),
-		::asserta(known_(yes,Attribute,AnswerValue)),
+		asserta(known_(yes,Attribute,AnswerValue)),
 		AskValue = AnswerValue.
 
 	display_menu(Menu) :-
