@@ -161,10 +161,10 @@ https://logtalk.org/support.html
 Citations
 ---------
 
-If you find Logtalk useful, please include a citation on your publications.
-Consult the [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib) file for bibliographic
-references in BibTeX format (the Logtalk user and reference manuals and the
-2003 PhD thesis on Logtalk are good choices).
+If you find Logtalk useful, please include a citation on your publications
+(also cite the used backend Prolog compilers). The [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib)
+file includes bibliographic references in BibTeX format (the Logtalk user
+and reference manuals and the 2003 PhD thesis on Logtalk are good choices).
 
 
 Contributions
