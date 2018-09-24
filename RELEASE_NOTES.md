@@ -42,7 +42,7 @@ Library
 -------
 
 * UPDATED: The `parallel_logtalk_processes_setup.pl` Prolog file with sample
-code for ECLiPSe and SICStus Prolog.
+code for ECLiPSe and SICStus Prolog and usage alternatives.
 
 Examples
 --------
@@ -52,6 +52,10 @@ entities for clarity.
 
 * UPDATED: The `patching` example to illustrate how to use a complementing
 category to add a missing predicate scope directive to an object.
+
+* FIXED: Issue running the `birds` example when using a recent SWI-Prolog
+version as the backend compiler (which now require flushing output before
+reading a term).
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

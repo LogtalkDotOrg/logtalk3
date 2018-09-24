@@ -47,7 +47,8 @@
 		tail/1,
 		throat/1,
 		voice/1,
-		wings/1]).
+		wings/1
+	]).
 
 	:- public(descriptor/1).
 

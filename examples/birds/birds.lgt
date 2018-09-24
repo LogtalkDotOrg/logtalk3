@@ -26,7 +26,6 @@
 
 
 	:- object(falconiforms,
-		imports(descriptors),
 		extends(order)).
 
 		order(falconiforms).
@@ -38,7 +37,6 @@
 
 
 		:- object(falcon,
-			imports(descriptors),
 			extends(falconiforms)).
 
 			family(falcon).
@@ -50,7 +48,6 @@
 
 
 			:- object(peregrine_falcon,
-				imports(descriptors),
 				extends(falcon)).
 
 				eats(birds).
@@ -59,7 +56,6 @@
 
 
 			:- object(sparrow_hawk,
-				imports(descriptors),
 				extends(falcon)).
 
 				eats(insects).
@@ -68,7 +64,6 @@
 
 
 		:- object(vulture,
-			imports(descriptors),
 			extends(falconiforms)).
 
 			family(vulture).
@@ -79,7 +74,6 @@
 
 
 			:- object(california_condor,
-				imports(descriptors),
 				extends(vulture)).
 
 				flight_profile(flat).
@@ -88,7 +82,6 @@
 
 
 			:- object(turkey_vulture,
-				imports(descriptors),
 				extends(vulture)).
 
 				flight_profile(v_shaped).
@@ -98,7 +91,6 @@
 
 
 	:- object(passerformes,
-		imports(descriptors),
 		extends(order)).
 
 		order(passerformes).
@@ -108,7 +100,6 @@
 
 
 		:- object(flycatcher,
-			imports(descriptors),
 			extends(passerformes)).
 
 			family(flycatcher).
@@ -119,7 +110,6 @@
 
 
 			:- object(ash_throated_flycatcher,
-				imports(descriptors),
 				extends(flycatcher)).
 
 				throat(white).
@@ -128,7 +118,6 @@
 
 
 			:- object(great_crested_flycatcher,
-				imports(descriptors),
 				extends(flycatcher)).
 
 				tail(long_rusty).
@@ -137,7 +126,6 @@
 
 
 		:- object(swallow,
-			imports(descriptors),
 			extends(passerformes)).
 
 			family(swallow).
@@ -149,7 +137,6 @@
 
 
 			:- object(barn_swallow,
-				imports(descriptors),
 				extends(swallow)).
 
 				tail(forked).
@@ -158,7 +145,6 @@
 
 
 			:- object(cliff_swallow,
-				imports(descriptors),
 				extends(swallow)).
 
 				tail(square).
@@ -167,7 +153,6 @@
 
 
 			:- object(purple_martin,
-				imports(descriptors),
 				extends(swallow)).
 
 				color(dark).
@@ -177,7 +162,6 @@
 
 
 	:- object(tubenose,
-		imports(descriptors),
 		extends(order)).
 
 		order(tubenose).
@@ -189,7 +173,6 @@
 
 
 		:- object(fulmar,
-			imports(descriptors),
 			extends(tubenose)).
 
 			size(medium).
@@ -199,7 +182,6 @@
 
 
 		:- object(albatross,
-			imports(descriptors),
 			extends(tubenose)).
 
 			family(albatross).
@@ -210,7 +192,6 @@
 
 
 			:- object(black_footed_albatross,
-				imports(descriptors),
 				extends(albatross)).
 
 				color(dark).
@@ -219,7 +200,6 @@
 
 
 			:- object(laysan_albatross,
-				imports(descriptors),
 				extends(albatross)).
 
 				color(white).
@@ -229,7 +209,6 @@
 
 
 	:- object(waterfowl,
-		imports(descriptors),
 		extends(order)).
 
 		order(waterfowl).
@@ -240,7 +219,6 @@
 
 
 		:- object(duck,
-			imports(descriptors),
 			extends(waterfowl)).
 
 			family(duck).
@@ -251,7 +229,6 @@
 
 
 			:- object(female_mallard,
-				imports(descriptors),
 				extends(duck)).
 
 				voice(quack).
@@ -261,7 +238,6 @@
 
 
 			:- object(male_mallard,
-				imports(descriptors),
 				extends(duck)).
 
 				voice(quack).
@@ -271,7 +247,6 @@
 
 
 			:- object(pintail,
-				imports(descriptors),
 				extends(duck)).
 
 				voice(short_whistle).
@@ -280,7 +255,6 @@
 
 
 		:- object(goose,
-			imports(descriptors),
 			extends(waterfowl)).
 
 			family(goose).
@@ -291,7 +265,6 @@
 
 
 			:- object(canada_goose,
-				imports(descriptors),
 				extends(goose)).
 
 				head(black).
@@ -301,7 +274,6 @@
 
 
 			:- object(snow_goose,
-				imports(descriptors),
 				extends(goose)).
 
 				color(white).
@@ -310,7 +282,6 @@
 
 
 		:- object(swan,
-			imports(descriptors),
 			extends(waterfowl)).
 
 			family(swan).
@@ -322,7 +293,6 @@
 
 
 			:- object(trumpeter_swan,
-				imports(descriptors),
 				extends(swan)).
 
 				voice(loud_trumpeting).
@@ -331,7 +301,6 @@
 
 
 			:- object(whistling_swan,
-				imports(descriptors),
 				extends(swan)).
 
 				voice(muffled_musical_whistle).

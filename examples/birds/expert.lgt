@@ -23,8 +23,8 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.1,
-		date is 2005/3/6,
+		version is 1.2,
+		date is 2018/09/24,
 		comment is 'Expert system for bird identification.',
 		source is 'Example adapted from an Amzi! Inc Prolog book.'
 	]).
@@ -119,8 +119,8 @@
 		::known_(yes, Attribute, _),
 		!, fail.
 	ask(Attribute, Value) :-
-		write(Attribute), write(': '), write(Value),
-		write('? (yes or no): '),
+		write(Attribute), write(': '), write(Value), write('? (yes or no): '),
+		flush_output,
 		read(Answer),
 		::asserta(known_(Answer, Attribute, Value)),
 		Answer = yes.
@@ -135,7 +135,8 @@
 		nl, write('What is the value for '), write(Attribute), write('?'), nl,
 		display_menu(Menu),
 		write('Enter the number of choice> '),
-		read(Num),nl,
+		flush_output,
+		read(Num), nl,
 		pick_menu(Num, AnswerValue, Menu),
 		::asserta(known_(yes,Attribute,AnswerValue)),
 		AskValue = AnswerValue.
