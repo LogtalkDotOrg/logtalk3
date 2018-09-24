@@ -54,7 +54,7 @@
 
 :- elif(current_prolog_flag(dialect, eclipse)).
 
-	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_eclipse.pl" > combined.pl && eclipse  -L iso -t user -f combined.pl
+	% usage: eclipse -L iso -t user -f parallel_logtalk_processes_setup.pl -f "$LOGTALKHOME/integration/logtalk_eclipse.pl"
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		get_flag(tmp_dir, TMP_DIR0),
