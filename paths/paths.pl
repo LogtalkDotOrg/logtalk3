@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on September 4, 2018
+%  Last updated on September 25, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -24,9 +24,6 @@
 % logtalk_library_path(Library, Path)
 %
 % paths must always end with a "/"
-
-:- multifile(logtalk_library_path/2).
-:- dynamic(logtalk_library_path/2).
 
 :- multifile(logtalk_library_path/2).
 :- dynamic(logtalk_library_path/2).

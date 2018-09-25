@@ -1,4 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Parallel Logtalk processes setup for selected backend Prolog compilers
+%  Last updated on September 25, 2018
 %  
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -18,8 +21,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% if you move backend Prolog compiler specific code to an initialization
+% file, don't forget to also copy the following two directives!
+
 :- multifile(logtalk_library_path/2).
 :- dynamic(logtalk_library_path/2).
+
 
 :- if(current_prolog_flag(dialect, swi)).
 
@@ -71,7 +78,6 @@
 :- elif(current_prolog_flag(dialect, sicstus)).
 
 	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
-	% in alternative, add the code to your ~/.sicstusrc or ~/sicstus.ini file and start Logtalk as usual
 
 	:- use_module(library(system), [environ/2, now/1]).
 	:- use_module(library(file_systems), [make_directory/1]).
