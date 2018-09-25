@@ -38,6 +38,11 @@ Prolog adapter and integration files
 requested by its developer who claims that Jekejeke Prolog license forbids
 using it to run Logtalk.
 
+Documentation
+-------------
+
+* ADDED: Contributor Covenant code of conduct.
+
 Library
 -------
 

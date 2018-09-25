@@ -47,6 +47,10 @@ Logtalk is distributed under a commercial friendly license and includes full
 documentation, portable libraries, portable developer tools, and a large number
 of programming examples to help get you started.
 
+Logtalk development adheres to the Contributor Covenant code of conduct.
+By participating, you are expected to uphold this code. Please report
+unacceptable behavior to contact@logtalk.org.
+
 
 Logtalk website
 ---------------
