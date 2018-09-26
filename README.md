@@ -55,12 +55,12 @@ unacceptable behavior to contact@logtalk.org.
 Logtalk website
 ---------------
 
-The latest stable release of the Logtalk is always available at the URL:
+The latest stable release of the Logtalk is always available at:
 
-<https://logtalk.org/>
+https://logtalk.org/
 
-At this address you can also find additional documentation and information
-about Logtalk.
+At this address you can download installers for your operating-system and also
+find additional documentation and information about Logtalk.
 
 
 Installation
@@ -108,14 +108,14 @@ found in the [manuals](manuals/) directory. They are also available online at:
 https://logtalk.org/manuals/index.html
 
 The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
-Logtalk updates since the first public version. Check it carefully if you
-have been using a previous Logtalk version.
+Logtalk updates since the first public version. Please check it if you are
+upgrading from a previous Logtalk version.
 
 The API documentation for the core, library, tools, and contributions entities
 is provided in XHTML format and can be found in the [docs](docs/) directory and
 also available online at:
 
-https://logtalk.org/library/index.html
+https://logtalk.org/docs/index.html
 
 Most directories include `NOTES.md` or `NOTES.txt` documentation files.
 
@@ -136,16 +136,9 @@ the Logtalk web site:
 
 https://logtalk.org/regform.html
 
-or send an email message to:
-
-registration@logtalk.org
-
-with the following information:
-
-email address, first and last name, organization, organization type
-(education, commercial, government, ...), Prolog compilers you use
-(optional), platforms (mac, pc, unix, ...) (optional), projects where
-you intend to use Logtalk (optional)
+Registration is optional. But it's also a way of showing your support and
+an opportunity for us to learn about the cool projects where you will be
+using Logtalk.
 
 
 Support
@@ -176,6 +169,7 @@ Contributions
 
 Contributions are most welcome! See the [CONTRIBUTING.md](CONTRIBUTING.md) file
 for details.
+
 
 Legal
 -----
