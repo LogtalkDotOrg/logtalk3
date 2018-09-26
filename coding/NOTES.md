@@ -23,7 +23,7 @@ This directory contains files that provide:
 editors and IDEs.
 
 - Support for syntax highlighters (used in e.g in wikis, code repositories,
-source code browsers, and bug trackers).
+source code browsers, bug trackers, and shells).
 
 - Support for setting Logtalk projects using common version control systems
 (e.g. git).

@@ -67,6 +67,9 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Sublime Text syntax file using the new `.sublime-syntax` format.
 
+* ADDED: Note on `bat`, a `cat` clone that supports syntax highlighting and
+can be easily customized for displaying Logtalk and Prolog source files.
+
 
 3.20.0 - September 5, 2018
 ==========================
