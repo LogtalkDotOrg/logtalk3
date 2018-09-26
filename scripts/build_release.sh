@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on February 17, 2017
+##   Last updated on September 26, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -101,3 +101,10 @@ cd "$directory/logtalk-$version/scripts/linux" || exit 1
 mv "$HOME"/rpmbuild/RPMS/noarch/logtalk-*.rpm "$directory"
 
 cd "$directory" || exit 1
+
+openssl sha256 logtalk-$version.tar.bz2
+openssl sha256 logtalk-$version.pkg.zip
+openssl sha256 logtalk-$version-1.noarch.rpm
+openssl sha256 logtalk_$version-1_all.deb
+openssl sha256 logtalk-manuals-$version.tgz
+openssl sha256 logtalk-$version.exe || true

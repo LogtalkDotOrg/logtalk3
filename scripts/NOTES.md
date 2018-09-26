@@ -36,7 +36,8 @@ also available in the Logtalk website.
 - `build_release.sh`  
 	helper script for building most of the distribution files of a new
 	Logtalk release; accepts as an optional argument a version identifier
-	(e.g. 3.00.0-a8)
+	(e.g. 3.00.0-a8); must be run on a macOS computer due to its dependency
+	on MacPorts to build the macOS installer
 
 - `cleandist.sh`  
 	script for cleaning a Logtalk distribution in preparation for packaging;
@@ -124,8 +125,7 @@ also available in the Logtalk website.
 	directory containing files used when building
 
 - `macosx`  
-	directory containing files used when building MacOS X installer
-	packages
+	directory containing files used when building macOS installer packages
 
 - `pack`  
 	support files for creating a `logtalk` SWI-Prolog pack
