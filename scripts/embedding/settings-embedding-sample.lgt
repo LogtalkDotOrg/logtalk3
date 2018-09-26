@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample embedding settings file
-%  Last updated on April 17, 2018
+%  Last updated on September 26, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@
 	logtalk_load_context(directory, Directory),
 	assertz(logtalk_library_path(my_application, Directory))
 )).
-*/
+%*/
 
 
 %  To define other "library" aliases for your application, edit and uncomment
@@ -45,7 +45,7 @@
 
 logtalk_library_path(my_application_core, my_application('core/')).
 logtalk_library_path(my_application_libraries, my_application('libraries/')).
-*/
+%*/
 
 
 %  To make Logtalk silent for application deployment, uncomment the
@@ -58,10 +58,11 @@ logtalk_library_path(my_application_libraries, my_application('libraries/')).
 	%set_prolog_flag(informational, off),               % SICStus Prolog
 	set_logtalk_flag(report, off)
 )).
-*/
+%*/
 
 
-%  Common settings for embedded applications:
+%  Common settings for embedded applications (note that these default
+%  values can always be overridden in source files and entities):
 
 :- initialization((
 	% be silent except for warnings (set to "off" for final deliverable)
@@ -87,7 +88,7 @@ logtalk_library_path(my_application_libraries, my_application('libraries/')).
 :- initialization((
 	set_logtalk_flag(complements, allow)
 )).
-*/
+%*/
 
 
 %  To support adding new features to compiled code at runtime uncomment the
@@ -97,7 +98,7 @@ logtalk_library_path(my_application_libraries, my_application('libraries/')).
 :- initialization((
 	set_logtalk_flag(complements, restrict)
 )).
-*/
+%*/
 
 
 %  Suppress most startup messages:
