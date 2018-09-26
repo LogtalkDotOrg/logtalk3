@@ -42,7 +42,9 @@ Prolog compiler documentation.
 
 In both solutions, the `reload` flag should usually be set to `skip`
 (in the used settings file) to prevent reloading of already loaded
-code when running the embedded application or saved state.
+code when running the embedded application or saved state. You may
+also want to turn off the `source_data` flag to reduce the size of
+your application.
 
 To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
 environment variables, the sample scripts allow expansion of library
