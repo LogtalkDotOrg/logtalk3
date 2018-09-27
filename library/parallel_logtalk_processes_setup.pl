@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on September 25, 2018
+%  Last updated on September 27, 2018
 %  
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -54,7 +54,7 @@
 	% usage: yaplgt -f parallel_logtalk_processes_setup.pl
 	% in alternative, add the code to your  ~/.yaprc, ~/.prologrc, or ~/prolog.ini file and start Logtalk as usual
 
-	:- use_module(library(system)).
+	:- use_module(library(system), [tmpnam/1, delete_file/1, make_directory/1]).
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		tmpnam(Directory),
@@ -68,27 +68,28 @@
 	logtalk_library_path(scratch_directory, Directory) :-
 		get_flag(tmp_dir, TMP_DIR0),
 		atom_string(TMP_DIR, TMP_DIR0),
-		get_flag(unix_time, Time),
-		number_codes(Time, TimeCodes),
-		atom_codes(TimeAtom, TimeCodes),
+		get_flag(pid, PID),
+		number_codes(PID, PIDCodes),
+		atom_codes(PIDAtom, PIDCodes),
 		atom_concat(TMP_DIR, logtalk, Directory0),
-		atom_concat(Directory0, TimeAtom, Directory),
+		atom_concat(Directory0, PIDAtom, Directory),
 		mkdir(Directory).
 
 :- elif(current_prolog_flag(dialect, sicstus)).
 
 	% usage: cat parallel_logtalk_processes_setup.pl "$LOGTALKHOME/integration/logtalk_sicstus.pl" > combined.pl && sicstus -l combined.pl
 
-	:- use_module(library(system), [environ/2, now/1]).
+	:- use_module(library(system), [environ/2]).
+	:- use_module(library(system3), [pid/1]).
 	:- use_module(library(file_systems), [make_directory/1]).
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		environ('SP_TEMP_DIR', SP_TEMP_DIR),
-		now(Time),
-		number_codes(Time, TimeCodes),
-		atom_codes(TimeAtom, TimeCodes),
+		pid(PID),
+		number_codes(PID, PIDCodes),
+		atom_codes(PIDAtom, PIDCodes),
 		atom_concat(SP_TEMP_DIR, logtalk, Directory0),
-		atom_concat(Directory0, TimeAtom, Directory),
+		atom_concat(Directory0, PIDAtom, Directory),
 		make_directory(Directory).
 
 :- endif.
