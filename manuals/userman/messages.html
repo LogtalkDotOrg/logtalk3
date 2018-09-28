@@ -206,9 +206,11 @@ benchmark(_, _).</pre>
 The rational of using a failure-driven loop is to try to avoid any interference on our timing measurements from garbage-collection or memory expansion mechanisms. Based on the predicate <code>benchmark/2</code>, we may define a more convenient predicate for performing our benchmarks. For example:
 </p>
 <pre>benchmark(Goal) :-
-    N = 10000000,                   % some sufficiently large number of repetitions
+    % some sufficiently large number of repetitions
+    N = 10000000,
     write('Number of repetitions: '), write(N), nl,
-    get_cpu_time(Seconds1),         % replace by your Prolog-specific predicate
+    % replace by your Prolog-specific predicate
+    get_cpu_time(Seconds1),
     benchmark(N, Goal),
     get_cpu_time(Seconds2),
     Average is (Seconds2 - Seconds1)/N,
@@ -233,7 +235,7 @@ It should be stressed that message sending is only one of the factors affecting 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 20, 2015</span>
+		<span>Last updated on: September 28, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="nomenclature.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="objects.html">next</a></span><br/>

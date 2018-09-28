@@ -198,10 +198,12 @@ Another example of directives that are often used in a loader file would be <cod
     % load the project source files
     logtalk_load(
         [source1, source2, source3],
-        [portability(warning)]),               % source file-specific flags
+        % source file-specific flags
+        [portability(warning)]),
     logtalk_load(
         [source4, source5],
-        [portability(silent)])                 % source file-specific flags
+        % source file-specific flags
+        [portability(silent)])
 )).</pre>
 <p>
 To take the best advantage of loader files, define a clause for the multifile and dynamic <code>logtalk_library_path/2</code> predicate for the directory containing your source files as explained in the next section.
@@ -866,7 +868,7 @@ yes
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 13, 2018</span>
+		<span>Last updated on: September 28, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

@@ -141,21 +141,31 @@ In short, an object can be a <em>stand-alone</em> object or be part of an object
 <p>
 A <em>stand-alone</em> object (i.e. an object with no extension, instantiation, or specialization relations with other objects) is always compiled as a prototype, that is, a self-describing object. If we want to use classes and instances, then we will need to specify at least one instantiation or specialization relation. The best way to do this is to define a set of objects that provide the basis of a reflective system <a href="../bibliography.html#Cointe87">[Cointe 87</a>, <a href="../bibliography.html#Moura94">Moura 94]</a>. For example:
 </p>
-<pre>:- object(object,               % default root of the inheritance graph
-    instantiates(class)).       % predicates common to all objects
+<pre>
+% default root of the inheritance graph
+% predicates common to all objects
+
+:- object(object,
+    instantiates(class)).
     ...
 :- end_object.
 
 
-:- object(class,                % default metaclass for all classes
-    instantiates(class),        % predicates common to all instantiable classes
+% default metaclass for all classes
+% predicates common to all instantiable classes
+
+:- object(class,
+    instantiates(class),
     specializes(abstract_class)).
     ...
 :- end_object.
 
 
-:- object(abstract_class,       % default metaclass for all abstract classes
-    instantiates(class),        % predicates common to all classes
+% default metaclass for all abstract classes
+% predicates common to all classes
+
+:- object(abstract_class,
+    instantiates(class),
     specializes(object)).
     ...
 :- end_object.</pre>
@@ -575,7 +585,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 27, 2018</span>
+		<span>Last updated on: September 28, 2018</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
