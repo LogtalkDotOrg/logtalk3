@@ -65,8 +65,8 @@ see our unit testing framework documentation at:
 
 https://github.com/LogtalkDotOrg/logtalk3/blob/master/tools/lgtunit/NOTES.md
 
-Please note that portability is a main Logtalk feature. As a general rule, new
-code should depend only on standard or de factor standard features available
+Please note that **portability** is a main Logtalk feature. As a general rule,
+new code should depend only on standard or de facto standard features available
 from the supported backend Prolog systems. But contributions that enhance the
 integration with a particular backend Prolog system are also sought as long
 they don't break support for other systems.
@@ -79,8 +79,8 @@ that they adhere to the Developer Certificate of Origin (DCO):
 
 https://developercertificate.org
 
-and must be made available under the Logtalk license without any additional
-terms or conditions. Contributions using other licensing terms may also be
-distributed with Logtalk with the understanding that the terms of their use
-depends solely on the authors chosen licensing terms and may require a separate,
-independent, agreement between users and authors.
+Contributions should be made available under the Logtalk license without any
+additional terms or conditions. Contributions using other licensing terms may
+also be distributed with Logtalk with the understanding that the terms of their
+use depends solely on the authors chosen licensing terms and may require a
+separate, independent, agreement between users and authors.
