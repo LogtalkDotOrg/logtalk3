@@ -1,2 +1,13 @@
 *.lgt linguist-language=Logtalk
 *.pl  linguist-language=Prolog
+manuals/_sources/** linguist-generated=true
+manuals/_static/** linguist-generated=true
+manuals/*.html linguist-generated=true
+manuals/*.pdf linguist-generated=true
+manuals/*.epub linguist-generated=true
+manuals/*.js linguist-generated=true
+manuals/*.inv linguist-generated=true
+manuals/faq/** linguist-generated=true
+manuals/refman/** linguist-generated=true
+manuals/tutorial/** linguist-generated=true
+manuals/userman/** linguist-generated=true
