@@ -43,3 +43,5 @@ make epub
 mv -f _build/html/* ../
 mv -f _build/latex/TheLogtalkHandbook.pdf ../
 mv -f _build/epub/TheLogtalkHandbook.epub ../
+
+make clean
