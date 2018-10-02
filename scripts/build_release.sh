@@ -48,6 +48,7 @@ tar zcvf "logtalk-$version.tgz" logtalk
 mv "logtalk-$version.tgz" ..
 cd ..
 
+manuals/build_docs.sh
 cp -R "logtalk-$version/manuals" "logtalk-manuals-$version"
 tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
 tar -cjf "logtalk-$version.tar.bz2" "logtalk-$version"
