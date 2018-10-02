@@ -20,27 +20,6 @@ ________________________________________________________________________
 To consult the Logtalk documentation open the file `index.html` with a
 web browser.
 
-All manual pages conform to the XHTML 1.1 W3C Standard. You may change 
-the appearance of the pages by changing the included `screen.css` 
-CSS file. Needless to say, the manual pages look better in recent web 
-browser releases that support both the XHTML 1.1 and CSS 2 web standards.
-
-The `print.css` CSS file can be used with CSSToXSLFO (version 1.5 or 
-later) to generate PDF files with page numbers suitable for printing. 
-For informations on how to use CSSToXSLFO, please see the following 
-URL:
-
-	http://www.re.be/css2xslfo/
-
-Two scripts are provided to convert the XHTML manual pages to PDF files:
-
-- `userman/userman.sh`  
-	Bourne-compatible shell script for POSIX systems that generates
-	a PDF version of the User Manual
-
-- `refman/refman.sh`  
-	Bourne-compatible shell script for POSIX systems that generates
-	a PDF version of the Reference Manual
-
-You may edit the scripts in order to change the default XSLT and/or XSL-FO 
-processors.
+The HTML, PDF, and ePub versions of the documentation are generated from
+reStructuredText sources in the `sources` directory using Sphinx. See the
+`sources/NOTES.md` file for details.

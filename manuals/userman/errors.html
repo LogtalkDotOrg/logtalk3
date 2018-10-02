@@ -1,211 +1,454 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk user manual: error handling</title>
-	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Error handling &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Documenting applications" href="documenting.html" />
+    <link rel="prev" title="Multi-threading programming" href="threads.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk user manual</div>
-<div class="top-right">Error handling</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Error handling</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h1 id="errors_errors">Error handling</h1>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<p>
-All error handling is done in Logtalk by using the ISO defined <code>catch/3</code> and <code>throw/1</code> predicates <a title="ISO Prolog Standard" href="../bibliography.html#ISO95">[ISO 95]</a>. Errors thrown by Logtalk have the following format:
-</p>
-<pre>error(Error, logtalk(Goal, ExecutionContext))</pre>
-<p>
-In this exception term, <code>Goal</code> is the goal that triggered the error <code>Error</code> and <code>ExecutionContext</code> is the context in which <code>Goal</code> is called. For example:
-</p>
-<pre>error(permission_error(modify,private_predicate,p), logtalk(foo::abolish(p/0),_))</pre>
-<p>
-Note, however, that <code>Goal</code> and <code>ExecutionContext</code> can be variables when the corresponding information is not available (e.g. due to compiler optimizations that throw away the necessary error context information). The <code>ExecutionContext</code> argument is an opaque term that can be decoded using the <code>logtalk::execution_context/7</code> predicate.
-</p>
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
 
-<h2>Compiler warnings and errors<a id="errors_compiler"></a></h2>
+          
+          </a>
 
-<p>
-The current Logtalk compiler uses the <code>read_term/3</code> ISO Prolog defined built-in predicate to read and compile a Logtalk source file. One consequence of this is that invalid Prolog terms or syntax errors may abort the compilation process with limited information given to the user (due to the inherent limitations of the <code>read_term/3</code> predicate). 
-</p>
-<p>
-If all the terms in a source file are valid, then there is a set of errors or potential errors, described below, that the compiler will try to detect and report, depending on the used compiler flags (see the <a href="programming.html#programming_flags">Writing, running, and debugging programs</a> section of this manual for details).
-</p>
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
 
-<h3 id="errors_unknown">Unknown entities</h3>
-
-<p>
-The Logtalk compiler warns about any referenced entity that is not currently loaded. The warning may reveal a misspell entity name or just an entity that it will be loaded later. Out-of-oder loading should be avoided when possible as it prevents some code optimizations such as static binding od messages to methods.
-</p>
-
-<h3 id="errors_singletons">Singleton variables</h3>
-
-<p>
-Singleton variables in a clause are often misspell variables and, as such, one of the most common errors when programming in Prolog. 
-when the backend Prolog compiler complies with the Prolog ISO standard or at least supports the ISO predicate <code>read_term/3</code> called with the option <code>singletons(S)</code>, the Logtalk compiler warns about any singleton variable found while compiling a source file.
-</p>
-
-<h3 id="errors_prolog">Redefinition of Prolog built-in predicates</h3>
-
-<p>
-The Logtalk compiler will warn us of any redefinition of a Prolog built-in predicate inside an object or category. Sometimes the redefinition is intended. In other cases, the user may not be aware that the subjacent Prolog compiler may already provide the predicate as a built-in or we may want to ensure code portability among several Prolog compilers with different sets of built-in predicates.
-</p>
-
-<h3 id="errors_redefinion_predicates">Redefinition of Logtalk built-in predicates</h3>
-
-<p>
-Similar to the redefinition of Prolog built-in predicates, the Logtalk compiler will warn us if we try to redefine a Logtalk built-in. The redefinition will probably be an error in almost all (if not all) cases.
-</p>
-
-<h3 id="errors_redefinion_methods">Redefinition of Logtalk built-in methods</h3>
-
-<p>
-An error will be thrown if we attempt to redefine a Logtalk built-in method inside an entity. The default behavior is to report the error and abort the compilation of the offending entity. 
-</p>
-
-<h3 id="errors_misspell">Misspell calls of local predicates</h3>
-
-<p>
-A warning will be reported if Logtalk finds (in the body of a predicate definition) a call to a local predicate that is not defined, built-in (either in Prolog or in Logtalk) or declared dynamic. In most cases these calls are simple misspell errors.
-</p>
-
-<h3 id="errors_portability">Portability warnings</h3>
-
-<p>
-A warning will be reported if a predicate clause contains a call to a non-ISO specified built-in predicate or arithmetic function, Portability warnings are also reported for non-standard flags or flag values. These warnings often cannot be avoided due to the limited scope of the ISO Prolog standard.
-</p>
-
-<h3 id="errors_deprecated">Deprecated elements</h3>
-
-<p>
-A warning will be reported if a deprecated directive or control construct is used.
-</p>
-
-<h3 id="errors_missing_directives">Missing directives</h3>
-
-<p>
-A warning will be reported for any missing dynamic, discontiguous, meta-predicate, and public predicate directive.
-</p>
-
-<h3 id="errors_duplicated_directives">Duplicated directives</h3>
-
-<p>
-A warning will be reported for any duplicated scope, multifile, dynamic, discontiguous, meta-predicate, and meta-non-terminal directives. Note that conflicting directives for the same predicate are handled as errors, not as duplicated directive warnings.
-</p>
-
-<h3 id="errors_always_true_or_false_goals">Goals that are always true or false</h3>
-
-<p>
-A warning will be reported for any goal that is always true or false. This is usually caused by typos in the code. For example, writing <code>X == y</code> instead of <code>X == Y</code>.
-</p>
-
-<h3 id="errors_trivial_fails">Trivial fails</h3>
-
-<p>
-A warning will be reported for any call to a local static predicate with no matching clause.
-</p>
-
-<h3 id="errors_suspicious_calls">Suspicious calls</h3>
-
-<p>
-A warning will be reported for calls that are syntactically correct but most likely a semantic error. An example is <code>::/1</code> calls in clauses that apparently are meant to implement recursive predicate definitions where the user intention is to call the local predicate.
-</p>
-
-<h3 id="errors_lambda_variables">Lambda variables</h3>
-
-<p>
-A warning will be reported for lambda expressions with unclassified variables (not listed as either lambda free or lambda parameter variables) or where variables play a dual role (as both lambda free and lambda parameter variables).
-</p>
-
-<h3 id="errors_predicate_redefinition">Redefinition of predicates declared in <code>uses/2</code> and <code>use_module/2</code> directives</h3>
-
-<p>
-A error will be reported for any attempt to define locally a predicate that is already listed in a <code>uses/2</code> or in a <code>use_module/2</code> directive.
-</p>
-
-<h3 id="errors_others">Other warnings and errors</h3>
-
-<p>
-The Logtalk compiler will throw an error if it finds a predicate clause or a directive that cannot be parsed. The default behavior is to report the error and abort the compilation of the offending entity.
-</p>
-
-<h2 id="errors_runtime">Runtime errors</h2>
-
-<p>
-This section briefly describes runtime errors that result from misuse of Logtalk built-in predicates, built-in methods or from message sending. For a complete and detailed description of runtime errors please consult the <a title="Consult reference manual" href="../refman/index.html">Reference Manual</a>.
-</p>
-
-<h3 id="errors_predicates">Logtalk built-in predicates</h3>
-
-<p>
-Most Logtalk built-in predicates checks the type and mode of the calling arguments, throwing an exception in case of misuse.
-</p>
-
-<h3 id="errors_methods">Logtalk built-in methods</h3>
-
-<p>
-Most Logtalk built-in method checks the type and mode of the calling arguments, throwing an exception in case of misuse.
-</p>
-
-<h3 id="errors_sending">Message sending</h3>
-
-<p>
-The message sending mechanisms always check if the receiver of a message is a defined object and if the message corresponds to a declared predicate within the scope of the sender. The built-in protocol <code>forwarding</code> declares a predicate, <code>forward/1</code>, which is automatically called (if defined) by the runtime for any message that the receiving object does not understand. The usual definition for this error handler is to delegate or forward the message to another object that might be able to answer it:
-</p>
-<pre>forward(Message) :-
-    [Object::Message].	% forward the message while preserving the original sender</pre>
-<p>
-If preserving the original sender is not required, this definition can be simplified to:
-</p>
-<pre>forward(Message) :-
-    Object::Message.</pre>
-<p>
-More sophisticated definitions are, of course, possible.
-</p>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 18, 2018</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="threads.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="documenting.html">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
 
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Error handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-warnings-and-errors">Compiler warnings and errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unknown-entities">Unknown entities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#singleton-variables">Singleton variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redefinition-of-prolog-built-in-predicates">Redefinition of Prolog built-in predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redefinition-of-logtalk-built-in-predicates">Redefinition of Logtalk built-in predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redefinition-of-logtalk-built-in-methods">Redefinition of Logtalk built-in methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#misspell-calls-of-local-predicates">Misspell calls of local predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#portability-warnings">Portability warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deprecated-elements">Deprecated elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#missing-directives">Missing directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#duplicated-directives">Duplicated directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#goals-that-are-always-true-or-false">Goals that are always true or false</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trivial-fails">Trivial fails</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suspicious-calls">Suspicious calls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lambda-variables">Lambda variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives">Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-warnings-and-errors">Other warnings and errors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#runtime-errors">Runtime errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logtalk-built-in-predicates">Logtalk built-in predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logtalk-built-in-methods">Logtalk built-in methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#message-sending">Message sending</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing, running, and debugging applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog Integration and Migration Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Error handling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/userman/errors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="error-handling">
+<span id="errors-errors"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+<p>All error handling is done in Logtalk by using the ISO defined
+<code class="docutils literal notranslate"><span class="pre">catch/3</span></code> and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference external" href="../bibliography.html#ISO95">[ISO
+95]</a>. Errors thrown by Logtalk have the
+following format:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>error(<span class="nv">Error</span>, logtalk(<span class="nv">Goal</span>, <span class="nv">ExecutionContext</span>))
+</pre></div>
+</div>
+<p>In this exception term, <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that triggered the error
+<code class="docutils literal notranslate"><span class="pre">Error</span></code> and <code class="docutils literal notranslate"><span class="pre">ExecutionContext</span></code> is the context in which <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is
+called. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>error(
+    permission_error(modify,private_predicate,p),
+    logtalk(foo<span class="o">::</span><span class="k">abolish</span>(p<span class="o">/</span><span class="m">0</span>), <span class="nv">_</span>)
+)
+</pre></div>
+</div>
+<p>Note, however, that <code class="docutils literal notranslate"><span class="pre">Goal</span></code> and <code class="docutils literal notranslate"><span class="pre">ExecutionContext</span></code> can be unbound or only
+partially instantiated when the corresponding information is not available
+(e.g. due to compiler optimizations that throw away the necessary error context
+information). The <code class="docutils literal notranslate"><span class="pre">ExecutionContext</span></code> argument is an opaque term that
+can be decoded using the <code class="docutils literal notranslate"><span class="pre">logtalk::execution_context/7</span></code> predicate.</p>
+<div class="section" id="compiler-warnings-and-errors">
+<h2>Compiler warnings and errors<a class="headerlink" href="#compiler-warnings-and-errors" title="Permalink to this headline">¶</a></h2>
+<p>The current Logtalk compiler uses the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> ISO Prolog defined
+built-in predicate to read and compile a Logtalk source file. One
+consequence of this is that invalid Prolog terms or syntax errors may
+abort the compilation process with limited information given to the user
+(due to the inherent limitations of the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate).</p>
+<p>If all the terms in a source file are valid, then there is a set of
+errors or potential errors, described below, that the compiler will try
+to detect and report, depending on the used compiler flags (see the
+<a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a> section of this manual for details).</p>
+<div class="section" id="unknown-entities">
+<span id="errors-unknown"></span><h3>Unknown entities<a class="headerlink" href="#unknown-entities" title="Permalink to this headline">¶</a></h3>
+<p>The Logtalk compiler warns about any referenced entity that is not
+currently loaded. The warning may reveal a misspell entity name or just
+an entity that it will be loaded later. Out-of-oder loading should be
+avoided when possible as it prevents some code optimizations such as
+static binding od messages to methods.</p>
+</div>
+<div class="section" id="singleton-variables">
+<span id="errors-singletons"></span><h3>Singleton variables<a class="headerlink" href="#singleton-variables" title="Permalink to this headline">¶</a></h3>
+<p>Singleton variables in a clause are often misspell variables and, as
+such, one of the most common errors when programming in Prolog. when the
+backend Prolog compiler complies with the Prolog ISO standard or at
+least supports the ISO predicate <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> called with the option
+<code class="docutils literal notranslate"><span class="pre">singletons(S)</span></code>, the Logtalk compiler warns about any singleton
+variable found while compiling a source file.</p>
+</div>
+<div class="section" id="redefinition-of-prolog-built-in-predicates">
+<span id="errors-prolog"></span><h3>Redefinition of Prolog built-in predicates<a class="headerlink" href="#redefinition-of-prolog-built-in-predicates" title="Permalink to this headline">¶</a></h3>
+<p>The Logtalk compiler will warn us of any redefinition of a Prolog
+built-in predicate inside an object or category. Sometimes the
+redefinition is intended. In other cases, the user may not be aware that
+the subjacent Prolog compiler may already provide the predicate as a
+built-in or we may want to ensure code portability among several Prolog
+compilers with different sets of built-in predicates.</p>
+</div>
+<div class="section" id="redefinition-of-logtalk-built-in-predicates">
+<span id="errors-redefinion-predicates"></span><h3>Redefinition of Logtalk built-in predicates<a class="headerlink" href="#redefinition-of-logtalk-built-in-predicates" title="Permalink to this headline">¶</a></h3>
+<p>Similar to the redefinition of Prolog built-in predicates, the Logtalk
+compiler will warn us if we try to redefine a Logtalk built-in. The
+redefinition will probably be an error in almost all (if not all) cases.</p>
+</div>
+<div class="section" id="redefinition-of-logtalk-built-in-methods">
+<span id="errors-redefinion-methods"></span><h3>Redefinition of Logtalk built-in methods<a class="headerlink" href="#redefinition-of-logtalk-built-in-methods" title="Permalink to this headline">¶</a></h3>
+<p>An error will be thrown if we attempt to redefine a Logtalk built-in
+method inside an entity. The default behavior is to report the error and
+abort the compilation of the offending entity.</p>
+</div>
+<div class="section" id="misspell-calls-of-local-predicates">
+<span id="errors-misspell"></span><h3>Misspell calls of local predicates<a class="headerlink" href="#misspell-calls-of-local-predicates" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported if Logtalk finds (in the body of a predicate
+definition) a call to a local predicate that is not defined, built-in
+(either in Prolog or in Logtalk) or declared dynamic. In most cases
+these calls are simple misspell errors.</p>
+</div>
+<div class="section" id="portability-warnings">
+<span id="errors-portability"></span><h3>Portability warnings<a class="headerlink" href="#portability-warnings" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported if a predicate clause contains a call to a
+non-ISO specified built-in predicate or arithmetic function, Portability
+warnings are also reported for non-standard flags or flag values. These
+warnings often cannot be avoided due to the limited scope of the ISO
+Prolog standard.</p>
+</div>
+<div class="section" id="deprecated-elements">
+<span id="errors-deprecated"></span><h3>Deprecated elements<a class="headerlink" href="#deprecated-elements" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported if a deprecated directive or control
+construct is used.</p>
+</div>
+<div class="section" id="missing-directives">
+<span id="errors-missing-directives"></span><h3>Missing directives<a class="headerlink" href="#missing-directives" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for any missing dynamic, discontiguous,
+meta-predicate, and public predicate directive.</p>
+</div>
+<div class="section" id="duplicated-directives">
+<span id="errors-duplicated-directives"></span><h3>Duplicated directives<a class="headerlink" href="#duplicated-directives" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for any duplicated scope, multifile, dynamic,
+discontiguous, meta-predicate, and meta-non-terminal directives. Note
+that conflicting directives for the same predicate are handled as
+errors, not as duplicated directive warnings.</p>
+</div>
+<div class="section" id="goals-that-are-always-true-or-false">
+<span id="errors-always-true-or-false-goals"></span><h3>Goals that are always true or false<a class="headerlink" href="#goals-that-are-always-true-or-false" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for any goal that is always true or false.
+This is usually caused by typos in the code. For example, writing
+<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">==</span> <span class="pre">y</span></code> instead of <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">==</span> <span class="pre">Y</span></code>.</p>
+</div>
+<div class="section" id="trivial-fails">
+<span id="errors-trivial-fails"></span><h3>Trivial fails<a class="headerlink" href="#trivial-fails" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for any call to a local static predicate with
+no matching clause.</p>
+</div>
+<div class="section" id="suspicious-calls">
+<span id="errors-suspicious-calls"></span><h3>Suspicious calls<a class="headerlink" href="#suspicious-calls" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for calls that are syntactically correct but
+most likely a semantic error. An example is <code class="docutils literal notranslate"><span class="pre">::/1</span></code> calls in clauses
+that apparently are meant to implement recursive predicate definitions
+where the user intention is to call the local predicate.</p>
+</div>
+<div class="section" id="lambda-variables">
+<span id="errors-lambda-variables"></span><h3>Lambda variables<a class="headerlink" href="#lambda-variables" title="Permalink to this headline">¶</a></h3>
+<p>A warning will be reported for lambda expressions with unclassified
+variables (not listed as either lambda free or lambda parameter
+variables) or where variables play a dual role (as both lambda free and
+lambda parameter variables).</p>
+</div>
+<div class="section" id="redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives">
+<span id="errors-predicate-redefinition"></span><h3>Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives<a class="headerlink" href="#redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives" title="Permalink to this headline">¶</a></h3>
+<p>A error will be reported for any attempt to define locally a predicate
+that is already listed in a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or in a <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
+directive.</p>
+</div>
+<div class="section" id="other-warnings-and-errors">
+<span id="errors-others"></span><h3>Other warnings and errors<a class="headerlink" href="#other-warnings-and-errors" title="Permalink to this headline">¶</a></h3>
+<p>The Logtalk compiler will throw an error if it finds a predicate clause
+or a directive that cannot be parsed. The default behavior is to report
+the error and abort the compilation of the offending entity.</p>
+</div>
+</div>
+<div class="section" id="runtime-errors">
+<span id="errors-runtime"></span><h2>Runtime errors<a class="headerlink" href="#runtime-errors" title="Permalink to this headline">¶</a></h2>
+<p>This section briefly describes runtime errors that result from misuse of
+Logtalk built-in predicates, built-in methods or from message sending.
+For a complete and detailed description of runtime errors please consult
+the <a class="reference external" href="../refman/index.html">Reference Manual</a>.</p>
+<div class="section" id="logtalk-built-in-predicates">
+<span id="errors-predicates"></span><h3>Logtalk built-in predicates<a class="headerlink" href="#logtalk-built-in-predicates" title="Permalink to this headline">¶</a></h3>
+<p>Most Logtalk built-in predicates checks the type and mode of the calling
+arguments, throwing an exception in case of misuse.</p>
+</div>
+<div class="section" id="logtalk-built-in-methods">
+<span id="errors-methods"></span><h3>Logtalk built-in methods<a class="headerlink" href="#logtalk-built-in-methods" title="Permalink to this headline">¶</a></h3>
+<p>Most Logtalk built-in method checks the type and mode of the calling
+arguments, throwing an exception in case of misuse.</p>
+</div>
+<div class="section" id="message-sending">
+<span id="errors-sending"></span><h3>Message sending<a class="headerlink" href="#message-sending" title="Permalink to this headline">¶</a></h3>
+<p>The message sending mechanisms always check if the receiver of a message
+is a defined object and if the message corresponds to a declared
+predicate within the scope of the sender. The built-in protocol
+<code class="docutils literal notranslate"><span class="pre">forwarding</span></code> declares a predicate, <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a>, which is
+automatically called (if defined) by the runtime for any message that
+the receiving object does not understand. The usual definition for this
+error handler is to delegate or forward the message to another object
+that might be able to answer it:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forward</span>(<span class="nv">Message</span>) <span class="o">:-</span>
+    <span class="c">% forward the message while preserving the sender</span>
+    [<span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>].
+</pre></div>
+</div>
+<p>If preserving the original sender is not required, this definition can
+be simplified to:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forward</span>(<span class="nv">Message</span>) <span class="o">:-</span>
+    <span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>.
+</pre></div>
+</div>
+<p>More sophisticated definitions are, of course, possible.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="documenting.html" class="btn btn-neutral float-right" title="Documenting applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="threads.html" class="btn btn-neutral" title="Multi-threading programming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
 </body>
-
 </html>
-

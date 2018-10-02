@@ -1,1240 +1,1211 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk reference manual: grammar</title>
-	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Grammar &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Directives" href="directives/index.html" />
+    <link rel="prev" title="Reference Manual" href="index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
-
-<div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Grammar</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">Reference Manual</a> &gt; Grammar</div>
-
-<h1 id="grammar_grammar">Grammar</h1>
-
-<p>
-The Logtalk grammar is here described using Backus-Naur Form syntax. Non-terminal symbols in <em>italics</em> have the definition found in the ISO Prolog Core standard. Terminal symbols are represented in a <code>fixed width font</code> and between double-quotes.
-</p>
-
-
-<h2 id="grammar_entities">Entities</h2>
-
-	<dl>
-		<dt>entity ::=</dt>
-			<dd>object |</dd>
-			<dd>category |</dd>
-			<dd>protocol</dd>
-	</dl>
-
-<h2 id="grammar_object_definition">Object definition</h2>
-
-	<dl>
-		<dt>object ::=</dt>
-			<dd>begin_object_directive [ object_terms ] end_object_directive.</dd>
-	</dl>
-	<dl>
-		<dt>begin_object_directive ::=</dt>
-			<dd>"<code>:- object(</code>" object_identifier [ "<code>,</code>" object_relations ] "<code>).</code>"</dd>
-	</dl>
-	<dl>
-		<dt>end_object_directive ::=</dt>
-			<dd>"<code>:- end_object.</code>"</dd>
-	</dl>
-	<dl>
-		<dt>object_relations ::=</dt>
-			<dd>prototype_relations |</dd>
-			<dd>non_prototype_relations</dd>
-	</dl>
-	<dl>
-		<dt>prototype_relations ::=</dt>
-			<dd>prototype_relation |</dd>
-			<dd>prototype_relation "<code>,</code>" prototype_relations</dd>
-	</dl>
-	<dl>
-		<dt>prototype_relation ::=</dt>
-			<dd>implements_protocols |</dd>
-			<dd>imports_categories |</dd>
-			<dd>extends_objects</dd>
-	</dl>
-	<dl>
-		<dt>non_prototype_relations ::=</dt>
-			<dd>non_prototype_relation |</dd>
-			<dd>non_prototype_relation "<code>,</code>" non_prototype_relations</dd>
-	</dl>
-	<dl>
-		<dt>non_prototype_relation ::=</dt>
-			<dd>implements_protocols |</dd>
-			<dd>imports_categories |</dd>
-			<dd>instantiates_classes |</dd>
-			<dd>specializes_classes</dd>
-	</dl>
-
-
-<h2 id="grammar_category_definition">Category definition</h2>
-
-	<dl>
-		<dt>category ::=</dt>
-			<dd>begin_category_directive [ category_terms ] end_category_directive.</dd>
-	</dl>
-	<dl>
-		<dt>begin_category_directive ::=</dt>
-			<dd>"<code>:- category(</code>" category_identifier [ "<code>,</code>" category_relations ] "<code>).</code>"</dd>
-	</dl>
-	<dl>
-		<dt>end_category_directive ::=</dt>
-			<dd>"<code>:- end_category.</code>"</dd>
-	</dl>
-	<dl>
-		<dt>category_relations ::=</dt>
-			<dd>category_relation |</dd>
-			<dd>category_relation "<code>,</code>" category_relations</dd>
-	</dl>
-	<dl>
-		<dt>category_relation ::=</dt>
-			<dd>implements_protocols |</dd>
-			<dd>extends_categories |</dd>
-			<dd>complements_objects</dd>
-	</dl>
-
-
-<h2 id="grammar_protocol_definition">Protocol definition</h2>
-
-	<dl>
-		<dt>protocol ::=</dt>
-			<dd>begin_protocol_directive [ protocol_directives ] end_protocol_directive.</dd>
-	</dl>
-	<dl>
-		<dt>begin_protocol_directive ::=</dt>
-			<dd>"<code>:- protocol(</code>" protocol_identifier [ "<code>,</code>" extends_protocols ] "<code>).</code>"</dd>
-	</dl>
-	<dl>
-		<dt>end_protocol_directive ::=</dt>
-			<dd>"<code>:- end_protocol.</code>"</dd>
-	</dl>
-
-
-<h2 id="grammar_entity_relations">Entity relations</h2>
-
-	<dl>
-		<dt>extends_protocols ::=</dt>
-			<dd>"<code>extends(</code>" extended_protocols "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>extends_objects ::=</dt>
-			<dd>"<code>extends(</code>" extended_objects "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>extends_categories ::=</dt>
-			<dd>"<code>extends(</code>" extended_categories "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>implements_protocols ::=</dt>
-			<dd>"<code>implements(</code>" implemented_protocols "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>imports_categories ::=</dt>
-			<dd>"<code>imports(</code>" imported_categories "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>instantiates_classes ::=</dt>
-			<dd>"<code>instantiates(</code>" instantiated_objects "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>specializes_classes ::=</dt>
-			<dd>"<code>specializes(</code>" specialized_objects "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>complements_objects ::=</dt>
-			<dd>"<code>complements(</code>" complemented_objects "<code>)</code>"</dd>
-	</dl>
-
-	<h3 id="grammar_implemented_protocols">Implemented protocols</h3>
-		<dl>
-			<dt>implemented_protocols ::=</dt>
-				<dd>implemented_protocol |</dd>
-				<dd>implemented_protocol_sequence |</dd>
-				<dd>implemented_protocol_list</dd>
-		</dl>
-		<dl>
-			<dt>implemented_protocol ::=</dt>
-				<dd>protocol_identifier |</dd>
-				<dd>scope "<code>::</code>" protocol_identifier</dd>
-		</dl>
-		<dl>
-			<dt>implemented_protocol_sequence ::=</dt>
-				<dd>implemented_protocol |</dd>
-				<dd>implemented_protocol "<code>,</code>" implemented_protocol_sequence</dd>
-		</dl>
-		<dl>
-			<dt>implemented_protocol_list ::=</dt>
-				<dd>"<code>[</code>" implemented_protocol_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_extended_protocols">Extended protocols</h3>
-		<dl>
-			<dt>extended_protocols ::=</dt>
-				<dd>extended_protocol |</dd>
-				<dd>extended_protocol_sequence |</dd>
-				<dd>extended_protocol_list</dd>
-		</dl>
-		<dl>
-			<dt>extended_protocol ::=</dt>
-				<dd>protocol_identifier |</dd>
-				<dd>scope "<code>::</code>" protocol_identifier</dd>
-		</dl>
-		<dl>
-			<dt>extended_protocol_sequence ::=</dt>
-				<dd>extended_protocol |</dd>
-				<dd>extended_protocol "<code>,</code>" extended_protocol_sequence</dd>
-		</dl>
-		<dl>
-			<dt>extended_protocol_list ::=</dt>
-				<dd>"<code>[</code>" extended_protocol_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_imported_categories">Imported categories</h3>
-		<dl>
-			<dt>imported_categories ::=</dt>
-				<dd>imported_category |</dd>
-				<dd>imported_category_sequence |</dd>
-				<dd>imported_category_list</dd>
-		</dl>
-		<dl>
-			<dt>imported_category ::=</dt>
-				<dd>category_identifier |</dd>
-				<dd>scope "<code>::</code>" category_identifier</dd>
-		</dl>
-		<dl>
-			<dt>imported_category_sequence ::=</dt>
-				<dd>imported_category |</dd>
-				<dd>imported_category "<code>,</code>" imported_category_sequence</dd>
-		</dl>
-		<dl>
-			<dt>imported_category_list ::=</dt>
-				<dd>"<code>[</code>" imported_category_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_extended_objects">Extended objects</h3>
-		<dl>
-			<dt>extended_objects ::=</dt>
-				<dd>extended_object |</dd>
-				<dd>extended_object_sequence |</dd>
-				<dd>extended_object_list</dd>
-		</dl>
-		<dl>
-			<dt>extended_object ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>scope "<code>::</code>" object_identifier</dd>
-		</dl>
-		<dl>
-			<dt>extended_object_sequence ::=</dt>
-				<dd>extended_object |</dd>
-				<dd>extended_object "<code>,</code>" extended_object_sequence</dd>
-		</dl>
-		<dl>
-			<dt>extended_object_list ::=</dt>
-				<dd>"<code>[</code>" extended_object_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_extended_categories">Extended categories</h3>
-		<dl>
-			<dt>extended_categories ::=</dt>
-				<dd>extended_category |</dd>
-				<dd>extended_category_sequence |</dd>
-				<dd>extended_category_list</dd>
-		</dl>
-		<dl>
-			<dt>extended_category ::=</dt>
-				<dd>category_identifier |</dd>
-				<dd>scope "<code>::</code>" category_identifier</dd>
-		</dl>
-		<dl>
-			<dt>extended_category_sequence ::=</dt>
-				<dd>extended_category |</dd>
-				<dd>extended_category "<code>,</code>" extended_category_sequence</dd>
-		</dl>
-		<dl>
-			<dt>extended_category_list ::=</dt>
-				<dd>"<code>[</code>" extended_category_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_instantiated_objects">Instantiated objects</h3>
-		<dl>
-			<dt>instantiated_objects ::=</dt>
-				<dd>instantiated_object |</dd>
-				<dd>instantiated_object_sequence |</dd>
-				<dd>instantiated_object_list</dd>
-		</dl>
-		<dl>
-			<dt>instantiated_object ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>scope "<code>::</code>" object_identifier</dd>
-		</dl>
-		<dl>
-			<dt>instantiated_object_sequence ::=</dt>
-				<dd>instantiated_object</dd>
-				<dd>instantiated_object "<code>,</code>" instantiated_object_sequence |</dd>
-		</dl>
-		<dl>
-			<dt>instantiated_object_list ::=</dt>
-				<dd>"<code>[</code>" instantiated_object_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_specialized_objects">Specialized objects</h3>
-		<dl>
-			<dt>specialized_objects ::=</dt>
-				<dd>specialized_object |</dd>
-				<dd>specialized_object_sequence |</dd>
-				<dd>specialized_object_list</dd>
-		</dl>
-		<dl>
-			<dt>specialized_object ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>scope "<code>::</code>" object_identifier</dd>
-		</dl>
-		<dl>
-			<dt>specialized_object_sequence ::=</dt>
-				<dd>specialized_object |</dd>
-				<dd>specialized_object "<code>,</code>" specialized_object_sequence</dd>
-		</dl>
-		<dl>
-			<dt>specialized_object_list ::=</dt>
-				<dd>"<code>[</code>" specialized_object_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_complemented_objects">Complemented objects</h3>
-		<dl>
-			<dt>complemented_objects ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>complemented_object_sequence |</dd>
-				<dd>complemented_object_list</dd>
-		</dl>
-		<dl>
-			<dt>complemented_object_sequence ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>object_identifier "<code>,</code>" complemented_object_sequence</dd>
-		</dl>
-		<dl>
-			<dt>complemented_object_list ::=</dt>
-				<dd>"<code>[</code>" complemented_object_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_scope">Entity and predicate scope</h3>
-		<dl>
-			<dt>scope ::=</dt>
-				<dd>"<code>public</code>" |</dd>
-				<dd>"<code>protected</code>" |</dd>
-				<dd>"<code>private</code>"</dd>
-		</dl>
-
-
-<h2 id="grammar_entity_identifiers">Entity identifiers</h2>
-
-	<dl>
-		<dt>entity_identifiers ::=</dt>
-			<dd>entity_identifier |</dd>
-			<dd>entity_identifier_sequence |</dd>
-			<dd>entity_identifier_list</dd>
-	</dl>
-	<dl>
-		<dt>entity_identifier ::=</dt>
-			<dd>object_identifier |</dd>
-			<dd>protocol_identifier |</dd>
-			<dd>category_identifier</dd>
-	</dl>
-	<dl>
-		<dt>entity_identifier_sequence ::=</dt>
-			<dd>entity_identifier |</dd>
-			<dd>entity_identifier "<code>,</code>" entity_identifier_sequence</dd>
-	</dl>
-	<dl>
-		<dt>entity_identifier_list ::=</dt>
-			<dd>"<code>[</code>" entity_identifier_sequence "<code>]</code>"</dd>
-	</dl>
-
-	<h3 id="grammar_object_identifiers">Object identifiers</h3>
-			<dl>
-			<dt>object_identifiers ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>object_identifier_sequence |</dd>
-				<dd>object_identifier_list</dd>
-		</dl>
-		<dl>
-			<dt>object_identifier ::=</dt>
-				<dd><em>atom</em> |</dd>
-				<dd><em>compound</em></dd>
-		</dl>
-		<dl>
-			<dt>object_identifier_sequence ::=</dt>
-				<dd>object_identifier |</dd>
-				<dd>object_identifier "<code>,</code>" object_identifier_sequence</dd>
-		</dl>
-		<dl>
-			<dt>object_identifier_list ::=</dt>
-				<dd>"<code>[</code>" object_identifier_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_category_identifiers">Category identifiers</h3>
-			<dl>
-			<dt>category_identifiers ::=</dt>
-				<dd>category_identifier |</dd>
-				<dd>category_identifier_sequence |</dd>
-				<dd>category_identifier_list</dd>
-		</dl>
-		<dl>
-			<dt>category_identifier ::=</dt>
-				<dd><em>atom</em> |</dd>
-				<dd><em>compound</em></dd>
-		</dl>
-		<dl>
-			<dt>category_identifier_sequence ::=</dt>
-				<dd>category_identifier |</dd>
-				<dd>category_identifier "<code>,</code>" category_identifier_sequence</dd>
-		</dl>
-		<dl>
-			<dt>category_identifier_list ::=</dt>
-				<dd>"<code>[</code>" category_identifier_sequence "<code>]</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_protocol_identifiers">Protocol identifiers</h3>
-			<dl>
-			<dt>protocol_identifiers ::=</dt>
-				<dd>protocol_identifier |</dd>
-				<dd>protocol_identifier_sequence |</dd>
-				<dd>protocol_identifier_list</dd>
-		</dl>
-		<dl>
-			<dt>protocol_identifier ::=</dt>
-				<dd><em>atom</em></dd>
-		</dl>
-		<dl>
-			<dt>protocol_identifier_sequence ::=</dt>
-				<dd>protocol_identifier |</dd>
-				<dd>protocol_identifier "<code>,</code>" protocol_identifier_sequence</dd>
-		</dl>
-		<dl>
-			<dt>protocol_identifier_list ::=</dt>
-				<dd>"<code>[</code>" protocol_identifier_sequence "<code>]</code>"</dd>
-		</dl>
-
-		<h3 id="grammar_module_identifiers">Module identifiers</h3>
-			<dl>
-				<dt>module_identifier ::=</dt>
-					<dd><em>atom</em></dd>
-			</dl>
-
-
-<h2 id="grammar_source_file_names">Source file names</h2>
-
-	<dl>
-		<dt>source_file_names ::=</dt>
-			<dd>source_file_name |</dd>
-			<dd>source_file_name_list</dd>
-	</dl>
-	<dl>
-		<dt>source_file_name ::=</dt>
-			<dd><em>atom</em> |</dd>
-			<dd>library_source_file_name</dd>
-	</dl>
-	<dl>
-		<dt>library_source_file_name ::=</dt>
-			<dd>library_name "<code>(</code>" <em>atom</em> "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>library_name ::=</dt>
-			<dd><em>atom</em></dd>
-	</dl>
-		<dl>
-			<dt>source_file_name_sequence ::=</dt>
-				<dd>source_file_name |</dd>
-				<dd>source_file_name "<code>,</code>" source_file_name_sequence</dd>
-		</dl>
-	<dl>
-		<dt>source_file_name_list ::=</dt>
-			<dd>"<code>[</code>" source_file_name_sequence "<code>]</code>"</dd>
-	</dl>
-
-
-<h2 id="grammar_terms">Terms</h2>
-
-	<h3 id="grammar_object_terms">Object terms</h3>
-		<dl>
-			<dt>object_terms ::=</dt>
-				<dd>object_term |</dd>
-				<dd>object_term object_terms</dd>
-		</dl>
-		<dl>
-			<dt>object_term ::=</dt>
-				<dd>object_directive |</dd>
-				<dd>clause |</dd>
-				<dd>grammar_rule</dd>
-		</dl>
-
-	<h3 id="grammar_category_terms">Category terms</h3>
-		<dl>
-			<dt>category_terms ::=</dt>
-				<dd>category_term |</dd>
-				<dd>category_term category_terms</dd>
-		</dl>
-		<dl>
-			<dt>category_term ::=</dt>
-				<dd>category_directive |</dd>
-				<dd>clause |</dd>
-				<dd>grammar_rule</dd>
-		</dl>
-
-<h2 id="grammar_directives">Directives</h2>
-
-	<h3 id="grammar_source_file_directives">Source file directives</h3>
-		<dl>
-			<dt>source_file_directives ::=</dt>
-				<dd>source_file_directive |</dd>
-				<dd>source_file_directive source_file_directives</dd>
-		</dl>
-		<dl>
-			<dt>source_file_directive ::=</dt>
-				<dd>"<code>:- encoding(</code>" <em>atom</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>"</dd>
-				<dd><em>Prolog directives</em></dd>
-		</dl>
-
-	<h3 id="grammar_conditional_compilation_directives">Conditional compilation directives</h3>
-			<dl>
-			<dt>conditional_compilation_directives ::=</dt>
-				<dd>conditional_compilation_directive |</dd>
-				<dd>conditional_compilation_directive conditional_compilation_directives</dd>
-		</dl>
-		<dl>
-			<dt>conditional_compilation_directive ::=</dt>
-				<dd>"<code>:- if(</code>" <em>callable</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- elif(</code>" <em>callable</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- else.</code>" |</dd>
-				<dd>"<code>:- endif.</code>"</dd>
-		</dl>
-
-	<h3 id="grammar_object_directives">Object directives</h3>
-			<dl>
-			<dt>object_directives ::=</dt>
-				<dd>object_directive |</dd>
-				<dd>object_directive object_directives</dd>
-		</dl>
-		<dl>
-			<dt>object_directive ::=</dt>
-				<dd>"<code>:- initialization(</code>" <em>callable</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- built_in.</code>" |</dd>
-				<dd>"<code>:- threaded.</code>" |</dd>
-				<dd>"<code>:- dynamic.</code>" |</dd>
-				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
-				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>" |</dd>
-				<dd>predicate_directives</dd>
-		</dl>
-
-	<h3 id="grammar_category_directives">Category directives</h3>
-			<dl>
-			<dt>category_directives ::=</dt>
-				<dd>category_directive |</dd>
-				<dd>category_directive category_directives</dd>
-		</dl>
-		<dl>
-			<dt>category_directive ::=</dt>
-				<dd>"<code>:- built_in.</code>" |</dd>
-				<dd>"<code>:- dynamic.</code>" |</dd>
-				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
-				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>" |</dd>
-				<dd>predicate_directives</dd>
-		</dl>
-
-	<h3 id="grammar_protocol_directives">Protocol directives</h3>
-			<dl>
-			<dt>protocol_directives ::=</dt>
-				<dd>protocol_directive |</dd>
-				<dd>protocol_directive protocol_directives</dd>
-		</dl>
-		<dl>
-			<dt>protocol_directive ::=</dt>
-				<dd>"<code>:- built_in.</code>" |</dd>
-				<dd>"<code>:- dynamic.</code>" |</dd>
-				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
-				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
-				<dd>"<code>:- include(</code>" source_file_name "<code>).</code>" |</dd>
-				<dd>predicate_directives</dd>
-		</dl>
-
-	<h3 id="grammar_predicate_directives">Predicate directives</h3>
-			<dl>
-			<dt>predicate_directives ::=</dt>
-				<dd>predicate_directive |</dd>
-				<dd>predicate_directive predicate_directives</dd>
-		</dl>
-		<dl>
-			<dt>predicate_directive ::=</dt>
-				<dd>alias_directive |</dd>
-				<dd>synchronized_directive |</dd>
-				<dd>uses_directive |</dd>
-				<dd>use_module_directive |</dd>
-				<dd>scope_directive |</dd>
-				<dd>mode_directive |</dd>
-				<dd>meta_predicate_directive |</dd>
-				<dd>meta_non_terminal_directive |</dd>
-				<dd>info_directive |</dd>
-				<dd>dynamic_directive |</dd>
-				<dd>discontiguous_directive |</dd>
-				<dd>multifile_directive |</dd>
-				<dd>coinductive_directive |</dd>
-				<dd><em>operator_directive</em></dd>
-		</dl>
-		<dl>
-			<dt>alias_directive ::=</dt>
-				<dd>"<code>:- alias(</code>" entity_identifier "<code>,</code>" predicate_indicator_alias_list "<code>).</code>" |</dd>
-				<dd>"<code>:- alias(</code>" entity_identifier "<code>,</code>" non_terminal_indicator_alias_list "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>synchronized_directive ::=</dt>
-				<dd>"<code>:- synchronized(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>uses_directive ::=</dt>
-				<dd>"<code>:- uses(</code>" object_identifier "<code>,</code>" predicate_indicator_alias_list "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>use_module_directive ::=</dt>
-				<dd>"<code>:- use_module(</code>" module_identifier  "<code>,</code>" module_predicate_indicator_alias_list "<code>).</code>" |</dd>
-		</dl>
-		<dl>
-			<dt>scope_directive ::=</dt>
-				<dd>"<code>:- public(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>" |</dd>
-				<dd>"<code>:- protected(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>" |</dd>
-				<dd>"<code>:- private(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>mode_directive ::=</dt>
-				<dd>"<code>:- mode(</code>" predicate_mode_term | non_terminal_mode_term "<code>,</code>" number_of_proofs "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>meta_predicate_directive ::=</dt>
-				<dd>"<code>:- meta_predicate(</code>" meta_predicate_template_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>meta_non_terminal_directive ::=</dt>
-				<dd>"<code>:- meta_non_terminal(</code>" meta_non_terminal_template_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>info_directive ::=</dt>
-				<dd>"<code>:- info(</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_info_list "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>dynamic_directive ::=</dt>
-				<dd>"<code>:- dynamic(</code>" qualified_predicate_indicator_term | qualified_non_terminal_indicator_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>discontiguous_directive ::=</dt>
-				<dd>"<code>:- discontiguous(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>multifile_directive ::=</dt>
-				<dd>"<code>:- multifile(</code>" qualified_predicate_indicator_term | qualified_non_terminal_indicator_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_directive ::=</dt>
-				<dd>"<code>:- coinductive(</code>" predicate_indicator_term | coinductive_predicate_template_term "<code>).</code>"</dd>
-		</dl>
-		<dl>
-			<dt>predicate_indicator_term ::=</dt>
-				<dd><em>predicate_indicator</em> |</dd>
-				<dd>predicate_indicator_sequence |</dd>
-				<dd>predicate_indicator_list</dd>
-		</dl>
-		<dl>
-			<dt>predicate_indicator_sequence ::=</dt>
-				<dd><em>predicate_indicator</em> |</dd>
-				<dd><em>predicate_indicator</em> "<code>,</code>" predicate_indicator_sequence</dd>
-		</dl>
-		<dl>
-			<dt>predicate_indicator_list ::=</dt>
-				<dd>"<code>[</code>" predicate_indicator_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>qualified_predicate_indicator_term ::=</dt>
-				<dd>qualified_predicate_indicator |</dd>
-				<dd>qualified_predicate_indicator_sequence |</dd>
-				<dd>qualified_predicate_indicator_list</dd>
-		</dl>
-		<dl>
-			<dt>qualified_predicate_indicator_sequence ::=</dt>
-				<dd>qualified_predicate_indicator |</dd>
-				<dd>qualified_predicate_indicator "<code>,</code>" qualified_predicate_indicator_sequence</dd>
-		</dl>
-		<dl>
-			<dt>qualified_predicate_indicator_list ::=</dt>
-				<dd>"<code>[</code>" qualified_predicate_indicator_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>qualified_predicate_indicator ::=</dt>
-				<dd>predicate_indicator |</dd>
-				<dd>object_identifier "<code>::</code>" predicate_indicator |</dd>
-				<dd>category_identifier "<code>::</code>" predicate_indicator |</dd>
-				<dd>module_identifier "<code>:</code>" predicate_indicator</dd>
-		</dl>
-		<dl>
-			<dt>predicate_indicator_alias ::=</dt>
-				<dd><em>predicate_indicator</em> |</dd>
-				<dd><em>predicate_indicator</em> "<code>as</code>" <em>predicate_indicator</em> |</dd>
-				<dd><em>predicate_indicator</em> "<code>::</code>" <em>predicate_indicator</em> |</dd>
-				<dd><em>predicate_indicator</em> "<code>:</code>" <em>predicate_indicator</em></dd>
-		</dl>
-		<dl>
-			<dt>predicate_indicator_alias_sequence ::=</dt>
-				<dd>predicate_indicator_alias |</dd>
-				<dd>predicate_indicator_alias "<code>,</code>" predicate_indicator_alias_sequence</dd>
-		</dl>
-		<dl>
-			<dt>predicate_indicator_alias_list ::=</dt>
-				<dd>"<code>[</code>" predicate_indicator_alias_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>module_predicate_indicator_alias ::=</dt>
-				<dd><em>predicate_indicator</em> |</dd>
-				<dd><em>predicate_indicator</em> "<code>as</code>" <em>predicate_indicator</em> |</dd>
-				<dd><em>predicate_indicator</em> "<code>:</code>" <em>predicate_indicator</em></dd>
-		</dl>
-		<dl>
-			<dt>module_predicate_indicator_alias_sequence ::=</dt>
-				<dd>module_predicate_indicator_alias |</dd>
-				<dd>module_predicate_indicator_alias "<code>,</code>" module_predicate_indicator_alias_sequence</dd>
-		</dl>
-		<dl>
-			<dt>module_predicate_indicator_alias_list ::=</dt>
-				<dd>"<code>[</code>" module_predicate_indicator_alias_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator_term ::=</dt>
-				<dd>non_terminal_indicator |</dd>
-				<dd>non_terminal_indicator_sequence |</dd>
-				<dd>non_terminal_indicator_list</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator_sequence ::=</dt>
-				<dd>non_terminal_indicator |</dd>
-				<dd>non_terminal_indicator "<code>,</code>" non_terminal_indicator_sequence</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator_list ::=</dt>
-				<dd>"<code>[</code>" non_terminal_indicator_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator ::=</dt>
-				<dd><em>functor</em> "<code>//</code>" <em>arity</em></dd>
-		</dl>
-		<dl>
-			<dt>qualified_non_terminal_indicator_term ::=</dt>
-				<dd>qualified_non_terminal_indicator |</dd>
-				<dd>qualified_non_terminal_indicator_sequence |</dd>
-				<dd>qualified_non_terminal_indicator_list</dd>
-		</dl>
-		<dl>
-			<dt>qualified_non_terminal_indicator_sequence ::=</dt>
-				<dd>qualified_non_terminal_indicator |</dd>
-				<dd>qualified_non_terminal_indicator "<code>,</code>" qualified_non_terminal_indicator_sequence</dd>
-		</dl>
-		<dl>
-			<dt>qualified_non_terminal_indicator_list ::=</dt>
-				<dd>"<code>[</code>" qualified_non_terminal_indicator_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>qualified_non_terminal_indicator ::=</dt>
-				<dd>non_terminal_indicator |</dd>
-				<dd>object_identifier "<code>::</code>" non_terminal_indicator |</dd>
-				<dd>category_identifier "<code>::</code>" non_terminal_indicator |</dd>
-				<dd>module_identifier "<code>:</code>" non_terminal_indicator</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator_alias ::=</dt>
-				<dd><em>non_terminal_indicator</em> |</dd>
-				<dd><em>non_terminal_indicator</em> "<code>as</code>" <em>non_terminal_indicator</em></dd>
-				<dd><em>non_terminal_indicator</em> "<code>::</code>" <em>non_terminal_indicator</em></dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator_alias_sequence ::=</dt>
-				<dd>non_terminal_indicator_alias |</dd>
-				<dd>non_terminal_indicator_alias "<code>,</code>" non_terminal_indicator_alias_sequence</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_indicator_alias_list ::=</dt>
-				<dd>"<code>[</code>" non_terminal_indicator_alias_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_predicate_template_term ::=</dt>
-				<dd>coinductive_predicate_template |</dd>
-				<dd>coinductive_predicate_template_sequence |</dd>
-				<dd>coinductive_predicate_template_list</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_predicate_template_sequence ::=</dt>
-				<dd>coinductive_predicate_template |</dd>
-				<dd>coinductive_predicate_template "<code>,</code>" coinductive_predicate_template_sequence</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_predicate_template_list ::=</dt>
-				<dd>"<code>[</code>" coinductive_predicate_template_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_predicate_template ::=</dt>
-				<dd><em>atom</em> "<code>(</code>" coinductive_mode_terms "<code>)</code>"</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_mode_terms ::=</dt>
-				<dd>coinductive_mode_term |</dd>
-				<dd>coinductive_mode_terms "<code>,</code>" coinductive_mode_terms</dd>
-		</dl>
-		<dl>
-			<dt>coinductive_mode_term ::=</dt>
-				<dd>"<code>+</code>" | "<code>-</code>"</dd>
-		</dl>
-		<dl>
-			<dt>predicate_mode_term ::=</dt>
-				<dd><em>atom</em> "<code>(</code>" mode_terms "<code>)</code>"</dd>
-		</dl>
-		<dl>
-			<dt>non_terminal_mode_term ::=</dt>
-				<dd><em>atom</em> "<code>(</code>" mode_terms "<code>)</code>"</dd>
-		</dl>
-		<dl>
-			<dt>mode_terms ::=</dt>
-				<dd>mode_term |</dd>
-				<dd>mode_term "<code>,</code>" mode_terms</dd>
-		</dl>
-		<dl>
-			<dt>mode_term ::=</dt>
-				<dd>"<code>@</code>" [ type ] | "<code>+</code>" [ type ] | "<code>-</code>" [ type ] | "<code>?</code>" [ type ] |</dd>
-				<dd>"<code>++</code>" [ type ] | "<code>--</code>" [ type ]</dd>
-		</dl>
-		<dl>
-			<dt>type ::=</dt>
-				<dd>prolog_type | logtalk_type | user_defined_type</dd>
-		</dl>
-		<dl>
-			<dt>prolog_type ::=</dt>
-				<dd>"<code>term</code>" | "<code>nonvar</code>" | "<code>var</code>" |</dd>
-				<dd>"<code>compound</code>" | "<code>ground</code>" | "<code>callable</code>" | "<code>list</code>" |</dd>
-				<dd>"<code>atomic</code>" | "<code>atom</code>" |</dd>
-				<dd>"<code>number</code>" | "<code>integer</code>" | "<code>float</code>"</dd>
-		</dl>
-		<dl>
-			<dt>logtalk_type ::=</dt>
-				<dd>"<code>object</code>" | "<code>category</code>" | "<code>protocol</code>" |</dd>
-				<dd>"<code>event</code>"</dd>
-		</dl>
-		<dl>
-			<dt>user_defined_type ::=</dt>
-				<dd><em>atom</em> |</dd>
-				<dd><em>compound</em></dd>
-		</dl>
-		<dl>
-			<dt>number_of_proofs ::=</dt>
-				<dd>"<code>zero</code>" | "<code>zero_or_one</code>" | "<code>zero_or_more</code>" | "<code>one</code>" | "<code>one_or_more</code>" | "<code>one_or_error</code>" | "<code>error</code>"</dd>
-		</dl>
-		<dl>
-			<dt>meta_predicate_template_term ::=</dt>
-				<dd><em>meta_predicate_template</em> |</dd>
-				<dd>meta_predicate_template_sequence |</dd>
-				<dd>meta_predicate_template_list</dd>
-		</dl>
-		<dl>
-			<dt>meta_predicate_template_sequence ::=</dt>
-				<dd><em>meta_predicate_template</em> |</dd>
-				<dd><em>meta_predicate_template</em> "<code>,</code>" meta_predicate_template_sequence</dd>
-		</dl>
-		<dl>
-			<dt>meta_predicate_template_list ::=</dt>
-				<dd>"<code>[</code>" meta_predicate_template_sequence "<code>]</code>"</dd>
-		</dl>
-		<dl id="grammar_meta_predicate_template">
-			<dt>meta_predicate_template ::=</dt>
-				<dd>object_identifier "<code>::</code>" <em>atom</em> "<code>(</code>" meta_predicate_specifiers "<code>)</code>" |</dd>
-				<dd>category_identifier "<code>::</code>" <em>atom</em> "<code>(</code>" meta_predicate_specifiers "<code>)</code>" |</dd>
-				<dd><em>atom</em> "<code>(</code>" meta_predicate_specifiers "<code>)</code>"</dd>
-		</dl>
-		<dl id="grammar_meta_predicate_specifiers">
-			<dt>meta_predicate_specifiers ::=</dt>
-				<dd>meta_predicate_specifier |</dd>
-				<dd>meta_predicate_specifier "<code>,</code>" meta_predicate_specifiers</dd>
-		</dl>
-		<dl>
-			<dt>meta_predicate_specifier ::=</dt>
-				<dd><em>non-negative integer</em> | "<code>::</code>" | "<code>^</code>" |</dd>
-				<dd>"<code>*</code>"</dd>
-		</dl>
-		<dl>
-			<dt>meta_non_terminal_template_term ::=</dt>
-				<dd>meta_predicate_template_term</dd>
-		</dl>
-		<dl id="grammar_entity_info">
-			<dt>entity_info_list ::=</dt>
-				<dd>"<code>[]</code>" |</dd>
-				<dd>"<code>[</code>" entity_info_item "<code>is</code>" <em>nonvar</em> "<code>|</code>" entity_info_list "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>entity_info_item ::=</dt>
-				<dd>"<code>comment</code>" | "<code>remarks</code>" | </dd>
-				<dd>"<code>author</code>" | "<code>version</code>" | "<code>date</code>" | </dd>
-				<dd>"<code>copyright</code>" | "<code>license</code>" | </dd>
-				<dd>"<code>parameters</code>" | "<code>parnames</code>" | </dd>
-				<dd>"<code>see_also</code>" | </dd>
-				<dd><em>atom</em></dd>
-		</dl>
-		<dl id="grammar_predicate_info">
-			<dt>predicate_info_list ::=</dt>
-				<dd>"<code>[]</code>" |</dd>
-				<dd>"<code>[</code>" predicate_info_item "<code>is</code>" <em>nonvar</em> "<code>|</code>" predicate_info_list "<code>]</code>"</dd>
-		</dl>
-		<dl>
-			<dt>predicate_info_item ::=</dt>
-				<dd>"<code>comment</code>" | "<code>remarks</code>" | </dd>
-				<dd>"<code>arguments</code>" | "<code>argnames</code>" | </dd>
-				<dd>"<code>redefinition</code>" | "<code>allocation</code>" |</dd>
-				<dd>"<code>examples</code>" | "<code>exceptions</code>" | </dd>
-				<dd><em>atom</em></dd>
-		</dl>
-
-
-<h2 id="grammar_clauses">Clauses and goals</h2>
-
-	<dl>
-		<dt>clause ::=</dt>
-			<dd>object_identifier "<code>::</code>" <em>head</em> "<code>:-</code>" <em>body</em> |</dd>
-			<dd>module_identifier "<code>:</code>" <em>head</em> "<code>:-</code>" <em>body</em> |</dd>
-			<dd><em>head</em> :- <em>body</em> |</dd>
-			<dd><em>fact</em></dd>
-	</dl>
-	<dl>
-		<dt>goal ::=</dt>
-			<dd>message_sending |</dd>
-			<dd>super_call |</dd>
-			<dd>external_call |</dd>
-			<dd>context_switching_call |</dd>
-			<dd><em>callable</em></dd>
-	</dl>
-	<dl>
-		<dt>message_sending ::=</dt>
-			<dd>message_to_object |</dd>
-			<dd>message_delegation |</dd>
-			<dd>message_to_self</dd>
-	</dl>
-	<dl>
-		<dt>message_to_object ::=</dt>
-			<dd>receiver "<code>::</code>" messages</dd>
-	</dl>
-	<dl>
-		<dt>message_delegation ::=</dt>
-			<dd>"<code>[</code>" message_to_object "<code>]</code>"</dd>
-	</dl>
-	<dl>
-		<dt>message_to_self ::=</dt>
-			<dd>"<code>::</code>" messages</dd>
-	</dl>
-	<dl>
-		<dt>super_call ::=</dt>
-			<dd>"<code>^^</code>" message</dd>
-	</dl>
-	<dl>
-		<dt>messages ::=</dt>
-			<dd>message |</dd>
-			<dd>"<code>(</code>" message "<code>,</code>" messages "<code>)</code>" |</dd>
-			<dd>"<code>(</code>" message "<code>;</code>" messages "<code>)</code>" |</dd>
-			<dd>"<code>(</code>" message "<code>-&gt;</code>" messages "<code>)</code>"</dd>
-	</dl>
-	<dl>
-		<dt>message ::=</dt>
-			<dd><em>callable</em> |</dd>
-			<dd><em>variable</em></dd>
-	</dl>
-	<dl>
-		<dt>receiver ::=</dt>
-			<dd>"<code>{</code>" <em>callable</em> "<code>}</code>" |</dd>
-			<dd>object_identifier |</dd>
-			<dd><em>variable</em></dd>
-	</dl>
-	<dl>
-		<dt>external_call ::=</dt>
-			<dd>"<code>{</code>" <em>callable</em> "<code>}</code>"</dd>
-	</dl>
-	<dl>
-		<dt>context_switching_call ::=</dt>
-			<dd>object_identifier "<code>&lt;&lt;</code>" <em>goal</em></dd>
-	</dl>
-
-<h2 id="grammar_lambdas">Lambda expressions</h2>
-
-	<dl>
-		<dt>lambda_expression ::=</dt>
-			<dd>lambda_free_variables "<code>/</code>" lambda_parameters "<code>&gt;&gt;</code>" <em>callable</em> |</dd>
-			<dd>lambda_free_variables "<code>/</code>" <em>callable</em> |</dd>
-			<dd>lambda_parameters "<code>&gt;&gt;</code>" <em>callable</em></dd>
-	</dl>
-
-	<dl>
-		<dt>lambda_free_variables ::=</dt>
-			<dd>"<code>{</code>" <em>conjunction of variables</em> "<code>}</code>" |</dd>
-			<dd>"<code>{</code>" <em>variable</em> "<code>}</code>" |</dd>
-			<dd>"<code>{}</code>"</dd>
-	</dl>
-
-	<dl>
-		<dt>lambda_parameters ::=</dt>
-			<dd><em>list of terms</em> |</dd>
-			<dd>"<code>[]</code>"</dd>
-	</dl>
-
-<h2 id="grammar_entity_properties">Entity properties</h2>
-
-	<dl  id="grammar_category_property">
-		<dt>category_property ::=</dt>
-			<dd>"<code>static</code>" |</dd>
-			<dd>"<code>dynamic</code>" |</dd>
-			<dd>"<code>built_in</code>" |</dd>
-			<dd>"<code>file(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>file(</code>" <em>atom</em> "<code>,</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>lines(</code>" <em>integer</em> "<code>,</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>events</code>" |</dd>
-			<dd>"<code>source_data</code>" |</dd>
-			<dd>"<code>public(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>protected(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>private(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>declares(</code>" predicate_indicator "<code>,</code>" predicate_declaration_property_list "<code>)</code>" |</dd>
-			<dd>"<code>defines(</code>" predicate_indicator "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>includes(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>provides(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>alias(</code>" predicate_indicator "<code>,</code>" predicate_alias_property_list "<code>)</code>" |</dd>
-			<dd>"<code>calls(</code>" predicate "<code>,</code>" predicate_call_update_property_list "<code>)</code>" |</dd>
-			<dd>"<code>updates(</code>" predicate "<code>,</code>" predicate_call_update_property_list "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_rules(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_user_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_user_rules(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>debugging</code>"</dd>
-	</dl>
-	<dl id="grammar_object_property">
-		<dt>object_property ::=</dt>
-			<dd>"<code>static</code>" |</dd>
-			<dd>"<code>dynamic</code>" |</dd>
-			<dd>"<code>built_in</code>" |</dd>
-			<dd>"<code>threaded</code>" |</dd>
-			<dd>"<code>file(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>file(</code>" <em>atom</em> "<code>,</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>lines(</code>" <em>integer</em> "<code>,</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>context_switching_calls</code>" |</dd>
-			<dd>"<code>dynamic_declarations</code>" |</dd>
-			<dd>"<code>events</code>" |</dd>
-			<dd>"<code>source_data</code>" |</dd>
-			<dd>"<code>complements(</code>" "<code>allow</code>" | "<code>restrict</code>" "<code>)</code>" |</dd>
-			<dd>"<code>complements</code>" |</dd>
-			<dd>"<code>public(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>protected(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>private(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>declares(</code>" predicate_indicator "<code>,</code>" predicate_declaration_property_list "<code>)</code>" |</dd>
-			<dd>"<code>defines(</code>" predicate_indicator "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>includes(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>provides(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>"</dd>
-			<dd>"<code>alias(</code>" predicate_indicator "<code>,</code>" predicate_alias_property_list "<code>)</code>" |</dd>
-			<dd>"<code>calls(</code>" predicate "<code>,</code>" predicate_call_update_property_list "<code>)</code>" |</dd>
-			<dd>"<code>updates(</code>" predicate "<code>,</code>" predicate_call_update_property_list "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_rules(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_user_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
-			<dd>"<code>number_of_user_rules(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>module</code> |"</dd>
-			<dd>"<code>debugging</code>"</dd>
-	</dl>
-	<dl id="grammar_protocol_property">
-		<dt>protocol_property ::=</dt>
-			<dd>"<code>static</code>" |</dd>
-			<dd>"<code>dynamic</code>" |</dd>
-			<dd>"<code>built_in</code>" |</dd>
-			<dd>"<code>source_data</code>" |</dd>
-			<dd>"<code>file(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>file(</code>" <em>atom</em> "<code>,</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>lines(</code>" <em>integer</em> "<code>,</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>public(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>protected(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>private(</code>" predicate_indicator_list "<code>)</code>" |</dd>
-			<dd>"<code>declares(</code>" predicate_indicator "<code>,</code>" predicate_declaration_property_list "<code>)</code>" |</dd>
-			<dd>"<code>alias(</code>" predicate_indicator "<code>,</code>" predicate_alias_property_list "<code>)</code>" |</dd>
-			<dd>"<code>debugging</code>"</dd>
-	</dl>
-
-	<dl>
-		<dt>predicate_declaration_property_list ::=</dt>
-			<dd>"<code>[</code>" predicate_declaration_property_sequence "<code>]</code>"</dd>
-	</dl>
-	<dl>
-		<dt>predicate_declaration_property_sequence ::=</dt>
-			<dd>predicate_declaration_property |</dd>
-			<dd>predicate_declaration_property "<code>,</code>" predicate_declaration_property_sequence</dd>
-	</dl>
-	<dl>
-		<dt>predicate_declaration_property ::=</dt>
-			<dd>"<code>static</code>" | "<code>dynamic</code>" |</dd>
-			<dd>"<code>scope(</code>" scope "<code>)</code>" |</dd>
-			<dd>"<code>private</code>" | "<code>protected</code>" | "<code>public</code>" |</dd>
-			<dd>"<code>coinductive</code>" |</dd>
-			<dd>"<code>multifile</code>" |</dd>
-			<dd>"<code>synchronized</code>" |</dd>
-			<dd>"<code>meta_predicate(</code>" meta_predicate_template "<code>)</code>" |</dd>
-			<dd>"<code>coinductive(</code>" coinductive_predicate_template "<code>)</code>" |</dd>
-			<dd>"<code>non_terminal(</code>" non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>include(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>line_count(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>mode(</code>" predicate_mode_term | non_terminal_mode_term "<code>,</code>" number_of_proofs "<code>)</code>" |</dd>
-			<dd>"<code>info(</code>" <em>list</em> "<code>)</code>"</dd>
-	</dl>
-
-	<dl>
-		<dt>predicate_definition_property_list ::=</dt>
-			<dd>"<code>[</code>" predicate_definition_property_sequence "<code>]</code>"</dd>
-	</dl>
-	<dl>
-		<dt>predicate_definition_property_sequence ::=</dt>
-			<dd>predicate_definition_property |</dd>
-			<dd>predicate_definition_property "<code>,</code>" predicate_definition_property_sequence</dd>
-	</dl>
-	<dl>
-		<dt>predicate_definition_property ::=</dt>
-			<dd>"<code>inline</code>" | "<code>auxiliary</code>" |</dd>
-			<dd>"<code>non_terminal(</code>" non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>include(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>line_count(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_rules(</code>" <em>integer</em> "<code>)</code>"</dd>
-	</dl>
-
-	<dl>
-		<dt>predicate_alias_property_list ::=</dt>
-			<dd>"<code>[</code>" predicate_alias_property_sequence "<code>]</code>"</dd>
-	</dl>
-	<dl>
-		<dt>predicate_alias_property_sequence ::=</dt>
-			<dd>predicate_alias_property |</dd>
-			<dd>predicate_alias_property "<code>,</code>" predicate_alias_property_sequence</dd>
-	</dl>
-	<dl>
-		<dt>predicate_alias_property ::=</dt>
-			<dd>"<code>for(</code>" predicate_indicator "<code>)</code>" |</dd>
-			<dd>"<code>from(</code>" entity_identifier "<code>)</code>" |</dd>
-			<dd>"<code>non_terminal(</code>" non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>include(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>line_count(</code>" <em>integer</em> "<code>)</code>"</dd>
-	</dl>
-
-	<dl>
-		<dt>predicate ::=</dt>
-			<dd>predicate_indicator |</dd>
-			<dd>"<code>^^</code>" predicate_indicator |</dd>
-			<dd>"<code>::</code>" predicate_indicator |</dd>
-			<dd><em>variable</em> "<code>::</code>" predicate_indicator |</dd>
-			<dd>object_identifier "<code>::</code>" predicate_indicator |</dd>
-			<dd><em>variable</em> "<code>:</code>" predicate_indicator |</dd>
-			<dd>module_identifier "<code>:</code>" predicate_indicator</dd>
-	</dl>
-
-	<dl>
-		<dt>predicate_call_update_property_list ::=</dt>
-			<dd>"<code>[</code>" predicate_call_update_property_sequence "<code>]</code>"</dd>
-	</dl>
-	<dl>
-		<dt>predicate_call_update_property_sequence ::=</dt>
-			<dd>predicate_call_update_property |</dd>
-			<dd>predicate_call_update_property "<code>,</code>" predicate_call_update_property_sequence</dd>
-	</dl>
-	<dl>
-		<dt>predicate_call_update_property ::=</dt>
-			<dd>"<code>caller(</code>" predicate_indicator "<code>)</code>" |</dd>
-			<dd>"<code>include(</code>" <em>atom</em> "<code>)</code>" |</dd>
-			<dd>"<code>line_count(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>as(</code>" predicate_indicator "<code>)</code>"</dd>
-	</dl>
-
-
-<h2 id="grammar_predicate_properties">Predicate properties</h2>
-
-	<dl>
-		<dt>predicate_property ::=</dt>
-			<dd>"<code>static</code>" | "<code>dynamic</code>" |</dd>
-			<dd>"<code>scope(</code>" scope "<code>)</code>" |</dd>
-			<dd>"<code>private</code>" | "<code>protected</code>" | "<code>public</code>" |</dd>
-			<dd>"<code>logtalk</code>" | "<code>prolog</code>" | "<code>foreign</code>" |</dd>
-			<dd>"<code>coinductive(</code>" coinductive_predicate_template "<code>)</code>" |</dd>
-			<dd>"<code>multifile</code>" |</dd>
-			<dd>"<code>synchronized</code>" |</dd>
-			<dd>"<code>built_in</code>" |</dd>
-			<dd>"<code>inline</code>" |</dd>
-			<dd>"<code>declared_in(</code>" entity_identifier "<code>)</code>" |</dd>
-			<dd>"<code>defined_in(</code>" object_identifier | category_identifier "<code>)</code>" |</dd>
-			<dd>"<code>redefined_from(</code>" object_identifier | category_identifier "<code>)</code>" |</dd>
-			<dd>"<code>meta_predicate(</code>" meta_predicate_template "<code>)</code>" |</dd>
-			<dd>"<code>alias_of(</code>" callable "<code>)</code>" |</dd>
-			<dd>"<code>alias_declared_in(</code>" entity_identifier "<code>)</code>" |</dd>
-			<dd>"<code>non_terminal(</code>" non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>mode(</code>" predicate_mode_term | non_terminal_mode_term "<code>,</code>" number_of_proofs "<code>)</code>" |</dd>
-			<dd>"<code>info(</code>" <em>list</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>number_of_rules(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>declared_in(</code>" entity_identifier "<code>,</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>defined_in(</code>" object_identifier | category_identifier "<code>,</code>" <em>integer</em>"<code>)</code>" |</dd>
-			<dd>"<code>redefined_from(</code>" object_identifier | category_identifier "<code>,</code>" <em>integer</em>"<code>)</code>" |</dd>
-			<dd>"<code>alias_declared_in(</code>" entity_identifier "<code>,</code>" <em>integer</em>"<code>)</code>"</dd>
-	</dl>
-
-<h2 id="grammar_compiler_flags">Compiler flags</h2>
-
-	<dl>
-		<dt>compiler_flag ::=</dt>
-			<dd><em>flag(flag_value)</em></dd>
-	</dl>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 2, 2018</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
 
-</body>
+          
+        </div>
 
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Grammar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entities">Entities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#object-definition">Object definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#category-definition">Category definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-definition">Protocol definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-relations">Entity relations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#implemented-protocols">Implemented protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-protocols">Extended protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imported-categories">Imported categories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-objects">Extended objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-categories">Extended categories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instantiated-objects">Instantiated objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specialized-objects">Specialized objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#complemented-objects">Complemented objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#entity-and-predicate-scope">Entity and predicate scope</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-identifiers">Entity identifiers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object-identifiers">Object identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-identifiers">Category identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protocol-identifiers">Protocol identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-identifiers">Module identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#source-file-names">Source file names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terms">Terms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object-terms">Object terms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-terms">Category terms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#directives">Directives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#source-file-directives">Source file directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-compilation-directives">Conditional compilation directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#object-directives">Object directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#category-directives">Category directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protocol-directives">Protocol directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predicate-directives">Predicate directives</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clauses-and-goals">Clauses and goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lambda-expressions">Lambda expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-properties">Entity properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predicate-properties">Predicate properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-flags">Compiler flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods/index.html">Built-in methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/index.html">Control constructs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Reference Manual</a> &raquo;</li>
+        
+      <li>Grammar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/refman/grammar.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="grammar">
+<span id="grammar-grammar"></span><h1>Grammar<a class="headerlink" href="#grammar" title="Permalink to this headline">¶</a></h1>
+<p>The Logtalk grammar is here described using Backus-Naur Form syntax.
+Non-terminal symbols in <em>italics</em> have the definition found in the ISO
+Prolog Core standard. Terminal symbols are represented in a
+<code class="docutils literal notranslate"><span class="pre">fixed</span> <span class="pre">width</span> <span class="pre">font</span></code> and between double-quotes.</p>
+<div class="section" id="entities">
+<span id="grammar-entities"></span><h2>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>entity ::=</dt>
+<dd>object |
+category |
+protocol</dd>
+</dl>
+</div>
+<div class="section" id="object-definition">
+<span id="grammar-object-definition"></span><h2>Object definition<a class="headerlink" href="#object-definition" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>object ::=</dt>
+<dd>begin_object_directive [ object_terms ] end_object_directive.</dd>
+<dt>begin_object_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">object(</span></code>” object_identifier [ “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_relations ]
+“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>end_object_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_object.</span></code>”</dd>
+<dt>object_relations ::=</dt>
+<dd>prototype_relations |
+non_prototype_relations</dd>
+<dt>prototype_relations ::=</dt>
+<dd>prototype_relation |
+prototype_relation “<code class="docutils literal notranslate"><span class="pre">,</span></code>” prototype_relations</dd>
+<dt>prototype_relation ::=</dt>
+<dd>implements_protocols |
+imports_categories |
+extends_objects</dd>
+<dt>non_prototype_relations ::=</dt>
+<dd>non_prototype_relation |
+non_prototype_relation “<code class="docutils literal notranslate"><span class="pre">,</span></code>” non_prototype_relations</dd>
+<dt>non_prototype_relation ::=</dt>
+<dd>implements_protocols |
+imports_categories |
+instantiates_classes |
+specializes_classes</dd>
+</dl>
+</div>
+<div class="section" id="category-definition">
+<span id="grammar-category-definition"></span><h2>Category definition<a class="headerlink" href="#category-definition" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>category ::=</dt>
+<dd>begin_category_directive [ category_terms ] end_category_directive.</dd>
+<dt>begin_category_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">category(</span></code>” category_identifier [ “<code class="docutils literal notranslate"><span class="pre">,</span></code>” category_relations ]
+“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>end_category_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_category.</span></code>”</dd>
+<dt>category_relations ::=</dt>
+<dd>category_relation |
+category_relation “<code class="docutils literal notranslate"><span class="pre">,</span></code>” category_relations</dd>
+<dt>category_relation ::=</dt>
+<dd>implements_protocols |
+extends_categories |
+complements_objects</dd>
+</dl>
+</div>
+<div class="section" id="protocol-definition">
+<span id="grammar-protocol-definition"></span><h2>Protocol definition<a class="headerlink" href="#protocol-definition" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>protocol ::=</dt>
+<dd>begin_protocol_directive [ protocol_directives ]
+end_protocol_directive.</dd>
+<dt>begin_protocol_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">protocol(</span></code>” protocol_identifier [ “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extends_protocols ]
+“<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>end_protocol_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_protocol.</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="entity-relations">
+<span id="grammar-entity-relations"></span><h2>Entity relations<a class="headerlink" href="#entity-relations" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>extends_protocols ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">extends(</span></code>” extended_protocols “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>extends_objects ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">extends(</span></code>” extended_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>extends_categories ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">extends(</span></code>” extended_categories “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>implements_protocols ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">implements(</span></code>” implemented_protocols “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>imports_categories ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">imports(</span></code>” imported_categories “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>instantiates_classes ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">instantiates(</span></code>” instantiated_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>specializes_classes ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">specializes(</span></code>” specialized_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>complements_objects ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">complements(</span></code>” complemented_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+</dl>
+<div class="section" id="implemented-protocols">
+<span id="grammar-implemented-protocols"></span><h3>Implemented protocols<a class="headerlink" href="#implemented-protocols" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>implemented_protocols ::=</dt>
+<dd>implemented_protocol |
+implemented_protocol_sequence |
+implemented_protocol_list</dd>
+<dt>implemented_protocol ::=</dt>
+<dd>protocol_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” protocol_identifier</dd>
+<dt>implemented_protocol_sequence ::=</dt>
+<dd>implemented_protocol |
+implemented_protocol “<code class="docutils literal notranslate"><span class="pre">,</span></code>” implemented_protocol_sequence</dd>
+<dt>implemented_protocol_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” implemented_protocol_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="extended-protocols">
+<span id="grammar-extended-protocols"></span><h3>Extended protocols<a class="headerlink" href="#extended-protocols" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>extended_protocols ::=</dt>
+<dd>extended_protocol |
+extended_protocol_sequence |
+extended_protocol_list</dd>
+<dt>extended_protocol ::=</dt>
+<dd>protocol_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” protocol_identifier</dd>
+<dt>extended_protocol_sequence ::=</dt>
+<dd>extended_protocol |
+extended_protocol “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extended_protocol_sequence</dd>
+<dt>extended_protocol_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_protocol_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="imported-categories">
+<span id="grammar-imported-categories"></span><h3>Imported categories<a class="headerlink" href="#imported-categories" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>imported_categories ::=</dt>
+<dd>imported_category |
+imported_category_sequence |
+imported_category_list</dd>
+<dt>imported_category ::=</dt>
+<dd>category_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” category_identifier</dd>
+<dt>imported_category_sequence ::=</dt>
+<dd>imported_category |
+imported_category “<code class="docutils literal notranslate"><span class="pre">,</span></code>” imported_category_sequence</dd>
+<dt>imported_category_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” imported_category_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="extended-objects">
+<span id="grammar-extended-objects"></span><h3>Extended objects<a class="headerlink" href="#extended-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>extended_objects ::=</dt>
+<dd>extended_object |
+extended_object_sequence |
+extended_object_list</dd>
+<dt>extended_object ::=</dt>
+<dd>object_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” object_identifier</dd>
+<dt>extended_object_sequence ::=</dt>
+<dd>extended_object |
+extended_object “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extended_object_sequence</dd>
+<dt>extended_object_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="extended-categories">
+<span id="grammar-extended-categories"></span><h3>Extended categories<a class="headerlink" href="#extended-categories" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>extended_categories ::=</dt>
+<dd>extended_category |
+extended_category_sequence |
+extended_category_list</dd>
+<dt>extended_category ::=</dt>
+<dd>category_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” category_identifier</dd>
+<dt>extended_category_sequence ::=</dt>
+<dd>extended_category |
+extended_category “<code class="docutils literal notranslate"><span class="pre">,</span></code>” extended_category_sequence</dd>
+<dt>extended_category_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_category_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="instantiated-objects">
+<span id="grammar-instantiated-objects"></span><h3>Instantiated objects<a class="headerlink" href="#instantiated-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>instantiated_objects ::=</dt>
+<dd>instantiated_object |
+instantiated_object_sequence |
+instantiated_object_list</dd>
+<dt>instantiated_object ::=</dt>
+<dd>object_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” object_identifier</dd>
+<dt>instantiated_object_sequence ::=</dt>
+<dd>instantiated_object
+instantiated_object “<code class="docutils literal notranslate"><span class="pre">,</span></code>” instantiated_object_sequence |</dd>
+<dt>instantiated_object_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” instantiated_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="specialized-objects">
+<span id="grammar-specialized-objects"></span><h3>Specialized objects<a class="headerlink" href="#specialized-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>specialized_objects ::=</dt>
+<dd>specialized_object |
+specialized_object_sequence |
+specialized_object_list</dd>
+<dt>specialized_object ::=</dt>
+<dd>object_identifier |
+scope “<code class="docutils literal notranslate"><span class="pre">::</span></code>” object_identifier</dd>
+<dt>specialized_object_sequence ::=</dt>
+<dd>specialized_object |
+specialized_object “<code class="docutils literal notranslate"><span class="pre">,</span></code>” specialized_object_sequence</dd>
+<dt>specialized_object_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” specialized_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="complemented-objects">
+<span id="grammar-complemented-objects"></span><h3>Complemented objects<a class="headerlink" href="#complemented-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>complemented_objects ::=</dt>
+<dd>object_identifier |
+complemented_object_sequence |
+complemented_object_list</dd>
+<dt>complemented_object_sequence ::=</dt>
+<dd>object_identifier |
+object_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” complemented_object_sequence</dd>
+<dt>complemented_object_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” complemented_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="entity-and-predicate-scope">
+<span id="grammar-scope"></span><h3>Entity and predicate scope<a class="headerlink" href="#entity-and-predicate-scope" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>scope ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">public</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">protected</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">private</span></code>”</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="entity-identifiers">
+<span id="grammar-entity-identifiers"></span><h2>Entity identifiers<a class="headerlink" href="#entity-identifiers" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>entity_identifiers ::=</dt>
+<dd>entity_identifier |
+entity_identifier_sequence |
+entity_identifier_list</dd>
+<dt>entity_identifier ::=</dt>
+<dd>object_identifier |
+protocol_identifier |
+category_identifier</dd>
+<dt>entity_identifier_sequence ::=</dt>
+<dd>entity_identifier |
+entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” entity_identifier_sequence</dd>
+<dt>entity_identifier_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” entity_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+<div class="section" id="object-identifiers">
+<span id="grammar-object-identifiers"></span><h3>Object identifiers<a class="headerlink" href="#object-identifiers" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>object_identifiers ::=</dt>
+<dd>object_identifier |
+object_identifier_sequence |
+object_identifier_list</dd>
+<dt>object_identifier ::=</dt>
+<dd><em>atom</em> |
+<em>compound</em></dd>
+<dt>object_identifier_sequence ::=</dt>
+<dd>object_identifier |
+object_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier_sequence</dd>
+<dt>object_identifier_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” object_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="category-identifiers">
+<span id="grammar-category-identifiers"></span><h3>Category identifiers<a class="headerlink" href="#category-identifiers" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>category_identifiers ::=</dt>
+<dd>category_identifier |
+category_identifier_sequence |
+category_identifier_list</dd>
+<dt>category_identifier ::=</dt>
+<dd><em>atom</em> |
+<em>compound</em></dd>
+<dt>category_identifier_sequence ::=</dt>
+<dd>category_identifier |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” category_identifier_sequence</dd>
+<dt>category_identifier_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” category_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="protocol-identifiers">
+<span id="grammar-protocol-identifiers"></span><h3>Protocol identifiers<a class="headerlink" href="#protocol-identifiers" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>protocol_identifiers ::=</dt>
+<dd>protocol_identifier |
+protocol_identifier_sequence |
+protocol_identifier_list</dd>
+<dt>protocol_identifier ::=</dt>
+<dd><em>atom</em></dd>
+<dt>protocol_identifier_sequence ::=</dt>
+<dd>protocol_identifier |
+protocol_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” protocol_identifier_sequence</dd>
+<dt>protocol_identifier_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” protocol_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="module-identifiers">
+<span id="grammar-module-identifiers"></span><h3>Module identifiers<a class="headerlink" href="#module-identifiers" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>module_identifier ::=</dt>
+<dd><em>atom</em></dd>
+</dl>
+</div>
+</div>
+<div class="section" id="source-file-names">
+<span id="grammar-source-file-names"></span><h2>Source file names<a class="headerlink" href="#source-file-names" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>source_file_names ::=</dt>
+<dd>source_file_name |
+source_file_name_list</dd>
+<dt>source_file_name ::=</dt>
+<dd><em>atom</em> |
+library_source_file_name</dd>
+<dt>library_source_file_name ::=</dt>
+<dd>library_name “<code class="docutils literal notranslate"><span class="pre">(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>library_name ::=</dt>
+<dd><em>atom</em></dd>
+<dt>source_file_name_sequence ::=</dt>
+<dd>source_file_name |
+source_file_name “<code class="docutils literal notranslate"><span class="pre">,</span></code>” source_file_name_sequence</dd>
+<dt>source_file_name_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” source_file_name_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="terms">
+<span id="grammar-terms"></span><h2>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="object-terms">
+<span id="grammar-object-terms"></span><h3>Object terms<a class="headerlink" href="#object-terms" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>object_terms ::=</dt>
+<dd>object_term |
+object_term object_terms</dd>
+<dt>object_term ::=</dt>
+<dd>object_directive |
+clause |
+grammar_rule</dd>
+</dl>
+</div>
+<div class="section" id="category-terms">
+<span id="grammar-category-terms"></span><h3>Category terms<a class="headerlink" href="#category-terms" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>category_terms ::=</dt>
+<dd>category_term |
+category_term category_terms</dd>
+<dt>category_term ::=</dt>
+<dd>category_directive |
+clause |
+grammar_rule</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="directives">
+<span id="grammar-directives"></span><h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="source-file-directives">
+<span id="grammar-source-file-directives"></span><h3>Source file directives<a class="headerlink" href="#source-file-directives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>source_file_directives ::=</dt>
+<dd>source_file_directive |
+source_file_directive source_file_directives</dd>
+<dt>source_file_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">encoding(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>”
+<em>Prolog directives</em></dd>
+</dl>
+</div>
+<div class="section" id="conditional-compilation-directives">
+<span id="grammar-conditional-compilation-directives"></span><h3>Conditional compilation directives<a class="headerlink" href="#conditional-compilation-directives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>conditional_compilation_directives ::=</dt>
+<dd>conditional_compilation_directive |
+conditional_compilation_directive conditional_compilation_directives</dd>
+<dt>conditional_compilation_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">if(</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">elif(</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">else.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">endif.</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="object-directives">
+<span id="grammar-object-directives"></span><h3>Object directives<a class="headerlink" href="#object-directives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>object_directives ::=</dt>
+<dd>object_directive |
+object_directive object_directives</dd>
+<dt>object_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">initialization(</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">built_in.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">threaded.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+predicate_directives</dd>
+</dl>
+</div>
+<div class="section" id="category-directives">
+<span id="grammar-category-directives"></span><h3>Category directives<a class="headerlink" href="#category-directives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>category_directives ::=</dt>
+<dd>category_directive |
+category_directive category_directives</dd>
+<dt>category_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">built_in.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+predicate_directives</dd>
+</dl>
+</div>
+<div class="section" id="protocol-directives">
+<span id="grammar-protocol-directives"></span><h3>Protocol directives<a class="headerlink" href="#protocol-directives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>protocol_directives ::=</dt>
+<dd>protocol_directive |
+protocol_directive protocol_directives</dd>
+<dt>protocol_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">built_in.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic.</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” entity_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">set_logtalk_flag(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">include(</span></code>” source_file_name “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+predicate_directives</dd>
+</dl>
+</div>
+<div class="section" id="predicate-directives">
+<span id="grammar-predicate-directives"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>predicate_directives ::=</dt>
+<dd>predicate_directive |
+predicate_directive predicate_directives</dd>
+<dt>predicate_directive ::=</dt>
+<dd>alias_directive |
+synchronized_directive |
+uses_directive |
+use_module_directive |
+scope_directive |
+mode_directive |
+meta_predicate_directive |
+meta_non_terminal_directive |
+info_directive |
+dynamic_directive |
+discontiguous_directive |
+multifile_directive |
+coinductive_directive |
+<em>operator_directive</em></dd>
+<dt>alias_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+non_terminal_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>synchronized_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">synchronized(</span></code>” predicate_indicator_term |
+non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>uses_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>” object_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>use_module_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module(</span></code>” module_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+module_predicate_indicator_alias_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |</dd>
+<dt>scope_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">public(</span></code>” predicate_indicator_term |
+non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">protected(</span></code>” predicate_indicator_term |
+non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">private(</span></code>” predicate_indicator_term |
+non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>mode_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">mode(</span></code>” predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+number_of_proofs “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>meta_predicate_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">meta_predicate(</span></code>” meta_predicate_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>meta_non_terminal_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">meta_non_terminal(</span></code>” meta_non_terminal_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>info_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>” predicate_indicator | non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_info_list “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>dynamic_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">dynamic(</span></code>” qualified_predicate_indicator_term |
+qualified_non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>discontiguous_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">discontiguous(</span></code>” predicate_indicator_term |
+non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>multifile_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">multifile(</span></code>” qualified_predicate_indicator_term |
+qualified_non_terminal_indicator_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>coinductive_directive ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">coinductive(</span></code>” predicate_indicator_term |
+coinductive_predicate_template_term “<code class="docutils literal notranslate"><span class="pre">).</span></code>”</dd>
+<dt>predicate_indicator_term ::=</dt>
+<dd><em>predicate_indicator</em> |
+predicate_indicator_sequence |
+predicate_indicator_list</dd>
+<dt>predicate_indicator_sequence ::=</dt>
+<dd><em>predicate_indicator</em> |
+<em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_indicator_sequence</dd>
+<dt>predicate_indicator_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>qualified_predicate_indicator_term ::=</dt>
+<dd>qualified_predicate_indicator |
+qualified_predicate_indicator_sequence |
+qualified_predicate_indicator_list</dd>
+<dt>qualified_predicate_indicator_sequence ::=</dt>
+<dd>qualified_predicate_indicator |
+qualified_predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+qualified_predicate_indicator_sequence</dd>
+<dt>qualified_predicate_indicator_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” qualified_predicate_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>qualified_predicate_indicator ::=</dt>
+<dd>predicate_indicator |
+object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |
+module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” predicate_indicator</dd>
+<dt>predicate_indicator_alias ::=</dt>
+<dd><em>predicate_indicator</em> |
+<em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>predicate_indicator</em> |
+<em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>predicate_indicator</em> |
+<em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>predicate_indicator</em></dd>
+<dt>predicate_indicator_alias_sequence ::=</dt>
+<dd>predicate_indicator_alias |
+predicate_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_indicator_alias_sequence</dd>
+<dt>predicate_indicator_alias_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>module_predicate_indicator_alias ::=</dt>
+<dd><em>predicate_indicator</em> |
+<em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>predicate_indicator</em> |
+<em>predicate_indicator</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>predicate_indicator</em></dd>
+<dt>module_predicate_indicator_alias_sequence ::=</dt>
+<dd>module_predicate_indicator_alias |
+module_predicate_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+module_predicate_indicator_alias_sequence</dd>
+<dt>module_predicate_indicator_alias_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” module_predicate_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>non_terminal_indicator_term ::=</dt>
+<dd>non_terminal_indicator |
+non_terminal_indicator_sequence |
+non_terminal_indicator_list</dd>
+<dt>non_terminal_indicator_sequence ::=</dt>
+<dd>non_terminal_indicator |
+non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” non_terminal_indicator_sequence</dd>
+<dt>non_terminal_indicator_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” non_terminal_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>non_terminal_indicator ::=</dt>
+<dd><em>functor</em> “<code class="docutils literal notranslate"><span class="pre">//</span></code>” <em>arity</em></dd>
+<dt>qualified_non_terminal_indicator_term ::=</dt>
+<dd>qualified_non_terminal_indicator |
+qualified_non_terminal_indicator_sequence |
+qualified_non_terminal_indicator_list</dd>
+<dt>qualified_non_terminal_indicator_sequence ::=</dt>
+<dd>qualified_non_terminal_indicator |
+qualified_non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+qualified_non_terminal_indicator_sequence</dd>
+<dt>qualified_non_terminal_indicator_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” qualified_non_terminal_indicator_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>qualified_non_terminal_indicator ::=</dt>
+<dd>non_terminal_indicator |
+object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” non_terminal_indicator |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” non_terminal_indicator |
+module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” non_terminal_indicator</dd>
+<dt>non_terminal_indicator_alias ::=</dt>
+<dd><em>non_terminal_indicator</em> |
+<em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">as</span></code>” <em>non_terminal_indicator</em>
+<em>non_terminal_indicator</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>non_terminal_indicator</em></dd>
+<dt>non_terminal_indicator_alias_sequence ::=</dt>
+<dd>non_terminal_indicator_alias |
+non_terminal_indicator_alias “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+non_terminal_indicator_alias_sequence</dd>
+<dt>non_terminal_indicator_alias_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” non_terminal_indicator_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>coinductive_predicate_template_term ::=</dt>
+<dd>coinductive_predicate_template |
+coinductive_predicate_template_sequence |
+coinductive_predicate_template_list</dd>
+<dt>coinductive_predicate_template_sequence ::=</dt>
+<dd>coinductive_predicate_template |
+coinductive_predicate_template “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+coinductive_predicate_template_sequence</dd>
+<dt>coinductive_predicate_template_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” coinductive_predicate_template_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>coinductive_predicate_template ::=</dt>
+<dd><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” coinductive_mode_terms “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>coinductive_mode_terms ::=</dt>
+<dd>coinductive_mode_term |
+coinductive_mode_terms “<code class="docutils literal notranslate"><span class="pre">,</span></code>” coinductive_mode_terms</dd>
+<dt>coinductive_mode_term ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">+</span></code>” | “<code class="docutils literal notranslate"><span class="pre">-</span></code>“</dd>
+<dt>predicate_mode_term ::=</dt>
+<dd><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” mode_terms “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>non_terminal_mode_term ::=</dt>
+<dd><em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” mode_terms “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>mode_terms ::=</dt>
+<dd>mode_term |
+mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>” mode_terms</dd>
+<dt>mode_term ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">&#64;</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">+</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">-</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">?</span></code>” [
+type ] |
+“<code class="docutils literal notranslate"><span class="pre">++</span></code>” [ type ] | “<code class="docutils literal notranslate"><span class="pre">--</span></code>” [ type ]</dd>
+<dt>type ::=</dt>
+<dd>prolog_type | logtalk_type | user_defined_type</dd>
+<dt>prolog_type ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">term</span></code>” | “<code class="docutils literal notranslate"><span class="pre">nonvar</span></code>” | “<code class="docutils literal notranslate"><span class="pre">var</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">compound</span></code>” | “<code class="docutils literal notranslate"><span class="pre">ground</span></code>” | “<code class="docutils literal notranslate"><span class="pre">callable</span></code>” | “<code class="docutils literal notranslate"><span class="pre">list</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">atomic</span></code>” | “<code class="docutils literal notranslate"><span class="pre">atom</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number</span></code>” | “<code class="docutils literal notranslate"><span class="pre">integer</span></code>” | “<code class="docutils literal notranslate"><span class="pre">float</span></code>”</dd>
+<dt>logtalk_type ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">object</span></code>” | “<code class="docutils literal notranslate"><span class="pre">category</span></code>” | “<code class="docutils literal notranslate"><span class="pre">protocol</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">event</span></code>”</dd>
+<dt>user_defined_type ::=</dt>
+<dd><em>atom</em> |
+<em>compound</em></dd>
+<dt>number_of_proofs ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">zero</span></code>” | “<code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code>” | “<code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code>” | “<code class="docutils literal notranslate"><span class="pre">one</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">one_or_more</span></code>” | “<code class="docutils literal notranslate"><span class="pre">one_or_error</span></code>” | “<code class="docutils literal notranslate"><span class="pre">error</span></code>”</dd>
+<dt>meta_predicate_template_term ::=</dt>
+<dd><em>meta_predicate_template</em> |
+meta_predicate_template_sequence |
+meta_predicate_template_list</dd>
+<dt>meta_predicate_template_sequence ::=</dt>
+<dd><em>meta_predicate_template</em> |
+<em>meta_predicate_template</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” meta_predicate_template_sequence</dd>
+<dt>meta_predicate_template_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” meta_predicate_template_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>meta_predicate_template ::=</dt>
+<dd>object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” meta_predicate_specifiers
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” meta_predicate_specifiers
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+<em>atom</em> “<code class="docutils literal notranslate"><span class="pre">(</span></code>” meta_predicate_specifiers “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>meta_predicate_specifiers ::=</dt>
+<dd>meta_predicate_specifier |
+meta_predicate_specifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” meta_predicate_specifiers</dd>
+<dt>meta_predicate_specifier ::=</dt>
+<dd><em>non-negative integer</em> | “<code class="docutils literal notranslate"><span class="pre">::</span></code>” | “<code class="docutils literal notranslate"><span class="pre">^</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">*</span></code>”</dd>
+<dt>meta_non_terminal_template_term ::=</dt>
+<dd>meta_predicate_template_term</dd>
+<dt>entity_info_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[]</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">[</span></code>” entity_info_item “<code class="docutils literal notranslate"><span class="pre">is</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">|</span></code>” entity_info_list
+“<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>entity_info_item ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">comment</span></code>” | “<code class="docutils literal notranslate"><span class="pre">remarks</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">author</span></code>” | “<code class="docutils literal notranslate"><span class="pre">version</span></code>” | “<code class="docutils literal notranslate"><span class="pre">date</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">copyright</span></code>” | “<code class="docutils literal notranslate"><span class="pre">license</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">parameters</span></code>” | “<code class="docutils literal notranslate"><span class="pre">parnames</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">see_also</span></code>” |
+<em>atom</em></dd>
+<dt>predicate_info_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[]</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_info_item “<code class="docutils literal notranslate"><span class="pre">is</span></code>” <em>nonvar</em> “<code class="docutils literal notranslate"><span class="pre">|</span></code>”
+predicate_info_list “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>predicate_info_item ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">comment</span></code>” | “<code class="docutils literal notranslate"><span class="pre">remarks</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">arguments</span></code>” | “<code class="docutils literal notranslate"><span class="pre">argnames</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">redefinition</span></code>” | “<code class="docutils literal notranslate"><span class="pre">allocation</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">examples</span></code>” | “<code class="docutils literal notranslate"><span class="pre">exceptions</span></code>” |
+<em>atom</em></dd>
+</dl>
+</div>
+</div>
+<div class="section" id="clauses-and-goals">
+<span id="grammar-clauses"></span><h2>Clauses and goals<a class="headerlink" href="#clauses-and-goals" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>clause ::=</dt>
+<dd>object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” <em>head</em> “<code class="docutils literal notranslate"><span class="pre">:-</span></code>” <em>body</em> |
+module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” <em>head</em> “<code class="docutils literal notranslate"><span class="pre">:-</span></code>” <em>body</em> |
+<em>head</em> :- <em>body</em> |
+<em>fact</em></dd>
+<dt>goal ::=</dt>
+<dd>message_sending |
+super_call |
+external_call |
+context_switching_call |
+<em>callable</em></dd>
+<dt>message_sending ::=</dt>
+<dd>message_to_object |
+message_delegation |
+message_to_self</dd>
+<dt>message_to_object ::=</dt>
+<dd>receiver “<code class="docutils literal notranslate"><span class="pre">::</span></code>” messages</dd>
+<dt>message_delegation ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” message_to_object “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>message_to_self ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">::</span></code>” messages</dd>
+<dt>super_call ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">^^</span></code>” message</dd>
+<dt>messages ::=</dt>
+<dd>message |
+“<code class="docutils literal notranslate"><span class="pre">(</span></code>” message “<code class="docutils literal notranslate"><span class="pre">,</span></code>” messages “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">(</span></code>” message “<code class="docutils literal notranslate"><span class="pre">;</span></code>” messages “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">(</span></code>” message “<code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>” messages “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>message ::=</dt>
+<dd><em>callable</em> |
+<em>variable</em></dd>
+<dt>receiver ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>” |
+object_identifier |
+<em>variable</em></dd>
+<dt>external_call ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>callable</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>”</dd>
+<dt>context_switching_call ::=</dt>
+<dd>object_identifier “<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>” <em>goal</em></dd>
+</dl>
+</div>
+<div class="section" id="lambda-expressions">
+<span id="grammar-lambdas"></span><h2>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>lambda_expression ::=</dt>
+<dd>lambda_free_variables “<code class="docutils literal notranslate"><span class="pre">/</span></code>” lambda_parameters “<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>” <em>callable</em>
+|
+lambda_free_variables “<code class="docutils literal notranslate"><span class="pre">/</span></code>” <em>callable</em> |
+lambda_parameters “<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>” <em>callable</em></dd>
+<dt>lambda_free_variables ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>conjunction of variables</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">{</span></code>” <em>variable</em> “<code class="docutils literal notranslate"><span class="pre">}</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">{}</span></code>”</dd>
+<dt>lambda_parameters ::=</dt>
+<dd><em>list of terms</em> |
+“<code class="docutils literal notranslate"><span class="pre">[]</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="entity-properties">
+<span id="grammar-entity-properties"></span><h2>Entity properties<a class="headerlink" href="#entity-properties" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>category_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">static</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">events</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">defines(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">includes(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">provides(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">calls(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">updates(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_user_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</dd>
+<dt>object_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">static</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">threaded</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">events</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">complements(</span></code>” “<code class="docutils literal notranslate"><span class="pre">allow</span></code>” | “<code class="docutils literal notranslate"><span class="pre">restrict</span></code>” “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">complements</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">defines(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">includes(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">provides(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier |
+category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>”
+“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">calls(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">updates(</span></code>” predicate “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_call_update_property_list
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”
+“<code class="docutils literal notranslate"><span class="pre">number_of_user_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">module</span></code> |”
+“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</dd>
+<dt>protocol_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">static</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</dd>
+<dt>predicate_declaration_property_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_declaration_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>predicate_declaration_property_sequence ::=</dt>
+<dd>predicate_declaration_property |
+predicate_declaration_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_declaration_property_sequence</dd>
+<dt>predicate_declaration_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">static</span></code>” | “<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">scope(</span></code>” scope “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">private</span></code>” | “<code class="docutils literal notranslate"><span class="pre">protected</span></code>” | “<code class="docutils literal notranslate"><span class="pre">public</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">coinductive</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">multifile</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">meta_predicate(</span></code>” meta_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">coinductive(</span></code>” coinductive_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">mode(</span></code>” predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+number_of_proofs “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">info(</span></code>” <em>list</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>predicate_definition_property_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_definition_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>predicate_definition_property_sequence ::=</dt>
+<dd>predicate_definition_property |
+predicate_definition_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_definition_property_sequence</dd>
+<dt>predicate_definition_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">inline</span></code>” | “<code class="docutils literal notranslate"><span class="pre">auxiliary</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>predicate_alias_property_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_alias_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>predicate_alias_property_sequence ::=</dt>
+<dd>predicate_alias_property |
+predicate_alias_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_alias_property_sequence</dd>
+<dt>predicate_alias_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">for(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">from(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+<dt>predicate ::=</dt>
+<dd>predicate_indicator |
+“<code class="docutils literal notranslate"><span class="pre">^^</span></code>” predicate_indicator |
+“<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |
+<em>variable</em> “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |
+object_identifier “<code class="docutils literal notranslate"><span class="pre">::</span></code>” predicate_indicator |
+<em>variable</em> “<code class="docutils literal notranslate"><span class="pre">:</span></code>” predicate_indicator |
+module_identifier “<code class="docutils literal notranslate"><span class="pre">:</span></code>” predicate_indicator</dd>
+<dt>predicate_call_update_property_list ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">[</span></code>” predicate_call_update_property_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</dd>
+<dt>predicate_call_update_property_sequence ::=</dt>
+<dd>predicate_call_update_property |
+predicate_call_update_property “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+predicate_call_update_property_sequence</dd>
+<dt>predicate_call_update_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">caller(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">include(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">line_count(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">as(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="predicate-properties">
+<span id="grammar-predicate-properties"></span><h2>Predicate properties<a class="headerlink" href="#predicate-properties" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>predicate_property ::=</dt>
+<dd>“<code class="docutils literal notranslate"><span class="pre">static</span></code>” | “<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">scope(</span></code>” scope “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">private</span></code>” | “<code class="docutils literal notranslate"><span class="pre">protected</span></code>” | “<code class="docutils literal notranslate"><span class="pre">public</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">logtalk</span></code>” | “<code class="docutils literal notranslate"><span class="pre">prolog</span></code>” | “<code class="docutils literal notranslate"><span class="pre">foreign</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">coinductive(</span></code>” coinductive_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">multifile</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">synchronized</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">built_in</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">inline</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">defined_in(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">redefined_from(</span></code>” object_identifier | category_identifier
+“<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">meta_predicate(</span></code>” meta_predicate_template “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">alias_of(</span></code>” callable “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">alias_declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">non_terminal(</span></code>” non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">mode(</span></code>” predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+number_of_proofs “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">info(</span></code>” <em>list</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_clauses(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">number_of_rules(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">defined_in(</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”
+<em>integer</em>”<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">redefined_from(</span></code>” object_identifier | category_identifier
+“<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em>”<code class="docutils literal notranslate"><span class="pre">)</span></code>” |
+“<code class="docutils literal notranslate"><span class="pre">alias_declared_in(</span></code>” entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em>”<code class="docutils literal notranslate"><span class="pre">)</span></code>”</dd>
+</dl>
+</div>
+<div class="section" id="compiler-flags">
+<span id="grammar-compiler-flags"></span><h2>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>compiler_flag ::=</dt>
+<dd><em>flag(flag_value)</em></dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="directives/index.html" class="btn btn-neutral float-right" title="Directives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Reference Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compatibility &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="General" href="general.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">FAQ</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general.html">General</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Compatibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-the-backend-prolog-compiler-requirements-to-run-logtalk">What are the backend Prolog compiler requirements to run Logtalk?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#can-i-use-constraint-based-packages-with-logtalk">Can I use constraint-based packages with Logtalk?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time">Can I use Logtalk objects and Prolog modules at the same time?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="portability.html">Portability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usability.html">Usability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="licensing.html">Licensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">FAQ</a> &raquo;</li>
+        
+      <li>Compatibility</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/faq/compatibility.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compatibility">
+<span id="faq-compatibility"></span><h1>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="#faq-compatibility-requirements"><span class="std std-ref">What are the backend Prolog compiler requirements to run Logtalk?</span></a></li>
+<li><a class="reference internal" href="#faq-compatibility-constraints"><span class="std std-ref">Can I use constraint-based packages with Logtalk?</span></a></li>
+<li><a class="reference internal" href="#faq-compatibility-modules"><span class="std std-ref">Can I use Logtalk objects and Prolog modules at the same time?</span></a></li>
+</ul>
+<div class="section" id="what-are-the-backend-prolog-compiler-requirements-to-run-logtalk">
+<span id="faq-compatibility-requirements"></span><h2>What are the backend Prolog compiler requirements to run Logtalk?<a class="headerlink" href="#what-are-the-backend-prolog-compiler-requirements-to-run-logtalk" title="Permalink to this headline">¶</a></h2>
+<p>See the wiki page on <a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/wiki/Backend-Prolog-compiler-requirements">backend Prolog compiler requirements</a>.</p>
+</div>
+<div class="section" id="can-i-use-constraint-based-packages-with-logtalk">
+<span id="faq-compatibility-constraints"></span><h2>Can I use constraint-based packages with Logtalk?<a class="headerlink" href="#can-i-use-constraint-based-packages-with-logtalk" title="Permalink to this headline">¶</a></h2>
+<p>Usually, yes. Some constraint-based packages may define operators
+which clash with the ones defined by Logtalk. In these cases,
+compatibility with Logtalk depends on the constraint-based packages
+providing an alternative for accessing the functionality provided by
+those operators. When the constraint solver is encapsulated using a
+Prolog module, a possible workaround is to use either explicit module
+qualification or encapsulate the call using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
+control construct (thus bypassing the Logtalk compiler).</p>
+</div>
+<div class="section" id="can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time">
+<span id="faq-compatibility-modules"></span><h2>Can I use Logtalk objects and Prolog modules at the same time?<a class="headerlink" href="#can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time" title="Permalink to this headline">¶</a></h2>
+<p>Yes. In order to call a module predicate from within an object (or category)
+you may use a <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive or use explicit
+module qualification (possibly wrapping the call using the Logtalk
+control construct <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> that allows bypassing of
+the Logtalk compiler when compiling a predicate call). Logtalk also allows
+modules to be compiled as objects (see the <a class="reference internal" href="../userman/migration.html#migration-migration"><span class="std std-ref">Prolog Integration and Migration Guide</span></a>
+for details).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="general.html" class="btn btn-neutral" title="General" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

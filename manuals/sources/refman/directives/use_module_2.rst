@@ -1,0 +1,93 @@
+
+.. index:: use_module/2
+.. _directives_use_module_2:
+
+use_module/2
+============
+
+Description
+-----------
+
+::
+
+   use_module(Module, Predicates)
+   use_module(Module, PredicatesAndAliases)
+
+   use_module(Module, NonTerminals)
+   use_module(Module, NonTerminalsAndAliases)
+
+   use_module(Module, Operators)
+
+This directive declares that all calls (made from predicates defined in
+the category or object containing the directive) to the specified
+predicates (or non-terminals) are to be interpreted as calls to
+explicitly-qualified module predicates (or non-terminals). Thus, this
+directive may be used to simplify writing of predicate definitions by
+allowing the programmer to omit the ``Module:`` prefix when using the
+predicates listed in the directive (as long as the predicate calls do
+not occur as arguments for non-standard Prolog meta-predicates not
+declared on the adapter files). It is also possible to include operator
+declarations, ``op(Precedence, Associativity, Operator)``, in the second
+argument.
+
+This directive is also used when compiling calls to the database and
+reflection built-in methods by examining these methods predicate
+arguments.
+
+It is possible to specify a predicate alias using the notation
+``Name/Arity as Alias/Arity`` or, in alternative, the notation
+``Name/Arity:Alias/Arity``. Aliases may be used either for avoiding
+conflicts between predicates specified in ``use_module/2`` and
+``uses/2`` directives or for giving more meaningful names considering
+the using context of the predicates.
+
+Note that this directive differs from the directive with the same name
+found on some Prolog implementations by requiring the first argument to
+be a module name (an atom) instead of a file specification. In Logtalk,
+there's no mixing between *loading* a resource and (declaring the)
+*using* (of) a resource. As a consequence, this directive doesn't
+automatically load the module. Loading the module file is dependent of
+the used backend Prolog compiler and must be done separately (usually,
+using a source file ``use_module/1`` or ``use_module/2`` directive in
+the entity file or in the application loader file). Also note that the
+name of the module may differ from the name of the module file.
+
+The modules should be loaded prior to the compilation of entities that
+call the module predicates. This is required in general to allow the
+compiler to check if the called module predicate is a meta-predicate and
+retrieve its meta-predicate template to ensure proper call compilation.
+
+Template and modes
+------------------
+
+::
+
+   use_module(+module_identifier, +predicate_indicator_list)
+   use_module(+module_identifier, +predicate_indicator_alias_list)
+
+   use_module(+module_identifier, +non_terminal_indicator_list)
+   use_module(+module_identifier, +non_terminal_indicator_alias_list)
+
+   use_module(+module_identifier, +operator_list)
+
+Examples
+--------
+
+::
+
+   :- use_module(lists, [append/3, member/2]).
+   :- use_module(store, [data/2]).
+   :- use_module(user,  [foo/1 as bar/1]).
+
+   foo :-
+       ...,
+       findall(X, member(X, L), A),    % same as findall(X, lists:member(X, L), A)
+       append(A, B, C),                % same as lists:append(A, B, C)
+       assertz(data(X, C)),            % same as assertz(store:data(X, C))
+       retractall(bar(_)),             % same as retractall(user:foo(_))
+       ...
+
+See also
+--------
+
+:ref:`directives_uses_2`

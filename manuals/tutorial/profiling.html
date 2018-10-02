@@ -1,127 +1,275 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-    <title>Logtalk tutorial: profiling programs</title>
-	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Profiling programs &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FAQ" href="../faq/index.html" />
+    <link rel="prev" title="A reflective class-based system" href="reflection.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk tutorial</div> 
-<div class="top-right">Profiling programs</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">Tutorial</a></div>
+   
+  <div class="wy-grid-for-nav">
 
-<h1>Profiling programs</h1>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<p>
-In this example, we will illustrate the use of:
-</p>
-<ul>
-	<li>events</li>
-	<li>monitors</li>
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lists.html">List predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attributes.html">Dynamic object attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">A reflective class-based system</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Profiling programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#messages-as-events">Messages as events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#profilers-as-monitors">Profilers as monitors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
 </ul>
-<p>
-by defining a simple profiler that prints the starting and ending time for processing a message sent to an object.
-</p>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
 
-<h2 id="events">Messages as events</h2>
+            
+          
+        </div>
+      </div>
+    </nav>
 
-<p>
-In a pure object-oriented system, all computations start by sending messages to objects. We can thus define an <em>event</em> as the sending of a message to an object. An event can then be specified by the tuple <code>(Object, Message, Sender)</code>. This definition can be refined by interpreting the sending of a message and the return of the control to the object that has sent the message as two distinct events. We call these events respectively <code>before</code> and <code>after</code>. Therefore, we end up by representing an event by the tuple <code>(Event, Object, Message, Sender)</code>. For instance, if we send the message:
-</p>
-<pre>| ?- foo::bar(X).
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Profiling programs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/profiling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="profiling-programs">
+<h1>Profiling programs<a class="headerlink" href="#profiling-programs" title="Permalink to this headline">¶</a></h1>
+<p>In this example, we will illustrate the use of:</p>
+<ul class="simple">
+<li>events</li>
+<li>monitors</li>
+</ul>
+<p>by defining a simple profiler that prints the starting and ending time
+for processing a message sent to an object.</p>
+<div class="section" id="messages-as-events">
+<span id="events"></span><h2>Messages as events<a class="headerlink" href="#messages-as-events" title="Permalink to this headline">¶</a></h2>
+<p>In a pure object-oriented system, all computations start by sending
+messages to objects. We can thus define an <em>event</em> as the sending of a
+message to an object. An event can then be specified by the tuple
+<code class="docutils literal notranslate"><span class="pre">(Object,</span> <span class="pre">Message,</span> <span class="pre">Sender)</span></code>. This definition can be refined by
+interpreting the sending of a message and the return of the control to
+the object that has sent the message as two distinct events. We call
+these events respectively <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code>. Therefore, we end up
+by representing an event by the tuple
+<code class="docutils literal notranslate"><span class="pre">(Event,</span> <span class="pre">Object,</span> <span class="pre">Message,</span> <span class="pre">Sender)</span></code>. For instance, if we send the
+message:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- foo::bar(X).
 
 X = 1
-yes</pre>
-<p>
-the two corresponding events will be:
-</p>
-<pre>(before, foo, bar(X), user)
-(after, foo, bar(1), user)</pre>
-<p>
-Note that the second event is only generated if the message succeeds. If the message as a goal have multiple solutions, then one <code>after</code> event will be generated for each solution.
-</p>
-<p>
-Events are automatically generated by the message sending mechanisms for each public message sent using the <a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a> operator.
-</p>
+yes
+</pre></div>
+</div>
+<p>the two corresponding events will be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>(before, foo, bar(<span class="nv">X</span>), user)
+(after, foo, bar(<span class="m">1</span>), user)
+</pre></div>
+</div>
+<p>Note that the second event is only generated if the message succeeds. If
+the message as a goal have multiple solutions, then one <code class="docutils literal notranslate"><span class="pre">after</span></code> event
+will be generated for each solution.</p>
+<p>Events are automatically generated by the message sending mechanisms for
+each public message sent using the
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> operator.</p>
+</div>
+<div class="section" id="profilers-as-monitors">
+<span id="monitors"></span><h2>Profilers as monitors<a class="headerlink" href="#profilers-as-monitors" title="Permalink to this headline">¶</a></h2>
+<p>A monitor is an object that reacts whenever a spied event occurs. The
+monitor actions are defined by two event handlers:
+<a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> for <code class="docutils literal notranslate"><span class="pre">before</span></code> events
+and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a> for <code class="docutils literal notranslate"><span class="pre">after</span></code>
+events. These predicates are automatically called by the message sending
+mechanisms when an event registered for the monitor occurs. These event
+handlers are declared as public predicates in the <code class="docutils literal notranslate"><span class="pre">monitoring</span></code>
+built-in protocol.</p>
+<p>In our example, we need a way to get the current time before and after
+we process a message. We will assume that we have a <code class="docutils literal notranslate"><span class="pre">time</span></code> object
+implementing a <code class="docutils literal notranslate"><span class="pre">cpu_time/1</span></code> predicate that returns the current CPU
+time for the Prolog session:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(time).
 
-<h2 id="monitors">Profilers as monitors</h2>
-
-<p>
-A monitor is an object that reacts whenever a spied event occurs. The monitor actions are defined by two event handlers: <a title="Consult reference manual" href="../refman/methods/before_3.html"><code>before/3</code></a> for <code>before</code> events and <a title="Consult reference manual" href="../refman/methods/after_3.html"><code>after/3</code></a> for <code>after</code> events. These predicates are automatically called by the message sending mechanisms when an event registered for the monitor occurs. These event handlers are declared as public predicates in the <code>monitoring</code> built-in protocol.
-</p>
-<p>
-In our example, we need a way to get the current time before and after we process a message. We will assume that we have a <code>time</code> object implementing a <code>cpu_time/1</code> predicate that returns the current CPU time for the Prolog session:
-</p>
-<pre>:- object(time).
-
-    :- public(cpu_time/1).
-    :- mode(cpu_time(-number), one).
+<span class="p">    :- </span><span class="k">public</span>(cpu_time<span class="o">/</span><span class="m">1</span>).
+<span class="p">    :- </span><span class="k">mode</span>(cpu_time(<span class="o">-</span>number), one).
 
     ...
 
-:- end_object.</pre>
-<p>
-Our profiler will be named <code>stop_watch</code>. It must define event handlers for the <code>before</code> and <code>after</code> events that will print the event description (object, message, and sender) and the current time:
-</p>
-<pre>:- object(stop_watch,
-    implements(monitoring)).    % event handler predicate declarations
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>Our profiler will be named <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code>. It must define event handlers
+for the <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> events that will print the event
+description (object, message, and sender) and the current time:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(stop_watch,
+    <span class="k">implements</span>(monitoring)).    <span class="c">% event handler predicate declarations</span>
 
-    :- uses(time).
+<span class="p">    :- </span><span class="k">uses</span>(time).
 
-    before(Object, Message, Sender) :-
-        write(Object), write(' &lt;-- '), writeq(Message),
-        write(' from '), write(Sender), nl, write('STARTING at '),
-        time::cpu_time(Seconds), write(Seconds), write(' seconds'), nl.
+    <span class="k">before</span>(<span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Sender</span>) <span class="o">:-</span>
+        <span class="k">write</span>(<span class="nv">Object</span>), <span class="k">write</span>(<span class="s">&#39; &lt;-- &#39;</span>), <span class="k">writeq</span>(<span class="nv">Message</span>),
+        <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">write</span>(<span class="nv">Sender</span>), <span class="k">nl</span>, <span class="k">write</span>(<span class="s">&#39;STARTING at &#39;</span>),
+        time<span class="o">::</span>cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
 
-    after(Object, Message, Sender) :-
-        write(Object), write(' &lt;-- '), writeq(Message),
-        write(' from '), write(Sender), nl, write('ENDING at '),
-        time::cpu_time(Seconds), write(Seconds), write(' seconds'), nl.
+    <span class="k">after</span>(<span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Sender</span>) <span class="o">:-</span>
+        <span class="k">write</span>(<span class="nv">Object</span>), <span class="k">write</span>(<span class="s">&#39; &lt;-- &#39;</span>), <span class="k">writeq</span>(<span class="nv">Message</span>),
+        <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">write</span>(<span class="nv">Sender</span>), <span class="k">nl</span>, <span class="k">write</span>(<span class="s">&#39;ENDING at &#39;</span>),
+        time<span class="o">::</span>cpu_time(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="nv">Seconds</span>), <span class="k">write</span>(<span class="s">&#39; seconds&#39;</span>), <span class="k">nl</span>.
 
-:- end_object.</pre>
-<p>
-After compiling and loading the <code>stop_watch</code> object (and the objects that we want to profile), we can use the <a title="Consult reference manual" href="../refman/predicates/define_events_5.html"><code>define_events/5</code></a> built-in predicate to set up our profiler. For example, to profile all messages that are sent to the object <code>foo</code>, we need to call the goal:
-</p>
-<pre>| ?- define_events(_, foo, _, _, stop_watch).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>After compiling and loading the <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code> object (and the objects
+that we want to profile), we can use the <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a>
+built-in predicate to set up our profiler. For example, to profile all
+messages that are sent to the object <code class="docutils literal notranslate"><span class="pre">foo</span></code>, we need to call the goal:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- define_events(_, foo, _, _, stop_watch).
 
-yes</pre>
-<p>
-This call will register <code>stop_watch</code> as a monitor to all messages sent to object <code>foo</code>, for both <code>before</code> and <code>after</code> events. Note that we say &quot;as a monitor&quot;, not &quot;the monitor&quot;: we can have any number of monitors over the same events.
-</p>
-<p>
-From now on, every time we sent a message to <code>foo</code>, the <code>stop_watch</code> monitor will print the starting and ending times for the message execution. For instance:
-</p>
-<pre>| ?- foo::bar(X).
+yes
+</pre></div>
+</div>
+<p>This call will register <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code> as a monitor to all messages sent
+to object <code class="docutils literal notranslate"><span class="pre">foo</span></code>, for both <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> events. Note that
+we say “as a monitor”, not “the monitor”: we can have any number of
+monitors over the same events.</p>
+<p>From now on, every time we sent a message to <code class="docutils literal notranslate"><span class="pre">foo</span></code>, the <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code>
+monitor will print the starting and ending times for the message
+execution. For instance:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- foo::bar(X).
 
 foo &lt;-- bar(X) from user
 STARTING at 12.87415 seconds
@@ -129,47 +277,104 @@ foo &lt;-- bar(1) from user
 ENDING at 12.87419 seconds
 
 X = 1
-yes</pre>
-<p>
-To stop profiling the messages sent to <code>foo</code> we use the <a title="Consult reference manual" href="../refman/predicates/abolish_events_5.html"><code>abolish_events/5</code></a>
-built-in predicate:
-</p>
-<pre>| ?- abolish_events(_, foo, _, _, stop_watch).
+yes
+</pre></div>
+</div>
+<p>To stop profiling the messages sent to <code class="docutils literal notranslate"><span class="pre">foo</span></code> we use the
+<a class="reference internal" href="../refman/predicates/abolish_events_5.html#predicates-abolish-events-5"><span class="std std-ref">abolish_events/5</span></a> built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- abolish_events(_, foo, _, _, stop_watch).
 
-yes</pre>
-<p>
-This call will abolish all events defined over the object <code>foo</code> assigned to the <code>stop_watch</code> monitor.
-</p>
-
-<h2 id="summary">Summary</h2>
-
-<ul>
-    <li>An event is defined as the sending of a (public) message to an object.</li>
+yes
+</pre></div>
+</div>
+<p>This call will abolish all events defined over the object <code class="docutils literal notranslate"><span class="pre">foo</span></code>
+assigned to the <code class="docutils literal notranslate"><span class="pre">stop_watch</span></code> monitor.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>An event is defined as the sending of a (public) message to an
+object.</li>
+<li>There are two kinds of events: <code class="docutils literal notranslate"><span class="pre">before</span></code> events, generated before a
+message is processed, and <code class="docutils literal notranslate"><span class="pre">after</span></code> events, generated after the
+message processing completed successfully.</li>
+<li>Any object can be declared as a monitor to any event. A monitor shall
+reference the <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> built-in protocol in the object opening
+directive.</li>
+<li>A monitor defines event handlers, the predicates
+<a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, that are
+automatically called by the runtime engine when a spied event occurs.</li>
+<li>Three built-in predicates, <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a>,
+<a class="reference internal" href="../refman/predicates/current_event_5.html#predicates-current-event-5"><span class="std std-ref">current_event/5</span></a>, and
+<a class="reference internal" href="../refman/predicates/abolish_events_5.html#predicates-abolish-events-5"><span class="std std-ref">abolish_events/5</span></a>,
+enables us define, query, and abolish both events and monitors.</li>
 </ul>
-<ul>
-    <li>There are two kinds of events: <code>before</code> events, generated before a message is processed, and <code>after</code> events, generated after the message processing completed successfully.</li>
-</ul>
-<ul>
-    <li>Any object can be declared as a monitor to any event. A monitor shall reference the <code>monitoring</code> built-in protocol in the object opening directive.</li>
-</ul>
-<ul>
-    <li>A monitor defines event handlers, the predicates <a title="Consult reference manual" href="../refman/methods/before_3.html"><code>before/3</code></a> and <a title="Consult reference manual" href="../refman/methods/after_3.html"><code>after/3</code></a>, that are automatically called by the runtime engine when a spied event occurs.</li>
-</ul>
-<ul>
-    <li>Three built-in predicates, <a title="Consult reference manual" href="../refman/predicates/define_events_5.html"><code>define_events/5</code></a>, <a title="Consult reference manual" href="../refman/predicates/current_event_5.html"><code>current_event/5</code></a>, and <a title="Consult reference manual" href="../refman/predicates/abolish_events_5.html"><code>abolish_events/5</code></a>, enables us define, query, and abolish both events and monitors.</li>
-</ul>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: December 11, 2006</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="reflection.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+</div>
 </div>
 
-</body>
 
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../faq/index.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reflection.html" class="btn btn-neutral" title="A reflective class-based system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

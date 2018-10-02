@@ -1,107 +1,315 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk control construct: &lt;&lt;/2</title>
-	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;&lt;/2 &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tutorial" href="../../tutorial/index.html" />
+    <link rel="prev" title="Context switching calls" href="context_switching_calls.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Control construct: &lt;&lt;/2</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#constructs">Control Constructs</a> &gt; &lt;&lt;/2</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h2 id="control_context_switch_2" class="codenp">&lt;&lt;/2</h2>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<h4>Description</h4>
+          
+            <a href="../../index.html" class="icon icon-home"> Logtalk
+          
 
-<pre>Object&lt;&lt;Goal
-{Proxy}&lt;&lt;Goal</pre>
-<p>
-Debugging control construct. Calls a goal within the context of the specified object. The goal is called with the execution context (<a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender"><em>sender</em></a>, <a class="glossary" title="Go to glossary definition" href="../../glossary.html#this"><em>this</em></a>, and <a class="glossary" title="Go to glossary definition" href="../../glossary.html#self"><em>self</em></a>) set to the object. The goal may need to be written between parenthesis to avoid parsing errors due to operator conflicts. This control construct should only be used for debugging or for writing unit tests. This control construct can only be used for objects compiled with the compiler flag <code>context_switching_calls</code> set to <code>allow</code>. Set this compiler flag to <code>deny</code> to disable this control construct and thus preventing using it to break encapsulation.
-</p>
-<p>
-The <code>{Proxy}&lt;&lt;Goal</code> syntax allows simplified access to parametric object <em>proxies</em>. Its operational semantics is equivalent to the goal conjunction <code>(call(Proxy), Proxy&lt;&lt;Goal)</code>. I.e. <code>Proxy</code> is proved within the context of the pseudo-object <code>user</code> and, if successful, the goal term is used as a parametric object identifier. Exceptions thrown when proving <code>Proxy</code> are handled by the <code>&lt;&lt;/2</code> control construct. This syntax construct supports backtracking over the <code>{Proxy}</code> goal.
-</p>
-<p>
-Caveat: although the goal argument is fully compiled before calling, some of the necessary information for the second compiler pass may not be available at runtime.
-</p>
+          
+          </a>
 
-<h4>Template and modes</h4>
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
 
-<pre>+object_identifier&lt;&lt;+callable
-{+object_identifier}&lt;&lt;+callable</pre>
-
-<h4>Errors</h4>
-
-<dl>
-	<dt>Either Object or Goal is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>Object is neither a variable nor a valid object identifier:</dt>
-		<dd><code>type_error(object_identifier, Object)</code></dd>
-	<dt>Goal is neither a variable nor a callable term:</dt>
-		<dd><code>type_error(callable, Goal)</code></dd>
-	<dt>Object does not contain a local definition for the Goal predicate:</dt>
-		<dd><code>existence_error(procedure, Goal)</code></dd>
-	<dt>Object does not exist:</dt>
-		<dd><code>existence_error(object, Object)</code></dd>
-	<dt>Object was created/compiled with support for context switching calls turned off:</dt>
-		<dd><code>permission_error(access, database, Goal)</code></dd>
-</dl>
-<dl>
-	<dt>Proxy is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>Proxy is neither a variable nor an object identifier:</dt>
-		<dd><code>type_error(object_identifier, Proxy)</code></dd>
-	<dt>The predicate Proxy does not exist in the <em>user</em> pseudo-object:</dt>
-		<dd><code>existence_error(procedure, ProxyFunctor/ProxyArity)</code></dd>
-</dl>
-
-<h4>Examples</h4>
-
-<pre>test(member) :-
-    list &lt;&lt; member(1, [1]).</pre>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 18, 2018</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
 
-</body>
+          
+        </div>
 
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Control constructs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="message_sending.html">Message sending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message_delegation.html">Message delegation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="super_calls.html">Calling imported and inherited predicate definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="external_calls.html">Calling external predicate definitions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="context_switching_calls.html">Context switching calls</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">&lt;&lt;/2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+        
+          <li><a href="index.html">Control constructs</a> &raquo;</li>
+        
+          <li><a href="context_switching_calls.html">Context switching calls</a> &raquo;</li>
+        
+      <li>&lt;&lt;/2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/refman/control/context_switch_2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="control-context-switch-2">
+<span id="index-0"></span><span id="id1"></span><h1>&lt;&lt;/2<a class="headerlink" href="#control-context-switch-2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Object</span><span class="o">&lt;&lt;</span><span class="nv">Goal</span>
+<span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">&lt;&lt;</span><span class="nv">Goal</span>
+</pre></div>
+</div>
+<p>Debugging control construct. Calls a goal within the context of the
+specified object. The goal is called with the execution context
+(<a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a>, <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>, and <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>) set to the object. The goal may
+need to be written between parenthesis to avoid parsing errors due to
+operator conflicts. This control construct should only be used for
+debugging or for writing unit tests. This control construct can only be
+used for objects compiled with the compiler flag
+<code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Set this compiler flag to
+<code class="docutils literal notranslate"><span class="pre">deny</span></code> to disable this control construct and thus preventing using it
+to break encapsulation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}&lt;&lt;Goal</span></code> syntax allows simplified access to parametric
+object <em>proxies</em>. Its operational semantics is equivalent to the goal
+conjunction <code class="docutils literal notranslate"><span class="pre">(call(Proxy),</span> <span class="pre">Proxy&lt;&lt;Goal)</span></code>. I.e. <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is proved
+within the context of the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code> and, if successful, the
+goal term is used as a parametric object identifier. Exceptions thrown
+when proving <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> are handled by the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct.
+This syntax construct supports backtracking over the <code class="docutils literal notranslate"><span class="pre">{Proxy}</span></code> goal.</p>
+<p>Caveat: although the goal argument is fully compiled before calling,
+some of the necessary information for the second compiler pass may not
+be available at runtime.</p>
+</div>
+<div class="section" id="template-and-modes">
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>object_identifier<span class="o">&lt;&lt;+</span>callable
+<span class="k">{</span><span class="o">+</span>object_identifier<span class="k">}</span><span class="o">&lt;&lt;+</span>callable
+</pre></div>
+</div>
+</div>
+<div class="section" id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Either Object or Goal is a variable:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
+<dt>Object is neither a variable nor a valid object identifier:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Object)</span></code></dd>
+<dt>Goal is neither a variable nor a callable term:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></dd>
+<dt>Object does not contain a local definition for the Goal predicate:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">Goal)</span></code></dd>
+<dt>Object does not exist:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">existence_error(object,</span> <span class="pre">Object)</span></code></dd>
+<dt>Object was created/compiled with support for context switching calls turned off:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">database,</span> <span class="pre">Goal)</span></code></dd>
+<dt>Proxy is a variable:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
+<dt>Proxy is neither a variable nor an object identifier:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Proxy)</span></code></dd>
+<dt>The predicate Proxy does not exist in the <em>user</em> pseudo-object:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">ProxyFunctor/ProxyArity)</span></code></dd>
+</dl>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(member) <span class="o">:-</span>
+    list <span class="o">&lt;&lt;</span> member(<span class="m">1</span>, [<span class="m">1</span>]).
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../tutorial/index.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="context_switching_calls.html" class="btn btn-neutral" title="Context switching calls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

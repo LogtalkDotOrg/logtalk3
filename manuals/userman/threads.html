@@ -1,127 +1,318 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk user manual: multi-threading programming</title>
-	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multi-threading programming &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Error handling" href="errors.html" />
+    <link rel="prev" title="Event-driven programming" href="events.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk user manual</div>
-<div class="top-right">Multi-threading programming</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Threads</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h1 id="threads_threads">Multi-threading programming</h1>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<p>
-Logtalk provides <strong>experimental</strong> support for multi-threading programming on selected Prolog compilers. Logtalk makes use of the low-level Prolog built-in predicates that implement message queues and interface with POSIX threads and mutexes (or a suitable emulation), providing a small set of high-level predicates and directives that allows programmers to easily take advantage of modern multi-processor and multi-core computers without worrying about the details of creating, synchronizing, or communicating with threads. Logtalk multi-threading programming integrates with object-oriented programming providing a threaded engines API, enabling objects and categories to prove goals concurrently, and supporting synchronous and asynchronous messages.
-</p>
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
 
-<h2 id="threads_enabling">Enabling multi-threading support</h2>
+          
+          </a>
 
-<p>
-Multi-threading support may be disabled by default. It can be enabled on the Prolog adapter files of supported compilers by setting the read-only compiler flag <code>threads</code> to <code>supported</code>.
-</p>
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
 
-<h2 id="threads_directive">Enabling objects to make multi-threading calls</h2>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
-<p>
-The <a title="Consult reference manual" href="../refman/directives/threaded_0.html"><code>threaded/0</code></a> object directive is used to enable an object to make multi-threading calls:
-</p>
-<pre>:- threaded.</pre>
-<p>
-This directive results in the automatic creation and set up of an object message queue when the object is loaded or created at runtime. Object message queues are used for exchanging thread notifications and for storing concurrent goal solutions and replies to the <em>multi-threading calls</em> made within the object. The message queue for the pseudo-object <code>user</code> is automatically created at Logtalk startup (provided that multi-threading programming is supported and enabled for the chosen Prolog compiler).
-</p>
+          
+        </div>
 
-<h2 id="threads_predicates">Multi-threading built-in predicates</h2>
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Multi-threading programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-multi-threading-support">Enabling multi-threading support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-objects-to-make-multi-threading-calls">Enabling objects to make multi-threading calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-threading-built-in-predicates">Multi-threading built-in predicates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#proving-goals-concurrently-using-threads">Proving goals concurrently using threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proving-goals-asynchronously-using-threads">Proving goals asynchronously using threads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#one-way-asynchronous-calls">One-way asynchronous calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-calls-and-synchronized-predicates">Asynchronous calls and synchronized predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronizing-threads-through-notifications">Synchronizing threads through notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#engines">Engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-threading-performance">Multi-threading performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing, running, and debugging applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog Integration and Migration Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
 
-<p>
-Logtalk provides a small set of built-in predicates for multi-threading programming. For simple tasks where you simply want to prove a set of goals, each one in its own thread, Logtalk provides a <a title="Consult reference manual" href="../refman/predicates/threaded_1.html"><code>threaded/1</code></a> built-in predicate. The remaining predicates allow for fine-grained control, including postponing retrieving of thread goal results at a later time, supporting non-deterministic thread goals, and making <em>one-way</em> asynchronous calls. Together, these predicates provide high-level support for multi-threading programming, covering most common use cases.
-</p>
+            
+          
+        </div>
+      </div>
+    </nav>
 
-<h3 id="threads_threaded">Proving goals concurrently using threads</h3>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-<p>
-A set of goals may be proved concurrently by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_1.html"><code>threaded/1</code></a>. Each goal in the set runs in its own thread. 
-</p>
-<p>
-When the <code>threaded/1</code> predicate argument is a <em>conjunction</em> of goals, the predicate call is akin to <em>and-parallelism</em>. For example, assume that we want to find all the prime numbers in a given interval, <code>[N, M]</code>. We can split the interval in two parts and then span two threads to compute the primes numbers in each sub-interval:
-</p>
-<pre>prime_numbers(N, M, Primes) :-
-    M &gt; N,
-    N1 is N + (M - N) // 2,
-    N2 is N1 + 1,
-    threaded((
-        prime_numbers(N2, M, [], Acc),
-        prime_numbers(N, N1, Acc, Primes)
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Multi-threading programming</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/userman/threads.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multi-threading-programming">
+<span id="threads-threads"></span><h1>Multi-threading programming<a class="headerlink" href="#multi-threading-programming" title="Permalink to this headline">¶</a></h1>
+<p>Logtalk provides <strong>experimental</strong> support for multi-threading
+programming on selected Prolog compilers. Logtalk makes use of the
+low-level Prolog built-in predicates that implement message queues and
+interface with POSIX threads and mutexes (or a suitable emulation),
+providing a small set of high-level predicates and directives that
+allows programmers to easily take advantage of modern multi-processor
+and multi-core computers without worrying about the details of creating,
+synchronizing, or communicating with threads. Logtalk multi-threading
+programming integrates with object-oriented programming providing a
+threaded engines API, enabling objects and categories to prove goals
+concurrently, and supporting synchronous and asynchronous messages.</p>
+<div class="section" id="enabling-multi-threading-support">
+<span id="threads-enabling"></span><h2>Enabling multi-threading support<a class="headerlink" href="#enabling-multi-threading-support" title="Permalink to this headline">¶</a></h2>
+<p>Multi-threading support may be disabled by default. It can be enabled on
+the Prolog adapter files of supported compilers by setting the read-only
+compiler flag <code class="docutils literal notranslate"><span class="pre">threads</span></code> to <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</p>
+</div>
+<div class="section" id="enabling-objects-to-make-multi-threading-calls">
+<span id="threads-directive"></span><h2>Enabling objects to make multi-threading calls<a class="headerlink" href="#enabling-objects-to-make-multi-threading-calls" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../refman/directives/threaded_0.html#directives-threaded-0"><span class="std std-ref">threaded/0</span></a> object
+directive is used to enable an object to make multi-threading calls:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">threaded.</span>
+</pre></div>
+</div>
+<p>This directive results in the automatic creation and set up of an object
+message queue when the object is loaded or created at runtime. Object
+message queues are used for exchanging thread notifications and for
+storing concurrent goal solutions and replies to the <em>multi-threading
+calls</em> made within the object. The message queue for the pseudo-object
+<code class="docutils literal notranslate"><span class="pre">user</span></code> is automatically created at Logtalk startup (provided that
+multi-threading programming is supported and enabled for the chosen
+Prolog compiler).</p>
+</div>
+<div class="section" id="multi-threading-built-in-predicates">
+<span id="threads-predicates"></span><h2>Multi-threading built-in predicates<a class="headerlink" href="#multi-threading-built-in-predicates" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk provides a small set of built-in predicates for multi-threading
+programming. For simple tasks where you simply want to prove a set of
+goals, each one in its own thread, Logtalk provides a
+<a class="reference internal" href="../refman/predicates/threaded_1.html#predicates-threaded-1"><span class="std std-ref">threaded/1</span></a> built-in
+predicate. The remaining predicates allow for fine-grained control,
+including postponing retrieving of thread goal results at a later time,
+supporting non-deterministic thread goals, and making <em>one-way</em>
+asynchronous calls. Together, these predicates provide high-level
+support for multi-threading programming, covering most common use cases.</p>
+<div class="section" id="proving-goals-concurrently-using-threads">
+<span id="threads-threaded"></span><h3>Proving goals concurrently using threads<a class="headerlink" href="#proving-goals-concurrently-using-threads" title="Permalink to this headline">¶</a></h3>
+<p>A set of goals may be proved concurrently by calling the Logtalk
+built-in predicate <a class="reference internal" href="../refman/predicates/threaded_1.html#predicates-threaded-1"><span class="std std-ref">threaded/1</span></a>. Each goal in
+the set runs in its own thread.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> predicate argument is a <em>conjunction</em> of goals,
+the predicate call is akin to <em>and-parallelism</em>. For example, assume
+that we want to find all the prime numbers in a given interval,
+<code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">M]</span></code>. We can split the interval in two parts and then span two
+threads to compute the primes numbers in each sub-interval:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class="nv">Primes</span>) <span class="o">:-</span>
+    <span class="nv">M</span> <span class="o">&gt;</span> <span class="nv">N</span>,
+    <span class="nv">N1</span> <span class="k">is</span> <span class="nv">N</span> <span class="o">+</span> (<span class="nv">M</span> <span class="o">-</span> <span class="nv">N</span>) <span class="o">//</span> <span class="m">2</span>,
+    <span class="nv">N2</span> <span class="k">is</span> <span class="nv">N1</span> <span class="o">+</span> <span class="m">1</span>,
+    <span class="k">threaded</span>((
+        prime_numbers(<span class="nv">N2</span>, <span class="nv">M</span>, [], <span class="nv">Acc</span>),
+        prime_numbers(<span class="nv">N</span>, <span class="nv">N1</span>, <span class="nv">Acc</span>, <span class="nv">Primes</span>)
     )).
 
-prime_numbers(N, M, Acc, Primes) :-
+prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class="nv">Acc</span>, <span class="nv">Primes</span>) <span class="o">:-</span>
     ...
-</pre>
-<p>
-The <code>threaded/1</code> call terminates when the two implicit threads terminate. In a computer with two or more processors (or with a processor with two or more cores) the code above can be expected to provide better computation times when compared with single-threaded code for sufficiently large intervals.
-</p>
-<p>
-When the <code>threaded/1</code> predicate argument is a <em>disjunction</em> of goals, the predicate call is akin to <em>or-parallelism</em>, here reinterpreted as a set of goals <em>competing</em> to find a solution. For example, consider the different methods that we can use to find the roots of real functions. Depending on the function, some methods will faster than others. Some methods will converge into the solution while others may diverge and never find it. We can try all the methods simultaneously by writing:
-</p>
-<pre>find_root(Function, A, B, Error, Zero, Algorithm) :-
-    threaded((
-            (bisection::find_root(Function, A, B, Error, Zero), Algorithm = bisection)
-        ;   (newton::find_root(Function, A, B, Error, Zero), Algorithm = newton)
-        ;   (muller::find_root(Function, A, B, Error, Zero), Algorithm = muller)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> call terminates when the two implicit threads
+terminate. In a computer with two or more processors (or with a
+processor with two or more cores) the code above can be expected to
+provide better computation times when compared with single-threaded code
+for sufficiently large intervals.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> predicate argument is a <em>disjunction</em> of goals,
+the predicate call is akin to <em>or-parallelism</em>, here reinterpreted as a
+set of goals <em>competing</em> to find a solution. For example, consider the
+different methods that we can use to find the roots of real functions.
+Depending on the function, some methods will faster than others. Some
+methods will converge into the solution while others may diverge and
+never find it. We can try all the methods simultaneously by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>, <span class="nv">Algorithm</span>) <span class="o">:-</span>
+    <span class="k">threaded</span>((
+        (bisection<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>), <span class="nv">Algorithm</span> <span class="o">=</span> bisection)
+    <span class="o">;</span>   (newton<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>), <span class="nv">Algorithm</span> <span class="o">=</span> newton)
+    <span class="o">;</span>   (muller<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>), <span class="nv">Algorithm</span> <span class="o">=</span> muller)
     )).
-</pre>
-<p>
-The above <code>threaded/1</code> goal succeeds when one of the implicit threads succeeds in finding the function root, leading to the termination of all the remaining competing threads.
-</p>
-<p>
-The <code>threaded/1</code> built-in predicate is most useful for lengthy, independent deterministic computations where the computational costs of each goal outweigh the overhead of the implicit thread creation and management.
-</p>
+</pre></div>
+</div>
+<p>The above <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> goal succeeds when one of the implicit threads
+succeeds in finding the function root, leading to the termination of all
+the remaining competing threads.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> built-in predicate is most useful for lengthy,
+independent deterministic computations where the computational costs of
+each goal outweigh the overhead of the implicit thread creation and
+management.</p>
+</div>
+<div class="section" id="proving-goals-asynchronously-using-threads">
+<span id="threads-call"></span><h3>Proving goals asynchronously using threads<a class="headerlink" href="#proving-goals-asynchronously-using-threads" title="Permalink to this headline">¶</a></h3>
+<p>A goal may be proved asynchronously using a new thread by calling the
+Logtalk built-in predicate <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/1-2</span></a>.
+Calls to this predicate are always true and return immediately (assuming
+a callable argument). The term representing the goal is copied, not
+shared with the thread. The thread computes the first solution to the
+goal, posts it to the message queue of the object from where the
+<code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> predicate was called, and suspends waiting for
+either a request for an alternative solution or for the program to
+commit to the current solution.</p>
+<p>The results of proving a goal asynchronously in a new thread may be
+later retrieved by calling the Logtalk built-in predicate
+<a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/1-2</span></a>
+within the same object where the call to the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code>
+predicate was made. The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> calls suspend execution
+until the results of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> calls are sent back to the
+object message queue.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate allow us to retrieve alternative
+solutions through backtracking (if you want to commit to the first
+solution, you may use the <a class="reference internal" href="../refman/predicates/threaded_once_1_2.html#predicates-threaded-once-1-2"><span class="std std-ref">threaded_once/1-2</span></a>
+predicate instead of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> predicate). For example,
+assuming a <code class="docutils literal notranslate"><span class="pre">lists</span></code> object implementing the usual <code class="docutils literal notranslate"><span class="pre">member/2</span></code>
+predicate, we could write:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_call(lists::member(X, [1,2,3])).
 
-<h3 id="threads_call">Proving goals asynchronously using threads</h3>
-
-<p>
-A goal may be proved asynchronously using a new thread by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/1</code></a>. Calls to this predicate are always true and return immediately (assuming a callable argument). The term representing the goal is copied, not shared with the thread. The thread computes the first solution to the goal, posts it to the message queue of the object from where the <code>threaded_call/1</code> predicate was called, and suspends waiting for either a request for an alternative solution or for the program to commit to the current solution.
-</p>
-<p>
-The results of proving a goal asynchronously in a new thread may be later retrieved by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/1</code></a> within the same object where the call to the <code>threaded_call/1</code> predicate was made. The <code>threaded_exit/1</code> calls suspend execution until the results of the <code>threaded_call/1</code> calls are sent back to the object message queue.
-</p>
-<p>
-The <code>threaded_exit/1</code> predicate allow us to retrieve alternative solutions through backtracking (if you want to commit to the first solution, you may use the <a title="Consult reference manual" href="../refman/predicates/threaded_once_1_2.html"><code>threaded_once/1</code></a> predicate instead of the <code>threaded_call/1</code> predicate). For example, assuming a <code>lists</code> object implementing the usual <code>member/2</code> predicate, we could write:
-</p>
-<pre>| ?- threaded_call(lists::member(X, [1,2,3])).
-
-X = _G189 
+X = _G189
 yes
 
 | ?- threaded_exit(lists::member(X, [1,2,3])).
@@ -130,210 +321,344 @@ X = 1 ;
 X = 2 ;
 X = 3 ;
 no
-</pre>
-<p>
-In this case, the <code>threaded_call/1</code> and the <code>threaded_exit/1</code> calls are made within the pseudo-object <em>user</em>. The implicit thread running the <code>lists::member/2</code> goal suspends itself after providing a solution, waiting for a request to an alternative solution; the thread is automatically terminated when the runtime engine detects that backtracking to the <code>threaded_exit/1</code> call is no longer possible.
-</p>
-<p>
-Calls to the <code>threaded_exit/1</code> predicate block the caller until the object message queue receives the reply to the asynchronous call. The predicate <a title="Consult reference manual" href="../refman/predicates/threaded_peek_1_2.html"><code>threaded_peek/1</code></a> may be used to check if a reply is already available without removing it from the thread queue. The <code>threaded_peek/1</code> predicate call succeeds or fails immediately without blocking the caller. However, keep in mind that repeated use of this predicate is equivalent to polling a message queue, which may severely hurt performance.
-</p>
-<p>
-Be careful when using the <code>threaded_exit/1</code> predicate inside failure-driven loops. When all the solutions have been found (and the thread generating them is therefore terminated), re-calling the predicate will generate an exception. Note that failing instead of throwing an exception is not an acceptable solution as it could be misinterpreted as a failure of the <code>threaded_exit/1</code> argument.
-</p>
-<p>
-The example on the previous section with prime numbers could be rewritten using the <code>threaded_call/1</code> and <code>threaded_exit/1</code> predicates:
-</p>
-<pre>prime_numbers(N, M, Primes) :-
-    M &gt; N,
-    N1 is N + (M - N) // 2,
-    N2 is N1 + 1,
-    threaded_call(prime_numbers(N2, M, [], Acc)),
-    threaded_call(prime_numbers(N, N1, Acc, Primes)),
-    threaded_exit(prime_numbers(N2, M, [], Acc)),
-    threaded_exit(prime_numbers(N, N1, Acc, Primes)).
+</pre></div>
+</div>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> calls
+are made within the pseudo-object <em>user</em>. The implicit thread running
+the <code class="docutils literal notranslate"><span class="pre">lists::member/2</span></code> goal suspends itself after providing a solution,
+waiting for a request to an alternative solution; the thread is
+automatically terminated when the runtime engine detects that
+backtracking to the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> call is no longer possible.</p>
+<p>Calls to the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate block the caller until the
+object message queue receives the reply to the asynchronous call. The
+predicate <a class="reference internal" href="../refman/predicates/threaded_peek_1_2.html#predicates-threaded-peek-1-2"><span class="std std-ref">threaded_peek/1-2</span></a>
+may be used to check if a reply is already available without removing it
+from the thread queue. The <code class="docutils literal notranslate"><span class="pre">threaded_peek/1</span></code> predicate call succeeds
+or fails immediately without blocking the caller. However, keep in mind
+that repeated use of this predicate is equivalent to polling a message
+queue, which may severely hurt performance.</p>
+<p>Be careful when using the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate inside
+failure-driven loops. When all the solutions have been found (and the
+thread generating them is therefore terminated), re-calling the
+predicate will generate an exception. Note that failing instead of
+throwing an exception is not an acceptable solution as it could be
+misinterpreted as a failure of the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> argument.</p>
+<p>The example on the previous section with prime numbers could be
+rewritten using the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
+predicates:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class="nv">Primes</span>) <span class="o">:-</span>
+    <span class="nv">M</span> <span class="o">&gt;</span> <span class="nv">N</span>,
+    <span class="nv">N1</span> <span class="k">is</span> <span class="nv">N</span> <span class="o">+</span> (<span class="nv">M</span> <span class="o">-</span> <span class="nv">N</span>) <span class="o">//</span> <span class="m">2</span>,
+    <span class="nv">N2</span> <span class="k">is</span> <span class="nv">N1</span> <span class="o">+</span> <span class="m">1</span>,
+    <span class="k">threaded_call</span>(prime_numbers(<span class="nv">N2</span>, <span class="nv">M</span>, [], <span class="nv">Acc</span>)),
+    <span class="k">threaded_call</span>(prime_numbers(<span class="nv">N</span>, <span class="nv">N1</span>, <span class="nv">Acc</span>, <span class="nv">Primes</span>)),
+    <span class="k">threaded_exit</span>(prime_numbers(<span class="nv">N2</span>, <span class="nv">M</span>, [], <span class="nv">Acc</span>)),
+    <span class="k">threaded_exit</span>(prime_numbers(<span class="nv">N</span>, <span class="nv">N1</span>, <span class="nv">Acc</span>, <span class="nv">Primes</span>)).
 
-prime_numbers(N, M, Acc, Primes) :-
+prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class="nv">Acc</span>, <span class="nv">Primes</span>) <span class="o">:-</span>
     ...
-</pre>
-<p>
-When using asynchronous calls, the link between a <code>threaded_exit/1</code> call and the corresponding <code>threaded_call/1</code> call is established using unification. If there are multiple <code>threaded_call/1</code> calls for a matching <code>threaded_exit/1</code> call, the connection can potentially be established with any of them. Nevertheless, you can easily use a tag the calls by using the extended <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/2</code></a> built-in predicates. For example:
-</p>
-<pre>?- threaded_call(member(X, [1,2,3]), Tag).
+</pre></div>
+</div>
+<p>When using asynchronous calls, the link between a <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
+call and the corresponding <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> call is established using
+unification. If there are multiple <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> calls for a
+matching <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> call, the connection can potentially be
+established with any of them. Nevertheless, you can easily use a tag the
+calls by using the extended <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/1-2</span></a>
+and <a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/1-2</span></a> built-in predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">threaded_call</span>(member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), <span class="nv">Tag</span>).
 
-Tag = 1
+<span class="nv">Tag</span> <span class="o">=</span> <span class="m">1</span>
 yes
 
-?- threaded_call(member(X, [1,2,3]), Tag).
+<span class="o">?-</span> <span class="k">threaded_call</span>(member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), <span class="nv">Tag</span>).
 
-Tag = 2
+<span class="nv">Tag</span> <span class="o">=</span> <span class="m">2</span>
 yes
 
-?- threaded_exit(member(X, [1,2,3]), 2).
+<span class="o">?-</span> <span class="k">threaded_exit</span>(member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), <span class="m">2</span>).
 
-X = 1 ;
-X = 2 ;
-X = 3
+<span class="nv">X</span> <span class="o">=</span> <span class="m">1</span> <span class="o">;</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">2</span> <span class="o">;</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">3</span>
 yes
-</pre>
-<p>
-When using these predicates, the tags shall be considered as an opaque term; users shall not rely on its type.
-</p>
+</pre></div>
+</div>
+<p>When using these predicates, the tags shall be considered as an opaque
+term; users shall not rely on its type.</p>
+</div>
+</div>
+<div class="section" id="one-way-asynchronous-calls">
+<span id="threads-ignore"></span><h2>One-way asynchronous calls<a class="headerlink" href="#one-way-asynchronous-calls" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes we want to prove a goal in a new thread without caring about
+the results. This may be accomplished by using the built-in predicate
+<a class="reference internal" href="../refman/predicates/threaded_ignore_1.html#predicates-threaded-ignore-1"><span class="std std-ref">threaded_ignore/1</span></a>.
+For example, assume that we are developing a multi-agent application
+where an agent may send an “happy birthday” message to another agent. We
+could write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="k">threaded_ignore</span>(agent<span class="o">::</span>happy_birthday), ...
+</pre></div>
+</div>
+<p>The call succeeds with no reply of the goal success, failure, or even
+exception ever being sent back to the object making the call. Note that
+this predicate implicitly performs a deterministic call of its argument.</p>
+</div>
+<div class="section" id="asynchronous-calls-and-synchronized-predicates">
+<span id="threads-synchronized-predicates"></span><h2>Asynchronous calls and synchronized predicates<a class="headerlink" href="#asynchronous-calls-and-synchronized-predicates" title="Permalink to this headline">¶</a></h2>
+<p>Proving a goal asynchronously using a new thread may lead to problems
+when the goal results in side-effects such as input/output operations or
+modifications to an object database. For example, if a new thread is
+started with the same goal before the first one finished its job, we may
+end up with mixed output, a corrupted database, or unexpected goal
+failures. In order to solve this problem, predicates (and grammar rule
+non-terminals) with side-effects can be declared as <em>synchronized</em> by
+using the <a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a>
+predicate directive. Proving a query to a synchronized predicate (or
+synchronized non-terminal) is internally protected by a mutex, thus
+allowing for easy thread synchronization. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(db_update<span class="o">/</span><span class="m">1</span>).   <span class="c">% ensure thread synchronization</span>
 
-<h2 id="threads_ignore">One-way asynchronous calls</h2>
-
-<p>
-Sometimes we want to prove a goal in a new thread without caring about the results. This may be accomplished by using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_ignore_1.html"><code>threaded_ignore/1</code></a>. For example, assume that we are developing a multi-agent application where an agent may send an "happy birthday" message to another agent. We could write:
-</p>
-<pre>..., threaded_ignore(agent::happy_birthday), ...
-</pre>
-<p>
-The call succeeds with no reply of the goal success, failure, or even exception ever being sent back to the object making the call. Note that this predicate implicitly performs a deterministic call of its argument.
-</p>
-
-<h2 id="threads_synchronized_predicates">Asynchronous calls and synchronized predicates</h2>
-
-<p>
-Proving a goal asynchronously using a new thread may lead to problems when the goal results in side-effects such as input/output operations or modifications to an object database. For example, if a new thread is started with the same goal before the first one finished its job, we may end up with mixed output, a corrupted database, or unexpected goal failures. In order to solve this problem, predicates (and grammar rule non-terminals) with side-effects can be declared as <em>synchronized</em> by using the <a title="Consult reference manual" href="../refman/directives/synchronized_1.html"><code>synchronized/1</code></a> predicate directive. Proving a query to a synchronized predicate (or synchronized non-terminal) is internally protected by a mutex, thus allowing for easy thread synchronization. For example:
-</p>
-<pre>:- synchronized(db_update/1).   % ensure thread synchronization
-
-db_update(Update) :-
-    % predicate with side-effects
+db_update(<span class="nv">Update</span>) <span class="o">:-</span>
+    <span class="c">% predicate with side-effects</span>
     ...
-</pre>
-<p>
-A second example: assume an object defining two predicates for writing, respectively, even and odd numbers in a given interval to the standard output. Given a large interval, a goal such as:
-</p>
-<pre>| ?- threaded_call(obj::odd_numbers(1,100)), threaded_call(obj::even_numbers(1,100)).
+</pre></div>
+</div>
+<p>A second example: assume an object defining two predicates for writing,
+respectively, even and odd numbers in a given interval to the standard
+output. Given a large interval, a goal such as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_call(obj::odd_numbers(1,100)),
+     threaded_call(obj::even_numbers(1,100)).
 
 1 3 2 4 6 8 5 7 10 ...
 ...
-</pre>
-<p>
-will most likely result in a mixed up output. By declaring the <code>odd_numbers/2</code> and <code>even_numbers/2</code> predicates synchronized:
-</p>
-<pre>:- synchronized([
-    odd_numbers/2,
-    even_numbers/2]).
-</pre>
-<p>
-one goal will only start after the other one finished:
-</p>
-<pre>| ?- threaded_ignore(obj::odd_numbers(1,99)), threaded_ignore(obj::even_numbers(1,99)).
+</pre></div>
+</div>
+<p>will most likely result in a mixed up output. By declaring the
+<code class="docutils literal notranslate"><span class="pre">odd_numbers/2</span></code> and <code class="docutils literal notranslate"><span class="pre">even_numbers/2</span></code> predicates synchronized:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>([
+    odd_numbers<span class="o">/</span><span class="m">2</span>,
+    even_numbers<span class="o">/</span><span class="m">2</span>]).
+</pre></div>
+</div>
+<p>one goal will only start after the other one finished:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_ignore(obj::odd_numbers(1,99)),
+     threaded_ignore(obj::even_numbers(1,99)).
 
 1 3 5 7 9 11 ...
 ...
 2 4 6 8 10 12 ...
 ...
-</pre>
-<p>
-Note that, in a more realistic scenario, the two <code>threaded_ignore/1</code> calls would be made concurrently from different objects. Using the same synchronized directive for a set of predicates imply that they all use the same mutex, as required for this example.
-</p>
+</pre></div>
+</div>
+<p>Note that, in a more realistic scenario, the two <code class="docutils literal notranslate"><span class="pre">threaded_ignore/1</span></code>
+calls would be made concurrently from different objects. Using the same
+synchronized directive for a set of predicates imply that they all use
+the same mutex, as required for this example.</p>
+<p>As each Logtalk entity is independently compiled, this directive must be
+included in every object or category that contains a definition for the
+described predicate, even if the predicate declaration is inherited from
+another entity, in order to ensure proper compilation. Note that a
+synchronized predicate cannot be declared dynamic. To ensure atomic
+updates of a dynamic predicate, declare as synchronized the predicate
+performing the update.</p>
+<p>Synchronized predicates may be used as wrappers to messages sent to
+objects that are not multi-threading aware. For example, assume a
+<code class="docutils literal notranslate"><span class="pre">random</span></code> object defining a <code class="docutils literal notranslate"><span class="pre">random/1</span></code> predicate that generates
+random numbers, using side-effects on its implementation (e.g. for
+storing the generator seed). We can specify and define e.g. a
+<code class="docutils literal notranslate"><span class="pre">sync_random/1</span></code> predicate as follows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(sync_random<span class="o">/</span><span class="m">1</span>).
 
-<p>
-As each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, in order to ensure proper compilation. Note that a synchronized predicate cannot be declared dynamic. To ensure atomic updates of a dynamic predicate, declare as synchronized the predicate performing the update.
-</p>
-<p>
-Synchronized predicates may be used as wrappers to messages sent to objects that are not multi-threading aware. For example, assume a <code>random</code> object defining a <code>random/1</code> predicate that generates random numbers, using side-effects on its implementation (e.g. for storing the generator seed). We can specify and define e.g. a <code>sync_random/1</code> predicate as follows:
-</p>
-<pre>:- synchronized(sync_random/1).
-
-sync_random(Random) :-
-    random::random(Random).
-</pre>
-<p>
-and then always use the <code>sync_random/1</code> predicate instead of the predicate <code>random/1</code> from multi-threaded code.
-</p>
-<p>
-The synchronization entity and predicate directives may be used when defining objects that may be reused in both single-threaded and multi-threaded Logtalk applications. The directives are simply ignored (i.e. the synchronized predicates are interpreted as normal predicates) when the objects are used in a single-threaded application.
-</p>
-
-<h2 id="threads_notifications">Synchronizing threads through notifications</h2>
-
-<p>
-Declaring a set of predicates as synchronized can only ensure that they are not executed at the same time by different threads. Sometimes we need to suspend a thread not on a synchronization lock but on some condition that must hold true for a thread goal to proceed. I.e. we want a thread goal to be suspended until a condition becomes true instead of simply failing. The built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_wait_1.html"><code>threaded_wait/1</code></a> allows us to suspend a predicate execution (running in its own thread) until a notification is received. Notifications are posted using the built-in predicate
- <a title="Consult reference manual" href="../refman/predicates/threaded_notify_1.html"><code>threaded_notify/1</code></a>. A notification is a Prolog term that a programmer chooses to represent some condition becoming true. Any Prolog term can be used as a notification argument for these predicates. Related calls to the <code>threaded_wait/1</code> and <code>threaded_notify/1</code> must be made within the same object, <em>this</em>, as the object message queue is used internally for posting and retrieving notifications.
-</p>
-<p>
-Each notification posted by a call to the <code>threaded_notify/1</code> predicate is consumed by a single <code>threaded_wait/1</code> predicate call (i.e. these predicates implement a peer-to-peer mechanism). Care should be taken to avoid deadlocks when two (or more) threads both wait and post notifications to each other.
-</p>
-
-<h2 id="threads_engines">Engines</h2>
-
-<p>
-Threaded <em>engines</em> provide an alternative to the multi-threading predicates described in the previous sections. An engine is a computing thread whose solutions can be lazily computed and retrieved. In addition, an engine also supports a term queue that allows passing arbitrary terms to the engine.
-</p>
-<p>
-An engine is created by calling the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_create_3.html"><code>threaded_engine_create/3</code></a> built-in predicates. For example:
-</p>
-<pre>
-| ?- threaded_engine_create(X, member(X, [1,2,3]), worker).
+sync_random(<span class="nv">Random</span>) <span class="o">:-</span>
+    random<span class="o">::</span>random(<span class="nv">Random</span>).
+</pre></div>
+</div>
+<p>and then always use the <code class="docutils literal notranslate"><span class="pre">sync_random/1</span></code> predicate instead of the
+predicate <code class="docutils literal notranslate"><span class="pre">random/1</span></code> from multi-threaded code.</p>
+<p>The synchronization entity and predicate directives may be used when
+defining objects that may be reused in both single-threaded and
+multi-threaded Logtalk applications. The directives are simply ignored
+(i.e. the synchronized predicates are interpreted as normal predicates)
+when the objects are used in a single-threaded application.</p>
+</div>
+<div class="section" id="synchronizing-threads-through-notifications">
+<span id="threads-notifications"></span><h2>Synchronizing threads through notifications<a class="headerlink" href="#synchronizing-threads-through-notifications" title="Permalink to this headline">¶</a></h2>
+<p>Declaring a set of predicates as synchronized can only ensure that they
+are not executed at the same time by different threads. Sometimes we
+need to suspend a thread not on a synchronization lock but on some
+condition that must hold true for a thread goal to proceed. I.e. we want
+a thread goal to be suspended until a condition becomes true instead of
+simply failing. The built-in predicate <a class="reference internal" href="../refman/predicates/threaded_wait_1.html#predicates-threaded-wait-1"><span class="std std-ref">threaded_wait/1</span></a>
+allows us to suspend a predicate execution (running in its own thread)
+until a notification is received. Notifications are posted using the
+built-in predicate <a class="reference internal" href="../refman/predicates/threaded_notify_1.html#predicates-threaded-notify-1"><span class="std std-ref">threaded_notify/1</span></a>.
+A notification is a Prolog term that a programmer chooses to represent
+some condition becoming true. Any Prolog term can be used as a
+notification argument for these predicates. Related calls to the
+<code class="docutils literal notranslate"><span class="pre">threaded_wait/1</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_notify/1</span></code> must be made within the
+same object, <em>this</em>, as the object message queue is used internally for
+posting and retrieving notifications.</p>
+<p>Each notification posted by a call to the <code class="docutils literal notranslate"><span class="pre">threaded_notify/1</span></code>
+predicate is consumed by a single <code class="docutils literal notranslate"><span class="pre">threaded_wait/1</span></code> predicate call
+(i.e. these predicates implement a peer-to-peer mechanism). Care should
+be taken to avoid deadlocks when two (or more) threads both wait and
+post notifications to each other.</p>
+</div>
+<div class="section" id="engines">
+<span id="threads-engines"></span><h2>Engines<a class="headerlink" href="#engines" title="Permalink to this headline">¶</a></h2>
+<p>Threaded <em>engines</em> provide an alternative to the multi-threading
+predicates described in the previous sections. An engine is a computing
+thread whose solutions can be lazily computed and retrieved. In
+addition, an engine also supports a term queue that allows passing
+arbitrary terms to the engine.</p>
+<p>An engine is created by calling the <a class="reference internal" href="../refman/predicates/threaded_engine_create_3.html#predicates-threaded-engine-create-3"><span class="std std-ref">threaded_engine_create/3</span></a>
+built-in predicates. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_engine_create(X, member(X, [1,2,3]), worker).
 yes
-</pre>
-<p>
-The first argument is an <em>answer template</em> to be used for retrieving solution bindings. The user can name the engine, as in this example where the atom <code>worker</code> is used, or have the runtime generate a name, which should be treated as an opaque term.
-</p>
-<p>
-Engines are scoped by the object within which the <code>threaded_engine_create/3</code> call takes place. Thus, different objects can create engines with the same names with no conflicts. Morevover, engines share the visible predicates of the object creating them.
-</p>
-<p>
-The engine computes the first solution of its goal argument and suspends waiting for it to be retrieved. Solutions can be retrieved one at a time using the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_next_2.html"><code>threaded_engine_next/2</code></a> built-in predicate:
-</p>
-<pre>
-| ?- threaded_engine_next(worker, X).
+</pre></div>
+</div>
+<p>The first argument is an <em>answer template</em> to be used for retrieving
+solution bindings. The user can name the engine, as in this example
+where the atom <code class="docutils literal notranslate"><span class="pre">worker</span></code> is used, or have the runtime generate a name,
+which should be treated as an opaque term.</p>
+<p>Engines are scoped by the object within which the
+<code class="docutils literal notranslate"><span class="pre">threaded_engine_create/3</span></code> call takes place. Thus, different objects
+can create engines with the same names with no conflicts. Morevover,
+engines share the visible predicates of the object creating them.</p>
+<p>The engine computes the first solution of its goal argument and suspends
+waiting for it to be retrieved. Solutions can be retrieved one at a time
+using the <a class="reference internal" href="../refman/predicates/threaded_engine_next_2.html#predicates-threaded-engine-next-2"><span class="std std-ref">threaded_engine_next/2</span></a> built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_engine_next(worker, X).
 X = 1
 yes
-</pre>
-<p>
-The call blocks until a solution is available and fails if there are no solutions left. After returning a solution, this predicate signals the engine to start computing the next one. Note that this predicate is deterministic. In constrast with the <code>threaded_exit/1-2</code> built-in predicates, retrieving the next solution requires calling the predicate again instead of by backtracking into its call.
-</p>
-<p>
-There is also an alternative reified version of the predicate, <a title="Consult reference manual" href="../refman/predicates/threaded_engine_next_reified_2.html"><code>threaded_engine_next_reified/2</code></a>, which returns <code>the(Answer)</code>, <code>no</code>, and <code>exception(Error)</code> terms as answers.
-</p>
-<p>
-Engines must be explicitly terminated using the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_destroy_1.html"><code>threaded_engine_destroy/1</code></a> built-in predicate:
-</p>
-<pre>
-| ?- threaded_engine_destroy(worker).
+</pre></div>
+</div>
+<p>The call blocks until a solution is available and fails if there are no
+solutions left. After returning a solution, this predicate signals the
+engine to start computing the next one. Note that this predicate is
+deterministic. In constrast with the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1-2</span></code> built-in
+predicates, retrieving the next solution requires calling the predicate
+again instead of by backtracking into its call.</p>
+<p>There is also an alternative reified version of the predicate,
+<a class="reference internal" href="../refman/predicates/threaded_engine_next_reified_2.html#predicates-threaded-engine-next-reified-2"><span class="std std-ref">threaded_engine_next_reified/2</span></a>,
+which returns <code class="docutils literal notranslate"><span class="pre">the(Answer)</span></code>, <code class="docutils literal notranslate"><span class="pre">no</span></code>, and <code class="docutils literal notranslate"><span class="pre">exception(Error)</span></code> terms as
+answers.</p>
+<p>Engines must be explicitly terminated using the
+<a class="reference internal" href="../refman/predicates/threaded_engine_destroy_1.html#predicates-threaded-engine-destroy-1"><span class="std std-ref">threaded_engine_destroy/1</span></a> built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_engine_destroy(worker).
 yes
-</pre>
-<p>
-A common usage pattern for engines is to define a recursive predicate that uses the engine term queue to retrieve a task to be performed. For example, assume we define the following predicate:
-</p>
-<pre>
-loop :-
-	threaded_engine_fetch(Task),
-	handle(Task),
-	loop.
-</pre>
-<p>
-The <a title="Consult reference manual" href="../refman/predicates/threaded_engine_fetch_1.html"><code>threaded_engine_fetch/1</code></a> built-in predicate fetches a task for the engine term queue. The engine clients would use the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_post_2.html"><code>threaded_engine_post/2</code></a> built-in predicate to post tasks into the engine term queue. The engine would be created using the call:
-</p>
-<pre>
-| ?- threaded_engine_create(none, loop, worker).
+</pre></div>
+</div>
+<p>A common usage pattern for engines is to define a recursive predicate
+that uses the engine term queue to retrieve a task to be performed. For
+example, assume we define the following predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>loop <span class="o">:-</span>
+    threaded_engine_fetch(<span class="nv">Task</span>),
+    handle(<span class="nv">Task</span>),
+    loop.
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../refman/predicates/threaded_engine_fetch_1.html#predicates-threaded-engine-fetch-1"><span class="std std-ref">threaded_engine_fetch/1</span></a>
+built-in predicate fetches a task for the engine term queue. The engine
+clients would use the <a class="reference internal" href="../refman/predicates/threaded_engine_post_2.html#predicates-threaded-engine-post-2"><span class="std std-ref">threaded_engine_post/2</span></a>
+built-in predicate to post tasks into the engine term queue. The engine
+would be created using the call:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- threaded_engine_create(none, loop, worker).
+
 yes
-</pre>
-<p>
-The <code>handle/1</code> predicate, after performing a task, can use the <a title="Consult reference manual" href="../refman/predicates/threaded_engine_yield_1.html"><code>threaded_engine_yield/1</code></a> built-in predicate to make the task results available for consumption using the <code>threaded_engine_next/2</code> built-in predicate. Blocking semantics are used by these two predicates: the <code>threaded_engine_yield/1</code> predicate blocks until the returned solution is consumed while the <code>threaded_engine_next/2</code> predicate blocks until a solution becomes available.
-</p>
-
-<h2 id="threads_performance">Multi-threading performance</h2>
-
-<p>
-The performance of multi-threading applications is highly dependent on the back-end Prolog compiler, on the operating-system, and on the use of dynamic binding and dynamic predicates. All compatible back-end Prolog compilers that support multi-threading features make use of POSIX threads or <em>pthreads</em>. The performance of the underlying pthreads implementation can exhibit significant differences between operating systems. An important point is synchronized access to dynamic predicates. As different threads may try to simultaneously access and update dynamic predicates, these operations must be protected by a lock, usually implemented using a mutex. Poor mutex lock operating-system performance, combined with a large number of collisions by several threads trying to acquire the same lock, often result in severe performance penalties. Thus, whenever possible, avoid using dynamic predicates and dynamic binding.
-</p>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 28, 2016</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="events.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="errors.html">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">handle/1</span></code> predicate, after performing a task, can use the
+<a class="reference internal" href="../refman/predicates/threaded_engine_yield_1.html#predicates-threaded-engine-yield-1"><span class="std std-ref">threaded_engine_yield/1</span></a>
+built-in predicate to make the task results available for consumption
+using the <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code> built-in predicate. Blocking
+semantics are used by these two predicates: the
+<code class="docutils literal notranslate"><span class="pre">threaded_engine_yield/1</span></code> predicate blocks until the returned solution
+is consumed while the <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code> predicate blocks until
+a solution becomes available.</p>
+</div>
+<div class="section" id="multi-threading-performance">
+<span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Permalink to this headline">¶</a></h2>
+<p>The performance of multi-threading applications is highly dependent on
+the back-end Prolog compiler, on the operating-system, and on the use of
+dynamic binding and dynamic predicates. All compatible back-end Prolog
+compilers that support multi-threading features make use of POSIX
+threads or <em>pthreads</em>. The performance of the underlying pthreads
+implementation can exhibit significant differences between operating
+systems. An important point is synchronized access to dynamic
+predicates. As different threads may try to simultaneously access and
+update dynamic predicates, these operations must be protected by a lock,
+usually implemented using a mutex. Poor mutex lock operating-system
+performance, combined with a large number of collisions by several
+threads trying to acquire the same lock, often result in severe
+performance penalties. Thus, whenever possible, avoid using dynamic
+predicates and dynamic binding.</p>
+</div>
 </div>
 
-</body>
 
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="errors.html" class="btn btn-neutral float-right" title="Error handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="events.html" class="btn btn-neutral" title="Event-driven programming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

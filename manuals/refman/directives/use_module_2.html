@@ -1,113 +1,343 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk entity directive: use_module/2</title>
-	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>use_module/2 &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Built-in predicates" href="../predicates/index.html" />
+    <link rel="prev" title="uses/2" href="uses_2.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Entity directive: use_module/2</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#directives">Directives</a> &gt; use_module/2</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h2 id="directives_use_module_2" class="codenp">use_module/2</h2>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<h4>Description</h4>
+          
+            <a href="../../index.html" class="icon icon-home"> Logtalk
+          
 
-<pre>use_module(Module, Predicates)
-use_module(Module, PredicatesAndAliases)
+          
+          </a>
 
-use_module(Module, NonTerminals)
-use_module(Module, NonTerminalsAndAliases)
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
 
-use_module(Module, Operators)</pre>
-<p>
-This directive declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates (or non-terminals) are to be interpreted as calls to explicitly-qualified module predicates (or non-terminals). Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Module:</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
-</p>
-<p>
-This directive is also used when compiling calls to the database and reflection built-in methods by examining these methods predicate arguments.
-</p>
-<p>
-It is possible to specify a predicate alias using the notation <code>Name/Arity as Alias/Arity</code> or, in alternative, the notation <code>Name/Arity:Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
-</p>
-<p>
-Note that this directive differs from the directive with the same name found on some Prolog implementations by requiring the first argument to be a module name (an atom) instead of a file specification. In Logtalk, there's no mixing between <em>loading</em> a resource and (declaring the) <em>using</em> (of) a resource. As a consequence, this directive doesn't automatically load the module. Loading the module file is dependent of the used backend Prolog compiler and must be done separately (usually, using a source file <code>use_module/1</code> or <code>use_module/2</code> directive in the entity file or in the application loader file). Also note that the name of the module may differ from the name of the module file.
-</p>
-<p>
-The modules should be loaded prior to the compilation of entities that call the module predicates. This is required in general to allow the compiler to check if the called module predicate is a meta-predicate and retrieve its meta-predicate template to ensure proper call compilation.
-</p>
-
-<h4>Template and modes</h4>
-
-<pre>use_module(+module_identifier, +predicate_indicator_list)
-use_module(+module_identifier, +predicate_indicator_alias_list)
-
-use_module(+module_identifier, +non_terminal_indicator_list)
-use_module(+module_identifier, +non_terminal_indicator_alias_list)
-
-use_module(+module_identifier, +operator_list)</pre>
-
-<h4>Examples</h4>
-
-<pre>:- use_module(lists, [append/3, member/2]).
-:- use_module(store, [data/2]).
-:- use_module(user,  [foo/1 as bar/1]).
-
-foo :-
-    ...,
-    findall(X, member(X, L), A),    % same as findall(X, lists:member(X, L), A)
-    append(A, B, C),                % same as lists:append(A, B, C)
-    assertz(data(X, C)),            % same as assertz(store:data(X, C))
-    retractall(bar(_)),             % same as retractall(user:foo(_))
-    ...</pre>
-
-<h4>See also</h4>
-
-<p>
-<code><a href="uses_2.html">uses/2</a></code>
-</p>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 29, 2018</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="../index.html#directives">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
 
-</body>
+          
+        </div>
 
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Directives</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="source_file_directives.html">Source file directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conditional_compilation_directives.html">Conditional compilation directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entity_directives.html">Entity directives</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="predicate_directives.html">Predicate directives</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alias_2.html">alias/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coinductive_1.html">coinductive/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="discontiguous_1.html">discontiguous/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dynamic_1.html">dynamic/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info_2.html">info/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta_predicate_1.html">meta_predicate/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta_non_terminal_1.html">meta_non_terminal/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode_2.html">mode/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multifile_1.html">multifile/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="op_3.html">op/3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="private_1.html">private/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="protected_1.html">protected/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="public_1.html">public/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="synchronized_1.html">synchronized/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uses_2.html">uses/2</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">use_module/2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+        
+          <li><a href="index.html">Directives</a> &raquo;</li>
+        
+          <li><a href="predicate_directives.html">Predicate directives</a> &raquo;</li>
+        
+      <li>use_module/2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/refman/directives/use_module_2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-module-2">
+<span id="directives-use-module-2"></span><span id="index-0"></span><h1>use_module/2<a class="headerlink" href="#use-module-2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>use_module(<span class="nv">Module</span>, <span class="nv">Predicates</span>)
+use_module(<span class="nv">Module</span>, <span class="nv">PredicatesAndAliases</span>)
+
+use_module(<span class="nv">Module</span>, <span class="nv">NonTerminals</span>)
+use_module(<span class="nv">Module</span>, <span class="nv">NonTerminalsAndAliases</span>)
+
+use_module(<span class="nv">Module</span>, <span class="nv">Operators</span>)
+</pre></div>
+</div>
+<p>This directive declares that all calls (made from predicates defined in
+the category or object containing the directive) to the specified
+predicates (or non-terminals) are to be interpreted as calls to
+explicitly-qualified module predicates (or non-terminals). Thus, this
+directive may be used to simplify writing of predicate definitions by
+allowing the programmer to omit the <code class="docutils literal notranslate"><span class="pre">Module:</span></code> prefix when using the
+predicates listed in the directive (as long as the predicate calls do
+not occur as arguments for non-standard Prolog meta-predicates not
+declared on the adapter files). It is also possible to include operator
+declarations, <code class="docutils literal notranslate"><span class="pre">op(Precedence,</span> <span class="pre">Associativity,</span> <span class="pre">Operator)</span></code>, in the second
+argument.</p>
+<p>This directive is also used when compiling calls to the database and
+reflection built-in methods by examining these methods predicate
+arguments.</p>
+<p>It is possible to specify a predicate alias using the notation
+<code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the notation
+<code class="docutils literal notranslate"><span class="pre">Name/Arity:Alias/Arity</span></code>. Aliases may be used either for avoiding
+conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or for giving more meaningful names considering
+the using context of the predicates.</p>
+<p>Note that this directive differs from the directive with the same name
+found on some Prolog implementations by requiring the first argument to
+be a module name (an atom) instead of a file specification. In Logtalk,
+there’s no mixing between <em>loading</em> a resource and (declaring the)
+<em>using</em> (of) a resource. As a consequence, this directive doesn’t
+automatically load the module. Loading the module file is dependent of
+the used backend Prolog compiler and must be done separately (usually,
+using a source file <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directive in
+the entity file or in the application loader file). Also note that the
+name of the module may differ from the name of the module file.</p>
+<p>The modules should be loaded prior to the compilation of entities that
+call the module predicates. This is required in general to allow the
+compiler to check if the called module predicate is a meta-predicate and
+retrieve its meta-predicate template to ensure proper call compilation.</p>
+</div>
+<div class="section" id="template-and-modes">
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>predicate_indicator_list)
+use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>predicate_indicator_alias_list)
+
+use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>non_terminal_indicator_list)
+use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>non_terminal_indicator_alias_list)
+
+use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>operator_list)
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(lists, [append<span class="o">/</span><span class="m">3</span>, member<span class="o">/</span><span class="m">2</span>]).
+<span class="p">:- </span><span class="k">use_module</span>(store, [data<span class="o">/</span><span class="m">2</span>]).
+<span class="p">:- </span><span class="k">use_module</span>(user,  [foo<span class="o">/</span><span class="m">1</span> <span class="o">as</span> bar<span class="o">/</span><span class="m">1</span>]).
+
+foo <span class="o">:-</span>
+    ...,
+    <span class="k">findall</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, <span class="nv">L</span>), <span class="nv">A</span>),    <span class="c">% same as findall(X, lists:member(X, L), A)</span>
+    append(<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">C</span>),                <span class="c">% same as lists:append(A, B, C)</span>
+    <span class="k">assertz</span>(data(<span class="nv">X</span>, <span class="nv">C</span>)),            <span class="c">% same as assertz(store:data(X, C))</span>
+    <span class="k">retractall</span>(bar(<span class="nv">_</span>)),             <span class="c">% same as retractall(user:foo(_))</span>
+    ...
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../predicates/index.html" class="btn btn-neutral float-right" title="Built-in predicates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="uses_2.html" class="btn btn-neutral" title="uses/2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

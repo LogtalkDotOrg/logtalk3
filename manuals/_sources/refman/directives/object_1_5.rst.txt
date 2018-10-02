@@ -1,0 +1,247 @@
+
+.. index:: object/1-5
+.. _directives_object_1_5:
+
+object/1-5
+==========
+
+Description
+-----------
+
+*Stand-alone objects (prototypes)*
+
+::
+
+   object(Object)
+
+   object(Object,
+       implements(Protocols))
+
+   object(Object,
+       imports(Categories))
+
+   object(Object,
+       implements(Protocols),
+       imports(Categories))
+
+*Prototype extensions*
+
+::
+
+   object(Object,
+       extends(Objects))
+
+   object(Object,
+       implements(Protocols),
+       extends(Objects))
+
+   object(Object,
+       imports(Categories),
+       extends(Objects))
+
+   object(Object,
+       implements(Protocols),
+       imports(Categories),
+       extends(Objects))
+
+*Class instances*
+
+::
+
+   object(Object,
+       instantiates(Classes))
+
+   object(Object,
+       implements(Protocols),
+       instantiates(Classes))
+
+   object(Object,
+       imports(Categories),
+       instantiates(Classes))
+
+   object(Object,
+       implements(Protocols),
+       imports(Categories),
+       instantiates(Classes))
+
+*Classes*
+
+::
+
+   object(Object,
+       specializes(Classes))
+
+   object(Object,
+       implements(Protocols),
+       specializes(Classes))
+
+   object(Object,
+       imports(Categories),
+       specializes(Classes))
+
+   object(Object,
+       implements(Protocols),
+       imports(Categories),
+       specializes(Classes))
+
+*Classes with metaclasses*
+
+::
+
+   object(Object,
+       instantiates(Classes),
+       specializes(Classes))
+
+   object(Object,
+       implements(Protocols),
+       instantiates(Classes),
+       specializes(Classes))
+
+   object(Object,
+       imports(Categories),
+       instantiates(Classes),
+       specializes(Classes))
+
+   object(Object,
+       implements(Protocols),
+       imports(Categories),
+       instantiates(Classes),
+       specializes(Classes))
+
+Starting object directive.
+
+Template and modes
+------------------
+
+*Stand-alone objects (prototypes)*
+
+::
+
+   object(+object_identifier)
+
+   object(+object_identifier,
+       implements(+implemented_protocols))
+
+   object(+object_identifier,
+       imports(+imported_categories))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       imports(+imported_categories))
+
+*Prototype extensions*
+
+::
+
+   object(+object_identifier,
+       extends(+extended_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       extends(+extended_objects))
+
+   object(+object_identifier,
+       imports(+imported_categories),
+       extends(+extended_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       imports(+imported_categories),
+       extends(+extended_objects))
+
+*Class instances*
+
+::
+
+   object(+object_identifier,
+       instantiates(+instantiated_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       instantiates(+instantiated_objects))
+
+   object(+object_identifier,
+       imports(+imported_categories),
+       instantiates(+instantiated_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       imports(+imported_categories),
+       instantiates(+instantiated_objects))
+
+*Classes*
+
+::
+
+   object(+object_identifier,
+       specializes(+specialized_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       specializes(+specialized_objects))
+
+   object(+object_identifier,
+       imports(+imported_categories),
+       specializes(+specialized_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       imports(+imported_categories),
+       specializes(+specialized_objects))
+
+*Class with metaclasses*
+
+::
+
+   object(+object_identifier,
+       instantiates(+instantiated_objects),
+       specializes(+specialized_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       instantiates(+instantiated_objects),
+       specializes(+specialized_objects))
+
+   object(+object_identifier,
+       imports(+imported_categories),
+       instantiates(+instantiated_objects),
+       specializes(+specialized_objects))
+
+   object(+object_identifier,
+       implements(+implemented_protocols),
+       imports(+imported_categories),
+       instantiates(+instantiated_objects),
+       specializes(+specialized_objects))
+
+Examples
+--------
+
+::
+
+   :- object(list).
+
+   :- object(list,
+       implements(listp)).
+
+   :- object(list,
+       extends(compound)).
+
+   :- object(list,
+       implements(listp),
+       extends(compound)).
+
+   :- object(object,
+       imports(initialization),
+       instantiates(class)).
+
+   :- object(abstract_class,
+       instantiates(class),
+       specializes(object)).
+
+   :- object(agent,
+       imports(private::attributes)).
+
+See also
+--------
+
+:ref:`directives_end_object_0`

@@ -1,598 +1,1006 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk user manual: objects</title>
-	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Objects &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Protocols" href="protocols.html" />
+    <link rel="prev" title="Messages" href="messages.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk user manual</div>
-<div class="top-right">Objects</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Objects</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h1 id="objects_objects">Objects</h1>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<p>
-The main goal of Logtalk objects is the encapsulation and reuse of predicates. Instead of a single database containing all your code, Logtalk objects provide separated namespaces or databases allowing the partitioning of code in more manageable parts. Logtalk does not aim to bring some sort of new dynamic state change concept to Logic Programming or Prolog.
-</p>
-<p>
-In Logtalk, the only pre-defined objects are the built-in objects <code>user</code> and <code>logtalk</code>, which are described at the end of this section.
-</p>
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
 
-<h2 id="objects_kind">Objects, prototypes, classes, and instances</h2>
+          
+          </a>
 
-<p>
-There are only three kinds of encapsulation entities in Logtalk: objects, protocols, and categories. Logtalk uses the term <em>object</em> in a broad sense. The terms <em>prototype</em>, <em>parent</em>, <em>class</em>, <em>subclass</em>, <em>superclass</em>, <em>metaclass</em>, and <em>instance</em> always designate an object. Different names are used to emphasize the <em>role</em> played by an object in a particular context. I.e. we use a term other than object when we want to make the relationship with other objects explicit. For example, an object with an <em>instantiation</em> relation with other object plays the role of an <em>instance</em>, while the instantiated object plays the role of a <em>class</em>; an object with a <em>specialization</em> relation with other object plays the role of a <em>subclass</em>, while the specialized object plays the role of a <em>superclass</em>; an object with an <em>extension</em> relation with other object plays the role of a <em>prototype</em>, the same for the extended object. A <em>stand-alone</em> object, i.e. an object with no relations with other objects, is always interpreted as a prototype. In Logtalk, entity relations essentially define <em>patterns</em> of code reuse. An entity is compiled accordingly to the roles it plays.
-</p>
-<p>
-Logtalk allows you to work from standalone objects to any kind of hierarchy, either class-based or prototype-based. You may use single or multiple inheritance, use or forgo metaclasses, implement reflective designs, use parametric objects, and take advantage of protocols and categories (think components).
-</p>
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
 
-<h3 id="objects_prototypes">Prototypes</h3>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
-<p>
-Prototypes are either self-defined objects or objects defined as extensions to other prototypes with whom they share common properties. Prototypes are ideal for representing one-of-a-kind objects. Prototypes usually represent concrete objects in the application domain. When linking prototypes using <em>extension</em> relations, Logtalk uses the term <em>prototype hierarchies</em> although most authors prefer to use the term <em>hierarchy</em> only with class generalization/specialization relations. In the context of logic programming, prototypes are often the ideal replacement for modules.
-</p>
+          
+        </div>
 
-<h3 id="objects_classes">Classes</h3>
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#objects-prototypes-classes-and-instances">Objects, prototypes, classes, and instances</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prototypes">Prototypes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-new-object">Defining a new object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-defined-objects">Finding defined objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-object-in-runtime">Creating a new object in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#abolishing-an-existing-object">Abolishing an existing object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#object-directives">Object directives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object-initialization">Object initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-objects">Dynamic objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#object-documentation">Object documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-files-into-an-object">Loading files into an object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#object-relationships">Object relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#object-properties">Object properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#built-in-objects">Built-in objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-built-in-pseudo-object-user">The built-in pseudo-object <em>user</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-built-in-object-logtalk">The built-in object <em>logtalk</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing, running, and debugging applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog Integration and Migration Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
 
-<p>
-Classes are used to represent abstractions of common properties of sets of objects. Classes provide an ideal structuring solution when you want to express hierarchies of abstractions or work with many similar objects. Classes are used indirectly through <em>instantiation</em>. Contrary to most object-oriented programming languages, instances can be created both dynamically at runtime or defined in a source file like other objects.
-</p>
+            
+          
+        </div>
+      </div>
+    </nav>
 
-<h2 id="objects_defining">Defining a new object</h2>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-<p>
-We can define a new object in the same way we write Prolog code: by using a text editor. Logtalk source files may contain one or more objects, categories, or protocols. If you prefer to define each entity in its own source file, it is recommended that the file be named after the object. By default, all Logtalk source files use the extension <code>.lgt</code> but this is optional and can be set in the adapter files. Intermediate Prolog source files (generated by the Logtalk compiler) have, by default, a <code>_lgt</code> suffix and a <code>.pl</code> extension. Again, this can be set to match the needs of a particular Prolog compiler in the corresponding adapter file. For instance, we may define an object named <code>vehicle</code> and save it in a <code>vehicle.lgt</code> source file which will be compiled to a <code>vehicle_lgt.pl</code> Prolog file (depending on the backend compiler, the names of the intermediate Prolog files may include a directory hash).
-</p>
-<p>
-Object names can be atoms or compound terms (when defining parametric objects, see below). Objects, categories, and protocols share the same name space: we cannot have an object with the same name as a protocol or a category.
-</p>
-<p>
-Object code (directives and predicates) is textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/object_1_5.html"><code>object/1-5</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object_0.html"><code>end_object/0</code></a>. The most simple object will be one that is self-contained, not depending on any other Logtalk entity:
-</p>
-<pre>:- object(Object).
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Objects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/userman/objects.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="objects">
+<span id="objects-objects"></span><h1>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h1>
+<p>The main goal of Logtalk objects is the encapsulation and reuse of
+predicates. Instead of a single database containing all your code,
+Logtalk objects provide separated namespaces or databases allowing the
+partitioning of code in more manageable parts. Logtalk does not aim to
+bring some sort of new dynamic state change concept to Logic Programming
+or Prolog.</p>
+<p>In Logtalk, the only pre-defined objects are the built-in objects
+<code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, which are described at the end of this
+section.</p>
+<div class="section" id="objects-prototypes-classes-and-instances">
+<span id="objects-kind"></span><h2>Objects, prototypes, classes, and instances<a class="headerlink" href="#objects-prototypes-classes-and-instances" title="Permalink to this headline">¶</a></h2>
+<p>There are only three kinds of encapsulation entities in Logtalk:
+objects, protocols, and categories. Logtalk uses the term <em>object</em> in a
+broad sense. The terms <em>prototype</em>, <em>parent</em>, <em>class</em>, <em>subclass</em>,
+<em>superclass</em>, <em>metaclass</em>, and <em>instance</em> always designate an object.
+Different names are used to emphasize the <em>role</em> played by an object in
+a particular context. I.e. we use a term other than object when we want
+to make the relationship with other objects explicit. For example, an
+object with an <em>instantiation</em> relation with other object plays the role
+of an <em>instance</em>, while the instantiated object plays the role of a
+<em>class</em>; an object with a <em>specialization</em> relation with other object
+plays the role of a <em>subclass</em>, while the specialized object plays the
+role of a <em>superclass</em>; an object with an <em>extension</em> relation with
+other object plays the role of a <em>prototype</em>, the same for the extended
+object. A <em>stand-alone</em> object, i.e. an object with no relations with
+other objects, is always interpreted as a prototype. In Logtalk, entity
+relations essentially define <em>patterns</em> of code reuse. An entity is
+compiled accordingly to the roles it plays.</p>
+<p>Logtalk allows you to work from standalone objects to any kind of
+hierarchy, either class-based or prototype-based. You may use single or
+multiple inheritance, use or forgo metaclasses, implement reflective
+designs, use parametric objects, and take advantage of protocols and
+categories (think components).</p>
+<div class="section" id="prototypes">
+<span id="objects-prototypes"></span><h3>Prototypes<a class="headerlink" href="#prototypes" title="Permalink to this headline">¶</a></h3>
+<p>Prototypes are either self-defined objects or objects defined as
+extensions to other prototypes with whom they share common properties.
+Prototypes are ideal for representing one-of-a-kind objects. Prototypes
+usually represent concrete objects in the application domain. When
+linking prototypes using <em>extension</em> relations, Logtalk uses the term
+<em>prototype hierarchies</em> although most authors prefer to use the term
+<em>hierarchy</em> only with class generalization/specialization relations. In
+the context of logic programming, prototypes are often the ideal
+replacement for modules.</p>
+</div>
+<div class="section" id="classes">
+<span id="objects-classes"></span><h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<p>Classes are used to represent abstractions of common properties of sets
+of objects. Classes provide an ideal structuring solution when you want
+to express hierarchies of abstractions or work with many similar
+objects. Classes are used indirectly through <em>instantiation</em>. Contrary
+to most object-oriented programming languages, instances can be created
+both dynamically at runtime or defined in a source file like other
+objects.</p>
+</div>
+</div>
+<div class="section" id="defining-a-new-object">
+<span id="objects-defining"></span><h2>Defining a new object<a class="headerlink" href="#defining-a-new-object" title="Permalink to this headline">¶</a></h2>
+<p>We can define a new object in the same way we write Prolog code: by
+using a text editor. Logtalk source files may contain one or more
+objects, categories, or protocols. If you prefer to define each entity
+in its own source file, it is recommended that the file be named after
+the object. By default, all Logtalk source files use the extension
+<code class="docutils literal notranslate"><span class="pre">.lgt</span></code> but this is optional and can be set in the adapter files.
+Intermediate Prolog source files (generated by the Logtalk compiler)
+have, by default, a <code class="docutils literal notranslate"><span class="pre">_lgt</span></code> suffix and a <code class="docutils literal notranslate"><span class="pre">.pl</span></code> extension. Again, this
+can be set to match the needs of a particular Prolog compiler in the
+corresponding adapter file. For instance, we may define an object named
+<code class="docutils literal notranslate"><span class="pre">vehicle</span></code> and save it in a <code class="docutils literal notranslate"><span class="pre">vehicle.lgt</span></code> source file which will be
+compiled to a <code class="docutils literal notranslate"><span class="pre">vehicle_lgt.pl</span></code> Prolog file (depending on the backend
+compiler, the names of the intermediate Prolog files may include a
+directory hash).</p>
+<p>Object names can be atoms or compound terms (when defining parametric
+objects, see below). Objects, categories, and protocols share the same
+name space: we cannot have an object with the same name as a protocol or
+a category.</p>
+<p>Object code (directives and predicates) is textually encapsulated by
+using two Logtalk directives: <a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a> and
+<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>. The most simple object will be one
+that is self-contained, not depending on any other Logtalk entity:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>).
     ...
-:- end_object.</pre>
-<p>
-If an object implements one or more protocols then the opening directive will be:
-</p>
-<pre>:- object(Object,
-    implements([Protocol1, Protocol2, ...])).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>If an object implements one or more protocols then the opening directive
+will be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
+    <span class="k">implements</span>([<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, ...])).
     ...
-:- end_object.</pre>
-<p>
-An object can import one or more categories:
-</p>
-<pre>:- object(Object,
-    imports([Category1, Category2, ...])).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>An object can import one or more categories:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
+    <span class="k">imports</span>([<span class="nv">Category1</span>, <span class="nv">Category2</span>, ...])).
     ...
-:- end_object.</pre>
-<p>
-If an object both implements protocols and imports categories then we will write:
-</p>
-<pre>:- object(Object,
-    implements([Protocol1, Protocol2, ...]),
-    imports([Category1, Category2, ...])).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>If an object both implements protocols and imports categories then we
+will write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
+    <span class="k">implements</span>([<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, ...]),
+    <span class="k">imports</span>([<span class="nv">Category1</span>, <span class="nv">Category2</span>, ...])).
     ...
-:- end_object.</pre>
-<p>
-In object-oriented programming objects are usually organized in hierarchies that enable interface and code sharing by inheritance. In Logtalk, we can construct prototype-based hierarchies by writing:
-</p>
-<pre>:- object(Prototype,
-    extends(Parent)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>In object-oriented programming objects are usually organized in
+hierarchies that enable interface and code sharing by inheritance. In
+Logtalk, we can construct prototype-based hierarchies by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Prototype</span>,
+    <span class="k">extends</span>(<span class="nv">Parent</span>)).
     ...
-:- end_object.</pre>
-<p>
-We can also have class-based hierarchies by defining instantiation and specialization relations between objects. To define an object as a class instance we will write: 
-</p>
-<pre>:- object(Object,
-    instantiates(Class)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>We can also have class-based hierarchies by defining instantiation and
+specialization relations between objects. To define an object as a class
+instance we will write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
+    <span class="k">instantiates</span>(<span class="nv">Class</span>)).
     ...
-:- end_object.</pre>
-<p>
-A class may specialize another class, its superclass:
-</p>
-<pre>:- object(Class,
-    specializes(Superclass)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>A class may specialize another class, its superclass:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Class</span>,
+    <span class="k">specializes</span>(<span class="nv">Superclass</span>)).
     ...
-:- end_object.</pre>
-<p>
-If we are defining a reflexive system where every class is also an instance, we will probably be using the following pattern:
-</p>
-<pre>:- object(Class,
-    instantiates(Metaclass),
-    specializes(Superclass)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>If we are defining a reflexive system where every class is also an
+instance, we will probably be using the following pattern:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Class</span>,
+    <span class="k">instantiates</span>(<span class="nv">Metaclass</span>),
+    <span class="k">specializes</span>(<span class="nv">Superclass</span>)).
     ...
-:- end_object.</pre>
-<p>
-In short, an object can be a <em>stand-alone</em> object or be part of an object hierarchy. The hierarchy can be prototype-based (defined by extending other objects) or class-based (with instantiation and specialization relations). An object may also implement one or more protocols or import one or more categories.
-</p>
-<p>
-A <em>stand-alone</em> object (i.e. an object with no extension, instantiation, or specialization relations with other objects) is always compiled as a prototype, that is, a self-describing object. If we want to use classes and instances, then we will need to specify at least one instantiation or specialization relation. The best way to do this is to define a set of objects that provide the basis of a reflective system <a href="../bibliography.html#Cointe87">[Cointe 87</a>, <a href="../bibliography.html#Moura94">Moura 94]</a>. For example:
-</p>
-<pre>
-% default root of the inheritance graph
-% predicates common to all objects
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>In short, an object can be a <em>stand-alone</em> object or be part of an
+object hierarchy. The hierarchy can be prototype-based (defined by
+extending other objects) or class-based (with instantiation and
+specialization relations). An object may also implement one or more
+protocols or import one or more categories.</p>
+<p>A <em>stand-alone</em> object (i.e. an object with no extension, instantiation,
+or specialization relations with other objects) is always compiled as a
+prototype, that is, a self-describing object. If we want to use classes
+and instances, then we will need to specify at least one instantiation
+or specialization relation. The best way to do this is to define a set
+of objects that provide the basis of a reflective system <a class="reference internal" href="../bibliography.html#cointe87" id="id1">[Cointe87]</a>,
+<a class="reference internal" href="../bibliography.html#moura94" id="id2">[Moura94]</a>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% default root of the inheritance graph</span>
+<span class="c">% predicates common to all objects</span>
 
-:- object(object,
-    instantiates(class)).
+<span class="p">:- </span><span class="k">object</span>(object,
+    <span class="k">instantiates</span>(class)).
     ...
-:- end_object.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
-% default metaclass for all classes
-% predicates common to all instantiable classes
+<span class="c">% default metaclass for all classes</span>
+<span class="c">% predicates common to all instantiable classes</span>
 
-:- object(class,
-    instantiates(class),
-    specializes(abstract_class)).
+<span class="p">:- </span><span class="k">object</span>(class,
+    <span class="k">instantiates</span>(class),
+    <span class="k">specializes</span>(abstract_class)).
     ...
-:- end_object.
+<span class="p">:- </span><span class="k">end_object.</span>
 
 
-% default metaclass for all abstract classes
-% predicates common to all classes
+<span class="c">% default metaclass for all abstract classes</span>
+<span class="c">% predicates common to all classes</span>
 
-:- object(abstract_class,
-    instantiates(class),
-    specializes(object)).
+<span class="p">:- </span><span class="k">object</span>(abstract_class,
+    <span class="k">instantiates</span>(class),
+    <span class="k">specializes</span>(object)).
     ...
-:- end_object.</pre>
-<p>
-Note that with these instantiation and specialization relations, <code>object</code>, <code>class</code>, and <code>abstract_class</code> are, at the same time, classes and instances of some class. In addition, each object inherits its own predicates and the predicates of the other two objects without any inheritance loop problems.
-</p>
-<p>
-When a full-blown reflective system solution is not needed, the above scheme can be simplified by making an object an instance of itself, i.e. by making a class its own metaclass. For example:
-</p>
-<pre>:- object(class,
-    instantiates(class)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>Note that with these instantiation and specialization relations,
+<code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, and <code class="docutils literal notranslate"><span class="pre">abstract_class</span></code> are, at the same time,
+classes and instances of some class. In addition, each object inherits
+its own predicates and the predicates of the other two objects without
+any inheritance loop problems.</p>
+<p>When a full-blown reflective system solution is not needed, the above
+scheme can be simplified by making an object an instance of itself, i.e.
+by making a class its own metaclass. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(class,
+    <span class="k">instantiates</span>(class)).
     ...
-:- end_object.</pre>
-<p>
-We can use, in the same application, both prototype and class-based hierarchies (and freely exchange messages between all objects). We cannot however mix the two types of hierarchies by, e.g., specializing an object that extends another object in this current Logtalk version.
-</p>
-
-<h2 id="objects_parametric">Parametric objects</h2>
-
-<p>
-Parametric objects have a compound term for name instead of an atom. This compound term usually contains free variables that can be instantiated when sending or as a consequence of sending a message to the object, thus acting as object parameters. The object predicates can then be coded to depend on those parameters, which are logical variables shared by all object predicates. When an object state is set at object creation and never changed, parameters provide a better solution than using the object's database via asserts. Parametric objects can also be used to associate a set of predicates to terms that share a common functor and arity.
-</p>
-<p>
-In order to give access to an object parameter, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method:
-</p>
-<pre>:- object(Functor(Arg1, Arg2, ...)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>We can use, in the same application, both prototype and class-based
+hierarchies (and freely exchange messages between all objects). We
+cannot however mix the two types of hierarchies by, e.g., specializing
+an object that extends another object in this current Logtalk version.</p>
+</div>
+<div class="section" id="parametric-objects">
+<span id="objects-parametric"></span><h2>Parametric objects<a class="headerlink" href="#parametric-objects" title="Permalink to this headline">¶</a></h2>
+<p>Parametric objects have a compound term for name instead of an atom.
+This compound term usually contains free variables that can be
+instantiated when sending or as a consequence of sending a message to
+the object, thus acting as object parameters. The object predicates can
+then be coded to depend on those parameters, which are logical variables
+shared by all object predicates. When an object state is set at object
+creation and never changed, parameters provide a better solution than
+using the object’s database via asserts. Parametric objects can also be
+used to associate a set of predicates to terms that share a common
+functor and arity.</p>
+<p>In order to give access to an object parameter, Logtalk provides a
+<a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> built-in local method:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Functor</span>(<span class="nv">Arg1</span>, <span class="nv">Arg2</span>, ...)).
 
     ...
 
-    Predicate :-
+    <span class="nv">Predicate</span> <span class="o">:-</span>
         ...,
-        parameter(Number, Value),
-        ... .</pre>
-<p>
-An alternative solution is to use the built-in local method <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a>. For example:
-</p>
-<pre>:- object(foo(Arg)).
+        <span class="k">parameter</span>(<span class="nv">Number</span>, <span class="nv">Value</span>),
+        ... .
+</pre></div>
+</div>
+<p>An alternative solution is to use the built-in local method
+<a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">Arg</span>)).
 
     ...
 
-    bar :-
+    bar <span class="o">:-</span>
         ...,
-        this(foo(Arg)),
-        ... .</pre>
-<p>
-Both solutions are equally efficient as calls to the methods <code>this/1</code> and <code>parameter/2</code> are usually compiled inline into a clause head unification. The drawback of this second solution is that we must check all calls of <code>this/1</code> if we change the object name. Note that we can't use these method with the message sending operators (<a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a>, <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a>, or <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a>).
-</p>
-<p>
-A third alternative to access object parameters is to use <a class="glossary" title="Go to glossary definition" href="../glossary.html#parameter_variable"><em>parameter variables</em></a>. Although parameter variables introduce a concept of entity global variables, they allow object parameters to be added, rearranged, or removed without requiring any changes to the clauses that refer to them. Note that using parameter variables doesn't change the fact that entity parameters are logical variables.
-</p>
-<p>
-When storing a parametric object in its own source file, the convention is to name the file after the object, with the object arity appended. For instance, when defining an object named <code>sort(Type)</code>, we may save it in a <code>sort_1.lgt</code> text file. This way it is easy to avoid file name clashes when saving Logtalk entities that have the same functor but different arity.
-</p>
-<p>
-Compound terms with the same functor and with the same number of arguments as a parametric object identifier may act as <em>proxies</em> to a parametric object. Proxies may be stored on the database as Prolog facts and be used to represent different instantiations of a parametric object identifier. Logtalk provides a convenient notation for accessing proxies represented as Prolog facts when sending a message:
-</p>
-<pre>{Proxy}::Message</pre>
-<p>
-In this context, the proxy argument is proved as a plain Prolog goal. If successful, the message is sent to the corresponding parametric object. Typically, the proof allows retrieving of parameter instantiations. This construct can either be used with a proxy argument that is sufficiently instantiated in order to unify with a single Prolog fact or with a proxy argument that unifies with several facts on backtracking.
-</p>
+        <span class="k">this</span>(foo(<span class="nv">Arg</span>)),
+        ... .
+</pre></div>
+</div>
+<p>Both solutions are equally efficient as calls to the methods <code class="docutils literal notranslate"><span class="pre">this/1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> are usually compiled inline into a clause head
+unification. The drawback of this second solution is that we must check
+all calls of <code class="docutils literal notranslate"><span class="pre">this/1</span></code> if we change the object name. Note that we can’t
+use these method with the message sending operators
+(<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>,
+<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, or
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>).</p>
+<p>A third alternative to access object parameters is to use
+<a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>. Although parameter
+variables introduce a concept of entity global variables, they allow
+object parameters to be added, rearranged, or removed without requiring
+any changes to the clauses that refer to them. Note that using parameter
+variables doesn’t change the fact that entity parameters are logical
+variables.</p>
+<p>When storing a parametric object in its own source file, the convention
+is to name the file after the object, with the object arity appended.
+For instance, when defining an object named <code class="docutils literal notranslate"><span class="pre">sort(Type)</span></code>, we may save
+it in a <code class="docutils literal notranslate"><span class="pre">sort_1.lgt</span></code> text file. This way it is easy to avoid file name
+clashes when saving Logtalk entities that have the same functor but
+different arity.</p>
+<p>Compound terms with the same functor and with the same number of
+arguments as a parametric object identifier may act as <em>proxies</em> to a
+parametric object. Proxies may be stored on the database as Prolog facts
+and be used to represent different instantiations of a parametric object
+identifier. Logtalk provides a convenient notation for accessing proxies
+represented as Prolog facts when sending a message:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>
+</pre></div>
+</div>
+<p>In this context, the proxy argument is proved as a plain Prolog goal. If
+successful, the message is sent to the corresponding parametric object.
+Typically, the proof allows retrieving of parameter instantiations. This
+construct can either be used with a proxy argument that is sufficiently
+instantiated in order to unify with a single Prolog fact or with a proxy
+argument that unifies with several facts on backtracking.</p>
+</div>
+<div class="section" id="finding-defined-objects">
+<span id="objects-finding"></span><h2>Finding defined objects<a class="headerlink" href="#finding-defined-objects" title="Permalink to this headline">¶</a></h2>
+<p>We can find, by backtracking, all defined objects by calling the
+<a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a>
+built-in predicate with a non-instantiated variable:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_object(Object).
+</pre></div>
+</div>
+<p>This predicate can also be used to test if an object is defined by
+calling it with a valid object identifier (an atom or a compound term).</p>
+</div>
+<div class="section" id="creating-a-new-object-in-runtime">
+<span id="objects-creating"></span><h2>Creating a new object in runtime<a class="headerlink" href="#creating-a-new-object-in-runtime" title="Permalink to this headline">¶</a></h2>
+<p>An object can be dynamically created at runtime by using the
+<a class="reference internal" href="../refman/predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a> built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(Object, Relations, Directives, Clauses).
+</pre></div>
+</div>
+<p>The first argument should be either a variable or the name of the new
+object (a Prolog atom or compound term, which must not match any
+existing entity name). The remaining three arguments correspond to the
+relations described in the opening object directive and to the object
+code contents (directives and clauses).</p>
+<p>For instance, the call:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(foo, [extends(bar)], [public(foo/1)], [foo(1), foo(2)]).
+</pre></div>
+</div>
+<p>is equivalent to compiling and loading the object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
+    <span class="k">extends</span>(bar)).
 
-<h2 id="objects_finding">Finding defined objects</h2>
+<span class="p">    :- </span><span class="k">dynamic.</span>
 
-<p>
-We can find, by backtracking, all defined objects by calling the <a title="Consult reference manual" href="../refman/predicates/current_object_1.html"><code>current_object/1</code></a> built-in predicate with a non-instantiated variable:
-</p>
-<pre>| ?- current_object(Object).</pre>
-<p>
-This predicate can also be used to test if an object is defined by calling it with a valid object identifier (an atom or a compound term).
-</p>
+<span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
 
-<h2 id="objects_creating">Creating a new object in runtime</h2>
+    foo(<span class="m">1</span>).
+    foo(<span class="m">2</span>).
 
-<p>
-An object can be dynamically created at runtime by using the <a title="Consult reference manual" href="../refman/predicates/create_object_4.html"><code>create_object/4</code></a> built-in predicate:
-</p>
-<pre>| ?- create_object(Object, Relations, Directives, Clauses).</pre>
-<p>
-The first argument should be either a variable or the name of the new object (a Prolog atom or compound term, which must not match any existing entity name). The remaining three arguments correspond to the relations described in the opening object directive and to the object code contents (directives and clauses).
-</p>
-<p>
-For instance, the call:
-</p>
-<pre>| ?- create_object(foo, [extends(bar)], [public(foo/1)], [foo(1), foo(2)]).</pre>
-<p>
-is equivalent to compiling and loading the object:
-</p>
-<pre>:- object(foo,
-    extends(bar)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>If we need to create a lot of (dynamic) objects at runtime, then is best
+to define a metaclass or a prototype with a predicate that will call
+this built-in predicate to make new objects. This predicate may provide
+automatic object name generation, name checking, and accept object
+initialization options.</p>
+</div>
+<div class="section" id="abolishing-an-existing-object">
+<span id="objects-abolishing"></span><h2>Abolishing an existing object<a class="headerlink" href="#abolishing-an-existing-object" title="Permalink to this headline">¶</a></h2>
+<p>Dynamic objects can be abolished using the <a class="reference internal" href="../refman/predicates/abolish_object_1.html#predicates-abolish-object-1"><span class="std std-ref">abolish_object/1</span></a>
+built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- abolish_object(Object).
+</pre></div>
+</div>
+<p>The argument must be an identifier of a defined dynamic object,
+otherwise an error will be thrown.</p>
+</div>
+<div class="section" id="object-directives">
+<span id="objects-directives"></span><h2>Object directives<a class="headerlink" href="#object-directives" title="Permalink to this headline">¶</a></h2>
+<p>Object directives are used to set initialization goals, define object
+properties, to document an object dependencies on other Logtalk
+entities, and to load the contents of files into an object.</p>
+<div class="section" id="object-initialization">
+<span id="objects-initialization"></span><h3>Object initialization<a class="headerlink" href="#object-initialization" title="Permalink to this headline">¶</a></h3>
+<p>We can define a goal to be executed as soon as an object is (compiled
+and) loaded to memory with the <a class="reference internal" href="../refman/directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a>
+directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(<span class="nv">Goal</span>).
+</pre></div>
+</div>
+<p>The argument can be any valid Prolog or Logtalk goal, including a
+message to other object. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo).
 
-    :- dynamic.
+<span class="p">    :- </span><span class="k">initialization</span>(init).
+<span class="p">    :- </span><span class="k">private</span>(init<span class="o">/</span><span class="m">0</span>).
 
-    :- public(foo/1).
-
-    foo(1).
-    foo(2).
-
-:- end_object.</pre>
-<p>
-If we need to create a lot of (dynamic) objects at runtime, then is best to define a metaclass or a prototype with a predicate that will call this built-in predicate to make new objects. This predicate may provide automatic object name generation, name checking, and accept object initialization options.
-</p>
-
-<h2 id="objects_abolishing">Abolishing an existing object</h2>
-
-<p>
-Dynamic objects can be abolished using the <a title="Consult reference manual" href="../refman/predicates/abolish_object_1.html"><code>abolish_object/1</code></a> built-in predicate:
-</p>
-<pre>| ?- abolish_object(Object).</pre>
-<p>
-The argument must be an identifier of a defined dynamic object, otherwise an error will be thrown.
-</p>
-
-<h2 id="objects_directives">Object directives</h2>
-
-<p>
-Object directives are used to set initialization goals, define object properties, to document an object dependencies on other Logtalk entities, and to load the contents of files into an object.
-</p>
-
-<h3 id="objects_initialization">Object initialization</h3>
-
-<p>
-We can define a goal to be executed as soon as an object is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization_1.html"><code>initialization/1</code></a> directive:
-</p>
-<pre>:- initialization(Goal).</pre>
-<p>
-The argument can be any valid Prolog or Logtalk goal, including a message to other object. For example:
-</p>
-<pre>:- object(foo).
-
-    :- initialization(init).
-    :- private(init/0).
-
-    init :-
+    init <span class="o">:-</span>
         ... .
 
     ...
 
-:- end_object.</pre>
-<p>
-Or:
-</p>
-<pre>:- object(assembler).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(assembler).
 
-    :- initialization(control::start).
+<span class="p">    :- </span><span class="k">initialization</span>(control<span class="o">::</span>start).
     ...
 
-:- end_object.</pre>
-<p>
-The initialization goal can also be a message to <i>self</i> in order to call an inherited or imported predicate. For example, assuming that we have a <code>monitor</code> category defining a <code>reset/0</code> predicate:
-</p>
-<pre>:- object(profiler,
-    imports(monitor)).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>The initialization goal can also be a message to <em>self</em> in order to call
+an inherited or imported predicate. For example, assuming that we have a
+<code class="docutils literal notranslate"><span class="pre">monitor</span></code> category defining a <code class="docutils literal notranslate"><span class="pre">reset/0</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(profiler,
+    <span class="k">imports</span>(monitor)).
 
-    :- initialization(::reset).
+<span class="p">    :- </span><span class="k">initialization</span>(<span class="o">::</span>reset).
     ...
 
-:- end_object.</pre>
-<p>
-Note, however, that descendant objects do not inherit initialization directives. In this context, <i>self</i> denotes the object that contains the directive. Also note that by initialization we do not necessarily mean setting an object dynamic state.
-</p>
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>Note, however, that descendant objects do not inherit initialization
+directives. In this context, <em>self</em> denotes the object that contains the
+directive. Also note that by initialization we do not necessarily mean
+setting an object dynamic state.</p>
+</div>
+<div class="section" id="dynamic-objects">
+<span id="objects-dynamic"></span><h3>Dynamic objects<a class="headerlink" href="#dynamic-objects" title="Permalink to this headline">¶</a></h3>
+<p>Similar to Prolog predicates, an object can be either static or dynamic.
+An object created during the execution of a program is always dynamic.
+An object defined in a file can be either dynamic or static. Dynamic
+objects are declared by using the <a class="reference internal" href="../refman/directives/dynamic_0.html#directives-dynamic-0"><span class="std std-ref">dynamic/0</span></a> directive in the
+object source code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic.</span>
+</pre></div>
+</div>
+<p>The directive must precede any predicate directives or clauses. Please
+be aware that using dynamic code results in a performance hit when
+compared to static code. We should only use dynamic objects when these
+need to be abolished during program execution. In addition, note that we
+can declare and define dynamic predicates within a static object.</p>
+</div>
+<div class="section" id="object-documentation">
+<span id="objects-documentation"></span><h3>Object documentation<a class="headerlink" href="#object-documentation" title="Permalink to this headline">¶</a></h3>
+<p>An object can be documented with arbitrary user-defined information by
+using the <a class="reference internal" href="../refman/directives/info_1.html#directives-info-1"><span class="std std-ref">info/1</span></a> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(<span class="nv">List</span>).
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="documenting.html#documenting-documenting"><span class="std std-ref">Documenting applications</span></a> section for details.</p>
+</div>
+<div class="section" id="loading-files-into-an-object">
+<span id="objects-include"></span><h3>Loading files into an object<a class="headerlink" href="#loading-files-into-an-object" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive
+can be used to load the contents of a file into an object. A typical
+usage scenario is to load a plain Prolog database into an object thus
+providing a simple way to encapsulate it. For example, assume a
+<code class="docutils literal notranslate"><span class="pre">cities.pl</span></code> file defining facts for a <code class="docutils literal notranslate"><span class="pre">city/4</span></code> predicate. We could
+define a wrapper for this database by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(cities).
 
-<h3 id="objects_dynamic">Dynamic objects</h3>
+<span class="p">    :- </span><span class="k">public</span>(city<span class="o">/</span><span class="m">4</span>).
 
-<p>
-Similar to Prolog predicates, an object can be either static or dynamic. An object created during the execution of a program is always dynamic. An object defined in a file can be either dynamic or static. Dynamic objects are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic_0.html"><code>dynamic/0</code></a> directive in the object source code:
-</p>
-<pre>:- dynamic.</pre>
-<p>
-The directive must precede any predicate directives or clauses. Please be aware that using dynamic code results in a performance hit when compared to static code. We should only use dynamic objects when these need to be abolished during program execution. In addition, note that we can declare and define dynamic predicates within a static object.
-</p>
+<span class="p">    :- </span><span class="k">include</span>(dbs(<span class="s">&#39;cities.pl&#39;</span>)).
 
-<h3 id="objects_documentation">Object documentation</h3>
-
-<p>
-An object can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info_1.html"><code>info/1</code></a> directive:
-</p>
-<pre>:- info(List).</pre>
-<p>
-See the <a href="documenting.html">documenting Logtalk programs</a> section for details.
-</p>
-
-<h3 id="objects_include">Loading files into an object</h3>
-
-<p>
-The <a title="Consult reference manual" href="../refman/directives/include_1.html"><code>include/1</code></a> directive can be used to load the contents of a file into an object. A typical usage scenario is to load a plain Prolog database into an object thus providing a simple way to encapsulate it. For example, assume a <code>cities.pl</code> file defining facts for a <code>city/4</code> predicate. We could define a wrapper for this database by writing:
-</p>
-<pre>:- object(cities).
-
-	:- public(city/4).
-
-	:- include(dbs('cities.pl')).
-
-:- end_object.
-</pre>
-<p>
-The <code>include/1</code> directive can also be used when creating an object dynamically. For example:
-</p>
-<pre>| ?- create_object(cities, [], [public(city/4), include(dbs('cities.pl'))], []).</pre>
-
-<h2 id="objects_relationships">Object relationships</h2>
-
-<p>
-Logtalk provides six sets of built-in predicates that enable us to query the system about the possible relationships that an object may have with other entities.
-</p>
-<p>
-The built-in predicates <a title="Consult reference manual" href="../refman/predicates/instantiates_class_2_3.html"><code>instantiates_class/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/instantiates_class_2_3.html"><code>instantiates_class/3</code></a> can be used to query all instantiation relations:
-</p>
-<pre>| ?- instantiates_class(Instance, Class).</pre>
-<p>
-or, if we want to know the instantiation scope:
-</p>
-<pre>| ?- instantiates_class(Instance, Class, Scope).</pre>
-<p>
-Specialization relations can be found by using either the <a title="Consult reference manual" href="../refman/predicates/specializes_class_2_3.html"><code>specializes_class/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/specializes_class_2_3.html"><code>specializes_class/3</code></a> built-in predicates:
-</p>
-<pre>| ?- specializes_class(Class, Superclass).</pre>
-<p>
-or, if we want to know the specialization scope:
-</p>
-<pre>| ?- specializes_class(Class, Superclass, Scope).</pre>
-<p>
-For prototypes, we can query extension relations with the <a title="Consult reference manual" href="../refman/predicates/extends_object_2_3.html"><code>extends_object/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/extends_object_2_3.html"><code>extends_object/3</code></a> built-in predicates:
-</p>
-<pre>| ?- extends_object(Object, Parent).</pre>
-<p>
-or, if we want to know the extension scope:
-</p>
-<pre>| ?- extends_object(Object, Parent, Scope).</pre>
-<p>
-In order to find which objects import which categories we can use the built-in predicates <a title="Consult reference manual" href="../refman/predicates/imports_category_2_3.html"><code>imports_category/2</code></a> or <a title="Consult reference manual" href="../refman/predicates/imports_category_2_3.html"><code>imports_category/3</code></a>:
-</p>
-<pre>| ?- imports_category(Object, Category).</pre>
-<p>
-or, if we want to know the importation scope:
-</p>
-<pre>| ?- imports_category(Object, Category, Scope).</pre>
-<p>
-To find which objects implements which protocols we can use the <a title="Consult reference manual" href="../refman/predicates/implements_protocol_2_3.html"><code>implements_protocol/2-3</code></a> and <a title="Consult reference manual" href="../refman/predicates/conforms_to_protocol_2_3.html"><code>conforms_to_protocol/2-3</code></a> built-in predicates:
-</p>
-<pre>| ?- implements_protocol(Object, Protocol, Scope).</pre>
-<p>
-or, if we also want inherited protocols:
-</p>
-<pre>| ?- conforms_to_protocol(Object, Protocol, Scope).</pre>
-<p>
-Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/predicates/current_object_1.html"><code>current_object/1</code></a> built-in predicate to ensure that the entity returned is an object and not a category.
-</p>
-<p>
-To find which objects are explicitly complemented by categories we can use the 
-<a title="Consult reference manual" href="../refman/predicates/complements_object_2.html"><code>complements_object/2</code></a> built-in predicate:
-</p>
-<pre>| ?- complements_object(Category, Object).</pre>
-<p>
-Note that more than one category may explicitly complement a single object.
-</p>
-
-
-<h2 id="objects_properties">Object properties</h2>
-
-<p>
-We can find the properties of defined objects by calling the built-in predicate <a title="Consult reference manual" href="../refman/predicates/object_property_2.html"><code>object_property/2</code></a>:
-</p>
-<pre>| ?- object_property(Object, Property).</pre>
-<p>
-The following object properties are supported:
-</p>
-<dl>
-	<dt><code>static</code></dt>
-		<dd>The object is static</dd>
-	<dt><code>dynamic</code></dt>
-		<dd>The object is dynamic (and thus can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_object_1.html"><code>abolish_object/1</code></a> built-in predicate)</dd>
-	<dt><code>built_in</code></dt>
-		<dd>The object is a built-in object (and thus always available)</dd>
-	<dt><code>threaded</code></dt>
-		<dd>The object supports/makes multi-threading calls</dd>
-	<dt><code>file(Path)</code></dt>
-		<dd>Absolute path of the source file defining the object (if applicable)</dd>
-	<dt><code>file(Basename, Directory)</code></dt>
-		<dd>Basename and directory of the source file defining the object (if applicable)</dd>
-	<dt><code>lines(BeginLine, EndLine)</code></dt>
-		<dd>Source file begin and end lines of the object definition (if applicable)</dd>
-	<dt><code>context_switching_calls</code></dt>
-		<dd>The object supports context switching calls (i.e. can be used with the <code>&lt;&lt;/2</code> debugging control construct)</dd>
-	<dt><code>dynamic_declarations</code></dt>
-		<dd>The object supports dynamic declarations of predicates</dd>
-	<dt><code>events</code></dt>
-		<dd>Messages sent from the object generate events</dd>
-	<dt><code>source_data</code></dt>
-		<dd>Source data available for the object</dd>
-	<dt><code>complements(Permission)</code></dt>
-		<dd>The object supports complementing categories with the specified permission (<code>allow</code> or <code>restrict</code>)</dd>
-	<dt><code>complements</code></dt>
-		<dd>The object supports complementing categories</dd>
-	<dt><code>public(Predicates)</code></dt>
-		<dd>List of public predicates declared by the object</dd>
-	<dt><code>protected(Predicates)</code></dt>
-		<dd>List of protected predicates declared by the object</dd>
-	<dt><code>private(Predicates)</code></dt>
-		<dd>List of private predicates declared by the object</dd>
-	<dt><code>declares(Predicate, Properties)</code></dt>
-		<dd>List of properties for a predicate declared by the object</dd>
-	<dt><code>defines(Predicate, Properties)</code></dt>
-		<dd>List of properties for a predicate defined by the object</dd>
-	<dt><code>includes(Predicate, Entity, Properties)</code></dt>
-		<dd>List of properties for an object multifile predicate that are defined in the specified entity (the properties include <code>number_of_clauses(Number)</code>, <code>number_of_rules(Number)</code>, and <code>line_count(Line)</code> with <code>Line</code> being the begin line of the multifile predicate clause)</dd>
-	<dt><code>provides(Predicate, Entity, Properties)</code></dt>
-		<dd>List of properties for other entity multifile predicate that are defined in the object (the properties include <code>number_of_clauses(Number)</code>, <code>number_of_rules(Number)</code>, and <code>line_count(Line)</code> with <code>Line</code> being the begin line of the multifile predicate clause)</dd>
-	<dt><code>alias(Predicate, Properties)</code></dt>
-		<dd>List of properties for a predicate alias declared by the object (the properties include <code>for(Original)</code>, <code>from(Entity)</code>, <code>non_terminal(NonTerminal)</code>, and <code>line_count(Line)</code> with <code>Line</code> being the begin line of the alias directive)</dd>
-	<dt><code>calls(Call, Properties)</code></dt>
-		<dd>List of properties for predicate calls made by the object (<code>Call</code> is either a predicate indicator or a control construct such as <code>::/1-2</code> or <code>^^/1</code> with a predicate indicator as argument; note that <code>Call</code> may not be ground in case of a call to a control construct where its argument is only know at runtime; the properties include <code>caller(Caller)</code>, <code>alias(Alias)</code>, and <code>line_count(Line)</code> with both <code>Caller</code> and <code>Alias</code> being predicate indicators and <code>Line</code> being the begin line of the predicate clause or directive making the call)</dd>
-	<dt><code>updates(Predicate, Properties)</code></dt>
-		<dd>List of properties for dynamic predicate updates (and also access using the <code>clause/2</code> predicate) made by the object (<code>Predicate</code> is either a predicate indicator or a control construct such as <code>::/1-2</code> or <code>:/2</code> with a predicate indicator as argument; note that <code>Predicate</code> may not be ground in case of a control construct argument only know at runtime; the properties include <code>updater(Updater)</code>, <code>alias(Alias)</code>, and <code>line_count(Line)</code> with <code>Updater</code> being a (possibly multifile) predicate indicator, <code>Alias</code> being a predicate indicator, and <code>Line</code> being the begin line of the predicate clause or directive updating the predicate)</dd>
-	<dt><code>number_of_clauses(Number)</code></dt>
-		<dd>Total number of predicate clauses defined in the object at compilation time (includes both user-defined clauses and auxiliary clauses generated by the compiler or by the expansion hooks)</dd>
-	<dt><code>number_of_rules(Number)</code></dt>
-		<dd>Total number of predicate rules defined in the object at compilation time (includes both user-defined rules and auxiliary rules generated by the compiler or by the expansion hooks)</dd>
-	<dt><code>number_of_user_clauses(Number)</code></dt>
-		<dd>Total number of user-defined predicate clauses defined in the object at compilation time</dd>
-	<dt><code>number_of_user_rules(Number)</code></dt>
-		<dd>Total number of user-defined predicate rules defined in the object at compilation time</dd>
-	<dt><code>debugging</code></dt>
-		<dd>The object is compiled in debug mode</dd>
-	<dt><code>module</code></dt>
-		<dd>The object resulted from the compilation of a Prolog module</dd>
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive can also be used when creating an object
+dynamically. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(cities, [], [public(city/4), include(dbs(&#39;cities.pl&#39;))], []).
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="object-relationships">
+<span id="objects-relationships"></span><h2>Object relationships<a class="headerlink" href="#object-relationships" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk provides six sets of built-in predicates that enable us to query
+the system about the possible relationships that an object may have with
+other entities.</p>
+<p>The built-in predicates <a class="reference internal" href="../refman/predicates/instantiates_class_2_3.html#predicates-instantiates-class-2-3"><span class="std std-ref">instantiates_class/2-3</span></a> and
+<a class="reference internal" href="../refman/predicates/instantiates_class_2_3.html#predicates-instantiates-class-2-3"><span class="std std-ref">instantiates_class/2-3</span></a>
+can be used to query all instantiation relations:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class).
+</pre></div>
+</div>
+<p>or, if we want to know the instantiation scope:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class, Scope).
+</pre></div>
+</div>
+<p>Specialization relations can be found by using either the
+<a class="reference internal" href="../refman/predicates/specializes_class_2_3.html#predicates-specializes-class-2-3"><span class="std std-ref">specializes_class/2-3</span></a> or the
+<a class="reference internal" href="../refman/predicates/specializes_class_2_3.html#predicates-specializes-class-2-3"><span class="std std-ref">specializes_class/2-3</span></a> built-in predicates:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- specializes_class(Class, Superclass).
+</pre></div>
+</div>
+<p>or, if we want to know the specialization scope:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- specializes_class(Class, Superclass, Scope).
+</pre></div>
+</div>
+<p>For prototypes, we can query extension relations with the
+<a class="reference internal" href="../refman/predicates/extends_object_2_3.html#predicates-extends-object-2-3"><span class="std std-ref">extends_object/2-3</span></a> or the
+<a class="reference internal" href="../refman/predicates/extends_object_2_3.html#predicates-extends-object-2-3"><span class="std std-ref">extends_object/2-3</span></a> built-in predicates:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_object(Object, Parent).
+</pre></div>
+</div>
+<p>or, if we want to know the extension scope:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_object(Object, Parent, Scope).
+</pre></div>
+</div>
+<p>In order to find which objects import which categories we can use the
+built-in predicates <a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a> or
+<a class="reference internal" href="../refman/predicates/imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category).
+</pre></div>
+</div>
+<p>or, if we want to know the importation scope:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- imports_category(Object, Category, Scope).
+</pre></div>
+</div>
+<p>To find which objects implements which protocols we can use the
+<a class="reference internal" href="../refman/predicates/implements_protocol_2_3.html#predicates-implements-protocol-2-3"><span class="std std-ref">implements_protocol/2-3</span></a> and
+<a class="reference internal" href="../refman/predicates/conforms_to_protocol_2_3.html#predicates-conforms-to-protocol-2-3"><span class="std std-ref">conforms_to_protocol/2-3</span></a> built-in predicates:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- implements_protocol(Object, Protocol, Scope).
+</pre></div>
+</div>
+<p>or, if we also want inherited protocols:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- conforms_to_protocol(Object, Protocol, Scope).
+</pre></div>
+</div>
+<p>Note that, if we use a non-instantiated variable for the first argument,
+we will need to use the <a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a>
+built-in predicate to ensure that the entity returned is an object and
+not a category.</p>
+<p>To find which objects are explicitly complemented by categories we can
+use the <a class="reference internal" href="../refman/predicates/complements_object_2.html#predicates-complements-object-2"><span class="std std-ref">complements_object/2</span></a> built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- complements_object(Category, Object).
+</pre></div>
+</div>
+<p>Note that more than one category may explicitly complement a single
+object.</p>
+</div>
+<div class="section" id="object-properties">
+<span id="objects-properties"></span><h2>Object properties<a class="headerlink" href="#object-properties" title="Permalink to this headline">¶</a></h2>
+<p>We can find the properties of defined objects by calling the built-in
+predicate <a class="reference internal" href="../refman/predicates/object_property_2.html#predicates-object-property-2"><span class="std std-ref">object_property/2</span></a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- object_property(Object, Property).
+</pre></div>
+</div>
+<p>The following object properties are supported:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">static</span></code></dt>
+<dd>The object is static</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></dt>
+<dd>The object is dynamic (and thus can be abolished in runtime by
+calling the <a class="reference internal" href="../refman/predicates/abolish_object_1.html#predicates-abolish-object-1"><span class="std std-ref">abolish_object/1</span></a> built-in predicate)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt>
+<dd>The object is a built-in object (and thus always available)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">threaded</span></code></dt>
+<dd>The object supports/makes multi-threading calls</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code></dt>
+<dd>Absolute path of the source file defining the object (if applicable)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file(Basename,</span> <span class="pre">Directory)</span></code></dt>
+<dd>Basename and directory of the source file defining the object (if
+applicable)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code></dt>
+<dd>Source file begin and end lines of the object definition (if
+applicable)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code></dt>
+<dd>The object supports context switching calls (i.e. can be used with
+the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control construct)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code></dt>
+<dd>The object supports dynamic declarations of predicates</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">events</span></code></dt>
+<dd>Messages sent from the object generate events</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_data</span></code></dt>
+<dd>Source data available for the object</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">complements(Permission)</span></code></dt>
+<dd>The object supports complementing categories with the specified
+permission (<code class="docutils literal notranslate"><span class="pre">allow</span></code> or <code class="docutils literal notranslate"><span class="pre">restrict</span></code>)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">complements</span></code></dt>
+<dd>The object supports complementing categories</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">public(Predicates)</span></code></dt>
+<dd>List of public predicates declared by the object</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">protected(Predicates)</span></code></dt>
+<dd>List of protected predicates declared by the object</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">private(Predicates)</span></code></dt>
+<dd>List of private predicates declared by the object</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">declares(Predicate,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for a predicate declared by the object</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">defines(Predicate,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for a predicate defined by the object</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">includes(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for an object multifile predicate that are defined
+in the specified entity (the properties include
+<code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
+multifile predicate clause)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">provides(Predicate,</span> <span class="pre">Entity,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for other entity multifile predicate that are
+defined in the object (the properties include
+<code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
+multifile predicate clause)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias(Predicate,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for a predicate alias declared by the object (the
+properties include <code class="docutils literal notranslate"><span class="pre">for(Original)</span></code>, <code class="docutils literal notranslate"><span class="pre">from(Entity)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">non_terminal(NonTerminal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with <code class="docutils literal notranslate"><span class="pre">Line</span></code>
+being the begin line of the alias directive)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for predicate calls made by the object (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
+is either a predicate indicator or a control construct such as
+<code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> with a predicate indicator as argument; note
+that <code class="docutils literal notranslate"><span class="pre">Call</span></code> may not be ground in case of a call to a control
+construct where its argument is only know at runtime; the properties
+include <code class="docutils literal notranslate"><span class="pre">caller(Caller)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with both <code class="docutils literal notranslate"><span class="pre">Caller</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> being
+predicate indicators and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin line of the
+predicate clause or directive making the call)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt>
+<dd>List of properties for dynamic predicate updates (and also access
+using the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> predicate) made by the object (<code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
+is either a predicate indicator or a control construct such as
+<code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> with a predicate indicator as argument; note
+that <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> may not be ground in case of a control construct
+argument only know at runtime; the properties include
+<code class="docutils literal notranslate"><span class="pre">updater(Updater)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">Updater</span></code> being a (possibly multifile) predicate indicator,
+<code class="docutils literal notranslate"><span class="pre">Alias</span></code> being a predicate indicator, and <code class="docutils literal notranslate"><span class="pre">Line</span></code> being the begin
+line of the predicate clause or directive updating the predicate)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_clauses(Number)</span></code></dt>
+<dd>Total number of predicate clauses defined in the object at
+compilation time (includes both user-defined clauses and auxiliary
+clauses generated by the compiler or by the expansion hooks)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_rules(Number)</span></code></dt>
+<dd>Total number of predicate rules defined in the object at compilation
+time (includes both user-defined rules and auxiliary rules generated
+by the compiler or by the expansion hooks)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_clauses(Number)</span></code></dt>
+<dd>Total number of user-defined predicate clauses defined in the object
+at compilation time</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_user_rules(Number)</span></code></dt>
+<dd>Total number of user-defined predicate rules defined in the object at
+compilation time</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debugging</span></code></dt>
+<dd>The object is compiled in debug mode</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">module</span></code></dt>
+<dd>The object resulted from the compilation of a Prolog module</dd>
 </dl>
-<p>
-When a predicate is called from an <code>initialization/1</code> directive, the argument of the <code>caller/1</code> property is <code>:-/1</code>.
-</p>
-<p>
-Some of the properties such as line numbers are only available when the object is defined in a source file compiled with the <code>source_data</code> flag turned on.
-</p>
-<p>
-The properties that return the number of clauses (rules) report the clauses (rules) <em>textually defined in the object</em> for both multifile and non-multifile predicates. Thus, these numbers exclude clauses (rules) for multifile predicates <em>contributed</em> by other entities.
-</p>
-
-<h2 id="objects_built_in">Built-in objects</h2>
-
-<p>
-Logtalk defines some built-in objects that are always available for any application.
-</p>
-
-<h3 id="objects_user">The built-in pseudo-object <em>user</em></h3>
-
-<p>
-Logtalk defines a built-in, pseudo-object named <code>user</code> that virtually contains all user predicate definitions not encapsulated in a Logtalk entity. These predicates are assumed to be implicitly declared public. Messages sent from this pseudo-object, which includes messages sent from the top-level interpreter, generate events when the default value of the <code>events</code> flag is set to <code>allow</code>. Defining complementing categories for this pseudo-object is not supported.
-</p>
-<p>
-With some of the backend Prolog compilers that support a module system, it is possible to load (the) Logtalk (compiler/runtime) into a module other than the pseudo-module <em>user</em>. In this case, the Logtalk pseudo-object <em>user</em> virtually contains all user predicate definitions defined in the module where Logtalk was loaded.
-</p>
-
-<h3 id="objects_logtalk">The built-in object <em>logtalk</em></h3>
-
-<p>
-Logtalk defines a built-in object named <code>logtalk</code> that provides structured message printing mechanism predicates, structured question asking predicates, debugging event predicates, predicates for accessing the internal database of loaded files and their properties, and also a set of low-level utility predicates normally used when defining hook objects.
-</p>
-<p>
-The following predicates are defined:
-</p>
-<dl>
-	<dt><code>expand_library_path(Library, Path)</code></dt>
-		<dd>Expands a file specification in library notation to a full operating-system path.</dd>
-	<dt><code>loaded_file(Path)</code></dt>
-		<dd>Returns the full path of a currently loaded source file.</dd>
-	<dt><code>loaded_file_property(Path, Property)</code></dt>
-		<dd>Returns a property for a currently loaded source file. Valid properties are <code>basename/1</code>, <code>directory/1</code>,
-<code>flags/1</code> (explicit flags used when the file was loaded), <code>text_properties/1</code> (list, possibly empty, whose possible elements are <code>encoding/1</code> and <code>bom/1</code>), <code>target/1</code> (full path for the Prolog file generated by the compilation of the loaded source file), <code>modified/1</code> (time stamp that should be treated as an opaque term but that may be used for comparisons), <code>parent/1</code> (parent file, if it exists, that loaded the file; a file may have multiple parents), and <code>library/1</code> (library name when there is a library whose location is the same as the loaded file directory).</dd>
+<p>When a predicate is called from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive, the
+argument of the <code class="docutils literal notranslate"><span class="pre">caller/1</span></code> property is <code class="docutils literal notranslate"><span class="pre">:-/1</span></code>.</p>
+<p>Some of the properties such as line numbers are only available when the
+object is defined in a source file compiled with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code>
+flag turned on.</p>
+<p>The properties that return the number of clauses (rules) report the
+clauses (rules) <em>textually defined in the object</em> for both multifile and
+non-multifile predicates. Thus, these numbers exclude clauses (rules)
+for multifile predicates <em>contributed</em> by other entities.</p>
+</div>
+<div class="section" id="built-in-objects">
+<span id="objects-built-in"></span><h2>Built-in objects<a class="headerlink" href="#built-in-objects" title="Permalink to this headline">¶</a></h2>
+<p>Logtalk defines some built-in objects that are always available for any
+application.</p>
+<div class="section" id="the-built-in-pseudo-object-user">
+<span id="objects-user"></span><h3>The built-in pseudo-object <em>user</em><a class="headerlink" href="#the-built-in-pseudo-object-user" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk defines a built-in, pseudo-object named <code class="docutils literal notranslate"><span class="pre">user</span></code> that virtually
+contains all user predicate definitions not encapsulated in a Logtalk
+entity. These predicates are assumed to be implicitly declared public.
+Messages sent from this pseudo-object, which includes messages sent from
+the top-level interpreter, generate events when the default value of the
+<code class="docutils literal notranslate"><span class="pre">events</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Defining complementing categories
+for this pseudo-object is not supported.</p>
+<p>With some of the backend Prolog compilers that support a module system,
+it is possible to load (the) Logtalk (compiler/runtime) into a module
+other than the pseudo-module <em>user</em>. In this case, the Logtalk
+pseudo-object <em>user</em> virtually contains all user predicate definitions
+defined in the module where Logtalk was loaded.</p>
+</div>
+<div class="section" id="the-built-in-object-logtalk">
+<span id="objects-logtalk"></span><h3>The built-in object <em>logtalk</em><a class="headerlink" href="#the-built-in-object-logtalk" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk defines a built-in object named <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> that provides
+structured message printing mechanism predicates, structured question
+asking predicates, debugging event predicates, predicates for accessing
+the internal database of loaded files and their properties, and also a
+set of low-level utility predicates normally used when defining hook
+objects.</p>
+<p>The following predicates are defined:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">expand_library_path(Library,</span> <span class="pre">Path)</span></code></dt>
+<dd>Expands a file specification in library notation to a full
+operating-system path.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">loaded_file(Path)</span></code></dt>
+<dd>Returns the full path of a currently loaded source file.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">loaded_file_property(Path,</span> <span class="pre">Property)</span></code></dt>
+<dd>Returns a property for a currently loaded source file. Valid
+properties are <code class="docutils literal notranslate"><span class="pre">basename/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">flags/1</span></code> (explicit
+flags used when the file was loaded), <code class="docutils literal notranslate"><span class="pre">text_properties/1</span></code> (list,
+possibly empty, whose possible elements are <code class="docutils literal notranslate"><span class="pre">encoding/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">bom/1</span></code>), <code class="docutils literal notranslate"><span class="pre">target/1</span></code> (full path for the Prolog file generated by
+the compilation of the loaded source file), <code class="docutils literal notranslate"><span class="pre">modified/1</span></code> (time
+stamp that should be treated as an opaque term but that may be used
+for comparisons), <code class="docutils literal notranslate"><span class="pre">parent/1</span></code> (parent file, if it exists, that
+loaded the file; a file may have multiple parents), and <code class="docutils literal notranslate"><span class="pre">library/1</span></code>
+(library name when there is a library whose location is the same as
+the loaded file directory).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses(Clauses)</span></code></dt>
+<dd>Compiles a list of clauses in the context of the entity under
+compilation. This method is usually called from <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
+hooks in order to compile auxiliary clauses generated for supporting
+an expanded goal. The compilation of the clauses avoids the risk of
+making the predicate whose clause is being goal-expanded
+discontiguous by accident.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entity_prefix(Entity,</span> <span class="pre">Prefix)</span></code></dt>
+<dd>Converts an entity identifier into its internal prefix or an internal
+prefix into an entity identifier.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(Heads,</span> <span class="pre">Entity,</span> <span class="pre">TranslatedHeads,</span> <span class="pre">ContextArgument)</span></code></dt>
+<dd>Compiles a predicate head or a list of predicate heads in the context
+of the specified entity or in the context of the entity being
+compiled when <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is not instantiated.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(PredicateIndicators,</span> <span class="pre">Entity,</span> <span class="pre">TranslatedPredicateIndicators)</span></code></dt>
+<dd>Compiles a predicate indicator or a list of predicate indicators in
+the context of the specified entity or in the context of the entity
+being compiled when <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is not instantiated.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(TranslatedHeads,</span> <span class="pre">Entity,</span> <span class="pre">EntityType,</span> <span class="pre">Heads)</span></code></dt>
+<dd>Decompiles a compiled predicate head or a list of compiled predicate
+heads returning the entity, entity type, and source level heads.
+Requires the entity to be currently loaded.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(TranslatedPredicateIndicators,</span> <span class="pre">Entity,</span> <span class="pre">EntityType,</span> <span class="pre">PredicateIndicators)</span></code></dt>
+<dd>Decompiles a compiled predicate indicator or a list of compiled
+predicate indicators returning the entity, entity type, and source
+level predicate indicators. Requires the entity to be currently
+loaded.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">execution_context(ExecutionContext,</span> <span class="pre">Entity,</span> <span class="pre">Sender,</span> <span class="pre">This,</span> <span class="pre">Self,</span> <span class="pre">MetaCallContext,</span> <span class="pre">Stack)</span></code></dt>
+<dd>Allows constructing and accessing execution context components.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">print_message(Kind,</span> <span class="pre">Component,</span> <span class="pre">Term)</span></code></dt>
+<dd>Prints a message term after converting it into a list of tokens using
+the <code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code> hook non-terminal. When the conversion
+fails, the message term itself is printed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">print_message_tokens(Stream,</span> <span class="pre">Prefix,</span> <span class="pre">Tokens)</span></code></dt>
+<dd>Prints a list of message tokens to the specified stream and prefixing
+each line with the specified prefix.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">print_message_token(Stream,</span> <span class="pre">Prefix,</span> <span class="pre">Token,</span> <span class="pre">Tokens)</span></code></dt>
+<dd>Hook predicate, declared multifile and dynamic, allowing the default
+printing of a token to be overridden.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">message_tokens(Term,</span> <span class="pre">Component)</span></code></dt>
+<dd>Hook non-terminal, declared multifile and dynamic, allowing the
+translation of a message into a list of tokens for printing.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">message_prefix_stream(Kind,</span> <span class="pre">Component,</span> <span class="pre">Prefix,</span> <span class="pre">Stream)</span></code></dt>
+<dd>Hook predicate, declared multifile and dynamic, allowing the
+definition of line prefix and output stream for messages.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">message_hook(Term,</span> <span class="pre">Kind,</span> <span class="pre">Component,</span> <span class="pre">Tokens)</span></code></dt>
+<dd>Hook predicate, declared multifile and dynamic, allowing the
+overriding the default printing of a message.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trace_event(Event,</span> <span class="pre">EventExecutionContext)</span></code></dt>
+<dd>Hook predicate, declared multifile and dynamic, for handling trace
+events generated by the execution of source code compiled in debug
+mode. The Logtalk runtime calls all defined handlers using a
+failure-driven loop. Thus, care must be taken that the handlers are
+deterministic to avoid potential termination issues.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug_handler_provider(Provider)</span></code></dt>
+<dd>Multifile predicate for declaring an object that provides a debug
+handler. There can only be one debug handler provider loaded at the
+same time. The Logtalk runtime uses this hook predicate for detecting
+multiple instances of the handler and for better error reporting.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug_handler(Event,</span> <span class="pre">EventExecutionContext)</span></code></dt>
+<dd>Multifile predicate for handling debug events generated by the
+execution of source code compiled in debug mode.</dd>
 </dl>
-<dl>
-	<dt><code>compile_aux_clauses(Clauses)</code></dt>
-		<dd>Compiles a list of clauses in the context of the entity under compilation. This method is usually called from <code>goal_expansion/2</code> hooks in order to compile auxiliary clauses generated for supporting an expanded goal. The compilation of the clauses avoids the risk of making the predicate whose clause is being goal-expanded discontiguous by accident.</dd>
-</dl>
-<dl>
-	<dt><code>entity_prefix(Entity, Prefix)</code></dt>
-		<dd>Converts an entity identifier into its internal prefix or an internal prefix into an entity identifier.</dd>
-</dl>
-<dl>
-	<dt><code>compile_predicate_heads(Heads, Entity, TranslatedHeads, ContextArgument)</code></dt>
-		<dd>Compiles a predicate head or a list of predicate heads in the context of the specified entity or in the context of the entity being compiled when <code>Entity</code> is not instantiated.</dd>
-	<dt><code>compile_predicate_indicators(PredicateIndicators, Entity, TranslatedPredicateIndicators)</code></dt>
-		<dd>Compiles a predicate indicator or a list of predicate indicators in the context of the specified entity or in the context of the entity being compiled when <code>Entity</code> is not instantiated.</dd>
-	<dt><code>decompile_predicate_heads(TranslatedHeads, Entity, EntityType, Heads)</code></dt>
-		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the entity, entity type, and source level heads. Requires the entity to be currently loaded.</dd>
-	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, Entity, EntityType, PredicateIndicators)</code></dt>
-		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning the entity, entity type, and source level predicate indicators. Requires the entity to be currently loaded.</dd>
-</dl>
-<dl>
-	<dt><code>execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, Stack)</code></dt>
-		<dd>Allows constructing and accessing execution context components.</dd>
-</dl>
-<dl>
-	<dt><code>print_message(Kind, Component, Term)</code></dt>
-		<dd>Prints a message term after converting it into a list of tokens using the <code>message_tokens//2</code> hook non-terminal. When the conversion fails, the message term itself is printed.</dd>
-	<dt><code>print_message_tokens(Stream, Prefix, Tokens)</code></dt>
-		<dd>Prints a list of message tokens to the specified stream and prefixing each line with the specified prefix.</dd>
-	<dt><code>print_message_token(Stream, Prefix, Token, Tokens)</code></dt>
-		<dd>Hook predicate, declared multifile and dynamic, allowing the default printing of a token to be overridden.</dd>
-	<dt><code>message_tokens(Term, Component)</code></dt>
-		<dd>Hook non-terminal, declared multifile and dynamic, allowing the translation of a message into a list of tokens for printing.</dd>
-	<dt><code>message_prefix_stream(Kind, Component, Prefix, Stream)</code></dt>
-		<dd>Hook predicate, declared multifile and dynamic, allowing the definition of line prefix and output stream for messages.</dd>
-	<dt><code>message_hook(Term, Kind, Component, Tokens)</code></dt>
-		<dd>Hook predicate, declared multifile and dynamic, allowing the overriding the default printing of a message.</dd>
-</dl>
-<dl>
-	<dt><code>trace_event(Event, EventExecutionContext)</code></dt>
-		<dd>Hook predicate, declared multifile and dynamic, for handling trace events generated by the execution of source code compiled in debug mode. The Logtalk runtime calls all defined handlers using a failure-driven loop. Thus, care must be taken that the handlers are deterministic to avoid potential termination issues.</dd>
-	<dt><code>debug_handler_provider(Provider)</code></dt>
-		<dd>Multifile predicate for declaring an object that provides a debug handler. There can only be one debug handler provider loaded at the same time. The Logtalk runtime uses this hook predicate for detecting multiple instances of the handler and for better error reporting.</dd>
-	<dt><code>debug_handler(Event, EventExecutionContext)</code></dt>
-		<dd>Multifile predicate for handling debug events generated by the execution of source code compiled in debug mode.</dd>
-</dl>
-<p>
-To use these predicates, simply send the corresponding message to the <code>logtalk</code> object.
-</p>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 28, 2018</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+<p>To use these predicates, simply send the corresponding message to the
+<code class="docutils literal notranslate"><span class="pre">logtalk</span></code> object.</p>
+</div>
+</div>
 </div>
 
-</body>
 
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="protocols.html" class="btn btn-neutral float-right" title="Protocols" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="messages.html" class="btn btn-neutral" title="Messages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

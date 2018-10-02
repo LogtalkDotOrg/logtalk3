@@ -1,573 +1,1086 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk user manual: writing, running, and debugging applications</title>
-	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing, running, and debugging applications &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Prolog Integration and Migration Guide" href="migration.html" />
+    <link rel="prev" title="Installing Logtalk" href="installing.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk user manual</div>
-<div class="top-right">Writing, running, and debugging applications</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Programming</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h1 id="programming_programming">Writing, running, and debugging applications</h1>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Logtalk
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writing, running, and debugging applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#writing-applications">Writing applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#source-files">Source files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#portable-applications">Portable applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-compilation">Conditional compilation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avoiding-common-errors">Avoiding common errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coding-style-guidelines">Coding style guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-logtalk-session">Running a Logtalk session</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#starting-logtalk">Starting Logtalk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiling-and-loading-your-applications">Compiling and loading your applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loader-utility-files">Loader utility files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libraries-of-source-files">Libraries of source files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiler-linter">Compiler linter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiler-flags">Compiler flags</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reloading-and-smart-compilation-of-source-files">Reloading and smart compilation of source files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-logtalk-for-batch-processing">Using Logtalk for batch processing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizing-performance">Optimizing performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-logtalk-applications">Debugging Logtalk applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compiling-source-files-and-entities-in-debug-mode">Compiling source files and entities in debug mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logtalk-procedure-box-model">Logtalk Procedure Box model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-spy-points">Defining spy points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tracing-program-execution">Tracing program execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-using-spy-points">Debugging using spy points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-commands">Debugging commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#context-switching-calls">Context-switching calls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-compilation-hooks-and-term-expansion-for-debugging">Using compilation hooks and term expansion for debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-messages">Debugging messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog Integration and Migration Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Logtalk</a>
+        
+      </nav>
 
 
-<h2 id="programming_writing">Writing applications</h2>
-
-<p>
-For a successful programming in Logtalk, you need a good working knowledge of Prolog and an understanding of the principles of object-oriented programming. Most guidelines for writing good Prolog code apply as well to Logtalk programming. To those guidelines, you should add the basics of good object-oriented design.
-</p>
-<p>
-One of the advantages of a system like Logtalk is that it enable us to use the currently available object-oriented methodologies, tools, and metrics <a href="../bibliography.html#Champaux92">[Champaux 92]</a> in Prolog programming. That said, writing applications in Logtalk is similar to writing applications in Prolog: we define new predicates describing what is true about our domain objects, about our problem solution. We encapsulate our predicate directives and definitions inside new objects, categories and protocols that we create by hand with a text editor or by using the Logtalk built-in predicates. Some of the information collected during the analysis and design phases can be integrated in the objects, categories and protocols that we define by using the available entity and predicate documenting directives.
-</p>
-
-<h3 id="programming_source_files">Source files</h3>
-
-<p>
-Logtalk source files may define any number of entities (objects, categories, or protocols) and Prolog code. If you prefer to define each entity in its own source file, then it is recommended that the source file be named after the entity identifier. For parametric objects, the identifier arity can be appended to the identifier functor. By default, all Logtalk source files use the extension <code>.lgt</code> but this is optional and can be set in the adapter files. Intermediate Prolog source files (generated by the Logtalk compiler) have, by default, a <code>_lgt</code> suffix and a <code>.pl</code> extension. Again, this can be set to match the needs of a particular Prolog compiler in the corresponding adapter file. For example, we may define an object named <code>vehicle</code> and save it in a <code>vehicle.lgt</code> source file that will be compiled to a <code>vehicle_lgt.pl</code> Prolog file. If we have a <code>sort(_)</code> parametric object we can save it on a <code>sort_1.lgt</code> source file that will be compiled to a <code>sort_1_lgt.pl</code> Prolog file. This name scheme helps avoid file name conflicts (remember that all Logtalk entities share the same name space). To further prevent file name conflicts, depending on the backend compiler, the names of the intermediate Prolog files may include a directory hash.
-</p>
-<p>
-Logtalk source files may contain Prolog code interleaved with Logtalk entity definitions. Plain Prolog code is usually copied as-is to the corresponding Prolog output file (except, of course, if subject to the term-expansion mechanism). Prolog modules are compiled as objects. The following Prolog directives are processed when read (thus affecting the compilation of the source code that follows): <code>ensure_loaded/1</code>, <code>use_module/1-2</code>, <code>op/3</code>, and <code>set_prolog_flag/2</code>. The <code>initialization/1</code> Prolog directive may be used for defining an initialization goal to be executed when loading a source file. Most calls to Logtalk built-in predicates from file <code>initialization/1</code> directives are compiled for better performance.
-</p>
-<p>
-The text encoding used in a source file may be declared using the <a title="Consult reference manual" href="../refman/directives/encoding_1.html"><code>encoding/1</code></a> directive when running Logtalk with back-end Prolog compilers that support multiple encodings (check the <code>encoding_directive</code> flag in the adapter file of your Prolog compiler). The encoding used (and, in the case of a Unicode encoding, any BOM present) in a source file will be used for the intermediate Prolog file generated by the compiler. Logtalk uses the encoding names specified by <a title="" href="http://www.iana.org/assignments/character-sets">IANA</a> (in those cases where a preferred MIME name alias is specified, the alias is used instead).
-</p>
-<p>
-Logtalk source files can include the text of other files by using the <a title="Consult reference manual" href="../refman/directives/include_1.html"><code>include/1</code></a> directive. Although there's also a standard Prolog <code>include/1</code> directive, any occurrences of this directive in a Logtalk source file is handled by the Logtalk compiler, not by the backend Prolog compiler.
-</p>
-
-<h3 id="programming_portability">Portable applications</h3>
-
-<p>
-Logtalk is compatible with almost all modern Prolog compilers. However, this does not necessarily imply that your Logtalk applications will have the same level of portability. If possible, you should only use in your applications Logtalk built-in predicates and ISO Prolog specified built-in predicates and arithmetic functions. If you need to use built-in predicates (or built-in arithmetic functions) that may not be available in other Prolog compilers, you should try to encapsulate the non-portable code in a small number of objects and provide a portable <strong>interface</strong> for that code through the use of Logtalk protocols. An example will be code that access operating-system specific features. The Logtalk compiler can warn you of the use of non-ISO specified built-in predicates and arithmetic functions by using the <code>portability/1</code> compiler flag.
-</p>
-
-<h3 id="programming_cc">Conditional compilation</h3>
-
-<p>
-Logtalk supports conditional compilation within source files using the <a title="Consult reference manual" href="../refman/directives/if_1.html"><code>if/1</code></a>, <a title="Consult reference manual" href="../refman/directives/elif_1.html"><code>elif/1</code></a>, <a title="Consult reference manual" href="../refman/directives/else_0.html"><code>else/0</code></a>, and <a title="Consult reference manual" href="../refman/directives/endif_0.html"><code>endif/0</code></a> directives. This support is similar to the support found in several Prolog systems such as ECLiPSe, SWI-Prolog, or YAP.
-</p>
-
-<h3 id="programming_errors">Avoiding common errors</h3>
-
-<p>
-Try to write objects and protocol documentation <strong>before</strong> writing any other code; if you are having trouble documenting a predicate perhaps we need to go back to the design stage.
-</p>
-<p>
-Try to avoid lengthy hierarchies. Composition is often a better choice over inheritance for defining new objects (Logtalk supports component-based programming through the use of categories). In addition, prototype-based hierarchies are semantically simpler than class-based hierarchies.
-</p>
-<p>
-Dynamic predicates or dynamic entities are sometimes needed, but we should always try to minimize the use of non-logical features such as asserts and retracts.
-</p>
-<p>
-Since each Logtalk entity is independently compiled, if an object inherits a dynamic or a meta-predicate predicate, then the respective directives must be repeated to ensure a correct compilation. 
-</p>
-<p>
-In general, Logtalk does not verify if a user predicate call/return arguments comply with the declared modes. On the other hand, Logtalk built-in predicates, built-in methods, and message sending control structures are fully checked for calling mode errors.
-</p>
-<p>
-Logtalk error handling strongly depends on the ISO compliance of the chosen Prolog compiler. For instance, the error terms that are generated by some Logtalk built-in predicates assume that the Prolog built-in predicates behave as defined in the ISO standard regarding error conditions. In particular, if your Prolog compiler does not support a <code>read_term/3</code> built-in predicate compliant with the ISO Prolog Standard definition, then the current version of the Logtalk compiler may not be able to detect misspell variables in your source code.
-</p>
-
-<h3 id="programming_style">Coding style guidelines</h3>
-
-<p>
-It is suggested that all code between an entity opening and closing directives be indented by one tab stop. When defining entity code, both directives and predicates, Prolog coding style guidelines may be applied. All Logtalk source files, examples, and standard library entities use tabs (the recommended setting is a tab width equivalent to 4 spaces) for laying out code. Closed related entities can be defined in the same source file. However, for best performance, is often necessary to have an entity per source file. Entities that might be useful in different contexts (such as library entities) are best defined in their own source files.
-</p>
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
 
 
-<h2 id="programming_session">Running a Logtalk session</h2>
 
-<p>
-We run Logtalk inside a normal Prolog session, after loading the necessary files. Logtalk extends but does not modify your Prolog compiler. We can freely mix Prolog queries with the sending of messages and our applications can be made of both normal Prolog clauses and object definitions.
-</p>
 
-<h3 id="programming_starting">Starting Logtalk</h3>
 
-<p>
-Depending on your Logtalk installation, you may use a script or a shortcut to start Logtalk with your chosen Prolog compiler. On POSIX operating systems, the scripts should be available from the command-line; scripts are named upon the used Prolog compilers. On Windows, the shortcuts should be available from the Start Menu. If no scripts or shortcuts are available for your installation, operating-system, or Prolog compiler, you can always start a Logtalk session by performing the following steps:
-</p>
-<ol>
-	<li>Start your Prolog compiler.</li>
-	<li>Load the appropriate adapter file for your compiler. Adapter files for most common Prolog compilers can be found in the <code>adapters</code> subdirectory.</li>
-	<li>Load the library paths file corresponding to your Logtalk installation contained in the <code>paths</code> subdirectory.</li>
-	<li>Load the Logtalk compiler/runtime files contained in the <code>compiler</code> subdirectory.</li>
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Manual</a> &raquo;</li>
+        
+      <li>Writing, running, and debugging applications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/userman/programming.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-running-and-debugging-applications">
+<span id="programming-programming"></span><h1>Writing, running, and debugging applications<a class="headerlink" href="#writing-running-and-debugging-applications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="writing-applications">
+<span id="programming-writing"></span><h2>Writing applications<a class="headerlink" href="#writing-applications" title="Permalink to this headline">¶</a></h2>
+<p>For a successful programming in Logtalk, you need a good working
+knowledge of Prolog and an understanding of the principles of
+object-oriented programming. Most guidelines for writing good Prolog
+code apply as well to Logtalk programming. To those guidelines, you
+should add the basics of good object-oriented design.</p>
+<p>One of the advantages of a system like Logtalk is that it enable us to
+use the currently available object-oriented methodologies, tools, and
+metrics <a class="reference internal" href="../bibliography.html#champaux92" id="id1">[Champaux92]</a> in Prolog
+programming. That said, writing applications in Logtalk is similar to
+writing applications in Prolog: we define new predicates describing what
+is true about our domain objects, about our problem solution. We
+encapsulate our predicate directives and definitions inside new objects,
+categories and protocols that we create by hand with a text editor or by
+using the Logtalk built-in predicates. Some of the information collected
+during the analysis and design phases can be integrated in the objects,
+categories and protocols that we define by using the available entity
+and predicate documenting directives.</p>
+<div class="section" id="source-files">
+<span id="programming-source-files"></span><h3>Source files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk source files may define any number of entities (objects,
+categories, or protocols) and Prolog code. If you prefer to define each
+entity in its own source file, then it is recommended that the source
+file be named after the entity identifier. For parametric objects, the
+identifier arity can be appended to the identifier functor. By default,
+all Logtalk source files use the extension <code class="docutils literal notranslate"><span class="pre">.lgt</span></code> but this is optional
+and can be set in the adapter files. Intermediate Prolog source files
+(generated by the Logtalk compiler) have, by default, a <code class="docutils literal notranslate"><span class="pre">_lgt</span></code> suffix
+and a <code class="docutils literal notranslate"><span class="pre">.pl</span></code> extension. Again, this can be set to match the needs of a
+particular Prolog compiler in the corresponding adapter file. For
+example, we may define an object named <code class="docutils literal notranslate"><span class="pre">vehicle</span></code> and save it in a
+<code class="docutils literal notranslate"><span class="pre">vehicle.lgt</span></code> source file that will be compiled to a
+<code class="docutils literal notranslate"><span class="pre">vehicle_lgt.pl</span></code> Prolog file. If we have a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric
+object we can save it on a <code class="docutils literal notranslate"><span class="pre">sort_1.lgt</span></code> source file that will be
+compiled to a <code class="docutils literal notranslate"><span class="pre">sort_1_lgt.pl</span></code> Prolog file. This name scheme helps
+avoid file name conflicts (remember that all Logtalk entities share the
+same name space). To further prevent file name conflicts, depending on
+the backend compiler, the names of the intermediate Prolog files may
+include a directory hash.</p>
+<p>Logtalk source files may contain Prolog code interleaved with Logtalk
+entity definitions. Plain Prolog code is usually copied as-is to the
+corresponding Prolog output file (except, of course, if subject to the
+term-expansion mechanism). Prolog modules are compiled as objects. The
+following Prolog directives are processed when read (thus affecting the
+compilation of the source code that follows): <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">op/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_prolog_flag/2</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> Prolog directive may be used for defining an
+initialization goal to be executed when loading a source file. Most
+calls to Logtalk built-in predicates from file <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>
+directives are compiled for better performance.</p>
+<p>The text encoding used in a source file may be declared using the
+<a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive when
+running Logtalk with back-end Prolog compilers that support multiple
+encodings (check the <code class="docutils literal notranslate"><span class="pre">encoding_directive</span></code> flag in the adapter file of
+your Prolog compiler). The encoding used (and, in the case of a Unicode
+encoding, any BOM present) in a source file will be used for the
+intermediate Prolog file generated by the compiler. Logtalk uses the
+encoding names specified by
+<a class="reference external" href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA</a> (in those
+cases where a preferred MIME name alias is specified, the alias is used
+instead).</p>
+<p>Logtalk source files can include the text of other files by using the
+<a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive.
+Although there’s also a standard Prolog <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive, any
+occurrences of this directive in a Logtalk source file is handled by the
+Logtalk compiler, not by the backend Prolog compiler.</p>
+</div>
+<div class="section" id="portable-applications">
+<span id="programming-portability"></span><h3>Portable applications<a class="headerlink" href="#portable-applications" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk is compatible with almost all modern Prolog compilers. However,
+this does not necessarily imply that your Logtalk applications will have
+the same level of portability. If possible, you should only use in your
+applications Logtalk built-in predicates and ISO Prolog specified
+built-in predicates and arithmetic functions. If you need to use
+built-in predicates (or built-in arithmetic functions) that may not be
+available in other Prolog compilers, you should try to encapsulate the
+non-portable code in a small number of objects and provide a portable
+<strong>interface</strong> for that code through the use of Logtalk protocols. An
+example will be code that access operating-system specific features. The
+Logtalk compiler can warn you of the use of non-ISO specified built-in
+predicates and arithmetic functions by using the <code class="docutils literal notranslate"><span class="pre">portability/1</span></code>
+compiler flag.</p>
+</div>
+<div class="section" id="conditional-compilation">
+<span id="programming-cc"></span><h3>Conditional compilation<a class="headerlink" href="#conditional-compilation" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk supports conditional compilation within source files using the
+<a class="reference internal" href="../refman/directives/if_1.html#directives-if-1"><span class="std std-ref">if/1</span></a>, <a class="reference internal" href="../refman/directives/elif_1.html#directives-elif-1"><span class="std std-ref">elif/1</span></a>,
+<a class="reference internal" href="../refman/directives/else_0.html#directives-else-0"><span class="std std-ref">else/0</span></a>, and <a class="reference internal" href="../refman/directives/endif_0.html#directives-endif-0"><span class="std std-ref">endif/0</span></a> directives. This
+support is similar to the support found in several Prolog systems such
+as ECLiPSe, SWI-Prolog, or YAP.</p>
+</div>
+<div class="section" id="avoiding-common-errors">
+<span id="programming-errors"></span><h3>Avoiding common errors<a class="headerlink" href="#avoiding-common-errors" title="Permalink to this headline">¶</a></h3>
+<p>Try to write objects and protocol documentation <strong>before</strong> writing any
+other code; if you are having trouble documenting a predicate perhaps we
+need to go back to the design stage.</p>
+<p>Try to avoid lengthy hierarchies. Composition is often a better choice
+over inheritance for defining new objects (Logtalk supports
+component-based programming through the use of categories). In addition,
+prototype-based hierarchies are semantically simpler than class-based
+hierarchies.</p>
+<p>Dynamic predicates or dynamic entities are sometimes needed, but we
+should always try to minimize the use of non-logical features such as
+asserts and retracts.</p>
+<p>Since each Logtalk entity is independently compiled, if an object
+inherits a dynamic or a meta-predicate predicate, then the respective
+directives must be repeated to ensure a correct compilation.</p>
+<p>In general, Logtalk does not verify if a user predicate call/return
+arguments comply with the declared modes. On the other hand, Logtalk
+built-in predicates, built-in methods, and message sending control
+structures are fully checked for calling mode errors.</p>
+<p>Logtalk error handling strongly depends on the ISO compliance of the
+chosen Prolog compiler. For instance, the error terms that are generated
+by some Logtalk built-in predicates assume that the Prolog built-in
+predicates behave as defined in the ISO standard regarding error
+conditions. In particular, if your Prolog compiler does not support a
+<code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in predicate compliant with the ISO Prolog
+Standard definition, then the current version of the Logtalk compiler
+may not be able to detect misspell variables in your source code.</p>
+</div>
+<div class="section" id="coding-style-guidelines">
+<span id="programming-style"></span><h3>Coding style guidelines<a class="headerlink" href="#coding-style-guidelines" title="Permalink to this headline">¶</a></h3>
+<p>It is suggested that all code between an entity opening and closing
+directives be indented by one tab stop. When defining entity code, both
+directives and predicates, Prolog coding style guidelines may be
+applied. All Logtalk source files, examples, and standard library
+entities use tabs (the recommended setting is a tab width equivalent to
+4 spaces) for laying out code. Closed related entities can be defined in
+the same source file. However, for best performance, is often necessary
+to have an entity per source file. Entities that might be useful in
+different contexts (such as library entities) are best defined in their
+own source files.</p>
+</div>
+</div>
+<div class="section" id="running-a-logtalk-session">
+<span id="programming-session"></span><h2>Running a Logtalk session<a class="headerlink" href="#running-a-logtalk-session" title="Permalink to this headline">¶</a></h2>
+<p>We run Logtalk inside a normal Prolog session, after loading the
+necessary files. Logtalk extends but does not modify your Prolog
+compiler. We can freely mix Prolog queries with the sending of messages
+and our applications can be made of both normal Prolog clauses and
+object definitions.</p>
+<div class="section" id="starting-logtalk">
+<span id="programming-starting"></span><h3>Starting Logtalk<a class="headerlink" href="#starting-logtalk" title="Permalink to this headline">¶</a></h3>
+<p>Depending on your Logtalk installation, you may use a script or a
+shortcut to start Logtalk with your chosen Prolog compiler. On POSIX
+operating systems, the scripts should be available from the
+command-line; scripts are named upon the used Prolog compilers. On
+Windows, the shortcuts should be available from the Start Menu. If no
+scripts or shortcuts are available for your installation,
+operating-system, or Prolog compiler, you can always start a Logtalk
+session by performing the following steps:</p>
+<ol class="arabic simple">
+<li>Start your Prolog compiler.</li>
+<li>Load the appropriate adapter file for your compiler. Adapter files
+for most common Prolog compilers can be found in the <code class="docutils literal notranslate"><span class="pre">adapters</span></code>
+subdirectory.</li>
+<li>Load the library paths file corresponding to your Logtalk
+installation contained in the <code class="docutils literal notranslate"><span class="pre">paths</span></code> subdirectory.</li>
+<li>Load the Logtalk compiler/runtime files contained in the <code class="docutils literal notranslate"><span class="pre">compiler</span></code>
+subdirectory.</li>
 </ol>
-<p>
-Note that the adapter files, compiler/runtime files, and library paths file are Prolog source files. The predicate called to load (and compile) them depends on your Prolog compiler. In case of doubt, consult your Prolog compiler reference manual or take a look at the definition of the predicate <code>'$lgt_load_prolog_code'/3</code> in the corresponding adapter file.
-</p>
-<p>
-Most Prolog compilers support automatic loading of an initialization file, which can include the necessary directives to load both the Prolog adapter file and the Logtalk compiler. This feature, when available, allows automatic loading of Logtalk when you start your Prolog compiler.
-</p>
-
-<h3 id="programming_compiling">Compiling and loading your applications</h3>
-
-<p>
-Your applications will be made of source files containing your objects, protocols, and categories. The source files can be compiled to disk by calling the Logtalk built-in predicate  
-<a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a>:
-</p>
-<pre>| ?- logtalk_compile([source_file1, source_file2, ...]).</pre>
-<p>
-This predicate runs the compiler on each file and, if no fatal errors are found, outputs Prolog source files that can then be consulted or compiled in the usual way by your Prolog compiler.
-</p>
-<p>
-To compile to disk and also load into memory the source files we can use the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a>:
-</p>
-<pre>| ?- logtalk_load([source_file1, source_file2, ...]).</pre>
-<p>
-This predicate works in the same way of the predicate <code>logtalk_compile/1</code> but also loads the compiled files into memory. 
-</p>
-<p>
-Both predicates expect a source file name or a list of source file names as an argument. The Logtalk source file name extension, as defined in the adapter file (by default, <code>.lgt</code>), can be omitted.
-</p>
-<p>
-If you have more than a few source files then you may want to use a loader helper file containing the calls to the <code>logtalk_load/1-2</code> predicates. Consulting or compiling the loader file will then compile and load all your Logtalk entities into memory (see below for details).
-</p>
-<p>
-With most Prolog back-end compilers, you can use the shorthands <code>{File}</code> for <code>logtalk_load(File)</code> and <code>{File1, File2, ...}</code> for <code>logtalk_load([File1, File2, ...])</code>. The use these shorthands should be restricted to the Logtalk/Prolog top-level interpreter as they are not part of the language specification and may be commented out in case of conflicts with backend Prolog compiler features.
-</p>
-<p>
-The built-in predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_make_0.html"><code>logtalk_make/0</code></a> can be used to reload all modified source files. Files are also reloaded when the compilation mode changes. For example, assume that you have loaded your application files and found a bug. You can easily recompile the files in debug mode by using the queries:
-</p>
-<pre>| ?- set_logtalk_flag(debug, on).
+<p>Note that the adapter files, compiler/runtime files, and library paths
+file are Prolog source files. The predicate called to load (and compile)
+them depends on your Prolog compiler. In case of doubt, consult your
+Prolog compiler reference manual or take a look at the definition of the
+predicate <code class="docutils literal notranslate"><span class="pre">'$lgt_load_prolog_code'/3</span></code> in the corresponding adapter
+file.</p>
+<p>Most Prolog compilers support automatic loading of an initialization
+file, which can include the necessary directives to load both the Prolog
+adapter file and the Logtalk compiler. This feature, when available,
+allows automatic loading of Logtalk when you start your Prolog compiler.</p>
+</div>
+<div class="section" id="compiling-and-loading-your-applications">
+<span id="programming-compiling"></span><h3>Compiling and loading your applications<a class="headerlink" href="#compiling-and-loading-your-applications" title="Permalink to this headline">¶</a></h3>
+<p>Your applications will be made of source files containing your objects,
+protocols, and categories. The source files can be compiled to disk by
+calling the Logtalk built-in predicate <a class="reference internal" href="../refman/predicates/logtalk_compile_1.html#predicates-logtalk-compile-1"><span class="std std-ref">logtalk_compile/1</span></a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_compile([source_file1, source_file2, ...]).
+</pre></div>
+</div>
+<p>This predicate runs the compiler on each file and, if no fatal errors
+are found, outputs Prolog source files that can then be consulted or
+compiled in the usual way by your Prolog compiler.</p>
+<p>To compile to disk and also load into memory the source files we can use
+the Logtalk built-in predicate <a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load([source_file1, source_file2, ...]).
+</pre></div>
+</div>
+<p>This predicate works in the same way of the predicate
+<code class="docutils literal notranslate"><span class="pre">logtalk_compile/1</span></code> but also loads the compiled files into memory.</p>
+<p>Both predicates expect a source file name or a list of source file names
+as an argument. The Logtalk source file name extension, as defined in
+the adapter file (by default, <code class="docutils literal notranslate"><span class="pre">.lgt</span></code>), can be omitted.</p>
+<p>If you have more than a few source files then you may want to use a
+loader helper file containing the calls to the <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code>
+predicates. Consulting or compiling the loader file will then compile
+and load all your Logtalk entities into memory (see below for details).</p>
+<p>With most Prolog back-end compilers, you can use the shorthands
+<code class="docutils literal notranslate"><span class="pre">{File}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_load(File)</span></code> and <code class="docutils literal notranslate"><span class="pre">{File1,</span> <span class="pre">File2,</span> <span class="pre">...}</span></code> for
+<code class="docutils literal notranslate"><span class="pre">logtalk_load([File1,</span> <span class="pre">File2,</span> <span class="pre">...])</span></code>. The use these shorthands should
+be restricted to the Logtalk/Prolog top-level interpreter as they are
+not part of the language specification and may be commented out in case
+of conflicts with backend Prolog compiler features.</p>
+<p>The built-in predicate <a class="reference internal" href="../refman/predicates/logtalk_make_0.html#predicates-logtalk-make-0"><span class="std std-ref">logtalk_make/0</span></a> can be
+used to reload all modified source files. Files are also reloaded when
+the compilation mode changes. For example, assume that you have loaded
+your application files and found a bug. You can easily recompile the
+files in debug mode by using the queries:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(debug, on).
 ...
 
 | ?- logtalk_make.
 ...
-</pre>
-<p>
-After debugging and fixing the bugs, you can reload the files in normal (or optimized) mode by turning the debug flag off and calling the <code>logtalk_make/0</code> predicate again.
-</p>
-<p>
-An extended version of this predicate, <a title="Consult reference manual" href="../refman/predicates/logtalk_make_1.html"><code>logtalk_make/1</code></a>, accepts <code>all</code>, <code>clean</code>, <code>check</code>, <code>circular</code>, <code>documentation</code>, and <code>caches</code> arguments for, respectively, reloading modified Logtalk source files, deleting any intermediate files generated by the compilation of Logtalk source files, checking for code issues, listing of circular dependencies, generating documentation, and deleting dynamic binding caches. With most Prolog backend compilers, you can use the shorthands <code>{*}</code> for <code>logtalk_make(all)</code>, <code>{!}</code> for <code>logtalk_make(clean)</code>, <code>{?}</code> for <code>logtalk_make(missing)</code>, <code>{@}</code> for <code>logtalk_make(circular)</code>, <code>{#}</code> for <code>logtalk_make(documentation)</code>, and <code>{$}</code> for <code>logtalk_make(caches)</code>. The <code>logtalk_make(clean)</code> goal can be specially useful before switching backend Prolog compilers as the generated intermediate files may not be compatible. The <code>logtalk_make(caches)</code> goal is usually used when benchmarking compiler performance improvements.
-</p>
-
-<h3 id="programming_loaders">Loader utility files</h3>
-
-<p>
-Most examples directories contain a Logtalk utility file that can be used to load all included source files. These loader utility files are usually named <code>loader.lgt</code> or contain the word "loader" in their name. Loader files are ordinary source file and thus compiled and loaded like any source file. For an example loader file named <code>loader.lgt</code> we would type:
-</p>
-<pre>| ?- logtalk_load(loader).</pre>
-<p>
-Usually these files contain a call to the Logtalk built-in predicates <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> (e.g. for setting global, <em>project-specific</em>, flag values) and <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> or <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> (for loading project files), wrapped inside a Prolog <code>initialization/1</code> directive. For instance, if your code is split in three Logtalk source files named <code>source1.lgt</code>, <code>source2.lgt</code>, and <code>source3.lgt</code>, then the contents of your loader file could be:
-</p>
-<pre>:- initialization((
-    % set project-specific global flags
-    set_logtalk_flag(events, allow),
-    % load the project source files
-    logtalk_load([source1, source2, source3])
-)).</pre>
-<p>
-Another example of directives that are often used in a loader file would be <code>op/3</code> directives declaring global operators needed by your application. Loader files are also often used for setting source file-specific compiler flags (this is useful even when you only have a single source file if you always load it with using the same set of compiler flags). For example:
-</p>
-<pre>:- initialization((
-    % set project-specific global flags
-    set_logtalk_flag(underscore_variables, dont_care),
-    set_logtalk_flag(source_data, off),
-    % load the project source files
-    logtalk_load(
+</pre></div>
+</div>
+<p>After debugging and fixing the bugs, you can reload the files in normal
+(or optimized) mode by turning the debug flag off and calling the
+<code class="docutils literal notranslate"><span class="pre">logtalk_make/0</span></code> predicate again.</p>
+<p>An extended version of this predicate, <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a>,
+accepts <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">clean</span></code>, <code class="docutils literal notranslate"><span class="pre">check</span></code>, <code class="docutils literal notranslate"><span class="pre">circular</span></code>, <code class="docutils literal notranslate"><span class="pre">documentation</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">caches</span></code> arguments for, respectively, reloading modified Logtalk
+source files, deleting any intermediate files generated by the
+compilation of Logtalk source files, checking for code issues, listing
+of circular dependencies, generating documentation, and deleting dynamic
+binding caches. With most Prolog backend compilers, you can use the
+shorthands <code class="docutils literal notranslate"><span class="pre">{*}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_make(all)</span></code>, <code class="docutils literal notranslate"><span class="pre">{!}</span></code> for
+<code class="docutils literal notranslate"><span class="pre">logtalk_make(clean)</span></code>, <code class="docutils literal notranslate"><span class="pre">{?}</span></code> for <code class="docutils literal notranslate"><span class="pre">logtalk_make(missing)</span></code>, <code class="docutils literal notranslate"><span class="pre">{&#64;}</span></code>
+for <code class="docutils literal notranslate"><span class="pre">logtalk_make(circular)</span></code>, <code class="docutils literal notranslate"><span class="pre">{#}</span></code> for
+<code class="docutils literal notranslate"><span class="pre">logtalk_make(documentation)</span></code>, and <code class="docutils literal notranslate"><span class="pre">{$}</span></code> for
+<code class="docutils literal notranslate"><span class="pre">logtalk_make(caches)</span></code>. The <code class="docutils literal notranslate"><span class="pre">logtalk_make(clean)</span></code> goal can be
+specially useful before switching backend Prolog compilers as the
+generated intermediate files may not be compatible. The
+<code class="docutils literal notranslate"><span class="pre">logtalk_make(caches)</span></code> goal is usually used when benchmarking compiler
+performance improvements.</p>
+</div>
+<div class="section" id="loader-utility-files">
+<span id="programming-loaders"></span><h3>Loader utility files<a class="headerlink" href="#loader-utility-files" title="Permalink to this headline">¶</a></h3>
+<p>Most examples directories contain a Logtalk utility file that can be
+used to load all included source files. These loader utility files are
+usually named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> or contain the word “loader” in their name.
+Loader files are ordinary source file and thus compiled and loaded like
+any source file. For an example loader file named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> we
+would type:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(loader).
+</pre></div>
+</div>
+<p>Usually these files contain a call to the Logtalk built-in predicates
+<a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
+(e.g. for setting global, <em>project-specific</em>, flag values) and
+<a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> or <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> (for
+loading project files), wrapped inside a Prolog <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>
+directive. For instance, if your code is split in three Logtalk source
+files named <code class="docutils literal notranslate"><span class="pre">source1.lgt</span></code>, <code class="docutils literal notranslate"><span class="pre">source2.lgt</span></code>, and <code class="docutils literal notranslate"><span class="pre">source3.lgt</span></code>, then
+the contents of your loader file could be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="c">% set project-specific global flags</span>
+    <span class="k">set_logtalk_flag</span>(events, allow),
+    <span class="c">% load the project source files</span>
+    <span class="k">logtalk_load</span>([source1, source2, source3])
+)).
+</pre></div>
+</div>
+<p>Another example of directives that are often used in a loader file would
+be <code class="docutils literal notranslate"><span class="pre">op/3</span></code> directives declaring global operators needed by your
+application. Loader files are also often used for setting source
+file-specific compiler flags (this is useful even when you only have a
+single source file if you always load it with using the same set of
+compiler flags). For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="c">% set project-specific global flags</span>
+    <span class="k">set_logtalk_flag</span>(underscore_variables, dont_care),
+    <span class="k">set_logtalk_flag</span>(source_data, off),
+    <span class="c">% load the project source files</span>
+    <span class="k">logtalk_load</span>(
         [source1, source2, source3],
-        % source file-specific flags
+        <span class="c">% source file-specific flags</span>
         [portability(warning)]),
-    logtalk_load(
+    <span class="k">logtalk_load</span>(
         [source4, source5],
-        % source file-specific flags
+        <span class="c">% source file-specific flags</span>
         [portability(silent)])
-)).</pre>
-<p>
-To take the best advantage of loader files, define a clause for the multifile and dynamic <code>logtalk_library_path/2</code> predicate for the directory containing your source files as explained in the next section.
-</p>
-<p>
-A common mistake is to try to set compiler flags using <code>logtalk_load/2</code> with a loader file. For example, by writing:
-</p>
-<pre>| ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).</pre>
-<p>
-This will not work as you might expect as the compiler flags will only be used in the compilation of the <code>loader.lgt</code> file itself and will not affect the compilation of files loaded through the <code>initialization/1</code> directive contained on the loader file.
-</p>
+)).
+</pre></div>
+</div>
+<p>To take the best advantage of loader files, define a clause for the
+multifile and dynamic <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate for the
+directory containing your source files as explained in the next section.</p>
+<p>A common mistake is to try to set compiler flags using
+<code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> with a loader file. For example, by writing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).
+</pre></div>
+</div>
+<p>This will not work as you might expect as the compiler flags will only
+be used in the compilation of the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file itself and will
+not affect the compilation of files loaded through the
+<code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive contained on the loader file.</p>
+</div>
+<div class="section" id="libraries-of-source-files">
+<span id="programming-libraries"></span><h3>Libraries of source files<a class="headerlink" href="#libraries-of-source-files" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk defines a <em>library</em> simply as a directory containing source
+files. Library locations can be specified by defining or asserting
+clauses for the dynamic and multifile predicate
+<a class="reference internal" href="../refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
 
-<h3 id="programming_libraries">Libraries of source files</h3>
+<span class="k">logtalk_library_path</span>(shapes, <span class="s">&#39;$LOGTALKUSER/examples/shapes/&#39;</span>).
+</pre></div>
+</div>
+<p>The first argument of the predicate is used as an alias for the path on
+the second argument. Library aliases may also be used on the second
+argument. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
 
-<p>
-Logtalk defines a <em>library</em> simply as a directory containing source files. Library locations can be specified by defining or asserting clauses for the dynamic and multifile predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_library_path_2.html"><code>logtalk_library_path/2</code></a>. For example:
-</p>
-<pre>:- multifile(logtalk_library_path/2).
-:- dynamic(logtalk_library_path/2).
-
-logtalk_library_path(shapes, '$LOGTALKUSER/examples/shapes/').</pre>
-<p>
-The first argument of the predicate is used as an alias for the path on the second argument. Library aliases may also be used on the second argument. For example:
-</p>
-<pre>:- multifile(logtalk_library_path/2).
-:- dynamic(logtalk_library_path/2).
-
-logtalk_library_path(lgtuser, '$LOGTALKUSER/').
-logtalk_library_path(examples, lgtuser('examples/')).
-logtalk_library_path(viewpoints, examples('viewpoints/')).</pre>
-<p>
-This allows us to load a library source file without the need to first change the current working directory to the library directory and then back to the original directory. For example, in order to load a <code>loader.lgt</code> file, contained in a library named <code>viewpoints</code>, we just need to type:
-</p>
-<pre>| ?- logtalk_load(viewpoints(loader)). </pre>
-<p>
-The best way to take advantage of this feature is to load at startup a source file containing clauses for the <code>logtalk_library_path/2</code> predicate needed for all available libraries. This allows us to load library source files or entire libraries without worrying about libraries paths, improving code portability. The directory paths on the second argument should always end with the path directory separator character. Most back-end Prolog compilers allows the use of environment variables in the second argument of the <code>logtalk_library_path/2</code> predicate. Use of POSIX relative paths (e.g. <code>'../'</code> or <code>'./'</code>) for top-level library directories (e.g. <code>lgtuser</code> in the example above) is not advised as different back-end Prolog compilers may start with different initial working directories, which may result in portability problems of your loader files.
-</p>
-<p>
-The library notation provides functionality inspired by the <code>file_search_path/2</code> mechanism introduced by Quintus Prolog and later adopted by some other Prolog compilers.
-</p>
-
-<h3 id="programming_linter">Compiler linter</h3>
-
-<p>
-The compiler includes a linter that checks for a wide range of possible problems in source files. Notably, the compiler checks for unknown entities, unknown predicates, undefined predicates (i.e. predicates that are declared but not defined), missing directives (including missing <code>dynamic/1</code> and <code>meta_predicate/1</code> directives), redefined built-in predicates, calls to non-portable predicates, singleton variables, tautology and falsehood goals (i.e. goals that are can be replaced by <code>true</code> or <code>fail</code>), and trivial fails (i.e. calls to predicates with no match clauses). Some of the linter warnings are controlled by compiler flags. See the next section for details.
-</p>
-
-<h3 id="programming_flags">Compiler flags</h3>
-
-<p>
-The <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> and <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a> always use the current set of default compiler flags as specified in your settings file and the Logtalk adapter files or changed for the current session using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a>. Although the default flag values cover the usual cases, you may want to use a different set of flag values while compiling or loading some of your Logtalk source files. This can be accomplished by using the <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_2.html"><code>logtalk_compile/2</code></a> built-in predicates. These two predicates accept a list of options affecting how a Logtalk source file is compiled and loaded:
-</p>
-<pre>| ?- logtalk_compile(Files, Options).</pre>
-<p>
-or:
-</p>
-<pre>| ?- logtalk_load(Files, Options).</pre>
-<p>
-In fact, the <code>logtalk_load/1</code> and <code>logtalk_compile/1</code> predicates are just shortcuts to the extended versions called with the default compiler flag values. The options are represented by a compound term where the functor is the flag name and the sole argument is the flag value.
-</p>
-<p>
-We may also change the default flag values from the ones loaded from the adapter file by using the <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> built-in predicate. For example:
-</p>
-<pre>| ?- set_logtalk_flag(unknown_entities, silent).</pre>
-<p>
-The current default flags values can be enumerated using the <a title="Consult reference manual" href="../refman/predicates/current_logtalk_flag_2.html"><code>current_logtalk_flag/2</code></a> built-in predicate:
-</p>
-<pre>| ?- current_logtalk_flag(unknown_entities, Value).
+<span class="k">logtalk_library_path</span>(lgtuser, <span class="s">&#39;$LOGTALKUSER/&#39;</span>).
+<span class="k">logtalk_library_path</span>(examples, lgtuser(<span class="s">&#39;examples/&#39;</span>)).
+<span class="k">logtalk_library_path</span>(viewpoints, examples(<span class="s">&#39;viewpoints/&#39;</span>)).
+</pre></div>
+</div>
+<p>This allows us to load a library source file without the need to first
+change the current working directory to the library directory and then
+back to the original directory. For example, in order to load a
+<code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file, contained in a library named <code class="docutils literal notranslate"><span class="pre">viewpoints</span></code>, we
+just need to type:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(viewpoints(loader)).
+</pre></div>
+</div>
+<p>The best way to take advantage of this feature is to load at startup a
+source file containing clauses for the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
+predicate needed for all available libraries. This allows us to load
+library source files or entire libraries without worrying about
+libraries paths, improving code portability. The directory paths on the
+second argument should always end with the path directory separator
+character. Most back-end Prolog compilers allows the use of environment
+variables in the second argument of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
+predicate. Use of POSIX relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) for
+top-level library directories (e.g. <code class="docutils literal notranslate"><span class="pre">lgtuser</span></code> in the example above) is
+not advised as different back-end Prolog compilers may start with
+different initial working directories, which may result in portability
+problems of your loader files.</p>
+<p>The library notation provides functionality inspired by the
+<code class="docutils literal notranslate"><span class="pre">file_search_path/2</span></code> mechanism introduced by Quintus Prolog and later
+adopted by some other Prolog compilers.</p>
+</div>
+<div class="section" id="compiler-linter">
+<span id="programming-linter"></span><h3>Compiler linter<a class="headerlink" href="#compiler-linter" title="Permalink to this headline">¶</a></h3>
+<p>The compiler includes a linter that checks for a wide range of possible
+problems in source files. Notably, the compiler checks for unknown
+entities, unknown predicates, undefined predicates (i.e. predicates that
+are declared but not defined), missing directives (including missing
+<code class="docutils literal notranslate"><span class="pre">dynamic/1</span></code> and <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives), redefined built-in
+predicates, calls to non-portable predicates, singleton variables,
+tautology and falsehood goals (i.e. goals that are can be replaced by
+<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">fail</span></code>), and trivial fails (i.e. calls to predicates with
+no match clauses). Some of the linter warnings are controlled by
+compiler flags. See the next section for details.</p>
+</div>
+<div class="section" id="compiler-flags">
+<span id="programming-flags"></span><h3>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> and <a class="reference internal" href="../refman/predicates/logtalk_compile_1.html#predicates-logtalk-compile-1"><span class="std std-ref">logtalk_compile/1</span></a>
+always use the current set of default compiler flags as specified in
+your settings file and the Logtalk adapter files or changed for the
+current session using the built-in predicate
+<a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>.
+Although the default flag values cover the usual cases, you may want to
+use a different set of flag values while compiling or loading some of
+your Logtalk source files. This can be accomplished by using the
+<a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> or the <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a>
+built-in predicates. These two predicates accept a list of options
+affecting how a Logtalk source file is compiled and loaded:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_compile(Files, Options).
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(Files, Options).
+</pre></div>
+</div>
+<p>In fact, the <code class="docutils literal notranslate"><span class="pre">logtalk_load/1</span></code> and <code class="docutils literal notranslate"><span class="pre">logtalk_compile/1</span></code> predicates are
+just shortcuts to the extended versions called with the default compiler
+flag values. The options are represented by a compound term where the
+functor is the flag name and the sole argument is the flag value.</p>
+<p>We may also change the default flag values from the ones loaded from the
+adapter file by using the <a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
+built-in predicate. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(unknown_entities, silent).
+</pre></div>
+</div>
+<p>The current default flags values can be enumerated using the
+<a class="reference internal" href="../refman/predicates/current_logtalk_flag_2.html#predicates-current-logtalk-flag-2"><span class="std std-ref">current_logtalk_flag/2</span></a> built-in predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_logtalk_flag(unknown_entities, Value).
 
 Value = silent
-yes</pre>
-<p>
-Logtalk also implements a <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive, which can be used to set flags within a source file or within an entity. For example:
-</p>
-<pre>% compile all objects in the source file with event support
-:- set_logtalk_flag(events, allow).
+yes
+</pre></div>
+</div>
+<p>Logtalk also implements a <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
+directive, which can be used to set flags within a source file or within
+an entity. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% compile all objects in the source file with event support</span>
+<span class="p">:- </span><span class="k">set_logtalk_flag</span>(events, allow).
 
-:- object(foo).
+<span class="p">:- </span><span class="k">object</span>(foo).
 
-    % compile this object with support for dynamic predicate declarations
-    :- set_logtalk_flag(dynamic_declarations, allow).
+    <span class="c">% compile this object with support</span>
+    <span class="c">% for dynamic predicate declarations</span>
+<span class="p">    :- </span><span class="k">set_logtalk_flag</span>(dynamic_declarations, allow).
     ...
 
-:- end_object.
+<span class="p">:- </span><span class="k">end_object.</span>
 
-...</pre>
-<p>
-Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to the entity or to the source file containing it.
-</p>
-
-<h4>Version flags</h4>
-
-	<dl>
-		<dt><code>version_data(Value)</code></dt>
-			<dd>Read-only flag whose value is the compound term <code>logtalk(Major,Minor,Patch,Status)</code>. The first three arguments are integers and the last argument is an atom, possibly empty, representing version status: <code>aN</code> for alpha versions, <code>bN</code> for beta versions, <code>rcN</code> for release candidates (with <code>N</code> being a natural number), and <code>stable</code> for stable versions. The <code>version_data</code> flag is also a de facto standard for Prolog compilers.</dd>
-	</dl>
-
-<h4>Lint flags</h4>
-
-	<dl>
-		<dt><code>unknown_entities(Option)</code></dt>
-			<dd>Controls the unknown entity warnings, resulting from loading an entity that references some other entity that is not currently loaded. Possible option values are <code>warning</code> (the usual default) and <code>silent</code>. Note that these warnings are not always avoidable, specially when using reflective designs of class-based hierarchies.</dd>
-	</dl>
-	<dl>
-		<dt><code>unknown_predicates(Option)</code></dt>
-			<dd>Defines the compiler behavior when calls to unknown predicates (or non-terminals) are found. An unknown predicate is a called predicate that is neither locally declared or defined. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>undefined_predicates(Option)</code></dt>
-			<dd>Defines the compiler behavior when calls to declared but undefined predicates (or non-terminals) are found. Note that calls to declared but undefined predicates (or non-terminals) fail as per closed-world assumption. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>portability(Option)</code></dt>
-			<dd>Controls the non-ISO specified Prolog built-in predicate and non-ISO specified Prolog built-in arithmetic function calls warnings plus use of non-standard Prolog flags and/or flag values. Possible option values are <code>warning</code> and <code>silent</code> (the usual default).</dd>
-	</dl>
-	<dl>
-		<dt><code>missing_directives(Option)</code></dt>
-			<dd>Controls the missing predicate directive warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>duplicated_directives(Option)</code></dt>
-			<dd>Controls the duplicated predicate directive warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended). Note that conflicting directives for the same predicate are handled as errors, not as duplicated directive warnings.</dd>
-	</dl>
-	<dl>
-		<dt><code>trivial_goal_fails(Option)</code></dt>
-			<dd>Controls the printing of warnings warnings for calls to local static predicates with no matching clauses. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>always_true_or_false_goals(Option)</code></dt>
-			<dd>Controls the printing of warnings for goals that are always true or false. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>lambda_variables(Option)</code></dt>
-			<dd>Controls the printing of lambda variable related warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>suspicious_calls(Option)</code></dt>
-			<dd>Controls the printing of suspicious call warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>redefined_built_ins(Option)</code></dt>
-			<dd>Controls the Logtalk and Prolog built-in predicate redefinition warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code>. Warnings about redefined Prolog built-in predicates are often the result of running a Logtalk application on several Prolog compilers as each Prolog compiler defines its set of built-in predicates.</dd>
-	</dl>
-	<dl>
-		<dt><code>singleton_variables(Option)</code></dt>
-			<dd>Controls the singleton variable warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
-	</dl>
-	<dl>
-		<dt><code>underscore_variables(Option)</code></dt>
-			<dd>Controls the interpretation of variables that start with an underscore (excluding the anonymous variable) that occur once in a term as either don't care variables or singleton variables. Possible option values are <code>dont_care</code> and <code>singletons</code> (the usual default). Note that, depending on your Prolog compiler, the <code>read_term/3</code> built-in predicate may report variables that start with an underscore as singleton variables. There is no standard behavior, hence this option.</dd>
-	</dl>
-
-<h4>Optional features compilation flags</h4>
-
-	<dl>
-		<dt><code>complements(Option)</code></dt>
-			<dd>Allows objects to be compiled with support for complementing categories turned off in order to improve performance and security. Possible option values are <code>allow</code> (allow complementing categories to override local object predicate declarations and definitions), <code>restrict</code> (allow complementing categories to add predicate declarations and definitions to an object but not to override them), and <code>deny</code> (ignore complementing categories; the usual default). This option can be used on a per-object basis. Note that changing this option is of no consequence for objects already compiled and loaded.</dd>
-	</dl>
-	<dl>
-		<dt><code>dynamic_declarations(Option)</code></dt>
-			<dd>Allows objects to be compiled with support for dynamic declaration of new predicates turned off in order to improve performance and security. Possible option values are <code>allow</code> and <code>deny</code> (the usual default). This option can be used on a per-object basis. Note that changing this option is of no consequence for objects already compiled and loaded. This option is only checked when sending an <code>asserta/1</code> or <code>assertz/1</code> message to an object. Local asserting of new predicates is always allowed.</dd>
-	</dl>
-	<dl>
-		<dt><code>events(Option)</code></dt>
-			<dd>Allows message sending calls to be compiled with event-driven programming support disable in order to improve performance. Possible option values are <code>allow</code> and <code>deny</code> (the usual default). Objects (and categories) compiled with this option set to <code>deny</code> use optimized code for message-sending calls that does not trigger events. As such, this option can be used on a per-object (or per-category) basis. Note that changing this option is of no consequence for objects already compiled and loaded.</dd>
-	</dl>
-	<dl>
-		<dt><code>context_switching_calls(Option)</code></dt>
-			<dd>Allows context switching calls (<code>&lt;&lt;/2</code>) to be either allowed or denied. Possible option values are <code>allow</code> and <code>deny</code>. The default flag vale is <code>allow</code>. Note that changing this option is of no consequence for objects already compiled and loaded.</dd>
-	</dl>
-
-<h4>Back-end Prolog compiler and loader flags</h4>
-
-	<dl>
-		<dt><code>prolog_compiler(Flags)</code></dt>
-			<dd>List of compiler flags for the generated Prolog files. The valid flags are specific to the used Prolog backend compiler. The usual default is the empty list. These flags are passed to the backend Prolog compiler built-in predicate that is responsible for compiling to disk a Prolog file. For Prolog compilers that don't provide separate predicates for compiling and loading a file, use instead the <code>prolog_loader/1</code> flag.</dd>
-	</dl>
-	<dl>
-		<dt><code>prolog_loader(Flags)</code></dt>
-			<dd>List of loader flags for the generated Prolog files. The valid flags are specific to the used Prolog backend compiler. The usual default is the empty list. These flags are passed to the backend Prolog compiler built-in predicate that is responsible for loading a (compiled) Prolog file.</dd>
-	</dl>
-
-<h4>Other flags</h4>
-
-	<dl>
-		<dt><code>scratch_directory(Directory)</code></dt>
-			<dd>Sets the directory to be used to store the temporary files generated when compiling Logtalk source files. This directory can be specified using an atom or using library notation. The directory must always end with a slash. The default value is a sub-directory of the source files directory, either <code>'./lgt_tmp/'</code> or <code>'./.lgt_tmp/'</code> (depending on the back-end Prolog compiler and operating-system). Relative directories must always start with <code>'./'</code> due to the lack of a portable solution to check if a path is relative or absolute.</dd>
-	</dl>
-	<dl>
-		<dt><code>report(Option)</code></dt>
-			<dd>Controls the default printing of messages. Possible option values are <code>on</code> (by usual default, print all messages that are not intercepted by the user), <code>warnings</code> (only print warning and error messages that are not intercepted by the user), and <code>off</code> (do not print any messages that are not intercepted by the user).</dd>
-	</dl>
-	<dl>
-		<dt><code>code_prefix(Character)</code></dt>
-			<dd>Enables the definition of prefix for all functors of Prolog code generated by the Logtalk compiler. The option value must be a single character atom. Its default value is <code>'$'</code>. Specifying a code prefix provides a way to solve possible conflicts between Logtalk compiled code and other Prolog code. In addition, some Prolog compilers automatically hide predicates whose functor start with a specific prefix such as the character <code>$</code>. Although this is not a read-only flag, it should only be changed at startup time and before loading any source files.</dd>
-	</dl>
-	<dl>
-		<dt><code>optimize(Option)</code></dt>
-			<dd>Controls the compiler optimizations. Possible option values are <code>on</code> (used by default for deployment) and <code>off</code> (used by default for development). Compiler optimizations include the use of static binding whenever possible, the removal of redundant calls to <code>true/0</code> from predicate clauses, the removal of redundant unifications when compiling grammar rules, and inlining of predicate definitions with a single clause that links to a local predicate, to a plain Prolog built-in (or foreign) predicate, or to a Prolog module predicate with the same arguments. Care should be taken when developing applications with this flag turned on as changing and reloading a file may render static binding optimizations invalid for code defining in other loaded files. Turning on this flag automatically turns off the <code>debug</code> flag.</dd>
-	</dl>
-	<dl>
-		<dt><code>source_data(Option)</code></dt>
-			<dd>Defines how much information is retained when compiling a source file. Possible option values are <code>on</code> (the usual default for development) and <code>off</code>. With this flag set to <code>on</code>, Logtalk will keep the information represented using documenting directives plus source location data (including source file names and line numbers). This information can be retrieved using reflection and is useful for documenting, debugging, and integration with third-party development tools. This flag can be turned off in order to generate more compact code.</dd>
-	</dl>
-	<dl>
-		<dt><code>debug(Option)</code></dt>
-			<dd>Controls the compilation of source files in debug mode (the Logtalk default debugger can only be used with files compiled in this mode). Also controls, by default, printing of <code>debug></code> and <code>debug(Topic)</code> messages. Possible option values are <code>on</code> and <code>off</code> (the usual default). Turning on this flag automatically turns off the <code>optimize</code> flag.</dd>
-	</dl>
-	<dl>
-		<dt><code>reload(Option)</code></dt>
-			<dd>Defines the reloading behavior for source files. Possible option values are <code>skip</code> (skip loading of already loaded files; this value can be used to get similar functionality to the Prolog directive <code>ensure_loaded/1</code> but should be used only with fully debugged code), <code>changed</code> (the usual default; reload files only when they are changed since last loaded provided that the any explicit flags and the compilation mode are the same as before), and <code>always</code> (always reload files).</dd>
-	</dl>
-	<dl>
-		<dt><code>relative_to(Directory)</code></dt>
-			<dd>Defines a base directory for resolving relative source file paths. The default value is the directory of the source file being compiled.</dd>
-	</dl>
-	<dl>
-		<dt><code>hook(Object)</code></dt>
-			<dd>Allows the definition of compiler hooks that are called for each term read form a source file and for each compiled goal. This option specifies an object (which can be the pseudo-object <code>user</code>) implementing the <code>expanding</code> built-in protocol. The hook object must be compiled and loaded when this option is used. It's also possible to specify a Prolog module instead of a Logtalk object but the module must be pre-loaded and its identifier must be different from any object identifier. The object is expected to define clauses for the <a title="Consult reference manual" href="../refman/methods/term_expansion_2.html"><code>term_expansion/2</code></a> and <a title="Consult reference manual" href="../refman/methods/goal_expansion_2.html"><code>goal_expansion/2</code></a> predicates. In the case of the <code>term_expansion/2</code> predicate, the first argument is the term read form the source file while the second argument returns a list of terms corresponding to the expansion of the first argument. In the case of the <code>goal_expansion/2</code> predicate, the second argument should be a goal resulting from the expansion of the goal in the first argument. The predicate <code>goal_expansion/2</code> is recursively called on the expanded goal until a fixed point is reached. Care must be taken to avoid compilation loops.</dd>
-	</dl>
-	<dl>
-		<dt><code>clean(Option)</code></dt>
-			<dd>Controls cleaning of the intermediate Prolog files generated when compiling Logtalk source files. Possible option values are <code>off</code> and <code>on</code> (the usual default). When turned on, this flag also forces recompilation of all source files, disregarding any existing intermediate files. Thus, it is strong advisable to turn on this flag when switching backend Prolog compilers as the intermediate files generated by the compilation of source files may not be portable (due to differences in the implementation of the standard <code>write_canonical/2</code> predicate).</dd>
-	</dl>
-
-<h4>User-defined flags</h4>
-
-Logtalk provides a <a title="Consult reference manual" href="../refman/predicates/create_logtalk_flag_3.html"><code>create_logtalk_flag/3</code></a> predicate that can be used for defining new flags.
-
-
-<h3 id="programming_smart">Reloading and smart compilation of source files</h3>
-
-<p>
-As a general rule, reloading source files should never occur in production code and should be handled with care in development code. Reloading a Logtalk source file usually requires reloading the intermediate Prolog file that is generated by the Logtalk compiler. The problem is that there is no standard behavior for reloading Prolog files. For static predicates, almost all Prolog compilers replace the old definitions with the new ones. However, for dynamic predicates, the behavior depends on the Prolog compiler. Most compilers replace the old definitions but some of them simply append the new ones, which usually leads to trouble. See the compatibility notes for the back-end Prolog compiler you intend to use for more information. There is an additional potential problem when using multi-threading programming. Reloading a threaded object does not recreate from scratch its old message queue, which may still be in use (e.g. threads may be waiting on it).
-</p>
-<p>
-When using library entities and stable code, you can avoid reloading the corresponding source files (and, therefore, recompiling them) by setting the compiler flag <code>reload</code> to <code>skip</code>. For code under development, you can turn off the <code>clean</code> flag to avoid recompiling files that have not been modified since last compilation (assuming that back-end Prolog compiler that you are using supports retrieving of file modification dates). You can disable deleting the intermediate files generated when compiling source files by changing the default flag value in your settings file, by using the corresponding compiler flag with the compiling and loading built-in predicates, or, for the remaining of a working session, by using the call:
-</p>
-<pre>| ?- set_logtalk_flag(clean, off).</pre>
-<p>
-Some caveats that you should be aware. First, some warnings that might be produced when compiling a source file will not show up if the corresponding object file is up-to-date because the source file is not being (re)compiled. Second, if you are using several Prolog compilers with Logtalk, be sure to perform the first compilation of your source files with smart compilation turned off: the intermediate Prolog files generated by the Logtalk compiler may be not compatible across Prolog compilers or even for the same Prolog compiler across operating systems (e.g. due to the use of different character encodings or end-of-line characters).
-</p>
-
-<h3 id="programming_batch">Using Logtalk for batch processing</h3>
-
-<p>
-If you use Logtalk for batch processing, you probably want to turn off the option <code>report</code> to suppress all messages of type <code>banner</code>, <code>comment</code>, <code>comment(_)</code>, <code>warning</code>, and <code>warning(_)</code> that are normally printed. Note that error messages and messages providing information requested by the user will still be printed.
-</p>
-
-<h2 id="programming_performance">Optimizing performance</h2>
-
-<p>
-The default compiler flag settings are appropriated for the <strong>development</strong> but not necessarily for the <strong>deployment</strong> of applications. To minimize the generated code size, turn the <code>source_data</code> flag off. To optimize runtime performance, turn on the <code>optimize</code> flag.
-</p>
-<p>
-Pay special attention to file compilation/loading order. Whenever possible, compile/load your files taking into account file dependencies to enable static binding optimizations. The easiest way to find the dependencies and thus the best compilation/loading order is to use the <code>diagrams</code> tool to generate a file dependency diagram for your application.
-</p>
-<p>
-Minimize the use of dynamic predicates. Parametric objects can often be used in alternative. When dynamic predicates cannot be avoided, try to make them private. Declaring a dynamic predicate also as a private predicate allows the compiler to optimize local calls to the database methods (e.g. <code>assertz/1</code> and <code>retract/1</code>) that handle the predicate.
-</p>
-<p>
-Sending a message to <em>self</em> implies dynamic binding but there are often cases where <code>::/1</code> is misused to call an imported or inherited predicate that is never going to be redefined in a descendant. In these cases, a <em>super</em> call, <code>^^/1</code>, can be used instead with the benefit of enabling static binding. Most of the guidelines for writing efficient Prolog code also apply to Logtalk code. In particular, define your predicates to take advantage of first-argument indexing. In the case of recursive predicates, define them as tail-recursive predicates whenever possible.
-</p>
-
-<h2 id="programming_debugging">Debugging Logtalk applications</h2>
-
-<p>
-The Logtalk distribution includes in its <code>tools</code> directory a command-line debugger, implemented as a Logtalk application. It can be loaded by typing:
-</p>
-<pre>| ?- logtalk_load(debugger(loader)).</pre>
-<p>
-This tool implements debugging features similar to those found on most Prolog systems. There are some differences, however, between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features when compared with some of the more sophisticated Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk decorates clauses with source information to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
-</p>
-
-<h3 id="programming_debug_mode">Compiling source files and entities in debug mode</h3>
-
-<p>
-Compilation of source files in debug mode is controlled by the compiler flag <code>debug</code>. The default value for this flag, usually <code>off</code>, is defined in the adapter files. Its value may be changed at runtime by writing:
-</p>
-<pre>| ?- set_logtalk_flag(debug, on).</pre>
-<p>
-In alternative, if we want to compile only some source files in debug mode, we may instead write:
-</p>
-<pre>| ?- logtalk_load([file1, file2, ...], [debug(on)]).</pre>
-<p>
-The compiler flag <code>clean</code> should be turned on whenever the debug flag is turned on at runtime. This is necessary because debug code would not be generated for files previously compiled in normal mode if there are no changes to the source files.
-</p>
-<p>After loading the debugger, we may check or enumerate, by backtracking, all loaded entities compiled in debug mode as follows:
-</p>
-<pre>| ?- debugger::debugging(Entity).</pre>
-<p>
-To compile only a specific entity in debug mode, use the <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive inside the entity.
-</p>
-
-<h3 id="programming_box_model">Logtalk Procedure Box model</h3>
-
-<p>
-Logtalk uses a <em>Procedure Box model</em> similar to those found on most Prolog compilers. The traditional Prolog procedure box model uses four ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control flow when a predicate clause is used during program execution: 
-</p>
-<dl>
-	<dt><code>call</code></dt>
-		<dd>predicate call</dd>
-	<dt><code>exit</code></dt>
-		<dd>success of a predicate call</dd>
-	<dt><code>redo</code></dt>
-		<dd>backtracking into a predicate</dd>
-	<dt><code>fail</code></dt>
-		<dd>failure of a predicate call</dd>
+...
+</pre></div>
+</div>
+<p>Note that the scope of the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive is local to
+the entity or to the source file containing it.</p>
+<div class="section" id="version-flags">
+<h4>Version flags<a class="headerlink" href="#version-flags" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">version_data(Value)</span></code></dt>
+<dd>Read-only flag whose value is the compound term
+<code class="docutils literal notranslate"><span class="pre">logtalk(Major,Minor,Patch,Status)</span></code>. The first three arguments are
+integers and the last argument is an atom, possibly empty,
+representing version status: <code class="docutils literal notranslate"><span class="pre">aN</span></code> for alpha versions, <code class="docutils literal notranslate"><span class="pre">bN</span></code> for
+beta versions, <code class="docutils literal notranslate"><span class="pre">rcN</span></code> for release candidates (with <code class="docutils literal notranslate"><span class="pre">N</span></code> being a
+natural number), and <code class="docutils literal notranslate"><span class="pre">stable</span></code> for stable versions. The
+<code class="docutils literal notranslate"><span class="pre">version_data</span></code> flag is also a de facto standard for Prolog
+compilers.</dd>
 </dl>
-<p>
-Logtalk, as found on some recent Prolog compilers, adds a port for dealing with exceptions thrown when calling a predicate:
-</p>
-<dl>
-	<dt><code>exception</code></dt>
-		<dd>predicate call throws an exception</dd>
+</div>
+<div class="section" id="lint-flags">
+<h4>Lint flags<a class="headerlink" href="#lint-flags" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">unknown_entities(Option)</span></code></dt>
+<dd>Controls the unknown entity warnings, resulting from loading an
+entity that references some other entity that is not currently
+loaded. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default)
+and <code class="docutils literal notranslate"><span class="pre">silent</span></code>. Note that these warnings are not always avoidable,
+specially when using reflective designs of class-based hierarchies.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unknown_predicates(Option)</span></code></dt>
+<dd>Defines the compiler behavior when calls to unknown predicates (or
+non-terminals) are found. An unknown predicate is a called predicate
+that is neither locally declared or defined. Possible option values
+are <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default), and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
+recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">undefined_predicates(Option)</span></code></dt>
+<dd>Defines the compiler behavior when calls to declared but undefined
+predicates (or non-terminals) are found. Note that calls to declared
+but undefined predicates (or non-terminals) fail as per closed-world
+assumption. Possible option values are <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the
+usual default), and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">portability(Option)</span></code></dt>
+<dd>Controls the non-ISO specified Prolog built-in predicate and non-ISO
+specified Prolog built-in arithmetic function calls warnings plus use
+of non-standard Prolog flags and/or flag values. Possible option
+values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (the usual default).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">missing_directives(Option)</span></code></dt>
+<dd>Controls the missing predicate directive warnings. Possible option
+values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
+recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">duplicated_directives(Option)</span></code></dt>
+<dd>Controls the duplicated predicate directive warnings. Possible option
+values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
+recommended). Note that conflicting directives for the same predicate
+are handled as errors, not as duplicated directive warnings.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trivial_goal_fails(Option)</span></code></dt>
+<dd>Controls the printing of warnings warnings for calls to local static
+predicates with no matching clauses. Possible option values are
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">always_true_or_false_goals(Option)</span></code></dt>
+<dd>Controls the printing of warnings for goals that are always true or
+false. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and
+<code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lambda_variables(Option)</span></code></dt>
+<dd>Controls the printing of lambda variable related warnings. Possible
+option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
+recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">suspicious_calls(Option)</span></code></dt>
+<dd>Controls the printing of suspicious call warnings. Possible option
+values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not
+recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">redefined_built_ins(Option)</span></code></dt>
+<dd>Controls the Logtalk and Prolog built-in predicate redefinition
+warnings. Possible option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default)
+and <code class="docutils literal notranslate"><span class="pre">silent</span></code>. Warnings about redefined Prolog built-in predicates
+are often the result of running a Logtalk application on several
+Prolog compilers as each Prolog compiler defines its set of built-in
+predicates.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">singleton_variables(Option)</span></code></dt>
+<dd>Controls the singleton variable warnings. Possible option values are
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code> (not recommended).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">underscore_variables(Option)</span></code></dt>
+<dd>Controls the interpretation of variables that start with an
+underscore (excluding the anonymous variable) that occur once in a
+term as either don’t care variables or singleton variables. Possible
+option values are <code class="docutils literal notranslate"><span class="pre">dont_care</span></code> and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> (the usual
+default). Note that, depending on your Prolog compiler, the
+<code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in predicate may report variables that start
+with an underscore as singleton variables. There is no standard
+behavior, hence this option.</dd>
 </dl>
-<p>
-In addition to the ports described above, Logtalk adds two more ports, <em>fact</em> and <em>rule</em>, which show the result of the unification of a goal with, respectively, a fact and a rule head:
-</p>
-<dl>
-	<dt><code>fact</code></dt>
-		<dd>unification success between a goal and a fact</dd>
-	<dt><code>rule</code></dt>
-		<dd>unification success between a goal and a rule head</dd>
+</div>
+<div class="section" id="optional-features-compilation-flags">
+<h4>Optional features compilation flags<a class="headerlink" href="#optional-features-compilation-flags" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">complements(Option)</span></code></dt>
+<dd>Allows objects to be compiled with support for complementing
+categories turned off in order to improve performance and security.
+Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> (allow complementing categories
+to override local object predicate declarations and definitions),
+<code class="docutils literal notranslate"><span class="pre">restrict</span></code> (allow complementing categories to add predicate
+declarations and definitions to an object but not to override them),
+and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (ignore complementing categories; the usual default).
+This option can be used on a per-object basis. Note that changing
+this option is of no consequence for objects already compiled and
+loaded.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations(Option)</span></code></dt>
+<dd>Allows objects to be compiled with support for dynamic declaration of
+new predicates turned off in order to improve performance and
+security. Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (the
+usual default). This option can be used on a per-object basis. Note
+that changing this option is of no consequence for objects already
+compiled and loaded. This option is only checked when sending an
+<code class="docutils literal notranslate"><span class="pre">asserta/1</span></code> or <code class="docutils literal notranslate"><span class="pre">assertz/1</span></code> message to an object. Local asserting
+of new predicates is always allowed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">events(Option)</span></code></dt>
+<dd>Allows message sending calls to be compiled with event-driven
+programming support disable in order to improve performance. Possible
+option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code> (the usual default). Objects
+(and categories) compiled with this option set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> use
+optimized code for message-sending calls that does not trigger
+events. As such, this option can be used on a per-object (or
+per-category) basis. Note that changing this option is of no
+consequence for objects already compiled and loaded.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls(Option)</span></code></dt>
+<dd>Allows context switching calls (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>) to be either allowed or
+denied. Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code>. The
+default flag vale is <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Note that changing this option is of
+no consequence for objects already compiled and loaded.</dd>
 </dl>
-<p>
-The user may define for which ports the debugger should pause for user interaction by specifying a list of leashed ports. For example:
-</p>
-<pre>| ?- debugger::leash([call, exit, fail]).</pre>
-<p>
-Alternatively, the user may use an atom abbreviation for a pre-defined set of ports. For example:
-</p>
-<pre>| ?- debugger::leash(loose).</pre>
-<p>
-The abbreviations defined in Logtalk are similar to those defined on some Prolog compilers:
-</p>
-<dl>
-	<dt><code>none</code></dt>
-		<dd><code>[]</code></dd>
-	<dt><code>loose</code></dt>
-		<dd><code>[fact, rule, call]</code></dd>
-	<dt><code>half</code></dt>
-		<dd><code>[fact, rule, call, redo]</code></dd>
-	<dt><code>tight</code></dt>
-		<dd><code>[fact, rule, call, redo, fail, exception]</code></dd>
-	<dt><code>full</code></dt>
-		<dd><code>[fact, rule, call, exit, redo, fail, exception]</code></dd>
+</div>
+<div class="section" id="back-end-prolog-compiler-and-loader-flags">
+<h4>Back-end Prolog compiler and loader flags<a class="headerlink" href="#back-end-prolog-compiler-and-loader-flags" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">prolog_compiler(Flags)</span></code></dt>
+<dd>List of compiler flags for the generated Prolog files. The valid
+flags are specific to the used Prolog backend compiler. The usual
+default is the empty list. These flags are passed to the backend
+Prolog compiler built-in predicate that is responsible for compiling
+to disk a Prolog file. For Prolog compilers that don’t provide
+separate predicates for compiling and loading a file, use instead the
+<code class="docutils literal notranslate"><span class="pre">prolog_loader/1</span></code> flag.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">prolog_loader(Flags)</span></code></dt>
+<dd>List of loader flags for the generated Prolog files. The valid flags
+are specific to the used Prolog backend compiler. The usual default
+is the empty list. These flags are passed to the backend Prolog
+compiler built-in predicate that is responsible for loading a
+(compiled) Prolog file.</dd>
 </dl>
-<p>
-By default, the debugger pauses at every port for user interaction.
-</p>
-
-<h3>Defining spy points<a id="programming_spy_points"></a></h3>
-
-<p>
-Logtalk spy points can be defined by simply stating which file line numbers or predicates should be spied, as in most Prolog debuggers, or by fully specifying the context for activating a spy point. In the case of line number spy points, the line number must correspond to the first line of an entity clause. To simplify the definition of line number spy points, these are specified using the entity identifier instead of the file name (as all entities share a single namespace, an entity can only be defined in a single file). 
-</p>
-
-<h4>Defining line number and predicate spy points<a id="programming_pspypoints"></a></h4>
-
-<p>
-Line number and predicate spy points are specified using the method <code>spy/1</code>. The argument can be either a pair entity identifier - line number (<code>Entity-Line</code>) or a predicate indicator (<code>Name/Arity</code>) or a list of spy points. For example:
-</p>
-<pre>| ?- debugger::spy(person-42).
+</div>
+<div class="section" id="other-flags">
+<h4>Other flags<a class="headerlink" href="#other-flags" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">scratch_directory(Directory)</span></code></dt>
+<dd>Sets the directory to be used to store the temporary files generated
+when compiling Logtalk source files. This directory can be specified
+using an atom or using library notation. The directory must always
+end with a slash. The default value is a sub-directory of the source
+files directory, either <code class="docutils literal notranslate"><span class="pre">'./lgt_tmp/'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./.lgt_tmp/'</span></code>
+(depending on the back-end Prolog compiler and operating-system).
+Relative directories must always start with <code class="docutils literal notranslate"><span class="pre">'./'</span></code> due to the lack
+of a portable solution to check if a path is relative or absolute.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">report(Option)</span></code></dt>
+<dd>Controls the default printing of messages. Possible option values are
+<code class="docutils literal notranslate"><span class="pre">on</span></code> (by usual default, print all messages that are not intercepted
+by the user), <code class="docutils literal notranslate"><span class="pre">warnings</span></code> (only print warning and error messages
+that are not intercepted by the user), and <code class="docutils literal notranslate"><span class="pre">off</span></code> (do not print any
+messages that are not intercepted by the user).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">code_prefix(Character)</span></code></dt>
+<dd>Enables the definition of prefix for all functors of Prolog code
+generated by the Logtalk compiler. The option value must be a single
+character atom. Its default value is <code class="docutils literal notranslate"><span class="pre">'$'</span></code>. Specifying a code
+prefix provides a way to solve possible conflicts between Logtalk
+compiled code and other Prolog code. In addition, some Prolog
+compilers automatically hide predicates whose functor start with a
+specific prefix such as the character <code class="docutils literal notranslate"><span class="pre">$</span></code>. Although this is not a
+read-only flag, it should only be changed at startup time and before
+loading any source files.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">optimize(Option)</span></code></dt>
+<dd>Controls the compiler optimizations. Possible option values are
+<code class="docutils literal notranslate"><span class="pre">on</span></code> (used by default for deployment) and <code class="docutils literal notranslate"><span class="pre">off</span></code> (used by default
+for development). Compiler optimizations include the use of static
+binding whenever possible, the removal of redundant calls to
+<code class="docutils literal notranslate"><span class="pre">true/0</span></code> from predicate clauses, the removal of redundant
+unifications when compiling grammar rules, and inlining of predicate
+definitions with a single clause that links to a local predicate, to
+a plain Prolog built-in (or foreign) predicate, or to a Prolog module
+predicate with the same arguments. Care should be taken when
+developing applications with this flag turned on as changing and
+reloading a file may render static binding optimizations invalid for
+code defining in other loaded files. Turning on this flag
+automatically turns off the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_data(Option)</span></code></dt>
+<dd>Defines how much information is retained when compiling a source
+file. Possible option values are <code class="docutils literal notranslate"><span class="pre">on</span></code> (the usual default for
+development) and <code class="docutils literal notranslate"><span class="pre">off</span></code>. With this flag set to <code class="docutils literal notranslate"><span class="pre">on</span></code>, Logtalk will
+keep the information represented using documenting directives plus
+source location data (including source file names and line numbers).
+This information can be retrieved using reflection and is useful for
+documenting, debugging, and integration with third-party development
+tools. This flag can be turned off in order to generate more compact
+code.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">debug(Option)</span></code></dt>
+<dd>Controls the compilation of source files in debug mode (the Logtalk
+default debugger can only be used with files compiled in this mode).
+Also controls, by default, printing of <code class="docutils literal notranslate"><span class="pre">debug&gt;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">debug(Topic)</span></code> messages. Possible option values are <code class="docutils literal notranslate"><span class="pre">on</span></code> and
+<code class="docutils literal notranslate"><span class="pre">off</span></code> (the usual default). Turning on this flag automatically turns
+off the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reload(Option)</span></code></dt>
+<dd>Defines the reloading behavior for source files. Possible option
+values are <code class="docutils literal notranslate"><span class="pre">skip</span></code> (skip loading of already loaded files; this value
+can be used to get similar functionality to the Prolog directive
+<code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> but should be used only with fully debugged
+code), <code class="docutils literal notranslate"><span class="pre">changed</span></code> (the usual default; reload files only when they
+are changed since last loaded provided that the any explicit flags
+and the compilation mode are the same as before), and <code class="docutils literal notranslate"><span class="pre">always</span></code>
+(always reload files).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">relative_to(Directory)</span></code></dt>
+<dd>Defines a base directory for resolving relative source file paths.
+The default value is the directory of the source file being compiled.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hook(Object)</span></code></dt>
+<dd>Allows the definition of compiler hooks that are called for each term
+read form a source file and for each compiled goal. This option
+specifies an object (which can be the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>)
+implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> built-in protocol. The hook object
+must be compiled and loaded when this option is used. It’s also
+possible to specify a Prolog module instead of a Logtalk object but
+the module must be pre-loaded and its identifier must be different
+from any object identifier. The object is expected to define clauses
+for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and
+<a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>
+predicates. In the case of the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> predicate, the
+first argument is the term read form the source file while the second
+argument returns a list of terms corresponding to the expansion of
+the first argument. In the case of the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
+predicate, the second argument should be a goal resulting from the
+expansion of the goal in the first argument. The predicate
+<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> is recursively called on the expanded goal until
+a fixed point is reached. Care must be taken to avoid compilation
+loops.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">clean(Option)</span></code></dt>
+<dd>Controls cleaning of the intermediate Prolog files generated when
+compiling Logtalk source files. Possible option values are <code class="docutils literal notranslate"><span class="pre">off</span></code>
+and <code class="docutils literal notranslate"><span class="pre">on</span></code> (the usual default). When turned on, this flag also forces
+recompilation of all source files, disregarding any existing
+intermediate files. Thus, it is strong advisable to turn on this flag
+when switching backend Prolog compilers as the intermediate files
+generated by the compilation of source files may not be portable (due
+to differences in the implementation of the standard
+<code class="docutils literal notranslate"><span class="pre">write_canonical/2</span></code> predicate).</dd>
+</dl>
+</div>
+<div class="section" id="user-defined-flags">
+<h4>User-defined flags<a class="headerlink" href="#user-defined-flags" title="Permalink to this headline">¶</a></h4>
+<p>Logtalk provides a <a class="reference internal" href="../refman/predicates/create_logtalk_flag_3.html#predicates-create-logtalk-flag-3"><span class="std std-ref">create_logtalk_flag/3</span></a>
+predicate that can be used for defining new flags.</p>
+</div>
+</div>
+<div class="section" id="reloading-and-smart-compilation-of-source-files">
+<span id="programming-smart"></span><h3>Reloading and smart compilation of source files<a class="headerlink" href="#reloading-and-smart-compilation-of-source-files" title="Permalink to this headline">¶</a></h3>
+<p>As a general rule, reloading source files should never occur in
+production code and should be handled with care in development code.
+Reloading a Logtalk source file usually requires reloading the
+intermediate Prolog file that is generated by the Logtalk compiler. The
+problem is that there is no standard behavior for reloading Prolog
+files. For static predicates, almost all Prolog compilers replace the
+old definitions with the new ones. However, for dynamic predicates, the
+behavior depends on the Prolog compiler. Most compilers replace the old
+definitions but some of them simply append the new ones, which usually
+leads to trouble. See the compatibility notes for the back-end Prolog
+compiler you intend to use for more information. There is an additional
+potential problem when using multi-threading programming. Reloading a
+threaded object does not recreate from scratch its old message queue,
+which may still be in use (e.g. threads may be waiting on it).</p>
+<p>When using library entities and stable code, you can avoid reloading the
+corresponding source files (and, therefore, recompiling them) by setting
+the compiler flag <code class="docutils literal notranslate"><span class="pre">reload</span></code> to <code class="docutils literal notranslate"><span class="pre">skip</span></code>. For code under development,
+you can turn off the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag to avoid recompiling files that have
+not been modified since last compilation (assuming that back-end Prolog
+compiler that you are using supports retrieving of file modification
+dates). You can disable deleting the intermediate files generated when
+compiling source files by changing the default flag value in your
+settings file, by using the corresponding compiler flag with the
+compiling and loading built-in predicates, or, for the remaining of a
+working session, by using the call:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(clean, off).
+</pre></div>
+</div>
+<p>Some caveats that you should be aware. First, some warnings that might
+be produced when compiling a source file will not show up if the
+corresponding object file is up-to-date because the source file is not
+being (re)compiled. Second, if you are using several Prolog compilers
+with Logtalk, be sure to perform the first compilation of your source
+files with smart compilation turned off: the intermediate Prolog files
+generated by the Logtalk compiler may be not compatible across Prolog
+compilers or even for the same Prolog compiler across operating systems
+(e.g. due to the use of different character encodings or end-of-line
+characters).</p>
+</div>
+<div class="section" id="using-logtalk-for-batch-processing">
+<span id="programming-batch"></span><h3>Using Logtalk for batch processing<a class="headerlink" href="#using-logtalk-for-batch-processing" title="Permalink to this headline">¶</a></h3>
+<p>If you use Logtalk for batch processing, you probably want to turn off
+the option <code class="docutils literal notranslate"><span class="pre">report</span></code> to suppress all messages of type <code class="docutils literal notranslate"><span class="pre">banner</span></code>,
+<code class="docutils literal notranslate"><span class="pre">comment</span></code>, <code class="docutils literal notranslate"><span class="pre">comment(_)</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, and <code class="docutils literal notranslate"><span class="pre">warning(_)</span></code> that are
+normally printed. Note that error messages and messages providing
+information requested by the user will still be printed.</p>
+</div>
+</div>
+<div class="section" id="optimizing-performance">
+<span id="programming-performance"></span><h2>Optimizing performance<a class="headerlink" href="#optimizing-performance" title="Permalink to this headline">¶</a></h2>
+<p>The default compiler flag settings are appropriated for the
+<strong>development</strong> but not necessarily for the <strong>deployment</strong> of
+applications. To minimize the generated code size, turn the
+<code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag off. To optimize runtime performance, turn on the
+<code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag.</p>
+<p>Pay special attention to file compilation/loading order. Whenever
+possible, compile/load your files taking into account file dependencies
+to enable static binding optimizations. The easiest way to find the
+dependencies and thus the best compilation/loading order is to use the
+<code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool to generate a file dependency diagram for your
+application.</p>
+<p>Minimize the use of dynamic predicates. Parametric objects can often be
+used in alternative. When dynamic predicates cannot be avoided, try to
+make them private. Declaring a dynamic predicate also as a private
+predicate allows the compiler to optimize local calls to the database
+methods (e.g. <code class="docutils literal notranslate"><span class="pre">assertz/1</span></code> and <code class="docutils literal notranslate"><span class="pre">retract/1</span></code>) that handle the
+predicate.</p>
+<p>Sending a message to <em>self</em> implies dynamic binding but there are often
+cases where <code class="docutils literal notranslate"><span class="pre">::/1</span></code> is misused to call an imported or inherited
+predicate that is never going to be redefined in a descendant. In these
+cases, a <em>super</em> call, <code class="docutils literal notranslate"><span class="pre">^^/1</span></code>, can be used instead with the benefit of
+enabling static binding. Most of the guidelines for writing efficient
+Prolog code also apply to Logtalk code. In particular, define your
+predicates to take advantage of first-argument indexing. In the case of
+recursive predicates, define them as tail-recursive predicates whenever
+possible.</p>
+</div>
+<div class="section" id="debugging-logtalk-applications">
+<span id="programming-debugging"></span><h2>Debugging Logtalk applications<a class="headerlink" href="#debugging-logtalk-applications" title="Permalink to this headline">¶</a></h2>
+<p>The Logtalk distribution includes in its <code class="docutils literal notranslate"><span class="pre">tools</span></code> directory a
+command-line debugger, implemented as a Logtalk application. It can be
+loaded by typing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debugger(loader)).
+</pre></div>
+</div>
+<p>This tool implements debugging features similar to those found on most
+Prolog systems. There are some differences, however, between the usual
+implementation of Prolog debuggers and the current implementation of the
+Logtalk debugger that you should be aware. First, unlike some Prolog
+debuggers, the Logtalk debugger is not implemented as a
+meta-interpreter. This translates to a different, although similar, set
+of debugging features when compared with some of the more sophisticated
+Prolog debuggers. Second, debugging is only possible for entities
+compiled in debug mode. When compiling an entity in debug mode, Logtalk
+decorates clauses with source information to allow tracing of the goal
+execution. Third, implementation of spy points allows the user to
+specify the execution context for entering the debugger. This feature is
+a consequence of the encapsulation of predicates inside objects.</p>
+<div class="section" id="compiling-source-files-and-entities-in-debug-mode">
+<span id="programming-debug-mode"></span><h3>Compiling source files and entities in debug mode<a class="headerlink" href="#compiling-source-files-and-entities-in-debug-mode" title="Permalink to this headline">¶</a></h3>
+<p>Compilation of source files in debug mode is controlled by the compiler
+flag <code class="docutils literal notranslate"><span class="pre">debug</span></code>. The default value for this flag, usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is
+defined in the adapter files. Its value may be changed at runtime by
+writing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(debug, on).
+</pre></div>
+</div>
+<p>In alternative, if we want to compile only some source files in debug
+mode, we may instead write:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load([file1, file2, ...], [debug(on)]).
+</pre></div>
+</div>
+<p>The compiler flag <code class="docutils literal notranslate"><span class="pre">clean</span></code> should be turned on whenever the debug flag
+is turned on at runtime. This is necessary because debug code would not
+be generated for files previously compiled in normal mode if there are
+no changes to the source files.</p>
+<p>After loading the debugger, we may check or enumerate, by backtracking,
+all loaded entities compiled in debug mode as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::debugging(Entity).
+</pre></div>
+</div>
+<p>To compile only a specific entity in debug mode, use the
+<a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive inside the entity.</p>
+</div>
+<div class="section" id="logtalk-procedure-box-model">
+<span id="programming-box-model"></span><h3>Logtalk Procedure Box model<a class="headerlink" href="#logtalk-procedure-box-model" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk uses a <em>Procedure Box model</em> similar to those found on most
+Prolog compilers. The traditional Prolog procedure box model uses four
+ports (<em>call</em>, <em>exit</em>, <em>redo</em>, and <em>fail</em>) for describing control flow
+when a predicate clause is used during program execution:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">call</span></code></dt>
+<dd>predicate call</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">exit</span></code></dt>
+<dd>success of a predicate call</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">redo</span></code></dt>
+<dd>backtracking into a predicate</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fail</span></code></dt>
+<dd>failure of a predicate call</dd>
+</dl>
+<p>Logtalk, as found on some recent Prolog compilers, adds a port for
+dealing with exceptions thrown when calling a predicate:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">exception</span></code></dt>
+<dd>predicate call throws an exception</dd>
+</dl>
+<p>In addition to the ports described above, Logtalk adds two more ports,
+<em>fact</em> and <em>rule</em>, which show the result of the unification of a goal
+with, respectively, a fact and a rule head:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">fact</span></code></dt>
+<dd>unification success between a goal and a fact</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rule</span></code></dt>
+<dd>unification success between a goal and a rule head</dd>
+</dl>
+<p>The user may define for which ports the debugger should pause for user
+interaction by specifying a list of leashed ports. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::leash([call, exit, fail]).
+</pre></div>
+</div>
+<p>Alternatively, the user may use an atom abbreviation for a pre-defined
+set of ports. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::leash(loose).
+</pre></div>
+</div>
+<p>The abbreviations defined in Logtalk are similar to those defined on
+some Prolog compilers:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">none</span></code></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">[]</span></code></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">loose</span></code></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call]</span></code></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">half</span></code></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">redo]</span></code></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tight</span></code></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">redo,</span> <span class="pre">fail,</span> <span class="pre">exception]</span></code></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">full</span></code></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">[fact,</span> <span class="pre">rule,</span> <span class="pre">call,</span> <span class="pre">exit,</span> <span class="pre">redo,</span> <span class="pre">fail,</span> <span class="pre">exception]</span></code></dd>
+</dl>
+<p>By default, the debugger pauses at every port for user interaction.</p>
+</div>
+<div class="section" id="defining-spy-points">
+<h3>Defining spy points<a class="headerlink" href="#defining-spy-points" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk spy points can be defined by simply stating which file line
+numbers or predicates should be spied, as in most Prolog debuggers, or
+by fully specifying the context for activating a spy point. In the case
+of line number spy points, the line number must correspond to the first
+line of an entity clause. To simplify the definition of line number spy
+points, these are specified using the entity identifier instead of the
+file name (as all entities share a single namespace, an entity can only
+be defined in a single file).</p>
+<div class="section" id="defining-line-number-and-predicate-spy-points">
+<h4>Defining line number and predicate spy points<a class="headerlink" href="#defining-line-number-and-predicate-spy-points" title="Permalink to this headline">¶</a></h4>
+<p>Line number and predicate spy points are specified using the method
+<code class="docutils literal notranslate"><span class="pre">spy/1</span></code>. The argument can be either a pair entity identifier - line
+number (<code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code>) or a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>) or a
+list of spy points. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(person-42).
 
 Spy points set.
 yes
@@ -580,302 +1093,414 @@ yes
 | ?- debugger::spy([foo/4, bar/1]).
 
 Spy points set.
-yes</pre>
-<p>
-Line numbers and predicate spy points can be removed by using the method <code>nospy/1</code>. The argument can be a spy point, a list of spy points, or a non-instantiated variable in which case all spy points will be removed. For example:
-</p>
-<pre>| ?- debugger::nospy(_).
+yes
+</pre></div>
+</div>
+<p>Line numbers and predicate spy points can be removed by using the method
+<code class="docutils literal notranslate"><span class="pre">nospy/1</span></code>. The argument can be a spy point, a list of spy points, or a
+non-instantiated variable in which case all spy points will be removed.
+For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_).
 
 All matching predicate spy points removed.
-yes</pre>
-
-<h4>Defining context spy points<a id="programming_cspypoints"></a></h4>
-
-<p>
-A context spy point is a term describing a message execution context and a goal:
-</p>
-<pre>(Sender, This, Self, Goal)</pre>
-<p>
-The debugger is evoked whenever the execution context is true and when the spy point goal unifies with the goal currently being executed. Variable bindings resulting from the unification between the current goal and the goal argument are discarded. The user may establish any number of context spy points as necessary. For example, in order to call the debugger whenever a predicate defined on an object named <code>foo</code> is called we may define the following spy point:
-</p>
-<pre>| ?- debugger::spy(_, foo, _, _).
+yes
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-context-spy-points">
+<h4>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Permalink to this headline">¶</a></h4>
+<p>A context spy point is a term describing a message execution context and
+a goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>(<span class="nv">Sender</span>, <span class="nv">This</span>, <span class="nv">Self</span>, <span class="nv">Goal</span>)
+</pre></div>
+</div>
+<p>The debugger is evoked whenever the execution context is true and when
+the spy point goal unifies with the goal currently being executed.
+Variable bindings resulting from the unification between the current
+goal and the goal argument are discarded. The user may establish any
+number of context spy points as necessary. For example, in order to call
+the debugger whenever a predicate defined on an object named <code class="docutils literal notranslate"><span class="pre">foo</span></code> is
+called we may define the following spy point:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, foo, _, _).
 
 Spy point set.
-yes</pre>
-<p>
-For example, we can spy all calls to a <code>foo/2</code> predicate by setting the condition:
-</p>
-<pre>| ?- debugger::spy(_, _, _, foo(_, _)).
+yes
+</pre></div>
+</div>
+<p>For example, we can spy all calls to a <code class="docutils literal notranslate"><span class="pre">foo/2</span></code> predicate by setting
+the condition:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, _, _, foo(_, _)).
 
 Spy point set.
-yes</pre>
-<p>
-The method <code>nospy/4</code> may be used to remove all matching spy points. For example, the call: 
-</p>
-<pre>| ?- debugger::nospy(_, _, foo, _).
+yes
+</pre></div>
+</div>
+<p>The method <code class="docutils literal notranslate"><span class="pre">nospy/4</span></code> may be used to remove all matching spy points.
+For example, the call:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_, _, foo, _).
 
 All matching context spy points removed.
-yes</pre>
-<p>
-will remove all context spy points where the value of <em>Self</em> matches the name <code>foo</code>.
-</p>
-
-<h4>Removing all spy points<a id="programming_nospyall"></a></h4>
-
-<p>
-We may remove all line number, predicate, and context spy points by using the method <code>nospyall/0</code>:
-</p>
-<pre>| ?- debugger::nospyall.
+yes
+</pre></div>
+</div>
+<p>will remove all context spy points where the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> matches the
+atom <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
+</div>
+<div class="section" id="removing-all-spy-points">
+<h4>Removing all spy points<a class="headerlink" href="#removing-all-spy-points" title="Permalink to this headline">¶</a></h4>
+<p>We may remove all line number, predicate, and context spy points by
+using the <code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospyall.
 
 All line number spy points removed.
 All predicate spy points removed.
 All context spy points removed.
-yes</pre>
+yes
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tracing-program-execution">
+<span id="programming-trace"></span><h3>Tracing program execution<a class="headerlink" href="#tracing-program-execution" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk allows tracing of execution for all objects compiled in debug
+mode. To start the debugger in trace mode, write:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::trace.
 
-<h3 id="programming_trace">Tracing program execution</h3>
+yes
+</pre></div>
+</div>
+<p>Note that, when tracing, spy points will be ignored. While tracing, the
+debugger will pause for user input at each leashed port, printing an
+informative message with the port name and the current goal. Before the
+port number, when a spy point is set for the current clause or goal, the
+debugger will print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for line number spy points, a
+<code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy points, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for
+context spy points. The debugger also provides determinism information
+by prefixing the <code class="docutils literal notranslate"><span class="pre">exit</span></code> port with a <code class="docutils literal notranslate"><span class="pre">*</span></code> character when a call
+succeeds with choice-points pending. After the port name, the debugger
+prints the goal invocation number. This invocation number is unique and
+can be used to correlate the port trace messages.</p>
+<p>To stop tracing and turning off the debugger, write:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::notrace.
 
-<p>
-Logtalk allows tracing of execution for all objects compiled in debug mode. To start the debugger in trace mode, write:
-</p>
-<pre>| ?- debugger::trace.
+yes
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-using-spy-points">
+<span id="programming-debug"></span><h3>Debugging using spy points<a class="headerlink" href="#debugging-using-spy-points" title="Permalink to this headline">¶</a></h3>
+<p>Tracing a program execution may generate large amounts of debugging
+data. Debugging using spy points allows the user to concentrate its
+attention in specific points of its code. To start a debugging session
+using spy points, write:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::debug.
 
-yes</pre>
-<p>
-Note that, when tracing, spy points will be ignored. While tracing, the debugger will pause for user input at each leashed port, printing an informative message with the port name and the current goal. Before the port number, when a spy point is set for the current clause or goal, the debugger will print a <code>#</code> character for line number spy points, a <code>+</code> character for predicate spy points, and a <code>*</code> character for context spy points. The debugger also provides determinism information by prefixing the <code>exit</code> port with a <code>*</code> character when a call succeeds with choice-points pending. After the port name, the debugger prints the goal invocation number. This invocation number is unique and can be used to correlate the port trace messages.
-</p>
-<p>
-To stop tracing and turning off the debugger, write:
-</p>
-<pre>| ?- debugger::notrace.
+yes
+</pre></div>
+</div>
+<p>At the beginning of a port description, the debugger will print a <code class="docutils literal notranslate"><span class="pre">#</span></code>,
+<code class="docutils literal notranslate"><span class="pre">+</span></code>, or <code class="docutils literal notranslate"><span class="pre">*</span></code> character before the current goal if there is,
+respectively, a line number, a predicate, or a context spy point
+defined.</p>
+<p>To stop the debugger, write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> debugger<span class="o">::</span>nodebug.
 
-yes</pre>
-
-
-<h3 id="programming_debug">Debugging using spy points</h3>
-
-<p>
-Tracing a program execution may generate large amounts of debugging data. Debugging using spy points allows the user to concentrate its attention in specific points of its code. To start a debugging session using spy points, write:
-</p>
-<pre>| ?- debugger::debug.
-
-yes</pre>
-<p>
-At the beginning of a port description, the debugger will print a <code>#</code>, <code>+</code>, or <code>*</code> character before the current goal if there is, respectively, a line number, a predicate, or a context spy point defined.
-</p>
-<p>
-To stop the debugger, write:
-</p>
-<pre>| ?- debugger::nodebug.
-
-yes</pre>
-<p>
-Note that stopping the debugger does not remove any defined spy points.
-</p>
-
-<h3 id="programming_commands">Debugging commands</h3>
-
-<p>
-The debugger pauses at leashed ports when tracing or when finding a spy point for user interaction. The commands available are as follows:
-</p>
-<dl>
-	<dt><code>c</code> &mdash; creep</dt>
-		<dd>go on; you may use the spacebar, return, or enter keys in alternative</dd>
-	<dt><code>l</code> &mdash; leap</dt>
-		<dd>continues execution until the next spy point is found</dd>
-	<dt><code>s</code> &mdash; skip</dt>
-		<dd>skips debugging for the current goal; valid at call, redo, and unification ports</dd>
-	<dt><code>q</code> &mdash; quasi-skip</dt>
-		<dd>skips debugging until returning to the current goal or reaching a spy point; valid at call and redo ports</dd>
-	<dt><code>r</code> &mdash; retry</dt>
-		<dd>retries the current goal but side-effects are not undone; valid at the fail port</dd>
-	<dt><code>j</code> &mdash; jump</dt>
-		<dd>reads invocation number and continues execution until a port is reached for that number</dd>
-	<dt><code>z</code> &mdash; zap</dt>
-		<dd>reads port name and continues execution until that port is reached</dd>
-		<dd>reads negated port name and continues execution until a port other than the negated port is reached</dd>
-	<dt><code>i</code> &mdash; ignore</dt>
-		<dd>ignores goal, assumes that it succeeded; valid at call and redo ports</dd>
-	<dt><code>f</code> &mdash; fail</dt>
-		<dd>forces backtracking; may also be used to convert an exception into a failure</dd>
-	<dt><code>n</code> &mdash; nodebug</dt>
-		<dd>turns off debugging</dd>
-	<dt><code>@</code> &mdash; command; <code>!</code> can be used in alternative</dt>
-		<dd>reads and executes a query</dd>
-	<dt><code>b</code> &mdash; break</dt>
-		<dd>suspends execution and starts new interpreter; type <code>end_of_file</code> to terminate</dd>
-	<dt><code>a</code> &mdash; abort</dt>
-		<dd>returns to top level interpreter</dd>
-	<dt><code>Q</code> &mdash; quit</dt>
-		<dd>quits Logtalk</dd>
-	<dt><code>p</code> &mdash; print</dt>
-		<dd>writes current goal using the print/1 predicate if available</dd>
-	<dt><code>d</code> &mdash; display</dt>
-		<dd>writes current goal without using operator notation</dd>
-	<dt><code>w</code> &mdash; write</dt>
-		<dd>writes current goal quoting atoms if necessary</dd>
-	<dt><code>$</code> &mdash; dollar</dt>
-		<dd>outputs the compiled form of the current goal (for low-level debugging)</dd>
-	<dt><code>x</code> &mdash; context</dt>
-		<dd>prints execution context</dd>
-	<dt><code>.</code> &mdash; file</dt>
-		<dd>prints file, entity, predicate, and line number information at an unification port</dd>
-	<dt><code>e</code> &mdash; exception</dt>
-		<dd>prints exception term thrown by the current goal</dd>
-	<dt><code>=</code> &mdash; debugging</dt>
-		<dd>prints debugging information</dd>
-	<dt><code>&lt;</code> &mdash; write depth</dt>
-		<dd>sets the write term depth (set to 0 to reset)</dd>
-	<dt><code>*</code> &mdash; add</dt>
-		<dd>adds a context spy point for the current goal</dd>
-	<dt><code>/</code> &mdash; remove</dt>
-		<dd>removes a context spy point for the current goal</dd>
-	<dt><code>+</code> &mdash; add</dt>
-		<dd>adds a predicate spy point for the current goal</dd>
-	<dt><code>-</code> &mdash; remove</dt>
-		<dd>removes a predicate spy point for the current goal</dd>
-	<dt><code>#</code> &mdash; add</dt>
-		<dd>adds a line number spy point for the current clause</dd>
-	<dt><code>|</code> &mdash; remove</dt>
-		<dd>removes a line number spy point for the current clause</dd>
-	<dt><code>h</code> &mdash; condensed help</dt>
-		<dd>prints list of command options</dd>
-	<dt><code>?</code> &mdash; extended help</dt>
-		<dd>prints list of command options</dd>
+yes
+</pre></div>
+</div>
+<p>Note that stopping the debugger does not remove any defined spy points.</p>
+</div>
+<div class="section" id="debugging-commands">
+<span id="programming-commands"></span><h3>Debugging commands<a class="headerlink" href="#debugging-commands" title="Permalink to this headline">¶</a></h3>
+<p>The debugger pauses at leashed ports when tracing or when finding a spy
+point for user interaction. The commands available are as follows:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">c</span></code> — creep</dt>
+<dd>go on; you may use the spacebar, return, or enter keys in alternative</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">l</span></code> — leap</dt>
+<dd>continues execution until the next spy point is found</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">s</span></code> — skip</dt>
+<dd>skips debugging for the current goal; valid at call, redo, and
+unification ports</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">q</span></code> — quasi-skip</dt>
+<dd>skips debugging until returning to the current goal or reaching a spy
+point; valid at call and redo ports</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">r</span></code> — retry</dt>
+<dd>retries the current goal but side-effects are not undone; valid at
+the fail port</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">j</span></code> — jump</dt>
+<dd>reads invocation number and continues execution until a port is
+reached for that number</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">z</span></code> — zap</dt>
+<dd>reads port name and continues execution until that port is reached
+reads negated port name and continues execution until a port other
+than the negated port is reached</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">i</span></code> — ignore</dt>
+<dd>ignores goal, assumes that it succeeded; valid at call and redo ports</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">f</span></code> — fail</dt>
+<dd>forces backtracking; may also be used to convert an exception into a
+failure</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">n</span></code> — nodebug</dt>
+<dd>turns off debugging</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;</span></code> — command; <code class="docutils literal notranslate"><span class="pre">!</span></code> can be used in alternative</dt>
+<dd>reads and executes a query</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">b</span></code> — break</dt>
+<dd>suspends execution and starts new interpreter; type <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>
+to terminate</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">a</span></code> — abort</dt>
+<dd>returns to top level interpreter</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Q</span></code> — quit</dt>
+<dd>quits Logtalk</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">p</span></code> — print</dt>
+<dd>writes current goal using the print/1 predicate if available</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">d</span></code> — display</dt>
+<dd>writes current goal without using operator notation</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">w</span></code> — write</dt>
+<dd>writes current goal quoting atoms if necessary</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">$</span></code> — dollar</dt>
+<dd>outputs the compiled form of the current goal (for low-level
+debugging)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">x</span></code> — context</dt>
+<dd>prints execution context</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">.</span></code> — file</dt>
+<dd>prints file, entity, predicate, and line number information at an
+unification port</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">e</span></code> — exception</dt>
+<dd>prints exception term thrown by the current goal</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">=</span></code> — debugging</dt>
+<dd>prints debugging information</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> — write depth</dt>
+<dd>sets the write term depth (set to 0 to reset)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">*</span></code> — add</dt>
+<dd>adds a context spy point for the current goal</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/</span></code> — remove</dt>
+<dd>removes a context spy point for the current goal</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">+</span></code> — add</dt>
+<dd>adds a predicate spy point for the current goal</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-</span></code> — remove</dt>
+<dd>removes a predicate spy point for the current goal</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">#</span></code> — add</dt>
+<dd>adds a line number spy point for the current clause</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">|</span></code> — remove</dt>
+<dd>removes a line number spy point for the current clause</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">h</span></code> — condensed help</dt>
+<dd>prints list of command options</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">?</span></code> — extended help</dt>
+<dd>prints list of command options</dd>
 </dl>
+</div>
+<div class="section" id="context-switching-calls">
+<span id="programming-context"></span><h3>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Permalink to this headline">¶</a></h3>
+<p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a>, which allows the
+execution of a query within the context of an object. Common debugging
+uses include checking an object local predicates (e.g. predicates
+representing internal dynamic state) and sending a message from within
+an object. This control construct may also be used to write unit tests.</p>
+<p>Consider the following toy example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(broken).
 
-<h3 id="programming_context">Context-switching calls</h3>
+<span class="p">    :- </span><span class="k">public</span>(a<span class="o">/</span><span class="m">1</span>).
+<span class="p">    :- </span><span class="k">private</span>([b<span class="o">/</span><span class="m">2</span>, c<span class="o">/</span><span class="m">1</span>]).
+<span class="p">    :- </span><span class="k">dynamic</span>(c<span class="o">/</span><span class="m">1</span>).
 
-<p>
-Logtalk provides a control construct, <a title="Consult reference manual" href="../refman/control/context_switch_2.html"><code>&lt;&lt;/2</code></a>, which allows the execution of a query within the context of an object. Common debugging uses include checking an object local predicates (e.g. predicates representing internal dynamic state) and sending a message from within an object. This control construct may also be used to write unit tests.
-</p>
-<p>
-Consider the following toy example:
-</p>
-<pre>:- object(broken).
+    a(<span class="nv">A</span>) <span class="o">:-</span> b(<span class="nv">A</span>, <span class="nv">B</span>), c(<span class="nv">B</span>).
+    b(<span class="m">1</span>, <span class="m">2</span>). b(<span class="m">2</span>, <span class="m">4</span>). b(<span class="m">3</span>, <span class="m">6</span>).
+    <span class="c">% assume that the next clause was asserted at runtime</span>
+    c(<span class="m">3</span>).
 
-    :- public(a/1).
-    :- private([b/2, c/1]).
-    :- dynamic(c/1).
+<span class="p">:- </span><span class="k">end_object.</span>
+</pre></div>
+</div>
+<p>Something is wrong when we try the object public predicate, <code class="docutils literal notranslate"><span class="pre">a/1</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- broken::a(A).
 
-    a(A) :- b(A, B), c(B).
-    b(1, 2). b(2, 4). b(3, 6).
-    c(3).    % in a real-life example, this would be a clause asserted at runtime
-
-:- end_object.
-</pre>
-<p>
-Something is wrong when we try the object public predicate, <code>a/1</code>:
-</p>
-<pre>| ?- broken::a(A).
-
-no</pre>
-<p>
-For helping diagnosing the problem, instead of compiling the object in debug mode and doing a <em>trace</em> of the query to check the clauses for the non-public predicates, we can instead simply type:
-</p>
-<pre>| ?- broken &lt;&lt; c(C).
+no
+</pre></div>
+</div>
+<p>For helping diagnosing the problem, instead of compiling the object in
+debug mode and doing a <em>trace</em> of the query to check the clauses for the
+non-public predicates, we can instead simply type:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- broken &lt;&lt; c(C).
 
 C = 3
 yes
-</pre>
-<p>
-The <code>&lt;&lt;/2</code> control construct works by switching the execution context to the object in the first argument and then compiling and executing the second argument within that context:
-</p>
-<pre>| ?- broken &lt;&lt; (self(Self), sender(Sender), this(This)).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct works by switching the execution context
+to the object in the first argument and then compiling and executing the
+second argument within that context:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- broken &lt;&lt; (self(Self), sender(Sender), this(This)).
 
 Self = broken
 Sender = broken
 This = broken
 
-yes</pre>
-<p>
-As exemplified above, the <code>&lt;&lt;/2</code> control construct allows you to call an object local and private predicates. However, it is important to stress that we are not bypassing or defeating an object predicate scope directives. The calls take place within the context of the specified object, not within the context of the object making the <code>&lt;&lt;/2</code> call. Thus, the <code>&lt;&lt;/2</code> control construct  implements a form of <em>execution-context switching</em>.
-</p>
-<p>
-The availability of the <code>&lt;&lt;/2</code> control construct is controlled by the compiler flag <code>context_switching_calls</code> (its default value is defined in the adapter files of the back-end Prolog compilers).
-</p>
-
-<h3 id="programming_hooks">Using compilation hooks and term expansion for debugging</h3>
-
-<p>
-It is possible to use compilation hooks and the term expansion mechanism for conditional compilation of debugging goals. Assume that we chose the predicate <code>debug/1</code> to represent debug goals. For example:
-</p>
-<pre>append([], List, List) :-
-    debug((write('Base case: '), writeq(append([], List, List)), nl)).
-append([Head| Tail], List, [Head| Tail2]) :-
-    debug((write('Recursive case: '), writeq(append(Tail, List, Tail2)), nl)),
-    append(Tail, List, Tail2).</pre>
-<p>
-When debugging, we want to call the argument of the predicate <code>debug/1</code>. This can be easily accomplished by defining a hook object containing the following definition for <code>goal_expansion/2</code>:
-</p>
-<pre>goal_expansion(debug(Goal), Goal).</pre>
-<p>
-When not debugging, we can use a second hook object to discard the <code>debug/1</code> calls by defining the predicate <code>goal_expansion/2</code> as follows:
-</p>
-<pre>goal_expansion(debug(_), true).</pre>
-<p>
-The Logtalk compiler automatically removes any redundant calls to the built-in predicate <code>true/0</code> when compiling object predicates.
-</p>
-
-<h3 id="programming_debugging_messages">Debugging messages</h3>
-
-<p>
-Calls to the <code>logtalk::print_message/3</code> predicate where the message kind is either <code>debug</code> or <code>debug(_)</code> are only printed, by default, when the <code>debug</code> flag is turned on. Note that using these messages does not require compiling the code in debug mode, only turning on the flag. To avoid having to define <code>message_tokens//2</code> grammar rules for translating each debug message, Logtalk provides default tokenization for four <em>meta-messages</em> that cover the most common cases:
-</p>
-<dl>
-	<dt><code>@Message</code></dt>
-		<dd>By default, the message is printed as passed to the <code>write/1</code> predicate followed by a newline.</dd>
-	<dt><code>Key-Value</code></dt>
-		<dd>By default, the message is printed as <code>Key: Value</code> followed by a newline. The value is printed as passed to the <code>writeq/1</code> predicate.</dd>
-	<dt><code>List</code></dt>
-		<dd>By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the <code>writeq/1</code> predicate.</dd>
-	<dt><code>Title::List</code></dt>
-		<dd>By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the <code>writeq/1</code> predicate.</dd>
+yes
+</pre></div>
+</div>
+<p>As exemplified above, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct allows you to call
+an object local and private predicates. However, it is important to
+stress that we are not bypassing or defeating an object predicate scope
+directives. The calls take place within the context of the specified
+object, not within the context of the object making the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> call.
+Thus, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct implements a form of
+<em>execution-context switching</em>.</p>
+<p>The availability of the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct is controlled by the
+compiler flag <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> (its default value is defined
+in the adapter files of the back-end Prolog compilers).</p>
+</div>
+<div class="section" id="using-compilation-hooks-and-term-expansion-for-debugging">
+<span id="programming-hooks"></span><h3>Using compilation hooks and term expansion for debugging<a class="headerlink" href="#using-compilation-hooks-and-term-expansion-for-debugging" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to use compilation hooks and the term expansion mechanism
+for conditional compilation of debugging goals. Assume that we chose the
+predicate <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> to represent debug goals. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>append([], <span class="nv">List</span>, <span class="nv">List</span>) <span class="o">:-</span>
+    debug((<span class="k">write</span>(<span class="s">&#39;Base case: &#39;</span>), <span class="k">writeq</span>(append([], <span class="nv">List</span>, <span class="nv">List</span>)), <span class="k">nl</span>)).
+append([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">List</span>, [<span class="nv">Head</span>| <span class="nv">Tail2</span>]) <span class="o">:-</span>
+    debug((<span class="k">write</span>(<span class="s">&#39;Recursive case: &#39;</span>), <span class="k">writeq</span>(append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>)), <span class="k">nl</span>)),
+    append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>).
+</pre></div>
+</div>
+<p>When debugging, we want to call the argument of the predicate
+<code class="docutils literal notranslate"><span class="pre">debug/1</span></code>. This can be easily accomplished by defining a hook object
+containing the following definition for <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">Goal</span>), <span class="nv">Goal</span>).
+</pre></div>
+</div>
+<p>When not debugging, we can use a second hook object to discard the
+<code class="docutils literal notranslate"><span class="pre">debug/1</span></code> calls by defining the predicate <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> as
+follows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(debug(<span class="nv">_</span>), <span class="k">true</span>).
+</pre></div>
+</div>
+<p>The Logtalk compiler automatically removes any redundant calls to the
+built-in predicate <code class="docutils literal notranslate"><span class="pre">true/0</span></code> when compiling object predicates.</p>
+</div>
+<div class="section" id="debugging-messages">
+<span id="programming-debugging-messages"></span><h3>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline">¶</a></h3>
+<p>Calls to the <code class="docutils literal notranslate"><span class="pre">logtalk::print_message/3</span></code> predicate where the message
+kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(_)</span></code> are only printed, by default,
+when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on. Note that using these messages
+does not require compiling the code in debug mode, only turning on the
+flag. To avoid having to define <code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code> grammar rules for
+translating each debug message, Logtalk provides default tokenization
+for four <em>meta-messages</em> that cover the most common cases:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code></dt>
+<dd>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code>
+predicate followed by a newline.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Key-Value</span></code></dt>
+<dd>By default, the message is printed as <code class="docutils literal notranslate"><span class="pre">Key:</span> <span class="pre">Value</span></code> followed by a
+newline. The value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code>
+predicate.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">List</span></code></dt>
+<dd>By default, the list items are printed indented one per line. The
+items are preceded by a dash and printed as passed to the
+<code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Title::List</span></code></dt>
+<dd>By default, the title is printed followed by a newline and the
+indented list items, one per line. The items are preceded by a dash
+and printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</dd>
 </dl>
-<p>
-These print messages goals can always be combined with hooks as described in the previous section to remove them in production ready code.
-</p>
-<p>
-Some simple examples of using these meta-messages:
-</p>
-<pre>| ?- logtalk::print_message(debug, core, @'Phase 1 completed').
+<p>These print messages goals can always be combined with hooks as
+described in the previous section to remove them in production ready
+code.</p>
+<p>Some simple examples of using these meta-messages:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::print_message(debug, core, @&#39;Phase 1 completed&#39;).
 yes
 
 | ?- set_logtalk_flag(debug, on).
 yes
 
-| ?- logtalk::print_message(debug, core, @'Phase 1 completed').
->>> Phase 1 completed
+| ?- logtalk::print_message(debug, core, @&#39;Phase 1 completed&#39;).
+&gt;&gt;&gt; Phase 1 completed
 yes
 
 | ?- logtalk::print_message(debug, core, answer-42).
->>> answer: 42
+&gt;&gt;&gt; answer: 42
 yes
 
-| ?- logtalk::print_message(debug, core, ['Arthur Dent','Ford Prefect','Marvin']).
->>> - 'Arthur Dent'
->>> - 'Ford Prefect'
->>> - 'Marvin'
+| ?- logtalk::print_message(debug, core, [&#39;Arthur Dent&#39;,&#39;Ford Prefect&#39;,&#39;Marvin&#39;]).
+&gt;&gt;&gt; - &#39;Arthur Dent&#39;
+&gt;&gt;&gt; - &#39;Ford Prefect&#39;
+&gt;&gt;&gt; - &#39;Marvin&#39;
 yes
 
-| ?- logtalk::print_message(debug, core, 'Names'::['Arthur Dent','Ford Prefect','Marvin']).
->>> Names:
->>> - 'Arthur Dent'
->>> - 'Ford Prefect'
->>> - 'Marvin'
+| ?- logtalk::print_message(debug, core, &#39;Names&#39;::[&#39;Arthur Dent&#39;,&#39;Ford Prefect&#39;,&#39;Marvin&#39;]).
+&gt;&gt;&gt; Names:
+&gt;&gt;&gt; - &#39;Arthur Dent&#39;
+&gt;&gt;&gt; - &#39;Ford Prefect&#39;
+&gt;&gt;&gt; - &#39;Marvin&#39;
 yes
-</pre>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 28, 2018</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
-</body>
 
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="migration.html" class="btn btn-neutral float-right" title="Prolog Integration and Migration Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing.html" class="btn btn-neutral" title="Installing Logtalk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

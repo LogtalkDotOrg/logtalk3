@@ -1,101 +1,316 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  This file is part of Logtalk <https://logtalk.org/>    
-%  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
--->
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk built-in method: phrase/3</title>
-	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>phrase/3 &mdash; Logtalk v3.21.0-b01 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/logtalk.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Term and goal expansion methods" href="expansion_methods.html" />
+    <link rel="prev" title="phrase/2" href="phrase_2.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body>
+<body class="wy-body-for-nav">
 
-<div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Built-in method: phrase/3</div>
-<div class="bottom-left"><span class="page"/></div>
-<div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; phrase/3</div>
+   
+  <div class="wy-grid-for-nav">
 
-<h2 id="methods_phrase_3" class="codenp">phrase/3</h2>
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-<h4>Description</h4>
+          
+            <a href="../../index.html" class="icon icon-home"> Logtalk
+          
 
-<pre>phrase(GrammarRuleBody, Input, Rest)
-phrase(::GrammarRuleBody, Input, Rest)
-phrase(Object::GrammarRuleBody, Input, Rest)</pre>
+          
+          </a>
 
-<p>
-True when the <code>GrammarRuleBody</code> grammar rule body can be applied to the <code>Input-Rest</code> difference list of tokens. In the most common case, <code>GrammarRuleBody</code> is a non-terminal defined by a grammar rule. This built-in method is declared private and thus cannot be used as a message to an object. When using a back-end Prolog compiler supporting a module system, calls in the format <code>phrase(Module:GrammarRuleBody, Input, Rest)</code> may also be used.
-</p>
-<p>
-This method is opaque to cuts in the first argument. When the first argument is sufficiently instantiated at compile time, the method call is compiled in order to eliminate the implicit overheads of converting the grammar rule body into a goal and meta-calling it. For performance reasons, the second and third arguments are only type-checked at compile time.
-</p>
+          
+            
+            
+              <div class="version">
+                v3.21.0
+              </div>
+            
+          
 
-<h4>Template and modes</h4>
-
-<pre>phrase(+callable, ?list, ?list)</pre>
-
-<h4>Errors</h4>
-
-<dl>
-	<dt>NonTerminal is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>NonTerminal is neither a variable nor a callable term:</dt>
-		<dd><code>type_error(callable, NonTerminal)</code></dd>
-</dl>
-
-<h4>Examples</h4>
-
-<dl>
-	<dt>To parse a list of tokens using a local non-terminal:</dt>
-		<dd><code>phrase(NonTerminal, Input, Rest)</code></dd>
-	<dt>To parse a list of tokens using a non-terminal within the scope of <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
-		<dd><code>phrase(::NonTerminal, Input, Rest)</code></dd>
-	<dt>To parse a list of tokens using a public non-terminal of an explicit object:</dt>
-		<dd><code>phrase(Object::NonTerminal, Input, Rest)</code></dd>
-</dl>
-
-<h4>See also</h4>
-
-<p>
-<code><a href="call_1.html">call//1-N</a></code>, <code><a href="phrase_1.html">phrase//1</a></code>, <code><a href="phrase_2.html">phrase/2</a></code>
-</p>
-
-<div class="footer">
-	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="https://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
-	</div>
-	<div class="navbottom">
-		<span><a href="phrase_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>
-		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
-	</div>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
 
-</body>
+          
+        </div>
 
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="context_methods.html">Execution context methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reflection_methods.html">Reflection methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database_methods.html">Database methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_call_methods.html">Meta-call methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exception_methods.html">Exception-handling methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solution_methods.html">All solutions methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_methods.html">Event handler methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="forwarding_methods.html">Message forwarding methods</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="dcg_methods.html">DCGs non-terminals and parsing methods</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="call_1.html">call//1-N</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eos_0.html">eos//0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="phrase_1.html">phrase//1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="phrase_2.html">phrase/2</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">phrase/3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="expansion_methods.html">Term and goal expansion methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coinduction_methods.html">Coinduction hook methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="printing_methods.html">Message printing methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Logtalk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+        
+          <li><a href="index.html">Built-in methods</a> &raquo;</li>
+        
+          <li><a href="dcg_methods.html">DCGs non-terminals and parsing methods</a> &raquo;</li>
+        
+      <li>phrase/3</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/refman/methods/phrase_3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="phrase-3">
+<span id="methods-phrase-3"></span><span id="index-0"></span><h1>phrase/3<a class="headerlink" href="#phrase-3" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">phrase</span>(<span class="nv">GrammarRuleBody</span>, <span class="nv">Input</span>, <span class="nv">Rest</span>)
+<span class="k">phrase</span>(<span class="o">::</span><span class="nv">GrammarRuleBody</span>, <span class="nv">Input</span>, <span class="nv">Rest</span>)
+<span class="k">phrase</span>(<span class="nv">Object</span><span class="o">::</span><span class="nv">GrammarRuleBody</span>, <span class="nv">Input</span>, <span class="nv">Rest</span>)
+</pre></div>
+</div>
+<p>True when the <code class="docutils literal notranslate"><span class="pre">GrammarRuleBody</span></code> grammar rule body can be applied to
+the <code class="docutils literal notranslate"><span class="pre">Input-Rest</span></code> difference list of tokens. In the most common case,
+<code class="docutils literal notranslate"><span class="pre">GrammarRuleBody</span></code> is a non-terminal defined by a grammar rule. This
+built-in method is declared private and thus cannot be used as a message
+to an object. When using a back-end Prolog compiler supporting a module
+system, calls in the format
+<code class="docutils literal notranslate"><span class="pre">phrase(Module:GrammarRuleBody,</span> <span class="pre">Input,</span> <span class="pre">Rest)</span></code> may also be used.</p>
+<p>This method is opaque to cuts in the first argument. When the first
+argument is sufficiently instantiated at compile time, the method call
+is compiled in order to eliminate the implicit overheads of converting
+the grammar rule body into a goal and meta-calling it. For performance
+reasons, the second and third arguments are only type-checked at compile
+time.</p>
+</div>
+<div class="section" id="template-and-modes">
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">phrase</span>(<span class="o">+</span>callable, <span class="o">?</span>list, <span class="o">?</span>list)
+</pre></div>
+</div>
+</div>
+<div class="section" id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>NonTerminal is a variable:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
+<dt>NonTerminal is neither a variable nor a callable term:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">NonTerminal)</span></code></dd>
+</dl>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>To parse a list of tokens using a local non-terminal:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">phrase(NonTerminal,</span> <span class="pre">Input,</span> <span class="pre">Rest)</span></code></dd>
+<dt>To parse a list of tokens using a non-terminal within the scope of <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">phrase(::NonTerminal,</span> <span class="pre">Input,</span> <span class="pre">Rest)</span></code></dd>
+<dt>To parse a list of tokens using a public non-terminal of an explicit object:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">phrase(Object::NonTerminal,</span> <span class="pre">Input,</span> <span class="pre">Rest)</span></code></dd>
+</dl>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="call_1.html#methods-call-1"><span class="std std-ref">call//1-N</span></a>,
+<a class="reference internal" href="phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a>,
+<a class="reference internal" href="#methods-phrase-3"><span class="std std-ref">phrase/3</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="expansion_methods.html" class="btn btn-neutral float-right" title="Term and goal expansion methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="phrase_2.html" class="btn btn-neutral" title="phrase/2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.21.0-b01',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>
