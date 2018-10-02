@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2018/03/04,
+		date is 2018/10/02,
 		comment is 'Unit tests for the "help" tool.'
 	]).
 
@@ -42,6 +42,7 @@
 	]).
 
 	:- uses(os, [
+		decompose_file_name/4,
 		directory_files/3,
 		environment_variable/2,
 		file_exists/1
@@ -133,7 +134,11 @@
 	test(built_in_directive_4_02) :-
 		% check that all files are referenced from the tool
 		forall(
-			directory_page(directives, Path, File),
+			(	directory_page(directives, Path, File),
+				decompose_file_name(File, _, Name, _),
+				sub_atom(Name, _, 1, 0, LastChar),
+				'0' @=< LastChar,LastChar @=< '9'
+			),
 			assertion(Path-File, built_in_directive(_, _, Path, File))
 		).
 
@@ -149,7 +154,11 @@
 	test(built_in_predicate_4_02) :-
 		% check that all files are referenced from the tool
 		forall(
-			directory_page(predicates, Path, File),
+			(	directory_page(predicates, Path, File),
+				decompose_file_name(File, _, Name, _),
+				sub_atom(Name, _, 1, 0, LastChar),
+				'0' @=< LastChar,LastChar @=< '9'
+			),
 			assertion(Path-File, built_in_predicate(_, _, Path, File))
 		).
 
@@ -165,7 +174,11 @@
 	test(built_in_method_4_02) :-
 		% check that all files are referenced from the tool
 		forall(
-			directory_page(methods, Path, File),
+			(	directory_page(methods, Path, File),
+				decompose_file_name(File, _, Name, _),
+				sub_atom(Name, _, 1, 0, LastChar),
+				'0' @=< LastChar,LastChar @=< '9'
+			),
 			assertion(Path-File, (built_in_method(_, _, Path, File); built_in_non_terminal(_, _, Path, File)))
 		).
 
@@ -181,7 +194,11 @@
 	test(control_construct_4_02) :-
 		% check that all files are referenced from the tool
 		forall(
-			directory_page(control, Path, File),
+			(	directory_page(control, Path, File),
+				decompose_file_name(File, _, Name, _),
+				sub_atom(Name, _, 1, 0, LastChar),
+				'0' @=< LastChar,LastChar @=< '9'
+			),
 			assertion(Path-File, control_construct(_, _, Path, File))
 		).
 
