@@ -106,7 +106,13 @@ html_static_path = ['_static']
 # 'searchbox.html']``.
 #
 # html_sidebars = {}
-
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "LogtalkDotOrg", # Username
+    "github_repo": "logtalk3", # Repo name
+    "github_version": "master", # Version
+    "conf_py_path": "/manuals/sources/", # Path in the checkout to the docs root
+}
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
