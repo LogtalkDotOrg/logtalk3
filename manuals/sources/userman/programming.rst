@@ -495,7 +495,7 @@ an entity. For example:
 
 ::
 
-   % compile all objects in the source file with event support
+   % compile objects in this source file with event support
    :- set_logtalk_flag(events, allow).
 
    :- object(foo).
@@ -1281,12 +1281,9 @@ Consider the following toy example:
    :- object(broken).
 
        :- public(a/1).
-       :- private([b/2, c/1]).
-       :- dynamic(c/1).
 
        a(A) :- b(A, B), c(B).
        b(1, 2). b(2, 4). b(3, 6).
-       % assume that the next clause was asserted at runtime
        c(3).
 
    :- end_object.

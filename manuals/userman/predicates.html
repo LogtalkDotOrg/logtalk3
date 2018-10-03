@@ -607,11 +607,14 @@ object <code class="docutils literal notranslate"><span class="pre">my_data_stru
 Logtalk predicate lookup algorithm. By using the <code class="docutils literal notranslate"><span class="pre">alias/2</span></code> directives,
 all the following messages would be valid (assuming a public scope for
 the predicates):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- my_data_structure::list_member(X, L).    % uses list member/2
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% uses list member/2
+| ?- my_data_structure::list_member(X, L).
 
-| ?- my_data_structure::set_member(X, L).     % uses set member/2
+ % uses set member/2
+| ?- my_data_structure::set_member(X, L).
 
-| ?- my_data_structure::member(X, L).         % uses list member/2
+% uses list member/2
+| ?- my_data_structure::member(X, L).
 </pre></div>
 </div>
 <p>When used this way, the <code class="docutils literal notranslate"><span class="pre">alias/2</span></code> directive provides functionality
@@ -1092,7 +1095,7 @@ directive, as in the following example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(sentence<span class="o">//</span><span class="m">0</span>).
 
 <span class="p">:- </span><span class="k">info</span>(sentence<span class="o">//</span><span class="m">0</span>, [
-    comment <span class="k">is</span> <span class="s">&#39;Rewrites a sentence into a noun phrase and a verb phrase.&#39;</span>]).
+    comment <span class="k">is</span> <span class="s">&#39;Rewrites sentence into noun and verb phrases.&#39;</span>]).
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1137,7 @@ context methods:</p>
 
     test <span class="o">:-</span>
         <span class="k">this</span>(<span class="nv">This</span>),
-        <span class="k">write</span>(<span class="s">&#39;Calling a predicate definition contained in &#39;</span>), <span class="k">writeq</span>(<span class="nv">This</span>), <span class="k">nl</span>,
+        <span class="k">write</span>(<span class="s">&#39;Calling predicate definition in &#39;</span>), <span class="k">writeq</span>(<span class="nv">This</span>), <span class="k">nl</span>,
         <span class="k">self</span>(<span class="nv">Self</span>),
         <span class="k">write</span>(<span class="s">&#39;to answer a message received by &#39;</span>), <span class="k">writeq</span>(<span class="nv">Self</span>), <span class="k">nl</span>,
         <span class="k">sender</span>(<span class="nv">Sender</span>),
@@ -1153,7 +1156,7 @@ context methods:</p>
 goal:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- descendant::test.
 
-Calling a predicate definition contained in test
+Calling predicate definition in test
 to answer a message received by descendant
 that was sent by user
 yes
@@ -1185,7 +1188,8 @@ description). For example:</p>
 
     test <span class="o">:-</span>
         <span class="k">parameter</span>(<span class="m">1</span>, <span class="nv">Color</span>),
-        <span class="k">write</span>(<span class="s">&#39;Color parameter value is &#39;</span>), <span class="k">writeq</span>(<span class="nv">Color</span>), <span class="k">nl</span>.
+        <span class="k">write</span>(<span class="s">&#39;Color parameter value is &#39;</span>),
+        <span class="k">writeq</span>(<span class="nv">Color</span>), <span class="k">nl</span>.
 
 <span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>
@@ -1197,7 +1201,8 @@ description). For example:</p>
 <span class="p">    :- </span><span class="k">public</span>(test<span class="o">/</span><span class="m">0</span>).
 
     test <span class="o">:-</span>
-        <span class="k">write</span>(<span class="s">&#39;Color parameter value is &#39;</span>), <span class="k">writeq</span>(<span class="nv">_Color_</span>), <span class="k">nl</span>.
+        <span class="k">write</span>(<span class="s">&#39;Color parameter value is &#39;</span>),
+        <span class="k">writeq</span>(<span class="nv">_Color_</span>), <span class="k">nl</span>.
 
 <span class="p">:- </span><span class="k">end_object.</span>
 </pre></div>

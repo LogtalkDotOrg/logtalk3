@@ -159,7 +159,7 @@ For example:
    :- info(color/1, [
        comment is 'Table of defined colors.',
        argnames is ['Color'],
-       constraint is 'Maximum of four visible colors allowed.'
+       constraint is 'Up to four visible colors allowed.'
    ]).
 
 As with the ``info/1`` directive, use only the keywords that make sense

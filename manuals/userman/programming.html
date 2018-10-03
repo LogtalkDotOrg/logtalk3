@@ -613,7 +613,7 @@ yes
 <p>Logtalk also implements a <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
 directive, which can be used to set flags within a source file or within
 an entity. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% compile all objects in the source file with event support</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% compile objects in this source file with event support</span>
 <span class="p">:- </span><span class="k">set_logtalk_flag</span>(events, allow).
 
 <span class="p">:- </span><span class="k">object</span>(foo).
@@ -1302,12 +1302,9 @@ an object. This control construct may also be used to write unit tests.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(broken).
 
 <span class="p">    :- </span><span class="k">public</span>(a<span class="o">/</span><span class="m">1</span>).
-<span class="p">    :- </span><span class="k">private</span>([b<span class="o">/</span><span class="m">2</span>, c<span class="o">/</span><span class="m">1</span>]).
-<span class="p">    :- </span><span class="k">dynamic</span>(c<span class="o">/</span><span class="m">1</span>).
 
     a(<span class="nv">A</span>) <span class="o">:-</span> b(<span class="nv">A</span>, <span class="nv">B</span>), c(<span class="nv">B</span>).
     b(<span class="m">1</span>, <span class="m">2</span>). b(<span class="m">2</span>, <span class="m">4</span>). b(<span class="m">3</span>, <span class="m">6</span>).
-    <span class="c">% assume that the next clause was asserted at runtime</span>
     c(<span class="m">3</span>).
 
 <span class="p">:- </span><span class="k">end_object.</span>

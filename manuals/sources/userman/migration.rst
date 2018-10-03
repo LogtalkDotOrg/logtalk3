@@ -401,7 +401,8 @@ You could write:
        :- public(puzzle/1).
 
        :- use_module(clpfd, [
-           all_different/1, ins/2, label/1, (#=)/2, (#\=)/2,
+           all_different/1, ins/2, label/1,
+           (#=)/2, (#\=)/2,
            op(700, xfx, #=), op(700, xfx, #\=)
        ]).
 

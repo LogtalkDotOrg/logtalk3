@@ -461,11 +461,14 @@ the predicates):
 
 .. code-block:: text
 
-   | ?- my_data_structure::list_member(X, L).    % uses list member/2
+   % uses list member/2
+   | ?- my_data_structure::list_member(X, L).
 
-   | ?- my_data_structure::set_member(X, L).     % uses set member/2
+    % uses set member/2
+   | ?- my_data_structure::set_member(X, L).
 
-   | ?- my_data_structure::member(X, L).         % uses list member/2
+   % uses list member/2
+   | ?- my_data_structure::member(X, L).
 
 When used this way, the ``alias/2`` directive provides functionality
 similar to programming constructs of other object-oriented languages
@@ -1033,7 +1036,7 @@ directive, as in the following example:
    :- public(sentence//0).
 
    :- info(sentence//0, [
-       comment is 'Rewrites a sentence into a noun phrase and a verb phrase.']).
+       comment is 'Rewrites sentence into noun and verb phrases.']).
 
 .. _predicates_methods:
 
@@ -1085,7 +1088,7 @@ context methods:
 
        test :-
            this(This), 
-           write('Calling a predicate definition contained in '), writeq(This), nl,
+           write('Calling predicate definition in '), writeq(This), nl,
            self(Self),
            write('to answer a message received by '), writeq(Self), nl,
            sender(Sender),
@@ -1106,7 +1109,7 @@ goal:
 
    | ?- descendant::test.
 
-   Calling a predicate definition contained in test
+   Calling predicate definition in test
    to answer a message received by descendant
    that was sent by user
    yes
@@ -1143,7 +1146,8 @@ description). For example:
 
        test :-
            parameter(1, Color), 
-           write('Color parameter value is '), writeq(Color), nl.
+           write('Color parameter value is '),
+           writeq(Color), nl.
 
    :- end_object.
 
@@ -1157,7 +1161,8 @@ An alternative to the ``parameter/2`` predicate is to use
        :- public(test/0).
 
        test :-
-           write('Color parameter value is '), writeq(_Color_), nl.
+           write('Color parameter value is '),
+           writeq(_Color_), nl.
 
    :- end_object.
 

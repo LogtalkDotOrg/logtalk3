@@ -344,7 +344,7 @@ argument. For example:
 
 .. code-block:: text
 
-   | ?- benchmark(list::length([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], _)).
+   | ?- benchmark(list::length([1,2,3,4,5,6,7,8,9,0], _)).
 
 For comparing message sending performance with predicate calls in plain
 Prolog and with calls to predicates encapsulated in modules, we should
