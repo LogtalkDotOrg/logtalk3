@@ -24,7 +24,7 @@ copyright = u'2018, Paulo Moura'
 author = u'Paulo Moura'
 
 # The short X.Y version
-version = u'v3.21.0'
+version = u'3.21.0'
 # The full version, including alpha/beta/rc tags
 release = u'v3.21.0-b01'
 
@@ -117,7 +117,7 @@ html_context = {
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'TheLogtalkHandbook'
+htmlhelp_basename = 'TheLogtalkHandbook-' + version
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -144,7 +144,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'TheLogtalkHandbook.tex', u'The Logtalk Handbook',
+    (master_doc, 'TheLogtalkHandbook-' + version + '.tex', u'The Logtalk Handbook',
      u'Paulo Moura', 'manual'),
 ]
 
@@ -179,7 +179,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-epub_basename = 'TheLogtalkHandbook'
+epub_basename = 'TheLogtalkHandbook-' + version
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #

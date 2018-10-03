@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on October 2, 2018
+##   Last updated on October 3, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -26,8 +26,8 @@
 # allow using this script from any directory
 cd "$(dirname "$0")" || exit 1
 
-rm -f ../TheLogtalkHandbook.pdf
-rm -f ../TheLogtalkHandbook.epub
+rm -f ../TheLogtalkHandbook*.pdf
+rm -f ../TheLogtalkHandbook*.epub
 rm -rf ../_sources
 rm -rf ../_static
 rm -rf ../faq
@@ -41,7 +41,7 @@ make latexpdf
 make epub
 
 mv -f _build/html/* ../
-mv -f _build/latex/TheLogtalkHandbook.pdf ../
-mv -f _build/epub/TheLogtalkHandbook.epub ../
+mv -f _build/latex/TheLogtalkHandbook*.pdf ../
+mv -f _build/epub/TheLogtalkHandbook*.epub ../
 
 make clean
