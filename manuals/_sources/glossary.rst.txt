@@ -3,6 +3,7 @@ Glossary
 ========
 
 .. glossary::
+   :sorted:
 
    ancestor
       A class or a parent prototype that contributes (via inheritance) to

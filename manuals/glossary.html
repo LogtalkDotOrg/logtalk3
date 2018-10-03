@@ -143,7 +143,9 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/glossary.rst.txt" rel="nofollow"> View page source</a>
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/glossary.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -159,55 +161,62 @@
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary docutils">
+<dt id="term-abstract-class">abstract class</dt>
+<dd>A class that cannot be instantiated. Usually used to contain
+common predicates that are inherited by other classes.</dd>
+<dt id="term-abstract-method">abstract method</dt>
+<dd>A method implementing an algorithm whose step corresponds to calls
+to methods defined in the descendants of the object (or category)
+containing it.</dd>
+<dt id="term-adapter-file">adapter file</dt>
+<dd>A Prolog source file defining a minimal abstraction layer between
+the Logtalk compiler/runtime and a specific backend Prolog
+compiler.</dd>
 <dt id="term-ancestor">ancestor</dt>
 <dd>A class or a parent prototype that contributes (via inheritance) to
 the definition of an object. For class-based hierarchies, the
 ancestors of an instance are its class(es) and all the superclasses
 of its class(es). For prototype-based hierarchies, the ancestors of
 an prototype are its parent(s) and the ancestors of its parent(s).</dd>
+<dt id="term-built-in-method">built-in method</dt>
+<dd>A pre-defined method that can be called from within any object or
+category. Built-in methods cannot be redefined.</dd>
+<dt id="term-built-in-predicate">built-in predicate</dt>
+<dd>A pre-defined predicate that can be called from anywhere. Built-in
+predicates can be redefined within objects and categories.</dd>
 <dt id="term-category">category</dt>
 <dd>A set of predicates directives and clauses that can be (virtually)
 imported by any object. Categories support composing objects using
 fine-grained units of code reuse and also hot patching of existing
 objects. A category should be functionally-cohesive, defining a
 single functionality.</dd>
-<dt id="term-complementing-category">complementing category</dt>
-<dd>A category used for hot patching an existing object (or a set of
-objects).</dd>
-<dt id="term-parametric-category">parametric category</dt>
-<dd>See parametric entity.</dd>
 <dt id="term-class">class</dt>
 <dd>An object that specializes another object, interpreted as its
 superclass. Classes define the common predicates of a set of objects
 that instantiates it. An object can also be interpreted as a class
 when it instantiates itself.</dd>
-<dt id="term-abstract-class">abstract class</dt>
-<dd>A class that cannot be instantiated. Usually used to contain
-common predicates that are inherited by other classes.</dd>
-<dt id="term-metaclass">metaclass</dt>
-<dd>The class of a class, when interpreted as an instance. Metaclass
-instances are themselves classes.</dd>
-<dt id="term-subclass">subclass</dt>
-<dd>A class that is a specialization, direct or indirectly, of another
-class.</dd>
-<dt id="term-superclass">superclass</dt>
-<dd>A class from which another class is a specialization (directly or
-indirectly via another class).</dd>
 <dt id="term-closed-world-assumption">closed-world assumption</dt>
 <dd>The assumption that what cannot be proved true is false. Therefore,
 sending a message corresponding to a declared but not defined
 predicate, or calling a declared predicate with no clauses, fails.
 But messages or calls to undeclared predicates generate an error.</dd>
+<dt id="term-coinductive-predicate">coinductive predicate</dt>
+<dd>A predicate whose calls are proved using greatest fixed point
+semantics. Coinductive predicates allows reasoning about about
+infinite rational entities such as cyclic terms and ω-automata.</dd>
+<dt id="term-complementing-category">complementing category</dt>
+<dd>A category used for hot patching an existing object (or a set of
+objects).</dd>
 <dt id="term-directive">directive</dt>
 <dd>A source file term that affects the interpretation of source code.
 Directives use the <code class="docutils literal notranslate"><span class="pre">(:-)/1</span></code> prefix operator as functor.</dd>
-<dt id="term-entity-directive">entity directive</dt>
-<dd>A directive that affects how Logtalk entities (objects, protocols,
-or categories) are used or compiled.</dd>
-<dt id="term-predicate-directive">predicate directive</dt>
-<dd>A directive that affects how predicates are called or compiled.</dd>
-<dt id="term-source-file-directive">source file directive</dt>
-<dd>A directive that affects how a source file is compiled.</dd>
+<dt id="term-doclet-file">doclet file</dt>
+<dd>A source file whose main purpose is to generate documentation for
+e.g. a library or an application.</dd>
+<dt id="term-doclet-object">doclet object</dt>
+<dd>An object specifying the steps necessary to (re)generate the API
+documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
+tool for details.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
 <dd>The hiding of an object implementation. This promotes software reuse
 by isolating the object clients from its implementation details.
@@ -216,11 +225,9 @@ directives.</dd>
 <dt id="term-entity">entity</dt>
 <dd>Generic name for Logtalk compilation units: objects, categories, and
 protocols.</dd>
-<dt id="term-parametric-entity">parametric entity</dt>
-<dd>An object or category whose identifier is a compound term
-containing free variables that can be used to parameterize the
-entity predicates. Parameters are logical variables implicitly
-shared by all the entity clauses.</dd>
+<dt id="term-entity-directive">entity directive</dt>
+<dd>A directive that affects how Logtalk entities (objects, protocols,
+or categories) are used or compiled.</dd>
 <dt id="term-event">event</dt>
 <dd>The sending of a message to an object. An event can be expressed as
 an ordered tuple: <code class="docutils literal notranslate"><span class="pre">(Event,</span> <span class="pre">Object,</span> <span class="pre">Message,</span> <span class="pre">Sender)</span></code>. Logtalk
@@ -239,6 +246,13 @@ identified by its <em>non-terminal indicator</em>, i.e. by its name and
 number of arguments using the notation <code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>.</dd>
 <dt id="term-grammar-rule-terminal">grammar rule terminal</dt>
 <dd>A word or basic symbol of a language.</dd>
+<dt id="term-hook-object">hook object</dt>
+<dd>An object, implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> built-in protocol,
+defining term- and goal-expansion clauses, used in the compilation
+of Logtalk or Prolog source files. An hook object can be specified
+using the compiler flag <code class="docutils literal notranslate"><span class="pre">hook/1</span></code>. It can also be specified using
+a <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive in the source files to be
+expanded.</dd>
 <dt id="term-identity">identity</dt>
 <dd>Property of an entity that distinguishes it from every other entity.
 Object and category identifiers can be an atoms or compound terms.
@@ -249,14 +263,6 @@ protocols, and categories) share the same name space.</dd>
 entities. If an object extends other object then we have a
 prototype-based inheritance. If an object specializes or instantiates
 another object we have a class-based inheritance.</dd>
-<dt id="term-private-inheritance">private inheritance</dt>
-<dd>All public and protected predicates are inherited as private
-predicates.</dd>
-<dt id="term-protected-inheritance">protected inheritance</dt>
-<dd>All public predicates are inherited as protected. No change for
-protected or private predicates.</dd>
-<dt id="term-public-inheritance">public inheritance</dt>
-<dd>All inherited predicates maintain their declared scope.</dd>
 <dt id="term-instance">instance</dt>
 <dd>An object that instantiates another object, interpreted as its class.</dd>
 <dt id="term-instantiation">instantiation</dt>
@@ -268,6 +274,14 @@ instance may also be defined as a static object in a source file.</dd>
 an alias to the directory path when compiling and loading source
 files using the notation
 <code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.</dd>
+<dt id="term-loader-file">loader file</dt>
+<dd>A source file whose main purpose is to load a set of source files.</dd>
+<dt id="term-local-predicate">local predicate</dt>
+<dd>A predicate that is defined in an object (or in a category) but
+that is not listed in a scope directive. These predicates behave
+like private predicates but are invisible to the reflection
+built-in methods. Local predicates are usually auxiliary
+predicates, only relevant to the entity where they are defined.</dd>
 <dt id="term-message">message</dt>
 <dd>A query sent to an object. In logical terms, a message can be seen as
 a request for proof construction using an object’s database and the
@@ -275,48 +289,33 @@ databases of related entities.</dd>
 <dt id="term-meta-interpreter">meta-interpreter</dt>
 <dd>A program capable of running other programs written in the same
 language.</dd>
+<dt id="term-meta-predicate">meta-predicate</dt>
+<dd>A predicate where one of its arguments will be called as a goal.
+For instance, <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> and <code class="docutils literal notranslate"><span class="pre">call/1</span></code> are Prolog built-ins
+meta-predicates.</dd>
+<dt id="term-metaclass">metaclass</dt>
+<dd>The class of a class, when interpreted as an instance. Metaclass
+instances are themselves classes.</dd>
 <dt id="term-method">method</dt>
 <dd>The predicate definition used to answer a message sent to an object.
 Logtalk supports both static binding and dynamic binding to find
 which method to run to answer a message.</dd>
-<dt id="term-abstract-method">abstract method</dt>
-<dd>A method implementing an algorithm whose step corresponds to calls
-to methods defined in the descendants of the object (or category)
-containing it.</dd>
-<dt id="term-built-in-method">built-in method</dt>
-<dd>A pre-defined method that can be called from within any object or
-category. Built-in methods cannot be redefined.</dd>
-<dt id="term-singleton-method">singleton method</dt>
-<dd>A method defined in an instance itself. Singleton methods are
-supported in Logtalk and can also be found in other
-object-oriented programming languages.</dd>
 <dt id="term-monitor">monitor</dt>
 <dd>Any object, implementing the <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> built-in protocol, that
 is notified by the runtime when a spied event occurs. The spied
 events can be set by the monitor itself or by any other object.</dd>
+<dt id="term-multifile-predicate">multifile predicate</dt>
+<dd>A predicate whose clauses can be defined in multiple entities. The
+object or category holding the directive without an entity prefix
+qualifying the predicate holds the multifile predicate <em>primary
+declaration</em>, which consists of both a scope directive and a
+<code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive for the predicate.</dd>
 <dt id="term-object">object</dt>
 <dd>An entity characterized by an identity and a set of predicate
 directives and clauses. Logtalk objects can be either static or
 dynamic. Logtalk objects can play the role of classes, instances, or
 prototypes. The role or roles an object plays depends on its
 relations with other objects.</dd>
-<dt id="term-doclet-object">doclet object</dt>
-<dd>An object specifying the steps necessary to (re)generate the API
-documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
-tool for details.</dd>
-<dt id="term-hook-object">hook object</dt>
-<dd>An object, implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> built-in protocol,
-defining term- and goal-expansion clauses, used in the compilation
-of Logtalk or Prolog source files. An hook object can be specified
-using the compiler flag <code class="docutils literal notranslate"><span class="pre">hook/1</span></code>. It can also be specified using
-a <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive in the source files to be
-expanded.</dd>
-<dt id="term-parametric-object">parametric object</dt>
-<dd>See parametric entity.</dd>
-<dt id="term-parametric-object-proxy">parametric object proxy</dt>
-<dd>A compound term (usually represented as a plain Prolog fact) with
-the same functor and with the same number of arguments as the
-identifier of a parametric object.</dd>
 <dt id="term-parameter">parameter</dt>
 <dd>An argument of a parametric object or a parametric category
 identifier. Parameters are logical variables implicitly shared by all
@@ -326,55 +325,44 @@ the entity predicate clauses.</dd>
 category using the syntax <code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>. Occurrences of
 parameter variables in entity clauses are implicitly unified with the
 corresponding entity parameters.</dd>
+<dt id="term-parametric-category">parametric category</dt>
+<dd>See parametric entity.</dd>
+<dt id="term-parametric-entity">parametric entity</dt>
+<dd>An object or category whose identifier is a compound term
+containing free variables that can be used to parameterize the
+entity predicates. Parameters are logical variables implicitly
+shared by all the entity clauses.</dd>
+<dt id="term-parametric-object">parametric object</dt>
+<dd>See parametric entity.</dd>
+<dt id="term-parametric-object-proxy">parametric object proxy</dt>
+<dd>A compound term (usually represented as a plain Prolog fact) with
+the same functor and with the same number of arguments as the
+identifier of a parametric object.</dd>
 <dt id="term-parent">parent</dt>
 <dd>A prototype that is extended by another prototype.</dd>
 <dt id="term-predicate">predicate</dt>
 <dd>Predicates describe what is true about the application domain. A
 predicate is identified by its <em>predicate indicator</em>, i.e. by its
 name and number of arguments using the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>.</dd>
-<dt id="term-built-in-predicate">built-in predicate</dt>
-<dd>A pre-defined predicate that can be called from anywhere. Built-in
-predicates can be redefined within objects and categories.</dd>
-<dt id="term-coinductive-predicate">coinductive predicate</dt>
-<dd>A predicate whose calls are proved using greatest fixed point
-semantics. Coinductive predicates allows reasoning about about
-infinite rational entities such as cyclic terms and ω-automata.</dd>
-<dt id="term-local-predicate">local predicate</dt>
-<dd>A predicate that is defined in an object (or in a category) but
-that is not listed in a scope directive. These predicates behave
-like private predicates but are invisible to the reflection
-built-in methods. Local predicates are usually auxiliary
-predicates, only relevant to the entity where they are defined.</dd>
-<dt id="term-meta-predicate">meta-predicate</dt>
-<dd>A predicate where one of its arguments will be called as a goal.
-For instance, <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> and <code class="docutils literal notranslate"><span class="pre">call/1</span></code> are Prolog built-ins
-meta-predicates.</dd>
+<dt id="term-predicate-directive">predicate directive</dt>
+<dd>A directive that affects how predicates are called or compiled.</dd>
 <dt id="term-predicate-scope-container">predicate scope container</dt>
 <dd>The object that inherits a predicate declaration from an imported
 category or an implemented protocol.</dd>
+<dt id="term-private-inheritance">private inheritance</dt>
+<dd>All public and protected predicates are inherited as private
+predicates.</dd>
 <dt id="term-private-predicate">private predicate</dt>
 <dd>A predicate that can only be called from the object that contains
 the scope directive.</dd>
+<dt id="term-profiler">profiler</dt>
+<dd>A program that collects data about other program performance.</dd>
+<dt id="term-protected-inheritance">protected inheritance</dt>
+<dd>All public predicates are inherited as protected. No change for
+protected or private predicates.</dd>
 <dt id="term-protected-predicate">protected predicate</dt>
 <dd>A predicate that can only be called from the object containing the
 scope directive or from an object that inherits the predicate.</dd>
-<dt id="term-public-predicate">public predicate</dt>
-<dd>A predicate that can be called from any object.</dd>
-<dt id="term-multifile-predicate">multifile predicate</dt>
-<dd>A predicate whose clauses can be defined in multiple entities. The
-object or category holding the directive without an entity prefix
-qualifying the predicate holds the multifile predicate <em>primary
-declaration</em>, which consists of both a scope directive and a
-<code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive for the predicate.</dd>
-<dt id="term-synchronized-predicate">synchronized predicate</dt>
-<dd>A synchronized predicate is protected by a mutex ensuring that, in
-a multi-threaded application, it can only be called by a single
-thread at a time.</dd>
-<dt id="term-visible-predicate">visible predicate</dt>
-<dd>A predicate that is declared for an object, a built-in method, a
-Logtalk built-in predicate, or a Prolog built-in predicate.</dd>
-<dt id="term-profiler">profiler</dt>
-<dd>A program that collects data about other program performance.</dd>
 <dt id="term-protocol">protocol</dt>
 <dd>An entity that contains predicate declarations. A predicate is
 declared using a scope directive. It may be further specified by
@@ -387,32 +375,43 @@ functionality.</dd>
 <dd>A self-describing object that may extend or be extended by other
 objects. An object with no instantiation or specialization relations
 with other objects is always interpreted as a prototype.</dd>
+<dt id="term-public-inheritance">public inheritance</dt>
+<dd>All inherited predicates maintain their declared scope.</dd>
+<dt id="term-public-predicate">public predicate</dt>
+<dd>A predicate that can be called from any object.</dd>
 <dt id="term-self">self</dt>
 <dd>The object that received the message under processing.</dd>
 <dt id="term-sender">sender</dt>
 <dd>An object that sends a message to other object. When a message is
 sent from within a category, the <em>sender</em> is the object importing the
 category.</dd>
-<dt id="term-specialization">specialization</dt>
-<dd>A class is specialized by defining a new class that inherit its
-predicates and possibly add new ones.</dd>
-<dt id="term-source-file">source file</dt>
-<dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk
-entities may be defined in a single source file. Prolog code may be
-intermixed with entity definitions.</dd>
-<dt id="term-adapter-file">adapter file</dt>
-<dd>A Prolog source file defining a minimal abstraction layer between
-the Logtalk compiler/runtime and a specific backend Prolog
-compiler.</dd>
-<dt id="term-doclet-file">doclet file</dt>
-<dd>A source file whose main purpose is to generate documentation for
-e.g. a library or an application.</dd>
-<dt id="term-loader-file">loader file</dt>
-<dd>A source file whose main purpose is to load a set of source files.</dd>
 <dt id="term-settings-file">settings file</dt>
 <dd>A source file, compiled and loaded at Logtalk startup, mainly
 defining default values for compiler flags that override the
 defaults found on the backend Prolog compiler adapter files.</dd>
+<dt id="term-singleton-method">singleton method</dt>
+<dd>A method defined in an instance itself. Singleton methods are
+supported in Logtalk and can also be found in other
+object-oriented programming languages.</dd>
+<dt id="term-source-file">source file</dt>
+<dd>A text file defining Logtalk and/or Prolog code. Multiple Logtalk
+entities may be defined in a single source file. Prolog code may be
+intermixed with entity definitions.</dd>
+<dt id="term-source-file-directive">source file directive</dt>
+<dd>A directive that affects how a source file is compiled.</dd>
+<dt id="term-specialization">specialization</dt>
+<dd>A class is specialized by defining a new class that inherit its
+predicates and possibly add new ones.</dd>
+<dt id="term-subclass">subclass</dt>
+<dd>A class that is a specialization, direct or indirectly, of another
+class.</dd>
+<dt id="term-superclass">superclass</dt>
+<dd>A class from which another class is a specialization (directly or
+indirectly via another class).</dd>
+<dt id="term-synchronized-predicate">synchronized predicate</dt>
+<dd>A synchronized predicate is protected by a mutex ensuring that, in
+a multi-threaded application, it can only be called by a single
+thread at a time.</dd>
 <dt id="term-tester-file">tester file</dt>
 <dd>A source file whose main purpose is to load and a run a set of
 unit tests.</dd>
@@ -421,6 +420,9 @@ unit tests.</dd>
 the predicate clause is contained in a category, <em>this</em> is a
 reference to the object importing the category for which the
 predicate clause is being executed.</dd>
+<dt id="term-visible-predicate">visible predicate</dt>
+<dd>A predicate that is declared for an object, a built-in method, a
+Logtalk built-in predicate, or a Prolog built-in predicate.</dd>
 </dl>
 </div>
 
@@ -477,6 +479,7 @@ predicate clause is being executed.</dd>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

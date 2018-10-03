@@ -20,14 +20,14 @@ ________________________________________________________________________
 This directory contains the sources for the Logtalk documentation (which
 include the User Manual, Reference Manual, FAQ, and Glossary). The sources
 are written using the reStructuredText markup language and converted to
-HTML, PDF, and ePub formats using Sphinx:
+HTML, PDF, and ePub formats using Sphinx with the `sphinx_rtd_theme` theme:
 
 http://sphinx-doc.org/
 
 The included Makefile allows exporting the documentation in the final
 formats:
 
-	$ make html && make latexpdf && make epub
+	$ make clean && make html && make latexpdf && make epub
 
 After completion, the exported files are found in the `_build` directory.
 The `build_docs.sh` bash shell script can be used to both export the final
