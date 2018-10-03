@@ -1088,11 +1088,14 @@ context methods:
 
        test :-
            this(This), 
-           write('Calling predicate definition in '), writeq(This), nl,
+           write('Calling predicate definition in '),
+           writeq(This), nl,
            self(Self),
-           write('to answer a message received by '), writeq(Self), nl,
+           write('to answer a message received by '),
+           writeq(Self), nl,
            sender(Sender),
-           write('that was sent by '), writeq(Sender), nl, nl.
+           write('that was sent by '),
+           writeq(Sender), nl, nl.
 
    :- end_object.
 
