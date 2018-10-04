@@ -14,11 +14,11 @@ Description
    {Goal}
 
 This control construct allows the programmer to bypass the Logtalk
-compiler. It can be used to wrap a source file term (either a clause or
+compiler. It can also be used to wrap a source file term (either a clause or
 a directive) to bypass the term-expansion mechanism. Similarly, it can
-be used to wrap a goal to bypass the goal-expansion mechanism. When used
+also be used to wrap a goal to bypass the goal-expansion mechanism. When used
 to wrap a goal, it is opaque to cuts and the argument is called within
-the context of the pseudo-object :ref:`objects_user`. It is also possible
+the context of the pseudo-object :ref:`user <objects_user>`. It is also possible
 to use ``{Closure}`` as the first argument of ``call/2-N`` calls. In
 this case, ``Closure`` will be extended with the remaining arguments of
 the ``call/2-N`` call in order to construct a goal that will be called

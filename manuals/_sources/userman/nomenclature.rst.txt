@@ -27,43 +27,43 @@ equivalents.
    Logtalk uses an *operational* definition of abstract class: any class
    that does not inherit a method for creating new instances can be
    considered an abstract class. Moreover, Logtalk supports
-   *interfaces*/*protocols*, which are often a better way to provide the
+   :term:`interfaces/protocols <protocol>`, which are often a better way to provide the
    functionality of C++ abstract classes.
 
 **base class**
-   Logtalk uses the term *superclass* with the same meaning.
+   Logtalk uses the term :term:`superclass` with the same meaning.
 
 **data member**
-   Logtalk uses *predicates* for representing both behavior and data.
+   Logtalk uses :term:`predicates <predicate>` for representing both behavior and data.
 
 **constructor function**
    There are no special methods for creating new objects in Logtalk.
-   Instead, Logtalk provides a built-in predicate, ``create_object/4``,
+   Instead, Logtalk provides a built-in predicate, :ref:`predicates_create_object_4`,
    which can be used as a building block to define more sophisticated
    object creation predicates.
 
 **derived class**
-   Logtalk uses the term *subclass* with the same meaning.
+   Logtalk uses the term :term:`subclass` with the same meaning.
 
 **destructor function**
    There are no special methods for deleting new objects in Logtalk.
-   Instead, Logtalk provides a built-in predicate, ``abolish_object/1``,
+   Instead, Logtalk provides a built-in predicate, :ref:`predicates_abolish_object_1`,
    which is often used to define more sophisticated object deletion
    predicates.
 
 **friend function**
    Not supported in Logtalk. Nevertheless, see the manual section on
-   *meta-predicates.*
+   :ref:`meta-predicates <predicates_meta>`.
 
 **instance**
    In Logtalk, an instance can be either created dynamically at runtime
    or defined statically in a source file in the same way as classes.
 
 **member**
-   Logtalk uses the term predicate.
+   Logtalk uses the term :term:`predicate`.
 
 **member function**
-   Logtalk uses predicates for representing both behavior and data.
+   Logtalk uses :term:`predicates <predicate>` for representing both behavior and data.
 
 **namespace**
    Logtalk does not support multiple identifier namespaces. All Logtalk
@@ -74,14 +74,14 @@ equivalents.
    Logtalk does not support nested classes.
 
 **template**
-   Logtalk supports *parametric objects*, which allows you to get the
-   similar functionality of templates at runtime.
+   Logtalk supports :ref:`parametric objects <objects_parametric>`, which
+   allows you to get the similar functionality of templates at runtime.
 
 **this**
-   Logtalk uses the built-in context method ``self/1`` for retrieving
-   the current instance. Logtalk also provides a ``this/1`` method but
+   Logtalk uses the built-in context method :ref:`methods_self_1` for retrieving
+   the current instance. Logtalk also provides a :ref:`methods_this_1` method but
    for returning the class containing the method being executed. Why the
-   name clashes? Well, the notion of *self* was inherited from
+   name clashes? Well, the notion of :term:`self` was inherited from
    Smalltalk, which predates C++.
 
 **virtual member function**
@@ -106,7 +106,7 @@ Logtalk equivalents.
    abstract class. I.e. there is no ``abstract`` keyword in Logtalk.
 
 **abstract method**
-   In Logtalk, you may simply declare a method (predicate) in a class
+   In Logtalk, you may simply declare a method (:term:`predicate`) in a class
    without defining it, leaving its definition to some descendant
    sub-class.
 
@@ -115,17 +115,17 @@ Logtalk equivalents.
    supported using Logtalk compilation hooks and developer tools.
 
 **extends**
-   There is no ``extends`` keyword in Logtalk. Class inheritance is
-   indicated using *specialization* relations. Moreover, the *extends*
-   relation is used in Logtalk to indicate protocol, category, or
+   There is no ``extends keyword`` in Logtalk. Class inheritance is
+   indicated using *specialization relations*. Moreover, the *extends
+   relation* is used in Logtalk to indicate protocol, category, or
    prototype extension.
 
 **interface**
-   Logtalk uses the term *protocol* with the same meaning.
+   Logtalk uses the term :term:`protocol` with the same meaning.
 
 **callback method**
-   Logtalk supports *event-driven programming*, the most common use
-   context of callback methods.
+   Logtalk supports :ref:`event-driven programming <events_events>`,
+   the most common use context of callback methods.
 
 **class method**
    Class methods may be implemented in Logtalk by using a metaclass for
@@ -144,7 +144,7 @@ Logtalk equivalents.
 
 **constructor**
    There are no special methods for creating new objects in Logtalk.
-   Instead, Logtalk provides a built-in predicate, ``create_object/4``,
+   Instead, Logtalk provides a built-in predicate, :ref:`predicates_create_object_4`,
    which is often used to define more sophisticated object creation
    predicates.
 
@@ -160,7 +160,7 @@ Logtalk equivalents.
    or defined statically in a source file in the same way as classes.
 
 **method**
-   Logtalk uses the term *predicate* interchangeably with the term
+   Logtalk uses the term :term:`predicate` interchangeably with the term
    *method*.
 
 **method call**
@@ -169,32 +169,31 @@ Logtalk equivalents.
 
 **method signature**
    Logtalk selects the method/predicate to execute in order to answer a
-   method call based only on the method name (functor) and number of
-   arguments (arity). Logtalk (and Prolog) are not typed languages in
-   the same sense as Java.
+   method call based only on the method name and number of arguments.
+   Logtalk (and Prolog) are not typed languages in the same sense as Java.
 
 **reflection**
    Logtalk supports both *structural reflection* (using a set of
    built-in predicates and built-in methods) and *behavioral reflection*
-   (using event-driven programming).
+   (using :ref:`event-driven programming <events_events>`).
 
 **static**
    There is no ``static`` keyword in Logtalk. See the entries on *class
    methods* and *class variables*.
 
 **super**
-   Instead of a ``super`` keyword, Logtalk provides a *super* operator,
-   ``^^/1``, for calling overridden methods.
+   Instead of a ``super`` keyword, Logtalk provides a super operator,
+   :ref:`control_call_super_1`, for calling overridden methods.
 
 **synchronized**
-   Logtalk supports *multi-threading programming* in selected Prolog
-   compilers, including a ``synchronized/1`` predicate directive.
+   Logtalk supports :ref:`multi-threading programming <threads_threads>` in selected Prolog
+   compilers, including a :ref:`directives_synchronized_1` predicate directive.
    Logtalk allows you to synchronize a predicate or a set of predicates
    using per-predicate or per-predicate-set *mutexes*.
 
 **this**
-   Logtalk uses the built-in context method ``self/1`` for retrieving
-   the current instance. Logtalk also provides a ``this/1`` method but
+   Logtalk uses the built-in context method :ref:`methods_self_1` for retrieving
+   the current instance. Logtalk also provides a :ref:`methods_this_1` method but
    for returning the class containing the predicate clause being
-   executed. Why the name clashes? Well, the notion of *self* was
+   executed. Why the name clashes? Well, the notion of :term:`self` was
    inherited from Smalltalk, which predates Java.

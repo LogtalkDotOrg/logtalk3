@@ -50,7 +50,7 @@ Glossary
    
    closed-world assumption
       The assumption that what cannot be proved true is false. Therefore,
-      sending a message corresponding to a declared but not defined
+      sending a message corresponding to a *declared* but not *defined*
       predicate, or calling a declared predicate with no clauses, fails.
       But messages or calls to undeclared predicates generate an error.
 

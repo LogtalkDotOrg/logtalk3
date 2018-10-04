@@ -190,11 +190,11 @@
 </pre></div>
 </div>
 <p>This control construct allows the programmer to bypass the Logtalk
-compiler. It can be used to wrap a source file term (either a clause or
+compiler. It can also be used to wrap a source file term (either a clause or
 a directive) to bypass the term-expansion mechanism. Similarly, it can
-be used to wrap a goal to bypass the goal-expansion mechanism. When used
+also be used to wrap a goal to bypass the goal-expansion mechanism. When used
 to wrap a goal, it is opaque to cuts and the argument is called within
-the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">The built-in pseudo-object user</span></a>. It is also possible
+the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a>. It is also possible
 to use <code class="docutils literal notranslate"><span class="pre">{Closure}</span></code> as the first argument of <code class="docutils literal notranslate"><span class="pre">call/2-N</span></code> calls. In
 this case, <code class="docutils literal notranslate"><span class="pre">Closure</span></code> will be extended with the remaining arguments of
 the <code class="docutils literal notranslate"><span class="pre">call/2-N</span></code> call in order to construct a goal that will be called
