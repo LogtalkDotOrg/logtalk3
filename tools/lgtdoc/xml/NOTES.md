@@ -90,6 +90,11 @@ Brief description of each file in this folder:
 	XSLT file to output Markdown text files from the XML files. UTF-8 encoding
 	is assumed. Edit the file if you use a different encoding.
 
+- `logtalk_entity_to_rst.xsl`  
+- `logtalk_index_to_rst.xsl`  
+	XSLT file to output reStructuredText files from the XML files. UTF-8 encoding
+	is assumed. Edit the file if you use a different encoding.
+
 - `logtalk_entity_to_txt.xsl`  
 - `logtalk_index_to_txt.xsl`  
 	XSLT file to output simple text files from the XML files. UTF-8 encoding
@@ -194,6 +199,15 @@ Brief description of each file in this folder:
 	of the available optional parameters (type `cscript lgt2md.js help` or
 	`lgt2md.sh -h`; depending on your Logtalk installation, you may simply
 	need to type `lgt2md` in order to run the script).
+
+- `lgt2rst.sh` and `lgt2rst.js`  
+	Sample scripts to batch convert XML files to  reStructuredText files.
+
+	The scripts should be called from the directory containing the XML files
+	you wish to convert. Call the scripts with the help option for a description
+	of the available optional parameters (type `cscript lgt2rst.js help` or
+	`lgt2rst.sh -h`; depending on your Logtalk installation, you may simply
+	need to type `lgt2rst` in order to run the script).
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.

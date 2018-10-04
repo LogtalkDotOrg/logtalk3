@@ -37,6 +37,7 @@
 	<define name="entity">
 		<element name="entity">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="type"/>
 			<ref name="entity_compilation"/>
 			<optional>
@@ -71,6 +72,12 @@
 
 	<define name="name">
 		<element name="name">
+			<text/>
+		</element>
+	</define>
+
+	<define name="functor">
+		<element name="functor">
 			<text/>
 		</element>
 	</define>
@@ -253,6 +260,7 @@
 	<define name="implements">
 		<element name="implements">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="scope"/>
 			<ref name="file"/>
 		</element>
@@ -261,6 +269,7 @@
 	<define name="imports">
 		<element name="imports">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="scope"/>
 			<ref name="file"/>
 		</element>
@@ -269,6 +278,7 @@
 	<define name="extends">
 		<element name="extends">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="scope"/>
 			<ref name="file"/>
 		</element>
@@ -277,6 +287,7 @@
 	<define name="instantiates">
 		<element name="instantiates">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="scope"/>
 			<ref name="file"/>
 		</element>
@@ -285,6 +296,7 @@
 	<define name="specializes">
 		<element name="specializes">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="scope"/>
 			<ref name="file"/>
 		</element>
@@ -293,6 +305,7 @@
 	<define name="complements">
 		<element name="complements">
 			<ref name="name"/>
+			<ref name="functor"/>
 			<ref name="file"/>
 		</element>
 	</define>
@@ -300,6 +313,7 @@
 	<define name="provides">
 		<element name="provides">
 			<ref name="to"/>
+			<ref name="functor"/>
 			<ref name="resource"/>
 			<ref name="file"/>
 		</element>

@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.8,
+		version is 4.9,
 		author is 'Paulo Moura',
-		date is 2017/11/04,
+		date is 2018/10/04,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -404,6 +404,8 @@
 		write_xml_open_tag(Stream, entity, []),
 		entity_to_xml_term(Entity),
 		write_xml_cdata_element(Stream, name, [], Entity),
+		functor(Entity, Name, Arity),
+		write_xml_cdata_element(Stream, functor, [], Name/Arity),
 		write_xml_element(Stream, type, [], Type),
 		xml_entity_compilation_text(Type, Entity, Compilation),
 		write_xml_element(Stream, compilation, [], Compilation),
@@ -1035,6 +1037,8 @@
 		relation_to_xml_filename(Relation, File),
 		write_xml_open_tag(Stream, Tag, []),
 		write_xml_cdata_element(Stream, name, [], Relation),
+		functor(Relation, Name, Arity),
+		write_xml_cdata_element(Stream, functor, [], Name/Arity),
 		write_xml_element(Stream, scope, [], Scope),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, Tag).
@@ -1052,6 +1056,8 @@
 		relation_to_xml_filename(To, File),
 		write_xml_open_tag(Stream, provides, []),
 		write_xml_cdata_element(Stream, to, [], To),
+		functor(To, Name, Arity),
+		write_xml_cdata_element(Stream, functor, [], Name/Arity::Resource),
 		write_xml_cdata_element(Stream, resource, [], Resource),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, provides).

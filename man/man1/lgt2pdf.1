@@ -1,4 +1,4 @@
-.TH lgt2pdf 1 "November 3, 2014" "Logtalk 3.00.0" "Logtalk Documentation"
+.TH lgt2pdf 1 "October 4, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2pdf \- Logtalk script for converting XML documenting files into PDF files
@@ -54,14 +54,20 @@ Specifies the location of the Logtalk user directory.
 
 .SH FILES
 .TP
-.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk.dtd
-The Logtalk DTD file.
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd
+The Logtalk entity DTD file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.dtd
+The Logtalk index DTD file.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/custom.ent
 The Logtalk custom entities file.
 .TP
-.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk.xsd
-The Logtalk XML Schema file.
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd
+The Logtalk entity XML Schema file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd
+The Logtalk index XML Schema file.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/lgtpdfa4.xsl
 The default XSLT file for generating PDF A4 files.
@@ -80,4 +86,4 @@ logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2md(1),\ lgt2txt(1)
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2015 Paulo Moura.
+Copyright (c) 1998-2018 Paulo Moura.

@@ -24,9 +24,11 @@
 <!ELEMENT logtalk (entity, relations, predicates, operators, remarks, see_also)>
 
 
-<!ELEMENT entity (name, type, compilation, comment?, (parnames|parameters)?, author?, version?, date?, copyright?, license?, info*)>
+<!ELEMENT entity (name, functor, type, compilation, comment?, (parnames|parameters)?, author?, version?, date?, copyright?, license?, info*)>
 
 <!ELEMENT name (#PCDATA)>
+
+<!ELEMENT functor (#PCDATA)>
 
 <!ELEMENT type (#PCDATA)>
 
@@ -65,19 +67,19 @@
 
 <!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, complements*, provides*, uses*, calls*, alias*)>
 
-<!ELEMENT implements (name, scope, file)>
+<!ELEMENT implements (name, functor, scope, file)>
 
-<!ELEMENT imports (name, scope, file)>
+<!ELEMENT imports (name, functor, scope, file)>
 
-<!ELEMENT extends (name, scope, file)>
+<!ELEMENT extends (name, functor, scope, file)>
 
-<!ELEMENT instantiates (name, scope, file)>
+<!ELEMENT instantiates (name, functor, scope, file)>
 
-<!ELEMENT specializes (name, scope, file)>
+<!ELEMENT specializes (name, functor, scope, file)>
 
-<!ELEMENT complements (name, file)>
+<!ELEMENT complements (name, functor, file)>
 
-<!ELEMENT provides (to, resource, file)>
+<!ELEMENT provides (to, functor, resource, file)>
 
 <!ELEMENT uses (name, file)>
 

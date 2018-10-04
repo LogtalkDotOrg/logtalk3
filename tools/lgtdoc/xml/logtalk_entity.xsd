@@ -49,6 +49,7 @@
 <xsd:complexType name="entity">
 	<xsd:sequence>
 		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="functor"		type="xsd:string"/>
 		<xsd:element name="type"		type="type"/>
 		<xsd:element name="compilation"	type="entity_compilation"/>
 		<xsd:element name="comment"		type="xsd:string"	minOccurs="0"/>
@@ -136,6 +137,7 @@
 <xsd:complexType name="relation">
 	<xsd:sequence>
 		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="functor"	type="xsd:string"/>
 		<xsd:element name="scope"	type="scope"/>
 		<xsd:element name="file"	type="xsd:string"/>
 	</xsd:sequence>
@@ -145,6 +147,7 @@
 <xsd:complexType name="complementsrelation">
 	<xsd:sequence>
 		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="functor"	type="xsd:string"/>
 		<xsd:element name="file"	type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>
@@ -153,6 +156,7 @@
 <xsd:complexType name="providesrelation">
 	<xsd:sequence>
 		<xsd:element name="to"			type="xsd:string"/>
+		<xsd:element name="functor"		type="xsd:string"/>
 		<xsd:element name="resource"	type="xsd:string"/>
 		<xsd:element name="file"		type="xsd:string"/>
 	</xsd:sequence>

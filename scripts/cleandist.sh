@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Distribution clean script for packaging
-##   Last updated on April 15, 2018
+##   Last updated on October 4, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -38,8 +38,7 @@ find . -type d -print0 | xargs -0 chmod 755
 
 chmod a+x integration/*.sh
 chmod a+x integration/unsupported/*.sh
-chmod a+x manuals/userman/*.sh
-chmod a+x manuals/refman/*.sh
+chmod a+x manuals/sources/*.sh
 chmod a+x scripts/*.sh
 chmod a-x scripts/*.js
 chmod a+x scripts/embedding/eclipse/*.sh
