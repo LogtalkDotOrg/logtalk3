@@ -32,7 +32,7 @@
 <xsl:output
 	method="text"
 	indent="yes"
-    encoding="utf-8"/>
+	encoding="utf-8"/>
 
 
 <xsl:variable name="nl">
