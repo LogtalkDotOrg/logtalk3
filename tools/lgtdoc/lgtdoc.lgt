@@ -1306,6 +1306,8 @@
 		write_xml_open_tag(Stream, entity, []),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_cdata_element(Stream, name, [], Entity),
+		functor(Entity, Name, Arity),
+		write_xml_cdata_element(Stream, functor, [], Name/Arity),
 		write_xml_close_tag(Stream, entity),
 		write_index_key_entities(Entities, Stream).	
 

@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files
-%  Last updated on October 4, 2018
+%  Last updated on October 5, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -45,31 +45,58 @@
 </xsl:variable>
 
 <xsl:variable name="hr">
-	<xsl:text>&#10;-------------------------------------------------------------------------------&#10;</xsl:text>
+	<xsl:text>&#10;&#10;--------&#10;&#10;</xsl:text>
 </xsl:variable>
+
+<xsl:template name="adornment">
+	<xsl:param name="char"/>
+	<xsl:param name="n"/>
+	<xsl:if test="$n > 0">
+		<xsl:call-template name="adornment">
+			<xsl:with-param name="char" select="$char"/>
+			<xsl:with-param name="n" select="$n - 1"/>
+		</xsl:call-template>
+		<xsl:value-of select="$char"/>
+	</xsl:if>
+</xsl:template>
 
 
 <xsl:template match="/">
-	<xsl:value-of select="$hr" />
-	<xsl:text># </xsl:text><xsl:apply-templates select="logtalk_index/type" />
+	<xsl:value-of select="$nl" />
+	<xsl:apply-templates select="logtalk_index/type" />
 	<xsl:value-of select="$nl2" />
 	<xsl:apply-templates select="logtalk_index/entries" />
-	<xsl:value-of select="$hr" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_index/type">
 	<xsl:if test=".='library'">
+		<xsl:text>.. _library_index:</xsl:text>
+		<xsl:value-of select="$nl2" />
 		<xsl:text>Library index</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>=============</xsl:text>
 	</xsl:if>
 	<xsl:if test=".='directory'">
+		<xsl:text>.. _directory_index:</xsl:text>
+		<xsl:value-of select="$nl2" />
 		<xsl:text>Directory index</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>===============</xsl:text>
 	</xsl:if>
 	<xsl:if test=".='entity'">
+		<xsl:text>.. _entity_index:</xsl:text>
+		<xsl:value-of select="$nl2" />
 		<xsl:text>Entity index</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>============</xsl:text>
 	</xsl:if>
 	<xsl:if test=".='predicate'">
+		<xsl:text>.. _predicate_index:</xsl:text>
+		<xsl:value-of select="$nl2" />
 		<xsl:text>Predicate index</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>===============</xsl:text>
 	</xsl:if>
 </xsl:template>
 
@@ -80,22 +107,18 @@
 
 
 <xsl:template match="*/entry">
-	<xsl:text>## `</xsl:text><xsl:apply-templates select="key" /><xsl:text>`</xsl:text>
+	<xsl:apply-templates select="key" />
 	<xsl:value-of select="$nl2" />
 	<xsl:choose>
 	    <xsl:when test="/logtalk_index/type='predicate'">
 			<xsl:for-each select="entities/entity">
-				<xsl:text>* [`</xsl:text><xsl:value-of select="name" />
-				<xsl:text>`](</xsl:text>
-				<xsl:value-of select="file" /><xsl:text>.rst#</xsl:text><xsl:value-of select="../../key" /><xsl:text>)</xsl:text>
+				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 				<xsl:value-of select="$nl" />
 			</xsl:for-each>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:for-each select="entities/entity">
-				<xsl:text>* [`</xsl:text><xsl:value-of select="name" />
-				<xsl:text>`](</xsl:text>
-				<xsl:value-of select="file" /><xsl:text>.rst)</xsl:text>
+				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 				<xsl:value-of select="$nl" />
 			</xsl:for-each>
 		</xsl:otherwise>
@@ -106,10 +129,29 @@
 
 <xsl:template match="*/key">
 	<xsl:choose>
-	    <xsl:when test=".='object'">Objects</xsl:when>
-	    <xsl:when test=".='protocol'">Protocols</xsl:when>
-	    <xsl:when test=".='category'">Categories</xsl:when>
-		<xsl:otherwise><xsl:value-of select="." /></xsl:otherwise>
+	    <xsl:when test=".='object'">
+			<xsl:text>Objects</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>-------</xsl:text>		
+		</xsl:when>
+	    <xsl:when test=".='protocol'">
+			<xsl:text>Protocols</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>---------</xsl:text>
+		</xsl:when>
+	    <xsl:when test=".='category'">
+			<xsl:text>Categories</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>----------</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="." />
+			<xsl:value-of select="$nl" />
+			<xsl:call-template name="adornment">
+				<xsl:with-param name="char" select="'-'"/>
+				<xsl:with-param name="n" select="string-length(.)"/>
+			</xsl:call-template>
+		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 

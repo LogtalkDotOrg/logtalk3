@@ -64,8 +64,10 @@
 <xsl:template match="/">
 	<xsl:value-of select="logtalk_entity/entity/type" />
 	<xsl:value-of select="$hr" />
-	<xsl:text>.. index:: </xsl:text><xsl:value-of select="logtalk_entity/entity/name" /><xsl:text>&#10;</xsl:text>
-	<xsl:text>.. _</xsl:text><xsl:value-of select="logtalk_entity/entity/functor" /><xsl:text>:&#10;&#10;</xsl:text>
+	<xsl:text>.. index:: </xsl:text><xsl:value-of select="logtalk_entity/entity/name" />
+	<xsl:value-of select="$nl" />
+	<xsl:text>.. _</xsl:text><xsl:value-of select="logtalk_entity/entity/functor" /><xsl:text>:</xsl:text>
+	<xsl:value-of select="$nl2" />
 	<xsl:text>``</xsl:text><xsl:value-of select="logtalk_entity/entity/name" /><xsl:text>``</xsl:text>
 	<xsl:value-of select="$nl" />
 	<xsl:call-template name="adornment">
@@ -259,8 +261,10 @@
 
 
 <xsl:template match="*/predicate">
-	<xsl:text>.. index:: </xsl:text><xsl:value-of select="name" /><xsl:text>&#10;</xsl:text>
-	<xsl:text>.. _</xsl:text><xsl:value-of select="/logtalk_entity/entity/functor" />::<xsl:value-of select="name" /><xsl:text>:&#10;&#10;</xsl:text>
+	<xsl:text>.. index:: </xsl:text><xsl:value-of select="name" />
+	<xsl:value-of select="$nl" />
+	<xsl:text>.. _</xsl:text><xsl:value-of select="/logtalk_entity/entity/functor" />::<xsl:value-of select="name" /><xsl:text>:</xsl:text>
+	<xsl:value-of select="$nl2" />
 	<xsl:text>``</xsl:text><xsl:value-of select="name" /><xsl:text>``</xsl:text>
 	<xsl:value-of select="$nl" />
 	<xsl:call-template name="adornment">
@@ -349,9 +353,9 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>(none)</xsl:text>
-			<xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
+	<xsl:value-of select="$nl2" />
 </xsl:template>
 
 
@@ -388,9 +392,9 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>(none)</xsl:text>
-			<xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
+	<xsl:value-of select="$nl2" />
 </xsl:template>
 
 <xsl:template match="logtalk_entity/see_also/reference">

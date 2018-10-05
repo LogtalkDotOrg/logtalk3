@@ -114,14 +114,28 @@ create_index_file()
 {
 	echo "" > "$index_file"
 
-	echo "# $index_title" >> "$index_file"
+	echo "$index_title" >> "$index_file"
+    num=${#index_title}
+    eval $(echo printf '"=%0.s"' {1..$num}) >> "$index_file"
+	echo "" >> "$index_file"
 	echo "" >> "$index_file"
 
 	if [ -e "./directory_index.xml" ] ; then
-		echo "* [Library index](library_index.rst)" >> "$index_file"
-		echo "* [Directory index](directory_index.rst)" >> "$index_file"
-		echo "* [Entity index](entity_index.rst)" >> "$index_file"
-		echo "* [Predicate index](predicate_index.rst)" >> "$index_file"
+
+		echo ".. toctree::" >> "$index_file"
+		echo "   :maxdepth: 3" >> "$index_file"
+		echo "   :caption: Contents:" >> "$index_file"
+    	echo "" >> "$index_file"
+		echo "* :ref:\`library_index\`" >> "$index_file"
+		echo "* :ref:\`directory_index\`" >> "$index_file"
+		echo "* :ref:\`entity_index\`" >> "$index_file"
+		echo "* :ref:\`predicate_index\`" >> "$index_file"
+    	echo "" >> "$index_file"
+    	echo "Indices and tables" >> "$index_file"
+    	echo "==================" >> "$index_file"
+    	echo "" >> "$index_file"
+    	echo "* :ref:\`genindex\`" >> "$index_file"
+    	echo "* :ref:\`search\`" >> "$index_file"
 	else
 		for file in $(grep -l "<logtalk_entity" ./*.xml); do
 			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
