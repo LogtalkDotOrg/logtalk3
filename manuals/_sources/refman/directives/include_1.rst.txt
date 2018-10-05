@@ -30,9 +30,11 @@ entities defined in source files and with the entity creation built-in
 predicates.
 
 Note that when using this directive as an argument in a call to the
-``create_object/4`` and ``create_category/4`` predicates, the objects
-will not be recreated or redefined when the included file(s) are
-modified and the ``logtalk_make/0-1`` predicates are called.
+:ref:`predicates_create_object_4` and :ref:`predicates_create_category_4`
+predicates, the objects will not be recreated or redefined when the
+included file(s) are modified and the :ref:`predicates_logtalk_make_0`
+predicate or the :ref:`predicates_logtalk_make_1` predicate (with target
+``all``) are called.
 
 Template and modes
 ------------------

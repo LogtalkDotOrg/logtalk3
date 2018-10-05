@@ -38,8 +38,8 @@ It is possible to specify a predicate alias using the notation
 ``Name/Arity as Alias/Arity`` or, in alternative, the notation
 ``Name/Arity:Alias/Arity``. Aliases may be used either for avoiding
 conflicts between predicates specified in ``use_module/2`` and
-``uses/2`` directives or for giving more meaningful names considering
-the using context of the predicates.
+:ref:`directives_uses_2` directives or for giving more meaningful
+names considering the using context of the predicates.
 
 Note that this directive differs from the directive with the same name
 found on some Prolog implementations by requiring the first argument to

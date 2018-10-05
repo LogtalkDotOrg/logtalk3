@@ -19,7 +19,7 @@ a directive) to bypass the term-expansion mechanism. Similarly, it can
 also be used to wrap a goal to bypass the goal-expansion mechanism. When used
 to wrap a goal, it is opaque to cuts and the argument is called within
 the context of the pseudo-object :ref:`user <objects_user>`. It is also possible
-to use ``{Closure}`` as the first argument of ``call/2-N`` calls. In
+to use ``{Closure}`` as the first argument of :ref:`methods_call_N` calls. In
 this case, ``Closure`` will be extended with the remaining arguments of
 the ``call/2-N`` call in order to construct a goal that will be called
 within the context of ``user``. It can also be used as a message to any
@@ -30,8 +30,8 @@ This control construct may also be used in place of an object identifier
 when sending a message. In this case, the result of proving its argument
 as a goal (within the context of the pseudo-object ``user``) is used as
 an object identifier in the message sending call. This feature is mainly
-used with parametric objects when the their identifiers correspond to
-predicates defined in ``user``.
+used with :term:`parametric objects <parametric object>` when the their
+identifiers correspond to predicates defined in ``user``.
 
 Template and modes
 ------------------

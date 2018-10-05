@@ -423,7 +423,7 @@ useful objects, categories, and protocols. Read the corresponding
 Examples
 ~~~~~~~~
 
-Logtalk 2.x contains new implementations of some of the examples
+Logtalk 2.x and 3.x contain new implementations of some of the examples
 provided with previous 1.x versions. The sources of each one of these
 examples can be found included in a subdirectory with the same name,
 inside the directory examples. The majority of these examples include a

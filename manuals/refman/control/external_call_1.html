@@ -195,7 +195,7 @@ a directive) to bypass the term-expansion mechanism. Similarly, it can
 also be used to wrap a goal to bypass the goal-expansion mechanism. When used
 to wrap a goal, it is opaque to cuts and the argument is called within
 the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a>. It is also possible
-to use <code class="docutils literal notranslate"><span class="pre">{Closure}</span></code> as the first argument of <code class="docutils literal notranslate"><span class="pre">call/2-N</span></code> calls. In
+to use <code class="docutils literal notranslate"><span class="pre">{Closure}</span></code> as the first argument of <a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> calls. In
 this case, <code class="docutils literal notranslate"><span class="pre">Closure</span></code> will be extended with the remaining arguments of
 the <code class="docutils literal notranslate"><span class="pre">call/2-N</span></code> call in order to construct a goal that will be called
 within the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>. It can also be used as a message to any
@@ -205,8 +205,8 @@ messages, some of which being calls to Prolog built-in predicates.</p>
 when sending a message. In this case, the result of proving its argument
 as a goal (within the context of the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>) is used as
 an object identifier in the message sending call. This feature is mainly
-used with parametric objects when the their identifiers correspond to
-predicates defined in <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p>
+used with <a class="reference internal" href="../../glossary.html#term-parametric-object"><span class="xref std std-term">parametric objects</span></a> when the their
+identifiers correspond to predicates defined in <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

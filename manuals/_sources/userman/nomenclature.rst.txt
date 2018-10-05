@@ -128,13 +128,13 @@ Logtalk equivalents.
    the most common use context of callback methods.
 
 **class method**
-   Class methods may be implemented in Logtalk by using a metaclass for
+   Class methods may be implemented in Logtalk by using a :term:`metaclass` for
    the class and defining the class methods in the metaclass. I.e. class
    methods are simply instance methods of the class metaclass.
 
 **class variable**
    True class variables may be implemented in Logtalk by using a
-   metaclass for the class and defining the class variables in the
+   :term:`metaclass` for the class and defining the class variables in the
    class. I.e. class variables are simply instance variables of the
    class metaclass. Shared instance variables may be implemented by
    using the built-in database methods (which can be used to implement

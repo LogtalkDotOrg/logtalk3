@@ -199,10 +199,11 @@ the closed-world assumption).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}::Message</span></code> syntax allows simplified access to parametric
 object <em>proxies</em>. Its operational semantics is equivalent to the goal
 conjunction <code class="docutils literal notranslate"><span class="pre">(call(Proxy),</span> <span class="pre">Proxy::Message)</span></code>. I.e. <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is proved
-within the context of the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code> and, if successful, the
-goal term is used as a parametric object identifier. Exceptions thrown
-when proving <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> are handled by the <code class="docutils literal notranslate"><span class="pre">::/2</span></code> control construct.
-This syntax construct supports backtracking over the <code class="docutils literal notranslate"><span class="pre">{Proxy}</span></code> goal.</p>
+within the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a> and,
+if successful, the goal term is used as a parametric object identifier.
+Exceptions thrown when proving <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> are handled by the <code class="docutils literal notranslate"><span class="pre">::/2</span></code>
+control construct. This syntax construct supports backtracking over the
+<code class="docutils literal notranslate"><span class="pre">{Proxy}</span></code> goal.</p>
 <p>The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. Depending on the value of the
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag, these lookups are performed at compile time whenever

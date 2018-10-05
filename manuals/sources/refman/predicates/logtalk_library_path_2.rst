@@ -39,7 +39,7 @@ Logtalk loading). This allows e.g. Logtalk to be installed in a
 read-only directory by setting this alias to the operating-system
 directory for temporary files. It also allows several Logtalk instances
 to run concurrently without conflict by using a unique scratch directory
-per instance (e.g. using a UUID generator).
+per instance (e.g. using a process ID or a UUID generator).
 
 Template and modes
 ------------------

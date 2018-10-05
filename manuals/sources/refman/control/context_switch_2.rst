@@ -24,10 +24,11 @@ used for objects compiled with the compiler flag
 ``deny`` to disable this control construct and thus preventing using it
 to break encapsulation.
 
-The ``{Proxy}<<Goal`` syntax allows simplified access to parametric
-object *proxies*. Its operational semantics is equivalent to the goal
+The ``{Proxy}<<Goal`` syntax allows simplified access to
+:term:`parametric object proxies <parametric object proxy>`.
+Its operational semantics is equivalent to the goal
 conjunction ``(call(Proxy), Proxy<<Goal)``. I.e. ``Proxy`` is proved
-within the context of the pseudo-object ``user`` and, if successful, the
+within the context of the pseudo-object :ref:`user <objects_user>` and, if successful, the
 goal term is used as a parametric object identifier. Exceptions thrown
 when proving ``Proxy`` are handled by the ``<</2`` control construct.
 This syntax construct supports backtracking over the ``{Proxy}`` goal.
