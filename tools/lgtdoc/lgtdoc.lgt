@@ -1108,11 +1108,13 @@
 		write_xml_open_tag(Stream, see_also, []),
 		(	entity_property(Entity, info(Info)), member(see_also(SeeAlso), Info) ->
 			forall(
-				member(Name, SeeAlso),
-				(entity_to_xml_term(Name),
-				 relation_to_xml_filename(Name, File),
+				member(Reference, SeeAlso),
+				(entity_to_xml_term(Reference),
+				 relation_to_xml_filename(Reference, File),
 				 write_xml_open_tag(Stream, reference, []),
-				 write_xml_cdata_element(Stream, name, [], Name),
+				 write_xml_cdata_element(Stream, name, [], Reference),
+				 functor(Reference, Name, Arity),
+				 write_xml_cdata_element(Stream, functor, [], Name/Arity),
 				 write_xml_cdata_element(Stream, file, [], File),
 				 write_xml_close_tag(Stream, reference))
 			)
