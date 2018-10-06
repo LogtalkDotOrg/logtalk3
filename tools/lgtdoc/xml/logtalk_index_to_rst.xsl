@@ -110,7 +110,7 @@
 	<xsl:apply-templates select="key" />
 	<xsl:value-of select="$nl2" />
 	<xsl:choose>
-	    <xsl:when test="/logtalk_index/type='predicate'">
+		<xsl:when test="/logtalk_index/type='predicate'">
 			<xsl:for-each select="entities/entity">
 				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 				<xsl:value-of select="$nl" />
@@ -118,7 +118,7 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:for-each select="entities/entity">
-				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+				<xsl:text>   </xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="file" /><xsl:text>&gt;</xsl:text>
 				<xsl:value-of select="$nl" />
 			</xsl:for-each>
 		</xsl:otherwise>
@@ -129,20 +129,35 @@
 
 <xsl:template match="*/key">
 	<xsl:choose>
-	    <xsl:when test=".='object'">
+		<xsl:when test=".='object'">
 			<xsl:text>Objects</xsl:text>
 			<xsl:value-of select="$nl" />
-			<xsl:text>-------</xsl:text>		
+			<xsl:text>-------</xsl:text>
+			<xsl:value-of select="$nl2" />
+			<xsl:text>.. toctree::</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>   :maxdepth: 1</xsl:text>
+			<xsl:value-of select="$nl2" />
 		</xsl:when>
-	    <xsl:when test=".='protocol'">
+		<xsl:when test=".='protocol'">
 			<xsl:text>Protocols</xsl:text>
 			<xsl:value-of select="$nl" />
 			<xsl:text>---------</xsl:text>
+			<xsl:value-of select="$nl2" />
+			<xsl:text>.. toctree::</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>   :maxdepth: 1</xsl:text>
+			<xsl:value-of select="$nl2" />
 		</xsl:when>
-	    <xsl:when test=".='category'">
+		<xsl:when test=".='category'">
 			<xsl:text>Categories</xsl:text>
 			<xsl:value-of select="$nl" />
 			<xsl:text>----------</xsl:text>
+			<xsl:value-of select="$nl2" />
+			<xsl:text>.. toctree::</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>   :maxdepth: 1</xsl:text>
+			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:value-of select="." />
@@ -151,6 +166,11 @@
 				<xsl:with-param name="char" select="'-'"/>
 				<xsl:with-param name="n" select="string-length(.)"/>
 			</xsl:call-template>
+			<xsl:value-of select="$nl2" />
+			<xsl:text>.. toctree::</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>   :maxdepth: 1</xsl:text>
+			<xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>

@@ -62,11 +62,11 @@
 
 
 <xsl:template match="/">
-	<xsl:value-of select="logtalk_entity/entity/type" />
-	<xsl:value-of select="$hr" />
 	<xsl:text>.. index:: </xsl:text><xsl:value-of select="logtalk_entity/entity/name" />
 	<xsl:value-of select="$nl" />
 	<xsl:text>.. _</xsl:text><xsl:value-of select="logtalk_entity/entity/functor" /><xsl:text>:</xsl:text>
+	<xsl:value-of select="$nl2" />
+	<xsl:text>**</xsl:text><xsl:value-of select="logtalk_entity/entity/type" /><xsl:text>**</xsl:text>
 	<xsl:value-of select="$nl2" />
 	<xsl:text>``</xsl:text><xsl:value-of select="logtalk_entity/entity/name" /><xsl:text>``</xsl:text>
 	<xsl:value-of select="$nl" />

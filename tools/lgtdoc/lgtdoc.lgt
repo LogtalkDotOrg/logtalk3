@@ -289,7 +289,7 @@
 		entity_doc_file_name(Entity, File),
 		convert_stream_options(StreamOptions, ConvertedStreamOptions),
 		open(File, write, Stream, ConvertedStreamOptions),
-		write_entity_xml_file(Stream, Entity, Options, StreamOptions),
+		write_entity_xml_file(File, Stream, Entity, Options, StreamOptions),
 		close(Stream).
 
 	% entity_doc_file_name(@nonvar, -atom)
@@ -337,13 +337,13 @@
 		convert_stream_option(StreamOption, StreamOption).
 	:- endif.
 
-	% write_entity_xml_file(@stream)
+	% write_entity_xml_file(@atom, @stream, @list, @list)
 	%
 	% writes an entity XML file containing the documentation of a compiled entity
 
-	write_entity_xml_file(Stream, Entity, Options, StreamOptions) :-
+	write_entity_xml_file(File, Stream, Entity, Options, StreamOptions) :-
 		write_entity_xml_header(Stream, Options, StreamOptions),
-		write_entity_xml_entity(Stream, Entity),
+		write_entity_xml_entity(File, Stream, Entity),
 		write_entity_xml_relations(Stream, Entity),
 		write_entity_xml_predicates(Stream, Entity),
 		write_entity_xml_operators(Stream, Entity),
@@ -399,13 +399,15 @@
 	write_entity_xml_footer(Stream) :-
 		write_xml_close_tag(Stream, logtalk_entity).
 
-	write_entity_xml_entity(Stream, Entity) :-
+	write_entity_xml_entity(File, Stream, Entity) :-
 		entity_type(Entity, Type),
 		write_xml_open_tag(Stream, entity, []),
 		entity_to_xml_term(Entity),
 		write_xml_cdata_element(Stream, name, [], Entity),
 		functor(Entity, Name, Arity),
 		write_xml_cdata_element(Stream, functor, [], Name/Arity),
+		os::decompose_file_name(File, _, Basename, _),
+		write_xml_cdata_element(Stream, file, [], Basename),
 		write_xml_element(Stream, type, [], Type),
 		xml_entity_compilation_text(Type, Entity, Compilation),
 		write_xml_element(Stream, compilation, [], Compilation),

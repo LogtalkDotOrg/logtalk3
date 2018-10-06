@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to  reStructuredText files conversion script
-##   Last updated on October 4, 2018
+##   Last updated on October 6, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -115,8 +115,8 @@ create_index_file()
 	echo "" > "$index_file"
 
 	echo "$index_title" >> "$index_file"
-    num=${#index_title}
-    eval $(echo printf '"=%0.s"' {1..$num}) >> "$index_file"
+	num=${#index_title}
+	eval $(echo printf '"=%0.s"' {1..$num}) >> "$index_file"
 	echo "" >> "$index_file"
 	echo "" >> "$index_file"
 
@@ -125,17 +125,17 @@ create_index_file()
 		echo ".. toctree::" >> "$index_file"
 		echo "   :maxdepth: 3" >> "$index_file"
 		echo "   :caption: Contents:" >> "$index_file"
-    	echo "" >> "$index_file"
+		echo "" >> "$index_file"
 		echo "   library_index" >> "$index_file"
 		echo "   directory_index" >> "$index_file"
 		echo "   entity_index" >> "$index_file"
 		echo "   predicate_index" >> "$index_file"
-    	echo "" >> "$index_file"
-    	echo "Indices and tables" >> "$index_file"
-    	echo "==================" >> "$index_file"
-    	echo "" >> "$index_file"
-    	echo "* :ref:\`genindex\`" >> "$index_file"
-    	echo "* :ref:\`search\`" >> "$index_file"
+		echo "" >> "$index_file"
+		echo "Indices and tables" >> "$index_file"
+		echo "==================" >> "$index_file"
+		echo "" >> "$index_file"
+		echo "* :ref:\`genindex\`" >> "$index_file"
+		echo "* :ref:\`search\`" >> "$index_file"
 	else
 		for file in $(grep -l "<logtalk_entity" ./*.xml); do
 			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
