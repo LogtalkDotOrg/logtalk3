@@ -227,7 +227,8 @@ Encapsulation is enforced in Logtalk by using predicate scope
 directives.</dd>
 <dt id="term-entity">entity</dt>
 <dd>Generic name for Logtalk compilation units: objects, categories, and
-protocols.</dd>
+protocols. Entities share a single namespace (i.e. entity identifiers
+must be unique).</dd>
 <dt id="term-entity-directive">entity directive</dt>
 <dd>A directive that affects how Logtalk entities (objects, protocols,
 or categories) are used or compiled.</dd>
@@ -260,7 +261,7 @@ expanded.</dd>
 <dd>Property of an entity that distinguishes it from every other entity.
 Object and category identifiers can be an atoms or compound terms.
 Protocol identities must be atoms. All Logtalk entities (objects,
-protocols, and categories) share the same name space.</dd>
+protocols, and categories) share the same namespace.</dd>
 <dt id="term-inheritance">inheritance</dt>
 <dd>An object inherits predicate directives and clauses from related
 entities. If an object extends other object then we have a
@@ -275,16 +276,15 @@ instance may also be defined as a static object in a source file.</dd>
 <dt id="term-library">library</dt>
 <dd>A directory containing source files. The library name can be used as
 an alias to the directory path when compiling and loading source
-files using the notation
-<code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.</dd>
+files using the notation <code class="docutils literal notranslate"><span class="pre">library_name('source_file_relative_path')</span></code>.</dd>
 <dt id="term-loader-file">loader file</dt>
 <dd>A source file whose main purpose is to load a set of source files.</dd>
 <dt id="term-local-predicate">local predicate</dt>
 <dd>A predicate that is defined in an object (or in a category) but
 that is not listed in a scope directive. These predicates behave
 like private predicates but are invisible to the reflection
-built-in methods. Local predicates are usually auxiliary
-predicates, only relevant to the entity where they are defined.</dd>
+built-in methods. Local predicates are usually auxiliary predicates
+and only relevant to the entity where they are defined.</dd>
 <dt id="term-message">message</dt>
 <dd>A query sent to an object. In logical terms, a message can be seen as
 a request for proof construction using an object’s database and the
@@ -293,8 +293,9 @@ databases of related entities.</dd>
 <dd>A program capable of running other programs written in the same
 language.</dd>
 <dt id="term-meta-predicate">meta-predicate</dt>
-<dd>A predicate where one of its arguments will be called as a goal.
-For instance, <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> and <code class="docutils literal notranslate"><span class="pre">call/1</span></code> are Prolog built-ins
+<dd>A predicate where one of its arguments will be called as a goal
+or used as a closure to construct a goal that will be called.
+For example, <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> and <code class="docutils literal notranslate"><span class="pre">call/1</span></code> are Prolog built-ins
 meta-predicates.</dd>
 <dt id="term-metaclass">metaclass</dt>
 <dd>The class of a class, when interpreted as an instance. Metaclass
@@ -333,7 +334,7 @@ corresponding entity parameters.</dd>
 <dt id="term-parametric-entity">parametric entity</dt>
 <dd>An object or category whose identifier is a compound term
 containing free variables that can be used to parameterize the
-entity predicates. Parameters are logical variables implicitly
+entity predicates. Parameters are <em>logical variables</em> implicitly
 shared by all the entity clauses.</dd>
 <dt id="term-parametric-object">parametric object</dt>
 <dd>See parametric entity.</dd>
@@ -347,6 +348,13 @@ identifier of a parametric object.</dd>
 <dd>Predicates describe what is true about the application domain. A
 predicate is identified by its <em>predicate indicator</em>, i.e. by its
 name and number of arguments using the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>.</dd>
+<dt id="term-predicate-alias">predicate alias</dt>
+<dd>An alternative functor (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>) for a predicate. Predicate
+aliases can be defined for any inherited predicate using the <code class="docutils literal notranslate"><span class="pre">alias/2</span></code>
+directive and for predicates listed in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module</span></code>
+directives. Predicate aliases can be used to solve inheritance conflicts
+and to improve code clarity by using alternative names that are more
+meaningful in the calling context.</dd>
 <dt id="term-predicate-directive">predicate directive</dt>
 <dd>A directive that affects how predicates are called or compiled.</dd>
 <dt id="term-predicate-scope-container">predicate scope container</dt>

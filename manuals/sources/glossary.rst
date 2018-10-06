@@ -18,20 +18,20 @@ Glossary
       fine-grained units of code reuse and also hot patching of existing
       objects. A category should be functionally-cohesive, defining a
       single functionality.
-   
+
    complementing category
       A category used for hot patching an existing object (or a set of
       objects).
 
    parametric category
       See parametric entity.
-   
+
    class
       An object that specializes another object, interpreted as its
       superclass. Classes define the common predicates of a set of objects
       that instantiates it. An object can also be interpreted as a class
       when it instantiates itself.
-   
+
    abstract class
       A class that cannot be instantiated. Usually used to contain
       common predicates that are inherited by other classes.
@@ -47,7 +47,7 @@ Glossary
    superclass
       A class from which another class is a specialization (directly or
       indirectly via another class).
-   
+
    closed-world assumption
       The assumption that what cannot be proved true is false. Therefore,
       sending a message corresponding to a *declared* but not *defined*
@@ -57,7 +57,7 @@ Glossary
    directive
       A source file term that affects the interpretation of source code.
       Directives use the ``(:-)/1`` prefix operator as functor.
-   
+
    entity directive
       A directive that affects how Logtalk entities (objects, protocols,
       or categories) are used or compiled.
@@ -67,7 +67,7 @@ Glossary
 
    source file directive
       A directive that affects how a source file is compiled.
-   
+
    encapsulation
       The hiding of an object implementation. This promotes software reuse
       by isolating the object clients from its implementation details.
@@ -76,14 +76,15 @@ Glossary
 
    entity
       Generic name for Logtalk compilation units: objects, categories, and
-      protocols.
-   
+      protocols. Entities share a single namespace (i.e. entity identifiers
+      must be unique).
+
    parametric entity
       An object or category whose identifier is a compound term
       containing free variables that can be used to parameterize the
-      entity predicates. Parameters are logical variables implicitly
+      entity predicates. Parameters are *logical variables* implicitly
       shared by all the entity clauses.
-   
+
    event
       The sending of a message to an object. An event can be expressed as
       an ordered tuple: ``(Event, Object, Message, Sender)``. Logtalk
@@ -97,7 +98,7 @@ Glossary
       representation of grammars. Grammar rules are represented using as
       functor the infix operator ``(-->)/2`` instead of the ``(:-)/2``
       operator used with predicate clauses.
-   
+
    grammar rule non-terminal
       A syntactic category of words or phrases. A non-terminal is
       identified by its *non-terminal indicator*, i.e. by its name and
@@ -105,19 +106,19 @@ Glossary
 
    grammar rule terminal
       A word or basic symbol of a language.
-   
+
    identity
       Property of an entity that distinguishes it from every other entity.
       Object and category identifiers can be an atoms or compound terms.
       Protocol identities must be atoms. All Logtalk entities (objects,
-      protocols, and categories) share the same name space.
+      protocols, and categories) share the same namespace.
 
    inheritance
       An object inherits predicate directives and clauses from related
       entities. If an object extends other object then we have a
       prototype-based inheritance. If an object specializes or instantiates
       another object we have a class-based inheritance.
-   
+
    private inheritance
       All public and protected predicates are inherited as private
       predicates.
@@ -128,7 +129,7 @@ Glossary
 
    public inheritance
       All inherited predicates maintain their declared scope.
-   
+
    instance
       An object that instantiates another object, interpreted as its class.
 
@@ -140,8 +141,7 @@ Glossary
    library
       A directory containing source files. The library name can be used as
       an alias to the directory path when compiling and loading source
-      files using the notation
-      ``library_name('source_file_relative_path')``.
+      files using the notation ``library_name('source_file_relative_path')``.
 
    message
       A query sent to an object. In logical terms, a message can be seen as
@@ -156,7 +156,7 @@ Glossary
       The predicate definition used to answer a message sent to an object.
       Logtalk supports both static binding and dynamic binding to find
       which method to run to answer a message.
-   
+
    abstract method
       A method implementing an algorithm whose step corresponds to calls
       to methods defined in the descendants of the object (or category)
@@ -170,7 +170,7 @@ Glossary
       A method defined in an instance itself. Singleton methods are
       supported in Logtalk and can also be found in other
       object-oriented programming languages.
-   
+
    monitor
       Any object, implementing the ``monitoring`` built-in protocol, that
       is notified by the runtime when a spied event occurs. The spied
@@ -182,7 +182,7 @@ Glossary
       dynamic. Logtalk objects can play the role of classes, instances, or
       prototypes. The role or roles an object plays depends on its
       relations with other objects.
-   
+
    doclet object
       An object specifying the steps necessary to (re)generate the API
       documentation for a project. See the ``doclet`` and ``lgtdoc``
@@ -203,7 +203,7 @@ Glossary
       A compound term (usually represented as a plain Prolog fact) with
       the same functor and with the same number of arguments as the
       identifier of a parametric object.
-   
+
    parameter
       An argument of a parametric object or a parametric category
       identifier. Parameters are logical variables implicitly shared by all
@@ -222,7 +222,15 @@ Glossary
       Predicates describe what is true about the application domain. A
       predicate is identified by its *predicate indicator*, i.e. by its
       name and number of arguments using the notation ``Name/Arity``.
-   
+
+   predicate alias
+      An alternative functor (``Name/Arity``) for a predicate. Predicate
+      aliases can be defined for any inherited predicate using the ``alias/2``
+      directive and for predicates listed in ``uses/2`` and ``use_module``
+      directives. Predicate aliases can be used to solve inheritance conflicts
+      and to improve code clarity by using alternative names that are more
+      meaningful in the calling context.
+
    built-in predicate
       A pre-defined predicate that can be called from anywhere. Built-in
       predicates can be redefined within objects and categories.
@@ -236,12 +244,13 @@ Glossary
       A predicate that is defined in an object (or in a category) but
       that is not listed in a scope directive. These predicates behave
       like private predicates but are invisible to the reflection
-      built-in methods. Local predicates are usually auxiliary
-      predicates, only relevant to the entity where they are defined.
+      built-in methods. Local predicates are usually auxiliary predicates
+      and only relevant to the entity where they are defined.
 
    meta-predicate
-      A predicate where one of its arguments will be called as a goal.
-      For instance, ``findall/3`` and ``call/1`` are Prolog built-ins
+      A predicate where one of its arguments will be called as a goal
+      or used as a closure to construct a goal that will be called.
+      For example, ``findall/3`` and ``call/1`` are Prolog built-ins
       meta-predicates.
 
    predicate scope container
@@ -274,7 +283,7 @@ Glossary
    visible predicate
       A predicate that is declared for an object, a built-in method, a
       Logtalk built-in predicate, or a Prolog built-in predicate.
-   
+
    profiler
       A program that collects data about other program performance.
 
@@ -308,7 +317,7 @@ Glossary
       A text file defining Logtalk and/or Prolog code. Multiple Logtalk
       entities may be defined in a single source file. Prolog code may be
       intermixed with entity definitions.
-   
+
    adapter file
       A Prolog source file defining a minimal abstraction layer between
       the Logtalk compiler/runtime and a specific backend Prolog
@@ -329,7 +338,7 @@ Glossary
    tester file
       A source file whose main purpose is to load and a run a set of
       unit tests.
-   
+
    this
       The object that contains the predicate clause under execution. When
       the predicate clause is contained in a category, *this* is a
