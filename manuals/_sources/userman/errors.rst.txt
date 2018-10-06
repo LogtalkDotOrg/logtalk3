@@ -6,9 +6,8 @@ Error handling
 ==============
 
 All error handling is done in Logtalk by using the ISO defined
-``catch/3`` and ``throw/1`` predicates `[ISO
-95] <../bibliography.html#ISO95>`__. Errors thrown by Logtalk have the
-following format:
+``catch/3`` and ``throw/1`` predicates [ISO95]_.
+Errors thrown by Logtalk have the following format:
 
 ::
 
@@ -188,8 +187,8 @@ Redefinition of predicates declared in ``uses/2`` and ``use_module/2`` directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A error will be reported for any attempt to define locally a predicate
-that is already listed in a ``uses/2`` or in a ``use_module/2``
-directive.
+that is already listed in a :ref:`directives_uses_2` or in a
+:ref:`directives_use_module_2` directive.
 
 .. _errors_others:
 
@@ -208,7 +207,7 @@ Runtime errors
 This section briefly describes runtime errors that result from misuse of
 Logtalk built-in predicates, built-in methods or from message sending.
 For a complete and detailed description of runtime errors please consult
-the `Reference Manual <../refman/index.html>`__.
+the Reference Manual.
 
 .. _errors_predicates:
 

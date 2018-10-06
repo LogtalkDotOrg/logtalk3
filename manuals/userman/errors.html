@@ -79,6 +79,7 @@
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+    
             
             
               
@@ -140,6 +141,8 @@
 
             
           
+    <a href="genindex.html">Index</a>
+  
         </div>
       </div>
     </nav>
@@ -207,9 +210,8 @@
   <div class="section" id="error-handling">
 <span id="errors-errors"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
 <p>All error handling is done in Logtalk by using the ISO defined
-<code class="docutils literal notranslate"><span class="pre">catch/3</span></code> and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference external" href="../bibliography.html#ISO95">[ISO
-95]</a>. Errors thrown by Logtalk have the
-following format:</p>
+<code class="docutils literal notranslate"><span class="pre">catch/3</span></code> and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1">[ISO95]</a>.
+Errors thrown by Logtalk have the following format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>error(<span class="nv">Error</span>, logtalk(<span class="nv">Goal</span>, <span class="nv">ExecutionContext</span>))
 </pre></div>
 </div>
@@ -336,8 +338,8 @@ lambda parameter variables).</p>
 <div class="section" id="redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives">
 <span id="errors-predicate-redefinition"></span><h3>Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives<a class="headerlink" href="#redefinition-of-predicates-declared-in-uses-2-and-use-module-2-directives" title="Permalink to this headline">¶</a></h3>
 <p>A error will be reported for any attempt to define locally a predicate
-that is already listed in a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or in a <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
-directive.</p>
+that is already listed in a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or in a
+<a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive.</p>
 </div>
 <div class="section" id="other-warnings-and-errors">
 <span id="errors-others"></span><h3>Other warnings and errors<a class="headerlink" href="#other-warnings-and-errors" title="Permalink to this headline">¶</a></h3>
@@ -351,7 +353,7 @@ the error and abort the compilation of the offending entity.</p>
 <p>This section briefly describes runtime errors that result from misuse of
 Logtalk built-in predicates, built-in methods or from message sending.
 For a complete and detailed description of runtime errors please consult
-the <a class="reference external" href="../refman/index.html">Reference Manual</a>.</p>
+the Reference Manual.</p>
 <div class="section" id="logtalk-built-in-predicates">
 <span id="errors-predicates"></span><h3>Logtalk built-in predicates<a class="headerlink" href="#logtalk-built-in-predicates" title="Permalink to this headline">¶</a></h3>
 <p>Most Logtalk built-in predicates checks the type and mode of the calling
