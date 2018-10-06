@@ -20,3 +20,4 @@ The Logtalk Handbook
 .. only:: html
 
    * :ref:`genindex`
+   * :ref:`search`
