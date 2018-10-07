@@ -161,11 +161,11 @@
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:value-of select="." />
+			<xsl:text>``</xsl:text><xsl:value-of select="." /><xsl:text>``</xsl:text>
 			<xsl:value-of select="$nl" />
 			<xsl:call-template name="adornment">
 				<xsl:with-param name="char" select="'-'"/>
-				<xsl:with-param name="n" select="string-length(.)"/>
+				<xsl:with-param name="n" select="2 + string-length(.) + 2"/>
 			</xsl:call-template>
 			<xsl:value-of select="$nl2" />
 			<xsl:text>.. toctree::</xsl:text>
