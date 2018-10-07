@@ -262,6 +262,10 @@
 
 
 <xsl:template match="*/predicate">
+	<xsl:text>.. raw:: html</xsl:text>
+   	<xsl:value-of select="$nl2" />
+	<xsl:text>   &lt;div id=&quot;</xsl:text><xsl:value-of select="name" /><xsl:text>&quot;&gt; &lt;/div&gt;</xsl:text>
+   	<xsl:value-of select="$nl2" />
 	<xsl:text>.. index:: </xsl:text><xsl:value-of select="name" />
 	<xsl:value-of select="$nl" />
 	<xsl:text>.. _</xsl:text><xsl:value-of select="/logtalk_entity/entity/functor" />::<xsl:value-of select="name" /><xsl:text>:</xsl:text>
