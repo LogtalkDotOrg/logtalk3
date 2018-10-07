@@ -50,6 +50,7 @@
 	<xsd:sequence>
 		<xsd:element name="name"		type="xsd:string"/>
 		<xsd:element name="functor"		type="xsd:string"/>
+		<xsd:element name="file"		type="xsd:string"/>
 		<xsd:element name="type"		type="type"/>
 		<xsd:element name="compilation"	type="entity_compilation"/>
 		<xsd:element name="comment"		type="xsd:string"	minOccurs="0"/>

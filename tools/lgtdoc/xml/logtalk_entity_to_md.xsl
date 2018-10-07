@@ -8,6 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
+%
 %  Last updated on October 4, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  

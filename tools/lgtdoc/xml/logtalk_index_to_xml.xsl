@@ -17,6 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
+%
 %  Last updated on July 5, 2016
 %
 %  This file is part of Logtalk <https://logtalk.org/>  

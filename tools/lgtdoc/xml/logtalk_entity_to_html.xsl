@@ -16,6 +16,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into HTML files
+%
 %  Last updated on August 11, 2017
 %
 %  This file is part of Logtalk <https://logtalk.org/>  

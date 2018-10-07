@@ -2,7 +2,8 @@
 
 #############################################################################
 ## 
-##   XML documenting files to  reStructuredText files conversion script
+##   XML documenting files to reStructuredText files conversion script
+## 
 ##   Last updated on October 6, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  

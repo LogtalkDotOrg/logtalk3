@@ -38,6 +38,7 @@
 		<element name="entity">
 			<ref name="name"/>
 			<ref name="functor"/>
+			<ref name="file"/>
 			<ref name="type"/>
 			<ref name="entity_compilation"/>
 			<optional>

@@ -1,7 +1,8 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to reStructuredText files conversion script
-//   Last updated on October 4, 2018
+//
+//   Last updated on October 7, 2018
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -208,10 +209,21 @@ function create_index_file() {
 	var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
 	if (FSObject.FileExists(WshShell.CurrentDirectory + "\\directory_index.xml")) {
-		f.WriteLine("* [Library index](library_index.rst)");
-		f.WriteLine("* [Directory index](directory_index.rst)");
-		f.WriteLine("* [Entity index](entity_index.rst)");
-		f.WriteLine("* [Predicate index](predicate_index.rst)");
+        
+		f.WriteLine(".. toctree::");
+		f.WriteLine("   :maxdepth: 3");
+		f.WriteLine("   :caption: Contents:");
+		f.WriteLine("");
+		f.WriteLine("   library_index");
+		f.WriteLine("   directory_index");
+		f.WriteLine("   entity_index");
+		f.WriteLine("   predicate_index");
+		f.WriteLine("");
+		f.WriteLine("Indices and tables");
+		f.WriteLine("==================");
+		f.WriteLine("");
+		f.WriteLine("* :ref:\`genindex\`");
+		f.WriteLine("* :ref:\`search\`");
 	} else {
 		for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 			var file = files.item().name;

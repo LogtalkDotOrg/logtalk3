@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 4.9,
+		version is 4.11,
 		author is 'Paulo Moura',
-		date is 2018/10/04,
+		date is 2018/10/07,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1270,11 +1270,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/4.1/logtalk_entity.dtd', 'https://logtalk.org/xml/4.1/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/4.2/logtalk_entity.dtd', 'https://logtalk.org/xml/4.2/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/4.1/logtalk_index.dtd', 'https://logtalk.org/xml/4.1/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/4.2/logtalk_index.dtd', 'https://logtalk.org/xml/4.2/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).

@@ -92,8 +92,9 @@ Brief description of each file in this folder:
 
 - `logtalk_entity_to_rst.xsl`  
 - `logtalk_index_to_rst.xsl`  
-	XSLT file to output reStructuredText files from the XML files. UTF-8 encoding
-	is assumed. Edit the file if you use a different encoding.
+	XSLT file to output reStructuredText files (for use with Sphinx) from the
+	XML files. UTF-8 encoding is assumed. Edit the file if you use a different
+	encoding.
 
 - `logtalk_entity_to_txt.xsl`  
 - `logtalk_index_to_txt.xsl`  

@@ -8,8 +8,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into
-%  reStructuredText files
-%  Last updated on October 4, 2018
+%  reStructuredText files for use with Sphinx
+%
+%  Last updated on October 7, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -273,7 +274,6 @@
 	</xsl:call-template>
 	<xsl:value-of select="$nl2" />
 	<xsl:if test="comment">
-		<xsl:value-of select="$nl" />
 		<xsl:value-of select="comment" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
