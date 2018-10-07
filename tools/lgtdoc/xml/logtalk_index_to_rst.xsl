@@ -113,7 +113,7 @@
 	<xsl:choose>
 		<xsl:when test="/logtalk_index/type='predicate'">
 			<xsl:for-each select="entities/entity">
-				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" />::<xsl:value-of select="../../key" /><xsl:text>&gt;`</xsl:text>
 				<xsl:value-of select="$nl" />
 			</xsl:for-each>
 		</xsl:when>
