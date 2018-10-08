@@ -64,8 +64,8 @@ The source files to be documented **must** be loaded prior to using this tool
 predicates to generate the documentation.
 
 The `lgtdoc/xml` directory includes several ready to use scripts for converting
-the XML documenting files to (X)HTML, PDF, Markdown, or plain text files. See
-the `lgtdoc/xml/NOTES.md` for details.
+the XML documenting files to (X)HTML, PDF, Markdown, reStructuredText (for use
+with Sphinx), or plain text files. See the `lgtdoc/xml/NOTES.md` for details.
 
 
 Other notes
