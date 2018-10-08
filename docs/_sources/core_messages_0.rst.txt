@@ -1,0 +1,50 @@
+.. index:: core_messages
+.. _core_messages/0:
+
+**category**
+
+``core_messages``
+=================
+
+Logtalk core (compiler and runtime) default message translations.
+
+* author: Paulo Moura
+* version: 1.43
+* date: 2018/7/12
+* compilation flags: ``static``
+
+* provides:
+
+  * :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

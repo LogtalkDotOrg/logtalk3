@@ -1,0 +1,113 @@
+.. index:: edcg
+.. _edcg/0:
+
+**object**
+
+``edcg``
+========
+
+Multiple hidden parameters: an extension to Prolog's DCG notation.
+
+* author: Peter Van Roy; adapted to Logtalk by Paulo Moura.
+* version: 1.01
+* date: 2018/8/8
+* copyright: Copyright (C) 1992 Peter Van Roy
+* license: MIT
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+* provides:
+
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="pred_info/3"> </div>
+
+.. index:: pred_info/3
+.. _edcg/0::pred_info/3:
+
+``pred_info/3``
+^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="acc_info/7"> </div>
+
+.. index:: acc_info/7
+.. _edcg/0::acc_info/7:
+
+``acc_info/7``
+^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="acc_info/5"> </div>
+
+.. index:: acc_info/5
+.. _edcg/0::acc_info/5:
+
+``acc_info/5``
+^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="pass_info/2"> </div>
+
+.. index:: pass_info/2
+.. _edcg/0::pass_info/2:
+
+``pass_info/2``
+^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="pass_info/1"> </div>
+
+.. index:: pass_info/1
+.. _edcg/0::pass_info/1:
+
+``pass_info/1``
+^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+* ``op(1200,xfx,-->>) (public)``
+
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

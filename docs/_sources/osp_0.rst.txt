@@ -1,0 +1,607 @@
+.. index:: osp
+.. _osp/0:
+
+**protocol**
+
+``osp``
+=======
+
+Portable operating-system access protocol.
+
+* author: Paulo Moura
+* version: 1.23
+* date: 2018/3/7
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="pid/1"> </div>
+
+.. index:: pid/1
+.. _osp/0::pid/1:
+
+``pid/1``
+^^^^^^^^^
+
+Returns the process identifier of the running process.
+
+* compilation flags: ``static``
+* template: ``pid(PID)``
+
+* mode - number of proofs:
+
+  * ``pid(-integer)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="shell/2"> </div>
+
+.. index:: shell/2
+.. _osp/0::shell/2:
+
+``shell/2``
+^^^^^^^^^^^
+
+Runs an operating-system shell command and returns its exit status.
+
+* compilation flags: ``static``
+* template: ``shell(Command,Status)``
+
+* mode - number of proofs:
+
+  * ``shell(+atom,-integer)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="shell/1"> </div>
+
+.. index:: shell/1
+.. _osp/0::shell/1:
+
+``shell/1``
+^^^^^^^^^^^
+
+Runs an operating-system shell command.
+
+* compilation flags: ``static``
+* template: ``shell(Command)``
+
+* mode - number of proofs:
+
+  * ``shell(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="absolute_file_name/2"> </div>
+
+.. index:: absolute_file_name/2
+.. _osp/0::absolute_file_name/2:
+
+``absolute_file_name/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.
+
+* compilation flags: ``static``
+* template: ``absolute_file_name(File,Path)``
+
+* mode - number of proofs:
+
+  * ``absolute_file_name(+atom,-atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="decompose_file_name/3"> </div>
+
+.. index:: decompose_file_name/3
+.. _osp/0::decompose_file_name/3:
+
+``decompose_file_name/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).
+
+* compilation flags: ``static``
+* template: ``decompose_file_name(File,Directory,Basename)``
+
+* mode - number of proofs:
+
+  * ``decompose_file_name(+atom,?atom,?atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="decompose_file_name/4"> </div>
+
+.. index:: decompose_file_name/4
+.. _osp/0::decompose_file_name/4:
+
+``decompose_file_name/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).
+
+* compilation flags: ``static``
+* template: ``decompose_file_name(File,Directory,Name,Extension)``
+
+* mode - number of proofs:
+
+  * ``decompose_file_name(+atom,?atom,?atom,?atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="make_directory/1"> </div>
+
+.. index:: make_directory/1
+.. _osp/0::make_directory/1:
+
+``make_directory/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Makes a new directory. Succeeds if the directory already exists.
+
+* compilation flags: ``static``
+* template: ``make_directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``make_directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="make_directory_path/1"> </div>
+
+.. index:: make_directory_path/1
+.. _osp/0::make_directory_path/1:
+
+``make_directory_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Makes a new directory creating all the intermediate directories if necessary. Succeeds if the directory already exists.
+
+* compilation flags: ``static``
+* template: ``make_directory_path(Directory)``
+
+* mode - number of proofs:
+
+  * ``make_directory_path(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete_directory/1"> </div>
+
+.. index:: delete_directory/1
+.. _osp/0::delete_directory/1:
+
+``delete_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes an empty directory.
+
+* compilation flags: ``static``
+* template: ``delete_directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``delete_directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="change_directory/1"> </div>
+
+.. index:: change_directory/1
+.. _osp/0::change_directory/1:
+
+``change_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Changes current working directory.
+
+* compilation flags: ``static``
+* template: ``change_directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``change_directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="working_directory/1"> </div>
+
+.. index:: working_directory/1
+.. _osp/0::working_directory/1:
+
+``working_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Current working directory.
+
+* compilation flags: ``static``
+* template: ``working_directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``working_directory(?atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="directory_files/2"> </div>
+
+.. index:: directory_files/2
+.. _osp/0::directory_files/2:
+
+``directory_files/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory.
+
+* compilation flags: ``static``
+* template: ``directory_files(Directory,Files)``
+
+* mode - number of proofs:
+
+  * ``directory_files(+atom,-list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory_files/3"> </div>
+
+.. index:: directory_files/3
+.. _osp/0::directory_files/3:
+
+``directory_files/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 - all/regular/directory, extensions/1 - list, prefixes/1 - list, suffixes/1 - list, dot_files/1 - boolean. Invalid options ignored. Defaults equivalent to directory_files/2.
+
+* compilation flags: ``static``
+* template: ``directory_files(Directory,Files,Options)``
+
+* mode - number of proofs:
+
+  * ``directory_files(+atom,-list(atom),+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory_exists/1"> </div>
+
+.. index:: directory_exists/1
+.. _osp/0::directory_exists/1:
+
+``directory_exists/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the specified directory exists (irrespective of directory permissions).
+
+* compilation flags: ``static``
+* template: ``directory_exists(Directory)``
+
+* mode - number of proofs:
+
+  * ``directory_exists(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file_exists/1"> </div>
+
+.. index:: file_exists/1
+.. _osp/0::file_exists/1:
+
+``file_exists/1``
+^^^^^^^^^^^^^^^^^
+
+True if the specified file exists and is a regular file (irrespective of file permissions).
+
+* compilation flags: ``static``
+* template: ``file_exists(File)``
+
+* mode - number of proofs:
+
+  * ``file_exists(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file_modification_time/2"> </div>
+
+.. index:: file_modification_time/2
+.. _osp/0::file_modification_time/2:
+
+``file_modification_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+File modification time (which can be used for comparison).
+
+* compilation flags: ``static``
+* template: ``file_modification_time(File,Time)``
+
+* mode - number of proofs:
+
+  * ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file_size/2"> </div>
+
+.. index:: file_size/2
+.. _osp/0::file_size/2:
+
+``file_size/2``
+^^^^^^^^^^^^^^^
+
+File size (in bytes).
+
+* compilation flags: ``static``
+* template: ``file_size(File,Size)``
+
+* mode - number of proofs:
+
+  * ``file_size(+atom,-integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file_permission/2"> </div>
+
+.. index:: file_permission/2
+.. _osp/0::file_permission/2:
+
+``file_permission/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+True if the specified file has the specified permission (read, write, or execute).
+
+* compilation flags: ``static``
+* template: ``file_permission(File,Permission)``
+
+* mode - number of proofs:
+
+  * ``file_permission(+atom,?atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="rename_file/2"> </div>
+
+.. index:: rename_file/2
+.. _osp/0::rename_file/2:
+
+``rename_file/2``
+^^^^^^^^^^^^^^^^^
+
+Renames a file or a directory.
+
+* compilation flags: ``static``
+* template: ``rename_file(Old,New)``
+
+* mode - number of proofs:
+
+  * ``rename_file(+atom,+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="delete_file/1"> </div>
+
+.. index:: delete_file/1
+.. _osp/0::delete_file/1:
+
+``delete_file/1``
+^^^^^^^^^^^^^^^^^
+
+Deletes a file.
+
+* compilation flags: ``static``
+* template: ``delete_file(File)``
+
+* mode - number of proofs:
+
+  * ``delete_file(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="environment_variable/2"> </div>
+
+.. index:: environment_variable/2
+.. _osp/0::environment_variable/2:
+
+``environment_variable/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an environment variable value. Fails if the variable does not exists.
+
+* compilation flags: ``static``
+* template: ``environment_variable(Variable,Value)``
+
+* mode - number of proofs:
+
+  * ``environment_variable(+atom,?atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="time_stamp/1"> </div>
+
+.. index:: time_stamp/1
+.. _osp/0::time_stamp/1:
+
+``time_stamp/1``
+^^^^^^^^^^^^^^^^
+
+Returns a system-dependent time stamp, which can be used for sorting, but should be regarded otherwise as an opaque term.
+
+* compilation flags: ``static``
+* template: ``time_stamp(Time)``
+
+* mode - number of proofs:
+
+  * ``time_stamp(-ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="date_time/7"> </div>
+
+.. index:: date_time/7
+.. _osp/0::date_time/7:
+
+``date_time/7``
+^^^^^^^^^^^^^^^
+
+Returns the current date and time.
+
+* compilation flags: ``static``
+* template: ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Miliseconds)``
+
+* mode - number of proofs:
+
+  * ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="cpu_time/1"> </div>
+
+.. index:: cpu_time/1
+.. _osp/0::cpu_time/1:
+
+``cpu_time/1``
+^^^^^^^^^^^^^^
+
+System cpu time in seconds.
+
+* compilation flags: ``static``
+* template: ``cpu_time(Seconds)``
+
+* mode - number of proofs:
+
+  * ``cpu_time(-number)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="wall_time/1"> </div>
+
+.. index:: wall_time/1
+.. _osp/0::wall_time/1:
+
+``wall_time/1``
+^^^^^^^^^^^^^^^
+
+Wall time in seconds.
+
+* compilation flags: ``static``
+* template: ``wall_time(Seconds)``
+
+* mode - number of proofs:
+
+  * ``wall_time(-number)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="operating_system_type/1"> </div>
+
+.. index:: operating_system_type/1
+.. _osp/0::operating_system_type/1:
+
+``operating_system_type/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Operating system type. Possible values are "unix", "windows", and "unknown".
+
+* compilation flags: ``static``
+* template: ``operating_system_type(Type)``
+
+* mode - number of proofs:
+
+  * ``operating_system_type(?atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="command_line_arguments/1"> </div>
+
+.. index:: command_line_arguments/1
+.. _osp/0::command_line_arguments/1:
+
+``command_line_arguments/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list with the command line arguments that occur after "--".
+
+* compilation flags: ``static``
+* template: ``command_line_arguments(Arguments)``
+
+* mode - number of proofs:
+
+  * ``command_line_arguments(-list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="sleep/1"> </div>
+
+.. index:: sleep/1
+.. _osp/0::sleep/1:
+
+``sleep/1``
+^^^^^^^^^^^
+
+Suspends execution the given number of seconds.
+
+* compilation flags: ``static``
+* template: ``sleep(Seconds)``
+
+* mode - number of proofs:
+
+  * ``sleep(+number)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`os_types <os_types/0>`
+
+

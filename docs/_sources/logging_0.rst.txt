@@ -1,0 +1,87 @@
+.. index:: logging
+.. _logging/0:
+
+**category**
+
+``logging``
+===========
+
+Logging events to files category.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2011/1/6
+* compilation flags: ``static``
+
+* implements:
+
+  * ``public`` :ref:`loggingp <loggingp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="log_file_/2"> </div>
+
+.. index:: log_file_/2
+.. _logging/0::log_file_/2:
+
+``log_file_/2``
+^^^^^^^^^^^^^^^
+
+Table of log files.
+
+* compilation flags: ``dynamic``
+* template: ``log_file_(Alias,File)``
+
+* mode - number of proofs:
+
+  * ``log_file_(?atom,?nonvar)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="logging_to_file_/2"> </div>
+
+.. index:: logging_to_file_/2
+.. _logging/0::logging_to_file_/2:
+
+``logging_to_file_/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Table of logging file status for log files.
+
+* compilation flags: ``dynamic``
+* template: ``logging_to_file_(Alias,Status)``
+
+* mode - number of proofs:
+
+  * ``logging_to_file_(?atom,?atom)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

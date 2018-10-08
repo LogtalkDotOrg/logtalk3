@@ -1,0 +1,147 @@
+.. index:: lgtdoc
+.. _lgtdoc/0:
+
+**object**
+
+``lgtdoc``
+==========
+
+Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.
+
+* author: Paulo Moura
+* version: 4.11
+* date: 2018/10/7
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`lgtdocp <lgtdocp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="option_/2"> </div>
+
+.. index:: option_/2
+.. _lgtdoc/0::option_/2:
+
+``option_/2``
+^^^^^^^^^^^^^
+
+Table of option values.
+
+* compilation flags: ``dynamic``
+* template: ``option_(Option,Value)``
+
+* mode - number of proofs:
+
+  * ``option_(?atom,?nonvar)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="library_entity_/4"> </div>
+
+.. index:: library_entity_/4
+.. _lgtdoc/0::library_entity_/4:
+
+``library_entity_/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Table of documented entities per library.
+
+* compilation flags: ``dynamic``
+* template: ``library_entity_(Library,PrimarySortKey,SecondarySortKey,Entity)``
+
+* mode - number of proofs:
+
+  * ``library_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="directory_entity_/4"> </div>
+
+.. index:: directory_entity_/4
+.. _lgtdoc/0::directory_entity_/4:
+
+``directory_entity_/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of documented entities per directory.
+
+* compilation flags: ``dynamic``
+* template: ``directory_entity_(Directory,PrimarySortKey,SecondarySortKey,Entity)``
+
+* mode - number of proofs:
+
+  * ``directory_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="type_entity_/4"> </div>
+
+.. index:: type_entity_/4
+.. _lgtdoc/0::type_entity_/4:
+
+``type_entity_/4``
+^^^^^^^^^^^^^^^^^^
+
+Table of documented entities per type.
+
+* compilation flags: ``dynamic``
+* template: ``type_entity_(Type,PrimarySortKey,SecondarySortKey,Entity)``
+
+* mode - number of proofs:
+
+  * ``type_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="predicate_entity_/4"> </div>
+
+.. index:: predicate_entity_/4
+.. _lgtdoc/0::predicate_entity_/4:
+
+``predicate_entity_/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of public predicates for all documented entities.
+
+* compilation flags: ``dynamic``
+* template: ``predicate_entity_(Predicate,PrimarySortKey,SecondarySortKey,Entity)``
+
+* mode - number of proofs:
+
+  * ``predicate_entity_(?predicate_indicator,?nonvar,?nonvar,?entity_identifier)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

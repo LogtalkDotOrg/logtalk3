@@ -1,0 +1,388 @@
+.. index:: java_utils_protocol
+.. _java_utils_protocol/0:
+
+**protocol**
+
+``java_utils_protocol``
+=======================
+
+Abstract interface to Java utility predicates.
+
+* author: Paulo Moura
+* version: 1.5
+* date: 2017/10/16
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="value_reference/2"> </div>
+
+.. index:: value_reference/2
+.. _java_utils_protocol/0::value_reference/2:
+
+``value_reference/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns an opaque term that represents the Java value with the given name.
+
+* compilation flags: ``static``
+* template: ``value_reference(Value,Reference)``
+
+* mode - number of proofs:
+
+  * ``value_reference(?atom,--ground)`` - ``one_or_more``
+
+
+.. raw:: html
+
+   <div id="true/1"> </div>
+
+.. index:: true/1
+.. _java_utils_protocol/0::true/1:
+
+``true/1``
+^^^^^^^^^^
+
+Returns an opaque term that represents the Java value true.
+
+* compilation flags: ``static``
+* template: ``true(Reference)``
+
+* mode - number of proofs:
+
+  * ``true(--ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="false/1"> </div>
+
+.. index:: false/1
+.. _java_utils_protocol/0::false/1:
+
+``false/1``
+^^^^^^^^^^^
+
+Returns an opaque term that represents the Java value false.
+
+* compilation flags: ``static``
+* template: ``false(Reference)``
+
+* mode - number of proofs:
+
+  * ``false(--ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="void/1"> </div>
+
+.. index:: void/1
+.. _java_utils_protocol/0::void/1:
+
+``void/1``
+^^^^^^^^^^
+
+Returns an opaque term that represents the Java value void.
+
+* compilation flags: ``static``
+* template: ``void(Reference)``
+
+* mode - number of proofs:
+
+  * ``void(--ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="null/1"> </div>
+
+.. index:: null/1
+.. _java_utils_protocol/0::null/1:
+
+``null/1``
+^^^^^^^^^^
+
+Returns an opaque term that represents the Java value null.
+
+* compilation flags: ``static``
+* template: ``null(Reference)``
+
+* mode - number of proofs:
+
+  * ``null(--ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="is_true/1"> </div>
+
+.. index:: is_true/1
+.. _java_utils_protocol/0::is_true/1:
+
+``is_true/1``
+^^^^^^^^^^^^^
+
+True when the argument is the Java value true. Fails if the argument is not instantiated.
+
+* compilation flags: ``static``
+* template: ``is_true(Reference)``
+
+* mode - number of proofs:
+
+  * ``is_true(@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="is_false/1"> </div>
+
+.. index:: is_false/1
+.. _java_utils_protocol/0::is_false/1:
+
+``is_false/1``
+^^^^^^^^^^^^^^
+
+True when the argument is the Java value false. Fails if the argument is not instantiated.
+
+* compilation flags: ``static``
+* template: ``is_false(Reference)``
+
+* mode - number of proofs:
+
+  * ``is_false(@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="is_void/1"> </div>
+
+.. index:: is_void/1
+.. _java_utils_protocol/0::is_void/1:
+
+``is_void/1``
+^^^^^^^^^^^^^
+
+True when the argument is the Java value void. Fails if the argument is not instantiated.
+
+* compilation flags: ``static``
+* template: ``is_void(Reference)``
+
+* mode - number of proofs:
+
+  * ``is_void(@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="is_null/1"> </div>
+
+.. index:: is_null/1
+.. _java_utils_protocol/0::is_null/1:
+
+``is_null/1``
+^^^^^^^^^^^^^
+
+True when the argument is the Java value null. Fails if the argument is not instantiated.
+
+* compilation flags: ``static``
+* template: ``is_null(Reference)``
+
+* mode - number of proofs:
+
+  * ``is_null(@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="is_object/1"> </div>
+
+.. index:: is_object/1
+.. _java_utils_protocol/0::is_object/1:
+
+``is_object/1``
+^^^^^^^^^^^^^^^
+
+True when the argument is a reference to a Java object. Fails if the argument is not instantiated.
+
+* compilation flags: ``static``
+* template: ``is_object(Reference)``
+
+* mode - number of proofs:
+
+  * ``is_object(@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="terms_to_array/2"> </div>
+
+.. index:: terms_to_array/2
+.. _java_utils_protocol/0::terms_to_array/2:
+
+``terms_to_array/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of ground Prolog terms to an array (a Java reference).
+
+* compilation flags: ``static``
+* template: ``terms_to_array(Terms,Array)``
+
+* mode - number of proofs:
+
+  * ``terms_to_array(++list(ground),-array)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="array_to_terms/3"> </div>
+
+.. index:: array_to_terms/3
+.. _java_utils_protocol/0::array_to_terms/3:
+
+``array_to_terms/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.
+
+* compilation flags: ``static``
+* template: ``array_to_terms(Array,Terms,Length)``
+
+* mode - number of proofs:
+
+  * ``array_to_terms(+array,-list(ground),-integer)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="array_to_terms/2"> </div>
+
+.. index:: array_to_terms/2
+.. _java_utils_protocol/0::array_to_terms/2:
+
+``array_to_terms/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.
+
+* compilation flags: ``static``
+* template: ``array_to_terms(Array,Terms)``
+
+* mode - number of proofs:
+
+  * ``array_to_terms(+array,-list(term))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="array_list/2"> </div>
+
+.. index:: array_list/2
+.. _java_utils_protocol/0::array_list/2:
+
+``array_list/2``
+^^^^^^^^^^^^^^^^
+
+Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.
+
+* compilation flags: ``static``
+* template: ``array_list(Array,List)``
+
+* mode - number of proofs:
+
+  * ``array_list(+array,-list)`` - ``one``
+
+  * ``array_list(-array,+list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="iterator_element/2"> </div>
+
+.. index:: iterator_element/2
+.. _java_utils_protocol/0::iterator_element/2:
+
+``iterator_element/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all iterator elements.
+
+* compilation flags: ``static``
+* template: ``iterator_element(Iterator,Element)``
+
+* mode - number of proofs:
+
+  * ``iterator_element(+iterator,-element)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="decode_exception/2"> </div>
+
+.. index:: decode_exception/2
+.. _java_utils_protocol/0::decode_exception/2:
+
+``decode_exception/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.
+
+* compilation flags: ``static``
+* template: ``decode_exception(Exception,Cause)``
+
+* mode - number of proofs:
+
+  * ``decode_exception(+callable,-atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="decode_exception/3"> </div>
+
+.. index:: decode_exception/3
+.. _java_utils_protocol/0::decode_exception/3:
+
+``decode_exception/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.
+
+* compilation flags: ``static``
+* template: ``decode_exception(Exception,Cause,StackTrace)``
+
+* mode - number of proofs:
+
+  * ``decode_exception(+callable,-atom,-list(atom))`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

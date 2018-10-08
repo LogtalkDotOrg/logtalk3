@@ -1,0 +1,74 @@
+.. index:: list
+.. _list/0:
+
+**object**
+
+``list``
+========
+
+List predicates.
+
+* author: Paulo Moura
+* version: 2.14
+* date: 2018/3/13
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`listp <listp/0>`
+* extends:
+
+  * ``public`` :ref:`compound <compound/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="as_difflist/2"> </div>
+
+.. index:: as_difflist/2
+.. _list/0::as_difflist/2:
+
+``as_difflist/2``
+^^^^^^^^^^^^^^^^^
+
+Converts a list to a difference list.
+
+* compilation flags: ``static``
+* template: ``as_difflist(List,Diffist)``
+
+* mode - number of proofs:
+
+  * ``as_difflist(+list,-difference_list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`list(Type) <list/1>`
+* :ref:`numberlist <numberlist/0>`
+* :ref:`varlist <varlist/0>`
+* :ref:`difflist <difflist/0>`
+
+

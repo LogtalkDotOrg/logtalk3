@@ -1,0 +1,266 @@
+.. index:: loopp
+.. _loopp/0:
+
+**protocol**
+
+``loopp``
+=========
+
+Loop control constructs protocol.
+
+* author: Paulo Moura
+* version: 1.3
+* date: 2017/3/20
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="whiledo/2"> </div>
+
+.. index:: whiledo/2
+.. _loopp/0::whiledo/2:
+
+``whiledo/2``
+^^^^^^^^^^^^^
+
+While Condition is true do Action.
+
+* compilation flags: ``static``
+* template: ``whiledo(Condition,Action)``
+
+* meta-predicate template: ``whiledo(0,0)``
+
+* mode - number of proofs:
+
+  * ``whiledo(+callable,@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="dowhile/2"> </div>
+
+.. index:: dowhile/2
+.. _loopp/0::dowhile/2:
+
+``dowhile/2``
+^^^^^^^^^^^^^
+
+Do Action while Condition is true.
+
+* compilation flags: ``static``
+* template: ``dowhile(Action,Condition)``
+
+* meta-predicate template: ``dowhile(0,0)``
+
+* mode - number of proofs:
+
+  * ``dowhile(@callable,+callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="foreach/3"> </div>
+
+.. index:: foreach/3
+.. _loopp/0::foreach/3:
+
+``foreach/3``
+^^^^^^^^^^^^^
+
+For each element Element in List call Goal.
+
+* compilation flags: ``static``
+* template: ``foreach(Element,List,Goal)``
+
+* meta-predicate template: ``foreach(*,*,0)``
+
+* mode - number of proofs:
+
+  * ``foreach(@var,+list(term),@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="foreach/4"> </div>
+
+.. index:: foreach/4
+.. _loopp/0::foreach/4:
+
+``foreach/4``
+^^^^^^^^^^^^^
+
+For each element Element in List at position Index call Goal. Index starts at 1.
+
+* compilation flags: ``static``
+* template: ``foreach(Element,Index,List,Goal)``
+
+* meta-predicate template: ``foreach(*,*,*,0)``
+
+* mode - number of proofs:
+
+  * ``foreach(@var,@var,+list(term),@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="forto/3"> </div>
+
+.. index:: forto/3
+.. _loopp/0::forto/3:
+
+``forto/3``
+^^^^^^^^^^^
+
+Call Goal counting up from First to Last. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+
+* compilation flags: ``static``
+* template: ``forto(First,Last,Goal)``
+
+* meta-predicate template: ``forto(*,*,0)``
+
+* mode - number of proofs:
+
+  * ``forto(+number,+number,@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="forto/4"> </div>
+
+.. index:: forto/4
+.. _loopp/0::forto/4:
+
+``forto/4``
+^^^^^^^^^^^
+
+Call Goal counting up from First to Last and instantiating Count to each successive value. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+
+* compilation flags: ``static``
+* template: ``forto(Count,First,Last,Goal)``
+
+* meta-predicate template: ``forto(*,*,*,0)``
+
+* mode - number of proofs:
+
+  * ``forto(@var,+number,+number,@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="forto/5"> </div>
+
+.. index:: forto/5
+.. _loopp/0::forto/5:
+
+``forto/5``
+^^^^^^^^^^^
+
+Call Goal counting up from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Increment can be arithmetic expressions (uses Increment absolute value). This predicate fails iff the Goal fails.
+
+* compilation flags: ``static``
+* template: ``forto(Count,First,Last,Increment,Goal)``
+
+* meta-predicate template: ``forto(*,*,*,*,0)``
+
+* mode - number of proofs:
+
+  * ``forto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="fordownto/3"> </div>
+
+.. index:: fordownto/3
+.. _loopp/0::fordownto/3:
+
+``fordownto/3``
+^^^^^^^^^^^^^^^
+
+Call Goal counting down from First to Last. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+
+* compilation flags: ``static``
+* template: ``fordownto(First,Last,Goal)``
+
+* meta-predicate template: ``fordownto(*,*,0)``
+
+* mode - number of proofs:
+
+  * ``fordownto(+number,+number,@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="fordownto/4"> </div>
+
+.. index:: fordownto/4
+.. _loopp/0::fordownto/4:
+
+``fordownto/4``
+^^^^^^^^^^^^^^^
+
+Call Goal counting down from First to Last and instantiating Count to each successive value. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
+
+* compilation flags: ``static``
+* template: ``fordownto(Count,First,Last,Goal)``
+
+* meta-predicate template: ``fordownto(*,*,*,0)``
+
+* mode - number of proofs:
+
+  * ``fordownto(@var,+number,+number,@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="fordownto/5"> </div>
+
+.. index:: fordownto/5
+.. _loopp/0::fordownto/5:
+
+``fordownto/5``
+^^^^^^^^^^^^^^^
+
+Call Goal counting down from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Decrement can be arithmetic expressions (uses Decrement absolute value). This predicate fails iff the Goal fails.
+
+* compilation flags: ``static``
+* template: ``fordownto(Count,First,Last,Decrement,Goal)``
+
+* meta-predicate template: ``fordownto(*,*,*,*,0)``
+
+* mode - number of proofs:
+
+  * ``fordownto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

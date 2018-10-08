@@ -1,0 +1,195 @@
+.. index:: debugger
+.. _debugger/0:
+
+**object**
+
+``debugger``
+============
+
+Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.
+
+* author: Paulo Moura
+* version: 4.0
+* date: 2017/2/27
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`debuggerp <debuggerp/0>`
+* provides:
+
+  * :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
+  * :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="debugging_/0"> </div>
+
+.. index:: debugging_/0
+.. _debugger/0::debugging_/0:
+
+``debugging_/0``
+^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="tracing_/0"> </div>
+
+.. index:: tracing_/0
+.. _debugger/0::tracing_/0:
+
+``tracing_/0``
+^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="skipping_/0"> </div>
+
+.. index:: skipping_/0
+.. _debugger/0::skipping_/0:
+
+``skipping_/0``
+^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="quasi_skipping_/0"> </div>
+
+.. index:: quasi_skipping_/0
+.. _debugger/0::quasi_skipping_/0:
+
+``quasi_skipping_/0``
+^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="spying_line_number_/2"> </div>
+
+.. index:: spying_line_number_/2
+.. _debugger/0::spying_line_number_/2:
+
+``spying_line_number_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="spying_predicate_/2"> </div>
+
+.. index:: spying_predicate_/2
+.. _debugger/0::spying_predicate_/2:
+
+``spying_predicate_/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="spying_context_/4"> </div>
+
+.. index:: spying_context_/4
+.. _debugger/0::spying_context_/4:
+
+``spying_context_/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="leashing_/1"> </div>
+
+.. index:: leashing_/1
+.. _debugger/0::leashing_/1:
+
+``leashing_/1``
+^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="invocation_number_/1"> </div>
+
+.. index:: invocation_number_/1
+.. _debugger/0::invocation_number_/1:
+
+``invocation_number_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="jump_to_invocation_number_/1"> </div>
+
+.. index:: jump_to_invocation_number_/1
+.. _debugger/0::jump_to_invocation_number_/1:
+
+``jump_to_invocation_number_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="zap_to_port_/1"> </div>
+
+.. index:: zap_to_port_/1
+.. _debugger/0::zap_to_port_/1:
+
+``zap_to_port_/1``
+^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="write_max_depth_/1"> </div>
+
+.. index:: write_max_depth_/1
+.. _debugger/0::write_max_depth_/1:
+
+``write_max_depth_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

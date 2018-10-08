@@ -1,0 +1,49 @@
+.. index:: diagrams
+.. _diagrams/0:
+
+**object**
+
+``diagrams``
+============
+
+Predicates for generating all supported diagrams for libraries and files in one step using the DOT format.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2014/3/9
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`diagrams(dot) <diagrams/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

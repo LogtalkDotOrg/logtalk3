@@ -1,0 +1,508 @@
+.. index:: setp
+.. _setp/0:
+
+**protocol**
+
+``setp``
+========
+
+Set protocol.
+
+* author: Paulo Moura
+* version: 1.4
+* date: 2018/8/17
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="as_set/2"> </div>
+
+.. index:: as_set/2
+.. _setp/0::as_set/2:
+
+``as_set/2``
+^^^^^^^^^^^^
+
+Returns a set with all unique elements from the given list.
+
+* compilation flags: ``static``
+* template: ``as_set(List,Set)``
+
+* mode - number of proofs:
+
+  * ``as_set(@list,-set)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="as_list/2"> </div>
+
+.. index:: as_list/2
+.. _setp/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Returns a list with all elements of the given set.
+
+* compilation flags: ``static``
+* template: ``as_list(Set,List)``
+
+* mode - number of proofs:
+
+  * ``as_list(@set,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete/3"> </div>
+
+.. index:: delete/3
+.. _setp/0::delete/3:
+
+``delete/3``
+^^^^^^^^^^^^
+
+Deletes an element from a set returning the set of remaining elements.
+
+* compilation flags: ``static``
+* template: ``delete(Set,Element,Remaining)``
+
+* mode - number of proofs:
+
+  * ``delete(+set,@term,?set)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="disjoint/2"> </div>
+
+.. index:: disjoint/2
+.. _setp/0::disjoint/2:
+
+``disjoint/2``
+^^^^^^^^^^^^^^
+
+True if the two sets have no element in common.
+
+* compilation flags: ``static``
+* template: ``disjoint(Set1,Set2)``
+
+* mode - number of proofs:
+
+  * ``disjoint(+set,+set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="equal/2"> </div>
+
+.. index:: equal/2
+.. _setp/0::equal/2:
+
+``equal/2``
+^^^^^^^^^^^
+
+True if the two sets are equal.
+
+* compilation flags: ``static``
+* template: ``equal(Set1,Set2)``
+
+* mode - number of proofs:
+
+  * ``equal(+set,+set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _setp/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True if the set is empty.
+
+* compilation flags: ``static``
+* template: ``empty(Set)``
+
+* mode - number of proofs:
+
+  * ``empty(+set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="insert/3"> </div>
+
+.. index:: insert/3
+.. _setp/0::insert/3:
+
+``insert/3``
+^^^^^^^^^^^^
+
+Inserts an element in a set, returning the resulting set.
+
+* compilation flags: ``static``
+* template: ``insert(In,Element,Out)``
+
+* mode - number of proofs:
+
+  * ``insert(+set,+term,?set)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="insert_all/3"> </div>
+
+.. index:: insert_all/3
+.. _setp/0::insert_all/3:
+
+``insert_all/3``
+^^^^^^^^^^^^^^^^
+
+Inserts a list of elements in a set, returning the resulting set.
+
+* compilation flags: ``static``
+* template: ``insert_all(List,In,Out)``
+
+* mode - number of proofs:
+
+  * ``insert_all(+list,+set,?set)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="intersect/2"> </div>
+
+.. index:: intersect/2
+.. _setp/0::intersect/2:
+
+``intersect/2``
+^^^^^^^^^^^^^^^
+
+True if the two sets have at least one element in common.
+
+* compilation flags: ``static``
+* template: ``intersect(Set1,Set2)``
+
+* mode - number of proofs:
+
+  * ``intersect(+set,+set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="intersection/3"> </div>
+
+.. index:: intersection/3
+.. _setp/0::intersection/3:
+
+``intersection/3``
+^^^^^^^^^^^^^^^^^^
+
+Returns the intersection of Set1 and Set2.
+
+* compilation flags: ``static``
+* template: ``intersection(Set1,Set2,Intersection)``
+
+* mode - number of proofs:
+
+  * ``intersection(+set,+set,?set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="intersection/4"> </div>
+
+.. index:: intersection/4
+.. _setp/0::intersection/4:
+
+``intersection/4``
+^^^^^^^^^^^^^^^^^^
+
+True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.
+
+* compilation flags: ``static``
+* template: ``intersection(Set1,Set2,Intersection,Difference)``
+
+* mode - number of proofs:
+
+  * ``intersection(+set,+set,?set,?set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="length/2"> </div>
+
+.. index:: length/2
+.. _setp/0::length/2:
+
+``length/2``
+^^^^^^^^^^^^
+
+Number of set elements.
+
+* compilation flags: ``static``
+* template: ``length(Set,Length)``
+
+* mode - number of proofs:
+
+  * ``length(+set,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="member/2"> </div>
+
+.. index:: member/2
+.. _setp/0::member/2:
+
+``member/2``
+^^^^^^^^^^^^
+
+Element is a member of set Set.
+
+* compilation flags: ``static``
+* template: ``member(Element,Set)``
+
+* mode - number of proofs:
+
+  * ``member(+term,+set)`` - ``zero_or_one``
+
+  * ``member(-term,+set)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="memberchk/2"> </div>
+
+.. index:: memberchk/2
+.. _setp/0::memberchk/2:
+
+``memberchk/2``
+^^^^^^^^^^^^^^^
+
+Checks if a term is a member of a set.
+
+* compilation flags: ``static``
+* template: ``memberchk(Element,Set)``
+
+* mode - number of proofs:
+
+  * ``memberchk(+term,+set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="powerset/2"> </div>
+
+.. index:: powerset/2
+.. _setp/0::powerset/2:
+
+``powerset/2``
+^^^^^^^^^^^^^^
+
+Returns the power set of a set, represented as a list of sets.
+
+* compilation flags: ``static``
+* template: ``powerset(Set,Powerset)``
+
+* mode - number of proofs:
+
+  * ``powerset(+set,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="product/3"> </div>
+
+.. index:: product/3
+.. _setp/0::product/3:
+
+``product/3``
+^^^^^^^^^^^^^
+
+Returns the cartesian product of two sets.
+
+* compilation flags: ``static``
+* template: ``product(Set1,Set2,Product)``
+
+* mode - number of proofs:
+
+  * ``product(+set,+set,-set)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="select/3"> </div>
+
+.. index:: select/3
+.. _setp/0::select/3:
+
+``select/3``
+^^^^^^^^^^^^
+
+Selects an element from a set, returning the set of remaining elements.
+
+* compilation flags: ``static``
+* template: ``select(Element,Set,Remaining)``
+
+* mode - number of proofs:
+
+  * ``select(?term,+set,?set)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="selectchk/3"> </div>
+
+.. index:: selectchk/3
+.. _setp/0::selectchk/3:
+
+``selectchk/3``
+^^^^^^^^^^^^^^^
+
+Checks that an element can be selected from a set, returning the set of remaining elements.
+
+* compilation flags: ``static``
+* template: ``selectchk(Element,Set,Remaining)``
+
+* mode - number of proofs:
+
+  * ``selectchk(?term,+set,?set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="subset/2"> </div>
+
+.. index:: subset/2
+.. _setp/0::subset/2:
+
+``subset/2``
+^^^^^^^^^^^^
+
+True if Subset is a subset of Set.
+
+* compilation flags: ``static``
+* template: ``subset(Subset,Set)``
+
+* mode - number of proofs:
+
+  * ``subset(+set,+set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="subtract/3"> </div>
+
+.. index:: subtract/3
+.. _setp/0::subtract/3:
+
+``subtract/3``
+^^^^^^^^^^^^^^
+
+True when Difference contains all and only the elements of Set1 which are not also in Set2.
+
+* compilation flags: ``static``
+* template: ``subtract(Set1,Set2,Difference)``
+
+* mode - number of proofs:
+
+  * ``subtract(+set,+set,?set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="symdiff/3"> </div>
+
+.. index:: symdiff/3
+.. _setp/0::symdiff/3:
+
+``symdiff/3``
+^^^^^^^^^^^^^
+
+True if Difference is the symmetric difference of Set1 and Set2.
+
+* compilation flags: ``static``
+* template: ``symdiff(Set1,Set2,Difference)``
+
+* mode - number of proofs:
+
+  * ``symdiff(+set,+set,?set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="union/3"> </div>
+
+.. index:: union/3
+.. _setp/0::union/3:
+
+``union/3``
+^^^^^^^^^^^
+
+True if Union is the union of Set1 and Set2.
+
+* compilation flags: ``static``
+* template: ``union(Set1,Set2,Union)``
+
+* mode - number of proofs:
+
+  * ``union(+set,+set,?set)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="union/4"> </div>
+
+.. index:: union/4
+.. _setp/0::union/4:
+
+``union/4``
+^^^^^^^^^^^
+
+True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.
+
+* compilation flags: ``static``
+* template: ``union(Set1,Set2,Union,Difference)``
+
+* mode - number of proofs:
+
+  * ``union(+set,+set,?set,?set)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

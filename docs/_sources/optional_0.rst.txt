@@ -1,0 +1,90 @@
+.. index:: optional
+.. _optional/0:
+
+**object**
+
+``optional``
+============
+
+Constructors for optional term references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.
+
+* author: Paulo Moura
+* version: 1.2
+* date: 2017/8/8
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`type::type/1 <type/0::type/1>`
+  * :ref:`type::check/2 <type/0::check/2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _optional/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+Constructs an empty optional reference.
+
+* compilation flags: ``static``
+* template: ``empty(Reference)``
+
+* mode - number of proofs:
+
+  * ``empty(--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="of/2"> </div>
+
+.. index:: of/2
+.. _optional/0::of/2:
+
+``of/2``
+^^^^^^^^
+
+Constructs an optional reference from a term.
+
+* compilation flags: ``static``
+* template: ``of(Term,Reference)``
+
+* mode - number of proofs:
+
+  * ``of(@term,--nonvar)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Type-checking support**: This object also defines a type "optional" for use with the "type" library object.
+
+See also
+--------
+
+* :ref:`optional(Reference) <optional/1>`
+* :ref:`type <type/0>`
+
+

@@ -1,0 +1,367 @@
+.. index:: class_hierarchyp
+.. _class_hierarchyp/0:
+
+**protocol**
+
+``class_hierarchyp``
+====================
+
+Class hierarchy protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static``
+
+* extends:
+
+  * ``public`` :ref:`hierarchyp <hierarchyp/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="class/1"> </div>
+
+.. index:: class/1
+.. _class_hierarchyp/0::class/1:
+
+``class/1``
+^^^^^^^^^^^
+
+Returns, by backtracking, all object classes.
+
+* compilation flags: ``static``
+* template: ``class(Class)``
+
+* mode - number of proofs:
+
+  * ``class(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="classes/1"> </div>
+
+.. index:: classes/1
+.. _class_hierarchyp/0::classes/1:
+
+``classes/1``
+^^^^^^^^^^^^^
+
+List of all object classes.
+
+* compilation flags: ``static``
+* template: ``classes(Classes)``
+
+* mode - number of proofs:
+
+  * ``classes(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="instance/1"> </div>
+
+.. index:: instance/1
+.. _class_hierarchyp/0::instance/1:
+
+``instance/1``
+^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class instances.
+
+* compilation flags: ``static``
+* template: ``instance(Instance)``
+
+* mode - number of proofs:
+
+  * ``instance(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="instances/1"> </div>
+
+.. index:: instances/1
+.. _class_hierarchyp/0::instances/1:
+
+``instances/1``
+^^^^^^^^^^^^^^^
+
+List of all class instances.
+
+* compilation flags: ``static``
+* template: ``instances(Instances)``
+
+* mode - number of proofs:
+
+  * ``instances(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="subclass/1"> </div>
+
+.. index:: subclass/1
+.. _class_hierarchyp/0::subclass/1:
+
+``subclass/1``
+^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class subclasses.
+
+* compilation flags: ``static``
+* template: ``subclass(Subclass)``
+
+* mode - number of proofs:
+
+  * ``subclass(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="subclasses/1"> </div>
+
+.. index:: subclasses/1
+.. _class_hierarchyp/0::subclasses/1:
+
+``subclasses/1``
+^^^^^^^^^^^^^^^^
+
+List of all class subclasses.
+
+* compilation flags: ``static``
+* template: ``subclasses(Subclasses)``
+
+* mode - number of proofs:
+
+  * ``subclasses(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="superclass/1"> </div>
+
+.. index:: superclass/1
+.. _class_hierarchyp/0::superclass/1:
+
+``superclass/1``
+^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class superclasses.
+
+* compilation flags: ``static``
+* template: ``superclass(Superclass)``
+
+* mode - number of proofs:
+
+  * ``superclass(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="superclasses/1"> </div>
+
+.. index:: superclasses/1
+.. _class_hierarchyp/0::superclasses/1:
+
+``superclasses/1``
+^^^^^^^^^^^^^^^^^^
+
+List of all class superclasses.
+
+* compilation flags: ``static``
+* template: ``superclasses(Superclasses)``
+
+* mode - number of proofs:
+
+  * ``superclasses(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="leaf_instance/1"> </div>
+
+.. index:: leaf_instance/1
+.. _class_hierarchyp/0::leaf_instance/1:
+
+``leaf_instance/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class leaf instances.
+
+* compilation flags: ``static``
+* template: ``leaf_instance(Leaf)``
+
+* mode - number of proofs:
+
+  * ``leaf_instance(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="leaf_instances/1"> </div>
+
+.. index:: leaf_instances/1
+.. _class_hierarchyp/0::leaf_instances/1:
+
+``leaf_instances/1``
+^^^^^^^^^^^^^^^^^^^^
+
+List of all class leaf instances.
+
+* compilation flags: ``static``
+* template: ``leaf_instances(Leaves)``
+
+* mode - number of proofs:
+
+  * ``leaf_instances(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="leaf_class/1"> </div>
+
+.. index:: leaf_class/1
+.. _class_hierarchyp/0::leaf_class/1:
+
+``leaf_class/1``
+^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class leaf subclasses.
+
+* compilation flags: ``static``
+* template: ``leaf_class(Leaf)``
+
+* mode - number of proofs:
+
+  * ``leaf_class(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="leaf_classes/1"> </div>
+
+.. index:: leaf_classes/1
+.. _class_hierarchyp/0::leaf_classes/1:
+
+``leaf_classes/1``
+^^^^^^^^^^^^^^^^^^
+
+List of all class leaf leaf subclasses.
+
+* compilation flags: ``static``
+* template: ``leaf_classes(Leaves)``
+
+* mode - number of proofs:
+
+  * ``leaf_classes(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="descendant_instance/1"> </div>
+
+.. index:: descendant_instance/1
+.. _class_hierarchyp/0::descendant_instance/1:
+
+``descendant_instance/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class descendant instances.
+
+* compilation flags: ``static``
+* template: ``descendant_instance(Descendant)``
+
+* mode - number of proofs:
+
+  * ``descendant_instance(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="descendant_instances/1"> </div>
+
+.. index:: descendant_instances/1
+.. _class_hierarchyp/0::descendant_instances/1:
+
+``descendant_instances/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+List of all class descendant instances.
+
+* compilation flags: ``static``
+* template: ``descendant_instances(Descendants)``
+
+* mode - number of proofs:
+
+  * ``descendant_instances(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="descendant_class/1"> </div>
+
+.. index:: descendant_class/1
+.. _class_hierarchyp/0::descendant_class/1:
+
+``descendant_class/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all class descendant subclasses.
+
+* compilation flags: ``static``
+* template: ``descendant_class(Descendant)``
+
+* mode - number of proofs:
+
+  * ``descendant_class(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="descendant_classes/1"> </div>
+
+.. index:: descendant_classes/1
+.. _class_hierarchyp/0::descendant_classes/1:
+
+``descendant_classes/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+List of all class descendant subclasses.
+
+* compilation flags: ``static``
+* template: ``descendant_classes(Descendants)``
+
+* mode - number of proofs:
+
+  * ``descendant_classes(-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

@@ -1,0 +1,49 @@
+.. index:: a_star_interpreter(W)
+.. _a_star_interpreter/1:
+
+**object**
+
+``a_star_interpreter(W)``
+=========================
+
+A* interpreter for general logic programs. The parameter W is used to fine tune the behaviour. W = 0 gives us a breadth-first search and W = 1 gives us a greedy best-first search. The default value for W is 0.5.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`best_first <best_first/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

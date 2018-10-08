@@ -1,0 +1,53 @@
+.. index:: noc_metric
+.. _noc_metric/0:
+
+**object**
+
+``noc_metric``
+==============
+
+Number of entity clauses metric. The score is represented using the compound term number_of_clauses(Total, User).
+
+* author: Ebrahim Azarisooreh and Paulo Moura
+* version: 0.9
+* date: 2018/7/16
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+  * ``public`` :ref:`code_metric <code_metric/0>`
+* provides:
+
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

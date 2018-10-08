@@ -1,0 +1,142 @@
+.. index:: assignvarsp
+.. _assignvarsp/0:
+
+**protocol**
+
+``assignvarsp``
+===============
+
+Assignable variables (supporting backtracable assignement of non-variable terms) protocol.
+
+* author: Nobukuni Kino and Paulo Moura
+* version: 1.0
+* date: 2015/7/31
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="assignable/1"> </div>
+
+.. index:: assignable/1
+.. _assignvarsp/0::assignable/1:
+
+``assignable/1``
+^^^^^^^^^^^^^^^^
+
+Makes Variable an assignable variable. Initial state will be empty.
+
+* compilation flags: ``static``
+* template: ``assignable(Variable)``
+
+* mode - number of proofs:
+
+  * ``assignable(-assignvar)`` - ``one``
+
+* exceptions:
+  * Variable is not a variable: ``type_error(variable,Variable)``
+
+
+.. raw:: html
+
+   <div id="assignable/2"> </div>
+
+.. index:: assignable/2
+.. _assignvarsp/0::assignable/2:
+
+``assignable/2``
+^^^^^^^^^^^^^^^^
+
+Makes Variable an assignable variable and sets its initial state to Value.
+
+* compilation flags: ``static``
+* template: ``assignable(Variable,Value)``
+
+* mode - number of proofs:
+
+  * ``assignable(-assignvar,@nonvar)`` - ``one``
+
+* exceptions:
+  * Variable is not a variable: ``type_error(variable,Variable)``
+
+  * Value is not instantiated: ``instantiation_error``
+
+
+.. raw:: html
+
+   <div id="(<=)/2"> </div>
+
+.. index:: (<=)/2
+.. _assignvarsp/0::(<=)/2:
+
+``(<=)/2``
+^^^^^^^^^^
+
+Sets the state of the assignable variable Variable to Value (initializing the variable if needed).
+
+* compilation flags: ``static``
+* template: ``Variable<=Value``
+
+* mode - number of proofs:
+
+  * ``(?assignvar)<=(@nonvar)`` - ``one``
+
+* exceptions:
+  * Value is not instantiated: ``instantiation_error``
+
+
+.. raw:: html
+
+   <div id="(=>)/2"> </div>
+
+.. index:: (=>)/2
+.. _assignvarsp/0::(=>)/2:
+
+``(=>)/2``
+^^^^^^^^^^
+
+Unifies Value with the current state of the assignable variable Variable.
+
+* compilation flags: ``static``
+* template: ``Variable=>Value``
+
+* mode - number of proofs:
+
+  * ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
+
+* exceptions:
+  * Variable is not instantiated: ``instantiation_error``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+* ``op(100,xfx,<=) (public)``
+* ``op(100,xfx,=>) (public)``
+
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

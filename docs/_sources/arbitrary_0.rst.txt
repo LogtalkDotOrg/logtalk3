@@ -1,0 +1,105 @@
+.. index:: arbitrary
+.. _arbitrary/0:
+
+**category**
+
+``arbitrary``
+=============
+
+Adds predicates for generating random values for selected types to the library "type" object.
+
+* author: Paulo Moura
+* version: 1.13
+* date: 2018/4/4
+* compilation flags: ``static``
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="arbitrary/1"> </div>
+
+.. index:: arbitrary/1
+.. _arbitrary/0::arbitrary/1:
+
+``arbitrary/1``
+^^^^^^^^^^^^^^^
+
+Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.
+
+* compilation flags: ``static, multifile``
+* template: ``arbitrary(Type)``
+
+* mode - number of proofs:
+
+  * ``arbitrary(?callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="arbitrary/2"> </div>
+
+.. index:: arbitrary/2
+.. _arbitrary/0::arbitrary/2:
+
+``arbitrary/2``
+^^^^^^^^^^^^^^^
+
+Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.
+
+* compilation flags: ``static, multifile``
+* template: ``arbitrary(Type,Term)``
+
+* mode - number of proofs:
+
+  * ``arbitrary(@callable,-term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="shrink/3"> </div>
+
+.. index:: shrink/3
+.. _arbitrary/0::shrink/3:
+
+``shrink/3``
+^^^^^^^^^^^^
+
+Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.
+
+* compilation flags: ``static, multifile``
+* template: ``shrink(Type,Large,Small)``
+
+* mode - number of proofs:
+
+  * ``shrink(@callable,@term,-term)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Atom character sets**: When generating atoms or character codes, or terms that contain them, it is possible to choose a character set (ascii_printable, ascii_full, byte, unicode_bmp, or unicode_full) using the parameterizable types. Default is ascii_printable.
+
+See also
+--------
+
+* :ref:`type <type/0>`
+
+

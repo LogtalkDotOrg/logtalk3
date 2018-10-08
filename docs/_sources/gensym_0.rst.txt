@@ -1,0 +1,122 @@
+.. index:: gensym
+.. _gensym/0:
+
+**object**
+
+``gensym``
+==========
+
+Predicates for generating unique atoms. Object protocol based on the "gensym" module of SWI-Prolog.
+
+* author: Paulo Moura
+* version: 1.01
+* date: 2011/11/9
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="reset_gensym/0"> </div>
+
+.. index:: reset_gensym/0
+.. _gensym/0::reset_gensym/0:
+
+``reset_gensym/0``
+^^^^^^^^^^^^^^^^^^
+
+Resets the generator counter for all bases.
+
+* compilation flags: ``static, synchronized``
+* mode - number of proofs:
+
+  * ``reset_gensym`` - ``one``
+
+
+.. raw:: html
+
+   <div id="reset_gensym/1"> </div>
+
+.. index:: reset_gensym/1
+.. _gensym/0::reset_gensym/1:
+
+``reset_gensym/1``
+^^^^^^^^^^^^^^^^^^
+
+Resets the generator counter for a given base.
+
+* compilation flags: ``static, synchronized``
+* template: ``reset_gensym(Base)``
+
+* mode - number of proofs:
+
+  * ``reset_gensym(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="gensym/2"> </div>
+
+.. index:: gensym/2
+.. _gensym/0::gensym/2:
+
+``gensym/2``
+^^^^^^^^^^^^
+
+Returns a new unique atom with a given base (prefix).
+
+* compilation flags: ``static, synchronized``
+* template: ``gensym(Base,Unique)``
+
+* mode - number of proofs:
+
+  * ``gensym(+atom,-atom)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="base_/2"> </div>
+
+.. index:: base_/2
+.. _gensym/0::base_/2:
+
+``base_/2``
+^^^^^^^^^^^
+
+Table of generator bases and respective counters.
+
+* compilation flags: ``dynamic``
+* template: ``base_(Base,Counter)``
+
+* mode - number of proofs:
+
+  * ``base_(?atom,?integer)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

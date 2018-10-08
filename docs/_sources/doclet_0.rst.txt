@@ -1,0 +1,107 @@
+.. index:: doclet
+.. _doclet/0:
+
+**object**
+
+``doclet``
+==========
+
+Utility object to help automate (re)generating documentation for a project.
+
+* author: Paulo Moura
+* version: 0.5
+* date: 2017/1/5
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="update/0"> </div>
+
+.. index:: update/0
+.. _doclet/0::update/0:
+
+``update/0``
+^^^^^^^^^^^^
+
+Updates the project documentation, first by calling a sequence of goals and second by executing a sequence of shell commands. Fails if any goal or shell command fails.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``update`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="doc_goal/1"> </div>
+
+.. index:: doc_goal/1
+.. _doclet/0::doc_goal/1:
+
+``doc_goal/1``
+^^^^^^^^^^^^^^
+
+Table of goals, typically using the "diagrams" and the "lgtdoc" tools, used to generate the documentation. Goals are called in the order they are defined and in the context of the "user" pseudo-object.
+
+* compilation flags: ``static``
+* template: ``doc_goal(Goal)``
+
+* mode - number of proofs:
+
+  * ``doc_goal(?callable)`` - ``one_or_more``
+
+
+.. raw:: html
+
+   <div id="shell_command/1"> </div>
+
+.. index:: shell_command/1
+.. _doclet/0::shell_command/1:
+
+``shell_command/1``
+^^^^^^^^^^^^^^^^^^^
+
+Table of shell commands to convert intermediate documentation files into user-friendly documentation. Commands are executed in the order they are defined.
+
+* compilation flags: ``static``
+* template: ``shell_command(Command)``
+
+* mode - number of proofs:
+
+  * ``shell_command(?atom)`` - ``one_or_more``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`lgtdocp <lgtdocp/0>`
+* :ref:`diagram(Format) <diagram/1>`
+
+

@@ -1,616 +1,587 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>logtalk</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">object</p>
-      <h1 class="code">logtalk</h1>
-      <blockquote>
-        <p class="comment">Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>logtalk &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="monitoring" href="monitoring_0.html" />
+    <link rel="prev" title="forwarding" href="forwarding_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core_messages_0.html">core_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expanding_0.html">expanding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="forwarding_0.html">forwarding</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">logtalk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring_0.html">monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_0.html">user</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">logtalk</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/logtalk_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="logtalk-0"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="logtalk">
+<h1><code class="docutils literal notranslate"><span class="pre">logtalk</span></code><a class="headerlink" href="#logtalk" title="Permalink to this headline">¶</a></h1>
+<p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 1.13</li>
+<li>date: 2017/10/18</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">built_in,</span> <span class="pre">context_switching_calls,</span> <span class="pre">threaded</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="print_message/3"> </div><div class="section" id="print-message-3">
+<span id="logtalk-0-print-message-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">print_message/3</span></code><a class="headerlink" href="#print-message-3" title="Permalink to this headline">¶</a></h3>
+<p>Prints a message of the given kind for the specified component.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">print_message(Kind,Component,Message)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">print_message(+nonvar,+nonvar,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="print_message_tokens/3"> </div></div>
+<div class="section" id="print-message-tokens-3">
+<span id="logtalk-0-print-message-tokens-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code><a class="headerlink" href="#print-message-tokens-3" title="Permalink to this headline">¶</a></h3>
+<p>Print the messages tokens to the given stream, prefixing each line with the specified atom.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">print_message_tokens(Stream,Prefix,Tokens)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">print_message_tokens(&#64;stream_or_alias,+atom,&#64;list(nonvar))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="print_message_token/4"> </div></div>
+<div class="section" id="print-message-token-4">
+<span id="logtalk-0-print-message-token-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code><a class="headerlink" href="#print-message-token-4" title="Permalink to this headline">¶</a></h3>
+<p>User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">print_message_token(Stream,Prefix,Token,Tokens)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">print_message_token(&#64;stream_or_alias,&#64;atom,&#64;nonvar,&#64;list(nonvar))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="message_tokens//2"> </div></div>
+<div class="section" id="message-tokens-2">
+<span id="logtalk-0-message-tokens-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code><a class="headerlink" href="#message-tokens-2" title="Permalink to this headline">¶</a></h3>
+<p>User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">message_tokens(Message,Component)</span></code></li>
+</ul>
+<div id="message_prefix_stream/4"> </div></div>
+<div class="section" id="message-prefix-stream-4">
+<span id="logtalk-0-message-prefix-stream-4"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">message_prefix_stream/4</span></code><a class="headerlink" href="#message-prefix-stream-4" title="Permalink to this headline">¶</a></h3>
+<p>Message line prefix and output stream to be used when printing a message given its kind and component.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">message_prefix_stream(Kind,Component,Prefix,Stream)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">message_prefix_stream(?nonvar,?nonvar,?atom,?stream_or_alias)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="message_hook/4"> </div></div>
+<div class="section" id="message-hook-4">
+<span id="logtalk-0-message-hook-4"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code><a class="headerlink" href="#message-hook-4" title="Permalink to this headline">¶</a></h3>
+<p>User-defined hook predicate for intercepting message printing calls.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">message_hook(Message,Kind,Component,Tokens)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">message_hook(+nonvar,+nonvar,+nonvar,+list(nonvar))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="ask_question/5"> </div></div>
+<div class="section" id="ask-question-5">
+<span id="logtalk-0-ask-question-5"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code><a class="headerlink" href="#ask-question-5" title="Permalink to this headline">¶</a></h3>
+<p>Asks a question and reads the answer until the check predicate is true.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">ask_question(Kind,Component,Question,Check,Answer)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">ask_question(*,*,*,1,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">ask_question(+nonvar,+nonvar,+nonvar,+callable,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="question_hook/6"> </div></div>
+<div class="section" id="question-hook-6">
+<span id="logtalk-0-question-hook-6"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code><a class="headerlink" href="#question-hook-6" title="Permalink to this headline">¶</a></h3>
+<p>User-defined hook predicate for intercepting question asking calls.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">question_hook(Question,Kind,Component,Tokens,Check,Answer)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">question_hook(*,*,*,*,1,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">question_hook(+nonvar,+nonvar,+nonvar,+list(nonvar),+callable,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="question_prompt_stream/4"> </div></div>
+<div class="section" id="question-prompt-stream-4">
+<span id="logtalk-0-question-prompt-stream-4"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">question_prompt_stream/4</span></code><a class="headerlink" href="#question-prompt-stream-4" title="Permalink to this headline">¶</a></h3>
+<p>Prompt and input stream to be used when asking a question given its kind and component.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">question_prompt_stream(Kind,Component,Prompt,Stream)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">question_prompt_stream(?nonvar,?nonvar,?atom,?stream_or_alias)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="trace_event/2"> </div></div>
+<div class="section" id="trace-event-2">
+<span id="logtalk-0-trace-event-2"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">trace_event/2</span></code><a class="headerlink" href="#trace-event-2" title="Permalink to this headline">¶</a></h3>
+<p>Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">trace_event(Event,ExecutionContext)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">trace_event(&#64;callable,&#64;execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="debug_handler_provider/1"> </div></div>
+<div class="section" id="debug-handler-provider-1">
+<span id="logtalk-0-debug-handler-provider-1"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">debug_handler_provider/1</span></code><a class="headerlink" href="#debug-handler-provider-1" title="Permalink to this headline">¶</a></h3>
+<p>Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">debug_handler_provider(Provider)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">debug_handler_provider(?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="debug_handler/2"> </div></div>
+<div class="section" id="debug-handler-2">
+<span id="logtalk-0-debug-handler-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code><a class="headerlink" href="#debug-handler-2" title="Permalink to this headline">¶</a></h3>
+<p>Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">debug_handler(Event,ExecutionContext)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">debug_handler(?entity_identifier,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="expand_library_path/2"> </div></div>
+<div class="section" id="expand-library-path-2">
+<span id="logtalk-0-expand-library-path-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code><a class="headerlink" href="#expand-library-path-2" title="Permalink to this headline">¶</a></h3>
+<p>Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">expand_library_path(LibraryPath,AbsolutePath)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">expand_library_path(+atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">expand_library_path(+callable,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="loaded_file/1"> </div></div>
+<div class="section" id="loaded-file-1">
+<span id="logtalk-0-loaded-file-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code><a class="headerlink" href="#loaded-file-1" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all loaded files, returning their full paths.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">loaded_file(Path)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">loaded_file(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="loaded_file_property/2"> </div></div>
+<div class="section" id="loaded-file-property-2">
+<span id="logtalk-0-loaded-file-property-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code><a class="headerlink" href="#loaded-file-property-2" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">loaded_file_property(Path,Property)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">loaded_file_property(?atom,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="file_type_extension/2"> </div></div>
+<div class="section" id="file-type-extension-2">
+<span id="logtalk-0-file-type-extension-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code><a class="headerlink" href="#file-type-extension-2" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">file_type_extension(Type,Extension)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">file_type_extension(?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="compile_aux_clauses/1"> </div></div>
+<div class="section" id="compile-aux-clauses-1">
+<span id="logtalk-0-compile-aux-clauses-1"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code><a class="headerlink" href="#compile-aux-clauses-1" title="Permalink to this headline">¶</a></h3>
+<p>Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">compile_aux_clauses(Clauses)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses(&#64;list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="entity_prefix/2"> </div></div>
+<div class="section" id="entity-prefix-2">
+<span id="logtalk-0-entity-prefix-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_prefix/2</span></code><a class="headerlink" href="#entity-prefix-2" title="Permalink to this headline">¶</a></h3>
+<p>Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">entity_prefix(Entity,Prefix)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">entity_prefix(?entity_identifier,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="compile_predicate_heads/4"> </div></div>
+<div class="section" id="compile-predicate-heads-4">
+<span id="logtalk-0-compile-predicate-heads-4"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads/4</span></code><a class="headerlink" href="#compile-predicate-heads-4" title="Permalink to this headline">¶</a></h3>
+<p>Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(&#64;list(callable),?entity_identifier,-list(callable),&#64;execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(&#64;conjunction(callable),?entity_identifier,-conjunction(callable),&#64;execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads(&#64;callable,?entity_identifier,-callable,&#64;execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="compile_predicate_indicators/3"> </div></div>
+<div class="section" id="compile-predicate-indicators-3">
+<span id="logtalk-0-compile-predicate-indicators-3"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators/3</span></code><a class="headerlink" href="#compile-predicate-indicators-3" title="Permalink to this headline">¶</a></h3>
+<p>Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(&#64;list(predicate_indicator),?entity_identifier,-list(predicate_indicator))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(&#64;conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators(&#64;predicate_indicator,?entity_identifier,-predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="decompile_predicate_heads/4"> </div></div>
+<div class="section" id="decompile-predicate-heads-4">
+<span id="logtalk-0-decompile-predicate-heads-4"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads/4</span></code><a class="headerlink" href="#decompile-predicate-heads-4" title="Permalink to this headline">¶</a></h3>
+<p>Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(&#64;list(callable),-entity_identifier,-atom,-list(callable))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(&#64;conjunction(callable),-entity_identifier,-atom,-conjunction(callable))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads(&#64;callable,-entity_identifier,-atom,-callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="decompile_predicate_indicators/4"> </div></div>
+<div class="section" id="decompile-predicate-indicators-4">
+<span id="logtalk-0-decompile-predicate-indicators-4"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code><a class="headerlink" href="#decompile-predicate-indicators-4" title="Permalink to this headline">¶</a></h3>
+<p>Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(&#64;list(predicate_indicator),-entity_identifier,-atom,-list(predicate_indicator))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(&#64;conjunction(predicate_indicator),-entity_identifier,-atom,-conjunction(predicate_indicator))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators(&#64;predicate_indicator,-entity_identifier,-atom,-predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="execution_context/7"> </div></div>
+<div class="section" id="execution-context-7">
+<span id="logtalk-0-execution-context-7"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">execution_context/7</span></code><a class="headerlink" href="#execution-context-7" title="Permalink to this headline">¶</a></h3>
+<p>Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">execution_context(ExecutionContext,Entity,Sender,This,Self,MetaCallContext,CoinductionStack)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,&#64;list(callable),&#64;list(callable))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Message kinds</strong>: The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.</li>
+<li><strong>Printing of silent messages</strong>: By default, silent messages are not printed. These messages are only useful when intercepted.</li>
+<li><strong>Printing of banner and comment messages</strong>: By default, banner and comment messages are only printed when the report flag is turned on.</li>
+<li><strong>Printing of help, information, and question messages</strong>: These messages are always printed by default as they provide requested output.</li>
+<li><strong>Printing of warning messages</strong>: By default, warning messages are not printed when the report flag is turned off.</li>
+<li><strong>Printing of error messages</strong>: These messages are always printed by default.</li>
+<li><strong>Printing of debug messages</strong>: By default, debug messages are only printed when the debug flag is turned on.</li>
+<li><strong>Meta messages</strong>: A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</li>
+<li><strong>&#64;Message meta message</strong>: By default, the message is printed as passed to the write/1 predicate followed by a newline.</li>
+<li><strong>Key-Value meta message</strong>: By default, the message is printed as “Key: Value” followed by a newline. The value is printed as passed to the writeq/1 predicate.</li>
+<li><strong>List meta message</strong>: By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</li>
+<li><strong>Title::List meta message</strong>: By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="monitoring_0.html" class="btn btn-neutral float-right" title="monitoring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="forwarding_0.html" class="btn btn-neutral" title="forwarding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>1.13</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2017/10/18</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static, built_in, context_switching_calls, threaded</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="print_message/3" class="code">print_message/3</h3>
-          <blockquote>
-            <p class="comment">Prints a message of the given kind for the specified component.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>print_message(Kind,Component,Message)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>print_message(+nonvar,+nonvar,+nonvar) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="print_message_tokens/3" class="code">print_message_tokens/3</h3>
-          <blockquote>
-            <p class="comment">Print the messages tokens to the given stream, prefixing each line with the specified atom.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>print_message_tokens(Stream,Prefix,Tokens)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>print_message_tokens(@stream_or_alias,+atom,@list(nonvar)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="print_message_token/4" class="code">print_message_token/4</h3>
-          <blockquote>
-            <p class="comment">User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>print_message_token(Stream,Prefix,Token,Tokens)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>print_message_token(@stream_or_alias,@atom,@nonvar,@list(nonvar)) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="message_tokens//2" class="code">message_tokens//2</h3>
-          <blockquote>
-            <p class="comment">User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>message_tokens(Message,Component)</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="message_prefix_stream/4" class="code">message_prefix_stream/4</h3>
-          <blockquote>
-            <p class="comment">Message line prefix and output stream to be used when printing a message given its kind and component.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>message_prefix_stream(Kind,Component,Prefix,Stream)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>message_prefix_stream(?nonvar,?nonvar,?atom,?stream_or_alias) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="message_hook/4" class="code">message_hook/4</h3>
-          <blockquote>
-            <p class="comment">User-defined hook predicate for intercepting message printing calls.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>message_hook(Message,Kind,Component,Tokens)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>message_hook(+nonvar,+nonvar,+nonvar,+list(nonvar)) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="ask_question/5" class="code">ask_question/5</h3>
-          <blockquote>
-            <p class="comment">Asks a question and reads the answer until the check predicate is true.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>ask_question(Kind,Component,Question,Check,Answer)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>ask_question(*,*,*,1,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>ask_question(+nonvar,+nonvar,+nonvar,+callable,-term) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="question_hook/6" class="code">question_hook/6</h3>
-          <blockquote>
-            <p class="comment">User-defined hook predicate for intercepting question asking calls.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>question_hook(Question,Kind,Component,Tokens,Check,Answer)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>question_hook(*,*,*,*,1,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>question_hook(+nonvar,+nonvar,+nonvar,+list(nonvar),+callable,-term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="question_prompt_stream/4" class="code">question_prompt_stream/4</h3>
-          <blockquote>
-            <p class="comment">Prompt and input stream to be used when asking a question given its kind and component.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>question_prompt_stream(Kind,Component,Prompt,Stream)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>question_prompt_stream(?nonvar,?nonvar,?atom,?stream_or_alias) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="trace_event/2" class="code">trace_event/2</h3>
-          <blockquote>
-            <p class="comment">Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>trace_event(Event,ExecutionContext)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>trace_event(@callable,@execution_context) &ndash; zero</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="debug_handler_provider/1" class="code">debug_handler_provider/1</h3>
-          <blockquote>
-            <p class="comment">Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>debug_handler_provider(Provider)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>debug_handler_provider(?object_identifier) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="debug_handler/2" class="code">debug_handler/2</h3>
-          <blockquote>
-            <p class="comment">Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>debug_handler(Event,ExecutionContext)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>debug_handler(?entity_identifier,?atom) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="expand_library_path/2" class="code">expand_library_path/2</h3>
-          <blockquote>
-            <p class="comment">Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>expand_library_path(LibraryPath,AbsolutePath)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>expand_library_path(+atom,?atom) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>expand_library_path(+callable,?atom) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="loaded_file/1" class="code">loaded_file/1</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all loaded files, returning their full paths.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>loaded_file(Path)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>loaded_file(?atom) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="loaded_file_property/2" class="code">loaded_file_property/2</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>loaded_file_property(Path,Property)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>loaded_file_property(?atom,?compound) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="file_type_extension/2" class="code">file_type_extension/2</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>file_type_extension(Type,Extension)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>file_type_extension(?atom,?atom) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="compile_aux_clauses/1" class="code">compile_aux_clauses/1</h3>
-          <blockquote>
-            <p class="comment">Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>compile_aux_clauses(Clauses)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>compile_aux_clauses(@list(clause)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="entity_prefix/2" class="code">entity_prefix/2</h3>
-          <blockquote>
-            <p class="comment">Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>entity_prefix(Entity,Prefix)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>entity_prefix(?entity_identifier,?atom) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="compile_predicate_heads/4" class="code">compile_predicate_heads/4</h3>
-          <blockquote>
-            <p class="comment">Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>compile_predicate_heads(@list(callable),?entity_identifier,-list(callable),@execution_context) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>compile_predicate_heads(@conjunction(callable),?entity_identifier,-conjunction(callable),@execution_context) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>compile_predicate_heads(@callable,?entity_identifier,-callable,@execution_context) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="compile_predicate_indicators/3" class="code">compile_predicate_indicators/3</h3>
-          <blockquote>
-            <p class="comment">Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>compile_predicate_indicators(@list(predicate_indicator),?entity_identifier,-list(predicate_indicator)) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>compile_predicate_indicators(@conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator)) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>compile_predicate_indicators(@predicate_indicator,?entity_identifier,-predicate_indicator) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="decompile_predicate_heads/4" class="code">decompile_predicate_heads/4</h3>
-          <blockquote>
-            <p class="comment">Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>decompile_predicate_heads(@list(callable),-entity_identifier,-atom,-list(callable)) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>decompile_predicate_heads(@conjunction(callable),-entity_identifier,-atom,-conjunction(callable)) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>decompile_predicate_heads(@callable,-entity_identifier,-atom,-callable) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="decompile_predicate_indicators/4" class="code">decompile_predicate_indicators/4</h3>
-          <blockquote>
-            <p class="comment">Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>decompile_predicate_indicators(@list(predicate_indicator),-entity_identifier,-atom,-list(predicate_indicator)) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>decompile_predicate_indicators(@conjunction(predicate_indicator),-entity_identifier,-atom,-conjunction(predicate_indicator)) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>decompile_predicate_indicators(@predicate_indicator,-entity_identifier,-atom,-predicate_indicator) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="execution_context/7" class="code">execution_context/7</h3>
-          <blockquote>
-            <p class="comment">Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>execution_context(ExecutionContext,Entity,Sender,This,Self,MetaCallContext,CoinductionStack)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable)) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <dl class="remarks">
-          <dt class="comment">Message kinds</dt>
-          <dd class="text">The default set is {silent, silent(Category), banner, help, comment, comment(Category), information, information(Category), warning, warning(Category), error, error(Category), debug, debug(Category), question, question(Category)}.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Printing of silent messages</dt>
-          <dd class="text">By default, silent messages are not printed. These messages are only useful when intercepted.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Printing of banner and comment messages</dt>
-          <dd class="text">By default, banner and comment messages are only printed when the report flag is turned on.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Printing of help, information, and question messages</dt>
-          <dd class="text">These messages are always printed by default as they provide requested output.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Printing of warning messages</dt>
-          <dd class="text">By default, warning messages are not printed when the report flag is turned off.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Printing of error messages</dt>
-          <dd class="text">These messages are always printed by default.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Printing of debug messages</dt>
-          <dd class="text">By default, debug messages are only printed when the debug flag is turned on.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Meta messages</dt>
-          <dd class="text">A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">@Message meta message</dt>
-          <dd class="text">By default, the message is printed as passed to the write/1 predicate followed by a newline.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Key-Value meta message</dt>
-          <dd class="text">By default, the message is printed as "Key: Value" followed by a newline. The value is printed as passed to the writeq/1 predicate.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">List meta message</dt>
-          <dd class="text">By default, the list items are printed indented one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Title::List meta message</dt>
-          <dd class="text">By default, the title is printed followed by a newline and the indented list items, one per line. The items are preceded by a dash and printed as passed to the writeq/1 predicate.</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

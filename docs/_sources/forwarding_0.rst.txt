@@ -1,0 +1,66 @@
+.. index:: forwarding
+.. _forwarding/0:
+
+**protocol**
+
+``forwarding``
+==============
+
+Message forwarding protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2013/5/4
+* compilation flags: ``static, built_in``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="forward/1"> </div>
+
+.. index:: forward/1
+.. _forwarding/0::forward/1:
+
+``forward/1``
+^^^^^^^^^^^^^
+
+User-defined message forwarding handler, automatically called (if defined) by the runtime for any message that the receiving object does not understand.
+
+* compilation flags: ``static``
+* template: ``forward(Message)``
+
+* mode - number of proofs:
+
+  * ``forward(@callable)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

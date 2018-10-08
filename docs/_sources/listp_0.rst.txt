@@ -1,0 +1,1052 @@
+.. index:: listp
+.. _listp/0:
+
+**protocol**
+
+``listp``
+=========
+
+List protocol.
+
+* author: Paulo Moura
+* version: 1.14
+* date: 2018/8/17
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="append/2"> </div>
+
+.. index:: append/2
+.. _listp/0::append/2:
+
+``append/2``
+^^^^^^^^^^^^
+
+Appends all lists in a list of lists.
+
+* compilation flags: ``static``
+* template: ``append(Lists,Concatenation)``
+
+* mode - number of proofs:
+
+  * ``append(+list(list),?list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="append/3"> </div>
+
+.. index:: append/3
+.. _listp/0::append/3:
+
+``append/3``
+^^^^^^^^^^^^
+
+Appends two lists.
+
+* compilation flags: ``static``
+* template: ``append(List1,List2,List)``
+
+* mode - number of proofs:
+
+  * ``append(?list,?list,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="delete/3"> </div>
+
+.. index:: delete/3
+.. _listp/0::delete/3:
+
+``delete/3``
+^^^^^^^^^^^^
+
+Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ==/2 for element comparison.
+
+* compilation flags: ``static``
+* template: ``delete(List,Element,Remaining)``
+
+* mode - number of proofs:
+
+  * ``delete(@list,@term,?list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete_matches/3"> </div>
+
+.. index:: delete_matches/3
+.. _listp/0::delete_matches/3:
+
+``delete_matches/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Deletes all matching elements from a list, returning the list of remaining elements. Uses =/2 for element comparison.
+
+* compilation flags: ``static``
+* template: ``delete_matches(List,Element,Remaining)``
+
+* mode - number of proofs:
+
+  * ``delete_matches(@list,@term,?list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _listp/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True if the argument is an empty list.
+
+* compilation flags: ``static``
+* template: ``empty(List)``
+
+* mode - number of proofs:
+
+  * ``empty(@list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="flatten/2"> </div>
+
+.. index:: flatten/2
+.. _listp/0::flatten/2:
+
+``flatten/2``
+^^^^^^^^^^^^^
+
+Flattens a list of lists into a list.
+
+* compilation flags: ``static``
+* template: ``flatten(List,Flatted)``
+
+* mode - number of proofs:
+
+  * ``flatten(+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="hamming_distance/3"> </div>
+
+.. index:: hamming_distance/3
+.. _listp/0::hamming_distance/3:
+
+``hamming_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Hamming distance between two lists (using equality to compare list elements). Fails if the two lists are not of the same length.
+
+* compilation flags: ``static``
+* template: ``hamming_distance(List1,List2,Distance)``
+
+* mode - number of proofs:
+
+  * ``hamming_distance(+list,+list,-integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="keysort/2"> </div>
+
+.. index:: keysort/2
+.. _listp/0::keysort/2:
+
+``keysort/2``
+^^^^^^^^^^^^^
+
+Sorts a list of key-value pairs in ascending order.
+
+* compilation flags: ``static``
+* template: ``keysort(List,Sorted)``
+
+* mode - number of proofs:
+
+  * ``keysort(+list(pair),-list(pair))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="last/2"> </div>
+
+.. index:: last/2
+.. _listp/0::last/2:
+
+``last/2``
+^^^^^^^^^^
+
+List last element (if it exists).
+
+* compilation flags: ``static``
+* template: ``last(List,Last)``
+
+* mode - number of proofs:
+
+  * ``last(?list,?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="length/2"> </div>
+
+.. index:: length/2
+.. _listp/0::length/2:
+
+``length/2``
+^^^^^^^^^^^^
+
+List length.
+
+* compilation flags: ``static``
+* template: ``length(List,Length)``
+
+* mode - number of proofs:
+
+  * ``length(?list,?integer)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="max/2"> </div>
+
+.. index:: max/2
+.. _listp/0::max/2:
+
+``max/2``
+^^^^^^^^^
+
+Determines the list maximum value using standard order. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``max(List,Maximum)``
+
+* mode - number of proofs:
+
+  * ``max(+list,-term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="member/2"> </div>
+
+.. index:: member/2
+.. _listp/0::member/2:
+
+``member/2``
+^^^^^^^^^^^^
+
+Element is a list member.
+
+* compilation flags: ``static``
+* template: ``member(Element,List)``
+
+* mode - number of proofs:
+
+  * ``member(?term,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="memberchk/2"> </div>
+
+.. index:: memberchk/2
+.. _listp/0::memberchk/2:
+
+``memberchk/2``
+^^^^^^^^^^^^^^^
+
+Checks if a term is a member of a list.
+
+* compilation flags: ``static``
+* template: ``memberchk(Element,List)``
+
+* mode - number of proofs:
+
+  * ``memberchk(?term,?list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="min/2"> </div>
+
+.. index:: min/2
+.. _listp/0::min/2:
+
+``min/2``
+^^^^^^^^^
+
+Determines the minimum value in a list using standard order. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``min(List,Minimum)``
+
+* mode - number of proofs:
+
+  * ``min(+list,-term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="msort/2"> </div>
+
+.. index:: msort/2
+.. _listp/0::msort/2:
+
+``msort/2``
+^^^^^^^^^^^
+
+Sorts a list in ascending order (duplicated elements are not removed).
+
+* compilation flags: ``static``
+* template: ``msort(List,Sorted)``
+
+* mode - number of proofs:
+
+  * ``msort(+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="msort/3"> </div>
+
+.. index:: msort/3
+.. _listp/0::msort/3:
+
+``msort/3``
+^^^^^^^^^^^
+
+Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are not removed).
+
+* compilation flags: ``static``
+* template: ``msort(Closure,List,Sorted)``
+
+* meta-predicate template: ``msort(3,*,*)``
+
+* mode - number of proofs:
+
+  * ``msort(+callable,+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="nextto/3"> </div>
+
+.. index:: nextto/3
+.. _listp/0::nextto/3:
+
+``nextto/3``
+^^^^^^^^^^^^
+
+X and Y are consecutive elements in List.
+
+* compilation flags: ``static``
+* template: ``nextto(X,Y,List)``
+
+* mode - number of proofs:
+
+  * ``nextto(?term,?term,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="nth0/3"> </div>
+
+.. index:: nth0/3
+.. _listp/0::nth0/3:
+
+``nth0/3``
+^^^^^^^^^^
+
+Nth element of a list (counting from zero).
+
+* compilation flags: ``static``
+* template: ``nth0(Nth,List,Element)``
+
+* mode - number of proofs:
+
+  * ``nth0(?integer,?list,?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="nth0/4"> </div>
+
+.. index:: nth0/4
+.. _listp/0::nth0/4:
+
+``nth0/4``
+^^^^^^^^^^
+
+Nth element of a list (counting from zero).
+
+* compilation flags: ``static``
+* template: ``nth0(Nth,List,Element,Residue)``
+
+* mode - number of proofs:
+
+  * ``nth0(?integer,?list,?term,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="nth1/3"> </div>
+
+.. index:: nth1/3
+.. _listp/0::nth1/3:
+
+``nth1/3``
+^^^^^^^^^^
+
+Nth element of a list (counting from one).
+
+* compilation flags: ``static``
+* template: ``nth1(Nth,List,Element)``
+
+* mode - number of proofs:
+
+  * ``nth1(?integer,?list,?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="nth1/4"> </div>
+
+.. index:: nth1/4
+.. _listp/0::nth1/4:
+
+``nth1/4``
+^^^^^^^^^^
+
+Nth element of a list (counting from one).
+
+* compilation flags: ``static``
+* template: ``nth1(Nth,List,Element,Residue)``
+
+* mode - number of proofs:
+
+  * ``nth1(?integer,?list,?term,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="partition/5"> </div>
+
+.. index:: partition/5
+.. _listp/0::partition/5:
+
+``partition/5``
+^^^^^^^^^^^^^^^
+
+Partitions a list in lists with values less, equal, and greater than a given value (using standard order).
+
+* compilation flags: ``static``
+* template: ``partition(List,Value,Less,Equal,Greater)``
+
+* mode - number of proofs:
+
+  * ``partition(+list,+number,-list,-list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="permutation/2"> </div>
+
+.. index:: permutation/2
+.. _listp/0::permutation/2:
+
+``permutation/2``
+^^^^^^^^^^^^^^^^^
+
+The two lists are a permutation of the same list.
+
+* compilation flags: ``static``
+* template: ``permutation(List,Permutation)``
+
+* mode - number of proofs:
+
+  * ``permutation(?list,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="prefix/2"> </div>
+
+.. index:: prefix/2
+.. _listp/0::prefix/2:
+
+``prefix/2``
+^^^^^^^^^^^^
+
+Prefix is a prefix of List.
+
+* compilation flags: ``static``
+* template: ``prefix(Prefix,List)``
+
+* mode - number of proofs:
+
+  * ``prefix(?list,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="prefix/3"> </div>
+
+.. index:: prefix/3
+.. _listp/0::prefix/3:
+
+``prefix/3``
+^^^^^^^^^^^^
+
+Prefix is a prefix of length Length of List.
+
+* compilation flags: ``static``
+* template: ``prefix(Prefix,Length,List)``
+
+* mode - number of proofs:
+
+  * ``prefix(?list,+integer,+list)`` - ``zero_or_one``
+
+  * ``prefix(?list,-integer,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="proper_prefix/2"> </div>
+
+.. index:: proper_prefix/2
+.. _listp/0::proper_prefix/2:
+
+``proper_prefix/2``
+^^^^^^^^^^^^^^^^^^^
+
+Prefix is a proper prefix of List.
+
+* compilation flags: ``static``
+* template: ``proper_prefix(Prefix,List)``
+
+* mode - number of proofs:
+
+  * ``proper_prefix(?list,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="proper_prefix/3"> </div>
+
+.. index:: proper_prefix/3
+.. _listp/0::proper_prefix/3:
+
+``proper_prefix/3``
+^^^^^^^^^^^^^^^^^^^
+
+Prefix is a proper prefix of length Length of List.
+
+* compilation flags: ``static``
+* template: ``proper_prefix(Prefix,Length,List)``
+
+* mode - number of proofs:
+
+  * ``proper_prefix(?list,+integer,+list)`` - ``zero_or_one``
+
+  * ``proper_prefix(?list,-integer,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="reverse/2"> </div>
+
+.. index:: reverse/2
+.. _listp/0::reverse/2:
+
+``reverse/2``
+^^^^^^^^^^^^^
+
+Reverses a list.
+
+* compilation flags: ``static``
+* template: ``reverse(List,Reversed)``
+
+* mode - number of proofs:
+
+  * ``reverse(+list,?list)`` - ``zero_or_one``
+
+  * ``reverse(?list,+list)`` - ``zero_or_one``
+
+  * ``reverse(-list,-list)`` - ``one_or_more``
+
+
+.. raw:: html
+
+   <div id="same_length/2"> </div>
+
+.. index:: same_length/2
+.. _listp/0::same_length/2:
+
+``same_length/2``
+^^^^^^^^^^^^^^^^^
+
+The two lists have the same length.
+
+* compilation flags: ``static``
+* template: ``same_length(List1,List2)``
+
+* mode - number of proofs:
+
+  * ``same_length(+list,?list)`` - ``zero_or_one``
+
+  * ``same_length(?list,+list)`` - ``zero_or_one``
+
+  * ``same_length(-list,-list)`` - ``one_or_more``
+
+
+.. raw:: html
+
+   <div id="same_length/3"> </div>
+
+.. index:: same_length/3
+.. _listp/0::same_length/3:
+
+``same_length/3``
+^^^^^^^^^^^^^^^^^
+
+The two lists have the same length.
+
+* compilation flags: ``static``
+* template: ``same_length(List1,List2,Length)``
+
+* mode - number of proofs:
+
+  * ``same_length(+list,?list,?integer)`` - ``zero_or_one``
+
+  * ``same_length(?list,+list,?integer)`` - ``zero_or_one``
+
+  * ``same_length(-list,-list,-integer)`` - ``one_or_more``
+
+
+.. raw:: html
+
+   <div id="select/3"> </div>
+
+.. index:: select/3
+.. _listp/0::select/3:
+
+``select/3``
+^^^^^^^^^^^^
+
+Selects an element from a list, returning the list of remaining elements.
+
+* compilation flags: ``static``
+* template: ``select(Element,List,Remaining)``
+
+* mode - number of proofs:
+
+  * ``select(?term,?list,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="selectchk/3"> </div>
+
+.. index:: selectchk/3
+.. _listp/0::selectchk/3:
+
+``selectchk/3``
+^^^^^^^^^^^^^^^
+
+Checks that an element can be selected from a list, returning the list of remaining elements.
+
+* compilation flags: ``static``
+* template: ``selectchk(Element,List,Remaining)``
+
+* mode - number of proofs:
+
+  * ``selectchk(?term,?list,?list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="select/4"> </div>
+
+.. index:: select/4
+.. _listp/0::select/4:
+
+``select/4``
+^^^^^^^^^^^^
+
+Selects an element from a list, replacing it by a new element and returning the resulting list.
+
+* compilation flags: ``static``
+* template: ``select(Old,OldList,New,NewList)``
+
+* mode - number of proofs:
+
+  * ``select(?term,?list,?term,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="selectchk/4"> </div>
+
+.. index:: selectchk/4
+.. _listp/0::selectchk/4:
+
+``selectchk/4``
+^^^^^^^^^^^^^^^
+
+Checks that an element from a list can be replaced by a new element, returning the resulting list.
+
+* compilation flags: ``static``
+* template: ``selectchk(Old,OldList,New,NewList)``
+
+* mode - number of proofs:
+
+  * ``selectchk(?term,?list,?term,?list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="sort/2"> </div>
+
+.. index:: sort/2
+.. _listp/0::sort/2:
+
+``sort/2``
+^^^^^^^^^^
+
+Sorts a list in ascending order (duplicated elements are removed).
+
+* compilation flags: ``static``
+* template: ``sort(List,Sorted)``
+
+* mode - number of proofs:
+
+  * ``sort(+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="sort/3"> </div>
+
+.. index:: sort/3
+.. _listp/0::sort/3:
+
+``sort/3``
+^^^^^^^^^^
+
+Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).
+
+* compilation flags: ``static``
+* template: ``sort(Closure,List,Sorted)``
+
+* meta-predicate template: ``sort(3,*,*)``
+
+* mode - number of proofs:
+
+  * ``sort(+callable,+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="sort/4"> </div>
+
+.. index:: sort/4
+.. _listp/0::sort/4:
+
+``sort/4``
+^^^^^^^^^^
+
+Sorts a list using the given key and order. @< and @> orders remove duplicates while @=< and @>= orders keep them. @< and @=< specify ascending order while @> and @>= specify descending order. When the key is zero, the whole term is used for comparisons.
+
+* compilation flags: ``static``
+* template: ``sort(Key,Order,List,Sorted)``
+
+* mode - number of proofs:
+
+  * ``sort(+non_negative_integer,+atom,+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="split/4"> </div>
+
+.. index:: split/4
+.. _listp/0::split/4:
+
+``split/4``
+^^^^^^^^^^^
+
+Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.
+
+* compilation flags: ``static``
+* template: ``split(List,Length,Sublists,Remaining)``
+
+* mode - number of proofs:
+
+  * ``split(+list,+integer,-list(list),-list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="sublist/2"> </div>
+
+.. index:: sublist/2
+.. _listp/0::sublist/2:
+
+``sublist/2``
+^^^^^^^^^^^^^
+
+The first list is a sublist of the second.
+
+* compilation flags: ``static``
+* template: ``sublist(Sublist,List)``
+
+* mode - number of proofs:
+
+  * ``sublist(?list,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="subsequence/3"> </div>
+
+.. index:: subsequence/3
+.. _listp/0::subsequence/3:
+
+``subsequence/3``
+^^^^^^^^^^^^^^^^^
+
+List is an interleaving of Subsequence and Remaining. Element order is preserved.
+
+* compilation flags: ``static``
+* template: ``subsequence(List,Subsequence,Remaining)``
+
+* mode - number of proofs:
+
+  * ``subsequence(?list,?list,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="subsequence/4"> </div>
+
+.. index:: subsequence/4
+.. _listp/0::subsequence/4:
+
+``subsequence/4``
+^^^^^^^^^^^^^^^^^
+
+Generates subsequences of a given length from a list. Also returns the remaining elements. Element order is preserved.
+
+* compilation flags: ``static``
+* template: ``subsequence(List,Length,Subsequence,Remaining)``
+
+* mode - number of proofs:
+
+  * ``subsequence(+list,+integer,?list,?list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="substitute/4"> </div>
+
+.. index:: substitute/4
+.. _listp/0::substitute/4:
+
+``substitute/4``
+^^^^^^^^^^^^^^^^
+
+Substitutes all occurrences of Old in List by New, returning NewList. Uses term equality for element comparison.
+
+* compilation flags: ``static``
+* template: ``substitute(Old,List,New,NewList)``
+
+* mode - number of proofs:
+
+  * ``substitute(@term,@list,@term,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="subtract/3"> </div>
+
+.. index:: subtract/3
+.. _listp/0::subtract/3:
+
+``subtract/3``
+^^^^^^^^^^^^^^
+
+Removes all elements in the second list from the first list, returning the list of remaining elements.
+
+* compilation flags: ``static``
+* template: ``subtract(List,Elements,Remaining)``
+
+* mode - number of proofs:
+
+  * ``subtract(+list,+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="suffix/2"> </div>
+
+.. index:: suffix/2
+.. _listp/0::suffix/2:
+
+``suffix/2``
+^^^^^^^^^^^^
+
+Suffix is a suffix of List.
+
+* compilation flags: ``static``
+* template: ``suffix(Suffix,List)``
+
+* mode - number of proofs:
+
+  * ``suffix(?list,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="suffix/3"> </div>
+
+.. index:: suffix/3
+.. _listp/0::suffix/3:
+
+``suffix/3``
+^^^^^^^^^^^^
+
+Suffix is a suffix of length Length of List.
+
+* compilation flags: ``static``
+* template: ``suffix(Suffix,Length,List)``
+
+* mode - number of proofs:
+
+  * ``suffix(?list,+integer,+list)`` - ``zero_or_one``
+
+  * ``suffix(?list,-integer,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="proper_suffix/2"> </div>
+
+.. index:: proper_suffix/2
+.. _listp/0::proper_suffix/2:
+
+``proper_suffix/2``
+^^^^^^^^^^^^^^^^^^^
+
+Suffix is a proper suffix of List.
+
+* compilation flags: ``static``
+* template: ``proper_suffix(Suffix,List)``
+
+* mode - number of proofs:
+
+  * ``proper_suffix(?list,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="proper_suffix/3"> </div>
+
+.. index:: proper_suffix/3
+.. _listp/0::proper_suffix/3:
+
+``proper_suffix/3``
+^^^^^^^^^^^^^^^^^^^
+
+Suffix is a proper suffix of length Length of List.
+
+* compilation flags: ``static``
+* template: ``proper_suffix(Suffix,Length,List)``
+
+* mode - number of proofs:
+
+  * ``proper_suffix(?list,+integer,+list)`` - ``zero_or_one``
+
+  * ``proper_suffix(?list,-integer,+list)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="take/3"> </div>
+
+.. index:: take/3
+.. _listp/0::take/3:
+
+``take/3``
+^^^^^^^^^^
+
+Takes the first N elements of a list. Fails if the list have fewer than N elements.
+
+* compilation flags: ``static``
+* template: ``take(N,List,Elements)``
+
+* mode - number of proofs:
+
+  * ``take(+integer,+list,-list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="drop/3"> </div>
+
+.. index:: drop/3
+.. _listp/0::drop/3:
+
+``drop/3``
+^^^^^^^^^^
+
+Drops the first N elements of a list. Fails if the list have fewer than N elements.
+
+* compilation flags: ``static``
+* template: ``drop(N,List,Remaining)``
+
+* mode - number of proofs:
+
+  * ``drop(+integer,+list,-list)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`numberlistp <numberlistp/0>`
+* :ref:`varlistp <varlistp/0>`
+
+

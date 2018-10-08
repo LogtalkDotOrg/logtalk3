@@ -1,0 +1,130 @@
+.. index:: number
+.. _number/0:
+
+**object**
+
+``number``
+==========
+
+Number data type predicates.
+
+* author: Paulo Moura
+* version: 1.5
+* date: 2018/7/14
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`atomic <atomic/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="approximately_equal/3"> </div>
+
+.. index:: approximately_equal/3
+.. _number/0::approximately_equal/3:
+
+``approximately_equal/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
+
+* compilation flags: ``static``
+* template: ``approximately_equal(Number1,Number2,Epsilon)``
+
+* mode - number of proofs:
+
+  * ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="essentially_equal/3"> </div>
+
+.. index:: essentially_equal/3
+.. _number/0::essentially_equal/3:
+
+``essentially_equal/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
+
+* compilation flags: ``static``
+* template: ``essentially_equal(Number1,Number2,Epsilon)``
+
+* mode - number of proofs:
+
+  * ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="tolerance_equal/4"> </div>
+
+.. index:: tolerance_equal/4
+.. _number/0::tolerance_equal/4:
+
+``tolerance_equal/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). No type-checking.
+
+* compilation flags: ``static``
+* template: ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
+
+* mode - number of proofs:
+
+  * ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="=~= / 2"> </div>
+
+.. index:: =~= / 2
+.. _number/0::=~= / 2:
+
+``=~= / 2``
+^^^^^^^^^^^
+
+Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.
+
+* compilation flags: ``static``
+* template: ``=~=(Float1,Float2)``
+
+* mode - number of proofs:
+
+  * ``=~=(+number,+number)`` - ``zero_or_one``
+
+  * ``=~=(+list(number),+list(number))`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+* ``op(700,xfx,=~=) (public)``
+
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

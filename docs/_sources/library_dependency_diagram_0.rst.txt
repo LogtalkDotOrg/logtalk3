@@ -1,0 +1,51 @@
+.. index:: library_dependency_diagram
+.. _library_dependency_diagram/0:
+
+**object**
+
+``library_dependency_diagram``
+==============================
+
+Predicates for generating library dependency diagrams in DOT format.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2016/2/29
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`library_dependency_diagram(dot) <library_dependency_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`library_load_diagram <library_load_diagram/0>`
+* :ref:`file_load_diagram <file_load_diagram/0>`
+
+

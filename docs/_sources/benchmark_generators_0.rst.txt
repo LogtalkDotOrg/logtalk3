@@ -1,0 +1,66 @@
+.. index:: benchmark_generators
+.. _benchmark_generators/0:
+
+**object**
+
+``benchmark_generators``
+========================
+
+Generates random data structures for use in benchmarks.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="random_tree/1"> </div>
+
+.. index:: random_tree/1
+.. _benchmark_generators/0::random_tree/1:
+
+``random_tree/1``
+^^^^^^^^^^^^^^^^^
+
+Generates a random tree.
+
+* compilation flags: ``static``
+* template: ``random_tree(Tree)``
+
+* mode - number of proofs:
+
+  * ``random_tree(-tree)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

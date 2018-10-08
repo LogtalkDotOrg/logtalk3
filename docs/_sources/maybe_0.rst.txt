@@ -1,0 +1,76 @@
+.. index:: maybe
+.. _maybe/0:
+
+**object**
+
+``maybe``
+=========
+
+Types and predicates for type-checking and handling optionals. Inspired by Haskell.
+
+* author: Paulo Moura
+* version: 0.3
+* date: 2017/12/18
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`type::type/1 <type/0::type/1>`
+  * :ref:`type::check/2 <type/0::check/2>`
+  * :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
+  * :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="cat/2"> </div>
+
+.. index:: cat/2
+.. _maybe/0::cat/2:
+
+``cat/2``
+^^^^^^^^^
+
+Returns the values stored in the non-empty optionals.
+
+* compilation flags: ``static``
+* template: ``cat(Optionals,Values)``
+
+* mode - number of proofs:
+
+  * ``cat(+list(optional),-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Type maybe(Type)**: Allows type-checking optional references where the optional term must be of the given type.
+
+* **QuickCheck support**: Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.
+
+See also
+--------
+
+* :ref:`optional <optional/0>`
+* :ref:`optional(Reference) <optional/1>`
+* :ref:`type <type/0>`
+* :ref:`arbitrary <arbitrary/0>`
+
+

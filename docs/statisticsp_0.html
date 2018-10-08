@@ -1,511 +1,644 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>statisticsp</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">statisticsp</h1>
-      <blockquote>
-        <p class="comment">Statistical calculations over a list of numbers protocol.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>statisticsp &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="streamvars" href="streamvars_0.html" />
+    <link rel="prev" title="statistics" href="statistics_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="randomp_0.html">randomp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">statisticsp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">statisticsp</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/statisticsp_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="statisticsp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="statisticsp">
+<h1><code class="docutils literal notranslate"><span class="pre">statisticsp</span></code><a class="headerlink" href="#statisticsp" title="Permalink to this headline">¶</a></h1>
+<p>Statistical calculations over a list of numbers protocol.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 1.1</li>
+<li>date: 2017/10/3</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="product/2"> </div><div class="section" id="product-2">
+<span id="statisticsp-0-product-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">product/2</span></code><a class="headerlink" href="#product-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the product of all list numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">product(List,Product)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">product(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="sum/2"> </div></div>
+<div class="section" id="sum-2">
+<span id="statisticsp-0-sum-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">sum/2</span></code><a class="headerlink" href="#sum-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the sum of all list numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">sum(List,Sum)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">sum(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="max/2"> </div></div>
+<div class="section" id="max-2">
+<span id="statisticsp-0-max-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">max/2</span></code><a class="headerlink" href="#max-2" title="Permalink to this headline">¶</a></h3>
+<p>Determines the list maximum value in a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">max(List,Maximum)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">max(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="min/2"> </div></div>
+<div class="section" id="min-2">
+<span id="statisticsp-0-min-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">min/2</span></code><a class="headerlink" href="#min-2" title="Permalink to this headline">¶</a></h3>
+<p>Determines the minimum value in a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">min(List,Minimum)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">min(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="range/2"> </div></div>
+<div class="section" id="range-2">
+<span id="statisticsp-0-range-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">range/2</span></code><a class="headerlink" href="#range-2" title="Permalink to this headline">¶</a></h3>
+<p>Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">range(List,Range)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">range(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="arithmetic_mean/2"> </div></div>
+<div class="section" id="arithmetic-mean-2">
+<span id="statisticsp-0-arithmetic-mean-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/2</span></code><a class="headerlink" href="#arithmetic-mean-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">arithmetic_mean(List,Mean)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">arithmetic_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="geometric_mean/2"> </div></div>
+<div class="section" id="geometric-mean-2">
+<span id="statisticsp-0-geometric-mean-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">geometric_mean/2</span></code><a class="headerlink" href="#geometric-mean-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the geometric mean of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">geometric_mean(List,Mean)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">geometric_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="harmonic_mean/2"> </div></div>
+<div class="section" id="harmonic-mean-2">
+<span id="statisticsp-0-harmonic-mean-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code><a class="headerlink" href="#harmonic-mean-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the harmonic mean of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">harmonic_mean(List,Mean)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">harmonic_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="median/2"> </div></div>
+<div class="section" id="median-2">
+<span id="statisticsp-0-median-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">median/2</span></code><a class="headerlink" href="#median-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the median of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">median(List,Median)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">median(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="average_deviation/3"> </div></div>
+<div class="section" id="average-deviation-3">
+<span id="statisticsp-0-average-deviation-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">average_deviation/3</span></code><a class="headerlink" href="#average-deviation-3" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">average_deviation(List,CentralTendency,Deviation)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">average_deviation(+list(number),+float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="mean_deviation/2"> </div></div>
+<div class="section" id="mean-deviation-2">
+<span id="statisticsp-0-mean-deviation-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">mean_deviation/2</span></code><a class="headerlink" href="#mean-deviation-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the mean absolute deviation of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">mean_deviation(List,Deviation)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">mean_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="median_deviation/2"> </div></div>
+<div class="section" id="median-deviation-2">
+<span id="statisticsp-0-median-deviation-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">median_deviation/2</span></code><a class="headerlink" href="#median-deviation-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the median absolute deviation of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">median_deviation(List,Deviation)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">median_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="standard_deviation/2"> </div></div>
+<div class="section" id="standard-deviation-2">
+<span id="statisticsp-0-standard-deviation-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">standard_deviation/2</span></code><a class="headerlink" href="#standard-deviation-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the standard deviation of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">standard_deviation(List,Deviation)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">standard_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="coefficient_of_variation/2"> </div></div>
+<div class="section" id="coefficient-of-variation-2">
+<span id="statisticsp-0-coefficient-of-variation-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation/2</span></code><a class="headerlink" href="#coefficient-of-variation-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">coefficient_of_variation(List,Coefficient)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="relative_standard_deviation/2"> </div></div>
+<div class="section" id="relative-standard-deviation-2">
+<span id="statisticsp-0-relative-standard-deviation-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code><a class="headerlink" href="#relative-standard-deviation-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the relative standard deviation of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">relative_standard_deviation(List,Percentage)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="skewness/2"> </div></div>
+<div class="section" id="skewness-2">
+<span id="statisticsp-0-skewness-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">skewness/2</span></code><a class="headerlink" href="#skewness-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the (moment) skewness of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">skewness(List,Skewness)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">skewness(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="kurtosis/2"> </div></div>
+<div class="section" id="kurtosis-2">
+<span id="statisticsp-0-kurtosis-2"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code><a class="headerlink" href="#kurtosis-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">kurtosis(List,Kurtosis)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">kurtosis(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="variance/2"> </div></div>
+<div class="section" id="variance-2">
+<span id="statisticsp-0-variance-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">variance/2</span></code><a class="headerlink" href="#variance-2" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the unbiased variance of a list of numbers. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">variance(List,Variance)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">variance(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="z_normalization/2"> </div></div>
+<div class="section" id="z-normalization-2">
+<span id="statisticsp-0-z-normalization-2"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">z_normalization/2</span></code><a class="headerlink" href="#z-normalization-2" title="Permalink to this headline">¶</a></h3>
+<p>Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">z_normalization(List,NormalizedList)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">z_normalization(+list(number),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="valid/1"> </div></div>
+<div class="section" id="valid-1">
+<span id="statisticsp-0-valid-1"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/1</span></code><a class="headerlink" href="#valid-1" title="Permalink to this headline">¶</a></h3>
+<p>Term is a closed list of numbers.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">valid(Term)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">valid(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<div id="arithmetic_mean/5"> </div><div class="section" id="arithmetic-mean-5">
+<span id="statisticsp-0-arithmetic-mean-5"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/5</span></code><a class="headerlink" href="#arithmetic-mean-5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<div id="squares_and_cubes/6"> </div></div>
+<div class="section" id="squares-and-cubes-6">
+<span id="statisticsp-0-squares-and-cubes-6"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">squares_and_cubes/6</span></code><a class="headerlink" href="#squares-and-cubes-6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<div id="squares_and_hypers/6"> </div></div>
+<div class="section" id="squares-and-hypers-6">
+<span id="statisticsp-0-squares-and-hypers-6"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">squares_and_hypers/6</span></code><a class="headerlink" href="#squares-and-hypers-6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<div id="variance/6"> </div></div>
+<div class="section" id="variance-6">
+<span id="statisticsp-0-variance-6"></span><span id="index-24"></span><h3><code class="docutils literal notranslate"><span class="pre">variance/6</span></code><a class="headerlink" href="#variance-6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="streamvars_0.html" class="btn btn-neutral float-right" title="streamvars" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="statistics_0.html" class="btn btn-neutral" title="statistics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>1.1</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2017/10/3</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="product/2" class="code">product/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the product of all list numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>product(List,Product)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>product(+list(number),-number) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="sum/2" class="code">sum/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the sum of all list numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>sum(List,Sum)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>sum(+list(number),-number) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="max/2" class="code">max/2</h3>
-          <blockquote>
-            <p class="comment">Determines the list maximum value in a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>max(List,Maximum)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>max(+list,-number) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="min/2" class="code">min/2</h3>
-          <blockquote>
-            <p class="comment">Determines the minimum value in a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>min(List,Minimum)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>min(+list,-number) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="range/2" class="code">range/2</h3>
-          <blockquote>
-            <p class="comment">Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>range(List,Range)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>range(+list,-number) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="arithmetic_mean/2" class="code">arithmetic_mean/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>arithmetic_mean(List,Mean)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>arithmetic_mean(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="geometric_mean/2" class="code">geometric_mean/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the geometric mean of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>geometric_mean(List,Mean)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>geometric_mean(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="harmonic_mean/2" class="code">harmonic_mean/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the harmonic mean of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>harmonic_mean(List,Mean)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>harmonic_mean(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="median/2" class="code">median/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the median of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>median(List,Median)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>median(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="average_deviation/3" class="code">average_deviation/3</h3>
-          <blockquote>
-            <p class="comment">Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>average_deviation(List,CentralTendency,Deviation)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>average_deviation(+list(number),+float,-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="mean_deviation/2" class="code">mean_deviation/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the mean absolute deviation of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>mean_deviation(List,Deviation)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>mean_deviation(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="median_deviation/2" class="code">median_deviation/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the median absolute deviation of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>median_deviation(List,Deviation)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>median_deviation(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="standard_deviation/2" class="code">standard_deviation/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the standard deviation of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>standard_deviation(List,Deviation)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>standard_deviation(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="coefficient_of_variation/2" class="code">coefficient_of_variation/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>coefficient_of_variation(List,Coefficient)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>coefficient_of_variation(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="relative_standard_deviation/2" class="code">relative_standard_deviation/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the relative standard deviation of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>relative_standard_deviation(List,Percentage)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>relative_standard_deviation(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="skewness/2" class="code">skewness/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the (moment) skewness of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>skewness(List,Skewness)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>skewness(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="kurtosis/2" class="code">kurtosis/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>kurtosis(List,Kurtosis)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>kurtosis(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="variance/2" class="code">variance/2</h3>
-          <blockquote>
-            <p class="comment">Calculates the unbiased variance of a list of numbers. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>variance(List,Variance)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>variance(+list(number),-float) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="z_normalization/2" class="code">z_normalization/2</h3>
-          <blockquote>
-            <p class="comment">Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>z_normalization(List,NormalizedList)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>z_normalization(+list(number),-list(float)) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="valid/1" class="code">valid/1</h3>
-          <blockquote>
-            <p class="comment">Term is a closed list of numbers.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>valid(Term)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>valid(@nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <h3 id="arithmetic_mean/5" class="code">arithmetic_mean/5</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="squares_and_cubes/6" class="code">squares_and_cubes/6</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="squares_and_hypers/6" class="code">squares_and_hypers/6</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="variance/6" class="code">variance/6</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

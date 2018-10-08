@@ -1,421 +1,586 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>java_utils_protocol</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">java_utils_protocol</h1>
-      <blockquote>
-        <p class="comment">Abstract interface to Java utility predicates.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>java_utils_protocol &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="list" href="list_0.html" />
+    <link rel="prev" title="java_hook" href="java_hook_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">java_utils_protocol</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="randomp_0.html">randomp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">java_utils_protocol</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/java_utils_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="java-utils-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="java-utils-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">java_utils_protocol</span></code><a class="headerlink" href="#java-utils-protocol" title="Permalink to this headline">¶</a></h1>
+<p>Abstract interface to Java utility predicates.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 1.5</li>
+<li>date: 2017/10/16</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="value_reference/2"> </div><div class="section" id="value-reference-2">
+<span id="java-utils-protocol-0-value-reference-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">value_reference/2</span></code><a class="headerlink" href="#value-reference-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns an opaque term that represents the Java value with the given name.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">value_reference(Value,Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">value_reference(?atom,--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="true/1"> </div></div>
+<div class="section" id="true-1">
+<span id="java-utils-protocol-0-true-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">true/1</span></code><a class="headerlink" href="#true-1" title="Permalink to this headline">¶</a></h3>
+<p>Returns an opaque term that represents the Java value true.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">true(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">true(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="false/1"> </div></div>
+<div class="section" id="false-1">
+<span id="java-utils-protocol-0-false-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">false/1</span></code><a class="headerlink" href="#false-1" title="Permalink to this headline">¶</a></h3>
+<p>Returns an opaque term that represents the Java value false.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">false(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">false(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="void/1"> </div></div>
+<div class="section" id="void-1">
+<span id="java-utils-protocol-0-void-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">void/1</span></code><a class="headerlink" href="#void-1" title="Permalink to this headline">¶</a></h3>
+<p>Returns an opaque term that represents the Java value void.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">void(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">void(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="null/1"> </div></div>
+<div class="section" id="null-1">
+<span id="java-utils-protocol-0-null-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">null/1</span></code><a class="headerlink" href="#null-1" title="Permalink to this headline">¶</a></h3>
+<p>Returns an opaque term that represents the Java value null.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">null(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">null(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="is_true/1"> </div></div>
+<div class="section" id="is-true-1">
+<span id="java-utils-protocol-0-is-true-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">is_true/1</span></code><a class="headerlink" href="#is-true-1" title="Permalink to this headline">¶</a></h3>
+<p>True when the argument is the Java value true. Fails if the argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">is_true(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">is_true(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="is_false/1"> </div></div>
+<div class="section" id="is-false-1">
+<span id="java-utils-protocol-0-is-false-1"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">is_false/1</span></code><a class="headerlink" href="#is-false-1" title="Permalink to this headline">¶</a></h3>
+<p>True when the argument is the Java value false. Fails if the argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">is_false(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">is_false(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="is_void/1"> </div></div>
+<div class="section" id="is-void-1">
+<span id="java-utils-protocol-0-is-void-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">is_void/1</span></code><a class="headerlink" href="#is-void-1" title="Permalink to this headline">¶</a></h3>
+<p>True when the argument is the Java value void. Fails if the argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">is_void(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">is_void(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="is_null/1"> </div></div>
+<div class="section" id="is-null-1">
+<span id="java-utils-protocol-0-is-null-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">is_null/1</span></code><a class="headerlink" href="#is-null-1" title="Permalink to this headline">¶</a></h3>
+<p>True when the argument is the Java value null. Fails if the argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">is_null(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">is_null(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="is_object/1"> </div></div>
+<div class="section" id="is-object-1">
+<span id="java-utils-protocol-0-is-object-1"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">is_object/1</span></code><a class="headerlink" href="#is-object-1" title="Permalink to this headline">¶</a></h3>
+<p>True when the argument is a reference to a Java object. Fails if the argument is not instantiated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">is_object(Reference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">is_object(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="terms_to_array/2"> </div></div>
+<div class="section" id="terms-to-array-2">
+<span id="java-utils-protocol-0-terms-to-array-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">terms_to_array/2</span></code><a class="headerlink" href="#terms-to-array-2" title="Permalink to this headline">¶</a></h3>
+<p>Converts a list of ground Prolog terms to an array (a Java reference).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">terms_to_array(Terms,Array)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">terms_to_array(++list(ground),-array)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="array_to_terms/3"> </div></div>
+<div class="section" id="array-to-terms-3">
+<span id="java-utils-protocol-0-array-to-terms-3"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">array_to_terms/3</span></code><a class="headerlink" href="#array-to-terms-3" title="Permalink to this headline">¶</a></h3>
+<p>Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">array_to_terms(Array,Terms,Length)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">array_to_terms(+array,-list(ground),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="array_to_terms/2"> </div></div>
+<div class="section" id="array-to-terms-2">
+<span id="java-utils-protocol-0-array-to-terms-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">array_to_terms/2</span></code><a class="headerlink" href="#array-to-terms-2" title="Permalink to this headline">¶</a></h3>
+<p>Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">array_to_terms(Array,Terms)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">array_to_terms(+array,-list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="array_list/2"> </div></div>
+<div class="section" id="array-list-2">
+<span id="java-utils-protocol-0-array-list-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">array_list/2</span></code><a class="headerlink" href="#array-list-2" title="Permalink to this headline">¶</a></h3>
+<p>Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">array_list(Array,List)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">array_list(+array,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">array_list(-array,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="iterator_element/2"> </div></div>
+<div class="section" id="iterator-element-2">
+<span id="java-utils-protocol-0-iterator-element-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">iterator_element/2</span></code><a class="headerlink" href="#iterator-element-2" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all iterator elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">iterator_element(Iterator,Element)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">iterator_element(+iterator,-element)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="decode_exception/2"> </div></div>
+<div class="section" id="decode-exception-2">
+<span id="java-utils-protocol-0-decode-exception-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">decode_exception/2</span></code><a class="headerlink" href="#decode-exception-2" title="Permalink to this headline">¶</a></h3>
+<p>Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">decode_exception(Exception,Cause)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">decode_exception(+callable,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="decode_exception/3"> </div></div>
+<div class="section" id="decode-exception-3">
+<span id="java-utils-protocol-0-decode-exception-3"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">decode_exception/3</span></code><a class="headerlink" href="#decode-exception-3" title="Permalink to this headline">¶</a></h3>
+<p>Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">decode_exception(Exception,Cause,StackTrace)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">decode_exception(+callable,-atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="list_0.html" class="btn btn-neutral float-right" title="list" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="java_hook_0.html" class="btn btn-neutral" title="java_hook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>1.5</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2017/10/16</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="value_reference/2" class="code">value_reference/2</h3>
-          <blockquote>
-            <p class="comment">Returns an opaque term that represents the Java value with the given name.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>value_reference(Value,Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>value_reference(?atom,--ground) &ndash; one_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="true/1" class="code">true/1</h3>
-          <blockquote>
-            <p class="comment">Returns an opaque term that represents the Java value true.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>true(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>true(--ground) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="false/1" class="code">false/1</h3>
-          <blockquote>
-            <p class="comment">Returns an opaque term that represents the Java value false.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>false(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>false(--ground) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="void/1" class="code">void/1</h3>
-          <blockquote>
-            <p class="comment">Returns an opaque term that represents the Java value void.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>void(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>void(--ground) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="null/1" class="code">null/1</h3>
-          <blockquote>
-            <p class="comment">Returns an opaque term that represents the Java value null.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>null(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>null(--ground) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="is_true/1" class="code">is_true/1</h3>
-          <blockquote>
-            <p class="comment">True when the argument is the Java value true. Fails if the argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>is_true(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>is_true(@term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="is_false/1" class="code">is_false/1</h3>
-          <blockquote>
-            <p class="comment">True when the argument is the Java value false. Fails if the argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>is_false(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>is_false(@term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="is_void/1" class="code">is_void/1</h3>
-          <blockquote>
-            <p class="comment">True when the argument is the Java value void. Fails if the argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>is_void(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>is_void(@term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="is_null/1" class="code">is_null/1</h3>
-          <blockquote>
-            <p class="comment">True when the argument is the Java value null. Fails if the argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>is_null(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>is_null(@term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="is_object/1" class="code">is_object/1</h3>
-          <blockquote>
-            <p class="comment">True when the argument is a reference to a Java object. Fails if the argument is not instantiated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>is_object(Reference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>is_object(@term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="terms_to_array/2" class="code">terms_to_array/2</h3>
-          <blockquote>
-            <p class="comment">Converts a list of ground Prolog terms to an array (a Java reference).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>terms_to_array(Terms,Array)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>terms_to_array(++list(ground),-array) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="array_to_terms/3" class="code">array_to_terms/3</h3>
-          <blockquote>
-            <p class="comment">Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>array_to_terms(Array,Terms,Length)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>array_to_terms(+array,-list(ground),-integer) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="array_to_terms/2" class="code">array_to_terms/2</h3>
-          <blockquote>
-            <p class="comment">Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>array_to_terms(Array,Terms)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>array_to_terms(+array,-list(term)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="array_list/2" class="code">array_list/2</h3>
-          <blockquote>
-            <p class="comment">Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>array_list(Array,List)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>array_list(+array,-list) &ndash; one</code>
-            </dd>
-            <dd class="value">
-              <code>array_list(-array,+list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="iterator_element/2" class="code">iterator_element/2</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all iterator elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>iterator_element(Iterator,Element)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>iterator_element(+iterator,-element) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="decode_exception/2" class="code">decode_exception/2</h3>
-          <blockquote>
-            <p class="comment">Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>decode_exception(Exception,Cause)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>decode_exception(+callable,-atom) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="decode_exception/3" class="code">decode_exception/3</h3>
-          <blockquote>
-            <p class="comment">Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>decode_exception(Exception,Cause,StackTrace)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>decode_exception(+callable,-atom,-list(atom)) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

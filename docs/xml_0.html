@@ -1,396 +1,463 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>xml</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">object</p>
-      <h1 class="code">xml</h1>
-      <blockquote>
-        <p class="comment">Bi-directional XML parser.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xml &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Directory index" href="directory_index.html" />
+    <link rel="prev" title="wrapper" href="wrapper_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">xml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">xml</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/xml_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="xml-0"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="xml">
+<h1><code class="docutils literal notranslate"><span class="pre">xml</span></code><a class="headerlink" href="#xml" title="Permalink to this headline">¶</a></h1>
+<p>Bi-directional XML parser.</p>
+<ul class="simple">
+<li>author: John Fletcher; adapted to Logtalk by Paulo Moura.</li>
+<li>version: 3.5</li>
+<li>date: 2014/11/3</li>
+<li>copyright: Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher</li>
+<li>license: This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="parse/2"> </div><div class="section" id="parse-2">
+<span id="xml-0-parse-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">parse/2</span></code><a class="headerlink" href="#parse-2" title="Permalink to this headline">¶</a></h3>
+<p>Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">parse(Chars,Document)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">parse(+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">parse(?nonvar,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="parse/3"> </div></div>
+<div class="section" id="parse-3">
+<span id="xml-0-parse-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">parse/3</span></code><a class="headerlink" href="#parse-3" title="Permalink to this headline">¶</a></h3>
+<p>Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">parse(Controls,Chars,Document)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">parse(+nonvar,+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">parse(+nonvar,?nonvar,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="subterm/2"> </div></div>
+<div class="section" id="subterm-2">
+<span id="xml-0-subterm-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">subterm/2</span></code><a class="headerlink" href="#subterm-2" title="Permalink to this headline">¶</a></h3>
+<p>Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">subterm(XMLTerm,Subterm)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">subterm(+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="pp/1"> </div></div>
+<div class="section" id="pp-1">
+<span id="xml-0-pp-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">pp/1</span></code><a class="headerlink" href="#pp-1" title="Permalink to this headline">¶</a></h3>
+<p>Pretty prints a XML document on the current output stream.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">pp(XMLDocument)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">pp(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<div id="xml_to_document/3"> </div><div class="section" id="xml-to-document-3">
+<span id="xml-0-xml-to-document-3"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">xml_to_document/3</span></code><a class="headerlink" href="#xml-to-document-3" title="Permalink to this headline">¶</a></h3>
+<p>Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">xml_to_document(Controls,XML,Document)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">xml_to_document(+nonvar,+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="empty_map/1"> </div></div>
+<div class="section" id="empty-map-1">
+<span id="xml-0-empty-map-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">empty_map/1</span></code><a class="headerlink" href="#empty-map-1" title="Permalink to this headline">¶</a></h3>
+<p>True if Map is a null map.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">empty_map(Map)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">empty_map(?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map_member/3"> </div></div>
+<div class="section" id="map-member-3">
+<span id="xml-0-map-member-3"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">map_member/3</span></code><a class="headerlink" href="#map-member-3" title="Permalink to this headline">¶</a></h3>
+<p>True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map_member(Key,Map,Data)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map_member(+nonvar,+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map_store/4"> </div></div>
+<div class="section" id="map-store-4">
+<span id="xml-0-map-store-4"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">map_store/4</span></code><a class="headerlink" href="#map-store-4" title="Permalink to this headline">¶</a></h3>
+<p>True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map_store(Map0,Key,Data,Map1)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map_store(+nonvar,+nonvar,+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="pp_string/1"> </div></div>
+<div class="section" id="pp-string-1">
+<span id="xml-0-pp-string-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">pp_string/1</span></code><a class="headerlink" href="#pp-string-1" title="Permalink to this headline">¶</a></h3>
+<p>Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">pp_string(String)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">pp_string(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="fault/5"> </div></div>
+<div class="section" id="fault-5">
+<span id="xml-0-fault-5"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">fault/5</span></code><a class="headerlink" href="#fault-5" title="Permalink to this headline">¶</a></h3>
+<p>Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm’s ancestor elements in the form &lt;tag&gt;{(id)}* where &lt;tag&gt; is the element tag and &lt;id&gt; is the value of any attribute _named_ id.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">fault(Term,Indentation,SubTerm,Path,Message)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="exception/4"> </div></div>
+<div class="section" id="exception-4">
+<span id="xml-0-exception-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">exception/4</span></code><a class="headerlink" href="#exception-4" title="Permalink to this headline">¶</a></h3>
+<p>Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">exception(Message,Document,Culprit,Path)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">exception(+atom,+nonvar,+nonvar,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="document_generation//2"> </div></div>
+<div class="section" id="document-generation-2">
+<span id="xml-0-document-generation-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">document_generation//2</span></code><a class="headerlink" href="#document-generation-2" title="Permalink to this headline">¶</a></h3>
+<p>DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant “string”. Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML’s ‘inline’ elements. Also, Format is over-ridden, for an individual element, by an explicit ‘xml:space’=”preserve” attribute.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">document_generation(Format,Document)</span></code></li>
+</ul>
+<div id="pcdata_7bit//1"> </div></div>
+<div class="section" id="pcdata-7bit-1">
+<span id="xml-0-pcdata-7bit-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">pcdata_7bit//1</span></code><a class="headerlink" href="#pcdata-7bit-1" title="Permalink to this headline">¶</a></h3>
+<p>Represents the ascii character set in its simplest format, using the character entities &amp;amp; &amp;quot; &amp;lt; and &amp;gt; which are common to both XML and HTML. The numeric entity ' is used in place of &amp;apos;, because browsers don’t recognize it in HTML.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">pcdata_7bit(Char)</span></code></li>
+</ul>
+<div id="character_data_format/3"> </div></div>
+<div class="section" id="character-data-format-3">
+<span id="xml-0-character-data-format-3"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">character_data_format/3</span></code><a class="headerlink" href="#character-data-format-3" title="Permalink to this headline">¶</a></h3>
+<p>Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">character_data_format(Chars,Format0,Format1)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">character_data_format(+nonvar,+nonvar,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="cdata_generation//1"> </div></div>
+<div class="section" id="cdata-generation-1">
+<span id="xml-0-cdata-generation-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">cdata_generation//1</span></code><a class="headerlink" href="#cdata-generation-1" title="Permalink to this headline">¶</a></h3>
+<p>Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">cdata_generation(Chars)</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>On-line documentation</strong>: <a class="reference external" href="http://www.binding-time.co.uk/xmlpl.html">http://www.binding-time.co.uk/xmlpl.html</a></li>
+<li><strong>Compliance</strong>: This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.</li>
+<li><strong>Compliance-strictness</strong>: It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.</li>
+<li><strong>Compliance-comprehensive</strong>: It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.</li>
+<li><strong>Bi-directional conversions</strong>: The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -&gt; Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(&lt;attributes&gt;, &lt;content&gt;).</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="directory_index.html" class="btn btn-neutral float-right" title="Directory index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wrapper_0.html" class="btn btn-neutral" title="wrapper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>John Fletcher; adapted to Logtalk by Paulo Moura.</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>3.5</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2014/11/3</code>
-          </dd>
-          <dt class="key">copyright:</dt>
-          <dd class="value">
-            <code>Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher</code>
-          </dd>
-          <dt class="key">license:</dt>
-          <dd class="value">
-            <code>This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static, context_switching_calls</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="parse/2" class="code">parse/2</h3>
-          <blockquote>
-            <p class="comment">Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>parse(Chars,Document)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>parse(+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>parse(?nonvar,+nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="parse/3" class="code">parse/3</h3>
-          <blockquote>
-            <p class="comment">Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>parse(Controls,Chars,Document)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>parse(+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>parse(+nonvar,?nonvar,+nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="subterm/2" class="code">subterm/2</h3>
-          <blockquote>
-            <p class="comment">Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>subterm(XMLTerm,Subterm)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>subterm(+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="pp/1" class="code">pp/1</h3>
-          <blockquote>
-            <p class="comment">Pretty prints a XML document on the current output stream.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>pp(XMLDocument)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>pp(+nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <h3 id="xml_to_document/3" class="code">xml_to_document/3</h3>
-          <blockquote>
-            <p class="comment">Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>xml_to_document(Controls,XML,Document)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>xml_to_document(+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="empty_map/1" class="code">empty_map/1</h3>
-          <blockquote>
-            <p class="comment">True if Map is a null map.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>empty_map(Map)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>empty_map(?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map_member/3" class="code">map_member/3</h3>
-          <blockquote>
-            <p class="comment">True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map_member(Key,Map,Data)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map_member(+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map_store/4" class="code">map_store/4</h3>
-          <blockquote>
-            <p class="comment">True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map_store(Map0,Key,Data,Map1)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map_store(+nonvar,+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="pp_string/1" class="code">pp_string/1</h3>
-          <blockquote>
-            <p class="comment">Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>pp_string(String)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>pp_string(+nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="fault/5" class="code">fault/5</h3>
-          <blockquote>
-            <p class="comment">Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm's ancestor elements in the form &lt;tag&gt;{(id)}* where &lt;tag&gt; is the element tag and &lt;id&gt; is the value of any attribute _named_ id.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>fault(Term,Indentation,SubTerm,Path,Message)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="exception/4" class="code">exception/4</h3>
-          <blockquote>
-            <p class="comment">Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>exception(Message,Document,Culprit,Path)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>exception(+atom,+nonvar,+nonvar,+nonvar) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="document_generation//2" class="code">document_generation//2</h3>
-          <blockquote>
-            <p class="comment">DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML's 'inline' elements. Also, Format is over-ridden, for an individual element, by an explicit 'xml:space'="preserve" attribute.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>document_generation(Format,Document)</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="pcdata_7bit//1" class="code">pcdata_7bit//1</h3>
-          <blockquote>
-            <p class="comment">Represents the ascii character set in its simplest format, using the character entities &amp;amp; &amp;quot; &amp;lt; and &amp;gt; which are common to both XML and HTML. The numeric entity &amp;#39; is used in place of &amp;apos;, because browsers don't recognize it in HTML.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>pcdata_7bit(Char)</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="character_data_format/3" class="code">character_data_format/3</h3>
-          <blockquote>
-            <p class="comment">Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>character_data_format(Chars,Format0,Format1)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>character_data_format(+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="cdata_generation//1" class="code">cdata_generation//1</h3>
-          <blockquote>
-            <p class="comment">Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>cdata_generation(Chars)</code>
-            </dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <dl class="remarks">
-          <dt class="comment">On-line documentation</dt>
-          <dd class="text">http://www.binding-time.co.uk/xmlpl.html</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Compliance</dt>
-          <dd class="text">This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Compliance-strictness</dt>
-          <dd class="text">It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Compliance-comprehensive</dt>
-          <dd class="text">It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Bi-directional conversions</dt>
-          <dd class="text">The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -&gt; Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(&lt;attributes&gt;, &lt;content&gt;).</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

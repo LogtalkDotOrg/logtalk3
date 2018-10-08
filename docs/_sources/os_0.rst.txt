@@ -1,0 +1,55 @@
+.. index:: os
+.. _os/0:
+
+**object**
+
+``os``
+======
+
+Portable operating-system access predicates.
+
+* author: Paulo Moura
+* version: 1.49
+* date: 2018/3/15
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`osp <osp/0>`
+* aliases:
+
+  * ``osp`` ``absolute_file_name/2`` aka ``expand_path/2``
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **File path expansion**: To ensure portability, all file paths are expanded before being handed to the backend Prolog system.
+
+* **Missing implementations**: A few predicates (e.g. wall_time/1) cannot be implemented in some backend Prolog systems.
+
+See also
+--------
+
+* :ref:`os_types <os_types/0>`
+
+

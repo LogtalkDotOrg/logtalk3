@@ -1,0 +1,49 @@
+.. index:: minheap
+.. _minheap/0:
+
+**object**
+
+``minheap``
+===========
+
+Min-heap implementation. Uses standard order to compare keys.
+
+* author: Paulo Moura.
+* version: 1.0
+* date: 2010/2/19
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`heap(<) <heap/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

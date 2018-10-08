@@ -1,0 +1,492 @@
+.. index:: code_metric
+.. _code_metric/0:
+
+**category**
+
+``code_metric``
+===============
+
+Core predicates for computing source code metrics.
+
+* author: Ebrahim Azarisooreh and Paulo Moura
+* version: 0.8
+* date: 2018/2/18
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="entity/1"> </div>
+
+.. index:: entity/1
+.. _code_metric/0::entity/1:
+
+``entity/1``
+^^^^^^^^^^^^
+
+Scans an entity and prints its metric score.
+
+* compilation flags: ``static``
+* template: ``entity(Entity)``
+
+* mode - number of proofs:
+
+  * ``entity(+term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file/1"> </div>
+
+.. index:: file/1
+.. _code_metric/0::file/1:
+
+``file/1``
+^^^^^^^^^^
+
+Prints metric scores for all the entities defined in a loaded source file.
+
+* compilation flags: ``static``
+* template: ``file(File)``
+
+* mode - number of proofs:
+
+  * ``file(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _code_metric/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Scans a directory and prints metric scores for all entities defined in its loaded source files.
+
+* compilation flags: ``static``
+* template: ``directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _code_metric/0::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Recursive version of the directory/1 predicate.
+
+* compilation flags: ``static``
+* template: ``rdirectory(Directory)``
+
+* mode - number of proofs:
+
+  * ``rdirectory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="library/1"> </div>
+
+.. index:: library/1
+.. _code_metric/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Prints metrics scores for all loaded entities from a given library.
+
+* compilation flags: ``static``
+* template: ``library(Library)``
+
+* mode - number of proofs:
+
+  * ``library(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rlibrary/1"> </div>
+
+.. index:: rlibrary/1
+.. _code_metric/0::rlibrary/1:
+
+``rlibrary/1``
+^^^^^^^^^^^^^^
+
+Recursive version of the library/1 predicate.
+
+* compilation flags: ``static``
+* template: ``rlibrary(Library)``
+
+* mode - number of proofs:
+
+  * ``rlibrary(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all/0"> </div>
+
+.. index:: all/0
+.. _code_metric/0::all/0:
+
+``all/0``
+^^^^^^^^^
+
+Scans all loaded entities and prints their metric scores.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``all`` - ``one``
+
+
+.. raw:: html
+
+   <div id="entity_score/2"> </div>
+
+.. index:: entity_score/2
+.. _code_metric/0::entity_score/2:
+
+``entity_score/2``
+^^^^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``entity_score(Entity,Score)``
+
+
+.. raw:: html
+
+   <div id="library_score/2"> </div>
+
+.. index:: library_score/2
+.. _code_metric/0::library_score/2:
+
+``library_score/2``
+^^^^^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``library_score(Library,Score)``
+
+* mode - number of proofs:
+
+  * ``library_score(@atom,-ground)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="rlibrary_score/2"> </div>
+
+.. index:: rlibrary_score/2
+.. _code_metric/0::rlibrary_score/2:
+
+``rlibrary_score/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``rlibrary_score(Library,Score)``
+
+* mode - number of proofs:
+
+  * ``rlibrary_score(@atom,-ground)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file_score/2"> </div>
+
+.. index:: file_score/2
+.. _code_metric/0::file_score/2:
+
+``file_score/2``
+^^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``file_score(File,Score)``
+
+* mode - number of proofs:
+
+  * ``file_score(@atom,-ground)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="directory_score/2"> </div>
+
+.. index:: directory_score/2
+.. _code_metric/0::directory_score/2:
+
+``directory_score/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``directory_score(Directory,Score)``
+
+* mode - number of proofs:
+
+  * ``directory_score(@atom,-ground)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="rdirectory_score/2"> </div>
+
+.. index:: rdirectory_score/2
+.. _code_metric/0::rdirectory_score/2:
+
+``rdirectory_score/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``rdirectory_score(Directory,Score)``
+
+* mode - number of proofs:
+
+  * ``rdirectory_score(@atom,-ground)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="all_score/1"> </div>
+
+.. index:: all_score/1
+.. _code_metric/0::all_score/1:
+
+``all_score/1``
+^^^^^^^^^^^^^^^
+
+Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.
+
+* compilation flags: ``static``
+* template: ``all_score(Score)``
+
+* mode - number of proofs:
+
+  * ``all_score(-ground)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="entity_score//2"> </div>
+
+.. index:: entity_score//2
+.. _code_metric/0::entity_score//2:
+
+``entity_score//2``
+^^^^^^^^^^^^^^^^^^^
+
+Pretty prints the entity score.
+
+* compilation flags: ``static``
+* template: ``entity_score(Entity,Score)``
+
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="process_entity/2"> </div>
+
+.. index:: process_entity/2
+.. _code_metric/0::process_entity/2:
+
+``process_entity/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Processes an entity of the given kind.
+
+* compilation flags: ``static``
+* template: ``process_entity(Kind,Entity)``
+
+* mode - number of proofs:
+
+  * ``process_entity(+atom,@entity_identifier)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="process_file/1"> </div>
+
+.. index:: process_file/1
+.. _code_metric/0::process_file/1:
+
+``process_file/1``
+^^^^^^^^^^^^^^^^^^
+
+Processes a source file.
+
+* compilation flags: ``static``
+* template: ``process_file(Path)``
+
+* mode - number of proofs:
+
+  * ``process_file(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="process_directory/1"> </div>
+
+.. index:: process_directory/1
+.. _code_metric/0::process_directory/1:
+
+``process_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Processes a directory of source files.
+
+* compilation flags: ``static``
+* template: ``process_directory(Path)``
+
+* mode - number of proofs:
+
+  * ``process_directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="process_rdirectory/1"> </div>
+
+.. index:: process_rdirectory/1
+.. _code_metric/0::process_rdirectory/1:
+
+``process_rdirectory/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Recursively process a directory of source files.
+
+* compilation flags: ``static``
+* template: ``process_rdirectory(Path)``
+
+* mode - number of proofs:
+
+  * ``process_rdirectory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="process_rlibrary/1"> </div>
+
+.. index:: process_rlibrary/1
+.. _code_metric/0::process_rlibrary/1:
+
+``process_rlibrary/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Recursively process a library of source files.
+
+* compilation flags: ``static``
+* template: ``process_rlibrary(Path)``
+
+* mode - number of proofs:
+
+  * ``process_rlibrary(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="process_all/0"> </div>
+
+.. index:: process_all/0
+.. _code_metric/0::process_all/0:
+
+``process_all/0``
+^^^^^^^^^^^^^^^^^
+
+Processes all loaded source code.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``process_all`` - ``one``
+
+
+.. raw:: html
+
+   <div id="sub_directory/2"> </div>
+
+.. index:: sub_directory/2
+.. _code_metric/0::sub_directory/2:
+
+``sub_directory/2``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all directory sub-directories containing loaded files.
+
+* compilation flags: ``static``
+* template: ``sub_directory(Directory,SubDirectory)``
+
+* mode - number of proofs:
+
+  * ``sub_directory(+atom,-atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="sub_library/2"> </div>
+
+.. index:: sub_library/2
+.. _code_metric/0::sub_library/2:
+
+``sub_library/2``
+^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all library sub-library paths.
+
+* compilation flags: ``static``
+* template: ``sub_library(Library,SubLibraryPath)``
+
+* mode - number of proofs:
+
+  * ``sub_library(+atom,-atom)`` - ``one``
+
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

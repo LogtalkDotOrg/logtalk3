@@ -1,0 +1,166 @@
+.. index:: hierarchyp
+.. _hierarchyp/0:
+
+**protocol**
+
+``hierarchyp``
+==============
+
+Common hierarchy protocol for prototype and class hierarchies.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="ancestor/1"> </div>
+
+.. index:: ancestor/1
+.. _hierarchyp/0::ancestor/1:
+
+``ancestor/1``
+^^^^^^^^^^^^^^
+
+Returns, by backtracking, all object ancestors.
+
+* compilation flags: ``static``
+* template: ``ancestor(Ancestor)``
+
+* mode - number of proofs:
+
+  * ``ancestor(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="ancestors/1"> </div>
+
+.. index:: ancestors/1
+.. _hierarchyp/0::ancestors/1:
+
+``ancestors/1``
+^^^^^^^^^^^^^^^
+
+List of all object ancestors.
+
+* compilation flags: ``static``
+* template: ``ancestors(Ancestors)``
+
+* mode - number of proofs:
+
+  * ``ancestors(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="leaf/1"> </div>
+
+.. index:: leaf/1
+.. _hierarchyp/0::leaf/1:
+
+``leaf/1``
+^^^^^^^^^^
+
+Returns, by backtracking, all object leaves.
+
+* compilation flags: ``static``
+* template: ``leaf(Leaf)``
+
+* mode - number of proofs:
+
+  * ``leaf(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="leaves/1"> </div>
+
+.. index:: leaves/1
+.. _hierarchyp/0::leaves/1:
+
+``leaves/1``
+^^^^^^^^^^^^
+
+List of all object leaves.
+
+* compilation flags: ``static``
+* template: ``leaves(Leaves)``
+
+* mode - number of proofs:
+
+  * ``leaves(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="descendant/1"> </div>
+
+.. index:: descendant/1
+.. _hierarchyp/0::descendant/1:
+
+``descendant/1``
+^^^^^^^^^^^^^^^^
+
+Returns, by backtracking, all object descendants.
+
+* compilation flags: ``static``
+* template: ``descendant(Descendant)``
+
+* mode - number of proofs:
+
+  * ``descendant(?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="descendants/1"> </div>
+
+.. index:: descendants/1
+.. _hierarchyp/0::descendants/1:
+
+``descendants/1``
+^^^^^^^^^^^^^^^^^
+
+List of all object descendants.
+
+* compilation flags: ``static``
+* template: ``descendants(Descendants)``
+
+* mode - number of proofs:
+
+  * ``descendants(-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

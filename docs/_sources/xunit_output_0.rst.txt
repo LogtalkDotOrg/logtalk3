@@ -1,0 +1,67 @@
+.. index:: xunit_output
+.. _xunit_output/0:
+
+**object**
+
+``xunit_output``
+================
+
+Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2017/12/29
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="message_cache_/1"> </div>
+
+.. index:: message_cache_/1
+.. _xunit_output/0::message_cache_/1:
+
+``message_cache_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of messages emitted by the lgtunit tool when running tests.
+
+* compilation flags: ``dynamic``
+* template: ``message_cache_(Message)``
+
+* mode - number of proofs:
+
+  * ``message_cache_(?callable)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

@@ -1,0 +1,149 @@
+.. index:: counter
+.. _counter/0:
+
+**object**
+
+``counter``
+===========
+
+Counter implemented with asserta/retract.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="increment/0"> </div>
+
+.. index:: increment/0
+.. _counter/0::increment/0:
+
+``increment/0``
+^^^^^^^^^^^^^^^
+
+Increment the counter by 1.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``increment`` - ``one``
+
+
+.. raw:: html
+
+   <div id="increase/1"> </div>
+
+.. index:: increase/1
+.. _counter/0::increase/1:
+
+``increase/1``
+^^^^^^^^^^^^^^
+
+Increments the counter by the specified amount.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``increase(+number)`` - ``one``
+
+* argname: [I]
+
+.. raw:: html
+
+   <div id="set/1"> </div>
+
+.. index:: set/1
+.. _counter/0::set/1:
+
+``set/1``
+^^^^^^^^^
+
+Sets the counter to the specified amount.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``set(+number)`` - ``one``
+
+* argname: [N]
+
+.. raw:: html
+
+   <div id="value/1"> </div>
+
+.. index:: value/1
+.. _counter/0::value/1:
+
+``value/1``
+^^^^^^^^^^^
+
+Gets the current value of the counter.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``value(?number)`` - ``one``
+
+* argname: [N]
+
+.. raw:: html
+
+   <div id="reset/0"> </div>
+
+.. index:: reset/0
+.. _counter/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Resets the counter to zero.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``reset`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="c/1"> </div>
+
+.. index:: c/1
+.. _counter/0::c/1:
+
+``c/1``
+^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

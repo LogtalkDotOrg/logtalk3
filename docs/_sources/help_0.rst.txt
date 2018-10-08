@@ -1,0 +1,301 @@
+.. index:: help
+.. _help/0:
+
+**object**
+
+``help``
+========
+
+Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.
+
+* author: Paulo Moura
+* version: 0.18
+* date: 2018/6/29
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`forwarding <forwarding/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="help/0"> </div>
+
+.. index:: help/0
+.. _help/0::help/0:
+
+``help/0``
+^^^^^^^^^^
+
+Prints instructions on how to use the help tool.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``help`` - ``one``
+
+
+.. raw:: html
+
+   <div id="(/)/2"> </div>
+
+.. index:: (/)/2
+.. _help/0::(/)/2:
+
+``(/)/2``
+^^^^^^^^^
+
+Provides help on the Functor/Arity built-in control construct, directive, predicate, or method.
+
+* compilation flags: ``static``
+* template: ``Functor/Arity``
+
+* mode - number of proofs:
+
+  * ``+atom/ +integer`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="(//)/2"> </div>
+
+.. index:: (//)/2
+.. _help/0::(//)/2:
+
+``(//)/2``
+^^^^^^^^^^
+
+Provides help on the Functor//Arity built-in non-terminal.
+
+* compilation flags: ``static``
+* template: ``Functor//Arity``
+
+* mode - number of proofs:
+
+  * ``+atom// +integer`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="completion/2"> </div>
+
+.. index:: completion/2
+.. _help/0::completion/2:
+
+``completion/2``
+^^^^^^^^^^^^^^^^
+
+Provides a completion pair (Completion-Page) for a given prefix.
+
+* compilation flags: ``static``
+* template: ``completion(Prefix,Completion)``
+
+* mode - number of proofs:
+
+  * ``completion(+atom,-pair)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="completions/2"> </div>
+
+.. index:: completions/2
+.. _help/0::completions/2:
+
+``completions/2``
+^^^^^^^^^^^^^^^^^
+
+Provides a list of completions pairs (Completion-Page) for a given prefix.
+
+* compilation flags: ``static``
+* template: ``completions(Prefix,Completions)``
+
+* mode - number of proofs:
+
+  * ``completions(+atom,-lists(pair))`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="built_in_directive/4"> </div>
+
+.. index:: built_in_directive/4
+.. _help/0::built_in_directive/4:
+
+``built_in_directive/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in directives.
+
+* compilation flags: ``static``
+* template: ``built_in_directive(Functor,Arity,Directory,Basename)``
+
+* mode - number of proofs:
+
+  * ``built_in_directive(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="built_in_predicate/4"> </div>
+
+.. index:: built_in_predicate/4
+.. _help/0::built_in_predicate/4:
+
+``built_in_predicate/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in predicates.
+
+* compilation flags: ``static``
+* template: ``built_in_predicate(Functor,Arity,Directory,Basename)``
+
+* mode - number of proofs:
+
+  * ``built_in_predicate(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="built_in_method/4"> </div>
+
+.. index:: built_in_method/4
+.. _help/0::built_in_method/4:
+
+``built_in_method/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in methods.
+
+* compilation flags: ``static``
+* template: ``built_in_method(Functor,Arity,Directory,Basename)``
+
+* mode - number of proofs:
+
+  * ``built_in_method(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="control_construct/4"> </div>
+
+.. index:: control_construct/4
+.. _help/0::control_construct/4:
+
+``control_construct/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in control constructs.
+
+* compilation flags: ``static``
+* template: ``control_construct(Functor,Arity,Directory,Basename)``
+
+* mode - number of proofs:
+
+  * ``control_construct(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="built_in_non_terminal/4"> </div>
+
+.. index:: built_in_non_terminal/4
+.. _help/0::built_in_non_terminal/4:
+
+``built_in_non_terminal/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Provides access to the HTML documenting files describing built-in DCG non-terminals.
+
+* compilation flags: ``static``
+* template: ``built_in_non_terminal(Functor,Arity,Directory,Basename)``
+
+* mode - number of proofs:
+
+  * ``built_in_non_terminal(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="library/0"> </div>
+
+.. index:: library/0
+.. _help/0::library/0:
+
+``library/0``
+^^^^^^^^^^^^^
+
+Provides help on the standard Logtalk library.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``library`` - ``one``
+
+
+.. raw:: html
+
+   <div id="library/1"> </div>
+
+.. index:: library/1
+.. _help/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Provides help on the standard Logtalk library entities, predicates, and non-terminals.
+
+* compilation flags: ``static``
+* template: ``library(Topic)``
+
+* mode - number of proofs:
+
+  * ``library(+entity_identifier)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="manuals/0"> </div>
+
+.. index:: manuals/0
+.. _help/0::manuals/0:
+
+``manuals/0``
+^^^^^^^^^^^^^
+
+Provides access to the Logtalk User and Reference manuals.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``manuals`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

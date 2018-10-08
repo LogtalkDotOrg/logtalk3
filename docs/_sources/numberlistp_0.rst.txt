@@ -1,0 +1,360 @@
+.. index:: numberlistp
+.. _numberlistp/0:
+
+**protocol**
+
+``numberlistp``
+===============
+
+List of numbers protocol.
+
+* author: Paulo Moura
+* version: 1.5
+* date: 2017/10/7
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="product/2"> </div>
+
+.. index:: product/2
+.. _numberlistp/0::product/2:
+
+``product/2``
+^^^^^^^^^^^^^
+
+Calculates the product of all list numbers. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``product(List,Product)``
+
+* mode - number of proofs:
+
+  * ``product(+list(number),-number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="sum/2"> </div>
+
+.. index:: sum/2
+.. _numberlistp/0::sum/2:
+
+``sum/2``
+^^^^^^^^^
+
+Calculates the sum of all list numbers. Returns the integer zero if the list is empty.
+
+* compilation flags: ``static``
+* template: ``sum(List,Sum)``
+
+* mode - number of proofs:
+
+  * ``sum(+list(number),-number)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="average/2"> </div>
+
+.. index:: average/2
+.. _numberlistp/0::average/2:
+
+``average/2``
+^^^^^^^^^^^^^
+
+Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``average(List,Average)``
+
+* mode - number of proofs:
+
+  * ``average(+list(number),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="euclidean_norm/2"> </div>
+
+.. index:: euclidean_norm/2
+.. _numberlistp/0::euclidean_norm/2:
+
+``euclidean_norm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``euclidean_norm(List,Norm)``
+
+* mode - number of proofs:
+
+  * ``euclidean_norm(+list(number),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="chebyshev_norm/2"> </div>
+
+.. index:: chebyshev_norm/2
+.. _numberlistp/0::chebyshev_norm/2:
+
+``chebyshev_norm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``chebyshev_norm(List,Norm)``
+
+* mode - number of proofs:
+
+  * ``chebyshev_norm(+list(integer),-integer)`` - ``zero_or_one``
+
+  * ``chebyshev_norm(+list(float),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="manhattan_norm/2"> </div>
+
+.. index:: manhattan_norm/2
+.. _numberlistp/0::manhattan_norm/2:
+
+``manhattan_norm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``manhattan_norm(List,Norm)``
+
+* mode - number of proofs:
+
+  * ``manhattan_norm(+list(integer),-integer)`` - ``zero_or_one``
+
+  * ``manhattan_norm(+list(float),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="euclidean_distance/3"> </div>
+
+.. index:: euclidean_distance/3
+.. _numberlistp/0::euclidean_distance/3:
+
+``euclidean_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Euclidean distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
+
+* compilation flags: ``static``
+* template: ``euclidean_distance(List1,List2,Distance)``
+
+* mode - number of proofs:
+
+  * ``euclidean_distance(+list(number),+list(number),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="chebyshev_distance/3"> </div>
+
+.. index:: chebyshev_distance/3
+.. _numberlistp/0::chebyshev_distance/3:
+
+``chebyshev_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Chebyshev distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
+
+* compilation flags: ``static``
+* template: ``chebyshev_distance(List1,List2,Distance)``
+
+* mode - number of proofs:
+
+  * ``chebyshev_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
+
+  * ``chebyshev_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="manhattan_distance/3"> </div>
+
+.. index:: manhattan_distance/3
+.. _numberlistp/0::manhattan_distance/3:
+
+``manhattan_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Manhattan distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
+
+* compilation flags: ``static``
+* template: ``manhattan_distance(List1,List2,Distance)``
+
+* mode - number of proofs:
+
+  * ``manhattan_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
+
+  * ``manhattan_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="scalar_product/3"> </div>
+
+.. index:: scalar_product/3
+.. _numberlistp/0::scalar_product/3:
+
+``scalar_product/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the scalar product of two lists of numbers. Fails if the two lists are empty or not of the same length.
+
+* compilation flags: ``static``
+* template: ``scalar_product(List1,List2,Product)``
+
+* mode - number of proofs:
+
+  * ``scalar_product(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
+
+  * ``scalar_product(+list(float),+list(float),-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="normalize_range/2"> </div>
+
+.. index:: normalize_range/2
+.. _numberlistp/0::normalize_range/2:
+
+``normalize_range/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.
+
+* compilation flags: ``static``
+* template: ``normalize_range(List,NormalizedList)``
+
+* mode - number of proofs:
+
+  * ``normalize_range(+list(number),-list(float))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="normalize_range/4"> </div>
+
+.. index:: normalize_range/4
+.. _numberlistp/0::normalize_range/4:
+
+``normalize_range/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a list of numbers into the given range. Caller must handle arithmetic exceptions if the input list if not normalizable.
+
+* compilation flags: ``static``
+* template: ``normalize_range(List,Minimum,Maximum,NormalizedList)``
+
+* mode - number of proofs:
+
+  * ``normalize_range(+list(number),+number,+number,-list(float))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="normalize_unit/2"> </div>
+
+.. index:: normalize_unit/2
+.. _numberlistp/0::normalize_unit/2:
+
+``normalize_unit/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.
+
+* compilation flags: ``static``
+* template: ``normalize_unit(List,NormalizedList)``
+
+* mode - number of proofs:
+
+  * ``normalize_unit(+list(number),-list(float))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="normalize_scalar/2"> </div>
+
+.. index:: normalize_scalar/2
+.. _numberlistp/0::normalize_scalar/2:
+
+``normalize_scalar/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a list of numbers such that the sum of all numbers is equal to one. Caller must handle arithmetic exceptions if the input list if not normalizable.
+
+* compilation flags: ``static``
+* template: ``normalize_scalar(List,NormalizedList)``
+
+* mode - number of proofs:
+
+  * ``normalize_scalar(+list(number),-list(float))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rescale/3"> </div>
+
+.. index:: rescale/3
+.. _numberlistp/0::rescale/3:
+
+``rescale/3``
+^^^^^^^^^^^^^
+
+Rescales all numbers in a list by the given factor.
+
+* compilation flags: ``static``
+* template: ``rescale(List,Factor,RescaledList)``
+
+* mode - number of proofs:
+
+  * ``rescale(+list(integer),+integer,-list(integer))`` - ``one``
+
+  * ``rescale(+list(number),+float,-list(float))`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`listp <listp/0>`
+* :ref:`varlistp <varlistp/0>`
+
+

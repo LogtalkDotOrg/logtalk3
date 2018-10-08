@@ -1,0 +1,53 @@
+.. index:: upn_metric
+.. _upn_metric/0:
+
+**object**
+
+``upn_metric``
+==============
+
+Number of unique predicates nodes metric. The nodes include called and updated predicates indepedently of where they are defined. The score is represented by a non-negative integer.
+
+* author: Paulo Moura
+* version: 0.2
+* date: 2018/7/18
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+  * ``public`` :ref:`code_metric <code_metric/0>`
+* provides:
+
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

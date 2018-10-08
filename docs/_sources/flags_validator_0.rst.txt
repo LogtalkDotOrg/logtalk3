@@ -1,0 +1,84 @@
+.. index:: flags_validator
+.. _flags_validator/0:
+
+**protocol**
+
+``flags_validator``
+===================
+
+Flag validation protocol. Must be implemented by validator objects.
+
+* author: Theofrastos Mantadelis
+* version: 1.0
+* date: 2010/11/27
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="print_flags/0"> </div>
+
+.. index:: print_flags/0
+.. _flags_validator/0::print_flags/0:
+
+``print_flags/0``
+^^^^^^^^^^^^^^^^^
+
+Validates the validator object itself.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``print_flags`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="validate/1"> </div>
+
+.. index:: validate/1
+.. _flags_validator/0::validate/1:
+
+``validate/1``
+^^^^^^^^^^^^^^
+
+Validates a flag value.
+
+* compilation flags: ``static``
+* template: ``validate(Value)``
+
+* mode - number of proofs:
+
+  * ``validate(@term)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

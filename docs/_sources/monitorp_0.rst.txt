@@ -1,0 +1,178 @@
+.. index:: monitorp
+.. _monitorp/0:
+
+**protocol**
+
+``monitorp``
+============
+
+Monitor protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="monitor_activated/0"> </div>
+
+.. index:: monitor_activated/0
+.. _monitorp/0::monitor_activated/0:
+
+``monitor_activated/0``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True if monitor is currently active.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``monitor_activated`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="activate_monitor/0"> </div>
+
+.. index:: activate_monitor/0
+.. _monitorp/0::activate_monitor/0:
+
+``activate_monitor/0``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Activates all spy points and start monitoring.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``activate_monitor`` - ``one``
+
+
+.. raw:: html
+
+   <div id="suspend_monitor/0"> </div>
+
+.. index:: suspend_monitor/0
+.. _monitorp/0::suspend_monitor/0:
+
+``suspend_monitor/0``
+^^^^^^^^^^^^^^^^^^^^^
+
+Suspends monitoring, deactivating all spy points.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``suspend_monitor`` - ``one``
+
+
+.. raw:: html
+
+   <div id="reset_monitor/0"> </div>
+
+.. index:: reset_monitor/0
+.. _monitorp/0::reset_monitor/0:
+
+``reset_monitor/0``
+^^^^^^^^^^^^^^^^^^^
+
+Resets monitor, deactivating and deleting all spy points.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``reset_monitor`` - ``one``
+
+
+.. raw:: html
+
+   <div id="spy_point/4"> </div>
+
+.. index:: spy_point/4
+.. _monitorp/0::spy_point/4:
+
+``spy_point/4``
+^^^^^^^^^^^^^^^
+
+Current spy point.
+
+* compilation flags: ``static``
+* template: ``spy_point(Event,Object,Message,Sender)``
+
+* mode - number of proofs:
+
+  * ``spy_point(?event,?object,?callable,?object)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="set_spy_point/4"> </div>
+
+.. index:: set_spy_point/4
+.. _monitorp/0::set_spy_point/4:
+
+``set_spy_point/4``
+^^^^^^^^^^^^^^^^^^^
+
+Sets a spy point.
+
+* compilation flags: ``static``
+* template: ``set_spy_point(Event,Object,Message,Sender)``
+
+* mode - number of proofs:
+
+  * ``set_spy_point(?event,?object,?callable,?object)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="del_spy_points/4"> </div>
+
+.. index:: del_spy_points/4
+.. _monitorp/0::del_spy_points/4:
+
+``del_spy_points/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Deletes all matching spy points.
+
+* compilation flags: ``static``
+* template: ``del_spy_points(Event,Object,Message,Sender)``
+
+* mode - number of proofs:
+
+  * ``del_spy_points(@event,@object,@callable,@object)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

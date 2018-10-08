@@ -1,0 +1,52 @@
+.. index:: term
+.. _term/0:
+
+**object**
+
+``term``
+========
+
+Prolog term utility predicates.
+
+* author: Paulo Moura
+* version: 1.8
+* date: 2018/6/18
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`termp <termp/0>`
+* aliases:
+
+  * ``termp`` ``variables/2`` aka ``vars/2``
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

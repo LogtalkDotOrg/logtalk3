@@ -1,0 +1,134 @@
+.. index:: streamvars
+.. _streamvars/0:
+
+**object**
+
+``streamvars``
+==============
+
+Stream variables (supporting logical, backtracable, adding and retrieving of terms).
+
+* author: Nobukuni Kino and Paulo Moura
+* version: 1.2
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="new/1"> </div>
+
+.. index:: new/1
+.. _streamvars/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Makes Variable a stream variable. Initial state will be empty.
+
+* compilation flags: ``static``
+* template: ``new(Variable)``
+
+* mode - number of proofs:
+
+  * ``new(-streamvar)`` - ``one``
+
+* exceptions:
+  * Variable is not a variable: ``type_error(variable,Variable)``
+
+
+.. raw:: html
+
+   <div id="new/2"> </div>
+
+.. index:: new/2
+.. _streamvars/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Makes Variable a stream variable and sets its initial state to Value.
+
+* compilation flags: ``static``
+* template: ``new(Variable,Value)``
+
+* mode - number of proofs:
+
+  * ``new(-streamvar,@nonvar)`` - ``one``
+
+* exceptions:
+  * Variable is not a variable: ``type_error(variable,Variable)``
+
+
+.. raw:: html
+
+   <div id="(<=)/2"> </div>
+
+.. index:: (<=)/2
+.. _streamvars/0::(<=)/2:
+
+``(<=)/2``
+^^^^^^^^^^
+
+Sets the state of the stream variable Variable to Value (initializing the variable if needed).
+
+* compilation flags: ``static``
+* template: ``Variable<=Value``
+
+* mode - number of proofs:
+
+  * ``(?streamvar)<=(@nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="(=>)/2"> </div>
+
+.. index:: (=>)/2
+.. _streamvars/0::(=>)/2:
+
+``(=>)/2``
+^^^^^^^^^^
+
+Unifies Value with the current state of the stream variable Variable.
+
+* compilation flags: ``static``
+* template: ``Variable=>Value``
+
+* mode - number of proofs:
+
+  * ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+* ``op(100,xfx,<=) (public)``
+* ``op(100,xfx,=>) (public)``
+
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

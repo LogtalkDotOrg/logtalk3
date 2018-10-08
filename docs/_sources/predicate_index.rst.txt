@@ -1,0 +1,5976 @@
+
+.. _predicate_index:
+
+Predicate index
+===============
+
+``(/)/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::(/)/2>`
+
+``(//)/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::(//)/2>`
+
+``(<)/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`comparingp <comparingp/0::(<)/2>`
+
+``(<=)/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`assignvarsp <assignvarsp/0::(<=)/2>`
+* :ref:`streamvars <streamvars/0::(<=)/2>`
+
+``(=:=)/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`comparingp <comparingp/0::(=:=)/2>`
+
+``(=<)/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`comparingp <comparingp/0::(=<)/2>`
+
+``(=>)/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`assignvarsp <assignvarsp/0::(=>)/2>`
+* :ref:`streamvars <streamvars/0::(=>)/2>`
+
+``(=\=)/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`comparingp <comparingp/0::(=\=)/2>`
+
+``=~= / 2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::=~= / 2>`
+* :ref:`number <number/0::=~= / 2>`
+
+``(>)/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`comparingp <comparingp/0::(>)/2>`
+
+``(>=)/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`comparingp <comparingp/0::(>=)/2>`
+
+``absolute_file_name/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::absolute_file_name/2>`
+
+``activate_monitor/0``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::activate_monitor/0>`
+
+``add/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`difflist <difflist/0::add/3>`
+
+``addDependent/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subject <subject/0::addDependent/1>`
+
+``after/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::after/2>`
+
+``after/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitoring <monitoring/0::after/3>`
+
+``all/0``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::all/0>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::all/0>`
+* :ref:`lgtdocp <lgtdocp/0::all/0>`
+
+``all/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::all/1>`
+
+``all_files/0``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::all_files/0>`
+* :ref:`diagrams(Format) <diagrams/1::all_files/0>`
+
+``all_files/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::all_files/1>`
+* :ref:`diagrams(Format) <diagrams/1::all_files/1>`
+
+``all_libraries/0``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::all_libraries/0>`
+* :ref:`diagrams(Format) <diagrams/1::all_libraries/0>`
+
+``all_libraries/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::all_libraries/1>`
+* :ref:`diagrams(Format) <diagrams/1::all_libraries/1>`
+
+``all_score/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::all_score/1>`
+
+``ancestor/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hierarchyp <hierarchyp/0::ancestor/1>`
+
+``ancestors/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hierarchyp <hierarchyp/0::ancestors/1>`
+
+``append/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::append/2>`
+
+``append/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::append/3>`
+* :ref:`varlistp <varlistp/0::append/3>`
+
+``apply/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::apply/4>`
+
+``approximately_equal/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::approximately_equal/3>`
+* :ref:`number <number/0::approximately_equal/3>`
+
+``arbitrary/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`arbitrary <arbitrary/0::arbitrary/1>`
+
+``arbitrary/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`arbitrary <arbitrary/0::arbitrary/2>`
+
+``arithmetic_mean/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::arithmetic_mean/2>`
+
+``array_list/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::array_list/2>`
+
+``array_to_terms/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::array_to_terms/2>`
+
+``array_to_terms/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::array_to_terms/3>`
+
+``as_dictionary/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::as_dictionary/2>`
+
+``as_difflist/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`list <list/0::as_difflist/2>`
+
+``as_heap/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`heapp <heapp/0::as_heap/2>`
+
+``as_list/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::as_list/2>`
+* :ref:`difflist <difflist/0::as_list/2>`
+* :ref:`heapp <heapp/0::as_list/2>`
+* :ref:`queuep <queuep/0::as_list/2>`
+* :ref:`setp <setp/0::as_list/2>`
+
+``as_set/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::as_set/2>`
+
+``ask_question/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::ask_question/5>`
+
+``assertion/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`assertions(Mode) <assertions/1::assertion/1>`
+* :ref:`lgtunit <lgtunit/0::assertion/1>`
+
+``assertion/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`assertions(Mode) <assertions/1::assertion/2>`
+* :ref:`lgtunit <lgtunit/0::assertion/2>`
+
+``assignable/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`assignvarsp <assignvarsp/0::assignable/1>`
+
+``assignable/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`assignvarsp <assignvarsp/0::assignable/2>`
+
+``average/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::average/2>`
+
+``average_deviation/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::average_deviation/3>`
+
+``before/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::before/2>`
+
+``before/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitoring <monitoring/0::before/3>`
+
+``bench_goal/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`databasep <databasep/0::bench_goal/1>`
+
+``benchmark/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::benchmark/2>`
+
+``benchmark/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::benchmark/3>`
+
+``benchmark/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::benchmark/4>`
+
+``benchmark_reified/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::benchmark_reified/3>`
+
+``between/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer <integer/0::between/3>`
+* :ref:`randomp <randomp/0::between/3>`
+
+``built_in_directive/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::built_in_directive/4>`
+
+``built_in_flag/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::built_in_flag/2>`
+
+``built_in_method/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::built_in_method/4>`
+
+``built_in_non_terminal/4``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::built_in_non_terminal/4>`
+
+``built_in_predicate/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::built_in_predicate/4>`
+
+``calendar_month/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::calendar_month/3>`
+
+``cat/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`maybe <maybe/0::cat/2>`
+
+``change_directory/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::change_directory/1>`
+
+``changed/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subject <subject/0::changed/0>`
+
+``changed/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subject <subject/0::changed/1>`
+
+``chebyshev_distance/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::chebyshev_distance/3>`
+
+``chebyshev_norm/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::chebyshev_norm/2>`
+
+``check/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::check/1>`
+* :ref:`varlistp <varlistp/0::check/1>`
+
+``check/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`type <type/0::check/2>`
+
+``check/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`type <type/0::check/3>`
+
+``class/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::class/1>`
+
+``classes/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::classes/1>`
+
+``clone/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::clone/3>`
+
+``clone/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::clone/4>`
+
+``coefficient_of_variation/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::coefficient_of_variation/2>`
+
+``command_line_arguments/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::command_line_arguments/1>`
+
+``compile_aux_clauses/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::compile_aux_clauses/1>`
+
+``compile_predicate_heads/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::compile_predicate_heads/4>`
+
+``compile_predicate_indicators/3``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::compile_predicate_indicators/3>`
+
+``completion/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::completion/2>`
+
+``completions/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::completions/2>`
+
+``connect/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::connect/1>`
+
+``connect/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::connect/3>`
+
+``console/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::console/1>`
+
+``contains/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::contains/2>`
+
+``control_construct/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::control_construct/4>`
+
+``counter/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counters <counters/0::counter/2>`
+
+``cover/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::cover/1>`
+
+``cpu_time/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::cpu_time/1>`
+* :ref:`timep <timep/0::cpu_time/1>`
+
+``data/0``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ports <ports/0::data/0>`
+
+``data/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ports <ports/0::data/1>`
+
+``date/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::date/4>`
+
+``date/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::date/5>`
+
+``date/6``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::date/6>`
+
+``date/7``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::date/7>`
+
+``date_string/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::date_string/3>`
+
+``date_time/7``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::date_time/7>`
+
+``days_in_month/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::days_in_month/3>`
+
+``debug/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::debug/0>`
+
+``debug_handler/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::debug_handler/2>`
+
+``debug_handler_provider/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::debug_handler_provider/1>`
+
+``debugging/0``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::debugging/0>`
+
+``debugging/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::debugging/1>`
+
+``decode_exception/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::decode_exception/2>`
+
+``decode_exception/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::decode_exception/3>`
+
+``decompile_predicate_heads/4``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::decompile_predicate_heads/4>`
+
+``decompile_predicate_indicators/4``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::decompile_predicate_indicators/4>`
+
+``decompose_file_name/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::decompose_file_name/3>`
+
+``decompose_file_name/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::decompose_file_name/4>`
+
+``decrement_counter/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counters <counters/0::decrement_counter/1>`
+
+``default_option/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::default_option/1>`
+* :ref:`wrapper <wrapper/0::default_option/1>`
+
+``default_options/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::default_options/1>`
+* :ref:`wrapper <wrapper/0::default_options/1>`
+
+``define_log_file/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::define_log_file/2>`
+
+``defined_flag/6``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::defined_flag/6>`
+
+``del_monitors/0``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::del_monitors/0>`
+
+``del_monitors/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::del_monitors/4>`
+
+``del_spy_points/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::del_spy_points/4>`
+
+``delete/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::delete/3>`
+* :ref:`setp <setp/0::delete/3>`
+* :ref:`varlistp <varlistp/0::delete/3>`
+
+``delete/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::delete/4>`
+* :ref:`heapp <heapp/0::delete/4>`
+
+``delete_directory/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::delete_directory/1>`
+
+``delete_file/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::delete_file/1>`
+
+``delete_matches/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::delete_matches/3>`
+
+``delete_max/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::delete_max/4>`
+
+``delete_min/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::delete_min/4>`
+
+``dependents/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subject <subject/0::dependents/1>`
+
+``depth/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::depth/2>`
+
+``descendant/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hierarchyp <hierarchyp/0::descendant/1>`
+
+``descendant_class/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::descendant_class/1>`
+
+``descendant_classes/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::descendant_classes/1>`
+
+``descendant_instance/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::descendant_instance/1>`
+
+``descendant_instances/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::descendant_instances/1>`
+
+``descendants/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hierarchyp <hierarchyp/0::descendants/1>`
+
+``deterministic/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::deterministic/1>`
+
+``deterministic/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::deterministic/2>`
+
+``diagram_name_suffix/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::diagram_name_suffix/1>`
+
+``directories/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`wrapper <wrapper/0::directories/1>`
+
+``directories/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::directories/2>`
+* :ref:`diagrams(Format) <diagrams/1::directories/2>`
+* :ref:`wrapper <wrapper/0::directories/2>`
+
+``directories/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::directories/3>`
+* :ref:`diagrams(Format) <diagrams/1::directories/3>`
+
+``directory/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::directory/1>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::directory/1>`
+* :ref:`diagram(Format) <diagram/1::directory/1>`
+* :ref:`diagrams(Format) <diagrams/1::directory/1>`
+* :ref:`lgtdocp <lgtdocp/0::directory/1>`
+* :ref:`wrapper <wrapper/0::directory/1>`
+
+``directory/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::directory/2>`
+* :ref:`diagrams(Format) <diagrams/1::directory/2>`
+* :ref:`lgtdocp <lgtdocp/0::directory/2>`
+* :ref:`wrapper <wrapper/0::directory/2>`
+
+``directory/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::directory/3>`
+* :ref:`diagrams(Format) <diagrams/1::directory/3>`
+
+``directory_exists/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::directory_exists/1>`
+
+``directory_files/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::directory_files/2>`
+
+``directory_files/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::directory_files/3>`
+
+``directory_score/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::directory_score/2>`
+
+``disable_logging/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::disable_logging/1>`
+
+``disconnect/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::disconnect/1>`
+
+``disjoint/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::disjoint/2>`
+
+``doc_goal/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doclet <doclet/0::doc_goal/1>`
+
+``dowhile/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::dowhile/2>`
+
+``drop/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::drop/3>`
+
+``during/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::during/2>`
+
+``easter_day/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::easter_day/3>`
+
+``edge/6``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::edge/6>`
+
+``empty/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::empty/1>`
+* :ref:`heapp <heapp/0::empty/1>`
+* :ref:`listp <listp/0::empty/1>`
+* :ref:`optional <optional/0::empty/1>`
+* :ref:`queuep <queuep/0::empty/1>`
+* :ref:`setp <setp/0::empty/1>`
+* :ref:`varlistp <varlistp/0::empty/1>`
+
+``enable_logging/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::enable_logging/1>`
+
+``entity/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::entity/1>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::entity/1>`
+* :ref:`xref_diagram(Format) <xref_diagram/1::entity/1>`
+
+``entity/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xref_diagram(Format) <xref_diagram/1::entity/2>`
+
+``entity_info_pair_score_hook/3``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::entity_info_pair_score_hook/3>`
+
+``entity_info_score_hook/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::entity_info_score_hook/2>`
+
+``entity_predicates_weights_hook/2``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::entity_predicates_weights_hook/2>`
+
+``entity_prefix/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::entity_prefix/2>`
+
+``entity_score/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::entity_score/2>`
+
+``entity_score//2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::entity_score//2>`
+
+``environment_variable/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::environment_variable/2>`
+
+``epsilon/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::epsilon/1>`
+
+``equal/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::equal/2>`
+* :ref:`setp <setp/0::equal/2>`
+
+``essentially_equal/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::essentially_equal/3>`
+* :ref:`number <number/0::essentially_equal/3>`
+
+``euclidean_distance/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::euclidean_distance/3>`
+
+``euclidean_norm/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::euclidean_norm/2>`
+
+``exclude/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::exclude/3>`
+
+``execution_context/7``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::execution_context/7>`
+
+``expand_library_path/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::expand_library_path/2>`
+
+``expected/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::expected/1>`
+
+``expecteds/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`either <either/0::expecteds/2>`
+
+``extension/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`proto_hierarchyp <proto_hierarchyp/0::extension/1>`
+
+``extensions/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`proto_hierarchyp <proto_hierarchyp/0::extensions/1>`
+
+``false/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::false/1>`
+
+``file/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::file/1>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::file/1>`
+* :ref:`entity_diagram(Format) <entity_diagram/1::file/1>`
+* :ref:`lgtdocp <lgtdocp/0::file/1>`
+* :ref:`wrapper <wrapper/0::file/1>`
+
+``file/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`entity_diagram(Format) <entity_diagram/1::file/2>`
+* :ref:`lgtdocp <lgtdocp/0::file/2>`
+* :ref:`wrapper <wrapper/0::file/2>`
+
+``file_exists/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::file_exists/1>`
+
+``file_footer/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::file_footer/3>`
+
+``file_header/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::file_header/3>`
+
+``file_modification_time/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::file_modification_time/2>`
+
+``file_permission/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::file_permission/2>`
+
+``file_score/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::file_score/2>`
+
+``file_size/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::file_size/2>`
+
+``file_type_extension/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::file_type_extension/2>`
+
+``files/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::files/1>`
+* :ref:`diagrams(Format) <diagrams/1::files/1>`
+* :ref:`wrapper <wrapper/0::files/1>`
+
+``files/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::files/2>`
+* :ref:`diagrams(Format) <diagrams/1::files/2>`
+* :ref:`wrapper <wrapper/0::files/2>`
+
+``files/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::files/3>`
+* :ref:`diagrams(Format) <diagrams/1::files/3>`
+
+``filter/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Reference) <optional/1::filter/2>`
+
+``findall_member/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::findall_member/4>`
+
+``findall_member/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::findall_member/5>`
+
+``finished_by/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::finished_by/2>`
+
+``finishes/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::finishes/2>`
+
+``flag_group_chk/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::flag_group_chk/1>`
+
+``flag_groups/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::flag_groups/1>`
+
+``flat_map/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::flat_map/2>`
+* :ref:`optional(Reference) <optional/1::flat_map/2>`
+
+``flatten/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::flatten/2>`
+* :ref:`varlistp <varlistp/0::flatten/2>`
+
+``fold_left/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::fold_left/4>`
+
+``fold_left_1/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::fold_left_1/3>`
+
+``fold_right/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::fold_right/4>`
+
+``fold_right_1/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::fold_right_1/3>`
+
+``fordownto/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::fordownto/3>`
+
+``fordownto/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::fordownto/4>`
+
+``fordownto/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::fordownto/5>`
+
+``foreach/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::foreach/3>`
+
+``foreach/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::foreach/4>`
+
+``format_object/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::format_object/1>`
+
+``forto/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::forto/3>`
+
+``forto/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::forto/4>`
+
+``forto/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::forto/5>`
+
+``forward/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`forwarding <forwarding/0::forward/1>`
+
+``gensym/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gensym <gensym/0::gensym/2>`
+
+``geometric_mean/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::geometric_mean/2>`
+
+``get/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Reference) <optional/1::get/1>`
+
+``get_field/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_access_protocol <java_access_protocol/0::get_field/2>`
+
+``get_flag_value/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::get_flag_value/2>`
+
+``get_seed/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::get_seed/1>`
+
+``goal_expansion/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expanding <expanding/0::goal_expansion/2>`
+
+``graph_footer/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::graph_footer/5>`
+
+``graph_header/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::graph_header/5>`
+
+``ground/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::ground/1>`
+
+``group_by_key/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairs <pairs/0::group_by_key/2>`
+
+``hamming_distance/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::hamming_distance/3>`
+
+``harmonic_mean/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::harmonic_mean/2>`
+
+``head/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::head/2>`
+
+``help/0``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::help/0>`
+
+``if_empty/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Reference) <optional/1::if_empty/1>`
+
+``if_expected/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::if_expected/1>`
+
+``if_present/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Reference) <optional/1::if_present/1>`
+
+``if_unexpected/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::if_unexpected/1>`
+
+``include/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::include/3>`
+
+``increase/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counter <counter/0::increase/1>`
+
+``increment/0``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counter <counter/0::increment/0>`
+
+``increment_counter/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counters <counters/0::increment_counter/1>`
+
+``init/0``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`shell(Interpreters) <shell/1::init/0>`
+
+``init_log_file/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::init_log_file/2>`
+
+``inorder/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`bintree <bintree/0::inorder/2>`
+
+``insert/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::insert/3>`
+
+``insert/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::insert/4>`
+* :ref:`heapp <heapp/0::insert/4>`
+
+``insert_all/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`heapp <heapp/0::insert_all/3>`
+* :ref:`setp <setp/0::insert_all/3>`
+
+``instance/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::instance/1>`
+
+``instances/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::instances/1>`
+
+``intersect/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::intersect/2>`
+
+``intersection/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::intersection/3>`
+
+``intersection/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::intersection/4>`
+
+``invoke/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_access_protocol <java_access_protocol/0::invoke/1>`
+
+``invoke/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_access_protocol <java_access_protocol/0::invoke/2>`
+
+``is_alpha/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_alpha/1>`
+
+``is_alphanumeric/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_alphanumeric/1>`
+
+``is_ascii/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_ascii/1>`
+
+``is_bin_digit/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_bin_digit/1>`
+
+``is_control/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_control/1>`
+
+``is_dec_digit/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_dec_digit/1>`
+
+``is_empty/0``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Reference) <optional/1::is_empty/0>`
+
+``is_end_of_line/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_end_of_line/1>`
+
+``is_expected/0``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::is_expected/0>`
+
+``is_false/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::is_false/1>`
+
+``is_hex_digit/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_hex_digit/1>`
+
+``is_layout/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_layout/1>`
+
+``is_letter/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_letter/1>`
+
+``is_lower_case/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_lower_case/1>`
+
+``is_newline/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_newline/1>`
+
+``is_null/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::is_null/1>`
+
+``is_object/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::is_object/1>`
+
+``is_octal_digit/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_octal_digit/1>`
+
+``is_period/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_period/1>`
+
+``is_present/0``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Reference) <optional/1::is_present/0>`
+
+``is_punctation/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_punctation/1>`
+
+``is_quote/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_quote/1>`
+
+``is_true/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::is_true/1>`
+
+``is_unexpected/0``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::is_unexpected/0>`
+
+``is_upper_case/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_upper_case/1>`
+
+``is_void/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::is_void/1>`
+
+``is_vowel/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_vowel/1>`
+
+``is_white_space/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::is_white_space/1>`
+
+``iterator_element/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::iterator_element/2>`
+
+``join/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::join/3>`
+
+``join_all/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::join_all/3>`
+
+``jump/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::jump/3>`
+
+``jump_all/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::jump_all/3>`
+
+``keys/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::keys/2>`
+* :ref:`pairs <pairs/0::keys/2>`
+
+``keys_values/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairs <pairs/0::keys_values/3>`
+
+``keysort/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::keysort/2>`
+
+``kurtosis/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::kurtosis/2>`
+
+``language_object/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_registry <graph_language_registry/0::language_object/2>`
+
+``last/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::last/2>`
+* :ref:`varlistp <varlistp/0::last/2>`
+
+``leaf/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hierarchyp <hierarchyp/0::leaf/1>`
+
+``leaf_class/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::leaf_class/1>`
+
+``leaf_classes/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::leaf_classes/1>`
+
+``leaf_instance/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::leaf_instance/1>`
+
+``leaf_instances/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::leaf_instances/1>`
+
+``leap_year/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::leap_year/1>`
+* :ref:`iso8601 <iso8601/0::leap_year/1>`
+
+``leash/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::leash/1>`
+
+``leashing/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::leashing/1>`
+
+``leaves/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hierarchyp <hierarchyp/0::leaves/1>`
+
+``length/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::length/2>`
+* :ref:`queuep <queuep/0::length/2>`
+* :ref:`setp <setp/0::length/2>`
+* :ref:`varlistp <varlistp/0::length/2>`
+
+``libraries/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::libraries/1>`
+* :ref:`diagrams(Format) <diagrams/1::libraries/1>`
+
+``libraries/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::libraries/2>`
+* :ref:`diagrams(Format) <diagrams/1::libraries/2>`
+
+``libraries/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::libraries/3>`
+* :ref:`diagrams(Format) <diagrams/1::libraries/3>`
+
+``library/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::library/0>`
+
+``library/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::library/1>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::library/1>`
+* :ref:`diagram(Format) <diagram/1::library/1>`
+* :ref:`diagrams(Format) <diagrams/1::library/1>`
+* :ref:`help <help/0::library/1>`
+* :ref:`lgtdocp <lgtdocp/0::library/1>`
+
+``library/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::library/2>`
+* :ref:`diagrams(Format) <diagrams/1::library/2>`
+* :ref:`lgtdocp <lgtdocp/0::library/2>`
+
+``library_score/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::library_score/2>`
+
+``loaded_file/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::loaded_file/1>`
+
+``loaded_file_property/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::loaded_file_property/2>`
+* :ref:`modules_diagram_support <modules_diagram_support/0::loaded_file_property/2>`
+
+``log_event/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::log_event/2>`
+
+``log_file/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::log_file/2>`
+
+``logging/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loggingp <loggingp/0::logging/1>`
+
+``lookup/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::lookup/3>`
+
+``lower_upper/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::lower_upper/2>`
+
+``magic/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`magic <magic/0::magic/2>`
+
+``magicise/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`magic <magic/0::magicise/4>`
+
+``make_directory/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::make_directory/1>`
+
+``make_directory_path/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::make_directory_path/1>`
+
+``manhattan_distance/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::manhattan_distance/3>`
+
+``manhattan_norm/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::manhattan_norm/2>`
+
+``manuals/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::manuals/0>`
+
+``map/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::map/2>`
+* :ref:`expected(Reference) <expected/1::map/2>`
+* :ref:`metap <metap/0::map/2>`
+* :ref:`optional(Reference) <optional/1::map/2>`
+
+``map/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::map/3>`
+* :ref:`metap <metap/0::map/3>`
+* :ref:`pairs <pairs/0::map/3>`
+
+``map/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::map/4>`
+
+``map/5``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::map/5>`
+
+``map/6``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::map/6>`
+
+``map/7``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::map/7>`
+
+``map/8``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::map/8>`
+
+``map_reduce/5``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::map_reduce/5>`
+
+``max/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::max/2>`
+* :ref:`statisticsp <statisticsp/0::max/2>`
+
+``max/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::max/3>`
+
+``maybe/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::maybe/0>`
+
+``maybe/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::maybe/1>`
+
+``maybe/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::maybe/2>`
+
+``maybe_call/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::maybe_call/1>`
+
+``maybe_call/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::maybe_call/2>`
+
+``mean_deviation/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::mean_deviation/2>`
+
+``median/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::median/2>`
+
+``median_deviation/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::median_deviation/2>`
+
+``meets/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::meets/2>`
+
+``member/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::member/2>`
+* :ref:`randomp <randomp/0::member/2>`
+* :ref:`setp <setp/0::member/2>`
+
+``memberchk/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::memberchk/2>`
+* :ref:`setp <setp/0::memberchk/2>`
+* :ref:`varlistp <varlistp/0::memberchk/2>`
+
+``merge/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`heapp <heapp/0::merge/3>`
+
+``message_hook/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::message_hook/4>`
+
+``message_prefix_stream/4``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::message_prefix_stream/4>`
+
+``message_tokens//2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::message_tokens//2>`
+
+``met_by/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::met_by/2>`
+
+``meta_type/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`type <type/0::meta_type/3>`
+
+``min/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::min/2>`
+* :ref:`statisticsp <statisticsp/0::min/2>`
+
+``min/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::min/3>`
+
+``module_property/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`modules_diagram_support <modules_diagram_support/0::module_property/2>`
+
+``monitor/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::monitor/1>`
+
+``monitor/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::monitor/4>`
+
+``monitor_activated/0``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::monitor_activated/0>`
+
+``monitored/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::monitored/1>`
+
+``monitors/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::monitors/1>`
+
+``msort/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::msort/2>`
+
+``msort/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::msort/3>`
+
+``name_of_day/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::name_of_day/3>`
+
+``name_of_month/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::name_of_month/3>`
+
+``new/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_access_protocol <java_access_protocol/0::new/1>`
+* :ref:`streamvars <streamvars/0::new/1>`
+* :ref:`termp <termp/0::new/1>`
+
+``new/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_access_protocol <java_access_protocol/0::new/2>`
+* :ref:`streamvars <streamvars/0::new/2>`
+
+``new/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::new/3>`
+
+``next/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::next/4>`
+
+``nextto/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::nextto/3>`
+* :ref:`varlistp <varlistp/0::nextto/3>`
+
+``node/7``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::node/7>`
+
+``nodebug/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::nodebug/0>`
+
+``normalize_range/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::normalize_range/2>`
+
+``normalize_range/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::normalize_range/4>`
+
+``normalize_scalar/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::normalize_scalar/2>`
+
+``normalize_unit/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::normalize_unit/2>`
+
+``nospy/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::nospy/1>`
+
+``nospy/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::nospy/4>`
+
+``nospyall/0``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::nospyall/0>`
+
+``notrace/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::notrace/0>`
+
+``now/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`timep <timep/0::now/3>`
+
+``nth0/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::nth0/3>`
+* :ref:`varlistp <varlistp/0::nth0/3>`
+
+``nth0/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::nth0/4>`
+* :ref:`varlistp <varlistp/0::nth0/4>`
+
+``nth1/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::nth1/3>`
+* :ref:`varlistp <varlistp/0::nth1/3>`
+
+``nth1/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::nth1/4>`
+* :ref:`varlistp <varlistp/0::nth1/4>`
+
+``null/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::null/1>`
+
+``occurs/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::occurs/2>`
+
+``of/2``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional <optional/0::of/2>`
+
+``of_expected/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected <expected/0::of_expected/2>`
+
+``of_unexpected/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected <expected/0::of_unexpected/2>`
+
+``operating_system_type/1``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::operating_system_type/1>`
+
+``option/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::option/2>`
+
+``or_else/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::or_else/2>`
+* :ref:`optional(Reference) <optional/1::or_else/2>`
+
+``or_else_call/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::or_else_call/2>`
+* :ref:`optional(Reference) <optional/1::or_else_call/2>`
+
+``or_else_fail/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::or_else_fail/1>`
+* :ref:`optional(Reference) <optional/1::or_else_fail/1>`
+
+``or_else_get/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::or_else_get/2>`
+* :ref:`optional(Reference) <optional/1::or_else_get/2>`
+
+``output_file_name/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_language_protocol <graph_language_protocol/0::output_file_name/2>`
+
+``overlapped_by/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::overlapped_by/2>`
+
+``overlaps/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::overlaps/2>`
+
+``parent/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`proto_hierarchyp <proto_hierarchyp/0::parent/1>`
+
+``parenthesis/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`characterp <characterp/0::parenthesis/2>`
+
+``parents/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`proto_hierarchyp <proto_hierarchyp/0::parents/1>`
+
+``parse/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xml <xml/0::parse/2>`
+
+``parse/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xml <xml/0::parse/3>`
+
+``parse_domain/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pddl <pddl/0::parse_domain/2>`
+
+``parse_domain/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pddl <pddl/0::parse_domain/3>`
+
+``parse_problem/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pddl <pddl/0::parse_problem/2>`
+
+``parse_problem/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pddl <pddl/0::parse_problem/3>`
+
+``partial_map/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rbtree <rbtree/0::partial_map/4>`
+
+``partition/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`either <either/0::partition/3>`
+
+``partition/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::partition/4>`
+
+``partition/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::partition/5>`
+
+``partition/6``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::partition/6>`
+
+``permutation/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::permutation/2>`
+* :ref:`randomp <randomp/0::permutation/2>`
+* :ref:`varlistp <varlistp/0::permutation/2>`
+
+``pid/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::pid/1>`
+
+``plus/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer <integer/0::plus/3>`
+
+``port/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ports <ports/0::port/5>`
+
+``postorder/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`bintree <bintree/0::postorder/2>`
+
+``powerset/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::powerset/2>`
+
+``pp/1``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xml <xml/0::pp/1>`
+
+``predicate/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::predicate/2>`
+
+``predicate_info_pair_score_hook/4``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::predicate_info_pair_score_hook/4>`
+
+``predicate_info_score_hook/3``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::predicate_info_score_hook/3>`
+
+``predicate_mode_score_hook/3``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::predicate_mode_score_hook/3>`
+
+``predicate_mode_score_hook/5``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doc_metric <doc_metric/0::predicate_mode_score_hook/5>`
+
+``predicates/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::predicates/2>`
+
+``prefix/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::prefix/2>`
+* :ref:`varlistp <varlistp/0::prefix/2>`
+
+``prefix/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::prefix/3>`
+
+``preorder/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`bintree <bintree/0::preorder/2>`
+
+``previous/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::previous/4>`
+
+``print_flags/0``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::print_flags/0>`
+* :ref:`flags_validator <flags_validator/0::print_flags/0>`
+
+``print_flags/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::print_flags/1>`
+
+``print_message/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::print_message/3>`
+
+``print_message_token/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::print_message_token/4>`
+
+``print_message_tokens/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::print_message_tokens/3>`
+
+``product/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::product/2>`
+* :ref:`statisticsp <statisticsp/0::product/2>`
+
+``product/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::product/3>`
+
+``proper_prefix/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::proper_prefix/2>`
+
+``proper_prefix/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::proper_prefix/3>`
+
+``proper_suffix/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::proper_suffix/2>`
+
+``proper_suffix/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::proper_suffix/3>`
+
+``prove/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interpreterp <interpreterp/0::prove/2>`
+
+``prove/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interpreterp <interpreterp/0::prove/3>`
+
+``question_hook/6``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::question_hook/6>`
+
+``question_prompt_stream/4``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::question_prompt_stream/4>`
+
+``quick_check/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::quick_check/1>`
+
+``quick_check/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::quick_check/2>`
+
+``quick_check/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::quick_check/3>`
+
+``random/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::random/1>`
+
+``random/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::random/3>`
+
+``random_tree/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`benchmark_generators <benchmark_generators/0::random_tree/1>`
+
+``randomize/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`fast_random <fast_random/0::randomize/1>`
+* :ref:`random <random/0::randomize/1>`
+
+``randseq/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::randseq/4>`
+
+``randset/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::randset/4>`
+
+``range/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::range/2>`
+
+``rdirectory/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::rdirectory/1>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::rdirectory/1>`
+* :ref:`lgtdocp <lgtdocp/0::rdirectory/1>`
+* :ref:`wrapper <wrapper/0::rdirectory/1>`
+
+``rdirectory/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::rdirectory/2>`
+* :ref:`wrapper <wrapper/0::rdirectory/2>`
+
+``rdirectory_score/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::rdirectory_score/2>`
+
+``read_file/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`read_file <read_file/0::read_file/2>`
+
+``relative_standard_deviation/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::relative_standard_deviation/2>`
+
+``removeDependent/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subject <subject/0::removeDependent/1>`
+
+``rename_file/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::rename_file/2>`
+
+``replace_sub_atom/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`atom <atom/0::replace_sub_atom/4>`
+
+``rescale/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::rescale/3>`
+
+``reset/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counter <counter/0::reset/0>`
+* :ref:`debuggerp <debuggerp/0::reset/0>`
+* :ref:`ports <ports/0::reset/0>`
+
+``reset/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ports <ports/0::reset/1>`
+
+``reset_counter/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counters <counters/0::reset_counter/1>`
+
+``reset_counters/0``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counters <counters/0::reset_counters/0>`
+
+``reset_flags/0``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::reset_flags/0>`
+
+``reset_flags/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::reset_flags/1>`
+
+``reset_gensym/0``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gensym <gensym/0::reset_gensym/0>`
+
+``reset_gensym/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gensym <gensym/0::reset_gensym/1>`
+
+``reset_monitor/0``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::reset_monitor/0>`
+
+``reset_seed/0``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`fast_random <fast_random/0::reset_seed/0>`
+* :ref:`random <random/0::reset_seed/0>`
+
+``reverse/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::reverse/2>`
+* :ref:`varlistp <varlistp/0::reverse/2>`
+
+``rlibrary/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::rlibrary/1>`
+* :ref:`dead_code_scanner <dead_code_scanner/0::rlibrary/1>`
+* :ref:`diagram(Format) <diagram/1::rlibrary/1>`
+* :ref:`diagrams(Format) <diagrams/1::rlibrary/1>`
+* :ref:`lgtdocp <lgtdocp/0::rlibrary/1>`
+
+``rlibrary/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`diagram(Format) <diagram/1::rlibrary/2>`
+* :ref:`diagrams(Format) <diagrams/1::rlibrary/2>`
+* :ref:`lgtdocp <lgtdocp/0::rlibrary/2>`
+
+``rlibrary_score/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::rlibrary_score/2>`
+
+``rule/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`databasep <databasep/0::rule/2>`
+
+``rule/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`databasep <databasep/0::rule/3>`
+
+``rule/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`databasep <databasep/0::rule/4>`
+
+``run/0``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::run/0>`
+
+``run/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::run/1>`
+
+``run/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::run/2>`
+
+``run_test_sets/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::run_test_sets/1>`
+
+``same_length/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::same_length/2>`
+* :ref:`varlistp <varlistp/0::same_length/2>`
+
+``same_length/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::same_length/3>`
+
+``save/0``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`wrapper <wrapper/0::save/0>`
+
+``save/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`wrapper <wrapper/0::save/1>`
+
+``scalar_product/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::scalar_product/3>`
+
+``scan_left/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::scan_left/4>`
+
+``scan_left_1/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::scan_left_1/3>`
+
+``scan_right/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::scan_right/4>`
+
+``scan_right_1/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`metap <metap/0::scan_right_1/3>`
+
+``select/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::select/3>`
+* :ref:`randomp <randomp/0::select/3>`
+* :ref:`setp <setp/0::select/3>`
+* :ref:`varlistp <varlistp/0::select/3>`
+
+``select/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::select/4>`
+
+``selectchk/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::selectchk/3>`
+* :ref:`setp <setp/0::selectchk/3>`
+
+``selectchk/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::selectchk/4>`
+
+``send/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::send/3>`
+
+``sequence/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer <integer/0::sequence/3>`
+
+``sequence/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::sequence/4>`
+
+``serve/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::serve/3>`
+
+``set/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counter <counter/0::set/1>`
+
+``set/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::set/4>`
+
+``set_field/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_access_protocol <java_access_protocol/0::set_field/2>`
+
+``set_flag_value/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::set_flag_value/2>`
+
+``set_flag_value/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags <flags/0::set_flag_value/3>`
+
+``set_monitor/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`event_registryp <event_registryp/0::set_monitor/4>`
+
+``set_option/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::set_option/2>`
+
+``set_seed/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`randomp <randomp/0::set_seed/1>`
+
+``set_spy_point/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::set_spy_point/4>`
+
+``shell/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::shell/1>`
+
+``shell/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::shell/2>`
+
+``shell_command/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doclet <doclet/0::shell_command/1>`
+
+``shrink/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`arbitrary <arbitrary/0::shrink/3>`
+
+``singletons/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::singletons/2>`
+
+``size/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::size/2>`
+* :ref:`heapp <heapp/0::size/2>`
+
+``skewness/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::skewness/2>`
+
+``sleep/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::sleep/1>`
+
+``sort/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::sort/2>`
+
+``sort/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::sort/3>`
+
+``sort/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::sort/4>`
+
+``source_file_extension/1``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`modules_diagram_support <modules_diagram_support/0::source_file_extension/1>`
+
+``split/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`atom <atom/0::split/3>`
+
+``split/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::split/4>`
+
+``spy/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::spy/1>`
+
+``spy/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::spy/4>`
+
+``spy_point/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::spy_point/4>`
+
+``spying/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::spying/1>`
+
+``spying/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::spying/4>`
+
+``standard_deviation/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::standard_deviation/2>`
+
+``started_by/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::started_by/2>`
+
+``starts/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::starts/2>`
+
+``subclass/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::subclass/1>`
+
+``subclasses/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::subclasses/1>`
+
+``sublist/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::sublist/2>`
+* :ref:`varlistp <varlistp/0::sublist/2>`
+
+``subsequence/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::subsequence/3>`
+
+``subsequence/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::subsequence/4>`
+
+``subset/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::subset/2>`
+
+``substitute/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::substitute/4>`
+
+``subsumes/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::subsumes/2>`
+
+``subterm/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::subterm/2>`
+* :ref:`xml <xml/0::subterm/2>`
+
+``subtract/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::subtract/3>`
+* :ref:`setp <setp/0::subtract/3>`
+* :ref:`varlistp <varlistp/0::subtract/3>`
+
+``succ/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer <integer/0::succ/2>`
+
+``suffix/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::suffix/2>`
+* :ref:`varlistp <varlistp/0::suffix/2>`
+
+``suffix/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::suffix/3>`
+
+``sum/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`numberlistp <numberlistp/0::sum/2>`
+* :ref:`statisticsp <statisticsp/0::sum/2>`
+
+``superclass/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::superclass/1>`
+
+``superclasses/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`class_hierarchyp <class_hierarchyp/0::superclasses/1>`
+
+``suspend_monitor/0``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`monitorp <monitorp/0::suspend_monitor/0>`
+
+``symdiff/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::symdiff/3>`
+
+``take/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`listp <listp/0::take/3>`
+
+``term_expansion/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expanding <expanding/0::term_expansion/2>`
+
+``terms_to_array/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::terms_to_array/2>`
+
+``time_stamp/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::time_stamp/1>`
+
+``today/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::today/3>`
+
+``tolerance_equal/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::tolerance_equal/4>`
+* :ref:`number <number/0::tolerance_equal/4>`
+
+``top/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`heapp <heapp/0::top/3>`
+
+``top_next/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`heapp <heapp/0::top_next/5>`
+
+``trace/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::trace/0>`
+
+``trace_event/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::trace_event/2>`
+
+``transpose/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairs <pairs/0::transpose/2>`
+
+``true/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::true/1>`
+
+``type/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`type <type/0::type/1>`
+
+``unexpected/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Reference) <expected/1::unexpected/1>`
+
+``unexpecteds/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`either <either/0::unexpecteds/2>`
+
+``union/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::union/3>`
+
+``union/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`setp <setp/0::union/4>`
+
+``update/0``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`doclet <doclet/0::update/0>`
+
+``update/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`observer <observer/0::update/1>`
+
+``update/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::update/4>`
+
+``update/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dictionaryp <dictionaryp/0::update/5>`
+
+``valid/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`intervalp <intervalp/0::valid/1>`
+* :ref:`statisticsp <statisticsp/0::valid/1>`
+* :ref:`termp <termp/0::valid/1>`
+* :ref:`varlistp <varlistp/0::valid/1>`
+
+``valid/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`type <type/0::valid/2>`
+
+``valid/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::valid/3>`
+* :ref:`timep <timep/0::valid/3>`
+
+``valid_date/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::valid_date/3>`
+
+``validate/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`flags_validator <flags_validator/0::validate/1>`
+
+``value/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`counter <counter/0::value/1>`
+
+``value_reference/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::value_reference/2>`
+
+``values/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairs <pairs/0::values/2>`
+
+``variables/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`termp <termp/0::variables/2>`
+
+``variance/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::variance/2>`
+
+``variant/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtunit <lgtunit/0::variant/2>`
+* :ref:`termp <termp/0::variant/2>`
+
+``void/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`java_utils_protocol <java_utils_protocol/0::void/1>`
+
+``wall_time/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::wall_time/1>`
+
+``whiledo/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`loopp <loopp/0::whiledo/2>`
+
+``working_directory/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`osp <osp/0::working_directory/1>`
+
+``z_normalization/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::z_normalization/2>`
+

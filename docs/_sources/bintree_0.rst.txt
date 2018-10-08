@@ -1,0 +1,103 @@
+.. index:: bintree
+.. _bintree/0:
+
+**object**
+
+``bintree``
+===========
+
+Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.
+
+* author: Paulo Moura and Paul Fodor
+* version: 2.3
+* date: 2018/3/18
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`dictionaryp <dictionaryp/0>`
+* extends:
+
+  * ``public`` :ref:`compound <compound/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="preorder/2"> </div>
+
+.. index:: preorder/2
+.. _bintree/0::preorder/2:
+
+``preorder/2``
+^^^^^^^^^^^^^^
+
+Preorder tree traversal.
+
+* compilation flags: ``static``
+* template: ``preorder(Tree,List)``
+
+* mode - number of proofs:
+
+  * ``preorder(@tree,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="inorder/2"> </div>
+
+.. index:: inorder/2
+.. _bintree/0::inorder/2:
+
+``inorder/2``
+^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``inorder(@tree,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="postorder/2"> </div>
+
+.. index:: postorder/2
+.. _bintree/0::postorder/2:
+
+``postorder/2``
+^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``postorder(@tree,-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`rbtree <rbtree/0>`
+
+

@@ -1,0 +1,424 @@
+.. index:: diagrams(Format)
+.. _diagrams/1:
+
+**object**
+
+``diagrams(Format)``
+====================
+
+Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.
+
+* author: Paulo Moura
+* version: 2.3
+* date: 2016/5/7
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="libraries/3"> </div>
+
+.. index:: libraries/3
+.. _diagrams/1::libraries/3:
+
+``libraries/3``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a set of libraries using the specified options. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``libraries(Project,Libraries,Options)``
+
+* mode - number of proofs:
+
+  * ``libraries(+atom,+list(atom),+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="libraries/2"> </div>
+
+.. index:: libraries/2
+.. _diagrams/1::libraries/2:
+
+``libraries/2``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a set of libraries using the default options. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``libraries(Project,Libraries)``
+
+* mode - number of proofs:
+
+  * ``libraries(+atom,+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="libraries/1"> </div>
+
+.. index:: libraries/1
+.. _diagrams/1::libraries/1:
+
+``libraries/1``
+^^^^^^^^^^^^^^^
+
+Creates  all supported diagrams for a set of libraries using the default options. The prefix "libraries" is used for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``libraries(Libraries)``
+
+* mode - number of proofs:
+
+  * ``libraries(+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all_libraries/1"> </div>
+
+.. index:: all_libraries/1
+.. _diagrams/1::all_libraries/1:
+
+``all_libraries/1``
+^^^^^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for all loaded libraries using the specified options.
+
+* compilation flags: ``static``
+* template: ``all_libraries(Options)``
+
+* mode - number of proofs:
+
+  * ``all_libraries(+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all_libraries/0"> </div>
+
+.. index:: all_libraries/0
+.. _diagrams/1::all_libraries/0:
+
+``all_libraries/0``
+^^^^^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for all loaded libraries using default options.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``all_libraries`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rlibrary/2"> </div>
+
+.. index:: rlibrary/2
+.. _diagrams/1::rlibrary/2:
+
+``rlibrary/2``
+^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a library and its sub-libraries using the specified options.
+
+* compilation flags: ``static``
+* template: ``rlibrary(Library,Options)``
+
+* mode - number of proofs:
+
+  * ``rlibrary(+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rlibrary/1"> </div>
+
+.. index:: rlibrary/1
+.. _diagrams/1::rlibrary/1:
+
+``rlibrary/1``
+^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a library and its sub-libraries using default options.
+
+* compilation flags: ``static``
+* template: ``rlibrary(Library)``
+
+* mode - number of proofs:
+
+  * ``rlibrary(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="library/2"> </div>
+
+.. index:: library/2
+.. _diagrams/1::library/2:
+
+``library/2``
+^^^^^^^^^^^^^
+
+Creates all supported diagrams for a library using the specified options.
+
+* compilation flags: ``static``
+* template: ``library(Library,Options)``
+
+* mode - number of proofs:
+
+  * ``library(+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="library/1"> </div>
+
+.. index:: library/1
+.. _diagrams/1::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Creates all supported diagrams for a library using default options.
+
+* compilation flags: ``static``
+* template: ``library(Library)``
+
+* mode - number of proofs:
+
+  * ``library(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directories/3"> </div>
+
+.. index:: directories/3
+.. _diagrams/1::directories/3:
+
+``directories/3``
+^^^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a set of directories using the specified options. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``directories(Project,Directories,Options)``
+
+* mode - number of proofs:
+
+  * ``directories(+atom,+list(atom),+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directories/2"> </div>
+
+.. index:: directories/2
+.. _diagrams/1::directories/2:
+
+``directories/2``
+^^^^^^^^^^^^^^^^^
+
+Creates a diagram for a directory using default options. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``directories(Project,Directories)``
+
+* mode - number of proofs:
+
+  * ``directories(+atom,+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory/3"> </div>
+
+.. index:: directory/3
+.. _diagrams/1::directory/3:
+
+``directory/3``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a directory using the specified options. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``directory(Project,Directory,Options)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _diagrams/1::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a directory using default options. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``directory(Project,Directory)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _diagrams/1::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for a directory using default options. The name of the directory is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="files/3"> </div>
+
+.. index:: files/3
+.. _diagrams/1::files/3:
+
+``files/3``
+^^^^^^^^^^^
+
+Creates all supported diagrams for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``files(Project,Files,Options)``
+
+* mode - number of proofs:
+
+  * ``files(+atom,+list(atom),+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="files/2"> </div>
+
+.. index:: files/2
+.. _diagrams/1::files/2:
+
+``files/2``
+^^^^^^^^^^^
+
+Creates all supported diagrams for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The Project argument is used as a prefix for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``files(Project,Files)``
+
+* mode - number of proofs:
+
+  * ``files(+atom,+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="files/1"> </div>
+
+.. index:: files/1
+.. _diagrams/1::files/1:
+
+``files/1``
+^^^^^^^^^^^
+
+Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation. The prefix "files" is used for the diagram file names.
+
+* compilation flags: ``static``
+* template: ``files(Files)``
+
+* mode - number of proofs:
+
+  * ``files(+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all_files/1"> </div>
+
+.. index:: all_files/1
+.. _diagrams/1::all_files/1:
+
+``all_files/1``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for all loaded files using the specified options.
+
+* compilation flags: ``static``
+* template: ``all_files(Options)``
+
+* mode - number of proofs:
+
+  * ``all_files(+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all_files/0"> </div>
+
+.. index:: all_files/0
+.. _diagrams/1::all_files/0:
+
+``all_files/0``
+^^^^^^^^^^^^^^^
+
+Creates all supported diagrams for all loaded files using default options.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``all_files`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Common options**: title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.
+
+* **Limitations**: Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.
+
+See also
+--------
+
+(none)
+

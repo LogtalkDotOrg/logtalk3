@@ -1,0 +1,88 @@
+.. index:: expanding
+.. _expanding/0:
+
+**protocol**
+
+``expanding``
+=============
+
+Term and goal expansion protocol.
+
+* author: Paulo Moura
+* version: 1.1
+* date: 2016/7/12
+* compilation flags: ``static, built_in``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="goal_expansion/2"> </div>
+
+.. index:: goal_expansion/2
+.. _expanding/0::goal_expansion/2:
+
+``goal_expansion/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (except for goals wrapped using the {}/1 compiler bypass control construct).
+
+* compilation flags: ``static``
+* template: ``goal_expansion(Goal,ExpandedGoal)``
+
+* mode - number of proofs:
+
+  * ``goal_expansion(+callable,-callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="term_expansion/2"> </div>
+
+.. index:: term_expansion/2
+.. _expanding/0::term_expansion/2:
+
+``term_expansion/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Defines a term expansion. Called until it succeeds on all terms read while compiling a source file (except for terms skipped by using the conditional compilation directives or wrapped using the {}/1 compiler bypass control construct).
+
+* compilation flags: ``static``
+* template: ``term_expansion(Term,ExpandedTerms)``
+
+* mode - number of proofs:
+
+  * ``term_expansion(+term,-term)`` - ``zero_or_one``
+
+  * ``term_expansion(+term,-list(term))`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

@@ -1,0 +1,303 @@
+.. index:: optional(Reference)
+.. _optional/1:
+
+**object**
+
+``optional(Reference)``
+=======================
+
+Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.
+
+* author: Paulo Moura
+* version: 1.4
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="is_empty/0"> </div>
+
+.. index:: is_empty/0
+.. _optional/1::is_empty/0:
+
+``is_empty/0``
+^^^^^^^^^^^^^^
+
+True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``is_empty`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="is_present/0"> </div>
+
+.. index:: is_present/0
+.. _optional/1::is_present/0:
+
+``is_present/0``
+^^^^^^^^^^^^^^^^
+
+True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``is_present`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="if_empty/1"> </div>
+
+.. index:: if_empty/1
+.. _optional/1::if_empty/1:
+
+``if_empty/1``
+^^^^^^^^^^^^^^
+
+Calls a goal if the optional reference is empty. Succeeds otherwise.
+
+* compilation flags: ``static``
+* template: ``if_empty(Goal)``
+
+* meta-predicate template: ``if_empty(0)``
+
+* mode - number of proofs:
+
+  * ``if_empty(+callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="if_present/1"> </div>
+
+.. index:: if_present/1
+.. _optional/1::if_present/1:
+
+``if_present/1``
+^^^^^^^^^^^^^^^^
+
+Applies a closure with the optional reference value as additional argument if not empty. Succeeds otherwise.
+
+* compilation flags: ``static``
+* template: ``if_present(Closure)``
+
+* meta-predicate template: ``if_present(1)``
+
+* mode - number of proofs:
+
+  * ``if_present(+callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="filter/2"> </div>
+
+.. index:: filter/2
+.. _optional/1::filter/2:
+
+``filter/2``
+^^^^^^^^^^^^
+
+Returns the optional reference when it is non-empty and its value satisfies a closure. Otherwise returns an empty optional.
+
+* compilation flags: ``static``
+* template: ``filter(Closure,Reference)``
+
+* meta-predicate template: ``filter(1,*)``
+
+* mode - number of proofs:
+
+  * ``filter(+callable,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="map/2"> </div>
+
+.. index:: map/2
+.. _optional/1::map/2:
+
+``map/2``
+^^^^^^^^^
+
+When the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.
+
+* compilation flags: ``static``
+* template: ``map(Closure,NewReference)``
+
+* meta-predicate template: ``map(2,*)``
+
+* mode - number of proofs:
+
+  * ``map(+callable,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="flat_map/2"> </div>
+
+.. index:: flat_map/2
+.. _optional/1::flat_map/2:
+
+``flat_map/2``
+^^^^^^^^^^^^^^
+
+When the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.
+
+* compilation flags: ``static``
+* template: ``flat_map(Closure,NewReference)``
+
+* meta-predicate template: ``flat_map(2,*)``
+
+* mode - number of proofs:
+
+  * ``flat_map(+callable,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="get/1"> </div>
+
+.. index:: get/1
+.. _optional/1::get/1:
+
+``get/1``
+^^^^^^^^^
+
+Returns the optional reference term if not empty. Throws an error otherwise.
+
+* compilation flags: ``static``
+* template: ``get(Term)``
+
+* mode - number of proofs:
+
+  * ``get(--term)`` - ``one``
+
+* exceptions:
+  * Optional is empty: ``existence_error(optional_term,Reference)``
+
+
+.. raw:: html
+
+   <div id="or_else/2"> </div>
+
+.. index:: or_else/2
+.. _optional/1::or_else/2:
+
+``or_else/2``
+^^^^^^^^^^^^^
+
+Returns the optional reference term if not empty or the given default term if the optional is empty.
+
+* compilation flags: ``static``
+* template: ``or_else(Term,Default)``
+
+* mode - number of proofs:
+
+  * ``or_else(--term,@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="or_else_get/2"> </div>
+
+.. index:: or_else_get/2
+.. _optional/1::or_else_get/2:
+
+``or_else_get/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.
+
+* compilation flags: ``static``
+* template: ``or_else_get(Term,Closure)``
+
+* meta-predicate template: ``or_else_get(*,1)``
+
+* mode - number of proofs:
+
+  * ``or_else_get(--term,+callable)`` - ``one``
+
+* exceptions:
+  * Optional is empty and a term cannot be computed: ``existence_error(optional_term,Reference)``
+
+
+.. raw:: html
+
+   <div id="or_else_call/2"> </div>
+
+.. index:: or_else_call/2
+.. _optional/1::or_else_call/2:
+
+``or_else_call/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Can be used e.g. to generate an exception for empty optionals.
+
+* compilation flags: ``static``
+* template: ``or_else_call(Term,Goal)``
+
+* meta-predicate template: ``or_else_call(*,0)``
+
+* mode - number of proofs:
+
+  * ``or_else_call(--term,+callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="or_else_fail/1"> </div>
+
+.. index:: or_else_fail/1
+.. _optional/1::or_else_fail/1:
+
+``or_else_fail/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the optional reference term if not empty. Fails otherwise. Usually called to skip over empty optionals.
+
+* compilation flags: ``static``
+* template: ``or_else_fail(Term)``
+
+* mode - number of proofs:
+
+  * ``or_else_fail(--term)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`optional <optional/0>`
+
+

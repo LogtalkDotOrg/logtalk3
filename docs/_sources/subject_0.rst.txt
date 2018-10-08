@@ -1,0 +1,163 @@
+.. index:: subject
+.. _subject/0:
+
+**category**
+
+``subject``
+===========
+
+Smalltalk dependent handling predicates.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2003/2/9
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="changed/0"> </div>
+
+.. index:: changed/0
+.. _subject/0::changed/0:
+
+``changed/0``
+^^^^^^^^^^^^^
+
+Receiver changed in some way. Notify all dependents.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``changed`` - ``one``
+
+
+.. raw:: html
+
+   <div id="changed/1"> </div>
+
+.. index:: changed/1
+.. _subject/0::changed/1:
+
+``changed/1``
+^^^^^^^^^^^^^
+
+Receiver changed as specified in the argument. Notify all dependents.
+
+* compilation flags: ``static``
+* template: ``changed(Change)``
+
+* mode - number of proofs:
+
+  * ``changed(?nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="dependents/1"> </div>
+
+.. index:: dependents/1
+.. _subject/0::dependents/1:
+
+``dependents/1``
+^^^^^^^^^^^^^^^^
+
+Returns a list of all dependent objects.
+
+* compilation flags: ``static``
+* template: ``dependents(Dependents)``
+
+* mode - number of proofs:
+
+  * ``dependents(-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="addDependent/1"> </div>
+
+.. index:: addDependent/1
+.. _subject/0::addDependent/1:
+
+``addDependent/1``
+^^^^^^^^^^^^^^^^^^
+
+Adds a new dependent object.
+
+* compilation flags: ``static``
+* template: ``addDependent(Dependent)``
+
+* mode - number of proofs:
+
+  * ``addDependent(@object)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="removeDependent/1"> </div>
+
+.. index:: removeDependent/1
+.. _subject/0::removeDependent/1:
+
+``removeDependent/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Removes a dependent object.
+
+* compilation flags: ``static``
+* template: ``removeDependent(Dependent)``
+
+* mode - number of proofs:
+
+  * ``removeDependent(?object)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="dependent_/1"> </div>
+
+.. index:: dependent_/1
+.. _subject/0::dependent_/1:
+
+``dependent_/1``
+^^^^^^^^^^^^^^^^
+
+Table of dependent objects.
+
+* compilation flags: ``dynamic``
+* template: ``dependent_(Dependent)``
+
+* mode - number of proofs:
+
+  * ``dependent_(?object)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`observer <observer/0>`
+
+

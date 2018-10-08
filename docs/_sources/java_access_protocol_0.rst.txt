@@ -1,0 +1,166 @@
+.. index:: java_access_protocol
+.. _java_access_protocol/0:
+
+**protocol**
+
+``java_access_protocol``
+========================
+
+Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.
+
+* author: Paulo Moura and Sergio Castro
+* version: 1.1
+* date: 2018/5/23
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="get_field/2"> </div>
+
+.. index:: get_field/2
+.. _java_access_protocol/0::get_field/2:
+
+``get_field/2``
+^^^^^^^^^^^^^^^
+
+Gets the value of a class or object field.
+
+* compilation flags: ``static``
+* template: ``get_field(Field,Value)``
+
+* mode - number of proofs:
+
+  * ``get_field(+atom,?nonvar)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="set_field/2"> </div>
+
+.. index:: set_field/2
+.. _java_access_protocol/0::set_field/2:
+
+``set_field/2``
+^^^^^^^^^^^^^^^
+
+Sets the value of a class or object field.
+
+* compilation flags: ``static``
+* template: ``set_field(Field,Value)``
+
+* mode - number of proofs:
+
+  * ``set_field(+atom,+nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="new/2"> </div>
+
+.. index:: new/2
+.. _java_access_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates a new instance using the specified parameter values.
+
+* compilation flags: ``static``
+* template: ``new(Parameters,Instance)``
+
+* mode - number of proofs:
+
+  * ``new(+list(nonvar),-reference)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="new/1"> </div>
+
+.. index:: new/1
+.. _java_access_protocol/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Creates a new instance using default parameter values.
+
+* compilation flags: ``static``
+* template: ``new(Instance)``
+
+* mode - number of proofs:
+
+  * ``new(-reference)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="invoke/1"> </div>
+
+.. index:: invoke/1
+.. _java_access_protocol/0::invoke/1:
+
+``invoke/1``
+^^^^^^^^^^^^
+
+Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
+
+* compilation flags: ``static``
+* template: ``invoke(Method)``
+
+* mode - number of proofs:
+
+  * ``invoke(@nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="invoke/2"> </div>
+
+.. index:: invoke/2
+.. _java_access_protocol/0::invoke/2:
+
+``invoke/2``
+^^^^^^^^^^^^
+
+Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
+
+* compilation flags: ``static``
+* template: ``invoke(Functor,Arguments)``
+
+* mode - number of proofs:
+
+  * ``invoke(@nonvar,@list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

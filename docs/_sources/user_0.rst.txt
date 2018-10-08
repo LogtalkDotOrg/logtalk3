@@ -1,0 +1,50 @@
+.. index:: user
+.. _user/0:
+
+**object**
+
+``user``
+========
+
+Pseudo-object "user" representing the plain Prolog database.
+
+* author: Paulo Moura
+* version: 1.3
+* date: 2018/5/24
+* compilation flags: ``static, built_in, context_switching_calls, dynamic_declarations, threaded``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+  * ``public`` :ref:`forwarding <forwarding/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

@@ -1,305 +1,481 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>type</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">object</p>
-      <h1 class="code">type</h1>
-      <blockquote>
-        <p class="comment">Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>type &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="varlist" href="varlist_0.html" />
+    <link rel="prev" title="timep" href="timep_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="randomp_0.html">randomp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">type</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">type</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/type_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="type-0"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="type">
+<h1><code class="docutils literal notranslate"><span class="pre">type</span></code><a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h1>
+<p>Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 1.18</li>
+<li>date: 2018/8/28</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls,</span> <span class="pre">complements(restrict)</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="type/1"> </div><div class="section" id="type-1">
+<span id="type-0-type-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">type/1</span></code><a class="headerlink" href="#type-1" title="Permalink to this headline">¶</a></h3>
+<p>Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">type(Type)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">type(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="meta_type/3"> </div></div>
+<div class="section" id="meta-type-3">
+<span id="type-0-meta-type-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code><a class="headerlink" href="#meta-type-3" title="Permalink to this headline">¶</a></h3>
+<p>Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">meta_type(MetaType,SubTypes,Values)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">meta_type(?callable,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="valid/2"> </div></div>
+<div class="section" id="valid-2">
+<span id="type-0-valid-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/2</span></code><a class="headerlink" href="#valid-2" title="Permalink to this headline">¶</a></h3>
+<p>True if the given term is of the specified type. Fails otherwise.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">valid(Type,Term)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">valid(&#64;callable,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="check/3"> </div></div>
+<div class="section" id="check-3">
+<span id="type-0-check-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">check/3</span></code><a class="headerlink" href="#check-3" title="Permalink to this headline">¶</a></h3>
+<p>True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">check(Type,Term,Context)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">check(&#64;callable,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="check/2"> </div></div>
+<div class="section" id="check-2">
+<span id="type-0-check-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">check/2</span></code><a class="headerlink" href="#check-2" title="Permalink to this headline">¶</a></h3>
+<p>True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">check(Type,Term)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">check(&#64;callable,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></li>
+</ul>
+</li>
+<li>exceptions:
+* Term is not bound as required: <code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code><ul>
+<li>Term is bound but not of the specified type: <code class="docutils literal notranslate"><span class="pre">type_error(Type,</span> <span class="pre">Term)</span></code></li>
+<li>Term is the of the correct type but not in the specified domain: <code class="docutils literal notranslate"><span class="pre">domain_error(Domain,</span> <span class="pre">Term)</span></code></li>
+<li>Term is the of the correct type and domain but the resource it represents does not exist: <code class="docutils literal notranslate"><span class="pre">existence_error(Type,</span> <span class="pre">Term)</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Logtalk specific types</strong>: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</li>
+<li><strong>Prolog module related types (when the backend compiler supports modules)</strong>: {module, module_identifier, qualified_callable}</li>
+<li><strong>Base types from Prolog</strong>: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</li>
+<li><strong>Atom derived types</strong>: {non_empty_atom, boolean, character}</li>
+<li><strong>Number derived types</strong>: {positive_number, negative_number, non_positive_number, non_negative_number}</li>
+<li><strong>Float derived types</strong>: {positive_float, negative_float, non_positive_float, non_negative_float, probability}</li>
+<li><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}</li>
+<li><strong>List types (compound derived types)</strong>: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}</li>
+<li><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}</li>
+<li><strong>Stream types</strong>: {stream, stream_or_alias, stream(Property), stream_or_alias(Property)}</li>
+<li><strong>Other types</strong>: {between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}</li>
+<li><strong>predicate type notes</strong>: This type is used to check for an object public predicate specified as Object::Functor/Arity.</li>
+<li><strong>boolean type notes</strong>: The two value of this type are the atoms true and false.</li>
+<li><strong>Stream types notes</strong>: In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.</li>
+<li><strong>order type notes</strong>: The three possible values of this type are the single character atoms &lt;, =, and &gt;.</li>
+<li><strong>character_code type notes</strong>: This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</li>
+<li><strong>between(Type, Lower, Upper) type notes</strong>: The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</li>
+<li><strong>property(Type, Lambda) type notes</strong>: Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]&gt;&gt;Goal. The lambda expression is applied in the context of “user”. The term is type-checked before calling the goal.</li>
+<li><strong>one_of(Type, Set) type notes</strong>: For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.</li>
+<li><strong>var_or(Type) notes</strong>: Allows checking if a term is either a variable or a valid value of the given type.</li>
+<li><strong>ground(Type) notes</strong>: Allows checking if a term is ground and a valid value of the given type.</li>
+<li><strong>types(Types) notes</strong>: Allows checking if a term is a valid value for one of the types in a list of types.</li>
+<li><strong>type notes</strong>: Allows checking if a term is a valid type.</li>
+<li><strong>qualified_callable notes</strong>: Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.</li>
+<li><strong>Caveats</strong>: The type argument to the predicates is never itself type-checked for performance reasons.</li>
+<li><strong>Design choices</strong>: The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</li>
+<li><strong>Error context</strong>: The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.</li>
+<li><strong>Registering new types</strong>: New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</li>
+<li><strong>Meta-types</strong>: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="arbitrary_0.html#arbitrary-0"><span class="std std-ref">arbitrary</span></a></li>
+<li><a class="reference internal" href="os_types_0.html#os-types-0"><span class="std std-ref">os_types</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="varlist_0.html" class="btn btn-neutral float-right" title="varlist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="timep_0.html" class="btn btn-neutral" title="timep" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>1.18</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2018/8/28</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static, context_switching_calls, complements(restrict)</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="type/1" class="code">type/1</h3>
-          <blockquote>
-            <p class="comment">Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>type(Type)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>type(?callable) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="meta_type/3" class="code">meta_type/3</h3>
-          <blockquote>
-            <p class="comment">Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>meta_type(MetaType,SubTypes,Values)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>meta_type(?callable,-list,-list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="valid/2" class="code">valid/2</h3>
-          <blockquote>
-            <p class="comment">True if the given term is of the specified type. Fails otherwise.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>valid(Type,Term)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>valid(@callable,@term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="check/3" class="code">check/3</h3>
-          <blockquote>
-            <p class="comment">True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>check(Type,Term,Context)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>check(@callable,@term,@term) &ndash; one_or_error</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="check/2" class="code">check/2</h3>
-          <blockquote>
-            <p class="comment">True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static, multifile</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>check(Type,Term)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>check(@callable,@term) &ndash; one_or_error</code>
-            </dd>
-            <dt class="key">exceptions:</dt>
-            <dd class="value">Term is not bound as required: <code>instantiation_error</code></dd>
-            <dd class="value">Term is bound but not of the specified type: <code>type_error(Type, Term)</code></dd>
-            <dd class="value">Term is the of the correct type but not in the specified domain: <code>domain_error(Domain, Term)</code></dd>
-            <dd class="value">Term is the of the correct type and domain but the resource it represents does not exist: <code>existence_error(Type, Term)</code></dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <dl class="remarks">
-          <dt class="comment">Logtalk specific types</dt>
-          <dd class="text">{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Prolog module related types (when the backend compiler supports modules)</dt>
-          <dd class="text">{module, module_identifier, qualified_callable}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Base types from Prolog</dt>
-          <dd class="text">{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Atom derived types</dt>
-          <dd class="text">{non_empty_atom, boolean, character}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Number derived types</dt>
-          <dd class="text">{positive_number, negative_number, non_positive_number, non_negative_number}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Float derived types</dt>
-          <dd class="text">{positive_float, negative_float, non_positive_float, non_negative_float, probability}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Integer derived types</dt>
-          <dd class="text">{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">List types (compound derived types)</dt>
-          <dd class="text">{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Other compound derived types</dt>
-          <dd class="text">{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Stream types</dt>
-          <dd class="text">{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Other types</dt>
-          <dd class="text">{between(Type,Lower,Upper), property(Type, LambdaExpression), one_of(Type, Set), var_or(Type), ground(Type), types(Types), type}</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">predicate type notes</dt>
-          <dd class="text">This type is used to check for an object public predicate specified as Object::Functor/Arity.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">boolean type notes</dt>
-          <dd class="text">The two value of this type are the atoms true and false.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Stream types notes</dt>
-          <dd class="text">In the case of the stream(Property) and stream_or_alias(Property) types, Property must be a valid stream property.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">order type notes</dt>
-          <dd class="text">The three possible values of this type are the single character atoms &lt;, =, and &gt;.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">character_code type notes</dt>
-          <dd class="text">This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">between(Type, Lower, Upper) type notes</dt>
-          <dd class="text">The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">property(Type, Lambda) type notes</dt>
-          <dd class="text">Verifies that Term satisfies a property described using a lambda expression of the form [Parameter]&gt;&gt;Goal. The lambda expression is applied in the context of "user". The term is type-checked before calling the goal.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">one_of(Type, Set) type notes</dt>
-          <dd class="text">For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">var_or(Type) notes</dt>
-          <dd class="text">Allows checking if a term is either a variable or a valid value of the given type.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">ground(Type) notes</dt>
-          <dd class="text">Allows checking if a term is ground and a valid value of the given type.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">types(Types) notes</dt>
-          <dd class="text">Allows checking if a term is a valid value for one of the types in a list of types.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">type notes</dt>
-          <dd class="text">Allows checking if a term is a valid type.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">qualified_callable notes</dt>
-          <dd class="text">Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Caveats</dt>
-          <dd class="text">The type argument to the predicates is never itself type-checked for performance reasons.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Design choices</dt>
-          <dd class="text">The main predicates are valid/2 and check/3. These are defined using the predicate check/2. Defining clauses for check/2 instead of valid/2 gives the user full control of exception terms without requiring an additional predicate.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Error context</dt>
-          <dd class="text">The built-in execution-context method context/1 can be used to provide the calling context for errors when using the predicate check/3.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Registering new types</dt>
-          <dd class="text">New types can be registered by defining clauses for the type/1 and check/2 multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Meta-types</dt>
-          <dd class="text">Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <ul>
-          <li class="code">
-            <a href="arbitrary_0.html">arbitrary</a>
-          </li>
-          <li class="code">
-            <a href="os_types_0.html">os_types</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

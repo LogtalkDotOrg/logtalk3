@@ -1,0 +1,105 @@
+.. index:: random
+.. _random/0:
+
+**object**
+
+``random``
+==========
+
+Portable random number generator predicates. Core predicates originally written by Richard O'Keefe. Based on algorithm AS 183 from Applied Statistics.
+
+* author: Paulo Moura
+* version: 2.5
+* date: 2018/8/14
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`randomp <randomp/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="reset_seed/0"> </div>
+
+.. index:: reset_seed/0
+.. _random/0::reset_seed/0:
+
+``reset_seed/0``
+^^^^^^^^^^^^^^^^
+
+Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.
+
+* compilation flags: ``static, synchronized``
+* mode - number of proofs:
+
+  * ``reset_seed`` - ``one``
+
+
+.. raw:: html
+
+   <div id="randomize/1"> </div>
+
+.. index:: randomize/1
+.. _random/0::randomize/1:
+
+``randomize/1``
+^^^^^^^^^^^^^^^
+
+Randomizes the random generator using a positive integer to compute a new seed.
+
+* compilation flags: ``static, synchronized``
+* template: ``randomize(Seed)``
+
+* mode - number of proofs:
+
+  * ``randomize(+positive_integer)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="seed_/3"> </div>
+
+.. index:: seed_/3
+.. _random/0::seed_/3:
+
+``seed_/3``
+^^^^^^^^^^^
+
+Stores the current random generator seed values.
+
+* compilation flags: ``dynamic``
+* template: ``seed_(S0,S1,S2)``
+
+* mode - number of proofs:
+
+  * ``seed_(-integer,-integer,-integer)`` - ``one``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Multiple random number generators**: To define multiple random number generators, simply extend this object. The derived objects must send to self the reset_seed/0 message.
+
+See also
+--------
+
+* :ref:`fast_random <fast_random/0>`
+* :ref:`backend_random <backend_random/0>`
+
+

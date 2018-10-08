@@ -1,0 +1,124 @@
+.. index:: xref_diagram(Format)
+.. _xref_diagram/1:
+
+**object**
+
+``xref_diagram(Format)``
+========================
+
+Predicates for generating predicate call cross-referencing diagrams.
+
+* author: Paulo Moura
+* version: 2.19
+* date: 2018/2/4
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`entity_diagram(Format) <entity_diagram/1>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="entity/2"> </div>
+
+.. index:: entity/2
+.. _xref_diagram/1::entity/2:
+
+``entity/2``
+^^^^^^^^^^^^
+
+Creates a diagram for a single entity using the specified options.
+
+* compilation flags: ``static``
+* template: ``entity(Entity,Options)``
+
+* mode - number of proofs:
+
+  * ``entity(+entity_identifier,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="entity/1"> </div>
+
+.. index:: entity/1
+.. _xref_diagram/1::entity/1:
+
+``entity/1``
+^^^^^^^^^^^^
+
+Creates a diagram for a single entity using default options.
+
+* compilation flags: ``static``
+* template: ``entity(Entity)``
+
+* mode - number of proofs:
+
+  * ``entity(+entity_identifier)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="included_predicate_/1"> </div>
+
+.. index:: included_predicate_/1
+.. _xref_diagram/1::included_predicate_/1:
+
+``included_predicate_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_predicate_/1"> </div>
+
+.. index:: referenced_predicate_/1
+.. _xref_diagram/1::referenced_predicate_/1:
+
+``referenced_predicate_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="external_predicate_/1"> </div>
+
+.. index:: external_predicate_/1
+.. _xref_diagram/1::external_predicate_/1:
+
+``external_predicate_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`entity_diagram(Format) <entity_diagram/1>`
+* :ref:`inheritance_diagram(Format) <inheritance_diagram/1>`
+* :ref:`uses_diagram(Format) <uses_diagram/1>`
+
+

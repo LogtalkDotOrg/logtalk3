@@ -1,0 +1,51 @@
+.. index:: file_dependency_diagram
+.. _file_dependency_diagram/0:
+
+**object**
+
+``file_dependency_diagram``
+===========================
+
+Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2014/1/14
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`file_dependency_diagram(dot) <file_dependency_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`file_load_diagram <file_load_diagram/0>`
+* :ref:`library_load_diagram <library_load_diagram/0>`
+
+

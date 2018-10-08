@@ -1,0 +1,304 @@
+.. index:: expected(Reference)
+.. _expected/1:
+
+**object**
+
+``expected(Reference)``
+=======================
+
+Expected term reference predicates. Requires passing an expected reference constructed using the "expected" object as a parameter.
+
+* author: Paulo Moura
+* version: 1.1
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="is_unexpected/0"> </div>
+
+.. index:: is_unexpected/0
+.. _expected/1::is_unexpected/0:
+
+``is_unexpected/0``
+^^^^^^^^^^^^^^^^^^^
+
+True if the expected reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``is_unexpected`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="is_expected/0"> </div>
+
+.. index:: is_expected/0
+.. _expected/1::is_expected/0:
+
+``is_expected/0``
+^^^^^^^^^^^^^^^^^
+
+True if the expected reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``is_expected`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="if_unexpected/1"> </div>
+
+.. index:: if_unexpected/1
+.. _expected/1::if_unexpected/1:
+
+``if_unexpected/1``
+^^^^^^^^^^^^^^^^^^^
+
+Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.
+
+* compilation flags: ``static``
+* template: ``if_unexpected(Closure)``
+
+* meta-predicate template: ``if_unexpected(1)``
+
+* mode - number of proofs:
+
+  * ``if_unexpected(+callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="if_expected/1"> </div>
+
+.. index:: if_expected/1
+.. _expected/1::if_expected/1:
+
+``if_expected/1``
+^^^^^^^^^^^^^^^^^
+
+Applies a closure, with the expected reference term as additional argument, if it does not hold an unexpected term. Succeeds otherwise.
+
+* compilation flags: ``static``
+* template: ``if_expected(Closure)``
+
+* meta-predicate template: ``if_expected(1)``
+
+* mode - number of proofs:
+
+  * ``if_expected(+callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="unexpected/1"> </div>
+
+.. index:: unexpected/1
+.. _expected/1::unexpected/1:
+
+``unexpected/1``
+^^^^^^^^^^^^^^^^
+
+Returns the unexpected reference term if not an expected term. Throws an error otherwise.
+
+* compilation flags: ``static``
+* template: ``unexpected(Unexpected)``
+
+* mode - number of proofs:
+
+  * ``unexpected(--term)`` - ``one``
+
+* exceptions:
+  * Expected reference holds an expected term: ``existence_error(unexpected_term,Reference)``
+
+
+.. raw:: html
+
+   <div id="expected/1"> </div>
+
+.. index:: expected/1
+.. _expected/1::expected/1:
+
+``expected/1``
+^^^^^^^^^^^^^^
+
+Returns the expected reference term if not an unexpected term. Throws an error otherwise.
+
+* compilation flags: ``static``
+* template: ``expected(Expected)``
+
+* mode - number of proofs:
+
+  * ``expected(--term)`` - ``one``
+
+* exceptions:
+  * Expected reference holds an unexpected term: ``existence_error(expected_term,Reference)``
+
+
+.. raw:: html
+
+   <div id="map/2"> </div>
+
+.. index:: map/2
+.. _expected/1::map/2:
+
+``map/2``
+^^^^^^^^^
+
+When the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.
+
+* compilation flags: ``static``
+* template: ``map(Closure,NewReference)``
+
+* meta-predicate template: ``map(2,*)``
+
+* mode - number of proofs:
+
+  * ``map(+callable,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="flat_map/2"> </div>
+
+.. index:: flat_map/2
+.. _expected/1::flat_map/2:
+
+``flat_map/2``
+^^^^^^^^^^^^^^
+
+When the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.
+
+* compilation flags: ``static``
+* template: ``flat_map(Closure,NewReference)``
+
+* meta-predicate template: ``flat_map(2,*)``
+
+* mode - number of proofs:
+
+  * ``flat_map(+callable,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="or_else/2"> </div>
+
+.. index:: or_else/2
+.. _expected/1::or_else/2:
+
+``or_else/2``
+^^^^^^^^^^^^^
+
+Returns the expected reference term if it does not hold an unexpected term or the given default term if the expected reference holds an unexpected term.
+
+* compilation flags: ``static``
+* template: ``or_else(Term,Default)``
+
+* mode - number of proofs:
+
+  * ``or_else(--term,@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="or_else_get/2"> </div>
+
+.. index:: or_else_get/2
+.. _expected/1::or_else_get/2:
+
+``or_else_get/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the expected reference term if it does not hold an unexpected term or applies a closure to compute the term if the expected holds an unexpected term. Throws an error when the expected reference holds an unexpected term and a term cannot be computed using the given closure.
+
+* compilation flags: ``static``
+* template: ``or_else_get(Term,Closure)``
+
+* meta-predicate template: ``or_else_get(*,1)``
+
+* mode - number of proofs:
+
+  * ``or_else_get(--term,+callable)`` - ``one``
+
+* exceptions:
+  * Expected reference holds an unexpected term and a term cannot be computed: ``existence_error(expected_term,Reference)``
+
+
+.. raw:: html
+
+   <div id="or_else_call/2"> </div>
+
+.. index:: or_else_call/2
+.. _expected/1::or_else_call/2:
+
+``or_else_call/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.
+
+* compilation flags: ``static``
+* template: ``or_else_call(Expected,Goal)``
+
+* meta-predicate template: ``or_else_call(*,0)``
+
+* mode - number of proofs:
+
+  * ``or_else_call(--term,+callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="or_else_fail/1"> </div>
+
+.. index:: or_else_fail/1
+.. _expected/1::or_else_fail/1:
+
+``or_else_fail/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the expected reference term if it does not hold an unexpected term. Fails otherwise. Usually called to skip over empty expected reference holding unexpected terms.
+
+* compilation flags: ``static``
+* template: ``or_else_fail(Expected)``
+
+* mode - number of proofs:
+
+  * ``or_else_fail(--term)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`expected <expected/0>`
+
+

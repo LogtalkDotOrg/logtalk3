@@ -1,0 +1,58 @@
+.. index:: shell(Interpreters)
+.. _shell/1:
+
+**object**
+
+``shell(Interpreters)``
+=======================
+
+Prolog shell for the interpreters.
+
+* author: Victor Lagerkvist and Paulo Moura
+* version: 1.01
+* date: 2014/3/12
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="init/0"> </div>
+
+.. index:: init/0
+.. _shell/1::init/0:
+
+``init/0``
+^^^^^^^^^^
+
+* compilation flags: ``static``
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

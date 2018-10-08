@@ -1,0 +1,86 @@
+.. index:: magic
+.. _magic/0:
+
+**object**
+
+``magic``
+=========
+
+Object encapsulating magic methods.
+
+* author: Ulf Nilsson. Ported to Logtalk and augmented with stratified negation by Victor Lagerkvist.
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="magicise/4"> </div>
+
+.. index:: magicise/4
+.. _magic/0::magicise/4:
+
+``magicise/4``
+^^^^^^^^^^^^^^
+
+Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
+
+* compilation flags: ``static``
+* template: ``magicise(Head,Body,NewHead,NewBody)``
+
+* mode - number of proofs:
+
+  * ``magicise(+term,+list,-term,-list)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="magic/2"> </div>
+
+.. index:: magic/2
+.. _magic/0::magic/2:
+
+``magic/2``
+^^^^^^^^^^^
+
+Prefix the predicate symbol of Old with magic_.
+
+* compilation flags: ``static``
+* template: ``magic(Old,New)``
+
+* mode - number of proofs:
+
+  * ``magic(+callable,-callable)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

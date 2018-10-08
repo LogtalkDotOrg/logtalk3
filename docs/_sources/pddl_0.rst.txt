@@ -1,0 +1,127 @@
+.. index:: pddl
+.. _pddl/0:
+
+**object**
+
+``pddl``
+========
+
+Simple parser of PDDL 3.0 files.
+
+* author: Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.
+* version: 1.1
+* date: 2016/5/18
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`read_file <read_file/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="parse_domain/3"> </div>
+
+.. index:: parse_domain/3
+.. _pddl/0::parse_domain/3:
+
+``parse_domain/3``
+^^^^^^^^^^^^^^^^^^
+
+Parses a PDDL 3.0 domain file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.
+
+* compilation flags: ``static``
+* template: ``parse_domain(File,Output,RestOfFile)``
+
+* mode - number of proofs:
+
+  * ``parse_domain(+atom,-compound,-list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="parse_domain/2"> </div>
+
+.. index:: parse_domain/2
+.. _pddl/0::parse_domain/2:
+
+``parse_domain/2``
+^^^^^^^^^^^^^^^^^^
+
+Parses a PDDL 3.0 domain file, returning a compound term representing its contents.
+
+* compilation flags: ``static``
+* template: ``parse_domain(File,Output)``
+
+* mode - number of proofs:
+
+  * ``parse_domain(+atom,-compound)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="parse_problem/2"> </div>
+
+.. index:: parse_problem/2
+.. _pddl/0::parse_problem/2:
+
+``parse_problem/2``
+^^^^^^^^^^^^^^^^^^^
+
+Parses a PDDL 3.0 problem file, returning a compound term representing its contents.
+
+* compilation flags: ``static``
+* template: ``parse_problem(File,Output)``
+
+* mode - number of proofs:
+
+  * ``parse_problem(+atom,-compound)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="parse_problem/3"> </div>
+
+.. index:: parse_problem/3
+.. _pddl/0::parse_problem/3:
+
+``parse_problem/3``
+^^^^^^^^^^^^^^^^^^^
+
+Parses a PDDL 3.0 problem file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.
+
+* compilation flags: ``static``
+* template: ``parse_problem(File,Output,RestOfFile)``
+
+* mode - number of proofs:
+
+  * ``parse_problem(+atom,-compound,-list(atom))`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

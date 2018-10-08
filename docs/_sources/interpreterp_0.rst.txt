@@ -1,0 +1,86 @@
+.. index:: interpreterp
+.. _interpreterp/0:
+
+**protocol**
+
+``interpreterp``
+================
+
+Protocol for an interpreter.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="prove/2"> </div>
+
+.. index:: prove/2
+.. _interpreterp/0::prove/2:
+
+``prove/2``
+^^^^^^^^^^^
+
+True if goal is provable in the specified database.
+
+* compilation flags: ``static``
+* template: ``prove(Goal,DB)``
+
+* mode - number of proofs:
+
+  * ``prove(+goal,+database)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="prove/3"> </div>
+
+.. index:: prove/3
+.. _interpreterp/0::prove/3:
+
+``prove/3``
+^^^^^^^^^^^
+
+True if goal is provable within the given depth-limit in the specified database.
+
+* compilation flags: ``static``
+* template: ``prove(Goal,Limit,DB)``
+
+* mode - number of proofs:
+
+  * ``prove(+goal,+limit,+database)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

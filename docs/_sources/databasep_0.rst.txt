@@ -1,0 +1,126 @@
+.. index:: databasep
+.. _databasep/0:
+
+**protocol**
+
+``databasep``
+=============
+
+Database protocol.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="rule/4"> </div>
+
+.. index:: rule/4
+.. _databasep/0::rule/4:
+
+``rule/4``
+^^^^^^^^^^
+
+Clauses for this predicate are automatically generated using term-expansion. The third argument contains the length of Body.
+
+* compilation flags: ``static``
+* template: ``rule(Head,Body,Length,Tail)``
+
+* mode - number of proofs:
+
+  * ``rule(?callable,?callable,-,-)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="rule/3"> </div>
+
+.. index:: rule/3
+.. _databasep/0::rule/3:
+
+``rule/3``
+^^^^^^^^^^
+
+Clauses for this predicate are automatically generated using term-expansion. The third argument denotes the tail of the Body.
+
+* compilation flags: ``static``
+* template: ``rule(Head,Body,Tail)``
+
+* mode - number of proofs:
+
+  * ``rule(?callable,?callable,-)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="rule/2"> </div>
+
+.. index:: rule/2
+.. _databasep/0::rule/2:
+
+``rule/2``
+^^^^^^^^^^
+
+Clauses for this predicate are automatically generated using term-expansion.
+
+* compilation flags: ``static``
+* template: ``rule(Head,Body)``
+
+* mode - number of proofs:
+
+  * ``rule(?callable,-list(callable))`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="bench_goal/1"> </div>
+
+.. index:: bench_goal/1
+.. _databasep/0::bench_goal/1:
+
+``bench_goal/1``
+^^^^^^^^^^^^^^^^
+
+Table of benchmark goals. They are used from shell.lgt to make benchmarking easier.
+
+* compilation flags: ``static``
+* template: ``bench_goal(Goal)``
+
+* mode - number of proofs:
+
+  * ``bench_goal(?callable)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

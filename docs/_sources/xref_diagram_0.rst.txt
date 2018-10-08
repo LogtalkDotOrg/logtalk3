@@ -1,0 +1,52 @@
+.. index:: xref_diagram
+.. _xref_diagram/0:
+
+**object**
+
+``xref_diagram``
+================
+
+Predicates for generating predicate call cross-referencing diagrams in DOT format.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2014/1/1
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`xref_diagram(dot) <xref_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`entity_diagram <entity_diagram/0>`
+* :ref:`inheritance_diagram <inheritance_diagram/0>`
+* :ref:`uses_diagram <uses_diagram/0>`
+
+

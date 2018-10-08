@@ -1,0 +1,53 @@
+.. index:: backend_random
+.. _backend_random/0:
+
+**object**
+
+``backend_random``
+==================
+
+Random number generator predicates using the backend Prolog compiler built-in random generator.
+
+* author: Paulo Moura
+* version: 1.4
+* date: 2018/8/14
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`randomp <randomp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Implementation**: The backend Prolog compiler built-in random generator is only used for the basic random/1, get_seed/1, and set_seed/1 predicates.
+
+* **Portability**: B-Prolog, CxProlog, ECLiPSe, JIProlog, Lean Prolog, Qu-Prolog, Quintus Prolog do not provide implementations for the get_seed/1 and set_seed/1 predicates and calling these predicates simply succeed without performing any action.
+
+See also
+--------
+
+* :ref:`random <random/0>`
+* :ref:`fast_random <fast_random/0>`
+
+

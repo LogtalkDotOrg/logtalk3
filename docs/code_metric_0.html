@@ -1,519 +1,564 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>code_metric</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">category</p>
-      <h1 class="code">code_metric</h1>
-      <blockquote>
-        <p class="comment">Core predicates for computing source code metrics.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>code_metric &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="code_metrics" href="code_metrics_0.html" />
+    <link rel="prev" title="cc_metric" href="cc_metric_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cc_metric_0.html">cc_metric</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">code_metric</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_0.html">code_metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_messages_0.html">code_metrics_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_utilities_0.html">code_metrics_utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coupling_metric_0.html">coupling_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dit_metric_0.html">dit_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc_metric_0.html">doc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="halstead_metric_0.html">halstead_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="halstead_metric_1.html">halstead_metric(Stroud)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upn_metric_0.html">upn_metric</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">code_metric</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/code_metric_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="code-metric-0"><span id="index-0"></span><strong>category</strong></p>
+<div class="section" id="code-metric">
+<h1><code class="docutils literal notranslate"><span class="pre">code_metric</span></code><a class="headerlink" href="#code-metric" title="Permalink to this headline">¶</a></h1>
+<p>Core predicates for computing source code metrics.</p>
+<ul class="simple">
+<li>author: Ebrahim Azarisooreh and Paulo Moura</li>
+<li>version: 0.8</li>
+<li>date: 2018/2/18</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="entity/1"> </div><div class="section" id="entity-1">
+<span id="code-metric-0-entity-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">entity/1</span></code><a class="headerlink" href="#entity-1" title="Permalink to this headline">¶</a></h3>
+<p>Scans an entity and prints its metric score.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">entity(Entity)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">entity(+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="file/1"> </div></div>
+<div class="section" id="file-1">
+<span id="code-metric-0-file-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">file/1</span></code><a class="headerlink" href="#file-1" title="Permalink to this headline">¶</a></h3>
+<p>Prints metric scores for all the entities defined in a loaded source file.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">file(File)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="directory/1"> </div></div>
+<div class="section" id="directory-1">
+<span id="code-metric-0-directory-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/1</span></code><a class="headerlink" href="#directory-1" title="Permalink to this headline">¶</a></h3>
+<p>Scans a directory and prints metric scores for all entities defined in its loaded source files.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="rdirectory/1"> </div></div>
+<div class="section" id="rdirectory-1">
+<span id="code-metric-0-rdirectory-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code><a class="headerlink" href="#rdirectory-1" title="Permalink to this headline">¶</a></h3>
+<p>Recursive version of the directory/1 predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="library/1"> </div></div>
+<div class="section" id="library-1">
+<span id="code-metric-0-library-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">library/1</span></code><a class="headerlink" href="#library-1" title="Permalink to this headline">¶</a></h3>
+<p>Prints metrics scores for all loaded entities from a given library.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">library(Library)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">library(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="rlibrary/1"> </div></div>
+<div class="section" id="rlibrary-1">
+<span id="code-metric-0-rlibrary-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code><a class="headerlink" href="#rlibrary-1" title="Permalink to this headline">¶</a></h3>
+<p>Recursive version of the library/1 predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="all/0"> </div></div>
+<div class="section" id="all-0">
+<span id="code-metric-0-all-0"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">all/0</span></code><a class="headerlink" href="#all-0" title="Permalink to this headline">¶</a></h3>
+<p>Scans all loaded entities and prints their metric scores.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="entity_score/2"> </div></div>
+<div class="section" id="entity-score-2">
+<span id="code-metric-0-entity-score-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_score/2</span></code><a class="headerlink" href="#entity-score-2" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">entity_score(Entity,Score)</span></code></li>
+</ul>
+<div id="library_score/2"> </div></div>
+<div class="section" id="library-score-2">
+<span id="code-metric-0-library-score-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">library_score/2</span></code><a class="headerlink" href="#library-score-2" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">library_score(Library,Score)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">library_score(&#64;atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="rlibrary_score/2"> </div></div>
+<div class="section" id="rlibrary-score-2">
+<span id="code-metric-0-rlibrary-score-2"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary_score/2</span></code><a class="headerlink" href="#rlibrary-score-2" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary_score(Library,Score)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rlibrary_score(&#64;atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="file_score/2"> </div></div>
+<div class="section" id="file-score-2">
+<span id="code-metric-0-file-score-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">file_score/2</span></code><a class="headerlink" href="#file-score-2" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">file_score(File,Score)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">file_score(&#64;atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="directory_score/2"> </div></div>
+<div class="section" id="directory-score-2">
+<span id="code-metric-0-directory-score-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">directory_score/2</span></code><a class="headerlink" href="#directory-score-2" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">directory_score(Directory,Score)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">directory_score(&#64;atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="rdirectory_score/2"> </div></div>
+<div class="section" id="rdirectory-score-2">
+<span id="code-metric-0-rdirectory-score-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory_score/2</span></code><a class="headerlink" href="#rdirectory-score-2" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory_score(Directory,Score)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rdirectory_score(&#64;atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="all_score/1"> </div></div>
+<div class="section" id="all-score-1">
+<span id="code-metric-0-all-score-1"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">all_score/1</span></code><a class="headerlink" href="#all-score-1" title="Permalink to this headline">¶</a></h3>
+<p>Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">all_score(Score)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">all_score(-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="entity_score//2"> </div></div>
+<div class="section" id="id1">
+<span id="index-15"></span><span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_score//2</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Pretty prints the entity score.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">entity_score(Entity,Score)</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<div id="process_entity/2"> </div><div class="section" id="process-entity-2">
+<span id="code-metric-0-process-entity-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">process_entity/2</span></code><a class="headerlink" href="#process-entity-2" title="Permalink to this headline">¶</a></h3>
+<p>Processes an entity of the given kind.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">process_entity(Kind,Entity)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">process_entity(+atom,&#64;entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="process_file/1"> </div></div>
+<div class="section" id="process-file-1">
+<span id="code-metric-0-process-file-1"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">process_file/1</span></code><a class="headerlink" href="#process-file-1" title="Permalink to this headline">¶</a></h3>
+<p>Processes a source file.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">process_file(Path)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">process_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="process_directory/1"> </div></div>
+<div class="section" id="process-directory-1">
+<span id="code-metric-0-process-directory-1"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">process_directory/1</span></code><a class="headerlink" href="#process-directory-1" title="Permalink to this headline">¶</a></h3>
+<p>Processes a directory of source files.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">process_directory(Path)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">process_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="process_rdirectory/1"> </div></div>
+<div class="section" id="process-rdirectory-1">
+<span id="code-metric-0-process-rdirectory-1"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">process_rdirectory/1</span></code><a class="headerlink" href="#process-rdirectory-1" title="Permalink to this headline">¶</a></h3>
+<p>Recursively process a directory of source files.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">process_rdirectory(Path)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">process_rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="process_rlibrary/1"> </div></div>
+<div class="section" id="process-rlibrary-1">
+<span id="code-metric-0-process-rlibrary-1"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">process_rlibrary/1</span></code><a class="headerlink" href="#process-rlibrary-1" title="Permalink to this headline">¶</a></h3>
+<p>Recursively process a library of source files.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">process_rlibrary(Path)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">process_rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="process_all/0"> </div></div>
+<div class="section" id="process-all-0">
+<span id="code-metric-0-process-all-0"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">process_all/0</span></code><a class="headerlink" href="#process-all-0" title="Permalink to this headline">¶</a></h3>
+<p>Processes all loaded source code.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">process_all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="sub_directory/2"> </div></div>
+<div class="section" id="sub-directory-2">
+<span id="code-metric-0-sub-directory-2"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">sub_directory/2</span></code><a class="headerlink" href="#sub-directory-2" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all directory sub-directories containing loaded files.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">sub_directory(Directory,SubDirectory)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">sub_directory(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="sub_library/2"> </div></div>
+<div class="section" id="sub-library-2">
+<span id="code-metric-0-sub-library-2"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">sub_library/2</span></code><a class="headerlink" href="#sub-library-2" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all library sub-library paths.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">sub_library(Library,SubLibraryPath)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">sub_library(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="code_metrics_0.html" class="btn btn-neutral float-right" title="code_metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cc_metric_0.html" class="btn btn-neutral" title="cc_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Ebrahim Azarisooreh and Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>0.8</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2018/2/18</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="entity/1" class="code">entity/1</h3>
-          <blockquote>
-            <p class="comment">Scans an entity and prints its metric score.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>entity(Entity)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>entity(+term) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="file/1" class="code">file/1</h3>
-          <blockquote>
-            <p class="comment">Prints metric scores for all the entities defined in a loaded source file.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>file(File)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>file(+atom) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="directory/1" class="code">directory/1</h3>
-          <blockquote>
-            <p class="comment">Scans a directory and prints metric scores for all entities defined in its loaded source files.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>directory(Directory)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>directory(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rdirectory/1" class="code">rdirectory/1</h3>
-          <blockquote>
-            <p class="comment">Recursive version of the directory/1 predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rdirectory(Directory)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rdirectory(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="library/1" class="code">library/1</h3>
-          <blockquote>
-            <p class="comment">Prints metrics scores for all loaded entities from a given library.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>library(Library)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>library(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rlibrary/1" class="code">rlibrary/1</h3>
-          <blockquote>
-            <p class="comment">Recursive version of the library/1 predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rlibrary(Library)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rlibrary(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="all/0" class="code">all/0</h3>
-          <blockquote>
-            <p class="comment">Scans all loaded entities and prints their metric scores.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>all &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="entity_score/2" class="code">entity_score/2</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>entity_score(Entity,Score)</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="library_score/2" class="code">library_score/2</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>library_score(Library,Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>library_score(@atom,-ground) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rlibrary_score/2" class="code">rlibrary_score/2</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rlibrary_score(Library,Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rlibrary_score(@atom,-ground) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="file_score/2" class="code">file_score/2</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>file_score(File,Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>file_score(@atom,-ground) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="directory_score/2" class="code">directory_score/2</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>directory_score(Directory,Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>directory_score(@atom,-ground) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rdirectory_score/2" class="code">rdirectory_score/2</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rdirectory_score(Directory,Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rdirectory_score(@atom,-ground) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="all_score/1" class="code">all_score/1</h3>
-          <blockquote>
-            <p class="comment">Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>all_score(Score)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>all_score(-ground) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="entity_score//2" class="code">entity_score//2</h3>
-          <blockquote>
-            <p class="comment">Pretty prints the entity score.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>entity_score(Entity,Score)</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <h3 id="process_entity/2" class="code">process_entity/2</h3>
-          <blockquote>
-            <p class="comment">Processes an entity of the given kind.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>process_entity(Kind,Entity)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>process_entity(+atom,@entity_identifier) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="process_file/1" class="code">process_file/1</h3>
-          <blockquote>
-            <p class="comment">Processes a source file.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>process_file(Path)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>process_file(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="process_directory/1" class="code">process_directory/1</h3>
-          <blockquote>
-            <p class="comment">Processes a directory of source files.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>process_directory(Path)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>process_directory(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="process_rdirectory/1" class="code">process_rdirectory/1</h3>
-          <blockquote>
-            <p class="comment">Recursively process a directory of source files.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>process_rdirectory(Path)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>process_rdirectory(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="process_rlibrary/1" class="code">process_rlibrary/1</h3>
-          <blockquote>
-            <p class="comment">Recursively process a library of source files.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>process_rlibrary(Path)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>process_rlibrary(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="process_all/0" class="code">process_all/0</h3>
-          <blockquote>
-            <p class="comment">Processes all loaded source code.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>process_all &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="sub_directory/2" class="code">sub_directory/2</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all directory sub-directories containing loaded files.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>sub_directory(Directory,SubDirectory)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>sub_directory(+atom,-atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="sub_library/2" class="code">sub_library/2</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all library sub-library paths.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>sub_library(Library,SubLibraryPath)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>sub_library(+atom,-atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

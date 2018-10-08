@@ -1,0 +1,162 @@
+.. index:: ports
+.. _ports/0:
+
+**object**
+
+``ports``
+=========
+
+Predicate execution box model port profiler.
+
+* author: Paulo Moura
+* version: 1.2
+* date: 2018/7/2
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
+  * :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="data/0"> </div>
+
+.. index:: data/0
+.. _ports/0::data/0:
+
+``data/0``
+^^^^^^^^^^
+
+Prints a table with all port profiling data.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``data`` - ``one``
+
+
+.. raw:: html
+
+   <div id="data/1"> </div>
+
+.. index:: data/1
+.. _ports/0::data/1:
+
+``data/1``
+^^^^^^^^^^
+
+Prints a table with all port profiling data for the specified entity.
+
+* compilation flags: ``static``
+* template: ``data(Entity)``
+
+* mode - number of proofs:
+
+  * ``data(+entity_identifier)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="reset/0"> </div>
+
+.. index:: reset/0
+.. _ports/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Resets all port profiling data.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``reset`` - ``one``
+
+
+.. raw:: html
+
+   <div id="reset/1"> </div>
+
+.. index:: reset/1
+.. _ports/0::reset/1:
+
+``reset/1``
+^^^^^^^^^^^
+
+Resets all port profiling data for the specified entity.
+
+* compilation flags: ``static``
+* template: ``reset(Entity)``
+
+* mode - number of proofs:
+
+  * ``reset(+entity_identifier)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="port/5"> </div>
+
+.. index:: port/5
+.. _ports/0::port/5:
+
+``port/5``
+^^^^^^^^^^
+
+Enumerates, by backtracking, all collected port profiling data.
+
+* compilation flags: ``static``
+* template: ``port(Port,Entity,Functor,Arity,Count)``
+
+* mode - number of proofs:
+
+  * ``port(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="port_/5"> </div>
+
+.. index:: port_/5
+.. _ports/0::port_/5:
+
+``port_/5``
+^^^^^^^^^^^
+
+Internal table of collected port profiling data.
+
+* compilation flags: ``dynamic``
+* template: ``port_(Port,Entity,Functor,Arity,Count)``
+
+* mode - number of proofs:
+
+  * ``port_(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

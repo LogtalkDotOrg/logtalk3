@@ -1,0 +1,117 @@
+.. index:: file_diagram(Format)
+.. _file_diagram/1:
+
+**category**
+
+``file_diagram(Format)``
+========================
+
+Common predicates for generating file diagrams.
+
+* author: Paulo Moura
+* version: 2.4
+* date: 2016/10/10
+* compilation flags: ``static``
+
+* extends:
+
+  * ``public`` :ref:`diagram(Format) <diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="remember_included_file/1"> </div>
+
+.. index:: remember_included_file/1
+.. _file_diagram/1::remember_included_file/1:
+
+``remember_included_file/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+.. raw:: html
+
+   <div id="remember_referenced_logtalk_file/1"> </div>
+
+.. index:: remember_referenced_logtalk_file/1
+.. _file_diagram/1::remember_referenced_logtalk_file/1:
+
+``remember_referenced_logtalk_file/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+.. raw:: html
+
+   <div id="remember_referenced_prolog_file/1"> </div>
+
+.. index:: remember_referenced_prolog_file/1
+.. _file_diagram/1::remember_referenced_prolog_file/1:
+
+``remember_referenced_prolog_file/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="included_file_/1"> </div>
+
+.. index:: included_file_/1
+.. _file_diagram/1::included_file_/1:
+
+``included_file_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_logtalk_file_/1"> </div>
+
+.. index:: referenced_logtalk_file_/1
+.. _file_diagram/1::referenced_logtalk_file_/1:
+
+``referenced_logtalk_file_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_prolog_file_/1"> </div>
+
+.. index:: referenced_prolog_file_/1
+.. _file_diagram/1::referenced_prolog_file_/1:
+
+``referenced_prolog_file_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

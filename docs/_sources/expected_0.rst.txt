@@ -1,0 +1,90 @@
+.. index:: expected
+.. _expected/0:
+
+**object**
+
+``expected``
+============
+
+Constructors for expected term references. An expected reference contains either a term or an unexpected term. Expected references should be regarded as opaque terms and always used with the "expected(_)" object by passing the reference as a parameter.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2017/12/16
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`type::type/1 <type/0::type/1>`
+  * :ref:`type::check/2 <type/0::check/2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="of_unexpected/2"> </div>
+
+.. index:: of_unexpected/2
+.. _expected/0::of_unexpected/2:
+
+``of_unexpected/2``
+^^^^^^^^^^^^^^^^^^^
+
+Constructs an expected reference from an unexpected term.
+
+* compilation flags: ``static``
+* template: ``of_unexpected(Unexpected,Reference)``
+
+* mode - number of proofs:
+
+  * ``of_unexpected(@term,--nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="of_expected/2"> </div>
+
+.. index:: of_expected/2
+.. _expected/0::of_expected/2:
+
+``of_expected/2``
+^^^^^^^^^^^^^^^^^
+
+Constructs an expected reference from a term.
+
+* compilation flags: ``static``
+* template: ``of_expected(Expected,Reference)``
+
+* mode - number of proofs:
+
+  * ``of_expected(@term,--nonvar)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Type-checking support**: This object also defines a type "expected" for use with the "type" library object.
+
+See also
+--------
+
+* :ref:`expected(Reference) <expected/1>`
+* :ref:`type <type/0>`
+
+

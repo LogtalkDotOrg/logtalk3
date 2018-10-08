@@ -1,0 +1,266 @@
+.. index:: termp
+.. _termp/0:
+
+**protocol**
+
+``termp``
+=========
+
+Prolog term utility predicates protocol.
+
+* author: Paulo Moura
+* version: 1.31
+* date: 2010/6/9
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="depth/2"> </div>
+
+.. index:: depth/2
+.. _termp/0::depth/2:
+
+``depth/2``
+^^^^^^^^^^^
+
+True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.
+
+* compilation flags: ``static``
+* template: ``depth(Term,Depth)``
+
+* mode - number of proofs:
+
+  * ``depth(@term,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="ground/1"> </div>
+
+.. index:: ground/1
+.. _termp/0::ground/1:
+
+``ground/1``
+^^^^^^^^^^^^
+
+True if the argument is ground.
+
+* compilation flags: ``static``
+* template: ``ground(Term)``
+
+* mode - number of proofs:
+
+  * ``ground(@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="new/1"> </div>
+
+.. index:: new/1
+.. _termp/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Creates a new term instance (if meaningful).
+
+* compilation flags: ``static``
+* template: ``new(Term)``
+
+* mode - number of proofs:
+
+  * ``new(-nonvar)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="occurs/2"> </div>
+
+.. index:: occurs/2
+.. _termp/0::occurs/2:
+
+``occurs/2``
+^^^^^^^^^^^^
+
+True if the variable occurs in the term.
+
+* compilation flags: ``static``
+* template: ``occurs(Variable,Term)``
+
+* mode - number of proofs:
+
+  * ``occurs(@var,@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="subsumes/2"> </div>
+
+.. index:: subsumes/2
+.. _termp/0::subsumes/2:
+
+``subsumes/2``
+^^^^^^^^^^^^^^
+
+The first term subsumes the second term.
+
+* compilation flags: ``static``
+* template: ``subsumes(General,Specific)``
+
+* mode - number of proofs:
+
+  * ``subsumes(?term,@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="subterm/2"> </div>
+
+.. index:: subterm/2
+.. _termp/0::subterm/2:
+
+``subterm/2``
+^^^^^^^^^^^^^
+
+The first term is a subterm of the second term.
+
+* compilation flags: ``static``
+* template: ``subterm(Subterm,Term)``
+
+* mode - number of proofs:
+
+  * ``subterm(?term,+term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="valid/1"> </div>
+
+.. index:: valid/1
+.. _termp/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+Term is valid.
+
+* compilation flags: ``static``
+* template: ``valid(Term)``
+
+* mode - number of proofs:
+
+  * ``valid(@nonvar)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="check/1"> </div>
+
+.. index:: check/1
+.. _termp/0::check/1:
+
+``check/1``
+^^^^^^^^^^^
+
+Checks if a term is valid. Throws an exception if the term is not valid.
+
+* compilation flags: ``static``
+* template: ``check(Term)``
+
+* mode - number of proofs:
+
+  * ``check(@nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="variant/2"> </div>
+
+.. index:: variant/2
+.. _termp/0::variant/2:
+
+``variant/2``
+^^^^^^^^^^^^^
+
+Each term is a variant of the other (i.e. they are structurally equivalent).
+
+* compilation flags: ``static``
+* template: ``variant(Term1,Term2)``
+
+* mode - number of proofs:
+
+  * ``variant(@term,@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="variables/2"> </div>
+
+.. index:: variables/2
+.. _termp/0::variables/2:
+
+``variables/2``
+^^^^^^^^^^^^^^^
+
+Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
+
+* compilation flags: ``static``
+* template: ``variables(Term,List)``
+
+* mode - number of proofs:
+
+  * ``variables(@term,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="singletons/2"> </div>
+
+.. index:: singletons/2
+.. _termp/0::singletons/2:
+
+``singletons/2``
+^^^^^^^^^^^^^^^^
+
+Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
+
+* compilation flags: ``static``
+* template: ``singletons(Term,Singletons)``
+
+* mode - number of proofs:
+
+  * ``singletons(@term,-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

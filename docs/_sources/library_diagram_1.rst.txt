@@ -1,0 +1,137 @@
+.. index:: library_diagram(Format)
+.. _library_diagram/1:
+
+**category**
+
+``library_diagram(Format)``
+===========================
+
+Common predicates for generating library diagrams.
+
+* author: Paulo Moura
+* version: 2.2
+* date: 2016/10/13
+* compilation flags: ``static``
+
+* extends:
+
+  * ``public`` :ref:`diagram(Format) <diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="add_library_documentation_url/4"> </div>
+
+.. index:: add_library_documentation_url/4
+.. _library_diagram/1::add_library_documentation_url/4:
+
+``add_library_documentation_url/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds a documentation URL when using the option url_prefixes/2.
+
+* compilation flags: ``static``
+* template: ``add_library_documentation_url(Kind,Options,Directory,NodeOptions)``
+
+* mode - number of proofs:
+
+  * ``add_library_documentation_url(+atom,+list(compound),+atom,-list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="remember_included_library/2"> </div>
+
+.. index:: remember_included_library/2
+.. _library_diagram/1::remember_included_library/2:
+
+``remember_included_library/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+.. raw:: html
+
+   <div id="remember_referenced_logtalk_library/2"> </div>
+
+.. index:: remember_referenced_logtalk_library/2
+.. _library_diagram/1::remember_referenced_logtalk_library/2:
+
+``remember_referenced_logtalk_library/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+.. raw:: html
+
+   <div id="remember_referenced_prolog_library/2"> </div>
+
+.. index:: remember_referenced_prolog_library/2
+.. _library_diagram/1::remember_referenced_prolog_library/2:
+
+``remember_referenced_prolog_library/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="included_library_/2"> </div>
+
+.. index:: included_library_/2
+.. _library_diagram/1::included_library_/2:
+
+``included_library_/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_logtalk_library_/2"> </div>
+
+.. index:: referenced_logtalk_library_/2
+.. _library_diagram/1::referenced_logtalk_library_/2:
+
+``referenced_logtalk_library_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_prolog_library_/2"> </div>
+
+.. index:: referenced_prolog_library_/2
+.. _library_diagram/1::referenced_prolog_library_/2:
+
+``referenced_prolog_library_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

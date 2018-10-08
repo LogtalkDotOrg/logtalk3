@@ -1,397 +1,482 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>debuggerp</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">debuggerp</h1>
-      <blockquote>
-        <p class="comment">Debugger protocol.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>debuggerp &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="diagram(Format)" href="diagram_1.html" />
+    <link rel="prev" title="debugger_messages" href="debugger_messages_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="debugger_0.html">debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugger_messages_0.html">debugger_messages</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">debuggerp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">debuggerp</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/debuggerp_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="debuggerp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="debuggerp">
+<h1><code class="docutils literal notranslate"><span class="pre">debuggerp</span></code><a class="headerlink" href="#debuggerp" title="Permalink to this headline">¶</a></h1>
+<p>Debugger protocol.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 2.1</li>
+<li>date: 2016/10/23</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="reset/0"> </div><div class="section" id="reset-0">
+<span id="debuggerp-0-reset-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">reset/0</span></code><a class="headerlink" href="#reset-0" title="Permalink to this headline">¶</a></h3>
+<p>Resets all debugging settings, including spy points and leashed ports, and turns off debugging.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">reset</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="debug/0"> </div></div>
+<div class="section" id="debug-0">
+<span id="debuggerp-0-debug-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">debug/0</span></code><a class="headerlink" href="#debug-0" title="Permalink to this headline">¶</a></h3>
+<p>Starts debugging for all defined spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">debug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="nodebug/0"> </div></div>
+<div class="section" id="nodebug-0">
+<span id="debuggerp-0-nodebug-0"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">nodebug/0</span></code><a class="headerlink" href="#nodebug-0" title="Permalink to this headline">¶</a></h3>
+<p>Stops debugging for all defined spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">nodebug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="debugging/0"> </div></div>
+<div class="section" id="debugging-0">
+<span id="debuggerp-0-debugging-0"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">debugging/0</span></code><a class="headerlink" href="#debugging-0" title="Permalink to this headline">¶</a></h3>
+<p>Reports current debugging settings, including spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">debugging</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="debugging/1"> </div></div>
+<div class="section" id="debugging-1">
+<span id="debuggerp-0-debugging-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">debugging/1</span></code><a class="headerlink" href="#debugging-1" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all entities compiled in debug mode.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">debugging(Entity)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">debugging(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="trace/0"> </div></div>
+<div class="section" id="trace-0">
+<span id="debuggerp-0-trace-0"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">trace/0</span></code><a class="headerlink" href="#trace-0" title="Permalink to this headline">¶</a></h3>
+<p>Starts tracing all calls compiled in debug mode.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">trace</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="notrace/0"> </div></div>
+<div class="section" id="notrace-0">
+<span id="debuggerp-0-notrace-0"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">notrace/0</span></code><a class="headerlink" href="#notrace-0" title="Permalink to this headline">¶</a></h3>
+<p>Stops tracing of calls compiled in debug mode.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">notrace</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="spy/1"> </div></div>
+<div class="section" id="spy-1">
+<span id="debuggerp-0-spy-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">spy/1</span></code><a class="headerlink" href="#spy-1" title="Permalink to this headline">¶</a></h3>
+<p>Sets a line number spy point or a predicate spy point or a list of spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">spy(SpyPoint)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">spy(&#64;spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">spy(&#64;list(spy_point))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="spying/1"> </div></div>
+<div class="section" id="spying-1">
+<span id="debuggerp-0-spying-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">spying/1</span></code><a class="headerlink" href="#spying-1" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all defined line number and predicate spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">spying(SpyPoint)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">spying(?spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="spy/4"> </div></div>
+<div class="section" id="spy-4">
+<span id="debuggerp-0-spy-4"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">spy/4</span></code><a class="headerlink" href="#spy-4" title="Permalink to this headline">¶</a></h3>
+<p>Sets a context spy point.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">spy(Sender,This,Self,Goal)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">spy(&#64;term,&#64;term,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="spying/4"> </div></div>
+<div class="section" id="spying-4">
+<span id="debuggerp-0-spying-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">spying/4</span></code><a class="headerlink" href="#spying-4" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all defined context spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">spying(Sender,This,Self,Goal)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">spying(?term,?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="nospy/1"> </div></div>
+<div class="section" id="nospy-1">
+<span id="debuggerp-0-nospy-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">nospy/1</span></code><a class="headerlink" href="#nospy-1" title="Permalink to this headline">¶</a></h3>
+<p>Removes all matching line number spy points and predicate spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">nospy(SpyPoint)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;var)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;list(spy_point))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="nospy/4"> </div></div>
+<div class="section" id="nospy-4">
+<span id="debuggerp-0-nospy-4"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">nospy/4</span></code><a class="headerlink" href="#nospy-4" title="Permalink to this headline">¶</a></h3>
+<p>Removes all matching context spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">nospy(Sender,This,Self,Goal)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;term,&#64;term,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="nospyall/0"> </div></div>
+<div class="section" id="nospyall-0">
+<span id="debuggerp-0-nospyall-0"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code><a class="headerlink" href="#nospyall-0" title="Permalink to this headline">¶</a></h3>
+<p>Removes all line number, predicate, and context spy points.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">nospyall</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="leash/1"> </div></div>
+<div class="section" id="leash-1">
+<span id="debuggerp-0-leash-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">leash/1</span></code><a class="headerlink" href="#leash-1" title="Permalink to this headline">¶</a></h3>
+<p>Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">leash(Ports)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">leash(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">leash(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="leashing/1"> </div></div>
+<div class="section" id="leashing-1">
+<span id="debuggerp-0-leashing-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">leashing/1</span></code><a class="headerlink" href="#leashing-1" title="Permalink to this headline">¶</a></h3>
+<p>Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">leashing(Port)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">leashing(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Debugger help</strong>: Type the character “h” or the character “?” at a leashed port.</li>
+<li><strong>Predicate spy point</strong>: Specified as a ground term Functor/Arity.</li>
+<li><strong>Line number spy point</strong>: Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.</li>
+<li><strong>Leash shorthands</strong>: none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="diagram_1.html" class="btn btn-neutral float-right" title="diagram(Format)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="debugger_messages_0.html" class="btn btn-neutral" title="debugger_messages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>2.1</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2016/10/23</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="reset/0" class="code">reset/0</h3>
-          <blockquote>
-            <p class="comment">Resets all debugging settings, including spy points and leashed ports, and turns off debugging.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>reset &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="debug/0" class="code">debug/0</h3>
-          <blockquote>
-            <p class="comment">Starts debugging for all defined spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>debug &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="nodebug/0" class="code">nodebug/0</h3>
-          <blockquote>
-            <p class="comment">Stops debugging for all defined spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>nodebug &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="debugging/0" class="code">debugging/0</h3>
-          <blockquote>
-            <p class="comment">Reports current debugging settings, including spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>debugging &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="debugging/1" class="code">debugging/1</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all entities compiled in debug mode.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>debugging(Entity)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>debugging(?entity_identifier) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="trace/0" class="code">trace/0</h3>
-          <blockquote>
-            <p class="comment">Starts tracing all calls compiled in debug mode.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>trace &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="notrace/0" class="code">notrace/0</h3>
-          <blockquote>
-            <p class="comment">Stops tracing of calls compiled in debug mode.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>notrace &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="spy/1" class="code">spy/1</h3>
-          <blockquote>
-            <p class="comment">Sets a line number spy point or a predicate spy point or a list of spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>spy(SpyPoint)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>spy(@spy_point) &ndash; one</code>
-            </dd>
-            <dd class="value">
-              <code>spy(@list(spy_point)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="spying/1" class="code">spying/1</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all defined line number and predicate spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>spying(SpyPoint)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>spying(?spy_point) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="spy/4" class="code">spy/4</h3>
-          <blockquote>
-            <p class="comment">Sets a context spy point.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>spy(Sender,This,Self,Goal)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>spy(@term,@term,@term,@term) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="spying/4" class="code">spying/4</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all defined context spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>spying(Sender,This,Self,Goal)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>spying(?term,?term,?term,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="nospy/1" class="code">nospy/1</h3>
-          <blockquote>
-            <p class="comment">Removes all matching line number spy points and predicate spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>nospy(SpyPoint)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>nospy(@var) &ndash; one</code>
-            </dd>
-            <dd class="value">
-              <code>nospy(@spy_point) &ndash; one</code>
-            </dd>
-            <dd class="value">
-              <code>nospy(@list(spy_point)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="nospy/4" class="code">nospy/4</h3>
-          <blockquote>
-            <p class="comment">Removes all matching context spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>nospy(Sender,This,Self,Goal)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>nospy(@term,@term,@term,@term) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="nospyall/0" class="code">nospyall/0</h3>
-          <blockquote>
-            <p class="comment">Removes all line number, predicate, and context spy points.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>nospyall &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="leash/1" class="code">leash/1</h3>
-          <blockquote>
-            <p class="comment">Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>leash(Ports)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>leash(+atom) &ndash; one</code>
-            </dd>
-            <dd class="value">
-              <code>leash(+list(atom)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="leashing/1" class="code">leashing/1</h3>
-          <blockquote>
-            <p class="comment">Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>leashing(Port)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>leashing(?atom) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <dl class="remarks">
-          <dt class="comment">Debugger help</dt>
-          <dd class="text">Type the character "h" or the character "?" at a leashed port.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Predicate spy point</dt>
-          <dd class="text">Specified as a ground term Functor/Arity.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Line number spy point</dt>
-          <dd class="text">Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Leash shorthands</dt>
-          <dd class="text">none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

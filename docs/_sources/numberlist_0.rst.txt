@@ -1,0 +1,56 @@
+.. index:: numberlist
+.. _numberlist/0:
+
+**object**
+
+``numberlist``
+==============
+
+List of numbers predicates.
+
+* author: Paulo Moura
+* version: 1.9
+* date: 2018/7/13
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`numberlistp <numberlistp/0>`
+* extends:
+
+  * ``public`` :ref:`list <list/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`list <list/0>`
+* :ref:`list(Type) <list/1>`
+* :ref:`varlist <varlist/0>`
+* :ref:`difflist <difflist/0>`
+
+

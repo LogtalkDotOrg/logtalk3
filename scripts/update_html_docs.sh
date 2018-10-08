@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, and
 ##   contributions documentation
 ## 
-##   Last updated on May 16, 2018
+##   Last updated on October 8, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -47,7 +47,7 @@ logtalk="swilgt$extension -g"
 cwd=$(pwd)
 
 # documentation goal
-goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]),halt."
+goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/'])]),halt."
 
 
 print_version() {
@@ -133,10 +133,15 @@ elif [ ! "$(command -v $backend)" ] ; then
 fi
 
 $logtalk "$goal"
-cd "$cwd/../docs" || exit 1
-lgt2html
-rm ./*.xml
-rm ./*.dtd
-rm ./*.xsd
+cd "$cwd/../docs/sources" || exit 1
+lgt2rst
+mv _conf.py conf.py
+make clean
+make html
+cp -R _build/html/* ../
+make clean
+mv conf.py _conf.py
+rm *.xml
+rm *.rst
 
 exit 0

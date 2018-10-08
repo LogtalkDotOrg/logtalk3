@@ -1,0 +1,186 @@
+.. index:: graph_language_protocol
+.. _graph_language_protocol/0:
+
+**protocol**
+
+``graph_language_protocol``
+===========================
+
+Predicates for generating graph files.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2014/12/30
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="output_file_name/2"> </div>
+
+.. index:: output_file_name/2
+.. _graph_language_protocol/0::output_file_name/2:
+
+``output_file_name/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs the diagram file basename by adding a graph language dependent extension to the given name.
+
+* compilation flags: ``static``
+* template: ``output_file_name(Name,Basename)``
+
+* mode - number of proofs:
+
+  * ``output_file_name(+atom,-atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file_header/3"> </div>
+
+.. index:: file_header/3
+.. _graph_language_protocol/0::file_header/3:
+
+``file_header/3``
+^^^^^^^^^^^^^^^^^
+
+Writes the output file header using the specified options.
+
+* compilation flags: ``static``
+* template: ``file_header(Stream,Identifier,Options)``
+
+* mode - number of proofs:
+
+  * ``file_header(+stream_or_alias,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file_footer/3"> </div>
+
+.. index:: file_footer/3
+.. _graph_language_protocol/0::file_footer/3:
+
+``file_footer/3``
+^^^^^^^^^^^^^^^^^
+
+Writes the output file footer using the specified options.
+
+* compilation flags: ``static``
+* template: ``file_footer(Stream,Identifier,Options)``
+
+* mode - number of proofs:
+
+  * ``file_footer(+stream_or_alias,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="graph_header/5"> </div>
+
+.. index:: graph_header/5
+.. _graph_language_protocol/0::graph_header/5:
+
+``graph_header/5``
+^^^^^^^^^^^^^^^^^^
+
+Writes a graph header using the specified options.
+
+* compilation flags: ``static``
+* template: ``graph_header(Stream,Identifier,Label,Kind,Options)``
+
+* mode - number of proofs:
+
+  * ``graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="graph_footer/5"> </div>
+
+.. index:: graph_footer/5
+.. _graph_language_protocol/0::graph_footer/5:
+
+``graph_footer/5``
+^^^^^^^^^^^^^^^^^^
+
+Writes a graph footer using the specified options.
+
+* compilation flags: ``static``
+* template: ``graph_footer(Stream,Identifier,Label,Kind,Options)``
+
+* mode - number of proofs:
+
+  * ``graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="node/7"> </div>
+
+.. index:: node/7
+.. _graph_language_protocol/0::node/7:
+
+``node/7``
+^^^^^^^^^^
+
+Writes a node using the specified options.
+
+* compilation flags: ``static``
+* template: ``node(Stream,Identifier,Label,Caption,Lines,Kind,Options)``
+
+* mode - number of proofs:
+
+  * ``node(+stream_or_alias,+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="edge/6"> </div>
+
+.. index:: edge/6
+.. _graph_language_protocol/0::edge/6:
+
+``edge/6``
+^^^^^^^^^^
+
+Writes an edge between two nodes using the specified options.
+
+* compilation flags: ``static``
+* template: ``edge(Stream,Start,End,Labels,Kind,Options)``
+
+* mode - number of proofs:
+
+  * ``edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

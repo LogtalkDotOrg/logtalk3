@@ -1,0 +1,106 @@
+.. index:: timep
+.. _timep/0:
+
+**protocol**
+
+``timep``
+=========
+
+Time protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="now/3"> </div>
+
+.. index:: now/3
+.. _timep/0::now/3:
+
+``now/3``
+^^^^^^^^^
+
+Returns current time.
+
+* compilation flags: ``static``
+* template: ``now(Hours,Mins,Secs)``
+
+* mode - number of proofs:
+
+  * ``now(-integer,-integer,-integer)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="cpu_time/1"> </div>
+
+.. index:: cpu_time/1
+.. _timep/0::cpu_time/1:
+
+``cpu_time/1``
+^^^^^^^^^^^^^^
+
+Returns the current cpu time.
+
+* compilation flags: ``static``
+* template: ``cpu_time(Time)``
+
+* mode - number of proofs:
+
+  * ``cpu_time(-number)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="valid/3"> </div>
+
+.. index:: valid/3
+.. _timep/0::valid/3:
+
+``valid/3``
+^^^^^^^^^^^
+
+True if the arguments represent a valid time value.
+
+* compilation flags: ``static``
+* template: ``valid(Hours,Mins,Secs)``
+
+* mode - number of proofs:
+
+  * ``valid(+integer,+integer,+integer)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

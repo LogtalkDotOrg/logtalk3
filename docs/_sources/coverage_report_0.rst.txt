@@ -1,0 +1,59 @@
+.. index:: coverage_report
+.. _coverage_report/0:
+
+**object**
+
+``coverage_report``
+===================
+
+Intercepts unit test execution messages and generates a coverage_report.xml file with a test suite code coverage results.
+
+* author: Paulo Moura
+* version: 1.3
+* date: 2018/3/11
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="timestamp_/6"> </div>
+
+.. index:: timestamp_/6
+.. _coverage_report/0::timestamp_/6:
+
+``timestamp_/6``
+^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

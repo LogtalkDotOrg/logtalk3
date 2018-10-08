@@ -1,0 +1,394 @@
+.. index:: randomp
+.. _randomp/0:
+
+**protocol**
+
+``randomp``
+===========
+
+Random number generator protocol.
+
+* author: Paulo Moura
+* version: 2.4
+* date: 2018/8/14
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="random/1"> </div>
+
+.. index:: random/1
+.. _randomp/0::random/1:
+
+``random/1``
+^^^^^^^^^^^^
+
+Returns a new random float value in the interval [0.0, 1.0[.
+
+* compilation flags: ``static``
+* template: ``random(Random)``
+
+* mode - number of proofs:
+
+  * ``random(-float)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="between/3"> </div>
+
+.. index:: between/3
+.. _randomp/0::between/3:
+
+``between/3``
+^^^^^^^^^^^^^
+
+Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower > Upper.
+
+* compilation flags: ``static``
+* template: ``between(Lower,Upper,Random)``
+
+* mode - number of proofs:
+
+  * ``between(+integer,+integer,-integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="member/2"> </div>
+
+.. index:: member/2
+.. _randomp/0::member/2:
+
+``member/2``
+^^^^^^^^^^^^
+
+Returns a random member of a list. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``member(Random,List)``
+
+* mode - number of proofs:
+
+  * ``member(-term,+list(term))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="select/3"> </div>
+
+.. index:: select/3
+.. _randomp/0::select/3:
+
+``select/3``
+^^^^^^^^^^^^
+
+Returns a random member of a list and the rest of the list. Fails if the list is empty.
+
+* compilation flags: ``static``
+* template: ``select(Random,List,Rest)``
+
+* mode - number of proofs:
+
+  * ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="permutation/2"> </div>
+
+.. index:: permutation/2
+.. _randomp/0::permutation/2:
+
+``permutation/2``
+^^^^^^^^^^^^^^^^^
+
+Returns a random permutation of a list.
+
+* compilation flags: ``static``
+* template: ``permutation(List,Permutation)``
+
+* mode - number of proofs:
+
+  * ``permutation(+list,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="sequence/4"> </div>
+
+.. index:: sequence/4
+.. _randomp/0::sequence/4:
+
+``sequence/4``
+^^^^^^^^^^^^^^
+
+Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower > Upper.
+
+* compilation flags: ``static``
+* template: ``sequence(Length,Lower,Upper,List)``
+
+* mode - number of proofs:
+
+  * ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="set/4"> </div>
+
+.. index:: set/4
+.. _randomp/0::set/4:
+
+``set/4``
+^^^^^^^^^
+
+Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower > Upper, or if Length > Upper - Lower + 1.
+
+* compilation flags: ``static``
+* template: ``set(Length,Lower,Upper,Set)``
+
+* mode - number of proofs:
+
+  * ``set(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="random/3"> </div>
+
+.. index:: random/3
+.. _randomp/0::random/3:
+
+``random/3``
+^^^^^^^^^^^^
+
+Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Upper. Deprecated. Use between/3 for integers.
+
+* compilation flags: ``static``
+* template: ``random(Lower,Upper,Random)``
+
+* mode - number of proofs:
+
+  * ``random(+integer,+integer,-integer)`` - ``zero_or_one``
+
+  * ``random(+float,+float,-float)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="randseq/4"> </div>
+
+.. index:: randseq/4
+.. _randomp/0::randseq/4:
+
+``randseq/4``
+^^^^^^^^^^^^^
+
+Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower > Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.
+
+* compilation flags: ``static``
+* template: ``randseq(Length,Lower,Upper,List)``
+
+* mode - number of proofs:
+
+  * ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+  * ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="randset/4"> </div>
+
+.. index:: randset/4
+.. _randomp/0::randset/4:
+
+``randset/4``
+^^^^^^^^^^^^^
+
+Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower > Upper, or Length > Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.
+
+* compilation flags: ``static``
+* template: ``randset(Length,Lower,Upper,Set)``
+
+* mode - number of proofs:
+
+  * ``randset(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+  * ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="get_seed/1"> </div>
+
+.. index:: get_seed/1
+.. _randomp/0::get_seed/1:
+
+``get_seed/1``
+^^^^^^^^^^^^^^
+
+Gets the current random generator seed. Seed should be regarded as an opaque ground term.
+
+* compilation flags: ``static``
+* template: ``get_seed(Seed)``
+
+* mode - number of proofs:
+
+  * ``get_seed(-ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_seed/1"> </div>
+
+.. index:: set_seed/1
+.. _randomp/0::set_seed/1:
+
+``set_seed/1``
+^^^^^^^^^^^^^^
+
+Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.
+
+* compilation flags: ``static``
+* template: ``set_seed(Seed)``
+
+* mode - number of proofs:
+
+  * ``set_seed(+ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="maybe/0"> </div>
+
+.. index:: maybe/0
+.. _randomp/0::maybe/0:
+
+``maybe/0``
+^^^^^^^^^^^
+
+Succeeds or fails with equal probability.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``maybe`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="maybe/1"> </div>
+
+.. index:: maybe/1
+.. _randomp/0::maybe/1:
+
+``maybe/1``
+^^^^^^^^^^^
+
+Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].
+
+* compilation flags: ``static``
+* template: ``maybe(Probability)``
+
+* mode - number of proofs:
+
+  * ``maybe(+probability)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="maybe/2"> </div>
+
+.. index:: maybe/2
+.. _randomp/0::maybe/2:
+
+``maybe/2``
+^^^^^^^^^^^
+
+Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.
+
+* compilation flags: ``static``
+* template: ``maybe(K,N)``
+
+* mode - number of proofs:
+
+  * ``maybe(+non_negative_integer,+non_negative_integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="maybe_call/1"> </div>
+
+.. index:: maybe_call/1
+.. _randomp/0::maybe_call/1:
+
+``maybe_call/1``
+^^^^^^^^^^^^^^^^
+
+Calls a goal or fails without calling it with equal probability. When the goal is called, it determines if this predicate succeeds once or fails.
+
+* compilation flags: ``static``
+* template: ``maybe_call(Goal)``
+
+* meta-predicate template: ``maybe_call(0)``
+
+* mode - number of proofs:
+
+  * ``maybe_call(+callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="maybe_call/2"> </div>
+
+.. index:: maybe_call/2
+.. _randomp/0::maybe_call/2:
+
+``maybe_call/2``
+^^^^^^^^^^^^^^^^
+
+Calls a goal or fails without calling it with probability Probability. When the goal is called, it determines if this predicate succeeds once or fails.
+
+* compilation flags: ``static``
+* template: ``maybe_call(Probability,Goal)``
+
+* meta-predicate template: ``maybe_call(*,0)``
+
+* mode - number of proofs:
+
+  * ``maybe_call(+probability,+callable)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

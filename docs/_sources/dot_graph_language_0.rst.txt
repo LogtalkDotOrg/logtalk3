@@ -1,0 +1,52 @@
+.. index:: dot_graph_language
+.. _dot_graph_language/0:
+
+**object**
+
+``dot_graph_language``
+======================
+
+Predicates for generating graph files in the DOT language (version 2.36.0 or later).
+
+* author: Paulo Moura
+* version: 2.12
+* date: 2018/2/1
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`graph_language_protocol <graph_language_protocol/0>`
+* provides:
+
+  * :ref:`graph_language_registry::language_object/2 <graph_language_registry/0::language_object/2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

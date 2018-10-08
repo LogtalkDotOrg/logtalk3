@@ -1,0 +1,51 @@
+.. index:: library_dependency_diagram(Format)
+.. _library_dependency_diagram/1:
+
+**object**
+
+``library_dependency_diagram(Format)``
+======================================
+
+Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.
+
+* author: Paulo Moura
+* version: 2.8
+* date: 2018/2/4
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`library_diagram(Format) <library_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`library_load_diagram(Format) <library_load_diagram/1>`
+* :ref:`file_load_diagram(Format) <file_load_diagram/1>`
+
+

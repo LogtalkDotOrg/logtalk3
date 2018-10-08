@@ -1,513 +1,637 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>dictionaryp</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">dictionaryp</h1>
-      <blockquote>
-        <p class="comment">Dictionary protocol.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dictionaryp &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="difflist" href="difflist_0.html" />
+    <link rel="prev" title="datep" href="datep_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dictionaryp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="randomp_0.html">randomp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">dictionaryp</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dictionaryp_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="dictionaryp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="dictionaryp">
+<h1><code class="docutils literal notranslate"><span class="pre">dictionaryp</span></code><a class="headerlink" href="#dictionaryp" title="Permalink to this headline">¶</a></h1>
+<p>Dictionary protocol.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 2.0</li>
+<li>date: 2010/2/26</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="as_dictionary/2"> </div><div class="section" id="as-dictionary-2">
+<span id="dictionaryp-0-as-dictionary-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">as_dictionary/2</span></code><a class="headerlink" href="#as-dictionary-2" title="Permalink to this headline">¶</a></h3>
+<p>Converts a list of key-value pairs to a dictionary.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">as_dictionary(Pairs,Dictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">as_dictionary(&#64;list(pairs),-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="as_list/2"> </div></div>
+<div class="section" id="as-list-2">
+<span id="dictionaryp-0-as-list-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
+<p>Converts a dictionary to a ordered list of key-value pairs.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">as_list(Dictionary,Pairs)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">as_list(&#64;dictionary,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="clone/3"> </div></div>
+<div class="section" id="clone-3">
+<span id="dictionaryp-0-clone-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">clone/3</span></code><a class="headerlink" href="#clone-3" title="Permalink to this headline">¶</a></h3>
+<p>Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">clone(Dictionary,Clone,ClonePairs)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">clone(+tree,-tree,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="clone/4"> </div></div>
+<div class="section" id="clone-4">
+<span id="dictionaryp-0-clone-4"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">clone/4</span></code><a class="headerlink" href="#clone-4" title="Permalink to this headline">¶</a></h3>
+<p>Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">clone(Dictionary,Pairs,Clone,ClonePairs)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">clone(+tree,-list(pairs),-tree,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="insert/4"> </div></div>
+<div class="section" id="insert-4">
+<span id="dictionaryp-0-insert-4"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">insert/4</span></code><a class="headerlink" href="#insert-4" title="Permalink to this headline">¶</a></h3>
+<p>Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">insert(OldDictionary,Key,Value,NewDictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">insert(+dictionary,+ground,&#64;term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="delete/4"> </div></div>
+<div class="section" id="delete-4">
+<span id="dictionaryp-0-delete-4"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">delete/4</span></code><a class="headerlink" href="#delete-4" title="Permalink to this headline">¶</a></h3>
+<p>Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">delete(OldDictionary,Key,Value,NewDictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">delete(+dictionary,&#64;ground,?term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="update/4"> </div></div>
+<div class="section" id="update-4">
+<span id="dictionaryp-0-update-4"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">update/4</span></code><a class="headerlink" href="#update-4" title="Permalink to this headline">¶</a></h3>
+<p>Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">update(OldDictionary,Key,NewValue,NewDictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">update(+dictionary,&#64;ground,+term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="update/5"> </div></div>
+<div class="section" id="update-5">
+<span id="dictionaryp-0-update-5"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">update/5</span></code><a class="headerlink" href="#update-5" title="Permalink to this headline">¶</a></h3>
+<p>Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">update(OldDictionary,Key,OldValue,NewValue,NewDictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">update(+dictionary,&#64;ground,?term,+term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="empty/1"> </div></div>
+<div class="section" id="empty-1">
+<span id="dictionaryp-0-empty-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">empty/1</span></code><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
+<p>True if the dictionary is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">empty(Dictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">empty(&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="lookup/3"> </div></div>
+<div class="section" id="lookup-3">
+<span id="dictionaryp-0-lookup-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">lookup/3</span></code><a class="headerlink" href="#lookup-3" title="Permalink to this headline">¶</a></h3>
+<p>Lookups a matching Key-Value pair from a dictionary.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">lookup(Key,Value,Dictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">lookup(+ground,?term,&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">lookup(-ground,?term,&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="previous/4"> </div></div>
+<div class="section" id="previous-4">
+<span id="dictionaryp-0-previous-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">previous/4</span></code><a class="headerlink" href="#previous-4" title="Permalink to this headline">¶</a></h3>
+<p>Returns the previous pair in a dictionary given a key.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">previous(Dictionary,Key,Previous,Value)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">previous(+dictionary,+key,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="next/4"> </div></div>
+<div class="section" id="next-4">
+<span id="dictionaryp-0-next-4"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">next/4</span></code><a class="headerlink" href="#next-4" title="Permalink to this headline">¶</a></h3>
+<p>Returns the next pair in a dictionary given a key.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">next(Dictionary,Key,Next,Value)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">next(+dictionary,+key,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="min/3"> </div></div>
+<div class="section" id="min-3">
+<span id="dictionaryp-0-min-3"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">min/3</span></code><a class="headerlink" href="#min-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">min(Dictionary,Key,Value)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">min(+dictionary,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="max/3"> </div></div>
+<div class="section" id="max-3">
+<span id="dictionaryp-0-max-3"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max/3</span></code><a class="headerlink" href="#max-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">max(Dictionary,Key,Value)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">max(+dictionary,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="delete_min/4"> </div></div>
+<div class="section" id="delete-min-4">
+<span id="dictionaryp-0-delete-min-4"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_min/4</span></code><a class="headerlink" href="#delete-min-4" title="Permalink to this headline">¶</a></h3>
+<p>Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">delete_min(OldDictionary,Key,Value,NewDictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">delete_min(+dictionary,-key,-value,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="delete_max/4"> </div></div>
+<div class="section" id="delete-max-4">
+<span id="dictionaryp-0-delete-max-4"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_max/4</span></code><a class="headerlink" href="#delete-max-4" title="Permalink to this headline">¶</a></h3>
+<p>Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">delete_max(OldDictionary,Key,Value,NewDictionary)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">delete_max(+dictionary,-key,-value,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="keys/2"> </div></div>
+<div class="section" id="keys-2">
+<span id="dictionaryp-0-keys-2"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">keys/2</span></code><a class="headerlink" href="#keys-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns a list with all dictionary keys.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">keys(Dictionary,List)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">keys(&#64;dictionary,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/2"> </div></div>
+<div class="section" id="map-2">
+<span id="dictionaryp-0-map-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
+<p>Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,Dictionary)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(1,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(&#64;callable,+dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/3"> </div></div>
+<div class="section" id="map-3">
+<span id="dictionaryp-0-map-3"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">map/3</span></code><a class="headerlink" href="#map-3" title="Permalink to this headline">¶</a></h3>
+<p>Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,OldDictionary,NewDictionary)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(2,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(&#64;callable,+dictionary,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="apply/4"> </div></div>
+<div class="section" id="apply-4">
+<span id="dictionaryp-0-apply-4"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">apply/4</span></code><a class="headerlink" href="#apply-4" title="Permalink to this headline">¶</a></h3>
+<p>Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">apply(Closure,OldDictionary,Key,NewDictionary)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">apply(2,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">apply(+callable,+dictionary,+key,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="size/2"> </div></div>
+<div class="section" id="size-2">
+<span id="dictionaryp-0-size-2"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
+<p>Number of dictionary entries.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">size(Dictionary,Size)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">size(&#64;dictionary,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="difflist_0.html" class="btn btn-neutral float-right" title="difflist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="datep_0.html" class="btn btn-neutral" title="datep" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>2.0</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2010/2/26</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="as_dictionary/2" class="code">as_dictionary/2</h3>
-          <blockquote>
-            <p class="comment">Converts a list of key-value pairs to a dictionary.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>as_dictionary(Pairs,Dictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>as_dictionary(@list(pairs),-dictionary) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="as_list/2" class="code">as_list/2</h3>
-          <blockquote>
-            <p class="comment">Converts a dictionary to a ordered list of key-value pairs.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>as_list(Dictionary,Pairs)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>as_list(@dictionary,-list(pairs)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="clone/3" class="code">clone/3</h3>
-          <blockquote>
-            <p class="comment">Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>clone(Dictionary,Clone,ClonePairs)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>clone(+tree,-tree,-list(pairs)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="clone/4" class="code">clone/4</h3>
-          <blockquote>
-            <p class="comment">Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>clone(Dictionary,Pairs,Clone,ClonePairs)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>clone(+tree,-list(pairs),-tree,-list(pairs)) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="insert/4" class="code">insert/4</h3>
-          <blockquote>
-            <p class="comment">Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>insert(OldDictionary,Key,Value,NewDictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>insert(+dictionary,+ground,@term,-dictionary) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="delete/4" class="code">delete/4</h3>
-          <blockquote>
-            <p class="comment">Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>delete(OldDictionary,Key,Value,NewDictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>delete(+dictionary,@ground,?term,-dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="update/4" class="code">update/4</h3>
-          <blockquote>
-            <p class="comment">Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>update(OldDictionary,Key,NewValue,NewDictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>update(+dictionary,@ground,+term,-dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="update/5" class="code">update/5</h3>
-          <blockquote>
-            <p class="comment">Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>update(OldDictionary,Key,OldValue,NewValue,NewDictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>update(+dictionary,@ground,?term,+term,-dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="empty/1" class="code">empty/1</h3>
-          <blockquote>
-            <p class="comment">True if the dictionary is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>empty(Dictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>empty(@dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="lookup/3" class="code">lookup/3</h3>
-          <blockquote>
-            <p class="comment">Lookups a matching Key-Value pair from a dictionary.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>lookup(Key,Value,Dictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>lookup(+ground,?term,@dictionary) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>lookup(-ground,?term,@dictionary) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="previous/4" class="code">previous/4</h3>
-          <blockquote>
-            <p class="comment">Returns the previous pair in a dictionary given a key.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>previous(Dictionary,Key,Previous,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>previous(+dictionary,+key,-key,-value) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="next/4" class="code">next/4</h3>
-          <blockquote>
-            <p class="comment">Returns the next pair in a dictionary given a key.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>next(Dictionary,Key,Next,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>next(+dictionary,+key,-key,-value) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="min/3" class="code">min/3</h3>
-          <blockquote>
-            <p class="comment">Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>min(Dictionary,Key,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>min(+dictionary,-key,-value) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="max/3" class="code">max/3</h3>
-          <blockquote>
-            <p class="comment">Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>max(Dictionary,Key,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>max(+dictionary,-key,-value) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="delete_min/4" class="code">delete_min/4</h3>
-          <blockquote>
-            <p class="comment">Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>delete_min(OldDictionary,Key,Value,NewDictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>delete_min(+dictionary,-key,-value,-dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="delete_max/4" class="code">delete_max/4</h3>
-          <blockquote>
-            <p class="comment">Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>delete_max(OldDictionary,Key,Value,NewDictionary)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>delete_max(+dictionary,-key,-value,-dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="keys/2" class="code">keys/2</h3>
-          <blockquote>
-            <p class="comment">Returns a list with all dictionary keys.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>keys(Dictionary,List)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>keys(@dictionary,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/2" class="code">map/2</h3>
-          <blockquote>
-            <p class="comment">Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,Dictionary)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(1,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(@callable,+dictionary) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/3" class="code">map/3</h3>
-          <blockquote>
-            <p class="comment">Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,OldDictionary,NewDictionary)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(2,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(@callable,+dictionary,-dictionary) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="apply/4" class="code">apply/4</h3>
-          <blockquote>
-            <p class="comment">Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>apply(Closure,OldDictionary,Key,NewDictionary)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>apply(2,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>apply(+callable,+dictionary,+key,-dictionary) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="size/2" class="code">size/2</h3>
-          <blockquote>
-            <p class="comment">Number of dictionary entries.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>size(Dictionary,Size)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>size(@dictionary,?integer) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

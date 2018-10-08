@@ -1,0 +1,616 @@
+.. index:: wrapper
+.. _wrapper/0:
+
+**object**
+
+``wrapper``
+===========
+
+Adviser tool for porting and wrapping plain Prolog applications.
+
+* author: Paulo Moura
+* version: 0.1
+* date: 2017/8/10
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+* provides:
+
+  * :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+  * :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="rdirectory/2"> </div>
+
+.. index:: rdirectory/2
+.. _wrapper/0::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using the specified options.
+
+* compilation flags: ``static``
+* template: ``rdirectory(Directory,Options)``
+
+* mode - number of proofs:
+
+  * ``rdirectory(+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _wrapper/0::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Advises the user on missing directives for converting all plain Prolog files in a directory and its sub-directories to Logtalk objects using default options.
+
+* compilation flags: ``static``
+* template: ``rdirectory(Directory)``
+
+* mode - number of proofs:
+
+  * ``rdirectory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _wrapper/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using the specified options.
+
+* compilation flags: ``static``
+* template: ``directory(Directory,Options)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _wrapper/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Advises the user on missing directives for converting all plain Prolog files in a directory to Logtalk objects using default options.
+
+* compilation flags: ``static``
+* template: ``directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directories/2"> </div>
+
+.. index:: directories/2
+.. _wrapper/0::directories/2:
+
+``directories/2``
+^^^^^^^^^^^^^^^^^
+
+Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using the specified options.
+
+* compilation flags: ``static``
+* template: ``directories(Directories,Options)``
+
+* mode - number of proofs:
+
+  * ``directories(+list(atom),+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="directories/1"> </div>
+
+.. index:: directories/1
+.. _wrapper/0::directories/1:
+
+``directories/1``
+^^^^^^^^^^^^^^^^^
+
+Advises the user on missing directives for converting all Prolog files in a set of directories to Logtalk objects using default options.
+
+* compilation flags: ``static``
+* template: ``directories(Directories)``
+
+* mode - number of proofs:
+
+  * ``directories(+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="files/2"> </div>
+
+.. index:: files/2
+.. _wrapper/0::files/2:
+
+``files/2``
+^^^^^^^^^^^
+
+Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using the specified options.
+
+* compilation flags: ``static``
+* template: ``files(Files,Options)``
+
+* mode - number of proofs:
+
+  * ``files(+list(atom),+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="files/1"> </div>
+
+.. index:: files/1
+.. _wrapper/0::files/1:
+
+``files/1``
+^^^^^^^^^^^
+
+Advises the user on missing directives for converting a list of plain Prolog files to Logtalk objects using default options.
+
+* compilation flags: ``static``
+* template: ``files(Files)``
+
+* mode - number of proofs:
+
+  * ``files(+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file/2"> </div>
+
+.. index:: file/2
+.. _wrapper/0::file/2:
+
+``file/2``
+^^^^^^^^^^
+
+Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using the specified options.
+
+* compilation flags: ``static``
+* template: ``file(File,Options)``
+
+* mode - number of proofs:
+
+  * ``file(+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file/1"> </div>
+
+.. index:: file/1
+.. _wrapper/0::file/1:
+
+``file/1``
+^^^^^^^^^^
+
+Advises the user on missing directives for converting a plain Prolog file to Logtalk objects using default options.
+
+* compilation flags: ``static``
+* template: ``file(File)``
+
+* mode - number of proofs:
+
+  * ``file(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="save/1"> </div>
+
+.. index:: save/1
+.. _wrapper/0::save/1:
+
+``save/1``
+^^^^^^^^^^
+
+Saves the generated wrapper objects (plus a loader file per directory) for all advised files using the specified options. The wrapper objects are saved to the same directories that contain the wrapped Prolog files.
+
+* compilation flags: ``static``
+* template: ``save(Options)``
+
+* mode - number of proofs:
+
+  * ``save(+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="save/0"> </div>
+
+.. index:: save/0
+.. _wrapper/0::save/0:
+
+``save/0``
+^^^^^^^^^^
+
+Saves the generated wrapper objects (plus a loader file per directory) for all advised files using default options. The wrapper objects are saved to the same directories that contain the wrapped Prolog files.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``save`` - ``one``
+
+
+.. raw:: html
+
+   <div id="default_option/1"> </div>
+
+.. index:: default_option/1
+.. _wrapper/0::default_option/1:
+
+``default_option/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the default options used when generating the wrapper objects.
+
+* compilation flags: ``static``
+* template: ``default_option(DefaultOption)``
+
+* mode - number of proofs:
+
+  * ``default_option(?compound)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="default_options/1"> </div>
+
+.. index:: default_options/1
+.. _wrapper/0::default_options/1:
+
+``default_options/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of the default options used when generating the wrapper objects.
+
+* compilation flags: ``static``
+* template: ``default_options(DefaultOptions)``
+
+* mode - number of proofs:
+
+  * ``default_options(-list(compound))`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="merge_options/2"> </div>
+
+.. index:: merge_options/2
+.. _wrapper/0::merge_options/2:
+
+``merge_options/2``
+^^^^^^^^^^^^^^^^^^^
+
+Merges the user options with the default options, returning the list of options used when generating the wrapper objects.
+
+* compilation flags: ``static``
+* template: ``merge_options(UserOptions,Options)``
+
+* mode - number of proofs:
+
+  * ``merge_options(+list(compound),-list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="predicate_called_but_not_defined_/2"> </div>
+
+.. index:: predicate_called_but_not_defined_/2
+.. _wrapper/0::predicate_called_but_not_defined_/2:
+
+``predicate_called_but_not_defined_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of called object predicates that are not locally defined.
+
+* compilation flags: ``dynamic``
+* template: ``predicate_called_but_not_defined_(Object,Predicate)``
+
+* mode - number of proofs:
+
+  * ``predicate_called_but_not_defined_(?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="object_predicate_called_/3"> </div>
+
+.. index:: object_predicate_called_/3
+.. _wrapper/0::object_predicate_called_/3:
+
+``object_predicate_called_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of called object predicates.
+
+* compilation flags: ``dynamic``
+* template: ``object_predicate_called_(Object,Other,Predicate)``
+
+* mode - number of proofs:
+
+  * ``object_predicate_called_(?atom,?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="module_predicate_called_/3"> </div>
+
+.. index:: module_predicate_called_/3
+.. _wrapper/0::module_predicate_called_/3:
+
+``module_predicate_called_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of called module predicates.
+
+* compilation flags: ``dynamic``
+* template: ``module_predicate_called_(Object,Module,Predicate)``
+
+* mode - number of proofs:
+
+  * ``module_predicate_called_(?atom,?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="unknown_predicate_called_/2"> </div>
+
+.. index:: unknown_predicate_called_/2
+.. _wrapper/0::unknown_predicate_called_/2:
+
+``unknown_predicate_called_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of predicates called but not defined.
+
+* compilation flags: ``dynamic``
+* template: ``unknown_predicate_called_(Object,Predicate)``
+
+* mode - number of proofs:
+
+  * ``unknown_predicate_called_(?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="missing_predicate_directive_/3"> </div>
+
+.. index:: missing_predicate_directive_/3
+.. _wrapper/0::missing_predicate_directive_/3:
+
+``missing_predicate_directive_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of missing predicate directives.
+
+* compilation flags: ``dynamic``
+* template: ``missing_predicate_directive_(Object,Directive,Predicate)``
+
+* mode - number of proofs:
+
+  * ``missing_predicate_directive_(?atom,?predicate_indicator,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="non_standard_predicate_call_/2"> </div>
+
+.. index:: non_standard_predicate_call_/2
+.. _wrapper/0::non_standard_predicate_call_/2:
+
+``non_standard_predicate_call_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of called non-standard predicates.
+
+* compilation flags: ``dynamic``
+* template: ``non_standard_predicate_call_(Object,Predicate)``
+
+* mode - number of proofs:
+
+  * ``non_standard_predicate_call_(?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="dynamic_directive_/3"> </div>
+
+.. index:: dynamic_directive_/3
+.. _wrapper/0::dynamic_directive_/3:
+
+``dynamic_directive_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of declared dynamic predicates.
+
+* compilation flags: ``dynamic``
+* template: ``dynamic_directive_(Object,Line,Predicate)``
+
+* mode - number of proofs:
+
+  * ``dynamic_directive_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="multifile_directive_/3"> </div>
+
+.. index:: multifile_directive_/3
+.. _wrapper/0::multifile_directive_/3:
+
+``multifile_directive_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of declared multifile predicates.
+
+* compilation flags: ``dynamic``
+* template: ``multifile_directive_(Object,Line,Predicate)``
+
+* mode - number of proofs:
+
+  * ``multifile_directive_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="add_directive_before_entity_/2"> </div>
+
+.. index:: add_directive_before_entity_/2
+.. _wrapper/0::add_directive_before_entity_/2:
+
+``add_directive_before_entity_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of directives to be added before the entity opening directive.
+
+* compilation flags: ``dynamic``
+* template: ``add_directive_before_entity_(Object,Directive)``
+
+* mode - number of proofs:
+
+  * ``add_directive_before_entity_(?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="add_directive_/2"> </div>
+
+.. index:: add_directive_/2
+.. _wrapper/0::add_directive_/2:
+
+``add_directive_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of directives to be added.
+
+* compilation flags: ``dynamic``
+* template: ``add_directive_(Object,Directive)``
+
+* mode - number of proofs:
+
+  * ``add_directive_(?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="add_directive_/3"> </div>
+
+.. index:: add_directive_/3
+.. _wrapper/0::add_directive_/3:
+
+``add_directive_/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of directives to be added to complement existing directives.
+
+* compilation flags: ``dynamic``
+* template: ``add_directive_(Object,Directive,NewDirective)``
+
+* mode - number of proofs:
+
+  * ``add_directive_(?atom,?predicate_indicator,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="remove_directive_/2"> </div>
+
+.. index:: remove_directive_/2
+.. _wrapper/0::remove_directive_/2:
+
+``remove_directive_/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of directives to be removed.
+
+* compilation flags: ``dynamic``
+* template: ``remove_directive_(Object,Directive)``
+
+* mode - number of proofs:
+
+  * ``remove_directive_(?atom,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="file_being_advised_/4"> </div>
+
+.. index:: file_being_advised_/4
+.. _wrapper/0::file_being_advised_/4:
+
+``file_being_advised_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of files being advised are respective directories and names (basename without extension).
+
+* compilation flags: ``dynamic``
+* template: ``file_being_advised_(File,Path,Directory,Name)``
+
+* mode - number of proofs:
+
+  * ``file_being_advised_(?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **prolog_extensions(Extensions) option**: list of file name extensions used to recognize Prolog source files (default is ['.pl','.pro','.prolog'])
+
+* **logtalk_extension(Extension) option**: Logtalk file name extension to be used for the generated wrapper files (default is '.lgt')
+
+* **exclude_files(Files) option**: list of Prolog source files names to exclude (default is [])
+
+* **exclude_directories(Files) option**: list of sub-directory names to exclude (default is [])
+
+* **include_wrapped_files(Boolean)**: generate include/1 directives for the wrapped Prolog source files (default is true)
+
+See also
+--------
+
+(none)
+

@@ -1,0 +1,52 @@
+.. index:: java(Reference,ReturnValue)
+.. _java/2:
+
+**object**
+
+``java(Reference,ReturnValue)``
+===============================
+
+Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
+
+* ``Reference`` - Either a class name or a Java reference to an object* ``ReturnValue`` - Value returned by a method call (possibly the Java value void)
+
+* author: Paulo Moura and Sergio Castro
+* version: 1.2
+* date: 2018/9/4
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`forwarding <forwarding/0>`
+  * ``public`` :ref:`java_access_protocol <java_access_protocol/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

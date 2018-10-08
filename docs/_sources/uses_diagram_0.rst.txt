@@ -1,0 +1,52 @@
+.. index:: uses_diagram
+.. _uses_diagram/0:
+
+**object**
+
+``uses_diagram``
+================
+
+Predicates for generating entity diagrams in DOT format with only uses and use_module relation edges.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2014/1/15
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`uses_diagram(dot) <uses_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`entity_diagram <entity_diagram/0>`
+* :ref:`inheritance_diagram <inheritance_diagram/0>`
+* :ref:`xref_diagram <xref_diagram/0>`
+
+

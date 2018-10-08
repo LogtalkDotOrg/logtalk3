@@ -1,0 +1,52 @@
+.. index:: hook_pipeline(Pipeline)
+.. _hook_pipeline/1:
+
+**object**
+
+``hook_pipeline(Pipeline)``
+===========================
+
+Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.
+
+* ``Pipeline`` - List of hook objects
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2015/11/16
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`hook_set(Set) <hook_set/1>`
+
+

@@ -1,0 +1,166 @@
+.. index:: datep
+.. _datep/0:
+
+**protocol**
+
+``datep``
+=========
+
+Date protocol.
+
+* author: Paulo Moura
+* version: 1.1
+* date: 2005/3/17
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="today/3"> </div>
+
+.. index:: today/3
+.. _datep/0::today/3:
+
+``today/3``
+^^^^^^^^^^^
+
+Returns current date.
+
+* compilation flags: ``static``
+* template: ``today(Year,Month,Day)``
+
+* mode - number of proofs:
+
+  * ``today(-integer,-integer,-integer)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="leap_year/1"> </div>
+
+.. index:: leap_year/1
+.. _datep/0::leap_year/1:
+
+``leap_year/1``
+^^^^^^^^^^^^^^^
+
+True if the argument is a leap year.
+
+* compilation flags: ``static``
+* template: ``leap_year(Year)``
+
+* mode - number of proofs:
+
+  * ``leap_year(+integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="name_of_day/3"> </div>
+
+.. index:: name_of_day/3
+.. _datep/0::name_of_day/3:
+
+``name_of_day/3``
+^^^^^^^^^^^^^^^^^
+
+Name and short name of day.
+
+* compilation flags: ``static``
+* template: ``name_of_day(Index,Name,Short)``
+
+* mode - number of proofs:
+
+  * ``name_of_day(?integer,?atom,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="name_of_month/3"> </div>
+
+.. index:: name_of_month/3
+.. _datep/0::name_of_month/3:
+
+``name_of_month/3``
+^^^^^^^^^^^^^^^^^^^
+
+Name and short name of month.
+
+* compilation flags: ``static``
+* template: ``name_of_month(Index,Name,Short)``
+
+* mode - number of proofs:
+
+  * ``name_of_month(?integer,?atom,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="days_in_month/3"> </div>
+
+.. index:: days_in_month/3
+.. _datep/0::days_in_month/3:
+
+``days_in_month/3``
+^^^^^^^^^^^^^^^^^^^
+
+Number of days in a month.
+
+* compilation flags: ``static``
+* template: ``days_in_month(Month,Year,Days)``
+
+* mode - number of proofs:
+
+  * ``days_in_month(?integer,+integer,?integer)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="valid/3"> </div>
+
+.. index:: valid/3
+.. _datep/0::valid/3:
+
+``valid/3``
+^^^^^^^^^^^
+
+True if the arguments represent a valid date.
+
+* compilation flags: ``static``
+* template: ``valid(Year,Month,Day)``
+
+* mode - number of proofs:
+
+  * ``valid(@integer,@integer,@integer)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

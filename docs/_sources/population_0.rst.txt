@@ -1,0 +1,50 @@
+.. index:: population
+.. _population/0:
+
+**object**
+
+``population``
+==============
+
+Statistical population represented as a list of numbers.
+
+* author: Paulo Moura
+* version: 1.2
+* date: 2013/4/19
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`statistics <statistics/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`sample <sample/0>`
+
+

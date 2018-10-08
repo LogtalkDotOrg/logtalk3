@@ -1,541 +1,658 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>setp</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">setp</h1>
-      <blockquote>
-        <p class="comment">Set protocol.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>setp &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="statistics" href="statistics_0.html" />
+    <link rel="prev" title="set(Type)" href="set_1.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="randomp_0.html">randomp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">setp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">setp</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setp_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="setp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="setp">
+<h1><code class="docutils literal notranslate"><span class="pre">setp</span></code><a class="headerlink" href="#setp" title="Permalink to this headline">¶</a></h1>
+<p>Set protocol.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 1.4</li>
+<li>date: 2018/8/17</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="as_set/2"> </div><div class="section" id="as-set-2">
+<span id="setp-0-as-set-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">as_set/2</span></code><a class="headerlink" href="#as-set-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns a set with all unique elements from the given list.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">as_set(List,Set)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">as_set(&#64;list,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="as_list/2"> </div></div>
+<div class="section" id="as-list-2">
+<span id="setp-0-as-list-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns a list with all elements of the given set.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">as_list(Set,List)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">as_list(&#64;set,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="delete/3"> </div></div>
+<div class="section" id="delete-3">
+<span id="setp-0-delete-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">delete/3</span></code><a class="headerlink" href="#delete-3" title="Permalink to this headline">¶</a></h3>
+<p>Deletes an element from a set returning the set of remaining elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">delete(Set,Element,Remaining)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">delete(+set,&#64;term,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="disjoint/2"> </div></div>
+<div class="section" id="disjoint-2">
+<span id="setp-0-disjoint-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">disjoint/2</span></code><a class="headerlink" href="#disjoint-2" title="Permalink to this headline">¶</a></h3>
+<p>True if the two sets have no element in common.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">disjoint(Set1,Set2)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">disjoint(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="equal/2"> </div></div>
+<div class="section" id="equal-2">
+<span id="setp-0-equal-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">equal/2</span></code><a class="headerlink" href="#equal-2" title="Permalink to this headline">¶</a></h3>
+<p>True if the two sets are equal.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">equal(Set1,Set2)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">equal(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="empty/1"> </div></div>
+<div class="section" id="empty-1">
+<span id="setp-0-empty-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">empty/1</span></code><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
+<p>True if the set is empty.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">empty(Set)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">empty(+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="insert/3"> </div></div>
+<div class="section" id="insert-3">
+<span id="setp-0-insert-3"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">insert/3</span></code><a class="headerlink" href="#insert-3" title="Permalink to this headline">¶</a></h3>
+<p>Inserts an element in a set, returning the resulting set.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">insert(In,Element,Out)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">insert(+set,+term,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="insert_all/3"> </div></div>
+<div class="section" id="insert-all-3">
+<span id="setp-0-insert-all-3"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code><a class="headerlink" href="#insert-all-3" title="Permalink to this headline">¶</a></h3>
+<p>Inserts a list of elements in a set, returning the resulting set.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">insert_all(List,In,Out)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">insert_all(+list,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="intersect/2"> </div></div>
+<div class="section" id="intersect-2">
+<span id="setp-0-intersect-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">intersect/2</span></code><a class="headerlink" href="#intersect-2" title="Permalink to this headline">¶</a></h3>
+<p>True if the two sets have at least one element in common.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">intersect(Set1,Set2)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">intersect(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="intersection/3"> </div></div>
+<div class="section" id="intersection-3">
+<span id="setp-0-intersection-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">intersection/3</span></code><a class="headerlink" href="#intersection-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns the intersection of Set1 and Set2.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">intersection(Set1,Set2,Intersection)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">intersection(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="intersection/4"> </div></div>
+<div class="section" id="intersection-4">
+<span id="setp-0-intersection-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">intersection/4</span></code><a class="headerlink" href="#intersection-4" title="Permalink to this headline">¶</a></h3>
+<p>True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">intersection(Set1,Set2,Intersection,Difference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">intersection(+set,+set,?set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="length/2"> </div></div>
+<div class="section" id="length-2">
+<span id="setp-0-length-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">length/2</span></code><a class="headerlink" href="#length-2" title="Permalink to this headline">¶</a></h3>
+<p>Number of set elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">length(Set,Length)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">length(+set,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="member/2"> </div></div>
+<div class="section" id="member-2">
+<span id="setp-0-member-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">member/2</span></code><a class="headerlink" href="#member-2" title="Permalink to this headline">¶</a></h3>
+<p>Element is a member of set Set.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">member(Element,Set)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">member(+term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">member(-term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="memberchk/2"> </div></div>
+<div class="section" id="memberchk-2">
+<span id="setp-0-memberchk-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">memberchk/2</span></code><a class="headerlink" href="#memberchk-2" title="Permalink to this headline">¶</a></h3>
+<p>Checks if a term is a member of a set.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">memberchk(Element,Set)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">memberchk(+term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="powerset/2"> </div></div>
+<div class="section" id="powerset-2">
+<span id="setp-0-powerset-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">powerset/2</span></code><a class="headerlink" href="#powerset-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns the power set of a set, represented as a list of sets.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">powerset(Set,Powerset)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">powerset(+set,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="product/3"> </div></div>
+<div class="section" id="product-3">
+<span id="setp-0-product-3"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">product/3</span></code><a class="headerlink" href="#product-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns the cartesian product of two sets.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">product(Set1,Set2,Product)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">product(+set,+set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="select/3"> </div></div>
+<div class="section" id="select-3">
+<span id="setp-0-select-3"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">select/3</span></code><a class="headerlink" href="#select-3" title="Permalink to this headline">¶</a></h3>
+<p>Selects an element from a set, returning the set of remaining elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">select(Element,Set,Remaining)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">select(?term,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="selectchk/3"> </div></div>
+<div class="section" id="selectchk-3">
+<span id="setp-0-selectchk-3"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">selectchk/3</span></code><a class="headerlink" href="#selectchk-3" title="Permalink to this headline">¶</a></h3>
+<p>Checks that an element can be selected from a set, returning the set of remaining elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">selectchk(Element,Set,Remaining)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">selectchk(?term,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="subset/2"> </div></div>
+<div class="section" id="subset-2">
+<span id="setp-0-subset-2"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">subset/2</span></code><a class="headerlink" href="#subset-2" title="Permalink to this headline">¶</a></h3>
+<p>True if Subset is a subset of Set.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">subset(Subset,Set)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">subset(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="subtract/3"> </div></div>
+<div class="section" id="subtract-3">
+<span id="setp-0-subtract-3"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code><a class="headerlink" href="#subtract-3" title="Permalink to this headline">¶</a></h3>
+<p>True when Difference contains all and only the elements of Set1 which are not also in Set2.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">subtract(Set1,Set2,Difference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">subtract(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="symdiff/3"> </div></div>
+<div class="section" id="symdiff-3">
+<span id="setp-0-symdiff-3"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">symdiff/3</span></code><a class="headerlink" href="#symdiff-3" title="Permalink to this headline">¶</a></h3>
+<p>True if Difference is the symmetric difference of Set1 and Set2.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">symdiff(Set1,Set2,Difference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">symdiff(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="union/3"> </div></div>
+<div class="section" id="union-3">
+<span id="setp-0-union-3"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">union/3</span></code><a class="headerlink" href="#union-3" title="Permalink to this headline">¶</a></h3>
+<p>True if Union is the union of Set1 and Set2.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">union(Set1,Set2,Union)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">union(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="union/4"> </div></div>
+<div class="section" id="union-4">
+<span id="setp-0-union-4"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">union/4</span></code><a class="headerlink" href="#union-4" title="Permalink to this headline">¶</a></h3>
+<p>True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">union(Set1,Set2,Union,Difference)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">union(+set,+set,?set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="statistics_0.html" class="btn btn-neutral float-right" title="statistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="set_1.html" class="btn btn-neutral" title="set(Type)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>1.4</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2018/8/17</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="as_set/2" class="code">as_set/2</h3>
-          <blockquote>
-            <p class="comment">Returns a set with all unique elements from the given list.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>as_set(List,Set)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>as_set(@list,-set) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="as_list/2" class="code">as_list/2</h3>
-          <blockquote>
-            <p class="comment">Returns a list with all elements of the given set.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>as_list(Set,List)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>as_list(@set,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="delete/3" class="code">delete/3</h3>
-          <blockquote>
-            <p class="comment">Deletes an element from a set returning the set of remaining elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>delete(Set,Element,Remaining)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>delete(+set,@term,?set) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="disjoint/2" class="code">disjoint/2</h3>
-          <blockquote>
-            <p class="comment">True if the two sets have no element in common.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>disjoint(Set1,Set2)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>disjoint(+set,+set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="equal/2" class="code">equal/2</h3>
-          <blockquote>
-            <p class="comment">True if the two sets are equal.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>equal(Set1,Set2)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>equal(+set,+set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="empty/1" class="code">empty/1</h3>
-          <blockquote>
-            <p class="comment">True if the set is empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>empty(Set)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>empty(+set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="insert/3" class="code">insert/3</h3>
-          <blockquote>
-            <p class="comment">Inserts an element in a set, returning the resulting set.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>insert(In,Element,Out)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>insert(+set,+term,?set) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="insert_all/3" class="code">insert_all/3</h3>
-          <blockquote>
-            <p class="comment">Inserts a list of elements in a set, returning the resulting set.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>insert_all(List,In,Out)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>insert_all(+list,+set,?set) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="intersect/2" class="code">intersect/2</h3>
-          <blockquote>
-            <p class="comment">True if the two sets have at least one element in common.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>intersect(Set1,Set2)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>intersect(+set,+set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="intersection/3" class="code">intersection/3</h3>
-          <blockquote>
-            <p class="comment">Returns the intersection of Set1 and Set2.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>intersection(Set1,Set2,Intersection)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>intersection(+set,+set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="intersection/4" class="code">intersection/4</h3>
-          <blockquote>
-            <p class="comment">True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>intersection(Set1,Set2,Intersection,Difference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>intersection(+set,+set,?set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="length/2" class="code">length/2</h3>
-          <blockquote>
-            <p class="comment">Number of set elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>length(Set,Length)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>length(+set,?integer) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="member/2" class="code">member/2</h3>
-          <blockquote>
-            <p class="comment">Element is a member of set Set.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>member(Element,Set)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>member(+term,+set) &ndash; zero_or_one</code>
-            </dd>
-            <dd class="value">
-              <code>member(-term,+set) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="memberchk/2" class="code">memberchk/2</h3>
-          <blockquote>
-            <p class="comment">Checks if a term is a member of a set.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>memberchk(Element,Set)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>memberchk(+term,+set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="powerset/2" class="code">powerset/2</h3>
-          <blockquote>
-            <p class="comment">Returns the power set of a set, represented as a list of sets.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>powerset(Set,Powerset)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>powerset(+set,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="product/3" class="code">product/3</h3>
-          <blockquote>
-            <p class="comment">Returns the cartesian product of two sets.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>product(Set1,Set2,Product)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>product(+set,+set,-set) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="select/3" class="code">select/3</h3>
-          <blockquote>
-            <p class="comment">Selects an element from a set, returning the set of remaining elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>select(Element,Set,Remaining)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>select(?term,+set,?set) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="selectchk/3" class="code">selectchk/3</h3>
-          <blockquote>
-            <p class="comment">Checks that an element can be selected from a set, returning the set of remaining elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>selectchk(Element,Set,Remaining)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>selectchk(?term,+set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="subset/2" class="code">subset/2</h3>
-          <blockquote>
-            <p class="comment">True if Subset is a subset of Set.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>subset(Subset,Set)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>subset(+set,+set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="subtract/3" class="code">subtract/3</h3>
-          <blockquote>
-            <p class="comment">True when Difference contains all and only the elements of Set1 which are not also in Set2.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>subtract(Set1,Set2,Difference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>subtract(+set,+set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="symdiff/3" class="code">symdiff/3</h3>
-          <blockquote>
-            <p class="comment">True if Difference is the symmetric difference of Set1 and Set2.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>symdiff(Set1,Set2,Difference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>symdiff(+set,+set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="union/3" class="code">union/3</h3>
-          <blockquote>
-            <p class="comment">True if Union is the union of Set1 and Set2.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>union(Set1,Set2,Union)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>union(+set,+set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="union/4" class="code">union/4</h3>
-          <blockquote>
-            <p class="comment">True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>union(Set1,Set2,Union,Difference)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>union(+set,+set,?set,?set) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

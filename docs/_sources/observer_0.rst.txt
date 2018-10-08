@@ -1,0 +1,67 @@
+.. index:: observer
+.. _observer/0:
+
+**category**
+
+``observer``
+============
+
+Smalltalk dependent protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2003/2/9
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="update/1"> </div>
+
+.. index:: update/1
+.. _observer/0::update/1:
+
+``update/1``
+^^^^^^^^^^^^
+
+Called when an observed object is updated.
+
+* compilation flags: ``static``
+* template: ``update(Change)``
+
+* mode - number of proofs:
+
+  * ``update(?nonvar)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`subject <subject/0>`
+
+

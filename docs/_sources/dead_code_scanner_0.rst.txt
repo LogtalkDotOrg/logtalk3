@@ -1,0 +1,228 @@
+.. index:: dead_code_scanner
+.. _dead_code_scanner/0:
+
+**object**
+
+``dead_code_scanner``
+=====================
+
+A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.
+
+* author: Barry Evans and Paulo Moura
+* version: 0.11
+* date: 2017/8/10
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="entity/1"> </div>
+
+.. index:: entity/1
+.. _dead_code_scanner/0::entity/1:
+
+``entity/1``
+^^^^^^^^^^^^
+
+Scans a loaded entity for dead code. Fails if the entity does not exist.
+
+* compilation flags: ``static``
+* template: ``entity(Entity)``
+
+* mode - number of proofs:
+
+  * ``entity(+entity_identifier)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="file/1"> </div>
+
+.. index:: file/1
+.. _dead_code_scanner/0::file/1:
+
+``file/1``
+^^^^^^^^^^
+
+Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.
+
+* compilation flags: ``static``
+* template: ``file(File)``
+
+* mode - number of proofs:
+
+  * ``file(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _dead_code_scanner/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given directory for dead code.
+
+* compilation flags: ``static``
+* template: ``directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _dead_code_scanner/0::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given directory and its sub-directories for dead code.
+
+* compilation flags: ``static``
+* template: ``rdirectory(Directory)``
+
+* mode - number of proofs:
+
+  * ``rdirectory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="library/1"> </div>
+
+.. index:: library/1
+.. _dead_code_scanner/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given library for dead code.
+
+* compilation flags: ``static``
+* template: ``library(Library)``
+
+* mode - number of proofs:
+
+  * ``library(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rlibrary/1"> </div>
+
+.. index:: rlibrary/1
+.. _dead_code_scanner/0::rlibrary/1:
+
+``rlibrary/1``
+^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.
+
+* compilation flags: ``static``
+* template: ``rlibrary(Library)``
+
+* mode - number of proofs:
+
+  * ``rlibrary(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all/0"> </div>
+
+.. index:: all/0
+.. _dead_code_scanner/0::all/0:
+
+``all/0``
+^^^^^^^^^
+
+Scans all entities for dead code.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``all`` - ``one``
+
+
+.. raw:: html
+
+   <div id="predicates/2"> </div>
+
+.. index:: predicates/2
+.. _dead_code_scanner/0::predicates/2:
+
+``predicates/2``
+^^^^^^^^^^^^^^^^
+
+Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
+
+* compilation flags: ``static``
+* template: ``predicates(Entity,Predicates)``
+
+* mode - number of proofs:
+
+  * ``predicates(+entity_identifier,-list(predicate_indicator))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="predicate/2"> </div>
+
+.. index:: predicate/2
+.. _dead_code_scanner/0::predicate/2:
+
+``predicate/2``
+^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
+
+* compilation flags: ``static``
+* template: ``predicate(Entity,Predicate)``
+
+* mode - number of proofs:
+
+  * ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Dead code**: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.
+
+* **Know issues**: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.
+
+* **Requirements**: Source files must be compiled with the source_data flag turned on. To avoid false positives do to meta-calls, compilation of source files with the optimized flag turned on is also advised.
+
+See also
+--------
+
+(none)
+

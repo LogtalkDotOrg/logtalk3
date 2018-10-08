@@ -1,0 +1,67 @@
+.. index:: monitor
+.. _monitor/0:
+
+**category**
+
+``monitor``
+===========
+
+Monitor predicates.
+
+* author: Paulo Moura
+* version: 1.2
+* date: 2009/10/8
+* compilation flags: ``static, events``
+
+* implements:
+
+  * ``public`` :ref:`monitorp <monitorp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="spy_point_/4"> </div>
+
+.. index:: spy_point_/4
+.. _monitor/0::spy_point_/4:
+
+``spy_point_/4``
+^^^^^^^^^^^^^^^^
+
+Stores current spy points.
+
+* compilation flags: ``dynamic``
+* template: ``spy_point_(Event,Object,Message,Sender)``
+
+* mode - number of proofs:
+
+  * ``spy_point_(?event,?object,?callable,?object)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

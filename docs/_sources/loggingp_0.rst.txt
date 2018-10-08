@@ -1,0 +1,186 @@
+.. index:: loggingp
+.. _loggingp/0:
+
+**protocol**
+
+``loggingp``
+============
+
+Logging events to files protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2011/1/6
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="log_file/2"> </div>
+
+.. index:: log_file/2
+.. _loggingp/0::log_file/2:
+
+``log_file/2``
+^^^^^^^^^^^^^^
+
+Access to the table of log files.
+
+* compilation flags: ``static``
+* template: ``log_file(Alias,File)``
+
+* mode - number of proofs:
+
+  * ``log_file(?atom,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="define_log_file/2"> </div>
+
+.. index:: define_log_file/2
+.. _loggingp/0::define_log_file/2:
+
+``define_log_file/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Defines a log file with alias Alias and file name File. If the log file already exists, its contents are kept. Logging is enabled by default.
+
+* compilation flags: ``static``
+* template: ``define_log_file(Alias,File)``
+
+* mode - number of proofs:
+
+  * ``define_log_file(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="init_log_file/2"> </div>
+
+.. index:: init_log_file/2
+.. _loggingp/0::init_log_file/2:
+
+``init_log_file/2``
+^^^^^^^^^^^^^^^^^^^
+
+Initializes a new log file with alias Alias and file name File. If the log file already exists, its contents are erased. Logging is enabled by default.
+
+* compilation flags: ``static``
+* template: ``init_log_file(Alias,File)``
+
+* mode - number of proofs:
+
+  * ``init_log_file(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="log_event/2"> </div>
+
+.. index:: log_event/2
+.. _loggingp/0::log_event/2:
+
+``log_event/2``
+^^^^^^^^^^^^^^^
+
+Logs an event Event to a log file with alias Alias. Fails if a log file with alias Alias is not defined.
+
+* compilation flags: ``static``
+* template: ``log_event(Alias,Event)``
+
+* mode - number of proofs:
+
+  * ``log_event(+atom,+nonvar)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="logging/1"> </div>
+
+.. index:: logging/1
+.. _loggingp/0::logging/1:
+
+``logging/1``
+^^^^^^^^^^^^^
+
+True if logging to file with alias Alias is enabled.
+
+* compilation flags: ``static``
+* template: ``logging(Alias)``
+
+* mode - number of proofs:
+
+  * ``logging(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="enable_logging/1"> </div>
+
+.. index:: enable_logging/1
+.. _loggingp/0::enable_logging/1:
+
+``enable_logging/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Enables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.
+
+* compilation flags: ``static``
+* template: ``enable_logging(Alias)``
+
+* mode - number of proofs:
+
+  * ``enable_logging(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="disable_logging/1"> </div>
+
+.. index:: disable_logging/1
+.. _loggingp/0::disable_logging/1:
+
+``disable_logging/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Disables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.
+
+* compilation flags: ``static``
+* template: ``disable_logging(Alias)``
+
+* mode - number of proofs:
+
+  * ``disable_logging(+atom)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

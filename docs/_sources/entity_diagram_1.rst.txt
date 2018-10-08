@@ -1,0 +1,124 @@
+.. index:: entity_diagram(Format)
+.. _entity_diagram/1:
+
+**object**
+
+``entity_diagram(Format)``
+==========================
+
+Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.
+
+* author: Paulo Moura
+* version: 2.14
+* date: 2018/2/4
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`diagram(Format) <diagram/1>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="file/2"> </div>
+
+.. index:: file/2
+.. _entity_diagram/1::file/2:
+
+``file/2``
+^^^^^^^^^^
+
+Creates a diagram for all entities in a loaded source file using the specified options. The file can be specified by name, basename, full path, or using library notation.
+
+* compilation flags: ``static``
+* template: ``file(File,Options)``
+
+* mode - number of proofs:
+
+  * ``file(+atom,+list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file/1"> </div>
+
+.. index:: file/1
+.. _entity_diagram/1::file/1:
+
+``file/1``
+^^^^^^^^^^
+
+Creates a diagram for all entities in a loaded source file using default options. The file can be specified by name, basename, full path, or using library notation.
+
+* compilation flags: ``static``
+* template: ``file(File)``
+
+* mode - number of proofs:
+
+  * ``file(+atom)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="included_entity_/1"> </div>
+
+.. index:: included_entity_/1
+.. _entity_diagram/1::included_entity_/1:
+
+``included_entity_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_entity_/1"> </div>
+
+.. index:: referenced_entity_/1
+.. _entity_diagram/1::referenced_entity_/1:
+
+``referenced_entity_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+.. raw:: html
+
+   <div id="referenced_module_/1"> </div>
+
+.. index:: referenced_module_/1
+.. _entity_diagram/1::referenced_module_/1:
+
+``referenced_module_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`inheritance_diagram(Format) <inheritance_diagram/1>`
+* :ref:`uses_diagram(Format) <uses_diagram/1>`
+* :ref:`xref_diagram(Format) <xref_diagram/1>`
+
+

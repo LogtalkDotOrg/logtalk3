@@ -1,0 +1,1647 @@
+.. index:: lgtunit
+.. _lgtunit/0:
+
+**object**
+
+``lgtunit``
+===========
+
+A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.
+
+* author: Paulo Moura
+* version: 6.24
+* date: 2018/8/1
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+* provides:
+
+  * :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="cover/1"> </div>
+
+.. index:: cover/1
+.. _lgtunit/0::cover/1:
+
+``cover/1``
+^^^^^^^^^^^
+
+Declares entities being tested for which code coverage information should be collected.
+
+* compilation flags: ``static``
+* template: ``cover(Entity)``
+
+* mode - number of proofs:
+
+  * ``cover(?entity_identifier)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="run/0"> </div>
+
+.. index:: run/0
+.. _lgtunit/0::run/0:
+
+``run/0``
+^^^^^^^^^
+
+Runs the unit tests, writing the results to the current output stream.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``run`` - ``one``
+
+
+.. raw:: html
+
+   <div id="run/1"> </div>
+
+.. index:: run/1
+.. _lgtunit/0::run/1:
+
+``run/1``
+^^^^^^^^^
+
+Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.
+
+* compilation flags: ``static``
+* template: ``run(Tests)``
+
+* mode - number of proofs:
+
+  * ``run(+atom)`` - ``zero_or_one``
+
+  * ``run(+list(atom))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="run/2"> </div>
+
+.. index:: run/2
+.. _lgtunit/0::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).
+
+* compilation flags: ``static``
+* template: ``run(File,Mode)``
+
+* mode - number of proofs:
+
+  * ``run(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="run_test_sets/1"> </div>
+
+.. index:: run_test_sets/1
+.. _lgtunit/0::run_test_sets/1:
+
+``run_test_sets/1``
+^^^^^^^^^^^^^^^^^^^
+
+Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.
+
+* compilation flags: ``static``
+* template: ``run_test_sets(TestObjects)``
+
+* mode - number of proofs:
+
+  * ``run_test_sets(+list(object_identifier))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="deterministic/1"> </div>
+
+.. index:: deterministic/1
+.. _lgtunit/0::deterministic/1:
+
+``deterministic/1``
+^^^^^^^^^^^^^^^^^^^
+
+True if the goal succeeds once without leaving choice-points.
+
+* compilation flags: ``static``
+* template: ``deterministic(Goal)``
+
+* meta-predicate template: ``deterministic(0)``
+
+* mode - number of proofs:
+
+  * ``deterministic(+callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="deterministic/2"> </div>
+
+.. index:: deterministic/2
+.. _lgtunit/0::deterministic/2:
+
+``deterministic/2``
+^^^^^^^^^^^^^^^^^^^
+
+Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.
+
+* compilation flags: ``static``
+* template: ``deterministic(Goal,Deterministic)``
+
+* meta-predicate template: ``deterministic(0,*)``
+
+* mode - number of proofs:
+
+  * ``deterministic(+callable,--atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="assertion/1"> </div>
+
+.. index:: assertion/1
+.. _lgtunit/0::assertion/1:
+
+``assertion/1``
+^^^^^^^^^^^^^^^
+
+True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.
+
+* compilation flags: ``static``
+* template: ``assertion(Assertion)``
+
+* meta-predicate template: ``assertion(::)``
+
+* mode - number of proofs:
+
+  * ``assertion(+callable)`` - ``one``
+
+* exceptions:
+  * Assertion goal fails: ``assertion_failure(Assertion)``
+
+  * Assertion goal throws Error: ``assertion_error(Assertion,Error)``
+
+
+.. raw:: html
+
+   <div id="assertion/2"> </div>
+
+.. index:: assertion/2
+.. _lgtunit/0::assertion/2:
+
+``assertion/2``
+^^^^^^^^^^^^^^^
+
+True if the assertion goal succeeds. Throws an error using the description as argument if the assertion goal throws an error or fails. The description argument helps to distinguish between different assertions in the same test body.
+
+* compilation flags: ``static``
+* template: ``assertion(Description,Assertion)``
+
+* meta-predicate template: ``assertion(*,0)``
+
+* mode - number of proofs:
+
+  * ``assertion(+nonvar,+callable)`` - ``one``
+
+* exceptions:
+  * Assertion goal fails: ``assertion_failure(Description)``
+
+  * Assertion goal throws Error: ``assertion_error(Description,Error)``
+
+
+.. raw:: html
+
+   <div id="quick_check/3"> </div>
+
+.. index:: quick_check/3
+.. _lgtunit/0::quick_check/3:
+
+``quick_check/3``
+^^^^^^^^^^^^^^^^^
+
+Reified version of the quick_check/2 predicate. Reports the result as "passed", "failed(Goal)" where Goal is the test that failed, or "error(Error,Template)".
+
+* compilation flags: ``static``
+* template: ``quick_check(Template,Result,Options)``
+
+* mode - number of proofs:
+
+  * ``quick_check(@callable,-callable,++list(compound))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="quick_check/2"> </div>
+
+.. index:: quick_check/2
+.. _lgtunit/0::quick_check/2:
+
+``quick_check/2``
+^^^^^^^^^^^^^^^^^
+
+Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.
+
+* compilation flags: ``static``
+* template: ``quick_check(Template,Options)``
+
+* mode - number of proofs:
+
+  * ``quick_check(@callable,++list(compound))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="quick_check/1"> </div>
+
+.. index:: quick_check/1
+.. _lgtunit/0::quick_check/1:
+
+``quick_check/1``
+^^^^^^^^^^^^^^^^^
+
+Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.
+
+* compilation flags: ``static``
+* template: ``quick_check(Template)``
+
+* mode - number of proofs:
+
+  * ``quick_check(@callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="benchmark/2"> </div>
+
+.. index:: benchmark/2
+.. _lgtunit/0::benchmark/2:
+
+``benchmark/2``
+^^^^^^^^^^^^^^^
+
+Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.
+
+* compilation flags: ``static``
+* template: ``benchmark(Goal,Time)``
+
+* meta-predicate template: ``benchmark(0,*)``
+
+* mode - number of proofs:
+
+  * ``benchmark(+callable,-float)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="benchmark_reified/3"> </div>
+
+.. index:: benchmark_reified/3
+.. _lgtunit/0::benchmark_reified/3:
+
+``benchmark_reified/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.
+
+* compilation flags: ``static``
+* template: ``benchmark_reified(Goal,Time,Result)``
+
+* meta-predicate template: ``benchmark_reified(0,*,*)``
+
+* mode - number of proofs:
+
+  * ``benchmark_reified(+callable,-float,-callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="benchmark/3"> </div>
+
+.. index:: benchmark/3
+.. _lgtunit/0::benchmark/3:
+
+``benchmark/3``
+^^^^^^^^^^^^^^^
+
+Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.
+
+* compilation flags: ``static``
+* template: ``benchmark(Goal,Repetitions,Time)``
+
+* meta-predicate template: ``benchmark(0,*,*)``
+
+* mode - number of proofs:
+
+  * ``benchmark(@callable,+positive_integer,-float)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="benchmark/4"> </div>
+
+.. index:: benchmark/4
+.. _lgtunit/0::benchmark/4:
+
+``benchmark/4``
+^^^^^^^^^^^^^^^
+
+Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.
+
+* compilation flags: ``static``
+* template: ``benchmark(Goal,Repetitions,Clock,Time)``
+
+* meta-predicate template: ``benchmark(0,*,*,*)``
+
+* mode - number of proofs:
+
+  * ``benchmark(@callable,+positive_integer,+atom,-float)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="variant/2"> </div>
+
+.. index:: variant/2
+.. _lgtunit/0::variant/2:
+
+``variant/2``
+^^^^^^^^^^^^^
+
+True when the two arguments are a variant of each other. I.e. if is possible to rename the term variables to make them identical. Useful for checking expected test results that contain variables.
+
+* compilation flags: ``static``
+* template: ``variant(Term1,Term2)``
+
+* mode - number of proofs:
+
+  * ``variant(@term,@term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="approximately_equal/3"> </div>
+
+.. index:: approximately_equal/3
+.. _lgtunit/0::approximately_equal/3:
+
+``approximately_equal/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.
+
+* compilation flags: ``static``
+* template: ``approximately_equal(Number1,Number2,Epsilon)``
+
+* mode - number of proofs:
+
+  * ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="essentially_equal/3"> </div>
+
+.. index:: essentially_equal/3
+.. _lgtunit/0::essentially_equal/3:
+
+``essentially_equal/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.
+
+* compilation flags: ``static``
+* template: ``essentially_equal(Number1,Number2,Epsilon)``
+
+* mode - number of proofs:
+
+  * ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="tolerance_equal/4"> </div>
+
+.. index:: tolerance_equal/4
+.. _lgtunit/0::tolerance_equal/4:
+
+``tolerance_equal/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.
+
+* compilation flags: ``static``
+* template: ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
+
+* mode - number of proofs:
+
+  * ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="=~= / 2"> </div>
+
+.. index:: =~= / 2
+.. _lgtunit/0::=~= / 2:
+
+``=~= / 2``
+^^^^^^^^^^^
+
+Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.
+
+* compilation flags: ``static``
+* template: ``=~=(Number1,Number2)``
+
+* mode - number of proofs:
+
+  * ``=~=(+number,+number)`` - ``zero_or_one``
+
+  * ``=~=(+list(number),+list(number))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="epsilon/1"> </div>
+
+.. index:: epsilon/1
+.. _lgtunit/0::epsilon/1:
+
+``epsilon/1``
+^^^^^^^^^^^^^
+
+Returns the value of epsilon used in the definition of the (=~=)/2 predicate.
+
+* compilation flags: ``static``
+* template: ``epsilon(Epsilon)``
+
+* mode - number of proofs:
+
+  * ``epsilon(-float)`` - ``one``
+
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="run_tests/0"> </div>
+
+.. index:: run_tests/0
+.. _lgtunit/0::run_tests/0:
+
+``run_tests/0``
+^^^^^^^^^^^^^^^
+
+Runs all defined unit tests.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``run_tests`` - ``one``
+
+
+.. raw:: html
+
+   <div id="run_tests/2"> </div>
+
+.. index:: run_tests/2
+.. _lgtunit/0::run_tests/2:
+
+``run_tests/2``
+^^^^^^^^^^^^^^^
+
+Runs a list of defined tests.
+
+* compilation flags: ``static``
+* template: ``run_tests(Tests,File)``
+
+* mode - number of proofs:
+
+  * ``run_tests(+list(callable),+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="run_test_set/0"> </div>
+
+.. index:: run_test_set/0
+.. _lgtunit/0::run_test_set/0:
+
+``run_test_set/0``
+^^^^^^^^^^^^^^^^^^
+
+Runs a test set as part of running two or more test sets as a unified set.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``run_test_set`` - ``one``
+
+
+.. raw:: html
+
+   <div id="run_quick_check_tests/2"> </div>
+
+.. index:: run_quick_check_tests/2
+.. _lgtunit/0::run_quick_check_tests/2:
+
+``run_quick_check_tests/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Runs a list of defined tests.
+
+* compilation flags: ``static``
+* template: ``run_quick_check_tests(Template,NumberOfTests)``
+
+* mode - number of proofs:
+
+  * ``run_quick_check_tests(@callable,+integer)`` - ``one_or_error``
+
+
+.. raw:: html
+
+   <div id="condition/0"> </div>
+
+.. index:: condition/0
+.. _lgtunit/0::condition/0:
+
+``condition/0``
+^^^^^^^^^^^^^^^
+
+Verifies conditions for running the tests. Defaults to the goal true.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``condition`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="setup/0"> </div>
+
+.. index:: setup/0
+.. _lgtunit/0::setup/0:
+
+``setup/0``
+^^^^^^^^^^^
+
+Setup environment before running the test set. Defaults to the goal true.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``setup`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="cleanup/0"> </div>
+
+.. index:: cleanup/0
+.. _lgtunit/0::cleanup/0:
+
+``cleanup/0``
+^^^^^^^^^^^^^
+
+Cleanup environment after running the test set. Defaults to the goal true.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``cleanup`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="make/1"> </div>
+
+.. index:: make/1
+.. _lgtunit/0::make/1:
+
+``make/1``
+^^^^^^^^^^
+
+Make target for automatically running the test set when calling the logtalk_make/1 built-in predicate. No default. Possible values are {all, check}.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``make(?atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="note/1"> </div>
+
+.. index:: note/1
+.. _lgtunit/0::note/1:
+
+``note/1``
+^^^^^^^^^^
+
+Note to be printed after the test results. Defaults to the empty atom.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``note(?atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="suppress_text_output/0"> </div>
+
+.. index:: suppress_text_output/0
+.. _lgtunit/0::suppress_text_output/0:
+
+``suppress_text_output/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Suppresses text output. Useful to avoid irrelevant text output from predicates being tested to clutter the test logs.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``suppress_text_output`` - ``one``
+
+
+.. raw:: html
+
+   <div id="suppress_binary_output/0"> </div>
+
+.. index:: suppress_binary_output/0
+.. _lgtunit/0::suppress_binary_output/0:
+
+``suppress_binary_output/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Suppresses binary output. Useful to avoid irrelevant binary output from predicates being tested to clutter the test logs.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``suppress_binary_output`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_text_input/3"> </div>
+
+.. index:: set_text_input/3
+.. _lgtunit/0::set_text_input/3:
+
+``set_text_input/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.
+
+* compilation flags: ``static``
+* template: ``set_text_input(Alias,Contents,Options)``
+
+* mode - number of proofs:
+
+  * ``set_text_input(+atom,+atom,+list(stream_option))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_text_input/2"> </div>
+
+.. index:: set_text_input/2
+.. _lgtunit/0::set_text_input/2:
+
+``set_text_input/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.
+
+* compilation flags: ``static``
+* template: ``set_text_input(Alias,Contents)``
+
+* mode - number of proofs:
+
+  * ``set_text_input(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_text_input/1"> </div>
+
+.. index:: set_text_input/1
+.. _lgtunit/0::set_text_input/1:
+
+``set_text_input/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.
+
+* compilation flags: ``static``
+* template: ``set_text_input(Contents)``
+
+* mode - number of proofs:
+
+  * ``set_text_input(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="check_text_input/2"> </div>
+
+.. index:: check_text_input/2
+.. _lgtunit/0::check_text_input/2:
+
+``check_text_input/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file (referenced with the given alias) being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``check_text_input(Alias,Contents)``
+
+* mode - number of proofs:
+
+  * ``check_text_input(+atom,+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="check_text_input/1"> </div>
+
+.. index:: check_text_input/1
+.. _lgtunit/0::check_text_input/1:
+
+``check_text_input/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``check_text_input(Contents)``
+
+* mode - number of proofs:
+
+  * ``check_text_input(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="text_input_assertion/3"> </div>
+
+.. index:: text_input_assertion/3
+.. _lgtunit/0::text_input_assertion/3:
+
+``text_input_assertion/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``text_input_assertion(Alias,Contents,Assertion)``
+
+* mode - number of proofs:
+
+  * ``text_input_assertion(+atom,+atom,--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="text_input_assertion/2"> </div>
+
+.. index:: text_input_assertion/2
+.. _lgtunit/0::text_input_assertion/2:
+
+``text_input_assertion/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``text_input_assertion(Contents,Assertion)``
+
+* mode - number of proofs:
+
+  * ``text_input_assertion(+atom,--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="clean_text_input/0"> </div>
+
+.. index:: clean_text_input/0
+.. _lgtunit/0::clean_text_input/0:
+
+``clean_text_input/0``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Cleans the temporary file used when testing text input.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``clean_text_input`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_binary_input/3"> </div>
+
+.. index:: set_binary_input/3
+.. _lgtunit/0::set_binary_input/3:
+
+``set_binary_input/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.
+
+* compilation flags: ``static``
+* template: ``set_binary_input(Alias,Bytes,Options)``
+
+* mode - number of proofs:
+
+  * ``set_binary_input(+atom,+list(byte),+list(stream_option))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_binary_input/2"> </div>
+
+.. index:: set_binary_input/2
+.. _lgtunit/0::set_binary_input/2:
+
+``set_binary_input/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.
+
+* compilation flags: ``static``
+* template: ``set_binary_input(Alias,Bytes)``
+
+* mode - number of proofs:
+
+  * ``set_binary_input(+atom,+list(byte))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_binary_input/1"> </div>
+
+.. index:: set_binary_input/1
+.. _lgtunit/0::set_binary_input/1:
+
+``set_binary_input/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.
+
+* compilation flags: ``static``
+* template: ``set_binary_input(Bytes)``
+
+* mode - number of proofs:
+
+  * ``set_binary_input(+list(byte))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="check_binary_input/2"> </div>
+
+.. index:: check_binary_input/2
+.. _lgtunit/0::check_binary_input/2:
+
+``check_binary_input/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file (referenced with the given alias) have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``check_binary_input(Alias,Bytes)``
+
+* mode - number of proofs:
+
+  * ``check_binary_input(+atom,+list(byte))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="check_binary_input/1"> </div>
+
+.. index:: check_binary_input/1
+.. _lgtunit/0::check_binary_input/1:
+
+``check_binary_input/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``check_binary_input(Bytes)``
+
+* mode - number of proofs:
+
+  * ``check_binary_input(+list(byte))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="binary_input_assertion/3"> </div>
+
+.. index:: binary_input_assertion/3
+.. _lgtunit/0::binary_input_assertion/3:
+
+``binary_input_assertion/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``binary_input_assertion(Alias,Bytes,Assertion)``
+
+* mode - number of proofs:
+
+  * ``binary_input_assertion(+atom,+list(byte),--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="binary_input_assertion/2"> </div>
+
+.. index:: binary_input_assertion/2
+.. _lgtunit/0::binary_input_assertion/2:
+
+``binary_input_assertion/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``binary_input_assertion(Bytes,Assertion)``
+
+* mode - number of proofs:
+
+  * ``binary_input_assertion(+list(byte),--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="clean_binary_input/0"> </div>
+
+.. index:: clean_binary_input/0
+.. _lgtunit/0::clean_binary_input/0:
+
+``clean_binary_input/0``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cleans the temporary file used when testing binary input.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``clean_binary_input`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_text_output/2"> </div>
+
+.. index:: set_text_output/2
+.. _lgtunit/0::set_text_output/2:
+
+``set_text_output/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given text contents and referenced with the given alias.
+
+* compilation flags: ``static``
+* template: ``set_text_output(Alias,Contents)``
+
+* mode - number of proofs:
+
+  * ``set_text_output(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_text_output/1"> </div>
+
+.. index:: set_text_output/1
+.. _lgtunit/0::set_text_output/1:
+
+``set_text_output/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given text contents and sets the current output stream to the file.
+
+* compilation flags: ``static``
+* template: ``set_text_output(Contents)``
+
+* mode - number of proofs:
+
+  * ``set_text_output(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="check_text_output/2"> </div>
+
+.. index:: check_text_output/2
+.. _lgtunit/0::check_text_output/2:
+
+``check_text_output/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file (referenced with the given alias) being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``check_text_output(Alias,Contents)``
+
+* mode - number of proofs:
+
+  * ``check_text_output(+atom,+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="check_text_output/1"> </div>
+
+.. index:: check_text_output/1
+.. _lgtunit/0::check_text_output/1:
+
+``check_text_output/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``check_text_output(Contents)``
+
+* mode - number of proofs:
+
+  * ``check_text_output(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="text_output_assertion/3"> </div>
+
+.. index:: text_output_assertion/3
+.. _lgtunit/0::text_output_assertion/3:
+
+``text_output_assertion/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``text_output_assertion(Alias,Contents,Assertion)``
+
+* mode - number of proofs:
+
+  * ``text_output_assertion(+atom,+atom,--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="text_output_assertion/2"> </div>
+
+.. index:: text_output_assertion/2
+.. _lgtunit/0::text_output_assertion/2:
+
+``text_output_assertion/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file being written have the expected text contents.
+
+* compilation flags: ``static``
+* template: ``text_output_assertion(Contents,Assertion)``
+
+* mode - number of proofs:
+
+  * ``text_output_assertion(+atom,--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="clean_text_output/0"> </div>
+
+.. index:: clean_text_output/0
+.. _lgtunit/0::clean_text_output/0:
+
+``clean_text_output/0``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Cleans the temporary file used when testing text output.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``clean_text_output`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_binary_output/2"> </div>
+
+.. index:: set_binary_output/2
+.. _lgtunit/0::set_binary_output/2:
+
+``set_binary_output/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given binary contents and referenced with the given alias.
+
+* compilation flags: ``static``
+* template: ``set_binary_output(Alias,Bytes)``
+
+* mode - number of proofs:
+
+  * ``set_binary_output(+atom,+list(byte))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_binary_output/1"> </div>
+
+.. index:: set_binary_output/1
+.. _lgtunit/0::set_binary_output/1:
+
+``set_binary_output/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a temporary file with the given binary contents and sets the current output stream to the file.
+
+* compilation flags: ``static``
+* template: ``set_binary_output(Bytes)``
+
+* mode - number of proofs:
+
+  * ``set_binary_output(+list(byte))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="check_binary_output/2"> </div>
+
+.. index:: check_binary_output/2
+.. _lgtunit/0::check_binary_output/2:
+
+``check_binary_output/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file (referenced with the given alias) have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``check_binary_output(Alias,Bytes)``
+
+* mode - number of proofs:
+
+  * ``check_binary_output(+atom,+list(byte))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="check_binary_output/1"> </div>
+
+.. index:: check_binary_output/1
+.. _lgtunit/0::check_binary_output/1:
+
+``check_binary_output/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``check_binary_output(Bytes)``
+
+* mode - number of proofs:
+
+  * ``check_binary_output(+list(byte))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="binary_output_assertion/3"> </div>
+
+.. index:: binary_output_assertion/3
+.. _lgtunit/0::binary_output_assertion/3:
+
+``binary_output_assertion/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``binary_output_assertion(Alias,Bytes,Assertion)``
+
+* mode - number of proofs:
+
+  * ``binary_output_assertion(+atom,+list(byte),--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="binary_output_assertion/2"> </div>
+
+.. index:: binary_output_assertion/2
+.. _lgtunit/0::binary_output_assertion/2:
+
+``binary_output_assertion/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file have the expected binary contents.
+
+* compilation flags: ``static``
+* template: ``binary_output_assertion(Bytes,Assertion)``
+
+* mode - number of proofs:
+
+  * ``binary_output_assertion(+list(byte),--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="clean_binary_output/0"> </div>
+
+.. index:: clean_binary_output/0
+.. _lgtunit/0::clean_binary_output/0:
+
+``clean_binary_output/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cleans the temporary file used when testing binary output.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``clean_binary_output`` - ``one``
+
+
+.. raw:: html
+
+   <div id="create_text_file/2"> </div>
+
+.. index:: create_text_file/2
+.. _lgtunit/0::create_text_file/2:
+
+``create_text_file/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a text file with the given contents.
+
+* compilation flags: ``static``
+* template: ``create_text_file(File,Contents)``
+
+* mode - number of proofs:
+
+  * ``create_text_file(+atom,+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="create_binary_file/2"> </div>
+
+.. index:: create_binary_file/2
+.. _lgtunit/0::create_binary_file/2:
+
+``create_binary_file/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a binary file with the given contents.
+
+* compilation flags: ``static``
+* template: ``create_binary_file(File,Bytes)``
+
+* mode - number of proofs:
+
+  * ``create_binary_file(+atom,+list(byte))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="check_text_file/2"> </div>
+
+.. index:: check_text_file/2
+.. _lgtunit/0::check_text_file/2:
+
+``check_text_file/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the contents of a text file match the expected contents.
+
+* compilation flags: ``static``
+* template: ``check_text_file(File,Contents)``
+
+* mode - number of proofs:
+
+  * ``check_text_file(+atom,+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="check_binary_file/2"> </div>
+
+.. index:: check_binary_file/2
+.. _lgtunit/0::check_binary_file/2:
+
+``check_binary_file/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks the contents of a binary file match the expected contents.
+
+* compilation flags: ``static``
+* template: ``check_binary_file(File,Bytes)``
+
+* mode - number of proofs:
+
+  * ``check_binary_file(+atom,+list(byte))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="clean_file/1"> </div>
+
+.. index:: clean_file/1
+.. _lgtunit/0::clean_file/1:
+
+``clean_file/1``
+^^^^^^^^^^^^^^^^
+
+Closes any existing stream associated with the file and deletes the file if it exists.
+
+* compilation flags: ``static``
+* template: ``clean_file(File)``
+
+* mode - number of proofs:
+
+  * ``clean_file(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="closed_input_stream/2"> </div>
+
+.. index:: closed_input_stream/2
+.. _lgtunit/0::closed_input_stream/2:
+
+``closed_input_stream/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a temporary file with the given options for reading, closes it, and returns its stream handle.
+
+* compilation flags: ``static``
+* template: ``closed_input_stream(Stream,Options)``
+
+* mode - number of proofs:
+
+  * ``closed_input_stream(-stream,+list(stream_option))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="closed_output_stream/2"> </div>
+
+.. index:: closed_output_stream/2
+.. _lgtunit/0::closed_output_stream/2:
+
+``closed_output_stream/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a temporary file with the given options for writing, closes it, and returns its stream handle.
+
+* compilation flags: ``static``
+* template: ``closed_output_stream(Stream,Options)``
+
+* mode - number of proofs:
+
+  * ``closed_output_stream(-stream,+list(stream_option))`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="stream_position/1"> </div>
+
+.. index:: stream_position/1
+.. _lgtunit/0::stream_position/1:
+
+``stream_position/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a syntactically valid stream position.
+
+* compilation flags: ``static``
+* template: ``stream_position(Position)``
+
+* mode - number of proofs:
+
+  * ``stream_position(-stream_position)`` - ``one``
+
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="running_test_sets_/0"> </div>
+
+.. index:: running_test_sets_/0
+.. _lgtunit/0::running_test_sets_/0:
+
+``running_test_sets_/0``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Internal flag used when running two or more test sets as a unified set.
+
+* compilation flags: ``dynamic``
+* mode - number of proofs:
+
+  * ``running_test_sets_`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="test/3"> </div>
+
+.. index:: test/3
+.. _lgtunit/0::test/3:
+
+``test/3``
+^^^^^^^^^^
+
+Specifies a unit test.
+
+* compilation flags: ``static``
+* template: ``test(Identifier,Variables,Outcome)``
+
+* mode - number of proofs:
+
+  * ``test(?atom,?list(variable),?nonvar)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="auxiliary_predicate_counter_/1"> </div>
+
+.. index:: auxiliary_predicate_counter_/1
+.. _lgtunit/0::auxiliary_predicate_counter_/1:
+
+``auxiliary_predicate_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counter for generarting unique auxiliary predicate names.
+
+* compilation flags: ``dynamic``
+* template: ``auxiliary_predicate_counter_(Counter)``
+
+* mode - number of proofs:
+
+  * ``auxiliary_predicate_counter_(?integer)`` - ``one_or_more``
+
+
+.. raw:: html
+
+   <div id="test_/2"> </div>
+
+.. index:: test_/2
+.. _lgtunit/0::test_/2:
+
+``test_/2``
+^^^^^^^^^^^
+
+Table of defined tests.
+
+* compilation flags: ``dynamic``
+* template: ``test_(Identifier,Test)``
+
+* mode - number of proofs:
+
+  * ``test_(?atom,?compound)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="skipped_/1"> </div>
+
+.. index:: skipped_/1
+.. _lgtunit/0::skipped_/1:
+
+``skipped_/1``
+^^^^^^^^^^^^^^
+
+Counter for skipped tests.
+
+* compilation flags: ``dynamic``
+* template: ``skipped_(Counter)``
+
+* mode - number of proofs:
+
+  * ``skipped_(?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="passed_/1"> </div>
+
+.. index:: passed_/1
+.. _lgtunit/0::passed_/1:
+
+``passed_/1``
+^^^^^^^^^^^^^
+
+Counter for passed tests.
+
+* compilation flags: ``dynamic``
+* template: ``passed_(Counter)``
+
+* mode - number of proofs:
+
+  * ``passed_(?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="failed_/1"> </div>
+
+.. index:: failed_/1
+.. _lgtunit/0::failed_/1:
+
+``failed_/1``
+^^^^^^^^^^^^^
+
+Counter for failed tests.
+
+* compilation flags: ``dynamic``
+* template: ``failed_(Counter)``
+
+* mode - number of proofs:
+
+  * ``failed_(?callable)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="fired_/3"> </div>
+
+.. index:: fired_/3
+.. _lgtunit/0::fired_/3:
+
+``fired_/3``
+^^^^^^^^^^^^
+
+Fired clauses when running the unit tests.
+
+* compilation flags: ``dynamic``
+* template: ``fired_(Entity,Predicate,Clause)``
+
+* mode - number of proofs:
+
+  * ``fired_(?entity_identifier,?predicate_indicator,?integer)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="covered_/4"> </div>
+
+.. index:: covered_/4
+.. _lgtunit/0::covered_/4:
+
+``covered_/4``
+^^^^^^^^^^^^^^
+
+Auxiliary predicate for collecting statistics on clause coverage.
+
+* compilation flags: ``dynamic``
+* template: ``covered_(Entity,Predicate,Covered,Total)``
+
+* mode - number of proofs:
+
+  * ``covered_(?entity_identifier,?callable,?integer,?integer)`` - ``zero_or_more``
+
+
+Operators
+---------
+
+* ``op(700,xfx,=~=) (public)``
+
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

@@ -1,0 +1,192 @@
+.. index:: doc_metric
+.. _doc_metric/0:
+
+**object**
+
+``doc_metric``
+==============
+
+Entity and entity predicates documentation score.
+
+* author: Paulo Moura
+* version: 0.11
+* date: 2018/7/8
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+  * ``public`` :ref:`code_metric <code_metric/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="entity_predicates_weights_hook/2"> </div>
+
+.. index:: entity_predicates_weights_hook/2
+.. _doc_metric/0::entity_predicates_weights_hook/2:
+
+``entity_predicates_weights_hook/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Relative weight between entity documentation and predicates documentation in percentage. The sum of the two values must be equal to 100.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``entity_predicates_weights_hook(EntityWeight,PredicatesWeight)``
+
+* mode - number of proofs:
+
+  * ``entity_predicates_weights_hook(?integer,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="entity_info_score_hook/2"> </div>
+
+.. index:: entity_info_score_hook/2
+.. _doc_metric/0::entity_info_score_hook/2:
+
+``entity_info_score_hook/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maximum score for entity info/1 directives.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``entity_info_score_hook(Entity,MaximumScore)``
+
+* mode - number of proofs:
+
+  * ``entity_info_score_hook(?term,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="entity_info_pair_score_hook/3"> </div>
+
+.. index:: entity_info_pair_score_hook/3
+.. _doc_metric/0::entity_info_pair_score_hook/3:
+
+``entity_info_pair_score_hook/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Score for relevant entity info/1 directive pairs. If defined, the entity_info_score_hook/2 predicate should be defined accordingly.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``entity_info_pair_score_hook(Pair,Entity,Score)``
+
+* mode - number of proofs:
+
+  * ``entity_info_pair_score_hook(?callable,?term,?integer)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="predicate_mode_score_hook/3"> </div>
+
+.. index:: predicate_mode_score_hook/3
+.. _doc_metric/0::predicate_mode_score_hook/3:
+
+``predicate_mode_score_hook/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maximum score for predicate mode/2 directives.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``predicate_mode_score_hook(Entity,Predicate,MaximumScore)``
+
+* mode - number of proofs:
+
+  * ``predicate_mode_score_hook(?term,?term,?integer)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="predicate_mode_score_hook/5"> </div>
+
+.. index:: predicate_mode_score_hook/5
+.. _doc_metric/0::predicate_mode_score_hook/5:
+
+``predicate_mode_score_hook/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hook/3 predicate should be defined accordingly.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``predicate_mode_score_hook(Template,Solutions,Entity,Predicate,Score)``
+
+* mode - number of proofs:
+
+  * ``predicate_mode_score_hook(?term,?term,?term,?term,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="predicate_info_score_hook/3"> </div>
+
+.. index:: predicate_info_score_hook/3
+.. _doc_metric/0::predicate_info_score_hook/3:
+
+``predicate_info_score_hook/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maximum score for predicate info/2 directives.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``predicate_info_score_hook(Entity,Predicate,MaximumScore)``
+
+* mode - number of proofs:
+
+  * ``predicate_info_score_hook(?term,?term,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="predicate_info_pair_score_hook/4"> </div>
+
+.. index:: predicate_info_pair_score_hook/4
+.. _doc_metric/0::predicate_info_pair_score_hook/4:
+
+``predicate_info_pair_score_hook/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Score for a predicate info/2 directive pairs. If defined, the predicate_info_score_hook/3 predicate should be defined accordingly.
+
+* compilation flags: ``dynamic, multifile``
+* template: ``predicate_info_pair_score_hook(Pair,Entity,Predicate,Score)``
+
+* mode - number of proofs:
+
+  * ``predicate_info_pair_score_hook(?callable,?term,?term,?integer)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Score range**: Score is a integer percentage where a 100% score means that all expected documentation information is present.
+
+* **Score weights**: The score is split by default between 20% for the entity documentation and 80% for the entity predicates documentation, Can be customized using the predicate entity_predicates_weights_hook/2.
+
+* **Score customization**: The individual scores of entity info/1 pairs and predicate info/2 pairs can be customized using the entity_info_pair_score_hook/3 and predicate_info_pair_score_hook/4 predicates.
+
+See also
+--------
+
+(none)
+

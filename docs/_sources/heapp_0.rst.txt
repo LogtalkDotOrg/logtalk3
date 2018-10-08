@@ -1,0 +1,246 @@
+.. index:: heapp
+.. _heapp/0:
+
+**protocol**
+
+``heapp``
+=========
+
+Heap protocol.
+
+* author: Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
+* version: 1.01
+* date: 2010/11/13
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="insert/4"> </div>
+
+.. index:: insert/4
+.. _heapp/0::insert/4:
+
+``insert/4``
+^^^^^^^^^^^^
+
+Inserts the new Key-Value pair into a heap, returning the updated heap.
+
+* compilation flags: ``static``
+* template: ``insert(Key,Value,Heap,NewHeap)``
+
+* mode - number of proofs:
+
+  * ``insert(+key,+value,+heap,-heap)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="insert_all/3"> </div>
+
+.. index:: insert_all/3
+.. _heapp/0::insert_all/3:
+
+``insert_all/3``
+^^^^^^^^^^^^^^^^
+
+Inserts a list of Key-Value pairs into a heap, returning the updated heap.
+
+* compilation flags: ``static``
+* template: ``insert_all(List,Heap,NewHeap)``
+
+* mode - number of proofs:
+
+  * ``insert_all(@list(pairs),+heap,-heap)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="delete/4"> </div>
+
+.. index:: delete/4
+.. _heapp/0::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
+
+* compilation flags: ``static``
+* template: ``delete(Heap,Key,Value,NewHeap)``
+
+* mode - number of proofs:
+
+  * ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="merge/3"> </div>
+
+.. index:: merge/3
+.. _heapp/0::merge/3:
+
+``merge/3``
+^^^^^^^^^^^
+
+Merges two heaps.
+
+* compilation flags: ``static``
+* template: ``merge(Heap1,Heap2,NewHeap)``
+
+* mode - number of proofs:
+
+  * ``merge(+heap,+heap,-heap)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _heapp/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True if the heap is empty.
+
+* compilation flags: ``static``
+* template: ``empty(Heap)``
+
+* mode - number of proofs:
+
+  * ``empty(@heap)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="size/2"> </div>
+
+.. index:: size/2
+.. _heapp/0::size/2:
+
+``size/2``
+^^^^^^^^^^
+
+Returns the number of heap elements.
+
+* compilation flags: ``static``
+* template: ``size(Heap,Size)``
+
+* mode - number of proofs:
+
+  * ``size(+heap,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="as_list/2"> </div>
+
+.. index:: as_list/2
+.. _heapp/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.
+
+* compilation flags: ``static``
+* template: ``as_list(Heap,List)``
+
+* mode - number of proofs:
+
+  * ``as_list(+heap,-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="as_heap/2"> </div>
+
+.. index:: as_heap/2
+.. _heapp/0::as_heap/2:
+
+``as_heap/2``
+^^^^^^^^^^^^^
+
+Constructs a Heap from a list of Key-Value pairs.
+
+* compilation flags: ``static``
+* template: ``as_heap(List,Heap)``
+
+* mode - number of proofs:
+
+  * ``as_heap(+list,-heap)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="top/3"> </div>
+
+.. index:: top/3
+.. _heapp/0::top/3:
+
+``top/3``
+^^^^^^^^^
+
+Returns the top Key-Value pair in Heap. Fails if the heap is empty.
+
+* compilation flags: ``static``
+* template: ``top(Heap,Key,Value)``
+
+* mode - number of proofs:
+
+  * ``top(+heap,?key,?value)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="top_next/5"> </div>
+
+.. index:: top_next/5
+.. _heapp/0::top_next/5:
+
+``top_next/5``
+^^^^^^^^^^^^^^
+
+Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.
+
+* compilation flags: ``static``
+* template: ``top_next(Heap,Key1,Value1,Key2,Value2)``
+
+* mode - number of proofs:
+
+  * ``top_next(+heap,?key,?value,?key,?value)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

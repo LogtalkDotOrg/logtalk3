@@ -1,0 +1,52 @@
+.. index:: character
+.. _character/0:
+
+**object**
+
+``character``
+=============
+
+Character predicates (most of them assume an ASCII representation).
+
+* author: Paulo Moura
+* version: 1.8
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`characterp <characterp/0>`
+* extends:
+
+  * ``public`` :ref:`atom <atom/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

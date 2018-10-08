@@ -1,0 +1,228 @@
+.. index:: code_metrics_utilities
+.. _code_metrics_utilities/0:
+
+**category**
+
+``code_metrics_utilities``
+==========================
+
+Internal predicates for analyzing source code.
+
+* author: Ebrahim Azarisooreh
+* version: 0.6
+* date: 2018/6/8
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+(none)
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="ancestor/4"> </div>
+
+.. index:: ancestor/4
+.. _code_metrics_utilities/0::ancestor/4:
+
+``ancestor/4``
+^^^^^^^^^^^^^^
+
+True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.
+
+* compilation flags: ``static``
+* template: ``ancestor(EntityKind,Entity,AncestorKind,Ancestor)``
+
+* mode - number of proofs:
+
+  * ``ancestor(?entity,?entity_identifier,?entity,?entity_identifier)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="current_entity/1"> </div>
+
+.. index:: current_entity/1
+.. _code_metrics_utilities/0::current_entity/1:
+
+``current_entity/1``
+^^^^^^^^^^^^^^^^^^^^
+
+True if Entity is a currently loaded entity.
+
+* compilation flags: ``static``
+* template: ``current_entity(Entity)``
+
+* mode - number of proofs:
+
+  * ``current_entity(?entity_identifier)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="declares_predicate/2"> </div>
+
+.. index:: declares_predicate/2
+.. _code_metrics_utilities/0::declares_predicate/2:
+
+``declares_predicate/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True if Entity declares Predicate internally.
+
+* compilation flags: ``static``
+* template: ``declares_predicate(Entity,Predicate)``
+
+* mode - number of proofs:
+
+  * ``declares_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="defines_predicate/2"> </div>
+
+.. index:: defines_predicate/2
+.. _code_metrics_utilities/0::defines_predicate/2:
+
+``defines_predicate/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True if Entity defines an implementation of Predicate internally. 'Auxiliary' predicates are excluded from results.
+
+* compilation flags: ``static``
+* template: ``defines_predicate(Entity,Predicate)``
+
+* mode - number of proofs:
+
+  * ``defines_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="defines_predicate/3"> </div>
+
+.. index:: defines_predicate/3
+.. _code_metrics_utilities/0::defines_predicate/3:
+
+``defines_predicate/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.
+
+* compilation flags: ``static``
+* template: ``defines_predicate(Entity,Predicate,Property)``
+
+* mode - number of proofs:
+
+  * ``defines_predicate(?entity_identifier,?predicate_indicator,?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="entity_calls/3"> </div>
+
+.. index:: entity_calls/3
+.. _code_metrics_utilities/0::entity_calls/3:
+
+``entity_calls/3``
+^^^^^^^^^^^^^^^^^^
+
+True if a predicate Caller within Entity makes a Call.
+
+* compilation flags: ``static``
+* template: ``entity_calls(Entity,Caller,Call)``
+
+* mode - number of proofs:
+
+  * ``entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="entity_kind/2"> </div>
+
+.. index:: entity_kind/2
+.. _code_metrics_utilities/0::entity_kind/2:
+
+``entity_kind/2``
+^^^^^^^^^^^^^^^^^
+
+True if Kind defines Entity and is one of category, protocol, or object.
+
+* compilation flags: ``static``
+* template: ``entity_kind(Entity,Kind)``
+
+* mode - number of proofs:
+
+  * ``entity_kind(+entity_identifier,-entity)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="entity_property/2"> </div>
+
+.. index:: entity_property/2
+.. _code_metrics_utilities/0::entity_property/2:
+
+``entity_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.
+
+* compilation flags: ``static``
+* template: ``entity_property(Entity,Property)``
+
+* mode - number of proofs:
+
+  * ``entity_property(+entity_identifier,-term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="entity_updates/3"> </div>
+
+.. index:: entity_updates/3
+.. _code_metrics_utilities/0::entity_updates/3:
+
+``entity_updates/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)
+
+* compilation flags: ``static``
+* template: ``entity_updates(Entity,Updater,Update)``
+
+* mode - number of proofs:
+
+  * ``entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
+
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Usage**: This is meant to be imported by any metric added to the system.
+
+* **Predicate Scope**: This is meant for internal use by metrics only. As such, all provided predicates are private.
+
+See also
+--------
+
+(none)
+

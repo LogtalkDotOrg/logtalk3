@@ -1,0 +1,51 @@
+.. index:: java(Reference)
+.. _java/1:
+
+**object**
+
+``java(Reference)``
+===================
+
+Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
+
+* ``Reference`` - Either a class name or a Java reference to an object
+
+* author: Paulo Moura and Sergio Castro
+* version: 1.0
+* date: 2014/3/25
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`java(Reference,_) <java/2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

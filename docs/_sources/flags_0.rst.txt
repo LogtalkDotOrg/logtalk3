@@ -1,0 +1,394 @@
+.. index:: flags
+.. _flags/0:
+
+**category**
+
+``flags``
+=========
+
+Implementation of persistent object flags.
+
+* author: Theofrastos Mantadelis
+* version: 1.0
+* date: 2010/11/27
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="get_flag_value/2"> </div>
+
+.. index:: get_flag_value/2
+.. _flags/0::get_flag_value/2:
+
+``get_flag_value/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Gets or tests the value of a flag.
+
+* compilation flags: ``static``
+* template: ``get_flag_value(Flag,Value)``
+
+* mode - number of proofs:
+
+  * ``get_flag_value(+atom,?nonvar)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="set_flag_value/2"> </div>
+
+.. index:: set_flag_value/2
+.. _flags/0::set_flag_value/2:
+
+``set_flag_value/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Sets the value of a flag.
+
+* compilation flags: ``static``
+* template: ``set_flag_value(Flag,NewValue)``
+
+* mode - number of proofs:
+
+  * ``set_flag_value(+atom,@nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="set_flag_value/3"> </div>
+
+.. index:: set_flag_value/3
+.. _flags/0::set_flag_value/3:
+
+``set_flag_value/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Sets the value of a flag, returning the old value.
+
+* compilation flags: ``static``
+* template: ``set_flag_value(Flag,OldValue,NewValue)``
+
+* mode - number of proofs:
+
+  * ``set_flag_value(+atom,?nonvar,@nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="reset_flags/0"> </div>
+
+.. index:: reset_flags/0
+.. _flags/0::reset_flags/0:
+
+``reset_flags/0``
+^^^^^^^^^^^^^^^^^
+
+Resets all flags to their default values.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``reset_flags`` - ``one``
+
+
+.. raw:: html
+
+   <div id="reset_flags/1"> </div>
+
+.. index:: reset_flags/1
+.. _flags/0::reset_flags/1:
+
+``reset_flags/1``
+^^^^^^^^^^^^^^^^^
+
+Resets all flags in a group to their default values.
+
+* compilation flags: ``static``
+* template: ``reset_flags(Group)``
+
+* mode - number of proofs:
+
+  * ``reset_flags(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="flag_groups/1"> </div>
+
+.. index:: flag_groups/1
+.. _flags/0::flag_groups/1:
+
+``flag_groups/1``
+^^^^^^^^^^^^^^^^^
+
+Returns a list of all flag groups.
+
+* compilation flags: ``static``
+* template: ``flag_groups(Groups)``
+
+* mode - number of proofs:
+
+  * ``flag_groups(-list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="flag_group_chk/1"> </div>
+
+.. index:: flag_group_chk/1
+.. _flags/0::flag_group_chk/1:
+
+``flag_group_chk/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks if a given atom is a flag group.
+
+* compilation flags: ``static``
+* template: ``flag_group_chk(Group)``
+
+* mode - number of proofs:
+
+  * ``flag_group_chk(+atom)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="print_flags/0"> </div>
+
+.. index:: print_flags/0
+.. _flags/0::print_flags/0:
+
+``print_flags/0``
+^^^^^^^^^^^^^^^^^
+
+Prints a listing of all flags.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``print_flags`` - ``one``
+
+
+.. raw:: html
+
+   <div id="print_flags/1"> </div>
+
+.. index:: print_flags/1
+.. _flags/0::print_flags/1:
+
+``print_flags/1``
+^^^^^^^^^^^^^^^^^
+
+Prints a listing of all flags in a group.
+
+* compilation flags: ``static``
+* template: ``print_flags(Group)``
+
+* mode - number of proofs:
+
+  * ``print_flags(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="defined_flag/6"> </div>
+
+.. index:: defined_flag/6
+.. _flags/0::defined_flag/6:
+
+``defined_flag/6``
+^^^^^^^^^^^^^^^^^^
+
+Gets or test the existing (visible) flag definitions.
+
+* compilation flags: ``static``
+* template: ``defined_flag(Flag,Group,Type,DefaultValue,Description,Access)``
+
+* mode - number of proofs:
+
+  * ``defined_flag(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="built_in_flag/2"> </div>
+
+.. index:: built_in_flag/2
+.. _flags/0::built_in_flag/2:
+
+``built_in_flag/2``
+^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a built-in flag type with the specified default value.
+
+* compilation flags: ``static``
+* template: ``built_in_flag(Type,DefaultValue)``
+
+* mode - number of proofs:
+
+  * ``built_in_flag(?atom,?nonvar)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="unsafe_set_flag_value/2"> </div>
+
+.. index:: unsafe_set_flag_value/2
+.. _flags/0::unsafe_set_flag_value/2:
+
+``unsafe_set_flag_value/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sets the value of a flag without performing any validation checks.
+
+* compilation flags: ``static``
+* template: ``unsafe_set_flag_value(Flag,NewValue)``
+
+* mode - number of proofs:
+
+  * ``unsafe_set_flag_value(+atom,@nonvar)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="define_flag/1"> </div>
+
+.. index:: define_flag/1
+.. _flags/0::define_flag/1:
+
+``define_flag/1``
+^^^^^^^^^^^^^^^^^
+
+Defines a new flag using default options.
+
+* compilation flags: ``static``
+* template: ``define_flag(Flag)``
+
+* mode - number of proofs:
+
+  * ``define_flag(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="define_flag/2"> </div>
+
+.. index:: define_flag/2
+.. _flags/0::define_flag/2:
+
+``define_flag/2``
+^^^^^^^^^^^^^^^^^
+
+Defines a new flag using a given set of options (for example, [group(general), type(nonvar), default(true), description(Flag), access(read_write)]).
+
+* compilation flags: ``static``
+* template: ``define_flag(Flag,Options)``
+
+* mode - number of proofs:
+
+  * ``define_flag(+atom,@list)`` - ``one``
+
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="defined_flag_/6"> </div>
+
+.. index:: defined_flag_/6
+.. _flags/0::defined_flag_/6:
+
+``defined_flag_/6``
+^^^^^^^^^^^^^^^^^^^
+
+Gets or test the existing flag definitions.
+
+* compilation flags: ``dynamic``
+* template: ``defined_flag_(Flag,Group,Type,DefaultValue,Description,Access)``
+
+* mode - number of proofs:
+
+  * ``defined_flag_(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="flag_value_/2"> </div>
+
+.. index:: flag_value_/2
+.. _flags/0::flag_value_/2:
+
+``flag_value_/2``
+^^^^^^^^^^^^^^^^^
+
+Table of flag values.
+
+* compilation flags: ``dynamic``
+* template: ``flag_value_(Flag,Value)``
+
+* mode - number of proofs:
+
+  * ``flag_value_(?atom,?nonvar)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="validate/3"> </div>
+
+.. index:: validate/3
+.. _flags/0::validate/3:
+
+``validate/3``
+^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+.. raw:: html
+
+   <div id="validate_type/1"> </div>
+
+.. index:: validate_type/1
+.. _flags/0::validate_type/1:
+
+``validate_type/1``
+^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+.. raw:: html
+
+   <div id="is_validator/1"> </div>
+
+.. index:: is_validator/1
+.. _flags/0::is_validator/1:
+
+``is_validator/1``
+^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``static``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

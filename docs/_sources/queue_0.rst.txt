@@ -1,0 +1,52 @@
+.. index:: queue
+.. _queue/0:
+
+**object**
+
+``queue``
+=========
+
+Queue predicates implemented using difference lists.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`queuep <queuep/0>`
+* extends:
+
+  * ``public`` :ref:`compound <compound/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

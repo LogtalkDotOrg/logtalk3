@@ -1,147 +1,320 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>halstead_metric(Stroud)</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">object</p>
-      <h1 class="code">halstead_metric(Stroud)</h1>
-      <blockquote>
-        <p class="comment">Computes Halstead complexity numbers for an entity.</p>
-        <ul class="parameters">
-          <li><code>Stroud</code> &ndash; <span class="comment">Coeficient for computing the time required to program.</span></li>
-        </ul>
-      </blockquote>
-    </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>0.7</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2018/7/18</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static, context_switching_calls</code>
-          </dd>
-        </dl>
-        <dl class="relations">
-          <dt class="key">imports:</dt>
-          <dd class="value">
-            <code>public <a href="code_metrics_utilities_0.html">code_metrics_utilities</a></code>
-          </dd>
-          <dd class="value">
-            <code>public <a href="code_metric_0.html">code_metric</a></code>
-          </dd>
-        </dl>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <p class="comment">(see related entities)</p>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>halstead_metric(Stroud) &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="noc_metric" href="noc_metric_0.html" />
+    <link rel="prev" title="halstead_metric" href="halstead_metric_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cc_metric_0.html">cc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metric_0.html">code_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_0.html">code_metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_messages_0.html">code_metrics_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_utilities_0.html">code_metrics_utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coupling_metric_0.html">coupling_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dit_metric_0.html">dit_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc_metric_0.html">doc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="halstead_metric_0.html">halstead_metric</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">halstead_metric(Stroud)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upn_metric_0.html">upn_metric</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(see related entities)</p>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">halstead_metric(Stroud)</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/halstead_metric_1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="halstead-metric-1"><span id="index-0"></span><strong>object</strong></p>
+<div class="section" id="halstead-metric-stroud">
+<h1><code class="docutils literal notranslate"><span class="pre">halstead_metric(Stroud)</span></code><a class="headerlink" href="#halstead-metric-stroud" title="Permalink to this headline">¶</a></h1>
+<p>Computes Halstead complexity numbers for an entity.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Stroud</span></code> - Coeficient for computing the time required to program.</li>
+<li>author: Paulo Moura</li>
+<li>version: 0.7</li>
+<li>date: 2018/7/18</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
+<li>imports:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metrics_utilities_0.html#code-metrics-utilities-0"><span class="std std-ref">code_metrics_utilities</span></a></li>
+<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metric_0.html#code-metric-0"><span class="std std-ref">code_metric</span></a></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<p>(see related entities)</p>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(see related entities)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(see related entities)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Definition of operators</strong>: Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.</li>
+<li><strong>Definition of operands</strong>: Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.</li>
+<li><strong>Pn</strong>: Number of distinct predicates (declared, defined, called, or updated)</li>
+<li><strong>PAn</strong>: Number of predicate arguments (assumed distinct)</li>
+<li><strong>Cn</strong>: Number of predicate calls/updates + number of clauses</li>
+<li><strong>CAn</strong>: Number of predicate call/update arguments + number of clause head arguments</li>
+<li><strong>EV</strong>: Entity vocabulary: EV = Pn + PAn</li>
+<li><strong>EL</strong>: Entity length: EL = Cn + CAn</li>
+<li><strong>V</strong>: Volume: V = EL * log2(EV)</li>
+<li><strong>D</strong>: Difficulty: D = (Pn/2) * (CAn/An)</li>
+<li><strong>E</strong>: Effort: E = D * V</li>
+<li><strong>T</strong>: Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)</li>
+<li><strong>B</strong>: Number of delivered bugs: B = V/3000</li>
+<li><strong>Entity score</strong>: Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="noc_metric_0.html" class="btn btn-neutral float-right" title="noc_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="halstead_metric_0.html" class="btn btn-neutral" title="halstead_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(see related entities)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <dl class="remarks">
-          <dt class="comment">Definition of operators</dt>
-          <dd class="text">Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Definition of operands</dt>
-          <dd class="text">Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Pn</dt>
-          <dd class="text">Number of distinct predicates (declared, defined, called, or updated)</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">PAn</dt>
-          <dd class="text">Number of predicate arguments (assumed distinct)</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Cn</dt>
-          <dd class="text">Number of predicate calls/updates + number of clauses</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">CAn</dt>
-          <dd class="text">Number of predicate call/update arguments + number of clause head arguments</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">EV</dt>
-          <dd class="text">Entity vocabulary: EV = Pn + PAn</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">EL</dt>
-          <dd class="text">Entity length: EL = Cn + CAn</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">V</dt>
-          <dd class="text">Volume: V = EL * log2(EV)</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">D</dt>
-          <dd class="text">Difficulty: D = (Pn/2) * (CAn/An)</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">E</dt>
-          <dd class="text">Effort: E = D * V</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">T</dt>
-          <dd class="text">Time required to program: T = E/k seconds (k is the Stroud number; defaults to 18)</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">B</dt>
-          <dd class="text">Number of delivered bugs: B = V/3000</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Entity score</dt>
-          <dd class="text">Represented as the compound term pn_pan_cn_can_ev_el_v_d_e_t_b/11.</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

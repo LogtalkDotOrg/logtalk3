@@ -1,0 +1,60 @@
+.. index:: meta_compiler
+.. _meta_compiler/0:
+
+**object**
+
+``meta_compiler``
+=================
+
+Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.
+
+* author: Paulo Moura
+* version: 0.12
+* date: 2018/8/16
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="generated_predicate/1"> </div>
+
+.. index:: generated_predicate/1
+.. _meta_compiler/0::generated_predicate/1:
+
+``generated_predicate/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* compilation flags: ``dynamic``
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`meta <meta/0>`
+
+

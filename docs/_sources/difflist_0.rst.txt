@@ -1,0 +1,94 @@
+.. index:: difflist
+.. _difflist/0:
+
+**object**
+
+``difflist``
+============
+
+Difference list predicates.
+
+* author: Paulo Moura
+* version: 1.14
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`listp <listp/0>`
+* extends:
+
+  * ``public`` :ref:`compound <compound/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="add/3"> </div>
+
+.. index:: add/3
+.. _difflist/0::add/3:
+
+``add/3``
+^^^^^^^^^
+
+Adds a term to the end of a difference list.
+
+* compilation flags: ``static``
+* template: ``add(Term,DiffList,NewDiffList)``
+
+* mode - number of proofs:
+
+  * ``add(@term,+difference_list,-difference_list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="as_list/2"> </div>
+
+.. index:: as_list/2
+.. _difflist/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Converts a difference list to a normal list.
+
+* compilation flags: ``static``
+* template: ``as_list(DiffList,List)``
+
+* mode - number of proofs:
+
+  * ``as_list(+difference_list,-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`list <list/0>`
+* :ref:`list(Type) <list/1>`
+* :ref:`numberlist <numberlist/0>`
+* :ref:`varlist <varlist/0>`
+
+

@@ -1,0 +1,63 @@
+.. index:: flatting
+.. _flatting/0:
+
+**category**
+
+``flatting``
+============
+
+Flattens conjunction of goals with the form f & g into a list [f,g].
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static``
+* source: Based on source code from The Craft of Prolog, by Richard O'Keefe
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+(none)
+
+Protected interface
+-------------------
+
+.. raw:: html
+
+   <div id="flatten_goals//1"> </div>
+
+.. index:: flatten_goals//1
+.. _flatting/0::flatten_goals//1:
+
+``flatten_goals//1``
+^^^^^^^^^^^^^^^^^^^^
+
+Flattens a conjunction of goals.
+
+* compilation flags: ``static``
+* template: ``flatten_goals(Conjunction)``
+
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

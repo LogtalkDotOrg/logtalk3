@@ -1,0 +1,226 @@
+.. index:: queuep
+.. _queuep/0:
+
+**protocol**
+
+``queuep``
+==========
+
+Queue protocol.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _queuep/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True if the queue is empty.
+
+* compilation flags: ``static``
+* template: ``empty(Queue)``
+
+* mode - number of proofs:
+
+  * ``empty(@queue)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="head/2"> </div>
+
+.. index:: head/2
+.. _queuep/0::head/2:
+
+``head/2``
+^^^^^^^^^^
+
+Unifies Head with the first element of the queue.
+
+* compilation flags: ``static``
+* template: ``head(Queue,Head)``
+
+* mode - number of proofs:
+
+  * ``head(+queue,?term)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="join/3"> </div>
+
+.. index:: join/3
+.. _queuep/0::join/3:
+
+``join/3``
+^^^^^^^^^^
+
+Adds the new element at the end of the queue.
+
+* compilation flags: ``static``
+* template: ``join(Element,Queue_in,Queue_out)``
+
+* mode - number of proofs:
+
+  * ``join(@term,+queue,-queue)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="join_all/3"> </div>
+
+.. index:: join_all/3
+.. _queuep/0::join_all/3:
+
+``join_all/3``
+^^^^^^^^^^^^^^
+
+Adds the new elements at the end of the queue.  The elements are added in the same order that they appear in the list.
+
+* compilation flags: ``static``
+* template: ``join_all(List,Queue_in,Queue_out)``
+
+* mode - number of proofs:
+
+  * ``join_all(+list,+queue,-queue)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="jump/3"> </div>
+
+.. index:: jump/3
+.. _queuep/0::jump/3:
+
+``jump/3``
+^^^^^^^^^^
+
+Adds the new element at the front of the queue.
+
+* compilation flags: ``static``
+* template: ``jump(Element,Queue_in,Queue_out)``
+
+* mode - number of proofs:
+
+  * ``jump(@term,+queue,-queue)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="jump_all/3"> </div>
+
+.. index:: jump_all/3
+.. _queuep/0::jump_all/3:
+
+``jump_all/3``
+^^^^^^^^^^^^^^
+
+Adds the new elements at the front of the queue.  The elements are added in the same order that they appear in the list.
+
+* compilation flags: ``static``
+* template: ``jump_all(Element,Queue_in,Queue_out)``
+
+* mode - number of proofs:
+
+  * ``jump_all(+list,+queue,-queue)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="length/2"> </div>
+
+.. index:: length/2
+.. _queuep/0::length/2:
+
+``length/2``
+^^^^^^^^^^^^
+
+Queue length.
+
+* compilation flags: ``static``
+* template: ``length(Queue,Length)``
+
+* mode - number of proofs:
+
+  * ``length(+queue,?integer)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="serve/3"> </div>
+
+.. index:: serve/3
+.. _queuep/0::serve/3:
+
+``serve/3``
+^^^^^^^^^^^
+
+Removes the first element of the queue for service.
+
+* compilation flags: ``static``
+* template: ``serve(Queue_in,Head,Queue_out)``
+
+* mode - number of proofs:
+
+  * ``serve(+queue,?term,-queue)`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="as_list/2"> </div>
+
+.. index:: as_list/2
+.. _queuep/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Converts a queue to a list.
+
+* compilation flags: ``static``
+* template: ``as_list(Queue,List)``
+
+* mode - number of proofs:
+
+  * ``as_list(+queue,-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

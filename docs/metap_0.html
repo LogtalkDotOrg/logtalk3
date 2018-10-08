@@ -1,606 +1,667 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>metap</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">metap</h1>
-      <blockquote>
-        <p class="comment">Useful meta-predicates protocol.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metap &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="minheap" href="minheap_0.html" />
+    <link rel="prev" title="meta_compiler" href="meta_compiler_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">metap</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="randomp_0.html">randomp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">metap</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/metap_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="metap-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="metap">
+<h1><code class="docutils literal notranslate"><span class="pre">metap</span></code><a class="headerlink" href="#metap" title="Permalink to this headline">¶</a></h1>
+<p>Useful meta-predicates protocol.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 6.1</li>
+<li>date: 2015/12/23</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="include/3"> </div><div class="section" id="include-3">
+<span id="metap-0-include-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">include/3</span></code><a class="headerlink" href="#include-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns a list of all list elements that satisfy a predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">include(Closure,List,Included)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">include(1,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">include(+callable,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="exclude/3"> </div></div>
+<div class="section" id="exclude-3">
+<span id="metap-0-exclude-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">exclude/3</span></code><a class="headerlink" href="#exclude-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns a list of all list elements that fail to satisfy a predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">exclude(Closure,List,Excluded)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">exclude(1,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">exclude(+callable,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="findall_member/4"> </div></div>
+<div class="section" id="findall-member-4">
+<span id="metap-0-findall-member-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">findall_member/4</span></code><a class="headerlink" href="#findall-member-4" title="Permalink to this headline">¶</a></h3>
+<p>Finds all members of a list that satisfy a given test.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">findall_member(Member,List,Test,Result)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">findall_member(*,*,0,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">findall_member(&#64;term,+list,&#64;callable,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="findall_member/5"> </div></div>
+<div class="section" id="findall-member-5">
+<span id="metap-0-findall-member-5"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">findall_member/5</span></code><a class="headerlink" href="#findall-member-5" title="Permalink to this headline">¶</a></h3>
+<p>Finds all members of a list that satisfy a given test appending the given tail to the result.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">findall_member(Member,List,Test,Result,Tail)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">findall_member(*,*,0,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">findall_member(&#64;term,+list,&#64;callable,-list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="partition/4"> </div></div>
+<div class="section" id="partition-4">
+<span id="metap-0-partition-4"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">partition/4</span></code><a class="headerlink" href="#partition-4" title="Permalink to this headline">¶</a></h3>
+<p>Partition a list of elements in two lists using a predicate.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">partition(Closure,List,Included,Excluded)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">partition(1,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">partition(+callable,+list,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="partition/6"> </div></div>
+<div class="section" id="partition-6">
+<span id="metap-0-partition-6"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">partition/6</span></code><a class="headerlink" href="#partition-6" title="Permalink to this headline">¶</a></h3>
+<p>Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">partition(Closure,List,Value,Less,Equal,Greater)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">partition(3,*,*,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">partition(+callable,+list,&#64;term,-list,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="fold_left/4"> </div></div>
+<div class="section" id="fold-left-4">
+<span id="metap-0-fold-left-4"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">fold_left/4</span></code><a class="headerlink" href="#fold-left-4" title="Permalink to this headline">¶</a></h3>
+<p>List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">fold_left(Closure,Accumulator,List,Result)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">fold_left(3,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">fold_left(+callable,?term,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="fold_left_1/3"> </div></div>
+<div class="section" id="fold-left-1-3">
+<span id="metap-0-fold-left-1-3"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">fold_left_1/3</span></code><a class="headerlink" href="#fold-left-1-3" title="Permalink to this headline">¶</a></h3>
+<p>List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">fold_left_1(Closure,List,Result)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">fold_left_1(3,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">fold_left_1(+callable,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="scan_left/4"> </div></div>
+<div class="section" id="scan-left-4">
+<span id="metap-0-scan-left-4"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">scan_left/4</span></code><a class="headerlink" href="#scan-left-4" title="Permalink to this headline">¶</a></h3>
+<p>List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">scan_left(Closure,Accumulator,List,Results)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">scan_left(3,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">scan_left(+callable,?term,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="scan_left_1/3"> </div></div>
+<div class="section" id="scan-left-1-3">
+<span id="metap-0-scan-left-1-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">scan_left_1/3</span></code><a class="headerlink" href="#scan-left-1-3" title="Permalink to this headline">¶</a></h3>
+<p>List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">scan_left_1(Closure,List,Results)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">scan_left_1(3,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">scan_left_1(+callable,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="fold_right/4"> </div></div>
+<div class="section" id="fold-right-4">
+<span id="metap-0-fold-right-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">fold_right/4</span></code><a class="headerlink" href="#fold-right-4" title="Permalink to this headline">¶</a></h3>
+<p>List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">fold_right(Closure,Accumulator,List,Result)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">fold_right(3,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">fold_right(+callable,?term,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="fold_right_1/3"> </div></div>
+<div class="section" id="fold-right-1-3">
+<span id="metap-0-fold-right-1-3"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">fold_right_1/3</span></code><a class="headerlink" href="#fold-right-1-3" title="Permalink to this headline">¶</a></h3>
+<p>List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">fold_right_1(Closure,List,Result)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">fold_right_1(3,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">fold_right_1(+callable,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="scan_right/4"> </div></div>
+<div class="section" id="scan-right-4">
+<span id="metap-0-scan-right-4"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">scan_right/4</span></code><a class="headerlink" href="#scan-right-4" title="Permalink to this headline">¶</a></h3>
+<p>List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">scan_right(Closure,Accumulator,List,Results)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">scan_right(3,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">scan_right(+callable,?term,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="scan_right_1/3"> </div></div>
+<div class="section" id="scan-right-1-3">
+<span id="metap-0-scan-right-1-3"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">scan_right_1/3</span></code><a class="headerlink" href="#scan-right-1-3" title="Permalink to this headline">¶</a></h3>
+<p>List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">scan_right_1(Closure,List,Results)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">scan_right_1(3,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">scan_right_1(+callable,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/2"> </div></div>
+<div class="section" id="map-2">
+<span id="metap-0-map-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
+<p>True if the predicate succeeds for each list element.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(1,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/3"> </div></div>
+<div class="section" id="map-3">
+<span id="metap-0-map-3"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">map/3</span></code><a class="headerlink" href="#map-3" title="Permalink to this headline">¶</a></h3>
+<p>List mapping predicate taken arguments from two lists of elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List1,List2)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(2,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/4"> </div></div>
+<div class="section" id="map-4">
+<span id="metap-0-map-4"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">map/4</span></code><a class="headerlink" href="#map-4" title="Permalink to this headline">¶</a></h3>
+<p>List mapping predicate taken arguments from three lists of elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List1,List2,List3)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(3,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/5"> </div></div>
+<div class="section" id="map-5">
+<span id="metap-0-map-5"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">map/5</span></code><a class="headerlink" href="#map-5" title="Permalink to this headline">¶</a></h3>
+<p>List mapping predicate taken arguments from four lists of elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List1,List2,List3,List4)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(4,*,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list,?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/6"> </div></div>
+<div class="section" id="map-6">
+<span id="metap-0-map-6"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">map/6</span></code><a class="headerlink" href="#map-6" title="Permalink to this headline">¶</a></h3>
+<p>List mapping predicate taken arguments from five lists of elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List1,List2,List3,List4,List5)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(5,*,*,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list,?list,?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/7"> </div></div>
+<div class="section" id="map-7">
+<span id="metap-0-map-7"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">map/7</span></code><a class="headerlink" href="#map-7" title="Permalink to this headline">¶</a></h3>
+<p>List mapping predicate taken arguments from six lists of elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List1,List2,List3,List4,List5,List6)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(6,*,*,*,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list,?list,?list,?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map/8"> </div></div>
+<div class="section" id="map-8">
+<span id="metap-0-map-8"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">map/8</span></code><a class="headerlink" href="#map-8" title="Permalink to this headline">¶</a></h3>
+<p>List mapping predicate taken arguments from seven lists of elements.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,List1,List2,List3,List4,List5,List6,List7)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(7,*,*,*,*,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map(+callable,?list,?list,?list,?list,?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="map_reduce/5"> </div></div>
+<div class="section" id="map-reduce-5">
+<span id="metap-0-map-reduce-5"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">map_reduce/5</span></code><a class="headerlink" href="#map-reduce-5" title="Permalink to this headline">¶</a></h3>
+<p>Map a list and apply a fold left (reduce) to the resulting list.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">map_reduce(Map,Reduce,Accumulator,List,Result)</span></code></li>
+<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map_reduce(2,3,*,*,*)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">map_reduce(+callable,+callable,+term,?list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="minheap_0.html" class="btn btn-neutral float-right" title="minheap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="meta_compiler_0.html" class="btn btn-neutral" title="meta_compiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>6.1</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2015/12/23</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="include/3" class="code">include/3</h3>
-          <blockquote>
-            <p class="comment">Returns a list of all list elements that satisfy a predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>include(Closure,List,Included)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>include(1,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>include(+callable,+list,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="exclude/3" class="code">exclude/3</h3>
-          <blockquote>
-            <p class="comment">Returns a list of all list elements that fail to satisfy a predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>exclude(Closure,List,Excluded)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>exclude(1,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>exclude(+callable,+list,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="findall_member/4" class="code">findall_member/4</h3>
-          <blockquote>
-            <p class="comment">Finds all members of a list that satisfy a given test.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>findall_member(Member,List,Test,Result)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>findall_member(*,*,0,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>findall_member(@term,+list,@callable,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="findall_member/5" class="code">findall_member/5</h3>
-          <blockquote>
-            <p class="comment">Finds all members of a list that satisfy a given test appending the given tail to the result.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>findall_member(Member,List,Test,Result,Tail)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>findall_member(*,*,0,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>findall_member(@term,+list,@callable,-list,+list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="partition/4" class="code">partition/4</h3>
-          <blockquote>
-            <p class="comment">Partition a list of elements in two lists using a predicate.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>partition(Closure,List,Included,Excluded)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>partition(1,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>partition(+callable,+list,-list,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="partition/6" class="code">partition/6</h3>
-          <blockquote>
-            <p class="comment">Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>partition(Closure,List,Value,Less,Equal,Greater)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>partition(3,*,*,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>partition(+callable,+list,@term,-list,-list,-list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="fold_left/4" class="code">fold_left/4</h3>
-          <blockquote>
-            <p class="comment">List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>fold_left(Closure,Accumulator,List,Result)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>fold_left(3,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>fold_left(+callable,?term,+list,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="fold_left_1/3" class="code">fold_left_1/3</h3>
-          <blockquote>
-            <p class="comment">List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>fold_left_1(Closure,List,Result)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>fold_left_1(3,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>fold_left_1(+callable,+list,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="scan_left/4" class="code">scan_left/4</h3>
-          <blockquote>
-            <p class="comment">List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>scan_left(Closure,Accumulator,List,Results)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>scan_left(3,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>scan_left(+callable,?term,+list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="scan_left_1/3" class="code">scan_left_1/3</h3>
-          <blockquote>
-            <p class="comment">List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>scan_left_1(Closure,List,Results)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>scan_left_1(3,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>scan_left_1(+callable,+list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="fold_right/4" class="code">fold_right/4</h3>
-          <blockquote>
-            <p class="comment">List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>fold_right(Closure,Accumulator,List,Result)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>fold_right(3,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>fold_right(+callable,?term,+list,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="fold_right_1/3" class="code">fold_right_1/3</h3>
-          <blockquote>
-            <p class="comment">List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>fold_right_1(Closure,List,Result)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>fold_right_1(3,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>fold_right_1(+callable,+list,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="scan_right/4" class="code">scan_right/4</h3>
-          <blockquote>
-            <p class="comment">List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>scan_right(Closure,Accumulator,List,Results)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>scan_right(3,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>scan_right(+callable,?term,+list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="scan_right_1/3" class="code">scan_right_1/3</h3>
-          <blockquote>
-            <p class="comment">List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>scan_right_1(Closure,List,Results)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>scan_right_1(3,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>scan_right_1(+callable,+list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/2" class="code">map/2</h3>
-          <blockquote>
-            <p class="comment">True if the predicate succeeds for each list element.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(1,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/3" class="code">map/3</h3>
-          <blockquote>
-            <p class="comment">List mapping predicate taken arguments from two lists of elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List1,List2)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(2,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/4" class="code">map/4</h3>
-          <blockquote>
-            <p class="comment">List mapping predicate taken arguments from three lists of elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List1,List2,List3)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(3,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list,?list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/5" class="code">map/5</h3>
-          <blockquote>
-            <p class="comment">List mapping predicate taken arguments from four lists of elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(4,*,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/6" class="code">map/6</h3>
-          <blockquote>
-            <p class="comment">List mapping predicate taken arguments from five lists of elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4,List5)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(5,*,*,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/7" class="code">map/7</h3>
-          <blockquote>
-            <p class="comment">List mapping predicate taken arguments from six lists of elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4,List5,List6)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(6,*,*,*,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list,?list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map/8" class="code">map/8</h3>
-          <blockquote>
-            <p class="comment">List mapping predicate taken arguments from seven lists of elements.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4,List5,List6,List7)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map(7,*,*,*,*,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list,?list,?list,?list) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="map_reduce/5" class="code">map_reduce/5</h3>
-          <blockquote>
-            <p class="comment">Map a list and apply a fold left (reduce) to the resulting list.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>map_reduce(Map,Reduce,Accumulator,List,Result)</code>
-            </dd>
-            <dt class="key">meta-predicate template:</dt>
-            <dd class="value">
-              <code>map_reduce(2,3,*,*,*)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>map_reduce(+callable,+callable,+term,?list,?term) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

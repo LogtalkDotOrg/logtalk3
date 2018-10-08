@@ -1,0 +1,52 @@
+.. index:: entity_diagram
+.. _entity_diagram/0:
+
+**object**
+
+``entity_diagram``
+==================
+
+Predicates for generating entity diagrams in DOT format with both inheritance and cross-referencing relation edges.
+
+* author: Paulo Moura
+* version: 2.0
+* date: 2014/1/1
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`entity_diagram(dot) <entity_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`inheritance_diagram <inheritance_diagram/0>`
+* :ref:`uses_diagram <uses_diagram/0>`
+* :ref:`xref_diagram <xref_diagram/0>`
+
+

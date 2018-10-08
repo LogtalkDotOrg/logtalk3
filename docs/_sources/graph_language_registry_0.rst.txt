@@ -1,0 +1,66 @@
+.. index:: graph_language_registry
+.. _graph_language_registry/0:
+
+**object**
+
+``graph_language_registry``
+===========================
+
+Registry of implemented graph languages.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2014/8/18
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="language_object/2"> </div>
+
+.. index:: language_object/2
+.. _graph_language_registry/0::language_object/2:
+
+``language_object/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Table of defined graph languages and their implementation objects.
+
+* compilation flags: ``static, multifile``
+* template: ``language_object(Format,Object)``
+
+* mode - number of proofs:
+
+  * ``language_object(?atom,?object_identifier)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

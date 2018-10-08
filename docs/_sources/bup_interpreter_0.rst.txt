@@ -1,0 +1,49 @@
+.. index:: bup_interpreter
+.. _bup_interpreter/0:
+
+**object**
+
+``bup_interpreter``
+===================
+
+Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.
+
+* author: Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.
+* version: 1.1
+* date: 2018/5/7
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`interpreterp <interpreterp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

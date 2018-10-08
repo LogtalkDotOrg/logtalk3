@@ -1,0 +1,49 @@
+.. index:: assignvars
+.. _assignvars/0:
+
+**object**
+
+``assignvars``
+==============
+
+Assignable variables (supporting backtracable assignment of non-variable terms).
+
+* author: Nobukuni Kino and Paulo Moura
+* version: 1.7
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`assignvarsp <assignvarsp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

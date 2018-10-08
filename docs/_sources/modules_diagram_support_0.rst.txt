@@ -1,0 +1,106 @@
+.. index:: modules_diagram_support
+.. _modules_diagram_support/0:
+
+**object**
+
+``modules_diagram_support``
+===========================
+
+Utility predicates for supporting Prolog modules in diagrams.
+
+* author: Paulo Moura
+* version: 0.15
+* date: 2018/2/2
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="module_property/2"> </div>
+
+.. index:: module_property/2
+.. _modules_diagram_support/0::module_property/2:
+
+``module_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Access to module properties, at least exports/1, file/1, and file/2 but also declares/2, defines/2, calls/2, and provides/3 when possible.
+
+* compilation flags: ``static``
+* template: ``module_property(Module,Property)``
+
+* mode - number of proofs:
+
+  * ``module_property(?atom,?callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="loaded_file_property/2"> </div>
+
+.. index:: loaded_file_property/2
+.. _modules_diagram_support/0::loaded_file_property/2:
+
+``loaded_file_property/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.
+
+* compilation flags: ``static``
+* template: ``loaded_file_property(File,Property)``
+
+* mode - number of proofs:
+
+  * ``loaded_file_property(?atom,?callable)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="source_file_extension/1"> </div>
+
+.. index:: source_file_extension/1
+.. _modules_diagram_support/0::source_file_extension/1:
+
+``source_file_extension/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Valid source file extension for Prolog source files.
+
+* compilation flags: ``static``
+* template: ``source_file_extension(Extension)``
+
+* mode - number of proofs:
+
+  * ``source_file_extension(?atom)`` - ``one_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

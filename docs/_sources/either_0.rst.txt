@@ -1,0 +1,116 @@
+.. index:: either
+.. _either/0:
+
+**object**
+
+``either``
+==========
+
+Types and predicates for extended type-checking of expected term references and for handling list of expected term references.
+
+* author: Paulo Moura
+* version: 0.2
+* date: 2018/6/4
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`type::type/1 <type/0::type/1>`
+  * :ref:`type::check/2 <type/0::check/2>`
+  * :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
+  * :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="expecteds/2"> </div>
+
+.. index:: expecteds/2
+.. _either/0::expecteds/2:
+
+``expecteds/2``
+^^^^^^^^^^^^^^^
+
+Returns the values stored in the expected term references that hold an expected term.
+
+* compilation flags: ``static``
+* template: ``expecteds(References,Expecteds)``
+
+* mode - number of proofs:
+
+  * ``expecteds(+list(expected),-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="unexpecteds/2"> </div>
+
+.. index:: unexpecteds/2
+.. _either/0::unexpecteds/2:
+
+``unexpecteds/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the values stored in the expected term references that hold an expected term.
+
+* compilation flags: ``static``
+* template: ``unexpecteds(References,Unexpecteds)``
+
+* mode - number of proofs:
+
+  * ``unexpecteds(+list(expected),-list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="partition/3"> </div>
+
+.. index:: partition/3
+.. _either/0::partition/3:
+
+``partition/3``
+^^^^^^^^^^^^^^^
+
+Retrieves and partitions the values stored in the expected term references.
+
+* compilation flags: ``static``
+* template: ``partition(References,Expecteds,Unexpecteds)``
+
+* mode - number of proofs:
+
+  * ``partition(+list(expected),-list,-list)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Type either(ExpectedType, UnexpectedType)**: Allows type-checking expected references where the expected and unexpected terms must be of the given types.
+
+* **QuickCheck support**: Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.
+
+See also
+--------
+
+* :ref:`expected <expected/0>`
+* :ref:`expected(Reference) <expected/1>`
+* :ref:`type <type/0>`
+* :ref:`arbitrary <arbitrary/0>`
+
+

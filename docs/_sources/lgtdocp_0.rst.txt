@@ -1,0 +1,390 @@
+.. index:: lgtdocp
+.. _lgtdocp/0:
+
+**protocol**
+
+``lgtdocp``
+===========
+
+Documenting tool protocol.
+
+* author: Paulo Moura
+* version: 3.2
+* date: 2017/11/4
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="rlibrary/2"> </div>
+
+.. index:: rlibrary/2
+.. _lgtdocp/0::rlibrary/2:
+
+``rlibrary/2``
+^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.
+
+* compilation flags: ``static``
+* template: ``rlibrary(Library,Options)``
+
+* mode - number of proofs:
+
+  * ``rlibrary(+atom,+list)`` - ``one``
+
+* examples:
+
+  * Generate XML documenting files for all tool entities for later conversion to Markdown files
+
+    * ``rlibrary(tools,[xslfile('lgtmd.xsl')])``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="rlibrary/1"> </div>
+
+.. index:: rlibrary/1
+.. _lgtdocp/0::rlibrary/1:
+
+``rlibrary/1``
+^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a library and its sub-libraries using default options.
+
+* compilation flags: ``static``
+* template: ``rlibrary(Library)``
+
+* mode - number of proofs:
+
+  * ``rlibrary(+atom)`` - ``one``
+
+* examples:
+
+  * Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the "lgt2xml" script)
+
+    * ``rlibrary(tools)``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="library/2"> </div>
+
+.. index:: library/2
+.. _lgtdocp/0::library/2:
+
+``library/2``
+^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a library using the specified options.
+
+* compilation flags: ``static``
+* template: ``library(Library,Options)``
+
+* mode - number of proofs:
+
+  * ``library(+atom,+list)`` - ``one``
+
+* examples:
+
+  * Generate XML documenting files for all library entities for later conversion to PDF A4 files
+
+    * ``library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="library/1"> </div>
+
+.. index:: library/1
+.. _lgtdocp/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a library using default options.
+
+* compilation flags: ``static``
+* template: ``library(Library)``
+
+* mode - number of proofs:
+
+  * ``library(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="rdirectory/2"> </div>
+
+.. index:: rdirectory/2
+.. _lgtdocp/0::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.
+
+* compilation flags: ``static``
+* template: ``rdirectory(Directory,Options)``
+
+* mode - number of proofs:
+
+  * ``rdirectory(+atom,+list)`` - ``one``
+
+* examples:
+
+  * Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files
+
+    * ``rdirectory('./tools',[xslfile('lgtmd.xsl')])``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="rdirectory/1"> </div>
+
+.. index:: rdirectory/1
+.. _lgtdocp/0::rdirectory/1:
+
+``rdirectory/1``
+^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a directory and its sub-directories using default options.
+
+* compilation flags: ``static``
+* template: ``rdirectory(Directory)``
+
+* mode - number of proofs:
+
+  * ``rdirectory(+atom)`` - ``one``
+
+* examples:
+
+  * Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the "lgt2xml" script)
+
+    * ``rdirectory('./tools')``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _lgtdocp/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a directory using the specified options.
+
+* compilation flags: ``static``
+* template: ``directory(Directory,Options)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom,+list)`` - ``one``
+
+* examples:
+
+  * Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files
+
+    * ``directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _lgtdocp/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in a directory using default options.
+
+* compilation flags: ``static``
+* template: ``directory(Directory)``
+
+* mode - number of proofs:
+
+  * ``directory(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file/2"> </div>
+
+.. index:: file/2
+.. _lgtdocp/0::file/2:
+
+``file/2``
+^^^^^^^^^^
+
+Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.
+
+* compilation flags: ``static``
+* template: ``file(File,Options)``
+
+* mode - number of proofs:
+
+  * ``file(+atom,+list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="file/1"> </div>
+
+.. index:: file/1
+.. _lgtdocp/0::file/1:
+
+``file/1``
+^^^^^^^^^^
+
+Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.
+
+* compilation flags: ``static``
+* template: ``file(File)``
+
+* mode - number of proofs:
+
+  * ``file(+atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all/1"> </div>
+
+.. index:: all/1
+.. _lgtdocp/0::all/1:
+
+``all/1``
+^^^^^^^^^
+
+Creates XML documenting files for all loaded entities using the specified options.
+
+* compilation flags: ``static``
+* template: ``all(File)``
+
+* mode - number of proofs:
+
+  * ``all(+list)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="all/0"> </div>
+
+.. index:: all/0
+.. _lgtdocp/0::all/0:
+
+``all/0``
+^^^^^^^^^
+
+Creates XML documenting files for all loaded entities using default options.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``all`` - ``one``
+
+
+.. raw:: html
+
+   <div id="option/2"> </div>
+
+.. index:: option/2
+.. _lgtdocp/0::option/2:
+
+``option/2``
+^^^^^^^^^^^^
+
+Returns, by backtracking, all options and their values.
+
+* compilation flags: ``static``
+* template: ``option(Option,Value)``
+
+* mode - number of proofs:
+
+  * ``option(?atom,?nonvar)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="set_option/2"> </div>
+
+.. index:: set_option/2
+.. _lgtdocp/0::set_option/2:
+
+``set_option/2``
+^^^^^^^^^^^^^^^^
+
+Sets an option value.
+
+* compilation flags: ``static``
+* template: ``set_option(Option,Value)``
+
+* mode - number of proofs:
+
+  * ``set_option(+atom,+nonvar)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Compiling files for generating XML documentation**: All source files must be compiled with the "source_data" compiler flag turned on.
+
+* **xml_spec(Specification) option**: XML documenting files specification format. Possible option values are "dtd" (DTD specification; default) and "xsd" (XML Schema specification).
+
+* **xml_spec_reference(Reference) option**: Reference to the XML specification file in XML documenting files. Possible values are "local" (default; DTD/XSD file in the same folder as the XML files), "web" (logtalk.org website DTD/XSD file), and "standalone" (no reference to specification files).
+
+* **entity_xsl_file(File) option**: XSLT file to use with generated XML documenting files. Default is "logtalk_entity_to_xml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).
+
+* **index_xsl_file(File) option**: XSLT file to use with generated XML documenting files. Default is "logtalk_index_to_xml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).
+
+* **xml_docs_directory(Directory) option**: Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.
+
+* **bom(Boolean) option**: Defines if a BOM should be added to the generated XML documenting files.
+
+* **encoding(Encoding) option**: Encoding to be used for the generated XML documenting files.
+
+* **omit_path_prefixes(Prefixes) option**: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.
+
+* **exclude_files(List) option**: List of files to exclude when generating the XML documenting files.
+
+* **exclude_paths(List) option**: List of (relative) library paths to exclude when generating the XML documenting files.
+
+* **exclude_entities(List) option**: List of entities to exclude when generating the XML documenting files.
+
+* **Known issues**: The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.
+
+See also
+--------
+
+(none)
+

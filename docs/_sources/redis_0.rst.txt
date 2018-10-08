@@ -1,0 +1,149 @@
+.. index:: redis
+.. _redis/0:
+
+**object**
+
+``redis``
+=========
+
+Redis client. Inspired by Sean Charles GNU Prolog Redis client.
+
+* author: Paulo Moura
+* version: 0.3
+* date: 2017/6/29
+* compilation flags: ``static, context_switching_calls``
+
+* provides:
+
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="connect/1"> </div>
+
+.. index:: connect/1
+.. _redis/0::connect/1:
+
+``connect/1``
+^^^^^^^^^^^^^
+
+Connect to a Redis server running on localhost using the default 6379 port.
+
+* compilation flags: ``static``
+* template: ``connect(Connection)``
+
+* mode - number of proofs:
+
+  * ``connect(--ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="connect/3"> </div>
+
+.. index:: connect/3
+.. _redis/0::connect/3:
+
+``connect/3``
+^^^^^^^^^^^^^
+
+Connect to a Redis server running on the given host and port.
+
+* compilation flags: ``static``
+* template: ``connect(Host,Port,Connection)``
+
+* mode - number of proofs:
+
+  * ``connect(+atom,+integer,--ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="disconnect/1"> </div>
+
+.. index:: disconnect/1
+.. _redis/0::disconnect/1:
+
+``disconnect/1``
+^^^^^^^^^^^^^^^^
+
+Disconnect from a Redis server.
+
+* compilation flags: ``static``
+* template: ``disconnect(Connection)``
+
+* mode - number of proofs:
+
+  * ``disconnect(++ground)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="send/3"> </div>
+
+.. index:: send/3
+.. _redis/0::send/3:
+
+``send/3``
+^^^^^^^^^^
+
+Sends a request to the a Redis server and returns its reply
+
+* compilation flags: ``static``
+* template: ``send(Connection,Request,Reply)``
+
+* mode - number of proofs:
+
+  * ``send(++ground,++callable,--callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="console/1"> </div>
+
+.. index:: console/1
+.. _redis/0::console/1:
+
+``console/1``
+^^^^^^^^^^^^^
+
+Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.
+
+* compilation flags: ``static``
+* template: ``console(Request)``
+
+* mode - number of proofs:
+
+  * ``console(++callable)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Command representation**: Use the Redis command name as the functor of a compound term where the arguments are the command arguments.
+
+* **Valid arguments**: Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the double_quotes flag.
+
+See also
+--------
+
+(none)
+

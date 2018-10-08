@@ -1,0 +1,52 @@
+.. index:: shell_expansion(A)
+.. _shell_expansion/1:
+
+**object**
+
+``shell_expansion(A)``
+======================
+
+Expansion object for the shell.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+* extends:
+
+  * ``public`` :ref:`rule_expansion(A) <rule_expansion/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

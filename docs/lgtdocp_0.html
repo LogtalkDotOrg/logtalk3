@@ -1,453 +1,516 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>lgtdocp</title>
-    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
-  </head>
-  <body>
-    <div class="header">
-      <p class="type">protocol</p>
-      <h1 class="code">lgtdocp</h1>
-      <blockquote>
-        <p class="comment">Documenting tool protocol.</p>
-      </blockquote>
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lgtdocp &mdash; Library API v3.21.0-b01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="coverage_report" href="coverage_report_0.html" />
+    <link rel="prev" title="lgtdoc" href="lgtdoc_0.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Library API
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Library index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lgtdoc_0.html">lgtdoc</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">lgtdocp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-interface">Public interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-interface">Protected interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#private-predicates">Private predicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operators">Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><code class="docutils literal notranslate"><span class="pre">library</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports"><code class="docutils literal notranslate"><span class="pre">ports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directory index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entity index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicate index</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Library API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library index</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">lgtdocp</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/lgtdocp_0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="lgtdocp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<div class="section" id="lgtdocp">
+<h1><code class="docutils literal notranslate"><span class="pre">lgtdocp</span></code><a class="headerlink" href="#lgtdocp" title="Permalink to this headline">¶</a></h1>
+<p>Documenting tool protocol.</p>
+<ul class="simple">
+<li>author: Paulo Moura</li>
+<li>version: 3.2</li>
+<li>date: 2017/11/4</li>
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+</ul>
+<p>(no dependencies on other entities)</p>
+<div class="section" id="public-interface">
+<h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
+<div id="rlibrary/2"> </div><div class="section" id="rlibrary-2">
+<span id="lgtdocp-0-rlibrary-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/2</span></code><a class="headerlink" href="#rlibrary-2" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary(Library,Options)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+<li>examples:<ul>
+<li>Generate XML documenting files for all tool entities for later conversion to Markdown files<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rlibrary(tools,[xslfile('lgtmd.xsl')])</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div id="rlibrary/1"> </div></div>
+<div class="section" id="rlibrary-1">
+<span id="lgtdocp-0-rlibrary-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code><a class="headerlink" href="#rlibrary-1" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a library and its sub-libraries using default options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+<li>examples:<ul>
+<li>Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the “lgt2xml” script)<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rlibrary(tools)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div id="library/2"> </div></div>
+<div class="section" id="library-2">
+<span id="lgtdocp-0-library-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">library/2</span></code><a class="headerlink" href="#library-2" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a library using the specified options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">library(Library,Options)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">library(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+<li>examples:<ul>
+<li>Generate XML documenting files for all library entities for later conversion to PDF A4 files<ul>
+<li><code class="docutils literal notranslate"><span class="pre">library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div id="library/1"> </div></div>
+<div class="section" id="library-1">
+<span id="lgtdocp-0-library-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">library/1</span></code><a class="headerlink" href="#library-1" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a library using default options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">library(Library)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">library(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="rdirectory/2"> </div></div>
+<div class="section" id="rdirectory-2">
+<span id="lgtdocp-0-rdirectory-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/2</span></code><a class="headerlink" href="#rdirectory-2" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory,Options)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+<li>examples:<ul>
+<li>Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools',[xslfile('lgtmd.xsl')])</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div id="rdirectory/1"> </div></div>
+<div class="section" id="rdirectory-1">
+<span id="lgtdocp-0-rdirectory-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code><a class="headerlink" href="#rdirectory-1" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a directory and its sub-directories using default options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+<li>examples:<ul>
+<li>Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the “lgt2xml” script)<ul>
+<li><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools')</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div id="directory/2"> </div></div>
+<div class="section" id="directory-2">
+<span id="lgtdocp-0-directory-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/2</span></code><a class="headerlink" href="#directory-2" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a directory using the specified options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">directory(Directory,Options)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">directory(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+<li>examples:<ul>
+<li>Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files<ul>
+<li><code class="docutils literal notranslate"><span class="pre">directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div id="directory/1"> </div></div>
+<div class="section" id="directory-1">
+<span id="lgtdocp-0-directory-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/1</span></code><a class="headerlink" href="#directory-1" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a directory using default options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="file/2"> </div></div>
+<div class="section" id="file-2">
+<span id="lgtdocp-0-file-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">file/2</span></code><a class="headerlink" href="#file-2" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">file(File,Options)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">file(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="file/1"> </div></div>
+<div class="section" id="file-1">
+<span id="lgtdocp-0-file-1"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">file/1</span></code><a class="headerlink" href="#file-1" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">file(File)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="all/1"> </div></div>
+<div class="section" id="all-1">
+<span id="lgtdocp-0-all-1"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">all/1</span></code><a class="headerlink" href="#all-1" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all loaded entities using the specified options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">all(File)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">all(+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="all/0"> </div></div>
+<div class="section" id="all-0">
+<span id="lgtdocp-0-all-0"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">all/0</span></code><a class="headerlink" href="#all-0" title="Permalink to this headline">¶</a></h3>
+<p>Creates XML documenting files for all loaded entities using default options.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="option/2"> </div></div>
+<div class="section" id="option-2">
+<span id="lgtdocp-0-option-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">option/2</span></code><a class="headerlink" href="#option-2" title="Permalink to this headline">¶</a></h3>
+<p>Returns, by backtracking, all options and their values.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">option(Option,Value)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">option(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
+</ul>
+</li>
+</ul>
+<div id="set_option/2"> </div></div>
+<div class="section" id="set-option-2">
+<span id="lgtdocp-0-set-option-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">set_option/2</span></code><a class="headerlink" href="#set-option-2" title="Permalink to this headline">¶</a></h3>
+<p>Sets an option value.</p>
+<ul class="simple">
+<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
+<li>template: <code class="docutils literal notranslate"><span class="pre">set_option(Option,Value)</span></code></li>
+<li>mode - number of proofs:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">set_option(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="protected-interface">
+<h2>Protected interface<a class="headerlink" href="#protected-interface" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="private-predicates">
+<h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Compiling files for generating XML documentation</strong>: All source files must be compiled with the “source_data” compiler flag turned on.</li>
+<li><strong>xml_spec(Specification) option</strong>: XML documenting files specification format. Possible option values are “dtd” (DTD specification; default) and “xsd” (XML Schema specification).</li>
+<li><strong>xml_spec_reference(Reference) option</strong>: Reference to the XML specification file in XML documenting files. Possible values are “local” (default; DTD/XSD file in the same folder as the XML files), “web” (logtalk.org website DTD/XSD file), and “standalone” (no reference to specification files).</li>
+<li><strong>entity_xsl_file(File) option</strong>: XSLT file to use with generated XML documenting files. Default is “logtalk_entity_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</li>
+<li><strong>index_xsl_file(File) option</strong>: XSLT file to use with generated XML documenting files. Default is “logtalk_index_to_xml.xsl”, allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the “lgt2xml.sh” script on the XML files directory).</li>
+<li><strong>xml_docs_directory(Directory) option</strong>: Directory where the XML documenting files will be generated. The default value is “./xml_docs”, a sub-directory of the source files directory.</li>
+<li><strong>bom(Boolean) option</strong>: Defines if a BOM should be added to the generated XML documenting files.</li>
+<li><strong>encoding(Encoding) option</strong>: Encoding to be used for the generated XML documenting files.</li>
+<li><strong>omit_path_prefixes(Prefixes) option</strong>: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</li>
+<li><strong>exclude_files(List) option</strong>: List of files to exclude when generating the XML documenting files.</li>
+<li><strong>exclude_paths(List) option</strong>: List of (relative) library paths to exclude when generating the XML documenting files.</li>
+<li><strong>exclude_entities(List) option</strong>: List of entities to exclude when generating the XML documenting files.</li>
+<li><strong>Known issues</strong>: The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>(none)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="coverage_report_0.html" class="btn btn-neutral float-right" title="coverage_report" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lgtdoc_0.html" class="btn btn-neutral" title="lgtdoc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-    <div class="entity">
-      <div class="section">
-        <dl class="properties">
-          <dt class="key">author:</dt>
-          <dd class="value">
-            <code>Paulo Moura</code>
-          </dd>
-          <dt class="key">version:</dt>
-          <dd class="value">
-            <code>3.2</code>
-          </dd>
-          <dt class="key">date:</dt>
-          <dd class="value">
-            <code>2017/11/4</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">compilation flags:</dt>
-          <dd class="value">
-            <code>static</code>
-          </dd>
-        </dl>
-        <p class="comment">(no dependencies on other entities)</p>
-      </div>
-    </div>
-    <div class="predicates">
-      <div class="public">
-        <h2>Public interface</h2>
-        <div class="section">
-          <h3 id="rlibrary/2" class="code">rlibrary/2</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rlibrary(Library,Options)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rlibrary(+atom,+list) &ndash; one</code>
-            </dd>
-            <dt class="key">examples:</dt>
-            <dd class="value">
-              <dl class="examples">
-                <dt class="comment">Generate XML documenting files for all tool entities for later conversion to Markdown files</dt>
-                <dd class="code">rlibrary(tools,[xslfile('lgtmd.xsl')])</dd>
-                <dd class="code">yes</dd>
-              </dl>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rlibrary/1" class="code">rlibrary/1</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a library and its sub-libraries using default options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rlibrary(Library)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rlibrary(+atom) &ndash; one</code>
-            </dd>
-            <dt class="key">examples:</dt>
-            <dd class="value">
-              <dl class="examples">
-                <dt class="comment">Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the "lgt2xml" script)</dt>
-                <dd class="code">rlibrary(tools)</dd>
-                <dd class="code">yes</dd>
-              </dl>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="library/2" class="code">library/2</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a library using the specified options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>library(Library,Options)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>library(+atom,+list) &ndash; one</code>
-            </dd>
-            <dt class="key">examples:</dt>
-            <dd class="value">
-              <dl class="examples">
-                <dt class="comment">Generate XML documenting files for all library entities for later conversion to PDF A4 files</dt>
-                <dd class="code">library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])</dd>
-                <dd class="code">yes</dd>
-              </dl>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="library/1" class="code">library/1</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a library using default options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>library(Library)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>library(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rdirectory/2" class="code">rdirectory/2</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rdirectory(Directory,Options)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rdirectory(+atom,+list) &ndash; one</code>
-            </dd>
-            <dt class="key">examples:</dt>
-            <dd class="value">
-              <dl class="examples">
-                <dt class="comment">Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files</dt>
-                <dd class="code">rdirectory('./tools',[xslfile('lgtmd.xsl')])</dd>
-                <dd class="code">yes</dd>
-              </dl>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="rdirectory/1" class="code">rdirectory/1</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a directory and its sub-directories using default options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>rdirectory(Directory)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>rdirectory(+atom) &ndash; one</code>
-            </dd>
-            <dt class="key">examples:</dt>
-            <dd class="value">
-              <dl class="examples">
-                <dt class="comment">Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the "lgt2xml" script)</dt>
-                <dd class="code">rdirectory('./tools')</dd>
-                <dd class="code">yes</dd>
-              </dl>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="directory/2" class="code">directory/2</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a directory using the specified options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>directory(Directory,Options)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>directory(+atom,+list) &ndash; one</code>
-            </dd>
-            <dt class="key">examples:</dt>
-            <dd class="value">
-              <dl class="examples">
-                <dt class="comment">Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files</dt>
-                <dd class="code">directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])</dd>
-                <dd class="code">yes</dd>
-              </dl>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="directory/1" class="code">directory/1</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a directory using default options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>directory(Directory)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>directory(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="file/2" class="code">file/2</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>file(File,Options)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>file(+atom,+list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="file/1" class="code">file/1</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>file(File)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>file(+atom) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="all/1" class="code">all/1</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all loaded entities using the specified options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>all(File)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>all(+list) &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="all/0" class="code">all/0</h3>
-          <blockquote>
-            <p class="comment">Creates XML documenting files for all loaded entities using default options.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>all &ndash; one</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="option/2" class="code">option/2</h3>
-          <blockquote>
-            <p class="comment">Returns, by backtracking, all options and their values.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>option(Option,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>option(?atom,?nonvar) &ndash; zero_or_more</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="set_option/2" class="code">set_option/2</h3>
-          <blockquote>
-            <p class="comment">Sets an option value.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>set_option(Option,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>set_option(+atom,+nonvar) &ndash; zero_or_one</code>
-            </dd>
-          </dl>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Paulo Moura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="protected">
-        <h2>Protected interface</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-      <div class="private">
-        <h2>Private predicates</h2>
-        <div class="section">
-          <p class="comment">(none)</p>
-        </div>
-      </div>
-    </div>
-    <div class="operators">
-      <h2>Operators</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-    <div class="remarks">
-      <h2>Remarks</h2>
-      <div class="section">
-        <dl class="remarks">
-          <dt class="comment">Compiling files for generating XML documentation</dt>
-          <dd class="text">All source files must be compiled with the "source_data" compiler flag turned on.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">xml_spec(Specification) option</dt>
-          <dd class="text">XML documenting files specification format. Possible option values are "dtd" (DTD specification; default) and "xsd" (XML Schema specification).</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">xml_spec_reference(Reference) option</dt>
-          <dd class="text">Reference to the XML specification file in XML documenting files. Possible values are "local" (default; DTD/XSD file in the same folder as the XML files), "web" (logtalk.org website DTD/XSD file), and "standalone" (no reference to specification files).</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">entity_xsl_file(File) option</dt>
-          <dd class="text">XSLT file to use with generated XML documenting files. Default is "logtalk_entity_to_xml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">index_xsl_file(File) option</dt>
-          <dd class="text">XSLT file to use with generated XML documenting files. Default is "logtalk_index_to_xml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">xml_docs_directory(Directory) option</dt>
-          <dd class="text">Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">bom(Boolean) option</dt>
-          <dd class="text">Defines if a BOM should be added to the generated XML documenting files.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">encoding(Encoding) option</dt>
-          <dd class="text">Encoding to be used for the generated XML documenting files.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">omit_path_prefixes(Prefixes) option</dt>
-          <dd class="text">List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">exclude_files(List) option</dt>
-          <dd class="text">List of files to exclude when generating the XML documenting files.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">exclude_paths(List) option</dt>
-          <dd class="text">List of (relative) library paths to exclude when generating the XML documenting files.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">exclude_entities(List) option</dt>
-          <dd class="text">List of entities to exclude when generating the XML documenting files.</dd>
-        </dl>
-        <dl class="remarks">
-          <dt class="comment">Known issues</dt>
-          <dd class="text">The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="see_also">
-      <h2>See also</h2>
-      <div class="section">
-        <h3 class="comment">(none)</h3>
-      </div>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

@@ -1,0 +1,53 @@
+.. index:: list(Type)
+.. _list/1:
+
+**object**
+
+``list(Type)``
+==============
+
+List predicates with elements constrained to a single type.
+
+* author: Paulo Moura
+* version: 1.22
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`list <list/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`list <list/0>`
+* :ref:`numberlist <numberlist/0>`
+* :ref:`varlist <varlist/0>`
+* :ref:`difflist <difflist/0>`
+
+

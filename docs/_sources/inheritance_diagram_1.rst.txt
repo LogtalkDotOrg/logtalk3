@@ -1,0 +1,52 @@
+.. index:: inheritance_diagram(Format)
+.. _inheritance_diagram/1:
+
+**object**
+
+``inheritance_diagram(Format)``
+===============================
+
+Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.
+
+* author: Paulo Moura
+* version: 2.5
+* date: 2018/2/4
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`entity_diagram(Format) <entity_diagram/1>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`entity_diagram(Format) <entity_diagram/1>`
+* :ref:`uses_diagram(Format) <uses_diagram/1>`
+* :ref:`xref_diagram(Format) <xref_diagram/1>`
+
+

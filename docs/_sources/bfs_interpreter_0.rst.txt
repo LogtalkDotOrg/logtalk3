@@ -1,0 +1,49 @@
+.. index:: bfs_interpreter
+.. _bfs_interpreter/0:
+
+**object**
+
+``bfs_interpreter``
+===================
+
+Breadth-first interpreter for general logic programs.
+
+* author: Victor Lagerkvist
+* version: 1.0
+* date: 2010/6/13
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`interpreterp <interpreterp/0>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

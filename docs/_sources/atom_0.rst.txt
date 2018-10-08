@@ -1,0 +1,87 @@
+.. index:: atom
+.. _atom/0:
+
+**object**
+
+``atom``
+========
+
+Atom data type predicates.
+
+* author: Paulo Moura
+* version: 1.6
+* date: 2018/7/11
+* compilation flags: ``static, context_switching_calls``
+
+* extends:
+
+  * ``public`` :ref:`atomic <atomic/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="replace_sub_atom/4"> </div>
+
+.. index:: replace_sub_atom/4
+.. _atom/0::replace_sub_atom/4:
+
+``replace_sub_atom/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.
+
+* compilation flags: ``static``
+* template: ``replace_sub_atom(Old,New,Input,Output)``
+
+* mode - number of proofs:
+
+  * ``replace_sub_atom(+atom,+atom,+atom,-atom)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="split/3"> </div>
+
+.. index:: split/3
+.. _atom/0::split/3:
+
+``split/3``
+^^^^^^^^^^^
+
+Splits an atom at a given delimiter into a list of sub-atoms.
+
+* compilation flags: ``static``
+* template: ``split(Atom,Delimiter,SubAtoms)``
+
+* mode - number of proofs:
+
+  * ``split(+atom,+atom,-list(atom))`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

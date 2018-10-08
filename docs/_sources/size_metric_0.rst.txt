@@ -1,0 +1,53 @@
+.. index:: size_metric
+.. _size_metric/0:
+
+**object**
+
+``size_metric``
+===============
+
+Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).
+
+* author: Paulo Moura
+* version: 0.3
+* date: 2018/6/8
+* compilation flags: ``static, context_switching_calls``
+
+* imports:
+
+  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+  * ``public`` :ref:`code_metric <code_metric/0>`
+* provides:
+
+  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

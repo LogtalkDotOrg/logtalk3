@@ -1,0 +1,64 @@
+.. index:: interval
+.. _interval/0:
+
+**object**
+
+``interval``
+============
+
+Basic temporal interval relations. An interval is represented by a compound term, i/2, with two ground arguments, the start and end points.
+
+* author: Paulo Moura
+* version: 1.1
+* date: 2014/4/26
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`intervalp <intervalp/0>`
+* aliases:
+
+  * ``intervalp`` ``before/2`` aka ``b/2``
+  * ``intervalp`` ``after/2`` aka ``bi/2``
+  * ``intervalp`` ``meets/2`` aka ``m/2``
+  * ``intervalp`` ``met_by/2`` aka ``mi/2``
+  * ``intervalp`` ``overlaps/2`` aka ``o/2``
+  * ``intervalp`` ``overlapped_by/2`` aka ``oi/2``
+  * ``intervalp`` ``starts/2`` aka ``s/2``
+  * ``intervalp`` ``started_by/2`` aka ``si/2``
+  * ``intervalp`` ``during/2`` aka ``d/2``
+  * ``intervalp`` ``contains/2`` aka ``di/2``
+  * ``intervalp`` ``contains/2`` aka ``f/2``
+  * ``intervalp`` ``finished_by/2`` aka ``fi/2``
+  * ``intervalp`` ``equal/2`` aka ``eq/2``
+
+Public interface
+----------------
+
+(see related entities)
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

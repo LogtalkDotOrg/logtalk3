@@ -1,0 +1,660 @@
+.. index:: iso8601
+.. _iso8601/0:
+
+**object**
+
+``iso8601``
+===========
+
+ISO 8601 (and European civil calendar) compliant library of date predicates.
+
+* author: Daniel L. Dudley
+* version: 1.02
+* date: 2014/11/3
+* compilation flags: ``static, context_switching_calls``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="date/4"> </div>
+
+.. index:: date/4
+.. _iso8601/0::date/4:
+
+``date/4``
+^^^^^^^^^^
+
+Get the system date and/or its Julian Day # or convert a Julian Day # to/from given date parts.
+
+* compilation flags: ``static``
+* template: ``date(JD,Year,Month,Day)``
+
+  * ``JD`` - Julian day serial number
+  * ``Year`` - 0 or negative if converted BC year, positive otherwise
+  * ``Month`` - Normally an integer between 1 and 12 inclusive
+  * ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
+* mode - number of proofs:
+
+  * ``date(?integer,?integer,?integer,?integer)`` - ``zero_or_one``
+
+* examples:
+
+  * Current date (i.e., today)
+
+    * ``date(JD,Year,Month,Day)``
+    * ``JD=2453471,Year=2005,Month=4,Day=10``
+
+  * Convert a date to its Julian day number
+
+    * ``date(JD,2000,2,29)``
+    * ``JD=2451604``
+
+  * Convert a Julian day number to its date
+
+    * ``date(2451604,Year,Month,Day)``
+    * ``Year=2000,Month=2,Day=29``
+
+  * What is the date of day # 60 in year 2000?
+
+    * ``date(JD,2000,1,60)``
+    * ``JD=2451604``
+
+  * What is the Julian of the 1st day prior to 2000-1-1?
+
+    * ``date(JD,2000,1,0)``
+    * ``JD=2451544``
+
+  * What is the Julian of the 60th day prior to 2000-1-1?
+
+    * ``date(JD,2000,1,-59)``
+    * ``JD=2451485``
+
+  * Illegal date is auto-adjusted (see also next query)
+
+    * ``date(JD,1900,2,29)``
+    * ``JD=2415080``
+
+  * This is the correct date!
+
+    * ``date(2415080,Year,Month,Day)``
+    * ``Year=1900,Month=3,Day=1``
+
+
+.. raw:: html
+
+   <div id="date/5"> </div>
+
+.. index:: date/5
+.. _iso8601/0::date/5:
+
+``date/5``
+^^^^^^^^^^
+
+Ditto date/4 + get/check its day-of-week #.
+
+* compilation flags: ``static``
+* template: ``date(JD,Year,Month,Day,DoW)``
+
+  * ``JD`` - Julian day serial number
+  * ``Year`` - 0 or negative if converted BC year, positive otherwise
+  * ``Month`` - Normally an integer between 1 and 12 inclusive
+  * ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
+  * ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
+* mode - number of proofs:
+
+  * ``date(?integer,?integer,?integer,?integer,?integer)`` - ``zero_or_one``
+
+* examples:
+
+  * Get the Julian and the day-of-week # of a date
+
+    * ``date(JD,2000,2,29,DoW)``
+    * ``JD=2451604,DoW=2``
+
+  * Check the validity of a given date (day-of-week is 2, not 4)
+
+    * ``date(_,2002,3,5,4)``
+    * ``no``
+
+  * Get the Julian day of a given date if it is a Sunday
+
+    * ``date(JD,2004,2,29,7)``
+    * ``JD=2453065``
+
+  * Get the date and day-of-week # of a Julian
+
+    * ``date(2451545,Year,Month,Day,DoW)``
+    * ``Year=2000,Month=1,Day=1,DoW=6``
+
+
+.. raw:: html
+
+   <div id="date/6"> </div>
+
+.. index:: date/6
+.. _iso8601/0::date/6:
+
+``date/6``
+^^^^^^^^^^
+
+Ditto date/5 + get/check its week #.
+
+* compilation flags: ``static``
+* template: ``date(JD,Year,Month,Day,DoW,Week)``
+
+  * ``JD`` - Julian day serial number
+  * ``Year`` - 0 or negative if converted BC year, positive otherwise
+  * ``Month`` - Normally an integer between 1 and 12 inclusive
+  * ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
+  * ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
+  * ``Week`` - Compound term, week(WeekNo,ActualYear), of a day
+* mode - number of proofs:
+
+  * ``date(?integer,?integer,?integer,?integer,?integer,?compound)`` - ``zero_or_one``
+
+* examples:
+
+  * Get the day-of-week and week number of a date
+
+    * ``date(_,2000,1,1,DoW,Week)``
+    * ``DoW=6,Week=week(52,1999)``
+
+  * Get the week number and year of this week
+
+    * ``date(_,_,_,_,_,Week)``
+    * ``Week=week(7,2004)``
+
+  * Get the Julian number and the week of a date if it is a Sunday
+
+    * ``date(JD,2004,2,29,7,Week)``
+    * ``JD=2453065,Week=week(9,2004)``
+
+  * Get the day-of-week and week of a Julian day number
+
+    * ``date(2453066,_,_,_,DoW,Week)``
+    * ``DoW=1,Week=week(10,2004)``
+
+  * Check that given date data matches
+
+    * ``date(_,2004,3,1,1,week(10,2004))``
+    * ``yes``
+
+  * What is the date of a day of week (default is 1) in given week # and year?
+
+    * ``date(_,Year,Month,Day,DoW,week(26,2004))``
+    * ``Year=2004,Month=6,Day=21,DoW=1``
+
+  * Ditto for Sunday
+
+    * ``date(_,Year,Month,Day,7,week(1,2005))``
+    * ``Year=2005,Month=1,Day=9``
+
+  * Ditto for Tuesday in following week
+
+    * ``date(_,Year,Month,Day,9,week(1,2005))``
+    * ``Year=2005,Month=1,Day=11``
+
+  * Ditto for Thursday in the prior week
+
+    * ``date(_,Year,Month,Day,4,week(0,2005))``
+    * ``Year=2004,Month=12,Day=30``
+
+  * Ditto for Tuesday two weeks prior
+
+    * ``date(_,Year,Month,Day,2,week(-1,2005))``
+    * ``Year=2004,Month=12,Day=21``
+
+  * Ditto for Saturday
+
+    * ``date(_,Year,Month,Day,6,week(53,2004))``
+    * ``Year=2005,Month=1,Day=1``
+
+  * Ditto for Monday (note automatic compensation of nonexistent week number)
+
+    * ``date(_,Year,Month,Day,1,week(60,2004))``
+    * ``Year=2005,Month=2,Day=14``
+
+
+.. raw:: html
+
+   <div id="date/7"> </div>
+
+.. index:: date/7
+.. _iso8601/0::date/7:
+
+``date/7``
+^^^^^^^^^^
+
+Ditto date/6 + get/check its day-of-year #.
+
+* compilation flags: ``static``
+* template: ``date(JD,Year,Month,Day,DoW,Week,DoY)``
+
+  * ``JD`` - Julian day serial number
+  * ``Year`` - 0 or negative if converted BC year, positive otherwise
+  * ``Month`` - Normally an integer between 1 and 12 inclusive
+  * ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
+  * ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
+  * ``Week`` - Compound term, week(WeekNo,ActualYear), of a day
+  * ``DoY`` - Day of year (NB! calendar year, not week # year)
+* mode - number of proofs:
+
+  * ``date(?integer,?integer,?integer,?integer,?integer,?compound,?integer)`` - ``zero_or_one``
+
+* examples:
+
+  * Get the date and day-of-year of a Julian number
+
+    * ``date(2451649,Year,Month,Day,_,_,DoY)``
+    * ``Year=2000,Month=4,Day=14,DoY=105``
+
+  * Get the Julian number, week number and day-of-year of a date, confirming that it is a Sunday
+
+    * ``date(JD,2004,2,29,7,Week,DoY)``
+    * ``JD=2453065,Week=week(9,2004),DoY=60``
+
+  * Confirm that a date is, in fact, a specific day-of-year
+
+    * ``date(_,2004,3,1,_,_,61)``
+    * ``yes``
+
+  * Get the Julian number, week day and day-of-year of a date
+
+    * ``date(JD,2004,10,18,DoW,_,DoY)``
+    * ``JD=2453297,DoW=1,DoY=292``
+
+  * Get today's day-of-year
+
+    * ``date(_,_,_,_,_,_,DoY)``
+    * ``DoY=54``
+
+  * Get all missing date data (excl. Julian number) for the 60th calendar day of 2004
+
+    * ``date(_,2004,Month,Day,DoW,Week,60)``
+    * ``Month=2,Day=29,DoW=7,Week=week(9,2004)``
+
+  * Match given date data and, if true, return the missing data (excl. Julian number)
+
+    * ``date(_,2004,3,Day,DoW,Week,61)``
+    * ``Day=1,DoW=1,Week=week(10,2004)``
+
+  * Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month)
+
+    * ``date(_,2004,_,2,_,_,61)``
+    * ``no``
+
+
+.. raw:: html
+
+   <div id="date_string/3"> </div>
+
+.. index:: date_string/3
+.. _iso8601/0::date_string/3:
+
+``date_string/3``
+^^^^^^^^^^^^^^^^^
+
+Conversion between an ISO 8601 compliant date string and its components (truncated and expanded date representations are currently unsupported). Note that date components are not validated; that is the caller's responsibility!
+
+* compilation flags: ``static``
+* template: ``date_string(Format,Components,String)``
+
+  * ``Format`` - ISO 8601 format
+  * ``Components`` - When bound and String is free, either a Julian number or a [Year,Month,Day] term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String
+  * ``String`` - ISO 8601 formatted string correspondent to Components
+* mode - number of proofs:
+
+  * ``date_string(+atom,+integer,?atom)`` - ``zero_or_one``
+
+  * ``date_string(+atom,?list,?atom)`` - ``zero_or_one``
+
+* examples:
+
+  * Date, complete, basic (section 5.2.1.1)
+
+    * ``date_string('YYYYMMDD',[2004,2,29],String)``
+    * ``String='20040229'``
+
+  * Date, complete, basic (section 5.2.1.1)
+
+    * ``date_string('YYYYMMDD',Components,'20040229')``
+    * ``Components=[2004,2,29]``
+
+  * Date, complete, extended (section 5.2.1.1)
+
+    * ``date_string('YYYY-MM-DD',[2003,12,16],String)``
+    * ``String='2003-12-16'``
+
+  * Date, complete, extended (section 5.2.1.1)
+
+    * ``date_string('YYYY-MM-DD',Components,'2003-12-16')``
+    * ``Components=[2003,12,16]``
+
+  * Date, complete, extended (section 5.2.1.1)
+
+    * ``date_string('YYYY-MM-DD',_,String)``
+    * ``String='2004-02-17'``
+
+  * Date, complete, extended (section 5.2.1.1)
+
+    * ``date_string('YYYY-MM-DD',Components,'2004-02-17')``
+    * ``Components=[2004,2,17]``
+
+  * Date, reduced, month (section 5.2.1.2 a)
+
+    * ``date_string('YYYY-MM',[2004,9,18],String)``
+    * ``String='2004-09'``
+
+  * Date, reduced, month (section 5.2.1.2 a)
+
+    * ``date_string('YYYY-MM',Components,'2004-09')``
+    * ``Components=[2004,9]``
+
+  * Date, reduced, year (section 5.2.1.2 b)
+
+    * ``date_string('YYYY',[1900,7,24],String)``
+    * ``String='1900'``
+
+  * Date, reduced, year (section 5.2.1.2 b)
+
+    * ``date_string('YYYY',Components,'1900')``
+    * ``Components=[1900]``
+
+  * Date, reduced, century (section 5.2.1.2 c)
+
+    * ``date_string('YY',2456557,String)``
+    * ``String='20'``
+
+  * Date, reduced, century (section 5.2.1.2 c)
+
+    * ``date_string('YY',Components,'20')``
+    * ``Components=[20]``
+
+  * Date, ordinal, complete (section 5.2.2.1)
+
+    * ``date_string('YYYYDDD',[2005,3,25],String)``
+    * ``String='2005084'``
+
+  * Date, ordinal, complete (section 5.2.2.1)
+
+    * ``date_string('YYYYDDD',Components,'2005084')``
+    * ``Components=[2005,84]``
+
+  * Date, ordinal, extended (section 5.2.2.1)
+
+    * ``date_string('YYYY-DDD',[1854,12,4],String)``
+    * ``String='1854-338'``
+
+  * Date, ordinal, extended (section 5.2.2.1)
+
+    * ``date_string('YYYY-DDD',Components,'1854-338')``
+    * ``Components=[1854,338]``
+
+  * Week, complete, basic (section 5.2.3.1)
+
+    * ``date_string('YYYYWwwD',[2000,1,2],String)``
+    * ``String='1999W527'``
+
+  * Week, complete, basic (section 5.2.3.1)
+
+    * ``date_string('YYYYWwwD',Components,'1999W527')``
+    * ``Components=[1999,52,7]``
+
+  * Week, complete, extended (section 5.2.3.1)
+
+    * ``date_string('YYYY-Www-D',[2003,12,29],String)``
+    * ``String='2004-W01-1'``
+
+  * Week, complete, extended (section 5.2.3.1)
+
+    * ``date_string('YYYY-Www-D',Components,'2004-W01-1')``
+    * ``Components=[2004,1,1]``
+
+  * Week, complete, extended (section 5.2.3.1)
+
+    * ``date_string('YYYY-Www-D',2453167,String)``
+    * ``String='2004-W24-4'``
+
+  * Week, complete, extended (section 5.2.3.1)
+
+    * ``date_string('YYYY-Www-D',Components,'2004-W24-4')``
+    * ``Components=[2004,24,4]``
+
+  * Week, reduced, basic (section 5.2.3.2)
+
+    * ``date_string('YYYYWww',[2004,2,29],String)``
+    * ``String='2004W09'``
+
+  * Week, reduced, basic (section 5.2.3.2)
+
+    * ``date_string('YYYYWww',Components,'2004W09')``
+    * ``Components=[2004,9]``
+
+  * Week, reduced, extended (section 5.2.3.2)
+
+    * ``date_string('YYYY-Www',[2004,2,29],String)``
+    * ``String='2004-W09'``
+
+  * Week, reduced, extended (section 5.2.3.2)
+
+    * ``date_string('YYYY-Www',Components,'2004-W09')``
+    * ``Components=[2004,9]``
+
+
+.. raw:: html
+
+   <div id="valid_date/3"> </div>
+
+.. index:: valid_date/3
+.. _iso8601/0::valid_date/3:
+
+``valid_date/3``
+^^^^^^^^^^^^^^^^
+
+Validate a given date in the Gregorian calendar.
+
+* compilation flags: ``static``
+* template: ``valid_date(Year,Month,Day)``
+
+* mode - number of proofs:
+
+  * ``valid_date(+integer,+integer,+integer)`` - ``zero_or_one``
+
+* examples:
+
+  * Yes, the recent millenium was a leap year
+
+    * ``valid_date(2000,2,29)``
+    * ``yes``
+
+  * 2004 was also a leap year
+
+    * ``valid_date(2004,2,29)``
+    * ``yes``
+
+  * Only 30 days in April
+
+    * ``valid_date(2004,4,31)``
+    * ``no``
+
+  * 1 BC was a leap year
+
+    * ``valid_date(-1,2,29)``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="leap_year/1"> </div>
+
+.. index:: leap_year/1
+.. _iso8601/0::leap_year/1:
+
+``leap_year/1``
+^^^^^^^^^^^^^^^
+
+Succeed if given year is a leap year in the Gregorian calendar.
+
+* compilation flags: ``static``
+* template: ``leap_year(Year)``
+
+  * ``Year`` - The Gregorian calendar year to investigate. If free, it binds to the system year
+* mode - number of proofs:
+
+  * ``leap_year(?integer)`` - ``zero_or_one``
+
+* examples:
+
+  * No, the prior centenary was not a leap year
+
+    * ``leap_year(1900)``
+    * ``no``
+
+  * The recent millenium
+
+    * ``leap_year(2000)``
+    * ``yes``
+
+  * This year
+
+    * ``leap_year(Year)``
+    * ``Year=2004``
+
+  * This year (equivalent to prior query)
+
+    * ``leap_year(_)``
+    * ``yes``
+
+  * Next centennial
+
+    * ``leap_year(2100)``
+    * ``no``
+
+  * Year 0, equivalent to 1 BC
+
+    * ``leap_year(0)``
+    * ``yes``
+
+  * 1 BC
+
+    * ``leap_year(-1)``
+    * ``yes``
+
+  * 4 BC
+
+    * ``leap_year(-4)``
+    * ``no``
+
+  * 5 BC
+
+    * ``leap_year(-5)``
+    * ``yes``
+
+
+.. raw:: html
+
+   <div id="calendar_month/3"> </div>
+
+.. index:: calendar_month/3
+.. _iso8601/0::calendar_month/3:
+
+``calendar_month/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Compute a calendar month.
+
+* compilation flags: ``static``
+* template: ``calendar_month(Year,Month,Calendar)``
+
+  * ``Year`` - The calendar year
+  * ``Month`` - The calendar month
+  * ``Calendar`` - A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).
+* mode - number of proofs:
+
+  * ``calendar_month(?integer,?integer,-compound)`` - ``zero_or_one``
+
+* examples:
+
+  * Compute the calendar of March, 2005
+
+    * ``calendar_month(2005,3,Calendar)``
+    * ``Calendar=m(2005,3,[w(9,[0,1,2,3,4,5,6]),w(10,[7,8,9,10,11,12,13]),w(11,[14,15,16,17,18,19,20]),w(12,[21,22,23,24,25,26,27]),w(13,[28,29,30,31,0,0,0]),w(0,[0,0,0,0,0,0,0])])``
+
+
+.. raw:: html
+
+   <div id="easter_day/3"> </div>
+
+.. index:: easter_day/3
+.. _iso8601/0::easter_day/3:
+
+``easter_day/3``
+^^^^^^^^^^^^^^^^
+
+Compute a Gregorian Easter Sunday.
+
+* compilation flags: ``static``
+* template: ``easter_day(Year,Month,Day)``
+
+  * ``Year`` - Integer specifying the year to be investigated
+  * ``Month`` - Month in which Easter Sunday falls for given year
+  * ``Day`` - Day of month in which Easter Sunday falls for given year
+* mode - number of proofs:
+
+  * ``easter_day(?integer,-integer,-integer)`` - ``zero_or_one``
+
+* examples:
+
+  * Compute Easter Sunday for a particular year
+
+    * ``easter_day(2006,Month,Day)``
+    * ``Month=4,Day=16``
+
+  * Compute Easter Sunday for the current year
+
+    * ``easter_day(Year,Month,Day)``
+    * ``Year=2005,Month=3,Day=27``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Scope**: This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.
+
+* **Validation of dates**: Date parts are not validated--that is the caller's responsibility! However, not being quite heartless yet, we do provide a predicate for this purpose.
+
+* **Date arithmetic**: Many of the examples illustrate a simplified method of doing date arithmetic. Note, however, that we do not generally recommend this practice--it is all too easy to make mistakes. The safest way of finding the day difference between two dates is to first convert the dates to their Julian day numbers and then subtract one from the other. Similarly, the safe way to add or subtract a day offset to a particular date is to first convert the date to its Julian day number, add or subtract the day offset, and then convert the result to its corresponding date.
+
+* **BC years**: ISO 8601 specifies that the Gregorian calendar be used, yet requires that years prior to 1 AD be handled arithmetically, i.e., the year we know as 1 BC is year 0, 2 BC is year -1, 3 BC is year -2 and so on. We do not follow ISO 8601 with regard to the handling of BC years. Our date predicates will accept and interpret an input year 0 as 1 BC; however, a negative year, Year, should always be interpreted as abs(Year) =:= Year BC. We believe that the average person will find our handling of BC years more user-friendly than the ISO 8601 one, but we encourage feedback from users with a view to a possible change in future versions.
+
+* **Week numbers**: It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in date/6-7 is a compound term, namely week(WeekNo,ActualYear).
+
+* **Computation of Gregorian Easter Sunday**: The algorithm is based upon the "Gaussian rule". Proleptic use is limited to years > 1582 AD, that is, after the introduction of the Gregorian calendar.
+
+* **Some Christian feast day offsets from Easter Sunday**: Carnival Monday: -48 days, Mardi Gras (Shrove Tuesday): -47 days, Ash Wednesday: -46 days, Palm Sunday: -7 days, Easter Friday: -2 days, Easter Saturday: -1 day, Easter Monday: +1 day, Ascension of Christ: +39 days, Whitsunday: +49 days, Whitmonday: +50 days, Feast of Corpus Christi: +60 days.
+
+See also
+--------
+
+(none)
+

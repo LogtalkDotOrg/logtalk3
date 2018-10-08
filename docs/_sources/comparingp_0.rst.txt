@@ -1,0 +1,166 @@
+.. index:: comparingp
+.. _comparingp/0:
+
+**protocol**
+
+``comparingp``
+==============
+
+Comparing protocol using overloading of standard operators.
+
+* author: Paulo Moura
+* version: 1.0
+* date: 2000/7/24
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="(<)/2"> </div>
+
+.. index:: (<)/2
+.. _comparingp/0::(<)/2:
+
+``(<)/2``
+^^^^^^^^^
+
+True if Term1 is less than Term2.
+
+* compilation flags: ``static``
+* template: ``Term1<Term2``
+
+* mode - number of proofs:
+
+  * ``+term< +term`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="(=<)/2"> </div>
+
+.. index:: (=<)/2
+.. _comparingp/0::(=<)/2:
+
+``(=<)/2``
+^^^^^^^^^^
+
+True if Term1 is less or equal than Term2.
+
+* compilation flags: ``static``
+* template: ``Term1=<Term2``
+
+* mode - number of proofs:
+
+  * ``+term=< +term`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="(>)/2"> </div>
+
+.. index:: (>)/2
+.. _comparingp/0::(>)/2:
+
+``(>)/2``
+^^^^^^^^^
+
+True if Term1 is greater than Term2.
+
+* compilation flags: ``static``
+* template: ``Term1>Term2``
+
+* mode - number of proofs:
+
+  * ``+term> +term`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="(>=)/2"> </div>
+
+.. index:: (>=)/2
+.. _comparingp/0::(>=)/2:
+
+``(>=)/2``
+^^^^^^^^^^
+
+True if Term1 is equal or grater than Term2.
+
+* compilation flags: ``static``
+* template: ``Term1>=Term2``
+
+* mode - number of proofs:
+
+  * ``+term>= +term`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="(=:=)/2"> </div>
+
+.. index:: (=:=)/2
+.. _comparingp/0::(=:=)/2:
+
+``(=:=)/2``
+^^^^^^^^^^^
+
+True if Term1 is equal to Term2.
+
+* compilation flags: ``static``
+* template: ``Term1=:=Term2``
+
+* mode - number of proofs:
+
+  * ``+term=:= +term`` - ``zero_or_one``
+
+
+.. raw:: html
+
+   <div id="(=\=)/2"> </div>
+
+.. index:: (=\=)/2
+.. _comparingp/0::(=\=)/2:
+
+``(=\=)/2``
+^^^^^^^^^^^
+
+True if Term1 is not equal to Term2.
+
+* compilation flags: ``static``
+* template: ``Term1=\=Term2``
+
+* mode - number of proofs:
+
+  * ``+term=\= +term`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

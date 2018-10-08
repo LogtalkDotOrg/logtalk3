@@ -1,0 +1,366 @@
+.. index:: debuggerp
+.. _debuggerp/0:
+
+**protocol**
+
+``debuggerp``
+=============
+
+Debugger protocol.
+
+* author: Paulo Moura
+* version: 2.1
+* date: 2016/10/23
+* compilation flags: ``static``
+
+(no dependencies on other entities)
+
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="reset/0"> </div>
+
+.. index:: reset/0
+.. _debuggerp/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Resets all debugging settings, including spy points and leashed ports, and turns off debugging.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``reset`` - ``one``
+
+
+.. raw:: html
+
+   <div id="debug/0"> </div>
+
+.. index:: debug/0
+.. _debuggerp/0::debug/0:
+
+``debug/0``
+^^^^^^^^^^^
+
+Starts debugging for all defined spy points.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``debug`` - ``one``
+
+
+.. raw:: html
+
+   <div id="nodebug/0"> </div>
+
+.. index:: nodebug/0
+.. _debuggerp/0::nodebug/0:
+
+``nodebug/0``
+^^^^^^^^^^^^^
+
+Stops debugging for all defined spy points.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``nodebug`` - ``one``
+
+
+.. raw:: html
+
+   <div id="debugging/0"> </div>
+
+.. index:: debugging/0
+.. _debuggerp/0::debugging/0:
+
+``debugging/0``
+^^^^^^^^^^^^^^^
+
+Reports current debugging settings, including spy points.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``debugging`` - ``one``
+
+
+.. raw:: html
+
+   <div id="debugging/1"> </div>
+
+.. index:: debugging/1
+.. _debuggerp/0::debugging/1:
+
+``debugging/1``
+^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all entities compiled in debug mode.
+
+* compilation flags: ``static``
+* template: ``debugging(Entity)``
+
+* mode - number of proofs:
+
+  * ``debugging(?entity_identifier)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="trace/0"> </div>
+
+.. index:: trace/0
+.. _debuggerp/0::trace/0:
+
+``trace/0``
+^^^^^^^^^^^
+
+Starts tracing all calls compiled in debug mode.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``trace`` - ``one``
+
+
+.. raw:: html
+
+   <div id="notrace/0"> </div>
+
+.. index:: notrace/0
+.. _debuggerp/0::notrace/0:
+
+``notrace/0``
+^^^^^^^^^^^^^
+
+Stops tracing of calls compiled in debug mode.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``notrace`` - ``one``
+
+
+.. raw:: html
+
+   <div id="spy/1"> </div>
+
+.. index:: spy/1
+.. _debuggerp/0::spy/1:
+
+``spy/1``
+^^^^^^^^^
+
+Sets a line number spy point or a predicate spy point or a list of spy points.
+
+* compilation flags: ``static``
+* template: ``spy(SpyPoint)``
+
+* mode - number of proofs:
+
+  * ``spy(@spy_point)`` - ``one``
+
+  * ``spy(@list(spy_point))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="spying/1"> </div>
+
+.. index:: spying/1
+.. _debuggerp/0::spying/1:
+
+``spying/1``
+^^^^^^^^^^^^
+
+Enumerates, by backtracking, all defined line number and predicate spy points.
+
+* compilation flags: ``static``
+* template: ``spying(SpyPoint)``
+
+* mode - number of proofs:
+
+  * ``spying(?spy_point)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="spy/4"> </div>
+
+.. index:: spy/4
+.. _debuggerp/0::spy/4:
+
+``spy/4``
+^^^^^^^^^
+
+Sets a context spy point.
+
+* compilation flags: ``static``
+* template: ``spy(Sender,This,Self,Goal)``
+
+* mode - number of proofs:
+
+  * ``spy(@term,@term,@term,@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="spying/4"> </div>
+
+.. index:: spying/4
+.. _debuggerp/0::spying/4:
+
+``spying/4``
+^^^^^^^^^^^^
+
+Enumerates, by backtracking, all defined context spy points.
+
+* compilation flags: ``static``
+* template: ``spying(Sender,This,Self,Goal)``
+
+* mode - number of proofs:
+
+  * ``spying(?term,?term,?term,?term)`` - ``zero_or_more``
+
+
+.. raw:: html
+
+   <div id="nospy/1"> </div>
+
+.. index:: nospy/1
+.. _debuggerp/0::nospy/1:
+
+``nospy/1``
+^^^^^^^^^^^
+
+Removes all matching line number spy points and predicate spy points.
+
+* compilation flags: ``static``
+* template: ``nospy(SpyPoint)``
+
+* mode - number of proofs:
+
+  * ``nospy(@var)`` - ``one``
+
+  * ``nospy(@spy_point)`` - ``one``
+
+  * ``nospy(@list(spy_point))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="nospy/4"> </div>
+
+.. index:: nospy/4
+.. _debuggerp/0::nospy/4:
+
+``nospy/4``
+^^^^^^^^^^^
+
+Removes all matching context spy points.
+
+* compilation flags: ``static``
+* template: ``nospy(Sender,This,Self,Goal)``
+
+* mode - number of proofs:
+
+  * ``nospy(@term,@term,@term,@term)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="nospyall/0"> </div>
+
+.. index:: nospyall/0
+.. _debuggerp/0::nospyall/0:
+
+``nospyall/0``
+^^^^^^^^^^^^^^
+
+Removes all line number, predicate, and context spy points.
+
+* compilation flags: ``static``
+* mode - number of proofs:
+
+  * ``nospyall`` - ``one``
+
+
+.. raw:: html
+
+   <div id="leash/1"> </div>
+
+.. index:: leash/1
+.. _debuggerp/0::leash/1:
+
+``leash/1``
+^^^^^^^^^^^
+
+Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
+
+* compilation flags: ``static``
+* template: ``leash(Ports)``
+
+* mode - number of proofs:
+
+  * ``leash(+atom)`` - ``one``
+
+  * ``leash(+list(atom))`` - ``one``
+
+
+.. raw:: html
+
+   <div id="leashing/1"> </div>
+
+.. index:: leashing/1
+.. _debuggerp/0::leashing/1:
+
+``leashing/1``
+^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
+
+* compilation flags: ``static``
+* template: ``leashing(Port)``
+
+* mode - number of proofs:
+
+  * ``leashing(?atom)`` - ``zero_or_more``
+
+
+Protected interface
+-------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+* **Debugger help**: Type the character "h" or the character "?" at a leashed port.
+
+* **Predicate spy point**: Specified as a ground term Functor/Arity.
+
+* **Line number spy point**: Specified as an Entity-Line term with both Entity and Line bound. Line must be the first source file line of an entity clause.
+
+* **Leash shorthands**: none - [], loose - [fact, rule, call], half - [fact, rule, call, redo], tight - [fact, rule, call, redo, fail, exception], and full - [fact, rule, call, exit, redo, fail, exception].
+
+See also
+--------
+
+(none)
+

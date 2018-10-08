@@ -1,0 +1,91 @@
+.. index:: assertions(Mode)
+.. _assertions/1:
+
+**object**
+
+``assertions(Mode)``
+====================
+
+A simple assertions framework. Can be used as a hook object for either suppressing assertions ("production" mode) or expanding them with file context information ("debug" mode).
+
+* author: Paulo Moura
+* version: 2.1
+* date: 2018/2/20
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`expanding <expanding/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="assertion/1"> </div>
+
+.. index:: assertion/1
+.. _assertions/1::assertion/1:
+
+``assertion/1``
+^^^^^^^^^^^^^^^
+
+Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure.
+
+* compilation flags: ``static``
+* template: ``assertion(Goal)``
+
+* meta-predicate template: ``assertion(0)``
+
+* mode - number of proofs:
+
+  * ``assertion(@callable)`` - ``one``
+
+
+.. raw:: html
+
+   <div id="assertion/2"> </div>
+
+.. index:: assertion/2
+.. _assertions/1::assertion/2:
+
+``assertion/2``
+^^^^^^^^^^^^^^^
+
+Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to pass location data.
+
+* compilation flags: ``static``
+* template: ``assertion(Context,Goal)``
+
+* meta-predicate template: ``assertion(*,0)``
+
+* mode - number of proofs:
+
+  * ``assertion(@term,@callable)`` - ``one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+(none)
+

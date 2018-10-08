@@ -1,0 +1,73 @@
+.. index:: rbtree
+.. _rbtree/0:
+
+**object**
+
+``rbtree``
+==========
+
+Red-Black trees. Uses standard order to compare keys.
+
+* author: Vitor Santos Costa; adapted to Logtalk by Paulo Moura.
+* version: 1.4
+* date: 2018/6/18
+* compilation flags: ``static, context_switching_calls``
+
+* implements:
+
+  * ``public`` :ref:`dictionaryp <dictionaryp/0>`
+* extends:
+
+  * ``public`` :ref:`compound <compound/0>`
+
+Public interface
+----------------
+
+.. raw:: html
+
+   <div id="partial_map/4"> </div>
+
+.. index:: partial_map/4
+.. _rbtree/0::partial_map/4:
+
+``partial_map/4``
+^^^^^^^^^^^^^^^^^
+
+Applies a closure to the tree pairs identified by a set of keys.
+
+* compilation flags: ``static``
+* template: ``partial_map(Tree,Keys,Closure,NewTree)``
+
+* meta-predicate template: ``partial_map(*,*,2,*)``
+
+* mode - number of proofs:
+
+  * ``partial_map(+tree,+list,@closure,-tree)`` - ``zero_or_one``
+
+
+Protected interface
+-------------------
+
+(see related entities)
+
+Private predicates
+------------------
+
+(see related entities)
+
+Operators
+---------
+
+(none)
+
+Remarks
+-------
+
+(none)
+
+See also
+--------
+
+* :ref:`bintree <bintree/0>`
+
+
