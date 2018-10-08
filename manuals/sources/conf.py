@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'Logtalk'
+project = u'The Logtalk Handbook'
 copyright = u'2018, Paulo Moura'
 author = u'Paulo Moura'
 

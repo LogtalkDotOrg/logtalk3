@@ -134,7 +134,7 @@ fi
 
 $logtalk "$goal"
 cd "$cwd/../docs/sources" || exit 1
-lgt2rst
+lgt2rst -t "Logtalk APIs"
 mv _conf.py conf.py
 make clean
 make html

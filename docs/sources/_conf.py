@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Library API'
+project = 'Logtalk APIs'
 copyright = '2018, Paulo Moura'
 author = 'Paulo Moura'
 
@@ -106,7 +106,7 @@ html_last_updated_fmt = ''
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Libraryapi'
+htmlhelp_basename = 'logtalkapis'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -133,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Library.tex', 'Library API',
+    (master_doc, 'LogtalkAPIs.tex', 'Logtalk APIs',
      'PM', 'manual'),
 ]
 
@@ -143,7 +143,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'library', 'Library API',
+    (master_doc, 'library', 'Logtalk APIs',
      [author], 1)
 ]
 
@@ -154,8 +154,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Library', 'Library',
-     author, 'Library API', 'One line description of project.',
+    (master_doc, 'Logtalk APIs', 'Logtalk APIs',
+     author, 'Logtalk APIs', 'Logtalk core, library, tools, and contributions APIs.',
      'Miscellaneous'),
 ]
 
