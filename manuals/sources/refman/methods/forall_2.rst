@@ -43,10 +43,9 @@ To send both goals as messages to :term:`self`:
 To send both goals as messages to explicit objects:
    ``forall(Object1::Generator, Object2::Test)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_bagof_3`,
-:ref:`methods_findall_3`,
-:ref:`methods_findall_4`,
-:ref:`methods_setof_3`
+   :ref:`methods_bagof_3`,
+   :ref:`methods_findall_3`,
+   :ref:`methods_findall_4`,
+   :ref:`methods_setof_3`

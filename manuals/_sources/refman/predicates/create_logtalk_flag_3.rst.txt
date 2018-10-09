@@ -65,8 +65,7 @@ Examples
 
    | ?- create_logtalk_flag(pretty_print_blobs, false, []).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_current_logtalk_flag_2`,
-:ref:`predicates_set_logtalk_flag_2`
+   :ref:`predicates_current_logtalk_flag_2`,
+   :ref:`predicates_set_logtalk_flag_2`

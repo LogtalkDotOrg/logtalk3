@@ -43,10 +43,9 @@ Examples
            writeq(Object), write('::'), writeq(Message),
            write(' from '), writeq(Sender), nl.
 
-See also
---------
+.. seealso::
 
-:ref:`methods_after_3`,
-:ref:`predicates_abolish_events_5`,
-:ref:`predicates_current_event_5`,
-:ref:`predicates_define_events_5`
+   :ref:`methods_after_3`,
+   :ref:`predicates_abolish_events_5`,
+   :ref:`predicates_current_event_5`,
+   :ref:`predicates_define_events_5`

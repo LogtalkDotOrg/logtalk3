@@ -34,9 +34,8 @@ Find the name of the engine making the query:
 Check if the name of the engine making the query is ``worker_1``:
    ``threaded_engine_self(worker_1)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_create_3`,
-:ref:`predicates_threaded_engine_destroy_1`,
-:ref:`predicates_threaded_engine_1`
+   :ref:`predicates_threaded_engine_create_3`,
+   :ref:`predicates_threaded_engine_destroy_1`,
+   :ref:`predicates_threaded_engine_1`

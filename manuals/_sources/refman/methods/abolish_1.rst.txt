@@ -65,15 +65,14 @@ To abolish a public or protected dynamic predicate in :term:`self`:
 To abolish a public dynamic predicate in an explicit object:
    ``Object::abolish(Predicate)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_asserta_1`,
-:ref:`methods_assertz_1`,
-:ref:`methods_clause_2`,
-:ref:`methods_retract_1`,
-:ref:`methods_retractall_1`
-:ref:`directives_dynamic_0`,
-:ref:`directives_dynamic_1`
-:ref:`directives_uses_2`,
-:ref:`directives_use_module_2`
+   :ref:`methods_asserta_1`,
+   :ref:`methods_assertz_1`,
+   :ref:`methods_clause_2`,
+   :ref:`methods_retract_1`,
+   :ref:`methods_retractall_1`
+   :ref:`directives_dynamic_0`,
+   :ref:`directives_dynamic_1`
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

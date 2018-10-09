@@ -46,10 +46,9 @@ Examples
        % arguments are fine; go ahead
        ... .
 
-See also
---------
+.. seealso::
 
-:ref:`methods_parameter_2`,
-:ref:`methods_self_1`,
-:ref:`methods_sender_1`,
-:ref:`methods_this_1`
+   :ref:`methods_parameter_2`,
+   :ref:`methods_self_1`,
+   :ref:`methods_sender_1`,
+   :ref:`methods_this_1`

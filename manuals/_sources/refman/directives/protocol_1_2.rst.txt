@@ -39,7 +39,6 @@ Examples
    :- protocol(queuep,
        extends(protected::listp)).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_end_protocol_0`
+   :ref:`directives_end_protocol_0`

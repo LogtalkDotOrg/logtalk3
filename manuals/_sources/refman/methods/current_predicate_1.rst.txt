@@ -47,10 +47,9 @@ To enumerate, by backtracking, the public and protected user predicates visible 
 To enumerate, by backtracking, the public user predicates visible for an explicit object:
    ``Object::current_predicate(Predicate)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_current_op_3`,
-:ref:`methods_predicate_property_2`,
-:ref:`directives_uses_2`,
-:ref:`directives_use_module_2`
+   :ref:`methods_current_op_3`,
+   :ref:`methods_predicate_property_2`,
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

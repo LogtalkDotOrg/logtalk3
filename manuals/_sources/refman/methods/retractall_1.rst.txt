@@ -55,15 +55,14 @@ To retract all public or protected predicate clauses with a matching head in :te
 To retract all public predicate clauses with a matching head in an explicit object:
    ``Object::retractall(Head)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_abolish_1`,
-:ref:`methods_asserta_1`,
-:ref:`methods_assertz_1`,
-:ref:`methods_clause_2`,
-:ref:`methods_retract_1`,
-:ref:`directives_dynamic_0`,
-:ref:`directives_dynamic_1`
-:ref:`directives_uses_2`,
-:ref:`directives_use_module_2`
+   :ref:`methods_abolish_1`,
+   :ref:`methods_asserta_1`,
+   :ref:`methods_assertz_1`,
+   :ref:`methods_clause_2`,
+   :ref:`methods_retract_1`,
+   :ref:`directives_dynamic_0`,
+   :ref:`directives_dynamic_1`
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

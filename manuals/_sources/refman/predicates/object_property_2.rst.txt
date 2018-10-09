@@ -40,12 +40,11 @@ Examples
 
    | ?- object_property(list, Property).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_abolish_object_1`,
-:ref:`predicates_create_object_4`,
-:ref:`predicates_current_object_1`,
-:ref:`predicates_extends_object_2_3`,
-:ref:`predicates_instantiates_class_2_3`,
-:ref:`predicates_specializes_class_2_3`
+   :ref:`predicates_abolish_object_1`,
+   :ref:`predicates_create_object_4`,
+   :ref:`predicates_current_object_1`,
+   :ref:`predicates_extends_object_2_3`,
+   :ref:`predicates_instantiates_class_2_3`,
+   :ref:`predicates_specializes_class_2_3`

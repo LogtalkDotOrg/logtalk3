@@ -57,15 +57,14 @@ To retrieve a matching clause of a public or protected dynamic predicate in :ter
 To retrieve a matching clause of a public dynamic predicate in an explicit object:
    ``Object::clause(Head, Body)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_abolish_1`,
-:ref:`methods_asserta_1`,
-:ref:`methods_assertz_1`,
-:ref:`methods_retract_1`,
-:ref:`methods_retractall_1`
-:ref:`directives_dynamic_0`,
-:ref:`directives_dynamic_1`
-:ref:`directives_uses_2`,
-:ref:`directives_use_module_2`
+   :ref:`methods_abolish_1`,
+   :ref:`methods_asserta_1`,
+   :ref:`methods_assertz_1`,
+   :ref:`methods_retract_1`,
+   :ref:`methods_retractall_1`
+   :ref:`directives_dynamic_0`,
+   :ref:`directives_dynamic_1`
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

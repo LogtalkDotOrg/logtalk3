@@ -38,9 +38,8 @@ Examples
 Gets the next engine answer:
    ``threaded_engine_next_reified(worker_1, Answer)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_create_3`,
-:ref:`predicates_threaded_engine_next_2`,
-:ref:`predicates_threaded_engine_yield_1`
+   :ref:`predicates_threaded_engine_create_3`,
+   :ref:`predicates_threaded_engine_next_2`,
+   :ref:`predicates_threaded_engine_yield_1`

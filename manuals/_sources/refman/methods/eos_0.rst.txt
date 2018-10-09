@@ -34,10 +34,9 @@ Examples
 
    abc --> a, b, c, eos.
 
-See also
---------
+.. seealso::
 
-:ref:`methods_call_1`,
-:ref:`methods_phrase_1`,
-:ref:`methods_phrase_2`,
-:ref:`methods_phrase_3`
+   :ref:`methods_call_1`,
+   :ref:`methods_phrase_1`,
+   :ref:`methods_phrase_2`,
+   :ref:`methods_phrase_3`

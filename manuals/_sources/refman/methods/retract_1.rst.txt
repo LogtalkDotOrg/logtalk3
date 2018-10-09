@@ -57,15 +57,14 @@ To retract a matching clause of a public or protected dynamic predicate in :term
 To retract a matching clause of a public dynamic predicate in an explicit object:
    ``Object::retract(Clause)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_abolish_1`,
-:ref:`methods_asserta_1`,
-:ref:`methods_assertz_1`,
-:ref:`methods_clause_2`,
-:ref:`methods_retractall_1`,
-:ref:`directives_dynamic_0`,
-:ref:`directives_dynamic_1`
-:ref:`directives_uses_2`,
-:ref:`directives_use_module_2`
+   :ref:`methods_abolish_1`,
+   :ref:`methods_asserta_1`,
+   :ref:`methods_assertz_1`,
+   :ref:`methods_clause_2`,
+   :ref:`methods_retractall_1`,
+   :ref:`directives_dynamic_0`,
+   :ref:`directives_dynamic_1`
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

@@ -36,7 +36,6 @@ Examples
 
 ``(none)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_throw_1`
+   :ref:`methods_throw_1`

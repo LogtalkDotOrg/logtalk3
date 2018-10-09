@@ -52,12 +52,11 @@ Examples
 
    | ?- logtalk_make.
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_logtalk_compile_1`,
-:ref:`predicates_logtalk_compile_2`,
-:ref:`predicates_logtalk_load_1`,
-:ref:`predicates_logtalk_load_2`,
-:ref:`predicates_logtalk_make_1`,
-:ref:`predicates_logtalk_make_target_action_1`
+   :ref:`predicates_logtalk_compile_1`,
+   :ref:`predicates_logtalk_compile_2`,
+   :ref:`predicates_logtalk_load_1`,
+   :ref:`predicates_logtalk_load_2`,
+   :ref:`predicates_logtalk_make_1`,
+   :ref:`predicates_logtalk_make_target_action_1`

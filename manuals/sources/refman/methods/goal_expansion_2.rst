@@ -55,10 +55,9 @@ Examples
 
 ``goal_expansion(read(Term), (write('Input: '), {read(Term)})).``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_expand_goal_2`,
-:ref:`methods_expand_term_2`,
-:ref:`methods_term_expansion_2`,
-:ref:`predicates_logtalk_load_context_2`
+   :ref:`methods_expand_goal_2`,
+   :ref:`methods_expand_term_2`,
+   :ref:`methods_term_expansion_2`,
+   :ref:`predicates_logtalk_load_context_2`

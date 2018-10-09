@@ -42,10 +42,9 @@ Examples
        write('executing a method to answer a message sent by '),
        writeq(Sender), nl.
 
-See also
---------
+.. seealso::
 
-:ref:`methods_context_1`,
-:ref:`methods_parameter_2`,
-:ref:`methods_self_1`,
-:ref:`methods_this_1`
+   :ref:`methods_context_1`,
+   :ref:`methods_parameter_2`,
+   :ref:`methods_self_1`,
+   :ref:`methods_this_1`

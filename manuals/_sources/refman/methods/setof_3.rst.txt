@@ -55,10 +55,9 @@ To find a set of solutions of sending a message to :term:`self`:
 To find a set of solutions of sending a message to an explicit object:
    ``setof(Template, Object::Message, List)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_bagof_3`,
-:ref:`methods_findall_3`,
-:ref:`methods_findall_4`,
-:ref:`methods_forall_2`
+   :ref:`methods_bagof_3`,
+   :ref:`methods_findall_3`,
+   :ref:`methods_findall_4`,
+   :ref:`methods_forall_2`

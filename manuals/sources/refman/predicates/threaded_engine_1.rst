@@ -35,9 +35,8 @@ Check that an engine named ``worker_1`` exists:
 Write the names of all existing engines:
    ``forall(threaded_engine(Engine), (writeq(Engine), nl))``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_create_3`,
-:ref:`predicates_threaded_engine_self_1`,
-:ref:`predicates_threaded_engine_destroy_1`
+   :ref:`predicates_threaded_engine_create_3`,
+   :ref:`predicates_threaded_engine_self_1`,
+   :ref:`predicates_threaded_engine_destroy_1`

@@ -47,9 +47,8 @@ To enumerate, by backtracking, the public and protected operators visible in :te
 To enumerate, by backtracking, the public operators visible for an explicit object:
    ``Object::current_op(Priority, Specifier, Operator)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_current_predicate_1`,
-:ref:`methods_predicate_property_2`
-:ref:`directives_op_3`
+   :ref:`methods_current_predicate_1`,
+   :ref:`methods_predicate_property_2`
+   :ref:`directives_op_3`

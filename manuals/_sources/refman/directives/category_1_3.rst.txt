@@ -93,7 +93,6 @@ Examples
        implements(monitoring),
        complements(employee)).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_end_category_0`
+   :ref:`directives_end_category_0`

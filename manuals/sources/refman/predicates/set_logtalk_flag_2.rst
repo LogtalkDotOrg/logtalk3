@@ -48,8 +48,7 @@ Examples
 
    | ?- set_logtalk_flag(unknown_entities, silent).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_create_logtalk_flag_3`,
-:ref:`predicates_current_logtalk_flag_2`
+   :ref:`predicates_create_logtalk_flag_3`,
+   :ref:`predicates_current_logtalk_flag_2`

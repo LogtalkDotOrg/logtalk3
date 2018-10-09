@@ -33,7 +33,6 @@ Examples
 Fetch a term from the engine term queue:
    ``threaded_engine_fetch(Term)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_post_2`
+   :ref:`predicates_threaded_engine_post_2`

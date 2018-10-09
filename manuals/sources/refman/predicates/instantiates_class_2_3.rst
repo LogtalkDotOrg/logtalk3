@@ -46,9 +46,8 @@ Examples
 
    | ?- instantiates_class(Space, state_space, public).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_current_object_1`,
-:ref:`predicates_extends_object_2_3`,
-:ref:`predicates_specializes_class_2_3`
+   :ref:`predicates_current_object_1`,
+   :ref:`predicates_extends_object_2_3`,
+   :ref:`predicates_specializes_class_2_3`

@@ -45,7 +45,6 @@ Examples
            % delegate the unknown message to other object
            [real::Message].
 
-See also
---------
+.. seealso::
 
-:ref:`control_delegate_message_1`
+   :ref:`control_delegate_message_1`

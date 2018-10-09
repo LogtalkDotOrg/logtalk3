@@ -40,10 +40,9 @@ Examples
        write('executing a method in behalf of '),    % call will be the first goal on
        writeq(Self), nl.                             % the clause body
 
-See also
---------
+.. seealso::
 
-:ref:`methods_context_1`,
-:ref:`methods_parameter_2`,
-:ref:`methods_sender_1`,
-:ref:`methods_this_1`
+   :ref:`methods_context_1`,
+   :ref:`methods_parameter_2`,
+   :ref:`methods_sender_1`,
+   :ref:`methods_this_1`

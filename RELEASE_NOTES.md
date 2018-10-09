@@ -46,9 +46,10 @@ includes the User Manual, Reference Manual, FAQ, and Glossary) are now
 generated from reStructuredText sources using Sphinx.
 
 * CHANGED: The manual `userman.pdf` and `refman.pdf` files have been replaced
-by a single `TheLogtalkHandbook.pdf` file.
+by a single `TheLogtalkHandbook-3.21.0.pdf` file.
 
-* ADDED: File `TheLogtalkHandbook.epub`, an ePub version of the documentation.
+* ADDED: File `TheLogtalkHandbook-3.21.0.epub`, an ePub version of the
+documentation.
 
 * ADDED: Contributor Covenant code of conduct.
 

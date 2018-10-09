@@ -75,9 +75,8 @@ Examples
        assertz(counter(0)),
        ^^init.
 
-See also
---------
+.. seealso::
 
-:ref:`control_send_to_object_2`,
-:ref:`control_send_to_self_1`,
-:ref:`control_delegate_message_1`
+   :ref:`control_send_to_object_2`,
+   :ref:`control_send_to_self_1`,
+   :ref:`control_delegate_message_1`

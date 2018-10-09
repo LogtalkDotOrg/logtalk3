@@ -41,8 +41,7 @@ Examples
    logtalk_make_target_action(check) :-
        dead_code_scanner::all.
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_logtalk_make_1`,
-:ref:`predicates_logtalk_make_0`
+   :ref:`predicates_logtalk_make_1`,
+   :ref:`predicates_logtalk_make_0`

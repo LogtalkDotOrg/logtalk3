@@ -47,8 +47,7 @@ Examples
 
    :- private([data/3, key/1, keys/1]).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_protected_1`,
-:ref:`directives_public_1`
+   :ref:`directives_protected_1`,
+   :ref:`directives_public_1`

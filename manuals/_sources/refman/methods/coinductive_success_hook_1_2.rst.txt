@@ -46,7 +46,6 @@ Examples
 
 ``(none)``
 
-See also
---------
+.. seealso::
 
-:ref:`directives_coinductive_1`
+   :ref:`directives_coinductive_1`

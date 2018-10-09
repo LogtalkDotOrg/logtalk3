@@ -58,14 +58,13 @@ Examples
    logtalk::ask_question(enter_age, question, my_app, integer, Age),
    ...
 
-See also
---------
+.. seealso::
 
-:ref:`methods_question_hook_6`,
-:ref:`methods_question_prompt_stream_4`,
-:ref:`methods_message_hook_4`,
-:ref:`methods_message_prefix_stream_4`,
-:ref:`methods_message_tokens_2`,
-:ref:`methods_print_message_3`,
-:ref:`methods_print_message_tokens_3`,
-:ref:`methods_print_message_token_4`
+   :ref:`methods_question_hook_6`,
+   :ref:`methods_question_prompt_stream_4`,
+   :ref:`methods_message_hook_4`,
+   :ref:`methods_message_prefix_stream_4`,
+   :ref:`methods_message_tokens_2`,
+   :ref:`methods_print_message_3`,
+   :ref:`methods_print_message_tokens_3`,
+   :ref:`methods_print_message_token_4`

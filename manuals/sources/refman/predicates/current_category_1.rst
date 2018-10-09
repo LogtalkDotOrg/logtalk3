@@ -35,12 +35,11 @@ Examples
 
    | ?- current_category(monitoring).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_abolish_category_1`,
-:ref:`predicates_category_property_2`,
-:ref:`predicates_create_category_4`,
-:ref:`predicates_complements_object_2`,
-:ref:`predicates_extends_category_2_3`,
-:ref:`predicates_imports_category_2_3`
+   :ref:`predicates_abolish_category_1`,
+   :ref:`predicates_category_property_2`,
+   :ref:`predicates_create_category_4`,
+   :ref:`predicates_complements_object_2`,
+   :ref:`predicates_extends_category_2_3`,
+   :ref:`predicates_imports_category_2_3`

@@ -42,11 +42,10 @@ Examples
 Create a new engine for finding members of a list:
    ``threaded_engine_create(X, member(X, [1,2,3]), worker_1)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_destroy_1`,
-:ref:`predicates_threaded_engine_self_1`,
-:ref:`predicates_threaded_engine_1`,
-:ref:`predicates_threaded_engine_next_2`,
-:ref:`predicates_threaded_engine_next_reified_2`
+   :ref:`predicates_threaded_engine_destroy_1`,
+   :ref:`predicates_threaded_engine_self_1`,
+   :ref:`predicates_threaded_engine_1`,
+   :ref:`predicates_threaded_engine_next_2`,
+   :ref:`predicates_threaded_engine_next_reified_2`

@@ -29,7 +29,6 @@ Examples
 
    :- dynamic.
 
-See also
---------
+.. seealso::
 
-:ref:`directives_dynamic_1`
+   :ref:`directives_dynamic_1`

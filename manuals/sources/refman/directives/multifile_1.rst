@@ -61,9 +61,8 @@ Examples
    :- multifile(table/3).
    :- multifile(user::hook/2).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_public_1`,
-:ref:`directives_protected_1`,
-:ref:`directives_private_1`
+   :ref:`directives_public_1`,
+   :ref:`directives_protected_1`,
+   :ref:`directives_private_1`

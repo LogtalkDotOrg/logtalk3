@@ -76,12 +76,11 @@ Creating a new object and defining its initialization goal:
 Creating a new empty object with dynamic predicate declarations support:
    ``| ?- create_object(database, [], [set_logtalk_flag(dynamic_declarations, allow)], []).``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_abolish_object_1`,
-:ref:`predicates_current_object_1`,
-:ref:`predicates_object_property_2`,
-:ref:`predicates_extends_object_2_3`,
-:ref:`predicates_instantiates_class_2_3`,
-:ref:`predicates_specializes_class_2_3`
+   :ref:`predicates_abolish_object_1`,
+   :ref:`predicates_current_object_1`,
+   :ref:`predicates_object_property_2`,
+   :ref:`predicates_extends_object_2_3`,
+   :ref:`predicates_instantiates_class_2_3`,
+   :ref:`predicates_specializes_class_2_3`

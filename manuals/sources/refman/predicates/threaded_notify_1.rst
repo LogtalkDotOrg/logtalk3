@@ -40,7 +40,6 @@ Examples
 Send the notification ``data_available``:
    ``threaded_notify(data_available)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_wait_1`
+   :ref:`predicates_threaded_wait_1`

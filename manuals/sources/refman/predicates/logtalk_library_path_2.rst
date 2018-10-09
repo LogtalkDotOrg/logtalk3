@@ -85,10 +85,9 @@ Examples
    Path = examples('viewpoints/')
    yes
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_logtalk_compile_1`,
-:ref:`predicates_logtalk_compile_2`,
-:ref:`predicates_logtalk_load_1`,
-:ref:`predicates_logtalk_load_2`
+   :ref:`predicates_logtalk_compile_1`,
+   :ref:`predicates_logtalk_compile_2`,
+   :ref:`predicates_logtalk_load_1`,
+   :ref:`predicates_logtalk_load_2`

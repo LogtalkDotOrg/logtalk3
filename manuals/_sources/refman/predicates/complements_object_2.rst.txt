@@ -37,8 +37,7 @@ Examples
 
    | ?- complements_object(logging, employee).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_current_category_1`,
-:ref:`predicates_imports_category_2_3`
+   :ref:`predicates_current_category_1`,
+   :ref:`predicates_imports_category_2_3`

@@ -46,9 +46,8 @@ Examples
 
    | ?- extends_object(Object, list, public).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_current_object_1`,
-:ref:`predicates_instantiates_class_2_3`,
-:ref:`predicates_specializes_class_2_3`
+   :ref:`predicates_current_object_1`,
+   :ref:`predicates_instantiates_class_2_3`,
+   :ref:`predicates_specializes_class_2_3`

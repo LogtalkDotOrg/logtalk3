@@ -46,9 +46,8 @@ Examples
 
    | ?- extends_category(Category, extended, private).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_current_category_1`,
-:ref:`predicates_complements_object_2`,
-:ref:`predicates_imports_category_2_3`
+   :ref:`predicates_current_category_1`,
+   :ref:`predicates_complements_object_2`,
+   :ref:`predicates_imports_category_2_3`

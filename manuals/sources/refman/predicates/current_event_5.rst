@@ -43,10 +43,9 @@ Examples
 
    | ?- current_event(Event, Object, Message, Sender, debugger).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_abolish_events_5`,
-:ref:`predicates_define_events_5`,
-:ref:`methods_before_3`,
-:ref:`methods_after_3`
+   :ref:`predicates_abolish_events_5`,
+   :ref:`predicates_define_events_5`,
+   :ref:`methods_before_3`,
+   :ref:`methods_after_3`

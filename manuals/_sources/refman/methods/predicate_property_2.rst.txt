@@ -47,10 +47,9 @@ To enumerate, by backtracking, the properties of a public or protected predicate
 To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:
    ``Object::predicate_property(foo(_), Property)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_current_op_3`,
-:ref:`methods_current_predicate_1`,
-:ref:`directives_uses_2`,
-:ref:`directives_use_module_2`
+   :ref:`methods_current_op_3`,
+   :ref:`methods_current_predicate_1`,
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

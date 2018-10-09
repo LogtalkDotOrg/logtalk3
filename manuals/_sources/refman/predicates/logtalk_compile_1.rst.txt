@@ -65,12 +65,11 @@ Examples
 
    | ?- logtalk_compile([listp, list]).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_logtalk_compile_2`,
-:ref:`predicates_logtalk_load_1`,
-:ref:`predicates_logtalk_load_2`,
-:ref:`predicates_logtalk_make_0`,
-:ref:`predicates_logtalk_make_1`,
-:ref:`predicates_logtalk_library_path_2`
+   :ref:`predicates_logtalk_compile_2`,
+   :ref:`predicates_logtalk_load_1`,
+   :ref:`predicates_logtalk_load_2`,
+   :ref:`predicates_logtalk_make_0`,
+   :ref:`predicates_logtalk_make_1`,
+   :ref:`predicates_logtalk_library_path_2`

@@ -87,7 +87,6 @@ Examples
        retractall(bar(_)),             % same as retractall(user:foo(_))
        ...
 
-See also
---------
+.. seealso::
 
-:ref:`directives_uses_2`
+   :ref:`directives_uses_2`

@@ -61,11 +61,10 @@ To retrieve an asynchronous message to *self* result:
 To retrieve an asynchronous message result:
    ``threaded_exit(Object::Goal)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_call_1_2`,
-:ref:`predicates_threaded_ignore_1`,
-:ref:`predicates_threaded_once_1_2`,
-:ref:`predicates_threaded_peek_1_2`
-:ref:`predicates_threaded_1`
+   :ref:`predicates_threaded_call_1_2`,
+   :ref:`predicates_threaded_ignore_1`,
+   :ref:`predicates_threaded_once_1_2`,
+   :ref:`predicates_threaded_peek_1_2`
+   :ref:`predicates_threaded_1`

@@ -56,7 +56,6 @@ Examples
    :- coinductive(comember/2).
    :- coinductive(controller(+,+,+,-,-)).
 
-See also
---------
+.. seealso::
 
-:ref:`methods_coinductive_success_hook_1_2`
+   :ref:`methods_coinductive_success_hook_1_2`

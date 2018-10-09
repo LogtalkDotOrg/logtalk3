@@ -52,10 +52,9 @@ Examples
 
    | ?- define_events(_, list, member(_, _), _ , debugger).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_abolish_events_5`,
-:ref:`predicates_current_event_5`,
-:ref:`methods_before_3`,
-:ref:`methods_after_3`
+   :ref:`predicates_abolish_events_5`,
+   :ref:`predicates_current_event_5`,
+   :ref:`methods_before_3`,
+   :ref:`methods_after_3`

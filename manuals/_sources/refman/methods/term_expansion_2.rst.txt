@@ -56,10 +56,9 @@ Examples
 
 ``term_expansion(data(Millimeters), data(Meters)) :- Meters is Millimeters / 1000.``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_expand_goal_2`,
-:ref:`methods_expand_term_2`,
-:ref:`methods_goal_expansion_2`
-:ref:`predicates_logtalk_load_context_2`
+   :ref:`methods_expand_goal_2`,
+   :ref:`methods_expand_term_2`,
+   :ref:`methods_goal_expansion_2`
+   :ref:`predicates_logtalk_load_context_2`

@@ -28,7 +28,6 @@ Examples
 
    :- end_protocol.
 
-See also
---------
+.. seealso::
 
-:ref:`directives_protocol_1_2`
+   :ref:`directives_protocol_1_2`

@@ -241,7 +241,6 @@ Examples
    :- object(agent,
        imports(private::attributes)).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_end_object_0`
+   :ref:`directives_end_object_0`

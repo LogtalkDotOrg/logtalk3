@@ -43,9 +43,8 @@ To send a goal as a non-backtracable message to :term:`self`:
 To send a goal as a non-backtracable message to an explicit object:
    ``once(Object::Goal)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_call_N`,
-:ref:`methods_ignore_1`,
-:ref:`methods_not_1`
+   :ref:`methods_call_N`,
+   :ref:`methods_ignore_1`,
+   :ref:`methods_not_1`

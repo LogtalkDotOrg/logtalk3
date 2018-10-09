@@ -33,7 +33,6 @@ Examples
    :- op(200, fy, @).
    :- op(200, fy, -).
 
-See also
---------
+.. seealso::
 
-:ref:`methods_current_op_3`
+   :ref:`methods_current_op_3`

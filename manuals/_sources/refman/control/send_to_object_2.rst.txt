@@ -81,9 +81,8 @@ Examples
    X = 3
    yes
 
-See also
---------
+.. seealso::
 
-:ref:`control_send_to_self_1`,
-:ref:`control_call_super_1`,
-:ref:`control_delegate_message_1`
+   :ref:`control_send_to_self_1`,
+   :ref:`control_call_super_1`,
+   :ref:`control_delegate_message_1`

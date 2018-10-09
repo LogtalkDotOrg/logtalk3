@@ -35,9 +35,8 @@ Examples
 
    :- if(current_prolog_flag(double_quotes, atom)).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_elif_1`,
-:ref:`directives_else_0`,
-:ref:`directives_endif_0`
+   :ref:`directives_elif_1`,
+   :ref:`directives_else_0`,
+   :ref:`directives_endif_0`

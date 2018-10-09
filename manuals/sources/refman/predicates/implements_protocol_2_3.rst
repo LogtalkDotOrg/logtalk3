@@ -56,8 +56,7 @@ Examples
 
    | ?- implements_protocol(list, listp, public).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_current_protocol_1`,
-:ref:`predicates_conforms_to_protocol_2_3`
+   :ref:`predicates_current_protocol_1`,
+   :ref:`predicates_conforms_to_protocol_2_3`

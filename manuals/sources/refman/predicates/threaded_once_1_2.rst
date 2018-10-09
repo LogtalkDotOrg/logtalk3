@@ -51,11 +51,10 @@ Prove ``::Message`` asynchronously in a new thread:
 Prove ``Object::Message`` asynchronously in a new thread:
    ``threaded_once(Object::Message)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_call_1_2`,
-:ref:`predicates_threaded_exit_1_2`,
-:ref:`predicates_threaded_ignore_1`,
-:ref:`predicates_threaded_peek_1_2`
-:ref:`predicates_threaded_1`
+   :ref:`predicates_threaded_call_1_2`,
+   :ref:`predicates_threaded_exit_1_2`,
+   :ref:`predicates_threaded_ignore_1`,
+   :ref:`predicates_threaded_peek_1_2`
+   :ref:`predicates_threaded_1`

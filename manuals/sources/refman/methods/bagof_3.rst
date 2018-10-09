@@ -55,10 +55,9 @@ To find a bag of solutions of sending a message to :term:`self`:
 To find a bag of solutions of sending a message to an explicit object:
    ``bagof(Template, Object::Message, List)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_findall_3`,
-:ref:`methods_findall_4`,
-:ref:`methods_forall_2`,
-:ref:`methods_setof_3`
+   :ref:`methods_findall_3`,
+   :ref:`methods_findall_4`,
+   :ref:`methods_forall_2`,
+   :ref:`methods_setof_3`

@@ -53,10 +53,9 @@ To send a goal, constructed by appending the input list of tokens and the list o
 To send a goal, constructed by appending the input list of tokens and the list of remaining tokens to the arguments of the closure, as a message to an explicit object:
    ``call(Object::Closure)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_eos_0`,
-:ref:`methods_phrase_1`,
-:ref:`methods_phrase_2`,
-:ref:`methods_phrase_3`
+   :ref:`methods_eos_0`,
+   :ref:`methods_phrase_1`,
+   :ref:`methods_phrase_2`,
+   :ref:`methods_phrase_3`

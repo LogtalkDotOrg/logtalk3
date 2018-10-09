@@ -36,8 +36,7 @@ Examples
 
    | ?- current_logtalk_flag(source_data, Value).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_create_logtalk_flag_3`,
-:ref:`predicates_set_logtalk_flag_2`
+   :ref:`predicates_create_logtalk_flag_3`,
+   :ref:`predicates_set_logtalk_flag_2`

@@ -73,10 +73,9 @@ Examples
    forward(Message) :-
        [backup::Message].
 
-See also
---------
+.. seealso::
 
-:ref:`control_send_to_object_2`,
-:ref:`control_send_to_self_1`,
-:ref:`control_call_super_1`,
-:ref:`methods_forward_1`
+   :ref:`control_send_to_object_2`,
+   :ref:`control_send_to_self_1`,
+   :ref:`control_call_super_1`,
+   :ref:`methods_forward_1`

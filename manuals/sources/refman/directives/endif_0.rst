@@ -28,9 +28,8 @@ Examples
 
    :- endif.
 
-See also
---------
+.. seealso::
 
-:ref:`directives_elif_1`,
-:ref:`directives_else_0`,
-:ref:`directives_if_1`
+   :ref:`directives_elif_1`,
+   :ref:`directives_else_0`,
+   :ref:`directives_if_1`

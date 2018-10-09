@@ -43,9 +43,8 @@ To send a message succeeding even if it fails to :term:`self`:
 To send a message succeeding even if it fails to an explicit object:
    ``ignore(Object::Goal)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_call_N`,
-:ref:`methods_once_1`,
-:ref:`methods_not_1`
+   :ref:`methods_call_N`,
+   :ref:`methods_once_1`,
+   :ref:`methods_not_1`

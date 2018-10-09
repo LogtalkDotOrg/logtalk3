@@ -86,7 +86,6 @@ predicate aliases:
        new_queue(Queue),    % the same as queues::new(Queue)
        ...
 
-See also
---------
+.. seealso::
 
-:ref:`directives_use_module_2`
+   :ref:`directives_use_module_2`

@@ -37,9 +37,8 @@ Stop an engine named ``worker_1``:
 Stop all engines:
    ``forall(threaded_engine(Engine), threaded_engine_destroy(Engine))``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_create_3`,
-:ref:`predicates_threaded_engine_self_1`,
-:ref:`predicates_threaded_engine_1`
+   :ref:`predicates_threaded_engine_create_3`,
+   :ref:`predicates_threaded_engine_self_1`,
+   :ref:`predicates_threaded_engine_1`

@@ -36,7 +36,6 @@ Examples
        comment is 'List protocol.'
    ]).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_info_2`
+   :ref:`directives_info_2`

@@ -43,9 +43,8 @@ Examples
 Returns the atom ``ready`` as an engine answer:
    ``threaded_engine_yield(ready)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_create_3`,
-:ref:`predicates_threaded_engine_next_2`,
-:ref:`predicates_threaded_engine_next_reified_2`
+   :ref:`predicates_threaded_engine_create_3`,
+   :ref:`predicates_threaded_engine_next_2`,
+   :ref:`predicates_threaded_engine_next_reified_2`

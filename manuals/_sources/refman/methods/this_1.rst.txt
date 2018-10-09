@@ -21,7 +21,7 @@ containing the call. This unification occurs at the clause head when the
 argument is not instantiated (the most common case). This method is
 useful for avoiding hard-coding references to an object identifier or
 for retrieving all object parameters with a single call when using
-parametric objects. See also :ref:`methods_parameter_2`.
+parametric objects.
 
 Template and modes
 ------------------
@@ -47,10 +47,9 @@ Examples
        write('Using a predicate clause contained in '),
        writeq(This), nl.
 
-See also
---------
+.. seealso::
 
-:ref:`methods_context_1`,
-:ref:`methods_parameter_2`,
-:ref:`methods_self_1`,
-:ref:`methods_sender_1`
+   :ref:`methods_context_1`,
+   :ref:`methods_parameter_2`,
+   :ref:`methods_self_1`,
+   :ref:`methods_sender_1`

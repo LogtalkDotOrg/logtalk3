@@ -36,9 +36,8 @@ Examples
 
    :- elif(predicate_property(callable(_), built_in)).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_else_0`,
-:ref:`directives_endif_0`,
-:ref:`directives_if_1`
+   :ref:`directives_else_0`,
+   :ref:`directives_endif_0`,
+   :ref:`directives_if_1`

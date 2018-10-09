@@ -56,9 +56,8 @@ To send a goal, constructed by appending additional arguments to a closure, as a
 To send a goal, constructed by appending additional arguments to a closure, as a message to an explicit object:
    ``call(Object::Closure, Arg1, Arg2, ...)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_ignore_1`,
-:ref:`methods_once_1`,
-:ref:`methods_not_1`
+   :ref:`methods_ignore_1`,
+   :ref:`methods_once_1`,
+   :ref:`methods_not_1`

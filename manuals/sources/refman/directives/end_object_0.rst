@@ -28,7 +28,6 @@ Examples
 
    :- end_object.
 
-See also
---------
+.. seealso::
 
-:ref:`directives_object_1_5`
+   :ref:`directives_object_1_5`

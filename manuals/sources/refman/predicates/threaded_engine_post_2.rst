@@ -35,7 +35,6 @@ Examples
 Post the atom ``ready`` to the ``worker_1`` engine queue:
    ``threaded_engine_post(worker_1, ready)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_engine_fetch_1`
+   :ref:`predicates_threaded_engine_fetch_1`

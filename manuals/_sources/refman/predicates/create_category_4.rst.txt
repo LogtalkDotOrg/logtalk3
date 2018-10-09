@@ -66,10 +66,9 @@ Examples
            [epsilon(1e-15), (equal(X, Y) :- epsilon(E), abs(X-Y) =< E)]
         ).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_abolish_category_1`, :ref:`predicates_category_property_2`,
-:ref:`predicates_current_category_1`,
-:ref:`predicates_complements_object_2`, :ref:`predicates_extends_category_2_3`,
-:ref:`predicates_imports_category_2_3`
+   :ref:`predicates_abolish_category_1`, :ref:`predicates_category_property_2`,
+   :ref:`predicates_current_category_1`,
+   :ref:`predicates_complements_object_2`, :ref:`predicates_extends_category_2_3`,
+   :ref:`predicates_imports_category_2_3`

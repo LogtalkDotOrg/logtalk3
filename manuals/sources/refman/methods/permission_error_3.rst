@@ -36,11 +36,17 @@ Examples
 
 ``(none)``
 
-See also
---------
+.. seealso::
 
-| ``catch/3``, ``throw/1``, ``context/1``
-| ``instantiation_error/0``, ``type_error/2``, ``domain_error/2``,
-  ``existence_error/2``, ``representation_error/1``,
-  ``evaluation_error/1``, ``resource_error/1``, ``syntax_error/1``,
-  ``system_error/0``
+   :ref:`methods_catch_3`,
+   :ref:`methods_throw_1`,
+   :ref:`methods_context_1`,
+   :ref:`methods_instantiation_error_0`,
+   :ref:`methods_type_error_2`,
+   :ref:`methods_domain_error_2`,
+   :ref:`methods_existence_error_2`,
+   :ref:`methods_representation_error_1`,
+   :ref:`methods_evaluation_error_1`,
+   :ref:`methods_resource_error_1`,
+   :ref:`methods_syntax_error_1`,
+   :ref:`methods_system_error_0`

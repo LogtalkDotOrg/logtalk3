@@ -50,8 +50,7 @@ Examples
 
    :- protected([load/1, save/3]).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_private_1`,
-:ref:`directives_public_1`
+   :ref:`directives_private_1`,
+   :ref:`directives_public_1`

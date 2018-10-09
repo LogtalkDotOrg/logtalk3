@@ -69,7 +69,6 @@ Examples
 
    :- dynamic([db/4, key/2, file/3]).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_dynamic_0`
+   :ref:`directives_dynamic_0`

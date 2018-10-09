@@ -22,7 +22,7 @@ argument in the predicate containing the call. This unification occurs
 at the clause head when the second argument is not instantiated (the
 most common case). When the second argument is instantiated, the
 unification must be delayed to runtime and thus occurs at the clause
-body. See also :ref:`methods_this_1`.
+body.
 
 Entity parameters can also be accessed using *parametric variables*,
 which use the syntax ``_VariableName_``. The compiler recognizes
@@ -82,10 +82,9 @@ The same example using *parametric variables*:
 
        ...
 
-See also
---------
+.. seealso::
 
-:ref:`methods_context_1`,
-:ref:`methods_self_1`,
-:ref:`methods_sender_1`,
-:ref:`methods_this_1`
+   :ref:`methods_context_1`,
+   :ref:`methods_self_1`,
+   :ref:`methods_sender_1`,
+   :ref:`methods_this_1`

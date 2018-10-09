@@ -60,7 +60,6 @@ Examples
 
    :- meta_non_terminal(maplist(2, *, *)).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_meta_predicate_1`
+   :ref:`directives_meta_predicate_1`

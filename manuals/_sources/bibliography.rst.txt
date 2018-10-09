@@ -241,6 +241,3 @@ Bibliography
    Proceedings of the 4th Portuguese Conference on Artificial
    Intelligence(390):257-268
    Lecture Notes in Artificial Intelligence, Springer-Verlag, 1989
-
-More references can be found in the `Object-Oriented Logic Programming
-Resources <http://www.ci.uc.pt/oolpr/oolpr.html>`__ web page.

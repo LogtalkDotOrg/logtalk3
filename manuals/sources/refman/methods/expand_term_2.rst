@@ -53,9 +53,8 @@ Examples
 
 ``(none)``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_expand_goal_2`,
-:ref:`methods_goal_expansion_2`,
-:ref:`methods_term_expansion_2`
+   :ref:`methods_expand_goal_2`,
+   :ref:`methods_goal_expansion_2`,
+   :ref:`methods_term_expansion_2`

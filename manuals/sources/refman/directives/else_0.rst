@@ -28,9 +28,8 @@ Examples
 
    :- else.
 
-See also
---------
+.. seealso::
 
-:ref:`directives_elif_1`,
-:ref:`directives_endif_0`,
-:ref:`directives_if_1`
+   :ref:`directives_elif_1`,
+   :ref:`directives_endif_0`,
+   :ref:`directives_if_1`

@@ -40,7 +40,6 @@ Examples
 Wait until the ``data_available`` notification is received:
    ``threaded_wait(data_available)``
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_threaded_notify_1`
+   :ref:`predicates_threaded_notify_1`

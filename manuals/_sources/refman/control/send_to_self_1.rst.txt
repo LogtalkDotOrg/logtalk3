@@ -55,9 +55,8 @@ Examples
        ::height(Height),
        Area is Width*Height.
 
-See also
---------
+.. seealso::
 
-:ref:`control_send_to_object_2`,
-:ref:`control_call_super_1`,
-:ref:`control_delegate_message_1`
+   :ref:`control_send_to_object_2`,
+   :ref:`control_call_super_1`,
+   :ref:`control_delegate_message_1`

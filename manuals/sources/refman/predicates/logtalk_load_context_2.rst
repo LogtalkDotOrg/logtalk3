@@ -71,8 +71,7 @@ Examples
        assertz(logtalk_library_path(my_app, Directory))
    )).
 
-See also
---------
+.. seealso::
 
-:ref:`methods_goal_expansion_2`,
-:ref:`methods_term_expansion_2`
+   :ref:`methods_goal_expansion_2`,
+   :ref:`methods_term_expansion_2`

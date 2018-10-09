@@ -41,8 +41,7 @@ Examples
        comment is 'Rewrites a sentence into a noun phrase and a verb phrase.'
    ]).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_info_1`,
-:ref:`directives_mode_2`
+   :ref:`directives_info_1`,
+   :ref:`directives_mode_2`

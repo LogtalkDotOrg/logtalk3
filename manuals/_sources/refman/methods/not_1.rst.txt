@@ -41,9 +41,8 @@ Not-provable goal sent as a message to :term:`self`:
 Not-provable goal sent as a message to an explicit object:
    ``\+ Object::Goal``
 
-See also
---------
+.. seealso::
 
-:ref:`methods_call_N`,
-:ref:`methods_ignore_1`,
-:ref:`methods_once_1`
+   :ref:`methods_call_N`,
+   :ref:`methods_ignore_1`,
+   :ref:`methods_once_1`

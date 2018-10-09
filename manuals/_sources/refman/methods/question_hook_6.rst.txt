@@ -49,14 +49,13 @@ Examples
    % use a pre-defined answer instead of asking the user
    logtalk::question_hook(upper_limit, question, my_app, _, float, 3.7).
 
-See also
---------
+.. seealso::
 
-:ref:`methods_ask_question_5`,
-:ref:`methods_question_prompt_stream_4`
-:ref:`methods_message_hook_4`,
-:ref:`methods_message_prefix_stream_4`,
-:ref:`methods_message_tokens_2`,
-:ref:`methods_print_message_3`,
-:ref:`methods_print_message_tokens_3`,
-:ref:`methods_print_message_token_4`,
+   :ref:`methods_ask_question_5`,
+   :ref:`methods_question_prompt_stream_4`
+   :ref:`methods_message_hook_4`,
+   :ref:`methods_message_prefix_stream_4`,
+   :ref:`methods_message_tokens_2`,
+   :ref:`methods_print_message_3`,
+   :ref:`methods_print_message_tokens_3`,
+   :ref:`methods_print_message_token_4`,

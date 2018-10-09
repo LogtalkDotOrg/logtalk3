@@ -48,8 +48,7 @@ Examples
 
    :- public([leaf/1, leaves/1]).
 
-See also
---------
+.. seealso::
 
-:ref:`directives_private_1`,
-:ref:`directives_protected_1`
+   :ref:`directives_private_1`,
+   :ref:`directives_protected_1`

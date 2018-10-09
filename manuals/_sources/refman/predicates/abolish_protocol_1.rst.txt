@@ -40,12 +40,11 @@ Examples
 
    | ?- abolish_protocol(listp).
 
-See also
---------
+.. seealso::
 
-:ref:`predicates_create_protocol_3`,
-:ref:`predicates_current_protocol_1`,
-:ref:`predicates_protocol_property_2`,
-:ref:`predicates_conforms_to_protocol_2_3`,
-:ref:`predicates_extends_protocol_2_3`,
-:ref:`predicates_implements_protocol_2_3`
+   :ref:`predicates_create_protocol_3`,
+   :ref:`predicates_current_protocol_1`,
+   :ref:`predicates_protocol_property_2`,
+   :ref:`predicates_conforms_to_protocol_2_3`,
+   :ref:`predicates_extends_protocol_2_3`,
+   :ref:`predicates_implements_protocol_2_3`
