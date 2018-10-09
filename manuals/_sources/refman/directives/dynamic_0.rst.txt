@@ -31,4 +31,7 @@ Examples
 
 .. seealso::
 
-   :ref:`directives_dynamic_1`
+   :ref:`directives_dynamic_1`,
+   :ref:`predicates_object_property_2`,
+   :ref:`predicates_protocol_property_2`,
+   :ref:`predicates_category_property_2`

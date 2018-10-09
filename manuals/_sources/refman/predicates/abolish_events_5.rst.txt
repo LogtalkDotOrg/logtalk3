@@ -47,6 +47,6 @@ Examples
 .. seealso::
 
    :ref:`predicates_current_event_5`,
-   :ref:`predicates_define_events_5`
+   :ref:`predicates_define_events_5`,
    :ref:`methods_before_3`,
    :ref:`methods_after_3`

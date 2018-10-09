@@ -63,6 +63,6 @@ To retract all public predicate clauses with a matching head in an explicit obje
    :ref:`methods_clause_2`,
    :ref:`methods_retract_1`,
    :ref:`directives_dynamic_0`,
-   :ref:`directives_dynamic_1`
+   :ref:`directives_dynamic_1`,
    :ref:`directives_uses_2`,
    :ref:`directives_use_module_2`

@@ -27,6 +27,10 @@ Predicate (and non-terminal) aliases are specified using (preferably)
 the notation ``Name/Arity as Alias/Arity`` or, in alternative, the
 notation ``Name/Arity::Alias/Arity``.
 
+It is also possible to declare predicate and grammar rule non-terminal
+aliases in implicit qualification directives for sending messages
+to objects and calling module predicates.
+
 Template and modes
 ------------------
 
@@ -44,3 +48,8 @@ Examples
    :- alias(set,  [member/2 as set_member/2]).
 
    :- alias(words, [singular//0 as peculiar//0]).
+
+.. seealso::
+
+   :ref:`directives_uses_2`,
+   :ref:`directives_use_module_2`

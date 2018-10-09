@@ -49,5 +49,6 @@ Prove ``Object::Message`` asynchronously in a new thread:
    :ref:`predicates_threaded_call_1_2`,
    :ref:`predicates_threaded_exit_1_2`,
    :ref:`predicates_threaded_once_1_2`,
-   :ref:`predicates_threaded_peek_1_2`
-   :ref:`predicates_threaded_1`
+   :ref:`predicates_threaded_peek_1_2`,
+   :ref:`predicates_threaded_1`,
+   :ref:`directives_synchronized_1`

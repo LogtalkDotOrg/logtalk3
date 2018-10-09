@@ -50,4 +50,5 @@ Examples
 .. seealso::
 
    :ref:`directives_protected_1`,
-   :ref:`directives_public_1`
+   :ref:`directives_public_1`,
+   :ref:`methods_predicate_property_2`

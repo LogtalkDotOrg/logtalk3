@@ -66,4 +66,5 @@ Examples
 
 .. seealso::
 
-   :ref:`directives_meta_non_terminal_1`
+   :ref:`directives_meta_non_terminal_1`,
+   :ref:`methods_predicate_property_2`

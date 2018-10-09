@@ -65,6 +65,6 @@ To retract a matching clause of a public dynamic predicate in an explicit object
    :ref:`methods_clause_2`,
    :ref:`methods_retractall_1`,
    :ref:`directives_dynamic_0`,
-   :ref:`directives_dynamic_1`
+   :ref:`directives_dynamic_1`,
    :ref:`directives_uses_2`,
    :ref:`directives_use_module_2`

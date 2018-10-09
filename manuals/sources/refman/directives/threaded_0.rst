@@ -30,3 +30,8 @@ Examples
 ::
 
    :- threaded.
+
+.. seealso::
+
+   :ref:`directives_synchronized_1`
+   :ref:`predicates_object_property_2`

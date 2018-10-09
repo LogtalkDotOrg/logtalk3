@@ -46,6 +46,6 @@ Examples
    :ref:`methods_existence_error_2`,
    :ref:`methods_permission_error_3`,
    :ref:`methods_representation_error_1`
-   :ref:`methods_instantiation_error_0`,
+   :ref:`methods_evaluation_error_1`,
    :ref:`methods_resource_error_1`,
    :ref:`methods_syntax_error_1`,

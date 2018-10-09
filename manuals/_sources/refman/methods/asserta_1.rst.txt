@@ -71,6 +71,6 @@ To assert a clause as the first one for any public dynamic predicate in an expli
    :ref:`methods_retract_1`,
    :ref:`methods_retractall_1`
    :ref:`directives_dynamic_0`,
-   :ref:`directives_dynamic_1`
+   :ref:`directives_dynamic_1`,
    :ref:`directives_uses_2`,
    :ref:`directives_use_module_2`

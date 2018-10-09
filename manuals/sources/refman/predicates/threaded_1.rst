@@ -67,7 +67,6 @@ Prove a disjunction of goals, each one in its own thread:
 .. seealso::
 
    :ref:`predicates_threaded_call_1_2`,
-   :ref:`predicates_threaded_exit_1_2`,
-   :ref:`predicates_threaded_ignore_1`,
    :ref:`predicates_threaded_once_1_2`,
-   :ref:`predicates_threaded_peek_1_2`
+   :ref:`predicates_threaded_ignore_1`,
+   :ref:`directives_synchronized_1`

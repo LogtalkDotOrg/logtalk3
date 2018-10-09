@@ -54,3 +54,7 @@ Examples
    :- synchronized((write_stream/2, read_stream/2)).
 
    :- synchronized([add_to_queue/2, remove_from_queue/2]).
+
+.. seealso::
+
+   :ref:`methods_predicate_property_2`

@@ -58,4 +58,5 @@ Examples
 
 .. seealso::
 
-   :ref:`methods_coinductive_success_hook_1_2`
+   :ref:`methods_coinductive_success_hook_1_2`,
+   :ref:`methods_predicate_property_2`

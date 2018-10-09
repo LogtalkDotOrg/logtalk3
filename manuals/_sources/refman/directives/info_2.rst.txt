@@ -44,4 +44,5 @@ Examples
 .. seealso::
 
    :ref:`directives_info_1`,
-   :ref:`directives_mode_2`
+   :ref:`directives_mode_2`,
+   :ref:`methods_predicate_property_2`

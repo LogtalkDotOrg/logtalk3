@@ -53,4 +53,5 @@ Examples
 .. seealso::
 
    :ref:`directives_private_1`,
-   :ref:`directives_public_1`
+   :ref:`directives_public_1`,
+   :ref:`methods_predicate_property_2`

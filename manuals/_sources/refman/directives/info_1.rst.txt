@@ -38,4 +38,7 @@ Examples
 
 .. seealso::
 
-   :ref:`directives_info_2`
+   :ref:`directives_info_2`,
+   :ref:`predicates_object_property_2`,
+   :ref:`predicates_protocol_property_2`,
+   :ref:`predicates_category_property_2`

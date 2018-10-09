@@ -71,4 +71,5 @@ Examples
 
 .. seealso::
 
-   :ref:`directives_dynamic_0`
+   :ref:`directives_dynamic_0`,
+   :ref:`methods_predicate_property_2`

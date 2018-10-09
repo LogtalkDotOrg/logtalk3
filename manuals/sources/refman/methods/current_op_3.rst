@@ -50,5 +50,5 @@ To enumerate, by backtracking, the public operators visible for an explicit obje
 .. seealso::
 
    :ref:`methods_current_predicate_1`,
-   :ref:`methods_predicate_property_2`
+   :ref:`methods_predicate_property_2`,
    :ref:`directives_op_3`

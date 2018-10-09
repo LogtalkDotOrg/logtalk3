@@ -65,6 +65,6 @@ To retrieve a matching clause of a public dynamic predicate in an explicit objec
    :ref:`methods_retract_1`,
    :ref:`methods_retractall_1`
    :ref:`directives_dynamic_0`,
-   :ref:`directives_dynamic_1`
+   :ref:`directives_dynamic_1`,
    :ref:`directives_uses_2`,
    :ref:`directives_use_module_2`

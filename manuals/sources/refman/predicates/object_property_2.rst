@@ -47,4 +47,5 @@ Examples
    :ref:`predicates_current_object_1`,
    :ref:`predicates_extends_object_2_3`,
    :ref:`predicates_instantiates_class_2_3`,
-   :ref:`predicates_specializes_class_2_3`
+   :ref:`predicates_specializes_class_2_3`,
+   :ref:`predicates_complements_object_2`

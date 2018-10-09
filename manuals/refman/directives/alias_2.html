@@ -218,6 +218,9 @@ directive may be used in objects, protocols, and categories.</p>
 <p>Predicate (and non-terminal) aliases are specified using (preferably)
 the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the
 notation <code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>.</p>
+<p>It is also possible to declare predicate and grammar rule non-terminal
+aliases in implicit qualification directives for sending messages
+to objects and calling module predicates.</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
@@ -233,6 +236,11 @@ alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(no
 
 <span class="p">:- </span><span class="k">alias</span>(words, [singular<span class="o">//</span><span class="m">0</span> <span class="o">as</span> peculiar<span class="o">//</span><span class="m">0</span>]).
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>,
+<a class="reference internal" href="use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a></p>
 </div>
 </div>
 </div>
