@@ -17,14 +17,14 @@
 :- object(xml).
 
 	:- info([
-		version is 3.5,
+		version is 3.6,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2014/11/03,
+		date is 2018/10/09,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
 		remarks is [
-			'On-line documentation' - 'http://www.binding-time.co.uk/xmlpl.html',
+			'On-line documentation' - 'https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog',
 			'Compliance' - 'This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.',
 			'Compliance-strictness' - 'It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.',
 			'Compliance-comprehensive' - 'It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.',

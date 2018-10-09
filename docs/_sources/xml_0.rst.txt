@@ -9,8 +9,8 @@
 Bi-directional XML parser.
 
 * author: John Fletcher; adapted to Logtalk by Paulo Moura.
-* version: 3.5
-* date: 2014/11/3
+* version: 3.6
+* date: 2018/10/9
 * copyright: Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher
 * license: This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.
 * compilation flags: ``static, context_switching_calls``
@@ -329,7 +329,7 @@ Operators
 Remarks
 -------
 
-* **On-line documentation**: http://www.binding-time.co.uk/xmlpl.html
+* **On-line documentation**: https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog
 
 * **Compliance**: This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.
 

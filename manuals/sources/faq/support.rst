@@ -11,5 +11,5 @@ Support
 Are there professional consulting, training and supporting services?
 --------------------------------------------------------------------
 
-Yes. Please visit `logtalk.pt <http://logtalk.pt>`__ for professional
+Yes. Please visit `logtalk.pt <https://logtalk.pt>`__ for professional
 consulting, developing, training, and other supporting services.

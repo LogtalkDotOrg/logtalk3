@@ -20,7 +20,7 @@ ________________________________________________________________________
 This folder contains a Logtalk version of John Fletcher's Prolog XML 
 parser:
 
-	http://www.binding-time.co.uk/xmlpl.html
+	https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog
 
 To load this XML parser and for sample queries, please see the `SCRIPT.txt` 
 file.

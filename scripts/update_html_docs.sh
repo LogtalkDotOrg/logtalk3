@@ -138,6 +138,7 @@ lgt2rst -t "Logtalk APIs"
 mv _conf.py conf.py
 make clean
 make html
+make linkcheck
 cp -R _build/html/* ../
 make clean
 mv conf.py _conf.py
