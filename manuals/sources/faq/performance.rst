@@ -56,7 +56,7 @@ Which Prolog-dependent factors are most crucial for good Logtalk performance?
 
 Logtalk compiles objects assuming first-argument indexing for static
 code. First-argument indexing of dynamic code, when available, helps
-improving performance due to the automatic caching of method lookups
+to improve performance due to the automatic caching of method lookups
 and the necessary use of book-keeping tables by the runtime engine
 (this is specially important when using event-driven programming).
 Dynamic objects and static objects containing dynamic predicates also
@@ -66,8 +66,8 @@ predicates, also benefits dynamic binding performance.
 
 .. _performance_prolog:
 
-How does Logtalk performance compares with plain Prolog and with Prolog modules?
---------------------------------------------------------------------------------
+How does Logtalk performance compare with plain Prolog and with Prolog modules?
+-------------------------------------------------------------------------------
 
 Plain Prolog, Prolog modules, and Logtalk objects provide different
 trade-offs between performance and features. In general, for a given

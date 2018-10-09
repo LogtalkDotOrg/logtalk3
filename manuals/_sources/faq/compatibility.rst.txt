@@ -35,7 +35,7 @@ Can I use Logtalk objects and Prolog modules at the same time?
 --------------------------------------------------------------
 
 Yes. In order to call a module predicate from within an object (or category)
-you may use a :ref:`directives_use_module_2` directive or use explicit
+you may use an :ref:`directives_use_module_2` directive or use explicit
 module qualification (possibly wrapping the call using the Logtalk
 control construct :ref:`control_external_call_1` that allows bypassing of
 the Logtalk compiler when compiling a predicate call). Logtalk also allows

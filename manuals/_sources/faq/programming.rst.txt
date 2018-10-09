@@ -54,7 +54,7 @@ What support is provided in Logtalk for defining and using components?
 ----------------------------------------------------------------------
 
 Logtalk supports component-based programming (since its inception on
-January, 1998), by using *categories* (which are first-class entities
+January 1998), by using *categories* (which are first-class entities
 like objects and protocols). Logtalk categories can be used with both
 classes and prototypes and are inspired on the Smalltalk-80
 (documentation-only) concept of method categories and on Objective-C

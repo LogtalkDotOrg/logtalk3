@@ -125,7 +125,7 @@ Separation between interface and implementation
 
    This is an expected (should we say standard ?) feature of almost any
    modern programming language. Logtalk provides support for separating
-   interface from implementation in a flexible way: protocol directives
+   interface from implementation in a flexible way: predicate directives
    can be contained in an object, a category or a protocol (first-order
    entities in Logtalk) or can be spread in both objects, categories and
    protocols.
@@ -191,13 +191,13 @@ Smooth learning curve
 
 .. _features_compatibility:
 
-Compatibility with most Prologs and the ISO standard
-----------------------------------------------------
+Compatibility with most Prolog systems and the ISO standard
+-----------------------------------------------------------
 
    The Logtalk system has been designed to be compatible with most
    Prolog compilers and, in particular, with the ISO Prolog standard
-   [ISO95]_. It runs in almost any
-   computer system with a modern Prolog compiler.
+   [ISO95]_. It runs in almost any computer system with a modern Prolog
+   compiler.
 
 .. _features_performance:
 

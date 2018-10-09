@@ -104,7 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code">What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding">How about message-sending performance? Does Logtalk use static binding or dynamic binding?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance">Which Prolog-dependent factors are most crucial for good Logtalk performance?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#how-does-logtalk-performance-compares-with-plain-prolog-and-with-prolog-modules">How does Logtalk performance compares with plain Prolog and with Prolog modules?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules">How does Logtalk performance compare with plain Prolog and with Prolog modules?</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="licensing.html">Licensing</a></li>
@@ -189,7 +189,7 @@
 <li><a class="reference internal" href="#performance-meta-interpreter"><span class="std std-ref">Is Logtalk implemented as a meta-interpreter?</span></a></li>
 <li><a class="reference internal" href="#performance-code-generated"><span class="std std-ref">What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?</span></a></li>
 <li><a class="reference internal" href="#performance-binding"><span class="std std-ref">How about message-sending performance? Does Logtalk use static binding or dynamic binding?</span></a></li>
-<li><a class="reference internal" href="#performance-prolog"><span class="std std-ref">How does Logtalk performance compares with plain Prolog and with Prolog modules?</span></a></li>
+<li><a class="reference internal" href="#performance-prolog"><span class="std std-ref">How does Logtalk performance compare with plain Prolog and with Prolog modules?</span></a></li>
 </ul>
 <div class="section" id="is-logtalk-implemented-as-a-meta-interpreter">
 <span id="performance-meta-interpreter"></span><h2>Is Logtalk implemented as a meta-interpreter?<a class="headerlink" href="#is-logtalk-implemented-as-a-meta-interpreter" title="Permalink to this headline">¶</a></h2>
@@ -228,7 +228,7 @@ for more details.</p>
 <h2>Which Prolog-dependent factors are most crucial for good Logtalk performance?<a class="headerlink" href="#which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk compiles objects assuming first-argument indexing for static
 code. First-argument indexing of dynamic code, when available, helps
-improving performance due to the automatic caching of method lookups
+to improve performance due to the automatic caching of method lookups
 and the necessary use of book-keeping tables by the runtime engine
 (this is specially important when using event-driven programming).
 Dynamic objects and static objects containing dynamic predicates also
@@ -236,8 +236,8 @@ benefit from first-argument indexing of dynamic predicates. The
 availability of multi-argument indexing, notably for dynamic
 predicates, also benefits dynamic binding performance.</p>
 </div>
-<div class="section" id="how-does-logtalk-performance-compares-with-plain-prolog-and-with-prolog-modules">
-<span id="performance-prolog"></span><h2>How does Logtalk performance compares with plain Prolog and with Prolog modules?<a class="headerlink" href="#how-does-logtalk-performance-compares-with-plain-prolog-and-with-prolog-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules">
+<span id="performance-prolog"></span><h2>How does Logtalk performance compare with plain Prolog and with Prolog modules?<a class="headerlink" href="#how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules" title="Permalink to this headline">¶</a></h2>
 <p>Plain Prolog, Prolog modules, and Logtalk objects provide different
 trade-offs between performance and features. In general, for a given
 predicate definition, the best performance will be attained using
@@ -272,7 +272,7 @@ popular Prolog compilers.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Paulo Moura
-      Last updated on Oct 09, 2018.
+      Last updated on Oct 10, 2018.
 
     </p>
   </div>

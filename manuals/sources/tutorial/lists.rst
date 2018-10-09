@@ -137,12 +137,12 @@ protocol:
 
    :- end_protocol.
 
-Similar to what we have done for objects, we use the directives
-:ref:`directives_protocol_1_2` and
-:ref:`directives_end_protocol_0` to
-encapsulate the predicate directives. We can improve this protocol by
-documenting the call/return modes and the number_of_proofs of each
-predicate using the :ref:`directives_mode_2` directive:
+Similar to what we have done for objects, we use the 
+:ref:`directives_protocol_1_2` and :ref:`directives_end_protocol_0`
+directives to encapsulate the predicate directives. We can improve
+this protocol by documenting the call/return modes and the
+number of proofs of each predicate using the :ref:`directives_mode_2`
+directive:
 
 ::
 

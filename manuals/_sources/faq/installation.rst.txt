@@ -16,7 +16,7 @@ The integration scripts/shortcuts are not working!
 Check that the ``LOGTALKHOME`` and ``LOGTALKUSER`` environment
 variables are defined, that the Logtalk user folder is available on
 the location pointed by ``LOGTALKUSER`` (you can create this folder
-by running the shell script ``cplgtdirs``), and that the Prolog
+by running the ``logtalk_user_setup`` shell script), and that the Prolog
 compilers that you want to use are supported and available from the
 system path. If the problem persists, run the shell script that
 creates the integration script or shortcut manually and check for any

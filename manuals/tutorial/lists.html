@@ -291,12 +291,12 @@ protocol:</p>
 <span class="p">:- </span><span class="k">end_protocol.</span>
 </pre></div>
 </div>
-<p>Similar to what we have done for objects, we use the directives
-<a class="reference internal" href="../refman/directives/protocol_1_2.html#directives-protocol-1-2"><span class="std std-ref">protocol/1-2</span></a> and
-<a class="reference internal" href="../refman/directives/end_protocol_0.html#directives-end-protocol-0"><span class="std std-ref">end_protocol/0</span></a> to
-encapsulate the predicate directives. We can improve this protocol by
-documenting the call/return modes and the number_of_proofs of each
-predicate using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> directive:</p>
+<p>Similar to what we have done for objects, we use the
+<a class="reference internal" href="../refman/directives/protocol_1_2.html#directives-protocol-1-2"><span class="std std-ref">protocol/1-2</span></a> and <a class="reference internal" href="../refman/directives/end_protocol_0.html#directives-end-protocol-0"><span class="std std-ref">end_protocol/0</span></a>
+directives to encapsulate the predicate directives. We can improve
+this protocol by documenting the call/return modes and the
+number of proofs of each predicate using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>
+directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(listp).
 
 <span class="p">    :- </span><span class="k">public</span>(append<span class="o">/</span><span class="m">3</span>).
@@ -372,7 +372,7 @@ avoid needless repetition of predicate directives.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Paulo Moura
-      Last updated on Oct 09, 2018.
+      Last updated on Oct 10, 2018.
 
     </p>
   </div>

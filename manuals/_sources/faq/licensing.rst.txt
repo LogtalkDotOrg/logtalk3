@@ -13,19 +13,19 @@ Licensing
 What's the Logtalk distribution license?
 ----------------------------------------
 
-Logtalk follows the `Apache Licence 2.0 <https://github.com/LogtalkDotOrg/logtalk3/blob/master/LICENSE.txt>`_.
+Logtalk follows the `Apache License 2.0 <https://github.com/LogtalkDotOrg/logtalk3/blob/master/LICENSE.txt>`_.
 
 .. _faq_licensing_commercial:
 
 Can Logtalk be used in commercial applications?
 -----------------------------------------------
 
-Yes, the Apache Licence 2.0 allows commercial use. See e.g. the
+Yes, the Apache License 2.0 allows commercial use. See e.g. the
 `Apache License and Distribution FAQ <http://www.apache.org/foundation/license-faq.html>`_.
 
 .. _faq_licensing_combining:
 
-What's the final licence for a combination of Logtalk with a Prolog compiler?
+What's the final license for a combination of Logtalk with a Prolog compiler?
 -----------------------------------------------------------------------------
 
 See the wiki page on `licensing <https://github.com/LogtalkDotOrg/logtalk3/wiki/Licensing>`_
