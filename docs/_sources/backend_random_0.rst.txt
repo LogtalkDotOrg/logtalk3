@@ -44,10 +44,7 @@ Remarks
 
 * **Portability**: B-Prolog, CxProlog, ECLiPSe, JIProlog, Lean Prolog, Qu-Prolog, Quintus Prolog do not provide implementations for the get_seed/1 and set_seed/1 predicates and calling these predicates simply succeed without performing any action.
 
-See also
---------
+.. seealso::
 
-* :ref:`random <random/0>`
-* :ref:`fast_random <fast_random/0>`
-
+   :ref:`random <random/0>`, :ref:`fast_random <fast_random/0>`
 

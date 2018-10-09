@@ -204,10 +204,7 @@ Remarks
 
 * **Meta-types**: Meta-types are types that have one or more sub-types. E.g. var_or(Type). The sub-types of a meta-type can be enumerated by defining a clause for the meta_type/3 multifile predicate.
 
-See also
---------
+.. seealso::
 
-* :ref:`arbitrary <arbitrary/0>`
-* :ref:`os_types <os_types/0>`
-
+   :ref:`arbitrary <arbitrary/0>`, :ref:`os_types <os_types/0>`
 

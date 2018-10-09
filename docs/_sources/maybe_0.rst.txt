@@ -65,12 +65,7 @@ Remarks
 
 * **QuickCheck support**: Defines clauses for the arbitrary::arbitrary/1-2 predicates to allow generating random values for the maybe(Type) type.
 
-See also
---------
+.. seealso::
 
-* :ref:`optional <optional/0>`
-* :ref:`optional(Reference) <optional/1>`
-* :ref:`type <type/0>`
-* :ref:`arbitrary <arbitrary/0>`
-
+   :ref:`optional <optional/0>`, :ref:`optional(Reference) <optional/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
 

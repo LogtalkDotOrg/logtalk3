@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on October 7, 2018
+%  Last updated on October 9, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -386,24 +386,18 @@
 
 
 <xsl:template match="logtalk_entity/see_also">
-	<xsl:text>See also</xsl:text>
-	<xsl:value-of select="$nl" />
-	<xsl:text>--------</xsl:text>
-	<xsl:value-of select="$nl2" />
-	<xsl:choose>
-		<xsl:when test="reference">
-			<xsl:apply-templates select="reference" />
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:text>(none)</xsl:text>
-		</xsl:otherwise>
-	</xsl:choose>
-	<xsl:value-of select="$nl2" />
-</xsl:template>
-
-<xsl:template match="logtalk_entity/see_also/reference">
-	<xsl:text>* :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
-	<xsl:value-of select="$nl" />
+	<xsl:if test="reference">
+		<xsl:text>.. seealso::</xsl:text>
+		<xsl:value-of select="$nl2" />
+		<xsl:text>   </xsl:text>
+		<xsl:for-each select="reference">
+			<xsl:text>:ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+			<xsl:if test="position() != last()">
+				<xsl:text>, </xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+		<xsl:value-of select="$nl2" />
+	</xsl:if>
 </xsl:template>
 
 

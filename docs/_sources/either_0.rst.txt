@@ -105,12 +105,7 @@ Remarks
 
 * **QuickCheck support**: Defines clauses for the type::arbitrary/1-2 predicates to allow generating random values for the either(ExpectedType, UnexpectedType) type.
 
-See also
---------
+.. seealso::
 
-* :ref:`expected <expected/0>`
-* :ref:`expected(Reference) <expected/1>`
-* :ref:`type <type/0>`
-* :ref:`arbitrary <arbitrary/0>`
-
+   :ref:`expected <expected/0>`, :ref:`expected(Reference) <expected/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
 

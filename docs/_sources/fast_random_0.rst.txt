@@ -96,10 +96,7 @@ Remarks
 
 * **Single random number generator**: This object provides a faster version of the "random" library object but does not support being extended to define multiple random number generators.
 
-See also
---------
+.. seealso::
 
-* :ref:`random <random/0>`
-* :ref:`backend_random <backend_random/0>`
-
+   :ref:`random <random/0>`, :ref:`backend_random <backend_random/0>`
 
