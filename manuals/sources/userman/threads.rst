@@ -75,7 +75,7 @@ When the ``threaded/1`` predicate argument is a *conjunction* of goals,
 the predicate call is akin to *and-parallelism*. For example, assume
 that we want to find all the prime numbers in a given interval,
 ``[N, M]``. We can split the interval in two parts and then span two
-threads to compute the primes numbers in each sub-interval:
+threads to compute the prime numbers in each sub-interval:
 
 ::
 
@@ -264,12 +264,12 @@ Asynchronous calls and synchronized predicates
 ----------------------------------------------
 
 Proving a goal asynchronously using a new thread may lead to problems
-when the goal results in side-effects such as input/output operations or
+when the goal results in side effects such as input/output operations or
 modifications to an object database. For example, if a new thread is
 started with the same goal before the first one finished its job, we may
 end up with mixed output, a corrupted database, or unexpected goal
 failures. In order to solve this problem, predicates (and grammar rule
-non-terminals) with side-effects can be declared as *synchronized* by
+non-terminals) with side effects can be declared as *synchronized* by
 using the :ref:`directives_synchronized_1`
 predicate directive. Proving a query to a synchronized predicate (or
 synchronized non-terminal) is internally protected by a mutex, thus
@@ -332,7 +332,7 @@ performing the update.
 Synchronized predicates may be used as wrappers to messages sent to
 objects that are not multi-threading aware. For example, assume a
 ``random`` object defining a ``random/1`` predicate that generates
-random numbers, using side-effects on its implementation (e.g. for
+random numbers, using side effects on its implementation (e.g. for
 storing the generator seed). We can specify and define e.g. a
 ``sync_random/1`` predicate as follows:
 
@@ -405,7 +405,7 @@ which should be treated as an opaque term.
 
 Engines are scoped by the object within which the
 ``threaded_engine_create/3`` call takes place. Thus, different objects
-can create engines with the same names with no conflicts. Morevover,
+can create engines with the same names with no conflicts. Moreover,
 engines share the visible predicates of the object creating them.
 
 The engine computes the first solution of its goal argument and suspends
@@ -421,7 +421,7 @@ using the :ref:`predicates_threaded_engine_next_2` built-in predicate:
 The call blocks until a solution is available and fails if there are no
 solutions left. After returning a solution, this predicate signals the
 engine to start computing the next one. Note that this predicate is
-deterministic. In constrast with the ``threaded_exit/1-2`` built-in
+deterministic. In contrast with the ``threaded_exit/1-2`` built-in
 predicates, retrieving the next solution requires calling the predicate
 again instead of by backtracking into its call.
 

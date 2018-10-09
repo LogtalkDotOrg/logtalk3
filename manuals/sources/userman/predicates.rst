@@ -117,8 +117,8 @@ found in use in some Prolog systems.
    Argument must be unbound.
 
 These four mode atoms are also declared as prefix operators by the
-Logtalk compiler. This makes it possible to include type information for
-each argument like in the example above. Some of the possible type
+Logtalk compiler. This makes it possible to include type information
+for each argument like in the example above. Some possible type
 values are: ``event``, ``object``, ``category``, ``protocol``,
 ``callable``, ``term``, ``nonvar``, ``var``, ``atomic``, ``atom``,
 ``number``, ``integer``, ``float``, ``compound``, and ``list``. The
@@ -166,7 +166,7 @@ mode directives. For example, to document the possible use modes of the
 Some old Prolog compilers supported some sort of mode directives to
 improve performance. To the best of my knowledge, there is no modern
 Prolog compiler supporting this kind of directive. The current version
-of the Logtalk compiler just parses and than discards this directive
+of the Logtalk compiler just parses and then discards this directive
 (however, see the description on :ref:`synchronized
 predicates <threads_synchronized_predicates>` in the
 :ref:`multi-threading programming <threads_threads>` section). Nevertheless,
@@ -249,7 +249,7 @@ In that case, we must declare the predicate discontiguous by using the
 This is a directive that we should avoid using: it makes your code
 harder to read and it is not supported by some Prolog compilers.
 
-As each Logtalk entity is compiled independently from other entities,
+As each Logtalk entity is compiled independently of other entities,
 this directive must be included in every object or category that
 contains a definition for the described predicate (even if the predicate
 declaration is inherited from other entity).
@@ -277,7 +277,7 @@ compiled static. In the case of dynamic objects, static predicates
 cannot be redefined using the database built-in methods (despite being
 internally compiled to dynamic code).
 
-Dynamic predicates can be used to represent persistant mutable object
+Dynamic predicates can be used to represent persistent mutable object
 state. Note that static objects may declare and define dynamic
 predicates.
 
@@ -856,7 +856,7 @@ specification of the lambda expression syntax can be found in the
 
 The compiler checks whenever possible that all variables in a lambda
 expression are either classified as free variables or as lambda
-parameters. The use of non-classified variables in a lambda expression
+parameters. Non-classified variables in a lambda expression
 should be regarded as a programming error. Unfortunately, the dynamic
 features of the language and lack of sufficient information at compile
 time may prevent the compiler of checking all uses of lambda
@@ -937,7 +937,7 @@ scope directive refers to a grammar rule non-terminal, not to a
 predicate. The idea is that the predicate corresponding to the
 translation of the ``expr//1`` non-terminal will have a number of
 arguments equal to one plus the number of additional arguments necessary
-for processing the subjacent lists of tokens.
+for processing the implicit difference list of tokens.
 
 In the body of a grammar rule, we can call rules that are inherited from
 ancestor objects, imported from categories, or contained in other
@@ -1238,7 +1238,7 @@ corresponding message.
 
 When working with dynamic grammar rule non-terminals, you may use the
 built-in method :ref:`methods_expand_term_2` convert a
-grammar rule into a clause that can than be used with the database
+grammar rule into a clause that can then be used with the database
 methods.
 
 .. _predicates_metacalls:
@@ -1270,7 +1270,7 @@ Reflection methods
 ~~~~~~~~~~~~~~~~~~
 
 Logtalk provides a comprehensive set of built-in predicates and built-in
-methods for querying about entities and predicates. Some of information,
+methods for querying about entities and predicates. Some of the information,
 however, requires that the source files are compiled with the
 ``source_data`` flag turned on.
 
@@ -1280,7 +1280,7 @@ box view*. In the transparent box view, we look into an entity
 disregarding how it will be used and returning all information available
 on it, including predicate declarations and predicate definitions. This
 view is supported by the entity property built-in predicates. In the
-black box view, we look into an entity from an usage point-of-view using
+black box view, we look into an entity from a usage point-of-view using
 built-in methods for inspecting object operators and predicates that are
 within scope from where we are making the call:
 :ref:`methods_current_op_3`, which returns operator specifications,
@@ -1313,19 +1313,19 @@ the arguments.
 Term and goal expansion methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk supports a :ref:`methods_expand_term_2` built-in
+Logtalk supports an :ref:`methods_expand_term_2` built-in
 method for expanding a term into another term or a list of terms. This
 method is mainly used to translate grammar rules into Prolog clauses. It
 can be customized, e.g. for bypassing the default Logtalk grammar rule
 translator, by defining clauses for the :ref:`methods_term_expansion_2` hook
-predicate. Logtalk also supports a :ref:`methods_expand_goal_2` built-in
+predicate. Logtalk also supports an :ref:`methods_expand_goal_2` built-in
 method for expanding a goal. This method can also be customized by
 defining clauses for the :ref:`methods_goal_expansion_2` hook
 predicate.
 
 Term and goal expansion may be performed either by calling the
 ``expand_term/2`` and ``expand_goal/2`` built-in methods explicitly or
-by using *hook objects*. An hook object is simply an object defining
+by using *hook objects*. A hook object is simply an object defining
 clauses for the term- and goal-expansion hook predicates. To compile a
 source file using a hook object for expanding its terms and goals, you
 can use the :ref:`hook/1 <programming_flags>` compiler
@@ -1341,7 +1341,7 @@ expansion predicate definitions if defined in the adapter file.
 Sometimes we have multiple hook objects that we need to use in the
 compilation of a source file. The Logtalk library includes support for
 two basic expansion workflows: a pipeline of hook objects, where the
-expansion results from an hook object are feed to the next hook object
+expansion results from a hook object are feed to the next hook object
 in the pipeline, and a set of hook objects, where expansions are tried
 until one of is found that succeeds. These workflows are implemented as
 parametric objects allowing combining them to implement more
@@ -1423,7 +1423,7 @@ groups. The following kinds of message are recognized by default:
    messages printed in reply for the user asking for help (mostly for
    helping port existing Prolog code)
 ``information`` and ``information(Group)``
-   messages printed usually in reply to a user request for information
+   messages usually printed in reply to a user request for information
 ``silent`` and ``silent(Group)``
    not printed by default (but can be intercepted using the
    ``message_hook/4`` predicate)
@@ -1523,7 +1523,7 @@ questions and automatically providing answers to specific questions.
 
 The question asking mechanism works in tandem with the message printing
 mechanism, using it to print the question text and a prompt. It provides
-a asking predicate and a hook predicate, both declared and defined in
+an asking predicate and a hook predicate, both declared and defined in
 the ``logtalk`` built-in object. The asking predicate,
 :ref:`ask_question(Kind, Component, Question, Check, Answer) <methods_ask_question_5>`,
 is used for ask a question and read the answer. The hook predicate,
@@ -1543,7 +1543,7 @@ There is also a user-defined multifile predicate for setting default
 prompt and input streams,
 ``question_prompt_stream(Kind, Component, Prompt, Stream)`` :ref:`methods_question_prompt_stream_4`.
 
-An usage example of this mechanism can be found in the ``debugger`` tool
+A usage example of this mechanism can be found in the ``debugger`` tool
 where it's used to abstract the user interaction when tracing a goal
 execution in debug mode.
 

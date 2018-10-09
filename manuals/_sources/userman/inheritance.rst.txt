@@ -233,7 +233,7 @@ local and inherited definitions.
 Selective inheritance
 ^^^^^^^^^^^^^^^^^^^^^
 
-Hiding some of the inherited definitions, or differential inheritance:
+Hiding of some of the inherited definitions, or differential inheritance:
 this form of inheritance is normally used in the representation of
 exceptions to generic definitions. Here we will need to use the
 :ref:`control_call_super_1` operator to test and
@@ -338,8 +338,8 @@ Composition versus multiple inheritance
 
 It is not possible to discuss inheritance mechanisms without referring
 to the long and probably endless debate on single versus multiple
-inheritance. The single inheritance mechanism can be implemented in an
-very efficient way, but it imposes several limitations on reusing, even
+inheritance. The single inheritance mechanism can be implemented
+efficiently but it imposes several limitations on reusing, even
 if the multiple characteristics we intend to inherit are orthogonal. On
 the other hand, the multiple inheritance mechanisms are attractive in
 their apparent capability of modeling complex situations. However, they
@@ -357,8 +357,8 @@ inheritance carries some complex problems in the domain of software
 engineering, particularly in the reuse and maintenance of the
 applications. All these problems are substantially reduced if we
 preferably use in our software development composition mechanisms
-instead of specialization mechanisms [Taenzer89]_. Multiple inheritance can and
-should be seen more as a useful analysis and project abstraction, than
+instead of specialization mechanisms [Taenzer89]_. Multiple inheritance is
+best used as an analysis and project abstraction, rather than
 as an implementation technique [Shan_et_al_93]_. Logtalk provides first-class
 support for software composition using :ref:`categories_categories`.
 

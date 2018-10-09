@@ -357,28 +357,27 @@ for any application.
 The built-in protocol *expanding*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk defines a built-in protocol named ``expanding`` that contains
-declarations for the ``term_expansion/2`` and ``goal_expansion/2``
-predicates. See the description of the :ref:`hook/1 <programming_flags>`
-compiler flag for more details.
+Logtalk defines a built-in protocol named ``expanding`` that declares
+the ``term_expansion/2`` and ``goal_expansion/2`` predicates. See the
+description of the :ref:`hook/1 <programming_flags>` compiler flag for
+more details.
 
 .. _protocols_monitoring:
 
 The built-in protocol *monitoring*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk defines a built-in protocol named ``monitoring`` that contains
-declarations for the :ref:`methods_before_3` and :ref:`methods_after_3`
-public event handler predicates. See the :ref:`events_events` section
-for more details.
+Logtalk defines a built-in protocol named ``monitoring`` declares the
+:ref:`methods_before_3` and :ref:`methods_after_3` public event handler
+predicates. See the :ref:`events_events` section for more details.
 
 .. _protocols_forwarding:
 
 The built-in protocol *forwarding*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Logtalk defines a built-in protocol named ``forwarding`` that contains a
-declaration for the :ref:`methods_forward_1` user-defined message forwarding
+Logtalk defines a built-in protocol named ``forwarding`` that declares the
+:ref:`methods_forward_1` user-defined message forwarding
 handler, which is automatically called (if defined) by the runtime for
 any message that the receiving object does not understand. See also the
 :ref:`control_delegate_message_1` control construct.

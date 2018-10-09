@@ -46,7 +46,7 @@ Computer and operating system
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Logtalk is compatible with almost any computer/operating-system with a
-modern, standars compliant, Prolog compiler available.
+modern, standards compliant, Prolog compiler available.
 
 .. _installing_compiler:
 
@@ -144,7 +144,7 @@ current Logtalk version
 
 ``settings-sample.lgt`` – sample file for user-defined Logtalk settings
 
-``tester-sample.lgt`` – sample file for helping automating running user
+``tester-sample.lgt`` – sample file for helping to automate running user
 application unit tests
 
 ``adapters``
@@ -231,16 +231,16 @@ Adapter files
 Adapter files provide the glue code between the Logtalk compiler/runtime
 and a Prolog compiler. Each adapter file contains two sets of
 predicates: ISO Prolog standard predicates and directives not built-in
-in the target Prolog compiler and Logtalk-specific predicates.
+in the target Prolog compiler and Logtalk specific predicates.
 
 Logtalk already includes ready to use adapter files for most academic
-and commercial Prolog compilers. If a adapter file is not available for
+and commercial Prolog compilers. If an adapter file is not available for
 the compiler that you intend to use, then you need to build a new one,
 starting from the included ``template.pl`` file. Start by making a copy
 of the template file. Carefully check (or complete if needed) each
 listed definition. If your Prolog compiler conforms to the ISO standard,
 this task should only take you a few minutes. In most cases, you can
-borrow code from some of the predefined adapter files. If you are unsure
+borrow code from the predefined adapter files. If you are unsure
 that your Prolog compiler provides all the ISO predicates needed by
 Logtalk, try to run the system by setting the unknown predicate error
 handler to report as an error any call to a missing predicate. Better
@@ -345,7 +345,7 @@ a ``settings.lgt`` file from the startup directory (assuming that the
 read-only ``settings`` flag is set to ``allow``). If not found, Logtalk
 tries to load a ``settings.lgt`` file from the Logtalk user folder. If
 still not found, Logtalk tries to load a ``settings.lgt`` file from the
-user home folder. If no settings files are found, Logtalk will use the
+user home folder. When no settings files are found, Logtalk will use the
 default compiler flag values set on the back-end Prolog compiler adapter
 files. When limitations of the back-end Prolog compiler or on the
 operating-system prevent Logtalk from finding the settings files, these

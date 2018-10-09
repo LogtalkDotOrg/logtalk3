@@ -206,7 +206,7 @@ encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
 necessary. Logtalk supports the compilation of source files containing
 both plain Prolog and Prolog modules. This guide provides tips for
-helping integrating and migrating plain Prolog code and Prolog module
+integrating and migrating plain Prolog code and Prolog module
 code to Logtalk. Step-by-step instructions are provided for
 encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
@@ -345,10 +345,10 @@ sending operator, assuming that the referenced modules are also being
 converted into objects. Calls in the pseudo-module <code class="docutils literal notranslate"><span class="pre">user</span></code> can
 simply be encapsulated using the
 <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> Logtalk
-external call control construct. You can also use instead a
+external call control construct. You can also use instead an
 <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive where the
 first argument would be the atom <code class="docutils literal notranslate"><span class="pre">user</span></code> and the second argument a
-list of all external predicates. This alternative have the advantage
+list of all external predicates. This alternative has the advantage
 of not requiring changes to the code making the predicate calls.</li>
 <li>If your module uses the database built-in predicates to implement
 module local mutable state using dynamic predicates, add both
@@ -417,14 +417,14 @@ non-terminal indicators, and operator declarations.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">export/1</span></code></dt>
 <dd>Exported predicates are compiled as public object predicates. The
 argument must be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a grammar
-rule non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), a operator
+rule non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), an operator
 declaration, or a list of predicate indicators, grammar rule
 non-terminal indicators, and operator declarations.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">reexport/2</span></code></dt>
 <dd>Reexported predicates are compiled as public object predicates. The
 first argument is the module name. The second argument must be a
 predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a grammar rule non-terminal
-indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), a operator declaration, or a list of
+indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), an operator declaration, or a list of
 predicate indicators, grammar rule non-terminal indicators, and
 operator declarations.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></dt>
@@ -513,13 +513,13 @@ to set the <code class="docutils literal notranslate"><span class="pre">portabil
 more easily identify source files that are likely non-portable across
 Prolog compilers.</p>
 <p>A second example, where a proprietary Prolog directive is discarded
-after triggering a side-effect:</p>
+after triggering a side effect:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>), []) <span class="o">:-</span>
     load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>).
 </pre></div>
 </div>
 <p>In this case, although the directive is not copied to the generated
-Prolog file, the foreign library files are loaded as a side-effect of
+Prolog file, the foreign library files are loaded as a side effect of
 the Logtalk compiler calling the <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_term_expansion'/2</span></code> hook
 predicate.</p>
 </div>

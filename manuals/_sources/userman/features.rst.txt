@@ -6,21 +6,21 @@ Main features
 =============
 
 Several years ago, I decided that the best way to learn object-oriented
-programming was to build my own object-oriented language. Prolog always
-being my favorite language, I chose to extend it with object-oriented
+programming was to build my own object-oriented language. Prolog being
+always my favorite language, I chose to extend it with object-oriented
 capabilities. Strong motivation also come from my frustration with
 Prolog shortcomings for writing large applications. Eventually this work
-has lead to the Logtalk programing language as its know today. The first
-system to use the name Logtalk appeared in February of 1995. At that
+has led to the Logtalk programming language as its know today. The first
+system to use the name Logtalk appeared in February 1995. At that
 time, Logtalk was mainly an experiment in computational reflection with
 a rudimentary runtime and no compiler. Based on feedback by users and on
 the author subsequent work, the name was retained and Logtalk as created
 as a full programming language focusing on using object-oriented
 concepts for code encapsulation and reuse. Its first public alpha
-version was released in July of 1998 with the first stable release (2.0)
-following in February of 1999. Development of the third generation of
-Logtalk started in 2012 with the first public alpha version in August of
-2012 and the first stable release (3.0.0) in January of 2015.
+version was released in July 1998 with the first stable release (2.0)
+following in February 1999. Development of the third generation of
+Logtalk started in 2012 with the first public alpha version in August
+2012 and the first stable release (3.0.0) in January 2015.
 
 Logtalk provides the following features:
 
@@ -262,7 +262,7 @@ Among these areas we have:
    namespaces, it avoids the porting problems of most Prolog module
    systems. Platform, operating system, or compiler specific code can be
    isolated from the rest of the code by encapsulating it in objects
-   with well defined interfaces.
+   with well-defined interfaces.
 
 **Alternative to a Prolog module system**
    Logtalk can be used as an alternative to a Prolog compiler module
@@ -274,5 +274,5 @@ Among these areas we have:
 **Integration with other programming languages**
    Logtalk support for most key object-oriented features helps users
    integrating Prolog with object-oriented languages like C++, Java, or
-   Smalltalk by facilitating an high-level mapping between the two
+   Smalltalk by facilitating a high-level mapping between the two
    languages.

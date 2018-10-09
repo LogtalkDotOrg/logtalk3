@@ -53,7 +53,7 @@ The Logtalk compiler warns about any referenced entity that is not
 currently loaded. The warning may reveal a misspell entity name or just
 an entity that it will be loaded later. Out-of-oder loading should be
 avoided when possible as it prevents some code optimizations such as
-static binding od messages to methods.
+static binding of messages to methods.
 
 .. _errors_singletons:
 
@@ -61,7 +61,7 @@ Singleton variables
 ~~~~~~~~~~~~~~~~~~~
 
 Singleton variables in a clause are often misspell variables and, as
-such, one of the most common errors when programming in Prolog. when the
+such, one of the most common errors when programming in Prolog. When the
 backend Prolog compiler complies with the Prolog ISO standard or at
 least supports the ISO predicate ``read_term/3`` called with the option
 ``singletons(S)``, the Logtalk compiler warns about any singleton
@@ -75,8 +75,8 @@ Redefinition of Prolog built-in predicates
 The Logtalk compiler will warn us of any redefinition of a Prolog
 built-in predicate inside an object or category. Sometimes the
 redefinition is intended. In other cases, the user may not be aware that
-the subjacent Prolog compiler may already provide the predicate as a
-built-in or we may want to ensure code portability among several Prolog
+the used backend Prolog compiler may already provide the predicate as a
+built-in or may want to ensure code portability among several Prolog
 compilers with different sets of built-in predicates.
 
 .. _errors_redefinion_predicates:
@@ -187,7 +187,7 @@ Redefinition of predicates declared in ``uses/2`` and ``use_module/2`` directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A error will be reported for any attempt to define locally a predicate
-that is already listed in a :ref:`directives_uses_2` or in a
+that is already listed in an :ref:`directives_uses_2` or in an
 :ref:`directives_use_module_2` directive.
 
 .. _errors_others:

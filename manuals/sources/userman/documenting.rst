@@ -46,14 +46,14 @@ Arbitrary user-defined entity information can be represented using the
    ]).
 
 In this pattern, keys should be atoms and values should be ground terms.
-The following keys are pre-defined and may be processed specially by
+The following keys are predefined and may be processed specially by
 Logtalk:
 
 ``comment``
    Comment describing entity purpose (an atom).
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
-   ``entity`` is the name of a XML entity defined in the ``custom.ent``
+   ``entity`` is the name of an XML entity defined in the ``custom.ent``
    file).
 ``version``
    Version number (a number).
@@ -68,12 +68,12 @@ Logtalk:
    deemed unnecessary).
 ``copyright``
    Copyright notice for the entity source code (an atom or a compound
-   term ``{entity}`` where ``entity`` is the name of a XML entity
+   term ``{entity}`` where ``entity`` is the name of an XML entity
    defined in the ``custom.ent`` file).
 ``license``
    License terms for the entity source code; usually, just the license
    name (an atom or a compound term ``{entity}`` where ``entity`` is the
-   name of a XML entity defined in the ``custom.ent`` file).
+   name of an XML entity defined in the ``custom.ent`` file).
 ``remarks``
    List of general remarks about the entity using the format *Topic*
    ``-`` *Text*. Both the topic and the text must be atoms.
@@ -115,7 +115,7 @@ the :ref:`directives_info_2` directive:
 
 The first argument can also a grammar rule non-terminal indicator,
 ``Name//Arity``. Keys should be atoms and values should be bound terms.
-The following keys are pre-defined and may be processed specially by
+The following keys are predefined and may be processed specially by
 Logtalk:
 
 ``comment``
@@ -172,20 +172,20 @@ using the reflection API and are visible to ``lgtdoc`` tool.
 Processing and viewing documenting files
 ----------------------------------------
 
-The ``lgtdoc`` tool generates a XML documenting file per entity. It can
+The ``lgtdoc`` tool generates an XML documenting file per entity. It can
 also generate directory, entity, and predicate indexes when documenting
 libraries and directories. For example, assuming the default filename
 extensions, a ``trace`` object and a ``sort(_)`` parametric object will
 result in ``trace_0.xml`` and ``sort_1.xml`` XML files.
 
-Each entity XML file contains references to two other files, a XML
+Each entity XML file contains references to two other files, an XML
 specification file and a XSL style-sheet file. The XML specification
-file can be either a DTD file (``logtalk_entity.dtd``) or a XML Scheme
+file can be either a DTD file (``logtalk_entity.dtd``) or an XML Scheme
 file (``logtalk_entity.xsd``). The
 `XSL <http://www.w3.org/Style/XSL/>`__ style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
-file are defined by the ``lgtdoc`` tool but can be overiden by passing a
+file are defined by the ``lgtdoc`` tool but can be overridden by passing a
 list of options to the tool predicates. The ``lgtdoc/xml`` sub-directory
 in the Logtalk installation directory contains the XML specification
 files described above, along with several sample XSL style-sheet files
@@ -227,5 +227,6 @@ Inline formatting in comments text
 ----------------------------------
 
 Inline formatting in comments text can be accomplished by using Markdown
-syntax and converting XML documenting files to Markdown files (and
-these, if required, to e.g. HTML or PDF).
+(or reStructuredText) syntax and converting XML documenting files to
+Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
+ePub, or PDF).

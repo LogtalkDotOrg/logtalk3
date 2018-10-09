@@ -13,7 +13,7 @@ encapsulation mechanism is adequate. Logtalk objects may be used when
 more powerful encapsulation, abstraction, and reuse features are
 necessary. Logtalk supports the compilation of source files containing
 both plain Prolog and Prolog modules. This guide provides tips for
-helping integrating and migrating plain Prolog code and Prolog module
+integrating and migrating plain Prolog code and Prolog module
 code to Logtalk. Step-by-step instructions are provided for
 encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
@@ -173,10 +173,10 @@ Assuming that this is the case, apply the following steps:
    converted into objects. Calls in the pseudo-module ``user`` can
    simply be encapsulated using the
    :ref:`control_external_call_1` Logtalk
-   external call control construct. You can also use instead a
+   external call control construct. You can also use instead an
    :ref:`directives_uses_2` directive where the
    first argument would be the atom ``user`` and the second argument a
-   list of all external predicates. This alternative have the advantage
+   list of all external predicates. This alternative has the advantage
    of not requiring changes to the code making the predicate calls.
 #. If your module uses the database built-in predicates to implement
    module local mutable state using dynamic predicates, add both
@@ -252,14 +252,14 @@ Currently, Logtalk supports the following module directives:
 ``export/1``
    Exported predicates are compiled as public object predicates. The
    argument must be a predicate indicator (``Name/Arity``), a grammar
-   rule non-terminal indicator (``Name//Arity``), a operator
+   rule non-terminal indicator (``Name//Arity``), an operator
    declaration, or a list of predicate indicators, grammar rule
    non-terminal indicators, and operator declarations.
 ``reexport/2``
    Reexported predicates are compiled as public object predicates. The
    first argument is the module name. The second argument must be a
    predicate indicator (``Name/Arity``), a grammar rule non-terminal
-   indicator (``Name//Arity``), a operator declaration, or a list of
+   indicator (``Name//Arity``), an operator declaration, or a list of
    predicate indicators, grammar rule non-terminal indicators, and
    operator declarations.
 ``meta_predicate/1``
@@ -364,7 +364,7 @@ more easily identify source files that are likely non-portable across
 Prolog compilers.
 
 A second example, where a proprietary Prolog directive is discarded
-after triggering a side-effect:
+after triggering a side effect:
 
 ::
 
@@ -372,7 +372,7 @@ after triggering a side-effect:
        load_foreign_files(Files,Libs,InitRoutine).
 
 In this case, although the directive is not copied to the generated
-Prolog file, the foreign library files are loaded as a side-effect of
+Prolog file, the foreign library files are loaded as a side effect of
 the Logtalk compiler calling the ``'$lgt_prolog_term_expansion'/2`` hook
 predicate.
 

@@ -35,7 +35,7 @@ constructs:
 It is assumed that these operators remain active (once the Logtalk
 compiler and runtime files are loaded) until the end of the Prolog
 session (this is the usual behavior of most Prolog compilers). Note that
-these operator definitions are compatible with the pre-defined operators
+these operator definitions are compatible with the predefined operators
 in the Prolog ISO standard.
 
 .. _messages_sending:
@@ -165,7 +165,7 @@ Messages that are sent using the
 :ref:`control_send_to_self_1` (message to *self*)
 control construct or the
 :ref:`control_call_super_1` super mechanism
-described above do not generate any events. The rational behind this
+described above do not generate any events. The rationale behind this
 distinction is that messages to *self* and *super* calls are only used
 internally in the definition of methods or to execute additional
 messages with the same target object (represented by *self*). In other
@@ -233,7 +233,7 @@ already cached.
 Translating message processing to predicate calls
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to better understand the performance tradeoffs of using Logtalk
+In order to better understand the performance trade-offs of using Logtalk
 dynamic binding when compared to plain Prolog or to Prolog module
 systems, is useful to translate message processing in terms of predicate
 calls. However, in doing this, we should keep in mind that the number of

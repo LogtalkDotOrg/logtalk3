@@ -221,14 +221,14 @@ important documentation information like <a class="reference internal" href="../
 </pre></div>
 </div>
 <p>In this pattern, keys should be atoms and values should be ground terms.
-The following keys are pre-defined and may be processed specially by
+The following keys are predefined and may be processed specially by
 Logtalk:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt>
 <dd>Comment describing entity purpose (an atom).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt>
 <dd>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
-<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of a XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>
+<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>
 file).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt>
 <dd>Version number (a number).</dd>
@@ -243,12 +243,12 @@ version of the previous key, used when parameter descriptions are
 deemed unnecessary).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">copyright</span></code></dt>
 <dd>Copyright notice for the entity source code (an atom or a compound
-term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of a XML entity
+term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity
 defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt>
 <dd>License terms for the entity source code; usually, just the license
 name (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the
-name of a XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</dd>
+name of an XML entity defined in the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt>
 <dd>List of general remarks about the entity using the format <em>Topic</em>
 <code class="docutils literal notranslate"><span class="pre">-</span></code> <em>Text</em>. Both the topic and the text must be atoms.</dd>
@@ -283,7 +283,7 @@ the <a class="reference internal" href="../refman/directives/info_2.html#directi
 </div>
 <p>The first argument can also a grammar rule non-terminal indicator,
 <code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>. Keys should be atoms and values should be bound terms.
-The following keys are pre-defined and may be processed specially by
+The following keys are predefined and may be processed specially by
 Logtalk:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt>
@@ -336,19 +336,19 @@ using the reflection API and are visible to <code class="docutils literal notran
 </div>
 <div class="section" id="processing-and-viewing-documenting-files">
 <span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool generates a XML documenting file per entity. It can
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool generates an XML documenting file per entity. It can
 also generate directory, entity, and predicate indexes when documenting
 libraries and directories. For example, assuming the default filename
 extensions, a <code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric object will
 result in <code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML files.</p>
-<p>Each entity XML file contains references to two other files, a XML
+<p>Each entity XML file contains references to two other files, an XML
 specification file and a XSL style-sheet file. The XML specification
-file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or a XML Scheme
+file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or an XML Scheme
 file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The
 <a class="reference external" href="http://www.w3.org/Style/XSL/">XSL</a> style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
-file are defined by the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool but can be overiden by passing a
+file are defined by the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool but can be overridden by passing a
 list of options to the tool predicates. The <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory
 in the Logtalk installation directory contains the XML specification
 files described above, along with several sample XSL style-sheet files
@@ -383,8 +383,9 @@ tool documentation for details.</p>
 <div class="section" id="inline-formatting-in-comments-text">
 <span id="documenting-formatting"></span><h2>Inline formatting in comments text<a class="headerlink" href="#inline-formatting-in-comments-text" title="Permalink to this headline">¶</a></h2>
 <p>Inline formatting in comments text can be accomplished by using Markdown
-syntax and converting XML documenting files to Markdown files (and
-these, if required, to e.g. HTML or PDF).</p>
+(or reStructuredText) syntax and converting XML documenting files to
+Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
+ePub, or PDF).</p>
 </div>
 </div>
 

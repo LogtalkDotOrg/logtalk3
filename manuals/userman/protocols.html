@@ -472,22 +472,21 @@ prefix the protocol’s name with the corresponding keyword. For instance:</p>
 for any application.</p>
 <div class="section" id="the-built-in-protocol-expanding">
 <span id="protocols-expanding"></span><h3>The built-in protocol <em>expanding</em><a class="headerlink" href="#the-built-in-protocol-expanding" title="Permalink to this headline">¶</a></h3>
-<p>Logtalk defines a built-in protocol named <code class="docutils literal notranslate"><span class="pre">expanding</span></code> that contains
-declarations for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
-predicates. See the description of the <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">hook/1</span></a>
-compiler flag for more details.</p>
+<p>Logtalk defines a built-in protocol named <code class="docutils literal notranslate"><span class="pre">expanding</span></code> that declares
+the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates. See the
+description of the <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">hook/1</span></a> compiler flag for
+more details.</p>
 </div>
 <div class="section" id="the-built-in-protocol-monitoring">
 <span id="protocols-monitoring"></span><h3>The built-in protocol <em>monitoring</em><a class="headerlink" href="#the-built-in-protocol-monitoring" title="Permalink to this headline">¶</a></h3>
-<p>Logtalk defines a built-in protocol named <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> that contains
-declarations for the <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>
-public event handler predicates. See the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section
-for more details.</p>
+<p>Logtalk defines a built-in protocol named <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> declares the
+<a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a> public event handler
+predicates. See the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more details.</p>
 </div>
 <div class="section" id="the-built-in-protocol-forwarding">
 <span id="protocols-forwarding"></span><h3>The built-in protocol <em>forwarding</em><a class="headerlink" href="#the-built-in-protocol-forwarding" title="Permalink to this headline">¶</a></h3>
-<p>Logtalk defines a built-in protocol named <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> that contains a
-declaration for the <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a> user-defined message forwarding
+<p>Logtalk defines a built-in protocol named <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> that declares the
+<a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a> user-defined message forwarding
 handler, which is automatically called (if defined) by the runtime for
 any message that the receiving object does not understand. See also the
 <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> control construct.</p>

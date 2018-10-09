@@ -219,7 +219,7 @@ constructs:</p>
 <p>It is assumed that these operators remain active (once the Logtalk
 compiler and runtime files are loaded) until the end of the Prolog
 session (this is the usual behavior of most Prolog compilers). Note that
-these operator definitions are compatible with the pre-defined operators
+these operator definitions are compatible with the predefined operators
 in the Prolog ISO standard.</p>
 </div>
 <div class="section" id="sending-a-message-to-an-object">
@@ -319,7 +319,7 @@ Messages that are sent using the
 <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> (message to <em>self</em>)
 control construct or the
 <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> super mechanism
-described above do not generate any events. The rational behind this
+described above do not generate any events. The rationale behind this
 distinction is that messages to <em>self</em> and <em>super</em> calls are only used
 internally in the definition of methods or to execute additional
 messages with the same target object (represented by <em>self</em>). In other
@@ -374,7 +374,7 @@ engine. In what follows, we will assume that the message lookups are
 already cached.</p>
 <div class="section" id="translating-message-processing-to-predicate-calls">
 <span id="messages-inferences"></span><h3>Translating message processing to predicate calls<a class="headerlink" href="#translating-message-processing-to-predicate-calls" title="Permalink to this headline">¶</a></h3>
-<p>In order to better understand the performance tradeoffs of using Logtalk
+<p>In order to better understand the performance trade-offs of using Logtalk
 dynamic binding when compared to plain Prolog or to Prolog module
 systems, is useful to translate message processing in terms of predicate
 calls. However, in doing this, we should keep in mind that the number of

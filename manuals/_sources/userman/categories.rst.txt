@@ -274,7 +274,7 @@ is equivalent to compiling and loading the category:
    :- end_category.
 
 If we need to create a lot of (dynamic) categories at runtime, then is
-best to to define a metaclass or a prototype with a predicate that will
+best to define a metaclass or a prototype with a predicate that will
 call this built-in predicate in order to provide more sophisticated
 behavior.
 
@@ -511,7 +511,7 @@ The following category properties are supported:
 ``number_of_user_rules(Number)``
    Total number of user-defined predicate rules defined in the category
 
-Some of the properties such as line numbers are only available when the
+Some properties such as line numbers are only available when the
 category is defined in a source file compiled with the ``source_data``
 flag turned on.
 
@@ -601,7 +601,7 @@ the category by simply sending a message to *self*. For example:
    :- end_object.
 
 This is the recommended way of calling a category predicate that can be
-specialized/overriden in a descendant object as the predicate definition
+specialized/overridden in a descendant object as the predicate definition
 lookup will start from *self*.
 
 A direct call the predicate definition found in an imported category can

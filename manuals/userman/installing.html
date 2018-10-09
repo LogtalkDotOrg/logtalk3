@@ -232,7 +232,7 @@ those changes before updating Logtalk.</p>
 <div class="section" id="computer-and-operating-system">
 <span id="installing-computer"></span><h3>Computer and operating system<a class="headerlink" href="#computer-and-operating-system" title="Permalink to this headline">¶</a></h3>
 <p>Logtalk is compatible with almost any computer/operating-system with a
-modern, standars compliant, Prolog compiler available.</p>
+modern, standards compliant, Prolog compiler available.</p>
 </div>
 <div class="section" id="prolog-compiler">
 <span id="installing-compiler"></span><h3>Prolog compiler<a class="headerlink" href="#prolog-compiler" title="Permalink to this headline">¶</a></h3>
@@ -302,7 +302,7 @@ current Logtalk version</p>
 (used for compatibility checking when upgrading Logtalk)</p>
 <p><code class="docutils literal notranslate"><span class="pre">loader-sample.lgt</span></code> – sample loader file for user applications</p>
 <p><code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> – sample file for user-defined Logtalk settings</p>
-<p><code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> – sample file for helping automating running user
+<p><code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> – sample file for helping to automate running user
 application unit tests</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">adapters</span></code></dt>
@@ -373,15 +373,15 @@ and installation
 <p>Adapter files provide the glue code between the Logtalk compiler/runtime
 and a Prolog compiler. Each adapter file contains two sets of
 predicates: ISO Prolog standard predicates and directives not built-in
-in the target Prolog compiler and Logtalk-specific predicates.</p>
+in the target Prolog compiler and Logtalk specific predicates.</p>
 <p>Logtalk already includes ready to use adapter files for most academic
-and commercial Prolog compilers. If a adapter file is not available for
+and commercial Prolog compilers. If an adapter file is not available for
 the compiler that you intend to use, then you need to build a new one,
 starting from the included <code class="docutils literal notranslate"><span class="pre">template.pl</span></code> file. Start by making a copy
 of the template file. Carefully check (or complete if needed) each
 listed definition. If your Prolog compiler conforms to the ISO standard,
 this task should only take you a few minutes. In most cases, you can
-borrow code from some of the predefined adapter files. If you are unsure
+borrow code from the predefined adapter files. If you are unsure
 that your Prolog compiler provides all the ISO predicates needed by
 Logtalk, try to run the system by setting the unknown predicate error
 handler to report as an error any call to a missing predicate. Better
@@ -472,7 +472,7 @@ a <code class="docutils literal notranslate"><span class="pre">settings.lgt</spa
 read-only <code class="docutils literal notranslate"><span class="pre">settings</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>). If not found, Logtalk
 tries to load a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file from the Logtalk user folder. If
 still not found, Logtalk tries to load a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file from the
-user home folder. If no settings files are found, Logtalk will use the
+user home folder. When no settings files are found, Logtalk will use the
 default compiler flag values set on the back-end Prolog compiler adapter
 files. When limitations of the back-end Prolog compiler or on the
 operating-system prevent Logtalk from finding the settings files, these
