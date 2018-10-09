@@ -2,7 +2,7 @@
 //
 //   XML documenting files to reStructuredText files conversion script
 //
-//   Last updated on October 7, 2018
+//   Last updated on October 9, 2018
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -184,7 +184,7 @@ WScript.Quit(0);
 function usage_help() {
 	WScript.Echo("");
 	WScript.Echo("This script converts all Logtalk XML files documenting files in the");
-	WScript.Echo("current directory to reStructuredText files");
+	WScript.Echo("current directory to reStructuredText files for use with Sphinx");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
 	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor]");

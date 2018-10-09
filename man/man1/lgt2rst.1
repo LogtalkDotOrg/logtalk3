@@ -1,13 +1,21 @@
-.TH lgt2rst 1 "October 4, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2rst 1 "October 9, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
 
 .SH NAME
-lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files
+lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files for use with Sphinx
 
 .SH SYNOPSIS
 .B lgt2rst
 [
 .B \-d
 .I directory
+]
+[
+.B \-i
+.I index
+]
+[
+.B \-t
+.I title
 ]
 [
 .B \-p
@@ -18,13 +26,21 @@ lgt2rst \- Logtalk script for converting XML documenting files into reStructured
 .B \-h
 
 .SH DESCRIPTION
-\fBlgt2rst\fR is a Logtalk script for converting all Logtalk XML documenting files in the current directory into  reStructuredText files. Assumes UTF-8 encoding.
+\fBlgt2rst\fR is a Logtalk script for converting all Logtalk XML documenting files in the current directory into reStructuredText files for use with Sphinx. Assumes UTF-8 encoding.
 
 .SH OPTIONS
 .TP
 .B \-d
 .I directory
 Output directory for the reStructuredText files.
+.TP
+.B \-i
+.I index
+Name of the index file.
+.TP
+.B \-t
+.I title
+Title to be used on the index file.
 .TP
 .B \-p
 .I processor
@@ -65,6 +81,8 @@ The Logtalk index XML Schema file.
 The default XSLT file.
 
 .SH "SEE ALSO"
+The Sphinx website at <http://www.sphinx-doc.org/en/master/>
+.PP
 The Logtalk website at <https://logtalk.org/>
 .PP
 The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR

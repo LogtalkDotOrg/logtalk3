@@ -96,7 +96,7 @@ usage_help()
 {
 	echo 
 	echo "This script converts all Logtalk XML documenting files in the"
-	echo "current directory to reStructuredText files"
+	echo "current directory to reStructuredText files for use with Sphinx"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor]"

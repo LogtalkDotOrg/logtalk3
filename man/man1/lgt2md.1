@@ -1,4 +1,4 @@
-.TH lgt2md 1 "October 4, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
+.TH lgt2md 1 "October 9, 2018" "Logtalk 3.21.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2md \- Logtalk script for converting XML documenting files into Markdown text files
@@ -8,6 +8,14 @@ lgt2md \- Logtalk script for converting XML documenting files into Markdown text
 [
 .B \-d
 .I directory
+]
+[
+.B \-i
+.I index
+]
+[
+.B \-t
+.I title
 ]
 [
 .B \-p
@@ -25,6 +33,14 @@ lgt2md \- Logtalk script for converting XML documenting files into Markdown text
 .B \-d
 .I directory
 Output directory for the Markdown text files.
+.TP
+.B \-i
+.I index
+Name of the index file.
+.TP
+.B \-t
+.I title
+Title to be used on the index file.
 .TP
 .B \-p
 .I processor
