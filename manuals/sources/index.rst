@@ -17,7 +17,8 @@ The Logtalk Handbook
    glossary
    bibliography
 
-.. only:: html
+* :ref:`genindex`
 
-   * :ref:`genindex`
+.. only:: builder_html
+
    * :ref:`search`

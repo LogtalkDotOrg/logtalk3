@@ -1,6 +1,8 @@
-============
-Bibliography
-============
+.. only:: html
+
+   ============
+   Bibliography
+   ============
 
 .. [Alexiev93]
    Mutable Object State for Object-Oriented Logic Programming: A Survey
