@@ -180,12 +180,12 @@ compiler.</dd>
 the definition of an object. For class-based hierarchies, the
 ancestors of an instance are its class(es) and all the superclasses
 of its class(es). For prototype-based hierarchies, the ancestors of
-an prototype are its parent(s) and the ancestors of its parent(s).</dd>
+a prototype are its parent(s) and the ancestors of its parent(s).</dd>
 <dt id="term-built-in-method">built-in method</dt>
-<dd>A pre-defined method that can be called from within any object or
+<dd>A predefined method that can be called from within any object or
 category. Built-in methods cannot be redefined.</dd>
 <dt id="term-built-in-predicate">built-in predicate</dt>
-<dd>A pre-defined predicate that can be called from anywhere. Built-in
+<dd>A predefined predicate that can be called from anywhere. Built-in
 predicates can be redefined within objects and categories.</dd>
 <dt id="term-category">category</dt>
 <dd>A set of predicates directives and clauses that can be (virtually)
@@ -205,7 +205,7 @@ predicate, or calling a declared predicate with no clauses, fails.
 But messages or calls to undeclared predicates generate an error.</dd>
 <dt id="term-coinductive-predicate">coinductive predicate</dt>
 <dd>A predicate whose calls are proved using greatest fixed point
-semantics. Coinductive predicates allows reasoning about about
+semantics. Coinductive predicates allows reasoning about
 infinite rational entities such as cyclic terms and ω-automata.</dd>
 <dt id="term-complementing-category">complementing category</dt>
 <dd>A category used for hot patching an existing object (or a set of
@@ -253,25 +253,25 @@ number of arguments using the notation <code class="docutils literal notranslate
 <dt id="term-hook-object">hook object</dt>
 <dd>An object, implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code> built-in protocol,
 defining term- and goal-expansion clauses, used in the compilation
-of Logtalk or Prolog source files. An hook object can be specified
+of Logtalk or Prolog source files. A hook object can be specified
 using the compiler flag <code class="docutils literal notranslate"><span class="pre">hook/1</span></code>. It can also be specified using
 a <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive in the source files to be
 expanded.</dd>
 <dt id="term-identity">identity</dt>
 <dd>Property of an entity that distinguishes it from every other entity.
-Object and category identifiers can be an atoms or compound terms.
+Object and category identifiers can be atoms or compound terms.
 Protocol identities must be atoms. All Logtalk entities (objects,
 protocols, and categories) share the same namespace.</dd>
 <dt id="term-inheritance">inheritance</dt>
 <dd>An object inherits predicate directives and clauses from related
-entities. If an object extends other object then we have a
+entities. If an object extends other object, then we have a
 prototype-based inheritance. If an object specializes or instantiates
 another object we have a class-based inheritance.</dd>
 <dt id="term-instance">instance</dt>
 <dd>An object that instantiates another object, interpreted as its class.</dd>
 <dt id="term-instantiation">instantiation</dt>
 <dd>The process of creating a new class instance. In Logtalk, this does
-not necessarily implies dynamic creation of an object at runtime; an
+not necessarily imply dynamic creation of an object at runtime; an
 instance may also be defined as a static object in a source file.</dd>
 <dt id="term-library">library</dt>
 <dd>A directory containing source files. The library name can be used as

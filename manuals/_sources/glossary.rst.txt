@@ -10,7 +10,7 @@ Glossary
       the definition of an object. For class-based hierarchies, the
       ancestors of an instance are its class(es) and all the superclasses
       of its class(es). For prototype-based hierarchies, the ancestors of
-      an prototype are its parent(s) and the ancestors of its parent(s).
+      a prototype are its parent(s) and the ancestors of its parent(s).
 
    category
       A set of predicates directives and clauses that can be (virtually)
@@ -109,13 +109,13 @@ Glossary
 
    identity
       Property of an entity that distinguishes it from every other entity.
-      Object and category identifiers can be an atoms or compound terms.
+      Object and category identifiers can be atoms or compound terms.
       Protocol identities must be atoms. All Logtalk entities (objects,
       protocols, and categories) share the same namespace.
 
    inheritance
       An object inherits predicate directives and clauses from related
-      entities. If an object extends other object then we have a
+      entities. If an object extends other object, then we have a
       prototype-based inheritance. If an object specializes or instantiates
       another object we have a class-based inheritance.
 
@@ -135,7 +135,7 @@ Glossary
 
    instantiation
       The process of creating a new class instance. In Logtalk, this does
-      not necessarily implies dynamic creation of an object at runtime; an
+      not necessarily imply dynamic creation of an object at runtime; an
       instance may also be defined as a static object in a source file.
 
    library
@@ -163,7 +163,7 @@ Glossary
       containing it.
 
    built-in method
-      A pre-defined method that can be called from within any object or
+      A predefined method that can be called from within any object or
       category. Built-in methods cannot be redefined.
 
    singleton method
@@ -191,7 +191,7 @@ Glossary
    hook object
       An object, implementing the ``expanding`` built-in protocol,
       defining term- and goal-expansion clauses, used in the compilation
-      of Logtalk or Prolog source files. An hook object can be specified
+      of Logtalk or Prolog source files. A hook object can be specified
       using the compiler flag ``hook/1``. It can also be specified using
       a ``set_logtalk_flag/2`` directive in the source files to be
       expanded.
@@ -232,12 +232,12 @@ Glossary
       meaningful in the calling context.
 
    built-in predicate
-      A pre-defined predicate that can be called from anywhere. Built-in
+      A predefined predicate that can be called from anywhere. Built-in
       predicates can be redefined within objects and categories.
 
    coinductive predicate
       A predicate whose calls are proved using greatest fixed point
-      semantics. Coinductive predicates allows reasoning about about
+      semantics. Coinductive predicates allows reasoning about
       infinite rational entities such as cyclic terms and ω-automata.
 
    local predicate
