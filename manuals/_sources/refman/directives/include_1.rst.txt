@@ -16,7 +16,7 @@ Includes a file contents, which must be valid terms, at the place of
 occurrence of the directive. The file can be specified as a relative
 path, an absolute path, or using library notation and is expanded as a
 source file name. Relative paths are interpreted as relative to the path
-of the file contining the directive.
+of the file containing the directive.
 
 When using the reflection API, predicates from an included file can be
 distinguished from predicates from the main file by looking for the

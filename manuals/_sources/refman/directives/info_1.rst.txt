@@ -14,8 +14,8 @@ Description
 
 Documentation directive for objects, protocols, and categories. The
 directive argument is a list of pairs using the format *Key is Value*.
-See the :ref:`documenting_entity` section
-for a description of the default keys.
+See the :ref:`documenting_entity` section for a description of the
+default keys.
 
 Template and modes
 ------------------

@@ -22,11 +22,10 @@ Description
 
 Declares public predicates, public grammar rule non-terminals, and
 public operators. A public predicate can be called from any object. A
-public non-terminal can be used as an argument in
-:ref:`methods_phrase_2` and
-:ref:`methods_phrase_3` calls from any object.
-Public operators are not exported but declaring them provides useful
-information for defining client objects.
+public non-terminal can be used as an argument in :ref:`methods_phrase_2`
+and :ref:`methods_phrase_3` calls from any object. Public operators are
+not exported but declaring them provides useful information for defining
+client objects.
 
 Template and modes
 ------------------

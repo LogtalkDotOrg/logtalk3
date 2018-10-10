@@ -30,7 +30,7 @@ This control construct may also be used in place of an object identifier
 when sending a message. In this case, the result of proving its argument
 as a goal (within the context of the pseudo-object ``user``) is used as
 an object identifier in the message sending call. This feature is mainly
-used with :term:`parametric objects <parametric object>` when the their
+used with :term:`parametric objects <parametric object>` when their
 identifiers correspond to predicates defined in ``user``.
 
 Template and modes

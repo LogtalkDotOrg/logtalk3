@@ -194,25 +194,25 @@
 </div>
 <p>Debugging control construct. Calls a goal within the context of the
 specified object. The goal is called with the execution context
-(<a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a>, <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>, and <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>) set to the object. The goal may
-need to be written between parenthesis to avoid parsing errors due to
-operator conflicts. This control construct should only be used for
-debugging or for writing unit tests. This control construct can only be
-used for objects compiled with the compiler flag
+(<a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a>, <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>, and <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>) set to the object.
+The goal may need to be written between parenthesis to avoid parsing
+errors due to operator conflicts. This control construct should only be
+used for debugging or for writing unit tests. This control construct can
+only be used for objects compiled with the compiler flag
 <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Set this compiler flag to
 <code class="docutils literal notranslate"><span class="pre">deny</span></code> to disable this control construct and thus preventing using it
 to break encapsulation.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}&lt;&lt;Goal</span></code> syntax allows simplified access to
 <a class="reference internal" href="../../glossary.html#term-parametric-object-proxy"><span class="xref std std-term">parametric object proxies</span></a>.
-Its operational semantics is equivalent to the goal
-conjunction <code class="docutils literal notranslate"><span class="pre">(call(Proxy),</span> <span class="pre">Proxy&lt;&lt;Goal)</span></code>. I.e. <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is proved
-within the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a> and, if successful, the
-goal term is used as a parametric object identifier. Exceptions thrown
+Its operational semantics is equivalent to the goal conjunction
+<code class="docutils literal notranslate"><span class="pre">(call(Proxy),</span> <span class="pre">Proxy&lt;&lt;Goal)</span></code>. I.e. <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is proved within the
+context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a> and, if successful,
+the goal term is used as a parametric object identifier. Exceptions thrown
 when proving <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> are handled by the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct.
 This syntax construct supports backtracking over the <code class="docutils literal notranslate"><span class="pre">{Proxy}</span></code> goal.</p>
 <p>Caveat: although the goal argument is fully compiled before calling,
-some of the necessary information for the second compiler pass may not
-be available at runtime.</p>
+some necessary information for the second compiler pass may not be
+available at runtime.</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
@@ -274,7 +274,6 @@ be available at runtime.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Paulo Moura
-      Last updated on Oct 10, 2018.
 
     </p>
   </div>

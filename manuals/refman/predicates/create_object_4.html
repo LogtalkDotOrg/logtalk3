@@ -198,14 +198,14 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_object</span>(<span class="nv">Identifier</span>, <span class="nv">Relations</span>, <span class="nv">Directives</span>, <span class="nv">Clauses</span>)
 </pre></div>
 </div>
-<p>Creates a new, dynamic object. The word <a class="reference internal" href="../../glossary.html#term-object"><span class="xref std std-term">object</span></a> is used here as a generic term.
-This predicate can be used to create new prototypes, instances, and
-classes. This predicate is often used as a primitive to implement
-high-level object creation methods.</p>
+<p>Creates a new, dynamic object. The word <a class="reference internal" href="../../glossary.html#term-object"><span class="xref std std-term">object</span></a> is used here
+as a generic term. This predicate can be used to create new prototypes,
+instances, and classes. This predicate is often used as a primitive to
+implement high-level object creation methods.</p>
 <p>Note that, when opting for runtime generated object identifiers, it’s
 possible to run out of identifiers when using a back-end Prolog compiler
 with bounded integer support. The portable solution, when creating a
-large number of dynamic objects in long running applications, is to
+large number of dynamic objects in long-running applications, is to
 recycle, whenever possible, the identifiers.</p>
 <p>When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to
@@ -292,7 +292,6 @@ avoid race conditions.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Paulo Moura
-      Last updated on Oct 10, 2018.
 
     </p>
   </div>

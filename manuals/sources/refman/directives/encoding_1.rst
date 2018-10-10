@@ -21,7 +21,7 @@ include ``'US-ASCII'``, ``'ISO-8859-1'``, ``'ISO-8859-2'``,
 ``'UTF-32LE'``, ``'UTF-32BE'``, ``'Shift_JIS'``, and ``'EUC-JP'``. Be
 sure to use an encoding supported by the chosen back-end Prolog compiler
 (whose adapter file must define a table that translates between the
-Logtalk and Prolog-specific atoms that represent each supported
+Logtalk and Prolog specific atoms that represent each supported
 encoding). When writing portable code that cannot be expressed using
 ASCII, ``'UTF-8'`` is usually the best choice.
 

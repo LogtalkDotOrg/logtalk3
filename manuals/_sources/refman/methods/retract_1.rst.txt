@@ -16,7 +16,7 @@ Description
 Retracts a clause for a dynamic predicate. When the predicate indicator
 for ``Head`` is declared in a :ref:`directives_uses_2` or
 :ref:`directives_use_module_2` directive,
-the clause is retracted in the referenced object or module. Otherwise
+the clause is retracted in the referenced object or module. Otherwise,
 the clause is retracted in an object's dynamic predicate. On
 backtracking, the predicate retracts the next matching clause.
 

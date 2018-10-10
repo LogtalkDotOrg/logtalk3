@@ -22,8 +22,8 @@ Description
 
 Declares private predicates, private grammar rule non-terminals, and
 private operators. A private predicate can only be called from the
-object containing the private directive. A private non-terminal can only
-be used in a call of the :ref:`methods_phrase_2` and
+object containing the private directive. A private non-terminal can
+only be used in a call of the :ref:`methods_phrase_2` and
 :ref:`methods_phrase_3` methods from the object
 containing the private directive.
 

@@ -13,7 +13,7 @@ Description
    threaded_engine_next_reified(Engine, Answer)
 
 Retrieves the next reified answer from an engine. This predicate
-predicate always succeeds and blocks until an answer becomes available.
+always succeeds and blocks until an answer becomes available.
 Answers are returned using the terms ``the(Answer)``, ``no``, and
 ``exception(Error)``.
 

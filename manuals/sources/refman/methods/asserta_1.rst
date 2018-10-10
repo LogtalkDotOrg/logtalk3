@@ -16,7 +16,7 @@ Description
 Asserts a clause as the first one for a dynamic predicate. When the
 predicate indicator for ``Head`` is declared in a :ref:`directives_uses_2` or
 :ref:`directives_use_module_2` directive, the clause is asserted in the referenced
-object or module. Otherwise the clause is asserted for an object's
+object or module. Otherwise, the clause is asserted for an object's
 dynamic predicate. If the predicate is not previously declared (using a
 scope directive), then a dynamic predicate declaration is added to the
 object (assuming that we are asserting locally or that the compiler flag

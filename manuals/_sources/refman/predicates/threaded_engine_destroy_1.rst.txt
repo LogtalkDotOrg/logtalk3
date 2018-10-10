@@ -12,7 +12,7 @@ Description
 
    threaded_engine_destroy(Engine)
 
-Stops an engine.
+Stops and destroys an engine.
 
 Template and modes
 ------------------

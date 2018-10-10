@@ -18,7 +18,7 @@ primitive to implement high-level protocol creation methods.
 Note that, when opting for runtime generated protocol identifiers, it's
 possible to run out of identifiers when using a back-end Prolog compiler
 with bounded integer support. The portable solution, when creating a
-large number of dynamic protocols in long running applications, is to
+large number of dynamic protocols in long-running applications, is to
 recycle, whenever possible, the identifiers.
 
 When using Logtalk multi-threading features, predicates calling this

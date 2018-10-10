@@ -12,7 +12,7 @@ Description
 
    else
 
-Starts a *else* branch when performing conditional compilation.
+Starts an *else* branch when performing conditional compilation.
 
 Template and modes
 ------------------

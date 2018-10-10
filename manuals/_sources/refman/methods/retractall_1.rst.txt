@@ -13,9 +13,9 @@ Description
    retractall(Head)
 
 Retracts all clauses with a matching head for a dynamic predicate. When
-the predicate indicator for ``Head`` is declared in a :ref:`directives_uses_2` or
-:ref:`directives_use_module_2` directive, the clauses are retracted in the referenced
-object or module. Otherwise the clauses are retracted in an object's
+the predicate indicator for ``Head`` is declared in a :ref:`directives_uses_2`
+or :ref:`directives_use_module_2` directive, the clauses are retracted in the
+referenced object or module. Otherwise, the clauses are retracted in an object's
 dynamic predicate.
 
 This method may be used to retract clauses for predicates that are not

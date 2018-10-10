@@ -202,12 +202,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">expand_goal</span>(<span class="nv">Goal</span>, <span class="nv">ExpandedGoal</span>)
 </pre></div>
 </div>
-<p>Expands a goal.</p>
-<p>The expansion works as follows: if the first argument is a variable,
-then it is unified with the second argument; if the first argument is
-not a variable and there are local or inherited clauses for the
-<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> hook predicate within scope, then this predicate is
-recursively called until a fixed-point is reached to provide an
+<p>Expands a goal. The expansion works as follows: if the first argument
+is a variable, then it is unified with the second argument; if the first
+argument is not a variable and there are local or inherited clauses for
+the <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> hook predicate within scope, then this predicate
+is recursively called until a fixed-point is reached to provide an
 expansion that is then unified with the second argument; if the
 <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicate is not within scope, the two arguments
 are unified.</p>
@@ -260,7 +259,6 @@ example, before asserting a clause).</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Paulo Moura
-      Last updated on Oct 10, 2018.
 
     </p>
   </div>

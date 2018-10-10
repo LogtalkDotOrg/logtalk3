@@ -14,7 +14,7 @@ Description
 
 Collects a list of solutions for the goal. The order of the elements in
 the list follows the order of the goal solutions. It succeeds returning
-an empty list when the goal have no solutions.
+an empty list when the goal has no solutions.
 
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.

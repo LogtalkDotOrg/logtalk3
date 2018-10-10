@@ -15,7 +15,7 @@ Description
 Enumerates, by backtracking, the clauses of a dynamic predicate. When
 the predicate indicator for ``Head`` is declared in a ``uses/2`` or
 ``use_module/2`` directive, the predicate enumerates the clauses in the
-referenced object or module. Otherwise it enumerates the clauses for an
+referenced object or module. Otherwise, it enumerates the clauses for an
 object's dynamic predicate.
 
 This method may be used to enumerate clauses for predicates that are not

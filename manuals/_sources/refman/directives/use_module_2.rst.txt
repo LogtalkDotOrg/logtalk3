@@ -49,7 +49,7 @@ there's no mixing between *loading* a resource and (declaring the)
 automatically load the module. Loading the module file is dependent of
 the used backend Prolog compiler and must be done separately (usually,
 using a source file ``use_module/1`` or ``use_module/2`` directive in
-the entity file or in the application loader file). Also note that the
+the entity file or in the application loader file). Also, note that the
 name of the module may differ from the name of the module file.
 
 The modules should be loaded prior to the compilation of entities that

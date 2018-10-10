@@ -14,7 +14,7 @@ Description
 
 Enumerates, by backtracking, visible user predicates. When the predicate
 is declared in a ``uses/2`` or ``use_module/2`` directive, predicates
-are enumerated for the referenced object or module. Otherwise predicates
+are enumerated for the referenced object or module. Otherwise, predicates
 are enumerated for an object. In the case of objects, predicates not
 declared using a scope directive are not enumerated.
 

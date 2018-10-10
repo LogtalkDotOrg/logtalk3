@@ -16,7 +16,7 @@ Description
 This control construct allows the programmer to send a message to an
 object while preserving the original sender. It is mainly used in the
 definition of object handlers for unknown messages. This functionality
-is usually know as *delegation* but be aware that this is an overloaded
+is usually known as *delegation* but be aware that this is an overloaded
 word that can mean different things in different object-oriented
 programming languages.
 
