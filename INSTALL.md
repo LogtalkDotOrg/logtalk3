@@ -22,7 +22,7 @@ MANUAL INSTALLATION INSTRUCTIONS
 
 The recommended way of installing Logtalk is to use, whenever possible,
 one of the provided installers that can be downloaded from the
-[Logtalk web site](https://logtalk.org).
+[Logtalk website](https://logtalk.org).
 
 This file contains detailed instructions for  *manual* installation and
 configuration of Logtalk. You should also consult
@@ -44,13 +44,13 @@ an installation script, and defining a couple of environment variables. You can
 install Logtalk in any user accessible location. Whenever possible, it is
 recommended that Logtalk be installed by a user with administrative rights,
 as described below. This leads to a setup where each Logtalk user may freely
-try and modify the provided examples, library, and tool files with the option
+run and modify the provided examples, library, and tool files with the option
 of, at any time, restoring the files to its original state by simply running
 one of the provided scripts.
 
 * Using the sources or git clone directory
 
-In this case, there is no installation procedure other than uncompressing the
+In this case, there is no installation procedure other than decompressing the
 sources (or cloning the git repository) into a convenient directory. Simply
 skip to the section below on setting the Logtalk environment variables and
 use the directory full path as the value for both the `LOGTALKHOME` and
@@ -87,10 +87,10 @@ the Logtalk directory, and then type:
 	% cd scripts
 	% sudo ./install.sh
 
-This installation script makes all files read-only for non-admin users in
-order to avoid user tampering. This is a convenient setup for computer labs,
-given that making directories world-writable is a security risk. The install
-script accepts an installation prefix as argument. For example:
+This installation script makes all files read-only for non-admin users
+in order to avoid user tampering. This is a convenient setup for computer
+labs, given that making directories world-writable is a security risk. The
+installation script accepts an installation prefix as argument. For example:
 
 	% sudo ./install.sh -p /opt/local
 
@@ -181,7 +181,7 @@ to setup their Logtalk user folder and the `LOGTALKUSER` environment variable.
 
 User applications should preferable be kept outside of the Logtalk user folder
 created by the scripts above as updating Logtalk often results in updating the
-contents of this folder. If your applications depend on customizations to the
+contents of this folder. If your applications depend on customization of the
 distribution files, backup those changes before updating Logtalk (the scripts
 above automatically make a backup of any existing Logtalk user folder but you
 should rely on your own backups).

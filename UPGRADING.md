@@ -27,7 +27,7 @@ specially, REMOVED, CHANGED, and RENAMED items.
 older versions incompatible with new ones. You may need to update your local
 Logtalk user folder by running the `logtalk_user_setup` shell script.
 
-* If your Logtalk applications depend on some of the example files, it is
+* If your Logtalk applications depend on some example files, it is
 advisable that you check your code against the new version.
 
 * It's usually a good idea to recompile your source files with the compiler
@@ -47,7 +47,7 @@ Structured message printing
 ---------------------------
 
 The new structured message printing mechanism, an extended implementation
-of the same mechanism available in some Prolog systems, allows fine grained
+of the same mechanism available in some Prolog systems, allows fine-grained
 control over printing of informative, warning, and error messages. This
 mechanism is fully customizable using user-defined hook predicates.
 
@@ -55,7 +55,7 @@ Structured question asking
 --------------------------
 
 The new structured question asking mechanism complements the structured
-message printing mechanism and allows fine grained control over querying
+message printing mechanism and allows fine-grained control over querying
 the user for data. This mechanism is fully customizable using user-defined
 hook predicates.
 

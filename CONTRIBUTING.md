@@ -25,7 +25,7 @@ welcome, including code patches, bug reports, documentation fixes, feature
 suggestions, portability improvements, new libraries, new examples, and
 improved support for text editors and IDEs. No contribution is too small.
 The [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) file lists past contributions
-and their authors. Looking forward to see your name there.
+and their authors. Looking forward to seeing your name there.
 
 
 How to make a contribution
@@ -82,5 +82,5 @@ https://developercertificate.org
 Contributions should be made available under the Logtalk license without any
 additional terms or conditions. Contributions using other licensing terms may
 also be distributed with Logtalk with the understanding that the terms of their
-use depends solely on the authors chosen licensing terms and may require a
+use depends solely on the authors chosen license terms and may require a
 separate, independent, agreement between users and authors.

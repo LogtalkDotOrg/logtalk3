@@ -33,8 +33,8 @@ and `SCRIPT.txt` files inside each example folder.
 Some examples may redefine objects already loaded from other examples.
 It might be necessary to restart Logtalk after playing with some examples.
 
-Some of the examples have been adapted from public Prolog code or from
-Prolog text books and are copyrighted by the respective authors.
+Some examples have been adapted from public Prolog code or from Prolog
+text book and tutorials and are copyrighted by the respective authors.
 
 These are programming examples, meaning that you should study the source
 files to fully understand them. Note, however, that some examples main
@@ -76,7 +76,7 @@ Follows a short description of each included example (in alphabetical order):
 	assumptions
 
 - `attvars`  
-	experimental example of of using attributed variables within
+	experimental example of using attributed variables within
 	Logtalk objects and categories
 	(requires Logtalk to be run with B-Prolog, SWI-Prolog, XSB, or YAP)
 
@@ -85,7 +85,7 @@ Follows a short description of each included example (in alphabetical order):
 	for those programs
 
 - `benchmarks`  
-	simple benchmarks for helping comparing the performance of Logtalk
+	simple benchmarks for helping to compare the performance of Logtalk
 	message sending when using different backend Prolog compilers and
 	for comparing performance of message sending calls with predicate
 	calls in plain Prolog and explicitly-qualified Prolog module calls
@@ -153,8 +153,8 @@ Follows a short description of each included example (in alphabetical order):
 	(multi-inheritance conflicts and ambiguities)
 
 - `dynpred`  
-	example of using some of the built-in database handling methods
-	in order to implement dynamic object state
+	example of using the built-in database handling methods to
+	implement dynamic object state
 
 - `edcgs`  
 	several examples of Extended Definite Clause Grammars (EDCGs)
@@ -377,10 +377,9 @@ Follows a short description of each included example (in alphabetical order):
 	played by an object
 
 - `roots`  
-	objects, protocols, and categories used by some of the other
-	examples; illustrates how you can define object creation and
-	abolishing methods, complete with initialization and termination
-	options
+	objects, protocols, and categories used by other examples;
+	illustrates how you can define object creation and abolishing
+	methods, complete with initialization and termination options
 
 - `scopes`  
 	simple example illustrating predicate scope semantics

@@ -75,13 +75,13 @@ Basic help on Logtalk usage at the top-level interpreter
 --------------------------------------------------------
 
 Start Logtalk and call the goal `{help(loader)}` followed by `help::help`.
-This will provided you with an overview on how to get help and how to load
+This will provide you with an overview on how to get help and how to load
 and debug your code.
 
 Running the examples
 --------------------
 
-You may now try some of the provided examples:
+You may now try some examples:
 
 1. Open the `examples` sub-directory. There you find several sub-directories
 with ready to run examples and a `NOTES.md` file containing general 

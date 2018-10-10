@@ -117,13 +117,13 @@ processes such that each process uses a unique scratch directory therefore
 allowing parallel process execution (e.g. for usage at continuous integration
 servers).
 
-Some of the files contained in this directory represent work in progress and 
-are not loaded by default by any loader utility file.
+Some files contained in this directory represent work in progress and  are
+not loaded by default by any loader utility file.
 
-Some of the code in this library is based on public domain Prolog code, in 
-particular, code adopted from the Edinburgh Prolog library. The definition 
-of predicate `reverse/2` in object list is from Richard O'Keefe and can be
-found in its book "The Craft of Prolog".
+Some code in this library is based on public domain Prolog code, in particular,
+code adopted from the Edinburgh Prolog library. The definition  of predicate
+`reverse/2` in object list is from Richard O'Keefe and can be found in its book
+"The Craft of Prolog".
 
 Some elements of this library are inspired by Richard O'Keefe library proposal
 available at:
@@ -133,7 +133,7 @@ available at:
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 
-The `$LOGTALKUSER/docs` directory includes a XHTML version of the library
+The `$LOGTALKUSER/docs` directory includes an HTML version of the library
 documentation. To regenerate documentation of the Logtalk libraries, start
 Logtalk with your favorite back-end Prolog compiler and follow these steps:
 

@@ -67,7 +67,7 @@ your settings file, described next.
 Customizing Logtalk settings
 ----------------------------
 
-Logtalk interfaces with a specific backend Prolog compiler using a adapter
+Logtalk interfaces with a specific backend Prolog compiler using an adapter
 file that can be found on the `adapters` folder in the Logtalk installation
 folder. These adapter files define default values of the flags that are used
 by Logtalk when compiling source files (for a full description of these flags,
@@ -85,7 +85,7 @@ folder to `settings.lgt` and editing it. The `settings.lgt` file may also be
 stored in your home directory. For application specific settings, save the
 `settings.lgt` file in the application root directory and start Logtalk from
 it. Settings in this file override the default values in the adapter files.
-Some of the default flag values that you may want to change include:
+Some default flag values that you may want to change include:
 
 * `report`  
     for less verbose startup and compilation reports

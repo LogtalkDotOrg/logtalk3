@@ -34,13 +34,13 @@ compiler of choice. For Prolog compilers with long release cycles, this
 may require use of development versions. Most Prolog compilers are moving 
 towards better compatibility with de facto and official standards and thus
 improved Logtalk compatibility. Also, visit the issue tracker on the Logtalk
-development website and check for any know Prolog compiler bugs that break
+development website and check for any known Prolog compiler bugs that break
 Logtalk functionality.
 
 For details on how to integrate Logtalk with specific Prolog compilers,
 see the files in the `integration` directory of the Logtalk distribution.
 
-The adapter files may include hacks for missing official and de-facto
+The adapter files may include hacks for missing official and de facto
 Prolog standard built-in predicates. These hacks aim only to fulfill
 the minimal requirements of the Logtalk compiler and runtime and are
 not intended as a full replacement for missing functionality.
@@ -105,7 +105,7 @@ template adapter file
 
 	template.pl
 
-If a adapter file for your favorite Prolog is not available, use this 
+If an adapter file for your favorite Prolog is not available, use this 
 file as a template for writing one. For each predicate in the file, 
 check if it is built-in in your Prolog, available in a library, or if 
 you can write a better definition.
@@ -120,7 +120,7 @@ For B-Prolog 7.8 and later versions. Note that this adapter file
 redefines the B-Prolog `::/2` finite-domain built-in predicate
 (you may use the alternative `in/2` built-in predicate instead).
 
-Some of the B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`) 
+Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`) 
 are not core predicates and can be redefined by the user. The predicate 
 `predicate_property/2` does not return the property `built_in` for these 
 predicates. The solution is to encapsulate calls to these predicates 
@@ -160,7 +160,7 @@ the `{}/1` control construct allows you to bypass the Logtalk compiler).
 ECLiPSe defines an alias `in_set_range/2` for `::/2` that can be used to
 avoid conflicts with Logtalk `::/2` message sending operator.
 
-Adopted from a adapter file written and tested with help of Taner Bilgic 
+Adopted from an adapter file written and tested with help of Taner Bilgic 
 for Logtalk 1.x.
 
 With this Prolog compiler, avoid reloading Logtalk source files defining
@@ -193,7 +193,7 @@ adapter file sets the `strict_iso` flag to `off`. This is recommended
 but not required to support Logtalk.
 
 See the `scripts/embedding/gprolog` directory for a sample shell script
-that can generate e.g. a new Prolog top level that embeds Logtalk and
+that can generate e.g. a new Prolog top-level that embeds Logtalk and
 optionally a Logtalk application.
 
 
@@ -225,7 +225,7 @@ compilation of Logtalk source files generates intermediate Prolog files
 that are consulted (i.e. interpreted) instead of being compiled, severely
 hurting performance. Thus, practical use requires embedding Logtalk and the
 Logtalk application in Lean Prolog by including all necessary files in a
-single file than can then be compiled. For example, you can collect all
+single file that can then be compiled. For example, you can collect all
 Logtalk core files in a single file by following the steps (exemplified
 for POSIX systems):
 
@@ -256,7 +256,7 @@ Qu-Prolog 9.7 and later versions
 
 	qp.pl
 
-Know issues in Qu-Prolog 9.7: (1) this version doesn't support static
+Known issues in Qu-Prolog 9.7: (1) this version doesn't support static
 multifile predicates. This limitation may be fixed in later versions;
 (2) a bug in the Windows version of Qu-Prolog in the expansion of file
 paths containing environment variables prevents using it with Logtalk
@@ -329,7 +329,7 @@ directive if necessary.
 For using XPCE from Logtalk, see the `xpce` example in the Logtalk
 distribution.
 
-With multi-threading support turned on, you may get an harmless message
+With multi-threading support turned on, you may get a harmless message
 when halting the system regarding threads that wouldn't die: you can 
 suppress the message on POSIX systems by using `% swilgt 2> /dev/null`.
 
@@ -413,7 +413,7 @@ XSB 3.8.0 and later versions
 
 XSB generates intermediate files (with a `.xwam` extension) when compiling
 Prolog source files (thus including the Logtalk core files). Thus, you
-must either install Logtalk on on a location where you have write access
+must either install Logtalk on a location where you have write access
 or perform the first run of the integration scripts from a user with the
 required privileges (e.g. using `sudo` on POSIX systems or choosing `Run as
 administrator` on Windows systems).
@@ -454,9 +454,9 @@ YAP 6.3.4 and later versions
 	yaphooks.pl
 
 The adapter file may set the flag `language` to `iso`, but that is only
-recommended and should not be needed to run Logtalk as some of the YAP
-libraries may not be compatible with this flag setting. Comment out the
-corresponding `set_prolog_flag/2` directive if necessary.
+recommended and should not be needed to run Logtalk as some YAP libraries
+may not be compatible with this flag setting. Comment out the corresponding
+`set_prolog_flag/2` directive if necessary.
 
 The `yaphooks.pl` file defines YAP hook predicates for improving the
 integration between Logtalk and YAP.

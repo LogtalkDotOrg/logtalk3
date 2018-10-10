@@ -92,7 +92,7 @@ portability and reliability.
 This list may be incomplete. Logtalk contributions and feedback occur
 in multiple forms, from private mail to public forums and paper reviews.
 Your contributions are greatly appreciated. If your name is missing,
-please accept our apologies and contact us so we can fix the omission.
+please accept our apologies and contact us so that we can fix the omission.
 Contact us also if, for some reason, you don't want your name on this
 list.
 

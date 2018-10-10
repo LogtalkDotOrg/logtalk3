@@ -46,8 +46,8 @@ syntax with the addition of some operators and directives for a smooth learning
 path.
 
 Logtalk is distributed under a commercial friendly license and includes full
-documentation, portable libraries, portable developer tools, and a large number
-of programming examples to help get you started.
+documentation, portable libraries, portable developer tools, and numerous
+programming examples to help get you started.
 
 Logtalk development adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report
@@ -134,7 +134,7 @@ Registration
 ------------
 
 To register as a Logtalk user either use the registration form found at
-the Logtalk web site:
+the Logtalk website:
 
 https://logtalk.org/regform.html
 
@@ -185,9 +185,9 @@ copyright information.
 Some files that are part of the Logtalk distribution are distributed using
 a different license and/or are copyrighted by a Logtalk contributor.
 
-Some of the included examples are adaptations to Logtalk of Prolog examples
-found elsewhere (e.g. in manuals, tutorials, books, and public mailing list
-discussions). The copyright in the examples original code should be assumed
-to belong to the original authors.
+Some examples are adaptations to Logtalk of Prolog examples found elsewhere
+(e.g. in manuals, tutorials, books, and public mailing list discussions).
+The copyright in the examples original code should be assumed to belong to
+the original authors.
 
 Logtalk is a registered trademark of Paulo Moura.

@@ -28,7 +28,7 @@ Also provided in this folder are four Prolog files, `paths_core.pl`,
 `paths_tools.pl`, `paths_contributions.pl`, and `paths_examples.pl`.
 Together, these files provide the same path definitions of the `paths.pl`
 file. They can be used when embedding or deploying Logtalk applications
-where e.g. tools or example paths should not included. Note that the
+where e.g. tools or example paths should not be included. Note that the
 obvious solution of having `paths.pl` including or loading the other
 four Prolog files is not portable!
 

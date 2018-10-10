@@ -55,7 +55,7 @@ also available in the Logtalk website.
 	installation directory (for example, `./install.sh -p $HOME`)
 
 - `uninstall.sh`  
-	shell script for de-installing Logtalk in Unix and Unix-like operating
+	shell script for uninstalling Logtalk in Unix and Unix-like operating
 	systems (must be run from this directory by a user with administration
 	privileges)
 
@@ -68,7 +68,7 @@ also available in the Logtalk website.
 	compilation mode, these warnings and errors might be expected);
 	it can also write test results in the TAP and xUnit formats, generating files
 	that can then be processed by continuous integration servers;
-	know issue: the output of some of the multi-threading examples may interfere
+	known issue: the output of some multi-threading examples may interfere
 	with the computation of the test/skipped/passed/failed totals;
 	you can use this script on Windows operating-systems by installing Git for
 	Windows (which provides a Bash shell implementation and is available from

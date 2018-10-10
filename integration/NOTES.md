@@ -62,7 +62,7 @@ commands. The integration scripts will need to be called, however, without
 omitting the `.sh` extension.
 
 The first run of the XSB (and possibly of the JIProlog) integration scripts
-must be made by an user with administrative rights. On POSIX systems, run
+must be made by a user with administrative rights. On POSIX systems, run
 them once as root or using `sudo`. In Windows systems, the first run of the
 XSB integration shortcuts must be made from an administrative account
 (right-click on the shortcut and select the "Run as administrator" option).
@@ -96,5 +96,5 @@ using SWI-Prolog as the backend compiler):
 	% swilgt -g "write('Hello world'), nl"
 
 Keep in mind, however, that the integration scripts already use the backend
-Prolog command-line option that allows a initialization file to be loaded in
+Prolog command-line option that allows an initialization file to be loaded in
 order to bootstrap Logtalk. See the script files for details.

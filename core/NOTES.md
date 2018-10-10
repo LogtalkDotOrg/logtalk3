@@ -45,7 +45,7 @@ there's a strong reason to manually load Logtalk.
 The source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).
 
-The `$LOGTALKUSER/docs` directory includes a XHTML version of the core
+The `$LOGTALKUSER/docs` directory includes an XHTML version of the core
 entities documentation. To regenerate the documentation of these libraries,
 start Logtalk with your favorite back-end Prolog compiler and follow these
 steps:
