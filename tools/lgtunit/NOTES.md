@@ -69,7 +69,7 @@ Writing, compiling, and loading unit tests
 ------------------------------------------
 
 In order to write your own unit tests, define objects extending the `lgtunit`
-object. For example:
+object. You may start from the `../../tests-sample.lgt` file. For example:
 
 	:- object(tests,
 		extends(lgtunit)).
