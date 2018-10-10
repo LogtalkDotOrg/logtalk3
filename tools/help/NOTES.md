@@ -51,8 +51,8 @@ command must be available. On MacOS X, the command `open` is used.
 This tool relies on the library portable operating-system access abstraction.
 
 
-Know issues
------------
+Known issues
+------------
 
 On macOS, the `open` command used to open documentation URLs drops the anchors,
 thus preventing navigating to the specified position on the documentation page.

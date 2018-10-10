@@ -28,7 +28,7 @@ The tool takes a directory of Prolog files or a list of Prolog files, loads
 and wraps the code in each file using an object wrapper, and advises on missing
 directives to be added to those objects by using the compiler lint checker and
 the reflection API. The user can then either save the generated wrapper objects
-or copy and paste the printed advise into the Prolog files (updating them to
+or copy and paste the printed advice into the Prolog files (updating them to
 Logtalk files by adding the object opening and closing directives to the Prolog
 files). The wrapper objects use `include/1` directives to include the Prolog
 files and can be loaded for testing and for use with other tools. The wrapped

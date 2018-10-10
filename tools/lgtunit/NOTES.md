@@ -140,7 +140,7 @@ object. For example:
 This clause will cause all tests to be run when calling the `logtalk_make/1`
 predicate with the target `check`. The other possible target is `all`.
 
-Note that you can have multiple tests driver files. For example, one driver
+Note that you can have multiple test driver files. For example, one driver
 file that runs the tests collecting code coverage data and a quicker driver
 file that skips code coverage and compiles the tests in optimized mode.
 
@@ -202,11 +202,11 @@ The possible values of the outcome argument are:
 
 In the case of the `true(Assertion)` and `deterministic(Assertion)` outcomes,
 a message that includes the assertion goal is printed for assertion failures
-and errors to help debugging failed unit tests. Note the this message is only
+and errors to help to debug failed unit tests. Note that this message is only
 printed when the test goal succeeds as its failure will prevent the assertion
 goal from being called.
 
-Some tests may require individual condition, setup, or cleanup goals. in this
+Some tests may require individual condition, setup, or cleanup goals. In this
 case, the following alternative test dialect can be used:
 
 	test(Test, Outcome, Options) :- Goal.
@@ -237,8 +237,8 @@ In all dialects, `Test` is a callable term, usually an atom, that uniquely
 identifies a test. This simplifies reporting failed tests and running tests
 selectively. An error message is printed if duplicated test identifiers are
 found. These errors must be corrected otherwise the reported test results
-can be misleading. Ideally, tests should be named in a descriptive way that
-clearly states the purpose of the test and what is being tested.
+can be misleading. Ideally, tests should have descriptive names that clearly
+state the purpose of the test and what is being tested.
 
 For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.
@@ -248,7 +248,7 @@ code coverage.
 Parameterized unit tests can be easily defined by using parametric objects.
 
 Note: when using the `(<<)/2` debugging control construct to access and test
-an object internal (i.e. non public) predicates, make sure that the compiler
+an object internal (i.e. non-public) predicates, make sure that the compiler
 flag `context_switching_calls` is set to `allow` for those objects.
 
 
@@ -438,7 +438,7 @@ used to set a limit per test set.
 Setup and cleanup goals
 -----------------------
 
-A unit test object can define `setup/0` and `cleanup/0`. goals. The `setup/0`
+A unit test object can define `setup/0` and `cleanup/0` goals. The `setup/0`
 predicate is called, when defined, before running the object unit tests. The
 `cleanup/0` predicate is called, when defined, after running all the object
 unit tests. The tests are skipped when the setup goal fails or throws an error.
@@ -524,7 +524,7 @@ using the flags `debug(on)` and `source_data(on)`. Be aware, however,
 that compiling in debug mode results in a performance penalty.
 
 A single unit test object may include tests for one or more entities (objects,
-protocols, and categories). The entities being tested by an unit test object
+protocols, and categories). The entities being tested by a unit test object
 for which code coverage information should be collected must be declared using
 the `cover/1` predicate. For example, to collect code coverage data for the
 objects `foo` and `bar` include the two clauses:
@@ -535,7 +535,7 @@ objects `foo` and `bar` include the two clauses:
 In the printed predicate clause coverage information, you may get a total
 number of clauses smaller than the covered clauses. This results from the
 use of dynamic predicates with clauses asserted at runtime. You may easily
-identify dynamic predicates in the results as their clauses often have a
+identify dynamic predicates in the results as their clauses often have an
 initial count equal to zero.
 
 The list of indexes of the covered predicate clauses can be quite long.
@@ -589,7 +589,7 @@ argument fails or throws an error
 - `approximately_equal(Number1, Number2, Epsilon)` - for number approximate equality
 - `essentially_equal(Number1, Number2, Epsilon)` - for number essential equality
 - `tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)` - for number equality within tolerances
-- `Number1 =~= Number2` - for number (or list of numbers) close equality (usually floating point numbers)
+- `Number1 =~= Number2` - for number (or list of numbers) close equality (usually floating-point numbers)
 
 - `benchmark(Goal, Time)` - for timing a goal
 - `benchmark_reified(Goal, Time, Result)` - reified version of `benchmark/2`
@@ -669,7 +669,7 @@ The XML file can be opened in most web browsers (with the notorious exception
 of Google Chrome) by copying to the same directory the `coverage_report.dtd`
 and `coverage_report.xsl` files found in the `tools/lgtunit` directory (when
 using the `logtalk_tester` script, these two files are copied automatically).
-In alternative, a XSLT processor can be used to generate an XHTML file instead
+In alternative, an XSLT processor can be used to generate an XHTML file instead
 of relying on a web browser for the transformation. For example, using the
 popular `xsltproc` processor:
 

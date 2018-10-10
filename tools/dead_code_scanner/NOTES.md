@@ -29,7 +29,7 @@ Predicates (and non-terminals) listed in `uses/2` and `use_module/2` directives
 but that are not used are also classified as dead code.
 
 Besides dead code, this tool can also help detect other problems in the code
-than often result in reporting false positives. For example, typos in `alias/2`
+that often result in reporting false positives. For example, typos in `alias/2`
 directives, missing scope directives, and missing `meta_non_terminal/1` and
 `meta_predicate/1` directives.
 
@@ -65,7 +65,7 @@ This tool can be loaded using the query:
 Known issues
 ------------
 
-Use of local meta-calls with goal arguments only know at runtime can result
+Use of local meta-calls with goal arguments only known at runtime can result
 in false positives. When using library or user-defined meta-predicates, it
 can be helpful to compile the source files with the `optimize` flag turned
 on so that the meta-calls may be resolved at compile time and thus allow

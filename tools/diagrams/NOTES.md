@@ -91,10 +91,10 @@ Library dependency diagrams are specially useful for large applications
 where file diagrams would be too large and complex to be useful, specially
 when combined with the *zoom* option to link to individual library diagrams.
 
-An utility object, `diagrams`, is provided for generating all supported
+A utility object, `diagrams`, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
-diagrams but note that some of the predicates that generate diagrams only
-make sense for some types of diagrams.
+diagrams but note that some predicates that generate diagrams only make
+sense for some types of diagrams.
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
@@ -193,7 +193,7 @@ For more information on the DOT language and related tools see:
 
 	http://www.graphviz.org/
 
-When using Windows, there are know issues with some Prolog compilers due
+When using Windows, there are known issues with some Prolog compilers due
 to the internal representation of paths. If you encounter problems with a
 specific back-end Prolog compiler, try to use another supported back-end
 Prolog compiler when generating diagrams.
@@ -232,9 +232,9 @@ generated diagrams. For entity diagrams the options are:
 - `provide_relations(Boolean)`  
 	print/omit provide relations (`true` or `false`; default is `false`)
 - `xref_relations(Boolean)`  
-	print/omit predicate call cross reference relations (`true` or `false`; default depends on the specific diagram)
+	print/omit predicate call cross-reference relations (`true` or `false`; default depends on the specific diagram)
 - `xref_calls(Boolean)`  
-	print/omit predicate cross reference calls (`true` or `false`; default depends on the specific diagram)
+	print/omit predicate cross-reference calls (`true` or `false`; default depends on the specific diagram)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)
 - `exclude_files(Files)`  
@@ -361,7 +361,7 @@ simply define an object including its code:
 		:- include('code.pl').
 	:- end_object.
 
-Save the object to a e.g. `code.lgt` file in the same directory as the
+Save the object to an e.g. `code.lgt` file in the same directory as the
 Prolog file and then load it and create the diagram:
 
 	?- logtalk_load(code), xref_diagram::entity(code).

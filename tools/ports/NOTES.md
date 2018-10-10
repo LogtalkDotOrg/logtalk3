@@ -100,8 +100,7 @@ To reset only the data about a specific entity, use the query:
 Interpreting profiling data
 ---------------------------
 
-Some of the useful information that can be inferred from the profiling data
-include:
+Some useful information that can be inferred from the profiling data include:
 
 - which predicates are called more often (from the `call` port)
 - unexpected failures (from the `fail` port)

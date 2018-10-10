@@ -53,7 +53,7 @@ Currently, the following metrics are provided:
 All metrics require the source code to be analyzed to be loaded with the
 `source_data` flag turned on.
 
-An helper object, `code_metrics`, is also provided allowing running all
+A helper object, `code_metrics`, is also provided allowing running all
 loaded individual metrics.
 
 For usage examples, see the `SCRIPT.txt` file.
@@ -79,7 +79,7 @@ paper by Robert Martin, "OO Design Quality Metrics":
 
 The Halstead metric computation uses the reflection API for performance.
 The main consequence of this choice is that we abstract all predicate
-arguments. A computation closer to the original definiton of the metric
+arguments. A computation closer to the original definition of the metric
 would require switching to use the parser to collect information on
 syntactic literals, which would imply a much large computation cost.
 
