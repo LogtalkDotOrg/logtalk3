@@ -97,7 +97,7 @@ html_favicon = 'logtalk.ico'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_last_updated_fmt = ''
+# html_last_updated_fmt = ''
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
