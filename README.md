@@ -73,9 +73,8 @@ scripts or by using an [installer](https://logtalk.org/download.html) for your
 operating system. For manual installation, see the [INSTALL.md](INSTALL.md)
 file for detailed instructions.
 
-See the user manual for a description of the source files organization
-and for using instructions (to read the user manual open the
-[index](manuals/index.html) file in a web browser).
+See the [user manual](manuals/index.html) for a description of the source
+files organization and for usage instructions.
 
 If you are upgrading from a previous Logtalk version, please check the
 [UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
