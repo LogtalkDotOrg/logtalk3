@@ -104,8 +104,9 @@ A quick and highly recommended introduction for users comfortable with Prolog
 and with general knowledge about object-oriented programming is available at
 the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
-The reference and user manuals are provided in XHTML and PDF formats and can be
-found in the [manuals](manuals/) directory. They are also available online at:
+The reference and user manuals are provided in HTML, PDF, and ePub formats and
+can be found in the [manuals](manuals/) directory. They are also available
+online at:
 
 https://logtalk.org/manuals/index.html
 
@@ -113,8 +114,8 @@ The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
 Logtalk updates since the first public version. Please check it if you are
 upgrading from a previous Logtalk version.
 
-The API documentation for the core, library, tools, and contributions entities
-is provided in XHTML format and can be found in the [docs](docs/) directory and
+The API documentation for the core, library, tools, and contributions is
+provided in HTML format and can be found in the [docs](docs/) directory and
 also available online at:
 
 https://logtalk.org/docs/index.html
