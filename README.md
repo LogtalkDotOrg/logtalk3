@@ -133,8 +133,7 @@ Additional useful information is available in the official repository
 Registration
 ------------
 
-To register as a Logtalk user either use the registration form found at
-the Logtalk website:
+To register as a Logtalk user please use the registration at:
 
 https://logtalk.org/regform.html
 
@@ -152,7 +151,7 @@ Support channels include:
 * [Community discussion forums](https://forums.logtalk.org/)
 * [Community live chat room](https://gitter.im/LogtalkDotOrg/logtalk3)
 
-For more information on support options, please consult the web page:
+For more information on support options, please consult:
 
 https://logtalk.org/support.html
 
