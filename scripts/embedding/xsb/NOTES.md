@@ -31,8 +31,8 @@ For example:
 
 	| ?- loader:load(logtalk).
 
-Know issues
------------
+Known issues
+------------
 
 A ISO Prolog standard compliance bug in the handling of `initialization/1`
 directives by XSB currently prevents passing a settings file to the script.
