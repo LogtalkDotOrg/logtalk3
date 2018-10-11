@@ -291,8 +291,8 @@
 <p>Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
 <ul class="simple">
 <li>author: Paulo Moura</li>
-<li>version: 1.18</li>
-<li>date: 2018/8/28</li>
+<li>version: 1.19</li>
+<li>date: 2018/10/11</li>
 <li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls,</span> <span class="pre">complements(restrict)</span></code></li>
 </ul>
 <p>(no dependencies on other entities)</p>
@@ -384,10 +384,10 @@
 <li><strong>Logtalk specific types</strong>: {entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}</li>
 <li><strong>Prolog module related types (when the backend compiler supports modules)</strong>: {module, module_identifier, qualified_callable}</li>
 <li><strong>Base types from Prolog</strong>: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}</li>
-<li><strong>Atom derived types</strong>: {non_empty_atom, boolean, character}</li>
+<li><strong>Atom derived types</strong>: {non_empty_atom, boolean, character, operator_specifier}</li>
 <li><strong>Number derived types</strong>: {positive_number, negative_number, non_positive_number, non_negative_number}</li>
 <li><strong>Float derived types</strong>: {positive_float, negative_float, non_positive_float, non_negative_float, probability}</li>
-<li><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}</li>
+<li><strong>Integer derived types</strong>: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, operator_priority}</li>
 <li><strong>List types (compound derived types)</strong>: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}</li>
 <li><strong>Other compound derived types</strong>: {predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}</li>
 <li><strong>Stream types</strong>: {stream, stream_or_alias, stream(Property), stream_or_alias(Property)}</li>
@@ -439,7 +439,6 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, Paulo Moura
-      Last updated on Oct 10, 2018.
 
     </p>
   </div>

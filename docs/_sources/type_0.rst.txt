@@ -9,8 +9,8 @@
 Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
 
 * author: Paulo Moura
-* version: 1.18
-* date: 2018/8/28
+* version: 1.19
+* date: 2018/10/11
 * compilation flags: ``static, context_switching_calls, complements(restrict)``
 
 (no dependencies on other entities)
@@ -152,13 +152,13 @@ Remarks
 
 * **Base types from Prolog**: {term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}
 
-* **Atom derived types**: {non_empty_atom, boolean, character}
+* **Atom derived types**: {non_empty_atom, boolean, character, operator_specifier}
 
 * **Number derived types**: {positive_number, negative_number, non_positive_number, non_negative_number}
 
 * **Float derived types**: {positive_float, negative_float, non_positive_float, non_negative_float, probability}
 
-* **Integer derived types**: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}
+* **Integer derived types**: {positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, operator_priority}
 
 * **List types (compound derived types)**: {list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}
 

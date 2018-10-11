@@ -59,6 +59,9 @@ Library
 * CHANGED: The library, tools, and contributions APIs are now generated from
 reStructuredText intermediate files using Sphinx.
 
+* ADDED: Types `operator_specifier` and `operator_priority` to the `type`
+library object.
+
 * UPDATED: The `parallel_logtalk_processes_setup.pl` Prolog file with sample
 code for ECLiPSe and SICStus Prolog and usage alternatives.
 

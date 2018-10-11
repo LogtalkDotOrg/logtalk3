@@ -21,18 +21,18 @@
 :- object(type).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2018/08/28,
+		date is 2018/10/11,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '{entity, object, protocol, category, entity_identifier, object_identifier, protocol_identifier, category_identifier, event, predicate}',
 			'Prolog module related types (when the backend compiler supports modules)' - '{module, module_identifier, qualified_callable}',
 			'Base types from Prolog' - '{term, var, nonvar, atomic, atom, number, integer, float, compound, callable, ground}',
-			'Atom derived types' - '{non_empty_atom, boolean, character}',
+			'Atom derived types' - '{non_empty_atom, boolean, character, operator_specifier}',
 			'Number derived types' - '{positive_number, negative_number, non_positive_number, non_negative_number}',
 			'Float derived types' - '{positive_float, negative_float, non_positive_float, non_negative_float, probability}',
-			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code}',
+			'Integer derived types' - '{positive_integer, negative_integer, non_positive_integer, non_negative_integer, byte, character_code, operator_priority}',
 			'List types (compound derived types)' - '{list, non_empty_list, partial_list, list_or_partial_list, list(Type), list(Type, Min, Max), non_empty_list(Type), difference_list, difference_list(Type)}',
 			'Other compound derived types' - '{predicate_indicator, non_terminal_indicator, predicate_or_non_terminal_indicator, clause, clause_or_partial_clause, grammar_rule, pair, pair(KeyType,ValueType), cyclic, acyclic}',
 			'Stream types' - '{stream, stream_or_alias, stream(Property), stream_or_alias(Property)}',
@@ -171,11 +171,13 @@
 	type(non_negative_integer).
 	type(byte).
 	type(character_code).
+	type(operator_priority).
 	% atom derived types
 	type(non_empty_atom).
 	type(boolean).
 	type(character).
 	type(order).
+	type(operator_specifier).
 	% compound derived types
 	type(predicate_indicator).
 	type(non_terminal_indicator).
@@ -522,6 +524,16 @@
 		;	throw(type_error(atom, Term))
 		).
 
+	check(operator_specifier, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	member(Term, [fx, fy, xfx, xfy, yfx, xf, yf]) ->
+			true
+		;	atom(Term) ->
+			throw(domain_error(operator_specifier, Term))
+		;	throw(type_error(atom, Term))
+		).
+
 	% number derived types
 
 	check(positive_number, Term) :-
@@ -677,6 +689,16 @@
 			0 =< Term, Term =< Upper ->
 			true
 		;	throw(domain_error(character_code, Term))
+		).
+
+	check(operator_priority, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	0 =< Term, Term =< 1200 ->
+			true
+		;	throw(domain_error(operator_priority, Term))
 		).
 
 	% compound derived types
