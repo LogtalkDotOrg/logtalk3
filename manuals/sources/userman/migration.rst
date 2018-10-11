@@ -280,7 +280,7 @@ directives. For better portability avoid this usage. For example, write:
 
 instead of:
 
-::
+.. code-block:: text
 
    :- dynamic foo/1, bar/2.
 
