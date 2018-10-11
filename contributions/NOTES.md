@@ -61,36 +61,9 @@ a short description of each included contribution:
 See the copyright and license information on the contributed files for 
 usage and distributions conditions.
 
-The `contributions/loader.lgt` file loads all contributions and is
-mainly used when generating the XHTML documentation by following the
-steps:
+The `contributions/loader.lgt` file loads all contributions.
 
-(1) Load all contributions using the query:
-
-	| ?- {contributions(loader)}.
-
-(2) Load the `lgtdoc` tool and generate the XML documenting files for all
-library entities using the queries:
-
-	| ?- {lgtdoc(loader)}.
-	...
-
-	| ?- lgtdoc::library(flags, [xml_docs_directory('$LOGTALKUSER/docs/tmp1')]),
-		lgtdoc::library(pddl_parser, [xml_docs_directory('$LOGTALKUSER/docs/tmp2')]),
-		lgtdoc::library(verdi_neruda, [xml_docs_directory('$LOGTALKUSER/docs/tmp3')]),
-		lgtdoc::library(xml_parser, [xml_docs_directory('$LOGTALKUSER/docs/tmp4')]),
-		lgtdoc::library(iso8601, [xml_docs_directory('$LOGTALKUSER/docs/tmp5')]).
-
-(3) Run the command `lgt2html` on the temporary directories to generate the
-(X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
-
-	$ cd "$LOGTALKUSER/docs/tmp1" && lgt2html -i flags.html -t "Flags" && mv *.html ..
-	$ cd ../tmp2 && lgt2html -i pddl_parser.html -t "PDDL Parser" && mv *.html ..
-	$ cd ../tmp3 && lgt2html -i verdi_neruda.html -t "Verdi Neruda" && mv *.html ..
-	$ cd ../tmp4 && lgt2html -i xml_parser.html -t "XML Parser" && mv *.html ..
-	$ cd ../tmp5 && lgt2html && rm index.html && mv *.html ..
-
-After generating the (X)HTML and/or PDF documentation, you can delete the
-temporary directories:
-
-	$ cd .. && rm -rf $LOGTALKUSER/docs/tmp*
+HTML documentation for each contribution API can be found on the `docs`
+directory (open the `docs/index.html` file with your web browser). The
+documentation for these tools can be regenerated using the shell scripts
+`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.

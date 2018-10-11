@@ -29,8 +29,11 @@ output.
 
 Validation:
 	The provided unit tests are based on a collection of problemset
-	files from International Planning Competition 2008. in order to
+	files from International Planning Competition 2008. In order to
 	run all unit tests from the parser's directory type:
 		?- logtalk_load(tester).
+	Or from any directory by typing:
+		?- logtalk_load(pddl_parser(tester)).
+
 	Some of the unit tests fail in some Prolog compilers due to
 	limitations to the maximum arity of a term.
