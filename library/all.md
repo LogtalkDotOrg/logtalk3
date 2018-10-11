@@ -34,8 +34,7 @@ and choose the library index.
 Loading
 -------
 
-The `all_loader.lgt` file will load all the library entities (with the
-exception of the large Unicode data files) loaded by the other loader
-files:
+The `all_loader.lgt` file will load all the library entities (except for
+the large Unicode data files) loaded by the other loader files:
 
 	| ?- logtalk_load(library(all_loader)).

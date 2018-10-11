@@ -44,7 +44,7 @@ utility file:
 Usage
 -----
 
-Pre-processing a source file with an hook object can be accomplished by either
+Pre-processing a source file with a hook object can be accomplished by either
 compiling the source file using the option `hook(HookObject)` or by adding to
 the top of the file the directive:
 

@@ -26,7 +26,7 @@ implementation. For full documentation on EDCGs, see:
 
 	https://www.info.ucl.ac.be/%7Epvr/edcg.html
 
-This Logtalk version defines an hook object, `edcg`. Source files defining
+This Logtalk version defines a hook object, `edcg`. Source files defining
 EDCGs must be compiled using the compiler option `hook(edcg)`:
 
 	| ?- logtalk_load(source, [hook(edcg)]).
@@ -53,8 +53,8 @@ to temporarily save those predicates in order to parse the corresponding
 EDCGs.
 
 Follows the usage documentation written by Michael Hendricks (with a
-contribution from Peter Peter Ludemann), used here with permission, with
-the necessary changes for the Logtalk port.
+contribution from Peter Ludemann), used here with permission, with the
+necessary changes for the Logtalk port.
 
 # Synopsis
 

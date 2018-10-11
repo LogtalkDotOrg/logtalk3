@@ -24,9 +24,8 @@ The `date` object implements some useful calendar date predicates.
 
 The `time` object implements some useful time predicates.
 
-Please note that some of the functionality of these objects depends 
-on the chosen Prolog support for accessing operating system time and 
-date data.
+Please note that the functionality of these objects depends on the chosen
+Prolog support for accessing the operating system time and date.
 
 
 API documentation

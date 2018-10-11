@@ -23,7 +23,7 @@ About
 The library Java entities define a minimal abstraction for calling Java
 from Logtalk. This abstraction makes use of Logtalk parametric objects
 and allows creating Java object, accessing Java class fields, and calling
-Java class and object methods using a more Logtalk-like syntax. It also
+Java class and object methods using syntax closer to Logtalk. It also
 gives access to some Java utility predicates.
 
 This abstraction was developed primarily to work with the JPL library
