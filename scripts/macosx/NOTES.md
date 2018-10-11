@@ -17,6 +17,6 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains files used when building MacOS X installer 
+This directory contains files used when building macOS installer 
 packages and a set of double-clickable `*.command` Terminal files
 for starting Logtalk with selected back-end Prolog compilers.

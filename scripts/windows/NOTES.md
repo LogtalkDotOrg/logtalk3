@@ -35,7 +35,7 @@ systems that are detected when running the installer. Most Prolog
 installers write entries in the Windows registry that are read by
 the Logtalk installer. Some Prolog systems, however, use environment
 variables. If a shortcut is not being created for a supported and
-installed Prolog compiler, possibly due to a non standard install,
+installed Prolog compiler, possibly due to a non-standard install,
 check the registry and environment variable assumptions made by the
 installer.
 

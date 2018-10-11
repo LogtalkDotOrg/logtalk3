@@ -30,7 +30,8 @@ The `build_rpm.sh` shell script makes the following assumptions:
 	%_tmppath     /var/tmp
 
 (2) The `~/rpmbuild` directory structure already exists. The command
-`rpmdev-setuptree` can be used to create these structure. Otherwise:
+`rpmdev-setuptree` can be used to create these structure. In alternative,
+the directory structure can be manually created using the commands:
 
 	$ cd $HOME
 	$ mkdir rpmbuild
