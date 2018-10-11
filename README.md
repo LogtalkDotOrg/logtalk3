@@ -161,8 +161,8 @@ Citations
 
 If you find Logtalk useful, please include a citation on your publications
 (also cite the used backend Prolog compilers). The [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib)
-file includes bibliographic references in BibTeX format (the Logtalk user
-and reference manuals and the 2003 PhD thesis on Logtalk are good choices).
+file includes bibliographic references in BibTeX format (including the 2003
+PhD thesis on Logtalk design and implementation).
 
 
 Contributions
@@ -178,7 +178,7 @@ Legal
 Logtalk is copyrighted by Paulo Moura and made available under the Apache
 License 2.0. See the [LICENSE.txt](LICENSE.txt) file for the license terms.
 The copyright notice and license applies to all files in this release unless
-otherwise explicitly stated. See the [NOTICE.txt](NOTICE.txt) for detailed
+otherwise explicitly stated. See the [NOTICE.txt](NOTICE.txt) for additional
 copyright information.
 
 Some files that are part of the Logtalk distribution are distributed using
