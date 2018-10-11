@@ -22,7 +22,7 @@ file.
 
 This folder contains several examples of using Prolog built-in meta-predicates
 and module meta-predicates that take closures as arguments. It is used to help
-testing Logtalk support for dealing with closures as it requires generation of
+test the Logtalk support for dealing with closures as it requires generation of
 a helper predicate per call to workaround a clash between the way Logtalk
 compiles predicates and the way a closure is extended to form a goal.
 

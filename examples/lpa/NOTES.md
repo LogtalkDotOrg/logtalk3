@@ -18,6 +18,6 @@ ________________________________________________________________________
 
 
 This directory contains examples adapted from the LPA Prolog++ 
-Reference Manual. This manual can be downloaded from the LPA web 
-site at <http://www.lpa.co.uk>. Please consult this reference 
+Reference Manual. This manual can be downloaded from the LPA
+website at <http://www.lpa.co.uk>. Please consult this reference 
 manual for further informations about each example.

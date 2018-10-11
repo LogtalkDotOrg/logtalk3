@@ -37,12 +37,12 @@ given a maximum approximation error. `NP` represents the method to be used, one
 of (0,1,2,3).
 
 For NP = 0 an adaptive trapezoidal rule is used.
-FOR NP=1,2,3,4 an adaptive gaussian quadrature of 1, 2, 3, or points is used.
+FOR NP=1,2,3,4 an adaptive Gaussian quadrature of 1, 2, 3, or points is used.
 
-For `quadrec/1`, the method used for the multithreading is simply to divide the 
-initial area amongst the number of threads available (a power of 2) and then 
-in each interval the recursive method is applied. The `threaded/1` predicate 
-is used.
+For `quadrec/1`, the method used for the multi-threading is simply to divide
+the initial area amongst the number of threads available (a power of 2) and
+then in each interval the recursive method is applied. The `threaded/1`
+predicate is used.
 
 For `quadsplit/1`, the method used is again division (split) of the original
 area amongst the number of threads specified. This method has no restriction

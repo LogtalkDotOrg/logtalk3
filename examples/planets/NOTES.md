@@ -20,5 +20,5 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This is a simple example illustrating the basics of a defining and using
+This is a simple example illustrating the basics of defining and using
 protocols and categories.

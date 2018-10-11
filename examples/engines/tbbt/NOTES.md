@@ -24,5 +24,6 @@ in the "The Big Bang Theory" sitcom using one threaded engine per player. See:
 
 	http://www.samkass.com/theories/RPSSL.html
 
-Currently this example requires SWI-Prolog. It should run also on XSB and YAP
-if and when these systems fix the bugs in their multi-threading support.
+Currently this example requires ECLiPSe or SWI-Prolog. It should run also on
+XSB and YAP if and when these systems fix the bugs in their multi-threading
+support.

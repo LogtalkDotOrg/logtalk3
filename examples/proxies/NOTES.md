@@ -33,7 +33,7 @@ then the following terms may be interpreted as references to the object above:
 	circle(1, blue)
 	circle(2, yellow)
 
-In the context of parametric objects, the above terms are know as "parametric 
+In the context of parametric objects, the above terms are known as "parametric
 object proxies". Proxies represent different instantiations of a parametric 
 object parameters. Proxy terms may be stored on the database as Prolog facts 
 or as Prolog rules (parameter instantiation can be deduced instead of being 

@@ -21,6 +21,6 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains a Logtalk version of the programming problem 
-"99 bottles of beer  on the wall", contributed to the web site:
+"99 bottles of beer on the wall", contributed to the web site:
 
 	http://99-bottles-of-beer.net/

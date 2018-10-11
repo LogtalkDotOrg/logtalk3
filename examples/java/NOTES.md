@@ -20,8 +20,8 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file. Running all the examples and the benchmarks requires SWI-Prolog with
 the JPL library installed. YAP most likely would be usable when the old JPL
-library bundled with it is updated. Some of the examples (but not the
-benchmarks) can also be used with JIProlog.
+library bundled with it is updated. Some examples (but not the benchmarks)
+can also be used with JIProlog.
 
 This folder contains examples, most of them adapted from the JPL library
 distributed with SWI-Prolog and YAP, of calling Java from Logtalk. It uses
@@ -30,7 +30,7 @@ a lightweight abstraction included in the Logtalk library for calling Java.
 Adaptations of the JColorChooser and JOptionPane dialog examples and the
 JTable example from the JPL distribution are included.
 
-When running the GUI examples on the Mac OS X Terminal application, you may
+When running the GUI examples on the macOS Terminal application, you may
 get a Java error saying that the AWT cannot be started. In alternative, try
 to run the example from within the SWI-Prolog Mac OS X application instead
 of using the shell integration script. This issue is due to a Mac OS X Java

@@ -39,7 +39,7 @@ In the `quadsplit2d` object, a divide and conquer approach is also used but
 the original domain is split along a single dimension. A thread is spawned 
 for each sub-interval. This method can use any number of threads. However, 
 by splitting along a single dimension, this method may perform poorly for 
-functions where the splitting leaves must of work to just a few threads 
+functions where the splitting leaves most of work to just a few threads 
 (resulting in load balancing problems).
 
 The split/span/collect of thread goals uses the Logtalk built-in predicates 
@@ -52,7 +52,7 @@ Both objects implement the same protocol:
 This predicate allows us to find the integral of a function of two variables 
 on the rectangular domain `[A,B][C,D]` given a maximum approximation error.
 NP represents the method to be used (0,1,2,3). For NP = 0, an adaptive 
-trapezoidal rule is used. For NP = 1, 2, 3 an adaptive gaussian quadrature of
+trapezoidal rule is used. For NP = 1, 2, 3 an adaptive Gaussian quadrature of
 1, 2, or 3 points is used.
 
 

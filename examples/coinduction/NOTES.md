@@ -83,3 +83,18 @@ For more information see:
 	  keywords = {coinduction,corecursion},
 	  year = 2012
 	}
+
+	@inproceedings{pmoura13b,
+		author = {Paulo Moura},
+		title = "{A Portable and Efficient Implementation of Coinductive Logic Programming}",
+		booktitle = {Proceedings of the Fifteenth International Symposium on Practical Aspects of Declarative Languages},
+		editor = "Kostis Sagonas",
+		series = "Lecture Notes in Computer Science",
+		pages = {77-92},
+		volume = "7752",
+		year = {2013},
+		publisher = "Springer-Verlag",
+		address = "Berlin Heidelberg",
+		doi = {10.1007/978-3-642-45284-0_6},
+		url = {http://dx.doi.org/10.1007/978-3-642-45284-0_6}
+	}

@@ -22,7 +22,7 @@ file.
 
 This folder contains two simple multi-threading examples illustrating the 
 use of the `synchronized/1` predicate directive to cope with methods that 
-have side-effects.
+have side effects.
 
 The `slow_print` example was originally coded for a Rosetta Code contribution
 available at:

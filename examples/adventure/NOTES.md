@@ -29,8 +29,8 @@ adventures:
 
 For the "sleepy" and "spider" adventures, I applied the necessary changes
 to ensure compatibility with all the back-end Prolog compilers that you
-can use with Logtalk, rewrote some of the code to avoid creation of
-choice-points, and added a very simple command-line interface.
+can use with Logtalk, rewrote some code to avoid creation of choice-points,
+and added a very simple command-line interface.
 
 For the "wumpus" adventure, I applied the necessary changes to ensure
 compatibility with all the back-end Prolog compilers that you can use

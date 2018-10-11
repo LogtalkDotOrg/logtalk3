@@ -20,7 +20,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-Some of the code in this folder is adapted, with permission, from the book 
+Some code in this folder is adapted, with permission, from the book 
 "Prolog Programming for Artificial Intelligence" by Ivan Bratko.
 
 For a description of the search problems, please see a classical AI book 

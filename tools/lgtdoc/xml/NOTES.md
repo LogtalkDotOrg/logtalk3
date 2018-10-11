@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 This folder contains supporting files for converting and/or indexing XML
 documenting files (which are created using the `lgtdoc` tool) to final
-formats such as PDF, ePub, HTML, reStructuredText, Markdown, and plain
+formats such as PDF, ePub, (X)HTML, reStructuredText, Markdown, and plain
 text files using XSL style sheets. The documenting files may also be
 viewed directly on a web browser that supports the W3C standards XML,
 XSLT, CSS, and HTML 4 or XHTML 1.0.

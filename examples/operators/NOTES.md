@@ -20,8 +20,8 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains examples of the used of operators inside objects 
-and categories:
+This folder contains examples of using operators inside objects and
+categories:
 
 - `double.lgt`  
 	Simple object containing clauses using an infix operator.

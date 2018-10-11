@@ -84,14 +84,14 @@ plain Prolog calls when using imported predicates and implicit qualification.
 When using explicit module qualification, performance can be worse.
 
 When static binding is used, messages to objects are, whenever possible, 
-translated to direct predicate calls. Thus performance should be about the 
+translated to direct predicate calls. Thus, performance should be about the
 same as in plain Prolog predicate calls. However, due to the overhead of 
 one extra argument per object predicate (used for passing the execution 
 context), the performance of Logtalk optimized calls might be slightly 
 worse than the equivalent plain Prolog predicate calls.
 
 When running the tests, pay special attention to the empty loop times. If
-the times for the empty loop are not stable across runs, try to use an
+the times for the empty loop are not stable across runs, try to use a
 higher value (than the default one) as argument of the `run/1` predicate.
 
 When the number of benchmark test repetitions is too low, you may get a

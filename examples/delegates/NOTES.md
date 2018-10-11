@@ -20,7 +20,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This folder contains an implementation of the delegation design pattern and
-is based on the sample code found on the Rosetta Code web site. For more
+is based on the sample code found on the Rosetta Code website. For more
 information see:
 
 	http://en.wikipedia.org/wiki/Delegation_pattern

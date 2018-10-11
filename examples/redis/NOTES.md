@@ -17,7 +17,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To example contains only unit tests for the Redis client library but
+This example contains only unit tests for the Redis client library but
 these tests also serve as examples of using this library. To run all
 the unit tests, please see the `SCRIPT.txt` file. The tests assume a
 local Redis server running on the default port. If the server is not

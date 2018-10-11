@@ -25,17 +25,16 @@ multi-threading may be turned off by default. In order to run the examples,
 you may need to first turn on multi-threading support on the Prolog adapter 
 files.
 
-Some of the examples try to benchmark single-threaded and multi-threaded 
-solutions. Depending on the Prolog compiler, the operating-system, and the 
-computer used, you may need to adjust the size of the problem data in order 
-to find the threshold where multi-threading solutions begin to outperform 
-the single-threaded solutions.
+Some examples try to benchmark single-threaded and multi-threaded solutions.
+Depending on the Prolog compiler, the operating-system, and the computer
+used, you may need to adjust the size of the problem data in order to find
+the threshold where multi-threading solutions begin to outperform the
+single-threaded solutions.
 
-Some of the examples may imply adjusting the default size of thread data 
-areas or, preferably, use of the 64 bits version of the compatible Prolog 
-compilers.
+Some examples may imply adjusting the default size of thread data areas or,
+preferably, use of the 64 bits version of the compatible Prolog compilers.
 
 There are known Prolog bugs on the multi-threading support found on XSB, 
 YAP, and SWI-Prolog. These bugs prevent some examples to run and may lead 
-to crashes. Some of the bugs are platform-specific, only occurring on some 
+to crashes. Some bugs are platform-specific, only occurring on some 
 operating-systems.

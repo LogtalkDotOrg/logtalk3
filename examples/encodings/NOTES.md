@@ -41,9 +41,6 @@ error.
 JIProlog and Lean Prolog default encoding is UTF-8. Therefore, only the
 `babel.lgt` file can be used with these systems.
 
-K-Prolog 6.0.x supports US-ASCII, UTF-8, EUC-JP, and Shift_JIS encodings. 
-Thus, only the `babel.lgt` file can be used with this compiler.
-
 Be sure to use a text editor that supports these encodings when opening 
 these files. In addition, you may need to configure your text editor to 
 open the source file using the declared encoding. Be sure to use a font 

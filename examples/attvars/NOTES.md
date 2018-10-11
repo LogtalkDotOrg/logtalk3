@@ -37,7 +37,7 @@ within the context of the container object).
 When using XSB, the `attvars_hook` hook object works by generating the
 `install_verify_attribute_handler/4` and `install_attribute_portray_hook/3`
 XSB directives, invoked using Logtalk-compiled arguments. These directives
-allows the use of common code for SWI-Prolog, XSB, and YAP.
+allow the use of common code for SWI-Prolog, XSB, and YAP.
 
 When using B-Prolog, the `attribute_goals//1` hook grammar rule is discarded.
 

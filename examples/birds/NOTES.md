@@ -21,7 +21,7 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains an example of a bird identification expert system 
-adapted with permission from the book "Adventure in Prolog" by Amzi! inc. 
+adapted with permission from the book "Adventure in Prolog" by Amzi! Inc. 
 The book is available on-line in HTML format at the URL:
 
 	http://www.amzi.com

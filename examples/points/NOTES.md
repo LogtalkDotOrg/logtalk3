@@ -64,7 +64,7 @@ on one point, while an object state, of the classes representing each one
 of the point types. This can be achieved through the definition of two new
 categories, `bounded_coordinate` and `point_history`, that will define the
 operations associated both to the memorization of previous values, and to
-the verification of feasible limits for a coordinate value. Each one of the
-`point`, `bounded_point`, `history_point`, and `bounded_history_point`
-classes will import this category, using his operations so as to define the
+the verification of feasible limits for a coordinate value. Each one of
+the `point`, `bounded_point`, `history_point`, and `bounded_history_point`
+classes will import this category, using his operations to define the
 methods affecting the solutions that use multiple inheritance.

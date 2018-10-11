@@ -20,11 +20,10 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains examples of using some of the built-in database 
-handling methods with object and categories. Two object hierarchies are
-provided, one prototype-based, and the other class-based, in order to
-illustrate the differences between asserting predicates in a class and
-in a prototype:
+This folder contains examples of using the built-in database handling
+methods with object and categories. Two object hierarchies are provided,
+one prototype-based, and the other class-based, in order to illustrate
+the differences between asserting predicates in a class and in a prototype:
 
 The following objects are defined:
 

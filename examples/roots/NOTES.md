@@ -20,11 +20,10 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains rewritten versions of some of the objects provided 
-with previous, 1.x versions, of the Logtalk system. They are intended to 
-help the conversion of applications from Logtalk 1.x to 2.x and to
-support most of the other examples provided with the current Logtalk
-distribution.
+This folder contains rewritten versions of some objects provided  with
+previous, 1.x versions, of Logtalk. They are intended to  help the
+conversion of applications from Logtalk 1.x to 2.x and to support most
+of the other examples provided with the current Logtalk distribution.
 
 Short description of each example entity:
 

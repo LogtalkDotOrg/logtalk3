@@ -21,6 +21,6 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains examples of using Logtalk support for lambda
-expressions. Some of the examples and test queries are collected
-from public discussions on lambda expressions on the SWI-Prolog
-mailing list and on the `comp.lang.prolog` discussion group.
+expressions. Some examples and test queries are collected from public
+discussions on lambda expressions on the SWI-Prolog mailing list and
+on the `comp.lang.prolog` discussion group.
