@@ -28,12 +28,12 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/debugger/](https://logtalk.org/docs/directory_index.html#tools/debugger/)
+[docs/library_index.html#debugger](https://logtalk.org/docs/library_index.html#debugger)
 
 For more information on using the debugger, open in a web browser the
 following file and consult the debugging section of the User Manual:
 
-[manuals/userman/programming.html#programming_debugging](https://logtalk.org/manuals/userman/programming.html#programming_debugging)
+[manuals/userman/programming.html#debugging-logtalk-applications](https://logtalk.org/manuals/userman/programming.html#debugging-logtalk-applications)
 
 
 Loading

@@ -27,6 +27,16 @@ error-proneness, and overall maintainability. It is meant to be extensible
 via the addition of objects implementing new metrics.
 
 
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the link:
+
+[docs/library_index.html#code-metrics](https://logtalk.org/docs/library_index.html#code-metrics)
+
+For sample queries, please see the `SCRIPT.txt` file.
+
+
 Loading
 -------
 

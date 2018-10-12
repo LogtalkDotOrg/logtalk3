@@ -40,7 +40,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/ports/](https://logtalk.org/docs/directory_index.html#tools/ports/)
+[docs/library_index.html#ports](https://logtalk.org/docs/library_index.html#ports)
 
 
 Loading

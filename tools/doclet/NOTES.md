@@ -38,6 +38,16 @@ For usage examples see the `sample_doclet.lgt`, `doclet1.lgt`,
 `zoom_doclet.lgt`, and `tools_doclet.lgt` source files.
 
 
+API documentation
+-----------------
+
+To consult this tool API documentation, open in a web browser the link:
+
+[docs/library_index.html#doclet](https://logtalk.org/docs/library_index.html#doclet)
+
+For sample queries, please see the `SCRIPT.txt` file.
+
+
 Loading
 -------
 

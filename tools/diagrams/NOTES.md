@@ -46,7 +46,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/diagrams/](https://logtalk.org/docs/directory_index.html#tools/diagrams/)
+[docs/library_index.html#diagrams](https://logtalk.org/docs/library_index.html#diagrams)
 
 For sample queries, please see the `SCRIPT.txt` file.
 

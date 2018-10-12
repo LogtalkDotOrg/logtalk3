@@ -54,7 +54,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/lgtunit/](https://logtalk.org/docs/directory_index.html#tools/lgtunit/)
+[docs/library_index.html#lgtunit](https://logtalk.org/docs/library_index.html#lgtunit)
 
 
 Loading

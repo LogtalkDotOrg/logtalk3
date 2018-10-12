@@ -34,7 +34,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/assertions/](https://logtalk.org/docs/directory_index.html#tools/assertions/)
+[docs/library_index.html#assertions](https://logtalk.org/docs/library_index.html#assertions)
 
 
 Loading

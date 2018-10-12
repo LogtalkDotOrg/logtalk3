@@ -51,7 +51,7 @@ API documentation
 
 To consult this tool API documentation, open in a web browser the link:
 
-[docs/directory_index.html#tools/dead_code_scanner/](https://logtalk.org/docs/directory_index.html#tools/dead_code_scanner/)
+[docs/library_index.html#dead-code-scanner](https://logtalk.org/docs/library_index.html#dead-code-scanner)
 
 
 Loading
