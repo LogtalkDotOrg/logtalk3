@@ -52,7 +52,7 @@ Template and modes
 Errors
 ------
 
-``(none)``
+(none)
 
 Examples
 --------

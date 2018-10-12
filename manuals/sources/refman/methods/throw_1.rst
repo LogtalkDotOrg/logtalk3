@@ -33,7 +33,7 @@ Exception does not unify with the second argument of any call of :ref:`catch/3 <
 Examples
 --------
 
-``(none)``
+(none)
 
 .. seealso::
 

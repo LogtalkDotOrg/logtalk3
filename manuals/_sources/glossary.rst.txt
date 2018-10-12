@@ -114,10 +114,11 @@ Glossary
       protocols, and categories) share the same namespace.
 
    inheritance
-      An object inherits predicate directives and clauses from related
-      entities. If an object extends other object, then we have a
-      prototype-based inheritance. If an object specializes or instantiates
-      another object we have a class-based inheritance.
+      An entity inherits predicate directives and clauses from related
+      entities. In the particular case of objects, when an object extends
+      other object, we have prototype-based inheritance. When an object
+      specializes or instantiates another object, we have class-based
+      inheritance.
 
    private inheritance
       All public and protected predicates are inherited as private

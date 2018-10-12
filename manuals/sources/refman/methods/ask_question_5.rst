@@ -47,7 +47,7 @@ Meta-predicate template
 Errors
 ------
 
-``(none)``
+(none)
 
 Examples
 --------

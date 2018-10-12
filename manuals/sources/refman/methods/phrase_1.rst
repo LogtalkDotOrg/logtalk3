@@ -34,7 +34,7 @@ NonTerminal is neither a variable nor a callable term:
 Examples
 --------
 
-   ``(none)``
+   (none)
 
 .. seealso::
 
