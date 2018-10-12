@@ -756,8 +756,8 @@ Note that in this case the meta-predicate directive specifies that the
 closure will be extended with exactly one extra argument.
 
 When calling a meta-predicate, a closure can correspond to a
-user-defined predicate, a built-in predicate, a lambda expression, or a
-control construct.
+user-defined predicate, a built-in predicate, a :term:`lambda expression`,
+or a control construct.
 
 .. _predicates_lambdas:
 

@@ -385,3 +385,20 @@ Glossary
       is used whenever static binding is not possible (e.g. due to the
       predicate being dynamic or due to lack of enough information).
       Also known as *early binding*. See also :term:`dynamic binding`.
+
+   lambda expression
+      A compound term that can be used in place of a goal or closure
+      meta-argument and that abstracts a predicate definition by listing
+      its variables and a callable term that implements the definition.
+      Lambda expressions help avoiding the need of naming and defining
+      auxiliary predicates.
+
+   lambda parameter
+      A term (usually a variable or a non-ground compound term) that is
+      local to a :term:`lambda expression`. All lambda parameters must
+      be explicitly enumerated in a lambda expression.
+
+   lambda free variable
+      A variable that is global to a :term:`lambda expression`. All
+      used global variables must be explicitly listed in a lambda
+      expression.

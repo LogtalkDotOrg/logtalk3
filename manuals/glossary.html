@@ -279,6 +279,20 @@ inheritance.</dd>
 <dd>The process of creating a new class instance. In Logtalk, this does
 not necessarily imply dynamic creation of an object at runtime; an
 instance may also be defined as a static object in a source file.</dd>
+<dt id="term-lambda-expression">lambda expression</dt>
+<dd>A compound term that can be used in place of a goal or closure
+meta-argument and that abstracts a predicate definition by listing
+its variables and a callable term that implements the definition.
+Lambda expressions help avoiding the need of naming and defining
+auxiliary predicates.</dd>
+<dt id="term-lambda-free-variable">lambda free variable</dt>
+<dd>A variable that is global to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All
+used global variables must be explicitly listed in a lambda
+expression.</dd>
+<dt id="term-lambda-parameter">lambda parameter</dt>
+<dd>A term (usually a variable or a non-ground compound term) that is
+local to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All lambda parameters must
+be explicitly enumerated in a lambda expression.</dd>
 <dt id="term-library">library</dt>
 <dd>A directory containing source files. The library name can be used as
 an alias to the directory path when compiling and loading source

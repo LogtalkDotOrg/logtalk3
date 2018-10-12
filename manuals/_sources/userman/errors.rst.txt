@@ -176,10 +176,10 @@ where the user intention is to call the local predicate.
 Lambda variables
 ~~~~~~~~~~~~~~~~
 
-A warning will be reported for lambda expressions with unclassified
-variables (not listed as either lambda free or lambda parameter
-variables) or where variables play a dual role (as both lambda free and
-lambda parameter variables).
+A warning will be reported for :term:`lambda expressions <lambda expression>`
+with unclassified variables (not listed as either :term:`lambda free <lambda free variable>`
+or :term:`lambda parameter` variables) or where variables play a dual role
+(as both lambda free and lambda parameter variables).
 
 .. _errors_predicate_redefinition:
 

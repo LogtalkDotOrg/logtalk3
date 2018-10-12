@@ -21,9 +21,9 @@ of the closure. This built-in non-terminal is interpreted as a private
 non-terminal and thus cannot be used as a message to an object. When
 using a back-end Prolog compiler supporting a module system, calls in
 the format ``call(Module:Closure)`` may also be used. By using as
-argument a lambda expression, this built-in non-terminal provides
-controlled access to the input list of tokens and to the list of the
-remaining tokens processed by the grammar rule containing the call.
+argument a :term:`lambda expression`, this built-in non-terminal can
+provide controlled access to the input list of tokens and to the list
+of the remaining tokens processed by the grammar rule containing the call.
 
 Template and modes
 ------------------

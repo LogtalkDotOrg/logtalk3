@@ -16,7 +16,7 @@ Defining a list object
 
 We will start by defining an object, ``list``, containing predicate
 definitions for some common list predicates like ``append/3``,
-``length/2`` and ``member/2``:
+``length/2``, and ``member/2``:
 
 ::
 
@@ -192,10 +192,10 @@ using difference lists by defining a new object, ``difflist``:
 Summary
 -------
 
--  It is easy to define a simple object: just put your Prolog code
+*  It is easy to define a simple object: just put your Prolog code
    inside starting and ending object directives and add the necessary
    scope directives. The object will be self-defining and ready to use.
 
--  Define a protocol when you may want to provide or enable several
+*  Define a protocol when you may want to provide or enable several
    alternative definitions to a given set of predicates. This way we
    avoid needless repetition of predicate directives.
