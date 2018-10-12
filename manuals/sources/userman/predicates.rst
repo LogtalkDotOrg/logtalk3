@@ -686,12 +686,12 @@ Category predicates
 ~~~~~~~~~~~~~~~~~~~
 
 Because a category can be imported by multiple objects, dynamic private
-predicates must be called either in the context of *self*, using the
-*message to self* control structure, :ref:`control_send_to_self_1`, or
-in the context of *this* (i.e. in the context of the object importing the
-category). For example, if we want to define a category implementing variables
-using destructive assignment where the variable values are stored in
-*self* we could write:
+predicates must be called either in the context of :term:`self`, using the
+:term:`message to self` control structure, :ref:`control_send_to_self_1`, or
+in the context of :term:`this` (i.e. in the context of the object importing
+the category). For example, if we want to define a category implementing
+variables using destructive assignment where the variable values are stored
+in *self* we could write:
 
 ::
 

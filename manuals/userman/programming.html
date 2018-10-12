@@ -816,9 +816,9 @@ definitions with a single clause that links to a local predicate, to
 a plain Prolog built-in (or foreign) predicate, or to a Prolog module
 predicate with the same arguments. Care should be taken when
 developing applications with this flag turned on as changing and
-reloading a file may render static binding optimizations invalid for
-code defining in other loaded files. Turning on this flag
-automatically turns off the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag.</dd>
+reloading a file may render <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> optimizations
+invalid for code defining in other loaded files. Turning on this
+flag automatically turns off the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">source_data(Option)</span></code></dt>
 <dd>Defines how much information is retained when compiling a source
 file. Possible option values are <code class="docutils literal notranslate"><span class="pre">on</span></code> (the usual default for
@@ -945,25 +945,26 @@ applications. To minimize the generated code size, turn the
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag.</p>
 <p>Pay special attention to file compilation/loading order. Whenever
 possible, compile/load your files taking into account file dependencies
-to enable static binding optimizations. The easiest way to find the
-dependencies and thus the best compilation/loading order is to use the
-<code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool to generate a file dependency diagram for your
+to enable <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> optimizations. The easiest way to find
+the dependencies and thus the best compilation/loading order is to use
+the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool to generate a file dependency diagram for your
 application.</p>
 <p>Minimize the use of dynamic predicates. Parametric objects can often be
 used in alternative. When dynamic predicates cannot be avoided, try to
 make them private. Declaring a dynamic predicate also as a private
 predicate allows the compiler to optimize local calls to the database
-methods (e.g. <code class="docutils literal notranslate"><span class="pre">assertz/1</span></code> and <code class="docutils literal notranslate"><span class="pre">retract/1</span></code>) that handle the
-predicate.</p>
-<p>Sending a message to <em>self</em> implies dynamic binding but there are often
-cases where <code class="docutils literal notranslate"><span class="pre">::/1</span></code> is misused to call an imported or inherited
-predicate that is never going to be redefined in a descendant. In these
-cases, a <em>super</em> call, <code class="docutils literal notranslate"><span class="pre">^^/1</span></code>, can be used instead with the benefit of
-enabling static binding. Most of the guidelines for writing efficient
-Prolog code also apply to Logtalk code. In particular, define your
-predicates to take advantage of first-argument indexing. In the case of
-recursive predicates, define them as tail-recursive predicates whenever
-possible.</p>
+methods (e.g. <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> and <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) that
+handle the predicate.</p>
+<p>Sending a <a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> implies <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> but
+there are often cases where <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> is misused
+to call an imported or inherited predicate that is never going to be
+redefined in a descendant. In these cases, a <a class="reference internal" href="../glossary.html#term-super-call"><span class="xref std std-term">super call</span></a>,
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>, can be used instead with
+the benefit of often enabling static binding. Most of the guidelines for
+writing efficient Prolog code also apply to Logtalk code. In particular,
+define your predicates to take advantage of first-argument indexing. In
+the case of recursive predicates, define them as tail-recursive predicates
+whenever possible.</p>
 </div>
 <div class="section" id="debugging-logtalk-applications">
 <span id="programming-debugging"></span><h2>Debugging Logtalk applications<a class="headerlink" href="#debugging-logtalk-applications" title="Permalink to this headline">¶</a></h2>

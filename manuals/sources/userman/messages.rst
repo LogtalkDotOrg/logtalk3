@@ -147,7 +147,7 @@ pattern:
 This control construct is generalized in Logtalk where it may be used to
 call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
-static binding, this control construct allows imported and inherited
+:term:`static binding`, this control construct allows imported and inherited
 predicates to be called with the same performance of local predicates.
 As with the message sending control constructs, the ``^^/1`` call simply
 fails when the predicate is declared but not defined (as per the
@@ -207,8 +207,8 @@ flag (see the :ref:`events_events` section for more details).
 Message sending performance
 ---------------------------
 
-Logtalk supports both static binding and dynamic binding. Static binding
-is used whenever messages are sent (using the ``::/2`` control
+Logtalk supports both :term:`static binding` and :term:`dynamic binding`.
+Static binding is used whenever messages are sent (using the ``::/2`` control
 construct) to static objects already loaded and with the ``optimize``
 compiler flag turned on. When that is not the case (or when using the
 ``::/1`` control construct), Logtalk uses dynamic binding coupled with a

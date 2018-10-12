@@ -187,7 +187,7 @@ functionality). A complementing category takes preference over a
 previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.
 
-Note that super calls from predicates defined in complementing
+Note that :term:`super calls <super call>` from predicates defined in complementing
 categories lookup inherited definitions as if the calls were made from
 the complemented object instead of the category ancestors. This allows
 more comprehensive object patching. But it also means that, if you want
@@ -198,7 +198,7 @@ category that extends the category that you want to add.
 
 An unfortunate consequence of allowing an object to be patched at
 runtime using a complementing category is that it disables the use of
-static binding optimizations for messages sent to the complemented
+:term:`static binding` optimizations for messages sent to the complemented
 object as it can always be later patched, thus rendering the static
 binding optimizations invalid.
 
@@ -625,8 +625,8 @@ This alternative should only be used when the user knows a priori that
 the category predicates will not be specialized or redefined by
 descendant objects of the object importing the category. Its advantage
 is that, when the ``optimize`` compiler flag is turned on, the Logtalk
-compiler will try to optimize the calls by using static binding. When
-dynamic binding is used due to e.g. the lack of sufficient information
+compiler will try to optimize the calls by using :term:`static binding`. When
+:term:`dynamic binding` is used due to e.g. the lack of sufficient information
 at compilation time, the performance is similar to calling the category
 predicate using a message to :term:`self` (in both cases a predicate lookup
 caching mechanism is used).

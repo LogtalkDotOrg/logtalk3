@@ -220,6 +220,11 @@ e.g. a library or an application.</dd>
 <dd>An object specifying the steps necessary to (re)generate the API
 documentation for a project. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
 tool for details.</dd>
+<dt id="term-dynamic-binding">dynamic binding</dt>
+<dd>Runtime lookup of a predicate declaration and definition to verify
+the validity of a message (or a super call) and find the predicate
+definition that will be used to answer the message (or the super call).
+Also known as late binding.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
 <dd>The hiding of an object implementation. This promotes software reuse
 by isolating the object clients from its implementation details.
@@ -289,6 +294,10 @@ and only relevant to the entity where they are defined.</dd>
 <dd>A query sent to an object. In logical terms, a message can be seen as
 a request for proof construction using an object’s database and the
 databases of related entities.</dd>
+<dt id="term-message-to-self">message to self</dt>
+<dd>A message sent to the object that received the original message under
+processing. Messages to self require dynamic binding as the value of
+self is only know at runtime.</dd>
 <dt id="term-meta-interpreter">meta-interpreter</dt>
 <dd>A program capable of running other programs written in the same
 language.</dd>
@@ -413,9 +422,20 @@ intermixed with entity definitions.</dd>
 <dt id="term-specialization">specialization</dt>
 <dd>A class is specialized by defining a new class that inherit its
 predicates and possibly add new ones.</dd>
+<dt id="term-static-binding">static binding</dt>
+<dd>Compile time lookup of a predicate declaration and definition when
+compiling a message sending call (or a super call). Dynamic binding
+is used whenever static binding is not possible (e.g. due to the
+predicate being dynamic or due to lack of enough information).
+Also known as early binding.</dd>
 <dt id="term-subclass">subclass</dt>
 <dd>A class that is a specialization, direct or indirectly, of another
 class.</dd>
+<dt id="term-super-call">super call</dt>
+<dd>Call of an inherited (or imported) predicate definition. Mainly used
+when redefining an inherited (or imported) predicate to call the
+overridden definition while making additional calls. Super calls preserve
+self and may require dynamic binding if the predicate is dynamic.</dd>
 <dt id="term-superclass">superclass</dt>
 <dd>A class from which another class is a specialization (directly or
 indirectly via another class).</dd>

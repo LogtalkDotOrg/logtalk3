@@ -304,7 +304,7 @@ pattern:</p>
 <p>This control construct is generalized in Logtalk where it may be used to
 call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
-static binding, this control construct allows imported and inherited
+<a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>, this control construct allows imported and inherited
 predicates to be called with the same performance of local predicates.
 As with the message sending control constructs, the <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> call simply
 fails when the predicate is declared but not defined (as per the
@@ -353,8 +353,8 @@ flag (see the <a class="reference internal" href="events.html#events-events"><sp
 </div>
 <div class="section" id="message-sending-performance">
 <span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Permalink to this headline">¶</a></h2>
-<p>Logtalk supports both static binding and dynamic binding. Static binding
-is used whenever messages are sent (using the <code class="docutils literal notranslate"><span class="pre">::/2</span></code> control
+<p>Logtalk supports both <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.
+Static binding is used whenever messages are sent (using the <code class="docutils literal notranslate"><span class="pre">::/2</span></code> control
 construct) to static objects already loaded and with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code>
 compiler flag turned on. When that is not the case (or when using the
 <code class="docutils literal notranslate"><span class="pre">::/1</span></code> control construct), Logtalk uses dynamic binding coupled with a

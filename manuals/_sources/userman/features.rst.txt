@@ -212,8 +212,8 @@ Performance
    efficient code that takes advantage of tail recursion and
    first-argument indexing.
 
-   As an object-oriented language, Logtalk can use both static binding
-   and dynamic binding for matching messages and methods. Furthermore,
+   As an object-oriented language, Logtalk can use both :term:`static binding`
+   and :term:`dynamic binding` for matching messages and methods. Furthermore,
    Logtalk entities (objects, protocols, and categories) are
    independently compiled, allowing for a very flexible programming
    development. Entities can be edited, compiled, and loaded at runtime,

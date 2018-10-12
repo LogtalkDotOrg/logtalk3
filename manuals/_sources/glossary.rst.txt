@@ -148,6 +148,11 @@ Glossary
       a request for proof construction using an object's database and the
       databases of related entities.
 
+   message to self
+      A message sent to the object that received the original message under
+      processing. Messages to self require dynamic binding as the value of
+      self is only know at runtime.
+
    meta-interpreter
       A program capable of running other programs written in the same
       language.
@@ -309,6 +314,12 @@ Glossary
       sent from within a category, the *sender* is the object importing the
       category.
 
+   super call
+      Call of an inherited (or imported) predicate definition. Mainly used
+      when redefining an inherited (or imported) predicate to call the
+      overridden definition while making additional calls. Super calls preserve
+      self and may require dynamic binding if the predicate is dynamic.
+
    specialization
       A class is specialized by defining a new class that inherit its
       predicates and possibly add new ones.
@@ -344,3 +355,16 @@ Glossary
       the predicate clause is contained in a category, *this* is a
       reference to the object importing the category for which the
       predicate clause is being executed.
+
+   dynamic binding
+      Runtime lookup of a predicate declaration and definition to verify
+      the validity of a message (or a super call) and find the predicate
+      definition that will be used to answer the message (or the super call).
+      Also known as late binding.
+
+   static binding
+      Compile time lookup of a predicate declaration and definition when
+      compiling a message sending call (or a super call). Dynamic binding
+      is used whenever static binding is not possible (e.g. due to the
+      predicate being dynamic or due to lack of enough information).
+      Also known as early binding.

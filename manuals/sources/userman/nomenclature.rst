@@ -87,9 +87,9 @@ equivalents.
 **virtual member function**
    There is no ``virtual`` keyword in Logtalk. Any inherited or imported
    predicate can be redefined (either overridden or specialized).
-   Logtalk can use static binding or dynamic binding for locating both
-   method declarations and method definitions. Moreover, methods that
-   are declared but not defined simply fail when called.
+   Logtalk can use :term:`static binding` or :term:`dynamic binding` for
+   locating both method declarations and method definitions. Moreover,
+   methods that are declared but not defined simply fail when called.
 
 .. _nomenclature_java:
 

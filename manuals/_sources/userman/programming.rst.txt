@@ -710,9 +710,9 @@ Other flags
    a plain Prolog built-in (or foreign) predicate, or to a Prolog module
    predicate with the same arguments. Care should be taken when
    developing applications with this flag turned on as changing and
-   reloading a file may render static binding optimizations invalid for
-   code defining in other loaded files. Turning on this flag
-   automatically turns off the ``debug`` flag.
+   reloading a file may render :term:`static binding` optimizations
+   invalid for code defining in other loaded files. Turning on this
+   flag automatically turns off the ``debug`` flag.
 
 ``source_data(Option)``
    Defines how much information is retained when compiling a source
@@ -856,27 +856,28 @@ applications. To minimize the generated code size, turn the
 
 Pay special attention to file compilation/loading order. Whenever
 possible, compile/load your files taking into account file dependencies
-to enable static binding optimizations. The easiest way to find the
-dependencies and thus the best compilation/loading order is to use the
-``diagrams`` tool to generate a file dependency diagram for your
+to enable :term:`static binding` optimizations. The easiest way to find
+the dependencies and thus the best compilation/loading order is to use
+the ``diagrams`` tool to generate a file dependency diagram for your
 application.
 
 Minimize the use of dynamic predicates. Parametric objects can often be
 used in alternative. When dynamic predicates cannot be avoided, try to
 make them private. Declaring a dynamic predicate also as a private
 predicate allows the compiler to optimize local calls to the database
-methods (e.g. ``assertz/1`` and ``retract/1``) that handle the
-predicate.
+methods (e.g. :ref:`methods_assertz_1` and :ref:`methods_retract_1`) that
+handle the predicate.
 
-Sending a message to *self* implies dynamic binding but there are often
-cases where ``::/1`` is misused to call an imported or inherited
-predicate that is never going to be redefined in a descendant. In these
-cases, a *super* call, ``^^/1``, can be used instead with the benefit of
-enabling static binding. Most of the guidelines for writing efficient
-Prolog code also apply to Logtalk code. In particular, define your
-predicates to take advantage of first-argument indexing. In the case of
-recursive predicates, define them as tail-recursive predicates whenever
-possible.
+Sending a :term:`message to self` implies :term:`dynamic binding` but
+there are often cases where :ref:`control_send_to_self_1` is misused
+to call an imported or inherited predicate that is never going to be
+redefined in a descendant. In these cases, a :term:`super call`,
+:ref:`control_call_super_1`, can be used instead with
+the benefit of often enabling static binding. Most of the guidelines for
+writing efficient Prolog code also apply to Logtalk code. In particular,
+define your predicates to take advantage of first-argument indexing. In
+the case of recursive predicates, define them as tail-recursive predicates
+whenever possible.
 
 .. _programming_debugging:
 

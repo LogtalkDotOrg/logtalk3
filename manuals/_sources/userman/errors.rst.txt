@@ -53,7 +53,7 @@ The Logtalk compiler warns about any referenced entity that is not
 currently loaded. The warning may reveal a misspell entity name or just
 an entity that it will be loaded later. Out-of-oder loading should be
 avoided when possible as it prevents some code optimizations such as
-static binding of messages to methods.
+:term:`static binding` of messages to methods.
 
 .. _errors_singletons:
 
