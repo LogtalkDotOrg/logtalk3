@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on October 4, 2018
+##   Last updated on October 12, 2018
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -134,7 +134,7 @@ ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2txt.sh lgt2txt
 echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
 echo "\"logtalk_version_select\", \"logtalk_tester\", \"logtalk_doclet\","
 echo "\"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\", \"lgt2rst\" and"
-echo "\"lgt2txt\"scripts have been created on \"$prefix/bin\";"
+echo "\"lgt2txt\" scripts have been created on \"$prefix/bin\";"
 echo "ensure that this directory is in your execution path."
 echo
 
