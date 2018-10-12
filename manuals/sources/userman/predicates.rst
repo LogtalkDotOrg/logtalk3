@@ -587,8 +587,8 @@ as:
    X = 4
    yes
 
-Entities containing primary multifile predicate declarations must always
-be compiled before entities defining clauses for those multifile
+Entities containing :term:`primary multifile predicate declarations <primary predicate declaration>`
+must always be compiled before entities defining clauses for those multifile
 predicates. The Logtalk compiler will print a warning if the scope
 directive is missing.
 
@@ -1225,7 +1225,7 @@ standard ``error/2`` exception terms:
 Database methods
 ~~~~~~~~~~~~~~~~
 
-Logtalk provides a set of built-in methods for object database handling
+Logtalk provides a set of built-in methods for :term:`object database` handling
 similar to the usual database Prolog predicates:
 :ref:`methods_abolish_1`,
 :ref:`methods_asserta_1`,

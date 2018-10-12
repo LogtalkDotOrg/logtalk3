@@ -265,7 +265,7 @@ Asynchronous calls and synchronized predicates
 
 Proving a goal asynchronously using a new thread may lead to problems
 when the goal results in side effects such as input/output operations or
-modifications to an object database. For example, if a new thread is
+modifications to an :term:`object database`. For example, if a new thread is
 started with the same goal before the first one finished its job, we may
 end up with mixed output, a corrupted database, or unexpected goal
 failures. In order to solve this problem, predicates (and grammar rule

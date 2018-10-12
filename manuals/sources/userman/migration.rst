@@ -82,8 +82,9 @@ predicate are spread among several source files. When encapsulating
 plain Prolog code that uses multifile predicates, is often the case that
 the clauses of the multifile predicates get spread between different
 objects and categories but conversion is straight-forward. In the
-Logtalk object (or category) holding the multifile predicate *primary*
-declaration, add a :ref:`predicate scope directive <predicates_scope>` and a
+Logtalk object (or category) holding the multifile predicate
+:term:`primary declaration <primary predicate declaration>`, add a
+:ref:`predicate scope directive <predicates_scope>` and a
 :ref:`multifile/1 <predicates_multifile>` directive. In
 all other objects (or categories) defining clauses for the multifile
 predicate, add a ``multifile/1`` directive and predicate clauses using
@@ -162,7 +163,7 @@ Assuming that this is the case, apply the following steps:
 #. Convert any ``meta_predicate/1`` directives into Logtalk
    :ref:`directives_meta_predicate_1`
    directives by replacing the module meta-argument indicator, ``:``,
-   into the Logtalk meta-predicate indicator, ``0``. Closures must be
+   with the Logtalk meta-argument indicator, ``0``. Closures must be
    represented using an integer denoting the number of additional
    arguments that will be appended to construct a goal. Arguments which
    are not meta-arguments are represented by the ``*`` character.

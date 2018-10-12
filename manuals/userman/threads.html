@@ -412,7 +412,7 @@ this predicate implicitly performs a deterministic call of its argument.</p>
 <span id="threads-synchronized-predicates"></span><h2>Asynchronous calls and synchronized predicates<a class="headerlink" href="#asynchronous-calls-and-synchronized-predicates" title="Permalink to this headline">¶</a></h2>
 <p>Proving a goal asynchronously using a new thread may lead to problems
 when the goal results in side effects such as input/output operations or
-modifications to an object database. For example, if a new thread is
+modifications to an <a class="reference internal" href="../glossary.html#term-object-database"><span class="xref std std-term">object database</span></a>. For example, if a new thread is
 started with the same goal before the first one finished its job, we may
 end up with mixed output, a corrupted database, or unexpected goal
 failures. In order to solve this problem, predicates (and grammar rule

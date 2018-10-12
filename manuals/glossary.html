@@ -224,7 +224,7 @@ tool for details.</dd>
 <dd>Runtime lookup of a predicate declaration and definition to verify
 the validity of a message (or a super call) and find the predicate
 definition that will be used to answer the message (or the super call).
-Also known as late binding.</dd>
+Also known as <em>late binding</em>. See also <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a>.</dd>
 <dt id="term-encapsulation">encapsulation</dt>
 <dd>The hiding of an object implementation. This promotes software reuse
 by isolating the object clients from its implementation details.
@@ -296,27 +296,35 @@ a request for proof construction using an object’s database and the
 databases of related entities.</dd>
 <dt id="term-message-to-self">message to self</dt>
 <dd>A message sent to the object that received the original message under
-processing. Messages to self require dynamic binding as the value of
-self is only know at runtime.</dd>
+processing. Messages to self require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> as the
+value of self is only know at runtime.</dd>
+<dt id="term-meta-argument">meta-argument</dt>
+<dd>A predicate argument that is called as a goal, used as a closure
+to construct a goal that will be called, or that is handled in a
+way that requires awareness of the predicate calling context.</dd>
 <dt id="term-meta-interpreter">meta-interpreter</dt>
 <dd>A program capable of running other programs written in the same
 language.</dd>
 <dt id="term-meta-predicate">meta-predicate</dt>
-<dd>A predicate where one of its arguments will be called as a goal
-or used as a closure to construct a goal that will be called.
-For example, <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> and <code class="docutils literal notranslate"><span class="pre">call/1</span></code> are Prolog built-ins
-meta-predicates.</dd>
+<dd>A predicate with one or more <a class="reference internal" href="#term-meta-argument"><span class="xref std std-term">meta-arguments</span></a>.
+For example, <code class="docutils literal notranslate"><span class="pre">call/1</span></code> and <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> are built-in meta-predicates.</dd>
 <dt id="term-metaclass">metaclass</dt>
 <dd>The class of a class, when interpreted as an instance. Metaclass
 instances are themselves classes.</dd>
 <dt id="term-method">method</dt>
 <dd>The predicate definition used to answer a message sent to an object.
-Logtalk supports both static binding and dynamic binding to find
-which method to run to answer a message.</dd>
+Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and dynamic binding to
+find which method to run to answer a message.</dd>
+<dt id="term-module">module</dt>
+<dd>A Prolog entity characterized by an identity and a set of predicate
+directives and clauses. Prolog modules are usually static although
+some Prolog systems allow the creation of dynamic modules at runtime.
+Prolog modules can be seen as prototypes.</dd>
 <dt id="term-monitor">monitor</dt>
 <dd>Any object, implementing the <code class="docutils literal notranslate"><span class="pre">monitoring</span></code> built-in protocol, that
 is notified by the runtime when a spied event occurs. The spied
-events can be set by the monitor itself or by any other object.</dd>
+<a class="reference internal" href="#term-event"><span class="xref std std-term">events</span></a> can be set by the monitor itself or by any
+other object.</dd>
 <dt id="term-multifile-predicate">multifile predicate</dt>
 <dd>A predicate whose clauses can be defined in multiple entities. The
 object or category holding the directive without an entity prefix
@@ -329,6 +337,8 @@ directives and clauses. Logtalk objects can be either static or
 dynamic. Logtalk objects can play the role of classes, instances, or
 prototypes. The role or roles an object plays depends on its
 relations with other objects.</dd>
+<dt id="term-object-database">object database</dt>
+<dd>The set of predicates locally defined inside an object.</dd>
 <dt id="term-parameter">parameter</dt>
 <dd>An argument of a parametric object or a parametric category
 identifier. Parameters are logical variables implicitly shared by all
@@ -369,6 +379,8 @@ meaningful in the calling context.</dd>
 <dt id="term-predicate-scope-container">predicate scope container</dt>
 <dd>The object that inherits a predicate declaration from an imported
 category or an implemented protocol.</dd>
+<dt id="term-primary-predicate-declaration">primary predicate declaration</dt>
+<dd>See <a class="reference internal" href="#term-multifile-predicate"><span class="xref std std-term">multifile predicate</span></a>.</dd>
 <dt id="term-private-inheritance">private inheritance</dt>
 <dd>All public and protected predicates are inherited as private
 predicates.</dd>
@@ -427,7 +439,7 @@ predicates and possibly add new ones.</dd>
 compiling a message sending call (or a super call). Dynamic binding
 is used whenever static binding is not possible (e.g. due to the
 predicate being dynamic or due to lack of enough information).
-Also known as early binding.</dd>
+Also known as <em>early binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</dd>
 <dt id="term-subclass">subclass</dt>
 <dd>A class that is a specialization, direct or indirectly, of another
 class.</dd>
@@ -435,7 +447,7 @@ class.</dd>
 <dd>Call of an inherited (or imported) predicate definition. Mainly used
 when redefining an inherited (or imported) predicate to call the
 overridden definition while making additional calls. Super calls preserve
-self and may require dynamic binding if the predicate is dynamic.</dd>
+self and may require <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> if the predicate is dynamic.</dd>
 <dt id="term-superclass">superclass</dt>
 <dd>A class from which another class is a specialization (directly or
 indirectly via another class).</dd>

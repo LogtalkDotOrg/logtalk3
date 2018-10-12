@@ -263,8 +263,9 @@ predicate are spread among several source files. When encapsulating
 plain Prolog code that uses multifile predicates, is often the case that
 the clauses of the multifile predicates get spread between different
 objects and categories but conversion is straight-forward. In the
-Logtalk object (or category) holding the multifile predicate <em>primary</em>
-declaration, add a <a class="reference internal" href="predicates.html#predicates-scope"><span class="std std-ref">predicate scope directive</span></a> and a
+Logtalk object (or category) holding the multifile predicate
+<a class="reference internal" href="../glossary.html#term-primary-predicate-declaration"><span class="xref std std-term">primary declaration</span></a>, add a
+<a class="reference internal" href="predicates.html#predicates-scope"><span class="std std-ref">predicate scope directive</span></a> and a
 <a class="reference internal" href="predicates.html#predicates-multifile"><span class="std std-ref">multifile/1</span></a> directive. In
 all other objects (or categories) defining clauses for the multifile
 predicate, add a <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive and predicate clauses using
@@ -334,7 +335,7 @@ the <code class="docutils literal notranslate"><span class="pre">use_module/2</s
 <li>Convert any <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives into Logtalk
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a>
 directives by replacing the module meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">:</span></code>,
-into the Logtalk meta-predicate indicator, <code class="docutils literal notranslate"><span class="pre">0</span></code>. Closures must be
+with the Logtalk meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">0</span></code>. Closures must be
 represented using an integer denoting the number of additional
 arguments that will be appended to construct a goal. Arguments which
 are not meta-arguments are represented by the <code class="docutils literal notranslate"><span class="pre">*</span></code> character.</li>

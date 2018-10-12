@@ -143,6 +143,12 @@ Glossary
       an alias to the directory path when compiling and loading source
       files using the notation ``library_name('source_file_relative_path')``.
 
+   module
+      A Prolog entity characterized by an identity and a set of predicate
+      directives and clauses. Prolog modules are usually static although
+      some Prolog systems allow the creation of dynamic modules at runtime.
+      Prolog modules can be seen as prototypes.
+
    message
       A query sent to an object. In logical terms, a message can be seen as
       a request for proof construction using an object's database and the
@@ -150,8 +156,8 @@ Glossary
 
    message to self
       A message sent to the object that received the original message under
-      processing. Messages to self require dynamic binding as the value of
-      self is only know at runtime.
+      processing. Messages to self require :term:`dynamic binding` as the
+      value of self is only know at runtime.
 
    meta-interpreter
       A program capable of running other programs written in the same
@@ -159,8 +165,8 @@ Glossary
 
    method
       The predicate definition used to answer a message sent to an object.
-      Logtalk supports both static binding and dynamic binding to find
-      which method to run to answer a message.
+      Logtalk supports both :term:`static binding` and dynamic binding to
+      find which method to run to answer a message.
 
    abstract method
       A method implementing an algorithm whose step corresponds to calls
@@ -179,7 +185,8 @@ Glossary
    monitor
       Any object, implementing the ``monitoring`` built-in protocol, that
       is notified by the runtime when a spied event occurs. The spied
-      events can be set by the monitor itself or by any other object.
+      :term:`events <event>` can be set by the monitor itself or by any
+      other object.
 
    object
       An entity characterized by an identity and a set of predicate
@@ -187,6 +194,9 @@ Glossary
       dynamic. Logtalk objects can play the role of classes, instances, or
       prototypes. The role or roles an object plays depends on its
       relations with other objects.
+
+   object database
+      The set of predicates locally defined inside an object.
 
    doclet object
       An object specifying the steps necessary to (re)generate the API
@@ -252,11 +262,14 @@ Glossary
       built-in methods. Local predicates are usually auxiliary predicates
       and only relevant to the entity where they are defined.
 
+   meta-argument
+      A predicate argument that is called as a goal, used as a closure
+      to construct a goal that will be called, or that is handled in a
+      way that requires awareness of the predicate calling context.
+
    meta-predicate
-      A predicate where one of its arguments will be called as a goal
-      or used as a closure to construct a goal that will be called.
-      For example, ``findall/3`` and ``call/1`` are Prolog built-ins
-      meta-predicates.
+      A predicate with one or more :term:`meta-arguments <meta-argument>`.
+      For example, ``call/1`` and ``findall/3`` are built-in meta-predicates.
 
    predicate scope container
       The object that inherits a predicate declaration from an imported
@@ -272,6 +285,9 @@ Glossary
 
    public predicate
       A predicate that can be called from any object.
+
+   primary predicate declaration
+      See :term:`multifile predicate`.
 
    multifile predicate
       A predicate whose clauses can be defined in multiple entities. The
@@ -318,7 +334,7 @@ Glossary
       Call of an inherited (or imported) predicate definition. Mainly used
       when redefining an inherited (or imported) predicate to call the
       overridden definition while making additional calls. Super calls preserve
-      self and may require dynamic binding if the predicate is dynamic.
+      self and may require :term:`dynamic binding` if the predicate is dynamic.
 
    specialization
       A class is specialized by defining a new class that inherit its
@@ -360,11 +376,11 @@ Glossary
       Runtime lookup of a predicate declaration and definition to verify
       the validity of a message (or a super call) and find the predicate
       definition that will be used to answer the message (or the super call).
-      Also known as late binding.
+      Also known as *late binding*. See also :term:`static binding`.
 
    static binding
       Compile time lookup of a predicate declaration and definition when
       compiling a message sending call (or a super call). Dynamic binding
       is used whenever static binding is not possible (e.g. due to the
       predicate being dynamic or due to lack of enough information).
-      Also known as early binding.
+      Also known as *early binding*. See also :term:`dynamic binding`.
