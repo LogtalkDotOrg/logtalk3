@@ -25,8 +25,8 @@ By setting the compiler flag ``source_data``, Logtalk saves all relevant
 documenting information collected when compiling a source file. The
 provided ``lgtdoc`` tool can access this information by using Logtalk's
 reflection support and generate a documentation file for each compiled
-entity (object, protocol, or category) in
-`XML <http://www.w3.org/XML/>`__ format. Contents of the XML file
+entity (object, protocol, or category) in `XML <http://www.w3.org/XML/>`_
+format. Contents of the XML file
 include the entity name, type, and compilation mode (static or dynamic),
 the entity relations with other entities, and a description of any
 declared predicates (name, compilation mode, scope, ...).
@@ -189,16 +189,16 @@ Processing and viewing documenting files
 ----------------------------------------
 
 The ``lgtdoc`` tool generates an XML documenting file per entity. It can
-also generate directory, entity, and predicate indexes when documenting
-libraries and directories. For example, assuming the default filename
-extensions, a ``trace`` object and a ``sort(_)`` parametric object will
-result in ``trace_0.xml`` and ``sort_1.xml`` XML files.
+also generate library, directory, entity, and predicate indexes when
+documenting libraries and directories. For example, assuming the default
+filename extensions, a ``trace`` object and a ``sort(_)`` parametric object
+will result in ``trace_0.xml`` and ``sort_1.xml`` XML files.
 
 Each entity XML file contains references to two other files, an XML
 specification file and a XSL style-sheet file. The XML specification
 file can be either a DTD file (``logtalk_entity.dtd``) or an XML Scheme
-file (``logtalk_entity.xsd``). The
-`XSL <http://www.w3.org/Style/XSL/>`__ style-sheet file is responsible
+file (``logtalk_entity.xsd``). The `XSL <http://www.w3.org/Style/XSL/>`_
+style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
 file are defined by the ``lgtdoc`` tool but can be overridden by passing a
@@ -206,10 +206,10 @@ list of options to the tool predicates. The ``lgtdoc/xml`` sub-directory
 in the Logtalk installation directory contains the XML specification
 files described above, along with several sample XSL style-sheet files
 and sample scripts for converting XML documenting files to several
-formats (e.g. Markdown, HTML, and PDF). Please read the ``NOTES`` file
-included in the directory for details. You may use the supplied sample
-files as a starting point for generating the documentation of your
-Logtalk applications.
+formats (e.g. reStructuredText, Markdown, HTML, and PDF). Please read
+the ``NOTES`` file included in the directory for details. You may use
+the supplied sample files as a starting point for generating the
+documentation of your Logtalk applications.
 
 The Logtalk DTD file, ``logtalk_entity.dtd``, contains a reference to a
 user-customizable file, ``custom.ent``, which declares XML entities for
@@ -245,4 +245,4 @@ Inline formatting in comments text
 Inline formatting in comments text can be accomplished by using Markdown
 (or reStructuredText) syntax and converting XML documenting files to
 Markdown (or reStructuredText) files (and these, if required, to e.g. HTML,
-ePub, or PDF).
+ePub, or PDF formats).

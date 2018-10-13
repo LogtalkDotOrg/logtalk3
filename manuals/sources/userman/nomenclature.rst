@@ -105,7 +105,8 @@ equivalents.
    predicate can be redefined (either overridden or specialized).
    Logtalk can use :term:`static binding` or :term:`dynamic binding` for
    locating both method declarations and method definitions. Moreover,
-   methods that are declared but not defined simply fail when called.
+   methods that are declared but not defined simply fail when called
+   (as per closed-world assumption).
 
 .. _nomenclature_java:
 
@@ -187,6 +188,12 @@ Logtalk equivalents.
    Logtalk selects the method/predicate to execute in order to answer a
    method call based only on the method name and number of arguments.
    Logtalk (and Prolog) are not typed languages in the same sense as Java.
+
+**package**
+   There is no concept of packages in Logtalk. All Logtalk entities
+   (objects, protocols, categories) share a single namespace. But
+   Logtalk does support a concept of *library* that allows grouping of
+   entities whose source files share a common prefix.
 
 **reflection**
    Logtalk supports both *structural reflection* (using a set of

@@ -100,7 +100,7 @@ to use the most recent version of your favorite Prolog compiler.
 Logtalk installers
 ------------------
 
-Logtalk installers are available for MacOS X, Linux, and Microsoft
+Logtalk installers are available for macOS, Linux, and Microsoft
 Windows. Depending on the chosen installer, some tasks (e.g. setting
 environment variables or integrating Logtalk with some Prolog compilers)
 may need to be performed manually.
