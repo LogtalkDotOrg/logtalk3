@@ -17,8 +17,8 @@
 
 .. _context_methods:
 
-Execution context methods
-=========================
+Execution context
+=================
 
 .. toctree::
    :maxdepth: 1

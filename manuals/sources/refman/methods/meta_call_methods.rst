@@ -17,8 +17,8 @@
 
 .. _meta_call_methods:
 
-Meta-call methods
-=================
+Meta-calls
+==========
 
 .. toctree::
    :maxdepth: 1

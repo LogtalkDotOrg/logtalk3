@@ -17,8 +17,8 @@
 
 .. _exceptions_methods:
 
-Exception-handling methods
-==========================
+Exception-handling
+==================
 
 .. toctree::
    :maxdepth: 1

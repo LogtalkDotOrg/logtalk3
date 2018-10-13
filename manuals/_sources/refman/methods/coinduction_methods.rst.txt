@@ -17,8 +17,8 @@
 
 .. _coinduction_methods:
 
-Coinduction hook methods
-========================
+Coinduction hooks
+=================
 
 .. toctree::
    :maxdepth: 1

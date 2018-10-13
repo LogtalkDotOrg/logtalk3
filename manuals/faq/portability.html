@@ -201,8 +201,10 @@ compiler being used.</p>
 </div>
 <div class="section" id="are-my-logtalk-applications-portable-across-operating-systems">
 <span id="faq-portability-os"></span><h2>Are my Logtalk applications portable across operating systems?<a class="headerlink" href="#are-my-logtalk-applications-portable-across-operating-systems" title="Permalink to this headline">¶</a></h2>
-<p>Yes. However, you may need to change the end-of-lines characters of
-your source files to match the ones on the target operating system
+<p>Yes, as long you don’t use built-in predicates or special features
+that your chosen backend Prolog compiler only supports in some
+operating-systems. You may need to change the end-of-lines characters
+of your source files to match the ones on the target operating system
 and the expectations of your Prolog compiler. Some Prolog compilers
 silently fail to compile source files with the wrong end-of-lines
 characters.</p>

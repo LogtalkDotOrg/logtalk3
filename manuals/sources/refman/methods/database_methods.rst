@@ -17,8 +17,8 @@
 
 .. _database_methods:
 
-Database methods
-================
+Database
+========
 
 .. toctree::
    :maxdepth: 1

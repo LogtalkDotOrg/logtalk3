@@ -17,7 +17,6 @@
 
 .. _message_sending:
 
-===============
 Message sending
 ===============
 

@@ -17,8 +17,8 @@
 
 .. _compiling_predicates:
 
-Source file compiling and loading predicates
-============================================
+Compiling and loading source files
+==================================
 
 .. toctree::
    :maxdepth: 1

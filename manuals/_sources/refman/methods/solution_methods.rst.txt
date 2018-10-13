@@ -17,8 +17,8 @@
 
 .. _solutions_methods:
 
-All solutions methods
-=====================
+All solutions
+=============
 
 .. toctree::
    :maxdepth: 1

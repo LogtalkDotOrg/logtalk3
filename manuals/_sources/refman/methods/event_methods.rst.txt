@@ -17,8 +17,8 @@
 
 .. _event_methods:
 
-Event handler methods
-=====================
+Event handling
+==============
 
 .. toctree::
    :maxdepth: 1

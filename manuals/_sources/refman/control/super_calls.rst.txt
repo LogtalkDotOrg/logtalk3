@@ -17,9 +17,8 @@
 
 .. _super_calls:
 
-====================================================
-Calling imported and inherited predicate definitions
-====================================================
+Calling imported and inherited predicates
+=========================================
 
 .. toctree::
    :maxdepth: 1

@@ -17,8 +17,8 @@
 
 .. _dcg_methods:
 
-DCGs non-terminals and parsing methods
-======================================
+Definite clause grammar rules
+=============================
 
 .. toctree::
    :maxdepth: 1

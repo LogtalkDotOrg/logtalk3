@@ -17,8 +17,8 @@
 
 .. _forwarding_methods:
 
-Message forwarding methods
-==========================
+Message forwarding
+==================
 
 .. toctree::
    :maxdepth: 1

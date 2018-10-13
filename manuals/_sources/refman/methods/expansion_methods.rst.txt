@@ -17,8 +17,8 @@
 
 .. _expansion_methods:
 
-Term and goal expansion methods
-===============================
+Term and goal expansion
+=======================
 
 .. toctree::
    :maxdepth: 1

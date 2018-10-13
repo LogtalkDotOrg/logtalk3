@@ -17,8 +17,8 @@
 
 .. _asking_methods:
 
-Question asking methods
-=======================
+Question asking
+===============
 
 .. toctree::
    :maxdepth: 1

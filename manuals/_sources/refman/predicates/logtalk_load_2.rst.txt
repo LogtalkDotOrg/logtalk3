@@ -52,6 +52,14 @@ Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails when errors are found during
 compilation of a source file.
 
+.. warning::
+
+   The compiler flags specified in the second argument only apply to the
+   files listed in the first argument and not to any files that those files
+   may load or compile. Notably, if you are loading a :term:`loader file`,
+   the flags only apply to the loader file itself and not to the files
+   loaded by it.
+
 Template and modes
 ------------------
 

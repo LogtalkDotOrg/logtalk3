@@ -17,9 +17,8 @@
 
 .. _external_calls:
 
-======================================
-Calling external predicate definitions
-======================================
+Calling external predicates
+===========================
 
 .. toctree::
    :maxdepth: 1

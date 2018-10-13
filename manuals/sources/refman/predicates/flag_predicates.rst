@@ -17,8 +17,8 @@
 
 .. _flag_predicates:
 
-Flag predicates
-===============
+Flags
+=====
 
 .. toctree::
    :maxdepth: 1

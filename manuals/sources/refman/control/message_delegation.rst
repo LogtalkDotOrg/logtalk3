@@ -17,7 +17,6 @@
 
 .. _message_delegation:
 
-==================
 Message delegation
 ==================
 

@@ -17,7 +17,6 @@
 
 .. _context_switching_calls:
 
-=======================
 Context switching calls
 =======================
 

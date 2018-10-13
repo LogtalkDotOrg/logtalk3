@@ -17,8 +17,8 @@
 
 .. _multi_threading_predicates:
 
-Multi-threading predicates
-==========================
+Multi-threading
+===============
 
 .. toctree::
    :maxdepth: 1

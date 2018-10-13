@@ -17,8 +17,8 @@
 
 .. _reflection_methods:
 
-Reflection methods
-==================
+Reflection
+==========
 
 .. toctree::
    :maxdepth: 1

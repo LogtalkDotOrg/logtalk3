@@ -17,8 +17,8 @@
 
 .. _engine_predicates:
 
-Multi-threading engine predicates
-=================================
+Multi-threading engines
+=======================
 
 .. toctree::
    :maxdepth: 1

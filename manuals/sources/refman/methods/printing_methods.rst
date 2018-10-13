@@ -17,8 +17,8 @@
 
 .. _printing_methods:
 
-Message printing methods
-========================
+Message printing
+================
 
 .. toctree::
    :maxdepth: 1
