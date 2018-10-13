@@ -267,14 +267,14 @@ Logtalk equivalents.</p>
 that does not inherit a method for creating new instances is an
 abstract class. I.e. there is no <code class="docutils literal notranslate"><span class="pre">abstract</span></code> keyword in Logtalk.</dd>
 <dt><strong>abstract method</strong></dt>
-<dd>In Logtalk, you may simply declare a method (<a class="reference internal" href="../glossary.html#term-predicate"><span class="xref std std-term">predicate</span></a>) in a class
-without defining it, leaving its definition to some descendant
+<dd>In Logtalk, you may simply declare a method (<a class="reference internal" href="../glossary.html#term-predicate"><span class="xref std std-term">predicate</span></a>) in a
+class without defining it, leaving its definition to some descendant
 sub-class.</dd>
 <dt><strong>assertion</strong></dt>
 <dd>There is no <code class="docutils literal notranslate"><span class="pre">assertion</span></code> keyword in Logtalk. Assertions are
 supported using Logtalk compilation hooks and developer tools.</dd>
 <dt><strong>extends</strong></dt>
-<dd>There is no <code class="docutils literal notranslate"><span class="pre">extends</span> <span class="pre">keyword</span></code> in Logtalk. Class inheritance is
+<dd>There is no <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword in Logtalk. Class inheritance is
 indicated using <em>specialization relations</em>. Moreover, the <em>extends
 relation</em> is used in Logtalk to indicate protocol, category, or
 prototype extension.</dd>
@@ -282,7 +282,7 @@ prototype extension.</dd>
 <dd>Logtalk uses the term <a class="reference internal" href="../glossary.html#term-protocol"><span class="xref std std-term">protocol</span></a> with the same meaning.</dd>
 <dt><strong>callback method</strong></dt>
 <dd>Logtalk supports <a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a>,
-the most common use context of callback methods.</dd>
+the most common usage context of callback methods.</dd>
 <dt><strong>class method</strong></dt>
 <dd>Class methods may be implemented in Logtalk by using a <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a> for
 the class and defining the class methods in the metaclass. I.e. class
@@ -322,23 +322,27 @@ Logtalk (and Prolog) are not typed languages in the same sense as Java.</dd>
 <dt><strong>package</strong></dt>
 <dd>There is no concept of packages in Logtalk. All Logtalk entities
 (objects, protocols, categories) share a single namespace. But
-Logtalk does support a concept of <em>library</em> that allows grouping of
-entities whose source files share a common prefix.</dd>
+Logtalk does support a concept of <a class="reference internal" href="../glossary.html#term-library"><span class="xref std std-term">library</span></a> that allows
+grouping of entities whose source files share a common prefix.</dd>
 <dt><strong>reflection</strong></dt>
-<dd>Logtalk supports both <em>structural reflection</em> (using a set of
-built-in predicates and built-in methods) and <em>behavioral reflection</em>
-(using <a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a>).</dd>
+<dd>Logtalk features a <em>white box</em> API supporting <em>structural</em> reflection
+about <a class="reference internal" href="../refman/predicates/enumerating_entity_property_predicates.html#enumerating-entity-property-predicates"><span class="std std-ref">entity contents</span></a>,
+a <em>black box</em> API supporting <em>behavioral</em> reflection about
+<a class="reference internal" href="../refman/methods/reflection_methods.html#reflection-methods"><span class="std std-ref">object protocols</span></a>, and an
+<a class="reference internal" href="../refman/predicates/event_handling_predicates.html#event-handling-predicates"><span class="std std-ref">events</span></a> API for reasoning about messages
+exchanged at runtime.</dd>
 <dt><strong>static</strong></dt>
 <dd>There is no <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword in Logtalk. See the entries on <em>class
 methods</em> and <em>class variables</em>.</dd>
 <dt><strong>super</strong></dt>
-<dd>Instead of a <code class="docutils literal notranslate"><span class="pre">super</span></code> keyword, Logtalk provides a super operator,
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>, for calling overridden methods.</dd>
+<dd>Instead of a <code class="docutils literal notranslate"><span class="pre">super</span></code> keyword, Logtalk provides a super operator and
+control construct, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>, for calling overridden
+methods.</dd>
 <dt><strong>synchronized</strong></dt>
-<dd>Logtalk supports <a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading programming</span></a> in selected Prolog
-compilers, including a <a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a> predicate directive.
-Logtalk allows you to synchronize a predicate or a set of predicates
-using per-predicate or per-predicate-set <em>mutexes</em>.</dd>
+<dd>Logtalk supports <a class="reference internal" href="threads.html#threads-threads"><span class="std std-ref">multi-threading programming</span></a> in
+selected Prolog compilers, including a <a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a>
+predicate directive. Logtalk allows you to synchronize a predicate or a
+set of predicates using per-predicate or per-predicate-set <em>mutexes</em>.</dd>
 <dt><strong>this</strong></dt>
 <dd>Logtalk uses the built-in context method <a class="reference internal" href="../refman/methods/self_1.html#methods-self-1"><span class="std std-ref">self/1</span></a> for retrieving
 the current instance. Logtalk also provides a <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> method but

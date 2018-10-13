@@ -123,8 +123,8 @@ Logtalk equivalents.
    abstract class. I.e. there is no ``abstract`` keyword in Logtalk.
 
 **abstract method**
-   In Logtalk, you may simply declare a method (:term:`predicate`) in a class
-   without defining it, leaving its definition to some descendant
+   In Logtalk, you may simply declare a method (:term:`predicate`) in a
+   class without defining it, leaving its definition to some descendant
    sub-class.
 
 **assertion**
@@ -132,7 +132,7 @@ Logtalk equivalents.
    supported using Logtalk compilation hooks and developer tools.
 
 **extends**
-   There is no ``extends keyword`` in Logtalk. Class inheritance is
+   There is no ``extends`` keyword in Logtalk. Class inheritance is
    indicated using *specialization relations*. Moreover, the *extends
    relation* is used in Logtalk to indicate protocol, category, or
    prototype extension.
@@ -142,7 +142,7 @@ Logtalk equivalents.
 
 **callback method**
    Logtalk supports :ref:`event-driven programming <events_events>`,
-   the most common use context of callback methods.
+   the most common usage context of callback methods.
 
 **class method**
    Class methods may be implemented in Logtalk by using a :term:`metaclass` for
@@ -192,27 +192,31 @@ Logtalk equivalents.
 **package**
    There is no concept of packages in Logtalk. All Logtalk entities
    (objects, protocols, categories) share a single namespace. But
-   Logtalk does support a concept of *library* that allows grouping of
-   entities whose source files share a common prefix.
+   Logtalk does support a concept of :term:`library` that allows
+   grouping of entities whose source files share a common prefix.
 
 **reflection**
-   Logtalk supports both *structural reflection* (using a set of
-   built-in predicates and built-in methods) and *behavioral reflection*
-   (using :ref:`event-driven programming <events_events>`).
+   Logtalk features a *white box* API supporting *structural* reflection
+   about :ref:`entity contents <enumerating_entity_property_predicates>`,
+   a *black box* API supporting *behavioral* reflection about
+   :ref:`object protocols <reflection_methods>`, and an
+   :ref:`events <event_handling_predicates>` API for reasoning about messages
+   exchanged at runtime.
 
 **static**
    There is no ``static`` keyword in Logtalk. See the entries on *class
    methods* and *class variables*.
 
 **super**
-   Instead of a ``super`` keyword, Logtalk provides a super operator,
-   :ref:`control_call_super_1`, for calling overridden methods.
+   Instead of a ``super`` keyword, Logtalk provides a super operator and
+   control construct, :ref:`control_call_super_1`, for calling overridden
+   methods.
 
 **synchronized**
-   Logtalk supports :ref:`multi-threading programming <threads_threads>` in selected Prolog
-   compilers, including a :ref:`directives_synchronized_1` predicate directive.
-   Logtalk allows you to synchronize a predicate or a set of predicates
-   using per-predicate or per-predicate-set *mutexes*.
+   Logtalk supports :ref:`multi-threading programming <threads_threads>` in
+   selected Prolog compilers, including a :ref:`directives_synchronized_1`
+   predicate directive. Logtalk allows you to synchronize a predicate or a
+   set of predicates using per-predicate or per-predicate-set *mutexes*.
 
 **this**
    Logtalk uses the built-in context method :ref:`methods_self_1` for retrieving
