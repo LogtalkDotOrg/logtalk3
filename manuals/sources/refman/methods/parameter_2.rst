@@ -74,13 +74,16 @@ Examples
 
        ...
        
-       color(Color) :-              % this clause is translated into a fact
-           parameter(1, Color).     % upon compilation 
-
+       % this clause is translated into
+       % a fact upon compilation
+       color(Color) :-
+           parameter(1, Color).
+       
+       % upon compilation, the >/2 call will be
+       % the single goal in the clause body
        heavy :-
-           parameter(2, Weight),    % after compilation, the >/2 call will be
-           Weight > 10.             % the first condition on the clause body
-
+           parameter(2, Weight),
+           Weight > 10.
        ...
 
 The same example using *parametric variables*:
