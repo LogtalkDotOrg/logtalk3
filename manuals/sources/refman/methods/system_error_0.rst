@@ -26,9 +26,9 @@ Description
 
 ::
 
-   system_error(Description)
+   system_error
 
-Throws an ``error(system_error(Description), logtalk(Head,Context))``
+Throws an ``error(system_error, logtalk(Head,Context))``
 exception term where ``Head`` is the head of the clause from where this
 predicate is called and ``Context`` is the execution context of the
 call. This built-in predicate is declared as a private method and thus
@@ -39,7 +39,7 @@ Template and modes
 
 ::
 
-   system_error(+nonvar)
+   system_error
 
 Errors
 ------
