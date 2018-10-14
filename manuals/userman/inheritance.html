@@ -274,10 +274,9 @@ objects:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(bar<span class="o">/</span><span class="m">1</span>).
-<span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
-
     bar(root).
 
+<span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
     foo(root).
 
 <span class="p">:- </span><span class="k">end_object.</span>
@@ -348,11 +347,10 @@ yes
 <span id="inheritance-union"></span><h4>Union inheritance<a class="headerlink" href="#union-inheritance" title="Permalink to this headline">¶</a></h4>
 <p>Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
-mechanisms. This can be accomplished by writing a clause that just
-calls, using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>
-operator, the inherited definitions. The relative position of this
-clause among the other definition clauses sets the calling order for the
-local and inherited definitions.</p>
+mechanisms. This can be accomplished by writing a clause that just calls,
+using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator, the inherited definitions.
+The relative position of this clause among the other definition clauses
+sets the calling order for the local and inherited definitions.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(root).
 
 <span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
@@ -387,8 +385,8 @@ no
 <p>Hiding of some of the inherited definitions, or differential inheritance:
 this form of inheritance is normally used in the representation of
 exceptions to generic definitions. Here we will need to use the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator to test and
-possibly reject some of the inherited definitions.</p>
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> operator to test and possibly reject some of
+the inherited definitions.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).
 
 <span class="p">    :- </span><span class="k">public</span>(mode<span class="o">/</span><span class="m">1</span>).

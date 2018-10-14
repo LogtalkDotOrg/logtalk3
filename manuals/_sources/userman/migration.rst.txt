@@ -371,7 +371,10 @@ predicate:
 
 ::
 
-   '$lgt_prolog_term_expansion'(comment(F/A, String), info(F/A, [comment is Atom])) :-
+   '$lgt_prolog_term_expansion'(
+           comment(F/A, String),
+           info(F/A, [comment is Atom])
+   ) :-
        atom_codes(Atom, String).
 
 This Logtalk feature can be used to allow compilation of legacy Prolog
@@ -385,7 +388,10 @@ after triggering a side effect:
 
 ::
 
-   '$lgt_prolog_term_expansion'(load_foreign_files(Files,Libs,InitRoutine), []) :-
+   '$lgt_prolog_term_expansion'(
+           load_foreign_files(Files,Libs,InitRoutine),
+           []
+   ) :-
        load_foreign_files(Files,Libs,InitRoutine).
 
 In this case, although the directive is not copied to the generated

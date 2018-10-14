@@ -138,8 +138,8 @@ control construct.
 
 .. _messages_super:
 
-Calling imported and inherited predicate definitions
-----------------------------------------------------
+Calling imported and inherited predicates
+-----------------------------------------
 
 When redefining a predicate, sometimes we need to call the inherited
 definition in the new code. This functionality, introduced by the

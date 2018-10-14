@@ -126,10 +126,9 @@ objects:
    :- object(root).
 
        :- public(bar/1).
-       :- public(foo/1).
-
        bar(root).
 
+       :- public(foo/1).
        foo(root).
 
    :- end_object.
@@ -209,11 +208,10 @@ Union inheritance
 
 Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
-mechanisms. This can be accomplished by writing a clause that just
-calls, using the :ref:`control_call_super_1`
-operator, the inherited definitions. The relative position of this
-clause among the other definition clauses sets the calling order for the
-local and inherited definitions.
+mechanisms. This can be accomplished by writing a clause that just calls,
+using the :ref:`control_call_super_1` operator, the inherited definitions.
+The relative position of this clause among the other definition clauses
+sets the calling order for the local and inherited definitions.
 
 ::
 
@@ -252,8 +250,8 @@ Selective inheritance
 Hiding of some of the inherited definitions, or differential inheritance:
 this form of inheritance is normally used in the representation of
 exceptions to generic definitions. Here we will need to use the
-:ref:`control_call_super_1` operator to test and
-possibly reject some of the inherited definitions.
+:ref:`control_call_super_1` operator to test and possibly reject some of
+the inherited definitions.
 
 ::
 

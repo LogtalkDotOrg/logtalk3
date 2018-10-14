@@ -374,7 +374,7 @@ A common mistake is to try to set compiler flags using
 
 .. code-block:: text
 
-   | ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).
+   | ?- logtalk_load(loader, [optimize(on)]).
 
 This will not work as you might expect as the compiler flags will only
 be used in the compilation of the ``loader.lgt`` file itself and will
@@ -1361,11 +1361,11 @@ predicate ``debug/1`` to represent debug goals. For example:
 
 ::
 
-   append([], List, List) :-
-       debug((write('Base case: '), writeq(append([], List, List)), nl)).
-   append([Head| Tail], List, [Head| Tail2]) :-
-       debug((write('Recursive case: '), writeq(append(Tail, List, Tail2)), nl)),
-       append(Tail, List, Tail2).
+   member(Head, [Head| _]) :-
+       debug((write('Base case: '), writeq(member(Head, [Head| _])))).
+   member(Head, [_| Tail]) :-
+       debug((write('Recursive case: '), writeq(member(Head, Tail)))),
+       member(Head, Tail).
 
 When debugging, we want to call the argument of the predicate
 ``debug/1``. This can be easily accomplished by defining a hook object
@@ -1437,15 +1437,15 @@ Some simple examples of using these meta-messages:
    >>> answer: 42
    yes
 
-   | ?- logtalk::print_message(debug, core, ['Arthur Dent','Ford Prefect','Marvin']).
-   >>> - 'Arthur Dent'
-   >>> - 'Ford Prefect'
-   >>> - 'Marvin'
+   | ?- logtalk::print_message(debug, core, [arthur,ford,marvin]).
+   >>> - arthur
+   >>> - ford
+   >>> - marvin
    yes
 
-   | ?- logtalk::print_message(debug, core, 'Names'::['Arthur Dent','Ford Prefect','Marvin']).
-   >>> Names:
-   >>> - 'Arthur Dent'
-   >>> - 'Ford Prefect'
-   >>> - 'Marvin'
+   | ?- logtalk::print_message(debug, core, names::[arthur,ford,marvin]).
+   >>> names:
+   >>> - arthur
+   >>> - ford
+   >>> - marvin
    yes

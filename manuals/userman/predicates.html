@@ -390,10 +390,11 @@ meaning:</p>
 <dd>Meta-argument that will be called as a goal.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">N</span></code></dt>
 <dd>Meta-argument that will be a closure used to construct a call by
-appending <code class="docutils literal notranslate"><span class="pre">N</span></code> arguments. The value of <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a non-negative
+appending <code class="docutils literal notranslate"><span class="pre">N</span></code> arguments. The value of <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive
 integer.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">::</span></code></dt>
-<dd>Argument that is context-aware but that will not be called as a goal.</dd>
+<dd>Argument that is context-aware but that will not be used as a goal
+or a closure.</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">^</span></code></dt>
 <dd>Goal that may be existentially quantified (<code class="docutils literal notranslate"><span class="pre">Vars^Goal</span></code>).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">*</span></code></dt>
@@ -1661,10 +1662,10 @@ the predicate’s scope declarations. For instance, the following call:</p>
 <p>will only return user predicates that are declared public. The predicate
 property <code class="docutils literal notranslate"><span class="pre">non_terminal/1</span></code> may be used to retrieve all grammar rule
 non-terminals declared for an object. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>current_non_terminal(<span class="nv">Object</span>, <span class="nv">NonTerminal</span><span class="o">//</span><span class="nv">Args</span>) <span class="o">:-</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>current_non_terminal(<span class="nv">Object</span>, <span class="nv">Name</span><span class="o">//</span><span class="nv">Args</span>) <span class="o">:-</span>
     <span class="nv">Object</span><span class="o">::</span><span class="k">current_predicate</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>),
     <span class="k">functor</span>(<span class="nv">Predicate</span>, <span class="nv">Functor</span>, <span class="nv">Arity</span>),
-    <span class="nv">Object</span><span class="o">::</span><span class="k">predicate_property</span>(<span class="nv">Predicate</span>, non_terminal(<span class="nv">NonTerminal</span><span class="o">//</span><span class="nv">Args</span>)).
+    <span class="nv">Object</span><span class="o">::</span><span class="k">predicate_property</span>(<span class="nv">Predicate</span>, non_terminal(<span class="nv">Name</span><span class="o">//</span><span class="nv">Args</span>)).
 </pre></div>
 </div>
 <p>Usually, the non-terminal and the corresponding predicate share the same

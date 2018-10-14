@@ -504,7 +504,10 @@ directive for predicates using the format:</p>
 <p>We can rewrite this predicate into a Logtalk <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive by
 defining a suitable clause for the <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_term_expansion'/2</span></code>
 predicate:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(comment(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, <span class="nv">String</span>), info(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, [comment <span class="k">is</span> <span class="nv">Atom</span>])) <span class="o">:-</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(
+        comment(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, <span class="nv">String</span>),
+        info(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, [comment <span class="k">is</span> <span class="nv">Atom</span>])
+) <span class="o">:-</span>
     <span class="k">atom_codes</span>(<span class="nv">Atom</span>, <span class="nv">String</span>).
 </pre></div>
 </div>
@@ -515,7 +518,10 @@ more easily identify source files that are likely non-portable across
 Prolog compilers.</p>
 <p>A second example, where a proprietary Prolog directive is discarded
 after triggering a side effect:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>), []) <span class="o">:-</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(
+        load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>),
+        []
+) <span class="o">:-</span>
     load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>).
 </pre></div>
 </div>

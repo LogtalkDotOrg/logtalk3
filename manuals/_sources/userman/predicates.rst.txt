@@ -211,10 +211,11 @@ meaning:
    Meta-argument that will be called as a goal.
 ``N``
    Meta-argument that will be a closure used to construct a call by
-   appending ``N`` arguments. The value of ``N`` must be a non-negative
+   appending ``N`` arguments. The value of ``N`` must be a positive
    integer.
 ``::``
-   Argument that is context-aware but that will not be called as a goal.
+   Argument that is context-aware but that will not be used as a goal
+   or a closure.
 ``^``
    Goal that may be existentially quantified (``Vars^Goal``).
 ``*``
@@ -1695,10 +1696,10 @@ non-terminals declared for an object. For example:
 
 ::
 
-   current_non_terminal(Object, NonTerminal//Args) :-
+   current_non_terminal(Object, Name//Args) :-
        Object::current_predicate(Name/Arity),
        functor(Predicate, Functor, Arity),
-       Object::predicate_property(Predicate, non_terminal(NonTerminal//Args)).
+       Object::predicate_property(Predicate, non_terminal(Name//Args)).
 
 Usually, the non-terminal and the corresponding predicate share the same
 functor but users should not rely on this always being true.

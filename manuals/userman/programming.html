@@ -506,7 +506,7 @@ multifile and dynamic <code class="docutils literal notranslate"><span class="pr
 directory containing your source files as explained in the next section.</p>
 <p>A common mistake is to try to set compiler flags using
 <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> with a loader file. For example, by writing:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(loader, [optimize(on)]).
 </pre></div>
 </div>
 <p>This will not work as you might expect as the compiler flags will only
@@ -1357,11 +1357,11 @@ in the adapter files of the back-end Prolog compilers).</p>
 <p>It is possible to use compilation hooks and the term expansion mechanism
 for conditional compilation of debugging goals. Assume that we chose the
 predicate <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> to represent debug goals. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>append([], <span class="nv">List</span>, <span class="nv">List</span>) <span class="o">:-</span>
-    debug((<span class="k">write</span>(<span class="s">&#39;Base case: &#39;</span>), <span class="k">writeq</span>(append([], <span class="nv">List</span>, <span class="nv">List</span>)), <span class="k">nl</span>)).
-append([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">List</span>, [<span class="nv">Head</span>| <span class="nv">Tail2</span>]) <span class="o">:-</span>
-    debug((<span class="k">write</span>(<span class="s">&#39;Recursive case: &#39;</span>), <span class="k">writeq</span>(append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>)), <span class="k">nl</span>)),
-    append(<span class="nv">Tail</span>, <span class="nv">List</span>, <span class="nv">Tail2</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>]) <span class="o">:-</span>
+    debug((<span class="k">write</span>(<span class="s">&#39;Base case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, [<span class="nv">Head</span>| <span class="nv">_</span>])))).
+member(<span class="nv">Head</span>, [<span class="nv">_</span>| <span class="nv">Tail</span>]) <span class="o">:-</span>
+    debug((<span class="k">write</span>(<span class="s">&#39;Recursive case: &#39;</span>), <span class="k">writeq</span>(member(<span class="nv">Head</span>, <span class="nv">Tail</span>)))),
+    member(<span class="nv">Head</span>, <span class="nv">Tail</span>).
 </pre></div>
 </div>
 <p>When debugging, we want to call the argument of the predicate
@@ -1423,17 +1423,17 @@ yes
 &gt;&gt;&gt; answer: 42
 yes
 
-| ?- logtalk::print_message(debug, core, [&#39;Arthur Dent&#39;,&#39;Ford Prefect&#39;,&#39;Marvin&#39;]).
-&gt;&gt;&gt; - &#39;Arthur Dent&#39;
-&gt;&gt;&gt; - &#39;Ford Prefect&#39;
-&gt;&gt;&gt; - &#39;Marvin&#39;
+| ?- logtalk::print_message(debug, core, [arthur,ford,marvin]).
+&gt;&gt;&gt; - arthur
+&gt;&gt;&gt; - ford
+&gt;&gt;&gt; - marvin
 yes
 
-| ?- logtalk::print_message(debug, core, &#39;Names&#39;::[&#39;Arthur Dent&#39;,&#39;Ford Prefect&#39;,&#39;Marvin&#39;]).
-&gt;&gt;&gt; Names:
-&gt;&gt;&gt; - &#39;Arthur Dent&#39;
-&gt;&gt;&gt; - &#39;Ford Prefect&#39;
-&gt;&gt;&gt; - &#39;Marvin&#39;
+| ?- logtalk::print_message(debug, core, names::[arthur,ford,marvin]).
+&gt;&gt;&gt; names:
+&gt;&gt;&gt; - arthur
+&gt;&gt;&gt; - ford
+&gt;&gt;&gt; - marvin
 yes
 </pre></div>
 </div>
