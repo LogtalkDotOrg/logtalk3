@@ -101,7 +101,7 @@ Examples
 
    | ?- logtalk_load(types(tree)).
 
-   | ?- logtalk_load([listp, list], [source_data(off), portability(silent)]).
+   | ?- logtalk_load(file_system, [portability(silent)]).
 
 .. seealso::
 

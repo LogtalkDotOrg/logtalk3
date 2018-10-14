@@ -28,11 +28,16 @@ Description
 
    current_predicate(Predicate)
 
-Enumerates, by backtracking, visible user predicates. When the predicate
-is declared in a ``uses/2`` or ``use_module/2`` directive, predicates
-are enumerated for the referenced object or module. Otherwise, predicates
-are enumerated for an object. In the case of objects, predicates not
-declared using a scope directive are not enumerated.
+Enumerates, by backtracking, visible user object predicates.
+Predicates not declared using a scope directive are not enumerated.
+
+When ``Predicate`` is ground at compile time, this predicate also
+succeeds for any predicates listed in :ref:`directives_uses_2` and
+:ref:`directives_use_module_2` directives.
+
+When ``Predicate`` is bound at compile time to a ``:/2`` term, this
+predicate enumerates module predicates (assuming that the backend
+Prolog compiler supports modules).
 
 Modes and number of proofs
 --------------------------

@@ -30,7 +30,7 @@ Description
 
 Returns the object that has sent the message under processing. This
 private method is translated into a unification between its argument and
-the corresponding implicit context argument in the predicate containing
+the corresponding implicit context argument in the predicate clause making
 the call. This unification occurs at the clause head when the argument
 is not instantiated (the most common case).
 

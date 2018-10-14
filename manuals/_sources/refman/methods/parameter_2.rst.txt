@@ -34,15 +34,15 @@ the parameter values of the entity that contains the predicate clause
 whose body is being executed by using the argument number in the entity
 identifier. This predicate is implemented as a unification between its
 second argument and the corresponding implicit execution-context
-argument in the predicate containing the call. This unification occurs
-at the clause head when the second argument is not instantiated (the
-most common case). When the second argument is instantiated, the
+argument in the predicate clause making the call. This unification
+occurs at the clause head when the second argument is not instantiated
+(the most common case). When the second argument is instantiated, the
 unification must be delayed to runtime and thus occurs at the clause
 body.
 
-Entity parameters can also be accessed using *parametric variables*,
+Entity parameters can also be accessed using *parameter variables*,
 which use the syntax ``_VariableName_``. The compiler recognizes
-occurrences of these variables in entity clauses. Parametric variables
+occurrences of these variables in entity clauses. Parameter variables
 allows us to abstract parameter positions thus simplifying code
 maintenance.
 
@@ -86,7 +86,7 @@ Examples
            Weight > 10.
        ...
 
-The same example using *parametric variables*:
+The same example using *parameter variables*:
 
 ::
 

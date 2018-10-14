@@ -99,7 +99,7 @@ Examples
 
    | ?- logtalk_compile(types(tree)).
 
-   | ?- logtalk_compile([listp, list], [source_data(off), portability(silent)]).
+   | ?- logtalk_compile(file_system, [portability(silent)]).
 
 .. seealso::
 

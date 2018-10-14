@@ -33,8 +33,8 @@ predicate clause whose body is being executed is defined (or the object
 importing the category that contains the predicate clause). This private
 method is implemented as a unification between its argument and the
 corresponding implicit execution-context argument in the predicate
-containing the call. This unification occurs at the clause head when the
-argument is not instantiated (the most common case). This method is
+clause making the call. This unification occurs at the clause head when
+the argument is not instantiated (the most common case). This method is
 useful for avoiding hard-coding references to an object identifier or
 for retrieving all object parameters with a single call when using
 parametric objects.
