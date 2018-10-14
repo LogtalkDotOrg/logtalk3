@@ -515,7 +515,8 @@ allowing calls to local object or category predicates. For example:
 
        :- multifile(clpfd:run_propagator/2).
        clpfd:run_propagator(..., ...) :-
-           ...    % calls to local object predicates
+           % calls to local object predicates
+           ...
 
    :- end_object.
 

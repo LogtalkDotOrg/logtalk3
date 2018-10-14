@@ -507,8 +507,13 @@ object (a Prolog atom or compound term, which must not match any
 existing entity name). The remaining three arguments correspond to the
 relations described in the opening object directive and to the object
 code contents (directives and clauses).</p>
-<p>For instance, the call:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(foo, [extends(bar)], [public(foo/1)], [foo(1), foo(2)]).
+<p>For example, the call:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(
+         foo,
+         [extends(bar)],
+         [public(foo/1)],
+         [foo(1), foo(2)]
+     ).
 </pre></div>
 </div>
 <p>is equivalent to compiling and loading the object:</p>
@@ -518,7 +523,6 @@ code contents (directives and clauses).</p>
 <span class="p">    :- </span><span class="k">dynamic.</span>
 
 <span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">1</span>).
-
     foo(<span class="m">1</span>).
     foo(<span class="m">2</span>).
 

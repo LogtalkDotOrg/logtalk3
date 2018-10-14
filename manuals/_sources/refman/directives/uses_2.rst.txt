@@ -83,9 +83,12 @@ Examples
 
    foo :-
        ...,
-       findall(X, member(X, L), A),    % the same as findall(X, list::member(X, L), A)
-       append(A, B, C),                % the same as list::append(A, B, C)
-       assertz(data(X, C)),            % the same as store::assertz(data(X, C))
+       % the same as findall(X, list::member(X, L), A)
+       findall(X, member(X, L), A),
+       % the same as list::append(A, B, C)
+       append(A, B, C),
+       % the same as store::assertz(data(X, C))
+       assertz(data(X, C)),
        ...
 
 Another example, using the extended notation that allows us to define
@@ -98,8 +101,10 @@ predicate aliases:
 
    btree_to_queue :-
        ...,
-       new_btree(Tree),     % the same as btrees::new(Tree)
-       new_queue(Queue),    % the same as queues::new(Queue)
+       % the same as btrees::new(Tree)
+       new_btree(Tree),
+       % the same as queues::new(Queue)
+       new_queue(Queue),
        ...
 
 .. seealso::

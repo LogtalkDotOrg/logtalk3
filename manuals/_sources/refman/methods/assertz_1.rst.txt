@@ -29,19 +29,19 @@ Description
    assertz(Head)
    assertz((Head:-Body))
 
-Asserts a clause as the last one for a dynamic predicate. When the
-predicate indicator for ``Head`` is declared in a :ref:`directives_uses_2` or
+Asserts a clause as the last one for a dynamic predicate. If the
+predicate is not previously declared (using a scope directive), then a
+dynamic predicate declaration is added to the object (assuming that we
+are asserting locally or that the compiler flag ``dynamic_declarations``
+was set to ``allow`` when the object was created or compiled).
+
+When the predicate indicator for ``Head`` is declared in a :ref:`directives_uses_2` or
 :ref:`directives_use_module_2` directive, the clause is asserted in the referenced
-object or module. Otherwise, the clause is asserted for an object's
-dynamic predicate. If the predicate is not previously declared (using a
-scope directive), then a dynamic predicate declaration is added to the
-object (assuming that we are asserting locally or that the compiler flag
-``dynamic_declarations`` was set to ``allow`` when the object was
-created or compiled).
+object or module.
 
 This method may be used to assert clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
-declared in *this*. This allows easy initialization of dynamically
+declared in :term:`this`. This allows easy initialization of dynamically
 created objects when writing constructors.
 
 Template and modes

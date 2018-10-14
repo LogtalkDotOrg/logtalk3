@@ -266,10 +266,14 @@ use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>op
 
 foo <span class="o">:-</span>
     ...,
-    <span class="k">findall</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, <span class="nv">L</span>), <span class="nv">A</span>),    <span class="c">% same as findall(X, lists:member(X, L), A)</span>
-    append(<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">C</span>),                <span class="c">% same as lists:append(A, B, C)</span>
-    <span class="k">assertz</span>(data(<span class="nv">X</span>, <span class="nv">C</span>)),            <span class="c">% same as assertz(store:data(X, C))</span>
-    <span class="k">retractall</span>(bar(<span class="nv">_</span>)),             <span class="c">% same as retractall(user:foo(_))</span>
+    <span class="c">% same as findall(X, lists:member(X, L), A)</span>
+    <span class="k">findall</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, <span class="nv">L</span>), <span class="nv">A</span>),
+    <span class="c">% same as lists:append(A, B, C)</span>
+    append(<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">C</span>),
+    <span class="c">% same as assertz(store:data(X, C))</span>
+    <span class="k">assertz</span>(data(<span class="nv">X</span>, <span class="nv">C</span>)),
+    <span class="c">% same as retractall(user:foo(_))</span>
+    <span class="k">retractall</span>(bar(<span class="nv">_</span>)),
     ...
 </pre></div>
 </div>

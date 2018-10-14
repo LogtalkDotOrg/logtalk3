@@ -30,9 +30,9 @@ Description
 
 Calls an imported or inherited predicate definition. The call fails if
 the predicate is declared but there is no imported or inherited
-predicate definition (as per the closed-world assumption). This control
-construct may be used within objects or categories in the body of a
-predicate definition.
+predicate definition (as per the :term:`closed-world assumption`). This
+control construct may be used within objects or categories in the body
+of a predicate definition.
 
 This control construct preserves the implicit execution context
 :term:`self` and :term:`sender` arguments (plus the meta-call

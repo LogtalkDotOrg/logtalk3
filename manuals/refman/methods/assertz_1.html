@@ -205,18 +205,17 @@
 <span class="k">assertz</span>((<span class="nv">Head</span><span class="o">:-</span><span class="nv">Body</span>))
 </pre></div>
 </div>
-<p>Asserts a clause as the last one for a dynamic predicate. When the
-predicate indicator for <code class="docutils literal notranslate"><span class="pre">Head</span></code> is declared in a <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or
+<p>Asserts a clause as the last one for a dynamic predicate. If the
+predicate is not previously declared (using a scope directive), then a
+dynamic predicate declaration is added to the object (assuming that we
+are asserting locally or that the compiler flag <code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code>
+was set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> when the object was created or compiled).</p>
+<p>When the predicate indicator for <code class="docutils literal notranslate"><span class="pre">Head</span></code> is declared in a <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or
 <a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive, the clause is asserted in the referenced
-object or module. Otherwise, the clause is asserted for an object’s
-dynamic predicate. If the predicate is not previously declared (using a
-scope directive), then a dynamic predicate declaration is added to the
-object (assuming that we are asserting locally or that the compiler flag
-<code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code> was set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> when the object was
-created or compiled).</p>
+object or module.</p>
 <p>This method may be used to assert clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
-declared in <em>this</em>. This allows easy initialization of dynamically
+declared in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>. This allows easy initialization of dynamically
 created objects when writing constructors.</p>
 </div>
 <div class="section" id="template-and-modes">

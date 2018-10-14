@@ -275,11 +275,11 @@ different methods that we can use to find the roots of real functions.
 Depending on the function, some methods will faster than others. Some
 methods will converge into the solution while others may diverge and
 never find it. We can try all the methods simultaneously by writing:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>, <span class="nv">Algorithm</span>) <span class="o">:-</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>) <span class="o">:-</span>
     <span class="k">threaded</span>((
-        (bisection<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>), <span class="nv">Algorithm</span> <span class="o">=</span> bisection)
-    <span class="o">;</span>   (newton<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>), <span class="nv">Algorithm</span> <span class="o">=</span> newton)
-    <span class="o">;</span>   (muller<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>), <span class="nv">Algorithm</span> <span class="o">=</span> muller)
+        bisection<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>)
+    <span class="o">;</span>   newton<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>)
+    <span class="o">;</span>   muller<span class="o">::</span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>)
     )).
 </pre></div>
 </div>
@@ -421,7 +421,8 @@ using the <a class="reference internal" href="../refman/directives/synchronized_
 predicate directive. Proving a query to a synchronized predicate (or
 synchronized non-terminal) is internally protected by a mutex, thus
 allowing for easy thread synchronization. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(db_update<span class="o">/</span><span class="m">1</span>).   <span class="c">% ensure thread synchronization</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% ensure thread synchronization</span>
+<span class="p">:- </span><span class="k">synchronized</span>(db_update<span class="o">/</span><span class="m">1</span>).
 
 db_update(<span class="nv">Update</span>) <span class="o">:-</span>
     <span class="c">% predicate with side-effects</span>

@@ -106,7 +106,7 @@ equivalents.
    Logtalk can use :term:`static binding` or :term:`dynamic binding` for
    locating both method declarations and method definitions. Moreover,
    methods that are declared but not defined simply fail when called
-   (as per closed-world assumption).
+   (as per :term:`closed-world assumption`).
 
 .. _nomenclature_java:
 
@@ -125,7 +125,7 @@ Logtalk equivalents.
 **abstract method**
    In Logtalk, you may simply declare a method (:term:`predicate`) in a
    class without defining it, leaving its definition to some descendant
-   sub-class.
+   subclass.
 
 **assertion**
    There is no ``assertion`` keyword in Logtalk. Assertions are

@@ -27,16 +27,16 @@ Description
 ::
 
    abolish(Predicate)
-   abolish(Name/Arity)
 
-Abolishes a runtime declared dynamic predicate or a local dynamic
-predicate. When the predicate indicator for ``Head`` is declared in a
-:ref:`directives_uses_2` or :ref:`directives_use_module_2` directive,
-the predicate is abolished in the referenced object or module.
-Otherwise, the predicate is abolished in an object's database. In the
-case of objects, only predicates that are dynamically declared (using
-a call to the ``asserta/1`` or ``assertz/1`` built-in methods) can be
-abolished.
+Abolishes a runtime declared object dynamic predicate or an object 
+local dynamic predicate. Only predicates that are dynamically declared
+at runtime (using a call to the ``asserta/1`` or ``assertz/1`` built-in
+methods) can be abolished. 
+
+When the predicate indicator is declared in a :ref:`directives_uses_2`
+or :ref:`directives_use_module_2` directive, the predicate is abolished
+in the referenced object or module.
+
 
 Template and modes
 ------------------

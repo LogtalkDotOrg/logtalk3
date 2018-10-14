@@ -70,7 +70,7 @@ The message must match a public predicate declared for the receiving
 object. The message may also correspond to a protected or private
 predicate if the *sender* matches the predicate scope container. If the
 predicate is declared but not defined, the message simply fails (as per
-the closed-world assumption).
+the :term:`closed-world assumption`).
 
 .. _messages_delegating:
 
@@ -108,7 +108,7 @@ for the receiving object or a private predicate within the scope of the
 details). If the message is sent from inside a category or if we are
 using private inheritance, then the message may also match a private
 predicate. Again, if the predicate is declared but not defined, the
-message simply fails (as per the closed-world assumption).
+message simply fails (as per the :term:`closed-world assumption`).
 
 .. _messages_broadcasting:
 
@@ -167,7 +167,7 @@ construct may be used within objects and categories. When combined with
 predicates to be called with the same performance of local predicates.
 As with the message sending control constructs, the ``^^/1`` call simply
 fails when the predicate is declared but not defined (as per the
-closed-world assumption).
+:term:`closed-world assumption`).
 
 .. _messages_events:
 

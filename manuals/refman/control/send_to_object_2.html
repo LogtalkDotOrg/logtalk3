@@ -198,7 +198,7 @@ predicate of the receiver object. When the message corresponds to a
 protected or private predicate, the call is only valid if the
 <a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a> matches the <a class="reference internal" href="../../glossary.html#term-predicate-scope-container"><span class="xref std std-term">predicate scope container</span></a>. When the
 predicate is declared but not defined, the message simply fails (as per
-the closed-world assumption).</p>
+the <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}::Message</span></code> syntax allows simplified access to parametric
 object <em>proxies</em>. Its operational semantics is equivalent to the goal
 conjunction <code class="docutils literal notranslate"><span class="pre">(call(Proxy),</span> <span class="pre">Proxy::Message)</span></code>. I.e. <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is proved

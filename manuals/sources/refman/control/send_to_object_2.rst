@@ -34,7 +34,7 @@ predicate of the receiver object. When the message corresponds to a
 protected or private predicate, the call is only valid if the
 :term:`sender` matches the :term:`predicate scope container`. When the
 predicate is declared but not defined, the message simply fails (as per
-the closed-world assumption).
+the :term:`closed-world assumption`).
 
 The ``{Proxy}::Message`` syntax allows simplified access to parametric
 object *proxies*. Its operational semantics is equivalent to the goal

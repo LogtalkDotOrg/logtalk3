@@ -1616,7 +1616,7 @@ The following predicate properties are supported:
    The predicate definition is looked up in the specified entity (note
    that this property does not necessarily imply that clauses for the
    predicate exist in ``Entity``; the predicate can simply be false as
-   per the closed-world assumption)
+   per the :term:`closed-world assumption`)
 ``redefined_from(Entity)``
    The predicate is a redefinition of a predicate definition inherited
    from the specified entity

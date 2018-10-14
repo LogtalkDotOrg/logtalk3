@@ -97,10 +97,14 @@ Examples
 
    foo :-
        ...,
-       findall(X, member(X, L), A),    % same as findall(X, lists:member(X, L), A)
-       append(A, B, C),                % same as lists:append(A, B, C)
-       assertz(data(X, C)),            % same as assertz(store:data(X, C))
-       retractall(bar(_)),             % same as retractall(user:foo(_))
+       % same as findall(X, lists:member(X, L), A)
+       findall(X, member(X, L), A),
+       % same as lists:append(A, B, C)
+       append(A, B, C),
+       % same as assertz(store:data(X, C))
+       assertz(data(X, C)),
+       % same as retractall(user:foo(_))
+       retractall(bar(_)),
        ...
 
 .. seealso::

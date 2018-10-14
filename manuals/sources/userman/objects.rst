@@ -383,11 +383,16 @@ existing entity name). The remaining three arguments correspond to the
 relations described in the opening object directive and to the object
 code contents (directives and clauses).
 
-For instance, the call:
+For example, the call:
 
 .. code-block:: text
 
-   | ?- create_object(foo, [extends(bar)], [public(foo/1)], [foo(1), foo(2)]).
+   | ?- create_object(
+            foo,
+            [extends(bar)],
+            [public(foo/1)],
+            [foo(1), foo(2)]
+        ).
 
 is equivalent to compiling and loading the object:
 
@@ -399,7 +404,6 @@ is equivalent to compiling and loading the object:
        :- dynamic.
 
        :- public(foo/1).
-
        foo(1).
        foo(2).
 

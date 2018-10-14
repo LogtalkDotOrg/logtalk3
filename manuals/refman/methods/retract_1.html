@@ -205,15 +205,14 @@
 <span class="k">retract</span>((<span class="nv">Head</span><span class="o">:-</span><span class="nv">Body</span>))
 </pre></div>
 </div>
-<p>Retracts a clause for a dynamic predicate. When the predicate indicator
-for <code class="docutils literal notranslate"><span class="pre">Head</span></code> is declared in a <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or
-<a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive,
-the clause is retracted in the referenced object or module. Otherwise,
-the clause is retracted in an object’s dynamic predicate. On
-backtracking, the predicate retracts the next matching clause.</p>
+<p>Retracts a clause for an object dynamic predicate. On backtracking, the
+predicate retracts the next matching clause.</p>
+<p>When the predicate indicator for <code class="docutils literal notranslate"><span class="pre">Head</span></code> is declared in a
+<a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or <a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive,
+the clause is retracted in the referenced object or module.</p>
 <p>This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
-declared in <em>this</em>.</p>
+declared in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>.</p>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
@@ -241,7 +240,7 @@ declared in <em>this</em>.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>To retract a matching clause of a local dynamic predicate or a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
+<dt>To retract a matching clause of a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
 <dd><code class="docutils literal notranslate"><span class="pre">retract(Clause)</span></code></dd>
 <dt>To retract a matching clause of a public or protected dynamic predicate in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
 <dd><code class="docutils literal notranslate"><span class="pre">::retract(Clause)</span></code></dd>

@@ -245,13 +245,16 @@ maintenance.</p>
 
     ...
 
-    color(<span class="nv">Color</span>) <span class="o">:-</span>              <span class="c">% this clause is translated into a fact</span>
-        <span class="k">parameter</span>(<span class="m">1</span>, <span class="nv">Color</span>).     <span class="c">% upon compilation</span>
+    <span class="c">% this clause is translated into</span>
+    <span class="c">% a fact upon compilation</span>
+    color(<span class="nv">Color</span>) <span class="o">:-</span>
+        <span class="k">parameter</span>(<span class="m">1</span>, <span class="nv">Color</span>).
 
+    <span class="c">% upon compilation, the &gt;/2 call will be</span>
+    <span class="c">% the single goal in the clause body</span>
     heavy <span class="o">:-</span>
-        <span class="k">parameter</span>(<span class="m">2</span>, <span class="nv">Weight</span>),    <span class="c">% after compilation, the &gt;/2 call will be</span>
-        <span class="nv">Weight</span> <span class="o">&gt;</span> <span class="m">10.</span>             <span class="c">% the first condition on the clause body</span>
-
+        <span class="k">parameter</span>(<span class="m">2</span>, <span class="nv">Weight</span>),
+        <span class="nv">Weight</span> <span class="o">&gt;</span> <span class="m">10.</span>
     ...
 </pre></div>
 </div>

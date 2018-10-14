@@ -51,8 +51,8 @@ Examples
 
 ::
 
-   % after compilation, the write/1 call will be the first goal on the clause body:
-
+   % after compilation, the write/1 call will
+   % be the first goal on the clause body
    test :-
        sender(Sender),
        write('executing a method to answer a message sent by '),

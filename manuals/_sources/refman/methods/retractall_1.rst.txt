@@ -28,15 +28,15 @@ Description
 
    retractall(Head)
 
-Retracts all clauses with a matching head for a dynamic predicate. When
-the predicate indicator for ``Head`` is declared in a :ref:`directives_uses_2`
-or :ref:`directives_use_module_2` directive, the clauses are retracted in the
-referenced object or module. Otherwise, the clauses are retracted in an object's
-dynamic predicate.
+Retracts all clauses with a matching head for an object dynamic predicate.
+
+When the predicate indicator for ``Head`` is declared in a
+:ref:`directives_uses_2` or :ref:`directives_use_module_2` directive,
+the clauses are retracted in the referenced object or module.
 
 This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
-declared in *this*.
+declared in :term:`this`.
 
 Template and modes
 ------------------
@@ -64,11 +64,11 @@ The predicate indicator of Head, Name/Arity, is not declared:
 Examples
 --------
 
-To retract all local predicate clauses or all predicate clauses in :term:`this` with a matching head:
+To retract all clauses with a matching head of a dynamic predicate in :term:`this`:
    ``retractall(Head)``
-To retract all public or protected predicate clauses with a matching head in :term:`self`:
+To retract all clauses with a matching head of a public or protected dynamic predicate in :term:`self`:
    ``::retractall(Head)``
-To retract all public predicate clauses with a matching head in an explicit object:
+To retract all clauses with a matching head of a public dynamic predicate in an explicit object:
    ``Object::retractall(Head)``
 
 .. seealso::

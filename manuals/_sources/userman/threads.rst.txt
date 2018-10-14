@@ -123,11 +123,11 @@ never find it. We can try all the methods simultaneously by writing:
 
 ::
 
-   find_root(Function, A, B, Error, Zero, Algorithm) :-
+   find_root(Function, A, B, Error, Zero) :-
        threaded((
-           (bisection::find_root(Function, A, B, Error, Zero), Algorithm = bisection)
-       ;   (newton::find_root(Function, A, B, Error, Zero), Algorithm = newton)
-       ;   (muller::find_root(Function, A, B, Error, Zero), Algorithm = muller)
+           bisection::find_root(Function, A, B, Error, Zero)
+       ;   newton::find_root(Function, A, B, Error, Zero)
+       ;   muller::find_root(Function, A, B, Error, Zero)
        )).
 
 The above ``threaded/1`` goal succeeds when one of the implicit threads
@@ -293,7 +293,8 @@ allowing for easy thread synchronization. For example:
 
 ::
 
-   :- synchronized(db_update/1).   % ensure thread synchronization
+   % ensure thread synchronization
+   :- synchronized(db_update/1).
 
    db_update(Update) :-
        % predicate with side-effects

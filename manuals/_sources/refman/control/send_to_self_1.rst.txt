@@ -35,7 +35,7 @@ if the predicate is within the scope of the object where the method
 making the call is defined, if imported from a category, if used from
 within a category, or when using private inheritance. When the predicate
 is declared but not defined, the message simply fails (as per the
-closed-world assumption).
+:term:`closed-world assumption`).
 
 The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. A message to *self* necessarily

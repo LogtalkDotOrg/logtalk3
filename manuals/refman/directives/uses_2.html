@@ -253,9 +253,12 @@ uses(<span class="o">+</span>object_identifier, <span class="o">+</span>operator
 
 foo <span class="o">:-</span>
     ...,
-    <span class="k">findall</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, <span class="nv">L</span>), <span class="nv">A</span>),    <span class="c">% the same as findall(X, list::member(X, L), A)</span>
-    append(<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">C</span>),                <span class="c">% the same as list::append(A, B, C)</span>
-    <span class="k">assertz</span>(data(<span class="nv">X</span>, <span class="nv">C</span>)),            <span class="c">% the same as store::assertz(data(X, C))</span>
+    <span class="c">% the same as findall(X, list::member(X, L), A)</span>
+    <span class="k">findall</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, <span class="nv">L</span>), <span class="nv">A</span>),
+    <span class="c">% the same as list::append(A, B, C)</span>
+    append(<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">C</span>),
+    <span class="c">% the same as store::assertz(data(X, C))</span>
+    <span class="k">assertz</span>(data(<span class="nv">X</span>, <span class="nv">C</span>)),
     ...
 </pre></div>
 </div>
@@ -266,8 +269,10 @@ predicate aliases:</p>
 
 btree_to_queue <span class="o">:-</span>
     ...,
-    new_btree(<span class="nv">Tree</span>),     <span class="c">% the same as btrees::new(Tree)</span>
-    new_queue(<span class="nv">Queue</span>),    <span class="c">% the same as queues::new(Queue)</span>
+    <span class="c">% the same as btrees::new(Tree)</span>
+    new_btree(<span class="nv">Tree</span>),
+    <span class="c">% the same as queues::new(Queue)</span>
+    new_queue(<span class="nv">Queue</span>),
     ...
 </pre></div>
 </div>

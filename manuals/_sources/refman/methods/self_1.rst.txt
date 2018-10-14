@@ -51,10 +51,12 @@ Examples
 
 ::
 
+   % upon compilation, the write/1 call will be
+   % the first goal on the clause body
    test :-
-       self(Self),                                   % after compilation, the write/1
-       write('executing a method in behalf of '),    % call will be the first goal on
-       writeq(Self), nl.                             % the clause body
+       self(Self),
+       write('executing a method in behalf of '),
+       writeq(Self), nl.
 
 .. seealso::
 

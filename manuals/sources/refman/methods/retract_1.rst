@@ -29,16 +29,16 @@ Description
    retract(Head)
    retract((Head:-Body))
 
-Retracts a clause for a dynamic predicate. When the predicate indicator
-for ``Head`` is declared in a :ref:`directives_uses_2` or
-:ref:`directives_use_module_2` directive,
-the clause is retracted in the referenced object or module. Otherwise,
-the clause is retracted in an object's dynamic predicate. On
-backtracking, the predicate retracts the next matching clause.
+Retracts a clause for an object dynamic predicate. On backtracking, the
+predicate retracts the next matching clause.
+
+When the predicate indicator for ``Head`` is declared in a
+:ref:`directives_uses_2` or :ref:`directives_use_module_2` directive,
+the clause is retracted in the referenced object or module.
 
 This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
-declared in *this*.
+declared in :term:`this`.
 
 Template and modes
 ------------------
@@ -66,7 +66,7 @@ The predicate indicator of Head, Name/Arity, is not declared:
 Examples
 --------
 
-To retract a matching clause of a local dynamic predicate or a dynamic predicate in :term:`this`:
+To retract a matching clause of a dynamic predicate in :term:`this`:
    ``retract(Clause)``
 To retract a matching clause of a public or protected dynamic predicate in :term:`self`:
    ``::retract(Clause)``

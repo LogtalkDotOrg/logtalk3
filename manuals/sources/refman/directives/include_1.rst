@@ -68,6 +68,6 @@ Examples
 
    :- include('factbase.pl').
 
-   :- include('/home/me/databases/cities.pl').
+   :- include('/home/me/databases/countries.pl').
 
-   | ?- create_object(cities, [], [public(city/4), include('/home/me/dbs/cities.pl')], []).
+   | ?- create_object(cities, [], [public(city/4), include('cities.pl')], []).
