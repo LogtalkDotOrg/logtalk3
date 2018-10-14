@@ -28,11 +28,11 @@ Description
 
    after(Object, Message, Sender)
 
-User-defined method for handling ``after`` events. This method is
+User-defined method for handling *after* events. This method is
 declared in the ``monitoring`` built-in protocol as a public predicate
 and automatically called by the runtime for messages sent using the
 :ref:`control_send_to_object_2` control construct from within objects
-compiled with the `events` flag set to `allow`.
+compiled with the ``events`` flag set to ``allow``.
 
 Note that you can make this predicate scope protected or private by using,
 respectively, protected or private implementation of the ``monitoring``
