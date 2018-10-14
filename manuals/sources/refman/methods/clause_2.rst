@@ -38,12 +38,12 @@ This method may be used to enumerate clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
 declared in :term:`this`.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   clause(+callable, ?body)
+   clause(+callable, ?body) - zero_or_more
 
 Errors
 ------

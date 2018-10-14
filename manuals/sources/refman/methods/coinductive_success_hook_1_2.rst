@@ -44,13 +44,13 @@ corresponding definition for the coinductive success hook predicates.
 The compiler assumes that these hook predicates are defined as static
 predicates in order to optimize their use.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   coinductive_success_hook(+callable, +callable)
-   coinductive_success_hook(+callable)
+   coinductive_success_hook(+callable, +callable) - zero_or_one
+   coinductive_success_hook(+callable) - zero_or_one
 
 Errors
 ------

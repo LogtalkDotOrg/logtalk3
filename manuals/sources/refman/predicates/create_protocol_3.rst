@@ -41,12 +41,12 @@ When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to
 avoid race conditions.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   create_protocol(?protocol_identifier, @list(protocol_relation), @list(protocol_directive))
+   create_protocol(?protocol_identifier, @list(protocol_relation), @list(protocol_directive)) - one
 
 Errors
 ------

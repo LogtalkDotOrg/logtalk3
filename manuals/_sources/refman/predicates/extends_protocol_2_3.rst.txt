@@ -33,13 +33,13 @@ Enumerates, by backtracking, all pairs of protocols such that the first
 one extends the second. The relation scope is represented by the atoms
 ``public``, ``protected``, and ``private``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   extends_protocol(?protocol_identifier, ?protocol_identifier)
-   extends_protocol(?protocol_identifier, ?protocol_identifier, ?scope)
+   extends_protocol(?protocol_identifier, ?protocol_identifier) - zero_or_more
+   extends_protocol(?protocol_identifier, ?protocol_identifier, ?scope) - zero_or_more
 
 Errors
 ------

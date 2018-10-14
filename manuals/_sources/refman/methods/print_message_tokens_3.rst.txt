@@ -41,12 +41,12 @@ token. When a call to this hook predicate succeeds, the
 printed. When the call fails, the ``print_message_tokens/3`` predicate
 uses a default printing procedure for the token.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   print_message_tokens(@stream_or_alias, +atom, @list(nonvar))
+   print_message_tokens(@stream_or_alias, +atom, @list(nonvar)) - zero_or_one
 
 Errors
 ------

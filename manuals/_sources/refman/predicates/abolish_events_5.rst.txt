@@ -32,12 +32,12 @@ Abolishes all matching events. The two types of events are represented
 by the atoms ``before`` and ``after``. When the predicate is called with
 the first argument unbound, both types of events are abolished.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   abolish_events(@term, @term, @term, @term, @term)
+   abolish_events(@term, @term, @term, @term, @term) - one
 
 Errors
 ------

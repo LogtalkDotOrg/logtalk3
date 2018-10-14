@@ -35,12 +35,12 @@ predicate. This hook method is automatically called by the
 succeeds, the ``ask_question/5`` method assumes that the question have
 been successfully asked and replied.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   question_hook(+nonvar, +nonvar, +nonvar, +list(nonvar), +callable, -term)
+   question_hook(+nonvar, +nonvar, +nonvar, +list(nonvar), +callable, -term) - zero_or_one
 
 Meta-predicate template
 -----------------------

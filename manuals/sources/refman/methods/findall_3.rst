@@ -35,12 +35,12 @@ an empty list when the goal has no solutions.
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   findall(?term, +callable, ?list)
+   findall(?term, +callable, ?list) - zero_or_one
 
 Errors
 ------

@@ -57,13 +57,13 @@ directory for temporary files. It also allows several Logtalk instances
 to run concurrently without conflict by using a unique scratch directory
 per instance (e.g. using a process ID or a UUID generator).
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_library_path(?atom, -atom)
-   logtalk_library_path(?atom, -compound)
+   logtalk_library_path(?atom, -atom) - zero_or_more
+   logtalk_library_path(?atom, -compound) - zero_or_more
 
 Errors
 ------

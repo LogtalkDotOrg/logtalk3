@@ -31,12 +31,12 @@ Description
 Enumerates, by backtracking, all existing engines. Engine names shall be
 regarded as opaque terms; users shall not rely on its type.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine(?nonvar)
+   threaded_engine(?nonvar) - zero_or_more
 
 Errors
 ------

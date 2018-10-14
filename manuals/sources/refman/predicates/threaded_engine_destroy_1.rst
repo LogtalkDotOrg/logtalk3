@@ -30,12 +30,12 @@ Description
 
 Stops and destroys an engine.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_destroy(@nonvar)
+   threaded_engine_destroy(@nonvar) - one
 
 Errors
 ------

@@ -34,14 +34,13 @@ Enumerates, by backtracking, importation relations between objects and
 categories. The relation scope is represented by the atoms ``public``,
 ``protected``, and ``private``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   imports_category(?object_identifier, ?category_identifier)
-
-   imports_category(?object_identifier, ?category_identifier, ?scope)
+   imports_category(?object_identifier, ?category_identifier) - zero_or_more
+   imports_category(?object_identifier, ?category_identifier, ?scope) - zero_or_more
 
 Errors
 ------

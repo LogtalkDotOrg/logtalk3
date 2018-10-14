@@ -34,12 +34,12 @@ predicate is called and ``Context`` is the execution context of the
 call. This built-in predicate is declared as a private method and thus
 cannot be used as a message to an object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   system_error
+   system_error - error
 
 Errors
 ------

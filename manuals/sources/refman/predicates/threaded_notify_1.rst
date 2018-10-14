@@ -37,13 +37,13 @@ notification. The argument may also be a list of notifications,
 ``[Term| Terms]``. In this case, all notifications in the list will be
 sent to any threads suspended waiting for them in order to proceed.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_notify(@term)
-   threaded_notify(@list(term))
+   threaded_notify(@term) - one
+   threaded_notify(@list(term)) - one
 
 Errors
 ------

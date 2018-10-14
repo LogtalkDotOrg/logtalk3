@@ -36,12 +36,12 @@ object predicate. In the case of objects, properties for predicates not
 declared using a scope directive are not enumerated. The valid predicate
 properties are listed in the language :ref:`grammar <grammar_predicate_properties>`.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   predicate_property(+callable, ?predicate_property)
+   predicate_property(+callable, ?predicate_property) - zero_or_more
 
 Errors
 ------

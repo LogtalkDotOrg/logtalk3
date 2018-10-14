@@ -37,13 +37,13 @@ eventually send the notification. The argument may also be a list of
 notifications, ``[Term| Terms]``. In this case, the thread making the
 call will suspend until all notifications in the list are received.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_wait(?term)
-   threaded_wait(+list(term))
+   threaded_wait(?term) - one
+   threaded_wait(+list(term)) - one
 
 Errors
 ------

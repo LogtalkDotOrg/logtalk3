@@ -30,12 +30,12 @@ Description
 
 Abolishes a dynamic category.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   abolish_category(+category_identifier)
+   abolish_category(+category_identifier) - one
 
 Errors
 ------

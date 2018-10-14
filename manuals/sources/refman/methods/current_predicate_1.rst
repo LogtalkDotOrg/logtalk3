@@ -34,12 +34,12 @@ are enumerated for the referenced object or module. Otherwise, predicates
 are enumerated for an object. In the case of objects, predicates not
 declared using a scope directive are not enumerated.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_predicate(?predicate_indicator)
+   current_predicate(?predicate_indicator) - zero_or_more
 
 Errors
 ------

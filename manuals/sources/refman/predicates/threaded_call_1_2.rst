@@ -40,13 +40,13 @@ The variant ``threaded_call/2`` returns a threaded call identifier tag
 that can be used with the :ref:`predicates_threaded_exit_1_2` predicate.
 Tags shall be regarded as opaque terms; users shall not rely on its type.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_call(@callable)
-   threaded_call(@callable, -nonvar)
+   threaded_call(@callable) - one
+   threaded_call(@callable, --nonvar) - one
 
 Errors
 ------

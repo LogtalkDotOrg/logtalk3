@@ -49,12 +49,12 @@ This predicate can be extended by the user by defining clauses for the
 using the argument ``all``. The additional user defined actions are run
 after the default one.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_make
+   logtalk_make - one
 
 Errors
 ------

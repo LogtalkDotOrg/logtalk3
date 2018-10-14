@@ -31,12 +31,12 @@ Description
 Enumerates, by backtracking, all category–object pairs such that the
 category explicitly complements the object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   complements_object(?category_identifier, ?object_identifier)
+   complements_object(?category_identifier, ?object_identifier) - zero_or_more
 
 Errors
 ------

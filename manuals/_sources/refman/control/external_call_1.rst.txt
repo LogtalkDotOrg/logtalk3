@@ -49,12 +49,12 @@ an object identifier in the message sending call. This feature is mainly
 used with :term:`parametric objects <parametric object>` when their
 identifiers correspond to predicates defined in ``user``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   {+callable}
+   {+callable} - zero_or_more
 
 Errors
 ------

@@ -30,12 +30,12 @@ Description
 
 Abolishes a dynamic protocol.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   abolish_protocol(@protocol_identifier)
+   abolish_protocol(@protocol_identifier) - one
 
 Errors
 ------

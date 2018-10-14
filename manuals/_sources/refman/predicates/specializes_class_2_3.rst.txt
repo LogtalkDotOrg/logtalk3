@@ -33,13 +33,13 @@ Enumerates, by backtracking, all pairs of objects such that the first
 one specializes the second. The relation scope is represented by the
 atoms ``public``, ``protected``, and ``private``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   specializes_class(?object_identifier, ?object_identifier)
-   specializes_class(?object_identifier, ?object_identifier, ?scope)
+   specializes_class(?object_identifier, ?object_identifier) - zero_or_more
+   specializes_class(?object_identifier, ?object_identifier, ?scope) - zero_or_more
 
 Errors
 ------

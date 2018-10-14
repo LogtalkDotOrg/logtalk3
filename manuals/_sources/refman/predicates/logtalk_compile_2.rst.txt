@@ -58,13 +58,13 @@ compilation of a source file.
    files listed in the first argument. Notably, if you are compiling a
    :term:`loader file`, the flags only apply to the loader file itself.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_compile(@source_file_name, @list(compiler_flag))
-   logtalk_compile(@list(source_file_name), @list(compiler_flag))
+   logtalk_compile(@source_file_name, @list(compiler_flag)) - zero_or_one
+   logtalk_compile(@list(source_file_name), @list(compiler_flag)) - zero_or_one
 
 Errors
 ------

@@ -211,9 +211,10 @@ the engine is not given, a unique name is generated and returned. Engine
 names shall be regarded as opaque terms; users shall not rely on its
 type.</p>
 </div>
-<div class="section" id="template-and-modes">
-<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_create(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">?</span>nonvar)
+<div class="section" id="modes-and-number-of-proofs">
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_create(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">@</span>nonvar) <span class="o">-</span> one
+threaded_engine_create(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">--</span>nonvar) <span class="o">-</span> one
 </pre></div>
 </div>
 </div>

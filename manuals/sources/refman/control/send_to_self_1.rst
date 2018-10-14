@@ -42,12 +42,12 @@ performed using a depth-first strategy. A message to *self* necessarily
 implies the use of dynamic binding but a caching mechanism is used to
 improve performance in subsequent messages.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   ::+callable
+   ::+callable - zero_or_more
 
 Errors
 ------

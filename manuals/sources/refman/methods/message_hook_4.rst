@@ -35,12 +35,12 @@ dynamic predicate. This hook method is automatically called by the
 succeeds, the ``print_message/3`` method assumes that the message have
 been successfully printed.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   message_hook(@nonvar, @nonvar, @nonvar, @list(nonvar))
+   message_hook(@nonvar, @nonvar, @nonvar, @list(nonvar)) - zero_or_one
 
 Errors
 ------

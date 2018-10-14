@@ -32,12 +32,12 @@ Enumerates, by backtracking, the properties associated with the defined
 objects. The valid object properties are listed in the language
 :ref:`grammar <grammar_entity_properties>`.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   object_property(?object_identifier, ?object_property)
+   object_property(?object_identifier, ?object_property) - zero_or_more
 
 Errors
 ------

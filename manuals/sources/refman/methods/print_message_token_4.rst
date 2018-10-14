@@ -35,12 +35,12 @@ token. This hook method is automatically called by the
 :ref:`methods_print_message_tokens_3` built-in
 method for each token.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar))
+   print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar)) - zero_or_one
 
 Errors
 ------

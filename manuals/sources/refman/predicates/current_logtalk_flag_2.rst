@@ -30,12 +30,12 @@ Description
 
 Enumerates, by backtracking, the current Logtalk flag values.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_logtalk_flag(?atom, ?atom)
+   current_logtalk_flag(?atom, ?atom) - zero_or_more
 
 Errors
 ------

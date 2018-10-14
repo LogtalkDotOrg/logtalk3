@@ -31,12 +31,12 @@ Description
 Throws an exception. This built-in predicate is declared as a private
 method and thus cannot be used as a message to an object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   throw(+nonvar)
+   throw(+nonvar) - error
 
 Errors
 ------

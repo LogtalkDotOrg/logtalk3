@@ -32,12 +32,12 @@ Multifile and dynamic hook predicate that allows defining user actions
 for the ``logtalk_make/1`` targets. The user defined actions are run
 after the default ones using a failure driven loop.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_make_target_action(+atom)
+   logtalk_make_target_action(+atom) - zero_or_more
 
 Errors
 ------

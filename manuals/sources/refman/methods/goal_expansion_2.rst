@@ -52,12 +52,12 @@ they implement the ``expanding`` protocol if no ancestor already
 declares it. This protocol implementation relation can be declared as
 either protected or private to restrict the scope of this predicate.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   goal_expansion(+callable, -callable)
+   goal_expansion(+callable, -callable) - zero_or_one
 
 Errors
 ------

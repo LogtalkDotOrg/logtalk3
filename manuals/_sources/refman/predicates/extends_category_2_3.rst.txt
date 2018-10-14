@@ -33,13 +33,13 @@ Enumerates, by backtracking, all pairs of categories such that the first
 one extends the second. The relation scope is represented by the atoms
 ``public``, ``protected``, and ``private``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   extends_category(?category_identifier, ?category_identifier)
-   extends_category(?category_identifier, ?category_identifier, ?scope)
+   extends_category(?category_identifier, ?category_identifier) - zero_or_more
+   extends_category(?category_identifier, ?category_identifier, ?scope) - zero_or_more
 
 Errors
 ------

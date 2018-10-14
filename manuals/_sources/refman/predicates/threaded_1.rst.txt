@@ -53,12 +53,12 @@ When the predicate argument is neither a conjunction not a disjunction
 of goals, no threads are used. In this case, the predicate call is
 equivalent to a ``once/1`` predicate call.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded(+callable)
+   threaded(+callable) - zero_or_one
 
 Errors
 ------

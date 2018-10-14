@@ -32,12 +32,12 @@ Not-provable meta-predicate. True iff ``call(Goal)`` is false. This
 built-in meta-predicate is declared as a private method and thus cannot
 be used as a message to an object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   \+ +callable
+   \+ +callable - zero_or_one
 
 Errors
 ------

@@ -29,17 +29,21 @@ Description
    before(Object, Message, Sender)
 
 User-defined method for handling ``before`` events. This method is
-declared in the ``monitoring`` built-in protocol as a public predicate.
-Note that you can make its scope protected or private by using,
+declared in the ``monitoring`` built-in protocol as a public predicate
+and automatically called by the runtime for messages sent using the
+:ref:`control_send_to_object_2` control construct from within objects
+compiled with the `events` flag set to `allow`.
+
+Note that you can make this predicate scope protected or private by using,
 respectively, protected or private implementation of the ``monitoring``
 protocol.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   before(?object_identifier, ?callable, ?object_identifier)
+   before(?object_identifier, ?callable, ?object_identifier) - zero_or_more
 
 Errors
 ------

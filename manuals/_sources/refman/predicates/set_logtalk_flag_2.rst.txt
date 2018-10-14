@@ -34,12 +34,12 @@ directive. To set a global flag value when compiling and loading a
 source file, wrap the calls to this built-in predicate with an
 :ref:`directives_initialization_1` directive.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   set_logtalk_flag(+atom, +nonvar)
+   set_logtalk_flag(+atom, +nonvar) - one
 
 Errors
 ------

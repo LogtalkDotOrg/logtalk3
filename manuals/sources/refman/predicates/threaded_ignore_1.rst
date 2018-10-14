@@ -35,12 +35,12 @@ exception), which is simply discarded instead of being sent back to the
 message queue of the object containing the call
 (:term:`this`).
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_ignore(@callable)
+   threaded_ignore(@callable) - one
 
 Errors
 ------

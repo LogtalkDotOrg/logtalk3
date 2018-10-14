@@ -40,14 +40,14 @@ back-end Prolog compiler supporting a module system, calls in the format
 
 This meta-predicate is opaque to cuts in its arguments.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   call(+callable)
-   call(+callable, ?term)
-   call(+callable, ?term, ?term)
+   call(+callable) - zero_or_more
+   call(+callable, ?term) - zero_or_more
+   call(+callable, ?term, ?term) - zero_or_more
    ...
 
 Errors

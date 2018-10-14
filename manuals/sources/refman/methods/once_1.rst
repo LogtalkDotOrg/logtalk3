@@ -34,12 +34,12 @@ cannot be used as a message to an object.
 
 This meta-predicate is opaque to cuts in its argument.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   once(+callable)
+   once(+callable) - zero_or_one
 
 Errors
 ------

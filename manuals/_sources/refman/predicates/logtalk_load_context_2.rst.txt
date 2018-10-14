@@ -60,12 +60,12 @@ variables in the same order for the ``term_variables/2`` predicate and
 the option ``variable_names/1`` of the ``read_term/3`` built-in
 predicate, which is used by the Logtalk compiler to read source files.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_load_context(?atom, -nonvar)
+   logtalk_load_context(?atom, -nonvar) - zero_or_more
 
 Errors
 ------

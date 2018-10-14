@@ -31,12 +31,12 @@ Description
 Enumerates, by backtracking, all currently defined objects. All objects
 are found, either static, dynamic or built-in.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_object(?object_identifier)
+   current_object(?object_identifier) - zero_or_more
 
 Errors
 ------

@@ -39,13 +39,13 @@ The variant ``threaded_once/2`` returns a threaded call identifier tag
 that can be used with the :ref:`predicates_threaded_exit_1_2` predicate.
 Tags shall be regarded as opaque terms; users shall not rely on its type.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_once(@callable)
-   threaded_once(@callable, -nonvar)
+   threaded_once(@callable) - one
+   threaded_once(@callable, --nonvar) - one
 
 Errors
 ------

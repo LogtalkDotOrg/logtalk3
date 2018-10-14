@@ -32,12 +32,12 @@ This non-terminal takes a non-terminal or a grammar rule body and parses
 it using the current implicit list of tokens. A common use is to wrap
 what otherwise would be a naked variable in a grammar rule body.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   phrase(+callable)
+   phrase(+callable) - zero_or_more
 
 Errors
 ------

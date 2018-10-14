@@ -30,7 +30,7 @@ Description
 
 Returns an answer independent of the solutions of the engine goal. Fails
 if not called from within an engine. This predicate is usually used when
-the engine goal is call to a recursive predicate processing terms from
+the engine goal is a call to a recursive predicate processing terms from
 the engine term queue.
 
 This predicate blocks until the returned answer is consumed.
@@ -41,12 +41,12 @@ answer will always be returned. For example, instead of
 ``(threaded_engine_yield(ready); member(X,[1,2,3]))`` use
 ``(X=ready; member(X,[1,2,3]))``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_yield(@term)
+   threaded_engine_yield(@term) - zero_or_one
 
 Errors
 ------

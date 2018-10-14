@@ -54,13 +54,13 @@ files for the availability of these shortcuts as they are not part of
 the language (and thus should only be used at the top-level
 interpreter).
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_load(@source_file_name)
-   logtalk_load(@list(source_file_name))
+   logtalk_load(@source_file_name) - zero_or_one
+   logtalk_load(@list(source_file_name)) - zero_or_one
 
 Errors
 ------

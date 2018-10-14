@@ -33,12 +33,12 @@ for printing a message for a given kind and component. This method is
 declared in the ``logtalk`` built-in object as a public, multifile, and
 dynamic predicate.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   message_prefix_stream(?nonvar, ?nonvar, ?atom, ?stream_or_alias)
+   message_prefix_stream(?nonvar, ?nonvar, ?atom, ?stream_or_alias) - zero_or_more
 
 Errors
 ------

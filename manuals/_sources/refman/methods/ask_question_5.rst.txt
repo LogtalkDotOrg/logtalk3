@@ -46,12 +46,12 @@ hook predicate. If this predicate succeeds, the ``ask_question/5``
 predicate assumes that the question have been successfully asked and
 replied.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   ask_question(+nonvar, +nonvar, +nonvar, +callable, -term)
+   ask_question(+nonvar, +nonvar, +nonvar, +callable, -term) - one
 
 Meta-predicate template
 -----------------------

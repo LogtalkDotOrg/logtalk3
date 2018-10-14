@@ -43,12 +43,12 @@ When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to
 avoid race conditions.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   create_object(?object_identifier, @list(object_relation), @list(object_directive), @list(clause))
+   create_object(?object_identifier, @list(object_relation), @list(object_directive), @list(clause)) - one
 
 Errors
 ------

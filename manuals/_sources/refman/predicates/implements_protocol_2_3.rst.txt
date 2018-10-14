@@ -38,16 +38,16 @@ by the atoms ``public``, ``protected``, and ``private``. This predicate
 only returns direct implementation relations; it does not implement a
 transitive closure.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   implements_protocol(?object_identifier, ?protocol_identifier)
-   implements_protocol(?category_identifier, ?protocol_identifier)
+   implements_protocol(?object_identifier, ?protocol_identifier) - zero_or_more
+   implements_protocol(?category_identifier, ?protocol_identifier) - zero_or_more
 
-   implements_protocol(?object_identifier, ?protocol_identifier, ?scope)
-   implements_protocol(?category_identifier, ?protocol_identifier, ?scope)
+   implements_protocol(?object_identifier, ?protocol_identifier, ?scope) - zero_or_more
+   implements_protocol(?category_identifier, ?protocol_identifier, ?scope) - zero_or_more
 
 Errors
 ------

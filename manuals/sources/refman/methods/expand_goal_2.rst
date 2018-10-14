@@ -43,12 +43,12 @@ using :term:`hook objects <hook object>`. This predicate can be
 used by the user to manually perform goal expansion at runtime (for
 example, before asserting a clause).
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   expand_goal(?term, ?term)
+   expand_goal(?term, ?term) - one
 
 Errors
 ------

@@ -32,12 +32,12 @@ Enumerates, by backtracking, the properties associated with the defined
 categories. The valid category properties are listed in the language
 :ref:`grammar_entity_properties`.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   category_property(?category_identifier, ?category_property)
+   category_property(?category_identifier, ?category_property) - zero_or_more
 
 Errors
 ------

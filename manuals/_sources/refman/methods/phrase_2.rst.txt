@@ -44,12 +44,12 @@ is compiled in order to eliminate the implicit overheads of converting
 the grammar rule body into a goal and meta-calling it. For performance
 reasons, the second argument is only type-checked at compile time.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   phrase(+callable, ?list)
+   phrase(+callable, ?list) - zero_or_more
 
 Errors
 ------

@@ -33,13 +33,13 @@ Enumerates, by backtracking, all pairs of objects such that the first
 one extends the second. The relation scope is represented by the atoms
 ``public``, ``protected``, and ``private``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   extends_object(?object_identifier, ?object_identifier)
-   extends_object(?object_identifier, ?object_identifier, ?scope)
+   extends_object(?object_identifier, ?object_identifier) - zero_or_more
+   extends_object(?object_identifier, ?object_identifier, ?scope) - zero_or_more
 
 Errors
 ------

@@ -32,12 +32,12 @@ For all solutions of ``Generator``, ``Test`` is true. This built-in
 meta-predicate is declared as a private method and thus cannot be used
 as a message to an object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   forall(+callable, +callable)
+   forall(+callable, +callable) - zero_or_one
 
 Errors
 ------

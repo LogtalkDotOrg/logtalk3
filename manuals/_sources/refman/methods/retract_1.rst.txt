@@ -40,12 +40,12 @@ This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
 declared in :term:`this`.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   retract(+clause)
+   retract(+clause) - zero_or_more
 
 Errors
 ------

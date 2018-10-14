@@ -63,12 +63,12 @@ This control construct is a generalization of the Smalltalk *super*
 keyword to take into account Logtalk support for prototypes and
 categories besides classes.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   ^^+callable
+   ^^+callable - zero_or_more
 
 Errors
 ------

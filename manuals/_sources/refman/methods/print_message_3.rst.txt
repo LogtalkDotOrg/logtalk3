@@ -43,12 +43,12 @@ and by calling the
 hook predicate. If this predicate succeeds, the ``print_message/3``
 predicate assumes that the message have been successfully printed.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   print_message(+nonvar, +nonvar, +nonvar)
+   print_message(+nonvar, +nonvar, +nonvar) - one
 
 Errors
 ------

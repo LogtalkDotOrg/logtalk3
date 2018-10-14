@@ -34,12 +34,12 @@ the corresponding implicit context argument in the predicate containing
 the call. This unification occurs at the clause head when the argument
 is not instantiated (the most common case).
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   sender(?object_identifier)
+   sender(?object_identifier) - zero_or_one
 
 Errors
 ------

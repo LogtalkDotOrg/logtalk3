@@ -38,12 +38,12 @@ or :ref:`directives_use_module_2` directive, the predicate is abolished
 in the referenced object or module.
 
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   abolish(+predicate_indicator)
+   abolish(+predicate_indicator) - one
 
 Errors
 ------

@@ -52,13 +52,13 @@ sufficient information is available. When the lookups are performed at
 runtime, a caching mechanism is used to improve performance in
 subsequent messages.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   +object_identifier::+callable
-   {+object_identifier}::+callable
+   +object_identifier::+callable - zero_or_more
+   {+object_identifier}::+callable - zero_or_more
 
 Errors
 ------

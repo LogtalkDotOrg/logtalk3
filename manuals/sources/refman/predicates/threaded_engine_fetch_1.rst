@@ -31,12 +31,12 @@ Description
 Fetches a term from the engine term queue. Blocks until a term is
 available. Fails if not called from within an engine.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_fetch(?term)
+   threaded_engine_fetch(?term) - zero_or_one
 
 Errors
 ------

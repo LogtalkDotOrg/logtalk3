@@ -35,12 +35,13 @@ the engine is not given, a unique name is generated and returned. Engine
 names shall be regarded as opaque terms; users shall not rely on its
 type.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_create(@term, @callable, ?nonvar)
+   threaded_engine_create(@term, @callable, @nonvar) - one
+   threaded_engine_create(@term, @callable, --nonvar) - one
 
 Errors
 ------

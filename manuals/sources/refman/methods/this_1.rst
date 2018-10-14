@@ -39,12 +39,12 @@ useful for avoiding hard-coding references to an object identifier or
 for retrieving all object parameters with a single call when using
 parametric objects.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   this(?object_identifier)
+   this(?object_identifier) - zero_or_one
 
 Errors
 ------

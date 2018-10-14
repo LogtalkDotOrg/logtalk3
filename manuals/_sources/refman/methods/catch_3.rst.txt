@@ -32,12 +32,12 @@ Catches exceptions thrown by a goal. See the ISO Prolog standard
 definition. This built-in meta-predicate is declared as a private method
 and thus cannot be used as a message to an object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   catch(?callable, ?term, ?term)
+   catch(?callable, ?term, ?term) - zero_or_more
 
 Errors
 ------

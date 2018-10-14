@@ -31,12 +31,12 @@ Description
 Enumerates, by backtracking, all currently defined categories. All
 categories are found, either static, dynamic, or built-in.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_category(?category_identifier)
+   current_category(?category_identifier) - zero_or_more
 
 Errors
 ------

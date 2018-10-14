@@ -45,13 +45,13 @@ Note that, despite the correct functor for this control construct being
 (traditionally) ``'.'/2``, we refer to it as ``[]/1`` simply to
 emphasize that the syntax is a list with a single element.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   [+object_identifier::+callable]
-   [{+object_identifier}::+callable]
+   [+object_identifier::+callable] - zero_or_more
+   [{+object_identifier}::+callable] - zero_or_more
 
 Errors
 ------

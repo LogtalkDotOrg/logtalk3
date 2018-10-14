@@ -32,12 +32,12 @@ Enumerates, by backtracking, the visible operators declared for an
 object. Operators not declared using a scope directive are not
 enumerated.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_op(?operator_priority, ?operator_specifier, ?atom)
+   current_op(?operator_priority, ?operator_specifier, ?atom) - zero_or_more
 
 Errors
 ------

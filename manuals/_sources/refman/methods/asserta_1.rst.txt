@@ -44,12 +44,12 @@ declared dynamic for dynamic objects provided that the predicates are
 declared in :term:`this`. This allows easy initialization of dynamically
 created objects when writing constructors.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   asserta(+clause)
+   asserta(+clause) - one
 
 Errors
 ------

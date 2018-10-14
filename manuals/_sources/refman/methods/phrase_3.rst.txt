@@ -45,12 +45,12 @@ the grammar rule body into a goal and meta-calling it. For performance
 reasons, the second and third arguments are only type-checked at compile
 time.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   phrase(+callable, ?list, ?list)
+   phrase(+callable, ?list, ?list) - zero_or_more
 
 Errors
 ------

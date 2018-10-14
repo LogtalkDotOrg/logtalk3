@@ -34,12 +34,12 @@ the first argument unbound, both types of events are defined. The object
 ``Monitor`` must define the event handler methods required by the
 ``Event`` argument.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   define_events(@term, @term, @term, @term, +object_identifier)
+   define_events(@term, @term, @term, @term, +object_identifier) - one
 
 Errors
 ------

@@ -32,12 +32,12 @@ Enumerates, by backtracking, the properties associated with the
 currently defined protocols. The valid protocol properties are listed in
 the language :ref:`grammar_entity_properties`.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   protocol_property(?protocol_identifier, ?protocol_property)
+   protocol_property(?protocol_identifier, ?protocol_property) - zero_or_more
 
 Errors
 ------

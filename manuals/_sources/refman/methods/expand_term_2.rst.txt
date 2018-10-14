@@ -52,12 +52,12 @@ terms read from a source file) when using a :term:`hook object`. This
 predicate can be used by the user to manually perform term expansion
 at runtime (for example, to convert a grammar rule into a clause).
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   expand_term(?term, ?term)
+   expand_term(?term, ?term) - one
 
 Errors
 ------

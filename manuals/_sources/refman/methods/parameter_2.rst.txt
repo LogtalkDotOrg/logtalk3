@@ -46,12 +46,12 @@ occurrences of these variables in entity clauses. Parametric variables
 allows us to abstract parameter positions thus simplifying code
 maintenance.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   parameter(+integer, ?term)
+   parameter(+integer, ?term) - zero_or_one
 
 Errors
 ------

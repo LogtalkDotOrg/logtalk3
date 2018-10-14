@@ -45,12 +45,12 @@ only restricts the flag value to ground terms). When the ``type/1``
 option is not specified, the type of the flag is inferred from its
 initial value.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   create_logtalk_flag(+atom, +ground, +list(ground))
+   create_logtalk_flag(+atom, +ground, +list(ground)) - one
 
 Errors
 ------

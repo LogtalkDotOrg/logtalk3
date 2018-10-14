@@ -213,11 +213,11 @@ back-end Prolog compiler supporting a module system, calls in the format
 <code class="docutils literal notranslate"><span class="pre">call(Module:Closure,</span> <span class="pre">Arg1,</span> <span class="pre">...)</span></code> may also be used.</p>
 <p>This meta-predicate is opaque to cuts in its arguments.</p>
 </div>
-<div class="section" id="template-and-modes">
-<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">call</span>(<span class="o">+</span>callable)
-<span class="k">call</span>(<span class="o">+</span>callable, <span class="o">?</span>term)
-<span class="k">call</span>(<span class="o">+</span>callable, <span class="o">?</span>term, <span class="o">?</span>term)
+<div class="section" id="modes-and-number-of-proofs">
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">call</span>(<span class="o">+</span>callable) <span class="o">-</span> zero_or_more
+<span class="k">call</span>(<span class="o">+</span>callable, <span class="o">?</span>term) <span class="o">-</span> zero_or_more
+<span class="k">call</span>(<span class="o">+</span>callable, <span class="o">?</span>term, <span class="o">?</span>term) <span class="o">-</span> zero_or_more
 ...
 </pre></div>
 </div>

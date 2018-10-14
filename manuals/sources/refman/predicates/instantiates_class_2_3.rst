@@ -33,13 +33,13 @@ Enumerates, by backtracking, all pairs of objects such that the first
 one instantiates the second. The relation scope is represented by the
 atoms ``public``, ``protected``, and ``private``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   instantiates_class(?object_identifier, ?object_identifier)
-   instantiates_class(?object_identifier, ?object_identifier, ?scope)
+   instantiates_class(?object_identifier, ?object_identifier) - zero_or_more
+   instantiates_class(?object_identifier, ?object_identifier, ?scope) - zero_or_more
 
 Errors
 ------

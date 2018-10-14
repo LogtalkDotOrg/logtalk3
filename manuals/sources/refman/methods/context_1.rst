@@ -36,12 +36,12 @@ arguments. The ``ExecutionContext`` term should be regarded as an opaque
 term, which can be decoded using the ``logtalk::execution_context/7``
 predicate. Calls to this predicate are inlined at compilation time.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   context(--callable)
+   context(--callable) - one
 
 Errors
 ------

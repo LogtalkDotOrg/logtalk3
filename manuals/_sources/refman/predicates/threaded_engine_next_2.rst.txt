@@ -34,12 +34,12 @@ solutions to the engine goal. If the engine goal throws an exception,
 calling this predicate will re-throw the exception and subsequent calls
 will fail.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_next(@nonvar, ?term)
+   threaded_engine_next(@nonvar, ?term) - zero_or_one
 
 Errors
 ------

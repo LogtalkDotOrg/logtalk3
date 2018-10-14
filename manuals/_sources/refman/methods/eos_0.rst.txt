@@ -31,12 +31,12 @@ Description
 This non-terminal matches the end-of-input. It is implemented by
 checking that the implicit difference list unifies with ``[]-[]``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   eos
+   eos - zero_or_one
 
 Errors
 ------

@@ -31,12 +31,12 @@ Description
 Enumerates, by backtracking, all defined events. The two types of events
 are represented by the atoms ``before`` and ``after``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_event(?event, ?term, ?term, ?term, ?object_identifier)
+   current_event(?event, ?term, ?term, ?term, ?object_identifier) - zero_or_more
 
 Errors
 ------

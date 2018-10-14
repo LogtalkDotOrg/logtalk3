@@ -33,12 +33,12 @@ always succeeds and blocks until an answer becomes available.
 Answers are returned using the terms ``the(Answer)``, ``no``, and
 ``exception(Error)``.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_next_reified(@nonvar, ?nonvar)
+   threaded_engine_next_reified(@nonvar, ?nonvar) - one
 
 Errors
 ------

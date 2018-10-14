@@ -52,13 +52,13 @@ they implement the ``expanding`` protocol if no ancestor already
 declares it. This protocol implementation relation can be declared as
 either protected or private to restrict the scope of this predicate.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   term_expansion(+nonvar, -nonvar)
-   term_expansion(+nonvar, -list(nonvar))
+   term_expansion(+nonvar, -nonvar) - zero_or_one
+   term_expansion(+nonvar, -list(nonvar)) - zero_or_one
 
 Errors
 ------

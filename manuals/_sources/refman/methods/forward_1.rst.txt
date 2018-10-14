@@ -36,12 +36,12 @@ predicate. Note that you can make its scope protected or private by
 using, respectively, protected or private implementation of the
 ``forwarding`` protocol.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   forward(+callable)
+   forward(+callable) - zero_or_more
 
 Errors
 ------

@@ -38,16 +38,16 @@ by the atoms ``public``, ``protected``, and ``private``. This predicate
 implements a transitive closure for the protocol implementation
 relation.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   conforms_to_protocol(?object_identifier, ?protocol_identifier)
-   conforms_to_protocol(?category_identifier, ?protocol_identifier)
+   conforms_to_protocol(?object_identifier, ?protocol_identifier) - zero_or_more
+   conforms_to_protocol(?category_identifier, ?protocol_identifier) - zero_or_more
 
-   conforms_to_protocol(?object_identifier, ?protocol_identifier, ?scope)
-   conforms_to_protocol(?category_identifier, ?protocol_identifier, ?scope)
+   conforms_to_protocol(?object_identifier, ?protocol_identifier, ?scope) - zero_or_more
+   conforms_to_protocol(?category_identifier, ?protocol_identifier, ?scope) - zero_or_more
 
 Errors
 ------

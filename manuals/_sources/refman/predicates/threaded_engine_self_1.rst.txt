@@ -30,12 +30,12 @@ Description
 
 Queries the name of engine calling the predicate.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_self(?nonvar)
+   threaded_engine_self(?nonvar) - zero_or_one
 
 Errors
 ------

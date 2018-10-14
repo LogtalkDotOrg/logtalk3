@@ -31,12 +31,12 @@ Description
 Enumerates, by backtracking, all currently defined protocols. All
 protocols are found, either static, dynamic, or built-in.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   current_protocol(?protocol_identifier)
+   current_protocol(?protocol_identifier) - zero_or_more
 
 Errors
 ------

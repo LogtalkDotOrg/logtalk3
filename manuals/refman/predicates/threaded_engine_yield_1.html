@@ -206,7 +206,7 @@
 </div>
 <p>Returns an answer independent of the solutions of the engine goal. Fails
 if not called from within an engine. This predicate is usually used when
-the engine goal is call to a recursive predicate processing terms from
+the engine goal is a call to a recursive predicate processing terms from
 the engine term queue.</p>
 <p>This predicate blocks until the returned answer is consumed.</p>
 <p>Note that this predicate should not be called as the last element of a
@@ -215,9 +215,9 @@ answer will always be returned. For example, instead of
 <code class="docutils literal notranslate"><span class="pre">(threaded_engine_yield(ready);</span> <span class="pre">member(X,[1,2,3]))</span></code> use
 <code class="docutils literal notranslate"><span class="pre">(X=ready;</span> <span class="pre">member(X,[1,2,3]))</span></code>.</p>
 </div>
-<div class="section" id="template-and-modes">
-<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_yield(<span class="o">@</span>term)
+<div class="section" id="modes-and-number-of-proofs">
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>threaded_engine_yield(<span class="o">@</span>term) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </div>

@@ -30,12 +30,12 @@ Description
 
 Posts a term to the engine term queue.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   threaded_engine_post(@nonvar, @term)
+   threaded_engine_post(@nonvar, @term) - one
 
 Errors
 ------

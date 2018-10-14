@@ -60,13 +60,13 @@ compilation of a source file.
    the flags only apply to the loader file itself and not to the files
    loaded by it.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_load(@source_file_name, @list(compiler_flag))
-   logtalk_load(@list(source_file_name), @list(compiler_flag))
+   logtalk_load(@source_file_name, @list(compiler_flag)) - zero_or_one
+   logtalk_load(@list(source_file_name), @list(compiler_flag)) - zero_or_one
 
 Errors
 ------

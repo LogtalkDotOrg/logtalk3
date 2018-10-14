@@ -30,12 +30,12 @@ Description
 
 Abolishes a dynamic object.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   abolish_object(+object_identifier)
+   abolish_object(+object_identifier) - one
 
 Errors
 ------

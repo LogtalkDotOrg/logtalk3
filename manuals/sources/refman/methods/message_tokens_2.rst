@@ -35,12 +35,12 @@ printed by calling the :ref:`methods_print_message_tokens_3` method.
 This non-terminal hook is automatically called by the
 :ref:`methods_print_message_3` method.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   message_tokens(+nonvar, +nonvar)
+   message_tokens(+nonvar, +nonvar) - zero_or_more
 
 Errors
 ------

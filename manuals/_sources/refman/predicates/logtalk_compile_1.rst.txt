@@ -48,13 +48,13 @@ Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails when errors are found during
 compilation of a source file.
 
-Template and modes
-------------------
+Modes and number of proofs
+--------------------------
 
 ::
 
-   logtalk_compile(@source_file_name)
-   logtalk_compile(@list(source_file_name))
+   logtalk_compile(@source_file_name) - zero_or_one
+   logtalk_compile(@list(source_file_name)) - zero_or_one
 
 Errors
 ------
