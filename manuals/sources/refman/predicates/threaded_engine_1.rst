@@ -46,10 +46,16 @@ Errors
 Examples
 --------
 
-Check that an engine named ``worker_1`` exists:
-   ``threaded_engine(worker_1)``
-Write the names of all existing engines:
-   ``forall(threaded_engine(Engine), (writeq(Engine), nl))``
+::
+
+   % check that the worker_1 engine exists:
+   | ?- threaded_engine(worker_1).
+
+   % write the names of all existing engines:
+   | ?- forall(
+            threaded_engine(Engine),
+            (writeq(Engine), nl)
+        ).
 
 .. seealso::
 

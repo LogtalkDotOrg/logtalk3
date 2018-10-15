@@ -45,10 +45,13 @@ Errors
 Examples
 --------
 
-Find the name of the engine making the query:
-   ``threaded_engine_self(Engine)``
-Check if the name of the engine making the query is ``worker_1``:
-   ``threaded_engine_self(worker_1)``
+::
+
+   % find the name of the engine making the query:
+   ..., threaded_engine_self(Engine), ...
+
+   % check if the the engine making the query is worker_1:
+   ..., threaded_engine_self(worker_1), ...
 
 .. seealso::
 

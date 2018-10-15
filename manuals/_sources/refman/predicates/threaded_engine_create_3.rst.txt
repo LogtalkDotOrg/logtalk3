@@ -56,8 +56,10 @@ Engine is the name of an existing engine:
 Examples
 --------
 
-Create a new engine for finding members of a list:
-   ``threaded_engine_create(X, member(X, [1,2,3]), worker_1)``
+::
+
+   % create a new engine for finding members of a list:
+   | ?- threaded_engine_create(X, member(X, [1,2,3]), worker_1).
 
 .. seealso::
 

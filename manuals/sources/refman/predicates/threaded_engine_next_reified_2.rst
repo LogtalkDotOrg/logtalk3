@@ -51,8 +51,10 @@ Engine is neither a variable nor the name of an existing engine:
 Examples
 --------
 
-Gets the next engine answer:
-   ``threaded_engine_next_reified(worker_1, Answer)``
+::
+
+   % get the next answer from the worker_1 engine:
+   | ?- threaded_engine_next_reified(worker_1, Answer).
 
 .. seealso::
 

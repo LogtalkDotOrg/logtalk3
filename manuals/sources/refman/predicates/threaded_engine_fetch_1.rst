@@ -46,8 +46,10 @@ Errors
 Examples
 --------
 
-Fetch a term from the engine term queue:
-   ``threaded_engine_fetch(Term)``
+::
+
+   % fetch a term from the engine term queue:
+   ..., threaded_engine_fetch(Term), ...
 
 .. seealso::
 

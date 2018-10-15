@@ -48,10 +48,16 @@ Engine is neither a variable nor the name of an existing engine:
 Examples
 --------
 
-Stop an engine named ``worker_1``:
-   ``threaded_engine_destroy(worker_1)``
-Stop all engines:
-   ``forall(threaded_engine(Engine), threaded_engine_destroy(Engine))``
+::
+
+   % stop the worker_1 engine:
+   | ?- threaded_engine_destroy(worker_1).
+
+   % stop all engines:
+   | ?- forall(
+            threaded_engine(Engine),
+            threaded_engine_destroy(Engine)
+        ).
 
 .. seealso::
 

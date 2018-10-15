@@ -218,12 +218,13 @@
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Find the name of the engine making the query:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">threaded_engine_self(Engine)</span></code></dd>
-<dt>Check if the name of the engine making the query is <code class="docutils literal notranslate"><span class="pre">worker_1</span></code>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">threaded_engine_self(worker_1)</span></code></dd>
-</dl>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% find the name of the engine making the query:</span>
+..., threaded_engine_self(<span class="nv">Engine</span>), ...
+
+<span class="c">% check if the the engine making the query is worker_1:</span>
+..., threaded_engine_self(worker_1), ...
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="threaded_engine_create_3.html#predicates-threaded-engine-create-3"><span class="std std-ref">threaded_engine_create/3</span></a>,

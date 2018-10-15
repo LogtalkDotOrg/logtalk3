@@ -223,12 +223,16 @@
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Stop an engine named <code class="docutils literal notranslate"><span class="pre">worker_1</span></code>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">threaded_engine_destroy(worker_1)</span></code></dd>
-<dt>Stop all engines:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">forall(threaded_engine(Engine),</span> <span class="pre">threaded_engine_destroy(Engine))</span></code></dd>
-</dl>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stop the worker_1 engine:</span>
+| <span class="o">?-</span> threaded_engine_destroy(worker_1).
+
+<span class="c">% stop all engines:</span>
+| <span class="o">?-</span> <span class="k">forall</span>(
+         threaded_engine(<span class="nv">Engine</span>),
+         threaded_engine_destroy(<span class="nv">Engine</span>)
+     ).
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="threaded_engine_create_3.html#predicates-threaded-engine-create-3"><span class="std std-ref">threaded_engine_create/3</span></a>,

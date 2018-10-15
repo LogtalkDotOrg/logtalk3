@@ -48,8 +48,10 @@ Engine is neither a variable nor the name of an existing engine:
 Examples
 --------
 
-Post the atom ``ready`` to the ``worker_1`` engine queue:
-   ``threaded_engine_post(worker_1, ready)``
+::
+
+   % post the atom "ready" to the worker_1 engine queue:
+   | ?- threaded_engine_post(worker_1, ready).
 
 .. seealso::
 

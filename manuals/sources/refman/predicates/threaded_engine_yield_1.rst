@@ -56,8 +56,10 @@ Errors
 Examples
 --------
 
-Returns the atom ``ready`` as an engine answer:
-   ``threaded_engine_yield(ready)``
+::
+
+   % returns the atom "ready" as an engine answer:
+   ..., threaded_engine_yield(ready), ...
 
 .. seealso::
 
