@@ -41,7 +41,8 @@ Makes Variable an assignable variable. Initial state will be empty.
 |    ``assignable(-assignvar)`` - ``one``
 
 | **Exceptions:**
-  * Variable is not a variable: ``type_error(variable,Variable)``
+|    Variable is not a variable:
+|        ``type_error(variable,Variable)``
 
 
 .. raw:: html
@@ -64,8 +65,10 @@ Makes Variable an assignable variable and sets its initial state to Value.
 |    ``assignable(-assignvar,@nonvar)`` - ``one``
 
 | **Exceptions:**
-  * Variable is not a variable: ``type_error(variable,Variable)``
-  * Value is not instantiated: ``instantiation_error``
+|    Variable is not a variable:
+|        ``type_error(variable,Variable)``
+|    Value is not instantiated:
+|        ``instantiation_error``
 
 
 .. raw:: html
@@ -88,7 +91,8 @@ Sets the state of the assignable variable Variable to Value (initializing the va
 |    ``(?assignvar)<=(@nonvar)`` - ``one``
 
 | **Exceptions:**
-  * Value is not instantiated: ``instantiation_error``
+|    Value is not instantiated:
+|        ``instantiation_error``
 
 
 .. raw:: html
@@ -111,7 +115,8 @@ Unifies Value with the current state of the assignable variable Variable.
 |    ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
 
 | **Exceptions:**
-  * Variable is not instantiated: ``instantiation_error``
+|    Variable is not instantiated:
+|        ``instantiation_error``
 
 
 Protected interface

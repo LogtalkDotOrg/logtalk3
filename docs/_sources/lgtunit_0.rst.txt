@@ -189,8 +189,10 @@ True if the assertion goal succeeds. Throws an error using the assertion goal as
 |    ``assertion(+callable)`` - ``one``
 
 | **Exceptions:**
-  * Assertion goal fails: ``assertion_failure(Assertion)``
-  * Assertion goal throws Error: ``assertion_error(Assertion,Error)``
+|    Assertion goal fails:
+|        ``assertion_failure(Assertion)``
+|    Assertion goal throws Error:
+|        ``assertion_error(Assertion,Error)``
 
 
 .. raw:: html
@@ -215,8 +217,10 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 |    ``assertion(+nonvar,+callable)`` - ``one``
 
 | **Exceptions:**
-  * Assertion goal fails: ``assertion_failure(Description)``
-  * Assertion goal throws Error: ``assertion_error(Description,Error)``
+|    Assertion goal fails:
+|        ``assertion_failure(Description)``
+|    Assertion goal throws Error:
+|        ``assertion_error(Description,Error)``
 
 
 .. raw:: html

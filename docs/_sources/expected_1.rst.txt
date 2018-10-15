@@ -121,7 +121,8 @@ Returns the unexpected reference term if not an expected term. Throws an error o
 |    ``unexpected(--term)`` - ``one``
 
 | **Exceptions:**
-  * Expected reference holds an expected term: ``existence_error(unexpected_term,Reference)``
+|    Expected reference holds an expected term:
+|        ``existence_error(unexpected_term,Reference)``
 
 
 .. raw:: html
@@ -144,7 +145,8 @@ Returns the expected reference term if not an unexpected term. Throws an error o
 |    ``expected(--term)`` - ``one``
 
 | **Exceptions:**
-  * Expected reference holds an unexpected term: ``existence_error(expected_term,Reference)``
+|    Expected reference holds an unexpected term:
+|        ``existence_error(expected_term,Reference)``
 
 
 .. raw:: html
@@ -233,7 +235,8 @@ Returns the expected reference term if it does not hold an unexpected term or ap
 |    ``or_else_get(--term,+callable)`` - ``one``
 
 | **Exceptions:**
-  * Expected reference holds an unexpected term and a term cannot be computed: ``existence_error(expected_term,Reference)``
+|    Expected reference holds an unexpected term and a term cannot be computed:
+|        ``existence_error(expected_term,Reference)``
 
 
 .. raw:: html

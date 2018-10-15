@@ -41,7 +41,8 @@ Makes Variable a stream variable. Initial state will be empty.
 |    ``new(-streamvar)`` - ``one``
 
 | **Exceptions:**
-  * Variable is not a variable: ``type_error(variable,Variable)``
+|    Variable is not a variable:
+|        ``type_error(variable,Variable)``
 
 
 .. raw:: html
@@ -64,7 +65,8 @@ Makes Variable a stream variable and sets its initial state to Value.
 |    ``new(-streamvar,@nonvar)`` - ``one``
 
 | **Exceptions:**
-  * Variable is not a variable: ``type_error(variable,Variable)``
+|    Variable is not a variable:
+|        ``type_error(variable,Variable)``
 
 
 .. raw:: html

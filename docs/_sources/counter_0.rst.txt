@@ -56,7 +56,8 @@ Increments the counter by the specified amount.
 | **Mode and number of proofs:**
 |    ``increase(+number)`` - ``one``
 
-* argname: [I]
+| **argname:**
+|    [I]
 
 .. raw:: html
 
@@ -75,7 +76,8 @@ Sets the counter to the specified amount.
 | **Mode and number of proofs:**
 |    ``set(+number)`` - ``one``
 
-* argname: [N]
+| **argname:**
+|    [N]
 
 .. raw:: html
 
@@ -94,7 +96,8 @@ Gets the current value of the counter.
 | **Mode and number of proofs:**
 |    ``value(?number)`` - ``one``
 
-* argname: [N]
+| **argname:**
+|    [N]
 
 .. raw:: html
 

@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on October 9, 2018
+%  Last updated on October 15, 2018
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2018 Paulo Moura <pmoura@logtalk.org>
@@ -320,7 +320,9 @@
 		<xsl:text>| **Exceptions:**</xsl:text>
 		<xsl:value-of select="$nl" />
 		<xsl:for-each select="exceptions/exception">
-			<xsl:text>  * </xsl:text><xsl:value-of select="condition" /><xsl:text>: ``</xsl:text><xsl:value-of select="term" /><xsl:text>``</xsl:text>
+			<xsl:text>|    </xsl:text><xsl:value-of select="condition" /><xsl:text>:</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>|        ``</xsl:text><xsl:value-of select="term" /><xsl:text>``</xsl:text>
 			<xsl:value-of select="$nl" />
 		</xsl:for-each>
 		<xsl:value-of select="$nl" />
@@ -349,7 +351,9 @@
 	</xsl:if>
 	<xsl:if test="info">
 		<xsl:for-each select="info">
-			<xsl:text>* </xsl:text><xsl:value-of select="key" /><xsl:text>: </xsl:text><xsl:value-of select="value" />
+			<xsl:text>| **</xsl:text><xsl:value-of select="key" /><xsl:text>:**</xsl:text>
+			<xsl:value-of select="$nl" />
+			<xsl:text>|    </xsl:text><xsl:value-of select="value" />
 			<xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>

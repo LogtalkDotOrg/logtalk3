@@ -187,7 +187,8 @@ Returns the optional reference term if not empty. Throws an error otherwise.
 |    ``get(--term)`` - ``one``
 
 | **Exceptions:**
-  * Optional is empty: ``existence_error(optional_term,Reference)``
+|    Optional is empty:
+|        ``existence_error(optional_term,Reference)``
 
 
 .. raw:: html
@@ -232,7 +233,8 @@ Returns the optional reference term if not empty or applies a closure to compute
 |    ``or_else_get(--term,+callable)`` - ``one``
 
 | **Exceptions:**
-  * Optional is empty and a term cannot be computed: ``existence_error(optional_term,Reference)``
+|    Optional is empty and a term cannot be computed:
+|        ``existence_error(optional_term,Reference)``
 
 
 .. raw:: html
