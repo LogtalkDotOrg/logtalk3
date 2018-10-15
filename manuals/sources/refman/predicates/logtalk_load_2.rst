@@ -97,10 +97,16 @@ Examples
 
 ::
 
+   % compile and load the "list" source file in the
+   % current directory using default compiler flags:
    | ?- logtalk_load(list, []).
 
+   % compile and load the "tree" source file in the "types"
+   % library directory with the source_data flag turned on:
    | ?- logtalk_load(types(tree)).
 
+   % compile and load the "file_system" source file in the
+   % current directory with portability warnings supressed:
    | ?- logtalk_load(file_system, [portability(silent)]).
 
 .. seealso::

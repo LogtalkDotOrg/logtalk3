@@ -251,10 +251,16 @@ interpreter).</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(set).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% compile and load the &quot;set&quot; source file in the</span>
+<span class="c">% current directory:</span>
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(set).
 
+<span class="c">% compile and load the &quot;tree&quot; source file in the</span>
+<span class="c">% &quot;types&quot; library directory:</span>
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(types(tree)).
 
+<span class="c">% compile and load the &quot;listp&quot; and &quot;list&quot; source</span>
+<span class="c">% files in the current directory:</span>
 | <span class="o">?-</span> <span class="k">logtalk_load</span>([listp, list]).
 </pre></div>
 </div>

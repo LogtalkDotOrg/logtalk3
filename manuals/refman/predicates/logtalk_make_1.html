@@ -240,16 +240,21 @@ objects and message calls. Only mutual and triangular dependencies are
 checked due to the computational cost.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">documentation</span></code> target requires the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool and a single
 <em>doclet</em> object to be loaded. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool for more details.</p>
-<p>Depending on the back-end Prolog compiler, the shortcuts <code class="docutils literal notranslate"><span class="pre">{*}</span></code>,
-<code class="docutils literal notranslate"><span class="pre">{!}</span></code>, <code class="docutils literal notranslate"><span class="pre">{?}</span></code>, <code class="docutils literal notranslate"><span class="pre">{&#64;}</span></code>, <code class="docutils literal notranslate"><span class="pre">{#}</span></code>, and <code class="docutils literal notranslate"><span class="pre">{$}</span></code> may be used in
-alternative to, respectively, <code class="docutils literal notranslate"><span class="pre">logtalk_make(all)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">logtalk_make(clean)</span></code>, <code class="docutils literal notranslate"><span class="pre">logtalk_make(check)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">logtalk_make(circular)</span></code>, <code class="docutils literal notranslate"><span class="pre">logtalk_make(documentation)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">logtalk_make(caches)</span></code>. The shortcuts <code class="docutils literal notranslate"><span class="pre">{+d}</span></code>, <code class="docutils literal notranslate"><span class="pre">{+n}</span></code>, and <code class="docutils literal notranslate"><span class="pre">{+o}</span></code>
-may be used in alternative to, respectively, <code class="docutils literal notranslate"><span class="pre">logtalk_make(debug)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">logtalk_make(normal)</span></code>, and <code class="docutils literal notranslate"><span class="pre">logtalk_make(optimal)</span></code>. Check the
-adapter files for the availability of these shortcuts as they are not
-part of the language (and thus should only be used at the top-level
+<p>Depending on the back-end Prolog compiler, the following top-level shortcuts
+are usually defined:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">{*}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(all)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{!}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(clean)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{?}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(check)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{&#64;}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(circular)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{#}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(documentation)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{$}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(caches)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{+d}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(debug)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{+n}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(normal)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">{+o}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(optimal)</span></code></li>
+</ul>
+<p>Check the adapter files for the availability of these shortcuts as they are
+not part of the language (and thus should only be used at the top-level
 interpreter).</p>
 <p>The target actions can be extended by defining clauses for the multifile
 and dynamic hook predicate <code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action(Target)</span></code> where
@@ -268,7 +273,12 @@ defined actions are run after the default ones.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_make</span>(clean).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check for code issues in the loaded source files:</span>
+| <span class="o">?-</span> <span class="k">logtalk_make</span>(check).
+
+<span class="c">% delete all intermediate files generated by</span>
+<span class="c">% the compilation of Logtalk source files:</span>
+| <span class="o">?-</span> <span class="k">logtalk_make</span>(clean).
 </pre></div>
 </div>
 <div class="admonition seealso">

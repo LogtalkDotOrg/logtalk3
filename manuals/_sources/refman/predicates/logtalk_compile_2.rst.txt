@@ -95,10 +95,16 @@ Examples
 
 ::
 
+   % compile to disk the "list" source file in the
+   % current directory using default compiler flags:
    | ?- logtalk_compile(list, []).
 
-   | ?- logtalk_compile(types(tree)).
+   % compile to disk the "tree" source file in the "types"
+   % library directory with the source_data flag turned on:
+   | ?- logtalk_compile(types(tree), [source_data(on)]).
 
+   % compile to disk the "file_system" source file in the
+   % current directory with portability warnings supressed:
    | ?- logtalk_compile(file_system, [portability(silent)]).
 
 .. seealso::

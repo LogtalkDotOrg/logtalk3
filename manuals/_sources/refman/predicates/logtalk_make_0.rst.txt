@@ -66,6 +66,7 @@ Examples
 
 ::
 
+   % reload all files modified since last loaded:
    | ?- logtalk_make.
 
 .. seealso::

@@ -268,10 +268,16 @@ loaded by it.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(list, []).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% compile and load the &quot;list&quot; source file in the</span>
+<span class="c">% current directory using default compiler flags:</span>
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(list, []).
 
+<span class="c">% compile and load the &quot;tree&quot; source file in the &quot;types&quot;</span>
+<span class="c">% library directory with the source_data flag turned on:</span>
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(types(tree)).
 
+<span class="c">% compile and load the &quot;file_system&quot; source file in the</span>
+<span class="c">% current directory with portability warnings supressed:</span>
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(file_system, [portability(silent)]).
 </pre></div>
 </div>

@@ -81,10 +81,16 @@ Examples
 
 ::
 
+   % compile and load the "set" source file in the
+   % current directory:
    | ?- logtalk_load(set).
 
+   % compile and load the "tree" source file in the
+   % "types" library directory:
    | ?- logtalk_load(types(tree)).
 
+   % compile and load the "listp" and "list" source
+   % files in the current directory:
    | ?- logtalk_load([listp, list]).
 
 .. seealso::

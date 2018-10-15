@@ -75,10 +75,16 @@ Examples
 
 ::
 
+   % compile to disk the "set" source file in the
+   % current directory:
    | ?- logtalk_compile(set).
 
+   % compile to disk the "tree" source file in the
+   % "types" library directory:
    | ?- logtalk_load(types(tree)).
 
+   % compile to disk the "listp" and "list" source
+   % files in the current directory:
    | ?- logtalk_compile([listp, list]).
 
 .. seealso::
