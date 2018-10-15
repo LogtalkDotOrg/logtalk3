@@ -68,9 +68,11 @@ Examples
 
 ::
 
-   | ?- conforms_to_protocol(list, listp).
+   % enumerate objects and categories that conform to the listp protocol:
+   | ?- conforms_to_protocol(Object, listp).
 
-   | ?- conforms_to_protocol(list, listp, public).
+   % enumerate objects and categories that privately conform to the listp protocol:
+   | ?- conforms_to_protocol(Object, listp, private).
 
 .. seealso::
 

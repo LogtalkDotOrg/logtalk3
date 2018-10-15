@@ -244,20 +244,55 @@ avoid race conditions.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Creating a simple, stand-alone object (a prototype):</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">?-</span> <span class="pre">create_object(translator,</span> <span class="pre">[],</span> <span class="pre">[public(int/2)],</span> <span class="pre">[int(0,</span> <span class="pre">zero)]).</span></code></dd>
-<dt>Creating a new prototype derived from a parent prototype:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">?-</span> <span class="pre">create_object(mickey,</span> <span class="pre">[extends(mouse)],</span> <span class="pre">[public(alias/1)],</span> <span class="pre">[alias(mortimer)]).</span></code></dd>
-<dt>Creating a new class instance:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">?-</span> <span class="pre">create_object(p1,</span> <span class="pre">[instantiates(person)],</span> <span class="pre">[],</span> <span class="pre">[name('Paulo</span> <span class="pre">Moura'),</span> <span class="pre">age(42)]).</span></code></dd>
-<dt>Creating a new class as a specialization of another class:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">?-</span> <span class="pre">create_object(hovercraft,</span> <span class="pre">[specializes(vehicle)],</span> <span class="pre">[public([propeller/2,</span> <span class="pre">fan/2])],</span> <span class="pre">[]).</span></code></dd>
-<dt>Creating a new object and defining its initialization goal:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">?-</span> <span class="pre">create_object(runner,</span> <span class="pre">[instantiates(runners)],</span> <span class="pre">[initialization(start)],</span> <span class="pre">[length(22),</span> <span class="pre">time(60)]).</span></code></dd>
-<dt>Creating a new empty object with dynamic predicate declarations support:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">?-</span> <span class="pre">create_object(database,</span> <span class="pre">[],</span> <span class="pre">[set_logtalk_flag(dynamic_declarations,</span> <span class="pre">allow)],</span> <span class="pre">[]).</span></code></dd>
-</dl>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% create a stand-alone object (a prototype):</span>
+| <span class="o">?-</span> <span class="k">create_object</span>(
+         translator,
+         [],
+         [public(int<span class="o">/</span><span class="m">2</span>)],
+         [int(<span class="m">0</span>, zero)]
+     ).
+
+<span class="c">% create a prototype derived from a parent prototype:</span>
+| <span class="o">?-</span> <span class="k">create_object</span>(
+         mickey,
+         [extends(mouse)],
+         [public(alias<span class="o">/</span><span class="m">1</span>)],
+         [alias(mortimer)]
+     ).
+
+<span class="c">% create a class instance:</span>
+| <span class="o">?-</span> <span class="k">create_object</span>(
+         p1,
+         [instantiates(person)],
+         [],
+         [name(<span class="s">&#39;Paulo Moura&#39;</span>), age(<span class="m">42</span>)]
+     ).
+
+<span class="c">% create a subclass:</span>
+| <span class="o">?-</span> <span class="k">create_object</span>(
+         hovercraft,
+         [specializes(vehicle)],
+         [public([propeller<span class="o">/</span><span class="m">2</span>, fan<span class="o">/</span><span class="m">2</span>])],
+         []
+     ).
+
+<span class="c">% create an object with an initialization goal:</span>
+| <span class="o">?-</span> <span class="k">create_object</span>(
+         runner,
+         [instantiates(runners)],
+         [initialization(<span class="o">::</span>start)],
+         [length(<span class="m">22</span>), time(<span class="m">60</span>)]
+     ).
+
+<span class="c">% create an object supporting dynamic predicate declarations:</span>
+| <span class="o">?-</span> <span class="k">create_object</span>(
+         database,
+         [],
+         [<span class="k">set_logtalk_flag</span>(dynamic_declarations, allow)],
+         []
+     ).
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="abolish_object_1.html#predicates-abolish-object-1"><span class="std std-ref">abolish_object/1</span></a>,

@@ -231,8 +231,11 @@ atoms <code class="docutils literal notranslate"><span class="pre">public</span>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">instantiates_class</span>(water_jug, state_space).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the water_jug is an instante of state_space:</span>
+| <span class="o">?-</span> <span class="k">instantiates_class</span>(water_jug, state_space).
 
+<span class="c">% enumerate the state_space instances where the</span>
+<span class="c">% instantiation relation is public:</span>
 | <span class="o">?-</span> <span class="k">instantiates_class</span>(<span class="nv">Space</span>, state_space, public).
 </pre></div>
 </div>

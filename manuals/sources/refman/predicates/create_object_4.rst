@@ -77,20 +77,55 @@ Clauses is neither a variable nor a proper list:
 Examples
 --------
 
-Creating a simple, stand-alone object (a prototype):
-   ``| ?- create_object(translator, [], [public(int/2)], [int(0, zero)]).``
-Creating a new prototype derived from a parent prototype:
-   ``| ?- create_object(mickey, [extends(mouse)], [public(alias/1)], [alias(mortimer)]).``
-Creating a new class instance:
-   ``| ?- create_object(p1, [instantiates(person)], [], [name('Paulo Moura'), age(42)]).``
-Creating a new class as a specialization of another class:
-   ``| ?- create_object(hovercraft, [specializes(vehicle)], [public([propeller/2, fan/2])], []).``
+::
 
-Creating a new object and defining its initialization goal:
-   ``| ?- create_object(runner, [instantiates(runners)], [initialization(start)], [length(22), time(60)]).``
+   % create a stand-alone object (a prototype):
+   | ?- create_object(
+            translator,
+            [],
+            [public(int/2)],
+            [int(0, zero)]
+        ).
 
-Creating a new empty object with dynamic predicate declarations support:
-   ``| ?- create_object(database, [], [set_logtalk_flag(dynamic_declarations, allow)], []).``
+   % create a prototype derived from a parent prototype:
+   | ?- create_object(
+            mickey,
+            [extends(mouse)],
+            [public(alias/1)],
+            [alias(mortimer)]
+        ).
+
+   % create a class instance:
+   | ?- create_object(
+            p1,
+            [instantiates(person)],
+            [],
+            [name('Paulo Moura'), age(42)]
+        ).
+
+   % create a subclass:
+   | ?- create_object(
+            hovercraft,
+            [specializes(vehicle)],
+            [public([propeller/2, fan/2])],
+            []
+        ).
+
+   % create an object with an initialization goal:
+   | ?- create_object(
+            runner,
+            [instantiates(runners)],
+            [initialization(::start)],
+            [length(22), time(60)]
+        ).
+
+   % create an object supporting dynamic predicate declarations:
+   | ?- create_object(
+            database,
+            [],
+            [set_logtalk_flag(dynamic_declarations, allow)],
+            []
+        ).
 
 .. seealso::
 

@@ -51,6 +51,7 @@ Examples
 
 ::
 
+   % check that the logging category complements the employee object:
    | ?- complements_object(logging, employee).
 
 .. seealso::

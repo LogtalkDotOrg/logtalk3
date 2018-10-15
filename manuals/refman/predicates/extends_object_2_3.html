@@ -231,8 +231,10 @@ one extends the second. The relation scope is represented by the atoms
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">extends_object</span>(<span class="nv">Object</span>, state_space).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate objects derived from the state_space prototype:</span>
+| <span class="o">?-</span> <span class="k">extends_object</span>(<span class="nv">Object</span>, state_space).
 
+<span class="c">% enumerate objects publicly derived from the list prototype:</span>
 | <span class="o">?-</span> <span class="k">extends_object</span>(<span class="nv">Object</span>, list, public).
 </pre></div>
 </div>

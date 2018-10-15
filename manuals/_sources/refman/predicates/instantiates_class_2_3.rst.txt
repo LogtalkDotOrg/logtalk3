@@ -58,8 +58,11 @@ Examples
 
 ::
 
+   % check that the water_jug is an instante of state_space:
    | ?- instantiates_class(water_jug, state_space).
 
+   % enumerate the state_space instances where the
+   % instantiation relation is public:
    | ?- instantiates_class(Space, state_space, public).
 
 .. seealso::

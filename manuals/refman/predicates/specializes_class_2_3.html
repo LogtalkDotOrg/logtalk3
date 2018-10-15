@@ -231,8 +231,11 @@ atoms <code class="docutils literal notranslate"><span class="pre">public</span>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">specializes_class</span>(<span class="nv">Subclass</span>, state_space).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the state_space subclasses:</span>
+| <span class="o">?-</span> <span class="k">specializes_class</span>(<span class="nv">Subclass</span>, state_space).
 
+<span class="c">% enumerate the state_space subclasses where the</span>
+<span class="c">% specialization relation is public:</span>
 | <span class="o">?-</span> <span class="k">specializes_class</span>(<span class="nv">Subclass</span>, state_space, public).
 </pre></div>
 </div>

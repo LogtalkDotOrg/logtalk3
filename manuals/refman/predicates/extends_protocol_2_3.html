@@ -201,8 +201,8 @@
 <span id="predicates-extends-protocol-2-3"></span><span id="index-0"></span><h1>extends_protocol/2-3<a class="headerlink" href="#extends-protocol-2-3" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">extends_protocol</span>(<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>)
-<span class="k">extends_protocol</span>(<span class="nv">Protocol1</span>, <span class="nv">Protocol2</span>, <span class="nv">Scope</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">extends_protocol</span>(<span class="nv">Protocol</span>, <span class="nv">ParentProtocol</span>)
+<span class="k">extends_protocol</span>(<span class="nv">Protocol</span>, <span class="nv">ParentProtocol</span>, <span class="nv">Scope</span>)
 </pre></div>
 </div>
 <p>Enumerates, by backtracking, all pairs of protocols such that the first
@@ -219,10 +219,10 @@ one extends the second. The relation scope is represented by the atoms
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>Protocol1 is neither a variable nor a valid protocol identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(protocol_identifier,</span> <span class="pre">Protocol1)</span></code></dd>
-<dt>Protocol2 is neither a variable nor a valid protocol identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(protocol_identifier,</span> <span class="pre">Protocol2)</span></code></dd>
+<dt>Protocol is neither a variable nor a valid protocol identifier:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(protocol_identifier,</span> <span class="pre">Protocol)</span></code></dd>
+<dt>ParentProtocol is neither a variable nor a valid protocol identifier:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(protocol_identifier,</span> <span class="pre">ParentProtocol)</span></code></dd>
 <dt>Scope is neither a variable nor an atom:</dt>
 <dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Scope)</span></code></dd>
 <dt>Scope is an atom but an invalid entity scope:</dt>
@@ -231,8 +231,10 @@ one extends the second. The relation scope is represented by the atoms
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">extends_protocol</span>(listp, <span class="nv">Protocol</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the protocols extended by the listp protocol:</span>
+| <span class="o">?-</span> <span class="k">extends_protocol</span>(listp, <span class="nv">Protocol</span>).
 
+<span class="c">% enumerate protocols that privately extend the termp protocol:</span>
 | <span class="o">?-</span> <span class="k">extends_protocol</span>(<span class="nv">Protocol</span>, termp, private).
 </pre></div>
 </div>

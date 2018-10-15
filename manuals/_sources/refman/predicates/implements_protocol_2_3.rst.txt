@@ -68,8 +68,10 @@ Examples
 
 ::
 
+   % check that the list object implements the listp protocol:
    | ?- implements_protocol(list, listp).
 
+   % check that the list object publicly implements the listp protocol:
    | ?- implements_protocol(list, listp, public).
 
 .. seealso::

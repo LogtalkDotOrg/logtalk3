@@ -241,9 +241,11 @@ relation.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">conforms_to_protocol</span>(list, listp).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate objects and categories that conform to the listp protocol:</span>
+| <span class="o">?-</span> <span class="k">conforms_to_protocol</span>(<span class="nv">Object</span>, listp).
 
-| <span class="o">?-</span> <span class="k">conforms_to_protocol</span>(list, listp, public).
+<span class="c">% enumerate objects and categories that privately conform to the listp protocol:</span>
+| <span class="o">?-</span> <span class="k">conforms_to_protocol</span>(<span class="nv">Object</span>, listp, private).
 </pre></div>
 </div>
 <div class="admonition seealso">

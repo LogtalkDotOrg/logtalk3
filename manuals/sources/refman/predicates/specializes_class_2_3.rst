@@ -58,8 +58,11 @@ Examples
 
 ::
 
+   % enumerate the state_space subclasses:
    | ?- specializes_class(Subclass, state_space).
 
+   % enumerate the state_space subclasses where the
+   % specialization relation is public:
    | ?- specializes_class(Subclass, state_space, public).
 
 .. seealso::

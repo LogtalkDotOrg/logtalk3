@@ -232,9 +232,11 @@ categories. The relation scope is represented by the atoms <code class="docutils
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">imports_category</span>(debugger, monitoring).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the xref_diagram object imports the diagram category:</span>
+| <span class="o">?-</span> <span class="k">imports_category</span>(xref_diagram, diagram).
 
-| <span class="o">?-</span> <span class="k">imports_category</span>(<span class="nv">Object</span>, monitoring, protected).
+<span class="c">% enumerate the objects that privately import the diagram category:</span>
+| <span class="o">?-</span> <span class="k">imports_category</span>(<span class="nv">Object</span>, diagram, private).
 </pre></div>
 </div>
 <div class="admonition seealso">

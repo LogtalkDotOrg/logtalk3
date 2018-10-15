@@ -201,8 +201,8 @@
 <span id="predicates-extends-category-2-3"></span><span id="index-0"></span><h1>extends_category/2-3<a class="headerlink" href="#extends-category-2-3" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">extends_category</span>(<span class="nv">Category1</span>, <span class="nv">Category2</span>)
-<span class="k">extends_category</span>(<span class="nv">Category1</span>, <span class="nv">Category2</span>, <span class="nv">Scope</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">extends_category</span>(<span class="nv">Category</span>, <span class="nv">ParentCategory</span>)
+<span class="k">extends_category</span>(<span class="nv">Category</span>, <span class="nv">ParentCategory</span>, <span class="nv">Scope</span>)
 </pre></div>
 </div>
 <p>Enumerates, by backtracking, all pairs of categories such that the first
@@ -219,10 +219,10 @@ one extends the second. The relation scope is represented by the atoms
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>Category1 is neither a variable nor a valid protocol identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(category_identifier,</span> <span class="pre">Category1)</span></code></dd>
-<dt>Category2 is neither a variable nor a valid protocol identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(category_identifier,</span> <span class="pre">Category2)</span></code></dd>
+<dt>Category is neither a variable nor a valid protocol identifier:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(category_identifier,</span> <span class="pre">Category)</span></code></dd>
+<dt>ParentCategory is neither a variable nor a valid protocol identifier:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">type_error(category_identifier,</span> <span class="pre">ParentCategory)</span></code></dd>
 <dt>Scope is neither a variable nor an atom:</dt>
 <dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Scope)</span></code></dd>
 <dt>Scope is an atom but an invalid entity scope:</dt>
@@ -231,9 +231,11 @@ one extends the second. The relation scope is represented by the atoms
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">extends_category</span>(basic, <span class="nv">Category</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the categories extended by the derailleur category:</span>
+| <span class="o">?-</span> <span class="k">extends_category</span>(derailleur, <span class="nv">Category</span>).
 
-| <span class="o">?-</span> <span class="k">extends_category</span>(<span class="nv">Category</span>, extended, private).
+<span class="c">% enumerate categories that privately extend the basics category:</span>
+| <span class="o">?-</span> <span class="k">extends_category</span>(<span class="nv">Category</span>, basics, private).
 </pre></div>
 </div>
 <div class="admonition seealso">

@@ -241,8 +241,10 @@ transitive closure.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">implements_protocol</span>(list, listp).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the list object implements the listp protocol:</span>
+| <span class="o">?-</span> <span class="k">implements_protocol</span>(list, listp).
 
+<span class="c">% check that the list object publicly implements the listp protocol:</span>
 | <span class="o">?-</span> <span class="k">implements_protocol</span>(list, listp, public).
 </pre></div>
 </div>

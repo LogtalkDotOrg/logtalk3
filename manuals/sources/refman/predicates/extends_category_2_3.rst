@@ -26,8 +26,8 @@ Description
 
 ::
 
-   extends_category(Category1, Category2)
-   extends_category(Category1, Category2, Scope)
+   extends_category(Category, ParentCategory)
+   extends_category(Category, ParentCategory, Scope)
 
 Enumerates, by backtracking, all pairs of categories such that the first
 one extends the second. The relation scope is represented by the atoms
@@ -44,10 +44,10 @@ Modes and number of proofs
 Errors
 ------
 
-Category1 is neither a variable nor a valid protocol identifier:
-   ``type_error(category_identifier, Category1)``
-Category2 is neither a variable nor a valid protocol identifier:
-   ``type_error(category_identifier, Category2)``
+Category is neither a variable nor a valid protocol identifier:
+   ``type_error(category_identifier, Category)``
+ParentCategory is neither a variable nor a valid protocol identifier:
+   ``type_error(category_identifier, ParentCategory)``
 Scope is neither a variable nor an atom:
    ``type_error(atom, Scope)``
 Scope is an atom but an invalid entity scope:
@@ -58,9 +58,11 @@ Examples
 
 ::
 
-   | ?- extends_category(basic, Category).
+   % enumerate the categories extended by the derailleur category:
+   | ?- extends_category(derailleur, Category).
 
-   | ?- extends_category(Category, extended, private).
+   % enumerate categories that privately extend the basics category:
+   | ?- extends_category(Category, basics, private).
 
 .. seealso::
 

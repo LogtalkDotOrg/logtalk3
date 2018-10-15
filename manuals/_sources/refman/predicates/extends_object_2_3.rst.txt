@@ -58,8 +58,10 @@ Examples
 
 ::
 
+   % enumerate objects derived from the state_space prototype:
    | ?- extends_object(Object, state_space).
 
+   % enumerate objects publicly derived from the list prototype:
    | ?- extends_object(Object, list, public).
 
 .. seealso::

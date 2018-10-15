@@ -26,8 +26,8 @@ Description
 
 ::
 
-   extends_protocol(Protocol1, Protocol2)
-   extends_protocol(Protocol1, Protocol2, Scope)
+   extends_protocol(Protocol, ParentProtocol)
+   extends_protocol(Protocol, ParentProtocol, Scope)
 
 Enumerates, by backtracking, all pairs of protocols such that the first
 one extends the second. The relation scope is represented by the atoms
@@ -44,10 +44,10 @@ Modes and number of proofs
 Errors
 ------
 
-Protocol1 is neither a variable nor a valid protocol identifier:
-   ``type_error(protocol_identifier, Protocol1)``
-Protocol2 is neither a variable nor a valid protocol identifier:
-   ``type_error(protocol_identifier, Protocol2)``
+Protocol is neither a variable nor a valid protocol identifier:
+   ``type_error(protocol_identifier, Protocol)``
+ParentProtocol is neither a variable nor a valid protocol identifier:
+   ``type_error(protocol_identifier, ParentProtocol)``
 Scope is neither a variable nor an atom:
    ``type_error(atom, Scope)``
 Scope is an atom but an invalid entity scope:
@@ -58,8 +58,10 @@ Examples
 
 ::
 
+   % enumerate the protocols extended by the listp protocol:
    | ?- extends_protocol(listp, Protocol).
 
+   % enumerate protocols that privately extend the termp protocol:
    | ?- extends_protocol(Protocol, termp, private).
 
 .. seealso::

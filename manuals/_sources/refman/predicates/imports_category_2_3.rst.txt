@@ -59,9 +59,11 @@ Examples
 
 ::
 
-   | ?- imports_category(debugger, monitoring).
+   % check that the xref_diagram object imports the diagram category:
+   | ?- imports_category(xref_diagram, diagram).
 
-   | ?- imports_category(Object, monitoring, protected).
+   % enumerate the objects that privately import the diagram category:
+   | ?- imports_category(Object, diagram, private).
 
 .. seealso::
 
