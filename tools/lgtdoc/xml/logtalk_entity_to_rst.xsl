@@ -76,14 +76,15 @@
 		<xsl:with-param name="n" select="4 + string-length(logtalk_entity/entity/name)"/>
 	</xsl:call-template>
 	<xsl:value-of select="$nl2" />
-	<xsl:if test="logtalk_entity/entity/comment">
-		<xsl:value-of select="logtalk_entity/entity/comment" />
-		<xsl:value-of select="$nl2" />
-	</xsl:if>
 	<xsl:if test="logtalk_entity/entity/parameters">
 		<xsl:for-each select="logtalk_entity/entity/parameters/parameter">
 			<xsl:text>* ``</xsl:text><xsl:value-of select="name" /><xsl:text>`` - </xsl:text><xsl:value-of select="description" />
+			<xsl:value-of select="$nl" />
 		</xsl:for-each>
+		<xsl:value-of select="$nl2" />
+	</xsl:if>
+	<xsl:if test="logtalk_entity/entity/comment">
+		<xsl:value-of select="logtalk_entity/entity/comment" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:apply-templates select="logtalk_entity/entity" />

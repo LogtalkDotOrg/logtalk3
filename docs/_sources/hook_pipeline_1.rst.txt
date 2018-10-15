@@ -6,9 +6,10 @@
 ``hook_pipeline(Pipeline)``
 ===========================
 
-Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.
-
 * ``Pipeline`` - List of hook objects
+
+
+Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.
 
 * author: Paulo Moura
 * version: 1.0

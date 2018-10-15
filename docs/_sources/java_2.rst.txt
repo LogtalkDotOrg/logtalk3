@@ -6,9 +6,11 @@
 ``java(Reference,ReturnValue)``
 ===============================
 
-Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
+* ``Reference`` - Either a class name or a Java reference to an object
+* ``ReturnValue`` - Value returned by a method call (possibly the Java value void)
 
-* ``Reference`` - Either a class name or a Java reference to an object* ``ReturnValue`` - Value returned by a method call (possibly the Java value void)
+
+Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
 
 * author: Paulo Moura and Sergio Castro
 * version: 1.2
