@@ -8,10 +8,12 @@
 
 Time protocol.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2000/7/24
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2000/7/24
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns current time.
 
-* compilation flags: ``static``
-* template: ``now(Hours,Mins,Secs)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``now(-integer,-integer,-integer)`` - ``one``
+| **Template:**
+|    ``now(Hours,Mins,Secs)``
+| **Mode and number of proofs:**
+|    ``now(-integer,-integer,-integer)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns current time.
 
 Returns the current cpu time.
 
-* compilation flags: ``static``
-* template: ``cpu_time(Time)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``cpu_time(-number)`` - ``one``
+| **Template:**
+|    ``cpu_time(Time)``
+| **Mode and number of proofs:**
+|    ``cpu_time(-number)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Returns the current cpu time.
 
 True if the arguments represent a valid time value.
 
-* compilation flags: ``static``
-* template: ``valid(Hours,Mins,Secs)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(+integer,+integer,+integer)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Hours,Mins,Secs)``
+| **Mode and number of proofs:**
+|    ``valid(+integer,+integer,+integer)`` - ``zero_or_one``
 
 
 Protected interface

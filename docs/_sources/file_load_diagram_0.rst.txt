@@ -8,14 +8,15 @@
 
 Predicates for generating file loading dependency diagrams in DOT format. A dependency exists when a file loads or includes another file.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2014/1/8
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2014/1/8
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`file_load_diagram(dot) <file_load_diagram/1>`
+
+| **Extends:**
+|    ``public`` :ref:`file_load_diagram(dot) <file_load_diagram/1>`
 
 Public interface
 ----------------

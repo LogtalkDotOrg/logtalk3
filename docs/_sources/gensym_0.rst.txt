@@ -8,10 +8,12 @@
 
 Predicates for generating unique atoms. Object protocol based on the "gensym" module of SWI-Prolog.
 
-* author: Paulo Moura
-* version: 1.01
-* date: 2011/11/9
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.01
+| **Date:** 2011/11/9
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 Resets the generator counter for all bases.
 
-* compilation flags: ``static, synchronized``
-* mode - number of proofs:
+| **Compilation flags:** ``static, synchronized``
 
-  * ``reset_gensym`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset_gensym`` - ``one``
 
 
 .. raw:: html
@@ -49,12 +51,12 @@ Resets the generator counter for all bases.
 
 Resets the generator counter for a given base.
 
-* compilation flags: ``static, synchronized``
-* template: ``reset_gensym(Base)``
+| **Compilation flags:** ``static, synchronized``
 
-* mode - number of proofs:
-
-  * ``reset_gensym(+atom)`` - ``one``
+| **Template:**
+|    ``reset_gensym(Base)``
+| **Mode and number of proofs:**
+|    ``reset_gensym(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -69,12 +71,12 @@ Resets the generator counter for a given base.
 
 Returns a new unique atom with a given base (prefix).
 
-* compilation flags: ``static, synchronized``
-* template: ``gensym(Base,Unique)``
+| **Compilation flags:** ``static, synchronized``
 
-* mode - number of proofs:
-
-  * ``gensym(+atom,-atom)`` - ``one``
+| **Template:**
+|    ``gensym(Base,Unique)``
+| **Mode and number of proofs:**
+|    ``gensym(+atom,-atom)`` - ``one``
 
 
 Protected interface
@@ -97,12 +99,12 @@ Private predicates
 
 Table of generator bases and respective counters.
 
-* compilation flags: ``dynamic``
-* template: ``base_(Base,Counter)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``base_(?atom,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``base_(Base,Counter)``
+| **Mode and number of proofs:**
+|    ``base_(?atom,?integer)`` - ``zero_or_more``
 
 
 Operators

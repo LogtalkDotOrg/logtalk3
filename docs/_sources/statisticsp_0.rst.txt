@@ -8,10 +8,12 @@
 
 Statistical calculations over a list of numbers protocol.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2017/10/3
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2017/10/3
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Calculates the product of all list numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``product(List,Product)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``product(+list(number),-number)`` - ``zero_or_one``
+| **Template:**
+|    ``product(List,Product)``
+| **Mode and number of proofs:**
+|    ``product(+list(number),-number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Calculates the product of all list numbers. Fails if the list is empty.
 
 Calculates the sum of all list numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``sum(List,Sum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sum(+list(number),-number)`` - ``zero_or_one``
+| **Template:**
+|    ``sum(List,Sum)``
+| **Mode and number of proofs:**
+|    ``sum(+list(number),-number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Calculates the sum of all list numbers. Fails if the list is empty.
 
 Determines the list maximum value in a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``max(List,Maximum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``max(+list,-number)`` - ``zero_or_one``
+| **Template:**
+|    ``max(List,Maximum)``
+| **Mode and number of proofs:**
+|    ``max(+list,-number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Determines the list maximum value in a list of numbers. Fails if the list is emp
 
 Determines the minimum value in a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``min(List,Minimum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``min(+list,-number)`` - ``zero_or_one``
+| **Template:**
+|    ``min(List,Minimum)``
+| **Mode and number of proofs:**
+|    ``min(+list,-number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Determines the minimum value in a list of numbers. Fails if the list is empty.
 
 Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``range(List,Range)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``range(+list,-number)`` - ``zero_or_one``
+| **Template:**
+|    ``range(List,Range)``
+| **Mode and number of proofs:**
+|    ``range(+list,-number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Range is the length of the smallest interval which contains all the numbers in L
 
 Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``arithmetic_mean(List,Mean)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``arithmetic_mean(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``arithmetic_mean(List,Mean)``
+| **Mode and number of proofs:**
+|    ``arithmetic_mean(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 
 Calculates the geometric mean of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``geometric_mean(List,Mean)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``geometric_mean(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``geometric_mean(List,Mean)``
+| **Mode and number of proofs:**
+|    ``geometric_mean(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Calculates the geometric mean of a list of numbers. Fails if the list is empty.
 
 Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``harmonic_mean(List,Mean)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``harmonic_mean(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``harmonic_mean(List,Mean)``
+| **Mode and number of proofs:**
+|    ``harmonic_mean(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
 Calculates the median of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``median(List,Median)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``median(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``median(List,Median)``
+| **Mode and number of proofs:**
+|    ``median(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ Calculates the median of a list of numbers. Fails if the list is empty.
 
 Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``average_deviation(List,CentralTendency,Deviation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``average_deviation(+list(number),+float,-float)`` - ``zero_or_one``
+| **Template:**
+|    ``average_deviation(List,CentralTendency,Deviation)``
+| **Mode and number of proofs:**
+|    ``average_deviation(+list(number),+float,-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ Calculates the average absolute deviation of a list of numbers given a central t
 
 Calculates the mean absolute deviation of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``mean_deviation(List,Deviation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``mean_deviation(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``mean_deviation(List,Deviation)``
+| **Mode and number of proofs:**
+|    ``mean_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ Calculates the mean absolute deviation of a list of numbers. Fails if the list i
 
 Calculates the median absolute deviation of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``median_deviation(List,Deviation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``median_deviation(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``median_deviation(List,Deviation)``
+| **Mode and number of proofs:**
+|    ``median_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ Calculates the median absolute deviation of a list of numbers. Fails if the list
 
 Calculates the standard deviation of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``standard_deviation(List,Deviation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``standard_deviation(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``standard_deviation(List,Deviation)``
+| **Mode and number of proofs:**
+|    ``standard_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -291,12 +293,12 @@ Calculates the standard deviation of a list of numbers. Fails if the list is emp
 
 Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``coefficient_of_variation(List,Coefficient)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``coefficient_of_variation(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``coefficient_of_variation(List,Coefficient)``
+| **Mode and number of proofs:**
+|    ``coefficient_of_variation(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -311,12 +313,12 @@ Calculates the coefficient of variation of a list of numbers. Fails if the list 
 
 Calculates the relative standard deviation of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``relative_standard_deviation(List,Percentage)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``relative_standard_deviation(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``relative_standard_deviation(List,Percentage)``
+| **Mode and number of proofs:**
+|    ``relative_standard_deviation(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -331,12 +333,12 @@ Calculates the relative standard deviation of a list of numbers. Fails if the li
 
 Calculates the (moment) skewness of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``skewness(List,Skewness)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``skewness(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``skewness(List,Skewness)``
+| **Mode and number of proofs:**
+|    ``skewness(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -351,12 +353,12 @@ Calculates the (moment) skewness of a list of numbers. Fails if the list is empt
 
 Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``kurtosis(List,Kurtosis)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``kurtosis(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``kurtosis(List,Kurtosis)``
+| **Mode and number of proofs:**
+|    ``kurtosis(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -371,12 +373,12 @@ Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empt
 
 Calculates the unbiased variance of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``variance(List,Variance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``variance(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``variance(List,Variance)``
+| **Mode and number of proofs:**
+|    ``variance(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -391,12 +393,12 @@ Calculates the unbiased variance of a list of numbers. Fails if the list is empt
 
 Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``z_normalization(List,NormalizedList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``z_normalization(+list(number),-list(float))`` - ``zero_or_one``
+| **Template:**
+|    ``z_normalization(List,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``z_normalization(+list(number),-list(float))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -411,12 +413,12 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 
 Term is a closed list of numbers.
 
-* compilation flags: ``static``
-* template: ``valid(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(@nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Term)``
+| **Mode and number of proofs:**
+|    ``valid(@nonvar)`` - ``zero_or_one``
 
 
 Protected interface
@@ -437,7 +439,8 @@ Private predicates
 ``arithmetic_mean/5``
 ^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -449,7 +452,8 @@ Private predicates
 ``squares_and_cubes/6``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -461,7 +465,8 @@ Private predicates
 ``squares_and_hypers/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -473,7 +478,8 @@ Private predicates
 ``variance/6``
 ^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 Operators
 ---------

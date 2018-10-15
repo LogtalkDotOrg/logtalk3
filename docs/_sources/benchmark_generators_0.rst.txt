@@ -8,10 +8,12 @@
 
 Generates random data structures for use in benchmarks.
 
-* author: Victor Lagerkvist
-* version: 1.0
-* date: 2010/6/13
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Victor Lagerkvist
+| **Version:** 1.0
+| **Date:** 2010/6/13
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Generates a random tree.
 
-* compilation flags: ``static``
-* template: ``random_tree(Tree)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``random_tree(-tree)`` - ``one``
+| **Template:**
+|    ``random_tree(Tree)``
+| **Mode and number of proofs:**
+|    ``random_tree(-tree)`` - ``one``
 
 
 Protected interface

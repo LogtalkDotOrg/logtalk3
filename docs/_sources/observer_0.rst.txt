@@ -8,10 +8,12 @@
 
 Smalltalk dependent protocol.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2003/2/9
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2003/2/9
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Called when an observed object is updated.
 
-* compilation flags: ``static``
-* template: ``update(Change)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``update(?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``update(Change)``
+| **Mode and number of proofs:**
+|    ``update(?nonvar)`` - ``zero_or_one``
 
 
 Protected interface

@@ -8,14 +8,15 @@
 
 Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.
 
-* author: Paulo Moura
-* version: 4.11
-* date: 2018/10/7
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 4.11
+| **Date:** 2018/10/7
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`lgtdocp <lgtdocp/0>`
+
+| **Implements:**
+|    ``public`` :ref:`lgtdocp <lgtdocp/0>`
 
 Public interface
 ----------------
@@ -42,12 +43,12 @@ Private predicates
 
 Table of option values.
 
-* compilation flags: ``dynamic``
-* template: ``option_(Option,Value)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``option_(?atom,?nonvar)`` - ``zero_or_more``
+| **Template:**
+|    ``option_(Option,Value)``
+| **Mode and number of proofs:**
+|    ``option_(?atom,?nonvar)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -62,12 +63,12 @@ Table of option values.
 
 Table of documented entities per library.
 
-* compilation flags: ``dynamic``
-* template: ``library_entity_(Library,PrimarySortKey,SecondarySortKey,Entity)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``library_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``library_entity_(Library,PrimarySortKey,SecondarySortKey,Entity)``
+| **Mode and number of proofs:**
+|    ``library_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -82,12 +83,12 @@ Table of documented entities per library.
 
 Table of documented entities per directory.
 
-* compilation flags: ``dynamic``
-* template: ``directory_entity_(Directory,PrimarySortKey,SecondarySortKey,Entity)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``directory_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``directory_entity_(Directory,PrimarySortKey,SecondarySortKey,Entity)``
+| **Mode and number of proofs:**
+|    ``directory_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -102,12 +103,12 @@ Table of documented entities per directory.
 
 Table of documented entities per type.
 
-* compilation flags: ``dynamic``
-* template: ``type_entity_(Type,PrimarySortKey,SecondarySortKey,Entity)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``type_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``type_entity_(Type,PrimarySortKey,SecondarySortKey,Entity)``
+| **Mode and number of proofs:**
+|    ``type_entity_(?atom,?nonvar,?nonvar,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -122,12 +123,12 @@ Table of documented entities per type.
 
 Table of public predicates for all documented entities.
 
-* compilation flags: ``dynamic``
-* template: ``predicate_entity_(Predicate,PrimarySortKey,SecondarySortKey,Entity)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``predicate_entity_(?predicate_indicator,?nonvar,?nonvar,?entity_identifier)`` - ``zero_or_more``
+| **Template:**
+|    ``predicate_entity_(Predicate,PrimarySortKey,SecondarySortKey,Entity)``
+| **Mode and number of proofs:**
+|    ``predicate_entity_(?predicate_indicator,?nonvar,?nonvar,?entity_identifier)`` - ``zero_or_more``
 
 
 Operators

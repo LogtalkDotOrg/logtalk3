@@ -289,86 +289,118 @@
 <div class="section" id="hierarchyp">
 <h1><code class="docutils literal notranslate"><span class="pre">hierarchyp</span></code><a class="headerlink" href="#hierarchyp" title="Permalink to this headline">¶</a></h1>
 <p>Common hierarchy protocol for prototype and class hierarchies.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.0</li>
-<li>date: 2000/7/24</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2000/7/24</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="ancestor/1"> </div><div class="section" id="ancestor-1">
 <span id="hierarchyp-0-ancestor-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">ancestor/1</span></code><a class="headerlink" href="#ancestor-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns, by backtracking, all object ancestors.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">ancestor(Ancestor)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">ancestor(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ancestor(Ancestor)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ancestor(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="ancestors/1"> </div></div>
 <div class="section" id="ancestors-1">
 <span id="hierarchyp-0-ancestors-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">ancestors/1</span></code><a class="headerlink" href="#ancestors-1" title="Permalink to this headline">¶</a></h3>
 <p>List of all object ancestors.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">ancestors(Ancestors)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">ancestors(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ancestors(Ancestors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ancestors(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="leaf/1"> </div></div>
 <div class="section" id="leaf-1">
 <span id="hierarchyp-0-leaf-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">leaf/1</span></code><a class="headerlink" href="#leaf-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns, by backtracking, all object leaves.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">leaf(Leaf)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">leaf(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leaf(Leaf)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leaf(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="leaves/1"> </div></div>
 <div class="section" id="leaves-1">
 <span id="hierarchyp-0-leaves-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">leaves/1</span></code><a class="headerlink" href="#leaves-1" title="Permalink to this headline">¶</a></h3>
 <p>List of all object leaves.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">leaves(Leaves)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">leaves(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leaves(Leaves)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leaves(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="descendant/1"> </div></div>
 <div class="section" id="descendant-1">
 <span id="hierarchyp-0-descendant-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">descendant/1</span></code><a class="headerlink" href="#descendant-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns, by backtracking, all object descendants.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">descendant(Descendant)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">descendant(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">descendant(Descendant)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">descendant(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="descendants/1"> </div></div>
 <div class="section" id="descendants-1">
 <span id="hierarchyp-0-descendants-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">descendants/1</span></code><a class="headerlink" href="#descendants-1" title="Permalink to this headline">¶</a></h3>
 <p>List of all object descendants.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">descendants(Descendants)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">descendants(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">descendants(Descendants)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">descendants(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

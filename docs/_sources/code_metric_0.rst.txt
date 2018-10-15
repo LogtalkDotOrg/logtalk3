@@ -8,10 +8,12 @@
 
 Core predicates for computing source code metrics.
 
-* author: Ebrahim Azarisooreh and Paulo Moura
-* version: 0.8
-* date: 2018/2/18
-* compilation flags: ``static``
+| **Author:** Ebrahim Azarisooreh and Paulo Moura
+| **Version:** 0.8
+| **Date:** 2018/2/18
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Scans an entity and prints its metric score.
 
-* compilation flags: ``static``
-* template: ``entity(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity(+term)`` - ``zero_or_one``
+| **Template:**
+|    ``entity(Entity)``
+| **Mode and number of proofs:**
+|    ``entity(+term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Scans an entity and prints its metric score.
 
 Prints metric scores for all the entities defined in a loaded source file.
 
-* compilation flags: ``static``
-* template: ``file(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``file(File)``
+| **Mode and number of proofs:**
+|    ``file(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Prints metric scores for all the entities defined in a loaded source file.
 
 Scans a directory and prints metric scores for all entities defined in its loaded source files.
 
-* compilation flags: ``static``
-* template: ``directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory(+atom)`` - ``one``
+| **Template:**
+|    ``directory(Directory)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Scans a directory and prints metric scores for all entities defined in its loade
 
 Recursive version of the directory/1 predicate.
 
-* compilation flags: ``static``
-* template: ``rdirectory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rdirectory(+atom)`` - ``one``
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Recursive version of the directory/1 predicate.
 
 Prints metrics scores for all loaded entities from a given library.
 
-* compilation flags: ``static``
-* template: ``library(Library)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``library(+atom)`` - ``one``
+| **Template:**
+|    ``library(Library)``
+| **Mode and number of proofs:**
+|    ``library(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Prints metrics scores for all loaded entities from a given library.
 
 Recursive version of the library/1 predicate.
 
-* compilation flags: ``static``
-* template: ``rlibrary(Library)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rlibrary(+atom)`` - ``one``
+| **Template:**
+|    ``rlibrary(Library)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -151,10 +153,10 @@ Recursive version of the library/1 predicate.
 
 Scans all loaded entities and prints their metric scores.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``all`` - ``one``
+| **Mode and number of proofs:**
+|    ``all`` - ``one``
 
 
 .. raw:: html
@@ -169,9 +171,10 @@ Scans all loaded entities and prints their metric scores.
 
 Score is a term that represents the metric score associated with a loaded entity. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``entity_score(Entity,Score)``
+| **Compilation flags:** ``static``
 
+| **Template:**
+|    ``entity_score(Entity,Score)``
 
 .. raw:: html
 
@@ -185,12 +188,12 @@ Score is a term that represents the metric score associated with a loaded entity
 
 Score is a term that represents the metric score associated with a loaded library source files. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``library_score(Library,Score)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``library_score(@atom,-ground)`` - ``zero_or_one``
+| **Template:**
+|    ``library_score(Library,Score)``
+| **Mode and number of proofs:**
+|    ``library_score(@atom,-ground)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -205,12 +208,12 @@ Score is a term that represents the metric score associated with a loaded librar
 
 Score is a term that represents the metric score associated with loaded source files from a library and its sub-libraries. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``rlibrary_score(Library,Score)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rlibrary_score(@atom,-ground)`` - ``zero_or_one``
+| **Template:**
+|    ``rlibrary_score(Library,Score)``
+| **Mode and number of proofs:**
+|    ``rlibrary_score(@atom,-ground)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -225,12 +228,12 @@ Score is a term that represents the metric score associated with loaded source f
 
 Score is a term that represents the metric score associated with a loaded source file. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``file_score(File,Score)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_score(@atom,-ground)`` - ``zero_or_one``
+| **Template:**
+|    ``file_score(File,Score)``
+| **Mode and number of proofs:**
+|    ``file_score(@atom,-ground)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -245,12 +248,12 @@ Score is a term that represents the metric score associated with a loaded source
 
 Score is a term that represents the metric score associated with loaded source files from a directory. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``directory_score(Directory,Score)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory_score(@atom,-ground)`` - ``zero_or_one``
+| **Template:**
+|    ``directory_score(Directory,Score)``
+| **Mode and number of proofs:**
+|    ``directory_score(@atom,-ground)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -265,12 +268,12 @@ Score is a term that represents the metric score associated with loaded source f
 
 Score is a term that represents the metric score associated with loaded source files from a directory and its sub-directories. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``rdirectory_score(Directory,Score)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rdirectory_score(@atom,-ground)`` - ``zero_or_one``
+| **Template:**
+|    ``rdirectory_score(Directory,Score)``
+| **Mode and number of proofs:**
+|    ``rdirectory_score(@atom,-ground)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -285,12 +288,12 @@ Score is a term that represents the metric score associated with loaded source f
 
 Score is a term that represents the metric score associated with all loaded source files. Fails if the metric does not apply.
 
-* compilation flags: ``static``
-* template: ``all_score(Score)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``all_score(-ground)`` - ``zero_or_one``
+| **Template:**
+|    ``all_score(Score)``
+| **Mode and number of proofs:**
+|    ``all_score(-ground)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -305,9 +308,10 @@ Score is a term that represents the metric score associated with all loaded sour
 
 Pretty prints the entity score.
 
-* compilation flags: ``static``
-* template: ``entity_score(Entity,Score)``
+| **Compilation flags:** ``static``
 
+| **Template:**
+|    ``entity_score(Entity,Score)``
 
 Protected interface
 -------------------
@@ -324,12 +328,12 @@ Protected interface
 
 Processes an entity of the given kind.
 
-* compilation flags: ``static``
-* template: ``process_entity(Kind,Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``process_entity(+atom,@entity_identifier)`` - ``one``
+| **Template:**
+|    ``process_entity(Kind,Entity)``
+| **Mode and number of proofs:**
+|    ``process_entity(+atom,@entity_identifier)`` - ``one``
 
 
 .. raw:: html
@@ -344,12 +348,12 @@ Processes an entity of the given kind.
 
 Processes a source file.
 
-* compilation flags: ``static``
-* template: ``process_file(Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``process_file(+atom)`` - ``one``
+| **Template:**
+|    ``process_file(Path)``
+| **Mode and number of proofs:**
+|    ``process_file(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -364,12 +368,12 @@ Processes a source file.
 
 Processes a directory of source files.
 
-* compilation flags: ``static``
-* template: ``process_directory(Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``process_directory(+atom)`` - ``one``
+| **Template:**
+|    ``process_directory(Path)``
+| **Mode and number of proofs:**
+|    ``process_directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -384,12 +388,12 @@ Processes a directory of source files.
 
 Recursively process a directory of source files.
 
-* compilation flags: ``static``
-* template: ``process_rdirectory(Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``process_rdirectory(+atom)`` - ``one``
+| **Template:**
+|    ``process_rdirectory(Path)``
+| **Mode and number of proofs:**
+|    ``process_rdirectory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -404,12 +408,12 @@ Recursively process a directory of source files.
 
 Recursively process a library of source files.
 
-* compilation flags: ``static``
-* template: ``process_rlibrary(Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``process_rlibrary(+atom)`` - ``one``
+| **Template:**
+|    ``process_rlibrary(Path)``
+| **Mode and number of proofs:**
+|    ``process_rlibrary(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -424,10 +428,10 @@ Recursively process a library of source files.
 
 Processes all loaded source code.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``process_all`` - ``one``
+| **Mode and number of proofs:**
+|    ``process_all`` - ``one``
 
 
 .. raw:: html
@@ -442,12 +446,12 @@ Processes all loaded source code.
 
 Enumerates, by backtracking, all directory sub-directories containing loaded files.
 
-* compilation flags: ``static``
-* template: ``sub_directory(Directory,SubDirectory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sub_directory(+atom,-atom)`` - ``one``
+| **Template:**
+|    ``sub_directory(Directory,SubDirectory)``
+| **Mode and number of proofs:**
+|    ``sub_directory(+atom,-atom)`` - ``one``
 
 
 .. raw:: html
@@ -462,12 +466,12 @@ Enumerates, by backtracking, all directory sub-directories containing loaded fil
 
 Enumerates, by backtracking, all library sub-library paths.
 
-* compilation flags: ``static``
-* template: ``sub_library(Library,SubLibraryPath)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sub_library(+atom,-atom)`` - ``one``
+| **Template:**
+|    ``sub_library(Library,SubLibraryPath)``
+| **Mode and number of proofs:**
+|    ``sub_library(+atom,-atom)`` - ``one``
 
 
 Private predicates

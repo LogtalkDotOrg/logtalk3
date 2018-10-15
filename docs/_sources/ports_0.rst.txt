@@ -8,15 +8,16 @@
 
 Predicate execution box model port profiler.
 
-* author: Paulo Moura
-* version: 1.2
-* date: 2018/7/2
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.2
+| **Date:** 2018/7/2
 
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
-  * :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
+
+| **Provides:**
+|    :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
+|    :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
 
 Public interface
 ----------------
@@ -33,10 +34,10 @@ Public interface
 
 Prints a table with all port profiling data.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``data`` - ``one``
+| **Mode and number of proofs:**
+|    ``data`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +52,12 @@ Prints a table with all port profiling data.
 
 Prints a table with all port profiling data for the specified entity.
 
-* compilation flags: ``static``
-* template: ``data(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``data(+entity_identifier)`` - ``one``
+| **Template:**
+|    ``data(Entity)``
+| **Mode and number of proofs:**
+|    ``data(+entity_identifier)`` - ``one``
 
 
 .. raw:: html
@@ -71,10 +72,10 @@ Prints a table with all port profiling data for the specified entity.
 
 Resets all port profiling data.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``reset`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
 
 
 .. raw:: html
@@ -89,12 +90,12 @@ Resets all port profiling data.
 
 Resets all port profiling data for the specified entity.
 
-* compilation flags: ``static``
-* template: ``reset(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``reset(+entity_identifier)`` - ``one``
+| **Template:**
+|    ``reset(Entity)``
+| **Mode and number of proofs:**
+|    ``reset(+entity_identifier)`` - ``one``
 
 
 .. raw:: html
@@ -109,12 +110,12 @@ Resets all port profiling data for the specified entity.
 
 Enumerates, by backtracking, all collected port profiling data.
 
-* compilation flags: ``static``
-* template: ``port(Port,Entity,Functor,Arity,Count)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``port(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``port(Port,Entity,Functor,Arity,Count)``
+| **Mode and number of proofs:**
+|    ``port(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
 
 
 Protected interface
@@ -137,12 +138,12 @@ Private predicates
 
 Internal table of collected port profiling data.
 
-* compilation flags: ``dynamic``
-* template: ``port_(Port,Entity,Functor,Arity,Count)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``port_(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``port_(Port,Entity,Functor,Arity,Count)``
+| **Mode and number of proofs:**
+|    ``port_(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
 
 
 Operators

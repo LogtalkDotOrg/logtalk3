@@ -207,12 +207,14 @@
 <div class="section" id="code-metrics-utilities">
 <h1><code class="docutils literal notranslate"><span class="pre">code_metrics_utilities</span></code><a class="headerlink" href="#code-metrics-utilities" title="Permalink to this headline">¶</a></h1>
 <p>Internal predicates for analyzing source code.</p>
-<ul class="simple">
-<li>author: Ebrahim Azarisooreh</li>
-<li>version: 0.6</li>
-<li>date: 2018/6/8</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Ebrahim Azarisooreh</div>
+<div class="line"><strong>Version:</strong> 0.6</div>
+<div class="line"><strong>Date:</strong> 2018/6/8</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
@@ -227,110 +229,155 @@
 <div id="ancestor/4"> </div><div class="section" id="ancestor-4">
 <span id="code-metrics-utilities-0-ancestor-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code><a class="headerlink" href="#ancestor-4" title="Permalink to this headline">¶</a></h3>
 <p>True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">ancestor(EntityKind,Entity,AncestorKind,Ancestor)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">ancestor(?entity,?entity_identifier,?entity,?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ancestor(EntityKind,Entity,AncestorKind,Ancestor)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ancestor(?entity,?entity_identifier,?entity,?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="current_entity/1"> </div></div>
 <div class="section" id="current-entity-1">
 <span id="code-metrics-utilities-0-current-entity-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code><a class="headerlink" href="#current-entity-1" title="Permalink to this headline">¶</a></h3>
 <p>True if Entity is a currently loaded entity.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">current_entity(Entity)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">current_entity(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_entity(Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_entity(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="declares_predicate/2"> </div></div>
 <div class="section" id="declares-predicate-2">
 <span id="code-metrics-utilities-0-declares-predicate-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code><a class="headerlink" href="#declares-predicate-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Entity declares Predicate internally.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">declares_predicate(Entity,Predicate)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">declares_predicate(?entity_identifier,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">declares_predicate(Entity,Predicate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">declares_predicate(?entity_identifier,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="defines_predicate/2"> </div></div>
 <div class="section" id="defines-predicate-2">
 <span id="code-metrics-utilities-0-defines-predicate-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code><a class="headerlink" href="#defines-predicate-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Entity defines an implementation of Predicate internally. ‘Auxiliary’ predicates are excluded from results.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">defines_predicate(Entity,Predicate)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">defines_predicate(?entity_identifier,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defines_predicate(Entity,Predicate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defines_predicate(?entity_identifier,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="defines_predicate/3"> </div></div>
 <div class="section" id="defines-predicate-3">
 <span id="code-metrics-utilities-0-defines-predicate-3"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code><a class="headerlink" href="#defines-predicate-3" title="Permalink to this headline">¶</a></h3>
 <p>Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">defines_predicate(Entity,Predicate,Property)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">defines_predicate(?entity_identifier,?predicate_indicator,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defines_predicate(Entity,Predicate,Property)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defines_predicate(?entity_identifier,?predicate_indicator,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="entity_calls/3"> </div></div>
 <div class="section" id="entity-calls-3">
 <span id="code-metrics-utilities-0-entity-calls-3"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code><a class="headerlink" href="#entity-calls-3" title="Permalink to this headline">¶</a></h3>
 <p>True if a predicate Caller within Entity makes a Call.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_calls(Entity,Caller,Call)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_calls(Entity,Caller,Call)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="entity_kind/2"> </div></div>
 <div class="section" id="entity-kind-2">
 <span id="code-metrics-utilities-0-entity-kind-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code><a class="headerlink" href="#entity-kind-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Kind defines Entity and is one of category, protocol, or object.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_kind(Entity,Kind)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_kind(+entity_identifier,-entity)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_kind(Entity,Kind)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_kind(+entity_identifier,-entity)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="entity_property/2"> </div></div>
 <div class="section" id="entity-property-2">
 <span id="code-metrics-utilities-0-entity-property-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code><a class="headerlink" href="#entity-property-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_property(Entity,Property)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_property(+entity_identifier,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_property(Entity,Property)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_property(+entity_identifier,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="entity_updates/3"> </div></div>
 <div class="section" id="entity-updates-3">
 <span id="code-metrics-utilities-0-entity-updates-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code><a class="headerlink" href="#entity-updates-3" title="Permalink to this headline">¶</a></h3>
 <p>True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_updates(Entity,Updater,Update)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_updates(Entity,Updater,Update)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="operators">

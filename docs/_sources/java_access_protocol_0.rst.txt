@@ -8,10 +8,12 @@
 
 Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.
 
-* author: Paulo Moura and Sergio Castro
-* version: 1.1
-* date: 2018/5/23
-* compilation flags: ``static``
+| **Author:** Paulo Moura and Sergio Castro
+| **Version:** 1.1
+| **Date:** 2018/5/23
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Gets the value of a class or object field.
 
-* compilation flags: ``static``
-* template: ``get_field(Field,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``get_field(+atom,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``get_field(Field,Value)``
+| **Mode and number of proofs:**
+|    ``get_field(+atom,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Gets the value of a class or object field.
 
 Sets the value of a class or object field.
 
-* compilation flags: ``static``
-* template: ``set_field(Field,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_field(+atom,+nonvar)`` - ``one``
+| **Template:**
+|    ``set_field(Field,Value)``
+| **Mode and number of proofs:**
+|    ``set_field(+atom,+nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Sets the value of a class or object field.
 
 Creates a new instance using the specified parameter values.
 
-* compilation flags: ``static``
-* template: ``new(Parameters,Instance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``new(+list(nonvar),-reference)`` - ``one``
+| **Template:**
+|    ``new(Parameters,Instance)``
+| **Mode and number of proofs:**
+|    ``new(+list(nonvar),-reference)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Creates a new instance using the specified parameter values.
 
 Creates a new instance using default parameter values.
 
-* compilation flags: ``static``
-* template: ``new(Instance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``new(-reference)`` - ``one``
+| **Template:**
+|    ``new(Instance)``
+| **Mode and number of proofs:**
+|    ``new(-reference)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Creates a new instance using default parameter values.
 
 Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
 
-* compilation flags: ``static``
-* template: ``invoke(Method)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``invoke(@nonvar)`` - ``one``
+| **Template:**
+|    ``invoke(Method)``
+| **Mode and number of proofs:**
+|    ``invoke(@nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Invokes a method. This is a more efficient compared with relying on the forward/
 
 Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.
 
-* compilation flags: ``static``
-* template: ``invoke(Functor,Arguments)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``invoke(@nonvar,@list)`` - ``one``
+| **Template:**
+|    ``invoke(Functor,Arguments)``
+| **Mode and number of proofs:**
+|    ``invoke(@nonvar,@list)`` - ``one``
 
 
 Protected interface

@@ -8,14 +8,15 @@
 
 Computes Halstead complexity numbers for an entity using a Stroud of 18.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2018/6/8
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2018/6/8
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`halstead_metric(18) <halstead_metric/1>`
+
+| **Extends:**
+|    ``public`` :ref:`halstead_metric(18) <halstead_metric/1>`
 
 Public interface
 ----------------

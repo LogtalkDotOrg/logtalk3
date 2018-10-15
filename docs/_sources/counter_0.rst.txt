@@ -8,10 +8,12 @@
 
 Counter implemented with asserta/retract.
 
-* author: Victor Lagerkvist
-* version: 1.0
-* date: 2010/6/13
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Victor Lagerkvist
+| **Version:** 1.0
+| **Date:** 2010/6/13
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 Increment the counter by 1.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``increment`` - ``one``
+| **Mode and number of proofs:**
+|    ``increment`` - ``one``
 
 
 .. raw:: html
@@ -49,10 +51,10 @@ Increment the counter by 1.
 
 Increments the counter by the specified amount.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``increase(+number)`` - ``one``
+| **Mode and number of proofs:**
+|    ``increase(+number)`` - ``one``
 
 * argname: [I]
 
@@ -68,10 +70,10 @@ Increments the counter by the specified amount.
 
 Sets the counter to the specified amount.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``set(+number)`` - ``one``
+| **Mode and number of proofs:**
+|    ``set(+number)`` - ``one``
 
 * argname: [N]
 
@@ -87,10 +89,10 @@ Sets the counter to the specified amount.
 
 Gets the current value of the counter.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``value(?number)`` - ``one``
+| **Mode and number of proofs:**
+|    ``value(?number)`` - ``one``
 
 * argname: [N]
 
@@ -106,10 +108,10 @@ Gets the current value of the counter.
 
 Resets the counter to zero.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``reset`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
 
 
 Protected interface
@@ -130,7 +132,8 @@ Private predicates
 ``c/1``
 ^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 Operators
 ---------

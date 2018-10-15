@@ -8,14 +8,15 @@
 
 Helper object to apply all loaded code metrics.
 
-* author: Ebrahim Azarisooreh and Paulo Moura
-* version: 0.1
-* date: 2017/12/31
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Ebrahim Azarisooreh and Paulo Moura
+| **Version:** 0.1
+| **Date:** 2017/12/31
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`code_metric <code_metric/0>`
+
+| **Imports:**
+|    ``public`` :ref:`code_metric <code_metric/0>`
 
 Public interface
 ----------------

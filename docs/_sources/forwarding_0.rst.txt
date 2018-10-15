@@ -8,10 +8,12 @@
 
 Message forwarding protocol.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2013/5/4
-* compilation flags: ``static, built_in``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2013/5/4
+
+| **Compilation flags:** ``static, built_in``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 User-defined message forwarding handler, automatically called (if defined) by the runtime for any message that the receiving object does not understand.
 
-* compilation flags: ``static``
-* template: ``forward(Message)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``forward(@callable)`` - ``zero_or_more``
+| **Template:**
+|    ``forward(Message)``
+| **Mode and number of proofs:**
+|    ``forward(@callable)`` - ``zero_or_more``
 
 
 Protected interface

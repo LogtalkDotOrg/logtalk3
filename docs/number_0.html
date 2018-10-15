@@ -289,66 +289,92 @@
 <div class="section" id="number">
 <h1><code class="docutils literal notranslate"><span class="pre">number</span></code><a class="headerlink" href="#number" title="Permalink to this headline">¶</a></h1>
 <p>Number data type predicates.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.5</li>
-<li>date: 2018/7/14</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-<li>extends:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="atomic_0.html#atomic-0"><span class="std std-ref">atomic</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.5</div>
+<div class="line"><strong>Date:</strong> 2018/7/14</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="atomic_0.html#atomic-0"><span class="std std-ref">atomic</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="approximately_equal/3"> </div><div class="section" id="approximately-equal-3">
 <span id="number-0-approximately-equal-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code><a class="headerlink" href="#approximately-equal-3" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,Number2,Epsilon)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">approximately_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,Number2,Epsilon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="essentially_equal/3"> </div></div>
 <div class="section" id="essentially-equal-3">
 <span id="number-0-essentially-equal-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code><a class="headerlink" href="#essentially-equal-3" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,Number2,Epsilon)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">essentially_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,Number2,Epsilon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">essentially_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="tolerance_equal/4"> </div></div>
 <div class="section" id="tolerance-equal-4">
 <span id="number-0-tolerance-equal-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code><a class="headerlink" href="#tolerance-equal-4" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =&lt; max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). No type-checking.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">tolerance_equal(+number,+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tolerance_equal(+number,+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="=~= / 2"> </div></div>
 <div class="section" id="number-0-2">
 <span id="index-4"></span><span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">=~=</span> <span class="pre">/</span> <span class="pre">2</span></code><a class="headerlink" href="#number-0-2" title="Permalink to this headline">¶</a></h3>
 <p>Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">=~=(Float1,Float2)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">=~=(+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">=~=(+list(number),+list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(Float1,Float2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(+list(number),+list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

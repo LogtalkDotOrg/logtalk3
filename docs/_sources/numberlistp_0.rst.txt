@@ -8,10 +8,12 @@
 
 List of numbers protocol.
 
-* author: Paulo Moura
-* version: 1.5
-* date: 2017/10/7
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.5
+| **Date:** 2017/10/7
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Calculates the product of all list numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``product(List,Product)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``product(+list(number),-number)`` - ``zero_or_one``
+| **Template:**
+|    ``product(List,Product)``
+| **Mode and number of proofs:**
+|    ``product(+list(number),-number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Calculates the product of all list numbers. Fails if the list is empty.
 
 Calculates the sum of all list numbers. Returns the integer zero if the list is empty.
 
-* compilation flags: ``static``
-* template: ``sum(List,Sum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sum(+list(number),-number)`` - ``one``
+| **Template:**
+|    ``sum(List,Sum)``
+| **Mode and number of proofs:**
+|    ``sum(+list(number),-number)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Calculates the sum of all list numbers. Returns the integer zero if the list is 
 
 Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``average(List,Average)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``average(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``average(List,Average)``
+| **Mode and number of proofs:**
+|    ``average(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the
 
 Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``euclidean_norm(List,Norm)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``euclidean_norm(+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``euclidean_norm(List,Norm)``
+| **Mode and number of proofs:**
+|    ``euclidean_norm(+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,14 +113,14 @@ Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.
 
 Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``chebyshev_norm(List,Norm)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``chebyshev_norm(List,Norm)``
+| **Mode and number of proofs:**
+|    ``chebyshev_norm(+list(integer),-integer)`` - ``zero_or_one``
 
-  * ``chebyshev_norm(+list(integer),-integer)`` - ``zero_or_one``
-
-  * ``chebyshev_norm(+list(float),-float)`` - ``zero_or_one``
+|    ``chebyshev_norm(+list(float),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -133,14 +135,14 @@ Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
 
 Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``manhattan_norm(List,Norm)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``manhattan_norm(List,Norm)``
+| **Mode and number of proofs:**
+|    ``manhattan_norm(+list(integer),-integer)`` - ``zero_or_one``
 
-  * ``manhattan_norm(+list(integer),-integer)`` - ``zero_or_one``
-
-  * ``manhattan_norm(+list(float),-float)`` - ``zero_or_one``
+|    ``manhattan_norm(+list(float),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -155,12 +157,12 @@ Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
 
 Calculates the Euclidean distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-* compilation flags: ``static``
-* template: ``euclidean_distance(List1,List2,Distance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``euclidean_distance(+list(number),+list(number),-float)`` - ``zero_or_one``
+| **Template:**
+|    ``euclidean_distance(List1,List2,Distance)``
+| **Mode and number of proofs:**
+|    ``euclidean_distance(+list(number),+list(number),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -175,14 +177,14 @@ Calculates the Euclidean distance between two lists of numbers. Fails if the two
 
 Calculates the Chebyshev distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-* compilation flags: ``static``
-* template: ``chebyshev_distance(List1,List2,Distance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``chebyshev_distance(List1,List2,Distance)``
+| **Mode and number of proofs:**
+|    ``chebyshev_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
 
-  * ``chebyshev_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
-
-  * ``chebyshev_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
+|    ``chebyshev_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -197,14 +199,14 @@ Calculates the Chebyshev distance between two lists of numbers. Fails if the two
 
 Calculates the Manhattan distance between two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-* compilation flags: ``static``
-* template: ``manhattan_distance(List1,List2,Distance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``manhattan_distance(List1,List2,Distance)``
+| **Mode and number of proofs:**
+|    ``manhattan_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
 
-  * ``manhattan_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
-
-  * ``manhattan_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
+|    ``manhattan_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -219,14 +221,14 @@ Calculates the Manhattan distance between two lists of numbers. Fails if the two
 
 Calculates the scalar product of two lists of numbers. Fails if the two lists are empty or not of the same length.
 
-* compilation flags: ``static``
-* template: ``scalar_product(List1,List2,Product)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``scalar_product(List1,List2,Product)``
+| **Mode and number of proofs:**
+|    ``scalar_product(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
 
-  * ``scalar_product(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
-
-  * ``scalar_product(+list(float),+list(float),-float)`` - ``zero_or_one``
+|    ``scalar_product(+list(float),+list(float),-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -241,12 +243,12 @@ Calculates the scalar product of two lists of numbers. Fails if the two lists ar
 
 Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-* compilation flags: ``static``
-* template: ``normalize_range(List,NormalizedList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``normalize_range(+list(number),-list(float))`` - ``one``
+| **Template:**
+|    ``normalize_range(List,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``normalize_range(+list(number),-list(float))`` - ``one``
 
 
 .. raw:: html
@@ -261,12 +263,12 @@ Normalizes a list of numbers into the 0.0-1.0 range. Caller must handle arithmet
 
 Normalizes a list of numbers into the given range. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-* compilation flags: ``static``
-* template: ``normalize_range(List,Minimum,Maximum,NormalizedList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``normalize_range(+list(number),+number,+number,-list(float))`` - ``one``
+| **Template:**
+|    ``normalize_range(List,Minimum,Maximum,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``normalize_range(+list(number),+number,+number,-list(float))`` - ``one``
 
 
 .. raw:: html
@@ -281,12 +283,12 @@ Normalizes a list of numbers into the given range. Caller must handle arithmetic
 
 Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-* compilation flags: ``static``
-* template: ``normalize_unit(List,NormalizedList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``normalize_unit(+list(number),-list(float))`` - ``one``
+| **Template:**
+|    ``normalize_unit(List,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``normalize_unit(+list(number),-list(float))`` - ``one``
 
 
 .. raw:: html
@@ -301,12 +303,12 @@ Normalizes a list of numbers returning its unit vector (i.e. a list with Euclide
 
 Normalizes a list of numbers such that the sum of all numbers is equal to one. Caller must handle arithmetic exceptions if the input list if not normalizable.
 
-* compilation flags: ``static``
-* template: ``normalize_scalar(List,NormalizedList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``normalize_scalar(+list(number),-list(float))`` - ``one``
+| **Template:**
+|    ``normalize_scalar(List,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``normalize_scalar(+list(number),-list(float))`` - ``one``
 
 
 .. raw:: html
@@ -321,14 +323,14 @@ Normalizes a list of numbers such that the sum of all numbers is equal to one. C
 
 Rescales all numbers in a list by the given factor.
 
-* compilation flags: ``static``
-* template: ``rescale(List,Factor,RescaledList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``rescale(List,Factor,RescaledList)``
+| **Mode and number of proofs:**
+|    ``rescale(+list(integer),+integer,-list(integer))`` - ``one``
 
-  * ``rescale(+list(integer),+integer,-list(integer))`` - ``one``
-
-  * ``rescale(+list(number),+float,-list(float))`` - ``one``
+|    ``rescale(+list(number),+float,-list(float))`` - ``one``
 
 
 Protected interface

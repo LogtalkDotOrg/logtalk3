@@ -8,10 +8,12 @@
 
 Character protocol.
 
-* author: Paulo Moura
-* version: 1.2
-* date: 2011/2/19
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.2
+| **Date:** 2011/2/19
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 True if the argument is an ASCII character.
 
-* compilation flags: ``static``
-* template: ``is_ascii(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_ascii(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_ascii(Char)``
+| **Mode and number of proofs:**
+|    ``is_ascii(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ True if the argument is an ASCII character.
 
 True if the argument is an alphanumeric character.
 
-* compilation flags: ``static``
-* template: ``is_alphanumeric(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_alphanumeric(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_alphanumeric(Char)``
+| **Mode and number of proofs:**
+|    ``is_alphanumeric(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ True if the argument is an alphanumeric character.
 
 True if the argument is a letter or an underscore.
 
-* compilation flags: ``static``
-* template: ``is_alpha(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_alpha(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_alpha(Char)``
+| **Mode and number of proofs:**
+|    ``is_alpha(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ True if the argument is a letter or an underscore.
 
 True if the argument is a letter.
 
-* compilation flags: ``static``
-* template: ``is_letter(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_letter(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_letter(Char)``
+| **Mode and number of proofs:**
+|    ``is_letter(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ True if the argument is a letter.
 
 True if the argument is a binary digit.
 
-* compilation flags: ``static``
-* template: ``is_bin_digit(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_bin_digit(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_bin_digit(Char)``
+| **Mode and number of proofs:**
+|    ``is_bin_digit(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ True if the argument is a binary digit.
 
 True if the argument is an octal digit.
 
-* compilation flags: ``static``
-* template: ``is_octal_digit(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_octal_digit(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_octal_digit(Char)``
+| **Mode and number of proofs:**
+|    ``is_octal_digit(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ True if the argument is an octal digit.
 
 True if the argument is a decimal digit.
 
-* compilation flags: ``static``
-* template: ``is_dec_digit(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_dec_digit(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_dec_digit(Char)``
+| **Mode and number of proofs:**
+|    ``is_dec_digit(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ True if the argument is a decimal digit.
 
 True if the argument is an hexadecimal digit.
 
-* compilation flags: ``static``
-* template: ``is_hex_digit(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_hex_digit(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_hex_digit(Char)``
+| **Mode and number of proofs:**
+|    ``is_hex_digit(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ True if the argument is an hexadecimal digit.
 
 True if the argument is a lower case letter.
 
-* compilation flags: ``static``
-* template: ``is_lower_case(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_lower_case(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_lower_case(Char)``
+| **Mode and number of proofs:**
+|    ``is_lower_case(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ True if the argument is a lower case letter.
 
 True if the argument is a upper case letter.
 
-* compilation flags: ``static``
-* template: ``is_upper_case(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_upper_case(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_upper_case(Char)``
+| **Mode and number of proofs:**
+|    ``is_upper_case(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ True if the argument is a upper case letter.
 
 True if the argument is a vowel.
 
-* compilation flags: ``static``
-* template: ``is_vowel(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_vowel(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_vowel(Char)``
+| **Mode and number of proofs:**
+|    ``is_vowel(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ True if the argument is a vowel.
 
 True if the argument is a white space character (a space or a tab) inside a line of characters.
 
-* compilation flags: ``static``
-* template: ``is_white_space(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_white_space(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_white_space(Char)``
+| **Mode and number of proofs:**
+|    ``is_white_space(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ True if the argument is a white space character (a space or a tab) inside a line
 
 True if the argument is a layout character.
 
-* compilation flags: ``static``
-* template: ``is_layout(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_layout(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_layout(Char)``
+| **Mode and number of proofs:**
+|    ``is_layout(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -291,12 +293,12 @@ True if the argument is a layout character.
 
 True if the argument is a quote character.
 
-* compilation flags: ``static``
-* template: ``is_quote(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_quote(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_quote(Char)``
+| **Mode and number of proofs:**
+|    ``is_quote(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -311,12 +313,12 @@ True if the argument is a quote character.
 
 True if the argument is a sentence punctation character.
 
-* compilation flags: ``static``
-* template: ``is_punctation(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_punctation(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_punctation(Char)``
+| **Mode and number of proofs:**
+|    ``is_punctation(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -331,12 +333,12 @@ True if the argument is a sentence punctation character.
 
 True if the argument is a character that ends a sentence.
 
-* compilation flags: ``static``
-* template: ``is_period(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_period(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_period(Char)``
+| **Mode and number of proofs:**
+|    ``is_period(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -351,12 +353,12 @@ True if the argument is a character that ends a sentence.
 
 True if the argument is an ASCII control character.
 
-* compilation flags: ``static``
-* template: ``is_control(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_control(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_control(Char)``
+| **Mode and number of proofs:**
+|    ``is_control(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -371,12 +373,12 @@ True if the argument is an ASCII control character.
 
 True if the argument is the ASCII newline character.
 
-* compilation flags: ``static``
-* template: ``is_newline(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_newline(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_newline(Char)``
+| **Mode and number of proofs:**
+|    ``is_newline(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -391,12 +393,12 @@ True if the argument is the ASCII newline character.
 
 True if the argument is the ASCII end-of-line character (either a carriage return or a line feed).
 
-* compilation flags: ``static``
-* template: ``is_end_of_line(Char)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_end_of_line(+char)`` - ``zero_or_one``
+| **Template:**
+|    ``is_end_of_line(Char)``
+| **Mode and number of proofs:**
+|    ``is_end_of_line(+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -411,16 +413,16 @@ True if the argument is the ASCII end-of-line character (either a carriage retur
 
 Recognises and converts between open and close parenthesis.
 
-* compilation flags: ``static``
-* template: ``parenthesis(Char1,Char2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``parenthesis(Char1,Char2)``
+| **Mode and number of proofs:**
+|    ``parenthesis(?char,?char)`` - ``zero_or_more``
 
-  * ``parenthesis(?char,?char)`` - ``zero_or_more``
+|    ``parenthesis(+char,?char)`` - ``zero_or_one``
 
-  * ``parenthesis(+char,?char)`` - ``zero_or_one``
-
-  * ``parenthesis(?char,+char)`` - ``zero_or_one``
+|    ``parenthesis(?char,+char)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -435,16 +437,16 @@ Recognises and converts between open and close parenthesis.
 
 Recognises and converts between lower and upper case letters.
 
-* compilation flags: ``static``
-* template: ``lower_upper(Char1,Char2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``lower_upper(Char1,Char2)``
+| **Mode and number of proofs:**
+|    ``lower_upper(?char,?char)`` - ``zero_or_more``
 
-  * ``lower_upper(?char,?char)`` - ``zero_or_more``
+|    ``lower_upper(+char,?char)`` - ``zero_or_one``
 
-  * ``lower_upper(+char,?char)`` - ``zero_or_one``
-
-  * ``lower_upper(?char,+char)`` - ``zero_or_one``
+|    ``lower_upper(?char,+char)`` - ``zero_or_one``
 
 
 Protected interface

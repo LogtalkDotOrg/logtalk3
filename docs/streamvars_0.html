@@ -289,66 +289,92 @@
 <div class="section" id="streamvars">
 <h1><code class="docutils literal notranslate"><span class="pre">streamvars</span></code><a class="headerlink" href="#streamvars" title="Permalink to this headline">¶</a></h1>
 <p>Stream variables (supporting logical, backtracable, adding and retrieving of terms).</p>
-<ul class="simple">
-<li>author: Nobukuni Kino and Paulo Moura</li>
-<li>version: 1.2</li>
-<li>date: 2018/7/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Nobukuni Kino and Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.2</div>
+<div class="line"><strong>Date:</strong> 2018/7/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="new/1"> </div><div class="section" id="new-1">
 <span id="streamvars-0-new-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">new/1</span></code><a class="headerlink" href="#new-1" title="Permalink to this headline">¶</a></h3>
 <p>Makes Variable a stream variable. Initial state will be empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">new(Variable)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">new(-streamvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Variable is not a variable: <code class="docutils literal notranslate"><span class="pre">type_error(variable,Variable)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(Variable)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(-streamvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Variable is not a variable: <code class="docutils literal notranslate"><span class="pre">type_error(variable,Variable)</span></code></div>
+</div>
 <div id="new/2"> </div></div>
 <div class="section" id="new-2">
 <span id="streamvars-0-new-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">new/2</span></code><a class="headerlink" href="#new-2" title="Permalink to this headline">¶</a></h3>
 <p>Makes Variable a stream variable and sets its initial state to Value.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">new(Variable,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">new(-streamvar,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Variable is not a variable: <code class="docutils literal notranslate"><span class="pre">type_error(variable,Variable)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(Variable,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(-streamvar,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Variable is not a variable: <code class="docutils literal notranslate"><span class="pre">type_error(variable,Variable)</span></code></div>
+</div>
 <div id="(<=)/2"> </div></div>
 <div class="section" id="streamvars-0-2">
 <span id="index-3"></span><span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">(&lt;=)/2</span></code><a class="headerlink" href="#streamvars-0-2" title="Permalink to this headline">¶</a></h3>
 <p>Sets the state of the stream variable Variable to Value (initializing the variable if needed).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Variable&lt;=Value</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">(?streamvar)&lt;=(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Variable&lt;=Value</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">(?streamvar)&lt;=(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="(=>)/2"> </div></div>
 <div class="section" id="id2">
 <span id="index-4"></span><span id="id3"></span><h3><code class="docutils literal notranslate"><span class="pre">(=&gt;)/2</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Unifies Value with the current state of the stream variable Variable.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Variable=&gt;Value</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">(+streamvar)=&gt;(?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Variable=&gt;Value</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">(+streamvar)=&gt;(?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

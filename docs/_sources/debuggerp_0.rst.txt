@@ -8,10 +8,12 @@
 
 Debugger protocol.
 
-* author: Paulo Moura
-* version: 2.1
-* date: 2016/10/23
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 2.1
+| **Date:** 2016/10/23
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 Resets all debugging settings, including spy points and leashed ports, and turns off debugging.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``reset`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
 
 
 .. raw:: html
@@ -49,10 +51,10 @@ Resets all debugging settings, including spy points and leashed ports, and turns
 
 Starts debugging for all defined spy points.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``debug`` - ``one``
+| **Mode and number of proofs:**
+|    ``debug`` - ``one``
 
 
 .. raw:: html
@@ -67,10 +69,10 @@ Starts debugging for all defined spy points.
 
 Stops debugging for all defined spy points.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``nodebug`` - ``one``
+| **Mode and number of proofs:**
+|    ``nodebug`` - ``one``
 
 
 .. raw:: html
@@ -85,10 +87,10 @@ Stops debugging for all defined spy points.
 
 Reports current debugging settings, including spy points.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``debugging`` - ``one``
+| **Mode and number of proofs:**
+|    ``debugging`` - ``one``
 
 
 .. raw:: html
@@ -103,12 +105,12 @@ Reports current debugging settings, including spy points.
 
 Enumerates, by backtracking, all entities compiled in debug mode.
 
-* compilation flags: ``static``
-* template: ``debugging(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``debugging(?entity_identifier)`` - ``zero_or_more``
+| **Template:**
+|    ``debugging(Entity)``
+| **Mode and number of proofs:**
+|    ``debugging(?entity_identifier)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -123,10 +125,10 @@ Enumerates, by backtracking, all entities compiled in debug mode.
 
 Starts tracing all calls compiled in debug mode.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``trace`` - ``one``
+| **Mode and number of proofs:**
+|    ``trace`` - ``one``
 
 
 .. raw:: html
@@ -141,10 +143,10 @@ Starts tracing all calls compiled in debug mode.
 
 Stops tracing of calls compiled in debug mode.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``notrace`` - ``one``
+| **Mode and number of proofs:**
+|    ``notrace`` - ``one``
 
 
 .. raw:: html
@@ -159,14 +161,14 @@ Stops tracing of calls compiled in debug mode.
 
 Sets a line number spy point or a predicate spy point or a list of spy points.
 
-* compilation flags: ``static``
-* template: ``spy(SpyPoint)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``spy(SpyPoint)``
+| **Mode and number of proofs:**
+|    ``spy(@spy_point)`` - ``one``
 
-  * ``spy(@spy_point)`` - ``one``
-
-  * ``spy(@list(spy_point))`` - ``one``
+|    ``spy(@list(spy_point))`` - ``one``
 
 
 .. raw:: html
@@ -181,12 +183,12 @@ Sets a line number spy point or a predicate spy point or a list of spy points.
 
 Enumerates, by backtracking, all defined line number and predicate spy points.
 
-* compilation flags: ``static``
-* template: ``spying(SpyPoint)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``spying(?spy_point)`` - ``zero_or_more``
+| **Template:**
+|    ``spying(SpyPoint)``
+| **Mode and number of proofs:**
+|    ``spying(?spy_point)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -201,12 +203,12 @@ Enumerates, by backtracking, all defined line number and predicate spy points.
 
 Sets a context spy point.
 
-* compilation flags: ``static``
-* template: ``spy(Sender,This,Self,Goal)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``spy(@term,@term,@term,@term)`` - ``one``
+| **Template:**
+|    ``spy(Sender,This,Self,Goal)``
+| **Mode and number of proofs:**
+|    ``spy(@term,@term,@term,@term)`` - ``one``
 
 
 .. raw:: html
@@ -221,12 +223,12 @@ Sets a context spy point.
 
 Enumerates, by backtracking, all defined context spy points.
 
-* compilation flags: ``static``
-* template: ``spying(Sender,This,Self,Goal)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``spying(?term,?term,?term,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``spying(Sender,This,Self,Goal)``
+| **Mode and number of proofs:**
+|    ``spying(?term,?term,?term,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -241,16 +243,16 @@ Enumerates, by backtracking, all defined context spy points.
 
 Removes all matching line number spy points and predicate spy points.
 
-* compilation flags: ``static``
-* template: ``nospy(SpyPoint)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``nospy(SpyPoint)``
+| **Mode and number of proofs:**
+|    ``nospy(@var)`` - ``one``
 
-  * ``nospy(@var)`` - ``one``
+|    ``nospy(@spy_point)`` - ``one``
 
-  * ``nospy(@spy_point)`` - ``one``
-
-  * ``nospy(@list(spy_point))`` - ``one``
+|    ``nospy(@list(spy_point))`` - ``one``
 
 
 .. raw:: html
@@ -265,12 +267,12 @@ Removes all matching line number spy points and predicate spy points.
 
 Removes all matching context spy points.
 
-* compilation flags: ``static``
-* template: ``nospy(Sender,This,Self,Goal)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nospy(@term,@term,@term,@term)`` - ``one``
+| **Template:**
+|    ``nospy(Sender,This,Self,Goal)``
+| **Mode and number of proofs:**
+|    ``nospy(@term,@term,@term,@term)`` - ``one``
 
 
 .. raw:: html
@@ -285,10 +287,10 @@ Removes all matching context spy points.
 
 Removes all line number, predicate, and context spy points.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``nospyall`` - ``one``
+| **Mode and number of proofs:**
+|    ``nospyall`` - ``one``
 
 
 .. raw:: html
@@ -303,14 +305,14 @@ Removes all line number, predicate, and context spy points.
 
 Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
 
-* compilation flags: ``static``
-* template: ``leash(Ports)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``leash(Ports)``
+| **Mode and number of proofs:**
+|    ``leash(+atom)`` - ``one``
 
-  * ``leash(+atom)`` - ``one``
-
-  * ``leash(+list(atom))`` - ``one``
+|    ``leash(+list(atom))`` - ``one``
 
 
 .. raw:: html
@@ -325,12 +327,12 @@ Sets the debugger leash ports using an abbreviation (none, loose, half, tight, o
 
 Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).
 
-* compilation flags: ``static``
-* template: ``leashing(Port)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leashing(?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``leashing(Port)``
+| **Mode and number of proofs:**
+|    ``leashing(?atom)`` - ``zero_or_more``
 
 
 Protected interface

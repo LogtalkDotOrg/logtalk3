@@ -8,14 +8,15 @@
 
 Predicates for generating library dependency diagrams in DOT format.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2016/2/29
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2016/2/29
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`library_dependency_diagram(dot) <library_dependency_diagram/1>`
+
+| **Extends:**
+|    ``public`` :ref:`library_dependency_diagram(dot) <library_dependency_diagram/1>`
 
 Public interface
 ----------------

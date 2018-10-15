@@ -8,10 +8,12 @@
 
 Documenting tool protocol.
 
-* author: Paulo Moura
-* version: 3.2
-* date: 2017/11/4
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 3.2
+| **Date:** 2017/11/4
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,19 +33,17 @@ Public interface
 
 Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.
 
-* compilation flags: ``static``
-* template: ``rlibrary(Library,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``rlibrary(Library,Options)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom,+list)`` - ``one``
 
-  * ``rlibrary(+atom,+list)`` - ``one``
-
-* examples:
-
-  * Generate XML documenting files for all tool entities for later conversion to Markdown files
-
-    * ``rlibrary(tools,[xslfile('lgtmd.xsl')])``
-    * ``yes``
+| **Examples:**
+|    Generate XML documenting files for all tool entities for later conversion to Markdown files
+|      ``rlibrary(tools,[xslfile('lgtmd.xsl')])``
+|      ``yes``
 
 
 .. raw:: html
@@ -58,19 +58,17 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 
 Creates XML documenting files for all entities in a library and its sub-libraries using default options.
 
-* compilation flags: ``static``
-* template: ``rlibrary(Library)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``rlibrary(Library)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom)`` - ``one``
 
-  * ``rlibrary(+atom)`` - ``one``
-
-* examples:
-
-  * Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the "lgt2xml" script)
-
-    * ``rlibrary(tools)``
-    * ``yes``
+| **Examples:**
+|    Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the "lgt2xml" script)
+|      ``rlibrary(tools)``
+|      ``yes``
 
 
 .. raw:: html
@@ -85,19 +83,17 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 
 Creates XML documenting files for all entities in a library using the specified options.
 
-* compilation flags: ``static``
-* template: ``library(Library,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``library(Library,Options)``
+| **Mode and number of proofs:**
+|    ``library(+atom,+list)`` - ``one``
 
-  * ``library(+atom,+list)`` - ``one``
-
-* examples:
-
-  * Generate XML documenting files for all library entities for later conversion to PDF A4 files
-
-    * ``library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
-    * ``yes``
+| **Examples:**
+|    Generate XML documenting files for all library entities for later conversion to PDF A4 files
+|      ``library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
+|      ``yes``
 
 
 .. raw:: html
@@ -112,12 +108,12 @@ Creates XML documenting files for all entities in a library using the specified 
 
 Creates XML documenting files for all entities in a library using default options.
 
-* compilation flags: ``static``
-* template: ``library(Library)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``library(+atom)`` - ``one``
+| **Template:**
+|    ``library(Library)``
+| **Mode and number of proofs:**
+|    ``library(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -132,19 +128,17 @@ Creates XML documenting files for all entities in a library using default option
 
 Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.
 
-* compilation flags: ``static``
-* template: ``rdirectory(Directory,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``rdirectory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+list)`` - ``one``
 
-  * ``rdirectory(+atom,+list)`` - ``one``
-
-* examples:
-
-  * Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files
-
-    * ``rdirectory('./tools',[xslfile('lgtmd.xsl')])``
-    * ``yes``
+| **Examples:**
+|    Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files
+|      ``rdirectory('./tools',[xslfile('lgtmd.xsl')])``
+|      ``yes``
 
 
 .. raw:: html
@@ -159,19 +153,17 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 
 Creates XML documenting files for all entities in a directory and its sub-directories using default options.
 
-* compilation flags: ``static``
-* template: ``rdirectory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
 
-  * ``rdirectory(+atom)`` - ``one``
-
-* examples:
-
-  * Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the "lgt2xml" script)
-
-    * ``rdirectory('./tools')``
-    * ``yes``
+| **Examples:**
+|    Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the "lgt2xml" script)
+|      ``rdirectory('./tools')``
+|      ``yes``
 
 
 .. raw:: html
@@ -186,19 +178,17 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 
 Creates XML documenting files for all entities in a directory using the specified options.
 
-* compilation flags: ``static``
-* template: ``directory(Directory,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``directory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``directory(+atom,+list)`` - ``one``
 
-  * ``directory(+atom,+list)`` - ``one``
-
-* examples:
-
-  * Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files
-
-    * ``directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
-    * ``yes``
+| **Examples:**
+|    Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files
+|      ``directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])``
+|      ``yes``
 
 
 .. raw:: html
@@ -213,12 +203,12 @@ Creates XML documenting files for all entities in a directory using the specifie
 
 Creates XML documenting files for all entities in a directory using default options.
 
-* compilation flags: ``static``
-* template: ``directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory(+atom)`` - ``one``
+| **Template:**
+|    ``directory(Directory)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -233,12 +223,12 @@ Creates XML documenting files for all entities in a directory using default opti
 
 Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.
 
-* compilation flags: ``static``
-* template: ``file(File,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file(+atom,+list)`` - ``one``
+| **Template:**
+|    ``file(File,Options)``
+| **Mode and number of proofs:**
+|    ``file(+atom,+list)`` - ``one``
 
 
 .. raw:: html
@@ -253,12 +243,12 @@ Creates XML documenting files for all entities in a loaded source file using the
 
 Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.
 
-* compilation flags: ``static``
-* template: ``file(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file(+atom)`` - ``one``
+| **Template:**
+|    ``file(File)``
+| **Mode and number of proofs:**
+|    ``file(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -273,12 +263,12 @@ Creates XML documenting files for all entities in a loaded source file using def
 
 Creates XML documenting files for all loaded entities using the specified options.
 
-* compilation flags: ``static``
-* template: ``all(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``all(+list)`` - ``one``
+| **Template:**
+|    ``all(File)``
+| **Mode and number of proofs:**
+|    ``all(+list)`` - ``one``
 
 
 .. raw:: html
@@ -293,10 +283,10 @@ Creates XML documenting files for all loaded entities using the specified option
 
 Creates XML documenting files for all loaded entities using default options.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``all`` - ``one``
+| **Mode and number of proofs:**
+|    ``all`` - ``one``
 
 
 .. raw:: html
@@ -311,12 +301,12 @@ Creates XML documenting files for all loaded entities using default options.
 
 Returns, by backtracking, all options and their values.
 
-* compilation flags: ``static``
-* template: ``option(Option,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``option(?atom,?nonvar)`` - ``zero_or_more``
+| **Template:**
+|    ``option(Option,Value)``
+| **Mode and number of proofs:**
+|    ``option(?atom,?nonvar)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -331,12 +321,12 @@ Returns, by backtracking, all options and their values.
 
 Sets an option value.
 
-* compilation flags: ``static``
-* template: ``set_option(Option,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_option(+atom,+nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``set_option(Option,Value)``
+| **Mode and number of proofs:**
+|    ``set_option(+atom,+nonvar)`` - ``zero_or_one``
 
 
 Protected interface

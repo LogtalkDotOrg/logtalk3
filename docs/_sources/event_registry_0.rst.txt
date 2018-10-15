@@ -8,14 +8,15 @@
 
 Before and after events registry predicates.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2009/10/8
-* compilation flags: ``static, context_switching_calls, events``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2009/10/8
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls, events``
 
-  * ``public`` :ref:`event_registryp <event_registryp/0>`
+
+| **Implements:**
+|    ``public`` :ref:`event_registryp <event_registryp/0>`
 
 Public interface
 ----------------

@@ -199,38 +199,50 @@
 <div class="section" id="monitoring">
 <h1><code class="docutils literal notranslate"><span class="pre">monitoring</span></code><a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h1>
 <p>Event handlers protocol. The handlers are automatically by the runtime called for messages sent using the ::/2 control construct from within objects compiled with the “events” flag set to “allow”.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.1</li>
-<li>date: 2018/10/14</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">built_in</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2018/10/14</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">built_in</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="before/3"> </div><div class="section" id="before-3">
 <span id="monitoring-0-before-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">before/3</span></code><a class="headerlink" href="#before-3" title="Permalink to this headline">¶</a></h3>
 <p>Event handler for “before” events. A “before” event handler may prevent a method from being looked up or called by failing.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">before(Object,Message,Sender)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">before(?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">before(Object,Message,Sender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">before(?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="after/3"> </div></div>
 <div class="section" id="after-3">
 <span id="monitoring-0-after-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">after/3</span></code><a class="headerlink" href="#after-3" title="Permalink to this headline">¶</a></h3>
 <p>Event handler for “after” events. An “after” event handler may prevent a method from succeeding by failing.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">after(Object,Message,Sender)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">after(?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">after(Object,Message,Sender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">after(?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

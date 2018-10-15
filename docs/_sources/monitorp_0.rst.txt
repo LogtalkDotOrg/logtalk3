@@ -8,10 +8,12 @@
 
 Monitor protocol.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2000/7/24
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2000/7/24
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 True if monitor is currently active.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``monitor_activated`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``monitor_activated`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -49,10 +51,10 @@ True if monitor is currently active.
 
 Activates all spy points and start monitoring.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``activate_monitor`` - ``one``
+| **Mode and number of proofs:**
+|    ``activate_monitor`` - ``one``
 
 
 .. raw:: html
@@ -67,10 +69,10 @@ Activates all spy points and start monitoring.
 
 Suspends monitoring, deactivating all spy points.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``suspend_monitor`` - ``one``
+| **Mode and number of proofs:**
+|    ``suspend_monitor`` - ``one``
 
 
 .. raw:: html
@@ -85,10 +87,10 @@ Suspends monitoring, deactivating all spy points.
 
 Resets monitor, deactivating and deleting all spy points.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``reset_monitor`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset_monitor`` - ``one``
 
 
 .. raw:: html
@@ -103,12 +105,12 @@ Resets monitor, deactivating and deleting all spy points.
 
 Current spy point.
 
-* compilation flags: ``static``
-* template: ``spy_point(Event,Object,Message,Sender)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``spy_point(?event,?object,?callable,?object)`` - ``zero_or_more``
+| **Template:**
+|    ``spy_point(Event,Object,Message,Sender)``
+| **Mode and number of proofs:**
+|    ``spy_point(?event,?object,?callable,?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -123,12 +125,12 @@ Current spy point.
 
 Sets a spy point.
 
-* compilation flags: ``static``
-* template: ``set_spy_point(Event,Object,Message,Sender)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_spy_point(?event,?object,?callable,?object)`` - ``one``
+| **Template:**
+|    ``set_spy_point(Event,Object,Message,Sender)``
+| **Mode and number of proofs:**
+|    ``set_spy_point(?event,?object,?callable,?object)`` - ``one``
 
 
 .. raw:: html
@@ -143,12 +145,12 @@ Sets a spy point.
 
 Deletes all matching spy points.
 
-* compilation flags: ``static``
-* template: ``del_spy_points(Event,Object,Message,Sender)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``del_spy_points(@event,@object,@callable,@object)`` - ``one``
+| **Template:**
+|    ``del_spy_points(Event,Object,Message,Sender)``
+| **Mode and number of proofs:**
+|    ``del_spy_points(@event,@object,@callable,@object)`` - ``one``
 
 
 Protected interface

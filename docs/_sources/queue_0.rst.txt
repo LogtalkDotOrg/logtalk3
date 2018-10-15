@@ -8,17 +8,17 @@
 
 Queue predicates implemented using difference lists.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2000/7/24
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2000/7/24
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`queuep <queuep/0>`
-* extends:
 
-  * ``public`` :ref:`compound <compound/0>`
+| **Implements:**
+|    ``public`` :ref:`queuep <queuep/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
 
 Public interface
 ----------------

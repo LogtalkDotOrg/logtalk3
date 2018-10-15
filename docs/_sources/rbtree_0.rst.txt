@@ -8,17 +8,17 @@
 
 Red-Black trees. Uses standard order to compare keys.
 
-* author: Vitor Santos Costa; adapted to Logtalk by Paulo Moura.
-* version: 1.4
-* date: 2018/6/18
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Vitor Santos Costa; adapted to Logtalk by Paulo Moura.
+| **Version:** 1.4
+| **Date:** 2018/6/18
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`dictionaryp <dictionaryp/0>`
-* extends:
 
-  * ``public`` :ref:`compound <compound/0>`
+| **Implements:**
+|    ``public`` :ref:`dictionaryp <dictionaryp/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
 
 Public interface
 ----------------
@@ -35,14 +35,14 @@ Public interface
 
 Applies a closure to the tree pairs identified by a set of keys.
 
-* compilation flags: ``static``
-* template: ``partial_map(Tree,Keys,Closure,NewTree)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``partial_map(*,*,2,*)``
-
-* mode - number of proofs:
-
-  * ``partial_map(+tree,+list,@closure,-tree)`` - ``zero_or_one``
+| **Template:**
+|    ``partial_map(Tree,Keys,Closure,NewTree)``
+| **Meta-predicate template:**
+|    ``partial_map(*,*,2,*)``
+| **Mode and number of proofs:**
+|    ``partial_map(+tree,+list,@closure,-tree)`` - ``zero_or_one``
 
 
 Protected interface

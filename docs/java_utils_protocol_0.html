@@ -289,219 +289,308 @@
 <div class="section" id="java-utils-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">java_utils_protocol</span></code><a class="headerlink" href="#java-utils-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Abstract interface to Java utility predicates.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.5</li>
-<li>date: 2017/10/16</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.5</div>
+<div class="line"><strong>Date:</strong> 2017/10/16</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="value_reference/2"> </div><div class="section" id="value-reference-2">
 <span id="java-utils-protocol-0-value-reference-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">value_reference/2</span></code><a class="headerlink" href="#value-reference-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an opaque term that represents the Java value with the given name.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">value_reference(Value,Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">value_reference(?atom,--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">value_reference(Value,Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">value_reference(?atom,--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
+</div>
+</div>
 <div id="true/1"> </div></div>
 <div class="section" id="true-1">
 <span id="java-utils-protocol-0-true-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">true/1</span></code><a class="headerlink" href="#true-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns an opaque term that represents the Java value true.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">true(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">true(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="false/1"> </div></div>
 <div class="section" id="false-1">
 <span id="java-utils-protocol-0-false-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">false/1</span></code><a class="headerlink" href="#false-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns an opaque term that represents the Java value false.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">false(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">false(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="void/1"> </div></div>
 <div class="section" id="void-1">
 <span id="java-utils-protocol-0-void-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">void/1</span></code><a class="headerlink" href="#void-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns an opaque term that represents the Java value void.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">void(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">void(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">void(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">void(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="null/1"> </div></div>
 <div class="section" id="null-1">
 <span id="java-utils-protocol-0-null-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">null/1</span></code><a class="headerlink" href="#null-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns an opaque term that represents the Java value null.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">null(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">null(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">null(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">null(--ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="is_true/1"> </div></div>
 <div class="section" id="is-true-1">
 <span id="java-utils-protocol-0-is-true-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">is_true/1</span></code><a class="headerlink" href="#is-true-1" title="Permalink to this headline">¶</a></h3>
 <p>True when the argument is the Java value true. Fails if the argument is not instantiated.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">is_true(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_true(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_true(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_true(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="is_false/1"> </div></div>
 <div class="section" id="is-false-1">
 <span id="java-utils-protocol-0-is-false-1"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">is_false/1</span></code><a class="headerlink" href="#is-false-1" title="Permalink to this headline">¶</a></h3>
 <p>True when the argument is the Java value false. Fails if the argument is not instantiated.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">is_false(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_false(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_false(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_false(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="is_void/1"> </div></div>
 <div class="section" id="is-void-1">
 <span id="java-utils-protocol-0-is-void-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">is_void/1</span></code><a class="headerlink" href="#is-void-1" title="Permalink to this headline">¶</a></h3>
 <p>True when the argument is the Java value void. Fails if the argument is not instantiated.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">is_void(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_void(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_void(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_void(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="is_null/1"> </div></div>
 <div class="section" id="is-null-1">
 <span id="java-utils-protocol-0-is-null-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">is_null/1</span></code><a class="headerlink" href="#is-null-1" title="Permalink to this headline">¶</a></h3>
 <p>True when the argument is the Java value null. Fails if the argument is not instantiated.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">is_null(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_null(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_null(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_null(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="is_object/1"> </div></div>
 <div class="section" id="is-object-1">
 <span id="java-utils-protocol-0-is-object-1"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">is_object/1</span></code><a class="headerlink" href="#is-object-1" title="Permalink to this headline">¶</a></h3>
 <p>True when the argument is a reference to a Java object. Fails if the argument is not instantiated.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">is_object(Reference)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_object(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_object(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_object(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="terms_to_array/2"> </div></div>
 <div class="section" id="terms-to-array-2">
 <span id="java-utils-protocol-0-terms-to-array-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">terms_to_array/2</span></code><a class="headerlink" href="#terms-to-array-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts a list of ground Prolog terms to an array (a Java reference).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">terms_to_array(Terms,Array)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">terms_to_array(++list(ground),-array)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">terms_to_array(Terms,Array)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">terms_to_array(++list(ground),-array)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="array_to_terms/3"> </div></div>
 <div class="section" id="array-to-terms-3">
 <span id="java-utils-protocol-0-array-to-terms-3"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">array_to_terms/3</span></code><a class="headerlink" href="#array-to-terms-3" title="Permalink to this headline">¶</a></h3>
 <p>Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">array_to_terms(Array,Terms,Length)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">array_to_terms(+array,-list(ground),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_to_terms(Array,Terms,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_to_terms(+array,-list(ground),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="array_to_terms/2"> </div></div>
 <div class="section" id="array-to-terms-2">
 <span id="java-utils-protocol-0-array-to-terms-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">array_to_terms/2</span></code><a class="headerlink" href="#array-to-terms-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">array_to_terms(Array,Terms)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">array_to_terms(+array,-list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_to_terms(Array,Terms)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_to_terms(+array,-list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="array_list/2"> </div></div>
 <div class="section" id="array-list-2">
 <span id="java-utils-protocol-0-array-list-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">array_list/2</span></code><a class="headerlink" href="#array-list-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">array_list(Array,List)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">array_list(+array,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">array_list(-array,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_list(Array,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_list(+array,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">array_list(-array,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
 <div id="iterator_element/2"> </div></div>
 <div class="section" id="iterator-element-2">
 <span id="java-utils-protocol-0-iterator-element-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">iterator_element/2</span></code><a class="headerlink" href="#iterator-element-2" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all iterator elements.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">iterator_element(Iterator,Element)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">iterator_element(+iterator,-element)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">iterator_element(Iterator,Element)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">iterator_element(+iterator,-element)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="decode_exception/2"> </div></div>
 <div class="section" id="decode-exception-2">
 <span id="java-utils-protocol-0-decode-exception-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">decode_exception/2</span></code><a class="headerlink" href="#decode-exception-2" title="Permalink to this headline">¶</a></h3>
 <p>Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">decode_exception(Exception,Cause)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">decode_exception(+callable,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_exception(Exception,Cause)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_exception(+callable,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="decode_exception/3"> </div></div>
 <div class="section" id="decode-exception-3">
 <span id="java-utils-protocol-0-decode-exception-3"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">decode_exception/3</span></code><a class="headerlink" href="#decode-exception-3" title="Permalink to this headline">¶</a></h3>
 <p>Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">decode_exception(Exception,Cause,StackTrace)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">decode_exception(+callable,-atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_exception(Exception,Cause,StackTrace)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_exception(+callable,-atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

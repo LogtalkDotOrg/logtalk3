@@ -289,45 +289,59 @@
 <div class="section" id="difflist">
 <h1><code class="docutils literal notranslate"><span class="pre">difflist</span></code><a class="headerlink" href="#difflist" title="Permalink to this headline">¶</a></h1>
 <p>Difference list predicates.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.14</li>
-<li>date: 2018/7/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-<li>implements:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="listp_0.html#listp-0"><span class="std std-ref">listp</span></a></li>
-</ul>
-</li>
-<li>extends:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="compound_0.html#compound-0"><span class="std std-ref">compound</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.14</div>
+<div class="line"><strong>Date:</strong> 2018/7/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="listp_0.html#listp-0"><span class="std std-ref">listp</span></a></div>
+</div>
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="compound_0.html#compound-0"><span class="std std-ref">compound</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="add/3"> </div><div class="section" id="add-3">
 <span id="difflist-0-add-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">add/3</span></code><a class="headerlink" href="#add-3" title="Permalink to this headline">¶</a></h3>
 <p>Adds a term to the end of a difference list.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">add(Term,DiffList,NewDiffList)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">add(&#64;term,+difference_list,-difference_list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add(Term,DiffList,NewDiffList)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add(&#64;term,+difference_list,-difference_list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="as_list/2"> </div></div>
 <div class="section" id="as-list-2">
 <span id="difflist-0-as-list-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts a difference list to a normal list.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">as_list(DiffList,List)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">as_list(+difference_list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(DiffList,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(+difference_list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

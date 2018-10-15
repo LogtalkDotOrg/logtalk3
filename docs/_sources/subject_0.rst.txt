@@ -8,10 +8,12 @@
 
 Smalltalk dependent handling predicates.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2003/2/9
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2003/2/9
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 Receiver changed in some way. Notify all dependents.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``changed`` - ``one``
+| **Mode and number of proofs:**
+|    ``changed`` - ``one``
 
 
 .. raw:: html
@@ -49,12 +51,12 @@ Receiver changed in some way. Notify all dependents.
 
 Receiver changed as specified in the argument. Notify all dependents.
 
-* compilation flags: ``static``
-* template: ``changed(Change)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``changed(?nonvar)`` - ``one``
+| **Template:**
+|    ``changed(Change)``
+| **Mode and number of proofs:**
+|    ``changed(?nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -69,12 +71,12 @@ Receiver changed as specified in the argument. Notify all dependents.
 
 Returns a list of all dependent objects.
 
-* compilation flags: ``static``
-* template: ``dependents(Dependents)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``dependents(-list)`` - ``one``
+| **Template:**
+|    ``dependents(Dependents)``
+| **Mode and number of proofs:**
+|    ``dependents(-list)`` - ``one``
 
 
 .. raw:: html
@@ -89,12 +91,12 @@ Returns a list of all dependent objects.
 
 Adds a new dependent object.
 
-* compilation flags: ``static``
-* template: ``addDependent(Dependent)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``addDependent(@object)`` - ``one``
+| **Template:**
+|    ``addDependent(Dependent)``
+| **Mode and number of proofs:**
+|    ``addDependent(@object)`` - ``one``
 
 
 .. raw:: html
@@ -109,12 +111,12 @@ Adds a new dependent object.
 
 Removes a dependent object.
 
-* compilation flags: ``static``
-* template: ``removeDependent(Dependent)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``removeDependent(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``removeDependent(Dependent)``
+| **Mode and number of proofs:**
+|    ``removeDependent(?object)`` - ``zero_or_more``
 
 
 Protected interface
@@ -137,12 +139,12 @@ Private predicates
 
 Table of dependent objects.
 
-* compilation flags: ``dynamic``
-* template: ``dependent_(Dependent)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``dependent_(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``dependent_(Dependent)``
+| **Mode and number of proofs:**
+|    ``dependent_(?object)`` - ``zero_or_more``
 
 
 Operators

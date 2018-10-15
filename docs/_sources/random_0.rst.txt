@@ -8,14 +8,15 @@
 
 Portable random number generator predicates. Core predicates originally written by Richard O'Keefe. Based on algorithm AS 183 from Applied Statistics.
 
-* author: Paulo Moura
-* version: 2.5
-* date: 2018/8/14
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.5
+| **Date:** 2018/8/14
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`randomp <randomp/0>`
+
+| **Implements:**
+|    ``public`` :ref:`randomp <randomp/0>`
 
 Public interface
 ----------------
@@ -32,10 +33,10 @@ Public interface
 
 Resets the random generator seed to its default value. Use get_seed/1 and set_seed/1 instead if you need reproducibility.
 
-* compilation flags: ``static, synchronized``
-* mode - number of proofs:
+| **Compilation flags:** ``static, synchronized``
 
-  * ``reset_seed`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset_seed`` - ``one``
 
 
 .. raw:: html
@@ -50,12 +51,12 @@ Resets the random generator seed to its default value. Use get_seed/1 and set_se
 
 Randomizes the random generator using a positive integer to compute a new seed.
 
-* compilation flags: ``static, synchronized``
-* template: ``randomize(Seed)``
+| **Compilation flags:** ``static, synchronized``
 
-* mode - number of proofs:
-
-  * ``randomize(+positive_integer)`` - ``one``
+| **Template:**
+|    ``randomize(Seed)``
+| **Mode and number of proofs:**
+|    ``randomize(+positive_integer)`` - ``one``
 
 
 Protected interface
@@ -78,12 +79,12 @@ Private predicates
 
 Stores the current random generator seed values.
 
-* compilation flags: ``dynamic``
-* template: ``seed_(S0,S1,S2)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``seed_(-integer,-integer,-integer)`` - ``one``
+| **Template:**
+|    ``seed_(S0,S1,S2)``
+| **Mode and number of proofs:**
+|    ``seed_(-integer,-integer,-integer)`` - ``one``
 
 
 Operators

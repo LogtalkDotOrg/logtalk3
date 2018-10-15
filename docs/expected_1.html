@@ -289,168 +289,248 @@
 <div class="section" id="expected-reference">
 <h1><code class="docutils literal notranslate"><span class="pre">expected(Reference)</span></code><a class="headerlink" href="#expected-reference" title="Permalink to this headline">¶</a></h1>
 <p>Expected term reference predicates. Requires passing an expected reference constructed using the “expected” object as a parameter.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.1</li>
-<li>date: 2018/7/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2018/7/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="is_unexpected/0"> </div><div class="section" id="is-unexpected-0">
 <span id="expected-1-is-unexpected-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">is_unexpected/0</span></code><a class="headerlink" href="#is-unexpected-0" title="Permalink to this headline">¶</a></h3>
 <p>True if the expected reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_unexpected</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_unexpected</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="is_expected/0"> </div></div>
 <div class="section" id="is-expected-0">
 <span id="expected-1-is-expected-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">is_expected/0</span></code><a class="headerlink" href="#is-expected-0" title="Permalink to this headline">¶</a></h3>
 <p>True if the expected reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_expected</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_expected</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="if_unexpected/1"> </div></div>
 <div class="section" id="if-unexpected-1">
 <span id="expected-1-if-unexpected-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">if_unexpected/1</span></code><a class="headerlink" href="#if-unexpected-1" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">if_unexpected(Closure)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">if_unexpected(1)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">if_unexpected(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_unexpected(Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_unexpected(1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_unexpected(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="if_expected/1"> </div></div>
 <div class="section" id="if-expected-1">
 <span id="expected-1-if-expected-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">if_expected/1</span></code><a class="headerlink" href="#if-expected-1" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure, with the expected reference term as additional argument, if it does not hold an unexpected term. Succeeds otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">if_expected(Closure)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">if_expected(1)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">if_expected(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_expected(Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_expected(1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_expected(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="unexpected/1"> </div></div>
 <div class="section" id="unexpected-1">
 <span id="expected-1-unexpected-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">unexpected/1</span></code><a class="headerlink" href="#unexpected-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the unexpected reference term if not an expected term. Throws an error otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">unexpected(Unexpected)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">unexpected(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Expected reference holds an expected term: <code class="docutils literal notranslate"><span class="pre">existence_error(unexpected_term,Reference)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unexpected(Unexpected)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unexpected(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Expected reference holds an expected term: <code class="docutils literal notranslate"><span class="pre">existence_error(unexpected_term,Reference)</span></code></div>
+</div>
 <div id="expected/1"> </div></div>
 <div class="section" id="expected-1-expected-1">
 <span id="index-6"></span><span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">expected/1</span></code><a class="headerlink" href="#expected-1-expected-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if not an unexpected term. Throws an error otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">expected(Expected)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">expected(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Expected reference holds an unexpected term: <code class="docutils literal notranslate"><span class="pre">existence_error(expected_term,Reference)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">expected(Expected)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">expected(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Expected reference holds an unexpected term: <code class="docutils literal notranslate"><span class="pre">existence_error(expected_term,Reference)</span></code></div>
+</div>
 <div id="map/2"> </div></div>
 <div class="section" id="map-2">
 <span id="expected-1-map-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,NewReference)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(2,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(Closure,NewReference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="flat_map/2"> </div></div>
 <div class="section" id="flat-map-2">
 <span id="expected-1-flat-map-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code><a class="headerlink" href="#flat-map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">flat_map(Closure,NewReference)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">flat_map(2,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">flat_map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flat_map(Closure,NewReference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flat_map(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flat_map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="or_else/2"> </div></div>
 <div class="section" id="or-else-2">
 <span id="expected-1-or-else-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else/2</span></code><a class="headerlink" href="#or-else-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term or the given default term if the expected reference holds an unexpected term.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else(Term,Default)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else(--term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else(Term,Default)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else(--term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="or_else_get/2"> </div></div>
 <div class="section" id="or-else-get-2">
 <span id="expected-1-or-else-get-2"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code><a class="headerlink" href="#or-else-get-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term or applies a closure to compute the term if the expected holds an unexpected term. Throws an error when the expected reference holds an unexpected term and a term cannot be computed using the given closure.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else_get(Term,Closure)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">or_else_get(*,1)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else_get(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Expected reference holds an unexpected term and a term cannot be computed: <code class="docutils literal notranslate"><span class="pre">existence_error(expected_term,Reference)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_get(Term,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_get(*,1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_get(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Expected reference holds an unexpected term and a term cannot be computed: <code class="docutils literal notranslate"><span class="pre">existence_error(expected_term,Reference)</span></code></div>
+</div>
 <div id="or_else_call/2"> </div></div>
 <div class="section" id="or-else-call-2">
 <span id="expected-1-or-else-call-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else_call(Expected,Goal)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">or_else_call(*,0)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(Expected,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(*,0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="or_else_fail/1"> </div></div>
 <div class="section" id="or-else-fail-1">
 <span id="expected-1-or-else-fail-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the expected reference term if it does not hold an unexpected term. Fails otherwise. Usually called to skip over empty expected reference holding unexpected terms.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else_fail(Expected)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(Expected)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

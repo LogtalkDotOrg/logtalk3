@@ -8,10 +8,12 @@
 
 Expected term reference predicates. Requires passing an expected reference constructed using the "expected" object as a parameter.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2018/7/11
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 True if the expected reference holds an unexpected term. Avoid whenever possible by using instead the if_unexpected/1 predicate.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``is_unexpected`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``is_unexpected`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -49,10 +51,10 @@ True if the expected reference holds an unexpected term. Avoid whenever possible
 
 True if the expected reference holds an expected term. Avoid whenever possible by using instead the if_expected/1 predicate.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``is_expected`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``is_expected`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -67,14 +69,14 @@ True if the expected reference holds an expected term. Avoid whenever possible b
 
 Applies a closure, with the expected reference term as additional argument, if it holds an unexpected term. Succeeds otherwise.
 
-* compilation flags: ``static``
-* template: ``if_unexpected(Closure)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``if_unexpected(1)``
-
-* mode - number of proofs:
-
-  * ``if_unexpected(+callable)`` - ``zero_or_more``
+| **Template:**
+|    ``if_unexpected(Closure)``
+| **Meta-predicate template:**
+|    ``if_unexpected(1)``
+| **Mode and number of proofs:**
+|    ``if_unexpected(+callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -89,14 +91,14 @@ Applies a closure, with the expected reference term as additional argument, if i
 
 Applies a closure, with the expected reference term as additional argument, if it does not hold an unexpected term. Succeeds otherwise.
 
-* compilation flags: ``static``
-* template: ``if_expected(Closure)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``if_expected(1)``
-
-* mode - number of proofs:
-
-  * ``if_expected(+callable)`` - ``zero_or_more``
+| **Template:**
+|    ``if_expected(Closure)``
+| **Meta-predicate template:**
+|    ``if_expected(1)``
+| **Mode and number of proofs:**
+|    ``if_expected(+callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -111,14 +113,14 @@ Applies a closure, with the expected reference term as additional argument, if i
 
 Returns the unexpected reference term if not an expected term. Throws an error otherwise.
 
-* compilation flags: ``static``
-* template: ``unexpected(Unexpected)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``unexpected(Unexpected)``
+| **Mode and number of proofs:**
+|    ``unexpected(--term)`` - ``one``
 
-  * ``unexpected(--term)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Expected reference holds an expected term: ``existence_error(unexpected_term,Reference)``
 
 
@@ -134,14 +136,14 @@ Returns the unexpected reference term if not an expected term. Throws an error o
 
 Returns the expected reference term if not an unexpected term. Throws an error otherwise.
 
-* compilation flags: ``static``
-* template: ``expected(Expected)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``expected(Expected)``
+| **Mode and number of proofs:**
+|    ``expected(--term)`` - ``one``
 
-  * ``expected(--term)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Expected reference holds an unexpected term: ``existence_error(expected_term,Reference)``
 
 
@@ -157,14 +159,14 @@ Returns the expected reference term if not an unexpected term. Throws an error o
 
 When the expected reference does not hold an unexpected term and mapping a closure with the expected reference term and the new term as additional arguments is successful, returns an expected reference with the new value. Otherwise returns the expected reference.
 
-* compilation flags: ``static``
-* template: ``map(Closure,NewReference)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(2,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,--nonvar)`` - ``one``
+| **Template:**
+|    ``map(Closure,NewReference)``
+| **Meta-predicate template:**
+|    ``map(2,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,--nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -179,14 +181,14 @@ When the expected reference does not hold an unexpected term and mapping a closu
 
 When the expected reference does not hold an unexpected term and mapping a closure with the expected reference value and the new expected reference as additional arguments is successful, returns the new expected reference. Otherwise returns the expected reference.
 
-* compilation flags: ``static``
-* template: ``flat_map(Closure,NewReference)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``flat_map(2,*)``
-
-* mode - number of proofs:
-
-  * ``flat_map(+callable,--nonvar)`` - ``one``
+| **Template:**
+|    ``flat_map(Closure,NewReference)``
+| **Meta-predicate template:**
+|    ``flat_map(2,*)``
+| **Mode and number of proofs:**
+|    ``flat_map(+callable,--nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -201,12 +203,12 @@ When the expected reference does not hold an unexpected term and mapping a closu
 
 Returns the expected reference term if it does not hold an unexpected term or the given default term if the expected reference holds an unexpected term.
 
-* compilation flags: ``static``
-* template: ``or_else(Term,Default)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``or_else(--term,@term)`` - ``one``
+| **Template:**
+|    ``or_else(Term,Default)``
+| **Mode and number of proofs:**
+|    ``or_else(--term,@term)`` - ``one``
 
 
 .. raw:: html
@@ -221,16 +223,16 @@ Returns the expected reference term if it does not hold an unexpected term or th
 
 Returns the expected reference term if it does not hold an unexpected term or applies a closure to compute the term if the expected holds an unexpected term. Throws an error when the expected reference holds an unexpected term and a term cannot be computed using the given closure.
 
-* compilation flags: ``static``
-* template: ``or_else_get(Term,Closure)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``or_else_get(*,1)``
+| **Template:**
+|    ``or_else_get(Term,Closure)``
+| **Meta-predicate template:**
+|    ``or_else_get(*,1)``
+| **Mode and number of proofs:**
+|    ``or_else_get(--term,+callable)`` - ``one``
 
-* mode - number of proofs:
-
-  * ``or_else_get(--term,+callable)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Expected reference holds an unexpected term and a term cannot be computed: ``existence_error(expected_term,Reference)``
 
 
@@ -246,14 +248,14 @@ Returns the expected reference term if it does not hold an unexpected term or ap
 
 Returns the expected reference term if it does not hold an unexpected term or calls a goal deterministically if the expected reference holds an unexpected term. Can be used e.g. to throw the exception hold by the expected reference.
 
-* compilation flags: ``static``
-* template: ``or_else_call(Expected,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``or_else_call(*,0)``
-
-* mode - number of proofs:
-
-  * ``or_else_call(--term,+callable)`` - ``zero_or_one``
+| **Template:**
+|    ``or_else_call(Expected,Goal)``
+| **Meta-predicate template:**
+|    ``or_else_call(*,0)``
+| **Mode and number of proofs:**
+|    ``or_else_call(--term,+callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -268,12 +270,12 @@ Returns the expected reference term if it does not hold an unexpected term or ca
 
 Returns the expected reference term if it does not hold an unexpected term. Fails otherwise. Usually called to skip over empty expected reference holding unexpected terms.
 
-* compilation flags: ``static``
-* template: ``or_else_fail(Expected)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``or_else_fail(--term)`` - ``zero_or_one``
+| **Template:**
+|    ``or_else_fail(Expected)``
+| **Mode and number of proofs:**
+|    ``or_else_fail(--term)`` - ``zero_or_one``
 
 
 Protected interface

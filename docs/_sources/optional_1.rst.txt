@@ -8,10 +8,12 @@
 
 Optional reference predicates. Requires passing an optional reference constructed using the "optional" object as a parameter.
 
-* author: Paulo Moura
-* version: 1.4
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.4
+| **Date:** 2018/7/11
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,10 +33,10 @@ Public interface
 
 True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``is_empty`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``is_empty`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -49,10 +51,10 @@ True if the optional reference is empty. Avoid whenever possible by using instea
 
 True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``is_present`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``is_present`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -67,14 +69,14 @@ True if the optional reference holds a term. Avoid whenever possible by using in
 
 Calls a goal if the optional reference is empty. Succeeds otherwise.
 
-* compilation flags: ``static``
-* template: ``if_empty(Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``if_empty(0)``
-
-* mode - number of proofs:
-
-  * ``if_empty(+callable)`` - ``zero_or_more``
+| **Template:**
+|    ``if_empty(Goal)``
+| **Meta-predicate template:**
+|    ``if_empty(0)``
+| **Mode and number of proofs:**
+|    ``if_empty(+callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -89,14 +91,14 @@ Calls a goal if the optional reference is empty. Succeeds otherwise.
 
 Applies a closure with the optional reference value as additional argument if not empty. Succeeds otherwise.
 
-* compilation flags: ``static``
-* template: ``if_present(Closure)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``if_present(1)``
-
-* mode - number of proofs:
-
-  * ``if_present(+callable)`` - ``zero_or_more``
+| **Template:**
+|    ``if_present(Closure)``
+| **Meta-predicate template:**
+|    ``if_present(1)``
+| **Mode and number of proofs:**
+|    ``if_present(+callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -111,14 +113,14 @@ Applies a closure with the optional reference value as additional argument if no
 
 Returns the optional reference when it is non-empty and its value satisfies a closure. Otherwise returns an empty optional.
 
-* compilation flags: ``static``
-* template: ``filter(Closure,Reference)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``filter(1,*)``
-
-* mode - number of proofs:
-
-  * ``filter(+callable,--nonvar)`` - ``one``
+| **Template:**
+|    ``filter(Closure,Reference)``
+| **Meta-predicate template:**
+|    ``filter(1,*)``
+| **Mode and number of proofs:**
+|    ``filter(+callable,--nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -133,14 +135,14 @@ Returns the optional reference when it is non-empty and its value satisfies a cl
 
 When the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.
 
-* compilation flags: ``static``
-* template: ``map(Closure,NewReference)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(2,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,--nonvar)`` - ``one``
+| **Template:**
+|    ``map(Closure,NewReference)``
+| **Meta-predicate template:**
+|    ``map(2,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,--nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -155,14 +157,14 @@ When the optional reference is non-empty and mapping a closure with the optional
 
 When the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.
 
-* compilation flags: ``static``
-* template: ``flat_map(Closure,NewReference)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``flat_map(2,*)``
-
-* mode - number of proofs:
-
-  * ``flat_map(+callable,--nonvar)`` - ``one``
+| **Template:**
+|    ``flat_map(Closure,NewReference)``
+| **Meta-predicate template:**
+|    ``flat_map(2,*)``
+| **Mode and number of proofs:**
+|    ``flat_map(+callable,--nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -177,14 +179,14 @@ When the optional reference is non-empty and mapping a closure with the optional
 
 Returns the optional reference term if not empty. Throws an error otherwise.
 
-* compilation flags: ``static``
-* template: ``get(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``get(Term)``
+| **Mode and number of proofs:**
+|    ``get(--term)`` - ``one``
 
-  * ``get(--term)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Optional is empty: ``existence_error(optional_term,Reference)``
 
 
@@ -200,12 +202,12 @@ Returns the optional reference term if not empty. Throws an error otherwise.
 
 Returns the optional reference term if not empty or the given default term if the optional is empty.
 
-* compilation flags: ``static``
-* template: ``or_else(Term,Default)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``or_else(--term,@term)`` - ``one``
+| **Template:**
+|    ``or_else(Term,Default)``
+| **Mode and number of proofs:**
+|    ``or_else(--term,@term)`` - ``one``
 
 
 .. raw:: html
@@ -220,16 +222,16 @@ Returns the optional reference term if not empty or the given default term if th
 
 Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.
 
-* compilation flags: ``static``
-* template: ``or_else_get(Term,Closure)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``or_else_get(*,1)``
+| **Template:**
+|    ``or_else_get(Term,Closure)``
+| **Meta-predicate template:**
+|    ``or_else_get(*,1)``
+| **Mode and number of proofs:**
+|    ``or_else_get(--term,+callable)`` - ``one``
 
-* mode - number of proofs:
-
-  * ``or_else_get(--term,+callable)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Optional is empty and a term cannot be computed: ``existence_error(optional_term,Reference)``
 
 
@@ -245,14 +247,14 @@ Returns the optional reference term if not empty or applies a closure to compute
 
 Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Can be used e.g. to generate an exception for empty optionals.
 
-* compilation flags: ``static``
-* template: ``or_else_call(Term,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``or_else_call(*,0)``
-
-* mode - number of proofs:
-
-  * ``or_else_call(--term,+callable)`` - ``zero_or_one``
+| **Template:**
+|    ``or_else_call(Term,Goal)``
+| **Meta-predicate template:**
+|    ``or_else_call(*,0)``
+| **Mode and number of proofs:**
+|    ``or_else_call(--term,+callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -267,12 +269,12 @@ Returns the optional reference term if not empty or calls a goal deterministical
 
 Returns the optional reference term if not empty. Fails otherwise. Usually called to skip over empty optionals.
 
-* compilation flags: ``static``
-* template: ``or_else_fail(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``or_else_fail(--term)`` - ``zero_or_one``
+| **Template:**
+|    ``or_else_fail(Term)``
+| **Mode and number of proofs:**
+|    ``or_else_fail(--term)`` - ``zero_or_one``
 
 
 Protected interface

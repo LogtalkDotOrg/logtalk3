@@ -12,15 +12,16 @@
 
 Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a forward/1 handler to resolve methods.
 
-* author: Paulo Moura and Sergio Castro
-* version: 1.2
-* date: 2018/9/4
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura and Sergio Castro
+| **Version:** 1.2
+| **Date:** 2018/9/4
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`forwarding <forwarding/0>`
-  * ``public`` :ref:`java_access_protocol <java_access_protocol/0>`
+
+| **Implements:**
+|    ``public`` :ref:`forwarding <forwarding/0>`
+|    ``public`` :ref:`java_access_protocol <java_access_protocol/0>`
 
 Public interface
 ----------------

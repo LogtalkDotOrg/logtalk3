@@ -289,134 +289,186 @@
 <div class="section" id="heapp">
 <h1><code class="docutils literal notranslate"><span class="pre">heapp</span></code><a class="headerlink" href="#heapp" title="Permalink to this headline">¶</a></h1>
 <p>Heap protocol.</p>
-<ul class="simple">
-<li>author: Richard O’Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.</li>
-<li>version: 1.01</li>
-<li>date: 2010/11/13</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Richard O’Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.</div>
+<div class="line"><strong>Version:</strong> 1.01</div>
+<div class="line"><strong>Date:</strong> 2010/11/13</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="insert/4"> </div><div class="section" id="insert-4">
 <span id="heapp-0-insert-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">insert/4</span></code><a class="headerlink" href="#insert-4" title="Permalink to this headline">¶</a></h3>
 <p>Inserts the new Key-Value pair into a heap, returning the updated heap.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">insert(Key,Value,Heap,NewHeap)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">insert(+key,+value,+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(Key,Value,Heap,NewHeap)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(+key,+value,+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="insert_all/3"> </div></div>
 <div class="section" id="insert-all-3">
 <span id="heapp-0-insert-all-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code><a class="headerlink" href="#insert-all-3" title="Permalink to this headline">¶</a></h3>
 <p>Inserts a list of Key-Value pairs into a heap, returning the updated heap.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">insert_all(List,Heap,NewHeap)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">insert_all(&#64;list(pairs),+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_all(List,Heap,NewHeap)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_all(&#64;list(pairs),+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="delete/4"> </div></div>
 <div class="section" id="delete-4">
 <span id="heapp-0-delete-4"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">delete/4</span></code><a class="headerlink" href="#delete-4" title="Permalink to this headline">¶</a></h3>
 <p>Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">delete(Heap,Key,Value,NewHeap)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">delete(+heap,?key,?value,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(Heap,Key,Value,NewHeap)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+heap,?key,?value,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="merge/3"> </div></div>
 <div class="section" id="merge-3">
 <span id="heapp-0-merge-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">merge/3</span></code><a class="headerlink" href="#merge-3" title="Permalink to this headline">¶</a></h3>
 <p>Merges two heaps.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">merge(Heap1,Heap2,NewHeap)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">merge(+heap,+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">merge(Heap1,Heap2,NewHeap)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">merge(+heap,+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="empty/1"> </div></div>
 <div class="section" id="empty-1">
 <span id="heapp-0-empty-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">empty/1</span></code><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
 <p>True if the heap is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">empty(Heap)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">empty(&#64;heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(Heap)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(&#64;heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="size/2"> </div></div>
 <div class="section" id="size-2">
 <span id="heapp-0-size-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the number of heap elements.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">size(Heap,Size)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">size(+heap,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(Heap,Size)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(+heap,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="as_list/2"> </div></div>
 <div class="section" id="as-list-2">
 <span id="heapp-0-as-list-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">as_list(Heap,List)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">as_list(+heap,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(Heap,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(+heap,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="as_heap/2"> </div></div>
 <div class="section" id="as-heap-2">
 <span id="heapp-0-as-heap-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">as_heap/2</span></code><a class="headerlink" href="#as-heap-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs a Heap from a list of Key-Value pairs.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">as_heap(List,Heap)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">as_heap(+list,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_heap(List,Heap)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_heap(+list,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="top/3"> </div></div>
 <div class="section" id="top-3">
 <span id="heapp-0-top-3"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">top/3</span></code><a class="headerlink" href="#top-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns the top Key-Value pair in Heap. Fails if the heap is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">top(Heap,Key,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">top(+heap,?key,?value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">top(Heap,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">top(+heap,?key,?value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="top_next/5"> </div></div>
 <div class="section" id="top-next-5">
 <span id="heapp-0-top-next-5"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code><a class="headerlink" href="#top-next-5" title="Permalink to this headline">¶</a></h3>
 <p>Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">top_next(Heap,Key1,Value1,Key2,Value2)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">top_next(+heap,?key,?value,?key,?value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">top_next(Heap,Key1,Value1,Key2,Value2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">top_next(+heap,?key,?value,?key,?value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

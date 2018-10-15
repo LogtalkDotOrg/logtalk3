@@ -8,17 +8,18 @@
 
 Types and predicates for extended type-checking of expected term references and for handling list of expected term references.
 
-* author: Paulo Moura
-* version: 0.2
-* date: 2018/6/4
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 0.2
+| **Date:** 2018/6/4
 
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`type::type/1 <type/0::type/1>`
-  * :ref:`type::check/2 <type/0::check/2>`
-  * :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
-  * :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
+
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
+|    :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
+|    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
 
 Public interface
 ----------------
@@ -35,12 +36,12 @@ Public interface
 
 Returns the values stored in the expected term references that hold an expected term.
 
-* compilation flags: ``static``
-* template: ``expecteds(References,Expecteds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``expecteds(+list(expected),-list)`` - ``one``
+| **Template:**
+|    ``expecteds(References,Expecteds)``
+| **Mode and number of proofs:**
+|    ``expecteds(+list(expected),-list)`` - ``one``
 
 
 .. raw:: html
@@ -55,12 +56,12 @@ Returns the values stored in the expected term references that hold an expected 
 
 Returns the values stored in the expected term references that hold an expected term.
 
-* compilation flags: ``static``
-* template: ``unexpecteds(References,Unexpecteds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``unexpecteds(+list(expected),-list)`` - ``one``
+| **Template:**
+|    ``unexpecteds(References,Unexpecteds)``
+| **Mode and number of proofs:**
+|    ``unexpecteds(+list(expected),-list)`` - ``one``
 
 
 .. raw:: html
@@ -75,12 +76,12 @@ Returns the values stored in the expected term references that hold an expected 
 
 Retrieves and partitions the values stored in the expected term references.
 
-* compilation flags: ``static``
-* template: ``partition(References,Expecteds,Unexpecteds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``partition(+list(expected),-list,-list)`` - ``one``
+| **Template:**
+|    ``partition(References,Expecteds,Unexpecteds)``
+| **Mode and number of proofs:**
+|    ``partition(+list(expected),-list,-list)`` - ``one``
 
 
 Protected interface

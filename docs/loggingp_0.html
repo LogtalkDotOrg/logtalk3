@@ -289,98 +289,135 @@
 <div class="section" id="loggingp">
 <h1><code class="docutils literal notranslate"><span class="pre">loggingp</span></code><a class="headerlink" href="#loggingp" title="Permalink to this headline">¶</a></h1>
 <p>Logging events to files protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.0</li>
-<li>date: 2011/1/6</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2011/1/6</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="log_file/2"> </div><div class="section" id="log-file-2">
 <span id="loggingp-0-log-file-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">log_file/2</span></code><a class="headerlink" href="#log-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Access to the table of log files.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">log_file(Alias,File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">log_file(?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">log_file(Alias,File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">log_file(?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="define_log_file/2"> </div></div>
 <div class="section" id="define-log-file-2">
 <span id="loggingp-0-define-log-file-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">define_log_file/2</span></code><a class="headerlink" href="#define-log-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Defines a log file with alias Alias and file name File. If the log file already exists, its contents are kept. Logging is enabled by default.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">define_log_file(Alias,File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">define_log_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">define_log_file(Alias,File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">define_log_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="init_log_file/2"> </div></div>
 <div class="section" id="init-log-file-2">
 <span id="loggingp-0-init-log-file-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">init_log_file/2</span></code><a class="headerlink" href="#init-log-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Initializes a new log file with alias Alias and file name File. If the log file already exists, its contents are erased. Logging is enabled by default.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">init_log_file(Alias,File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">init_log_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_log_file(Alias,File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_log_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="log_event/2"> </div></div>
 <div class="section" id="log-event-2">
 <span id="loggingp-0-log-event-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">log_event/2</span></code><a class="headerlink" href="#log-event-2" title="Permalink to this headline">¶</a></h3>
 <p>Logs an event Event to a log file with alias Alias. Fails if a log file with alias Alias is not defined.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">log_event(Alias,Event)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">log_event(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">log_event(Alias,Event)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">log_event(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="logging/1"> </div></div>
 <div class="section" id="logging-1">
 <span id="loggingp-0-logging-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">logging/1</span></code><a class="headerlink" href="#logging-1" title="Permalink to this headline">¶</a></h3>
 <p>True if logging to file with alias Alias is enabled.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">logging(Alias)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">logging(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logging(Alias)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logging(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="enable_logging/1"> </div></div>
 <div class="section" id="enable-logging-1">
 <span id="loggingp-0-enable-logging-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">enable_logging/1</span></code><a class="headerlink" href="#enable-logging-1" title="Permalink to this headline">¶</a></h3>
 <p>Enables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">enable_logging(Alias)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">enable_logging(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">enable_logging(Alias)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">enable_logging(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="disable_logging/1"> </div></div>
 <div class="section" id="disable-logging-1">
 <span id="loggingp-0-disable-logging-1"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">disable_logging/1</span></code><a class="headerlink" href="#disable-logging-1" title="Permalink to this headline">¶</a></h3>
 <p>Disables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">disable_logging(Alias)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">disable_logging(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">disable_logging(Alias)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">disable_logging(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

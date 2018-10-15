@@ -8,10 +8,12 @@
 
 Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.
 
-* author: Paulo Moura
-* version: 1.19
-* date: 2018/10/11
-* compilation flags: ``static, context_switching_calls, complements(restrict)``
+| **Author:** Paulo Moura
+| **Version:** 1.19
+| **Date:** 2018/10/11
+
+| **Compilation flags:** ``static, context_switching_calls, complements(restrict)``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.
 
-* compilation flags: ``static, multifile``
-* template: ``type(Type)``
+| **Compilation flags:** ``static, multifile``
 
-* mode - number of proofs:
-
-  * ``type(?callable)`` - ``zero_or_more``
+| **Template:**
+|    ``type(Type)``
+| **Mode and number of proofs:**
+|    ``type(?callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Table of defined types. A new type can be registered by defining a clause for th
 
 Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.
 
-* compilation flags: ``static, multifile``
-* template: ``meta_type(MetaType,SubTypes,Values)``
+| **Compilation flags:** ``static, multifile``
 
-* mode - number of proofs:
-
-  * ``meta_type(?callable,-list,-list)`` - ``zero_or_more``
+| **Template:**
+|    ``meta_type(MetaType,SubTypes,Values)``
+| **Mode and number of proofs:**
+|    ``meta_type(?callable,-list,-list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Table of defined meta-types. A registered type that is a meta-type can be descri
 
 True if the given term is of the specified type. Fails otherwise.
 
-* compilation flags: ``static``
-* template: ``valid(Type,Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(@callable,@term)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Type,Term)``
+| **Mode and number of proofs:**
+|    ``valid(@callable,@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ True if the given term is of the specified type. Fails otherwise.
 
 True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.
 
-* compilation flags: ``static``
-* template: ``check(Type,Term,Context)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``check(@callable,@term,@term)`` - ``one_or_error``
+| **Template:**
+|    ``check(Type,Term,Context)``
+| **Mode and number of proofs:**
+|    ``check(@callable,@term,@term)`` - ``one_or_error``
 
 
 .. raw:: html
@@ -111,20 +113,17 @@ True if the given term is of the specified type. Throws an error otherwise using
 
 True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.
 
-* compilation flags: ``static, multifile``
-* template: ``check(Type,Term)``
+| **Compilation flags:** ``static, multifile``
 
-* mode - number of proofs:
+| **Template:**
+|    ``check(Type,Term)``
+| **Mode and number of proofs:**
+|    ``check(@callable,@term)`` - ``one_or_error``
 
-  * ``check(@callable,@term)`` - ``one_or_error``
-
-* exceptions:
+| **Exceptions:**
   * Term is not bound as required: ``instantiation_error``
-
   * Term is bound but not of the specified type: ``type_error(Type, Term)``
-
   * Term is the of the correct type but not in the specified domain: ``domain_error(Domain, Term)``
-
   * Term is the of the correct type and domain but the resource it represents does not exist: ``existence_error(Type, Term)``
 
 

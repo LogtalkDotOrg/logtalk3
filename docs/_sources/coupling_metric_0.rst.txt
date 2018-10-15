@@ -8,15 +8,16 @@
 
 Computes entity efferent coupling, afferent coupling, and instability.
 
-* author: Ebrahim Azarisooreh and Paulo Moura
-* version: 0.12
-* date: 2018/7/17
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Ebrahim Azarisooreh and Paulo Moura
+| **Version:** 0.12
+| **Date:** 2018/7/17
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
-  * ``public`` :ref:`code_metric <code_metric/0>`
+
+| **Imports:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+|    ``public`` :ref:`code_metric <code_metric/0>`
 
 Public interface
 ----------------

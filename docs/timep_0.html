@@ -289,50 +289,67 @@
 <div class="section" id="timep">
 <h1><code class="docutils literal notranslate"><span class="pre">timep</span></code><a class="headerlink" href="#timep" title="Permalink to this headline">¶</a></h1>
 <p>Time protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.0</li>
-<li>date: 2000/7/24</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2000/7/24</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="now/3"> </div><div class="section" id="now-3">
 <span id="timep-0-now-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">now/3</span></code><a class="headerlink" href="#now-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns current time.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">now(Hours,Mins,Secs)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">now(-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">now(Hours,Mins,Secs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">now(-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="cpu_time/1"> </div></div>
 <div class="section" id="cpu-time-1">
 <span id="timep-0-cpu-time-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">cpu_time/1</span></code><a class="headerlink" href="#cpu-time-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the current cpu time.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">cpu_time(Time)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">cpu_time(-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cpu_time(Time)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cpu_time(-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="valid/3"> </div></div>
 <div class="section" id="valid-3">
 <span id="timep-0-valid-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/3</span></code><a class="headerlink" href="#valid-3" title="Permalink to this headline">¶</a></h3>
 <p>True if the arguments represent a valid time value.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">valid(Hours,Mins,Secs)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">valid(+integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(Hours,Mins,Secs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(+integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

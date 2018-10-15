@@ -8,17 +8,17 @@
 
 List of numbers predicates.
 
-* author: Paulo Moura
-* version: 1.9
-* date: 2018/7/13
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.9
+| **Date:** 2018/7/13
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`numberlistp <numberlistp/0>`
-* extends:
 
-  * ``public`` :ref:`list <list/0>`
+| **Implements:**
+|    ``public`` :ref:`numberlistp <numberlistp/0>`
+| **Extends:**
+|    ``public`` :ref:`list <list/0>`
 
 Public interface
 ----------------

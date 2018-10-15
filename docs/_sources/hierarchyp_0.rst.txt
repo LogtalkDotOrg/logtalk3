@@ -8,10 +8,12 @@
 
 Common hierarchy protocol for prototype and class hierarchies.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2000/7/24
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2000/7/24
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns, by backtracking, all object ancestors.
 
-* compilation flags: ``static``
-* template: ``ancestor(Ancestor)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``ancestor(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``ancestor(Ancestor)``
+| **Mode and number of proofs:**
+|    ``ancestor(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns, by backtracking, all object ancestors.
 
 List of all object ancestors.
 
-* compilation flags: ``static``
-* template: ``ancestors(Ancestors)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``ancestors(-list)`` - ``one``
+| **Template:**
+|    ``ancestors(Ancestors)``
+| **Mode and number of proofs:**
+|    ``ancestors(-list)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ List of all object ancestors.
 
 Returns, by backtracking, all object leaves.
 
-* compilation flags: ``static``
-* template: ``leaf(Leaf)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leaf(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``leaf(Leaf)``
+| **Mode and number of proofs:**
+|    ``leaf(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Returns, by backtracking, all object leaves.
 
 List of all object leaves.
 
-* compilation flags: ``static``
-* template: ``leaves(Leaves)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leaves(-list)`` - ``one``
+| **Template:**
+|    ``leaves(Leaves)``
+| **Mode and number of proofs:**
+|    ``leaves(-list)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ List of all object leaves.
 
 Returns, by backtracking, all object descendants.
 
-* compilation flags: ``static``
-* template: ``descendant(Descendant)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``descendant(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``descendant(Descendant)``
+| **Mode and number of proofs:**
+|    ``descendant(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Returns, by backtracking, all object descendants.
 
 List of all object descendants.
 
-* compilation flags: ``static``
-* template: ``descendants(Descendants)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``descendants(-list)`` - ``one``
+| **Template:**
+|    ``descendants(Descendants)``
+| **Mode and number of proofs:**
+|    ``descendants(-list)`` - ``one``
 
 
 Protected interface

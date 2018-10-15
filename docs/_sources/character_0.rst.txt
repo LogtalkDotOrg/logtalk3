@@ -8,17 +8,17 @@
 
 Character predicates (most of them assume an ASCII representation).
 
-* author: Paulo Moura
-* version: 1.8
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.8
+| **Date:** 2018/7/11
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`characterp <characterp/0>`
-* extends:
 
-  * ``public`` :ref:`atom <atom/0>`
+| **Implements:**
+|    ``public`` :ref:`characterp <characterp/0>`
+| **Extends:**
+|    ``public`` :ref:`atom <atom/0>`
 
 Public interface
 ----------------

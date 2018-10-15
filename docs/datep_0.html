@@ -289,86 +289,118 @@
 <div class="section" id="datep">
 <h1><code class="docutils literal notranslate"><span class="pre">datep</span></code><a class="headerlink" href="#datep" title="Permalink to this headline">¶</a></h1>
 <p>Date protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.1</li>
-<li>date: 2005/3/17</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2005/3/17</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="today/3"> </div><div class="section" id="today-3">
 <span id="datep-0-today-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">today/3</span></code><a class="headerlink" href="#today-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns current date.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">today(Year,Month,Day)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">today(-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">today(Year,Month,Day)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">today(-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="leap_year/1"> </div></div>
 <div class="section" id="leap-year-1">
 <span id="datep-0-leap-year-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code><a class="headerlink" href="#leap-year-1" title="Permalink to this headline">¶</a></h3>
 <p>True if the argument is a leap year.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">leap_year(Year)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">leap_year(+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leap_year(Year)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leap_year(+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="name_of_day/3"> </div></div>
 <div class="section" id="name-of-day-3">
 <span id="datep-0-name-of-day-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">name_of_day/3</span></code><a class="headerlink" href="#name-of-day-3" title="Permalink to this headline">¶</a></h3>
 <p>Name and short name of day.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">name_of_day(Index,Name,Short)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">name_of_day(?integer,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">name_of_day(Index,Name,Short)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">name_of_day(?integer,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="name_of_month/3"> </div></div>
 <div class="section" id="name-of-month-3">
 <span id="datep-0-name-of-month-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">name_of_month/3</span></code><a class="headerlink" href="#name-of-month-3" title="Permalink to this headline">¶</a></h3>
 <p>Name and short name of month.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">name_of_month(Index,Name,Short)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">name_of_month(?integer,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">name_of_month(Index,Name,Short)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">name_of_month(?integer,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="days_in_month/3"> </div></div>
 <div class="section" id="days-in-month-3">
 <span id="datep-0-days-in-month-3"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">days_in_month/3</span></code><a class="headerlink" href="#days-in-month-3" title="Permalink to this headline">¶</a></h3>
 <p>Number of days in a month.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">days_in_month(Month,Year,Days)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">days_in_month(?integer,+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">days_in_month(Month,Year,Days)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">days_in_month(?integer,+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="valid/3"> </div></div>
 <div class="section" id="valid-3">
 <span id="datep-0-valid-3"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/3</span></code><a class="headerlink" href="#valid-3" title="Permalink to this headline">¶</a></h3>
 <p>True if the arguments represent a valid date.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">valid(Year,Month,Day)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">valid(&#64;integer,&#64;integer,&#64;integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(Year,Month,Day)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(&#64;integer,&#64;integer,&#64;integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

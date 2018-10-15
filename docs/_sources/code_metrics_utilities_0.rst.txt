@@ -8,10 +8,12 @@
 
 Internal predicates for analyzing source code.
 
-* author: Ebrahim Azarisooreh
-* version: 0.6
-* date: 2018/6/8
-* compilation flags: ``static``
+| **Author:** Ebrahim Azarisooreh
+| **Version:** 0.6
+| **Date:** 2018/6/8
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -41,12 +43,12 @@ Private predicates
 
 True if Entity descends from Ancestor, and EntityKind and AncestorKind unify with their respective entity types.
 
-* compilation flags: ``static``
-* template: ``ancestor(EntityKind,Entity,AncestorKind,Ancestor)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``ancestor(?entity,?entity_identifier,?entity,?entity_identifier)`` - ``zero_or_more``
+| **Template:**
+|    ``ancestor(EntityKind,Entity,AncestorKind,Ancestor)``
+| **Mode and number of proofs:**
+|    ``ancestor(?entity,?entity_identifier,?entity,?entity_identifier)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -61,12 +63,12 @@ True if Entity descends from Ancestor, and EntityKind and AncestorKind unify wit
 
 True if Entity is a currently loaded entity.
 
-* compilation flags: ``static``
-* template: ``current_entity(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``current_entity(?entity_identifier)`` - ``zero_or_more``
+| **Template:**
+|    ``current_entity(Entity)``
+| **Mode and number of proofs:**
+|    ``current_entity(?entity_identifier)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -81,12 +83,12 @@ True if Entity is a currently loaded entity.
 
 True if Entity declares Predicate internally.
 
-* compilation flags: ``static``
-* template: ``declares_predicate(Entity,Predicate)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``declares_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+| **Template:**
+|    ``declares_predicate(Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``declares_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -101,12 +103,12 @@ True if Entity declares Predicate internally.
 
 True if Entity defines an implementation of Predicate internally. 'Auxiliary' predicates are excluded from results.
 
-* compilation flags: ``static``
-* template: ``defines_predicate(Entity,Predicate)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``defines_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+| **Template:**
+|    ``defines_predicate(Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``defines_predicate(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -121,12 +123,12 @@ True if Entity defines an implementation of Predicate internally. 'Auxiliary' pr
 
 Same as defines_predicate/2, except Property is unified with a corresponding property defined in the grammar.
 
-* compilation flags: ``static``
-* template: ``defines_predicate(Entity,Predicate,Property)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``defines_predicate(?entity_identifier,?predicate_indicator,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``defines_predicate(Entity,Predicate,Property)``
+| **Mode and number of proofs:**
+|    ``defines_predicate(?entity_identifier,?predicate_indicator,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -141,12 +143,12 @@ Same as defines_predicate/2, except Property is unified with a corresponding pro
 
 True if a predicate Caller within Entity makes a Call.
 
-* compilation flags: ``static``
-* template: ``entity_calls(Entity,Caller,Call)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
+| **Template:**
+|    ``entity_calls(Entity,Caller,Call)``
+| **Mode and number of proofs:**
+|    ``entity_calls(?entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -161,12 +163,12 @@ True if a predicate Caller within Entity makes a Call.
 
 True if Kind defines Entity and is one of category, protocol, or object.
 
-* compilation flags: ``static``
-* template: ``entity_kind(Entity,Kind)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity_kind(+entity_identifier,-entity)`` - ``zero_or_one``
+| **Template:**
+|    ``entity_kind(Entity,Kind)``
+| **Mode and number of proofs:**
+|    ``entity_kind(+entity_identifier,-entity)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -181,12 +183,12 @@ True if Kind defines Entity and is one of category, protocol, or object.
 
 True if Property is a valid property of Entity. Entity can be either a category, a protocol, or an object.
 
-* compilation flags: ``static``
-* template: ``entity_property(Entity,Property)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity_property(+entity_identifier,-term)`` - ``zero_or_more``
+| **Template:**
+|    ``entity_property(Entity,Property)``
+| **Mode and number of proofs:**
+|    ``entity_property(+entity_identifier,-term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -201,12 +203,12 @@ True if Property is a valid property of Entity. Entity can be either a category,
 
 True if a predicate Updater within Entity makes a dynamic update to Update (by e.g. asserta/1, retract/1, etc.)
 
-* compilation flags: ``static``
-* template: ``entity_updates(Entity,Updater,Update)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
+| **Template:**
+|    ``entity_updates(Entity,Updater,Update)``
+| **Mode and number of proofs:**
+|    ``entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)`` - ``zero_or_one``
 
 
 Operators

@@ -8,10 +8,12 @@
 
 Object encapsulating magic methods.
 
-* author: Ulf Nilsson. Ported to Logtalk and augmented with stratified negation by Victor Lagerkvist.
-* version: 1.0
-* date: 2010/6/13
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Ulf Nilsson. Ported to Logtalk and augmented with stratified negation by Victor Lagerkvist.
+| **Version:** 1.0
+| **Date:** 2010/6/13
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
 
-* compilation flags: ``static``
-* template: ``magicise(Head,Body,NewHead,NewBody)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``magicise(+term,+list,-term,-list)`` - ``zero_or_one``
+| **Template:**
+|    ``magicise(Head,Body,NewHead,NewBody)``
+| **Mode and number of proofs:**
+|    ``magicise(+term,+list,-term,-list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Transform (Head :- Body) into a magic clause (NewHead :- NewBody).
 
 Prefix the predicate symbol of Old with magic_.
 
-* compilation flags: ``static``
-* template: ``magic(Old,New)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``magic(+callable,-callable)`` - ``zero_or_one``
+| **Template:**
+|    ``magic(Old,New)``
+| **Mode and number of proofs:**
+|    ``magic(+callable,-callable)`` - ``zero_or_one``
 
 
 Protected interface

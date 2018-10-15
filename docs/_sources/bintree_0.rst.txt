@@ -8,17 +8,17 @@
 
 Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.
 
-* author: Paulo Moura and Paul Fodor
-* version: 2.3
-* date: 2018/3/18
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura and Paul Fodor
+| **Version:** 2.3
+| **Date:** 2018/3/18
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`dictionaryp <dictionaryp/0>`
-* extends:
 
-  * ``public`` :ref:`compound <compound/0>`
+| **Implements:**
+|    ``public`` :ref:`dictionaryp <dictionaryp/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
 
 Public interface
 ----------------
@@ -35,12 +35,12 @@ Public interface
 
 Preorder tree traversal.
 
-* compilation flags: ``static``
-* template: ``preorder(Tree,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``preorder(@tree,-list)`` - ``one``
+| **Template:**
+|    ``preorder(Tree,List)``
+| **Mode and number of proofs:**
+|    ``preorder(@tree,-list)`` - ``one``
 
 
 .. raw:: html
@@ -53,10 +53,10 @@ Preorder tree traversal.
 ``inorder/2``
 ^^^^^^^^^^^^^
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``inorder(@tree,-list)`` - ``one``
+| **Mode and number of proofs:**
+|    ``inorder(@tree,-list)`` - ``one``
 
 
 .. raw:: html
@@ -69,10 +69,10 @@ Preorder tree traversal.
 ``postorder/2``
 ^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``postorder(@tree,-list)`` - ``one``
+| **Mode and number of proofs:**
+|    ``postorder(@tree,-list)`` - ``one``
 
 
 Protected interface

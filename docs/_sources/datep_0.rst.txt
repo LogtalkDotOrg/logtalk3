@@ -8,10 +8,12 @@
 
 Date protocol.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2005/3/17
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2005/3/17
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns current date.
 
-* compilation flags: ``static``
-* template: ``today(Year,Month,Day)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``today(-integer,-integer,-integer)`` - ``one``
+| **Template:**
+|    ``today(Year,Month,Day)``
+| **Mode and number of proofs:**
+|    ``today(-integer,-integer,-integer)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns current date.
 
 True if the argument is a leap year.
 
-* compilation flags: ``static``
-* template: ``leap_year(Year)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leap_year(+integer)`` - ``zero_or_one``
+| **Template:**
+|    ``leap_year(Year)``
+| **Mode and number of proofs:**
+|    ``leap_year(+integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ True if the argument is a leap year.
 
 Name and short name of day.
 
-* compilation flags: ``static``
-* template: ``name_of_day(Index,Name,Short)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``name_of_day(?integer,?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``name_of_day(Index,Name,Short)``
+| **Mode and number of proofs:**
+|    ``name_of_day(?integer,?atom,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Name and short name of day.
 
 Name and short name of month.
 
-* compilation flags: ``static``
-* template: ``name_of_month(Index,Name,Short)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``name_of_month(?integer,?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``name_of_month(Index,Name,Short)``
+| **Mode and number of proofs:**
+|    ``name_of_month(?integer,?atom,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Name and short name of month.
 
 Number of days in a month.
 
-* compilation flags: ``static``
-* template: ``days_in_month(Month,Year,Days)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``days_in_month(?integer,+integer,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``days_in_month(Month,Year,Days)``
+| **Mode and number of proofs:**
+|    ``days_in_month(?integer,+integer,?integer)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Number of days in a month.
 
 True if the arguments represent a valid date.
 
-* compilation flags: ``static``
-* template: ``valid(Year,Month,Day)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(@integer,@integer,@integer)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Year,Month,Day)``
+| **Mode and number of proofs:**
+|    ``valid(@integer,@integer,@integer)`` - ``zero_or_one``
 
 
 Protected interface

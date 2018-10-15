@@ -8,10 +8,12 @@
 
 Abstract interface to Java utility predicates.
 
-* author: Paulo Moura
-* version: 1.5
-* date: 2017/10/16
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.5
+| **Date:** 2017/10/16
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns an opaque term that represents the Java value with the given name.
 
-* compilation flags: ``static``
-* template: ``value_reference(Value,Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``value_reference(?atom,--ground)`` - ``one_or_more``
+| **Template:**
+|    ``value_reference(Value,Reference)``
+| **Mode and number of proofs:**
+|    ``value_reference(?atom,--ground)`` - ``one_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns an opaque term that represents the Java value with the given name.
 
 Returns an opaque term that represents the Java value true.
 
-* compilation flags: ``static``
-* template: ``true(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``true(--ground)`` - ``one``
+| **Template:**
+|    ``true(Reference)``
+| **Mode and number of proofs:**
+|    ``true(--ground)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Returns an opaque term that represents the Java value true.
 
 Returns an opaque term that represents the Java value false.
 
-* compilation flags: ``static``
-* template: ``false(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``false(--ground)`` - ``one``
+| **Template:**
+|    ``false(Reference)``
+| **Mode and number of proofs:**
+|    ``false(--ground)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Returns an opaque term that represents the Java value false.
 
 Returns an opaque term that represents the Java value void.
 
-* compilation flags: ``static``
-* template: ``void(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``void(--ground)`` - ``one``
+| **Template:**
+|    ``void(Reference)``
+| **Mode and number of proofs:**
+|    ``void(--ground)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Returns an opaque term that represents the Java value void.
 
 Returns an opaque term that represents the Java value null.
 
-* compilation flags: ``static``
-* template: ``null(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``null(--ground)`` - ``one``
+| **Template:**
+|    ``null(Reference)``
+| **Mode and number of proofs:**
+|    ``null(--ground)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Returns an opaque term that represents the Java value null.
 
 True when the argument is the Java value true. Fails if the argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``is_true(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_true(@term)`` - ``zero_or_one``
+| **Template:**
+|    ``is_true(Reference)``
+| **Mode and number of proofs:**
+|    ``is_true(@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ True when the argument is the Java value true. Fails if the argument is not inst
 
 True when the argument is the Java value false. Fails if the argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``is_false(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_false(@term)`` - ``zero_or_one``
+| **Template:**
+|    ``is_false(Reference)``
+| **Mode and number of proofs:**
+|    ``is_false(@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ True when the argument is the Java value false. Fails if the argument is not ins
 
 True when the argument is the Java value void. Fails if the argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``is_void(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_void(@term)`` - ``zero_or_one``
+| **Template:**
+|    ``is_void(Reference)``
+| **Mode and number of proofs:**
+|    ``is_void(@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ True when the argument is the Java value void. Fails if the argument is not inst
 
 True when the argument is the Java value null. Fails if the argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``is_null(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_null(@term)`` - ``zero_or_one``
+| **Template:**
+|    ``is_null(Reference)``
+| **Mode and number of proofs:**
+|    ``is_null(@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ True when the argument is the Java value null. Fails if the argument is not inst
 
 True when the argument is a reference to a Java object. Fails if the argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``is_object(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``is_object(@term)`` - ``zero_or_one``
+| **Template:**
+|    ``is_object(Reference)``
+| **Mode and number of proofs:**
+|    ``is_object(@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ True when the argument is a reference to a Java object. Fails if the argument is
 
 Converts a list of ground Prolog terms to an array (a Java reference).
 
-* compilation flags: ``static``
-* template: ``terms_to_array(Terms,Array)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``terms_to_array(++list(ground),-array)`` - ``one``
+| **Template:**
+|    ``terms_to_array(Terms,Array)``
+| **Mode and number of proofs:**
+|    ``terms_to_array(++list(ground),-array)`` - ``one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ Converts a list of ground Prolog terms to an array (a Java reference).
 
 Converts an array (a Java reference) to a list of ground Prolog terms returning also its length. The array elements must be atoms, integers, floats, or compound terms. Fails otherwise.
 
-* compilation flags: ``static``
-* template: ``array_to_terms(Array,Terms,Length)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``array_to_terms(+array,-list(ground),-integer)`` - ``one``
+| **Template:**
+|    ``array_to_terms(Array,Terms,Length)``
+| **Mode and number of proofs:**
+|    ``array_to_terms(+array,-list(ground),-integer)`` - ``one``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ Converts an array (a Java reference) to a list of ground Prolog terms returning 
 
 Converts an array (a Java reference) to a list of ground Prolog terms. The array elements must be atoms, integers, floats, or ground compound terms. Fails otherwise.
 
-* compilation flags: ``static``
-* template: ``array_to_terms(Array,Terms)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``array_to_terms(+array,-list(term))`` - ``one``
+| **Template:**
+|    ``array_to_terms(Array,Terms)``
+| **Mode and number of proofs:**
+|    ``array_to_terms(+array,-list(term))`` - ``one``
 
 
 .. raw:: html
@@ -291,14 +293,14 @@ Converts an array (a Java reference) to a list of ground Prolog terms. The array
 
 Converts between an array (a Java reference) and a list. Deprecated. Use the terms_to_array/2 and array_to_terms/2-3 instead in new code.
 
-* compilation flags: ``static``
-* template: ``array_list(Array,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``array_list(Array,List)``
+| **Mode and number of proofs:**
+|    ``array_list(+array,-list)`` - ``one``
 
-  * ``array_list(+array,-list)`` - ``one``
-
-  * ``array_list(-array,+list)`` - ``one``
+|    ``array_list(-array,+list)`` - ``one``
 
 
 .. raw:: html
@@ -313,12 +315,12 @@ Converts between an array (a Java reference) and a list. Deprecated. Use the ter
 
 Enumerates, by backtracking, all iterator elements.
 
-* compilation flags: ``static``
-* template: ``iterator_element(Iterator,Element)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``iterator_element(+iterator,-element)`` - ``zero_or_more``
+| **Template:**
+|    ``iterator_element(Iterator,Element)``
+| **Mode and number of proofs:**
+|    ``iterator_element(+iterator,-element)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -333,12 +335,12 @@ Enumerates, by backtracking, all iterator elements.
 
 Decodes an exception into its corresponding cause. Fails if the exception is not a Java exception.
 
-* compilation flags: ``static``
-* template: ``decode_exception(Exception,Cause)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``decode_exception(+callable,-atom)`` - ``zero_or_one``
+| **Template:**
+|    ``decode_exception(Exception,Cause)``
+| **Mode and number of proofs:**
+|    ``decode_exception(+callable,-atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -353,12 +355,12 @@ Decodes an exception into its corresponding cause. Fails if the exception is not
 
 Decodes an exception into its corresponding cause and a stack trace. Fails if the exception is not a Java exception.
 
-* compilation flags: ``static``
-* template: ``decode_exception(Exception,Cause,StackTrace)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``decode_exception(+callable,-atom,-list(atom))`` - ``zero_or_one``
+| **Template:**
+|    ``decode_exception(Exception,Cause,StackTrace)``
+| **Mode and number of proofs:**
+|    ``decode_exception(+callable,-atom,-list(atom))`` - ``zero_or_one``
 
 
 Protected interface

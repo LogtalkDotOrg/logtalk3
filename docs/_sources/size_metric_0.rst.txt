@@ -8,18 +8,18 @@
 
 Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).
 
-* author: Paulo Moura
-* version: 0.3
-* date: 2018/6/8
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 0.3
+| **Date:** 2018/6/8
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
-  * ``public`` :ref:`code_metric <code_metric/0>`
-* provides:
 
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Imports:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+|    ``public`` :ref:`code_metric <code_metric/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------

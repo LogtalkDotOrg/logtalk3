@@ -8,10 +8,12 @@
 
 Prolog term utility predicates protocol.
 
-* author: Paulo Moura
-* version: 1.31
-* date: 2010/6/9
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.31
+| **Date:** 2010/6/9
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.
 
-* compilation flags: ``static``
-* template: ``depth(Term,Depth)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``depth(@term,?integer)`` - ``zero_or_one``
+| **Template:**
+|    ``depth(Term,Depth)``
+| **Mode and number of proofs:**
+|    ``depth(@term,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ True if the depth of Term is Depth. The depth of atomic terms is zero; the depth
 
 True if the argument is ground.
 
-* compilation flags: ``static``
-* template: ``ground(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``ground(@term)`` - ``zero_or_one``
+| **Template:**
+|    ``ground(Term)``
+| **Mode and number of proofs:**
+|    ``ground(@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ True if the argument is ground.
 
 Creates a new term instance (if meaningful).
 
-* compilation flags: ``static``
-* template: ``new(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``new(-nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``new(Term)``
+| **Mode and number of proofs:**
+|    ``new(-nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Creates a new term instance (if meaningful).
 
 True if the variable occurs in the term.
 
-* compilation flags: ``static``
-* template: ``occurs(Variable,Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``occurs(@var,@term)`` - ``zero_or_one``
+| **Template:**
+|    ``occurs(Variable,Term)``
+| **Mode and number of proofs:**
+|    ``occurs(@var,@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ True if the variable occurs in the term.
 
 The first term subsumes the second term.
 
-* compilation flags: ``static``
-* template: ``subsumes(General,Specific)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subsumes(?term,@term)`` - ``zero_or_one``
+| **Template:**
+|    ``subsumes(General,Specific)``
+| **Mode and number of proofs:**
+|    ``subsumes(?term,@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ The first term subsumes the second term.
 
 The first term is a subterm of the second term.
 
-* compilation flags: ``static``
-* template: ``subterm(Subterm,Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subterm(?term,+term)`` - ``zero_or_more``
+| **Template:**
+|    ``subterm(Subterm,Term)``
+| **Mode and number of proofs:**
+|    ``subterm(?term,+term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ The first term is a subterm of the second term.
 
 Term is valid.
 
-* compilation flags: ``static``
-* template: ``valid(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(@nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Term)``
+| **Mode and number of proofs:**
+|    ``valid(@nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Term is valid.
 
 Checks if a term is valid. Throws an exception if the term is not valid.
 
-* compilation flags: ``static``
-* template: ``check(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``check(@nonvar)`` - ``one``
+| **Template:**
+|    ``check(Term)``
+| **Mode and number of proofs:**
+|    ``check(@nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Checks if a term is valid. Throws an exception if the term is not valid.
 
 Each term is a variant of the other (i.e. they are structurally equivalent).
 
-* compilation flags: ``static``
-* template: ``variant(Term1,Term2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``variant(@term,@term)`` - ``zero_or_one``
+| **Template:**
+|    ``variant(Term1,Term2)``
+| **Mode and number of proofs:**
+|    ``variant(@term,@term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 
 Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
 
-* compilation flags: ``static``
-* template: ``variables(Term,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``variables(@term,-list)`` - ``one``
+| **Template:**
+|    ``variables(Term,List)``
+| **Mode and number of proofs:**
+|    ``variables(@term,-list)`` - ``one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ Returns a list of all term variables (ordered as found when doing a depth-first,
 
 Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).
 
-* compilation flags: ``static``
-* template: ``singletons(Term,Singletons)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``singletons(@term,-list)`` - ``one``
+| **Template:**
+|    ``singletons(Term,Singletons)``
+| **Mode and number of proofs:**
+|    ``singletons(@term,-list)`` - ``one``
 
 
 Protected interface

@@ -196,203 +196,272 @@
 <div class="section" id="debuggerp">
 <h1><code class="docutils literal notranslate"><span class="pre">debuggerp</span></code><a class="headerlink" href="#debuggerp" title="Permalink to this headline">¶</a></h1>
 <p>Debugger protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 2.1</li>
-<li>date: 2016/10/23</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 2.1</div>
+<div class="line"><strong>Date:</strong> 2016/10/23</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="reset/0"> </div><div class="section" id="reset-0">
 <span id="debuggerp-0-reset-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">reset/0</span></code><a class="headerlink" href="#reset-0" title="Permalink to this headline">¶</a></h3>
 <p>Resets all debugging settings, including spy points and leashed ports, and turns off debugging.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">reset</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="debug/0"> </div></div>
 <div class="section" id="debug-0">
 <span id="debuggerp-0-debug-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">debug/0</span></code><a class="headerlink" href="#debug-0" title="Permalink to this headline">¶</a></h3>
 <p>Starts debugging for all defined spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">debug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="nodebug/0"> </div></div>
 <div class="section" id="nodebug-0">
 <span id="debuggerp-0-nodebug-0"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">nodebug/0</span></code><a class="headerlink" href="#nodebug-0" title="Permalink to this headline">¶</a></h3>
 <p>Stops debugging for all defined spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">nodebug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nodebug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="debugging/0"> </div></div>
 <div class="section" id="debugging-0">
 <span id="debuggerp-0-debugging-0"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">debugging/0</span></code><a class="headerlink" href="#debugging-0" title="Permalink to this headline">¶</a></h3>
 <p>Reports current debugging settings, including spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">debugging</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debugging</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="debugging/1"> </div></div>
 <div class="section" id="debugging-1">
 <span id="debuggerp-0-debugging-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">debugging/1</span></code><a class="headerlink" href="#debugging-1" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all entities compiled in debug mode.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">debugging(Entity)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">debugging(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debugging(Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debugging(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="trace/0"> </div></div>
 <div class="section" id="trace-0">
 <span id="debuggerp-0-trace-0"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">trace/0</span></code><a class="headerlink" href="#trace-0" title="Permalink to this headline">¶</a></h3>
 <p>Starts tracing all calls compiled in debug mode.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">trace</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">trace</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="notrace/0"> </div></div>
 <div class="section" id="notrace-0">
 <span id="debuggerp-0-notrace-0"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">notrace/0</span></code><a class="headerlink" href="#notrace-0" title="Permalink to this headline">¶</a></h3>
 <p>Stops tracing of calls compiled in debug mode.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">notrace</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">notrace</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="spy/1"> </div></div>
 <div class="section" id="spy-1">
 <span id="debuggerp-0-spy-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">spy/1</span></code><a class="headerlink" href="#spy-1" title="Permalink to this headline">¶</a></h3>
 <p>Sets a line number spy point or a predicate spy point or a list of spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">spy(SpyPoint)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">spy(&#64;spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">spy(&#64;list(spy_point))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(SpyPoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(&#64;spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(&#64;list(spy_point))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
 <div id="spying/1"> </div></div>
 <div class="section" id="spying-1">
 <span id="debuggerp-0-spying-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">spying/1</span></code><a class="headerlink" href="#spying-1" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all defined line number and predicate spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">spying(SpyPoint)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">spying(?spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spying(SpyPoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spying(?spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="spy/4"> </div></div>
 <div class="section" id="spy-4">
 <span id="debuggerp-0-spy-4"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">spy/4</span></code><a class="headerlink" href="#spy-4" title="Permalink to this headline">¶</a></h3>
 <p>Sets a context spy point.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">spy(Sender,This,Self,Goal)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">spy(&#64;term,&#64;term,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(Sender,This,Self,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(&#64;term,&#64;term,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="spying/4"> </div></div>
 <div class="section" id="spying-4">
 <span id="debuggerp-0-spying-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">spying/4</span></code><a class="headerlink" href="#spying-4" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all defined context spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">spying(Sender,This,Self,Goal)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">spying(?term,?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spying(Sender,This,Self,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spying(?term,?term,?term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="nospy/1"> </div></div>
 <div class="section" id="nospy-1">
 <span id="debuggerp-0-nospy-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">nospy/1</span></code><a class="headerlink" href="#nospy-1" title="Permalink to this headline">¶</a></h3>
 <p>Removes all matching line number spy points and predicate spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">nospy(SpyPoint)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;var)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;list(spy_point))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(SpyPoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(&#64;var)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(&#64;spy_point)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(&#64;list(spy_point))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
 <div id="nospy/4"> </div></div>
 <div class="section" id="nospy-4">
 <span id="debuggerp-0-nospy-4"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">nospy/4</span></code><a class="headerlink" href="#nospy-4" title="Permalink to this headline">¶</a></h3>
 <p>Removes all matching context spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">nospy(Sender,This,Self,Goal)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">nospy(&#64;term,&#64;term,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(Sender,This,Self,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(&#64;term,&#64;term,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="nospyall/0"> </div></div>
 <div class="section" id="nospyall-0">
 <span id="debuggerp-0-nospyall-0"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code><a class="headerlink" href="#nospyall-0" title="Permalink to this headline">¶</a></h3>
 <p>Removes all line number, predicate, and context spy points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">nospyall</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospyall</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="leash/1"> </div></div>
 <div class="section" id="leash-1">
 <span id="debuggerp-0-leash-1"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">leash/1</span></code><a class="headerlink" href="#leash-1" title="Permalink to this headline">¶</a></h3>
 <p>Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">leash(Ports)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">leash(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">leash(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leash(Ports)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leash(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leash(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
 <div id="leashing/1"> </div></div>
 <div class="section" id="leashing-1">
 <span id="debuggerp-0-leashing-1"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">leashing/1</span></code><a class="headerlink" href="#leashing-1" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all leashed ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">leashing(Port)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">leashing(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leashing(Port)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">leashing(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

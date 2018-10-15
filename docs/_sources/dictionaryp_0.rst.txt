@@ -8,10 +8,12 @@
 
 Dictionary protocol.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2010/2/26
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2010/2/26
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Converts a list of key-value pairs to a dictionary.
 
-* compilation flags: ``static``
-* template: ``as_dictionary(Pairs,Dictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_dictionary(@list(pairs),-dictionary)`` - ``one``
+| **Template:**
+|    ``as_dictionary(Pairs,Dictionary)``
+| **Mode and number of proofs:**
+|    ``as_dictionary(@list(pairs),-dictionary)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Converts a list of key-value pairs to a dictionary.
 
 Converts a dictionary to a ordered list of key-value pairs.
 
-* compilation flags: ``static``
-* template: ``as_list(Dictionary,Pairs)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_list(@dictionary,-list(pairs))`` - ``one``
+| **Template:**
+|    ``as_list(Dictionary,Pairs)``
+| **Mode and number of proofs:**
+|    ``as_list(@dictionary,-list(pairs))`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Converts a dictionary to a ordered list of key-value pairs.
 
 Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.
 
-* compilation flags: ``static``
-* template: ``clone(Dictionary,Clone,ClonePairs)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``clone(+tree,-tree,-list(pairs))`` - ``one``
+| **Template:**
+|    ``clone(Dictionary,Clone,ClonePairs)``
+| **Mode and number of proofs:**
+|    ``clone(+tree,-tree,-list(pairs))`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.
 
-* compilation flags: ``static``
-* template: ``clone(Dictionary,Pairs,Clone,ClonePairs)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``clone(+tree,-list(pairs),-tree,-list(pairs))`` - ``one``
+| **Template:**
+|    ``clone(Dictionary,Pairs,Clone,ClonePairs)``
+| **Mode and number of proofs:**
+|    ``clone(+tree,-list(pairs),-tree,-list(pairs))`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.
 
-* compilation flags: ``static``
-* template: ``insert(OldDictionary,Key,Value,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``insert(+dictionary,+ground,@term,-dictionary)`` - ``one``
+| **Template:**
+|    ``insert(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``insert(+dictionary,+ground,@term,-dictionary)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Inserts a Key-Value pair into a dictionary, returning the updated dictionary. Wh
 
 Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.
 
-* compilation flags: ``static``
-* template: ``delete(OldDictionary,Key,Value,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete(+dictionary,@ground,?term,-dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``delete(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``delete(+dictionary,@ground,?term,-dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Deletes a matching Key-Value pair from a dictionary, returning the updated dicti
 
 Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.
 
-* compilation flags: ``static``
-* template: ``update(OldDictionary,Key,NewValue,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``update(+dictionary,@ground,+term,-dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``update(OldDictionary,Key,NewValue,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``update(+dictionary,@ground,+term,-dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 
 Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.
 
-* compilation flags: ``static``
-* template: ``update(OldDictionary,Key,OldValue,NewValue,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``update(+dictionary,@ground,?term,+term,-dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``update(OldDictionary,Key,OldValue,NewValue,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``update(+dictionary,@ground,?term,+term,-dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 
 True if the dictionary is empty.
 
-* compilation flags: ``static``
-* template: ``empty(Dictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty(@dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``empty(Dictionary)``
+| **Mode and number of proofs:**
+|    ``empty(@dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,14 +213,14 @@ True if the dictionary is empty.
 
 Lookups a matching Key-Value pair from a dictionary.
 
-* compilation flags: ``static``
-* template: ``lookup(Key,Value,Dictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``lookup(Key,Value,Dictionary)``
+| **Mode and number of proofs:**
+|    ``lookup(+ground,?term,@dictionary)`` - ``zero_or_one``
 
-  * ``lookup(+ground,?term,@dictionary)`` - ``zero_or_one``
-
-  * ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
+|    ``lookup(-ground,?term,@dictionary)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -233,12 +235,12 @@ Lookups a matching Key-Value pair from a dictionary.
 
 Returns the previous pair in a dictionary given a key.
 
-* compilation flags: ``static``
-* template: ``previous(Dictionary,Key,Previous,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``previous(+dictionary,+key,-key,-value)`` - ``zero_or_one``
+| **Template:**
+|    ``previous(Dictionary,Key,Previous,Value)``
+| **Mode and number of proofs:**
+|    ``previous(+dictionary,+key,-key,-value)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -253,12 +255,12 @@ Returns the previous pair in a dictionary given a key.
 
 Returns the next pair in a dictionary given a key.
 
-* compilation flags: ``static``
-* template: ``next(Dictionary,Key,Next,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``next(+dictionary,+key,-key,-value)`` - ``zero_or_one``
+| **Template:**
+|    ``next(Dictionary,Key,Next,Value)``
+| **Mode and number of proofs:**
+|    ``next(+dictionary,+key,-key,-value)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -273,12 +275,12 @@ Returns the next pair in a dictionary given a key.
 
 Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.
 
-* compilation flags: ``static``
-* template: ``min(Dictionary,Key,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``min(+dictionary,-key,-value)`` - ``zero_or_one``
+| **Template:**
+|    ``min(Dictionary,Key,Value)``
+| **Mode and number of proofs:**
+|    ``min(+dictionary,-key,-value)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -293,12 +295,12 @@ Returns the pair with the minimum key in a dictionary. Fails if the dictionary i
 
 Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.
 
-* compilation flags: ``static``
-* template: ``max(Dictionary,Key,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``max(+dictionary,-key,-value)`` - ``zero_or_one``
+| **Template:**
+|    ``max(Dictionary,Key,Value)``
+| **Mode and number of proofs:**
+|    ``max(+dictionary,-key,-value)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -313,12 +315,12 @@ Returns the pair with the maximum key in a dictionary. Fails if the dictionary i
 
 Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.
 
-* compilation flags: ``static``
-* template: ``delete_min(OldDictionary,Key,Value,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete_min(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``delete_min(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``delete_min(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -333,12 +335,12 @@ Deletes the pair with the minimum key from a dictionary, returning the deleted p
 
 Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.
 
-* compilation flags: ``static``
-* template: ``delete_max(OldDictionary,Key,Value,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete_max(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``delete_max(OldDictionary,Key,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``delete_max(+dictionary,-key,-value,-dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -353,12 +355,12 @@ Deletes the pair with the maximum key from a dictionary, returning the deleted p
 
 Returns a list with all dictionary keys.
 
-* compilation flags: ``static``
-* template: ``keys(Dictionary,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``keys(@dictionary,-list)`` - ``one``
+| **Template:**
+|    ``keys(Dictionary,List)``
+| **Mode and number of proofs:**
+|    ``keys(@dictionary,-list)`` - ``one``
 
 
 .. raw:: html
@@ -373,14 +375,14 @@ Returns a list with all dictionary keys.
 
 Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.
 
-* compilation flags: ``static``
-* template: ``map(Closure,Dictionary)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(1,*)``
-
-* mode - number of proofs:
-
-  * ``map(@callable,+dictionary)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,Dictionary)``
+| **Meta-predicate template:**
+|    ``map(1,*)``
+| **Mode and number of proofs:**
+|    ``map(@callable,+dictionary)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -395,14 +397,14 @@ Maps a closure over each dictionary key-value pair. Fails if the mapped closure 
 
 Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.
 
-* compilation flags: ``static``
-* template: ``map(Closure,OldDictionary,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(2,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(@callable,+dictionary,-dictionary)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,OldDictionary,NewDictionary)``
+| **Meta-predicate template:**
+|    ``map(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map(@callable,+dictionary,-dictionary)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -417,14 +419,14 @@ Maps a closure over each dictionary key-value pair, returning the new dictionary
 
 Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.
 
-* compilation flags: ``static``
-* template: ``apply(Closure,OldDictionary,Key,NewDictionary)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``apply(2,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``apply(+callable,+dictionary,+key,-dictionary)`` - ``zero_or_one``
+| **Template:**
+|    ``apply(Closure,OldDictionary,Key,NewDictionary)``
+| **Meta-predicate template:**
+|    ``apply(2,*,*,*)``
+| **Mode and number of proofs:**
+|    ``apply(+callable,+dictionary,+key,-dictionary)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -439,12 +441,12 @@ Applies a closure to a specific key-value pair, returning the new dictionary. Fa
 
 Number of dictionary entries.
 
-* compilation flags: ``static``
-* template: ``size(Dictionary,Size)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``size(@dictionary,?integer)`` - ``zero_or_one``
+| **Template:**
+|    ``size(Dictionary,Size)``
+| **Mode and number of proofs:**
+|    ``size(@dictionary,?integer)`` - ``zero_or_one``
 
 
 Protected interface

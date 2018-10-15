@@ -8,14 +8,15 @@
 
 Hook object for expanding library alias paths in logtalk_library_path/2 facts when compiling a source file.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2018/4/12
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2018/4/12
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`expanding <expanding/0>`
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
 
 Public interface
 ----------------

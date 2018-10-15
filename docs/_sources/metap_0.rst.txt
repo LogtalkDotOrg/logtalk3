@@ -8,10 +8,12 @@
 
 Useful meta-predicates protocol.
 
-* author: Paulo Moura
-* version: 6.1
-* date: 2015/12/23
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 6.1
+| **Date:** 2015/12/23
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,14 +33,14 @@ Public interface
 
 Returns a list of all list elements that satisfy a predicate.
 
-* compilation flags: ``static``
-* template: ``include(Closure,List,Included)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``include(1,*,*)``
-
-* mode - number of proofs:
-
-  * ``include(+callable,+list,-list)`` - ``one``
+| **Template:**
+|    ``include(Closure,List,Included)``
+| **Meta-predicate template:**
+|    ``include(1,*,*)``
+| **Mode and number of proofs:**
+|    ``include(+callable,+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -53,14 +55,14 @@ Returns a list of all list elements that satisfy a predicate.
 
 Returns a list of all list elements that fail to satisfy a predicate.
 
-* compilation flags: ``static``
-* template: ``exclude(Closure,List,Excluded)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``exclude(1,*,*)``
-
-* mode - number of proofs:
-
-  * ``exclude(+callable,+list,-list)`` - ``one``
+| **Template:**
+|    ``exclude(Closure,List,Excluded)``
+| **Meta-predicate template:**
+|    ``exclude(1,*,*)``
+| **Mode and number of proofs:**
+|    ``exclude(+callable,+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -75,14 +77,14 @@ Returns a list of all list elements that fail to satisfy a predicate.
 
 Finds all members of a list that satisfy a given test.
 
-* compilation flags: ``static``
-* template: ``findall_member(Member,List,Test,Result)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``findall_member(*,*,0,*)``
-
-* mode - number of proofs:
-
-  * ``findall_member(@term,+list,@callable,-list)`` - ``one``
+| **Template:**
+|    ``findall_member(Member,List,Test,Result)``
+| **Meta-predicate template:**
+|    ``findall_member(*,*,0,*)``
+| **Mode and number of proofs:**
+|    ``findall_member(@term,+list,@callable,-list)`` - ``one``
 
 
 .. raw:: html
@@ -97,14 +99,14 @@ Finds all members of a list that satisfy a given test.
 
 Finds all members of a list that satisfy a given test appending the given tail to the result.
 
-* compilation flags: ``static``
-* template: ``findall_member(Member,List,Test,Result,Tail)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``findall_member(*,*,0,*,*)``
-
-* mode - number of proofs:
-
-  * ``findall_member(@term,+list,@callable,-list,+list)`` - ``one``
+| **Template:**
+|    ``findall_member(Member,List,Test,Result,Tail)``
+| **Meta-predicate template:**
+|    ``findall_member(*,*,0,*,*)``
+| **Mode and number of proofs:**
+|    ``findall_member(@term,+list,@callable,-list,+list)`` - ``one``
 
 
 .. raw:: html
@@ -119,14 +121,14 @@ Finds all members of a list that satisfy a given test appending the given tail t
 
 Partition a list of elements in two lists using a predicate.
 
-* compilation flags: ``static``
-* template: ``partition(Closure,List,Included,Excluded)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``partition(1,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``partition(+callable,+list,-list,-list)`` - ``one``
+| **Template:**
+|    ``partition(Closure,List,Included,Excluded)``
+| **Meta-predicate template:**
+|    ``partition(1,*,*,*)``
+| **Mode and number of proofs:**
+|    ``partition(+callable,+list,-list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -141,14 +143,14 @@ Partition a list of elements in two lists using a predicate.
 
 Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.
 
-* compilation flags: ``static``
-* template: ``partition(Closure,List,Value,Less,Equal,Greater)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``partition(3,*,*,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``partition(+callable,+list,@term,-list,-list,-list)`` - ``one``
+| **Template:**
+|    ``partition(Closure,List,Value,Less,Equal,Greater)``
+| **Meta-predicate template:**
+|    ``partition(3,*,*,*,*,*)``
+| **Mode and number of proofs:**
+|    ``partition(+callable,+list,@term,-list,-list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -163,14 +165,14 @@ Partitions a list in lists with values less, equal, and greater than a given val
 
 List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.
 
-* compilation flags: ``static``
-* template: ``fold_left(Closure,Accumulator,List,Result)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fold_left(3,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``fold_left(+callable,?term,+list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``fold_left(Closure,Accumulator,List,Result)``
+| **Meta-predicate template:**
+|    ``fold_left(3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``fold_left(+callable,?term,+list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -185,14 +187,14 @@ List folding (left associative). Closure is extended with three arguments: accum
 
 List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.
 
-* compilation flags: ``static``
-* template: ``fold_left_1(Closure,List,Result)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fold_left_1(3,*,*)``
-
-* mode - number of proofs:
-
-  * ``fold_left_1(+callable,+list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``fold_left_1(Closure,List,Result)``
+| **Meta-predicate template:**
+|    ``fold_left_1(3,*,*)``
+| **Mode and number of proofs:**
+|    ``fold_left_1(+callable,+list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -207,14 +209,14 @@ List folding (left associative). Closure is extended with three arguments: accum
 
 List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.
 
-* compilation flags: ``static``
-* template: ``scan_left(Closure,Accumulator,List,Results)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``scan_left(3,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``scan_left(+callable,?term,+list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``scan_left(Closure,Accumulator,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_left(3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_left(+callable,?term,+list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -229,14 +231,14 @@ List scanning (left associative). Closure is extended with three arguments: accu
 
 List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
 
-* compilation flags: ``static``
-* template: ``scan_left_1(Closure,List,Results)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``scan_left_1(3,*,*)``
-
-* mode - number of proofs:
-
-  * ``scan_left_1(+callable,+list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``scan_left_1(Closure,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_left_1(3,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_left_1(+callable,+list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -251,14 +253,14 @@ List scanning (left associative). Closure is extended with three arguments: accu
 
 List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.
 
-* compilation flags: ``static``
-* template: ``fold_right(Closure,Accumulator,List,Result)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fold_right(3,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``fold_right(+callable,?term,+list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``fold_right(Closure,Accumulator,List,Result)``
+| **Meta-predicate template:**
+|    ``fold_right(3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``fold_right(+callable,?term,+list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -273,14 +275,14 @@ List folding (right associative). Closure is extended with three arguments: list
 
 List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.
 
-* compilation flags: ``static``
-* template: ``fold_right_1(Closure,List,Result)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fold_right_1(3,*,*)``
-
-* mode - number of proofs:
-
-  * ``fold_right_1(+callable,+list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``fold_right_1(Closure,List,Result)``
+| **Meta-predicate template:**
+|    ``fold_right_1(3,*,*)``
+| **Mode and number of proofs:**
+|    ``fold_right_1(+callable,+list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -295,14 +297,14 @@ List folding (right associative). Closure is extended with three arguments: list
 
 List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.
 
-* compilation flags: ``static``
-* template: ``scan_right(Closure,Accumulator,List,Results)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``scan_right(3,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``scan_right(+callable,?term,+list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``scan_right(Closure,Accumulator,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_right(3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_right(+callable,?term,+list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -317,14 +319,14 @@ List scanning (right associative). Closure is extended with three arguments: lis
 
 List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.
 
-* compilation flags: ``static``
-* template: ``scan_right_1(Closure,List,Results)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``scan_right_1(3,*,*)``
-
-* mode - number of proofs:
-
-  * ``scan_right_1(+callable,+list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``scan_right_1(Closure,List,Results)``
+| **Meta-predicate template:**
+|    ``scan_right_1(3,*,*)``
+| **Mode and number of proofs:**
+|    ``scan_right_1(+callable,+list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -339,14 +341,14 @@ List scanning (right associative). Closure is extended with three arguments: lis
 
 True if the predicate succeeds for each list element.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(1,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List)``
+| **Meta-predicate template:**
+|    ``map(1,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -361,14 +363,14 @@ True if the predicate succeeds for each list element.
 
 List mapping predicate taken arguments from two lists of elements.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List1,List2)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(2,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List1,List2)``
+| **Meta-predicate template:**
+|    ``map(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -383,14 +385,14 @@ List mapping predicate taken arguments from two lists of elements.
 
 List mapping predicate taken arguments from three lists of elements.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List1,List2,List3)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(3,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List1,List2,List3)``
+| **Meta-predicate template:**
+|    ``map(3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -405,14 +407,14 @@ List mapping predicate taken arguments from three lists of elements.
 
 List mapping predicate taken arguments from four lists of elements.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List1,List2,List3,List4)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(4,*,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list,?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List1,List2,List3,List4)``
+| **Meta-predicate template:**
+|    ``map(4,*,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list,?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -427,14 +429,14 @@ List mapping predicate taken arguments from four lists of elements.
 
 List mapping predicate taken arguments from five lists of elements.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List1,List2,List3,List4,List5)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(5,*,*,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list,?list,?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List1,List2,List3,List4,List5)``
+| **Meta-predicate template:**
+|    ``map(5,*,*,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list,?list,?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -449,14 +451,14 @@ List mapping predicate taken arguments from five lists of elements.
 
 List mapping predicate taken arguments from six lists of elements.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List1,List2,List3,List4,List5,List6)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(6,*,*,*,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list,?list,?list,?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List1,List2,List3,List4,List5,List6)``
+| **Meta-predicate template:**
+|    ``map(6,*,*,*,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list,?list,?list,?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -471,14 +473,14 @@ List mapping predicate taken arguments from six lists of elements.
 
 List mapping predicate taken arguments from seven lists of elements.
 
-* compilation flags: ``static``
-* template: ``map(Closure,List1,List2,List3,List4,List5,List6,List7)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map(7,*,*,*,*,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``map(+callable,?list,?list,?list,?list,?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``map(Closure,List1,List2,List3,List4,List5,List6,List7)``
+| **Meta-predicate template:**
+|    ``map(7,*,*,*,*,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,?list,?list,?list,?list,?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -493,14 +495,14 @@ List mapping predicate taken arguments from seven lists of elements.
 
 Map a list and apply a fold left (reduce) to the resulting list.
 
-* compilation flags: ``static``
-* template: ``map_reduce(Map,Reduce,Accumulator,List,Result)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``map_reduce(2,3,*,*,*)``
-
-* mode - number of proofs:
-
-  * ``map_reduce(+callable,+callable,+term,?list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``map_reduce(Map,Reduce,Accumulator,List,Result)``
+| **Meta-predicate template:**
+|    ``map_reduce(2,3,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map_reduce(+callable,+callable,+term,?list,?term)`` - ``zero_or_more``
 
 
 Protected interface

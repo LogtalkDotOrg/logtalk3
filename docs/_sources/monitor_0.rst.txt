@@ -8,14 +8,15 @@
 
 Monitor predicates.
 
-* author: Paulo Moura
-* version: 1.2
-* date: 2009/10/8
-* compilation flags: ``static, events``
+| **Author:** Paulo Moura
+| **Version:** 1.2
+| **Date:** 2009/10/8
 
-* implements:
+| **Compilation flags:** ``static, events``
 
-  * ``public`` :ref:`monitorp <monitorp/0>`
+
+| **Implements:**
+|    ``public`` :ref:`monitorp <monitorp/0>`
 
 Public interface
 ----------------
@@ -42,12 +43,12 @@ Private predicates
 
 Stores current spy points.
 
-* compilation flags: ``dynamic``
-* template: ``spy_point_(Event,Object,Message,Sender)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``spy_point_(?event,?object,?callable,?object)`` - ``zero_or_more``
+| **Template:**
+|    ``spy_point_(Event,Object,Message,Sender)``
+| **Mode and number of proofs:**
+|    ``spy_point_(?event,?object,?callable,?object)`` - ``zero_or_more``
 
 
 Operators

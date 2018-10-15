@@ -8,10 +8,12 @@
 
 Set protocol.
 
-* author: Paulo Moura
-* version: 1.4
-* date: 2018/8/17
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.4
+| **Date:** 2018/8/17
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns a set with all unique elements from the given list.
 
-* compilation flags: ``static``
-* template: ``as_set(List,Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_set(@list,-set)`` - ``one``
+| **Template:**
+|    ``as_set(List,Set)``
+| **Mode and number of proofs:**
+|    ``as_set(@list,-set)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns a set with all unique elements from the given list.
 
 Returns a list with all elements of the given set.
 
-* compilation flags: ``static``
-* template: ``as_list(Set,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_list(@set,-list)`` - ``one``
+| **Template:**
+|    ``as_list(Set,List)``
+| **Mode and number of proofs:**
+|    ``as_list(@set,-list)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Returns a list with all elements of the given set.
 
 Deletes an element from a set returning the set of remaining elements.
 
-* compilation flags: ``static``
-* template: ``delete(Set,Element,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete(+set,@term,?set)`` - ``one``
+| **Template:**
+|    ``delete(Set,Element,Remaining)``
+| **Mode and number of proofs:**
+|    ``delete(+set,@term,?set)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Deletes an element from a set returning the set of remaining elements.
 
 True if the two sets have no element in common.
 
-* compilation flags: ``static``
-* template: ``disjoint(Set1,Set2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``disjoint(+set,+set)`` - ``zero_or_one``
+| **Template:**
+|    ``disjoint(Set1,Set2)``
+| **Mode and number of proofs:**
+|    ``disjoint(+set,+set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ True if the two sets have no element in common.
 
 True if the two sets are equal.
 
-* compilation flags: ``static``
-* template: ``equal(Set1,Set2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``equal(+set,+set)`` - ``zero_or_one``
+| **Template:**
+|    ``equal(Set1,Set2)``
+| **Mode and number of proofs:**
+|    ``equal(+set,+set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ True if the two sets are equal.
 
 True if the set is empty.
 
-* compilation flags: ``static``
-* template: ``empty(Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty(+set)`` - ``zero_or_one``
+| **Template:**
+|    ``empty(Set)``
+| **Mode and number of proofs:**
+|    ``empty(+set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ True if the set is empty.
 
 Inserts an element in a set, returning the resulting set.
 
-* compilation flags: ``static``
-* template: ``insert(In,Element,Out)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``insert(+set,+term,?set)`` - ``one``
+| **Template:**
+|    ``insert(In,Element,Out)``
+| **Mode and number of proofs:**
+|    ``insert(+set,+term,?set)`` - ``one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Inserts an element in a set, returning the resulting set.
 
 Inserts a list of elements in a set, returning the resulting set.
 
-* compilation flags: ``static``
-* template: ``insert_all(List,In,Out)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``insert_all(+list,+set,?set)`` - ``one``
+| **Template:**
+|    ``insert_all(List,In,Out)``
+| **Mode and number of proofs:**
+|    ``insert_all(+list,+set,?set)`` - ``one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Inserts a list of elements in a set, returning the resulting set.
 
 True if the two sets have at least one element in common.
 
-* compilation flags: ``static``
-* template: ``intersect(Set1,Set2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``intersect(+set,+set)`` - ``zero_or_one``
+| **Template:**
+|    ``intersect(Set1,Set2)``
+| **Mode and number of proofs:**
+|    ``intersect(+set,+set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ True if the two sets have at least one element in common.
 
 Returns the intersection of Set1 and Set2.
 
-* compilation flags: ``static``
-* template: ``intersection(Set1,Set2,Intersection)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``intersection(+set,+set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``intersection(Set1,Set2,Intersection)``
+| **Mode and number of proofs:**
+|    ``intersection(+set,+set,?set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ Returns the intersection of Set1 and Set2.
 
 True if Intersection is the intersection of Set1 and Set2 and Difference is the difference between Set2 and Set1.
 
-* compilation flags: ``static``
-* template: ``intersection(Set1,Set2,Intersection,Difference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``intersection(+set,+set,?set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``intersection(Set1,Set2,Intersection,Difference)``
+| **Mode and number of proofs:**
+|    ``intersection(+set,+set,?set,?set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ True if Intersection is the intersection of Set1 and Set2 and Difference is the 
 
 Number of set elements.
 
-* compilation flags: ``static``
-* template: ``length(Set,Length)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``length(+set,?integer)`` - ``zero_or_one``
+| **Template:**
+|    ``length(Set,Length)``
+| **Mode and number of proofs:**
+|    ``length(+set,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -271,14 +273,14 @@ Number of set elements.
 
 Element is a member of set Set.
 
-* compilation flags: ``static``
-* template: ``member(Element,Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``member(Element,Set)``
+| **Mode and number of proofs:**
+|    ``member(+term,+set)`` - ``zero_or_one``
 
-  * ``member(+term,+set)`` - ``zero_or_one``
-
-  * ``member(-term,+set)`` - ``zero_or_more``
+|    ``member(-term,+set)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -293,12 +295,12 @@ Element is a member of set Set.
 
 Checks if a term is a member of a set.
 
-* compilation flags: ``static``
-* template: ``memberchk(Element,Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``memberchk(+term,+set)`` - ``zero_or_one``
+| **Template:**
+|    ``memberchk(Element,Set)``
+| **Mode and number of proofs:**
+|    ``memberchk(+term,+set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -313,12 +315,12 @@ Checks if a term is a member of a set.
 
 Returns the power set of a set, represented as a list of sets.
 
-* compilation flags: ``static``
-* template: ``powerset(Set,Powerset)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``powerset(+set,-list)`` - ``one``
+| **Template:**
+|    ``powerset(Set,Powerset)``
+| **Mode and number of proofs:**
+|    ``powerset(+set,-list)`` - ``one``
 
 
 .. raw:: html
@@ -333,12 +335,12 @@ Returns the power set of a set, represented as a list of sets.
 
 Returns the cartesian product of two sets.
 
-* compilation flags: ``static``
-* template: ``product(Set1,Set2,Product)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``product(+set,+set,-set)`` - ``one``
+| **Template:**
+|    ``product(Set1,Set2,Product)``
+| **Mode and number of proofs:**
+|    ``product(+set,+set,-set)`` - ``one``
 
 
 .. raw:: html
@@ -353,12 +355,12 @@ Returns the cartesian product of two sets.
 
 Selects an element from a set, returning the set of remaining elements.
 
-* compilation flags: ``static``
-* template: ``select(Element,Set,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``select(?term,+set,?set)`` - ``zero_or_more``
+| **Template:**
+|    ``select(Element,Set,Remaining)``
+| **Mode and number of proofs:**
+|    ``select(?term,+set,?set)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -373,12 +375,12 @@ Selects an element from a set, returning the set of remaining elements.
 
 Checks that an element can be selected from a set, returning the set of remaining elements.
 
-* compilation flags: ``static``
-* template: ``selectchk(Element,Set,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``selectchk(?term,+set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``selectchk(Element,Set,Remaining)``
+| **Mode and number of proofs:**
+|    ``selectchk(?term,+set,?set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -393,12 +395,12 @@ Checks that an element can be selected from a set, returning the set of remainin
 
 True if Subset is a subset of Set.
 
-* compilation flags: ``static``
-* template: ``subset(Subset,Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subset(+set,+set)`` - ``zero_or_one``
+| **Template:**
+|    ``subset(Subset,Set)``
+| **Mode and number of proofs:**
+|    ``subset(+set,+set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -413,12 +415,12 @@ True if Subset is a subset of Set.
 
 True when Difference contains all and only the elements of Set1 which are not also in Set2.
 
-* compilation flags: ``static``
-* template: ``subtract(Set1,Set2,Difference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subtract(+set,+set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``subtract(Set1,Set2,Difference)``
+| **Mode and number of proofs:**
+|    ``subtract(+set,+set,?set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -433,12 +435,12 @@ True when Difference contains all and only the elements of Set1 which are not al
 
 True if Difference is the symmetric difference of Set1 and Set2.
 
-* compilation flags: ``static``
-* template: ``symdiff(Set1,Set2,Difference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``symdiff(+set,+set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``symdiff(Set1,Set2,Difference)``
+| **Mode and number of proofs:**
+|    ``symdiff(+set,+set,?set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -453,12 +455,12 @@ True if Difference is the symmetric difference of Set1 and Set2.
 
 True if Union is the union of Set1 and Set2.
 
-* compilation flags: ``static``
-* template: ``union(Set1,Set2,Union)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``union(+set,+set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``union(Set1,Set2,Union)``
+| **Mode and number of proofs:**
+|    ``union(+set,+set,?set)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -473,12 +475,12 @@ True if Union is the union of Set1 and Set2.
 
 True if Union is the union of Set1 and Set2 and Difference is the difference between Set2 and Set1.
 
-* compilation flags: ``static``
-* template: ``union(Set1,Set2,Union,Difference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``union(+set,+set,?set,?set)`` - ``zero_or_one``
+| **Template:**
+|    ``union(Set1,Set2,Union,Difference)``
+| **Mode and number of proofs:**
+|    ``union(+set,+set,?set,?set)`` - ``zero_or_one``
 
 
 Protected interface

@@ -8,18 +8,18 @@
 
 Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.
 
-* author: Paulo Moura
-* version: 0.2
-* date: 2018/7/18
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 0.2
+| **Date:** 2018/7/18
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
-  * ``public`` :ref:`code_metric <code_metric/0>`
-* provides:
 
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Imports:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+|    ``public`` :ref:`code_metric <code_metric/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------

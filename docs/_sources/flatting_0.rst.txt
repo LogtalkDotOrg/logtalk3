@@ -8,11 +8,13 @@
 
 Flattens conjunction of goals with the form f & g into a list [f,g].
 
-* author: Victor Lagerkvist
-* version: 1.0
-* date: 2010/6/13
-* compilation flags: ``static``
-* source: Based on source code from The Craft of Prolog, by Richard O'Keefe
+| **Author:** Victor Lagerkvist
+| **Version:** 1.0
+| **Date:** 2010/6/13
+
+| **Compilation flags:** ``static``
+
+| **source:** Based on source code from The Craft of Prolog, by Richard O'Keefe
 
 (no dependencies on other entities)
 
@@ -37,9 +39,10 @@ Protected interface
 
 Flattens a conjunction of goals.
 
-* compilation flags: ``static``
-* template: ``flatten_goals(Conjunction)``
+| **Compilation flags:** ``static``
 
+| **Template:**
+|    ``flatten_goals(Conjunction)``
 
 Private predicates
 ------------------

@@ -212,72 +212,90 @@
 <div class="section" id="counter">
 <h1><code class="docutils literal notranslate"><span class="pre">counter</span></code><a class="headerlink" href="#counter" title="Permalink to this headline">¶</a></h1>
 <p>Counter implemented with asserta/retract.</p>
-<ul class="simple">
-<li>author: Victor Lagerkvist</li>
-<li>version: 1.0</li>
-<li>date: 2010/6/13</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Victor Lagerkvist</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2010/6/13</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="increment/0"> </div><div class="section" id="increment-0">
 <span id="counter-0-increment-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">increment/0</span></code><a class="headerlink" href="#increment-0" title="Permalink to this headline">¶</a></h3>
 <p>Increment the counter by 1.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">increment</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">increment</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="increase/1"> </div></div>
 <div class="section" id="increase-1">
 <span id="counter-0-increase-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">increase/1</span></code><a class="headerlink" href="#increase-1" title="Permalink to this headline">¶</a></h3>
 <p>Increments the counter by the specified amount.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">increase(+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">increase(+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
 <li>argname: [I]</li>
 </ul>
 <div id="set/1"> </div></div>
 <div class="section" id="set-1">
 <span id="counter-0-set-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">set/1</span></code><a class="headerlink" href="#set-1" title="Permalink to this headline">¶</a></h3>
 <p>Sets the counter to the specified amount.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set(+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set(+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
 <li>argname: [N]</li>
 </ul>
 <div id="value/1"> </div></div>
 <div class="section" id="value-1">
 <span id="counter-0-value-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">value/1</span></code><a class="headerlink" href="#value-1" title="Permalink to this headline">¶</a></h3>
 <p>Gets the current value of the counter.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">value(?number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">value(?number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
 <li>argname: [N]</li>
 </ul>
 <div id="reset/0"> </div></div>
 <div class="section" id="reset-0">
 <span id="counter-0-reset-0"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">reset/0</span></code><a class="headerlink" href="#reset-0" title="Permalink to this headline">¶</a></h3>
 <p>Resets the counter to zero.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">reset</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">
@@ -288,9 +306,9 @@
 <h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="c/1"> </div><div class="section" id="c-1">
 <span id="counter-0-c-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">c/1</span></code><a class="headerlink" href="#c-1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
 </div>
 </div>
 <div class="section" id="operators">

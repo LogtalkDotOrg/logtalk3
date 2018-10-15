@@ -8,10 +8,12 @@
 
 List protocol.
 
-* author: Paulo Moura
-* version: 1.14
-* date: 2018/8/17
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.14
+| **Date:** 2018/8/17
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Appends all lists in a list of lists.
 
-* compilation flags: ``static``
-* template: ``append(Lists,Concatenation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``append(+list(list),?list)`` - ``zero_or_one``
+| **Template:**
+|    ``append(Lists,Concatenation)``
+| **Mode and number of proofs:**
+|    ``append(+list(list),?list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Appends all lists in a list of lists.
 
 Appends two lists.
 
-* compilation flags: ``static``
-* template: ``append(List1,List2,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``append(?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``append(List1,List2,List)``
+| **Mode and number of proofs:**
+|    ``append(?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Appends two lists.
 
 Deletes from a list all occurrences of an element returning the list of remaining elements. Uses ==/2 for element comparison.
 
-* compilation flags: ``static``
-* template: ``delete(List,Element,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete(@list,@term,?list)`` - ``one``
+| **Template:**
+|    ``delete(List,Element,Remaining)``
+| **Mode and number of proofs:**
+|    ``delete(@list,@term,?list)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Deletes from a list all occurrences of an element returning the list of remainin
 
 Deletes all matching elements from a list, returning the list of remaining elements. Uses =/2 for element comparison.
 
-* compilation flags: ``static``
-* template: ``delete_matches(List,Element,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete_matches(@list,@term,?list)`` - ``one``
+| **Template:**
+|    ``delete_matches(List,Element,Remaining)``
+| **Mode and number of proofs:**
+|    ``delete_matches(@list,@term,?list)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Deletes all matching elements from a list, returning the list of remaining eleme
 
 True if the argument is an empty list.
 
-* compilation flags: ``static``
-* template: ``empty(List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty(@list)`` - ``zero_or_one``
+| **Template:**
+|    ``empty(List)``
+| **Mode and number of proofs:**
+|    ``empty(@list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ True if the argument is an empty list.
 
 Flattens a list of lists into a list.
 
-* compilation flags: ``static``
-* template: ``flatten(List,Flatted)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``flatten(+list,-list)`` - ``one``
+| **Template:**
+|    ``flatten(List,Flatted)``
+| **Mode and number of proofs:**
+|    ``flatten(+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Flattens a list of lists into a list.
 
 Calculates the Hamming distance between two lists (using equality to compare list elements). Fails if the two lists are not of the same length.
 
-* compilation flags: ``static``
-* template: ``hamming_distance(List1,List2,Distance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``hamming_distance(+list,+list,-integer)`` - ``zero_or_one``
+| **Template:**
+|    ``hamming_distance(List1,List2,Distance)``
+| **Mode and number of proofs:**
+|    ``hamming_distance(+list,+list,-integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Calculates the Hamming distance between two lists (using equality to compare lis
 
 Sorts a list of key-value pairs in ascending order.
 
-* compilation flags: ``static``
-* template: ``keysort(List,Sorted)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``keysort(+list(pair),-list(pair))`` - ``one``
+| **Template:**
+|    ``keysort(List,Sorted)``
+| **Mode and number of proofs:**
+|    ``keysort(+list(pair),-list(pair))`` - ``one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Sorts a list of key-value pairs in ascending order.
 
 List last element (if it exists).
 
-* compilation flags: ``static``
-* template: ``last(List,Last)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``last(?list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``last(List,Last)``
+| **Mode and number of proofs:**
+|    ``last(?list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ List last element (if it exists).
 
 List length.
 
-* compilation flags: ``static``
-* template: ``length(List,Length)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``length(?list,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``length(List,Length)``
+| **Mode and number of proofs:**
+|    ``length(?list,?integer)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ List length.
 
 Determines the list maximum value using standard order. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``max(List,Maximum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``max(+list,-term)`` - ``zero_or_one``
+| **Template:**
+|    ``max(List,Maximum)``
+| **Mode and number of proofs:**
+|    ``max(+list,-term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ Determines the list maximum value using standard order. Fails if the list is emp
 
 Element is a list member.
 
-* compilation flags: ``static``
-* template: ``member(Element,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``member(?term,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``member(Element,List)``
+| **Mode and number of proofs:**
+|    ``member(?term,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ Element is a list member.
 
 Checks if a term is a member of a list.
 
-* compilation flags: ``static``
-* template: ``memberchk(Element,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``memberchk(?term,?list)`` - ``zero_or_one``
+| **Template:**
+|    ``memberchk(Element,List)``
+| **Mode and number of proofs:**
+|    ``memberchk(?term,?list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -291,12 +293,12 @@ Checks if a term is a member of a list.
 
 Determines the minimum value in a list using standard order. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``min(List,Minimum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``min(+list,-term)`` - ``zero_or_one``
+| **Template:**
+|    ``min(List,Minimum)``
+| **Mode and number of proofs:**
+|    ``min(+list,-term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -311,12 +313,12 @@ Determines the minimum value in a list using standard order. Fails if the list i
 
 Sorts a list in ascending order (duplicated elements are not removed).
 
-* compilation flags: ``static``
-* template: ``msort(List,Sorted)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``msort(+list,-list)`` - ``one``
+| **Template:**
+|    ``msort(List,Sorted)``
+| **Mode and number of proofs:**
+|    ``msort(+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -331,14 +333,14 @@ Sorts a list in ascending order (duplicated elements are not removed).
 
 Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are not removed).
 
-* compilation flags: ``static``
-* template: ``msort(Closure,List,Sorted)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``msort(3,*,*)``
-
-* mode - number of proofs:
-
-  * ``msort(+callable,+list,-list)`` - ``one``
+| **Template:**
+|    ``msort(Closure,List,Sorted)``
+| **Meta-predicate template:**
+|    ``msort(3,*,*)``
+| **Mode and number of proofs:**
+|    ``msort(+callable,+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -353,12 +355,12 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 X and Y are consecutive elements in List.
 
-* compilation flags: ``static``
-* template: ``nextto(X,Y,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nextto(?term,?term,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``nextto(X,Y,List)``
+| **Mode and number of proofs:**
+|    ``nextto(?term,?term,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -373,12 +375,12 @@ X and Y are consecutive elements in List.
 
 Nth element of a list (counting from zero).
 
-* compilation flags: ``static``
-* template: ``nth0(Nth,List,Element)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth0(?integer,?list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``nth0(Nth,List,Element)``
+| **Mode and number of proofs:**
+|    ``nth0(?integer,?list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -393,12 +395,12 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from zero).
 
-* compilation flags: ``static``
-* template: ``nth0(Nth,List,Element,Residue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth0(?integer,?list,?term,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``nth0(Nth,List,Element,Residue)``
+| **Mode and number of proofs:**
+|    ``nth0(?integer,?list,?term,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -413,12 +415,12 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from one).
 
-* compilation flags: ``static``
-* template: ``nth1(Nth,List,Element)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth1(?integer,?list,?term)`` - ``zero_or_more``
+| **Template:**
+|    ``nth1(Nth,List,Element)``
+| **Mode and number of proofs:**
+|    ``nth1(?integer,?list,?term)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -433,12 +435,12 @@ Nth element of a list (counting from one).
 
 Nth element of a list (counting from one).
 
-* compilation flags: ``static``
-* template: ``nth1(Nth,List,Element,Residue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth1(?integer,?list,?term,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``nth1(Nth,List,Element,Residue)``
+| **Mode and number of proofs:**
+|    ``nth1(?integer,?list,?term,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -453,12 +455,12 @@ Nth element of a list (counting from one).
 
 Partitions a list in lists with values less, equal, and greater than a given value (using standard order).
 
-* compilation flags: ``static``
-* template: ``partition(List,Value,Less,Equal,Greater)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``partition(+list,+number,-list,-list,-list)`` - ``one``
+| **Template:**
+|    ``partition(List,Value,Less,Equal,Greater)``
+| **Mode and number of proofs:**
+|    ``partition(+list,+number,-list,-list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -473,12 +475,12 @@ Partitions a list in lists with values less, equal, and greater than a given val
 
 The two lists are a permutation of the same list.
 
-* compilation flags: ``static``
-* template: ``permutation(List,Permutation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``permutation(?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``permutation(List,Permutation)``
+| **Mode and number of proofs:**
+|    ``permutation(?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -493,12 +495,12 @@ The two lists are a permutation of the same list.
 
 Prefix is a prefix of List.
 
-* compilation flags: ``static``
-* template: ``prefix(Prefix,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``prefix(?list,+list)`` - ``zero_or_more``
+| **Template:**
+|    ``prefix(Prefix,List)``
+| **Mode and number of proofs:**
+|    ``prefix(?list,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -513,14 +515,14 @@ Prefix is a prefix of List.
 
 Prefix is a prefix of length Length of List.
 
-* compilation flags: ``static``
-* template: ``prefix(Prefix,Length,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``prefix(Prefix,Length,List)``
+| **Mode and number of proofs:**
+|    ``prefix(?list,+integer,+list)`` - ``zero_or_one``
 
-  * ``prefix(?list,+integer,+list)`` - ``zero_or_one``
-
-  * ``prefix(?list,-integer,+list)`` - ``zero_or_more``
+|    ``prefix(?list,-integer,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -535,12 +537,12 @@ Prefix is a prefix of length Length of List.
 
 Prefix is a proper prefix of List.
 
-* compilation flags: ``static``
-* template: ``proper_prefix(Prefix,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``proper_prefix(?list,+list)`` - ``zero_or_more``
+| **Template:**
+|    ``proper_prefix(Prefix,List)``
+| **Mode and number of proofs:**
+|    ``proper_prefix(?list,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -555,14 +557,14 @@ Prefix is a proper prefix of List.
 
 Prefix is a proper prefix of length Length of List.
 
-* compilation flags: ``static``
-* template: ``proper_prefix(Prefix,Length,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``proper_prefix(Prefix,Length,List)``
+| **Mode and number of proofs:**
+|    ``proper_prefix(?list,+integer,+list)`` - ``zero_or_one``
 
-  * ``proper_prefix(?list,+integer,+list)`` - ``zero_or_one``
-
-  * ``proper_prefix(?list,-integer,+list)`` - ``zero_or_more``
+|    ``proper_prefix(?list,-integer,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -577,16 +579,16 @@ Prefix is a proper prefix of length Length of List.
 
 Reverses a list.
 
-* compilation flags: ``static``
-* template: ``reverse(List,Reversed)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``reverse(List,Reversed)``
+| **Mode and number of proofs:**
+|    ``reverse(+list,?list)`` - ``zero_or_one``
 
-  * ``reverse(+list,?list)`` - ``zero_or_one``
+|    ``reverse(?list,+list)`` - ``zero_or_one``
 
-  * ``reverse(?list,+list)`` - ``zero_or_one``
-
-  * ``reverse(-list,-list)`` - ``one_or_more``
+|    ``reverse(-list,-list)`` - ``one_or_more``
 
 
 .. raw:: html
@@ -601,16 +603,16 @@ Reverses a list.
 
 The two lists have the same length.
 
-* compilation flags: ``static``
-* template: ``same_length(List1,List2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``same_length(List1,List2)``
+| **Mode and number of proofs:**
+|    ``same_length(+list,?list)`` - ``zero_or_one``
 
-  * ``same_length(+list,?list)`` - ``zero_or_one``
+|    ``same_length(?list,+list)`` - ``zero_or_one``
 
-  * ``same_length(?list,+list)`` - ``zero_or_one``
-
-  * ``same_length(-list,-list)`` - ``one_or_more``
+|    ``same_length(-list,-list)`` - ``one_or_more``
 
 
 .. raw:: html
@@ -625,16 +627,16 @@ The two lists have the same length.
 
 The two lists have the same length.
 
-* compilation flags: ``static``
-* template: ``same_length(List1,List2,Length)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``same_length(List1,List2,Length)``
+| **Mode and number of proofs:**
+|    ``same_length(+list,?list,?integer)`` - ``zero_or_one``
 
-  * ``same_length(+list,?list,?integer)`` - ``zero_or_one``
+|    ``same_length(?list,+list,?integer)`` - ``zero_or_one``
 
-  * ``same_length(?list,+list,?integer)`` - ``zero_or_one``
-
-  * ``same_length(-list,-list,-integer)`` - ``one_or_more``
+|    ``same_length(-list,-list,-integer)`` - ``one_or_more``
 
 
 .. raw:: html
@@ -649,12 +651,12 @@ The two lists have the same length.
 
 Selects an element from a list, returning the list of remaining elements.
 
-* compilation flags: ``static``
-* template: ``select(Element,List,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``select(?term,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``select(Element,List,Remaining)``
+| **Mode and number of proofs:**
+|    ``select(?term,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -669,12 +671,12 @@ Selects an element from a list, returning the list of remaining elements.
 
 Checks that an element can be selected from a list, returning the list of remaining elements.
 
-* compilation flags: ``static``
-* template: ``selectchk(Element,List,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``selectchk(?term,?list,?list)`` - ``zero_or_one``
+| **Template:**
+|    ``selectchk(Element,List,Remaining)``
+| **Mode and number of proofs:**
+|    ``selectchk(?term,?list,?list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -689,12 +691,12 @@ Checks that an element can be selected from a list, returning the list of remain
 
 Selects an element from a list, replacing it by a new element and returning the resulting list.
 
-* compilation flags: ``static``
-* template: ``select(Old,OldList,New,NewList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``select(?term,?list,?term,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``select(Old,OldList,New,NewList)``
+| **Mode and number of proofs:**
+|    ``select(?term,?list,?term,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -709,12 +711,12 @@ Selects an element from a list, replacing it by a new element and returning the 
 
 Checks that an element from a list can be replaced by a new element, returning the resulting list.
 
-* compilation flags: ``static``
-* template: ``selectchk(Old,OldList,New,NewList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``selectchk(?term,?list,?term,?list)`` - ``zero_or_one``
+| **Template:**
+|    ``selectchk(Old,OldList,New,NewList)``
+| **Mode and number of proofs:**
+|    ``selectchk(?term,?list,?term,?list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -729,12 +731,12 @@ Checks that an element from a list can be replaced by a new element, returning t
 
 Sorts a list in ascending order (duplicated elements are removed).
 
-* compilation flags: ``static``
-* template: ``sort(List,Sorted)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sort(+list,-list)`` - ``one``
+| **Template:**
+|    ``sort(List,Sorted)``
+| **Mode and number of proofs:**
+|    ``sort(+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -749,14 +751,14 @@ Sorts a list in ascending order (duplicated elements are removed).
 
 Sorts a list using a user-specified comparison predicate modeled on the standard compare/3 predicate (duplicated elements are removed).
 
-* compilation flags: ``static``
-* template: ``sort(Closure,List,Sorted)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``sort(3,*,*)``
-
-* mode - number of proofs:
-
-  * ``sort(+callable,+list,-list)`` - ``one``
+| **Template:**
+|    ``sort(Closure,List,Sorted)``
+| **Meta-predicate template:**
+|    ``sort(3,*,*)``
+| **Mode and number of proofs:**
+|    ``sort(+callable,+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -771,12 +773,12 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 Sorts a list using the given key and order. @< and @> orders remove duplicates while @=< and @>= orders keep them. @< and @=< specify ascending order while @> and @>= specify descending order. When the key is zero, the whole term is used for comparisons.
 
-* compilation flags: ``static``
-* template: ``sort(Key,Order,List,Sorted)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sort(+non_negative_integer,+atom,+list,-list)`` - ``one``
+| **Template:**
+|    ``sort(Key,Order,List,Sorted)``
+| **Mode and number of proofs:**
+|    ``sort(+non_negative_integer,+atom,+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -791,12 +793,12 @@ Sorts a list using the given key and order. @< and @> orders remove duplicates w
 
 Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.
 
-* compilation flags: ``static``
-* template: ``split(List,Length,Sublists,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``split(+list,+integer,-list(list),-list)`` - ``zero_or_one``
+| **Template:**
+|    ``split(List,Length,Sublists,Remaining)``
+| **Mode and number of proofs:**
+|    ``split(+list,+integer,-list(list),-list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -811,12 +813,12 @@ Splits a list into sublists of a given length. Also returns a list with the rema
 
 The first list is a sublist of the second.
 
-* compilation flags: ``static``
-* template: ``sublist(Sublist,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sublist(?list,+list)`` - ``zero_or_more``
+| **Template:**
+|    ``sublist(Sublist,List)``
+| **Mode and number of proofs:**
+|    ``sublist(?list,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -831,12 +833,12 @@ The first list is a sublist of the second.
 
 List is an interleaving of Subsequence and Remaining. Element order is preserved.
 
-* compilation flags: ``static``
-* template: ``subsequence(List,Subsequence,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subsequence(?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``subsequence(List,Subsequence,Remaining)``
+| **Mode and number of proofs:**
+|    ``subsequence(?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -851,12 +853,12 @@ List is an interleaving of Subsequence and Remaining. Element order is preserved
 
 Generates subsequences of a given length from a list. Also returns the remaining elements. Element order is preserved.
 
-* compilation flags: ``static``
-* template: ``subsequence(List,Length,Subsequence,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subsequence(+list,+integer,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``subsequence(List,Length,Subsequence,Remaining)``
+| **Mode and number of proofs:**
+|    ``subsequence(+list,+integer,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -871,12 +873,12 @@ Generates subsequences of a given length from a list. Also returns the remaining
 
 Substitutes all occurrences of Old in List by New, returning NewList. Uses term equality for element comparison.
 
-* compilation flags: ``static``
-* template: ``substitute(Old,List,New,NewList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``substitute(@term,@list,@term,-list)`` - ``one``
+| **Template:**
+|    ``substitute(Old,List,New,NewList)``
+| **Mode and number of proofs:**
+|    ``substitute(@term,@list,@term,-list)`` - ``one``
 
 
 .. raw:: html
@@ -891,12 +893,12 @@ Substitutes all occurrences of Old in List by New, returning NewList. Uses term 
 
 Removes all elements in the second list from the first list, returning the list of remaining elements.
 
-* compilation flags: ``static``
-* template: ``subtract(List,Elements,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subtract(+list,+list,-list)`` - ``one``
+| **Template:**
+|    ``subtract(List,Elements,Remaining)``
+| **Mode and number of proofs:**
+|    ``subtract(+list,+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -911,12 +913,12 @@ Removes all elements in the second list from the first list, returning the list 
 
 Suffix is a suffix of List.
 
-* compilation flags: ``static``
-* template: ``suffix(Suffix,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``suffix(?list,+list)`` - ``zero_or_more``
+| **Template:**
+|    ``suffix(Suffix,List)``
+| **Mode and number of proofs:**
+|    ``suffix(?list,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -931,14 +933,14 @@ Suffix is a suffix of List.
 
 Suffix is a suffix of length Length of List.
 
-* compilation flags: ``static``
-* template: ``suffix(Suffix,Length,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``suffix(Suffix,Length,List)``
+| **Mode and number of proofs:**
+|    ``suffix(?list,+integer,+list)`` - ``zero_or_one``
 
-  * ``suffix(?list,+integer,+list)`` - ``zero_or_one``
-
-  * ``suffix(?list,-integer,+list)`` - ``zero_or_more``
+|    ``suffix(?list,-integer,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -953,12 +955,12 @@ Suffix is a suffix of length Length of List.
 
 Suffix is a proper suffix of List.
 
-* compilation flags: ``static``
-* template: ``proper_suffix(Suffix,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``proper_suffix(?list,+list)`` - ``zero_or_more``
+| **Template:**
+|    ``proper_suffix(Suffix,List)``
+| **Mode and number of proofs:**
+|    ``proper_suffix(?list,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -973,14 +975,14 @@ Suffix is a proper suffix of List.
 
 Suffix is a proper suffix of length Length of List.
 
-* compilation flags: ``static``
-* template: ``proper_suffix(Suffix,Length,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``proper_suffix(Suffix,Length,List)``
+| **Mode and number of proofs:**
+|    ``proper_suffix(?list,+integer,+list)`` - ``zero_or_one``
 
-  * ``proper_suffix(?list,+integer,+list)`` - ``zero_or_one``
-
-  * ``proper_suffix(?list,-integer,+list)`` - ``zero_or_more``
+|    ``proper_suffix(?list,-integer,+list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -995,12 +997,12 @@ Suffix is a proper suffix of length Length of List.
 
 Takes the first N elements of a list. Fails if the list have fewer than N elements.
 
-* compilation flags: ``static``
-* template: ``take(N,List,Elements)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``take(+integer,+list,-list)`` - ``zero_or_one``
+| **Template:**
+|    ``take(N,List,Elements)``
+| **Mode and number of proofs:**
+|    ``take(+integer,+list,-list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -1015,12 +1017,12 @@ Takes the first N elements of a list. Fails if the list have fewer than N elemen
 
 Drops the first N elements of a list. Fails if the list have fewer than N elements.
 
-* compilation flags: ``static``
-* template: ``drop(N,List,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``drop(+integer,+list,-list)`` - ``zero_or_one``
+| **Template:**
+|    ``drop(N,List,Remaining)``
+| **Mode and number of proofs:**
+|    ``drop(+integer,+list,-list)`` - ``zero_or_one``
 
 
 Protected interface

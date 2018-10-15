@@ -289,81 +289,108 @@
 <div class="section" id="type">
 <h1><code class="docutils literal notranslate"><span class="pre">type</span></code><a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h1>
 <p>Type checking predicates. User extensible. New types can be defined by adding clauses for the type/1 and check/2 multifile predicates.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.19</li>
-<li>date: 2018/10/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls,</span> <span class="pre">complements(restrict)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.19</div>
+<div class="line"><strong>Date:</strong> 2018/10/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls,</span> <span class="pre">complements(restrict)</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="type/1"> </div><div class="section" id="type-1">
 <span id="type-0-type-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">type/1</span></code><a class="headerlink" href="#type-1" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the check/2 multifile predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">type(Type)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">type(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type(Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="meta_type/3"> </div></div>
 <div class="section" id="meta-type-3">
 <span id="type-0-meta-type-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code><a class="headerlink" href="#meta-type-3" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">meta_type(MetaType,SubTypes,Values)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">meta_type(?callable,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">meta_type(MetaType,SubTypes,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">meta_type(?callable,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="valid/2"> </div></div>
 <div class="section" id="valid-2">
 <span id="type-0-valid-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/2</span></code><a class="headerlink" href="#valid-2" title="Permalink to this headline">¶</a></h3>
 <p>True if the given term is of the specified type. Fails otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">valid(Type,Term)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">valid(&#64;callable,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(&#64;callable,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="check/3"> </div></div>
 <div class="section" id="check-3">
 <span id="type-0-check-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">check/3</span></code><a class="headerlink" href="#check-3" title="Permalink to this headline">¶</a></h3>
 <p>True if the given term is of the specified type. Throws an error otherwise using the format error(Error, Context). For the possible values of Error see the check/2 predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check(Type,Term,Context)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check(&#64;callable,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check(Type,Term,Context)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check(&#64;callable,&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
 <div id="check/2"> </div></div>
 <div class="section" id="check-2">
 <span id="type-0-check-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">check/2</span></code><a class="headerlink" href="#check-2" title="Permalink to this headline">¶</a></h3>
 <p>True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the type/1 multifile predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check(Type,Term)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check(&#64;callable,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Term is not bound as required: <code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code><ul>
-<li>Term is bound but not of the specified type: <code class="docutils literal notranslate"><span class="pre">type_error(Type,</span> <span class="pre">Term)</span></code></li>
-<li>Term is the of the correct type but not in the specified domain: <code class="docutils literal notranslate"><span class="pre">domain_error(Domain,</span> <span class="pre">Term)</span></code></li>
-<li>Term is the of the correct type and domain but the resource it represents does not exist: <code class="docutils literal notranslate"><span class="pre">existence_error(Type,</span> <span class="pre">Term)</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check(&#64;callable,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Term is not bound as required: <code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code>
+* Term is bound but not of the specified type: <code class="docutils literal notranslate"><span class="pre">type_error(Type,</span> <span class="pre">Term)</span></code>
+* Term is the of the correct type but not in the specified domain: <code class="docutils literal notranslate"><span class="pre">domain_error(Domain,</span> <span class="pre">Term)</span></code>
+* Term is the of the correct type and domain but the resource it represents does not exist: <code class="docutils literal notranslate"><span class="pre">existence_error(Type,</span> <span class="pre">Term)</span></code></div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

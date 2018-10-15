@@ -8,15 +8,16 @@
 
 Message translations for the code_metrics tool.
 
-* author: Ebrahim Azarisooreh
-* version: 0.5
-* date: 2017/12/31
-* compilation flags: ``static``
+| **Author:** Ebrahim Azarisooreh
+| **Version:** 0.5
+| **Date:** 2017/12/31
 
-* provides:
+| **Compilation flags:** ``static``
 
-  * :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+| **Provides:**
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------

@@ -8,14 +8,15 @@
 
 Simple parser of PDDL 3.0 files.
 
-* author: Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.
-* version: 1.1
-* date: 2016/5/18
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.
+| **Version:** 1.1
+| **Date:** 2016/5/18
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`read_file <read_file/0>`
+
+| **Imports:**
+|    ``public`` :ref:`read_file <read_file/0>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Parses a PDDL 3.0 domain file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.
 
-* compilation flags: ``static``
-* template: ``parse_domain(File,Output,RestOfFile)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``parse_domain(+atom,-compound,-list(atom))`` - ``one``
+| **Template:**
+|    ``parse_domain(File,Output,RestOfFile)``
+| **Mode and number of proofs:**
+|    ``parse_domain(+atom,-compound,-list(atom))`` - ``one``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 
 Parses a PDDL 3.0 domain file, returning a compound term representing its contents.
 
-* compilation flags: ``static``
-* template: ``parse_domain(File,Output)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``parse_domain(+atom,-compound)`` - ``one``
+| **Template:**
+|    ``parse_domain(File,Output)``
+| **Mode and number of proofs:**
+|    ``parse_domain(+atom,-compound)`` - ``one``
 
 
 .. raw:: html
@@ -72,12 +73,12 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 
 Parses a PDDL 3.0 problem file, returning a compound term representing its contents.
 
-* compilation flags: ``static``
-* template: ``parse_problem(File,Output)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``parse_problem(+atom,-compound)`` - ``one``
+| **Template:**
+|    ``parse_problem(File,Output)``
+| **Mode and number of proofs:**
+|    ``parse_problem(+atom,-compound)`` - ``one``
 
 
 .. raw:: html
@@ -92,12 +93,12 @@ Parses a PDDL 3.0 problem file, returning a compound term representing its conte
 
 Parses a PDDL 3.0 problem file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.
 
-* compilation flags: ``static``
-* template: ``parse_problem(File,Output,RestOfFile)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``parse_problem(+atom,-compound,-list(atom))`` - ``one``
+| **Template:**
+|    ``parse_problem(File,Output,RestOfFile)``
+| **Mode and number of proofs:**
+|    ``parse_problem(+atom,-compound,-list(atom))`` - ``one``
 
 
 Protected interface

@@ -289,49 +289,66 @@
 <div class="section" id="arbitrary">
 <h1><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code><a class="headerlink" href="#arbitrary" title="Permalink to this headline">¶</a></h1>
 <p>Adds predicates for generating random values for selected types to the library “type” object.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.13</li>
-<li>date: 2018/4/4</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.13</div>
+<div class="line"><strong>Date:</strong> 2018/4/4</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="arbitrary/1"> </div><div class="section" id="arbitrary-1">
 <span id="arbitrary-0-arbitrary-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code><a class="headerlink" href="#arbitrary-1" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the arbitrary/2 multifile predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">arbitrary(Type)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">arbitrary(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="arbitrary/2"> </div></div>
 <div class="section" id="arbitrary-2">
 <span id="arbitrary-0-arbitrary-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code><a class="headerlink" href="#arbitrary-2" title="Permalink to this headline">¶</a></h3>
 <p>Generates an arbitrary term of the specified type. Fails if the given type is not supported. A new generator can be added by defining a clause for this predicate and registering it by adding a clause for the arbitrary/1 multifile predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">arbitrary(Type,Term)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">arbitrary(&#64;callable,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(&#64;callable,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="shrink/3"> </div></div>
 <div class="section" id="shrink-3">
 <span id="arbitrary-0-shrink-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code><a class="headerlink" href="#shrink-3" title="Permalink to this headline">¶</a></h3>
 <p>Shrinks a value to a smaller value. Fails if the given type is not supported or if shrinking the value is not possible. Support for a new type can be added by defining a clause for this predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">shrink(Type,Large,Small)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">shrink(&#64;callable,&#64;term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(Type,Large,Small)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(&#64;callable,&#64;term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

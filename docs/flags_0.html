@@ -195,144 +195,195 @@
 <div class="section" id="flags">
 <h1><code class="docutils literal notranslate"><span class="pre">flags</span></code><a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h1>
 <p>Implementation of persistent object flags.</p>
-<ul class="simple">
-<li>author: Theofrastos Mantadelis</li>
-<li>version: 1.0</li>
-<li>date: 2010/11/27</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Theofrastos Mantadelis</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2010/11/27</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="get_flag_value/2"> </div><div class="section" id="get-flag-value-2">
 <span id="flags-0-get-flag-value-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">get_flag_value/2</span></code><a class="headerlink" href="#get-flag-value-2" title="Permalink to this headline">¶</a></h3>
 <p>Gets or tests the value of a flag.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">get_flag_value(Flag,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">get_flag_value(+atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get_flag_value(Flag,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get_flag_value(+atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="set_flag_value/2"> </div></div>
 <div class="section" id="set-flag-value-2">
 <span id="flags-0-set-flag-value-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">set_flag_value/2</span></code><a class="headerlink" href="#set-flag-value-2" title="Permalink to this headline">¶</a></h3>
 <p>Sets the value of a flag.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_flag_value(Flag,NewValue)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_flag_value(+atom,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_flag_value(Flag,NewValue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_flag_value(+atom,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_flag_value/3"> </div></div>
 <div class="section" id="set-flag-value-3">
 <span id="flags-0-set-flag-value-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">set_flag_value/3</span></code><a class="headerlink" href="#set-flag-value-3" title="Permalink to this headline">¶</a></h3>
 <p>Sets the value of a flag, returning the old value.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_flag_value(Flag,OldValue,NewValue)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_flag_value(+atom,?nonvar,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_flag_value(Flag,OldValue,NewValue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_flag_value(+atom,?nonvar,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="reset_flags/0"> </div></div>
 <div class="section" id="reset-flags-0">
 <span id="flags-0-reset-flags-0"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">reset_flags/0</span></code><a class="headerlink" href="#reset-flags-0" title="Permalink to this headline">¶</a></h3>
 <p>Resets all flags to their default values.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">reset_flags</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_flags</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="reset_flags/1"> </div></div>
 <div class="section" id="reset-flags-1">
 <span id="flags-0-reset-flags-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">reset_flags/1</span></code><a class="headerlink" href="#reset-flags-1" title="Permalink to this headline">¶</a></h3>
 <p>Resets all flags in a group to their default values.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">reset_flags(Group)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">reset_flags(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_flags(Group)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_flags(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="flag_groups/1"> </div></div>
 <div class="section" id="flag-groups-1">
 <span id="flags-0-flag-groups-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">flag_groups/1</span></code><a class="headerlink" href="#flag-groups-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns a list of all flag groups.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">flag_groups(Groups)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">flag_groups(-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flag_groups(Groups)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flag_groups(-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="flag_group_chk/1"> </div></div>
 <div class="section" id="flag-group-chk-1">
 <span id="flags-0-flag-group-chk-1"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">flag_group_chk/1</span></code><a class="headerlink" href="#flag-group-chk-1" title="Permalink to this headline">¶</a></h3>
 <p>Checks if a given atom is a flag group.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">flag_group_chk(Group)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">flag_group_chk(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flag_group_chk(Group)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flag_group_chk(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="print_flags/0"> </div></div>
 <div class="section" id="print-flags-0">
 <span id="flags-0-print-flags-0"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">print_flags/0</span></code><a class="headerlink" href="#print-flags-0" title="Permalink to this headline">¶</a></h3>
 <p>Prints a listing of all flags.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">print_flags</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">print_flags</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="print_flags/1"> </div></div>
 <div class="section" id="print-flags-1">
 <span id="flags-0-print-flags-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">print_flags/1</span></code><a class="headerlink" href="#print-flags-1" title="Permalink to this headline">¶</a></h3>
 <p>Prints a listing of all flags in a group.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">print_flags(Group)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">print_flags(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">print_flags(Group)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">print_flags(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="defined_flag/6"> </div></div>
 <div class="section" id="defined-flag-6">
 <span id="flags-0-defined-flag-6"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">defined_flag/6</span></code><a class="headerlink" href="#defined-flag-6" title="Permalink to this headline">¶</a></h3>
 <p>Gets or test the existing (visible) flag definitions.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">defined_flag(Flag,Group,Type,DefaultValue,Description,Access)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">defined_flag(?atom,?atom,?nonvar,?nonvar,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defined_flag(Flag,Group,Type,DefaultValue,Description,Access)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defined_flag(?atom,?atom,?nonvar,?nonvar,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="built_in_flag/2"> </div></div>
 <div class="section" id="built-in-flag-2">
 <span id="flags-0-built-in-flag-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">built_in_flag/2</span></code><a class="headerlink" href="#built-in-flag-2" title="Permalink to this headline">¶</a></h3>
 <p>True if the argument is a built-in flag type with the specified default value.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">built_in_flag(Type,DefaultValue)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">built_in_flag(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">built_in_flag(Type,DefaultValue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">built_in_flag(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">
@@ -340,38 +391,53 @@
 <div id="unsafe_set_flag_value/2"> </div><div class="section" id="unsafe-set-flag-value-2">
 <span id="flags-0-unsafe-set-flag-value-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">unsafe_set_flag_value/2</span></code><a class="headerlink" href="#unsafe-set-flag-value-2" title="Permalink to this headline">¶</a></h3>
 <p>Sets the value of a flag without performing any validation checks.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">unsafe_set_flag_value(Flag,NewValue)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">unsafe_set_flag_value(+atom,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unsafe_set_flag_value(Flag,NewValue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unsafe_set_flag_value(+atom,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="define_flag/1"> </div></div>
 <div class="section" id="define-flag-1">
 <span id="flags-0-define-flag-1"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">define_flag/1</span></code><a class="headerlink" href="#define-flag-1" title="Permalink to this headline">¶</a></h3>
 <p>Defines a new flag using default options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">define_flag(Flag)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">define_flag(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">define_flag(Flag)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">define_flag(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="define_flag/2"> </div></div>
 <div class="section" id="define-flag-2">
 <span id="flags-0-define-flag-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">define_flag/2</span></code><a class="headerlink" href="#define-flag-2" title="Permalink to this headline">¶</a></h3>
 <p>Defines a new flag using a given set of options (for example, [group(general), type(nonvar), default(true), description(Flag), access(read_write)]).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">define_flag(Flag,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">define_flag(+atom,&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">define_flag(Flag,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">define_flag(+atom,&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="private-predicates">
@@ -379,44 +445,54 @@
 <div id="defined_flag_/6"> </div><div class="section" id="id1">
 <span id="index-15"></span><span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">defined_flag_/6</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Gets or test the existing flag definitions.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">defined_flag_(Flag,Group,Type,DefaultValue,Description,Access)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">defined_flag_(?atom,?atom,?nonvar,?nonvar,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defined_flag_(Flag,Group,Type,DefaultValue,Description,Access)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defined_flag_(?atom,?atom,?nonvar,?nonvar,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="flag_value_/2"> </div></div>
 <div class="section" id="flag-value-2">
 <span id="flags-0-flag-value-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">flag_value_/2</span></code><a class="headerlink" href="#flag-value-2" title="Permalink to this headline">¶</a></h3>
 <p>Table of flag values.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">flag_value_(Flag,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">flag_value_(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flag_value_(Flag,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flag_value_(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="validate/3"> </div></div>
 <div class="section" id="validate-3">
 <span id="flags-0-validate-3"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">validate/3</span></code><a class="headerlink" href="#validate-3" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <div id="validate_type/1"> </div></div>
 <div class="section" id="validate-type-1">
 <span id="flags-0-validate-type-1"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">validate_type/1</span></code><a class="headerlink" href="#validate-type-1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <div id="is_validator/1"> </div></div>
 <div class="section" id="is-validator-1">
 <span id="flags-0-is-validator-1"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">is_validator/1</span></code><a class="headerlink" href="#is-validator-1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 </div>
 <div class="section" id="operators">

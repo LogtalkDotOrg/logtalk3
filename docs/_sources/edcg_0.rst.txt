@@ -8,19 +8,20 @@
 
 Multiple hidden parameters: an extension to Prolog's DCG notation.
 
-* author: Peter Van Roy; adapted to Logtalk by Paulo Moura.
-* version: 1.01
-* date: 2018/8/8
-* copyright: Copyright (C) 1992 Peter Van Roy
-* license: MIT
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Peter Van Roy; adapted to Logtalk by Paulo Moura.
+| **Version:** 1.01
+| **Date:** 2018/8/8
 
-* implements:
+| **Copyright:** Copyright (C) 1992 Peter Van Roy
+| **License:** MIT
 
-  * ``public`` :ref:`expanding <expanding/0>`
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------
@@ -45,7 +46,8 @@ Private predicates
 ``pred_info/3``
 ^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -57,7 +59,8 @@ Private predicates
 ``acc_info/7``
 ^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -69,7 +72,8 @@ Private predicates
 ``acc_info/5``
 ^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -81,7 +85,8 @@ Private predicates
 ``pass_info/2``
 ^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -93,7 +98,8 @@ Private predicates
 ``pass_info/1``
 ^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 Operators
 ---------

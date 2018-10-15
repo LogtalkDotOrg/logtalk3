@@ -8,10 +8,12 @@
 
 Term and goal expansion protocol.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2016/7/12
-* compilation flags: ``static, built_in``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2016/7/12
+
+| **Compilation flags:** ``static, built_in``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Defines a goal expansion. Called recursively until a fixed point is reached on goals found while compiling a source file (except for goals wrapped using the {}/1 compiler bypass control construct).
 
-* compilation flags: ``static``
-* template: ``goal_expansion(Goal,ExpandedGoal)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``goal_expansion(+callable,-callable)`` - ``zero_or_one``
+| **Template:**
+|    ``goal_expansion(Goal,ExpandedGoal)``
+| **Mode and number of proofs:**
+|    ``goal_expansion(+callable,-callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,14 +53,14 @@ Defines a goal expansion. Called recursively until a fixed point is reached on g
 
 Defines a term expansion. Called until it succeeds on all terms read while compiling a source file (except for terms skipped by using the conditional compilation directives or wrapped using the {}/1 compiler bypass control construct).
 
-* compilation flags: ``static``
-* template: ``term_expansion(Term,ExpandedTerms)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``term_expansion(Term,ExpandedTerms)``
+| **Mode and number of proofs:**
+|    ``term_expansion(+term,-term)`` - ``zero_or_one``
 
-  * ``term_expansion(+term,-term)`` - ``zero_or_one``
-
-  * ``term_expansion(+term,-list(term))`` - ``zero_or_one``
+|    ``term_expansion(+term,-list(term))`` - ``zero_or_one``
 
 
 Protected interface

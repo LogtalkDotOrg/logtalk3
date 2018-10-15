@@ -200,304 +200,443 @@
 <div class="section" id="lgtunit">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code><a class="headerlink" href="#lgtunit" title="Permalink to this headline">¶</a></h1>
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, quick-check testing, and multiple test dialects.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 6.24</li>
-<li>date: 2018/8/1</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-<li>implements:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="expanding_0.html#expanding-0"><span class="std std-ref">expanding</span></a></li>
-</ul>
-</li>
-<li>provides:<ul>
-<li><a class="reference internal" href="logtalk_0.html#logtalk-0-trace-event-2"><span class="std std-ref">logtalk::trace_event/2</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 6.24</div>
+<div class="line"><strong>Date:</strong> 2018/8/1</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="expanding_0.html#expanding-0"><span class="std std-ref">expanding</span></a></div>
+</div>
+<div class="line"><strong>Provides:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-trace-event-2"><span class="std std-ref">logtalk::trace_event/2</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="cover/1"> </div><div class="section" id="cover-1">
 <span id="lgtunit-0-cover-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">cover/1</span></code><a class="headerlink" href="#cover-1" title="Permalink to this headline">¶</a></h3>
 <p>Declares entities being tested for which code coverage information should be collected.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">cover(Entity)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">cover(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cover(Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cover(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="run/0"> </div></div>
 <div class="section" id="run-0">
 <span id="lgtunit-0-run-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">run/0</span></code><a class="headerlink" href="#run-0" title="Permalink to this headline">¶</a></h3>
 <p>Runs the unit tests, writing the results to the current output stream.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="run/1"> </div></div>
 <div class="section" id="run-1">
 <span id="lgtunit-0-run-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">run/1</span></code><a class="headerlink" href="#run-1" title="Permalink to this headline">¶</a></h3>
 <p>Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">run(Tests)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">run(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(Tests)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
 <div id="run/2"> </div></div>
 <div class="section" id="run-2">
 <span id="lgtunit-0-run-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">run/2</span></code><a class="headerlink" href="#run-2" title="Permalink to this headline">¶</a></h3>
 <p>Runs the unit tests, writing the results to the specified file. Mode can be either “write” (to create a new file) or “append” (to add results to an existing file).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">run(File,Mode)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(File,Mode)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="run_test_sets/1"> </div></div>
 <div class="section" id="run-test-sets-1">
 <span id="lgtunit-0-run-test-sets-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code><a class="headerlink" href="#run-test-sets-1" title="Permalink to this headline">¶</a></h3>
 <p>Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">run_test_sets(TestObjects)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run_test_sets(+list(object_identifier))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_test_sets(TestObjects)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_test_sets(+list(object_identifier))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="deterministic/1"> </div></div>
 <div class="section" id="deterministic-1">
 <span id="lgtunit-0-deterministic-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code><a class="headerlink" href="#deterministic-1" title="Permalink to this headline">¶</a></h3>
 <p>True if the goal succeeds once without leaving choice-points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">deterministic(Goal)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">deterministic(0)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">deterministic(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="deterministic/2"> </div></div>
 <div class="section" id="deterministic-2">
 <span id="lgtunit-0-deterministic-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">deterministic/2</span></code><a class="headerlink" href="#deterministic-2" title="Permalink to this headline">¶</a></h3>
 <p>Reified version of the deterministic/1 predicate. True if the goal succeeds. Returns a boolean value (true or false) indicating if the goal succeeded without leaving choice-points.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">deterministic(Goal,Deterministic)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">deterministic(0,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">deterministic(+callable,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Goal,Deterministic)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(0,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(+callable,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="assertion/1"> </div></div>
 <div class="section" id="assertion-1">
 <span id="lgtunit-0-assertion-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">assertion/1</span></code><a class="headerlink" href="#assertion-1" title="Permalink to this headline">¶</a></h3>
 <p>True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">assertion(Assertion)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">assertion(::)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">assertion(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Assertion goal fails: <code class="docutils literal notranslate"><span class="pre">assertion_failure(Assertion)</span></code><ul>
-<li>Assertion goal throws Error: <code class="docutils literal notranslate"><span class="pre">assertion_error(Assertion,Error)</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(::)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Assertion goal fails: <code class="docutils literal notranslate"><span class="pre">assertion_failure(Assertion)</span></code>
+* Assertion goal throws Error: <code class="docutils literal notranslate"><span class="pre">assertion_error(Assertion,Error)</span></code></div>
+</div>
 <div id="assertion/2"> </div></div>
 <div class="section" id="assertion-2">
 <span id="lgtunit-0-assertion-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">assertion/2</span></code><a class="headerlink" href="#assertion-2" title="Permalink to this headline">¶</a></h3>
 <p>True if the assertion goal succeeds. Throws an error using the description as argument if the assertion goal throws an error or fails. The description argument helps to distinguish between different assertions in the same test body.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">assertion(Description,Assertion)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">assertion(*,0)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">assertion(+nonvar,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Assertion goal fails: <code class="docutils literal notranslate"><span class="pre">assertion_failure(Description)</span></code><ul>
-<li>Assertion goal throws Error: <code class="docutils literal notranslate"><span class="pre">assertion_error(Description,Error)</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Description,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(*,0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(+nonvar,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Assertion goal fails: <code class="docutils literal notranslate"><span class="pre">assertion_failure(Description)</span></code>
+* Assertion goal throws Error: <code class="docutils literal notranslate"><span class="pre">assertion_error(Description,Error)</span></code></div>
+</div>
 <div id="quick_check/3"> </div></div>
 <div class="section" id="quick-check-3">
 <span id="lgtunit-0-quick-check-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code><a class="headerlink" href="#quick-check-3" title="Permalink to this headline">¶</a></h3>
 <p>Reified version of the quick_check/2 predicate. Reports the result as “passed”, “failed(Goal)” where Goal is the test that failed, or “error(Error,Template)”.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">quick_check(Template,Result,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable,-callable,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(Template,Result,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable,-callable,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="quick_check/2"> </div></div>
 <div class="section" id="quick-check-2">
 <span id="lgtunit-0-quick-check-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">quick_check/2</span></code><a class="headerlink" href="#quick-check-2" title="Permalink to this headline">¶</a></h3>
 <p>Generates and runs random tests for a given predicate given its mode template. Fails when a random generated test fails printing the test. Accepts an option n(NumberOfTests). Default is to run 100 random tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">quick_check(Template,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(Template,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="quick_check/1"> </div></div>
 <div class="section" id="quick-check-1">
 <span id="lgtunit-0-quick-check-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code><a class="headerlink" href="#quick-check-1" title="Permalink to this headline">¶</a></h3>
 <p>Generates and runs 100 random tests for a given predicate given its mode template. Fails when a random generated call fails printing the test.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">quick_check(Template)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(Template)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="benchmark/2"> </div></div>
 <div class="section" id="benchmark-2">
 <span id="lgtunit-0-benchmark-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">benchmark/2</span></code><a class="headerlink" href="#benchmark-2" title="Permalink to this headline">¶</a></h3>
 <p>Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">benchmark(Goal,Time)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">benchmark(0,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">benchmark(+callable,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,Time)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(0,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(+callable,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="benchmark_reified/3"> </div></div>
 <div class="section" id="benchmark-reified-3">
 <span id="lgtunit-0-benchmark-reified-3"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">benchmark_reified/3</span></code><a class="headerlink" href="#benchmark-reified-3" title="Permalink to this headline">¶</a></h3>
 <p>Benchmarks a goal and returns the total execution time in seconds plus its result (success, failure, or error(Error)). Uses cpu clock.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">benchmark_reified(Goal,Time,Result)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">benchmark_reified(0,*,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">benchmark_reified(+callable,-float,-callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark_reified(Goal,Time,Result)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark_reified(0,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark_reified(+callable,-float,-callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="benchmark/3"> </div></div>
 <div class="section" id="benchmark-3">
 <span id="lgtunit-0-benchmark-3"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">benchmark/3</span></code><a class="headerlink" href="#benchmark-3" title="Permalink to this headline">¶</a></h3>
 <p>Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">benchmark(Goal,Repetitions,Time)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">benchmark(0,*,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">benchmark(&#64;callable,+positive_integer,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,Repetitions,Time)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(0,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(&#64;callable,+positive_integer,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="benchmark/4"> </div></div>
 <div class="section" id="benchmark-4">
 <span id="lgtunit-0-benchmark-4"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">benchmark/4</span></code><a class="headerlink" href="#benchmark-4" title="Permalink to this headline">¶</a></h3>
 <p>Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds using the given clock (cpu or wall). Goals that may throw an exception should be wrapped by the catch/3 control construct.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">benchmark(Goal,Repetitions,Clock,Time)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">benchmark(0,*,*,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">benchmark(&#64;callable,+positive_integer,+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,Repetitions,Clock,Time)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(0,*,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(&#64;callable,+positive_integer,+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="variant/2"> </div></div>
 <div class="section" id="variant-2">
 <span id="lgtunit-0-variant-2"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">variant/2</span></code><a class="headerlink" href="#variant-2" title="Permalink to this headline">¶</a></h3>
 <p>True when the two arguments are a variant of each other. I.e. if is possible to rename the term variables to make them identical. Useful for checking expected test results that contain variables.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">variant(Term1,Term2)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">variant(&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,Term2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variant(&#64;term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="approximately_equal/3"> </div></div>
 <div class="section" id="approximately-equal-3">
 <span id="lgtunit-0-approximately-equal-3"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code><a class="headerlink" href="#approximately-equal-3" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; max(abs(Number1), abs(Number2)) * Epsilon. Type-checked.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,Number2,Epsilon)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">approximately_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,Number2,Epsilon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="essentially_equal/3"> </div></div>
 <div class="section" id="essentially-equal-3">
 <span id="lgtunit-0-essentially-equal-3"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code><a class="headerlink" href="#essentially-equal-3" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; min(abs(Number1), abs(Number2)) * Epsilon. Type-checked.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,Number2,Epsilon)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">essentially_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,Number2,Epsilon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">essentially_equal(+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="tolerance_equal/4"> </div></div>
 <div class="section" id="tolerance-equal-4">
 <span id="lgtunit-0-tolerance-equal-4"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code><a class="headerlink" href="#tolerance-equal-4" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =&lt; max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). Type-checked.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">tolerance_equal(+number,+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tolerance_equal(+number,+number,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="=~= / 2"> </div></div>
 <div class="section" id="lgtunit-0-2">
 <span id="index-21"></span><span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">=~=</span> <span class="pre">/</span> <span class="pre">2</span></code><a class="headerlink" href="#lgtunit-0-2" title="Permalink to this headline">¶</a></h3>
 <p>Compares two numbers (or lists of numbers) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. Type-checked.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">=~=(Number1,Number2)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">=~=(+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">=~=(+list(number),+list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(Number1,Number2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(+list(number),+list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
 <div id="epsilon/1"> </div></div>
 <div class="section" id="epsilon-1">
 <span id="lgtunit-0-epsilon-1"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">epsilon/1</span></code><a class="headerlink" href="#epsilon-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the value of epsilon used in the definition of the (=~=)/2 predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">epsilon(Epsilon)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">epsilon(-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">epsilon(Epsilon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">epsilon(-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">
@@ -505,577 +644,783 @@
 <div id="run_tests/0"> </div><div class="section" id="run-tests-0">
 <span id="lgtunit-0-run-tests-0"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">run_tests/0</span></code><a class="headerlink" href="#run-tests-0" title="Permalink to this headline">¶</a></h3>
 <p>Runs all defined unit tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run_tests</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_tests</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="run_tests/2"> </div></div>
 <div class="section" id="run-tests-2">
 <span id="lgtunit-0-run-tests-2"></span><span id="index-24"></span><h3><code class="docutils literal notranslate"><span class="pre">run_tests/2</span></code><a class="headerlink" href="#run-tests-2" title="Permalink to this headline">¶</a></h3>
 <p>Runs a list of defined tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">run_tests(Tests,File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run_tests(+list(callable),+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_tests(Tests,File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_tests(+list(callable),+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="run_test_set/0"> </div></div>
 <div class="section" id="run-test-set-0">
 <span id="lgtunit-0-run-test-set-0"></span><span id="index-25"></span><h3><code class="docutils literal notranslate"><span class="pre">run_test_set/0</span></code><a class="headerlink" href="#run-test-set-0" title="Permalink to this headline">¶</a></h3>
 <p>Runs a test set as part of running two or more test sets as a unified set.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run_test_set</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_test_set</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="run_quick_check_tests/2"> </div></div>
 <div class="section" id="run-quick-check-tests-2">
 <span id="lgtunit-0-run-quick-check-tests-2"></span><span id="index-26"></span><h3><code class="docutils literal notranslate"><span class="pre">run_quick_check_tests/2</span></code><a class="headerlink" href="#run-quick-check-tests-2" title="Permalink to this headline">¶</a></h3>
 <p>Runs a list of defined tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">run_quick_check_tests(Template,NumberOfTests)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">run_quick_check_tests(&#64;callable,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_quick_check_tests(Template,NumberOfTests)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_quick_check_tests(&#64;callable,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
 <div id="condition/0"> </div></div>
 <div class="section" id="condition-0">
 <span id="lgtunit-0-condition-0"></span><span id="index-27"></span><h3><code class="docutils literal notranslate"><span class="pre">condition/0</span></code><a class="headerlink" href="#condition-0" title="Permalink to this headline">¶</a></h3>
 <p>Verifies conditions for running the tests. Defaults to the goal true.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">condition</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">condition</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="setup/0"> </div></div>
 <div class="section" id="setup-0">
 <span id="lgtunit-0-setup-0"></span><span id="index-28"></span><h3><code class="docutils literal notranslate"><span class="pre">setup/0</span></code><a class="headerlink" href="#setup-0" title="Permalink to this headline">¶</a></h3>
 <p>Setup environment before running the test set. Defaults to the goal true.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">setup</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">setup</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="cleanup/0"> </div></div>
 <div class="section" id="cleanup-0">
 <span id="lgtunit-0-cleanup-0"></span><span id="index-29"></span><h3><code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code><a class="headerlink" href="#cleanup-0" title="Permalink to this headline">¶</a></h3>
 <p>Cleanup environment after running the test set. Defaults to the goal true.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">cleanup</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cleanup</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="make/1"> </div></div>
 <div class="section" id="make-1">
 <span id="lgtunit-0-make-1"></span><span id="index-30"></span><h3><code class="docutils literal notranslate"><span class="pre">make/1</span></code><a class="headerlink" href="#make-1" title="Permalink to this headline">¶</a></h3>
 <p>Make target for automatically running the test set when calling the logtalk_make/1 built-in predicate. No default. Possible values are {all, check}.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">make(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">make(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="note/1"> </div></div>
 <div class="section" id="note-1">
 <span id="lgtunit-0-note-1"></span><span id="index-31"></span><h3><code class="docutils literal notranslate"><span class="pre">note/1</span></code><a class="headerlink" href="#note-1" title="Permalink to this headline">¶</a></h3>
 <p>Note to be printed after the test results. Defaults to the empty atom.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">note(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">note(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="suppress_text_output/0"> </div></div>
 <div class="section" id="suppress-text-output-0">
 <span id="lgtunit-0-suppress-text-output-0"></span><span id="index-32"></span><h3><code class="docutils literal notranslate"><span class="pre">suppress_text_output/0</span></code><a class="headerlink" href="#suppress-text-output-0" title="Permalink to this headline">¶</a></h3>
 <p>Suppresses text output. Useful to avoid irrelevant text output from predicates being tested to clutter the test logs.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">suppress_text_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suppress_text_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="suppress_binary_output/0"> </div></div>
 <div class="section" id="suppress-binary-output-0">
 <span id="lgtunit-0-suppress-binary-output-0"></span><span id="index-33"></span><h3><code class="docutils literal notranslate"><span class="pre">suppress_binary_output/0</span></code><a class="headerlink" href="#suppress-binary-output-0" title="Permalink to this headline">¶</a></h3>
 <p>Suppresses binary output. Useful to avoid irrelevant binary output from predicates being tested to clutter the test logs.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">suppress_binary_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suppress_binary_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_text_input/3"> </div></div>
 <div class="section" id="set-text-input-3">
 <span id="lgtunit-0-set-text-input-3"></span><span id="index-34"></span><h3><code class="docutils literal notranslate"><span class="pre">set_text_input/3</span></code><a class="headerlink" href="#set-text-input-3" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_text_input(Alias,Contents,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom,+atom,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(Alias,Contents,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom,+atom,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_text_input/2"> </div></div>
 <div class="section" id="set-text-input-2">
 <span id="lgtunit-0-set-text-input-2"></span><span id="index-35"></span><h3><code class="docutils literal notranslate"><span class="pre">set_text_input/2</span></code><a class="headerlink" href="#set-text-input-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_text_input(Alias,Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(Alias,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_text_input/1"> </div></div>
 <div class="section" id="set-text-input-1">
 <span id="lgtunit-0-set-text-input-1"></span><span id="index-36"></span><h3><code class="docutils literal notranslate"><span class="pre">set_text_input/1</span></code><a class="headerlink" href="#set-text-input-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_text_input(Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="check_text_input/2"> </div></div>
 <div class="section" id="check-text-input-2">
 <span id="lgtunit-0-check-text-input-2"></span><span id="index-37"></span><h3><code class="docutils literal notranslate"><span class="pre">check_text_input/2</span></code><a class="headerlink" href="#check-text-input-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_text_input(Alias,Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_text_input(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_input(Alias,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_input(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="check_text_input/1"> </div></div>
 <div class="section" id="check-text-input-1">
 <span id="lgtunit-0-check-text-input-1"></span><span id="index-38"></span><h3><code class="docutils literal notranslate"><span class="pre">check_text_input/1</span></code><a class="headerlink" href="#check-text-input-1" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_text_input(Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_text_input(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_input(Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_input(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="text_input_assertion/3"> </div></div>
 <div class="section" id="text-input-assertion-3">
 <span id="lgtunit-0-text-input-assertion-3"></span><span id="index-39"></span><h3><code class="docutils literal notranslate"><span class="pre">text_input_assertion/3</span></code><a class="headerlink" href="#text-input-assertion-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">text_input_assertion(Alias,Contents,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">text_input_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_input_assertion(Alias,Contents,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_input_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="text_input_assertion/2"> </div></div>
 <div class="section" id="text-input-assertion-2">
 <span id="lgtunit-0-text-input-assertion-2"></span><span id="index-40"></span><h3><code class="docutils literal notranslate"><span class="pre">text_input_assertion/2</span></code><a class="headerlink" href="#text-input-assertion-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">text_input_assertion(Contents,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">text_input_assertion(+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_input_assertion(Contents,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_input_assertion(+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="clean_text_input/0"> </div></div>
 <div class="section" id="clean-text-input-0">
 <span id="lgtunit-0-clean-text-input-0"></span><span id="index-41"></span><h3><code class="docutils literal notranslate"><span class="pre">clean_text_input/0</span></code><a class="headerlink" href="#clean-text-input-0" title="Permalink to this headline">¶</a></h3>
 <p>Cleans the temporary file used when testing text input.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clean_text_input</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clean_text_input</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_binary_input/3"> </div></div>
 <div class="section" id="set-binary-input-3">
 <span id="lgtunit-0-set-binary-input-3"></span><span id="index-42"></span><h3><code class="docutils literal notranslate"><span class="pre">set_binary_input/3</span></code><a class="headerlink" href="#set-binary-input-3" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no eof_action/1 option is specified, its value will be the default used by the backend compiler.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_binary_input(Alias,Bytes,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_binary_input(+atom,+list(byte),+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(Alias,Bytes,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(+atom,+list(byte),+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_binary_input/2"> </div></div>
 <div class="section" id="set-binary-input-2">
 <span id="lgtunit-0-set-binary-input-2"></span><span id="index-43"></span><h3><code class="docutils literal notranslate"><span class="pre">set_binary_input/2</span></code><a class="headerlink" href="#set-binary-input-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_binary_input(Alias,Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_binary_input(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(Alias,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_binary_input/1"> </div></div>
 <div class="section" id="set-binary-input-1">
 <span id="lgtunit-0-set-binary-input-1"></span><span id="index-44"></span><h3><code class="docutils literal notranslate"><span class="pre">set_binary_input/1</span></code><a class="headerlink" href="#set-binary-input-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_binary_input(Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_binary_input(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="check_binary_input/2"> </div></div>
 <div class="section" id="check-binary-input-2">
 <span id="lgtunit-0-check-binary-input-2"></span><span id="index-45"></span><h3><code class="docutils literal notranslate"><span class="pre">check_binary_input/2</span></code><a class="headerlink" href="#check-binary-input-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file (referenced with the given alias) have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_binary_input(Alias,Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_binary_input(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_input(Alias,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_input(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="check_binary_input/1"> </div></div>
 <div class="section" id="check-binary-input-1">
 <span id="lgtunit-0-check-binary-input-1"></span><span id="index-46"></span><h3><code class="docutils literal notranslate"><span class="pre">check_binary_input/1</span></code><a class="headerlink" href="#check-binary-input-1" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_binary_input(Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_binary_input(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_input(Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_input(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="binary_input_assertion/3"> </div></div>
 <div class="section" id="binary-input-assertion-3">
 <span id="lgtunit-0-binary-input-assertion-3"></span><span id="index-47"></span><h3><code class="docutils literal notranslate"><span class="pre">binary_input_assertion/3</span></code><a class="headerlink" href="#binary-input-assertion-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">binary_input_assertion(Alias,Bytes,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(Alias,Bytes,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="binary_input_assertion/2"> </div></div>
 <div class="section" id="binary-input-assertion-2">
 <span id="lgtunit-0-binary-input-assertion-2"></span><span id="index-48"></span><h3><code class="docutils literal notranslate"><span class="pre">binary_input_assertion/2</span></code><a class="headerlink" href="#binary-input-assertion-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">binary_input_assertion(Bytes,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(Bytes,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="clean_binary_input/0"> </div></div>
 <div class="section" id="clean-binary-input-0">
 <span id="lgtunit-0-clean-binary-input-0"></span><span id="index-49"></span><h3><code class="docutils literal notranslate"><span class="pre">clean_binary_input/0</span></code><a class="headerlink" href="#clean-binary-input-0" title="Permalink to this headline">¶</a></h3>
 <p>Cleans the temporary file used when testing binary input.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clean_binary_input</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clean_binary_input</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_text_output/2"> </div></div>
 <div class="section" id="set-text-output-2">
 <span id="lgtunit-0-set-text-output-2"></span><span id="index-50"></span><h3><code class="docutils literal notranslate"><span class="pre">set_text_output/2</span></code><a class="headerlink" href="#set-text-output-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given text contents and referenced with the given alias.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_text_output(Alias,Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_text_output(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(Alias,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_text_output/1"> </div></div>
 <div class="section" id="set-text-output-1">
 <span id="lgtunit-0-set-text-output-1"></span><span id="index-51"></span><h3><code class="docutils literal notranslate"><span class="pre">set_text_output/1</span></code><a class="headerlink" href="#set-text-output-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given text contents and sets the current output stream to the file.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_text_output(Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_text_output(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="check_text_output/2"> </div></div>
 <div class="section" id="check-text-output-2">
 <span id="lgtunit-0-check-text-output-2"></span><span id="index-52"></span><h3><code class="docutils literal notranslate"><span class="pre">check_text_output/2</span></code><a class="headerlink" href="#check-text-output-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_text_output(Alias,Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(Alias,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="check_text_output/1"> </div></div>
 <div class="section" id="check-text-output-1">
 <span id="lgtunit-0-check-text-output-1"></span><span id="index-53"></span><h3><code class="docutils literal notranslate"><span class="pre">check_text_output/1</span></code><a class="headerlink" href="#check-text-output-1" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_text_output(Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="text_output_assertion/3"> </div></div>
 <div class="section" id="text-output-assertion-3">
 <span id="lgtunit-0-text-output-assertion-3"></span><span id="index-54"></span><h3><code class="docutils literal notranslate"><span class="pre">text_output_assertion/3</span></code><a class="headerlink" href="#text-output-assertion-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">text_output_assertion(Alias,Contents,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(Alias,Contents,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="text_output_assertion/2"> </div></div>
 <div class="section" id="text-output-assertion-2">
 <span id="lgtunit-0-text-output-assertion-2"></span><span id="index-55"></span><h3><code class="docutils literal notranslate"><span class="pre">text_output_assertion/2</span></code><a class="headerlink" href="#text-output-assertion-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file being written have the expected text contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">text_output_assertion(Contents,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(Contents,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="clean_text_output/0"> </div></div>
 <div class="section" id="clean-text-output-0">
 <span id="lgtunit-0-clean-text-output-0"></span><span id="index-56"></span><h3><code class="docutils literal notranslate"><span class="pre">clean_text_output/0</span></code><a class="headerlink" href="#clean-text-output-0" title="Permalink to this headline">¶</a></h3>
 <p>Cleans the temporary file used when testing text output.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clean_text_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clean_text_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_binary_output/2"> </div></div>
 <div class="section" id="set-binary-output-2">
 <span id="lgtunit-0-set-binary-output-2"></span><span id="index-57"></span><h3><code class="docutils literal notranslate"><span class="pre">set_binary_output/2</span></code><a class="headerlink" href="#set-binary-output-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given binary contents and referenced with the given alias.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_binary_output(Alias,Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_binary_output(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(Alias,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="set_binary_output/1"> </div></div>
 <div class="section" id="set-binary-output-1">
 <span id="lgtunit-0-set-binary-output-1"></span><span id="index-58"></span><h3><code class="docutils literal notranslate"><span class="pre">set_binary_output/1</span></code><a class="headerlink" href="#set-binary-output-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates a temporary file with the given binary contents and sets the current output stream to the file.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_binary_output(Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_binary_output(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="check_binary_output/2"> </div></div>
 <div class="section" id="check-binary-output-2">
 <span id="lgtunit-0-check-binary-output-2"></span><span id="index-59"></span><h3><code class="docutils literal notranslate"><span class="pre">check_binary_output/2</span></code><a class="headerlink" href="#check-binary-output-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file (referenced with the given alias) have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_binary_output(Alias,Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_binary_output(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_output(Alias,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_output(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="check_binary_output/1"> </div></div>
 <div class="section" id="check-binary-output-1">
 <span id="lgtunit-0-check-binary-output-1"></span><span id="index-60"></span><h3><code class="docutils literal notranslate"><span class="pre">check_binary_output/1</span></code><a class="headerlink" href="#check-binary-output-1" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the temporary file have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_binary_output(Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_binary_output(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_output(Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_output(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="binary_output_assertion/3"> </div></div>
 <div class="section" id="binary-output-assertion-3">
 <span id="lgtunit-0-binary-output-assertion-3"></span><span id="index-61"></span><h3><code class="docutils literal notranslate"><span class="pre">binary_output_assertion/3</span></code><a class="headerlink" href="#binary-output-assertion-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">binary_output_assertion(Alias,Bytes,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(Alias,Bytes,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="binary_output_assertion/2"> </div></div>
 <div class="section" id="binary-output-assertion-2">
 <span id="lgtunit-0-binary-output-assertion-2"></span><span id="index-62"></span><h3><code class="docutils literal notranslate"><span class="pre">binary_output_assertion/2</span></code><a class="headerlink" href="#binary-output-assertion-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an assertion for checking that the temporary file have the expected binary contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">binary_output_assertion(Bytes,Assertion)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(Bytes,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="clean_binary_output/0"> </div></div>
 <div class="section" id="clean-binary-output-0">
 <span id="lgtunit-0-clean-binary-output-0"></span><span id="index-63"></span><h3><code class="docutils literal notranslate"><span class="pre">clean_binary_output/0</span></code><a class="headerlink" href="#clean-binary-output-0" title="Permalink to this headline">¶</a></h3>
 <p>Cleans the temporary file used when testing binary output.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clean_binary_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clean_binary_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="create_text_file/2"> </div></div>
 <div class="section" id="create-text-file-2">
 <span id="lgtunit-0-create-text-file-2"></span><span id="index-64"></span><h3><code class="docutils literal notranslate"><span class="pre">create_text_file/2</span></code><a class="headerlink" href="#create-text-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a text file with the given contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">create_text_file(File,Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">create_text_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">create_text_file(File,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">create_text_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="create_binary_file/2"> </div></div>
 <div class="section" id="create-binary-file-2">
 <span id="lgtunit-0-create-binary-file-2"></span><span id="index-65"></span><h3><code class="docutils literal notranslate"><span class="pre">create_binary_file/2</span></code><a class="headerlink" href="#create-binary-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a binary file with the given contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">create_binary_file(File,Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">create_binary_file(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">create_binary_file(File,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">create_binary_file(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="check_text_file/2"> </div></div>
 <div class="section" id="check-text-file-2">
 <span id="lgtunit-0-check-text-file-2"></span><span id="index-66"></span><h3><code class="docutils literal notranslate"><span class="pre">check_text_file/2</span></code><a class="headerlink" href="#check-text-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks that the contents of a text file match the expected contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_text_file(File,Contents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_text_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_file(File,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="check_binary_file/2"> </div></div>
 <div class="section" id="check-binary-file-2">
 <span id="lgtunit-0-check-binary-file-2"></span><span id="index-67"></span><h3><code class="docutils literal notranslate"><span class="pre">check_binary_file/2</span></code><a class="headerlink" href="#check-binary-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks the contents of a binary file match the expected contents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">check_binary_file(File,Bytes)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">check_binary_file(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_file(File,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_file(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="clean_file/1"> </div></div>
 <div class="section" id="clean-file-1">
 <span id="lgtunit-0-clean-file-1"></span><span id="index-68"></span><h3><code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code><a class="headerlink" href="#clean-file-1" title="Permalink to this headline">¶</a></h3>
 <p>Closes any existing stream associated with the file and deletes the file if it exists.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">clean_file(File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clean_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clean_file(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clean_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="closed_input_stream/2"> </div></div>
 <div class="section" id="closed-input-stream-2">
 <span id="lgtunit-0-closed-input-stream-2"></span><span id="index-69"></span><h3><code class="docutils literal notranslate"><span class="pre">closed_input_stream/2</span></code><a class="headerlink" href="#closed-input-stream-2" title="Permalink to this headline">¶</a></h3>
 <p>Opens a temporary file with the given options for reading, closes it, and returns its stream handle.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">closed_input_stream(Stream,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">closed_input_stream(-stream,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">closed_input_stream(Stream,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">closed_input_stream(-stream,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="closed_output_stream/2"> </div></div>
 <div class="section" id="closed-output-stream-2">
 <span id="lgtunit-0-closed-output-stream-2"></span><span id="index-70"></span><h3><code class="docutils literal notranslate"><span class="pre">closed_output_stream/2</span></code><a class="headerlink" href="#closed-output-stream-2" title="Permalink to this headline">¶</a></h3>
 <p>Opens a temporary file with the given options for writing, closes it, and returns its stream handle.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">closed_output_stream(Stream,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">closed_output_stream(-stream,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">closed_output_stream(Stream,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">closed_output_stream(-stream,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="stream_position/1"> </div></div>
 <div class="section" id="stream-position-1">
 <span id="lgtunit-0-stream-position-1"></span><span id="index-71"></span><h3><code class="docutils literal notranslate"><span class="pre">stream_position/1</span></code><a class="headerlink" href="#stream-position-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns a syntactically valid stream position.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">stream_position(Position)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">stream_position(-stream_position)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stream_position(Position)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stream_position(-stream_position)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="private-predicates">
@@ -1083,109 +1428,151 @@
 <div id="running_test_sets_/0"> </div><div class="section" id="running-test-sets-0">
 <span id="lgtunit-0-running-test-sets-0"></span><span id="index-72"></span><h3><code class="docutils literal notranslate"><span class="pre">running_test_sets_/0</span></code><a class="headerlink" href="#running-test-sets-0" title="Permalink to this headline">¶</a></h3>
 <p>Internal flag used when running two or more test sets as a unified set.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">running_test_sets_</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">running_test_sets_</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="test/3"> </div></div>
 <div class="section" id="test-3">
 <span id="lgtunit-0-test-3"></span><span id="index-73"></span><h3><code class="docutils literal notranslate"><span class="pre">test/3</span></code><a class="headerlink" href="#test-3" title="Permalink to this headline">¶</a></h3>
 <p>Specifies a unit test.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">test(Identifier,Variables,Outcome)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">test(?atom,?list(variable),?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">test(Identifier,Variables,Outcome)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">test(?atom,?list(variable),?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="auxiliary_predicate_counter_/1"> </div></div>
 <div class="section" id="auxiliary-predicate-counter-1">
 <span id="lgtunit-0-auxiliary-predicate-counter-1"></span><span id="index-74"></span><h3><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_/1</span></code><a class="headerlink" href="#auxiliary-predicate-counter-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for generarting unique auxiliary predicate names.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_(Counter)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_(Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
+</div>
+</div>
 <div id="test_/2"> </div></div>
 <div class="section" id="test-2">
 <span id="lgtunit-0-test-2"></span><span id="index-75"></span><h3><code class="docutils literal notranslate"><span class="pre">test_/2</span></code><a class="headerlink" href="#test-2" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">test_(Identifier,Test)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">test_(?atom,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">test_(Identifier,Test)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">test_(?atom,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="skipped_/1"> </div></div>
 <div class="section" id="skipped-1">
 <span id="lgtunit-0-skipped-1"></span><span id="index-76"></span><h3><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code><a class="headerlink" href="#skipped-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for skipped tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">skipped_(Counter)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">skipped_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">skipped_(Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">skipped_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="passed_/1"> </div></div>
 <div class="section" id="passed-1">
 <span id="lgtunit-0-passed-1"></span><span id="index-77"></span><h3><code class="docutils literal notranslate"><span class="pre">passed_/1</span></code><a class="headerlink" href="#passed-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for passed tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">passed_(Counter)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">passed_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">passed_(Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">passed_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="failed_/1"> </div></div>
 <div class="section" id="failed-1">
 <span id="lgtunit-0-failed-1"></span><span id="index-78"></span><h3><code class="docutils literal notranslate"><span class="pre">failed_/1</span></code><a class="headerlink" href="#failed-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for failed tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">failed_(Counter)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">failed_(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">failed_(Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">failed_(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="fired_/3"> </div></div>
 <div class="section" id="fired-3">
 <span id="lgtunit-0-fired-3"></span><span id="index-79"></span><h3><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code><a class="headerlink" href="#fired-3" title="Permalink to this headline">¶</a></h3>
 <p>Fired clauses when running the unit tests.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">fired_(Entity,Predicate,Clause)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">fired_(?entity_identifier,?predicate_indicator,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fired_(Entity,Predicate,Clause)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fired_(?entity_identifier,?predicate_indicator,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="covered_/4"> </div></div>
 <div class="section" id="covered-4">
 <span id="lgtunit-0-covered-4"></span><span id="index-80"></span><h3><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code><a class="headerlink" href="#covered-4" title="Permalink to this headline">¶</a></h3>
 <p>Auxiliary predicate for collecting statistics on clause coverage.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">covered_(Entity,Predicate,Covered,Total)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">covered_(?entity_identifier,?callable,?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">covered_(Entity,Predicate,Covered,Total)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">covered_(?entity_identifier,?callable,?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="operators">

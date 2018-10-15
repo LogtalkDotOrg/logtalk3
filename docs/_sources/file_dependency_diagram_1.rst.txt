@@ -8,14 +8,15 @@
 
 Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.
 
-* author: Paulo Moura
-* version: 2.7
-* date: 2018/2/4
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.7
+| **Date:** 2018/2/4
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`file_diagram(Format) <file_diagram/1>`
+
+| **Imports:**
+|    ``public`` :ref:`file_diagram(Format) <file_diagram/1>`
 
 Public interface
 ----------------

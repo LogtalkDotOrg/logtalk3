@@ -8,14 +8,15 @@
 
 Max-heap implementation. Uses standard order to compare keys.
 
-* author: Paulo Moura.
-* version: 1.0
-* date: 2010/2/19
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura.
+| **Version:** 1.0
+| **Date:** 2010/2/19
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`heap(>) <heap/1>`
+
+| **Extends:**
+|    ``public`` :ref:`heap(>) <heap/1>`
 
 Public interface
 ----------------

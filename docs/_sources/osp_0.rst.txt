@@ -8,10 +8,12 @@
 
 Portable operating-system access protocol.
 
-* author: Paulo Moura
-* version: 1.23
-* date: 2018/3/7
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.23
+| **Date:** 2018/3/7
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns the process identifier of the running process.
 
-* compilation flags: ``static``
-* template: ``pid(PID)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``pid(-integer)`` - ``one``
+| **Template:**
+|    ``pid(PID)``
+| **Mode and number of proofs:**
+|    ``pid(-integer)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns the process identifier of the running process.
 
 Runs an operating-system shell command and returns its exit status.
 
-* compilation flags: ``static``
-* template: ``shell(Command,Status)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``shell(+atom,-integer)`` - ``one``
+| **Template:**
+|    ``shell(Command,Status)``
+| **Mode and number of proofs:**
+|    ``shell(+atom,-integer)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Runs an operating-system shell command and returns its exit status.
 
 Runs an operating-system shell command.
 
-* compilation flags: ``static``
-* template: ``shell(Command)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``shell(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``shell(Command)``
+| **Mode and number of proofs:**
+|    ``shell(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Runs an operating-system shell command.
 
 Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.
 
-* compilation flags: ``static``
-* template: ``absolute_file_name(File,Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``absolute_file_name(+atom,-atom)`` - ``one``
+| **Template:**
+|    ``absolute_file_name(File,Path)``
+| **Mode and number of proofs:**
+|    ``absolute_file_name(+atom,-atom)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Expands a file name to an absolute file path. An environment variable at the beg
 
 Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent) and its basename (that can be the empty atom).
 
-* compilation flags: ``static``
-* template: ``decompose_file_name(File,Directory,Basename)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``decompose_file_name(+atom,?atom,?atom)`` - ``one``
+| **Template:**
+|    ``decompose_file_name(File,Directory,Basename)``
+| **Mode and number of proofs:**
+|    ``decompose_file_name(+atom,?atom,?atom)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Decomposes a file name into its directory (which always ends with a slash; "./" 
 
 Decomposes a file name into its directory (which always ends with a slash; "./" is returned if absent), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).
 
-* compilation flags: ``static``
-* template: ``decompose_file_name(File,Directory,Name,Extension)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``decompose_file_name(+atom,?atom,?atom,?atom)`` - ``one``
+| **Template:**
+|    ``decompose_file_name(File,Directory,Name,Extension)``
+| **Mode and number of proofs:**
+|    ``decompose_file_name(+atom,?atom,?atom,?atom)`` - ``one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Decomposes a file name into its directory (which always ends with a slash; "./" 
 
 Makes a new directory. Succeeds if the directory already exists.
 
-* compilation flags: ``static``
-* template: ``make_directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``make_directory(+atom)`` - ``one``
+| **Template:**
+|    ``make_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``make_directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Makes a new directory. Succeeds if the directory already exists.
 
 Makes a new directory creating all the intermediate directories if necessary. Succeeds if the directory already exists.
 
-* compilation flags: ``static``
-* template: ``make_directory_path(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``make_directory_path(+atom)`` - ``one``
+| **Template:**
+|    ``make_directory_path(Directory)``
+| **Mode and number of proofs:**
+|    ``make_directory_path(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Makes a new directory creating all the intermediate directories if necessary. Su
 
 Deletes an empty directory.
 
-* compilation flags: ``static``
-* template: ``delete_directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete_directory(+atom)`` - ``one``
+| **Template:**
+|    ``delete_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``delete_directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ Deletes an empty directory.
 
 Changes current working directory.
 
-* compilation flags: ``static``
-* template: ``change_directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``change_directory(+atom)`` - ``one``
+| **Template:**
+|    ``change_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``change_directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ Changes current working directory.
 
 Current working directory.
 
-* compilation flags: ``static``
-* template: ``working_directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``working_directory(?atom)`` - ``zero_or_one``
+| **Template:**
+|    ``working_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``working_directory(?atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ Current working directory.
 
 Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory.
 
-* compilation flags: ``static``
-* template: ``directory_files(Directory,Files)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory_files(+atom,-list(atom))`` - ``one``
+| **Template:**
+|    ``directory_files(Directory,Files)``
+| **Mode and number of proofs:**
+|    ``directory_files(+atom,-list(atom))`` - ``one``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ Returns a list of all files (including directories, regular files, and hidden di
 
 Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 - all/regular/directory, extensions/1 - list, prefixes/1 - list, suffixes/1 - list, dot_files/1 - boolean. Invalid options ignored. Defaults equivalent to directory_files/2.
 
-* compilation flags: ``static``
-* template: ``directory_files(Directory,Files,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory_files(+atom,-list(atom),+list(compound))`` - ``one``
+| **Template:**
+|    ``directory_files(Directory,Files,Options)``
+| **Mode and number of proofs:**
+|    ``directory_files(+atom,-list(atom),+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -291,12 +293,12 @@ Returns a filtered list of files. Filters: paths/1 - relative/absolute, type/1 -
 
 True if the specified directory exists (irrespective of directory permissions).
 
-* compilation flags: ``static``
-* template: ``directory_exists(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory_exists(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``directory_exists(Directory)``
+| **Mode and number of proofs:**
+|    ``directory_exists(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -311,12 +313,12 @@ True if the specified directory exists (irrespective of directory permissions).
 
 True if the specified file exists and is a regular file (irrespective of file permissions).
 
-* compilation flags: ``static``
-* template: ``file_exists(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_exists(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``file_exists(File)``
+| **Mode and number of proofs:**
+|    ``file_exists(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -331,12 +333,12 @@ True if the specified file exists and is a regular file (irrespective of file pe
 
 File modification time (which can be used for comparison).
 
-* compilation flags: ``static``
-* template: ``file_modification_time(File,Time)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
+| **Template:**
+|    ``file_modification_time(File,Time)``
+| **Mode and number of proofs:**
+|    ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -351,12 +353,12 @@ File modification time (which can be used for comparison).
 
 File size (in bytes).
 
-* compilation flags: ``static``
-* template: ``file_size(File,Size)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_size(+atom,-integer)`` - ``zero_or_one``
+| **Template:**
+|    ``file_size(File,Size)``
+| **Mode and number of proofs:**
+|    ``file_size(+atom,-integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -371,12 +373,12 @@ File size (in bytes).
 
 True if the specified file has the specified permission (read, write, or execute).
 
-* compilation flags: ``static``
-* template: ``file_permission(File,Permission)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_permission(+atom,?atom)`` - ``zero_or_one``
+| **Template:**
+|    ``file_permission(File,Permission)``
+| **Mode and number of proofs:**
+|    ``file_permission(+atom,?atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -391,12 +393,12 @@ True if the specified file has the specified permission (read, write, or execute
 
 Renames a file or a directory.
 
-* compilation flags: ``static``
-* template: ``rename_file(Old,New)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rename_file(+atom,+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``rename_file(Old,New)``
+| **Mode and number of proofs:**
+|    ``rename_file(+atom,+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -411,12 +413,12 @@ Renames a file or a directory.
 
 Deletes a file.
 
-* compilation flags: ``static``
-* template: ``delete_file(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete_file(+atom)`` - ``one``
+| **Template:**
+|    ``delete_file(File)``
+| **Mode and number of proofs:**
+|    ``delete_file(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -431,12 +433,12 @@ Deletes a file.
 
 Returns an environment variable value. Fails if the variable does not exists.
 
-* compilation flags: ``static``
-* template: ``environment_variable(Variable,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``environment_variable(+atom,?atom)`` - ``zero_or_one``
+| **Template:**
+|    ``environment_variable(Variable,Value)``
+| **Mode and number of proofs:**
+|    ``environment_variable(+atom,?atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -451,12 +453,12 @@ Returns an environment variable value. Fails if the variable does not exists.
 
 Returns a system-dependent time stamp, which can be used for sorting, but should be regarded otherwise as an opaque term.
 
-* compilation flags: ``static``
-* template: ``time_stamp(Time)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``time_stamp(-ground)`` - ``one``
+| **Template:**
+|    ``time_stamp(Time)``
+| **Mode and number of proofs:**
+|    ``time_stamp(-ground)`` - ``one``
 
 
 .. raw:: html
@@ -471,12 +473,12 @@ Returns a system-dependent time stamp, which can be used for sorting, but should
 
 Returns the current date and time.
 
-* compilation flags: ``static``
-* template: ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Miliseconds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
+| **Template:**
+|    ``date_time(Year,Month,Day,Hours,Minutes,Seconds,Miliseconds)``
+| **Mode and number of proofs:**
+|    ``date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
 
 
 .. raw:: html
@@ -491,12 +493,12 @@ Returns the current date and time.
 
 System cpu time in seconds.
 
-* compilation flags: ``static``
-* template: ``cpu_time(Seconds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``cpu_time(-number)`` - ``one``
+| **Template:**
+|    ``cpu_time(Seconds)``
+| **Mode and number of proofs:**
+|    ``cpu_time(-number)`` - ``one``
 
 
 .. raw:: html
@@ -511,12 +513,12 @@ System cpu time in seconds.
 
 Wall time in seconds.
 
-* compilation flags: ``static``
-* template: ``wall_time(Seconds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``wall_time(-number)`` - ``one``
+| **Template:**
+|    ``wall_time(Seconds)``
+| **Mode and number of proofs:**
+|    ``wall_time(-number)`` - ``one``
 
 
 .. raw:: html
@@ -531,12 +533,12 @@ Wall time in seconds.
 
 Operating system type. Possible values are "unix", "windows", and "unknown".
 
-* compilation flags: ``static``
-* template: ``operating_system_type(Type)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``operating_system_type(?atom)`` - ``one``
+| **Template:**
+|    ``operating_system_type(Type)``
+| **Mode and number of proofs:**
+|    ``operating_system_type(?atom)`` - ``one``
 
 
 .. raw:: html
@@ -551,12 +553,12 @@ Operating system type. Possible values are "unix", "windows", and "unknown".
 
 Returns a list with the command line arguments that occur after "--".
 
-* compilation flags: ``static``
-* template: ``command_line_arguments(Arguments)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``command_line_arguments(-list(atom))`` - ``one``
+| **Template:**
+|    ``command_line_arguments(Arguments)``
+| **Mode and number of proofs:**
+|    ``command_line_arguments(-list(atom))`` - ``one``
 
 
 .. raw:: html
@@ -571,12 +573,12 @@ Returns a list with the command line arguments that occur after "--".
 
 Suspends execution the given number of seconds.
 
-* compilation flags: ``static``
-* template: ``sleep(Seconds)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sleep(+number)`` - ``one``
+| **Template:**
+|    ``sleep(Seconds)``
+| **Mode and number of proofs:**
+|    ``sleep(+number)`` - ``one``
 
 
 Protected interface

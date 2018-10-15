@@ -289,167 +289,248 @@
 <div class="section" id="optional-reference">
 <h1><code class="docutils literal notranslate"><span class="pre">optional(Reference)</span></code><a class="headerlink" href="#optional-reference" title="Permalink to this headline">¶</a></h1>
 <p>Optional reference predicates. Requires passing an optional reference constructed using the “optional” object as a parameter.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.4</li>
-<li>date: 2018/7/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.4</div>
+<div class="line"><strong>Date:</strong> 2018/7/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="is_empty/0"> </div><div class="section" id="is-empty-0">
 <span id="optional-1-is-empty-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">is_empty/0</span></code><a class="headerlink" href="#is-empty-0" title="Permalink to this headline">¶</a></h3>
 <p>True if the optional reference is empty. Avoid whenever possible by using instead the if_empty/1 predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_empty</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_empty</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="is_present/0"> </div></div>
 <div class="section" id="is-present-0">
 <span id="optional-1-is-present-0"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">is_present/0</span></code><a class="headerlink" href="#is-present-0" title="Permalink to this headline">¶</a></h3>
 <p>True if the optional reference holds a term. Avoid whenever possible by using instead the if_present/1 predicate.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">is_present</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_present</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="if_empty/1"> </div></div>
 <div class="section" id="if-empty-1">
 <span id="optional-1-if-empty-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">if_empty/1</span></code><a class="headerlink" href="#if-empty-1" title="Permalink to this headline">¶</a></h3>
 <p>Calls a goal if the optional reference is empty. Succeeds otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">if_empty(Goal)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">if_empty(0)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">if_empty(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_empty(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="if_present/1"> </div></div>
 <div class="section" id="if-present-1">
 <span id="optional-1-if-present-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">if_present/1</span></code><a class="headerlink" href="#if-present-1" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure with the optional reference value as additional argument if not empty. Succeeds otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">if_present(Closure)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">if_present(1)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">if_present(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">if_present(+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="filter/2"> </div></div>
 <div class="section" id="filter-2">
 <span id="optional-1-filter-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">filter/2</span></code><a class="headerlink" href="#filter-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the optional reference when it is non-empty and its value satisfies a closure. Otherwise returns an empty optional.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">filter(Closure,Reference)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">filter(1,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">filter(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">filter(Closure,Reference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">filter(1,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">filter(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="map/2"> </div></div>
 <div class="section" id="map-2">
 <span id="optional-1-map-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the optional reference is non-empty and mapping a closure with the optional reference value and the new value as additional arguments is successful, returns an optional reference with the new value. Otherwise returns an empty optional.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,NewReference)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(2,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(Closure,NewReference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="flat_map/2"> </div></div>
 <div class="section" id="flat-map-2">
 <span id="optional-1-flat-map-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">flat_map/2</span></code><a class="headerlink" href="#flat-map-2" title="Permalink to this headline">¶</a></h3>
 <p>When the optional reference is non-empty and mapping a closure with the optional reference value and the new optional reference as additional arguments is successful, returns the new optional reference. Otherwise returns an empty optional.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">flat_map(Closure,NewReference)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">flat_map(2,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">flat_map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flat_map(Closure,NewReference)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flat_map(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flat_map(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="get/1"> </div></div>
 <div class="section" id="get-1">
 <span id="optional-1-get-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">get/1</span></code><a class="headerlink" href="#get-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the optional reference term if not empty. Throws an error otherwise.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">get(Term)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">get(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Optional is empty: <code class="docutils literal notranslate"><span class="pre">existence_error(optional_term,Reference)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get(Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Optional is empty: <code class="docutils literal notranslate"><span class="pre">existence_error(optional_term,Reference)</span></code></div>
+</div>
 <div id="or_else/2"> </div></div>
 <div class="section" id="or-else-2">
 <span id="optional-1-or-else-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else/2</span></code><a class="headerlink" href="#or-else-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the optional reference term if not empty or the given default term if the optional is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else(Term,Default)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else(--term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else(Term,Default)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else(--term,&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="or_else_get/2"> </div></div>
 <div class="section" id="or-else-get-2">
 <span id="optional-1-or-else-get-2"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_get/2</span></code><a class="headerlink" href="#or-else-get-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the optional reference term if not empty or applies a closure to compute the term if the optional is empty. Throws an error when the optional is empty and a term cannot be computed using the given closure.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else_get(Term,Closure)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">or_else_get(*,1)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else_get(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>exceptions:
-* Optional is empty and a term cannot be computed: <code class="docutils literal notranslate"><span class="pre">existence_error(optional_term,Reference)</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_get(Term,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_get(*,1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_get(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong>
+* Optional is empty and a term cannot be computed: <code class="docutils literal notranslate"><span class="pre">existence_error(optional_term,Reference)</span></code></div>
+</div>
 <div id="or_else_call/2"> </div></div>
 <div class="section" id="or-else-call-2">
 <span id="optional-1-or-else-call-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code><a class="headerlink" href="#or-else-call-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns the optional reference term if not empty or calls a goal deterministically if the optional is empty. Can be used e.g. to generate an exception for empty optionals.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else_call(Term,Goal)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">or_else_call(*,0)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(Term,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(*,0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_call(--term,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="or_else_fail/1"> </div></div>
 <div class="section" id="or-else-fail-1">
 <span id="optional-1-or-else-fail-1"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code><a class="headerlink" href="#or-else-fail-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns the optional reference term if not empty. Fails otherwise. Usually called to skip over empty optionals.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">or_else_fail(Term)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

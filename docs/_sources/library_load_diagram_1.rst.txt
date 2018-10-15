@@ -8,14 +8,15 @@
 
 Predicates for generating library loading dependency diagrams.
 
-* author: Paulo Moura
-* version: 2.7
-* date: 2018/2/4
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.7
+| **Date:** 2018/2/4
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`library_diagram(Format) <library_diagram/1>`
+
+| **Imports:**
+|    ``public`` :ref:`library_diagram(Format) <library_diagram/1>`
 
 Public interface
 ----------------

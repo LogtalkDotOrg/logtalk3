@@ -8,14 +8,15 @@
 
 Atom data type predicates.
 
-* author: Paulo Moura
-* version: 1.6
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.6
+| **Date:** 2018/7/11
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`atomic <atomic/0>`
+
+| **Extends:**
+|    ``public`` :ref:`atomic <atomic/0>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.
 
-* compilation flags: ``static``
-* template: ``replace_sub_atom(Old,New,Input,Output)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``replace_sub_atom(+atom,+atom,+atom,-atom)`` - ``one``
+| **Template:**
+|    ``replace_sub_atom(Old,New,Input,Output)``
+| **Mode and number of proofs:**
+|    ``replace_sub_atom(+atom,+atom,+atom,-atom)`` - ``one``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Replaces all occurences of Old by New in Input returning Output. Returns Input i
 
 Splits an atom at a given delimiter into a list of sub-atoms.
 
-* compilation flags: ``static``
-* template: ``split(Atom,Delimiter,SubAtoms)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``split(+atom,+atom,-list(atom))`` - ``one``
+| **Template:**
+|    ``split(Atom,Delimiter,SubAtoms)``
+| **Mode and number of proofs:**
+|    ``split(+atom,+atom,-list(atom))`` - ``one``
 
 
 Protected interface

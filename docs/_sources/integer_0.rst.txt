@@ -8,14 +8,15 @@
 
 Integer data type predicates.
 
-* author: Paulo Moura
-* version: 1.53
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.53
+| **Date:** 2018/7/11
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`number <number/0>`
+
+| **Extends:**
+|    ``public`` :ref:`number <number/0>`
 
 Public interface
 ----------------
@@ -32,14 +33,14 @@ Public interface
 
 Returns integers in the interval defined by the two first arguments.
 
-* compilation flags: ``static``
-* template: ``between(Lower,Upper,Integer)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``between(Lower,Upper,Integer)``
+| **Mode and number of proofs:**
+|    ``between(+integer,+integer,+integer)`` - ``zero_or_one``
 
-  * ``between(+integer,+integer,+integer)`` - ``zero_or_one``
-
-  * ``between(+integer,+integer,-integer)`` - ``zero_or_more``
+|    ``between(+integer,+integer,-integer)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -54,16 +55,16 @@ Returns integers in the interval defined by the two first arguments.
 
 Reversible integer sum. At least two of the arguments must be instantiated to integers.
 
-* compilation flags: ``static``
-* template: ``plus(I,J,Sum)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``plus(I,J,Sum)``
+| **Mode and number of proofs:**
+|    ``plus(+integer,+integer,?integer)`` - ``zero_or_one``
 
-  * ``plus(+integer,+integer,?integer)`` - ``zero_or_one``
+|    ``plus(+integer,?integer,+integer)`` - ``zero_or_one``
 
-  * ``plus(+integer,?integer,+integer)`` - ``zero_or_one``
-
-  * ``plus(?integer,+integer,+integer)`` - ``zero_or_one``
+|    ``plus(?integer,+integer,+integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -78,14 +79,14 @@ Reversible integer sum. At least two of the arguments must be instantiated to in
 
 Successor of a natural number. At least one of the arguments must be instantiated to a natural number.
 
-* compilation flags: ``static``
-* template: ``succ(I,J)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``succ(I,J)``
+| **Mode and number of proofs:**
+|    ``succ(+integer,?integer)`` - ``zero_or_one``
 
-  * ``succ(+integer,?integer)`` - ``zero_or_one``
-
-  * ``succ(?integer,+integer)`` - ``zero_or_one``
+|    ``succ(?integer,+integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -100,12 +101,12 @@ Successor of a natural number. At least one of the arguments must be instantiate
 
 Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =< Sup.
 
-* compilation flags: ``static``
-* template: ``sequence(Inf,Sup,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sequence(+integer,+integer,-list(integer))`` - ``zero_or_one``
+| **Template:**
+|    ``sequence(Inf,Sup,List)``
+| **Mode and number of proofs:**
+|    ``sequence(+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
 Protected interface

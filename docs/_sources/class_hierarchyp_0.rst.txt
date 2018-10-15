@@ -8,14 +8,15 @@
 
 Class hierarchy protocol.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2000/7/24
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2000/7/24
 
-* extends:
+| **Compilation flags:** ``static``
 
-  * ``public`` :ref:`hierarchyp <hierarchyp/0>`
+
+| **Extends:**
+|    ``public`` :ref:`hierarchyp <hierarchyp/0>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Returns, by backtracking, all object classes.
 
-* compilation flags: ``static``
-* template: ``class(Class)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``class(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``class(Class)``
+| **Mode and number of proofs:**
+|    ``class(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Returns, by backtracking, all object classes.
 
 List of all object classes.
 
-* compilation flags: ``static``
-* template: ``classes(Classes)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``classes(-list)`` - ``one``
+| **Template:**
+|    ``classes(Classes)``
+| **Mode and number of proofs:**
+|    ``classes(-list)`` - ``one``
 
 
 .. raw:: html
@@ -72,12 +73,12 @@ List of all object classes.
 
 Returns, by backtracking, all class instances.
 
-* compilation flags: ``static``
-* template: ``instance(Instance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``instance(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``instance(Instance)``
+| **Mode and number of proofs:**
+|    ``instance(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -92,12 +93,12 @@ Returns, by backtracking, all class instances.
 
 List of all class instances.
 
-* compilation flags: ``static``
-* template: ``instances(Instances)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``instances(-list)`` - ``one``
+| **Template:**
+|    ``instances(Instances)``
+| **Mode and number of proofs:**
+|    ``instances(-list)`` - ``one``
 
 
 .. raw:: html
@@ -112,12 +113,12 @@ List of all class instances.
 
 Returns, by backtracking, all class subclasses.
 
-* compilation flags: ``static``
-* template: ``subclass(Subclass)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subclass(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``subclass(Subclass)``
+| **Mode and number of proofs:**
+|    ``subclass(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -132,12 +133,12 @@ Returns, by backtracking, all class subclasses.
 
 List of all class subclasses.
 
-* compilation flags: ``static``
-* template: ``subclasses(Subclasses)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subclasses(-list)`` - ``one``
+| **Template:**
+|    ``subclasses(Subclasses)``
+| **Mode and number of proofs:**
+|    ``subclasses(-list)`` - ``one``
 
 
 .. raw:: html
@@ -152,12 +153,12 @@ List of all class subclasses.
 
 Returns, by backtracking, all class superclasses.
 
-* compilation flags: ``static``
-* template: ``superclass(Superclass)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``superclass(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``superclass(Superclass)``
+| **Mode and number of proofs:**
+|    ``superclass(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -172,12 +173,12 @@ Returns, by backtracking, all class superclasses.
 
 List of all class superclasses.
 
-* compilation flags: ``static``
-* template: ``superclasses(Superclasses)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``superclasses(-list)`` - ``one``
+| **Template:**
+|    ``superclasses(Superclasses)``
+| **Mode and number of proofs:**
+|    ``superclasses(-list)`` - ``one``
 
 
 .. raw:: html
@@ -192,12 +193,12 @@ List of all class superclasses.
 
 Returns, by backtracking, all class leaf instances.
 
-* compilation flags: ``static``
-* template: ``leaf_instance(Leaf)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leaf_instance(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``leaf_instance(Leaf)``
+| **Mode and number of proofs:**
+|    ``leaf_instance(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -212,12 +213,12 @@ Returns, by backtracking, all class leaf instances.
 
 List of all class leaf instances.
 
-* compilation flags: ``static``
-* template: ``leaf_instances(Leaves)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leaf_instances(-list)`` - ``one``
+| **Template:**
+|    ``leaf_instances(Leaves)``
+| **Mode and number of proofs:**
+|    ``leaf_instances(-list)`` - ``one``
 
 
 .. raw:: html
@@ -232,12 +233,12 @@ List of all class leaf instances.
 
 Returns, by backtracking, all class leaf subclasses.
 
-* compilation flags: ``static``
-* template: ``leaf_class(Leaf)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leaf_class(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``leaf_class(Leaf)``
+| **Mode and number of proofs:**
+|    ``leaf_class(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -252,12 +253,12 @@ Returns, by backtracking, all class leaf subclasses.
 
 List of all class leaf leaf subclasses.
 
-* compilation flags: ``static``
-* template: ``leaf_classes(Leaves)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``leaf_classes(-list)`` - ``one``
+| **Template:**
+|    ``leaf_classes(Leaves)``
+| **Mode and number of proofs:**
+|    ``leaf_classes(-list)`` - ``one``
 
 
 .. raw:: html
@@ -272,12 +273,12 @@ List of all class leaf leaf subclasses.
 
 Returns, by backtracking, all class descendant instances.
 
-* compilation flags: ``static``
-* template: ``descendant_instance(Descendant)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``descendant_instance(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``descendant_instance(Descendant)``
+| **Mode and number of proofs:**
+|    ``descendant_instance(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -292,12 +293,12 @@ Returns, by backtracking, all class descendant instances.
 
 List of all class descendant instances.
 
-* compilation flags: ``static``
-* template: ``descendant_instances(Descendants)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``descendant_instances(-list)`` - ``one``
+| **Template:**
+|    ``descendant_instances(Descendants)``
+| **Mode and number of proofs:**
+|    ``descendant_instances(-list)`` - ``one``
 
 
 .. raw:: html
@@ -312,12 +313,12 @@ List of all class descendant instances.
 
 Returns, by backtracking, all class descendant subclasses.
 
-* compilation flags: ``static``
-* template: ``descendant_class(Descendant)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``descendant_class(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``descendant_class(Descendant)``
+| **Mode and number of proofs:**
+|    ``descendant_class(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -332,12 +333,12 @@ Returns, by backtracking, all class descendant subclasses.
 
 List of all class descendant subclasses.
 
-* compilation flags: ``static``
-* template: ``descendant_classes(Descendants)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``descendant_classes(-list)`` - ``one``
+| **Template:**
+|    ``descendant_classes(Descendants)``
+| **Mode and number of proofs:**
+|    ``descendant_classes(-list)`` - ``one``
 
 
 Protected interface

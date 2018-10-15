@@ -195,121 +195,165 @@
 <div class="section" id="dead-code-scanner">
 <h1><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code><a class="headerlink" href="#dead-code-scanner" title="Permalink to this headline">¶</a></h1>
 <p>A tool for detecting <em>likely</em> dead code in compiled Logtalk entities and Prolog modules compiled as objects.</p>
-<ul class="simple">
-<li>author: Barry Evans and Paulo Moura</li>
-<li>version: 0.11</li>
-<li>date: 2017/8/10</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Barry Evans and Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 0.11</div>
+<div class="line"><strong>Date:</strong> 2017/8/10</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="entity/1"> </div><div class="section" id="entity-1">
 <span id="dead-code-scanner-0-entity-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">entity/1</span></code><a class="headerlink" href="#entity-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans a loaded entity for dead code. Fails if the entity does not exist.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity(Entity)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity(+entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity(Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity(+entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="file/1"> </div></div>
 <div class="section" id="file-1">
 <span id="dead-code-scanner-0-file-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">file/1</span></code><a class="headerlink" href="#file-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">file(File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="directory/1"> </div></div>
 <div class="section" id="directory-1">
 <span id="dead-code-scanner-0-directory-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/1</span></code><a class="headerlink" href="#directory-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files from a given directory for dead code.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="rdirectory/1"> </div></div>
 <div class="section" id="rdirectory-1">
 <span id="dead-code-scanner-0-rdirectory-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code><a class="headerlink" href="#rdirectory-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files from a given directory and its sub-directories for dead code.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="library/1"> </div></div>
 <div class="section" id="library-1">
 <span id="dead-code-scanner-0-library-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">library/1</span></code><a class="headerlink" href="#library-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files from a given library for dead code.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">library(Library)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">library(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(Library)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="rlibrary/1"> </div></div>
 <div class="section" id="rlibrary-1">
 <span id="dead-code-scanner-0-rlibrary-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code><a class="headerlink" href="#rlibrary-1" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="all/0"> </div></div>
 <div class="section" id="all-0">
 <span id="dead-code-scanner-0-all-0"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">all/0</span></code><a class="headerlink" href="#all-0" title="Permalink to this headline">¶</a></h3>
 <p>Scans all entities for dead code.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="predicates/2"> </div></div>
 <div class="section" id="predicates-2">
 <span id="dead-code-scanner-0-predicates-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code><a class="headerlink" href="#predicates-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">predicates(Entity,Predicates)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">predicates(+entity_identifier,-list(predicate_indicator))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicates(Entity,Predicates)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicates(+entity_identifier,-list(predicate_indicator))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="predicate/2"> </div></div>
 <div class="section" id="predicate-2">
 <span id="dead-code-scanner-0-predicate-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code><a class="headerlink" href="#predicate-2" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">predicate(Entity,Predicate)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">predicate(+entity_identifier,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate(Entity,Predicate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate(+entity_identifier,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

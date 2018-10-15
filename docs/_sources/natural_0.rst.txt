@@ -8,14 +8,15 @@
 
 Natural numbers data type predicates.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2009/3/6
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2009/3/6
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`integer <integer/0>`
+
+| **Extends:**
+|    ``public`` :ref:`integer <integer/0>`
 
 Public interface
 ----------------

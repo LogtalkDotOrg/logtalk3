@@ -8,14 +8,15 @@
 
 Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format in the same directory as the tests object file.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2017/12/15
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2017/12/15
 
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 
 Public interface
 ----------------
@@ -42,12 +43,12 @@ Private predicates
 
 Table of messages emitted by the lgtunit tool when running tests.
 
-* compilation flags: ``dynamic``
-* template: ``message_cache_(Message)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``message_cache_(?callable)`` - ``zero_or_more``
+| **Template:**
+|    ``message_cache_(Message)``
+| **Mode and number of proofs:**
+|    ``message_cache_(?callable)`` - ``zero_or_more``
 
 
 Operators

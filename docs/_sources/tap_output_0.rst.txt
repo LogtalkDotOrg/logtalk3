@@ -8,14 +8,15 @@
 
 Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2017/12/21
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2017/12/21
 
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 
 Public interface
 ----------------
@@ -42,10 +43,10 @@ Private predicates
 
 Flag to detect report in progress when processing two or more test sets as a unified set.
 
-* compilation flags: ``dynamic``
-* mode - number of proofs:
+| **Compilation flags:** ``dynamic``
 
-  * ``generating_`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``generating_`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -60,10 +61,10 @@ Flag to detect report in progress when processing two or more test sets as a uni
 
 Cache of total of tests per test set.
 
-* compilation flags: ``dynamic``
-* mode - number of proofs:
+| **Compilation flags:** ``dynamic``
 
-  * ``partial_(?integer)`` - ``zero_or_more``
+| **Mode and number of proofs:**
+|    ``partial_(?integer)`` - ``zero_or_more``
 
 
 Operators

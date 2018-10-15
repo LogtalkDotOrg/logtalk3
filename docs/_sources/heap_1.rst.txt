@@ -8,17 +8,17 @@
 
 Heap implementation, parameterized by the order to be used to compare keys ("<" or ">").
 
-* author: Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
-* version: 1.0
-* date: 2010/2/19
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
+| **Version:** 1.0
+| **Date:** 2010/2/19
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`heapp <heapp/0>`
-* extends:
 
-  * ``public`` :ref:`compound <compound/0>`
+| **Implements:**
+|    ``public`` :ref:`heapp <heapp/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
 
 Public interface
 ----------------

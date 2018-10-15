@@ -98,30 +98,30 @@
 
 <xsl:template match="logtalk_entity/entity">
 	<xsl:if test="author">
-		<xsl:text>* author: </xsl:text><xsl:value-of select="author" />
+		<xsl:text>| **Author:** </xsl:text><xsl:value-of select="author" />
 		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="version">
-		<xsl:text>* version: </xsl:text><xsl:value-of select="version" />
+		<xsl:text>| **Version:** </xsl:text><xsl:value-of select="version" />
 		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="date">
-		<xsl:text>* date: </xsl:text><xsl:value-of select="date" />
-		<xsl:value-of select="$nl" />
+		<xsl:text>| **Date:** </xsl:text><xsl:value-of select="date" />
+		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:if test="copyright">
-		<xsl:text>* copyright: </xsl:text><xsl:value-of select="copyright" />
+		<xsl:text>| **Copyright:** </xsl:text><xsl:value-of select="copyright" />
 		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="license">
-		<xsl:text>* license: </xsl:text><xsl:value-of select="license" />
-		<xsl:value-of select="$nl" />
+		<xsl:text>| **License:** </xsl:text><xsl:value-of select="license" />
+		<xsl:value-of select="$nl2" />
 	</xsl:if>
-	<xsl:text>* compilation flags: ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
-	<xsl:value-of select="$nl" />
+	<xsl:text>| **Compilation flags:** ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
+	<xsl:value-of select="$nl2" />
 	<xsl:if test="info">
 		<xsl:for-each select="info">
-			<xsl:text>* </xsl:text><xsl:value-of select="key" /><xsl:text>: </xsl:text><xsl:value-of select="value" />
+			<xsl:text>| **</xsl:text><xsl:value-of select="key" /><xsl:text>:** </xsl:text><xsl:value-of select="value" />
 			<xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
@@ -133,39 +133,39 @@
 	<xsl:choose>
 		<xsl:when test="*">
 			<xsl:if test="implements">
-				<xsl:text>* implements:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Implements:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="implements" />
 			</xsl:if>
 			<xsl:if test="imports">
-				<xsl:text>* imports:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Imports:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="imports" />
 			</xsl:if>
 			<xsl:if test="extends">
-				<xsl:text>* extends:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Extends:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="extends" />
 			</xsl:if>
 			<xsl:if test="instantiates">
-				<xsl:text>* instantiates:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Instantiates:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="instantiates" />
 			</xsl:if>
 			<xsl:if test="specializes">
-				<xsl:text>* specializes:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Specializes:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
 			<xsl:if test="provides">
-				<xsl:text>* provides:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Provides:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="provides" />
 			</xsl:if>
 			<xsl:if test="uses">
-				<xsl:text>* uses:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Uses:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="uses" />
 			</xsl:if>
 			<xsl:if test="calls">
-				<xsl:text>* calls:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Calls:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="calls" />
 			</xsl:if>
 			<xsl:if test="alias">
-				<xsl:text>* aliases:</xsl:text><xsl:value-of select="$nl2" />
+				<xsl:text>| **Aliases:**</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="alias" />
 			</xsl:if>
 		</xsl:when>
@@ -178,31 +178,31 @@
 
 
 <xsl:template match="logtalk_entity/relations/provides" priority="1">
-	<xsl:text>  * :ref:`</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/uses" priority="1">
-	<xsl:text>  * :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/calls" priority="1">
-	<xsl:text>  * :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
-	<xsl:text>  * ``</xsl:text><xsl:value-of select="name" /><xsl:text>`` ``</xsl:text><xsl:value-of select="original" /><xsl:text>`` aka ``</xsl:text><xsl:value-of select="alternative" /><xsl:text>``</xsl:text>
+	<xsl:text>|    ``</xsl:text><xsl:value-of select="name" /><xsl:text>`` ``</xsl:text><xsl:value-of select="original" /><xsl:text>`` aka ``</xsl:text><xsl:value-of select="alternative" /><xsl:text>``</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/*" priority="0">
-	<xsl:text>  * ``</xsl:text><xsl:value-of select="scope" /><xsl:text>`` :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
+	<xsl:text>|    ``</xsl:text><xsl:value-of select="scope" /><xsl:text>`` :ref:`</xsl:text><xsl:value-of select="name" /><xsl:text> &lt;</xsl:text><xsl:value-of select="functor" /><xsl:text>&gt;`</xsl:text>
 	<xsl:value-of select="$nl" />
 </xsl:template>
 
@@ -282,57 +282,70 @@
 		<xsl:value-of select="comment" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
-	<xsl:text>* compilation flags: ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
-	<xsl:value-of select="$nl" />
+	<xsl:text>| **Compilation flags:** ``</xsl:text><xsl:value-of select="compilation" /><xsl:text>``</xsl:text>
+	<xsl:value-of select="$nl2" />
 	<xsl:if test="template">
-		<xsl:text>* template: ``</xsl:text><xsl:value-of select="template" /><xsl:text>``</xsl:text>
-		<xsl:value-of select="$nl2" />
+		<xsl:text>| **Template:**</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>|    ``</xsl:text><xsl:value-of select="template" /><xsl:text>``</xsl:text>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="arguments">
 		<xsl:for-each select="arguments/argument">
-			<xsl:text>  * ``</xsl:text><xsl:value-of select="name" /><xsl:text>`` - </xsl:text><xsl:value-of select="description" />
+			<xsl:text>|        ``</xsl:text><xsl:value-of select="name" /><xsl:text>`` - </xsl:text><xsl:value-of select="description" />
 			<xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:if test="meta">
-		<xsl:text>* meta-predicate template: ``</xsl:text><xsl:value-of select="meta" /><xsl:text>``</xsl:text>
-		<xsl:value-of select="$nl2" />
+		<xsl:text>| **Meta-predicate template:**</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>|    ``</xsl:text><xsl:value-of select="meta" /><xsl:text>``</xsl:text>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="coinductive">
-		<xsl:text>* coinduction predicate template: ``</xsl:text><xsl:value-of select="coinductive" /><xsl:text>``</xsl:text>
-		<xsl:value-of select="$nl2" />
+		<xsl:text>| **Coinduction template:**</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>|    ``</xsl:text><xsl:value-of select="coinductive" /><xsl:text>``</xsl:text>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="mode">
-		<xsl:text>* mode - number of proofs:</xsl:text><xsl:value-of select="$nl2" />
+		<xsl:text>| **Mode and number of proofs:**</xsl:text>
+		<xsl:value-of select="$nl" />
 		<xsl:for-each select="mode">
-			<xsl:text>  * ``</xsl:text><xsl:value-of select="template" /><xsl:text>`` - ``</xsl:text><xsl:value-of select="proofs" /><xsl:text>``</xsl:text>
+			<xsl:text>|    ``</xsl:text><xsl:value-of select="template" /><xsl:text>`` - ``</xsl:text><xsl:value-of select="proofs" /><xsl:text>``</xsl:text>
 			<xsl:value-of select="$nl2" />
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:if test="exceptions">
-		<xsl:text>* exceptions:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:text>| **Exceptions:**</xsl:text>
+		<xsl:value-of select="$nl" />
 		<xsl:for-each select="exceptions/exception">
 			<xsl:text>  * </xsl:text><xsl:value-of select="condition" /><xsl:text>: ``</xsl:text><xsl:value-of select="term" /><xsl:text>``</xsl:text>
-			<xsl:value-of select="$nl2" />
+			<xsl:value-of select="$nl" />
 		</xsl:for-each>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="remarks">
-		<xsl:text>* remarks:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:text>| **Remarks:**</xsl:text>
+		<xsl:value-of select="$nl" />
 		<xsl:for-each select="remarks/remark">
-			<xsl:text>  * </xsl:text><xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" />
-			<xsl:value-of select="$nl2" />
+			<xsl:text>|    </xsl:text><xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" />
+			<xsl:value-of select="$nl" />
 		</xsl:for-each>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="examples">
-		<xsl:text>* examples:</xsl:text><xsl:value-of select="$nl2" />
+		<xsl:text>| **Examples:**</xsl:text>
+		<xsl:value-of select="$nl" />
 		<xsl:for-each select="examples/example">
-			<xsl:text>  * </xsl:text><xsl:value-of select="description" />
-			<xsl:value-of select="$nl2" />
-				<xsl:text>    * ``</xsl:text><xsl:value-of select="call" /><xsl:text>``</xsl:text>
+			<xsl:text>|    </xsl:text><xsl:value-of select="description" />
+			<xsl:value-of select="$nl" />
+				<xsl:text>|      ``</xsl:text><xsl:value-of select="call" /><xsl:text>``</xsl:text>
 				<xsl:value-of select="$nl" />
-				<xsl:text>    * ``</xsl:text><xsl:value-of select="bindings" /><xsl:text>``</xsl:text>
-				<xsl:value-of select="$nl2" />
+				<xsl:text>|      ``</xsl:text><xsl:value-of select="bindings" /><xsl:text>``</xsl:text>
+				<xsl:value-of select="$nl" />
 		</xsl:for-each>
+		<xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="info">
 		<xsl:for-each select="info">

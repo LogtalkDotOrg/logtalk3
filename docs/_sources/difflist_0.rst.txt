@@ -8,17 +8,17 @@
 
 Difference list predicates.
 
-* author: Paulo Moura
-* version: 1.14
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.14
+| **Date:** 2018/7/11
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`listp <listp/0>`
-* extends:
 
-  * ``public`` :ref:`compound <compound/0>`
+| **Implements:**
+|    ``public`` :ref:`listp <listp/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
 
 Public interface
 ----------------
@@ -35,12 +35,12 @@ Public interface
 
 Adds a term to the end of a difference list.
 
-* compilation flags: ``static``
-* template: ``add(Term,DiffList,NewDiffList)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``add(@term,+difference_list,-difference_list)`` - ``one``
+| **Template:**
+|    ``add(Term,DiffList,NewDiffList)``
+| **Mode and number of proofs:**
+|    ``add(@term,+difference_list,-difference_list)`` - ``one``
 
 
 .. raw:: html
@@ -55,12 +55,12 @@ Adds a term to the end of a difference list.
 
 Converts a difference list to a normal list.
 
-* compilation flags: ``static``
-* template: ``as_list(DiffList,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_list(+difference_list,-list)`` - ``one``
+| **Template:**
+|    ``as_list(DiffList,List)``
+| **Mode and number of proofs:**
+|    ``as_list(+difference_list,-list)`` - ``one``
 
 
 Protected interface

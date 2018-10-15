@@ -8,10 +8,12 @@
 
 A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.
 
-* author: Barry Evans and Paulo Moura
-* version: 0.11
-* date: 2017/8/10
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Barry Evans and Paulo Moura
+| **Version:** 0.11
+| **Date:** 2017/8/10
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Scans a loaded entity for dead code. Fails if the entity does not exist.
 
-* compilation flags: ``static``
-* template: ``entity(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity(+entity_identifier)`` - ``zero_or_one``
+| **Template:**
+|    ``entity(Entity)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Scans a loaded entity for dead code. Fails if the entity does not exist.
 
 Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.
 
-* compilation flags: ``static``
-* template: ``file(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``file(File)``
+| **Mode and number of proofs:**
+|    ``file(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Scans all entities in a loaded source file for dead code. The file can be given 
 
 Scans all entities in all loaded files from a given directory for dead code.
 
-* compilation flags: ``static``
-* template: ``directory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``directory(+atom)`` - ``one``
+| **Template:**
+|    ``directory(Directory)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Scans all entities in all loaded files from a given directory for dead code.
 
 Scans all entities in all loaded files from a given directory and its sub-directories for dead code.
 
-* compilation flags: ``static``
-* template: ``rdirectory(Directory)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rdirectory(+atom)`` - ``one``
+| **Template:**
+|    ``rdirectory(Directory)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Scans all entities in all loaded files from a given directory and its sub-direct
 
 Scans all entities in all loaded files from a given library for dead code.
 
-* compilation flags: ``static``
-* template: ``library(Library)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``library(+atom)`` - ``one``
+| **Template:**
+|    ``library(Library)``
+| **Mode and number of proofs:**
+|    ``library(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Scans all entities in all loaded files from a given library for dead code.
 
 Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.
 
-* compilation flags: ``static``
-* template: ``rlibrary(Library)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``rlibrary(+atom)`` - ``one``
+| **Template:**
+|    ``rlibrary(Library)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -151,10 +153,10 @@ Scans all entities in all loaded files in a loaded library and its sub-libraries
 
 Scans all entities for dead code.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``all`` - ``one``
+| **Mode and number of proofs:**
+|    ``all`` - ``one``
 
 
 .. raw:: html
@@ -169,12 +171,12 @@ Scans all entities for dead code.
 
 Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
 
-* compilation flags: ``static``
-* template: ``predicates(Entity,Predicates)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``predicates(+entity_identifier,-list(predicate_indicator))`` - ``one``
+| **Template:**
+|    ``predicates(Entity,Predicates)``
+| **Mode and number of proofs:**
+|    ``predicates(+entity_identifier,-list(predicate_indicator))`` - ``one``
 
 
 .. raw:: html
@@ -189,12 +191,12 @@ Returns an ordered set of local predicates (and non-terminals) that are not used
 
 Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.
 
-* compilation flags: ``static``
-* template: ``predicate(Entity,Predicate)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+| **Template:**
+|    ``predicate(Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
 
 Protected interface

@@ -289,86 +289,118 @@
 <div class="section" id="comparingp">
 <h1><code class="docutils literal notranslate"><span class="pre">comparingp</span></code><a class="headerlink" href="#comparingp" title="Permalink to this headline">¶</a></h1>
 <p>Comparing protocol using overloading of standard operators.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.0</li>
-<li>date: 2000/7/24</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2000/7/24</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="(<)/2"> </div><div class="section" id="comparingp-0-2">
 <span id="index-1"></span><span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">(&lt;)/2</span></code><a class="headerlink" href="#comparingp-0-2" title="Permalink to this headline">¶</a></h3>
 <p>True if Term1 is less than Term2.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Term1&lt;Term2</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">+term&lt;</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term1&lt;Term2</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">+term&lt;</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="(=<)/2"> </div></div>
 <div class="section" id="id2">
 <span id="index-2"></span><span id="id3"></span><h3><code class="docutils literal notranslate"><span class="pre">(=&lt;)/2</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>True if Term1 is less or equal than Term2.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Term1=&lt;Term2</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">+term=&lt;</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term1=&lt;Term2</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">+term=&lt;</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="(>)/2"> </div></div>
 <div class="section" id="id4">
 <span id="index-3"></span><span id="id5"></span><h3><code class="docutils literal notranslate"><span class="pre">(&gt;)/2</span></code><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>True if Term1 is greater than Term2.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Term1&gt;Term2</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">+term&gt;</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term1&gt;Term2</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">+term&gt;</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="(>=)/2"> </div></div>
 <div class="section" id="id6">
 <span id="index-4"></span><span id="id7"></span><h3><code class="docutils literal notranslate"><span class="pre">(&gt;=)/2</span></code><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>True if Term1 is equal or grater than Term2.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Term1&gt;=Term2</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">+term&gt;=</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term1&gt;=Term2</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">+term&gt;=</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="(=:=)/2"> </div></div>
 <div class="section" id="id8">
 <span id="index-5"></span><span id="id9"></span><h3><code class="docutils literal notranslate"><span class="pre">(=:=)/2</span></code><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>True if Term1 is equal to Term2.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Term1=:=Term2</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">+term=:=</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term1=:=Term2</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">+term=:=</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="(=\=)/2"> </div></div>
 <div class="section" id="id10">
 <span id="index-6"></span><span id="id11"></span><h3><code class="docutils literal notranslate"><span class="pre">(=\=)/2</span></code><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <p>True if Term1 is not equal to Term2.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">Term1=\=Term2</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">+term=\=</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term1=\=Term2</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">+term=\=</span> <span class="pre">+term</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

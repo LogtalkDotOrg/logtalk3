@@ -8,15 +8,16 @@
 
 Constructors for optional term references. An optional reference represents a term that may or may not be present. Optional references should be regarded as opaque terms and always used with the "optional(_)" object by passing the reference as a parameter.
 
-* author: Paulo Moura
-* version: 1.2
-* date: 2017/8/8
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.2
+| **Date:** 2017/8/8
 
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`type::type/1 <type/0::type/1>`
-  * :ref:`type::check/2 <type/0::check/2>`
+
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
 
 Public interface
 ----------------
@@ -33,12 +34,12 @@ Public interface
 
 Constructs an empty optional reference.
 
-* compilation flags: ``static``
-* template: ``empty(Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty(--nonvar)`` - ``one``
+| **Template:**
+|    ``empty(Reference)``
+| **Mode and number of proofs:**
+|    ``empty(--nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -53,12 +54,12 @@ Constructs an empty optional reference.
 
 Constructs an optional reference from a term.
 
-* compilation flags: ``static``
-* template: ``of(Term,Reference)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``of(@term,--nonvar)`` - ``one``
+| **Template:**
+|    ``of(Term,Reference)``
+| **Mode and number of proofs:**
+|    ``of(@term,--nonvar)`` - ``one``
 
 
 Protected interface

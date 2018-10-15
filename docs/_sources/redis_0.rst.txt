@@ -8,14 +8,15 @@
 
 Redis client. Inspired by Sean Charles GNU Prolog Redis client.
 
-* author: Paulo Moura
-* version: 0.3
-* date: 2017/6/29
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 0.3
+| **Date:** 2017/6/29
 
-* provides:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Connect to a Redis server running on localhost using the default 6379 port.
 
-* compilation flags: ``static``
-* template: ``connect(Connection)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``connect(--ground)`` - ``one``
+| **Template:**
+|    ``connect(Connection)``
+| **Mode and number of proofs:**
+|    ``connect(--ground)`` - ``one``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Connect to a Redis server running on localhost using the default 6379 port.
 
 Connect to a Redis server running on the given host and port.
 
-* compilation flags: ``static``
-* template: ``connect(Host,Port,Connection)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``connect(+atom,+integer,--ground)`` - ``one``
+| **Template:**
+|    ``connect(Host,Port,Connection)``
+| **Mode and number of proofs:**
+|    ``connect(+atom,+integer,--ground)`` - ``one``
 
 
 .. raw:: html
@@ -72,12 +73,12 @@ Connect to a Redis server running on the given host and port.
 
 Disconnect from a Redis server.
 
-* compilation flags: ``static``
-* template: ``disconnect(Connection)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``disconnect(++ground)`` - ``one``
+| **Template:**
+|    ``disconnect(Connection)``
+| **Mode and number of proofs:**
+|    ``disconnect(++ground)`` - ``one``
 
 
 .. raw:: html
@@ -92,12 +93,12 @@ Disconnect from a Redis server.
 
 Sends a request to the a Redis server and returns its reply
 
-* compilation flags: ``static``
-* template: ``send(Connection,Request,Reply)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``send(++ground,++callable,--callable)`` - ``one``
+| **Template:**
+|    ``send(Connection,Request,Reply)``
+| **Mode and number of proofs:**
+|    ``send(++ground,++callable,--callable)`` - ``one``
 
 
 .. raw:: html
@@ -112,12 +113,12 @@ Sends a request to the a Redis server and returns its reply
 
 Sends a request to a Redis server running on localhost at the default 6379 port and prints the reply.
 
-* compilation flags: ``static``
-* template: ``console(Request)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``console(++callable)`` - ``one``
+| **Template:**
+|    ``console(Request)``
+| **Mode and number of proofs:**
+|    ``console(++callable)`` - ``one``
 
 
 Protected interface

@@ -8,14 +8,15 @@
 
 Predicates for generating file contents dependency diagrams in DOT format. A dependency exists when an entity in one file makes a reference to an entity in another file.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2014/1/14
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2014/1/14
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`file_dependency_diagram(dot) <file_dependency_diagram/1>`
+
+| **Extends:**
+|    ``public`` :ref:`file_dependency_diagram(dot) <file_dependency_diagram/1>`
 
 Public interface
 ----------------

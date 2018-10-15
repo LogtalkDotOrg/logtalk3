@@ -289,254 +289,356 @@
 <div class="section" id="statisticsp">
 <h1><code class="docutils literal notranslate"><span class="pre">statisticsp</span></code><a class="headerlink" href="#statisticsp" title="Permalink to this headline">¶</a></h1>
 <p>Statistical calculations over a list of numbers protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.1</li>
-<li>date: 2017/10/3</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2017/10/3</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="product/2"> </div><div class="section" id="product-2">
 <span id="statisticsp-0-product-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">product/2</span></code><a class="headerlink" href="#product-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the product of all list numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">product(List,Product)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">product(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">product(List,Product)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">product(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="sum/2"> </div></div>
 <div class="section" id="sum-2">
 <span id="statisticsp-0-sum-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">sum/2</span></code><a class="headerlink" href="#sum-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the sum of all list numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">sum(List,Sum)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">sum(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sum(List,Sum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sum(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="max/2"> </div></div>
 <div class="section" id="max-2">
 <span id="statisticsp-0-max-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">max/2</span></code><a class="headerlink" href="#max-2" title="Permalink to this headline">¶</a></h3>
 <p>Determines the list maximum value in a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">max(List,Maximum)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">max(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(List,Maximum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="min/2"> </div></div>
 <div class="section" id="min-2">
 <span id="statisticsp-0-min-2"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">min/2</span></code><a class="headerlink" href="#min-2" title="Permalink to this headline">¶</a></h3>
 <p>Determines the minimum value in a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">min(List,Minimum)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">min(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(List,Minimum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="range/2"> </div></div>
 <div class="section" id="range-2">
 <span id="statisticsp-0-range-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">range/2</span></code><a class="headerlink" href="#range-2" title="Permalink to this headline">¶</a></h3>
 <p>Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">range(List,Range)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">range(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">range(List,Range)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">range(+list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="arithmetic_mean/2"> </div></div>
 <div class="section" id="arithmetic-mean-2">
 <span id="statisticsp-0-arithmetic-mean-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/2</span></code><a class="headerlink" href="#arithmetic-mean-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">arithmetic_mean(List,Mean)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">arithmetic_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arithmetic_mean(List,Mean)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arithmetic_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="geometric_mean/2"> </div></div>
 <div class="section" id="geometric-mean-2">
 <span id="statisticsp-0-geometric-mean-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">geometric_mean/2</span></code><a class="headerlink" href="#geometric-mean-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the geometric mean of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">geometric_mean(List,Mean)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">geometric_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">geometric_mean(List,Mean)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">geometric_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="harmonic_mean/2"> </div></div>
 <div class="section" id="harmonic-mean-2">
 <span id="statisticsp-0-harmonic-mean-2"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code><a class="headerlink" href="#harmonic-mean-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the harmonic mean of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">harmonic_mean(List,Mean)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">harmonic_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">harmonic_mean(List,Mean)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">harmonic_mean(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="median/2"> </div></div>
 <div class="section" id="median-2">
 <span id="statisticsp-0-median-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">median/2</span></code><a class="headerlink" href="#median-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the median of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">median(List,Median)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">median(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">median(List,Median)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">median(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="average_deviation/3"> </div></div>
 <div class="section" id="average-deviation-3">
 <span id="statisticsp-0-average-deviation-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">average_deviation/3</span></code><a class="headerlink" href="#average-deviation-3" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">average_deviation(List,CentralTendency,Deviation)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">average_deviation(+list(number),+float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">average_deviation(List,CentralTendency,Deviation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">average_deviation(+list(number),+float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="mean_deviation/2"> </div></div>
 <div class="section" id="mean-deviation-2">
 <span id="statisticsp-0-mean-deviation-2"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">mean_deviation/2</span></code><a class="headerlink" href="#mean-deviation-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the mean absolute deviation of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">mean_deviation(List,Deviation)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">mean_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_deviation(List,Deviation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="median_deviation/2"> </div></div>
 <div class="section" id="median-deviation-2">
 <span id="statisticsp-0-median-deviation-2"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">median_deviation/2</span></code><a class="headerlink" href="#median-deviation-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the median absolute deviation of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">median_deviation(List,Deviation)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">median_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">median_deviation(List,Deviation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">median_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="standard_deviation/2"> </div></div>
 <div class="section" id="standard-deviation-2">
 <span id="statisticsp-0-standard-deviation-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">standard_deviation/2</span></code><a class="headerlink" href="#standard-deviation-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the standard deviation of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">standard_deviation(List,Deviation)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">standard_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">standard_deviation(List,Deviation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">standard_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="coefficient_of_variation/2"> </div></div>
 <div class="section" id="coefficient-of-variation-2">
 <span id="statisticsp-0-coefficient-of-variation-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation/2</span></code><a class="headerlink" href="#coefficient-of-variation-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">coefficient_of_variation(List,Coefficient)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation(List,Coefficient)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="relative_standard_deviation/2"> </div></div>
 <div class="section" id="relative-standard-deviation-2">
 <span id="statisticsp-0-relative-standard-deviation-2"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code><a class="headerlink" href="#relative-standard-deviation-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the relative standard deviation of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">relative_standard_deviation(List,Percentage)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation(List,Percentage)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="skewness/2"> </div></div>
 <div class="section" id="skewness-2">
 <span id="statisticsp-0-skewness-2"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">skewness/2</span></code><a class="headerlink" href="#skewness-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the (moment) skewness of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">skewness(List,Skewness)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">skewness(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">skewness(List,Skewness)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">skewness(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="kurtosis/2"> </div></div>
 <div class="section" id="kurtosis-2">
 <span id="statisticsp-0-kurtosis-2"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code><a class="headerlink" href="#kurtosis-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">kurtosis(List,Kurtosis)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">kurtosis(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">kurtosis(List,Kurtosis)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">kurtosis(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="variance/2"> </div></div>
 <div class="section" id="variance-2">
 <span id="statisticsp-0-variance-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">variance/2</span></code><a class="headerlink" href="#variance-2" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the unbiased variance of a list of numbers. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">variance(List,Variance)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">variance(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variance(List,Variance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variance(+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="z_normalization/2"> </div></div>
 <div class="section" id="z-normalization-2">
 <span id="statisticsp-0-z-normalization-2"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">z_normalization/2</span></code><a class="headerlink" href="#z-normalization-2" title="Permalink to this headline">¶</a></h3>
 <p>Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">z_normalization(List,NormalizedList)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">z_normalization(+list(number),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">z_normalization(List,NormalizedList)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">z_normalization(+list(number),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="valid/1"> </div></div>
 <div class="section" id="valid-1">
 <span id="statisticsp-0-valid-1"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">valid/1</span></code><a class="headerlink" href="#valid-1" title="Permalink to this headline">¶</a></h3>
 <p>Term is a closed list of numbers.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">valid(Term)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">valid(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">
@@ -547,27 +649,27 @@
 <h2>Private predicates<a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="arithmetic_mean/5"> </div><div class="section" id="arithmetic-mean-5">
 <span id="statisticsp-0-arithmetic-mean-5"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/5</span></code><a class="headerlink" href="#arithmetic-mean-5" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <div id="squares_and_cubes/6"> </div></div>
 <div class="section" id="squares-and-cubes-6">
 <span id="statisticsp-0-squares-and-cubes-6"></span><span id="index-22"></span><h3><code class="docutils literal notranslate"><span class="pre">squares_and_cubes/6</span></code><a class="headerlink" href="#squares-and-cubes-6" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <div id="squares_and_hypers/6"> </div></div>
 <div class="section" id="squares-and-hypers-6">
 <span id="statisticsp-0-squares-and-hypers-6"></span><span id="index-23"></span><h3><code class="docutils literal notranslate"><span class="pre">squares_and_hypers/6</span></code><a class="headerlink" href="#squares-and-hypers-6" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <div id="variance/6"> </div></div>
 <div class="section" id="variance-6">
 <span id="statisticsp-0-variance-6"></span><span id="index-24"></span><h3><code class="docutils literal notranslate"><span class="pre">variance/6</span></code><a class="headerlink" href="#variance-6" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 </div>
 </div>
 <div class="section" id="operators">

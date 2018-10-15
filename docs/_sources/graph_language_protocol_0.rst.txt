@@ -8,10 +8,12 @@
 
 Predicates for generating graph files.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2014/12/30
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2014/12/30
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Constructs the diagram file basename by adding a graph language dependent extension to the given name.
 
-* compilation flags: ``static``
-* template: ``output_file_name(Name,Basename)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``output_file_name(+atom,-atom)`` - ``one``
+| **Template:**
+|    ``output_file_name(Name,Basename)``
+| **Mode and number of proofs:**
+|    ``output_file_name(+atom,-atom)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Constructs the diagram file basename by adding a graph language dependent extens
 
 Writes the output file header using the specified options.
 
-* compilation flags: ``static``
-* template: ``file_header(Stream,Identifier,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_header(+stream_or_alias,+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``file_header(Stream,Identifier,Options)``
+| **Mode and number of proofs:**
+|    ``file_header(+stream_or_alias,+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Writes the output file header using the specified options.
 
 Writes the output file footer using the specified options.
 
-* compilation flags: ``static``
-* template: ``file_footer(Stream,Identifier,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_footer(+stream_or_alias,+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``file_footer(Stream,Identifier,Options)``
+| **Mode and number of proofs:**
+|    ``file_footer(+stream_or_alias,+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Writes the output file footer using the specified options.
 
 Writes a graph header using the specified options.
 
-* compilation flags: ``static``
-* template: ``graph_header(Stream,Identifier,Label,Kind,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``graph_header(Stream,Identifier,Label,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Writes a graph header using the specified options.
 
 Writes a graph footer using the specified options.
 
-* compilation flags: ``static``
-* template: ``graph_footer(Stream,Identifier,Label,Kind,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``graph_footer(Stream,Identifier,Label,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Writes a graph footer using the specified options.
 
 Writes a node using the specified options.
 
-* compilation flags: ``static``
-* template: ``node(Stream,Identifier,Label,Caption,Lines,Kind,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``node(+stream_or_alias,+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``node(Stream,Identifier,Label,Caption,Lines,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``node(+stream_or_alias,+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Writes a node using the specified options.
 
 Writes an edge between two nodes using the specified options.
 
-* compilation flags: ``static``
-* template: ``edge(Stream,Start,End,Labels,Kind,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``edge(Stream,Start,End,Labels,Kind,Options)``
+| **Mode and number of proofs:**
+|    ``edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))`` - ``one``
 
 
 Protected interface

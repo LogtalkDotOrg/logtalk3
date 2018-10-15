@@ -8,10 +8,12 @@
 
 Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2014/4/26
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2014/4/26
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Constructs a new interval given start and end points. The start point must strictly precede the end point.
 
-* compilation flags: ``static``
-* template: ``new(Start,End,Interval)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``new(@ground,@ground,-interval)`` - ``zero_or_one``
+| **Template:**
+|    ``new(Start,End,Interval)``
+| **Mode and number of proofs:**
+|    ``new(@ground,@ground,-interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Constructs a new interval given start and end points. The start point must stric
 
 True if Interval is a valid interval.
 
-* compilation flags: ``static``
-* template: ``valid(Interval)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Interval)``
+| **Mode and number of proofs:**
+|    ``valid(@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ True if Interval is a valid interval.
 
 True if Interval1 takes place before Interval2.
 
-* compilation flags: ``static``
-* template: ``before(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``before(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``before(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``before(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ True if Interval1 takes place before Interval2.
 
 True if Interval1 takes place after Interval2.
 
-* compilation flags: ``static``
-* template: ``after(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``after(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``after(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``after(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ True if Interval1 takes place after Interval2.
 
 True if Interval1 meets Interval2.
 
-* compilation flags: ``static``
-* template: ``meets(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``meets(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``meets(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``meets(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ True if Interval1 meets Interval2.
 
 True if Interval1 is met by Interval2.
 
-* compilation flags: ``static``
-* template: ``met_by(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``met_by(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``met_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``met_by(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ True if Interval1 is met by Interval2.
 
 True if Interval1 overlaps with Interval2.
 
-* compilation flags: ``static``
-* template: ``overlaps(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``overlaps(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``overlaps(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``overlaps(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ True if Interval1 overlaps with Interval2.
 
 True if Interval1 is overlapped by Interval2.
 
-* compilation flags: ``static``
-* template: ``overlapped_by(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``overlapped_by(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``overlapped_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``overlapped_by(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ True if Interval1 is overlapped by Interval2.
 
 True if Interval1 starts Interval2.
 
-* compilation flags: ``static``
-* template: ``starts(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``starts(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``starts(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``starts(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ True if Interval1 starts Interval2.
 
 True if Interval1 is started by Interval2.
 
-* compilation flags: ``static``
-* template: ``started_by(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``started_by(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``started_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``started_by(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ True if Interval1 is started by Interval2.
 
 True if Interval1 occurs during Interval2.
 
-* compilation flags: ``static``
-* template: ``during(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``during(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``during(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``during(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ True if Interval1 occurs during Interval2.
 
 True if Interval1 contains Interval2.
 
-* compilation flags: ``static``
-* template: ``contains(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``contains(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``contains(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``contains(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ True if Interval1 contains Interval2.
 
 True if Interval1 finishes Interval2.
 
-* compilation flags: ``static``
-* template: ``finishes(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``finishes(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``finishes(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``finishes(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -291,12 +293,12 @@ True if Interval1 finishes Interval2.
 
 True if Interval1 is finished by Interval2.
 
-* compilation flags: ``static``
-* template: ``finished_by(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``finished_by(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``finished_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``finished_by(@interval,@interval)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -311,12 +313,12 @@ True if Interval1 is finished by Interval2.
 
 True if Interval1 is equal to Interval2.
 
-* compilation flags: ``static``
-* template: ``equal(Interval1,Interval2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``equal(@interval,@interval)`` - ``zero_or_one``
+| **Template:**
+|    ``equal(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``equal(@interval,@interval)`` - ``zero_or_one``
 
 
 Protected interface

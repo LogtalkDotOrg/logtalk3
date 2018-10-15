@@ -8,10 +8,12 @@
 
 Event registry protocol.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2009/10/8
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2009/10/8
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns a list of all current monitors.
 
-* compilation flags: ``static``
-* template: ``monitors(Monitors)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``monitors(-list(object_identifier))`` - ``one``
+| **Template:**
+|    ``monitors(Monitors)``
+| **Mode and number of proofs:**
+|    ``monitors(-list(object_identifier))`` - ``one``
 
 
 .. raw:: html
@@ -51,14 +53,14 @@ Returns a list of all current monitors.
 
 Monitor is an object playing the role of a monitor.
 
-* compilation flags: ``static``
-* template: ``monitor(Monitor)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``monitor(Monitor)``
+| **Mode and number of proofs:**
+|    ``monitor(-object_identifier)`` - ``zero_or_more``
 
-  * ``monitor(-object_identifier)`` - ``zero_or_more``
-
-  * ``monitor(+object_identifier)`` - ``zero_or_one``
+|    ``monitor(+object_identifier)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -73,12 +75,12 @@ Monitor is an object playing the role of a monitor.
 
 Returns a list of all currently monitored objects.
 
-* compilation flags: ``static``
-* template: ``monitored(Objects)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``monitored(-list(object_identifier))`` - ``one``
+| **Template:**
+|    ``monitored(Objects)``
+| **Mode and number of proofs:**
+|    ``monitored(-list(object_identifier))`` - ``one``
 
 
 .. raw:: html
@@ -93,12 +95,12 @@ Returns a list of all currently monitored objects.
 
 True if the arguments describe a currently defined monitored event.
 
-* compilation flags: ``static``
-* template: ``monitor(Object,Message,Sender,Monitor)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``monitor(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``zero_or_more``
+| **Template:**
+|    ``monitor(Object,Message,Sender,Monitor)``
+| **Mode and number of proofs:**
+|    ``monitor(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -113,12 +115,12 @@ True if the arguments describe a currently defined monitored event.
 
 Sets a monitor for the set of matching events.
 
-* compilation flags: ``static``
-* template: ``set_monitor(Object,Message,Sender,Monitor)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_monitor(?object_identifier,?nonvar,?object_identifier,+object_identifier)`` - ``zero_or_one``
+| **Template:**
+|    ``set_monitor(Object,Message,Sender,Monitor)``
+| **Mode and number of proofs:**
+|    ``set_monitor(?object_identifier,?nonvar,?object_identifier,+object_identifier)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -133,12 +135,12 @@ Sets a monitor for the set of matching events.
 
 Deletes all matching monitored events.
 
-* compilation flags: ``static``
-* template: ``del_monitors(Object,Message,Sender,Monitor)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``del_monitors(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``one``
+| **Template:**
+|    ``del_monitors(Object,Message,Sender,Monitor)``
+| **Mode and number of proofs:**
+|    ``del_monitors(?object_identifier,?nonvar,?object_identifier,?object_identifier)`` - ``one``
 
 
 .. raw:: html
@@ -153,10 +155,10 @@ Deletes all matching monitored events.
 
 Deletes all monitored events.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``del_monitors`` - ``one``
+| **Mode and number of proofs:**
+|    ``del_monitors`` - ``one``
 
 
 Protected interface

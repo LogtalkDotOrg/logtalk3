@@ -8,10 +8,12 @@
 
 List of variables protocol.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2016/10/6
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2016/10/6
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Appends two lists.
 
-* compilation flags: ``static``
-* template: ``append(List1,List2,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``append(?list,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``append(List1,List2,List)``
+| **Mode and number of proofs:**
+|    ``append(?list,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Appends two lists.
 
 Deletes from a list all occurrences of an element returning the list of remaining elements.
 
-* compilation flags: ``static``
-* template: ``delete(List,Element,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete(@list,@term,?list)`` - ``one``
+| **Template:**
+|    ``delete(List,Element,Remaining)``
+| **Mode and number of proofs:**
+|    ``delete(@list,@term,?list)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Deletes from a list all occurrences of an element returning the list of remainin
 
 True if the argument is an empty list.
 
-* compilation flags: ``static``
-* template: ``empty(List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty(@list)`` - ``zero_or_one``
+| **Template:**
+|    ``empty(List)``
+| **Mode and number of proofs:**
+|    ``empty(@list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ True if the argument is an empty list.
 
 Flattens a list of lists into a list.
 
-* compilation flags: ``static``
-* template: ``flatten(List,Flatted)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``flatten(@list,-list)`` - ``one``
+| **Template:**
+|    ``flatten(List,Flatted)``
+| **Mode and number of proofs:**
+|    ``flatten(@list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Flattens a list of lists into a list.
 
 List last element (if it exists).
 
-* compilation flags: ``static``
-* template: ``last(List,Last)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``last(@list,@var)`` - ``zero_or_one``
+| **Template:**
+|    ``last(List,Last)``
+| **Mode and number of proofs:**
+|    ``last(@list,@var)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ List last element (if it exists).
 
 List length.
 
-* compilation flags: ``static``
-* template: ``length(List,Length)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``length(@list,?integer)`` - ``zero_or_one``
+| **Template:**
+|    ``length(List,Length)``
+| **Mode and number of proofs:**
+|    ``length(@list,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ List length.
 
 Checks if a variable is a member of a list.
 
-* compilation flags: ``static``
-* template: ``memberchk(Element,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``memberchk(@var,@list)`` - ``zero_or_one``
+| **Template:**
+|    ``memberchk(Element,List)``
+| **Mode and number of proofs:**
+|    ``memberchk(@var,@list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Checks if a variable is a member of a list.
 
 X and Y are consecutive elements in List.
 
-* compilation flags: ``static``
-* template: ``nextto(X,Y,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nextto(@var,@var,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``nextto(X,Y,List)``
+| **Mode and number of proofs:**
+|    ``nextto(@var,@var,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ X and Y are consecutive elements in List.
 
 Nth element of a list (counting from zero).
 
-* compilation flags: ``static``
-* template: ``nth0(Nth,List,Element)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth0(?integer,+list,@var)`` - ``zero_or_more``
+| **Template:**
+|    ``nth0(Nth,List,Element)``
+| **Mode and number of proofs:**
+|    ``nth0(?integer,+list,@var)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from zero).
 
-* compilation flags: ``static``
-* template: ``nth0(Nth,List,Element,Residue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth0(?integer,+list,@var,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``nth0(Nth,List,Element,Residue)``
+| **Mode and number of proofs:**
+|    ``nth0(?integer,+list,@var,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -231,12 +233,12 @@ Nth element of a list (counting from zero).
 
 Nth element of a list (counting from one).
 
-* compilation flags: ``static``
-* template: ``nth1(Nth,List,Element)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth1(?integer,+list,@var)`` - ``zero_or_more``
+| **Template:**
+|    ``nth1(Nth,List,Element)``
+| **Mode and number of proofs:**
+|    ``nth1(?integer,+list,@var)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -251,12 +253,12 @@ Nth element of a list (counting from one).
 
 Nth element of a list (counting from zero).
 
-* compilation flags: ``static``
-* template: ``nth1(Nth,List,Element,Residue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``nth1(?integer,+list,@var,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``nth1(Nth,List,Element,Residue)``
+| **Mode and number of proofs:**
+|    ``nth1(?integer,+list,@var,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -271,12 +273,12 @@ Nth element of a list (counting from zero).
 
 The two lists are a permutation of the same list.
 
-* compilation flags: ``static``
-* template: ``permutation(List,Permutation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``permutation(@list,@list)`` - ``zero_or_one``
+| **Template:**
+|    ``permutation(List,Permutation)``
+| **Mode and number of proofs:**
+|    ``permutation(@list,@list)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -291,12 +293,12 @@ The two lists are a permutation of the same list.
 
 Prefix is a prefix of List.
 
-* compilation flags: ``static``
-* template: ``prefix(Prefix,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``prefix(?list,@list)`` - ``zero_or_more``
+| **Template:**
+|    ``prefix(Prefix,List)``
+| **Mode and number of proofs:**
+|    ``prefix(?list,@list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -311,16 +313,16 @@ Prefix is a prefix of List.
 
 Reverses a list.
 
-* compilation flags: ``static``
-* template: ``reverse(List,Reversed)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``reverse(List,Reversed)``
+| **Mode and number of proofs:**
+|    ``reverse(@list,?list)`` - ``zero_or_one``
 
-  * ``reverse(@list,?list)`` - ``zero_or_one``
+|    ``reverse(?list,@list)`` - ``zero_or_one``
 
-  * ``reverse(?list,@list)`` - ``zero_or_one``
-
-  * ``reverse(-list,-list)`` - ``one_or_more``
+|    ``reverse(-list,-list)`` - ``one_or_more``
 
 
 .. raw:: html
@@ -335,16 +337,16 @@ Reverses a list.
 
 The two lists have the same length.
 
-* compilation flags: ``static``
-* template: ``same_length(List1,List2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``same_length(List1,List2)``
+| **Mode and number of proofs:**
+|    ``same_length(@list,?list)`` - ``zero_or_one``
 
-  * ``same_length(@list,?list)`` - ``zero_or_one``
+|    ``same_length(?list,@list)`` - ``zero_or_one``
 
-  * ``same_length(?list,@list)`` - ``zero_or_one``
-
-  * ``same_length(-list,-list)`` - ``one_or_more``
+|    ``same_length(-list,-list)`` - ``one_or_more``
 
 
 .. raw:: html
@@ -359,12 +361,12 @@ The two lists have the same length.
 
 Selects an element from a list, returning the list of remaining elements.
 
-* compilation flags: ``static``
-* template: ``select(Element,List,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``select(@var,?list,?list)`` - ``zero_or_more``
+| **Template:**
+|    ``select(Element,List,Remaining)``
+| **Mode and number of proofs:**
+|    ``select(@var,?list,?list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -379,12 +381,12 @@ Selects an element from a list, returning the list of remaining elements.
 
 The first list is a sublist of the second.
 
-* compilation flags: ``static``
-* template: ``sublist(Sublist,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sublist(?list,@list)`` - ``zero_or_more``
+| **Template:**
+|    ``sublist(Sublist,List)``
+| **Mode and number of proofs:**
+|    ``sublist(?list,@list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -399,12 +401,12 @@ The first list is a sublist of the second.
 
 Removes all elements in the second list from the first list, returning the list of remaining elements.
 
-* compilation flags: ``static``
-* template: ``subtract(List,Elements,Remaining)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subtract(@list,@list,-list)`` - ``one``
+| **Template:**
+|    ``subtract(List,Elements,Remaining)``
+| **Mode and number of proofs:**
+|    ``subtract(@list,@list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -419,12 +421,12 @@ Removes all elements in the second list from the first list, returning the list 
 
 Suffix is a suffix of List.
 
-* compilation flags: ``static``
-* template: ``suffix(Suffix,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``suffix(?list,@list)`` - ``zero_or_more``
+| **Template:**
+|    ``suffix(Suffix,List)``
+| **Mode and number of proofs:**
+|    ``suffix(?list,@list)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -439,12 +441,12 @@ Suffix is a suffix of List.
 
 Term is a valid list of variables.
 
-* compilation flags: ``static``
-* template: ``valid(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``valid(@nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``valid(Term)``
+| **Mode and number of proofs:**
+|    ``valid(@nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -459,12 +461,12 @@ Term is a valid list of variables.
 
 Checks if a term is a valid list of variables. Throws an exception if the term is not valid.
 
-* compilation flags: ``static``
-* template: ``check(Term)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``check(@nonvar)`` - ``one``
+| **Template:**
+|    ``check(Term)``
+| **Mode and number of proofs:**
+|    ``check(@nonvar)`` - ``one``
 
 
 Protected interface

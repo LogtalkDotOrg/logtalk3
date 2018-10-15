@@ -289,69 +289,101 @@
 <div class="section" id="integer">
 <h1><code class="docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#integer" title="Permalink to this headline">¶</a></h1>
 <p>Integer data type predicates.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.53</li>
-<li>date: 2018/7/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-<li>extends:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="number_0.html#number-0"><span class="std std-ref">number</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.53</div>
+<div class="line"><strong>Date:</strong> 2018/7/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="number_0.html#number-0"><span class="std std-ref">number</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="between/3"> </div><div class="section" id="between-3">
 <span id="integer-0-between-3"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">between/3</span></code><a class="headerlink" href="#between-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns integers in the interval defined by the two first arguments.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">between(Lower,Upper,Integer)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">between(+integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">between(+integer,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">between(Lower,Upper,Integer)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">between(+integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">between(+integer,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
 <div id="plus/3"> </div></div>
 <div class="section" id="plus-3">
 <span id="integer-0-plus-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">plus/3</span></code><a class="headerlink" href="#plus-3" title="Permalink to this headline">¶</a></h3>
 <p>Reversible integer sum. At least two of the arguments must be instantiated to integers.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">plus(I,J,Sum)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">plus(+integer,+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">plus(+integer,?integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">plus(?integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">plus(I,J,Sum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">plus(+integer,+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">plus(+integer,?integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">plus(?integer,+integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
 <div id="succ/2"> </div></div>
 <div class="section" id="succ-2">
 <span id="integer-0-succ-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">succ/2</span></code><a class="headerlink" href="#succ-2" title="Permalink to this headline">¶</a></h3>
 <p>Successor of a natural number. At least one of the arguments must be instantiated to a natural number.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">succ(I,J)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">succ(+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">succ(?integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">succ(I,J)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">succ(+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">succ(?integer,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
 <div id="sequence/3"> </div></div>
 <div class="section" id="sequence-3">
 <span id="integer-0-sequence-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">sequence/3</span></code><a class="headerlink" href="#sequence-3" title="Permalink to this headline">¶</a></h3>
 <p>Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =&lt; Sup.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">sequence(Inf,Sup,List)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">sequence(+integer,+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(Inf,Sup,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(+integer,+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

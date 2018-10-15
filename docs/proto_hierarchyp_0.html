@@ -289,65 +289,89 @@
 <div class="section" id="proto-hierarchyp">
 <h1><code class="docutils literal notranslate"><span class="pre">proto_hierarchyp</span></code><a class="headerlink" href="#proto-hierarchyp" title="Permalink to this headline">¶</a></h1>
 <p>Prototype hierarchy protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.1</li>
-<li>date: 2006/2/20</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>extends:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hierarchyp_0.html#hierarchyp-0"><span class="std std-ref">hierarchyp</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2006/2/20</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hierarchyp_0.html#hierarchyp-0"><span class="std std-ref">hierarchyp</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="parent/1"> </div><div class="section" id="parent-1">
 <span id="proto-hierarchyp-0-parent-1"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">parent/1</span></code><a class="headerlink" href="#parent-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns, by backtracking, all object parents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">parent(Parent)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">parent(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">parent(Parent)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">parent(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="parents/1"> </div></div>
 <div class="section" id="parents-1">
 <span id="proto-hierarchyp-0-parents-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">parents/1</span></code><a class="headerlink" href="#parents-1" title="Permalink to this headline">¶</a></h3>
 <p>List of all object parents.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">parents(Parents)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">parents(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">parents(Parents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">parents(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="extension/1"> </div></div>
 <div class="section" id="extension-1">
 <span id="proto-hierarchyp-0-extension-1"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">extension/1</span></code><a class="headerlink" href="#extension-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns, by backtracking, all object direct descendants.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">extension(Extension)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">extension(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">extension(Extension)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">extension(?object)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="extensions/1"> </div></div>
 <div class="section" id="extensions-1">
 <span id="proto-hierarchyp-0-extensions-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">extensions/1</span></code><a class="headerlink" href="#extensions-1" title="Permalink to this headline">¶</a></h3>
 <p>List of all object direct descendants.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">extensions(Extensions)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">extensions(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">extensions(Extensions)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">extensions(-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

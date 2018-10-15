@@ -8,10 +8,12 @@
 
 Logging events to files protocol.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2011/1/6
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2011/1/6
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Access to the table of log files.
 
-* compilation flags: ``static``
-* template: ``log_file(Alias,File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``log_file(?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``log_file(Alias,File)``
+| **Mode and number of proofs:**
+|    ``log_file(?atom,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Access to the table of log files.
 
 Defines a log file with alias Alias and file name File. If the log file already exists, its contents are kept. Logging is enabled by default.
 
-* compilation flags: ``static``
-* template: ``define_log_file(Alias,File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``define_log_file(+atom,+atom)`` - ``one``
+| **Template:**
+|    ``define_log_file(Alias,File)``
+| **Mode and number of proofs:**
+|    ``define_log_file(+atom,+atom)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Defines a log file with alias Alias and file name File. If the log file already 
 
 Initializes a new log file with alias Alias and file name File. If the log file already exists, its contents are erased. Logging is enabled by default.
 
-* compilation flags: ``static``
-* template: ``init_log_file(Alias,File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``init_log_file(+atom,+atom)`` - ``one``
+| **Template:**
+|    ``init_log_file(Alias,File)``
+| **Mode and number of proofs:**
+|    ``init_log_file(+atom,+atom)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Initializes a new log file with alias Alias and file name File. If the log file 
 
 Logs an event Event to a log file with alias Alias. Fails if a log file with alias Alias is not defined.
 
-* compilation flags: ``static``
-* template: ``log_event(Alias,Event)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``log_event(+atom,+nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``log_event(Alias,Event)``
+| **Mode and number of proofs:**
+|    ``log_event(+atom,+nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Logs an event Event to a log file with alias Alias. Fails if a log file with ali
 
 True if logging to file with alias Alias is enabled.
 
-* compilation flags: ``static``
-* template: ``logging(Alias)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``logging(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``logging(Alias)``
+| **Mode and number of proofs:**
+|    ``logging(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ True if logging to file with alias Alias is enabled.
 
 Enables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.
 
-* compilation flags: ``static``
-* template: ``enable_logging(Alias)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``enable_logging(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``enable_logging(Alias)``
+| **Mode and number of proofs:**
+|    ``enable_logging(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Enables logging to file with alias Alias. Fails if a log file with alias Alias i
 
 Disables logging to file with alias Alias. Fails if a log file with alias Alias is not defined.
 
-* compilation flags: ``static``
-* template: ``disable_logging(Alias)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``disable_logging(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``disable_logging(Alias)``
+| **Mode and number of proofs:**
+|    ``disable_logging(+atom)`` - ``zero_or_one``
 
 
 Protected interface

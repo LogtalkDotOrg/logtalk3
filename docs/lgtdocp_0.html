@@ -195,229 +195,310 @@
 <div class="section" id="lgtdocp">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtdocp</span></code><a class="headerlink" href="#lgtdocp" title="Permalink to this headline">¶</a></h1>
 <p>Documenting tool protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 3.2</li>
-<li>date: 2017/11/4</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 3.2</div>
+<div class="line"><strong>Date:</strong> 2017/11/4</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="rlibrary/2"> </div><div class="section" id="rlibrary-2">
 <span id="lgtdocp-0-rlibrary-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/2</span></code><a class="headerlink" href="#rlibrary-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary(Library,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>examples:<ul>
-<li>Generate XML documenting files for all tool entities for later conversion to Markdown files<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rlibrary(tools,[xslfile('lgtmd.xsl')])</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(Library,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Generate XML documenting files for all tool entities for later conversion to Markdown files</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(tools,[xslfile('lgtmd.xsl')])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+</div>
+</div>
+</div>
 <div id="rlibrary/1"> </div></div>
 <div class="section" id="rlibrary-1">
 <span id="lgtdocp-0-rlibrary-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code><a class="headerlink" href="#rlibrary-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a library and its sub-libraries using default options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>examples:<ul>
-<li>Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the “lgt2xml” script)<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rlibrary(tools)</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the “lgt2xml” script)</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(tools)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+</div>
+</div>
+</div>
 <div id="library/2"> </div></div>
 <div class="section" id="library-2">
 <span id="lgtdocp-0-library-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">library/2</span></code><a class="headerlink" href="#library-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a library using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">library(Library,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">library(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>examples:<ul>
-<li>Generate XML documenting files for all library entities for later conversion to PDF A4 files<ul>
-<li><code class="docutils literal notranslate"><span class="pre">library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(Library,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Generate XML documenting files for all library entities for later conversion to PDF A4 files</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+</div>
+</div>
+</div>
 <div id="library/1"> </div></div>
 <div class="section" id="library-1">
 <span id="lgtdocp-0-library-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">library/1</span></code><a class="headerlink" href="#library-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a library using default options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">library(Library)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">library(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(Library)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="rdirectory/2"> </div></div>
 <div class="section" id="rdirectory-2">
 <span id="lgtdocp-0-rdirectory-2"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/2</span></code><a class="headerlink" href="#rdirectory-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>examples:<ul>
-<li>Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools',[xslfile('lgtmd.xsl')])</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(Directory,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools',[xslfile('lgtmd.xsl')])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+</div>
+</div>
+</div>
 <div id="rdirectory/1"> </div></div>
 <div class="section" id="rdirectory-1">
 <span id="lgtdocp-0-rdirectory-1"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code><a class="headerlink" href="#rdirectory-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a directory and its sub-directories using default options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>examples:<ul>
-<li>Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the “lgt2xml” script)<ul>
-<li><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools')</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the “lgt2xml” script)</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory('./tools')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+</div>
+</div>
+</div>
 <div id="directory/2"> </div></div>
 <div class="section" id="directory-2">
 <span id="lgtdocp-0-directory-2"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/2</span></code><a class="headerlink" href="#directory-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a directory using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">directory(Directory,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">directory(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-<li>examples:<ul>
-<li>Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files<ul>
-<li><code class="docutils literal notranslate"><span class="pre">directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">yes</span></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(Directory,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">yes</span></code></div>
+</div>
+</div>
+</div>
 <div id="directory/1"> </div></div>
 <div class="section" id="directory-1">
 <span id="lgtdocp-0-directory-1"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">directory/1</span></code><a class="headerlink" href="#directory-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a directory using default options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="file/2"> </div></div>
 <div class="section" id="file-2">
 <span id="lgtdocp-0-file-2"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">file/2</span></code><a class="headerlink" href="#file-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">file(File,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">file(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(File,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="file/1"> </div></div>
 <div class="section" id="file-1">
 <span id="lgtdocp-0-file-1"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">file/1</span></code><a class="headerlink" href="#file-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">file(File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="all/1"> </div></div>
 <div class="section" id="all-1">
 <span id="lgtdocp-0-all-1"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">all/1</span></code><a class="headerlink" href="#all-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all loaded entities using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">all(File)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">all(+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all(+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="all/0"> </div></div>
 <div class="section" id="all-0">
 <span id="lgtdocp-0-all-0"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">all/0</span></code><a class="headerlink" href="#all-0" title="Permalink to this headline">¶</a></h3>
 <p>Creates XML documenting files for all loaded entities using default options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="option/2"> </div></div>
 <div class="section" id="option-2">
 <span id="lgtdocp-0-option-2"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">option/2</span></code><a class="headerlink" href="#option-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns, by backtracking, all options and their values.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">option(Option,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">option(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">option(Option,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">option(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="set_option/2"> </div></div>
 <div class="section" id="set-option-2">
 <span id="lgtdocp-0-set-option-2"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">set_option/2</span></code><a class="headerlink" href="#set-option-2" title="Permalink to this headline">¶</a></h3>
 <p>Sets an option value.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_option(Option,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_option(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_option(Option,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_option(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

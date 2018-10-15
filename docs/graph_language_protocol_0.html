@@ -218,98 +218,135 @@
 <div class="section" id="graph-language-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">graph_language_protocol</span></code><a class="headerlink" href="#graph-language-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Predicates for generating graph files.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 2.0</li>
-<li>date: 2014/12/30</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 2.0</div>
+<div class="line"><strong>Date:</strong> 2014/12/30</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="output_file_name/2"> </div><div class="section" id="output-file-name-2">
 <span id="graph-language-protocol-0-output-file-name-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">output_file_name/2</span></code><a class="headerlink" href="#output-file-name-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs the diagram file basename by adding a graph language dependent extension to the given name.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">output_file_name(Name,Basename)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">output_file_name(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_file_name(Name,Basename)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_file_name(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="file_header/3"> </div></div>
 <div class="section" id="file-header-3">
 <span id="graph-language-protocol-0-file-header-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">file_header/3</span></code><a class="headerlink" href="#file-header-3" title="Permalink to this headline">¶</a></h3>
 <p>Writes the output file header using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">file_header(Stream,Identifier,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">file_header(+stream_or_alias,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_header(Stream,Identifier,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_header(+stream_or_alias,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="file_footer/3"> </div></div>
 <div class="section" id="file-footer-3">
 <span id="graph-language-protocol-0-file-footer-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">file_footer/3</span></code><a class="headerlink" href="#file-footer-3" title="Permalink to this headline">¶</a></h3>
 <p>Writes the output file footer using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">file_footer(Stream,Identifier,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">file_footer(+stream_or_alias,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_footer(Stream,Identifier,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_footer(+stream_or_alias,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="graph_header/5"> </div></div>
 <div class="section" id="graph-header-5">
 <span id="graph-language-protocol-0-graph-header-5"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">graph_header/5</span></code><a class="headerlink" href="#graph-header-5" title="Permalink to this headline">¶</a></h3>
 <p>Writes a graph header using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">graph_header(Stream,Identifier,Label,Kind,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">graph_header(Stream,Identifier,Label,Kind,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="graph_footer/5"> </div></div>
 <div class="section" id="graph-footer-5">
 <span id="graph-language-protocol-0-graph-footer-5"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">graph_footer/5</span></code><a class="headerlink" href="#graph-footer-5" title="Permalink to this headline">¶</a></h3>
 <p>Writes a graph footer using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">graph_footer(Stream,Identifier,Label,Kind,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">graph_footer(Stream,Identifier,Label,Kind,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="node/7"> </div></div>
 <div class="section" id="node-7">
 <span id="graph-language-protocol-0-node-7"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">node/7</span></code><a class="headerlink" href="#node-7" title="Permalink to this headline">¶</a></h3>
 <p>Writes a node using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">node(Stream,Identifier,Label,Caption,Lines,Kind,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">node(+stream_or_alias,+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">node(Stream,Identifier,Label,Caption,Lines,Kind,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">node(+stream_or_alias,+nonvar,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="edge/6"> </div></div>
 <div class="section" id="edge-6">
 <span id="graph-language-protocol-0-edge-6"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">edge/6</span></code><a class="headerlink" href="#edge-6" title="Permalink to this headline">¶</a></h3>
 <p>Writes an edge between two nodes using the specified options.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">edge(Stream,Start,End,Labels,Kind,Options)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">edge(Stream,Start,End,Labels,Kind,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

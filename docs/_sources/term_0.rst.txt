@@ -8,17 +8,17 @@
 
 Prolog term utility predicates.
 
-* author: Paulo Moura
-* version: 1.8
-* date: 2018/6/18
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.8
+| **Date:** 2018/6/18
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`termp <termp/0>`
-* aliases:
 
-  * ``termp`` ``variables/2`` aka ``vars/2``
+| **Implements:**
+|    ``public`` :ref:`termp <termp/0>`
+| **Aliases:**
+|    ``termp`` ``variables/2`` aka ``vars/2``
 
 Public interface
 ----------------

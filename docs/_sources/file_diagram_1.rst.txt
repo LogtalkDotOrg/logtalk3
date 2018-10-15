@@ -8,14 +8,15 @@
 
 Common predicates for generating file diagrams.
 
-* author: Paulo Moura
-* version: 2.4
-* date: 2016/10/10
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 2.4
+| **Date:** 2016/10/10
 
-* extends:
+| **Compilation flags:** ``static``
 
-  * ``public`` :ref:`diagram(Format) <diagram/1>`
+
+| **Extends:**
+|    ``public`` :ref:`diagram(Format) <diagram/1>`
 
 Public interface
 ----------------
@@ -35,7 +36,8 @@ Protected interface
 ``remember_included_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -47,7 +49,8 @@ Protected interface
 ``remember_referenced_logtalk_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -59,7 +62,8 @@ Protected interface
 ``remember_referenced_prolog_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 Private predicates
 ------------------
@@ -74,7 +78,8 @@ Private predicates
 ``included_file_/1``
 ^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -86,7 +91,8 @@ Private predicates
 ``referenced_logtalk_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -98,7 +104,8 @@ Private predicates
 ``referenced_prolog_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 Operators
 ---------

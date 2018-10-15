@@ -8,17 +8,17 @@
 
 List predicates.
 
-* author: Paulo Moura
-* version: 2.14
-* date: 2018/3/13
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.14
+| **Date:** 2018/3/13
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`listp <listp/0>`
-* extends:
 
-  * ``public`` :ref:`compound <compound/0>`
+| **Implements:**
+|    ``public`` :ref:`listp <listp/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
 
 Public interface
 ----------------
@@ -35,12 +35,12 @@ Public interface
 
 Converts a list to a difference list.
 
-* compilation flags: ``static``
-* template: ``as_difflist(List,Diffist)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_difflist(+list,-difference_list)`` - ``one``
+| **Template:**
+|    ``as_difflist(List,Diffist)``
+| **Mode and number of proofs:**
+|    ``as_difflist(+list,-difference_list)`` - ``one``
 
 
 Protected interface

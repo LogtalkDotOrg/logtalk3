@@ -8,18 +8,18 @@
 
 Number of entity rules metric. The score is represented using the compound term number_of_rules(Total, User).
 
-* author: Paulo Moura
-* version: 0.1
-* date: 2018/7/16
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 0.1
+| **Date:** 2018/7/16
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
-  * ``public`` :ref:`code_metric <code_metric/0>`
-* provides:
 
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Imports:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+|    ``public`` :ref:`code_metric <code_metric/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------

@@ -8,17 +8,17 @@
 
 Portable operating-system access predicates.
 
-* author: Paulo Moura
-* version: 1.49
-* date: 2018/3/15
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.49
+| **Date:** 2018/3/15
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`osp <osp/0>`
-* aliases:
 
-  * ``osp`` ``absolute_file_name/2`` aka ``expand_path/2``
+| **Implements:**
+|    ``public`` :ref:`osp <osp/0>`
+| **Aliases:**
+|    ``osp`` ``absolute_file_name/2`` aka ``expand_path/2``
 
 Public interface
 ----------------

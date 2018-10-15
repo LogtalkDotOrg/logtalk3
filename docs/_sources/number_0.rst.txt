@@ -8,14 +8,15 @@
 
 Number data type predicates.
 
-* author: Paulo Moura
-* version: 1.5
-* date: 2018/7/14
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.5
+| **Date:** 2018/7/14
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`atomic <atomic/0>`
+
+| **Extends:**
+|    ``public`` :ref:`atomic <atomic/0>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
 
-* compilation flags: ``static``
-* template: ``approximately_equal(Number1,Number2,Epsilon)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
+| **Template:**
+|    ``approximately_equal(Number1,Number2,Epsilon)``
+| **Mode and number of proofs:**
+|    ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Compares two numbers for approximate equality given an epsilon value using the d
 
 Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
 
-* compilation flags: ``static``
-* template: ``essentially_equal(Number1,Number2,Epsilon)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
+| **Template:**
+|    ``essentially_equal(Number1,Number2,Epsilon)``
+| **Mode and number of proofs:**
+|    ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -72,12 +73,12 @@ Compares two numbers for essential equality given an epsilon value using the de 
 
 Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). No type-checking.
 
-* compilation flags: ``static``
-* template: ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
+| **Template:**
+|    ``tolerance_equal(Number1,Number2,RelativeTolerance,AbsoluteTolerance)``
+| **Mode and number of proofs:**
+|    ``tolerance_equal(+number,+number,+number,+number)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -92,14 +93,14 @@ Compares two numbers for close equality given relative and absolute tolerances u
 
 Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.
 
-* compilation flags: ``static``
-* template: ``=~=(Float1,Float2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``=~=(Float1,Float2)``
+| **Mode and number of proofs:**
+|    ``=~=(+number,+number)`` - ``zero_or_one``
 
-  * ``=~=(+number,+number)`` - ``zero_or_one``
-
-  * ``=~=(+list(number),+list(number))`` - ``zero_or_one``
+|    ``=~=(+list(number),+list(number))`` - ``zero_or_one``
 
 
 Protected interface

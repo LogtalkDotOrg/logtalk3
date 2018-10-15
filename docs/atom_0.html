@@ -289,41 +289,55 @@
 <div class="section" id="atom">
 <h1><code class="docutils literal notranslate"><span class="pre">atom</span></code><a class="headerlink" href="#atom" title="Permalink to this headline">¶</a></h1>
 <p>Atom data type predicates.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 1.6</li>
-<li>date: 2018/7/11</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-<li>extends:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="atomic_0.html#atomic-0"><span class="std std-ref">atomic</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1.6</div>
+<div class="line"><strong>Date:</strong> 2018/7/11</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="atomic_0.html#atomic-0"><span class="std std-ref">atomic</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="replace_sub_atom/4"> </div><div class="section" id="replace-sub-atom-4">
 <span id="atom-0-replace-sub-atom-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">replace_sub_atom/4</span></code><a class="headerlink" href="#replace-sub-atom-4" title="Permalink to this headline">¶</a></h3>
 <p>Replaces all occurences of Old by New in Input returning Output. Returns Input if Old is the empty atom. Fails when Output does not unify with the resulting atom.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">replace_sub_atom(Old,New,Input,Output)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">replace_sub_atom(+atom,+atom,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">replace_sub_atom(Old,New,Input,Output)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">replace_sub_atom(+atom,+atom,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="split/3"> </div></div>
 <div class="section" id="split-3">
 <span id="atom-0-split-3"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">split/3</span></code><a class="headerlink" href="#split-3" title="Permalink to this headline">¶</a></h3>
 <p>Splits an atom at a given delimiter into a list of sub-atoms.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">split(Atom,Delimiter,SubAtoms)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">split(+atom,+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">split(Atom,Delimiter,SubAtoms)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">split(+atom,+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

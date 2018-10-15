@@ -8,14 +8,15 @@
 
 Predicates for generating predicate call cross-referencing diagrams.
 
-* author: Paulo Moura
-* version: 2.19
-* date: 2018/2/4
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.19
+| **Date:** 2018/2/4
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`entity_diagram(Format) <entity_diagram/1>`
+
+| **Extends:**
+|    ``public`` :ref:`entity_diagram(Format) <entity_diagram/1>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Creates a diagram for a single entity using the specified options.
 
-* compilation flags: ``static``
-* template: ``entity(Entity,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity(+entity_identifier,+list(compound))`` - ``one``
+| **Template:**
+|    ``entity(Entity,Options)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Creates a diagram for a single entity using the specified options.
 
 Creates a diagram for a single entity using default options.
 
-* compilation flags: ``static``
-* template: ``entity(Entity)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity(+entity_identifier)`` - ``one``
+| **Template:**
+|    ``entity(Entity)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier)`` - ``one``
 
 
 Protected interface
@@ -78,7 +79,8 @@ Private predicates
 ``included_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -90,7 +92,8 @@ Private predicates
 ``referenced_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -102,7 +105,8 @@ Private predicates
 ``external_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 Operators
 ---------

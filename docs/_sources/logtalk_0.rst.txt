@@ -8,10 +8,12 @@
 
 Built-in object providing message printing, debugging, library, source file, and hacking methods.
 
-* author: Paulo Moura
-* version: 1.13
-* date: 2017/10/18
-* compilation flags: ``static, built_in, context_switching_calls, threaded``
+| **Author:** Paulo Moura
+| **Version:** 1.13
+| **Date:** 2017/10/18
+
+| **Compilation flags:** ``static, built_in, context_switching_calls, threaded``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Prints a message of the given kind for the specified component.
 
-* compilation flags: ``static``
-* template: ``print_message(Kind,Component,Message)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``print_message(+nonvar,+nonvar,+nonvar)`` - ``one``
+| **Template:**
+|    ``print_message(Kind,Component,Message)``
+| **Mode and number of proofs:**
+|    ``print_message(+nonvar,+nonvar,+nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Prints a message of the given kind for the specified component.
 
 Print the messages tokens to the given stream, prefixing each line with the specified atom.
 
-* compilation flags: ``static``
-* template: ``print_message_tokens(Stream,Prefix,Tokens)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``print_message_tokens(@stream_or_alias,+atom,@list(nonvar))`` - ``one``
+| **Template:**
+|    ``print_message_tokens(Stream,Prefix,Tokens)``
+| **Mode and number of proofs:**
+|    ``print_message_tokens(@stream_or_alias,+atom,@list(nonvar))`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Print the messages tokens to the given stream, prefixing each line with the spec
 
 User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).
 
-* compilation flags: ``dynamic, multifile``
-* template: ``print_message_token(Stream,Prefix,Token,Tokens)``
+| **Compilation flags:** ``dynamic, multifile``
 
-* mode - number of proofs:
-
-  * ``print_message_token(@stream_or_alias,@atom,@nonvar,@list(nonvar))`` - ``zero_or_one``
+| **Template:**
+|    ``print_message_token(Stream,Prefix,Token,Tokens)``
+| **Mode and number of proofs:**
+|    ``print_message_token(@stream_or_alias,@atom,@nonvar,@list(nonvar))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,9 +93,10 @@ User-defined hook predicate for printing a message token (at_same_line, nl, flus
 
 User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).
 
-* compilation flags: ``dynamic, multifile``
-* template: ``message_tokens(Message,Component)``
+| **Compilation flags:** ``dynamic, multifile``
 
+| **Template:**
+|    ``message_tokens(Message,Component)``
 
 .. raw:: html
 
@@ -107,12 +110,12 @@ User-defined hook grammar rule for converting a message into a list of tokens (a
 
 Message line prefix and output stream to be used when printing a message given its kind and component.
 
-* compilation flags: ``dynamic, multifile``
-* template: ``message_prefix_stream(Kind,Component,Prefix,Stream)``
+| **Compilation flags:** ``dynamic, multifile``
 
-* mode - number of proofs:
-
-  * ``message_prefix_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
+| **Template:**
+|    ``message_prefix_stream(Kind,Component,Prefix,Stream)``
+| **Mode and number of proofs:**
+|    ``message_prefix_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -127,12 +130,12 @@ Message line prefix and output stream to be used when printing a message given i
 
 User-defined hook predicate for intercepting message printing calls.
 
-* compilation flags: ``dynamic, multifile``
-* template: ``message_hook(Message,Kind,Component,Tokens)``
+| **Compilation flags:** ``dynamic, multifile``
 
-* mode - number of proofs:
-
-  * ``message_hook(+nonvar,+nonvar,+nonvar,+list(nonvar))`` - ``zero_or_one``
+| **Template:**
+|    ``message_hook(Message,Kind,Component,Tokens)``
+| **Mode and number of proofs:**
+|    ``message_hook(+nonvar,+nonvar,+nonvar,+list(nonvar))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -147,14 +150,14 @@ User-defined hook predicate for intercepting message printing calls.
 
 Asks a question and reads the answer until the check predicate is true.
 
-* compilation flags: ``static``
-* template: ``ask_question(Kind,Component,Question,Check,Answer)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``ask_question(*,*,*,1,*)``
-
-* mode - number of proofs:
-
-  * ``ask_question(+nonvar,+nonvar,+nonvar,+callable,-term)`` - ``one``
+| **Template:**
+|    ``ask_question(Kind,Component,Question,Check,Answer)``
+| **Meta-predicate template:**
+|    ``ask_question(*,*,*,1,*)``
+| **Mode and number of proofs:**
+|    ``ask_question(+nonvar,+nonvar,+nonvar,+callable,-term)`` - ``one``
 
 
 .. raw:: html
@@ -169,14 +172,14 @@ Asks a question and reads the answer until the check predicate is true.
 
 User-defined hook predicate for intercepting question asking calls.
 
-* compilation flags: ``dynamic, multifile``
-* template: ``question_hook(Question,Kind,Component,Tokens,Check,Answer)``
+| **Compilation flags:** ``dynamic, multifile``
 
-* meta-predicate template: ``question_hook(*,*,*,*,1,*)``
-
-* mode - number of proofs:
-
-  * ``question_hook(+nonvar,+nonvar,+nonvar,+list(nonvar),+callable,-term)`` - ``zero_or_one``
+| **Template:**
+|    ``question_hook(Question,Kind,Component,Tokens,Check,Answer)``
+| **Meta-predicate template:**
+|    ``question_hook(*,*,*,*,1,*)``
+| **Mode and number of proofs:**
+|    ``question_hook(+nonvar,+nonvar,+nonvar,+list(nonvar),+callable,-term)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -191,12 +194,12 @@ User-defined hook predicate for intercepting question asking calls.
 
 Prompt and input stream to be used when asking a question given its kind and component.
 
-* compilation flags: ``dynamic, multifile``
-* template: ``question_prompt_stream(Kind,Component,Prompt,Stream)``
+| **Compilation flags:** ``dynamic, multifile``
 
-* mode - number of proofs:
-
-  * ``question_prompt_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
+| **Template:**
+|    ``question_prompt_stream(Kind,Component,Prompt,Stream)``
+| **Mode and number of proofs:**
+|    ``question_prompt_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -211,12 +214,12 @@ Prompt and input stream to be used when asking a question given its kind and com
 
 Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.
 
-* compilation flags: ``dynamic, multifile``
-* template: ``trace_event(Event,ExecutionContext)``
+| **Compilation flags:** ``dynamic, multifile``
 
-* mode - number of proofs:
-
-  * ``trace_event(@callable,@execution_context)`` - ``zero``
+| **Template:**
+|    ``trace_event(Event,ExecutionContext)``
+| **Mode and number of proofs:**
+|    ``trace_event(@callable,@execution_context)`` - ``zero``
 
 
 .. raw:: html
@@ -231,12 +234,12 @@ Trace event handler. The runtime calls all trace event handlers using a failure-
 
 Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.
 
-* compilation flags: ``static, multifile``
-* template: ``debug_handler_provider(Provider)``
+| **Compilation flags:** ``static, multifile``
 
-* mode - number of proofs:
-
-  * ``debug_handler_provider(?object_identifier)`` - ``zero_or_one``
+| **Template:**
+|    ``debug_handler_provider(Provider)``
+| **Mode and number of proofs:**
+|    ``debug_handler_provider(?object_identifier)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -251,12 +254,12 @@ Declares an object as the debug handler provider. There should be at most one de
 
 Debug event handler. The defined events are unification events - fact(Entity,Fact,Clause,File,Line) and rule(Entity,Head,Clause,File,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).
 
-* compilation flags: ``static, multifile``
-* template: ``debug_handler(Event,ExecutionContext)``
+| **Compilation flags:** ``static, multifile``
 
-* mode - number of proofs:
-
-  * ``debug_handler(?entity_identifier,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``debug_handler(Event,ExecutionContext)``
+| **Mode and number of proofs:**
+|    ``debug_handler(?entity_identifier,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -271,14 +274,14 @@ Debug event handler. The defined events are unification events - fact(Entity,Fac
 
 Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.
 
-* compilation flags: ``static``
-* template: ``expand_library_path(LibraryPath,AbsolutePath)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``expand_library_path(LibraryPath,AbsolutePath)``
+| **Mode and number of proofs:**
+|    ``expand_library_path(+atom,?atom)`` - ``zero_or_one``
 
-  * ``expand_library_path(+atom,?atom)`` - ``zero_or_one``
-
-  * ``expand_library_path(+callable,?atom)`` - ``zero_or_one``
+|    ``expand_library_path(+callable,?atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -293,12 +296,12 @@ Expands a library alias or a library path into its absolute path. Uses a depth b
 
 Enumerates, by backtracking, all loaded files, returning their full paths.
 
-* compilation flags: ``static``
-* template: ``loaded_file(Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``loaded_file(?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``loaded_file(Path)``
+| **Mode and number of proofs:**
+|    ``loaded_file(?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -313,12 +316,12 @@ Enumerates, by backtracking, all loaded files, returning their full paths.
 
 Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.
 
-* compilation flags: ``static``
-* template: ``loaded_file_property(Path,Property)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``loaded_file_property(?atom,?compound)`` - ``zero_or_more``
+| **Template:**
+|    ``loaded_file_property(Path,Property)``
+| **Mode and number of proofs:**
+|    ``loaded_file_property(?atom,?compound)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -333,12 +336,12 @@ Enumerates, by backtracking, all loaded file properties. Valid properties are: b
 
 Enumerates, by backtracking, all defined file type extensions. The defined types are: source, object, logtalk, prolog, and tmp. The source type returns both logtalk and prolog type extensions.
 
-* compilation flags: ``static``
-* template: ``file_type_extension(Type,Extension)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file_type_extension(?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``file_type_extension(Type,Extension)``
+| **Mode and number of proofs:**
+|    ``file_type_extension(?atom,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -353,12 +356,12 @@ Enumerates, by backtracking, all defined file type extensions. The defined types
 
 Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from term_expansion/2 or goal_expansion/2 hook predicate definitions.
 
-* compilation flags: ``static``
-* template: ``compile_aux_clauses(Clauses)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``compile_aux_clauses(@list(clause))`` - ``one``
+| **Template:**
+|    ``compile_aux_clauses(Clauses)``
+| **Mode and number of proofs:**
+|    ``compile_aux_clauses(@list(clause))`` - ``one``
 
 
 .. raw:: html
@@ -373,12 +376,12 @@ Compiles a list of auxiliary clauses. Can only be called during source file comp
 
 Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.
 
-* compilation flags: ``static``
-* template: ``entity_prefix(Entity,Prefix)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``entity_prefix(?entity_identifier,?atom)`` - ``zero_or_one``
+| **Template:**
+|    ``entity_prefix(Entity,Prefix)``
+| **Mode and number of proofs:**
+|    ``entity_prefix(?entity_identifier,?atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -393,16 +396,16 @@ Converts between an entity identifier and the entity prefix that is used for its
 
 Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)``
+| **Mode and number of proofs:**
+|    ``compile_predicate_heads(@list(callable),?entity_identifier,-list(callable),@execution_context)`` - ``zero_or_one``
 
-  * ``compile_predicate_heads(@list(callable),?entity_identifier,-list(callable),@execution_context)`` - ``zero_or_one``
+|    ``compile_predicate_heads(@conjunction(callable),?entity_identifier,-conjunction(callable),@execution_context)`` - ``zero_or_one``
 
-  * ``compile_predicate_heads(@conjunction(callable),?entity_identifier,-conjunction(callable),@execution_context)`` - ``zero_or_one``
-
-  * ``compile_predicate_heads(@callable,?entity_identifier,-callable,@execution_context)`` - ``zero_or_one``
+|    ``compile_predicate_heads(@callable,?entity_identifier,-callable,@execution_context)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -417,16 +420,16 @@ Compiles clause heads. The heads are compiled in the context of the entity under
 
 Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.
 
-* compilation flags: ``static``
-* template: ``compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)``
+| **Mode and number of proofs:**
+|    ``compile_predicate_indicators(@list(predicate_indicator),?entity_identifier,-list(predicate_indicator))`` - ``zero_or_one``
 
-  * ``compile_predicate_indicators(@list(predicate_indicator),?entity_identifier,-list(predicate_indicator))`` - ``zero_or_one``
+|    ``compile_predicate_indicators(@conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator))`` - ``zero_or_one``
 
-  * ``compile_predicate_indicators(@conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator))`` - ``zero_or_one``
-
-  * ``compile_predicate_indicators(@predicate_indicator,?entity_identifier,-predicate_indicator)`` - ``zero_or_one``
+|    ``compile_predicate_indicators(@predicate_indicator,?entity_identifier,-predicate_indicator)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -441,16 +444,16 @@ Compiles predicate indicators. The predicate are compiled in the context of the 
 
 Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.
 
-* compilation flags: ``static``
-* template: ``decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)``
+| **Mode and number of proofs:**
+|    ``decompile_predicate_heads(@list(callable),-entity_identifier,-atom,-list(callable))`` - ``zero_or_one``
 
-  * ``decompile_predicate_heads(@list(callable),-entity_identifier,-atom,-list(callable))`` - ``zero_or_one``
+|    ``decompile_predicate_heads(@conjunction(callable),-entity_identifier,-atom,-conjunction(callable))`` - ``zero_or_one``
 
-  * ``decompile_predicate_heads(@conjunction(callable),-entity_identifier,-atom,-conjunction(callable))`` - ``zero_or_one``
-
-  * ``decompile_predicate_heads(@callable,-entity_identifier,-atom,-callable)`` - ``zero_or_one``
+|    ``decompile_predicate_heads(@callable,-entity_identifier,-atom,-callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -465,16 +468,16 @@ Decompiles clause heads. All compiled clause heads must belong to the same entit
 
 Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.
 
-* compilation flags: ``static``
-* template: ``decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)``
+| **Mode and number of proofs:**
+|    ``decompile_predicate_indicators(@list(predicate_indicator),-entity_identifier,-atom,-list(predicate_indicator))`` - ``zero_or_one``
 
-  * ``decompile_predicate_indicators(@list(predicate_indicator),-entity_identifier,-atom,-list(predicate_indicator))`` - ``zero_or_one``
+|    ``decompile_predicate_indicators(@conjunction(predicate_indicator),-entity_identifier,-atom,-conjunction(predicate_indicator))`` - ``zero_or_one``
 
-  * ``decompile_predicate_indicators(@conjunction(predicate_indicator),-entity_identifier,-atom,-conjunction(predicate_indicator))`` - ``zero_or_one``
-
-  * ``decompile_predicate_indicators(@predicate_indicator,-entity_identifier,-atom,-predicate_indicator)`` - ``zero_or_one``
+|    ``decompile_predicate_indicators(@predicate_indicator,-entity_identifier,-atom,-predicate_indicator)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -489,12 +492,12 @@ Decompiles predicate indicators. All compiled predicate indicators must belong t
 
 Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.
 
-* compilation flags: ``static``
-* template: ``execution_context(ExecutionContext,Entity,Sender,This,Self,MetaCallContext,CoinductionStack)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable))`` - ``zero_or_one``
+| **Template:**
+|    ``execution_context(ExecutionContext,Entity,Sender,This,Self,MetaCallContext,CoinductionStack)``
+| **Mode and number of proofs:**
+|    ``execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable))`` - ``zero_or_one``
 
 
 Protected interface

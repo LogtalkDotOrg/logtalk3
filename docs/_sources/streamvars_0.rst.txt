@@ -8,10 +8,12 @@
 
 Stream variables (supporting logical, backtracable, adding and retrieving of terms).
 
-* author: Nobukuni Kino and Paulo Moura
-* version: 1.2
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Nobukuni Kino and Paulo Moura
+| **Version:** 1.2
+| **Date:** 2018/7/11
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,14 +33,14 @@ Public interface
 
 Makes Variable a stream variable. Initial state will be empty.
 
-* compilation flags: ``static``
-* template: ``new(Variable)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``new(Variable)``
+| **Mode and number of proofs:**
+|    ``new(-streamvar)`` - ``one``
 
-  * ``new(-streamvar)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Variable is not a variable: ``type_error(variable,Variable)``
 
 
@@ -54,14 +56,14 @@ Makes Variable a stream variable. Initial state will be empty.
 
 Makes Variable a stream variable and sets its initial state to Value.
 
-* compilation flags: ``static``
-* template: ``new(Variable,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``new(Variable,Value)``
+| **Mode and number of proofs:**
+|    ``new(-streamvar,@nonvar)`` - ``one``
 
-  * ``new(-streamvar,@nonvar)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Variable is not a variable: ``type_error(variable,Variable)``
 
 
@@ -77,12 +79,12 @@ Makes Variable a stream variable and sets its initial state to Value.
 
 Sets the state of the stream variable Variable to Value (initializing the variable if needed).
 
-* compilation flags: ``static``
-* template: ``Variable<=Value``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``(?streamvar)<=(@nonvar)`` - ``one``
+| **Template:**
+|    ``Variable<=Value``
+| **Mode and number of proofs:**
+|    ``(?streamvar)<=(@nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -97,12 +99,12 @@ Sets the state of the stream variable Variable to Value (initializing the variab
 
 Unifies Value with the current state of the stream variable Variable.
 
-* compilation flags: ``static``
-* template: ``Variable=>Value``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``Variable=>Value``
+| **Mode and number of proofs:**
+|    ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
 
 
 Protected interface

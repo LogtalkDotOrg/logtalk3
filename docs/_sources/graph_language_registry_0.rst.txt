@@ -8,10 +8,12 @@
 
 Registry of implemented graph languages.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2014/8/18
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2014/8/18
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Table of defined graph languages and their implementation objects.
 
-* compilation flags: ``static, multifile``
-* template: ``language_object(Format,Object)``
+| **Compilation flags:** ``static, multifile``
 
-* mode - number of proofs:
-
-  * ``language_object(?atom,?object_identifier)`` - ``zero_or_more``
+| **Template:**
+|    ``language_object(Format,Object)``
+| **Mode and number of proofs:**
+|    ``language_object(?atom,?object_identifier)`` - ``zero_or_more``
 
 
 Protected interface

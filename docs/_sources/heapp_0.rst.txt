@@ -8,10 +8,12 @@
 
 Heap protocol.
 
-* author: Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
-* version: 1.01
-* date: 2010/11/13
-* compilation flags: ``static``
+| **Author:** Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
+| **Version:** 1.01
+| **Date:** 2010/11/13
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Inserts the new Key-Value pair into a heap, returning the updated heap.
 
-* compilation flags: ``static``
-* template: ``insert(Key,Value,Heap,NewHeap)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``insert(+key,+value,+heap,-heap)`` - ``one``
+| **Template:**
+|    ``insert(Key,Value,Heap,NewHeap)``
+| **Mode and number of proofs:**
+|    ``insert(+key,+value,+heap,-heap)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Inserts the new Key-Value pair into a heap, returning the updated heap.
 
 Inserts a list of Key-Value pairs into a heap, returning the updated heap.
 
-* compilation flags: ``static``
-* template: ``insert_all(List,Heap,NewHeap)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``insert_all(@list(pairs),+heap,-heap)`` - ``one``
+| **Template:**
+|    ``insert_all(List,Heap,NewHeap)``
+| **Mode and number of proofs:**
+|    ``insert_all(@list(pairs),+heap,-heap)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Inserts a list of Key-Value pairs into a heap, returning the updated heap.
 
 Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
 
-* compilation flags: ``static``
-* template: ``delete(Heap,Key,Value,NewHeap)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
+| **Template:**
+|    ``delete(Heap,Key,Value,NewHeap)``
+| **Mode and number of proofs:**
+|    ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.
 
 Merges two heaps.
 
-* compilation flags: ``static``
-* template: ``merge(Heap1,Heap2,NewHeap)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``merge(+heap,+heap,-heap)`` - ``one``
+| **Template:**
+|    ``merge(Heap1,Heap2,NewHeap)``
+| **Mode and number of proofs:**
+|    ``merge(+heap,+heap,-heap)`` - ``one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Merges two heaps.
 
 True if the heap is empty.
 
-* compilation flags: ``static``
-* template: ``empty(Heap)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty(@heap)`` - ``zero_or_one``
+| **Template:**
+|    ``empty(Heap)``
+| **Mode and number of proofs:**
+|    ``empty(@heap)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ True if the heap is empty.
 
 Returns the number of heap elements.
 
-* compilation flags: ``static``
-* template: ``size(Heap,Size)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``size(+heap,?integer)`` - ``zero_or_one``
+| **Template:**
+|    ``size(Heap,Size)``
+| **Mode and number of proofs:**
+|    ``size(+heap,?integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Returns the number of heap elements.
 
 Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.
 
-* compilation flags: ``static``
-* template: ``as_list(Heap,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_list(+heap,-list)`` - ``one``
+| **Template:**
+|    ``as_list(Heap,List)``
+| **Mode and number of proofs:**
+|    ``as_list(+heap,-list)`` - ``one``
 
 
 .. raw:: html
@@ -171,12 +173,12 @@ Returns the current set of Key-Value pairs in the Heap as a List, sorted into as
 
 Constructs a Heap from a list of Key-Value pairs.
 
-* compilation flags: ``static``
-* template: ``as_heap(List,Heap)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``as_heap(+list,-heap)`` - ``one``
+| **Template:**
+|    ``as_heap(List,Heap)``
+| **Mode and number of proofs:**
+|    ``as_heap(+list,-heap)`` - ``one``
 
 
 .. raw:: html
@@ -191,12 +193,12 @@ Constructs a Heap from a list of Key-Value pairs.
 
 Returns the top Key-Value pair in Heap. Fails if the heap is empty.
 
-* compilation flags: ``static``
-* template: ``top(Heap,Key,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``top(+heap,?key,?value)`` - ``zero_or_one``
+| **Template:**
+|    ``top(Heap,Key,Value)``
+| **Mode and number of proofs:**
+|    ``top(+heap,?key,?value)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -211,12 +213,12 @@ Returns the top Key-Value pair in Heap. Fails if the heap is empty.
 
 Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.
 
-* compilation flags: ``static``
-* template: ``top_next(Heap,Key1,Value1,Key2,Value2)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``top_next(+heap,?key,?value,?key,?value)`` - ``zero_or_one``
+| **Template:**
+|    ``top_next(Heap,Key1,Value1,Key2,Value2)``
+| **Mode and number of proofs:**
+|    ``top_next(+heap,?key,?value,?key,?value)`` - ``zero_or_one``
 
 
 Protected interface

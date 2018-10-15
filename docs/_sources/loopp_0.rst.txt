@@ -8,10 +8,12 @@
 
 Loop control constructs protocol.
 
-* author: Paulo Moura
-* version: 1.3
-* date: 2017/3/20
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.3
+| **Date:** 2017/3/20
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,14 +33,14 @@ Public interface
 
 While Condition is true do Action.
 
-* compilation flags: ``static``
-* template: ``whiledo(Condition,Action)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``whiledo(0,0)``
-
-* mode - number of proofs:
-
-  * ``whiledo(+callable,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``whiledo(Condition,Action)``
+| **Meta-predicate template:**
+|    ``whiledo(0,0)``
+| **Mode and number of proofs:**
+|    ``whiledo(+callable,@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -53,14 +55,14 @@ While Condition is true do Action.
 
 Do Action while Condition is true.
 
-* compilation flags: ``static``
-* template: ``dowhile(Action,Condition)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``dowhile(0,0)``
-
-* mode - number of proofs:
-
-  * ``dowhile(@callable,+callable)`` - ``zero_or_one``
+| **Template:**
+|    ``dowhile(Action,Condition)``
+| **Meta-predicate template:**
+|    ``dowhile(0,0)``
+| **Mode and number of proofs:**
+|    ``dowhile(@callable,+callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -75,14 +77,14 @@ Do Action while Condition is true.
 
 For each element Element in List call Goal.
 
-* compilation flags: ``static``
-* template: ``foreach(Element,List,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``foreach(*,*,0)``
-
-* mode - number of proofs:
-
-  * ``foreach(@var,+list(term),@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``foreach(Element,List,Goal)``
+| **Meta-predicate template:**
+|    ``foreach(*,*,0)``
+| **Mode and number of proofs:**
+|    ``foreach(@var,+list(term),@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -97,14 +99,14 @@ For each element Element in List call Goal.
 
 For each element Element in List at position Index call Goal. Index starts at 1.
 
-* compilation flags: ``static``
-* template: ``foreach(Element,Index,List,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``foreach(*,*,*,0)``
-
-* mode - number of proofs:
-
-  * ``foreach(@var,@var,+list(term),@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``foreach(Element,Index,List,Goal)``
+| **Meta-predicate template:**
+|    ``foreach(*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``foreach(@var,@var,+list(term),@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -119,14 +121,14 @@ For each element Element in List at position Index call Goal. Index starts at 1.
 
 Call Goal counting up from First to Last. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
 
-* compilation flags: ``static``
-* template: ``forto(First,Last,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``forto(*,*,0)``
-
-* mode - number of proofs:
-
-  * ``forto(+number,+number,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``forto(First,Last,Goal)``
+| **Meta-predicate template:**
+|    ``forto(*,*,0)``
+| **Mode and number of proofs:**
+|    ``forto(+number,+number,@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -141,14 +143,14 @@ Call Goal counting up from First to Last. Increment is 1. For convenience and cl
 
 Call Goal counting up from First to Last and instantiating Count to each successive value. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
 
-* compilation flags: ``static``
-* template: ``forto(Count,First,Last,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``forto(*,*,*,0)``
-
-* mode - number of proofs:
-
-  * ``forto(@var,+number,+number,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``forto(Count,First,Last,Goal)``
+| **Meta-predicate template:**
+|    ``forto(*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``forto(@var,+number,+number,@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -163,14 +165,14 @@ Call Goal counting up from First to Last and instantiating Count to each success
 
 Call Goal counting up from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Increment can be arithmetic expressions (uses Increment absolute value). This predicate fails iff the Goal fails.
 
-* compilation flags: ``static``
-* template: ``forto(Count,First,Last,Increment,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``forto(*,*,*,*,0)``
-
-* mode - number of proofs:
-
-  * ``forto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``forto(Count,First,Last,Increment,Goal)``
+| **Meta-predicate template:**
+|    ``forto(*,*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``forto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -185,14 +187,14 @@ Call Goal counting up from First to Last and instantiating Count to each success
 
 Call Goal counting down from First to Last. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
 
-* compilation flags: ``static``
-* template: ``fordownto(First,Last,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fordownto(*,*,0)``
-
-* mode - number of proofs:
-
-  * ``fordownto(+number,+number,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``fordownto(First,Last,Goal)``
+| **Meta-predicate template:**
+|    ``fordownto(*,*,0)``
+| **Mode and number of proofs:**
+|    ``fordownto(+number,+number,@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -207,14 +209,14 @@ Call Goal counting down from First to Last. Decrement is 1. For convenience and 
 
 Call Goal counting down from First to Last and instantiating Count to each successive value. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.
 
-* compilation flags: ``static``
-* template: ``fordownto(Count,First,Last,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fordownto(*,*,*,0)``
-
-* mode - number of proofs:
-
-  * ``fordownto(@var,+number,+number,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``fordownto(Count,First,Last,Goal)``
+| **Meta-predicate template:**
+|    ``fordownto(*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``fordownto(@var,+number,+number,@callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -229,14 +231,14 @@ Call Goal counting down from First to Last and instantiating Count to each succe
 
 Call Goal counting down from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Decrement can be arithmetic expressions (uses Decrement absolute value). This predicate fails iff the Goal fails.
 
-* compilation flags: ``static``
-* template: ``fordownto(Count,First,Last,Decrement,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``fordownto(*,*,*,*,0)``
-
-* mode - number of proofs:
-
-  * ``fordownto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
+| **Template:**
+|    ``fordownto(Count,First,Last,Decrement,Goal)``
+| **Meta-predicate template:**
+|    ``fordownto(*,*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``fordownto(@var,+number,+number,+number,@callable)`` - ``zero_or_one``
 
 
 Protected interface

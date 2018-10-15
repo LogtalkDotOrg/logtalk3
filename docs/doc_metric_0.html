@@ -207,102 +207,141 @@
 <div class="section" id="doc-metric">
 <h1><code class="docutils literal notranslate"><span class="pre">doc_metric</span></code><a class="headerlink" href="#doc-metric" title="Permalink to this headline">¶</a></h1>
 <p>Entity and entity predicates documentation score.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 0.11</li>
-<li>date: 2018/7/8</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-<li>imports:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metrics_utilities_0.html#code-metrics-utilities-0"><span class="std std-ref">code_metrics_utilities</span></a></li>
-<li><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metric_0.html#code-metric-0"><span class="std std-ref">code_metric</span></a></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 0.11</div>
+<div class="line"><strong>Date:</strong> 2018/7/8</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Imports:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metrics_utilities_0.html#code-metrics-utilities-0"><span class="std std-ref">code_metrics_utilities</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metric_0.html#code-metric-0"><span class="std std-ref">code_metric</span></a></div>
+</div>
+</div>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="entity_predicates_weights_hook/2"> </div><div class="section" id="entity-predicates-weights-hook-2">
 <span id="doc-metric-0-entity-predicates-weights-hook-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_predicates_weights_hook/2</span></code><a class="headerlink" href="#entity-predicates-weights-hook-2" title="Permalink to this headline">¶</a></h3>
 <p>Relative weight between entity documentation and predicates documentation in percentage. The sum of the two values must be equal to 100.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_predicates_weights_hook(EntityWeight,PredicatesWeight)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_predicates_weights_hook(?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_predicates_weights_hook(EntityWeight,PredicatesWeight)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_predicates_weights_hook(?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="entity_info_score_hook/2"> </div></div>
 <div class="section" id="entity-info-score-hook-2">
 <span id="doc-metric-0-entity-info-score-hook-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_info_score_hook/2</span></code><a class="headerlink" href="#entity-info-score-hook-2" title="Permalink to this headline">¶</a></h3>
 <p>Maximum score for entity info/1 directives.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_info_score_hook(Entity,MaximumScore)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_info_score_hook(?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_info_score_hook(Entity,MaximumScore)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_info_score_hook(?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="entity_info_pair_score_hook/3"> </div></div>
 <div class="section" id="entity-info-pair-score-hook-3">
 <span id="doc-metric-0-entity-info-pair-score-hook-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook/3</span></code><a class="headerlink" href="#entity-info-pair-score-hook-3" title="Permalink to this headline">¶</a></h3>
 <p>Score for relevant entity info/1 directive pairs. If defined, the entity_info_score_hook/2 predicate should be defined accordingly.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook(Pair,Entity,Score)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook(?callable,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook(Pair,Entity,Score)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entity_info_pair_score_hook(?callable,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="predicate_mode_score_hook/3"> </div></div>
 <div class="section" id="predicate-mode-score-hook-3">
 <span id="doc-metric-0-predicate-mode-score-hook-3"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook/3</span></code><a class="headerlink" href="#predicate-mode-score-hook-3" title="Permalink to this headline">¶</a></h3>
 <p>Maximum score for predicate mode/2 directives.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(Entity,Predicate,MaximumScore)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(Entity,Predicate,MaximumScore)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="predicate_mode_score_hook/5"> </div></div>
 <div class="section" id="predicate-mode-score-hook-5">
 <span id="doc-metric-0-predicate-mode-score-hook-5"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook/5</span></code><a class="headerlink" href="#predicate-mode-score-hook-5" title="Permalink to this headline">¶</a></h3>
 <p>Score for a predicate mode/2 directive. If defined, the predicate_mode_score_hook/3 predicate should be defined accordingly.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(Template,Solutions,Entity,Predicate,Score)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(?term,?term,?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(Template,Solutions,Entity,Predicate,Score)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_mode_score_hook(?term,?term,?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="predicate_info_score_hook/3"> </div></div>
 <div class="section" id="predicate-info-score-hook-3">
 <span id="doc-metric-0-predicate-info-score-hook-3"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook/3</span></code><a class="headerlink" href="#predicate-info-score-hook-3" title="Permalink to this headline">¶</a></h3>
 <p>Maximum score for predicate info/2 directives.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook(Entity,Predicate,MaximumScore)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook(?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook(Entity,Predicate,MaximumScore)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_info_score_hook(?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="predicate_info_pair_score_hook/4"> </div></div>
 <div class="section" id="predicate-info-pair-score-hook-4">
 <span id="doc-metric-0-predicate-info-pair-score-hook-4"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook/4</span></code><a class="headerlink" href="#predicate-info-pair-score-hook-4" title="Permalink to this headline">¶</a></h3>
 <p>Score for a predicate info/2 directive pairs. If defined, the predicate_info_score_hook/3 predicate should be defined accordingly.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook(Pair,Entity,Predicate,Score)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook(?callable,?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook(Pair,Entity,Predicate,Score)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_info_pair_score_hook(?callable,?term,?term,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

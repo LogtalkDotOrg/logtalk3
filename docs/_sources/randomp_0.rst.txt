@@ -8,10 +8,12 @@
 
 Random number generator protocol.
 
-* author: Paulo Moura
-* version: 2.4
-* date: 2018/8/14
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 2.4
+| **Date:** 2018/8/14
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Returns a new random float value in the interval [0.0, 1.0[.
 
-* compilation flags: ``static``
-* template: ``random(Random)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``random(-float)`` - ``one``
+| **Template:**
+|    ``random(Random)``
+| **Mode and number of proofs:**
+|    ``random(-float)`` - ``one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Returns a new random float value in the interval [0.0, 1.0[.
 
 Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or Upper are not integers or if Lower > Upper.
 
-* compilation flags: ``static``
-* template: ``between(Lower,Upper,Random)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``between(+integer,+integer,-integer)`` - ``zero_or_one``
+| **Template:**
+|    ``between(Lower,Upper,Random)``
+| **Mode and number of proofs:**
+|    ``between(+integer,+integer,-integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Returns a new random integer in the interval [Lower, Upper]. Fails if Lower or U
 
 Returns a random member of a list. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``member(Random,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``member(-term,+list(term))`` - ``zero_or_one``
+| **Template:**
+|    ``member(Random,List)``
+| **Mode and number of proofs:**
+|    ``member(-term,+list(term))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Returns a random member of a list. Fails if the list is empty.
 
 Returns a random member of a list and the rest of the list. Fails if the list is empty.
 
-* compilation flags: ``static``
-* template: ``select(Random,List,Rest)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
+| **Template:**
+|    ``select(Random,List,Rest)``
+| **Mode and number of proofs:**
+|    ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -111,12 +113,12 @@ Returns a random member of a list and the rest of the list. Fails if the list is
 
 Returns a random permutation of a list.
 
-* compilation flags: ``static``
-* template: ``permutation(List,Permutation)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``permutation(+list,-list)`` - ``one``
+| **Template:**
+|    ``permutation(List,Permutation)``
+| **Mode and number of proofs:**
+|    ``permutation(+list,-list)`` - ``one``
 
 
 .. raw:: html
@@ -131,12 +133,12 @@ Returns a random permutation of a list.
 
 Returns a list of the given length of random integers in random order in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers or if Lower > Upper.
 
-* compilation flags: ``static``
-* template: ``sequence(Length,Lower,Upper,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+| **Template:**
+|    ``sequence(Length,Lower,Upper,List)``
+| **Mode and number of proofs:**
+|    ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -151,12 +153,12 @@ Returns a list of the given length of random integers in random order in the int
 
 Returns an ordered set of the given size of random integers in the interval [Lower, Upper]. Fails if Length, Lower, or Upper are not integers, if Lower > Upper, or if Length > Upper - Lower + 1.
 
-* compilation flags: ``static``
-* template: ``set(Length,Lower,Upper,Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+| **Template:**
+|    ``set(Length,Lower,Upper,Set)``
+| **Mode and number of proofs:**
+|    ``set(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -171,14 +173,14 @@ Returns an ordered set of the given size of random integers in the interval [Low
 
 Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Upper. Deprecated. Use between/3 for integers.
 
-* compilation flags: ``static``
-* template: ``random(Lower,Upper,Random)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``random(Lower,Upper,Random)``
+| **Mode and number of proofs:**
+|    ``random(+integer,+integer,-integer)`` - ``zero_or_one``
 
-  * ``random(+integer,+integer,-integer)`` - ``zero_or_one``
-
-  * ``random(+float,+float,-float)`` - ``zero_or_one``
+|    ``random(+float,+float,-float)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -193,14 +195,14 @@ Returns a new random value in the interval [Lower, Upper[. Fails if Lower > Uppe
 
 Returns a list of the given length of random values in random order in the interval [Lower, Upper[. Fails if Lower > Upper or if the arguments are neither integers or floats. Deprecated. Use sequence/4 for integers.
 
-* compilation flags: ``static``
-* template: ``randseq(Length,Lower,Upper,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``randseq(Length,Lower,Upper,List)``
+| **Mode and number of proofs:**
+|    ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
-  * ``randseq(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-
-  * ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
+|    ``randseq(+integer,+float,+float,-list(float))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -215,14 +217,14 @@ Returns a list of the given length of random values in random order in the inter
 
 Returns an ordered set of the given size of random values in the interval [Lower, Upper[. Fails if the arguments are neither integers or floats, Lower > Upper, or Length > Upper - Lower when the arguments are integers. Deprecated. Use set/4 for integers.
 
-* compilation flags: ``static``
-* template: ``randset(Length,Lower,Upper,Set)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``randset(Length,Lower,Upper,Set)``
+| **Mode and number of proofs:**
+|    ``randset(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
-  * ``randset(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
-
-  * ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
+|    ``randset(+integer,+float,+float,-list(float))`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -237,12 +239,12 @@ Returns an ordered set of the given size of random values in the interval [Lower
 
 Gets the current random generator seed. Seed should be regarded as an opaque ground term.
 
-* compilation flags: ``static``
-* template: ``get_seed(Seed)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``get_seed(-ground)`` - ``one``
+| **Template:**
+|    ``get_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``get_seed(-ground)`` - ``one``
 
 
 .. raw:: html
@@ -257,12 +259,12 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 
 Sets the random generator seed to a given value returned by calling the get_seed/1 predicate.
 
-* compilation flags: ``static``
-* template: ``set_seed(Seed)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_seed(+ground)`` - ``one``
+| **Template:**
+|    ``set_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``set_seed(+ground)`` - ``one``
 
 
 .. raw:: html
@@ -277,10 +279,10 @@ Sets the random generator seed to a given value returned by calling the get_seed
 
 Succeeds or fails with equal probability.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``maybe`` - ``zero_or_one``
+| **Mode and number of proofs:**
+|    ``maybe`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -295,12 +297,12 @@ Succeeds or fails with equal probability.
 
 Succeeds with probability Probability or fails with probability 1 - Probability. Fails if Probability is not a float or is outside the interval [0.0, 1.0].
 
-* compilation flags: ``static``
-* template: ``maybe(Probability)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``maybe(+probability)`` - ``zero_or_one``
+| **Template:**
+|    ``maybe(Probability)``
+| **Mode and number of proofs:**
+|    ``maybe(+probability)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -315,12 +317,12 @@ Succeeds with probability Probability or fails with probability 1 - Probability.
 
 Succeeds with probability K/N where K and N are integers satisfying the equation 0 =< K =< N. Fails otherwise.
 
-* compilation flags: ``static``
-* template: ``maybe(K,N)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``maybe(+non_negative_integer,+non_negative_integer)`` - ``zero_or_one``
+| **Template:**
+|    ``maybe(K,N)``
+| **Mode and number of proofs:**
+|    ``maybe(+non_negative_integer,+non_negative_integer)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -335,14 +337,14 @@ Succeeds with probability K/N where K and N are integers satisfying the equation
 
 Calls a goal or fails without calling it with equal probability. When the goal is called, it determines if this predicate succeeds once or fails.
 
-* compilation flags: ``static``
-* template: ``maybe_call(Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``maybe_call(0)``
-
-* mode - number of proofs:
-
-  * ``maybe_call(+callable)`` - ``zero_or_one``
+| **Template:**
+|    ``maybe_call(Goal)``
+| **Meta-predicate template:**
+|    ``maybe_call(0)``
+| **Mode and number of proofs:**
+|    ``maybe_call(+callable)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -357,14 +359,14 @@ Calls a goal or fails without calling it with equal probability. When the goal i
 
 Calls a goal or fails without calling it with probability Probability. When the goal is called, it determines if this predicate succeeds once or fails.
 
-* compilation flags: ``static``
-* template: ``maybe_call(Probability,Goal)``
+| **Compilation flags:** ``static``
 
-* meta-predicate template: ``maybe_call(*,0)``
-
-* mode - number of proofs:
-
-  * ``maybe_call(+probability,+callable)`` - ``zero_or_one``
+| **Template:**
+|    ``maybe_call(Probability,Goal)``
+| **Meta-predicate template:**
+|    ``maybe_call(*,0)``
+| **Mode and number of proofs:**
+|    ``maybe_call(+probability,+callable)`` - ``zero_or_one``
 
 
 Protected interface

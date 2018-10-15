@@ -8,18 +8,18 @@
 
 Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.
 
-* author: Paulo Moura
-* version: 4.0
-* date: 2017/2/27
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 4.0
+| **Date:** 2017/2/27
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`debuggerp <debuggerp/0>`
-* provides:
 
-  * :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
-  * :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
+| **Implements:**
+|    ``public`` :ref:`debuggerp <debuggerp/0>`
+| **Provides:**
+|    :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
+|    :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
 
 Public interface
 ----------------
@@ -44,7 +44,8 @@ Private predicates
 ``debugging_/0``
 ^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -56,7 +57,8 @@ Private predicates
 ``tracing_/0``
 ^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -68,7 +70,8 @@ Private predicates
 ``skipping_/0``
 ^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -80,7 +83,8 @@ Private predicates
 ``quasi_skipping_/0``
 ^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -92,7 +96,8 @@ Private predicates
 ``spying_line_number_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -104,7 +109,8 @@ Private predicates
 ``spying_predicate_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -116,7 +122,8 @@ Private predicates
 ``spying_context_/4``
 ^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -128,7 +135,8 @@ Private predicates
 ``leashing_/1``
 ^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -140,7 +148,8 @@ Private predicates
 ``invocation_number_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -152,7 +161,8 @@ Private predicates
 ``jump_to_invocation_number_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -164,7 +174,8 @@ Private predicates
 ``zap_to_port_/1``
 ^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -176,7 +187,8 @@ Private predicates
 ``write_max_depth_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 Operators
 ---------

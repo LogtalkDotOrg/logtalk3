@@ -289,86 +289,118 @@
 <div class="section" id="java-access-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">java_access_protocol</span></code><a class="headerlink" href="#java-access-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.</p>
-<ul class="simple">
-<li>author: Paulo Moura and Sergio Castro</li>
-<li>version: 1.1</li>
-<li>date: 2018/5/23</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura and Sergio Castro</div>
+<div class="line"><strong>Version:</strong> 1.1</div>
+<div class="line"><strong>Date:</strong> 2018/5/23</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="get_field/2"> </div><div class="section" id="get-field-2">
 <span id="java-access-protocol-0-get-field-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">get_field/2</span></code><a class="headerlink" href="#get-field-2" title="Permalink to this headline">¶</a></h3>
 <p>Gets the value of a class or object field.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">get_field(Field,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">get_field(+atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get_field(Field,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get_field(+atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="set_field/2"> </div></div>
 <div class="section" id="set-field-2">
 <span id="java-access-protocol-0-set-field-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code><a class="headerlink" href="#set-field-2" title="Permalink to this headline">¶</a></h3>
 <p>Sets the value of a class or object field.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">set_field(Field,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">set_field(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_field(Field,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_field(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="new/2"> </div></div>
 <div class="section" id="new-2">
 <span id="java-access-protocol-0-new-2"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">new/2</span></code><a class="headerlink" href="#new-2" title="Permalink to this headline">¶</a></h3>
 <p>Creates a new instance using the specified parameter values.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">new(Parameters,Instance)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">new(+list(nonvar),-reference)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(Parameters,Instance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(+list(nonvar),-reference)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="new/1"> </div></div>
 <div class="section" id="new-1">
 <span id="java-access-protocol-0-new-1"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">new/1</span></code><a class="headerlink" href="#new-1" title="Permalink to this headline">¶</a></h3>
 <p>Creates a new instance using default parameter values.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">new(Instance)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">new(-reference)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(Instance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(-reference)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="invoke/1"> </div></div>
 <div class="section" id="invoke-1">
 <span id="java-access-protocol-0-invoke-1"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code><a class="headerlink" href="#invoke-1" title="Permalink to this headline">¶</a></h3>
 <p>Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">invoke(Method)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(Method)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="invoke/2"> </div></div>
 <div class="section" id="invoke-2">
 <span id="java-access-protocol-0-invoke-2"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code><a class="headerlink" href="#invoke-2" title="Permalink to this headline">¶</a></h3>
 <p>Invokes a method. This is a more efficient compared with relying on the forward/1 handler to resolve methods.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">invoke(Functor,Arguments)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar,&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(Functor,Arguments)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">invoke(&#64;nonvar,&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

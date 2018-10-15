@@ -8,14 +8,15 @@
 
 Prototype hierarchy protocol.
 
-* author: Paulo Moura
-* version: 1.1
-* date: 2006/2/20
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.1
+| **Date:** 2006/2/20
 
-* extends:
+| **Compilation flags:** ``static``
 
-  * ``public`` :ref:`hierarchyp <hierarchyp/0>`
+
+| **Extends:**
+|    ``public`` :ref:`hierarchyp <hierarchyp/0>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Returns, by backtracking, all object parents.
 
-* compilation flags: ``static``
-* template: ``parent(Parent)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``parent(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``parent(Parent)``
+| **Mode and number of proofs:**
+|    ``parent(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Returns, by backtracking, all object parents.
 
 List of all object parents.
 
-* compilation flags: ``static``
-* template: ``parents(Parents)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``parents(-list)`` - ``one``
+| **Template:**
+|    ``parents(Parents)``
+| **Mode and number of proofs:**
+|    ``parents(-list)`` - ``one``
 
 
 .. raw:: html
@@ -72,12 +73,12 @@ List of all object parents.
 
 Returns, by backtracking, all object direct descendants.
 
-* compilation flags: ``static``
-* template: ``extension(Extension)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``extension(?object)`` - ``zero_or_more``
+| **Template:**
+|    ``extension(Extension)``
+| **Mode and number of proofs:**
+|    ``extension(?object)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -92,12 +93,12 @@ Returns, by backtracking, all object direct descendants.
 
 List of all object direct descendants.
 
-* compilation flags: ``static``
-* template: ``extensions(Extensions)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``extensions(-list)`` - ``one``
+| **Template:**
+|    ``extensions(Extensions)``
+| **Mode and number of proofs:**
+|    ``extensions(-list)`` - ``one``
 
 
 Protected interface

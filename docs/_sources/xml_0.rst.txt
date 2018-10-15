@@ -8,12 +8,15 @@
 
 Bi-directional XML parser.
 
-* author: John Fletcher; adapted to Logtalk by Paulo Moura.
-* version: 3.6
-* date: 2018/10/9
-* copyright: Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher
-* license: This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.
-* compilation flags: ``static, context_switching_calls``
+| **Author:** John Fletcher; adapted to Logtalk by Paulo Moura.
+| **Version:** 3.6
+| **Date:** 2018/10/9
+
+| **Copyright:** Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher
+| **License:** This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -33,14 +36,14 @@ Public interface
 
 Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
-* compilation flags: ``static``
-* template: ``parse(Chars,Document)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``parse(Chars,Document)``
+| **Mode and number of proofs:**
+|    ``parse(+nonvar,?nonvar)`` - ``zero_or_one``
 
-  * ``parse(+nonvar,?nonvar)`` - ``zero_or_one``
-
-  * ``parse(?nonvar,+nonvar)`` - ``zero_or_one``
+|    ``parse(?nonvar,+nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -55,14 +58,14 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
 Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
-* compilation flags: ``static``
-* template: ``parse(Controls,Chars,Document)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``parse(Controls,Chars,Document)``
+| **Mode and number of proofs:**
+|    ``parse(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
-  * ``parse(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
-
-  * ``parse(+nonvar,?nonvar,+nonvar)`` - ``zero_or_one``
+|    ``parse(+nonvar,?nonvar,+nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -77,12 +80,12 @@ Parses Chars to/from a data structure of the form xml(<atts>, <content>).
 
 Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.
 
-* compilation flags: ``static``
-* template: ``subterm(XMLTerm,Subterm)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``subterm(+nonvar,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``subterm(XMLTerm,Subterm)``
+| **Mode and number of proofs:**
+|    ``subterm(+nonvar,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -97,12 +100,12 @@ Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of i
 
 Pretty prints a XML document on the current output stream.
 
-* compilation flags: ``static``
-* template: ``pp(XMLDocument)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``pp(+nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``pp(XMLDocument)``
+| **Mode and number of proofs:**
+|    ``pp(+nonvar)`` - ``zero_or_one``
 
 
 Protected interface
@@ -125,12 +128,12 @@ Private predicates
 
 Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.
 
-* compilation flags: ``static``
-* template: ``xml_to_document(Controls,XML,Document)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``xml_to_document(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``xml_to_document(Controls,XML,Document)``
+| **Mode and number of proofs:**
+|    ``xml_to_document(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -145,12 +148,12 @@ Translates the list of character codes XML into the Prolog term Document. Contro
 
 True if Map is a null map.
 
-* compilation flags: ``static``
-* template: ``empty_map(Map)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``empty_map(?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``empty_map(Map)``
+| **Mode and number of proofs:**
+|    ``empty_map(?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -165,12 +168,12 @@ True if Map is a null map.
 
 True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.
 
-* compilation flags: ``static``
-* template: ``map_member(Key,Map,Data)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``map_member(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``map_member(Key,Map,Data)``
+| **Mode and number of proofs:**
+|    ``map_member(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -185,12 +188,12 @@ True if Map is a ordered map structure which records the pair Key-Data. Key must
 
 True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.
 
-* compilation flags: ``static``
-* template: ``map_store(Map0,Key,Data,Map1)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``map_store(+nonvar,+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``map_store(Map0,Key,Data,Map1)``
+| **Mode and number of proofs:**
+|    ``map_store(+nonvar,+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -205,12 +208,12 @@ True if Map0 is an ordered map structure, Key must be ground, and Map1 is identi
 
 Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.
 
-* compilation flags: ``static``
-* template: ``pp_string(String)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``pp_string(+nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``pp_string(String)``
+| **Mode and number of proofs:**
+|    ``pp_string(+nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -225,12 +228,12 @@ Prints String onto the current output stream. If String contains only 7-bit char
 
 Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm's ancestor elements in the form <tag>{(id)}* where <tag> is the element tag and <id> is the value of any attribute _named_ id.
 
-* compilation flags: ``static``
-* template: ``fault(Term,Indentation,SubTerm,Path,Message)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``fault(Term,Indentation,SubTerm,Path,Message)``
+| **Mode and number of proofs:**
+|    ``fault(+nonvar,+nonvar,?nonvar,?nonvar,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -245,12 +248,12 @@ Identifies SubTerm as a sub-term of Term which cannot be serialized after Indent
 
 Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.
 
-* compilation flags: ``static``
-* template: ``exception(Message,Document,Culprit,Path)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``exception(+atom,+nonvar,+nonvar,+nonvar)`` - ``one``
+| **Template:**
+|    ``exception(Message,Document,Culprit,Path)``
+| **Mode and number of proofs:**
+|    ``exception(+atom,+nonvar,+nonvar,+nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -265,9 +268,10 @@ Hook to raise an exception to be raised in respect of a fault in the XML Term: D
 
 DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML's 'inline' elements. Also, Format is over-ridden, for an individual element, by an explicit 'xml:space'="preserve" attribute.
 
-* compilation flags: ``static``
-* template: ``document_generation(Format,Document)``
+| **Compilation flags:** ``static``
 
+| **Template:**
+|    ``document_generation(Format,Document)``
 
 .. raw:: html
 
@@ -281,9 +285,10 @@ DCG generating Document as a list of character codes. Format is true|false defin
 
 Represents the ascii character set in its simplest format, using the character entities &amp; &quot; &lt; and &gt; which are common to both XML and HTML. The numeric entity &#39; is used in place of &apos;, because browsers don't recognize it in HTML.
 
-* compilation flags: ``static``
-* template: ``pcdata_7bit(Char)``
+| **Compilation flags:** ``static``
 
+| **Template:**
+|    ``pcdata_7bit(Char)``
 
 .. raw:: html
 
@@ -297,12 +302,12 @@ Represents the ascii character set in its simplest format, using the character e
 
 Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.
 
-* compilation flags: ``static``
-* template: ``character_data_format(Chars,Format0,Format1)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``character_data_format(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``character_data_format(Chars,Format0,Format1)``
+| **Mode and number of proofs:**
+|    ``character_data_format(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -317,9 +322,10 @@ Holds when Format0 and Format1 are the statuses of XML formatting before and aft
 
 Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.
 
-* compilation flags: ``static``
-* template: ``cdata_generation(Chars)``
+| **Compilation flags:** ``static``
 
+| **Template:**
+|    ``cdata_generation(Chars)``
 
 Operators
 ---------

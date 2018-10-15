@@ -8,14 +8,15 @@
 
 Global logger object for logging events to files.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2011/1/6
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2011/1/6
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`loggingp <loggingp/0>`
+
+| **Implements:**
+|    ``public`` :ref:`loggingp <loggingp/0>`
 
 Public interface
 ----------------
@@ -42,12 +43,12 @@ Private predicates
 
 Table of log files.
 
-* compilation flags: ``dynamic``
-* template: ``log_file_(Alias,File)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``log_file_(?atom,?nonvar)`` - ``zero_or_more``
+| **Template:**
+|    ``log_file_(Alias,File)``
+| **Mode and number of proofs:**
+|    ``log_file_(?atom,?nonvar)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -62,12 +63,12 @@ Table of log files.
 
 Table of logging file status for log files.
 
-* compilation flags: ``dynamic``
-* template: ``logging_to_file_(Alias,Status)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``logging_to_file_(?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``logging_to_file_(Alias,Status)``
+| **Mode and number of proofs:**
+|    ``logging_to_file_(?atom,?atom)`` - ``zero_or_more``
 
 
 Operators

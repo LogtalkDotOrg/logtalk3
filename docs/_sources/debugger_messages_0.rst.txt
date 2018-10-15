@@ -8,16 +8,17 @@
 
 Logtalk debugger default message translations.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2017/2/27
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2017/2/27
 
-* provides:
+| **Compilation flags:** ``static``
 
-  * :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
-  * :ref:`logtalk::question_prompt_stream/4 <logtalk/0::question_prompt_stream/4>`
-  * :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+| **Provides:**
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+|    :ref:`logtalk::question_prompt_stream/4 <logtalk/0::question_prompt_stream/4>`
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 Public interface
 ----------------

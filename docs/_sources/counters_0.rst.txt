@@ -8,10 +8,12 @@
 
 Named integer counters. Counter names can be any nonvar term.
 
-* author: Paulo Moura
-* version: 1.0
-* date: 2011/1/3
-* compilation flags: ``static``
+| **Author:** Paulo Moura
+| **Version:** 1.0
+| **Date:** 2011/1/3
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 True if Counter is a counter with value Value.
 
-* compilation flags: ``static``
-* template: ``counter(Counter,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``counter(?nonvar,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``counter(Counter,Value)``
+| **Mode and number of proofs:**
+|    ``counter(?nonvar,?integer)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ True if Counter is a counter with value Value.
 
 Increments the named counter.
 
-* compilation flags: ``static``
-* template: ``increment_counter(Counter)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``increment_counter(+nonvar)`` - ``one``
+| **Template:**
+|    ``increment_counter(Counter)``
+| **Mode and number of proofs:**
+|    ``increment_counter(+nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Increments the named counter.
 
 Decrements the named counter.
 
-* compilation flags: ``static``
-* template: ``decrement_counter(Counter)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``decrement_counter(+nonvar)`` - ``one``
+| **Template:**
+|    ``decrement_counter(Counter)``
+| **Mode and number of proofs:**
+|    ``decrement_counter(+nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -91,12 +93,12 @@ Decrements the named counter.
 
 Resets the named counter to zero. Creates the counter if it does not exist.
 
-* compilation flags: ``static``
-* template: ``reset_counter(Counter)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``reset_counter(+nonvar)`` - ``one``
+| **Template:**
+|    ``reset_counter(Counter)``
+| **Mode and number of proofs:**
+|    ``reset_counter(+nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -109,10 +111,10 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 ``reset_counters/0``
 ^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``reset_counters`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset_counters`` - ``one``
 
 
 Protected interface
@@ -135,12 +137,12 @@ Private predicates
 
 Table of named counters.
 
-* compilation flags: ``dynamic``
-* template: ``counter_(Counter,Value)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``counter_(?nonvar,?integer)`` - ``zero_or_more``
+| **Template:**
+|    ``counter_(Counter,Value)``
+| **Mode and number of proofs:**
+|    ``counter_(?nonvar,?integer)`` - ``zero_or_more``
 
 
 Operators

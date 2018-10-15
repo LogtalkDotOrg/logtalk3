@@ -195,37 +195,46 @@
 <div class="section" id="flags-validator">
 <h1><code class="docutils literal notranslate"><span class="pre">flags_validator</span></code><a class="headerlink" href="#flags-validator" title="Permalink to this headline">¶</a></h1>
 <p>Flag validation protocol. Must be implemented by validator objects.</p>
-<ul class="simple">
-<li>author: Theofrastos Mantadelis</li>
-<li>version: 1.0</li>
-<li>date: 2010/11/27</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Theofrastos Mantadelis</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2010/11/27</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="print_flags/0"> </div><div class="section" id="print-flags-0">
 <span id="flags-validator-0-print-flags-0"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">print_flags/0</span></code><a class="headerlink" href="#print-flags-0" title="Permalink to this headline">¶</a></h3>
 <p>Validates the validator object itself.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">print_flags</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">print_flags</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="validate/1"> </div></div>
 <div class="section" id="validate-1">
 <span id="flags-validator-0-validate-1"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">validate/1</span></code><a class="headerlink" href="#validate-1" title="Permalink to this headline">¶</a></h3>
 <p>Validates a flag value.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">validate(Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">validate(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate(Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

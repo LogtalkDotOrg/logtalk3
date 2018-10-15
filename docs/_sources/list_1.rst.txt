@@ -8,14 +8,15 @@
 
 List predicates with elements constrained to a single type.
 
-* author: Paulo Moura
-* version: 1.22
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 1.22
+| **Date:** 2018/7/11
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`list <list/0>`
+
+| **Extends:**
+|    ``public`` :ref:`list <list/0>`
 
 Public interface
 ----------------

@@ -8,14 +8,15 @@
 
 Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.
 
-* author: Paulo Moura
-* version: 2.14
-* date: 2018/2/4
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.14
+| **Date:** 2018/2/4
 
-* imports:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`diagram(Format) <diagram/1>`
+
+| **Imports:**
+|    ``public`` :ref:`diagram(Format) <diagram/1>`
 
 Public interface
 ----------------
@@ -32,12 +33,12 @@ Public interface
 
 Creates a diagram for all entities in a loaded source file using the specified options. The file can be specified by name, basename, full path, or using library notation.
 
-* compilation flags: ``static``
-* template: ``file(File,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file(+atom,+list(compound))`` - ``one``
+| **Template:**
+|    ``file(File,Options)``
+| **Mode and number of proofs:**
+|    ``file(+atom,+list(compound))`` - ``one``
 
 
 .. raw:: html
@@ -52,12 +53,12 @@ Creates a diagram for all entities in a loaded source file using the specified o
 
 Creates a diagram for all entities in a loaded source file using default options. The file can be specified by name, basename, full path, or using library notation.
 
-* compilation flags: ``static``
-* template: ``file(File)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``file(+atom)`` - ``one``
+| **Template:**
+|    ``file(File)``
+| **Mode and number of proofs:**
+|    ``file(+atom)`` - ``one``
 
 
 Protected interface
@@ -78,7 +79,8 @@ Private predicates
 ``included_entity_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -90,7 +92,8 @@ Private predicates
 ``referenced_entity_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 .. raw:: html
 
@@ -102,7 +105,8 @@ Private predicates
 ``referenced_module_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``dynamic``
+| **Compilation flags:** ``dynamic``
+
 
 Operators
 ---------

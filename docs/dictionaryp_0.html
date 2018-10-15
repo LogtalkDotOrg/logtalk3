@@ -289,270 +289,388 @@
 <div class="section" id="dictionaryp">
 <h1><code class="docutils literal notranslate"><span class="pre">dictionaryp</span></code><a class="headerlink" href="#dictionaryp" title="Permalink to this headline">¶</a></h1>
 <p>Dictionary protocol.</p>
-<ul class="simple">
-<li>author: Paulo Moura</li>
-<li>version: 2.0</li>
-<li>date: 2010/2/26</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 2.0</div>
+<div class="line"><strong>Date:</strong> 2010/2/26</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="as_dictionary/2"> </div><div class="section" id="as-dictionary-2">
 <span id="dictionaryp-0-as-dictionary-2"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">as_dictionary/2</span></code><a class="headerlink" href="#as-dictionary-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts a list of key-value pairs to a dictionary.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">as_dictionary(Pairs,Dictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">as_dictionary(&#64;list(pairs),-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_dictionary(Pairs,Dictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_dictionary(&#64;list(pairs),-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="as_list/2"> </div></div>
 <div class="section" id="as-list-2">
 <span id="dictionaryp-0-as-list-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code><a class="headerlink" href="#as-list-2" title="Permalink to this headline">¶</a></h3>
 <p>Converts a dictionary to a ordered list of key-value pairs.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">as_list(Dictionary,Pairs)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">as_list(&#64;dictionary,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(Dictionary,Pairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(&#64;dictionary,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="clone/3"> </div></div>
 <div class="section" id="clone-3">
 <span id="dictionaryp-0-clone-3"></span><span id="index-3"></span><h3><code class="docutils literal notranslate"><span class="pre">clone/3</span></code><a class="headerlink" href="#clone-3" title="Permalink to this headline">¶</a></h3>
 <p>Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">clone(Dictionary,Clone,ClonePairs)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clone(+tree,-tree,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone(Dictionary,Clone,ClonePairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone(+tree,-tree,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="clone/4"> </div></div>
 <div class="section" id="clone-4">
 <span id="dictionaryp-0-clone-4"></span><span id="index-4"></span><h3><code class="docutils literal notranslate"><span class="pre">clone/4</span></code><a class="headerlink" href="#clone-4" title="Permalink to this headline">¶</a></h3>
 <p>Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">clone(Dictionary,Pairs,Clone,ClonePairs)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">clone(+tree,-list(pairs),-tree,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone(Dictionary,Pairs,Clone,ClonePairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone(+tree,-list(pairs),-tree,-list(pairs))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="insert/4"> </div></div>
 <div class="section" id="insert-4">
 <span id="dictionaryp-0-insert-4"></span><span id="index-5"></span><h3><code class="docutils literal notranslate"><span class="pre">insert/4</span></code><a class="headerlink" href="#insert-4" title="Permalink to this headline">¶</a></h3>
 <p>Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">insert(OldDictionary,Key,Value,NewDictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">insert(+dictionary,+ground,&#64;term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(OldDictionary,Key,Value,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(+dictionary,+ground,&#64;term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="delete/4"> </div></div>
 <div class="section" id="delete-4">
 <span id="dictionaryp-0-delete-4"></span><span id="index-6"></span><h3><code class="docutils literal notranslate"><span class="pre">delete/4</span></code><a class="headerlink" href="#delete-4" title="Permalink to this headline">¶</a></h3>
 <p>Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">delete(OldDictionary,Key,Value,NewDictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">delete(+dictionary,&#64;ground,?term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(OldDictionary,Key,Value,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+dictionary,&#64;ground,?term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="update/4"> </div></div>
 <div class="section" id="update-4">
 <span id="dictionaryp-0-update-4"></span><span id="index-7"></span><h3><code class="docutils literal notranslate"><span class="pre">update/4</span></code><a class="headerlink" href="#update-4" title="Permalink to this headline">¶</a></h3>
 <p>Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">update(OldDictionary,Key,NewValue,NewDictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">update(+dictionary,&#64;ground,+term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update(OldDictionary,Key,NewValue,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update(+dictionary,&#64;ground,+term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="update/5"> </div></div>
 <div class="section" id="update-5">
 <span id="dictionaryp-0-update-5"></span><span id="index-8"></span><h3><code class="docutils literal notranslate"><span class="pre">update/5</span></code><a class="headerlink" href="#update-5" title="Permalink to this headline">¶</a></h3>
 <p>Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">update(OldDictionary,Key,OldValue,NewValue,NewDictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">update(+dictionary,&#64;ground,?term,+term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update(OldDictionary,Key,OldValue,NewValue,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update(+dictionary,&#64;ground,?term,+term,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="empty/1"> </div></div>
 <div class="section" id="empty-1">
 <span id="dictionaryp-0-empty-1"></span><span id="index-9"></span><h3><code class="docutils literal notranslate"><span class="pre">empty/1</span></code><a class="headerlink" href="#empty-1" title="Permalink to this headline">¶</a></h3>
 <p>True if the dictionary is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">empty(Dictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">empty(&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(Dictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="lookup/3"> </div></div>
 <div class="section" id="lookup-3">
 <span id="dictionaryp-0-lookup-3"></span><span id="index-10"></span><h3><code class="docutils literal notranslate"><span class="pre">lookup/3</span></code><a class="headerlink" href="#lookup-3" title="Permalink to this headline">¶</a></h3>
 <p>Lookups a matching Key-Value pair from a dictionary.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">lookup(Key,Value,Dictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">lookup(+ground,?term,&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">lookup(-ground,?term,&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lookup(Key,Value,Dictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lookup(+ground,?term,&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lookup(-ground,?term,&#64;dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
 <div id="previous/4"> </div></div>
 <div class="section" id="previous-4">
 <span id="dictionaryp-0-previous-4"></span><span id="index-11"></span><h3><code class="docutils literal notranslate"><span class="pre">previous/4</span></code><a class="headerlink" href="#previous-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns the previous pair in a dictionary given a key.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">previous(Dictionary,Key,Previous,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">previous(+dictionary,+key,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">previous(Dictionary,Key,Previous,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">previous(+dictionary,+key,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="next/4"> </div></div>
 <div class="section" id="next-4">
 <span id="dictionaryp-0-next-4"></span><span id="index-12"></span><h3><code class="docutils literal notranslate"><span class="pre">next/4</span></code><a class="headerlink" href="#next-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns the next pair in a dictionary given a key.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">next(Dictionary,Key,Next,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">next(+dictionary,+key,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next(Dictionary,Key,Next,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next(+dictionary,+key,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="min/3"> </div></div>
 <div class="section" id="min-3">
 <span id="dictionaryp-0-min-3"></span><span id="index-13"></span><h3><code class="docutils literal notranslate"><span class="pre">min/3</span></code><a class="headerlink" href="#min-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">min(Dictionary,Key,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">min(+dictionary,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(Dictionary,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(+dictionary,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="max/3"> </div></div>
 <div class="section" id="max-3">
 <span id="dictionaryp-0-max-3"></span><span id="index-14"></span><h3><code class="docutils literal notranslate"><span class="pre">max/3</span></code><a class="headerlink" href="#max-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">max(Dictionary,Key,Value)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">max(+dictionary,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(Dictionary,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(+dictionary,-key,-value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="delete_min/4"> </div></div>
 <div class="section" id="delete-min-4">
 <span id="dictionaryp-0-delete-min-4"></span><span id="index-15"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_min/4</span></code><a class="headerlink" href="#delete-min-4" title="Permalink to this headline">¶</a></h3>
 <p>Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">delete_min(OldDictionary,Key,Value,NewDictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">delete_min(+dictionary,-key,-value,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_min(OldDictionary,Key,Value,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_min(+dictionary,-key,-value,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="delete_max/4"> </div></div>
 <div class="section" id="delete-max-4">
 <span id="dictionaryp-0-delete-max-4"></span><span id="index-16"></span><h3><code class="docutils literal notranslate"><span class="pre">delete_max/4</span></code><a class="headerlink" href="#delete-max-4" title="Permalink to this headline">¶</a></h3>
 <p>Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">delete_max(OldDictionary,Key,Value,NewDictionary)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">delete_max(+dictionary,-key,-value,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_max(OldDictionary,Key,Value,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_max(+dictionary,-key,-value,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="keys/2"> </div></div>
 <div class="section" id="keys-2">
 <span id="dictionaryp-0-keys-2"></span><span id="index-17"></span><h3><code class="docutils literal notranslate"><span class="pre">keys/2</span></code><a class="headerlink" href="#keys-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns a list with all dictionary keys.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">keys(Dictionary,List)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">keys(&#64;dictionary,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keys(Dictionary,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keys(&#64;dictionary,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 <div id="map/2"> </div></div>
 <div class="section" id="map-2">
 <span id="dictionaryp-0-map-2"></span><span id="index-18"></span><h3><code class="docutils literal notranslate"><span class="pre">map/2</span></code><a class="headerlink" href="#map-2" title="Permalink to this headline">¶</a></h3>
 <p>Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,Dictionary)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(1,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">map(&#64;callable,+dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(Closure,Dictionary)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(1,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(&#64;callable,+dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="map/3"> </div></div>
 <div class="section" id="map-3">
 <span id="dictionaryp-0-map-3"></span><span id="index-19"></span><h3><code class="docutils literal notranslate"><span class="pre">map/3</span></code><a class="headerlink" href="#map-3" title="Permalink to this headline">¶</a></h3>
 <p>Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">map(Closure,OldDictionary,NewDictionary)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">map(2,*,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">map(&#64;callable,+dictionary,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(Closure,OldDictionary,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(2,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map(&#64;callable,+dictionary,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <div id="apply/4"> </div></div>
 <div class="section" id="apply-4">
 <span id="dictionaryp-0-apply-4"></span><span id="index-20"></span><h3><code class="docutils literal notranslate"><span class="pre">apply/4</span></code><a class="headerlink" href="#apply-4" title="Permalink to this headline">¶</a></h3>
 <p>Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">apply(Closure,OldDictionary,Key,NewDictionary)</span></code></li>
-<li>meta-predicate template: <code class="docutils literal notranslate"><span class="pre">apply(2,*,*,*)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">apply(+callable,+dictionary,+key,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">apply(Closure,OldDictionary,Key,NewDictionary)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">apply(2,*,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">apply(+callable,+dictionary,+key,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="size/2"> </div></div>
 <div class="section" id="size-2">
 <span id="dictionaryp-0-size-2"></span><span id="index-21"></span><h3><code class="docutils literal notranslate"><span class="pre">size/2</span></code><a class="headerlink" href="#size-2" title="Permalink to this headline">¶</a></h3>
 <p>Number of dictionary entries.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">size(Dictionary,Size)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">size(&#64;dictionary,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(Dictionary,Size)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(&#64;dictionary,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

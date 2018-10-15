@@ -8,10 +8,12 @@
 
 Utility predicates for supporting Prolog modules in diagrams.
 
-* author: Paulo Moura
-* version: 0.15
-* date: 2018/2/2
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 0.15
+| **Date:** 2018/2/2
+
+| **Compilation flags:** ``static, context_switching_calls``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Access to module properties, at least exports/1, file/1, and file/2 but also declares/2, defines/2, calls/2, and provides/3 when possible.
 
-* compilation flags: ``static``
-* template: ``module_property(Module,Property)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``module_property(?atom,?callable)`` - ``zero_or_more``
+| **Template:**
+|    ``module_property(Module,Property)``
+| **Mode and number of proofs:**
+|    ``module_property(?atom,?callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Access to module properties, at least exports/1, file/1, and file/2 but also dec
 
 Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.
 
-* compilation flags: ``static``
-* template: ``loaded_file_property(File,Property)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``loaded_file_property(?atom,?callable)`` - ``zero_or_more``
+| **Template:**
+|    ``loaded_file_property(File,Property)``
+| **Mode and number of proofs:**
+|    ``loaded_file_property(?atom,?callable)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Access to loaded source file properties, at least basename/1, directory/1 but al
 
 Valid source file extension for Prolog source files.
 
-* compilation flags: ``static``
-* template: ``source_file_extension(Extension)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``source_file_extension(?atom)`` - ``one_or_more``
+| **Template:**
+|    ``source_file_extension(Extension)``
+| **Mode and number of proofs:**
+|    ``source_file_extension(?atom)`` - ``one_or_more``
 
 
 Protected interface

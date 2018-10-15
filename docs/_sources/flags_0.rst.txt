@@ -8,10 +8,12 @@
 
 Implementation of persistent object flags.
 
-* author: Theofrastos Mantadelis
-* version: 1.0
-* date: 2010/11/27
-* compilation flags: ``static``
+| **Author:** Theofrastos Mantadelis
+| **Version:** 1.0
+| **Date:** 2010/11/27
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Gets or tests the value of a flag.
 
-* compilation flags: ``static``
-* template: ``get_flag_value(Flag,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``get_flag_value(+atom,?nonvar)`` - ``zero_or_one``
+| **Template:**
+|    ``get_flag_value(Flag,Value)``
+| **Mode and number of proofs:**
+|    ``get_flag_value(+atom,?nonvar)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -51,12 +53,12 @@ Gets or tests the value of a flag.
 
 Sets the value of a flag.
 
-* compilation flags: ``static``
-* template: ``set_flag_value(Flag,NewValue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_flag_value(+atom,@nonvar)`` - ``one``
+| **Template:**
+|    ``set_flag_value(Flag,NewValue)``
+| **Mode and number of proofs:**
+|    ``set_flag_value(+atom,@nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -71,12 +73,12 @@ Sets the value of a flag.
 
 Sets the value of a flag, returning the old value.
 
-* compilation flags: ``static``
-* template: ``set_flag_value(Flag,OldValue,NewValue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``set_flag_value(+atom,?nonvar,@nonvar)`` - ``one``
+| **Template:**
+|    ``set_flag_value(Flag,OldValue,NewValue)``
+| **Mode and number of proofs:**
+|    ``set_flag_value(+atom,?nonvar,@nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -91,10 +93,10 @@ Sets the value of a flag, returning the old value.
 
 Resets all flags to their default values.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``reset_flags`` - ``one``
+| **Mode and number of proofs:**
+|    ``reset_flags`` - ``one``
 
 
 .. raw:: html
@@ -109,12 +111,12 @@ Resets all flags to their default values.
 
 Resets all flags in a group to their default values.
 
-* compilation flags: ``static``
-* template: ``reset_flags(Group)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``reset_flags(+atom)`` - ``one``
+| **Template:**
+|    ``reset_flags(Group)``
+| **Mode and number of proofs:**
+|    ``reset_flags(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -129,12 +131,12 @@ Resets all flags in a group to their default values.
 
 Returns a list of all flag groups.
 
-* compilation flags: ``static``
-* template: ``flag_groups(Groups)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``flag_groups(-list(atom))`` - ``one``
+| **Template:**
+|    ``flag_groups(Groups)``
+| **Mode and number of proofs:**
+|    ``flag_groups(-list(atom))`` - ``one``
 
 
 .. raw:: html
@@ -149,12 +151,12 @@ Returns a list of all flag groups.
 
 Checks if a given atom is a flag group.
 
-* compilation flags: ``static``
-* template: ``flag_group_chk(Group)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``flag_group_chk(+atom)`` - ``zero_or_one``
+| **Template:**
+|    ``flag_group_chk(Group)``
+| **Mode and number of proofs:**
+|    ``flag_group_chk(+atom)`` - ``zero_or_one``
 
 
 .. raw:: html
@@ -169,10 +171,10 @@ Checks if a given atom is a flag group.
 
 Prints a listing of all flags.
 
-* compilation flags: ``static``
-* mode - number of proofs:
+| **Compilation flags:** ``static``
 
-  * ``print_flags`` - ``one``
+| **Mode and number of proofs:**
+|    ``print_flags`` - ``one``
 
 
 .. raw:: html
@@ -187,12 +189,12 @@ Prints a listing of all flags.
 
 Prints a listing of all flags in a group.
 
-* compilation flags: ``static``
-* template: ``print_flags(Group)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``print_flags(+atom)`` - ``one``
+| **Template:**
+|    ``print_flags(Group)``
+| **Mode and number of proofs:**
+|    ``print_flags(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -207,12 +209,12 @@ Prints a listing of all flags in a group.
 
 Gets or test the existing (visible) flag definitions.
 
-* compilation flags: ``static``
-* template: ``defined_flag(Flag,Group,Type,DefaultValue,Description,Access)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``defined_flag(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``defined_flag(Flag,Group,Type,DefaultValue,Description,Access)``
+| **Mode and number of proofs:**
+|    ``defined_flag(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -227,12 +229,12 @@ Gets or test the existing (visible) flag definitions.
 
 True if the argument is a built-in flag type with the specified default value.
 
-* compilation flags: ``static``
-* template: ``built_in_flag(Type,DefaultValue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``built_in_flag(?atom,?nonvar)`` - ``zero_or_more``
+| **Template:**
+|    ``built_in_flag(Type,DefaultValue)``
+| **Mode and number of proofs:**
+|    ``built_in_flag(?atom,?nonvar)`` - ``zero_or_more``
 
 
 Protected interface
@@ -250,12 +252,12 @@ Protected interface
 
 Sets the value of a flag without performing any validation checks.
 
-* compilation flags: ``static``
-* template: ``unsafe_set_flag_value(Flag,NewValue)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``unsafe_set_flag_value(+atom,@nonvar)`` - ``one``
+| **Template:**
+|    ``unsafe_set_flag_value(Flag,NewValue)``
+| **Mode and number of proofs:**
+|    ``unsafe_set_flag_value(+atom,@nonvar)`` - ``one``
 
 
 .. raw:: html
@@ -270,12 +272,12 @@ Sets the value of a flag without performing any validation checks.
 
 Defines a new flag using default options.
 
-* compilation flags: ``static``
-* template: ``define_flag(Flag)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``define_flag(+atom)`` - ``one``
+| **Template:**
+|    ``define_flag(Flag)``
+| **Mode and number of proofs:**
+|    ``define_flag(+atom)`` - ``one``
 
 
 .. raw:: html
@@ -290,12 +292,12 @@ Defines a new flag using default options.
 
 Defines a new flag using a given set of options (for example, [group(general), type(nonvar), default(true), description(Flag), access(read_write)]).
 
-* compilation flags: ``static``
-* template: ``define_flag(Flag,Options)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``define_flag(+atom,@list)`` - ``one``
+| **Template:**
+|    ``define_flag(Flag,Options)``
+| **Mode and number of proofs:**
+|    ``define_flag(+atom,@list)`` - ``one``
 
 
 Private predicates
@@ -313,12 +315,12 @@ Private predicates
 
 Gets or test the existing flag definitions.
 
-* compilation flags: ``dynamic``
-* template: ``defined_flag_(Flag,Group,Type,DefaultValue,Description,Access)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``defined_flag_(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
+| **Template:**
+|    ``defined_flag_(Flag,Group,Type,DefaultValue,Description,Access)``
+| **Mode and number of proofs:**
+|    ``defined_flag_(?atom,?atom,?nonvar,?nonvar,?atom,?atom)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -333,12 +335,12 @@ Gets or test the existing flag definitions.
 
 Table of flag values.
 
-* compilation flags: ``dynamic``
-* template: ``flag_value_(Flag,Value)``
+| **Compilation flags:** ``dynamic``
 
-* mode - number of proofs:
-
-  * ``flag_value_(?atom,?nonvar)`` - ``zero_or_more``
+| **Template:**
+|    ``flag_value_(Flag,Value)``
+| **Mode and number of proofs:**
+|    ``flag_value_(?atom,?nonvar)`` - ``zero_or_more``
 
 
 .. raw:: html
@@ -351,7 +353,8 @@ Table of flag values.
 ``validate/3``
 ^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -363,7 +366,8 @@ Table of flag values.
 ``validate_type/1``
 ^^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 .. raw:: html
 
@@ -375,7 +379,8 @@ Table of flag values.
 ``is_validator/1``
 ^^^^^^^^^^^^^^^^^^
 
-* compilation flags: ``static``
+| **Compilation flags:** ``static``
+
 
 Operators
 ---------

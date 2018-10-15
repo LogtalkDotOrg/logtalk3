@@ -8,14 +8,15 @@
 
 Assignable variables (supporting backtracable assignment of non-variable terms).
 
-* author: Nobukuni Kino and Paulo Moura
-* version: 1.7
-* date: 2018/7/11
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Nobukuni Kino and Paulo Moura
+| **Version:** 1.7
+| **Date:** 2018/7/11
 
-* implements:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`assignvarsp <assignvarsp/0>`
+
+| **Implements:**
+|    ``public`` :ref:`assignvarsp <assignvarsp/0>`
 
 Public interface
 ----------------

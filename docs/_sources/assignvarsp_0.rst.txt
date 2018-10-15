@@ -8,10 +8,12 @@
 
 Assignable variables (supporting backtracable assignement of non-variable terms) protocol.
 
-* author: Nobukuni Kino and Paulo Moura
-* version: 1.0
-* date: 2015/7/31
-* compilation flags: ``static``
+| **Author:** Nobukuni Kino and Paulo Moura
+| **Version:** 1.0
+| **Date:** 2015/7/31
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,14 +33,14 @@ Public interface
 
 Makes Variable an assignable variable. Initial state will be empty.
 
-* compilation flags: ``static``
-* template: ``assignable(Variable)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``assignable(Variable)``
+| **Mode and number of proofs:**
+|    ``assignable(-assignvar)`` - ``one``
 
-  * ``assignable(-assignvar)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Variable is not a variable: ``type_error(variable,Variable)``
 
 
@@ -54,16 +56,15 @@ Makes Variable an assignable variable. Initial state will be empty.
 
 Makes Variable an assignable variable and sets its initial state to Value.
 
-* compilation flags: ``static``
-* template: ``assignable(Variable,Value)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``assignable(Variable,Value)``
+| **Mode and number of proofs:**
+|    ``assignable(-assignvar,@nonvar)`` - ``one``
 
-  * ``assignable(-assignvar,@nonvar)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Variable is not a variable: ``type_error(variable,Variable)``
-
   * Value is not instantiated: ``instantiation_error``
 
 
@@ -79,14 +80,14 @@ Makes Variable an assignable variable and sets its initial state to Value.
 
 Sets the state of the assignable variable Variable to Value (initializing the variable if needed).
 
-* compilation flags: ``static``
-* template: ``Variable<=Value``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``Variable<=Value``
+| **Mode and number of proofs:**
+|    ``(?assignvar)<=(@nonvar)`` - ``one``
 
-  * ``(?assignvar)<=(@nonvar)`` - ``one``
-
-* exceptions:
+| **Exceptions:**
   * Value is not instantiated: ``instantiation_error``
 
 
@@ -102,14 +103,14 @@ Sets the state of the assignable variable Variable to Value (initializing the va
 
 Unifies Value with the current state of the assignable variable Variable.
 
-* compilation flags: ``static``
-* template: ``Variable=>Value``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
+| **Template:**
+|    ``Variable=>Value``
+| **Mode and number of proofs:**
+|    ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
 
-  * ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
-
-* exceptions:
+| **Exceptions:**
   * Variable is not instantiated: ``instantiation_error``
 
 

@@ -8,10 +8,12 @@
 
 Utility predicates for parsing a file as a list of atoms.
 
-* author: Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.
-* version: 1.0
-* date: 2011/8/4
-* compilation flags: ``static``
+| **Author:** Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.
+| **Version:** 1.0
+| **Date:** 2011/8/4
+
+| **Compilation flags:** ``static``
+
 
 (no dependencies on other entities)
 
@@ -31,12 +33,12 @@ Public interface
 
 Reads a file character by character, parsing it into a list of atoms.
 
-* compilation flags: ``static``
-* template: ``read_file(File,List)``
+| **Compilation flags:** ``static``
 
-* mode - number of proofs:
-
-  * ``read_file(+atom,-list(atom))`` - ``one``
+| **Template:**
+|    ``read_file(File,List)``
+| **Mode and number of proofs:**
+|    ``read_file(+atom,-list(atom))`` - ``one``
 
 
 Protected interface

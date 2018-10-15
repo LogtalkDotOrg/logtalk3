@@ -212,38 +212,50 @@
 <div class="section" id="magic">
 <h1><code class="docutils literal notranslate"><span class="pre">magic</span></code><a class="headerlink" href="#magic" title="Permalink to this headline">¶</a></h1>
 <p>Object encapsulating magic methods.</p>
-<ul class="simple">
-<li>author: Ulf Nilsson. Ported to Logtalk and augmented with stratified negation by Victor Lagerkvist.</li>
-<li>version: 1.0</li>
-<li>date: 2010/6/13</li>
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Ulf Nilsson. Ported to Logtalk and augmented with stratified negation by Victor Lagerkvist.</div>
+<div class="line"><strong>Version:</strong> 1.0</div>
+<div class="line"><strong>Date:</strong> 2010/6/13</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
 <p>(no dependencies on other entities)</p>
 <div class="section" id="public-interface">
 <h2>Public interface<a class="headerlink" href="#public-interface" title="Permalink to this headline">¶</a></h2>
 <div id="magicise/4"> </div><div class="section" id="magicise-4">
 <span id="magic-0-magicise-4"></span><span id="index-1"></span><h3><code class="docutils literal notranslate"><span class="pre">magicise/4</span></code><a class="headerlink" href="#magicise-4" title="Permalink to this headline">¶</a></h3>
 <p>Transform (Head :- Body) into a magic clause (NewHead :- NewBody).</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">magicise(Head,Body,NewHead,NewBody)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">magicise(+term,+list,-term,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">magicise(Head,Body,NewHead,NewBody)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">magicise(+term,+list,-term,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <div id="magic/2"> </div></div>
 <div class="section" id="magic-2">
 <span id="magic-0-magic-2"></span><span id="index-2"></span><h3><code class="docutils literal notranslate"><span class="pre">magic/2</span></code><a class="headerlink" href="#magic-2" title="Permalink to this headline">¶</a></h3>
 <p>Prefix the predicate symbol of Old with <a class="reference internal" href="#magic">magic</a>.</p>
-<ul class="simple">
-<li>compilation flags: <code class="docutils literal notranslate"><span class="pre">static</span></code></li>
-<li>template: <code class="docutils literal notranslate"><span class="pre">magic(Old,New)</span></code></li>
-<li>mode - number of proofs:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">magic(+callable,-callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></li>
-</ul>
-</li>
-</ul>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong> <code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">magic(Old,New)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">magic(+callable,-callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="protected-interface">

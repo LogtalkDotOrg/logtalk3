@@ -8,14 +8,15 @@
 
 Predicates for generating all supported diagrams for libraries and files in one step using the DOT format.
 
-* author: Paulo Moura
-* version: 2.0
-* date: 2014/3/9
-* compilation flags: ``static, context_switching_calls``
+| **Author:** Paulo Moura
+| **Version:** 2.0
+| **Date:** 2014/3/9
 
-* extends:
+| **Compilation flags:** ``static, context_switching_calls``
 
-  * ``public`` :ref:`diagrams(dot) <diagrams/1>`
+
+| **Extends:**
+|    ``public`` :ref:`diagrams(dot) <diagrams/1>`
 
 Public interface
 ----------------
