@@ -225,6 +225,7 @@ protocol.</p>
     <span class="k">implements</span>(monitoring),
     ...).
 
+    <span class="c">% write a log message when a message is successful:</span>
     <span class="k">after</span>(<span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Sender</span>) <span class="o">:-</span>
         <span class="k">writeq</span>(<span class="nv">Object</span>), <span class="k">write</span>(<span class="s">&#39;::&#39;</span>), <span class="k">writeq</span>(<span class="nv">Message</span>),
         <span class="k">write</span>(<span class="s">&#39; from &#39;</span>), <span class="k">writeq</span>(<span class="nv">Sender</span>), <span class="k">nl</span>.

@@ -225,7 +225,9 @@ the first argument unbound, both types of events are abolished.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">abolish_events</span>(<span class="nv">_</span>, list, <span class="nv">_</span>, <span class="nv">_</span>, debugger).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% abolish all events for messages sent to the &quot;list&quot;</span>
+<span class="c">% object being monitored by the &quot;debugger&quot; object:</span>
+| <span class="o">?-</span> <span class="k">abolish_events</span>(<span class="nv">_</span>, list, <span class="nv">_</span>, <span class="nv">_</span>, debugger).
 </pre></div>
 </div>
 <div class="admonition seealso">

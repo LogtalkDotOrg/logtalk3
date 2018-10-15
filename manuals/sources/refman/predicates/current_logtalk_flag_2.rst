@@ -50,6 +50,7 @@ Examples
 
 ::
 
+   % get the current value of the source_data flag:
    | ?- current_logtalk_flag(source_data, Value).
 
 .. seealso::

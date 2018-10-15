@@ -66,6 +66,8 @@ Examples
 
 ::
 
+   % define "debugger" as a monitor for member/2 messages
+   % sent to the "list" object:
    | ?- define_events(_, list, member(_, _), _ , debugger).
 
 .. seealso::

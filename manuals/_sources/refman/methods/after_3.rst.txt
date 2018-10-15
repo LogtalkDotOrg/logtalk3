@@ -59,6 +59,7 @@ Examples
        implements(monitoring),
        ...).
 
+       % write a log message when a message is successful:
        after(Object, Message, Sender) :-
            writeq(Object), write('::'), writeq(Message),
            write(' from '), writeq(Sender), nl.

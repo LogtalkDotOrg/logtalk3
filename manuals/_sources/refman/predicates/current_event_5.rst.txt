@@ -57,6 +57,7 @@ Examples
 
 ::
 
+   % enumerate all events monitored by the "debugger" object:
    | ?- current_event(Event, Object, Message, Sender, debugger).
 
 .. seealso::

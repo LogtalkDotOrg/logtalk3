@@ -233,7 +233,9 @@ the first argument unbound, both types of events are defined. The object
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">define_events</span>(<span class="nv">_</span>, list, member(<span class="nv">_</span>, <span class="nv">_</span>), <span class="nv">_</span> , debugger).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% define &quot;debugger&quot; as a monitor for member/2 messages</span>
+<span class="c">% sent to the &quot;list&quot; object:</span>
+| <span class="o">?-</span> <span class="k">define_events</span>(<span class="nv">_</span>, list, member(<span class="nv">_</span>, <span class="nv">_</span>), <span class="nv">_</span> , debugger).
 </pre></div>
 </div>
 <div class="admonition seealso">

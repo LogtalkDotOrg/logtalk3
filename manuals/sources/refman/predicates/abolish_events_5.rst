@@ -58,6 +58,8 @@ Examples
 
 ::
 
+   % abolish all events for messages sent to the "list"
+   % object being monitored by the "debugger" object:
    | ?- abolish_events(_, list, _, _, debugger).
 
 .. seealso::
