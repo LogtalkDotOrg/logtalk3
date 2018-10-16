@@ -26,7 +26,7 @@ Built-in methods
    reflection_methods
    database_methods
    meta_call_methods
-   exception_methods
+   error_handling_methods
    solution_methods
    event_methods
    forwarding_methods

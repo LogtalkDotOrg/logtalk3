@@ -98,7 +98,7 @@
 <li class="toctree-l3"><a class="reference internal" href="reflection_methods.html">Reflection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="database_methods.html">Database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="meta_call_methods.html">Meta-calls</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="exception_methods.html">Exception-handling</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="error_handling_methods.html">Error handling</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="catch_3.html">catch/3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="throw_1.html">throw/1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="instantiation_error_0.html">instantiation_error/0</a></li>
@@ -180,7 +180,7 @@
         
           <li><a href="index.html">Built-in methods</a> &raquo;</li>
         
-          <li><a href="exception_methods.html">Exception-handling</a> &raquo;</li>
+          <li><a href="error_handling_methods.html">Error handling</a> &raquo;</li>
         
       <li>system_error/0</li>
     
@@ -210,11 +210,17 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>system_error
 </pre></div>
 </div>
-<p>Throws an <code class="docutils literal notranslate"><span class="pre">error(system_error,</span> <span class="pre">logtalk(Head,Context))</span></code>
-exception term where <code class="docutils literal notranslate"><span class="pre">Head</span></code> is the head of the clause from where this
-predicate is called and <code class="docutils literal notranslate"><span class="pre">Context</span></code> is the execution context of the
-call. This built-in predicate is declared as a private method and thus
-cannot be used as a message to an object.</p>
+<p>Throws a system error. This built-in predicate is declared as
+a private method and thus cannot be used as a message to an object.
+Calling this predicate is equivalent to the following sequence of calls
+where <code class="docutils literal notranslate"><span class="pre">Head</span></code> is the head of the predicate clause making the call:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
+context(<span class="nv">Context</span>),
+<span class="k">throw</span>(error(system_error, logtalk(<span class="nv">Head</span>,<span class="nv">Context</span>))).
+</pre></div>
+</div>
+<p>This allows the user to generate errors in the same format used by the
+runtime.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
@@ -224,7 +230,12 @@ cannot be used as a message to an object.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<p>(none)</p>
+<div class="line-block">
+<div class="line">When called:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">system_error</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

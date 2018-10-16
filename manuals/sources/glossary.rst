@@ -379,7 +379,7 @@ Glossary
       A source file, compiled and loaded at Logtalk startup, mainly
       defining default values for compiler flags that override the
       defaults found on the backend Prolog compiler
-	  :term:`adapter files <adapter file>`.
+      :term:`adapter files <adapter file>`.
 
    tester file
       A source file whose main purpose is to load and a run a set of

@@ -28,11 +28,19 @@ Description
 
    system_error
 
-Throws an ``error(system_error, logtalk(Head,Context))``
-exception term where ``Head`` is the head of the clause from where this
-predicate is called and ``Context`` is the execution context of the
-call. This built-in predicate is declared as a private method and thus
-cannot be used as a message to an object.
+Throws a system error. This built-in predicate is declared as
+a private method and thus cannot be used as a message to an object.
+Calling this predicate is equivalent to the following sequence of calls
+where ``Head`` is the head of the predicate clause making the call:
+
+::
+
+   ...,
+   context(Context),
+   throw(error(system_error, logtalk(Head,Context))).
+
+This allows the user to generate errors in the same format used by the
+runtime.
 
 Modes and number of proofs
 --------------------------
@@ -44,7 +52,8 @@ Modes and number of proofs
 Errors
 ------
 
-(none)
+| When called:
+|     ``system_error``
 
 Examples
 --------

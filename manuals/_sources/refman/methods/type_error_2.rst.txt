@@ -28,11 +28,19 @@ Description
 
    type_error(Type, Culprit)
 
-Throws an ``error(type_error(Type,Culprit), logtalk(Head,Context))``
-exception term where ``Head`` is the head of the clause from where this
-predicate is called and ``Context`` is the execution context of the
-call. This built-in predicate is declared as a private method and thus
-cannot be used as a message to an object.
+Throws a type error. This built-in predicate is declared as
+a private method and thus cannot be used as a message to an object.
+Calling this predicate is equivalent to the following sequence of calls
+where ``Head`` is the head of the predicate clause making the call:
+
+::
+
+   ...,
+   context(Context),
+   throw(error(type_error(Type,Culprit), logtalk(Head,Context))).
+
+This allows the user to generate errors in the same format used by the
+runtime.
 
 Modes and number of proofs
 --------------------------
@@ -44,12 +52,17 @@ Modes and number of proofs
 Errors
 ------
 
-(none)
+| When called:
+|     ``type_error(Type,Culprit)``
 
 Examples
 --------
 
-(none)
+::
+
+   ...,
+   \+ atom(Name),
+   type_error(atom, Name).
 
 .. seealso::
 

@@ -15,10 +15,10 @@
    limitations under the License.
 
 
-.. _exceptions_methods:
+.. _error_handling_methods:
 
-Exception-handling
-==================
+Error handling
+==============
 
 .. toctree::
    :maxdepth: 1
