@@ -63,22 +63,22 @@ Modes and number of proofs
 Errors
 ------
 
-Goals is a variable:
-   ``instantiation_error``
-A goal in Goals is a variable:
-   ``instantiation_error``
-Goals is neither a variable nor a callable term:
-   ``type_error(callable, Goals)``
-A goal Goal in Goals is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
+| Goals is a variable:
+|     ``instantiation_error``
+| A goal in Goals is a variable:
+|     ``instantiation_error``
+| Goals is neither a variable nor a callable term:
+|     ``type_error(callable, Goals)``
+| A goal Goal in Goals is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
 
 Examples
 --------
 
-Prove a conjunction of goals, each one in its own thread:
-   ``threaded((Goal, Goals))``
-Prove a disjunction of goals, each one in its own thread:
-   ``threaded((Goal; Goals))``
+| Prove a conjunction of goals, each one in its own thread:
+|     ``threaded((Goal, Goals))``
+| Prove a disjunction of goals, each one in its own thread:
+|     ``threaded((Goal; Goals))``
 
 .. seealso::
 

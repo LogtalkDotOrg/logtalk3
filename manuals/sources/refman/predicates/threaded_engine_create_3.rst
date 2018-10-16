@@ -46,12 +46,12 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-Engine is the name of an existing engine:
-   ``permission_error(create, engine, Engine)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| Engine is the name of an existing engine:
+|     ``permission_error(create, engine, Engine)``
 
 Examples
 --------

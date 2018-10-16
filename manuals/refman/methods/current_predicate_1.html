@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
@@ -113,7 +114,6 @@
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -218,27 +218,41 @@ Prolog compiler supports modules).</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Predicate is neither a variable nor a valid predicate indicator:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,</span> <span class="pre">Predicate)</span></code></dd>
-<dt>Predicate is a Name/Arity term but Functor is neither a variable nor an atom:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Name)</span></code></dd>
-<dt>Predicate is a Name/Arity term but Arity is neither a variable nor an integer:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(integer,</span> <span class="pre">Arity)</span></code></dd>
-<dt>Predicate is a Name/Arity term but Arity is a negative integer:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(not_less_than_zero,</span> <span class="pre">Arity)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Predicate is neither a variable nor a valid predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,</span> <span class="pre">Predicate)</span></code></div>
+</div>
+<div class="line">Predicate is a Name/Arity term but Functor is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Name)</span></code></div>
+</div>
+<div class="line">Predicate is a Name/Arity term but Arity is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,</span> <span class="pre">Arity)</span></code></div>
+</div>
+<div class="line">Predicate is a Name/Arity term but Arity is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(not_less_than_zero,</span> <span class="pre">Arity)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>To enumerate, by backtracking, the locally visible user predicates or the user predicates visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">current_predicate(Predicate)</span></code></dd>
-<dt>To enumerate, by backtracking, the public and protected user predicates visible in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">::current_predicate(Predicate)</span></code></dd>
-<dt>To enumerate, by backtracking, the public user predicates visible for an explicit object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Object::current_predicate(Predicate)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">To enumerate, by backtracking, the locally visible user predicates or the user predicates visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_predicate(Predicate)</span></code></div>
+</div>
+<div class="line">To enumerate, by backtracking, the public and protected user predicates visible in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">::current_predicate(Predicate)</span></code></div>
+</div>
+<div class="line">To enumerate, by backtracking, the public user predicates visible for an explicit object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object::current_predicate(Predicate)</span></code></div>
+</div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="current_op_3.html#methods-current-op-3"><span class="std std-ref">current_op/3</span></a>,

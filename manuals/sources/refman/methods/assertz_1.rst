@@ -54,30 +54,30 @@ Modes and number of proofs
 Errors
 ------
 
-Head is a variable:
-   ``instantiation_error``
-Head is a neither a variable nor a callable term:
-   ``type_error(callable, Head)``
-Body cannot be converted to a goal:
-   ``type_error(callable, Body)``
-The predicate indicator of Head, Name/Arity, is that of a private predicate:
-   ``permission_error(modify, private_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a protected predicate:
-   ``permission_error(modify, protected_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a static predicate:
-   ``permission_error(modify, static_predicate, Name/Arity)``
-Target object was created/compiled with support for dynamic declaration of predicates turned off:
-   ``permission_error(create, predicate_declaration, Name/Arity)``
+| Head is a variable:
+|     ``instantiation_error``
+| Head is a neither a variable nor a callable term:
+|     ``type_error(callable, Head)``
+| Body cannot be converted to a goal:
+|     ``type_error(callable, Body)``
+| The predicate indicator of Head, Name/Arity, is that of a private predicate:
+|     ``permission_error(modify, private_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a protected predicate:
+|     ``permission_error(modify, protected_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a static predicate:
+|     ``permission_error(modify, static_predicate, Name/Arity)``
+| Target object was created/compiled with support for dynamic declaration of predicates turned off:
+|     ``permission_error(create, predicate_declaration, Name/Arity)``
 
 Examples
 --------
 
-To assert a clause as the last one for a local dynamic predicate or a dynamic predicate in :term:`this`:
-   ``assertz(Clause)``
-To assert a clause as the last one for any public or protected dynamic predicate in :term:`self`:
-   ``::assertz(Clause)``
-To assert a clause as the last one for any public dynamic predicate in an explicit object:
-   ``Object::assertz(Clause)``
+| To assert a clause as the last one for a local dynamic predicate or a dynamic predicate in :term:`this`:
+|     ``assertz(Clause)``
+| To assert a clause as the last one for any public or protected dynamic predicate in :term:`self`:
+|     ``::assertz(Clause)``
+| To assert a clause as the last one for any public dynamic predicate in an explicit object:
+|     ``Object::assertz(Clause)``
 
 .. seealso::
 

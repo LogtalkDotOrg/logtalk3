@@ -44,20 +44,20 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
 
 Examples
 --------
 
-Call a goal deterministically in the context of the object or category containing the call:
-   ``once(Goal)``
-To send a goal as a non-backtracable message to :term:`self`:
-   ``once(::Goal)``
-To send a goal as a non-backtracable message to an explicit object:
-   ``once(Object::Goal)``
+| Call a goal deterministically in the context of the object or category containing the call:
+|     ``once(Goal)``
+| To send a goal as a non-backtracable message to :term:`self`:
+|     ``once(::Goal)``
+| To send a goal as a non-backtracable message to an explicit object:
+|     ``once(Object::Goal)``
 
 .. seealso::
 

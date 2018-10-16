@@ -42,12 +42,12 @@ Modes and number of proofs
 Errors
 ------
 
-Object is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Object)``
-Property is neither a variable nor a callable term:
-   ``type_error(callable, Property)``
-Property is a callable term but not a valid object property:
-   ``domain_error(object_property, Property)``
+| Object is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Object)``
+| Property is neither a variable nor a callable term:
+|     ``type_error(callable, Property)``
+| Property is a callable term but not a valid object property:
+|     ``domain_error(object_property, Property)``
 
 Examples
 --------

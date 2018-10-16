@@ -44,14 +44,14 @@ Modes and number of proofs
 Errors
 ------
 
-Instance is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Instance)``
-Class is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Class)``
-Scope is neither a variable nor an atom:
-   ``type_error(atom, Scope)``
-Scope is an atom but an invalid entity scope:
-   ``domain_error(scope, Scope)``
+| Instance is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Instance)``
+| Class is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Class)``
+| Scope is neither a variable nor an atom:
+|     ``type_error(atom, Scope)``
+| Scope is an atom but an invalid entity scope:
+|     ``domain_error(scope, Scope)``
 
 Examples
 --------

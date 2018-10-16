@@ -53,8 +53,10 @@ Errors
 Examples
 --------
 
-Send the notification ``data_available``:
-   ``threaded_notify(data_available)``
+::
+
+   % send a "data_available" notification:
+   ..., threaded_notify(data_available), ...
 
 .. seealso::
 

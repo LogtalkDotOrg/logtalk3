@@ -42,12 +42,12 @@ Modes and number of proofs
 Errors
 ------
 
-Protocol is neither a variable nor a valid protocol identifier:
-   ``type_error(protocol_identifier, Protocol)``
-Property is neither a variable nor a callable term:
-   ``type_error(callable, Property)``
-Property is a callable term but not a valid protocol property:
-   ``domain_error(protocol_property, Property)``
+| Protocol is neither a variable nor a valid protocol identifier:
+|     ``type_error(protocol_identifier, Protocol)``
+| Property is neither a variable nor a callable term:
+|     ``type_error(callable, Property)``
+| Property is a callable term but not a valid protocol property:
+|     ``domain_error(protocol_property, Property)``
 
 Examples
 --------

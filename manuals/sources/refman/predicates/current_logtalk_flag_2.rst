@@ -40,10 +40,10 @@ Modes and number of proofs
 Errors
 ------
 
-Flag is neither a variable nor an atom:
-   ``type_error(atom, Flag)``
-Flag is an atom but an invalid flag:
-   ``domain_error(flag, Value)``
+| Flag is neither a variable nor an atom:
+|     ``type_error(atom, Flag)``
+| Flag is an atom but an invalid flag:
+|     ``domain_error(flag, Value)``
 
 Examples
 --------

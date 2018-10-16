@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Tutorial" href="../../tutorial/index.html" />
+    <link rel="next" title="Directives" href="../directives/index.html" />
     <link rel="prev" title="Context switching calls" href="context_switching_calls.html" /> 
 
   
@@ -90,9 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Control constructs</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="message_sending.html">Message sending</a></li>
 <li class="toctree-l3"><a class="reference internal" href="message_delegation.html">Message delegation</a></li>
@@ -104,6 +101,9 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -223,26 +223,45 @@ available at runtime.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Either Object or Goal is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Object is neither a variable nor a valid object identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Object)</span></code></dd>
-<dt>Goal is neither a variable nor a callable term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></dd>
-<dt>Object does not contain a local definition for the Goal predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">Goal)</span></code></dd>
-<dt>Object does not exist:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(object,</span> <span class="pre">Object)</span></code></dd>
-<dt>Object was created/compiled with support for context switching calls turned off:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">database,</span> <span class="pre">Goal)</span></code></dd>
-<dt>Proxy is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Proxy is neither a variable nor an object identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Proxy)</span></code></dd>
-<dt>The predicate Proxy does not exist in the <em>user</em> pseudo-object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">ProxyFunctor/ProxyArity)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Either Object or Goal is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Object is neither a variable nor a valid object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Object)</span></code></div>
+</div>
+<div class="line">Goal is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></div>
+</div>
+<div class="line">Object does not contain a local definition for the Goal predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">Goal)</span></code></div>
+</div>
+<div class="line">Object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,</span> <span class="pre">Object)</span></code></div>
+</div>
+<div class="line">Object was created/compiled with support for context switching calls turned off:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">database,</span> <span class="pre">Goal)</span></code></div>
+<div class="line"><br /></div>
+</div>
+<div class="line">Proxy is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Proxy is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Proxy)</span></code></div>
+</div>
+<div class="line">The predicate Proxy does not exist in the <em>user</em> pseudo-object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">ProxyFunctor/ProxyArity)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -261,7 +280,7 @@ available at runtime.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../tutorial/index.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../directives/index.html" class="btn btn-neutral float-right" title="Directives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="context_switching_calls.html" class="btn btn-neutral" title="Context switching calls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

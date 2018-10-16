@@ -55,20 +55,20 @@ Modes and number of proofs
 Errors
 ------
 
-NonTerminal is a variable:
-   ``instantiation_error``
-NonTerminal is neither a variable nor a callable term:
-   ``type_error(callable, NonTerminal)``
+| NonTerminal is a variable:
+|     ``instantiation_error``
+| NonTerminal is neither a variable nor a callable term:
+|     ``type_error(callable, NonTerminal)``
 
 Examples
 --------
 
-To parse a list of tokens using a local non-terminal:
-   ``phrase(NonTerminal, Input, Rest)``
-To parse a list of tokens using a non-terminal within the scope of :term:`self`:
-   ``phrase(::NonTerminal, Input, Rest)``
-To parse a list of tokens using a public non-terminal of an explicit object:
-   ``phrase(Object::NonTerminal, Input, Rest)``
+| To parse a list of tokens using a local non-terminal:
+|     ``phrase(NonTerminal, Input, Rest)``
+| To parse a list of tokens using a non-terminal within the scope of :term:`self`:
+|     ``phrase(::NonTerminal, Input, Rest)``
+| To parse a list of tokens using a public non-terminal of an explicit object:
+|     ``phrase(Object::NonTerminal, Input, Rest)``
 
 .. seealso::
 

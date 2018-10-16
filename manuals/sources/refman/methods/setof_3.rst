@@ -54,22 +54,22 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-Goal is a call to a non-existing predicate:
-   ``existence_error(procedure, Predicate)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| Goal is a call to a non-existing predicate:
+|     ``existence_error(procedure, Predicate)``
 
 Examples
 --------
 
-To find a set of solutions in the context of the object or category containing the call:
-   ``setof(Template, Goal, List)``
-To find a set of solutions of sending a message to :term:`self`:
-   ``setof(Template, ::Message, List)``
-To find a set of solutions of sending a message to an explicit object:
-   ``setof(Template, Object::Message, List)``
+| To find a set of solutions in the context of the object or category containing the call:
+|     ``setof(Template, Goal, List)``
+| To find a set of solutions of sending a message to :term:`self`:
+|     ``setof(Template, ::Message, List)``
+| To find a set of solutions of sending a message to an explicit object:
+|     ``setof(Template, Object::Message, List)``
 
 .. seealso::
 

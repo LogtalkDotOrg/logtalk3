@@ -90,9 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Control constructs</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="message_sending.html">Message sending</a></li>
 <li class="toctree-l3"><a class="reference internal" href="message_delegation.html">Message delegation</a></li>
@@ -104,6 +101,9 @@
 <li class="toctree-l3"><a class="reference internal" href="context_switching_calls.html">Context switching calls</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -219,14 +219,20 @@ identifiers correspond to predicates defined in <code class="docutils literal no
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Term or Goal is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Term is neither a variable nor a callable term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Term)</span></code></dd>
-<dt>Goal is neither a variable nor a callable term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Term or Goal is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Term is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Term)</span></code></div>
+</div>
+<div class="line">Goal is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -241,8 +247,8 @@ call_in_user(<span class="nv">F</span>, <span class="nv">X</span>, <span class="
 | <span class="o">?-</span> <span class="k">{</span>circle(<span class="nv">Id</span>, <span class="nv">Radius</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>area(<span class="nv">Area</span>).
 ...
 
-| <span class="o">?-</span> logtalk<span class="o">::</span><span class="k">{write</span>(<span class="s">&#39;Hello world!&#39;</span>), <span class="k">nl}</span>.
-<span class="nv">Hello</span> world<span class="o">!</span>
+| <span class="o">?-</span> logtalk<span class="o">::</span><span class="k">{write</span>(<span class="s">&#39;hello world!&#39;</span>), <span class="k">nl}</span>.
+hello world<span class="o">!</span>
 yes
 </pre></div>
 </div>

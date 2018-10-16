@@ -44,14 +44,14 @@ Modes and number of proofs
 Errors
 ------
 
-Category is neither a variable nor a valid protocol identifier:
-   ``type_error(category_identifier, Category)``
-ParentCategory is neither a variable nor a valid protocol identifier:
-   ``type_error(category_identifier, ParentCategory)``
-Scope is neither a variable nor an atom:
-   ``type_error(atom, Scope)``
-Scope is an atom but an invalid entity scope:
-   ``domain_error(scope, Scope)``
+| Category is neither a variable nor a valid protocol identifier:
+|     ``type_error(category_identifier, Category)``
+| ParentCategory is neither a variable nor a valid protocol identifier:
+|     ``type_error(category_identifier, ParentCategory)``
+| Scope is neither a variable nor an atom:
+|     ``type_error(atom, Scope)``
+| Scope is an atom but an invalid entity scope:
+|     ``domain_error(scope, Scope)``
 
 Examples
 --------

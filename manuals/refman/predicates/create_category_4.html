@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in predicates</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
@@ -110,7 +111,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -217,26 +217,40 @@ avoid race conditions.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Relations, Directives, or Clauses is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Identifier is neither a variable nor a valid category identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(category_identifier,</span> <span class="pre">Identifier)</span></code></dd>
-<dt>Identifier is already in use:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">category,</span> <span class="pre">Identifier)</span></code>
-<code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">object,</span> <span class="pre">Identifier)</span></code>
-<code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">protocol,</span> <span class="pre">Identifier)</span></code></dd>
-<dt>Relations is neither a variable nor a proper list:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Relations)</span></code></dd>
-<dt>Repeated entity relation clause:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(repeat,</span> <span class="pre">entity_relation,</span> <span class="pre">implements/1)</span></code>
-<code class="docutils literal notranslate"><span class="pre">permission_error(repeat,</span> <span class="pre">entity_relation,</span> <span class="pre">extends/1)</span></code>
-<code class="docutils literal notranslate"><span class="pre">permission_error(repeat,</span> <span class="pre">entity_relation,</span> <span class="pre">complements/1)</span></code></dd>
-<dt>Directives is neither a variable nor a proper list:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Directives)</span></code></dd>
-<dt>Clauses is neither a variable nor a proper list:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Clauses)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Relations, Directives, or Clauses is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Identifier is neither a variable nor a valid category identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(category_identifier,</span> <span class="pre">Identifier)</span></code></div>
+</div>
+<div class="line">Identifier is already in use:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">category,</span> <span class="pre">Identifier)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">object,</span> <span class="pre">Identifier)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">protocol,</span> <span class="pre">Identifier)</span></code></div>
+</div>
+<div class="line">Relations is neither a variable nor a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Relations)</span></code></div>
+</div>
+<div class="line">Repeated entity relation clause:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(repeat,</span> <span class="pre">entity_relation,</span> <span class="pre">implements/1)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(repeat,</span> <span class="pre">entity_relation,</span> <span class="pre">extends/1)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(repeat,</span> <span class="pre">entity_relation,</span> <span class="pre">complements/1)</span></code></div>
+</div>
+<div class="line">Directives is neither a variable nor a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Directives)</span></code></div>
+</div>
+<div class="line">Clauses is neither a variable nor a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Clauses)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

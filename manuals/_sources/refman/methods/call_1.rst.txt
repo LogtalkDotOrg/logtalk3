@@ -54,20 +54,20 @@ Modes and number of proofs
 Errors
 ------
 
-Closure is a variable:
-   ``instantiation_error``
-Closure is neither a variable nor a callable term:
-   ``type_error(callable, Closure)``
+| Closure is a variable:
+|     ``instantiation_error``
+| Closure is neither a variable nor a callable term:
+|     ``type_error(callable, Closure)``
 
 Examples
 --------
 
-Calls a goal, constructed by appending the input list of tokens and the list of remaining tokens to the arguments of the closure, in the context of the object or category containing the call:
-   ``call(Closure)``
-To send a goal, constructed by appending the input list of tokens and the list of remaining tokens to the arguments of the closure, as a message to :term:`self`:
-   ``call(::Closure)``
-To send a goal, constructed by appending the input list of tokens and the list of remaining tokens to the arguments of the closure, as a message to an explicit object:
-   ``call(Object::Closure)``
+| Calls a goal, constructed by appending the tokens difference list to the closure, in in the context of the object or category containing the call:
+|     ``call(Closure)``
+| To send a goal, constructed by appending the tokens difference list to the closure, as a message to :term:`self`:
+|     ``call(::Closure)``
+| To send a goal, constructed by appending the tokens difference list to the closure, as a message to an explicit object:
+|     ``call(Object::Closure)``
 
 .. seealso::
 

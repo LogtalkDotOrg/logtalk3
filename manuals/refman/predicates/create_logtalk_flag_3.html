@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in predicates</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
@@ -110,7 +111,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -222,26 +222,44 @@ initial value.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Flag is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Value is not a ground term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Options is not a ground term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Flag is neither a variable nor an atom:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Flag)</span></code></dd>
-<dt>Options is neither a variable nor a list:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Flag)</span></code></dd>
-<dt>Value is not a valid value for flag Flag:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(flag_value,</span> <span class="pre">Flag</span> <span class="pre">+</span> <span class="pre">Value)</span></code></dd>
-<dt>Flag is a system-defined flag:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">flag,</span> <span class="pre">Flag)</span></code></dd>
-<dt>An element Option of the list Options is not a valid option</dt>
-<dd>domain_error(flag_option,Option)</dd>
-<dt>The list Options contains a type(Type) option and Value is not a Type term</dt>
-<dd>type_error(Type, Value)</dd>
-</dl>
+<div class="line-block">
+<div class="line">Flag is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Value is not a ground term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Options is not a ground term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Flag is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Flag)</span></code></div>
+</div>
+<div class="line">Options is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Flag)</span></code></div>
+</div>
+<div class="line">Value is not a valid value for flag Flag:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(flag_value,</span> <span class="pre">Flag</span> <span class="pre">+</span> <span class="pre">Value)</span></code></div>
+</div>
+<div class="line">Flag is a system-defined flag:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">flag,</span> <span class="pre">Flag)</span></code></div>
+</div>
+<div class="line">An element Option of the list Options is not a valid option</div>
+<div class="line-block">
+<div class="line">domain_error(flag_option,Option)</div>
+</div>
+<div class="line">The list Options contains a type(Type) option and Value is not a Type term</div>
+<div class="line-block">
+<div class="line">type_error(Type, Value)</div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

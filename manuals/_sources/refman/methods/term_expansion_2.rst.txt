@@ -68,9 +68,10 @@ Errors
 Examples
 --------
 
-``term_expansion((:- license(default)), (:- license(gplv3))).``
+::
 
-``term_expansion(data(Millimeters), data(Meters)) :- Meters is Millimeters / 1000.``
+   term_expansion((:- license(default)), (:- license(gplv3))).
+   term_expansion(data(Millimeters), data(Meters)) :- Meters is Millimeters / 1000.
 
 .. seealso::
 

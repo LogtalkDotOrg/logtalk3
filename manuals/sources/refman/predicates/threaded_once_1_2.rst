@@ -50,22 +50,22 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-Tag is not a variable:
-   ``type_error(variable, Goal)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| Tag is not a variable:
+|     ``type_error(variable, Goal)``
 
 Examples
 --------
 
-Prove ``Goal`` asynchronously in a new thread:
-   ``threaded_once(Goal)``
-Prove ``::Message`` asynchronously in a new thread:
-   ``threaded_once(::Message)``
-Prove ``Object::Message`` asynchronously in a new thread:
-   ``threaded_once(Object::Message)``
+| Prove ``Goal`` asynchronously in a new thread:
+|     ``threaded_once(Goal)``
+| Prove ``::Message`` asynchronously in a new thread:
+|     ``threaded_once(::Message)``
+| Prove ``Object::Message`` asynchronously in a new thread:
+|     ``threaded_once(Object::Message)``
 
 .. seealso::
 

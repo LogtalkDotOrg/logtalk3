@@ -54,22 +54,22 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-Goal is a call to a non-existing predicate:
-   ``existence_error(procedure, Predicate)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| Goal is a call to a non-existing predicate:
+|     ``existence_error(procedure, Predicate)``
 
 Examples
 --------
 
-To find a bag of solutions in the context of the object or category containing the call:
-   ``bagof(Template, Goal, List)``
-To find a bag of solutions of sending a message to :term:`self`:
-   ``bagof(Template, ::Message, List)``
-To find a bag of solutions of sending a message to an explicit object:
-   ``bagof(Template, Object::Message, List)``
+| To find a bag of solutions in the context of the object or category containing the call:
+|     ``bagof(Template, Goal, List)``
+| To find a bag of solutions of sending a message to :term:`self`:
+|     ``bagof(Template, ::Message, List)``
+| To find a bag of solutions of sending a message to an explicit object:
+|     ``bagof(Template, Object::Message, List)``
 
 .. seealso::
 

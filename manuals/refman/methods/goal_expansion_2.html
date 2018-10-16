@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
@@ -114,7 +115,6 @@
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -236,8 +236,10 @@ either protected or private to restrict the scope of this predicate.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">goal_expansion(write(Term),</span> <span class="pre">(write_term(Term,</span> <span class="pre">[]),</span> <span class="pre">nl)).</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">goal_expansion(read(Term),</span> <span class="pre">(write('Input:</span> <span class="pre">'),</span> <span class="pre">{read(Term)})).</span></code></p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">goal_expansion</span>(<span class="k">write</span>(<span class="nv">Term</span>), (<span class="k">write_term</span>(<span class="nv">Term</span>, []), <span class="k">nl</span>)).
+<span class="k">goal_expansion</span>(<span class="k">read</span>(<span class="nv">Term</span>), (<span class="k">write</span>(<span class="s">&#39;Input: &#39;</span>), <span class="k">{read</span>(<span class="nv">Term</span>)<span class="k">}</span>)).
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a>,

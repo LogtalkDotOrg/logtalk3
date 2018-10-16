@@ -48,38 +48,38 @@ Modes and number of proofs
 Errors
 ------
 
-Predicate is a variable:
-   ``instantiation_error``
-Functor is a variable:
-   ``instantiation_error``
-Arity is a variable:
-   ``instantiation_error``
-Predicate is neither a variable nor a valid predicate indicator:
-   ``type_error(predicate_indicator, Predicate)``
-Functor is neither a variable nor an atom:
-   ``type_error(atom, Functor)``
-Arity is neither a variable nor an integer:
-   ``type_error(integer, Arity)``
-Predicate is statically declared:
-   ``permission_error(modify, predicate_declaration, Name/Arity)``
-Predicate is a private predicate:
-   ``permission_error(modify, private_predicate, Name/Arity)``
-Predicate is a protected predicate:
-   ``permission_error(modify, protected_predicate, Name/Arity)``
-Predicate is a static predicate:
-   ``permission_error(modify, static_predicate, Name/Arity)``
-Predicate is not declared for the object receiving the message:
-   ``existence_error(predicate_declaration, Name/Arity)``
+| Predicate is a variable:
+|     ``instantiation_error``
+| Functor is a variable:
+|     ``instantiation_error``
+| Arity is a variable:
+|     ``instantiation_error``
+| Predicate is neither a variable nor a valid predicate indicator:
+|     ``type_error(predicate_indicator, Predicate)``
+| Functor is neither a variable nor an atom:
+|     ``type_error(atom, Functor)``
+| Arity is neither a variable nor an integer:
+|     ``type_error(integer, Arity)``
+| Predicate is statically declared:
+|     ``permission_error(modify, predicate_declaration, Name/Arity)``
+| Predicate is a private predicate:
+|     ``permission_error(modify, private_predicate, Name/Arity)``
+| Predicate is a protected predicate:
+|     ``permission_error(modify, protected_predicate, Name/Arity)``
+| Predicate is a static predicate:
+|     ``permission_error(modify, static_predicate, Name/Arity)``
+| Predicate is not declared for the object receiving the message:
+|     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples
 --------
 
-To abolish a local dynamic predicate or a dynamic predicate in :term:`this`:
-   ``abolish(Predicate)``
-To abolish a public or protected dynamic predicate in :term:`self`:
-   ``::abolish(Predicate)``
-To abolish a public dynamic predicate in an explicit object:
-   ``Object::abolish(Predicate)``
+| To abolish a local dynamic predicate or a dynamic predicate in :term:`this`:
+|     ``abolish(Predicate)``
+| To abolish a public or protected dynamic predicate in :term:`self`:
+|     ``::abolish(Predicate)``
+| To abolish a public dynamic predicate in an explicit object:
+|     ``Object::abolish(Predicate)``
 
 .. seealso::
 

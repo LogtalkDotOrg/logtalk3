@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in predicates</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
@@ -115,7 +116,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -225,10 +225,10 @@ sent to any threads suspended waiting for them in order to proceed.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Send the notification <code class="docutils literal notranslate"><span class="pre">data_available</span></code>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">threaded_notify(data_available)</span></code></dd>
-</dl>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% send a &quot;data_available&quot; notification:</span>
+..., <span class="k">threaded_notify</span>(data_available), ...
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="threaded_wait_1.html#predicates-threaded-wait-1"><span class="std std-ref">threaded_wait/1</span></a></p>

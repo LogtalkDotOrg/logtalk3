@@ -44,22 +44,22 @@ Modes and number of proofs
 Errors
 ------
 
-Event is neither a variable nor a valid event identifier:
-   ``type_error(event, Event)``
-Object is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Object)``
-Message is neither a variable nor a callable term:
-   ``type_error(callable, Message)``
-Sender is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Sender)``
-Monitor is a variable:
-   ``instantiation_error``
-Monitor is neither a variable nor a valid object identifier:
-   ``existence_error(object_identifier, Monitor)``
-Monitor does not define the required ``before/3`` method:
-   ``existence_error(procedure, before/3)``
-Monitor does not define the required ``after/3`` method:
-   ``existence_error(procedure, after/3)``
+| Event is neither a variable nor a valid event identifier:
+|     ``type_error(event, Event)``
+| Object is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Object)``
+| Message is neither a variable nor a callable term:
+|     ``type_error(callable, Message)``
+| Sender is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Sender)``
+| Monitor is a variable:
+|     ``instantiation_error``
+| Monitor is neither a variable nor a valid object identifier:
+|     ``existence_error(object_identifier, Monitor)``
+| Monitor does not define the required ``before/3`` method:
+|     ``existence_error(procedure, before/3)``
+| Monitor does not define the required ``after/3`` method:
+|     ``existence_error(procedure, after/3)``
 
 Examples
 --------

@@ -67,9 +67,10 @@ Errors
 Examples
 --------
 
-``goal_expansion(write(Term), (write_term(Term, []), nl)).``
+::
 
-``goal_expansion(read(Term), (write('Input: '), {read(Term)})).``
+   goal_expansion(write(Term), (write_term(Term, []), nl)).
+   goal_expansion(read(Term), (write('Input: '), {read(Term)})).
 
 .. seealso::
 

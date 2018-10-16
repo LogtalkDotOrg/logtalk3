@@ -55,24 +55,24 @@ Modes and number of proofs
 Errors
 ------
 
-Flag is a variable:
-   ``instantiation_error``
-Value is not a ground term:
-   ``instantiation_error``
-Options is not a ground term:
-   ``instantiation_error``
-Flag is neither a variable nor an atom:
-   ``type_error(atom, Flag)``
-Options is neither a variable nor a list:
-   ``type_error(atom, Flag)``
-Value is not a valid value for flag Flag:
-   ``domain_error(flag_value, Flag + Value)``
-Flag is a system-defined flag:
-   ``permission_error(modify, flag, Flag)``
-An element Option of the list Options is not a valid option
-   domain_error(flag_option,Option)
-The list Options contains a type(Type) option and Value is not a Type term
-   type_error(Type, Value)
+| Flag is a variable:
+|     ``instantiation_error``
+| Value is not a ground term:
+|     ``instantiation_error``
+| Options is not a ground term:
+|     ``instantiation_error``
+| Flag is neither a variable nor an atom:
+|     ``type_error(atom, Flag)``
+| Options is neither a variable nor a list:
+|     ``type_error(atom, Flag)``
+| Value is not a valid value for flag Flag:
+|     ``domain_error(flag_value, Flag + Value)``
+| Flag is a system-defined flag:
+|     ``permission_error(modify, flag, Flag)``
+| An element Option of the list Options is not a valid option
+|    domain_error(flag_option,Option)
+| The list Options contains a type(Type) option and Value is not a Type term
+|    type_error(Type, Value)
 
 Examples
 --------

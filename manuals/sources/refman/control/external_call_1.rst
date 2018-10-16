@@ -59,12 +59,12 @@ Modes and number of proofs
 Errors
 ------
 
-Term or Goal is a variable:
-   ``instantiation_error``
-Term is neither a variable nor a callable term:
-   ``type_error(callable, Term)``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
+| Term or Goal is a variable:
+|     ``instantiation_error``
+| Term is neither a variable nor a callable term:
+|     ``type_error(callable, Term)``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
 
 Examples
 --------
@@ -82,6 +82,6 @@ Examples
    | ?- {circle(Id, Radius, Color)}::area(Area).
    ...
 
-   | ?- logtalk::{write('Hello world!'), nl}.
-   Hello world!
+   | ?- logtalk::{write('hello world!'), nl}.
+   hello world!
    yes

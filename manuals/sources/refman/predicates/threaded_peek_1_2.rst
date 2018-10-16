@@ -55,22 +55,22 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-Tag is a variable:
-   ``instantiation_error``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| Tag is a variable:
+|     ``instantiation_error``
 
 Examples
 --------
 
-To check for an asynchronous goal proof result:
-   ``threaded_peek(Goal)``
-To check for an asynchronous message to *self* result:
-   ``threaded_peek(::Goal)``
-To check for an asynchronous message result:
-   ``threaded_peek(Object::Goal)``
+| To check for an asynchronous goal proof result:
+|     ``threaded_peek(Goal)``
+| To check for an asynchronous message to *self* result:
+|     ``threaded_peek(::Goal)``
+| To check for an asynchronous message result:
+|     ``threaded_peek(Object::Goal)``
 
 .. seealso::
 

@@ -50,28 +50,28 @@ Modes and number of proofs
 Errors
 ------
 
-Head is a variable:
-   ``instantiation_error``
-Head is neither a variable nor a callable term:
-   ``type_error(callable, Head)``
-The predicate indicator of Head, Name/Arity, is that of a private predicate:
-   ``permission_error(modify, private_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a protected predicate:
-   ``permission_error(modify, protected_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a static predicate:
-   ``permission_error(modify, static_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is not declared:
-   ``existence_error(predicate_declaration, Name/Arity)``
+| Head is a variable:
+|     ``instantiation_error``
+| Head is neither a variable nor a callable term:
+|     ``type_error(callable, Head)``
+| The predicate indicator of Head, Name/Arity, is that of a private predicate:
+|     ``permission_error(modify, private_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a protected predicate:
+|     ``permission_error(modify, protected_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a static predicate:
+|     ``permission_error(modify, static_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is not declared:
+|     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples
 --------
 
-To retract a matching clause of a dynamic predicate in :term:`this`:
-   ``retract(Clause)``
-To retract a matching clause of a public or protected dynamic predicate in :term:`self`:
-   ``::retract(Clause)``
-To retract a matching clause of a public dynamic predicate in an explicit object:
-   ``Object::retract(Clause)``
+| To retract a matching clause of a dynamic predicate in :term:`this`:
+|     ``retract(Clause)``
+| To retract a matching clause of a public or protected dynamic predicate in :term:`self`:
+|     ``::retract(Clause)``
+| To retract a matching clause of a public dynamic predicate in an explicit object:
+|     ``Object::retract(Clause)``
 
 .. seealso::
 

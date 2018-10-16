@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in predicates</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
@@ -116,7 +117,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -243,28 +243,48 @@ loaded by it.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>File is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Files is a variable or a list with an element which is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>File, or an element File of the Files list, is neither a variable nor a source file name:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(source_file_name,</span> <span class="pre">File)</span></code></dd>
-<dt>File, or an element File of the Files list, uses library notation but the library does not exist:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(library,</span> <span class="pre">Library)</span></code></dd>
-<dt>File or an element File of the Files list, does not exist:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(file,</span> <span class="pre">File)</span></code></dd>
-<dt>Flags is a variable or a list with an element which is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Flags is neither a variable nor a proper list:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Flags)</span></code></dd>
-<dt>An element Flag of the Flags list is not a valid compiler flag:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(compiler_flag,</span> <span class="pre">Flag)</span></code></dd>
-<dt>An element Flag of the Flags list defines a value for a read-only compiler flag:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">flag,</span> <span class="pre">Flag)</span></code></dd>
-<dt>An element Flag of the Flags list defines an invalid value for a flag:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(flag_value,</span> <span class="pre">Flag+Value)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">File is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Files is a variable or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">File, or an element File of the Files list, is neither a variable nor a source file name:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(source_file_name,</span> <span class="pre">File)</span></code></div>
+</div>
+<div class="line">File, or an element File of the Files list, uses library notation but the library does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(library,</span> <span class="pre">Library)</span></code></div>
+</div>
+<div class="line">File or an element File of the Files list, does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,</span> <span class="pre">File)</span></code></div>
+</div>
+<div class="line">Flags is a variable or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Flags is neither a variable nor a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Flags)</span></code></div>
+</div>
+<div class="line">An element Flag of the Flags list is not a valid compiler flag:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compiler_flag,</span> <span class="pre">Flag)</span></code></div>
+</div>
+<div class="line">An element Flag of the Flags list defines a value for a read-only compiler flag:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">flag,</span> <span class="pre">Flag)</span></code></div>
+</div>
+<div class="line">An element Flag of the Flags list defines an invalid value for a flag:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(flag_value,</span> <span class="pre">Flag+Value)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

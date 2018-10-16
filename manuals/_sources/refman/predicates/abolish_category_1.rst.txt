@@ -40,14 +40,14 @@ Modes and number of proofs
 Errors
 ------
 
-Category is a variable:
-   ``instantiation_error``
-Category is neither a variable nor a valid category identifier:
-   ``type_error(category_identifier, Category)``
-Category is an identifier of a static category:
-   ``permission_error(modify, static_category, Category)``
-Category does not exist:
-   ``existence_error(category, Category)``
+| Category is a variable:
+|     ``instantiation_error``
+| Category is neither a variable nor a valid category identifier:
+|     ``type_error(category_identifier, Category)``
+| Category is an identifier of a static category:
+|     ``permission_error(modify, static_category, Category)``
+| Category does not exist:
+|     ``existence_error(category, Category)``
 
 Examples
 --------

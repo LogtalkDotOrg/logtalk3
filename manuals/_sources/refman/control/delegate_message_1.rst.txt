@@ -56,30 +56,30 @@ Modes and number of proofs
 Errors
 ------
 
-Object and the original sender are the same object:
-   ``permission_error(access, object, Sender)``
-
-Either Object or Message is a variable:
-   ``instantiation_error``
-Object is neither a variable nor an object identifier:
-   ``type_error(object_identifier, Object)``
-Message is neither a variable nor a callable term:
-   ``type_error(callable, Message)``
-Message, with predicate indicator Name/Arity, is declared private:
-   ``permission_error(access, private_predicate, Name/Arity)``
-Message, with predicate indicator Name/Arity, is declared protected:
-   ``permission_error(access, protected_predicate, Name/Arity)``
-Message, with predicate indicator Name/Arity, is not declared:
-   ``existence_error(predicate_declaration, Name/Arity)``
-Object does not exist:
-   ``existence_error(object, Object)``
-
-Proxy is a variable:
-   ``instantiation_error``
-Proxy is neither a variable nor an object identifier:
-   ``type_error(object_identifier, Proxy)``
-Proxy, with predicate indicator Name/Arity, does not exist in the *user* pseudo-object:
-   ``existence_error(procedure, Name/Arity)``
+| Object and the original sender are the same object:
+|     ``permission_error(access, object, Sender)``
+| 
+| Either Object or Message is a variable:
+|     ``instantiation_error``
+| Object is neither a variable nor an object identifier:
+|     ``type_error(object_identifier, Object)``
+| Message is neither a variable nor a callable term:
+|     ``type_error(callable, Message)``
+| Message, with predicate indicator Name/Arity, is declared private:
+|     ``permission_error(access, private_predicate, Name/Arity)``
+| Message, with predicate indicator Name/Arity, is declared protected:
+|     ``permission_error(access, protected_predicate, Name/Arity)``
+| Message, with predicate indicator Name/Arity, is not declared:
+|     ``existence_error(predicate_declaration, Name/Arity)``
+| Object does not exist:
+|     ``existence_error(object, Object)``
+| 
+| Proxy is a variable:
+|     ``instantiation_error``
+| Proxy is neither a variable nor an object identifier:
+|     ``type_error(object_identifier, Proxy)``
+| Proxy, with predicate indicator Name/Arity, does not exist in the *user* pseudo-object:
+|     ``existence_error(procedure, Name/Arity)``
 
 Examples
 --------

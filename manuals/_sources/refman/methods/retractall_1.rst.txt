@@ -48,28 +48,28 @@ Modes and number of proofs
 Errors
 ------
 
-Head is a variable:
-   ``instantiation_error``
-Head is neither a variable nor a callable term:
-   ``type_error(callable, Head)``
-The predicate indicator of Head, Name/Arity, is that of a private predicate:
-   ``permission_error(modify, private_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a protected predicate:
-   ``permission_error(modify, protected_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a static predicate:
-   ``permission_error(modify, static_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is not declared:
-   ``existence_error(predicate_declaration, Name/Arity)``
+| Head is a variable:
+|     ``instantiation_error``
+| Head is neither a variable nor a callable term:
+|     ``type_error(callable, Head)``
+| The predicate indicator of Head, Name/Arity, is that of a private predicate:
+|     ``permission_error(modify, private_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a protected predicate:
+|     ``permission_error(modify, protected_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a static predicate:
+|     ``permission_error(modify, static_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is not declared:
+|     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples
 --------
 
-To retract all clauses with a matching head of a dynamic predicate in :term:`this`:
-   ``retractall(Head)``
-To retract all clauses with a matching head of a public or protected dynamic predicate in :term:`self`:
-   ``::retractall(Head)``
-To retract all clauses with a matching head of a public dynamic predicate in an explicit object:
-   ``Object::retractall(Head)``
+| To retract all clauses with a matching head of a dynamic predicate in :term:`this`:
+|     ``retractall(Head)``
+| To retract all clauses with a matching head of a public or protected dynamic predicate in :term:`self`:
+|     ``::retractall(Head)``
+| To retract all clauses with a matching head of a public dynamic predicate in an explicit object:
+|     ``Object::retractall(Head)``
 
 .. seealso::
 

@@ -45,20 +45,20 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
 
 Examples
 --------
 
-Prove ``Goal`` asynchronously in a new thread:
-   ``threaded_ignore(Goal)``
-Prove ``::Message`` asynchronously in a new thread:
-   ``threaded_ignore(::Message)``
-Prove ``Object::Message`` asynchronously in a new thread:
-   ``threaded_ignore(Object::Message)``
+| Prove ``Goal`` asynchronously in a new thread:
+|     ``threaded_ignore(Goal)``
+| Prove ``::Message`` asynchronously in a new thread:
+|     ``threaded_ignore(::Message)``
+| Prove ``Object::Message`` asynchronously in a new thread:
+|     ``threaded_ignore(Object::Message)``
 
 .. seealso::
 

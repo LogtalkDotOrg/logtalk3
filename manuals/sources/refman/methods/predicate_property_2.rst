@@ -52,22 +52,22 @@ Modes and number of proofs
 Errors
 ------
 
-Predicate is a variable:
-   ``instantiation_error``
-Predicate is neither a variable nor a callable term:
-   ``type_error(callable, Predicate)``
-Property is neither a variable nor a valid predicate property:
-   ``domain_error(predicate_property, Property)``
+| Predicate is a variable:
+|     ``instantiation_error``
+| Predicate is neither a variable nor a callable term:
+|     ``type_error(callable, Predicate)``
+| Property is neither a variable nor a valid predicate property:
+|     ``domain_error(predicate_property, Property)``
 
 Examples
 --------
 
-To enumerate, by backtracking, the properties of a locally visible user predicate or a user predicate visible in :term:`this`:
-   ``predicate_property(foo(_), Property)``
-To enumerate, by backtracking, the properties of a public or protected predicate visible in :term:`self`:
-   ``::predicate_property(foo(_), Property)``
-To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:
-   ``Object::predicate_property(foo(_), Property)``
+| To enumerate, by backtracking, the properties of a locally visible user predicate or a user predicate visible in :term:`this`:
+|     ``predicate_property(foo(_), Property)``
+| To enumerate, by backtracking, the properties of a public or protected predicate visible in :term:`self`:
+|     ``::predicate_property(foo(_), Property)``
+| To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:
+|     ``Object::predicate_property(foo(_), Property)``
 
 .. seealso::
 

@@ -42,22 +42,22 @@ Modes and number of proofs
 Errors
 ------
 
-Either Generator or Test is a variable:
-   ``instantiation_error``
-Generator is neither a variable nor a callable term:
-   ``type_error(callable, Generator)``
-Test is neither a variable nor a callable term:
-   ``type_error(callable, Test)``
+| Either Generator or Test is a variable:
+|     ``instantiation_error``
+| Generator is neither a variable nor a callable term:
+|     ``type_error(callable, Generator)``
+| Test is neither a variable nor a callable term:
+|     ``type_error(callable, Test)``
 
 Examples
 --------
 
-To call both goals in the context of the object or category containing the call:
-   ``forall(Generator, Test)``
-To send both goals as messages to :term:`self`:
-   ``forall(::Generator, ::Test)``
-To send both goals as messages to explicit objects:
-   ``forall(Object1::Generator, Object2::Test)``
+| To call both goals in the context of the object or category containing the call:
+|     ``forall(Generator, Test)``
+| To send both goals as messages to :term:`self`:
+|     ``forall(::Generator, ::Test)``
+| To send both goals as messages to explicit objects:
+|     ``forall(Object1::Generator, Object2::Test)``
 
 .. seealso::
 

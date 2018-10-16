@@ -42,16 +42,16 @@ Modes and number of proofs
 Errors
 ------
 
-Event is neither a variable nor a valid event identifier:
-   ``type_error(event, Event)``
-Object is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Object)``
-Message is neither a variable nor a callable term:
-   ``type_error(callable, Message)``
-Sender is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Sender)``
-Monitor is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Monitor)``
+| Event is neither a variable nor a valid event identifier:
+|     ``type_error(event, Event)``
+| Object is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Object)``
+| Message is neither a variable nor a callable term:
+|     ``type_error(callable, Message)``
+| Sender is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Sender)``
+| Monitor is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Monitor)``
 
 Examples
 --------

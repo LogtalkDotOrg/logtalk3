@@ -44,14 +44,14 @@ Modes and number of proofs
 Errors
 ------
 
-Protocol is neither a variable nor a valid protocol identifier:
-   ``type_error(protocol_identifier, Protocol)``
-ParentProtocol is neither a variable nor a valid protocol identifier:
-   ``type_error(protocol_identifier, ParentProtocol)``
-Scope is neither a variable nor an atom:
-   ``type_error(atom, Scope)``
-Scope is an atom but an invalid entity scope:
-   ``domain_error(scope, Scope)``
+| Protocol is neither a variable nor a valid protocol identifier:
+|     ``type_error(protocol_identifier, Protocol)``
+| ParentProtocol is neither a variable nor a valid protocol identifier:
+|     ``type_error(protocol_identifier, ParentProtocol)``
+| Scope is neither a variable nor an atom:
+|     ``type_error(atom, Scope)``
+| Scope is an atom but an invalid entity scope:
+|     ``domain_error(scope, Scope)``
 
 Examples
 --------

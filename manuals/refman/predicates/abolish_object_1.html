@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in predicates</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
@@ -110,7 +111,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -208,16 +208,24 @@
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Object is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Object is neither a variable nor a valid object identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Object)</span></code></dd>
-<dt>Object is an identifier of a static object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">static_object,</span> <span class="pre">Object)</span></code></dd>
-<dt>Object does not exist:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(object,</span> <span class="pre">Object)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Object is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Object is neither a variable nor a valid object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Object)</span></code></div>
+</div>
+<div class="line">Object is an identifier of a static object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">static_object,</span> <span class="pre">Object)</span></code></div>
+</div>
+<div class="line">Object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,</span> <span class="pre">Object)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

@@ -52,16 +52,16 @@ Modes and number of proofs
 Errors
 ------
 
-Object is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Object)``
-Category is neither a variable nor a valid category identifier:
-   ``type_error(category_identifier, Category)``
-Protocol is neither a variable nor a valid protocol identifier:
-   ``type_error(protocol_identifier, Protocol)``
-Scope is neither a variable nor an atom:
-   ``type_error(atom, Scope)``
-Scope is an atom but an invalid entity scope:
-   ``domain_error(scope, Scope)``
+| Object is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Object)``
+| Category is neither a variable nor a valid category identifier:
+|     ``type_error(category_identifier, Category)``
+| Protocol is neither a variable nor a valid protocol identifier:
+|     ``type_error(protocol_identifier, Protocol)``
+| Scope is neither a variable nor an atom:
+|     ``type_error(atom, Scope)``
+| Scope is an atom but an invalid entity scope:
+|     ``domain_error(scope, Scope)``
 
 Examples
 --------

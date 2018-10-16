@@ -48,30 +48,30 @@ Modes and number of proofs
 Errors
 ------
 
-Head is a variable:
-   ``instantiation_error``
-Head is a neither a variable nor a callable term:
-   ``type_error(callable, Head)``
-Body is a neither a variable nor a callable term:
-   ``type_error(callable, Body)``
-The predicate indicator of Head, Name/Arity, is that of a private predicate:
-   ``permission_error(access, private_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a protected predicate:
-   ``permission_error(access, protected_predicate, Name/Arity)``
-The predicate indicator of Head, Name/Arity, is that of a static predicate:
-   ``permission_error(access, static_predicate, Name/Arity)``
-Head is not a declared predicate:
-   ``existence_error(predicate_declaration, Name/Arity)``
+| Head is a variable:
+|     ``instantiation_error``
+| Head is a neither a variable nor a callable term:
+|     ``type_error(callable, Head)``
+| Body is a neither a variable nor a callable term:
+|     ``type_error(callable, Body)``
+| The predicate indicator of Head, Name/Arity, is that of a private predicate:
+|     ``permission_error(access, private_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a protected predicate:
+|     ``permission_error(access, protected_predicate, Name/Arity)``
+| The predicate indicator of Head, Name/Arity, is that of a static predicate:
+|     ``permission_error(access, static_predicate, Name/Arity)``
+| Head is not a declared predicate:
+|     ``existence_error(predicate_declaration, Name/Arity)``
 
 Examples
 --------
 
-To retrieve a matching clause of a local dynamic predicate or a dynamic predicate in :term:`this`:
-   ``clause(Head, Body)``
-To retrieve a matching clause of a public or protected dynamic predicate in :term:`self`:
-   ``::clause(Head, Body)``
-To retrieve a matching clause of a public dynamic predicate in an explicit object:
-   ``Object::clause(Head, Body)``
+| To retrieve a matching clause of a local dynamic predicate or a dynamic predicate in :term:`this`:
+|     ``clause(Head, Body)``
+| To retrieve a matching clause of a public or protected dynamic predicate in :term:`self`:
+|     ``::clause(Head, Body)``
+| To retrieve a matching clause of a public dynamic predicate in an explicit object:
+|     ``Object::clause(Head, Body)``
 
 .. seealso::
 

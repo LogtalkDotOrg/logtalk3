@@ -44,20 +44,20 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
 
 Examples
 --------
 
-Call a goal and succeeding even if it fails:
-   ``ignore(Goal)``
-To send a message succeeding even if it fails to :term:`self`:
-   ``ignore(::Goal)``
-To send a message succeeding even if it fails to an explicit object:
-   ``ignore(Object::Goal)``
+| Call a goal and succeeding even if it fails:
+|     ``ignore(Goal)``
+| To send a message succeeding even if it fails to :term:`self`:
+|     ``ignore(::Goal)``
+| To send a message succeeding even if it fails to an explicit object:
+|     ``ignore(Object::Goal)``
 
 .. seealso::
 

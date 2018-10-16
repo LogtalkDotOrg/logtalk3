@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in predicates</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
@@ -116,7 +117,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../methods/index.html">Built-in methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -218,16 +218,24 @@ atoms <code class="docutils literal notranslate"><span class="pre">public</span>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Instance is neither a variable nor a valid object identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Instance)</span></code></dd>
-<dt>Class is neither a variable nor a valid object identifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Class)</span></code></dd>
-<dt>Scope is neither a variable nor an atom:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Scope)</span></code></dd>
-<dt>Scope is an atom but an invalid entity scope:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(scope,</span> <span class="pre">Scope)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Instance is neither a variable nor a valid object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Instance)</span></code></div>
+</div>
+<div class="line">Class is neither a variable nor a valid object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Class)</span></code></div>
+</div>
+<div class="line">Scope is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Scope)</span></code></div>
+</div>
+<div class="line">Scope is an atom but an invalid entity scope:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(scope,</span> <span class="pre">Scope)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

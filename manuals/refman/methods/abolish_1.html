@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
@@ -116,7 +117,6 @@
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -220,41 +220,69 @@ in the referenced object or module.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Predicate is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Functor is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Arity is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Predicate is neither a variable nor a valid predicate indicator:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,</span> <span class="pre">Predicate)</span></code></dd>
-<dt>Functor is neither a variable nor an atom:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Functor)</span></code></dd>
-<dt>Arity is neither a variable nor an integer:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(integer,</span> <span class="pre">Arity)</span></code></dd>
-<dt>Predicate is statically declared:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>Predicate is a private predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">private_predicate,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>Predicate is a protected predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">protected_predicate,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>Predicate is a static predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">static_predicate,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>Predicate is not declared for the object receiving the message:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Predicate is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Functor is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Arity is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Predicate is neither a variable nor a valid predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,</span> <span class="pre">Predicate)</span></code></div>
+</div>
+<div class="line">Functor is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Functor)</span></code></div>
+</div>
+<div class="line">Arity is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,</span> <span class="pre">Arity)</span></code></div>
+</div>
+<div class="line">Predicate is statically declared:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">Predicate is a private predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">private_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">Predicate is a protected predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">protected_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">Predicate is a static predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(modify,</span> <span class="pre">static_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">Predicate is not declared for the object receiving the message:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>To abolish a local dynamic predicate or a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">abolish(Predicate)</span></code></dd>
-<dt>To abolish a public or protected dynamic predicate in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">::abolish(Predicate)</span></code></dd>
-<dt>To abolish a public dynamic predicate in an explicit object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Object::abolish(Predicate)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">To abolish a local dynamic predicate or a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">abolish(Predicate)</span></code></div>
+</div>
+<div class="line">To abolish a public or protected dynamic predicate in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">::abolish(Predicate)</span></code></div>
+</div>
+<div class="line">To abolish a public dynamic predicate in an explicit object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object::abolish(Predicate)</span></code></div>
+</div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="asserta_1.html#methods-asserta-1"><span class="std std-ref">asserta/1</span></a>,

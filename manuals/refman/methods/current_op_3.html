@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
@@ -113,7 +114,6 @@
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -213,29 +213,45 @@ enumerated.</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Priority is neither a variable nor an integer:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(integer,</span> <span class="pre">Priority)</span></code></dd>
-<dt>Priority is an integer but not a valid operator priority:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(operator_priority,</span> <span class="pre">Priority)</span></code></dd>
-<dt>Specifier is neither a variable nor an atom:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Specifier)</span></code></dd>
-<dt>Specifier is an atom but not a valid operator specifier:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(operator_specifier,</span> <span class="pre">Specifier)</span></code></dd>
-<dt>Operator is neither a variable nor an atom:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Operator)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Priority is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,</span> <span class="pre">Priority)</span></code></div>
+</div>
+<div class="line">Priority is an integer but not a valid operator priority:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(operator_priority,</span> <span class="pre">Priority)</span></code></div>
+</div>
+<div class="line">Specifier is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Specifier)</span></code></div>
+</div>
+<div class="line">Specifier is an atom but not a valid operator specifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(operator_specifier,</span> <span class="pre">Specifier)</span></code></div>
+</div>
+<div class="line">Operator is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Operator)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>To enumerate, by backtracking, the local operators or the operators visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">current_op(Priority,</span> <span class="pre">Specifier,</span> <span class="pre">Operator)</span></code></dd>
-<dt>To enumerate, by backtracking, the public and protected operators visible in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">::current_op(Priority,</span> <span class="pre">Specifier,</span> <span class="pre">Operator)</span></code></dd>
-<dt>To enumerate, by backtracking, the public operators visible for an explicit object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Object::current_op(Priority,</span> <span class="pre">Specifier,</span> <span class="pre">Operator)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">To enumerate, by backtracking, the local operators or the operators visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_op(Priority,</span> <span class="pre">Specifier,</span> <span class="pre">Operator)</span></code></div>
+</div>
+<div class="line">To enumerate, by backtracking, the public and protected operators visible in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">::current_op(Priority,</span> <span class="pre">Specifier,</span> <span class="pre">Operator)</span></code></div>
+</div>
+<div class="line">To enumerate, by backtracking, the public operators visible for an explicit object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object::current_op(Priority,</span> <span class="pre">Specifier,</span> <span class="pre">Operator)</span></code></div>
+</div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>,

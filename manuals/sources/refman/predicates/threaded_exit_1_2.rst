@@ -58,24 +58,24 @@ Modes and number of proofs
 Errors
 ------
 
-Goal is a variable:
-   ``instantiation_error``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-no thread is running for proving Goal:
-   ``existence_error(goal_thread, Goal)``
-Tag is a variable:
-   ``instantiation_error``
+| Goal is a variable:
+|     ``instantiation_error``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| no thread is running for proving Goal:
+|     ``existence_error(goal_thread, Goal)``
+| Tag is a variable:
+|     ``instantiation_error``
 
 Examples
 --------
 
-To retrieve an asynchronous goal proof result:
-   ``threaded_exit(Goal)``
-To retrieve an asynchronous message to *self* result:
-   ``threaded_exit(::Goal)``
-To retrieve an asynchronous message result:
-   ``threaded_exit(Object::Goal)``
+| To retrieve an asynchronous goal proof result:
+|     ``threaded_exit(Goal)``
+| To retrieve an asynchronous message to *self* result:
+|     ``threaded_exit(::Goal)``
+| To retrieve an asynchronous message result:
+|     ``threaded_exit(Object::Goal)``
 
 .. seealso::
 

@@ -23,7 +23,7 @@ Reference Manual
    :maxdepth: 2
 
    grammar
+   control/index
    directives/index
    predicates/index
    methods/index
-   control/index

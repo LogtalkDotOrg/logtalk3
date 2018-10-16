@@ -43,10 +43,10 @@ Modes and number of proofs
 Errors
 ------
 
-Engine is a variable:
-   ``instantiation_error``
-Engine is neither a variable nor the name of an existing engine:
-   ``existence_error(engine, Engine)``
+| Engine is a variable:
+|     ``instantiation_error``
+| Engine is neither a variable nor the name of an existing engine:
+|     ``existence_error(engine, Engine)``
 
 Examples
 --------

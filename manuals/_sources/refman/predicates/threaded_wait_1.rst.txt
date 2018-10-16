@@ -53,8 +53,10 @@ Errors
 Examples
 --------
 
-Wait until the ``data_available`` notification is received:
-   ``threaded_wait(data_available)``
+::
+
+   % wait until the "data_available" notification is received:
+   ..., threaded_wait(data_available), ...
 
 .. seealso::
 

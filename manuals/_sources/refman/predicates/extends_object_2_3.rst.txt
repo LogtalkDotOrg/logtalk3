@@ -44,14 +44,14 @@ Modes and number of proofs
 Errors
 ------
 
-Prototype is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Prototype)``
-Parent is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Parent)``
-Scope is neither a variable nor an atom:
-   ``type_error(atom, Scope)``
-Scope is an atom but an invalid entity scope:
-   ``domain_error(scope, Scope)``
+| Prototype is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Prototype)``
+| Parent is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Parent)``
+| Scope is neither a variable nor an atom:
+|     ``type_error(atom, Scope)``
+| Scope is an atom but an invalid entity scope:
+|     ``domain_error(scope, Scope)``
 
 Examples
 --------

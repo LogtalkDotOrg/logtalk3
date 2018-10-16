@@ -64,25 +64,25 @@ Modes and number of proofs
 Errors
 ------
 
-Either Object or Goal is a variable:
-   ``instantiation_error``
-Object is neither a variable nor a valid object identifier:
-   ``type_error(object_identifier, Object)``
-Goal is neither a variable nor a callable term:
-   ``type_error(callable, Goal)``
-Object does not contain a local definition for the Goal predicate:
-   ``existence_error(procedure, Goal)``
-Object does not exist:
-   ``existence_error(object, Object)``
-Object was created/compiled with support for context switching calls turned off:
-   ``permission_error(access, database, Goal)``
-
-Proxy is a variable:
-   ``instantiation_error``
-Proxy is neither a variable nor an object identifier:
-   ``type_error(object_identifier, Proxy)``
-The predicate Proxy does not exist in the *user* pseudo-object:
-   ``existence_error(procedure, ProxyFunctor/ProxyArity)``
+| Either Object or Goal is a variable:
+|     ``instantiation_error``
+| Object is neither a variable nor a valid object identifier:
+|     ``type_error(object_identifier, Object)``
+| Goal is neither a variable nor a callable term:
+|     ``type_error(callable, Goal)``
+| Object does not contain a local definition for the Goal predicate:
+|     ``existence_error(procedure, Goal)``
+| Object does not exist:
+|     ``existence_error(object, Object)``
+| Object was created/compiled with support for context switching calls turned off:
+|     ``permission_error(access, database, Goal)``
+| 
+| Proxy is a variable:
+|     ``instantiation_error``
+| Proxy is neither a variable nor an object identifier:
+|     ``type_error(object_identifier, Proxy)``
+| The predicate Proxy does not exist in the *user* pseudo-object:
+|     ``existence_error(procedure, ProxyFunctor/ProxyArity)``
 
 Examples
 --------

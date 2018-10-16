@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
@@ -113,7 +114,6 @@
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -221,25 +221,37 @@ the backend Prolog compiler supports modules).</p>
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Predicate is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Predicate is neither a variable nor a callable term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Predicate)</span></code></dd>
-<dt>Property is neither a variable nor a valid predicate property:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">domain_error(predicate_property,</span> <span class="pre">Property)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Predicate is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Predicate is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Predicate)</span></code></div>
+</div>
+<div class="line">Property is neither a variable nor a valid predicate property:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(predicate_property,</span> <span class="pre">Property)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>To enumerate, by backtracking, the properties of a locally visible user predicate or a user predicate visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">predicate_property(foo(_),</span> <span class="pre">Property)</span></code></dd>
-<dt>To enumerate, by backtracking, the properties of a public or protected predicate visible in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">::predicate_property(foo(_),</span> <span class="pre">Property)</span></code></dd>
-<dt>To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Object::predicate_property(foo(_),</span> <span class="pre">Property)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">To enumerate, by backtracking, the properties of a locally visible user predicate or a user predicate visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_property(foo(_),</span> <span class="pre">Property)</span></code></div>
+</div>
+<div class="line">To enumerate, by backtracking, the properties of a public or protected predicate visible in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">::predicate_property(foo(_),</span> <span class="pre">Property)</span></code></div>
+</div>
+<div class="line">To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object::predicate_property(foo(_),</span> <span class="pre">Property)</span></code></div>
+</div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="current_op_3.html#methods-current-op-3"><span class="std std-ref">current_op/3</span></a>,

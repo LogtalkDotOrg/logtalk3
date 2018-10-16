@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
@@ -116,7 +117,6 @@
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
@@ -220,33 +220,53 @@ declared in <a class="reference internal" href="../../glossary.html#term-this"><
 </div>
 <div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Head is a variable:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></dd>
-<dt>Head is a neither a variable nor a callable term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Head)</span></code></dd>
-<dt>Body is a neither a variable nor a callable term:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Body)</span></code></dd>
-<dt>The predicate indicator of Head, Name/Arity, is that of a private predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">private_predicate,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>The predicate indicator of Head, Name/Arity, is that of a protected predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">protected_predicate,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>The predicate indicator of Head, Name/Arity, is that of a static predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">static_predicate,</span> <span class="pre">Name/Arity)</span></code></dd>
-<dt>Head is not a declared predicate:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">Head is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Head is a neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Head)</span></code></div>
+</div>
+<div class="line">Body is a neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Body)</span></code></div>
+</div>
+<div class="line">The predicate indicator of Head, Name/Arity, is that of a private predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">private_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">The predicate indicator of Head, Name/Arity, is that of a protected predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">protected_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">The predicate indicator of Head, Name/Arity, is that of a static predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,</span> <span class="pre">static_predicate,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+<div class="line">Head is not a declared predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>To retrieve a matching clause of a local dynamic predicate or a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">clause(Head,</span> <span class="pre">Body)</span></code></dd>
-<dt>To retrieve a matching clause of a public or protected dynamic predicate in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">::clause(Head,</span> <span class="pre">Body)</span></code></dd>
-<dt>To retrieve a matching clause of a public dynamic predicate in an explicit object:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">Object::clause(Head,</span> <span class="pre">Body)</span></code></dd>
-</dl>
+<div class="line-block">
+<div class="line">To retrieve a matching clause of a local dynamic predicate or a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clause(Head,</span> <span class="pre">Body)</span></code></div>
+</div>
+<div class="line">To retrieve a matching clause of a public or protected dynamic predicate in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">::clause(Head,</span> <span class="pre">Body)</span></code></div>
+</div>
+<div class="line">To retrieve a matching clause of a public dynamic predicate in an explicit object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object::clause(Head,</span> <span class="pre">Body)</span></code></div>
+</div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="abolish_1.html#methods-abolish-1"><span class="std std-ref">abolish/1</span></a>,
